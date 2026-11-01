@@ -21,7 +21,7 @@
 
 ## 3. ケース実行の順序と判定
 
-caseはJSONのcommon_profileと個別全項目をmergeして解釈する。個別値が優先し、未指定を推測しない。matrix入力は順序・期待値を保持したvariant IDを採番し、各variantを独立cloneへ実施する。100反復はseed/iteration1..100を保存、反復数をTest数へ水増ししない。
+caseはJSONのcommon_profileと個別全項目、SCのinitial_state/steps/assertion_evidence/load_planをmergeして解釈する。ACTIVEかつCONTRACT_REVIEWEDで、判断待ち/開始blocker解除済みのSCだけを選ぶ。PENDING_REAUDIT/SUPERSEDEDは実行対象にしない。個別値が優先し、未指定を推測しない。v2の明示matrix入力はscenarios.jsonの安定SC-IDをvariant IDとして使い（新たな並べ替え採番をしない）、順序・期待値を保持し、各variantを独立cloneへ実施する。100反復はseed/iteration1..100を保存、反復数をTest数へ水増ししない。
 
 1. 予約キー=`releaseDigest/environmentDigest/caseID/variantID/attempt`。T-RESUMEのO_EXCL予約とOS所有lockを取得し、同じキーのRUNNING/UNKNOWN/途中原本がないことを確認する。
 2. `RESERVED→PRECHECKED→SETUP→READY`をdurable append-onlyで記録する。全開始条件/fixture/oracle hash/initial count/side-effect allowed setを確認する。

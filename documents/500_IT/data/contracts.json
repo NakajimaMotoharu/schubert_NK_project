@@ -1,0 +1,3067 @@
+[
+  {
+    "id": "ITC-TX-040",
+    "condition_ids": [
+      "SSCOND-324-8441c326461d",
+      "SSCOND-324-b8b70459fc5b"
+    ],
+    "source_section": "Outbox・Inbox・冪等性・再送設計 > 6. Response保存・再構成 > 保存元Message binding（SSC-033）",
+    "scope": "別Message同tokenの保存元AADと現在correlation",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-TX-040",
+    "scenario_ids": [
+      "IT-TX-040-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧IT-TX-013は同tokenの応答再現だけで、保存元M0と今回M1を分離したAAD/非aliasを判定していない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-324-8441c326461d",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 6. Response保存・再構成 > 保存元Message binding（SSC-033）",
+        "line": 116,
+        "quote": "暗号replay側はsourceMessageIdをResponseSnapshotIdentityのAADへ使用し、保存header correlationもsourceに一致を確認する。利用者へ送る新headerのcorrelationは現在request Message IDとし、owner/layout/target/payload同一性、最新認証、保存body/ref/versionの検証を省略しない。Bound値それ自体を認証許可や暗号完全性の証明にしない。PT-IDEM-B01～B04で初回/同Message/別Message同token、競合INSERT再読、PROCESSING、NULL/誤PK/SQL fault、実AADでの復号、100並行と既存全API互換を検証する。",
+        "design_ids": [
+          "PT-IDEM-B01",
+          "SSC-033"
+        ]
+      },
+      {
+        "condition_id": "SSCOND-324-b8b70459fc5b",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 6. Response保存・再構成 > 保存元Message binding（SSC-033）",
+        "line": 112,
+        "quote": "`JdbcInboxCoordinator.executeBound`は既存executeと同じ認証後・caller write transaction内のMessage/token検索、HMAC照合、一意制約競合再読、handler実行を用い、`BoundInboxExecution(sourceMessageId, execution)`を返す。新規EXECUTEDのsourceは受付Message ID、既存REPLAY/IN_PROGRESSのsourceは検証した取得rowのmessage_id。sourceを新request IDやtokenから推測しない。SELECTへ既存PK列を追加するだけでDDL/外部wire/retention変更はない。",
+        "design_ids": [
+          "SSC-033"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-SEC-020",
+    "condition_ids": [
+      "SSCOND-324-246b18ec5c61",
+      "SSCOND-324-2bc167d6fa93",
+      "SSCOND-324-2c9719326e71"
+    ],
+    "source_section": "Outbox・Inbox・冪等性・再送設計 > 6. Response保存・再構成 > 6.1 Login replayの凍結・整合検証（SSC-013）",
+    "scope": "Login凍結結果と現在IF003認証probe",
+    "route": [
+      "Browser/Web session",
+      "Artemis",
+      "API auth/Inbox",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-SEC-020",
+    "scenario_ids": [
+      "IT-SEC-020-S01",
+      "IT-SEC-020-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03",
+      "A04"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧IT-SEC-008/IT-TX-017は暗号/再起動を扱うが、過去成功0200からWeb認証を誤付与する境界がない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-324-246b18ec5c61",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 6. Response保存・再構成 > 6.1 Login replayの凍結・整合検証（SSC-013）",
+        "line": 143,
+        "quote": "SSC-043: Webの0200受信後の現在認証確認は314 §3.1を正とする。新Message IDの既存IF-003を通常API認証へ通し、成功応答を全検証してから元Login snapshotをWebの早期principalへ投影する。Login再送・session新規発行・元snapshotの書換えではない。0102/一時障害/不正応答時はWeb認証を付与せず、probe後の各業務API認証も維持する。",
+        "design_ids": [
+          "SSC-013",
+          "SSC-043"
+        ]
+      },
+      {
+        "condition_id": "SSCOND-324-2bc167d6fa93",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 6. Response保存・再構成 > 6.1 Login replayの凍結・整合検証（SSC-013）",
+        "line": 139,
+        "quote": "成功も失敗も初回688byte LGNRSP01/001を上記snapshotへ保存する。成功はAUTH_SESSION参照を併記、失敗はNONE。成功の発行時username/role/発行日時/初回8h期限はsnapshotを正とし、現在のuser情報やidle延長後のexpires_atから推測しない。Header/全DATA byte/成功semantic、保存Message相関・layout/version・Inbox state/result/refの組合せを検証する。成功snapshotはauth_sessionsの参照UUID/created_message_id、AADのuser/session、復号context/hash、immutable issued_atと初回8h期限に一致必須。不在・不整合・unknown key・復号不能は9000/運用errorとし保存結果を成功推測しない。",
+        "design_ids": [
+          "SSC-013"
+        ]
+      },
+      {
+        "condition_id": "SSCOND-324-2c9719326e71",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 6. Response保存・再構成 > 6.1 Login replayの凍結・整合検証（SSC-013）",
+        "line": 141,
+        "quote": "再送は元結果の提示だけであり、新session発行、idle延長、失効解除、password再照合、counter/audit再更新を行わない。後で失効・期限切れ・権限変更されていても元結果を変更せず、通常の認証context検証は現在DB状態を正として拒否/認可する。Web sessionや現在権限をsnapshotだけから認証済みとみなしてはならない。初回0000/確定0101/0106の保存、成功0200・失敗元codeでの新Header再構築を独立byte oracleで検証する。",
+        "design_ids": [
+          "SSC-013"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-SEC-021",
+    "condition_ids": [
+      "SSCOND-324-7f7d67b9ad83"
+    ],
+    "source_section": "Outbox・Inbox・冪等性・再送設計",
+    "scope": "QSS/QSD取得scope凍結と降格時deny",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-SEC-021",
+    "scenario_ids": [
+      "IT-SEC-021-S01",
+      "IT-SEC-021-S02",
+      "IT-SEC-021-S03",
+      "IT-SEC-021-S04"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "初版のowner/role拒否では、ADMIN全件snapshotとwrite時roleの取り違え・保存済9001のscope漏洩を観測できない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-324-7f7d67b9ad83",
+        "section": "Outbox・Inbox・冪等性・再送設計",
+        "line": 13,
+        "quote": "SSC157（2026-10-02、実装前）：新QSS/QSDの取得scopeをSS352のNKQRY1内部frameへ暗号保存し、成功/確定error（特にADMIN全件9001）を同じscopeへ拘束する。read-only stageの取得scopeをwrite現在認証で上書きしない。取得USER又は現在ADMINなら元scopeの凍結結果を許可、取得ADMIN→現在USERはQSS0103/QSD0104を非保存で返しSECURITY監査する。失効は先に0102。元snapshot/state/code/completed/expiryは不変更、未保存stageならInbox handlerへ渡す前に拒否。NTS/NTDはowner固定・raw profile不変更。通常QSS/QSDは無scope旧rawを9000で保護し、現在質問/Usernameから所有scopeを推測しない。12.8の保守はprefixのsyntax/layout/固定wireだけ検査し、旧raw検査と現在role非比較を維持する。24h/owner/HMAC/NONE/外部電文は不変更。",
+        "design_ids": [
+          "SSC157"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-TX-041",
+    "condition_ids": [
+      "SSCOND-324-1337785f5a6d"
+    ],
+    "source_section": "Outbox・Inbox・冪等性・再送設計 > 6. Response保存・再構成 > 6.3 Scenario保存結果の検証（SSC-026）",
+    "scope": "Scenario確定ERRORと一時拒否の保存区別",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-TX-041",
+    "scenario_ids": [
+      "IT-TX-041-S01",
+      "IT-TX-041-S02",
+      "IT-TX-041-S03",
+      "IT-TX-041-S04"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03",
+      "A04"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "IT-FILE/IFのerror確認にはERROR snapshot再送と0102/9000非保存の差がない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-324-1337785f5a6d",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 6. Response保存・再構成 > 6.3 Scenario保存結果の検証（SSC-026）",
+        "line": 155,
+        "quote": "GAM/SPK/RTE/SCF/SRC/SCN responseは初回fixed header+DATA+recordsを§6の既存AES snapshotへ保存する。AADは要求Message ID/対応response layout/001/認証owner。初回成功0000はCOMPLETED、確定9001（容量上限）とSCNの0104（対象不在）はERROR。0102/9000は非保存の応答とし、失効/一時障害を成功snapshotへ変換しない。正常responseは要求と対応するlayout必須。",
+        "design_ids": [
+          "SSC-026"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-SEC-022",
+    "condition_ids": [
+      "SSCOND-324-3ca6bdad21f5"
+    ],
+    "source_section": "Outbox・Inbox・冪等性・再送設計 > 6. Response保存・再構成 > 6.2 Logout Inbox（SSC-015）",
+    "scope": "Logout同Messageと別Messageの監査差",
+    "route": [
+      "Browser/Web session",
+      "Artemis",
+      "API auth/Inbox",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-SEC-022",
+    "scenario_ids": [
+      "IT-SEC-022-S01",
+      "IT-SEC-022-S02",
+      "IT-SEC-022-S03"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "IT-SEC-010の再送一括条件を補正。別Messageの既失効要求まで監査0とする誤判定を防ぐ。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-324-3ca6bdad21f5",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 6. Response保存・再構成 > 6.2 Logout Inbox（SSC-015）",
+        "line": 147,
+        "quote": "LOGREQ01はprotocol検証後、raw hashに一致するsessionのUserを先にlockし、Inbox owner用user IDだけを取得する。未失効/既失効/期限切れ/account状態から業務actorを発行せず、このlookupでidle延長/監査/失効更新を行わない。不明contextは0102でInboxを新規保存しない。Known contextはowner付きInboxを開始し、NEWのhandlerだけ312 §4.2の失効専用serviceを呼ぶ。これにより同Message ID再配送の監査重複を防ぐ。別Messageの既失効要求は元revoked_at/0200と当該要求の監査を確定する。",
+        "design_ids": [
+          "SSC-015"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-TX-042",
+    "condition_ids": [
+      "SSCOND-324-bbd1ccd61f5f",
+      "SSCOND-324-768fb78236c8",
+      "SSCOND-324-03d8760b9b3d",
+      "SSCOND-324-12fa78b9818d"
+    ],
+    "source_section": "Outbox・Inbox・冪等性・再送設計 > 8. API `mq_outbox` > 8.3 Claim/send",
+    "scope": "Outbox claim100・10秒leaseと送信確認",
+    "route": [
+      "Web",
+      "Artemis sync + async.work",
+      "API dispatcher/worker",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-TX-042",
+    "scenario_ids": [
+      "IT-TX-042-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "既存claim crashケースに最大batch/lease失効前後の他worker選択証拠がない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-324-bbd1ccd61f5f",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 8. API `mq_outbox` > 8.3 Claim/send",
+        "line": 213,
+        "quote": "1. `status in (PENDING,ERROR)`、due、lease期限切れを`FOR UPDATE SKIP LOCKED`で最大100件取得する。",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-324-768fb78236c8",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 8. API `mq_outbox` > 8.3 Claim/send",
+        "line": 214,
+        "quote": "2. 10秒lease ownerを設定して短transactionをcommitする。",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-324-03d8760b9b3d",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 8. API `mq_outbox` > 8.3 Claim/send",
+        "line": 216,
+        "quote": "4. Persistent messageへ`_AMQ_DUPL_ID=message_id`を設定し、JMS transacted send/commitする。",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-324-12fa78b9818d",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 8. API `mq_outbox` > 8.3 Claim/send",
+        "line": 217,
+        "quote": "5. DB短transactionでSENT/sent_at、lease clearを更新する。",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-TX-043",
+    "condition_ids": [
+      "SSCOND-324-b0b0d8c03075",
+      "SSCOND-324-c7e617c97c66"
+    ],
+    "source_section": "Outbox・Inbox・冪等性・再送設計 > 8. API `mq_outbox` > 8.3 Claim/send",
+    "scope": "Outbox application再送scheduleとcritical",
+    "route": [
+      "Web",
+      "Artemis sync + async.work",
+      "API dispatcher/worker",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-TX-043",
+    "scenario_ids": [
+      "IT-TX-043-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "Broker再配送1/5/25と混同したapplication送信再試行を独立測定する。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-324-b0b0d8c03075",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 8. API `mq_outbox` > 8.3 Claim/send",
+        "line": 220,
+        "quote": "再送delayは1秒、5秒、30秒、1分、5分capとし、outbox送信接続障害のapplication scheduleである。UIC-001のBroker受信再配送間隔とは別物。",
+        "design_ids": [
+          "UIC-001"
+        ]
+      },
+      {
+        "condition_id": "SSCOND-324-c7e617c97c66",
+        "section": "Outbox・Inbox・冪等性・再送設計",
+        "line": 5,
+        "quote": "SSC323（2026-10-21、BUG1573/YKT1328/1323）：ordinary WebLogDispatcherのtyped failureCode決定前及びWebLogReplayWorkerの周期retry前にもSS322と同じcause/suppressed/JMS linked/SQL next・identity-visited検査を行う。内包Errorを同一fatalとして伝播、非fatal循環は有限帰還し既ERROR/attempt/lease/backoffと固定redactionを維持する。一般session catalogの所有契約は置換せずordinary二境界の純粋非I/O確認へ限定、graph書換え/新mark/rollback/close/権限操作0。自己所有workerのterminal/failedCycle0、temporary DBの未mark/既claim保持と非fatal通常後条件を独立確認する。API/Webを同sourceで照合し中間の成功全回帰を目的無く再演せず、実Root/native/拒否保留の受入へ転用しない。",
+        "design_ids": [
+          "SSC323"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-ASY-020",
+    "condition_ids": [
+      "SSCOND-324-d6f80d34140c",
+      "SSCOND-324-c11c751aee91",
+      "SSCOND-324-2ed5ea94a9e3",
+      "SSCOND-324-f71dc331aa00",
+      "SSCOND-332-f9a6cf0581b6"
+    ],
+    "source_section": "Outbox・Inbox・冪等性・再送設計 > 10. Internal work冪等性",
+    "scope": "workerの状態別再配送とACK gate",
+    "route": [
+      "Web",
+      "Artemis sync + async.work",
+      "API dispatcher/worker",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-ASY-020",
+    "scenario_ids": [
+      "IT-ASY-020-S01",
+      "IT-ASY-020-S02",
+      "IT-ASY-020-S03",
+      "IT-ASY-020-S04",
+      "IT-ASY-020-S05"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "IT-ASY-003等の途中crashだけでは処理済/別W/取消/ERRORのACK可否を判定できない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-324-d6f80d34140c",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 10. Internal work冪等性",
+        "line": 240,
+        "quote": "| PROCESSING＋別ID | 整合error。Ackせず調査/DLQ |",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-324-c11c751aee91",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 10. Internal work冪等性",
+        "line": 239,
+        "quote": "| PROCESSING＋同ID | Crash recoveryとして処理再開 |",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-324-2ed5ea94a9e3",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 10. Internal work冪等性",
+        "line": 241,
+        "quote": "| COMPLETED＋answerあり | 冪等ACK、更新なし |",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-324-f71dc331aa00",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 10. Internal work冪等性",
+        "line": 243,
+        "quote": "| CANCELLED | 業務処理せずACK |",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-332-f9a6cf0581b6",
+        "section": "SQL・transaction・lock・削除設計 > 8. Async job・取消競合 > 8.1 RECEIVED→PROCESSING",
+        "line": 219,
+        "quote": "0件の場合はjobを`FOR UPDATE`で再読し、COMPLETED/CANCELLEDおよび確定済み業務ERRORは冪等ACK、最終retry ERRORは既存DLQ dispatch DのSENT確認後だけACK（SSC156、SS312 §9/SS353 §7.2）。PROCESSINGは\n`processing_message_id`一致のみcrash recovery、不一致は整合errorとする。\n実delivery countはmetadataへ非capで保存する。retry_countだけDDL上限3に制限し、actual countを捏造しない。",
+        "design_ids": [
+          "SSC156"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-ASY-021",
+    "condition_ids": [
+      "SSCOND-332-4ffaa24c6093",
+      "SSCOND-332-96c1efba850b",
+      "SSCOND-332-888cd5d263ac"
+    ],
+    "source_section": "SQL・transaction・lock・削除設計 > 8. Async job・取消競合 > 8.3 Answer完了",
+    "scope": "処理中質問削除と将来回答への削除triple継承",
+    "route": [
+      "Web",
+      "Artemis sync + async.work",
+      "API dispatcher/worker",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-ASY-021",
+    "scenario_ids": [
+      "IT-ASY-021-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "既存取消/削除caseは削除時点とworker完了の交差における回答非露出を確認していない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-332-4ffaa24c6093",
+        "section": "SQL・transaction・lock・削除設計 > 8. Async job・取消競合 > 8.3 Answer完了",
+        "line": 239,
+        "quote": "1. Jobを`FOR UPDATE`しPROCESSINGとmessage IDを再検証。",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-332-96c1efba850b",
+        "section": "SQL・transaction・lock・削除設計 > 8. Async job・取消競合 > 8.3 Answer完了",
+        "line": 240,
+        "quote": "2. Questionをlockし削除flag/時刻/actor三点を継承して`answers(question_id UK)`へINSERT。既存answer/provider/time/削除三点を検証し、同一なら冪等完了、矛盾は整合errorとし上書きしない。",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-332-888cd5d263ac",
+        "section": "SQL・transaction・lock・削除設計 > 10. Question/Answer論理削除",
+        "line": 277,
+        "quote": "- Notification/jobは更新しない。Notification detail SQLはquestion削除済み時に本文/answerをprojectionせず「削除済み」表示用flagだけ返す。",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-ASY-022",
+    "condition_ids": [
+      "SSCOND-332-f0f236612790"
+    ],
+    "source_section": "SQL・transaction・lock・削除設計 > 8. Async job・取消競合 > 8.2 取消",
+    "scope": "取消敗者0107のInbox ERROR確定",
+    "route": [
+      "Web",
+      "Artemis sync + async.work",
+      "API dispatcher/worker",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-ASY-022",
+    "scenario_ids": [
+      "IT-ASY-022-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "IT-ASY-002は取消raceを含むが、敗者をrollbackとする誤期待値を排除する。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-332-f0f236612790",
+        "section": "SQL・transaction・lock・削除設計 > 8. Async job・取消競合 > 8.2 取消",
+        "line": 234,
+        "quote": "Workerと取消の更新先着commitが勝つ。取消成功時は同transactionでnotification stateもCANCELLEDにする。\nPROCESSING/COMPLETED/ERRORはrollbackではなく業務error`0107`をInbox ERRORでcommitする。",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-DB-001",
+    "condition_ids": [
+      "SSCOND-332-cf975699fe81",
+      "SSCOND-332-b591baccb00b"
+    ],
+    "source_section": "SQL・transaction・lock・削除設計",
+    "scope": "接続開始失敗と更新未commit切断",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-DB-001",
+    "scenario_ids": [
+      "IT-DB-001-S01",
+      "IT-DB-001-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "IT-TX-003のprocess crashではbegin不能/接続切断rollbackの実DB状態を区別できない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-332-cf975699fe81",
+        "section": "SQL・transaction・lock・削除設計 > 2. Transaction共通規則",
+        "line": 55,
+        "quote": "| Command | Inbox INSERT～業務更新～critical audit～Inbox完了を1 transactionで確定 |",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-332-b591baccb00b",
+        "section": "SQL・transaction・lock・削除設計 > 2. Transaction共通規則",
+        "line": 59,
+        "quote": "| Rollback | Checked business errorは予期responseをInbox ERRORでcommit、DB/MQ/I/O例外はtransaction rollback |",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-DB-002",
+    "condition_ids": [
+      "SSCOND-324-e6a58567976d",
+      "SSCOND-332-cf975699fe81",
+      "SSCOND-324-af23819761ad"
+    ],
+    "source_section": "Outbox・Inbox・冪等性・再送設計",
+    "scope": "COMMIT ACK喪失の成否不明照合",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-DB-002",
+    "scenario_ids": [
+      "IT-DB-002-S01",
+      "IT-DB-002-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "UNDETERMINED",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "DB server停止一括ケースにcommit済か否か不明の二分岐と再開抑止がない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [
+      "ISS-COMMIT-INJECTION"
+    ],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-324-e6a58567976d",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 14. PT/IT必須crash point",
+        "line": 378,
+        "quote": "1. DB commit前/後、JMS send前/後、ACK commit前/後を個別にprocess killする。",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-332-cf975699fe81",
+        "section": "SQL・transaction・lock・削除設計 > 2. Transaction共通規則",
+        "line": 55,
+        "quote": "| Command | Inbox INSERT～業務更新～critical audit～Inbox完了を1 transactionで確定 |",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-324-af23819761ad",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 5. Inbox取得algorithm > 5.1 非更新Message参照（SSC-024）",
+        "line": 106,
+        "quote": "不在はOptional.empty、存在時は通常executeと共通のrow reader・layout/version/correlation/owner/token/HMAC照合を行い、一致した保存COMPLETED/ERRORだけREPLAY、PROCESSINGはIN_PROGRESSを返す。NULL/不正state/unknown key/照合不一致を成功へ補完しない。これはMessage参照snapshotであって新規受付の予約/lockではない。別Messageの同operation tokenを検索して確定扱いせず、最終write transactionでは通常executeの一意制約/再照合を必須とする。Scenarioはこの参照結果を復号・整合検証してから既存descriptorの再利用を判断し、file I/Oへread-only transactionを持ち出さない。",
+        "design_ids": [
+          "SSC-024"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-DB-003",
+    "condition_ids": [
+      "SSCOND-342-8d043ddfaf8b"
+    ],
+    "source_section": "Caddy・systemd・PostgreSQL・Java設定設計 > 5. Java/JVM・Spring process > 5.2 Spring主要値",
+    "scope": "pool実上限と返却後の回復",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-DB-003",
+    "scenario_ids": [
+      "IT-DB-003-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "UNDETERMINED",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "既存lock/性能caseにはWeb2/API8接続の実borrow上限と復旧後残lease/接続0差分がない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [
+      "ISS-POOL-TIMEOUT"
+    ],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-342-8d043ddfaf8b",
+        "section": "Caddy・systemd・PostgreSQL・Java設定設計 > 5. Java/JVM・Spring process > 5.2 Spring主要値",
+        "line": 350,
+        "quote": "| DB pool | Web technical max 2/min 1、connect 3s | max 8/min 2、connect 3s |",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-MQ-030",
+    "condition_ids": [
+      "SSCOND-324-cf3d7ad32e38"
+    ],
+    "source_section": "Outbox・Inbox・冪等性・再送設計 > 8. API `mq_outbox` > 8.3 Claim/send",
+    "scope": "send commit成否不明とduplicate cache永続化",
+    "route": [
+      "Web",
+      "Artemis sync + async.work",
+      "API dispatcher/worker",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-MQ-030",
+    "scenario_ids": [
+      "IT-MQ-030-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "既存TX send-afterは送達確定/不明とbroker再起動後cache耐久を一連照合していない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-324-cf3d7ad32e38",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 8. API `mq_outbox` > 8.3 Claim/send",
+        "line": 218,
+        "quote": "6. Crashが4と5の間なら同Message IDを再sendする。Broker duplicate cacheまたはConsumer DB UKが重複を排除する。",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-MQ-031",
+    "condition_ids": [
+      "SSCOND-321-b3e2eb8a4658",
+      "SSCOND-321-97ff00b017f9"
+    ],
+    "source_section": "Artemis物理構成・JMS設定設計 > 6. JMS connection factory",
+    "scope": "receive/ACK成否不明と再開停止",
+    "route": [
+      "Web",
+      "Artemis sync + async.work",
+      "API dispatcher/worker",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-MQ-031",
+    "scenario_ids": [
+      "IT-MQ-031-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "既存receive crashはrollback/closeの失敗不明を通常再送と区別していない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-321-b3e2eb8a4658",
+        "section": "Artemis物理構成・JMS設定設計 > 7. JMS transaction・ACK",
+        "line": 220,
+        "quote": "- Async最終失敗はDB outboxでDLQ sendを確認後に元messageをcommit/ACKする。DB不能時のbroker自動DLQは353で整合する。",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-321-97ff00b017f9",
+        "section": "Artemis物理構成・JMS設定設計 > 7. JMS transaction・ACK",
+        "line": 217,
+        "quote": "- `Message.acknowledge()`を呼ばず、JMS commitが受信ACKと同session上sendを確定する。",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-NET-001",
+    "condition_ids": [
+      "SSCOND-321-48ddb24c2b12",
+      "SSCOND-321-071769d8cd6e",
+      "SSCOND-321-32084ec58e96"
+    ],
+    "source_section": "Artemis物理構成・JMS設定設計 > 4. Address・Queue定義",
+    "scope": "request方向遮断とreply方向遮断",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-NET-001",
+    "scenario_ids": [
+      "IT-NET-001-S01",
+      "IT-NET-001-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "単純API停止だけでは片方向不通時の受付未確定/確定済結果を切り分けられない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-321-48ddb24c2b12",
+        "section": "Artemis物理構成・JMS設定設計 > 4. Address・Queue定義",
+        "line": 120,
+        "quote": "| `nk.sync.request` | `nk.sync.request.q` | ○ | `nk_web` | `nk_api` | 最大1,000,000 byte、TTL 5秒 |",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-321-071769d8cd6e",
+        "section": "Artemis物理構成・JMS設定設計 > 6. JMS connection factory",
+        "line": 202,
+        "quote": "| Web request producer | `nk_web`専用pool | transacted producer session | call timeout 2秒、block-on-durable-send=true |",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-321-32084ec58e96",
+        "section": "Artemis物理構成・JMS設定設計 > 9. Correlation registry",
+        "line": 249,
+        "quote": "4. 不存在/期限後なら画面へ渡さずlate response metricを増やしてJMS ACKする。Broker expiry済みmessageはExpiry Queueへrouteされる。",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-FILE-050",
+    "condition_ids": [
+      "SSCOND-333-fed5ccd955f9",
+      "SSCOND-333-9607768ee2d9",
+      "SSCOND-332-4671f48b9221"
+    ],
+    "source_section": "大容量結果file・media・Range配信設計 > 6. Descriptor検証・取得 > 6.1 APIの再送file確認と再生成（SSC-027）",
+    "scope": "native ENOENTとUNAVAILABLEの再生成分離",
+    "route": [
+      "Web file reader",
+      "Artemis",
+      "API snapshot/publisher",
+      "PostgreSQL",
+      "実ext4 Transfer"
+    ],
+    "test_id": "IT-FILE-050",
+    "scenario_ids": [
+      "IT-FILE-050-S01",
+      "IT-FILE-050-S02",
+      "IT-FILE-050-S03"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03",
+      "A04"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "IT-FILE-040は不在をまとめており、close/crypto/保持inode内NoSuchFileを誤って再生成していないことを確認できない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-333-fed5ccd955f9",
+        "section": "大容量結果file・media・Range配信設計 > 6. Descriptor検証・取得 > 6.1 APIの再送file確認と再生成（SSC-027）",
+        "line": 121,
+        "quote": "MISSINGを返せるのはroot検査成功後の既存date open、またはdate属性成功後でready inode取得前のnative ENOENTだけ。保持inode callback内のNoSuchFile、root/属性/hash/crypto/権限/close/不明I/OはUNAVAILABLEとし、不在へ補完しない。Close失敗を伴う不在は再生成候補にしない。FD番号の再利用と所有を混同せず、callbackのresource所有範囲を字句的に限定する。",
+        "design_ids": [
+          "SSC-027"
+        ]
+      },
+      {
+        "condition_id": "SSCOND-333-9607768ee2d9",
+        "section": "大容量結果file・media・Range配信設計 > 6. Descriptor検証・取得 > 6.1 APIの再送file確認と再生成（SSC-027）",
+        "line": 123,
+        "quote": "不在を確定したcallerだけが、DB snapshotのmetadata全8論理fieldと元snapshotのmetadata（file descriptor部を除く）、record数、4800byte record streamのSHA-256を照合する。原本と一致する場合だけpublisherを1回呼ぶ。新descriptorも元のcount/hash（sizeは4800×count）へ再照合し、key/date/UUID以外の内容を差替えない。生成前の不一致ではI/Oを行わず、生成後の失敗ではreadyを削除しない。既存成功の再生成不能・容量不足を保存ERRORへ上書きせず、一時障害として元Inboxを保持する。保持header/state/ref/completed_at/24h期限を変えないdescriptor置換の最終DB手順は324 §7.1による。",
+        "design_ids": [
+          "SSC-027"
+        ]
+      },
+      {
+        "condition_id": "SSCOND-332-4671f48b9221",
+        "section": "SQL・transaction・lock・削除設計 > 4. Scenario・Speaker・Media query > 4.2 Scenario file/detail（IF-003/004）",
+        "line": 106,
+        "quote": "SSC-027補足（4.2のScenario再生成）: 最終write transactionで324 §7.1のrow lock/owner/HMAC/旧snapshot一致を確認してから、`update schubert.request_inbox set response_body_encrypted=?,response_key_version=? where message_id=? and processing_state='COMPLETED'`を実行する。SQL後条件は更新1件、他17列（初回completed_at/expires_atを含む）不変。失敗はcaller rollback、commit確認後にのみ応答する。PT-IDEM-SR01～SR03で本番DDL/限定app roleの実PostgreSQLにより検査する。",
+        "design_ids": [
+          "PT-IDEM-SR01",
+          "SSC-027"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-FILE-051",
+    "condition_ids": [
+      "SSCOND-333-9607768ee2d9"
+    ],
+    "source_section": "大容量結果file・media・Range配信設計 > 6. Descriptor検証・取得 > 6.1 APIの再送file確認と再生成（SSC-027）",
+    "scope": "再生成metadata8/hash不一致と非公開",
+    "route": [
+      "Web file reader",
+      "Artemis",
+      "API snapshot/publisher",
+      "PostgreSQL",
+      "実ext4 Transfer"
+    ],
+    "test_id": "IT-FILE-051",
+    "scenario_ids": [
+      "IT-FILE-051-S01",
+      "IT-FILE-051-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧再生成caseは元snapshotからDBが変わった時の生成禁止/非更新を十分指定していない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-333-9607768ee2d9",
+        "section": "大容量結果file・media・Range配信設計 > 6. Descriptor検証・取得 > 6.1 APIの再送file確認と再生成（SSC-027）",
+        "line": 123,
+        "quote": "不在を確定したcallerだけが、DB snapshotのmetadata全8論理fieldと元snapshotのmetadata（file descriptor部を除く）、record数、4800byte record streamのSHA-256を照合する。原本と一致する場合だけpublisherを1回呼ぶ。新descriptorも元のcount/hash（sizeは4800×count）へ再照合し、key/date/UUID以外の内容を差替えない。生成前の不一致ではI/Oを行わず、生成後の失敗ではreadyを削除しない。既存成功の再生成不能・容量不足を保存ERRORへ上書きせず、一時障害として元Inboxを保持する。保持header/state/ref/completed_at/24h期限を変えないdescriptor置換の最終DB手順は324 §7.1による。",
+        "design_ids": [
+          "SSC-027"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-FILE-052",
+    "condition_ids": [
+      "SSCOND-333-9607768ee2d9",
+      "SSCOND-333-538b95945847"
+    ],
+    "source_section": "大容量結果file・media・Range配信設計 > 7. Path検証の実装規約 > 7.4 起動時の診断専用probe（SSC-022）",
+    "scope": "公開後fsync/close失敗のready保全",
+    "route": [
+      "Web file reader",
+      "Artemis",
+      "API snapshot/publisher",
+      "PostgreSQL",
+      "実ext4 Transfer"
+    ],
+    "test_id": "IT-FILE-052",
+    "scenario_ids": [
+      "IT-FILE-052-S01",
+      "IT-FILE-052-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "rename後の失敗を公開前rollbackと同一視しないため、再処理禁止/起動拒否を独立化。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-333-9607768ee2d9",
+        "section": "大容量結果file・media・Range配信設計 > 6. Descriptor検証・取得 > 6.1 APIの再送file確認と再生成（SSC-027）",
+        "line": 123,
+        "quote": "不在を確定したcallerだけが、DB snapshotのmetadata全8論理fieldと元snapshotのmetadata（file descriptor部を除く）、record数、4800byte record streamのSHA-256を照合する。原本と一致する場合だけpublisherを1回呼ぶ。新descriptorも元のcount/hash（sizeは4800×count）へ再照合し、key/date/UUID以外の内容を差替えない。生成前の不一致ではI/Oを行わず、生成後の失敗ではreadyを削除しない。既存成功の再生成不能・容量不足を保存ERRORへ上書きせず、一時障害として元Inboxを保持する。保持header/state/ref/completed_at/24h期限を変えないdescriptor置換の最終DB手順は324 §7.1による。",
+        "design_ids": [
+          "SSC-027"
+        ]
+      },
+      {
+        "condition_id": "SSCOND-333-538b95945847",
+        "section": "大容量結果file・media・Range配信設計 > 7. Path検証の実装規約 > 7.3 API writerのdirectory capability（SSC-019）",
+        "line": 150,
+        "quote": "SSC-049/PG-D-153（先行67148c13）: shared storageへ保守file adapter専用のprivate能力を追加する。DirectoryCalls.createPrivateFileは同じopenat CREATE_NEW/NOFOLLOW/CLOEXECでmode0600を要求し、既存createFile0640は不変。未対応実装のdefaultは無操作UNAVAILABLEで拒否する。OwnedTransferDirectory.createPrivatePart(UUID,callback)は生成時点のinodeを保持し全終了close。publishAs(UUID,単一名)はUUID.partから同directoryの単一targetへ既存RENAME_NOREPLACE、その後directory fsync。unlinkEntry(単一名)はcallerが証明済みのentryだけをunlinkat→directory fsync。空/`.`/`..`/slash/NUL/null・closed rootは無操作拒否。root/階層の削除はなく、既存target衝突時はpart/targetを保持する。rename/unlink後のfsync/close失敗は不確定な非成功で、逆操作や他file削除で隠さない。",
+        "design_ids": [
+          "SSC-019",
+          "SSC-049"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-FILE-053",
+    "condition_ids": [
+      "SSCOND-333-bec2605e0385",
+      "SSCOND-333-0942b985ff06",
+      "SSCOND-333-e3f3ca4e4c95"
+    ],
+    "source_section": "大容量結果file・media・Range配信設計 > 7. Path検証の実装規約 > 7.4 起動時の診断専用probe（SSC-022）",
+    "scope": "起動診断A/B collisionと所有限定清掃",
+    "route": [
+      "Web file reader",
+      "Artemis",
+      "API snapshot/publisher",
+      "PostgreSQL",
+      "実ext4 Transfer"
+    ],
+    "test_id": "IT-FILE-053",
+    "scenario_ids": [
+      "IT-FILE-053-S01",
+      "IT-FILE-053-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "既存起動/ファイルcaseに実no-replaceの二重公開診断と自分以外を消さない証拠がない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-333-bec2605e0385",
+        "section": "大容量結果file・media・Range配信設計 > 7. Path検証の実装規約 > 7.4 起動時の診断専用probe（SSC-022）",
+        "line": 170,
+        "quote": "CSPRNG UUIDの診断partをCREATE_NEWで保持し、秘密を含まない4800byte固定pattern Aを書いてforce/属性/独立hashを検証、readyへnative no-replace公開する。同UUIDの新しい診断partに異なるpattern Bを書き、readyへの二度目の公開がCOLLISIONとなりA/B双方のbyteが保たれることを検査する。通常rename/置換へのfallbackはない。Probeのfileは業務結果ではなく、descriptor/Inbox/業務message/HTTPへ返さない。",
+        "design_ids": [
+          "SSC-022"
+        ]
+      },
+      {
+        "condition_id": "SSCOND-333-0942b985ff06",
+        "section": "大容量結果file・media・Range配信設計 > 7. Path検証の実装規約 > 7.4 起動時の診断専用probe（SSC-022）",
+        "line": 172,
+        "quote": "ProbeはCREATE_NEW成功で所有を確認したpartと、公開成功を確認した**自分の診断readyだけ**をその保持dateから清掃し、directory fsyncする。Ready清掃前に保持inodeの属性とdiagnostic A hashを再確認し、変質/検査不能なら保全する。既存衝突先、所有不明entry、公開結果不確定のreadyは削除しない。清掃失敗/close失敗/不確定公開は起動不合格とし、全体scan/ready成功へ算入しない。残った診断entryは既存の次回朝清掃/運用調査対象とする。新規empty dateは無断削除しない。",
+        "design_ids": [
+          "SSC-022"
+        ]
+      },
+      {
+        "condition_id": "SSCOND-333-e3f3ca4e4c95",
+        "section": "大容量結果file・media・Range配信設計 > 7. Path検証の実装規約 > 7.4 起動時の診断専用probe（SSC-022）",
+        "line": 174,
+        "quote": "この限定された起動診断の清掃を、通常writer/readerや業務ready削除へ流用しない。通常のlarge-result lifecycleは従来どおり次回朝batchへ委ねる。Probe成功後の完全scanだけで容量を初期化し、single-instance/exclusive保証・full root検査・service readinessへの結線を別途検証する。",
+        "design_ids": [
+          "SSC-022"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-FILE-054",
+    "condition_ids": [
+      "SSCOND-333-b49bde1c1860"
+    ],
+    "source_section": "大容量結果file・media・Range配信設計 > 7. Path検証の実装規約 > 7.2 OS・TOCTOU対策",
+    "scope": "Media N12とTransfer48MBの別上限",
+    "route": [
+      "Caddy",
+      "Web media endpoint",
+      "API descriptor",
+      "PostgreSQL",
+      "実Asset filesystem"
+    ],
+    "test_id": "IT-FILE-054",
+    "scenario_ids": [
+      "IT-FILE-054-S01",
+      "IT-FILE-054-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧容量caseはTransfer専用上限をMediaへ誤適用する不備を検出できない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-333-b49bde1c1860",
+        "section": "大容量結果file・media・Range配信設計 > 7. Path検証の実装規約 > 7.2 OS・TOCTOU対策",
+        "line": 139,
+        "quote": "保持Unix通常file/owner/group/mode0640/nlink1/size一致の共通`existingFile`照合は正のlong sizeを扱う。Media callerは先にMEDIA1024のN12上限を検証し、Transfer専用`file`入口は従来の1～48,000,000byteを検査した上で共通照合へ委譲する。MediaをTransferの48MB上限に誤って制限せず、逆にTransferの上限を緩和しない。属性照合はmanifest/hash/readiness/認証の代替ではない。",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-FILE-055",
+    "condition_ids": [
+      "SSCOND-333-6c0dcf98453f"
+    ],
+    "source_section": "大容量結果file・media・Range配信設計 > 9. Endpoint・HTTP header",
+    "scope": "表示filename256byteと実segment255byte",
+    "route": [
+      "Caddy",
+      "Web media endpoint",
+      "API descriptor",
+      "PostgreSQL",
+      "実Asset filesystem"
+    ],
+    "test_id": "IT-FILE-055",
+    "scenario_ids": [
+      "IT-FILE-055-S01",
+      "IT-FILE-055-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧path攻撃caseとContent-Dispositionの表示metadataを分離し、実filename上限の誤流用を検出する。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-333-6c0dcf98453f",
+        "section": "大容量結果file・media・Range配信設計 > 9. Endpoint・HTTP header",
+        "line": 240,
+        "quote": "Descriptorの表示/download file nameはNFC、1～256 UTF-8 byte、CR/LF/NUL/quote/slash/backslash/control文字禁止。\nこれはstorage pathの実segment名（255 byte以下）と別metadataであり、OS path解決に使わない。\n`Content-Disposition` attachmentはASCII fallbackを安全な`download.bin`等にし、\n`filename*=UTF-8''<RFC 5987 percent-encoded>`を使う。Header valueにraw file nameを連結しない。",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-OPS-020",
+    "condition_ids": [
+      "SSCOND-341-5bdeb657b18e"
+    ],
+    "source_section": "Caddy・systemd・PostgreSQL・Java設定設計 > SSC312 HTTP資源factoryの取得前owner準備（2026-10-21、内部詳細補足）",
+    "scope": "Caddy validate失敗の逆順停止とready否認",
+    "route": [
+      "systemd/Caddy",
+      "Morning/Backup/Cleanup",
+      "API/Web",
+      "PostgreSQL",
+      "Artemis",
+      "実filesystem"
+    ],
+    "test_id": "IT-OPS-020",
+    "scenario_ids": [
+      "IT-OPS-020-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "IT-OPS-001の正常起動順では、API/Web既起動後の最終Caddy失敗と残資源を判定していない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-341-5bdeb657b18e",
+        "section": "朝batch・backup・削除・再実行設計 > 10. Readiness・smoke",
+        "line": 417,
+        "quote": "SSC178（2026-10-04、内部接続補足）：API ordinary ready→Web全業務ready→固定Caddy validate/実daemon/証明書検証付きHTTPS `/login` 200→同原本completeの順とする。元の親M/専用DB/原本/ISSUED/30分deadlineを連続保持し、API/Webは同捕捉boot/Invocation/PID/startTicks/cgroup/本人管理socket/署名5info/readyを各段前後で再検査する。Caddy送達中はAPI/Web両intentが連続した隔離fenceとなり、別receiptを捏造しない。成功時の稼働サービスintent退役は専用live-ready能力でWEB→API、同inode/同親/元deadline・実client0/全client資源closeと全ready/Caddy確認を前後に満たす。worker終了用退役とは別能力とする。通常後段失敗はCaddy→Web→APIを逆順停止し全kernel終端後に観測ownerを閉じ、残留intentを保全して許可abort。送達/停止/半退役/原本完了不明は非成功・所有保持で隔離し、成功へ補完しない。",
+        "design_ids": [
+          "SSC178"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-OPS-021",
+    "condition_ids": [
+      "SSCOND-321-fe37f322773c",
+      "SSCOND-321-49c79b8e41aa"
+    ],
+    "source_section": "Artemis物理構成・JMS設定設計 > 1. 目的・追跡・状態",
+    "scope": "Unit activeと実依存readyの不一致",
+    "route": [
+      "systemd/Caddy",
+      "Morning/Backup/Cleanup",
+      "API/Web",
+      "PostgreSQL",
+      "Artemis",
+      "実filesystem"
+    ],
+    "test_id": "IT-OPS-021",
+    "scenario_ids": [
+      "IT-OPS-021-S01",
+      "IT-OPS-021-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "正常readyケースに、queue不在/DB不通でactiveだけを合格とする誤判定の反例を追加。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-321-fe37f322773c",
+        "section": "Artemis物理構成・JMS設定設計 > 13. Readiness・監視",
+        "line": 289,
+        "quote": "Readinessはbroker processだけでなく、journal load error 0、全6 Address/Queue存在、durable/routing一致、acceptor loopback、disk<90%、\nDLQ/Expiry/Queue閾値、expected security role存在を確認する。MetricはQueue message/delivering/scheduled/acknowledged/expired/killed、\nconsumer count、address bytes、paging、journal sync、connection countを取得する。",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-321-49c79b8e41aa",
+        "section": "Artemis物理構成・JMS設定設計 > 6. JMS connection factory",
+        "line": 210,
+        "quote": "共通初期値はconnect timeout 3秒、initial connect attempts 3、reconnect attempts unlimited（process稼働中）、retry interval 1秒、\nretry multiplier 2、max retry 30秒、client failure check 10秒、connection TTL 30秒とする。API/Web readinessは必要connection/consumerが\n確立するまでfalse。計画停止はlistener stop後にsession commit/rollbackを完了する。",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-OPS-022",
+    "condition_ids": [
+      "SSCOND-341-6cb193215770",
+      "SSCOND-341-b13dc2a70fc7"
+    ],
+    "source_section": "朝batch・backup・削除・再実行設計 > 11. 再実行仕様",
+    "scope": "Backup成功再用とfresh childのSKIP終端",
+    "route": [
+      "systemd/Caddy",
+      "Morning/Backup/Cleanup",
+      "API/Web",
+      "PostgreSQL",
+      "Artemis",
+      "実filesystem"
+    ],
+    "test_id": "IT-OPS-022",
+    "scenario_ids": [
+      "IT-OPS-022-S01",
+      "IT-OPS-022-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧backup/restartは同日成功再用時の元handleと新SKIP handleの独立性を確認していない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-341-6cb193215770",
+        "section": "朝batch・backup・削除・再実行設計 > 11. 再実行仕様",
+        "line": 432,
+        "quote": "SSC116/BUG350（2026-09-30、実装前補足）：通常Morning resumeと手動Backupのportを分離する。通常で同run元SUCCESSがあるBackupは元成功bundle一対（DB/CONFIGの完全handle、同content開始/終了/attempt、実4file）を再読・実再検証し、今回両stepをSKIPPED/ALREADY_SUCCESSFUL、件数/byte全0として保存・commit後独立再読する。元成功と今回skipのhandleは別で、元の保存結果・成果を変更しない。最新の同runbundleを選び、異なる試行の片成功を組み合わせず、片方欠落/未知/不整合は拒否する。",
+        "design_ids": [
+          "SSC116"
+        ]
+      },
+      {
+        "condition_id": "SSCOND-341-b13dc2a70fc7",
+        "section": "朝batch・backup・削除・再実行設計 > 11. 再実行仕様",
+        "line": 434,
+        "quote": "§5.1/SSC108のfresh Backup Invocationは通常成功resumeでも必須だが、その真正子は「既存成果の実再検証」を行い、再生成しない。固定ASCII/LF profile NKBACKUPVERIFY1をNKBACKUP1と相互受理せず、元run・content開始・manifest SHA・dump size/SHAのみ許す（任意path/command/SQL/attempt禁止）。既存規則でdirectoryを導出し、普通Backup UIDが保持inode/owner/ACL/size/hashを確認して実pg_restore --listを実行する。親rootは元4file・元完全DB結果と今回両SKIPを保持前後に照合する。root0600 manifest/config/credential archiveを子のために緩めない。今回真正fresh子/全終端とこれらの証明後だけBackup完了能力/起動根拠とする。再検証失敗はpermit不可、新INVALID・保全対象保持、元SUCCESSをFAILEDへ書換えず、生成失敗経路へ流用しない。手動Backupの再生成・複数SUCCESS例外はSSC054の既存規則のみ。",
+        "design_ids": [
+          "SSC054",
+          "SSC108"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-OPS-023",
+    "condition_ids": [
+      "SSCOND-341-6f8976af37cb"
+    ],
+    "source_section": "朝batch・backup・削除・再実行設計 > 11. 再実行仕様",
+    "scope": "手動Backup新attempt失敗と旧成功不変",
+    "route": [
+      "systemd/Caddy",
+      "Morning/Backup/Cleanup",
+      "API/Web",
+      "PostgreSQL",
+      "Artemis",
+      "実filesystem"
+    ],
+    "test_id": "IT-OPS-023",
+    "scenario_ids": [
+      "IT-OPS-023-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "同日再用と手動新規の分岐を分離し、新失敗で既存成功を破壊しないことを確認する。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-341-6f8976af37cb",
+        "section": "朝batch・backup・削除・再実行設計 > 11. 再実行仕様",
+        "line": 446,
+        "quote": "新しい日時でresume対象を再計算しない。別日へ進む場合は新run ID/business dateを作る。\nSSC-054/BUG-138: 手動backup再実行は通常成功stepのskip例外。331 §8.2のbackup2stepだけ同日複数SUCCESSを保持し、新attempt失敗で既存成功を消去・状態変更しない。最新成功の実artifactを検証し、通常step成功一意性・固定run/cutoffと全backup gateは維持する。DB制約修正を実backup生成/検証完了と混同しない。\nManual commandもsystemd transient scopeまたは対応oneshot unitを通し、root shellでJava/SQL/scriptを直接実行しない。",
+        "design_ids": [
+          "SSC-054"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-OPS-024",
+    "condition_ids": [
+      "SSCOND-341-9ca9828de12d"
+    ],
+    "source_section": "朝batch・backup・削除・再実行設計 > 6. DB backup > 6.3 確定・7世代",
+    "scope": "世代削除のverified BOTHと失敗時UNKNOWN",
+    "route": [
+      "systemd/Caddy",
+      "Morning/Backup/Cleanup",
+      "API/Web",
+      "PostgreSQL",
+      "Artemis",
+      "実filesystem"
+    ],
+    "test_id": "IT-OPS-024",
+    "scenario_ids": [
+      "IT-OPS-024-S01",
+      "IT-OPS-024-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧7世代caseにcorrupt/part/unknown保護とunlink部分失敗の再実行禁止がない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-341-9ca9828de12d",
+        "section": "朝batch・backup・削除・再実行設計 > 6. DB backup > 6.3 確定・7世代",
+        "line": 200,
+        "quote": "SSC133補足（PG/PT内部具体化、2026-10-01、実装前）：Morningは真正backup完了後/Cleanup前に、保持backup root、同Root/M/A/原本/借用DB/元30分の下で世代を観測する。新規両SUCCESS時だけ正規directory名のmanifest/全4file inode・hash・ACL・完全DB成功pairを検証し古い名前順の超過分を削除、現在bundleが最新保持集合に入らなければ拒否する。既存成功再利用/FAILEDは削除呼出し0、一覧を前後比較し未観測成功数は未観測と記録。未知名/.part/通常directoryでないもの/manifest・archive不整合/既知非成功pairは保護理由を保存する。SQL/close/owner/未知Throwableは不確定を正常warningへ変換せず保全。削除直前に全bundle/DBを再照合し保持childとnameのdev/ino/所有/policyを確認、固定3archive→MANIFESTの順に各保持entry属性を再確認してunlink+sync、実emptyとname同inode確認後に既存removeEmptyChild+親sync。partial削除/再読失敗は完了にせず、後続で同世代を自動的に再削除しない。末段まで借用rootを閉じず、一覧・全保持bundle・root identity・原本を再照合する。外部仕様/7世代/失敗保護/既存低位APIを変更しない。",
+        "design_ids": [
+          "SSC133"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-OPS-025",
+    "condition_ids": [
+      "SSCOND-332-6531b0565fdb"
+    ],
+    "source_section": "SQL・transaction・lock・削除設計",
+    "scope": "cleanup SKIP LOCKED 0件と真の終端",
+    "route": [
+      "systemd/Caddy",
+      "Morning/Backup/Cleanup",
+      "API/Web",
+      "PostgreSQL",
+      "Artemis",
+      "実filesystem"
+    ],
+    "test_id": "IT-OPS-025",
+    "scenario_ids": [
+      "IT-OPS-025-S01",
+      "IT-OPS-025-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "既存cleanupの件数0を完了とする誤期待値を明示的な実DB競合で否定する。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-332-6531b0565fdb",
+        "section": "SQL・transaction・lock・削除設計",
+        "line": 13,
+        "quote": "SSC175（2026-10-04、QA048/SS331§9.4）：受付参照の孤児cleanupは固定`WEB_RECEIPTS` kindと`maintenance_cleanup_web_receipt_references(uuid,timestamptz,integer)`を用い、既存`CLEAN_BATCH_RUN` handleのatomic chunk境界へ接続する。NULL/無限・範囲外cutoff、limit1..1000、閉じたkind、同run/date/完全step identity・RUNNING状態を既存同様に検査する。親OS/session advisoryを保持した既定の順、両backup共有lock→現在run参照→親step NOWAIT→locator候補を維持し、statement中の観測だけで決定する。候補はreceipt_id順/最大1,000/FOR UPDATE SKIP LOCKED、現在業務questionsにquestion_idが存在しないものだけ。DELETE＋既存step target/success累積は同transactionで、共有step全kindの順序/累積を維持する。chunk0でもeligible EXISTSが真ならLOCK_BUSY非完了、未知/SQL/commit/close失敗はcallerがrollback/隔離し、単なるDML成功をstep成功にしない。単独孤児functionを呼んだ結果だけで親step終了を証明しない。SECURITY DEFINER/nk_owner・固定search_path/UTC・PUBLIC EXECUTE0、batchに完全signature EXECUTEのみ、Web/business直接権限は増やさない。新operation UUID生成/質問再発行/業務DB修復は本保守の責務ではない。",
+        "design_ids": [
+          "SSC175"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-OPS-026",
+    "condition_ids": [
+      "SSCOND-332-4dc877f8e67e",
+      "SSCOND-341-c5d5ef8518ee"
+    ],
+    "source_section": "SQL・transaction・lock・削除設計 > 11. 朝batchの物理削除 > 11.4 Technical cleanup順",
+    "scope": "security hold/log cutoffとrun履歴400日",
+    "route": [
+      "systemd/Caddy",
+      "Morning/Backup/Cleanup",
+      "API/Web",
+      "PostgreSQL",
+      "Artemis",
+      "実filesystem"
+    ],
+    "test_id": "IT-OPS-026",
+    "scenario_ids": [
+      "IT-OPS-026-S01",
+      "IT-OPS-026-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "UNDETERMINED",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "既存cleanup一括条件ではhold比較cutoffとrun-history保持を独立判定できない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [
+      "ISS-RUNHISTORY-BOUNDARY"
+    ],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-332-4dc877f8e67e",
+        "section": "SQL・transaction・lock・削除設計 > 11. 朝batchの物理削除 > 11.4 Technical cleanup順",
+        "line": 326,
+        "quote": "4. App logは90日の保持別定義に従い、`logged_at < :log_cutoff`の行を時刻/ID順に最大10,000件lockする。\n   `security_hold_until > :log_cutoff`は保全中としてskip、NULLまたは`<= :log_cutoff`は期限到達として削除する。\n   target/deleted/skippedは同lock対象chunkで集計し、保全行の存在を成功件数に隠さない。",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-341-c5d5ef8518ee",
+        "section": "朝batch・backup・削除・再実行設計 > 6. DB backup > 6.6 root manifestとbackup両stepの原子的確定（SSC061/PG168）",
+        "line": 243,
+        "quote": "- Production .repository.BackupStepRepositoryは借用親Connection、.backup.BackupCommitServiceは同借用Connectionのtransaction境界を所有する。原本/OS排他/停止/実artifactの継続保全はcaller、DB専用backup credentialは使わず既存schubert_batchを使う。新table/FK/DDL/grantは追加せずV001～020不変、400日/7世代保持不変更。",
+        "design_ids": [
+          "SSC061"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-OPS-027",
+    "condition_ids": [
+      "SSCOND-332-8c4f3aa8261d",
+      "SSCOND-324-4fe0ef7309e1",
+      "SSCOND-324-2be4fe4af1da"
+    ],
+    "source_section": "SQL・transaction・lock・削除設計 > 11. 朝batchの物理削除 > 11.4 Technical cleanup順",
+    "scope": "Inspector保護・同transaction削除・照会snapshot凍結",
+    "route": [
+      "systemd/Caddy",
+      "Morning/Backup/Cleanup",
+      "API/Web",
+      "PostgreSQL",
+      "Artemis",
+      "実filesystem"
+    ],
+    "test_id": "IT-OPS-027",
+    "scenario_ids": [
+      "IT-OPS-027-S01",
+      "IT-OPS-027-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧cleanup caseはInspector失敗時の暗号不備保護と通常batch成功の誤共用を区別できない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-332-8c4f3aa8261d",
+        "section": "SQL・transaction・lock・削除設計 > 11. 朝batchの物理削除 > 11.4 Technical cleanup順",
+        "line": 330,
+        "quote": "SSC-049/PG-D-126補足: V011以降のmaintenance_cleanup_message_storesは上記2のOutboxだけを処理し、3のInboxを読み書きしない。通常batchのOKをInbox検査完了の証明にしない。Inboxは専用processの候補lock→暗号/参照検査→条件付き削除という同transactionの経路だけで処理する。全件検査の未起動/失敗は親stepで非成功として記録・警告し、検査しない削除へfallbackしない。通常batchの直接Inbox権限は追加しない。",
+        "design_ids": [
+          "SSC-049"
+        ]
+      },
+      {
+        "condition_id": "SSCOND-324-4fe0ef7309e1",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 12. 保持・cleanup > 12.8 質問・通知の照会snapshot検査（SSC-049、PG-D-139）",
+        "line": 344,
+        "quote": "6章の参照/list/detailの凍結snapshot契約に従い、現在のquestions/notifications/answersの有無や本文、現在のowner role/statusを過去の照会結果へ再比較しない。ADMIN照会の他利用者Questionを現在ownerと同一に強制しない。通常認証・再送・body再生成・DB参照権限の追加なし。保存wire自体のowner AAD/相関・schema意味検査は省略しない。",
+        "design_ids": [
+          "SSC-049"
+        ]
+      },
+      {
+        "condition_id": "SSCOND-324-2be4fe4af1da",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 12. 保持・cleanup > 12.8 質問・通知の照会snapshot検査（SSC-049、PG-D-139）",
+        "line": 346,
+        "quote": "V015の4 canonical REQ01/RSP01 routeを既存owned InboxCleanupへ追加し、tokenなし・ownerあり・最短24時間・strict expires<cutoff・同transaction ID/hash・固定backup/lockという12.3/12.5の保護を維持する。QSB/NTC/QDL更新3応答は本追加の対象外でPROTECTED、業務UK/result ref照合完了まで削除許可しない。",
+        "design_ids": [
+          "SSC-049"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-OPS-028",
+    "condition_ids": [
+      "SSCOND-341-b5ca75620dcd"
+    ],
+    "source_section": "朝batch・backup・削除・再実行設計 > 9. Artemis Expiry cleanup",
+    "scope": "Expiry purge前後commitとafter_count不明",
+    "route": [
+      "systemd/Caddy",
+      "Morning/Backup/Cleanup",
+      "API/Web",
+      "PostgreSQL",
+      "Artemis",
+      "実filesystem"
+    ],
+    "test_id": "IT-OPS-028",
+    "scenario_ids": [
+      "IT-OPS-028-S01",
+      "IT-OPS-028-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧Expirycaseの抽象途中失敗を、監査commit済とpurge後不明に分ける。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-341-b5ca75620dcd",
+        "section": "朝batch・backup・削除・再実行設計 > 9. Artemis Expiry cleanup",
+        "line": 409,
+        "quote": "3. Count/byte/cutoffを記録した後、同selectorをArtemis management operationでpurge。Queue/journal fileをOSから削除しない。\n   SSC-077: `batch_runs`の`CLEAN_EXPIRY`行には`expiry_cutoff_at`/`expiry_before_count`/`expiry_after_count`をV021以降で保存し、既存target/success/failure/byteに対象/削除/失敗/推定byteを対応させる。既存`started_at`からrun原本開始時刻を推定しない。監査値はstep結果と同一DB transactionで確定し、不確定commitは同run/cutoffの原本とDB行を再読取りして判定する。\n   SSC-078: V022以降はpurge前に固定cutoff・実before・対象件数・推定byteを`CLEAN_EXPIRY RUNNING`へ確定し、`expiry_after_count`は未知のままNULLとする。purge後にだけ実afterとstep terminalを同一後続transactionで確定する。crash/通信断/DB commit不明でafterをbeforeや0へ補完しない。同run再実行は元行の観測値を保持したまま、残件を同cutoff selectorで再確認する。旧V021最終監査の正本rowと他stepは変更しない。",
+        "design_ids": [
+          "SSC-077",
+          "SSC-078"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-OPS-029",
+    "condition_ids": [
+      "SSCOND-341-8eb06b297796"
+    ],
+    "source_section": "朝batch・backup・削除・再実行設計",
+    "scope": "親全close前の0/10成功禁止",
+    "route": [
+      "systemd/Caddy",
+      "Morning/Backup/Cleanup",
+      "API/Web",
+      "PostgreSQL",
+      "Artemis",
+      "実filesystem"
+    ],
+    "test_id": "IT-OPS-029",
+    "scenario_ids": [
+      "IT-OPS-029-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "IT-OPS-013のUNKNOWN一括に、HTTPready後資源終端失敗で正常終了させない観測点を追加。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-341-8eb06b297796",
+        "section": "朝batch・backup・削除・再実行設計",
+        "line": 3,
+        "quote": "SSC278（2026-10-13、BUG1162/YKT930）：親の全gate・原本・資源正常close後に得る既定SUCCESS0/WARNING10は、Morning controllerのType=oneshot/SuccessExitStatus=10でmanager正常終端へ対応させる。10を無視して0へ変換しない。真正同Root PID1 start job done・同activation NKDONE1の0/10・元30分・API/Web/Caddy・owned逆順停止及び全資源後条件は独立必須。30/50/70/143/signal/timeout/未知を許可しない。旧PG1759のDONE10とfailed10は保全し、新設定やGCから旧成功へ再解釈しない。未結線時の暫定「親SuccessExitStatus無し」だけを置換し、同日処理結果・Backup成功再用・再送契約は不変更。",
+        "design_ids": [
+          "SSC278"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-SEC-023",
+    "condition_ids": [
+      "SSCOND-321-8db0ac1a0862",
+      "SSCOND-321-98aa3dfaa199",
+      "SSCOND-331-460e7d8e6091"
+    ],
+    "source_section": "Artemis物理構成・JMS設定設計 > SSC314 API JMSの停止通知と確認済みclose（2026-10-21、内部詳細/S2）",
+    "scope": "DB roleとMQ roleの実拒否行列",
+    "route": [
+      "systemd/Caddy",
+      "Morning/Backup/Cleanup",
+      "API/Web",
+      "PostgreSQL",
+      "Artemis",
+      "実filesystem"
+    ],
+    "test_id": "IT-SEC-023",
+    "scenario_ids": [
+      "IT-SEC-023-S01",
+      "IT-SEC-023-S02",
+      "IT-SEC-023-S03"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧IT-OPS-011のrole名だけの列挙を、実接続/実送受信/management負の権限へ具体化。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-321-8db0ac1a0862",
+        "section": "Artemis物理構成・JMS設定設計 > 10. Security settings",
+        "line": 269,
+        "quote": "SSC-076: Expiry保守専用`nk_mq_maintenance`だけは上記Ops管理照会の例外として、`activemq.management.#`内の一時・非durable reply Address/Queueの作成/削除・送受信を許し、管理電文RBACを有効にする。`mops.#`の全管理操作は`nk_ops`に限定し、保守roleには`nk.expiry.q`の`countMessages`、属性の実RBAC名`getMessageCount`/`getPersistentSize`読取、`removeMessages`だけを個別許可する。業務Addressの作成/削除・他Queue/DLQの管理・アプリroleの管理は禁止し、空/null selectorを全件削除として渡さない。`nk_ops`の既存管理照会はRBACを有効化しても維持する。実Brokerで保守role正系、他Queue/アプリ拒否、一時reply cleanupを確認するまで本修正を完了扱いにしない。",
+        "design_ids": [
+          "SSC-076"
+        ]
+      },
+      {
+        "condition_id": "SSCOND-321-98aa3dfaa199",
+        "section": "Artemis物理構成・JMS設定設計 > 10. Security settings",
+        "line": 267,
+        "quote": "SSC-075: Ops専用Core management照会はArtemis `ClientRequestor`が`activemq.management.<UUID>`の一時・非durable reply Address/Queueを明示作成し、完了時に削除する。`nk_ops`に`activemq.management.#`内の`createAddress`/`deleteAddress`/`createNonDurableQueue`/`deleteNonDurableQueue`を許す。業務6 Address、`nk_web`/`nk_api`には付与しない。`nk_mq_maintenance`の例外はSSC-076に限定する。恒久Queue作成/削除と管理namespace外のAddress作成/削除は許さず、global auto-create=falseを維持する。管理応答待ちは各request 2秒上限、null/失敗/cleanup不完了は固定redacted失敗でAPI起動へ進めない。実認証BrokerでOps正系とapp role拒否、2秒境界/一時Address/Queue cleanupをPTする。これは管理値照会の限定契約であり、§13全項目のreadiness完了を意味しない。",
+        "design_ids": [
+          "SSC-075",
+          "SSC-076"
+        ]
+      },
+      {
+        "condition_id": "SSCOND-331-460e7d8e6091",
+        "section": "DB物理・DDL・index・権限設計 > 11. Migration DDLの順序・検査",
+        "line": 548,
+        "quote": "5. Web credentialで`select * from schubert.app_users`がpermission denied、API credentialでWeb schemaがpermission deniedとなる負のtestを必須とする。",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-LOG-020",
+    "condition_ids": [
+      "SSCOND-351-b6f79b4a1448"
+    ],
+    "source_section": "Log・metric・alert・error code設計 > 2. Log channel・正本",
+    "scope": "REQUEST投影のID UKと原始証跡",
+    "route": [
+      "Web event outbox",
+      "Artemis web.log",
+      "API projection",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-LOG-020",
+    "scenario_ids": [
+      "IT-LOG-020-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧ログ再送caseのHTTP不変だけでは同source_event_idのDB投影と原始local証拠が結び付かない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-351-b6f79b4a1448",
+        "section": "Log・metric・alert・error code設計 > 2. Log channel・正本",
+        "line": 25,
+        "quote": "| `REQUEST` | Web HTTP filter | JSON 1 event/lineまたはjournald | `web_log_outbox`→`WLGEVT01`→`app_logs` | Localを原始証跡、DBをLog画面正本。投影失敗でHTTP結果を変更しない |",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-DATA-020",
+    "condition_ids": [
+      "SSCOND-332-7d97c7109bb1"
+    ],
+    "source_section": "SQL・transaction・lock・削除設計 > 4. Scenario・Speaker・Media query",
+    "scope": "Log診断level混在・filterなしcount/list一致",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-DATA-020",
+    "scenario_ids": [
+      "IT-DATA-020-S01",
+      "IT-DATA-020-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧IT-IF-017の3件期待値を維持しつつ、診断のみ0件とFrom/To未指定を独立実DB観測へ展開。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-332-7d97c7109bb1",
+        "section": "SQL・transaction・lock・削除設計 > 4. Scenario・Speaker・Media query",
+        "line": 76,
+        "quote": "SSC-036、Log query SQL補足: UI225 §2/235 §11のLog検索・LGSRSP01の許可levelはINFO/WARN/ERRORである。app_logsに診断TRACE/DEBUGが存在してもwire enumの拡張・INFOへの置換をせず、表示用count/listの共通predicateへ`level IN ('INFO','WARN','ERROR')`を必ず適用する。明示Level条件はこの集合内で追加する。診断rowを削除・改変しない。空filterは画面が扱う全3levelを意味し、診断だけなら0件/page1となる。表示対象とtotal/pageの不一致、診断rowによる応答全体9000を起こさない。UI235のFrom/Toはoptionalのまま。§13の「日付条件必須」は計測caseであり、未指定/片側指定をAPIで拒否・期間補完する意味ではない。PG-D-090/PT-ADM-055～060で実DB混在・診断のみ・全filter・wire/count/list・無更新を確認する。",
+        "design_ids": [
+          "PT-ADM-055",
+          "SSC-036"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-SEC-024",
+    "condition_ids": [
+      "SSCOND-314-b9c2313601d9",
+      "SSCOND-314-62f48d7438cf",
+      "SSCOND-314-49b5fd92047a"
+    ],
+    "source_section": "認証・認可・session・CSRF実装設計 > 3. Spring Security filter chain",
+    "scope": "SavedRequestのsafe GETと外部/POST拒否",
+    "route": [
+      "Browser/Web session",
+      "Artemis",
+      "API auth/Inbox",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-SEC-024",
+    "scenario_ids": [
+      "IT-SEC-024-S01",
+      "IT-SEC-024-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "CSRF代表caseにはLogin後redirectが安全な保存GETだけか、session fixation後principal照合する判定がない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-314-b9c2313601d9",
+        "section": "認証・認可・session・CSRF実装設計 > 3. Spring Security filter chain",
+        "line": 52,
+        "quote": "6. Form loginは`MqAuthenticationProvider`、success/failure handler、safe SavedRequestを使用する。",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-314-62f48d7438cf",
+        "section": "認証・認可・session・CSRF実装設計 > 5. Login失敗・lock > 5.2 Retry-After",
+        "line": 125,
+        "quote": "SSC-046: Form Loginの失敗/lockは351 §5.1の補足どおり現行302 `/login?error`または`/login?locked`を維持し、lockのRetry-AfterはAPI確定値だけを使用する。Webで失敗counter/lock時刻を再計算しない。成功handlerはcustom fixation後の永続principal同値を検査し、閉SavedRequestまたは`/`へ302する。汎用Spring認証例外のsession保存やURL session rewritingを使用しない。Login画面の残時間表示への引渡しはUI226の表示条件を満たす別controller接続gateであり、handler単体のRetry-After成功だけで画面完了としない。",
+        "design_ids": [
+          "SSC-046"
+        ]
+      },
+      {
+        "condition_id": "SSCOND-314-49b5fd92047a",
+        "section": "認証・認可・session・CSRF実装設計 > 7. HTTP session > 7.2 `EncryptedWebSessionRepository`",
+        "line": 183,
+        "quote": "| savedRequest | path/query合計2,048 byte | Same-origin safe GETだけ |",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-RANGE-001",
+    "condition_ids": [
+      "SSCOND-333-b368d01be6cf",
+      "SSCOND-333-bbf72b34f82a"
+    ],
+    "source_section": "大容量結果file・media・Range配信設計 > 3. Class・method責務",
+    "scope": "Range/HEAD first-spec・1MiB上限parameter表",
+    "route": [
+      "Caddy",
+      "Web media endpoint",
+      "API descriptor",
+      "PostgreSQL",
+      "実Asset filesystem"
+    ],
+    "test_id": "IT-RANGE-001",
+    "scenario_ids": [
+      "IT-RANGE-001-S01",
+      "IT-RANGE-001-S02",
+      "IT-RANGE-001-S03",
+      "IT-RANGE-001-S04",
+      "IT-RANGE-001-S05",
+      "IT-RANGE-001-S06",
+      "IT-RANGE-001-S07",
+      "IT-RANGE-001-S08",
+      "IT-RANGE-001-S09",
+      "IT-RANGE-001-S10",
+      "IT-RANGE-001-S11",
+      "IT-RANGE-001-S12",
+      "IT-RANGE-001-S13",
+      "IT-RANGE-001-S14",
+      "IT-RANGE-001-S15",
+      "IT-RANGE-001-S16",
+      "IT-RANGE-001-S17",
+      "IT-RANGE-001-S18",
+      "IT-RANGE-001-S19",
+      "IT-RANGE-001-S20",
+      "IT-RANGE-001-S21",
+      "IT-RANGE-001-S22",
+      "IT-RANGE-001-S23",
+      "IT-RANGE-001-S24",
+      "IT-RANGE-001-S25",
+      "IT-RANGE-001-S26",
+      "IT-RANGE-001-S27",
+      "IT-RANGE-001-S28",
+      "IT-RANGE-001-S29",
+      "IT-RANGE-001-S30"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A09",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "A16",
+      "A17",
+      "A18",
+      "A19",
+      "A20",
+      "A21",
+      "A22",
+      "A23",
+      "A24",
+      "A25",
+      "A26",
+      "A27",
+      "A28",
+      "A29",
+      "A30",
+      "A31",
+      "A32",
+      "A33",
+      "A34",
+      "A35",
+      "A36",
+      "A37",
+      "A38",
+      "A39",
+      "A40",
+      "A41",
+      "A42",
+      "A43",
+      "A44",
+      "A45",
+      "A46",
+      "A47",
+      "A48",
+      "A49",
+      "A50",
+      "A51",
+      "A52",
+      "A53",
+      "A54",
+      "A55",
+      "A56",
+      "A57",
+      "A58",
+      "A59",
+      "A60"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧15caseは値だけの違い。GET/HEADと全入力/期待byte範囲を30実行単位へ明示してcaseを統合。",
+    "independence_reason": "同一Range配信契約のparameter差なので独立15caseの必要なし。各HTTPは別SCで追跡、反復やbyte数をcaseへ加算しない。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-333-b368d01be6cf",
+        "section": "大容量結果file・media・Range配信設計 > 3. Class・method責務",
+        "line": 69,
+        "quote": "| `HttpByteRangeParser.parseFirst` | Range header、file size | `Full/Partial/Unsatisfiable` | 最初のrangeだけ解析、1MiB cap |",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-333-bbf72b34f82a",
+        "section": "大容量結果file・media・Range配信設計 > 10. Range解析・応答 > 10.2 範囲計算",
+        "line": 277,
+        "quote": "206の`Content-Length`=`length`、200の`Content-Length`=total、416は0。Channel positionをstartへ移し、64KiB以下のbufferで\nちょうどlength byteをstreamする。`InputStream.transferTo`等でendを超えない。HEADはGETと同じ認可/headerだけとしbodyなし。",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-PERF-030",
+    "condition_ids": [
+      "SSCOND-354-873b902e498b"
+    ],
+    "source_section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+    "scope": "段階負荷1→5→10と短時間集中",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-PERF-030",
+    "scenario_ids": [
+      "IT-PERF-030-S01",
+      "IT-PERF-030-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "同時10名条件に至る待ち/飽和点を明示し、旧定常10だけでは見えないbackpressureを観測。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-354-873b902e498b",
+        "section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+        "line": 395,
+        "quote": "| STANDARD、同時10名×1同期request | End-to-end p95 <=2.5s、MQ待ち<=2.0s、取違え0、timeout/error率併記 |",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-PERF-031",
+    "condition_ids": [
+      "SSCOND-354-873b902e498b"
+    ],
+    "source_section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+    "scope": "同期照会と質問worker混在",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-PERF-031",
+    "scenario_ids": [
+      "IT-PERF-031-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧通常負荷に非同期acceptanceとcompletionの計測/質量収支がない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-354-873b902e498b",
+        "section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+        "line": 395,
+        "quote": "| STANDARD、同時10名×1同期request | End-to-end p95 <=2.5s、MQ待ち<=2.0s、取違え0、timeout/error率併記 |",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-PERF-032",
+    "condition_ids": [
+      "SSCOND-354-873b902e498b",
+      "SSCOND-354-c45465a4b0bd",
+      "SSCOND-333-ba0639c9c8fc"
+    ],
+    "source_section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+    "scope": "20media+SCN10000と通常画面混在",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-PERF-032",
+    "scenario_ids": [
+      "IT-PERF-032-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧IT-PERF-002の比率未指定を補い、20streampermitと大容量48MB生成が通常同期へ与える影響を同窓観測。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-354-873b902e498b",
+        "section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+        "line": 395,
+        "quote": "| STANDARD、同時10名×1同期request | End-to-end p95 <=2.5s、MQ待ち<=2.0s、取違え0、timeout/error率併記 |",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-354-c45465a4b0bd",
+        "section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+        "line": 397,
+        "quote": "| 20 media stream/Range 1MiB | 同時数上限、Range開始、FD/thread/direct memory、他画面p95への影響 |",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-333-ba0639c9c8fc",
+        "section": "大容量結果file・media・Range配信設計 > 4. Large-result判定・レイアウト",
+        "line": 82,
+        "quote": "| File byte数 | `4,800 * recordCount`、最大48,000,000 |",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-PERF-033",
+    "condition_ids": [
+      "SSCOND-354-873b902e498b"
+    ],
+    "source_section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+    "scope": "障害復帰後Outbox残件と通常業務継続",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-PERF-033",
+    "scenario_ids": [
+      "IT-PERF-033-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "停止中の失敗率を正常窓から黙って除外せず、復旧直後の集中と収束を区分。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-354-873b902e498b",
+        "section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+        "line": 395,
+        "quote": "| STANDARD、同時10名×1同期request | End-to-end p95 <=2.5s、MQ待ち<=2.0s、取違え0、timeout/error率併記 |",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-PERF-034",
+    "condition_ids": [
+      "SSCOND-354-873b902e498b"
+    ],
+    "source_section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+    "scope": "2時間継続と解放後資源回復",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-PERF-034",
+    "scenario_ids": [
+      "IT-PERF-034-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧30分平均観測だけでは生存中lease/接続/FD蓄積が不明。2時間は試験入力で新運用SLAではない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-354-873b902e498b",
+        "section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+        "line": 395,
+        "quote": "| STANDARD、同時10名×1同期request | End-to-end p95 <=2.5s、MQ待ち<=2.0s、取違え0、timeout/error率併記 |",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-PERF-035",
+    "condition_ids": [
+      "SSCOND-354-873b902e498b",
+      "SSCOND-342-3f5bcc672759",
+      "SSCOND-341-8eb06b297796"
+    ],
+    "source_section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+    "scope": "計画maintenance排他とbackup/cleanup資源",
+    "route": [
+      "systemd/Caddy",
+      "Morning/Backup/Cleanup",
+      "API/Web",
+      "PostgreSQL",
+      "Artemis",
+      "実filesystem"
+    ],
+    "test_id": "IT-PERF-035",
+    "scenario_ids": [
+      "IT-PERF-035-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "通常業務とbackup並行という根拠のない負荷を作らず、設計のpublic停止/排他下で資源予算と再開後SLAを確認。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-354-873b902e498b",
+        "section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+        "line": 395,
+        "quote": "| STANDARD、同時10名×1同期request | End-to-end p95 <=2.5s、MQ待ち<=2.0s、取違え0、timeout/error率併記 |",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-342-3f5bcc672759",
+        "section": "Caddy・systemd・PostgreSQL・Java設定設計 > 5. Java/JVM・Spring process > 5.1 Resource",
+        "line": 317,
+        "quote": "| Web | `-Xms384m -Xmx768m` | 128m / 192m | 1536M | 448m | HTTP 16/max32、MQ wait 12/max20 |",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-341-8eb06b297796",
+        "section": "朝batch・backup・削除・再実行設計",
+        "line": 3,
+        "quote": "SSC278（2026-10-13、BUG1162/YKT930）：親の全gate・原本・資源正常close後に得る既定SUCCESS0/WARNING10は、Morning controllerのType=oneshot/SuccessExitStatus=10でmanager正常終端へ対応させる。10を無視して0へ変換しない。真正同Root PID1 start job done・同activation NKDONE1の0/10・元30分・API/Web/Caddy・owned逆順停止及び全資源後条件は独立必須。30/50/70/143/signal/timeout/未知を許可しない。旧PG1759のDONE10とfailed10は保全し、新設定やGCから旧成功へ再解釈しない。未結線時の暫定「親SuccessExitStatus無し」だけを置換し、同日処理結果・Backup成功再用・再送契約は不変更。",
+        "design_ids": [
+          "SSC278"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-PERF-036",
+    "condition_ids": [
+      "SSCOND-332-f089261f9f76"
+    ],
+    "source_section": "SQL・transaction・lock・削除設計 > 13. Query plan・性能確認",
+    "scope": "Scenario selective SQL p95 1.5秒",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-PERF-036",
+    "scenario_ids": [
+      "IT-PERF-036-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "UNDETERMINED",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧IT-PERF-001のE2E2.5秒だけではSS332のSQL単独1.5秒条件を判定できない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [
+      "ISS-SELECTIVITY"
+    ],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-332-f089261f9f76",
+        "section": "SQL・transaction・lock・削除設計 > 13. Query plan・性能確認",
+        "line": 354,
+        "quote": "| Scenario search | 99,661 entry、100件page | selective検索p95 1.5秒以内、stable order、不要seq scanなし |",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-RETRY-100-集中-なし",
+    "condition_ids": [
+      "SSCOND-354-8bc89bb07bb4"
+    ],
+    "source_section": "PT・IT試験観点詳細設計 > QA-050承認反映：再試行のPT・IT/STと間隔調整（2026-10-03）",
+    "scope": "QA050 size/fault/due分布の選定matrix",
+    "route": [
+      "Browser/Web session",
+      "Artemis",
+      "API auth/Inbox",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-RETRY-100-集中-なし",
+    "scenario_ids": [
+      "IT-RETRY-100-集中-なし-S01",
+      "IT-RETRY-100-集中-なし-S02",
+      "IT-RETRY-100-集中-なし-S03",
+      "IT-RETRY-100-集中-なし-S04",
+      "IT-RETRY-100-集中-なし-S05",
+      "IT-RETRY-100-集中-なし-S06",
+      "IT-RETRY-100-集中-なし-S07",
+      "IT-RETRY-100-集中-なし-S08",
+      "IT-RETRY-100-集中-なし-S09"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A09",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "A16",
+      "A17",
+      "A18",
+      "A19",
+      "A20",
+      "A21",
+      "A22",
+      "A23",
+      "A24",
+      "A25",
+      "A26",
+      "A27"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "初版18caseの値名違いを9parameter行へ統合。全size×fault pairと両due分布/各faultの分布を保持し、根拠なき三因子積を撤回。",
+    "independence_reason": "QA050の容量点・故障種・due形態をpairwiseで選定。同じretry契約なのでcase1、具体9SC、反復は別。除外9組は第三因子相互作用が未規定、異常実測/設計変更で追加する。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-354-8bc89bb07bb4",
+        "section": "PT・IT試験観点詳細設計 > QA-050承認反映：再試行のPT・IT/STと間隔調整（2026-10-03）",
+        "line": 467,
+        "quote": "試験条件は正常Logout、API/Broker停止→復帰、既存session/物理削除済み0102/復号不能、due集中と分散、複数workerのlease競合、残件100/1,000/10,000の計画容量点と想定運用ピークを含む（件数は試験点であり実運用の残件予測ではない）。実時間の15分運転・反復滞留をIT/STで確認し、仮想ClockのPTだけを性能実測に代用しない。",
+        "design_ids": [
+          "QA-050"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-MQ-010",
+    "condition_ids": [
+      "SSCOND-321-0c983f32c1db"
+    ],
+    "source_section": "Artemis物理構成・JMS設定設計 > 5. Address settings > 5.3 QA-042/UIC-002承認値",
+    "scope": "6address memory/page/full独立軸matrix",
+    "route": [
+      "Web",
+      "Artemis sync + async.work",
+      "API dispatcher/worker",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-MQ-010",
+    "scenario_ids": [
+      "IT-MQ-010-S01",
+      "IT-MQ-010-S02",
+      "IT-MQ-010-S03",
+      "IT-MQ-010-S04",
+      "IT-MQ-010-S05",
+      "IT-MQ-010-S06",
+      "IT-MQ-010-S07",
+      "IT-MQ-010-S08",
+      "IT-MQ-010-S09",
+      "IT-MQ-010-S10",
+      "IT-MQ-010-S11",
+      "IT-MQ-010-S12"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A09",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "A16",
+      "A17",
+      "A18",
+      "A19",
+      "A20",
+      "A21",
+      "A22",
+      "A23",
+      "A24"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "UNDETERMINED",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧6caseはaddress名差だけ。12SCでbyte/件数の支配軸を分離し、各SC内閾値点のraw実測を保持。",
+    "independence_reason": "address policy共通契約。6address×2独立上限軸は異なるBLOCKトリガーなので追跡SC、閾値点をcaseへ加算しない。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [
+      "ISS-MQCAP"
+    ],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-321-0c983f32c1db",
+        "section": "Artemis物理構成・JMS設定設計 > 5. Address settings > 5.3 QA-042/UIC-002承認値",
+        "line": 175,
+        "quote": "`page-limit-*`はpaging開始後の受入上限であるため、表ではUI上限からmemory high-waterを控除した。Byte値は8MiBのpage単位で\n割り切れる値とし、memory＋pageの設計合計をUI 231/253の上限以内に置く。Page読込によるheap再膨張を防ぐため、\n`max-read-page-bytes=16MiB`、`max-read-page-messages=100`を各Addressへ明示し、両条件の先着で制限する。\nJournal/page metadata、配送中message、consumer buffer等のoverheadはこの業務message容量に含めず、10GiBのBroker disk budgetと\n1GiB heap内でIT実測する。",
+        "design_ids": [
+          "QA-042",
+          "UIC-002"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-PERF-010",
+    "condition_ids": [
+      "SSCOND-354-1b9e0996d475"
+    ],
+    "source_section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+    "scope": "Transfer bytes warning/critical境界matrix",
+    "route": [
+      "Web file reader",
+      "Artemis",
+      "API snapshot/publisher",
+      "PostgreSQL",
+      "実ext4 Transfer"
+    ],
+    "test_id": "IT-PERF-010",
+    "scenario_ids": [
+      "IT-PERF-010-S01",
+      "IT-PERF-010-S02",
+      "IT-PERF-010-S03",
+      "IT-PERF-010-S04",
+      "IT-PERF-010-S05"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A09",
+      "A10"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "UNDETERMINED",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧5caseの値差を1familyへ統合。scan値/新規拒否/既受付非破壊を各入力行で追跡。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [
+      "ISS-TRANSFER"
+    ],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-354-1b9e0996d475",
+        "section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+        "line": 398,
+        "quote": "| Async/Web log Queue 70/90%、transfer 3.5/4.5GB | Warning/critical、新規受付9001、既受付・証跡を失わない |",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-PERF-020",
+    "condition_ids": [
+      "SSCOND-354-1b9e0996d475",
+      "SSCOND-333-1b035d167298"
+    ],
+    "source_section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+    "scope": "Transfer count warning/critical境界matrix",
+    "route": [
+      "Web file reader",
+      "Artemis",
+      "API snapshot/publisher",
+      "PostgreSQL",
+      "実ext4 Transfer"
+    ],
+    "test_id": "IT-PERF-020",
+    "scenario_ids": [
+      "IT-PERF-020-S01",
+      "IT-PERF-020-S02",
+      "IT-PERF-020-S03",
+      "IT-PERF-020-S04",
+      "IT-PERF-020-S05"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A09",
+      "A10"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "UNDETERMINED",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧5caseの値差を1familyへ統合。scan値/新規拒否/既受付非破壊を各入力行で追跡。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [
+      "ISS-TRANSFER"
+    ],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-354-1b9e0996d475",
+        "section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.5 IT-PERFORMANCE・CAPACITY",
+        "line": 398,
+        "quote": "| Async/Web log Queue 70/90%、transfer 3.5/4.5GB | Warning/critical、新規受付9001、既受付・証跡を失わない |",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-333-1b035d167298",
+        "section": "大容量結果file・media・Range配信設計 > 13. Capacity・metric・alert",
+        "line": 314,
+        "quote": "| Transfer file count | 5,000 | 9,000で新規生成停止、10,000上限 |",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-TX-030",
+    "condition_ids": [
+      "SSCOND-321-8fbec9934897",
+      "SSCOND-354-068ea78f6298"
+    ],
+    "source_section": "PT・IT試験観点詳細設計 > SSC335 Web管理lock/join残budget PG/PT（2026-10-22）",
+    "scope": "commit後component停止の選定matrix",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-TX-030",
+    "scenario_ids": [
+      "IT-TX-030-S01",
+      "IT-TX-030-S02",
+      "IT-TX-030-S03",
+      "IT-TX-030-S04",
+      "IT-TX-030-S05",
+      "IT-TX-030-S06"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A09",
+      "A10",
+      "A11",
+      "A12"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "旧6caseの同一確定点/同期待をparameter化。単独Web/API/DB、MQ複合/DB複合/全4の所有・耐久差は各SCで保つ。",
+    "independence_reason": "全2^4組は生成しない。単独writer/receiver/storeおよびdurable storeを伴う代表複合を選定。Broker単独はMQ005/030が担当。異なるcommit点はTX001..005/DB002。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-321-8fbec9934897",
+        "section": "Artemis物理構成・JMS設定設計 > 7. JMS transaction・ACK",
+        "line": 218,
+        "quote": "- Sync APIはDB commit後、reply sendとrequest ACKを同じJMS transactionでcommitする。XAは使用しない。",
+        "design_ids": []
+      },
+      {
+        "condition_id": "SSCOND-354-068ea78f6298",
+        "section": "PT・IT試験観点詳細設計 > 5. IT詳細観点 > 5.2 IT-CRASH・RETRY",
+        "line": 362,
+        "quote": "| DB commit後・reply send前 | Inboxによる再受信replay、業務更新1 |",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-REQ-001",
+    "condition_ids": [
+      "SSCOND-312-2eb85397c6d7"
+    ],
+    "source_section": "処理sequence・method・例外・transaction設計 > SSC329 ordinary JDBC fatal保持・owned transaction（2026-10-21）",
+    "scope": "QSB二つの2秒期限とcommit後timeout",
+    "route": [
+      "Web",
+      "Artemis sync + async.work",
+      "API dispatcher/worker",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-REQ-001",
+    "scenario_ids": [
+      "IT-REQ-001-S01",
+      "IT-REQ-001-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "UNDETERMINED",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "ASY007の単純2秒待ちではheader由来と受信clock由来の早い期限・受付前後が区別できない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [
+      "ISS-TIME"
+    ],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-312-2eb85397c6d7",
+        "section": "処理sequence・method・例外・transaction設計 > SSC329 ordinary JDBC fatal保持・owned transaction（2026-10-21）",
+        "line": 27,
+        "quote": "QSBの元request ID M0はInbox source/async_job message_id/correlationであり、内部QWKの新UUID Wとは別。受付transactionはquestion/job/notification(type ACCEPTED/state RECEIVED)/PENDING work/QUESTION-bound NKREF1 success snapshotを一度だけcommitする。再送snapshot AADはM0、返信は新UUID/今request correlation、payload/受付時刻は保存値。応答成功は当該workの真正SENT確認後だけ。単調budgetはheader.sentAt+2秒と受信clock+2秒の早い期限の残量を受信時に固定し、既に遅い要求は受付前9000。commit後timeoutもfresh9000で既存COMPLETED/保存期間を変更しない。専用dispatcherへwakeし、DB connection/lockなしで残時間内に対象SENTを短い再観測する。共通processorをrequest thread内のJMS sendへ変えない。",
+        "design_ids": [
+          "SSC329"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-TX-044",
+    "condition_ids": [
+      "SSCOND-324-8ca730aacf24"
+    ],
+    "source_section": "Outbox・Inbox・冪等性・再送設計 > 7. Inbox transaction/crash > 7.1 Scenario段階処理と同Message排他（SSC-027）",
+    "scope": "同Message lock待機DB0とhash衝突結果非共有",
+    "route": [
+      "Web file reader",
+      "Artemis",
+      "API snapshot/publisher",
+      "PostgreSQL",
+      "実ext4 Transfer"
+    ],
+    "test_id": "IT-TX-044",
+    "scenario_ids": [
+      "IT-TX-044-S01",
+      "IT-TX-044-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03",
+      "A04"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "TX018のtoken100並行だけではfile I/O中lockを待つthreadのDB保持0と別Message衝突の結果非共有を確認できない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-324-8ca730aacf24",
+        "section": "Outbox・Inbox・冪等性・再送設計 > 7. Inbox transaction/crash > 7.1 Scenario段階処理と同Message排他（SSC-027）",
+        "line": 178,
+        "quote": "単一API process・単一service instanceを起動契約とする。同Messageのsnapshot取得～file生成/検証～最終DB確定は同一private lockで直列化する。UUID hash下位8bitを使う固定256本のfair ReentrantLockを所有し、動的なMessage履歴/cache/認証情報を保持しない。異なるMessageのhash衝突は処理を直列化するだけで結果を共有しない。待機中はDB connection/transactionを取得せず、業務timeoutを追加しない。Interruptは状態を復元して一時基盤型へ返し、未取得lockをunlockしない。Callback失敗/nullでも取得lockを必ず解放する。外部から取得できるthis/class monitorに依存しない。",
+        "design_ids": [
+          "SSC-027"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-DATA-021",
+    "condition_ids": [
+      "SSCOND-332-8e611ced8f7d"
+    ],
+    "source_section": "SQL・transaction・lock・削除設計 > 2. Transaction共通規則",
+    "scope": "UTC µs DBとwire millisの独立境界",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-DATA-021",
+    "scenario_ids": [
+      "IT-DATA-021-S01",
+      "IT-DATA-021-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "UNDETERMINED",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "TX016のstage時刻だけではJDBC歴史暦/defaulttimezoneとwire切捨ての変換境界を判定できない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [
+      "ISS-DATA"
+    ],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-332-8e611ced8f7d",
+        "section": "SQL・transaction・lock・削除設計 > 2. Transaction共通規則",
+        "line": 47,
+        "quote": "SSC056/PG160（先行8002b28b・3cf06b00）: Java InstantとPostgreSQL timestamptzの境界はJDBC4.2を使い、setObject(index, instant.atOffset(ZoneOffset.UTC))、getObject(column,OffsetDateTime.class)→null契約確認→toInstantに統一する。java.sql.Timestamp/getTimestamp/setTimestampで歴史暦やdefault timezoneを経由しない。SQL NULLは既存Optional/必須列検査を維持し、値0やepochへ補完しない。PG-D-159もこの規則を適用する。年月日だけのLocalDateは時刻へ変換せず既存date型対応を維持する。既存SQL/parameter番号/transaction/lock/µs範囲・wire表示は不変、新DB columnや推測backfillを追加しない。",
+        "design_ids": [
+          "SSC056"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-SEC-025",
+    "condition_ids": [
+      "SSCOND-314-96a3c0155aea"
+    ],
+    "source_section": "認証・認可・session・CSRF実装設計 > 9. 認可・owner検証 > 9.3 業務API0102のlocal失効（SSC-048）",
+    "scope": "検証済API0102のlocal終端と古い要求",
+    "route": [
+      "Browser/Web session",
+      "Artemis",
+      "API auth/Inbox",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-SEC-025",
+    "scenario_ids": [
+      "IT-SEC-025-S01",
+      "IT-SEC-025-S02",
+      "IT-SEC-025-S03"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03",
+      "A04"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "SEC003はAPIの拒否のみ。Web local session/cookie/tokenと遅延した旧requestのrow削除対象まで確認できない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-314-96a3c0155aea",
+        "section": "認証・認可・session・CSRF実装設計 > 9. 認可・owner検証 > 9.3 業務API0102のlocal失効（SSC-048）",
+        "line": 329,
+        "quote": "検証済API0102を受けたcontrollerはApiSessionInvalidHandlerで終端する。構成済暗号repository marker同一性を確認し、閉actorの表示用投影だけを監査へ使用、WebDisplayContext/CSRF属性とSecurityContextをclearし既存getSession(false)だけinvalidateする。新session/SavedRequest/operation tokenやAPI Logout再送rowは作らない。通常GETは固定302 `/login?session-expired`、POST/HEAD/その他・AJAX・mediaは401共通error、bodyの自動再送は禁止。local DB削除とSESSION_EXPIRED監査後にだけ応答を確定する。DB/属性/監査/response故障は成功扱いせず、既存503境界へ連携する。commit済でもlocal破棄を行うが応答書換不能を伝播する。古いrequestの失効で新Loginの別rowを削除しないことを試験する。業務全controller接続は各program gateで確認する。",
+        "design_ids": [
+          "SSC-048"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-WIRE-001",
+    "condition_ids": [
+      "SSCOND-321-08b9647a3242"
+    ],
+    "source_section": "Artemis物理構成・JMS設定設計 > 7. JMS transaction・ACK",
+    "scope": "API恒久protocol errorのDLQ+ACK+停止",
+    "route": [
+      "Web controller",
+      "Artemis sync.request/sync.reply.web",
+      "API service",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-WIRE-001",
+    "scenario_ids": [
+      "IT-WIRE-001-S01",
+      "IT-WIRE-001-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "MQ002の形式列挙を具体byte変異と原配送ACKの原子性へ分解し、業務非更新を観測する。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-321-08b9647a3242",
+        "section": "Artemis物理構成・JMS設定設計 > 7. JMS transaction・ACK",
+        "line": 219,
+        "quote": "- Permanent protocol errorはDLQ sendと元message ACKを同一JMS transactionでcommitし、その後processを非zero終了する。",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-HTTP-001",
+    "condition_ids": [
+      "SSCOND-314-5ff9b1f7d5a5"
+    ],
+    "source_section": "認証・認可・session・CSRF実装設計 > 3. Spring Security filter chain > 3.2 内部error dispatchと依存障害（SSC-047）",
+    "scope": "真正ERROR dispatchと偽装通常requestのchain境界",
+    "route": [
+      "Browser/Web session",
+      "Artemis",
+      "API auth/Inbox",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-HTTP-001",
+    "scenario_ids": [
+      "IT-HTTP-001-S01",
+      "IT-HTTP-001-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "既存CSRF/安全headerでは内部/errorの表示例外経路を偽headerで迂回できないか判定できない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-314-5ff9b1f7d5a5",
+        "section": "認証・認可・session・CSRF実装設計 > 3. Spring Security filter chain > 3.2 内部error dispatchと依存障害（SSC-047）",
+        "line": 66,
+        "quote": "UI221/222のMQ/DB一時障害503共通errorを、失敗したsession/DB/keyへ再依存せず表示する。BUG-074/YKT-066の是正として、InternalErrorDispatchRouterを単一business FilterChainProxyの手前へ置く。実containerのDispatcherType.ERRORかつrequest URI exact `/error`だけを、UTF8と解決済表示snapshot/CSRF再投影の非業務filterへ渡す。外側Caddy検証・server request UUID・security headerは共通必須。StrictHttpFirewallは通常business要求の必須検査として維持し、拒否済み元method/headerを内部error表示へ再適用しない。通常REQUESTの`/error`、外部POST/PUT、ASYNC/FORWARD、ERRORの別URLはbusiness chainを通り、認証・CSRF・URL roleを省略しない。HTTP header/query/attributeの偽dispatcher値を許可条件へ使わない。両分岐の終了でSecurityContextをclearし、内部error branchの表示以外のhandler/JMS/DB/更新への利用を禁止する。",
+        "design_ids": [
+          "SSC-047"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-LOG-021",
+    "condition_ids": [
+      "SSCOND-351-1bdbb7edf281"
+    ],
+    "source_section": "Log・metric・alert・error code設計 > 3. JSON event schema > 3.4 REQUEST終端hook・投影故障（SSC-172）",
+    "scope": "origin responseBytesとCaddy変換・HEAD・切断",
+    "route": [
+      "Web event outbox",
+      "Artemis web.log",
+      "API projection",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-LOG-021",
+    "scenario_ids": [
+      "IT-LOG-021-S01",
+      "IT-LOG-021-S02",
+      "IT-LOG-021-S03"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03",
+      "A04"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "UNDETERMINED",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "LOG003の一般body長比較をcharset後content成功writeとproxy変換/ACK非保証へ具体化。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [
+      "ISS-DATA"
+    ],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-351-1bdbb7edf281",
+        "section": "Log・metric・alert・error code設計 > 3. JSON event schema > 3.4 REQUEST終端hook・投影故障（SSC-172）",
+        "line": 89,
+        "quote": "SSC-173: `responseBytes`はWeb originのcharset後successful content write byte。HTTP header/transfer chunk framingを除き、導入Tomcat11.0.25のterminal callbackからCoyote Response.getContentWritten（ByteBuffer消費byte）を読取る。transport込みResponse.getBytesWritten、Servlet char数、Caddy後段変換を混同しない。強制flushなし・HTTP不変更、切断時の既知write観測はclient受信ACKの保証ではない。独立UTF8/固定body/HEAD0とchunked実HTTPを比較する。",
+        "design_ids": [
+          "SSC-172",
+          "SSC-173"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-OPS-030",
+    "condition_ids": [
+      "SSCOND-341-bcd670e397ec"
+    ],
+    "source_section": "朝batch・backup・削除・再実行設計 > SSC198 Backup途中保全後の正規resume（2026-10-06、BUG771/YKT551）",
+    "scope": "明示resume grammarとcutoff/原本保全",
+    "route": [
+      "systemd/Caddy",
+      "Morning/Backup/Cleanup",
+      "API/Web",
+      "PostgreSQL",
+      "Artemis",
+      "実filesystem"
+    ],
+    "test_id": "IT-OPS-030",
+    "scenario_ids": [
+      "IT-OPS-030-S01",
+      "IT-OPS-030-S02",
+      "IT-OPS-030-S03",
+      "IT-OPS-030-S04",
+      "IT-OPS-030-S05"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "OPS013の起動不明に、勝手なrun選択/時刻再計算を許さない外部入口の拒否前非更新がない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-341-bcd670e397ec",
+        "section": "朝batch・backup・削除・再実行設計 > SSC198 Backup途中保全後の正規resume（2026-10-06、BUG771/YKT551）",
+        "line": 37,
+        "quote": "SSC112実装前補足：root Morning外部入口の引数はnoargs（新規）又は厳密な `--resume <canonical非zero UUID>`（明示同run）だけ。runはDBやpermitから自動選択せず、cutoff指定/変更を認めない。既存durable原本を同run/cutoffでresumeし、新activationと同M/A/DB/advisory/current INVALIDを保つ。原本proofは同保持file ownerとcallback thread/lifetimeだけに束縛、終了後/別threadで無効。残留Backup marker/Expiry requestはresumeでもDB/原本変更/stop前に拒否。recoverAbandonedは明示resume時だけ許容し、実未実行をFAILED/SKIPPEDで代用しない。",
+        "design_ids": [
+          "SSC112",
+          "SSC198"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-OPS-031",
+    "condition_ids": [
+      "SSCOND-341-a28f1e2c1f99"
+    ],
+    "source_section": "朝batch・backup・削除・再実行設計 > 11. 再実行仕様",
+    "scope": "Backup実失敗後の六SKIPと後段続行",
+    "route": [
+      "systemd/Caddy",
+      "Morning/Backup/Cleanup",
+      "API/Web",
+      "PostgreSQL",
+      "Artemis",
+      "実filesystem"
+    ],
+    "test_id": "IT-OPS-031",
+    "scenario_ids": [
+      "IT-OPS-031-S01"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "OPS003のcleanup skip一般語から、真正FAILED pairと六SKIP/Transfer/Expiry独立実行を具体化。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-341-a28f1e2c1f99",
+        "section": "朝batch・backup・削除・再実行設計 > 11. 再実行仕様",
+        "line": 436,
+        "quote": "SSC117/BUG351（2026-09-30、実装前補足）：真正Backup失敗後は成功manifestを捏造せずNKCLEANFAIL1の別固定profileで現run/activation/boot/Epoch・実非0fresh Backup receipt・完全FAILED pairを束縛し、真正Cleanup子が両COMMAND_FAILUREを全列再読する。BUSINESS/TECHNICAL削除6stepのみ実SKIPPED/BACKUP_UNAVAILABLE/全count0をcommit/readbackしDELETE/Inspectorは呼ばず、実Transferと独立Artemis/Expiryは続行する。成功済stepのskipは元terminal/Log進捗/Inbox summary/Expiry auditと今回SKIPを別identityで照合する。Cleanup後の親advisory再取得・全終端の後にExpiryを別一度限りhandoffし、同じ親30分budget/M/A/原本/INVALID ownerを保持する。Expiry auditは元SUCCESS handleだけで読む。今回SKIP handleを元auditへ渡さず、fresh selected0・cutoff/元audit全列・今回terminalを検証する。Transferの実高位callerは固定root・正規日付dir・NOFOLLOW walk・cutoff・集計・保持前後条件を実行し、既存低位unlink/sync能力を再使用する。",
+        "design_ids": [
+          "SSC117"
+        ]
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  },
+  {
+    "id": "ITC-ASY-023",
+    "condition_ids": [
+      "SSCOND-332-96c1efba850b"
+    ],
+    "source_section": "SQL・transaction・lock・削除設計 > 8. Async job・取消競合 > 8.3 Answer完了",
+    "scope": "既存answer同一と矛盾時の非上書き",
+    "route": [
+      "Web",
+      "Artemis sync + async.work",
+      "API dispatcher/worker",
+      "PostgreSQL"
+    ],
+    "test_id": "IT-ASY-023",
+    "scenario_ids": [
+      "IT-ASY-023-S01",
+      "IT-ASY-023-S02"
+    ],
+    "assertion_ids": [
+      "A01",
+      "A02"
+    ],
+    "evidence": "scenarios.assertion_evidence（SC/Assertionごとのraw artifactとpredicate）",
+    "spec_coverage": "FULFILLED_SLICE",
+    "execution": "NOT_EXECUTED",
+    "previous_gap": "ASY020のCOMPLETED+answerだけではPROCESSING回復中の既存answer一致/不一致を区別できない。",
+    "independence_reason": "既存代表caseではこの確定点・非更新条件の観測がなく合否を独立判定できない。失敗後に許される再処理が異なるため独立契約とする。同一契約内の値/状態差はSC行へ統合。",
+    "block_coverage": "PARTIAL（選択した契約sliceのみ。原文block全体の充足へ拡張禁止）",
+    "decision_issues": [],
+    "source_clauses": [
+      {
+        "condition_id": "SSCOND-332-96c1efba850b",
+        "section": "SQL・transaction・lock・削除設計 > 8. Async job・取消競合 > 8.3 Answer完了",
+        "line": 240,
+        "quote": "2. Questionをlockし削除flag/時刻/actor三点を継承して`answers(question_id UK)`へINSERT。既存answer/provider/time/削除三点を検証し、同一なら冪等完了、矛盾は整合errorとし上書きしない。",
+        "design_ids": []
+      }
+    ],
+    "precondition_ref": "scenarios.json: scenario_ids -> initial_state"
+  }
+]

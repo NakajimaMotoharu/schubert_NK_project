@@ -1,0 +1,895 @@
+[
+  {
+    "test_id": "IT-TX-040",
+    "action": "ADD",
+    "reason": "旧IT-TX-013は同tokenの応答再現だけで、保存元M0と今回M1を分離したAAD/非aliasを判定していない。",
+    "contract_id": "ITC-TX-040",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-SEC-020",
+    "action": "ADD",
+    "reason": "旧IT-SEC-008/IT-TX-017は暗号/再起動を扱うが、過去成功0200からWeb認証を誤付与する境界がない。",
+    "contract_id": "ITC-SEC-020",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-SEC-021",
+    "action": "ADD",
+    "reason": "初版のowner/role拒否では、ADMIN全件snapshotとwrite時roleの取り違え・保存済9001のscope漏洩を観測できない。",
+    "contract_id": "ITC-SEC-021",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-TX-041",
+    "action": "ADD",
+    "reason": "IT-FILE/IFのerror確認にはERROR snapshot再送と0102/9000非保存の差がない。",
+    "contract_id": "ITC-TX-041",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-SEC-022",
+    "action": "ADD",
+    "reason": "IT-SEC-010の再送一括条件を補正。別Messageの既失効要求まで監査0とする誤判定を防ぐ。",
+    "contract_id": "ITC-SEC-022",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-TX-042",
+    "action": "ADD",
+    "reason": "既存claim crashケースに最大batch/lease失効前後の他worker選択証拠がない。",
+    "contract_id": "ITC-TX-042",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-TX-043",
+    "action": "ADD",
+    "reason": "Broker再配送1/5/25と混同したapplication送信再試行を独立測定する。",
+    "contract_id": "ITC-TX-043",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-ASY-020",
+    "action": "ADD",
+    "reason": "IT-ASY-003等の途中crashだけでは処理済/別W/取消/ERRORのACK可否を判定できない。",
+    "contract_id": "ITC-ASY-020",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-ASY-021",
+    "action": "ADD",
+    "reason": "既存取消/削除caseは削除時点とworker完了の交差における回答非露出を確認していない。",
+    "contract_id": "ITC-ASY-021",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-ASY-022",
+    "action": "ADD",
+    "reason": "IT-ASY-002は取消raceを含むが、敗者をrollbackとする誤期待値を排除する。",
+    "contract_id": "ITC-ASY-022",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-DB-001",
+    "action": "ADD",
+    "reason": "IT-TX-003のprocess crashではbegin不能/接続切断rollbackの実DB状態を区別できない。",
+    "contract_id": "ITC-DB-001",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-DB-002",
+    "action": "ADD",
+    "reason": "DB server停止一括ケースにcommit済か否か不明の二分岐と再開抑止がない。",
+    "contract_id": "ITC-DB-002",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-DB-003",
+    "action": "ADD",
+    "reason": "既存lock/性能caseにはWeb2/API8接続の実borrow上限と復旧後残lease/接続0差分がない。",
+    "contract_id": "ITC-DB-003",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-MQ-030",
+    "action": "ADD",
+    "reason": "既存TX send-afterは送達確定/不明とbroker再起動後cache耐久を一連照合していない。",
+    "contract_id": "ITC-MQ-030",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-MQ-031",
+    "action": "ADD",
+    "reason": "既存receive crashはrollback/closeの失敗不明を通常再送と区別していない。",
+    "contract_id": "ITC-MQ-031",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-NET-001",
+    "action": "ADD",
+    "reason": "単純API停止だけでは片方向不通時の受付未確定/確定済結果を切り分けられない。",
+    "contract_id": "ITC-NET-001",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-FILE-050",
+    "action": "ADD",
+    "reason": "IT-FILE-040は不在をまとめており、close/crypto/保持inode内NoSuchFileを誤って再生成していないことを確認できない。",
+    "contract_id": "ITC-FILE-050",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-FILE-051",
+    "action": "ADD",
+    "reason": "旧再生成caseは元snapshotからDBが変わった時の生成禁止/非更新を十分指定していない。",
+    "contract_id": "ITC-FILE-051",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-FILE-052",
+    "action": "ADD",
+    "reason": "rename後の失敗を公開前rollbackと同一視しないため、再処理禁止/起動拒否を独立化。",
+    "contract_id": "ITC-FILE-052",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-FILE-053",
+    "action": "ADD",
+    "reason": "既存起動/ファイルcaseに実no-replaceの二重公開診断と自分以外を消さない証拠がない。",
+    "contract_id": "ITC-FILE-053",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-FILE-054",
+    "action": "ADD",
+    "reason": "旧容量caseはTransfer専用上限をMediaへ誤適用する不備を検出できない。",
+    "contract_id": "ITC-FILE-054",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-FILE-055",
+    "action": "ADD",
+    "reason": "旧path攻撃caseとContent-Dispositionの表示metadataを分離し、実filename上限の誤流用を検出する。",
+    "contract_id": "ITC-FILE-055",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-OPS-020",
+    "action": "ADD",
+    "reason": "IT-OPS-001の正常起動順では、API/Web既起動後の最終Caddy失敗と残資源を判定していない。",
+    "contract_id": "ITC-OPS-020",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-OPS-021",
+    "action": "ADD",
+    "reason": "正常readyケースに、queue不在/DB不通でactiveだけを合格とする誤判定の反例を追加。",
+    "contract_id": "ITC-OPS-021",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-OPS-022",
+    "action": "ADD",
+    "reason": "旧backup/restartは同日成功再用時の元handleと新SKIP handleの独立性を確認していない。",
+    "contract_id": "ITC-OPS-022",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-OPS-023",
+    "action": "ADD",
+    "reason": "同日再用と手動新規の分岐を分離し、新失敗で既存成功を破壊しないことを確認する。",
+    "contract_id": "ITC-OPS-023",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-OPS-024",
+    "action": "ADD",
+    "reason": "旧7世代caseにcorrupt/part/unknown保護とunlink部分失敗の再実行禁止がない。",
+    "contract_id": "ITC-OPS-024",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-OPS-025",
+    "action": "ADD",
+    "reason": "既存cleanupの件数0を完了とする誤期待値を明示的な実DB競合で否定する。",
+    "contract_id": "ITC-OPS-025",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-OPS-026",
+    "action": "ADD",
+    "reason": "既存cleanup一括条件ではhold比較cutoffとrun-history保持を独立判定できない。",
+    "contract_id": "ITC-OPS-026",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-OPS-027",
+    "action": "ADD",
+    "reason": "旧cleanup caseはInspector失敗時の暗号不備保護と通常batch成功の誤共用を区別できない。",
+    "contract_id": "ITC-OPS-027",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-OPS-028",
+    "action": "ADD",
+    "reason": "旧Expirycaseの抽象途中失敗を、監査commit済とpurge後不明に分ける。",
+    "contract_id": "ITC-OPS-028",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-OPS-029",
+    "action": "ADD",
+    "reason": "IT-OPS-013のUNKNOWN一括に、HTTPready後資源終端失敗で正常終了させない観測点を追加。",
+    "contract_id": "ITC-OPS-029",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-SEC-023",
+    "action": "ADD",
+    "reason": "旧IT-OPS-011のrole名だけの列挙を、実接続/実送受信/management負の権限へ具体化。",
+    "contract_id": "ITC-SEC-023",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-LOG-020",
+    "action": "ADD",
+    "reason": "旧ログ再送caseのHTTP不変だけでは同source_event_idのDB投影と原始local証拠が結び付かない。",
+    "contract_id": "ITC-LOG-020",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-DATA-020",
+    "action": "ADD",
+    "reason": "旧IT-IF-017の3件期待値を維持しつつ、診断のみ0件とFrom/To未指定を独立実DB観測へ展開。",
+    "contract_id": "ITC-DATA-020",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-SEC-024",
+    "action": "ADD",
+    "reason": "CSRF代表caseにはLogin後redirectが安全な保存GETだけか、session fixation後principal照合する判定がない。",
+    "contract_id": "ITC-SEC-024",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-RANGE-001",
+    "action": "REWRITE",
+    "reason": "旧15caseは値だけの違い。GET/HEADと全入力/期待byte範囲を30実行単位へ明示してcaseを統合。",
+    "contract_id": "ITC-RANGE-001",
+    "supersedes": [],
+    "scenario_targets": [
+      "IT-RANGE-001-S01",
+      "IT-RANGE-001-S02"
+    ]
+  },
+  {
+    "test_id": "IT-PERF-030",
+    "action": "ADD",
+    "reason": "同時10名条件に至る待ち/飽和点を明示し、旧定常10だけでは見えないbackpressureを観測。",
+    "contract_id": "ITC-PERF-030",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-PERF-031",
+    "action": "ADD",
+    "reason": "旧通常負荷に非同期acceptanceとcompletionの計測/質量収支がない。",
+    "contract_id": "ITC-PERF-031",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-PERF-032",
+    "action": "ADD",
+    "reason": "旧IT-PERF-002の比率未指定を補い、20streampermitと大容量48MB生成が通常同期へ与える影響を同窓観測。",
+    "contract_id": "ITC-PERF-032",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-PERF-033",
+    "action": "ADD",
+    "reason": "停止中の失敗率を正常窓から黙って除外せず、復旧直後の集中と収束を区分。",
+    "contract_id": "ITC-PERF-033",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-PERF-034",
+    "action": "ADD",
+    "reason": "旧30分平均観測だけでは生存中lease/接続/FD蓄積が不明。2時間は試験入力で新運用SLAではない。",
+    "contract_id": "ITC-PERF-034",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-PERF-035",
+    "action": "ADD",
+    "reason": "通常業務とbackup並行という根拠のない負荷を作らず、設計のpublic停止/排他下で資源予算と再開後SLAを確認。",
+    "contract_id": "ITC-PERF-035",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-PERF-036",
+    "action": "ADD",
+    "reason": "旧IT-PERF-001のE2E2.5秒だけではSS332のSQL単独1.5秒条件を判定できない。",
+    "contract_id": "ITC-PERF-036",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-RETRY-100-集中-なし",
+    "action": "REWRITE",
+    "reason": "初版18caseの値名違いを9parameter行へ統合。全size×fault pairと両due分布/各faultの分布を保持し、根拠なき三因子積を撤回。",
+    "contract_id": "ITC-RETRY-100-集中-なし",
+    "supersedes": [],
+    "scenario_targets": [
+      "IT-RETRY-100-集中-なし-S01"
+    ]
+  },
+  {
+    "test_id": "IT-MQ-010",
+    "action": "REWRITE",
+    "reason": "旧6caseはaddress名差だけ。12SCでbyte/件数の支配軸を分離し、各SC内閾値点のraw実測を保持。",
+    "contract_id": "ITC-MQ-010",
+    "supersedes": [],
+    "scenario_targets": [
+      "IT-MQ-010-S01",
+      "IT-MQ-010-S02"
+    ]
+  },
+  {
+    "test_id": "IT-PERF-010",
+    "action": "REWRITE",
+    "reason": "旧5caseの値差を1familyへ統合。scan値/新規拒否/既受付非破壊を各入力行で追跡。",
+    "contract_id": "ITC-PERF-010",
+    "supersedes": [],
+    "scenario_targets": [
+      "IT-PERF-010-S01"
+    ]
+  },
+  {
+    "test_id": "IT-PERF-020",
+    "action": "REWRITE",
+    "reason": "旧5caseの値差を1familyへ統合。scan値/新規拒否/既受付非破壊を各入力行で追跡。",
+    "contract_id": "ITC-PERF-020",
+    "supersedes": [],
+    "scenario_targets": [
+      "IT-PERF-020-S01"
+    ]
+  },
+  {
+    "test_id": "IT-TX-030",
+    "action": "REWRITE",
+    "reason": "旧6caseの同一確定点/同期待をparameter化。単独Web/API/DB、MQ複合/DB複合/全4の所有・耐久差は各SCで保つ。",
+    "contract_id": "ITC-TX-030",
+    "supersedes": [],
+    "scenario_targets": [
+      "IT-TX-030-S01"
+    ]
+  },
+  {
+    "test_id": "IT-RANGE-002",
+    "action": "CONSOLIDATE",
+    "target": "IT-RANGE-001",
+    "reason": "同一Range契約のparameter表へ。旧入力差/変更はcase-changesで追跡、SCが実行単位。",
+    "scenario_targets": [
+      "IT-RANGE-001-S03",
+      "IT-RANGE-001-S04"
+    ]
+  },
+  {
+    "test_id": "IT-RANGE-003",
+    "action": "CONSOLIDATE",
+    "target": "IT-RANGE-001",
+    "reason": "同一Range契約のparameter表へ。旧入力差/変更はcase-changesで追跡、SCが実行単位。",
+    "scenario_targets": [
+      "IT-RANGE-001-S05",
+      "IT-RANGE-001-S06"
+    ]
+  },
+  {
+    "test_id": "IT-RANGE-004",
+    "action": "CONSOLIDATE",
+    "target": "IT-RANGE-001",
+    "reason": "同一Range契約のparameter表へ。旧入力差/変更はcase-changesで追跡、SCが実行単位。",
+    "scenario_targets": [
+      "IT-RANGE-001-S07",
+      "IT-RANGE-001-S08"
+    ]
+  },
+  {
+    "test_id": "IT-RANGE-005",
+    "action": "CONSOLIDATE",
+    "target": "IT-RANGE-001",
+    "reason": "同一Range契約のparameter表へ。旧入力差/変更はcase-changesで追跡、SCが実行単位。",
+    "scenario_targets": [
+      "IT-RANGE-001-S09",
+      "IT-RANGE-001-S10"
+    ]
+  },
+  {
+    "test_id": "IT-RANGE-006",
+    "action": "CONSOLIDATE",
+    "target": "IT-RANGE-001",
+    "reason": "同一Range契約のparameter表へ。旧入力差/変更はcase-changesで追跡、SCが実行単位。",
+    "scenario_targets": [
+      "IT-RANGE-001-S11",
+      "IT-RANGE-001-S12"
+    ]
+  },
+  {
+    "test_id": "IT-RANGE-007",
+    "action": "CONSOLIDATE",
+    "target": "IT-RANGE-001",
+    "reason": "同一Range契約のparameter表へ。旧入力差/変更はcase-changesで追跡、SCが実行単位。",
+    "scenario_targets": [
+      "IT-RANGE-001-S13",
+      "IT-RANGE-001-S14"
+    ]
+  },
+  {
+    "test_id": "IT-RANGE-008",
+    "action": "CONSOLIDATE",
+    "target": "IT-RANGE-001",
+    "reason": "同一Range契約のparameter表へ。旧入力差/変更はcase-changesで追跡、SCが実行単位。",
+    "scenario_targets": [
+      "IT-RANGE-001-S15",
+      "IT-RANGE-001-S16"
+    ]
+  },
+  {
+    "test_id": "IT-RANGE-009",
+    "action": "CONSOLIDATE",
+    "target": "IT-RANGE-001",
+    "reason": "同一Range契約のparameter表へ。旧入力差/変更はcase-changesで追跡、SCが実行単位。",
+    "scenario_targets": [
+      "IT-RANGE-001-S17",
+      "IT-RANGE-001-S18"
+    ]
+  },
+  {
+    "test_id": "IT-RANGE-010",
+    "action": "CONSOLIDATE",
+    "target": "IT-RANGE-001",
+    "reason": "同一Range契約のparameter表へ。旧入力差/変更はcase-changesで追跡、SCが実行単位。",
+    "scenario_targets": [
+      "IT-RANGE-001-S19",
+      "IT-RANGE-001-S20"
+    ]
+  },
+  {
+    "test_id": "IT-RANGE-011",
+    "action": "CONSOLIDATE",
+    "target": "IT-RANGE-001",
+    "reason": "同一Range契約のparameter表へ。旧入力差/変更はcase-changesで追跡、SCが実行単位。",
+    "scenario_targets": [
+      "IT-RANGE-001-S21",
+      "IT-RANGE-001-S22"
+    ]
+  },
+  {
+    "test_id": "IT-RANGE-012",
+    "action": "CONSOLIDATE",
+    "target": "IT-RANGE-001",
+    "reason": "同一Range契約のparameter表へ。旧入力差/変更はcase-changesで追跡、SCが実行単位。",
+    "scenario_targets": [
+      "IT-RANGE-001-S23",
+      "IT-RANGE-001-S24"
+    ]
+  },
+  {
+    "test_id": "IT-RANGE-013",
+    "action": "CONSOLIDATE",
+    "target": "IT-RANGE-001",
+    "reason": "同一Range契約のparameter表へ。旧入力差/変更はcase-changesで追跡、SCが実行単位。",
+    "scenario_targets": [
+      "IT-RANGE-001-S25",
+      "IT-RANGE-001-S26"
+    ]
+  },
+  {
+    "test_id": "IT-RANGE-014",
+    "action": "CONSOLIDATE",
+    "target": "IT-RANGE-001",
+    "reason": "同一Range契約のparameter表へ。旧入力差/変更はcase-changesで追跡、SCが実行単位。",
+    "scenario_targets": [
+      "IT-RANGE-001-S27",
+      "IT-RANGE-001-S28"
+    ]
+  },
+  {
+    "test_id": "IT-RANGE-015",
+    "action": "CONSOLIDATE",
+    "target": "IT-RANGE-001",
+    "reason": "同一Range契約のparameter表へ。旧入力差/変更はcase-changesで追跡、SCが実行単位。",
+    "scenario_targets": [
+      "IT-RANGE-001-S29",
+      "IT-RANGE-001-S30"
+    ]
+  },
+  {
+    "test_id": "IT-MQ-011",
+    "action": "CONSOLIDATE",
+    "target": "IT-MQ-010",
+    "reason": "address差を12SCへ統合、byte/件数の算定は未確定のまま維持。",
+    "scenario_targets": [
+      "IT-MQ-010-S03",
+      "IT-MQ-010-S04"
+    ]
+  },
+  {
+    "test_id": "IT-MQ-012",
+    "action": "CONSOLIDATE",
+    "target": "IT-MQ-010",
+    "reason": "address差を12SCへ統合、byte/件数の算定は未確定のまま維持。",
+    "scenario_targets": [
+      "IT-MQ-010-S05",
+      "IT-MQ-010-S06"
+    ]
+  },
+  {
+    "test_id": "IT-MQ-013",
+    "action": "CONSOLIDATE",
+    "target": "IT-MQ-010",
+    "reason": "address差を12SCへ統合、byte/件数の算定は未確定のまま維持。",
+    "scenario_targets": [
+      "IT-MQ-010-S07",
+      "IT-MQ-010-S08"
+    ]
+  },
+  {
+    "test_id": "IT-MQ-014",
+    "action": "CONSOLIDATE",
+    "target": "IT-MQ-010",
+    "reason": "address差を12SCへ統合、byte/件数の算定は未確定のまま維持。",
+    "scenario_targets": [
+      "IT-MQ-010-S09",
+      "IT-MQ-010-S10"
+    ]
+  },
+  {
+    "test_id": "IT-MQ-015",
+    "action": "CONSOLIDATE",
+    "target": "IT-MQ-010",
+    "reason": "address差を12SCへ統合、byte/件数の算定は未確定のまま維持。",
+    "scenario_targets": [
+      "IT-MQ-010-S11",
+      "IT-MQ-010-S12"
+    ]
+  },
+  {
+    "test_id": "IT-TX-031",
+    "action": "CONSOLIDATE",
+    "target": "IT-TX-030",
+    "reason": "同確定点component選択6SCへ統合。",
+    "scenario_targets": [
+      "IT-TX-030-S02"
+    ]
+  },
+  {
+    "test_id": "IT-TX-032",
+    "action": "CONSOLIDATE",
+    "target": "IT-TX-030",
+    "reason": "同確定点component選択6SCへ統合。",
+    "scenario_targets": [
+      "IT-TX-030-S03"
+    ]
+  },
+  {
+    "test_id": "IT-TX-033",
+    "action": "CONSOLIDATE",
+    "target": "IT-TX-030",
+    "reason": "同確定点component選択6SCへ統合。",
+    "scenario_targets": [
+      "IT-TX-030-S04"
+    ]
+  },
+  {
+    "test_id": "IT-TX-034",
+    "action": "CONSOLIDATE",
+    "target": "IT-TX-030",
+    "reason": "同確定点component選択6SCへ統合。",
+    "scenario_targets": [
+      "IT-TX-030-S05"
+    ]
+  },
+  {
+    "test_id": "IT-TX-035",
+    "action": "CONSOLIDATE",
+    "target": "IT-TX-030",
+    "reason": "同確定点component選択6SCへ統合。",
+    "scenario_targets": [
+      "IT-TX-030-S06"
+    ]
+  },
+  {
+    "test_id": "IT-PERF-011",
+    "action": "CONSOLIDATE",
+    "target": "IT-PERF-010",
+    "reason": "byte境界5SCへ統合。",
+    "scenario_targets": [
+      "IT-PERF-010-S02"
+    ]
+  },
+  {
+    "test_id": "IT-PERF-012",
+    "action": "CONSOLIDATE",
+    "target": "IT-PERF-010",
+    "reason": "byte境界5SCへ統合。",
+    "scenario_targets": [
+      "IT-PERF-010-S03"
+    ]
+  },
+  {
+    "test_id": "IT-PERF-013",
+    "action": "CONSOLIDATE",
+    "target": "IT-PERF-010",
+    "reason": "byte境界5SCへ統合。",
+    "scenario_targets": [
+      "IT-PERF-010-S04"
+    ]
+  },
+  {
+    "test_id": "IT-PERF-014",
+    "action": "CONSOLIDATE",
+    "target": "IT-PERF-010",
+    "reason": "byte境界5SCへ統合。",
+    "scenario_targets": [
+      "IT-PERF-010-S05"
+    ]
+  },
+  {
+    "test_id": "IT-PERF-021",
+    "action": "CONSOLIDATE",
+    "target": "IT-PERF-020",
+    "reason": "件数境界5SCへ統合。",
+    "scenario_targets": [
+      "IT-PERF-020-S02"
+    ]
+  },
+  {
+    "test_id": "IT-PERF-022",
+    "action": "CONSOLIDATE",
+    "target": "IT-PERF-020",
+    "reason": "件数境界5SCへ統合。",
+    "scenario_targets": [
+      "IT-PERF-020-S03"
+    ]
+  },
+  {
+    "test_id": "IT-PERF-023",
+    "action": "CONSOLIDATE",
+    "target": "IT-PERF-020",
+    "reason": "件数境界5SCへ統合。",
+    "scenario_targets": [
+      "IT-PERF-020-S04"
+    ]
+  },
+  {
+    "test_id": "IT-PERF-024",
+    "action": "CONSOLIDATE",
+    "target": "IT-PERF-020",
+    "reason": "件数境界5SCへ統合。",
+    "scenario_targets": [
+      "IT-PERF-020-S05"
+    ]
+  },
+  {
+    "test_id": "IT-RETRY-100-集中-API停止復帰",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "parameter_selection": "NOT_SELECTED_THIRD_FACTOR_COMBINATION",
+    "selection_reason": "全size×fault pairと各due形態を選定9SCで担保。旧三因子積のこの組は未実施で、他SCの実績を転記しない。追加が必要な相互作用は実測/設計判断で選定。",
+    "scenario_targets": []
+  },
+  {
+    "test_id": "IT-RETRY-100-集中-Broker停止復帰",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "scenario_targets": [
+      "IT-RETRY-100-集中-なし-S03"
+    ]
+  },
+  {
+    "test_id": "IT-RETRY-100-分散-なし",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "parameter_selection": "NOT_SELECTED_THIRD_FACTOR_COMBINATION",
+    "selection_reason": "全size×fault pairと各due形態を選定9SCで担保。旧三因子積のこの組は未実施で、他SCの実績を転記しない。追加が必要な相互作用は実測/設計判断で選定。",
+    "scenario_targets": []
+  },
+  {
+    "test_id": "IT-RETRY-100-分散-API停止復帰",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "scenario_targets": [
+      "IT-RETRY-100-集中-なし-S02"
+    ]
+  },
+  {
+    "test_id": "IT-RETRY-100-分散-Broker停止復帰",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "parameter_selection": "NOT_SELECTED_THIRD_FACTOR_COMBINATION",
+    "selection_reason": "全size×fault pairと各due形態を選定9SCで担保。旧三因子積のこの組は未実施で、他SCの実績を転記しない。追加が必要な相互作用は実測/設計判断で選定。",
+    "scenario_targets": []
+  },
+  {
+    "test_id": "IT-RETRY-1000-集中-なし",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "parameter_selection": "NOT_SELECTED_THIRD_FACTOR_COMBINATION",
+    "selection_reason": "全size×fault pairと各due形態を選定9SCで担保。旧三因子積のこの組は未実施で、他SCの実績を転記しない。追加が必要な相互作用は実測/設計判断で選定。",
+    "scenario_targets": []
+  },
+  {
+    "test_id": "IT-RETRY-1000-集中-API停止復帰",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "scenario_targets": [
+      "IT-RETRY-100-集中-なし-S05"
+    ]
+  },
+  {
+    "test_id": "IT-RETRY-1000-集中-Broker停止復帰",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "parameter_selection": "NOT_SELECTED_THIRD_FACTOR_COMBINATION",
+    "selection_reason": "全size×fault pairと各due形態を選定9SCで担保。旧三因子積のこの組は未実施で、他SCの実績を転記しない。追加が必要な相互作用は実測/設計判断で選定。",
+    "scenario_targets": []
+  },
+  {
+    "test_id": "IT-RETRY-1000-分散-なし",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "scenario_targets": [
+      "IT-RETRY-100-集中-なし-S04"
+    ]
+  },
+  {
+    "test_id": "IT-RETRY-1000-分散-API停止復帰",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "parameter_selection": "NOT_SELECTED_THIRD_FACTOR_COMBINATION",
+    "selection_reason": "全size×fault pairと各due形態を選定9SCで担保。旧三因子積のこの組は未実施で、他SCの実績を転記しない。追加が必要な相互作用は実測/設計判断で選定。",
+    "scenario_targets": []
+  },
+  {
+    "test_id": "IT-RETRY-1000-分散-Broker停止復帰",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "scenario_targets": [
+      "IT-RETRY-100-集中-なし-S06"
+    ]
+  },
+  {
+    "test_id": "IT-RETRY-10000-集中-なし",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "scenario_targets": [
+      "IT-RETRY-100-集中-なし-S07"
+    ]
+  },
+  {
+    "test_id": "IT-RETRY-10000-集中-API停止復帰",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "parameter_selection": "NOT_SELECTED_THIRD_FACTOR_COMBINATION",
+    "selection_reason": "全size×fault pairと各due形態を選定9SCで担保。旧三因子積のこの組は未実施で、他SCの実績を転記しない。追加が必要な相互作用は実測/設計判断で選定。",
+    "scenario_targets": []
+  },
+  {
+    "test_id": "IT-RETRY-10000-集中-Broker停止復帰",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "scenario_targets": [
+      "IT-RETRY-100-集中-なし-S09"
+    ]
+  },
+  {
+    "test_id": "IT-RETRY-10000-分散-なし",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "parameter_selection": "NOT_SELECTED_THIRD_FACTOR_COMBINATION",
+    "selection_reason": "全size×fault pairと各due形態を選定9SCで担保。旧三因子積のこの組は未実施で、他SCの実績を転記しない。追加が必要な相互作用は実測/設計判断で選定。",
+    "scenario_targets": []
+  },
+  {
+    "test_id": "IT-RETRY-10000-分散-API停止復帰",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "scenario_targets": [
+      "IT-RETRY-100-集中-なし-S08"
+    ]
+  },
+  {
+    "test_id": "IT-RETRY-10000-分散-Broker停止復帰",
+    "action": "CONSOLIDATE",
+    "target": "IT-RETRY-100-集中-なし",
+    "reason": "9pairwise SCへ集約。全size×fault/両分布を保持、除外三因子組は未実施・未充足相互作用として保持。",
+    "parameter_selection": "NOT_SELECTED_THIRD_FACTOR_COMBINATION",
+    "selection_reason": "全size×fault pairと各due形態を選定9SCで担保。旧三因子積のこの組は未実施で、他SCの実績を転記しない。追加が必要な相互作用は実測/設計判断で選定。",
+    "scenario_targets": []
+  },
+  {
+    "test_id": "IT-REQ-001",
+    "action": "ADD",
+    "reason": "ASY007の単純2秒待ちではheader由来と受信clock由来の早い期限・受付前後が区別できない。",
+    "contract_id": "ITC-REQ-001",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-TX-044",
+    "action": "ADD",
+    "reason": "TX018のtoken100並行だけではfile I/O中lockを待つthreadのDB保持0と別Message衝突の結果非共有を確認できない。",
+    "contract_id": "ITC-TX-044",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-DATA-021",
+    "action": "ADD",
+    "reason": "TX016のstage時刻だけではJDBC歴史暦/defaulttimezoneとwire切捨ての変換境界を判定できない。",
+    "contract_id": "ITC-DATA-021",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-SEC-025",
+    "action": "ADD",
+    "reason": "SEC003はAPIの拒否のみ。Web local session/cookie/tokenと遅延した旧requestのrow削除対象まで確認できない。",
+    "contract_id": "ITC-SEC-025",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-WIRE-001",
+    "action": "ADD",
+    "reason": "MQ002の形式列挙を具体byte変異と原配送ACKの原子性へ分解し、業務非更新を観測する。",
+    "contract_id": "ITC-WIRE-001",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-HTTP-001",
+    "action": "ADD",
+    "reason": "既存CSRF/安全headerでは内部/errorの表示例外経路を偽headerで迂回できないか判定できない。",
+    "contract_id": "ITC-HTTP-001",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-LOG-021",
+    "action": "ADD",
+    "reason": "LOG003の一般body長比較をcharset後content成功writeとproxy変換/ACK非保証へ具体化。",
+    "contract_id": "ITC-LOG-021",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-OPS-030",
+    "action": "ADD",
+    "reason": "OPS013の起動不明に、勝手なrun選択/時刻再計算を許さない外部入口の拒否前非更新がない。",
+    "contract_id": "ITC-OPS-030",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-OPS-031",
+    "action": "ADD",
+    "reason": "OPS003のcleanup skip一般語から、真正FAILED pairと六SKIP/Transfer/Expiry独立実行を具体化。",
+    "contract_id": "ITC-OPS-031",
+    "supersedes": []
+  },
+  {
+    "test_id": "IT-ASY-023",
+    "action": "ADD",
+    "reason": "ASY020のCOMPLETED+answerだけではPROCESSING回復中の既存answer一致/不一致を区別できない。",
+    "contract_id": "ITC-ASY-023",
+    "supersedes": []
+  }
+]

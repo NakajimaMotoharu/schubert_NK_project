@@ -6,6 +6,8 @@ import hashlib
 import json
 import re
 import os
+import sys
+sys.dont_write_bytecode=True
 ROOT=Path(__file__).resolve().parents[3]
 OUT=ROOT/'documents/500_IT'
 def read(n):return json.loads((OUT/'data'/n).read_text())
@@ -30,13 +32,13 @@ ss_layouts=set(re.findall(r'^\| `([A-Z0-9]{8})` \d[\d,]*/',ss323,re.M))
 check(ss_layouts==covered,'SS323/UI233 layout集合不一致')
 required=['purpose','source_refs','route','components','contract','environment_profile','fixture','precondition_addendum','inputs','operation','synchronization','fault_and_concurrency','repetitions','assertions','forbidden_effects','observation','judgement','timeout','abort_and_preservation','cleanup_and_rerun','automation_and_missing','spec_status','execution_state','execution_blockers','ss_condition_ids']
 for c in cases:
- for f in required:check(f in c and c[f] is not None and c[f]!=[],c['id']+' mandatory '+f)
+ for f in required:check(f in c and c[f] is not None and (c[f]!=[] or f=='ss_condition_ids'),c['id']+' mandatory '+f)
  check(c['execution_state']=='NOT_EXECUTED',c['id']+' executed/PASS混入')
  check(c['common_profile'] in pack['profiles'],c['id']+' profile不存在')
  for r in c['source_refs']:check((ROOT/r['document']).is_file(),c['id']+' source ref不存在')
  for a in c['assertions']:check(bool(a['expected']) and bool(a['evidence']),c['id']+' assertion/evidence欠落')
  for i in c['execution_blockers']:check(i in issueidx,c['id']+' blocker不明 '+i)
- if c['decision_issues']:check(c['spec_status']=='PENDING_DECISION',c['id']+' TBDありCONFIRMED')
+ if c['decision_issues'] and c.get('lifecycle')!='SUPERSEDED':check(c['spec_status']=='PENDING_DECISION',c['id']+' TBDありCONFIRMED')
  for cid in c['ss_condition_ids']:check(cid in condidx,c['id']+' condition不明')
 for cond in conditions:
  check(cond['classification'] in ['IT_CASE','PT_AND_IT_CONTRACT','ST_OT','NOT_APPLICABLE','OPEN'],cond['id']+' 分類不明')
@@ -71,13 +73,15 @@ def clink(tid,prefix='../520_ケース/'):
 for domain,(filename,title) in vols.items():
  lines=[f'# {title} 結合テストケース','', '編集正本は [cases.json](../data/cases.json)。この巻は自動生成。全件NOT_EXECUTED。', '', '全ケースは [512](../510_方針・準備/512_結合構成・環境・データ.md) の経路・環境・fixture・観測・C-ISOLATE と [541](../540_実行・管理/541_Codex実行・判定・証跡・再開.md) を参照する。共通CP-BASEの入力以外の初期状態・証跡・中断・後片付けは cases.json.profiles に一元化し、個別追加条件と併せて必須とする。', '', '他巻：'+' / '.join(f'[{v[1]}]({v[0]})' for v in vols.values()),'']
  for c in [x for x in cases if x['domain']==domain]:
+  if c.get('lifecycle')=='SUPERSEDED':
+   lines += [f'<a id="{c["id"].lower()}"></a>',f'## {c["id"]}（統合済・実行対象外）','', '継続先：'+clink(c['superseded_by'],prefix='')+'。'+c['supersession_reason'],''];continue
   lines += [f'<a id="{c["id"].lower()}"></a>',f'## {c["id"]} {c["title"]}','',f'仕様：**{c["spec_status"]}** ／ 実行：**NOT_EXECUTED** ／ 共通条件：CP-BASE。','',c['purpose'],'','| 項目 | 個別仕様（CP-BASEへ追加） |','|---|---|']
   for label,key in [('結合経路・部品','route'),('確認契約','contract'),('必要環境','environment_profile'),('artifact/設定/schema/data版','fixture'),('事前条件・依存','precondition_addendum'),('同期・待機','synchronization'),('故障注入・並行・再現','fault_and_concurrency'),('反復','repetitions'),('timeout・中断','timeout'),('副作用禁止','forbidden_effects'),('観測方法','observation'),('判定式','judgement'),('失敗保全','abort_and_preservation'),('後片付け・再実行','cleanup_and_rerun'),('自動化・未作成工具','automation_and_missing')]:lines.append(f'| {label} | {esc(c[key])} |')
   lines += ['', '**根拠文書・節・承認変更**','']
   for r in c['source_refs']:
    rel=os.path.relpath(ROOT/r['document'],OUT/'520_ケース')
    lines.append(f'- [{Path(r["document"]).name}](<{rel}>) {r["sections"]} ／ {r["approved_changes"]} ／ commit `{r["commit"][:12]}`')
-  lines += ['',f'条件ID：JSONの `ss_condition_ids`（{len(c["ss_condition_ids"])}件の節別/個別割当、内部詳細のIT複写ではない）。[531](../530_追跡/531_SS条件対応・網羅性.md)から原文・工程分類を確認。','', '**入力・初期状態差分**','','```json',json.dumps(c['inputs'],ensure_ascii=False,indent=2),'```','','**操作順序・入口**','',c['operation'],'CP-BASEの予約→初期化→観測開始→一回操作→後条件採取→判定→後片付けを適用。','','**期待結果・取得証跡**','','| Assertion | 値・件数・順序・状態・非更新の期待 | 観測/証跡 |','|---|---|---|']
+  lines += ['',f'意味監査：{c.get("semantic_review")}。条件ID：JSONの `ss_condition_ids`（{len(c["ss_condition_ids"])}件）。旧candidateは参照候補のみ、充足認定禁止。[531](../530_追跡/531_SS条件対応・網羅性.md)から原文・工程分類を確認。','', '**入力・初期状態差分**','','```json',json.dumps(c['inputs'],ensure_ascii=False,indent=2),'```','','**操作順序・入口**','',c['operation'],'CP-BASEの予約→初期化→観測開始→一回操作→後条件採取→判定→後片付けを適用。','','**期待結果・取得証跡**','','| Assertion | 値・件数・順序・状態・非更新の期待 | 観測/証跡 |','|---|---|---|']
   lines += [f'| {a["id"]} | {esc(a["expected"])} | {", ".join(a["evidence"])}。実測/path/SHA/判定式はattemptへ記録 |' for a in c['assertions']]
   lines += ['', '**実行可能条件・不足**','', ', '.join(c['execution_blockers'])+' を全解除。判断待ち：'+(', '.join(c['decision_issues']) or 'なし（開始依存・工具準備は別途必要）')+'。[543](../540_実行・管理/543_未確定・不足・開始依存.md) の解除証拠を確認。','']
  write('520_ケース/'+filename,'\n'.join(lines))
@@ -95,11 +99,12 @@ for doc,rows in bydoc.items():
  n=Path(doc).name[:3];lines=[f'# SS{n} 条件対応表','',f'基準：{baseline["design_commit"]} ／ [{Path(doc).name}](<{os.path.relpath(ROOT/doc,OUT/"530_追跡/conditions")}>)','', '条件原文・原行・SHA・理由・承認/変更IDは [conditions.json](../../data/conditions.json)。条件IDは文書・節・原文hash由来で、追加時も連番振替をしない。', '', '| 条件ID / source行 | 節・条件抜粋 | 工程分類 | 契約binding / 開始依存 |','|---|---|---|---|']
  for c in rows:
   bind=f'[{c["binding_id"]}](../532_契約binding.md#{c["binding_id"].lower()})' if c['binding_id'] else ','.join(c['blocking_issues'])
+  if c.get('contract_ids'):bind=', '.join(f'[{k}](../533_契約別意味監査.md#{k.lower()})' for k in c['contract_ids'])
   excerpt=c['text'].replace('\n',' ')[:85]
   lines.append(f'| {c["id"]} / L{c["line"]} | {esc(c["section"].split(" > ")[-1])}：{esc(excerpt)} | {classes[c["classification"]]} | {bind} |')
  write(f'530_追跡/conditions/SS{n}.md','\n'.join(lines))
 counts=collections.Counter(c['classification'] for c in conditions);extents=collections.Counter(c['coverage_extent'] for c in conditions)
-lines=['# SS条件対応・網羅性照合','', 'SS301と全24 Markdownを対象に段落・箇条書き・表の設計行・コード塊を棚卸しした。節題/表header/更新履歴等を実行case数へ加算しない。条件IDには原文hashを含め、原文とsource行を保持する。これはSS上の要件IDを勝手に再採番するものではない。','', '条件→結合点/観点→Test ID→Assertion/期待結果/証跡は、conditions.json.binding_id → bindings.json.links → cases.json.assertions の一方向参照。Markdownはその派生表示である。PT内部詳細とIT結合契約を分離し、古いsource限定の復旧指示を新環境の操作へ複写しない。', '', '| 分類 | 条件ブロック数 |','|---|---|']
+lines=['# SS条件対応・網羅性照合','', 'SS301と全24 Markdownを対象に段落・箇条書き・表の設計行・コード塊を棚卸しした。節題/表header/更新履歴等を実行case数へ加算しない。条件IDには原文hashを含め、原文とsource行を保持する。これはSS上の要件IDを勝手に再採番するものではない。','', '条件→結合点/観点→Test ID→Assertion/期待結果/証跡は、conditions.json.contract_ids → contracts.json.scenario_ids → scenarios.json.assertion_evidence/cases.json.assertions の参照。binding_idは一部indexのみで全契約集合ではない。Markdownはその派生表示である。PT内部詳細とIT結合契約を分離し、古いsource限定の復旧指示を新環境の操作へ複写しない。', '', '| 分類 | 条件ブロック数 |','|---|---|']
 lines += [f'| {classes[k]} | {v} |' for k,v in sorted(counts.items())]
 lines += ['', 'この数は独立した要件の個数・IT合格率ではない。各章の共通条件を複数の部品で再記述したblockも保持している。IT_CASEは直接契約の仕様割当、PT_AND_IT_CONTRACTは内部詳細のPT＋実結合の仕様割当で、実行実績は全件NOT_EXECUTED。START_DEPENDENCYは最終source・承認・PGPT残件の照合待ち。','', '## SS文書別の棚卸しと工程配分','', '| SS文書 | 全block | IT | PT＋IT | ST/OT | 適用外 | 未確定/開始依存 |','|---|---:|---:|---:|---:|---:|---:|']
 for doc,rows in bydoc.items():
@@ -107,11 +112,11 @@ for doc,rows in bydoc.items():
  lines.append(f'| [SS{n}](conditions/SS{n}.md) {Path(doc).name[4:]} | {len(rows)} | '+ ' | '.join(str(ct[k]) for k in ['IT_CASE','PT_AND_IT_CONTRACT','ST_OT','NOT_APPLICABLE','OPEN'])+' |')
 lines += ['', '## SS354/362の既定ITと具体ケース','', '| 既定条件 | ケース | 残る判断 |','|---|---|---|']
 for d in read('default-it-crosscheck.json'):
- lines.append('| '+d['source']+' | '+', '.join(clink(t) for t in d['test_ids'])+' | '+(','.join(d['remaining_issues']) or '開始gate/工具のみ')+' |')
-lines += ['', '## 対応漏れ・参照だけの検出','',f'構造上の未割当（OPEN_COVERAGE）={extents["OPEN_COVERAGE"]}、未確定oracleのみを参照する条件={extents["SPEC_PENDING"]}。後者は [coverage-gaps.json](../data/coverage-gaps.json) に個別抽出し、割当ありでも仕様充足へ算入しない。case/condition/binding/Assertion/証跡の不明参照はvalidation-report.jsonに記録する。契約bindingが存在しても、内部PTの全分岐やsectionの全literalを直接IT検証したとは認定しない。PT条件は既存PT ID/最終証跡を開始前に照合する。', '', '未確定caseの参照だけではその条件を仕様確定済み・実行可能へ数えない。ISS-DATA/TIME/MQCAP/DISK/EMPTY/STREAM/TRANSFER/CONFIG/METRIC/JOURNALは543へ集約した。特定source/PID/原本の復旧条件はSTART_DEPENDENCYに分離し、一般のowner/UNKNOWN/非更新はOPSケースで確認する。', '', '設計tableの全field/offset/constructor/Throwable graphはPTへ、実BytesMessage・grant・DB/JMS原子性・FS公開・OS実所有はITへ分担。全画面互換/24CHRのUI受入はST、RD適合/Go判断はOT。性能/容量/復旧/securityの既定IT項目は削除0。','', '## 64layout対応','', '| Layout | IF | bytes（data/record/max/total） | 結合ケース |','|---|---|---|---|']
+ lines.append('| '+d['source']+'（意味監査PARTIAL・明示SC '+str(len(d.get('explicit_scenario_ids',[])))+'） | '+', '.join(clink(t) for t in d['test_ids'])+' | '+(','.join(d['remaining_issues']) or '開始gate/工具のみ')+' |')
+lines += ['', '## 対応漏れ・参照だけの検出','',f'旧構造分類OPEN_COVERAGE={extents["OPEN_COVERAGE"]}、未確定oracleのみを参照する条件={extents["SPEC_PENDING"]}。後者は [coverage-gaps.json](../data/coverage-gaps.json) に個別抽出し、割当ありでも仕様充足へ算入しない。意味未照合のUNVERIFIED_REFERENCE・原文残句は別途残り、OPEN_COVERAGE=0でも未充足0とは扱わない。case/condition/binding/Assertion/証跡の不明参照はvalidation-report.jsonに記録する。契約bindingが存在しても、内部PTの全分岐やsectionの全literalを直接IT検証したとは認定しない。PT条件は既存PT ID/最終証跡を開始前に照合する。', '', '未確定caseの参照だけではその条件を仕様確定済み・実行可能へ数えない。ISS-DATA/TIME/MQCAP/DISK/EMPTY/STREAM/TRANSFER/CONFIG/METRIC/JOURNALは543へ集約した。特定source/PID/原本の復旧条件はSTART_DEPENDENCYに分離し、一般のowner/UNKNOWN/非更新はOPSケースで確認する。', '', '設計tableの全field/offset/constructor/Throwable graphはPTへ、実BytesMessage・grant・DB/JMS原子性・FS公開・OS実所有はITへ分担。全画面互換/24CHRのUI受入はST、RD適合/Go判断はOT。性能/容量/復旧/securityの既定IT項目は削除0。','', '## 64layout対応','', '| Layout | IF | bytes（data/record/max/total） | 結合ケース |','|---|---|---|---|']
 for x in layouts:lines.append(f'| {x["id"]} | {x["interface"]} | {x["data"]}/{x["record"]}/{x["max_count"]}/{x["max_total"]} | {clink(x["test_id"])} |')
 write('530_追跡/531_SS条件対応・網羅性.md','\n'.join(lines))
-gaps=[{'condition_id':c['id'],'document':c['document'],'section':c['section'],'line':c['line'],'reason':c['reason'],'issues':c['blocking_issues'],'binding_id':c['binding_id']} for c in conditions if c['coverage_extent'] in ['SPEC_PENDING','OPEN_COVERAGE']]
+gaps=[{'condition_id':c['id'],'document':c['document'],'section':c['section'],'line':c['line'],'reason':c['reason'],'issues':c['blocking_issues'],'binding_id':c['binding_id']} for c in conditions if c['coverage_extent'] in ['SPEC_PENDING','OPEN_COVERAGE','UNVERIFIED_REFERENCE','CONTRACT_SLICE','CONTRACT_SLICE_PENDING']]
 (OUT/'data/coverage-gaps.json').write_text(json.dumps(gaps,ensure_ascii=False,indent=2)+'\n')
 # open issuesはJSON唯一正本
 lines=['# 未確定事項・準備不足・IT開始依存','', 'issueの状態は個別欄とJSONを正とする。決定・解消は証拠/承認/更新reviewの後に行う。依存解除は仕様作成/PGPT完了/IT実行可能/IT合格を別々に判定する。JSON正本：[issues.json](../data/issues.json)。','']
@@ -128,6 +133,9 @@ for c in cases:
  if c['spec_status']!='CONFIRMED':reviewlines.append('| '+clink(c['id'])+' | '+','.join(c['decision_issues'])+' |')
 reviewlines += ['', '## 検査範囲と限界','', 'JSON必須field、case/condition/binding/assertion/issue参照、全64layout集合・長さ式、SS正本文書hash、実行結果混入0を検査した。代表手計算はGAM809byte、SRC2record11472byte、SCN3record16384byte、201record964800byte、Range1MiB境界・suffix/HEAD。case件数やコードcoverageで網羅性合格を認定していない。', '', '本レビューのPASSは文書構造監査だけ。意味的な仕様全件確定、PGPT完了、環境利用承認、IT開始可能、IT合格を意味しない。SS補足の内部例外graph/生成要素/詳細constructor等はPTへ分担し、最終PT同source証跡を開始前に確認する。特定旧source/PID/原本への限定操作を新ITへ再利用しない。', '', '追加の残件：'+str(report['counts']['open_issues'])+'件OPEN。詳細は[543](../540_実行・管理/543_未確定・不足・開始依存.md)。設計/期待値が未確定なら該当assertionをNOT_JUDGEDのまま保持し、独立確定範囲だけ進める。']
 write('550_レビュー/551_仕様書自己レビュー結果.md','\n'.join(reviewlines))
+# v2は同一JSON編集正本から意味監査/シナリオ本文を派生生成。
+from audit_v2 import render as render_v2
+render_v2(ROOT, OUT, report, errors)
 # 派生文書のlocal link/明示anchorも検査（snippet原文のMarkdownはescape済み）。
 from urllib.parse import unquote
 link_errors=[]

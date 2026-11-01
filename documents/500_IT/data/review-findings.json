@@ -56,7 +56,92 @@
   {
     "id": "REV-010",
     "finding": "8.2restoreの計測起点の曖昧さ",
-    "action": "RPOは最新一貫checkpointとの差、RTOは検知→公開再開経過、損失範囲を記録。",
-    "status": "CORRECTED"
+    "action": "初版のRPO一般式による補完を撤回。RV2-010/ISS-RPO-DEFINITIONへ引継ぎ、設計判断までNOT_JUDGED。RTO/損失範囲のrawは保持。",
+    "status": "REOPENED_BY_RV2-010",
+    "previous_action": "RPOは最新一貫checkpointとの差、RTOは検知→公開再開経過、損失範囲を記録。"
+  },
+  {
+    "id": "RV2-001",
+    "finding": "節単位の広域bindingだけでSS充足と見える",
+    "action": "旧bindingを履歴へ隔離。具体入力/経路/assertion/個別証跡を照合した59契約sliceだけを直接対応、原文block全体はPARTIAL。",
+    "status": "FIXED_WITH_OPEN_SCOPE"
+  },
+  {
+    "id": "RV2-002",
+    "finding": "PAGE上限とdisk fullの挙動を混同",
+    "action": "page-full-policy=FAIL/9001/Outbox保持retry、disk90%=BLOCK/readyfalseへ修正。旧address IDは履歴のみ。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV2-003",
+    "finding": "role変更後も同sessionのprobe成功を対照にしていた",
+    "action": "role変更はsession失効。成功対照はrole不変idle延長、scope降格は同ownerの新USER Login contextへ修正。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV2-004",
+    "finding": "同token別MessageとLogin再送の期待結果が粗い",
+    "action": "M0保存元AAD/M1現在correlation/alias0、元ERROR維持、IF003現在認証probe、元snapshot不変を分離。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV2-005",
+    "finding": "値名だけのcase増加と隠れた複数操作",
+    "action": "49旧IDを6familyへ統合、SC169/Assertion695/反復186を別集計。旧ID→SCと未選定組をcase-changesへ保持。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV2-006",
+    "finding": "QA050が三因子18全積で選定理由がない",
+    "action": "size×fault全9pairと両due形態を9SCへ選定。除外第三因子9組は未実施で他結果を転記しない。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV2-007",
+    "finding": "QA050の通常対照窓と混在窓が不揃い",
+    "action": "両45分で同source/fixture/seed。5/30/300秒と900秒実定常を2周期以上、2反復はcase数へ加算0。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV2-008",
+    "finding": "起動probeの未規定patternを0x41/0x42へ固定し誤NGを作る",
+    "action": "実probe公開前のraw A/Bを独立採取し4800byte/A≠B/collision前後不変/秘密0で判定。設計にないpattern値は期待にしない。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV2-009",
+    "finding": "Web DB負の権限試験のtable名が曖昧",
+    "action": "schubert.app_users/questions/answersの実在を先に確認。実schubert_web資格のpermission deniedと非更新を検証し、不存在errorを合格にしない。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV2-010",
+    "finding": "RPO測定式を一般的定義から推測していた",
+    "action": "SS353検知→再開文言とRD/UI各24h目標を記録。RPO式はISS-RPO-DEFINITION判断待ち、RESTORE A01はNOT_JUDGED。",
+    "status": "OPEN"
+  },
+  {
+    "id": "RV2-011",
+    "finding": "初版137caseと原文残句の意味分解が未完",
+    "action": "PENDING_REAUDIT/UNREVIEWED_BLOCKを保持しPREP-SEMANTICへ開始blocker化。構造PASSで全充足と宣言0。",
+    "status": "OPEN"
+  },
+  {
+    "id": "RV2-012",
+    "finding": "工具名を実在commandと誤認する恐れ",
+    "action": "514で入力schema/receipt/SQL projection/計測/再開を仕様化しUNIMPLEMENTEDを明示。既存PT collectorをIT runnerとして流用0。",
+    "status": "FIXED_WITH_PREPARATION_DEPENDENCY"
+  },
+  {
+    "id": "RV2-013",
+    "finding": "ISS-SPEC-BLOCKSが構造割当だけでCLOSED",
+    "action": "旧解消記録を保存しOPENへ戻した。契約意味精査と残句レビューを解除条件に変更。",
+    "status": "REOPENED"
+  },
+  {
+    "id": "RV2-014",
+    "finding": "64layout集合一致を全byte/全入口網羅と誤認する恐れ",
+    "action": "IF33caseはlegacy再監査待ち。fixture/golden/各許可role/全HTTP入力はISS-DATA等を残す。",
+    "status": "OPEN"
   }
 ]
