@@ -64,7 +64,9 @@
     "id": "RV2-001",
     "finding": "節単位の広域bindingだけでSS充足と見える",
     "action": "旧bindingを履歴へ隔離。具体入力/経路/assertion/個別証跡を照合した59契約sliceだけを直接対応、原文block全体はPARTIAL。",
-    "status": "FIXED_WITH_OPEN_SCOPE"
+    "status": "RESOLVED_BY_V3_REVIEW",
+    "previous_status": "FIXED_WITH_OPEN_SCOPE",
+    "v3_resolution": "旧137全件/全SS残句工程配分/351field・190config・実HTTPname・個別SC期待と証拠を照合。534/535/554。B/C/Dは別未解決として保持。"
   },
   {
     "id": "RV2-002",
@@ -124,7 +126,9 @@
     "id": "RV2-011",
     "finding": "初版137caseと原文残句の意味分解が未完",
     "action": "PENDING_REAUDIT/UNREVIEWED_BLOCKを保持しPREP-SEMANTICへ開始blocker化。構造PASSで全充足と宣言0。",
-    "status": "OPEN"
+    "status": "RESOLVED_BY_V3_REVIEW",
+    "previous_status": "OPEN",
+    "v3_resolution": "旧137全件/全SS残句工程配分/351field・190config・実HTTPname・個別SC期待と証拠を照合。534/535/554。B/C/Dは別未解決として保持。"
   },
   {
     "id": "RV2-012",
@@ -136,12 +140,113 @@
     "id": "RV2-013",
     "finding": "ISS-SPEC-BLOCKSが構造割当だけでCLOSED",
     "action": "旧解消記録を保存しOPENへ戻した。契約意味精査と残句レビューを解除条件に変更。",
-    "status": "REOPENED"
+    "status": "RESOLVED_BY_V3_REVIEW",
+    "previous_status": "REOPENED",
+    "v3_resolution": "旧137全件/全SS残句工程配分/351field・190config・実HTTPname・個別SC期待と証拠を照合。534/535/554。B/C/Dは別未解決として保持。"
   },
   {
     "id": "RV2-014",
     "finding": "64layout集合一致を全byte/全入口網羅と誤認する恐れ",
     "action": "IF33caseはlegacy再監査待ち。fixture/golden/各許可role/全HTTP入力はISS-DATA等を残す。",
-    "status": "OPEN"
+    "status": "RESOLVED_BY_V3_REVIEW",
+    "previous_status": "OPEN",
+    "v3_resolution": "旧137全件/全SS残句工程配分/351field・190config・実HTTPname・個別SC期待と証拠を照合。534/535/554。B/C/Dは別未解決として保持。"
+  },
+  {
+    "id": "RV3-001",
+    "finding": "旧Inspectorを28routeで打切る誤り",
+    "action": "SS324§12.9/V016の更新3routeを含む31route・OPS040..044へ。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV3-002",
+    "finding": "JMS roleをlogin名と混同",
+    "action": "nk_web/nk_apiとcredential実principalを分離、維持maintenance/ops名も実JAASへ照合。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV3-003",
+    "finding": "設定215行にheaderと未解釈行が混在",
+    "action": "header25除外/190dataを個別CFG/SC/Assertion/P-probeへ。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV3-004",
+    "finding": "Journal追加案が既存と同目的",
+    "action": "MQ036037は不採用予約ID、既存MQ005006へSC追加、新規件数に算入0。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV3-005",
+    "finding": "HTTP semantic項目を架空HTTP fieldで送る危険",
+    "action": "7template固定sourceを読取確認。operation_token/expected_version/password_confirmation、Rangeheaderとpath/query/固定pageSizeを分離。期待はSS。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV3-006",
+    "finding": "F-IF QSB期待行とseed済み行の衝突",
+    "action": "IF025はQテーブル空/sequence501601701、照会取消はseed版とownerを明示。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV3-007",
+    "finding": "大文字Username同一Passwordを許可又は曖昧にする危険",
+    "action": "SS314 case-insensitive同一を拒否、末尾!付き対照を追加。HTTPstatusのみB。",
+    "status": "FIXED_WITH_B_C_D"
+  },
+  {
+    "id": "RV3-008",
+    "finding": "通知cleanupの同値/当日取消に正本間差",
+    "action": "ISS-NOTIFICATION-CUTOFFでB限定。履歴400日strictはSS331で確定し旧issue解消。",
+    "status": "FIXED_WITH_B_C_D"
+  },
+  {
+    "id": "RV3-009",
+    "finding": "Outboxdelayを完全1/5/30/60/300秒とする誤り",
+    "action": "SS332±10%jitterを時刻式へ。Broker1/5/25秒とは分離。",
+    "status": "FIXED_WITH_B_C_D"
+  },
+  {
+    "id": "RV3-010",
+    "finding": "SCNとMediaの全不正を同一stage/HTTPへ寄せる危険",
+    "action": "SCNrecord長/件数codecとWebpath/UUID整合を分割、Media重複責務だけB。",
+    "status": "FIXED_WITH_B_C_D"
+  },
+  {
+    "id": "RV3-011",
+    "finding": "knownCleanup30とUNKNOWNの退役を混同",
+    "action": "OPS057で真正30/全7step不存在保持/退役順と不明terminal非退役を分割。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV3-012",
+    "finding": "heap90%alertと実OOM/MemoryMaxを同じ証拠にする危険",
+    "action": "PERF046実JVM/同cgroup機構を追加、限定未実装工具・全HOLD維持。",
+    "status": "FIXED_WITH_B_C_D"
+  },
+  {
+    "id": "RV3-013",
+    "finding": "source引用がInspectorの同語へ先着",
+    "action": "PERF046のExitOnOOM根拠をWeb/API共通の原文へ限定し修正。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV3-014",
+    "finding": "履歴49や反復/parameter/workerを件数へ混算する危険",
+    "action": "active246/新規50/旧137書換/その他追記を別集計、UI351/CFG190/反復/各SCworkerdataを分離。",
+    "status": "FIXED"
+  },
+  {
+    "id": "RV3-015",
+    "finding": "終了前fetchでQA051承認がmainに追加",
+    "action": "7147c428/QA051UIC010SSC184を参照基準へ採用。既存4275block不変＋12追加を再レビュー、LOG022追加。QA051回答待ちは解消、menu/log_search個別caller/cardinalityだけ別B。原PGPT未回答履歴/他HOLD/実装未完は保存。",
+    "status": "FIXED_WITH_B_C_D"
+  },
+  {
+    "id": "RV3-016",
+    "finding": "Inspector QSBのreceipt/question ID表記混同と運用SCに共通HTTP待機文が残存",
+    "action": "QSBのquestion501/job601と26字receiptを分離。運用入口はSCの正規Unit/wrapperへ、待機はMorning1800秒/Inspector30分と親期限/stop30・60秒へ明記。HTTP2秒は業務setupに限定、UNKNOWN保全。",
+    "status": "CORRECTED",
+    "epoch": "CONTINUATION_20261102"
   }
 ]

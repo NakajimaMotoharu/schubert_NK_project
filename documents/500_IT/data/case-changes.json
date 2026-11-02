@@ -891,5 +891,1509 @@
     "reason": "ASY020のCOMPLETED+answerだけではPROCESSING回復中の既存answer一致/不一致を区別できない。",
     "contract_id": "ITC-ASY-023",
     "supersedes": []
+  },
+  {
+    "test_id": "IT-TX-001",
+    "action": "REWRITE",
+    "reason": "初版の共通手順ではqueue可視性とDBcommit有無の判定が薄く、監査categoryのTBDが全後条件へ混ざっていた。",
+    "contract_id": "ITC-TX-001",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-002",
+    "action": "REWRITE",
+    "reason": "初版の共通手順ではqueue可視性とDBcommit有無の判定が薄く、監査categoryのTBDが全後条件へ混ざっていた。",
+    "contract_id": "ITC-TX-002",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-003",
+    "action": "REWRITE",
+    "reason": "初版の共通手順ではqueue可視性とDBcommit有無の判定が薄く、監査categoryのTBDが全後条件へ混ざっていた。",
+    "contract_id": "ITC-TX-003",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-004",
+    "action": "REWRITE",
+    "reason": "初版の共通手順ではqueue可視性とDBcommit有無の判定が薄く、監査categoryのTBDが全後条件へ混ざっていた。",
+    "contract_id": "ITC-TX-004",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-005",
+    "action": "REWRITE",
+    "reason": "初版の共通手順ではqueue可視性とDBcommit有無の判定が薄く、監査categoryのTBDが全後条件へ混ざっていた。",
+    "contract_id": "ITC-TX-005",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-006",
+    "action": "REWRITE",
+    "reason": "初版は全faultで同じ期待を並べ、送信確定前後とDBmark未確定の区別が判定できなかった。",
+    "contract_id": "ITC-TX-006",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-007",
+    "action": "REWRITE",
+    "reason": "初版は全faultで同じ期待を並べ、送信確定前後とDBmark未確定の区別が判定できなかった。",
+    "contract_id": "ITC-TX-007",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-008",
+    "action": "REWRITE",
+    "reason": "初版は全faultで同じ期待を並べ、送信確定前後とDBmark未確定の区別が判定できなかった。",
+    "contract_id": "ITC-TX-008",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-009",
+    "action": "REWRITE",
+    "reason": "初版は全faultで同じ期待を並べ、送信確定前後とDBmark未確定の区別が判定できなかった。",
+    "contract_id": "ITC-TX-009",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-050",
+    "action": "ADD",
+    "reason": "DB002はACK喪失、旧TX004はprocess停止。commit済みだがowned close失敗時に成功response/ACKを返す結線を区別できない。",
+    "contract_id": "ITC-TX-050",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-051",
+    "action": "ADD",
+    "reason": "FILE040は再生成を含む一括case。事前read-only actorが有効でもI/O後の失効を迂回しない契約と資源保持境界を独立化。",
+    "contract_id": "ITC-TX-051",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-052",
+    "action": "ADD",
+    "reason": "TX015は成功critical audit rollback。認可拒否の監査失敗を0103完了へ変換する別分岐が未検証。",
+    "contract_id": "ITC-TX-052",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-053",
+    "action": "ADD",
+    "reason": "TX015とTX041は部分対象。命令の確定business errorと一時障害を同じERROR保存へ落とす違反を分離。",
+    "contract_id": "ITC-TX-053",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-010",
+    "action": "REWRITE",
+    "reason": "旧caseの2100msだけではregistry終端/別要求のcorrelationを独立eventで結べない。",
+    "contract_id": "ITC-TX-010",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-011",
+    "action": "REWRITE",
+    "reason": "旧caseのUCRまたはSRCを2SCへ明示。保存対象と現在DBが異なる場合もpayload凍結を確認。",
+    "contract_id": "ITC-TX-011",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-012",
+    "action": "REWRITE",
+    "reason": "旧文書の「各一項目」だけでは入力表と拒否監査→DLQ/ACK順が追えない。",
+    "contract_id": "ITC-TX-012",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-013",
+    "action": "REWRITE",
+    "reason": "TX040はAAD/Scenario中心。UCR/USTの保存versionを現在DBversionから再計算する違反を検出する。",
+    "contract_id": "ITC-TX-013",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-014",
+    "action": "REWRITE",
+    "reason": "旧caseの全副作用0は拒否監査まで禁じていた。非更新対象と許可されたSECURITY監査を分離。",
+    "contract_id": "ITC-TX-014",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-015",
+    "action": "REWRITE",
+    "reason": "旧caseの9000または規定再配送を、確定業務ERROR保存との区別と独立DBreadbackへ具体化。",
+    "contract_id": "ITC-TX-015",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-016",
+    "action": "REWRITE",
+    "reason": "旧1秒刻みT..T+3sは通常2秒budgetと両立しない。契約観測用Clock/barrierを10ms差へ変更し、負荷SLA測定と分離。",
+    "contract_id": "ITC-TX-016",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-017",
+    "action": "REWRITE",
+    "reason": "旧current/previous/unknown一覧を6SCへ具体化し、成功時だけ再送profile、未知を過去成功へ補完しない。",
+    "contract_id": "ITC-TX-017",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-018",
+    "action": "REWRITE",
+    "reason": "旧caseの100HTTPを同一userに置くsession/CSRF/setup依存と二dispatcherの無関係条件を除き、owner/token UK競合を実MQで独立確認。",
+    "contract_id": "ITC-TX-018",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-019",
+    "action": "REWRITE",
+    "reason": "旧deadlock variantは500ms lockと500ms detectorの競合を固定victimに見立てていた。実SQLSTATE/victimで分岐し未観測を補完しない。",
+    "contract_id": "ITC-TX-019",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-DATA-001",
+    "action": "REWRITE",
+    "reason": "旧caseの抽象入力を9SCへ明示し、同じLIKEの期待を全queryへ適用する誤判定を排除。speaker集計/titleは独立DATA030へ分離。",
+    "contract_id": "ITC-DATA-001",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-DATA-030",
+    "action": "ADD",
+    "reason": "旧DATA001へ埋められたmetadata責務はpaginationと異なる。SQL coalesce/trimやlabel代用による画面互換破壊を独立判定。",
+    "contract_id": "ITC-DATA-030",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-DATA-031",
+    "action": "ADD",
+    "reason": "旧DATA001は静的表だけでcount/list snapshot契約を実競合で確認しない。",
+    "contract_id": "ITC-DATA-031",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-DATA-002",
+    "action": "REWRITE",
+    "reason": "旧caseの「いずれか改変」を7SCの別入力/期待とし、µs差の誤NGとlocatorだけの成功偽装を検出。Web登録部分失敗は新DATA032へ分離。",
+    "contract_id": "ITC-DATA-002",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-DATA-032",
+    "action": "ADD",
+    "reason": "業務受付とWeb locatorは別責務。保存失敗を質問取消/新受付へ変換する違反を独立に判定する。",
+    "contract_id": "ITC-DATA-032",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-DATA-003",
+    "action": "REWRITE",
+    "reason": "旧caseに埋め込まれた複数操作を4SCとして安定追跡。入力の差とMQ前/後の責任境界を分ける。",
+    "contract_id": "ITC-DATA-003",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-ASY-001",
+    "action": "REWRITE",
+    "reason": "旧「業務timeoutを越える」は未規定のtimeout値を暗示。到着順と受付timestamp順を分離し、有限観測窓で設計上の失効がないことを確認。",
+    "contract_id": "ITC-ASY-001",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-ASY-002",
+    "action": "REWRITE",
+    "reason": "旧100反復一括を勝者2SCへ明示。100はcase/SC数へ加算せず各iterationでDB/CAS後条件を記録。",
+    "contract_id": "ITC-ASY-002",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-ASY-003",
+    "action": "REWRITE",
+    "reason": "旧3caseで全同一assertionを用いていた。PROCESSING確定済とanswer/通知未commitの差を別readbackで判定。",
+    "contract_id": "ITC-ASY-003",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-ASY-004",
+    "action": "REWRITE",
+    "reason": "旧3caseで全同一assertionを用いていた。PROCESSING確定済とanswer/通知未commitの差を別readbackで判定。",
+    "contract_id": "ITC-ASY-004",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-ASY-005",
+    "action": "REWRITE",
+    "reason": "旧3caseで全同一assertionを用いていた。PROCESSING確定済とanswer/通知未commitの差を別readbackで判定。",
+    "contract_id": "ITC-ASY-005",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-ASY-006",
+    "action": "REWRITE",
+    "reason": "旧caseは正常完了answer1と最終DLQを混在。D INSERTだけ未commitでcrashするとERROR確定扱いにできない。",
+    "contract_id": "ITC-ASY-006",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-ASY-007",
+    "action": "REWRITE",
+    "reason": "旧caseのBroker停止一括を、DB確定済/SENT未確定/HTTP終端/同token復旧へ具体的に結合。",
+    "contract_id": "ITC-ASY-007",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-ASY-008",
+    "action": "REWRITE",
+    "reason": "旧caseの正しい2copy注意を具体receipt/物理transport別証拠と個別承認整理の終了条件へ展開。",
+    "contract_id": "ITC-ASY-008",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-ASY-009",
+    "action": "REWRITE",
+    "reason": "旧2variantを本文/期待code付き2SCへ明示し、保持後の同tokenに推測成功を返す違反を判定。",
+    "contract_id": "ITC-ASY-009",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-MQ-001",
+    "action": "REWRITE",
+    "reason": "旧DLQ1件固定はERROR+D/ACK前crashの2copy契約と矛盾。最終DB可能/不能を2SCへ分離。",
+    "contract_id": "ITC-MQ-001",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-MQ-002",
+    "action": "REWRITE",
+    "reason": "旧mutation文字列を全8入力行へ展開。DLQ送信失敗は新MQ033の所有確認分岐へ分離。",
+    "contract_id": "ITC-MQ-002",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-MQ-003",
+    "action": "REWRITE",
+    "reason": "旧Web変異一覧を3SCへ、pending/correlationの存在とprotocol検査順まで具体化。",
+    "contract_id": "ITC-MQ-003",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-MQ-004",
+    "action": "REWRITE",
+    "reason": "旧DLQ/Expiry混在をDLQ3分岐へ分離。Expiry selectorはOPS012/MQ035へ対応し無差別直積を作らない。",
+    "contract_id": "ITC-MQ-004",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-MQ-005",
+    "action": "REWRITE",
+    "reason": "旧2modeを独立2SCにしproducercommit集合と受信未ACKを区別。log UKの正規列名source_message_idを使用。",
+    "contract_id": "ITC-MQ-005",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-MQ-006",
+    "action": "REWRITE",
+    "reason": "任意先頭byteで特定errorを期待しない。検知可能破損のfixture設計を判断対象として、確定できる保全/非初期化/承認条件を先行仕様化。",
+    "contract_id": "ITC-MQ-006",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-MQ-020",
+    "action": "REWRITE",
+    "reason": "旧3点を3SCへ固定。disk比率とbroker MESSAGE容量を混同せず、HTTP未規定だけ判断待ちに分離。",
+    "contract_id": "ITC-MQ-020",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-MQ-033",
+    "action": "ADD",
+    "reason": "既存MQ031はcommit/ACK不明。rollback呼出attemptだけで普通retryへ戻す誤結線とcontext間state漏れが未検証。",
+    "contract_id": "ITC-MQ-033",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-MQ-034",
+    "action": "ADD",
+    "reason": "Web2秒timeoutだけではbroker TTL5/10と内部無期限を確認できない。異なる寿命責任を独立化。",
+    "contract_id": "ITC-MQ-034",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-MQ-035",
+    "action": "ADD",
+    "reason": "SEC023はrole拒否主体。実管理temporary queueの取得/削除失敗を通常readyへ補完する違反を区別。",
+    "contract_id": "ITC-MQ-035",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-SEC-001",
+    "action": "REWRITE",
+    "reason": "旧入力の4→5/9→10/T±1µsを6SCへ明示し、失敗窓とlocked_untilの異なる比較演算を検証。",
+    "contract_id": "ITC-SEC-001",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-SEC-002",
+    "action": "REWRITE",
+    "reason": "旧最古のmanifest依存を実2sessionの順序/同時刻tieへ入力化。Currentバグ3継続を期待値にしない。",
+    "contract_id": "ITC-SEC-002",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-SEC-003",
+    "action": "REWRITE",
+    "reason": "旧local失効の複合部分はSEC025へ対応。ここは3期限点と非延長条件の独立判定を明示。",
+    "contract_id": "ITC-SEC-003",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-SEC-004",
+    "action": "REWRITE",
+    "reason": "旧全POST一覧を全入力21SCへ展開。SSに全POST必須なのでpath×3CSRF形態を選ぶ根拠あり、任意機能全直積は作らない。",
+    "contract_id": "ITC-SEC-004",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-SEC-005",
+    "action": "REWRITE",
+    "reason": "旧一行の全役割を5SCの実入口/対象scope/観測に分け、ADMIN通知拡張を誤って許す違反を検出。",
+    "contract_id": "ITC-SEC-005",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-SEC-006",
+    "action": "REWRITE",
+    "reason": "旧一括100回を2減員SCと自己保護SCへ明示。actor失効0102と自己競合0105を混同しない。",
+    "contract_id": "ITC-SEC-006",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-SEC-007",
+    "action": "REWRITE",
+    "reason": "旧二ADMIN更新を両入力/先行commit/後条件へ具体化、最新versionへの試験側追従を禁じる。",
+    "contract_id": "ITC-SEC-007",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-SEC-008",
+    "action": "REWRITE",
+    "reason": "旧JSON種別一覧を6SCへ明示。schema純粋parserの全分岐はPTに分担し、ITは実row/chainと非再生成を確認。",
+    "contract_id": "ITC-SEC-008",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-SEC-009",
+    "action": "REWRITE",
+    "reason": "旧条件列挙を5SCへ。token数/完成firstwrite/退役と通常session touchを分離して独立DB後条件で判定。",
+    "contract_id": "ITC-SEC-009",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-SEC-010",
+    "action": "REWRITE",
+    "reason": "旧variant一覧を5SCへ具体化。有限自動回収を保証せず、永続失敗でrow0を必須にしない。",
+    "contract_id": "ITC-SEC-010",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-SEC-011",
+    "action": "REWRITE",
+    "reason": "旧成功コード一覧を初回と同token0200の2SCへ分離し、実IF020束縛/完成印/現在row終端順を明示。",
+    "contract_id": "ITC-SEC-011",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-SEC-012",
+    "action": "REWRITE",
+    "reason": "旧複数攻撃を2SCへ明示。SQL/HTMLの独立入力とDB保持/表示変換、headerとtrusted transportの結合を観測。",
+    "contract_id": "ITC-SEC-012",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-BOUND-001",
+    "action": "REWRITE",
+    "reason": "旧巨大文字列配列を6generator入力行へ明示し、Web/API境界と業務非更新を独立判定。",
+    "contract_id": "ITC-BOUND-001",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-BOUND-002",
+    "action": "REWRITE",
+    "reason": "旧長さ一覧を9SCへ。Login長と作成/resetpolicyを分離し、最後のbyte比較を実認証で確認。",
+    "contract_id": "ITC-BOUND-002",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-SEC-013",
+    "action": "REWRITE",
+    "reason": "旧公開/内部logの存在情報禁止を区別し、3入力のwire/data/DB後条件を全行へ具体化。",
+    "contract_id": "ITC-SEC-013",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-SEC-030",
+    "action": "ADD",
+    "reason": "SEC008はrestart/暗号破損、SEC009はtoken merge。version上限で古いwrapperが新rowを更新/削除するABAを別に判定。",
+    "contract_id": "ITC-SEC-030",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-SEC-031",
+    "action": "ADD",
+    "reason": "SEC025はAPI0102応答のlocal削除。ここは正常に取得済wrapperのsaveが後着する独立adapter保存境界。",
+    "contract_id": "ITC-SEC-031",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-SEC-032",
+    "action": "ADD",
+    "reason": "既存Logout再送では、取得前nowが有効でもUser lock後にexpiryを跨ぐ内部fenceとWeb一般0102保持を検証できない。",
+    "contract_id": "ITC-SEC-032",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-PERF-040",
+    "action": "ADD",
+    "reason": "旧PERFは一般p95中心。password判定doubleを使わない実暗号のCPU/lock競合と0.5～1.0秒目標のreview条件が欠落。",
+    "contract_id": "ITC-PERF-040",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-001",
+    "action": "REWRITE",
+    "reason": "旧record値だけのcaseを実展開入力/byte数/FS/最終認証まで具体化。既存IDは保持し新規追加数へ加算しない。",
+    "contract_id": "ITC-FILE-001",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-002",
+    "action": "REWRITE",
+    "reason": "旧record値だけのcaseを実展開入力/byte数/FS/最終認証まで具体化。既存IDは保持し新規追加数へ加算しない。",
+    "contract_id": "ITC-FILE-002",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-003",
+    "action": "REWRITE",
+    "reason": "旧record値だけのcaseを実展開入力/byte数/FS/最終認証まで具体化。既存IDは保持し新規追加数へ加算しない。",
+    "contract_id": "ITC-FILE-003",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-004",
+    "action": "REWRITE",
+    "reason": "旧record値だけのcaseを実展開入力/byte数/FS/最終認証まで具体化。既存IDは保持し新規追加数へ加算しない。",
+    "contract_id": "ITC-FILE-004",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-005",
+    "action": "REWRITE",
+    "reason": "旧record値だけのcaseを実展開入力/byte数/FS/最終認証まで具体化。既存IDは保持し新規追加数へ加算しない。",
+    "contract_id": "ITC-FILE-005",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-006",
+    "action": "REWRITE",
+    "reason": "旧record値だけのcaseを実展開入力/byte数/FS/最終認証まで具体化。既存IDは保持し新規追加数へ加算しない。",
+    "contract_id": "ITC-FILE-006",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-010",
+    "action": "REWRITE",
+    "reason": "旧公開前/後の同一assertionを、未公開part清掃と公開済ready保全の異なる後条件へ具体化。collisionは新FILE062へ分離。",
+    "contract_id": "ITC-FILE-010",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-011",
+    "action": "REWRITE",
+    "reason": "旧公開前/後の同一assertionを、未公開part清掃と公開済ready保全の異なる後条件へ具体化。collisionは新FILE062へ分離。",
+    "contract_id": "ITC-FILE-011",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-012",
+    "action": "REWRITE",
+    "reason": "旧公開前/後の同一assertionを、未公開part清掃と公開済ready保全の異なる後条件へ具体化。collisionは新FILE062へ分離。",
+    "contract_id": "ITC-FILE-012",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-020",
+    "action": "REWRITE",
+    "reason": "旧全件同じ拒否期待を、decode前metadata/属性前open/hash後/sequence検査の到達点へ分解。必要な検証readまで禁止する誤期待を修正。",
+    "contract_id": "ITC-FILE-020",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-021",
+    "action": "REWRITE",
+    "reason": "旧全件同じ拒否期待を、decode前metadata/属性前open/hash後/sequence検査の到達点へ分解。必要な検証readまで禁止する誤期待を修正。",
+    "contract_id": "ITC-FILE-021",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-022",
+    "action": "REWRITE",
+    "reason": "旧全件同じ拒否期待を、decode前metadata/属性前open/hash後/sequence検査の到達点へ分解。必要な検証readまで禁止する誤期待を修正。",
+    "contract_id": "ITC-FILE-022",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-023",
+    "action": "REWRITE",
+    "reason": "旧全件同じ拒否期待を、decode前metadata/属性前open/hash後/sequence検査の到達点へ分解。必要な検証readまで禁止する誤期待を修正。",
+    "contract_id": "ITC-FILE-023",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-024",
+    "action": "REWRITE",
+    "reason": "旧全件同じ拒否期待を、decode前metadata/属性前open/hash後/sequence検査の到達点へ分解。必要な検証readまで禁止する誤期待を修正。",
+    "contract_id": "ITC-FILE-024",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-025",
+    "action": "REWRITE",
+    "reason": "旧全件同じ拒否期待を、decode前metadata/属性前open/hash後/sequence検査の到達点へ分解。必要な検証readまで禁止する誤期待を修正。",
+    "contract_id": "ITC-FILE-025",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-027",
+    "action": "REWRITE",
+    "reason": "旧全件同じ拒否期待を、decode前metadata/属性前open/hash後/sequence検査の到達点へ分解。必要な検証readまで禁止する誤期待を修正。",
+    "contract_id": "ITC-FILE-027",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-028",
+    "action": "REWRITE",
+    "reason": "旧全件同じ拒否期待を、decode前metadata/属性前open/hash後/sequence検査の到達点へ分解。必要な検証readまで禁止する誤期待を修正。",
+    "contract_id": "ITC-FILE-028",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-029",
+    "action": "REWRITE",
+    "reason": "旧全件同じ拒否期待を、decode前metadata/属性前open/hash後/sequence検査の到達点へ分解。必要な検証readまで禁止する誤期待を修正。",
+    "contract_id": "ITC-FILE-029",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-030",
+    "action": "REWRITE",
+    "reason": "旧全件同じ拒否期待を、decode前metadata/属性前open/hash後/sequence検査の到達点へ分解。必要な検証readまで禁止する誤期待を修正。",
+    "contract_id": "ITC-FILE-030",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-031",
+    "action": "REWRITE",
+    "reason": "旧全件同じ拒否期待を、decode前metadata/属性前open/hash後/sequence検査の到達点へ分解。必要な検証readまで禁止する誤期待を修正。",
+    "contract_id": "ITC-FILE-031",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-026",
+    "action": "REWRITE",
+    "reason": "旧caseはroot symlinkを全てHTTP503としたがstartupで不合格なら通常requestへ到達しない。初期gateと保持後差替えFILE060を分離。",
+    "contract_id": "ITC-FILE-026",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-040",
+    "action": "REWRITE",
+    "reason": "旧5variantを5SCとして追跡。FILE050/051/TX051の単独契約を同じ実service経路で通し責務の結線を確認。",
+    "contract_id": "ITC-FILE-040",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-RANGE-020",
+    "action": "REWRITE",
+    "reason": "旧複合caseの4異なる終端を4SCへ明示し、未確定拒否statusだけISS-STREAMへ分離。",
+    "contract_id": "ITC-RANGE-020",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-060",
+    "action": "ADD",
+    "reason": "旧symlink拒否はopen前。open済capability後に名前を差替えるTOCTOUで別fileを読まない契約を独立判定。",
+    "contract_id": "ITC-FILE-060",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-061",
+    "action": "ADD",
+    "reason": "root symlinkとは別のプラットフォーム前提。Java path fallback/権限緩和でreadyにする違反を判定。",
+    "contract_id": "ITC-FILE-061",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-062",
+    "action": "ADD",
+    "reason": "旧write/forceケースのcollisionを独立化。CREATE_NEW part競合とpublish ready競合で保全対象が異なる。",
+    "contract_id": "ITC-FILE-062",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-063",
+    "action": "ADD",
+    "reason": "既存IFの代表Mediaだけでは7組合せ/attachment HTTP変換と未定義署名追加の誤りを検出できない。",
+    "contract_id": "ITC-FILE-063",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-FILE-064",
+    "action": "ADD",
+    "reason": "path文字列拒否/ハッシュ不一致とは異なるOS資格・属性責務。実library存在だけでwrite権限付与していないことを確認。",
+    "contract_id": "ITC-FILE-064",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-001",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-001",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-002",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-002",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-003",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-003",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-004",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-004",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-005",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-005",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-006",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-006",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-007",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-007",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-008",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-008",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-009",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-009",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-010",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-010",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-011",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-011",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-012",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-012",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-013",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-013",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-014",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-014",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-015",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-015",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-016",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-016",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-017",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-017",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-018",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-018",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-019",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-019",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-020",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-020",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-021",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-021",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-022",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-022",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-023",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-023",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-024",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-024",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-025",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-025",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-026",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-026",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-027",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-027",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-028",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-028",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-029",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-029",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-030",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-030",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-031",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-031",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-032",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-032",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-IF-033",
+    "action": "REWRITE",
+    "reason": "旧caseに暗黙のUSER/ADMIN反復・未選択master入力・共通証跡しかなかった。役割SCと独立fixture選択/field oracle/DB非更新・確定条件を明示。",
+    "contract_id": "ITC-IF-033",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-HTTP-010",
+    "action": "ADD",
+    "reason": "旧IF005/DATA001は成功検索/ページ結果中心。HTTP field多値/未知/trim前control/数値文法のMQ前境界が欠落。",
+    "contract_id": "ITC-HTTP-010",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-HTTP-011",
+    "action": "ADD",
+    "reason": "IF017の日時未指定成功だけではHTTP日時解釈とwire millisecond一致を検証できない。独立表による入力境界を追加。",
+    "contract_id": "ITC-HTTP-011",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-HTTP-012",
+    "action": "ADD",
+    "reason": "一般paged0件は200空一覧、Route/File階層0件は404という別外部契約。IF006/007正常だけでは検出不可。",
+    "contract_id": "ITC-HTTP-012",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-HTTP-013",
+    "action": "ADD",
+    "reason": "wire/DB一致だけではSCNのgroup表示/anchor変更時の不要業務要求とModel秘密混入を検出できない。",
+    "contract_id": "ITC-HTTP-013",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-HTTP-014",
+    "action": "ADD",
+    "reason": "HTTP001はrouter真正性主体。表示snapshot取得後にDB/sessionが失われても安全な503表示だけで終端する責務を追加。",
+    "contract_id": "ITC-HTTP-014",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-LOG-001",
+    "action": "REWRITE",
+    "reason": "旧caseの観点だけを、実HTTP3件・停止点3種・event集合とDB UKの全比較へ具体化。",
+    "contract_id": "ITC-LOG-001",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-LOG-002",
+    "action": "REWRITE",
+    "reason": "DB失敗とlocal出力失敗を混同せず、それぞれHTTP確定後の責務と非再実行を検証。",
+    "contract_id": "ITC-LOG-002",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-LOG-003",
+    "action": "REWRITE",
+    "reason": "char数/transport/Caddy圧縮後のbyteをoracleへ混ぜていた危険を独立UTF8と既知payloadに分離。",
+    "contract_id": "ITC-LOG-003",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-LOG-004",
+    "action": "REWRITE",
+    "reason": "抽象alert一覧を実値直前/到達・実時間保持・close条件と非受付後条件へ展開。",
+    "contract_id": "ITC-LOG-004",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-LOG-005",
+    "action": "REWRITE",
+    "reason": "mode文字列だけでなく実Unit/scrape/HTTP/業務logとredactionを同artifactで照合する。",
+    "contract_id": "ITC-LOG-005",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-LOG-006",
+    "action": "REWRITE",
+    "reason": "秘密分類ごとの実入力→公開面全走査とops読取権限を個別assertionへ具体化。",
+    "contract_id": "ITC-LOG-006",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-LOG-010",
+    "action": "REWRITE",
+    "reason": "旧matrix26行を明示SCと個別証跡に展開、代替sensor注入だけの受入を防ぐ。",
+    "contract_id": "ITC-LOG-010",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-001",
+    "action": "REWRITE",
+    "reason": "旧正常順序を真正Unit/同run/本人socket/親資源帰還まで一本のtimelineで判定。",
+    "contract_id": "ITC-OPS-001",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-002",
+    "action": "REWRITE",
+    "reason": "値manifestだけをbackup成功にせず実4file/二handle/子全終端/7世代を結合。",
+    "contract_id": "ITC-OPS-002",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-003",
+    "action": "REWRITE",
+    "reason": "旧失敗の一括観点を現物生成各確定点に分け、実行済み失敗と未実行UNKNOWNを区別。",
+    "contract_id": "ITC-OPS-003",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-004",
+    "action": "REWRITE",
+    "reason": "旧6step概要を各保存条件と共有step内kindの順序、実観測する候補IDへ展開。",
+    "contract_id": "ITC-OPS-004",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-005",
+    "action": "REWRITE",
+    "reason": "各確定点のDB永続状態を再開の正本として重複集計とcutoff拡張を検出。",
+    "contract_id": "ITC-OPS-005",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-006",
+    "action": "REWRITE",
+    "reason": "生成file4800byte制約を清掃へ誤適用せず、旧inode/mtime安全契約とroot異常を分離。",
+    "contract_id": "ITC-OPS-006",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-007",
+    "action": "REWRITE",
+    "reason": "30/60秒とworker/DB/JMS/鍵の終端順、毒電文restart抑止を実Unitで分離。",
+    "contract_id": "ITC-OPS-007",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-008",
+    "action": "REWRITE",
+    "reason": "設定表だけで合格にせず実入口の外部公開前gateを一項目変造で判定。",
+    "contract_id": "ITC-OPS-008",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-009",
+    "action": "REWRITE",
+    "reason": "source0600とsystemd private ACL0440を混同しない独立inode/主体正負matrix。",
+    "contract_id": "ITC-OPS-009",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-010",
+    "action": "REWRITE",
+    "reason": "外部負接続とloopback管理非proxyを実観測し、TLS検証disable無しの公開smokeへ具体化。",
+    "contract_id": "ITC-OPS-010",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-011",
+    "action": "REWRITE",
+    "reason": "role名の列挙を具体operationと正常対照のある実認可matrixへ展開。",
+    "contract_id": "ITC-OPS-011",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-012",
+    "action": "REWRITE",
+    "reason": "target/before/after監査と実queue残件、warningとcritical停止を区別する。",
+    "contract_id": "ITC-OPS-012",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-013",
+    "action": "REWRITE",
+    "reason": "未取得と取得後未返却、未start管理server、送達不明を区別し後続能力を生成しない。",
+    "contract_id": "ITC-OPS-013",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-014",
+    "action": "REWRITE",
+    "reason": "bootstrap専用identity/3credentialを維持し、通常UserCREATEやpermitへの権限拡張を検出する。",
+    "contract_id": "ITC-OPS-014",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-015",
+    "action": "REWRITE",
+    "reason": "本番Go判断とITのschema/reader契約を分け、現在sourceに旧schema番号を推測固定しない。",
+    "contract_id": "ITC-OPS-015",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-016",
+    "action": "REWRITE",
+    "reason": "数値countだけでなく全filebyte/hashとIDmapping/孤児/順序/ETL原子性を独立manifestで判定する。",
+    "contract_id": "ITC-OPS-016",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-RESTORE-001",
+    "action": "REWRITE",
+    "reason": "復元手順を承認point/全後条件/DBとMQの過去時点ずれとRPO未決部分へ分解する。",
+    "contract_id": "ITC-RESTORE-001",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-CONFIG-001",
+    "action": "REWRITE",
+    "reason": "旧config観点を根拠table全data行→個別観測を持つsection単位SCへ展開。未解釈行は判断待ちのまま。",
+    "contract_id": "ITC-CONFIG-001",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-PERF-001",
+    "action": "REWRITE",
+    "reason": "旧性能観点を固有10session・周期mix・計測窓・独立統計・対象除外根拠まで具体化。",
+    "contract_id": "ITC-PERF-001",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-PERF-002",
+    "action": "REWRITE",
+    "reason": "並行数/route比率/最大recordとbyteを固定し、転送全長と同期開始SLAを分離。",
+    "contract_id": "ITC-PERF-002",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-PERF-003",
+    "action": "REWRITE",
+    "reason": "RSS/割当/プランナhintを二重計上せず全構成の実効上限とピークを同時間軸で照合。",
+    "contract_id": "ITC-PERF-003",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-PERF-041",
+    "action": "ADD",
+    "reason": "通常10名ではdefault12と上限20の入場制御、timeout/送信失敗後のpermit漏れを観測できない。",
+    "contract_id": "ITC-PERF-041",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-PERF-042",
+    "action": "ADD",
+    "reason": "selective1.5秒と非選択query/HTTP2.5秒の責務を分け、worst件数・page端でpool競合を測定。",
+    "contract_id": "ITC-PERF-042",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-PERF-043",
+    "action": "ADD",
+    "reason": "既存停止復帰代表では大量既存Inboxと送信残件のclaim/pool占有・増幅を独立判定できない。",
+    "contract_id": "ITC-PERF-043",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-PERF-044",
+    "action": "ADD",
+    "reason": "初期接続と稼働中reconnectの回数上限を混同せず、復帰直後集中と遅着相関/permitを測定。",
+    "contract_id": "ITC-PERF-044",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-PERF-045",
+    "action": "ADD",
+    "reason": "file48MB代表だけでは最大inline snapshotの暗号/圧縮/DB保存増幅と鍵借用を検証できない。",
+    "contract_id": "ITC-PERF-045",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-040",
+    "action": "ADD",
+    "reason": "OPS027の一般保護では匿名LoginとownerLogoutの実credential/DB参照/削除code分岐を確認していない。",
+    "contract_id": "ITC-OPS-040",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-041",
+    "action": "ADD",
+    "reason": "旧28routeという観点だけの参照を、全26query/Userrouteの許可code/実grant/同TXdeleteと証拠へ具体化。",
+    "contract_id": "ITC-OPS-041",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-042",
+    "action": "ADD",
+    "reason": "旧仕様がQSB/NTC/QDLを一律保護していた誤りを是正。§12.9承認の正しいproofなら削除、欠落なら保護という別責務を判定。",
+    "contract_id": "ITC-OPS-042",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-043",
+    "action": "ADD",
+    "reason": "正常26/3routeだけでは正当な現状態変化と壊れたproofを取り違える。削除/保護を独立ID/DB状態で比較。",
+    "contract_id": "ITC-OPS-043",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-044",
+    "action": "ADD",
+    "reason": "旧OPS005の一般chunkでは秘密検査のtrue後SQLaborted・DELETEcheckpoint間の不整合を検出できない。",
+    "contract_id": "ITC-OPS-044",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-045",
+    "action": "ADD",
+    "reason": "旧resume grammarだけではanchor/begin/active/doneの異なる確定点と副作用開始禁止を検出できない。",
+    "contract_id": "ITC-OPS-045",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-046",
+    "action": "ADD",
+    "reason": "configdriftだけでは非任意実根拠・permit→ISSUED二段公開・失敗abort/保全とRoot認可が観測できない。",
+    "contract_id": "ITC-OPS-046",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-047",
+    "action": "ADD",
+    "reason": "世代存在をready/終了と誤認する独立不具合を実kernel世代と管理socketの結合で検出する。",
+    "contract_id": "ITC-OPS-047",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-048",
+    "action": "ADD",
+    "reason": "M/AとDBlockの所有を同じboolで扱うと自己deadlock/子生存中解放/別run誤続行を検出できない。",
+    "contract_id": "ITC-OPS-048",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-049",
+    "action": "ADD",
+    "reason": "鍵単体復号PTでは実systemd配布/借用寿命/restore時参照・別purpose拒否を観測できない。",
+    "contract_id": "ITC-OPS-049",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-050",
+    "action": "ADD",
+    "reason": "一般historycleanupではdurable原本GCの段階確定と参照復活時保全を検証できない。",
+    "contract_id": "ITC-OPS-050",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-051",
+    "action": "ADD",
+    "reason": "Morning正常起動だけでは05:00制御とpackage失敗/boot安全性/外部watchの責務を確認できない。",
+    "contract_id": "ITC-OPS-051",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-TX-054",
+    "action": "ADD",
+    "reason": "claim重複0の通常並行試験では期限同値の奪取と旧ownerの遅いmarkによる状態上書きを区別できない。",
+    "contract_id": "ITC-TX-054",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-052",
+    "action": "ADD",
+    "reason": "同run Backup再用だけでは異runの元cutoff/全列/原本、現在fresh selector0を同時に束縛できない。",
+    "contract_id": "ITC-OPS-052",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-053",
+    "action": "ADD",
+    "reason": "backup成功hashだけでは.env suffixでの権限誤設定とruntime秘密の混入、旧成功catalog改変を検出できない。",
+    "contract_id": "ITC-OPS-053",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-054",
+    "action": "ADD",
+    "reason": "jarhash正常だけではselectorの許可chainとsandbox祖先RO/実mutationRWの異なる責務を検出できない。",
+    "contract_id": "ITC-OPS-054",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-055",
+    "action": "ADD",
+    "reason": "旧停止143必須だけでは正しい初回coldを誤拒否し、空判定後の旧row遅着を見逃す。",
+    "contract_id": "ITC-OPS-055",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-056",
+    "action": "ADD",
+    "reason": "起動時drift拒否だけでは配備側signature→全BOM→approval/currentの間で混在し旧permitへfallbackする欠陥を検出できない。",
+    "contract_id": "ITC-OPS-056",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-DB-004",
+    "action": "ADD",
+    "reason": "mutation個別結果だけではmigrationは通るがservice roleが異schema/object/列/indexへ接続する不具合とPUBLIC漏れを検出できない。",
+    "contract_id": "ITC-DB-004",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-OPS-057",
+    "action": "ADD",
+    "reason": "既存UNKNOWNと正常完了では、安全性拒否30を不用意に成功/UNKNOWNへ混ぜること、未実行7stepを補完して後段を起動する欠陥を区別できない。",
+    "contract_id": "ITC-OPS-057",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-PERF-046",
+    "action": "ADD",
+    "reason": "平常時RSS上限とheap90%alertだけでは実OOM/MemoryMax時のExitOnOOM・PID1再起動・dump非生成と確定済DB/MQの保全を検出できない。",
+    "contract_id": "ITC-PERF-046",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
+  },
+  {
+    "test_id": "IT-LOG-022",
+    "action": "ADD",
+    "reason": "既存REQUEST再送・Log一覧だけではQA051の旧action対応/既存ログ保全/操作相関/追加技術行の独立期待と表示差分拒否を検証できない。",
+    "contract_id": "ITC-LOG-022",
+    "supersedes": [],
+    "epoch": "CONTINUATION_20261102"
   }
 ]

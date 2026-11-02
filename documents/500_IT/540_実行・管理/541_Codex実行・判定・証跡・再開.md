@@ -15,7 +15,7 @@
 
 `run-template.json`をGit外の新規private0600領域へ複製し、run UUID/人が読めるrun名・対象source・環境digest・spec commitを記入する。公開版は非秘密投影で作る。scope承認ID、復旧点、操作対象、外部依存の所有、全job一覧を記録する。秘密値をenv/argv/URL/logへ渡さない。
 
-工具T-*は513の仕様に従って別途実装・reviewし、最終入口を `tool-manifest` の実path/sha/argv/cwd/環境allowlist/作用/timeout/cleanupへ固定する。未作成commandを創作して実行しない。検証SQL packもSQL本文/hash/param schema/期待列/権限をreviewする。既存018 collectorはPT専用であり自動転用しない。
+工具T-*は513/514/515の仕様（515の具体化を優先）に従って別途実装・reviewし、最終入口を `tool-manifest` の実path/sha/argv/cwd/環境allowlist/作用/timeout/cleanupへ固定する。未作成commandを創作して実行しない。検証SQL packもSQL本文/hash/param schema/期待列/権限をreviewする。既存018 collectorはPT専用であり自動転用しない。
 
 環境準備は512のE-REAL/E-OPS/E-RESTOREとC-ISOLATE。provisioning/migration/credential配布は実行依頼の許可範囲と既存HOLDを確認した準備工程でのみ行う。準備完了時に全構成/設定/権限/DB/Queue/file・restore点の前後snapshotを確定し、ケースのinputと結合する。最終release artifactがないなら実行準備未了。
 
@@ -53,3 +53,5 @@ collection途中もstageごとにforce/renameで確定し、元fileを上書き�
 | 修正後の再試験が必要 | 原失敗IDへ紐づく新attempt。必要変更/回帰選択を542で確定 |
 
 停止要求は既定のgraceful/正規所有経路だけ。SSのUNKNOWN保持や承認をshell kill/force resetで置換しない。長い運転中も60秒以内に短い進捗/残り不確定を報告できる非blocking job/collectorを準備する。
+
+QA051については7147c428の承認済み正本を優先し、旧PGPT報告の未回答を現在状態へ転用しない。比較実装/原CHR-L01・全PGPT/他HOLDの完了を、承認やIT仕様作成で代替しない。

@@ -1,0 +1,117 @@
+{
+  "source_commit": "d3edd2c50baeac5bae8d9522138e5394741521cf",
+  "source_files": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-new.html",
+      "source": "d3edd2c50baeac5bae8d9522138e5394741521cf",
+      "sha256": "97fd0f78dbfbe4538ca36e5ddda507ed55d762c040d12b09d544fc568b0dbedd",
+      "use": "HTTP入力name/実selectorの存在確認のみ。期待業務結果/合否はSS。最終artifactで再照合。"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-detail.html",
+      "source": "d3edd2c50baeac5bae8d9522138e5394741521cf",
+      "sha256": "c74fe2ced5c6492369f243bf9930e52e88fef40b18492195a1ac01a9b05f8fba",
+      "use": "HTTP入力name/実selectorの存在確認のみ。期待業務結果/合否はSS。最終artifactで再照合。"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/questions/new.html",
+      "source": "d3edd2c50baeac5bae8d9522138e5394741521cf",
+      "sha256": "199d2b490c33bc708d6c459cf4681d2a4307eaf25f18a8fcd3617e1d94125cb4",
+      "use": "HTTP入力name/実selectorの存在確認のみ。期待業務結果/合否はSS。最終artifactで再照合。"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/questions/detail.html",
+      "source": "d3edd2c50baeac5bae8d9522138e5394741521cf",
+      "sha256": "106063b219b894417619b35cd8a120cffc4f4aa21432f59bfcf6b54f7595e9f2",
+      "use": "HTTP入力name/実selectorの存在確認のみ。期待業務結果/合否はSS。最終artifactで再照合。"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/notifications/detail.html",
+      "source": "d3edd2c50baeac5bae8d9522138e5394741521cf",
+      "sha256": "10e4f709e65f4da0ee7f6afe05c13b3cc21cb3a0ad497a52ba1a2a2408824701",
+      "use": "HTTP入力name/実selectorの存在確認のみ。期待業務結果/合否はSS。最終artifactで再照合。"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-list.html",
+      "source": "d3edd2c50baeac5bae8d9522138e5394741521cf",
+      "sha256": "75ff8f6521d9e48c852264d839e17f9d2224f17ad2d486b37750cdae612e7655",
+      "use": "query入力nameの存在確認のみ、期待値はSS/UI。"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/questions/list.html",
+      "source": "d3edd2c50baeac5bae8d9522138e5394741521cf",
+      "sha256": "d164e7957f53807c40d46d3247c1354202607f905eedd82f7971cd2a1d483af2",
+      "use": "query入力nameの存在確認のみ、期待値はSS/UI。"
+    }
+  ],
+  "semantic_to_http": {
+    "token": "operation_token",
+    "version": "expected_version",
+    "password_confirm": "password_confirmation"
+  },
+  "routes": {
+    "UCR": {
+      "entry": "POST /admin/users/new",
+      "fields": [
+        "username",
+        "password",
+        "password_confirmation",
+        "role",
+        "enabled",
+        "operation_token",
+        "_csrf"
+      ]
+    },
+    "UST_URL_UPW_ULK": {
+      "entry": "POST /admin/users/201",
+      "fields": [
+        "operation",
+        "id",
+        "expected_version",
+        "operation_token",
+        "confirm",
+        "enabled|role|password/password_confirmation",
+        "_csrf"
+      ]
+    },
+    "QSB": {
+      "entry": "POST /questions/new",
+      "fields": [
+        "question",
+        "operation_token",
+        "_csrf"
+      ]
+    },
+    "NTC": {
+      "entry": "POST /notifications/701",
+      "fields": [
+        "operation=CANCEL",
+        "id=701",
+        "operation_token",
+        "confirm=true",
+        "_csrf"
+      ]
+    },
+    "QDL": {
+      "entry": "POST /questions/501",
+      "fields": [
+        "operation=DELETE",
+        "id=501",
+        "operation_token",
+        "confirm=true",
+        "_csrf"
+      ]
+    }
+  },
+  "csrf": "hidden parameterNameは実GETの_csrf.parameterName/tokenを読み、同origin/sessionで送る。現在既定_csrfを最終Security設定と照合、欠落を独自発行しない。",
+  "state": "SOURCE_INPUT_BINDINGS_NOT_EXPECTED_ORACLE",
+  "final_reconciliation": "DEP-REBASE。field名が変わればSS意味/閉formとの整合をレビューしbinding更新、未知名を通すfallback0。",
+  "query_rules": {
+    "UserSearch": "username/role/state/page。usernamePrefixやpageSizeをHTTPに送らない。",
+    "LogSearch": "q/log_type/action/path/level/from/to/page、dateというfieldは無い。",
+    "Scenario": "GET /search、q/game/speaker/chapter/entry_type/voice/page。",
+    "Notification_Question": "pageSizeはwire固定値でHTTP入力ではない。",
+    "media": "Rangeはheader、logicalID/type/dispositionはpathから導出、架空Disposition queryやvideoId queryを送らない。",
+    "category_section": "pathsegmentを一回UTF8-percentencode、同名queryを付けない。"
+  }
+}

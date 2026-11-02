@@ -1,0 +1,160 @@
+{
+  "profile": "F-IF-v3 / E-REAL。各SC専有clone、SS331最終migration/SS343config、正規資格/暗号/認可を維持。fixture manifest/hash未作成はPREP-DATA。",
+  "users": {
+    "U1": [
+      1,
+      "it_user1",
+      "USER",
+      "ACTIVE",
+      0
+    ],
+    "U2": [
+      2,
+      "it_user2",
+      "USER",
+      "ACTIVE",
+      0
+    ],
+    "U3": [
+      3,
+      "it_user3",
+      "USER",
+      "ACTIVE",
+      0
+    ],
+    "A1": [
+      11,
+      "it_admin1",
+      "ADMIN",
+      "ACTIVE",
+      0
+    ],
+    "A2": [
+      12,
+      "it_admin2",
+      "ADMIN",
+      "ACTIVE",
+      0
+    ],
+    "TUSER": [
+      201,
+      "it_target",
+      "USER",
+      "ACTIVE",
+      0
+    ]
+  },
+  "password": "ItOnly-20261101!",
+  "new_user_sequence_next": 1001,
+  "created_UTC": "2026-11-01T15:00:00.000000Z",
+  "games": [
+    [
+      1,
+      "NUKITASHI1",
+      "NUKITASHI",
+      1
+    ],
+    [
+      2,
+      "NUKITASHI2",
+      "NUKITASHI2",
+      2
+    ]
+  ],
+  "SF1": {
+    "id": 101,
+    "game": "NUKITASHI1",
+    "prefix": "01",
+    "route": "共通ルート",
+    "chapter": "IT章",
+    "section": "IT節",
+    "display_title": "IT章",
+    "display_path": "scenario/IT/01.scn",
+    "previous": null,
+    "next": null
+  },
+  "entries": [
+    {
+      "id": 1001,
+      "entry_index": 1,
+      "line": 1,
+      "type": "dialogue",
+      "speaker_id": 301,
+      "speaker_name": "IT話者",
+      "speaker_label": "別保持名",
+      "body": "IT本文一",
+      "voice_ids": [
+        401,
+        402
+      ]
+    },
+    {
+      "id": 1002,
+      "entry_index": 2,
+      "line": 2,
+      "type": "narration",
+      "speaker_id": null,
+      "body": "IT本文二",
+      "voice_ids": []
+    }
+  ],
+  "audio": {
+    "401": {
+      "display_path": "scenario/IT/a1.ogg",
+      "MIME": "audio/ogg",
+      "size": 2097169,
+      "pattern": "byte[i]=i%251",
+      "link_order": 1
+    },
+    "402": {
+      "display_path": "scenario/IT/a2.ogg",
+      "MIME": "audio/ogg",
+      "size": 2097169,
+      "pattern": "byte[i]=(i+1)%251",
+      "link_order": 2
+    }
+  },
+  "question_fixture": {
+    "Q1": {
+      "id": 501,
+      "owner": "U1",
+      "receipt": "01ARZ3NDEKTSV4RRFFQ69G5FAV",
+      "body": "IT質問一",
+      "job_id": 601,
+      "notification_id": 701
+    },
+    "Q2": {
+      "id": 502,
+      "owner": "U2",
+      "receipt": "01ARZ3NDEKTSV4RRFFQ69G5FAW",
+      "body": "IT質問二",
+      "job_id": 602,
+      "notification_id": 702
+    },
+    "completed": {
+      "provider": "STUB",
+      "answer": "",
+      "is_deleted": false,
+      "answered_UTC": "2026-11-01T15:00:01.123456Z",
+      "received_UTC": "2026-11-01T15:00:00.123456Z"
+    }
+  },
+  "full_master": "SS343/354正本copy:59627files/19240707190bytes/video20/music129。Animation20ID/順序はUI223§6の固定表。",
+  "music_selector": {
+    "source": "署名済み最終import manifestの129 track全行（各fieldとhashを含む）",
+    "category": "曲",
+    "section": "ゲーム",
+    "track_selector": "category/section一致行のdisplay_order昇順→logical_id Unicode codepoint昇順の先頭、0行なら準備不備として実行しない",
+    "category_oracle": "manifestをcategoryでgroupし曲→BGM→残り名称Unicode順。各countはmanifest行の整数和。",
+    "section_oracle": "category曲のみをsectionでgroupしゲーム→アニメ→キャラクターソング→残り名称順。",
+    "track_oracle": "category曲/sectionゲームをstored pair_key/role M-I-N/display_orderとUI223の既定projectionで事前表へ固定。runtime filesystem再走査/対象SQLを使わない。",
+    "freeze": "選択実ID/全row/件数/期待順序表をfixture manifest new-onlyに記録しdriver開始後変更禁止。無人selector/collectorをT-FIXTURE-v3として未実装仕様化。"
+  },
+  "variant_initialization": {
+    "IF019": "it_new未登録/nextUser1001。作成期待行のみ、既存F-IF User群不変。",
+    "IF025": "Q1は期待行template。Q/Job/Notification/Answer/WOutbox/locatorを空、sequence501/601/701。正規QSB1回で生成、owner当SCactor、workerCAS前で受付証拠凍結。",
+    "IF026_027_028": "Q1実seed・owner当SCactor/notification701。状態は個別SCvariant、worker配送は専有barrier。",
+    "IF029_030_031": "Q1実seed ownerU1、ADMINは全scope、USERは本人。COMPLETEDはanswer空文字1と同完了時刻、削除triple初期false。",
+    "tokens": "T0は独立DB/HTML事前照合した実GET発行UUID。用途/target/version/actorと公開hidden値をprivate binding manifestへ保存、fixture固定UUIDへHTTPhiddenを上書きしない。改変負例のみ指定literalを使う。"
+  }
+}

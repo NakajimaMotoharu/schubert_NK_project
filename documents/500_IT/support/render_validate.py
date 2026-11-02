@@ -15,6 +15,8 @@ def write(n,s):
  p=OUT/n;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(s.strip()+'\n')
 def esc(x):return str(x).replace('&','&amp;').replace('<','&lt;').replace('>','&gt;').replace('[','&#91;').replace(']','&#93;').replace('|','\\|').replace('\n','<br>')
 def sha(b):return hashlib.sha256(b).hexdigest()
+import audit_v4
+audit_v4.prepare(ROOT,OUT)
 pack=read('cases.json');cases=pack['cases'];conditions=read('conditions.json');trace=read('assertion-trace.json');bindings=read('bindings.json');issues=read('issues.json');layouts=read('layouts.json');baseline=read('baseline.json')
 caseidx={c['id']:c for c in cases};condidx={c['id']:c for c in conditions};bindidx={b['id']:b for b in bindings};issueidx={i['id']:i for i in issues}
 errors=[]
@@ -136,6 +138,9 @@ write('550_レビュー/551_仕様書自己レビュー結果.md','\n'.join(revi
 # v2は同一JSON編集正本から意味監査/シナリオ本文を派生生成。
 from audit_v2 import render as render_v2
 render_v2(ROOT, OUT, report, errors)
+from audit_v3 import render as render_v3
+render_v3(ROOT, OUT, report, errors)
+audit_v4.render(ROOT, OUT, report, errors)
 # 派生文書のlocal link/明示anchorも検査（snippet原文のMarkdownはescape済み）。
 from urllib.parse import unquote
 link_errors=[]

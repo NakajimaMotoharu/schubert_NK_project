@@ -13,7 +13,7 @@
 5. `it_user1/it_user2`はUSER ACTIVE、`it_admin1/it_admin2`はADMIN ACTIVE、P-BASEはUSER8名+ADMIN2名（計10固有principal）。passwordは試験専用`ItOnly-20261101!`、実Loginでcontext/CSRF/cookieを取得する。secretはprivate artifactへだけ保存し公開索引にはhash/aliasを置く。SSの最大2sessionを超える並列Loginを同じuserで代用しない。
 6. UCRはusernameをSC固有の`it_<case suffix>_<SC番号>`、role USER、status ACTIVE、passwordを上記試験値とする。field名/target/version/tokenのwire表はUI235/236・SS323の正規layoutを使う。故障前に別のUCRを成功させ、当SCで使用する入力とは別名で入口接続の検査をする。成功を対象SCの結果へ数えない。
 7. QSBはquestion本文`IT-AUDIT <SC-ID> 質問`、owner=実Login user1、他の必須fieldはUI236の確定表からfixture manifestへ展開する。Q0/job/notification/answerのPKと状態は、SCが求める到達点まで実受付・実worker/CASを通して構築する。意図的な不整合fixture以外で直接DMLだけを使い、実部品の前段を検証した扱いにしない。
-8. SCN201/10000は独立作成した順序表 `(entry_order,audio_order,logical_ID,全wire field)` 201/10000行、各record4800byte。元snapshotのmetadata8論理fieldとrecord全byte/hashを固定する。変更fixtureは8field中の指定1field又は201行目の1byteのみ差分を保存する。最終SS333/SS323の8field名称をmanifestへ展開するまでPREP-DATAは解除しない。正本masterを使う場合はそのmanifest/hashと選択集合を固定し、実装の検索結果をexpected集合として採用しない。
+8. SCN201/10000は独立作成した順序表 `(entry_order,audio_order,logical_ID,全wire field)` 201/10000行、各record4800byte。元snapshotのmetadata8論理fieldとrecord全byte/hashを固定する。変更fixtureは8field中の指定1field又は201行目の1byteのみ差分を保存する。8field名と固定入力は515で具体化済み。実manifest生成・review完了までPREP-DATAは解除しない。正本masterを使う場合はそのmanifest/hashと選択集合を固定し、実装の検索結果をexpected集合として採用しない。
 9. 通常Rangeはtotal2097169、独立pattern `byte[i]=i%251`、大きいMediaは48000001byte。実Assetで論理descriptor/hash/size/権限を整合させる。download表示名256ASCIIと実segment `asset.bin` は別field。正規Media type/実URLはIF009/012/016のregistryからfixtureへ解決し、未解決なら開始不可。
 10. Log fixtureは固有keywordで隔離し、INFO/WARN/ERROR/DEBUG/TRACEの5行。Login/setupのログをtotalへ混入させない。診断のみは別keyword。logged_at/idの固定表で順序とcount/listを独立照合する。
 11. Outbox/Inbox fixtureは実DDLを使う。due/lease/created/completed/expiry、暗号keyVersion、AAD owner/layout/sourceをすべてmanifestへ保存する。暗号fixture生成・復号検算は独立JCE等で仕様から作り、対象のsnapshot encoder/decoderで両側を生成しない。破損tag/旧raw/不一致metadataは改変前後byte/hashを保存する。製品の暗号保護を無効化しない。
@@ -30,7 +30,7 @@
 - pointはSC本文の確定点。`DB commit-visible / client-ack-before`、`claim-commit-after / send-before`、`answer-insert-before`、`publish-success / fsync-before`、`Root final close`等を別名で識別する。単なるmethod名到達やsleepをcommit証拠へしない。
 - receiptは上記全identityに`sequence,monotonic_ns,utc,transaction_id,message_id,token_hash,resource_owner,inode/dev,observed_state,receipt_sha256`を加える。armed→reached→effect_applied→released→terminalを一回だけ記録する。未到達ならNOT_JUDGED/BLOCKED、故障が効いていない成功を合格にしない。
 - 専有部品以外のPID/backend/Unit/portに作用しない。barrier直前・直後にboot/PID-start/Invocation/所有nonceを再照合し、変化時は注入しない。故障後の無条件再start/ACK/COMMIT/rename/unlinkは禁止。
-- DB commit ACK喪失はserver commit可視化とclient完了を独立観測する。内部関数mockで「commitした」と返す方法は実commit不明を検証しない。実注入設計はISS-COMMIT-INJECTION判断待ち。
+- DB commit ACK喪失はserver commit可視化とclient完了を独立観測する。内部関数mockで「commitした」と返す方法は実commit不明を検証しない。実注入設計は515 T-COMMIT-v3。工具実装・校正/レビューはISS-COMMIT-INJECTION（D）で未完了。
 - broker durable commitとproducer確認、受信ACKと業務DBcommitをそれぞれ記録する。明示PAGE上限はFAIL、disk90%はBLOCKであり同一oracleにしない。
 - 真正OSのclose失敗/送達不明を安全に再現できない場合は未実施範囲として残す。値オブジェクト/例外だけのPTを実所有close ITのPASSへしない。
 
@@ -43,7 +43,7 @@
 | command-atomic | request_inboxのMessage/owner/token/HMAC/layout/state/result/body hash/ref/completed/expiry、対象user、critical audit全row | Message/token別before→afterの件数と全field差分。command/user/audit/inboxの同一確定点、rollback時新規0 |
 | async-state | async_jobsのstate/processing_message_id/retry_count/全時刻、questions/answers/notificationsのPK/owner/deletion triple、Outbox D/W | W/D/M0を別join、answer question_id UK1、completion µs同一、final D SENT前ACK0 |
 | snapshot-replace | request_inbox全19列before/after、response encrypted hash/keyVersion | 置換2列以外17列完全一致、初回completed/expiry不変。暗号検算は独立AADと保存元Message |
-| outbox-lease | Message/status/owner/lease_until/next_attempt/attempts/created/sent、claim TX、JMS commit receipt | claim<=100/10秒lease、application delay1/5/30/60/300、SENTは送信確認後 |
+| outbox-lease | Message/status/owner/lease_until/next_attempt/attempts/created/sent、claim TX、JMS commit receipt | claim<=100/10秒lease、application delay base1/5/30/60/300秒±10%jitter、SENTは送信確認後 |
 | cleanup | run/step全identity/count/ended、progress/cursor/hold/eligible存在、削除前PK集合と削除後集合 | 同TX DELETE+累積、LOCK_BUSY未完了、元cutoff保持、未確定件数NULL/UNKNOWN |
 | backup-expiry | 旧元SUCCESSと新SKIP/FAILED pair、4file inode/hash、expiry before/after/cutoff/selector | 同attempt完全pair、再用再生成0、削除/再purgeの所有と許可、未知after=NULL |
 | permissions | 実接続role、実行statement/management action、結果SQLstate/provider errorと非秘密分類 | allow/denyと更新0。資格情報本文を証跡公開へ含めない |
@@ -71,3 +71,5 @@
 予約キーは`source/artifact/environment/boot/case/SC/fixture/attempt/owner`。job registryとbarrier receipt、DB/JMS/inode/Unitの途中状態を読取り照合し、同jobへ再付着する。job不明やsource/env違いでは自動再発行しない。送達/commit不明の読取り照合完了前に新Message/新token/新Unit startを出さない。
 
 初回NG/UNKNOWNを保持し、542のPG不備/SS不備/試験側/環境/上位判断/未判定を証拠で分類する。仕様監査で見つけた不足は実測NGへ登録しない。修正後は当該SC、同契約の他parameter、共有結合経路、DB/JMS/file確定点の隣接caseを影響graphで選ぶ。PG915/916、SS914、上位911～913の用途を守る。工具/期待値修正でも原失敗を上書きしない。
+
+継続監査での具体化・訂正は[515](515_継続監査のfixture・probe・故障注入準備仕様.md)を参照。Dの実生成/工具準備が終わるまで実行不可。

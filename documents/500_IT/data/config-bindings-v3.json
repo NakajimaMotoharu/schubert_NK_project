@@ -1,0 +1,4874 @@
+[
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 94,
+    "design_table_row": "| `persistence-enabled` | true | Durable request/work/log/DLQ/Expiry |",
+    "id": "CFG-321-0094",
+    "headers": [
+      "設定",
+      "初期値",
+      "理由・検証"
+    ],
+    "expected_cells": [
+      "persistence-enabled",
+      "true",
+      "Durable request/work/log/DLQ/Expiry"
+    ],
+    "condition_id": "SSCOND-321-d581b956e7ce",
+    "probe_plan": "P-MQ-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S01",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A76"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 95,
+    "design_table_row": "| `journal-type` | NIO | 単一SSD、native依存削減 |",
+    "id": "CFG-321-0095",
+    "headers": [
+      "設定",
+      "初期値",
+      "理由・検証"
+    ],
+    "expected_cells": [
+      "journal-type",
+      "NIO",
+      "単一SSD、native依存削減"
+    ],
+    "condition_id": "SSCOND-321-9a18f55c5f9e",
+    "probe_plan": "P-MQ-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S01",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A77"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 96,
+    "design_table_row": "| `journal-file-size` | 10MiB | 小規模queueとcompaction単位 |",
+    "id": "CFG-321-0096",
+    "headers": [
+      "設定",
+      "初期値",
+      "理由・検証"
+    ],
+    "expected_cells": [
+      "journal-file-size",
+      "10MiB",
+      "小規模queueとcompaction単位"
+    ],
+    "condition_id": "SSCOND-321-843af4675bfb",
+    "probe_plan": "P-MQ-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S01",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A78"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 97,
+    "design_table_row": "| `journal-min-files` | 4 | 起動時最低pool |",
+    "id": "CFG-321-0097",
+    "headers": [
+      "設定",
+      "初期値",
+      "理由・検証"
+    ],
+    "expected_cells": [
+      "journal-min-files",
+      "4",
+      "起動時最低pool"
+    ],
+    "condition_id": "SSCOND-321-b7a6093b48a1",
+    "probe_plan": "P-MQ-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S01",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A79"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 98,
+    "design_table_row": "| `journal-pool-files` | 20 | 200MiB事前pool、実測後上限内調整 |",
+    "id": "CFG-321-0098",
+    "headers": [
+      "設定",
+      "初期値",
+      "理由・検証"
+    ],
+    "expected_cells": [
+      "journal-pool-files",
+      "20",
+      "200MiB事前pool、実測後上限内調整"
+    ],
+    "condition_id": "SSCOND-321-cc149e965ab3",
+    "probe_plan": "P-MQ-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S01",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A80"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 99,
+    "design_table_row": "| `journal-compact-min-files` | 10 | 小file増加抑止 |",
+    "id": "CFG-321-0099",
+    "headers": [
+      "設定",
+      "初期値",
+      "理由・検証"
+    ],
+    "expected_cells": [
+      "journal-compact-min-files",
+      "10",
+      "小file増加抑止"
+    ],
+    "condition_id": "SSCOND-321-ca8a2c537c03",
+    "probe_plan": "P-MQ-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S01",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A81"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 100,
+    "design_table_row": "| `journal-compact-percentage` | 30 | reclaim閾値 |",
+    "id": "CFG-321-0100",
+    "headers": [
+      "設定",
+      "初期値",
+      "理由・検証"
+    ],
+    "expected_cells": [
+      "journal-compact-percentage",
+      "30",
+      "reclaim閾値"
+    ],
+    "condition_id": "SSCOND-321-96b4eeb34ac5",
+    "probe_plan": "P-MQ-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S01",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A82"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 101,
+    "design_table_row": "| `global-max-size` | 512MiB | JVM heap 1GiB内でAddress memory high-water合計448MiBを包含 |",
+    "id": "CFG-321-0101",
+    "headers": [
+      "設定",
+      "初期値",
+      "理由・検証"
+    ],
+    "expected_cells": [
+      "global-max-size",
+      "512MiB",
+      "JVM heap 1GiB内でAddress memory high-water合計448MiBを包含"
+    ],
+    "condition_id": "SSCOND-321-922b0336f4ee",
+    "probe_plan": "P-MQ-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S01",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A83"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 102,
+    "design_table_row": "| `global-max-messages` | 50,000 | UI全Queue件数上限41,000件に運用余裕 |",
+    "id": "CFG-321-0102",
+    "headers": [
+      "設定",
+      "初期値",
+      "理由・検証"
+    ],
+    "expected_cells": [
+      "global-max-messages",
+      "50,000",
+      "UI全Queue件数上限41,000件に運用余裕"
+    ],
+    "condition_id": "SSCOND-321-46cf36d29de1",
+    "probe_plan": "P-MQ-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S01",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A84"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 103,
+    "design_table_row": "| `max-disk-usage` | 90 | 90%でproducer block/readiness false |",
+    "id": "CFG-321-0103",
+    "headers": [
+      "設定",
+      "初期値",
+      "理由・検証"
+    ],
+    "expected_cells": [
+      "max-disk-usage",
+      "90",
+      "90%でproducer block/readiness false"
+    ],
+    "condition_id": "SSCOND-321-1e7e777a3c06",
+    "probe_plan": "P-MQ-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S01",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A85"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 104,
+    "design_table_row": "| `disk-scan-period` | 5,000ms | Disk枯渇検知 |",
+    "id": "CFG-321-0104",
+    "headers": [
+      "設定",
+      "初期値",
+      "理由・検証"
+    ],
+    "expected_cells": [
+      "disk-scan-period",
+      "5,000ms",
+      "Disk枯渇検知"
+    ],
+    "condition_id": "SSCOND-321-e73aaa5b1c9e",
+    "probe_plan": "P-MQ-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S01",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A86"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 105,
+    "design_table_row": "| `id-cache-size` | 20,000 | Outbox duplicate IDを保持。Async/Web log各上限以上 |",
+    "id": "CFG-321-0105",
+    "headers": [
+      "設定",
+      "初期値",
+      "理由・検証"
+    ],
+    "expected_cells": [
+      "id-cache-size",
+      "20,000",
+      "Outbox duplicate IDを保持。Async/Web log各上限以上"
+    ],
+    "condition_id": "SSCOND-321-683398dd32b3",
+    "probe_plan": "P-MQ-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S01",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A87"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 106,
+    "design_table_row": "| `persist-id-cache` | true | Broker再起動跨ぎduplicate detection |",
+    "id": "CFG-321-0106",
+    "headers": [
+      "設定",
+      "初期値",
+      "理由・検証"
+    ],
+    "expected_cells": [
+      "persist-id-cache",
+      "true",
+      "Broker再起動跨ぎduplicate detection"
+    ],
+    "condition_id": "SSCOND-321-37b65aa979c2",
+    "probe_plan": "P-MQ-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S01",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A88"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 107,
+    "design_table_row": "| `graceful-shutdown-enabled` | true | 計画停止でConsumer切断待ち |",
+    "id": "CFG-321-0107",
+    "headers": [
+      "設定",
+      "初期値",
+      "理由・検証"
+    ],
+    "expected_cells": [
+      "graceful-shutdown-enabled",
+      "true",
+      "計画停止でConsumer切断待ち"
+    ],
+    "condition_id": "SSCOND-321-a1589b38df39",
+    "probe_plan": "P-MQ-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S01",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A89"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 108,
+    "design_table_row": "| `graceful-shutdown-timeout` | 60,000ms | API stop上限と一致 |",
+    "id": "CFG-321-0108",
+    "headers": [
+      "設定",
+      "初期値",
+      "理由・検証"
+    ],
+    "expected_cells": [
+      "graceful-shutdown-timeout",
+      "60,000ms",
+      "API stop上限と一致"
+    ],
+    "condition_id": "SSCOND-321-cf342fa69945",
+    "probe_plan": "P-MQ-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S01",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A90"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 109,
+    "design_table_row": "| Auto create/delete | 全てfalse | 未定義Address/Queueを起動失敗にする |",
+    "id": "CFG-321-0109",
+    "headers": [
+      "設定",
+      "初期値",
+      "理由・検証"
+    ],
+    "expected_cells": [
+      "Auto create/delete",
+      "全てfalse",
+      "未定義Address/Queueを起動失敗にする"
+    ],
+    "condition_id": "SSCOND-321-7aeeebd4cd7b",
+    "probe_plan": "P-MQ-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S01",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A91"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "4. Address・Queue定義",
+    "line": 120,
+    "design_table_row": "| `nk.sync.request` | `nk.sync.request.q` | ○ | `nk_web` | `nk_api` | 最大1,000,000 byte、TTL 5秒 |",
+    "id": "CFG-321-0120",
+    "headers": [
+      "Address",
+      "Queue",
+      "Durable",
+      "Producer",
+      "Consumer",
+      "Body/TTL"
+    ],
+    "expected_cells": [
+      "nk.sync.request",
+      "nk.sync.request.q",
+      "○",
+      "nk_web",
+      "nk_api",
+      "最大1,000,000 byte、TTL 5秒"
+    ],
+    "condition_id": "SSCOND-321-48ddb24c2b12",
+    "probe_plan": "P-MQ-TOPOLOGY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S02",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A92"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "4. Address・Queue定義",
+    "line": 121,
+    "design_table_row": "| `nk.sync.reply.web` | `nk.sync.reply.web.q` | ○ | `nk_api` | `nk_web` | 最大1,000,000 byte、TTL 10秒 |",
+    "id": "CFG-321-0121",
+    "headers": [
+      "Address",
+      "Queue",
+      "Durable",
+      "Producer",
+      "Consumer",
+      "Body/TTL"
+    ],
+    "expected_cells": [
+      "nk.sync.reply.web",
+      "nk.sync.reply.web.q",
+      "○",
+      "nk_api",
+      "nk_web",
+      "最大1,000,000 byte、TTL 10秒"
+    ],
+    "condition_id": "SSCOND-321-b8c0190d6da5",
+    "probe_plan": "P-MQ-TOPOLOGY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S02",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A93"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "4. Address・Queue定義",
+    "line": 122,
+    "design_table_row": "| `nk.async.work` | `nk.async.work.q` | ○ | `nk_api` dispatcher | `nk_api` worker | 最大1,000 byte、TTLなし |",
+    "id": "CFG-321-0122",
+    "headers": [
+      "Address",
+      "Queue",
+      "Durable",
+      "Producer",
+      "Consumer",
+      "Body/TTL"
+    ],
+    "expected_cells": [
+      "nk.async.work",
+      "nk.async.work.q",
+      "○",
+      "nk_api dispatcher",
+      "nk_api worker",
+      "最大1,000 byte、TTLなし"
+    ],
+    "condition_id": "SSCOND-321-8f4fe4c9e2c5",
+    "probe_plan": "P-MQ-TOPOLOGY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S02",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A94"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "4. Address・Queue定義",
+    "line": 123,
+    "design_table_row": "| `nk.web.log` | `nk.web.log.q` | ○ | `nk_web` dispatcher | `nk_api` ingestor | 最大10,000 byte、TTLなし |",
+    "id": "CFG-321-0123",
+    "headers": [
+      "Address",
+      "Queue",
+      "Durable",
+      "Producer",
+      "Consumer",
+      "Body/TTL"
+    ],
+    "expected_cells": [
+      "nk.web.log",
+      "nk.web.log.q",
+      "○",
+      "nk_web dispatcher",
+      "nk_api ingestor",
+      "最大10,000 byte、TTLなし"
+    ],
+    "condition_id": "SSCOND-321-368b922df6f3",
+    "probe_plan": "P-MQ-TOPOLOGY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S02",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A95"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "4. Address・Queue定義",
+    "line": 124,
+    "design_table_row": "| `nk.dead.letter` | `nk.dead.letter.q` | ○ | Broker/fatal handler | Ops browse/replay tool | 元messageの定義上限、TTLなし |",
+    "id": "CFG-321-0124",
+    "headers": [
+      "Address",
+      "Queue",
+      "Durable",
+      "Producer",
+      "Consumer",
+      "Body/TTL"
+    ],
+    "expected_cells": [
+      "nk.dead.letter",
+      "nk.dead.letter.q",
+      "○",
+      "Broker/fatal handler",
+      "Ops browse/replay tool",
+      "元messageの定義上限、TTLなし"
+    ],
+    "condition_id": "SSCOND-321-374c247ad480",
+    "probe_plan": "P-MQ-TOPOLOGY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S02",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A96"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "4. Address・Queue定義",
+    "line": 125,
+    "design_table_row": "| `nk.expiry` | `nk.expiry.q` | ○ | Broker | Ops/maintenance | 元messageの定義上限、TTLなし |",
+    "id": "CFG-321-0125",
+    "headers": [
+      "Address",
+      "Queue",
+      "Durable",
+      "Producer",
+      "Consumer",
+      "Body/TTL"
+    ],
+    "expected_cells": [
+      "nk.expiry",
+      "nk.expiry.q",
+      "○",
+      "Broker",
+      "Ops/maintenance",
+      "元messageの定義上限、TTLなし"
+    ],
+    "condition_id": "SSCOND-321-114c02e829d3",
+    "probe_plan": "P-MQ-TOPOLOGY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S02",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A97"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.2 容量",
+    "line": 149,
+    "design_table_row": "| `nk.sync.request` | 256MiB | 500 | PAGE→上限FAIL | 250/450件、70/90% |",
+    "id": "CFG-321-0149",
+    "headers": [
+      "Match",
+      "合計保存上限",
+      "合計件数上限",
+      "Full policy",
+      "Warning/Critical"
+    ],
+    "expected_cells": [
+      "nk.sync.request",
+      "256MiB",
+      "500",
+      "PAGE→上限FAIL",
+      "250/450件、70/90%"
+    ],
+    "condition_id": "SSCOND-321-98cbd50ddab6",
+    "probe_plan": "P-MQ-CAPACITY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S03",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A98"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.2 容量",
+    "line": 150,
+    "design_table_row": "| `nk.sync.reply.web` | 256MiB | 500 | PAGE→上限FAIL | 250/450件、70/90% |",
+    "id": "CFG-321-0150",
+    "headers": [
+      "Match",
+      "合計保存上限",
+      "合計件数上限",
+      "Full policy",
+      "Warning/Critical"
+    ],
+    "expected_cells": [
+      "nk.sync.reply.web",
+      "256MiB",
+      "500",
+      "PAGE→上限FAIL",
+      "250/450件、70/90%"
+    ],
+    "condition_id": "SSCOND-321-5ba91b6726c7",
+    "probe_plan": "P-MQ-CAPACITY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S03",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A99"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.2 容量",
+    "line": 151,
+    "design_table_row": "| `nk.async.work` | 1GiB | 10,000 | PAGE→上限FAIL | 5,000/9,000件、70/90% |",
+    "id": "CFG-321-0151",
+    "headers": [
+      "Match",
+      "合計保存上限",
+      "合計件数上限",
+      "Full policy",
+      "Warning/Critical"
+    ],
+    "expected_cells": [
+      "nk.async.work",
+      "1GiB",
+      "10,000",
+      "PAGE→上限FAIL",
+      "5,000/9,000件、70/90%"
+    ],
+    "condition_id": "SSCOND-321-d664afc8662e",
+    "probe_plan": "P-MQ-CAPACITY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S03",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A100"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.2 容量",
+    "line": 152,
+    "design_table_row": "| `nk.web.log` | 256MiB | 10,000 | PAGE→上限FAIL | 5,000/9,000件、70/90% |",
+    "id": "CFG-321-0152",
+    "headers": [
+      "Match",
+      "合計保存上限",
+      "合計件数上限",
+      "Full policy",
+      "Warning/Critical"
+    ],
+    "expected_cells": [
+      "nk.web.log",
+      "256MiB",
+      "10,000",
+      "PAGE→上限FAIL",
+      "5,000/9,000件、70/90%"
+    ],
+    "condition_id": "SSCOND-321-62d2a04b22a8",
+    "probe_plan": "P-MQ-CAPACITY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S03",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A101"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.2 容量",
+    "line": 153,
+    "design_table_row": "| `nk.dead.letter` | 2GiB | 10,000 | PAGE→上限FAIL | 1件/増加継続 |",
+    "id": "CFG-321-0153",
+    "headers": [
+      "Match",
+      "合計保存上限",
+      "合計件数上限",
+      "Full policy",
+      "Warning/Critical"
+    ],
+    "expected_cells": [
+      "nk.dead.letter",
+      "2GiB",
+      "10,000",
+      "PAGE→上限FAIL",
+      "1件/増加継続"
+    ],
+    "condition_id": "SSCOND-321-49a240336f3b",
+    "probe_plan": "P-MQ-CAPACITY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S03",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A102"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.2 容量",
+    "line": 154,
+    "design_table_row": "| `nk.expiry` | 1GiB | 10,000 | PAGE→上限FAIL | 1,000/5,000件、70/90% |",
+    "id": "CFG-321-0154",
+    "headers": [
+      "Match",
+      "合計保存上限",
+      "合計件数上限",
+      "Full policy",
+      "Warning/Critical"
+    ],
+    "expected_cells": [
+      "nk.expiry",
+      "1GiB",
+      "10,000",
+      "PAGE→上限FAIL",
+      "1,000/5,000件、70/90%"
+    ],
+    "condition_id": "SSCOND-321-af17d7b10226",
+    "probe_plan": "P-MQ-CAPACITY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S03",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A103"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.3 QA-042/UIC-002承認値",
+    "line": 163,
+    "design_table_row": "| `nk.sync.request` | 32MiB / 50 | 224MiB / 450 | 256MiB / 500 |",
+    "id": "CFG-321-0163",
+    "headers": [
+      "Match",
+      "Memory high-water (max-size-bytes / max-size-messages)",
+      "Paging store上限 (page-limit-bytes / page-limit-messages)",
+      "合計上限"
+    ],
+    "expected_cells": [
+      "nk.sync.request",
+      "32MiB / 50",
+      "224MiB / 450",
+      "256MiB / 500"
+    ],
+    "condition_id": "SSCOND-321-cbac2acb7494",
+    "probe_plan": "P-MQ-PAGE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S04",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A104"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.3 QA-042/UIC-002承認値",
+    "line": 164,
+    "design_table_row": "| `nk.sync.reply.web` | 32MiB / 50 | 224MiB / 450 | 256MiB / 500 |",
+    "id": "CFG-321-0164",
+    "headers": [
+      "Match",
+      "Memory high-water (max-size-bytes / max-size-messages)",
+      "Paging store上限 (page-limit-bytes / page-limit-messages)",
+      "合計上限"
+    ],
+    "expected_cells": [
+      "nk.sync.reply.web",
+      "32MiB / 50",
+      "224MiB / 450",
+      "256MiB / 500"
+    ],
+    "condition_id": "SSCOND-321-63e5889d61f3",
+    "probe_plan": "P-MQ-PAGE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S04",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A105"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.3 QA-042/UIC-002承認値",
+    "line": 165,
+    "design_table_row": "| `nk.async.work` | 128MiB / 1,000 | 896MiB / 9,000 | 1GiB / 10,000 |",
+    "id": "CFG-321-0165",
+    "headers": [
+      "Match",
+      "Memory high-water (max-size-bytes / max-size-messages)",
+      "Paging store上限 (page-limit-bytes / page-limit-messages)",
+      "合計上限"
+    ],
+    "expected_cells": [
+      "nk.async.work",
+      "128MiB / 1,000",
+      "896MiB / 9,000",
+      "1GiB / 10,000"
+    ],
+    "condition_id": "SSCOND-321-6b5eefec7abf",
+    "probe_plan": "P-MQ-PAGE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S04",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A106"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.3 QA-042/UIC-002承認値",
+    "line": 166,
+    "design_table_row": "| `nk.web.log` | 64MiB / 1,000 | 192MiB / 9,000 | 256MiB / 10,000 |",
+    "id": "CFG-321-0166",
+    "headers": [
+      "Match",
+      "Memory high-water (max-size-bytes / max-size-messages)",
+      "Paging store上限 (page-limit-bytes / page-limit-messages)",
+      "合計上限"
+    ],
+    "expected_cells": [
+      "nk.web.log",
+      "64MiB / 1,000",
+      "192MiB / 9,000",
+      "256MiB / 10,000"
+    ],
+    "condition_id": "SSCOND-321-6fed58b71f10",
+    "probe_plan": "P-MQ-PAGE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S04",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A107"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.3 QA-042/UIC-002承認値",
+    "line": 167,
+    "design_table_row": "| `nk.dead.letter` | 128MiB / 1,000 | 1,920MiB / 9,000 | 2GiB / 10,000 |",
+    "id": "CFG-321-0167",
+    "headers": [
+      "Match",
+      "Memory high-water (max-size-bytes / max-size-messages)",
+      "Paging store上限 (page-limit-bytes / page-limit-messages)",
+      "合計上限"
+    ],
+    "expected_cells": [
+      "nk.dead.letter",
+      "128MiB / 1,000",
+      "1,920MiB / 9,000",
+      "2GiB / 10,000"
+    ],
+    "condition_id": "SSCOND-321-927f16c687da",
+    "probe_plan": "P-MQ-PAGE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S04",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A108"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.3 QA-042/UIC-002承認値",
+    "line": 168,
+    "design_table_row": "| `nk.expiry` | 64MiB / 1,000 | 960MiB / 9,000 | 1GiB / 10,000 |",
+    "id": "CFG-321-0168",
+    "headers": [
+      "Match",
+      "Memory high-water (max-size-bytes / max-size-messages)",
+      "Paging store上限 (page-limit-bytes / page-limit-messages)",
+      "合計上限"
+    ],
+    "expected_cells": [
+      "nk.expiry",
+      "64MiB / 1,000",
+      "960MiB / 9,000",
+      "1GiB / 10,000"
+    ],
+    "condition_id": "SSCOND-321-b0087156e985",
+    "probe_plan": "P-MQ-PAGE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S04",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A109"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.4 再配送（QA-041/UIC-001反映済み）",
+    "line": 189,
+    "design_table_row": "| `max-delivery-attempts` | 4 | 初回＋再配送3回。4回目の失敗後にDLQへroute |",
+    "id": "CFG-321-0189",
+    "headers": [
+      "設定",
+      "値",
+      "実効動作"
+    ],
+    "expected_cells": [
+      "max-delivery-attempts",
+      "4",
+      "初回＋再配送3回。4回目の失敗後にDLQへroute"
+    ],
+    "condition_id": "SSCOND-321-3b05c4611605",
+    "probe_plan": "P-MQ-REDELIVERY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S05",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A110"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.4 再配送（QA-041/UIC-001反映済み）",
+    "line": 190,
+    "design_table_row": "| `redelivery-delay` | 1,000ms | 第1再配送は1秒後 |",
+    "id": "CFG-321-0190",
+    "headers": [
+      "設定",
+      "値",
+      "実効動作"
+    ],
+    "expected_cells": [
+      "redelivery-delay",
+      "1,000ms",
+      "第1再配送は1秒後"
+    ],
+    "condition_id": "SSCOND-321-cdad3fb84a4d",
+    "probe_plan": "P-MQ-REDELIVERY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S05",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A111"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.4 再配送（QA-041/UIC-001反映済み）",
+    "line": 191,
+    "design_table_row": "| `redelivery-delay-multiplier` | 5.0 | 次回delayを前回の5倍にする |",
+    "id": "CFG-321-0191",
+    "headers": [
+      "設定",
+      "値",
+      "実効動作"
+    ],
+    "expected_cells": [
+      "redelivery-delay-multiplier",
+      "5.0",
+      "次回delayを前回の5倍にする"
+    ],
+    "condition_id": "SSCOND-321-4d61f53ba8fb",
+    "probe_plan": "P-MQ-REDELIVERY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S05",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A112"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.4 再配送（QA-041/UIC-001反映済み）",
+    "line": 192,
+    "design_table_row": "| `max-redelivery-delay` | 30,000ms | delay上限。3回の範囲ではcapへ到達しない |",
+    "id": "CFG-321-0192",
+    "headers": [
+      "設定",
+      "値",
+      "実効動作"
+    ],
+    "expected_cells": [
+      "max-redelivery-delay",
+      "30,000ms",
+      "delay上限。3回の範囲ではcapへ到達しない"
+    ],
+    "condition_id": "SSCOND-321-0a576a170cae",
+    "probe_plan": "P-MQ-REDELIVERY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S05",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A113"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.4 再配送（QA-041/UIC-001反映済み）",
+    "line": 193,
+    "design_table_row": "| 実効delay | 1秒、5秒、25秒 | QA-041承認済みの一意なrelease/test oracle |",
+    "id": "CFG-321-0193",
+    "headers": [
+      "設定",
+      "値",
+      "実効動作"
+    ],
+    "expected_cells": [
+      "実効delay",
+      "1秒、5秒、25秒",
+      "QA-041承認済みの一意なrelease/test oracle"
+    ],
+    "condition_id": "SSCOND-321-15e7354f9197",
+    "probe_plan": "P-MQ-REDELIVERY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S05",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A114"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "6. JMS connection factory",
+    "line": 202,
+    "design_table_row": "| Web request producer | `nk_web`専用pool | transacted producer session | call timeout 2秒、block-on-durable-send=true |",
+    "id": "CFG-321-0202",
+    "headers": [
+      "Client",
+      "Connection",
+      "Session/consumer",
+      "初期値"
+    ],
+    "expected_cells": [
+      "Web request producer",
+      "nk_web専用pool",
+      "transacted producer session",
+      "call timeout 2秒、block-on-durable-send=true"
+    ],
+    "condition_id": "SSCOND-321-071769d8cd6e",
+    "probe_plan": "P-JMS-CLIENT",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S06",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A115"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "6. JMS connection factory",
+    "line": 203,
+    "design_table_row": "| Web reply consumer | 同connection、専用session | transacted consumer、1 | consumer window 1MiB、selector/registry相関 |",
+    "id": "CFG-321-0203",
+    "headers": [
+      "Client",
+      "Connection",
+      "Session/consumer",
+      "初期値"
+    ],
+    "expected_cells": [
+      "Web reply consumer",
+      "同connection、専用session",
+      "transacted consumer、1",
+      "consumer window 1MiB、selector/registry相関"
+    ],
+    "condition_id": "SSCOND-321-4c427706e539",
+    "probe_plan": "P-JMS-CLIENT",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S06",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A116"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "6. JMS connection factory",
+    "line": 204,
+    "design_table_row": "| Web log dispatcher | 別session | transacted producer | reconnect/retry、HTTP threadと分離 |",
+    "id": "CFG-321-0204",
+    "headers": [
+      "Client",
+      "Connection",
+      "Session/consumer",
+      "初期値"
+    ],
+    "expected_cells": [
+      "Web log dispatcher",
+      "別session",
+      "transacted producer",
+      "reconnect/retry、HTTP threadと分離"
+    ],
+    "condition_id": "SSCOND-321-6674887a3a09",
+    "probe_plan": "P-JMS-CLIENT",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S06",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A117"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "6. JMS connection factory",
+    "line": 205,
+    "design_table_row": "| API sync | `nk_api` connection | transacted listener、concurrency 4 | max 8、consumer window 1MiB |",
+    "id": "CFG-321-0205",
+    "headers": [
+      "Client",
+      "Connection",
+      "Session/consumer",
+      "初期値"
+    ],
+    "expected_cells": [
+      "API sync",
+      "nk_api connection",
+      "transacted listener、concurrency 4",
+      "max 8、consumer window 1MiB"
+    ],
+    "condition_id": "SSCOND-321-7b7e30032cf9",
+    "probe_plan": "P-JMS-CLIENT",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S06",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A118"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "6. JMS connection factory",
+    "line": 206,
+    "design_table_row": "| API async | 別session | transacted listener、concurrency 1 | consumer window 0、priorityなし |",
+    "id": "CFG-321-0206",
+    "headers": [
+      "Client",
+      "Connection",
+      "Session/consumer",
+      "初期値"
+    ],
+    "expected_cells": [
+      "API async",
+      "別session",
+      "transacted listener、concurrency 1",
+      "consumer window 0、priorityなし"
+    ],
+    "condition_id": "SSCOND-321-d02b324a0b1f",
+    "probe_plan": "P-JMS-CLIENT",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S06",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A119"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "6. JMS connection factory",
+    "line": 207,
+    "design_table_row": "| API Web log | 別session | transacted listener、concurrency 1 | consumer window 64KiB |",
+    "id": "CFG-321-0207",
+    "headers": [
+      "Client",
+      "Connection",
+      "Session/consumer",
+      "初期値"
+    ],
+    "expected_cells": [
+      "API Web log",
+      "別session",
+      "transacted listener、concurrency 1",
+      "consumer window 64KiB"
+    ],
+    "condition_id": "SSCOND-321-b01c74073c38",
+    "probe_plan": "P-JMS-CLIENT",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S06",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A120"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "6. JMS connection factory",
+    "line": 208,
+    "design_table_row": "| API outbox/reply | listener sessionまたは専用dispatcher | transacted producer | Persistent、send commit確認 |",
+    "id": "CFG-321-0208",
+    "headers": [
+      "Client",
+      "Connection",
+      "Session/consumer",
+      "初期値"
+    ],
+    "expected_cells": [
+      "API outbox/reply",
+      "listener sessionまたは専用dispatcher",
+      "transacted producer",
+      "Persistent、send commit確認"
+    ],
+    "condition_id": "SSCOND-321-d8270288d335",
+    "probe_plan": "P-JMS-CLIENT",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S06",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A121"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 229,
+    "design_table_row": "| `JMSDeliveryMode` | PERSISTENT |",
+    "id": "CFG-321-0229",
+    "headers": [
+      "Property",
+      "設計"
+    ],
+    "expected_cells": [
+      "JMSDeliveryMode",
+      "PERSISTENT"
+    ],
+    "condition_id": "SSCOND-321-47127427a354",
+    "probe_plan": "P-WIRE-PROPERTY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S07",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A122"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 230,
+    "design_table_row": "| `JMSCorrelationID` | wire Correlation ID |",
+    "id": "CFG-321-0230",
+    "headers": [
+      "Property",
+      "設計"
+    ],
+    "expected_cells": [
+      "JMSCorrelationID",
+      "wire Correlation ID"
+    ],
+    "condition_id": "SSCOND-321-4a876237f219",
+    "probe_plan": "P-WIRE-PROPERTY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S07",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A123"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 231,
+    "design_table_row": "| `JMSReplyTo` | Requestだけ、allowlist Address |",
+    "id": "CFG-321-0231",
+    "headers": [
+      "Property",
+      "設計"
+    ],
+    "expected_cells": [
+      "JMSReplyTo",
+      "Requestだけ、allowlist Address"
+    ],
+    "condition_id": "SSCOND-321-391865ab9697",
+    "probe_plan": "P-WIRE-PROPERTY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S07",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A124"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 232,
+    "design_table_row": "| `JMSExpiration` | Request 5秒、reply 10秒、internal 0 |",
+    "id": "CFG-321-0232",
+    "headers": [
+      "Property",
+      "設計"
+    ],
+    "expected_cells": [
+      "JMSExpiration",
+      "Request 5秒、reply 10秒、internal 0"
+    ],
+    "condition_id": "SSCOND-321-fe16160f6beb",
+    "probe_plan": "P-WIRE-PROPERTY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S07",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A125"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 233,
+    "design_table_row": "| `NKMessageID` | wire Message ID |",
+    "id": "CFG-321-0233",
+    "headers": [
+      "Property",
+      "設計"
+    ],
+    "expected_cells": [
+      "NKMessageID",
+      "wire Message ID"
+    ],
+    "condition_id": "SSCOND-321-2e33e6c42027",
+    "probe_plan": "P-WIRE-PROPERTY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S07",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A126"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 234,
+    "design_table_row": "| `NKLayoutID` | wire layout ID |",
+    "id": "CFG-321-0234",
+    "headers": [
+      "Property",
+      "設計"
+    ],
+    "expected_cells": [
+      "NKLayoutID",
+      "wire layout ID"
+    ],
+    "condition_id": "SSCOND-321-571981933dd2",
+    "probe_plan": "P-WIRE-PROPERTY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S07",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A127"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 235,
+    "design_table_row": "| `NKProtocolVersion` | `001` |",
+    "id": "CFG-321-0235",
+    "headers": [
+      "Property",
+      "設計"
+    ],
+    "expected_cells": [
+      "NKProtocolVersion",
+      "001"
+    ],
+    "condition_id": "SSCOND-321-989ece7647c1",
+    "probe_plan": "P-WIRE-PROPERTY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S07",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A128"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 236,
+    "design_table_row": "| `_AMQ_DUPL_ID` | Outbox/work/log eventでは業務Message ID ASCII byte。Request/replyも設定可 |",
+    "id": "CFG-321-0236",
+    "headers": [
+      "Property",
+      "設計"
+    ],
+    "expected_cells": [
+      "_AMQ_DUPL_ID",
+      "Outbox/work/log eventでは業務Message ID ASCII byte。Request/replyも設定可"
+    ],
+    "condition_id": "SSCOND-321-45556ac8126f",
+    "probe_plan": "P-WIRE-PROPERTY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S07",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A129"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.1 Dependency",
+    "line": 237,
+    "design_table_row": "| `schubert-nk-backup` | PostgreSQL | PostgreSQL | 失敗はmorning続行 |",
+    "id": "CFG-342-0237",
+    "headers": [
+      "Unit",
+      "After",
+      "Requires",
+      "Wants/note"
+    ],
+    "expected_cells": [
+      "schubert-nk-backup",
+      "PostgreSQL",
+      "PostgreSQL",
+      "失敗はmorning続行"
+    ],
+    "condition_id": "SSCOND-342-efec970bc69c",
+    "probe_plan": "P-UNIT-DEPENDENCY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S08",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A130"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.1 Dependency",
+    "line": 238,
+    "design_table_row": "| `schubert-nk-cleanup` | backup | PostgreSQL | Backup成否はDB rowで分岐 |",
+    "id": "CFG-342-0238",
+    "headers": [
+      "Unit",
+      "After",
+      "Requires",
+      "Wants/note"
+    ],
+    "expected_cells": [
+      "schubert-nk-cleanup",
+      "backup",
+      "PostgreSQL",
+      "Backup成否はDB rowで分岐"
+    ],
+    "condition_id": "SSCOND-342-e989367bfa30",
+    "probe_plan": "P-UNIT-DEPENDENCY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S08",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A131"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.1 Dependency",
+    "line": 239,
+    "design_table_row": "| `artemis` | cleanup | cleanup | Cleanup safety failureで起動不可 |",
+    "id": "CFG-342-0239",
+    "headers": [
+      "Unit",
+      "After",
+      "Requires",
+      "Wants/note"
+    ],
+    "expected_cells": [
+      "artemis",
+      "cleanup",
+      "cleanup",
+      "Cleanup safety failureで起動不可"
+    ],
+    "condition_id": "SSCOND-342-bc2909eac54e",
+    "probe_plan": "P-UNIT-DEPENDENCY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S08",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A132"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.1 Dependency",
+    "line": 240,
+    "design_table_row": "| `schubert-nk-expiry-cleanup.service` | Artemis | Artemis | API Consumer前に実行。SSC099: SS341§2の完全名、別名expiry-cleanup.serviceを作らない |",
+    "id": "CFG-342-0240",
+    "headers": [
+      "Unit",
+      "After",
+      "Requires",
+      "Wants/note"
+    ],
+    "expected_cells": [
+      "schubert-nk-expiry-cleanup.service",
+      "Artemis",
+      "Artemis",
+      "API Consumer前に実行。SSC099: SS341§2の完全名、別名expiry-cleanup.serviceを作らない"
+    ],
+    "condition_id": "SSCOND-342-2fcc081e96c2",
+    "probe_plan": "P-UNIT-DEPENDENCY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S08",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A133"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.1 Dependency",
+    "line": 241,
+    "design_table_row": "| `schubert-nk-api` | expiry, Artemis, PostgreSQL | Artemis, PostgreSQL | SSC139: expiryの実前処理は正規issuer/Root許可で必須、API dependencyによる保守子再実行は禁止。readiness poll後にWeb |",
+    "id": "CFG-342-0241",
+    "headers": [
+      "Unit",
+      "After",
+      "Requires",
+      "Wants/note"
+    ],
+    "expected_cells": [
+      "schubert-nk-api",
+      "expiry, Artemis, PostgreSQL",
+      "Artemis, PostgreSQL",
+      "SSC139: expiryの実前処理は正規issuer/Root許可で必須、API dependencyによる保守子再実行は禁止。readiness poll後にWeb"
+    ],
+    "condition_id": "SSCOND-342-8f187d3d222a",
+    "probe_plan": "P-UNIT-DEPENDENCY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S08",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A134"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.1 Dependency",
+    "line": 242,
+    "design_table_row": "| `schubert-nk-web` | API, Artemis, PostgreSQL | API, Artemis, PostgreSQL | technical DBが必要 |",
+    "id": "CFG-342-0242",
+    "headers": [
+      "Unit",
+      "After",
+      "Requires",
+      "Wants/note"
+    ],
+    "expected_cells": [
+      "schubert-nk-web",
+      "API, Artemis, PostgreSQL",
+      "API, Artemis, PostgreSQL",
+      "technical DBが必要"
+    ],
+    "condition_id": "SSCOND-342-b021bc2f71cc",
+    "probe_plan": "P-UNIT-DEPENDENCY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S08",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A135"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.1 Dependency",
+    "line": 243,
+    "design_table_row": "| `caddy` | Web | Web | Packageの自由先行起動をdisable |",
+    "id": "CFG-342-0243",
+    "headers": [
+      "Unit",
+      "After",
+      "Requires",
+      "Wants/note"
+    ],
+    "expected_cells": [
+      "caddy",
+      "Web",
+      "Web",
+      "Packageの自由先行起動をdisable"
+    ],
+    "condition_id": "SSCOND-342-02658abadffb",
+    "probe_plan": "P-UNIT-DEPENDENCY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S08",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A136"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 263,
+    "design_table_row": "| `Type` | `simple` | Java processを直接ExecStart、shellを挟まない |",
+    "id": "CFG-342-0263",
+    "headers": [
+      "Directive",
+      "Web/API",
+      "理由"
+    ],
+    "expected_cells": [
+      "Type",
+      "simple",
+      "Java processを直接ExecStart、shellを挟まない"
+    ],
+    "condition_id": "SSCOND-342-909663b2e4a0",
+    "probe_plan": "P-UNIT-DIRECTIVE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S09",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A137"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 264,
+    "design_table_row": "| `User`/`Group` | service別専用account | OS権限分離 |",
+    "id": "CFG-342-0264",
+    "headers": [
+      "Directive",
+      "Web/API",
+      "理由"
+    ],
+    "expected_cells": [
+      "User/Group",
+      "service別専用account",
+      "OS権限分離"
+    ],
+    "condition_id": "SSCOND-342-57ee752607b0",
+    "probe_plan": "P-UNIT-DIRECTIVE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S09",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A138"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 265,
+    "design_table_row": "| `WorkingDirectory` | `/opt/schubert-nk/current/<web|api>` | release symlinkのread-only artifact |",
+    "id": "CFG-342-0265",
+    "headers": [
+      "Directive",
+      "Web/API",
+      "理由"
+    ],
+    "expected_cells": [
+      "WorkingDirectory",
+      "/opt/schubert-nk/current/<web|api>",
+      "release symlinkのread-only artifact"
+    ],
+    "condition_id": "SSCOND-342-bd29b5c36c40",
+    "probe_plan": "P-UNIT-DIRECTIVE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S09",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A139"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 266,
+    "design_table_row": "| `EnvironmentFile` | `/etc/schubert-nk/<service>.env` | 非秘密・0600 root:service、古い環境を残さない |",
+    "id": "CFG-342-0266",
+    "headers": [
+      "Directive",
+      "Web/API",
+      "理由"
+    ],
+    "expected_cells": [
+      "EnvironmentFile",
+      "/etc/schubert-nk/<service>.env",
+      "非秘密・0600 root:service、古い環境を残さない"
+    ],
+    "condition_id": "SSCOND-342-f2d9e8a18965",
+    "probe_plan": "P-UNIT-DIRECTIVE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S09",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A140"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 267,
+    "design_table_row": "| `LoadCredential` | DB/MQ/AES/HMAC secretを個別file | Secretをenv/argv/Gitへ出さない |",
+    "id": "CFG-342-0267",
+    "headers": [
+      "Directive",
+      "Web/API",
+      "理由"
+    ],
+    "expected_cells": [
+      "LoadCredential",
+      "DB/MQ/AES/HMAC secretを個別file",
+      "Secretをenv/argv/Gitへ出さない"
+    ],
+    "condition_id": "SSCOND-342-4b1883f02179",
+    "probe_plan": "P-UNIT-DIRECTIVE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S09",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A141"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 268,
+    "design_table_row": "| `UMask` | `0027` | 新規fileのgroup以外読取禁止 |",
+    "id": "CFG-342-0268",
+    "headers": [
+      "Directive",
+      "Web/API",
+      "理由"
+    ],
+    "expected_cells": [
+      "UMask",
+      "0027",
+      "新規fileのgroup以外読取禁止"
+    ],
+    "condition_id": "SSCOND-342-603e924da020",
+    "probe_plan": "P-UNIT-DIRECTIVE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S09",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A142"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 269,
+    "design_table_row": "| `Restart` | `on-failure`, `RestartSec=5s` | Process/protocol異常復旧 |",
+    "id": "CFG-342-0269",
+    "headers": [
+      "Directive",
+      "Web/API",
+      "理由"
+    ],
+    "expected_cells": [
+      "Restart",
+      "on-failure, RestartSec=5s",
+      "Process/protocol異常復旧"
+    ],
+    "condition_id": "SSCOND-342-3914eee2d840",
+    "probe_plan": "P-UNIT-DIRECTIVE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S09",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A143"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 270,
+    "design_table_row": "| Start limit | interval 600s, burst 5 | Poison/config errorのrestart loop停止。UI 252と一致 |",
+    "id": "CFG-342-0270",
+    "headers": [
+      "Directive",
+      "Web/API",
+      "理由"
+    ],
+    "expected_cells": [
+      "Start limit",
+      "interval 600s, burst 5",
+      "Poison/config errorのrestart loop停止。UI 252と一致"
+    ],
+    "condition_id": "SSCOND-342-76c2f4244847",
+    "probe_plan": "P-UNIT-DIRECTIVE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S09",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A144"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 271,
+    "design_table_row": "| `TimeoutStartSec` | 120s | readinessは別poll、起動hangのbound |",
+    "id": "CFG-342-0271",
+    "headers": [
+      "Directive",
+      "Web/API",
+      "理由"
+    ],
+    "expected_cells": [
+      "TimeoutStartSec",
+      "120s",
+      "readinessは別poll、起動hangのbound"
+    ],
+    "condition_id": "SSCOND-342-638c814d3054",
+    "probe_plan": "P-UNIT-DIRECTIVE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S09",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A145"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 272,
+    "design_table_row": "| `TimeoutStopSec` | Web 30s/API 60s | UI 251のgraceful上限 |",
+    "id": "CFG-342-0272",
+    "headers": [
+      "Directive",
+      "Web/API",
+      "理由"
+    ],
+    "expected_cells": [
+      "TimeoutStopSec",
+      "Web 30s/API 60s",
+      "UI 251のgraceful上限"
+    ],
+    "condition_id": "SSCOND-342-d8f4ed05b3d0",
+    "probe_plan": "P-UNIT-DIRECTIVE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S09",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A146"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 273,
+    "design_table_row": "| `SendSIGKILL` | `no` | Timeout後の自動強制終了を禁止 |",
+    "id": "CFG-342-0273",
+    "headers": [
+      "Directive",
+      "Web/API",
+      "理由"
+    ],
+    "expected_cells": [
+      "SendSIGKILL",
+      "no",
+      "Timeout後の自動強制終了を禁止"
+    ],
+    "condition_id": "SSCOND-342-7a6df2233f95",
+    "probe_plan": "P-UNIT-DIRECTIVE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S09",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A147"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 274,
+    "design_table_row": "| `LimitNOFILE` | 65536 | MQ/DB/media FD、leak監視 |",
+    "id": "CFG-342-0274",
+    "headers": [
+      "Directive",
+      "Web/API",
+      "理由"
+    ],
+    "expected_cells": [
+      "LimitNOFILE",
+      "65536",
+      "MQ/DB/media FD、leak監視"
+    ],
+    "condition_id": "SSCOND-342-adfc8f2b40f6",
+    "probe_plan": "P-UNIT-DIRECTIVE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S09",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A148"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.1 Resource",
+    "line": 317,
+    "design_table_row": "| Web | `-Xms384m -Xmx768m` | 128m / 192m | 1536M | 448m | HTTP 16/max32、MQ wait 12/max20 |",
+    "id": "CFG-342-0317",
+    "headers": [
+      "Process",
+      "Heap",
+      "Direct/Metaspace上限",
+      "systemd MemoryMax",
+      "Native headroom",
+      "Thread/pool"
+    ],
+    "expected_cells": [
+      "Web",
+      "-Xms384m -Xmx768m",
+      "128m / 192m",
+      "1536M",
+      "448m",
+      "HTTP 16/max32、MQ wait 12/max20"
+    ],
+    "condition_id": "SSCOND-342-3f5bcc672759",
+    "probe_plan": "P-JVM-RESOURCE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S10",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A149"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.1 Resource",
+    "line": 318,
+    "design_table_row": "| API | `-Xms512m -Xmx1024m` | 256m / 256m | 2048M | 512m | Sync consumer 4/max8、async 1、DB pool 8 |",
+    "id": "CFG-342-0318",
+    "headers": [
+      "Process",
+      "Heap",
+      "Direct/Metaspace上限",
+      "systemd MemoryMax",
+      "Native headroom",
+      "Thread/pool"
+    ],
+    "expected_cells": [
+      "API",
+      "-Xms512m -Xmx1024m",
+      "256m / 256m",
+      "2048M",
+      "512m",
+      "Sync consumer 4/max8、async 1、DB pool 8"
+    ],
+    "condition_id": "SSCOND-342-035ecd2c665b",
+    "probe_plan": "P-JVM-RESOURCE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S10",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A150"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.1 Resource",
+    "line": 319,
+    "design_table_row": "| Batch | `-Xms256m -Xmx768m` | 128m / 192m | 1536M | 448m | DB connection 1、step worker 1 |",
+    "id": "CFG-342-0319",
+    "headers": [
+      "Process",
+      "Heap",
+      "Direct/Metaspace上限",
+      "systemd MemoryMax",
+      "Native headroom",
+      "Thread/pool"
+    ],
+    "expected_cells": [
+      "Batch",
+      "-Xms256m -Xmx768m",
+      "128m / 192m",
+      "1536M",
+      "448m",
+      "DB connection 1、step worker 1"
+    ],
+    "condition_id": "SSCOND-342-9d1fecb644a1",
+    "probe_plan": "P-JVM-RESOURCE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S10",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A151"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.1 Resource",
+    "line": 320,
+    "design_table_row": "| Artemis | `-Xms768m -Xmx1024m` | 256m / 192m | 2048M | 576m | 321のbroker thread/config |",
+    "id": "CFG-342-0320",
+    "headers": [
+      "Process",
+      "Heap",
+      "Direct/Metaspace上限",
+      "systemd MemoryMax",
+      "Native headroom",
+      "Thread/pool"
+    ],
+    "expected_cells": [
+      "Artemis",
+      "-Xms768m -Xmx1024m",
+      "256m / 192m",
+      "2048M",
+      "576m",
+      "321のbroker thread/config"
+    ],
+    "condition_id": "SSCOND-342-95c5990caf20",
+    "probe_plan": "P-JVM-RESOURCE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S10",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A152"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 343,
+    "design_table_row": "| `server.address` | `127.0.0.1` | Main HTTP disabled |",
+    "id": "CFG-342-0343",
+    "headers": [
+      "Key",
+      "Web",
+      "API"
+    ],
+    "expected_cells": [
+      "server.address",
+      "127.0.0.1",
+      "Main HTTP disabled"
+    ],
+    "condition_id": "SSCOND-342-d7c39216834f",
+    "probe_plan": "P-APP-RUNTIME",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S11",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A153"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 344,
+    "design_table_row": "| `server.port` | `8080` | `-1`相当 |",
+    "id": "CFG-342-0344",
+    "headers": [
+      "Key",
+      "Web",
+      "API"
+    ],
+    "expected_cells": [
+      "server.port",
+      "8080",
+      "-1相当"
+    ],
+    "condition_id": "SSCOND-342-d5f21276eabc",
+    "probe_plan": "P-APP-RUNTIME",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S11",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A154"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 345,
+    "design_table_row": "| `management.server.address/port` | `127.0.0.1:8081` | `127.0.0.1:8091` |",
+    "id": "CFG-342-0345",
+    "headers": [
+      "Key",
+      "Web",
+      "API"
+    ],
+    "expected_cells": [
+      "management.server.address/port",
+      "127.0.0.1:8081",
+      "127.0.0.1:8091"
+    ],
+    "condition_id": "SSCOND-342-5b70076187b8",
+    "probe_plan": "P-APP-RUNTIME",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S11",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A155"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 346,
+    "design_table_row": "| Exposed actuator | `health,info,prometheus` | `health,info,prometheus` |",
+    "id": "CFG-342-0346",
+    "headers": [
+      "Key",
+      "Web",
+      "API"
+    ],
+    "expected_cells": [
+      "Exposed actuator",
+      "health,info,prometheus",
+      "health,info,prometheus"
+    ],
+    "condition_id": "SSCOND-342-213d6edbaf7d",
+    "probe_plan": "P-APP-RUNTIME",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S11",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A156"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 347,
+    "design_table_row": "| Health details | loopbackでも`never`、component statusはlog/metric | 同じ |",
+    "id": "CFG-342-0347",
+    "headers": [
+      "Key",
+      "Web",
+      "API"
+    ],
+    "expected_cells": [
+      "Health details",
+      "loopbackでもnever、component statusはlog/metric",
+      "同じ"
+    ],
+    "condition_id": "SSCOND-342-623a064e38a2",
+    "probe_plan": "P-APP-RUNTIME",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S11",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A157"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 348,
+    "design_table_row": "| HTTP threads | 16 initial/max32、queue 32 | management最小 |",
+    "id": "CFG-342-0348",
+    "headers": [
+      "Key",
+      "Web",
+      "API"
+    ],
+    "expected_cells": [
+      "HTTP threads",
+      "16 initial/max32、queue 32",
+      "management最小"
+    ],
+    "condition_id": "SSCOND-342-b102d19b5259",
+    "probe_plan": "P-APP-RUNTIME",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S11",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A158"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 349,
+    "design_table_row": "| Graceful shutdown | enabled、phase timeout 30s | enabled、phase timeout 60s |",
+    "id": "CFG-342-0349",
+    "headers": [
+      "Key",
+      "Web",
+      "API"
+    ],
+    "expected_cells": [
+      "Graceful shutdown",
+      "enabled、phase timeout 30s",
+      "enabled、phase timeout 60s"
+    ],
+    "condition_id": "SSCOND-342-3333d6c0b1f4",
+    "probe_plan": "P-APP-RUNTIME",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S11",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A159"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 350,
+    "design_table_row": "| DB pool | Web technical max 2/min 1、connect 3s | max 8/min 2、connect 3s |",
+    "id": "CFG-342-0350",
+    "headers": [
+      "Key",
+      "Web",
+      "API"
+    ],
+    "expected_cells": [
+      "DB pool",
+      "Web technical max 2/min 1、connect 3s",
+      "max 8/min 2、connect 3s"
+    ],
+    "condition_id": "SSCOND-342-8d043ddfaf8b",
+    "probe_plan": "P-APP-RUNTIME",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S11",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A160"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 351,
+    "design_table_row": "| JMS request wait | 2s、semaphore 12/max20 | Listener 4/max8、async 1 |",
+    "id": "CFG-342-0351",
+    "headers": [
+      "Key",
+      "Web",
+      "API"
+    ],
+    "expected_cells": [
+      "JMS request wait",
+      "2s、semaphore 12/max20",
+      "Listener 4/max8、async 1"
+    ],
+    "condition_id": "SSCOND-342-5bb9f372576c",
+    "probe_plan": "P-APP-RUNTIME",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S11",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A161"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 364,
+    "design_table_row": "| `listen_addresses` | `127.0.0.1,::1` | Loopback専用 |",
+    "id": "CFG-342-0364",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "listen_addresses",
+      "127.0.0.1,::1",
+      "Loopback専用"
+    ],
+    "condition_id": "SSCOND-342-9728e8989e81",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A162"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 365,
+    "design_table_row": "| `port` | 5432 | UI default |",
+    "id": "CFG-342-0365",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "port",
+      "5432",
+      "UI default"
+    ],
+    "condition_id": "SSCOND-342-df18610a121e",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A163"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 366,
+    "design_table_row": "| `max_connections` | 40 | API 8＋Web 2＋batch/migration/ops＋管理・復旧余裕 |",
+    "id": "CFG-342-0366",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "max_connections",
+      "40",
+      "API 8＋Web 2＋batch/migration/ops＋管理・復旧余裕"
+    ],
+    "condition_id": "SSCOND-342-683c0aa959a9",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A164"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 367,
+    "design_table_row": "| `shared_buffers` | 2GB | 16GB host/PG 4GB budgetの初期値 |",
+    "id": "CFG-342-0367",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "shared_buffers",
+      "2GB",
+      "16GB host/PG 4GB budgetの初期値"
+    ],
+    "condition_id": "SSCOND-342-0ec24e83905d",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A165"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 368,
+    "design_table_row": "| `effective_cache_size` | 6GB | OS cacheを含むplanner hint、allocationではない |",
+    "id": "CFG-342-0368",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "effective_cache_size",
+      "6GB",
+      "OS cacheを含むplanner hint、allocationではない"
+    ],
+    "condition_id": "SSCOND-342-44a7399ec01c",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A166"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 369,
+    "design_table_row": "| `work_mem` | 8MB | 同時sort/hashの倍率消費をbound |",
+    "id": "CFG-342-0369",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "work_mem",
+      "8MB",
+      "同時sort/hashの倍率消費をbound"
+    ],
+    "condition_id": "SSCOND-342-6da069d4cd86",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A167"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 370,
+    "design_table_row": "| `maintenance_work_mem` | 512MB | Migration/index/maintenance、app同時多重なし |",
+    "id": "CFG-342-0370",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "maintenance_work_mem",
+      "512MB",
+      "Migration/index/maintenance、app同時多重なし"
+    ],
+    "condition_id": "SSCOND-342-b17691d21b46",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A168"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 371,
+    "design_table_row": "| `max_worker_processes` | 8 | 小規模single host |",
+    "id": "CFG-342-0371",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "max_worker_processes",
+      "8",
+      "小規模single host"
+    ],
+    "condition_id": "SSCOND-342-9233602895cf",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A169"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 372,
+    "design_table_row": "| `max_parallel_workers` | 4 | CPU/メモリ上限 |",
+    "id": "CFG-342-0372",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "max_parallel_workers",
+      "4",
+      "CPU/メモリ上限"
+    ],
+    "condition_id": "SSCOND-342-60c8d720b851",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A170"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 373,
+    "design_table_row": "| `max_parallel_workers_per_gather` | 2 | 1 queryの占有防止 |",
+    "id": "CFG-342-0373",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "max_parallel_workers_per_gather",
+      "2",
+      "1 queryの占有防止"
+    ],
+    "condition_id": "SSCOND-342-3bca88d7e37a",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A171"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 374,
+    "design_table_row": "| `temp_file_limit` | 2GB | 異常sortのSSD枯渇防止 |",
+    "id": "CFG-342-0374",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "temp_file_limit",
+      "2GB",
+      "異常sortのSSD枯渇防止"
+    ],
+    "condition_id": "SSCOND-342-36d9e152d901",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A172"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 375,
+    "design_table_row": "| `wal_compression` | on | WAL容量抑制 |",
+    "id": "CFG-342-0375",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "wal_compression",
+      "on",
+      "WAL容量抑制"
+    ],
+    "condition_id": "SSCOND-342-b4ba86947e7c",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A173"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 376,
+    "design_table_row": "| `min_wal_size` / `max_wal_size` | 1GB / 4GB | Checkpoint・30GB DB budget |",
+    "id": "CFG-342-0376",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "min_wal_size / max_wal_size",
+      "1GB / 4GB",
+      "Checkpoint・30GB DB budget"
+    ],
+    "condition_id": "SSCOND-342-6fcfc69ae49e",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A174"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 377,
+    "design_table_row": "| `checkpoint_timeout` | 15min | 小規模の初期値 |",
+    "id": "CFG-342-0377",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "checkpoint_timeout",
+      "15min",
+      "小規模の初期値"
+    ],
+    "condition_id": "SSCOND-342-f8e9dc150ad3",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A175"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 378,
+    "design_table_row": "| `checkpoint_completion_target` | 0.9 | I/O平準化 |",
+    "id": "CFG-342-0378",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "checkpoint_completion_target",
+      "0.9",
+      "I/O平準化"
+    ],
+    "condition_id": "SSCOND-342-d5d242c3d6e6",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A176"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 379,
+    "design_table_row": "| `deadlock_timeout` | 500ms | API lock timeoutと合わせ早期検出 |",
+    "id": "CFG-342-0379",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "deadlock_timeout",
+      "500ms",
+      "API lock timeoutと合わせ早期検出"
+    ],
+    "condition_id": "SSCOND-342-5f9f3eac4551",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A177"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 380,
+    "design_table_row": "| `password_encryption` | `scram-sha-256` | MD5非使用 |",
+    "id": "CFG-342-0380",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "password_encryption",
+      "scram-sha-256",
+      "MD5非使用"
+    ],
+    "condition_id": "SSCOND-342-3a5c42b018e0",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A178"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 381,
+    "design_table_row": "| `ssl` | off | Loopback内のみ、OS・rolesで保護 |",
+    "id": "CFG-342-0381",
+    "headers": [
+      "Key",
+      "Value",
+      "理由"
+    ],
+    "expected_cells": [
+      "ssl",
+      "off",
+      "Loopback内のみ、OS・rolesで保護"
+    ],
+    "condition_id": "SSCOND-342-29de7226a6b4",
+    "probe_plan": "P-PG-GLOBAL",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S12",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A179"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.2 Roleごとのtimeout",
+    "line": 397,
+    "design_table_row": "| `schubert_app` | 1500ms | 500ms | 15s |",
+    "id": "CFG-342-0397",
+    "headers": [
+      "Role",
+      "statement_timeout",
+      "lock_timeout",
+      "idle_in_transaction_session_timeout"
+    ],
+    "expected_cells": [
+      "schubert_app",
+      "1500ms",
+      "500ms",
+      "15s"
+    ],
+    "condition_id": "SSCOND-342-dcb9349f9b22",
+    "probe_plan": "P-PG-ROLE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S13",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A180"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.2 Roleごとのtimeout",
+    "line": 398,
+    "design_table_row": "| `schubert_web_session` | 1500ms | 500ms | 15s |",
+    "id": "CFG-342-0398",
+    "headers": [
+      "Role",
+      "statement_timeout",
+      "lock_timeout",
+      "idle_in_transaction_session_timeout"
+    ],
+    "expected_cells": [
+      "schubert_web_session",
+      "1500ms",
+      "500ms",
+      "15s"
+    ],
+    "condition_id": "SSCOND-342-e72b10e6db10",
+    "probe_plan": "P-PG-ROLE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S13",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A181"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.2 Roleごとのtimeout",
+    "line": 399,
+    "design_table_row": "| `schubert_batch` | 30min | 5s | 60s |",
+    "id": "CFG-342-0399",
+    "headers": [
+      "Role",
+      "statement_timeout",
+      "lock_timeout",
+      "idle_in_transaction_session_timeout"
+    ],
+    "expected_cells": [
+      "schubert_batch",
+      "30min",
+      "5s",
+      "60s"
+    ],
+    "condition_id": "SSCOND-342-bcb1fe6d5308",
+    "probe_plan": "P-PG-ROLE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S13",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A182"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.2 Roleごとのtimeout",
+    "line": 400,
+    "design_table_row": "| `schubert_backup` | 30min | 5s | 60s |",
+    "id": "CFG-342-0400",
+    "headers": [
+      "Role",
+      "statement_timeout",
+      "lock_timeout",
+      "idle_in_transaction_session_timeout"
+    ],
+    "expected_cells": [
+      "schubert_backup",
+      "30min",
+      "5s",
+      "60s"
+    ],
+    "condition_id": "SSCOND-342-a21da6fab69f",
+    "probe_plan": "P-PG-ROLE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S13",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A183"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.2 Roleごとのtimeout",
+    "line": 401,
+    "design_table_row": "| `schubert_migration` | 30min | 5s | 60s |",
+    "id": "CFG-342-0401",
+    "headers": [
+      "Role",
+      "statement_timeout",
+      "lock_timeout",
+      "idle_in_transaction_session_timeout"
+    ],
+    "expected_cells": [
+      "schubert_migration",
+      "30min",
+      "5s",
+      "60s"
+    ],
+    "condition_id": "SSCOND-342-dab4c7ba3e7a",
+    "probe_plan": "P-PG-ROLE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S13",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A184"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.2 Roleごとのtimeout",
+    "line": 402,
+    "design_table_row": "| `schubert_ops_ro` | 10s | 1s | 15s |",
+    "id": "CFG-342-0402",
+    "headers": [
+      "Role",
+      "statement_timeout",
+      "lock_timeout",
+      "idle_in_transaction_session_timeout"
+    ],
+    "expected_cells": [
+      "schubert_ops_ro",
+      "10s",
+      "1s",
+      "15s"
+    ],
+    "condition_id": "SSCOND-342-7fbebf16bfdb",
+    "probe_plan": "P-PG-ROLE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S13",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A185"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.2 Roleごとのtimeout",
+    "line": 403,
+    "design_table_row": "| `schubert_inbox_inspector`（SSC-049） | 30s | 5s | 専用単発transaction、process上限30min。既存provisioningに未設定のidle値を設定済みとしない |",
+    "id": "CFG-342-0403",
+    "headers": [
+      "Role",
+      "statement_timeout",
+      "lock_timeout",
+      "idle_in_transaction_session_timeout"
+    ],
+    "expected_cells": [
+      "schubert_inbox_inspector（SSC-049）",
+      "30s",
+      "5s",
+      "専用単発transaction、process上限30min。既存provisioningに未設定のidle値を設定済みとしない"
+    ],
+    "condition_id": "SSCOND-342-f9d80be24537",
+    "probe_plan": "P-PG-ROLE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S13",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A186"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "8. Resource・disk合計・実測gates",
+    "line": 452,
+    "design_table_row": "| PostgreSQL | 4GB | RSS/shared/work memory合計、temp/WAL、query plan |",
+    "id": "CFG-342-0452",
+    "headers": [
+      "分類",
+      "設計budget",
+      "Gate"
+    ],
+    "expected_cells": [
+      "PostgreSQL",
+      "4GB",
+      "RSS/shared/work memory合計、temp/WAL、query plan"
+    ],
+    "condition_id": "SSCOND-342-22ab6e14f8fb",
+    "probe_plan": "P-HOST-BUDGET",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S14",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A187"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "8. Resource・disk合計・実測gates",
+    "line": 453,
+    "design_table_row": "| Artemis | 2GB | JVM/direct/RSS、Queue 41,000件相当 |",
+    "id": "CFG-342-0453",
+    "headers": [
+      "分類",
+      "設計budget",
+      "Gate"
+    ],
+    "expected_cells": [
+      "Artemis",
+      "2GB",
+      "JVM/direct/RSS、Queue 41,000件相当"
+    ],
+    "condition_id": "SSCOND-342-0856fd849d25",
+    "probe_plan": "P-HOST-BUDGET",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S14",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A188"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "8. Resource・disk合計・実測gates",
+    "line": 454,
+    "design_table_row": "| API | 2GB | 8 DB connection、8 sync consumer max、codec/file mode |",
+    "id": "CFG-342-0454",
+    "headers": [
+      "分類",
+      "設計budget",
+      "Gate"
+    ],
+    "expected_cells": [
+      "API",
+      "2GB",
+      "8 DB connection、8 sync consumer max、codec/file mode"
+    ],
+    "condition_id": "SSCOND-342-83c84bff9c91",
+    "probe_plan": "P-HOST-BUDGET",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S14",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A189"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "8. Resource・disk合計・実測gates",
+    "line": 455,
+    "design_table_row": "| Web | 1.5GB | 20 wait/20 stream、session/outbox |",
+    "id": "CFG-342-0455",
+    "headers": [
+      "分類",
+      "設計budget",
+      "Gate"
+    ],
+    "expected_cells": [
+      "Web",
+      "1.5GB",
+      "20 wait/20 stream、session/outbox"
+    ],
+    "condition_id": "SSCOND-342-ba180508e7f8",
+    "probe_plan": "P-HOST-BUDGET",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S14",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A190"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "8. Resource・disk合計・実測gates",
+    "line": 456,
+    "design_table_row": "| OS/Caddy/cache | 3GB | 停止/起動・broker I/Oを含む |",
+    "id": "CFG-342-0456",
+    "headers": [
+      "分類",
+      "設計budget",
+      "Gate"
+    ],
+    "expected_cells": [
+      "OS/Caddy/cache",
+      "3GB",
+      "停止/起動・broker I/Oを含む"
+    ],
+    "condition_id": "SSCOND-342-6f4f4d3d535b",
+    "probe_plan": "P-HOST-BUDGET",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S14",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A191"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "8. Resource・disk合計・実測gates",
+    "line": 457,
+    "design_table_row": "| Safety/DEBUG | 3.5GB | STANDARDでDEBUG 2GBを起動しない |",
+    "id": "CFG-342-0457",
+    "headers": [
+      "分類",
+      "設計budget",
+      "Gate"
+    ],
+    "expected_cells": [
+      "Safety/DEBUG",
+      "3.5GB",
+      "STANDARDでDEBUG 2GBを起動しない"
+    ],
+    "condition_id": "SSCOND-342-3d2d6d3e42ff",
+    "probe_plan": "P-HOST-BUDGET",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S14",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A192"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "9. Configuration validation・drift",
+    "line": 469,
+    "design_table_row": "| Caddy | fmt/adapt/validate、bind/cert/key permission | TLS/header/upstream/55160/firewall |",
+    "id": "CFG-342-0469",
+    "headers": [
+      "Component",
+      "Deploy前",
+      "起動後"
+    ],
+    "expected_cells": [
+      "Caddy",
+      "fmt/adapt/validate、bind/cert/key permission",
+      "TLS/header/upstream/55160/firewall"
+    ],
+    "condition_id": "SSCOND-342-a20041b6c253",
+    "probe_plan": "P-DEPLOY-VALIDATION",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S15",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A193"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "9. Configuration validation・drift",
+    "line": 470,
+    "design_table_row": "| Systemd | `systemd-analyze verify`、unit diff、user/path | `systemctl show`のMemoryMax/restart/timeout/hardening |",
+    "id": "CFG-342-0470",
+    "headers": [
+      "Component",
+      "Deploy前",
+      "起動後"
+    ],
+    "expected_cells": [
+      "Systemd",
+      "systemd-analyze verify、unit diff、user/path",
+      "systemctl showのMemoryMax/restart/timeout/hardening"
+    ],
+    "condition_id": "SSCOND-342-2de870b4092f",
+    "probe_plan": "P-DEPLOY-VALIDATION",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S15",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A194"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "9. Configuration validation・drift",
+    "line": 471,
+    "design_table_row": "| PostgreSQL | config/hba parse、`postgres -C`、role/grant diff | `SHOW`実効値、pg_isready、remote接続拒否 |",
+    "id": "CFG-342-0471",
+    "headers": [
+      "Component",
+      "Deploy前",
+      "起動後"
+    ],
+    "expected_cells": [
+      "PostgreSQL",
+      "config/hba parse、postgres -C、role/grant diff",
+      "SHOW実効値、pg_isready、remote接続拒否"
+    ],
+    "condition_id": "SSCOND-342-a8ade870e069",
+    "probe_plan": "P-DEPLOY-VALIDATION",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S15",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A195"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "9. Configuration validation・drift",
+    "line": 472,
+    "design_table_row": "| Artemis | XML schema、address/security diff | Management APIのAddress/Queue/journal/security/effective settings |",
+    "id": "CFG-342-0472",
+    "headers": [
+      "Component",
+      "Deploy前",
+      "起動後"
+    ],
+    "expected_cells": [
+      "Artemis",
+      "XML schema、address/security diff",
+      "Management APIのAddress/Queue/journal/security/effective settings"
+    ],
+    "condition_id": "SSCOND-342-1b4d023c5e9a",
+    "probe_plan": "P-DEPLOY-VALIDATION",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S15",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A196"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "9. Configuration validation・drift",
+    "line": 473,
+    "design_table_row": "| Java | Java 25/toolchain、config schema、secret permission | `/info`のversion、health、JVM flag/resource |",
+    "id": "CFG-342-0473",
+    "headers": [
+      "Component",
+      "Deploy前",
+      "起動後"
+    ],
+    "expected_cells": [
+      "Java",
+      "Java 25/toolchain、config schema、secret permission",
+      "/infoのversion、health、JVM flag/resource"
+    ],
+    "condition_id": "SSCOND-342-3584811b5fe8",
+    "probe_plan": "P-DEPLOY-VALIDATION",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S15",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A197"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "4. Config file・設定sourceの優先順",
+    "line": 876,
+    "design_table_row": "| 1（低） | Jar内default | 上位で確定済みの非環境値、安全なfail-closed default |",
+    "id": "CFG-343-0876",
+    "headers": [
+      "優先",
+      "Source",
+      "用途"
+    ],
+    "expected_cells": [
+      "1（低）",
+      "Jar内default",
+      "上位で確定済みの非環境値、安全なfail-closed default"
+    ],
+    "condition_id": "SSCOND-343-0118138db6f3",
+    "probe_plan": "P-CONFIG-PRECEDENCE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S16",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A198"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "4. Config file・設定sourceの優先順",
+    "line": 877,
+    "design_table_row": "| 2 | `/etc/schubert-nk/common.yml` | protocol/timezone/monitoring共通 |",
+    "id": "CFG-343-0877",
+    "headers": [
+      "優先",
+      "Source",
+      "用途"
+    ],
+    "expected_cells": [
+      "2",
+      "/etc/schubert-nk/common.yml",
+      "protocol/timezone/monitoring共通"
+    ],
+    "condition_id": "SSCOND-343-c2d598fd65cd",
+    "probe_plan": "P-CONFIG-PRECEDENCE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S16",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A199"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "4. Config file・設定sourceの優先順",
+    "line": 878,
+    "design_table_row": "| 3 | `/etc/schubert-nk/<web|api|batch>.yml` | Process別port/pool/path/retention |",
+    "id": "CFG-343-0878",
+    "headers": [
+      "優先",
+      "Source",
+      "用途"
+    ],
+    "expected_cells": [
+      "3",
+      "/etc/schubert-nk/<web|api|batch>.yml",
+      "Process別port/pool/path/retention"
+    ],
+    "condition_id": "SSCOND-343-4602548a56fd",
+    "probe_plan": "P-CONFIG-PRECEDENCE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S16",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A200"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "4. Config file・設定sourceの優先順",
+    "line": 879,
+    "design_table_row": "| 4 | `/etc/schubert-nk/<service>.env` | JVM option、config file location等の非秘密 |",
+    "id": "CFG-343-0879",
+    "headers": [
+      "優先",
+      "Source",
+      "用途"
+    ],
+    "expected_cells": [
+      "4",
+      "/etc/schubert-nk/<service>.env",
+      "JVM option、config file location等の非秘密"
+    ],
+    "condition_id": "SSCOND-343-44a3ec129bcd",
+    "probe_plan": "P-CONFIG-PRECEDENCE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S16",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A201"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "4. Config file・設定sourceの優先順",
+    "line": 880,
+    "design_table_row": "| 5（高） | systemd credential/config tree | DB/MQ password、AES/HMAC key、backup recipient等のsecret |",
+    "id": "CFG-343-0880",
+    "headers": [
+      "優先",
+      "Source",
+      "用途"
+    ],
+    "expected_cells": [
+      "5（高）",
+      "systemd credential/config tree",
+      "DB/MQ password、AES/HMAC key、backup recipient等のsecret"
+    ],
+    "condition_id": "SSCOND-343-59523c1a9b34",
+    "probe_plan": "P-CONFIG-PRECEDENCE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S16",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A202"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 893,
+    "design_table_row": "| `nk.protocol.version` | `001` | 完全一致、UI 232 |",
+    "id": "CFG-343-0893",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.protocol.version",
+      "001",
+      "完全一致、UI 232"
+    ],
+    "condition_id": "SSCOND-343-97e4a7242d9e",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S17",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A203"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 894,
+    "design_table_row": "| `nk.time.display-zone` | `Asia/Tokyo` | Wire/viewだけ、DB/JVM UTC |",
+    "id": "CFG-343-0894",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.time.display-zone",
+      "Asia/Tokyo",
+      "Wire/viewだけ、DB/JVM UTC"
+    ],
+    "condition_id": "SSCOND-343-4a658d118ee1",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S17",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A204"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 895,
+    "design_table_row": "| `nk.monitoring.mode` | `STANDARD` | STANDARD/DEBUG、UI 252 |",
+    "id": "CFG-343-0895",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.monitoring.mode",
+      "STANDARD",
+      "STANDARD/DEBUG、UI 252"
+    ],
+    "condition_id": "SSCOND-343-76b63eba161b",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S17",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A205"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 896,
+    "design_table_row": "| `nk.web.http.address/port` | `127.0.0.1` / `8080` | Loopback |",
+    "id": "CFG-343-0896",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.web.http.address/port",
+      "127.0.0.1 / 8080",
+      "Loopback"
+    ],
+    "condition_id": "SSCOND-343-a62e32a85603",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S17",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A206"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 897,
+    "design_table_row": "| `nk.web.management.port` | `8081` | Loopback、Caddy非proxy |",
+    "id": "CFG-343-0897",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.web.management.port",
+      "8081",
+      "Loopback、Caddy非proxy"
+    ],
+    "condition_id": "SSCOND-343-78a4144ad417",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S17",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A207"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 898,
+    "design_table_row": "| `nk.web.mq.reply-timeout` | `2s` | 100ms..2s、UI 212/253 |",
+    "id": "CFG-343-0898",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.web.mq.reply-timeout",
+      "2s",
+      "100ms..2s、UI 212/253"
+    ],
+    "condition_id": "SSCOND-343-c956958970bf",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S17",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A208"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 899,
+    "design_table_row": "| `nk.web.mq.wait.initial/max` | `12` / `20` | max<=20 |",
+    "id": "CFG-343-0899",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.web.mq.wait.initial/max",
+      "12 / 20",
+      "max<=20"
+    ],
+    "condition_id": "SSCOND-343-936b88e99e30",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S17",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A209"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 900,
+    "design_table_row": "| `nk.web.session.idle-timeout` | `8h` | UI 226、無断短縮禁止 |",
+    "id": "CFG-343-0900",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.web.session.idle-timeout",
+      "8h",
+      "UI 226、無断短縮禁止"
+    ],
+    "condition_id": "SSCOND-343-a916951d62b3",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S17",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A210"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 901,
+    "design_table_row": "| `nk.web.session.max-per-user` | `2` | APIが最終強制 |",
+    "id": "CFG-343-0901",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.web.session.max-per-user",
+      "2",
+      "APIが最終強制"
+    ],
+    "condition_id": "SSCOND-343-26be505ad632",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S17",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A211"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 902,
+    "design_table_row": "| `nk.web.storage.asset-root` | `/srv/schubert-nk/data/assets` | absolute real dir/read-only |",
+    "id": "CFG-343-0902",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.web.storage.asset-root",
+      "/srv/schubert-nk/data/assets",
+      "absolute real dir/read-only"
+    ],
+    "condition_id": "SSCOND-343-2b5db0538606",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S17",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A212"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 903,
+    "design_table_row": "| `nk.web.storage.transfer-root` | `/srv/schubert-nk/data/transfer` | absolute real dir/read-only |",
+    "id": "CFG-343-0903",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.web.storage.transfer-root",
+      "/srv/schubert-nk/data/transfer",
+      "absolute real dir/read-only"
+    ],
+    "condition_id": "SSCOND-343-38a3e0fd3bbd",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S17",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A213"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 904,
+    "design_table_row": "| `nk.web.media.max-streams` | `20` | 1..20 |",
+    "id": "CFG-343-0904",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.web.media.max-streams",
+      "20",
+      "1..20"
+    ],
+    "condition_id": "SSCOND-343-fd23eae4ea0e",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S17",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A214"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 905,
+    "design_table_row": "| `nk.web.media.max-range-bytes` | `1048576` | UI 223/237と完全一致 |",
+    "id": "CFG-343-0905",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.web.media.max-range-bytes",
+      "1048576",
+      "UI 223/237と完全一致"
+    ],
+    "condition_id": "SSCOND-343-3c1b08e9812d",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S17",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A215"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 911,
+    "design_table_row": "| `nk.mq.url` | `tcp://127.0.0.1:61616` | Loopback/coreのみ |",
+    "id": "CFG-343-0911",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.mq.url",
+      "tcp://127.0.0.1:61616",
+      "Loopback/coreのみ"
+    ],
+    "condition_id": "SSCOND-343-c67de96ccd09",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S18",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A216"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 912,
+    "design_table_row": "| `nk.mq.sync-request/reply` | UI 231のAddress名 | 321のallowlistと完全一致 |",
+    "id": "CFG-343-0912",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.mq.sync-request/reply",
+      "UI 231のAddress名",
+      "321のallowlistと完全一致"
+    ],
+    "condition_id": "SSCOND-343-43ab2edb6900",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S18",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A217"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 913,
+    "design_table_row": "| `nk.mq.async-work/web-log/dlq/expiry` | UI 231のAddress名 | Unknown禁止 |",
+    "id": "CFG-343-0913",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.mq.async-work/web-log/dlq/expiry",
+      "UI 231のAddress名",
+      "Unknown禁止"
+    ],
+    "condition_id": "SSCOND-343-86677a009963",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S18",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A218"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 914,
+    "design_table_row": "| `nk.api.sync-consumers.initial/max` | `4` / `8` | DB pool<=8 |",
+    "id": "CFG-343-0914",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.api.sync-consumers.initial/max",
+      "4 / 8",
+      "DB pool<=8"
+    ],
+    "condition_id": "SSCOND-343-87dbe3c62470",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S18",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A219"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 915,
+    "design_table_row": "| `nk.api.async-consumers` | `1` | 固定、変更禁止 |",
+    "id": "CFG-343-0915",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.api.async-consumers",
+      "1",
+      "固定、変更禁止"
+    ],
+    "condition_id": "SSCOND-343-9b7e79190bbd",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S18",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A220"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 916,
+    "design_table_row": "| `nk.db.url` | `jdbc:postgresql://127.0.0.1:5432/schubert_nk` | Loopback、parameter allowlist |",
+    "id": "CFG-343-0916",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.db.url",
+      "jdbc:postgresql://127.0.0.1:5432/schubert_nk",
+      "Loopback、parameter allowlist"
+    ],
+    "condition_id": "SSCOND-343-1372af7ba6aa",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S18",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A221"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 917,
+    "design_table_row": "| `nk.db.pool.api.max/min` | `8` / `2` | UI 253 |",
+    "id": "CFG-343-0917",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.db.pool.api.max/min",
+      "8 / 2",
+      "UI 253"
+    ],
+    "condition_id": "SSCOND-343-1778c98ad461",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S18",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A222"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 918,
+    "design_table_row": "| `nk.db.pool.web.max/min` | `2` / `1` | UI 212の初期上限2、Technical schema専用 |",
+    "id": "CFG-343-0918",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.db.pool.web.max/min",
+      "2 / 1",
+      "UI 212の初期上限2、Technical schema専用"
+    ],
+    "condition_id": "SSCOND-343-bab01ff19c8e",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S18",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A223"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 919,
+    "design_table_row": "| `nk.db.connect-timeout` | `3s` | UI 212 |",
+    "id": "CFG-343-0919",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.db.connect-timeout",
+      "3s",
+      "UI 212"
+    ],
+    "condition_id": "SSCOND-343-a6e20ae0489e",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S18",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A224"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 920,
+    "design_table_row": "| `nk.api.storage.asset-root` | `/srv/schubert-nk/data/assets` | read-only |",
+    "id": "CFG-343-0920",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.api.storage.asset-root",
+      "/srv/schubert-nk/data/assets",
+      "read-only"
+    ],
+    "condition_id": "SSCOND-343-89f11a100312",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S18",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A225"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 921,
+    "design_table_row": "| `nk.api.storage.transfer-root` | `/srv/schubert-nk/data/transfer` | write、secure root |",
+    "id": "CFG-343-0921",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.api.storage.transfer-root",
+      "/srv/schubert-nk/data/transfer",
+      "write、secure root"
+    ],
+    "condition_id": "SSCOND-343-349a5a1da62a",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S18",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A226"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 922,
+    "design_table_row": "| `nk.inbox.reference/update-retention` | `24h` / `7d` | UI 251、324 |",
+    "id": "CFG-343-0922",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.inbox.reference/update-retention",
+      "24h / 7d",
+      "UI 251、324"
+    ],
+    "condition_id": "SSCOND-343-5a1cfffbe9ba",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S18",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A227"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 923,
+    "design_table_row": "| `nk.outbox.sent-retention` | `7d` | PENDING/ERRORは無期限 |",
+    "id": "CFG-343-0923",
+    "headers": [
+      "Key",
+      "Production initial",
+      "Validation/関連UI"
+    ],
+    "expected_cells": [
+      "nk.outbox.sent-retention",
+      "7d",
+      "PENDING/ERRORは無期限"
+    ],
+    "condition_id": "SSCOND-343-dba4b0ee6514",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S18",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A228"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 937,
+    "design_table_row": "| `nk.batch.zone/schedule` | `Asia/Tokyo` / `05:00` | systemd timerと照合 |",
+    "id": "CFG-343-0937",
+    "headers": [
+      "Key",
+      "Initial",
+      "Validation"
+    ],
+    "expected_cells": [
+      "nk.batch.zone/schedule",
+      "Asia/Tokyo / 05:00",
+      "systemd timerと照合"
+    ],
+    "condition_id": "SSCOND-343-be70f027f386",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S19",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A229"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 938,
+    "design_table_row": "| `nk.batch.backup-root` | `/srv/schubert-nk/backup` | absolute real dir、other root非重複 |",
+    "id": "CFG-343-0938",
+    "headers": [
+      "Key",
+      "Initial",
+      "Validation"
+    ],
+    "expected_cells": [
+      "nk.batch.backup-root",
+      "/srv/schubert-nk/backup",
+      "absolute real dir、other root非重複"
+    ],
+    "condition_id": "SSCOND-343-a03f91c3d1bc",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S19",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A230"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 939,
+    "design_table_row": "| `nk.batch.backup-generations` | `7` | 固定、短縮禁止 |",
+    "id": "CFG-343-0939",
+    "headers": [
+      "Key",
+      "Initial",
+      "Validation"
+    ],
+    "expected_cells": [
+      "nk.batch.backup-generations",
+      "7",
+      "固定、短縮禁止"
+    ],
+    "condition_id": "SSCOND-343-9cc983ab18e9",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S19",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A231"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 940,
+    "design_table_row": "| `nk.batch.transfer-cleanup` | enabled | 取得ACKなし、次回朝 |",
+    "id": "CFG-343-0940",
+    "headers": [
+      "Key",
+      "Initial",
+      "Validation"
+    ],
+    "expected_cells": [
+      "nk.batch.transfer-cleanup",
+      "enabled",
+      "取得ACKなし、次回朝"
+    ],
+    "condition_id": "SSCOND-343-734dfdd676eb",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S19",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A232"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 941,
+    "design_table_row": "| `nk.batch.expiry-retention` | `7d` | DLQに適用しない |",
+    "id": "CFG-343-0941",
+    "headers": [
+      "Key",
+      "Initial",
+      "Validation"
+    ],
+    "expected_cells": [
+      "nk.batch.expiry-retention",
+      "7d",
+      "DLQに適用しない"
+    ],
+    "condition_id": "SSCOND-343-0795ae68dda4",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S19",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A233"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 942,
+    "design_table_row": "| `nk.batch.log-retention` | `90d` | Security hold除外 |",
+    "id": "CFG-343-0942",
+    "headers": [
+      "Key",
+      "Initial",
+      "Validation"
+    ],
+    "expected_cells": [
+      "nk.batch.log-retention",
+      "90d",
+      "Security hold除外"
+    ],
+    "condition_id": "SSCOND-343-42ff85bf9b0a",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S19",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A234"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 943,
+    "design_table_row": "| `nk.batch.run-retention` | `400d` | FAILED調査中除外 |",
+    "id": "CFG-343-0943",
+    "headers": [
+      "Key",
+      "Initial",
+      "Validation"
+    ],
+    "expected_cells": [
+      "nk.batch.run-retention",
+      "400d",
+      "FAILED調査中除外"
+    ],
+    "condition_id": "SSCOND-343-3181251db3fb",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S19",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A235"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 944,
+    "design_table_row": "| `nk.batch.chunk-size` | notification/question 1000、log 10000 | 1..defined max |",
+    "id": "CFG-343-0944",
+    "headers": [
+      "Key",
+      "Initial",
+      "Validation"
+    ],
+    "expected_cells": [
+      "nk.batch.chunk-size",
+      "notification/question 1000、log 10000",
+      "1..defined max"
+    ],
+    "condition_id": "SSCOND-343-c5051b2f526b",
+    "probe_plan": "P-APP-KEY",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S19",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A236"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 952,
+    "design_table_row": "| `db-api`,`db-web`,`db-batch`,`db-migration` | 対応process | PostgreSQL SCRAM password、service別。`db-batch`はdumpへ使用しない |",
+    "id": "CFG-343-0952",
+    "headers": [
+      "Credential ID",
+      "Consumer",
+      "形式・rotation"
+    ],
+    "expected_cells": [
+      "db-api,db-web,db-batch,db-migration",
+      "対応process",
+      "PostgreSQL SCRAM password、service別。db-batchはdumpへ使用しない"
+    ],
+    "condition_id": "SSCOND-343-a0044dbf07c3",
+    "probe_plan": "P-CREDENTIAL-CATALOG",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S20",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A237"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 953,
+    "design_table_row": "| `db-backup` | backup unit | QA-043/UIC-003承認済みの`schubert_backup`専用SCRAM password。`schubert-backup` OS userだけへ配布 |",
+    "id": "CFG-343-0953",
+    "headers": [
+      "Credential ID",
+      "Consumer",
+      "形式・rotation"
+    ],
+    "expected_cells": [
+      "db-backup",
+      "backup unit",
+      "QA-043/UIC-003承認済みのschubert_backup専用SCRAM password。schubert-backup OS userだけへ配布"
+    ],
+    "condition_id": "SSCOND-343-f68873b9d4df",
+    "probe_plan": "P-CREDENTIAL-CATALOG",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S20",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A238"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 954,
+    "design_table_row": "| `db-inbox-inspector` | 非公開Inbox保守検査processのみ | QA-046/UIC-006/SSC-049の`schubert_inbox_inspector`専用SCRAM password。batch/Web/backup/通常APIへ配布しない |",
+    "id": "CFG-343-0954",
+    "headers": [
+      "Credential ID",
+      "Consumer",
+      "形式・rotation"
+    ],
+    "expected_cells": [
+      "db-inbox-inspector",
+      "非公開Inbox保守検査processのみ",
+      "QA-046/UIC-006/SSC-049のschubert_inbox_inspector専用SCRAM password。batch/Web/backup/通常APIへ配布しない"
+    ],
+    "condition_id": "SSCOND-343-e59d2d1916fd",
+    "probe_plan": "P-CREDENTIAL-CATALOG",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S20",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A239"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 955,
+    "design_table_row": "| `mq-web`,`mq-api`,`mq-maintenance`,`mq-ops` | 対応process | Artemis credential、Address権限別 |",
+    "id": "CFG-343-0955",
+    "headers": [
+      "Credential ID",
+      "Consumer",
+      "形式・rotation"
+    ],
+    "expected_cells": [
+      "mq-web,mq-api,mq-maintenance,mq-ops",
+      "対応process",
+      "Artemis credential、Address権限別"
+    ],
+    "condition_id": "SSCOND-343-fcbc5087b51b",
+    "probe_plan": "P-CREDENTIAL-CATALOG",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S20",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A240"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 956,
+    "design_table_row": "| `web-session-aes-current/previous` | Web | AES-256-GCM、key version付き |",
+    "id": "CFG-343-0956",
+    "headers": [
+      "Credential ID",
+      "Consumer",
+      "形式・rotation"
+    ],
+    "expected_cells": [
+      "web-session-aes-current/previous",
+      "Web",
+      "AES-256-GCM、key version付き"
+    ],
+    "condition_id": "SSCOND-343-bb559a3ede61",
+    "probe_plan": "P-CREDENTIAL-CATALOG",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S20",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A241"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 957,
+    "design_table_row": "| `web-revoke-aes-current/previous` | Web | Pending context revoke暗号、session keyと分離 |",
+    "id": "CFG-343-0957",
+    "headers": [
+      "Credential ID",
+      "Consumer",
+      "形式・rotation"
+    ],
+    "expected_cells": [
+      "web-revoke-aes-current/previous",
+      "Web",
+      "Pending context revoke暗号、session keyと分離"
+    ],
+    "condition_id": "SSCOND-343-7de87abf0de1",
+    "probe_plan": "P-CREDENTIAL-CATALOG",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S20",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A242"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 958,
+    "design_table_row": "| `api-context-aes-current/previous` | API、非公開Inbox保守検査process（SSC-049/QA-046） | `auth_sessions.context_ciphertext`暗号、key version付き。batch/Web/backupへ配布不可 |",
+    "id": "CFG-343-0958",
+    "headers": [
+      "Credential ID",
+      "Consumer",
+      "形式・rotation"
+    ],
+    "expected_cells": [
+      "api-context-aes-current/previous",
+      "API、非公開Inbox保守検査process（SSC-049/QA-046）",
+      "auth_sessions.context_ciphertext暗号、key version付き。batch/Web/backupへ配布不可"
+    ],
+    "condition_id": "SSCOND-343-eb6b709528ff",
+    "probe_plan": "P-CREDENTIAL-CATALOG",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S20",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A243"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 959,
+    "design_table_row": "| `api-inbox-response-aes-current/previous` | API、非公開Inbox保守検査process（SSC-049/QA-046） | Inbox replay response暗号、context keyと分離。検査はreadのみ、batch/Web/backupへ配布不可 |",
+    "id": "CFG-343-0959",
+    "headers": [
+      "Credential ID",
+      "Consumer",
+      "形式・rotation"
+    ],
+    "expected_cells": [
+      "api-inbox-response-aes-current/previous",
+      "API、非公開Inbox保守検査process（SSC-049/QA-046）",
+      "Inbox replay response暗号、context keyと分離。検査はreadのみ、batch/Web/backupへ配布不可"
+    ],
+    "condition_id": "SSCOND-343-5ad8f72f5d47",
+    "probe_plan": "P-CREDENTIAL-CATALOG",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S20",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A244"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 960,
+    "design_table_row": "| `operation-hmac-current/previous` | API | 256 bit以上、HMAC-SHA-256 |",
+    "id": "CFG-343-0960",
+    "headers": [
+      "Credential ID",
+      "Consumer",
+      "形式・rotation"
+    ],
+    "expected_cells": [
+      "operation-hmac-current/previous",
+      "API",
+      "256 bit以上、HMAC-SHA-256"
+    ],
+    "condition_id": "SSCOND-343-cddc4b8fc714",
+    "probe_plan": "P-CREDENTIAL-CATALOG",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S20",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A245"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 961,
+    "design_table_row": "| `web-log-aes-current/previous` | Webのみ | Technical outbox保存・復号。API ingestへ配布しない（SSC-007） |",
+    "id": "CFG-343-0961",
+    "headers": [
+      "Credential ID",
+      "Consumer",
+      "形式・rotation"
+    ],
+    "expected_cells": [
+      "web-log-aes-current/previous",
+      "Webのみ",
+      "Technical outbox保存・復号。API ingestへ配布しない（SSC-007）"
+    ],
+    "condition_id": "SSCOND-343-e03915f59549",
+    "probe_plan": "P-CREDENTIAL-CATALOG",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S20",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A246"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 962,
+    "design_table_row": "| `backup-age-recipient` | backup unit | 公開keyのみserver保持、private keyはoffline |",
+    "id": "CFG-343-0962",
+    "headers": [
+      "Credential ID",
+      "Consumer",
+      "形式・rotation"
+    ],
+    "expected_cells": [
+      "backup-age-recipient",
+      "backup unit",
+      "公開keyのみserver保持、private keyはoffline"
+    ],
+    "condition_id": "SSCOND-343-a91bf25735dd",
+    "probe_plan": "P-CREDENTIAL-CATALOG",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S20",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A247"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 963,
+    "design_table_row": "| Caddy TLS key/state | Caddy | Caddy専用OS権限、fingerprint管理 |",
+    "id": "CFG-343-0963",
+    "headers": [
+      "Credential ID",
+      "Consumer",
+      "形式・rotation"
+    ],
+    "expected_cells": [
+      "Caddy TLS key/state",
+      "Caddy",
+      "Caddy専用OS権限、fingerprint管理"
+    ],
+    "condition_id": "SSCOND-343-131ab2c819e3",
+    "probe_plan": "P-CREDENTIAL-CATALOG",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S20",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A248"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.2 Runtime credential権限の限定（SSC-049、PG-D-132）",
+    "line": 998,
+    "design_table_row": "| system manager root所有＋専用UID ACL | type directory、mode0550、nlink>=1 | type regular、mode0440、nlink=1、size54～69 | owner root、USER_OBJ=r-x/r--、USER=専用UID:r-x/r--、GROUP_OBJ=---、MASK=r-x/r--、OTHER=---の5 entryのみ |",
+    "id": "CFG-343-0998",
+    "headers": [
+      "形式",
+      "Directory",
+      "AES file",
+      "Access ACL"
+    ],
+    "expected_cells": [
+      "system manager root所有＋専用UID ACL",
+      "type directory、mode0550、nlink>=1",
+      "type regular、mode0440、nlink=1、size54～69",
+      "owner root、USER_OBJ=r-x/r--、USER=専用UID:r-x/r--、GROUP_OBJ=---、MASK=r-x/r--、OTHER=---の5 entryのみ"
+    ],
+    "condition_id": "SSCOND-343-8af20fc091a6",
+    "probe_plan": "P-CREDENTIAL-RUNTIME",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S21",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A249"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.2 Runtime credential権限の限定（SSC-049、PG-D-132）",
+    "line": 999,
+    "design_table_row": "| 専用UID所有fallback | type directory、mode0500、nlink>=1 | type regular、mode0400、nlink=1、size54～69 | access ACLなし、owner=専用UID、実filesystem readonly必須 |",
+    "id": "CFG-343-0999",
+    "headers": [
+      "形式",
+      "Directory",
+      "AES file",
+      "Access ACL"
+    ],
+    "expected_cells": [
+      "専用UID所有fallback",
+      "type directory、mode0500、nlink>=1",
+      "type regular、mode0400、nlink=1、size54～69",
+      "access ACLなし、owner=専用UID、実filesystem readonly必須"
+    ],
+    "condition_id": "SSCOND-343-2a03a3af36aa",
+    "probe_plan": "P-CREDENTIAL-RUNTIME",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S21",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A250"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.8 非公開launcherの入力・receipt・credential profile（SSC-049、PG-D-144）",
+    "line": 1069,
+    "design_table_row": "| `CREDENTIALS_DIRECTORY` | systemdが設定するprivate root、1～4096文字、InspectorSettingsの絶対正規化path（`/`不可）。特定の未保証systemd内部path prefixを推測しない。保持inode/専用UID/ACL/ROは既存readerが毎回検証 |",
+    "id": "CFG-343-1069",
+    "headers": [
+      "Key",
+      "受理契約"
+    ],
+    "expected_cells": [
+      "CREDENTIALS_DIRECTORY",
+      "systemdが設定するprivate root、1～4096文字、InspectorSettingsの絶対正規化path（/不可）。特定の未保証systemd内部path prefixを推測しない。保持inode/専用UID/ACL/ROは既存readerが毎回検証"
+    ],
+    "condition_id": "SSCOND-343-d6a7def5de12",
+    "probe_plan": "P-INSPECTOR-INPUT",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S22",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A251"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.8 非公開launcherの入力・receipt・credential profile（SSC-049、PG-D-144）",
+    "line": 1070,
+    "design_table_row": "| `NK_INSPECTOR_DB_URL` | 1～256文字、§6.6のcanonical loopback専用DB URL |",
+    "id": "CFG-343-1070",
+    "headers": [
+      "Key",
+      "受理契約"
+    ],
+    "expected_cells": [
+      "NK_INSPECTOR_DB_URL",
+      "1～256文字、§6.6のcanonical loopback専用DB URL"
+    ],
+    "condition_id": "SSCOND-343-8a7cd0d3f36c",
+    "probe_plan": "P-INSPECTOR-INPUT",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S22",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A252"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.8 非公開launcherの入力・receipt・credential profile（SSC-049、PG-D-144）",
+    "line": 1071,
+    "design_table_row": "| `NK_INSPECTOR_RUN_ID` | canonical小文字36文字UUID、parse後toStringが原値と一致 |",
+    "id": "CFG-343-1071",
+    "headers": [
+      "Key",
+      "受理契約"
+    ],
+    "expected_cells": [
+      "NK_INSPECTOR_RUN_ID",
+      "canonical小文字36文字UUID、parse後toStringが原値と一致"
+    ],
+    "condition_id": "SSCOND-343-78e5b3e5b642",
+    "probe_plan": "P-INSPECTOR-INPUT",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S22",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A253"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.8 非公開launcherの入力・receipt・credential profile（SSC-049、PG-D-144）",
+    "line": 1072,
+    "design_table_row": "| `NK_INSPECTOR_CUTOFF` | 1～32文字、UTC Instant canonical文字列と完全一致、InspectionRunの年/精度契約（microsecond以下）を維持。offset別表現/補完/丸め禁止 |",
+    "id": "CFG-343-1072",
+    "headers": [
+      "Key",
+      "受理契約"
+    ],
+    "expected_cells": [
+      "NK_INSPECTOR_CUTOFF",
+      "1～32文字、UTC Instant canonical文字列と完全一致、InspectionRunの年/精度契約（microsecond以下）を維持。offset別表現/補完/丸め禁止"
+    ],
+    "condition_id": "SSCOND-343-8d04519f7ff9",
+    "probe_plan": "P-INSPECTOR-INPUT",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S22",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A254"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.8 非公開launcherの入力・receipt・credential profile（SSC-049、PG-D-144）",
+    "line": 1073,
+    "design_table_row": "| `NK_INSPECTOR_FINGERPRINT_VERSIONS` | 1～65536文字のcomma区切り、空要素/重複不可、各versionは§6.5の1～16 ASCII。HMAC秘密値は含めない |",
+    "id": "CFG-343-1073",
+    "headers": [
+      "Key",
+      "受理契約"
+    ],
+    "expected_cells": [
+      "NK_INSPECTOR_FINGERPRINT_VERSIONS",
+      "1～65536文字のcomma区切り、空要素/重複不可、各versionは§6.5の1～16 ASCII。HMAC秘密値は含めない"
+    ],
+    "condition_id": "SSCOND-343-47a47608407b",
+    "probe_plan": "P-INSPECTOR-INPUT",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S22",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A255"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.13 永続run原本・activation・completion（SSC-055/PG-D-156、先行b6b5f0f6）",
+    "line": 1154,
+    "design_table_row": "| anchor | `NKRUN1` | run UUID、cutoff | 72 |",
+    "id": "CFG-343-1154",
+    "headers": [
+      "種別",
+      "行1",
+      "続く行",
+      "byte長"
+    ],
+    "expected_cells": [
+      "anchor",
+      "NKRUN1",
+      "run UUID、cutoff",
+      "72"
+    ],
+    "condition_id": "SSCOND-343-0d95e44a50ac",
+    "probe_plan": "P-RUN-BYTES",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S23",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A256"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.13 永続run原本・activation・completion（SSC-055/PG-D-156、先行b6b5f0f6）",
+    "line": 1155,
+    "design_table_row": "| begin/active | `NKACT1` | run UUID、cutoff、activation UUID | 109 |",
+    "id": "CFG-343-1155",
+    "headers": [
+      "種別",
+      "行1",
+      "続く行",
+      "byte長"
+    ],
+    "expected_cells": [
+      "begin/active",
+      "NKACT1",
+      "run UUID、cutoff、activation UUID",
+      "109"
+    ],
+    "condition_id": "SSCOND-343-525756c70035",
+    "probe_plan": "P-RUN-BYTES",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S23",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A257"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.13 永続run原本・activation・completion（SSC-055/PG-D-156、先行b6b5f0f6）",
+    "line": 1156,
+    "design_table_row": "| done | `NKDONE1` | run UUID、cutoff、activation UUID、ended_at、`0`または`10` | 140/141 |",
+    "id": "CFG-343-1156",
+    "headers": [
+      "種別",
+      "行1",
+      "続く行",
+      "byte長"
+    ],
+    "expected_cells": [
+      "done",
+      "NKDONE1",
+      "run UUID、cutoff、activation UUID、ended_at、0または10",
+      "140/141"
+    ],
+    "condition_id": "SSCOND-343-ac41c0def4ab",
+    "probe_plan": "P-RUN-BYTES",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S23",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A258"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.15 固定永続namespaceとrun lifecycle（SSC-055/PG-D-158、先行36b5f85b）",
+    "line": 1196,
+    "design_table_row": "| start(BatchRun, activationUUID) | null/型検証→全scan、active/pendingなし、run UUID未登録、activation UUIDは全履歴未使用。callerがDB既存legacy ID非衝突を別照会。anchor→begin→activeを各durable公開→全graph期待値と照合 | 同じ固定activationを返す。各公開途中の失敗は原本/partを保全、停止/update等はcallerがこの成功後だけ行う |",
+    "id": "CFG-343-1196",
+    "headers": [
+      "Session操作",
+      "前提と順序",
+      "結果/中断保全"
+    ],
+    "expected_cells": [
+      "start(BatchRun, activationUUID)",
+      "null/型検証→全scan、active/pendingなし、run UUID未登録、activation UUIDは全履歴未使用。callerがDB既存legacy ID非衝突を別照会。anchor→begin→activeを各durable公開→全graph期待値と照合",
+      "同じ固定activationを返す。各公開途中の失敗は原本/partを保全、停止/update等はcallerがこの成功後だけ行う"
+    ],
+    "condition_id": "SSCOND-343-fc1060aa03f9",
+    "probe_plan": "P-RUN-LIFECYCLE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S24",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A259"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.15 固定永続namespaceとrun lifecycle（SSC-055/PG-D-158、先行36b5f85b）",
+    "line": 1197,
+    "design_table_row": "| resume(runUUID, nextActivationUUID)・activeあり | 全scan、active.runが指定runと一致 | 同activationとOptional completionを返す。doneありは回復状態であり今回の副作用実行成功とは数えない。勝手にactiveを消さず、親終端確認後completeへ |",
+    "id": "CFG-343-1197",
+    "headers": [
+      "Session操作",
+      "前提と順序",
+      "結果/中断保全"
+    ],
+    "expected_cells": [
+      "resume(runUUID, nextActivationUUID)・activeあり",
+      "全scan、active.runが指定runと一致",
+      "同activationとOptional completionを返す。doneありは回復状態であり今回の副作用実行成功とは数えない。勝手にactiveを消さず、親終端確認後completeへ"
+    ],
+    "condition_id": "SSCOND-343-b2c5c65f14aa",
+    "probe_plan": "P-RUN-LIFECYCLE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S24",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A260"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.15 固定永続namespaceとrun lifecycle（SSC-055/PG-D-158、先行36b5f85b）",
+    "line": 1198,
+    "design_table_row": "| resume・activeなし/未完了beginあり | pendingが指定runだけ、anchor/未完了begin完全一致 | 同beginからactiveだけ再公開、同activationを返す。nextActivationUUIDへ取り替えない |",
+    "id": "CFG-343-1198",
+    "headers": [
+      "Session操作",
+      "前提と順序",
+      "結果/中断保全"
+    ],
+    "expected_cells": [
+      "resume・activeなし/未完了beginあり",
+      "pendingが指定runだけ、anchor/未完了begin完全一致",
+      "同beginからactiveだけ再公開、同activationを返す。nextActivationUUIDへ取り替えない"
+    ],
+    "condition_id": "SSCOND-343-f9a32834f1e6",
+    "probe_plan": "P-RUN-LIFECYCLE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S24",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A261"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.15 固定永続namespaceとrun lifecycle（SSC-055/PG-D-158、先行36b5f85b）",
+    "line": 1199,
+    "design_table_row": "| resume・activeなし/anchorのみまたは全activation完了 | 原本必須、他runのpendingなし、nextActivationUUID未使用 | 新begin→active、原本cutoffを変更しない。旧completionを新activationへコピーしない |",
+    "id": "CFG-343-1199",
+    "headers": [
+      "Session操作",
+      "前提と順序",
+      "結果/中断保全"
+    ],
+    "expected_cells": [
+      "resume・activeなし/anchorのみまたは全activation完了",
+      "原本必須、他runのpendingなし、nextActivationUUID未使用",
+      "新begin→active、原本cutoffを変更しない。旧completionを新activationへコピーしない"
+    ],
+    "condition_id": "SSCOND-343-2e29c7cc1755",
+    "probe_plan": "P-RUN-LIFECYCLE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S24",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A262"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.15 固定永続namespaceとrun lifecycle（SSC-055/PG-D-158、先行36b5f85b）",
+    "line": 1200,
+    "design_table_row": "| complete(MaintenanceCompletion) | 全scan、指定activationとanchor/begin一致、activeは同activationまたは同done確定済みの不存在。別active/別既done・doneなしでactive不存在は拒否。callerは実子終端/親の許容morning終端/DB stepを別確認 | 同doneは全値一致だけ、新doneはdurable公開→同activeだけ退役→全graph照合。同じcompletion再試行は冪等。別終了時刻/0↔10で上書きしない |",
+    "id": "CFG-343-1200",
+    "headers": [
+      "Session操作",
+      "前提と順序",
+      "結果/中断保全"
+    ],
+    "expected_cells": [
+      "complete(MaintenanceCompletion)",
+      "全scan、指定activationとanchor/begin一致、activeは同activationまたは同done確定済みの不存在。別active/別既done・doneなしでactive不存在は拒否。callerは実子終端/親の許容morning終端/DB stepを別確認",
+      "同doneは全値一致だけ、新doneはdurable公開→同activeだけ退役→全graph照合。同じcompletion再試行は冪等。別終了時刻/0↔10で上書きしない"
+    ],
+    "condition_id": "SSCOND-343-07cffccc99e3",
+    "probe_plan": "P-RUN-LIFECYCLE",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S24",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A263"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.16 完全な退役計画による原本GC（SSC-055/PG-D-161、先行4d534ba9）",
+    "line": 1226,
+    "design_table_row": "| plan | 既存NKDONE1をそのまま使用。nameはactivation UUID | 140/141 |",
+    "id": "CFG-343-1226",
+    "headers": [
+      "record",
+      "正規ASCII LFの順序",
+      "長さ"
+    ],
+    "expected_cells": [
+      "plan",
+      "既存NKDONE1をそのまま使用。nameはactivation UUID",
+      "140/141"
+    ],
+    "condition_id": "SSCOND-343-b67424d7d7c4",
+    "probe_plan": "P-RUN-GC",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S25",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A264"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.16 完全な退役計画による原本GC（SSC-055/PG-D-161、先行4d534ba9）",
+    "line": 1227,
+    "design_table_row": "| marker | `NKRET1`、run UUID、cutoff、latestEnded、preparedAt、count、digest、最後LF | 195～204 |",
+    "id": "CFG-343-1227",
+    "headers": [
+      "record",
+      "正規ASCII LFの順序",
+      "長さ"
+    ],
+    "expected_cells": [
+      "marker",
+      "NKRET1、run UUID、cutoff、latestEnded、preparedAt、count、digest、最後LF",
+      "195～204"
+    ],
+    "condition_id": "SSCOND-343-7c949df2bcb8",
+    "probe_plan": "P-RUN-GC",
+    "test_id": "IT-CONFIG-001",
+    "scenario_id": "IT-CONFIG-001-S25",
+    "comparison": "typed projection。515の単位換算/集合・順序/秘密非出力・歴史上書き優先を適用。literal以外の制約は全predicateを実観測で確認。",
+    "state": "SPECIFIED_TOOL_UNIMPLEMENTED",
+    "execution_state": "NOT_EXECUTED",
+    "assertion_id": "A265"
+  }
+]
