@@ -1,0 +1,105 @@
+{
+  "actualExit": 0,
+  "bug": "BUG2250",
+  "horizontal": "YKT1997",
+  "sourceScope": "All Git-tracked tools/quality py/java/sh plus9named activeSscripts; fourheld basenames excluded before metadata/read; no sourceTest/rawprivate/log/VM accesses",
+  "sourceFilesScanned": 13612,
+  "sourceIndex": "630",
+  "sourceIndexSha256": "5af9c8e74b77a730f9c1a4c7302def28cb667407281a5820c26194df2061b2fe",
+  "javapMentionFiles": 183,
+  "explicitDashLTargets": [
+    {
+      "path": "documents/400_PGPT/470_PMO/500_SV計画整備_20261104/622_七六行の既存JDKclass行表照合.py",
+      "sha256": "1b62961c0c5f44c2c7bb167c16f436d466e2df5920a38693712ccce1be0558e9",
+      "mentionsDashL": true,
+      "literalArgLists": [
+        {
+          "line": 104,
+          "flags": [
+            "-p",
+            "-c",
+            "-l"
+          ]
+        },
+        {
+          "line": 212,
+          "flags": [
+            "-p",
+            "-s",
+            "-l",
+            "-sysinfo"
+          ]
+        }
+      ],
+      "decision": "FIXED: explicitline-only mode has-p-c-l, historicalnoargdisabled;629guardactual1expected/parserASTsame,625executedbodypreserved"
+    },
+    {
+      "path": "tools/quality/pg6586_api_mapper_jvm_join.py",
+      "sha256": "1d5775e7cfb75dc7d81bb53448e9a11b5b597d5e17dade8362a7ca8cc790f711",
+      "mentionsDashL": true,
+      "literalArgLists": [
+        {
+          "line": 63,
+          "flags": [
+            "-classpath",
+            "-p",
+            "-c",
+            "-l"
+          ]
+        }
+      ],
+      "decision": "NON_APPLICABLE: actual fixedjavapargv alreadycontains-c-l; source662051 inspected, no existing successfulrun replay"
+    },
+    {
+      "path": "tools/quality/pg6644_sql58_original_jvm.py",
+      "sha256": "538b93f54202a606f752b67931d903f4a18c1da49f2424a5b17cb68676dcad83",
+      "mentionsDashL": true,
+      "literalArgLists": [
+        {
+          "line": 59,
+          "flags": [
+            "-classpath",
+            "-p",
+            "-c",
+            "-l"
+          ]
+        }
+      ],
+      "decision": "NON_APPLICABLE: actual fixedjavapargv alreadycontains-c-l; source662051 inspected, no existing successfulrun replay"
+    },
+    {
+      "path": "tools/quality/pg6676_sql58_original_jvm.py",
+      "sha256": "4ba0d3bc3752408f7a0089d8ef59d881ca26577454d0b9edd43534a67fd89c0e",
+      "mentionsDashL": true,
+      "literalArgLists": [
+        {
+          "line": 31,
+          "flags": [
+            "-classpath",
+            "-p",
+            "-c",
+            "-l"
+          ]
+        }
+      ],
+      "decision": "NON_APPLICABLE: actual fixedjavapargv alreadycontains-c-l; source662051 inspected, no existing successfulrun replay"
+    }
+  ],
+  "otherJavapFiles": "179files do notcontainliteral-l token; this omission predicate is nonapplicable, not general callgraph/requiredattribute correctness approval",
+  "fixedActualCodeLineSource": "PG18550/57424/bfa1db/0",
+  "lineAndPCIndependentCheck": "628/0da3b3/0/9negatives",
+  "cliGuard": "629/a3fca7/expected1",
+  "frozenHistoricalUnchanged": [
+    "621",
+    "624",
+    "625",
+    "626",
+    "PG18546",
+    "PG18548"
+  ],
+  "successfulProductOrOldProofReplayed": false,
+  "newProductPT": 0,
+  "coverageAdded": 0,
+  "newAccepted": 0,
+  "formalUpdated": false
+}
