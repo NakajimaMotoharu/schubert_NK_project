@@ -1,0 +1,11 @@
+# QA051比較の内部依存を追加特定
+
+同じS-POST。承認済みQA051とmain/dev同期は完了しており、承認待ちへ戻さない。553に続き、Current AppLogService.logActionはcategory=ACTIONでDB insertを呼ぶことをd2fcd4で確認した。menu/log_searchは単なるREQUEST空actionの別名ではない。
+
+NK LogQueryApplicationServiceは読取transactionでsnapshotを取得し、後続write transactionで現在ADMIN/Inbox/responseを確定する。正常の初回queryでは当persistのaudit.writeは呼ばず、replayだけLogQueryAuditWriter.Event.REPLAYを記録する。writerの四eventはSESSION_INVALID/ROLE_DENIED/MESSAGE_MISMATCH/REPLAYで、actionはAUTHORIZATION_DENIED/PROTOCOL_REJECTED/INBOX_REPLAYED、categoryはSECURITY/MQである（d2fcd4/b177d5）。このコード範囲にCurrent log_search ACTIONの直接対応はない。共通REQUEST hookその他の記録は別に扱い、記録が全く存在しないという全体断定ではない。
+
+UI225§2.1はmenu/log_search相当の欠落を許さず、UI264§5.1/SS351§4.1はその他actionを個別に対応させる。したがって、①Current ACTIONを捨てる、②REQUESTへの無条件置換、③replay監査を初回成功監査として数える、④自分の検索auditがまだsnapshotへ入らない時点差を件数免除とする、いずれも現時点のoracleへ採用しない。新action/新業務電文/保存責務の変更も未承認案として追加しない。
+
+次はSS312/314/323/324/351及び既audit送信口から、メニューとLog照会に対応する既存設計責務を横断確認する。範囲内の内部投影・caller照合で合理的に確定できるなら実装判断へ、SSの不足ならSSCへ先行起票する。UI又はRDの外部仕様変更が必要ならUIC/RDF＋必要QAへ先行分類し、具体的な選択肢/利用者影響を明示して初めて質問する。調査不足だけで新たな利用者入力待ちにしない。
+
+費用はS調査分を元S10内で計上し、将来の実装/独立oracle/実CHR費は未確定のまま区別する。今回の追加発見を元WBS消化/新受入/PGPT完成率へ加算しない。実装byte・Current baseline・DB・実ログ・秘密・既原観測は変更/アクセスしていない。通常のS区切りやこの未対応を全独立作業の停止理由にしない。

@@ -1,0 +1,69 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S_POST_SAME10",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "testSource": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSessionTest.java",
+  "sourceSha256": "cbd25ed83c772a66a3990811105c201215863fb9db27c2294cbf25f83da84009",
+  "fixtureReview": {
+    "source": "BatchDatabaseFixture.java",
+    "readReceipt": "a40b31/0",
+    "lifecycle": "BeforeAll3574 creates dedicated PostgreSQL18 cluster via initdb/pg_ctl, random loopback port, role SQL and Flyway, creates schubert_nk DB; AfterAll stops received fixture",
+    "notPureBecauseProxy": "Even methods injecting proxy wrappers acquire actual JDBC connections and independent SQL observers. Selecting one method still runs BeforeAll. No invocation performed.",
+    "resourceRequirements": [
+      "Owned temp cluster/root and toolchain versions",
+      "No connection to deployed/original data",
+      "Proper nonroot uid/gid for first file guard test",
+      "Actual PG_ctl terminal and fixture cleanup independent proof"
+    ],
+    "classMissingReferences": 65,
+    "classAllMethodsReviewed": false,
+    "permission": "Not inferred from class name; whole fixture/source/HOLD/authority needs operation-specific authentication before future execution"
+  },
+  "reviews": [
+    {
+      "methodId": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest#mdb3256001CompletionGuardSqlFailurePreservesCommittedBeginsAndEmptyBackupRoot",
+      "testId": "PT-MDB-3256-001",
+      "span": [
+        147,
+        220
+      ],
+      "inputs": "Two actual-connection faults after committed beginBackup: getAutoCommit or getTransactionIsolation; fixed run/cutoff/start and initially empty owned backup directory",
+      "expected": "Fixed IOException 'root batch database unavailable', no cause/suppressed; one injected failure; connection closed; backup directory still empty; two committed RUNNING begin rows and no owner connection/advisory locks",
+      "independence": "Expected row states, timestamps, counts and two step names from literal values; separate JDBC observer SELECT. No production method derives expected rows.",
+      "fileScope": "OwnedTransferDirectory/LinuxDirectoryCalls/LinuxInodeSecurity actual native-backed fixture; pure injected metadata only is not an equivalent reproduction",
+      "remaining": "Same source execution reference absent; physical resource owner/native and compound current qualification not established by static reading"
+    },
+    {
+      "methodId": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest#mdb3254001ReadOnlyStatementCompoundFailuresKeepRowsAndCloseEveryOwner",
+      "testId": "PT-MDB-3254-001",
+      "span": [
+        223,
+        367
+      ],
+      "inputs": "Fixed27 primary/statement-close combinations across NONE/SQL/IAE/STATE/Error and same-instance variants; actual SET TRANSACTION READ ONLY plus independent SHOW transaction_read_only='on'",
+      "expected": "Literal priority table selects fixed IO vs exact unknown identity; exact sanitized secondary count0/1, new fixed BatchRepositoryException without cause/suppressed; executes/readOnlyProof/close each1; actual connection closed, borrowed handle unusable; FAILED pair timestamps/counts retained and owner resources absent",
+      "independence": "27-row fixed oracle; it never calls JdbcResourceFailures to compute expected. Expected Throwable is an injected fixture object, not subject output. mdb2292Rows independent SQL verifies exact two ordered rows; NoOwnerResources independently queries pg_stat_activity/pg_locks.",
+      "limits": [
+        "Does not prove every Morning lifecycle/DB branch",
+        "SQLException observer failure throws rather than counts as success",
+        "No new OS/JDBC/native execution or reference qualification"
+      ]
+    }
+  ],
+  "requirements": [
+    "SS332/SSC063 direct-close SQL/unknown priority and redaction",
+    "SS341/SS343 committed Backup begin and resource ownership"
+  ],
+  "readReceipts": [
+    "9444e0",
+    "47cdbb",
+    "df7c22",
+    "a40b31",
+    "a1065f",
+    "afe76c"
+  ],
+  "newProductTests": 0,
+  "newAcceptedCriteria": 0,
+  "coverageAdded": 0,
+  "originalErrorsPreserved": true
+}

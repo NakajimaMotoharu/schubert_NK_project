@@ -1,0 +1,99 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S_POST_SAME10",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "testPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/LogControllerTest.java",
+  "testSha256": "0d2df3edccb3e68058b540937d544eab36234694381613bb260adb7dbf8f4c09",
+  "caseReviews": [
+    {
+      "method": "log093SuccessAndIndependentWire",
+      "input": "0000/0200 with0/1/100 rows, NFC input and explicit filters/date/page",
+      "independentExpected": "HTTP200;912-byte request with656-byte literal payload golden at offsets0/256/272/336/592/600/617/634/640; correct result count and ADMIN topbar",
+      "executionQualified": false
+    },
+    {
+      "method": "log094InvalidInputNeverSends",
+      "input": "Unknown/duplicate/oversize/invalid date/type/level/page/control input",
+      "independentExpected": "400 with explicit errors, no result/send",
+      "executionQualified": false
+    },
+    {
+      "method": "log095AllResultErrors",
+      "input": "Fixed nine result codes0100/0101/0103/0104/0105/0106/0107/9000/9001",
+      "independentExpected": "Literal400/401/403/404/409/429/409/503/503; no view/model; request buffers erased",
+      "executionQualified": false
+    },
+    {
+      "method": "log096SessionInvalidIsTerminal",
+      "input": "0102 with authenticated context",
+      "independentExpected": "302 /login?session-expired; context cleared,session absent,one request; buffers erased",
+      "executionQualified": false
+    },
+    {
+      "method": "log097MalformedTransportAndProjection",
+      "input": "Short response/JMS failure/inconsistent counts/other page binding",
+      "independentExpected": "503 for each; no success view; malformed transport distinct from page/record binding",
+      "executionQualified": false
+    },
+    {
+      "method": "log098NullRoleAndUnknownFailure",
+      "input": "Null dependencies/input,foreign Principal,USER,unknown AssertionError and response IOException",
+      "independentExpected": "Contract null rejection,SessionStoreException for foreign principal; USER403/no send; exact unknown Error/IOException identity preserved",
+      "executionQualified": false
+    },
+    {
+      "method": "log099MvcRoutesAndBinding",
+      "input": "MockMvc GET/HEAD/POST and malformed parameters",
+      "independentExpected": "GET/HEAD200+logs view; POST405; bad400 with DOM errors/no count/results/no extra send",
+      "executionQualified": false
+    },
+    {
+      "method": "log100RealHttpAuthorizationAndSession",
+      "input": "Real embedded HTTP server with fixture USER/ADMIN login",
+      "independentExpected": "Anonymous302login,USER403no wire,ADMIN200/role/filter/CSRF/no-store; HEAD200empty; bad400;0102 expires cookie/session and next protected request302",
+      "executionQualified": false
+    },
+    {
+      "method": "log101ConcurrentAdminContexts",
+      "input": "64 requests/8threads, each separate actor/query/context",
+      "independentExpected": "Each view preserves own username/query and exactly one corresponding request; pending0 and buffers zero",
+      "executionQualified": false
+    },
+    {
+      "method": "log102EscapingEmptyAndPagination",
+      "input": "0rows then page2 of101 with malicious-looking fixed HTML text",
+      "independentExpected": "Explicit Japanese empty/no pagination; literal text escaped/no injected element; exact previous URL and count label",
+      "executionQualified": false
+    },
+    {
+      "method": "log103PublicScriptIsReadOnly",
+      "input": "GET/HEAD known script and unknown resource",
+      "independentExpected": "GET200/text/javascript and bytes equal source resource; HEADempty; missing404,no business wire. This is serving equality, not independent JS behavior validation",
+      "executionQualified": false
+    }
+  ],
+  "references": [
+    "NK-WEB-002/SCR014/FUN008/AUT002",
+    "UI225/232/235",
+    "SS313/314/323",
+    "PT-SCR093..103"
+  ],
+  "oracle": "Literal request payload offsets and independently handwritten LGSRSP01 response builder, explicit HTTP/status/DOM values. Fixture standard() reads page/context from actual request to echo a relational response;093 separate literal expected bytes anchor request correctness. A page mismatch negative checks that this echo is not universal acceptance.",
+  "boundaries": [
+    "BeforeAll starts WebLogDatabaseFixture actual PostgreSQL18 with role/migration; BeforeEach deletes dedicated web-session fixture rows. Not a pure MockMvc class.",
+    "Most wire reply is synchronous injected JmsRequestReplyClient.onReply with handwritten bytes, no actual Artemis delivery/ACK proof.",
+    "log100 creates real embedded HTTP/session assembly; no actual Browser/Caddy deployment or final CHR comparison.",
+    "No raw cookie/context/password/CSRF values copied to this public review; only synthetic test description.",
+    "QA051 does not turn old 'search' response fixture into verified new producer action; capture/comparison correlation and current API DB audit remain separate."
+  ],
+  "readReceipts": [
+    "ada93e",
+    "5f7158",
+    "1372d2",
+    "41959a"
+  ],
+  "newProductTests": 0,
+  "newAcceptedCriteria": 0,
+  "coverageAdded": 0,
+  "effortCompletion": null
+}

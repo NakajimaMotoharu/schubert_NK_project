@@ -1,0 +1,139 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S_POST_SAME10",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationServiceTest.java",
+  "testSha256": "1c11a57c16141e567dfb7cc4d9dea769e61ebebd15717c587d8b861bc93424ea",
+  "caseCount": 12,
+  "mode": "STATIC_ORIGINAL_TEST_ORACLE_AND_FIXTURE_REVIEW_NOT_EXECUTION",
+  "caseReviews": [
+    {
+      "method": "successAuditIsAtomicAndNotRepeatedForSavedSearchAndDetail",
+      "input": "SRC/SCN on two seeded entries, same message replay",
+      "independentExpected": "0000 then0200; one literal ACTION audit per message (API/INFO/actor101/category/action/time/count), two inbox/audits total",
+      "executionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "criticalAuditFailureRollsBackInboxAndCanBeRetried",
+      "input": "Dedicated trigger raises on audit insert then removed",
+      "independentExpected": "TemporaryInfrastructureException fixed redaction; inbox/audit0,live0; retry0000 and exactly one audit",
+      "executionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "concurrentSameMessageAuditsOnceAndDistinctMessagesAuditIndividually",
+      "input": "24 calls same message, then two distinct messages on12 workers",
+      "independentExpected": "one0000/23x0200, same audit once; distinct both0000 and three inbox/audit total",
+      "executionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "committedAuditRemainsExactlyOnceAfterUnknownResponse",
+      "input": "After-commit or close throws on second connection; separate UUID failure before commit",
+      "independentExpected": "Committed audit/inbox remain1 and replay0200 unchanged; precommit UUID failure leaves0",
+      "executionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "sixRequestsCommitFrozenResponsesAndReplayWithFreshHeaders",
+      "input": "GAM/SPK/RTE/SCF/SRC/SCN fixed requests and fixed response UUID supplier",
+      "independentExpected": "Literal golden bytes; SCN absent0104, others0000/replay0200; frozen independent decrypt bytes; six inbox, one successful SRC audit; expires+24h; no file publication",
+      "executionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "productionAssemblyUsesRealQueryInboxAndNullContract",
+      "input": "Real assembly/inbox/query and each null constructor dependency",
+      "independentExpected": "0000 then0200,one inbox,no publication; null rejected by documented constructor contract, not successful NPE handling",
+      "executionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detailBoundariesReleaseDatabaseBeforeFilesAndPreserveOriginalContent",
+      "input": "Speaker501; detail counts0/200/201/10000/10001; publisher capacity failure",
+      "independentExpected": "Speaker9001; inline through200/file201..10000/capacity9001 above; liveDB0 before file actions; frozen replay unchanged despite master edit; audit only successful response",
+      "executionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "replayRegeneratesOnlyMissingOriginalFilesAndPreservesLifetime",
+      "input": "Missing ready at+20sec then master/query/file/inspection failures",
+      "independentExpected": "Regeneration changes only permitted file reference bytes/encrypted body, retains original lifetime/status metadata; exact publication count2; every failure leaves stored snapshot unchanged",
+      "executionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "oneHundredSameMessagesGenerateOnceAndFinalAuthenticationWins",
+      "input": "100 calls/16workers plus revoked/owner/role/expiry/regeneration-owner changes",
+      "independentExpected": "One initial success/publish/inbox, unique response IDs and input correlation; final auth recheck enforces0102 except valid role change; no leaked DB ownership",
+      "executionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "failuresAtEveryTransactionFileClockAndIdentityBoundaryNeverClaimSuccess",
+      "input": "Two-stage JDBC faults, clock/UUIDnull/fault, retained identity/state/cipher corruption and file failures",
+      "independentExpected": "Fixed temporary/permanent classification, SQL row persistence according commit boundary, fixed redaction; known no-success conditions never normalized; master/file/ready ownership retained as specified",
+      "executionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "brokerSendAndAckFailuresReplayOneCommittedResult",
+      "input": "Actual embedded broker; send creation/ACK commit/DB faults; second delivery and independent duplicate message",
+      "independentExpected": "No first reply; delivery count2; saved one result/one publish/inbox; replay0200 vs first0000 according committed state; queues empty after expected messages; broker normal stop; security disabled so not RBAC proof",
+      "executionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "realWriterInspectorAndDatabaseRegenerationShareExactFrozenBytes",
+      "input": "Real ext4 fixture,201/10000 records; missing ready and later DB commit failure",
+      "independentExpected": "4800*count bytes,0640 file/0750directory/users group, literal per-record byte golden and independent SHA; regenerate exact original records; failed DB commit retains only owned ready; no transaction held during file work",
+      "executionQualified": false,
+      "newPass": false
+    }
+  ],
+  "oracleMeaning": {
+    "wire": "ScenarioReplayFixture.wire/data use literal header256/result208/4 and data sizes/record offsets, spaces/decimal formatting, no production encode to generate expected. Header response UUID/time/context are controlled fixture values; selected request-header fields are relational correlations, not independent decode proof.",
+    "database": "Separate SELECT of inbox/audit, literal actor/action/category/time/count. Trigger and postcommit faults distinguish committed vs rolled back audit.",
+    "crypto": "Fixture decrypt uses independent JCE AES-GCM and LP AAD rather than production ResponseSnapshotCodec.decrypt. It still accepts production ScenarioRequest metadata; full request decode/golden authority and all AAD categories are separate coverage obligations. No keys/ciphertext copied into this public review.",
+    "file": "Stub publisher and golden share test-only hash(count); this tests orchestration/descriptor mapping, not independent physical writer content. Dedicated realWriter case compares actual file against literal per-record4800-byte data and independently digested expected stream. Golden descriptor UUID/publication mapping relies on controlled fixture counter, not full absolute production file identity."
+  },
+  "fixtureBoundaries": {
+    "global": "BeforeAll actual ApiLogDatabaseFixture; BeforeEach truncates dedicated tables/seeds accounts/session/master; selecting individual methods does not omit these lifecycle effects",
+    "others": [
+      "Actual JDBC/transactions/advisory-row lock observations",
+      "JCE snapshot/HMAC machinery instantiated",
+      "Some methods actual embedded Artemis with security disabled",
+      "RealWriter uses actual native-backed ext4 fixture and owned file deletion"
+    ],
+    "HOLD": "TemporaryInfrastructureException class is an existing class-level HOLD dependency; no execution probing or same verification under another name. This review does not declare all12 currently permitted.",
+    "newExecution": 0,
+    "originalBaselineOrDeployedDataAccess": 0
+  },
+  "references": [
+    "SSC027/PT-SCN-009",
+    "UI232/234",
+    "SS323 fixed offsets",
+    "SS352 snapshot/AAD",
+    "SS351 atomic business audit"
+  ],
+  "receipts": [
+    "6d894b",
+    "9a41e5",
+    "feef1e",
+    "8c1a44",
+    "8cd5c5",
+    "16af59",
+    "bcd3b6",
+    "96c815"
+  ],
+  "remaining": [
+    "Current-source original12 runtime references missing",
+    "No whole WBS acceptance from existing four-counter summaries",
+    "Full transitive fixture/permission/resource/independent post and final source qualification remain"
+  ],
+  "newProductTests": 0,
+  "coverageAdded": 0,
+  "newAcceptedCriteria": 0,
+  "effortCompletion": null
+}

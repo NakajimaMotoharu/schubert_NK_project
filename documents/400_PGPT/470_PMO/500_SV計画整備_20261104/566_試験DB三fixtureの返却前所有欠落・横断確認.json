@@ -1,0 +1,44 @@
+{
+  "actualExit": 0,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "scope": "EXACT_THREE_STATEMENT_SHAPE_IN_PINNED_TEST_JAVA_NOT_WHOLE_G07",
+  "readSourceCount": 854,
+  "excludedBeforeMetadataOrRead": [
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootFailedStartPairRecoveryTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootFailedStartRecoveryTest.java"
+  ],
+  "matches": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchDatabaseFixture.java",
+      "sha256": "ad3567863c78e5cbbbe28cd1c2b38c2005113abb3bd0f9184cda190d0c886023",
+      "line": 104,
+      "decision": "OWNED_SETUP_FAILURE_CLOSE_GAP",
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture.java",
+      "sha256": "59934c39fa8589f63dc83dd913e8c6d0028fc64536aca9850a13afbd33fd0bfa",
+      "line": 107,
+      "decision": "OWNED_SETUP_FAILURE_CLOSE_GAP",
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDatabaseFixture.java",
+      "sha256": "9325eea2624232010b1fccd7a226a46cc6fd9142c4f59e9d35087bfec0370682",
+      "line": 101,
+      "decision": "OWNED_SETUP_FAILURE_CLOSE_GAP",
+      "newAcceptance": false
+    }
+  ],
+  "BUG": "BUG2245",
+  "YKT": "YKT1991",
+  "repairApplied": false,
+  "productTests": 0,
+  "coverageAdded": 0,
+  "newAcceptance": 0,
+  "limits": [
+    "No other setup/method aliases/complex control flow proof",
+    "Test fixture-only finding, not observed deployed DB failure",
+    "No refused test retry, actual DB or external operation"
+  ]
+}
