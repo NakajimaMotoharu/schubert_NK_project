@@ -1,0 +1,267 @@
+{
+  "actualExit": 0,
+  "source": "b09393b0e746b55fd480176d57996d65bd76a95d",
+  "rawManifestSha256": "113c482177059b17343334ffa7ecccff2e964b5d7e91558a5048dc47e1341976",
+  "normalCompileManifestSha256": "6dec0021543c6c13c100237055b1f8bfe38fbdeeca5ac462b6a4ab2e1d45e010",
+  "scope": "TWO_CHANGED_MAIN_NORMAL_ARTIFACT_FULL_SOURCE_UNITS_NOT_451",
+  "sourcePins": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard.java": "68f3ac3e1ddba2e6e3afac97303a04b58b652c3cc357b4afed82d2bf85cd77ed",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoder.java": "fe609be3a5742587cfa6594691ee2c82fae3dc393e94f5fb0783113a88e21da2",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java": "81bd71024934aeeea579560a3fd9f9863a28ad7e4d8bdaec6f2fa82166462877",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java": "e26b68f3de97575ba40842a775258679d0c630586155822c799ff167425a8b6b"
+  },
+  "jarPins": {
+    "api": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18642-jms-uuid-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar",
+      "sha256": "9af4c9a0f30df45cd7d343a9a48acd69ce2069eb5946646ee2e9a5d82b26f917"
+    },
+    "web": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18642-jms-uuid-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar",
+      "sha256": "97a939371acdfa1b59e006d11baadf3a95292ee4555d7e3a2be0cd21374c8e38"
+    }
+  },
+  "tests": 14,
+  "newUniqueTestMethods": 2,
+  "preexistingMethodsRerunForChangedSource": 12,
+  "newMethodLiteralVectors": 22,
+  "sourceUnits": {
+    "dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard": {
+      "normalClassSha256": "8f43baae80f92e683ef0c0d592516f402945c481068dec6f8e3e0525da797191",
+      "crc64": "10d925165591aabd",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 255
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 42
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 66
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 31
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 10
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "probeHits": 66,
+      "probes": 66,
+      "four100": true
+    },
+    "dev/codex/schubert/nk/web/messaging/JmsReplyDecoder": {
+      "normalClassSha256": "669807892f6ccb050fcf6392ade93a4b29930b39070e2d0cfea833486d6c0ebd",
+      "crc64": "8f2ccd699ecb1e73",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 268
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 40
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 70
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 30
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 10
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "probeHits": 70,
+      "probes": 70,
+      "four100": true
+    }
+  },
+  "sessionIdentity": "PG18644-JMS-CANONICAL-NORMAL",
+  "execSha256": "7f8cb6b918d601cec82e0faf04d5ae66c112a212f9af346ae5eda7ec4b1d07e5",
+  "originalXmlPins": {
+    "TEST-junit-jupiter.xml": "9ab9bc058f9a33a2f99011b7f9efa66135267648d57a25cf29885004a7b1870d",
+    "TEST-junit-platform-suite.xml": "1f24578cfbcb6aa306d96699425b836b56f6910c040cfa371be6fefe75303fcb",
+    "TEST-junit-vintage.xml": "7837791180739f761c5337f2afbc8cf51492f825859d78e7024723b8cc7ff908"
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+      "name": "requiredHeadersPropertiesAndValuesDenyMissingBlankAndMalformedInputs",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+      "name": "nullAndNonBytesMessagesAreDeniedBeforeBodyAccess",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+      "name": "transportAndWireValuesMustExactlyMatchTheReplyHeaderAndRoute",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+      "name": "acceptanceReplyUsesExactRegisteredAsyncProfile",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+      "name": "destinationMustBeThePermanentApprovedAddressWithoutReplyTo",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+      "name": "identityPropertiesMustRetainExactLowercaseCanonicalUuidText",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+      "name": "requiredHeadersAndPropertiesDenyNullBlankMissingAndMalformedValues",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+      "name": "replyToMustMatchPresenceAndPermanentAllowlistedAddress",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+      "name": "nullTypeBodyLengthAndCopyAnomaliesAreRejected",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+      "name": "validBytesMessageProducesAnImmutableRedactedSnapshot",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+      "name": "identityPropertiesMustRetainExactLowercaseCanonicalUuidText",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+      "name": "bodyLengthAndCopyAnomaliesAreDeniedBeforeAllocationUse",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+      "name": "validReplyProducesAnImmutableRedactedResult",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+      "name": "destinationMustBePermanentArtemisUnqualifiedAndExact",
+      "result": "PASS"
+    }
+  ],
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "metadataNegativeVectors": [
+    "source:6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+    "actualExit:1",
+    "actualExit:True",
+    "tests:13",
+    "failures:1",
+    "errors:1",
+    "skipped:1",
+    "duplicate_case"
+  ],
+  "classInitMain": [
+    "dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard",
+    "dev/codex/schubert/nk/protocol/codec/ExpectedRoute",
+    "dev/codex/schubert/nk/protocol/header/MessageKind",
+    "dev/codex/schubert/nk/protocol/header/InteractionKind",
+    "dev/codex/schubert/nk/protocol/transport/BrokerTopology",
+    "dev/codex/schubert/nk/protocol/codec/TransportMetadata",
+    "dev/codex/schubert/nk/protocol/codec/TransportBodyType",
+    "dev/codex/schubert/nk/protocol/layout/LayoutId",
+    "dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage",
+    "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException",
+    "dev/codex/schubert/nk/protocol/layout/LayoutValidationException",
+    "dev/codex/schubert/nk/web/messaging/JmsReplyDecoder",
+    "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+    "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+    "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec",
+    "dev/codex/schubert/nk/protocol/time/JstWireTimestamp",
+    "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+    "dev/codex/schubert/nk/protocol/header/ResultCode",
+    "dev/codex/schubert/nk/protocol/header/CommonHeader",
+    "dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder",
+    "dev/codex/schubert/nk/protocol/codec/ProtocolValidator",
+    "dev/codex/schubert/nk/protocol/layout/WireMessage",
+    "dev/codex/schubert/nk/protocol/layout/FixedPayload",
+    "dev/codex/schubert/nk/web/messaging/ValidatedReply"
+  ],
+  "reportedEnvironment": [
+    {
+      "java.runtime.version": "25.0.4+7-1-26.04-Ubuntu",
+      "java.version": "25.0.4",
+      "os.arch": "amd64",
+      "os.name": "Linux",
+      "os.version": "7.0.0-42-generic"
+    },
+    {
+      "java.runtime.version": "25.0.4+7-1-26.04-Ubuntu",
+      "java.version": "25.0.4",
+      "os.arch": "amd64",
+      "os.name": "Linux",
+      "os.version": "7.0.0-42-generic"
+    },
+    {
+      "java.runtime.version": "25.0.4+7-1-26.04-Ubuntu",
+      "java.version": "25.0.4",
+      "os.arch": "amd64",
+      "os.name": "Linux",
+      "os.version": "7.0.0-42-generic"
+    }
+  ],
+  "actualBackendActions": 0,
+  "actualRootInvocation": false,
+  "whole451Accepted": false,
+  "wholeF03Accepted": false,
+  "formalUpdated": false,
+  "newAccepted": 0,
+  "oldSourceExecTransferred": false,
+  "priorLocalCompilePG18638CountedAgain": false,
+  "files": {
+    "source-display-contract.py": "e2d8845cd8418c1773dc8cda3e095b95e2d1116ab4d421443237ea7795ccc398",
+    "post-attempt1.py": "bf5c206d9e5031996ac6cc8ae586dbabdebe6269fdf3462d71b09285bba54017",
+    "post.py": "7dc574363a993a8ee1881f1bdf88d1338e0c7f4eac4c27fe72f3edd6713132d8",
+    "coverage.csv": "d54d66044e010a31c23ae0fdab0bb881fc354c9224fc4385eac27254ab197204",
+    "manifest.safe.json": "113c482177059b17343334ffa7ecccff2e964b5d7e91558a5048dc47e1341976",
+    "source-display-contract.json": "6557ce34bd24e073af4d16a855977b0dd3f04644551ed4a9212cd8e62eccbe53",
+    "TEST-junit-platform-suite.xml": "23d9f661083aadec5fda673da55efbf4c754ff058937dfce7cd66db52376b9ee",
+    "classinfo.stdout": "22f94451369c0745fb7431991620d32aa34193cf67d50b2987cb786195544f74",
+    "coverage.xml": "8ca3836745f02ebaa8892daa01b13bac0f8557b61907931f480c010e79579f65",
+    "execinfo.stdout": "6244bebb8dbd7bec87fc6239fce2d6680e50645bad9b2b3311e916dad4a5bec4",
+    "TEST-junit-vintage.xml": "b0adeea0f98fed1f55ecbaaee13db8e56494c3fc2ebf02e2347512a88fa137f5",
+    "TEST-junit-jupiter.xml": "d847d1ee35b6166769733a53b8554240f49a0224ad9352f8cd9c49cb29f279b5"
+  },
+  "supplement": {
+    "qualifiedBeforeSupplementSha256": "585d9f28c7bf43217ba0b94380269c45ffa81e2efc7d7afeb21a55dd8947a310",
+    "sourceDisplayChecks": 4,
+    "newLiteralVectors": 22,
+    "receipt": "cc9609/0",
+    "originalPostFailurePreserved": true,
+    "productReexecuted": false
+  }
+}
