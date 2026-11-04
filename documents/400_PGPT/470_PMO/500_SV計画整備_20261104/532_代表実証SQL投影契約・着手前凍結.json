@@ -1,0 +1,147 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "revision": "S_PRE_CANDIDATE7_FIRST_V_SELECTION",
+  "atJST": "2026-11-04T22:04:09+09:00",
+  "status": "SELECTED_FOR_PREPARATION_PRODUCT_EXECUTION_REQUIRES_FINAL_PINS_AND_TOOL_CHECK",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "designCommit": "7147c428bb9d619d88139947294bc3e8d95c4b62",
+  "baseHead": "9001f6a6134dc2173c530a3b9eca508c290ddfa1",
+  "pool": "V",
+  "capPp": 10,
+  "maximumGroups": 1,
+  "originalGroupEstimatePp": {
+    "low": 1.5,
+    "base": 5,
+    "high": 9
+  },
+  "estimateType": "TECHNICAL_JUDGEMENT_NOT_CALIBRATED_COST",
+  "costOwner": "WBS-P014-01",
+  "commonToolCostsIncludedOnce": true,
+  "SObservedBeforeTransitionPp": 3,
+  "sourceChanged": false,
+  "selection": {
+    "candidateId": "V-API-QUERY-PROJECTION",
+    "contract": "Question/Notification四queryのprepared SQL・role/owner投影・件数/page整合・異常分類・borrowed資源寿命の単体契約",
+    "targetSource": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.java",
+    "sha256": "5eece6ce0bfd2e2e7db0f466f4f2806a28ce4182019117d897f5346468f54efd",
+    "wholePhysicalClosure": [
+      "dev/codex/schubert/nk/api/persistence/QuestionQueryRepository",
+      "dev/codex/schubert/nk/api/persistence/QuestionQueryRepository$RowMapper"
+    ],
+    "oldCurrentCounters": {
+      "LINE": {
+        "covered": 158,
+        "missed": 12
+      },
+      "METHOD": {
+        "covered": 30,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 49,
+        "missed": 15
+      }
+    },
+    "representativeOf": [
+      "API21部分未達中のquery投影/SQL境界",
+      "Source単位の独立oracleと必要repeatを伴う残branch閉鎖"
+    ],
+    "notRepresentativeOf": [
+      "DB driver/実SQL評価計画",
+      "Root/VM/Backup/permit/native",
+      "新規crypto/認証発行",
+      "全80Source又は全残工程の単価"
+    ],
+    "newCandidateComparedWith": "508の六候補は実owner/暗号/未確定解放に依存。この候補は実業務のquery SQL・投影・異常境界で、getter/既成功の再確認や計画工具だけでない。最初で唯一のVを選ぶので追加二群でない。"
+  },
+  "preflight": {
+    "classification": "PT_DEFAULT_FOR_DECLARED_OWN_PROXY_QUERY_OPERATIONS_ONLY",
+    "evidenceReceipts": [
+      "ac1cb8",
+      "ba500c",
+      "480ec3",
+      "66efca",
+      "09af0f",
+      "fc0e10"
+    ],
+    "fixture": "自己所有java.sql Connection/PreparedStatement/ResultSet interface proxy、手書row map/日時/USER・ADMIN actor値。Driver/DB/network/key/Root/permit/私有状態を作成も取得もしない",
+    "callPath": "Repository→PayloadCodec/TypeCatalog/record validation、RequiredColumn/QuestionQueryException。異常時TemporaryInfrastructureException.preserveFatalの容器走査だけ。attachSecondary/ServiceProcessResources/RootFailedStart/権限変更/失敗cohort回収を呼ばない。TempクラスはserialVersionUIDのみのstatic値、preserveFatalはcollection/Throwable/JDBC/JMS型検査でI/O無し。fixtureの例外は当試験が作成した固定Throwableだけ。",
+    "holdSeparation": "1975等の既九PT/attachSecondaryとunknown-release経路、RootFailed二source、held二工具は未実行・read/stat/hash/stage保留。対象未特定拒否をこのqueryへ割り当てず、拒否境界を実行で探らない。",
+    "toolApplicability": "旧scoped_prometheus_hostと旧postはnormal1962 inputの全fileをhashし、保留RootFailed二Testも含むため、そのまま起動しない。全六Main Jarの固定byte/compile witnessと対象Source/選択Test/必要依存だけを検証する共有の有限runner/postへ適用範囲を明示する。既工具は不変。全工程G07/G13/451合格の代用品にしない。",
+    "actualProductOperationsBeforeFreeze": 0,
+    "permissionScopeExpanded": false
+  },
+  "newTest": {
+    "path": "tools/quality/architecture/QuestionProjectionFailureContractTest.java",
+    "className": "dev.codex.schubert.nk.api.persistence.QuestionProjectionFailureContractTest",
+    "methods": [
+      "projection001BorrowedTransactionPreconditions",
+      "projection002SqlStageFailuresCloseOwnedResources",
+      "projection003PageTotalsAndLimits",
+      "projection004PageMetadataAndCardinality",
+      "projection005RequiredColumnsAndTypedValues",
+      "projection006DetailAbsenceDuplicateAndErrorCodes",
+      "projection007SuppressedFailuresAndFatalIdentity",
+      "projection008RequestAndNullBoundaries",
+      "projection009StableSqlAndOwnerScope",
+      "projection010BorrowedLifecycleAndDiagnostics"
+    ],
+    "count": 10,
+    "independentOracle": "UI236のlayout/offset/50件・SS332§3/§9のrole/owner/page、最大999999page=49999950recordsの独立算術、literalSQL/bind/row→明示DOMでなくTypedPayload期待値。code/例外/redactionとRS/PS close数・connection lifecycle0を手書定義する。expectedにProduction query/mapper/codecを呼ばない。"
+  },
+  "necessaryRepeat": {
+    "className": "dev.codex.schubert.nk.api.application.question.QuestionSqlContractTest",
+    "count": 10,
+    "why": "既current成功10は再加算しない。未達の同一whole Sourceを一つのfresh execで四counter100にするため正常分岐の必要repeatだけを含め、旧execのcoverage合算0。旧plain8/既Auth/既Canonicalは再演しない。"
+  },
+  "command": [
+    "python3",
+    "-B",
+    "tools/quality/pg18510_query_projection_joint_pt.py"
+  ],
+  "normalCompileWitness": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg14216-typed-marker-guard-six-compile-v1/manifest.safe.json",
+    "sha256": "1d0a3dee2f054010a81c67f4a8ef11e7d4370c9640efa9bcb8eead51168c81a3",
+    "testsExecuted": 0,
+    "sixJarPathsPresent": true,
+    "currentProductTestNotRunForConfirmation": true
+  },
+  "requiredQuality": [
+    "製造済Repository全bodyをSSと点検し、発見不具合は修正前915/916へ起票",
+    "新10期待値/fixture/呼出し全体・所有・副作用を凍結、原SQL10をhash固定",
+    "共有工具の適用範囲/12以上否定metadataと真正OS終了・timeout/非PASSの不受理を確認",
+    "JDK25 javac -Xlint:all -Werror、同6Main Jarのみで新Testをcompile",
+    "20method/2suiteのF/E/S/flaky/not-run0、真の一JVM終端/exec/session/CRCを確認",
+    "一execのRepo whole physical closureでline/method/class/branch100、NoCode RowMapperは分母を明示し除外で穴埋めしない",
+    "独立postのXML/exec/CRC/source hash/全後条件・固定oracle/負例を照合",
+    "同source静的六module既0をbyte根拠付き再利用、Mainが変われば必要build/static/451再資格を省略しない",
+    "source/run/requirements/TestID/結果/coverage/BUGを文書化・sanitize・通常commit/push"
+  ],
+  "acceptance": {
+    "criterion": "WBS-P014-01内の四SQL投影単体契約",
+    "criteriaAreNotNewBudgetLeaves": true,
+    "needs": "上記全qualityと明示入力/後条件を満たした場合だけ個別の当契約受入を判定",
+    "parentRemaining": [
+      "QuestionQueryApplicationService/Inbox-HMAC/保存snapshot/実DBの最終受入",
+      "P006-01/P007-03の必要parent start/exit依存",
+      "native/実CHR/G07/G13/451正式"
+    ],
+    "wholeParentAccepted": false,
+    "formal1964x53Unchanged": true
+  },
+  "costBasis": {
+    "existingComparable": "PG14760/14762 同Source/同SQL10とwholeRequest8のcompile/JUnit/独立post成功。ただしRepository partial・当契約の新異常/新工具/受入までの完成例ではない。既8pp初期受入basketやSource件数を単価にしない。",
+    "low": "既Mainを不変更でfresh20が初回で全必要branchを閉鎖し、共有runnerとpostを一回資格化",
+    "base": "一つのfixture/工具是正と再資格、独立期待値・後条件・trace/保存を含む",
+    "high": "Main不具合一件又は複数fixture是正を含む当契約の再build/静的/全scope再確認。9pp予測は測定ではなく停止までの余裕1ppをcap10内で残す判断",
+    "capExit": "V観測10pp/見込み超過ならVだけ保全し未達保存、別易しい実証へ差替えない。S内POST残2ppは別に保持。",
+    "actualAllocatedPp": null
+  },
+  "SStatus": "S-PRE仮計画/保留/分類の部分成果を保持。全282/2980意味分類は未完で、Vの実測後S-POSTへ反映する。完成・費用/日程VALIDATEDはまだ主張しない。",
+  "VProductStarted": false,
+  "noNewAgentChatAutomationModelResetCharge": true
+}

@@ -1,0 +1,55 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "atJST": "2026-11-04T22:11:31+09:00",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "pool": "V",
+  "originalSelection": "532_代表実証SQL投影契約・着手前凍結.json",
+  "bug": "BUG2240",
+  "horizontal": "YKT1986",
+  "status": "NOT_READY_FOR_PILOT_HOLD_SCOPE_UNRESOLVED_PREPARATION_ONLY",
+  "originalFrozenEstimatePp": {
+    "low": 1.5,
+    "base": 5,
+    "high": 9
+  },
+  "capPp": 10,
+  "selectionHistoryRetained": true,
+  "newPilotOrEasyReplacement": false,
+  "reason": "既ReviewedProjectionHeldProbeAuditはTemporaryInfrastructureExceptionの全probeを保留。新負例はRepository catchから同classを実行する。メソッド純粋性/attachSecondary非呼出しだけでそのHOLDを変更できない。最終判定前に2ffb77で確認し、実行前に中断。",
+  "heldGuardPath": "tools/quality/architecture/ReviewedProjectionHeldProbeAudit.java",
+  "guardReadReceipt": "2ffb77",
+  "wholeSourceFour100ImpossibleUnderCurrentDeclaredOperations": "LINE12/BRANCH15 missedの一部は同catchに依存。正常10だけの反復/旧exec転用/Sourceの分母縮小で満たさない。",
+  "actual": {
+    "productTestRuns": 0,
+    "db": 0,
+    "vm": 0,
+    "services": 0,
+    "network": 0,
+    "heldClassCalls": 0,
+    "oldSuccessfulTestsRepeated": 0,
+    "newFixtureInstantiated": 0,
+    "newRunnerOrPostExecuted": 0
+  },
+  "draft": {
+    "path": "tools/quality/architecture/QuestionProjectionFailureContractTest.java",
+    "methods": 10,
+    "execution": "NOT_RUN",
+    "compilation": "NOT_RUN",
+    "acceptance": false,
+    "coverage": null,
+    "reason": "新候補の未実行draftとして保持。読み取り/静的PG点検以外へ進めない。"
+  },
+  "scopeOfCorrection": "532のPT_DEFAULT/独立性判定だけ訂正。source/SS/oracle/原費用/元group event/cap不変更。",
+  "budget": {
+    "VStartedAsPreparation": true,
+    "VSharedReportedDeltaPp": 0,
+    "actualAllocatedPp": null,
+    "zeroNotFree": true,
+    "SObservedPp": 3,
+    "SRemainingCapPp": 7,
+    "SPostReservePp": 2,
+    "combinedObservedPp": 3
+  },
+  "mayFinishTurn": false,
+  "next": "V当範囲を保留し、同じS群POSTの残S7pp内でAPI21横断の具体HOLD/非該当・残件分類/仮積算の不確実性と再利用の意味確認を続ける。独立Sが尽きたとはしない。"
+}

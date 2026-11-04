@@ -1,0 +1,125 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S",
+  "costOwner": "WBS-K03.02",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "owner": "WBS-P007-01",
+  "method": "STATIC_SEMANTIC_REUSE_OF_EXISTING_CURRENT_SUBSET_NOT_REEXECUTION",
+  "post": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG17742-auth-borrowed-boundary-three-post-v1/manifest.json",
+  "sha256": "f1082ea1d6aa3d8aad341dd00a03dde5f61b8bb1562bce759ab1304576af22bf",
+  "specification": "evidence/01_PT/018_NK-OPS-001/3427_認証借用JDBC原三単体テスト仕様.md",
+  "postRecorded": {
+    "actualExit": 0,
+    "tests": 3,
+    "suites": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "execSha256": "0a94692614b3b3a62dd854a0ce8ee6012b661e0423f6cdbe77524afa878fd7e1"
+  },
+  "sourceTest": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationJdbcBoundary329Test.java",
+  "receipts": [
+    "bca334",
+    "af0e53",
+    "e5a119"
+  ],
+  "semanticContract": [
+    {
+      "id": "PT-AUTH-BOUNDARY329001",
+      "method": "authBoundary329001LockPreservesFatalAfterOwnedStatementClose",
+      "input": "lockForAttempt第一SELECTでSQL primary + owned statement close Error / SQL next cause Error / 非fatal SQLnext循環",
+      "expected": "前二は独立生成Errorの同一identity伝播、非fatalは固定Infrastructure/cause null/suppressed0。prepare/execute/close各1、ResultSet0、borrowedConnection close/commit/rollback0",
+      "independentOracle": "Test verify(failAt1)のliteral counterと既生成Error。Production graph探索からexpectedを算出しない"
+    },
+    {
+      "id": "PT-AUTH-BOUNDARY329002",
+      "method": "authBoundary329002BothRecordOutcomesPreserveFatalWithoutOwningConnection",
+      "input": "account不在/IP固定でsuccess/failure更新を同三faultmode",
+      "expected": "同identity/catalog/lifecycle、両処理ともstatement各1×3、connection lifecycle0",
+      "independentOracle": "bool success二値による対象二処理、counterはliteral1。実user row成功/失敗の状態確認とは別"
+    },
+    {
+      "id": "PT-AUTH-BOUNDARY329003",
+      "method": "authBoundary329003AuditFatalCannotBecomeRetryAndAlwaysWipesInput",
+      "input": "借用proxy user0→IP固定row→failure update→audit第五statement、常時false predicate/char3",
+      "expected": "SQL/close/next異常のError identity又は固定catalog、statement各5×3/ResultSetclose2×3、predicate3、password全3zero、borrowedConnection lifecycle0",
+      "independentOracle": "合成char[3]zero配列、SQLstub序数5、literalprepare/close数。実DB無しでも引数/SQLaudit正常性全部を検証したとの主張ではない"
+    }
+  ],
+  "actualOperationsInThisReview": {
+    "productOrTestExecution": 0,
+    "db": 0,
+    "crypto": 0,
+    "network": 0,
+    "privateFiles": 0
+  },
+  "disclosure": "元実行のAuthContextCodec public zero constructorの複製/wipe、ContextHash/SecureRandom provider object作成は存在し、元provider内部読取回数null。今回constructorやfixtureを呼ばない。元false predicateによりsession.issue/nonce/rawcontext発行は通らない。@Timeout元framework thread数null。",
+  "currentSubsetCounters": {
+    "AuthenticationService": {
+      "LINE": [
+        36,
+        18
+      ],
+      "METHOD": [
+        4,
+        1
+      ],
+      "CLASS": [
+        1,
+        0
+      ],
+      "BRANCH": [
+        10,
+        14
+      ]
+    },
+    "LoginAttemptRepository": {
+      "LINE": [
+        61,
+        33
+      ],
+      "METHOD": [
+        7,
+        1
+      ],
+      "CLASS": [
+        1,
+        0
+      ],
+      "BRANCH": [
+        11,
+        19
+      ]
+    },
+    "LoginAuditWriter": {
+      "LINE": [
+        25,
+        5
+      ],
+      "METHOD": [
+        2,
+        0
+      ],
+      "CLASS": [
+        1,
+        0
+      ],
+      "BRANCH": [
+        5,
+        7
+      ]
+    }
+  },
+  "counterArrayOrder": [
+    "covered",
+    "missed"
+  ],
+  "remaining": "528の実DB正常認証/失敗窓/atomic commit/8h/二session/DDL/並行/timeoutの後条件はこのproxy fault三件で代替しない。Source三ともpartialを維持し、catch/fatal資格をRoot/DB操作許可へ外挿しない。",
+  "newProductPass": 0,
+  "newCoverage": 0,
+  "newAcceptedCriteria": 0,
+  "currentOrdinaryCaseAliasAdded": 0,
+  "VStarted": false,
+  "mayFinishTurn": false,
+  "next": "Scenario/Mediaのquery契約・既SQL後条件を限定sourceで比較し、全有限familyの不足と見積比較へ継続"
+}

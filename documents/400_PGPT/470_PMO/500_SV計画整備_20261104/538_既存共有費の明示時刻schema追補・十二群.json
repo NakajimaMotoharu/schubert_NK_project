@@ -1,0 +1,435 @@
+{
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "actualExit": 0,
+  "scope": "READ_ONLY_PUBLIC_HISTORICAL_QUOTA_ENVELOPES_NOT_FUTURE_UNIT_PRICES",
+  "asOfSeed": "2026-11-02T07:43:28.773987+09:00",
+  "historicalSeedExpectedSavedSamples": 380,
+  "recognizedUniqueSavedSamples": 456,
+  "unrecognizedOrNonNumericQuotaRecords": 21,
+  "afterSeedNumericRecordsExcluded": 3,
+  "malformedPublicObservationLines": 0,
+  "inputSeedSha256": "90a6cada3c8081d2ee7c71b42b4a90640b8c3ea98fcda326e4b0f215b811f742",
+  "freshReportingSha256": "2d1abdf7de2a5051e84c6c0ec44980fa9118f6f1e50256848ffda672f2037fde",
+  "freshReportingUpdatedAt": "2026-11-04T21:26:10.853192+09:00",
+  "freshReportingIsNotOriginalPinnedSnapshot": true,
+  "prior1128And479SummaryPreserved": {
+    "method": "Reconstruct enclosing reported shared-quota intervals from380 saved numeric quota samples and public group start/last-checkpoint timestamps; no private/raw logs or new collection. Timestamp end is not proof of acceptance. Overlapping intervals are not summed or allocated.",
+    "savedNumericQuotaSamples": 380,
+    "groupsWithComparableEnclosingIntervalAtMost3Hours": 1128,
+    "dedicatedCostInferred": false,
+    "reconstructedFullAcceptedEarlyBasket": {
+      "interval": {
+        "fromJST": "2026-10-23T06:27:22+09:00",
+        "toJST": "2026-10-23T10:27:39+09:00",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793306748,
+        "fromUsedPercent": 0,
+        "toUsedPercent": 8,
+        "reportedSharedDeltaPp": 8,
+        "intervalSeconds": 14417,
+        "isIndividualActualCost": false,
+        "isFreeIfZero": false
+      },
+      "acceptanceEvidence": "state.current_source_individual_acceptance at08:30 and individual_acceptance_by_source.3c70 at09:28; six new e7 leaves +three common children, four prerequisite revalidations; separate sources, parent not added",
+      "interpretation": "The recorded interval0->8 contains this already-implemented/evidence-reuse-heavy accepted basket and PMO/other work. It is a real shared observation, not18pp earned work, not an8pp dedicated cost, and not a unit price for unresolved actual paths or80partial/282unreferenced Sources."
+    },
+    "extrapolationRejectedBecause": [
+      "Enclosing hourly intervals contain multiple groups and other chats; overlapping interval totals cannot be added",
+      "Latest checkpoint is not a verified end-to-end final acceptance event",
+      "Simple source-specific proof reuse is not comparable to unresolved ownership/native/runtime/semantic work",
+      "No established finite remaining group quantity for each comparable work type yet"
+    ],
+    "notDependentOnExclusiveCostOnly": true,
+    "nextCalibrationCanUse": "A comparable, genuinely closed contractual group within a recorded shared cost pool, charged once; ownership/overlap and integer precision disclosed. Dedicated response usage is helpful but not a prerequisite for all planning.",
+    "distinctEnclosingIntervalKeysNotAdditive": 479
+  },
+  "selectedLeaf": "WBS-P014-01",
+  "selectedGroups": [
+    {
+      "groupId": "P013_QUESTION_SQL_INTERFACE_CONTRACT_V1",
+      "source": "9eac6bffd8462aea5d0d0759cb14fdef5b1a1a3e",
+      "startAtJST": "2026-10-26T09:02:35.077959+09:00",
+      "lastCheckpointAtJST": "2026-10-26T09:09:04.986904+09:00",
+      "groupElapsedSeconds": 389.908945,
+      "groupEndIsNotAcceptance": true,
+      "actualAllocatedPp": null,
+      "fullContractAcceptedByThisAudit": false,
+      "sharedEnvelope": "2026-10-26T08:41:39.037805+09:00..2026-10-26T09:45:40.413126+09:00",
+      "sharedReportedEnvelopePp": 2,
+      "zeroNotFree": true
+    },
+    {
+      "groupId": "P013_QUERY_VALID_PAGE_STATE_BATCH_V1",
+      "source": "dd138e9def675f9278ae4b1bdb8c5ee3e34f2b77",
+      "startAtJST": "2026-10-26T09:16:44.403746+09:00",
+      "lastCheckpointAtJST": "2026-10-26T09:28:18.863680+09:00",
+      "groupElapsedSeconds": 694.459934,
+      "groupEndIsNotAcceptance": true,
+      "actualAllocatedPp": null,
+      "fullContractAcceptedByThisAudit": false,
+      "sharedEnvelope": "2026-10-26T08:41:39.037805+09:00..2026-10-26T09:45:40.413126+09:00",
+      "sharedReportedEnvelopePp": 2,
+      "zeroNotFree": true
+    },
+    {
+      "groupId": "P010_PRE_SQL_BOUNDARY_ASSESSMENT_V1",
+      "source": "5e8255bcf8f309d05fb091cee2e9ad810b276c87",
+      "startAtJST": "2026-10-26T11:57:34.073959+09:00",
+      "lastCheckpointAtJST": "2026-10-26T12:06:03.090429+09:00",
+      "groupElapsedSeconds": 509.01647,
+      "groupEndIsNotAcceptance": true,
+      "actualAllocatedPp": null,
+      "fullContractAcceptedByThisAudit": false,
+      "sharedEnvelope": "2026-10-26T11:46:11.238182+09:00..2026-10-26T12:45:39.375754+09:00",
+      "sharedReportedEnvelopePp": 2,
+      "zeroNotFree": true
+    },
+    {
+      "groupId": "P010_PRE_SQL_BOUNDARY_IMPLEMENTATION_V1",
+      "source": "d4ba0fcbe8855b9674413d395b46d2de7bb2ded9",
+      "startAtJST": "2026-10-26T12:08:47.003067+09:00",
+      "lastCheckpointAtJST": "2026-10-26T12:37:19.127538+09:00",
+      "groupElapsedSeconds": 1712.124471,
+      "groupEndIsNotAcceptance": true,
+      "actualAllocatedPp": null,
+      "fullContractAcceptedByThisAudit": false,
+      "sharedEnvelope": "2026-10-26T11:46:11.238182+09:00..2026-10-26T12:45:39.375754+09:00",
+      "sharedReportedEnvelopePp": 2,
+      "zeroNotFree": true
+    },
+    {
+      "groupId": "G13_PRE_SQL_THREE_PATH_TRACE_V1",
+      "source": "d4ba0fcbe8855b9674413d395b46d2de7bb2ded9",
+      "startAtJST": "2026-10-26T12:39:14.542087+09:00",
+      "lastCheckpointAtJST": "2026-10-26T12:41:26.727066+09:00",
+      "groupElapsedSeconds": 132.184979,
+      "groupEndIsNotAcceptance": true,
+      "actualAllocatedPp": null,
+      "fullContractAcceptedByThisAudit": false,
+      "sharedEnvelope": "2026-10-26T11:46:11.238182+09:00..2026-10-26T12:45:39.375754+09:00",
+      "sharedReportedEnvelopePp": 2,
+      "zeroNotFree": true
+    },
+    {
+      "groupId": "G03_QUERY_WIRE_ORACLE_INDEPENDENCE_V1",
+      "source": "21228608b9defca3eb6fac7e0485f28a56925246",
+      "startAtJST": "2026-10-26T14:04:22.394445+09:00",
+      "lastCheckpointAtJST": "2026-10-26T14:11:27.404671+09:00",
+      "groupElapsedSeconds": 425.010226,
+      "groupEndIsNotAcceptance": true,
+      "actualAllocatedPp": null,
+      "fullContractAcceptedByThisAudit": false,
+      "sharedEnvelope": "2026-10-26T13:53:11.327318+09:00..2026-10-26T14:50:37+09:00",
+      "sharedReportedEnvelopePp": 2,
+      "zeroNotFree": true
+    },
+    {
+      "groupId": "F03_QUERY_TEST_LITERAL19_V1",
+      "source": "4c975c3eb1d8d5540805fae642b80d0d5e781c12",
+      "startAtJST": "2026-10-26T14:20:24.078090+09:00",
+      "lastCheckpointAtJST": "2026-10-26T14:23:25.095023+09:00",
+      "groupElapsedSeconds": 181.016933,
+      "groupEndIsNotAcceptance": true,
+      "actualAllocatedPp": null,
+      "fullContractAcceptedByThisAudit": false,
+      "sharedEnvelope": "2026-10-26T13:53:11.327318+09:00..2026-10-26T14:50:37+09:00",
+      "sharedReportedEnvelopePp": 2,
+      "zeroNotFree": true
+    },
+    {
+      "groupId": "ALL_MODULE_EXISTING262_TEST_LITERAL1171_PG_ONLY_V1",
+      "source": "8a518b2535a1d29ce1493fa56ed7be285a540201",
+      "startAtJST": "2026-10-29T02:20:21.105433+09:00",
+      "lastCheckpointAtJST": "2026-10-29T02:30:28.014982+09:00",
+      "groupElapsedSeconds": 606.909549,
+      "groupEndIsNotAcceptance": true,
+      "actualAllocatedPp": null,
+      "fullContractAcceptedByThisAudit": false,
+      "sharedEnvelope": "2026-10-29T01:57:12+09:00..2026-10-29T02:57:43+09:00",
+      "sharedReportedEnvelopePp": 2,
+      "zeroNotFree": true
+    },
+    {
+      "groupId": "CURRENT_PRINTABLE34_TEST_LITERAL65_PG_ONLY_V1",
+      "source": "99fa8e93a67184377012d90cb41fdbc11a86cfad",
+      "startAtJST": "2026-10-29T02:49:30.078414+09:00",
+      "lastCheckpointAtJST": "2026-10-29T03:00:26.259121+09:00",
+      "groupElapsedSeconds": 656.180707,
+      "groupEndIsNotAcceptance": true,
+      "actualAllocatedPp": null,
+      "fullContractAcceptedByThisAudit": false,
+      "sharedEnvelope": "2026-10-29T01:57:12+09:00..2026-10-29T03:58:45+09:00",
+      "sharedReportedEnvelopePp": 4,
+      "zeroNotFree": true
+    },
+    {
+      "groupId": "HOST_QUESTION_SQL_JOINT18_V1",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "startAtJST": "2026-10-30T10:52:52.266768+09:00",
+      "lastCheckpointAtJST": "2026-10-30T10:57:51.699822+09:00",
+      "groupElapsedSeconds": 299.433054,
+      "groupEndIsNotAcceptance": true,
+      "actualAllocatedPp": null,
+      "fullContractAcceptedByThisAudit": false,
+      "sharedEnvelope": "2026-10-30T10:42:15+09:00..2026-10-30T11:48:17+09:00",
+      "sharedReportedEnvelopePp": 2,
+      "zeroNotFree": true
+    },
+    {
+      "groupId": "PG15582-PUBLIC-INBOX-VALUES-FIFTEEN",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "startAtJST": "2026-10-31T07:45:47.740454+09:00",
+      "lastCheckpointAtJST": "2026-10-31T07:58:44.104986+09:00",
+      "groupElapsedSeconds": 776.364532,
+      "groupEndIsNotAcceptance": true,
+      "actualAllocatedPp": null,
+      "fullContractAcceptedByThisAudit": false,
+      "sharedEnvelope": "2026-10-31T07:16:14+09:00..2026-10-31T08:18:43+09:00",
+      "sharedReportedEnvelopePp": 2,
+      "zeroNotFree": true
+    },
+    {
+      "groupId": "PG15678-PRE-SQL-THIRTEEN",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "startAtJST": "2026-10-31T08:46:27.181541+09:00",
+      "lastCheckpointAtJST": "2026-10-31T08:56:23.948821+09:00",
+      "groupElapsedSeconds": 596.76728,
+      "groupEndIsNotAcceptance": true,
+      "actualAllocatedPp": null,
+      "fullContractAcceptedByThisAudit": false,
+      "sharedEnvelope": "2026-10-31T08:18:43+09:00..2026-10-31T09:18:42+09:00",
+      "sharedReportedEnvelopePp": 1,
+      "zeroNotFree": true
+    }
+  ],
+  "distinctNonAdditiveEnvelopePools": [
+    {
+      "before": {
+        "atJST": "2026-10-26T08:41:39.037805+09:00",
+        "timestampField": "retrieved_at_jst",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793513544,
+        "usedPercent": 26,
+        "counterDiscontinuity": null
+      },
+      "after": {
+        "atJST": "2026-10-26T09:45:40.413126+09:00",
+        "timestampField": "retrieved_at_jst",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793513544,
+        "usedPercent": 28,
+        "counterDiscontinuity": null
+      },
+      "sharedReportedPp": 2,
+      "envelopeSeconds": 3841.375321,
+      "groupIds": [
+        "P013_QUESTION_SQL_INTERFACE_CONTRACT_V1",
+        "P013_QUERY_VALID_PAGE_STATE_BATCH_V1"
+      ]
+    },
+    {
+      "before": {
+        "atJST": "2026-10-26T11:46:11.238182+09:00",
+        "timestampField": "retrieved_at_jst",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793513544,
+        "usedPercent": 31,
+        "counterDiscontinuity": null
+      },
+      "after": {
+        "atJST": "2026-10-26T12:45:39.375754+09:00",
+        "timestampField": "retrieved_at_jst",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793513544,
+        "usedPercent": 33,
+        "counterDiscontinuity": null
+      },
+      "sharedReportedPp": 2,
+      "envelopeSeconds": 3568.137572,
+      "groupIds": [
+        "P010_PRE_SQL_BOUNDARY_ASSESSMENT_V1",
+        "P010_PRE_SQL_BOUNDARY_IMPLEMENTATION_V1",
+        "G13_PRE_SQL_THREE_PATH_TRACE_V1"
+      ]
+    },
+    {
+      "before": {
+        "atJST": "2026-10-26T13:53:11.327318+09:00",
+        "timestampField": "retrieved_at_jst",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793513544,
+        "usedPercent": 35,
+        "counterDiscontinuity": null
+      },
+      "after": {
+        "atJST": "2026-10-26T14:50:37+09:00",
+        "timestampField": "retrieved_at_jst",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793513544,
+        "usedPercent": 37,
+        "counterDiscontinuity": null
+      },
+      "sharedReportedPp": 2,
+      "envelopeSeconds": 3445.672682,
+      "groupIds": [
+        "G03_QUERY_WIRE_ORACLE_INDEPENDENCE_V1",
+        "F03_QUERY_TEST_LITERAL19_V1"
+      ]
+    },
+    {
+      "before": {
+        "atJST": "2026-10-29T01:57:12+09:00",
+        "timestampField": "retrieved_at_jst",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793774153,
+        "usedPercent": 15,
+        "counterDiscontinuity": null
+      },
+      "after": {
+        "atJST": "2026-10-29T02:57:43+09:00",
+        "timestampField": "retrieved_at_jst",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793774153,
+        "usedPercent": 17,
+        "counterDiscontinuity": null
+      },
+      "sharedReportedPp": 2,
+      "envelopeSeconds": 3631,
+      "groupIds": [
+        "ALL_MODULE_EXISTING262_TEST_LITERAL1171_PG_ONLY_V1"
+      ]
+    },
+    {
+      "before": {
+        "atJST": "2026-10-29T01:57:12+09:00",
+        "timestampField": "retrieved_at_jst",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793774153,
+        "usedPercent": 15,
+        "counterDiscontinuity": null
+      },
+      "after": {
+        "atJST": "2026-10-29T03:58:45+09:00",
+        "timestampField": "retrieved_at_jst",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793774153,
+        "usedPercent": 19,
+        "counterDiscontinuity": null
+      },
+      "sharedReportedPp": 4,
+      "envelopeSeconds": 7293,
+      "groupIds": [
+        "CURRENT_PRINTABLE34_TEST_LITERAL65_PG_ONLY_V1"
+      ]
+    },
+    {
+      "before": {
+        "atJST": "2026-10-30T10:42:15+09:00",
+        "timestampField": "retrieved_at_jst",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793774153,
+        "usedPercent": 31,
+        "counterDiscontinuity": false
+      },
+      "after": {
+        "atJST": "2026-10-30T11:48:17+09:00",
+        "timestampField": "retrieved_at_jst",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793774153,
+        "usedPercent": 33,
+        "counterDiscontinuity": false
+      },
+      "sharedReportedPp": 2,
+      "envelopeSeconds": 3962,
+      "groupIds": [
+        "HOST_QUESTION_SQL_JOINT18_V1"
+      ]
+    },
+    {
+      "before": {
+        "atJST": "2026-10-31T07:16:14+09:00",
+        "timestampField": "retrieved_at_jst",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793774153,
+        "usedPercent": 43,
+        "counterDiscontinuity": false
+      },
+      "after": {
+        "atJST": "2026-10-31T08:18:43+09:00",
+        "timestampField": "retrieved_at_jst",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793774153,
+        "usedPercent": 45,
+        "counterDiscontinuity": false
+      },
+      "sharedReportedPp": 2,
+      "envelopeSeconds": 3749,
+      "groupIds": [
+        "PG15582-PUBLIC-INBOX-VALUES-FIFTEEN"
+      ]
+    },
+    {
+      "before": {
+        "atJST": "2026-10-31T08:18:43+09:00",
+        "timestampField": "retrieved_at_jst",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793774153,
+        "usedPercent": 45,
+        "counterDiscontinuity": false
+      },
+      "after": {
+        "atJST": "2026-10-31T09:18:42+09:00",
+        "timestampField": "retrieved_at_jst",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793774153,
+        "usedPercent": 46,
+        "counterDiscontinuity": false
+      },
+      "sharedReportedPp": 1,
+      "envelopeSeconds": 3599,
+      "groupIds": [
+        "PG15678-PRE-SQL-THIRTEEN"
+      ]
+    }
+  ],
+  "overlappingPoolPairs": [
+    [
+      [
+        "ALL_MODULE_EXISTING262_TEST_LITERAL1171_PG_ONLY_V1"
+      ],
+      [
+        "CURRENT_PRINTABLE34_TEST_LITERAL65_PG_ONLY_V1"
+      ]
+    ]
+  ],
+  "sumOfOverlappingPoolsPp": null,
+  "calibratedProductFullCyclePrices": false,
+  "futureLowBaseHigh": null,
+  "reason": "All selected group starts/last checkpoints lack independent full-contract acceptance. Reusable successful unit18 does not close held error paths. Overlapping/shared envelopes and current V static-only results cannot price the whole remaining contract.",
+  "newProductTests": 0,
+  "newAcceptedCriteria": 0,
+  "wholePlanValidated": false,
+  "receipt": {
+    "chunk": "c108ed",
+    "actualExit": 0
+  },
+  "script": "import json,hashlib,bisect,datetime\nfrom pathlib import Path\nb=Path('/home/mini/codex/project1/work/PMO/hourly-monitor')\nseedPath=b/'completion-execution-kit-20261102/evidence/remaining-work-seed.json'\nseed=json.loads(seedPath.read_bytes());cut=datetime.datetime.fromisoformat(seed['atJST'])\nsamples={};unknown=0;afterCut=0;malformed=0\nwith (b/'observations.jsonl').open() as stream:\n for line in stream:\n  try:row=json.loads(line)\n  except json.JSONDecodeError:malformed+=1;continue\n  q=row.get('quota')\n  if not isinstance(q,dict):continue\n  timestampField=next((k for k in ('retrieved_at_jst','retrieved_at_utc','time_jst') if isinstance(q.get(k),str)),None)\n  stamp=q.get(timestampField) if timestampField else None;used=q.get('used_percent');reset=q.get('reset');duration=q.get('window_duration_mins');limit=q.get('limit_id')\n  if not isinstance(stamp,str) or type(used) is not int or type(reset) is not int or type(duration) is not int or not isinstance(limit,str):unknown+=1;continue\n  try:at=datetime.datetime.fromisoformat(stamp)\n  except ValueError:unknown+=1;continue\n  if at.tzinfo is None or not 0<=used<=100:unknown+=1;continue\n  if at>cut:afterCut+=1;continue\n  samples[(at,limit,duration,reset)]=dict(atJST=at.isoformat(),timestampField=timestampField,limitId=limit,windowDurationMins=duration,reset=reset,usedPercent=used,counterDiscontinuity=q.get('counterDiscontinuity'))\nordered=sorted(samples.items());times=[k[0] for k,v in ordered]\nreportPath=b/'wbs-reporting/latest.json';raw=reportPath.read_bytes();report=json.loads(raw)\nkeys=report['leaves']['WBS-P014-01']['groupKeys']\nrows=[];pools={}\nfor key in keys:\n g=report['groups'][key];a=g.get('startAtJST');z=g.get('lastCheckpointAtJST')\n if not a or not z:continue\n start=datetime.datetime.fromisoformat(a);end=datetime.datetime.fromisoformat(z)\n if end>cut:continue\n row=dict(groupId=g['groupId'],source=g.get('lastSource'),startAtJST=a,lastCheckpointAtJST=z,groupElapsedSeconds=(end-start).total_seconds(),groupEndIsNotAcceptance=True,actualAllocatedPp=None,fullContractAcceptedByThisAudit=False)\n i=bisect.bisect_right(times,start)-1;j=bisect.bisect_left(times,end)\n if i<0 or j>=len(times):\n  row.update(sharedEnvelope=None,reason='MISSING_ENCLOSING_SAVED_SAMPLE')\n else:\n  before=ordered[i][1];after=ordered[j][1];span=(times[j]-times[i]).total_seconds();window=(before['limitId'],before['windowDurationMins'],before['reset'])\n  valid=window==(after['limitId'],after['windowDurationMins'],after['reset']) and span<=10800 and after['usedPercent']>=before['usedPercent']\n  valid=valid and all(tuple(v[k] for k in ('limitId','windowDurationMins','reset'))==window for key,v in ordered[i:j+1]) and all(ordered[k][1]['usedPercent']<=ordered[k+1][1]['usedPercent'] and ordered[k+1][1]['counterDiscontinuity'] is not True for k in range(i,j))\n  if valid:\n   pool=before['atJST']+'..'+after['atJST'];delta=after['usedPercent']-before['usedPercent'];pools[pool]=dict(before=before,after=after,sharedReportedPp=delta,envelopeSeconds=span,groupIds=[])\n   row.update(sharedEnvelope=pool,sharedReportedEnvelopePp=delta,zeroNotFree=True)\n  else:row.update(sharedEnvelope=None,reason='WINDOW_OR_INTERNAL_COUNTER_SEGMENT_MISMATCH_OR_ENVELOPE_OVER_THREE_HOURS')\n rows.append(row)\nfor row in rows:\n if row.get('sharedEnvelope'):pools[row['sharedEnvelope']]['groupIds'].append(row['groupId'])\nvalid=list(pools.values());valid.sort(key=lambda v:v['before']['atJST']);overlaps=[]\nfor i,x in enumerate(valid):\n for y in valid[i+1:]:\n  wx=tuple(x['before'][k] for k in ('limitId','windowDurationMins','reset'));wy=tuple(y['before'][k] for k in ('limitId','windowDurationMins','reset'))\n  if wx==wy and datetime.datetime.fromisoformat(y['before']['atJST'])<datetime.datetime.fromisoformat(x['after']['atJST']):overlaps.append([x['groupIds'],y['groupIds']])\nout=dict(source=seed['source'],actualExit=0,scope='READ_ONLY_PUBLIC_HISTORICAL_QUOTA_ENVELOPES_NOT_FUTURE_UNIT_PRICES',asOfSeed=seed['atJST'],historicalSeedExpectedSavedSamples=380,recognizedUniqueSavedSamples=len(samples),unrecognizedOrNonNumericQuotaRecords=unknown,afterSeedNumericRecordsExcluded=afterCut,malformedPublicObservationLines=malformed,inputSeedSha256=hashlib.sha256(seedPath.read_bytes()).hexdigest(),freshReportingSha256=hashlib.sha256(raw).hexdigest(),freshReportingUpdatedAt=report.get('updatedAtJST'),freshReportingIsNotOriginalPinnedSnapshot=True,prior1128And479SummaryPreserved=seed['reconstructedSharedCostEvidence'],selectedLeaf='WBS-P014-01',selectedGroups=rows,distinctNonAdditiveEnvelopePools=valid,overlappingPoolPairs=overlaps,sumOfOverlappingPoolsPp=None,calibratedProductFullCyclePrices=False,futureLowBaseHigh=None,reason='All selected group starts/last checkpoints lack independent full-contract acceptance. Reusable successful unit18 does not close held error paths. Overlapping/shared envelopes and current V static-only results cannot price the whole remaining contract.',newProductTests=0,newAcceptedCriteria=0,wholePlanValidated=False)\nprint(json.dumps(out,ensure_ascii=False))\n",
+  "schemaSupplementTo": "537 limited time_jst schema recognized2 and preserved480 unknown records; now known retrieved_at_jst/utc fields (a2337a) are normalized explicitly. Original537 remains historical incomplete extraction; no overwritten missing data or guessed timestamp."
+}

@@ -1,0 +1,82 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "V",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "status": "NOT_MET_DYNAMIC_HOLD_PREPARATION_AND_STATIC_COMPILE_ONLY",
+  "originalEstimatePp": {
+    "low": 1.5,
+    "base": 5,
+    "high": 9
+  },
+  "capPp": 10,
+  "groupStartJST": "2026-11-04T22:06:13+09:00",
+  "observedThroughJST": "2026-11-04T22:19:39+09:00",
+  "sharedQuotaBefore": {
+    "usedPercent": 2,
+    "resetsAt": 1794395640,
+    "windowDurationMins": 10080
+  },
+  "sharedQuotaAfter": {
+    "usedPercent": 2,
+    "resetsAt": 1794395640,
+    "windowDurationMins": 10080
+  },
+  "reportedSharedDifferencePp": 0,
+  "actualAllocatedPp": null,
+  "zeroDoesNotMeanFree": true,
+  "elapsedEnvelopeSeconds": 806,
+  "elapsedIsNotExclusiveComputeTime": true,
+  "selection": "532",
+  "correction": "533",
+  "crosscheck": "534",
+  "staticScope": "535",
+  "draftCompiled": true,
+  "compileManifest": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG18512-query-projection-draft-static-v1/manifest.json",
+  "compileManifestSha256": "18123c1edfa0da4a548782f24a03a19ae623d4c743968a2ef8c1b2bc39e4c6f9",
+  "trueCompilerTerminal": {
+    "session": 56470,
+    "chunk": "abb561",
+    "actualExit": 0,
+    "timedOut": false
+  },
+  "independentCompileReceipt": {
+    "chunk": "2198e1",
+    "actualExit": 0,
+    "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+    "rawSha256": "18123c1edfa0da4a548782f24a03a19ae623d4c743968a2ef8c1b2bc39e4c6f9",
+    "stageExit": 0,
+    "timedOut": false,
+    "stdoutBytes": 0,
+    "stderrBytes": 0,
+    "compiledClasses": 3,
+    "productTestsExecuted": 0,
+    "coverage": null,
+    "acceptance": false
+  },
+  "actualProductTests": 0,
+  "newAcceptedCriteria": 0,
+  "newCoverage": null,
+  "parentWbsAccepted": false,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "whyNoProduct": "異常分岐が既class HOLDへ到達するため実行を起動しなかった。旧guardを弱めず、拒否試行・新fixture呼出しなし。PG静的レビュー/新Test記述とwarning-free compileのみ。",
+  "metCriteria": [
+    "代表性/契約/source/独立期待値の事前選定を保存",
+    "未実行10methodを作成・静的反証点検・compile0",
+    "真のcompile OS終了・入力hash・無出力・後条件を独立検証"
+  ],
+  "unmetCriteria": [
+    "20method/2suiteの実行",
+    "wholeSource四counter100",
+    "Product後条件の独立post",
+    "当契約の個別受入",
+    "本体費用の較正"
+  ],
+  "lessons": [
+    "V開始前に純粋性だけでなく既class HOLD intersectionを確認する必要があった（BUG2240/YKT1986）",
+    "旧normal全1962Source照合工具はheld RootFailed二Testを読むためそのまま適用できない",
+    "未達V準備/静的費を成功契約の単価へ外挿しない"
+  ],
+  "next": "同じS群のS-POSTへ戻り、API21と比較実績の有限範囲・保留/残見積・後続手順を具体化する。追加V/新S10なし。",
+  "mayFinishTurn": false
+}
