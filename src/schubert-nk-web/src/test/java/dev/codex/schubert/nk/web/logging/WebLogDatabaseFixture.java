@@ -98,9 +98,29 @@ public final class WebLogDatabaseFixture {
   }
 
   public Connection transaction() throws SQLException {
-    Connection connection = web();
-    connection.setAutoCommit(false);
-    return connection;
+    return beginTransaction(web());
+  }
+
+  /** SS332/SSC320; BUG2245/YKT1991; PT-FIX-SETUP001..004: owned until setup succeeds. */
+  static Connection beginTransaction(Connection connection) throws SQLException {
+    java.util.Objects.requireNonNull(connection, "connection");
+    try {
+      connection.setAutoCommit(false);
+      return connection;
+    } catch (SQLException | RuntimeException | Error failure) {
+      try {
+        connection.close();
+      } catch (SQLException | RuntimeException | Error closeFailure) {
+        if (closeFailure != failure) {
+          if (closeFailure instanceof Error fatal && !(failure instanceof Error)) {
+            fatal.addSuppressed(failure);
+            throw fatal;
+          }
+          failure.addSuppressed(closeFailure);
+        }
+      }
+      throw failure;
+    }
   }
 
   public Connection admin() throws SQLException {
