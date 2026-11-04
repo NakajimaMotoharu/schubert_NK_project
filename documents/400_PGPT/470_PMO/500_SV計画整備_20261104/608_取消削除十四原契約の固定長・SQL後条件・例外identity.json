@@ -1,0 +1,125 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S_POST_SAME10",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "testPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/TargetBusinessControllerTest.java",
+  "testSha256": "0c9d5b4d705d1c10a615113c04029f35bad956639090ebd205f71d78f0164b8e",
+  "caseReviews": [
+    {
+      "method": "ntc001OnlyReceivedVisibleFormIssuesOneCurrentToken",
+      "independentExpectedAndInput": "Five notification states:onlyRECEIVED showscancel form/issues1token,others0;all showverified state/oneNTDread;does not authorize cancel based solely on Web state.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntc002AndQdl002IndependentWholeRequestAndCompletionFirstWrite",
+      "independentExpectedAndInput": "Cancel/delete x0000/0200:literal304=256+48request target12/token36,fullheader controlled clock/UUID/context;redirect notification1 vs/questions;one retainedtoken firstcompletedAt unchanged; response32/24bytesseparate.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "qdl001OnlyVerifiedDetailIssuesOneAndInputRetryNeverIssuesReplacement",
+      "independentExpectedAndInput": "Verified detailissuesoneQDLtoken;confirmfalse400/redisplayoriginaltoken,no replacement,no mutation,onlyQSDreads,pendingretained.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntc003AndQdl003AllPendingCapacityFreshRefusalHasNoUuidOrMutation",
+      "independentExpectedAndInput": "Tenpending cap;freshdetailread allowed then409/no tokenor mutation;alloriginalpending retained,onlyoneNTD/QSDread.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntc004AndQdl004CurrentRetainedPurposeAndSessionRequiredBeforeMutation",
+      "independentExpectedAndInput": "Absent/wrongpurpose/missing/malformedsession409/noAPI;tokenpurposeboundbeforemutation.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntc004AndQdl004InvalidBindingReadsFreshStateWithoutMutationOrReplacement",
+      "independentExpectedAndInput": "Missingconfirm/wrongtarget/baduuid/unknownowner/nullconfirm ->400,same action/tokenandpending,no Location;exactlyonefreshNTD/QSDread,no mutation.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntc005AndQdl005FailureCodesKeepSameTokenOrTerminalAndRefreshOnlyReads",
+      "independentExpectedAndInput": "Cancelten/delete nine statuscodes (0107cancelonly),literal400/401/403/404/409/429/503;0102invalidates+oneaudit;otherfailurespending;redisplayaddsreadonly,0107PROCESSING removesaction andfixed notice. No replacementtoken.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntc006AndQdl006UnknownTransportAndStoreCompletionNeverFakeSuccess",
+      "independentExpectedAndInput": "Transport/open/commit/close/deleted row completion ->503 ordeleted409/noLocation;same token. Closefault mayfollowpersistedcompletion yet no success;detail missing/malformedsession409/open503,no newtoken.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntc006AndQdl006FatalIdentityIsNeverConvertedToRetryOrSuccess",
+      "independentExpectedAndInput": "Exact LinkageError identity propagates on cancel/delete,one mutationrequest,tokenpending,noLocation/no retry/read fallback.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntc007AndQdl007ActualApiOneChangeAndRetainedReplayWithoutPreRead",
+      "independentExpectedAndInput": "Real in-processAPI/dedicatedPG:initial+same-tokenreplay302;literalDBcancelstate/version1/time vsquestiondelete/version1/actor/time;unrelatedquestion/jobversionunchanged,oneINBOX_REPLAYED,notificationsRECEIVED50(cancel)/51(delete). Deletedfreshdetail404/no newtoken.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntc008AndQdl008OneHundredRealApiCallsKeepOneMutationAndNinetyNineReplays",
+      "independentExpectedAndInput": "Cancel/delete each100same-token/8threads:100MessageIDs-issued counter,1token,DBversion1,99INBOX_REPLAYED,onecompletedretainedtoken;in-processAPI qualification plan,not realbroker/deployedserver performance.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntc006AndQdl006RealHttpSameCoreActualApiCsrfListAndReplay",
+      "independentExpectedAndInput": "EmbeddedHTTP+sameencryptedcore+actualin-processAPI:50literaldeletehrefs ID50..1, no listtoken;safe100codepointsummary/escapedbody,correctform/asset/CSRF;badCSRF403/no send;twoPOSTs version1/302 each,cancel/delete originalroute;deletedGET404/tworeplayaudits,liveDB0. Caddy/Browser/Artemis not exercised.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "qdl009OwnerIsolationAndLiteralCodePointSummary",
+      "independentExpectedAndInput": "Literal100codepointboundaries with99ASCII+emoji andscriptprefix;otherowner target51cancel/delete404,question/jobversions0,tokenpending/onewire. Independent SQL ownerpostconditions vs synthetic projection checks distinguished.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "targetBoundaryAndLegacyAssemblyRemainClosed",
+      "independentExpectedAndInput": "Nullconstructor/controllerargs rejected,foreignprincipalSessionStoreException;badtarget404,legacy2arg mutation503/no send. No upgrade of legacy-read assembly to business readiness.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    }
+  ],
+  "references": [
+    "UI224/226/236 sections10/13",
+    "QA049",
+    "SS313/314/323/324/332",
+    "504",
+    "586",
+    "607"
+  ],
+  "fixtureBoundaries": [
+    "ClassBeforeAll starts realPostgreSQL andBeforeEach resetsWebrows;no execution here",
+    "RealApi helpertruncates dedicatedfixture/seeds51questions/jobs/notifications,2syntheticowners+authsession;notoriginalDB",
+    "Actual query/mutation/HMAC/snapshot classes called inoriginaltests through injectedonReply,not realArtemis orordinaryprocess startup",
+    "Syntheticrequestexpectedheader uses controlled fixturemessagecounter,not productionencoder;separate100requestcounterandSQLassertions limit what this implies",
+    "erased helper checks outboundbuffers andDBhandles;doesnot explicitly assertwire.pendingCount,unlike other sharedfixtures. No universal registry-cleanup proof inferred."
+  ],
+  "scopeBindings": {
+    "WBS-P016-21": "Cancel behavior sharesnotificationdetail; no duplicate cost",
+    "WBS-P016-23": "Logicaldelete actions sharequestiondetail; no duplicate cost"
+  },
+  "readReceipts": [
+    "fef26b",
+    "8289dd",
+    "2c6fb4",
+    "b3e5c1",
+    "f8e79e"
+  ],
+  "newDefectDetermined": false,
+  "newProductPT": 0,
+  "coverageAdded": 0,
+  "newAcceptedCriteria": 0,
+  "formalUpdated": false,
+  "effortCompletion": null
+}

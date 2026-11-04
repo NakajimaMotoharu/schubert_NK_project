@@ -1,0 +1,179 @@
+{
+  "actualExit": 0,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "stages": [
+    {
+      "label": "compile",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18542-sv80-method-line-parse-v1/classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/ExistingTestMethodJdkAudit.java"
+      ],
+      "actualExit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutBytes": 0,
+      "stderrBytes": 0
+    },
+    {
+      "label": "legacy-default-vectors",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18542-sv80-method-line-parse-v1/classes",
+        "ExistingTestMethodJdkAudit",
+        "/home/mini/codex/project1/work/pgpt-foundation",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18542-sv80-method-line-parse-v1/empty.txt"
+      ],
+      "actualExit": 0,
+      "stdoutSha256": "78ec62bfa6a9340e33ec429d8b70f2ef09aefd98fcd350e86b9912d8abdfc754",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutBytes": 11,
+      "stderrBytes": 0
+    },
+    {
+      "label": "parse-main80",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18542-sv80-method-line-parse-v1/classes",
+        "ExistingTestMethodJdkAudit",
+        "/home/mini/codex/project1/work/pgpt-foundation",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18542-sv80-method-line-parse-v1/main-paths.txt",
+        "--main-declarations"
+      ],
+      "actualExit": 0,
+      "stdoutSha256": "a11d08179abaa5525f84c1c2c74bc9e641476ada22259cbc8246a4b43978c40b",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutBytes": 259624,
+      "stderrBytes": 0
+    },
+    {
+      "label": "reject-unknown-mode",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18542-sv80-method-line-parse-v1/classes",
+        "ExistingTestMethodJdkAudit",
+        "/home/mini/codex/project1/work/pgpt-foundation",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18542-sv80-method-line-parse-v1/empty.txt",
+        "--unknown-mode"
+      ],
+      "actualExit": 1,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "b83a4eb75e3168284d0bd1c9e86c6df1ec9acd405915625fbb5e7fc72abfbfd4",
+      "stdoutBytes": 0,
+      "stderrBytes": 161
+    },
+    {
+      "label": "reject-held-name-0",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18542-sv80-method-line-parse-v1/classes",
+        "ExistingTestMethodJdkAudit",
+        "/home/mini/codex/project1/work/pgpt-foundation",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18542-sv80-method-line-parse-v1/held-names-0.txt",
+        "--main-declarations"
+      ],
+      "actualExit": 1,
+      "stdoutSha256": "f38d4f2bf7e64a40bd8ee5c2d0d91e9dfb8d23224b41c3cb9dcd3d58ca838846",
+      "stderrSha256": "ef1fcf9fb8378db29aaba1c763d8cb514b3355c08f5c5cfd0c3e8286d2dc70fc",
+      "stdoutBytes": 12,
+      "stderrBytes": 165
+    },
+    {
+      "label": "reject-held-name-1",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18542-sv80-method-line-parse-v1/classes",
+        "ExistingTestMethodJdkAudit",
+        "/home/mini/codex/project1/work/pgpt-foundation",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18542-sv80-method-line-parse-v1/held-names-1.txt",
+        "--main-declarations"
+      ],
+      "actualExit": 1,
+      "stdoutSha256": "f38d4f2bf7e64a40bd8ee5c2d0d91e9dfb8d23224b41c3cb9dcd3d58ca838846",
+      "stderrSha256": "ef1fcf9fb8378db29aaba1c763d8cb514b3355c08f5c5cfd0c3e8286d2dc70fc",
+      "stdoutBytes": 12,
+      "stderrBytes": 165
+    },
+    {
+      "label": "reject-held-name-2",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18542-sv80-method-line-parse-v1/classes",
+        "ExistingTestMethodJdkAudit",
+        "/home/mini/codex/project1/work/pgpt-foundation",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18542-sv80-method-line-parse-v1/held-names-2.txt",
+        "--main-declarations"
+      ],
+      "actualExit": 1,
+      "stdoutSha256": "f38d4f2bf7e64a40bd8ee5c2d0d91e9dfb8d23224b41c3cb9dcd3d58ca838846",
+      "stderrSha256": "ef1fcf9fb8378db29aaba1c763d8cb514b3355c08f5c5cfd0c3e8286d2dc70fc",
+      "stdoutBytes": 12,
+      "stderrBytes": 165
+    },
+    {
+      "label": "reject-held-name-3",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18542-sv80-method-line-parse-v1/classes",
+        "ExistingTestMethodJdkAudit",
+        "/home/mini/codex/project1/work/pgpt-foundation",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18542-sv80-method-line-parse-v1/held-names-3.txt",
+        "--main-declarations"
+      ],
+      "actualExit": 1,
+      "stdoutSha256": "f38d4f2bf7e64a40bd8ee5c2d0d91e9dfb8d23224b41c3cb9dcd3d58ca838846",
+      "stderrSha256": "ef1fcf9fb8378db29aaba1c763d8cb514b3355c08f5c5cfd0c3e8286d2dc70fc",
+      "stdoutBytes": 12,
+      "stderrBytes": 165
+    }
+  ],
+  "toolPath": "tools/quality/architecture/ExistingTestMethodJdkAudit.java",
+  "toolSourceSha256": "593373e7228abcca5dbc3bee456f77f164017eae6778e10962d77c4227d49cab",
+  "originalLineManifestSha256": "6cbcf4309cfb2f7b91274fdb7875d7f8edea8e8a5466bc12c13e5da4c922c763",
+  "compilerOperations": [
+    "JavacTask.parse"
+  ],
+  "analyzeInvoked": false,
+  "generateInvoked": false,
+  "productClassLoading": false,
+  "productExecution": false,
+  "newProductPT": 0,
+  "coverageAdded": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "phase": "COMPLETE_STATIC_SYNTAX_ONLY",
+  "sourceFiles": 80,
+  "declarations": 1363,
+  "lineAnchors": 7049,
+  "missedBranches": 3004,
+  "dispositions": {
+    "SYNTACTIC_ENCLOSING_DECLARATION_ONLY": 6973,
+    "NO_EXPLICIT_METHOD_FIELD_OR_INITIALIZER_OR_GENERATED": 76
+  },
+  "methodLineMapSha256": "d143dbc37025dac58fcfaa57d46b0677564e968b945fd081665ff562be4e4a5a",
+  "legacyVectors": 7,
+  "mainVectors": 8,
+  "commandRejectionVectors": [
+    "UNKNOWN_MODE",
+    "RootFailedStartPairRecoveryTest.java",
+    "RootFailedStartRecoveryTest.java",
+    "SnapshotKeyCloseWitness.java",
+    "pg9892_snapshot_key_close_witness.py"
+  ],
+  "notJvmMethodIdentity": true,
+  "noSyntheticClassOrInitializerExclusion": true,
+  "noIndependentBusinessOracleQualification": true
+}

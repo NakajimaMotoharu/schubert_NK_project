@@ -1,0 +1,15 @@
+# 未達行を具体的な修正・試験対象へ結ぶ
+
+611の事前見積0.4/1.0/2.0ppは同じS10内、別予算なし。既存ExistingTestMethodJdkAuditへ明示Main宣言modeを加え、同用途の独立parser工具を増やさず、従来のTest抽出modeを保持した。元工具SHA d9552556c572e1f61029829ee72592bfd83f8339a658233b95dd890566c55f23と元Git版は保全した。
+
+612/PG18542のJDK25.0.4工具compile及びparseは39007/d52198で真正終了0。Python限定lint b7e948/0。旧default構文7vector、Main追加8vector、未知mode/held四basenameの拒否5vectorを実施した。heldは対象filesystem metadata取得前に名前で拒否し、当工具のMain入力は503固定80Sourceだけ。工具classpathには工具classのみを置き、Productはclassload/init/compile/実行しない。JavacTask.parseだけでanalyze/generate/注釈processorは使わない。JDK実物はb07bf9の25.0.4+7-1-26.04-Ubuntuで確認した。
+
+manifest SHA3d2ffbdac525d2f1205ff87bf7125a8b3eef00f6e28ac21aaecefcd7a83d5ba9、method-line-mapはmanifest記載hashを正とする。元PG18532/6cbcf430…の7049未達line anchor/3004未達branch outcomeを読み、全80source hashを前後確認。元exec、成功十post、残43post、実PTを再演しない。明示宣言1363のうち797に未達行が対応し、行6973は構文上の内包宣言へ結合、76行は明示methodなしとして残った。
+
+613/5876fcの独立照合は全7049行のphysical/sourceLine/未達・既達branch multisetを保存し、source文字位置からline番号を独立計算し、宣言候補集合を全件再照合した。欠落/重複Source、hash、line欠落、branch改変、offset、存在しないowner候補、偽のmethod非該当の8metadata反例も拒否した。元未達6809line/1125method/83class/3004branchというcounter値は変わらない。797は構文宣言の数で、1125のJVM未達method counter、独立条件数、追加必要試験数、費用単位とは異なる。
+
+残76行は21Sourceにあり、未達branch outcomeは0。field初期化、enum定数、record宣言、暗黙constructorに関係するclass宣言等を含む。例はServiceConfigFilesの既定Path/retained構成、MorningBackupArtifacts/RootStartupContextのfield初期化、MorningDatabaseSessionのPattern/thread/active初期値、Status enumやSnapshot recordである。これらをNoCode/除外/到達不能として落とさず、実bytecodeのconstructor/clinit/合成methodと既物理coverageを照合する残責務にする。ソース上の内包methodが一つでも、lambda/ローカルclass等のJVM method identityまで確定したとはしない。
+
+以後は556の各Source契約・要求/SS・正当な既証拠に、method-line-mapの宣言ID（path＋文字offset範囲）を添えて、独立入力/正常・境界・例外・null・並行・後条件を定義する。root causeが同じと実証したBUG/YKTだけを共有修理へまとめる。method名一致や欠落lineの同形だけで共通原因・必要単価・新Test IDを作らない。具体HOLDがある経路は静的準備と実着手を分離し、未知拒否を任意のmethodへ割り当てない。
+
+本成果は計画範囲を具体化する静的metadataで、実測coverageの増加、NPE排除の全証明、四counter100、80Source受入、V成功、正式認定更新のいずれでもない。元全251/932/282/2980/予備/P01902参照0・原費用・品質/安全条件は維持する。

@@ -1,0 +1,115 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S_POST_SAME10",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "testPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ErrorMvcTest.java",
+  "testSha256": "ce1f1463e43e5d207d0327b478949d90c8e98444f71a06df5dde8719256c72bd",
+  "caseReviews": [
+    {
+      "method": "web148ErrorCatalogAndModelsAreClosed",
+      "input": "Nine literal status/message pairs x anonymous/USER/ADMIN;null/unknown/noninteger/malicious toString status",
+      "independentExpected": "Exact UI222 Japanese403/404/409/503 and SS313 closed catalog400/401/405/416/429; missing status404,unknown500/type503; fixed request UUID and model/topbar/redaction; null input rejected without reading unsafe object diagnostics.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "web149DisplaySnapshotAndCsrfRemainRequestScoped",
+      "input": "Verified display snapshot,mutated principal/token/ERROR route,foreign principal/missing/malformed token,authenticated/CSRF combinations",
+      "independentExpected": "Original request-only snapshot preserved and cleared; fixed hidden CSRF header/name; no session/native principal reads in error rendering; foreign/malformed/null rejected; ERROR-only filter rejects other dispatcher/path. Security context is fixture-only.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "web150InfrastructureFailuresDoNotLoopOrHideOtherFaults",
+      "input": "SessionStoreException on REQUEST vs committed/ERROR;IOException/ServletException/RTE/NPE;sendError/isCommitted faults;normal chain",
+      "independentExpected": "Uncommitted REQUEST503 once; committed/ERROR original same exception rethrown; unknown IO/servlet/RTE/NPE exact identity propagates; no NPE-to-success/recursive error loop; normal chain once.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "web151ErrorControllerIgnoresUnsafeDiagnostics",
+      "input": "Direct/error dispatch,all7HTTP methods,wrappers throwing on diagnostic/query/params reads,null/model/response/request faults",
+      "independentExpected": "Only safe status/identity/display attributes; direct default404; external nonGET/HEAD405+Allow GET, HEAD; internalERROR preserves error status; no private diagnostics read; null rejected and original faults exact identity propagate.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "web152ErrorTemplatesRenderExactSafeDom",
+      "input": "Nine statuses x anonymous/USER/ADMIN in MockMvc with prepared snapshot",
+      "independentExpected": "Exact title/lang/status/message/id/alert; anonymous menu-login links without form/input; verified user/role/logout+resolved CSRF; no script/style/iframe/img/inline style/private diagnostic text. Expected literals from test map and UI222/SS313, not Production mapper.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "web153RealHttpErrorsKeepStatusHeadersAndIdentity",
+      "input": "Embedded HTTP fixture statuses400/401/403/404/405/409/416/429/500/503",
+      "independentExpected": "500 mapped503,others unchanged,exact original request identity/display/no-store DENY nosniff; one stub loginAPI send,zero businessPOST/container sessions. Not actual ordinaryCaddy/Browser.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "web154DatabaseFailureRendersWithoutReadingSessionAgain",
+      "input": "Session DB open failure before or after display snapshot",
+      "independentExpected": "503safe page; snapshot actor retained only after snapshot,otherwise anonymous view; original requestID; login API send stays1 and container active sessions0; failure injection reset finally. Does not exercise arbitrary actualDB/server failures.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "web155DeniedRequestsKeepOneAuditAndOriginalRequestId",
+      "input": "Role deny,CSRF deny,direct/error query spoof,externalPOST,untrusted proxy,TRACK method",
+      "independentExpected": "403 role/CSRF with only one additional security audit each/original ID; direct GET404/no query diagnostics; POST405+Allow; untrusted transport403empty;TRACK400;no businessPOST. Test log sink event counts are not DB delivery proof.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "web156ForgedErrorDispatchNeverBypassesBusinessSecurity",
+      "input": "Real filter assembly with synthetic servlet ERROR/header/query attempts;dispatcher/path cross-product;router lifecycle null/init/destroy faults",
+      "independentExpected": "Only true internalERROR /error avoids business session reread; business path remains protected302 even with spoofed markers; no API sends; missing identity fails and clearsSecurityContext; both filters init/destroy responsibilities and original failure propagation checked. No exploit/remote probing executed in this stage.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "web157ConcurrentErrorRenderingKeepsRequestActorsSeparate",
+      "input": "100 logins/8threads,alternating roles and403/503 paths",
+      "independentExpected": "Unique100requestIDs/100CSRF values, own username/role/errorDOM;100stubAPI sends,150fixture security events,300server IDs,0container active sessions. No runtimeexecution or saved raw cookies/tokens in this review.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    }
+  ],
+  "references": [
+    "UI221/222/226",
+    "SS313 section9/SSC047",
+    "SS314/351/352",
+    "504",
+    "586"
+  ],
+  "independentLiteralOracle": {
+    "statusMessages": 9,
+    "authorityMapping": "Test exhaustive USER->ROLE_USER ADMIN->ROLE_ADMIN switch; no Production mapper used to generate expected identity",
+    "unknownErrors": "Exact identity assertions for IO/servlet/runtime/NPE and boundary faults, not caught as normal results"
+  },
+  "fixtureBoundaries": [
+    "BeforeAll starts WebLogDatabaseFixture; all original methods share class initialization, even apparently pure model tests",
+    "Some original methods use actual embedded HTTP+dedicated encrypted-session DB and stub login API",
+    "In-memory audit sink counts do not qualify app_logs delivery or local/outbox/DB closure",
+    "Static read only, no remote/security probes/DB/failure injection executed"
+  ],
+  "sourceReadReceipts": [
+    "b60b6e",
+    "8cd3c6",
+    "da7788",
+    "e3b284",
+    "27714d",
+    "e8cd36",
+    "9304cf"
+  ],
+  "scopeBindings": {
+    "WBS-P016-24": "Shared SCR090 safe-error screen and filters; no method-count cost allocation"
+  },
+  "newDefectDetermined": false,
+  "newProductPT": 0,
+  "coverageAdded": 0,
+  "newAcceptedCriteria": 0,
+  "formalUpdated": false,
+  "effortCompletion": null
+}

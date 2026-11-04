@@ -1,0 +1,186 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S_POST_SAME10",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "testPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java",
+  "testSha256": "911bdfb597f7ee9dd434ef8a61439c304889f3955ea089d0bf8010d83e4a50b1",
+  "caseReviews": [
+    {
+      "method": "qry001IndependentSearchWireAndRoles",
+      "independentExpectedAndInput": "USER/ADMIN x0000/0200: literal QSSREQ01 total640/data384; NFC keyword256, ADMIN-only username64, state12/from17/to17/page6/size3/reserved9, fixed header/context/time/IDs. USER username space; no Production encoder creates expected.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "qry002ClosedNullAndByteBoundaries",
+      "independentExpectedAndInput": "Keyword256byte/257byte and UTF8multibyte edges;ADMIN username64/65;USER cannot bind username even blank;unknown owner/role/state/duplicate/control/malformedUnicode invalid400/no wire;null map/key/list/element rejected; immutable redacted fields/issues.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "qry003CalendarAndPageBounds",
+      "independentExpectedAndInput": "JST start/end instants independently calculated with java.time; validyear0001..9999/leapday;strict invalid dates,reverse/367days reject;366days accept;page0/negative->1,999999unchanged,overflow/decimal/fullwidth/sign/space invalid;size50.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "qry004ImmutableListsStatesPages",
+      "independentExpectedAndInput": "Both roles xthree states x0/1/50rows; explicit Japanese labels/JST/owner/admin flag andunique IDs; rows/maps immutable, copied input list detached. Reply fixture matching filters is not actual SQL predicate proof.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "qry005ProjectionDamage",
+      "independentExpectedAndInput": "Count/duplicate/wrong USER owner/reversed time-ID/101codepoint summary/state-time/page-role/form mismatches rejected, factory nulls rejected. Valid projection is never repaired from malformed response.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "qry006DetailWholeWireAndDisplay",
+      "independentExpectedAndInput": "Both roles,0000/0200,three states,ID1/max12digits: literal268-byteQSDREQ01;explicit8352data/8608total reply and owner/state/time/empty-answer semantics;USER other owner reject,ADMIN direct detail permits;target mismatch503/badtarget404/no send;immutable/redacted view.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "qry007AllErrorsWireFaultsAnd0102",
+      "independentExpectedAndInput": "List/detail nine literal codes->400/401/403/404/409/429/409/503/503;bad header/correlation/context/padding,JMS/timeout503;exact unknown Error identity propagates;genuine0102 GET302/session-expired;pending0/buffers erased.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "qry008MvcEscapeRolesStatesAndMethods",
+      "independentExpectedAndInput": "Bothroles xstates list/detail exacttitle/labels/owner visibility/script escaping/empty answered caption; legacytoken-absent detailPOST503,HEAD200,badtarget404,invalidfilter400,empty rows/nav;no mutationform in partialassembly, not ordinary full form oracle.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "qry009RealSecurityAnd0102",
+      "independentExpectedAndInput": "Bothroles xlist/detail embeddedHTTP/actualdedicatedsessionDB/stubLoginAPI:200/no-store/titles/HEADempty,anonymous302,0102cookieexpire+302 then no new API request. No ordinarydeployed/broker/Caddy/Browser qualification.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "qry010ConcurrentTargetsContextsAndMessages",
+      "independentExpectedAndInput": "100detail requests/8threads;each own target/model;100unique requestIDs andcontext tied toindependent assigned target;buffers erased. JMSreply is injected.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "qry011FactoryControllerNullAndIntegrity",
+      "independentExpectedAndInput": "ADMIN fullstate/newest-first projection accepts;foreignprincipal/nullcontroller inputs reject beforewire;USER wrongowner,101summary,rowrange corruption503 without repair.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "qry012PaginationQueryAndOwnerShape",
+      "independentExpectedAndInput": "Explicit encodedURL for é space &+ plusstate/from/to;ADMIN username only;51rows first/second navigation exact;empty clampedpage1/totalpages1,no navigation; not actual DBfilter implementation proof.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "rcpt006ANewFormCapacityRetirementAndMissingToken",
+      "independentExpectedAndInput": "Ten pending forms use controlled UUIDsequence;11th409/no newtoken/no API. Completeoldest then newform retires justoldest consumed; retiredPOST409/no API/no replacementtoken;retainedtotal10.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "rcpt006BIndependentSubmitWireAndSameTokenReplay",
+      "independentExpectedAndInput": "Bothroles,0000then0200: literal4400byteQSBREQ01/4144data with4096question,NFC/token offset4352/reserved;302stable receipt;immutablelocator tuple;completedAt firsttime retained afterclockadvance;one token,newrequestUUID perreplay.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "rcpt006CUnknownResponseAndLocatorGapKeepTheOriginalToken",
+      "independentExpectedAndInput": "Malformed response vs post-success locatorSQLfailure:503same input/token;completion absent vs present distinguished;no locator inventing. Subsequent0200same token registersverifiedtuple and302;firstcompletedAt unchanged,2requests/1token.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "rcpt006DMissingWrongPurposeExpiredAndInFlightInvalidation",
+      "independentExpectedAndInput": "Missing/wrongpurpose/no/malformed/expiredsession409/no send/no tokenincrease;in-flight invalidation afterresponse409,no locator persistence. No replay from old session authority.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "rcpt006EFreshGetTupleOwnerDeletionAndNoFallback",
+      "independentExpectedAndInput": "Bothroles:everyacceptedGET freshQSDREQ01,bodychanges reflected/requestIDsadvance;wrongid/receipt/time/owner503;deleted0104404;unknown/malformedreceipt404/no API;no cached fallback.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "rcpt006FExplicitMvcDomEscaping200CodepointsAndCsrf",
+      "independentExpectedAndInput": "Exactnewform route/method/controlled operationtoken/CSRF/validationasset;acceptedtitle/message/nav;literal25codepointscript-looking prefix+175emoji=200codepoints,escaped;no resubmitform. No Browser execution.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "rcpt006GNegativeNullReadonlySqlAndResultStatusMatrix",
+      "independentExpectedAndInput": "Legacy2arg acceptingmethods503;invalidbody400/no send;nine result statuses literal;store/locator/malformedwire503;0102POST401 andacceptedGET302/session-expired. No bad result converted to accepted.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "rcpt006HConcurrentSameTokenAndImmutableLocator",
+      "independentExpectedAndInput": "100parallelPOSTs/8threads,all synthetic0200reply:stable redirect/body/token,100uniqueMessageIDs,one issued/retainedtoken andsame immutablelocator. Does NOT prove actual API creates once or businessDB dedup because APIreply is a stub.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "rcpt006GCurrentCompletionFailureAndInputContracts",
+      "independentExpectedAndInput": "Afterverifiedreply currentWebDBopenfailure503 leaves token pending andlocator absent;null/foreign/viewwrongpurpose/closedform reject;emptyacceptedbody invalid;no false success after completion failure.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "rcpt006FRealSecuredHttpPostCsrfRefreshAndNoAnonymousSubmission",
+      "independentExpectedAndInput": "Bothroles embeddedHTTP+sameWebcore:missingCSRF403/no send;validPOST302/QSBonce;two result refreshesQSDonly,no newsubmission;anonymousGET302,anonymousPOST specifically not302/no send (test does not assert exact401vs403);no Webtransaction during injectedAPI send.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "rcpt006CLostRedirectAndBlankWireCannotInventANewQuestion",
+      "independentExpectedAndInput": "Lost Location setter throws aftercompletion+locator;replay0200same token retains original completion andreceipt. Blank question in acceptedwire503;detail/accepted factory rejects emptybody;never generate another question.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    }
+  ],
+  "references": [
+    "UI224/226/236 sections7/11/12",
+    "QA048049",
+    "SS313 QA048/SS314",
+    "504",
+    "586",
+    "604"
+  ],
+  "fixtureBoundaries": [
+    "ClassBeforeAll realPostgreSQL; session/locator rows reset inBeforeEach, no execution here",
+    "Reply fixture builds literalbytes from requests but is not an independent API/DB filtering/dedup implementation",
+    "Actual dedicated Web DB/crypto/helpers and embeddedHTTP are different from ordinary API/JMS/Caddy/Browser/native/CHR",
+    "Ownedconnection counting checks sendingthread handles; proxy decrements on close invocation, not independent proof of failed-close resource release",
+    "Legacy2arg queryassembly and fullacceptance receipt/token assembly distinguished; deletion/cancel actions are separate TargetBusinessControllerTest"
+  ],
+  "readReceipts": [
+    "f58ae1",
+    "8c39ac",
+    "deffc2",
+    "9900f1",
+    "ea5430",
+    "9f96cd",
+    "852429",
+    "7549e0",
+    "805a21",
+    "04543e",
+    "54e9a7"
+  ],
+  "scopeBindings": {
+    "WBS-P016-19": "Receipt/acceptance rcpt families11; shared file",
+    "WBS-P016-22": "Question search qry list families; shared file",
+    "WBS-P016-23": "Question detail qry families; separate delete action fixture remains unreviewed"
+  },
+  "newDefectDetermined": false,
+  "newProductPT": 0,
+  "coverageAdded": 0,
+  "newAcceptedCriteria": 0,
+  "formalUpdated": false,
+  "effortCompletion": null
+}

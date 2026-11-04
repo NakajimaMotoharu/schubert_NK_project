@@ -1,0 +1,155 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S_POST_SAME10",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "testPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/UserBusinessControllerTest.java",
+  "testSha256": "4ec7b267f4ca20905fa46c6e4a394b4b96d3e91c0fe73d0d5eea38c8b65d8368",
+  "caseReviews": [
+    {
+      "method": "biz001NewDefaultsAndCreateSuccessIndependent372Bytes",
+      "input": "0000/0200 create,new form defaults",
+      "independentExpected": "USER/enabled defaults; UCRREQ01 literal372data/628total username64/password256/role5/enabled1/token36/reserved10; success302/detail42, retained completedAt present, immutable/redacted view. No Production encoder builds expected payload.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "biz002OnlyVisibleFormsAndExactCapacity",
+      "input": "Target/self x ACTIVE/DISABLED/LOCKED x version0/max; eight existing pending tokens",
+      "independentExpected": "Nonself status+role,password,locked unlock only; hiddenversion unchanged,no password in model; all visible form purposes match; insufficient capacity409 preserves8pending and generates0new token.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "biz003FourMutationsLiteralBytesAndIdempotentUnlock",
+      "input": "STATUS/ROLE/PASSWORD/UNLOCK x0000/0200",
+      "independentExpected": "Literal data60/68/324/60 with decimal target42 and fixed version0/token offsets/reserved;302/detail42 and completion retained; already-unlocked0200 accepts unchanged version0.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "biz004InvalidOperationTokenAndBindingsNeverUpdate",
+      "input": "Missing/unknown/duplicate operation,invalid target,missing/bad/duplicate/unknown token,negative version",
+      "independentExpected": "400 invalid binding/no update; unknown token409/no send; negative version redisplays400 with only UDTREQ01 read and original token uncompleted.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "biz005FreshConflictAndUnknownKeepExactToken",
+      "input": "Password mutation conflict0105 or9000; latest fetched version7 vs submittedversion0",
+      "independentExpected": "UDTREQ01,UPWREQ01,UDTREQ01 sequence;409/503; display currentversion7 but keep original hiddenversion0/purpose/token and pending, no regenerated token/password. Prevents rebasing a held request payload silently.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "biz005CreateInvalidConflictAndAllNonSuccessCodes",
+      "input": "Nine fixed errors,confirmation mismatch,JMS unknown",
+      "independentExpected": "Literal400/401/403/404/409/429/409/503/503;400/409/503 redisplay with same token/no password, username issue only409; no completedAt; mismatch400/no send; transport503 not success.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "biz006MutationsRejectAllCodesMalformedTargetAndVersionWithoutConsumption",
+      "input": "Nine errors;fouroperations x0000/0200 x wrongtarget/version;four corrupt headeroffsets;bad create version",
+      "independentExpected": "Fixed status map, malformed projection503/no completedAt; original token retained, never repair response/consume on malformed success.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "biz007GenuineInvalidCreateAndChangeTerminateWithoutConsumption",
+      "input": "Genuine0102 create/status result with existing session",
+      "independentExpected": "401, invalidates HTTP session and clearsSecurityContext, one SESSION_EXPIRED audit; token remains pending. Not a proof to revoke unrelated sessions.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "biz008MissingSessionStoreAndCompletionFailuresNeverReportSuccess",
+      "input": "Create/role completion commit/close failure or row deletion;missing session/open failure fornew/detail/create/change",
+      "independentExpected": "Completion uncertain503; deleted409; no false success. Close-fault can leave completedAt persisted after commit yet response503; commit fault leaves uncompleted. AllliveDBhandles0. Missing session409/open503.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "biz008UnknownReadAndMutationCannotContinueOrGenerateNewToken",
+      "input": "Password pre-read/redisplay/transport JMS failures,create with empty binding",
+      "independentExpected": "503 with no completedAt/new token; only mutation-transport case may redisplay; malformed create400/no wire/token. Unavailable state never assumed success.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "biz009ActualMvcNewAndDetailFormsAreClosedAndPasswordFree",
+      "input": "MockMvc new/detail LOCKED forms with actual token lifecycle",
+      "independentExpected": "Explicit formactions/deferred operation-post-submit.js, closed STATUS/ROLE/PASSWORD/UNLOCK form set,4CSRF+originalversion0, UUID token, no password value or raw context. Differs from two-arg legacy read assembly.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "biz009RealHttpSameCoreCsrfAndVerifiedSelfReset",
+      "input": "Embedded HTTP, shared encrypted core/token lifecycle,stub Login API,real in-process User assembly;bad/goodCSRF create then selfpassword reset",
+      "independentExpected": "BadCSRF403/no send; success302/createversion0; asset bytes match repository;self sees password form only;verifiedself reset302/login,cookieexpires,version1/API revoked1/Webrows0, audit1;no SESSION_EXPIRED orLOGREQ01, later protected302.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "biz010RealApiCreateZeroDetailFirstUpdateOneAndIdempotency",
+      "input": "In-process real User query/mutation assembly+dedicated realPG fixture;create,statussame/different payload,role,unlock,password",
+      "independentExpected": "Independent SQL version0->1 same-token replay stays1;changed payload409/no update;role2;alreadyunlocked0200 stays2;password3; exactly one required ACTION/SECURITY audit per new mutation, no duplicate business update. Not broker/ordinary process integration.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "biz010RealLockedUnlockAndStoredIncrementedVersion",
+      "input": "Independent SQL sets failed_count5/futurelockeduntil then same unlock twice",
+      "independentExpected": "Firstversion1/failed0/lockedNULL;replay unchanged;one0000 USER_UNLOCKED plusone INBOX_REPLAYED;token completed and no live handles.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "biz011HundredSamePostRealApiUpdatesOnceAndConsumesOneToken",
+      "input": "100same-token statusPOST/8threads to in-process actual User assembly",
+      "independentExpected": "All302/same target;SQL version1;ACTION1+SECURITY1 success audit,99INBOX_REPLAYED;100distinctMessageIDs but one business update;create+status two retained completed tokens and exactly2issued;bufferszero. No realbroker/concurrentproductionserver qualification.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "biz012AdministratorAndNullBoundariesLegacyAssemblyAndViewContract",
+      "input": "USER/ADMIN with fulltoken vs legacy2arg controller,nullconstructor/request/view args,null map elements,foreignprincipal andinvalid session",
+      "independentExpected": "USER403,legacyADMIN503; explicit null rejection and SessionStoreException, no null normal result;invalidsession409. Fullbusinesscontroller uses actual lifecycle, legacyassembly cannot imply mutation-ready.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    }
+  ],
+  "references": [
+    "QA049/UI225226236",
+    "SS313314323324332",
+    "504",
+    "586",
+    "601"
+  ],
+  "scopeBindings": {
+    "WBS-P016-16": "User create and shared mutation responsibilities; overlaps detail scope without extra source/method expense"
+  },
+  "fixtureBoundaries": [
+    "ClassBeforeAll real PostgreSQL fixture; BeforeEach deletes dedicated session rows, not pure-memory wholeclass",
+    "RealApi helper truncates dedicated fixture business tables, seeds synthetic administrator/session and instantiates real UserApplicationAssembly directly",
+    "RealApi uses production HMAC/snapshot crypto classes but synthetic key material; no actual server/credential/privatekey access here",
+    "LoginApi synthetic and JMS injected onReply; in-process actual API vs real ordinary deployed API/Artemis/Caddy/Browser distinguished",
+    "Source/tests/fixture/crypto/DB were not executed by this static review",
+    "Actual SQL assertions are independently literal postconditions; some display/payload helper relations are not separate SQL enforcement proofs"
+  ],
+  "readReceipts": [
+    "bb2362",
+    "58983d",
+    "54e3df",
+    "be1b2e",
+    "0fcbef",
+    "663a34",
+    "c4dd1d",
+    "6d9460"
+  ],
+  "newDefectDetermined": false,
+  "newProductPT": 0,
+  "coverageAdded": 0,
+  "newAcceptedCriteria": 0,
+  "formalUpdated": false,
+  "effortCompletion": null
+}
