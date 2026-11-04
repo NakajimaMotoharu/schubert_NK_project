@@ -1,0 +1,16 @@
+# 八候補を四責務へまとめる
+
+同S-POST、PG18534/580/424eab。対象はBackupStepRepository.inspect、MorningDatabaseSession.query、ExpiryAuditRepository.read、RunReferenceRepository.read。prepareStatement/executeQuery各二scopeで計八候補。全80 Sourceをparseした結果であり、ほか76 Sourceはこの狭い構造検索に候補が出なかったという意味だけである。TWR/connection/factory/別名の取得等を除外・完了認定しない。
+
+四者の取得直後にprimary Throwable保持＋typed try/finallyがあり、ResultSet→Statementの一回close、SQL対unknownの既JdbcResourceFailures順位を適用していることを本文で確認した。present(null)はSQL不正として固定し、取得が無い資源はcloseしない。Backup.inspectは二stepのid/重複/状態一致と前後guard、RunReferenceは借用RW/READ_COMMITTED・固定function/四Boolean・一行と前後割込、Expiry.readは完全handle/nullable projection/validSnapshotと前後guardを持つ。実際のJDBC動作・全branchの合格や全resource安全を静的形だけで断定しない。
+
+未達acquisition行が重なったのはBackup.inspect二scopeとMorning.query二scopeである。まず元SS332 SSC063/199/310等とSS331/341/343の当責務を確認し、以下をひとつの共通試験matrixとして固定した上で適用先の差分を扱う。ExpectedはSSの順位・所有契約と固定SQL後条件から作り、JdbcResourceFailures等のproduction methodを呼んで生成しない。
+
+- Statement取得失敗/NULL、query timeout/bind失敗、ResultSet取得失敗/NULLを分ける。取得なしはclose0、取得済みだけ一回close、借用Connectionのcommit/rollback/config/closeは0。
+- 正常/不正投影/SQL/unknown Runtime/NPE/Error primaryと各close失敗・同一Throwableを分ける。SQL固定redactionとunknown identity、secondaryの秘匿、戻り値のclose成功前返却禁止を固定表で検証する。
+- 正常fixtureの読取結果だけでなく、失敗時の既committed行不変、未commit変更の独立observerからの不可視/後条件、parent run/cutoff/完全step/lock/thread/lifetimeを必要範囲で確認する。
+- Backupは二行の不足/過剰/重複/異id/不一致状態/境界時刻と前後guardを、Expiry/RunReferenceは各固定projectionのNULL/未知値/行数等を個別に加える。現sourceで既に正当に資格を持つ意味的証拠は再演せず結合する。
+
+MorningDBの3254はcreateStatementによるread-only設定の複合故障を検証するため、その成功だけをqueryのPreparedStatement/ResultSet全故障へ代用しない。原65 Testの実DB BeforeAllと既HOLDを維持し、pure proxyで閉じる範囲と実専用DB/親資源を必要とする範囲を具体的に分け、試験選択・許可・原終端・独立postを確定してから動的工程へ進む。今回のstaticレビューから追加実行の権限を作らない。
+
+Source変更/新Product PT/coverage/受入増分0。上記四者には本文確認の範囲で新たな修正箇所を確定していない。一方、これらの正常形と対照的な三DB試験fixture.transactionの返却前setup保護不足は別のBUG2245/YKT1991としてOPEN。共通fixture修理を呼出先各programの費用へ重複計上せず、担当・影響試験を先に固定する。全80の残branch/元2980の独立oracle/実経路・正式451は未完である。

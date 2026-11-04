@@ -1,0 +1,776 @@
+{
+  "actualExit": 0,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "scope": "PARSE_ONLY_EXACT80_MAIN_FILES_NO_ANALYZE_GENERATE_OR_CLASSLOAD_PRODUCT",
+  "toolSourceSha256": "a63cd88343756d7abe18c5b0037b0b68863b0b2d428152c97f3a8640dbae4c3d",
+  "compiledToolSha256": "76fea11ad28b93f3cb92746d734e0cf3f7ca60ae895bea3b88f5eaee1fc13059",
+  "stages": [
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18534-sv80-jdbc-ast-v1/classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/SourceJdbcOwnershipInventory.java"
+      ],
+      "actualExit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutBytes": 0,
+      "stderrBytes": 0
+    },
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18534-sv80-jdbc-ast-v1/classes",
+        "SourceJdbcOwnershipInventory",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessMain.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiTerminalCapture.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/InspectorApplication.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorLauncher.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSource.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/LogQueryRepository.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/MediaRepository.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshot.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioRepository.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryRepository.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditWriter.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CaddyPublicConfiguration.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupExpiryExecution.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBrokerExecution.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCleanupExecution.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningGateEvidence.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningNewRunAdmission.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningResumeAdmission.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningRootScope.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootCurrentPermitPreflight.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceAdmissionScope.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceExecutableAdmission.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceFacts.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceLauncher.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootStartupPending.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningPreviousBroker.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningStopPass.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningUnitTerminals.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/RootReleaseAdmission.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/RootStartupContext.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccess.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ChildStartupContext.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceIdentity.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java",
+        "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeCodecs.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebProcessLifetime.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebTerminalCapture.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebSecurityAudit.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaResponseDecoder.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyTransportContextFilter.java"
+      ],
+      "actualExit": 0,
+      "stdoutSha256": "2cdbddc47320589dde6208c82092f1da3120cd55f2066709b1b03e0c90c00c5e",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutBytes": 18796,
+      "stderrBytes": 0
+    }
+  ],
+  "parsedSourceFiles": 80,
+  "candidates": [
+    {
+      "candidateId": "S-JDBC-AST-001",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "sourceSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "logicalOwnerOriginal": "WBS-P017-06",
+      "methodNameNotOverloadIdentity": "inspect",
+      "variable": "statement",
+      "acquisitionLines": [
+        127,
+        127
+      ],
+      "operation": "prepareStatement",
+      "immediateDirectFinallyPattern": true,
+      "codeSnippetSha256": {
+        "resource": "484e67870b8667647be2a6672273065e691a9863023a4a00a96acc457da052bd",
+        "primary": "6bb98fe4b8975858b5acb22a6414d31a74dec539fe6127298deae0bbd8dd9c01",
+        "body": "e7f71e75dd9647980d8a816e3dc8f81705ff573767424b43fb88080c83304585",
+        "catch": "58f0602bdb9fd5fd37a69c0435f7ab89dc51c638e0b53a3f2588e0022ae6e94b",
+        "finally": "9ca486b5bc0d3633fdac29212479e19eef2d2a8967877cc9c3718670cd2da0d3",
+        "declarations": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "missingAcquisitionLineAnchors": [
+        {
+          "physical": "dev/codex/schubert/nk/batch/repository/BackupStepRepository",
+          "sourceLine": 127,
+          "missedBranches": 0,
+          "coveredBranches": 0
+        }
+      ],
+      "decision": "STRUCTURAL_CANDIDATE_REQUIRES_SS_AND_BODY_REVIEW_NOT_BUG_OR_SAFETY_PROOF",
+      "newAcceptance": false
+    },
+    {
+      "candidateId": "S-JDBC-AST-002",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "sourceSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "logicalOwnerOriginal": "WBS-P017-06",
+      "methodNameNotOverloadIdentity": "inspect",
+      "variable": "rows",
+      "acquisitionLines": [
+        134,
+        134
+      ],
+      "operation": "executeQuery",
+      "immediateDirectFinallyPattern": true,
+      "codeSnippetSha256": {
+        "resource": "ff498f3295dcf864f839b8e7f0287c2e1f48f8a155ebd34b7bffd865bbfefb51",
+        "primary": "04b79624c5b4f27ee91746a42cc1d164bf5cd628750af3a2fd01daf153f49b91",
+        "body": "c69e3b7dacce403af37f2d55e28a27fb5983d645b8184dc625b2c17a8e991550",
+        "catch": "5f6fbab1abeecfdaaf2006aa24f01fa994068640eac9915538840acd1680a569",
+        "finally": "67a45a1d71dbca88f869c64f0198d20aa528236fee2c052ac008a9fb198b37b1",
+        "declarations": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "missingAcquisitionLineAnchors": [
+        {
+          "physical": "dev/codex/schubert/nk/batch/repository/BackupStepRepository",
+          "sourceLine": 134,
+          "missedBranches": 0,
+          "coveredBranches": 0
+        }
+      ],
+      "decision": "STRUCTURAL_CANDIDATE_REQUIRES_SS_AND_BODY_REVIEW_NOT_BUG_OR_SAFETY_PROOF",
+      "newAcceptance": false
+    },
+    {
+      "candidateId": "S-JDBC-AST-003",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "sourceSha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "logicalOwnerOriginal": "WBS-P017-11",
+      "methodNameNotOverloadIdentity": "read",
+      "variable": "statement",
+      "acquisitionLines": [
+        253,
+        258
+      ],
+      "operation": "prepareStatement",
+      "immediateDirectFinallyPattern": true,
+      "codeSnippetSha256": {
+        "resource": "85a141eb53f3ccc81606952c8ff2305df7367e10e00d7415c2468a6d0d2f906b",
+        "primary": "6bb98fe4b8975858b5acb22a6414d31a74dec539fe6127298deae0bbd8dd9c01",
+        "body": "a8e665b336bfb0ca724fb35236893f3794ef05a1909e6270554eadabde2f314a",
+        "catch": "58f0602bdb9fd5fd37a69c0435f7ab89dc51c638e0b53a3f2588e0022ae6e94b",
+        "finally": "a45fd5edc397c6e36f13b7a4a0b6a3d63ad40022c2efffd2f955aadc683652e0",
+        "declarations": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "missingAcquisitionLineAnchors": [],
+      "decision": "STRUCTURAL_CANDIDATE_REQUIRES_SS_AND_BODY_REVIEW_NOT_BUG_OR_SAFETY_PROOF",
+      "newAcceptance": false
+    },
+    {
+      "candidateId": "S-JDBC-AST-004",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "sourceSha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "logicalOwnerOriginal": "WBS-P017-11",
+      "methodNameNotOverloadIdentity": "read",
+      "variable": "rows",
+      "acquisitionLines": [
+        264,
+        264
+      ],
+      "operation": "executeQuery",
+      "immediateDirectFinallyPattern": true,
+      "codeSnippetSha256": {
+        "resource": "5a3bad63dfe64fd2fcff85e17468c8c397bebd9b60efd7cd035476f7ebe8a138",
+        "primary": "04b79624c5b4f27ee91746a42cc1d164bf5cd628750af3a2fd01daf153f49b91",
+        "body": "ee5dcc481a9d22ce3f1376b8364af0752415a5510247019f9c846fbb28c9bea2",
+        "catch": "5f6fbab1abeecfdaaf2006aa24f01fa994068640eac9915538840acd1680a569",
+        "finally": "5f4dc016c0c8f446d852313a829d1daccc5bc7478eab11c827fc98b86107b99b",
+        "declarations": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "missingAcquisitionLineAnchors": [],
+      "decision": "STRUCTURAL_CANDIDATE_REQUIRES_SS_AND_BODY_REVIEW_NOT_BUG_OR_SAFETY_PROOF",
+      "newAcceptance": false
+    },
+    {
+      "candidateId": "S-JDBC-AST-005",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+      "sourceSha256": "27bda4446e8b0a112963704b95d530af2357d254f3f6bced1ce04284fb5e88e2",
+      "logicalOwnerOriginal": "WBS-P017-01",
+      "methodNameNotOverloadIdentity": "query",
+      "variable": "statement",
+      "acquisitionLines": [
+        612,
+        612
+      ],
+      "operation": "prepareStatement",
+      "immediateDirectFinallyPattern": true,
+      "codeSnippetSha256": {
+        "resource": "481ae2a075d5713429ea13a93eff16325ea59a8477b0db7703f6b816326130cd",
+        "primary": "d955313835b63216fd66ea2304f38e225af2e246a50e5cb2e114cd31b0672bd7",
+        "body": "deeef7dc1b6300edcbf83bd3c0a0d5bb9fe6ec9336aac75bf2107337528b7dc3",
+        "catch": "cf93966cecfdf69670ed6244d6d29854cece16fc24b330bc11d37e90aeac35da",
+        "finally": "d12907668d8e175af573b00f287e244dcb8dbca62245ede1ce6db8a4d62be0e3",
+        "declarations": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "missingAcquisitionLineAnchors": [
+        {
+          "physical": "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession",
+          "sourceLine": 612,
+          "missedBranches": 0,
+          "coveredBranches": 0
+        }
+      ],
+      "decision": "STRUCTURAL_CANDIDATE_REQUIRES_SS_AND_BODY_REVIEW_NOT_BUG_OR_SAFETY_PROOF",
+      "newAcceptance": false
+    },
+    {
+      "candidateId": "S-JDBC-AST-006",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+      "sourceSha256": "27bda4446e8b0a112963704b95d530af2357d254f3f6bced1ce04284fb5e88e2",
+      "logicalOwnerOriginal": "WBS-P017-01",
+      "methodNameNotOverloadIdentity": "query",
+      "variable": "rows",
+      "acquisitionLines": [
+        618,
+        618
+      ],
+      "operation": "executeQuery",
+      "immediateDirectFinallyPattern": true,
+      "codeSnippetSha256": {
+        "resource": "bba5a5db2259a15283e21c2602a4e42a477794245968238a59e6ca57484303ec",
+        "primary": "04b79624c5b4f27ee91746a42cc1d164bf5cd628750af3a2fd01daf153f49b91",
+        "body": "79f8dc392541d87c7f981a8e27863fdf88e703ad2c1a395ca6d894397327ebc5",
+        "catch": "08986f51ad2b24ad9e6225685cf0dac7acaefead542745eccd6e046fc968e63a",
+        "finally": "d0ba17efce5f1ad5e45a273e84f2a23f94ce09cb927a3746cffa115b5a3095b4",
+        "declarations": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "missingAcquisitionLineAnchors": [
+        {
+          "physical": "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession",
+          "sourceLine": 618,
+          "missedBranches": 0,
+          "coveredBranches": 0
+        }
+      ],
+      "decision": "STRUCTURAL_CANDIDATE_REQUIRES_SS_AND_BODY_REVIEW_NOT_BUG_OR_SAFETY_PROOF",
+      "newAcceptance": false
+    },
+    {
+      "candidateId": "S-JDBC-AST-007",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "sourceSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "logicalOwnerOriginal": "WBS-P004-03",
+      "methodNameNotOverloadIdentity": "read",
+      "variable": "statement",
+      "acquisitionLines": [
+        33,
+        36
+      ],
+      "operation": "prepareStatement",
+      "immediateDirectFinallyPattern": true,
+      "codeSnippetSha256": {
+        "resource": "e5fbbbd6616ee446a6386f3f8771ad622867b233bf44fef8a79a243a5b6c01e6",
+        "primary": "6bb98fe4b8975858b5acb22a6414d31a74dec539fe6127298deae0bbd8dd9c01",
+        "body": "45c6fac07cecc7af66d86afe48019518d70d30966181e0623a6531b63d7fe198",
+        "catch": "58f0602bdb9fd5fd37a69c0435f7ab89dc51c638e0b53a3f2588e0022ae6e94b",
+        "finally": "a45fd5edc397c6e36f13b7a4a0b6a3d63ad40022c2efffd2f955aadc683652e0",
+        "declarations": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "missingAcquisitionLineAnchors": [],
+      "decision": "STRUCTURAL_CANDIDATE_REQUIRES_SS_AND_BODY_REVIEW_NOT_BUG_OR_SAFETY_PROOF",
+      "newAcceptance": false
+    },
+    {
+      "candidateId": "S-JDBC-AST-008",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "sourceSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "logicalOwnerOriginal": "WBS-P004-03",
+      "methodNameNotOverloadIdentity": "read",
+      "variable": "row",
+      "acquisitionLines": [
+        43,
+        43
+      ],
+      "operation": "executeQuery",
+      "immediateDirectFinallyPattern": true,
+      "codeSnippetSha256": {
+        "resource": "0a2e96ac1c6f6d7ac786bed864beeac5f8f8197830351a8adb0066c8591c0a2e",
+        "primary": "04b79624c5b4f27ee91746a42cc1d164bf5cd628750af3a2fd01daf153f49b91",
+        "body": "bddad645a2c81854a18ed2a442a61912b21f2ce38db3a7bd65bd753394ecdab6",
+        "catch": "5f6fbab1abeecfdaaf2006aa24f01fa994068640eac9915538840acd1680a569",
+        "finally": "b2cc59b495c5f2517d70447ff88207428975d301e473b4a961ffec98637ab393",
+        "declarations": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "missingAcquisitionLineAnchors": [],
+      "decision": "STRUCTURAL_CANDIDATE_REQUIRES_SS_AND_BODY_REVIEW_NOT_BUG_OR_SAFETY_PROOF",
+      "newAcceptance": false
+    }
+  ],
+  "sourceDisposition": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessMain.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiTerminalCapture.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/InspectorApplication.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorLauncher.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSource.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/LogQueryRepository.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/MediaRepository.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshot.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioRepository.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryRepository.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditWriter.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CaddyPublicConfiguration.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupExpiryExecution.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBrokerExecution.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCleanupExecution.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningGateEvidence.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningNewRunAdmission.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningResumeAdmission.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningRootScope.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootCurrentPermitPreflight.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceAdmissionScope.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceExecutableAdmission.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceFacts.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceLauncher.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootStartupPending.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningPreviousBroker.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningStopPass.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningUnitTerminals.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/RootReleaseAdmission.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/RootStartupContext.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "candidateIds": [
+        "S-JDBC-AST-001",
+        "S-JDBC-AST-002"
+      ],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "candidateIds": [
+        "S-JDBC-AST-003",
+        "S-JDBC-AST-004"
+      ],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+      "candidateIds": [
+        "S-JDBC-AST-005",
+        "S-JDBC-AST-006"
+      ],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "candidateIds": [
+        "S-JDBC-AST-007",
+        "S-JDBC-AST-008"
+      ],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccess.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ChildStartupContext.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceIdentity.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeCodecs.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebProcessLifetime.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebTerminalCapture.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebSecurityAudit.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaResponseDecoder.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyTransportContextFilter.java",
+      "candidateIds": [],
+      "noCandidateMeansNoJDBCOrNoDefect": false
+    }
+  ],
+  "candidateCount": 8,
+  "candidateSourceFiles": 4,
+  "notImmediatePatternCount": 0,
+  "sourceFilesWithNoNarrowPatternCandidate": 76,
+  "uncoveredAcquisitionCandidates": 4,
+  "wholeJDBCOrResourceScopeComplete": false,
+  "actualProductClassLoaded": false,
+  "productTests": 0,
+  "coverageAdded": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "rawBusinessOrPrivateOriginalLogsRead": false,
+  "wholeCodeBodiesPublished": false
+}

@@ -1,5 +1,9 @@
 # PGPT成果物一覧・進捗
 
+2026-11-05 02:01利用枠追補：fresh残95%、S共有観測6/10（原base5超・cap10未達/残4内POST2確保）・V同一初回HOLD/準備差0/10・計6/20、専有/N/Tnull。成果は570～589、保存前差分590。数字/予算の窓初期化・付替え0、正式/新受入/工数率不変。保存後も次の静的共有画面レビューを同S内で継続し、現在地は456/460先頭。
+
+2026-11-05 01:48追補：570～589。80 partial Source/53元execの静的解析で7049未達行anchor・3004未達branchへ具体化、未実行Code83を未達のまま保持。既成功十post再演0、Product/PT/coverage/新WBS受入0。JDBC八構造候補/四未達取得、三fixture31呼出候補file/274 lexical呼出、未捕捉86leafと共有Web6class/100method候補、旧共有8pp一poolの受入算術/原490追記訂正を保存。51原method意味レビュー以外を意味充足/PASSへ加算せず、正式1964/53/工数null不変。S観測5/10・V初回HOLD/準備差0/10、計5/20・PLAN_NOT_VALIDATED、継続現況は456/460先頭。
+
 2026-11-05 00:46追補：560～569、原期待値/資源レビュー累計51/2980（残2929）、Morning65共通実DB fixture/Scenario12/Log11の具体的境界と76操作の静的準備・実着手・終了依存を保存。三DB fixtureの設定失敗未closeをBUG2245/YKT1991へ修正前起票、JMS oracle BUG2242も未修正。製品PT/coverage/WBS受入増分0、正式1964/53・工数null不変。S共有観測5/10・V同一初回HOLD/準備差0/10、計5/20、PLAN_NOT_VALIDATED。現況/次操作は456/460先頭、S-POST継続。
 
 2026-11-05 00:20追補：541～558。282全Source構造分類（278 Code/4別build、除外0）、390原Test packet、原method意味レビュー26/2980、80未達Sourceの契約表/全932owner照合を追加。80部分群の未達は6809line/1125method/83class/3004branch outcomeで、条件数/工数率へ換算しない。QA051九文書dev同期、QA053回答main PR203反映済み。QA051比較11vectorは計画のみ、JMS負例oracle不備BUG2242は未修正。新ProductPT/coverage/受入0、正式/工数率不変。S観測4/10・V準備差0/10/合計4/20、S-POST継続・次操作は456/460先頭。PLAN_NOT_VALIDATED。

@@ -1,0 +1,1851 @@
+{
+  "actualExit": 0,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "BUG": "BUG2245",
+  "YKT": "YKT1991",
+  "scope": "PINNED854_TEST_JAVA_DIRECT_TYPE_MENTION_AND_DOT_TRANSACTION_CALL_SHAPE_ONLY",
+  "readSourceCount": 854,
+  "heldNamesExcludedBeforeReadStatHash": [
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootFailedStartPairRecoveryTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootFailedStartRecoveryTest.java"
+  ],
+  "candidateFiles": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceTest.java",
+      "sha256": "3814db950ec9a6e6eceee7c529efbbb39731a53acea84f1c4da803804cc5bdb8",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 77,
+          "receiverText": "db"
+        },
+        {
+          "line": 142,
+          "receiverText": "db"
+        },
+        {
+          "line": 161,
+          "receiverText": "db"
+        },
+        {
+          "line": 177,
+          "receiverText": "db"
+        },
+        {
+          "line": 186,
+          "receiverText": "db"
+        },
+        {
+          "line": 199,
+          "receiverText": "db"
+        },
+        {
+          "line": 216,
+          "receiverText": "db"
+        },
+        {
+          "line": 245,
+          "receiverText": "db"
+        },
+        {
+          "line": 278,
+          "receiverText": "db"
+        },
+        {
+          "line": 299,
+          "receiverText": "db"
+        },
+        {
+          "line": 308,
+          "receiverText": "db"
+        },
+        {
+          "line": 360,
+          "receiverText": "db"
+        },
+        {
+          "line": 386,
+          "receiverText": "db"
+        },
+        {
+          "line": 409,
+          "receiverText": "db"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.application.admin.BootstrapAdminServiceTest#boot001CreateAndAuditWithIndependentPbkdf2AndSql",
+        "dev.codex.schubert.nk.api.application.admin.BootstrapAdminServiceTest#boot002ExistingAnyUserAndRepeatAreUnchangedEvenInvalidCreationPassword",
+        "dev.codex.schubert.nk.api.application.admin.BootstrapAdminServiceTest#boot003CreationValidationAndNullBoundariesConsumePassword",
+        "dev.codex.schubert.nk.api.application.admin.BootstrapAdminServiceTest#boot004NonCooperatingInsertIsSeenAfterTableLockWait",
+        "dev.codex.schubert.nk.api.application.admin.BootstrapAdminServiceTest#boot004OneWinnerAmong100ConcurrentBootstrapTransactions",
+        "dev.codex.schubert.nk.api.application.admin.BootstrapAdminServiceTest#boot005ExclusiveMaintenanceDeniesBeforeAnyAccountMutationAndSharedLockEndsAtCommit",
+        "dev.codex.schubert.nk.api.application.admin.BootstrapAdminServiceTest#boot005SecurityAuditFaultRollsBackWholeCreation",
+        "dev.codex.schubert.nk.api.application.admin.BootstrapAdminServiceTest#boot005TransactionContractAndRollbackAreNotNormalCompletion",
+        "dev.codex.schubert.nk.api.application.admin.BootstrapAdminServiceTest#boot006ExistingResultAndStatementCloseFaultCannotReturnNormalSkip",
+        "dev.codex.schubert.nk.api.application.admin.BootstrapAdminServiceTest#boot006MalformedRowsAndAuditCountFailClosed"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+      "sha256": "cc78b69029069f5720afa381c5c2a42622ea6e43ee245bccffa21026f7dac1ce",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 226,
+          "receiverText": "database"
+        },
+        {
+          "line": 470,
+          "receiverText": "database"
+        },
+        {
+          "line": 637,
+          "receiverText": "database"
+        },
+        {
+          "line": 653,
+          "receiverText": "database"
+        },
+        {
+          "line": 686,
+          "receiverText": "database"
+        },
+        {
+          "line": 713,
+          "receiverText": "database"
+        },
+        {
+          "line": 772,
+          "receiverText": "database"
+        },
+        {
+          "line": 831,
+          "receiverText": "database"
+        },
+        {
+          "line": 988,
+          "receiverText": "database"
+        },
+        {
+          "line": 1016,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm014CreateNormalizesAsciiUsersAndIndependentlyVerifiesPassword",
+        "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm015StatusChangesAtomicallyRevokeSessions",
+        "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm016RoleChangesProtectSelfAndLastActiveAdmin",
+        "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm017PasswordResetConsumesSecretsAndRevokesEverySession",
+        "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm018UnlockUsesExactExpiryAndNoopVersionRules",
+        "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm019ExpectedVersionDuplicateAndCapacityAreBusinessResults",
+        "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm020SqlRevocationAndAuditFailuresRollbackTogether",
+        "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm021NullPolicyAndHashFailuresAlwaysErasePasswords",
+        "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm022ConcurrentMutationsPreserveAdminAndVersionInvariants",
+        "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest#adm023ResultAndAuditProjectionsContainOnlyApprovedFields"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationServiceTest.java",
+      "sha256": "007af1cec58f35e10dee457912ffa04844bdae4cda3cc2ee3276ffd96a837139",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 818,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest#adm033AllMutationsCommitOnceAndReplayFrozenVersions",
+        "dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest#adm034CurrentAuthenticationAndIdentityDenialsAreAudited",
+        "dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest#adm035SqlCryptoAuditAndTransactionFailuresNeverClaimSuccess",
+        "dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest#adm036ConcurrentTokensAndReciprocalAdminsPreserveInvariants",
+        "dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest#adm037DefiniteErrorsAndProcessingKeepApprovedResults",
+        "dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest#adm038BrokerSendAndAckFailuresReplayOneCommittedMutation",
+        "dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest#adm039NullLifecycleAndAuditAllowlistProtectBoundaries"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest.java",
+      "sha256": "aa4db7e439cbb8fdf1adee7f8352dd60d65e21f2d6ce44c5d0fde0cfbf937f3f",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 178,
+          "receiverText": "database"
+        },
+        {
+          "line": 244,
+          "receiverText": "database"
+        },
+        {
+          "line": 269,
+          "receiverText": "database"
+        },
+        {
+          "line": 311,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest#adm024DecodeAndCanonicalMatchIndependentWireAndHmac",
+        "dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest#adm025DispatchUsesTheSameDecodedFieldsInRealTransactions",
+        "dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest#adm026MalformedNullAndClosedRequestsFailWithoutSecretLeak",
+        "dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest#adm027ConcurrentIndependentRequestsNeverShareIdentityOrBuffers"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryRequestTest.java",
+      "sha256": "245b84e2fe0af87848385d8ed4de445c0dfd574b0dc02e6f226101521c3d9b4a",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 117,
+          "receiverText": "db"
+        },
+        {
+          "line": 132,
+          "receiverText": "db"
+        },
+        {
+          "line": 140,
+          "receiverText": "db"
+        },
+        {
+          "line": 273,
+          "receiverText": "db"
+        },
+        {
+          "line": 274,
+          "receiverText": "db"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest#adm040DecodeAndCanonicalKeepAllOriginalQueryFields",
+        "dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest#adm041RealReadOnlyQueriesUseTheSameDecodedValues",
+        "dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest#adm042NullMalformedAndResponseMismatchNeverPass",
+        "dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest#adm043ConcurrentRequestsOwnIndependentCanonicalBuffers"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogRequestTest.java",
+      "sha256": "283303adafd8fd708a2a82c1223ba6554aec62bb10b48af3d5efa7532e71c1fd",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 210,
+          "receiverText": "db"
+        },
+        {
+          "line": 243,
+          "receiverText": "db"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.application.log.LogRequestTest#adm061CanonicalPreservesEveryOriginalFilterAndDate",
+        "dev.codex.schubert.nk.api.application.log.LogRequestTest#adm062StrictBoundariesAndRealQueryUseOneDecodedRequest",
+        "dev.codex.schubert.nk.api.application.log.LogRequestTest#adm063ConcurrentCanonicalBuffersRemainIndependent"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaStageFixture.java",
+      "sha256": "5a4bc7a98de050ca752a2c412e74bb1d890f8912ee1192115f59d98fd599df33",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 358,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationServiceTest.java",
+      "sha256": "1c11a57c16141e567dfb7cc4d9dea769e61ebebd15717c587d8b861bc93424ea",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 1467,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#brokerSendAndAckFailuresReplayOneCommittedResult",
+        "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#committedAuditRemainsExactlyOnceAfterUnknownResponse",
+        "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#concurrentSameMessageAuditsOnceAndDistinctMessagesAuditIndividually",
+        "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#criticalAuditFailureRollsBackInboxAndCanBeRetried",
+        "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#detailBoundariesReleaseDatabaseBeforeFilesAndPreserveOriginalContent",
+        "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#failuresAtEveryTransactionFileClockAndIdentityBoundaryNeverClaimSuccess",
+        "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#oneHundredSameMessagesGenerateOnceAndFinalAuthenticationWins",
+        "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#productionAssemblyUsesRealQueryInboxAndNullContract",
+        "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#realWriterInspectorAndDatabaseRegenerationShareExactFrozenBytes",
+        "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#replayRegeneratesOnlyMissingOriginalFilesAndPreservesLifetime",
+        "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#sixRequestsCommitFrozenResponsesAndReplayWithFreshHeaders",
+        "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest#successAuditIsAtomicAndNotRepeatedForSavedSearchAndDetail"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/BoundInboxExecutionTest.java",
+      "sha256": "1eaf645553d7b296962e21730d1a1e7c878ffed258c71fa7a7473ae790d98003",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 84,
+          "receiverText": "database"
+        },
+        {
+          "line": 132,
+          "receiverText": "database"
+        },
+        {
+          "line": 181,
+          "receiverText": "database"
+        },
+        {
+          "line": 218,
+          "receiverText": "database"
+        },
+        {
+          "line": 240,
+          "receiverText": "database"
+        },
+        {
+          "line": 281,
+          "receiverText": "database"
+        },
+        {
+          "line": 316,
+          "receiverText": "database"
+        },
+        {
+          "line": 458,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundCompatibilityPreservesReadOnlyAndSnapshotReplacement",
+        "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundConcurrentInsertRecoveryAndProcessingUseStoredMessage",
+        "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundFirstMessageAndOperationTokenKeepOriginalAadIdentity",
+        "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest#boundNullCorruptIdentityAndSqlFaultsNeverProduceReplay"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/JdbcScenarioSnapshotReplacementTest.java",
+      "sha256": "cdff14c712f40952c4856666cc3ddf33aaf3d6d728c831fb9cd4ac09b9c46410",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 101,
+          "receiverText": "database"
+        },
+        {
+          "line": 134,
+          "receiverText": "database"
+        },
+        {
+          "line": 295,
+          "receiverText": "database"
+        },
+        {
+          "line": 314,
+          "receiverText": "database"
+        },
+        {
+          "line": 391,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#invalidMetadataIdentityAndStoredStateRejectBeforeReplacement",
+        "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#nullTransactionAndJdbcFaultsPreserveOwnershipAndClearBindings",
+        "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest#replacementCommitsOnlyCiphertextAndKeyWithoutExtendingLifetime"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest.java",
+      "sha256": "f6f7fecb41d569f5fd3ac15d9419cf8f8977c65ffbc53f57146d432c67999378",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 89,
+          "receiverText": "db"
+        },
+        {
+          "line": 122,
+          "receiverText": "db"
+        },
+        {
+          "line": 161,
+          "receiverText": "db"
+        },
+        {
+          "line": 200,
+          "receiverText": "db"
+        },
+        {
+          "line": 231,
+          "receiverText": "db"
+        },
+        {
+          "line": 285,
+          "receiverText": "db"
+        },
+        {
+          "line": 309,
+          "receiverText": "db"
+        },
+        {
+          "line": 340,
+          "receiverText": "db"
+        },
+        {
+          "line": 354,
+          "receiverText": "db"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest#concurrentReferencesDoNotCross",
+        "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest#databaseFaultsAndTransactionOwnership",
+        "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest#deterministicErrorReferences",
+        "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest#identityStructureAndNullContracts",
+        "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest#keyRotationAndClosedLifetimes",
+        "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest#loginOriginalAndLaterAccountState",
+        "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest#logoutOwnerAndRevokedReference",
+        "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest#missingAndInconsistentLoginRows"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxDeletionBoundaryTest.java",
+      "sha256": "a7101d0e23ea387a1df5ce9a6e8956634d6b75a99f09e2da533a9e705dbc3b70",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 306,
+          "receiverText": "db"
+        },
+        {
+          "line": 561,
+          "receiverText": "db"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.maintenance.InboxDeletionBoundaryTest#argumentsAndTransactionIdentity",
+        "dev.codex.schubert.nk.api.maintenance.InboxDeletionBoundaryTest#backupAndLockGate",
+        "dev.codex.schubert.nk.api.maintenance.InboxDeletionBoundaryTest#ciphertextAndMessageBinding",
+        "dev.codex.schubert.nk.api.maintenance.InboxDeletionBoundaryTest#concurrentRowsCannotChangeDuringValidation",
+        "dev.codex.schubert.nk.api.maintenance.InboxDeletionBoundaryTest#exactDeleteRollbackAndReplay",
+        "dev.codex.schubert.nk.api.maintenance.InboxDeletionBoundaryTest#leastPrivilegeIsUnchanged",
+        "dev.codex.schubert.nk.api.maintenance.InboxDeletionBoundaryTest#migrationInventoryAndSqlScope",
+        "dev.codex.schubert.nk.api.maintenance.InboxDeletionBoundaryTest#retainedAndMalformedMetadata"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/LogQueryRepositoryTest.java",
+      "sha256": "604b138630735d0f06088bb21665f02bb2df9cc4743a22f821e25fa83fb0028e",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 391,
+          "receiverText": "database"
+        },
+        {
+          "line": 465,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.persistence.LogQueryRepositoryTest#adm055PagesAndEveryFilterMatchIndependentRows",
+        "dev.codex.schubert.nk.api.persistence.LogQueryRepositoryTest#adm056ProjectionMatchesLiteralLogWireOffsets",
+        "dev.codex.schubert.nk.api.persistence.LogQueryRepositoryTest#adm057DateBoundsAndOptionalEndpointsAreExact",
+        "dev.codex.schubert.nk.api.persistence.LogQueryRepositoryTest#adm058NullRoleTransactionAndCapacityFailClosed",
+        "dev.codex.schubert.nk.api.persistence.LogQueryRepositoryTest#adm059JdbcAndResourceFailuresPreserveCallerState",
+        "dev.codex.schubert.nk.api.persistence.LogQueryRepositoryTest#adm060ConcurrentReadsDoNotBlockOrShareResults"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioRepositoryTest.java",
+      "sha256": "387f48739260b4593b0a54728ed4b04209e671813fb6de85b607b651c8153307",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 474,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn001GamesHaveIndependentBytesAndDoNotOwnTransaction",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn002004CapacityLimitsNeverReturnTruncatedSuccess",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn002SpeakerAggregationIsByNameAndScopedBeforeCounting",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn003EveryRouteMapAndUnknownPrefixHaveIndependentBytes",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn004FilesUseDisplayOrderTitleAndEntryNotAudioCount",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn005ParallelReadsKeepOrderAndDoNotWriteMasterOrSessions",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn005SixFiltersWildcardsAndRepresentativeVoiceAreIndependent",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn005ThreeTextInputsNormalizeBeforeByteChecks",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn006007AggregateAndMetadataFaultsAreBounded",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn006PagesAreClippedWithOneStatementAndEmptyIsOnePage",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn007CapacityAndCloseFailureNeverExposeSuppressedSql",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn007JdbcIntegerWideningKeepsSqlNullDistinct",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn007NullReadonlyAndRequiredMetadataNeverBecomeSuccess",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn008D01NavigationAndBlankTitlesFollowCurrentDisplayContract",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn008D02AllVoiceRowsAndDataHaveIndependentByteOffsets",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn008D03CountsExpandedRecordsAndBoundsSnapshotBeforeFileIo",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn008D04NullMetadataSqlAndCompoundCloseFaultsStayBounded",
+        "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest#ptScn009AllRequestRoutesUseIndependentDatabaseOutcomes"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/UserQueryRepositoryTest.java",
+      "sha256": "21e862c320130baadd1636a5cea8641a3d29b4b97243b93f2a653041fa27a062",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 527,
+          "receiverText": "database"
+        },
+        {
+          "line": 676,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm001SearchFiltersLiteralPrefixesAndStablePages",
+        "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm002DetailProjectsActorsTimesAndActiveSessions",
+        "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm003DisabledAndLockBoundariesUseOneFixedInstant",
+        "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm004AuthorizationNullAndInputContractsRejectBeforeSql",
+        "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm005JdbcNullUnknownAndCloseFailuresNeverBecomeMissing",
+        "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm006CapacityAndPageMetadataRejectTruncation",
+        "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#adm007ConcurrentReadOnlyQueriesNeverMutateOrLock",
+        "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest#bizUserTime001SubMillisecondDatabaseTimesProjectWithoutChangingSqlValues"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticatorTest.java",
+      "sha256": "4906dbaa81ca9d27f27eb11d327e240e5a28cb16d1f89f196824c235275c4a21",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 68,
+          "receiverText": "database"
+        },
+        {
+          "line": 102,
+          "receiverText": "database"
+        },
+        {
+          "line": 113,
+          "receiverText": "database"
+        },
+        {
+          "line": 164,
+          "receiverText": "database"
+        },
+        {
+          "line": 171,
+          "receiverText": "database"
+        },
+        {
+          "line": 196,
+          "receiverText": "database"
+        },
+        {
+          "line": 203,
+          "receiverText": "database"
+        },
+        {
+          "line": 246,
+          "receiverText": "database"
+        },
+        {
+          "line": 260,
+          "receiverText": "database"
+        },
+        {
+          "line": 303,
+          "receiverText": "database"
+        },
+        {
+          "line": 333,
+          "receiverText": "database"
+        },
+        {
+          "line": 347,
+          "receiverText": "database"
+        },
+        {
+          "line": 361,
+          "receiverText": "database"
+        },
+        {
+          "line": 373,
+          "receiverText": "database"
+        },
+        {
+          "line": 391,
+          "receiverText": "database"
+        },
+        {
+          "line": 426,
+          "receiverText": "database"
+        },
+        {
+          "line": 440,
+          "receiverText": "database"
+        },
+        {
+          "line": 468,
+          "receiverText": "database"
+        },
+        {
+          "line": 504,
+          "receiverText": "database"
+        },
+        {
+          "line": 526,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm008AllMutationKindsLockThenAuthenticateCurrentAdmin",
+        "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm009ReciprocalAdminsFollowOneGlobalUserOrder",
+        "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm010RevokedExpiredChangedOwnerAndRoleNeverAuthorize",
+        "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm011NullTargetsAndWriteTransactionContractsFailClosed",
+        "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm012JdbcClockAndResourceFailuresRollbackWithoutLeaks",
+        "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm013ConcurrentAuthenticationKeepsNoCrossRequestState",
+        "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest#adm074ProviderIllegalArgumentPlusCloseIsInfrastructure"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationServiceTest.java",
+      "sha256": "fb08bb5f49818298542e7b6711f2106e34c55a342dd081dda92a668ed2bafbaf",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 100,
+          "receiverText": "database"
+        },
+        {
+          "line": 147,
+          "receiverText": "database"
+        },
+        {
+          "line": 171,
+          "receiverText": "database"
+        },
+        {
+          "line": 188,
+          "receiverText": "database"
+        },
+        {
+          "line": 222,
+          "receiverText": "database"
+        },
+        {
+          "line": 279,
+          "receiverText": "database"
+        },
+        {
+          "line": 303,
+          "receiverText": "database"
+        },
+        {
+          "line": 328,
+          "receiverText": "database"
+        },
+        {
+          "line": 341,
+          "receiverText": "database"
+        },
+        {
+          "line": 381,
+          "receiverText": "database"
+        },
+        {
+          "line": 389,
+          "receiverText": "database"
+        },
+        {
+          "line": 502,
+          "receiverText": "database"
+        },
+        {
+          "line": 525,
+          "receiverText": "database"
+        },
+        {
+          "line": 565,
+          "receiverText": "database"
+        },
+        {
+          "line": 632,
+          "receiverText": "database"
+        },
+        {
+          "line": 687,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#absentRequestIpIsNotReplacedByLoginAddress",
+        "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#adminReasonsRevokeOnlyTargetAndPreserveExistingRevocations",
+        "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#concurrentLogoutAndIssuanceSerializeWithoutLostRevocation",
+        "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#faultsNullRowsAndAuditFailuresRollbackWithoutLeakingData",
+        "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#logoutAndRepeatedLogoutKeepOriginalTimeWithoutExtendingIdle",
+        "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#providerIllegalArgumentAndRowCloseAreInfrastructure",
+        "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#rerun001FatalCloseOfExpiredRowIsNotAnInfrastructureResponse",
+        "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest#rerun001FatalMarkerMatrixKeepsIdentityAndSqlPrimaryCyclesAreBounded"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthSessionServiceTest.java",
+      "sha256": "d2452c513a9c9f92bdcf67de977fa547b5dbe2319299955610c5a93d0b579381",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 89,
+          "receiverText": "database"
+        },
+        {
+          "line": 226,
+          "receiverText": "database"
+        },
+        {
+          "line": 241,
+          "receiverText": "database"
+        },
+        {
+          "line": 256,
+          "receiverText": "database"
+        },
+        {
+          "line": 281,
+          "receiverText": "database"
+        },
+        {
+          "line": 297,
+          "receiverText": "database"
+        },
+        {
+          "line": 317,
+          "receiverText": "database"
+        },
+        {
+          "line": 344,
+          "receiverText": "database"
+        },
+        {
+          "line": 365,
+          "receiverText": "database"
+        },
+        {
+          "line": 388,
+          "receiverText": "database"
+        },
+        {
+          "line": 439,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#constructorsNullBoundsAndUnavailableCryptoFailBeforeCommit",
+        "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#issuancePersistsOnlyHashAndBoundCipherInCallerTransaction",
+        "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#missingDisabledDuplicateAndDatabaseFaultsRollbackWithoutLeaks",
+        "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#oneHundredConcurrentIssuesKeepOnlyTwoActive",
+        "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#replacementAuditIsAtomicBoundedAndCarriesRequestIdentity",
+        "dev.codex.schubert.nk.api.security.AuthSessionServiceTest#thirdSessionRevokesOldestAccessAndUuidTieOnly"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifierTest.java",
+      "sha256": "990217488f3a10a40597eb5fc53da442b6f474df9f8d0d3dbe650fde604a7057",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 79,
+          "receiverText": "database"
+        },
+        {
+          "line": 92,
+          "receiverText": "database"
+        },
+        {
+          "line": 102,
+          "receiverText": "database"
+        },
+        {
+          "line": 137,
+          "receiverText": "database"
+        },
+        {
+          "line": 171,
+          "receiverText": "database"
+        },
+        {
+          "line": 182,
+          "receiverText": "database"
+        },
+        {
+          "line": 203,
+          "receiverText": "database"
+        },
+        {
+          "line": 211,
+          "receiverText": "database"
+        },
+        {
+          "line": 237,
+          "receiverText": "database"
+        },
+        {
+          "line": 245,
+          "receiverText": "database"
+        },
+        {
+          "line": 274,
+          "receiverText": "database"
+        },
+        {
+          "line": 321,
+          "receiverText": "database"
+        },
+        {
+          "line": 377,
+          "receiverText": "database"
+        },
+        {
+          "line": 389,
+          "receiverText": "database"
+        },
+        {
+          "line": 400,
+          "receiverText": "database"
+        },
+        {
+          "line": 414,
+          "receiverText": "database"
+        },
+        {
+          "line": 428,
+          "receiverText": "database"
+        },
+        {
+          "line": 451,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#concurrentVerificationsSerializeUserThenSessionAndRemainUsable",
+        "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#currentDatabaseActorAndIdleUpdateUseCallerTransactionWithoutShortening",
+        "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#nullAndAutocommitBoundariesRejectBeforeModifyingState",
+        "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#readOnlyPreflightBoundsNullContractsAndJdbcFailures",
+        "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#readOnlyPreflightDoesNotWaitForRowLocksAndCannotAuthorizeAfterRevocation",
+        "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#readOnlyPreflightRejectsUnknownRevokedExpiredAndDisabled",
+        "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#readOnlyPreflightReturnsCurrentActorWithoutTouchOrTransactionOwnership",
+        "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#sqlFaultsAndSuppressedCloseErrorsAreBoundedAndDoNotCommit",
+        "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#sqlNullAndUnknownRoleNeverBecomeAValidActor",
+        "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest#unknownRevokedExpiredAndDisabledAllDenyWithoutTouch"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationServiceTest.java",
+      "sha256": "be9dd86bd0244c79a60b66354c901371f5acae529ce000b6096d89c98b9d1985",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 138,
+          "receiverText": "database"
+        },
+        {
+          "line": 419,
+          "receiverText": "database"
+        },
+        {
+          "line": 440,
+          "receiverText": "database"
+        },
+        {
+          "line": 461,
+          "receiverText": "database"
+        },
+        {
+          "line": 482,
+          "receiverText": "database"
+        },
+        {
+          "line": 586,
+          "receiverText": "database"
+        },
+        {
+          "line": 594,
+          "receiverText": "database"
+        },
+        {
+          "line": 638,
+          "receiverText": "database"
+        },
+        {
+          "line": 721,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#absentDisabledAndWrongPasswordHaveSameFailureShapeAndDummyWork",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#databaseTimeoutRollsBackWithoutSessionCounterOrAuditAndConsumesPassword",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#nullInvalidInputsAndOutcomeInvariantsAreRejectedAndConsumed",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#realPasswordSuccessClearsCountersIssuesContextAndAuditsAtomically",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#sessionOrAuditFaultRollsBackSuccessAndFailureWithoutLeakingInput",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#threeSuccessfulLoginsAndConcurrentAttemptsKeepDatabaseInvariants",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#thresholdRequestLocksImmediatelyAndLockedRequestsDoNotHashOrExtend",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#unicodeKeyMigrationAcceptsNinetySixBytesButAuditsTheSixtyFourByteDisplay"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptRepositoryTest.java",
+      "sha256": "81c90422652e9314a1aac1a04cd4a911e655c866aa24f761b2a4b057e07c565e",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 79,
+          "receiverText": "database"
+        },
+        {
+          "line": 101,
+          "receiverText": "database"
+        },
+        {
+          "line": 150,
+          "receiverText": "database"
+        },
+        {
+          "line": 216,
+          "receiverText": "database"
+        },
+        {
+          "line": 227,
+          "receiverText": "database"
+        },
+        {
+          "line": 242,
+          "receiverText": "database"
+        },
+        {
+          "line": 246,
+          "receiverText": "database"
+        },
+        {
+          "line": 276,
+          "receiverText": "database"
+        },
+        {
+          "line": 300,
+          "receiverText": "database"
+        },
+        {
+          "line": 313,
+          "receiverText": "database"
+        },
+        {
+          "line": 325,
+          "receiverText": "database"
+        },
+        {
+          "line": 337,
+          "receiverText": "database"
+        },
+        {
+          "line": 393,
+          "receiverText": "database"
+        },
+        {
+          "line": 421,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#concurrentAttemptsHaveNoLostUpdatesAndRollbackRestoresAllRows",
+        "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#jdbcNullUnknownEnumAndFaultsFailClosedWithoutProviderData",
+        "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#knownAndUnknownUsersLockUserBeforeIpAndPersistAcrossConnections",
+        "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#modelAndMethodNullBoundsDoNotInventPersistedState",
+        "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#providerIllegalArgumentAndCloseSqlRemainRedactedInfrastructure",
+        "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#thresholdsWindowsLocksAndSuccessHaveLiteralSqlPostconditions"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginInboxServiceTest.java",
+      "sha256": "02e4ea99e5306a6977f0726574c60763e35254bd1a7a671599921adb2dcf2ce6",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 321,
+          "receiverText": "database"
+        },
+        {
+          "line": 354,
+          "receiverText": "database"
+        },
+        {
+          "line": 389,
+          "receiverText": "database"
+        },
+        {
+          "line": 407,
+          "receiverText": "database"
+        },
+        {
+          "line": 437,
+          "receiverText": "database"
+        },
+        {
+          "line": 452,
+          "receiverText": "database"
+        },
+        {
+          "line": 480,
+          "receiverText": "database"
+        },
+        {
+          "line": 506,
+          "receiverText": "database"
+        },
+        {
+          "line": 525,
+          "receiverText": "database"
+        },
+        {
+          "line": 574,
+          "receiverText": "database"
+        },
+        {
+          "line": 604,
+          "receiverText": "database"
+        },
+        {
+          "line": 682,
+          "receiverText": "database"
+        },
+        {
+          "line": 1125,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#brokerRedeliveryReplaysCommittedLoginWithoutDuplicateEffects",
+        "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#concurrentRedeliveryCreatesOneSessionAndOneAudit",
+        "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#databaseAndAuditFailpointsRollbackAllEffectsAndConsumeSecrets",
+        "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#failuresAndLocksReplayWithoutRehashingOrIncrementingCounters",
+        "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#jdbcLifecycleFaultsRemainRetryableAndRedacted",
+        "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#jdbcOwnerCommitsOnlyCompleteBusinessResults",
+        "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#movingClockSeparatesBusinessCompletionAndReplyTimes",
+        "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#permanentProtocolNeedsConfirmedRollbackAndClose",
+        "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#processingIdentityReuseAndUnavailableKeysHaveDistinctOutcomes",
+        "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#productionApiReceiveGroupConsumesRealBrokerLoginAndReplay",
+        "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#productionAssemblyAuthenticatesWithRealInboxSessionAndAudit",
+        "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#productionAssemblyFailedLoginReplaysWithoutSecondAttempt",
+        "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#successfulLoginAndReplayShareOneAtomicInboxTransaction",
+        "dev.codex.schubert.nk.api.security.LoginInboxServiceTest#wireInputNullNfcIpAndClockBoundariesAreValidatedBeforeMutation"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginReplayServiceTest.java",
+      "sha256": "2e5d1196476f8c9e45dbb1a28832b29dff09575c8c4685af2bd078aab560f9a1",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 114,
+          "receiverText": "database"
+        },
+        {
+          "line": 149,
+          "receiverText": "database"
+        },
+        {
+          "line": 253,
+          "receiverText": "database"
+        },
+        {
+          "line": 295,
+          "receiverText": "database"
+        },
+        {
+          "line": 311,
+          "receiverText": "database"
+        },
+        {
+          "line": 320,
+          "receiverText": "database"
+        },
+        {
+          "line": 353,
+          "receiverText": "database"
+        },
+        {
+          "line": 372,
+          "receiverText": "database"
+        },
+        {
+          "line": 391,
+          "receiverText": "database"
+        },
+        {
+          "line": 411,
+          "receiverText": "database"
+        },
+        {
+          "line": 425,
+          "receiverText": "database"
+        },
+        {
+          "line": 444,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#concurrentReplayAndKeyRotationPreserveExactData",
+        "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#failureSnapshotKeepsOriginalCodeRetryAndMessage",
+        "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#jdbcNullFaultsAndInvalidArgumentsNeverLeakOrMutate",
+        "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#successSnapshotFreezesOriginalFieldsAndRebuildsOnlyResponseHeader",
+        "dev.codex.schubert.nk.api.security.LoginReplayServiceTest#tamperedMetadataWireAndSessionReferencesFailClosed"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LogoutInboxServiceTest.java",
+      "sha256": "e18f014a8e3ba8a5ef79acfbfbb8c94fe0735bde2daf1afa85497befc65e831a",
+      "mentionedFixtureTypes": [
+        "ApiLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 151,
+          "receiverText": "database"
+        },
+        {
+          "line": 299,
+          "receiverText": "database"
+        },
+        {
+          "line": 324,
+          "receiverText": "database"
+        },
+        {
+          "line": 347,
+          "receiverText": "database"
+        },
+        {
+          "line": 355,
+          "receiverText": "database"
+        },
+        {
+          "line": 490,
+          "receiverText": "database"
+        },
+        {
+          "line": 650,
+          "receiverText": "database"
+        },
+        {
+          "line": 750,
+          "receiverText": "database"
+        },
+        {
+          "line": 757,
+          "receiverText": "database"
+        },
+        {
+          "line": 787,
+          "receiverText": "database"
+        },
+        {
+          "line": 805,
+          "receiverText": "database"
+        },
+        {
+          "line": 819,
+          "receiverText": "database"
+        },
+        {
+          "line": 827,
+          "receiverText": "database"
+        },
+        {
+          "line": 864,
+          "receiverText": "database"
+        },
+        {
+          "line": 897,
+          "receiverText": "database"
+        },
+        {
+          "line": 1108,
+          "receiverText": "database"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#assemblyUsesRealRevocationInboxReplayWithoutTakingKeyOwnership",
+        "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#concurrentRedeliveryRevokesAndAuditsOnce",
+        "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#initialReplayAndNewMessageKeepOneOriginalRevocation",
+        "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#invalidAndExpiredContextsNeverGainAuthority",
+        "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#jdbcAndCryptoFaultsRollBackEveryEffect",
+        "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#movingClockKeepsRevocationAndAuditTogetherButExpiresFromCompletion",
+        "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#nullAndWireBoundariesAreRejected",
+        "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#providerIllegalArgumentOwnerAndCloseRollbackAllEffects",
+        "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#rerun001CurrentClockIsReadAfterSessionLock",
+        "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#rerun001ExpiryBoundaryFencesAtomicallyAndPreservesErrorReplay",
+        "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#rerun001ExpiryFaultsRollbackFenceAuditAndInboxTogether",
+        "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#rerun001PriorTouchIsCurrentAndLateVerifierCannotUndoFence",
+        "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest#savedMetadataCiphertextAndReferencesFailClosed"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/JdbcWebSessionStoreTest.java",
+      "sha256": "a932b7b15262dec3d80bd8c6d93d560d7103e950036abae0f053675aaf4344b5",
+      "mentionedFixtureTypes": [
+        "WebLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 97,
+          "receiverText": "db"
+        },
+        {
+          "line": 157,
+          "receiverText": "db"
+        },
+        {
+          "line": 205,
+          "receiverText": "db"
+        },
+        {
+          "line": 212,
+          "receiverText": "db"
+        },
+        {
+          "line": 252,
+          "receiverText": "db"
+        },
+        {
+          "line": 278,
+          "receiverText": "db"
+        },
+        {
+          "line": 291,
+          "receiverText": "db"
+        },
+        {
+          "line": 317,
+          "receiverText": "db"
+        },
+        {
+          "line": 357,
+          "receiverText": "db"
+        },
+        {
+          "line": 385,
+          "receiverText": "db"
+        },
+        {
+          "line": 428,
+          "receiverText": "db"
+        },
+        {
+          "line": 448,
+          "receiverText": "db"
+        },
+        {
+          "line": 458,
+          "receiverText": "db"
+        },
+        {
+          "line": 473,
+          "receiverText": "db"
+        },
+        {
+          "line": 506,
+          "receiverText": "db"
+        },
+        {
+          "line": 514,
+          "receiverText": "db"
+        },
+        {
+          "line": 527,
+          "receiverText": "db"
+        },
+        {
+          "line": 553,
+          "receiverText": "db"
+        },
+        {
+          "line": 577,
+          "receiverText": "db"
+        },
+        {
+          "line": 604,
+          "receiverText": "db"
+        },
+        {
+          "line": 612,
+          "receiverText": "db"
+        },
+        {
+          "line": 620,
+          "receiverText": "db"
+        },
+        {
+          "line": 629,
+          "receiverText": "db"
+        },
+        {
+          "line": 644,
+          "receiverText": "db"
+        },
+        {
+          "line": 668,
+          "receiverText": "db"
+        },
+        {
+          "line": 725,
+          "receiverText": "db"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#rerun006JdbcEverySessionCataloguePreservesFatalAfterOwnedResourceClose",
+        "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web024RoundTripCiphertextAndExplicitColumns",
+        "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web025CompareAndSwapNoResurrection",
+        "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web026CallerTransactionsRollbackFixation",
+        "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web027RoleIsolationAndConstraints",
+        "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web028NullRowAndConfigurationBoundaries",
+        "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web029EveryJdbcFailureIsRedactedAndResourcesClose",
+        "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web030InvalidDatabaseRowsFailClosed",
+        "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web031ConcurrentLocksAndVersionsStayConsistent",
+        "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web294ProviderGetterFailureNeverBecomesInvalidRow",
+        "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web296MalformedRowWithResultCloseFailureIsInfrastructureNotInvalidation",
+        "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest#web298MalformedRowWithFatalResultClosePropagatesFatalWithoutInvalidation"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDispatcherTest.java",
+      "sha256": "0baac6ee57464b86157d140f4dcb06b5d4eaad4f6bb430b38b7d2e1bd944e363",
+      "mentionedFixtureTypes": [
+        "WebLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 254,
+          "receiverText": "db"
+        },
+        {
+          "line": 556,
+          "receiverText": "db"
+        },
+        {
+          "line": 590,
+          "receiverText": "db"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest#confirmedSendThenMarkFailureRecoversAfterLeaseWithoutDuplicate",
+        "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest#databaseFailuresRollbackAndCloseWithoutInventingSuccessfulMarks",
+        "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest#graph323002ProviderFatalNeverMarksOrdinaryFailureAndNullEdgesStillRetry",
+        "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest#idem012r02SameJdbcFailureAtClaimRollbackAndClosePreservesPrimary",
+        "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest#idem012r03DistinctRollbackAndCloseFailuresRemainSecondary",
+        "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest#idem012r04RollbackFatalAndSameCloseFatalRemainFatal",
+        "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest#idem012r05CloseFatalAfterClaimFailureDoesNotHidePrimary",
+        "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest#lostLeaseProtectsNewOwnerAndInvalidCipherNeverSends",
+        "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest#nullContractsAndReportInvariantsRejectInvalidInput",
+        "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest#resultTimeRetryAndNoDatabaseLockDuringJms"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogOutboxRepositoryTest.java",
+      "sha256": "611496343630bcebc58709c309926dda643a3d074907b848634aed25376e34a6",
+      "mentionedFixtureTypes": [
+        "WebLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 59,
+          "receiverText": "db"
+        },
+        {
+          "line": 65,
+          "receiverText": "db"
+        },
+        {
+          "line": 76,
+          "receiverText": "db"
+        },
+        {
+          "line": 108,
+          "receiverText": "db"
+        },
+        {
+          "line": 109,
+          "receiverText": "db"
+        },
+        {
+          "line": 117,
+          "receiverText": "db"
+        },
+        {
+          "line": 127,
+          "receiverText": "db"
+        },
+        {
+          "line": 128,
+          "receiverText": "db"
+        },
+        {
+          "line": 165,
+          "receiverText": "db"
+        },
+        {
+          "line": 196,
+          "receiverText": "db"
+        },
+        {
+          "line": 224,
+          "receiverText": "db"
+        },
+        {
+          "line": 354,
+          "receiverText": "db"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.web.logging.WebLogOutboxRepositoryTest#dueAndStrictLeaseBoundariesSkipLocksLimit100AndNeverClaimSent",
+        "dev.codex.schubert.nk.web.logging.WebLogOutboxRepositoryTest#encryptedInsertIsCallerAtomicDuplicateRetainsFirstAndWebCannotReachBusiness",
+        "dev.codex.schubert.nk.web.logging.WebLogOutboxRepositoryTest#nullInvalidDatabaseRowsAndBoundsFailClosedWithoutNpeRecovery",
+        "dev.codex.schubert.nk.web.logging.WebLogOutboxRepositoryTest#resultUpdatesProtectOwnerAndPersistExactJitterAllStagesIncludingAttemptCap"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorkerTest.java",
+      "sha256": "8cefebc7964540a8445b478a2fc8aba24b85199ea1ae0908a9bc88ed9462b310",
+      "mentionedFixtureTypes": [
+        "WebLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 245,
+          "receiverText": "db"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest#boundedStopReportsUnresponsiveWorkerThenReleases",
+        "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest#closeIsIdempotentAndRejectsInvalidInputs",
+        "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest#fatalVmFailureMakesWorkerNotReadyWithoutExposingCause",
+        "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest#graph323001ProviderFatalEdgesStopWithoutOrdinaryFailedCycle",
+        "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest#interruptedStopRestoresCallerFlag",
+        "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest#nativeBudget001ZeroIsBoundedAndRemainingActualJoinAllowsRetry",
+        "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest#realOutboxRetriesInBackgroundAndSendsOnce",
+        "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest#rerun008HiddenFatalStopsWithoutFailedCycleAndSelfJoinRejects",
+        "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest#rerun008SecondCloseMustJoinStillAliveWorkerRatherThanSucceed",
+        "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest#temporarySqlAndRuntimeFailuresRecoverWithoutLeakingDetails"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationRepositoryTest.java",
+      "sha256": "2d64e4e150dc592ea642b9a50d9ab640247b8be81d6f3cc91b87ff256a5258ad",
+      "mentionedFixtureTypes": [
+        "WebLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 65,
+          "receiverText": "db"
+        },
+        {
+          "line": 94,
+          "receiverText": "db"
+        },
+        {
+          "line": 108,
+          "receiverText": "db"
+        },
+        {
+          "line": 112,
+          "receiverText": "db"
+        },
+        {
+          "line": 113,
+          "receiverText": "db"
+        },
+        {
+          "line": 134,
+          "receiverText": "db"
+        },
+        {
+          "line": 145,
+          "receiverText": "db"
+        },
+        {
+          "line": 146,
+          "receiverText": "db"
+        },
+        {
+          "line": 165,
+          "receiverText": "db"
+        },
+        {
+          "line": 169,
+          "receiverText": "db"
+        },
+        {
+          "line": 174,
+          "receiverText": "db"
+        },
+        {
+          "line": 190,
+          "receiverText": "db"
+        },
+        {
+          "line": 194,
+          "receiverText": "db"
+        },
+        {
+          "line": 210,
+          "receiverText": "db"
+        },
+        {
+          "line": 214,
+          "receiverText": "db"
+        },
+        {
+          "line": 220,
+          "receiverText": "db"
+        },
+        {
+          "line": 224,
+          "receiverText": "db"
+        },
+        {
+          "line": 231,
+          "receiverText": "db"
+        },
+        {
+          "line": 249,
+          "receiverText": "db"
+        },
+        {
+          "line": 371,
+          "receiverText": "db"
+        },
+        {
+          "line": 407,
+          "receiverText": "db"
+        },
+        {
+          "line": 432,
+          "receiverText": "db"
+        },
+        {
+          "line": 447,
+          "receiverText": "db"
+        },
+        {
+          "line": 457,
+          "receiverText": "db"
+        },
+        {
+          "line": 471,
+          "receiverText": "db"
+        },
+        {
+          "line": 505,
+          "receiverText": "db"
+        },
+        {
+          "line": 519,
+          "receiverText": "db"
+        },
+        {
+          "line": 532,
+          "receiverText": "db"
+        },
+        {
+          "line": 550,
+          "receiverText": "db"
+        },
+        {
+          "line": 557,
+          "receiverText": "db"
+        },
+        {
+          "line": 565,
+          "receiverText": "db"
+        },
+        {
+          "line": 595,
+          "receiverText": "db"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.web.revocation.PendingRevocationRepositoryTest#rerun004aEnqueueRollbackAndLiteralRetainedNull",
+        "dev.codex.schubert.nk.web.revocation.PendingRevocationRepositoryTest#rerun004bDueSkipLocksAndLimitOneHundredIgnoreExpiry",
+        "dev.codex.schubert.nk.web.revocation.PendingRevocationRepositoryTest#rerun004cIndependentBackoffSaturationAndAllClosedWarnings",
+        "dev.codex.schubert.nk.web.revocation.PendingRevocationRepositoryTest#rerun004dSelfLeaseCasRollbackAndExpiredOwnerNeverDeletes",
+        "dev.codex.schubert.nk.web.revocation.PendingRevocationRepositoryTest#rerun004eNullBoundsExplicitTransactionAndReadContracts",
+        "dev.codex.schubert.nk.web.revocation.PendingRevocationRepositoryTest#rerun004fOversizedCorruptCipherIsClaimedForRetainedWarningNotWholeQueuePoison",
+        "dev.codex.schubert.nk.web.revocation.PendingRevocationRepositoryTest#rerun004gRequiredSqlNullMalformedAndResourceFaultsRollback",
+        "dev.codex.schubert.nk.web.revocation.PendingRevocationRepositoryTest#rerun004hCipherProjectionBoundsDistinguishOversizedFromMissingOrInconsistent",
+        "dev.codex.schubert.nk.web.revocation.PendingRevocationRepositoryTest#rerun004iAllFourStatementOwnersFailClosedAndCallerRollbackRestoresRows"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinatorTest.java",
+      "sha256": "0b5fa9f866fe30b9723adffb919fc0e359e342f2edc89da58a5b19aed8b877e7",
+      "mentionedFixtureTypes": [
+        "WebLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 195,
+          "receiverText": "db"
+        },
+        {
+          "line": 517,
+          "receiverText": "db"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest#rerun005aRealApiNormalAndExpiredFenceFreshMessageProof",
+        "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest#rerun005bActualApiCommitThenLostReplyRetainsAndFresh0200Closes",
+        "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest#rerun005cGeneral0102ErrorWrongWireAndTimeoutKeepOriginalRow",
+        "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest#rerun005dUnknownKeyBadTagAndOversizedNeverGenerateOrSendContext",
+        "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest#rerun005eLeaseWaitBudgetAndLateReplyCannotMutateExpiredClaim",
+        "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest#rerun005fNullContractsAndCommitCloseUnknownNeverReleaseClaimToRemote",
+        "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest#rerun005gFatalIdentityNestedCyclicFailuresAndResourceAfterconditions",
+        "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest#rerun005hHundredConcurrentClaimsReachRealApiWithNoDuplicateRowOwnership"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepositoryTest.java",
+      "sha256": "33e428d60c71d6276c6c7e7a3a2023ebcc723a656c349d39b27d333f2697382f",
+      "mentionedFixtureTypes": [
+        "WebLogDatabaseFixture"
+      ],
+      "candidateCalls": [
+        {
+          "line": 412,
+          "receiverText": "db"
+        },
+        {
+          "line": 569,
+          "receiverText": "db"
+        }
+      ],
+      "candidateOrdinaryMethodIds": [
+        "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#bizOwnership001FixtureDistinguishesSendingThreadFromOtherBorrowers",
+        "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#web036CreateReadRestartAndIdleAreEncrypted",
+        "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#web037ExpiryAndCorruptRowsCommitInvalidation",
+        "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#web038MutationPreservesCurrentAttributesAndSecurityIdentity",
+        "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#web039LoginFixationIsAtomicAndPreservesAllowlist",
+        "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#web040VersionRolloverPreservesCookieAndRejectsOldPk",
+        "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#web041DatabaseCryptoAndCommitFailuresNeverGrantSession",
+        "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#web042NullConfigurationAndIdentityInvariants",
+        "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#web043ConcurrentReadMutateInvalidateNeverResurrect",
+        "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#web295ProviderGetterFailureRollsBackWithoutDeletingSession",
+        "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest#web297MalformedRowAndResultCloseFailureRollsBackWithoutDeletingSession"
+      ],
+      "decision": "LEXICAL_TYPE_AND_CALL_CANDIDATE_NOT_RESOLVED_CALL_GRAPH",
+      "confirmedCaller": null,
+      "repairRequiredHere": null,
+      "newAcceptance": false
+    }
+  ],
+  "candidateFileCount": 31,
+  "candidateCallCount": 274,
+  "confirmedFixtureDefinitions": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchDatabaseFixture.java",
+      "sha256": "ad3567863c78e5cbbbe28cd1c2b38c2005113abb3bd0f9184cda190d0c886023",
+      "line": 104,
+      "decision": "OWNED_SETUP_FAILURE_CLOSE_GAP",
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture.java",
+      "sha256": "59934c39fa8589f63dc83dd913e8c6d0028fc64536aca9850a13afbd33fd0bfa",
+      "line": 107,
+      "decision": "OWNED_SETUP_FAILURE_CLOSE_GAP",
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDatabaseFixture.java",
+      "sha256": "9325eea2624232010b1fccd7a226a46cc6fd9142c4f59e9d35087bfec0370682",
+      "line": 101,
+      "decision": "OWNED_SETUP_FAILURE_CLOSE_GAP",
+      "newAcceptance": false
+    }
+  ],
+  "requiredNext": "Resolve each candidate receiver/class/helper and indirect engine/quality launcher impact; source2 held and aliases outside regex remain unknown. Repair shared3 once, no per-caller repeated implementation cost. Keep Product/test replay prerequisites.",
+  "newProductPT": 0,
+  "coverageAdded": 0,
+  "newAcceptance": 0,
+  "wholeCallGraphComplete": false,
+  "actualCostOwnerAllocation": null
+}
