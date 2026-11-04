@@ -1,0 +1,76 @@
+{
+  "bug": "BUG2235",
+  "horizontal": "YKT1982",
+  "pool": "S",
+  "original": {
+    "script": "pg18490_completion_stage_reconciliation_v1.py",
+    "sha256": "0e713189cbca0cd5a4137a14a773ddad4b8e75ba118b914b22197d5b140e13a4",
+    "toolReceipt": "595c6f",
+    "osExit": 0,
+    "receiverOutcome": "JSON.parse Bad control character at458592",
+    "fullStdoutPreserved": false,
+    "fullStdoutHash": null,
+    "specificCutCause": "UNCONFIRMED"
+  },
+  "correction": {
+    "script": "pg18491_completion_stage_stream_v2.py",
+    "processSession": 38098,
+    "terminalReceipt": "2d6a4f",
+    "osExit": 0,
+    "transportBoundaryVectors": 4,
+    "metadataComputationCount": 2,
+    "noProductReplay": true
+  },
+  "independent": {
+    "toolReceipt": "7312a1",
+    "osExit": 0,
+    "sevenWholeHashesAndCountsChecked": true,
+    "files": [
+      {
+        "name": "remaining-work-packages.json",
+        "characters": 846905,
+        "sha256": "f832b8876e5fa70210787d5a48b36aef8433f45c32983a97558cc10632d85bd0"
+      },
+      {
+        "name": "source-reuse-matrix.json",
+        "characters": 852307,
+        "sha256": "4eed49f699b8e6e5789d7ee76aef3a783d58915f672347a8de24f80aeeb2a9ae"
+      },
+      {
+        "name": "ordinary-reuse-matrix.json",
+        "characters": 3381838,
+        "sha256": "bfe5e6d318b26ba382904f5a3e77952e0d18c8165563c19dda0db970a47107ec"
+      },
+      {
+        "name": "common-cause-groups.json",
+        "characters": 49190,
+        "sha256": "569e14679b8202b58471ff37db754496b9d79478a9d1a06bf6096c18eb27104c"
+      },
+      {
+        "name": "hold-register.json",
+        "characters": 102501,
+        "sha256": "854f796580f3509ef8cb0f6d0bdc718e59de3f4276cfe7a63cab8522a84bd991"
+      },
+      {
+        "name": "provisional-estimate.json",
+        "characters": 57064,
+        "sha256": "502f100d56c7a6cc6a431bda098cae34cbb393a831aef1892f059fa826a845bc"
+      },
+      {
+        "name": "reconciliation-summary.json",
+        "characters": 2893,
+        "sha256": "e7d4533bf8dd29672f0e5739d2277ab98ce9be7114f88be82ef7b64b92f83a09"
+      }
+    ]
+  },
+  "additionalOrchestrationPreparationFailure": {
+    "kind": "ReferenceError outputs undefined in fresh JS isolate",
+    "filesChangedByFailedCall": 0,
+    "productCommands": 0,
+    "exactTime": null,
+    "recoveredBy": "Reconstruct transfer metadata from stored s_stream_files before patch construction"
+  },
+  "status": "FINITE_RETESTED_REMOTE_SAVE_PENDING",
+  "productTestsExecuted": 0,
+  "actualAllocatedPp": null
+}

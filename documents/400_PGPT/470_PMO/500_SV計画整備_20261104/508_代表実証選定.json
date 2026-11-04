@@ -1,0 +1,368 @@
+{
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "executionId": "PGPT-SV-20261104-01",
+  "status": "NOT_READY_FOR_PILOT",
+  "selectedCandidateId": null,
+  "selectionFrozenBeforeStart": true,
+  "additionalPilotAuthorized": false,
+  "candidates": [
+    {
+      "id": "V-BATCH-BACKUP",
+      "leafIds": [
+        "WBS-P017-06"
+      ],
+      "partialSources": 3,
+      "contract": "同一Morning ownerのBackup開始・成功/失敗/skipと原本DB整合・停止receipt",
+      "sourcePaths": [
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java"
+      ],
+      "input": "当bootのRoot snapshot/親既存budget/正規のrequestと原本・Backup前像。synthetic data-only terminalは実owner能力ではない",
+      "expected": "新receipt0又は明示失敗/skip、正規停止、fresh whole Unit終端、14列DB終端/原本/要求を独立照合しintent退役。未確定deliveryを成功にしない",
+      "types": [
+        "OWNERSHIP_OR_CURRENT_STATE",
+        "TECHNICAL_OR_QUALITY"
+      ],
+      "basis": [
+        "Main MorningBackupUnitCycle.create root.recheck(expected), BackupUnitReceiptGate.create, start/stop/terminal acquisition",
+        "Main BackupStepRepository: borrowed transaction and genuine root manifest;14-column terminal",
+        "456/460 external current state UNOBSERVED_HOLD, 6b not deployed"
+      ],
+      "missing": "現在boot/source/owner/全Unit・原本DB・Backupの認証と当契約の開始許可/同source実後条件。akoへ接続できず他hostの現所有も未確認",
+      "representativeOf": [
+        "Batch42のうち実Backup三Sourceと同owner資源寿命"
+      ],
+      "notRepresentativeOf": [
+        "純codec",
+        "SQL検索",
+        "Web描画"
+      ],
+      "parentDependencies": [
+        "WBS-P004-01",
+        "WBS-P004-03",
+        "WBS-N01",
+        "WBS-N02"
+      ],
+      "preflightClass": "HOLD_SCOPE_UNRESOLVED",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "designCommit": "7147c428bb9d619d88139947294bc3e8d95c4b62",
+      "actualCommandTargetFixtureSideEffects": {
+        "actualCommand": null,
+        "reason": "No execution selected: exact safe start prerequisite not proven; not an authorized command placeholder",
+        "target": [
+          "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+          "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java"
+        ],
+        "fixture": "当bootのRoot snapshot/親既存budget/正規のrequestと原本・Backup前像。synthetic data-only terminalは実owner能力ではない",
+        "permissions": "Existing authority only; no held operation release",
+        "sideEffectsProposed": "Would require contract-specific owned fixture/mutation and cleanup; none issued"
+      },
+      "sourceRunJobOwnershipProof": "NO_NEW_PRODUCT_JOB; historic18474 os terminal unrecovered; do not reissue",
+      "estimatedPp": {
+        "low": null,
+        "base": null,
+        "high": null
+      },
+      "costType": "FULL_CYCLE_BOUND_NOT_ESTABLISHED",
+      "canFinishIncludingQualityWithin10Pp": null,
+      "selectionStatus": "NOT_SELECTED_NOT_PROVEN_READY"
+    },
+    {
+      "id": "V-API-JMS-CLEANUP",
+      "leafIds": [
+        "WBS-P005-04"
+      ],
+      "partialSources": 1,
+      "contract": "factory設定失敗時のowned close・primary/secondary/Error優先と未確定解放",
+      "sourcePaths": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java"
+      ],
+      "input": "未接続factory取得supplier、設定失敗primary、close失敗secondary、observer。credential-free成功系の旧5件は新実証にしない",
+      "expected": "取得前null検査、失敗時close一回、secondary Errorはprimary非Errorより優先、それ以外identity保持。未帰還observer/UNKNOWNをclose成功にしない",
+      "types": [
+        "REFUSAL_SCOPE_UNRESOLVED",
+        "TECHNICAL_OR_QUALITY"
+      ],
+      "basis": [
+        "2937既成功は接続前正常3＋値2、残catch/retainUnknownは未網羅",
+        "3162 Main109 TemporaryInfrastructureException.attachSecondaryとServiceProcessResources.unknownReleasePolicy依存、当wholeの新fixture/抽出未許可",
+        "1975は具体拒否対象不明であり当provider自体が拒否されたとの断定ではない"
+      ],
+      "missing": "未充足catch/retainUnknownの依存portと既HOLDから独立するwhole試験範囲。未特定拒否を本factoryの拒否と断定せず、分離未証明部分を実行しない",
+      "representativeOf": [
+        "API21部分未達のうちprovider取得/cleanup一Source・共通例外資源寿命"
+      ],
+      "notRepresentativeOf": [
+        "実broker接続",
+        "ACK/rollback全consumer",
+        "DB業務",
+        "他の80Source全部"
+      ],
+      "parentDependencies": [
+        "WBS-P002-03",
+        "WBS-C04"
+      ],
+      "preflightClass": "HOLD_SCOPE_UNRESOLVED",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "designCommit": "7147c428bb9d619d88139947294bc3e8d95c4b62",
+      "actualCommandTargetFixtureSideEffects": {
+        "actualCommand": null,
+        "reason": "No execution selected: exact safe start prerequisite not proven; not an authorized command placeholder",
+        "target": [
+          "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java"
+        ],
+        "fixture": "未接続factory取得supplier、設定失敗primary、close失敗secondary、observer。credential-free成功系の旧5件は新実証にしない",
+        "permissions": "Existing authority only; no held operation release",
+        "sideEffectsProposed": "Would require contract-specific owned fixture/mutation and cleanup; none issued"
+      },
+      "sourceRunJobOwnershipProof": "NO_NEW_PRODUCT_JOB; historic18474 os terminal unrecovered; do not reissue",
+      "estimatedPp": {
+        "low": null,
+        "base": null,
+        "high": null
+      },
+      "costType": "FULL_CYCLE_BOUND_NOT_ESTABLISHED",
+      "canFinishIncludingQualityWithin10Pp": null,
+      "selectionStatus": "NOT_SELECTED_NOT_PROVEN_READY"
+    },
+    {
+      "id": "V-API-LOGIN",
+      "leafIds": [
+        "WBS-P007-01"
+      ],
+      "partialSources": 3,
+      "contract": "5/10回制限・15分lock、session/Inbox/監査を同transactionで閉じる",
+      "sourcePaths": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditWriter.java"
+      ],
+      "input": "専用test schemaとrole/明示transaction/時刻・user/ip・passwordのsynthetic fixture。既単純PasswordPolicy検証だけではない",
+      "expected": "承認5/10閾値・15分境界、User→IP lock順、成功時session/監査/Inboxの原子性、失敗rollback/入力消費/資源後条件",
+      "types": [
+        "OWNERSHIP_OR_CURRENT_STATE",
+        "TECHNICAL_OR_QUALITY"
+      ],
+      "basis": [
+        "Main AuthenticationService caller-owned transaction/attempts.lockForAttempt/sessions.issue/audit",
+        "LoginAttemptRepository requires explicit transaction SQLSTATE25000",
+        "seed当source三partial、旧static/type証拠は残SQL・並行後条件を閉じない"
+      ],
+      "missing": "資格情報や既DBを流用せず使える具体的な隔離test DB/role/fixture/rollback後条件と元wholeの安全依存対応。DBという名前や認証機能だけを拒否理由にはしていない",
+      "representativeOf": [
+        "APIの業務transaction・rate limit・監査の複合契約"
+      ],
+      "notRepresentativeOf": [
+        "Root native",
+        "Batch unit",
+        "全Web操作"
+      ],
+      "parentDependencies": [
+        "WBS-P004-01",
+        "WBS-P006-01"
+      ],
+      "preflightClass": "HOLD_SCOPE_UNRESOLVED",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "designCommit": "7147c428bb9d619d88139947294bc3e8d95c4b62",
+      "actualCommandTargetFixtureSideEffects": {
+        "actualCommand": null,
+        "reason": "No execution selected: exact safe start prerequisite not proven; not an authorized command placeholder",
+        "target": [
+          "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java",
+          "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java",
+          "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditWriter.java"
+        ],
+        "fixture": "専用test schemaとrole/明示transaction/時刻・user/ip・passwordのsynthetic fixture。既単純PasswordPolicy検証だけではない",
+        "permissions": "Existing authority only; no held operation release",
+        "sideEffectsProposed": "Would require contract-specific owned fixture/mutation and cleanup; none issued"
+      },
+      "sourceRunJobOwnershipProof": "NO_NEW_PRODUCT_JOB; historic18474 os terminal unrecovered; do not reissue",
+      "estimatedPp": {
+        "low": null,
+        "base": null,
+        "high": null
+      },
+      "costType": "FULL_CYCLE_BOUND_NOT_ESTABLISHED",
+      "canFinishIncludingQualityWithin10Pp": null,
+      "selectionStatus": "NOT_SELECTED_NOT_PROVEN_READY"
+    },
+    {
+      "id": "V-WEB-RETRY",
+      "leafIds": [
+        "WBS-P015-05"
+      ],
+      "partialSources": 1,
+      "contract": "失効payload保持・旧鍵・同pending再送・QA050 backoff",
+      "sourcePaths": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java"
+      ],
+      "input": "当契約の隔離pending row/lease/clock/公開synthetic暗号fixtureと正規wire facade。保存済み鍵・raw contextは使わない",
+      "expected": "DB資源close後に送信、0000/0200だけ確認削除、STALEや失敗は保持・承認済初期backoff後15分、payload/業務二重発行0",
+      "types": [
+        "OWNERSHIP_OR_CURRENT_STATE",
+        "REFUSAL_SCOPE_UNRESOLVED",
+        "TECHNICAL_OR_QUALITY"
+      ],
+      "basis": [
+        "3425既三graph試験はdispatchOne/transaction/codec/wireを一度も呼ばない",
+        "Main dispatchOne->transaction->repository.claim/decrypt/wire/removeConfirmed",
+        "Main transaction.combine->WebStartupException.attachSecondary（1975のHOLD portとの依存）"
+      ],
+      "missing": "専用DB/lease/wire/暗号fixtureと当transaction失敗portの独立性、業務再送/上限の独立oracle。既成功graph三の再確認では閉じない",
+      "representativeOf": [
+        "Web10のうち永続再送・lease・暗号/transaction複合契約"
+      ],
+      "notRepresentativeOf": [
+        "純value/getter",
+        "実Browser",
+        "Batch/MQ全体"
+      ],
+      "parentDependencies": [
+        "WBS-P007-03",
+        "WBS-P005-02"
+      ],
+      "preflightClass": "HOLD_SCOPE_UNRESOLVED",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "designCommit": "7147c428bb9d619d88139947294bc3e8d95c4b62",
+      "actualCommandTargetFixtureSideEffects": {
+        "actualCommand": null,
+        "reason": "No execution selected: exact safe start prerequisite not proven; not an authorized command placeholder",
+        "target": [
+          "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java"
+        ],
+        "fixture": "当契約の隔離pending row/lease/clock/公開synthetic暗号fixtureと正規wire facade。保存済み鍵・raw contextは使わない",
+        "permissions": "Existing authority only; no held operation release",
+        "sideEffectsProposed": "Would require contract-specific owned fixture/mutation and cleanup; none issued"
+      },
+      "sourceRunJobOwnershipProof": "NO_NEW_PRODUCT_JOB; historic18474 os terminal unrecovered; do not reissue",
+      "estimatedPp": {
+        "low": null,
+        "base": null,
+        "high": null
+      },
+      "costType": "FULL_CYCLE_BOUND_NOT_ESTABLISHED",
+      "canFinishIncludingQualityWithin10Pp": null,
+      "selectionStatus": "NOT_SELECTED_NOT_PROVEN_READY"
+    },
+    {
+      "id": "V-ROOT-OWNERSHIP",
+      "leafIds": [
+        "WBS-P018-03"
+      ],
+      "partialSources": 12,
+      "contract": "canonical epoch/owner/launch・保持FDからordinary実起動まで同世代で閉じる",
+      "sourcePaths": [],
+      "input": "当bootの正規unused permit/親捕捉世代/所有済FD、30分既存budget、同source署名release",
+      "expected": "same-peer/generation/identity/socket/infoを照合、親真正DONE・逆順owned停止・全資源後条件。data-only mockによる代用をしない",
+      "types": [
+        "OWNERSHIP_OR_CURRENT_STATE",
+        "TECHNICAL_OR_QUALITY"
+      ],
+      "basis": [
+        "seed ownerP018-03部分未達12",
+        "456/460では6b未配備、現在VM/DB/job所有は未観測",
+        "既未確認18474や旧PID/bootを現在所有にしない"
+      ],
+      "missing": "具体的な現在boot/actor/client/permitの認証、既存品質HOLDに依存しない正規開始条件と同source後条件。Rootという名前自体が拒否根拠ではない",
+      "representativeOf": [
+        "startup ownership/native・長期停滞の重要経路"
+      ],
+      "notRepresentativeOf": [
+        "通常フォーム",
+        "純codec"
+      ],
+      "parentDependencies": [
+        "WBS-N11",
+        "WBS-N12",
+        "WBS-N13",
+        "WBS-N14",
+        "WBS-N05",
+        "WBS-N06",
+        "WBS-N09",
+        "WBS-N10"
+      ],
+      "preflightClass": "HOLD_SCOPE_UNRESOLVED",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "designCommit": "7147c428bb9d619d88139947294bc3e8d95c4b62",
+      "actualCommandTargetFixtureSideEffects": {
+        "actualCommand": null,
+        "reason": "No execution selected: exact safe start prerequisite not proven; not an authorized command placeholder",
+        "target": [],
+        "fixture": "当bootの正規unused permit/親捕捉世代/所有済FD、30分既存budget、同source署名release",
+        "permissions": "Existing authority only; no held operation release",
+        "sideEffectsProposed": "Would require contract-specific owned fixture/mutation and cleanup; none issued"
+      },
+      "sourceRunJobOwnershipProof": "NO_NEW_PRODUCT_JOB; historic18474 os terminal unrecovered; do not reissue",
+      "estimatedPp": {
+        "low": null,
+        "base": null,
+        "high": null
+      },
+      "costType": "FULL_CYCLE_BOUND_NOT_ESTABLISHED",
+      "canFinishIncludingQualityWithin10Pp": null,
+      "selectionStatus": "NOT_SELECTED_NOT_PROVEN_READY"
+    },
+    {
+      "id": "V-CHR-ORACLE-ALTERNATIVE",
+      "leafIds": [
+        "WBS-P020-01.02"
+      ],
+      "partialSources": 0,
+      "contract": "QA051相関投影・独立NK期待値の比較artifact/oracle",
+      "sourcePaths": [
+        "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java"
+      ],
+      "input": "承認main7147のUI264/SS351/SS355に従う相関付きartifactと独立expectations",
+      "expected": "欠落/重複/相関誤り/対象外差分を拒否、既baseline不変更、実NK比較は別残依存",
+      "types": [
+        "TECHNICAL_OR_QUALITY"
+      ],
+      "basis": [
+        "QA051 approved/main7147",
+        "1535旧source3c70の比較DIF受入は新QA051方式の証明ではない",
+        "今回利用者は工具/metadataのみを代表実証成功にすることを禁止"
+      ],
+      "missing": "当方式の実装・独立品質が未完であり、比較工具単体では今回要求した本体代表実証の代表性を満たさない。易しい差替えとして選ばない",
+      "representativeOf": [
+        "QA051比較oracleの将来限定較正"
+      ],
+      "notRepresentativeOf": [
+        "Batch/API本体修理",
+        "実NK CHR-L01",
+        "実経路/native"
+      ],
+      "parentDependencies": [
+        "WBS-P020-01.01",
+        "WBS-CHR-L01",
+        "WBS-G06"
+      ],
+      "preflightClass": "HOLD_SCOPE_UNRESOLVED",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "designCommit": "7147c428bb9d619d88139947294bc3e8d95c4b62",
+      "actualCommandTargetFixtureSideEffects": {
+        "actualCommand": null,
+        "reason": "No execution selected: exact safe start prerequisite not proven; not an authorized command placeholder",
+        "target": [
+          "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java"
+        ],
+        "fixture": "承認main7147のUI264/SS351/SS355に従う相関付きartifactと独立expectations",
+        "permissions": "Existing authority only; no held operation release",
+        "sideEffectsProposed": "Would require contract-specific owned fixture/mutation and cleanup; none issued"
+      },
+      "sourceRunJobOwnershipProof": "NO_NEW_PRODUCT_JOB; historic18474 os terminal unrecovered; do not reissue",
+      "estimatedPp": {
+        "low": null,
+        "base": null,
+        "high": null
+      },
+      "costType": "FULL_CYCLE_BOUND_NOT_ESTABLISHED",
+      "canFinishIncludingQualityWithin10Pp": null,
+      "selectionStatus": "NOT_SELECTED_NOT_PROVEN_READY"
+    }
+  ],
+  "reviewScope": "Six specific contracts compared; their unmet exact start/exit conditions are not proof that all80 Source or every independent operation is impossible. No candidate satisfying representative/full-cycle/authority/bounded10 conditions was established in this assessment.",
+  "whyNoFallback": "No successful old replay, getter/value tests or tools-only substitute; no probing held operations",
+  "VGroupStarted": false
+}

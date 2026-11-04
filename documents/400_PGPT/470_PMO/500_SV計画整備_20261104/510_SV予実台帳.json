@@ -1,0 +1,181 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "phase": "S_POST_PARTIAL_NOT_READY_FINAL_PRESERVATION",
+  "pools": {
+    "S": {
+      "capPp": 10,
+      "preparationObservedChargedConservativelyPp": 1,
+      "observedPp": 2,
+      "actualAllocatedPp": null,
+      "reserveWithinSForPostPp": 2,
+      "reportedRemainingCapPp": 8
+    },
+    "V": {
+      "capPp": 10,
+      "observedPp": 0,
+      "actualAllocatedPp": null,
+      "status": "NOT_READY_FOR_PILOT_NOT_STARTED",
+      "zeroMeansNoVActivityNotMeasuredExclusiveZero": true
+    }
+  },
+  "approvedCombinedCapPp": 20,
+  "intervals": [
+    {
+      "intervalId": "PREPARATION-ORIGINAL",
+      "activity": "PREPARATION",
+      "groupId": "S",
+      "before": {
+        "fetchedAtJST": "2026-11-02T07:28:59+09:00",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793774153,
+        "usedPercent": 91
+      },
+      "after": {
+        "fetchedAtJST": "2026-11-02T08:09:58+09:00",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1793774153,
+        "usedPercent": 92
+      },
+      "reportedSharedDeltaPp": 1,
+      "comparable": true,
+      "allocatedPp": null,
+      "parallelCostStatus": "UNKNOWN_INCLUDED_ONCE",
+      "sourceRecord": "kit/preparation-cost.json"
+    },
+    {
+      "intervalId": "S_CURRENT_PRE_AND_TRANSITION",
+      "activity": "S_PRE_AND_TRANSITION_TO_S_POST",
+      "actorRole": "PGPT_PLANNING_NOT_MANUFACTURING",
+      "threadId": "01a05ae6-b388-7360-ad9b-c97d488d093b",
+      "groupId": "PGPT-SV-20261104-01-S",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "before": {
+        "fetchedAtJST": "2026-11-04T20:14:42+09:00",
+        "clockMeaning": "Clock after usage response; first current-window read also0 before S preparatory reads",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1794395640,
+        "usedPercent": 0,
+        "remainingPercent": 100,
+        "secondary": null
+      },
+      "after": {
+        "fetchedAtJST": "2026-11-04T20:35:53+09:00",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1794395640,
+        "usedPercent": 1,
+        "remainingPercent": 99
+      },
+      "reportedSharedDeltaPp": 1,
+      "comparable": true,
+      "allocatedPp": null,
+      "parallelCostStatus": "UNKNOWN_SHARED_ACCOUNT",
+      "overlappingIntervalIds": [],
+      "meaning": "First initial0 observation preceded all planning; exact initial timestamp missing, second0 observed by20:14:42. Same reported0 retained, no assertion of free initial reads."
+    },
+    {
+      "intervalId": "S_POST_PRESERVATION",
+      "activity": "S_POST",
+      "actorRole": "PGPT_PLANNING_NOT_MANUFACTURING",
+      "groupId": "PGPT-SV-20261104-01-S",
+      "before": {
+        "fetchedAtJST": "2026-11-04T20:35:53+09:00",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1794395640,
+        "usedPercent": 1,
+        "remainingPercent": 99
+      },
+      "after": {
+        "fetchedAtJST": "2026-11-04T20:44:02+09:00",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1794395640,
+        "usedPercent": 1,
+        "remainingPercent": 99
+      },
+      "reportedSharedDeltaPp": 0,
+      "comparable": true,
+      "allocatedPp": null,
+      "parallelCostStatus": "UNKNOWN_SHARED_ACCOUNT",
+      "overlappingIntervalIds": [],
+      "zeroDifferenceNotFree": true
+    },
+    {
+      "intervalId": "S_POST_FINAL_REVIEW",
+      "activity": "S_POST_STATIC_TRIAGE_AND_TOOL_REPAIR",
+      "actorRole": "PGPT_PLANNING_NOT_MANUFACTURING",
+      "groupId": "PGPT-SV-20261104-01-S",
+      "before": {
+        "fetchedAtJST": "2026-11-04T20:44:02+09:00",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1794395640,
+        "usedPercent": 1,
+        "remainingPercent": 99
+      },
+      "after": {
+        "fetchedAtJST": "2026-11-04T20:57:54+09:00",
+        "limitId": "codex",
+        "windowDurationMins": 10080,
+        "reset": 1794395640,
+        "usedPercent": 1,
+        "remainingPercent": 99
+      },
+      "reportedSharedDeltaPp": 0,
+      "comparable": true,
+      "allocatedPp": null,
+      "overlappingIntervalIds": [],
+      "parallelCostStatus": "UNKNOWN_SHARED_ACCOUNT",
+      "zeroDifferenceNotFree": true
+    }
+  ],
+  "executionStartQuota": {
+    "fetchedAtJST": "2026-11-04T20:14:42+09:00",
+    "clockMeaning": "Clock after usage response; first current-window read also0 before S preparatory reads",
+    "limitId": "codex",
+    "windowDurationMins": 10080,
+    "reset": 1794395640,
+    "usedPercent": 0,
+    "remainingPercent": 100,
+    "secondary": null
+  },
+  "nonOverlappingObservedTotalPp": 2,
+  "budgetBoundVerified": true,
+  "budgetBasis": "Reported shared integer pp, not exclusive or exact token costs; no gap between inactive windows charged as0",
+  "actualAllocatedPp": null,
+  "tokenN": null,
+  "tokenT": null,
+  "withdrawn630PpDec23Used": false,
+  "reportedCombinedRemainingCapPp": 18,
+  "latestUsagePoll": {
+    "atJST": "2026-11-04T20:35:52+09:00",
+    "cursor": "4e3b2f1423e2fca355e3a395dce59704a6ebc1299b1accd35689a3e94905ffb2",
+    "N": null,
+    "T": null,
+    "coverage": "INCOMPLETE_NO_NEW_EXPLICIT_USAGE_RECORD",
+    "previousCursorRetainedInCollector": true
+  },
+  "originalEstimateS": {
+    "low": 1.5,
+    "base": 5,
+    "high": 10
+  },
+  "VEstimateFullCycle": {
+    "low": null,
+    "base": null,
+    "high": null
+  },
+  "VCapPp": 10,
+  "noNewPostPool": true,
+  "futureBudgetAuthorized": false,
+  "fullExclusiveCostUncertain": true,
+  "currentPlanningObservedPp": 1,
+  "preservationAfterObservationPending": true,
+  "costOwner": "WBS-K03.02",
+  "costOwnerClarificationEvent": "PGPT-20261008-3770",
+  "originalGroupStartEventsPreserved": true
+}
