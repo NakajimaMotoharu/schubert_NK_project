@@ -1,0 +1,5 @@
+# Web post source identityの原失敗
+
+73cd40 actual1、post-attempt1.py SHA256 cd28b610d2bf1674258cf322d6eefcddfb646b53b69bac78b549c30963105670へ原全文保全。原JUnit/exec/四counterは全成功で不変更、公開O/685前にexpectedcase集合の独立guardが停止した。原因はfullQNameをWeb名へ変換後、旧simple suffix DlqSenderContractTestを置換してWeb prefixが二重になったこと。誤expected=dev.codex.schubert.nk.web.messaging.ArtemisReplyArtemisReplyDlqSenderContractTest、actual/frozenSourceはArtemisReplyDlqSenderContractTest。Product/JUnit再演0。
+
+BUG2262/YKT2007へ修正前起票。expected classはXML actualから作らず、固定Git Test Sourceのpackageとclass宣言から導出し、元command --select-classと一致を照合する。定数の重複/重なる置換で自由literalを作らない。新post全generated fileは原file含めSource.class判定・Main physical/CRC/Tool/selectorへ拘束、source/case/selector不一致metadata反例を追加し、同元raw結果だけを読取する。原費用.5/1.5/4/cap10内、原source/失敗は保持。
