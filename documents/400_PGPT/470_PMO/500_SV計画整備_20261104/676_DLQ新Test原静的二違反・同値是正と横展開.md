@@ -1,0 +1,5 @@
+# DLQ新Test初回静的と同値是正
+
+原PG18616 manifest9fb359307739f38f19b5167174d4eff19a9bd8e92c1b545cf0979494286e75ec、Source 1508bbdabaef35c77fbf4be5cfe8d590b5886a7e1988743e2a57f9b0324ed2e0 は原文全byteをownrun original.javaへ保持。八Unitは未実行。BUG2261/YKT2006起票後、prop:十/send四を同値定数化し、引数/expected表/独立golden/段階数25・135vectorを変更しない。旧二Source固定PG18598/18608の当違反0を再利用し、確認のため旧PTを再演しない。
+
+残UseConcurrentHashMapはuniqueFixtureのsinglethread property map（JUnit parallel=false、全callback同期）、UseProperClassLoaderはpublic JMS interfaceを自分のdefining loaderでJDK proxyにするstandalone helperで局所非該当。raw指摘/件数は残し、全F03受入や抑制/除外へ置換しない。改訂compile/static/formatを当newsourceで行い、初回Unit/CRC/全Source counter/postを必要条件として保持する。

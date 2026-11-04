@@ -1,0 +1,71 @@
+{
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "groupId": "PGPT-20261105-DLQ-SENDER-CONTRACT",
+  "decision": "PT_DEFAULT_OWN_JMS_CALLBACKS_ONLY",
+  "sourceEvidenceRefs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15520-synthetic-jms-guard-six-post-v1/manifest.json",
+      "sha256": "77b9c0aa0bec563c180c66f3de6e81fc108e9b604c068bbc77f4e49242f2bdcb",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15616-dlq-web-health-nine-post-v1/manifest.json",
+      "sha256": "43bc3610124c113a4f85186fa7689a0e70fa9e26e674a0749a2b50aa932f90b2",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+    }
+  ],
+  "inputSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/DlqSender.java": "43202ae1c72c9ce38bdfd48e33851ef74384eb67223e368db6ce6b40ccbe28e9",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriter.java": "a1ae6af67703defb14f811b91e1b872c1d6ad2442d2fac8d758d18b39d661095",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata.java": "ecb1f660cd83fbc28c7133e38f1ea1a67ef47f7bf46085e220b810047d963efc",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage.java": "6c8c70ef3872a2de673eb4a5af6a4eaefc52516403b5f08e9465a762b897cbad",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportMetadata.java": "198dac5e9cad2046e8e78a4323bfe2e0e2a4a3842044015e8088c1149fcdf646"
+  },
+  "canonicalMain": "bf11a7b63e0d97c34f15a56b41bfd57681c38ccc",
+  "canonicalDocsVerified": [
+    "SS321",
+    "UI231",
+    "UI232"
+  ],
+  "independentOracle": [
+    "SS321§11 exact ten-property allowlist, originalbody/JMSsubtype preservation, no password/body/hash property copying",
+    "PG-D017 stage-only borrowed transacted context; no commit/rollback/close",
+    "PG-D018 malformed/missing diagnostic IDs→UNAVAILABLE, never read Object/body; same subtype. API adapter follows same existing boundeddiagnostic policy.",
+    "UI232 fixed UUID lowercasecanonical36/layout uppercaseASCII8. Alreadyqualified Writer independentTest bounds transportID128 printableASCII. Diagnostic UNAVAILABLE sentinel is not a valid applicationwire ID and need not be8/36 characters.",
+    "Count missing orless1→1, positive signedJMS int retained: existing internal boundeddiagnostic policy; no actualdelivery-limit/queue behavior claim."
+  ],
+  "plannedMethods": 8,
+  "plannedVectors": 130,
+  "tableCounts": {
+    "trustedNormal": 1,
+    "untrustedOriginNormal": 3,
+    "transportBoundary": 10,
+    "uuidBoundaryTwoFields": 18,
+    "layoutBoundary": 8,
+    "deliveryCount": 7,
+    "nullModeAdminGuards": 11,
+    "providerStageFaults": 70,
+    "trustedFailure": 2
+  },
+  "propertyFaultStages": 25,
+  "checkedStages": 20,
+  "uncheckedStages": 5,
+  "providerFaultTypes": "JMSException/IllegalArgumentException/Error for Message stages; Runtime/Error only for five JMSContext/JMSProducer stages",
+  "protocolScope": "Body is opaque literal bytes for trusted snapshot, original TextMessage handle for untrusted. No codec/business acceptance inferred; underlying codec currentproofs unchanged.",
+  "runtime": "Own4 public JMS interface proxies, fixedQueue value same669closure; no ConnectionFactory/realbroker/DB/Root/native/key/credential/session issue",
+  "negativeOracle": "Construct all input/fixtures/faults before assertions; require same injectedThrowable. Unknown Message methods including body/deserialization/ack immediately fail. Defaultno-op onlyexplicitJMSmutators.",
+  "priorSuccessfulTestsReexecuted": 0,
+  "productRunBeforePreflight": 0,
+  "coverageTarget": "WholeDlqSender physicalclass only, defaultcompiler filters unchanged; eachline/method/class/branch100 required, no invented missing=0 or oldexec union",
+  "mainChangePlanned": false,
+  "firstVChanged": false,
+  "whole451Accepted": false,
+  "preFirstCompileBoundaryAddition": {
+    "originalPlannedVectorsRetained": 130,
+    "additionalDiscoveredBoundaryVectors": 5,
+    "reason": "Explicit max−1/min+1 boundaries transport127/layout7/UUID35 bothfields/count2; not extra uniqueTests or budget.",
+    "finalPlannedVectors": 135,
+    "additionalBudgetPp": 0,
+    "newTestMethodsStill": 8
+  }
+}
