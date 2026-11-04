@@ -1,0 +1,20 @@
+{
+  "bug": "BUG2239",
+  "horizontal": "YKT1985",
+  "originalTool": {
+    "chunk": "fa29f3",
+    "actualExit": 1,
+    "error": "KeyError: records",
+    "failedStatement": "assert len(m['records'])==8",
+    "phase": "First 524 uses cases, not records; no output generated; Product not invoked"
+  },
+  "correction": "Explicit per-file schema, required-key checks; no default-empty suppression",
+  "retest": {
+    "chunk": "be608b",
+    "exit": 0
+  },
+  "negativeMetadataVectors": 12,
+  "productTests": 0,
+  "oldFailurePreserved": true,
+  "script": "import json,hashlib,subprocess,datetime,copy\nfrom pathlib import Path\nroot=Path.cwd();b=root/'documents/400_PGPT/470_PMO/500_SV計画整備_20261104'\nnames=('524_質問受付八Test独立期待値・静的意味照合.json','525_参照要求八Test独立期待値・静的意味照合.json','528_認証八Test独立期待値・副作用・後条件.json')\ndocs=[json.loads((b/n).read_bytes()) for n in names]\ndef check(index,m):\n assert m['source']=='6b53efeec87f3ec36a840dd8e7759656cb4aee5c'\n if index==0:\n  assert len(m['cases'])==8\n  assert all(x['staticReview']=='PERFORMED_WITH_EXPLICIT_LIMITS' and x['newPTPass'] is False and x['executionExempt'] is False for x in m['cases'])\n  assert m['result']['newPassedTests']==0 and m['result']['newCoverage']==0 and m['result']['newAcceptedCriteria']==0\n else:\n  assert len(m['records'])==8\n  assert all(x['actualProductOrTestExecution'] is False and x['currentPassAdded']==0 for x in m['records'])\n  if index==2: assert m['newPass']==0 and m['newCoverage']==0 and m['newAcceptedCriteria']==0\nrows=[];negative=0\nfor index,(n,m) in enumerate(zip(names,docs)):\n check(index,m)\n for mutation in ('missing','wrongCount','source','claim'):\n  bad=copy.deepcopy(m);key='cases' if index==0 else 'records'\n  if mutation=='missing':del bad[key]\n  elif mutation=='wrongCount':bad[key]=bad[key][:-1]\n  elif mutation=='source':bad['source']='0'*40\n  elif index==0:bad[key][0]['newPTPass']=True\n  else:bad[key][0]['currentPassAdded']=1\n  try:check(index,bad)\n  except (AssertionError,KeyError):negative+=1\n  else:raise AssertionError('invalid semantic claim accepted')\n p=b/n;rows.append(dict(path=str(p.relative_to(root)),sha256=hashlib.sha256(p.read_bytes()).hexdigest(),staticallyReviewedOriginalMethods=8,newPass=0))\nassert negative==12\nreuse=json.loads((b/'527_現source既存証跡の意味的再利用.json').read_bytes())\nfor x in reuse['references']:\n p=root/x['post'];m=json.loads(p.read_bytes());assert hashlib.sha256(p.read_bytes()).hexdigest()==x['sha256'];assert m['source']==reuse['source'];assert [m[k] for k in ('actualExit','failures','errors','skipped')]==[0,0,0,0];assert m['tests']==x['tests'] and m['suites']==x['suites'];assert m['execSha256']==x['execSha256']\n u=m['fullSourceUnits'][x['sourceUnit']];assert u['four100'] and all(c['missed']==0 and c['covered']==x['counterCovered'][k] for k,c in u['totals'].items())\nrows.append(dict(path=str((b/'527_現source既存証跡の意味的再利用.json').relative_to(root)),sha256=hashlib.sha256((b/'527_現source既存証跡の意味的再利用.json').read_bytes()).hexdigest(),currentSourceProofReferencesReusedWithoutExecution=2))\ngate=json.loads((b/'526_継続gateと現況.json').read_bytes())['gate'];assert gate['currentEvaluation']['mayFinishTurn'] is False;assert gate['pools']['S']['alreadyObservedPp']==2 and gate['pools']['S']['capPp']==10\nassert subprocess.check_output(['git','diff','--name-only','HEAD','--','src'],text=True)==''\nprint(json.dumps(dict(source=reuse['source'],actualExit=0,scope='STATIC_SEMANTIC_DOCUMENT_CONSISTENCY_NOT_PRODUCT_PT',atJST=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).isoformat(),files=rows,originalMethodsReviewed=24,existingCurrentSourceProofs=2,metadataNegativeVectorsRejected=negative,newProductTests=0,newCoverage=0,newWbsAcceptance=0,formalUpdated=False,wholeMissingClassificationCompleted=False,mayFinishTurn=False,next='PG17742 original three-case contract proof; then Scenario/Media meaningful SQL contracts',heldFilesReadStatHashStage=0),ensure_ascii=False))\n"
+}

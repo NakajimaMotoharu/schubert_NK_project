@@ -1,0 +1,273 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S",
+  "primaryCostOwner": "WBS-K03.02",
+  "programOwner": "WBS-P011-01",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "head": "28dc40d276c1baa7f9f1f1340080c941cf6c5dde",
+  "designCommit": "7147c428bb9d619d88139947294bc3e8d95c4b62",
+  "independence": {
+    "operation": "Read existing public SS/UI/Main/Test/shared CanonicalRequest/Git blobs only",
+    "actualClassesLoadedOrExecuted": false,
+    "cryptoProductOperation": false,
+    "newFixture": false,
+    "networkDBVMOrServiceActions": false,
+    "sourceIntegrityHashesOnly": true,
+    "heldFilesBeforeMetadataExcluded": true,
+    "whyLexicalFlagsDoNotStopReading": "DB/CRYPTO/ASYNC in source are not executed by text inspection"
+  },
+  "pins": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequest.java",
+      "sha256": "d9ed41871ca79eddaf323630a938b1d468886a6e3e8b3c9f72203d905ae1ab5d"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequestTest.java",
+      "sha256": "84da364beb7d9537bd5cb25a3907db733a810d9a34fd36279bfaad4f94329390"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+      "sha256": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "sha256": "085a751480baf929bea7c80e758a66b3fffe4dee4a3f4fd84b6eed2b38e86523"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "sha256": "2bc99fd66ca1121a1ab4ae44e97aab96b52d4cf4c8145f6a425f89c7b07ce774"
+    }
+  ],
+  "sharedFixture": {
+    "source": "QuestionSubmitRequestTest.java:310-408",
+    "wire": "Independent Arrays.fill spaces and literal offsets0/4096/4132,length4144; header256,total4400",
+    "HMACExpected": "Separate DataOutputStreamLP/U32 BE from SS324, magic SCHUBERT-NK-OP1, owner/layout/version/target/field count/name/type/body, standard JCE expected vs actual FingerprintKeyRing",
+    "expectedNotGeneratedByProductionCanonicalSerializer": true,
+    "limits": "Both actual and independent expected use standard JCE primitive; independent serialization is reviewed, not executed. Public synthetic key only; no real key material read or exported.",
+    "scopeOwnership": "TWR closes request/canonical/keyring, finally closes request/copies; no proof all caller buffers/JVM Strings physically erased"
+  },
+  "cases": [
+    {
+      "testId": "PT-QST-SUB001",
+      "method": "literalWireAndCanonical",
+      "sourceSpan": [
+        55,
+        65
+      ],
+      "design": "UI236§7/SS323§9.6/SS324§3",
+      "inputDescription": "手書きDATA4144、本文先頭4096・token36・reserved12、Q/A header",
+      "independentExpected": "本文clone、別keyのtoken、owner十進/layout/version/QUESTION:NEW/question/X1の固定順。独立LP/JCE oracleとdigest一致",
+      "oracleOrigin": "SSの列順をcheck()で独立にDataOutputStreamへ構築。Production FingerprintKeyRingはactual側のみ",
+      "mainScope": "decode/header/operationToken/copyQuestion/canonical/close",
+      "originalTestSideEffects": [
+        "codec",
+        "public-synthetic-key JCE when original Test runs"
+      ],
+      "residualLimit": "実認証/Inbox NEW/受付・Queue送達は対象外",
+      "staticReview": "PERFORMED_WITH_EXPLICIT_LIMITS",
+      "staticOracleReuse": "REUSABLE_FOR_NAMED_INPUT_RELATION_WITH_LIMITS",
+      "currentExecutionEvidence": "NOT_QUALIFIED",
+      "newPTPass": false,
+      "executionExempt": false
+    },
+    {
+      "testId": "PT-QST-SUB002",
+      "method": "byteAndUnicodeBoundaries",
+      "sourceSpan": [
+        67,
+        88
+      ],
+      "design": "UI236:162/SS323:236",
+      "inputDescription": "ASCII1/4096、2byte文字2048、4byte文字1024、先頭space/末尾全角space。空/control/NFC非正規/malformedUTF8/長さ不整合",
+      "independentExpected": "正規の1..4096byteを保持、空・CR/LF/TAB/NUL・decomposed・malformed・DATA4145を拒否",
+      "oracleOrigin": "固定文字/個数と標準UTF8定義、UI byte境界。期待をdecodeの結果から生成しない",
+      "mainScope": "decode/copyQuestion/canonical/close",
+      "originalTestSideEffects": [
+        "codec",
+        "JCE through check on successful originals"
+      ],
+      "residualLimit": "DATAのASCII末尾spaceとpaddingは同byteになるためa+spaceはwire上aへ復号。同じことをUI入力許容へ拡大しない。4097本文はhelper overflowで作らず、本Testでの独立encode境界証拠と呼ばない",
+      "staticReview": "PERFORMED_WITH_EXPLICIT_LIMITS",
+      "staticOracleReuse": "REUSABLE_FOR_NAMED_INPUT_RELATION_WITH_LIMITS",
+      "currentExecutionEvidence": "NOT_QUALIFIED",
+      "newPTPass": false,
+      "executionExempt": false
+    },
+    {
+      "testId": "PT-QST-SUB003",
+      "method": "protocolRejection",
+      "sourceSpan": [
+        90,
+        136
+      ],
+      "design": "UI236§7/SS323§9.6/共通header契約",
+      "inputDescription": "別layout、version2、internal/synchronous、DATA4143、record1、reserved12各byte、UUIDの先頭/区切/末尾破損",
+      "independentExpected": "対象外layout/型/長さ・record・reserved・UUIDを拒否、固定redactedエラー/cause null/suppressed0",
+      "oracleOrigin": "Golden offset4096/4132/4144と宣言例外。invalid()のexpected文字は固定literal",
+      "mainScope": "decodeおよびmessage()のCommonHeader/WireMessage構築",
+      "originalTestSideEffects": [
+        "codec"
+      ],
+      "residualLimit": "version/internalの二assertはmessage()構築が先に拒否し得る。これをdecode本体の分岐実測に付け替えない。constructor型とdecode固定例外を区別",
+      "staticReview": "PERFORMED_WITH_EXPLICIT_LIMITS",
+      "staticOracleReuse": "REUSABLE_FOR_NAMED_INPUT_RELATION_WITH_LIMITS",
+      "currentExecutionEvidence": "NOT_QUALIFIED",
+      "newPTPass": false,
+      "executionExempt": false
+    },
+    {
+      "testId": "PT-QST-SUB004",
+      "method": "fingerprintBinding",
+      "sourceSpan": [
+        138,
+        163
+      ],
+      "design": "SS323:234/SS324:51-65",
+      "inputDescription": "同本文/ownerでtoken/header ID/time/contextを変更、別本文、別userId、同userIdのname/role変更",
+      "independentExpected": "token/header metadata/name/roleの違いは同一canonical、本文又はuserId相違は異なるcanonical fingerprint",
+      "oracleOrigin": "等値/非等値はSSのmetamorphic関係として独立に決定。check(second)は別LP/JCEの具体oracle anchor",
+      "mainScope": "canonical/close",
+      "originalTestSideEffects": [
+        "JCE",
+        "FingerprintKeyRing only on actual path when Test runs"
+      ],
+      "residualLimit": "hash同士の関係比較を全variantの独立golden digestと呼ばない。変更body/ownerの具体numeric vectorはこのmethodで直接assertされない。認可/role許可の実証でない",
+      "staticReview": "PERFORMED_WITH_EXPLICIT_LIMITS",
+      "staticOracleReuse": "REUSABLE_FOR_NAMED_INPUT_RELATION_WITH_LIMITS",
+      "currentExecutionEvidence": "NOT_QUALIFIED",
+      "newPTPass": false,
+      "executionExempt": false
+    },
+    {
+      "testId": "PT-QST-SUB005",
+      "method": "ownershipAndClose",
+      "sourceSpan": [
+        165,
+        211
+      ],
+      "design": "SS323:236/SS324:65/CanonicalRequest close契約",
+      "inputDescription": "元wire配列/返却char/返却canonical配列を改変、request二度close、別canonicalを保持、canonical単体close",
+      "independentExpected": "各所有bufferは独立、閉鎖済業務accessは固定IllegalState、toString固定redacted、canonical単体close後はbyte6のzero、他所有request/別canonicalは保持",
+      "oracleOrigin": "public固定本文/独立new byte[6]/固定例外文、Mainのcopy/zero/lockは別のsource対応点検",
+      "mainScope": "copyQuestion/canonical/ensureOpen/close/toString",
+      "originalTestSideEffects": [
+        "memory only in original method body"
+      ],
+      "residualLimit": "request内部char zeroはMain sourceを確認するがprivate reflection/heap測定なし。String DTOや呼出側wire全メモリ消去の証拠でない",
+      "staticReview": "PERFORMED_WITH_EXPLICIT_LIMITS",
+      "staticOracleReuse": "REUSABLE_FOR_NAMED_INPUT_RELATION_WITH_LIMITS",
+      "currentExecutionEvidence": "NOT_QUALIFIED",
+      "newPTPass": false,
+      "executionExempt": false
+    },
+    {
+      "testId": "PT-QST-SUB006",
+      "method": "nullContracts",
+      "sourceSpan": [
+        213,
+        225
+      ],
+      "design": "SS323§9.6/451 null契約",
+      "inputDescription": "decode(null)、open canonical(null)、close後canonical(null)",
+      "independentExpected": "open時必須nullはfailfast、close後はclosed判定を優先してIllegalState。NPE catchして正常化しない",
+      "oracleOrigin": "固定入力nullと宣言例外型。MainはObjects.requireNonNullとensureOpenの順",
+      "mainScope": "decode/canonical/ensureOpen/close",
+      "originalTestSideEffects": [
+        "memory only"
+      ],
+      "residualLimit": "必須nullの期待拒否と全NPE排除の正式品質を同一視しない。他DB/config/collection全境界の代替ではない",
+      "staticReview": "PERFORMED_WITH_EXPLICIT_LIMITS",
+      "staticOracleReuse": "REUSABLE_FOR_NAMED_INPUT_RELATION_WITH_LIMITS",
+      "currentExecutionEvidence": "NOT_QUALIFIED",
+      "newPTPass": false,
+      "executionExempt": false
+    },
+    {
+      "testId": "PT-QST-SUB007",
+      "method": "concurrentScopes",
+      "sourceSpan": [
+        227,
+        290
+      ],
+      "design": "SS323:236 private lock/owned scopes",
+      "inputDescription": "原Testは8worker/64独立要求、外部synchronized(shared)中の読取、latchでcanonicalとclose競合",
+      "independentExpected": "各public-indexが混線しない、外部monitor非依存、競合は完全canonical又は閉鎖拒否の二結果のみ、終了後access拒否",
+      "oracleOrigin": "indexと固定shared bytes/complete|closed集合・fixed messageを独立に定義",
+      "mainScope": "decode/copyQuestion/canonical/close",
+      "originalTestSideEffects": [
+        "owned executor/futures/latch when original Test runs",
+        "JCE through check"
+      ],
+      "residualLimit": "現在は読取のみでworker/timeoutは実測0。原Testの5/10秒boundは実Root期限でない。部分bufferが無いことの動的証拠は当source未取得",
+      "staticReview": "PERFORMED_WITH_EXPLICIT_LIMITS",
+      "staticOracleReuse": "REUSABLE_FOR_NAMED_INPUT_RELATION_WITH_LIMITS",
+      "currentExecutionEvidence": "NOT_QUALIFIED",
+      "newPTPass": false,
+      "executionExempt": false
+    },
+    {
+      "testId": "PT-QST-SUB008",
+      "method": "publicEvidenceAndRedaction",
+      "sourceSpan": [
+        292,
+        308
+      ],
+      "design": "SS323:236/SS324:65/既2141 trace契約",
+      "inputDescription": "request/canonicalのredactionとcheck()、原Testはtarget/question-submit-tracesに固定metadataをwrite",
+      "independentExpected": "requestは固定REDACTED、canonical文字に本文/tokenなし。保存文字はlayout/長さ/field名のみ",
+      "oracleOrigin": "固定literalとSS。check()は独立LP/JCE、ファイル内容自体は手書き宣言であり動的外部観測ではない",
+      "mainScope": "canonical/toString/closeおよびTest内Files呼出",
+      "originalTestSideEffects": [
+        "JCE when original Test runs",
+        "createDirectories/writeString when original Test runs"
+      ],
+      "residualLimit": "本Sはfile/crypto操作を実行0。固定trace文面だけで副作用全域/秘密canary0/Current適合の証明にしない",
+      "staticReview": "PERFORMED_WITH_EXPLICIT_LIMITS",
+      "staticOracleReuse": "REUSABLE_FOR_NAMED_INPUT_RELATION_WITH_LIMITS",
+      "currentExecutionEvidence": "NOT_QUALIFIED",
+      "newPTPass": false,
+      "executionExempt": false
+    }
+  ],
+  "historicalReuse": {
+    "source": "9b255cbe300d1feffeeee076cfa5af318c9b1bb1",
+    "reference": "2141/2142,11042 original16,11043 independent recovery; old parent1 remains1, old XML success remains historical",
+    "mainAndTestWholeBytesSame": true,
+    "proofReceipt": "926659/a1eb3c",
+    "staticOracleOrContractReuse": true,
+    "oldRuntimeTransferredToCurrent": false,
+    "old46L9M1C4BNotImported": true,
+    "transitiveCurrentSourceQualification": "NOT_ESTABLISHED",
+    "needsCurrentSourceRuntimeProof": true
+  },
+  "sameNameComparison": [
+    {
+      "method": "concurrentScopes",
+      "existingClasses": [
+        "dev.codex.schubert.nk.storage.ResourceScopeTest"
+      ],
+      "meaning": "Storage resource contract is not QuestionSubmit wire/HMAC/canonical ownership; no same fixture/oracle proof"
+    },
+    {
+      "method": "nullContracts",
+      "existingClasses": [
+        "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest"
+      ],
+      "meaning": "Different SUT, data and null boundaries; no alias/dedup/reuse"
+    }
+  ],
+  "result": {
+    "declarationsReviewed": 8,
+    "unmeasuredSourceStaticallyReviewed": 1,
+    "staticContractReview": "COMPLETE_FOR_LISTED_EIGHT_WITH_LIMITS",
+    "dynamicPT": "NOT_EXECUTED_HOLD_UNCHANGED",
+    "newPassedTests": 0,
+    "newCoverage": 0,
+    "newAcceptedCriteria": 0,
+    "currentOrdinaryReferenceCountUnchanged": 2806,
+    "VStarted": false
+  },
+  "nextIndependentWork": "Same SS323/324/UI234235236 read-only review of ScenarioRequestTest3/MediaRequestTest3/QuestionQueryRequestTest2; no Test execution or crypto/DB/filesystem fixture action; same S pool.",
+  "gateDecision": "CONTINUE_NOT_FINAL"
+}

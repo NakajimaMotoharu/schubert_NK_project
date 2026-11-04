@@ -1,0 +1,211 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S",
+  "costOwner": "WBS-K03.02",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "designCommit": "7147c428bb9d619d88139947294bc3e8d95c4b62",
+  "method": "STATIC_SEMANTIC_CONTRACT_REVIEW_NOT_PT_ALTERNATIVE_OR_PASS",
+  "sourcePins": {
+    "main": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java",
+      "sha256": "453a743084bbbe3d8cd859db1246faee5c27af1cc3f46484cb1ea07e98baee51"
+    },
+    "test": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationServiceTest.java",
+      "sha256": "be9dd86bd0244c79a60b66354c901371f5acae529ce000b6096d89c98b9d1985"
+    },
+    "currentProductionWholeBytesVerified": true,
+    "receipt": "b2dfc8"
+  },
+  "testHeaderId": "PT-AUT-004-01..06はheader表記。実際8methodをexact class#methodで区別し、独自に連番IDへ改名しない",
+  "records": [
+    {
+      "actualProductOrTestExecution": false,
+      "currentPassAdded": 0,
+      "refusalAssigned": false,
+      "currentCaseReference": "MISSING_NOT_PROOF_OF_NEVER_EXECUTED",
+      "oracleReview": "STATIC_ONLY",
+      "owner": "WBS-P007-01",
+      "id": "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#realPasswordSuccessClearsCountersIssuesContextAndAuditsAtomically",
+      "method": "realPasswordSuccessClearsCountersIssuesContextAndAuditsAtomically",
+      "span": [
+        125,
+        205
+      ],
+      "input": "合成ADMIN user7、user/IP失敗2、明示transaction、独立JCA PBKDF2合成fixture",
+      "expected": "成功actor7/ADMIN、issued=NOW、expires=NOW+8h、手書JST wire。別connectionで未commit session/audit0・旧counter2→rollback、再実行commit後session1/counter0/window NULL/last_login更新。SECURITY INFO LOGIN_SUCCEEDEDとcode0000/reason/outcomeをSQL後条件で検査",
+      "oracle": "SS314§5.1/6.1/§11、UI226§4/5、UI234Login response。expectedはPasswordHasher.encode/発行結果の再計算から作らない",
+      "limits": "DB/JCA/crypto/session発行/複数TX。Testの認証成功は外部Caddy由来client検証やInbox再送を含まない"
+    },
+    {
+      "actualProductOrTestExecution": false,
+      "currentPassAdded": 0,
+      "refusalAssigned": false,
+      "currentCaseReference": "MISSING_NOT_PROOF_OF_NEVER_EXECUTED",
+      "oracleReview": "STATIC_ONLY",
+      "owner": "WBS-P007-01",
+      "id": "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#absentDisabledAndWrongPasswordHaveSameFailureShapeAndDummyWork",
+      "method": "absentDisabledAndWrongPasswordHaveSameFailureShapeAndDummyWork",
+      "span": [
+        207,
+        260
+      ],
+      "input": "不存在/disabled/wrong password、呼出回数spy、常にtrueのpassword double",
+      "expected": "全0101/retry0/password zero、hash判定各1回、active wrongだけ実保存hash・他は同workfactor dummy。IPfailed1、既userだけuserfailed1、session0、WARN LOGIN_FAILED。alwaysTrueでも不在/disabledを許可しない",
+      "oracle": "SS314§5.1/username比較と存在非開示、UI226§4。固定SQL数・結果code・spyにより独立に定義",
+      "limits": "同message/same workfactorの確認であり実CPU timing同一やIT/ST性能を保証しない"
+    },
+    {
+      "actualProductOrTestExecution": false,
+      "currentPassAdded": 0,
+      "refusalAssigned": false,
+      "currentCaseReference": "MISSING_NOT_PROOF_OF_NEVER_EXECUTED",
+      "oracleReview": "STATIC_ONLY",
+      "owner": "WBS-P007-01",
+      "id": "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#unicodeKeyMigrationAcceptsNinetySixBytesButAuditsTheSixtyFourByteDisplay",
+      "method": "unicodeKeyMigrationAcceptsNinetySixBytesButAuditsTheSixtyFourByteDisplay",
+      "span": [
+        262,
+        352
+      ],
+      "input": "U+0130×32表示64UTF8byte→Locale.ROOT小文字i+combiningdot×32比較96byte。旧64byte constraint再構成→V007",
+      "expected": "旧check23514→V007後比較key95/96許可、空/97・表示65拒否23514、NULL23502、重複23505。Login成功/失敗ともaudit表示64byte・key96byte、session1/failed1",
+      "oracle": "SS331 app_users username/username_key1..96及びSSC014、UI226§3/4。SQLSTATE/byte数はliteral期待値",
+      "limits": "実行時はadmin connection/set role nk_owner/ALTER TABLE/V007読取実行/fixtureDB mutationを含む。単なる文字value Testとして独立実行可とはしない"
+    },
+    {
+      "actualProductOrTestExecution": false,
+      "currentPassAdded": 0,
+      "refusalAssigned": false,
+      "currentCaseReference": "MISSING_NOT_PROOF_OF_NEVER_EXECUTED",
+      "oracleReview": "STATIC_ONLY",
+      "owner": "WBS-P007-01",
+      "id": "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#thresholdRequestLocksImmediatelyAndLockedRequestsDoNotHashOrExtend",
+      "method": "thresholdRequestLocksImmediatelyAndLockedRequestsDoNotHashOrExtend",
+      "span": [
+        354,
+        411
+      ],
+      "input": "user5回/IP10回、lock後30秒、二lock期限、1.000001秒の端数、900秒一致",
+      "expected": "第5/10要求から0106/900、lock継続時hash呼出増0/counter不変/期限非延長、30秒後870、後期限採用・cap900、端数ceil2。lock終了一致ではhash再開だが窓終了一致は旧窓なので失敗時relock",
+      "oracle": "SS314§5.1.1 strict窓外 now>start+15分、lock有効until>now、§5.2 ceil cap900、UI2265/10回",
+      "limits": "このTestは全15分境界±1µsの組合せ網羅ではない。LoginAttemptState側の別試験との対応が残る"
+    },
+    {
+      "actualProductOrTestExecution": false,
+      "currentPassAdded": 0,
+      "refusalAssigned": false,
+      "currentCaseReference": "MISSING_NOT_PROOF_OF_NEVER_EXECUTED",
+      "oracleReview": "STATIC_ONLY",
+      "owner": "WBS-P007-01",
+      "id": "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#sessionOrAuditFaultRollsBackSuccessAndFailureWithoutLeakingInput",
+      "method": "sessionOrAuditFaultRollsBackSuccessAndFailureWithoutLeakingInput",
+      "span": [
+        413,
+        503
+      ],
+      "input": "audit prepare/zero/after/close、session insert/after/getAutoCommit、closed codec、二合成Runtime障害",
+      "expected": "固定Infrastructure message/cause null/suppressed0、password zero/借用connection未close、caller rollback後usercounter/IProw/session/audit全0。after-write faultもrollbackを検査",
+      "oracle": "SS314§5.1原子性/監査必須、SS332TX、redaction。assertInfrastructureは固定catalogを検査、assertEmptyTransactionEffectsは独立SQL",
+      "limits": "JDBC Proxyは実Connection/Statementへ反射委譲するためDBなしとは扱わない。productが自動rollbackした証明ではなくcaller rollback契約。cause graph/fatal追加契約は別試験"
+    },
+    {
+      "actualProductOrTestExecution": false,
+      "currentPassAdded": 0,
+      "refusalAssigned": false,
+      "currentCaseReference": "MISSING_NOT_PROOF_OF_NEVER_EXECUTED",
+      "oracleReview": "STATIC_ONLY",
+      "owner": "WBS-P007-01",
+      "id": "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#threeSuccessfulLoginsAndConcurrentAttemptsKeepDatabaseInvariants",
+      "method": "threeSuccessfulLoginsAndConcurrentAttemptsKeepDatabaseInvariants",
+      "span": [
+        505,
+        572
+      ],
+      "input": "明示異時刻3Login、固定password doubleで12並行成功+20並行失敗",
+      "expected": "3件目で最初REPLACED・active2・監査login3/revoke1。fresh fixture12成功commit後全session12/active2、20失敗はinvalid4/locked16、最終failed5・LOGIN32・REPLACED10。revoked履歴を消す期待ではない",
+      "oracle": "SS314SSC267/§6.1最大2・last_accessed_at,id最古、UI226DIF016。12-2=10は保持sessionと監査の独立後条件",
+      "limits": "doubleはDB状態遷移を分離する承認済み設計。実crypto同時性能/12成功の一般外部保証ではない。DB/timing/worker/fixture起動を本Sで実行0"
+    },
+    {
+      "actualProductOrTestExecution": false,
+      "currentPassAdded": 0,
+      "refusalAssigned": false,
+      "currentCaseReference": "MISSING_NOT_PROOF_OF_NEVER_EXECUTED",
+      "oracleReview": "STATIC_ONLY",
+      "owner": "WBS-P007-01",
+      "id": "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#databaseTimeoutRollsBackWithoutSessionCounterOrAuditAndConsumesPassword",
+      "method": "databaseTimeoutRollsBackWithoutSessionCounterOrAuditAndConsumesPassword",
+      "span": [
+        574,
+        618
+      ],
+      "input": "API role statement1500ms/lock500msを先確認、別TXでuser7行FOR UPDATE保持",
+      "expected": "固定Infrastructure失敗/password zero、両TX rollback後session/audit/IProw/counter全0。timeoutをLogin成功やflaky除外にしない",
+      "oracle": "SS314SSC267/§5.1DBtimeout9000とcounter不増、SS332role timeout。固定設定・SQL後条件で期待値を独立化",
+      "limits": "実DB blocker lock操作。延長/迂回せずHOLD維持。ここは例外変換境界であり外部9000 wire生成の全証明ではない"
+    },
+    {
+      "actualProductOrTestExecution": false,
+      "currentPassAdded": 0,
+      "refusalAssigned": false,
+      "currentCaseReference": "MISSING_NOT_PROOF_OF_NEVER_EXECUTED",
+      "oracleReview": "STATIC_ONLY",
+      "owner": "WBS-P007-01",
+      "id": "dev.codex.schubert.nk.api.security.AuthenticationServiceTest#nullInvalidInputsAndOutcomeInvariantsAreRejectedAndConsumed",
+      "method": "nullInvalidInputsAndOutcomeInvariantsAreRejectedAndConsumed",
+      "span": [
+        620,
+        705
+      ],
+      "input": "constructor4依存null/二password overload、六authenticate引数null/password null、unsupported fixturehash、結果invariant",
+      "expected": "必須null failfastNPE、保持password全zero、非null未知hashInfrastructure/rollback後DB不変。Failure code0101/0106限定・0101retry0・lock1..900、Success actorID/issuedID一致必須",
+      "oracle": "規約null契約、SS314/ResultCode。全enumを禁止code選定へ使用するが許可0101/0106はTest内literal固定",
+      "limits": "class lifecycleはDB/JCA/cryptoを起動する。null-only部分抽出を実行許可としない。NPE catchで正常扱いする実装ではない"
+    }
+  ],
+  "readReceipts": [
+    "57c014",
+    "861ea5",
+    "647cdd",
+    "775d8d",
+    "69c5f0",
+    "025201",
+    "2ed0a1",
+    "6370c8",
+    "f88e1e",
+    "b2dfc8"
+  ],
+  "sourceCurrentMeasuredSubset": {
+    "status": "PARTIAL",
+    "counters": {
+      "LINE": {
+        "covered": 36,
+        "missed": 18
+      },
+      "METHOD": {
+        "covered": 4,
+        "missed": 1
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 10,
+        "missed": 14
+      }
+    },
+    "post": "PG17742-auth-borrowed-boundary-three-post-v1",
+    "postSha256": "f1082ea1d6aa3d8aad341dd00a03dde5f61b8bb1562bce759ab1304576af22bf",
+    "semanticReviewOfThatPost": "NEXT_NOT_COMPLETED_IN_THIS_FILE"
+  },
+  "actualFixtureCreated": false,
+  "actualDbOrCryptoActions": 0,
+  "newPass": 0,
+  "newCoverage": 0,
+  "newAcceptedCriteria": 0,
+  "wholeParentLeafAccepted": false,
+  "interpretation": "8methodのoracle・副作用・後条件を確認した静的計画成果。DBという字句で一律拒否せず、実際のlifecycle/TX/DDL/workerの根拠を示す。HOLD解除/実行PT代替PASSへ変換しない。",
+  "nextIndependentOperation": "既現source PG17742三件の限定境界証拠を照合し、正常認証・実DB未達と切り分ける。次にfamily別に未参照Testと既証拠の意味対応を追加する。"
+}

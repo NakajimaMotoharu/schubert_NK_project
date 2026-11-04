@@ -1,0 +1,220 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S",
+  "costOwner": "WBS-K03.02",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "designCommit": "7147c428bb9d619d88139947294bc3e8d95c4b62",
+  "method": "STATIC_SEMANTIC_CONTRACT_REVIEW_NOT_PT_ALTERNATIVE_OR_PASS",
+  "historical": {
+    "source": "9b255cbe300d1feffeeee076cfa5af318c9b1bb1",
+    "reference": "2141/2142 source-specific original16 methods, parent1 and independent11043 preserved",
+    "currentMainAndTestWholeBytesSameForEachThree": true,
+    "receipt": "b6d660",
+    "currentRuntimeRequalification": false
+  },
+  "records": [
+    {
+      "testId": "PT-SCN-009-Q01",
+      "method": "sixLayoutsHaveIndependentCanonicalVectors",
+      "span": [
+        41,
+        79
+      ],
+      "SUT": "ScenarioRequest.decode/canonical",
+      "owner": "WBS-P008-01",
+      "design": "UI234§6/7及びScenario各request、SS323§9.1/SS324§3",
+      "input": "GAM0/SPK12/RTE12/SCF14/SCN12/SRC672。optional game NULL、leading space/%/_/NFC多byte、literalDATA offset0/256/268/396/652/662/663",
+      "expected": "SS323順の0/1/2/8field、X1 NFC原値・N1 paddingなし十進。owner101/version001/REQUEST:layout、metadata除外、独立LP/JCE digest",
+      "oracle": "Field record列は手書きSS表、別DataOutputStreamでLP/U32とpublic合成key。Production canonical serializerをexpectedへ使わない",
+      "residual": "SQL query/DB表示・page実補正・file/JMS/認証は未実行。fixture UUID乱数はfingerprintに不使用、乱数が無いとの主張でない",
+      "staticReviewPerformed": true,
+      "actualProductOrTestExecution": false,
+      "oldRuntimeTransferred": false,
+      "currentPassAdded": 0,
+      "sideEffects": "Only fixed public source/document/Git text read; original fixtures/crypto/DB are not invoked"
+    },
+    {
+      "testId": "PT-SCN-009-Q02",
+      "method": "optionalAndNumericBoundariesPreserveFieldPresenceAndRequestValues",
+      "span": [
+        81,
+        132
+      ],
+      "SUT": "ScenarioRequest.canonical/CanonicalField",
+      "owner": "WBS-P008-01",
+      "design": "SS323§9.1/SS324:47-64/UI234§7",
+      "input": "全optional欠落、最大256/128/256byte、page999999/size100、prefix00/99、ID1/999999999999",
+      "expected": "NULL LP FFFFFFFFとemptyを区別、optional列を落とさず、pageは要求999999のまま拘束、prefix/IDは0/99/1等の標準十進",
+      "oracle": "固定field表と標準UTF8/Long表現・別LP/JCE。expectedはRepository最終pageから生成しない",
+      "residual": "この二値prefix/ID境界が全enum・全文字・実SQL後条件を網羅したとはしない",
+      "staticReviewPerformed": true,
+      "actualProductOrTestExecution": false,
+      "oldRuntimeTransferred": false,
+      "currentPassAdded": 0,
+      "sideEffects": "Only fixed public source/document/Git text read; original fixtures/crypto/DB are not invoked"
+    },
+    {
+      "testId": "PT-SCN-009-Q03",
+      "method": "malformedNullAndOutcomeBoundariesNeverBecomeQueries",
+      "span": [
+        134,
+        177
+      ],
+      "SUT": "ScenarioRequest.decode/query null boundaries; ScenarioQuerySnapshot null constructors",
+      "owner": "WBS-P008-01",
+      "design": "SS323§9.1、UI234長さ/enum/NFC/page契約",
+      "input": "null/unknownlayout、data長±1、unknown enum/decomposed/malformedUTF8、ID0/page0/size99/101。全callがAssertionErrorのJDBC proxyとnull引数",
+      "expected": "固定redacted PermanentProtocolException/cause null/suppressed0、必須null NPE、nullquery時JDBC callbackに到達しない",
+      "oracle": "literalinvalid値と固定例外。Main queryはrepository/connection/actorのnullをswitch前検査するsource対応",
+      "residual": "JDBC proxyは本Sで作成も実行も0。原Testでも実Repositoryの正常query/SQL・query snapshotの内容を検証しない",
+      "staticReviewPerformed": true,
+      "actualProductOrTestExecution": false,
+      "oldRuntimeTransferred": false,
+      "currentPassAdded": 0,
+      "sideEffects": "Only fixed public source/document/Git text read; original fixtures/crypto/DB are not invoked"
+    },
+    {
+      "testId": "PT-MED-033",
+      "method": "med033CanonicalFactoriesNormalizeOwnAndEraseBytes",
+      "span": [
+        39,
+        70
+      ],
+      "SUT": "CanonicalField.text/number/value/close（MediaRequest本体ではない）",
+      "owner": "WBS-P006-01",
+      "referenceOwner": "WBS-P009-01",
+      "design": "SS323§9.2/SS324§3、CanonicalFieldNKOP1共有契約",
+      "input": "decomposed accented文字の前後space、long min/0/max、nullと不正field metadata",
+      "expected": "NFC UTF8の独立literalbyte列、X1/N1、clone不変、close後同長zero、必須null/不正metadata拒否",
+      "oracle": "手書きbyte 32/C3/A9/32・標準long文字列表現・new byte[length]で、Production normalizeをexpected生成に使わない",
+      "residual": "共通Sourceの既証拠参照。これをMediaRequestのquery/descriptor検証又は新製造へ加算しない",
+      "staticReviewPerformed": true,
+      "actualProductOrTestExecution": false,
+      "oldRuntimeTransferred": false,
+      "currentPassAdded": 0,
+      "sideEffects": "Only fixed public source/document/Git text read; original fixtures/crypto/DB are not invoked"
+    },
+    {
+      "testId": "PT-MED-034",
+      "method": "med034EightLayoutsHaveIndependentCanonicalFingerprints",
+      "span": [
+        72,
+        109
+      ],
+      "SUT": "MediaRequest.decode/header/responseLayoutId/canonical",
+      "owner": "WBS-P009-01",
+      "design": "UI235の八request/SS323§9.2/SS324§3",
+      "input": "AUD16/ANM0/ANL16/VID64/MCT0/MCS64/MTR192/MED72。IDs1/700/12digitmax、I/A、MAIN/OVA、NFCleading-space、max64/128",
+      "expected": "eight-layout別SS列順/name/type、必須field全て、owner101/version001、header不変・対応RSP、別LP/JCE digest、canonical closeでfieldzero",
+      "oracle": "各TestのField列とUI長さ・標準N1から独立構築、REQRSP変換expectedはinput IDの明示対応でありSUT戻り値ではない",
+      "residual": "descriptor物理manifest/hash/realRange・実SQLは未実施。loop値が全wire enum/未知値を網羅するとの宣言0",
+      "staticReviewPerformed": true,
+      "actualProductOrTestExecution": false,
+      "oldRuntimeTransferred": false,
+      "currentPassAdded": 0,
+      "sideEffects": "Only fixed public source/document/Git text read; original fixtures/crypto/DB are not invoked"
+    },
+    {
+      "testId": "PT-MED-035",
+      "method": "med035MalformedNullAndUnknownRequestsNeverReachQueries",
+      "span": [
+        111,
+        157
+      ],
+      "SUT": "MediaRequest.decode/query null",
+      "owner": "WBS-P009-01",
+      "design": "UI235/SS323§9.2 strictDATA/enum/ID/reserved/null",
+      "input": "wrongREQ/RSP/layout、全八data長±1、非empty必須欄欠落、不正UTF8/ID0/dispositionZ/category/非NFC/reserved破損、JDBCneverproxy/null",
+      "expected": "固定永久拒否/cause null/suppressed0、必須nullはswitch/query前拒否、queryへ送る正常JDBC呼出なし",
+      "oracle": "field位置やliteralinvalid値をUIから固定し、Main null順序とassertionを対応付ける",
+      "residual": "nullguard以外の三descriptorの不在と障害区別・sourceSQL後条件はこのmethodで未証明",
+      "staticReviewPerformed": true,
+      "actualProductOrTestExecution": false,
+      "oldRuntimeTransferred": false,
+      "currentPassAdded": 0,
+      "sideEffects": "Only fixed public source/document/Git text read; original fixtures/crypto/DB are not invoked"
+    },
+    {
+      "testId": "PT-QRY009/PT-NTF009",
+      "method": "qry009CanonicalFieldsNullAndAllLayoutsUseIndependentJce",
+      "span": [
+        44,
+        133
+      ],
+      "SUT": "QuestionQueryRequest.decode/scopes/canonical",
+      "owner": "WBS-P013-01",
+      "design": "UI236§8/9/11/12、SS324§3/SS332§3page契約、既2141のfield定義",
+      "input": "QSS384/NTS64/QSD12/NTD12、optional全欠落/設定、page999999/size50、JST17桁固定→UTCInstantliteral、USER/ADMIN同userId",
+      "expected": "QSS keyword/username/answerState/from/to/page/size、NTS type/from/to/page/size、detailID一列。NULLLPと空区別、owner1/version001/REQUEST:layout、USER/ADMIN同ownerのcanonical同一、wireコピー不変更",
+      "oracle": "names/types/valuesの手書き列と別LP/JCE。UTC日時expectedは独立固定literal。role同一性はmetamorphicで標準USER値に別JCE anchor",
+      "residual": "USERにusername指定の実検索許可を与える試験ではない（decode/canonicalのみ、認可はcaller）。正確ASCIIfield名/T1の細部はselectedSSに全literal列挙されず既PT/実装判断参照を保持し、currentMainから期待値逆生成0。正常SQL/認可全flow未証明",
+      "staticReviewPerformed": true,
+      "actualProductOrTestExecution": false,
+      "oldRuntimeTransferred": false,
+      "currentPassAdded": 0,
+      "sideEffects": "Only fixed public source/document/Git text read; original fixtures/crypto/DB are not invoked"
+    },
+    {
+      "testId": "PT-QRY010",
+      "method": "qry010MalformedNullAndRequestDependentPageAreRejected",
+      "span": [
+        135,
+        182
+      ],
+      "SUT": "QuestionQueryRequest.decode/validateResponse/query null",
+      "owner": "WBS-P013-01",
+      "design": "UI236 fixed4layout、SS332§3 effective=min(requested,totalPages)/0件page1",
+      "input": "null/foreignlayout、各bodyのNUL/short、wrongresponseUSRRSP、検索0件page1、51件/2pageなのにeffective1",
+      "expected": "必須nullとmalformed拒否、response別layout拒否、空の1/1は許容、要求999999なのに2page中effective1は拒否",
+      "oracle": "response metadataは手書きPagedResponseData values。positive layoutにSUT responseLayoutIdを使うがqry009は四対応RSPをinput由来の独立式で別assertしている",
+      "residual": "qry010はdetailの正しい/誤ID応答全分岐を構築していない。別layout拒否を正しいlayoutのwrongdetailID拒否へ転記しない。validateResponseの最終codec encodeとの契約はStatic sourceだけ",
+      "staticReviewPerformed": true,
+      "actualProductOrTestExecution": false,
+      "oldRuntimeTransferred": false,
+      "currentPassAdded": 0,
+      "sideEffects": "Only fixed public source/document/Git text read; original fixtures/crypto/DB are not invoked"
+    }
+  ],
+  "sourcePins": [
+    [
+      "ScenarioRequest",
+      "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a",
+      "08f53e616aa58369d7b7b26d671c0a60139933a77a0c68ba52178087b3ef9a15"
+    ],
+    [
+      "MediaRequest",
+      "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a",
+      "c179ee62c17e81940fb29790a0601f5be6f9c0a493689d4dbb0f2f9b9cc6aa60"
+    ],
+    [
+      "QuestionQueryRequest",
+      "7e8ed5ca4175bb673a3396612d7cb3e0f7c9aca239bd1ae8f6337155e5201181",
+      "9388f89830fff72af50ca24c30ed9508d1e417d836819755f42580d9131ff953"
+    ]
+  ],
+  "sharedFixturesRead": [
+    "ScenarioRequestFixture:literal offsets/spaces/UUID header only",
+    "MediaRequestFixture:eightliteral layouts/spaces/UUID header only",
+    "QuestionQueryRequestTest localdata384/64/12/UTCexpected",
+    "CanonicalField/CanonicalRequest ownership/close source"
+  ],
+  "findings": [
+    "Null query proxies are no-SQL assertions, not proof real database works",
+    "CanonicalField med033 is sharedcost ownerP00601, not newMediaRequest manufacturing",
+    "Role-independent hash owner does not grant USER username search",
+    "Current ordinary case identity is not inferred from same methodname",
+    "Historical source-specific runtime/coverage remains old; static expected/reference reused only"
+  ],
+  "progress": {
+    "newStaticMethodReviews": 8,
+    "totalSinceCorrection": 16,
+    "newCurrentPass": 0,
+    "newWbsAccepted": 0,
+    "newRuntimeCoverage": 0
+  },
+  "nextIndependentWork": "AuthenticationService/login attempt/audit originalTest expectations: approved5/10lock/15min, atomic transaction/owner cases; read only, no DB or crypto execution",
+  "continuationGate": {
+    "mayFinishTurn": false,
+    "reason": "SAFE_S_REMAINDER_AND_BUDGET_REMAIN"
+  }
+}

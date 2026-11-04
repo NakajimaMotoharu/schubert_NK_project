@@ -1,0 +1,142 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S",
+  "costOwner": "WBS-K03.02",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "designCommit": "7147c428bb9d619d88139947294bc3e8d95c4b62",
+  "atJST": "2026-11-04T21:44:31+09:00",
+  "method": "STATIC_SEMANTIC_REUSE_REVIEW_OF_EXISTING_CURRENT_SOURCE_PROOF",
+  "claims": {
+    "newProductTests": 0,
+    "newCoverage": 0,
+    "newWbsAcceptance": 0,
+    "oldCaseIdsRenamedToCurrent": 0,
+    "actualProductOrTestExecution": false,
+    "entireLeafAccepted": false
+  },
+  "references": [
+    {
+      "sourceUnit": "dev/codex/schubert/nk/api/application/question/QuestionQueryRequest",
+      "owner": "WBS-P013-01",
+      "post": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14762-question-sql-joint-eighteen-post-v1/manifest.json",
+      "sha256": "9653028e361d41a2b0793e485797ff93c00c4500acf9a06249a54c2f1179c84e",
+      "postRecordedExit": 0,
+      "sourceVerified": true,
+      "tests": 18,
+      "suites": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "execSha256": "c688769e7116142b5aaec605c1860bdfe7b0718dbb8f046d489678d8c2196cfb",
+      "counterCovered": {
+        "LINE": 102,
+        "METHOD": 16,
+        "CLASS": 1,
+        "BRANCH": 32
+      },
+      "allMissed": 0,
+      "currentTest": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryPlainContractTest.java",
+      "reviewReceipts": [
+        "27a1e8",
+        "14e90b",
+        "349bb1",
+        "746b34"
+      ],
+      "specification": "evidence/01_PT/018_NK-OPS-001/2763_QuestionSQL原joint18_単体テスト仕様.md",
+      "semanticCorrespondence": [
+        [
+          "plain001",
+          "旧PT-QRY-009のNULL任意field/元page999999保持を、literal name/type/NULL/N1/owner7/version001/REQUEST:layoutで確認"
+        ],
+        [
+          "plain002/plain003",
+          "UI236手書offset384/64byte→独立literalUTC09:00JST=00:00Z、全field名/型/UTF8値。expectedはProduction decoderから生成しない"
+        ],
+        [
+          "plain004",
+          "二detailのliteral response layout/field名questionId又はnotificationId/ID3/N1"
+        ],
+        [
+          "plain005",
+          "空結果effectivePage1と元canonical page999999を区別"
+        ],
+        [
+          "plain006",
+          "page0/異layout/異型/size49/count不一致拒否"
+        ],
+        [
+          "plain007",
+          "正layoutの正ID3成功、ID4拒否、質問/通知data型交差拒否。旧QRY010だけでは直接構成していなかった後条件を既current試験で確認"
+        ],
+        [
+          "plain008",
+          "null/malformed/unknownlayoutで固定例外/cause不開示。query(null,null,null)はnullguardだけで正常SQLの証明ではない"
+        ]
+      ],
+      "limits": [
+        "旧PT-QRY-009/010そのものの現source実行とはしない。旧HMAC/JCEの実行資格は移さない",
+        "SQL10件の存在と同joint runは確認したが本追補で全10件のoracle意味を再レビューしたとはしない",
+        "QuestionQueryRepositoryは同runでもLINE12/BRANCH15 missedが残る。Requestのfour100をRepository/親leaf/実DB・owner認証へ外挿しない",
+        "USER username filterの権限判断は別Repository契約。canonical値を保持することと操作権限を分離"
+      ]
+    },
+    {
+      "sourceUnit": "dev/codex/schubert/nk/api/idempotency/CanonicalField",
+      "owner": "WBS-P006-01",
+      "referenceOwner": "WBS-P009-01",
+      "post": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16084-public-canonical-aad-eight-post-v1/manifest.json",
+      "sha256": "9604d48643df5cd54cea757bb49d1f504f097b0a2f83eff1f962671408d74be9",
+      "postRecordedExit": 0,
+      "sourceVerified": true,
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "execSha256": "cf485c1a78a5ea4dfd962691f648b41d3472d533dbbaff5b4a7f17aa4c16f878",
+      "counterCovered": {
+        "LINE": 17,
+        "METHOD": 7,
+        "CLASS": 1,
+        "BRANCH": 10
+      },
+      "allMissed": 0,
+      "currentTest": "tools/quality/architecture/PublicCanonicalAadValueTest.java",
+      "reviewReceipts": [
+        "349bb1",
+        "746b34"
+      ],
+      "specification": "evidence/01_PT/018_NK-OPS-001/3086_公開CanonicalField・AAD二Source独立八_単体テスト仕様.md",
+      "semanticCorrespondence": [
+        [
+          "public001",
+          "name1..64/type1..32とASCII lexical、必須null/empty/長超過/非ASCII拒否。旧MED033 metadata正常異常の共通責務"
+        ],
+        [
+          "public002",
+          "input clone/getter clone/null対empty/close後同長zero/二回close/元input不変をliteral配列で確認"
+        ],
+        [
+          "public003",
+          "NFC UTF8 c3a9e697a5e69cac独立hex、long min/-1/0/maxの手書十進literal。Production number/textでexpectedを生成しない"
+        ],
+        [
+          "public004",
+          "合成PUBLIC_ONLYを診断へ含めず固定redacted値。全ログ/heap/暗号秘密の全消去は証明しない"
+        ]
+      ],
+      "limits": [
+        "旧MED033の現source実行に改名しない。元quality202内の既存8でordinary5786不足を8減算しない",
+        "CanonicalFieldは共有ownerP006-01。MediaRequest製造/descriptor/Range/SQL受入へ加算しない",
+        "AAD値試験の全8既成功とwhole Source counterを参照するが、本追補でpublic005..008の全意味レビューを終えたとはしない",
+        "crypto/key/auth/VM/DB操作は本追補で0"
+      ]
+    }
+  ],
+  "registry": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG18454-current3008-latest270-owner-correction-v1/manifest.json",
+    "sha256": "0662e8e2912f48ef1d5619199a22edd1bbef34dcb45c7ef69b278936b7a40d51",
+    "newUniqueCases": 0
+  },
+  "interpretation": "282未収載/2980未参照の全分類は未完。参照元Testの未参照とSUT Sourceの未測定は別軸。既current証拠を再実行せず必要部分へ結び、同名aliasや件数/費用再加算をしない。"
+}
