@@ -1,5 +1,9 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-05 返信factory限定実測
+
+662/664～667・Program005/005/006：新返信envelope四PT/26vectorがMain6b53/Testa8afで全成功。line16/method2/class1/branch6未達0・単一exec/CRC一致、生成enum標準filterとraw probes19/21を明記。新Main sidecarはport4＋設定loader10＋返信factory4の18unique/四Source、旧集計/正式/親受入へ未登録。Fixture12はTestinfra別domain。rollback全六件661は具体Temp依存でNOT_RUN/HOLD、実broker/JMS transaction/native/CHR/全451/正式1964-53・歴史17-190/工数nullの状態は維持。
+
 ## 2026-11-05 現source限定実績の追加
 
 655～659/3509～3510：API/Web設定loaderの原十PTが現Main6b53で成功。全physical二Sourceのline38/method10/class2/branch20未達0・単一exec/CRC一致、PMD raw4の局所適用性を残す。新port四PT/一Sourceは1fd3554ba公開済。両結果は旧3008/451/650へ未登録sidecar、Fixture新12はTestinfra。正式1964/53・歴史17/190・工数null、親WBS新受入0、全F03/451/V/PLAN_NOT_VALIDATED・QA054/他HOLD維持。S7/10・V報告差0/10（準備あり無償ではない）と通常共有2は分離。
