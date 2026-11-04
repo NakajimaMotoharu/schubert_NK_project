@@ -1,0 +1,33 @@
+{
+  "atJST": "2026-11-05T08:14:36.647047+09:00",
+  "bug": "BUG2263",
+  "ykt": "YKT2008",
+  "originalRed": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18634-jms-uuid-original-red-v1/manifest.json",
+    "sha256": "487ef29f5debb04e198169f821096b9bbfd41387e1ed0079f97f98fd1e094f57",
+    "actualUnitExit": 1,
+    "tests": 2,
+    "failures": 2,
+    "receipt": "14205/d56714 driver0; unit1 not PASS"
+  },
+  "static": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18636-jms-uuid-static-v1/manifest.json",
+    "sha256": "fad7d6b13961d2f61608ece8cb74ba3ffd135b499603792a1890305decd11645",
+    "receipt": "25489/efe332 driver0, compile0, PMD4/raw10 locally nonapplicable, CS0"
+  },
+  "change": "Only API/Web private parseUuid require exact lowercase UUID roundtrip before typed identity comparison; unchanged wire/parser/oracle/queue/errors/redaction; new Test7th method each uses literals, independent UI232 offsets.",
+  "mainInputs": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard.java": "68f3ac3e1ddba2e6e3afac97303a04b58b652c3cc357b4afed82d2bf85cd77ed",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoder.java": "fe609be3a5742587cfa6594691ee2c82fae3dc393e94f5fb0783113a88e21da2"
+  },
+  "testInputs": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java": "81bd71024934aeeea579560a3fd9f9863a28ad7e4d8bdaec6f2fa82166462877",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java": "e26b68f3de97575ba40842a775258679d0c630586155822c799ff167425a8b6b"
+  },
+  "plannedGreenTests": 14,
+  "completedGreenTests": 0,
+  "sourceFixed": false,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "old6bCounterTransfer": false
+}

@@ -1,0 +1,91 @@
+{
+  "actualExit": 0,
+  "sourceBefore": "bad5b8850e6c80d5fbccab8ecc09eb9f10160dc0",
+  "uncommittedMainHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard.java": "68f3ac3e1ddba2e6e3afac97303a04b58b652c3cc357b4afed82d2bf85cd77ed",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoder.java": "fe609be3a5742587cfa6594691ee2c82fae3dc393e94f5fb0783113a88e21da2",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java": "81bd71024934aeeea579560a3fd9f9863a28ad7e4d8bdaec6f2fa82166462877",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java": "e26b68f3de97575ba40842a775258679d0c630586155822c799ff167425a8b6b"
+  },
+  "scope": "FOUR_SOURCE_COMPILE_AND_FORMAT_CHECKSTYLE_PLUS_PMD_APPLICABILITY_NOT_ALL_STATIC",
+  "pmdActualExit": 4,
+  "pmdRawViolations": 10,
+  "pmdProcessingErrors": 0,
+  "pmdLocalApplicability": [
+    {
+      "file": "JmsMessageGuardTest.java",
+      "line": 199,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Thread-confined fresh fixture map; no shared concurrent access. No map lifetime crosses Test calls."
+    },
+    {
+      "file": "JmsMessageGuardTest.java",
+      "line": 213,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Thread-confined fresh fixture map; no shared concurrent access. No map lifetime crosses Test calls."
+    },
+    {
+      "file": "JmsMessageGuardTest.java",
+      "line": 219,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Thread-confined fresh fixture map; no shared concurrent access. No map lifetime crosses Test calls."
+    },
+    {
+      "file": "JmsMessageGuardTest.java",
+      "line": 236,
+      "rule": "UseProperClassLoader",
+      "reason": "Standalone JDK Proxy test uses precisely the JMS API defining loader; no J2EE/container or context-loader assembly."
+    },
+    {
+      "file": "JmsMessageGuardTest.java",
+      "line": 281,
+      "rule": "CompareObjectsWithEquals",
+      "reason": "Proxy equals intentionally implements identity with ignored == arguments[0], avoids recursive equals dispatch."
+    },
+    {
+      "file": "JmsReplyDecoderTest.java",
+      "line": 216,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Thread-confined fresh fixture map; no shared concurrent access. No map lifetime crosses Test calls."
+    },
+    {
+      "file": "JmsReplyDecoderTest.java",
+      "line": 233,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Thread-confined fresh fixture map; no shared concurrent access. No map lifetime crosses Test calls."
+    },
+    {
+      "file": "JmsReplyDecoderTest.java",
+      "line": 239,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Thread-confined fresh fixture map; no shared concurrent access. No map lifetime crosses Test calls."
+    },
+    {
+      "file": "JmsReplyDecoderTest.java",
+      "line": 256,
+      "rule": "UseProperClassLoader",
+      "reason": "Standalone JDK Proxy test uses precisely the JMS API defining loader; no J2EE/container or context-loader assembly."
+    },
+    {
+      "file": "JmsReplyDecoderTest.java",
+      "line": 298,
+      "rule": "CompareObjectsWithEquals",
+      "reason": "Proxy equals intentionally implements identity with ignored == arguments[0], avoids recursive equals dispatch."
+    }
+  ],
+  "checkstyleErrors": 0,
+  "mainPmdViolations": 0,
+  "nullAway": "NOT_RUN_YET",
+  "spotBugs": "NOT_RUN_YET",
+  "productTestsExecuted": 0,
+  "formalUpdated": false,
+  "files": {
+    "compile-exit.safe.json": "70e001089d3b98506781758bea19afa84d827374167dfed5c9a6c3c0225e736a",
+    "checkstyle-exit.safe.json": "fb1067bc87b3fb310dcd4b9da24f6d079bbf5cca80324e89a2eab553fd139112",
+    "pmd-exit.safe.json": "ba9ea4412c297f62e621485bfdeb0001e1194d5d9b945772b7895ac84bc88308",
+    "manifest.safe.json": "2a76a6af29b3f5bf570d5e49797bba094d37562ed30f84dfc8da2a3460f40992",
+    "format-exit.safe.json": "9f0f73b7e84b7f53aeec1564628a9d7650ec658188d788a265a0feb70d078ff2",
+    "checkstyle.xml": "21353691f1a1c3b110ae8908ec47d46e1260a7ed9f66be2e0789a9bd16ba7d14",
+    "pmd.xml": "9ab52c5ebf1292d8a57b24dad2d769a52b149087c0977ff1775d2beb0f7486b7"
+  }
+}

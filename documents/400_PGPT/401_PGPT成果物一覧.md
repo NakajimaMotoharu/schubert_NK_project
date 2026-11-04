@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-05: 690～693/013はWeb公開確認・decoder既6意味照合とBUG2263/YKT2008二境界canonical是正PG。原再現2failure/静的原10局所非該当を保持、修正後PT/451未実行。
+
 ## 2026-11-05 Web返信DLQの追加実測
 
 685～689・Program005/011/012：新Web八PT/126vector全成功、line49/method9/class1/branch18未達0・sameCRC/全physical一Source。追加Main sidecarは非重複38unique/七Source/七Testclass、対象counter合計line182/method34/class7/branch70未達0。旧3008/451/650へ未登録、Testinfra12は別、正式1964/53・歴史17/190・工数null/新WBS受入0とRoot/native/CHR/全451/V未受入を保持する。S7/V報告差0/施策7と通常共有3、全記録共有10pp、専有/実tokens不明は別記。

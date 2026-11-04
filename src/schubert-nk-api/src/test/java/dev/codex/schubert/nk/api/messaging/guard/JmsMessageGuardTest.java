@@ -143,6 +143,42 @@ final class JmsMessageGuardTest {
     assertRejected(with(validRequest(), EXPIRATION_FIELD, -1L), REQUEST_ROUTE);
   }
 
+  @Test
+  void identityPropertiesMustRetainExactLowercaseCanonicalUuidText() throws Exception {
+    // BUG2263/YKT2008; UI232 §6 and SS321 §8 require exact wire/property identity.
+    String messageId = "0000000a-000b-000c-000d-00000000000e";
+    String correlationId = "0000000f-0010-0011-0012-000000000013";
+    Map<String, Object> canonical =
+        with(
+            with(validRequest(), MESSAGE_ID_PROPERTY, messageId), CORRELATION_FIELD, correlationId);
+    GuardedJmsMessage accepted = GUARD.read(bytesMessage(canonical), REQUEST_ROUTE);
+    assertEquals(messageId, accepted.metadata().nkMessageId().toString());
+    assertEquals(correlationId, accepted.metadata().correlationId().toString());
+
+    String[][] aliases = {
+      {
+        "0000000A-000B-000C-000D-00000000000E",
+        "a-b-c-d-e",
+        "0000000a-b-000c-000d-00000000000e",
+        " " + messageId,
+        messageId + " "
+      },
+      {
+        "0000000F-0010-0011-0012-000000000013",
+        "f-10-11-12-13",
+        "0000000f-10-0011-0012-000000000013",
+        " " + correlationId,
+        correlationId + " "
+      }
+    };
+    String[] fields = {MESSAGE_ID_PROPERTY, CORRELATION_FIELD};
+    for (int field = 0; field < fields.length; field++) {
+      for (String alias : aliases[field]) {
+        assertRejected(with(canonical, fields[field], alias), REQUEST_ROUTE);
+      }
+    }
+  }
+
   private static Map<String, Object> validRequest() {
     Map<String, Object> values = baseValues();
     values.put(DESTINATION_FIELD, new ActiveMQQueue("nk.sync.request"));

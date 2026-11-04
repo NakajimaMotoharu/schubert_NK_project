@@ -170,6 +170,47 @@ final class JmsReplyDecoderTest {
     assertRejected(bytesMessage(with(validReply(), CORRELATION_FIELD, RESPONSE_ID)));
   }
 
+  @Test
+  void identityPropertiesMustRetainExactLowercaseCanonicalUuidText() throws Exception {
+    // Independent UI232 offsets 25/61 and §6 identity rule; no production encoder.
+    String messageId = "0000000a-000b-000c-000d-00000000000e";
+    String correlationId = "0000000f-0010-0011-0012-000000000013";
+    byte[] wire = responseWire();
+    ascii(wire, 24, messageId);
+    ascii(wire, 60, correlationId);
+    Map<String, Object> canonical =
+        with(
+            with(with(validReply(), BODY_FIELD, wire), MESSAGE_ID_PROPERTY, messageId),
+            CORRELATION_FIELD,
+            correlationId);
+    ValidatedReply accepted = DECODER.decode(bytesMessage(canonical));
+    assertArrayEquals(wire, accepted.body());
+    assertEquals(correlationId, accepted.correlationId().toString());
+
+    String[][] aliases = {
+      {
+        "0000000A-000B-000C-000D-00000000000E",
+        "a-b-c-d-e",
+        "0000000a-b-000c-000d-00000000000e",
+        " " + messageId,
+        messageId + " "
+      },
+      {
+        "0000000F-0010-0011-0012-000000000013",
+        "f-10-11-12-13",
+        "0000000f-10-0011-0012-000000000013",
+        " " + correlationId,
+        correlationId + " "
+      }
+    };
+    String[] fields = {MESSAGE_ID_PROPERTY, CORRELATION_FIELD};
+    for (int field = 0; field < fields.length; field++) {
+      for (String alias : aliases[field]) {
+        assertRejected(bytesMessage(with(canonical, fields[field], alias)));
+      }
+    }
+  }
+
   private static Map<String, Object> validReply() {
     byte[] body = responseWire();
     Map<String, Object> values = new HashMap<>();

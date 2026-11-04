@@ -1,0 +1,102 @@
+{
+  "atJST": "2026-11-05T08:09:10.235690+09:00",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "actualExit": 0,
+  "mode": "READ_ONLY_SEMANTIC_EVIDENCE_REUSE",
+  "sourceEvidenceRefs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15648-lgs-reply-fourteen-post-v1/manifest.json",
+      "sha256": "0580200b2aed01476d1e95274c7ac6be29708ea822542a56f6bcf4a4978df705",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+    }
+  ],
+  "originalRawManifestSha256": "37640508e3b47f8c7ce1eb96221240e57d4555c5cb41e24a88e7205763c16858",
+  "xml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15648-lgs-reply-fourteen-post-v1/TEST-dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest.xml",
+    "sha256": "7797ce7b3cd62207c990d9ba2a167fddc2c76be2be72c5acf56a37922078ae2e",
+    "cases": 6
+  },
+  "sourcePins": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoder.java",
+      "sha256": "f6d03f1809ddd5d58df0c9a0b670be35e5884b8d10d30b42ada40a5f0285c78f"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ValidatedReply.java",
+      "sha256": "5003b09aff1093dab0f672518d1962d5b2a9f0b95698d11d0295639ebe3b3a54"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+      "sha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+    }
+  ],
+  "caseReviews": [
+    {
+      "testId": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest#acceptanceReplyUsesExactRegisteredAsyncProfile",
+      "independentOracle": "UI233 IF025: QSB response kind S/interaction A/data64/total320; literal header offsets UI232, responseId/correlation distinct; rejects S/I/Q/layout/id/route and false A on LOGRSP. Explicit arrays independent of encoder.",
+      "status": "EXISTING_CASE_ORACLE_REVIEWED_NOT_NEW_PASS"
+    },
+    {
+      "testId": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest#validReplyProducesAnImmutableRedactedResult",
+      "independentOracle": "UI233 LOGRSP S/S/data24/total280; independent literal array. Retains0200 body unchanged; mutations to provider and returned buffers cannot change captured reply; null record arguments rejected; body redacted in toString.",
+      "status": "EXISTING_CASE_ORACLE_REVIEWED_NOT_NEW_PASS"
+    },
+    {
+      "testId": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest#nullTypeBodyLengthAndCopyAnomaliesAreRejected",
+      "independentOracle": "SS321§8/322§5: rejects null/nonBytes/negative and1000001 lengths/null or changed body/255 short and 281 length inconsistency. Expected typed rejection independent of implementation output.",
+      "status": "EXISTING_CASE_ORACLE_REVIEWED_NOT_NEW_PASS"
+    },
+    {
+      "testId": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest#destinationMustBeThePermanentApprovedAddressWithoutReplyTo",
+      "independentOracle": "SS321 fixed permanent physical route; foreign/temporary/missing/blank/other destinations and replyTo rejected; canonical FQQN accepted, wrong queue or blank base denied. No actual broker proof.",
+      "status": "EXISTING_CASE_ORACLE_REVIEWED_NOT_NEW_PASS"
+    },
+    {
+      "testId": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest#requiredHeadersPropertiesAndValuesDenyMissingBlankAndMalformedInputs",
+      "independentOracle": "SS321§8/322§5: missing/blank/non-UUID identities, missing/zero delivery count, absent/malformed layout/version and negative expiration denied. Canonical UUID alias boundary NOT covered.",
+      "status": "EXISTING_CASE_ORACLE_REVIEWED_NOT_NEW_PASS"
+    },
+    {
+      "testId": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest#transportAndWireValuesMustExactlyMatchTheReplyHeaderAndRoute",
+      "independentOracle": "SS321§8/UI232§6: nonpersistent, expired0, protocol999, wire/JMS message/layout/correlation mismatch denied; explicit different UUID literals. Canonical-text alias boundary NOT covered.",
+      "status": "EXISTING_CASE_ORACLE_REVIEWED_NOT_NEW_PASS"
+    }
+  ],
+  "qualifiedExistingCounters": {
+    "branchNaturallyZero": false,
+    "four100": true,
+    "metadataOnly": false,
+    "physical": [
+      "dev/codex/schubert/nk/web/messaging/JmsReplyDecoder"
+    ],
+    "threeCounter100": true,
+    "totals": {
+      "BRANCH": {
+        "covered": 38,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 67,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 10,
+        "missed": 0
+      }
+    }
+  },
+  "semanticGap": "BUG2263/YKT2008: both API and Web parseUuid normalize input without canonical-text check; UI232§6 requires exact wire/property identity. Original negative matrices test non-UUID/different values but omit short and uppercase aliases. Existing coverage100 alone does not settle this contract.",
+  "wholeContractSatisfied": false,
+  "newProductTests": 0,
+  "productReexecuted": false,
+  "newCoverage": 0,
+  "newAcceptedCriteria": 0,
+  "formalUpdated": false,
+  "heldFilesRead": false,
+  "mainChanges": 0,
+  "collectorTimingDeviation": "08:07:11 poll was57m23s after07:09:48, earlier than stored08:09:48. No response usage record; N/T null. Preserve record, do not repeat; next not before09:07:11."
+}

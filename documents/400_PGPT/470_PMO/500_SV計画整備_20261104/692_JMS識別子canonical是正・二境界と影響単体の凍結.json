@@ -1,0 +1,44 @@
+{
+  "atJST": "2026-11-05T08:10:18.275952+09:00",
+  "groupId": "PGPT-20261105-JMS-CANONICAL-UUID-FIX",
+  "sourceBefore": "bad5b8850e6c80d5fbccab8ecc09eb9f10160dc0",
+  "productionMainBefore": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "owners": [
+    "WBS-P005-02",
+    "WBS-P005-03"
+  ],
+  "costOwner": "WBS-P005-03",
+  "referenceCostOwner": "WBS-P005-02 reference no second charge",
+  "estimateAtGroupStartPp": {
+    "low": 0.75,
+    "base": 2,
+    "high": 5
+  },
+  "capPp": 10,
+  "quotaBefore": {
+    "observedByJST": "2026-11-05T08:06:59.309255+09:00",
+    "limitId": "codex",
+    "windowDurationMins": 10080,
+    "reset": 1794395640,
+    "usedPercent": 9,
+    "remainingPercent": 91,
+    "secondary": null,
+    "secondaryMeaning": "UNAVAILABLE_NOT_UNLIMITED"
+  },
+  "chargedToSV": false,
+  "bugs": [
+    "BUG2263",
+    "YKT2008"
+  ],
+  "scope": "Two boundary canonical UUID checks only; existing UI232§6, SS321§8/322§5 oracle unchanged. New one Test method per boundary, literal lowercase valid and uppercase/short/partially-short/space aliases rejected for each of two identity fields.",
+  "fixture": "Existing own JDK JMS proxies and unconnected SDK destination value constructors. Original Web responseWire literal offsets24/60; API validRequest map literal IDs. No actual auth/session/key/token/client connection.",
+  "reproducer": "Before Main edit, javac existing+new Test sources against preserved6b normal jars; JUnit select-method only both new methods, expect exactly2 failures due no canonical rejection; preserve original run and exit.",
+  "fix": "Add parsed.toString.equals(input) check in each private parseUuid, fixed redacted IllegalArgumentException wrapped by existing caller; no public API or approved design changes.",
+  "requiredValidation": "After fixing Main source and Testsource freeze, fresh targeted compile+both whole7case classes, impacts original LogSearchWireClientTest8 only after unchanged old effects/pins review; counter/CRC fulltargettwoSources, PMD/Checkstyle and source/null contracts. All other consumers/whole451 remain unexecuted/HOLD rather than inferred success.",
+  "classification": "PT_DEFAULT ordinary independently authorized pure JVM boundaries. No unknown refusal/VM/Root/native/DB/intent/permit operations or extraction.",
+  "actualEffects": "Own fresh JVM, host artifacts only; SDK value constructors reviewed669 plus priororiginal15520/15648. No new framework assembly.",
+  "quality": "No old source coverage copied to changed two classes; Main6b historical proof retained. New whole-source source identity requires commit fixed before qualifying run. Formal1964/53 unchanged until full451.",
+  "newMainSourceWillInvalidateOldTargetCounters": true,
+  "acceptedDelta": 0,
+  "mainChangeApprovedByExistingDesign": true
+}

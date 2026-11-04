@@ -140,7 +140,12 @@ public final class JmsReplyDecoder {
   }
 
   private static UUID parseUuid(String value) {
-    return UUID.fromString(value);
+    UUID parsed = UUID.fromString(value);
+    // BUG2263/YKT2008: UI232 §6 requires exact text, before UUID normalization loses it.
+    if (!parsed.toString().equals(value)) {
+      throw new IllegalArgumentException("transport UUID is not lowercase canonical form");
+    }
+    return parsed;
   }
 
   private static PermanentProtocolException rejection(String message) {
