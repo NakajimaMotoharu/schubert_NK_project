@@ -1,0 +1,162 @@
+{
+  "actualExit": 0,
+  "group": "PGPT-20261105-BUG2242-PG-STATIC",
+  "sourceBefore": "2ff4132268a995ed0a99fe3f161ba22ff0c4086b",
+  "downloadManifestSha256": "0da6343a0a223e1e529c97283c2b08af44c8b2332fd8735e1f099ddef3f827f3",
+  "SDKLineage": [
+    {
+      "artifact": "artemis-server",
+      "binaryPublisherSha1": "24f53398fb9bf41286d062a7ac1c83be258e6968",
+      "binaryChecksumUrl": "https://repo.maven.apache.org/maven2/org/apache/artemis/artemis-server/2.56.0/artemis-server-2.56.0.jar.sha1",
+      "sourceSha256": "92ee862199c69bfc4c5dfbb1da3a84a9958ab510a476db63dabc923e988a28ed",
+      "binarySha256": "4bc0bb2d74e340fbb54d84121f2c52708e00bdad0a84751b9bd4f4b21e03c358",
+      "sourceUrl": "https://repo.maven.apache.org/maven2/org/apache/artemis/artemis-server/2.56.0/artemis-server-2.56.0-sources.jar"
+    },
+    {
+      "artifact": "artemis-core-client",
+      "binaryPublisherSha1": "0cd7061d453e1c363b12766580ff8708bc0f5de4",
+      "binaryChecksumUrl": "https://repo.maven.apache.org/maven2/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar.sha1",
+      "sourceSha256": "152baae63bd8c8a1ae793dd59428e83808e9a06c4746ee6e592cf01eec197130",
+      "binarySha256": "111cbc7a359b5597085b5328ab74c2f81dd40e7211d07bd12e6ffa83d9de99d9",
+      "sourceUrl": "https://repo.maven.apache.org/maven2/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0-sources.jar"
+    },
+    {
+      "artifact": "artemis-commons",
+      "binaryPublisherSha1": "4079674633f00f06f9f66a605f306e7e2e2452d9",
+      "binaryChecksumUrl": "https://repo.maven.apache.org/maven2/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar.sha1",
+      "sourceSha256": "93b626c2c2329e732a36af54db420d7ed8e2e316ed3e0a982bb121217b89b9f9",
+      "binarySha256": "02b43c47403dd0ef6dcd4573d0744bc6bae935edae016eb19f2d4ebb5eb33722",
+      "sourceUrl": "https://repo.maven.apache.org/maven2/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0-sources.jar"
+    }
+  ],
+  "reviewedSource": [
+    {
+      "archive": "artemis-server-2.56.0-sources.jar",
+      "entry": "org/apache/activemq/artemis/core/server/management/impl/ManagementServiceImpl.java",
+      "sha256": "961415d138287d9e0bc7bc8fc2d5829a555526abed18d8fd9ce25ae2ff83ca03",
+      "reviewedLineRanges": [
+        [
+          180,
+          185
+        ],
+        [
+          651,
+          692
+        ],
+        [
+          720,
+          732
+        ],
+        [
+          1124,
+          1131
+        ]
+      ]
+    },
+    {
+      "archive": "artemis-server-2.56.0-sources.jar",
+      "entry": "org/apache/activemq/artemis/core/server/ActiveMQMessageBundle.java",
+      "sha256": "5eaac1a80cbd2c16bb5a3ade13401873df0519ff150d246efac18c2bcb9cb257",
+      "reviewedLineRanges": [
+        [
+          148,
+          149
+        ],
+        [
+          406,
+          407
+        ]
+      ]
+    },
+    {
+      "archive": "artemis-server-2.56.0-sources.jar",
+      "entry": "org/apache/activemq/artemis/core/security/impl/SecurityStoreImpl.java",
+      "sha256": "2a9d8733e3c881b28892bcc6067a119a739a19b3ff437f919bd4e90d6716dc7f",
+      "reviewedLineRanges": [
+        [
+          412,
+          450
+        ],
+        [
+          463,
+          467
+        ]
+      ]
+    },
+    {
+      "archive": "artemis-server-2.56.0-sources.jar",
+      "entry": "org/apache/activemq/artemis/core/server/impl/ServerSessionImpl.java",
+      "sha256": "ca7304c94dbf9ff023c244ea720d6b8131cc54f7b4e828e7c35af422728cbe80",
+      "reviewedLineRanges": [
+        [
+          780,
+          795
+        ]
+      ]
+    },
+    {
+      "archive": "artemis-core-client-2.56.0-sources.jar",
+      "entry": "org/apache/activemq/artemis/api/core/client/ClientRequestor.java",
+      "sha256": "73b39b77a15fee125805af1e304707927946fec7b6430713fb9ab9a604db88c9",
+      "reviewedLineRanges": [
+        [
+          49,
+          55
+        ],
+        [
+          84,
+          99
+        ]
+      ]
+    },
+    {
+      "archive": "artemis-core-client-2.56.0-sources.jar",
+      "entry": "org/apache/activemq/artemis/api/core/management/ManagementHelper.java",
+      "sha256": "7ccf8f3f77038232f1689f11bd0aee5e12faa9a0700624812c34d028203cf1b2",
+      "reviewedLineRanges": [
+        [
+          233,
+          286
+        ],
+        [
+          293,
+          305
+        ]
+      ]
+    },
+    {
+      "archive": "artemis-core-client-2.56.0-sources.jar",
+      "entry": "org/apache/activemq/artemis/api/config/ActiveMQDefaultConfiguration.java",
+      "sha256": "28f08c864e5400747f1a45b210e8ab50689f54c9556e9d78a611dddc5113f84d",
+      "reviewedLineRanges": [
+        [
+          720,
+          720
+        ]
+      ]
+    }
+  ],
+  "callerScan": {
+    "sha256": "9e60e489ba015145c3420317ccca652c44b3102d42150d5a6fc084ef5dc37df9",
+    "ordinarySources": 884,
+    "heldExcluded": 2,
+    "affectedHelpers": 1,
+    "limitation": "ExactManagementHelper/syntacticcatchfalse scan, notindirectalias proof"
+  },
+  "PGDecisionFrozenBeforeEdit": [
+    "Keep the eleven fixed allow/deny operations and existing actual authenticated broker fixture; no operation orrole permission weakened.",
+    "Bind expected publicfixture username to its owned ClientSession using an internal AutoCloseable record; neverstorepassword.",
+    "Start errors propagate before any denialcatch. Constructor ActiveMQSecurityException counts denial only for exactAMQ229032/229213 user+createQueue/createAddress canonicalactivemq.management.UUID target.",
+    "Request typedsecurity denial counts only exactuser+SEND+activemq.management. Other exception types/other stage/resource/authentication failures propagate.",
+    "Missingreply/resultflag/unknown error is assertionfailure, neverfalse. Failedserverreply counts denial only exactAMQ229032 user+VIEW/EDIT+mops.resource.operation fromfixedcurrentSDK/SSmatrix.",
+    "ClientRequestor close stays outside denialcatch; closefailure alwayspropagates evenafter negativeoutcome.",
+    "No rawexception/resultmessage included in AssertionError orpubliclog. No actual SDKrequestor/session/crypto/Root/broker invoked duringstaticwork."
+  ],
+  "immutableTestId": "PT-OPS-MQ-022",
+  "actualPT": "NOT_EXECUTED_HOLD_SCOPE_UNRESOLVED",
+  "coverage": null,
+  "PTExecutionExemption": false,
+  "whole451Accepted": false,
+  "sourceSpecChange": false,
+  "QARequired": false
+}

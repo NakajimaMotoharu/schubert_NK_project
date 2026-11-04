@@ -1,0 +1,275 @@
+{
+  "actualExit": 0,
+  "sourceBefore": "2ff4132268a995ed0a99fe3f161ba22ff0c4086b",
+  "targetPath": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryManagementAuthorizationTest.java",
+  "targetSha256": "421da3d429ea68876faff9011c286ab5381b4a9ab06aa5998fa9cc5676c0baf2",
+  "compileManifestSha256": "49a2b46f10ef010452f1941bdca6929070475a5a096a0dd96b8501a38a737a9e",
+  "staticManifestSha256": "95073f8ff9b43850f7230c1c0a6621b998013a6c569fa1f80507b57886836af7",
+  "frozenTestMatrixSha256": "0c0524bf6de6d2e6c1a09079a23927e7c3a046936741dfd305169b6d8eddbc0d",
+  "elevenOperationsByteUnchanged": true,
+  "finalAddressPostconditionIncludedInUnchangedBlock": true,
+  "reviewRows": [
+    {
+      "reviewId": "RV-OPS-MQ022-001",
+      "input": "SUCCESS_WITH_CLEAN_CLOSE",
+      "expected": "true",
+      "independentBasis": "nonnull operationresult/status=true followed by TWRclose success",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-002",
+      "input": "SUCCESS_THEN_CLOSE_FAILURE",
+      "expected": "propagate/fail",
+      "independentBasis": "TWRclose outside recognizeddenialcatch",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-003",
+      "input": "EXACT_FAILED_REPLY_PERMISSION",
+      "expected": "false afterclose",
+      "independentBasis": "AMQ229032 exactownedfixtureuser+VIEW/EDIT+mops.resource.operation",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-004",
+      "input": "UNKNOWN_MANAGEMENT_ERROR",
+      "expected": "fixedAssertionError",
+      "independentBasis": "No generic status=false normalization; rawbody notlogged",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-005",
+      "input": "MISSING_REPLY",
+      "expected": "fixedAssertionError",
+      "independentBasis": "requestor timeout null is not denial",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-006",
+      "input": "MISSING_OR_INVALID_RESULT_FLAG",
+      "expected": "fail",
+      "independentBasis": "operationresult andnonnullBoolean status required; provider typeerror propagates",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-007",
+      "input": "TRANSPORT_OR_UNKNOWN_RUNTIME",
+      "expected": "propagate/fail",
+      "independentBasis": "No generalException/NPE catch inquery",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-008",
+      "input": "SESSION_START_SECURITY_ERROR",
+      "expected": "propagate/fail",
+      "independentBasis": "start occurs before both denialcatch scopes",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-009",
+      "input": "AUTHENTICATION_ERROR_CODE",
+      "expected": "propagate/fail",
+      "independentBasis": "Onlyspecific229032/229213 permission codes accepted, no catch-allsecurity",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-010",
+      "input": "EXACT_REQUEST_SEND_DENIED",
+      "expected": "false afterclose",
+      "independentBasis": "typedActiveMQSecurityException and exactuser/SEND/activemq.management",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-011",
+      "input": "WRONG_USER_TARGET_PERMISSION_OR_CODE",
+      "expected": "propagate/fail",
+      "independentBasis": "wholemessage exactmatching orcanonicalreply constraints",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-012",
+      "input": "EXACT_REPLY_SETUP_DENIED",
+      "expected": "false; outerclientstillowned",
+      "independentBasis": "typedsecurity/CREATE_NON_DURABLE_QUEUE orCREATE_ADDRESS withcanonicalmanagementreplyname",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-013",
+      "input": "QUEUE_AND_ADDRESS_DIFFER",
+      "expected": "propagate/fail",
+      "independentBasis": "queueform mustrefer samecanonicaltarget",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-014",
+      "input": "MALFORMED_OR_NONCANONICAL_UUID",
+      "expected": "propagate/fail",
+      "independentBasis": "narrowUUIDparse rejects; no normalizingrawsecurityerror",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-015",
+      "input": "NULL_SECURITY_MESSAGE",
+      "expected": "propagate/fail",
+      "independentBasis": "setupvalidatorfalse then original typederror rethrown",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-016",
+      "input": "CORRECT_PREFIX_WITH_EXTRA_ERROR_TEXT",
+      "expected": "fail",
+      "independentBasis": "wholemessage equality disallows suffix/injectedreason",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-017",
+      "input": "CLEANUP_TYPED_SECURITY_FAILURE",
+      "expected": "propagate/fail",
+      "independentBasis": "notcaughtasauthorizationdenial",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-018",
+      "input": "OWN_CLIENT_CLEANUP_FAILURE",
+      "expected": "propagate/fail",
+      "independentBasis": "AuthenticatedSession.close delegates; no suppression-to-success",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-019",
+      "input": "UNREGISTERED_OPERATION",
+      "expected": "outsidefixedmatrix; failedreplythrows",
+      "independentBasis": "All11calls use four fixedoperations; defaultonfailedreplyasserts. Do notclaimgeneraloperation API coverage.",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-020",
+      "input": "UNKNOWN_ROLE_NULLCLIENT",
+      "expected": "notaccepted",
+      "independentBasis": "recordrequiresnonnull user/client; null failnotnormaldeny",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-021",
+      "input": "SENSITIVE_DIAGNOSTIC",
+      "expected": "redacted/fixedtext",
+      "independentBasis": "recordtoString fixed, no passwordfield/rawreply innewAssertionError",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    },
+    {
+      "reviewId": "RV-OPS-MQ022-022",
+      "input": "ACTUAL_RBAC_OR_CLEANUP_PROOF",
+      "expected": "NOT_EXECUTED",
+      "independentBasis": "compile/static alone neverproves actualsecurity orreplyresourcepost",
+      "result": "STATIC_REVIEW_ONLY_NOT_EXECUTED"
+    }
+  ],
+  "pmdApplicability": [
+    {
+      "begincolumn": "39",
+      "beginline": "35",
+      "class": "ArtemisExpiryManagementAuthorizationTest",
+      "endcolumn": "52",
+      "endline": "35",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals",
+      "message": "The String literal \"nk.expiry.q\" appears 6 times in this file; the first occurrence is on line 35",
+      "method": "opsMq022MaintenanceCanOnlyInspectAndRemoveSelectedExpiryMessages",
+      "package": "dev.codex.schubert.nk.batch.mq",
+      "priority": "3",
+      "rule": "AvoidDuplicateLiterals",
+      "ruleset": "Error Prone",
+      "applicability": "PREEXISTING_LITERAL_ORACLE_OPEN",
+      "basis": "Exactoriginal11operationmatrix literalblock preserved. Keeprawfinding; no suppression/globalPMDpass."
+    },
+    {
+      "begincolumn": "71",
+      "beginline": "35",
+      "class": "ArtemisExpiryManagementAuthorizationTest",
+      "endcolumn": "95",
+      "endline": "35",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals",
+      "message": "The String literal \"_AMQ_ACTUAL_EXPIRY < 1\" appears 7 times in this file; the first occurrence is on line 35",
+      "method": "opsMq022MaintenanceCanOnlyInspectAndRemoveSelectedExpiryMessages",
+      "package": "dev.codex.schubert.nk.batch.mq",
+      "priority": "3",
+      "rule": "AvoidDuplicateLiterals",
+      "ruleset": "Error Prone",
+      "applicability": "PREEXISTING_LITERAL_ORACLE_OPEN",
+      "basis": "Exactoriginal11operationmatrix literalblock preserved. Keeprawfinding; no suppression/globalPMDpass."
+    },
+    {
+      "begincolumn": "54",
+      "beginline": "36",
+      "class": "ArtemisExpiryManagementAuthorizationTest",
+      "endcolumn": "70",
+      "endline": "36",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals",
+      "message": "The String literal \"removeMessages\" appears 6 times in this file; the first occurrence is on line 36",
+      "method": "opsMq022MaintenanceCanOnlyInspectAndRemoveSelectedExpiryMessages",
+      "package": "dev.codex.schubert.nk.batch.mq",
+      "priority": "3",
+      "rule": "AvoidDuplicateLiterals",
+      "ruleset": "Error Prone",
+      "applicability": "PREEXISTING_LITERAL_ORACLE_OPEN",
+      "basis": "Exactoriginal11operationmatrix literalblock preserved. Keeprawfinding; no suppression/globalPMDpass."
+    },
+    {
+      "begincolumn": "19",
+      "beginline": "74",
+      "class": "ArtemisExpiryManagementAuthorizationTest",
+      "endcolumn": "26",
+      "endline": "74",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+      "message": "Ensure that resources like this ClientSession object are closed after use",
+      "method": "query",
+      "package": "dev.codex.schubert.nk.batch.mq",
+      "priority": "3",
+      "rule": "CloseResource",
+      "ruleset": "Error Prone",
+      "variable": "session",
+      "applicability": "BORROWED_CLIENT_REVIEWED",
+      "basis": "queryborrows authenticated.client; outertry-with-resources ownsclose. Closinghere wouldinvalidate subsequent same-roleoperations."
+    },
+    {
+      "begincolumn": "16",
+      "beginline": "188",
+      "class": "ArtemisExpiryManagementAuthorizationTest",
+      "endcolumn": "25",
+      "endline": "188",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "message": "Avoid catching Exception in try-catch block",
+      "method": "securedBroker",
+      "package": "dev.codex.schubert.nk.batch.mq",
+      "priority": "3",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "applicability": "PREEXISTING_FIXTURE_CLEANUP_OPEN",
+      "basis": "securedBroker catch/close recovery unchanged; keepforfullF03/ownershipreview, notoracleDENY path."
+    },
+    {
+      "begincolumn": "14",
+      "beginline": "192",
+      "class": "ArtemisExpiryManagementAuthorizationTest",
+      "endcolumn": "23",
+      "endline": "192",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "message": "Avoid catching Exception in try-catch block",
+      "method": "securedBroker",
+      "package": "dev.codex.schubert.nk.batch.mq",
+      "priority": "3",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "applicability": "PREEXISTING_FIXTURE_CLEANUP_OPEN",
+      "basis": "securedBroker catch/close recovery unchanged; keepforfullF03/ownershipreview, notoracleDENY path."
+    }
+  ],
+  "pmdPassed": false,
+  "checkstyleFindings": 0,
+  "SDKOrTargetTestsExecuted": 0,
+  "actualCoverage": null,
+  "actualRbacProven": false,
+  "PTExemption": false,
+  "newAcceptedCriteria": 0,
+  "formalUpdated": false,
+  "remaining": "Realownedbroker PT-OPS-MQ-022 and negative transport/missing/wrongdenial/cleanup cases, same-source full451/trace; HOLD unchanged."
+}
