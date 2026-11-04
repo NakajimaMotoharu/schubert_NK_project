@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-05 05:54：Program005/003/004、PGPT500/649～654、default業務portの新四PT/一Source全適用counterの独立証拠。PG18586全成功/CRC一致、compile・PMD・Checkstyle0、実broker/Root操作0。旧3008/451/650集計への登録前sidecarとして新実績を明示し、正式/工数/新WBS受入は不変。S7/V報告差0/計7・別通常群共有2で全観測9pp、Vへの差替えなし。最新456/460と654を参照、通常継続。
+
 2026-11-05 管理権限oracle PG：3507/3508・PGPT500/644～646/PG18570。固定SDKと全同形候補から、BUG2242の一般例外/nullを拒否成功へ扱う処理を是正。限定compile0・Checkstyle0・PMD6未抑制・独立22観点は静的確認のみで実PT0/coverage null/動的HOLD・全品質未受入。元十一操作の本文不変更、S/V別予算/正式認定を維持し通常継続。
 
 2026-11-05 04:32：3505/3506・PGPT500/633～643、三fixture setup所有保護PG＋新12unique Unit/78vector成功、helper39line/18branch miss0（wholeFixture未達）、PMD56/Checkstyle0・realprovider/全品質未受入。S-POST A–GはPARTIAL/V未達/PLAN_NOT_VALIDATED、S7/V報告差0/計7、別通常群共有1pp（記録全活動8）を分離。正式/工数/新WBS受入は不変。最新456/460参照、独立継続。
