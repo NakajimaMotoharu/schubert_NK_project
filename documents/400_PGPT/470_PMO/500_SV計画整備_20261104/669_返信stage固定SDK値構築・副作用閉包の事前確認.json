@@ -1,0 +1,80 @@
+{
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "groupId": "PGPT-20261105-REPLY-STAGING-CALLBACKS",
+  "disposition": "PT_DEFAULT_EXACT_NEW_UNIT_CALLBACK_SCOPE",
+  "artifact": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar",
+  "artifactSha256": "89eb1f27e583119db4c1c23db26cbc1916c82bfc5fcc23dbcb7ef040602f09d6",
+  "publisherSha1Verified": "7dbfda0711b9761e513b5585cfa8c5a4387fb392",
+  "stages": [
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar",
+        "org.apache.activemq.artemis.jms.client.ActiveMQQueue",
+        "org.apache.activemq.artemis.jms.client.ActiveMQDestination"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18606-reply-stage-sdk-value-preflight-v1",
+      "endUTC": "2026-11-04T21:43:06.995778+00:00",
+      "startUTC": "2026-11-04T21:43:06.780806+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "fbaf6496bfaa488c8287204ad37aaf5f0c5ebe43d61066790890ff00cb602821",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-c",
+        "-p",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar",
+        "org.apache.activemq.artemis.jndi.JNDIStorable",
+        "org.apache.activemq.artemis.api.core.SimpleString",
+        "org.apache.activemq.artemis.api.core.ParameterisedAddress"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18606-reply-stage-sdk-value-preflight-v1",
+      "endUTC": "2026-11-04T21:43:43.914497+00:00",
+      "startUTC": "2026-11-04T21:43:43.649173+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "99f7962a7f355bf0ca5e1490cc393fe7b07e90944cd1af6ce1116b3ac5417375",
+      "timedOut": false
+    }
+  ],
+  "sourceArtifact": {
+    "path": "PG18568/artemis-commons-2.56.0-sources.jar",
+    "sha256": "93b626c2c2329e732a36af54db420d7ed8e2e316ed3e0a982bb121217b89b9f9"
+  },
+  "queueConstructor": "ActiveMQQueue(String)→ActiveMQDestination(String,TYPE.QUEUE,null)→SimpleString.of→JNDIStorable.Objectctor + setSimpleAddress + literal enum flags. No ActiveMQSession object or factory initialized.",
+  "fixedAddress": "nk.sync.reply.web::nk.sync.reply.web.q",
+  "branchReason": "No question mark in literal address. ParameterisedAddress.isParameterised→URISupport.containsQuery(SimpleString)→contains(char) is false, so no URI parser/QueueConfiguration path.",
+  "staticInitialization": "SimpleString EMPTY uses String/bytearray only. Queue/Destination/JNDIStorable have no active clinit path. TYPE uses ordinary enum initialization.",
+  "nameRead": "Queue.getQueueName→getName returns name assigned from simple address string; no JNDI lookup/getenv/network",
+  "toolMetadataCorrection": "c04f93 nonexistent artemis-jms-client artifact directory lookup only failed; e71ef0 actual normalclasspath identifies artemis-jakarta-client2.56; no network/job/security retry.",
+  "productClassLoads": 0,
+  "productFixtures": 0,
+  "productTests": 0,
+  "actualBroker": 0,
+  "actualDb": 0,
+  "actualRoot": 0,
+  "actualNative": 0,
+  "actualKeys": 0,
+  "actualNetwork": 0,
+  "oldFactoryQualification": "PG18602 Main6b/4PT used as separate current dependency proof; no old Source transfer",
+  "newTestExpectedMethods": 4,
+  "newTestPlanned": "ReplySenderStageContractTest",
+  "newTestExpectedVectors": 18,
+  "expected": "normal1; null/wrongmode6; five runtime/error stages x2=10; checkedJMS construction failure1. Literal persistent2/TTL10000/FQQN, exact messageidentity/callprefix, no commit/ack/close.",
+  "wholeParentAccepted": false,
+  "firstVChanged": false,
+  "holdsUnchanged": [
+    "661 whole6Temp hold",
+    "18474 OSunrecovered",
+    "QA054",
+    "externalVMDBRoot/permit",
+    "heldtwo/RootFailedtwo/ako-iori"
+  ]
+}
