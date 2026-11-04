@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-05 04:32：3505/3506・PGPT500/633～643、三fixture setup所有保護PG＋新12unique Unit/78vector成功、helper39line/18branch miss0（wholeFixture未達）、PMD56/Checkstyle0・realprovider/全品質未受入。S-POST A–GはPARTIAL/V未達/PLAN_NOT_VALIDATED、S7/V報告差0/計7、別通常群共有1pp（記録全活動8）を分離。正式/工数/新WBS受入は不変。最新456/460参照、独立継続。
+
 2026-11-05 通常PG着手：PGPT500/633～636・NK-OPS-001/3505。既BUG2245/YKT1991の三fixture setup所有保護を既SSC320へ一致させるPGと12独立Unit methodを作成。限定compile38883/d15f0c、bytecode事前確認62616/cd6126 actual0、製品試験はまだ未実行。S/V別予算を維持し初回Vに代替計上0、実DB/caller/全451は保留。
 
 2026-11-05 04:01追補：PGPT500/620～632、未対応76行を既存class byteのJVM候補へ全件接続（19複数候補）。原工具失敗/宣言だけの結果/不足行表補完を分離し、独立反例と有限横展開、八live全文・予実を保存。製品PT/coverage/受入増分0、S7/10・V同じ初回HOLD・計7/20、PLAN_NOT_VALIDATED。最新456/460と632を参照し通常継続。
