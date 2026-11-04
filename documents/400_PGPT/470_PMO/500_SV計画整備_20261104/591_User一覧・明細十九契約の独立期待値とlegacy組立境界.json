@@ -1,0 +1,182 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S_POST_SAME10",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "testPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/UserAdminControllerTest.java",
+  "testSha256": "08e54b6c79491bac211c8d8baf17b4b29c6a7a577f5941290dccbc9ff968e1fa",
+  "caseReviews": [
+    {
+      "method": "user001IndependentWholeByteAndAllPageSizes",
+      "input": "0000/0200,0/1/50 rows, NFD username prefix/admin/locked/page1",
+      "independentExpected": "USRREQ01 total352/data96; literal UTF8NFC64/role5/state8/page6/size50/reserved10; explicit context and controlled request UUID sequence; correct view/count/ADMIN role",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "user002FormDefaultsNormalizationAndImmutableInputs",
+      "input": "Empty input, page0/negative/min-int/leadingzero/999999,64-byte UTF8 boundaries and mutated caller lists",
+      "independentExpected": "Defaults page1/size50/empty filters; trim/NFC/case closed enums; nonpositive->1,999999 unchanged; captured values immutable/redacted and issue map immutable",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "user003InvalidBindingsNullAndWireNeverSent",
+      "input": "Unknown/duplicate/empty-list/control/malformedUnicode/65byte/invalidPage/role/state and null map/key/list/element",
+      "independentExpected": "Invalid400/errors/no results or pagination; no wire; toRequest rejects invalid; null is contract violation. These tests do not make caught NPE a successful request.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "user004AdminOnlyAndExplicitBoundaryContracts",
+      "input": "USER/foreign Principal and null dependency/request/model/response",
+      "independentExpected": "USER403 and no send; foreign SessionStoreException; explicit null rejection before send",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "user005ResultAndTransportFailures",
+      "input": "Nine fixed result codes, JMS failure/short reply/bad correlation-context-padding, fatal Error and10ms no-reply timeout",
+      "independentExpected": "Literal400/401/403/404/409/429/409/503/503; malformed/transport/timeout503; fatal Error propagates by type; pending0/bufferszero. Exact Error identity not asserted here.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "user006IndependentProjectionCountIdentityAndCOrder",
+      "input": "U+E000 vs U+10000; equal-name ascendingIDs; reverse/duplicateID/count/page inconsistency",
+      "independentExpected": "Explicit C/UTF8 order and stableID acceptance; reverse/duplicate/mismatch rejected; malformed duplicate projection503. Not actual PostgreSQL collation execution.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "user007MvcDomEscapingAndPagination",
+      "input": "GET/HEAD/POST,empty,HTML-looking username,51total/page clamp/filters/unknown parameter",
+      "independentExpected": "Explicit Users title,row/links/JST/role/state/CSRF/no exposed context; list POST405; safe escaping; exact encoded navigation and51users/page2of2; invalid400",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "user008RealSecurityAndApi0102Terminal",
+      "input": "Embedded HTTP,USER/ADMIN fixture login,HEAD/bad page/0102",
+      "independentExpected": "Anonymous302;USER403/no wire;ADMIN200/no-store,HEADempty; bad400/no send;0102 expires session/cookie and subsequent protected302; buffers erased",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "user009ConcurrentContextAndQueryIsolation",
+      "input": "100requests/8threads with distinct actor/query/context",
+      "independentExpected": "Own model/query/topbar;100unique requestIDs and matching context/query payload; no pending/retained buffers",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "user010ViewInvariantsAndAllSafeSnapshotValues",
+      "input": "Null/invalid/user actor, mismatch page,size/count; fixed record42 andempty",
+      "independentExpected": "Factory rejection for invalid combinations; exact snapshot id/link/state/timestamps/role/redaction, immutable rows, no prev/next for one/empty page",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail001IndependentWireAndSafeDisplay",
+      "input": "0000/0200, target42",
+      "independentExpected": "UDTREQ01 total268 with literal12-byte decimal target; fixed detail username/lock reason/JST/session2/version7/SYSTEM/actor/self flag",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail002MvcEscapingAndFixedRoutes",
+      "input": "Read-only legacy2arg assembly,HTML-looking name,GET/HEAD, invalid targets anddetailPOST",
+      "independentExpected": "Exact title/fields/nav/CSRF/escaping; no password or operation-token inputs; malformed target404; detailPOST503 because same mapped controller lacks token core, not universal unsupported-method oracle",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail003RolesInvalidTargetsAndNullBoundaries",
+      "input": "USER,target0/negative/13digit,foreign/null Principal andnull model/request/response",
+      "independentExpected": "USER403/invalid404/no send; foreign SessionStoreException; null rejected",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail004ErrorsAndMalformedWire",
+      "input": "Nine result codes,correlation/context/reserved corruption,JMS/timeout/fatalError",
+      "independentExpected": "Fixed status table and503 for damage/transport/timeout; diagnostic canary absent; Error propagates by type, exact identity not asserted",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail005ProjectionRejectionsDoNotRepairResponse",
+      "input": "Wrong target43, sessionCount3, blank required timestamp",
+      "independentExpected": "503 without repairing reply into valid projection",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail006AllSafeValuesAndFactoryInvariants",
+      "input": "ACTIVE/DISABLED/LOCKED x optional dates x session0/1/2;self/nonself andnull factory",
+      "independentExpected": "Literal role/state/JST/lock reason/session/version/SYSTEM fallback, immutable/redactedvalues; count3/factoryuser/null reject",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail007ConcurrentActorIsolation",
+      "input": "100detail requests/8threads, distinct actors/context andtarget42",
+      "independentExpected": "Independent topbar;100unique request/context, every target literal42, buffers erased",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail008RealSecurityAndApiInvalidTermination",
+      "input": "Embedded HTTP USER/ADMIN,HEAD,0102",
+      "independentExpected": "Anonymous302,USER403/no wire,ADMIN200/no-store,HEADempty;0102cookie/session expires,nextprotected302/no extra business read",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail009ZeroAndMaximumVersionAreValidIndependentWireValues",
+      "input": "Version0 and999999999",
+      "independentExpected": "Both independently encoded detail replies accepted/displayed exactly, not arbitrary min1version rule",
+      "currentExecutionQualified": false,
+      "newPass": false
+    }
+  ],
+  "references": [
+    "FUN009/AUT002/AUT003",
+    "UI225 sections3/5",
+    "UI236 sections3/5:96/48/168/12/320byte",
+    "SS313 routes and token-core composition",
+    "SS314/323"
+  ],
+  "independentOracle": "Handwritten request payload and USRRSP01/UDTRSP01 bytes with literal offsets/padding/results/date/version/session bounds, not production encode. Fixture standard() echoes request context as a relational response; user001/detail001 separately anchor literal request payload. Typed UserRecord/DetailResponse objects are inputs to projection factory tests, not expected generated by subject.",
+  "scopeBindings": {
+    "list": "WBS-P016-15 ten user methods",
+    "detail": "WBS-P016-17 nine detail methods, shared controller scope, not an extra separate cost per mirrored reference",
+    "source586CandidatesNowReviewed": 19,
+    "other586CandidateMethodsUnreviewed": 81
+  },
+  "fixtureBoundaries": [
+    "Whole BeforeAll starts real WebLogDatabaseFixture PostgreSQL18; BeforeEach removes dedicated web-session rows and per-test context cleanup",
+    "JMS wire is injected onReply with independently handwritten bytes, not actual broker delivery/ACK proof",
+    "Real HTTP methods instantiate EmbeddedWebSecurityTest.Server and session fixture/fake API provider; not ordinary deployed API/Web/Caddy/Browser/CHR/native acceptance",
+    "Two-argument UserAdminController sets tokens Optional.empty; @PostMapping detail exists and assembled() returns503 when core absent. This explains legacy detail002 expected503 without changing it to405. Full same-core business assembly and write/token behavior live in separate UserBusinessControllerTest.",
+    "Legacy MVC detail hides password/operation-token fields. Do not transfer that DOM as ordinary fully wired User detail form expectation.",
+    "Unknown Error tests assert type; object identity/whole fatal graph needs separate stronger evidence. Full SQL role/data ordering/actual API/JMS/source/run and resource postconditions remain separate."
+  ],
+  "sourceReadReceipts": [
+    "b3fad7",
+    "4b5657",
+    "ee2c7e",
+    "054051",
+    "f7421c",
+    "615c6c",
+    "590ddc",
+    "648762",
+    "15751f",
+    "e4ca27"
+  ],
+  "noNewDefectDeterminedByThisReview": true,
+  "newProductPT": 0,
+  "coverageAdded": 0,
+  "newAcceptedCriteria": 0,
+  "formalUpdated": false,
+  "effortCompletion": null
+}
