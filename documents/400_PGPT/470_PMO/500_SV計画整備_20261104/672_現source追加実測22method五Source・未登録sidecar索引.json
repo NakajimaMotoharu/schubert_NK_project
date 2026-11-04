@@ -1,0 +1,297 @@
+{
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "sourceEvidenceRefs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18586-internal-port-unit-v1/manifest.json",
+      "sha256": "86878d2da664c3ca3ede5c5e9a5aff2b79f1d240d4347df5d26d18ca9e0d561c",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG18590-config-loaders-current-whole10-v1/manifest.json",
+      "sha256": "11fa28e22c5694dc260cb577dd804340261e4df3af1363f2813a1630273497e2",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18602-jms-reply-envelope-unit-v1/manifest.json",
+      "sha256": "637fdb75971145c4e2b4d973870bc5d3dfdec02902acc3353d5f088a68e6b253",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18612-reply-stage-unit-v1/manifest.json",
+      "sha256": "d2db189fae80f126ebf3f42165dc5f326d6a5437de87a2ef348b78d5379d0d05",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+    }
+  ],
+  "proofMeaning": "Disjoint eligible additional component proofs; NO merge or requalification of old registry",
+  "rows": [
+    {
+      "manifest": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18586-internal-port-unit-v1/manifest.json",
+      "sha256": "86878d2da664c3ca3ede5c5e9a5aff2b79f1d240d4347df5d26d18ca9e0d561c",
+      "testSource": "11044560bc478ae6fe7dfeaa6afbcb4fc7881f45",
+      "uniqueCaseIds": [
+        "dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessorContractTest#defaultForwardsSameEventOnce",
+        "dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessorContractTest#delegateFailuresKeepIdentityAndAreNotRetried",
+        "dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessorContractTest#nullDeliveryNeverReachesBusiness",
+        "dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessorContractTest#nullEventNeverReachesBusiness"
+      ],
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor.java",
+          "sha256": "b9d8a661e85cceaca6fddc73de6e12faae9f9337e563cd33fe3df77f601c42d1",
+          "owner": "WBS-P005-03",
+          "physical": "dev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor",
+          "originalRegistryStatus": "NOT_IN_CURRENT_MEASUREMENT_REGISTRY",
+          "qualification": "ELIGIBLE_UNMERGED_WHOLE_APPLICABLE_FOUR_COUNTERS"
+        }
+      ],
+      "counters": {
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 1,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 12,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 4,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      },
+      "declaredScope": "NOT_PARENT_WBS_OR_GLOBAL451",
+      "actualSourceRunBound": true
+    },
+    {
+      "manifest": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG18590-config-loaders-current-whole10-v1/manifest.json",
+      "sha256": "11fa28e22c5694dc260cb577dd804340261e4df3af1363f2813a1630273497e2",
+      "testSource": "1fd3554ba0400b65cf501e68bfb6653fa5bd4ca2",
+      "uniqueCaseIds": [
+        "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest#opsApiLoad001FixedServiceAndLayerOrder",
+        "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest#opsApiLoad002SourceAndParserFailuresStayDistinct",
+        "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest#opsApiLoad003NullContractsAndProductionFactory",
+        "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest#opsApiLoad004ConcurrentFreshReads",
+        "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest#opsApiLoad005EnvironmentIsExactBeforeFileRead",
+        "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest#opsWebLoad001FixedServiceAndLayerOrder",
+        "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest#opsWebLoad002SourceAndParserFailuresStayDistinct",
+        "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest#opsWebLoad003NullContractsAndProductionFactory",
+        "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest#opsWebLoad004ConcurrentFreshReads",
+        "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest#opsWebLoad005EnvironmentIsExactBeforeFileRead"
+      ],
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiConfigurationLoader.java",
+          "sha256": "b83a846f6559b6ce4f89af5cbcb5f6cdee602ab0c8f9a7afe85fa1b26e25b569",
+          "owner": "WBS-P018-05",
+          "physical": "dev/codex/schubert/nk/api/bootstrap/ApiConfigurationLoader",
+          "originalRegistryStatus": "NOT_IN_CURRENT_MEASUREMENT_REGISTRY",
+          "qualification": "ELIGIBLE_UNMERGED_WHOLE_APPLICABLE_FOUR_COUNTERS"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoader.java",
+          "sha256": "61b84b53aabf00554608ffcaaad8445a08f9fb2cb3db8bb07501dc24d2dd7685",
+          "owner": "WBS-P018-06",
+          "physical": "dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoader",
+          "originalRegistryStatus": "NOT_IN_CURRENT_MEASUREMENT_REGISTRY",
+          "qualification": "ELIGIBLE_UNMERGED_WHOLE_APPLICABLE_FOUR_COUNTERS"
+        }
+      ],
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 158
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 20
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 38
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 20
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 10
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 2
+        }
+      },
+      "declaredScope": "NOT_PARENT_WBS_OR_GLOBAL451",
+      "actualSourceRunBound": true
+    },
+    {
+      "manifest": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18602-jms-reply-envelope-unit-v1/manifest.json",
+      "sha256": "637fdb75971145c4e2b4d973870bc5d3dfdec02902acc3353d5f088a68e6b253",
+      "testSource": "a8afbe30aa044add0504be44233e2fabb114af26",
+      "uniqueCaseIds": [
+        "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest#envelope001LiteralSyncAndApprovedAsyncRepliesKeepBodyAndExactProperties",
+        "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest#envelope002NullMalformedRequestOversizeAndLengthMismatchNeverAcquireMessage",
+        "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest#envelope003ProviderFailuresKeepIdentityAndNeverRetryOrContinue",
+        "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest#envelope004NullProviderResultFailsBeforeAnyMessageOperation"
+      ],
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.java",
+          "sha256": "90c2401c0755b6ef1bb7e15c3847d268d9401a30d7ea9a4409f7516d7c500957",
+          "owner": "WBS-P005-04",
+          "physical": "dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory",
+          "originalRegistryStatus": "NOT_IN_CURRENT_MEASUREMENT_REGISTRY",
+          "qualification": "ELIGIBLE_UNMERGED_WHOLE_APPLICABLE_FOUR_COUNTERS"
+        }
+      ],
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 69
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 6
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 16
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "declaredScope": "NOT_PARENT_WBS_OR_GLOBAL451",
+      "actualSourceRunBound": true
+    },
+    {
+      "manifest": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18612-reply-stage-unit-v1/manifest.json",
+      "sha256": "d2db189fae80f126ebf3f42165dc5f326d6a5437de87a2ef348b78d5379d0d05",
+      "testSource": "a9d99933efb970ab95257395646ed45f30fd4d80",
+      "uniqueCaseIds": [
+        "dev.codex.schubert.nk.api.messaging.outbound.ReplySenderStageContractTest#stage001FixedPersistentReplyUsesBorrowedContextWithoutCommitOrClose",
+        "dev.codex.schubert.nk.api.messaging.outbound.ReplySenderStageContractTest#stage002NullAndEveryNontransactedModeRejectBeforeMessageCreation",
+        "dev.codex.schubert.nk.api.messaging.outbound.ReplySenderStageContractTest#stage003EveryRuntimeOrFatalStageKeepsIdentityAndNeverRetries",
+        "dev.codex.schubert.nk.api.messaging.outbound.ReplySenderStageContractTest#stage004CheckedMessageConstructionFailureNeverAcquiresProducer"
+      ],
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/ReplySender.java",
+          "sha256": "c043943bdddd75ef916aa4e8db97b056a0c0a845286cf9c7757483ae9bb58ffe",
+          "owner": "WBS-P005-03",
+          "physical": "dev/codex/schubert/nk/api/messaging/outbound/ReplySender",
+          "originalRegistryStatus": "NOT_IN_CURRENT_MEASUREMENT_REGISTRY",
+          "qualification": "ELIGIBLE_UNMERGED_WHOLE_APPLICABLE_FOUR_COUNTERS"
+        }
+      ],
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 40
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 12
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 3
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "declaredScope": "NOT_PARENT_WBS_OR_GLOBAL451",
+      "actualSourceRunBound": true
+    }
+  ],
+  "uniqueCaseIds": [
+    "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest#opsApiLoad001FixedServiceAndLayerOrder",
+    "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest#opsApiLoad002SourceAndParserFailuresStayDistinct",
+    "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest#opsApiLoad003NullContractsAndProductionFactory",
+    "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest#opsApiLoad004ConcurrentFreshReads",
+    "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest#opsApiLoad005EnvironmentIsExactBeforeFileRead",
+    "dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessorContractTest#defaultForwardsSameEventOnce",
+    "dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessorContractTest#delegateFailuresKeepIdentityAndAreNotRetried",
+    "dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessorContractTest#nullDeliveryNeverReachesBusiness",
+    "dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessorContractTest#nullEventNeverReachesBusiness",
+    "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest#envelope001LiteralSyncAndApprovedAsyncRepliesKeepBodyAndExactProperties",
+    "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest#envelope002NullMalformedRequestOversizeAndLengthMismatchNeverAcquireMessage",
+    "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest#envelope003ProviderFailuresKeepIdentityAndNeverRetryOrContinue",
+    "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest#envelope004NullProviderResultFailsBeforeAnyMessageOperation",
+    "dev.codex.schubert.nk.api.messaging.outbound.ReplySenderStageContractTest#stage001FixedPersistentReplyUsesBorrowedContextWithoutCommitOrClose",
+    "dev.codex.schubert.nk.api.messaging.outbound.ReplySenderStageContractTest#stage002NullAndEveryNontransactedModeRejectBeforeMessageCreation",
+    "dev.codex.schubert.nk.api.messaging.outbound.ReplySenderStageContractTest#stage003EveryRuntimeOrFatalStageKeepsIdentityAndNeverRetries",
+    "dev.codex.schubert.nk.api.messaging.outbound.ReplySenderStageContractTest#stage004CheckedMessageConstructionFailureNeverAcquiresProducer",
+    "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest#opsWebLoad001FixedServiceAndLayerOrder",
+    "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest#opsWebLoad002SourceAndParserFailuresStayDistinct",
+    "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest#opsWebLoad003NullContractsAndProductionFactory",
+    "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest#opsWebLoad004ConcurrentFreshReads",
+    "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest#opsWebLoad005EnvironmentIsExactBeforeFileRead"
+  ],
+  "uniqueMethods": 22,
+  "testClasses": 5,
+  "wholeMainSources": 5,
+  "physicalClasses": 5,
+  "disjointScopedCounterSums": {
+    "LINE": {
+      "missed": 0,
+      "covered": 70
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 15
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 5
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 28
+    }
+  },
+  "sourceDisjointnessVerified": true,
+  "caseDisjointnessVerified": true,
+  "oldRegistryUpdated": false,
+  "oldTechnical": "3008/451/650 unchanged",
+  "testInfrastructure": "12 unique/3classes/3helpers separate, not Main domain",
+  "formal": "1964PT/53scope unchanged",
+  "historicAccepted": "17/190 unchanged",
+  "newWbsAccepted": 0,
+  "effortPercent": null,
+  "firstVChanged": false,
+  "whole451Accepted": false,
+  "oldRoot18474Terminal": "UNRECOVERED",
+  "noOldCoverageUnion": true
+}

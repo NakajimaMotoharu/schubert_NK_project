@@ -1,0 +1,11 @@
+# NK-MSG-001 返信stage callback単体結果
+
+007/668～670、PT-JMS-STAGE001～004。Main6b53不変更、Test source a9d99933efb970ab95257395646ed45f30fd4d80（198408 commit0/80281 24da91 push0/41133c remote exact）。Test SHA3151f82dfe606455784b486f923c9f9ac48782d04f70d72ad9d10f676ef7f9a7と実compilePG18608 bytesを同Gitへ結合した。PG18612/tool44376・22f591実0、四unique/一Testclass/一XMLsuite・18vector、F/E/S/aborted0。
+
+671/542472独立postは元XML/exec・Main/Test/Git/依存/SDK/classとsession PG18612-REPLY-STAGE・CRC8fd72ac316e17a6d一致を確認。LINE12/METHOD2/CLASS1/BRANCH2全未達0、全physical一Source、手動除外/旧exec合算0。borrowed contextのmode/producer chainのみ、persistent2/TTL10000/FQQN/created message identity・例外の同一性と操作prefix/No retry-commit-closeを独立literal期待で確認。source constructorとsendを共に実行し、生成helperを無意味に呼んでいない。
+
+runtime初期化MainはAPI sender/factory二＋protocol11、SDKは669既reviewの値構築七classだけ。接続factory/ActiveMQSession/server/DB/Root/native/鍵/実credential/session発行0。全SDK artifactは正常compileclasspathの固定versionとhash/localpublisher SHA1で照合し、実server資源/role/TTL到達性/ACK/transactionの確認には使わない。commands/時刻/OS-JDK/全tool依存pinはpublic manifest.inputProvenance/actualStages/environment、入手元は421、今回tool追加0。
+
+PG18608のPMD raw3はstandalone JDK proxyがpublic JMS interface defining loaderを明示する三箇所（JavaEE配備codeではない）で局所非該当を記録、processing0/Checkstyle0/format2e1ff8実0。raw指摘数0/全F03受入とはしない。c61d95 metadata writerのsource keyword重複は全body未実行、BUG2257/YKT2002新scopeとして旧CLOSEDを保持しつつ起票。670と本postはrecord field一意/追加field非交差・重複source否定を確認、元Test/成功を再演0。独立postは他10metadata否定も実施した。
+
+公開manifest SHA256 d2db189fae80f126ebf3f42165dc5f326d6a5437de87a2ef348b78d5379d0d05、path evidence/provisional/PG18612-reply-stage-unit-v1/manifest.json。独立671 SHA4d2cfe2c719f47c7a60b6e1777bb841eb4be5363671528f58fad2df60ea1d10d。672は当Main6bの四component manifests全hash/filepin/Source/Gitとcase/physical集合の非重複を確認し、Main22 unique/五Source/五Testclass、対象別disjoint counter合計line70/method15/class5/branch28未達0を索引化した。これは旧execの合成や旧3008/451/650の更新ではない。Fixture12は別Testinfra、正式1964/53・歴史17/190・工数null・新WBS受入0、全451/実broker/native/CHR/IT-ST/V成功にはしない。
