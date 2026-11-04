@@ -1,0 +1,52 @@
+{
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "testSource": "c8c76df775646e0c92f76595b3b01d55cc8b283c",
+  "testSha256": "9ef8751b3436c130040668acb0ae1184ee29bac1c9d88ee6ee911794279b0824",
+  "methods": [
+    {
+      "name": "dlq001TrustedSnapshotPreservesLiteralBodyAndMetadataWithoutOwningTransaction",
+      "vectors": 1
+    },
+    {
+      "name": "dlq002UntrustedApplicationOriginsPreserveTextHandleAndOnlyAllowlistedProperties",
+      "vectors": 3
+    },
+    {
+      "name": "dlq003TransportDiagnosticHasIndependentAsciiAndLengthBoundaries",
+      "vectors": 11
+    },
+    {
+      "name": "dlq004BothUuidDiagnosticsRequireCanonicalLowercaseWithoutEchoingMalformedValues",
+      "vectors": 20
+    },
+    {
+      "name": "dlq005LayoutDiagnosticsAndDeliveryCountsAreBoundedWithoutPretendingWireValidation",
+      "vectors": 17
+    },
+    {
+      "name": "dlq006NullWrongModeAndAdministrativeOriginsFailBeforeMessageMutation",
+      "vectors": 11
+    },
+    {
+      "name": "dlq007EveryProviderFaultKeepsIdentityAndCannotBecomeUnavailableOrRetry",
+      "vectors": 70
+    },
+    {
+      "name": "dlq008TrustedWriterFailureOrUnboundedTransportCannotSendOrCommit",
+      "vectors": 2
+    }
+  ],
+  "sourceTableArguments": {
+    "order": 25,
+    "unchecked": 5,
+    "checked": 20
+  },
+  "vectorTotal": 135,
+  "uniqueMethods": 8,
+  "original130PlusAdditional5": true,
+  "methodBodiesContainNoEarlyReturnBreakContinue": true,
+  "meaning": "Literal currentsource table/finite loop count plus original8JUnit genuine PASS. Static counting is not new PT or coverage; post executes no Product.",
+  "productTestsReexecuted": 0,
+  "formalUpdated": false,
+  "newWbsAccepted": 0
+}

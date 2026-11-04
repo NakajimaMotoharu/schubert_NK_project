@@ -1,5 +1,9 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-05 DLQ Sender追加実測
+
+678～681・Program005/009/010：新DLQ Sender八PT/135vector全成功、line63/method10/class1/branch24未達0・同CRC/全physical一Source。Main追加sidecarは非重複30unique/六Source/六Testclass、対象counter計line133/method25/class6/branch52未達0（元登録3008/451/650は更新0）。Testinfra12は別、正式1964/53・歴史17/190・工数null/新WBS受入0、全Root/native/CHR/451/V未受入を維持。S7/V報告差0と通常共有3、全記録共有10ppを別記し、専有/実token不明を0にしない。
+
 ## 2026-11-05 追加実測を集合で確認
 
 671/672/673・Program005/007/008：新返信stage四PT/18vectorが全成功、line12/method2/class1/branch2未達0。Main追加sidecarは重複検証済22unique/五Source/五Testclass、対象counter計line70/method15/class5/branch28未達0。原650収載Source/3008PT/451と正式1964/53へ未登録、工数率null/新WBS受入0、Testinfra12は別。S7/V報告差0/施策7と通常共有3を分け、全活動共有観測10pp・専有N/T不明を保持する。実broker/native/Root/全451・Vは未受入のまま。
