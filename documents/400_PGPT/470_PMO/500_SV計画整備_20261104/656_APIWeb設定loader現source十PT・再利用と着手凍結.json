@@ -1,0 +1,103 @@
+{
+  "groupId": "PGPT-20261105-CONFIG-LOADERS-CURRENT-WHOLE10",
+  "source": "1fd3554ba0400b65cf501e68bfb6653fa5bd4ca2",
+  "productionMainSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "atJST": "2026-11-05T06:09:42.947267+09:00",
+  "quotaBefore": {
+    "observedByJST": "2026-11-05T06:09:42.947267+09:00",
+    "limitId": "codex",
+    "windowDurationMins": 10080,
+    "reset": 1794395640,
+    "usedPercent": 8,
+    "remainingPercent": 92,
+    "secondary": null,
+    "secondaryMeaning": "UNAVAILABLE_NOT_UNLIMITED"
+  },
+  "estimateAtGroupStartPp": {
+    "low": 0.75,
+    "base": 2,
+    "high": 4
+  },
+  "capPp": 10,
+  "chargedToSV": false,
+  "additionalBudgetPp": 0,
+  "basis": "Existing preauthorized477/478 continuous-v2; technical judgment from2478/2479 scope, not calibrated money or per-Source price. Compile/static/PT/post/publication included.",
+  "rows": [
+    {
+      "module": "api",
+      "main": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiConfigurationLoader.java",
+      "mainSha256": "b83a846f6559b6ce4f89af5cbcb5f6cdee602ab0c8f9a7afe85fa1b26e25b569",
+      "test": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiConfigurationLoaderTest.java",
+      "testSha256": "60381ca7e5ea04675238c7a82d18e55e0bbb1fcdd0cfa6845a364ba70812e2fd",
+      "testIds": [
+        "opsApiLoad001FixedServiceAndLayerOrder",
+        "opsApiLoad002SourceAndParserFailuresStayDistinct",
+        "opsApiLoad003NullContractsAndProductionFactory",
+        "opsApiLoad004ConcurrentFreshReads",
+        "opsApiLoad005EnvironmentIsExactBeforeFileRead"
+      ],
+      "owner": "WBS-P018-05"
+    },
+    {
+      "module": "web",
+      "main": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoader.java",
+      "mainSha256": "61b84b53aabf00554608ffcaaad8445a08f9fb2cb3db8bb07501dc24d2dd7685",
+      "test": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoaderTest.java",
+      "testSha256": "43bc7332ebf8f05b53763635b914462473fa39f1c85b433887f3e1af5f22114a",
+      "testIds": [
+        "opsWebLoad001FixedServiceAndLayerOrder",
+        "opsWebLoad002SourceAndParserFailuresStayDistinct",
+        "opsWebLoad003NullContractsAndProductionFactory",
+        "opsWebLoad004ConcurrentFreshReads",
+        "opsWebLoad005EnvironmentIsExactBeforeFileRead"
+      ],
+      "owner": "WBS-P018-06"
+    }
+  ],
+  "scope": "Two original whole5-method suites; current Main qualification missing; no new method extraction/harness or oldruntime transfer",
+  "reuse": {
+    "oldWhole10Source": "a90e303fc59938d413c2d777380bdffbe3e7f9e7",
+    "oldResults": "PG13550/13552 oracle/static evidence only",
+    "currentPartial": "PG15342/15475/15476 startup inputs only; not whole10",
+    "normalMain": "PG14216 source6b compileonly reused with input/class byte pins"
+  },
+  "disposition": "PT_DEFAULT_AFTER_FINITE_DEPENDENCY_PREFLIGHT",
+  "effects": {
+    "publicNonsecretCanonicalSha256": true,
+    "keysOrCredentials": false,
+    "ffmLibcFixedSymbolHandleBinding": true,
+    "libcFdCalls": false,
+    "actualConfigReads": false,
+    "actualDatabase": false,
+    "actualBroker": false,
+    "actualNetwork": false,
+    "actualRoot": false,
+    "actualVm": false,
+    "permissionOrNativeAccessFlagChanges": false,
+    "hostOwnThreads": "2 suites x32 fresh reads using own8thread executor; allFuture collected/closed"
+  },
+  "expectations": [
+    "Common then service exactDEBUG/001/APIpool8/Webport8082",
+    "Source exception same identity; unknown parser key rejects",
+    "Null source/contents/environment reject; factory nonnull only no production.load",
+    "32freshreads per role/callback32",
+    "Exact config env/namespace and alias reject BEFORE callback; descriptor name recognition grants no authority"
+  ],
+  "plannedCommands": [
+    "JDK25 javac current two original Test sources against pinned normalMain jars/JUnit/dependencies",
+    "Existing ConsoleLauncher explicit two wholeclass selections; implicitextensionsfalse/parallelfalse; finite180s; fresh singleJaCoCo session appendfalse",
+    "Existing JaCoCoCLI report target wholephysicaltwo classes only; original exec CRC/session verify and XML unique10/FES0",
+    "Existing PMD/Checkstyle exacttwoTest source reports no suppression; pending findings remain OPEN"
+  ],
+  "acceptance": "Current10 original unique methods pass and two wholeMain Source applicable fourcounter100 with independent oracle, source/hash/session/CRC and post; NO parentWBS/formal/F03/451 acceptance by unit alone",
+  "holdsUnchanged": [
+    "PG18474 OS unknown",
+    "External VM/DB/Root/permits/refusalunknown",
+    "QA054 limited proposal",
+    "twoheld paths/RootFailed two excluded",
+    "ako/iori nonaccess"
+  ],
+  "sourceChangesExpected": 0,
+  "registryAggregateUpdatesExpected": false,
+  "firstVReplacement": false
+}

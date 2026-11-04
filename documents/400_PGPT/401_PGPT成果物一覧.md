@@ -1,5 +1,9 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-05 現source限定実績の追加
+
+655～659/3509～3510：API/Web設定loaderの原十PTが現Main6b53で成功。全physical二Sourceのline38/method10/class2/branch20未達0・単一exec/CRC一致、PMD raw4の局所適用性を残す。新port四PT/一Sourceは1fd3554ba公開済。両結果は旧3008/451/650へ未登録sidecar、Fixture新12はTestinfra。正式1964/53・歴史17/190・工数null、親WBS新受入0、全F03/451/V/PLAN_NOT_VALIDATED・QA054/他HOLD維持。S7/10・V報告差0/10（準備あり無償ではない）と通常共有2は分離。
+
 2026-11-05 05:54：Program005/003/004、PGPT500/649～654、default業務portの新四PT/一Source全適用counterの独立証拠。PG18586全成功/CRC一致、compile・PMD・Checkstyle0、実broker/Root操作0。旧3008/451/650集計への登録前sidecarとして新実績を明示し、正式/工数/新WBS受入は不変。S7/V報告差0/計7・別通常群共有2で全観測9pp、Vへの差替えなし。最新456/460と654を参照、通常継続。
 
 2026-11-05 管理権限oracle PG：3507/3508・PGPT500/644～646/PG18570。固定SDKと全同形候補から、BUG2242の一般例外/nullを拒否成功へ扱う処理を是正。限定compile0・Checkstyle0・PMD6未抑制・独立22観点は静的確認のみで実PT0/coverage null/動的HOLD・全品質未受入。元十一操作の本文不変更、S/V別予算/正式認定を維持し通常継続。

@@ -1,0 +1,9 @@
+# 原post構文失敗の保全
+
+2026-11-05、原工具cell49faa7 actual exit1。Python compile時に `SyntaxError: keyword argument repeated: source`、`<stdin>` line41のpost=dict構築でsource=raw["source"]が先頭と末尾に重複。全本文の実行前であり、公開PG18590 manifest/657はまだ存在しない。PG18590の元driver actual0/manifest38133b73326a7e380e48b049dc082d4269316ec19c3b1e56c7d83dc0acdd0b99とJUnit十件/coverage原本は不変更。原スクリプト全文はtool call会話証跡にあり、手元ファイル保存は無い。保存したと偽らない。
+
+BUG2257/YKT2002へ修正前起票。原因は同一inline recordへ同じfieldを二回記述。postの既存raw sourceとsource_evidence_bindingの意味を分け、dict recordはsource一回、同sourceをbinderで照合する。修正bodyは別のpost.pyへ保存しPython AST/compileを先行確認する。Product/JUnit再試験は行わず元XML/exec/counter/CRC/入力/依存を独立読取する。修理費用は656原同群に含む。
+
+## 二回目post 4d2481/1（Product再演なし）
+
+保存post原SHA256 ba251e454caed4e5df9fee29491aee2b90d67722f9c13eded081ffdf7e98c063、post-attempt1.pyへ全byte保全。構文重複は修正済みだが、classinit allowlistがServiceConfigFiles$Contentsを落として停止。公開O/657前。実際は元Testが直接構築する二String非null recordで、ServiceConfigFiles.javaの既review行70～76と656/2478のContents fixtureに含まれる。未確認作用を許可へ変換するのではなく、既review済み14classのうち列挙漏れ一件を補正する。BUG2258/YKT2003へ是正前起票。元14名と13許容を差分照合、未知class混入時rejectを追加する。
