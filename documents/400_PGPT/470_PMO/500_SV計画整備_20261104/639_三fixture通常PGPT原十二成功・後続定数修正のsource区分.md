@@ -1,0 +1,11 @@
+# 三fixture通常PGPTのsource区分
+
+元PG修正source7f523d042a609f4833fbf6d7acf0c375643973ebはpush12926/2fcf68 actual0・c4a96eでremote一致。PG18558/b50ede actual0で明示12method/3Test class・78literal vectorは全件成功、F/E/S/aborted0。637/fbcd86は元XML/単一JaCoCo session/classinfo CRC三一致/全sourcehashと、helper39line/3method/18branch全miss0を照合。whole fixtureはline212/branch34/method26未実行を保持し100%とはしない。
+
+元同sourceのstaticはPMD62/processing0、Checkstyle0。637は62の原rowを全て保持して設計必須27、独立proxy所有flow9/standalone interface loader3の具体根拠と、旧constructor17/新Test literal可読性6の残件へ分類した。規則/閾値/除外を変更せずF03は未受入。これは原Product試験3008/451/正式1964/53へ追加12を合算する意味ではなく、今回のTest infrastructureに独立した12実績である。
+
+BUG2252は原61cb41/1/PMD同位置重複九群を638へ保持し、fbcd86/0は全62rowにoccurrence ordinalを付け九重複を喪失しない。受入/費用の重複加算0。製品試験/PMD自体の再演なし。
+
+BUG2253/YKT1999は三Testのイベント固定語六指摘を修正前起票し、コンパイル時定数二個ずつへ集約した。入力と20rowの独立winner/文字列値は不変更。PG18560/93977/5e457e actual0で更新六sourceを再compile、三Fixture classは原PG18554と全byte同一、Testに<clinit>/Fixture constructor/provider呼出はなくPT_DEFAULTを維持。BUG2254の元空slot停止c0d3faと名前/hash参照による是正を同manifestへ保存。旧7fの12成功を更新Test sourceの成功へ移さず、必要な12再試験と新source静的確認をこれから行う。
+
+費用は633の既承認通常PG/PT群（開始0.5/1.5/4、cap10）で、S7/10・初回V未達の枠から付け替えない。新V/新S/新investigation枠は0。六sourceの元485 canonical ownerは未登録でUNKNOWN、変更担当P004-05をcanonical/費用ownerへ推測代入しない。全trace/全451、実provider/31caller、BUG2245/YKT1991の最終閉鎖、外部HOLDは未完。

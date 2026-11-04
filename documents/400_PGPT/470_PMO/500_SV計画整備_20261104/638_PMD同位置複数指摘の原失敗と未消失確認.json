@@ -1,0 +1,76 @@
+{
+  "receipt": "61cb41",
+  "actualExit": 1,
+  "failedBeforePublicWrite": true,
+  "originalPmdSha256": "fa5f9dd8136032bff4c80b7867e778f229c65a1a55aedf8b961e14b5e5dbec7b",
+  "rawRows": 62,
+  "distinctLocationRuleKeys": 53,
+  "duplicates": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchDatabaseFixture.java",
+      "line": "89",
+      "column": "37",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "count": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchDatabaseFixture.java",
+      "line": "118",
+      "column": "39",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "count": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchDatabaseFixture.java",
+      "line": "118",
+      "column": "75",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "count": 2
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture.java",
+      "line": "96",
+      "column": "37",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "count": 2
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture.java",
+      "line": "121",
+      "column": "39",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "count": 2
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture.java",
+      "line": "121",
+      "column": "75",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "count": 2
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDatabaseFixture.java",
+      "line": "86",
+      "column": "37",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "count": 2
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDatabaseFixture.java",
+      "line": "115",
+      "column": "39",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "count": 2
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDatabaseFixture.java",
+      "line": "115",
+      "column": "75",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "count": 2
+    }
+  ],
+  "expected": "Keep every report row, including repeated same location/rule; assign stable occurrence ID; no dedup into0.",
+  "actual": "dict key uniqueness assertion rejected repeated valid PMD rows; Unit12/CRC/coverage source unchanged, public637notyetwritten",
+  "repairScope": "Read originalPMD62 and include explicit occurrence ordinal; do not rerunJUnit/PMD or alter original report"
+}

@@ -15,13 +15,16 @@ import org.junit.jupiter.api.Test;
 
 /** SS332/SSC320; BUG2245/YKT1991; NK-OPS-001/3505. JDK proxies only, no fixture instance. */
 final class WebLogDatabaseFixtureTransactionTest {
+  private static final String SETUP_EVENT = "setup:false";
+  private static final String CLOSE_EVENT = "close";
+
   /** PT-FIX-SETUP001: ownership transfers only after successful setup. */
   @Test
   void normalTransfersOwnership() throws SQLException {
     List<String> events = new ArrayList<>();
     Connection connection = connection(null, null, events);
     assertSame(connection, WebLogDatabaseFixture.beginTransaction(connection));
-    assertEquals(List.of("setup:false"), events);
+    assertEquals(List.of(SETUP_EVENT), events);
   }
 
   /** PT-FIX-SETUP002: literal SS320 truth table, independent of the implementation. */
@@ -45,7 +48,7 @@ final class WebLogDatabaseFixtureTransactionTest {
       assertSame(expected, actual, row);
       assertArrayEquals(
           other == null ? new Throwable[0] : new Throwable[] {other}, actual.getSuppressed(), row);
-      assertEquals(List.of("setup:false", "close"), events, row);
+      assertEquals(List.of(SETUP_EVENT, CLOSE_EVENT), events, row);
     }
   }
 
@@ -60,7 +63,7 @@ final class WebLogDatabaseFixtureTransactionTest {
           original,
           assertThrows(Throwable.class, () -> WebLogDatabaseFixture.beginTransaction(connection)));
       assertArrayEquals(new Throwable[0], original.getSuppressed());
-      assertEquals(List.of("setup:false", "close"), events);
+      assertEquals(List.of(SETUP_EVENT, CLOSE_EVENT), events);
     }
   }
 
@@ -95,11 +98,11 @@ final class WebLogDatabaseFixtureTransactionTest {
                 case "setAutoCommit":
                   assertEquals(1, arguments.length);
                   assertFalse((boolean) arguments[0]);
-                  events.add("setup:false");
+                  events.add(SETUP_EVENT);
                   if (setup != null) throw setup;
                   return null;
-                case "close":
-                  events.add("close");
+                case CLOSE_EVENT:
+                  events.add(CLOSE_EVENT);
                   if (close != null) throw close;
                   return null;
                 default:
