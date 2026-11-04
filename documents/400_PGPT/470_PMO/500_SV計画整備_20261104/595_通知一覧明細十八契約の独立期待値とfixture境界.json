@@ -1,0 +1,188 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S_POST_SAME10",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "testPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/NotificationControllerTest.java",
+  "testSha256": "e9267eb8a62efbc40fb16548bbcb7a401be84d59e93403608a07756d693d5239",
+  "caseReviews": [
+    {
+      "method": "ntf001IndependentWholeByteAndBothRoles",
+      "input": "Both roles,0000/0200,0/1/50,2024 leap-year inclusive366-day dates",
+      "independentExpected": "Literal NTSREQ01 320=256+64; type12/from17/to17/page6/size3/reserved9, controlled header IDs/time/context; explicit rows/role/type/submitted JST values. No production encoder generates expected request.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntf002DefaultsClosedTypesAndImmutableSnapshot",
+      "input": "Empty params, three types,page0/negative/minint/leadingzeros/999999, caller input mutation",
+      "independentExpected": "Page1/size50, absent optional filters, trimmed closed types; nonpositive->1 and999999 preserved; immutable independent snapshot/issues and redacted toString.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntf003StrictDatesInclusive366DayAndYearBounds",
+      "input": "2024 leap span/same leap-day/reverse/367days/year0001..9999/bad syntax and invalid dates",
+      "independentExpected": "Fixed UTC instants correspond JST start00:00 andend23:59:59.999; inclusive366 accepted,367 rejected; only strict valid dates accepted; invalid toRequest rejected.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntf004UnknownOwnerBindingAndNullContracts",
+      "input": "Unknown/owner/user/role/context params, duplicate/missing list,controls/malformedUnicode/invalid page/type,null map/key/list/element/args/foreign principal",
+      "independentExpected": "400/form issue/no wire for invalid input; foreign principal SessionStoreException; explicit NPE contract rejection for null, never caught as successful request.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntf005AllErrorsAndClosedWireFailures",
+      "input": "Nine fixed result codes, five corrupt offsets,JMS fault,fatal Error,10ms no reply",
+      "independentExpected": "Fixed400/401/403/404/409/429/409/503/503; malformed/transport/timeout503; no canary; Error propagates by type, not exact identity assertion; pending0/buffers erased.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntf006ProjectionCountOrderingAndIndependentFactoryNegatives",
+      "input": "Same-time IDs2/1, reversed/duplicate/later timestamp,type-state/summary101/deleted caption/page/count mismatch,null factory inputs",
+      "independentExpected": "Explicit lastUpdated desc thenID desc accepted; reversed/duplicates/malformed factories rejected; five bad reply projections503. UI236 summary100 codepoint contract is distinct from512byte wire width.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntf007AllStatesTypesSummaryAndImmutableDisplay",
+      "input": "Five states x deleted flags,100 emoji summary,invalid andempty page",
+      "independentExpected": "Literal state switch and Japanese labels, fixed JST values/id42/link, deletion marker; immutable rows/maps and redacted view; no pagination for empty/single page.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntf008MvcFiltersPaginationAndSafeDom",
+      "input": "MockMvc GET/HEAD/listPOST, empty,HTML text,51total/filter navigation/clamping,unknown owner",
+      "independentExpected": "Explicit title/options/CSRF/nav/date fields; no owner/context; listPOST405; exact next/previous URLs,51notifications/page2of2,escaped markup,no send on400; CSS pre-wrap presence. MockMvc is not Browser/Caddy.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntf009RealSecurityBothRolesAnd0102",
+      "input": "Embedded real HTTP with actual web DB and stub API login,both roles,anonymous,HEAD,unknown owner,0102",
+      "independentExpected": "Anonymous302; USER/ADMIN200/no-store; HEADempty; invalid400/no wire;0102 redirects session-expired,expires cookie then later302/no new wire. No actual ordinary API/broker route.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "ntf010ConcurrentQueryContextAndRoleIsolation",
+      "input": "100requests/8threads,distinct usernames/context and alternating type/role",
+      "independentExpected": "Own query/type label/topbar;100requests/unique IDs; each context exactly once with matching type; no pending/retained buffer. Injected onReply, no actual JMS broker.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail001BothRolesStatesAndIndependentWholeRequest",
+      "input": "Both roles x five states x target1/max12digits;0000/0200",
+      "independentExpected": "Literal NTDREQ01 total268/data12 target; fixed independent header and view role/state/id. Response NTD data8896/total9152 generated by test literals, not production encoder.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail002StateDatesDeletedAndEmptyAnswerProjection",
+      "input": "Five states x deleted,empty answer and nonempty completed answer",
+      "independentExpected": "Explicit Japanese state labels/time; deleted hides question/answer; completed+notdeleted permits answer/link even empty; ERROR fixedPROCESS_FAILED; immutable/redacted view.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail003NullTargetsAndProjectionDisagreement",
+      "input": "Null factory/controller args,foreign principal,bad targets0/-1/13digit/text/overflow,reply target2 for request1",
+      "independentExpected": "Null rejected,foreign SessionStoreException; bad targets404/no wire; mismatched response503, not repaired to requested target.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail004ErrorsMalformedAndUnknownTransport",
+      "input": "Nine result codes,wrong correlation,unknown AssertionError",
+      "independentExpected": "Fixed status table; correlation damage503; assertSame exact unknown Error identity propagates; pending0/buffers erased.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail005SafeStateDomAndHead",
+      "input": "Five states x deleted,script-looking question,legacy two-arg assembly GET/HEAD/POST/bad path",
+      "independentExpected": "Literal title/JST/deletion/empty-answer/link/error/cancelled time; no injected script; no operation_token in legacy read-only assembly; detailPOST503 because token core absent, not universal405 or full ordinary action-page expectation.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail006RealSecurityAnd0102",
+      "input": "Embedded actual HTTP+web DB/stub login API,both roles,anonymous/HEAD/0102",
+      "independentExpected": "Detail200/no-store/title,HEADempty; anonymous302;0102 session-expired+cookie invalidation, subsequent302/no new request. Not deployed route/Browser/native qualification.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail007ConcurrentIndependentTargetsAndContexts",
+      "input": "100requests/8threads,distinct targets1..100 and actor contexts",
+      "independentExpected": "Own target/model/topbar;100unique IDs; decimal target equals independently assigned hexadecimal context; buffers erased. No broker/real backend owner validation.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    },
+    {
+      "method": "detail008DeletedAnswerRejectedAtAllBoundaries",
+      "input": "Deleted COMPLETED with illegal retained answer,then corrected deleted reply",
+      "independentExpected": "LayoutValidationException at semantic validator/encoder/decoder and controller503; corrected reply renders. Production codec here is SUT for negative rejection, never expected-byte generator.",
+      "currentExecutionQualified": false,
+      "newPass": false
+    }
+  ],
+  "references": [
+    "UI224",
+    "UI236 sections8-9",
+    "SS313",
+    "SS323",
+    "504",
+    "586"
+  ],
+  "independentOracle": {
+    "requestTotals": [
+      320,
+      268
+    ],
+    "listDataBytes": 48,
+    "listRecordBytes": 624,
+    "maxRows": 50,
+    "detailDataBytes": 8896,
+    "detailTotalBytes": 9152,
+    "literalStateSwitch": true,
+    "productionCodecOnlyAsSubjectOfNegativeChecks": true,
+    "fixtureQueryDependentFields": "Read literal request bytes to construct matching synthetic replies; not an independent database/filter implementation oracle."
+  },
+  "scopeBindings": {
+    "P016-20": "list10 shared source",
+    "P016-21": "detail8 shared source",
+    "costAllocation": "No split by method or duplicate file charge"
+  },
+  "fixtureBoundaries": [
+    "BeforeAll starts WebLogDatabaseFixture PostgreSQL18; no execution here",
+    "JmsRequestReplyClient uses injected onReply; not Artemis",
+    "MockMvc and embedded HTTP fixtures are not ordinary deployed API/Web/Caddy/Browser/CHR/native",
+    "NotificationMvcConfiguration creates two-arg controller; tokens absent, cancelPOST503/action form absent. Full ordinary assembly contract remains separate.",
+    "No DB-owner SQL enforcement proved by synthetic response tests"
+  ],
+  "sourceReadReceipts": [
+    "7a70f4",
+    "641850",
+    "5831d6",
+    "9c2b01",
+    "18128c",
+    "7ef5a4",
+    "40d277",
+    "abbf63",
+    "90a083",
+    "e09cb0",
+    "5cf769"
+  ],
+  "noNewDefectDeterminedByThisReview": true,
+  "newProductPT": 0,
+  "coverageAdded": 0,
+  "newAcceptedCriteria": 0,
+  "formalUpdated": false,
+  "effortCompletion": null
+}
