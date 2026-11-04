@@ -1,0 +1,211 @@
+package dev.codex.schubert.nk.api.messaging.outbound;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import jakarta.jms.BytesMessage;
+import jakarta.jms.JMSContext;
+import jakarta.jms.JMSException;
+import java.lang.reflect.Proxy;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import org.junit.jupiter.api.Test;
+
+/** NK-MSG-001; MQ003/008; UI231/232/233; SS321 section8/SSC151; PT-JMS-ENV001..004. */
+final class JmsReplyEnvelopeContractTest {
+  private static final String REQUEST_ID = "00000000-0000-0000-0000-000000000001";
+  private static final String RESPONSE = "00000000-0000-0000-0000-000000000002";
+  private static final String STAGE_CREATE = "create";
+  private static final String PROVIDER_FAILURE = "synthetic provider";
+  private static final String MESSAGE_PROPERTY = "NKMessageID";
+  private static final String LAYOUT_PROPERTY = "NKLayoutID";
+  private static final String VERSION_PROPERTY = "NKProtocolVersion";
+  private static final List<String> STAGES =
+      List.of(
+          STAGE_CREATE,
+          "write",
+          "correlation",
+          MESSAGE_PROPERTY,
+          LAYOUT_PROPERTY,
+          VERSION_PROPERTY);
+
+  @Test
+  void envelope001LiteralSyncAndApprovedAsyncRepliesKeepBodyAndExactProperties() throws Exception {
+    for (boolean async : List.of(false, true)) {
+      byte[] input = reply(async);
+      byte[] original = input.clone();
+      var fixture = new Fixture(null, null, false);
+      BytesMessage actual = JmsMessageFactory.INSTANCE.createReply(fixture.context, input);
+      assertSame(fixture.message, actual);
+      assertArrayEquals(original, fixture.body);
+      assertArrayEquals(original, input);
+      assertEquals(REQUEST_ID, fixture.correlation);
+      assertEquals(
+          Map.of(
+              MESSAGE_PROPERTY,
+              RESPONSE,
+              LAYOUT_PROPERTY,
+              async ? "QSBRSP01" : "LGNRSP01",
+              VERSION_PROPERTY,
+              "001"),
+          fixture.properties);
+      assertEquals(STAGES, fixture.events);
+    }
+  }
+
+  @Test
+  void envelope002NullMalformedRequestOversizeAndLengthMismatchNeverAcquireMessage() {
+    byte[] valid = reply(false);
+    var fixture = new Fixture(null, null, false);
+    assertThrows(
+        NullPointerException.class, () -> JmsMessageFactory.INSTANCE.createReply(null, valid));
+    assertThrows(
+        NullPointerException.class,
+        () -> JmsMessageFactory.INSTANCE.createReply(fixture.context, null));
+    byte[] shortBody = new byte[255];
+    assertThrows(
+        PermanentProtocolException.class,
+        () -> JmsMessageFactory.INSTANCE.createReply(fixture.context, shortBody));
+    byte[] request = request();
+    byte[] longer = Arrays.copyOf(valid, valid.length + 1);
+    byte[] oversized = Arrays.copyOf(valid, 1_000_001);
+    for (byte[] invalid : List.of(request, longer, oversized)) {
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> JmsMessageFactory.INSTANCE.createReply(fixture.context, invalid));
+    }
+    assertEquals(List.of(), fixture.events);
+  }
+
+  @Test
+  void envelope003ProviderFailuresKeepIdentityAndNeverRetryOrContinue() {
+    byte[] valid = reply(false);
+    for (int stage = 0; stage < STAGES.size(); stage++) {
+      List<Throwable> failures =
+          stage == 0
+              ? List.of(
+                  new IllegalStateException(PROVIDER_FAILURE), new AssertionError(PROVIDER_FAILURE))
+              : List.of(
+                  new JMSException(PROVIDER_FAILURE),
+                  new IllegalStateException(PROVIDER_FAILURE),
+                  new AssertionError(PROVIDER_FAILURE));
+      for (Throwable failure : failures) {
+        var fixture = new Fixture(STAGES.get(stage), failure, false);
+        assertSame(
+            failure,
+            assertThrows(
+                failure.getClass(),
+                () -> JmsMessageFactory.INSTANCE.createReply(fixture.context, valid)));
+        assertEquals(STAGES.subList(0, stage + 1), fixture.events);
+      }
+    }
+  }
+
+  @Test
+  void envelope004NullProviderResultFailsBeforeAnyMessageOperation() {
+    byte[] valid = reply(false);
+    var fixture = new Fixture(null, null, true);
+    assertThrows(
+        NullPointerException.class,
+        () -> JmsMessageFactory.INSTANCE.createReply(fixture.context, valid));
+    assertEquals(List.of(STAGE_CREATE), fixture.events);
+  }
+
+  /** Literal UI232 offsets; no production encoder or runtime authentication is used. */
+  private static byte[] reply(boolean async) {
+    byte[] body =
+        header(async ? 320 : 688, async ? "QSBRSP01" : "LGNRSP01", "S", async ? "A" : "S");
+    put(body, 24, RESPONSE);
+    put(body, 60, REQUEST_ID);
+    if (async)
+      put(body, 113, "0".repeat(64)); // Public synthetic format-only context, never admitted.
+    put(body, 181, async ? "000064" : "000432");
+    put(body, 199, async ? "000000320" : "000000688");
+    put(body, 208, "0100");
+    return body;
+  }
+
+  private static byte[] request() {
+    byte[] body = header(640, "LGNREQ01", "Q", "S");
+    put(body, 24, REQUEST_ID);
+    put(body, 60, REQUEST_ID);
+    put(body, 181, "000384");
+    put(body, 199, "000000640");
+    return body;
+  }
+
+  private static byte[] header(int length, String layout, String kind, String interaction) {
+    byte[] body = new byte[length];
+    Arrays.fill(body, (byte) ' ');
+    put(body, 0, "SCHBNK01");
+    put(body, 8, "001");
+    put(body, 11, layout);
+    put(body, 19, "001");
+    put(body, 22, kind);
+    put(body, 23, interaction);
+    put(body, 96, "20260903120000000");
+    put(body, 177, "0256");
+    put(body, 187, "000000");
+    put(body, 193, "000000");
+    return body;
+  }
+
+  private static void put(byte[] target, int offset, String value) {
+    byte[] bytes = value.getBytes(StandardCharsets.US_ASCII);
+    System.arraycopy(bytes, 0, target, offset, bytes.length);
+  }
+
+  private static final class Fixture {
+    private final List<String> events = new ArrayList<>();
+    private final Map<String, Object> properties = new LinkedHashMap<>();
+    private final BytesMessage message;
+    private final JMSContext context;
+    private byte[] body;
+    private String correlation;
+
+    Fixture(String failedStage, Throwable failure, boolean nullResult) {
+      message =
+          (BytesMessage)
+              Proxy.newProxyInstance(
+                  BytesMessage.class.getClassLoader(),
+                  new Class<?>[] {BytesMessage.class},
+                  (proxy, method, args) -> {
+                    String stage =
+                        switch (method.getName()) {
+                          case "writeBytes" -> "write";
+                          case "setJMSCorrelationID" -> "correlation";
+                          case "setStringProperty" -> (String) args[0];
+                          default -> throw new AssertionError("unexpected message operation");
+                        };
+                    events.add(stage);
+                    if (stage.equals(failedStage)) throw failure;
+                    switch (method.getName()) {
+                      case "writeBytes" -> body = ((byte[]) args[0]).clone();
+                      case "setJMSCorrelationID" -> correlation = (String) args[0];
+                      case "setStringProperty" -> properties.put((String) args[0], args[1]);
+                      default -> throw new AssertionError("unexpected message operation");
+                    }
+                    return null;
+                  });
+      context =
+          (JMSContext)
+              Proxy.newProxyInstance(
+                  JMSContext.class.getClassLoader(),
+                  new Class<?>[] {JMSContext.class},
+                  (proxy, method, args) -> {
+                    if (!method.getName().equals("createBytesMessage"))
+                      throw new AssertionError("unexpected context operation");
+                    events.add(STAGE_CREATE);
+                    if (STAGE_CREATE.equals(failedStage)) throw failure;
+                    return nullResult ? null : message;
+                  });
+    }
+  }
+}

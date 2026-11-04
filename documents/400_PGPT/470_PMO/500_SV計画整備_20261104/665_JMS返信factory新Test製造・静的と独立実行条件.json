@@ -1,0 +1,45 @@
+{
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "testInputHash": "9187f5a6b40e071a5eec53eb5df476c4147023556f35ac517b338a88e04739c9",
+  "mainUnchanged": true,
+  "newTestMethods": 4,
+  "testStatus": "NOT_EXECUTED",
+  "sourceBase": "fddc43990ad7776baa2abb9b456097f530e5b69d",
+  "compiledTestClasses": {
+    "dev/codex/schubert/nk/api/messaging/outbound/JmsReplyEnvelopeContractTest$Fixture.class": "e761a8ec4df040b177ea1d6e47edbc36df39c6ec5013bbed4c6906ae8b06aa0b",
+    "dev/codex/schubert/nk/api/messaging/outbound/JmsReplyEnvelopeContractTest.class": "46ea3434b6cbeb4aa53c3c5f0f562ec0630878b9f71166b2dc9be36b7416f8e1"
+  },
+  "manifest": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18598-jms-envelope-pg-static-v1/manifest.json",
+  "manifestSha256": "154ac5333302967f786541a587e6a085dadd820336cc0119c9a78fed020b7b45",
+  "originalStaticSix": "PG18594/77705/b28d1b originalfullSource9553e109… retained",
+  "fix": "REQUEST_ID/STAGE_CREATE same literalvalues, original26vectors unchanged; finalformatter7677000",
+  "static": [
+    {
+      "rule": "UseConcurrentHashMap",
+      "line": "167",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": "177",
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": "200",
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+    }
+  ],
+  "pmdRaw": 3,
+  "processing": 0,
+  "checkstyle": 0,
+  "scope": "JMSContext/BytesMessage interfaces-only ownJDK proxies; targetJmsMessageFactory plus protocolMain. Runtime classpath only own API/protocol jars + JMSapi/JUnit/agent. No Artemis/provider/driver/broker/Root/native/keys.",
+  "expected": "Program005/005 and662 literalUI232 offsets plus scalar response identity/callstage prefix oracle",
+  "heldWholeSix": "661 NOT_RUN",
+  "normalMain": "PG14216 untouchedsource6b; no Main compilation/PT repeat",
+  "fixBug": "BUG2260/YKT2005",
+  "priorMetadataRepair": "BUG2259/YKT2004 663 allbodyunexecuted→099387 preservedlast3795 then3796/3797 exactlyonce",
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "firstVChanged": false
+}

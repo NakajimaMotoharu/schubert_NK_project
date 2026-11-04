@@ -1,0 +1,63 @@
+{
+  "source": "fddc43990ad7776baa2abb9b456097f530e5b69d",
+  "productionMainSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "atJST": "2026-11-05T06:27:00.276452+09:00",
+  "groupId": "PGPT-20261105-JMS-REPLY-ENVELOPE",
+  "owner": "WBS-P005-03",
+  "main": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.java",
+  "mainSha256": "90c2401c0755b6ef1bb7e15c3847d268d9401a30d7ea9a4409f7516d7c500957",
+  "test": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JmsReplyEnvelopeContractTest.java",
+  "originalEstimatePp": {
+    "low": 0.5,
+    "base": 1.5,
+    "high": 3
+  },
+  "capPp": 10,
+  "chargedToSV": false,
+  "additionalBudgetPp": 0,
+  "quotaBefore": {
+    "observedByJST": "2026-11-05T06:27:00.276452+09:00",
+    "limitId": "codex",
+    "windowDurationMins": 10080,
+    "reset": 1794395640,
+    "usedPercent": 8,
+    "remainingPercent": 92,
+    "secondary": null,
+    "secondaryMeaning": "UNAVAILABLE_NOT_UNLIMITED"
+  },
+  "authority": "Ordinary477/478; not S/V or cost calibration",
+  "related": [
+    "NK-MSG-001",
+    "RD MQ003/008",
+    "UI231/232/233 IF001",
+    "SS311/321§8",
+    "451"
+  ],
+  "disposition": "PT_DEFAULT_INDEPENDENT_MESSAGE_CONSTRUCTION_ONLY",
+  "operation": "OwnJDK JMSContext/BytesMessage proxy callbacks plus protocol HeaderCodec.peek. No send/producer/commit/connection/broker/native/keys/Root/VM/DB.",
+  "legacyScope": "OutboundJmsAdapterTest actualBroker TTL/DLQ/commit/rollback remain NOT_RUN/HOLD; no method/fixture extraction. New bounded factory validation/API exception propagation is not broker compatibility.",
+  "closure": "JmsMessageFactory plus HeaderCodec/LayoutRegistry/FieldCodec/CommonHeader/JST/ResultCode. No TemporaryInfrastructureException/WebStartupException/keyring/Root/native/connection factory.",
+  "golden": "UI232 zero-based0/8/11/19/22/23/24/60/96/113/177/181/187/193/199/208/212. LGNRSP01/S/S data432,total688,error0101,auth/reserved spaces,UUID2/correlationUUID1,date20260903120000000. Opaque errorbody spaces; no actualsession/token/password. LGNREQ01/Q/S data384,total640,UUID1/samecorrelation,resultspaces.",
+  "expectations": [
+    "Exact originalbody/correlationUUID1/NKMessageIDUUID2/layoutLGNRSP01/protocol001; return ownmessage and fixedcallorder, no send/commit",
+    "Null/short/request/declaredactualmismatch/1000001byte reject BEFORE creation",
+    "Literal provider failure stage table: exact checked/runtime/Error identity, once and no latercall; fixture generation outside assert"
+  ],
+  "commands": [
+    "JDK javac then existingConsole whole newclass/autoextensionsfalse/parallelfalse finite180s",
+    "One newJaCoCo session appendfalse, fullphysical factoryenum report/CRC/session; no oldexec",
+    "Existing PMD/Checkstyle and independentpost; rawfindings not suppressed"
+  ],
+  "acceptance": "Actual unique tests and fullfactory applicable fourcounter100 only if proven; not oldbroker/parentWBS/451/F03/formal/V acceptance",
+  "firstVReplacement": false,
+  "mainChangePlanned": false,
+  "holdsUnchanged": true,
+  "beforeFirstCompileSupplement": {
+    "goldenAsync": "QSBRSP01 S/A data64 total320 result0100, format-only public zero64 auth. SS321 SSC151/UI233/232. No session/key issuance.",
+    "testSha256BeforeFormat": "f146d3452d28accc5fd5b5e87591cc2f232430534281ae2f1fd19187b6678173",
+    "testMethods": 4,
+    "negativeOracle": "All Fixture/wire/throwable construction outside assert target; assertSame injectedprovider identity. Expected values from independent literalUI offsets; no production expected generator.",
+    "nativeOps": 0,
+    "providerOrBrokerStarted": false
+  }
+}
