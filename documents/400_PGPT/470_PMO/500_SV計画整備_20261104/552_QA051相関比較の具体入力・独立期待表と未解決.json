@@ -1,0 +1,176 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S_POST_SAME10",
+  "status": "PLANNING_CONTRACT_NOT_IMPLEMENTED_OR_EXECUTED",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "designMain": "bf11a7b63e0d97c34f15a56b41bfd57681c38ccc",
+  "WBS": [
+    "WBS-P020-01.01",
+    "WBS-P020-01.02",
+    "WBS-P020-01.03"
+  ],
+  "references": [
+    "UI264 section5.1",
+    "SS351 section3/4/4.1",
+    "SS355 section8.1",
+    "QA051/UIC010/SSC184"
+  ],
+  "observedImplementationGap": {
+    "receipt": "8e937e/0",
+    "driver": "CurrentCharacterizationTest.chrL01LogProjection resets dedicated Current fixture and captures full actions/types arrays plus DOM counts",
+    "comparator": "ArtifactComparator.compare validates exact field/mode/selector and expected values for each DIF, with full raw differences; existing DIF010 field remains log.filters",
+    "missing": "Correlated before/after + immutable independently fixed per-operation expectations + per-event local/outbox/DB closure and additional-row accounting; generic DIF010 selector is not broad projection approval",
+    "oldEvidence": "Keep Current baseline unchanged; old observations/actual0 cannot certify this design"
+  },
+  "projectionContract": {
+    "frozenInputs": [
+      "Current/NK source and design IDs",
+      "artifact schema and oracle revision",
+      "named dedicated fixture and ownership",
+      "before/after observation consistency",
+      "logical operation names and independent expected rows",
+      "local/outbox/DB event associations",
+      "HTTP/DOM observed results"
+    ],
+    "publicFields": [
+      "logicalOperation",
+      "category",
+      "mappedAction",
+      "outcome",
+      "httpMethod",
+      "safeRoute",
+      "status",
+      "responseBytes",
+      "orderingKeyForDisplay",
+      "rowMultiplicity"
+    ],
+    "sideSpecificCorrelation": "Request/event/message identifiers are matched within each side and replaced by explicit public operation aliases across sides; no cross-system raw PK equality requirement. Source IDs are retained only under existing safe evidence rules.",
+    "normalization": "Only three named QA051 mappings with correct operation/category context; no uppercase fallback, broad category skip or arbitrary rows dropped.",
+    "requestProjection": "For every fixed HTTP terminal event local/outbox/DB bind to the same event, expected logical DB count1 after delivery/replay; pending/failed local supplements do not create another DB event. DB-before-ACK replay preserves original row.",
+    "notReplaced": [
+      "API transactional business/security audits",
+      "screen datetime ordering and100/page",
+      "display count/detail/search and business result",
+      "Current original log preservation"
+    ],
+    "unknownOutcome": "UNDETERMINED_OR_FAIL; never PASS"
+  },
+  "operationTable": [
+    {
+      "id": "L01-OP-REQUEST",
+      "basis": "SS351 section3.3 and4",
+      "currentAction": "empty",
+      "nkAction": "HTTP_REQUEST_COMPLETED",
+      "category": "REQUEST",
+      "precondition": "Same identified actual HTTP completion, trusted transport metadata and before/after association",
+      "requiredLogicalDBMultiplicityPerEvent": 1
+    },
+    {
+      "id": "L01-OP-LOGIN",
+      "basis": "UI264 section5.1 / SS351 section4",
+      "currentAction": "login_success",
+      "nkAction": "LOGIN_SUCCEEDED",
+      "category": "SECURITY",
+      "precondition": "Same successful authentication operation; request association and independent expected audit",
+      "requestProjectionIsSeparate": true
+    },
+    {
+      "id": "L01-OP-SEARCH",
+      "basis": "UI264 section5.1 / SS351 section4",
+      "currentAction": "search",
+      "nkAction": "SCENARIO_SEARCHED",
+      "category": "ACTION",
+      "precondition": "Same scenario query and outcome; no raw query/body; request projection separate"
+    },
+    {
+      "id": "L01-OP-MENU",
+      "currentAction": "menu",
+      "nkAction": null,
+      "expectedMultiplicity": null,
+      "status": "CALLER_AND_CATALOG_ASSOCIATION_NOT_YET_RESOLVED_DO_NOT_DROP",
+      "next": "Read approved menu logging caller context and UI252/SS351; distinguish REQUEST from additional required action; internal implementation/design supplement classification before oracle code"
+    },
+    {
+      "id": "L01-OP-LOGSEARCH",
+      "currentAction": "log_search",
+      "nkAction": null,
+      "expectedMultiplicity": null,
+      "status": "CALLER_AND_CATALOG_ASSOCIATION_NOT_YET_RESOLVED_DO_NOT_DROP",
+      "next": "Identify log query caller/category/action and self-observation timing without excluding its row"
+    }
+  ],
+  "independentFutureVectors": [
+    {
+      "id": "PT-CHR-L01-C01",
+      "input": "one REQUEST with proper local/outbox/DB event binding and mapped empty->HTTP_REQUEST_COMPLETED",
+      "expected": "qualified logical projection equal; all retained DOM/business values equal"
+    },
+    {
+      "id": "PT-CHR-L01-C02",
+      "input": "proper login_success/LOGIN_SUCCEEDED and search/SCENARIO_SEARCHED in their categories",
+      "expected": "only approved contextual differences accepted"
+    },
+    {
+      "id": "PT-CHR-L01-C03",
+      "input": "same event replayed after DB commit before ACK, original row unchanged",
+      "expected": "one logical DB row; no loss or duplicate"
+    },
+    {
+      "id": "PT-CHR-L01-N01",
+      "input": "REQUEST DB row missing",
+      "expected": "FAIL missing event"
+    },
+    {
+      "id": "PT-CHR-L01-N02",
+      "input": "two logical DB rows for one event",
+      "expected": "FAIL duplicate"
+    },
+    {
+      "id": "PT-CHR-L01-N03",
+      "input": "same timestamp/watermark but different request/event association",
+      "expected": "UNDETERMINED correlation, not PASS"
+    },
+    {
+      "id": "PT-CHR-L01-N04",
+      "input": "empty action outside REQUEST category or login_success with failed login",
+      "expected": "FAIL context mismatch, no string substitution"
+    },
+    {
+      "id": "PT-CHR-L01-N05",
+      "input": "unmapped menu/log_search or arbitrary technical row",
+      "expected": "UNDETERMINED unresolved required mapping or FAIL unapproved addition, never ignored"
+    },
+    {
+      "id": "PT-CHR-L01-N06",
+      "input": "correct projection but changed order/count/page/detail/HTTP/business result",
+      "expected": "FAIL unregistered observable difference"
+    },
+    {
+      "id": "PT-CHR-L01-N07",
+      "input": "secrets/raw query/body/session/credential in public projection",
+      "expected": "REJECT artifact before publication"
+    },
+    {
+      "id": "PT-CHR-L01-N08",
+      "input": "source/oracle/fixture identity absent or mismatched, partial snapshot",
+      "expected": "UNDETERMINED qualification, no acceptance"
+    }
+  ],
+  "executionBoundary": {
+    "thisStageProductTests": 0,
+    "fixtureReset": 0,
+    "CurrentBaselineModified": false,
+    "VMDBNativeAccess": false,
+    "nextPGRequires": "Existing permission/HOLD and source/fixture/ownership preconditions checked per operation; no refusal probing",
+    "wholeContractAcceptance": "Implement comparator/artifacts and independently test normal/negative contracts; permitted same-source actual L01; all parent/source/451 exits"
+  },
+  "estimate": {
+    "low": null,
+    "base": null,
+    "high": null,
+    "reason": "No fully accepted same-kind cycle; first V blocked; unresolved menu/log_search and real route prerequisites. Historical SQL18 shared2pp is not comparator full-cycle price."
+  },
+  "newAcceptedCriteria": 0,
+  "coverageAdded": 0,
+  "effortCompletion": null
+}

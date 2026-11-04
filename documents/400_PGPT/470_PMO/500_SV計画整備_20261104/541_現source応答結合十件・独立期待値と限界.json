@@ -1,0 +1,269 @@
+{
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "actualExit": 0,
+  "postSha256": "6b5c22e929862e1fef12dca365d8f38015e988668439bea706bb9d53b7ba428a",
+  "existingCurrentCasesMatched": 10,
+  "rows": [
+    {
+      "id": "dev.codex.schubert.nk.api.application.media.MediaRequestDescriptorBindingTest#mediaBind001AudioUsesCanonicalNumericIdAndRequestedDisposition",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaRequestDescriptorBindingTest.java",
+      "sha256": "21b6d6830f46eb260d7b64b01b2b8863e913bbe9115049dd6c12fbb648b49a1b",
+      "span": [
+        38,
+        64
+      ],
+      "decision": "RETAIN_EXISTING_CURRENT_CASE_REFERENCE_NOT_NEW_PASS",
+      "testId": "PT-MED-BIND001",
+      "design": "UI235§2/§3、SS323§9.2",
+      "input": "手書AUD16/N12=700/disposition I又はA、AUDRSP01 literal metadata",
+      "independentExpectation": "AUDIO/logicalId700/path scenario/a.ogg/file a.ogg/長1/SHAzero64/MIME audio/ogg/要求disposition。ID701/別disposition拒否、同metadata再照会安定",
+      "limits": "独立値はliteralid/path/size/MIME/hash/要求metadata。enum値列挙は外部許可catalog全証明でない",
+      "staticSemanticReviewPerformed": true,
+      "oldCaseRenamedOrAdded": false
+    },
+    {
+      "id": "dev.codex.schubert.nk.api.application.media.MediaRequestDescriptorBindingTest#mediaBind002MusicKeepsTrackIdAndMaximumMetadataLength",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaRequestDescriptorBindingTest.java",
+      "sha256": "21b6d6830f46eb260d7b64b01b2b8863e913bbe9115049dd6c12fbb648b49a1b",
+      "span": [
+        66,
+        92
+      ],
+      "decision": "RETAIN_EXISTING_CURRENT_CASE_REFERENCE_NOT_NEW_PASS",
+      "testId": "PT-MED-BIND002",
+      "design": "UI235§2/§10、SS323§9.2",
+      "input": "MED72のoffset0 track music-0/offset64 disposition、MEDRSP01",
+      "independentExpectation": "MUSIC/track保存/N12最大999999999999/path music/曲.flac/file曲.flac/MIME audio/flac/disposition。同IDとrequested disposition拘束、otherID/他disposition拒否",
+      "limits": "最大はN12上限の算術、path/file/MIMEは手書。実file length/hash/存在を検査しない",
+      "staticSemanticReviewPerformed": true,
+      "oldCaseRenamedOrAdded": false
+    },
+    {
+      "id": "dev.codex.schubert.nk.api.application.media.MediaRequestDescriptorBindingTest#mediaBind003VideoIsInlineAndCannotRebindLogicalIdentity",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaRequestDescriptorBindingTest.java",
+      "sha256": "21b6d6830f46eb260d7b64b01b2b8863e913bbe9115049dd6c12fbb648b49a1b",
+      "span": [
+        94,
+        118
+      ],
+      "decision": "RETAIN_EXISTING_CURRENT_CASE_REFERENCE_NOT_NEW_PASS",
+      "testId": "PT-MED-BIND003",
+      "design": "UI235§6、SS323§9.2",
+      "input": "VID64 opening/VIDRSP01 literal descriptor",
+      "independentExpectation": "VIDEO/opening/video/opening.mp4/video/mp4/INLINE、別ID/ATTACHMENT/null/audioのresponse layout拒否",
+      "limits": "入力responseはliteralVIDRSP01で独立。metadataの保証だけでRoot descriptor/file配信/Rangeの証明ではない",
+      "staticSemanticReviewPerformed": true,
+      "oldCaseRenamedOrAdded": false
+    },
+    {
+      "id": "dev.codex.schubert.nk.api.application.media.MediaRequestDescriptorBindingTest#mediaBind004NonDescriptorsReturnEmptyOnlyAfterLayoutCheck",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaRequestDescriptorBindingTest.java",
+      "sha256": "21b6d6830f46eb260d7b64b01b2b8863e913bbe9115049dd6c12fbb648b49a1b",
+      "span": [
+        120,
+        137
+      ],
+      "decision": "RETAIN_EXISTING_CURRENT_CASE_REFERENCE_NOT_NEW_PASS",
+      "testId": "PT-MED-BIND004",
+      "design": "UI235§4/5/7/8/9、MediaRequest.descriptor責務",
+      "input": "ANM/ANL/MCT/MCS/MTRの五非descriptor kind、same-layout metadataとAUD別layout/null",
+      "independentExpectation": "descriptorRequest=false、同layoutでOptional.empty、null/別layout拒否、再呼出しempty",
+      "limits": "sameLayoutはSUT responseLayoutIdを入力生成に使うmetamorphic条件で、変換layoutの独立goldenではない。与えたPagedResponseDataが各layoutの正常wire dataだという主張もせず、非descriptorの早期判定だけを再利用",
+      "staticSemanticReviewPerformed": true,
+      "oldCaseRenamedOrAdded": false
+    },
+    {
+      "id": "dev.codex.schubert.nk.api.application.question.QuestionQueryResponseBindingTest#qryBind001QuestionDetailRequiresOriginalId",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryResponseBindingTest.java",
+      "sha256": "9b04113db75e98c0ecbaccd5e5b10987c93036b4183ebf7dc223a8cf35ab5205",
+      "span": [
+        39,
+        46
+      ],
+      "decision": "RETAIN_EXISTING_CURRENT_CASE_REFERENCE_NOT_NEW_PASS",
+      "testId": "PT-QRY-BIND001",
+      "design": "UI236 IF027 QSD N12、SS323/332",
+      "input": "要求ID999999999999/応答同ID、別999999999998",
+      "independentExpectation": "literalQSDRSP01＋同ID成功、別ID拒否、同ID再成功",
+      "limits": "ID/layoutは手書、response bodyには固定receipt/username/state/UTC。DB owner認可や同ownerの権限付与は対象外",
+      "staticSemanticReviewPerformed": true,
+      "oldCaseRenamedOrAdded": false
+    },
+    {
+      "id": "dev.codex.schubert.nk.api.application.question.QuestionQueryResponseBindingTest#qryBind002NotificationDetailRequiresOriginalId",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryResponseBindingTest.java",
+      "sha256": "9b04113db75e98c0ecbaccd5e5b10987c93036b4183ebf7dc223a8cf35ab5205",
+      "span": [
+        48,
+        55
+      ],
+      "decision": "RETAIN_EXISTING_CURRENT_CASE_REFERENCE_NOT_NEW_PASS",
+      "testId": "PT-QRY-BIND002",
+      "design": "UI236 IF029 NTD N12、SS323/332",
+      "input": "通知要求IDmax/同ID・max-1のresponse",
+      "independentExpectation": "literalNTDRSP01＋同ID成功、別ID拒否、再呼出し安定",
+      "limits": "固定enum/日時/optional明示。notification/question owner・実DB参照は別契約",
+      "staticSemanticReviewPerformed": true,
+      "oldCaseRenamedOrAdded": false
+    },
+    {
+      "id": "dev.codex.schubert.nk.api.application.question.QuestionQueryResponseBindingTest#qryBind003CorrectLayoutDoesNotAdmitWrongDataFamily",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryResponseBindingTest.java",
+      "sha256": "9b04113db75e98c0ecbaccd5e5b10987c93036b4183ebf7dc223a8cf35ab5205",
+      "span": [
+        57,
+        72
+      ],
+      "decision": "RETAIN_EXISTING_CURRENT_CASE_REFERENCE_NOT_NEW_PASS",
+      "testId": "PT-QRY-BIND003",
+      "design": "UI236 typed response/SS323 payload family",
+      "input": "detailにpage data、searchにquestion detail data。layout入力はSUTの同layoutを意図的使用",
+      "independentExpectation": "どちらもIllegalArgumentException",
+      "limits": "同layoutに条件付けてdata family違反を分離する負例。layout変換の絶対値を証明しない。527/PG14762 plain004等の既literal proofと責務を分け、coverage合算0",
+      "staticSemanticReviewPerformed": true,
+      "oldCaseRenamedOrAdded": false
+    },
+    {
+      "id": "dev.codex.schubert.nk.api.application.question.QuestionQueryResponseBindingTest#qryBind004EmptySearchClampsEveryRequestedBoundaryToOne",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryResponseBindingTest.java",
+      "sha256": "9b04113db75e98c0ecbaccd5e5b10987c93036b4183ebf7dc223a8cf35ab5205",
+      "span": [
+        74,
+        95
+      ],
+      "decision": "RETAIN_EXISTING_CURRENT_CASE_REFERENCE_NOT_NEW_PASS",
+      "testId": "PT-QRY-BIND004",
+      "design": "UI236 page offset366/46、SS332§3",
+      "input": "二searchの手書page1/2/999999をDATAへ置換、応答page1又は2/size50/total0/pages1/firstlast0",
+      "independentExpectation": "独立0件post条件page1は成功、page2は拒否、正応答を再受理",
+      "limits": "page・size・totalはliteral独立値。response layoutはSUTから入力へ用いるため絶対layout対応のoracleではない。元request.pageはこの結果で上書きしない",
+      "staticSemanticReviewPerformed": true,
+      "oldCaseRenamedOrAdded": false
+    },
+    {
+      "id": "dev.codex.schubert.nk.api.application.scenario.ScenarioScriptFileBindingTest#scriptBind001DetailIdSurvivesCallerByteMutationAndOtherRequests",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioScriptFileBindingTest.java",
+      "sha256": "a7fe439fdbcab85e7d783ce4904cc32d2c5f1ba90111909720cf118972ce9706",
+      "span": [
+        17,
+        38
+      ],
+      "decision": "RETAIN_EXISTING_CURRENT_CASE_REFERENCE_NOT_NEW_PASS",
+      "testId": "PT-SCN-SCRIPTBIND001",
+      "design": "UI234 IF008 N12、SS323§9.1",
+      "input": "SCNREQ01の手書1/30/999999999999、元DATAを後からzero、別request2",
+      "independentExpectation": "header identity維持、scriptFileId1/30/max、literalSCNRSP01、別request2作成後も元ID不変",
+      "limits": "Long.parseLong(expected literal)は標準独立算出。wire helper自体のcloneもあるのでこの変異だけで全request内部所有実装を証明しない。query/file再生成/実パス検査なし",
+      "staticSemanticReviewPerformed": true,
+      "oldCaseRenamedOrAdded": false
+    },
+    {
+      "id": "dev.codex.schubert.nk.api.application.scenario.ScenarioScriptFileBindingTest#scriptBind002EveryOtherKindHasNoDetailId",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioScriptFileBindingTest.java",
+      "sha256": "a7fe439fdbcab85e7d783ce4904cc32d2c5f1ba90111909720cf118972ce9706",
+      "span": [
+        40,
+        62
+      ],
+      "decision": "RETAIN_EXISTING_CURRENT_CASE_REFERENCE_NOT_NEW_PASS",
+      "testId": "PT-SCN-SCRIPTBIND002",
+      "design": "UI234 GAM/SPK/RTE/SCF/SRC、SS323§9.1",
+      "input": "GAM0/SPK12/RTE12/SCF14/SRC672の独立layout表",
+      "independentExpectation": "scriptFileId.empty、literalGAM/SPK/RTE/SCF/SRC response対応",
+      "limits": "expected response表はTest literalでSUTから生成しない。canonical全field列・SQL/ページ/ファイルの証明に拡大しない",
+      "staticSemanticReviewPerformed": true,
+      "oldCaseRenamedOrAdded": false
+    }
+  ],
+  "fullSourceUnits": {
+    "dev/codex/schubert/nk/api/application/media/MediaRequest": {
+      "branchNaturallyZero": false,
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/api/application/media/MediaRequest",
+        "dev/codex/schubert/nk/api/application/media/MediaRequest$Kind"
+      ],
+      "threeCounter100": false,
+      "totals": {
+        "BRANCH": {
+          "covered": 26,
+          "missed": 16
+        },
+        "CLASS": {
+          "covered": 2,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 64,
+          "missed": 44
+        },
+        "METHOD": {
+          "covered": 6,
+          "missed": 4
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/application/scenario/ScenarioRequest": {
+      "branchNaturallyZero": false,
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/api/application/scenario/ScenarioRequest",
+        "dev/codex/schubert/nk/api/application/scenario/ScenarioRequest$Kind"
+      ],
+      "threeCounter100": false,
+      "totals": {
+        "BRANCH": {
+          "covered": 8,
+          "missed": 15
+        },
+        "CLASS": {
+          "covered": 2,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 34,
+          "missed": 55
+        },
+        "METHOD": {
+          "covered": 6,
+          "missed": 5
+        }
+      }
+    }
+  },
+  "cryptoOrKeyOperationsInvoked": true,
+  "cryptoOperationKind": "UUID_V4_PUBLIC_REQUEST_IDENTIFIERS_ONLY",
+  "actualSecretKeysLoaded": false,
+  "forbiddenProductProbeHits": 0,
+  "newTests": 0,
+  "newCoverage": 0,
+  "newAcceptance": 0,
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S",
+  "costOwner": "WBS-K03.02",
+  "method": "EXISTING_CURRENT_BINDING10_STATIC_SEMANTIC_REUSE_NOT_REEXECUTION",
+  "receipts": [
+    "5ecfa9",
+    "f50595",
+    "1e5821",
+    "d7ad68",
+    "dd9d9f",
+    "e671ad",
+    "5ce7bf",
+    "d73869",
+    "1bbec8"
+  ],
+  "fixtureDisclosure": "元postのcrypto=true/UUID_V4_PUBLIC_REQUEST_IDENTIFIERS_ONLYを保持。今回Sは固定Source/証跡のread/hashだけでUUID/crypto/fixtureを呼ばない。zero SHAは公開metadata値でfile実体hash検証ではない。",
+  "owners": {
+    "MediaRequest": "WBS-P009-01",
+    "ScenarioRequest": "WBS-P008-01",
+    "QuestionQueryRequest": "WBS-P013-01",
+    "QuestionRepositoryNotAcceptedHere": "WBS-P014-01 remains separate"
+  },
+  "remaining": "Media/Scenario二whole Sourceのpartialを維持。query/canonical等未達は今回10へ含めず、525の旧HMAC三原TestへPASSを移さない。QuestionQueryRequest全four100は別のPG14762原18で確認済みで、このpostで他execを合算しない。",
+  "currentRegistryCasesCountUnchanged": 3008,
+  "originalMissing24Unchanged": true,
+  "mayFinishTurn": false
+}

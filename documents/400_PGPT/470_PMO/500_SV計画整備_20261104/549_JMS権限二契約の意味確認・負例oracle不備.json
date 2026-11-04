@@ -1,0 +1,90 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S_POST_SAME10",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "reviewMode": "READ_ONLY_EXISTING_TEST_SOURCE_AND_APPROVED_SS",
+  "notProductExecution": true,
+  "reviews": [
+    {
+      "methodId": "dev.codex.schubert.nk.api.messaging.config.ArtemisSecurityTest#actualBrokerEnforcesEveryRoleAddressAndOperationCombination",
+      "testId": "PT-JMS-002",
+      "sha256": "4bf1cf13709dbe938fcc35da8b5bba2ed927044d8785addd56222678b9680a33",
+      "basis": "SS321 section10 literal role/address/operation matrix",
+      "inputs": "5 roles x 6 addresses x 3 operations; three bad/missing credential cases",
+      "expected": "21 granted/69 denied matrix combinations, independent literal map; actual denial requires JMSSecurityException or JMSSecurityRuntimeException",
+      "fixture": "EmbeddedActiveMQ vm://0, four temporary storage directories, random ephemeral credentials, actual JMS send/consumer/browser",
+      "limits": [
+        "No broker started in this stage",
+        "Consumer creation is not business delivery/replay proof",
+        "No current-source execution reference established",
+        "Cleanup/start-before-try needs separate resource qualification"
+      ],
+      "negativeOracle": "Typed security exception required; NPE/other transport exceptions do not become denied PASS",
+      "decision": "SEMANTICALLY_REVIEWED_EXECUTION_REFERENCE_UNRESOLVED"
+    },
+    {
+      "methodId": "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest#opsMq022MaintenanceCanOnlyInspectAndRemoveSelectedExpiryMessages",
+      "testId": "PT-OPS-MQ-022",
+      "sha256": "c489ce0607cffe3e1c91b64465e20f08e3acc35864b8c3a37546bd6ecfc9923d",
+      "basis": "SS321 section10, SSC075/076, BUG236",
+      "inputs": "maintenance count/remove selected expiry; denied other queues/removeAll/getRoles; web management denied; ops management allowed",
+      "expected": "Only explicitly authorized operations succeed, each denied case independently proves actual authorization denial; temporary management addresses absent after operation",
+      "fixture": "Actual embedded broker, four TempDir stores, random credentials, ClientRequestor 2000ms",
+      "observedStaticDefect": "query returns false on null reply and every Exception, including NPE, so assertFalse accepts unconfirmed transport/runtime failure as authorization denial",
+      "requiredRepair": "Typed SUCCESS/SECURITY_DENIED/UNCONFIRMED_ERROR outcome or propagate all unconfirmed exceptions; fixed independent table; negative false-positive prevention and permitted actual broker qualification",
+      "bug": "BUG2242",
+      "rollout": "YKT1988",
+      "currentExecutionQualified": false,
+      "decision": "SEMANTICALLY_REVIEWED_ORACLE_DEFECT_OPEN"
+    }
+  ],
+  "rollout": {
+    "receipt": "9f370d/0",
+    "population": "854 Test Java entries from compile14216 begin.inputHashes, hash matched; RootFailed two names excluded before read/stat/hash",
+    "pattern": "simple catch(Exception/Throwable/specificException){ return false; }",
+    "candidates": 5,
+    "sourceReadReceipt": "0f585e/0",
+    "nonApplicable": [
+      {
+        "class": "BackupStartIntentFilesTest",
+        "sha256": "f80fcd8f843efeed1a3a7d0beb21fea0cb24b9545ac684b46208dbaf4897f99c",
+        "reason": "Concurrent publication safety property, checks one winner plus persisted state, not RBAC reason"
+      },
+      {
+        "class": "MaintenanceRunFilesTest",
+        "sha256": "b8bad141acc659bb30120e99493322ac6d71620ce5339417aa3dc84a3bad1844",
+        "reason": "Sixteen starts; one winner and activeFiles/disk/release state, not RBAC denial"
+      },
+      {
+        "class": "StartupPermitFilesTest",
+        "sha256": "37f2bdb397478ea645c5ebe262170dc26025c9003e2a74f7bff39cb856c8c42d",
+        "reason": "Sixteen issuers, one winner plus GOLD/released state; no authorization-denial claim"
+      },
+      {
+        "class": "SessionOperationTokenLifecycleTest",
+        "sha256": "cfe40ad77f9b1d9cc24d33f85eef07d4df0fc02f1af0b77b73670586d05503f8",
+        "reason": "Catches specifically OperationTokenConflictException; other exceptions propagate, asserts capacity and no cancellation"
+      }
+    ],
+    "remaining": [
+      "Complex catch shapes not covered by this regex",
+      "Two held RootFailed source files not inspected",
+      "No claim of whole-test NPE/availability/cleanup completeness"
+    ],
+    "status": "OPEN_FIX_AND_REQUALIFICATION_REQUIRED"
+  },
+  "newProductTests": 0,
+  "coverageAdded": 0,
+  "newAcceptedCriteria": 0,
+  "formalUnchanged": "1964PT/53scope",
+  "effortCompletion": null,
+  "originalResultsPreserved": true,
+  "receipts": [
+    "aa9f95",
+    "dbd1d7",
+    "de2f82",
+    "9f370d",
+    "0f585e"
+  ],
+  "designChangeRequired": false
+}

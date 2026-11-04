@@ -1,0 +1,42 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "pool": "S",
+  "bug": "BUG2235",
+  "horizontal": "YKT1982",
+  "scope": "NEW282_METADATA",
+  "originalBodyCommand": "env PYTHONPATH=tools/quality python3 -B - <<'PY' [savedScript below] PY",
+  "originalScript": "import json,hashlib,zipfile,collections,datetime\nfrom pathlib import Path\nimport classfile_code_metadata as code\nroot=Path.cwd();b=root/'documents/400_PGPT/470_PMO/500_SV計画整備_20261104'\nmatrix=json.loads((b/'503_Source証拠再利用判定.json').read_bytes())\nnormalPath=root.parent/'pgpt-runs/PG379/pg14216-typed-marker-guard-six-compile-v1/manifest.safe.json'\nassert hashlib.sha256(normalPath.read_bytes()).hexdigest()=='1d0a3dee2f054010a81c67f4a8ef11e7d4370c9640efa9bcb8eead51168c81a3'\nnormal=json.loads(normalPath.read_bytes());assert normal['source']==matrix['source'] and normal['actualExit']==normal['testsExecuted']==0\nbySource=collections.defaultdict(list);errors=[];jarPins={}\nfor role,jarInfo in normal['jars'].items():\n jarPath=Path(jarInfo['path']);assert hashlib.sha256(jarPath.read_bytes()).hexdigest()==jarInfo['sha256'];jarPins[role]=jarInfo\n with zipfile.ZipFile(jarPath) as jar:\n  for entry in jar.namelist():\n   if not entry.endswith('.class') or not entry.startswith('dev/codex/schubert/'):continue\n   raw=jar.read(entry)\n   try:parsed=code.decode(raw,entry)\n   except ValueError as error:\n    errors.append(dict(module=role,entry=entry,error=str(error)));continue\n   package=entry.rpartition('/')[0]\n   path='src/schubert-nk-'+role+'/src/main/java/'+package+'/'+parsed['sourceFile']\n   bySource[path].append(dict(name=entry[:-6],sha256=hashlib.sha256(raw).hexdigest(),flags=parsed['flags'],methods=parsed['methods'],sourceFile=parsed['sourceFile']))\nrows=[]\nfor r in matrix['rows']:\n if r['evidenceStatus']!='NOT_IN_CURRENT_MEASUREMENT_REGISTRY':continue\n path=r['path'];assert 'RootFailedStartRecoveryTest' not in path and 'RootFailedStartPairRecoveryTest' not in path\n physical=bySource.get(path,[]);sourceMatches=normal['begin']['inputHashes'].get(path)==r['sha256']\n hasCode=any(m['hasCode'] for c in physical for m in c['methods'])\n native=any(m['flags']&0x0100 for c in physical for m in c['methods'])\n if not physical or not sourceMatches:decision='SEPARATE_BUILD_OR_SOURCE_BINDING_RECONCILIATION_REQUIRED'\n elif not hasCode and not native:decision='WHOLE_PHYSICAL_SOURCE_NO_CODE_STATIC_COVERAGE_NONAPPLICABILITY_ONLY'\n elif native:decision='CODE_OR_NATIVE_CONTRACT_CURRENT_PROOF_REQUIRED'\n else:decision='EXECUTABLE_BODY_CURRENT_SOURCE_PROOF_OR_REUSE_RECONCILIATION_REQUIRED'\n rows.append(dict(path=path,owner=r['owner'],module=r['module'],sourceSha256=r['sha256'],normalSourceHashMatches=sourceMatches,physical=physical,physicalCount=len(physical),hasCode=hasCode if physical else None,hasNative=native if physical else None,decision=decision,necessaryDynamicExecutions=None,newCoverage=0,newAcceptance=False,businessContractClosed=False))\nassert len(rows)==282\ncounts=dict(collections.Counter(r['decision'] for r in rows))\nprint(json.dumps(dict(actualExit=0,source=matrix['source'],atJST=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).isoformat(),scope='STATIC_BINARY_METADATA_FOR_ALL282_UNREGISTERED_SOURCE_UNITS_NOT_RUNTIME_QUALIFICATION',normalCompileSha256='1d0a3dee2f054010a81c67f4a8ef11e7d4370c9640efa9bcb8eead51168c81a3',jars=jarPins,rows=rows,counts=counts,parserErrors=errors,wholeProductionClassesLoadedOrExecuted=0,productTests=0,oldExecTransferred=False,registryUpdated=False,coverageExclusionsAdded=False,allSourceOracleMeaningReviewed=False,formalUpdated=False,heldToolPathsAccessed=False,heldRootFailedTestSourceFilesAccessed=False,mayFinishTurn=False),ensure_ascii=False))\n",
+  "originalTerminal": {
+    "chunk": "4734cb",
+    "bodyExit": 0,
+    "deliveredChars": 120112,
+    "receiver": "TRUNCATED_JSON_NOT_PARSEABLE",
+    "fullStdoutPreserved": false,
+    "partialStdoutPreserved": false
+  },
+  "followup": [
+    {
+      "file": "542_二八二静的producer_v2.py",
+      "chunk": "6ce9ef",
+      "actualExit": 1,
+      "phase": "SYNTAX_NO_BODY"
+    },
+    {
+      "file": "543_二八二静的producer_v3.py",
+      "chunk": "fe9bbc",
+      "actualExit": 1,
+      "phase": "LATE_WRITER_IMPORT_AFTER_STATIC_READ_NO_OUTPUT"
+    }
+  ],
+  "corrected": {
+    "file": "544_二八二静的producer_v4.py",
+    "preflight": "8edf72/0",
+    "terminal": "15bcba/0",
+    "manifest": "PG18520-unregistered282-binary-static-v2",
+    "sha256": "2ebe247cc222a48b11695d79053f6d964a62ab2b04db28be8f5bd598810629a0",
+    "independent": "d8999a/0"
+  },
+  "cost": "All repair and necessary static recomputation remain in same S10; no Product rerun/refusal retry or zero-cost inference",
+  "productTests": 0,
+  "registryChanged": false
+}

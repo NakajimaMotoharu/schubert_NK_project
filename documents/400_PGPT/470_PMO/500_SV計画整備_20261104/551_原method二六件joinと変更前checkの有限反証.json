@@ -1,0 +1,76 @@
+{
+  "actualExit": 0,
+  "executionId": "PGPT-SV-20261104-01",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "matrixSha256": "bfe5e6d318b26ba382904f5a3e77952e0d18c8165563c19dda0db970a47107ec",
+  "prior539UnchangedSha256": "eab3361b9883b2d2ff72ece7bec7da0f60ae98980377e5dcba8afda6be0aea8c",
+  "newReviewedRows": [
+    {
+      "id": "dev.codex.schubert.nk.api.messaging.config.ArtemisSecurityTest#actualBrokerEnforcesEveryRoleAddressAndOperationCombination",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/config/ArtemisSecurityTest.java",
+      "span": [
+        43,
+        159
+      ],
+      "testSha256": "4bf1cf13709dbe938fcc35da8b5bba2ed927044d8785addd56222678b9680a33",
+      "reviewFile": "549",
+      "staticSemanticReviewPerformed": true,
+      "currentExecutionQualified": false,
+      "newPass": false,
+      "originalReferenceDecisionPreserved": "CURRENT_EXECUTION_REFERENCE_MISSING_RECONCILIATION_REQUIRED",
+      "oracleDefect": null
+    },
+    {
+      "id": "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest#opsMq022MaintenanceCanOnlyInspectAndRemoveSelectedExpiryMessages",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryManagementAuthorizationTest.java",
+      "span": [
+        28,
+        54
+      ],
+      "testSha256": "c489ce0607cffe3e1c91b64465e20f08e3acc35864b8c3a37546bd6ecfc9923d",
+      "reviewFile": "549",
+      "staticSemanticReviewPerformed": true,
+      "currentExecutionQualified": false,
+      "newPass": false,
+      "originalReferenceDecisionPreserved": "CURRENT_EXECUTION_REFERENCE_MISSING_RECONCILIATION_REQUIRED",
+      "oracleDefect": "BUG2242"
+    }
+  ],
+  "reviewedOriginalMethods": 26,
+  "notYetSemanticallyReviewed": 2954,
+  "ordinaryMissingReferenceCountUnchanged": 2980,
+  "BUG2241Prevention": {
+    "scope": "METADATA_MODEL_ONLY_NOT_GIT_REPLAY",
+    "vectors": [
+      {
+        "input": "exception",
+        "metadataActionCalls": 0,
+        "expected": 0
+      },
+      {
+        "input": "false",
+        "metadataActionCalls": 0,
+        "expected": 0
+      },
+      {
+        "input": "none",
+        "metadataActionCalls": 0,
+        "expected": 0
+      },
+      {
+        "input": "true",
+        "metadataActionCalls": 1,
+        "expected": 1
+      }
+    ],
+    "GitRepairReceipts": [
+      "ed47300",
+      "e5436d0",
+      "eceab20",
+      "4f08a7"
+    ]
+  },
+  "newProductPT": 0,
+  "newAcceptedCriteria": 0,
+  "coverageAdded": 0
+}
