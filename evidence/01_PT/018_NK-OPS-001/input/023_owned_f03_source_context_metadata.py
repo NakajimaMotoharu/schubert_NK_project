@@ -5,6 +5,7 @@ import datetime
 import hashlib
 import importlib.util
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -72,6 +73,37 @@ def scoped_partitions(config, previous, current, remaining, raw):
     return results
 
 
+def historical_bindings(rows):
+    """Verify immutable old source-context facts, never transfer runtime qualification."""
+    count = 0
+    for row in rows:
+        item = row.get('historicalStaticReview')
+        if item is None:
+            continue
+        p, m = ROOT / item['path'], ROOT / item['manifestPath']
+        assert sha(p) == item['sha256'] and sha(m) == item['manifestSha256']
+        manifest = load(m)
+        files = manifest.get('files')
+        assert manifest.get('reviewSha256') == sha(p) or (isinstance(files, dict) and files.get('review.json') == sha(p))
+        old = load(p)
+        for part in item['rowPointer']:
+            old = old[part]
+        finding = row['rawFinding']
+        assert old['path'] == finding['path'] and old['rule'] == finding['rule']
+        assert old['attributes'] == finding['attributes']
+        assert old.get('sourceSha256', old.get('inputSha256')) == finding['sourceSha256']
+        assert old['reason'] == item['historicalReason']
+        assert item['runtimeTransferred'] is False
+        monitor = row.get('privateMonitorEvidence')
+        if monitor is not None:
+            lines = (ROOT / finding['path']).read_text().splitlines()
+            assert lines[monitor['declarationLine'] - 1].strip() == monitor['declaration']
+            assert re.search(r'private\s+final\s+Object\s+' + re.escape(monitor['identifier']) + r'\s*=\s*new Object\(\)', monitor['declaration'])
+            assert re.search(r'synchronized\s*\(\s*' + re.escape(monitor['identifier']) + r'\s*\)', lines[int(finding['attributes']['beginline']) - 1])
+        count += 1
+    return count
+
+
 def run(config, slot, public):
     assert not slot.exists() and not public.exists()
     previous = prior(config)
@@ -94,6 +126,7 @@ def run(config, slot, public):
         assert decision['reason'] and decision['requiredDynamicPostconditions']
         rows.append(dict(decision, id=f'{i:06d}:' + hashlib.sha256(canon(f)).hexdigest(), rawFinding=f, classification='CONTEXTUAL_NONAPPLICABLE', actualViolation=False, runtimeProven=False, ptExempt=False, newWbsAcceptance=False))
     assert len(rows) == len({r['rawOrdinal'] for r in rows}) == config['newCount']
+    historical_bindings(rows)
     selected = old | {r['rawOrdinal'] for r in rows}
     remaining = [{'rawOrdinal': i, 'id': f'{i:06d}:' + hashlib.sha256(canon(f)).hexdigest(), 'rawFinding': f, 'applicability': 'UNCLASSIFIED', 'actualViolation': None} for i, f in enumerate(raw) if i not in selected]
     assert len(remaining) == 1491 - config['priorCount'] - config['newCount']
@@ -121,6 +154,7 @@ def post(config, slot, public):
         decision = expected[row['rawOrdinal']]
         assert all(row[k] == v for k, v in decision.items())
         assert not row['ptExempt'] and not row['runtimeProven']
+    historical_bindings(rows)
     allrows = previous + rows + value['remaining']
     raw = load(RAW / 'findings.json')
     indexed = {r['rawOrdinal']: r for r in allrows}
