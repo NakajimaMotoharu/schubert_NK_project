@@ -1,0 +1,104 @@
+{
+  "atJST": "2026-11-05T15:09:27.367792+09:00",
+  "source": "0e8097586f2c11cac10bba9a0fbddfadac25a75a",
+  "productionCoreMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+  "run": "PG18948",
+  "actualExit": 0,
+  "tests": 11,
+  "testClasses": 2,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "aborted": 0,
+  "coverage": {
+    "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions": {
+      "INSTRUCTION": {
+        "covered": 107,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 4,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 34,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 8,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 6,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "physical": 1,
+  "heldFourProbeHits": {
+    "dev/codex/schubert/nk/api/idempotency/FingerprintKeyRing": 0,
+    "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec": 0,
+    "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException": 0,
+    "dev/codex/schubert/nk/web/bootstrap/WebStartupException": 0
+  },
+  "sdkInitializedExactSeven": [
+    "org/apache/activemq/artemis/api/core/ParameterisedAddress",
+    "org/apache/activemq/artemis/api/core/SimpleString",
+    "org/apache/activemq/artemis/jms/client/ActiveMQDestination",
+    "org/apache/activemq/artemis/jms/client/ActiveMQDestination$TYPE",
+    "org/apache/activemq/artemis/jms/client/ActiveMQQueue",
+    "org/apache/activemq/artemis/jndi/JNDIStorable",
+    "org/apache/activemq/artemis/utils/uri/URISupport"
+  ],
+  "sdkPreflightReused": "669/PG18606 and PG18622 exact6artifacthashes; oldDLQtests notrepeated; currentfreshSDKinit subset checked",
+  "manifest": "evidence/01_PT/005_NK-MSG-001/evidence/PG18948-inbound-transaction-port-eleven-v1/manifest.json",
+  "manifestSha256": "5097158bd6b8517c68d9f168d1b9f0d0a78fca5d20e1b17544f52d4a716949c5",
+  "environmentSha256": "ac09c95ce834f06de0d70cd1940bd68b68485213155637c5ab42ac407abe799a",
+  "baseline80SamePathHash": true,
+  "PG": "Main unchanged; samecontextDLQ sanitization/send/commit; rollbackphase/identity/observer sequencing; Throwable != identity retained and proved distinctequalsTrue byold5",
+  "oracle": "fixedDLQFQQN/persistent2/TTL0 andownfailureidentitytable; expectednotproductiongenerated",
+  "static": "PG18942raw10 individualizedNA780; applicable0/CS0/parser0; normalMain6buildNullAway/SBPG18642/18648 sameb093 exactallinputs/jars reused",
+  "oldExecUnion": false,
+  "actualProviderBrokerDbRootVmOrNative": false,
+  "limitations": "not realbrokerACK/TTL/transactiondurability/realisolation/receiverlifetime/WBS/V/whole451",
+  "formalUpdated": false,
+  "newAccepted": 0,
+  "effortRate": null,
+  "originalPartial80": {
+    "wholeTechnical": 7,
+    "notYetWholeBound": 73,
+    "globalRegistryChanged": false
+  },
+  "cost": {
+    "startEstimatePp": {
+      "low": 0.5,
+      "base": 2,
+      "high": 5
+    },
+    "capPp": 10,
+    "actualAllocatedPp": null,
+    "N": null,
+    "T": null,
+    "quotaAfter": {
+      "primary": {
+        "usedPercent": 15,
+        "windowDurationMins": 10080,
+        "resetsAt": 1794395640
+      },
+      "secondary": null,
+      "usedPercent": 15,
+      "remainingPercent": 85,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640,
+      "observedByJST": "2026-11-05 15:08:23 JST",
+      "provenance": "fresh get_usage_limits direct structured response",
+      "previousObservationSha256": "f75ad2a4c22cb6cc69d8a92f6e236f2f5b9ed35d598f5416c896566b7d0b8410"
+    },
+    "reportedSharedPp": 0,
+    "zeroNotFree": true
+  }
+}
