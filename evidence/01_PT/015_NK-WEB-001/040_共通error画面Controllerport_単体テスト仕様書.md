@@ -1,0 +1,26 @@
+# 共通error画面 Controller port 単体テスト仕様書
+
+Program NK-WEB-001 / SCR090 / ErrorController constructor/error。RD TST-001..005/MON、UI222/226、SS313SSC047/314/351/352。837/group3881原1/3/6pp cap10、普通PGPT/第一V代替0。
+
+UI222正本の403「この操作を実行する権限がありません。」/404「対象が見つかりません。」/409「状態が更新されたため操作できません。再表示してください。」/503「現在処理できません。しばらくしてから再操作してください。」を独立literal oracleにする。SS313SSC047の400/401/403/404/405/409/416/429/503は固定表示、500/未知statusは503、属性なし直接GET/errorは404、外部非GET/HEADは405＋Allow: GET, HEAD、内部ERRORは元methodを業務実行せずerrorstatus保持、responseとModel status一致を明示tableで確認。他closed表示の字句は未規定の変更を要求せずnonblank/外来details非混入の固定catalog契約を検査する。
+
+|Test ID|class.method|入力・独立期待|
+|---|---|---|
+|WEB-ERROR-PORT-001|ErrorControllerPortTest.allClosedStatusesAndUnknownValuesProduceMatchingHttpAndOnlyFixedPageData|9closed status/unknown型値→503・missingGET404・UI222四文言/RequestID/Modelonepage|
+|WEB-ERROR-PORT-002|ErrorControllerPortTest.dispatcherAndMethodGoldenMatrixDistinguishesInternalErrorFromPublicGetHead|全DispatcherType+null×GET/HEAD/POST/nullの24literal matrix、外部405AllowGETHEAD/内部ERRORは元status|
+|WEB-ERROR-PORT-003|ErrorControllerPortTest.existingDisplaySnapshotSuppliesOnlyApprovedBrandUsernameAndRole|USER/ADMIN表示snapshotのbrand/username/roleだけ、CSRFをControllerは読まない|
+|WEB-ERROR-PORT-004|ErrorControllerPortTest.constructorAndAllThreeNullArgumentsRejectBeforeReadingPorts|constructor/全3引数nullをread前failfast|
+|WEB-ERROR-PORT-005|ErrorControllerPortTest.missingOrMistypedInternalContextsNeverBecomeASuccessfulPage|欠落・型不正requestcontextはfixedISE、型不正displayはfixedSessionStoreException、status/model成功なし|
+|WEB-ERROR-PORT-006|ErrorControllerPortTest.unknownRuntimeAndErrorAtEveryExternalPortPreserveIdentity|全externalport8種で未知Runtime/Error参照保持、Model成功なし|
+|WEB-ERROR-PORT-007|ErrorControllerPortTest.throwableMessageUriQueryHeadersBodyAndSessionAreNeverReadOrStringified|errorThrowable/message/URI/query/header/body/sessionへアクセスせずforeignstatusをstringifyしない|
+|WEB-ERROR-PORT-008|ErrorControllerPortTest.sharedControllerHasIndependentConcurrentRequestAndModelState|同singleton Controllerの二ownedworkerのRequestID/status/model独立|
+
+FixtureはJDKProxy Servlet/Modelだけで、既ProblemViewFactory/WebRequestContextのseedFOUR100を依存として再利用する。Model.addAttributeはinterfaceどおりreceiverを返す。内部display準備だけ既package captureへ合成Principalとzero-byteから生成した64文字placeholderをmemoryで与え、実context/CSRF/token/鍵/sessionを読まない・保存しない・evidenceに値を出さない。WebCsrfToken.parseだけを使いgenerator/matches/暗号処理は呼ばない。capture準備後はrequestのprincipal、CSRF、session、Throwable/message/URI/query/body/header/getParameter・attribute書換をspyで禁止し、status/requestcontext/displaycontextの三private属性だけを許す。SessionStoreExceptionは固定catalog constructorのみでpreserveFatalや失敗graphを呼ばない。Root・拒否対象・actualserver処理の再試行ではない。
+
+正常/境界/型/null/例外・二request並行を含む全8を一括初回実行し、既correction未実行/他source成功/失敗は合算しない。Mainは不変更。Main constructorは通常fixture/004、errorは001～008、Test IDは全methodとsafeXMLへ一意対応。factoryはfinal/invariantがnonnulloutputを保証し、nullfakefactoryreturnや反射による壊れたsnapshotを作らない。入口nullは明示NPE failfast/正常扱い0、contextの欠落は有効画面にせずwiringfailureとして残す。
+
+環境Linux/JDK25.0.4、JUnit1.13.4/JaCoCo0.8.15、既Servlet6.1.0/SpringFramework7.0.9/Security7.1.1/JSpecify。新download/production依存変更なし、全jarhashをcompilemanifestで固定する。CoreMain7d2cのnormal六module build/NullAway19270と六SpotBugs19272全0をsameMain/hashで再利用し不要な再build0。既qualifier prepare/static/run/post error_controller、compile19360/static19362→source固定/push→PG19368全8/post19370。normal全physical1/CRC/単exec-session/全@Test・line/method/class/branch100/HELD四0、manual除外0を独立post。
+
+HTML/DOM/実HTTPserver/Container securitychain/実認証/session/CHR/native/Root/VM/451/IT-STは別未受入。表示modelとstatusのport確認を実画面完了へ変換しない。source/実command/環境/終了code/XML/coverage/関連BUG/証跡path/hashは838以降と041へ記録し、正式1964PT/53scope・歴史17/190・工数null・WBS新個別受入0・同第一V HOLDを維持する。
+
+固定前838: 19360compile0、19362 raw9(ownedJUnitworker3/専有nullablemap4/Principal参照drop1/definingLoader1)全個別非適用、適用0-CS0-parser0。suppression/規約変更0、Main/既正本不変更。全extra既存jar11CPはcompilemanifestでhash固定し、起動frameworkを含めず直接controllerを呼ぶ。input002 fixedproducer、source固定後に全8初回へ。

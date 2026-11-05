@@ -1,0 +1,112 @@
+{
+  "atJST": "2026-11-05T22:38:32.051083+09:00",
+  "decision": "SOURCE_READY_TO_FREEZE_NOT_EXECUTED",
+  "mainChanged": false,
+  "coreMain": "7d2c2fb64711531db8898d49b4b377670b58ff87",
+  "compile": {
+    "path": "PG19360",
+    "actualExit": 0,
+    "manifestSha256": "6d7e4fb65c025f24955b6fbff93ba4dec22cfc7f8201f7ebad76726ee4d5199b"
+  },
+  "static": {
+    "path": "PG19362",
+    "rawPMD": 9,
+    "applicable": 0,
+    "checkstyle": 0,
+    "parserErrors": 0,
+    "individualDecisions": [
+      {
+        "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+        "line": 220,
+        "rule": "DoNotUseThreads",
+        "decision": "NOT_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "StandaloneJUnit owns exactlytwo worker tasks in try-with-resources Executor withboundedget; noproductionweb worker/server starts. J2EE deploymentthread rule not applicable."
+      },
+      {
+        "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+        "line": 222,
+        "rule": "DoNotUseThreads",
+        "decision": "NOT_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "StandaloneJUnit owns exactlytwo worker tasks in try-with-resources Executor withboundedget; noproductionweb worker/server starts. J2EE deploymentthread rule not applicable."
+      },
+      {
+        "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+        "line": 229,
+        "rule": "DoNotUseThreads",
+        "decision": "NOT_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "StandaloneJUnit owns exactlytwo worker tasks in try-with-resources Executor withboundedget; noproductionweb worker/server starts. J2EE deploymentthread rule not applicable."
+      },
+      {
+        "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+        "line": 258,
+        "rule": "UseConcurrentHashMap",
+        "decision": "NOT_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Each Servlet/Model/attributes/header/fault map belongs to exactlyone Fixture andoneworker, no concurrentmap access. Null status/contextnegativefixture entries require nullable map. SharedController/factory holdno perrequestmap."
+      },
+      {
+        "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+        "line": 259,
+        "rule": "UseConcurrentHashMap",
+        "decision": "NOT_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Each Servlet/Model/attributes/header/fault map belongs to exactlyone Fixture andoneworker, no concurrentmap access. Null status/contextnegativefixture entries require nullable map. SharedController/factory holdno perrequestmap."
+      },
+      {
+        "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+        "line": 260,
+        "rule": "UseConcurrentHashMap",
+        "decision": "NOT_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Each Servlet/Model/attributes/header/fault map belongs to exactlyone Fixture andoneworker, no concurrentmap access. Null status/contextnegativefixture entries require nullable map. SharedController/factory holdno perrequestmap."
+      },
+      {
+        "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+        "line": 261,
+        "rule": "UseConcurrentHashMap",
+        "decision": "NOT_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Each Servlet/Model/attributes/header/fault map belongs to exactlyone Fixture andoneworker, no concurrentmap access. Null status/contextnegativefixture entries require nullable map. SharedController/factory holdno perrequestmap."
+      },
+      {
+        "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+        "line": 363,
+        "rule": "NullAssignment",
+        "decision": "NOT_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Explicitly drops the syntheticPrincipal reference after displaycapture in finally; testprivacy requires no retainedauthobject, intentional cleanup not accidentalnullablebusinessstate."
+      },
+      {
+        "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+        "line": 377,
+        "rule": "UseProperClassLoader",
+        "decision": "NOT_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "JDKProxy uses exactServlet/Model definingloader in standaloneJUnit; no J2EE TCCL/provider/container lookup."
+      }
+    ],
+    "manifestSha256": "3c9184c35e78893ad68030ef178b9ae37289426f871980ae4f7ca59a0a7d4438"
+  },
+  "jarPins": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19270-acceptor-parser-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "f3c85ac5c4aae6fc1c516a46ec1998b1cdd247de1ae4cb155795647f125772e2",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19270-acceptor-parser-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": "c48133ab26a1c45c29246295dd1e92c60c424b7939d795d2ceb656fc9747e940",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar": "8a31f465f3593bf2351531a5c952014eb839da96a605b5825b93dd54714c48c4",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar": "7552a2fcfa30cea53eb14d7a65a7a8e1b1dd82e832a7164fb7e6fb105f438858",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar": "ff218b827a25c9e8929b0cd56dfb56916cea9d5b669ed97dc7cb262508ff548b",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar": "941ced476427bde2533872f293da535fd0258de3f3a650a7f1bfe01ed2927302",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-web/7.1.1/spring-security-web-7.1.1.jar": "dece134a2332c976a2c94ecf13f816c64e8ea7f2139795485afe655fba0408f3",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar": "98a5011baa78df36fb184e6ce0e8e086ca9a64fcdd8f161c0a96475a3a0907bd"
+  },
+  "dependencySource": "ExistingMaven toolchain only; Servlet6.1/SpringFramework7.0.9/Security7.1.1, no newdownload/POMchange",
+  "factoryScope": "ProblemViewFactory realdata only; noSpringApplication/Boot/MockMvc/Tomcat/HTTP/service/sessionstore. SynthPrincipal/AuthContext/CSRF format only, no actualsecret/key read orissued. SessionStoreException constructor-only nofailuregraph.",
+  "oracle": "UI222 exact403404409503/SS313SSC047 fullclosedstatus and24dispatcher/methodmatrix; no productionmethod generatesexpected",
+  "testPlan": {
+    "tests": 8,
+    "run": "PG19368",
+    "post": "PG19370",
+    "normalPhysical": 1
+  },
+  "producer": {
+    "path": "evidence/01_PT/015_NK-WEB-001/input/002_error_controller_qualifier.py",
+    "sha256": "ac489a7597b44c193350b71e88bc62902162539916a4f666a94df038085d55b7"
+  },
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "firstV": "SAME_FIRST_HOLD_NOT_REPLACED"
+}
