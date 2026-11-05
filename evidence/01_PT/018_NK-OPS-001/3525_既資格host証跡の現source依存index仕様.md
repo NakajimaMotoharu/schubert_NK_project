@@ -1,0 +1,11 @@
+# 既資格host証跡の現source依存index仕様
+
+WBS-F03/487/885。原群.25/1/3pp cap3、開始前の共有gap1を原文維持して一度だけordinaryへ保存（PGPT/PMO専有不明）、新消費含むcap残2。元WBS価格/元受入条件/第一V/モデル不変更。これは読取metadata照合だけで新Product実行/新試験/新成分/個別leaf受入を計上しない。
+
+F03-PROOFINDEX001: selected safeProgram002005007008009010011014015016017020直下の公開PG manifestから、VM/native/Root/cohort/history/failed/provisional/activation等を名前段階で除き、symlink不許可。modern host-memory schema(actualExit0/tests>0/FES-aborted0/held四正確0/oldExecUnion false/manual除外なし/単session/wholeSourceFour)だけをcandidateとする。未知・欠落・bool数値aliasを成功0へ補完しない。別Char源やlegacy binding867等はindex全体性の対象外であり未資格へ誤変換しない。
+F03-PROOFINDEX002: normal19740 source28af・全966Main/POM/全JAR hashを確認し静的zip bytes/SHA/JaCoCoCRC64を計算。JDK25 classfile69限定、実saved SessionAuditWriter classinfo IDを独立witnessとする。Main源hashと全対象physicalclass SHAが現normalと一致するかを保存。対象HELD四をcandidateにしない、Product初期化なし。
+F03-PROOFINDEX003: 旧postのsourceと現HEADのTest Git blob IDだけを照合しTest本文を読まない。forbidden Test/tool名はmetadata照合前に除外する。旧public execinfoのhashを検査して観測済core classIDと現normalCRCを比較し、依存driftを個別列挙する。元core→現coreのMain変更pathはGit namesだけ、SDK/Test/aux等未解明はunknown残存として保持する。private原exec/classinit/raw/VMにはアクセスしない。
+F03-PROOFINDEX004: source/target/Test変更、観測済依存drift、observed classID一致を別tierにする。一致でも未実行branch/SDK/native/資源/期待値・条件差の影響reviewを省略せずcurrentScopeQualified=false。旧exec/別source union0、Global451/正式/coverage更新0。source hashだけで旧成功を現成果へ移さない。必要な影響scopeだけ新source再認証候補にし、旧成功確認だけの一括再演はしない。
+F03-PROOFINDEX005: metadata run/postが全公開元hash/Root現Main・JAR/Gitblob/CRC/分類を独立再構成してindexを公開。Program全historyの完全性やtrace漏れ0は宣言しない。実結果/日時/HEAD/入力paths/hashes/source差・shared消費は3526/886とmanifestへ。Tool/Pythonmetadataは新Product test count0。
+
+現在の安全判断: ScenarioRequestの既HMAC試験は実行/分割しない。Repository異常処理がheld exceptionへ接続するため新whole動的scopeも保留する。MediaResponseDecoder PG18814八・ScenarioDetailSnapshot PG18964六は既whole成分で、新規成分へ加点しない。四Protocol変更(PayloadCodec/LayoutFieldCatalog/PayloadSemanticValidator/WebLogEventData)が観測済依存かを照合してから必要な後続を選ぶ。
