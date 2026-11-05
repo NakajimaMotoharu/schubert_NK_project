@@ -1,0 +1,201 @@
+
+Failures (4):
+  JUnit Jupiter:GateMetricsCountTest:concurrentIndependentSnapshotsNeverShareUnknownValues()
+    MethodSource [className = 'dev.codex.schubert.characterization.GateMetricsCountTest', methodName = 'concurrentIndependentSnapshotsNeverShareUnknownValues', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+       org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+       org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+       org.junit.jupiter.api.Assertions.assertFalse(Assertions.java:231)
+       dev.codex.schubert.characterization.GateMetricsCountTest.concurrentIndependentSnapshotsNeverShareUnknownValues(GateMetricsCountTest.java:153)
+       java.base/java.lang.reflect.Method.invoke(Method.java:565)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+  JUnit Jupiter:GateMetricsCountTest:invalidOrMissingCurrentCountIsUnknownAndNeverAZeroOrCoercedValue()
+    MethodSource [className = 'dev.codex.schubert.characterization.GateMetricsCountTest', methodName = 'invalidOrMissingCurrentCountIsUnknownAndNeverAZeroOrCoercedValue', methodParameterTypes = '']
+    => org.opentest4j.MultipleFailuresError: Multiple Failures (6 failures)
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+       org.junit.jupiter.api.AssertAll.assertAll(AssertAll.java:80)
+       org.junit.jupiter.api.AssertAll.assertAll(AssertAll.java:54)
+       org.junit.jupiter.api.AssertAll.assertAll(AssertAll.java:48)
+       org.junit.jupiter.api.Assertions.assertAll(Assertions.java:2978)
+       dev.codex.schubert.characterization.GateMetricsCountTest.invalidOrMissingCurrentCountIsUnknownAndNeverAZeroOrCoercedValue(GateMetricsCountTest.java:96)
+       [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+  JUnit Jupiter:GateMetricsCountTest:unavailableDeclarationArraysAreOmittedInsteadOfReportedAsZero()
+    MethodSource [className = 'dev.codex.schubert.characterization.GateMetricsCountTest', methodName = 'unavailableDeclarationArraysAreOmittedInsteadOfReportedAsZero', methodParameterTypes = '']
+    => org.opentest4j.MultipleFailuresError: Multiple Failures (7 failures)
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	org.opentest4j.AssertionFailedError: expected: <{failureCount=0, baselineFileCount=27}> but was: <{currentApplicableCount=0, baselineFileCount=27, caseCount=24, failureCount=0, differenceCount=0}>
+       org.junit.jupiter.api.AssertAll.assertAll(AssertAll.java:80)
+       org.junit.jupiter.api.AssertAll.assertAll(AssertAll.java:54)
+       org.junit.jupiter.api.AssertAll.assertAll(AssertAll.java:48)
+       org.junit.jupiter.api.Assertions.assertAll(Assertions.java:2978)
+       dev.codex.schubert.characterization.GateMetricsCountTest.unavailableDeclarationArraysAreOmittedInsteadOfReportedAsZero(GateMetricsCountTest.java:114)
+       [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <{failureCount=0, baselineFileCount=27}> but was: <{currentApplicableCount=0, baselineFileCount=27, caseCount=24, failureCount=0, differenceCount=0}>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+         org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+         org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+         [...]
+  JUnit Jupiter:GateMetricsCountTest:baselineCountComparisonRejectsCoercionAndRespectsExactIntegerBoundary()
+    MethodSource [className = 'dev.codex.schubert.characterization.GateMetricsCountTest', methodName = 'baselineCountComparisonRejectsCoercionAndRespectsExactIntegerBoundary', methodParameterTypes = '']
+    => org.opentest4j.MultipleFailuresError: Multiple Failures (5 failures)
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+       org.junit.jupiter.api.AssertAll.assertAll(AssertAll.java:80)
+       org.junit.jupiter.api.AssertAll.assertAll(AssertAll.java:54)
+       org.junit.jupiter.api.AssertAll.assertAll(AssertAll.java:48)
+       org.junit.jupiter.api.Assertions.assertAll(Assertions.java:2978)
+       dev.codex.schubert.characterization.GateMetricsCountTest.baselineCountComparisonRejectsCoercionAndRespectsExactIntegerBoundary(GateMetricsCountTest.java:141)
+       [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+       Suppressed: org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+         org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+         org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+         org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+         org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+         [...]
+
+Test run finished after 238 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         6 tests found           ]
+[         0 tests skipped         ]
+[         6 tests started         ]
+[         0 tests aborted         ]
+[         2 tests successful      ]
+[         4 tests failed          ]
+

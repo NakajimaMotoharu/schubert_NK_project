@@ -26,6 +26,8 @@ import java.util.stream.Stream;
  */
 final class GateContractValidator {
   private static final String HASH_SUFFIX = "Sha256";
+  private static final String FIELD_CASE_ORDER = "caseOrder";
+  private static final String FIELD_CURRENT_APPLICABLE_COUNT = "currentApplicableCount";
   private static final int CASE_GROUP_OFFSET = 4;
   private static final String FIELD_BASELINECOMMIT = "baselineCommit";
   private static final String FIELD_VERSION = "version";
@@ -68,8 +70,7 @@ final class GateContractValidator {
     List<String> failures =
         new ArrayList<>(
             validateDefinitions(contract, catalog, schema, differences, browser, requirements));
-    Map<String, Object> metrics = new LinkedHashMap<>();
-    List<String> caseOrder = strings(contract.path("caseOrder"));
+    List<String> caseOrder = strings(contract.path(FIELD_CASE_ORDER));
     validateRun(firstRun, caseOrder, requirements, "run1", true, failures);
     validateRun(secondRun, caseOrder, requirements, "run2", true, failures);
     failures.addAll(
@@ -92,15 +93,54 @@ final class GateContractValidator {
         requirements,
         failures);
 
-    metrics.put("caseCount", caseOrder.size());
-    metrics.put("currentApplicableCount", contract.path("currentApplicableCount").asInt());
-    metrics.put("differenceCount", differences.path("differences").size());
-    metrics.put(
-        "baselineFileCount",
-        regularFiles(projectRoot.resolve("program/characterization/baseline/current"), path -> true)
-            .size());
-    metrics.put("failureCount", failures.size());
+    Map<String, Object> metrics =
+        gateMetrics(
+            contract,
+            differences,
+            caseOrder.size(),
+            regularFiles(
+                    projectRoot.resolve("program/characterization/baseline/current"), path -> true)
+                .size(),
+            failures.size());
     return new ValidationResult(List.copyOf(failures), Map.copyOf(metrics));
+  }
+
+  /**
+   * SS355 / PT-CHR-METRIC001..006: pure report projection, never enumerates files or qualifies a
+   * run.
+   */
+  static Map<String, Object> gateMetrics(
+      JsonNode contract,
+      JsonNode differences,
+      int caseCount,
+      int baselineFileCount,
+      int failureCount) {
+    if (contract == null || differences == null) {
+      throw new IllegalArgumentException("metric documents are required");
+    }
+    if (caseCount < 0 || baselineFileCount < 0 || failureCount < 0) {
+      throw new IllegalArgumentException("observed metric counts must be nonnegative");
+    }
+    Map<String, Object> metrics = new LinkedHashMap<>();
+    if (contract.path(FIELD_CASE_ORDER).isArray()) {
+      metrics.put("caseCount", caseCount);
+    }
+    if (integerEquals(contract.path(FIELD_CURRENT_APPLICABLE_COUNT), 23)) {
+      metrics.put(FIELD_CURRENT_APPLICABLE_COUNT, 23);
+    }
+    if (differences.path("differences").isArray()) {
+      metrics.put("differenceCount", differences.path("differences").size());
+    }
+    metrics.put("baselineFileCount", baselineFileCount);
+    metrics.put("failureCount", failureCount);
+    return Map.copyOf(metrics);
+  }
+
+  static boolean matchesBaselineFileCount(JsonNode contract, int actualCount) {
+    if (contract == null || actualCount < 0) {
+      throw new IllegalArgumentException("baseline count input is invalid");
+    }
+    return integerEquals(contract.path("baselineFileCount"), actualCount);
   }
 
   /**
@@ -120,7 +160,7 @@ final class GateContractValidator {
     }
     List<String> failures = new ArrayList<>();
     validateContractShape(contract, failures);
-    List<String> caseOrder = strings(contract.path("caseOrder"));
+    List<String> caseOrder = strings(contract.path(FIELD_CASE_ORDER));
     validateSchema(schema, failures);
     validateCatalog(catalog, caseOrder, failures);
     validateBrowser(browser, contract.path("browser"), failures);
@@ -132,7 +172,7 @@ final class GateContractValidator {
   private static void validateContractShape(JsonNode contract, List<String> failures) {
     require(contract.isObject(), "CONTRACT_NOT_OBJECT", failures);
     require(
-        integerEquals(contract.path("currentApplicableCount"), 23),
+        integerEquals(contract.path(FIELD_CURRENT_APPLICABLE_COUNT), 23),
         "CONTRACT_CURRENT_COUNT",
         failures);
     require(
@@ -148,7 +188,7 @@ final class GateContractValidator {
             .equals(List.of("CHR-G01", "CHR-G02", "CHR-G03", "CHR-G04", "CHR-G05", "CHR-G06")),
         "CONTRACT_GATE_IDS",
         failures);
-    List<String> cases = strings(contract.path("caseOrder"));
+    List<String> cases = strings(contract.path(FIELD_CASE_ORDER));
     require(cases.size() == 24, "CONTRACT_CASE_COUNT", failures);
     require(new HashSet<>(cases).size() == cases.size(), "CONTRACT_CASE_DUPLICATE", failures);
     require(
@@ -744,10 +784,7 @@ final class GateContractValidator {
       throws IOException, NoSuchAlgorithmException {
     failures.addAll(validateBaselineMetadata(manifest, sourceReport));
     List<Path> files = regularFiles(baselineRoot, path -> true);
-    require(
-        files.size() == contract.path("baselineFileCount").asInt(),
-        "BASELINE_FILE_COUNT",
-        failures);
+    require(matchesBaselineFileCount(contract, files.size()), "BASELINE_FILE_COUNT", failures);
     require(
         aggregateHash(projectRoot, files).equals(contract.path("baselineAggregateSha256").asText()),
         "BASELINE_TREE_HASH",

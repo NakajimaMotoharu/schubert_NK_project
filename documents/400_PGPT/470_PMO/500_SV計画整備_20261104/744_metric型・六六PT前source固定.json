@@ -1,0 +1,376 @@
+{
+  "atJST": "2026-11-05T12:36:57.450643+09:00",
+  "beforeHead": "0d9fc3d15a13961b3cf9c63e25f77bc42ff5e028",
+  "source": null,
+  "sourceMeaning": "Typed Characterization Main/Test WIP bound by exact compile input hashes; Core b093 unchanged",
+  "compile": {
+    "run": "PG18778",
+    "actualExit": 0,
+    "manifestSha256": "5ca37c4096d22c59aed0793be4d2e0cceb17b4dcfadbf0d418d54fde5d9fe577",
+    "testMethodsPlanned": 66,
+    "testClasses": 11,
+    "javaInputs": 16
+  },
+  "static": {
+    "run": "PG18780",
+    "manifestSha256": "0b3e4e0b7ee4e75b73074b466386ccc832b033836e7fe793bdf1dc0d7412ce0a",
+    "SpotBugs": 0,
+    "processingErrors": 0,
+    "Checkstyle": 0,
+    "PMDraw": 36,
+    "applicability": [
+      {
+        "class": "ArtifactComparator",
+        "method": "compare",
+        "variable": "currentByCase",
+        "beginline": "73",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "ArtifactComparator",
+        "method": "compare",
+        "variable": "nkByCase",
+        "beginline": "74",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "ArtifactComparator",
+        "method": "compare",
+        "variable": "rules",
+        "beginline": "102",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "ArtifactComparator",
+        "method": "artifactFiles",
+        "variable": "files",
+        "beginline": "247",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "CorrelatedLogEvidenceValidator",
+        "method": "expectations",
+        "variable": "events",
+        "beginline": "91",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "CorrelatedLogEvidenceValidator",
+        "method": "compareSide",
+        "variable": "addedEvents",
+        "beginline": "125",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "CorrelatedLogEvidenceValidator",
+        "method": "rows",
+        "variable": "rows",
+        "beginline": "146",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "GateCli",
+        "method": "verifySource",
+        "variable": "actual",
+        "beginline": "126",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "GateCli",
+        "method": "preflight",
+        "variable": "result",
+        "beginline": "212",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "GateCli",
+        "method": "compareCurrent",
+        "variable": "result",
+        "beginline": "263",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "GateCli",
+        "method": "report",
+        "variable": "result",
+        "beginline": "334",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "GateCli",
+        "method": "containsAny",
+        "variable": null,
+        "beginline": "398",
+        "rule": "AvoidBranchingStatementAsLastInLoop",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Labelled outer-loop continue is the required search control, not an ineffective continue of the inner final statement."
+      },
+      {
+        "class": "GateCli",
+        "method": "promoteCurrent",
+        "variable": "manifest",
+        "beginline": "471",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "GateCli",
+        "method": "prefixed",
+        "variable": "result",
+        "beginline": "535",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "GateCli",
+        "method": "fileHashes",
+        "variable": "result",
+        "beginline": "541",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "GateContractValidator",
+        "method": "gateMetrics",
+        "variable": "metrics",
+        "beginline": "124",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "ArtifactComparatorTest",
+        "method": "fixture",
+        "variable": "currentArtifacts",
+        "beginline": "710",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "ArtifactComparatorTest",
+        "method": "fixture",
+        "variable": "nkArtifacts",
+        "beginline": "711",
+        "rule": "UseConcurrentHashMap",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Method-local map, no shared publication or concurrent writer; concurrent fixtures use separate inputs/results. ConcurrentHashMap would alter ordering/null semantics without a shared-state requirement."
+      },
+      {
+        "class": "BaselineNumericMetadataTest",
+        "method": "concurrentIndependentValidAndInvalidInputsPreserveTheirOwnResults",
+        "variable": "workers",
+        "beginline": "122",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "BaselineNumericMetadataTest",
+        "method": "concurrentIndependentValidAndInvalidInputsPreserveTheirOwnResults",
+        "variable": "valid",
+        "beginline": "123",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "BaselineNumericMetadataTest",
+        "method": "concurrentIndependentValidAndInvalidInputsPreserveTheirOwnResults",
+        "variable": "invalid",
+        "beginline": "125",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "CorrelatedLogEvidenceValidatorTest",
+        "method": "concurrentValidAndInvalidSnapshotsKeepTheirDiagnosticsAndInputsIsolated",
+        "variable": "workers",
+        "beginline": "326",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "CorrelatedLogEvidenceValidatorTest",
+        "method": "concurrentValidAndInvalidSnapshotsKeepTheirDiagnosticsAndInputsIsolated",
+        "variable": "good",
+        "beginline": "327",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "CorrelatedLogEvidenceValidatorTest",
+        "method": "concurrentValidAndInvalidSnapshotsKeepTheirDiagnosticsAndInputsIsolated",
+        "variable": "bad",
+        "beginline": "328",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "GateBaselineMetadataTest",
+        "method": "concurrentManifestFramesNeverShareMutationsOrFailures",
+        "variable": "workers",
+        "beginline": "171",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "GateBaselineMetadataTest",
+        "method": "concurrentManifestFramesNeverShareMutationsOrFailures",
+        "variable": "first",
+        "beginline": "172",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "GateBaselineMetadataTest",
+        "method": "concurrentManifestFramesNeverShareMutationsOrFailures",
+        "variable": "second",
+        "beginline": "173",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "GateDefinitionDocumentsTest",
+        "method": "concurrentValidAndInvalidDefinitionsRemainIndependent",
+        "variable": "workers",
+        "beginline": "301",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "GateDefinitionDocumentsTest",
+        "method": "concurrentValidAndInvalidDefinitionsRemainIndependent",
+        "variable": "first",
+        "beginline": "302",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "GateDefinitionDocumentsTest",
+        "method": "concurrentValidAndInvalidDefinitionsRemainIndependent",
+        "variable": "second",
+        "beginline": "303",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "GateEvidenceDocumentsTest",
+        "method": "concurrentFrozenFramesKeepTheirDiagnosticsIndependent",
+        "variable": "workers",
+        "beginline": "292",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "GateEvidenceDocumentsTest",
+        "method": "concurrentFrozenFramesKeepTheirDiagnosticsIndependent",
+        "variable": "first",
+        "beginline": "293",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "GateEvidenceDocumentsTest",
+        "method": "concurrentFrozenFramesKeepTheirDiagnosticsIndependent",
+        "variable": "second",
+        "beginline": "294",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "GateMetricsCountTest",
+        "method": "concurrentIndependentSnapshotsNeverShareUnknownValues",
+        "variable": "workers",
+        "beginline": "149",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "GateMetricsCountTest",
+        "method": "concurrentIndependentSnapshotsNeverShareUnknownValues",
+        "variable": "good",
+        "beginline": "150",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      },
+      {
+        "class": "GateMetricsCountTest",
+        "method": "concurrentIndependentSnapshotsNeverShareUnknownValues",
+        "variable": "bad",
+        "beginline": "151",
+        "rule": "DoNotUseThreads",
+        "status": "NON_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Finite standalone JUnit two-worker fixture; submit results are joined and executor is closed with try-with-resources; no app-server thread lifecycle."
+      }
+    ],
+    "suppressions": 0
+  },
+  "publicEvidence": {
+    "PG18776-metric-count-original-red-v1": {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG18776-metric-count-original-red-v1/public-pins.json",
+      "sha256": "55baba8c1a773bb1ee9afa972eeb8a65a86cdafd9c85d0fbc6db7cb1aa442f18"
+    },
+    "PG18778-metric-count-normal-compile-v1": {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG18778-metric-count-normal-compile-v1/public-pins.json",
+      "sha256": "ad55aeef5a3cb859b8c2f5af4fe4e2b5d5c0b27ed96383a370d781f111be218b"
+    },
+    "PG18780-metric-count-qualified-static-v1": {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG18780-metric-count-qualified-static-v1/public-pins.json",
+      "sha256": "c7c10b2220e92af6dac38ea831f5e6e6071454c466b2b302447cdfdf011e57b9"
+    }
+  },
+  "originalRed": {
+    "run": "PG18776",
+    "tests": 6,
+    "failure": 4,
+    "error": 0,
+    "skipped": 0,
+    "actualExit": 1
+  },
+  "first66": "NOT_RUN",
+  "physicalMainExpected": 10,
+  "actualFileCountObservationOrFullGateExecuted": false,
+  "whole451OrFormalUpdated": false,
+  "newAccepted": 0
+}
