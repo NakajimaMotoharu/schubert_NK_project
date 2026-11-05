@@ -1,0 +1,7 @@
+# F03JMSAPI五六の文脈照合
+
+2026-11-06T07:55:56.342703+09:00 / dev-foundation / Main source 28af318d0198fe7432ca6fcd234d3fabbfd10173。PG20010 metadata真正0/独立post0。PG20010 metadata0/独立post0。1491=前982+新56+残453、ordinal/ID/unique1439/duplicate52保持。Main/POM/normal19740/SB19742/JAR/currentSS321324312一致、旧purpose直接hash/全PMD属性/whole source/manualPurpose pointer照合。全dynamic/graph/provider/DB終端は未検証、Product/PT/analyzer/VM再演0。
+
+本群56件、先行と重複なし累計1038/生1491、未分類453。scope: Exact same-source PG16350 delivery/log47 and PG16356 borrowed/owned9. Primary Error and Dispatcher distinct close-Error priority preserved. Four old ingest observations source drift excluded; no historical PT transfer.。全finding/source/context/hash/元ordinalは公開 evidence/01_PT/018_NK-OPS-001/evidence/PG20010-jms-api-purpose-context-v1/manifest.json / SHA256 f7acc70e36bf5868d5a01dc1f35e6889041ebfc72e0e1b4fbd74018a266773ca。関連仕様evidence/01_PT/018_NK-OPS-001/3563_F03JMSAPI五六の仕様.md・計測documents/400_PGPT/470_PMO/500_SV計画整備_20261104/928_F03JMSAPI五六の結果.json。
+
+rawGate1/全適用違反null/全F03・451未受入、Product実行0/coverage未測定/動的PT免除0/新個別受入0/技術成分46/正式1964-53/歴史17-190/工数null/第一V同HOLD。原群{'low': 0.5, 'base': 1.5, 'high': 4} cap5不変更、共有26→26=0ppをPGPT-20261008-3958へ一度（ordinary20/all27/S7残3）、専有N/Tnull。次=Review remaining management30/session13/question15 exact public purpose sites against current source and canonical design; preserve dynamic and F03/451 holds, no old runtime transfers.、通常区切り停止不可。
