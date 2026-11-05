@@ -1,0 +1,154 @@
+{
+  "atJST": "2026-11-05T12:51:00.199075+09:00",
+  "beforeHead": "683985994ad12865171101abc4dbc9876024b6c2",
+  "coreMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+  "PGReview": "ExistingMain finally releasessemaphore forchecked/unchecked failures, validates type/id/disposition beforeadmission, capsconfigured1..20/default20; HEAD and416neverbody; parserrangebound and headers safe. ExistingMainunchanged; actualnative/HTTP/authnotexecuted.",
+  "normalMainCompile": "PG18642 reused only after all sixMaininputs+all sixjarhashes match; no redundantMainbuild",
+  "newTestCompile": {
+    "run": "PG18794",
+    "actualExit": 0,
+    "manifestSha256": "7201c0e49072af16fcb774b2a28b7bcbbabb6aeba4c9227134d29d99b020abed",
+    "selectedTests": 8
+  },
+  "static": {
+    "run": "PG18796",
+    "Checkstyle": 0,
+    "PMDraw": 6,
+    "processingErrors": 0,
+    "perFindingApplicability": [
+      {
+        "beginline": "96",
+        "endline": "96",
+        "begincolumn": "25",
+        "endcolumn": "50",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.media",
+        "class": "MediaRangeService",
+        "method": "respond",
+        "variable": "headers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3",
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+        "status": "NON_APPLICABLE_METHOD_LOCAL_MAP_UNSHARED_AND_COPIED_IMMUTABLE"
+      },
+      {
+        "beginline": "248",
+        "endline": "248",
+        "begincolumn": "17",
+        "endcolumn": "23",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.media",
+        "class": "MediaRangePortTest",
+        "method": "twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "status": "NON_APPLICABLE_FINITE_UNIT_EXECUTOR_WITH_BOUNDED_JOIN_AND_CLOSE"
+      },
+      {
+        "beginline": "254",
+        "endline": "254",
+        "begincolumn": "24",
+        "endcolumn": "55",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.media",
+        "class": "MediaRangePortTest",
+        "method": "twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState",
+        "variable": "workers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "status": "NON_APPLICABLE_FINITE_UNIT_EXECUTOR_WITH_BOUNDED_JOIN_AND_CLOSE"
+      },
+      {
+        "beginline": "257",
+        "endline": "266",
+        "begincolumn": "11",
+        "endcolumn": "17",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.media",
+        "class": "MediaRangePortTest",
+        "method": "twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState",
+        "variable": "pending",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "status": "NON_APPLICABLE_FINITE_UNIT_EXECUTOR_WITH_BOUNDED_JOIN_AND_CLOSE"
+      },
+      {
+        "beginline": "271",
+        "endline": "281",
+        "begincolumn": "13",
+        "endcolumn": "42",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.media",
+        "class": "MediaRangePortTest",
+        "method": "twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState",
+        "variable": "rejected",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "status": "NON_APPLICABLE_FINITE_UNIT_EXECUTOR_WITH_BOUNDED_JOIN_AND_CLOSE"
+      },
+      {
+        "beginline": "380",
+        "endline": "395",
+        "begincolumn": "25",
+        "endcolumn": "43",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.media",
+        "class": "MediaRangePortTest",
+        "method": "verify",
+        "variable": "headers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3",
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+        "status": "NON_APPLICABLE_METHOD_LOCAL_MAP_UNSHARED_AND_COPIED_IMMUTABLE"
+      }
+    ],
+    "sixMainSpotBugs": "PG18648 sameb093 allzero andexactsourcepins, no replay",
+    "suppressionAdded": false
+  },
+  "publicEvidence": {
+    "pg18788-media-range-port-compile-v1": {
+      "path": "evidence/01_PT/009_NK-MED-001/evidence/PG18788-MEDIA-RANGE-PORT-COMPILE-V1/public-pins.json",
+      "sha256": "f9561d982b16287420947cc80bd7d0b99a9a370aa606d6e769d7ee7740dd28ba"
+    },
+    "pg18790-media-range-port-static-v1": {
+      "path": "evidence/01_PT/009_NK-MED-001/evidence/PG18790-MEDIA-RANGE-PORT-STATIC-V1/public-pins.json",
+      "sha256": "e026f2605287c54227ee47ddc14e42d2ffa018126ca2ed687cd14c9363f8ce62"
+    },
+    "pg18794-media-range-port-compile-v1": {
+      "path": "evidence/01_PT/009_NK-MED-001/evidence/PG18794-MEDIA-RANGE-PORT-COMPILE-V1/public-pins.json",
+      "sha256": "d8a2066e9a847e75ec2545efeaaa1654970bad702e87b4d6db4cf03d2b15346f"
+    },
+    "pg18796-media-range-port-static-v1": {
+      "path": "evidence/01_PT/009_NK-MED-001/evidence/PG18796-MEDIA-RANGE-PORT-STATIC-V1/public-pins.json",
+      "sha256": "1885e77d643ac7446fdeac7ab8f563876cd364bb55f008011a72f8f84633b8ea"
+    }
+  },
+  "originalStaticFault": {
+    "run": "PG18790",
+    "PMDraw": 7,
+    "applicableAssignmentInOperand": 1,
+    "BUG": "2278",
+    "YKT": "2023",
+    "fixedBeforeNewRun": true
+  },
+  "administrativeReadPreconditions": {
+    "receipt": "22c30e",
+    "actualExit": 1,
+    "cause": "Adhoc ID max regex captured concatenated historic ID text; assertion prevented ledger/source edits. Following prepare also rejected already-existing output before any command. Subsequent bounded ID parser3321bc confirmed2277/2022; successfulregistration18d9fa precededfix.",
+    "productTestsOrSourceChangedDuringFailure": false
+  },
+  "first8": "NOT_EXECUTED",
+  "newWbsAccepted": 0,
+  "formalUpdated": false,
+  "secondV": false
+}
