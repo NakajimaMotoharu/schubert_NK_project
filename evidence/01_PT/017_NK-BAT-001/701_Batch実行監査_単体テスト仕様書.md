@@ -26,3 +26,5 @@ fixtureはUUID(0,1)/UTC2026-11-05T00Z、同日別UUID、手書12列と期待SQL/
 |BRPORT014|BatchRunAuditPortTest.internalHistoryRenderingUsesFixedRedactionWithoutExposingItsInputIdentityOrTime|純粋History dataの固定redactionとidentity/time非表示、411のcoverage目的だけの反射ではない|
 
 PG19060 compile1二件（BUG2290/YKT2035）と静的前提guard1を保全し、元失敗をPASSへ算入しない。PG19062 raw55の適用命名1（BUG2291/YKT2036）をsource固定前に是正。最終PG19072compile0/PG19074 raw54は806で全個別非適用・適用0/CS0/parser0。実SQLのConstraint/Original owner/復旧真正性をこのメモリPTで認定しない。sourcefreeze/push後、全14を単独run PG19068で一回開始。
+
+初回PG19068/source43ca全14はF1/終了1、全体不合格。空historyで予定idfaultへ非到達をBUG2292/YKT2037へ修正前起票。原source/run/coverage145B+3miss/XML/stdout/OS終端はPG19068-batch-run-audit-failed-first-v1へ保全。sourceを変更せず元run再演はしない。是正ではHISTORY最小1row/全route実hitのassert/route-point診断を追加、未網羅のMorning非Backup空履歴のRUNNING挿入vectorも同BRPORT002へ追加。全14method数は不変。PG19080compile0/19082raw54全個別適用性0-CS0-parser0、807へ。新source固定/push後に新専用PG19088で全14を実行し、最終結果は702/808。原成功13や元execの合算0、newscopeの四100不足は未達のまま。

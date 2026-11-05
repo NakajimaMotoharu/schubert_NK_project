@@ -139,6 +139,16 @@ final class BatchRunAuditPortTest {
     assertFalse(backup.repository().begin(RUN, BatchStep.BACKUP_DB, NOW, false).skipped());
     assertEquals(3, backup.bindings.get(INSERT).getFirst().get(4));
     backup.assertClosed();
+    Fixture emptyMorning = new Fixture();
+    assertFalse(
+        emptyMorning
+            .repository()
+            .beginMorningResume(RUN, BatchStep.CLEAN_LOG, NOW, false)
+            .skipped());
+    assertEquals(
+        insertBindings(BatchStep.CLEAN_LOG, 1, false, null, null),
+        emptyMorning.bindings.get(INSERT).getFirst());
+    emptyMorning.assertClosed();
     Fixture morningWithoutSuccess = new Fixture();
     morningWithoutSuccess.history = List.of(historicalRow(1, 1, ID, BatchStep.BACKUP_DB, "FAILED"));
     assertFalse(
@@ -426,8 +436,10 @@ final class BatchRunAuditPortTest {
           Fixture fixture = new Fixture();
           fixture.faults.put(route + ":" + point, failure);
           Executable action = () -> action(fixture, route);
-          if (failure instanceof SQLException) catalog(action);
-          else assertSame(failure, assertThrows(failure.getClass(), action));
+          if (failure instanceof SQLException) catalog(action, route + ":" + point);
+          else assertSame(failure, assertThrows(failure.getClass(), action, route + ":" + point));
+          assertTrue(
+              fixture.visitedFaultPoints.contains(route + ":" + point), "injected point reached");
           fixture.assertClosed();
         }
       }
@@ -517,6 +529,9 @@ final class BatchRunAuditPortTest {
     if (route.equals(ABANDON)) {
       fixture.history = List.of(historicalRow(1, 1, ID, BatchStep.CLEAN_LOG, TEXT_RUNNING));
       fixture.repository().begin(RUN, BatchStep.CLEAN_LOG, NOW, true);
+    } else if (route.equals(HISTORY)) {
+      fixture.history = List.of(historicalRow());
+      fixture.repository().begin(RUN, BatchStep.CLEAN_LOG, NOW, false);
     } else if (route.equals(FINISH)) fixture.repository().finish(attempt(false), END, result());
     else if (route.equals(REPLAY))
       fixture.repository().verifyFinished(attempt(false), END, result());
@@ -621,7 +636,11 @@ final class BatchRunAuditPortTest {
   }
 
   private static void catalog(Executable action) {
-    var failure = assertThrows(BatchRepositoryException.class, action);
+    catalog(action, "declared failure boundary");
+  }
+
+  private static void catalog(Executable action, String context) {
+    var failure = assertThrows(BatchRepositoryException.class, action, context);
     assertEquals(FIXED, failure.getMessage());
     assertEquals(null, failure.getCause());
     assertEquals(0, failure.getSuppressed().length);
@@ -629,6 +648,7 @@ final class BatchRunAuditPortTest {
 
   private static final class Fixture {
     private final List<String> routes = new ArrayList<>();
+    private final List<String> visitedFaultPoints = new ArrayList<>();
     private final Map<String, List<Map<Integer, Object>>> bindings = new HashMap<>();
     private final Map<String, Throwable> faults = new HashMap<>();
     private List<Map<String, Object>> history = List.of();
@@ -802,6 +822,7 @@ final class BatchRunAuditPortTest {
     }
 
     private void hit(String route, String point) throws Throwable {
+      visitedFaultPoints.add(route + ":" + point);
       Throwable failure = faults.get(route + ":" + point);
       if (failure != null) throw failure;
     }
