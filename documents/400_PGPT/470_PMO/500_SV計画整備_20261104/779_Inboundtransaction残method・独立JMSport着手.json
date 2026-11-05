@@ -1,0 +1,49 @@
+{
+  "atJST": "2026-11-05T15:02:33.061609+09:00",
+  "groupId": "PGPT-20261105-INBOUND-TRANSACTION-PORT",
+  "headBefore": "ea1d3babe808eeb3bd4f6e7a49d98851985c1f78",
+  "productionMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+  "primaryWbs": "WBS-P005-03",
+  "leafCostBinding": null,
+  "target": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+  "startEstimatePp": {
+    "low": 0.5,
+    "base": 2,
+    "high": 5
+  },
+  "capPp": 10,
+  "chargedToSV": false,
+  "classification": "PT_DEFAULT_PURE_JMS_PORT_NO_BROKER",
+  "review": "same transactedcontextDLQ send then commit, failureattemptrollback + phase-specific exception; observer attempted-before/confirmed-after; defaultoverloads; onlyownedcontextportcalls, doesnot open provider/session/DB/files",
+  "closure": "InboundTransactions->DlqSender.sendUntrusted->FatalDlqMetadata/Message interface/ActiveMQQueue valueconstructor and protocol wrappers. No TemporaryInfrastructureException/WebStartupException/FingerprintKeyRing/ResponseSnapshotCodec. Reuse669 staticSDKvaluepreflight/PG18622 exact6SDKpins and7valueclass-onlybound; assert freshrecordedHELD4hits0 andSDKinitializedsubsetallowed7.",
+  "existingEvidence": {
+    "canonicalDlq": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18622-dlq-sender-unit-v1/manifest.json",
+    "sha256": "e643b92d0553c4b0b76413381d39d7cf6e2cf6509510ab0798492300eafb6404",
+    "reuse": "dependency/currentMainbyte checks only, no repeatedDlqqualification/execreuse; same product code inputs b093 enforced"
+  },
+  "fixture": "JMSContext/JMSProducer/Message finiteinterfacesProxy, recorder/ownThrowable/fixedClock. No connectionfactory/provider/broker/socket/actualmessage/credential/DB/Root/VM. ExistingpurePrimaryContract5 plus newport6 planned11/2classes. No privatefailedlogs or aliases toheldoperation.",
+  "requirements": [
+    "NK-MSG-001",
+    "MQ008/010",
+    "UI231/251",
+    "SS312§9/321§7-11/322§11/352",
+    "PT-JMS-ISO/UNC/PRE"
+  ],
+  "oracle": "literalDLQFQQN nk.dead.letter::nk.dead.letter.q/persistent2/TTL0/PROTOCOL_INVALID; callback/commit/rollbackcount/order andindependentprimarysecondaryidentitytables; neverexpectusingSUThelper",
+  "acceptance": "new whole11/normalAPIjar/allphysical1/singleexec-session/CRC/wholefour100/HELDfour0/SDKvalueonly. FormalWBS/actualbrokerACK/VM/native/firstV/whole451 remainopen",
+  "quotaBefore": {
+    "primary": {
+      "usedPercent": 15,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 15,
+    "remainingPercent": 85,
+    "windowDurationMins": 10080,
+    "resetsAt": 1794395640,
+    "observedByJST": "2026-11-05 14:59:00 JST",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "5fb964668d47aa96050fb33cbbace16e1dffbd43dd9b4763745ee4e071f934b1"
+  }
+}

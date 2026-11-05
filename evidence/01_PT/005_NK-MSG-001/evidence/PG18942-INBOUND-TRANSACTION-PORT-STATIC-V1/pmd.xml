@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-05T15:05:03.404">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java">
+<violation beginline="62" endline="62" begincolumn="29" endcolumn="45" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="InboundTransactions" method="isolateFatal" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="63" endline="63" begincolumn="11" endcolumn="46" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="InboundTransactions" method="isolateFatal" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+<violation beginline="86" endline="86" begincolumn="14" endcolumn="30" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="InboundTransactions" method="rollbackAfterFailure" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="87" endline="87" begincolumn="11" endcolumn="37" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="InboundTransactions" method="rollbackAfterFailure" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionPortTest.java">
+<violation beginline="243" endline="243" begincolumn="31" endcolumn="59" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.inbound" class="InboundTransactionPortTest.Fixture" variable="properties" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="264" endline="264" begincolumn="15" endcolumn="48" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="InboundTransactionPortTest.Fixture" method="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="289" endline="289" begincolumn="15" endcolumn="49" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="InboundTransactionPortTest.Fixture" method="producer" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="316" endline="316" begincolumn="15" endcolumn="45" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="InboundTransactionPortTest.Fixture" method="message" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionsPrimaryContractTest.java">
+<violation beginline="114" endline="114" begincolumn="13" endcolumn="43" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="InboundTransactionsPrimaryContractTest" method="message" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="145" endline="145" begincolumn="15" endcolumn="48" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="InboundTransactionsPrimaryContractTest.Fixture" method="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+</pmd>

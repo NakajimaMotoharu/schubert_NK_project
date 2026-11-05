@@ -1,0 +1,18 @@
+# Inbound transaction 単体仕様
+
+NK-MSG-001 / InboundTransactions全method / RD MQ008/010・UI231/251・SS312§9/321§7-11/322§11/352・411/451・779/780。旧部分34lineうち10line未通過のdefault/observer系を全Source単位で検証する。既PrimaryContract5は元Test source不変更、新port6と同一source/runへ全class実行する。旧exec/成功件数は合算しない。
+
+|Test ID|新InboundTransactionPortTest method・独立期待|
+|---|---|
+|PT-JMS-INPORT001|defaultAndObservedIsolationSendSameSanitizedHandleThenCommitWithoutRollback。default/observer双方、sameMessagehandleをfixedDLQ nk.dead.letter::nk.dead.letter.qへpersistent2/TTL0→commit1、rollback0/observer0。十property閉projection、PROTOCOL_INVALID/API_SYNC/fixed時刻、本文呼出禁止。|
+|PT-JMS-INPORT002|checkedReadAndRuntimeSendOrCommitFailuresRollbackOnceWithoutResending。JMSException read、RTE send/commitを同一cause＋protocol同一suppressedでFailedIsolation。send/commit試行数、attempted→rollback→confirmed各1、再送0。|
+|PT-JMS-INPORT003|isolationRollbackFailureRetainsBothPhasesAndNeverConfirms。sendfailure＋rollbackRTEはUnconfirmedをcauseにphasewrapper、元isolation/rollback/protocol各identity保持。rollbackErrorは同一fatal、確認callback/commitなし。|
+|PT-JMS-INPORT004|observerNullContractsRejectBeforeAnyContextOrMessageOperation。二methodのattempted/confirmed各nullはcaller契約NPE拒否、実context/messagecall0。NPE正常化なし。|
+|PT-JMS-INPORT005|observerFailuresPropagateIdentityAtTheirDeclaredSequenceBoundary。attempted/confirmed各RTE/Error、元同一性、attempt前ならrollback0・confirm時はrollback1、後続0、成功へ変換しない。|
+|PT-JMS-INPORT006|successfulDefaultAndObservedRollbackOnlyNotifyAfterProviderReturns。defaultはrollback1、observerはattempted→rollback→confirmed、commit0。|
+
+既PT-JMS-PRE001～005はPrimaryContractTestのsameThrowable/selfsuppression0、distinctequalsTrue/identity保持、rollbackErrorfatal、sameProtocol隔離失敗、distinct隔離失敗の独立期待を保持する。
+
+FixtureはJMSContext/JMSProducer/Message有限ProxyとownThrowable/Clockだけ。ActiveMQQueueは値constructorのみ、669/PG18622のexact6SDKhash・既許可7値class初期化閉包を再利用し、freshclass-initが同集合のsubsetであることをpost検証。connectionfactory/provider/実broker/socket/DB/VM/Root/鍵/credential/実payload/nativeは使用しない。HELD四classの実probe0も検査。既DLQ sender成功の再演/oldexec合算/そのincidental hitを新source資格へ重複計上しない。
+
+Expectedは設計のliteralFQQN/transaction順とJavaThrowable同一性を手作成し、productionの実行結果からexpectedを計算しない。Mainbuild/NullAway/六SBはPG18642/18648の同b093全入力/JARpinを照合して再利用。PG18940compile0、18942static全10finding個別NA780/適用0/CS0/parser0/抑制なし。exactsource固定後PG18948全11/二class、単exec/session/正常MainphysicalCRC/line-method-class-branch100をstrictpost。環境/時刻/source/command/exit/hash/BUGは016結果へ。実brokerTTL/ACK/隔離耐久性・WBS/正式451/V/IT-STは未受入。
