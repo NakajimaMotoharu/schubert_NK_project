@@ -1,0 +1,7 @@
+# F03共通資源GenericCatch二十の限定文脈確認
+
+2026-11-06T06:07:06.840895+09:00 / dev-foundation / Main source 28af318d0198fe7432ca6fcd234d3fabbfd10173。PG19840 metadata真正0/独立post0。source-only metadata0/独立別パスpost0。先行307+今回20+未分類1164=1491の全ordinal/raw/IDを独立再構成、unique1439・duplicate52組不変。全Main/POM/normal19740/SB19742/JAR hash不変、全文methodとcanonical-main設計原文/行/hash一致。Product実行/新JUnit/analyzer replay0、抑制・包括免除0。
+
+本群20件、先行と重複なし累計327/生1491、未分類1164。scope: ResourceScope8/ProcessResourceScope8/ConfigurationGroupResolver4のRuntimeException/Error body/cleanup catchのみ。SS333/343の同一所有cleanup・unknown identity・既知IO/Stop/Interrupt優先・固定secondary・interrupt保持。動的後条件は各行未実施として保持。。全finding/source/context/hash/元ordinalは公開 evidence/01_PT/018_NK-OPS-001/evidence/PG19840-resource-generic-catch-context-v1/manifest.json / SHA256 dcfaa6104f6bdd8f57093a235a56f04000d83702b03db55c78e45528fcbebf21。関連仕様evidence/01_PT/018_NK-OPS-001/3529_F03共通資源GenericCatch二十の仕様.md・計測documents/400_PGPT/470_PMO/500_SV計画整備_20261104/894_F03共通資源GenericCatch二十の結果・残1164.json。
+
+rawGate1/全適用違反null/全F03・451未受入、Product実行0/coverage未測定/動的PT免除0/新個別受入0/技術成分46/正式1964-53/歴史17-190/工数null/第一V同HOLD。原群{'low': 0.5, 'base': 1.5, 'high': 4} cap5不変更、共有24→25=1ppをPGPT-20261008-3924へ一度（ordinary19/all26/S7残3）、専有N/Tnull。次=Publish20 and continue remaining F03 exact raw context selection with whole Main/approved design and independent post. No held dynamic/resource/Root/VM/HMAC execution; preserve formal1964/53, technical46 and all HOLD.、通常区切り停止不可。
