@@ -1,0 +1,36 @@
+# Logout再送記録 SQL port 単体テスト仕様書
+
+Program NK-WEB-002 / PendingRevocationRepository全constructor/method/lambda。RD AUT-004、UI226/234、SS314/331/332/352、QA050/SSC171。費用831/group3877の原1/4/8pp cap10、第一Vの代替にしない。
+
+対象はenqueue/claim/markFailure/removeConfirmedとtransaction/microseconds/read/required/bindLease。JDKProxy Connection/PreparedStatement/ResultSetは借用JDBCのメモリfixtureでありDataSource/DriverManager/実DB/JMS/API/Root/VM/鍵/暗号操作/intent/permitは起動しない。旧PendingRevocationRepositoryTestはBeforeAllでWebLogDatabaseFixtureを起動するためcompile/選択しない。入力は公開UUID/明示時刻/ゼロ配列だけ、keyVersion=pt-syntheticは非機密markerで鍵の値ではない。cipher配列は29..116の合成byte値で実contextではなく、巨大length metadataには配列を割り当てずgetBytes自体を禁止する。
+
+独立oracle: Web側pending_context_revocations DDL/承認QA050に基づく手書き全4SQL literal及び全bindの型/位置/値を捕捉。初回requestedAt=2026-11-05T00:00:00.123456Zに対しdueは00:00:05.123456Z。失敗now=00:00:10.123456Zに対し次回00:00:40/00:05:10/00:15:10、以後15分、attempt最大100。期待日は固定文字列から算出しproduction methodを呼ばない。claimのSQL due選択はnext_attempt_at/requested_at/id/skiplocked、UPDATE RETURNINGはDBの返却順保証がないためローカルimmutable投影をrequestedAt/id順へ整える内部判断を別に確認する。dispatchOneはlimit1で、この投影順は外部表示/業務処理順を変更しない。SQL lease_owner/lease_until/attempt_count/lease_until>nowを全bind確認し、DBの実排他成立の証拠にはしない。
+
+|Test ID|class.method|目的・入力・独立期待|
+|---|---|---|
+|OPS-RVR-PORT-001|PendingRevocationPortTest.enqueueBindsIndependentFiveSecondScheduleAndBothExpiryForms|enqueue null/既知expiry・5秒・literalSQL/7bind/stmtclose|
+|OPS-RVR-PORT-002|PendingRevocationPortTest.enqueueRequiresExactlyOneAffectedRowAndClosesStatement|insert更新0/2/-1はSQLData22000|
+|OPS-RVR-PORT-003|PendingRevocationPortTest.enqueueNullTransactionExpiryPrecisionAndOverflowContracts|全null/4entry TXautoCommit/expiry等時前時submicro/Instant上限|
+|OPS-RVR-PORT-004|PendingRevocationPortTest.claimCapturesDueLeaseSqlAndReturnsSortedImmutableDefensiveProjection|claim due/skiplocked/CAS5bind、requestedAt-id安定順、immutable/deepcopy|
+|OPS-RVR-PORT-005|PendingRevocationPortTest.claimPublicBoundsAndPrecisionRejectBeforeSqlWhileBothLimitBoundsWork|claim null/limit0-1-100-101/leaseUntil等時前時/submicro/empty|
+|OPS-RVR-PORT-006|PendingRevocationPortTest.boundedCiphertextCopiesSmallValuesAndNeverLoadsOversizedDatabaseBytes|cipher29/116copy・117/MAXはgetBytes禁止・nullablepayloadwarning保持|
+|OPS-RVR-PORT-007|PendingRevocationPortTest.storedCiphertextInvalidLengthOrInconsistentBytesHasClosedDataFailure|cipher負/0/28/不足不一致は固定Data22000|
+|OPS-RVR-PORT-008|PendingRevocationPortTest.everyRequiredDatabaseColumnRejectsNullWithoutUnexpectedNpe|必須DB列8種nullは明示SQLData/NPE0|
+|OPS-RVR-PORT-009|PendingRevocationPortTest.invalidIdentityLeaseKeyAttemptAndTimesAreClosedWithoutProviderText|UUIDnoncanonical/keyversion/attempt/timestamp/DateTime異常閉鎖|
+|OPS-RVR-PORT-010|PendingRevocationPortTest.failureBackoffHasIndependentThirtyThreeHundredNineHundredSecondVectorsAndSaturation|30/300/900秒・attempt99/100飽和・7warning・CAS8bind/更新0-1-2|
+|OPS-RVR-PORT-011|PendingRevocationPortTest.failureNullEarlyTimeSubmicrosecondsAndOverflowStayCallerFailures|markFailure null/過去now/submicro/時刻overflowとclose|
+|OPS-RVR-PORT-012|PendingRevocationPortTest.confirmationDeletesOnlyExactOneRowWithAllFiveLeaseCasBindings|removeConfirmed exactSQL/CAS5bindとrowcount0-1-2/null/time|
+|OPS-RVR-PORT-013|PendingRevocationPortTest.allFourStatementNullsAndClaimResultNullAreExplicitDataErrors|全4statementnull/resultnullとownedclose条件|
+|OPS-RVR-PORT-014|PendingRevocationPortTest.jdbcFailuresPreservePrimarySuppressionAndReverseOwnedResourceClose|全4operation SQL各phase原SQLException同一性・suppressed・逆順close|
+|OPS-RVR-PORT-015|PendingRevocationPortTest.unknownRuntimeAndErrorKeepIdentityAndStillCloseOwnedJdbcOnly|未知Runtime/Error参照保持とownedclose|
+|OPS-RVR-PORT-016|PendingRevocationPortTest.oneRepositoryHasIndependentConcurrentBorrowedConnectionsAndImmutableRows|同instance二ownworker/Connection独立・各leasebindingと結果不変|
+
+null契約: API conn/identity/payload/failure/row/lease/timeは入口failfast、nullableexpiresは2形。Result/statement/必須列の欠落はSQLDataException state22000/固定messageで、NPEをcatchして正常扱いしない。DB行のinvalid IllegalArgumentException/DateTimeExceptionはstored revocation metadata is invalid/cause null/suppressed0、required nullはrequired revocation SQL value absent。SQLExceptionと未知Runtime/Errorは原参照を保持し、JDK try-with-resourcesでrs→psだけcloseする。借用connection commit/rollback/close/setAutoCommit/setReadOnlyを行わない。sql.bind失敗/資源close失敗も正常と算入しない。
+
+Fixture事前是正: 最初のcompile19310後、並行2件目のfake RETURNING lease_ownerが呼出ownerと一致するよう修正し、各owner/SQLbindもassert追加。Main/期待業務仕様の変更ではなく初回製品実行前のfixture整合確認。修正後compile19314/static19316を使用し旧compileを保全、全16はsource固定/push後にPG19318へ初回実行する。
+
+環境Linux/JDK25.0.4、JUnit1.13.4/JaCoCo0.8.15、CoreMain7d2c normal六module build/NullAway19270・SpotBugs19272全0を同Mainhash/全normaljarで再利用。既qualifier prepare/static/run/post revocation_repo、全16/1class・normalWeb全physical1/CRC/単exec/session・line/method/class/branch100/全@Test/HELD四probe0を独立postする。Main変更なし。Test IDはsafeXML/selectedTestMethodsへ一意対応、実command/OS終端/commit/fixture観点/coverage/結果/BUG/証跡hashを117と832以降へ保存する。
+
+実DBのDDL/constraint/row lock競合・実暗号payload/実Logout再送・credential・HTTP/CHR/native/451はこのport試験の受入範囲外であり未試験のまま保持する。外部依存や品質条件を免除せず、正式1964PT/53scope/工数null/新個別WBS0/第一V HOLDを維持する。
+
+最終固定前832: compile19320/static19322 raw6(ownedJUnitworker3/各worker専有map2/definingJdbcLoader1)個別非適用、適用0-CS0-parser0。SQLSTATE/close/閾値の独立Test定数とcursor分離は実修正し抑制0。19318は予定のみ未実行、fresh全16はPG19328/post19330、固定producer input001。SS314の5秒/30秒/5分/15分とSS3319.2列/型/attempt上限/nullableexpiry/ownleaseCASを正本から照合済み。

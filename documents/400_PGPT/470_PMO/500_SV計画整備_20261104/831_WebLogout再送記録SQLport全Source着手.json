@@ -1,0 +1,46 @@
+{
+  "atJST": "2026-11-05T21:18:56.578774+09:00",
+  "sourceAtSelection": "dd3bacaada97c058f4afee402f9664e51a0ca9bd",
+  "coreMain": "7d2c2fb64711531db8898d49b4b377670b58ff87",
+  "groupId": "PGPT-20261105-WEB-REVOCATION-REPOSITORY-PORT",
+  "owner": "WBS-P015-04",
+  "estimateAtGroupStartPp": {
+    "low": 1,
+    "base": 4,
+    "high": 8
+  },
+  "capPp": 10,
+  "target": "PendingRevocationRepository whole source; four SQL operations enqueue/claim/markFailure/removeConfirmed, microseconds/transaction/read helpers",
+  "permission": "PT_DEFAULT independent host fakeJDBC; no real DataSource or PostgreSQL/socket/worker/JMS/Logout/credential/key reads/crypto or Root/cohort operations",
+  "dependenciesReviewed": [
+    "PendingRevocationRepository full source",
+    "ClaimedRevocation",
+    "EncryptedRevocationPayload constructors/version validator/defensivebytecopy",
+    "RevocationPayloadIdentity constructor only (AAD/encryption not called)",
+    "RevocationFailureCode enum",
+    "JDK SQLException/DateTime/UUID/Instant/collections"
+  ],
+  "heldDependencies": "No TemporaryInfrastructureException/WebStartupException/FingerprintKeyRing/ResponseSnapshotCodec invocation in target closure",
+  "ciphertext": "Synthetic zero-filled29..116byte fixture, not a real encrypted context/key/DB dump; value only, never decrypts or usesAad",
+  "existingTests": "PendingRevocationRepositoryTest startsWebLogDatabaseFixture inBeforeAll; not compiled/selected, goldenbackoff/leaseconditions read as existing independent oracle",
+  "newTestIdPrefix": "OPS-RVR-PORT reserved after uniqueness check",
+  "expected": "QA050/SSC171 initial5s then30/300/900s; dueleaseSQL exact capture/CAS predicate/update result; microseconds/cipher bounds/immutableorderedprojection/fixedSQLData diagnostics/no borrowedtransaction lifecycle",
+  "scopeLimitations": "No realDB constraint/SQL execution/rowlock/crossconnectionrace acceptance; only normal Main/control/parameter/resource contracts. Not substitute for firstV/451/native/CHR. LegacyAudit/Caddy unchangedMain+threeWebclassnormalBytehashes verifiedreuse, no rerun/newcount. APIOutbox/MediaRepository fullerrorclosures helddueTempInfra; RevocationRetryCoordinator helddueWebStartup attachSecondary; actualMorningStopPass/UnitTerminals factory needs nativeRootownership, not executed.",
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "firstV": "SAME_FIRST_HOLD_NOT_REPLACED",
+  "quotaBefore": {
+    "primary": {
+      "usedPercent": 18,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 18,
+    "remainingPercent": 82,
+    "observedAtUTC": "2026-11-05T12:06:16.040Z",
+    "observedByJST": "2026-11-05 21:06:16",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "7fb85a1373125215ffb7d9411b3b022f231d3b2717053445fe9f32277646d315"
+  }
+}

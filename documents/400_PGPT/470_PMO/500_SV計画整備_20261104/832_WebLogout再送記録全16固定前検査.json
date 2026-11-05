@@ -1,0 +1,84 @@
+{
+  "atJST": "2026-11-05T21:37:04.968254+09:00",
+  "decision": "SOURCE_READY_TO_FREEZE_NO_PRODUCT_EXECUTION",
+  "coreMain": "7d2c2fb64711531db8898d49b4b377670b58ff87",
+  "mainChanged": false,
+  "sameSourceNormalSixMainAndSpotBugs": "PG19270/PG19272 source7d2c full input/6jars equality checked by qualifier, no rerun merely to confirm success",
+  "compileManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19320-web-revocation-repository-port-compile-v1/manifest.safe.json",
+    "sha256": "df4f60cdb0c6f0ee85928acdb1b44586a156b1f07c3ea7d6c0b6a6364f570805"
+  },
+  "staticManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19322-web-revocation-repository-port-static-v1/manifest.safe.json",
+    "sha256": "59e4f1948b9268109433454489cdf605b1ee55510cae4c3af1647695cf4d2a1f"
+  },
+  "rawPMD": 6,
+  "applicable": 0,
+  "checkstyle": 0,
+  "parserErrors": 0,
+  "individualDecisions": [
+    {
+      "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "line": 495,
+      "rule": "DoNotUseThreads",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_SCOPE_REASON",
+      "reason": "Standalone JUnit creates exactlytwo owned workers with try-with-resources Executor and boundedget; no productionweb thread/lifecycle creation, no realDB race claimed. J2EE deployment rule not applicable to testfixture."
+    },
+    {
+      "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "line": 497,
+      "rule": "DoNotUseThreads",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_SCOPE_REASON",
+      "reason": "Standalone JUnit creates exactlytwo owned workers with try-with-resources Executor and boundedget; no productionweb thread/lifecycle creation, no realDB race claimed. J2EE deployment rule not applicable to testfixture."
+    },
+    {
+      "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "line": 506,
+      "rule": "DoNotUseThreads",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_SCOPE_REASON",
+      "reason": "Standalone JUnit creates exactlytwo owned workers with try-with-resources Executor and boundedget; no productionweb thread/lifecycle creation, no realDB race claimed. J2EE deployment rule not applicable to testfixture."
+    },
+    {
+      "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "line": 588,
+      "rule": "UseConcurrentHashMap",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_SCOPE_REASON",
+      "reason": "Each Fixture/rows/bindings/faults is owned and accessed by exactlyone testworker; sharingREPO has no mutablefixture fields. No concurrent mapaccess, nullpayload/expiry fixtures require ordinarynull-capable map."
+    },
+    {
+      "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "line": 590,
+      "rule": "UseConcurrentHashMap",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_SCOPE_REASON",
+      "reason": "Each Fixture/rows/bindings/faults is owned and accessed by exactlyone testworker; sharingREPO has no mutablefixture fields. No concurrent mapaccess, nullpayload/expiry fixtures require ordinarynull-capable map."
+    },
+    {
+      "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "line": 680,
+      "rule": "UseProperClassLoader",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_SCOPE_REASON",
+      "reason": "JDK JDBC interface definingloader binds Proxy to exacttype; standaloneJUnit, not J2EE arbitraryTCCL/provider. No JDBCdriver/provider loaded."
+    }
+  ],
+  "originalStatic": {
+    "PG19316raw": 11,
+    "corrections": "TestSQLState/close/boundary independentconstants and separatecursorincrement actuallyfixed; no suppression, Mainunmodified",
+    "firstCompile19310": "pre-product draft secondworker returnedleaseowner corrected to matchboundowner, assertsadded; oldartifactkept"
+  },
+  "testPlan": {
+    "class": "PendingRevocationPortTest",
+    "tests": 16,
+    "run": "PG19328",
+    "post": "PG19330",
+    "all16MustRun": true
+  },
+  "oracleSource": "origin/main SS314 explicit5s/30s/5min/15min +SS3319.2 DDL limits/nullableexpiry/ownleaseCAS; handcodedliteralSQL andparameter positions/typedpostconditions",
+  "localSortDecision": "UPDATE RETURNING ordering not promised; deterministic immutable projection requestedAt/id. CallerdispatchOnelimit1 hasno externalorderchange. Onlycontrol/SQLport tested, actualDBlock/SQLexecutionseparate.",
+  "producer": {
+    "path": "evidence/01_PT/016_NK-WEB-002/input/001_revocation_repository_qualifier.py",
+    "sha256": "19b60d482b4bcb24fb9983f8c264cd1a7042bab848c1494aa9ee8a08e6be217c"
+  },
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "S_VTransfer": false
+}
