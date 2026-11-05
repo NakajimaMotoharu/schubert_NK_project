@@ -1,0 +1,132 @@
+{
+  "atJST": "2026-11-05T20:36:09.906097+09:00",
+  "source": "4874c478e1a81ce5390a79ba09a73e9552dfb9ff",
+  "productionCoreMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+  "run": "PG19218",
+  "actualExit": 0,
+  "postActualExit": 0,
+  "postRun": "PG19230",
+  "postToolQualificationSource": "24d9417468efd2125313894af6699ec76bb41e12",
+  "tests": 6,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "aborted": 0,
+  "coverage": {
+    "LINE": {
+      "covered": 51,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 5,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 36,
+      "missed": 0
+    }
+  },
+  "physical": 1,
+  "canonicalManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19218-mq-topology-port-six-v1/manifest.json",
+    "sha256": "810adf8a31c874a459c3dd8c243ae199b9c8ce2c480f7d6b1e7c78e97a71bbab"
+  },
+  "supplementalPins": {
+    "environment.safe.json": "6c8fce0d40dba673c08404e6ed05607dc62b30d8d448841bbcf1939e747719bd",
+    "initialization.safe.json": "26c91c82d7bb8e948138a237cfcf15652fbc7992d58c2e45f9ecb62553471a68"
+  },
+  "producer": {
+    "source": "4874c478e1a81ce5390a79ba09a73e9552dfb9ff",
+    "path": "evidence/01_PT/018_NK-OPS-001/input/005_mq_topology_qualifier.py",
+    "sha256": "43e55c7a02cb6d1b1372017b3f15c9babf90aa965184c9f3d1b3a544d32a60f1"
+  },
+  "verifier": {
+    "source": "24d9417468efd2125313894af6699ec76bb41e12",
+    "path": "evidence/01_PT/018_NK-OPS-001/input/007_topology_post_verifier.py",
+    "sha256": "489f4f1e46939806790f127cf50240a131b4849cc83c84835ed15029a2c97948"
+  },
+  "sdkMethodExtension": {
+    "source": "24d9417468efd2125313894af6699ec76bb41e12",
+    "path": "evidence/01_PT/018_NK-OPS-001/input/006_topology_sdk_method_extension.json",
+    "sha256": "57ce7da2c29857e6cfa5c252e224d0deacae6cbdb30f9bfc92438d85b4b05aee"
+  },
+  "allStaticArtifactsFixedInGit": true,
+  "sdkBoundaryLimitations": {
+    "originalZeroFilesystemClaimSuperseded": true,
+    "javaIoTmpdir": "original unit explicitly owned slot/tmp, mkdir before execution; XML exact match checked",
+    "nettyTmpdirInitializer": "io.netty.tmpdir absent, java.io.tmpdir path tries mkdirs/isDirectory then returns existing owned directory; fallback code exists and is not claimed syscall-observed",
+    "osMetadata": "PlatformDependent initializer may read /etc/os-release or /usr/lib/os-release using BoundedInputStream/BufferedReader; OS public metadata only",
+    "jvmMemory": "CleanerJava9/PlatformDependent0 may allocate small direct buffer and perform internal reflection/Unsafe capability checks; this is not the project native ABI acceptance",
+    "notProven": "No syscall tracing was performed; no assertion of zero JDK/SDK filesystem or memory activity",
+    "productBoundary": "No Root/VM/DB/broker/session/provider actions qualified by this metadata review"
+  },
+  "firstProductRunPassed": true,
+  "productTestsReplayed": 0,
+  "originalPostExit": 1,
+  "invocationOnlyPostExit": 1,
+  "mainChanged": false,
+  "expectedValuesChanged": false,
+  "bug": "BUG2295/YKT2040",
+  "bugStatus": "FINITE_POST_CLOSURE_CLOSED",
+  "currentTechnicalReusableComponents": 29,
+  "originalPartial80TechnicallyWhole": 14,
+  "originalPartialUnbound": 66,
+  "originalUnregistered282ProofIntersection": 14,
+  "originalUnregisteredUnbound": 268,
+  "originalMainSamePathHashChecked": true,
+  "globalRegistryUpdated": false,
+  "newWbsAcceptance": 0,
+  "formalUpdated": false,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "historicalAccepted": "17/190",
+  "effortRate": null,
+  "firstV": "SAME_FIRST_HOLD_NOT_REPLACED",
+  "quotaBefore": {
+    "primary": {
+      "usedPercent": 17,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 17,
+    "remainingPercent": 83,
+    "windowDurationMins": 10080,
+    "resetsAt": 1794395640,
+    "observedAtUTC": "2026-11-05T10:53:17.245Z",
+    "observedByJST": "2026-11-05 19:53:17 JST",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "b7b2a959e0e67e97b96e371798975cdd468e31c67e43f63dc616888a9e80d16a"
+  },
+  "quotaAfter": {
+    "primary": {
+      "usedPercent": 18,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 18,
+    "remainingPercent": 82,
+    "observedAtUTC": "2026-11-05T11:34:20.510Z",
+    "observedByJST": "2026-11-05 20:34:20",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "769aa588a1b3242e35423a44de3f3f2424c471a0a5c0e72548dc2c761a1e32ec"
+  },
+  "sharedObservedPp": 1,
+  "actualAllocatedPp": null,
+  "tokenN": null,
+  "tokenT": null,
+  "ordinarySharedObservedPp": 12,
+  "allRecordedSharedPp": 19,
+  "SObservedPp": 7,
+  "SRemainingCapPp": 3,
+  "mayFinishTurn": false,
+  "usageMeasurementId": "b27027109b82aad637ec5d2e97c1b250658031bce55efa5866dd95076e4b7dc8",
+  "usageLastPollJST": "2026-11-05T20:30:47+09:00",
+  "usageNextNotBeforeJST": "2026-11-05T21:30:47+09:00",
+  "next": "publish/push; independent nextbatch/API source closure and knownwholeproof preflight, keep Root/native/VM/realbroker and samefirstV HOLD"
+}
