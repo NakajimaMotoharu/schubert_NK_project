@@ -1,0 +1,72 @@
+{
+  "atJST": "2026-11-06T01:37:07.026995+09:00",
+  "groupId": "PGPT-ORDINARY-WEB-LOG-OUTBOX-JDBC-20261106",
+  "sourceBefore": "827983a97a9c3bf36b7671985a7924417ff0e8f7",
+  "target": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogOutboxRepository.java",
+  "targetSha256": "b37b87f7e787540b2ccf20ce92d014a2b71d7f038ae4cfecc22ab3133177933e",
+  "canonicalOwner": "WBS-P006-03",
+  "costOwner": "WBS-P006-03",
+  "originalEstimatePp": {
+    "low": 1.5,
+    "base": 4,
+    "high": 8
+  },
+  "capPp": 10,
+  "chargedToSV": false,
+  "quotaBefore": {
+    "primary": {
+      "usedPercent": 21,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 21,
+    "remainingPercent": 79,
+    "observedAtUTC": "2026-11-05T16:35:24Z",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "54843c8fbb0a6ec5615dac80af7d5748a1d29b8df5c21fd4ac45d516cff8d9e5"
+  },
+  "scope": "All original repository methods: enqueue, claim, read, sent/failure CAS/backoff, required fields and caller transaction using own java.sql Proxy only. Existing holder constructors/clone no encryption. Unchanged Main versus original6b verified.",
+  "decision": "PT_DEFAULT",
+  "fixture": "Synthetic public UUID/Instant/worker/29 zero bytes and PUBLIC key-version label; no real encrypted envelope, crypto/provider/key, actual claim/DB/JMS/permissions. Supplier generates jitter only.",
+  "closedDependencies": [
+    "WebLogPayloadIdentity ctor/getters only; aad not called",
+    "EncryptedWebLogPayload ctor/defensive clone only",
+    "ClaimedWebLog ctor/getters/requireWorker only",
+    "JDK java.sql/time/collections/Proxy/ThreadLocalRandom"
+  ],
+  "requirements": "NK-MSG-002/MON003/MQ008; UI235/242; SS324 sections8.3/9,331 section9.3,352; QA054 ACTION shares unchanged outbox algorithm; QA050 revocation15min is distinct.",
+  "normalRequalification": "Current Characterization POM changed after normal19518; fresh six-Main compile/NullAway packages on fixed current source, no Test/Root invocation; sixSB. No old full regression repetition.",
+  "oracle": "Independent exact SQL literals/bind index-type-value, SS1/5/30/60/300s with +/-10percent and attempt saturation100, SSlimit1..100/lease10s, explicit result fixtures, resource counters/exception identity, thread-local fixtures.",
+  "acceptance": "Every new Test class method genuinely0/FESaborted0; entire repository normalclass set CRC/single exec fourcounter100; PMD/CS applicability and sixSB0; independent post; excludes real PostgreSQL syntax/locking/concurrency, crypto, dispatcher/producer/ingest/runtime, native/CHR/451 formal.",
+  "existingReuse": "seed503 unregistered, followup3493 proves ClaimedWebLog only, not outerrepository; no same existing success rerun. RequestLogDetails seedFOUR100 skipped.",
+  "currentHolds": "all existing VM/Root/cohort/DB/Backup/keys/native/heldfour/heldtwo/RootFailedtwo/akoiori unchanged",
+  "next": "freeze normal compile, write original independent JDBC specification/test, execute only new suite then strict post, close via own evidence; ordinaryPGPT continues",
+  "normalSource": "827983a97a9c3bf36b7671985a7924417ff0e8f7",
+  "normalSixCompile": {
+    "slot": "pg19630-web-outbox-current-six-main-compile-v1",
+    "actualExit": 0,
+    "testsExecuted": 0
+  },
+  "testCompile": {
+    "slot": "pg19634-web-outbox-jdbc-port-compile-v1",
+    "actualExit": 0
+  },
+  "testMethods": 20,
+  "normalStaticPending": false,
+  "normalSixSpotbugs": {
+    "slot": "pg19632-web-outbox-current-six-static-reactor-v1",
+    "actualExit": 0,
+    "bugs": 0,
+    "missingClasses": 0,
+    "errors": 0,
+    "jarsUnchanged": true
+  },
+  "sameSourceRule": "Normal compile source827 fixed; core source1ea has identical Main bytes, current qualification uses827 full Main/POM snapshot inclnewCharPOM. oldformal/nohistoricalmerge unchanged.",
+  "testTool": "evidence/01_PT/015_NK-WEB-001/input/007_owned_web_outbox_unit.py",
+  "testCompileCurrent": "pg19640-web-outbox-jdbc-style-compile-v1",
+  "staticCurrent": "pg19642-web-outbox-jdbc-style-static-v1",
+  "historyPreserved": "evidence/01_PT/015_NK-WEB-001/evidence/PG19636-web-outbox-static-failed-history-v1",
+  "testStyleBug": "BUG-2306/YKT-2051",
+  "testNotExecutedYet": true
+}
