@@ -1,0 +1,7 @@
+# ScenarioSnapshot 現codec単独再認証結果
+
+2026-11-06T05:36:10.033564+09:00/dev-foundation、Test source65d00a74703d7948a397821511dce5e9c5d93fc0、CoreMain28af318d0198fe7432ca6fcd234d3fabbfd10173。PG19818六whole初回終了0/FESaborted0、18L2M1C6B全100/normalphysical1/CRC/全@Test/単exec-session/全presentCoreID一致/HELD四0、独立post19820終了0。producer/verifierはGit artifactで固定。公開evidence/01_PT/008_NK-SCN-001/evidence/PG19818-scenario-snapshot-current-six-v1/manifest.json / SHA256 c827fe182d5b37c59d3568ef3050b3c31c9f1fd0ec76293b272f567110f2341e、同evidenceに原argv/終了/XML/JaCoCo/環境メタデータとpost、889に全hash/source/ref。compile19810/PMD-CS19812/parser全0、Main既19740 NullAway/sixSB19742 current28afのallinputs/JAR不変。
+
+既六Testと対象Mainを変更せず、0/1/10000/10001、FILE/INLINE、null契約/要素、immutable alias、途中と末尾sequence、4097byteの独立期待値を保持。旧18964では実際に使用した五codecclass IDがQA054後と異なるため、必要な現source再認証だけを実施。旧source成功とexecは不変保全・現結果へ合算0。新実装Test0/新成分0/技術成分46不変/原80結合16・原282交差28/新個別受入0/正式1964-53/歴史17-190/工数null/第一V同HOLD。
+
+ファイルmetadata形式のfixtureはheap値だけで生成/読取/hashなし。実DB取得/認可/session/HMAC/Root/VM/native/large-result公開/CHR/全451/IT-ST/親WBSは未受入。原.5/1.5/4cap5・共有24→24=0pp event3920一度、ordinary18/all25/S7残3、専有N/Tnull。次=Publish currentSnapshot requalification, keep46components/no newWBS. Continue finite F03 remaining type-dispatch/exception/resource source review under actualMain28af, or genuinely unqualified safe source after proofpreflight. Do not rerun15 unchangedcore proofs or held HMAC/Root/DB/native.
