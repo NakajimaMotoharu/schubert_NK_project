@@ -389,7 +389,7 @@ public final class LayoutFieldCatalog {
         QWKREQ01\tDATA\tAsync job ID\t39\t12\tN\tM\tJob ID
         QWKREQ01\tDATA\tReserved\t51\t14\tX\tF\t全space
         WLGEVT01\tDATA\t発生日時\t1\t17\tN\tM\tHTTP response確定時のJST
-        WLGEVT01\tDATA\tLog type\t18\t16\tX\tF\t固定`REQUEST`
+        WLGEVT01\tDATA\tLog type\t18\t16\tX\tM\tREQUEST/ACTION。QA054限定組合せ
         WLGEVT01\tDATA\tLevel\t34\t8\tX\tM\tINFO/WARN/ERROR
         WLGEVT01\tDATA\tAction\t42\t64\tX\tO\tBounded action code
         WLGEVT01\tDATA\tMessage\t106\t512\tX\tM\t本文・secretを含まない定型要約
@@ -560,9 +560,7 @@ public final class LayoutFieldCatalog {
   }
 
   private static void validateFixedField(LayoutId layoutId, String name, Presence presence) {
-    if (presence == Presence.FIXED
-        && !name.equals("Reserved")
-        && !(layoutId.value().equals("WLGEVT01") && name.equals("Log type"))) {
+    if (presence == Presence.FIXED && !name.equals("Reserved")) {
       throw new LayoutValidationException("unknown fixed payload field");
     }
   }

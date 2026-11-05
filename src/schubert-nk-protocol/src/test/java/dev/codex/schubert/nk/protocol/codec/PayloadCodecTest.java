@@ -403,9 +403,10 @@ class PayloadCodecTest {
                 new PayloadValues(event.id(), minimumValues(event.dataFields()), List.of()), false)
             .copyData();
     eventData[17] = 'X';
-    assertThrows(
-        PermanentProtocolException.class,
-        () -> codec.decode(event.id(), eventData, List.of(), false));
+    // QA054: category is mandatory data, not a fixed filler. Named semantic layer rejects it.
+    assertEquals(
+        new FieldValue.Text("XEQUEST"),
+        codec.decode(event.id(), eventData, List.of(), false).data().getOrUnset("Log type"));
 
     assertBadErrorFiller(codec, "LGNRSP01", 0, (byte) 'A');
     assertBadErrorFiller(codec, "LGNRSP01", 167, (byte) '1');
@@ -483,6 +484,9 @@ class PayloadCodecTest {
                 case BOOLEAN -> new FieldValue.Flag(false);
               }
               : FieldValue.Unset.INSTANCE;
+      if (field.name().equals("Log type") && field.start() == 18) {
+        value = new FieldValue.Text("REQUEST");
+      }
       values.put(field.name(), value);
     }
     return new FieldValueSet(values);

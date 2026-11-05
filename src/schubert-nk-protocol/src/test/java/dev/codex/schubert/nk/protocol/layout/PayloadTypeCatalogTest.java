@@ -348,7 +348,7 @@ class PayloadTypeCatalogTest {
       case "Pair role" -> "N";
       case "Role", "New role" -> "USER";
       case "Level" -> "INFO";
-      case "Log type" -> "ACTION";
+      case "Log type" -> layoutId.equals("WLGEVT01") ? "REQUEST" : "ACTION";
       case "State" -> "ACTIVE";
       case "内部状態" -> "RECEIVED";
       case "回答状態" -> "UNANSWERED";

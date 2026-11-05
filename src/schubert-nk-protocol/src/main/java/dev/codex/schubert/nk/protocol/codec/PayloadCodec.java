@@ -171,7 +171,7 @@ public final class PayloadCodec {
       byte[] fieldBytes =
           Arrays.copyOfRange(encoded, field.start() - 1, field.start() - 1 + field.length());
       if (field.presence() == Presence.FIXED) {
-        validateFixed(field, fieldBytes);
+        FieldCodec.requireSpaces(fieldBytes);
       } else {
         boolean useErrorFiller =
             errorProfile && !isErrorOverride(layoutId, resultCode, field.name());
@@ -194,8 +194,7 @@ public final class PayloadCodec {
   private static byte[] encodeField(
       FieldDefinition<?> field, FieldValue value, boolean errorProfile) {
     if (field.presence() == Presence.FIXED) {
-      Optional<String> fixedText = fixedText(field);
-      return FieldCodec.encodeText(fixedText.orElse(null), field.length(), fixedText.isPresent());
+      return FieldCodec.encodeText(null, field.length(), false);
     }
     if (errorProfile) {
       return errorFiller(field);
@@ -270,22 +269,6 @@ public final class PayloadCodec {
     if (!valid) {
       throw new PermanentProtocolException("payload field does not use its error filler");
     }
-  }
-
-  private static void validateFixed(FieldDefinition<?> field, byte[] encoded) {
-    Optional<String> fixedText = fixedText(field);
-    if (fixedText.isEmpty()) {
-      FieldCodec.requireSpaces(encoded);
-      return;
-    }
-    String actual = FieldCodec.decodeText(encoded, true).orElseThrow();
-    if (!actual.equals(fixedText.orElseThrow())) {
-      throw new PermanentProtocolException("fixed payload field has an unexpected value");
-    }
-  }
-
-  private static Optional<String> fixedText(FieldDefinition<?> field) {
-    return field.name().equals("Log type") ? Optional.of("REQUEST") : Optional.empty();
   }
 
   private static boolean isErrorOverride(

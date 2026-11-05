@@ -391,6 +391,13 @@ public final class PayloadSemanticValidator {
   }
 
   private static void validateWebLog(FieldValueSet data) {
+    // QA054/SSC336: only the two approved pairs; no Web-issued API audit action.
+    String category = text(data, "Log type");
+    String action = present(data, "Action") ? text(data, "Action") : "HTTP_REQUEST_COMPLETED";
+    require(
+        (category.equals("REQUEST") && action.equals("HTTP_REQUEST_COMPLETED"))
+            || (category.equals("ACTION") && action.equals("MENU_VIEWED")),
+        "web log category/action pair is not approved");
     require(
         HTTP_METHOD.matcher(text(data, "HTTP method")).matches(), "HTTP method format is invalid");
     String path = text(data, "Path");

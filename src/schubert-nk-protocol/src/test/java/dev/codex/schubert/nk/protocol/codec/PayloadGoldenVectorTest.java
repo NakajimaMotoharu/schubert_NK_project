@@ -177,6 +177,9 @@ class PayloadGoldenVectorTest {
               case BOOLEAN -> new FieldValue.Flag(maximum);
             };
       }
+      if (field.name().equals("Log type") && field.start() == 18) {
+        value = new FieldValue.Text("REQUEST"); // QA054: preserve original REQUEST golden bytes.
+      }
       values.put(field.name(), value);
     }
     return new FieldValueSet(values);
