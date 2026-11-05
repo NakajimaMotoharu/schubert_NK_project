@@ -52,6 +52,26 @@ def source_inputs(config):
     return contexts, refs
 
 
+def scoped_partitions(config, previous, current, remaining, raw):
+    """BUG2316: exact scoped raw IDs and rule counts, independent of prose totals."""
+    old = {r['rawOrdinal'] for r in previous}
+    selected = {r['rawOrdinal'] for r in current}
+    rest = {r['rawOrdinal'] for r in remaining}
+    results = []
+    for item in config.get('requiredScopedPartitions', []):
+        before = {i for i, f in enumerate(raw) if i not in old and f['path'] == item['path']}
+        chosen = before & selected
+        after = before & rest
+        assert before == set(item['beforeOrdinals'])
+        assert chosen == set(item['selectedOrdinals'])
+        assert after == set(item['remainingOrdinals'])
+        assert not chosen & after and chosen | after == before
+        counts = dict(collections.Counter(raw[i]['rule'] for i in after))
+        assert counts == item['remainingRuleCounts']
+        results.append({'path': item['path'], 'beforeCount': len(before), 'selectedCount': len(chosen), 'remainingCount': len(after), 'remainingRuleCounts': counts, 'exactOrdinalsVerified': True})
+    return results
+
+
 def run(config, slot, public):
     assert not slot.exists() and not public.exists()
     previous = prior(config)
@@ -77,7 +97,8 @@ def run(config, slot, public):
     selected = old | {r['rawOrdinal'] for r in rows}
     remaining = [{'rawOrdinal': i, 'id': f'{i:06d}:' + hashlib.sha256(canon(f)).hexdigest(), 'rawFinding': f, 'applicability': 'UNCLASSIFIED', 'actualViolation': None} for i, f in enumerate(raw) if i not in selected]
     assert len(remaining) == 1491 - config['priorCount'] - config['newCount']
-    result = {'source': config['mainSource'], 'classified': rows, 'remaining': remaining, 'sourceContexts': contexts, 'canonicalDesignReferences': refs, 'deferred': config['deferred'], 'productExecuted': False, 'coverageMeasured': False, 'rawGateUnchanged': 1, 'actualApplicableViolations': None, 'wholeF03Accepted': False, 'whole451Accepted': False}
+    partitions = scoped_partitions(config, previous, rows, remaining, raw)
+    result = {'source': config['mainSource'], 'classified': rows, 'remaining': remaining, 'sourceContexts': contexts, 'canonicalDesignReferences': refs, 'deferred': config['deferred'], 'scopedPartitions': partitions, 'productExecuted': False, 'coverageMeasured': False, 'rawGateUnchanged': 1, 'actualApplicableViolations': None, 'wholeF03Accepted': False, 'whole451Accepted': False}
     slot.mkdir()
     (slot / 'review.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
     manifest = {'actualExit': 0, 'source': config['mainSource'], 'atJST': datetime.datetime.now().astimezone().isoformat(), 'driverSha256': sha(__file__), 'configSha256': sha(sys.argv[2]), 'reviewSha256': sha(slot / 'review.json'), 'orchestrationHead': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(), 'newContext': len(rows), 'combinedReviewed': len(selected), 'remaining': len(remaining), 'productExecuted': False, 'newAcceptance': 0}
@@ -108,6 +129,7 @@ def post(config, slot, public):
     for i, finding in enumerate(raw):
         assert indexed[i]['rawFinding'] == finding
         assert indexed[i]['id'] == f'{i:06d}:' + hashlib.sha256(canon(finding)).hexdigest()
+    assert value['scopedPartitions'] == scoped_partitions(config, previous, rows, value['remaining'], raw)
     counts = collections.Counter(canon(f) for f in raw)
     assert len(counts) == 1439 and sum(c == 2 for c in counts.values()) == 52 and max(counts.values()) == 2
     assert {r['rawOrdinal'] for r in config['deferred']} <= {r['rawOrdinal'] for r in value['remaining']}
