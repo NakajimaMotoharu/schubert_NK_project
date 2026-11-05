@@ -1,0 +1,46 @@
+{
+  "atJST": "2026-11-05T14:50:12.218526+09:00",
+  "groupId": "PGPT-20261105-LOGIN-ATTEMPT-JDBC-PORT",
+  "headBefore": "164015a8f2e321d2a48c434da54e8804b9485a99",
+  "productionMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+  "primaryWbs": "WBS-P007-01",
+  "leafCostBinding": null,
+  "target": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java",
+  "startEstimatePp": {
+    "low": 1,
+    "base": 4,
+    "high": 8
+  },
+  "capPp": 10,
+  "chargedToSV": false,
+  "classification": "PT_DEFAULT_INDEPENDENT_BORROWED_JDBC_INTERFACE_COMPONENT",
+  "review": "lock USER -> CREATE_IP -> IP, transactionprecondition,96byteusernamekey, roles/status/requiredrow/nullabletimes, user-IP boundcounterupdate, ownstatement/resultclose; callercommit/rollback/connectionclose forbidden",
+  "requirements": [
+    "NK-AUT-001",
+    "AUT001",
+    "UI226§4",
+    "SS312§4/314§5/331§4/332§5",
+    "PT-AUT-003-D"
+  ],
+  "fixture": "JDK JDBC interfaceProxy/handmade rows, InetAddress literalbytes/ofLiteral noDNS. Noncredential text only in fakepassword_hash column for carrierinvariant; no PasswordHasher/AuthContext/Session/crypto/actualkey. OwnThrowable cause/suppressed/next graph only. No DB/pool/driver/Root/VM/actualnetwork or publishing authority.",
+  "heldFour": "AuthenticationInfrastructureException puremodulelocal graph, RequiredColumn pureSQLdata guard, LoginAccount/AuthenticatedActor/LoginAttemptState/LockedLoginAttempt/Role/Kind are independentof HELD TemporaryInfrastructureException/WebStartupException/FingerprintKeyRing/ResponseSnapshotCodec. Fulltarget methodclosure read before execution; no knownfour call.",
+  "testsPlanned": 10,
+  "oracle": "SS literals5SQL/bindingtypes/order; manualcounter0/1/4/5/9/10 and15minuteboundary/lockexpiry/clockbackward; fixedcatalog9000/no cause; providerunknownidentity or hiddenfatal perdeclaredAuth policy",
+  "quality": "whole10 unique/normalAPIjar/oneexec-session/allphysicalCRC/allfourcounter100/HELDfourprobes0; exactMain6inputbuild/SB reuse PG18642/18648. TargetMain unchanged, preregister realimplementationfault beforefix. Existing realDBTests notcompiled/run.",
+  "acceptanceLimits": "pureJDBCcomponent only; realSQL rowlocks/isolation/concurrency/durableaudit/AuthService/realcrypto/parentWBS/V/whole451 stillopen",
+  "quotaBefore": {
+    "primary": {
+      "usedPercent": 14,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 14,
+    "remainingPercent": 86,
+    "windowDurationMins": 10080,
+    "resetsAt": 1794395640,
+    "observedByJST": "2026-11-05 14:47:13 JST",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "d5a941db27e6607fd690e15c009e4fc8690ef28b0f2005134af0fd85fb166f2d"
+  }
+}
