@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import dev.codex.schubert.nk.protocol.codec.MessageEncodingException;
+import dev.codex.schubert.nk.protocol.codec.FieldEncodingException;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
 import dev.codex.schubert.nk.protocol.layout.log.WebLogEventData;
@@ -134,7 +134,7 @@ class WebLogActionContractTest {
             .dataLength());
     fields.put("Message", new FieldValue.Text("é".repeat(256) + "a"));
     assertThrows(
-        MessageEncodingException.class,
+        FieldEncodingException.class,
         () ->
             PayloadCodec.standard()
                 .encode(new PayloadValues(LAYOUT, new FieldValueSet(fields), List.of()), false));
