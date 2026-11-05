@@ -1,0 +1,23 @@
+# Cleanup基底query 単体テスト仕様書
+
+NK-BAT-001 / CleanupRepository全Source / UI251/DAT009・OPS009/SS311§7・331§3.9・332§11・341§3/7/SSC051056063175/451/812。新CleanupQueryPortTest全9、CLNQUERY001～009。旧CleanupRepositoryTestのDB BeforeAllはcompile/選択しない。PGレビューとPTを並行しMain b093不変更。
+
+execute全9kindの固定SQL・UTCtyped2bind＋maxint、LOGS1～10000/他1～1000・autoCommitfalse、count三列/OK protectedskips・busy/gate拒否、readLogProgressの4列/complete維持、必須null・未知/不正count・row0/2・全JDBC fault実hitとclose優先を手書vectorで検証。親OS/sessionadvisory/DBRole/rollback/timeout・実commitはcaller条件で、このclassのメモリPTでは証明しない。JDBC nullstmt/resultは規約違反へのfailfast NPEであり正常結果へcatchしない。実DB/DELETE/Root/原本/Backup/鍵/native/VM/network0。
+
+normaljar全physical2を保持する。CleanupRepository$1はjavac25のACC_SYNTHETIC enumSwitchMapだけ。defaultJaCoCoがNoCodeとする場合は原classflag/javap/全physicalCRC/XML空counterを確認しgeneratedと正しく分類する（interfaceではない）。手書Mainのline/method/class/branch100を損なわず、任意coverage除外/人工NoSuchFieldError生成なし。generatedをreportから落とさない。
+
+実commandは既qualifier prepare/static/run/post cleanup_query。全9source固定/push→新専用単exec/session→独立post、全physical/HELD四0・static適用0・同六Main build/NullAway/SB・環境/argv/OS終端/XML/source/coverage/失敗とBUG/pathhashを706/813以降へ記録。期待をproduction function/mapperで生成しない。原見積1/3/6・cap10普通PG/PT、S/V付替え0。新WBS個別受入/正式1964-53/工数null/同第一V/実経路/451全体とは別。
+
+|Test ID|class.method|独立期待/検査|
+|---|---|---|
+|CLNQUERY001|CleanupQueryPortTest.allNineFixedQueriesBindOnlyLiteralUuidUtcCutoffAndIntegerLimit|9kind固定function literal/UUID-UTC-µs2bind/maxint・3/2/1件数|
+|CLNQUERY002|CleanupQueryPortTest.okMayRetainProtectedRowsWhileBusyAndBackupGateReturnOnlyTrueZeroObservations|OK protected skip1許可、LOCK_BUSY/BackupGateはtarget0|
+|CLNQUERY003|CleanupQueryPortTest.progressKeepsActualThreeCountsAndBothCompleteValuesWithTheOriginalRun|readLogProgressの三countとcompletefalse/true/同run2bind/固定SQL|
+|CLNQUERY004|CleanupQueryPortTest.eachRequiredColumnInvalidCountAndUnknownOrContradictoryReasonIsRejectedIndependently|必須null/negative3/件数不一致、未知reasonと非OK非zero拒否|
+|CLNQUERY005|CleanupQueryPortTest.eachKindLimitOneAndMaximumAreAcceptedButZeroAndMaximumPlusOneAcquireNothing|LOGS1/10000・他1/1000等号許可、0/MAX+1はSQL取得0、返却上限超過拒否|
+|CLNQUERY006|CleanupQueryPortTest.publicNullsMissingDuplicateRowsAndIllegalNullJdbcResultsNeverBecomeNormalValues|publicnonnull、row0/2、nullstmt/rowfailfastは正常化しない、autoCommittrue拒否|
+|CLNQUERY007|CleanupQueryPortTest.bothEntryProviderFaultMatricesVerifyActualPointReachAndOriginalUnknownIdentity|execute14point/progress13point×SQL/RTE/Error、全実hitとunknown同一性|
+|CLNQUERY008|CleanupQueryPortTest.independentPrimaryClosePrecedenceAndExactSafeSuppressedCountsHoldForBothEntries|2entry×2close×9組の独立優先/固定secondary個数・型・message、全close|
+|CLNQUERY009|CleanupQueryPortTest.zeroCountsAndMaximumLongCountsRemainDataAndCallerTransactionIsNeverCommitted|zero3countとLong.MAX_VALUE進捗counterを維持、conn変更操作はfixtureが禁止|
+
+PG19120compile0/PG19122 raw25全個別非適用・適用0/CS0/parser0、813。初回実行前にsource固定/pushし新専用PG19128で全9を一回、独立postへ。新BUG0。生成物NoCodeは実際のnormal2class/CRC/flags/原javap/報告XMLで確認するまで未認定。
