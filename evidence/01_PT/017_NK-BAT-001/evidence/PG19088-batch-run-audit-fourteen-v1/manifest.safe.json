@@ -1,0 +1,237 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "coreSource": "b09393b0e746b55fd480176d57996d65bd76a95d",
+    "source": "2742da362d79d075bc3f2f26132631b4be1e9e7b",
+    "session": "PG19088-BATCH-RUN-AUDIT-14",
+    "compileManifestSha256": "970eced6abe95fb023e0276f05c749938faa1f4fc1dcc340f8de82c1175ec512",
+    "mainCompileManifestSha256": "6dec0021543c6c13c100237055b1f8bfe38fbdeeca5ac462b6a4ab2e1d45e010",
+    "inputHashes": {
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunAuditPortTest.java": "4b8f593bfa4071f47d1586ef2576b01228140a36fd40c40c80f60b5cbd7a6315"
+    },
+    "classHashes": {
+      "dev/codex/schubert/nk/batch/repository/BatchRunAuditPortTest.class": "11918f0024e197912b29959c981b64648120920f219d4863ea3939d15faa2259",
+      "dev/codex/schubert/nk/batch/repository/BatchRunAuditPortTest$Fixture.class": "5dd534f67ae85ded93fceb8eb5e457e6e91e8cad791791c3673eb93a993b864b"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18642-jms-uuid-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "d3f1f45ac5c34ec6144046ada5534957d7042c84b66a324f26eea6a627d2b5df",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18642-jms-uuid-six-main-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar": "a60277fdbed42149b58ecb5d43afedbff79e0da354a612288b186cef4e1d6f66"
+    },
+    "tools": {
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1"
+    },
+    "selectedClasses": [
+      "dev.codex.schubert.nk.batch.repository.BatchRunAuditPortTest"
+    ],
+    "expectedTests": 14,
+    "onlyMemoryCallbackFixtures": true,
+    "actualNativeFsDbVmNetworkActions": 0,
+    "startUTC": "2026-11-05T08:57:44.276744+00:00",
+    "driverSha256": "b260c9fcbecd79547267ed239d33eb6348f794658812da080a7b9787543d8858",
+    "configHash": "53551804d813da1956508096308d838cf1c949e125e51623e4d373f70728d40b"
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-05T08:57:44.276894+00:00",
+      "endUTC": "2026-11-05T08:57:45.394350+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg19088-batch-run-audit-fourteen-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.language=ja",
+        "-Duser.country=JP",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg19088-batch-run-audit-fourteen-unit-v1/jacoco.exec,sessionid=PG19088-BATCH-RUN-AUDIT-14,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg19088-batch-run-audit-fourteen-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19080-batch-run-audit-compile-v1/test-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg18642-jms-uuid-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg18642-jms-uuid-six-main-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19088-batch-run-audit-fourteen-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.repository.BatchRunAuditPortTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "4c3af7cfe694cbd219c05e5c445eb4f68aeddf2c69b66e9053b65a4452a08788",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-05T08:57:45.397666+00:00",
+      "endUTC": "2026-11-05T08:57:45.562720+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19088-batch-run-audit-fourteen-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19088-batch-run-audit-fourteen-unit-v1/component",
+        "--sourcefiles",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19088-batch-run-audit-fourteen-unit-v1/coverage.xml",
+        "--csv",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19088-batch-run-audit-fourteen-unit-v1/coverage.csv"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "dbb3373a79bea627ce6e5a39b904813a622ba1baea7f9ce9df41363e184f5cf2",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-05T08:57:45.563001+00:00",
+      "endUTC": "2026-11-05T08:57:45.677742+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19088-batch-run-audit-fourteen-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "f67907a115eec360a79d01652def837d0f806a6af72c87d4720d4bbfee65303f",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-05T08:57:45.678038+00:00",
+      "endUTC": "2026-11-05T08:57:45.792792+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19088-batch-run-audit-fourteen-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "97df03e067ed009e87a82e0b3e1127b4e533765ddf1b71fc9da0df30f4e076b7",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.BatchRunAuditPortTest",
+      "name": "insertedIdMustBeExactlyOneNonNullValidHandleAndFailureClosesTheReturningRow()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.BatchRunAuditPortTest",
+      "name": "invalidAffectedCountsAndFailedReplayCannotInsertOrUpdateAnExtraAttempt()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.BatchRunAuditPortTest",
+      "name": "allOwnedScopesUseExplicitBodyVersusClosePrecedenceWithSafeSecondaryDiagnostics()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.BatchRunAuditPortTest",
+      "name": "everyPublicNullAndInvalidTimeOrSkipContractRejectsBeforeAnyJdbcAcquisition()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.BatchRunAuditPortTest",
+      "name": "finishAndExactReplayUseFourteenTypedBindingsAndSkipReasonsAreNotInterchangeable()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.BatchRunAuditPortTest",
+      "name": "internalHistoryRenderingUsesFixedRedactionWithoutExposingItsInputIdentityOrTime()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.BatchRunAuditPortTest",
+      "name": "replayRequiresExactlyOnePresentTrueBooleanAndNeverRepairsAnUnknownSavedRow()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.BatchRunAuditPortTest",
+      "name": "nullAcquisitionsAndLostParentIdentityNeverAuthorizeSuccessOrFallback()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.BatchRunAuditPortTest",
+      "name": "sameRunAbandonRequiresExplicitFlagAndValidatesEveryRowBeforeAnyMutation()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.BatchRunAuditPortTest",
+      "name": "historyTerminalTimeAndRunningNullRelationshipRejectWithoutChangingAnyPastAttempt()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.BatchRunAuditPortTest",
+      "name": "everyHistoryRequiredNullIdentityAttemptStatusCounterAndStoredTimeBoundaryIsIndependent()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.BatchRunAuditPortTest",
+      "name": "successfulDaySkipsNonBackupButManualAndMorningBackupFollowDifferentRunContracts()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.BatchRunAuditPortTest",
+      "name": "everyHistoryInsertAbandonFinishReplayPortFailurePreservesItsDeclaredFailureIdentity()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.repository.BatchRunAuditPortTest",
+      "name": "emptyBeginAndSixBackupDependentSkipsUseLiteralSqlAndTypedNineBindings()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 14,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/batch/repository/BatchRunRepository$History": "2172a69e3d1bdff745f95f92c9e90b899ac2d770c0718ed43d0cd77bbd95763b",
+    "dev/codex/schubert/nk/batch/repository/BatchRunRepository": "93d46f81c042d60b1ea4beabb1d47037fb01c073942c12a275018c4c35227e8f"
+  },
+  "noOldExecUnion": true,
+  "formalUpdated": false,
+  "newAccepted": 0
+}
