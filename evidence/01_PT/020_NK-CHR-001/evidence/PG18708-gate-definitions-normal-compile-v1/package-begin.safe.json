@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+    "-o",
+    "--no-transfer-progress",
+    "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+    "-pl",
+    "program/characterization",
+    "-am",
+    "-Dmaven.test.skip=true",
+    "package",
+    "org.apache.maven.plugins:maven-dependency-plugin:3.9.0:build-classpath",
+    "-DincludeScope=test",
+    "-Dmdep.outputFile=target/pgpt-test-classpath.txt"
+  ],
+  "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18708-gate-definitions-final-compile-v1/snapshot",
+  "environment": {
+    "JAVA_HOME": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4",
+    "LANG": "C.UTF-8",
+    "MAVEN_OPTS": "-Xmx2g -Djava.awt.headless=true",
+    "MAVEN_SKIP_RC": "true",
+    "MAVEN_USER_HOME": "/home/mini/codex/project1/work/toolchain/m2",
+    "PATH": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:/usr/bin:/bin"
+  },
+  "startUTC": "2026-11-05T01:22:58.121463+00:00"
+}

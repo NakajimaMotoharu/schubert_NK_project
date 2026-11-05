@@ -64,15 +64,11 @@ final class GateContractValidator {
         read(projectRoot.resolve("program/characterization/reports/review-record.json"));
     JsonNode comparison = read(comparisonReport);
 
-    List<String> failures = new ArrayList<>();
+    List<String> failures =
+        new ArrayList<>(
+            validateDefinitions(contract, catalog, schema, differences, browser, requirements));
     Map<String, Object> metrics = new LinkedHashMap<>();
-    validateContractShape(contract, failures);
     List<String> caseOrder = strings(contract.path("caseOrder"));
-    validateSchema(schema, failures);
-    validateCatalog(catalog, caseOrder, failures);
-    validateBrowser(browser, contract.path("browser"), failures);
-    validateDifferences(differences, contract.path("differenceIds"), caseOrder, failures);
-    validateRequirements(requirements, caseOrder, failures);
     validateRun(firstRun, caseOrder, requirements, "run1", true, failures);
     validateRun(secondRun, caseOrder, requirements, "run2", true, failures);
     validateComparison(comparison, failures);
@@ -100,6 +96,32 @@ final class GateContractValidator {
             .size());
     metrics.put("failureCount", failures.size());
     return new ValidationResult(List.copyOf(failures), Map.copyOf(metrics));
+  }
+
+  /**
+   * PT-CHR-DEF-001..011 / SS355. Pure public-definition stage used by the full gate above.
+   * Caller-frozen JSON only; no baseline, filesystem, capture, runtime or authority qualification.
+   */
+  static List<String> validateDefinitions(
+      JsonNode contract,
+      JsonNode catalog,
+      JsonNode schema,
+      JsonNode differences,
+      JsonNode browser,
+      JsonNode requirements) {
+    for (JsonNode document :
+        new JsonNode[] {contract, catalog, schema, differences, browser, requirements}) {
+      if (document == null) throw new IllegalArgumentException("definition document is required");
+    }
+    List<String> failures = new ArrayList<>();
+    validateContractShape(contract, failures);
+    List<String> caseOrder = strings(contract.path("caseOrder"));
+    validateSchema(schema, failures);
+    validateCatalog(catalog, caseOrder, failures);
+    validateBrowser(browser, contract.path("browser"), failures);
+    validateDifferences(differences, contract.path("differenceIds"), caseOrder, failures);
+    validateRequirements(requirements, caseOrder, failures);
+    return List.copyOf(failures);
   }
 
   private static void validateContractShape(JsonNode contract, List<String> failures) {
