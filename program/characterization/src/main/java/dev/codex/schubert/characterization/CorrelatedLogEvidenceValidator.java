@@ -23,6 +23,7 @@ public final class CorrelatedLogEvidenceValidator {
   private static final String FIELD_CATEGORY = "category";
   private static final String FIELD_ACTION = "action";
   private static final String FIELD_HTTP = "http";
+  private static final String FIELD_METHOD = "method";
   private static final String VALUE_REQUEST = "REQUEST";
   private static final String VALUE_ACTION = "ACTION";
   private static final String VALUE_MENU = "MENU_VIEWED";
@@ -50,7 +51,7 @@ public final class CorrelatedLogEvidenceValidator {
       Set.of(VALUE_REQUEST, "ACTION", "SECURITY", "MQ", "SYSTEM", "BATCH");
   private static final Set<String> HTTP_FIELDS =
       Set.of(
-          "method",
+          FIELD_METHOD,
           FIELD_PATH,
           FIELD_STATUS,
           FIELD_ELAPSEDMS,
@@ -270,8 +271,8 @@ public final class CorrelatedLogEvidenceValidator {
       if (!HTTP_FIELDS.contains(field.getKey()) || !field.getValue().isValueNode()) return false;
     }
     if (request || (nk && webProjection(value))) {
-      if (!http.path("method").isTextual()
-          || http.path("method").asText().isBlank()
+      if (!http.path(FIELD_METHOD).isTextual()
+          || http.path(FIELD_METHOD).asText().isBlank()
           || !http.path(FIELD_PATH).isTextual()
           || !http.path(FIELD_PATH).asText().startsWith("/")
           || http.path(FIELD_PATH).asText().contains("?")
@@ -288,7 +289,7 @@ public final class CorrelatedLogEvidenceValidator {
     if (nk
         && VALUE_ACTION.equals(value.path(FIELD_CATEGORY).asText())
         && VALUE_MENU.equals(value.path(FIELD_ACTION).asText())) {
-      return "GET".equals(http.path("method").asText())
+      return "GET".equals(http.path(FIELD_METHOD).asText())
           && "/".equals(http.path(FIELD_PATH).asText())
           && http.path(FIELD_STATUS).asInt() == 200;
     }

@@ -13,13 +13,23 @@ import org.junit.jupiter.api.Test;
 /** QA054/UI264/SS351355 independent synthetic rows, no capture/DB/driver/baseline access. */
 final class CorrelatedMenuActionContractTest {
   private static final ObjectMapper JSON = new ObjectMapper();
+  private static final String WITNESSES_PATH = "/observed/nk/witnesses";
+  private static final String LOCAL_STAGE = "LOCAL";
+  private static final String STAGE_FIELD = "stage";
+  private static final String HTTP_PATH = "/http";
+  private static final String PAYLOAD_FIELD = "payload";
+  private static final String SEARCH_OPERATION = "OP_SEARCH";
+  private static final String ROW_FIELD = "row";
+  private static final String MENU_OPERATION = "OP_MENU";
+  private static final String ACTION_CATEGORY = "ACTION";
+  private static final String REQUEST_CATEGORY = "REQUEST";
   private static final String CURRENT = "current";
   private static final String NK = "nk";
   private static final String ACTION = "action";
   private static final String CATEGORY = "category";
   private static final String OPERATION = "operation";
   private static final String EVENT = "event";
-  private static final String HTTP = "http";
+  private static final String HTTP_FIELD = "http";
   private static final String MENU_EVENT = "NK_MENU";
   private static final String SEARCH_EVENT = "NK_SEARCH";
   private static final String PAIR_ERROR = "LOG_PROJECTION_APPROVED_ACTION_PAIR";
@@ -33,16 +43,16 @@ final class CorrelatedMenuActionContractTest {
     assertEquals(before, input.toString());
     assertTrue(input.at("/expected/current/0/http").isEmpty());
     assertTrue(input.at("/expected/nk/1/http").isEmpty());
-    assertEquals(6, input.at("/observed/nk/witnesses").size());
+    assertEquals(6, input.at(WITNESSES_PATH).size());
   }
 
   @Test
   void qa054log002MenuNeedsExactlyOneLocalAndOutboxWitnessEach() {
-    for (String stage : List.of("LOCAL", "OUTBOX")) {
+    for (String stage : List.of(LOCAL_STAGE, "OUTBOX")) {
       var input = fixture();
-      var witnesses = array(input, "/observed/nk/witnesses");
+      var witnesses = array(input, WITNESSES_PATH);
       for (int i = witnesses.size() - 1; i >= 0; i--) {
-        if (witnesses.get(i).path("stage").asText().equals(stage)
+        if (witnesses.get(i).path(STAGE_FIELD).asText().equals(stage)
             && witnesses.get(i).at("/payload/event").asText().equals(MENU_EVENT))
           witnesses.remove(i);
       }
@@ -51,7 +61,7 @@ final class CorrelatedMenuActionContractTest {
               .contains("LOG_PROJECTION_WITNESS_MISSING"));
     }
     var duplicate = fixture();
-    var witnesses = array(duplicate, "/observed/nk/witnesses");
+    var witnesses = array(duplicate, WITNESSES_PATH);
     witnesses.add(witnesses.get(0).deepCopy());
     assertTrue(
         CorrelatedLogEvidenceValidator.validate(duplicate)
@@ -62,22 +72,25 @@ final class CorrelatedMenuActionContractTest {
   void qa054log003MenuKeepsHttpContractAndApiSearchNeverUsesWebWitness() {
     for (Consumer<ObjectNode> mutation :
         List.<Consumer<ObjectNode>>of(
-            x -> object(x, "/http").remove("method"),
-            x -> object(x, "/http").put("method", "POST"),
-            x -> object(x, "/http").put("path", "/logs"),
-            x -> object(x, "/http").put("path", "/?raw"),
-            x -> object(x, "/http").put("status", 201),
-            x -> object(x, "/http").put("elapsedMs", -1),
-            x -> object(x, "/http").put("elapsedMs", "1"),
-            x -> object(x, "/http").put("status", 0))) {
+            x -> object(x, HTTP_PATH).remove("method"),
+            x -> object(x, HTTP_PATH).put("method", "POST"),
+            x -> object(x, HTTP_PATH).put("path", "/logs"),
+            x -> object(x, HTTP_PATH).put("path", "/?raw"),
+            x -> object(x, HTTP_PATH).put("status", 201),
+            x -> object(x, HTTP_PATH).put("elapsedMs", -1),
+            x -> object(x, HTTP_PATH).put("elapsedMs", "1"),
+            x -> object(x, HTTP_PATH).put("status", 0))) {
       var input = fixture();
       update(input, NK, MENU_EVENT, mutation);
       assertTrue(CorrelatedLogEvidenceValidator.validate(input).contains(EXPECTED_ERROR));
     }
     var input = fixture();
     var search = (ObjectNode) array(input, "/expected/nk").get(1);
-    array(input, "/observed/nk/witnesses")
-        .add(JSON.createObjectNode().put("stage", "LOCAL").set("payload", search.deepCopy()));
+    array(input, WITNESSES_PATH)
+        .add(
+            JSON.createObjectNode()
+                .put(STAGE_FIELD, LOCAL_STAGE)
+                .set(PAYLOAD_FIELD, search.deepCopy()));
     assertTrue(
         CorrelatedLogEvidenceValidator.validate(input)
             .contains("LOG_PROJECTION_WITNESS_UNEXPECTED"));
@@ -103,7 +116,7 @@ final class CorrelatedMenuActionContractTest {
   @Test
   void qa054log005OperationBindingAndDatabaseReplayCountsRemainStrict() {
     var swapped = fixture();
-    update(swapped, NK, MENU_EVENT, x -> x.put(OPERATION, "OP_SEARCH"));
+    update(swapped, NK, MENU_EVENT, x -> x.put(OPERATION, SEARCH_OPERATION));
     assertTrue(CorrelatedLogEvidenceValidator.validate(swapped).contains(PAIR_ERROR));
     var missing = fixture();
     array(missing, "/observed/nk/after").remove(2);
@@ -113,8 +126,8 @@ final class CorrelatedMenuActionContractTest {
     var after = array(replay, "/observed/nk/after");
     after.add(
         JSON.createObjectNode()
-            .put("row", "ROW_REPLAY")
-            .set("payload", array(replay, "/expected/nk").get(1).deepCopy()));
+            .put(ROW_FIELD, "ROW_REPLAY")
+            .set(PAYLOAD_FIELD, array(replay, "/expected/nk").get(1).deepCopy()));
     assertTrue(
         CorrelatedLogEvidenceValidator.validate(replay).contains("LOG_PROJECTION_DB_DUPLICATE"));
   }
@@ -129,12 +142,15 @@ final class CorrelatedMenuActionContractTest {
       array(input, "/observed/" + side + "/after")
           .add(
               JSON.createObjectNode()
-                  .put("row", "ROW_DUP_" + side)
-                  .set("payload", copy.deepCopy()));
+                  .put(ROW_FIELD, "ROW_DUP_" + side)
+                  .set(PAYLOAD_FIELD, copy.deepCopy()));
       if (side.equals(NK))
-        for (String stage : List.of("LOCAL", "OUTBOX")) {
-          array(input, "/observed/nk/witnesses")
-              .add(JSON.createObjectNode().put("stage", stage).set("payload", copy.deepCopy()));
+        for (String stage : List.of(LOCAL_STAGE, "OUTBOX")) {
+          array(input, WITNESSES_PATH)
+              .add(
+                  JSON.createObjectNode()
+                      .put(STAGE_FIELD, stage)
+                      .set(PAYLOAD_FIELD, copy.deepCopy()));
         }
     }
     assertEquals(List.of(PAIR_ERROR), CorrelatedLogEvidenceValidator.validate(input));
@@ -145,37 +161,55 @@ final class CorrelatedMenuActionContractTest {
     var expected = input.putObject("expected").put("oracleSha256", "a".repeat(64));
     var current = expected.putArray(CURRENT);
     var nk = expected.putArray(NK);
-    current.add(payload("OP_MENU", "C_MENU", "ACTION", "menu", JSON.createObjectNode()));
-    current.add(payload("OP_SEARCH", "C_SEARCH", "ACTION", "log_search", JSON.createObjectNode()));
-    current.add(payload("OP_MENU", "C_HTTP_MENU", "REQUEST", "", http("/")));
-    current.add(payload("OP_SEARCH", "C_HTTP_SEARCH", "REQUEST", "", http("/logs")));
-    nk.add(payload("OP_MENU", MENU_EVENT, "ACTION", "MENU_VIEWED", http("/")));
-    nk.add(payload("OP_SEARCH", SEARCH_EVENT, "ACTION", "LOG_SEARCHED", JSON.createObjectNode()));
-    nk.add(payload("OP_MENU", "NK_HTTP_MENU", "REQUEST", "HTTP_REQUEST_COMPLETED", http("/")));
+    current.add(
+        payload(MENU_OPERATION, "C_MENU", ACTION_CATEGORY, "menu", JSON.createObjectNode()));
+    current.add(
+        payload(
+            SEARCH_OPERATION, "C_SEARCH", ACTION_CATEGORY, "log_search", JSON.createObjectNode()));
+    current.add(payload(MENU_OPERATION, "C_HTTP_MENU", REQUEST_CATEGORY, "", http("/")));
+    current.add(payload(SEARCH_OPERATION, "C_HTTP_SEARCH", REQUEST_CATEGORY, "", http("/logs")));
+    nk.add(payload(MENU_OPERATION, MENU_EVENT, ACTION_CATEGORY, "MENU_VIEWED", http("/")));
     nk.add(
-        payload("OP_SEARCH", "NK_HTTP_SEARCH", "REQUEST", "HTTP_REQUEST_COMPLETED", http("/logs")));
+        payload(
+            SEARCH_OPERATION,
+            SEARCH_EVENT,
+            ACTION_CATEGORY,
+            "LOG_SEARCHED",
+            JSON.createObjectNode()));
+    nk.add(
+        payload(
+            MENU_OPERATION, "NK_HTTP_MENU", REQUEST_CATEGORY, "HTTP_REQUEST_COMPLETED", http("/")));
+    nk.add(
+        payload(
+            SEARCH_OPERATION,
+            "NK_HTTP_SEARCH",
+            REQUEST_CATEGORY,
+            "HTTP_REQUEST_COMPLETED",
+            http("/logs")));
     var observed = input.putObject("observed").put("oracleSha256", "a".repeat(64));
     for (String side : List.of(CURRENT, NK)) {
       var snapshot = observed.putObject(side);
       var old = JSON.createObjectNode();
       for (String field : List.of(OPERATION, "request", EVENT, "message", CATEGORY, ACTION))
         old.putNull(field);
-      old.putObject(HTTP);
+      old.putObject(HTTP_FIELD);
       var before = snapshot.putArray("before");
-      before.add(JSON.createObjectNode().put("row", "OLD_" + side).set("payload", old));
+      before.add(JSON.createObjectNode().put(ROW_FIELD, "OLD_" + side).set(PAYLOAD_FIELD, old));
       var after = snapshot.putArray("after");
       after.add(before.get(0).deepCopy());
       var witnesses = snapshot.putArray("witnesses");
       int index = 0;
       for (var event : expected.path(side)) {
+        String rowId = "NEW_" + side + index;
+        index++;
         after.add(
-            JSON.createObjectNode()
-                .put("row", "NEW_" + side + index++)
-                .set("payload", event.deepCopy()));
+            JSON.createObjectNode().put(ROW_FIELD, rowId).set(PAYLOAD_FIELD, event.deepCopy()));
         if (side.equals(NK) && !event.path(ACTION).asText().equals("LOG_SEARCHED")) {
-          for (String stage : List.of("LOCAL", "OUTBOX"))
+          for (String stage : List.of(LOCAL_STAGE, "OUTBOX"))
             witnesses.add(
-                JSON.createObjectNode().put("stage", stage).set("payload", event.deepCopy()));
+                JSON.createObjectNode()
+                    .put(STAGE_FIELD, stage)
+                    .set(PAYLOAD_FIELD, event.deepCopy()));
         }
       }
     }
@@ -200,7 +234,7 @@ final class CorrelatedMenuActionContractTest {
             .put("message", "MSG_" + event)
             .put(CATEGORY, category)
             .put(ACTION, action);
-    value.set(HTTP, http);
+    value.set(HTTP_FIELD, http);
     return value;
   }
 
@@ -218,9 +252,9 @@ final class CorrelatedMenuActionContractTest {
       if (value.path(EVENT).asText().equals(event)) mutation.accept((ObjectNode) value);
     for (var row : array(input, "/observed/" + side + "/after"))
       if (row.at("/payload/event").asText().equals(event))
-        mutation.accept((ObjectNode) row.path("payload"));
+        mutation.accept((ObjectNode) row.path(PAYLOAD_FIELD));
     for (var row : array(input, "/observed/" + side + "/witnesses"))
       if (row.at("/payload/event").asText().equals(event))
-        mutation.accept((ObjectNode) row.path("payload"));
+        mutation.accept((ObjectNode) row.path(PAYLOAD_FIELD));
   }
 }
