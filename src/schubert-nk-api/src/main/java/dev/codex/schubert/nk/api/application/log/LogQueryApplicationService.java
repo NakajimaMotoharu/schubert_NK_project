@@ -212,8 +212,14 @@ public final class LogQueryApplicationService implements SyncRequestProcessor {
         require(InboxCompletionConsistency.sameSaved(saved.completion(), completion));
       boolean replay = execution.status() == InboxExecutionStatus.REPLAY;
       var snapshot = responses.read(request, actor, completion);
-      if (replay)
+      if (replay) {
         audit.write(connection, Optional.of(actor), request, Event.REPLAY, clock.instant());
+      } else if (prepared instanceof Success) {
+        // QA054/SSC336: snapshot was read before this first-success audit. Same caller TX;
+        // rollback on audit failure, no extra success row for stored-result or denied replay.
+        audit.write(
+            connection, Optional.of(actor), request, Event.SEARCH_SUCCEEDED, clock.instant());
+      }
       return new Completed(actor, snapshot, replay);
     } finally {
       canonical.close();
