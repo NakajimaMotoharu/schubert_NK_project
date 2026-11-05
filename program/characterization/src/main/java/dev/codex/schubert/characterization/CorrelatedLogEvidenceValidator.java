@@ -7,12 +7,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Validates independently frozen, safe log projections without opening a DB or collecting a log.
- * Trace: QA-051; UI264 §5.1; SS355 §8.1; SS351 §3/4; WBS-P020-01. Diagnostics contain fixed codes
- * only. Real capture/source/DOM qualification remains separate.
+ * Trace: QA-051/054/UIC011/SSC336; UI264 §5.1; SS355 §8.1; SS351 §3/4; WBS-P020-01. Diagnostics
+ * contain fixed codes only. Real capture/source/DOM qualification remains separate.
  */
+@NullMarked
 public final class CorrelatedLogEvidenceValidator {
   private static final int SUPPORTED_SCHEMA_VERSION = 1;
   private static final String FIELD_OPERATION = "operation";
@@ -21,6 +24,10 @@ public final class CorrelatedLogEvidenceValidator {
   private static final String FIELD_ACTION = "action";
   private static final String FIELD_HTTP = "http";
   private static final String VALUE_REQUEST = "REQUEST";
+  private static final String VALUE_ACTION = "ACTION";
+  private static final String VALUE_MENU = "MENU_VIEWED";
+  private static final Map<String, String> APPROVED_ACTION_PAIRS =
+      Map.of("menu", VALUE_MENU, "log_search", "LOG_SEARCHED");
   private static final String FIELD_PATH = "path";
   private static final String FIELD_STATUS = "status";
   private static final String FIELD_ELAPSEDMS = "elapsedMs";
@@ -57,7 +64,7 @@ public final class CorrelatedLogEvidenceValidator {
   private CorrelatedLogEvidenceValidator() {}
 
   /** Missing, ambiguous, duplicate or changed evidence is a failure, never an empty success. */
-  public static List<String> validate(JsonNode evidence) {
+  public static List<String> validate(@Nullable JsonNode evidence) {
     List<String> failures = new ArrayList<>();
     if (evidence == null || !shape(evidence, Set.of("version", "expected", "observed"))) {
       return List.of("LOG_PROJECTION_ENVELOPE");
@@ -81,6 +88,7 @@ public final class CorrelatedLogEvidenceValidator {
     if (!operations(current).equals(operations(nk))) {
       failures.add("LOG_PROJECTION_OPERATION_SET");
     }
+    approvedActionPairs(current, nk, failures);
     compareSide(current, observed.path(FIELD_CURRENT), false, failures);
     compareSide(nk, observed.path("nk"), true, failures);
     return List.copyOf(failures);
@@ -107,6 +115,39 @@ public final class CorrelatedLogEvidenceValidator {
     Set<String> operations = new HashSet<>();
     for (JsonNode value : events.values()) operations.add(value.path(FIELD_OPERATION).asText());
     return operations;
+  }
+
+  /** QA054/UI264 exact ACTION pairs, one initial success; no category-wide exemption. */
+  private static void approvedActionPairs(
+      Map<String, JsonNode> current, Map<String, JsonNode> nk, List<String> failures) {
+    Set<String> allOperations = new HashSet<>(operations(current));
+    allOperations.addAll(operations(nk));
+    for (Map.Entry<String, String> pair : APPROVED_ACTION_PAIRS.entrySet()) {
+      for (String operation : allOperations) {
+        long legacy = actionCount(current, operation, pair.getKey());
+        long replacement = actionCount(nk, operation, pair.getValue());
+        if (legacy != replacement || legacy > 1) {
+          failures.add("LOG_PROJECTION_APPROVED_ACTION_PAIR");
+        }
+      }
+    }
+  }
+
+  private static long actionCount(Map<String, JsonNode> values, String operation, String action) {
+    return values.values().stream()
+        .filter(
+            value ->
+                VALUE_ACTION.equals(value.path(FIELD_CATEGORY).asText())
+                    && operation.equals(value.path(FIELD_OPERATION).asText())
+                    && action.equals(value.path(FIELD_ACTION).asText()))
+        .count();
+  }
+
+  /** Only REQUEST and approved Web MENU use local/outbox projection. */
+  private static boolean webProjection(JsonNode value) {
+    String category = value.path(FIELD_CATEGORY).asText();
+    return VALUE_REQUEST.equals(category)
+        || (VALUE_ACTION.equals(category) && VALUE_MENU.equals(value.path(FIELD_ACTION).asText()));
   }
 
   private static void compareSide(
@@ -191,9 +232,7 @@ public final class CorrelatedLogEvidenceValidator {
       }
       JsonNode value = witness.path(FIELD_PAYLOAD);
       String event = value.path(FIELD_EVENT).asText();
-      if (!nk
-          || !VALUE_REQUEST.equals(value.path(FIELD_CATEGORY).asText())
-          || !value.equals(expected.get(event))) {
+      if (!nk || !webProjection(value) || !value.equals(expected.get(event))) {
         failures.add("LOG_PROJECTION_WITNESS_UNEXPECTED");
       }
       if (!found.add(witness.path(FIELD_STAGE).asText() + "/" + event)) {
@@ -202,7 +241,7 @@ public final class CorrelatedLogEvidenceValidator {
     }
     if (nk) {
       for (Map.Entry<String, JsonNode> event : expected.entrySet()) {
-        if (VALUE_REQUEST.equals(event.getValue().path(FIELD_CATEGORY).asText())) {
+        if (webProjection(event.getValue())) {
           for (String stage : STAGES) {
             if (!found.contains(stage + "/" + event.getKey())) {
               failures.add("LOG_PROJECTION_WITNESS_MISSING");
@@ -230,7 +269,7 @@ public final class CorrelatedLogEvidenceValidator {
     for (Map.Entry<String, JsonNode> field : http.properties()) {
       if (!HTTP_FIELDS.contains(field.getKey()) || !field.getValue().isValueNode()) return false;
     }
-    if (request) {
+    if (request || (nk && webProjection(value))) {
       if (!http.path("method").isTextual()
           || http.path("method").asText().isBlank()
           || !http.path(FIELD_PATH).isTextual()
@@ -245,6 +284,13 @@ public final class CorrelatedLogEvidenceValidator {
           || (http.has(FIELD_RESPONSE_BYTES) && !unsignedN12(http.path(FIELD_RESPONSE_BYTES)))) {
         return false;
       }
+    }
+    if (nk
+        && VALUE_ACTION.equals(value.path(FIELD_CATEGORY).asText())
+        && VALUE_MENU.equals(value.path(FIELD_ACTION).asText())) {
+      return "GET".equals(http.path("method").asText())
+          && "/".equals(http.path(FIELD_PATH).asText())
+          && http.path(FIELD_STATUS).asInt() == 200;
     }
     return true;
   }
@@ -263,7 +309,7 @@ public final class CorrelatedLogEvidenceValidator {
   /**
    * Shared strict schema boundary: no string/fraction coercion or truncating integer conversion.
    */
-  static boolean versionOne(JsonNode value) {
+  static boolean versionOne(@Nullable JsonNode value) {
     return value != null
         && value.isIntegralNumber()
         && value.canConvertToInt()
