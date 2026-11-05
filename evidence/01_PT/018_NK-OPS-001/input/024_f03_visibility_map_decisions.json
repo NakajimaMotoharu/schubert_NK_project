@@ -1,0 +1,269 @@
+{
+  "mainSource": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+  "slot": "pg19850-visibility-map-context-v1",
+  "publicName": "PG19850-visibility-map-context-v1",
+  "priorManifests": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19752-f03-finite-source-context-corrected-v1/manifest.json",
+      "sha256": "d4d8274a68727f8bb278ff89140b8778fa5293011263f4e75c8d195e8fe4cf14"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19760-f03-identity-context-v1/manifest.json",
+      "sha256": "40e501ddd751e8e7849721e7a063d69062d49ad3ba0e1e3429c345b5245723bf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19770-f03-map-monitor-context-v1/manifest.json",
+      "sha256": "6a272d4a9ecad5c26ee13e3af9765f766f9fcd2936ec1e0b39bf030a8778bae4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19830-resource-type-context-v1/manifest.json",
+      "sha256": "6c3055b08e58ec40e023bbf70dd56d667dc1ea50357e1c3d1703aee00534e8a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19840-resource-generic-catch-context-v1/manifest.json",
+      "sha256": "dcfaa6104f6bdd8f57093a235a56f04000d83702b03db55c78e45528fcbebf21"
+    }
+  ],
+  "priorCount": 327,
+  "newCount": 10,
+  "decisions": [
+    {
+      "rawOrdinal": 1191,
+      "rule": "UseConcurrentHashMap",
+      "sourceSha256": "01dfe01fe186a9fe8e65098bb2a020cb8f4855e9033043c89696998262dec348",
+      "variable": "jars",
+      "line": 49,
+      "reason": "Each public StartupReleaseManifest.verify/verifyCandidate allocates a fresh package-private ReleasePayloadVerification immediately for its own synchronous verify invocation. jars is a private final builder populated only in walk then consumed by agreement; it and its owner never return. Output Contents contains newly collected unmodifiable metadata, not this builder. Concurrent public invocations have separate builder owners; ConcurrentHashMap would not make a shared/reused verifier operation coherent and is unnecessary under the actual fresh-owner contract.",
+      "requiredDynamicPostconditions": [
+        "Two concurrent verify operations use distinct builders and no mutable-map escape",
+        "Actual retained directory/manifest/BOM/signature checks remain unperformed and held"
+      ]
+    },
+    {
+      "rawOrdinal": 1192,
+      "rule": "UseConcurrentHashMap",
+      "sourceSha256": "01dfe01fe186a9fe8e65098bb2a020cb8f4855e9033043c89696998262dec348",
+      "variable": "checksums",
+      "line": 50,
+      "reason": "The private final checksum map is allocated with the per-invocation verifier owner in each of the only two constructor sites. walk inserts immutable Integer checksums synchronously and agreement reads after traversal; no map or verifier escapes into returned Contents. There is no shared mutable checksum map across concurrent verify/verifyCandidate calls. This source finding is confined to map choice, not actual filesystem/signature/BOM acceptance.",
+      "requiredDynamicPostconditions": [
+        "Two concurrent verify operations use distinct builders and no mutable-map escape",
+        "Actual retained directory/manifest/BOM/signature checks remain unperformed and held"
+      ]
+    },
+    {
+      "rawOrdinal": 1264,
+      "rule": "AvoidUsingVolatile",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "variable": "started",
+      "line": 50,
+      "reason": "WebManagementServer writes started=true only after server.start returns while stopLock is held. promote/ready and stopFailure observe it; ready/promote do not acquire stopLock. volatile supplies visibility of successful start to these readers, while AtomicBoolean stopping/promoted and stopLock control other transitions. It is not used for a compound read-modify-write or as evidence that an unknown stop released selector/socket. The normal stop contract still separately requires actual termination.",
+      "requiredDynamicPostconditions": [
+        "Independent concurrent start/ready/close histories with actual provider outcome; no tuple linearizability inferred",
+        "Ownership retained on partial startup and unknown cleanup; budgets/interrupt/real socket or worker termination remain unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1287,
+      "rule": "AvoidUsingVolatile",
+      "sourceSha256": "c9701244fed7a903c0858a5b8ef4bd78a3ddd499b76bbb9358a5f7181c4bec45",
+      "variable": "replies",
+      "line": 90,
+      "reason": "WebNativeRuntime start owns ownerLock and captures bind result before listener start can fail. healthy copies this volatile reference once outside ownerLock; close holds ownerLock and retains the owner for cleanup. The field publishes an acquired owner, not an already-ready graph; the health predicate separately checks ready/stopping/terminal. No compound update relies on volatile.",
+      "requiredDynamicPostconditions": [
+        "Independent concurrent start/ready/close histories with actual provider outcome; no tuple linearizability inferred",
+        "Ownership retained on partial startup and unknown cleanup; budgets/interrupt/real socket or worker termination remain unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1288,
+      "rule": "AvoidUsingVolatile",
+      "sourceSha256": "c9701244fed7a903c0858a5b8ef4bd78a3ddd499b76bbb9358a5f7181c4bec45",
+      "variable": "replay",
+      "line": 91,
+      "reason": "Under ownerLock startup publishes the returned replay worker; healthy takes a local reference outside that lock and close uses the retained owner. volatile provides that single-handle publication only. Actual worker running/stop/join and all budget postconditions remain separate; no aggregate readiness or completed cleanup is inferred.",
+      "requiredDynamicPostconditions": [
+        "Independent concurrent start/ready/close histories with actual provider outcome; no tuple linearizability inferred",
+        "Ownership retained on partial startup and unknown cleanup; budgets/interrupt/real socket or worker termination remain unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1289,
+      "rule": "AvoidUsingVolatile",
+      "sourceSha256": "c9701244fed7a903c0858a5b8ef4bd78a3ddd499b76bbb9358a5f7181c4bec45",
+      "variable": "retry",
+      "line": 92,
+      "reason": "Under ownerLock startup captures the revocation retry worker; healthy and close each snapshot the reference. volatile provides visibility without claiming atomicity with other runtime handles, retry completion, a permit, or native termination. Stop state and worker running checks remain independent.",
+      "requiredDynamicPostconditions": [
+        "Independent concurrent start/ready/close histories with actual provider outcome; no tuple linearizability inferred",
+        "Ownership retained on partial startup and unknown cleanup; budgets/interrupt/real socket or worker termination remain unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1290,
+      "rule": "AvoidUsingVolatile",
+      "sourceSha256": "c9701244fed7a903c0858a5b8ef4bd78a3ddd499b76bbb9358a5f7181c4bec45",
+      "variable": "http",
+      "line": 93,
+      "reason": "The ownership callback captures a possibly partial HTTP owner into the volatile field before startup/mapping failure. healthy reads a local copy outside ownerLock; close retains the same owner under ownerLock. Visibility is required even for failed partial startup and is not a claim of successful HTTP readiness or actual socket release.",
+      "requiredDynamicPostconditions": [
+        "Independent concurrent start/ready/close histories with actual provider outcome; no tuple linearizability inferred",
+        "Ownership retained on partial startup and unknown cleanup; budgets/interrupt/real socket or worker termination remain unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1291,
+      "rule": "AvoidUsingVolatile",
+      "sourceSha256": "c9701244fed7a903c0858a5b8ef4bd78a3ddd499b76bbb9358a5f7181c4bec45",
+      "variable": "management",
+      "line": 94,
+      "reason": "Management bind is captured before its start/promote; ready takes a local copy outside ownerLock and close keeps the retained owner. volatile publishes only the owner handle. Full startup admission, current source identity, socket readiness, stop budgets and selector termination are not established by this syntax review.",
+      "requiredDynamicPostconditions": [
+        "Independent concurrent start/ready/close histories with actual provider outcome; no tuple linearizability inferred",
+        "Ownership retained on partial startup and unknown cleanup; budgets/interrupt/real socket or worker termination remain unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1368,
+      "rule": "AvoidUsingVolatile",
+      "sourceSha256": "134a6f35746447e6e27020ae8b82da5d67c136f0d20c46e94b41e5b8b81bc47f",
+      "variable": "stopping",
+      "line": 30,
+      "reason": "ArtemisReplyConsumers close writes stopping=true under stateLock before context.close; ready observes it without taking stateLock and must refuse stopping. volatile makes this stop fence visible. closed/startAttempted are instead lock-guarded, and atomic terminal/halted are separate signals. No provider close completion or compound linearizable readiness snapshot is inferred.",
+      "requiredDynamicPostconditions": [
+        "Independent concurrent start/ready/close histories with actual provider outcome; no tuple linearizability inferred",
+        "Ownership retained on partial startup and unknown cleanup; budgets/interrupt/real socket or worker termination remain unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1369,
+      "rule": "AvoidUsingVolatile",
+      "sourceSha256": "134a6f35746447e6e27020ae8b82da5d67c136f0d20c46e94b41e5b8b81bc47f",
+      "variable": "started",
+      "line": 32,
+      "reason": "ArtemisReplyConsumers start sets started=true only after opened.start returns under stateLock; ready reads it without that lock alongside stopping and atomic terminal. volatile publishes this success flag; there is no increment/CAS compound mutation on started. Provider behavior and concurrent start-close/rollback termination still require their separate dynamic tests.",
+      "requiredDynamicPostconditions": [
+        "Independent concurrent start/ready/close histories with actual provider outcome; no tuple linearizability inferred",
+        "Ownership retained on partial startup and unknown cleanup; budgets/interrupt/real socket or worker termination remain unperformed"
+      ]
+    }
+  ],
+  "sourceContexts": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+      "sha256": "01dfe01fe186a9fe8e65098bb2a020cb8f4855e9033043c89696998262dec348",
+      "ranges": [
+        [
+          1,
+          395
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "ranges": [
+        [
+          1,
+          303
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+      "sha256": "c9701244fed7a903c0858a5b8ef4bd78a3ddd499b76bbb9358a5f7181c4bec45",
+      "ranges": [
+        [
+          1,
+          447
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumers.java",
+      "sha256": "134a6f35746447e6e27020ae8b82da5d67c136f0d20c46e94b41e5b8b81bc47f",
+      "ranges": [
+        [
+          1,
+          190
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java",
+      "sha256": "3f2ae514697c8bac938eb9e0202a4e25346774b8875ce08c63d8117538753937",
+      "ranges": [
+        [
+          189,
+          216
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java",
+      "sha256": "2531a763d1779b40ae132ad0c1d749eb374dab830e5acb2eaacf1a4d4d69f841",
+      "ranges": [
+        [
+          108,
+          126
+        ],
+        [
+          209,
+          220
+        ]
+      ]
+    }
+  ],
+  "designReferences": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "line": 3
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "line": 413
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 23
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 33
+    }
+  ],
+  "deferred": [
+    {
+      "rawOrdinal": 1075,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1076,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1077,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1078,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1079,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1080,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1081,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    }
+  ]
+}
