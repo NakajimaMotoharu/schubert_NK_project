@@ -1,0 +1,209 @@
+{
+  "sourceBeforeReconciliation": "404971cc4687c6128672c4ef8480d739f35b4596",
+  "target": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebSecurityAudit.java",
+  "targetSourceSha256": "ce6fc0f8c9031c15077b7fd929837641e38fd9ac5b33683468e63224d53cd1f3",
+  "test": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java",
+  "testSha256": "4c73d76e9cc7067380497a8bf63c47b1678f59b20b6644350dc0fe83ab6d3819",
+  "originalNormalAndPtSource": "4b5f6faa078be348132a6ece9140b0c1a31d7907",
+  "originalRun": "PG12196",
+  "originalPost": "PG12200",
+  "originalSession": "PG12196-AUDITMETRIC-JP",
+  "refs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12194-audit-metric-six-compile-v1/manifest.json",
+      "sha256": "971ee001e169f9fa05df627e0cd0789704518d952105c27328eabf86ebd4adff",
+      "actualExit": 0,
+      "source": "4b5f6faa078be348132a6ece9140b0c1a31d7907"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12196-audit-metric-host-v1/manifest.json",
+      "sha256": "5611da6fac4d7f4959d97882e2a0c297d5d9681fa7b29e3a8721f15373d75fc8",
+      "actualExit": 0,
+      "source": "4b5f6faa078be348132a6ece9140b0c1a31d7907"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12198-audit-metric-static-v1/manifest.json",
+      "sha256": "a10133ca7dedd88083f8f39c8b96b0af1cde5ffc161655dc8feb3591b10d8255",
+      "actualExit": 1,
+      "source": "4b5f6faa078be348132a6ece9140b0c1a31d7907"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12200-audit-metric-post-v1/manifest.json",
+      "sha256": "554698fe99408bc21057694826c982c3ab4d6eafe44629ae4cf9cdaf1c9e20fb",
+      "actualExit": 0,
+      "source": "4b5f6faa078be348132a6ece9140b0c1a31d7907"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12201-audit-metric-context-v1/manifest.json",
+      "sha256": "12c21f28214a9869f24549a69d8fdf577b12316a0c31b6bc822cd6bcf94a2ee2",
+      "actualExit": 0,
+      "source": "4b5f6faa078be348132a6ece9140b0c1a31d7907"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12203-audit-metric-context-post-v1/manifest.json",
+      "sha256": "f7b5d181661634f8cfff2aade0bbf30eefc7d22ae0942cfac58d529b64ca9e07",
+      "actualExit": 0,
+      "source": "4b5f6faa078be348132a6ece9140b0c1a31d7907"
+    }
+  ],
+  "sixOriginalTestMethods": [
+    {
+      "classname": "dev.codex.schubert.nk.web.logging.WebSecurityAuditTest",
+      "name": "web095AllSecurityEventsUseClosedIndependentJson",
+      "nonPass": []
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.logging.WebSecurityAuditTest",
+      "name": "web096InvalidEventMetadataNeverReachesLogger",
+      "nonPass": []
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.logging.WebSecurityAuditTest",
+      "name": "web097UnicodeAndSecretCanariesRemainOutsideAudit",
+      "nonPass": []
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.logging.WebSecurityAuditTest",
+      "name": "web098ClockAndLoggerFaultsNeverBecomeSuccessfulAudit",
+      "nonPass": []
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.logging.WebSecurityAuditTest",
+      "name": "web099RepeatedEventsHaveNoMutableJsonOrPrincipalRetention",
+      "nonPass": []
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.logging.WebSecurityAuditTest",
+      "name": "web100ConcurrentAuditEventsStayIndependent",
+      "nonPass": []
+    }
+  ],
+  "mainAndTestBytesEqualOriginal": true,
+  "fiveDependencySourceHashes": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java": "aaa18a4c954a425c943e8c30ea1752b665b249e86d8f1767e9e37f4aa61a6b66",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/UserRole.java": "b68402e5705ca2ac5093a1b98a44de5a9f45ed69cb9b231658b4903c51e0bf69",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/WireEnum.java": "a14544397a3ce1c45ff3026c0463c2829ea35a39a8990056a368fc52cf7b6d4b",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebSecurityAudit.java": "ce6fc0f8c9031c15077b7fd929837641e38fd9ac5b33683468e63224d53cd1f3",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232"
+  },
+  "fixedToolchainJarHashesReauthenticated": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+  },
+  "normalCurrentSource": "827983a97a9c3bf36b7671985a7924417ff0e8f7",
+  "normalCurrentManifestSha256": "9f284d8fa50a137f739a5a3c65bb4f6ae62b706741853664f19c7817ee75fb3c",
+  "allThreePhysicalEqual": [
+    {
+      "path": "dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.class",
+      "oldAndCurrentSha256": "a58423c9d40741625fc29e9d169d4be69447f79c4b81485575e6a83d6b1017a4",
+      "priorClassCrc64": "bc204e37859b691d",
+      "priorCounters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 17,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      }
+    },
+    {
+      "path": "dev/codex/schubert/nk/web/logging/WebSecurityAudit$Route.class",
+      "oldAndCurrentSha256": "7e16609edfebc3e354a117b8162b0478039e7179a7ef9b24d638df2d1743029c",
+      "priorClassCrc64": "7a5562bc4326d7dd",
+      "priorCounters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 9,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      }
+    },
+    {
+      "path": "dev/codex/schubert/nk/web/logging/WebSecurityAudit.class",
+      "oldAndCurrentSha256": "15eb95ec0e7d25f95881eea7fc648fa70f79f5f59c69a3b8ead8ee3c9eaf6c71",
+      "priorClassCrc64": "a1fd18ee7e97e28a",
+      "priorCounters": {
+        "BRANCH": {
+          "covered": 52,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 63,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 7,
+          "missed": 0
+        }
+      }
+    }
+  ],
+  "priorWholeSourceCounters": {
+    "LINE": {
+      "covered": 89,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 11,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 3,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 52,
+      "missed": 0
+    }
+  },
+  "priorStaticActualExit": 1,
+  "priorRaw5Preserved": true,
+  "scopeContext0AndIndependentPost0": true,
+  "sourceOwnerAndCostOwner": "WBS-P006-04",
+  "newChangeOrReallocation": false,
+  "newProductTestsExecuted": 0,
+  "newCompileOrStaticExecuted": 0,
+  "newCurrentSourceRunDeclared": false,
+  "oldExecUnion": false,
+  "decision": "REUSE_UNCHANGED_TARGET_BYTE_COUNTER_AND_INDEPENDENT_ORACLE_SUBPROOF_KEEP_ORIGINAL_RUN",
+  "notCurrentGlobal451": true,
+  "newIndividualAcceptance": 0,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "effortRate": null,
+  "runtimeAuthSessionHTTPCHRNativeEvidence": false,
+  "remaining": "Global same-source/run451, real authenticated HTTP/audit persistence and CHR/G13 remain open; original6-test run never rerun and never added as new6.",
+  "partial80Meaning": "Seed PARTIAL is the selected collected witness, not proof that these52branches still need execution. Target evidence reconciliation can identify already completed subproofs without quality or oracle relaxation.",
+  "media7774Decision": "Coverage scope monitoring13/Main6, suites7 allmonitoring, no WebMediaAuditTest selected; it is not whole WebMediaAudit proof. No inference from51test total; separate preflight needed.",
+  "qa054Impact": "Closed SECURITY event catalog unchanged by limited MENU/LOG_SEARCHED ACTION approval; new unrelated SOURCE/Main bytes are not covered by this old proof.",
+  "oracleReview": {
+    "reviewed": "All six current Test bodies/helper/classes samebytes as original4b5, manual10event/action/reason/outcome/level/route table, timestamp/IP literal/JSON keysets, boundaries/negative/null, unicode/redaction, logger-clock failures and own100task independence; no productionMethod generates expected.",
+    "existingRequirementsUnchanged": "SECURITY actioncatalog not modified byQA054 MENU/LOG_SEARCHED change; UI226/SS314351352 target contract unchanged.",
+    "counting": "One newlybound existing subproof, zero newmanufacture/ProductTest/coverage measurements/individualacceptances. OldRunPG12196+post12200 stay originalsource/session. Exact currentTargetMain/class3 andTest5dependency hash equality; current sixMain/NullAway/SB supports unchangedMain class, no globalnewsource qualification."
+  }
+}
