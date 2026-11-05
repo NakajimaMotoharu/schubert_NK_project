@@ -10,26 +10,26 @@ public enum WebHttpLogKind {
   REQUEST(LogType.REQUEST, "HTTP_REQUEST_COMPLETED", "HTTP request completed"),
   MENU_VIEWED(LogType.ACTION, "MENU_VIEWED", "Menu viewed");
 
-  private final LogType category;
-  private final String action;
-  private final String message;
+  private final LogType retainedCategory;
+  private final String retainedAction;
+  private final String retainedMessage;
 
   WebHttpLogKind(LogType category, String action, String message) {
-    this.category = category;
-    this.action = action;
-    this.message = message;
+    this.retainedCategory = category;
+    this.retainedAction = action;
+    this.retainedMessage = message;
   }
 
   public LogType category() {
-    return category;
+    return retainedCategory;
   }
 
   public String action() {
-    return action;
+    return retainedAction;
   }
 
   public String message() {
-    return message;
+    return retainedMessage;
   }
 
   /** Only an actual successful menu model and terminal metadata establish this observation. */
