@@ -1,0 +1,7 @@
+# F03Log資源五scope二四の文脈照合
+
+2026-11-06T07:53:11.131323+09:00 / dev-foundation / Main source 28af318d0198fe7432ca6fcd234d3fabbfd10173。PG20000 metadata真正0/独立post0。PG20000 metadata0/独立post0。1491=前958+新24+残509、ordinal/ID/unique1439/duplicate52保持。Main/POM/normal19740/SB19742/JAR/currentSS一致。未知例外identity・固定secondary・once逆順解放・borrowedConnection非closeをsourceで照合。transaction431未分類。Product/PT/analyzer/DB/Root/VM再演0、coverage未測定。
+
+本群24件、先行と重複なし累計982/生1491、未分類509。scope: LogCleanup five owned releases: generic20/finally4; currentSS341327 resource contract only. Transaction raw431 remains unclassified, separate responsibility.。全finding/source/context/hash/元ordinalは公開 evidence/01_PT/018_NK-OPS-001/evidence/PG20000-log-resource-context-v1/manifest.json / SHA256 8b54614e4977e05df0f38eb534ee8d5e7c6e3bb415dca38371b21c4c895dbe59。関連仕様evidence/01_PT/018_NK-OPS-001/3561_F03Log資源五scope二四の仕様.md・計測documents/400_PGPT/470_PMO/500_SV計画整備_20261104/926_F03Log資源五scope二四の結果.json。
+
+rawGate1/全適用違反null/全F03・451未受入、Product実行0/coverage未測定/動的PT免除0/新個別受入0/技術成分46/正式1964-53/歴史17-190/工数null/第一V同HOLD。原群{'low': 0.25, 'base': 0.75, 'high': 2} cap3不変更、共有26→26=0ppをPGPT-20261008-3956へ一度（ordinary20/all27/S7残3）、専有N/Tnull。次=Continue remaining exact same-source public purposes with per-site source and canonical design verification; never replay Product or held dynamic operations. Transaction431 remains separate and unclassified.、通常区切り停止不可。
