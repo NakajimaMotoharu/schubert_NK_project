@@ -1,0 +1,7 @@
+# F03観測session質問五八の文脈照合
+
+2026-11-06T07:57:51.403743+09:00 / dev-foundation / Main source 28af318d0198fe7432ca6fcd234d3fabbfd10173。PG20020 metadata真正0/独立post0。PG20020 metadata0/独立post0。1491=前1038+新58+残395、全ordinal/ID/unique1439/duplicate52/Morning12/transaction431保持。現在Main/POM/normal19740/SB19742/JAR/SS一致、全旧purpose hash・pointer・raw属性照合。動的graph/workerjoin/vendor stop/DB/鍵/再送/Root/VMは未実行。
+
+本群58件、先行と重複なし累計1096/生1491、未分類395。scope: Current whole-source purposes management30/session13/question15. Missing-not-zero and unknown close are not success; native captured vs ownerless cleanup and API/Web diagnostics remain distinct.。全finding/source/context/hash/元ordinalは公開 evidence/01_PT/018_NK-OPS-001/evidence/PG20020-observation-session-question-context-v1/manifest.json / SHA256 81e4c57f48bdb4f9430c04575d4656918ec44a879db11b33f9f32737f4182d3e。関連仕様evidence/01_PT/018_NK-OPS-001/3565_F03観測session質問五八の仕様.md・計測documents/400_PGPT/470_PMO/500_SV計画整備_20261104/930_F03観測session質問五八の結果.json。
+
+rawGate1/全適用違反null/全F03・451未受入、Product実行0/coverage未測定/動的PT免除0/新個別受入0/技術成分46/正式1964-53/歴史17-190/工数null/第一V同HOLD。原群{'low': 0.5, 'base': 2, 'high': 4} cap5不変更、共有26→26=0ppをPGPT-20261008-3960へ一度（ordinary20/all27/S7残3）、専有N/Tnull。次=Review remaining exact purposes maintenance11/batch18/retention1 using only source and current design; no native/publication/retirement/cohort operation. Continue unclassified sites and preserve all formal holds.、通常区切り停止不可。
