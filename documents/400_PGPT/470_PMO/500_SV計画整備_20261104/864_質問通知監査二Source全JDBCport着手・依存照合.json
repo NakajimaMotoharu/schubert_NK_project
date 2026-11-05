@@ -1,0 +1,96 @@
+{
+  "atJST": "2026-11-06T02:09:53.148666+09:00",
+  "groupId": "PGPT-ORDINARY-QUESTION-AUDIT-JDBC-20261106",
+  "sourceBefore": "a20867a6774556a6d8c797dfa9c3f41e9441df55",
+  "rows": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryAuditWriter.java",
+      "sha256": "f07e45a7a349f594ec6bd0276e98604e2aab91476bc26299a6c50ccff7a48620",
+      "canonicalOwner": "WBS-P014-03",
+      "canonicalCostOwner": "WBS-P014-03"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationAuditWriter.java",
+      "sha256": "9b36eb173f1c64adb26515f0f6b84f19d454e704f893a3bef2e6661188e57b0c",
+      "canonicalOwner": "WBS-P014-03",
+      "canonicalCostOwner": "WBS-P014-03"
+    }
+  ],
+  "originalEstimatePp": {
+    "low": 1,
+    "base": 3,
+    "high": 7
+  },
+  "capPp": 10,
+  "estimateBasis": "Technical judgment for two analogous existing JDBC writers; preceding roundedshared0 is not exclusive cost calibration or freework. Includes necessary source/tool/static/post/bug repair.",
+  "chargedToSV": false,
+  "quotaBefore": {
+    "primary": {
+      "usedPercent": 22,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 22,
+    "remainingPercent": 78,
+    "observedAtUTC": "2026-11-05T17:09:52Z",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "890f48c5f7a30474cc90dcc1c65abfdc3943cd0be596ffa43258d65e7b5b28af"
+  },
+  "costOwner": "WBS-P014-03",
+  "decision": "PT_DEFAULT",
+  "scope": "Full query and mutation critical audit writers, both QUESTION/NOTIFICATION metadata categories, every closed denial/replay/capacity event, optional verified actor projection, SQL/bind/rowcount/close/null/concurrent state. Synthetic data only; no actual authentication/query/cancel/delete or DB.",
+  "closure": [
+    "Request DTO decode/header/questionScope/cancellation only using boundedpublic typedcodec input",
+    "AuthenticatedActor constructors + Role/UserRole/typedtargetIDs only",
+    "JDK JDBC proxies/Gson/time/Normalizer; no canonical/HMAC/Inbox execution or keys/fingerprint/error classifier"
+  ],
+  "oracle": "Independent SQL literals and closed six-event tables perwriter, targettype/role/outcome-step andcapacityN9/version9001 allowlist, explicit absentfields, UTCoffsetMicro time, own resource operation logs and fixed SQLException identity.",
+  "normalReuse": "PG19630/19632 all current Main/POM/JAR hashes before new Test, no rebuild/replay/execmerge",
+  "priorSelection": "SecurityAudit same Main bytes as prior92c whole6/89L11M3C52B proof12166/12170 but global/static/registry distinct: skip confirmation execution, no new count from hash alone. LogQueryRepository/ApiOutbox observe owned path/ScenarioRequest whole depend on held error/key graphs and remain HOLD, no fixture extraction.",
+  "requirements": "NK-QRY-001/NTF001/MON004/MQ006..010/UI224236241/SS323324332351352/SSC157/PGD330332",
+  "acceptance": "All new @Tests actual0/FESaborted0, whole2 source four100, allnormalphysical/CRC/singleexec/session/staticapplicability0 andindependentpost; actualruntime/Root/native/CHR/formal remainsunaccepted",
+  "next": "new independent Test/spec, pure host PT then post andsourcebinding; continue ordinaryPGPT without newS/pilot or holdrelease",
+  "preStartSharedGapObservation": {
+    "activityId": "QA054_POST_QUESTION_SELECTION_SHARED_GAP_3900_3901",
+    "fromEvent": "PGPT-20261008-3900",
+    "toEvent": "PGPT-20261008-3901",
+    "quotaBefore": {
+      "primary": {
+        "usedPercent": 21,
+        "windowDurationMins": 10080,
+        "resetsAt": 1794395640
+      },
+      "secondary": null,
+      "usedPercent": 21,
+      "remainingPercent": 79,
+      "observedAtUTC": "2026-11-05T17:02:10Z",
+      "provenance": "fresh get_usage_limits direct structured response",
+      "previousObservationSha256": "6258534771236ada406d052f0a9b80a250bc31b7d01f75a46b96948ed9f5d2b2"
+    },
+    "quotaAfter": {
+      "primary": {
+        "usedPercent": 22,
+        "windowDurationMins": 10080,
+        "resetsAt": 1794395640
+      },
+      "secondary": null,
+      "usedPercent": 22,
+      "remainingPercent": 78,
+      "observedAtUTC": "2026-11-05T17:09:52Z",
+      "provenance": "fresh get_usage_limits direct structured response",
+      "previousObservationSha256": "890f48c5f7a30474cc90dcc1c65abfdc3943cd0be596ffa43258d65e7b5b28af"
+    },
+    "sharedObservedPp": 1,
+    "sameQuotaWindow": true,
+    "attribution": "UNKNOWN_PGPT_PMO_OTHER_CHAT_NOT_EXCLUSIVE",
+    "classification": "INTER_GROUP_SELECTION_OVERHEAD_SHARED_ONLY",
+    "includedInOrdinarySharedOnce": true,
+    "actualAllocatedPp": null,
+    "N": null,
+    "T": null,
+    "notNewSOrPilotPool": true,
+    "conservativelyIncludedInCurrentGroupCap": true
+  },
+  "capRemainingAfterPreStartGap": 9
+}

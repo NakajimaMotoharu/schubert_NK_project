@@ -1,0 +1,125 @@
+{
+  "actualExit": 0,
+  "rawPmdExit": 4,
+  "rawFindings": 7,
+  "applicableFindings": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": 0,
+  "items": [
+    {
+      "source": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest.java",
+      "line": 331,
+      "rule": "DoNotUseThreads",
+      "applicability": "NOT_APPLICABLE_TEST_SCOPE",
+      "reason": "Owned standalone JUnit2worker ExecutorService with timedFuture.get andscopeclose, no server lifecycle/new service."
+    },
+    {
+      "source": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest.java",
+      "line": 332,
+      "rule": "DoNotUseThreads",
+      "applicability": "NOT_APPLICABLE_TEST_SCOPE",
+      "reason": "Owned standalone JUnit2worker ExecutorService with timedFuture.get andscopeclose, no server lifecycle/new service."
+    },
+    {
+      "source": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest.java",
+      "line": 333,
+      "rule": "DoNotUseThreads",
+      "applicability": "NOT_APPLICABLE_TEST_SCOPE",
+      "reason": "Owned standalone JUnit2worker ExecutorService with timedFuture.get andscopeclose, no server lifecycle/new service."
+    },
+    {
+      "source": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest.java",
+      "line": 451,
+      "rule": "UseConcurrentHashMap",
+      "applicability": "NOT_APPLICABLE_TEST_SCOPE",
+      "reason": "Both binds/nullTypes are fields of each Jdbc instance, private to a single worker; no shared map, observed only after joining."
+    },
+    {
+      "source": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest.java",
+      "line": 452,
+      "rule": "UseConcurrentHashMap",
+      "applicability": "NOT_APPLICABLE_TEST_SCOPE",
+      "reason": "Both binds/nullTypes are fields of each Jdbc instance, private to a single worker; no shared map, observed only after joining."
+    },
+    {
+      "source": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest.java",
+      "line": 473,
+      "rule": "UseProperClassLoader",
+      "applicability": "NOT_APPLICABLE_TEST_SCOPE",
+      "reason": "Defining java.sql interface loader makes only same-interface JDK proxies, not context/service/app loading."
+    },
+    {
+      "source": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest.java",
+      "line": 489,
+      "rule": "UseProperClassLoader",
+      "applicability": "NOT_APPLICABLE_TEST_SCOPE",
+      "reason": "Defining java.sql interface loader makes only same-interface JDK proxies, not context/service/app loading."
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryAuditWriter.java": "f07e45a7a349f594ec6bd0276e98604e2aab91476bc26299a6c50ccff7a48620",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationAuditWriter.java": "9b36eb173f1c64adb26515f0f6b84f19d454e704f893a3bef2e6661188e57b0c",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest.java": "a0ae26af387cc48d71f28c47b89866a2c50c192b965838321860a773ea91daaf"
+  },
+  "sameNormalSixSpotbugs": {
+    "manifest": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19632-web-outbox-current-six-static-reactor-v1/manifest.safe.json",
+    "sha256": "a607c0549bc695087d6e5162fd610546493e27f023d44b3fb60110b3303d3e5a",
+    "reports": {
+      "protocol": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "98ed5445a1efd27fd4f9fd797f66869d649d8f69c9779f80da8e8742e5bcbaae"
+      },
+      "storage": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "5988998932309b405279e1d9f266f6994fd2bdfb8d10efffcef17cb4d8304a36"
+      },
+      "bootstrap": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "038b1285dc5ed759a26688a0afa25bf3eb1b3422f3f0d38a60f6e7707f6fdd4f"
+      },
+      "api": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-api/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "dd6924652027bb2e6999ce5791ce83dd942ee13fe7f3148acbbdf791e19bac4c"
+      },
+      "web": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-web/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "29f932e8270a445c181d5819d93c241bd04cf1b67316f1262dc55599017468d3"
+      },
+      "batch": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-batch/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "0859e0f584ecd2dd8de5daeeb545af4909c82f77b5fb6fc75a710e4cb1ee10ea"
+      }
+    },
+    "currentAllMainInputsEqualPinnedNormalBuild": true
+  },
+  "productOrTestExecuted": false,
+  "wholeF03": false,
+  "files": {
+    "pmd.stdout": "f5457fa386e37393bd99ca05d27fcf8e46bc40307eb160386d82d3bb68d9f113",
+    "pmd.stderr": "28205b933507aac26ff4349ad8a5cdfae58e04a6895d91c204b0ee8dda8463a1",
+    "manifest.safe.json": "87fe26adf2483059155855784dd851e28973e8d0d5d1a21aa26361bf5e402c53",
+    "checkstyle.xml": "51462297a4cebabeb1e402012410c07c2425be977b7cefb0f5b4508535c93eda",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pmd.xml": "95a72d75093d3dc289f4e987069dafdc3222e0a5babf36a017dc6ad76ccad2fa",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
