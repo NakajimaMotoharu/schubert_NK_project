@@ -1,0 +1,30 @@
+# Expiry監査 SQL・状態契約 単体仕様
+
+NK-BAT-001 / ExpiryAuditRepository全Source（Stage/Snapshot/Prior・JdbcAcquire/Release/Read含む）/ DAT009・OPS009・UI251・SS331§8.2-8.3/332/341§9/343・SSC063/078/200/304/310・411/451・799。元部分106L/49B・未達145L/139Bを対象に、PGと全条件PTを併行する。Mainは既実装をレビューして不変更、障害を発見した場合は修正前に915/916へ記録する。
+
+|Test ID|class/methodと独立期待|
+|---|---|
+|EXPPORT-P001|ExpiryAuditPredicateContractTest.stageAndPriorEstablishRequiredInvariantsAndAllRenderingsStayRedacted。Stageのcutoff非null/非負before-target-bytes/target<=before、0/MAX境界、Prior非null二field、fixedredactionと同じhandle値。|
+|EXPPORT-P002|同statusEndedAndAbsentObservationTriplesFollowIndependentV022Table。RUNNING/SUCCESS/WARNING/FAILED、未知status、runningとended関係、cutoff-before同時null、未観測after null/SUCCESS不可をliteral真偽表で検査。|
+|EXPPORT-P003|同counterCutoffAndKnownOrUnknownAfterBoundariesUseLiteralPostconditions。各負count、7日前cutoff不一致、target>before、after未知は非SUCCESS/success0、実測after0..beforeとbefore-after=success、SUCCESSはtarget一致/failure0。警告部分成功・after不明失敗も別vector。|
+|EXPPORT-P004|同stageReplayAcceptsExactNineConditionsAndRejectsEachIndependentDifference。Optional欠落と全AND一項目ずつの差、RUNNING/after/cutoff/before/target/success/failure/bytesの一致。|
+|EXPPORT-P005|同terminalReplayRequiresEveryLiteralCountTimeDiagnosticAndNullableField。terminalの12比較とOptional欠落、nullable after/diagnosticのObjects同値。これは比較predicate単体であり、SUCCESS after null等のraw入力をDB/finishが受理したことにはしない。|
+|EXPPORT-J001|ExpiryAuditPortTest.readUsesElevenTypedColumnsAndLiteralHandleOrReturnsOnlyTrueAbsence。11column/5bind/timeout5のliteral SQL、UTCの全property、未観測null、必須null/不正count/不在を区分、取得資源close/borrowedconn不変。|
+|EXPPORT-J002|同readOwnedScopesPreserveUnknownIdentityAndCatalogOnlySqlIncludingNullAcquisitions。stmt/row null、各JDBC箇所SQL-RTE-Error、body×row/stmtclose18組のSSC310/063優先、SQLだけ固定catalog、unknown/Error同一性と固定secondary、全close試行。|
+|EXPPORT-J003|同stageLiteralUpdateAndZeroCountReplayRespectTheExactCommittedObservation。literalUPDATEと9bind、cutoff独立UTC2026-10-29/before3/target2/bytes200、changed1はreadback0、changed0は完全同値だけ許可、欠落/byte差拒否。DDL PKから実UPDATE件数は0/1、偽2件を実DBの境界値として扱わない。|
+|EXPPORT-J004|同finishLiteralUpdateAndZeroReplayBindAllSixteenColumnsWithoutBorrowedCommit。16bind/SUCCESS after1/削除2、changed0の真正同値/欠落/byte差、FAILED after不明はnull保持・success0、WARNING既知after2/削除1の別分岐。commit/rollback/conncloseは禁止。|
+|EXPPORT-J005|同invalidAttemptAndEveryTerminalRelationRejectBeforeAnySqlAcquisition。nonnull/correctstep/nonskipped、ended>=start/cutoff-7/target-bytes一致、SKIPPED不可、未知after/既知afterとstatus・countの全関係を一項目ずつ拒否。|
+|EXPPORT-J006|同retainedSuccessUsesDefaultOrExplicitSameDayOriginalOnlyAndClosesBeforeReturn。default currentrunとexplicit別UUID/sameJSTdayのsynthetic original lookup、SQLdate/timeout/rowhandle/cutoffを独立literalで照合、guard3callback、空はOptional.empty、正常close後だけreturn。実original保持資格は検証しない。|
+|EXPPORT-J007|同retainedLookupAndBadProjectionsCannotFabricateAnOriginalOrAdmitBrokenAudit。default別UUIDはIO、explicit UUID/day差/duplicate/監査不在/nonnull列null/error文字/未来ended拒否、null lookup結果NPE契約拒否、取得資源close。|
+|EXPPORT-J008|同guardAndJdbcFailuresHaveDeclaredPhaseSemanticsWithNoPrivilegedOwnerActions。guard ownIOの呼出1/2/3、stage/finish SQL-RTEは固定catalog/直接Error同一性、successfulはSQLだけ固定・runtime/Error原値、lookup IO同一性、ownedclose。usingJdbc lexicalTWRは既24と結合しread専用SSC310と混同しない。|
+|EXPPORT-J009|同nullPortsAndFailedParentIdentityCannotBeAcceptedByAConvenientFallback。caller非null/観測時刻/identity不整合でfallback0、UPDATE後/投影後にidentity失われたら値を返さずclose、retained stmt/row null拒否。|
+
+既ExpirySuccessfulScopeTest全24（PT-EXP-4956-001～024）は693のfixture/期待値/独立Java25 compiler TWRを不変更で選択する。Acquire/body/close/複合12組/nested/selfsuppression/同secondary/構築前failure/各null/固定成功監査を確認。新14＋旧24の全3class/38methodを同source・単exec/sessionへ実行し、旧成功の算術加算/旧exec合成はしない。
+
+期待値はSS331 V022とSQL列/WHERE、固定UTC/JST日付/件数/手組状態表/JavaTWRの独立参照に基づく。productionvalidSnapshot/matches/mapper/SQL生成methodをexpected算出へ使用しない。mutateはrawSnapshot入力field置換だけ、validはactual呼出wrapperだけ。FixtureのStage/Result/Snapshot値ctorは入力carrierで、実Root/DB成功oracleではない。
+
+FixtureはJDK JDBC interface Proxy/handrows/events、Guard.remainingNanosが固定positive5秒又はownIOExceptionを返すcallbackだけ。真のMaintenanceOwnerFrame、実actor/owner/保持Session/Root/permit/intent/原本/鍵/DB/driver/SQLengine/broker/file/native/VM/networkを起動・読取・操作しない。normalBootstrap.jarはGuard型のみで、postはstorage/nativeと実Frame外側初期化がないことを検査。実所有/親30分budget/実purge/DDLgrants/Original真正性は別未受入。借用connは同一親専有の事前契約、同じconnの並行操作を試験で正当化しない。各fixtureは別carrierで、再送はchanged0/既同値readbackで検証する。
+
+PG19016compile0/19018raw23全個別適用性を保持。初回実行前PGレビューでWARNING既知afterと遅いidentity喪失を追加しPG19020/19022へ。文字列パッチguard1は全filewrite前に停止し、旧prepare既存directoryguard1も二重compile未発行、Main/Test/元artifact変更0だった。是正は実format後行を読んで該当行だけ追加し新専用slotへ、失敗をPT PASSへ算入しない。Main/旧24不変更、追加toolなし（固定scope qualifier再利用）。
+
+Main6build/NullAway/六SBはPG18642/18648同b093の全input/JARpinで再利用。Bootstrap artifactとJSpecify1.0.1を明示pin、追加依存downloadなし。正常Batch.jarで全7physical（code4＋宣言interface3を報告し除外0）・全四counter100/全@Test/元XML/CRC/HELD四probe0/単exec-sessionをstrictpost。未達は未達、到達不能/任意除外/抑制なし。終了quotaはfreshUTC>=postをassert。環境/branch/source/argv/OS終了/原失敗/BUG/path/hash/coverageは698結果へ。正式1964-53/工数null/第一V/親WBS/451全体/IT-STは不変更。
