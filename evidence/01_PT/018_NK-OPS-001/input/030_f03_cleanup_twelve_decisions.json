@@ -1,0 +1,1167 @@
+{
+  "mainSource": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+  "slot": "pg19910-cleanup-twelve-context-v1",
+  "publicName": "PG19910-cleanup-twelve-context-v1",
+  "priorManifests": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19752-f03-finite-source-context-corrected-v1/manifest.json",
+      "sha256": "d4d8274a68727f8bb278ff89140b8778fa5293011263f4e75c8d195e8fe4cf14"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19760-f03-identity-context-v1/manifest.json",
+      "sha256": "40e501ddd751e8e7849721e7a063d69062d49ad3ba0e1e3429c345b5245723bf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19770-f03-map-monitor-context-v1/manifest.json",
+      "sha256": "6a272d4a9ecad5c26ee13e3af9765f766f9fcd2936ec1e0b39bf030a8778bae4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19830-resource-type-context-v1/manifest.json",
+      "sha256": "6c3055b08e58ec40e023bbf70dd56d667dc1ea50357e1c3d1703aee00534e8a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19840-resource-generic-catch-context-v1/manifest.json",
+      "sha256": "dcfaa6104f6bdd8f57093a235a56f04000d83702b03db55c78e45528fcbebf21"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19850-visibility-map-context-v1/manifest.json",
+      "sha256": "291d806a9539c8c6e331b5d621aaf872356cc8700dcf1b461f219269c15b3c11"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19860-jdbc-close-context-v1/manifest.json",
+      "sha256": "a57ff397b8465ebd306a521add6b9c609facae43c1f9f6abddf00bee64a90103"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19870-jdbc-generic-catch-context-v1/manifest.json",
+      "sha256": "f8ff492143ca570823f2c79a25191c67b175409aad8c242b54027ffa2afc2765"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19880-empty-catch-context-v1/manifest.json",
+      "sha256": "86a4bb1544fa83e25f151a04af5a52034200ea52a2a8ad72326d2961a4e98958"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19890-finally-priority-context-v1/manifest.json",
+      "sha256": "b294eccae2a4c5a27c979e9a5ddd96a36fb7f2a508a9445028ebdabf1d53ab35"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19900-batch-run-context-v1/manifest.json",
+      "sha256": "59327bb132893061eee966a0def91a5541be573b82708ad16195295e9bc916d2"
+    }
+  ],
+  "priorCount": 494,
+  "newCount": 68,
+  "decisions": [
+    {
+      "rawOrdinal": 947,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 56,
+      "reason": "CleanupRepository.java.execute: This RuntimeException catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 948,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 56,
+      "reason": "CleanupRepository.java.execute: This Error catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 949,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 59,
+      "reason": "CleanupRepository.java.execute: The finally performs one owned direct close; its nested cleanup throw is conditional on JdbcResourceFailures.replace priority, not unconditional replacement of every primary. Silencing a selected failure would falsely return success, whereas standard TWR would change the approved fixed-secondary/knownSQL priority. All early returns unwind the row scope then statement scope. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 950,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 62,
+      "reason": "CleanupRepository.java.execute: This RuntimeException cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 951,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 62,
+      "reason": "CleanupRepository.java.execute: This Error cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 952,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 66,
+      "reason": "CleanupRepository.java.execute: This RuntimeException catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 953,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 66,
+      "reason": "CleanupRepository.java.execute: This Error catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 954,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 69,
+      "reason": "CleanupRepository.java.execute: The finally performs one owned direct close; its nested cleanup throw is conditional on JdbcResourceFailures.replace priority, not unconditional replacement of every primary. Silencing a selected failure would falsely return success, whereas standard TWR would change the approved fixed-secondary/knownSQL priority. All early returns unwind the row scope then statement scope. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 955,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 72,
+      "reason": "CleanupRepository.java.execute: This RuntimeException cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 956,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 72,
+      "reason": "CleanupRepository.java.execute: This Error cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 957,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "readLogProgress"
+      },
+      "line": 102,
+      "reason": "CleanupRepository.java.readLogProgress: This RuntimeException catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 958,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "readLogProgress"
+      },
+      "line": 102,
+      "reason": "CleanupRepository.java.readLogProgress: This Error catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 959,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "readLogProgress"
+      },
+      "line": 105,
+      "reason": "CleanupRepository.java.readLogProgress: The finally performs one owned direct close; its nested cleanup throw is conditional on JdbcResourceFailures.replace priority, not unconditional replacement of every primary. Silencing a selected failure would falsely return success, whereas standard TWR would change the approved fixed-secondary/knownSQL priority. All early returns unwind the row scope then statement scope. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 960,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "readLogProgress"
+      },
+      "line": 108,
+      "reason": "CleanupRepository.java.readLogProgress: This RuntimeException cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 961,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "readLogProgress"
+      },
+      "line": 108,
+      "reason": "CleanupRepository.java.readLogProgress: This Error cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 962,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "readLogProgress"
+      },
+      "line": 112,
+      "reason": "CleanupRepository.java.readLogProgress: This RuntimeException catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 963,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "readLogProgress"
+      },
+      "line": 112,
+      "reason": "CleanupRepository.java.readLogProgress: This Error catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 964,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "readLogProgress"
+      },
+      "line": 115,
+      "reason": "CleanupRepository.java.readLogProgress: The finally performs one owned direct close; its nested cleanup throw is conditional on JdbcResourceFailures.replace priority, not unconditional replacement of every primary. Silencing a selected failure would falsely return success, whereas standard TWR would change the approved fixed-secondary/knownSQL priority. All early returns unwind the row scope then statement scope. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 965,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "readLogProgress"
+      },
+      "line": 118,
+      "reason": "CleanupRepository.java.readLogProgress: This RuntimeException cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 966,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "attributeValues": {
+        "method": "readLogProgress"
+      },
+      "line": 118,
+      "reason": "CleanupRepository.java.readLogProgress: This Error cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:21/23 specifically keeps resource-null NPE non-success distinct from SQL column-null and scopes execute/readLogProgress this way. Caller retains transaction and must decide rollback/commit. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 979,
+      "rule": "CloseResource",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "read",
+        "variable": "query"
+      },
+      "line": 183,
+      "reason": "CleanupTerminalRepository.java.read: query is present(original), an identity alias inside the immediate protected resource scope. The acquired originals, including nullable acquisition failure paths, are directly closed in nested finally once, not the aliases as additional owners. All getters/projection/returns remain inside protection until ResultSet then Statement cleanup. A separate alias close would double-close the same owner. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 980,
+      "rule": "CloseResource",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "read",
+        "variable": "row"
+      },
+      "line": 190,
+      "reason": "CleanupTerminalRepository.java.read: row is present(original), an identity alias inside the immediate protected resource scope. The acquired originals, including nullable acquisition failure paths, are directly closed in nested finally once, not the aliases as additional owners. All getters/projection/returns remain inside protection until ResultSet then Statement cleanup. A separate alias close would double-close the same owner. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 981,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 206,
+      "reason": "CleanupTerminalRepository.java.read: This RuntimeException catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 982,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 206,
+      "reason": "CleanupTerminalRepository.java.read: This Error catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 983,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 209,
+      "reason": "CleanupTerminalRepository.java.read: The finally performs one owned direct close; its nested cleanup throw is conditional on JdbcResourceFailures.replace priority, not unconditional replacement of every primary. Silencing a selected failure would falsely return success, whereas standard TWR would change the approved fixed-secondary/knownSQL priority. All early returns unwind the row scope then statement scope. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 984,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 213,
+      "reason": "CleanupTerminalRepository.java.read: This RuntimeException cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 985,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 213,
+      "reason": "CleanupTerminalRepository.java.read: This Error cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 986,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 218,
+      "reason": "CleanupTerminalRepository.java.read: This RuntimeException catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 987,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 218,
+      "reason": "CleanupTerminalRepository.java.read: This Error catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 988,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 221,
+      "reason": "CleanupTerminalRepository.java.read: The finally performs one owned direct close; its nested cleanup throw is conditional on JdbcResourceFailures.replace priority, not unconditional replacement of every primary. Silencing a selected failure would falsely return success, whereas standard TWR would change the approved fixed-secondary/knownSQL priority. All early returns unwind the row scope then statement scope. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 989,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 225,
+      "reason": "CleanupTerminalRepository.java.read: This RuntimeException cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 990,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 225,
+      "reason": "CleanupTerminalRepository.java.read: This Error cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 991,
+      "rule": "CloseResource",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "references",
+        "variable": "query"
+      },
+      "line": 281,
+      "reason": "CleanupTerminalRepository.java.references: query is present(original), an identity alias inside the immediate protected resource scope. The acquired originals, including nullable acquisition failure paths, are directly closed in nested finally once, not the aliases as additional owners. All getters/projection/returns remain inside protection until ResultSet then Statement cleanup. A separate alias close would double-close the same owner. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 992,
+      "rule": "CloseResource",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "references",
+        "variable": "row"
+      },
+      "line": 289,
+      "reason": "CleanupTerminalRepository.java.references: row is present(original), an identity alias inside the immediate protected resource scope. The acquired originals, including nullable acquisition failure paths, are directly closed in nested finally once, not the aliases as additional owners. All getters/projection/returns remain inside protection until ResultSet then Statement cleanup. A separate alias close would double-close the same owner. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 993,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "references"
+      },
+      "line": 311,
+      "reason": "CleanupTerminalRepository.java.references: This RuntimeException catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 994,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "references"
+      },
+      "line": 311,
+      "reason": "CleanupTerminalRepository.java.references: This Error catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 995,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "references"
+      },
+      "line": 314,
+      "reason": "CleanupTerminalRepository.java.references: The finally performs one owned direct close; its nested cleanup throw is conditional on JdbcResourceFailures.replace priority, not unconditional replacement of every primary. Silencing a selected failure would falsely return success, whereas standard TWR would change the approved fixed-secondary/knownSQL priority. All early returns unwind the row scope then statement scope. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 996,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "references"
+      },
+      "line": 318,
+      "reason": "CleanupTerminalRepository.java.references: This RuntimeException cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 997,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "references"
+      },
+      "line": 318,
+      "reason": "CleanupTerminalRepository.java.references: This Error cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 998,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "references"
+      },
+      "line": 323,
+      "reason": "CleanupTerminalRepository.java.references: This RuntimeException catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 999,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "references"
+      },
+      "line": 323,
+      "reason": "CleanupTerminalRepository.java.references: This Error catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1000,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "references"
+      },
+      "line": 326,
+      "reason": "CleanupTerminalRepository.java.references: The finally performs one owned direct close; its nested cleanup throw is conditional on JdbcResourceFailures.replace priority, not unconditional replacement of every primary. Silencing a selected failure would falsely return success, whereas standard TWR would change the approved fixed-secondary/knownSQL priority. All early returns unwind the row scope then statement scope. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1001,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "references"
+      },
+      "line": 330,
+      "reason": "CleanupTerminalRepository.java.references: This RuntimeException cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1002,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "references"
+      },
+      "line": 330,
+      "reason": "CleanupTerminalRepository.java.references: This Error cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1003,
+      "rule": "CloseResource",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "progressSeal",
+        "variable": "checked"
+      },
+      "line": 367,
+      "reason": "CleanupTerminalRepository.java.progressSeal: checked is present(original), an identity alias inside the immediate protected resource scope. The acquired originals, including nullable acquisition failure paths, are directly closed in nested finally once, not the aliases as additional owners. All getters/projection/returns remain inside protection until ResultSet then Statement cleanup. A separate alias close would double-close the same owner. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1004,
+      "rule": "CloseResource",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "progressSeal",
+        "variable": "row"
+      },
+      "line": 376,
+      "reason": "CleanupTerminalRepository.java.progressSeal: row is present(original), an identity alias inside the immediate protected resource scope. The acquired originals, including nullable acquisition failure paths, are directly closed in nested finally once, not the aliases as additional owners. All getters/projection/returns remain inside protection until ResultSet then Statement cleanup. A separate alias close would double-close the same owner. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1005,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "progressSeal"
+      },
+      "line": 381,
+      "reason": "CleanupTerminalRepository.java.progressSeal: This RuntimeException catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1006,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "progressSeal"
+      },
+      "line": 381,
+      "reason": "CleanupTerminalRepository.java.progressSeal: This Error catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1007,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "progressSeal"
+      },
+      "line": 384,
+      "reason": "CleanupTerminalRepository.java.progressSeal: The finally performs one owned direct close; its nested cleanup throw is conditional on JdbcResourceFailures.replace priority, not unconditional replacement of every primary. Silencing a selected failure would falsely return success, whereas standard TWR would change the approved fixed-secondary/knownSQL priority. All early returns unwind the row scope then statement scope. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1008,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "progressSeal"
+      },
+      "line": 388,
+      "reason": "CleanupTerminalRepository.java.progressSeal: This RuntimeException cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1009,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "progressSeal"
+      },
+      "line": 388,
+      "reason": "CleanupTerminalRepository.java.progressSeal: This Error cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1010,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "progressSeal"
+      },
+      "line": 392,
+      "reason": "CleanupTerminalRepository.java.progressSeal: This RuntimeException catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1011,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "progressSeal"
+      },
+      "line": 392,
+      "reason": "CleanupTerminalRepository.java.progressSeal: This Error catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1012,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "progressSeal"
+      },
+      "line": 395,
+      "reason": "CleanupTerminalRepository.java.progressSeal: The finally performs one owned direct close; its nested cleanup throw is conditional on JdbcResourceFailures.replace priority, not unconditional replacement of every primary. Silencing a selected failure would falsely return success, whereas standard TWR would change the approved fixed-secondary/knownSQL priority. All early returns unwind the row scope then statement scope. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1013,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "progressSeal"
+      },
+      "line": 399,
+      "reason": "CleanupTerminalRepository.java.progressSeal: This RuntimeException cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1014,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "progressSeal"
+      },
+      "line": 399,
+      "reason": "CleanupTerminalRepository.java.progressSeal: This Error cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1015,
+      "rule": "CloseResource",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "readRejected",
+        "variable": "query"
+      },
+      "line": 504,
+      "reason": "CleanupTerminalRepository.java.readRejected: query is present(original), an identity alias inside the immediate protected resource scope. The acquired originals, including nullable acquisition failure paths, are directly closed in nested finally once, not the aliases as additional owners. All getters/projection/returns remain inside protection until ResultSet then Statement cleanup. A separate alias close would double-close the same owner. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1016,
+      "rule": "CloseResource",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "readRejected",
+        "variable": "row"
+      },
+      "line": 511,
+      "reason": "CleanupTerminalRepository.java.readRejected: row is present(original), an identity alias inside the immediate protected resource scope. The acquired originals, including nullable acquisition failure paths, are directly closed in nested finally once, not the aliases as additional owners. All getters/projection/returns remain inside protection until ResultSet then Statement cleanup. A separate alias close would double-close the same owner. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1017,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "readRejected"
+      },
+      "line": 518,
+      "reason": "CleanupTerminalRepository.java.readRejected: This RuntimeException catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1018,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "readRejected"
+      },
+      "line": 518,
+      "reason": "CleanupTerminalRepository.java.readRejected: This Error catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1019,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "readRejected"
+      },
+      "line": 521,
+      "reason": "CleanupTerminalRepository.java.readRejected: The finally performs one owned direct close; its nested cleanup throw is conditional on JdbcResourceFailures.replace priority, not unconditional replacement of every primary. Silencing a selected failure would falsely return success, whereas standard TWR would change the approved fixed-secondary/knownSQL priority. All early returns unwind the row scope then statement scope. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1020,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "readRejected"
+      },
+      "line": 525,
+      "reason": "CleanupTerminalRepository.java.readRejected: This RuntimeException cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1021,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "readRejected"
+      },
+      "line": 525,
+      "reason": "CleanupTerminalRepository.java.readRejected: This Error cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1022,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "readRejected"
+      },
+      "line": 530,
+      "reason": "CleanupTerminalRepository.java.readRejected: This RuntimeException catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1023,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "readRejected"
+      },
+      "line": 530,
+      "reason": "CleanupTerminalRepository.java.readRejected: This Error catch records and rethrows the identical body failure before its original resource finally. Tracking is necessary so cleanup can retain an unknown primary instead of masking it with an incidental release failure. It does not normalize provider Runtime/NPE/Error or produce success. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1024,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "readRejected"
+      },
+      "line": 533,
+      "reason": "CleanupTerminalRepository.java.readRejected: The finally performs one owned direct close; its nested cleanup throw is conditional on JdbcResourceFailures.replace priority, not unconditional replacement of every primary. Silencing a selected failure would falsely return success, whereas standard TWR would change the approved fixed-secondary/knownSQL priority. All early returns unwind the row scope then statement scope. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1025,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "readRejected"
+      },
+      "line": 537,
+      "reason": "CleanupTerminalRepository.java.readRejected: This RuntimeException cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    },
+    {
+      "rawOrdinal": 1026,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "attributeValues": {
+        "method": "readRejected"
+      },
+      "line": 537,
+      "reason": "CleanupTerminalRepository.java.readRejected: This Error cleanup catch applies JdbcResourceFailures.replace after the single direct close. Original cleanup is selected only for no body primary or known SQL body plus unknown cleanup; otherwise the original unknown body is retained with a newly fixed BatchRepositoryException secondary. No second close/retry is issued and same Throwable is not added to itself. SS332:11 applies this local cleanup contract to terminal read/readRejected/references; progressSeal uses the same own-resource boundary. references also records checked IOException from its original-owner lookup and preserves it through cleanup to its declared checked boundary; it must not be relabeled as SQLException merely to simplify priority. All original-success/terminal/progress semantics remain dynamically unproven. This is source-only applicability of the exact raw occurrence, not acceptance of actual cleanup/DB/Root/ownership or previous-source results.",
+      "requiredDynamicPostconditions": [
+        "All twelve resource scopes: null/acquisition/getter/projection/close failure, reverse order exact same-object close once, unacquired close zero, early return still unwinds",
+        "SQL/Runtime/NPE/Error andreferences checkedIOException primary versus all cleanup classes, same/distinct throwable and fixed redacted secondary",
+        "Borrowed connection config/commit/rollback/close absent, SQL/terminal/progress/original-owner invariants andreal afterconditions separately tested; no dynamic execution by this review"
+      ]
+    }
+  ],
+  "sourceContexts": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "sha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "ranges": [
+        [
+          1,
+          184
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "sha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "ranges": [
+        [
+          1,
+          626
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "sha256": "f4cff9bb43cacfde5be699fd61d4e25526523d5ef5e478aa88dcbb8bdde6928a",
+      "ranges": [
+        [
+          1,
+          21
+        ]
+      ]
+    }
+  ],
+  "designReferences": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 11
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 21
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 23
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 25
+    }
+  ],
+  "deferred": [
+    {
+      "rawOrdinal": 1075,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1076,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1077,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1078,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1079,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1080,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1081,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    }
+  ]
+}
