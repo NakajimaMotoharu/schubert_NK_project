@@ -1,0 +1,48 @@
+{
+  "atJST": "2026-11-05T14:43:03.002838+09:00",
+  "groupId": "PGPT-20261105-LOGIN-AUDIT-JDBC-PORT",
+  "headBefore": "31460d1d2b147abba055b2679fe56c59cfefc13a",
+  "productionMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+  "primaryWbs": "WBS-P007-01",
+  "leafCostBinding": null,
+  "target": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditWriter.java",
+  "startEstimatePp": {
+    "low": 0.5,
+    "base": 2,
+    "high": 5
+  },
+  "capPp": 10,
+  "chargedToSV": false,
+  "classification": "PT_DEFAULT_INDEPENDENT_JDBC_INTERFACE_COMPONENT",
+  "review": "critical caller-owned audit, literal12-columnSQL/10parameters, NFC/control redaction, resultcode/action/level/outcome, ownstatement TWR; nocommit/rollback/connectionclose; unexpectedrowcount rejected",
+  "requirements": [
+    "NK-AUT-001",
+    "AUT001",
+    "MON004",
+    "UI226/252",
+    "SS314§12/351§3-4/332",
+    "PT-AUT-004"
+  ],
+  "fixture": "JDBC Connection/PreparedStatement JavaProxy only, independent literal bindings/JSONschema/values. Synthetic DTO success uses nonissued in-memory zeros context and zero UUID; no auth/session/key/secretIO/crypto/DB/Root/driver. No secret is printed or persisted. No calls to actual authentication, SessionService, pool or realnetwork. InetAddress.getByAddress literalbytes only; no DNS.",
+  "heldFour": "directdependency closure: LoginResult/AuthenticatedActor/Role/IssuedContext/AuthContextIdentity/AuthenticationContext pureconstructors, protocolResultCode, GsonJSON/JavaSQL interfaces. Does not call TemporaryInfrastructureException/WebStartupException/FingerprintKeyRing/ResponseSnapshotCodec. No rejectedV queryprojection sameoperation.",
+  "testsPlanned": 7,
+  "acceptance": "allwholeTestclass unique7, normalapiMain exactinput/jar/classCRC/singleexec/session allapplicablefourcounter100 for writer; heldfourrecordedprobes0; nullcallercontract negatives and concurrent separateborrowedconnections. Does not prove actual DBtransaction/redactiondownstream/AuthService/Contextissue/WBS orV.",
+  "mainChange": "none planned, preregister actualimplementationfault beforefix",
+  "reused": "normal6MaincompilePG18642/6SBPG18648 exactpins; existing real AuthenticationServiceTest SQLoracle onlyreference, notselected/compiled/replayed",
+  "endDependencies": "parent actualLogin/DB/session/auth/HOLD notreleased; no newV orunit cost extrapolation",
+  "quotaBefore": {
+    "primary": {
+      "usedPercent": 14,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 14,
+    "remainingPercent": 86,
+    "windowDurationMins": 10080,
+    "resetsAt": 1794395640,
+    "observedByJST": "2026-11-05 14:39:26 JST",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "3e82a3f012ce63245eb0c3e0804ea5d773245ff98a7a64939456c0b0a81fbc0c"
+  }
+}
