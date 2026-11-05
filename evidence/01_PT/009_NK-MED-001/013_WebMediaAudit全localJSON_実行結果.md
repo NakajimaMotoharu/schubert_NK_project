@@ -1,0 +1,12 @@
+# WebMediaAudit全localJSON 実行結果
+
+2026-11-06T02:44:44.715235+09:00 / dev-foundation / source 6c31ab644418cab3296a16c9d6613c60f6da01e9 / CoreMain 827983a97a9c3bf36b7671985a7924417ff0e8f7・Main不変更。PG19718全8初回真正OS終了0/FESaborted0、独立post0。line/method/class/branch=[56, 5, 2, 36]は同一exec/sessionの全100、normal全physical2/CRC/全@Test/HELD四0、合成・manual除外0。canonical evidence/01_PT/009_NK-MED-001/evidence/PG19718-web-media-audit-eight-v1/manifest.json / SHA256 4bae520aeee9da30ae15eaaecd0d49489226c46c8e05c6cdde130c14949c8476。原argv/OS終端/XMLhash/safeXML/coverage/exec/環境/補足scope/hashは同evidenceとdocuments/400_PGPT/470_PMO/500_SV計画整備_20261104/870_WebMediaAudit全八PT・予実・残依存.json、Test IDはspecとsafeXMLへ一意対応。
+
+19630 normal6Main827/NullAway and19632 sixSB0 reused afterallcurrent Main/POM/JAR hashes exact, no rebuild. 19714 testcompile0/19716 raw3 individually ownJUnitworker nonapplicable/applicable0-CS0-parser0-suppression0; ACTOR/actor alias actuallyfixed(BUG2309/YKT2054), sourcepoint6c31/oldraw4 exactTest-driver history preserved. Horizontal prior4Test raw/source reviewed unchanged noalias, currentMedia0alias; logger atomiccall2 assertion actual0. PG19718 all8first0/FESaborted0;56L5M2C36B100/normal2physical/oneexec-session/CRC/all@Test/heldfour0,19720 strict independentpost0. All present execclass IDs compared to normalclassinfo; enumzero branches N/A, no manualexclusions.
+
+試験scope: Complete existing local JSON emitter only: closed60normal inputmatrix cells within8methods, status/Failure/type/disposition, byte0/full/N12max/invalid, secretmetadataabsence, null/version/clock/logger failures andown2worker atomiccall2/CopyOnWrite state. No media file/read/hash verification/HTTP/auth/context/key/JMS/Root/VM or real session/permission operation.
+未受入: Actualmedia delivery/bytes/sourcebinding/browser/HTTP/Root/VM/native/CHR/global451/IT-ST and parentWBS/firstV completion. PriorSecurityAudit6 are oldrun reuse only andnot new8, no globalexecunion.
+
+技術成分45、原80技術16/未結合64、原282交差27/未結合255。currentSource/normalCRC・元6b同path/hashを照合し旧execや旧成功の合算0。globalregistry/新WBS受入0/正式1964PT-53scope/歴史17-190/工数null/同第一V HOLD維持。
+
+原開始見積{'low': 0.75, 'base': 2, 'high': 5}・cap10継続、共有22→22=0ppはPGPT-20261008-3906へ一度、ordinary16/all23/S7残3。共有報告0を無償とせず、専有N-Tnull。次: publish/push Mediaaudit8; inspect next genuinely unqualified business persistence/audit source and all dependency/followup conditions, reuse knownwhole proofs andkeep heldgraphs separate. OrdinaryPGPT continues.。
