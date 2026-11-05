@@ -1,0 +1,543 @@
+{
+  "mainSource": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+  "slot": "pg19860-jdbc-close-context-v1",
+  "publicName": "PG19860-jdbc-close-context-v1",
+  "priorManifests": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19752-f03-finite-source-context-corrected-v1/manifest.json",
+      "sha256": "d4d8274a68727f8bb278ff89140b8778fa5293011263f4e75c8d195e8fe4cf14"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19760-f03-identity-context-v1/manifest.json",
+      "sha256": "40e501ddd751e8e7849721e7a063d69062d49ad3ba0e1e3429c345b5245723bf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19770-f03-map-monitor-context-v1/manifest.json",
+      "sha256": "6a272d4a9ecad5c26ee13e3af9765f766f9fcd2936ec1e0b39bf030a8778bae4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19830-resource-type-context-v1/manifest.json",
+      "sha256": "6c3055b08e58ec40e023bbf70dd56d667dc1ea50357e1c3d1703aee00534e8a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19840-resource-generic-catch-context-v1/manifest.json",
+      "sha256": "dcfaa6104f6bdd8f57093a235a56f04000d83702b03db55c78e45528fcbebf21"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19850-visibility-map-context-v1/manifest.json",
+      "sha256": "291d806a9539c8c6e331b5d621aaf872356cc8700dcf1b461f219269c15b3c11"
+    }
+  ],
+  "priorCount": 337,
+  "newCount": 23,
+  "decisions": [
+    {
+      "rawOrdinal": 385,
+      "rule": "CloseResource",
+      "sourceSha256": "e337ab556b1e6b7033626ab57740c11f4b13e35ae446a582f20f41f344f66b76",
+      "variable": "statement",
+      "line": 39,
+      "reason": "read creates nullable statement, immediately rejects only null, then try(statement); executeQuery rows are similarly tested then try(rows). All row/statement uses and failure exits are lexically protected, with rows before statement close, and Snapshot is constructed after both scopes. The connection remains borrowed; no successful return can bypass TWR. Null-result rejection still unwinds the already-open statement.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 386,
+      "rule": "CloseResource",
+      "sourceSha256": "e337ab556b1e6b7033626ab57740c11f4b13e35ae446a582f20f41f344f66b76",
+      "variable": "rows",
+      "line": 43,
+      "reason": "read creates nullable statement, immediately rejects only null, then try(statement); executeQuery rows are similarly tested then try(rows). All row/statement uses and failure exits are lexically protected, with rows before statement close, and Snapshot is constructed after both scopes. The connection remains borrowed; no successful return can bypass TWR. Null-result rejection still unwinds the already-open statement.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 387,
+      "rule": "CloseResource",
+      "sourceSha256": "90b0d76c02ba974dc22034fe8a13003fb93298105b5f3b3e53f1f90d99544f16",
+      "variable": "statement",
+      "line": 47,
+      "reason": "read holds statement in Java9 existing-variable TWR and nests try(rows) around every result getter/validation. Only a null-result check separates acquisition and its owning scope; if rows is null there is no rows owner, and statement still unwinds. All counts/ages return construction occurs after both scopes. The detector is missing existing-variable TWR ownership, not finding an unclosed newly-created owner.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 388,
+      "rule": "CloseResource",
+      "sourceSha256": "90b0d76c02ba974dc22034fe8a13003fb93298105b5f3b3e53f1f90d99544f16",
+      "variable": "rows",
+      "line": 51,
+      "reason": "read holds statement in Java9 existing-variable TWR and nests try(rows) around every result getter/validation. Only a null-result check separates acquisition and its owning scope; if rows is null there is no rows owner, and statement still unwinds. All counts/ages return construction occurs after both scopes. The detector is missing existing-variable TWR ownership, not finding an unclosed newly-created owner.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 423,
+      "rule": "CloseResource",
+      "sourceSha256": "f14d52b486f8e263ba67f8c08ddb0e37c2aa2772b28f8e4e61f2717f27d4ab74",
+      "variable": "checkedStatement",
+      "line": 75,
+      "reason": "scalar owns statement and row in nested TWR declarations. present returns the identical nonnull argument; checkedStatement/checkedRow are aliases of those already-owned resources, not separate acquisitions. Their validation is inside the original scope, so null/SQL failure also unwinds the outer statement. Moving aliases into another TWR would close the same owner twice. No actual advisory-lock handoff is executed or certified.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 424,
+      "rule": "CloseResource",
+      "sourceSha256": "f14d52b486f8e263ba67f8c08ddb0e37c2aa2772b28f8e4e61f2717f27d4ab74",
+      "variable": "checkedRow",
+      "line": 78,
+      "reason": "scalar owns statement and row in nested TWR declarations. present returns the identical nonnull argument; checkedStatement/checkedRow are aliases of those already-owned resources, not separate acquisitions. Their validation is inside the original scope, so null/SQL failure also unwinds the outer statement. Moving aliases into another TWR would close the same owner twice. No actual advisory-lock handoff is executed or certified.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 452,
+      "rule": "CloseResource",
+      "sourceSha256": "93e77b1a49c293d53683628f805b1a0047803ce6a2ad101ec27be4142b4a83e6",
+      "variable": "checked",
+      "line": 53,
+      "reason": "bind owns statement and rows in nested TWR declarations before introducing checked/row aliases via Objects.requireNonNull. These nonnull aliases are identical references, not independent acquired resources. All timeout/result checks stay in those scopes; an extra TWR on aliases would duplicate close. Borrowed connection and owner authorization remain untouched and dynamically unproven.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 453,
+      "rule": "CloseResource",
+      "sourceSha256": "93e77b1a49c293d53683628f805b1a0047803ce6a2ad101ec27be4142b4a83e6",
+      "variable": "row",
+      "line": 57,
+      "reason": "bind owns statement and rows in nested TWR declarations before introducing checked/row aliases via Objects.requireNonNull. These nonnull aliases are identical references, not independent acquired resources. All timeout/result checks stay in those scopes; an extra TWR on aliases would duplicate close. Borrowed connection and owner authorization remain untouched and dynamically unproven.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 870,
+      "rule": "CloseResource",
+      "sourceSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "variable": "query",
+      "line": 130,
+      "reason": "inspect acquires statement then immediately protects it with primary tracking/typed try/finally; query=present(statement) is the same resource. rows are acquired inside that outer scope and protected immediately by their own typed try/finally; row=present(rows) is an alias. Nonnull originals are directly closed once, row before statement, with JdbcResourceFailures used only for precedence. Success returns only after both finally blocks and run guards. Source proof does not certify DB/Backup completion.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 871,
+      "rule": "CloseResource",
+      "sourceSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "variable": "row",
+      "line": 137,
+      "reason": "inspect acquires statement then immediately protects it with primary tracking/typed try/finally; query=present(statement) is the same resource. rows are acquired inside that outer scope and protected immediately by their own typed try/finally; row=present(rows) is an alias. Nonnull originals are directly closed once, row before statement, with JdbcResourceFailures used only for precedence. Success returns only after both finally blocks and run guards. Source proof does not certify DB/Backup completion.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 967,
+      "rule": "CloseResource",
+      "sourceSha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "variable": "query",
+      "line": 38,
+      "reason": "execute has outer statement and nested rows ownership with direct typed finally close. query/row are nonnull aliases of those originals. Each finally tests the original for null, closes it once, and delegates only competing-failure precedence to JdbcResourceFailures; connection is borrowed. Parsing/return result cannot bypass either finally, including provider Runtime/Error and invalid projections. It would change the approved SQL/unknown contract to replace this mechanically with ordinary TWR.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 968,
+      "rule": "CloseResource",
+      "sourceSha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "variable": "row",
+      "line": 50,
+      "reason": "execute has outer statement and nested rows ownership with direct typed finally close. query/row are nonnull aliases of those originals. Each finally tests the original for null, closes it once, and delegates only competing-failure precedence to JdbcResourceFailures; connection is borrowed. Parsing/return result cannot bypass either finally, including provider Runtime/Error and invalid projections. It would change the approved SQL/unknown contract to replace this mechanically with ordinary TWR.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1029,
+      "rule": "CloseResource",
+      "sourceSha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "variable": "query",
+      "line": 261,
+      "reason": "read immediately protects acquired statement and rows in typed try/finally. query/values are aliases; empty and present early returns both execute inner rows.close then outer statement.close. JdbcResourceFailures preserves SS332 SSC310 priority with fixed secondary and unknown identity. Null acquisition does not invent a resource to close. No actual successful retained audit/DB/Backup or native state follows from this review.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1030,
+      "rule": "CloseResource",
+      "sourceSha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "variable": "values",
+      "line": 267,
+      "reason": "read immediately protects acquired statement and rows in typed try/finally. query/values are aliases; empty and present early returns both execute inner rows.close then outer statement.close. JdbcResourceFailures preserves SS332 SSC310 priority with fixed secondary and unknown identity. Null acquisition does not invent a resource to close. No actual successful retained audit/DB/Backup or native state follows from this review.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1044,
+      "rule": "CloseResource",
+      "sourceSha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "variable": "checked",
+      "line": 39,
+      "reason": "read protects original statement and row with nested primary-aware finally scopes. checked/values are present() identity aliases used solely inside these scopes. Each original nonnull resource is directly closed once in reverse order; unknown body/cleanup priority is delegated to the non-owning JdbcResourceFailures helper. The immutable result is returned only after close and interrupt recheck; borrowed connection remains outside ownership.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1045,
+      "rule": "CloseResource",
+      "sourceSha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "variable": "values",
+      "line": 46,
+      "reason": "read protects original statement and row with nested primary-aware finally scopes. checked/values are present() identity aliases used solely inside these scopes. Each original nonnull resource is directly closed once in reverse order; unknown body/cleanup priority is delegated to the non-owning JdbcResourceFailures helper. The immutable result is returned only after close and interrupt recheck; borrowed connection remains outside ownership.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1089,
+      "rule": "CloseResource",
+      "sourceSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "variable": "checked",
+      "line": 39,
+      "reason": "read protects statement and its result row immediately in nested typed try/finally; checked/values are identity aliases from present(). Null/invalid projection/getter Runtime/Error all unwind the same originals in reverse order. Direct close is performed by the repository, while JdbcResourceFailures decides exception precedence only. Final result publication occurs after both cleanup blocks and interrupt check, with no borrowed connection close/transaction action.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1090,
+      "rule": "CloseResource",
+      "sourceSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "variable": "values",
+      "line": 46,
+      "reason": "read protects statement and its result row immediately in nested typed try/finally; checked/values are identity aliases from present(). Null/invalid projection/getter Runtime/Error all unwind the same originals in reverse order. Direct close is performed by the repository, while JdbcResourceFailures decides exception precedence only. Final result publication occurs after both cleanup blocks and interrupt check, with no borrowed connection close/transaction action.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1105,
+      "rule": "CloseResource",
+      "sourceSha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "variable": "query",
+      "line": 87,
+      "reason": "inspect protects the original statement and rows using nested typed try/finally; query/values are required() identity aliases. Every expected-row comparison and observed-row collection occurs inside these protected scopes. Nonnull original rows and statement close once in reverse order through JdbcAdmissionFailures precedence, and List.copyOf(observed) is returned afterwards. Actual schema compatibility/provider cleanup is a separate unperformed dynamic condition.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1106,
+      "rule": "CloseResource",
+      "sourceSha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "variable": "values",
+      "line": 92,
+      "reason": "inspect protects the original statement and rows using nested typed try/finally; query/values are required() identity aliases. Every expected-row comparison and observed-row collection occurs inside these protected scopes. Nonnull original rows and statement close once in reverse order through JdbcAdmissionFailures precedence, and List.copyOf(observed) is returned afterwards. Actual schema compatibility/provider cleanup is a separate unperformed dynamic condition.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1118,
+      "rule": "CloseResource",
+      "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "variable": "values",
+      "line": 52,
+      "reason": "verify protects statement and rows with immediate nested typed try/finally. values=required(rows) aliases the original result set and all role/database/recovery checks remain within that scope. Both direct closes happen before normal method completion; JdbcAdmissionFailures owns no resources and merely selects priority. Borrowed Connection stays caller-owned. This finding does not establish actual service authentication, DB permissions or cleanup completion.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1423,
+      "rule": "CloseResource",
+      "sourceSha256": "8eead2d8cdf54cec5ce702117a34074c7d55b5ea454cfc8f001f770eae09d5c5",
+      "variable": "statement",
+      "line": 38,
+      "reason": "read uses try(statement) then try(rows) after nullable acquisition boundary checks. All getter/validation failures unwind rows then statement and observation construction is outside both scopes; null rows throws while statement remains protected. Borrowed Connection is never closed or committed. Classification covers CloseResource only and preserves the actual Java TWR exception behavior.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 1424,
+      "rule": "CloseResource",
+      "sourceSha256": "8eead2d8cdf54cec5ce702117a34074c7d55b5ea454cfc8f001f770eae09d5c5",
+      "variable": "rows",
+      "line": 42,
+      "reason": "read uses try(statement) then try(rows) after nullable acquisition boundary checks. All getter/validation failures unwind rows then statement and observation construction is outside both scopes; null rows throws while statement remains protected. Borrowed Connection is never closed or committed. Classification covers CloseResource only and preserves the actual Java TWR exception behavior.",
+      "requiredDynamicPostconditions": [
+        "Acquisition-null/failure, all SQL/provider Runtime/NPE/Error points and normal/early returns preserve row-before-statement close count one; unacquired close zero",
+        "Body/close same and distinct Throwable cases follow this exact class contract (Java TWR versus fixed-secondary helper), never mix the two",
+        "No borrowed Connection close/config/commit/rollback; actual DB SQL/role/lock/runtime qualification remains separate and unperformed"
+      ]
+    }
+  ],
+  "sourceContexts": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/AsyncJobCountRepository.java",
+      "sha256": "e337ab556b1e6b7033626ab57740c11f4b13e35ae446a582f20f41f344f66b76",
+      "ranges": [
+        [
+          1,
+          69
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+      "sha256": "90b0d76c02ba974dc22034fe8a13003fb93298105b5f3b3e53f1f90d99544f16",
+      "ranges": [
+        [
+          1,
+          86
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java",
+      "sha256": "f14d52b486f8e263ba67f8c08ddb0e37c2aa2772b28f8e4e61f2717f27d4ab74",
+      "ranges": [
+        [
+          1,
+          104
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.java",
+      "sha256": "93e77b1a49c293d53683628f805b1a0047803ce6a2ad101ec27be4142b4a83e6",
+      "ranges": [
+        [
+          1,
+          64
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "sha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "ranges": [
+        [
+          1,
+          256
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "sha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "ranges": [
+        [
+          1,
+          120
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "sha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "ranges": [
+        [
+          1,
+          459
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "sha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "sha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "ranges": [
+        [
+          1,
+          96
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "sha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "ranges": [
+        [
+          1,
+          152
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "sha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "ranges": [
+        [
+          1,
+          97
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepository.java",
+      "sha256": "8eead2d8cdf54cec5ce702117a34074c7d55b5ea454cfc8f001f770eae09d5c5",
+      "ranges": [
+        [
+          1,
+          75
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "sha256": "f4cff9bb43cacfde5be699fd61d4e25526523d5ef5e478aa88dcbb8bdde6928a",
+      "ranges": [
+        [
+          1,
+          21
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+      "sha256": "bf179887c2496723d5ddb4ee0be02c5e599ecba781f5b8338367bb21648627a5",
+      "ranges": [
+        [
+          1,
+          24
+        ]
+      ]
+    }
+  ],
+  "designReferences": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 5
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 7
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 19
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 25
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "line": 19
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "line": 81
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "line": 83
+    }
+  ],
+  "deferred": [
+    {
+      "rawOrdinal": 1075,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1076,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1077,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1078,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1079,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1080,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1081,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    }
+  ]
+}
