@@ -1,0 +1,136 @@
+{
+  "atJST": "2026-11-06T02:19:28.973033+09:00",
+  "source": "b76880ede10ea9bb9441e75acce9e703ad567c37",
+  "productionCoreMain": "827983a97a9c3bf36b7671985a7924417ff0e8f7",
+  "mainChanged": false,
+  "run": "PG19688",
+  "tests": 8,
+  "actualExit": 0,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "aborted": 0,
+  "coverage": {
+    "LINE": {
+      "covered": 102,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 8,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 4,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 50,
+      "missed": 0
+    }
+  },
+  "physical": 4,
+  "post": "pg19690-question-critical-audit-independent-post-v1",
+  "postActualExit": 0,
+  "canonicalManifest": {
+    "path": "evidence/01_PT/014_NK-QRY-001/evidence/PG19688-question-critical-audit-eight-v1/manifest.json",
+    "sha256": "e78c3d40e4592f7375d3d77332df0a21ffd17273c16338c43fd77fcbc0747f0a"
+  },
+  "supplementalPins": {
+    "environment.safe.json": "62619a0cc58bd332ff6b21ea9c99f32603b188ad1b78de743a2e71faf0462195",
+    "scope.safe.json": "c4e86eccaf4dce01548caf681fd891da12510a986605cb2735ec0abe92d2453c"
+  },
+  "producer": {
+    "source": "b76880ede10ea9bb9441e75acce9e703ad567c37",
+    "path": "evidence/01_PT/014_NK-QRY-001/input/001_owned_question_audit_unit.py",
+    "sha256": "05c0a5f0be7260c1268fe7a78d91f0b6db8abc5ecc653ab51b2796bedd3c4ff1"
+  },
+  "spec": "evidence/01_PT/014_NK-QRY-001/012_質問通知監査二Source全JDBCport_単体テスト仕様.md",
+  "testIdMethods": [
+    [
+      "QRY-AUDIT-PORT001",
+      "port001EveryQueryEventBothScopesAndActorStatesMatchesIndependentTable"
+    ],
+    [
+      "QRY-AUDIT-PORT002",
+      "port002EveryMutationEventBothScopesAndActorStatesMatchesIndependentTable"
+    ],
+    [
+      "QRY-AUDIT-PORT003",
+      "port003BothWritersSanitizeNfcUsernameAndProjectNoSensitiveFields"
+    ],
+    [
+      "QRY-AUDIT-PORT004",
+      "port004EveryRequiredInputRejectsNullWithoutOwningBorrowedConnection"
+    ],
+    [
+      "QRY-AUDIT-PORT005",
+      "port005OnlyOneAffectedRowIsSuccessfulCriticalAudit"
+    ],
+    [
+      "QRY-AUDIT-PORT006",
+      "port006AllSqlStagesAndTimeOverflowPreserveFailureAndCloseOwnedOnly"
+    ],
+    [
+      "QRY-AUDIT-PORT007",
+      "port007PrimaryCloseAndUnknownFailuresRemainFailures"
+    ],
+    [
+      "QRY-AUDIT-PORT008",
+      "port008IndependentWorkersShareNoMutableJdbcOrJson"
+    ]
+  ],
+  "verification": "PG19680 compile0/19682 raw7 individually nonapplicable(applicable0-CS0-parser0-suppression0); all original Main/POM/JAR inputs still equal normal19630 sixMain827/NullAway and19632 sixSB0, no rebuild. PG19688 all8first0/FESaborted0, 102L8M4C50B100 whole2source/normal4physical/allpresentCRC/oneexecsession/full@Test mapping/heldfour0. PG19690 independentpost0. Source original6b exactsamebytes; no oldexecunion. Group includes preceding sharedgap1 (3900 quotaAfter21→3901 quotaBefore22) only once inordinary16/all23; notexclusive, existinggapledger and864 preserve endpoints, currentselected group incremental delta separate and cap10 includesgap1.",
+  "scope": "Two original critical Question/Notification audit writers, all closed query/mutation denial/replay/capacity events and target types, no actual business query/cancel/delete/auth/DB/JMS/keys/HMAC/Root/VM. InputDTO uses existingcodec only; expected SQL/table/scalars absentfields/times/resource operations authored independently. Own2 workers and perworker JDBC maps; no shared mutable JSON.",
+  "unacceptedExternalCriteria": "Actual owner/auth/Inbox/business mutation/DB transaction andSQL validity/locking, runtime/Root/VM/native/CHR/global451/IT-ST or parentWBS completion/firstV; original seed whole2qualifications are scoped technical subproofs only.",
+  "original6bMainSameHash": true,
+  "currentTechnicalReusableComponents": 43,
+  "originalPartial80TechnicallyWhole": 15,
+  "originalPartialUnbound": 65,
+  "originalUnregistered282ProofIntersection": 26,
+  "originalUnregisteredUnbound": 256,
+  "globalRegistryUpdated": false,
+  "newIndividualWbsAcceptance": 0,
+  "formalUpdated": false,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "historicalAccepted": "17/190",
+  "effortRate": null,
+  "firstV": "SAME_FIRST_HOLD_NOT_REPLACED",
+  "quotaBefore": {
+    "primary": {
+      "usedPercent": 22,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 22,
+    "remainingPercent": 78,
+    "observedAtUTC": "2026-11-05T17:09:52Z",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "890f48c5f7a30474cc90dcc1c65abfdc3943cd0be596ffa43258d65e7b5b28af"
+  },
+  "quotaAfter": {
+    "primary": {
+      "usedPercent": 22,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 22,
+    "remainingPercent": 78,
+    "observedAtUTC": "2026-11-05T17:18:12Z",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "70ff032012d11f5d8f0c8e9a635f0ef6eb1c486129d383a089e437c53b0cecc4"
+  },
+  "sharedObservedPp": 0,
+  "actualAllocatedPp": null,
+  "tokenN": null,
+  "tokenT": null,
+  "ordinarySharedObservedPp": 16,
+  "allRecordedSharedPp": 23,
+  "SObservedPp": 7,
+  "SRemainingCapPp": 3,
+  "mayFinishTurn": false,
+  "next": "publish/push twoSource8; assess existing successful Security/Media audit proof and exactnormalclass/source/oracle reuse before any future Test; continue authorized ordinary PGPT and sameS only if bounded incrementaltrace needed, no oldsuccess replay/newpilot/holdrelease.",
+  "metadataCloserSha256": "1a27af71319e51370b020e81e0f0bcdf243e0560171496cb21cce742483b8fea"
+}

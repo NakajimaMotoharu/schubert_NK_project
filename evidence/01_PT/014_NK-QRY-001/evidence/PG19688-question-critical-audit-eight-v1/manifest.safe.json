@@ -1,0 +1,204 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "coreSource": "827983a97a9c3bf36b7671985a7924417ff0e8f7",
+    "source": "b76880ede10ea9bb9441e75acce9e703ad567c37",
+    "session": "PG19688-QUESTION-CRITICAL-AUDIT-8",
+    "compileManifestSha256": "1c4826c8b385fe50ea2b01427403097b058b18faedfe7a1a2f8219ffdc532443",
+    "mainCompileManifestSha256": "9f284d8fa50a137f739a5a3c65bb4f6ae62b706741853664f19c7817ee75fb3c",
+    "inputHashes": {
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryAuditWriter.java": "f07e45a7a349f594ec6bd0276e98604e2aab91476bc26299a6c50ccff7a48620",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationAuditWriter.java": "9b36eb173f1c64adb26515f0f6b84f19d454e704f893a3bef2e6661188e57b0c",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest.java": "a0ae26af387cc48d71f28c47b89866a2c50c192b965838321860a773ea91daaf"
+    },
+    "classHashes": {
+      "dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest$Jdbc.class": "87af58b307d51ca00e834785e1b5a132e4817c4d1f352656d3bcf8018e248e6d",
+      "dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest.class": "902625494da15983841063977f3da52ea9f0aa95168f67688190518969f32f3e",
+      "dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest$MutationCase.class": "e4851ee6927bfc1939a749818f82a41d5c3fae5ee52d4c36c7f45e0567c09045",
+      "dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest$QueryCase.class": "517fff5961ab5a925a8766e4a1c135b474f27e50500192009c011d378ce5ff95"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "7aac6055586cf29e5d4e1a054c28503a6019a7d8af698eb295917cf5927dc39b",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar": "f7f68d5c375349743894d3c7577d3b5493fdbe1d2b94d338601ad1117695aebd",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar": "4667724877f1d37a689202da191e23efa7657c62eef93ccdac406eccfe5cdd0a"
+    },
+    "tools": {
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1"
+    },
+    "selectedClasses": [
+      "dev.codex.schubert.nk.api.application.question.QuestionCriticalAuditPortTest"
+    ],
+    "expectedTests": 8,
+    "onlyMemoryCallbackFixtures": true,
+    "actualNativeFsDbVmNetworkActions": 0,
+    "resourceScopeNote": "No actual business backend operations; SDK/JVM activity reviewed separately",
+    "startUTC": "2026-11-05T17:16:20.441483+00:00",
+    "driverSha256": "05c0a5f0be7260c1268fe7a78d91f0b6db8abc5ecc653ab51b2796bedd3c4ff1",
+    "configHash": "913dbe468a6f0071833f614ba5e020cc5fcc430b5a9331483a269aee7895179b"
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-05T17:16:20.441729+00:00",
+      "endUTC": "2026-11-05T17:16:21.962277+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg19688-question-critical-audit-eight-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.language=ja",
+        "-Duser.country=JP",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg19688-question-critical-audit-eight-unit-v1/jacoco.exec,sessionid=PG19688-QUESTION-CRITICAL-AUDIT-8,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg19688-question-critical-audit-eight-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19680-question-critical-audit-compile-v1/test-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19688-question-critical-audit-eight-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.api.application.question.QuestionCriticalAuditPortTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "ae55e566729bbf6fe13161b4b74de434508c5b74ca1aab5900f0b9e84dba4442",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-05T17:16:21.965846+00:00",
+      "endUTC": "2026-11-05T17:16:22.130658+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19688-question-critical-audit-eight-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19688-question-critical-audit-eight-unit-v1/component",
+        "--sourcefiles",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19688-question-critical-audit-eight-unit-v1/coverage.xml",
+        "--csv",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19688-question-critical-audit-eight-unit-v1/coverage.csv"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "7326714ea2782139b055edaddd053fdb96cc56561b63ee310f30d8047e5beabd",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-05T17:16:22.130978+00:00",
+      "endUTC": "2026-11-05T17:16:22.295513+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19688-question-critical-audit-eight-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "3387e3828986d668e142e930538cd26a27295f6a569d8e1b592abf59a5e708f1",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-05T17:16:22.295905+00:00",
+      "endUTC": "2026-11-05T17:16:22.410382+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19688-question-critical-audit-eight-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "9ec240a8cf0a99303f82573d1f4cf55499f6a78a9416945791fb26200b1a2758",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionCriticalAuditPortTest",
+      "name": "port006AllSqlStagesAndTimeOverflowPreserveFailureAndCloseOwnedOnly()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionCriticalAuditPortTest",
+      "name": "port005OnlyOneAffectedRowIsSuccessfulCriticalAudit()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionCriticalAuditPortTest",
+      "name": "port002EveryMutationEventBothScopesAndActorStatesMatchesIndependentTable()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionCriticalAuditPortTest",
+      "name": "port004EveryRequiredInputRejectsNullWithoutOwningBorrowedConnection()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionCriticalAuditPortTest",
+      "name": "port007PrimaryCloseAndUnknownFailuresRemainFailures()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionCriticalAuditPortTest",
+      "name": "port003BothWritersSanitizeNfcUsernameAndProjectNoSensitiveFields()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionCriticalAuditPortTest",
+      "name": "port008IndependentWorkersShareNoMutableJdbcOrJson()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionCriticalAuditPortTest",
+      "name": "port001EveryQueryEventBothScopesAndActorStatesMatchesIndependentTable()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 8,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/api/application/question/QuestionQueryAuditWriter": "f6a96440dbf9cfcee559d75a60067c646dc384b69176a4f5e47658ef17aa58f3",
+    "dev/codex/schubert/nk/api/application/question/QuestionMutationAuditWriter$Event": "e69bf4e7c05ce85e8630a99fed55083e6fa18ec76aaf7f8a1be5ba953a321bdb",
+    "dev/codex/schubert/nk/api/application/question/QuestionMutationAuditWriter": "06008695b2f3e640f7cf6b3f960d2ead192a9ab899a95e36147c5f14f9f8b007",
+    "dev/codex/schubert/nk/api/application/question/QuestionQueryAuditWriter$Event": "2e3e8bbee4ac76cac353b1fa9b78e2580785ab358ed0d68be445bc3be51e669c"
+  },
+  "noOldExecUnion": true,
+  "formalUpdated": false,
+  "newAccepted": 0
+}

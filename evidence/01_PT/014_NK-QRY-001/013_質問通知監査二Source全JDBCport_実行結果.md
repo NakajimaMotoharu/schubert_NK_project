@@ -1,0 +1,12 @@
+# 質問通知監査二Source全JDBCport 実行結果
+
+2026-11-06T02:19:28.973033+09:00 / dev-foundation / source b76880ede10ea9bb9441e75acce9e703ad567c37 / CoreMain 827983a97a9c3bf36b7671985a7924417ff0e8f7・Main不変更。PG19688全8初回真正OS終了0/FESaborted0、独立post0。line/method/class/branch=[102, 8, 4, 50]は同一exec/sessionの全100、normal全physical4/CRC/全@Test/HELD四0、合成・manual除外0。canonical evidence/01_PT/014_NK-QRY-001/evidence/PG19688-question-critical-audit-eight-v1/manifest.json / SHA256 e78c3d40e4592f7375d3d77332df0a21ffd17273c16338c43fd77fcbc0747f0a。原argv/OS終端/XMLhash/safeXML/coverage/exec/環境/補足scope/hashは同evidenceとdocuments/400_PGPT/470_PMO/500_SV計画整備_20261104/865_質問通知監査二Source全八PT・予実・残依存.json、Test IDはspecとsafeXMLへ一意対応。
+
+PG19680 compile0/19682 raw7 individually nonapplicable(applicable0-CS0-parser0-suppression0); all original Main/POM/JAR inputs still equal normal19630 sixMain827/NullAway and19632 sixSB0, no rebuild. PG19688 all8first0/FESaborted0, 102L8M4C50B100 whole2source/normal4physical/allpresentCRC/oneexecsession/full@Test mapping/heldfour0. PG19690 independentpost0. Source original6b exactsamebytes; no oldexecunion. Group includes preceding sharedgap1 (3900 quotaAfter21→3901 quotaBefore22) only once inordinary16/all23; notexclusive, existinggapledger and864 preserve endpoints, currentselected group incremental delta separate and cap10 includesgap1.
+
+試験scope: Two original critical Question/Notification audit writers, all closed query/mutation denial/replay/capacity events and target types, no actual business query/cancel/delete/auth/DB/JMS/keys/HMAC/Root/VM. InputDTO uses existingcodec only; expected SQL/table/scalars absentfields/times/resource operations authored independently. Own2 workers and perworker JDBC maps; no shared mutable JSON.
+未受入: Actual owner/auth/Inbox/business mutation/DB transaction andSQL validity/locking, runtime/Root/VM/native/CHR/global451/IT-ST or parentWBS completion/firstV; original seed whole2qualifications are scoped technical subproofs only.
+
+技術成分43、原80技術15/未結合65、原282交差26/未結合256。currentSource/normalCRC・元6b同path/hashを照合し旧execや旧成功の合算0。globalregistry/新WBS受入0/正式1964PT-53scope/歴史17-190/工数null/同第一V HOLD維持。
+
+原開始見積{'low': 1, 'base': 3, 'high': 7}・cap10継続、共有22→22=0ppはPGPT-20261008-3902へ一度、ordinary16/all23/S7残3。共有報告0を無償とせず、専有N-Tnull。次: publish/push twoSource8; assess existing successful Security/Media audit proof and exactnormalclass/source/oracle reuse before any future Test; continue authorized ordinary PGPT and sameS only if bounded incrementaltrace needed, no oldsuccess replay/newpilot/holdrelease.。
