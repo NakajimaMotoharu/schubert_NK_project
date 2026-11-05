@@ -31,6 +31,10 @@ class WebLogActionContractTest {
   private static final Instant AT = Instant.parse("2026-11-05T00:00:00Z");
   private static final UUID ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
   private static final LayoutId LAYOUT = new LayoutId("WLGEVT01");
+  private static final String REQUEST_CATEGORY = "REQUEST";
+  private static final String ACTION_CATEGORY = "ACTION";
+  private static final String GET_METHOD = "GET";
+  private static final String USERNAME = "user";
   private static final String REQUEST_ACTION = "HTTP_REQUEST_COMPLETED";
   private static final String MENU_ACTION = "MENU_VIEWED";
   private static final String ADDRESS = "127.0.0.1";
@@ -40,8 +44,8 @@ class WebLogActionContractTest {
   void legacyRequestMatchesIndependentOriginalBytes() {
     var value = legacy(Optional.empty());
     assertEquals(LogType.REQUEST, value.logType());
-    assertArrayEquals(golden("REQUEST", ""), encode(value));
-    assertEquals(value, decode(golden("REQUEST", "")));
+    assertArrayEquals(golden(REQUEST_CATEGORY, ""), encode(value));
+    assertEquals(value, decode(golden(REQUEST_CATEGORY, "")));
     assertEquals(64, LayoutRegistry.standard().all().size());
     assertEquals(2336, LayoutRegistry.standard().require(LAYOUT, 1).maximumTotalLength());
     assertEquals(2080, encode(value).length);
@@ -50,7 +54,7 @@ class WebLogActionContractTest {
   @Test // PT-PRO-QA054-002
   void menuActionMatchesIndependentOffsetsAndRoundTrips() {
     var value = value(LogType.ACTION, Optional.of(MENU_ACTION));
-    byte[] expected = golden("ACTION", MENU_ACTION);
+    byte[] expected = golden(ACTION_CATEGORY, MENU_ACTION);
     assertArrayEquals(expected, encode(value));
     assertEquals(value, decode(expected));
     assertEquals("ACTION          ", new String(expected, 17, 16, StandardCharsets.US_ASCII));
@@ -60,9 +64,10 @@ class WebLogActionContractTest {
   @Test // PT-PRO-QA054-003
   void explicitRequestActionKeepsItsOwnClosedPair() {
     assertArrayEquals(
-        golden("REQUEST", REQUEST_ACTION), encode(legacy(Optional.of(REQUEST_ACTION))));
-    assertEquals(LogType.REQUEST, decode(golden("REQUEST", REQUEST_ACTION)).logType());
-    assertNotEquals(decode(golden("ACTION", MENU_ACTION)), legacy(Optional.of(REQUEST_ACTION)));
+        golden(REQUEST_CATEGORY, REQUEST_ACTION), encode(legacy(Optional.of(REQUEST_ACTION))));
+    assertEquals(LogType.REQUEST, decode(golden(REQUEST_CATEGORY, REQUEST_ACTION)).logType());
+    assertNotEquals(
+        decode(golden(ACTION_CATEGORY, MENU_ACTION)), legacy(Optional.of(REQUEST_ACTION)));
   }
 
   @Test // PT-PRO-QA054-004
@@ -77,17 +82,17 @@ class WebLogActionContractTest {
   @Test // PT-PRO-QA054-005
   void crossedAndUnknownActionsAreNeverNormalizedToSuccess() {
     for (String action : List.of(REQUEST_ACTION, "LOG_SEARCHED", "UNKNOWN", "menu_viewed")) {
-      assertThrows(LayoutValidationException.class, () -> decode(golden("ACTION", action)));
+      assertThrows(LayoutValidationException.class, () -> decode(golden(ACTION_CATEGORY, action)));
     }
     for (String action : List.of(MENU_ACTION, "LOG_SEARCHED", "UNKNOWN")) {
-      assertThrows(LayoutValidationException.class, () -> decode(golden("REQUEST", action)));
+      assertThrows(LayoutValidationException.class, () -> decode(golden(REQUEST_CATEGORY, action)));
     }
   }
 
   @Test // PT-PRO-QA054-006
   void omittedActionIsAllowedForRequestOnly() {
-    assertEquals(Optional.empty(), decode(golden("REQUEST", "")).action());
-    assertThrows(LayoutValidationException.class, () -> decode(golden("ACTION", "")));
+    assertEquals(Optional.empty(), decode(golden(REQUEST_CATEGORY, "")).action());
+    assertThrows(LayoutValidationException.class, () -> decode(golden(ACTION_CATEGORY, "")));
     assertThrows(
         LayoutValidationException.class, () -> encode(value(LogType.ACTION, Optional.empty())));
   }
@@ -117,7 +122,7 @@ class WebLogActionContractTest {
         PayloadCodec.standard()
             .encode(new PayloadValues(LAYOUT, new FieldValueSet(fields), List.of()), false)
             .copyData();
-    byte[] expected = golden("REQUEST", "");
+    byte[] expected = golden(REQUEST_CATEGORY, "");
     Arrays.fill(expected, 105, 617, (byte) ' ');
     put(expected, 106, "é");
     assertArrayEquals(expected, actual);
@@ -160,12 +165,12 @@ class WebLogActionContractTest {
       Optional.of(MENU_ACTION),
       SAFE_MESSAGE,
       ID,
-      "GET",
+      GET_METHOD,
       "/",
       new HttpStatusCode(200),
       new ElapsedMilliseconds(12),
       ADDRESS,
-      Optional.of("user"),
+      Optional.of(USERNAME),
       Optional.of(UserRole.USER),
       Optional.of("{}")
     };
@@ -182,18 +187,18 @@ class WebLogActionContractTest {
   @Test // PT-PRO-QA054-010
   void existingHttpMetadataAndReservedRulesRemainEnforced() {
     for (String path : List.of("relative", "/?query")) {
-      byte[] bytes = golden("ACTION", MENU_ACTION);
+      byte[] bytes = golden(ACTION_CATEGORY, MENU_ACTION);
       Arrays.fill(bytes, 661, 917, (byte) ' ');
       put(bytes, 662, path);
       assertThrows(LayoutValidationException.class, () -> decode(bytes));
     }
-    byte[] method = golden("ACTION", MENU_ACTION);
+    byte[] method = golden(ACTION_CATEGORY, MENU_ACTION);
     put(method, 654, "get");
     assertThrows(LayoutValidationException.class, () -> decode(method));
-    byte[] reserved = golden("ACTION", MENU_ACTION);
+    byte[] reserved = golden(ACTION_CATEGORY, MENU_ACTION);
     reserved[2067] = 'X';
     assertThrows(PermanentProtocolException.class, () -> decode(reserved));
-    byte[] blankMethod = golden("ACTION", MENU_ACTION);
+    byte[] blankMethod = golden(ACTION_CATEGORY, MENU_ACTION);
     Arrays.fill(blankMethod, 653, 661, (byte) ' ');
     assertThrows(PermanentProtocolException.class, () -> decode(blankMethod));
   }
@@ -203,8 +208,8 @@ class WebLogActionContractTest {
     try (var workers = Executors.newFixedThreadPool(2)) {
       var first = workers.submit(() -> encode(legacy(Optional.empty())));
       var second = workers.submit(() -> encode(value(LogType.ACTION, Optional.of(MENU_ACTION))));
-      assertArrayEquals(golden("REQUEST", ""), first.get());
-      assertArrayEquals(golden("ACTION", MENU_ACTION), second.get());
+      assertArrayEquals(golden(REQUEST_CATEGORY, ""), first.get());
+      assertArrayEquals(golden(ACTION_CATEGORY, MENU_ACTION), second.get());
     }
   }
 
@@ -217,12 +222,12 @@ class WebLogActionContractTest {
     assertEquals(ID, data.httpRequestId());
     assertEquals(LogLevel.INFO, data.level());
     assertEquals(SAFE_MESSAGE, data.message());
-    assertEquals("GET", data.httpMethod());
+    assertEquals(GET_METHOD, data.httpMethod());
     assertEquals("/", data.path());
     assertEquals(200, data.httpStatus().value());
     assertEquals(12, data.elapsedMs().value());
     assertEquals(ADDRESS, data.remoteAddress());
-    assertEquals(Optional.of("user"), data.username());
+    assertEquals(Optional.of(USERNAME), data.username());
     assertEquals(Optional.of(UserRole.USER), data.role());
     assertEquals(Optional.of("{}"), data.details());
     assertEquals("WebLogEventData[REDACTED]", data.toString());
@@ -235,12 +240,12 @@ class WebLogActionContractTest {
         action,
         SAFE_MESSAGE,
         ID,
-        "GET",
+        GET_METHOD,
         "/",
         new HttpStatusCode(200),
         new ElapsedMilliseconds(12),
         ADDRESS,
-        Optional.of("user"),
+        Optional.of(USERNAME),
         Optional.of(UserRole.USER),
         Optional.of("{}"));
   }
@@ -253,12 +258,12 @@ class WebLogActionContractTest {
         action,
         SAFE_MESSAGE,
         ID,
-        "GET",
+        GET_METHOD,
         "/",
         new HttpStatusCode(200),
         new ElapsedMilliseconds(12),
         ADDRESS,
-        Optional.of("user"),
+        Optional.of(USERNAME),
         Optional.of(UserRole.USER),
         Optional.of("{}"));
   }
@@ -285,12 +290,12 @@ class WebLogActionContractTest {
     put(data, 42, action);
     put(data, 106, SAFE_MESSAGE);
     put(data, 618, ID.toString());
-    put(data, 654, "GET");
+    put(data, 654, GET_METHOD);
     put(data, 662, "/");
     put(data, 918, "200");
     put(data, 921, "000000012");
     put(data, 930, ADDRESS);
-    put(data, 975, "user");
+    put(data, 975, USERNAME);
     put(data, 1039, "USER");
     put(data, 1044, "{}");
     return data;
