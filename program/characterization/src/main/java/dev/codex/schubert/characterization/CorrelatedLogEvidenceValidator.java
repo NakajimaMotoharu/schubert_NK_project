@@ -24,6 +24,7 @@ public final class CorrelatedLogEvidenceValidator {
   private static final String FIELD_PATH = "path";
   private static final String FIELD_STATUS = "status";
   private static final String FIELD_ELAPSEDMS = "elapsedMs";
+  private static final String FIELD_RESPONSE_BYTES = "responseBytes";
   private static final String FIELD_ORACLESHA256 = "oracleSha256";
   private static final String FIELD_CURRENT = "current";
   private static final String FIELD_PAYLOAD = "payload";
@@ -46,7 +47,7 @@ public final class CorrelatedLogEvidenceValidator {
           FIELD_PATH,
           FIELD_STATUS,
           FIELD_ELAPSEDMS,
-          "responseBytes",
+          FIELD_RESPONSE_BYTES,
           "contentType",
           "clientIp",
           "actorUsername",
@@ -240,14 +241,19 @@ public final class CorrelatedLogEvidenceValidator {
           || !http.path(FIELD_STATUS).canConvertToInt()
           || http.path(FIELD_STATUS).asInt() < 100
           || http.path(FIELD_STATUS).asInt() > 599
-          || !http.path(FIELD_ELAPSEDMS).isIntegralNumber()
-          || !http.path(FIELD_ELAPSEDMS).canConvertToLong()
-          || http.path(FIELD_ELAPSEDMS).asLong() < 0
-          || http.path(FIELD_ELAPSEDMS).asLong() > 999_999_999_999L) {
+          || !unsignedN12(http.path(FIELD_ELAPSEDMS))
+          || (http.has(FIELD_RESPONSE_BYTES) && !unsignedN12(http.path(FIELD_RESPONSE_BYTES)))) {
         return false;
       }
     }
     return true;
+  }
+
+  private static boolean unsignedN12(JsonNode value) {
+    return value.isIntegralNumber()
+        && value.canConvertToLong()
+        && value.asLong() >= 0
+        && value.asLong() <= 999_999_999_999L;
   }
 
   private static boolean reference(JsonNode value) {
