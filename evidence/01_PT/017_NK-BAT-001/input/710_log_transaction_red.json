@@ -1,0 +1,27 @@
+{
+  "module": "batch",
+  "program": "017_NK-BAT-001",
+  "main": "LogCleanupService",
+  "mainPackage": "cleanup",
+  "tests": [
+    "LogCleanupTransactionPortTest"
+  ],
+  "testPackages": [
+    "cleanup"
+  ],
+  "prepare": "pg20102-log-tx-red-compile-v1",
+  "static": "pg20103-log-tx-red-static-v1",
+  "unit": "pg20104-log-tx-red-unit-v1",
+  "public": "PG20104-log-tx-red-v1",
+  "physical": 5,
+  "abstract": 2,
+  "expected": 19,
+  "session": "PG20104-LOG-TX-RED-19",
+  "preflightDecision": "PT_DEFAULT",
+  "actualBackendActions": 0,
+  "coreSource": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+  "normalCompileSlot": "pg19740-f03-index-style-six-main-compile-v1",
+  "sixStaticSlot": "pg19742-f03-index-style-six-static-reactor-v1",
+  "sixStaticManifestSha256": "0a045c9c495ec96035a40151415b540d5406e2a433f6c56266fccb587247d5f3",
+  "resourceScopeNote": "Only synthetic JDK JDBC proxies; no driver/DataSource/DB/VM/Root/key/cohort access. Selected public LogCleanup entry only; red is expected non-success, not accepted PT."
+}

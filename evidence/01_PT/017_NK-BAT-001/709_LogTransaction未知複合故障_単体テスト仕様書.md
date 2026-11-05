@@ -43,3 +43,31 @@ rollback一回→正常時だけautoCommit復元一回、失敗時追加復元/c
 必要なMain-only Maven compile/NullAway・静的checkは実command/版/source/真正exitを保存。JUnit XML found/started/succeeded/F/E/S/abort、JaCoCo当source/session/全物理classを照合する。LogCleanupServiceのline/method/class/branch100%を要求し、未達は未完、abstract interfaceの実行code0は根拠を明記する。除外や旧exec合成、動的HOLDをPASSにしない。
 
 原red、green、入力/期待/実際、environment/JDK25.0.4、branch/commit、tool hash、command/exit、BUG/SSC、coverage/manifest/hashをProgram017/evidenceの未使用runへ保存する。秘密/実session/token/DB dumpなし。全451/native/CHR/正式1964-53は別未完了であり、この限定PTでPGPT完了を宣言しない。
+
+## 実行前凍結（Main未修正・Product実行前）
+
+修正前CoreMain28af、normal PG19740。PG20102 TestだけのGJF/javac25 -Xlint:all -Werrorは真正0、Main再compile0/Test実行0。共有qualifierを既存profile不変の明示Log JSON一つへ拡張し、対象Test/正常JAR/dependencyを固定した。
+
+|Test ID|class.method|
+|---|---|
+|PT-BAT-LOGTX337001|LogCleanupTransactionPortTest.boundariesAndDeadline|
+|PT-BAT-LOGTX337002|LogCleanupTransactionPortTest.emptyAndLoop|
+|PT-BAT-LOGTX337003|LogCleanupTransactionPortTest.knownStops|
+|PT-BAT-LOGTX337004|LogCleanupTransactionPortTest.cumulativeDeltas|
+|PT-BAT-LOGTX337005|LogCleanupTransactionPortTest.lockRows|
+|PT-BAT-LOGTX337006|LogCleanupTransactionPortTest.unlockRows|
+|PT-BAT-LOGTX337007|LogCleanupTransactionPortTest.bodyFaultsWithCleanRecovery|
+|PT-BAT-LOGTX337008|LogCleanupTransactionPortTest.rollbackMatrix|
+|PT-BAT-LOGTX337009|LogCleanupTransactionPortTest.restoreMatrix|
+|PT-BAT-LOGTX337010|LogCleanupTransactionPortTest.sameFailureIdentity|
+|PT-BAT-LOGTX337011|LogCleanupTransactionPortTest.rollbackGatesRestore|
+|PT-BAT-LOGTX337012|LogCleanupTransactionPortTest.allResourceBoundaries|
+|PT-BAT-LOGTX337013|LogCleanupTransactionPortTest.postcommitOwnerFailure|
+|PT-BAT-LOGTX337014|LogCleanupTransactionPortTest.successfulCommitRestoreFailure|
+|PT-BAT-LOGTX337015|LogCleanupTransactionPortTest.beginFailure|
+|PT-BAT-LOGTX337016|LogCleanupTransactionPortTest.ownerTimeoutBinding|
+|PT-BAT-LOGTX337017|LogCleanupTransactionPortTest.providerNullResources|
+|PT-BAT-LOGTX337018|LogCleanupTransactionPortTest.independentConnectionsInParallel|
+|PT-BAT-LOGTX337019|LogCleanupTransactionPortTest.suppressionDisabledPrimary|
+
+Test SHA256 `c36d1626a09970c99ed9223c92644284a71cd9958def7e9b72e728476122c80b`、shared qualifier SHA256 `4f6e55731a119580f6f38f426790f766aead16bdc1dbd35928790ed1fe3bcffa`、red profile SHA256 `f81ece0ca9817d95b30ca188db882d6f932abf288a79ff1b382c7b0936042a24`、prepare manifest SHA256 `f21dd9cc0ea45f5c6f0e3015472cda2bcce9dacf210499b13657a68b483e7ad7`。実runではTest凍結commitを引数にしてGit object/hashを再照合し、JUnit exact class19件だけを選択する。既存DB fixture Testはcompile/実行しない。
