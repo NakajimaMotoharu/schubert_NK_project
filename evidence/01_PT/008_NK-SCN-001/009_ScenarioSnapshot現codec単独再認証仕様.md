@@ -18,3 +18,5 @@ Expectedはtyped snapshot/production encodeから生成せず、元固定scalar�
 入力工具001のprofile snapshot_requal: prepare19810/static19812、sourcefreeze後unit19818を一度、post19820（producer/verifier Git artifact引数を明示）。六Test・2suiteのfound/started/succeeded/FESabort、whole normalphysical1/CRC/単exec-session/LINE18 METHOD2 CLASS1 BRANCH6全100と全present exec-core ID current一致/HELD四0を独立照合。元18964のexecと合算しない。全argv/日時/OS-JDK/branch/commit/終了/各hash/coverage/BUGは010/888-889とmanifestへ。静的raw/適用性も個別記録、suppress/除外/未実行をPASS扱いしない。
 
 未受入=実DB read transaction/認可・Snapshot抽出/正規large-file生成・転送/Root/VM/native/CHR/全source451/正式1964-53/IT-ST/親WBSと第一V。今回のheap再認証をこれらの成功へ拡張しない。
+
+Coverage分母は通常normal class一個の全physical CRCを対象とする。標準JaCoCo0.8.15のrecord生成equals/hashCode/accessor等の自動filterだけが働き、明示Sourceのconstructor/toString二methodは18line/6branch全対象。手動method/class除外・到達不能設定なし。OS/JDK/own tmpのallowlistだけを原newrun JUnitXMLからenvironment.safe.jsonへ保存。JUnit engine report三（Jupiter六/Vintage零/Suite零）、選択Test class二・method六を区別する。環境捕捉の最初の草稿で二classを二reportと誤認したassertは、Product終了/件数/品質に影響なしで三実report+六case集合へ訂正した。空engineはskip/not-run合格に加算しない。他System property/私有環境は出力しない。
