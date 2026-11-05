@@ -17,7 +17,7 @@ import org.apache.activemq.artemis.api.core.client.ClientSession;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-/** OPS-ACC-PORT-001..010; SS321/342 literal JSON only; no real management/session operation. */
+/** OPS-ACC-PORT-001..013; SS321/342 literal JSON only; no real management/session operation. */
 final class AcceptorPolicyPortTest {
   private static final String FACTORY =
       "org.apache.activemq.artemis.core.remoting.impl.netty.NettyAcceptorFactory";
@@ -240,6 +240,74 @@ final class AcceptorPolicyPortTest {
     rejected(() -> client.inspect(unusedSession()));
     assertEquals(EXPECTED, client.inspect(unusedSession()));
     assertEquals(3, reads.get());
+  }
+
+  @Test
+  void eachDeclaredParserExceptionIsRedactedBeforeStartedAndNeverRetried() {
+    for (RuntimeException fault :
+        List.of(
+            new org.apache.activemq.artemis.commons.shaded.json.JsonException("public fixture"),
+            new ClassCastException("public fixture"),
+            new IllegalStateException("public fixture"))) {
+      var parses = new AtomicInteger();
+      var started = new AtomicInteger();
+      var client =
+          new ArtemisAcceptorReadinessClient(
+              ignored -> GOOD,
+              ignored -> {
+                started.incrementAndGet();
+                return true;
+              },
+              json -> {
+                assertEquals(GOOD, json);
+                parses.incrementAndGet();
+                throw fault;
+              });
+      rejected(() -> client.inspect(unusedSession()));
+      assertEquals(1, parses.get());
+      assertEquals(0, started.get());
+    }
+  }
+
+  @Test
+  void parserNullContractIsCheckedAtConstructorAndResultBoundary() {
+    assertThrows(
+        NullPointerException.class,
+        () -> new ArtemisAcceptorReadinessClient(ignored -> GOOD, ignored -> true, null));
+    var started = new AtomicInteger();
+    var client =
+        new ArtemisAcceptorReadinessClient(
+            ignored -> GOOD,
+            ignored -> {
+              started.incrementAndGet();
+              return true;
+            },
+            ignored -> null);
+    var failure = assertThrows(NullPointerException.class, () -> client.inspect(unusedSession()));
+    assertEquals("parsed acceptor array", failure.getMessage());
+    assertEquals(0, started.get());
+  }
+
+  @Test
+  void undeclaredParserRuntimeAndFatalKeepIdentityWithoutStartedRead() {
+    for (Throwable fault :
+        List.of(
+            new IllegalArgumentException("public fixture"), new AssertionError("public fixture"))) {
+      var started = new AtomicInteger();
+      var client =
+          new ArtemisAcceptorReadinessClient(
+              ignored -> GOOD,
+              ignored -> {
+                started.incrementAndGet();
+                return true;
+              },
+              json -> {
+                fail(fault);
+                return null;
+              });
+      assertSame(fault, assertThrows(fault.getClass(), () -> client.inspect(unusedSession())));
+      assertEquals(0, started.get());
+    }
   }
 
   private static String replaced(String original, String old, String replacement) {

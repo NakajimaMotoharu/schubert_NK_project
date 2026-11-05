@@ -4,8 +4,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
 import org.apache.activemq.artemis.api.core.JsonUtil;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
+import org.apache.activemq.artemis.json.JsonArray;
 import org.apache.activemq.artemis.json.JsonObject;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -14,7 +16,8 @@ import org.jspecify.annotations.Nullable;
  * Live, effective single loopback Core acceptor and started status through Ops-only management. No
  * application role receives management permission. NK-OPS-001; RD MQ-001/002/009/010,SYS-004;
  * UI231/251/253; SS321 §2/10/13,342 §2/4; PG240; PT-OPS-MQ-013..015. Other broker readiness and
- * Production credential binding remain mandatory.
+ * Production credential binding remain mandatory. OPS-ACC-PORT-001..013 independently check the SDK
+ * parser boundary; injecting that internal boundary never grants broker or startup authority.
  */
 @NullMarked
 public final class ArtemisAcceptorReadinessClient {
@@ -46,6 +49,7 @@ public final class ArtemisAcceptorReadinessClient {
 
   private final Reader acceptors;
   private final Reader started;
+  private final Function<String, JsonArray> parser;
 
   public ArtemisAcceptorReadinessClient() {
     this(
@@ -54,8 +58,15 @@ public final class ArtemisAcceptorReadinessClient {
   }
 
   ArtemisAcceptorReadinessClient(Reader acceptors, Reader started) {
+    this(acceptors, started, JsonUtil::readJsonArray);
+  }
+
+  /** Internal SDK boundary: independently test parser failures without a live management query. */
+  ArtemisAcceptorReadinessClient(
+      Reader acceptors, Reader started, Function<String, JsonArray> parser) {
     this.acceptors = Objects.requireNonNull(acceptors, "acceptor reader");
     this.started = Objects.requireNonNull(started, "started reader");
+    this.parser = Objects.requireNonNull(parser, "acceptor parser");
   }
 
   /** Borrow the Ops session; fail closed without disclosing management responses. */
@@ -68,7 +79,7 @@ public final class ArtemisAcceptorReadinessClient {
     Objects.requireNonNull(session, "ops session");
     Object response = acceptors.read(session);
     if (!(response instanceof String json)) throw new ArtemisManagementReadinessException();
-    var actual = new LinkedHashMap<>(verifyResponse(json));
+    var actual = new LinkedHashMap<>(verifyResponse(json, parser));
     Object running = started.read(session);
     if (!(running instanceof Boolean bit)) throw new ArtemisManagementReadinessException();
     actual.put("started", bit ? "1" : "0");
@@ -76,9 +87,10 @@ public final class ArtemisAcceptorReadinessClient {
     return Map.copyOf(actual);
   }
 
-  private static Map<String, String> verifyResponse(String json) {
+  private static Map<String, String> verifyResponse(
+      String json, Function<String, JsonArray> parser) {
     try {
-      var values = JsonUtil.readJsonArray(json);
+      var values = Objects.requireNonNull(parser.apply(json), "parsed acceptor array");
       if (values.size() != EXPECTED_ACCEPTOR_COUNT) throw new ArtemisManagementReadinessException();
       if (!(values.get(0) instanceof JsonObject acceptor))
         throw new ArtemisManagementReadinessException();
