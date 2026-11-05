@@ -1,0 +1,178 @@
+{
+  "actualExit": 0,
+  "sourceBefore": "a9417e64d787e32a92fdb2001b5e8f58772bd647",
+  "inputHashes": {
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "program/characterization/pom.xml": "f5e72eb2d2b8cc9e1f97c0f39212e1eee506b38fcb25980ed0959a28e2f468f2",
+    "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+    "src/schubert-nk-api/pom.xml": "2c9786c2431606e25aef3e07117a43ee1abe4a4aa239900c4d7ae6d20469617f",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java": "dad81aa3510a24376f5c61d3aaeff12caf87a2eda00b1d6670c046a768b1eb39",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java": "c45b65bd922548785f6798ab88e2cfde0b880e163864414be102bbe980eab299",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java": "9c48c740e76f82ce4479e77392b71e28bd2fd0fa79f24205429bf686bd256c9d",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java": "800a838e38b445775c46198da53bc37e7832347173ee308d5ed0255fb4f1a88b",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/TargetAdapter.java": "c73d16ee3183dc7315fe8b03ea1af83a4972f1061616f218884308b4e8cc9003",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java": "decb8d68d011f2835b5a1202290e0847a68e154c742283148759fcdb21171a5d",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java": "601ad8cd134dbb0deb54bcc2387f8c7b6e68fd507dd914e6b77ee4c4257230bf",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/TargetAdapterTest.java": "69bf147d90936517c1d71d1499a52a2c09a256e409fe0c304568fc9bb5df5fbf",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/CharacterizationHashTest.java": "3d428a7e5adab39424c9f872f8c89d5bbd7c9f9d8450a608c88be20f73862997",
+    "program/characterization/tests/resources/cases/catalog.json": "df412392032ad324a5e5dd92b0703c03287a7744af47aa42cd34a0a617e46d38",
+    "program/characterization/tests/resources/cases/dif-allowlist.json": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6"
+  },
+  "qualification": "CURRENT_WIP_CHARACTERIZATION_STATIC_WITH_EXPLICIT_APPLICABILITY_NOT_GLOBAL_F03",
+  "pmdRaw": 21,
+  "pmdActualExit": 4,
+  "pmdProcessingErrors": 0,
+  "applicability": [
+    {
+      "file": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "line": 73,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "line": 74,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "line": 102,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "line": 247,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+      "line": 90,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+      "line": 124,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+      "line": 145,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "line": 126,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "line": 212,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "line": 263,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "line": 334,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "line": 398,
+      "rule": "AvoidBranchingStatementAsLastInLoop",
+      "reason": "The labelled continue targets OUTER candidate loop, not the current inner byte loop. It prevents reporting a mismatching candidate as a match; it is semantically necessary, not a redundant tail continue."
+    },
+    {
+      "file": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "line": 439,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "line": 501,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "line": 507,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 68,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+      "line": 710,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+      "line": 711,
+      "rule": "UseConcurrentHashMap",
+      "reason": "Each shown Map is method/fixture-local; source review shows no concurrent mutable publication. Shared JSON mapper configuration is initialized once and is not this Map."
+    },
+    {
+      "file": "program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java",
+      "line": 326,
+      "rule": "DoNotUseThreads",
+      "reason": "Own standalone JUnit two-thread finite executor; no JavaEE container, all futures joined and executor closed; no application worker thread."
+    },
+    {
+      "file": "program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java",
+      "line": 327,
+      "rule": "DoNotUseThreads",
+      "reason": "Own standalone JUnit two-thread finite executor; no JavaEE container, all futures joined and executor closed; no application worker thread."
+    },
+    {
+      "file": "program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java",
+      "line": 328,
+      "rule": "DoNotUseThreads",
+      "reason": "Own standalone JUnit two-thread finite executor; no JavaEE container, all futures joined and executor closed; no application worker thread."
+    }
+  ],
+  "newSuppressionsOrRuleExclusions": false,
+  "spotbugsWholeFiveMain": {
+    "findings": 0,
+    "processingErrors": 0,
+    "actualExit": 0
+  },
+  "checkstyle": 0,
+  "original111And13Preserved": "PG18660 static original",
+  "sameOuterContinueMethodTextAsA941": true,
+  "productTestsExecuted": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "files": {
+    "checkstyle-exit.safe.json": "ecab9c798c2a1f76e6acbd32cc7549539f80c1aa42b3e781cee2477e174d74e6",
+    "pmd-exit.safe.json": "bd10f874e5c5e5dde5c8cf10cbd373857a6c55963e989a2add16bcf8d1e6eeb8",
+    "manifest.safe.json": "c39ad839d753f45a1d9f82a3f5a1446a068f0783b359e100412044c5e0eb6ff5",
+    "spotbugs-exit.safe.json": "50260b6f371748c7584518d6e2586e91cbbd9c1e47cc3f71452cfec35d7e3251",
+    "checkstyle.xml": "1560fbe6c569084e0799537248dd390c4906311f18ed19c48d1fc357e213c52d",
+    "pmd.xml": "6480be981aa65145d6c949a740c37a86d8793fe94e130e2b7b48bf746f0a32cd",
+    "spotbugs.xml": "1e2bfae1929c466a867ff81ec32b337c8b62c1ba7a4f9abfd71f50a96b930352"
+  }
+}

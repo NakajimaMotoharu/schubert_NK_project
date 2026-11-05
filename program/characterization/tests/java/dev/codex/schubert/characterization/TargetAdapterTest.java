@@ -19,6 +19,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Current/NK同一case runner境界。PT-CHR-NK-001。 */
 class TargetAdapterTest {
+  private static final String FIXTURE_LOCALHOST = "localhost";
+  private static final String FIXTURE_CURRENT = "current";
+  private static final String FIXTURE_HTTPS_LOCALHOST = "https://localhost";
+
   private static final ObjectMapper JSON = new ObjectMapper();
   private static final Path PROJECT_ROOT =
       Path.of(System.getProperty("chr.unitProjectRoot")).toAbsolutePath().normalize();
@@ -46,7 +50,7 @@ class TargetAdapterTest {
             "https://127.0.0.1:56162/",
             reports,
             reports.resolve("nk/run-01"),
-            Set.of("localhost", "127.0.0.1"));
+            Set.of(FIXTURE_LOCALHOST, "127.0.0.1"));
 
     List<String> currentCases = current.executableCaseIds(catalog);
     List<String> nkCases = nk.executableCaseIds(catalog);
@@ -55,7 +59,7 @@ class TargetAdapterTest {
     assertEquals(24, nkCases.size());
     assertTrue(nkCases.contains("CHR-N01"));
     assertEquals(TargetAdapter.Target.CURRENT, current.target());
-    assertEquals("current", current.target().externalName());
+    assertEquals(FIXTURE_CURRENT, current.target().externalName());
     assertEquals("nk", nk.target().externalName());
     assertEquals("https://localhost:55162/", current.baseUri().toString());
     assertEquals(reports.resolve("current/run-01").toAbsolutePath(), current.evidenceRoot());
@@ -71,20 +75,20 @@ class TargetAdapterTest {
   void adapterRejectsNullUnknownExternalAndOverwriteInputs() throws Exception {
     Path reports = temporaryDirectory.resolve("invalid-reports");
     Path evidence = reports.resolve("run");
-    Set<String> hosts = Set.of("localhost");
-    assertCreateFails(null, "https://localhost", reports, evidence, hosts);
-    assertCreateFails(" ", "https://localhost", reports, evidence, hosts);
-    assertCreateFails("other", "https://localhost", reports, evidence, hosts);
-    assertCreateFails("current", null, reports, evidence, hosts);
-    assertCreateFails("current", " ", reports, evidence, hosts);
-    assertCreateFails("current", "https://localhost", null, evidence, hosts);
-    assertCreateFails("current", "https://localhost", reports, null, hosts);
-    assertCreateFails("current", "https://localhost", reports, evidence, null);
-    assertCreateFails("current", "https://localhost", reports, evidence, Set.of());
-    assertCreateFails("current", "https://localhost", reports, evidence, Set.of(" "));
+    Set<String> hosts = Set.of(FIXTURE_LOCALHOST);
+    assertCreateFails(null, FIXTURE_HTTPS_LOCALHOST, reports, evidence, hosts);
+    assertCreateFails(" ", FIXTURE_HTTPS_LOCALHOST, reports, evidence, hosts);
+    assertCreateFails("other", FIXTURE_HTTPS_LOCALHOST, reports, evidence, hosts);
+    assertCreateFails(FIXTURE_CURRENT, null, reports, evidence, hosts);
+    assertCreateFails(FIXTURE_CURRENT, " ", reports, evidence, hosts);
+    assertCreateFails(FIXTURE_CURRENT, FIXTURE_HTTPS_LOCALHOST, null, evidence, hosts);
+    assertCreateFails(FIXTURE_CURRENT, FIXTURE_HTTPS_LOCALHOST, reports, null, hosts);
+    assertCreateFails(FIXTURE_CURRENT, FIXTURE_HTTPS_LOCALHOST, reports, evidence, null);
+    assertCreateFails(FIXTURE_CURRENT, FIXTURE_HTTPS_LOCALHOST, reports, evidence, Set.of());
+    assertCreateFails(FIXTURE_CURRENT, FIXTURE_HTTPS_LOCALHOST, reports, evidence, Set.of(" "));
     Set<String> nullHost = new HashSet<>();
     nullHost.add(null);
-    assertCreateFails("current", "https://localhost", reports, evidence, nullHost);
+    assertCreateFails(FIXTURE_CURRENT, FIXTURE_HTTPS_LOCALHOST, reports, evidence, nullHost);
 
     for (String url :
         List.of(
@@ -95,18 +99,22 @@ class TargetAdapterTest {
             "https://localhost?query=x",
             "https://localhost#fragment",
             "https://localhost/base")) {
-      assertCreateFails("current", url, reports, evidence, hosts);
+      assertCreateFails(FIXTURE_CURRENT, url, reports, evidence, hosts);
     }
-    assertCreateFails("current", "https://localhost", reports, reports, hosts);
+    assertCreateFails(FIXTURE_CURRENT, FIXTURE_HTTPS_LOCALHOST, reports, reports, hosts);
     assertCreateFails(
-        "current", "https://localhost", reports, temporaryDirectory.resolve("outside"), hosts);
+        FIXTURE_CURRENT,
+        FIXTURE_HTTPS_LOCALHOST,
+        reports,
+        temporaryDirectory.resolve("outside"),
+        hosts);
     Files.createDirectories(evidence);
-    assertCreateFails("current", "https://localhost", reports, evidence, hosts);
+    assertCreateFails(FIXTURE_CURRENT, FIXTURE_HTTPS_LOCALHOST, reports, evidence, hosts);
 
     Path linkedEvidence = reports.resolve("linked");
     Files.createDirectories(reports);
     Files.createSymbolicLink(linkedEvidence, temporaryDirectory.resolve("missing-link-target"));
-    assertCreateFails("current", "https://localhost", reports, linkedEvidence, hosts);
+    assertCreateFails(FIXTURE_CURRENT, FIXTURE_HTTPS_LOCALHOST, reports, linkedEvidence, hosts);
   }
 
   @Test
@@ -114,14 +122,18 @@ class TargetAdapterTest {
     Path reports = temporaryDirectory.resolve("contract-reports");
     TargetAdapter current =
         TargetAdapter.create(
-            "current",
-            "https://localhost",
+            FIXTURE_CURRENT,
+            FIXTURE_HTTPS_LOCALHOST,
             reports,
             reports.resolve("current/run"),
-            Set.of("localhost"));
+            Set.of(FIXTURE_LOCALHOST));
     TargetAdapter nk =
         TargetAdapter.create(
-            "nk", "https://localhost", reports, reports.resolve("nk/run"), Set.of("localhost"));
+            "nk",
+            FIXTURE_HTTPS_LOCALHOST,
+            reports,
+            reports.resolve("nk/run"),
+            Set.of(FIXTURE_LOCALHOST));
     assertThrows(IllegalArgumentException.class, () -> current.endpoint(null));
     assertThrows(IllegalArgumentException.class, () -> current.endpoint("relative"));
     assertThrows(IllegalArgumentException.class, () -> current.endpoint("//external.example/path"));
@@ -142,16 +154,16 @@ class TargetAdapterTest {
     assertThrows(IllegalArgumentException.class, () -> current.executableCaseIds(duplicate));
 
     ObjectNode currentUnknown = original.deepCopy();
-    ((ObjectNode) cases(currentUnknown).get(0)).put("current", "SKIP");
+    ((ObjectNode) cases(currentUnknown).get(0)).put(FIXTURE_CURRENT, "SKIP");
     assertThrows(IllegalArgumentException.class, () -> current.executableCaseIds(currentUnknown));
 
     ObjectNode currentNkOnlyWrongCase = original.deepCopy();
-    ((ObjectNode) cases(currentNkOnlyWrongCase).get(0)).put("current", "NK_ONLY");
+    ((ObjectNode) cases(currentNkOnlyWrongCase).get(0)).put(FIXTURE_CURRENT, "NK_ONLY");
     assertThrows(
         IllegalArgumentException.class, () -> current.executableCaseIds(currentNkOnlyWrongCase));
 
     ObjectNode currentN01Unknown = original.deepCopy();
-    ((ObjectNode) cases(currentN01Unknown).get(22)).put("current", "SKIP");
+    ((ObjectNode) cases(currentN01Unknown).get(22)).put(FIXTURE_CURRENT, "SKIP");
     assertThrows(
         IllegalArgumentException.class, () -> current.executableCaseIds(currentN01Unknown));
 

@@ -19,8 +19,11 @@ import java.util.stream.Stream;
 
 /** Narrow DIF oracle for normalized Current baseline and NK artifacts. SS 355 §8, §12. */
 public final class ArtifactComparator {
+  private static final String VALUE_PASS = "PASS";
+
+  private static final String MODE_DIFFERENCE = "difference";
   private static final ObjectMapper JSON = new ObjectMapper();
-  private static final Set<String> MODES = Set.of("difference", "required", "contract");
+  private static final Set<String> MODES = Set.of(MODE_DIFFERENCE, "required", "contract");
 
   private ArtifactComparator() {}
 
@@ -80,8 +83,9 @@ public final class ArtifactComparator {
       require(
           caseId.equals(current.path("caseId").asText()), "CURRENT_CASE_ID:" + caseId, failures);
       require(caseId.equals(nk.path("caseId").asText()), "NK_CASE_ID:" + caseId, failures);
-      require("PASS".equals(current.path("status").asText()), "CURRENT_STATUS:" + caseId, failures);
-      require("PASS".equals(nk.path("status").asText()), "NK_STATUS:" + caseId, failures);
+      require(
+          VALUE_PASS.equals(current.path("status").asText()), "CURRENT_STATUS:" + caseId, failures);
+      require(VALUE_PASS.equals(nk.path("status").asText()), "NK_STATUS:" + caseId, failures);
       collectDifferences(caseId, "", current, nk, rawDifferences);
       comparedCases++;
     }
@@ -100,7 +104,10 @@ public final class ArtifactComparator {
       rules.put(rule.path("id").asText(), rule);
     }
     require(rules.size() == 16, "DIF_RULE_COUNT", failures);
-    require(observations.path("version").asInt(-1) == 1, "OBSERVATION_VERSION", failures);
+    require(
+        CorrelatedLogEvidenceValidator.versionOne(observations.path("version")),
+        "OBSERVATION_VERSION",
+        failures);
     require(observations.path("observations").isArray(), "OBSERVATIONS_NOT_ARRAY", failures);
 
     Set<String> usedRules = new TreeSet<>();
@@ -192,7 +199,7 @@ public final class ArtifactComparator {
 
       String differenceKey = key(caseId, pointer);
       boolean changed = rawDifferences.contains(differenceKey);
-      if ("difference".equals(mode)) {
+      if (MODE_DIFFERENCE.equals(mode)) {
         valid &= require(changed, "OBSERVATION_DIFFERENCE_REQUIRED:" + observationKey, failures);
       }
       if (changed) {
@@ -212,7 +219,7 @@ public final class ArtifactComparator {
     unused.forEach(value -> failures.add("UNUSED_DIF:" + value));
     List<String> used = List.copyOf(usedRules);
     return new ComparisonResult(
-        failures.isEmpty() ? "PASS" : "FAIL",
+        failures.isEmpty() ? VALUE_PASS : "FAIL",
         expectedCases.size(),
         comparedCases,
         rawDifferences.size(),
@@ -227,6 +234,14 @@ public final class ArtifactComparator {
     if (value == null) throw new IllegalArgumentException(label + " is required");
   }
 
+  /** Lexical name boundary shared by artifact readers; it performs no filesystem operation. */
+  static String requiredArtifactFileName(Path path) {
+    if (path == null) throw new IllegalArgumentException("artifact path is required");
+    Path name = path.getFileName();
+    if (name == null) throw new IllegalArgumentException("artifact entry must have a name");
+    return name.toString();
+  }
+
   private static Map<String, Path> artifactFiles(Path root, List<String> failures, String target)
       throws IOException {
     Map<String, Path> files = new TreeMap<>();
@@ -235,8 +250,8 @@ public final class ArtifactComparator {
         if (Files.isSymbolicLink(path)) {
           failures.add(target + "_SYMLINK:" + path.getFileName());
         } else if (Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS)
-            && path.getFileName().toString().endsWith(".json")) {
-          String id = path.getFileName().toString().replaceFirst("\\.json$", "");
+            && requiredArtifactFileName(path).endsWith(".json")) {
+          String id = requiredArtifactFileName(path).replaceFirst("\\.json$", "");
           files.put(id, path);
         }
       }
@@ -332,7 +347,7 @@ public final class ArtifactComparator {
     }
 
     public boolean passed() {
-      return "PASS".equals(status);
+      return VALUE_PASS.equals(status);
     }
   }
 }

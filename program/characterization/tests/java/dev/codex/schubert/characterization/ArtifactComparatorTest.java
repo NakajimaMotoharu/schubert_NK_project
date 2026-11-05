@@ -23,58 +23,102 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** DIF narrow-allowlist oracle. PT-CHR-G05-003/004, PT-CHR-NK-002。 */
 class ArtifactComparatorTest {
+  private static final String FIXTURE_EXTRA = "extra";
+
+  private static final String ASYNC_MENU_DIFFERENCE = "DIF-003";
+  private static final String FIXTURE_CHR_A01 = "CHR-A01";
+  private static final String FIXTURE_CHR_U01 = "CHR-U01";
+  private static final String FIXTURE_CHR_L01 = "CHR-L01";
+  private static final String FIXTURE_DIF_001 = "DIF-001";
+  private static final String FIXTURE_BRAND = "brand";
+  private static final String FIXTURE_DIFFERENCE = "difference";
+  private static final String FIXTURE_SEMANTIC = "semantic";
+  private static final String FIXTURE_SCHUBERT = "schubert";
+  private static final String FIXTURE_SCHUBERT_NK = "schubert NK";
+  private static final String FIXTURE_AUTHORIZATION_LOG = "authorization.log";
+  private static final String FIXTURE_AUTHENTICATION_BACKEND = "authentication.backend";
+  private static final String FIXTURE_HTTP_PATH = "http.path";
+  private static final String FIXTURE_PASS = "PASS";
+  private static final String FIXTURE_STATUS = "status";
+  private static final String FIXTURE_CHR_A01_JSON = "CHR-A01.json";
+  private static final String FIXTURE_CASEID = "caseId";
+  private static final String FIXTURE_SAME = "same";
+  private static final String FIXTURE_CURRENT = "current";
+  private static final String FIXTURE_CHR_PROJECTROOT = "chr.projectRoot";
+
   private static final ObjectMapper JSON = new ObjectMapper();
   private static final Path SOURCE_ROOT =
       Path.of(System.getProperty("chr.unitProjectRoot")).toAbsolutePath().normalize();
   private static final List<String> CASE_IDS =
       List.of(
-          "CHR-A01", "CHR-A02", "CHR-A03", "CHR-U01", "CHR-U02", "CHR-S01", "CHR-S02", "CHR-S03",
-          "CHR-S04", "CHR-S05", "CHR-S06", "CHR-S07", "CHR-S08", "CHR-M01", "CHR-M02", "CHR-M03",
-          "CHR-M04", "CHR-M05", "CHR-M06", "CHR-M07", "CHR-L01", "CHR-E01", "CHR-N01", "CHR-O01");
+          FIXTURE_CHR_A01,
+          "CHR-A02",
+          "CHR-A03",
+          FIXTURE_CHR_U01,
+          "CHR-U02",
+          "CHR-S01",
+          "CHR-S02",
+          "CHR-S03",
+          "CHR-S04",
+          "CHR-S05",
+          "CHR-S06",
+          "CHR-S07",
+          "CHR-S08",
+          "CHR-M01",
+          "CHR-M02",
+          "CHR-M03",
+          "CHR-M04",
+          "CHR-M05",
+          "CHR-M06",
+          "CHR-M07",
+          FIXTURE_CHR_L01,
+          "CHR-E01",
+          "CHR-N01",
+          "CHR-O01");
   private static final List<Oracle> ORACLES =
       List.of(
           new Oracle(
-              "DIF-001",
-              "CHR-U01",
-              "brand",
-              "difference",
-              "semantic",
-              "brand",
-              "schubert",
-              "schubert NK"),
+              FIXTURE_DIF_001,
+              FIXTURE_CHR_U01,
+              FIXTURE_BRAND,
+              FIXTURE_DIFFERENCE,
+              FIXTURE_SEMANTIC,
+              FIXTURE_BRAND,
+              FIXTURE_SCHUBERT,
+              FIXTURE_SCHUBERT_NK),
           new Oracle(
               "DIF-002",
-              "CHR-L01",
-              "authorization.log",
-              "difference",
-              "semantic",
-              "authorization.log",
+              FIXTURE_CHR_L01,
+              FIXTURE_AUTHORIZATION_LOG,
+              FIXTURE_DIFFERENCE,
+              FIXTURE_SEMANTIC,
+              FIXTURE_AUTHORIZATION_LOG,
               "AUTHENTICATED",
               "ADMIN"),
           new Oracle(
               "DIF-003",
-              "CHR-U01",
+              FIXTURE_CHR_U01,
               "menu.cards",
-              "difference",
-              "semantic",
+              FIXTURE_DIFFERENCE,
+              FIXTURE_SEMANTIC,
               "menu.cards",
               "4 legacy plus log",
               "legacy plus question notification answer and admin user"),
           new Oracle(
               "DIF-004",
-              "CHR-A01",
-              "authentication.backend",
-              "difference",
-              "semantic",
-              "authentication.backend",
+              FIXTURE_CHR_A01,
+              FIXTURE_AUTHENTICATION_BACKEND,
+              FIXTURE_DIFFERENCE,
+              FIXTURE_SEMANTIC,
+              FIXTURE_AUTHENTICATION_BACKEND,
               "file/in-process",
               "PostgreSQL/MQ USER ADMIN"),
           new Oracle(
               "DIF-005",
               "CHR-E01",
               "error.presentation",
-              "difference",
-              "semantic",
+              FIXTURE_DIFFERENCE,
+              FIXTURE_SEMANTIC,
               "error.presentation",
               "spring/default mixed",
               "common style and recovery guidance"),
@@ -82,8 +126,8 @@ class ArtifactComparatorTest {
               "DIF-006",
               "CHR-S01",
               "input.byteLimit",
-              "difference",
-              "semantic",
+              FIXTURE_DIFFERENCE,
+              FIXTURE_SEMANTIC,
               "input.byteLimit",
               "mostly implicit",
               "fixed-wire explicit"),
@@ -91,8 +135,8 @@ class ArtifactComparatorTest {
               "DIF-007",
               "CHR-U02",
               "topbar.identity",
-              "difference",
-              "semantic",
+              FIXTURE_DIFFERENCE,
+              FIXTURE_SEMANTIC,
               "topbar.identity",
               "partial",
               "username role logout"),
@@ -100,8 +144,8 @@ class ArtifactComparatorTest {
               "DIF-008",
               "CHR-S04",
               "empty.message",
-              "difference",
-              "semantic",
+              FIXTURE_DIFFERENCE,
+              FIXTURE_SEMANTIC,
               "empty.message",
               "may be blank",
               "該当するデータはありません"),
@@ -109,17 +153,17 @@ class ArtifactComparatorTest {
               "DIF-009",
               "CHR-S08",
               "voice.grouping",
-              "difference",
-              "semantic",
+              FIXTURE_DIFFERENCE,
+              FIXTURE_SEMANTIC,
               "voice.grouping",
               "body may repeat",
               "one body per entry"),
           new Oracle(
               "DIF-010",
-              "CHR-L01",
+              FIXTURE_CHR_L01,
               "log.filters",
-              "difference",
-              "semantic",
+              FIXTURE_DIFFERENCE,
+              FIXTURE_SEMANTIC,
               "log.filters",
               "limited",
               "WARN date MQ SYSTEM BATCH"),
@@ -136,7 +180,7 @@ class ArtifactComparatorTest {
               "DIF-012",
               "CHR-M04",
               "invalid.range",
-              "difference",
+              FIXTURE_DIFFERENCE,
               "header",
               "content-range",
               "baseline capture",
@@ -145,8 +189,8 @@ class ArtifactComparatorTest {
               "DIF-013",
               "CHR-S02",
               "game.change",
-              "difference",
-              "semantic",
+              FIXTURE_DIFFERENCE,
+              FIXTURE_SEMANTIC,
               "game.change",
               "inline onchange",
               "external same-origin JS plus button"),
@@ -154,26 +198,26 @@ class ArtifactComparatorTest {
               "DIF-014",
               "CHR-O01",
               "session.restart",
-              "difference",
-              "semantic",
+              FIXTURE_DIFFERENCE,
+              FIXTURE_SEMANTIC,
               "session.restart",
               "in-memory invalidated",
               "encrypted persistent continuation"),
           new Oracle(
               "DIF-015",
-              "CHR-A01",
-              "http.path",
+              FIXTURE_CHR_A01,
+              FIXTURE_HTTP_PATH,
               "contract",
-              "semantic",
-              "http.path",
+              FIXTURE_SEMANTIC,
+              FIXTURE_HTTP_PATH,
               "/same-path",
               "/same-path"),
           new Oracle(
               "DIF-016",
               "CHR-A02",
               "session.concurrentLimit",
-              "difference",
-              "semantic",
+              FIXTURE_DIFFERENCE,
+              FIXTURE_SEMANTIC,
               "session.concurrentLimit",
               "three observed sessions remain active despite configured maximum 2",
               "maximum 2; third login revokes oldest"));
@@ -196,7 +240,7 @@ class ArtifactComparatorTest {
                   output.toString()
                 }));
     JsonNode report = JSON.readTree(output.toFile());
-    assertEquals("PASS", report.path("status").asText());
+    assertEquals(FIXTURE_PASS, report.path(FIXTURE_STATUS).asText());
     assertEquals(24, report.path("expectedCaseCount").asInt());
     assertEquals(24, report.path("comparedCaseCount").asInt());
     assertEquals(14, report.path("rawDifferenceCount").asInt());
@@ -211,7 +255,7 @@ class ArtifactComparatorTest {
         ArtifactComparator.compare(
             fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
     assertTrue(direct.passed());
-    assertEquals("PASS", direct.status());
+    assertEquals(FIXTURE_PASS, direct.status());
     assertEquals(24, direct.expectedCaseCount());
     assertEquals(24, direct.comparedCaseCount());
     assertEquals(14, direct.rawDifferenceCount());
@@ -271,14 +315,14 @@ class ArtifactComparatorTest {
         root -> {
           ArrayNode cases = (ArrayNode) root.path("cases");
           ((ObjectNode) cases.get(0)).put("nk", "SKIP");
-          ((ObjectNode) cases.get(1)).put("id", "CHR-A01");
+          ((ObjectNode) cases.get(1)).put("id", FIXTURE_CHR_A01);
         });
     mutate(
         fixture
             .project()
             .resolve("program/characterization/tests/resources/cases/dif-allowlist.json"),
         root -> ((ArrayNode) root.path("differences")).remove(15));
-    Files.delete(fixture.current().resolve("CHR-A01.json"));
+    Files.delete(fixture.current().resolve(FIXTURE_CHR_A01_JSON));
     Files.delete(fixture.nk().resolve("CHR-M04.json"));
     write(
         fixture.current().resolve("CHR-X99.json"), "{\"caseId\":\"CHR-X99\",\"status\":\"PASS\"}");
@@ -289,20 +333,20 @@ class ArtifactComparatorTest {
         fixture.nk().resolve("linked.json"), fixture.nk().resolve("CHR-A03.json"));
     write(fixture.current().resolve("ignored.txt"), "ignored");
     Files.createDirectories(fixture.nk().resolve("ignored-directory"));
-    mutate(fixture.current().resolve("CHR-A03.json"), root -> root.put("caseId", "wrong"));
-    mutate(fixture.current().resolve("CHR-U01.json"), root -> root.put("status", "FAIL"));
-    mutate(fixture.nk().resolve("CHR-U02.json"), root -> root.put("caseId", "wrong"));
-    mutate(fixture.nk().resolve("CHR-S01.json"), root -> root.put("status", "SKIPPED"));
+    mutate(fixture.current().resolve("CHR-A03.json"), root -> root.put(FIXTURE_CASEID, "wrong"));
+    mutate(fixture.current().resolve("CHR-U01.json"), root -> root.put(FIXTURE_STATUS, "FAIL"));
+    mutate(fixture.nk().resolve("CHR-U02.json"), root -> root.put(FIXTURE_CASEID, "wrong"));
+    mutate(fixture.nk().resolve("CHR-S01.json"), root -> root.put(FIXTURE_STATUS, "SKIPPED"));
     mutate(
         fixture.current().resolve("CHR-S02.json"),
         root -> {
-          root.set("arrayDrift", JSON.valueToTree(List.of("same")));
-          root.put("name/~field", "current");
+          root.set("arrayDrift", JSON.valueToTree(List.of(FIXTURE_SAME)));
+          root.put("name/~field", FIXTURE_CURRENT);
         });
     mutate(
         fixture.nk().resolve("CHR-S02.json"),
         root -> {
-          root.set("arrayDrift", JSON.valueToTree(List.of("same", "extra")));
+          root.set("arrayDrift", JSON.valueToTree(List.of(FIXTURE_SAME, FIXTURE_EXTRA)));
           root.put("name/~field", "nk");
           root.put("objectToScalar", "nk-scalar");
           root.put("arrayToScalar", "nk-scalar");
@@ -310,8 +354,8 @@ class ArtifactComparatorTest {
     mutate(
         fixture.current().resolve("CHR-S02.json"),
         root -> {
-          root.set("objectToScalar", JSON.createObjectNode().put("key", "current"));
-          root.set("arrayToScalar", JSON.valueToTree(List.of("current")));
+          root.set("objectToScalar", JSON.createObjectNode().put("key", FIXTURE_CURRENT));
+          root.set("arrayToScalar", JSON.valueToTree(List.of(FIXTURE_CURRENT)));
         });
 
     ArtifactComparator.ComparisonResult result =
@@ -365,78 +409,78 @@ class ArtifactComparatorTest {
     observations.add(
         observation(
             "DIF-X99",
-            "CHR-U01",
-            "brand",
-            "difference",
-            "semantic",
-            "brand",
+            FIXTURE_CHR_U01,
+            FIXTURE_BRAND,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_BRAND,
             "/dif/DIF-001",
-            "schubert",
-            "schubert NK"));
+            FIXTURE_SCHUBERT,
+            FIXTURE_SCHUBERT_NK));
     observations.add(
         observation(
-            "DIF-001",
+            FIXTURE_DIF_001,
             "CHR-Z99",
-            "brand",
-            "difference",
-            "semantic",
-            "brand",
+            FIXTURE_BRAND,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_BRAND,
             "/dif/DIF-001",
-            "schubert",
-            "schubert NK"));
+            FIXTURE_SCHUBERT,
+            FIXTURE_SCHUBERT_NK));
     observations.add(
         observation(
-            "DIF-001",
-            "CHR-U01",
-            "brand",
-            "difference",
-            "semantic",
-            "brand",
+            FIXTURE_DIF_001,
+            FIXTURE_CHR_U01,
+            FIXTURE_BRAND,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_BRAND,
             "relative",
-            "schubert",
-            "schubert NK"));
+            FIXTURE_SCHUBERT,
+            FIXTURE_SCHUBERT_NK));
     observations.add(
         observation(
-            "DIF-001",
-            "CHR-U01",
-            "brand",
-            "difference",
-            "semantic",
-            "brand",
+            FIXTURE_DIF_001,
+            FIXTURE_CHR_U01,
+            FIXTURE_BRAND,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_BRAND,
             "/*",
-            "schubert",
-            "schubert NK"));
+            FIXTURE_SCHUBERT,
+            FIXTURE_SCHUBERT_NK));
     observations.add(
         observation(
-            "DIF-001",
-            "CHR-U01",
-            "brand",
-            "difference",
-            "semantic",
-            "brand",
+            FIXTURE_DIF_001,
+            FIXTURE_CHR_U01,
+            FIXTURE_BRAND,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_BRAND,
             "/a..b",
-            "schubert",
-            "schubert NK"));
+            FIXTURE_SCHUBERT,
+            FIXTURE_SCHUBERT_NK));
     observations.add(
         observation(
-            "DIF-001",
-            "CHR-U01",
-            "brand",
-            "difference",
-            "semantic",
-            "brand",
+            FIXTURE_DIF_001,
+            FIXTURE_CHR_U01,
+            FIXTURE_BRAND,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_BRAND,
             "/",
-            "schubert",
-            "schubert NK"));
+            FIXTURE_SCHUBERT,
+            FIXTURE_SCHUBERT_NK));
 
     ObjectNode missingExpected =
         observation(
             "DIF-002",
-            "CHR-L01",
-            "authorization.log",
-            "difference",
-            "semantic",
-            "authorization.log",
+            FIXTURE_CHR_L01,
+            FIXTURE_AUTHORIZATION_LOG,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_AUTHORIZATION_LOG,
             "/dif/DIF-002",
             "AUTHENTICATED",
             "ADMIN");
@@ -446,7 +490,7 @@ class ArtifactComparatorTest {
 
     observations.add(
         observation(
-            "DIF-001",
+            FIXTURE_DIF_001,
             "CHR-M01",
             "wrong-field",
             "contract",
@@ -457,56 +501,56 @@ class ArtifactComparatorTest {
             "wrong-nk"));
     observations.add(
         observation(
-            "DIF-001",
-            "CHR-U01",
-            "brand",
-            "difference",
-            "semantic",
-            "brand",
+            FIXTURE_DIF_001,
+            FIXTURE_CHR_U01,
+            FIXTURE_BRAND,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_BRAND,
             "/missing",
             "wrong-current",
             "wrong-nk"));
 
-    ObjectNode currentA01 = objectFile(fixture.current().resolve("CHR-A01.json"));
-    ObjectNode nkA01 = objectFile(fixture.nk().resolve("CHR-A01.json"));
-    currentA01.put("same", "same");
-    nkA01.put("same", "same");
-    currentA01.put("shared", "current");
+    ObjectNode currentA01 = objectFile(fixture.current().resolve(FIXTURE_CHR_A01_JSON));
+    ObjectNode nkA01 = objectFile(fixture.nk().resolve(FIXTURE_CHR_A01_JSON));
+    currentA01.put(FIXTURE_SAME, FIXTURE_SAME);
+    nkA01.put(FIXTURE_SAME, FIXTURE_SAME);
+    currentA01.put("shared", FIXTURE_CURRENT);
     nkA01.put("shared", "nk");
-    writeJson(fixture.current().resolve("CHR-A01.json"), currentA01);
-    writeJson(fixture.nk().resolve("CHR-A01.json"), nkA01);
+    writeJson(fixture.current().resolve(FIXTURE_CHR_A01_JSON), currentA01);
+    writeJson(fixture.nk().resolve(FIXTURE_CHR_A01_JSON), nkA01);
     observations.add(
         observation(
             "DIF-004",
-            "CHR-A01",
-            "authentication.backend",
-            "difference",
-            "semantic",
-            "authentication.backend",
+            FIXTURE_CHR_A01,
+            FIXTURE_AUTHENTICATION_BACKEND,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_AUTHENTICATION_BACKEND,
             "/same",
-            "same",
-            "same"));
+            FIXTURE_SAME,
+            FIXTURE_SAME));
     observations.add(
         observation(
             "DIF-004",
-            "CHR-A01",
-            "authentication.backend",
-            "difference",
-            "semantic",
-            "authentication.backend",
+            FIXTURE_CHR_A01,
+            FIXTURE_AUTHENTICATION_BACKEND,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_AUTHENTICATION_BACKEND,
             "/shared",
-            "current",
+            FIXTURE_CURRENT,
             "nk"));
     observations.add(
         observation(
             "DIF-015",
-            "CHR-A01",
-            "http.path",
+            FIXTURE_CHR_A01,
+            FIXTURE_HTTP_PATH,
             "contract",
-            "semantic",
-            "http.path",
+            FIXTURE_SEMANTIC,
+            FIXTURE_HTTP_PATH,
             "/shared",
-            "current",
+            FIXTURE_CURRENT,
             "nk"));
     mutate(
         fixture
@@ -516,11 +560,11 @@ class ArtifactComparatorTest {
     observations.add(
         observation(
             "DIF-002",
-            "CHR-L01",
-            "authorization.log",
+            FIXTURE_CHR_L01,
+            FIXTURE_AUTHORIZATION_LOG,
             "wildcard",
-            "semantic",
-            "authorization.log",
+            FIXTURE_SEMANTIC,
+            FIXTURE_AUTHORIZATION_LOG,
             "/dif/DIF-002",
             "AUTHENTICATED",
             "ADMIN"));
@@ -560,7 +604,7 @@ class ArtifactComparatorTest {
     assertPrefix(failures, "OBSERVATION_NK_VALUE:");
     assertPrefix(failures, "OBSERVATION_DIFFERENCE_REQUIRED:");
     assertPrefix(failures, "OBSERVATION_OVERLAP:");
-    assertEquals("FAIL", report.path("status").asText());
+    assertEquals("FAIL", report.path(FIXTURE_STATUS).asText());
   }
 
   @Test
@@ -589,12 +633,63 @@ class ArtifactComparatorTest {
     mutate(
         unrelated.observations(),
         root ->
-            ((ObjectNode) root.at("/correlatedLogArtifacts/current")).put("extra", "not-captured"));
+            ((ObjectNode) root.at("/correlatedLogArtifacts/current"))
+                .put(FIXTURE_EXTRA, "not-captured"));
     ArtifactComparator.ComparisonResult unrelatedResult =
         ArtifactComparator.compare(
             unrelated.project(), unrelated.current(), unrelated.nk(), unrelated.observations());
     assertFalse(unrelatedResult.passed());
     assertContains(unrelatedResult.failures(), "LOG_PROJECTION_ARTIFACT_BINDING");
+
+    for (String side : List.of("missing", FIXTURE_EXTRA, "nk")) {
+      Fixture binding = fixture("projection-binding-" + side);
+      mutate(
+          binding.observations(),
+          root -> {
+            if (side.equals("missing")) root.remove("correlatedLogArtifacts");
+            else if (side.equals(FIXTURE_EXTRA))
+              ((ObjectNode) root.path("correlatedLogArtifacts")).put(FIXTURE_EXTRA, true);
+            else
+              ((ObjectNode) root.at("/correlatedLogArtifacts/nk"))
+                  .put(FIXTURE_EXTRA, "not-captured");
+          });
+      ArtifactComparator.ComparisonResult result =
+          ArtifactComparator.compare(
+              binding.project(), binding.current(), binding.nk(), binding.observations());
+      assertFalse(result.passed());
+      assertContains(result.failures(), "LOG_PROJECTION_ARTIFACT_BINDING");
+    }
+  }
+
+  @Test
+  void rejectsNonIntegralOrOversizedObservationVersions() throws Exception {
+    int index = 0;
+    for (JsonNode version :
+        List.of(
+            TextNode.valueOf("1"),
+            JSON.getNodeFactory().numberNode(1.5),
+            JSON.getNodeFactory().numberNode(new java.math.BigInteger("4294967297")))) {
+      Fixture input = fixture("observation-version-" + index);
+      index++;
+      mutate(input.observations(), root -> root.set("version", version));
+      ArtifactComparator.ComparisonResult result =
+          ArtifactComparator.compare(
+              input.project(), input.current(), input.nk(), input.observations());
+      assertFalse(result.passed());
+      assertContains(result.failures(), "OBSERVATION_VERSION");
+    }
+  }
+
+  @Test
+  void lexicalArtifactNamesRejectNullAndNamelessPathsBeforeDereference() {
+    assertEquals(
+        "CHR-L01.json",
+        ArtifactComparator.requiredArtifactFileName(Path.of("/synthetic/CHR-L01.json")));
+    assertThrows(
+        IllegalArgumentException.class, () -> ArtifactComparator.requiredArtifactFileName(null));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> ArtifactComparator.requiredArtifactFileName(Path.of("/")));
   }
 
   private Fixture fixture(String name) throws Exception {
@@ -610,14 +705,17 @@ class ArtifactComparatorTest {
         SOURCE_ROOT.resolve("program/characterization/tests/resources/cases/dif-allowlist.json"),
         resources.resolve("dif-allowlist.json"),
         StandardCopyOption.COPY_ATTRIBUTES);
-    Path current = Files.createDirectories(root.resolve("current"));
+    Path current = Files.createDirectories(root.resolve(FIXTURE_CURRENT));
     Path nk = Files.createDirectories(root.resolve("nk"));
     java.util.Map<String, ObjectNode> currentArtifacts = new java.util.LinkedHashMap<>();
     java.util.Map<String, ObjectNode> nkArtifacts = new java.util.LinkedHashMap<>();
     for (String caseId : CASE_IDS) {
       currentArtifacts.put(
-          caseId, JSON.createObjectNode().put("caseId", caseId).put("status", "PASS"));
-      nkArtifacts.put(caseId, JSON.createObjectNode().put("caseId", caseId).put("status", "PASS"));
+          caseId,
+          JSON.createObjectNode().put(FIXTURE_CASEID, caseId).put(FIXTURE_STATUS, FIXTURE_PASS));
+      nkArtifacts.put(
+          caseId,
+          JSON.createObjectNode().put(FIXTURE_CASEID, caseId).put(FIXTURE_STATUS, FIXTURE_PASS));
     }
 
     ArrayNode observationItems = JSON.createArrayNode();
@@ -629,9 +727,9 @@ class ArtifactComparatorTest {
       String pointer = "/dif/" + oracle.id();
       JsonNode currentValue = TextNode.valueOf(oracle.currentValue());
       JsonNode nkValue = TextNode.valueOf(oracle.nkValue());
-      if ("DIF-003".equals(oracle.id())) {
-        currentDif.set(oracle.id(), JSON.valueToTree(List.of("same", oracle.currentValue())));
-        nkDif.set(oracle.id(), JSON.valueToTree(List.of("same", oracle.nkValue())));
+      if (ASYNC_MENU_DIFFERENCE.equals(oracle.id())) {
+        currentDif.set(oracle.id(), JSON.valueToTree(List.of(FIXTURE_SAME, oracle.currentValue())));
+        nkDif.set(oracle.id(), JSON.valueToTree(List.of(FIXTURE_SAME, oracle.nkValue())));
         pointer += "/1";
       } else {
         currentDif.set(oracle.id(), currentValue);
@@ -658,8 +756,8 @@ class ArtifactComparatorTest {
     envelope.set("observations", observationItems);
     envelope.set("correlatedLogEvidence", CorrelatedLogEvidenceValidatorTest.fixture());
     ObjectNode artifactBinding = envelope.putObject("correlatedLogArtifacts");
-    artifactBinding.set("current", currentArtifacts.get("CHR-L01").deepCopy());
-    artifactBinding.set("nk", nkArtifacts.get("CHR-L01").deepCopy());
+    artifactBinding.set(FIXTURE_CURRENT, currentArtifacts.get(FIXTURE_CHR_L01).deepCopy());
+    artifactBinding.set("nk", nkArtifacts.get(FIXTURE_CHR_L01).deepCopy());
     writeJson(observations, envelope);
     return new Fixture(project, current, nk, observations);
   }
@@ -676,7 +774,7 @@ class ArtifactComparatorTest {
       String expectedNk) {
     return JSON.createObjectNode()
         .put("id", id)
-        .put("caseId", caseId)
+        .put(FIXTURE_CASEID, caseId)
         .put("field", field)
         .put("mode", mode)
         .put("selectorType", selectorType)
@@ -737,13 +835,13 @@ class ArtifactComparatorTest {
   }
 
   private static void withProjectRoot(Path projectRoot, ThrowingRunnable action) throws Exception {
-    String previous = System.getProperty("chr.projectRoot");
+    String previous = System.getProperty(FIXTURE_CHR_PROJECTROOT);
     try {
-      System.setProperty("chr.projectRoot", projectRoot.toString());
+      System.setProperty(FIXTURE_CHR_PROJECTROOT, projectRoot.toString());
       action.run();
     } finally {
-      if (previous == null) System.clearProperty("chr.projectRoot");
-      else System.setProperty("chr.projectRoot", previous);
+      if (previous == null) System.clearProperty(FIXTURE_CHR_PROJECTROOT);
+      else System.setProperty(FIXTURE_CHR_PROJECTROOT, previous);
     }
   }
 

@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-05: 709～712、QA051初回14/原version2failure・全五静的0と新22Test compile/trace（green未実行）。Core b093不変更、実L01/全451未受入。
+
 2026-11-05: 703～708 / 020_NK-CHR-001/001、QA051 host相関比較PG・14Test compile。Characterization frameworkはprogramへ分離、Core b093不変更、初回Unit前/静的111・13未処理。
 
 2026-11-05: 698～702 同SのPOST更新。全251leaf＋予備1/元17受入と新証拠を分離、二正常class差分確認、S PARTIAL/V未達/PLAN_NOT_VALIDATED。新予算・全体終了ではない。

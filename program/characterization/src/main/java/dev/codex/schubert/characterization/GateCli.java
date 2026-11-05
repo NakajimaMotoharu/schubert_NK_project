@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.PosixFilePermission;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -25,6 +26,17 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
 public final class GateCli {
+  private static final String VALUE_CHR_PROJECTROOT = "chr.projectRoot";
+  private static final String FIELD_SOURCEAGGREGATESHA256 = "sourceAggregateSha256";
+  private static final String FIELD_DOCUMENTAGGREGATESHA256 = "documentAggregateSha256";
+  private static final String FIELD_MASTERFILECOUNT = "masterFileCount";
+  private static final String FIELD_MASTERBYTES = "masterBytes";
+  private static final String FIELD_STATUS = "status";
+  private static final String VALUE_PASS = "PASS";
+  private static final String VALUE_FAIL = "FAIL";
+  private static final String FIELD_ARTIFACTS = "artifacts";
+  private static final String FIELD_SCREENSHOTS = "screenshots";
+
   private static final int EXPECTED_REPEAT_FILE_COUNT = 28;
   private static final ObjectMapper JSON =
       new ObjectMapper()
@@ -35,35 +47,37 @@ public final class GateCli {
 
   private GateCli() {}
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
     if (args.length == 0) {
       throw new IllegalArgumentException("command is required");
     }
     switch (args[0]) {
       case "verify-source" ->
           verifySource(
-              pathProperty("chr.projectRoot"), pathProperty("chr.currentRoot"), output(args, 1));
-      case "preflight" -> preflight(pathProperty("chr.projectRoot"), output(args, 1));
+              pathProperty(VALUE_CHR_PROJECTROOT),
+              pathProperty("chr.currentRoot"),
+              output(args, 1));
+      case "preflight" -> preflight(pathProperty(VALUE_CHR_PROJECTROOT), output(args, 1));
       case "compare-current" ->
           compareCurrent(
               argument(args, 1, "first run"), argument(args, 2, "second run"), output(args, 3));
       case "compare-nk" ->
           compareNk(
-              pathProperty("chr.projectRoot"),
+              pathProperty(VALUE_CHR_PROJECTROOT),
               argument(args, 1, "current artifacts"),
               argument(args, 2, "NK artifacts"),
               argument(args, 3, "DIF observations"),
               output(args, 4));
       case "report" ->
           report(
-              pathProperty("chr.projectRoot"),
+              pathProperty(VALUE_CHR_PROJECTROOT),
               argument(args, 1, "first run"),
               argument(args, 2, "second run"),
               argument(args, 3, "comparison"),
               output(args, 4));
       case "promote-current" ->
           promoteCurrent(
-              pathProperty("chr.projectRoot"),
+              pathProperty(VALUE_CHR_PROJECTROOT),
               argument(args, 1, "source run"),
               argument(args, 2, "baseline"));
       default -> throw new IllegalArgumentException("unknown command: " + args[0]);
@@ -92,7 +106,8 @@ public final class GateCli {
     return Path.of(value).toAbsolutePath().normalize();
   }
 
-  static void verifySource(Path projectRoot, Path currentRoot, Path output) throws Exception {
+  static void verifySource(Path projectRoot, Path currentRoot, Path output)
+      throws IOException, NoSuchAlgorithmException {
     JsonNode expected =
         JSON.readTree(
             projectRoot
@@ -105,29 +120,29 @@ public final class GateCli {
     List<Path> documents =
         regularFiles(
             currentRoot.resolve("documents"),
-            path -> path.getFileName().toString().endsWith(".md"));
+            path -> ArtifactComparator.requiredArtifactFileName(path).endsWith(".md"));
     TreeStats master = treeStats(currentRoot.resolve("data/master"));
 
     Map<String, Object> actual = new LinkedHashMap<>();
     actual.put("sourceFileCount", sourceFiles.size());
-    actual.put("sourceAggregateSha256", aggregateHash(currentRoot, sourceFiles));
+    actual.put(FIELD_SOURCEAGGREGATESHA256, aggregateHash(currentRoot, sourceFiles));
     actual.put("documentFileCount", documents.size());
-    actual.put("documentAggregateSha256", aggregateHash(currentRoot, documents));
-    actual.put("masterFileCount", master.fileCount());
-    actual.put("masterBytes", master.bytes());
+    actual.put(FIELD_DOCUMENTAGGREGATESHA256, aggregateHash(currentRoot, documents));
+    actual.put(FIELD_MASTERFILECOUNT, master.fileCount());
+    actual.put(FIELD_MASTERBYTES, master.bytes());
     actual.put("masterSymlinks", master.symlinks());
 
     List<String> failures = new ArrayList<>();
     compare(expected, actual, "sourceFileCount", failures);
-    compare(expected, actual, "sourceAggregateSha256", failures);
+    compare(expected, actual, FIELD_SOURCEAGGREGATESHA256, failures);
     compare(expected, actual, "documentFileCount", failures);
-    compare(expected, actual, "documentAggregateSha256", failures);
-    compare(expected, actual, "masterFileCount", failures);
-    compare(expected, actual, "masterBytes", failures);
+    compare(expected, actual, FIELD_DOCUMENTAGGREGATESHA256, failures);
+    compare(expected, actual, FIELD_MASTERFILECOUNT, failures);
+    compare(expected, actual, FIELD_MASTERBYTES, failures);
     if (!master.symlinks().isEmpty()) {
       failures.add("masterSymlinks must be empty");
     }
-    actual.put("status", failures.isEmpty() ? "PASS" : "FAIL");
+    actual.put(FIELD_STATUS, failures.isEmpty() ? VALUE_PASS : VALUE_FAIL);
     actual.put("failures", failures);
     writeJson(output, actual);
     if (!failures.isEmpty()) {
@@ -144,7 +159,8 @@ public final class GateCli {
     }
   }
 
-  static void preflight(Path projectRoot, Path output) throws Exception {
+  static void preflight(Path projectRoot, Path output)
+      throws IOException, NoSuchAlgorithmException {
     Path currentRoot = pathProperty("chr.currentRoot");
     Path currentJar = pathProperty("chr.currentJar");
     Path assetRoot = pathProperty("chr.assetRoot");
@@ -194,7 +210,7 @@ public final class GateCli {
     }
 
     Map<String, Object> result = new LinkedHashMap<>();
-    result.put("status", failures.isEmpty() ? "PASS" : "FAIL");
+    result.put(FIELD_STATUS, failures.isEmpty() ? VALUE_PASS : VALUE_FAIL);
     result.put("failures", failures);
     result.put("freeBytes", usableBytes);
     result.put("credentialPermission", isOwnerOnly(usersFile) ? "0600" : "INVALID");
@@ -227,12 +243,13 @@ public final class GateCli {
         Set.of(PosixFilePermission.OWNER_READ, PosixFilePermission.OWNER_WRITE));
   }
 
-  static void compareCurrent(Path first, Path second, Path output) throws Exception {
-    Map<String, String> firstFiles = fileHashes(first.resolve("artifacts"));
-    firstFiles.putAll(prefixed("screenshots/", fileHashes(first.resolve("screenshots"))));
+  static void compareCurrent(Path first, Path second, Path output)
+      throws IOException, NoSuchAlgorithmException {
+    Map<String, String> firstFiles = fileHashes(first.resolve(FIELD_ARTIFACTS));
+    firstFiles.putAll(prefixed("screenshots/", fileHashes(first.resolve(FIELD_SCREENSHOTS))));
     addRunReportHashes(first, firstFiles);
-    Map<String, String> secondFiles = fileHashes(second.resolve("artifacts"));
-    secondFiles.putAll(prefixed("screenshots/", fileHashes(second.resolve("screenshots"))));
+    Map<String, String> secondFiles = fileHashes(second.resolve(FIELD_ARTIFACTS));
+    secondFiles.putAll(prefixed("screenshots/", fileHashes(second.resolve(FIELD_SCREENSHOTS))));
     addRunReportHashes(second, secondFiles);
     List<String> missing =
         firstFiles.keySet().stream().filter(key -> !secondFiles.containsKey(key)).toList();
@@ -248,7 +265,7 @@ public final class GateCli {
         firstFiles.size() == EXPECTED_REPEAT_FILE_COUNT
             & secondFiles.size() == EXPECTED_REPEAT_FILE_COUNT;
     boolean unchanged = missing.isEmpty() & extra.isEmpty() & changed.isEmpty();
-    result.put("status", complete & unchanged ? "PASS" : "FAIL");
+    result.put(FIELD_STATUS, complete & unchanged ? VALUE_PASS : VALUE_FAIL);
     result.put("expectedFileCount", EXPECTED_REPEAT_FILE_COUNT);
     result.put("firstFileCount", firstFiles.size());
     result.put("secondFileCount", secondFiles.size());
@@ -256,14 +273,14 @@ public final class GateCli {
     result.put("extra", extra);
     result.put("changed", changed);
     writeJson(output, result);
-    if (!"PASS".equals(result.get("status"))) {
+    if (!VALUE_PASS.equals(result.get(FIELD_STATUS))) {
       throw new IllegalStateException("current repeat comparison failed");
     }
   }
 
   static void compareNk(
       Path projectRoot, Path currentArtifacts, Path nkArtifacts, Path observations, Path output)
-      throws Exception {
+      throws IOException {
     ArtifactComparator.ComparisonResult result =
         ArtifactComparator.compare(projectRoot, currentArtifacts, nkArtifacts, observations);
     writeJson(output, result);
@@ -272,7 +289,8 @@ public final class GateCli {
     }
   }
 
-  private static void addRunReportHashes(Path run, Map<String, String> hashes) throws Exception {
+  private static void addRunReportHashes(Path run, Map<String, String> hashes)
+      throws IOException, NoSuchAlgorithmException {
     for (String name : List.of("inventory.json", "supplemental.json")) {
       Path report = run.resolve(name);
       if (Files.isRegularFile(report, LinkOption.NOFOLLOW_LINKS)) {
@@ -282,7 +300,7 @@ public final class GateCli {
   }
 
   static void report(Path projectRoot, Path first, Path second, Path comparison, Path output)
-      throws Exception {
+      throws IOException, NoSuchAlgorithmException {
     JsonNode compare = JSON.readTree(comparison.toFile());
     GateContractValidator.ValidationResult validation =
         GateContractValidator.validate(projectRoot, first, second, comparison);
@@ -314,12 +332,12 @@ public final class GateCli {
         secretHits.isEmpty() && noneMatch(validation.failures(), "SOURCE_", "BASELINE_", "REVIEW_");
 
     Map<String, Object> result = new LinkedHashMap<>();
-    result.put("status", failures.isEmpty() ? "PASS" : "FAIL");
+    result.put(FIELD_STATUS, failures.isEmpty() ? VALUE_PASS : VALUE_FAIL);
     result.put("generatedAt", Instant.now().toString());
-    result.put("caseCoverage", g02 ? "24/24 PASS" : "FAIL");
-    result.put("currentApplicable", g02 ? "23/23 PASS" : "FAIL");
-    result.put("nkOnlyMetadata", g02 ? "CHR-N01 PASS" : "FAIL");
-    result.put("repeatComparison", compare.path("status").asText());
+    result.put("caseCoverage", g02 ? "24/24 PASS" : VALUE_FAIL);
+    result.put("currentApplicable", g02 ? "23/23 PASS" : VALUE_FAIL);
+    result.put("nkOnlyMetadata", g02 ? "CHR-N01 PASS" : VALUE_FAIL);
+    result.put("repeatComparison", compare.path(FIELD_STATUS).asText());
     result.put("differenceCatalog", "DIF-001..016");
     result.put("secretScanHits", secretHits.size());
     result.put("contractMetrics", validation.metrics());
@@ -327,12 +345,12 @@ public final class GateCli {
     result.put(
         "gates",
         Map.of(
-            "CHR-G01", g01 ? "PASS" : "FAIL",
-            "CHR-G02", g02 ? "PASS" : "FAIL",
-            "CHR-G03", g03 ? "PASS" : "FAIL",
-            "CHR-G04", g04 ? "PASS" : "FAIL",
-            "CHR-G05", g05 ? "PASS" : "FAIL",
-            "CHR-G06", g06 ? "PASS" : "FAIL"));
+            "CHR-G01", g01 ? VALUE_PASS : VALUE_FAIL,
+            "CHR-G02", g02 ? VALUE_PASS : VALUE_FAIL,
+            "CHR-G03", g03 ? VALUE_PASS : VALUE_FAIL,
+            "CHR-G04", g04 ? VALUE_PASS : VALUE_FAIL,
+            "CHR-G05", g05 ? VALUE_PASS : VALUE_FAIL,
+            "CHR-G06", g06 ? VALUE_PASS : VALUE_FAIL));
     writeJson(output, result);
     if (!failures.isEmpty()) {
       throw new IllegalStateException("gate report failed: " + failures);
@@ -383,7 +401,8 @@ public final class GateCli {
     return false;
   }
 
-  static void promoteCurrent(Path projectRoot, Path sourceRun, Path baseline) throws Exception {
+  static void promoteCurrent(Path projectRoot, Path sourceRun, Path baseline)
+      throws IOException, NoSuchAlgorithmException {
     if (sourceRun == null)
       throw new IllegalArgumentException("sourceRun must name a run directory");
     Path runName = sourceRun.getFileName();
@@ -400,8 +419,8 @@ public final class GateCli {
         }
       }
     }
-    copyTree(sourceRun.resolve("artifacts"), baseline.resolve("artifacts"));
-    copyTree(sourceRun.resolve("screenshots"), baseline.resolve("screenshots"));
+    copyTree(sourceRun.resolve(FIELD_ARTIFACTS), baseline.resolve(FIELD_ARTIFACTS));
+    copyTree(sourceRun.resolve(FIELD_SCREENSHOTS), baseline.resolve(FIELD_SCREENSHOTS));
     JsonNode expected =
         JSON.readTree(
             projectRoot
@@ -421,14 +440,16 @@ public final class GateCli {
     manifest.put("schemaVersion", 2);
     manifest.put("target", "current");
     manifest.put("sourceRun", runName.toString());
-    manifest.put("caseCount", caseIds(sourceRun.resolve("artifacts")).size());
+    manifest.put("caseCount", caseIds(sourceRun.resolve(FIELD_ARTIFACTS)).size());
     manifest.put(
-        "screenshotFileCount", regularFiles(sourceRun.resolve("screenshots"), path -> true).size());
+        "screenshotFileCount",
+        regularFiles(sourceRun.resolve(FIELD_SCREENSHOTS), path -> true).size());
     manifest.put("differenceCount", differences.path("differences").size());
-    manifest.put("sourceAggregateSha256", expected.path("sourceAggregateSha256").asText());
-    manifest.put("documentAggregateSha256", expected.path("documentAggregateSha256").asText());
-    manifest.put("masterFileCount", expected.path("masterFileCount").asLong());
-    manifest.put("masterBytes", expected.path("masterBytes").asLong());
+    manifest.put(FIELD_SOURCEAGGREGATESHA256, expected.path(FIELD_SOURCEAGGREGATESHA256).asText());
+    manifest.put(
+        FIELD_DOCUMENTAGGREGATESHA256, expected.path(FIELD_DOCUMENTAGGREGATESHA256).asText());
+    manifest.put(FIELD_MASTERFILECOUNT, expected.path(FIELD_MASTERFILECOUNT).asLong());
+    manifest.put(FIELD_MASTERBYTES, expected.path(FIELD_MASTERBYTES).asLong());
     manifest.put(
         "environment",
         Map.of(
@@ -460,8 +481,11 @@ public final class GateCli {
     if (!Files.isDirectory(artifactRoot)) return List.of();
     try (Stream<Path> files = Files.list(artifactRoot)) {
       return files
-          .filter(path -> path.getFileName().toString().matches("CHR-[A-Z][0-9]{2}\\.json"))
-          .map(path -> path.getFileName().toString().replace(".json", ""))
+          .filter(
+              path ->
+                  ArtifactComparator.requiredArtifactFileName(path)
+                      .matches("CHR-[A-Z][0-9]{2}\\.json"))
+          .map(path -> ArtifactComparator.requiredArtifactFileName(path).replace(".json", ""))
           .sorted(Comparator.comparingInt(GateCli::caseOrder))
           .toList();
     }
@@ -479,7 +503,7 @@ public final class GateCli {
     return result;
   }
 
-  static Map<String, String> fileHashes(Path root) throws Exception {
+  static Map<String, String> fileHashes(Path root) throws IOException, NoSuchAlgorithmException {
     Map<String, String> result = new TreeMap<>();
     if (!Files.isDirectory(root)) return result;
     for (Path file : regularFiles(root, path -> true)) {
@@ -517,7 +541,8 @@ public final class GateCli {
     return new TreeStats(files, bytes, List.copyOf(symlinks));
   }
 
-  private static String aggregateHash(Path root, List<Path> files) throws Exception {
+  private static String aggregateHash(Path root, List<Path> files)
+      throws IOException, NoSuchAlgorithmException {
     List<Path> sorted =
         files.stream()
             .sorted(
@@ -539,11 +564,12 @@ public final class GateCli {
         left.getBytes(StandardCharsets.UTF_8), right.getBytes(StandardCharsets.UTF_8));
   }
 
-  private static String sha256(Path file) throws Exception {
+  static String sha256(Path file) throws IOException, NoSuchAlgorithmException {
+    if (file == null) throw new IllegalArgumentException("hash source is required");
     MessageDigest digest = MessageDigest.getInstance("SHA-256");
     try (var input = Files.newInputStream(file)) {
       byte[] buffer = new byte[1024 * 1024];
-      for (int read; (read = input.read(buffer)) >= 0; ) {
+      for (int read = input.read(buffer); read >= 0; read = input.read(buffer)) {
         digest.update(buffer, 0, read);
       }
     }

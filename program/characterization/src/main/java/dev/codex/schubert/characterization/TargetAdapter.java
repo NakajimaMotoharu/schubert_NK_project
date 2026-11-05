@@ -12,14 +12,16 @@ import java.util.Set;
 
 /** Current/NK共通runnerへ接続先と証跡先だけを与えるtarget境界。SS 355 §4, §12。 */
 public final class TargetAdapter {
-  private final Target target;
-  private final URI baseUri;
-  private final Path evidenceRoot;
+  private static final String APPLICABILITY_RUN = "RUN";
+  private static final int CATALOG_CASE_COUNT = 24;
+  private final Target selectedTarget;
+  private final URI canonicalOrigin;
+  private final Path selectedEvidenceRoot;
 
   private TargetAdapter(Target target, URI baseUri, Path evidenceRoot) {
-    this.target = target;
-    this.baseUri = baseUri;
-    this.evidenceRoot = evidenceRoot;
+    selectedTarget = target;
+    canonicalOrigin = baseUri;
+    selectedEvidenceRoot = evidenceRoot;
   }
 
   public static TargetAdapter create(
@@ -74,15 +76,15 @@ public final class TargetAdapter {
   }
 
   public Target target() {
-    return target;
+    return selectedTarget;
   }
 
   public URI baseUri() {
-    return baseUri;
+    return canonicalOrigin;
   }
 
   public Path evidenceRoot() {
-    return evidenceRoot;
+    return selectedEvidenceRoot;
   }
 
   public URI endpoint(String applicationPath) {
@@ -93,14 +95,14 @@ public final class TargetAdapter {
     if (reference.getHost() != null) {
       throw new IllegalArgumentException("application path must not change origin");
     }
-    return baseUri.resolve(reference);
+    return canonicalOrigin.resolve(reference);
   }
 
   public Path caseArtifact(String caseId) {
     if (caseId == null || !caseId.matches("CHR-[A-Z][0-9]{2}")) {
       throw new IllegalArgumentException("invalid case ID");
     }
-    return evidenceRoot.resolve("artifacts").resolve(caseId + ".json");
+    return selectedEvidenceRoot.resolve("artifacts").resolve(caseId + ".json");
   }
 
   public List<String> executableCaseIds(JsonNode catalog) {
@@ -114,17 +116,17 @@ public final class TargetAdapter {
       if (!id.matches("CHR-[A-Z][0-9]{2}") || !all.add(id)) {
         throw new IllegalArgumentException("invalid or duplicate case ID: " + id);
       }
-      String applicability = item.path(target.property()).asText();
-      if ("RUN".equals(applicability)) {
+      String applicability = item.path(selectedTarget.property()).asText();
+      if (APPLICABILITY_RUN.equals(applicability)) {
         executable.add(id);
-      } else if (!(target == Target.CURRENT
+      } else if (!(selectedTarget == Target.CURRENT
           && "CHR-N01".equals(id)
           && "NK_ONLY".equals(applicability))) {
         throw new IllegalArgumentException(
-            "unsupported applicability for " + target.externalName() + ": " + id);
+            "unsupported applicability for " + selectedTarget.externalName() + ": " + id);
       }
     }
-    if (all.size() != 24) {
+    if (all.size() != CATALOG_CASE_COUNT) {
       throw new IllegalArgumentException("case catalog must contain exactly 24 cases");
     }
     return List.copyOf(executable);
@@ -134,10 +136,10 @@ public final class TargetAdapter {
     CURRENT("current"),
     NK("nk");
 
-    private final String property;
+    private final String configurationProperty;
 
     Target(String property) {
-      this.property = property;
+      configurationProperty = property;
     }
 
     static Target parse(String value) {
@@ -152,11 +154,11 @@ public final class TargetAdapter {
     }
 
     String property() {
-      return property;
+      return configurationProperty;
     }
 
     public String externalName() {
-      return property;
+      return configurationProperty;
     }
   }
 }

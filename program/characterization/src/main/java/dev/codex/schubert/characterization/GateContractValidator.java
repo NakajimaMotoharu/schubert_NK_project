@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -24,6 +25,17 @@ import java.util.stream.Stream;
  * <p>Program: NK-CHR-001. Tests: PT-CHR-G01-* through PT-CHR-G06-*.
  */
 final class GateContractValidator {
+  private static final int CASE_GROUP_OFFSET = 4;
+  private static final String FIELD_BASELINECOMMIT = "baselineCommit";
+  private static final String FIELD_VERSION = "version";
+  private static final String FIELD_CASES = "cases";
+  private static final String FIELD_CURRENT = "current";
+  private static final String FIELD_DEVICESCALEFACTOR = "deviceScaleFactor";
+  private static final String FIELD_STATUS = "status";
+  private static final String VALUE_PASS = "PASS";
+  private static final String FIELD_EVIDENCE = "evidence";
+  private static final String FIELD_ENVIRONMENT = "environment";
+
   private static final ObjectMapper JSON = new ObjectMapper();
   private static final Set<String> MODES = Set.of("difference", "required", "contract");
   private static final Set<String> SELECTOR_TYPES = Set.of("semantic", "header", "json-pointer");
@@ -31,7 +43,8 @@ final class GateContractValidator {
   private GateContractValidator() {}
 
   static ValidationResult validate(
-      Path projectRoot, Path firstRun, Path secondRun, Path comparisonReport) throws Exception {
+      Path projectRoot, Path firstRun, Path secondRun, Path comparisonReport)
+      throws IOException, NoSuchAlgorithmException {
     Path resources = projectRoot.resolve("program/characterization/tests/resources");
     JsonNode contract = read(resources.resolve("cases/gate-contract.json"));
     JsonNode catalog = read(resources.resolve("cases/catalog.json"));
@@ -67,7 +80,7 @@ final class GateContractValidator {
     validateSource(sourceReport, secondInventory, contract.path("source"), "run2", failures);
     require(firstInventory.equals(secondInventory), "INVENTORY_REPEAT_DIFF", failures);
     validatePreflight(preflight, failures);
-    validateReview(review, contract.path("baselineCommit").asText(), failures);
+    validateReview(review, contract.path(FIELD_BASELINECOMMIT).asText(), failures);
     validateBaseline(
         projectRoot,
         projectRoot.resolve("program/characterization/baseline/current"),
@@ -91,7 +104,10 @@ final class GateContractValidator {
 
   private static void validateContractShape(JsonNode contract, List<String> failures) {
     require(contract.isObject(), "CONTRACT_NOT_OBJECT", failures);
-    require(contract.path("version").asInt(-1) == 1, "CONTRACT_VERSION", failures);
+    require(
+        CorrelatedLogEvidenceValidator.versionOne(contract.path(FIELD_VERSION)),
+        "CONTRACT_VERSION",
+        failures);
     require(
         strings(contract.path("gates"))
             .equals(List.of("CHR-G01", "CHR-G02", "CHR-G03", "CHR-G04", "CHR-G05", "CHR-G06")),
@@ -105,7 +121,7 @@ final class GateContractValidator {
         "CONTRACT_DIFFERENCE_COUNT",
         failures);
     require(
-        contract.path("baselineCommit").asText().matches("[0-9a-f]{7,40}"),
+        contract.path(FIELD_BASELINECOMMIT).asText().matches("[0-9a-f]{7,40}"),
         "CONTRACT_BASELINE_COMMIT",
         failures);
     require(
@@ -122,15 +138,15 @@ final class GateContractValidator {
         failures);
     require("object".equals(schema.path("type").asText()), "SCHEMA_ROOT_TYPE", failures);
     require(
-        strings(schema.path("required")).equals(List.of("version", "cases")),
+        strings(schema.path("required")).equals(List.of(FIELD_VERSION, FIELD_CASES)),
         "SCHEMA_REQUIRED",
         failures);
-    JsonNode cases = schema.path("properties").path("cases");
+    JsonNode cases = schema.path("properties").path(FIELD_CASES);
     require(cases.path("minItems").asInt(-1) == 24, "SCHEMA_MIN_ITEMS", failures);
     require(cases.path("maxItems").asInt(-1) == 24, "SCHEMA_MAX_ITEMS", failures);
     require(
         strings(cases.path("items").path("required"))
-            .equals(List.of("id", "group", "current", "nk")),
+            .equals(List.of("id", "group", FIELD_CURRENT, "nk")),
         "SCHEMA_CASE_REQUIRED",
         failures);
   }
@@ -138,8 +154,11 @@ final class GateContractValidator {
   private static void validateCatalog(
       JsonNode catalog, List<String> expectedOrder, List<String> failures) {
     require(catalog.isObject(), "CATALOG_NOT_OBJECT", failures);
-    require(catalog.path("version").asInt(-1) == 1, "CATALOG_VERSION", failures);
-    JsonNode cases = catalog.path("cases");
+    require(
+        CorrelatedLogEvidenceValidator.versionOne(catalog.path(FIELD_VERSION)),
+        "CATALOG_VERSION",
+        failures);
+    JsonNode cases = catalog.path(FIELD_CASES);
     require(cases.isArray(), "CATALOG_CASES_NOT_ARRAY", failures);
     List<String> actualOrder = new ArrayList<>();
     Set<String> ids = new HashSet<>();
@@ -154,17 +173,19 @@ final class GateContractValidator {
           expectedGroup(id).equals(item.path("group").asText()), "CATALOG_GROUP:" + id, failures);
       String expectedCurrent = "CHR-N01".equals(id) ? "NK_ONLY" : "RUN";
       require(
-          expectedCurrent.equals(item.path("current").asText()), "CATALOG_CURRENT:" + id, failures);
+          expectedCurrent.equals(item.path(FIELD_CURRENT).asText()),
+          "CATALOG_CURRENT:" + id,
+          failures);
       require("RUN".equals(item.path("nk").asText()), "CATALOG_NK:" + id, failures);
     }
     require(expectedOrder.equals(actualOrder), "CATALOG_ORDER", failures);
   }
 
   private static String expectedGroup(String id) {
-    if (id.length() < 5) {
+    if (id.length() <= CASE_GROUP_OFFSET) {
       return "";
     }
-    return switch (id.charAt(4)) {
+    return switch (id.charAt(CASE_GROUP_OFFSET)) {
       case 'A' -> "Authentication";
       case 'U' -> "Common UI";
       case 'S' -> "Scenario";
@@ -211,10 +232,10 @@ final class GateContractValidator {
         "BROWSER_MOBILE_VIEWPORT",
         failures);
     require(
-        expected.path("deviceScaleFactor").asInt()
-                == browser.path("desktop").path("deviceScaleFactor").asInt()
-            && expected.path("deviceScaleFactor").asInt()
-                == browser.path("mobile").path("deviceScaleFactor").asInt(),
+        expected.path(FIELD_DEVICESCALEFACTOR).asInt()
+                == browser.path("desktop").path(FIELD_DEVICESCALEFACTOR).asInt()
+            && expected.path(FIELD_DEVICESCALEFACTOR).asInt()
+                == browser.path("mobile").path(FIELD_DEVICESCALEFACTOR).asInt(),
         "BROWSER_DEVICE_SCALE",
         failures);
     require(!strings(browser.path("fonts")).isEmpty(), "BROWSER_FONTS", failures);
@@ -234,7 +255,10 @@ final class GateContractValidator {
       JsonNode expectedIdsNode,
       List<String> expectedCases,
       List<String> failures) {
-    require(catalog.path("version").asInt(-1) == 1, "DIF_VERSION", failures);
+    require(
+        CorrelatedLogEvidenceValidator.versionOne(catalog.path(FIELD_VERSION)),
+        "DIF_VERSION",
+        failures);
     JsonNode differences = catalog.path("differences");
     require(differences.isArray(), "DIF_NOT_ARRAY", failures);
     List<String> ids = new ArrayList<>();
@@ -248,7 +272,7 @@ final class GateContractValidator {
           SELECTOR_TYPES.contains(difference.path("selectorType").asText()),
           "DIF_SELECTOR_TYPE:" + id,
           failures);
-      List<String> cases = strings(difference.path("cases"));
+      List<String> cases = strings(difference.path(FIELD_CASES));
       require(!cases.isEmpty(), "DIF_CASES_EMPTY:" + id, failures);
       require(new HashSet<>(cases).size() == cases.size(), "DIF_CASES_DUPLICATE:" + id, failures);
       for (String caseId : cases) {
@@ -269,13 +293,13 @@ final class GateContractValidator {
             "DIF_SELECTOR_WILDCARD:" + id,
             failures);
       }
-      require(!difference.path("current").asText().isBlank(), "DIF_CURRENT:" + id, failures);
+      require(!difference.path(FIELD_CURRENT).asText().isBlank(), "DIF_CURRENT:" + id, failures);
       require(!difference.path("nk").asText().isBlank(), "DIF_NK:" + id, failures);
     }
     require(strings(expectedIdsNode).equals(ids), "DIF_ID_SEQUENCE", failures);
     JsonNode pathContract = findDifference(differences, "DIF-015");
     require(
-        expectedCases.equals(strings(pathContract.path("cases"))),
+        expectedCases.equals(strings(pathContract.path(FIELD_CASES))),
         "DIF-015_CASE_COVERAGE",
         failures);
   }
@@ -291,7 +315,10 @@ final class GateContractValidator {
 
   private static void validateRequirements(
       JsonNode requirements, List<String> expectedCases, List<String> failures) {
-    require(requirements.path("version").asInt(-1) == 1, "REQ_VERSION", failures);
+    require(
+        CorrelatedLogEvidenceValidator.versionOne(requirements.path(FIELD_VERSION)),
+        "REQ_VERSION",
+        failures);
     JsonNode byCase = requirements.path("requirements");
     require(byCase.isObject(), "REQ_NOT_OBJECT", failures);
     List<String> actualCases = new ArrayList<>();
@@ -299,7 +326,8 @@ final class GateContractValidator {
     require(expectedCases.equals(actualCases), "REQ_CASE_ORDER", failures);
     for (String caseId : expectedCases) {
       List<String> keys = strings(byCase.path(caseId));
-      require(keys.contains("caseId") && keys.contains("status"), "REQ_CORE:" + caseId, failures);
+      require(
+          keys.contains("caseId") && keys.contains(FIELD_STATUS), "REQ_CORE:" + caseId, failures);
       require(new HashSet<>(keys).size() == keys.size(), "REQ_DUPLICATE:" + caseId, failures);
     }
     JsonNode supplemental = requirements.path("supplementalChecks");
@@ -345,7 +373,7 @@ final class GateContractValidator {
       String label,
       boolean requireSupplemental,
       List<String> failures)
-      throws Exception {
+      throws IOException, NoSuchAlgorithmException {
     Path artifactRoot = runRoot.resolve("artifacts");
     List<String> actualCases = caseIds(artifactRoot);
     require(expectedCases.equals(actualCases), label + "_CASE_COVERAGE", failures);
@@ -359,8 +387,8 @@ final class GateContractValidator {
       }
       JsonNode item = read(artifact);
       require(caseId.equals(item.path("caseId").asText()), label + "_CASE_ID:" + caseId, failures);
-      String status = item.path("status").asText();
-      require("PASS".equals(status), label + "_STATUS:" + caseId, failures);
+      String status = item.path(FIELD_STATUS).asText();
+      require(VALUE_PASS.equals(status), label + "_STATUS:" + caseId, failures);
       require(!rejected.contains(status), label + "_REJECTED_STATUS:" + caseId, failures);
       for (String key : strings(requirements.path("requirements").path(caseId))) {
         require(
@@ -371,7 +399,9 @@ final class GateContractValidator {
     }
     Path screenshots = runRoot.resolve("screenshots");
     List<Path> screenshotFiles =
-        regularFiles(screenshots, path -> path.getFileName().toString().endsWith(".png"));
+        regularFiles(
+            screenshots,
+            path -> ArtifactComparator.requiredArtifactFileName(path).endsWith(".png"));
     require(screenshotFiles.size() == 2, label + "_SCREENSHOT_COUNT", failures);
     require(
         Files.isRegularFile(screenshots.resolve("CHR-U01-desktop.png")),
@@ -411,16 +441,17 @@ final class GateContractValidator {
             entry -> {
               for (String check : strings(entry.getValue())) {
                 JsonNode result = checks.path(entry.getKey()).path(check);
-                String value = result.path("status").asText();
+                String value = result.path(FIELD_STATUS).asText();
                 boolean nkOnlyAllowed =
                     strings(requirements.path("nkOnlySupplementalChecks").path(entry.getKey()))
                         .contains(check);
                 require(
-                    "PASS".equals(value) || (nkOnlyAllowed && "NK_ONLY".equals(value)),
+                    VALUE_PASS.equals(value) || (nkOnlyAllowed && "NK_ONLY".equals(value)),
                     label + "_SUPPLEMENTAL:" + entry.getKey() + ":" + check,
                     failures);
                 require(
-                    result.path("evidence").isObject() && !result.path("evidence").isEmpty(),
+                    result.path(FIELD_EVIDENCE).isObject()
+                        && !result.path(FIELD_EVIDENCE).isEmpty(),
                     label + "_SUPPLEMENTAL_EVIDENCE:" + entry.getKey() + ":" + check,
                     failures);
               }
@@ -428,7 +459,7 @@ final class GateContractValidator {
   }
 
   private static void validateComparison(JsonNode comparison, List<String> failures) {
-    require("PASS".equals(comparison.path("status").asText()), "COMPARE_STATUS", failures);
+    require(VALUE_PASS.equals(comparison.path(FIELD_STATUS).asText()), "COMPARE_STATUS", failures);
     require(comparison.path("firstFileCount").asInt(-1) == 28, "COMPARE_FIRST_COUNT", failures);
     require(comparison.path("secondFileCount").asInt(-1) == 28, "COMPARE_SECOND_COUNT", failures);
     require(
@@ -451,7 +482,7 @@ final class GateContractValidator {
       JsonNode expected,
       String label,
       List<String> failures) {
-    require("PASS".equals(sourceReport.path("status").asText()), "SOURCE_STATUS", failures);
+    require(VALUE_PASS.equals(sourceReport.path(FIELD_STATUS).asText()), "SOURCE_STATUS", failures);
     for (String field :
         List.of(
             "sourceFileCount",
@@ -471,7 +502,7 @@ final class GateContractValidator {
         "SOURCE_SYMLINKS",
         failures);
     require(
-        "PASS".equals(inventoryReport.path("status").asText()),
+        VALUE_PASS.equals(inventoryReport.path(FIELD_STATUS).asText()),
         label + "_INVENTORY_STATUS",
         failures);
     for (String field :
@@ -490,7 +521,7 @@ final class GateContractValidator {
   }
 
   private static void validatePreflight(JsonNode preflight, List<String> failures) {
-    require("PASS".equals(preflight.path("status").asText()), "PREFLIGHT_STATUS", failures);
+    require(VALUE_PASS.equals(preflight.path(FIELD_STATUS).asText()), "PREFLIGHT_STATUS", failures);
     require(
         preflight.path("failures").isArray() && preflight.path("failures").isEmpty(),
         "PREFLIGHT_FAILURES",
@@ -511,12 +542,14 @@ final class GateContractValidator {
 
   private static void validateReview(
       JsonNode review, String baselineCommit, List<String> failures) {
-    require("APPROVED".equals(review.path("status").asText()), "REVIEW_STATUS", failures);
+    require("APPROVED".equals(review.path(FIELD_STATUS).asText()), "REVIEW_STATUS", failures);
     require(
-        baselineCommit.equals(review.path("baselineCommit").asText()), "REVIEW_COMMIT", failures);
+        baselineCommit.equals(review.path(FIELD_BASELINECOMMIT).asText()),
+        "REVIEW_COMMIT",
+        failures);
     require(!review.path("reviewerRole").asText().isBlank(), "REVIEW_ROLE", failures);
     require(
-        review.path("evidence").isArray() && review.path("evidence").size() >= 3,
+        review.path(FIELD_EVIDENCE).isArray() && review.path(FIELD_EVIDENCE).size() >= 3,
         "REVIEW_EVIDENCE",
         failures);
     JsonNode checks = review.path("checks");
@@ -541,8 +574,8 @@ final class GateContractValidator {
       List<String> caseOrder,
       JsonNode requirements,
       List<String> failures)
-      throws Exception {
-    require("current".equals(manifest.path("target").asText()), "BASELINE_TARGET", failures);
+      throws IOException, NoSuchAlgorithmException {
+    require(FIELD_CURRENT.equals(manifest.path("target").asText()), "BASELINE_TARGET", failures);
     require(manifest.path("caseCount").asInt(-1) == 24, "BASELINE_CASE_COUNT", failures);
     require(
         manifest.path("screenshotFileCount").asInt(-1) == 2, "BASELINE_SCREENSHOT_COUNT", failures);
@@ -570,19 +603,19 @@ final class GateContractValidator {
         "BASELINE_MASTER_BYTES",
         failures);
     require(
-        manifest.path("environment").path("javaVersion").asText().equals("25.0.4"),
+        manifest.path(FIELD_ENVIRONMENT).path("javaVersion").asText().equals("25.0.4"),
         "BASELINE_JAVA",
         failures);
     require(
-        manifest.path("environment").path("browserRevision").asInt() == 1187,
+        manifest.path(FIELD_ENVIRONMENT).path("browserRevision").asInt() == 1187,
         "BASELINE_BROWSER",
         failures);
     require(
-        manifest.path("environment").path("locale").asText().equals("ja-JP"),
+        manifest.path(FIELD_ENVIRONMENT).path("locale").asText().equals("ja-JP"),
         "BASELINE_LOCALE",
         failures);
     require(
-        manifest.path("environment").path("timezone").asText().equals("Asia/Tokyo"),
+        manifest.path(FIELD_ENVIRONMENT).path("timezone").asText().equals("Asia/Tokyo"),
         "BASELINE_TIMEZONE",
         failures);
     List<Path> files = regularFiles(baselineRoot, path -> true);
@@ -597,8 +630,8 @@ final class GateContractValidator {
     String gateCommit = manifest.path("gateCommit").asText();
     boolean anchoredLegacy =
         "commit-containing-this-manifest".equals(gateCommit)
-            && "843de94".equals(contract.path("baselineCommit").asText());
-    boolean actualCommit = gateCommit.equals(contract.path("baselineCommit").asText());
+            && "843de94".equals(contract.path(FIELD_BASELINECOMMIT).asText());
+    boolean actualCommit = gateCommit.equals(contract.path(FIELD_BASELINECOMMIT).asText());
     require(anchoredLegacy || actualCommit, "BASELINE_GATE_COMMIT", failures);
     validateRun(baselineRoot, caseOrder, requirements, "baseline", false, failures);
   }
@@ -609,15 +642,18 @@ final class GateContractValidator {
     }
     try (Stream<Path> files = Files.list(artifactRoot)) {
       return files
-          .filter(path -> path.getFileName().toString().matches("CHR-[A-Z][0-9]{2}\\.json"))
-          .map(path -> path.getFileName().toString().replace(".json", ""))
+          .filter(
+              path ->
+                  ArtifactComparator.requiredArtifactFileName(path)
+                      .matches("CHR-[A-Z][0-9]{2}\\.json"))
+          .map(path -> ArtifactComparator.requiredArtifactFileName(path).replace(".json", ""))
           .sorted((left, right) -> Integer.compare(caseOrder(left), caseOrder(right)))
           .toList();
     }
   }
 
   private static int caseOrder(String id) {
-    int group = "AUSMLENO".indexOf(id.charAt(4));
+    int group = "AUSMLENO".indexOf(id.charAt(CASE_GROUP_OFFSET));
     return group * 100 + Integer.parseInt(id.substring(5));
   }
 
@@ -633,7 +669,8 @@ final class GateContractValidator {
     }
   }
 
-  private static String aggregateHash(Path root, List<Path> files) throws Exception {
+  private static String aggregateHash(Path root, List<Path> files)
+      throws IOException, NoSuchAlgorithmException {
     List<Path> sorted =
         files.stream()
             .sorted(
@@ -655,11 +692,12 @@ final class GateContractValidator {
         left.getBytes(StandardCharsets.UTF_8), right.getBytes(StandardCharsets.UTF_8));
   }
 
-  private static String sha256(Path file) throws Exception {
+  static String sha256(Path file) throws IOException, NoSuchAlgorithmException {
+    if (file == null) throw new IllegalArgumentException("hash source is required");
     MessageDigest digest = MessageDigest.getInstance("SHA-256");
     try (var input = Files.newInputStream(file)) {
       byte[] buffer = new byte[1024 * 1024];
-      for (int read; (read = input.read(buffer)) >= 0; ) {
+      for (int read = input.read(buffer); read >= 0; read = input.read(buffer)) {
         digest.update(buffer, 0, read);
       }
     }

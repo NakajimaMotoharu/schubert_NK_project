@@ -14,16 +14,38 @@ import java.util.Set;
  * only. Real capture/source/DOM qualification remains separate.
  */
 public final class CorrelatedLogEvidenceValidator {
+  private static final int SUPPORTED_SCHEMA_VERSION = 1;
+  private static final String FIELD_OPERATION = "operation";
+  private static final String FIELD_EVENT = "event";
+  private static final String FIELD_CATEGORY = "category";
+  private static final String FIELD_ACTION = "action";
+  private static final String FIELD_HTTP = "http";
+  private static final String VALUE_REQUEST = "REQUEST";
+  private static final String FIELD_PATH = "path";
+  private static final String FIELD_STATUS = "status";
+  private static final String FIELD_ELAPSEDMS = "elapsedMs";
+  private static final String FIELD_ORACLESHA256 = "oracleSha256";
+  private static final String FIELD_CURRENT = "current";
+  private static final String FIELD_PAYLOAD = "payload";
+  private static final String FIELD_STAGE = "stage";
+
   private static final Set<String> PAYLOAD_FIELDS =
-      Set.of("operation", "request", "event", "message", "category", "action", "http");
+      Set.of(
+          FIELD_OPERATION,
+          "request",
+          FIELD_EVENT,
+          "message",
+          FIELD_CATEGORY,
+          FIELD_ACTION,
+          FIELD_HTTP);
   private static final Set<String> CATEGORIES =
-      Set.of("REQUEST", "ACTION", "SECURITY", "MQ", "SYSTEM", "BATCH");
+      Set.of(VALUE_REQUEST, "ACTION", "SECURITY", "MQ", "SYSTEM", "BATCH");
   private static final Set<String> HTTP_FIELDS =
       Set.of(
           "method",
-          "path",
-          "status",
-          "elapsedMs",
+          FIELD_PATH,
+          FIELD_STATUS,
+          FIELD_ELAPSEDMS,
           "responseBytes",
           "contentType",
           "clientIp",
@@ -39,26 +61,26 @@ public final class CorrelatedLogEvidenceValidator {
     if (evidence == null || !shape(evidence, Set.of("version", "expected", "observed"))) {
       return List.of("LOG_PROJECTION_ENVELOPE");
     }
-    if (!evidence.path("version").isIntegralNumber() || evidence.path("version").asInt() != 1) {
+    if (!versionOne(evidence.path("version"))) {
       failures.add("LOG_PROJECTION_VERSION");
     }
     JsonNode expected = evidence.path("expected");
     JsonNode observed = evidence.path("observed");
-    if (!shape(expected, Set.of("oracleSha256", "current", "nk"))
-        || !shape(observed, Set.of("oracleSha256", "current", "nk"))) {
+    if (!shape(expected, Set.of(FIELD_ORACLESHA256, FIELD_CURRENT, "nk"))
+        || !shape(observed, Set.of(FIELD_ORACLESHA256, FIELD_CURRENT, "nk"))) {
       return List.of("LOG_PROJECTION_SOURCE_ENVELOPE");
     }
-    if (!expected.path("oracleSha256").isTextual()
-        || !expected.path("oracleSha256").asText().matches("[0-9a-f]{64}")
-        || !expected.path("oracleSha256").equals(observed.path("oracleSha256"))) {
+    if (!expected.path(FIELD_ORACLESHA256).isTextual()
+        || !expected.path(FIELD_ORACLESHA256).asText().matches("[0-9a-f]{64}")
+        || !expected.path(FIELD_ORACLESHA256).equals(observed.path(FIELD_ORACLESHA256))) {
       failures.add("LOG_PROJECTION_ORACLE_BINDING");
     }
-    Map<String, JsonNode> current = expectations(expected.path("current"), false, failures);
+    Map<String, JsonNode> current = expectations(expected.path(FIELD_CURRENT), false, failures);
     Map<String, JsonNode> nk = expectations(expected.path("nk"), true, failures);
     if (!operations(current).equals(operations(nk))) {
       failures.add("LOG_PROJECTION_OPERATION_SET");
     }
-    compareSide(current, observed.path("current"), false, failures);
+    compareSide(current, observed.path(FIELD_CURRENT), false, failures);
     compareSide(nk, observed.path("nk"), true, failures);
     return List.copyOf(failures);
   }
@@ -73,7 +95,7 @@ public final class CorrelatedLogEvidenceValidator {
     for (JsonNode value : values) {
       if (!payload(value, nk)) {
         failures.add("LOG_PROJECTION_EXPECTED_PAYLOAD");
-      } else if (events.putIfAbsent(value.path("event").asText(), value) != null) {
+      } else if (events.putIfAbsent(value.path(FIELD_EVENT).asText(), value) != null) {
         failures.add("LOG_PROJECTION_EXPECTED_DUPLICATE");
       }
     }
@@ -82,7 +104,7 @@ public final class CorrelatedLogEvidenceValidator {
 
   private static Set<String> operations(Map<String, JsonNode> events) {
     Set<String> operations = new HashSet<>();
-    for (JsonNode value : events.values()) operations.add(value.path("operation").asText());
+    for (JsonNode value : events.values()) operations.add(value.path(FIELD_OPERATION).asText());
     return operations;
   }
 
@@ -107,7 +129,7 @@ public final class CorrelatedLogEvidenceValidator {
         failures.add("LOG_PROJECTION_DB_PAYLOAD");
         continue;
       }
-      String event = value.path("event").asText();
+      String event = value.path(FIELD_EVENT).asText();
       if (addedEvents.putIfAbsent(event, value) != null) {
         failures.add("LOG_PROJECTION_DB_DUPLICATE");
       }
@@ -126,11 +148,11 @@ public final class CorrelatedLogEvidenceValidator {
       return rows;
     }
     for (JsonNode row : values) {
-      if (!shape(row, Set.of("row", "payload"))
+      if (!shape(row, Set.of("row", FIELD_PAYLOAD))
           || !reference(row.path("row"))
-          || !safeProjection(row.path("payload"))) {
+          || !safeProjection(row.path(FIELD_PAYLOAD))) {
         failures.add("LOG_PROJECTION_ROW_PAYLOAD");
-      } else if (rows.putIfAbsent(row.path("row").asText(), row.path("payload")) != null) {
+      } else if (rows.putIfAbsent(row.path("row").asText(), row.path(FIELD_PAYLOAD)) != null) {
         failures.add("LOG_PROJECTION_ROW_DUPLICATE");
       }
     }
@@ -139,12 +161,13 @@ public final class CorrelatedLogEvidenceValidator {
 
   // Old rows need no invented run correlation. Preserve known nulls and the entire safe projection.
   private static boolean safeProjection(JsonNode value) {
-    if (!shape(value, PAYLOAD_FIELDS) || !value.path("http").isObject()) return false;
-    for (String field : List.of("operation", "request", "event", "message", "category", "action")) {
+    if (!shape(value, PAYLOAD_FIELDS) || !value.path(FIELD_HTTP).isObject()) return false;
+    for (String field :
+        List.of(FIELD_OPERATION, "request", FIELD_EVENT, "message", FIELD_CATEGORY, FIELD_ACTION)) {
       JsonNode item = value.path(field);
       if (!item.isTextual() && !item.isNull()) return false;
     }
-    for (Map.Entry<String, JsonNode> item : value.path("http").properties()) {
+    for (Map.Entry<String, JsonNode> item : value.path(FIELD_HTTP).properties()) {
       if (!HTTP_FIELDS.contains(item.getKey()) || !item.getValue().isValueNode()) return false;
     }
     return true;
@@ -158,27 +181,27 @@ public final class CorrelatedLogEvidenceValidator {
       return;
     }
     for (JsonNode witness : values) {
-      if (!shape(witness, Set.of("stage", "payload"))
-          || !witness.path("stage").isTextual()
-          || !STAGES.contains(witness.path("stage").asText())
-          || !payload(witness.path("payload"), true)) {
+      if (!shape(witness, Set.of(FIELD_STAGE, FIELD_PAYLOAD))
+          || !witness.path(FIELD_STAGE).isTextual()
+          || !STAGES.contains(witness.path(FIELD_STAGE).asText())
+          || !payload(witness.path(FIELD_PAYLOAD), true)) {
         failures.add("LOG_PROJECTION_WITNESS_PAYLOAD");
         continue;
       }
-      JsonNode value = witness.path("payload");
-      String event = value.path("event").asText();
+      JsonNode value = witness.path(FIELD_PAYLOAD);
+      String event = value.path(FIELD_EVENT).asText();
       if (!nk
-          || !"REQUEST".equals(value.path("category").asText())
+          || !VALUE_REQUEST.equals(value.path(FIELD_CATEGORY).asText())
           || !value.equals(expected.get(event))) {
         failures.add("LOG_PROJECTION_WITNESS_UNEXPECTED");
       }
-      if (!found.add(witness.path("stage").asText() + "/" + event)) {
+      if (!found.add(witness.path(FIELD_STAGE).asText() + "/" + event)) {
         failures.add("LOG_PROJECTION_WITNESS_DUPLICATE");
       }
     }
     if (nk) {
       for (Map.Entry<String, JsonNode> event : expected.entrySet()) {
-        if ("REQUEST".equals(event.getValue().path("category").asText())) {
+        if (VALUE_REQUEST.equals(event.getValue().path(FIELD_CATEGORY).asText())) {
           for (String stage : STAGES) {
             if (!found.contains(stage + "/" + event.getKey())) {
               failures.add("LOG_PROJECTION_WITNESS_MISSING");
@@ -191,17 +214,17 @@ public final class CorrelatedLogEvidenceValidator {
 
   private static boolean payload(JsonNode value, boolean nk) {
     if (!shape(value, PAYLOAD_FIELDS)) return false;
-    for (String field : List.of("operation", "request", "event", "message")) {
+    for (String field : List.of(FIELD_OPERATION, "request", FIELD_EVENT, "message")) {
       if (!reference(value.path(field))) return false;
     }
-    if (!value.path("category").isTextual()
-        || !CATEGORIES.contains(value.path("category").asText())
-        || !value.path("action").isTextual()) return false;
-    boolean request = "REQUEST".equals(value.path("category").asText());
-    if (nk && request && !"HTTP_REQUEST_COMPLETED".equals(value.path("action").asText())) {
+    if (!value.path(FIELD_CATEGORY).isTextual()
+        || !CATEGORIES.contains(value.path(FIELD_CATEGORY).asText())
+        || !value.path(FIELD_ACTION).isTextual()) return false;
+    boolean request = VALUE_REQUEST.equals(value.path(FIELD_CATEGORY).asText());
+    if (nk && request && !"HTTP_REQUEST_COMPLETED".equals(value.path(FIELD_ACTION).asText())) {
       return false;
     }
-    JsonNode http = value.path("http");
+    JsonNode http = value.path(FIELD_HTTP);
     if (!http.isObject()) return false;
     for (Map.Entry<String, JsonNode> field : http.properties()) {
       if (!HTTP_FIELDS.contains(field.getKey()) || !field.getValue().isValueNode()) return false;
@@ -209,18 +232,18 @@ public final class CorrelatedLogEvidenceValidator {
     if (request) {
       if (!http.path("method").isTextual()
           || http.path("method").asText().isBlank()
-          || !http.path("path").isTextual()
-          || !http.path("path").asText().startsWith("/")
-          || http.path("path").asText().contains("?")
-          || http.path("path").asText().contains("#")
-          || !http.path("status").isIntegralNumber()
-          || !http.path("status").canConvertToInt()
-          || http.path("status").asInt() < 100
-          || http.path("status").asInt() > 599
-          || !http.path("elapsedMs").isIntegralNumber()
-          || !http.path("elapsedMs").canConvertToLong()
-          || http.path("elapsedMs").asLong() < 0
-          || http.path("elapsedMs").asLong() > 999_999_999_999L) {
+          || !http.path(FIELD_PATH).isTextual()
+          || !http.path(FIELD_PATH).asText().startsWith("/")
+          || http.path(FIELD_PATH).asText().contains("?")
+          || http.path(FIELD_PATH).asText().contains("#")
+          || !http.path(FIELD_STATUS).isIntegralNumber()
+          || !http.path(FIELD_STATUS).canConvertToInt()
+          || http.path(FIELD_STATUS).asInt() < 100
+          || http.path(FIELD_STATUS).asInt() > 599
+          || !http.path(FIELD_ELAPSEDMS).isIntegralNumber()
+          || !http.path(FIELD_ELAPSEDMS).canConvertToLong()
+          || http.path(FIELD_ELAPSEDMS).asLong() < 0
+          || http.path(FIELD_ELAPSEDMS).asLong() > 999_999_999_999L) {
         return false;
       }
     }
@@ -229,6 +252,16 @@ public final class CorrelatedLogEvidenceValidator {
 
   private static boolean reference(JsonNode value) {
     return value.isTextual() && value.asText().matches("[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}");
+  }
+
+  /**
+   * Shared strict schema boundary: no string/fraction coercion or truncating integer conversion.
+   */
+  static boolean versionOne(JsonNode value) {
+    return value != null
+        && value.isIntegralNumber()
+        && value.canConvertToInt()
+        && value.asInt() == SUPPORTED_SCHEMA_VERSION;
   }
 
   private static boolean shape(JsonNode value, Set<String> fields) {
