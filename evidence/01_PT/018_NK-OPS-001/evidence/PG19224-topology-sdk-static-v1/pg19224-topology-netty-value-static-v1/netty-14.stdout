@@ -1,0 +1,71 @@
+Compiled from "PlatformDependent0.java"
+final class io.netty.util.internal.PlatformDependent0$5 implements java.security.PrivilegedAction<java.lang.Object> {
+  final java.nio.ByteBuffer val$direct;
+
+  io.netty.util.internal.PlatformDependent0$5(java.nio.ByteBuffer);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #16                 // Field val$direct:Ljava/nio/ByteBuffer;
+         5: aload_0
+         6: invokespecial #19                 // Method java/lang/Object."<init>":()V
+         9: return
+
+  public java.lang.Object run();
+    Code:
+         0: invokestatic  #31                 // Method io/netty/util/internal/PlatformDependent0.javaVersion:()I
+         3: bipush        21
+         5: if_icmplt     37
+         8: aload_0
+         9: getfield      #16                 // Field val$direct:Ljava/nio/ByteBuffer;
+        12: invokevirtual #35                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+        15: iconst_2
+        16: anewarray     #37                 // class java/lang/Class
+        19: dup
+        20: iconst_0
+        21: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+        24: aastore
+        25: dup
+        26: iconst_1
+        27: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+        30: aastore
+        31: invokevirtual #47                 // Method java/lang/Class.getDeclaredConstructor:([Ljava/lang/Class;)Ljava/lang/reflect/Constructor;
+        34: goto          63
+        37: aload_0
+        38: getfield      #16                 // Field val$direct:Ljava/nio/ByteBuffer;
+        41: invokevirtual #35                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+        44: iconst_2
+        45: anewarray     #37                 // class java/lang/Class
+        48: dup
+        49: iconst_0
+        50: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+        53: aastore
+        54: dup
+        55: iconst_1
+        56: getstatic     #50                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+        59: aastore
+        60: invokevirtual #47                 // Method java/lang/Class.getDeclaredConstructor:([Ljava/lang/Class;)Ljava/lang/reflect/Constructor;
+        63: astore_1
+        64: aload_1
+        65: iconst_1
+        66: invokestatic  #58                 // Method io/netty/util/internal/ReflectionUtil.trySetAccessible:(Ljava/lang/reflect/AccessibleObject;Z)Ljava/lang/Throwable;
+        69: astore_2
+        70: aload_2
+        71: ifnull        76
+        74: aload_2
+        75: areturn
+        76: aload_1
+        77: areturn
+        78: astore_1
+        79: aload_1
+        80: areturn
+        81: astore_1
+        82: aload_1
+        83: areturn
+      Exception table:
+         from    to  target type
+             0    75    78   Class java/lang/NoSuchMethodException
+            76    77    78   Class java/lang/NoSuchMethodException
+             0    75    81   Class java/lang/SecurityException
+            76    77    81   Class java/lang/SecurityException
+}

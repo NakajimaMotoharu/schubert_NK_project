@@ -1,0 +1,143 @@
+Compiled from "PlatformDependent0.java"
+final class io.netty.util.internal.PlatformDependent0$6 implements java.security.PrivilegedAction<java.lang.Object> {
+  final java.util.concurrent.atomic.AtomicLong val$maybeMaxMemory;
+
+  io.netty.util.internal.PlatformDependent0$6(java.util.concurrent.atomic.AtomicLong);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #16                 // Field val$maybeMaxMemory:Ljava/util/concurrent/atomic/AtomicLong;
+         5: aload_0
+         6: invokespecial #19                 // Method java/lang/Object."<init>":()V
+         9: return
+
+  public java.lang.Object run();
+    Code:
+         0: ldc           #39                 // String java.nio.Bits
+         2: iconst_0
+         3: invokestatic  #43                 // Method io/netty/util/internal/PlatformDependent0.getSystemClassLoader:()Ljava/lang/ClassLoader;
+         6: invokestatic  #49                 // Method java/lang/Class.forName:(Ljava/lang/String;ZLjava/lang/ClassLoader;)Ljava/lang/Class;
+         9: astore_1
+        10: invokestatic  #53                 // Method io/netty/util/internal/PlatformDependent0.javaVersion:()I
+        13: istore_2
+        14: iload_2
+        15: bipush        9
+        17: if_icmplt     165
+        20: iload_2
+        21: bipush        11
+        23: if_icmplt     31
+        26: ldc           #55                 // String MAX_MEMORY
+        28: goto          33
+        31: ldc           #57                 // String maxMemory
+        33: astore_3
+        34: aload_1
+        35: aload_3
+        36: invokevirtual #63                 // Method java/lang/Class.getDeclaredField:(Ljava/lang/String;)Ljava/lang/reflect/Field;
+        39: astore        4
+        41: aload         4
+        43: invokevirtual #69                 // Method java/lang/reflect/Field.getType:()Ljava/lang/Class;
+        46: getstatic     #75                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+        49: if_acmpne     89
+        52: getstatic     #79                 // Field io/netty/util/internal/PlatformDependent0.UNSAFE:Lsun/misc/Unsafe;
+        55: aload         4
+        57: invokevirtual #85                 // Method sun/misc/Unsafe.staticFieldOffset:(Ljava/lang/reflect/Field;)J
+        60: lstore        5
+        62: getstatic     #79                 // Field io/netty/util/internal/PlatformDependent0.UNSAFE:Lsun/misc/Unsafe;
+        65: aload         4
+        67: invokevirtual #89                 // Method sun/misc/Unsafe.staticFieldBase:(Ljava/lang/reflect/Field;)Ljava/lang/Object;
+        70: astore        7
+        72: aload_0
+        73: getfield      #16                 // Field val$maybeMaxMemory:Ljava/util/concurrent/atomic/AtomicLong;
+        76: getstatic     #79                 // Field io/netty/util/internal/PlatformDependent0.UNSAFE:Lsun/misc/Unsafe;
+        79: aload         7
+        81: lload         5
+        83: invokevirtual #93                 // Method sun/misc/Unsafe.getLong:(Ljava/lang/Object;J)J
+        86: invokevirtual #99                 // Method java/util/concurrent/atomic/AtomicLong.lazySet:(J)V
+        89: goto          94
+        92: astore        4
+        94: iload_2
+        95: bipush        11
+        97: if_icmplt     105
+       100: ldc           #101                // String UNALIGNED
+       102: goto          107
+       105: ldc           #103                // String unaligned
+       107: astore_3
+       108: aload_1
+       109: aload_3
+       110: invokevirtual #63                 // Method java/lang/Class.getDeclaredField:(Ljava/lang/String;)Ljava/lang/reflect/Field;
+       113: astore        4
+       115: aload         4
+       117: invokevirtual #69                 // Method java/lang/reflect/Field.getType:()Ljava/lang/Class;
+       120: getstatic     #106                // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       123: if_acmpne     160
+       126: getstatic     #79                 // Field io/netty/util/internal/PlatformDependent0.UNSAFE:Lsun/misc/Unsafe;
+       129: aload         4
+       131: invokevirtual #85                 // Method sun/misc/Unsafe.staticFieldOffset:(Ljava/lang/reflect/Field;)J
+       134: lstore        5
+       136: getstatic     #79                 // Field io/netty/util/internal/PlatformDependent0.UNSAFE:Lsun/misc/Unsafe;
+       139: aload         4
+       141: invokevirtual #89                 // Method sun/misc/Unsafe.staticFieldBase:(Ljava/lang/reflect/Field;)Ljava/lang/Object;
+       144: astore        7
+       146: getstatic     #79                 // Field io/netty/util/internal/PlatformDependent0.UNSAFE:Lsun/misc/Unsafe;
+       149: aload         7
+       151: lload         5
+       153: invokevirtual #110                // Method sun/misc/Unsafe.getBoolean:(Ljava/lang/Object;J)Z
+       156: invokestatic  #114                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+       159: areturn
+       160: goto          165
+       163: astore        4
+       165: aload_1
+       166: ldc           #103                // String unaligned
+       168: iconst_0
+       169: anewarray     #45                 // class java/lang/Class
+       172: invokevirtual #118                // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       175: astore_3
+       176: aload_3
+       177: iconst_1
+       178: invokestatic  #124                // Method io/netty/util/internal/ReflectionUtil.trySetAccessible:(Ljava/lang/reflect/AccessibleObject;Z)Ljava/lang/Throwable;
+       181: astore        4
+       183: aload         4
+       185: ifnull        191
+       188: aload         4
+       190: areturn
+       191: aload_3
+       192: aconst_null
+       193: iconst_0
+       194: anewarray     #5                  // class java/lang/Object
+       197: invokevirtual #130                // Method java/lang/reflect/Method.invoke:(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+       200: areturn
+       201: astore_1
+       202: aload_1
+       203: areturn
+       204: astore_1
+       205: aload_1
+       206: areturn
+       207: astore_1
+       208: aload_1
+       209: areturn
+       210: astore_1
+       211: aload_1
+       212: areturn
+       213: astore_1
+       214: aload_1
+       215: areturn
+      Exception table:
+         from    to  target type
+            34    89    92   Class java/lang/Throwable
+           108   159   163   Class java/lang/NoSuchFieldException
+             0   159   201   Class java/lang/NoSuchMethodException
+           160   190   201   Class java/lang/NoSuchMethodException
+           191   200   201   Class java/lang/NoSuchMethodException
+             0   159   204   Class java/lang/SecurityException
+           160   190   204   Class java/lang/SecurityException
+           191   200   204   Class java/lang/SecurityException
+             0   159   207   Class java/lang/IllegalAccessException
+           160   190   207   Class java/lang/IllegalAccessException
+           191   200   207   Class java/lang/IllegalAccessException
+             0   159   210   Class java/lang/ClassNotFoundException
+           160   190   210   Class java/lang/ClassNotFoundException
+           191   200   210   Class java/lang/ClassNotFoundException
+             0   159   213   Class java/lang/reflect/InvocationTargetException
+           160   190   213   Class java/lang/reflect/InvocationTargetException
+           191   200   213   Class java/lang/reflect/InvocationTargetException
+}

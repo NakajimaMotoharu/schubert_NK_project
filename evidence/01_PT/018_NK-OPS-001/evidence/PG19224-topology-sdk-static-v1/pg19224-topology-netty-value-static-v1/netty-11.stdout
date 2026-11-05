@@ -1,0 +1,394 @@
+Compiled from "PlatformDependent0.java"
+final class io.netty.util.internal.PlatformDependent0$2 implements java.security.PrivilegedAction<java.lang.Object> {
+  final sun.misc.Unsafe val$finalUnsafe;
+
+  io.netty.util.internal.PlatformDependent0$2(sun.misc.Unsafe);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #16                 // Field val$finalUnsafe:Lsun/misc/Unsafe;
+         5: aload_0
+         6: invokespecial #19                 // Method java/lang/Object."<init>":()V
+         9: return
+
+  public java.lang.Object run();
+    Code:
+         0: aload_0
+         1: getfield      #16                 // Field val$finalUnsafe:Lsun/misc/Unsafe;
+         4: invokevirtual #33                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+         7: astore_1
+         8: aload_1
+         9: ldc           #35                 // String copyMemory
+        11: iconst_5
+        12: anewarray     #37                 // class java/lang/Class
+        15: dup
+        16: iconst_0
+        17: ldc           #5                  // class java/lang/Object
+        19: aastore
+        20: dup
+        21: iconst_1
+        22: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+        25: aastore
+        26: dup
+        27: iconst_2
+        28: ldc           #5                  // class java/lang/Object
+        30: aastore
+        31: dup
+        32: iconst_3
+        33: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+        36: aastore
+        37: dup
+        38: iconst_4
+        39: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+        42: aastore
+        43: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+        46: pop
+        47: invokestatic  #51                 // Method io/netty/util/internal/PlatformDependent0.javaVersion:()I
+        50: bipush        23
+        52: if_icmple     558
+        55: aload_1
+        56: ldc           #53                 // String objectFieldOffset
+        58: iconst_1
+        59: anewarray     #37                 // class java/lang/Class
+        62: dup
+        63: iconst_0
+        64: ldc           #55                 // class java/lang/reflect/Field
+        66: aastore
+        67: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+        70: pop
+        71: aload_1
+        72: ldc           #57                 // String staticFieldOffset
+        74: iconst_1
+        75: anewarray     #37                 // class java/lang/Class
+        78: dup
+        79: iconst_0
+        80: ldc           #55                 // class java/lang/reflect/Field
+        82: aastore
+        83: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+        86: pop
+        87: aload_1
+        88: ldc           #59                 // String staticFieldBase
+        90: iconst_1
+        91: anewarray     #37                 // class java/lang/Class
+        94: dup
+        95: iconst_0
+        96: ldc           #55                 // class java/lang/reflect/Field
+        98: aastore
+        99: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       102: pop
+       103: aload_1
+       104: ldc           #61                 // String arrayBaseOffset
+       106: iconst_1
+       107: anewarray     #37                 // class java/lang/Class
+       110: dup
+       111: iconst_0
+       112: ldc           #37                 // class java/lang/Class
+       114: aastore
+       115: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       118: pop
+       119: aload_1
+       120: ldc           #63                 // String arrayIndexScale
+       122: iconst_1
+       123: anewarray     #37                 // class java/lang/Class
+       126: dup
+       127: iconst_0
+       128: ldc           #37                 // class java/lang/Class
+       130: aastore
+       131: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       134: pop
+       135: aload_1
+       136: ldc           #65                 // String allocateMemory
+       138: iconst_1
+       139: anewarray     #37                 // class java/lang/Class
+       142: dup
+       143: iconst_0
+       144: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       147: aastore
+       148: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       151: pop
+       152: aload_1
+       153: ldc           #67                 // String reallocateMemory
+       155: iconst_2
+       156: anewarray     #37                 // class java/lang/Class
+       159: dup
+       160: iconst_0
+       161: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       164: aastore
+       165: dup
+       166: iconst_1
+       167: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       170: aastore
+       171: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       174: pop
+       175: aload_1
+       176: ldc           #69                 // String freeMemory
+       178: iconst_1
+       179: anewarray     #37                 // class java/lang/Class
+       182: dup
+       183: iconst_0
+       184: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       187: aastore
+       188: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       191: pop
+       192: aload_1
+       193: ldc           #71                 // String setMemory
+       195: iconst_3
+       196: anewarray     #37                 // class java/lang/Class
+       199: dup
+       200: iconst_0
+       201: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       204: aastore
+       205: dup
+       206: iconst_1
+       207: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       210: aastore
+       211: dup
+       212: iconst_2
+       213: getstatic     #74                 // Field java/lang/Byte.TYPE:Ljava/lang/Class;
+       216: aastore
+       217: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       220: pop
+       221: aload_1
+       222: ldc           #71                 // String setMemory
+       224: iconst_4
+       225: anewarray     #37                 // class java/lang/Class
+       228: dup
+       229: iconst_0
+       230: ldc           #5                  // class java/lang/Object
+       232: aastore
+       233: dup
+       234: iconst_1
+       235: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       238: aastore
+       239: dup
+       240: iconst_2
+       241: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       244: aastore
+       245: dup
+       246: iconst_3
+       247: getstatic     #74                 // Field java/lang/Byte.TYPE:Ljava/lang/Class;
+       250: aastore
+       251: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       254: pop
+       255: aload_1
+       256: ldc           #76                 // String getBoolean
+       258: iconst_2
+       259: anewarray     #37                 // class java/lang/Class
+       262: dup
+       263: iconst_0
+       264: ldc           #5                  // class java/lang/Object
+       266: aastore
+       267: dup
+       268: iconst_1
+       269: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       272: aastore
+       273: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       276: pop
+       277: aload_1
+       278: ldc           #78                 // String getByte
+       280: iconst_1
+       281: anewarray     #37                 // class java/lang/Class
+       284: dup
+       285: iconst_0
+       286: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       289: aastore
+       290: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       293: pop
+       294: aload_1
+       295: ldc           #78                 // String getByte
+       297: iconst_2
+       298: anewarray     #37                 // class java/lang/Class
+       301: dup
+       302: iconst_0
+       303: ldc           #5                  // class java/lang/Object
+       305: aastore
+       306: dup
+       307: iconst_1
+       308: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       311: aastore
+       312: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       315: pop
+       316: aload_1
+       317: ldc           #80                 // String getInt
+       319: iconst_1
+       320: anewarray     #37                 // class java/lang/Class
+       323: dup
+       324: iconst_0
+       325: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       328: aastore
+       329: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       332: pop
+       333: aload_1
+       334: ldc           #80                 // String getInt
+       336: iconst_2
+       337: anewarray     #37                 // class java/lang/Class
+       340: dup
+       341: iconst_0
+       342: ldc           #5                  // class java/lang/Object
+       344: aastore
+       345: dup
+       346: iconst_1
+       347: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       350: aastore
+       351: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       354: pop
+       355: aload_1
+       356: ldc           #82                 // String getLong
+       358: iconst_1
+       359: anewarray     #37                 // class java/lang/Class
+       362: dup
+       363: iconst_0
+       364: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       367: aastore
+       368: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       371: pop
+       372: aload_1
+       373: ldc           #82                 // String getLong
+       375: iconst_2
+       376: anewarray     #37                 // class java/lang/Class
+       379: dup
+       380: iconst_0
+       381: ldc           #5                  // class java/lang/Object
+       383: aastore
+       384: dup
+       385: iconst_1
+       386: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       389: aastore
+       390: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       393: pop
+       394: aload_1
+       395: ldc           #84                 // String putByte
+       397: iconst_2
+       398: anewarray     #37                 // class java/lang/Class
+       401: dup
+       402: iconst_0
+       403: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       406: aastore
+       407: dup
+       408: iconst_1
+       409: getstatic     #74                 // Field java/lang/Byte.TYPE:Ljava/lang/Class;
+       412: aastore
+       413: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       416: pop
+       417: aload_1
+       418: ldc           #84                 // String putByte
+       420: iconst_3
+       421: anewarray     #37                 // class java/lang/Class
+       424: dup
+       425: iconst_0
+       426: ldc           #5                  // class java/lang/Object
+       428: aastore
+       429: dup
+       430: iconst_1
+       431: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       434: aastore
+       435: dup
+       436: iconst_2
+       437: getstatic     #74                 // Field java/lang/Byte.TYPE:Ljava/lang/Class;
+       440: aastore
+       441: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       444: pop
+       445: aload_1
+       446: ldc           #86                 // String putInt
+       448: iconst_2
+       449: anewarray     #37                 // class java/lang/Class
+       452: dup
+       453: iconst_0
+       454: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       457: aastore
+       458: dup
+       459: iconst_1
+       460: getstatic     #89                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       463: aastore
+       464: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       467: pop
+       468: aload_1
+       469: ldc           #86                 // String putInt
+       471: iconst_3
+       472: anewarray     #37                 // class java/lang/Class
+       475: dup
+       476: iconst_0
+       477: ldc           #5                  // class java/lang/Object
+       479: aastore
+       480: dup
+       481: iconst_1
+       482: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       485: aastore
+       486: dup
+       487: iconst_2
+       488: getstatic     #89                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       491: aastore
+       492: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       495: pop
+       496: aload_1
+       497: ldc           #91                 // String putLong
+       499: iconst_2
+       500: anewarray     #37                 // class java/lang/Class
+       503: dup
+       504: iconst_0
+       505: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       508: aastore
+       509: dup
+       510: iconst_1
+       511: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       514: aastore
+       515: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       518: pop
+       519: aload_1
+       520: ldc           #91                 // String putLong
+       522: iconst_3
+       523: anewarray     #37                 // class java/lang/Class
+       526: dup
+       527: iconst_0
+       528: ldc           #5                  // class java/lang/Object
+       530: aastore
+       531: dup
+       532: iconst_1
+       533: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       536: aastore
+       537: dup
+       538: iconst_2
+       539: getstatic     #43                 // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       542: aastore
+       543: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       546: pop
+       547: aload_1
+       548: ldc           #93                 // String addressSize
+       550: iconst_0
+       551: anewarray     #37                 // class java/lang/Class
+       554: invokevirtual #47                 // Method java/lang/Class.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+       557: pop
+       558: invokestatic  #51                 // Method io/netty/util/internal/PlatformDependent0.javaVersion:()I
+       561: bipush        23
+       563: if_icmplt     596
+       566: aload_0
+       567: getfield      #16                 // Field val$finalUnsafe:Lsun/misc/Unsafe;
+       570: ldc2_w        #94                 // long 8l
+       573: invokevirtual #100                // Method sun/misc/Unsafe.allocateMemory:(J)J
+       576: lstore_2
+       577: aload_0
+       578: getfield      #16                 // Field val$finalUnsafe:Lsun/misc/Unsafe;
+       581: lload_2
+       582: ldc2_w        #101                // long 42l
+       585: invokevirtual #105                // Method sun/misc/Unsafe.putLong:(JJ)V
+       588: aload_0
+       589: getfield      #16                 // Field val$finalUnsafe:Lsun/misc/Unsafe;
+       592: lload_2
+       593: invokevirtual #108                // Method sun/misc/Unsafe.freeMemory:(J)V
+       596: aconst_null
+       597: areturn
+       598: astore_1
+       599: aload_1
+       600: areturn
+       601: astore_1
+       602: aload_1
+       603: areturn
+       604: astore_1
+       605: aload_1
+       606: areturn
+      Exception table:
+         from    to  target type
+             0   597   598   Class java/lang/UnsupportedOperationException
+             0   597   601   Class java/lang/NoSuchMethodException
+             0   597   604   Class java/lang/SecurityException
+}

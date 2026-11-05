@@ -1,0 +1,171 @@
+{
+  "atJST": "2026-11-05T20:32:42.615700+09:00",
+  "decision": "STATIC_METHOD_CLOSURE_PASS_HOST_VALUE_COMPARISON",
+  "source": "4874c478e1a81ce5390a79ba09a73e9552dfb9ff",
+  "originalRun": "PG19218",
+  "originalManifestSha256": "b9af1af9baf5309ee95c152be2d42208c3dde2a3bd5299fa1c8fa14110687f1a",
+  "parentReview": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/004_mq_topology_sdk_static_review.json",
+    "sha256": "78c04314faae4343166bc69d434ea5584294df09e5ce175d10df4aebda32c50e"
+  },
+  "sdkDependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar": "89eb1f27e583119db4c1c23db26cbc1916c82bfc5fcc23dbcb7ef040602f09d6",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar": "111cbc7a359b5597085b5328ab74c2f81dd40e7211d07bd12e6ffa83d9de99d9",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar": "02b43c47403dd0ef6dcd4573d0744bc6bae935edae016eb19f2d4ebb5eb33722",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar": "f474b14c7734f15e0540394cb6f39d67777b7581a42919e4ac89d253d4efd929",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar": "d31926b01adcc07af86f5e27b81b6d6c115df17d366e835d1fc3f5a1924e7e52",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55"
+  },
+  "additionalInitializedSdkClasses": [
+    "org/apache/activemq/artemis/utils/ByteUtil"
+  ],
+  "reviewedInitializedNettyClasses": [
+    "io/netty/util/CharsetUtil",
+    "io/netty/util/internal/BoundedInputStream",
+    "io/netty/util/internal/CleanerJava9",
+    "io/netty/util/internal/CleanerJava9$1",
+    "io/netty/util/internal/ObjectUtil",
+    "io/netty/util/internal/PlatformDependent",
+    "io/netty/util/internal/PlatformDependent$1",
+    "io/netty/util/internal/PlatformDependent$2",
+    "io/netty/util/internal/PlatformDependent$4",
+    "io/netty/util/internal/PlatformDependent0",
+    "io/netty/util/internal/PlatformDependent0$1",
+    "io/netty/util/internal/PlatformDependent0$2",
+    "io/netty/util/internal/PlatformDependent0$3",
+    "io/netty/util/internal/PlatformDependent0$4",
+    "io/netty/util/internal/PlatformDependent0$5",
+    "io/netty/util/internal/PlatformDependent0$6",
+    "io/netty/util/internal/PlatformDependent0$7",
+    "io/netty/util/internal/PlatformDependent0$9",
+    "io/netty/util/internal/ReflectionUtil",
+    "io/netty/util/internal/SystemPropertyUtil",
+    "io/netty/util/internal/logging/AbstractInternalLogger",
+    "io/netty/util/internal/logging/InternalLoggerFactory",
+    "io/netty/util/internal/logging/JdkLogger",
+    "io/netty/util/internal/logging/JdkLoggerFactory",
+    "io/netty/util/internal/logging/Log4J2LoggerFactory",
+    "io/netty/util/internal/logging/Log4JLoggerFactory",
+    "io/netty/util/internal/logging/Slf4JLoggerFactory",
+    "io/netty/util/internal/logging/Slf4JLoggerFactory$NopInstanceHolder"
+  ],
+  "methodClosure": [
+    "SimpleString.equals(Object) -> ByteUtil.equals(byte[],byte[]) -> length/null checks -> equalsSafe or equalsUnsafe(byte[],byte[],offset,length)",
+    "equalsUnsafe uses PlatformDependent.getLong(byte[],int)/getByte(byte[],int), bounded heap arrays; no raw external address",
+    "ByteUtil clinit creates literal hex tables, regex Patterns, numeric constants only",
+    "Netty initializer memory/Unsafe/reflection capability checks, JDK/logging factory choice, CharsetUtil; no broker transport factory/session operation"
+  ],
+  "environmentAndResourceLimitations": {
+    "originalZeroFilesystemClaimSuperseded": true,
+    "javaIoTmpdir": "original unit explicitly owned slot/tmp, mkdir before execution; XML exact match checked",
+    "nettyTmpdirInitializer": "io.netty.tmpdir absent, java.io.tmpdir path tries mkdirs/isDirectory then returns existing owned directory; fallback code exists and is not claimed syscall-observed",
+    "osMetadata": "PlatformDependent initializer may read /etc/os-release or /usr/lib/os-release using BoundedInputStream/BufferedReader; OS public metadata only",
+    "jvmMemory": "CleanerJava9/PlatformDependent0 may allocate small direct buffer and perform internal reflection/Unsafe capability checks; this is not the project native ABI acceptance",
+    "notProven": "No syscall tracing was performed; no assertion of zero JDK/SDK filesystem or memory activity",
+    "productBoundary": "No Root/VM/DB/broker/session/provider actions qualified by this metadata review"
+  },
+  "originalXmlEnvironmentBindings": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19218-mq-topology-port-six-unit-v1/xml/TEST-junit-jupiter.xml": {
+      "sha256": "9739beaca6bd83f3006955cc4769691a6a9581fbd7796af0e5250d3e41b071af",
+      "checks": {
+        "javaIoTmpdirEqualsOwnedSlot": true,
+        "noNettyTmpOverride": true,
+        "noJulConfigFile": true,
+        "noJulConfigClass": true
+      }
+    },
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19218-mq-topology-port-six-unit-v1/xml/TEST-junit-platform-suite.xml": {
+      "sha256": "ad9db01352be02744bea5171414026af4ae7cdb49506235ae51865e46456a17b",
+      "checks": {
+        "javaIoTmpdirEqualsOwnedSlot": true,
+        "noNettyTmpOverride": true,
+        "noJulConfigFile": true,
+        "noJulConfigClass": true
+      }
+    },
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19218-mq-topology-port-six-unit-v1/xml/TEST-junit-vintage.xml": {
+      "sha256": "a6175a51347328b6d5c6da8e628b697225d1116853838ce465cf961bab451d1c",
+      "checks": {
+        "javaIoTmpdirEqualsOwnedSlot": true,
+        "noNettyTmpOverride": true,
+        "noJulConfigFile": true,
+        "noJulConfigClass": true
+      }
+    }
+  },
+  "classInitializationLogSha256": "48e48ff34e522d46f4c656d52a2f6e15eb20c4d7e816df8b05d034dd2a978ef8",
+  "staticArtifacts": {
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19220-topology-sdk-method-static-v1/simple-string.stdout": "d509bbe3659c5941c1314a34cf290c0f1043bd75e9e5d9d1472510839eaa5a61",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19220-topology-sdk-method-static-v1/manifest.safe.json": "542bd223a6089fd9defab9416bc04405e75010fcb22f3793dd026cc8c87c1368",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19220-topology-sdk-method-static-v1/byte-util.stdout": "97b4b5ab3ab6b6292bcdb9e4a2cf7a790c83a50d81ffcc3e46e7b7acc8be5c73",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19220-topology-sdk-method-static-v1/byte-util.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19220-topology-sdk-method-static-v1/simple-string.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-25.stdout": "2df19210fdb05b576bc1088609b49a9ae32e4ab8d268c7cc9dda7805a5c8ff1d",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-14.stdout": "aac60357518bdabd60189eecdab34c904ac961540647fa557bfe0f15accf568a",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-01.stdout": "be00ccb9d994963b0d0d056316b1a645ad0fa0996e7ed4bfe2a43c97a02d5619",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-09.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-06.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-06.stdout": "a8cc696d44bd0bf51bdc4ca57f2e470ee2cf1dff701e54568bfc1c36d44259a7",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-00.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-26.stdout": "55972415ff2fe10c89dc285d079bafdfe22de8c3d74e3cd77eb1e3ccc119e1ce",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-11.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-11.stdout": "2968e420ab1bda398fff683e88384a2facb1394f747c460e24e576d6804c5fc8",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-01.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-00.stdout": "3bd2fb6d2222737f3cac001605b08d17c67c2abe8ce0267b884f24cdaf24b500",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-10.stdout": "b751bd08d00d20154f0853e8cd4c27b440eeb3288f000c5385586c31fe55dcdf",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-12.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-02.stdout": "1af52dbc9168abe11cae8e3a98d268b64da3547fb0e4a178f2708e9737ea4bb8",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-20.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-24.stdout": "8665892ed997cd28204f120bed49225cece144ff7de6c504247fdaa9fa92e256",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-10.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/manifest.safe.json": "02fde0957ff0cc218f410832637aa9dcf23f5a9ef2170692114b408a1d8b0058",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-04.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-05.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-13.stdout": "5c8b05433b95f654941f502ecb64ec5a3d724c38ecd82a652e31b8322d355a5c",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-15.stdout": "a4d445f572ffb120353f2d38a71dccfc8e8cb55b2152324e3a83731642bfec1f",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-09.stdout": "dd5bc0a97ad8783aa9ffff98c763b248cde9b1fda54b60e2337e1be683f62923",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-17.stdout": "30cf5e73436b54579978e658de9bba95627a4e9fc6c98128eec1c4154b875275",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-18.stdout": "2e2f469d7f89f22f3fe39ff70f1c1a36eaa20d233c829afa17da3be1d6a1f442",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-19.stdout": "8f5669093a6604d1a1bea801def4bd67561e04a5bf992f8d494449b0099193d2",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-14.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-13.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-16.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-20.stdout": "1faa640de2d9533a702f039701589cb2c28ddc73451a231830b956473ea06e99",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-07.stdout": "e5e21b12a55a51344404e5e55fa83c457182e9dbed0edb057409f49256cb2a6b",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-08.stdout": "84c16d1cef2a13f4e13e0d3d4892ea8a77a6bc77d6bea429f8fe95659e45e9f2",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-04.stdout": "e74c93f07c65cdb492c721be07c5ad6195d8a38997a818dee82d10eb5a0c18ee",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-03.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-08.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-18.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-26.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-27.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-17.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-25.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-21.stdout": "88ef566a4044914b4cf9755f3dea1affbe0d62b707eccdf36e12a7459d15d5f1",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-19.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-05.stdout": "ea35500afb01610f203ee3905026e9ba4c495f53e6a244bc5b2098a6709157a4",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-15.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-21.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-27.stdout": "27bdd17f0427582b0274990e84f6e6af1bc7b3c5ae8dfd5001435194ad1d1da9",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-24.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-03.stdout": "262b6ea4cdfb67a1209264cc60b91f6fab27093bab80466afb7f599302404eff",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-12.stdout": "4a1fff692b8c1c59af6d57f89930ae52340c2aed7b5438114288f567604641c3",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-22.stdout": "e75d2b231d7339321b4e3292f69109bd3d2e0ccddd1aa990a3449c79592de314",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-22.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-02.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-07.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-23.stdout": "3ac16e5ba38d6a64a02cfd24b8e40051b042f5756ea96b332884aa5ac9ecd13f",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-23.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG19224-topology-sdk-static-v1/pg19224-topology-netty-value-static-v1/netty-16.stdout": "d76d2e9b0f6dc930231dc88019525a167f4ae82872cdd6c0feb035f71b01bf4a"
+  },
+  "originalPost": {
+    "actualExit": 1,
+    "unexpectedSdkClass": "org/apache/activemq/artemis/utils/ByteUtil",
+    "newProductTests": 0,
+    "newMeasuredCoverage": 0
+  },
+  "bug": "BUG2295/YKT2040",
+  "testsReexecuted": 0,
+  "expectedValuesChanged": false,
+  "formalUpdated": false
+}

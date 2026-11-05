@@ -1,0 +1,36 @@
+{
+  "atJST": "2026-11-05T20:32:42.615700+09:00",
+  "source": "4874c478e1a81ce5390a79ba09a73e9552dfb9ff",
+  "originalUnitExit": 0,
+  "tests": 6,
+  "originalPostExit": 1,
+  "qualification": "PENDING_FIXED_VERIFIER_POST",
+  "bug": "BUG2295/YKT2040",
+  "extension": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/006_topology_sdk_method_extension.json",
+    "sha256": "57ce7da2c29857e6cfa5c252e224d0deacae6cbdb30f9bfc92438d85b4b05aee"
+  },
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/007_topology_post_verifier.py",
+    "sha256": "489f4f1e46939806790f127cf50240a131b4849cc83c84835ed15029a2c97948"
+  },
+  "producerPreserved": "input005 original source4874; original config/compile/run immutable",
+  "originalSdkReviewPreserved": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/004_mq_topology_sdk_static_review.json",
+    "sha256": "78c04314faae4343166bc69d434ea5584294df09e5ce175d10df4aebda32c50e"
+  },
+  "staticStages": 30,
+  "allExitZero": true,
+  "sdkBoundary": {
+    "originalZeroFilesystemClaimSuperseded": true,
+    "javaIoTmpdir": "original unit explicitly owned slot/tmp, mkdir before execution; XML exact match checked",
+    "nettyTmpdirInitializer": "io.netty.tmpdir absent, java.io.tmpdir path tries mkdirs/isDirectory then returns existing owned directory; fallback code exists and is not claimed syscall-observed",
+    "osMetadata": "PlatformDependent initializer may read /etc/os-release or /usr/lib/os-release using BoundedInputStream/BufferedReader; OS public metadata only",
+    "jvmMemory": "CleanerJava9/PlatformDependent0 may allocate small direct buffer and perform internal reflection/Unsafe capability checks; this is not the project native ABI acceptance",
+    "notProven": "No syscall tracing was performed; no assertion of zero JDK/SDK filesystem or memory activity",
+    "productBoundary": "No Root/VM/DB/broker/session/provider actions qualified by this metadata review"
+  },
+  "newProductExecution": 0,
+  "newAccepted": 0,
+  "formalUpdated": false
+}
