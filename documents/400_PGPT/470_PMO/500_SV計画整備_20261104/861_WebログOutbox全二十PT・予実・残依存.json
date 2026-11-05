@@ -1,0 +1,184 @@
+{
+  "atJST": "2026-11-06T01:47:59.073655+09:00",
+  "source": "411d97d6c98def68b064924b5f5dba3d0c459f7f",
+  "productionCoreMain": "827983a97a9c3bf36b7671985a7924417ff0e8f7",
+  "mainChanged": false,
+  "run": "PG19638",
+  "tests": 20,
+  "actualExit": 0,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "aborted": 0,
+  "coverage": {
+    "LINE": {
+      "covered": 95,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 10,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 31,
+      "missed": 0
+    }
+  },
+  "physical": 1,
+  "post": "pg19646-web-outbox-jdbc-independent-post-v1",
+  "postActualExit": 0,
+  "canonicalManifest": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG19638-web-outbox-jdbc-twenty-v1/manifest.json",
+    "sha256": "b458c4282e6b95bee8cc8616cb236de9cbe56e23ab7bd57e1a2ba7ec9111fdc7"
+  },
+  "supplementalPins": {
+    "environment.safe.json": "2137f3a91f78331e12abe492346baac552c8434198d999c98b81cabe0defa7ab",
+    "scope.safe.json": "bca69742dad4c6b8a3496472710c2b4bb01bec444ef26b5131aeb62ec614bec7"
+  },
+  "producer": {
+    "source": "411d97d6c98def68b064924b5f5dba3d0c459f7f",
+    "path": "evidence/01_PT/015_NK-WEB-001/input/007_owned_web_outbox_unit.py",
+    "sha256": "be139b62c76a1cb0bfd5320261692cf468222b841d186fbd56a484bccd1173fc"
+  },
+  "spec": "evidence/01_PT/015_NK-WEB-001/046_WebLogOutbox全JDBCport_単体テスト仕様.md",
+  "testIdMethods": [
+    [
+      "WLG-PORT-001",
+      "port001SupplierNullIsRejected"
+    ],
+    [
+      "WLG-PORT-002",
+      "port002EnqueueFirstWriteAndDuplicateUseExactSqlBindings"
+    ],
+    [
+      "WLG-PORT-003",
+      "port003EnqueueRejectsEveryRequiredArgumentBeforeSql"
+    ],
+    [
+      "WLG-PORT-004",
+      "port004AllPublicOperationsRequireBorrowedExplicitTransaction"
+    ],
+    [
+      "WLG-PORT-005",
+      "port005ClaimEmptyAndLimitBoundsBindUtcAndTenSecondLease"
+    ],
+    [
+      "WLG-PORT-006",
+      "port006ClaimSortsDueThenIdAndReturnsIndependentImmutableRows"
+    ],
+    [
+      "WLG-PORT-007",
+      "port007ClaimRejectsInvalidWorkerLimitAndNullTime"
+    ],
+    [
+      "WLG-PORT-008",
+      "port008SentUsesOwnerStatusCasAndReportsUnchangedRows"
+    ],
+    [
+      "WLG-PORT-009",
+      "port009SentRejectsNullRowAndTime"
+    ],
+    [
+      "WLG-PORT-010",
+      "port010FailureBackoffAndSaturatedAttemptUseIndependentVectors"
+    ],
+    [
+      "WLG-PORT-011",
+      "port011DefaultJitterStaysWithinIndependentTenPercentBounds"
+    ],
+    [
+      "WLG-PORT-012",
+      "port012FailureRejectsMissingOrUnboundedErrorCode"
+    ],
+    [
+      "WLG-PORT-013",
+      "port013FailureRejectsOutOfRangeJitterBeforeSql"
+    ],
+    [
+      "WLG-PORT-014",
+      "port014EveryMissingDatabaseFieldProducesFixedSqlDataFailure"
+    ],
+    [
+      "WLG-PORT-015",
+      "port015InvalidStoredLayoutOrVersionRejectsBeforeOtherFields"
+    ],
+    [
+      "WLG-PORT-016",
+      "port016StoredConstructorInvariantsAreNotNormalizedAsSuccessfulRows"
+    ],
+    [
+      "WLG-PORT-017",
+      "port017TimeOverflowAndSupplierFailureKeepIdentityAndResourceOwnership"
+    ],
+    [
+      "WLG-PORT-018",
+      "port018JdbcFailuresPropagateWithoutTransactionOrConnectionOwnership"
+    ],
+    [
+      "WLG-PORT-019",
+      "port019BorrowedConnectionRemainsUntouchedOnSuppressedAndUnknownFailure"
+    ],
+    [
+      "WLG-PORT-020",
+      "port020SharedRepositoryHasIndependentConcurrentJdbcState"
+    ]
+  ],
+  "verification": "Normal sixMain827/PG19630 NullAway0 and PG19632 allsixSB bugs/error/missing0/jarsunchanged; newtestcompile19640=0/static19642 raw6 withsix per-finding scope reasons/applicable0-CS0-parser0-suppression0. Original19636 raw9 preserved; three duplicateTestliteral violations actuallyfixed(BUG2306/YKT2051). Same current Main hash as original6b, normalphysical1/CRC/singleexec-session/full20first0/heldfour0/independentpost19646=0. Public normal andstatic evidence manifests included. BUG2307/YKT2052 tool display fixed to actual manifest source, report/event/JSON guards unchanged.",
+  "scope": "All original WebLogOutboxRepository public/private methods using memory JDK JDBC proxies and synthetic public zero-byte holder values only. No actual SQL driver/database/crypto/key/provider/JMS/recovery/Root/VM operation; own two workers have no shared JDBC state. Metadata JVM/class loading is not zero-syscall proof.",
+  "unacceptedExternalCriteria": "Real PostgreSQL syntax/locking/commit/inter-worker row exclusivity; crypto authenticity, producer/dispatcher/ingest completegraphs (existing holds unchanged), actual HTTP/WLGEVT01 delivery/CHR/runtime/native/global451/IT-ST. No new individual WBS acceptance or replacement firstV.",
+  "original6bMainSameHash": true,
+  "currentTechnicalReusableComponents": 38,
+  "originalPartial80TechnicallyWhole": 15,
+  "originalPartialUnbound": 65,
+  "originalUnregistered282ProofIntersection": 21,
+  "originalUnregisteredUnbound": 261,
+  "globalRegistryUpdated": false,
+  "newIndividualWbsAcceptance": 0,
+  "formalUpdated": false,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "historicalAccepted": "17/190",
+  "effortRate": null,
+  "firstV": "SAME_FIRST_HOLD_NOT_REPLACED",
+  "quotaBefore": {
+    "primary": {
+      "usedPercent": 21,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 21,
+    "remainingPercent": 79,
+    "observedAtUTC": "2026-11-05T16:35:24Z",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "54843c8fbb0a6ec5615dac80af7d5748a1d29b8df5c21fd4ac45d516cff8d9e5"
+  },
+  "quotaAfter": {
+    "primary": {
+      "usedPercent": 21,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 21,
+    "remainingPercent": 79,
+    "observedAtUTC": "2026-11-05T16:47:07Z",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "50905c6d9e66102175bf95365de43c95014488830eec3752a872843e8e6bb4b3"
+  },
+  "sharedObservedPp": 0,
+  "actualAllocatedPp": null,
+  "tokenN": null,
+  "tokenT": null,
+  "ordinarySharedObservedPp": 15,
+  "allRecordedSharedPp": 22,
+  "SObservedPp": 7,
+  "SRemainingCapPp": 3,
+  "mayFinishTurn": false,
+  "next": "publish/push accepted technical20; check next unqualified independent Web log persistence/audit contract and existing followup; preserve sameV/wholeHOLD, continue ordinary PGPT.",
+  "metadataCloserSha256": "1a27af71319e51370b020e81e0f0bcdf243e0560171496cb21cce742483b8fea"
+}
