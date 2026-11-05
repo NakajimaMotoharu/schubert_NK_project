@@ -1,0 +1,7 @@
+# F03資源finallyvolatile二七の文脈照合
+
+2026-11-06T08:06:52.244706+09:00 / dev-foundation / Main source 28af318d0198fe7432ca6fcd234d3fabbfd10173。PG20050 metadata真正0/独立post0。PG20050 metadata0/独立post0。1491=前1209+新27+残255、全ordinal/ID/unique1439/duplicate52。Morning原12=新8+残generic4、transaction431保留。Main/POM/normal19740/SB19742/JAR/currentSS一致。読取補助2失敗safe保存、Product/codec/FD/DB/鍵/Root/VM/PT実行0/coverage未測定。
+
+本群27件、先行と重複なし累計1236/生1491、未分類255。scope: Resource18/finally2/volatile7 source-specific ownership. Borrowed aliases vs explicit owner/end/close, UNKNOWN connection and statement cleanup priority retained; scalar volatile is visibility only. Held codec and general retirement Main source read only, no operation/current-cohort investigation.。全finding/source/context/hash/元ordinalは公開 evidence/01_PT/018_NK-OPS-001/evidence/PG20050-resource-finally-volatile-context-v1/manifest.json / SHA256 b249e0753c2dea6c1b1e62f262143a3329599023cf7bc0cc7ef5a6236d4941af。関連仕様evidence/01_PT/018_NK-OPS-001/3571_F03資源finallyvolatile二七の仕様.md・計測documents/400_PGPT/470_PMO/500_SV計画整備_20261104/936_F03資源finallyvolatile二七の結果.json。
+
+rawGate1/全適用違反null/全F03・451未受入、Product実行0/coverage未測定/動的PT免除0/新個別受入0/技術成分46/正式1964-53/歴史17-190/工数null/第一V同HOLD。原群{'low': 0.5, 'base': 2, 'high': 5} cap6不変更、共有26→26=0ppをPGPT-20261008-3966へ一度（ordinary20/all27/S7残3）、専有N/Tnull。次=Assess remaining generic255 individually, prioritize nonoperational Web logging and API observation boundaries and separate transaction431 contract. Keep unresolved contracts unclassified, no blanket catch waiver.、通常区切り停止不可。
