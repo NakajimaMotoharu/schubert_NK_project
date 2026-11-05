@@ -25,6 +25,7 @@ import java.util.stream.Stream;
  * <p>Program: NK-CHR-001. Tests: PT-CHR-G01-* through PT-CHR-G06-*.
  */
 final class GateContractValidator {
+  private static final String HASH_SUFFIX = "Sha256";
   private static final int CASE_GROUP_OFFSET = 4;
   private static final String FIELD_BASELINECOMMIT = "baselineCommit";
   private static final String FIELD_VERSION = "version";
@@ -71,12 +72,16 @@ final class GateContractValidator {
     List<String> caseOrder = strings(contract.path("caseOrder"));
     validateRun(firstRun, caseOrder, requirements, "run1", true, failures);
     validateRun(secondRun, caseOrder, requirements, "run2", true, failures);
-    validateComparison(comparison, failures);
-    validateSource(sourceReport, firstInventory, contract.path("source"), "run1", failures);
-    validateSource(sourceReport, secondInventory, contract.path("source"), "run2", failures);
-    require(firstInventory.equals(secondInventory), "INVENTORY_REPEAT_DIFF", failures);
-    validatePreflight(preflight, failures);
-    validateReview(review, contract.path(FIELD_BASELINECOMMIT).asText(), failures);
+    failures.addAll(
+        validateEvidenceDocuments(
+            comparison,
+            sourceReport,
+            firstInventory,
+            secondInventory,
+            contract.path("source"),
+            preflight,
+            review,
+            contract.path(FIELD_BASELINECOMMIT).asText()));
     validateBaseline(
         projectRoot,
         projectRoot.resolve("program/characterization/baseline/current"),
@@ -493,10 +498,48 @@ final class GateContractValidator {
             });
   }
 
+  /**
+   * Metadata consistency only (SS355 / PT-CHR-META001..009); no collection, permission, source
+   * ownership, actual approval or physical baseline qualification occurs in this stage.
+   */
+  static List<String> validateEvidenceDocuments(
+      JsonNode comparison,
+      JsonNode sourceReport,
+      JsonNode firstInventory,
+      JsonNode secondInventory,
+      JsonNode expectedSource,
+      JsonNode preflight,
+      JsonNode review,
+      String baselineCommit) {
+    for (JsonNode document :
+        new JsonNode[] {
+          comparison,
+          sourceReport,
+          firstInventory,
+          secondInventory,
+          expectedSource,
+          preflight,
+          review
+        }) {
+      if (document == null) throw new IllegalArgumentException("evidence document is required");
+    }
+    if (baselineCommit == null)
+      throw new IllegalArgumentException("baseline reference is required");
+    List<String> failures = new ArrayList<>();
+    validateComparison(comparison, failures);
+    validateSource(sourceReport, firstInventory, expectedSource, "run1", failures);
+    validateSource(sourceReport, secondInventory, expectedSource, "run2", failures);
+    require(firstInventory.equals(secondInventory), "INVENTORY_REPEAT_DIFF", failures);
+    validatePreflight(preflight, failures);
+    validateReview(review, baselineCommit, failures);
+    return List.copyOf(failures);
+  }
+
   private static void validateComparison(JsonNode comparison, List<String> failures) {
     require(VALUE_PASS.equals(comparison.path(FIELD_STATUS).asText()), "COMPARE_STATUS", failures);
-    require(comparison.path("firstFileCount").asInt(-1) == 28, "COMPARE_FIRST_COUNT", failures);
-    require(comparison.path("secondFileCount").asInt(-1) == 28, "COMPARE_SECOND_COUNT", failures);
+    require(integerEquals(comparison.path("firstFileCount"), 28), "COMPARE_FIRST_COUNT", failures);
+    require(
+        integerEquals(comparison.path("secondFileCount"), 28), "COMPARE_SECOND_COUNT", failures);
     require(
         comparison.path("missing").isArray() && comparison.path("missing").isEmpty(),
         "COMPARE_MISSING",
@@ -527,7 +570,9 @@ final class GateContractValidator {
             "masterFileCount",
             "masterBytes")) {
       require(
-          expected.path(field).asText().equals(sourceReport.path(field).asText()),
+          (field.endsWith(HASH_SUFFIX)
+              ? matchingHash(expected.path(field), sourceReport.path(field))
+              : matchingCount(expected.path(field), sourceReport.path(field))),
           "SOURCE_VALUE:" + field,
           failures);
     }
@@ -549,7 +594,7 @@ final class GateContractValidator {
             "videoCount",
             "musicCount")) {
       require(
-          expected.path(field).asText().equals(inventoryReport.path(field).asText()),
+          matchingCount(expected.path(field), inventoryReport.path(field)),
           label + "_INVENTORY_VALUE:" + field,
           failures);
     }
@@ -570,7 +615,7 @@ final class GateContractValidator {
         "PREFLIGHT_HOSTS",
         failures);
     require(
-        preflight.path("freeBytes").asLong() >= 20L * 1024 * 1024 * 1024,
+        atLeastLong(preflight.path("freeBytes"), 20L * 1024 * 1024 * 1024),
         "PREFLIGHT_DISK",
         failures);
   }
@@ -582,7 +627,11 @@ final class GateContractValidator {
         baselineCommit.equals(review.path(FIELD_BASELINECOMMIT).asText()),
         "REVIEW_COMMIT",
         failures);
-    require(!review.path("reviewerRole").asText().isBlank(), "REVIEW_ROLE", failures);
+    require(
+        review.path("reviewerRole").isTextual()
+            && !review.path("reviewerRole").asText("").isBlank(),
+        "REVIEW_ROLE",
+        failures);
     require(
         review.path(FIELD_EVIDENCE).isArray() && review.path(FIELD_EVIDENCE).size() >= 3,
         "REVIEW_EVIDENCE",
@@ -596,8 +645,31 @@ final class GateContractValidator {
             "secretScanZero",
             "qaThrough044Resolved",
             "uicThrough004Completed")) {
-      require(checks.path(name).asBoolean(false), "REVIEW_CHECK:" + name, failures);
+      require(
+          checks.path(name).isBoolean() && checks.path(name).booleanValue(),
+          "REVIEW_CHECK:" + name,
+          failures);
     }
+  }
+
+  private static boolean matchingCount(JsonNode expected, JsonNode actual) {
+    return expected.isIntegralNumber()
+        && expected.canConvertToLong()
+        && expected.longValue() >= 0
+        && actual.isIntegralNumber()
+        && actual.canConvertToLong()
+        && actual.longValue() == expected.longValue();
+  }
+
+  private static boolean matchingHash(JsonNode expected, JsonNode actual) {
+    return expected.isTextual()
+        && expected.asText("").matches("[0-9a-f]{64}")
+        && actual.isTextual()
+        && expected.asText("").equals(actual.asText(""));
+  }
+
+  private static boolean atLeastLong(JsonNode actual, long minimum) {
+    return actual.isIntegralNumber() && actual.canConvertToLong() && actual.longValue() >= minimum;
   }
 
   private static void validateBaseline(
