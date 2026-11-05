@@ -1,0 +1,149 @@
+{
+  "actualExit": 0,
+  "currentManufacturingSource": "b09393b0e746b55fd480176d57996d65bd76a95d",
+  "originalExecutedProofSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "originalSourceEvidenceRefs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14366-protocol-file-time-topology-whole-twenty-post-v1/manifest.json",
+      "sha256": "f0853ef479bb0cec0c665a985d10109f01720a048a16421a72277590df29f565",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+    }
+  ],
+  "testSourceSha256": "96e98d5d674681c90c863b7150c9fcfdb17c69e89d63f9462569daa004ab2630",
+  "currentNormalTargetClassSha256": "ffb26a6e704e399d6a190eff1d3a7ac6608b07ce6bf8eb33087894227724f675",
+  "normalTargetBytesEqual": true,
+  "originalUnitCaseCount": 2,
+  "originalCombined20NotCreditedHere": true,
+  "originalApplicableCounters": {
+    "branchNaturallyZero": false,
+    "four100": true,
+    "metadataOnly": false,
+    "physical": [
+      "dev/codex/schubert/nk/protocol/transport/BrokerTopology"
+    ],
+    "threeCounter100": true,
+    "totals": {
+      "BRANCH": {
+        "covered": 6,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 25,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 9,
+        "missed": 0
+      }
+    }
+  },
+  "independentSS321Table": [
+    [
+      "SYNC_REQUEST",
+      "nk.sync.request",
+      "nk.sync.request.q",
+      1000000,
+      5000
+    ],
+    [
+      "SYNC_REPLY_WEB",
+      "nk.sync.reply.web",
+      "nk.sync.reply.web.q",
+      1000000,
+      10000
+    ],
+    [
+      "ASYNC_WORK",
+      "nk.async.work",
+      "nk.async.work.q",
+      1000,
+      0
+    ],
+    [
+      "WEB_LOG",
+      "nk.web.log",
+      "nk.web.log.q",
+      10000,
+      0
+    ],
+    [
+      "DEAD_LETTER",
+      "nk.dead.letter",
+      "nk.dead.letter.q",
+      1000000,
+      0
+    ],
+    [
+      "EXPIRY",
+      "nk.expiry",
+      "nk.expiry.q",
+      1000000,
+      0
+    ]
+  ],
+  "independentExpectedRule": "Six exact permanent addresses/queue suffix/FQQN, body bytes and TTL seconds×1000; for-loop matches name/order/count, near-match whitespace/queue-address and null rejection. No expected from production methods.",
+  "readOnlySemanticReviews": [
+    {
+      "case": "sixDestinationsMatchTheIndependentPhysicalAndLimitOracle",
+      "review": "Independent physical table all six/name/order/queue/FQQN/body/TTL/expiration/lookup"
+    },
+    {
+      "case": "nullUnknownAndNearMatchAddressesAreDenied",
+      "review": "Null boundary, queue-name-as-address and trailing-space must reject"
+    }
+  ],
+  "contributionVsWholeRequirement": [
+    {
+      "id": "MQ-001",
+      "catalogContribution": "Artemis physical names shared across Java modules",
+      "wholeRequirementProven": false
+    },
+    {
+      "id": "MQ-002",
+      "catalogContribution": "Fixed request and Web reply routes",
+      "wholeRequirementProven": false
+    },
+    {
+      "id": "MQ-003",
+      "catalogContribution": "Dedicated async work address",
+      "wholeRequirementProven": false
+    },
+    {
+      "id": "MQ-004",
+      "catalogContribution": "Web/API physical boundary; auth/session/DB access is other component evidence",
+      "wholeRequirementProven": false
+    },
+    {
+      "id": "MQ-005",
+      "catalogContribution": "Transport route enum is not ApplicationService dispatch",
+      "wholeRequirementProven": false
+    }
+  ],
+  "exitDependencies": [
+    {
+      "id": "WBS-P002-03",
+      "historicalStatus": "ACCEPTED",
+      "historicSource": "7fffab57",
+      "currentNeededReauth": "Only exact required dependency proof; no all17 or new credit"
+    },
+    {
+      "id": "WBS-C04",
+      "historicalStatus": "ACCEPTED",
+      "historicSource": "7fffab57",
+      "currentGap": "BUG2242/YKT1988 PG_STATIC_PARTIAL_DYNAMIC_OPEN; actual management authorization negative/oracle not dynamically requalified"
+    }
+  ],
+  "wbsChecksClosed": [],
+  "reasonNoWholeLeafAcceptance": "Catalog component subproof is established; broad requirement contribution is not whole contract, current dependency exits/sourceRunRequired not all satisfied.",
+  "productExecutions": 0,
+  "newPT": 0,
+  "newCoverage": 0,
+  "newAccepted": 0,
+  "formalUpdated": false,
+  "noVMOrProviderOrOriginalLaunchers": true,
+  "next": "Independent QA051 comparison artifact PG/PT preflight after full ArtifactComparator source/originalTest fixture review. No Root capture/TargetAdapter or Current baseline writes."
+}

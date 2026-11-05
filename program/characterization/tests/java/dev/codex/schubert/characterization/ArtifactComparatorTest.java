@@ -563,6 +563,40 @@ class ArtifactComparatorTest {
     assertEquals("FAIL", report.path("status").asText());
   }
 
+  @Test
+  void rejectsMissingOrUncorrelatedL01ProjectionEvenWhenDifClaimsAreValid() throws Exception {
+    Fixture missing = fixture("projection-missing");
+    mutate(missing.observations(), root -> root.remove("correlatedLogEvidence"));
+    ArtifactComparator.ComparisonResult missingResult =
+        ArtifactComparator.compare(
+            missing.project(), missing.current(), missing.nk(), missing.observations());
+    assertFalse(missingResult.passed());
+    assertContains(missingResult.failures(), "LOG_PROJECTION_ENVELOPE");
+
+    Fixture mismatch = fixture("projection-mismatch");
+    mutate(
+        mismatch.observations(),
+        root ->
+            ((ObjectNode) root.at("/correlatedLogEvidence/observed/nk/after/1/payload"))
+                .put("request", "WRONG_REQUEST"));
+    ArtifactComparator.ComparisonResult mismatchResult =
+        ArtifactComparator.compare(
+            mismatch.project(), mismatch.current(), mismatch.nk(), mismatch.observations());
+    assertFalse(mismatchResult.passed());
+    assertContains(mismatchResult.failures(), "LOG_PROJECTION_DB_UNEXPECTED");
+
+    Fixture unrelated = fixture("projection-unrelated-artifact");
+    mutate(
+        unrelated.observations(),
+        root ->
+            ((ObjectNode) root.at("/correlatedLogArtifacts/current")).put("extra", "not-captured"));
+    ArtifactComparator.ComparisonResult unrelatedResult =
+        ArtifactComparator.compare(
+            unrelated.project(), unrelated.current(), unrelated.nk(), unrelated.observations());
+    assertFalse(unrelatedResult.passed());
+    assertContains(unrelatedResult.failures(), "LOG_PROJECTION_ARTIFACT_BINDING");
+  }
+
   private Fixture fixture(String name) throws Exception {
     Path root = temporaryDirectory.resolve(name);
     Path project = root.resolve("project");
@@ -620,9 +654,13 @@ class ArtifactComparatorTest {
     nkArtifacts.forEach(
         (caseId, artifact) -> uncheckedWriteJson(nk.resolve(caseId + ".json"), artifact));
     Path observations = root.resolve("observations.json");
-    writeJson(
-        observations,
-        JSON.createObjectNode().put("version", 1).set("observations", observationItems));
+    ObjectNode envelope = JSON.createObjectNode().put("version", 1);
+    envelope.set("observations", observationItems);
+    envelope.set("correlatedLogEvidence", CorrelatedLogEvidenceValidatorTest.fixture());
+    ObjectNode artifactBinding = envelope.putObject("correlatedLogArtifacts");
+    artifactBinding.set("current", currentArtifacts.get("CHR-L01").deepCopy());
+    artifactBinding.set("nk", nkArtifacts.get("CHR-L01").deepCopy());
+    writeJson(observations, envelope);
     return new Fixture(project, current, nk, observations);
   }
 

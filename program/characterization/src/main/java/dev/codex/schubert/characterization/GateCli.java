@@ -384,7 +384,8 @@ public final class GateCli {
   }
 
   static void promoteCurrent(Path projectRoot, Path sourceRun, Path baseline) throws Exception {
-    if (sourceRun == null) throw new IllegalArgumentException("sourceRun must name a run directory");
+    if (sourceRun == null)
+      throw new IllegalArgumentException("sourceRun must name a run directory");
     Path runName = sourceRun.getFileName();
     if (runName == null) throw new IllegalArgumentException("sourceRun must name a run directory");
     String gateCommit = System.getProperty("chr.gateCommit", "");
@@ -553,7 +554,8 @@ public final class GateCli {
     if (output == null) throw new IllegalArgumentException("output is required");
     Path normalized = output.toAbsolutePath().normalize();
     Path parent = normalized.getParent();
-    if (parent == null) throw new IllegalArgumentException("output must name a file below a directory");
+    if (parent == null)
+      throw new IllegalArgumentException("output must name a file below a directory");
     if (!ACTIVE_OUTPUTS.add(normalized)) {
       throw new IllegalStateException(
           "concurrent write to the same output is not allowed: " + normalized);

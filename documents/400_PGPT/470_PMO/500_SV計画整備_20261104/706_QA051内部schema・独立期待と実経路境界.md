@@ -1,0 +1,15 @@
+# QA051 host相関比較の内部実装契約
+
+705/020単体仕様を適用。新CorrelatedLogEvidenceValidatorと既ArtifactComparatorの接続はCharacterization framework内に限定し、srcのProduction Main b093を変更しない。Core933等の集約数字を先に更新せず、旧932Source/4frameworkSourceに対する追加class1としてtrace sidecarへ記録し、正式G13では実inventoryへの追加を必要とする。
+
+observations.correlatedLogEvidence/version1はexpected（独立期待table hash/current/nk配列）とobserved（同hash/current/nk snapshot）を分ける。payloadは安全論理operation/request/event/messageとcategory/action/httpだけ。DB before/afterのrow keyから既存行と今回追加を区別し、時刻や最大IDを相関の代替にしない。旧行の相関nullはそのまま比較し、今回の新規行にだけ厳密な非空論理refを要求する。全入力はcaller-frozen JsonNode treeであり、並行に同じtreeを書換える使用は契約外。validate自身は入力不変/Mapと診断は呼出しごとに専有、結果は不変list。
+
+NK REQUESTはHTTP_REQUEST_COMPLETEDで、同eventのLOCAL/OUTBOX各1＋DB差分1を要求。stageの別名・異event・異request/message/op/HTTPは失敗。再送は同logical eventのDB重複を免除しない。ACTION/SECURITY等は別の独立期待eventを必要とし、未登録技術行も無視しない。Current側のaction名称は独立期待に明示し、NKの名称を自動生成しない。USER/ADMIN、menu/log_search未承認案を本validatorの期待で承認扱いしない。
+
+correlatedLogArtifacts/current,nkは比較中のCHR-L01正規化JSONへ全内容一致を要求し、他case/別artifactの証拠を借用できない。既存24 artifact比較・DIF16 narrow allowlistの判定を保持し、相関不足を包括免除に変えない。DOM表示順/100件/page/件数/明細/業務結果の差は引き続き元artifact比較と実captureの対象。
+
+このhost検査だけで、実DB捕捉・raw UUID→安全ref対応・Source/run/fixture版・独立oracleの真正性・表示実測の資格は成立しない。Collectorは実行前oracle tableとmanifestを固定し、原本保全とsnapshot/全stage由来を証拠化する必要がある。今回は実VM/DB/Root/Browser/TargetAdapter/captureを起動せず、QA051 final/CHR-L01/親P02001/451は未受入を維持する。
+
+初回13Test計画から、初回実行前に独立並行case009を追加し14Testへ固定。必要coverageは新validatorと変更Comparatorに限定した四counter、通常Maven artifact/CRC/source/Testの一致を別途確認する。GateCliはcompileを可能にする既二行formatだけ（707）、正確なcompare-nk→比較器→own temporary JSON出力だけを元Testが通る。他のreport/verify-source/preflight/promote-current/Adapterコマンドは実行しない。
+
+PG18654 format原失敗、PG18656 prebinding compile成功、PG18658 artifact-binding版compile成功、PG18659 並行case追加版compile成功をそれぞれ保持。各Source/Test hashが違う版を合格へ合算しない。現在未commit/WIP、初回Unit未実行、静的PG18660観測中。原190/251leafやS/Vへ新規受入を追加しない。

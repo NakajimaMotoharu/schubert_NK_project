@@ -1,0 +1,36 @@
+{
+  "atJST": "2026-11-05T08:52:38.249361+09:00",
+  "groupId": "PGPT-20261105-QA051-CORRELATED-LOG-VALIDATION",
+  "sourceBefore": "495717be652a0136ff2eba6b90dc493690771aa1",
+  "productionMainSourceUnchanged": "b09393b0e746b55fd480176d57996d65bd76a95d",
+  "owner": "WBS-P020-01",
+  "estimateAtGroupStartPp": {
+    "low": 0.75,
+    "base": 2,
+    "high": 6
+  },
+  "capPp": 10,
+  "quotaBefore": {
+    "observedByJST": "2026-11-05T08:52:38.249361+09:00",
+    "limitId": "codex",
+    "windowDurationMins": 10080,
+    "reset": 1794395640,
+    "usedPercent": 10,
+    "remainingPercent": 90,
+    "secondary": null,
+    "secondaryMeaning": "UNAVAILABLE_NOT_UNLIMITED"
+  },
+  "chargedToSV": false,
+  "authority": "QA051 approved UI264§5.1/SS355§8.1, ordinary477/478; no finalCHR or actual capture permission implied.",
+  "target": "New program/characterization internal CorrelatedLogEvidenceValidator plus ArtifactComparator required L01 evidence validation. Production code remains src, test harness stays program.",
+  "scope": "Pure JSON expectation-vs-observation validation: preserved DB-before rows, exact correlated new DB events, request/event/message/operation refs, missing/duplicate/extra/wrong correlation, NK REQUEST local/outbox/DB witnesses and exact HTTP attributes. Independent expected input from frozen SS351 action table/capture plan, never from observed values.",
+  "formatInternalJudgment": "Schema version1 scoped only to observations.correlatedLogEvidence; expected/current/nk plus observed/current/nk snapshots and LOCAL/OUTBOX witnesses. Fields are safe logical refs and allowlisted HTTP projections, no raw session/cookie/context/token/password. Does not normalize DOM order/count or unrelated artifacts/differences.",
+  "plannedPG": "Implement validator with fail-closed null/missing/type/extra validation and redacted fixed diagnostics; require it at ArtifactComparator boundary; adjust only synthetic Test fixture, Current baseline unchanged. Exact schema freeze in PT spec before execution.",
+  "plannedPT": "New self-contained pure JsonNode validator suite plus original whole ArtifactComparatorTest after complete review of fixture and its fixed compare-nk call path. The latter calls only compare/writeJson to own temporary path; no report/capture/adapter/preflight/promote commands.",
+  "effects": "Own JVM Jackson/JDK, own synthetic temp artifacts, publiccatalog/dif allowlist read. No VM/DB/Root/Artemis/actualBrowser/TargetAdapter/network/credential/key/native/process-service actions.",
+  "quality": "Source/Test compile/static/negative and meaningful branch coverage, independent literal fixtures; preserve actual tool endings; no PT exemptions or old6b/core14/oldchar success import. Cannot call framework build or synthetic proof a real CHR-L01 pass.",
+  "exit": "Host correlated-evidence contract plus integration tests/trace published, scope same-source/golden evidence. Parent P02001/QA051-final/451/real captures remain open. No new V or project scope/quality change.",
+  "holdsUnchanged": true,
+  "refusalAssignedToThisNewPureOperation": false,
+  "preflightStillRequiredBeforeExecution": "Complete new schema/source/test and fixed helper effects; if any held dependency appears, hold only dependent scope."
+}

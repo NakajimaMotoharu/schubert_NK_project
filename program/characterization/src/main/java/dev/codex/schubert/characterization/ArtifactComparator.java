@@ -49,6 +49,9 @@ public final class ArtifactComparator {
                 .toFile());
     JsonNode observations = JSON.readTree(observationsFile.toFile());
     List<String> failures = new ArrayList<>();
+    // QA-051/SS355 §8.1: legacy DIF claims alone cannot establish correlated CHR-L01 evidence.
+    failures.addAll(
+        CorrelatedLogEvidenceValidator.validate(observations.path("correlatedLogEvidence")));
 
     Set<String> expectedCases = strings(catalog.path("cases"), "id");
     require(expectedCases.size() == 24, "CATALOG_CASE_COUNT", failures);
@@ -82,6 +85,15 @@ public final class ArtifactComparator {
       collectDifferences(caseId, "", current, nk, rawDifferences);
       comparedCases++;
     }
+
+    JsonNode logArtifacts = observations.path("correlatedLogArtifacts");
+    require(
+        logArtifacts.isObject()
+            && logArtifacts.size() == 2
+            && logArtifacts.path("current").equals(currentByCase.get("CHR-L01"))
+            && logArtifacts.path("nk").equals(nkByCase.get("CHR-L01")),
+        "LOG_PROJECTION_ARTIFACT_BINDING",
+        failures);
 
     Map<String, JsonNode> rules = new LinkedHashMap<>();
     for (JsonNode rule : allowlist.path("differences")) {

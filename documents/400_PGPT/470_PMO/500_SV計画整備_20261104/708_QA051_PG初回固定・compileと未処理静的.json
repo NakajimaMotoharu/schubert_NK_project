@@ -1,0 +1,78 @@
+{
+  "atJST": "2026-11-05T09:14:59.072707+09:00",
+  "sourceBefore": "495717be652a0136ff2eba6b90dc493690771aa1",
+  "productionCoreMainUnchanged": "b09393b0e746b55fd480176d57996d65bd76a95d",
+  "characterizationChanges": [
+    "ArtifactComparator mandatory correlated proof/artifact binding",
+    "New CorrelatedLogEvidenceValidator pure JSON validation",
+    "GateCli only exact2format spans"
+  ],
+  "inputHashes": {
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "program/characterization/pom.xml": "f5e72eb2d2b8cc9e1f97c0f39212e1eee506b38fcb25980ed0959a28e2f468f2",
+    "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+    "src/schubert-nk-api/pom.xml": "2c9786c2431606e25aef3e07117a43ee1abe4a4aa239900c4d7ae6d20469617f",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java": "6580cedeee10b6bb78a2457d8f367ac5dd30bc67636124071b8c758bd7c81bfc",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java": "4c5134e42eb3795384f573fb1128e447ed5170a3d69b3d9819790c7ebb1fb482",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java": "0fa182bf33b9db648c2a31b5e9a0b97c2d8df24f1116d2bf68bb610a2503026f",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java": "982550448364405d41f2e0c6fba874342afbbcf6b8261d30ce2133976eea5c00",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/TargetAdapter.java": "0a5e158e24c3e7bfce869a7bb9eda2ea497c3afdc7fcf1d40ae247fe37b3b7a0",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java": "90a949d4642575885331cf1851a3cba53f21a508371ae4877d151e29f835f960",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java": "6378cf93da4beab6b601be8bc8e5bc8b678a1005f60f66983d6d46e57f9f72e5",
+    "program/characterization/tests/resources/cases/catalog.json": "df412392032ad324a5e5dd92b0703c03287a7744af47aa42cd34a0a617e46d38",
+    "program/characterization/tests/resources/cases/dif-allowlist.json": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6"
+  },
+  "compile": {
+    "run": "PG18659",
+    "receipt": "20482/5ebadb/0",
+    "manifestSha256": "fa2d973ef06289e0005e50f1b22c8366423c86e6a25e597752f30682312f3129",
+    "sourceJar": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18659-correlated-log-char-compile-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+      "sha256": "9628dce7bd02008eda9332dfef24284c8d5cdc54fc2a8175ac69f210c25153d7"
+    },
+    "testsCompiled": 14,
+    "testsExecuted": 0
+  },
+  "originalCompileHistory": [
+    {
+      "run": "PG18654",
+      "actualExit": 1,
+      "reason": "oldGateCli format2spans",
+      "bug": "BUG2266"
+    },
+    {
+      "run": "PG18656",
+      "actualExit": 0,
+      "reason": "pre artifact-snapshot binding variant; not current"
+    },
+    {
+      "run": "PG18658",
+      "actualExit": 0,
+      "reason": "before independent concurrency/shape-null negatives; not current"
+    }
+  ],
+  "static": {
+    "run": "PG18660",
+    "actualUnitTests": 0,
+    "manifest": "evidence/01_PT/020_NK-CHR-001/evidence/provisional/PG18660-characterization-static-original-v1/manifest.json",
+    "sha256": "9f19d8ded4d8adb416cb7fe45f4cfb12841f8214e5fb516c6cf9aacab7e26d43",
+    "pmdRaw": 111,
+    "spotbugsRaw": 13,
+    "newValidatorSpotbugs": 0,
+    "wholeStaticPass": false,
+    "bugs": [
+      "BUG2267",
+      "BUG2268"
+    ],
+    "otherBroadThrows": 5
+  },
+  "firstUnitPlan": "After this Characterization input commit fixed, own first14test pass/fail/actualCoverage on normalPG18659 jar, newexec no older result merge. Do not wait for unrelated oldstatic repairs to execute meaningful firstTDD unit. Failed first new feature vectors are TDD, not existing-source success.",
+  "formalUpdated": false,
+  "newAccepted": 0,
+  "qa051Final": "HOLD",
+  "noActualRootDbCaptureOrBaselineWrite": true
+}
