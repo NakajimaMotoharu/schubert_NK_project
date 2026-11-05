@@ -132,6 +132,14 @@ final class GateContractValidator {
   private static void validateContractShape(JsonNode contract, List<String> failures) {
     require(contract.isObject(), "CONTRACT_NOT_OBJECT", failures);
     require(
+        integerEquals(contract.path("currentApplicableCount"), 23),
+        "CONTRACT_CURRENT_COUNT",
+        failures);
+    require(
+        integerEquals(contract.path("baselineFileCount"), 27),
+        "CONTRACT_BASELINE_FILE_COUNT",
+        failures);
+    require(
         CorrelatedLogEvidenceValidator.versionOne(contract.path(FIELD_VERSION)),
         "CONTRACT_VERSION",
         failures);
@@ -672,6 +680,58 @@ final class GateContractValidator {
     return actual.isIntegralNumber() && actual.canConvertToLong() && actual.longValue() >= minimum;
   }
 
+  /**
+   * SS355 / PT-CHR-BMETA001..008: manifest items only, never opens a baseline or qualifies origin.
+   */
+  static List<String> validateBaselineMetadata(JsonNode manifest, JsonNode sourceReport) {
+    if (manifest == null || sourceReport == null) {
+      throw new IllegalArgumentException("baseline metadata document is required");
+    }
+    List<String> failures = new ArrayList<>();
+    require(FIELD_CURRENT.equals(manifest.path("target").asText()), "BASELINE_TARGET", failures);
+    require(integerEquals(manifest.path("caseCount"), 24), "BASELINE_CASE_COUNT", failures);
+    require(
+        integerEquals(manifest.path("screenshotFileCount"), 2),
+        "BASELINE_SCREENSHOT_COUNT",
+        failures);
+    require(integerEquals(manifest.path("differenceCount"), 16), "BASELINE_DIF_COUNT", failures);
+    require(
+        matchingHash(
+            sourceReport.path("sourceAggregateSha256"), manifest.path("sourceAggregateSha256")),
+        "BASELINE_SOURCE_HASH",
+        failures);
+    require(
+        matchingHash(
+            sourceReport.path("documentAggregateSha256"), manifest.path("documentAggregateSha256")),
+        "BASELINE_DOCUMENT_HASH",
+        failures);
+    require(
+        matchingCount(sourceReport.path("masterFileCount"), manifest.path("masterFileCount")),
+        "BASELINE_MASTER_COUNT",
+        failures);
+    require(
+        matchingCount(sourceReport.path("masterBytes"), manifest.path("masterBytes")),
+        "BASELINE_MASTER_BYTES",
+        failures);
+    require(
+        "25.0.4".equals(manifest.path(FIELD_ENVIRONMENT).path("javaVersion").asText("")),
+        "BASELINE_JAVA",
+        failures);
+    require(
+        integerEquals(manifest.path(FIELD_ENVIRONMENT).path("browserRevision"), 1187),
+        "BASELINE_BROWSER",
+        failures);
+    require(
+        "ja-JP".equals(manifest.path(FIELD_ENVIRONMENT).path("locale").asText("")),
+        "BASELINE_LOCALE",
+        failures);
+    require(
+        "Asia/Tokyo".equals(manifest.path(FIELD_ENVIRONMENT).path("timezone").asText("")),
+        "BASELINE_TIMEZONE",
+        failures);
+    return List.copyOf(failures);
+  }
+
   private static void validateBaseline(
       Path projectRoot,
       Path baselineRoot,
@@ -682,49 +742,7 @@ final class GateContractValidator {
       JsonNode requirements,
       List<String> failures)
       throws IOException, NoSuchAlgorithmException {
-    require(FIELD_CURRENT.equals(manifest.path("target").asText()), "BASELINE_TARGET", failures);
-    require(manifest.path("caseCount").asInt(-1) == 24, "BASELINE_CASE_COUNT", failures);
-    require(
-        manifest.path("screenshotFileCount").asInt(-1) == 2, "BASELINE_SCREENSHOT_COUNT", failures);
-    require(manifest.path("differenceCount").asInt(-1) == 16, "BASELINE_DIF_COUNT", failures);
-    require(
-        manifest
-            .path("sourceAggregateSha256")
-            .asText()
-            .equals(sourceReport.path("sourceAggregateSha256").asText()),
-        "BASELINE_SOURCE_HASH",
-        failures);
-    require(
-        manifest
-            .path("documentAggregateSha256")
-            .asText()
-            .equals(sourceReport.path("documentAggregateSha256").asText()),
-        "BASELINE_DOCUMENT_HASH",
-        failures);
-    require(
-        manifest.path("masterFileCount").asLong() == sourceReport.path("masterFileCount").asLong(),
-        "BASELINE_MASTER_COUNT",
-        failures);
-    require(
-        manifest.path("masterBytes").asLong() == sourceReport.path("masterBytes").asLong(),
-        "BASELINE_MASTER_BYTES",
-        failures);
-    require(
-        manifest.path(FIELD_ENVIRONMENT).path("javaVersion").asText().equals("25.0.4"),
-        "BASELINE_JAVA",
-        failures);
-    require(
-        manifest.path(FIELD_ENVIRONMENT).path("browserRevision").asInt() == 1187,
-        "BASELINE_BROWSER",
-        failures);
-    require(
-        manifest.path(FIELD_ENVIRONMENT).path("locale").asText().equals("ja-JP"),
-        "BASELINE_LOCALE",
-        failures);
-    require(
-        manifest.path(FIELD_ENVIRONMENT).path("timezone").asText().equals("Asia/Tokyo"),
-        "BASELINE_TIMEZONE",
-        failures);
+    failures.addAll(validateBaselineMetadata(manifest, sourceReport));
     List<Path> files = regularFiles(baselineRoot, path -> true);
     require(
         files.size() == contract.path("baselineFileCount").asInt(),

@@ -1,0 +1,71 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] schubert-nk                                                        [pom]
+[INFO] Schubert Characterization Test                                     [jar]
+[INFO] 
+[INFO] -------------------< dev.codex.schubert:schubert-nk >-------------------
+[INFO] Building schubert-nk 0.1.0-SNAPSHOT                                [1/2]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (toolchain-and-dependency-contract) @ schubert-nk ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] Rule 2: org.apache.maven.enforcer.rules.dependency.DependencyConvergence passed
+[INFO] 
+[INFO] --- spotless:3.10.2:check (java-format-contract) @ schubert-nk ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] 
+[INFO] --- dependency:3.9.0:build-classpath (default-cli) @ schubert-nk ---
+[INFO] No dependencies found.
+[INFO] Wrote classpath file '/home/mini/codex/project1/work/pgpt-runs/PG379/pg18750-baseline-metadata-typed-compile-v1/snapshot/target/pgpt-test-classpath.txt'.
+[INFO] 
+[INFO] ------------< dev.codex.schubert:schubert-characterization >------------
+[INFO] Building Schubert Characterization Test 0.1.0-SNAPSHOT             [2/2]
+[INFO]   from program/characterization/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (toolchain-and-dependency-contract) @ schubert-characterization ---
+[INFO] Rule 2: org.apache.maven.enforcer.rules.dependency.DependencyConvergence passed
+[INFO] 
+[INFO] --- spotless:3.10.2:check (java-format-contract) @ schubert-characterization ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 14 files clean - 0 needs changes to be clean, 14 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- jacoco:0.8.15:prepare-agent (prepare-coverage-agent) @ schubert-characterization ---
+[INFO] argLine set to -javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg18750-baseline-metadata-typed-compile-v1/snapshot/program/characterization/target/jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ schubert-characterization ---
+[INFO] skip non existing resourceDirectory /home/mini/codex/project1/work/pgpt-runs/PG379/pg18750-baseline-metadata-typed-compile-v1/snapshot/program/characterization/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.0:compile (default-compile) @ schubert-characterization ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 5 source files with javac [forked debug release 25] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ schubert-characterization ---
+[INFO] Not copying test resources
+[INFO] 
+[INFO] --- compiler:3.14.0:testCompile (default-testCompile) @ schubert-characterization ---
+[INFO] Not compiling test sources
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ schubert-characterization ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ schubert-characterization ---
+[INFO] Building jar: /home/mini/codex/project1/work/pgpt-runs/PG379/pg18750-baseline-metadata-typed-compile-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- dependency:3.9.0:build-classpath (default-cli) @ schubert-characterization ---
+[INFO] Wrote classpath file '/home/mini/codex/project1/work/pgpt-runs/PG379/pg18750-baseline-metadata-typed-compile-v1/snapshot/program/characterization/target/pgpt-test-classpath.txt'.
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for schubert-nk 0.1.0-SNAPSHOT:
+[INFO] 
+[INFO] schubert-nk ........................................ SUCCESS [  0.853 s]
+[INFO] Schubert Characterization Test ..................... SUCCESS [  2.926 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.910 s
+[INFO] Finished at: 2026-11-05T11:58:00+09:00
+[INFO] ------------------------------------------------------------------------
