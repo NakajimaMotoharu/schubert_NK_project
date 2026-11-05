@@ -524,3 +524,10 @@ pending_context_revocationsはAPI/Web sessionの期限cleanupと分け、expires
 SSC202（2026-10-06、SSC200201/BUG788/YKT562）：隔離PG/PT VMの同日別run参照修正では、成功済みBackup二stepとCleanup七SKIPを持つ未完了runを保全し、027→028移行・pending code-only・一回用通常resumeを別の正常所有区間として認定する。元cutoff/activationをoperatorが更新せず、手DB terminal修復/日次業務再処理をしない。既成功Backupは元schema027の真正manifest/全byte/元二handleで通常same-run再用し、新profile028へ書き換えない。新規Backupだけ現在署名/profile028と整合させる。親fresh Invocationからの30分budget、実Unitの期限、API所有のままWeb/Caddy/原本DONE、失敗逆順停止・全後条件は既契約のまま。各段の実source/終了コード/全資源正常帰還を確認するまで次段の権限・成功を与えない。
 SSC202工具起動前失敗限定回収（BUG797）：参照子missing filenameの実exit2、SAVE/Ref/設定変更/start0を実証し、当管理Javaのboot/PID/ticks/Root/子0/専用DB/locksを現在値固定した場合に限りowned PIDへTERMし、消失・全peer/lock0・十Unit/kernel/全原値不変更を確認して別新scopeへ進める。回収は異常終了であり旧close正常化/一般UNKNOWN補修/業務Unit強制終了の根拠にしない。
 SSC202同範囲起動前失敗（BUG798）：既知の署名base security取り違えが十Ref取得前に失敗しSAVE空/runtime空・全原値不変更の場合、固定child/parentのboot/PID/ticks/Root/argv/全task-childを認証して当child→parentのowned TERMだけで回収する。既DBidle TX期限後peer0は正常closeでなく、前後全原値・全peer/lock0と独立拒否再現を保存、新scopeへ別所有で進む。一般UNKNOWN・業務Unit強制終了・旧close正常化へ拡張しない。release原本Root:schubert0640と/etc配備Unit Root:Root0644は既署名profileのまま別検査し、権限を変更しない。
+
+
+## SSC337 LogCleanup借用transactionの複合故障（2026-11-06）
+
+BUG2317/YKT2062。§7.2の5資源releaseとは別に、LogCleanupService.transactionにも§6.6の既borrowed transaction規約を明示適用する。開始済みで未commitのbody SQL/Runtime/Error失敗はrollbackを一度試み、正常rollback後だけautoCommitをtrueへ復元する。rollback/復元のSQL・未知Runtime/NPE/Errorで先行未知primaryを覆わず、同一objectのまま再送出し、新しい固定DATABASE_FAILUREをsecondaryへ一件追加する。同じThrowableが再送されても自身へaddSuppressedしない。既知SQL/BatchRepositoryException/CleanupStoppedException primaryに未知cleanupが重なる場合はcleanup同一性を優先、既知同士は固定DATABASE_FAILUREとする。回復がすべて正常なら元の既知停止reasonを保持する。
+
+commit済みflag確定後の失敗はrollbackしたと偽らず、回復/再commit/再送を発行せず非成功でcallerのConnection破棄へ渡す。rollback不明後のautoCommit復元・回復retry・借用Connection close/新接続を追加しない。通常chunk結果/累積/lock取得解放順・割込flag・共通期限・SQL/DB構造・業務UI/wire/承認DIFは不変更。公開executeの独立JDBC proxyで未知/既知/同一Throwable・commit前後・rollback/復元/借用close回数を照合し、実DB後条件・native・451全体の認定とは分ける。詳細設計内の既契約適用補足でありRD/UI変更・利用者QAは不要、PG/PT・main公開の完了は別に記録する。

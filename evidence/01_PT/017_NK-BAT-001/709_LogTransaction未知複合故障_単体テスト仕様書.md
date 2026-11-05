@@ -1,0 +1,45 @@
+# NK-BAT-001 LogCleanupService transaction複合故障 単体テスト仕様書
+
+- 関連: OPS-009/DAT-009、UI251、SS331 §3.14・SS332・SS341 §6.6/7.2/SSC337、BUG-2317/YKT-2062。設計正本origin/main854f0c1ac23ff01646b329c495d62ffce2a3c491 / PR205。
+- Program/class/method: LogCleanupServiceのpublic execute/withOwner、constructor、transaction/check/owned/replace/known、SessionLease acquire/closeとChunkProgress。TestはLogCleanupTransactionPortTestの公開入口だけ、private抽出・reflection呼出なし。
+- 状態: 試験設計・Test source作成中、実行未着手。旧source成功を新sourceへ加算しない。
+
+## 独立oracleとfixture
+
+Connection/PreparedStatement/ResultSetはJDKの自己所有memory proxy。DriverManager/DataSource/BatchDatabaseFixture、OS/DB/JMS/Root/VM、実鍵/credential/permit/intent/失敗cohortを呼ばない。SS331の固定SQLと出力列に基づく一行literal、queryTimeout固定値、正常/欠落/null/未知/複数行を用意する。既成功Production methodでexpectedを生成しない。
+
+期待表の既知KはSQL・BatchRepository・CleanupStopped（fixture TIME_LIMIT）、未知UはIllegalStateException・NullPointerException・AssertionError。body SQLはRepository既境界の固定既知失敗を経由する。回復が正常なら元U identity・secondary0、Kは既reasonを保持。回復失敗はU primaryを同一identityで保持し固定DATABASE_FAILUREだけ一件、K primary＋U cleanupはU cleanup同一identity、K同士は固定DATABASE_FAILURE。回復故障後autoCommit=falseならSessionLeaseの独立失敗も同じ資源表で固定secondaryとなるため、U primaryの公開結果は固定secondary二件、K＋U cleanupは一件、K同士は最外側redact後0件。secondaryは新規・cause null・raw診断なし、元object自身へ追加しない。suppression無効ならsecondary0で同一primary、正常扱いしない。
+
+rollback一回→正常時だけautoCommit復元一回、失敗時追加復元/commit/retry0。borrowed Connection close0。commit済み後の失敗はcommit1/rollback0でsummary返却0、durable mutationをrollback済みとしない。実DB永続後条件の実測はこのfixtureの証明外。
+
+## Test ID群（Test source確定時にmethod/hashと一対一で結合）
+
+|Test ID|目的/入力・操作|独立期待値・根拠|
+|---|---|---|
+|PT-BAT-LOGTX337001|constructor/API null、entry IRQ、時計負値/期限/計測中IRQ|契約拒否、INTERRUPTED/TIME_LIMIT、flag保持、DB作用0|
+|PT-BAT-LOGTX337002|空完了・未完→次chunk完了・hold累積|固定counts/exit0又は10、commit回数、normal回復なし|
+|PT-BAT-LOGTX337003|LOCK_BUSY/BACKUP_GATE|元停止reason、rollback復元後のみ解放|
+|PT-BAT-LOGTX337004|累積不足/前回累積競合|固定DB失敗、未commit、rollback一回|
+|PT-BAT-LOGTX337005|lock行欠落/null/false/複数|固定失敗/LOCK_BUSY、取得済flagに応じた解放|
+|PT-BAT-LOGTX337006|unlock行欠落/null/false/複数|summary未返却、固定DB失敗、借用close0|
+|PT-BAT-LOGTX337007|body K/U×回復正常|前述K/U表、元U identity、rollback→復元|
+|PT-BAT-LOGTX337008|body六型×rollback六型|前述独立36-vector表、復元0、未知identity/固定secondary|
+|PT-BAT-LOGTX337009|body六型×復元六型|前述独立36-vector表、rollback1/復元1|
+|PT-BAT-LOGTX337010|同一未知objectの再送×rollback/復元|self-suppression0、元identity、fresh固定secondary|
+|PT-BAT-LOGTX337011|rollback失敗の後条件|復元/commit/retry/borrowed close0|
+|PT-BAT-LOGTX337012|五所有resourceのbody/close/同一/close-only競合|SS341327の独立225-vector、資源ごとの一度解放、未知primary/cleanup優先|
+|PT-BAT-LOGTX337013|commit後owner既知/未知故障|commit1/rollback0、summaryなし、caller破棄条件|
+|PT-BAT-LOGTX337014|正常commit後autoCommit復元故障|commit1/rollback0、未知identity/固定失敗|
+|PT-BAT-LOGTX337015|開始setAutoCommit(false)自体の故障|開始成立を推測rollbackしない、追加commitなし|
+|PT-BAT-LOGTX337016|withOwnerの既期限・固定timeout binding|同owner check、literal5s/5000・最大5、owner null拒否|
+|PT-BAT-LOGTX337017|providerのnull statement/result|NPE契約非正常、未取得資源成功扱い0、借用close0|
+|PT-BAT-LOGTX337018|別connection/別ownerの独立並行|各counts/result/close回数独立、同connection共有を許可しない|
+|PT-BAT-LOGTX337019|suppression無効な未知primary|同一primary、cleanupの失敗を成功へ変換しない|
+
+## 実施・品質・証跡
+
+実行前にTest source/hashと各IDのmethodを確定する。既PG19740のMain-only normal JARで修正前redを一回採取し、原失敗を保存、期待表を変えずPG後の新source normal JARでgreenを実施する。共有selected-class qualifier一つを明示profileへ拡張して再利用し、javacはこのTestだけを指定する。RootFailed二Testを読取/compileせず、JUnit --select-classを固定、held四dynamic classの初期化hitを独立に確認する。
+
+必要なMain-only Maven compile/NullAway・静的checkは実command/版/source/真正exitを保存。JUnit XML found/started/succeeded/F/E/S/abort、JaCoCo当source/session/全物理classを照合する。LogCleanupServiceのline/method/class/branch100%を要求し、未達は未完、abstract interfaceの実行code0は根拠を明記する。除外や旧exec合成、動的HOLDをPASSにしない。
+
+原red、green、入力/期待/実際、environment/JDK25.0.4、branch/commit、tool hash、command/exit、BUG/SSC、coverage/manifest/hashをProgram017/evidenceの未使用runへ保存する。秘密/実session/token/DB dumpなし。全451/native/CHR/正式1964-53は別未完了であり、この限定PTでPGPT完了を宣言しない。
