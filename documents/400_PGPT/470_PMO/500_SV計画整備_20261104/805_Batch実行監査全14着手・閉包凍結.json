@@ -1,0 +1,50 @@
+{
+  "atJST": "2026-11-05T17:42:42.133622+09:00",
+  "groupId": "PGPT-20261105-BATCH-RUN-AUDIT-PORT",
+  "headBefore": "6f9d96adb9f6647dff67cf5bf8f83b6235f4531b",
+  "productionMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+  "design": "bf11a7b63e0d97c34f15a56b41bfd57681c38ccc",
+  "primaryWbs": "WBS-P017-02",
+  "leafCostBinding": null,
+  "startEstimatePp": {
+    "low": 1,
+    "base": 5,
+    "high": 9
+  },
+  "capPp": 10,
+  "chargedToSV": false,
+  "originalEvidenceStatus": "NOT_IN_CURRENT_MEASUREMENT_REGISTRY_UNQUALIFIED_STATIC_DESCRIPTOR_ONLY",
+  "originalCounters": null,
+  "target": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+  "scope": "whole BatchRunRepository + private pure History record, 2normalphysical; new whole BatchRunAuditPortTest14 methods. No selecting old mixedDB tests.",
+  "closure": "all Main source read begin3 entry+privatebegin/history/abandon/insert/finish/verify/replayed/bind/guards/History; borrowed RunReferenceRepository/JdbcResourceFailures/BatchStepAttempt/BatchStepResult/BatchRun/BatchStep pure. Old BatchRunRepositoryTest @BeforeAll/@TempDir BatchDatabaseFixture is not independent and is not compiled/run. No extracting/retrying denied tests. Synthetic JDBC updates never reach DB/SQLengine/Root/cohort/owner/permit/intent/native/backend.",
+  "independentOracles": "SS3318.3/SS341 samebusinessday successful nonBackup skip; manualBackup multisucces retains; Morning same-run reuse, foreignBackup notskip; abandoned same-run validation of entireset before updates; max99, typed12-column history; literal5SQL+references, timeout5, insert9bind/finish14/abandon6; exactreplaymatches/no fallback; SSC063 closepriority; privateHistory fixedredaction data-only via reflected ctor never access authority/provider.",
+  "quality": "normal b093 sixMain/NullAway/SB PG18642/18648 source/JAR equality, format/javac25XlintWerror/newTest PMD/CS; prefreeze whole Test/Main/normalallphysical CRC, oneexec/session, four100, HELD4zero/noNative/init; endfreshUTC afterpost.",
+  "requirements": [
+    "NK-BAT-001",
+    "DAT009/OPS009",
+    "UI251",
+    "SS331§8.3/332/341",
+    "SSC055/056/063/116/124"
+  ],
+  "newTests": 14,
+  "newIndividualAcceptance": 0,
+  "formalUnchanged": true,
+  "firstV": false,
+  "quotaBefore": {
+    "primary": {
+      "usedPercent": 16,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 16,
+    "remainingPercent": 84,
+    "windowDurationMins": 10080,
+    "resetsAt": 1794395640,
+    "observedAtUTC": "2026-11-05T08:39:57.741Z",
+    "observedByJST": "2026-11-05 17:39:57 JST",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "861ea0395f166a65298043f7ab82d4d9c58b2d3487d8980910ec79478adc8927"
+  }
+}

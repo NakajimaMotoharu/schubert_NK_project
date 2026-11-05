@@ -1,0 +1,28 @@
+# Batch実行監査 単体テスト仕様書
+
+NK-BAT-001 / BatchRunRepository全Source/History / DAT009・OPS009/UI251/SS331§8.3・332・341/SSC055056063116124/451/805。Main b093をレビューしPGと全分岐PTを併行する。旧BatchRunRepositoryTestはDB fixture/@BeforeAll/TempDirを持つため選択・compileしない。独立の手書JDBC portだけで通常PT、実失敗cohort/Root/原本/DB復旧試験へ代替しない。
+
+BRPORT001～014、BatchRunAuditPortTest全14method。literal SQL/typedbind/timeout5、normal/morning/BackupUnavailable・99試行・成功skipとmanualBackup別扱い、同run abandon事前全検証、history列のnull/時刻・count/identity境界、insert/replay欠落や重複、finish/verifyの同値のみ許可、SQL/RTE/Errorのbody/close優先と全資源解放、borrowedconn変更0、private純粋Historyの固定redactionを検証する。privateDTO ctor反射はデータ文字列表現だけ、owner/権限/provider/Rootへ到達しない。
+
+fixtureはUUID(0,1)/UTC2026-11-05T00Z、同日別UUID、手書12列と期待SQL/bind9・14・6。productionのmapper/SQL/privatepredicateからexpectedを作らない。元正常ビルドjar2physical・全@Test・XML/source固定/単exec-session・四100/HELD四0・静的適用0を独立postする。並行同connはsingleowner事前契約で未許可、再送はchanged0/typedmatchesだけ。無意味assert/安易除外/skip/未実行の合格算入0。Main障害は修正前に915/916へ起票。
+
+実commandは既qualifier prepare/static/run/post batch_run。source/argv/環境/終端・coverage・BUG・evidencehash・各methodの詳細期待は702結果/806-807に記録。原見積1/5/9・群cap10（普通PG/PT、S/Vへ付替え0）。全WBS/正式1964-53/工数null/第一V/実DB/Root/native/CHR/451/IT-STを更新しない。
+
+|Test ID|class.method|期待と独立根拠|
+|---|---|---|
+|BRPORT001|BatchRunAuditPortTest.emptyBeginAndSixBackupDependentSkipsUseLiteralSqlAndTypedNineBindings|初回id7/try1、SQL全6literal/9bind、六固定削除SKIP/BACKUP_UNAVAILABLE|
+|BRPORT002|BatchRunAuditPortTest.successfulDaySkipsNonBackupButManualAndMorningBackupFollowDifferentRunContracts|非Backupは同日success一意でskip、手動Backupは複数success保全、Morningは同runだけ再用|
+|BRPORT003|BatchRunAuditPortTest.sameRunAbandonRequiresExplicitFlagAndValidatesEveryRowBeforeAnyMutation|同run RUNNING全rowを明示flagで検証後だけABANDONED、異run/無flag/複数nonBackup成功は変更0|
+|BRPORT004|BatchRunAuditPortTest.everyHistoryRequiredNullIdentityAttemptStatusCounterAndStoredTimeBoundaryIsIndependent|必須11null/列差/ID0-MAX+1/重複、try0-99-100/順序、negative4、start0000/未来/subµs/cutoff、foreign過去とMAXid|
+|BRPORT005|BatchRunAuditPortTest.historyTerminalTimeAndRunningNullRelationshipRejectWithoutChangingAnyPastAttempt|RUNNING ended null、terminalnonnull/開始後/観測以前/µs、全status4と最終try99|
+|BRPORT006|BatchRunAuditPortTest.insertedIdMustBeExactlyOneNonNullValidHandleAndFailureClosesTheReturningRow|insert戻り0/2row/nullid/0/MAX+1は固定例外、取得資源close|
+|BRPORT007|BatchRunAuditPortTest.finishAndExactReplayUseFourteenTypedBindingsAndSkipReasonsAreNotInterchangeable|finish14bind SUCCESS1/3bytes、changed0 exactexists、verify読み取りだけ、skip reason二種を区別|
+|BRPORT008|BatchRunAuditPortTest.replayRequiresExactlyOnePresentTrueBooleanAndNeverRepairsAnUnknownSavedRow|replay0/2row/null/falseは全4entryで拒否、修復INSERTなし|
+|BRPORT009|BatchRunAuditPortTest.everyPublicNullAndInvalidTimeOrSkipContractRejectsBeforeAnyJdbcAcquisition|全nonnull/不正step4/time/skip関係はSQL取得0|
+|BRPORT010|BatchRunAuditPortTest.everyHistoryInsertAbandonFinishReplayPortFailurePreservesItsDeclaredFailureIdentity|全5route各prepare/timeout/bind/query/update/next/get/closeのSQL-RTE-Error、unknown原参照|
+|BRPORT011|BatchRunAuditPortTest.allOwnedScopesUseExplicitBodyVersusClosePrecedenceWithSafeSecondaryDiagnostics|全5route body×close9組、宣言SSC063優先・safe secondary固定・全close|
+|BRPORT012|BatchRunAuditPortTest.nullAcquisitionsAndLostParentIdentityNeverAuthorizeSuccessOrFallback|全phaseのnullstatement/row、前後identity喪失は成功不可|
+|BRPORT013|BatchRunAuditPortTest.invalidAffectedCountsAndFailedReplayCannotInsertOrUpdateAnExtraAttempt|finish changed-1/2、abandon0/2は拒否し追加try/余分updateなし|
+|BRPORT014|BatchRunAuditPortTest.internalHistoryRenderingUsesFixedRedactionWithoutExposingItsInputIdentityOrTime|純粋History dataの固定redactionとidentity/time非表示、411のcoverage目的だけの反射ではない|
+
+PG19060 compile1二件（BUG2290/YKT2035）と静的前提guard1を保全し、元失敗をPASSへ算入しない。PG19062 raw55の適用命名1（BUG2291/YKT2036）をsource固定前に是正。最終PG19072compile0/PG19074 raw54は806で全個別非適用・適用0/CS0/parser0。実SQLのConstraint/Original owner/復旧真正性をこのメモリPTで認定しない。sourcefreeze/push後、全14を単独run PG19068で一回開始。
