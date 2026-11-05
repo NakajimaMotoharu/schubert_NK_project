@@ -1,0 +1,7 @@
+# F03finally優先順位十五の文脈確認
+
+2026-11-06T06:24:35.009834+09:00 / dev-foundation / Main source 28af318d0198fe7432ca6fcd234d3fabbfd10173。PG19890 metadata真正0/独立post0。PG19890 metadata0/独立post0、前431+新15+残1045=1491全raw/ordinal/ID完全partition、unique1439/duplicate52組保持。全Main/POM/JAR/context/approved設計原文hash一致。Product/JDBC/close/notification/rollback/Root/VM/PT/analyzer0、同一Throwable/例外/実provider動的後条件未証明。
+
+本群15件、先行と重複なし累計446/生1491、未分類1045。scope: Seven already-inspected JDBC methods fourteen directfinally scopes with conditional selected cleanup propagation andoneWeb selectedError rethrow in notification finally. No automatic finallythrow waiver, no silent cleanup success, no TWR priority substitution.。全finding/source/context/hash/元ordinalは公開 evidence/01_PT/018_NK-OPS-001/evidence/PG19890-finally-priority-context-v1/manifest.json / SHA256 b294eccae2a4c5a27c979e9a5ddd96a36fb7f2a508a9445028ebdabf1d53ab35。関連仕様evidence/01_PT/018_NK-OPS-001/3539_F03finally優先順位十五の仕様.md・計測documents/400_PGPT/470_PMO/500_SV計画整備_20261104/904_F03finally優先順位十五の結果.json。
+
+rawGate1/全適用違反null/全F03・451未受入、Product実行0/coverage未測定/動的PT免除0/新個別受入0/技術成分46/正式1964-53/歴史17-190/工数null/第一V同HOLD。原群{'low': 0.25, 'base': 0.75, 'high': 2} cap3不変更、共有25→25=0ppをPGPT-20261008-3934へ一度（ordinary19/all26/S7残3）、専有N/Tnull。次=Publish15 then review BatchRunRepository remaining48 exact F03 observations as one wholeclass ownership/priority group, inspecting allfive flagged methods andapproved SS332. Preserve prior14Unit as historical proof only, no rerun/union or dynamic DB/Root action.、通常区切り停止不可。

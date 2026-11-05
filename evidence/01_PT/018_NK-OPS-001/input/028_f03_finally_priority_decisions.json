@@ -1,0 +1,521 @@
+{
+  "mainSource": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+  "slot": "pg19890-finally-priority-context-v1",
+  "publicName": "PG19890-finally-priority-context-v1",
+  "priorManifests": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19752-f03-finite-source-context-corrected-v1/manifest.json",
+      "sha256": "d4d8274a68727f8bb278ff89140b8778fa5293011263f4e75c8d195e8fe4cf14"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19760-f03-identity-context-v1/manifest.json",
+      "sha256": "40e501ddd751e8e7849721e7a063d69062d49ad3ba0e1e3429c345b5245723bf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19770-f03-map-monitor-context-v1/manifest.json",
+      "sha256": "6a272d4a9ecad5c26ee13e3af9765f766f9fcd2936ec1e0b39bf030a8778bae4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19830-resource-type-context-v1/manifest.json",
+      "sha256": "6c3055b08e58ec40e023bbf70dd56d667dc1ea50357e1c3d1703aee00534e8a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19840-resource-generic-catch-context-v1/manifest.json",
+      "sha256": "dcfaa6104f6bdd8f57093a235a56f04000d83702b03db55c78e45528fcbebf21"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19850-visibility-map-context-v1/manifest.json",
+      "sha256": "291d806a9539c8c6e331b5d621aaf872356cc8700dcf1b461f219269c15b3c11"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19860-jdbc-close-context-v1/manifest.json",
+      "sha256": "a57ff397b8465ebd306a521add6b9c609facae43c1f9f6abddf00bee64a90103"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19870-jdbc-generic-catch-context-v1/manifest.json",
+      "sha256": "f8ff492143ca570823f2c79a25191c67b175409aad8c242b54027ffa2afc2765"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19880-empty-catch-context-v1/manifest.json",
+      "sha256": "86a4bb1544fa83e25f151a04af5a52034200ea52a2a8ad72326d2961a4e98958"
+    }
+  ],
+  "priorCount": 431,
+  "newCount": 15,
+  "decisions": [
+    {
+      "rawOrdinal": 874,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 153,
+      "reason": "BackupStepRepository.java.inspect uses a direct finally to close its already-acquired original JDBC resource once. The nested typed cleanup catch throws only when JdbcResourceFailures.replace selects that original cleanup failure: no primary, or known SQLException primary with unknown Runtime/Error cleanup. Otherwise an unknown body primary is retained with a new fixed redacted secondary, and known SQL/SQL is handled by the existing outer fixed SQL normalization. Thus this is the approved cleanup competition table, not an unconditional finally throw that masks every body failure. Silently returning after a selected cleanup failure would falsely publish success, while blindly changing to Java TWR would change same-Throwable/fixed-secondary and known-versus-unknown priority. ResultSet precedes Statement and borrowed Connection is not closed.",
+      "requiredDynamicPostconditions": [
+        "Every normal/body/cleanup failure and early-return path preserves exact resource order, one close and required non-success outcome",
+        "Known SQL versus unknown Runtime/Error, same/distinct Throwable and redacted secondary identity tests are separate unperformed dynamic obligations",
+        "Web notification failure cannot mask selected Error; actual callback/rollback/ownership/native outcomes remain held/unproven"
+      ]
+    },
+    {
+      "rawOrdinal": 879,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 165,
+      "reason": "BackupStepRepository.java.inspect uses a direct finally to close its already-acquired original JDBC resource once. The nested typed cleanup catch throws only when JdbcResourceFailures.replace selects that original cleanup failure: no primary, or known SQLException primary with unknown Runtime/Error cleanup. Otherwise an unknown body primary is retained with a new fixed redacted secondary, and known SQL/SQL is handled by the existing outer fixed SQL normalization. Thus this is the approved cleanup competition table, not an unconditional finally throw that masks every body failure. Silently returning after a selected cleanup failure would falsely publish success, while blindly changing to Java TWR would change same-Throwable/fixed-secondary and known-versus-unknown priority. ResultSet precedes Statement and borrowed Connection is not closed.",
+      "requiredDynamicPostconditions": [
+        "Every normal/body/cleanup failure and early-return path preserves exact resource order, one close and required non-success outcome",
+        "Known SQL versus unknown Runtime/Error, same/distinct Throwable and redacted secondary identity tests are separate unperformed dynamic obligations",
+        "Web notification failure cannot mask selected Error; actual callback/rollback/ownership/native outcomes remain held/unproven"
+      ]
+    },
+    {
+      "rawOrdinal": 971,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 75,
+      "reason": "CleanupStepRepository.java.execute uses a direct finally to close its already-acquired original JDBC resource once. The nested typed cleanup catch throws only when JdbcResourceFailures.replace selects that original cleanup failure: no primary, or known SQLException primary with unknown Runtime/Error cleanup. Otherwise an unknown body primary is retained with a new fixed redacted secondary, and known SQL/SQL is handled by the existing outer fixed SQL normalization. Thus this is the approved cleanup competition table, not an unconditional finally throw that masks every body failure. Silently returning after a selected cleanup failure would falsely publish success, while blindly changing to Java TWR would change same-Throwable/fixed-secondary and known-versus-unknown priority. ResultSet precedes Statement and borrowed Connection is not closed.",
+      "requiredDynamicPostconditions": [
+        "Every normal/body/cleanup failure and early-return path preserves exact resource order, one close and required non-success outcome",
+        "Known SQL versus unknown Runtime/Error, same/distinct Throwable and redacted secondary identity tests are separate unperformed dynamic obligations",
+        "Web notification failure cannot mask selected Error; actual callback/rollback/ownership/native outcomes remain held/unproven"
+      ]
+    },
+    {
+      "rawOrdinal": 976,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 87,
+      "reason": "CleanupStepRepository.java.execute uses a direct finally to close its already-acquired original JDBC resource once. The nested typed cleanup catch throws only when JdbcResourceFailures.replace selects that original cleanup failure: no primary, or known SQLException primary with unknown Runtime/Error cleanup. Otherwise an unknown body primary is retained with a new fixed redacted secondary, and known SQL/SQL is handled by the existing outer fixed SQL normalization. Thus this is the approved cleanup competition table, not an unconditional finally throw that masks every body failure. Silently returning after a selected cleanup failure would falsely publish success, while blindly changing to Java TWR would change same-Throwable/fixed-secondary and known-versus-unknown priority. ResultSet precedes Statement and borrowed Connection is not closed.",
+      "requiredDynamicPostconditions": [
+        "Every normal/body/cleanup failure and early-return path preserves exact resource order, one close and required non-success outcome",
+        "Known SQL versus unknown Runtime/Error, same/distinct Throwable and redacted secondary identity tests are separate unperformed dynamic obligations",
+        "Web notification failure cannot mask selected Error; actual callback/rollback/ownership/native outcomes remain held/unproven"
+      ]
+    },
+    {
+      "rawOrdinal": 1033,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 295,
+      "reason": "ExpiryAuditRepository.java.read uses a direct finally to close its already-acquired original JDBC resource once. The nested typed cleanup catch throws only when JdbcResourceFailures.replace selects that original cleanup failure: no primary, or known SQLException primary with unknown Runtime/Error cleanup. Otherwise an unknown body primary is retained with a new fixed redacted secondary, and known SQL/SQL is handled by the existing outer fixed SQL normalization. Thus this is the approved cleanup competition table, not an unconditional finally throw that masks every body failure. Silently returning after a selected cleanup failure would falsely publish success, while blindly changing to Java TWR would change same-Throwable/fixed-secondary and known-versus-unknown priority. ResultSet precedes Statement and borrowed Connection is not closed.",
+      "requiredDynamicPostconditions": [
+        "Every normal/body/cleanup failure and early-return path preserves exact resource order, one close and required non-success outcome",
+        "Known SQL versus unknown Runtime/Error, same/distinct Throwable and redacted secondary identity tests are separate unperformed dynamic obligations",
+        "Web notification failure cannot mask selected Error; actual callback/rollback/ownership/native outcomes remain held/unproven"
+      ]
+    },
+    {
+      "rawOrdinal": 1038,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 306,
+      "reason": "ExpiryAuditRepository.java.read uses a direct finally to close its already-acquired original JDBC resource once. The nested typed cleanup catch throws only when JdbcResourceFailures.replace selects that original cleanup failure: no primary, or known SQLException primary with unknown Runtime/Error cleanup. Otherwise an unknown body primary is retained with a new fixed redacted secondary, and known SQL/SQL is handled by the existing outer fixed SQL normalization. Thus this is the approved cleanup competition table, not an unconditional finally throw that masks every body failure. Silently returning after a selected cleanup failure would falsely publish success, while blindly changing to Java TWR would change same-Throwable/fixed-secondary and known-versus-unknown priority. ResultSet precedes Statement and borrowed Connection is not closed.",
+      "requiredDynamicPostconditions": [
+        "Every normal/body/cleanup failure and early-return path preserves exact resource order, one close and required non-success outcome",
+        "Known SQL versus unknown Runtime/Error, same/distinct Throwable and redacted secondary identity tests are separate unperformed dynamic obligations",
+        "Web notification failure cannot mask selected Error; actual callback/rollback/ownership/native outcomes remain held/unproven"
+      ]
+    },
+    {
+      "rawOrdinal": 1048,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 67,
+      "reason": "InspectionSummaryRepository.java.read uses a direct finally to close its already-acquired original JDBC resource once. The nested typed cleanup catch throws only when JdbcResourceFailures.replace selects that original cleanup failure: no primary, or known SQLException primary with unknown Runtime/Error cleanup. Otherwise an unknown body primary is retained with a new fixed redacted secondary, and known SQL/SQL is handled by the existing outer fixed SQL normalization. Thus this is the approved cleanup competition table, not an unconditional finally throw that masks every body failure. Silently returning after a selected cleanup failure would falsely publish success, while blindly changing to Java TWR would change same-Throwable/fixed-secondary and known-versus-unknown priority. ResultSet precedes Statement and borrowed Connection is not closed.",
+      "requiredDynamicPostconditions": [
+        "Every normal/body/cleanup failure and early-return path preserves exact resource order, one close and required non-success outcome",
+        "Known SQL versus unknown Runtime/Error, same/distinct Throwable and redacted secondary identity tests are separate unperformed dynamic obligations",
+        "Web notification failure cannot mask selected Error; actual callback/rollback/ownership/native outcomes remain held/unproven"
+      ]
+    },
+    {
+      "rawOrdinal": 1053,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 78,
+      "reason": "InspectionSummaryRepository.java.read uses a direct finally to close its already-acquired original JDBC resource once. The nested typed cleanup catch throws only when JdbcResourceFailures.replace selects that original cleanup failure: no primary, or known SQLException primary with unknown Runtime/Error cleanup. Otherwise an unknown body primary is retained with a new fixed redacted secondary, and known SQL/SQL is handled by the existing outer fixed SQL normalization. Thus this is the approved cleanup competition table, not an unconditional finally throw that masks every body failure. Silently returning after a selected cleanup failure would falsely publish success, while blindly changing to Java TWR would change same-Throwable/fixed-secondary and known-versus-unknown priority. ResultSet precedes Statement and borrowed Connection is not closed.",
+      "requiredDynamicPostconditions": [
+        "Every normal/body/cleanup failure and early-return path preserves exact resource order, one close and required non-success outcome",
+        "Known SQL versus unknown Runtime/Error, same/distinct Throwable and redacted secondary identity tests are separate unperformed dynamic obligations",
+        "Web notification failure cannot mask selected Error; actual callback/rollback/ownership/native outcomes remain held/unproven"
+      ]
+    },
+    {
+      "rawOrdinal": 1093,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 61,
+      "reason": "RunReferenceRepository.java.read uses a direct finally to close its already-acquired original JDBC resource once. The nested typed cleanup catch throws only when JdbcResourceFailures.replace selects that original cleanup failure: no primary, or known SQLException primary with unknown Runtime/Error cleanup. Otherwise an unknown body primary is retained with a new fixed redacted secondary, and known SQL/SQL is handled by the existing outer fixed SQL normalization. Thus this is the approved cleanup competition table, not an unconditional finally throw that masks every body failure. Silently returning after a selected cleanup failure would falsely publish success, while blindly changing to Java TWR would change same-Throwable/fixed-secondary and known-versus-unknown priority. ResultSet precedes Statement and borrowed Connection is not closed.",
+      "requiredDynamicPostconditions": [
+        "Every normal/body/cleanup failure and early-return path preserves exact resource order, one close and required non-success outcome",
+        "Known SQL versus unknown Runtime/Error, same/distinct Throwable and redacted secondary identity tests are separate unperformed dynamic obligations",
+        "Web notification failure cannot mask selected Error; actual callback/rollback/ownership/native outcomes remain held/unproven"
+      ]
+    },
+    {
+      "rawOrdinal": 1098,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 72,
+      "reason": "RunReferenceRepository.java.read uses a direct finally to close its already-acquired original JDBC resource once. The nested typed cleanup catch throws only when JdbcResourceFailures.replace selects that original cleanup failure: no primary, or known SQLException primary with unknown Runtime/Error cleanup. Otherwise an unknown body primary is retained with a new fixed redacted secondary, and known SQL/SQL is handled by the existing outer fixed SQL normalization. Thus this is the approved cleanup competition table, not an unconditional finally throw that masks every body failure. Silently returning after a selected cleanup failure would falsely publish success, while blindly changing to Java TWR would change same-Throwable/fixed-secondary and known-versus-unknown priority. ResultSet precedes Statement and borrowed Connection is not closed.",
+      "requiredDynamicPostconditions": [
+        "Every normal/body/cleanup failure and early-return path preserves exact resource order, one close and required non-success outcome",
+        "Known SQL versus unknown Runtime/Error, same/distinct Throwable and redacted secondary identity tests are separate unperformed dynamic obligations",
+        "Web notification failure cannot mask selected Error; actual callback/rollback/ownership/native outcomes remain held/unproven"
+      ]
+    },
+    {
+      "rawOrdinal": 1110,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 115,
+      "reason": "SchemaHistoryAdmission.java.inspect uses a direct finally to close its already-acquired original JDBC resource once. The nested typed cleanup catch throws only when JdbcAdmissionFailures.replace selects that original cleanup failure: no primary, or known SQLException primary with unknown Runtime/Error cleanup. Otherwise an unknown body primary is retained with a new fixed redacted secondary, and known SQL/SQL is handled by the existing outer fixed SQL normalization. Thus this is the approved cleanup competition table, not an unconditional finally throw that masks every body failure. Silently returning after a selected cleanup failure would falsely publish success, while blindly changing to Java TWR would change same-Throwable/fixed-secondary and known-versus-unknown priority. ResultSet precedes Statement and borrowed Connection is not closed.",
+      "requiredDynamicPostconditions": [
+        "Every normal/body/cleanup failure and early-return path preserves exact resource order, one close and required non-success outcome",
+        "Known SQL versus unknown Runtime/Error, same/distinct Throwable and redacted secondary identity tests are separate unperformed dynamic obligations",
+        "Web notification failure cannot mask selected Error; actual callback/rollback/ownership/native outcomes remain held/unproven"
+      ]
+    },
+    {
+      "rawOrdinal": 1115,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 126,
+      "reason": "SchemaHistoryAdmission.java.inspect uses a direct finally to close its already-acquired original JDBC resource once. The nested typed cleanup catch throws only when JdbcAdmissionFailures.replace selects that original cleanup failure: no primary, or known SQLException primary with unknown Runtime/Error cleanup. Otherwise an unknown body primary is retained with a new fixed redacted secondary, and known SQL/SQL is handled by the existing outer fixed SQL normalization. Thus this is the approved cleanup competition table, not an unconditional finally throw that masks every body failure. Silently returning after a selected cleanup failure would falsely publish success, while blindly changing to Java TWR would change same-Throwable/fixed-secondary and known-versus-unknown priority. ResultSet precedes Statement and borrowed Connection is not closed.",
+      "requiredDynamicPostconditions": [
+        "Every normal/body/cleanup failure and early-return path preserves exact resource order, one close and required non-success outcome",
+        "Known SQL versus unknown Runtime/Error, same/distinct Throwable and redacted secondary identity tests are separate unperformed dynamic obligations",
+        "Web notification failure cannot mask selected Error; actual callback/rollback/ownership/native outcomes remain held/unproven"
+      ]
+    },
+    {
+      "rawOrdinal": 1121,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "attributeValues": {
+        "method": "verify"
+      },
+      "line": 62,
+      "reason": "ServiceDatabaseAdmission.java.verify uses a direct finally to close its already-acquired original JDBC resource once. The nested typed cleanup catch throws only when JdbcAdmissionFailures.replace selects that original cleanup failure: no primary, or known SQLException primary with unknown Runtime/Error cleanup. Otherwise an unknown body primary is retained with a new fixed redacted secondary, and known SQL/SQL is handled by the existing outer fixed SQL normalization. Thus this is the approved cleanup competition table, not an unconditional finally throw that masks every body failure. Silently returning after a selected cleanup failure would falsely publish success, while blindly changing to Java TWR would change same-Throwable/fixed-secondary and known-versus-unknown priority. ResultSet precedes Statement and borrowed Connection is not closed.",
+      "requiredDynamicPostconditions": [
+        "Every normal/body/cleanup failure and early-return path preserves exact resource order, one close and required non-success outcome",
+        "Known SQL versus unknown Runtime/Error, same/distinct Throwable and redacted secondary identity tests are separate unperformed dynamic obligations",
+        "Web notification failure cannot mask selected Error; actual callback/rollback/ownership/native outcomes remain held/unproven"
+      ]
+    },
+    {
+      "rawOrdinal": 1126,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "attributeValues": {
+        "method": "verify"
+      },
+      "line": 74,
+      "reason": "ServiceDatabaseAdmission.java.verify uses a direct finally to close its already-acquired original JDBC resource once. The nested typed cleanup catch throws only when JdbcAdmissionFailures.replace selects that original cleanup failure: no primary, or known SQLException primary with unknown Runtime/Error cleanup. Otherwise an unknown body primary is retained with a new fixed redacted secondary, and known SQL/SQL is handled by the existing outer fixed SQL normalization. Thus this is the approved cleanup competition table, not an unconditional finally throw that masks every body failure. Silently returning after a selected cleanup failure would falsely publish success, while blindly changing to Java TWR would change same-Throwable/fixed-secondary and known-versus-unknown priority. ResultSet precedes Statement and borrowed Connection is not closed.",
+      "requiredDynamicPostconditions": [
+        "Every normal/body/cleanup failure and early-return path preserves exact resource order, one close and required non-success outcome",
+        "Known SQL versus unknown Runtime/Error, same/distinct Throwable and redacted secondary identity tests are separate unperformed dynamic obligations",
+        "Web notification failure cannot mask selected Error; actual callback/rollback/ownership/native outcomes remain held/unproven"
+      ]
+    },
+    {
+      "rawOrdinal": 1384,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "134a6f35746447e6e27020ae8b82da5d67c136f0d20c46e94b41e5b8b81bc47f",
+      "attributeValues": {
+        "method": "deliveryFailure"
+      },
+      "line": 159,
+      "reason": "ArtemisReplyConsumers.deliveryFailure has selected a retained original Error before notification. The finally is deliberately the authority that rethrows that exact selected Error even if onFatal throws another Runtime/Error; removing its throw could replace the selected original fatal with a notification failure or permit normal completion. halted/terminal are already set, one-time rollback remains best effort/unconfirmed, no cleanup is skipped here. SS321 SSC332 explicitly separates this Web rethrow policy from API halt/notify. Review covers this local priority only, not graph discovery/actual provider/runtime termination.",
+      "requiredDynamicPostconditions": [
+        "Every normal/body/cleanup failure and early-return path preserves exact resource order, one close and required non-success outcome",
+        "Known SQL versus unknown Runtime/Error, same/distinct Throwable and redacted secondary identity tests are separate unperformed dynamic obligations",
+        "Web notification failure cannot mask selected Error; actual callback/rollback/ownership/native outcomes remain held/unproven"
+      ]
+    }
+  ],
+  "sourceContexts": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/AsyncJobCountRepository.java",
+      "sha256": "e337ab556b1e6b7033626ab57740c11f4b13e35ae446a582f20f41f344f66b76",
+      "ranges": [
+        [
+          1,
+          69
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+      "sha256": "90b0d76c02ba974dc22034fe8a13003fb93298105b5f3b3e53f1f90d99544f16",
+      "ranges": [
+        [
+          1,
+          86
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java",
+      "sha256": "f14d52b486f8e263ba67f8c08ddb0e37c2aa2772b28f8e4e61f2717f27d4ab74",
+      "ranges": [
+        [
+          1,
+          104
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.java",
+      "sha256": "93e77b1a49c293d53683628f805b1a0047803ce6a2ad101ec27be4142b4a83e6",
+      "ranges": [
+        [
+          1,
+          64
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "sha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "ranges": [
+        [
+          1,
+          256
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "sha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "ranges": [
+        [
+          1,
+          120
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "sha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "ranges": [
+        [
+          1,
+          459
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "sha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "sha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "ranges": [
+        [
+          1,
+          96
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "sha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "ranges": [
+        [
+          1,
+          152
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "sha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "ranges": [
+        [
+          1,
+          97
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepository.java",
+      "sha256": "8eead2d8cdf54cec5ce702117a34074c7d55b5ea454cfc8f001f770eae09d5c5",
+      "ranges": [
+        [
+          1,
+          75
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "sha256": "f4cff9bb43cacfde5be699fd61d4e25526523d5ef5e478aa88dcbb8bdde6928a",
+      "ranges": [
+        [
+          1,
+          21
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+      "sha256": "bf179887c2496723d5ddb4ee0be02c5e599ecba781f5b8338367bb21648627a5",
+      "ranges": [
+        [
+          1,
+          24
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumers.java",
+      "sha256": "134a6f35746447e6e27020ae8b82da5d67c136f0d20c46e94b41e5b8b81bc47f",
+      "ranges": [
+        [
+          1,
+          190
+        ]
+      ]
+    }
+  ],
+  "designReferences": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 5
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 7
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 19
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 25
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "line": 19
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "line": 81
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "line": 83
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 16
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 21
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 23
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 29
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 31
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 33
+    }
+  ],
+  "deferred": [
+    {
+      "rawOrdinal": 1075,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1076,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1077,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1078,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1079,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1080,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1081,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    }
+  ]
+}
