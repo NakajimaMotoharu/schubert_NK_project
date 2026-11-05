@@ -226,7 +226,7 @@ ERRORは最終破棄を意味せず、非同期要求にbusiness timeoutがな�
 - Message ID UK、Correlation、layout/version、status/attempt/next/lease、created/sentを持つ。
 - Dispatcher algorithm/backoffはAPI outboxと同じ。HTTP request threadはsendを待たない。
 - API `app_logs.source_message_id` UKが最終重複防止。DuplicateはINSERTせずJMS ACKする。
-- APIは351 §3.3のREQUEST action/Details/表示metadataの正規化を適用し、DB INSERT/duplicate transaction確定後だけlistenerへ正常復帰する（SSC-008）。
+- APIは351 §3.3のREQUEST正規化と、QA-054の限定ACTION/MENU_VIEWED・共通Details/表示metadata規則を適用し、DB INSERT/duplicate transaction確定後だけlistenerへ正常復帰する（SSC-008/336）。MENU_VIEWEDも同じevent Message IDを再配送し、source UK重複時は既存行不変/追加0とする。LOG_SEARCHEDはWeb電文から受け付けない。
 - PENDING/ERRORの本文を管理画面へ表示せず、件数・最古時刻・error codeだけ監視する。
 
 ## 10. Internal work冪等性
@@ -407,3 +407,7 @@ Metric labelへowner、token、Message ID、question本文を使わない。ID�
 | 2026-08-31 | 横断監査でHMAC fingerprintを全Requestに必須化し、Inbox response暗号key名をcredential catalogに同期。 |
 | 2026-08-31 | 横断監査でLogin UUIDと業務bigintをInbox result referenceで型別に分離し、Scenario再生成元IDを明記。 |
 | 2026-09-03 | SSC-006によりOutbox destinationの保存値をUI 242/SS 331/DDLの物理Address allowlistへ統一。 |
+
+## QA-054 API LOG_SEARCHEDと結果再送（SSC-336）
+
+初回成功ログ検索の結果snapshot取得後、LOG_SEARCHED/ACTION保存とInbox・再送結果の成功確定を同じ業務transactionに含める。既存の原子性・排他・結果保持契約を維持し、監査失敗ではrollbackする。保存済み応答の再送/同一要求の競合では成功確定を一度だけ行い、LOG_SEARCHEDを増やさない。INBOX_REPLAYED等の必要MQ記録は独立期待値とし、成功ACTIONの代替にしない。検索snapshotとcommit後の監査DB後条件を別々に検証する。再送間隔/保持期限/operation token契約の変更はない。

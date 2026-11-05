@@ -268,3 +268,9 @@ Ownerは検証済actor.userId十進、layout QSBREQ01/version001、target `QUEST
 | 2026-08-31 | 全64 layoutのJava class、handler/service、DB型・table、validation対応を初版作成。 |
 | 2026-08-31 | 横断監査でLGNREQ01の匿名Inbox HMAC対象を追加し、失敗counterの再配送二重更新を防止。 |
 | 2026-09-02 | SSC-004によりMEDIA1024のAudio/Video/Music拡張子・MIME完全一致allowlistを固定。 |
+
+## QA-054 WLGEVT01の限定意味拡張（SSC-336）
+
+UI235 §12.2/SS351 §3.3を適用し、Log typeの固定REQUEST一値を必須REQUEST/ACTION二値へ変更する。REQUESTはHTTP_REQUEST_COMPLETED（Action省略補完を維持）、ACTIONはMENU_VIEWED必須に限定し、LOG_SEARCHEDや他ACTIONをこの電文から取り込まない。WebLogEventData・固定field定義・codec・意味検証・API ingestを同じ契約へ合わせる。
+
+既存64 layoutの集合、WLGEVT01 EVENT/INTERNAL、header256/data2080/total2336、全offset/length/type、認証context space、Role/Username表示用途、source_message_id UKを維持する。app_logsは既存category ACTION許容・action64 byte・source UKで収容でき、今回の承認に伴うDDL/index/grant変更は不要。API LOG_SEARCHEDは別の既存app_logs業務監査経路である。独立golden vectorでREQUEST互換・MENU_VIEWED・未知/交差/欠落の拒否を検証する。

@@ -148,6 +148,12 @@ Current sourceと実動が異なる場合は実動証跡をbaselineにする。N
 
 比較artifact/oracleの改修、独立正常/欠落/重複/相関誤り/対象外差分の検証、最終同sourceの実NK CHR-L01は未完である。過去のactual0、設計承認、原観測を新方式のPASSに変換しない。今回のQA回答待ちは解消するが、資源所有・権限・安全・他の品質HOLD、利用枠停止と明示再開条件は維持する。
 
+### 8.1.1 QA-054の追加独立期待値（SSC-336）
+
+UI264 §5.1/SS351のQA-054期待表を凍結し、Current menu→NK MENU_VIEWED/ACTION、Current log_search→NK LOG_SEARCHED/ACTIONを同操作相関付きで比較する。正常メニューGETでは別eventのREQUEST 1＋MENU_VIEWED 1と各local/outbox/DBの欠落重複0、ADMIN初回成功ログ検索ではREQUEST 1＋API LOG_SEARCHED 1を確認する。保存結果再送では成功ACTION追加0、拒否/失敗/HEAD等では当該成功ACTION 0を確認し、必要MQ記録は別検証する。
+
+検索snapshot取得時点と後発LOG_SEARCHEDのcommit後DB後条件を区別する。snapshotに自身の監査が含まれないことだけで欠落とせず、後条件で保存1件を検証する。日時順/100件page/表示件数/明細の差分や未登録追加を包括免除しない。独立wire goldenは全offset/length/type・2336 byte・64 layout不変、REQUEST互換、MENU_VIEWED限定、未知/交差/Action欠落拒否を確認する。本設計承認・静的照合を動的PT/実NK L01/coverage/native/451 PASSへ加算しない。
+
 ## 9. Case別実装契約
 
 | Case | Driver・入力 | Oracle・証跡 |
