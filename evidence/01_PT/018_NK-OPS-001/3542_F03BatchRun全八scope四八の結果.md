@@ -1,0 +1,7 @@
+# F03BatchRun全八scope四八の文脈確認
+
+2026-11-06T06:27:18.484250+09:00 / dev-foundation / Main source 28af318d0198fe7432ca6fcd234d3fabbfd10173。PG19900 metadata真正0/独立post0。PG19900 metadata0/独立post0、先行446+新48+残997=1491のraw/ordinal/ID完全partition、unique1439/duplicate52組保持。全source/normal19740-SB19742/Main-POM-JAR/SS33215-25-27原文hash一致。Product/JDBC/close/DB/Root/VM/PT/analyzer0、動的8scope合成と実DB/terminal/CAS未証明、旧14PT再演/再加算0。
+
+本群48件、先行と重複なし累計494/生1491、未分類997。scope: BatchRunRepository exactlyeight approvedJDBC scopes across finish/history/abandon/insert/replayed: CloseResource8/genericcatch32/finally8. Alias ownership, knownSQL/unknown cleanup priority, fixedsecondary, no borrowedConnection changes.。全finding/source/context/hash/元ordinalは公開 evidence/01_PT/018_NK-OPS-001/evidence/PG19900-batch-run-context-v1/manifest.json / SHA256 59327bb132893061eee966a0def91a5541be573b82708ad16195295e9bc916d2。関連仕様evidence/01_PT/018_NK-OPS-001/3541_F03BatchRun全八scope四八の仕様.md・計測documents/400_PGPT/470_PMO/500_SV計画整備_20261104/906_F03BatchRun全八scope四八の結果.json。
+
+rawGate1/全適用違反null/全F03・451未受入、Product実行0/coverage未測定/動的PT免除0/新個別受入0/技術成分46/正式1964-53/歴史17-190/工数null/第一V同HOLD。原群{'low': 0.5, 'base': 1.5, 'high': 4} cap5不変更、共有25→25=0ppをPGPT-20261008-3936へ一度（ordinary19/all26/S7残3）、専有N/Tnull。次=Publish48 then review CleanupRepository20 andCleanupTerminalRepository48 as one finite source-only twelve-scope group with explicit SS332 contracts; no DB/transaction/Root/held dynamic or success-only rerun.、通常区切り停止不可。

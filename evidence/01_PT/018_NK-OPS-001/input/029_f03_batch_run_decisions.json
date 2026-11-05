@@ -1,0 +1,848 @@
+{
+  "mainSource": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+  "slot": "pg19900-batch-run-context-v1",
+  "publicName": "PG19900-batch-run-context-v1",
+  "priorManifests": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19752-f03-finite-source-context-corrected-v1/manifest.json",
+      "sha256": "d4d8274a68727f8bb278ff89140b8778fa5293011263f4e75c8d195e8fe4cf14"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19760-f03-identity-context-v1/manifest.json",
+      "sha256": "40e501ddd751e8e7849721e7a063d69062d49ad3ba0e1e3429c345b5245723bf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19770-f03-map-monitor-context-v1/manifest.json",
+      "sha256": "6a272d4a9ecad5c26ee13e3af9765f766f9fcd2936ec1e0b39bf030a8778bae4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19830-resource-type-context-v1/manifest.json",
+      "sha256": "6c3055b08e58ec40e023bbf70dd56d667dc1ea50357e1c3d1703aee00534e8a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19840-resource-generic-catch-context-v1/manifest.json",
+      "sha256": "dcfaa6104f6bdd8f57093a235a56f04000d83702b03db55c78e45528fcbebf21"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19850-visibility-map-context-v1/manifest.json",
+      "sha256": "291d806a9539c8c6e331b5d621aaf872356cc8700dcf1b461f219269c15b3c11"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19860-jdbc-close-context-v1/manifest.json",
+      "sha256": "a57ff397b8465ebd306a521add6b9c609facae43c1f9f6abddf00bee64a90103"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19870-jdbc-generic-catch-context-v1/manifest.json",
+      "sha256": "f8ff492143ca570823f2c79a25191c67b175409aad8c242b54027ffa2afc2765"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19880-empty-catch-context-v1/manifest.json",
+      "sha256": "86a4bb1544fa83e25f151a04af5a52034200ea52a2a8ad72326d2961a4e98958"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19890-finally-priority-context-v1/manifest.json",
+      "sha256": "b294eccae2a4c5a27c979e9a5ddd96a36fb7f2a508a9445028ebdabf1d53ab35"
+    }
+  ],
+  "priorCount": 446,
+  "newCount": 48,
+  "decisions": [
+    {
+      "rawOrdinal": 882,
+      "rule": "CloseResource",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "finish",
+        "variable": "query"
+      },
+      "line": 142,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. finish uses query=present(original) only inside the already-protected lexical ownership scope. present returns the identical nonnull resource, not an independently acquired handle. Original statement/rows are closed directly exactly once in nested finally, null originals are not closed, and these aliases do not escape. Result publication and terminal replay/guards occur after cleanup; adding separate alias TWR would duplicate close. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 883,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "finish"
+      },
+      "line": 147,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. finish STATEMENT_BODY catches RuntimeException: the catch records and immediately rethrows the same body primary so the following one-time cleanup can resolve a competing failure without masking unknown identity. Without this record, a secondary close could replace a retained unknown body. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 884,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "finish"
+      },
+      "line": 147,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. finish STATEMENT_BODY catches Error: the catch records and immediately rethrows the same body primary so the following one-time cleanup can resolve a competing failure without masking unknown identity. Without this record, a secondary close could replace a retained unknown body. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 885,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "finish"
+      },
+      "line": 150,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. finish finally performs required cleanup, throwing a cleanup failure only if JdbcResourceFailures.replace selects it. This is the explicit SS332 competing-failure contract, not an unconditional exception that masks all body failures. Removing selected propagation would return success after close failed; ordinary Java TWR would alter fixed-secondary/same-Throwable/known-versus-unknown priority. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 886,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "finish"
+      },
+      "line": 154,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. finish STATEMENT_CLEANUP catches RuntimeException: the catch applies JdbcResourceFailures.replace after direct close, selecting original cleanup only for no primary or known SQL primary with unknown cleanup. Unknown body remains identical with a fresh fixed BatchRepositoryException secondary; SQL/SQL remains for outer fixed SQL normalization. No cleanup retry or normal return follows the selected failure. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 887,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "finish"
+      },
+      "line": 154,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. finish STATEMENT_CLEANUP catches Error: the catch applies JdbcResourceFailures.replace after direct close, selecting original cleanup only for no primary or known SQL primary with unknown cleanup. Unknown body remains identical with a fresh fixed BatchRepositoryException secondary; SQL/SQL remains for outer fixed SQL normalization. No cleanup retry or normal return follows the selected failure. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 888,
+      "rule": "CloseResource",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "history",
+        "variable": "query"
+      },
+      "line": 238,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. history uses query=present(original) only inside the already-protected lexical ownership scope. present returns the identical nonnull resource, not an independently acquired handle. Original statement/rows are closed directly exactly once in nested finally, null originals are not closed, and these aliases do not escape. Result publication and terminal replay/guards occur after cleanup; adding separate alias TWR would duplicate close. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 889,
+      "rule": "CloseResource",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "history",
+        "variable": "row"
+      },
+      "line": 245,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. history uses row=present(original) only inside the already-protected lexical ownership scope. present returns the identical nonnull resource, not an independently acquired handle. Original statement/rows are closed directly exactly once in nested finally, null originals are not closed, and these aliases do not escape. Result publication and terminal replay/guards occur after cleanup; adding separate alias TWR would duplicate close. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 890,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "history"
+      },
+      "line": 280,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. history ROWS_BODY catches RuntimeException: the catch records and immediately rethrows the same body primary so the following one-time cleanup can resolve a competing failure without masking unknown identity. Without this record, a secondary close could replace a retained unknown body. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 891,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "history"
+      },
+      "line": 280,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. history ROWS_BODY catches Error: the catch records and immediately rethrows the same body primary so the following one-time cleanup can resolve a competing failure without masking unknown identity. Without this record, a secondary close could replace a retained unknown body. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 892,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "history"
+      },
+      "line": 283,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. history finally performs required cleanup, throwing a cleanup failure only if JdbcResourceFailures.replace selects it. This is the explicit SS332 competing-failure contract, not an unconditional exception that masks all body failures. Removing selected propagation would return success after close failed; ordinary Java TWR would alter fixed-secondary/same-Throwable/known-versus-unknown priority. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 893,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "history"
+      },
+      "line": 287,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. history ROWS_CLEANUP catches RuntimeException: the catch applies JdbcResourceFailures.replace after direct close, selecting original cleanup only for no primary or known SQL primary with unknown cleanup. Unknown body remains identical with a fresh fixed BatchRepositoryException secondary; SQL/SQL remains for outer fixed SQL normalization. No cleanup retry or normal return follows the selected failure. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 894,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "history"
+      },
+      "line": 287,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. history ROWS_CLEANUP catches Error: the catch applies JdbcResourceFailures.replace after direct close, selecting original cleanup only for no primary or known SQL primary with unknown cleanup. Unknown body remains identical with a fresh fixed BatchRepositoryException secondary; SQL/SQL remains for outer fixed SQL normalization. No cleanup retry or normal return follows the selected failure. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 895,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "history"
+      },
+      "line": 292,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. history STATEMENT_BODY catches RuntimeException: the catch records and immediately rethrows the same body primary so the following one-time cleanup can resolve a competing failure without masking unknown identity. Without this record, a secondary close could replace a retained unknown body. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 896,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "history"
+      },
+      "line": 292,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. history STATEMENT_BODY catches Error: the catch records and immediately rethrows the same body primary so the following one-time cleanup can resolve a competing failure without masking unknown identity. Without this record, a secondary close could replace a retained unknown body. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 897,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "history"
+      },
+      "line": 295,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. history finally performs required cleanup, throwing a cleanup failure only if JdbcResourceFailures.replace selects it. This is the explicit SS332 competing-failure contract, not an unconditional exception that masks all body failures. Removing selected propagation would return success after close failed; ordinary Java TWR would alter fixed-secondary/same-Throwable/known-versus-unknown priority. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 898,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "history"
+      },
+      "line": 299,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. history STATEMENT_CLEANUP catches RuntimeException: the catch applies JdbcResourceFailures.replace after direct close, selecting original cleanup only for no primary or known SQL primary with unknown cleanup. Unknown body remains identical with a fresh fixed BatchRepositoryException secondary; SQL/SQL remains for outer fixed SQL normalization. No cleanup retry or normal return follows the selected failure. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 899,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "history"
+      },
+      "line": 299,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. history STATEMENT_CLEANUP catches Error: the catch applies JdbcResourceFailures.replace after direct close, selecting original cleanup only for no primary or known SQL primary with unknown cleanup. Unknown body remains identical with a fresh fixed BatchRepositoryException secondary; SQL/SQL remains for outer fixed SQL normalization. No cleanup retry or normal return follows the selected failure. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 900,
+      "rule": "CloseResource",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "abandon",
+        "variable": "query"
+      },
+      "line": 314,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. abandon uses query=present(original) only inside the already-protected lexical ownership scope. present returns the identical nonnull resource, not an independently acquired handle. Original statement/rows are closed directly exactly once in nested finally, null originals are not closed, and these aliases do not escape. Result publication and terminal replay/guards occur after cleanup; adding separate alias TWR would duplicate close. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 901,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "abandon"
+      },
+      "line": 323,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. abandon STATEMENT_BODY catches RuntimeException: the catch records and immediately rethrows the same body primary so the following one-time cleanup can resolve a competing failure without masking unknown identity. Without this record, a secondary close could replace a retained unknown body. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 902,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "abandon"
+      },
+      "line": 323,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. abandon STATEMENT_BODY catches Error: the catch records and immediately rethrows the same body primary so the following one-time cleanup can resolve a competing failure without masking unknown identity. Without this record, a secondary close could replace a retained unknown body. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 903,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "abandon"
+      },
+      "line": 326,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. abandon finally performs required cleanup, throwing a cleanup failure only if JdbcResourceFailures.replace selects it. This is the explicit SS332 competing-failure contract, not an unconditional exception that masks all body failures. Removing selected propagation would return success after close failed; ordinary Java TWR would alter fixed-secondary/same-Throwable/known-versus-unknown priority. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 904,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "abandon"
+      },
+      "line": 330,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. abandon STATEMENT_CLEANUP catches RuntimeException: the catch applies JdbcResourceFailures.replace after direct close, selecting original cleanup only for no primary or known SQL primary with unknown cleanup. Unknown body remains identical with a fresh fixed BatchRepositoryException secondary; SQL/SQL remains for outer fixed SQL normalization. No cleanup retry or normal return follows the selected failure. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 905,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "abandon"
+      },
+      "line": 330,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. abandon STATEMENT_CLEANUP catches Error: the catch applies JdbcResourceFailures.replace after direct close, selecting original cleanup only for no primary or known SQL primary with unknown cleanup. Unknown body remains identical with a fresh fixed BatchRepositoryException secondary; SQL/SQL remains for outer fixed SQL normalization. No cleanup retry or normal return follows the selected failure. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 906,
+      "rule": "CloseResource",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "insert",
+        "variable": "query"
+      },
+      "line": 354,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. insert uses query=present(original) only inside the already-protected lexical ownership scope. present returns the identical nonnull resource, not an independently acquired handle. Original statement/rows are closed directly exactly once in nested finally, null originals are not closed, and these aliases do not escape. Result publication and terminal replay/guards occur after cleanup; adding separate alias TWR would duplicate close. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 907,
+      "rule": "CloseResource",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "insert",
+        "variable": "row"
+      },
+      "line": 368,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. insert uses row=present(original) only inside the already-protected lexical ownership scope. present returns the identical nonnull resource, not an independently acquired handle. Original statement/rows are closed directly exactly once in nested finally, null originals are not closed, and these aliases do not escape. Result publication and terminal replay/guards occur after cleanup; adding separate alias TWR would duplicate close. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 908,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "insert"
+      },
+      "line": 377,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. insert ROWS_BODY catches RuntimeException: the catch records and immediately rethrows the same body primary so the following one-time cleanup can resolve a competing failure without masking unknown identity. Without this record, a secondary close could replace a retained unknown body. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 909,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "insert"
+      },
+      "line": 377,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. insert ROWS_BODY catches Error: the catch records and immediately rethrows the same body primary so the following one-time cleanup can resolve a competing failure without masking unknown identity. Without this record, a secondary close could replace a retained unknown body. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 910,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "insert"
+      },
+      "line": 380,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. insert finally performs required cleanup, throwing a cleanup failure only if JdbcResourceFailures.replace selects it. This is the explicit SS332 competing-failure contract, not an unconditional exception that masks all body failures. Removing selected propagation would return success after close failed; ordinary Java TWR would alter fixed-secondary/same-Throwable/known-versus-unknown priority. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 911,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "insert"
+      },
+      "line": 384,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. insert ROWS_CLEANUP catches RuntimeException: the catch applies JdbcResourceFailures.replace after direct close, selecting original cleanup only for no primary or known SQL primary with unknown cleanup. Unknown body remains identical with a fresh fixed BatchRepositoryException secondary; SQL/SQL remains for outer fixed SQL normalization. No cleanup retry or normal return follows the selected failure. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 912,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "insert"
+      },
+      "line": 384,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. insert ROWS_CLEANUP catches Error: the catch applies JdbcResourceFailures.replace after direct close, selecting original cleanup only for no primary or known SQL primary with unknown cleanup. Unknown body remains identical with a fresh fixed BatchRepositoryException secondary; SQL/SQL remains for outer fixed SQL normalization. No cleanup retry or normal return follows the selected failure. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 913,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "insert"
+      },
+      "line": 389,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. insert STATEMENT_BODY catches RuntimeException: the catch records and immediately rethrows the same body primary so the following one-time cleanup can resolve a competing failure without masking unknown identity. Without this record, a secondary close could replace a retained unknown body. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 914,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "insert"
+      },
+      "line": 389,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. insert STATEMENT_BODY catches Error: the catch records and immediately rethrows the same body primary so the following one-time cleanup can resolve a competing failure without masking unknown identity. Without this record, a secondary close could replace a retained unknown body. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 915,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "insert"
+      },
+      "line": 392,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. insert finally performs required cleanup, throwing a cleanup failure only if JdbcResourceFailures.replace selects it. This is the explicit SS332 competing-failure contract, not an unconditional exception that masks all body failures. Removing selected propagation would return success after close failed; ordinary Java TWR would alter fixed-secondary/same-Throwable/known-versus-unknown priority. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 916,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "insert"
+      },
+      "line": 396,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. insert STATEMENT_CLEANUP catches RuntimeException: the catch applies JdbcResourceFailures.replace after direct close, selecting original cleanup only for no primary or known SQL primary with unknown cleanup. Unknown body remains identical with a fresh fixed BatchRepositoryException secondary; SQL/SQL remains for outer fixed SQL normalization. No cleanup retry or normal return follows the selected failure. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 917,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "insert"
+      },
+      "line": 396,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. insert STATEMENT_CLEANUP catches Error: the catch applies JdbcResourceFailures.replace after direct close, selecting original cleanup only for no primary or known SQL primary with unknown cleanup. Unknown body remains identical with a fresh fixed BatchRepositoryException secondary; SQL/SQL remains for outer fixed SQL normalization. No cleanup retry or normal return follows the selected failure. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 918,
+      "rule": "CloseResource",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "replayed",
+        "variable": "query"
+      },
+      "line": 417,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. replayed uses query=present(original) only inside the already-protected lexical ownership scope. present returns the identical nonnull resource, not an independently acquired handle. Original statement/rows are closed directly exactly once in nested finally, null originals are not closed, and these aliases do not escape. Result publication and terminal replay/guards occur after cleanup; adding separate alias TWR would duplicate close. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 919,
+      "rule": "CloseResource",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "replayed",
+        "variable": "row"
+      },
+      "line": 424,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. replayed uses row=present(original) only inside the already-protected lexical ownership scope. present returns the identical nonnull resource, not an independently acquired handle. Original statement/rows are closed directly exactly once in nested finally, null originals are not closed, and these aliases do not escape. Result publication and terminal replay/guards occur after cleanup; adding separate alias TWR would duplicate close. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 920,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "replayed"
+      },
+      "line": 428,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. replayed ROWS_BODY catches RuntimeException: the catch records and immediately rethrows the same body primary so the following one-time cleanup can resolve a competing failure without masking unknown identity. Without this record, a secondary close could replace a retained unknown body. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 921,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "replayed"
+      },
+      "line": 428,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. replayed ROWS_BODY catches Error: the catch records and immediately rethrows the same body primary so the following one-time cleanup can resolve a competing failure without masking unknown identity. Without this record, a secondary close could replace a retained unknown body. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 922,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "replayed"
+      },
+      "line": 431,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. replayed finally performs required cleanup, throwing a cleanup failure only if JdbcResourceFailures.replace selects it. This is the explicit SS332 competing-failure contract, not an unconditional exception that masks all body failures. Removing selected propagation would return success after close failed; ordinary Java TWR would alter fixed-secondary/same-Throwable/known-versus-unknown priority. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 923,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "replayed"
+      },
+      "line": 435,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. replayed ROWS_CLEANUP catches RuntimeException: the catch applies JdbcResourceFailures.replace after direct close, selecting original cleanup only for no primary or known SQL primary with unknown cleanup. Unknown body remains identical with a fresh fixed BatchRepositoryException secondary; SQL/SQL remains for outer fixed SQL normalization. No cleanup retry or normal return follows the selected failure. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 924,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "replayed"
+      },
+      "line": 435,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. replayed ROWS_CLEANUP catches Error: the catch applies JdbcResourceFailures.replace after direct close, selecting original cleanup only for no primary or known SQL primary with unknown cleanup. Unknown body remains identical with a fresh fixed BatchRepositoryException secondary; SQL/SQL remains for outer fixed SQL normalization. No cleanup retry or normal return follows the selected failure. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 925,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "replayed"
+      },
+      "line": 440,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. replayed STATEMENT_BODY catches RuntimeException: the catch records and immediately rethrows the same body primary so the following one-time cleanup can resolve a competing failure without masking unknown identity. Without this record, a secondary close could replace a retained unknown body. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 926,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "replayed"
+      },
+      "line": 440,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. replayed STATEMENT_BODY catches Error: the catch records and immediately rethrows the same body primary so the following one-time cleanup can resolve a competing failure without masking unknown identity. Without this record, a secondary close could replace a retained unknown body. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 927,
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "replayed"
+      },
+      "line": 443,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. replayed finally performs required cleanup, throwing a cleanup failure only if JdbcResourceFailures.replace selects it. This is the explicit SS332 competing-failure contract, not an unconditional exception that masks all body failures. Removing selected propagation would return success after close failed; ordinary Java TWR would alter fixed-secondary/same-Throwable/known-versus-unknown priority. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 928,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "replayed"
+      },
+      "line": 447,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. replayed STATEMENT_CLEANUP catches RuntimeException: the catch applies JdbcResourceFailures.replace after direct close, selecting original cleanup only for no primary or known SQL primary with unknown cleanup. Unknown body remains identical with a fresh fixed BatchRepositoryException secondary; SQL/SQL remains for outer fixed SQL normalization. No cleanup retry or normal return follows the selected failure. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    },
+    {
+      "rawOrdinal": 929,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "attributeValues": {
+        "method": "replayed"
+      },
+      "line": 447,
+      "reason": "SS332:15 explicitly prescribes these eight owned scopes with direct finally close and SQL-versus-unknown precedence; SS332:25 defines the shared non-owning JdbcResourceFailures table. replayed STATEMENT_CLEANUP catches Error: the catch applies JdbcResourceFailures.replace after direct close, selecting original cleanup only for no primary or known SQL primary with unknown cleanup. Unknown body remains identical with a fresh fixed BatchRepositoryException secondary; SQL/SQL remains for outer fixed SQL normalization. No cleanup retry or normal return follows the selected failure. This source-only decision preserves borrowed connection/SQL/lock/CAS/terminal replay semantics; it does not execute or qualify DB mutation, commits, close success or original-run completion.",
+      "requiredDynamicPostconditions": [
+        "Each of eight acquired scopes: null/prepare/query/getter/validation/close failures, exact reverse-order one-close and zero unacquired close",
+        "Every SQL/Runtime/NPE/Error primary x cleanup (same/distinct instance), fixed redacted secondary and selected original identity",
+        "Independent literal SQL/binds/row counts/history ordering/CAS/replay and caller rollback/commit after result; no borrowed connection ownership changes; actual DB/runtime remains unperformed"
+      ]
+    }
+  ],
+  "sourceContexts": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "sha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "ranges": [
+        [
+          1,
+          502
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "sha256": "f4cff9bb43cacfde5be699fd61d4e25526523d5ef5e478aa88dcbb8bdde6928a",
+      "ranges": [
+        [
+          1,
+          21
+        ]
+      ]
+    }
+  ],
+  "designReferences": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 15
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 25
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 27
+    }
+  ],
+  "deferred": [
+    {
+      "rawOrdinal": 1075,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1076,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1077,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1078,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1079,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1080,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1081,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    }
+  ]
+}
