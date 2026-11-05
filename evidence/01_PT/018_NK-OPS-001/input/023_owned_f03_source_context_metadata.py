@@ -88,7 +88,9 @@ def historical_bindings(rows):
         assert sha(p) == item['sha256'] and sha(m) == item['manifestSha256']
         manifest = load(m)
         files = manifest.get('files')
-        assert manifest.get('reviewSha256') == sha(p) or (isinstance(files, dict) and files.get('review.json') == sha(p))
+        hash_key = item.get('manifestHashKey', 'reviewSha256')
+        assert hash_key in ['reviewSha256', 'purposesSha256']
+        assert manifest.get(hash_key) == sha(p) or (isinstance(files, dict) and files.get('review.json') == sha(p))
         old = load(p)
         for part in item['rowPointer']:
             old = old[part]
@@ -96,7 +98,9 @@ def historical_bindings(rows):
         assert old['path'] == finding['path'] and old['rule'] == finding['rule']
         assert old['attributes'] == finding['attributes']
         assert old.get('sourceSha256', old.get('inputSha256')) == finding['sourceSha256']
-        assert old['reason'] == item['historicalReason']
+        reason_key = item.get('historicalReasonKey', 'reason')
+        assert reason_key in ['reason', 'manualPurpose']
+        assert old[reason_key] == item['historicalReason']
         assert item['runtimeTransferred'] is False
         monitor = row.get('privateMonitorEvidence')
         if monitor is not None:

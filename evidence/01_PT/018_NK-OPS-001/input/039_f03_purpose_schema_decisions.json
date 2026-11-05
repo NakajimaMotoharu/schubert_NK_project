@@ -1,0 +1,1814 @@
+{
+  "mainSource": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+  "slot": "pg19990-purpose-schema-context-v1",
+  "publicName": "PG19990-purpose-schema-context-v1",
+  "priorManifests": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19752-f03-finite-source-context-corrected-v1/manifest.json",
+      "sha256": "d4d8274a68727f8bb278ff89140b8778fa5293011263f4e75c8d195e8fe4cf14"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19760-f03-identity-context-v1/manifest.json",
+      "sha256": "40e501ddd751e8e7849721e7a063d69062d49ad3ba0e1e3429c345b5245723bf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19770-f03-map-monitor-context-v1/manifest.json",
+      "sha256": "6a272d4a9ecad5c26ee13e3af9765f766f9fcd2936ec1e0b39bf030a8778bae4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19830-resource-type-context-v1/manifest.json",
+      "sha256": "6c3055b08e58ec40e023bbf70dd56d667dc1ea50357e1c3d1703aee00534e8a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19840-resource-generic-catch-context-v1/manifest.json",
+      "sha256": "dcfaa6104f6bdd8f57093a235a56f04000d83702b03db55c78e45528fcbebf21"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19850-visibility-map-context-v1/manifest.json",
+      "sha256": "291d806a9539c8c6e331b5d621aaf872356cc8700dcf1b461f219269c15b3c11"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19860-jdbc-close-context-v1/manifest.json",
+      "sha256": "a57ff397b8465ebd306a521add6b9c609facae43c1f9f6abddf00bee64a90103"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19870-jdbc-generic-catch-context-v1/manifest.json",
+      "sha256": "f8ff492143ca570823f2c79a25191c67b175409aad8c242b54027ffa2afc2765"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19880-empty-catch-context-v1/manifest.json",
+      "sha256": "86a4bb1544fa83e25f151a04af5a52034200ea52a2a8ad72326d2961a4e98958"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19890-finally-priority-context-v1/manifest.json",
+      "sha256": "b294eccae2a4c5a27c979e9a5ddd96a36fb7f2a508a9445028ebdabf1d53ab35"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19900-batch-run-context-v1/manifest.json",
+      "sha256": "59327bb132893061eee966a0def91a5541be573b82708ad16195295e9bc916d2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19910-cleanup-twelve-context-v1/manifest.json",
+      "sha256": "35bf4572d4dd7952b0437b6951c123ee94760544491ff1dc0cbfc5ffac907a1f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19920-db-receipt-context-v1/manifest.json",
+      "sha256": "7ed71d1d06bb5da1236920fa326edc844ed8a0bcbbd7e7729bebcb0aabad57c3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19930-api-consumer-context-v1/manifest.json",
+      "sha256": "afd728733fff03c0c052382a45195343da6f0564a0324ac841cd92fcab4b8404"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19940-existing-context-preflight-v1/manifest.json",
+      "sha256": "6060a9066dcb8eba77bd1583d0302d7aa872dfc252790e03959005f9289f03eb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19950-private-monitor-context-v1/manifest.json",
+      "sha256": "94b5d4f9988fcdac2ee7b4b0c45f9b5d8ad0dd236b4f8fb248882eac94523daf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19960-remaining-monitor-context-v1/manifest.json",
+      "sha256": "f96abd4c3b198ee705198a1ea87ff6f870412e749f68f4eb96c12d794dfd6a0e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19970-bound-type-context-v1/manifest.json",
+      "sha256": "903a58c9321a69920cdf15c0f8107c14a5e3c6211107f2fe2bed3373c1d921b9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19980-bound-remaining-context-v1/manifest.json",
+      "sha256": "f1f2e9cfe4c207bbb46d313ecdcc0effd22bb69864a8d4443f64bd49521b992c"
+    }
+  ],
+  "priorCount": 918,
+  "newCount": 40,
+  "decisions": [
+    {
+      "rawOrdinal": 101,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+      "attributeValues": {
+        "class": "ApiDependencyReadiness",
+        "method": "verify"
+      },
+      "line": 60,
+      "catchPurpose": "BODY",
+      "reason": "BODY: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          0
+        ],
+        "historicalReason": "The owned admission body may fail with RuntimeException or direct Error as well as its declared JDBC failure. Record the same primary and rethrow it through the mandatory close scope; removing unchecked capture skips the explicit primary/cleanup precedence. This is a failed startup path, not a successful fallback or NPE normalization.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+          "sha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+          "line": 60,
+          "text": "} catch (SQLException | RuntimeException | Error failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 102,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+      "attributeValues": {
+        "class": "ApiDependencyReadiness",
+        "method": "verify"
+      },
+      "line": 60,
+      "catchPurpose": "BODY",
+      "reason": "BODY: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          1
+        ],
+        "historicalReason": "The owned admission body may fail with RuntimeException or direct Error as well as its declared JDBC failure. Record the same primary and rethrow it through the mandatory close scope; removing unchecked capture skips the explicit primary/cleanup precedence. This is a failed startup path, not a successful fallback or NPE normalization.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+          "sha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+          "line": 60,
+          "text": "} catch (SQLException | RuntimeException | Error failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 104,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+      "attributeValues": {
+        "class": "ApiDependencyReadiness",
+        "method": "verify"
+      },
+      "line": 66,
+      "catchPurpose": "CLEANUP",
+      "reason": "CLEANUP: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          2
+        ],
+        "historicalReason": "The already-acquired Connection/JMSContext close site must be attempted after body failure and before normal progress. No primary, or direct close Error versus non-Error primary, selects the closing failure; otherwise retain primary and transient secondary for module-local fatal classification. Removing this boundary or substituting unconditional finally throw changes SSC330. Actual close/graph behavior remains unproved.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+          "sha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+          "line": 66,
+          "text": "} catch (SQLException | RuntimeException | Error closing) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 105,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+      "attributeValues": {
+        "class": "ApiDependencyReadiness",
+        "method": "verify"
+      },
+      "line": 66,
+      "catchPurpose": "CLEANUP",
+      "reason": "CLEANUP: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          3
+        ],
+        "historicalReason": "The already-acquired Connection/JMSContext close site must be attempted after body failure and before normal progress. No primary, or direct close Error versus non-Error primary, selects the closing failure; otherwise retain primary and transient secondary for module-local fatal classification. Removing this boundary or substituting unconditional finally throw changes SSC330. Actual close/graph behavior remains unproved.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+          "sha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+          "line": 66,
+          "text": "} catch (SQLException | RuntimeException | Error closing) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 107,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+      "attributeValues": {
+        "class": "ApiDependencyReadiness",
+        "method": "verify"
+      },
+      "line": 74,
+      "catchPurpose": "CATALOG",
+      "reason": "CATALOG: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          4
+        ],
+        "historicalReason": "Only ordinary SQLException/RuntimeException reaches the fixed non-success catalog after module-local preserveFatal. Direct Error is not added to this normalizing outer catch. No retry, ready=true or partial success is returned from failure; the source orders DB failure before broker probing. Hidden Error traversal and actual provider admission remain unproved.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+          "sha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+          "line": 74,
+          "text": "} catch (SQLException | RuntimeException failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 108,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+      "attributeValues": {
+        "class": "ApiDependencyReadiness",
+        "method": "probe"
+      },
+      "line": 102,
+      "catchPurpose": "BODY",
+      "reason": "BODY: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          5
+        ],
+        "historicalReason": "The owned admission body may fail with RuntimeException or direct Error as well as its declared JDBC failure. Record the same primary and rethrow it through the mandatory close scope; removing unchecked capture skips the explicit primary/cleanup precedence. This is a failed startup path, not a successful fallback or NPE normalization.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+          "sha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+          "line": 102,
+          "text": "} catch (RuntimeException | Error failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 109,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+      "attributeValues": {
+        "class": "ApiDependencyReadiness",
+        "method": "probe"
+      },
+      "line": 102,
+      "catchPurpose": "BODY",
+      "reason": "BODY: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          6
+        ],
+        "historicalReason": "The owned admission body may fail with RuntimeException or direct Error as well as its declared JDBC failure. Record the same primary and rethrow it through the mandatory close scope; removing unchecked capture skips the explicit primary/cleanup precedence. This is a failed startup path, not a successful fallback or NPE normalization.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+          "sha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+          "line": 102,
+          "text": "} catch (RuntimeException | Error failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 111,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+      "attributeValues": {
+        "class": "ApiDependencyReadiness",
+        "method": "probe"
+      },
+      "line": 108,
+      "catchPurpose": "CLEANUP",
+      "reason": "CLEANUP: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          7
+        ],
+        "historicalReason": "The already-acquired Connection/JMSContext close site must be attempted after body failure and before normal progress. No primary, or direct close Error versus non-Error primary, selects the closing failure; otherwise retain primary and transient secondary for module-local fatal classification. Removing this boundary or substituting unconditional finally throw changes SSC330. Actual close/graph behavior remains unproved.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+          "sha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+          "line": 108,
+          "text": "} catch (RuntimeException | Error closing) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 112,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+      "attributeValues": {
+        "class": "ApiDependencyReadiness",
+        "method": "probe"
+      },
+      "line": 108,
+      "catchPurpose": "CLEANUP",
+      "reason": "CLEANUP: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          8
+        ],
+        "historicalReason": "The already-acquired Connection/JMSContext close site must be attempted after body failure and before normal progress. No primary, or direct close Error versus non-Error primary, selects the closing failure; otherwise retain primary and transient secondary for module-local fatal classification. Removing this boundary or substituting unconditional finally throw changes SSC330. Actual close/graph behavior remains unproved.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+          "sha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+          "line": 108,
+          "text": "} catch (RuntimeException | Error closing) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 114,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+      "attributeValues": {
+        "class": "ApiDependencyReadiness",
+        "method": "probe"
+      },
+      "line": 118,
+      "catchPurpose": "CATALOG",
+      "reason": "CATALOG: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          9
+        ],
+        "historicalReason": "Only ordinary SQLException/RuntimeException reaches the fixed non-success catalog after module-local preserveFatal. Direct Error is not added to this normalizing outer catch. No retry, ready=true or partial success is returned from failure; the source orders DB failure before broker probing. Hidden Error traversal and actual provider admission remain unproved.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+          "sha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+          "line": 118,
+          "text": "} catch (RuntimeException failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1226,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+      "attributeValues": {
+        "class": "WebDependencyReadiness",
+        "method": "verify"
+      },
+      "line": 34,
+      "catchPurpose": "BODY",
+      "reason": "BODY: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          10
+        ],
+        "historicalReason": "The owned admission body may fail with RuntimeException or direct Error as well as its declared JDBC failure. Record the same primary and rethrow it through the mandatory close scope; removing unchecked capture skips the explicit primary/cleanup precedence. This is a failed startup path, not a successful fallback or NPE normalization.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+          "sha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+          "line": 34,
+          "text": "} catch (SQLException | RuntimeException | Error failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1227,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+      "attributeValues": {
+        "class": "WebDependencyReadiness",
+        "method": "verify"
+      },
+      "line": 34,
+      "catchPurpose": "BODY",
+      "reason": "BODY: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          11
+        ],
+        "historicalReason": "The owned admission body may fail with RuntimeException or direct Error as well as its declared JDBC failure. Record the same primary and rethrow it through the mandatory close scope; removing unchecked capture skips the explicit primary/cleanup precedence. This is a failed startup path, not a successful fallback or NPE normalization.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+          "sha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+          "line": 34,
+          "text": "} catch (SQLException | RuntimeException | Error failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1229,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+      "attributeValues": {
+        "class": "WebDependencyReadiness",
+        "method": "verify"
+      },
+      "line": 40,
+      "catchPurpose": "CLEANUP",
+      "reason": "CLEANUP: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          12
+        ],
+        "historicalReason": "The already-acquired Connection/JMSContext close site must be attempted after body failure and before normal progress. No primary, or direct close Error versus non-Error primary, selects the closing failure; otherwise retain primary and transient secondary for module-local fatal classification. Removing this boundary or substituting unconditional finally throw changes SSC330. Actual close/graph behavior remains unproved.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+          "sha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+          "line": 40,
+          "text": "} catch (SQLException | RuntimeException | Error closing) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1230,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+      "attributeValues": {
+        "class": "WebDependencyReadiness",
+        "method": "verify"
+      },
+      "line": 40,
+      "catchPurpose": "CLEANUP",
+      "reason": "CLEANUP: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          13
+        ],
+        "historicalReason": "The already-acquired Connection/JMSContext close site must be attempted after body failure and before normal progress. No primary, or direct close Error versus non-Error primary, selects the closing failure; otherwise retain primary and transient secondary for module-local fatal classification. Removing this boundary or substituting unconditional finally throw changes SSC330. Actual close/graph behavior remains unproved.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+          "sha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+          "line": 40,
+          "text": "} catch (SQLException | RuntimeException | Error closing) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1232,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+      "attributeValues": {
+        "class": "WebDependencyReadiness",
+        "method": "verify"
+      },
+      "line": 47,
+      "catchPurpose": "CATALOG",
+      "reason": "CATALOG: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          14
+        ],
+        "historicalReason": "Only ordinary SQLException/RuntimeException reaches the fixed non-success catalog after module-local preserveFatal. Direct Error is not added to this normalizing outer catch. No retry, ready=true or partial success is returned from failure; the source orders DB failure before broker probing. Hidden Error traversal and actual provider admission remain unproved.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+          "sha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+          "line": 47,
+          "text": "} catch (SQLException | RuntimeException failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1233,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+      "attributeValues": {
+        "class": "WebDependencyReadiness",
+        "method": "verify"
+      },
+      "line": 58,
+      "catchPurpose": "BODY",
+      "reason": "BODY: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          15
+        ],
+        "historicalReason": "The owned admission body may fail with RuntimeException or direct Error as well as its declared JDBC failure. Record the same primary and rethrow it through the mandatory close scope; removing unchecked capture skips the explicit primary/cleanup precedence. This is a failed startup path, not a successful fallback or NPE normalization.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+          "sha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+          "line": 58,
+          "text": "} catch (RuntimeException | Error failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1234,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+      "attributeValues": {
+        "class": "WebDependencyReadiness",
+        "method": "verify"
+      },
+      "line": 58,
+      "catchPurpose": "BODY",
+      "reason": "BODY: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          16
+        ],
+        "historicalReason": "The owned admission body may fail with RuntimeException or direct Error as well as its declared JDBC failure. Record the same primary and rethrow it through the mandatory close scope; removing unchecked capture skips the explicit primary/cleanup precedence. This is a failed startup path, not a successful fallback or NPE normalization.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+          "sha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+          "line": 58,
+          "text": "} catch (RuntimeException | Error failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1236,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+      "attributeValues": {
+        "class": "WebDependencyReadiness",
+        "method": "verify"
+      },
+      "line": 64,
+      "catchPurpose": "CLEANUP",
+      "reason": "CLEANUP: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          17
+        ],
+        "historicalReason": "The already-acquired Connection/JMSContext close site must be attempted after body failure and before normal progress. No primary, or direct close Error versus non-Error primary, selects the closing failure; otherwise retain primary and transient secondary for module-local fatal classification. Removing this boundary or substituting unconditional finally throw changes SSC330. Actual close/graph behavior remains unproved.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+          "sha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+          "line": 64,
+          "text": "} catch (RuntimeException | Error closing) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1237,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+      "attributeValues": {
+        "class": "WebDependencyReadiness",
+        "method": "verify"
+      },
+      "line": 64,
+      "catchPurpose": "CLEANUP",
+      "reason": "CLEANUP: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          18
+        ],
+        "historicalReason": "The already-acquired Connection/JMSContext close site must be attempted after body failure and before normal progress. No primary, or direct close Error versus non-Error primary, selects the closing failure; otherwise retain primary and transient secondary for module-local fatal classification. Removing this boundary or substituting unconditional finally throw changes SSC330. Actual close/graph behavior remains unproved.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+          "sha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+          "line": 64,
+          "text": "} catch (RuntimeException | Error closing) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1239,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+      "attributeValues": {
+        "class": "WebDependencyReadiness",
+        "method": "verify"
+      },
+      "line": 71,
+      "catchPurpose": "CATALOG",
+      "reason": "CATALOG: SSC330 readiness body capture preserves primary through required close; cleanup keeps componentdirectError selection; outercatalog accepts only its declared non-success SQL/Runtime boundary after fatalpreservation. DB failure cannot progress toJMS, no closefailure can grant readiness. Existing Graph9/provider/actualadmission evidence remainsHOLD. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/review.json",
+        "sha256": "6be6cdfcc9fd7e7cbc37a562ad522b04817bf5b95b2d186151f893b1e1763f5f",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16142-readiness-generic20-current-purpose-v1/manifest.json",
+        "manifestSha256": "aa5616879887e35e561778b12b02a6ac21b77fb0243d952fd7e2e8f917a98df8",
+        "manifestHashKey": "reviewSha256",
+        "historicalReasonKey": "reason",
+        "rowPointer": [
+          "rows",
+          19
+        ],
+        "historicalReason": "Only ordinary SQLException/RuntimeException reaches the fixed non-success catalog after module-local preserveFatal. Direct Error is not added to this normalizing outer catch. No retry, ready=true or partial success is returned from failure; the source orders DB failure before broker probing. Hidden Error traversal and actual provider admission remain unproved.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+          "sha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+          "line": 71,
+          "text": "} catch (RuntimeException failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 158,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+      "attributeValues": {
+        "class": "ApiBrokerContexts",
+        "method": "ApiBrokerContexts"
+      },
+      "line": 126,
+      "catchPurpose": "ASSEMBLY_PRIMARY",
+      "reason": "ASSEMBLY_PRIMARY: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          0
+        ],
+        "historicalReason": "Broad runtime/fatal assembly boundary protects already captured factories in reverse index order and rethrows the same primary when cleanup/observers/attachment return. No successful owner is published on this source path.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+          "sha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+          "line": 126,
+          "text": "} catch (RuntimeException | Error failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 159,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+      "attributeValues": {
+        "class": "ApiBrokerContexts",
+        "method": "ApiBrokerContexts"
+      },
+      "line": 126,
+      "catchPurpose": "ASSEMBLY_PRIMARY",
+      "reason": "ASSEMBLY_PRIMARY: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          1
+        ],
+        "historicalReason": "Broad runtime/fatal assembly boundary protects already captured factories in reverse index order and rethrows the same primary when cleanup/observers/attachment return. No successful owner is published on this source path.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+          "sha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+          "line": 126,
+          "text": "} catch (RuntimeException | Error failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 160,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+      "attributeValues": {
+        "class": "ApiBrokerContexts",
+        "method": "ApiBrokerContexts"
+      },
+      "line": 131,
+      "catchPurpose": "ASSEMBLY_SECONDARY_CLOSE",
+      "reason": "ASSEMBLY_SECONDARY_CLOSE: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          2
+        ],
+        "historicalReason": "Captures the per-owner secondary, notifies the declared UNKNOWN policy and retains non-self primary suppression/fallback. The observer is inside the constructor loop and may not return; this does not prove all later closes occur.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+          "sha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+          "line": 131,
+          "text": "} catch (Exception | Error closing) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 161,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+      "attributeValues": {
+        "class": "ApiBrokerContexts",
+        "method": "ApiBrokerContexts"
+      },
+      "line": 131,
+      "catchPurpose": "ASSEMBLY_SECONDARY_CLOSE",
+      "reason": "ASSEMBLY_SECONDARY_CLOSE: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          3
+        ],
+        "historicalReason": "Captures the per-owner secondary, notifies the declared UNKNOWN policy and retains non-self primary suppression/fallback. The observer is inside the constructor loop and may not return; this does not prove all later closes occur.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+          "sha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+          "line": 131,
+          "text": "} catch (Exception | Error closing) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 163,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+      "attributeValues": {
+        "class": "ApiBrokerContexts",
+        "method": "open"
+      },
+      "line": 213,
+      "catchPurpose": "PASSWORD_SOURCE_FAILURE",
+      "reason": "PASSWORD_SOURCE_FAILURE: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          4
+        ],
+        "historicalReason": "A failing borrowed password supplier goes through the declared fatal-graph check then fixed unavailable error if that check returns; never a successful JMS context. Graph semantics are outside this Source review.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+          "sha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+          "line": 213,
+          "text": "} catch (RuntimeException failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 164,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+      "attributeValues": {
+        "class": "ApiBrokerContexts",
+        "method": "open"
+      },
+      "line": 223,
+      "catchPurpose": "CONTEXT_CREATE_FAILURE",
+      "reason": "CONTEXT_CREATE_FAILURE: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          5
+        ],
+        "historicalReason": "A createContext/length/null-result runtime failure goes through the declared fatal check and fixed unavailable error; the mutable char copy is filled in finally. Immutable String/provider erasure is not promised.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+          "sha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+          "line": 223,
+          "text": "} catch (RuntimeException failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 165,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+      "attributeValues": {
+        "class": "ApiBrokerContexts",
+        "method": "close"
+      },
+      "line": 246,
+      "catchPurpose": "OWNER_CLOSE_FAILURE",
+      "reason": "OWNER_CLOSE_FAILURE: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          6
+        ],
+        "historicalReason": "Close uncertainty is recorded/observed and either fatal or fixed redacted error is propagated if the observer/graph calls return. Only normal owner close paths mark success; UNKNOWN retention is not normal release.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+          "sha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+          "line": 246,
+          "text": "} catch (Exception | Error closing) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 166,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+      "attributeValues": {
+        "class": "ApiBrokerContexts",
+        "method": "close"
+      },
+      "line": 246,
+      "catchPurpose": "OWNER_CLOSE_FAILURE",
+      "reason": "OWNER_CLOSE_FAILURE: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          7
+        ],
+        "historicalReason": "Close uncertainty is recorded/observed and either fatal or fixed redacted error is propagated if the observer/graph calls return. Only normal owner close paths mark success; UNKNOWN retention is not normal release.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+          "sha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+          "line": 246,
+          "text": "} catch (Exception | Error closing) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 168,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "e34f85fb6c359595962afb863089e0f4c874dd78a4108981e1d623ec03b2d6e8",
+      "attributeValues": {
+        "class": "ArtemisConnectionFactoryProvider",
+        "method": "configureOwned"
+      },
+      "line": 99,
+      "catchPurpose": "SETUP_PRIMARY",
+      "reason": "SETUP_PRIMARY: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          8
+        ],
+        "historicalReason": "Configuration failure owns one close attempt before secondary priority/attachment and eventual primary rethrow; no configured factory is returned by this failure source path.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+          "sha256": "e34f85fb6c359595962afb863089e0f4c874dd78a4108981e1d623ec03b2d6e8",
+          "line": 99,
+          "text": "} catch (RuntimeException | Error primary) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 169,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "e34f85fb6c359595962afb863089e0f4c874dd78a4108981e1d623ec03b2d6e8",
+      "attributeValues": {
+        "class": "ArtemisConnectionFactoryProvider",
+        "method": "configureOwned"
+      },
+      "line": 99,
+      "catchPurpose": "SETUP_PRIMARY",
+      "reason": "SETUP_PRIMARY: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          9
+        ],
+        "historicalReason": "Configuration failure owns one close attempt before secondary priority/attachment and eventual primary rethrow; no configured factory is returned by this failure source path.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+          "sha256": "e34f85fb6c359595962afb863089e0f4c874dd78a4108981e1d623ec03b2d6e8",
+          "line": 99,
+          "text": "} catch (RuntimeException | Error primary) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 170,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "e34f85fb6c359595962afb863089e0f4c874dd78a4108981e1d623ec03b2d6e8",
+      "attributeValues": {
+        "class": "ArtemisConnectionFactoryProvider",
+        "method": "configureOwned"
+      },
+      "line": 102,
+      "catchPurpose": "SETUP_SECONDARY_CLOSE",
+      "reason": "SETUP_SECONDARY_CLOSE: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          10
+        ],
+        "historicalReason": "After the owned close failure the observer is notified; a secondary Error outranks a non-Error primary, otherwise attachment is delegated before primary rethrow. Nonreturn/Graph behavior is not dynamically proven.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+          "sha256": "e34f85fb6c359595962afb863089e0f4c874dd78a4108981e1d623ec03b2d6e8",
+          "line": 102,
+          "text": "} catch (RuntimeException | Error secondary) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 171,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "e34f85fb6c359595962afb863089e0f4c874dd78a4108981e1d623ec03b2d6e8",
+      "attributeValues": {
+        "class": "ArtemisConnectionFactoryProvider",
+        "method": "configureOwned"
+      },
+      "line": 102,
+      "catchPurpose": "SETUP_SECONDARY_CLOSE",
+      "reason": "SETUP_SECONDARY_CLOSE: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          11
+        ],
+        "historicalReason": "After the owned close failure the observer is notified; a secondary Error outranks a non-Error primary, otherwise attachment is delegated before primary rethrow. Nonreturn/Graph behavior is not dynamically proven.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+          "sha256": "e34f85fb6c359595962afb863089e0f4c874dd78a4108981e1d623ec03b2d6e8",
+          "line": 102,
+          "text": "} catch (RuntimeException | Error secondary) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1397,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+      "attributeValues": {
+        "class": "WebBrokerContexts",
+        "method": "configureOwned"
+      },
+      "line": 121,
+      "catchPurpose": "SETUP_PRIMARY",
+      "reason": "SETUP_PRIMARY: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          12
+        ],
+        "historicalReason": "Configuration failure owns one close attempt before secondary priority/attachment and eventual primary rethrow; no configured factory is returned by this failure source path.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+          "sha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+          "line": 121,
+          "text": "} catch (RuntimeException | Error primary) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1398,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+      "attributeValues": {
+        "class": "WebBrokerContexts",
+        "method": "configureOwned"
+      },
+      "line": 121,
+      "catchPurpose": "SETUP_PRIMARY",
+      "reason": "SETUP_PRIMARY: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          13
+        ],
+        "historicalReason": "Configuration failure owns one close attempt before secondary priority/attachment and eventual primary rethrow; no configured factory is returned by this failure source path.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+          "sha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+          "line": 121,
+          "text": "} catch (RuntimeException | Error primary) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1399,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+      "attributeValues": {
+        "class": "WebBrokerContexts",
+        "method": "configureOwned"
+      },
+      "line": 124,
+      "catchPurpose": "SETUP_SECONDARY_CLOSE",
+      "reason": "SETUP_SECONDARY_CLOSE: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          14
+        ],
+        "historicalReason": "After the owned close failure the observer is notified; a secondary Error outranks a non-Error primary, otherwise attachment is delegated before primary rethrow. Nonreturn/Graph behavior is not dynamically proven.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+          "sha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+          "line": 124,
+          "text": "} catch (RuntimeException | Error secondary) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1400,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+      "attributeValues": {
+        "class": "WebBrokerContexts",
+        "method": "configureOwned"
+      },
+      "line": 124,
+      "catchPurpose": "SETUP_SECONDARY_CLOSE",
+      "reason": "SETUP_SECONDARY_CLOSE: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          15
+        ],
+        "historicalReason": "After the owned close failure the observer is notified; a secondary Error outranks a non-Error primary, otherwise attachment is delegated before primary rethrow. Nonreturn/Graph behavior is not dynamically proven.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+          "sha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+          "line": 124,
+          "text": "} catch (RuntimeException | Error secondary) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1405,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+      "attributeValues": {
+        "class": "WebBrokerContexts",
+        "method": "open"
+      },
+      "line": 164,
+      "catchPurpose": "PASSWORD_SOURCE_FAILURE",
+      "reason": "PASSWORD_SOURCE_FAILURE: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          16
+        ],
+        "historicalReason": "A failing borrowed password supplier goes through the declared fatal-graph check then fixed unavailable error if that check returns; never a successful JMS context. Graph semantics are outside this Source review.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+          "sha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+          "line": 164,
+          "text": "} catch (RuntimeException failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1406,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+      "attributeValues": {
+        "class": "WebBrokerContexts",
+        "method": "open"
+      },
+      "line": 174,
+      "catchPurpose": "CONTEXT_CREATE_FAILURE",
+      "reason": "CONTEXT_CREATE_FAILURE: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          17
+        ],
+        "historicalReason": "A createContext/length/null-result runtime failure goes through the declared fatal check and fixed unavailable error; the mutable char copy is filled in finally. Immutable String/provider erasure is not promised.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+          "sha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+          "line": 174,
+          "text": "} catch (RuntimeException failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1407,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+      "attributeValues": {
+        "class": "WebBrokerContexts",
+        "method": "close"
+      },
+      "line": 193,
+      "catchPurpose": "OWNER_CLOSE_FAILURE",
+      "reason": "OWNER_CLOSE_FAILURE: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          18
+        ],
+        "historicalReason": "Close uncertainty is recorded/observed and either fatal or fixed redacted error is propagated if the observer/graph calls return. Only normal owner close paths mark success; UNKNOWN retention is not normal release.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+          "sha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+          "line": 193,
+          "text": "} catch (Exception | Error failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    },
+    {
+      "rawOrdinal": 1408,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+      "attributeValues": {
+        "class": "WebBrokerContexts",
+        "method": "close"
+      },
+      "line": 193,
+      "catchPurpose": "OWNER_CLOSE_FAILURE",
+      "reason": "OWNER_CLOSE_FAILURE: SSC311/315/334 factory andbroker boundaries prepare ports/state beforeacquisition, protect settings/partialassembly with ownedcleanup andseparate password/context creation unavailable paths. Mutablecharcopy wipe isdistinct fromimmutableString/provider erasure. UNKNOWN observer canbe nonreturning; this purpose doesnot assert later closes orcatalog graph calls completed. The exactsite-specific oldpurpose isbound bywholecurrentMainSHA/fullPMD attributes andmanifest-declared schema hash; only sourcecatch purpose isreused, not type/CFG/runtime/graph/cleanup qualification oroldPT success.",
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/purposes.json",
+        "sha256": "17766c134c68ab6ae618b419aeec5fdcc17a4666438f6ea03aee6cb1e88ad8cf",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16345-jms-generic-twenty-purpose-v2/manifest.json",
+        "manifestSha256": "516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a",
+        "manifestHashKey": "purposesSha256",
+        "historicalReasonKey": "manualPurpose",
+        "rowPointer": [
+          19
+        ],
+        "historicalReason": "Close uncertainty is recorded/observed and either fatal or fixed redacted error is propagated if the observer/graph calls return. Only normal owner close paths mark success; UNKNOWN retention is not normal release.",
+        "runtimeTransferred": false
+      },
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+          "sha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+          "line": 193,
+          "text": "} catch (Exception | Error failure) {"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Actual provider/null/owned close/partialconstructor/primary-secondary andUNKNOWN callback paths remain separate scoped tests",
+        "Fatal graph traversal/observer return/immutableString erasure/DB-JMS readiness/source-owner timing andwhole runtime are not established orperformed",
+        "No caller-scope replay/recovery/permission/Root/VM/credential/JMS orPT operation; no newcoverage orformal acceptance"
+      ]
+    }
+  ],
+  "sourceContexts": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+      "sha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e",
+      "ranges": [
+        [
+          1,
+          123
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+      "sha256": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+      "ranges": [
+        [
+          1,
+          276
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+      "sha256": "e34f85fb6c359595962afb863089e0f4c874dd78a4108981e1d623ec03b2d6e8",
+      "ranges": [
+        [
+          1,
+          131
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+      "sha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab",
+      "ranges": [
+        [
+          1,
+          76
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+      "sha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+      "ranges": [
+        [
+          1,
+          209
+        ]
+      ]
+    }
+  ],
+  "designReferences": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82",
+      "line": 11
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 4
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 6
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 8
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 14
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 16
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 45
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 47
+    }
+  ],
+  "deferred": [
+    {
+      "rawOrdinal": 1075,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1076,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1077,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1078,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1079,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1080,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1081,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1083,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1084,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1085,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1086,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1087,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    }
+  ],
+  "requiredScopedPartitions": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+      "beforeOrdinals": [
+        1075,
+        1076,
+        1077,
+        1078,
+        1079,
+        1080,
+        1081,
+        1083,
+        1084,
+        1085,
+        1086,
+        1087
+      ],
+      "selectedOrdinals": [],
+      "remainingOrdinals": [
+        1075,
+        1076,
+        1077,
+        1078,
+        1079,
+        1080,
+        1081,
+        1083,
+        1084,
+        1085,
+        1086,
+        1087
+      ],
+      "remainingRuleCounts": {
+        "AvoidUsingVolatile": 7,
+        "AvoidCatchingGenericException": 4,
+        "DoNotThrowExceptionInFinally": 1
+      }
+    }
+  ],
+  "existingCandidateIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19940-existing-context-preflight-v1/existing-context-candidates.safe.json",
+    "sha256": "aa168d1ef3d2f8a4723f7df5ccbb0056008ca723be01cf23fedcda2a7ba1eb36"
+  }
+}
