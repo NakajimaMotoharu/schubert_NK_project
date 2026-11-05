@@ -1,0 +1,606 @@
+{
+  "atJST": "2026-11-05T19:21:10.915234+09:00",
+  "decision": "STATIC_PASS_BEFORE_ANY_FIXTURE_OR_PRODUCT_RUN",
+  "priorSdkManifest": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18622-dlq-sender-unit-v1/manifest.json",
+    "sha256": "e643b92d0553c4b0b76413381d39d7cf6e2cf6509510ab0798492300eafb6404"
+  },
+  "sdkDependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar": "89eb1f27e583119db4c1c23db26cbc1916c82bfc5fcc23dbcb7ef040602f09d6",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar": "111cbc7a359b5597085b5328ab74c2f81dd40e7211d07bd12e6ffa83d9de99d9",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar": "02b43c47403dd0ef6dcd4573d0744bc6bae935edae016eb19f2d4ebb5eb33722",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar": "f474b14c7734f15e0540394cb6f39d67777b7581a42919e4ac89d253d4efd929",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar": "d31926b01adcc07af86f5e27b81b6d6c115df17d366e835d1fc3f5a1924e7e52",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55"
+  },
+  "classes": {
+    "org.apache.activemq.artemis.api.core.client.ClientSession": {
+      "declaration": "public interface org.apache.activemq.artemis.api.core.client.ClientSession extends javax.transaction.xa.XAResource,java.lang.AutoCloseable {",
+      "hasStaticInitializer": false,
+      "initializerInvokes": [],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "No static initializer, interface/plain parameter type, no instance or method call.",
+      "originalStdoutSha256": "f9132d39981139c65c6c2694a84de99d6503f462284566b18acac874ce865d92",
+      "originalExitSha256": "d53292456a3cf814bca325e749d67761a60004f5f1b404b640c295fe0d706806",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.api.core.ActiveMQException": {
+      "declaration": "public class org.apache.activemq.artemis.api.core.ActiveMQException extends java.lang.Exception {",
+      "hasStaticInitializer": false,
+      "initializerInvokes": [],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "No static initializer, interface/plain parameter type, no instance or method call.",
+      "originalStdoutSha256": "74c3962ad447843da0003f587da3635c1a8bf4e0198a8008d72eb5f02c77e668",
+      "originalExitSha256": "aea96ddd24e347f44e8a927d4f65a893a14068f9c0b98e7d4353b9139c6c99e3",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.api.core.QueueAttributes": {
+      "declaration": "public class org.apache.activemq.artemis.api.core.QueueAttributes implements java.io.Serializable {",
+      "hasStaticInitializer": false,
+      "initializerInvokes": [],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "No static initializer, interface/plain parameter type, no instance or method call.",
+      "originalStdoutSha256": "42f1255a3106bad5ec4da65847628e20f76cd6c97ccffddb47fe7f2561641e02",
+      "originalExitSha256": "76552d6eda8ab3b2b07755291924887c6aa153b41c24b89a519305942a8e073d",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.api.core.QueueConfiguration": {
+      "declaration": "public class org.apache.activemq.artemis.api.core.QueueConfiguration implements java.io.Serializable {",
+      "hasStaticInitializer": false,
+      "initializerInvokes": [],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "No static initializer, interface/plain parameter type, no instance or method call.",
+      "originalStdoutSha256": "01ef9601c886622fa3d40f8a7a8f76f09b25602a91ffe78db67d7c15de594fac",
+      "originalExitSha256": "b42ed1324489a4a65d129279007c85165e855f7fd0be128e05ca1f393085fab3",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.api.core.RoutingType": {
+      "declaration": "public final class org.apache.activemq.artemis.api.core.RoutingType extends java.lang.Enum<org.apache.activemq.artemis.api.core.RoutingType> {",
+      "hasStaticInitializer": true,
+      "initializerInvokes": [
+        "7: invokespecial #34                 // Method \"<init>\":(Ljava/lang/String;I)V",
+        "20: invokespecial #34                 // Method \"<init>\":(Ljava/lang/String;I)V",
+        "26: invokestatic  #36                 // Method $values:()[Lorg/apache/activemq/artemis/api/core/RoutingType;"
+      ],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "Two enumvalue constructors/array only, immutable routing labels; no session/factory.",
+      "originalStdoutSha256": "a177ad64307241b61a6d7c16cf160aa0376b165684565ca397e2f0ae152dc01d",
+      "originalExitSha256": "975eba95b6d4eff2cafb60afd20e75ddd9d46274e5056b30a371cd07ce7f70c9",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.api.core.SimpleString": {
+      "declaration": "public final class org.apache.activemq.artemis.api.core.SimpleString implements java.lang.CharSequence, java.io.Serializable, java.lang.Comparable<org.apache.activemq.artemis.api.core.SimpleString> {",
+      "hasStaticInitializer": true,
+      "initializerInvokes": [
+        "2: invokestatic  #7                  // Method of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;"
+      ],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "Samehash sixSDK priorPG18622 actualpure value class initialization reused; static of(\"\") shorthand is self value allocation, no newrole/provider.",
+      "originalStdoutSha256": "d509bbe3659c5941c1314a34cf290c0f1043bd75e9e5d9d1472510839eaa5a61",
+      "originalExitSha256": "5e0fbc695c0ecadeb44bb2511d12162adf0d8bd4cdc8ee0e5b8acb3f0d080eec",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.api.core.client.ClientConsumer": {
+      "declaration": "public interface org.apache.activemq.artemis.api.core.client.ClientConsumer extends java.lang.AutoCloseable {",
+      "hasStaticInitializer": false,
+      "initializerInvokes": [],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "No static initializer, interface/plain parameter type, no instance or method call.",
+      "originalStdoutSha256": "20621ce4e5cbf4d63850da191fcf6916b71456ec5c064a9ac4a7ae2c92f307a0",
+      "originalExitSha256": "0f2b7311f538c58b6fbdc527ed8986bb646f96d5c5724243a8f41867f036d969",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.api.core.client.ClientMessage": {
+      "declaration": "public interface org.apache.activemq.artemis.api.core.client.ClientMessage extends org.apache.activemq.artemis.api.core.ICoreMessage {",
+      "hasStaticInitializer": false,
+      "initializerInvokes": [],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "No static initializer, interface/plain parameter type, no instance or method call.",
+      "originalStdoutSha256": "615175955b455638306ad879433bfe41026a5dc5f1393c36fe86dd27dda97f3b",
+      "originalExitSha256": "99f4f08d77c0e17595ca971ee0dca820667f04197de51e65632926a293c162e5",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.api.core.client.ClientProducer": {
+      "declaration": "public interface org.apache.activemq.artemis.api.core.client.ClientProducer extends java.lang.AutoCloseable {",
+      "hasStaticInitializer": false,
+      "initializerInvokes": [],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "No static initializer, interface/plain parameter type, no instance or method call.",
+      "originalStdoutSha256": "bb84114756929148d06543820864bfd81220c51a1aa1e75e8155b245364037c9",
+      "originalExitSha256": "b2b7b596d4c7009f7e80acb8974498b295800c1853fa740072617af451315597",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.api.core.client.ClientSession$AddressQuery": {
+      "declaration": "public interface org.apache.activemq.artemis.api.core.client.ClientSession$AddressQuery {",
+      "hasStaticInitializer": false,
+      "initializerInvokes": [],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "No static initializer, interface/plain parameter type, no instance or method call.",
+      "originalStdoutSha256": "c8ecb6d4f6743b8f13aeee5e6156db2ba82ee1758f412a2d9876f234c1ec2c0b",
+      "originalExitSha256": "4ccefadafd78fb8ceb53421f2f1a5295215bb8ac96f1caab8d043e7b2ad4a309",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.api.core.client.ClientSession$QueueQuery": {
+      "declaration": "public interface org.apache.activemq.artemis.api.core.client.ClientSession$QueueQuery {",
+      "hasStaticInitializer": false,
+      "initializerInvokes": [],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "No static initializer, interface/plain parameter type, no instance or method call.",
+      "originalStdoutSha256": "04a3d583042b07d516436c2ae919cc86b332745bbc55fb0853d0a45019a3399f",
+      "originalExitSha256": "3238ff69089890fd26315c74000bbc1f93608d74793a5c44ce8b3d1a67e20ca8",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.api.core.client.ClientSessionFactory": {
+      "declaration": "public interface org.apache.activemq.artemis.api.core.client.ClientSessionFactory extends java.lang.AutoCloseable {",
+      "hasStaticInitializer": false,
+      "initializerInvokes": [],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "No static initializer, interface/plain parameter type, no instance or method call.",
+      "originalStdoutSha256": "0b05729e3a2662edb3690c47857c12c06cd8690ea9a65423b3fae432fb24787a",
+      "originalExitSha256": "ec63eaf1ce40839972f77bb9d6f19151c0090ea7cee8ca233a5b9904b63ae50f",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.api.core.client.FailoverEventListener": {
+      "declaration": "public interface org.apache.activemq.artemis.api.core.client.FailoverEventListener {",
+      "hasStaticInitializer": false,
+      "initializerInvokes": [],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "No static initializer, interface/plain parameter type, no instance or method call.",
+      "originalStdoutSha256": "43f4531e7453f9ef1c8808c18d5dbe3cd3ce6180d7b2aea96735dd019be75649",
+      "originalExitSha256": "a87094d8f717c63aeed7dee4265173cd63c719a45e8d825f27ebeacfebba7d51",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.api.core.client.SendAcknowledgementHandler": {
+      "declaration": "public interface org.apache.activemq.artemis.api.core.client.SendAcknowledgementHandler {",
+      "hasStaticInitializer": false,
+      "initializerInvokes": [],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "No static initializer, interface/plain parameter type, no instance or method call.",
+      "originalStdoutSha256": "8241bec0d5adf2bc4cac2c40dd6bf9697302dc3cd8cfa2100a34a46815493f39",
+      "originalExitSha256": "2e0228f531de2ac735741024bb0aed0be8c1d70292f1b702deab010ef6641597",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.api.core.client.SessionFailureListener": {
+      "declaration": "public interface org.apache.activemq.artemis.api.core.client.SessionFailureListener extends org.apache.activemq.artemis.core.remoting.FailureListener {",
+      "hasStaticInitializer": false,
+      "initializerInvokes": [],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "No static initializer, interface/plain parameter type, no instance or method call.",
+      "originalStdoutSha256": "3a37dba24890813e35682d62435d8144b4f2c300427be42d6f7fabaca1cbf41c",
+      "originalExitSha256": "f1779545a82a01a6a75cff570816240ceca965770a330e09b1d0d054a07f209d",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.api.core.ICoreMessage": {
+      "declaration": "public interface org.apache.activemq.artemis.api.core.ICoreMessage extends org.apache.activemq.artemis.api.core.Message {",
+      "hasStaticInitializer": false,
+      "initializerInvokes": [],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "No static initializer, interface/plain parameter type, no instance or method call.",
+      "originalStdoutSha256": "4af552e4b08602f0094dd93060db5094f5ac730f0bda66d020711ad295b857a9",
+      "originalExitSha256": "48edbc1a51202eea86f815048f8f5fc8c1bc6e3178ed054afb488459c72a8426",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.core.remoting.FailureListener": {
+      "declaration": "public interface org.apache.activemq.artemis.core.remoting.FailureListener {",
+      "hasStaticInitializer": false,
+      "initializerInvokes": [],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "No static initializer, interface/plain parameter type, no instance or method call.",
+      "originalStdoutSha256": "4b2f18f776c36e43db9e034e28c7cda651f4cd41aa926c404523af0623fbed6a",
+      "originalExitSha256": "07f93704e3460264a9281f0f6c24e9541a28d132c5b97513f2e7ca9d89b55898",
+      "actualExit": 0
+    },
+    "org.apache.activemq.artemis.api.core.Message": {
+      "declaration": "public interface org.apache.activemq.artemis.api.core.Message {",
+      "hasStaticInitializer": true,
+      "initializerInvokes": [
+        "2: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "8: invokedynamic #243,  0            // InvokeDynamic #1:test:()Ljava/util/function/Predicate;",
+        "16: invokedynamic #251,  0            // InvokeDynamic #2:test:()Ljava/util/function/Predicate;",
+        "26: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "35: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "44: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "53: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "62: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "71: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "80: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "89: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "98: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "107: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "116: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "125: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "134: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "143: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "152: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "161: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "170: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "179: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "188: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "197: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;",
+        "206: invokestatic  #86                 // Method org/apache/activemq/artemis/api/core/SimpleString.of:(Ljava/lang/String;)Lorg/apache/activemq/artemis/api/core/SimpleString;"
+      ],
+      "decision": "SAFE_PASSIVE_TYPE_OR_VALUE_INITIALIZATION",
+      "reason": "Fixed SimpleString header values plus exactlytwo JDKLambdaMetafactory Predicate creations; bootstrapimpl refs Message.lambda$static$0/1, no predicate invocation/provider atinit. Message generatedlambda prefix allowedmax2 only.",
+      "originalStdoutSha256": "8e14cffb0b69578eac66806365389d0823d67a529672590f92c8cee4f2165f43",
+      "originalExitSha256": "fdd55c4af4fa34d2f1e161b81e5c7d4748b6f4ef948acc0d7c68beedd3138928",
+      "actualExit": 0
+    }
+  },
+  "allowedInitializedClasses": [
+    "org.apache.activemq.artemis.api.core.ActiveMQException",
+    "org.apache.activemq.artemis.api.core.ICoreMessage",
+    "org.apache.activemq.artemis.api.core.Message",
+    "org.apache.activemq.artemis.api.core.ParameterisedAddress",
+    "org.apache.activemq.artemis.api.core.QueueAttributes",
+    "org.apache.activemq.artemis.api.core.QueueConfiguration",
+    "org.apache.activemq.artemis.api.core.RoutingType",
+    "org.apache.activemq.artemis.api.core.SimpleString",
+    "org.apache.activemq.artemis.api.core.client.ClientConsumer",
+    "org.apache.activemq.artemis.api.core.client.ClientMessage",
+    "org.apache.activemq.artemis.api.core.client.ClientProducer",
+    "org.apache.activemq.artemis.api.core.client.ClientSession",
+    "org.apache.activemq.artemis.api.core.client.ClientSession$AddressQuery",
+    "org.apache.activemq.artemis.api.core.client.ClientSession$QueueQuery",
+    "org.apache.activemq.artemis.api.core.client.ClientSessionFactory",
+    "org.apache.activemq.artemis.api.core.client.FailoverEventListener",
+    "org.apache.activemq.artemis.api.core.client.SendAcknowledgementHandler",
+    "org.apache.activemq.artemis.api.core.client.SessionFailureListener",
+    "org.apache.activemq.artemis.core.remoting.FailureListener",
+    "org.apache.activemq.artemis.jms.client.ActiveMQDestination",
+    "org.apache.activemq.artemis.jms.client.ActiveMQDestination$TYPE",
+    "org.apache.activemq.artemis.jms.client.ActiveMQQueue",
+    "org.apache.activemq.artemis.jndi.JNDIStorable",
+    "org.apache.activemq.artemis.utils.uri.URISupport"
+  ],
+  "allowedGeneratedLambdaPrefixes": {
+    "org/apache/activemq/artemis/api/core/Message$$Lambda": 2
+  },
+  "initialGuard": {
+    "actualExit": 1,
+    "unknownSymbols": [
+      "SimpleString selfof shorthand",
+      "Message Predicate invokedynamic bootstrap"
+    ],
+    "productInitialization": false,
+    "testsExecuted": 0,
+    "resolution": "samehash priorSimpleString proof + existing19metadata OS0 receipts/JDKbootstrap staticfollowup, not a Product retry orboundaryprobe"
+  },
+  "stages": {
+    "class-00": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.client.ClientSession"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:21.210570+00:00",
+      "startUTC": "2026-11-05T10:13:20.995713+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "f9132d39981139c65c6c2694a84de99d6503f462284566b18acac874ce865d92",
+      "timedOut": false
+    },
+    "class-01": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.ActiveMQException"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:21.426716+00:00",
+      "startUTC": "2026-11-05T10:13:21.211335+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "74c3962ad447843da0003f587da3635c1a8bf4e0198a8008d72eb5f02c77e668",
+      "timedOut": false
+    },
+    "class-02": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.QueueAttributes"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:21.642599+00:00",
+      "startUTC": "2026-11-05T10:13:21.427254+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "42f1255a3106bad5ec4da65847628e20f76cd6c97ccffddb47fe7f2561641e02",
+      "timedOut": false
+    },
+    "class-03": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.QueueConfiguration"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:21.908604+00:00",
+      "startUTC": "2026-11-05T10:13:21.643207+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "01ef9601c886622fa3d40f8a7a8f76f09b25602a91ffe78db67d7c15de594fac",
+      "timedOut": false
+    },
+    "class-04": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.RoutingType"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:22.124853+00:00",
+      "startUTC": "2026-11-05T10:13:21.909489+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "a177ad64307241b61a6d7c16cf160aa0376b165684565ca397e2f0ae152dc01d",
+      "timedOut": false
+    },
+    "class-05": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.SimpleString"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:22.340742+00:00",
+      "startUTC": "2026-11-05T10:13:22.125483+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "d509bbe3659c5941c1314a34cf290c0f1043bd75e9e5d9d1472510839eaa5a61",
+      "timedOut": false
+    },
+    "class-06": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.client.ClientConsumer"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:22.506642+00:00",
+      "startUTC": "2026-11-05T10:13:22.341417+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "20621ce4e5cbf4d63850da191fcf6916b71456ec5c064a9ac4a7ae2c92f307a0",
+      "timedOut": false
+    },
+    "class-07": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.client.ClientMessage"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:22.722270+00:00",
+      "startUTC": "2026-11-05T10:13:22.507125+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "615175955b455638306ad879433bfe41026a5dc5f1393c36fe86dd27dda97f3b",
+      "timedOut": false
+    },
+    "class-08": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.client.ClientProducer"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:22.887707+00:00",
+      "startUTC": "2026-11-05T10:13:22.722802+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "bb84114756929148d06543820864bfd81220c51a1aa1e75e8155b245364037c9",
+      "timedOut": false
+    },
+    "class-09": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.client.ClientSession$AddressQuery"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:23.053179+00:00",
+      "startUTC": "2026-11-05T10:13:22.888181+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "c8ecb6d4f6743b8f13aeee5e6156db2ba82ee1758f412a2d9876f234c1ec2c0b",
+      "timedOut": false
+    },
+    "class-10": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.client.ClientSession$QueueQuery"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:23.218256+00:00",
+      "startUTC": "2026-11-05T10:13:23.053668+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "04a3d583042b07d516436c2ae919cc86b332745bbc55fb0853d0a45019a3399f",
+      "timedOut": false
+    },
+    "class-11": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.client.ClientSessionFactory"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:23.383354+00:00",
+      "startUTC": "2026-11-05T10:13:23.218766+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "0b05729e3a2662edb3690c47857c12c06cd8690ea9a65423b3fae432fb24787a",
+      "timedOut": false
+    },
+    "class-12": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.client.FailoverEventListener"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:23.548740+00:00",
+      "startUTC": "2026-11-05T10:13:23.383862+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "43f4531e7453f9ef1c8808c18d5dbe3cd3ce6180d7b2aea96735dd019be75649",
+      "timedOut": false
+    },
+    "class-13": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.client.SendAcknowledgementHandler"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:23.714420+00:00",
+      "startUTC": "2026-11-05T10:13:23.549221+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "8241bec0d5adf2bc4cac2c40dd6bf9697302dc3cd8cfa2100a34a46815493f39",
+      "timedOut": false
+    },
+    "class-14": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.client.SessionFailureListener"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:23.879719+00:00",
+      "startUTC": "2026-11-05T10:13:23.714951+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "3a37dba24890813e35682d62435d8144b4f2c300427be42d6f7fabaca1cbf41c",
+      "timedOut": false
+    },
+    "class-15": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.ICoreMessage"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:24.095311+00:00",
+      "startUTC": "2026-11-05T10:13:23.880183+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "4af552e4b08602f0094dd93060db5094f5ac730f0bda66d020711ad295b857a9",
+      "timedOut": false
+    },
+    "class-16": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.core.remoting.FailureListener"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:24.260487+00:00",
+      "startUTC": "2026-11-05T10:13:24.095809+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "4b2f18f776c36e43db9e034e28c7cda651f4cd41aa926c404523af0623fbed6a",
+      "timedOut": false
+    },
+    "class-17": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.Message"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:13:24.475771+00:00",
+      "startUTC": "2026-11-05T10:13:24.260985+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "8e14cffb0b69578eac66806365389d0823d67a529672590f92c8cee4f2165f43",
+      "timedOut": false
+    },
+    "message-bootstrap": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-v",
+        "-p",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "org.apache.activemq.artemis.api.core.Message"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-05T10:16:52.286808+00:00",
+      "startUTC": "2026-11-05T10:16:51.971407+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "2ef7d321c786d3267260bf65cb0362dd5c4fd2bf8f23f123e207053ccf37f0f4",
+      "timedOut": false
+    }
+  },
+  "physical": [
+    "dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient$Limits.class",
+    "dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient$Pressure.class",
+    "dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient$Value.class",
+    "dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient.class",
+    "dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient$Reader.class"
+  ],
+  "productInitialization": false,
+  "testsExecuted": 0,
+  "actualBrokerNetworkNativeActions": 0,
+  "defaultManagementQueryAllowed": false,
+  "fullOldMixedBrokerTestAllowed": false,
+  "limitations": "Reader onlysynthetic counts/bytes. CoreSession methods forbidden. Default publicctor null boundary+staticwire only, actualOps role/query/ephemeral/ready allunproven andnotexecuted."
+}

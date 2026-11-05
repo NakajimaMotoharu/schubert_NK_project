@@ -1,0 +1,110 @@
+{
+  "atJST": "2026-11-05T19:40:08.154120+09:00",
+  "Main": "unchanged b093 all6Main source/JARpins/normalbuild+NullAwayPG18642+SBPG18648 reusedexact",
+  "compile": {
+    "actualExit": 0,
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19180-mq-pressure-port-compile-v1/manifest.safe.json",
+    "sha256": "4a6856093e4ff728e031e0047ce8d04eb45802e6cc65530b277ab051bf1269d0"
+  },
+  "static": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19182-mq-pressure-port-static-v1/manifest.safe.json",
+    "sha256": "e86a8d83223c19d356a709f7adb40fd07157af4dc48c3e5501e2ef83f181e496",
+    "raw": 3,
+    "applicable": 0,
+    "Checkstyle": 0,
+    "parser": 0,
+    "individualApplicability": [
+      {
+        "beginline": "219",
+        "endline": "219",
+        "begincolumn": "41",
+        "endcolumn": "66",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.mq",
+        "class": "QueuePressurePolicyTest.Fixture",
+        "variable": "samples",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3",
+        "file": "QueuePressurePolicyTest.java",
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+        "decision": "NON_APPLICABLE_WITH_EXPLICIT_CONTRACT",
+        "reason": "finite same-thread per-fixture synthetic metric/read maps; mutable cells are deliberate input for output snapshot independence, no shared/concurrent provider."
+      },
+      {
+        "beginline": "220",
+        "endline": "220",
+        "begincolumn": "45",
+        "endcolumn": "68",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.mq",
+        "class": "QueuePressurePolicyTest.Fixture",
+        "variable": "reads",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3",
+        "file": "QueuePressurePolicyTest.java",
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+        "decision": "NON_APPLICABLE_WITH_EXPLICIT_CONTRACT",
+        "reason": "finite same-thread per-fixture synthetic metric/read maps; mutable cells are deliberate input for output snapshot independence, no shared/concurrent provider."
+      },
+      {
+        "beginline": "225",
+        "endline": "225",
+        "begincolumn": "17",
+        "endcolumn": "47",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.mq",
+        "class": "QueuePressurePolicyTest.Fixture",
+        "variable": "borrowed",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3",
+        "file": "QueuePressurePolicyTest.java",
+        "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+        "decision": "NON_APPLICABLE_WITH_EXPLICIT_CONTRACT",
+        "reason": "standalone CoreSession interface Proxy exactdefining loader; all18signature/parent initializers staticallyreviewed with fixedSDKhashes before fixture, no J2EE/ambientloader/realprovider. AllCoreSessionmethods forbidden."
+      }
+    ]
+  },
+  "sdkReview": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/001_mq_pressure_sdk_static_review.json",
+    "sha256": "ad4b2e32bd9a784eedca09b804dac58a12d1e21b2da1b1978b733de7d8782eb6",
+    "classes": 18,
+    "initialUnknownGuardExit": 1,
+    "followup": "19existing javap OS0 receipts; samehash priorSimpleString initializedvalue7 proof; Message JDKLambdaMetafactory predicates exactlytwo noinvocation, typedclasses withnoinitializer/RoutingType pureenum. NoProducttest fordiscovery."
+  },
+  "independentOracles": [
+    "origin/main bf11 SS3215.2 table sixcapacity/countpairs/QA042 UI231",
+    "018046 historical unchanged PG242 approvedinternal policy: DLQ count>=1 ALERT andseparate2GiB70/90 bytes, fixedbefore/equal/after; existing expectedspec reusedsemantic only, no oldactualrun/sourcepass transferred",
+    "byteceil exactliteral187904820/241591911/751619277/966367642/1503238554/1932735284, productionfraction notcalled forexpected"
+  ],
+  "scopeLimits": "Custom Reader onlysynthetic values; borrowed CoreSession zeroMethodcalls. Default publicconstructor-null entry tested/staticmethodref inspected, actualOps query/auth/ClientRequestor/ephemeral/bootready notrun oraccepted. Oldclass hasrealbroker andexcludedwhole, no methodfilter.",
+  "tests": 6,
+  "physical": 5,
+  "codeClasses": 4,
+  "abstractInterfaces": 1,
+  "bugs": [
+    "BUG2293",
+    "YKT2038"
+  ],
+  "crossApplication": "newBKPPORT/BRPORT/CLNPORT/CLNQUERY/INSPPORT each onlyone correspondingnewclass inallTestsource scan excludingRootFailedtwo; newOPS-QPP-PORT prefix unoccupied before change. ExistingMQPRESS1693unchanged, newall6methodtable canonicalqualificationpending.",
+  "naming": "draft inputnames1/2 normalized001/002 beforeartifactcreation andpublication, no existingfilesmoved or overwritten",
+  "qualifier": "samegeneric with staticpinnedSDKallowlist/Messagegeneratedprefixmax2, noactualArtemisfactory/ClientRequestor/transport/Netty-native/RootFrame init; post mustverify beforetechnicalwholeclaim. Program018 content+rawdiffallowlist bothadded beforestaging, BUG2283 cause prevented.",
+  "formalUpdated": false,
+  "firstV": false,
+  "files": {
+    "pg19180-mq-pressure-port-compile-v1-test-compile.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pg19172-mq-pressure-port-static-v1-manifest.safe.json": "41d69e5a915be1ddd4015393ea10bece8a1736b1431961c7b273d1901c9f4667",
+    "pg19170-mq-pressure-port-compile-v1-manifest.safe.json": "9c9e38005be2702fdc7bb80c67795fc2d41858be5f08e2c0adb2d10f08acd2ef",
+    "pg19170-mq-pressure-port-compile-v1-test-compile.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pg19182-mq-pressure-port-static-v1-checkstyle.xml": "c5142cd2851bb27f7a4321799c08582d9ac3b3ed861e25b737df46e9d3d30e36",
+    "pg19182-mq-pressure-port-static-v1-manifest.safe.json": "e86a8d83223c19d356a709f7adb40fd07157af4dc48c3e5501e2ef83f181e496",
+    "pg19172-mq-pressure-port-static-v1-checkstyle.xml": "c5142cd2851bb27f7a4321799c08582d9ac3b3ed861e25b737df46e9d3d30e36",
+    "pg19170-mq-pressure-port-compile-v1-test-compile.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pg19182-mq-pressure-port-static-v1-pmd.xml": "79e579add076da0fa4246d56b05cda84ec408e56d69eb847fd745656f8dfea3b",
+    "pg19180-mq-pressure-port-compile-v1-manifest.safe.json": "4a6856093e4ff728e031e0047ce8d04eb45802e6cc65530b277ab051bf1269d0",
+    "pg19180-mq-pressure-port-compile-v1-test-compile.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pg19172-mq-pressure-port-static-v1-pmd.xml": "857975df021a37ca3098cb9683d1c5e0544d56ca7b7569df79e556110bd76fa3"
+  }
+}

@@ -1,0 +1,24 @@
+# MQ圧力policy 単体テスト仕様書
+
+NK-OPS-001 / ArtemisQueuePressureClient全Source・Pressure/Value/Limits/Reader / WBS-P017-10 / MQ001002009010・SYS004/UI231251253/SS321§5.2/5.3/10/13・342§4/QA042・UIC002・SSC075130/451/818。Main b093不変更、PGレビューとPT並行。新QueuePressurePolicyTest全6、OPS-QPP-PORT-001～006。実EmbeddedBrokerを起動する旧ArtemisQueuePressureClientTestはcompile/選択しない。
+
+callbackのsynthetic6Queue/Long-Integer countとbytes、固定閾値の前/等号/後・DLQ alert優先・90%critical・immutablemap/primitiveValue/借用session同一性と非操作、null/欠落/未知型/負数/providerRuntime-Errorを独立literalで検査。expectedをproductionfraction/limitsで作らない。SDK Proxy型初期化の静的閉包を先に凍結、未確認のまま試し実行しない。
+
+デフォルトconstructorはpublicnull-session入口契約を検査し、methodref wiringは静的照合する。実queueMetric/query・Ops認証・ClientRequestor・ephemeral生成を模擬してconstructorcoverageを稼がない。callback正規sessionmarkerは一切sessionmethodを呼ばない。実管理query/role/bootreadyは別Source/後続実経路の未受入であり、policyの技術資格で代替しない。
+
+正常Batch全physical5（code4+宣言Reader1を報告内保持）/全6/単exec-session/四100/HELD四0・SDK静的allowlist/実factory-ClientRequestor-channel-native/Owner初期化0・静的適用0を独立post。same6Main build/NullAway/SB b093を再利用、sourcefreeze/push後に初回unit。環境/argv/OS終端/XML/coverage/BUG/hashと各method表を結果/819以降へ記録。原見積1/4/8 cap10普通PGPT、準備の共有区間も内包しS/V付替え0。正式1964-53/歴史17-190/工数null/新leaf0/同第一V HOLD不変。
+
+|Test ID|class.method|独立期待・条件|
+|---|---|---|
+|OPS-QPP-PORT-001|QueuePressurePolicyTest.sixImmutableSnapshotsUseExactlyTwoAttributesAndNeverOperateTheBorrowedSession|6address/queue/2attributes・same session/zero sessionoperations・returnedmaps immutable、overallmaporder非仮定|
+|OPS-QPP-PORT-002|QueuePressurePolicyTest.everyNonDlqCountAndByteThresholdHasLiteralBeforeEqualAndAfterVectors|5非DLQのcount/byte境界それぞれ前/等/後計60vector、actualcount/bytes/stateを照合|
+|OPS-QPP-PORT-003|QueuePressurePolicyTest.dlqAlertPrecedesSeventyPercentWarningButNinetyPercentBytesPrecedesEveryCount|DLQ1alert/bytes70warning/bytes90critical優先・MAX/両条件同時・同期countwarning+bytescritical|
+|OPS-QPP-PORT-004|QueuePressurePolicyTest.missingUnknownNegativeMetricsAreCataloguedButProviderRuntimeAndErrorKeepIdentity|各count/byteのnull・negative・Double/Float/String/Boolean/Short/BigInteger拒否、providerRuntime/Error原参照|
+|OPS-QPP-PORT-005|QueuePressurePolicyTest.publicNullEntryAndValueInvariantsRejectBeforeAnyReaderOrManagementQuery|default/injected両publicnull入口はreader前拒否、Value非nullstate/非負count-byte/MAX invariant|
+|OPS-QPP-PORT-006|QueuePressurePolicyTest.integerAndLongMetricsAreBothExactAndSnapshotsCannotRetainMutableProviderCells|Integer0/Long0の両合法型、MAX countで非DLQcritical、mutableinput変更前snapshot0保持/新取得だけcritical|
+
+独立期待の追加根拠: 旧018046仕様はDLQの件数1alertと2GiB byte70/90別監視を明記する。SS321§5.2の保存容量と非DLQ件数/標準70/90を組み合わせた未変更PG242内部policyのliteral期待として再利用し、旧sourceでの実broker成功や旧coverageを新sourceへ転用しない。UI/RD/SSは変更なし。
+
+SDK18型とparent初期化はinput001へ凍結。初期静的guard1（SimpleString自己of/Message Predicatebootstrap未分類）は製品未実行のまま止まり、19JavaP OS0既存情報＋既SDK値class証拠とJDKLambdaMetafactory参照で静的確定。許可SDKset/Message生成lambda最大2をpostで照合し、実factory/ClientRequestor/channel/native/Owner初期化を許さない。CPは旧6SDK同hash・normalBootstrapGuard型/JSpecifyだけ追加。
+
+BUG2293/YKT2038はMQPRESS既1693とのID衝突へ修正前起票、新OPS-QPP-PORT-001～006へcomment/仕様を一貫改名。旧1693ID/期待値/Mainは不変更、他新5namespaceは各一classのみを確認。原PG19170/19172を保持し最終PG19180compile0/19182raw3全個別非適用・適用0-CS0-parser0、819。source固定/push後、新専用PG19178全6を一回→独立post。

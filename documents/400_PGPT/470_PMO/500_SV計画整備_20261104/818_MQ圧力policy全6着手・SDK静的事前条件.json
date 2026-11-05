@@ -1,0 +1,85 @@
+{
+  "atJST": "2026-11-05T19:10:43.022226+09:00",
+  "groupId": "PGPT-20261105-MQ-PRESSURE-MEMORY-PORT",
+  "headBefore": "479f1a60c41dd3c74d0f98fa57e6262f560b98f4",
+  "productionMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+  "primaryWbs": "WBS-P017-10",
+  "leafCostBinding": null,
+  "startEstimatePp": {
+    "low": 1,
+    "base": 4,
+    "high": 8
+  },
+  "capPp": 10,
+  "chargedToSV": false,
+  "target": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient.java",
+  "originalPartial": {
+    "BRANCH": {
+      "covered": 21,
+      "missed": 7
+    },
+    "CLASS": {
+      "covered": 4,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 45,
+      "missed": 8
+    },
+    "METHOD": {
+      "covered": 9,
+      "missed": 3
+    }
+  },
+  "program": "018_NK-OPS-001",
+  "specRelative": "evidence/01_PT/018_NK-OPS-001/3511_MQ圧力policy_単体テスト仕様書.md",
+  "resultRelative": "evidence/01_PT/018_NK-OPS-001/3512_MQ圧力policy_実行結果.md",
+  "sdkReviewRelative": "evidence/01_PT/018_NK-OPS-001/input/001_mq_pressure_sdk_static_review.json",
+  "qualifierRelative": "evidence/01_PT/018_NK-OPS-001/input/002_mq_pressure_qualifier.py",
+  "scope": "wholePressureClient/Pressureenum/Value/Limits/Reader(physical5/code4+interface1); six new memory tests. Old wholeTest includes realEmbeddedBroker and is notcompiled/run; no selecting its individual methods.",
+  "admission": "PT_DEFAULT_CALLBACK_POLICY_WITH_STATIC_SDK_CLOSURE",
+  "preparation": "selection code/oldmixedTest/threeSDKjavap readonly before estimate; quota interval conservatively starts previousunitend so no consumption gap or overlap, frozenBeforeAnyNewFixture/Test",
+  "quotaBefore": {
+    "primary": {
+      "usedPercent": 17,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 17,
+    "remainingPercent": 83,
+    "windowDurationMins": 10080,
+    "resetsAt": 1794395640,
+    "observedAtUTC": "2026-11-05T09:44:38.389Z",
+    "observedByJST": "2026-11-05 18:44:38 JST",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "3ac9be500dca3cc3ca845a143f38ec651c4f1bae429978822e2dcc5bad5a02e5"
+  },
+  "freshAtGroupStart": {
+    "primary": {
+      "usedPercent": 17,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 17,
+    "remainingPercent": 83,
+    "windowDurationMins": 10080,
+    "resetsAt": 1794395640,
+    "observedAtUTC": "2026-11-05T10:10:42.924Z",
+    "observedByJST": "2026-11-05 19:10:42 JST",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "4fe088b34ecdbc49b39df6a0303da5847f7edb39d1a1f41a650e04eb613c1c7d"
+  },
+  "closure": "Reader callback returns synthetic count/bytes only, borrowed ClientSession interface marker notinvoked. Default publicconstructor tested only null-session boundary before reader call; static methodref wiring reviewed, no default queueMetric/query/ClientRequestor/realOps auth/ephemeralresources executed. CoreSDK six existing dependency pins and normalBootstrap Guard type/JSpecify only; must prove signatureclass initializers safe before Proxy creation, post bound SDK init allowlist/no actualfactory/channel/native.",
+  "independentOracles": "SS3215.2/5.3/10/13 UI231251253 MQ001002009010 SYS004 QA042 UIC002 SSC075/130. Six exactqueue names; count250/450,5000/9000,1000/5000; independentceil bytes256MiB187904820/241591911,1GiB751619277/966367642,2GiB1503238554/1932735284. DLQ count>=1 ALERT before70% warning,90%bytesCRITICAL precedes. literalvectors productionfraction/limits neverexpected.",
+  "newTests": 6,
+  "physical": 5,
+  "abstractInterfaces": 1,
+  "quality": "sameb0936Main compile/NullAway/SB reuse exactsource/JAR; allowedCoreSDKmetadata onlybeforetest; normalall5CRC/whole6/singleexec-session/four100/HELD4zero/no actualSDKfactory-ClientRequestor-Frame-native-init; sourcefreeze/push beforeunit/endfreshafterpost.",
+  "formalUpdated": false,
+  "firstV": false,
+  "sdkReviewSha256": "ad4b2e32bd9a784eedca09b804dac58a12d1e21b2da1b1978b733de7d8782eb6",
+  "testIdNamespace": "OPS-QPP-PORT-001..006",
+  "traceCorrectionBug": "BUG2293/YKT2038"
+}
