@@ -1,0 +1,204 @@
+Compiled from "JsonLoader.java"
+public class org.apache.activemq.artemis.utils.JsonLoader {
+  private static final org.apache.activemq.artemis.commons.shaded.json.spi.JsonProvider provider;
+
+  public org.apache.activemq.artemis.utils.JsonLoader();
+    Code:
+         0: aload_0
+         1: invokespecial #11                 // Method java/lang/Object."<init>":()V
+         4: return
+
+  public static org.apache.activemq.artemis.json.JsonObject readObject(java.io.Reader);
+    Code:
+         0: getstatic     #19                 // Field provider:Lorg/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider;
+         3: aload_0
+         4: invokevirtual #25                 // Method org/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider.createReader:(Ljava/io/Reader;)Lorg/apache/activemq/artemis/commons/shaded/json/JsonReader;
+         7: astore_1
+         8: new           #27                 // class org/apache/activemq/artemis/json/impl/JsonObjectImpl
+        11: dup
+        12: aload_1
+        13: invokeinterface #32,  1           // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonReader.readObject:()Lorg/apache/activemq/artemis/commons/shaded/json/JsonObject;
+        18: invokespecial #35                 // Method org/apache/activemq/artemis/json/impl/JsonObjectImpl."<init>":(Lorg/apache/activemq/artemis/commons/shaded/json/JsonObject;)V
+        21: astore_2
+        22: aload_1
+        23: ifnull        32
+        26: aload_1
+        27: invokeinterface #38,  1           // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonReader.close:()V
+        32: aload_2
+        33: areturn
+        34: astore_2
+        35: aload_1
+        36: ifnull        54
+        39: aload_1
+        40: invokeinterface #38,  1           // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonReader.close:()V
+        45: goto          54
+        48: astore_3
+        49: aload_2
+        50: aload_3
+        51: invokevirtual #46                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+        54: aload_2
+        55: athrow
+      Exception table:
+         from    to  target type
+             8    22    34   Class java/lang/Throwable
+            39    45    48   Class java/lang/Throwable
+
+  public static void writeObject(java.util.Map<java.lang.String, java.lang.Object>, java.io.Writer, org.apache.activemq.artemis.json.JsonObject);
+    Code:
+         0: getstatic     #19                 // Field provider:Lorg/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider;
+         3: aload_0
+         4: invokevirtual #57                 // Method org/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider.createWriterFactory:(Ljava/util/Map;)Lorg/apache/activemq/artemis/commons/shaded/json/JsonWriterFactory;
+         7: aload_1
+         8: invokeinterface #63,  2           // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonWriterFactory.createWriter:(Ljava/io/Writer;)Lorg/apache/activemq/artemis/commons/shaded/json/JsonWriter;
+        13: astore_3
+        14: aload_3
+        15: aload_2
+        16: checkcast     #27                 // class org/apache/activemq/artemis/json/impl/JsonObjectImpl
+        19: invokevirtual #66                 // Method org/apache/activemq/artemis/json/impl/JsonObjectImpl.getRawObject:()Lorg/apache/activemq/artemis/commons/shaded/json/JsonObject;
+        22: invokeinterface #70,  2           // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonWriter.writeObject:(Lorg/apache/activemq/artemis/commons/shaded/json/JsonObject;)V
+        27: aload_3
+        28: ifnull        67
+        31: aload_3
+        32: invokeinterface #71,  1           // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonWriter.close:()V
+        37: goto          67
+        40: astore        4
+        42: aload_3
+        43: ifnull        64
+        46: aload_3
+        47: invokeinterface #71,  1           // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonWriter.close:()V
+        52: goto          64
+        55: astore        5
+        57: aload         4
+        59: aload         5
+        61: invokevirtual #46                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+        64: aload         4
+        66: athrow
+        67: return
+      Exception table:
+         from    to  target type
+            14    27    40   Class java/lang/Throwable
+            46    52    55   Class java/lang/Throwable
+
+  public static org.apache.activemq.artemis.json.JsonArray readArray(java.io.Reader);
+    Code:
+         0: getstatic     #19                 // Field provider:Lorg/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider;
+         3: aload_0
+         4: invokevirtual #25                 // Method org/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider.createReader:(Ljava/io/Reader;)Lorg/apache/activemq/artemis/commons/shaded/json/JsonReader;
+         7: astore_1
+         8: new           #87                 // class org/apache/activemq/artemis/json/impl/JsonArrayImpl
+        11: dup
+        12: aload_1
+        13: invokeinterface #90,  1           // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonReader.readArray:()Lorg/apache/activemq/artemis/commons/shaded/json/JsonArray;
+        18: invokespecial #93                 // Method org/apache/activemq/artemis/json/impl/JsonArrayImpl."<init>":(Lorg/apache/activemq/artemis/commons/shaded/json/JsonArray;)V
+        21: astore_2
+        22: aload_1
+        23: ifnull        32
+        26: aload_1
+        27: invokeinterface #38,  1           // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonReader.close:()V
+        32: aload_2
+        33: areturn
+        34: astore_2
+        35: aload_1
+        36: ifnull        54
+        39: aload_1
+        40: invokeinterface #38,  1           // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonReader.close:()V
+        45: goto          54
+        48: astore_3
+        49: aload_2
+        50: aload_3
+        51: invokevirtual #46                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+        54: aload_2
+        55: athrow
+      Exception table:
+         from    to  target type
+             8    22    34   Class java/lang/Throwable
+            39    45    48   Class java/lang/Throwable
+
+  public static org.apache.activemq.artemis.json.JsonArrayBuilder createArrayBuilder();
+    Code:
+         0: new           #99                 // class org/apache/activemq/artemis/json/impl/JsonArrayBuilderImpl
+         3: dup
+         4: getstatic     #19                 // Field provider:Lorg/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider;
+         7: invokevirtual #102                // Method org/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider.createArrayBuilder:()Lorg/apache/activemq/artemis/commons/shaded/json/JsonArrayBuilder;
+        10: invokespecial #105                // Method org/apache/activemq/artemis/json/impl/JsonArrayBuilderImpl."<init>":(Lorg/apache/activemq/artemis/commons/shaded/json/JsonArrayBuilder;)V
+        13: areturn
+
+  public static org.apache.activemq.artemis.json.JsonObjectBuilder createObjectBuilder();
+    Code:
+         0: new           #109                // class org/apache/activemq/artemis/json/impl/JsonObjectBuilderImpl
+         3: dup
+         4: getstatic     #19                 // Field provider:Lorg/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider;
+         7: invokevirtual #112                // Method org/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider.createObjectBuilder:()Lorg/apache/activemq/artemis/commons/shaded/json/JsonObjectBuilder;
+        10: invokespecial #115                // Method org/apache/activemq/artemis/json/impl/JsonObjectBuilderImpl."<init>":(Lorg/apache/activemq/artemis/commons/shaded/json/JsonObjectBuilder;)V
+        13: areturn
+
+  public static java.lang.String prettyPrint(java.lang.String);
+    Code:
+         0: aload_0
+         1: astore_1
+         2: new           #121                // class java/io/StringReader
+         5: dup
+         6: aload_0
+         7: invokespecial #124                // Method java/io/StringReader."<init>":(Ljava/lang/String;)V
+        10: astore_2
+        11: new           #126                // class java/io/StringWriter
+        14: dup
+        15: invokespecial #127                // Method java/io/StringWriter."<init>":()V
+        18: astore_3
+        19: ldc           #129                // String org.apache.activemq.artemis.commons.shaded.json.stream.JsonGenerator.prettyPrinting
+        21: iconst_1
+        22: invokestatic  #135                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+        25: invokestatic  #139                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+        28: aload_3
+        29: aload_2
+        30: invokestatic  #141                // Method readObject:(Ljava/io/Reader;)Lorg/apache/activemq/artemis/json/JsonObject;
+        33: invokestatic  #143                // Method writeObject:(Ljava/util/Map;Ljava/io/Writer;Lorg/apache/activemq/artemis/json/JsonObject;)V
+        36: aload_3
+        37: invokevirtual #147                // Method java/io/StringWriter.toString:()Ljava/lang/String;
+        40: astore_1
+        41: aload_3
+        42: invokevirtual #148                // Method java/io/StringWriter.close:()V
+        45: goto          69
+        48: astore        4
+        50: aload_3
+        51: invokevirtual #148                // Method java/io/StringWriter.close:()V
+        54: goto          66
+        57: astore        5
+        59: aload         4
+        61: aload         5
+        63: invokevirtual #46                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+        66: aload         4
+        68: athrow
+        69: aload_2
+        70: invokevirtual #151                // Method java/io/StringReader.close:()V
+        73: goto          94
+        76: astore_3
+        77: aload_2
+        78: invokevirtual #151                // Method java/io/StringReader.close:()V
+        81: goto          92
+        84: astore        4
+        86: aload_3
+        87: aload         4
+        89: invokevirtual #46                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+        92: aload_3
+        93: athrow
+        94: goto          98
+        97: astore_2
+        98: aload_1
+        99: areturn
+      Exception table:
+         from    to  target type
+            19    41    48   Class java/lang/Throwable
+            50    54    57   Class java/lang/Throwable
+            11    69    76   Class java/lang/Throwable
+            77    81    84   Class java/lang/Throwable
+             2    94    97   Class java/lang/Exception
+
+  static {};
+    Code:
+         0: new           #159                // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl
+         3: dup
+         4: invokespecial #160                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl."<init>":()V
+         7: putstatic     #19                 // Field provider:Lorg/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider;
+        10: return
+}

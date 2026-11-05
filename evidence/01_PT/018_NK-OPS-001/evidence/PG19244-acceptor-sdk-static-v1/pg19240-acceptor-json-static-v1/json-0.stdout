@@ -1,0 +1,1350 @@
+Compiled from "JsonUtil.java"
+public final class org.apache.activemq.artemis.api.core.JsonUtil {
+  public static org.apache.activemq.artemis.json.JsonArray toJSONArray(java.lang.Object[]) throws java.lang.Exception;
+    Code:
+         0: invokestatic  #1                  // Method org/apache/activemq/artemis/utils/JsonLoader.createArrayBuilder:()Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+         3: astore_1
+         4: aload_0
+         5: astore_2
+         6: aload_2
+         7: arraylength
+         8: istore_3
+         9: iconst_0
+        10: istore        4
+        12: iload         4
+        14: iload_3
+        15: if_icmpge     36
+        18: aload_2
+        19: iload         4
+        21: aaload
+        22: astore        5
+        24: aload         5
+        26: aload_1
+        27: invokestatic  #7                  // Method addToArray:(Ljava/lang/Object;Lorg/apache/activemq/artemis/json/JsonArrayBuilder;)V
+        30: iinc          4, 1
+        33: goto          12
+        36: aload_1
+        37: invokeinterface #13,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.build:()Lorg/apache/activemq/artemis/json/JsonArray;
+        42: areturn
+
+  public static java.lang.Object[] fromJsonArray(org.apache.activemq.artemis.json.JsonArray) throws java.lang.Exception;
+    Code:
+         0: aload_0
+         1: invokeinterface #19,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonArray.size:()I
+         6: anewarray     #25                 // class java/lang/Object
+         9: astore_1
+        10: iconst_0
+        11: istore_2
+        12: iload_2
+        13: aload_0
+        14: invokeinterface #19,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonArray.size:()I
+        19: if_icmpge     655
+        22: aload_0
+        23: iload_2
+        24: invokeinterface #27,  2           // InterfaceMethod org/apache/activemq/artemis/json/JsonArray.get:(I)Ljava/lang/Object;
+        29: astore_3
+        30: aload_3
+        31: instanceof    #20                 // class org/apache/activemq/artemis/json/JsonArray
+        34: ifeq          58
+        37: aload_3
+        38: checkcast     #20                 // class org/apache/activemq/artemis/json/JsonArray
+        41: astore        4
+        43: aload         4
+        45: invokestatic  #31                 // Method fromJsonArray:(Lorg/apache/activemq/artemis/json/JsonArray;)[Ljava/lang/Object;
+        48: astore        8
+        50: aload_1
+        51: iload_2
+        52: aload         8
+        54: aastore
+        55: goto          649
+        58: aload_3
+        59: instanceof    #35                 // class org/apache/activemq/artemis/json/JsonObject
+        62: ifeq          518
+        65: aload_3
+        66: checkcast     #35                 // class org/apache/activemq/artemis/json/JsonObject
+        69: astore        5
+        71: new           #37                 // class java/util/HashMap
+        74: dup
+        75: invokespecial #39                 // Method java/util/HashMap."<init>":()V
+        78: astore        8
+        80: aload         5
+        82: invokeinterface #43,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonObject.keySet:()Ljava/util/Set;
+        87: astore        9
+        89: aload         9
+        91: invokeinterface #47,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+        96: astore        10
+        98: aload         10
+       100: invokeinterface #53,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+       105: ifeq          510
+       108: aload         10
+       110: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       115: checkcast     #63                 // class java/lang/String
+       118: astore        11
+       120: aload         5
+       122: aload         11
+       124: invokeinterface #65,  2           // InterfaceMethod org/apache/activemq/artemis/json/JsonObject.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       129: astore        12
+       131: aload         12
+       133: instanceof    #20                 // class org/apache/activemq/artemis/json/JsonArray
+       136: ifeq          156
+       139: aload         12
+       141: checkcast     #20                 // class org/apache/activemq/artemis/json/JsonArray
+       144: astore        13
+       146: aload         13
+       148: invokestatic  #31                 // Method fromJsonArray:(Lorg/apache/activemq/artemis/json/JsonArray;)[Ljava/lang/Object;
+       151: astore        12
+       153: goto          360
+       156: aload         12
+       158: instanceof    #68                 // class org/apache/activemq/artemis/json/JsonString
+       161: ifeq          183
+       164: aload         12
+       166: checkcast     #68                 // class org/apache/activemq/artemis/json/JsonString
+       169: astore        14
+       171: aload         14
+       173: invokeinterface #70,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonString.getString:()Ljava/lang/String;
+       178: astore        12
+       180: goto          360
+       183: aload         12
+       185: getstatic     #74                 // Field org/apache/activemq/artemis/json/JsonValue.FALSE:Lorg/apache/activemq/artemis/json/JsonValue;
+       188: if_acmpne     199
+       191: getstatic     #80                 // Field java/lang/Boolean.FALSE:Ljava/lang/Boolean;
+       194: astore        12
+       196: goto          360
+       199: aload         12
+       201: getstatic     #85                 // Field org/apache/activemq/artemis/json/JsonValue.TRUE:Lorg/apache/activemq/artemis/json/JsonValue;
+       204: if_acmpne     215
+       207: getstatic     #88                 // Field java/lang/Boolean.TRUE:Ljava/lang/Boolean;
+       210: astore        12
+       212: goto          360
+       215: aload         12
+       217: instanceof    #90                 // class org/apache/activemq/artemis/json/JsonNumber
+       220: ifeq          270
+       223: aload         12
+       225: checkcast     #90                 // class org/apache/activemq/artemis/json/JsonNumber
+       228: astore        15
+       230: aload         15
+       232: invokeinterface #92,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonNumber.isIntegral:()Z
+       237: ifeq          255
+       240: aload         15
+       242: invokeinterface #95,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonNumber.longValue:()J
+       247: invokestatic  #99                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       250: astore        12
+       252: goto          360
+       255: aload         15
+       257: invokeinterface #105,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonNumber.doubleValue:()D
+       262: invokestatic  #109                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+       265: astore        12
+       267: goto          360
+       270: aload         12
+       272: instanceof    #35                 // class org/apache/activemq/artemis/json/JsonObject
+       275: ifeq          360
+       278: aload         12
+       280: checkcast     #35                 // class org/apache/activemq/artemis/json/JsonObject
+       283: astore        16
+       285: new           #37                 // class java/util/HashMap
+       288: dup
+       289: invokespecial #39                 // Method java/util/HashMap."<init>":()V
+       292: astore        17
+       294: aload         16
+       296: invokeinterface #43,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonObject.keySet:()Ljava/util/Set;
+       301: astore        18
+       303: aload         18
+       305: invokeinterface #47,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+       310: astore        19
+       312: aload         19
+       314: invokeinterface #53,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+       319: ifeq          356
+       322: aload         19
+       324: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       329: checkcast     #63                 // class java/lang/String
+       332: astore        20
+       334: aload         17
+       336: aload         20
+       338: aload         16
+       340: aload         20
+       342: invokeinterface #65,  2           // InterfaceMethod org/apache/activemq/artemis/json/JsonObject.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       347: invokeinterface #114,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       352: pop
+       353: goto          312
+       356: aload         17
+       358: astore        12
+       360: ldc           #120                // class javax/management/openmbean/CompositeData
+       362: invokevirtual #122                // Method java/lang/Class.getName:()Ljava/lang/String;
+       365: aload         11
+       367: invokevirtual #127                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       370: ifeq          495
+       373: aload         12
+       375: checkcast     #131                // class "[Ljava/lang/Object;"
+       378: astore        13
+       380: aload         13
+       382: arraylength
+       383: anewarray     #120                // class javax/management/openmbean/CompositeData
+       386: astore        14
+       388: iconst_0
+       389: istore        15
+       391: iload         15
+       393: aload         13
+       395: arraylength
+       396: if_icmpge     491
+       399: aload         13
+       401: iload         15
+       403: aaload
+       404: ldc           #63                 // class java/lang/String
+       406: invokestatic  #133                // Method convertJsonValue:(Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/Object;
+       409: invokevirtual #137                // Method java/lang/Object.toString:()Ljava/lang/String;
+       412: astore        16
+       414: new           #140                // class org/apache/activemq/artemis/utils/ObjectInputStreamWithClassLoader
+       417: dup
+       418: new           #142                // class java/io/ByteArrayInputStream
+       421: dup
+       422: aload         16
+       424: invokestatic  #144                // Method org/apache/activemq/artemis/utils/Base64.decode:(Ljava/lang/String;)[B
+       427: invokespecial #150                // Method java/io/ByteArrayInputStream."<init>":([B)V
+       430: invokespecial #153                // Method org/apache/activemq/artemis/utils/ObjectInputStreamWithClassLoader."<init>":(Ljava/io/InputStream;)V
+       433: astore        17
+       435: aload         17
+       437: ldc           #156                // String java.util,java.lang,javax.management
+       439: invokevirtual #158                // Method org/apache/activemq/artemis/utils/ObjectInputStreamWithClassLoader.setAllowList:(Ljava/lang/String;)V
+       442: aload         14
+       444: iload         15
+       446: aload         17
+       448: invokevirtual #162                // Method org/apache/activemq/artemis/utils/ObjectInputStreamWithClassLoader.readObject:()Ljava/lang/Object;
+       451: checkcast     #165                // class javax/management/openmbean/CompositeDataSupport
+       454: aastore
+       455: aload         17
+       457: invokevirtual #167                // Method org/apache/activemq/artemis/utils/ObjectInputStreamWithClassLoader.close:()V
+       460: goto          485
+       463: astore        18
+       465: aload         17
+       467: invokevirtual #167                // Method org/apache/activemq/artemis/utils/ObjectInputStreamWithClassLoader.close:()V
+       470: goto          482
+       473: astore        19
+       475: aload         18
+       477: aload         19
+       479: invokevirtual #172                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       482: aload         18
+       484: athrow
+       485: iinc          15, 1
+       488: goto          391
+       491: aload         14
+       493: astore        12
+       495: aload         8
+       497: aload         11
+       499: aload         12
+       501: invokeinterface #114,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       506: pop
+       507: goto          98
+       510: aload_1
+       511: iload_2
+       512: aload         8
+       514: aastore
+       515: goto          649
+       518: aload_3
+       519: instanceof    #68                 // class org/apache/activemq/artemis/json/JsonString
+       522: ifeq          544
+       525: aload_3
+       526: checkcast     #68                 // class org/apache/activemq/artemis/json/JsonString
+       529: astore        6
+       531: aload_1
+       532: iload_2
+       533: aload         6
+       535: invokeinterface #70,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonString.getString:()Ljava/lang/String;
+       540: aastore
+       541: goto          649
+       544: aload_3
+       545: getstatic     #74                 // Field org/apache/activemq/artemis/json/JsonValue.FALSE:Lorg/apache/activemq/artemis/json/JsonValue;
+       548: if_acmpne     560
+       551: aload_1
+       552: iload_2
+       553: getstatic     #80                 // Field java/lang/Boolean.FALSE:Ljava/lang/Boolean;
+       556: aastore
+       557: goto          649
+       560: aload_3
+       561: getstatic     #85                 // Field org/apache/activemq/artemis/json/JsonValue.TRUE:Lorg/apache/activemq/artemis/json/JsonValue;
+       564: if_acmpne     576
+       567: aload_1
+       568: iload_2
+       569: getstatic     #88                 // Field java/lang/Boolean.TRUE:Ljava/lang/Boolean;
+       572: aastore
+       573: goto          649
+       576: aload_3
+       577: instanceof    #90                 // class org/apache/activemq/artemis/json/JsonNumber
+       580: ifeq          631
+       583: aload_3
+       584: checkcast     #90                 // class org/apache/activemq/artemis/json/JsonNumber
+       587: astore        7
+       589: aload         7
+       591: invokeinterface #92,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonNumber.isIntegral:()Z
+       596: ifeq          615
+       599: aload_1
+       600: iload_2
+       601: aload         7
+       603: invokeinterface #95,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonNumber.longValue:()J
+       608: invokestatic  #99                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       611: aastore
+       612: goto          649
+       615: aload_1
+       616: iload_2
+       617: aload         7
+       619: invokeinterface #105,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonNumber.doubleValue:()D
+       624: invokestatic  #109                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+       627: aastore
+       628: goto          649
+       631: aload_3
+       632: getstatic     #176                // Field org/apache/activemq/artemis/json/JsonValue.NULL:Lorg/apache/activemq/artemis/json/JsonValue;
+       635: if_acmpne     645
+       638: aload_1
+       639: iload_2
+       640: aconst_null
+       641: aastore
+       642: goto          649
+       645: aload_1
+       646: iload_2
+       647: aload_3
+       648: aastore
+       649: iinc          2, 1
+       652: goto          12
+       655: aload_1
+       656: areturn
+      Exception table:
+         from    to  target type
+           435   455   463   Class java/lang/Throwable
+           465   470   473   Class java/lang/Throwable
+
+  public static org.apache.activemq.artemis.json.JsonValue nullSafe(java.lang.String);
+    Code:
+         0: new           #179                // class org/apache/activemq/artemis/api/core/JsonUtil$NullableJsonString
+         3: dup
+         4: aload_0
+         5: invokespecial #181                // Method org/apache/activemq/artemis/api/core/JsonUtil$NullableJsonString."<init>":(Ljava/lang/String;)V
+         8: areturn
+
+  public static void addToObject(java.lang.String, java.lang.Object, org.apache.activemq.artemis.json.JsonObjectBuilder);
+    Code:
+         0: aload_1
+         1: instanceof    #183                // class java/lang/Integer
+         4: ifeq          27
+         7: aload_1
+         8: checkcast     #183                // class java/lang/Integer
+        11: astore_3
+        12: aload_2
+        13: aload_0
+        14: aload_3
+        15: invokevirtual #185                // Method java/lang/Integer.intValue:()I
+        18: invokeinterface #188,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;I)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+        23: pop
+        24: goto          434
+        27: aload_1
+        28: instanceof    #100                // class java/lang/Long
+        31: ifeq          56
+        34: aload_1
+        35: checkcast     #100                // class java/lang/Long
+        38: astore        4
+        40: aload_2
+        41: aload_0
+        42: aload         4
+        44: invokevirtual #194                // Method java/lang/Long.longValue:()J
+        47: invokeinterface #195,  4          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;J)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+        52: pop
+        53: goto          434
+        56: aload_1
+        57: instanceof    #110                // class java/lang/Double
+        60: ifeq          85
+        63: aload_1
+        64: checkcast     #110                // class java/lang/Double
+        67: astore        5
+        69: aload_2
+        70: aload_0
+        71: aload         5
+        73: invokevirtual #198                // Method java/lang/Double.doubleValue:()D
+        76: invokeinterface #199,  4          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;D)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+        81: pop
+        82: goto          434
+        85: aload_1
+        86: instanceof    #63                 // class java/lang/String
+        89: ifeq          111
+        92: aload_1
+        93: checkcast     #63                 // class java/lang/String
+        96: astore        6
+        98: aload_2
+        99: aload_0
+       100: aload         6
+       102: invokeinterface #202,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;Ljava/lang/String;)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       107: pop
+       108: goto          434
+       111: aload_1
+       112: instanceof    #81                 // class java/lang/Boolean
+       115: ifeq          140
+       118: aload_1
+       119: checkcast     #81                 // class java/lang/Boolean
+       122: astore        7
+       124: aload_2
+       125: aload_0
+       126: aload         7
+       128: invokevirtual #205                // Method java/lang/Boolean.booleanValue:()Z
+       131: invokeinterface #208,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;Z)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       136: pop
+       137: goto          434
+       140: aload_1
+       141: instanceof    #115                // class java/util/Map
+       144: ifeq          169
+       147: aload_1
+       148: checkcast     #115                // class java/util/Map
+       151: astore        8
+       153: aload_2
+       154: aload_0
+       155: aload         8
+       157: invokestatic  #211                // Method toJsonObject:(Ljava/util/Map;)Lorg/apache/activemq/artemis/json/JsonObject;
+       160: invokeinterface #215,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;Lorg/apache/activemq/artemis/json/JsonValue;)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       165: pop
+       166: goto          434
+       169: aload_1
+       170: instanceof    #218                // class java/lang/Short
+       173: ifeq          198
+       176: aload_1
+       177: checkcast     #218                // class java/lang/Short
+       180: astore        9
+       182: aload_2
+       183: aload_0
+       184: aload         9
+       186: invokevirtual #220                // Method java/lang/Short.shortValue:()S
+       189: invokeinterface #188,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;I)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       194: pop
+       195: goto          434
+       198: aload_1
+       199: instanceof    #224                // class java/lang/Byte
+       202: ifeq          227
+       205: aload_1
+       206: checkcast     #224                // class java/lang/Byte
+       209: astore        10
+       211: aload_2
+       212: aload_0
+       213: aload         10
+       215: invokevirtual #226                // Method java/lang/Byte.shortValue:()S
+       218: invokeinterface #188,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;I)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       223: pop
+       224: goto          434
+       227: aload_1
+       228: instanceof    #227                // class java/lang/Number
+       231: ifeq          256
+       234: aload_1
+       235: checkcast     #227                // class java/lang/Number
+       238: astore        11
+       240: aload_2
+       241: aload_0
+       242: aload         11
+       244: invokevirtual #229                // Method java/lang/Number.doubleValue:()D
+       247: invokeinterface #199,  4          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;D)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       252: pop
+       253: goto          434
+       256: aload_1
+       257: instanceof    #230                // class org/apache/activemq/artemis/api/core/SimpleString
+       260: ifeq          278
+       263: aload_2
+       264: aload_0
+       265: aload_1
+       266: invokevirtual #137                // Method java/lang/Object.toString:()Ljava/lang/String;
+       269: invokeinterface #202,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;Ljava/lang/String;)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       274: pop
+       275: goto          434
+       278: aload_1
+       279: ifnonnull     293
+       282: aload_2
+       283: aload_0
+       284: invokeinterface #232,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.addNull:(Ljava/lang/String;)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       289: pop
+       290: goto          434
+       293: aload_1
+       294: instanceof    #236                // class "[B"
+       297: ifeq          326
+       300: aload_1
+       301: checkcast     #236                // class "[B"
+       304: astore        12
+       306: aload         12
+       308: invokestatic  #238                // Method toJsonArrayBuilder:([B)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       311: astore        15
+       313: aload_2
+       314: aload_0
+       315: aload         15
+       317: invokeinterface #242,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;Lorg/apache/activemq/artemis/json/JsonArrayBuilder;)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       322: pop
+       323: goto          434
+       326: aload_1
+       327: instanceof    #131                // class "[Ljava/lang/Object;"
+       330: ifeq          396
+       333: aload_1
+       334: checkcast     #131                // class "[Ljava/lang/Object;"
+       337: astore        13
+       339: invokestatic  #1                  // Method org/apache/activemq/artemis/utils/JsonLoader.createArrayBuilder:()Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       342: astore        15
+       344: aload         13
+       346: astore        16
+       348: aload         16
+       350: arraylength
+       351: istore        17
+       353: iconst_0
+       354: istore        18
+       356: iload         18
+       358: iload         17
+       360: if_icmpge     383
+       363: aload         16
+       365: iload         18
+       367: aaload
+       368: astore        19
+       370: aload         19
+       372: aload         15
+       374: invokestatic  #7                  // Method addToArray:(Ljava/lang/Object;Lorg/apache/activemq/artemis/json/JsonArrayBuilder;)V
+       377: iinc          18, 1
+       380: goto          356
+       383: aload_2
+       384: aload_0
+       385: aload         15
+       387: invokeinterface #242,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;Lorg/apache/activemq/artemis/json/JsonArrayBuilder;)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       392: pop
+       393: goto          434
+       396: aload_1
+       397: instanceof    #75                 // class org/apache/activemq/artemis/json/JsonValue
+       400: ifeq          422
+       403: aload_1
+       404: checkcast     #75                 // class org/apache/activemq/artemis/json/JsonValue
+       407: astore        14
+       409: aload_2
+       410: aload_0
+       411: aload         14
+       413: invokeinterface #215,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;Lorg/apache/activemq/artemis/json/JsonValue;)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       418: pop
+       419: goto          434
+       422: aload_2
+       423: aload_0
+       424: aload_1
+       425: invokevirtual #137                // Method java/lang/Object.toString:()Ljava/lang/String;
+       428: invokeinterface #202,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;Ljava/lang/String;)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       433: pop
+       434: return
+
+  public static void addToArray(java.lang.Object, org.apache.activemq.artemis.json.JsonArrayBuilder);
+    Code:
+         0: aload_0
+         1: instanceof    #183                // class java/lang/Integer
+         4: ifeq          26
+         7: aload_0
+         8: checkcast     #183                // class java/lang/Integer
+        11: astore_2
+        12: aload_1
+        13: aload_2
+        14: invokevirtual #185                // Method java/lang/Integer.intValue:()I
+        17: invokeinterface #245,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(I)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+        22: pop
+        23: goto          498
+        26: aload_0
+        27: instanceof    #100                // class java/lang/Long
+        30: ifeq          52
+        33: aload_0
+        34: checkcast     #100                // class java/lang/Long
+        37: astore_3
+        38: aload_1
+        39: aload_3
+        40: invokevirtual #194                // Method java/lang/Long.longValue:()J
+        43: invokeinterface #248,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(J)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+        48: pop
+        49: goto          498
+        52: aload_0
+        53: instanceof    #110                // class java/lang/Double
+        56: ifeq          80
+        59: aload_0
+        60: checkcast     #110                // class java/lang/Double
+        63: astore        4
+        65: aload_1
+        66: aload         4
+        68: invokevirtual #198                // Method java/lang/Double.doubleValue:()D
+        71: invokeinterface #251,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(D)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+        76: pop
+        77: goto          498
+        80: aload_0
+        81: instanceof    #63                 // class java/lang/String
+        84: ifeq          105
+        87: aload_0
+        88: checkcast     #63                 // class java/lang/String
+        91: astore        5
+        93: aload_1
+        94: aload         5
+        96: invokeinterface #254,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(Ljava/lang/String;)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       101: pop
+       102: goto          498
+       105: aload_0
+       106: instanceof    #81                 // class java/lang/Boolean
+       109: ifeq          133
+       112: aload_0
+       113: checkcast     #81                 // class java/lang/Boolean
+       116: astore        6
+       118: aload_1
+       119: aload         6
+       121: invokevirtual #205                // Method java/lang/Boolean.booleanValue:()Z
+       124: invokeinterface #257,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(Z)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       129: pop
+       130: goto          498
+       133: aload_0
+       134: instanceof    #115                // class java/util/Map
+       137: ifeq          161
+       140: aload_0
+       141: checkcast     #115                // class java/util/Map
+       144: astore        7
+       146: aload_1
+       147: aload         7
+       149: invokestatic  #211                // Method toJsonObject:(Ljava/util/Map;)Lorg/apache/activemq/artemis/json/JsonObject;
+       152: invokeinterface #260,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(Lorg/apache/activemq/artemis/json/JsonValue;)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       157: pop
+       158: goto          498
+       161: aload_0
+       162: instanceof    #218                // class java/lang/Short
+       165: ifeq          189
+       168: aload_0
+       169: checkcast     #218                // class java/lang/Short
+       172: astore        8
+       174: aload_1
+       175: aload         8
+       177: invokevirtual #220                // Method java/lang/Short.shortValue:()S
+       180: invokeinterface #245,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(I)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       185: pop
+       186: goto          498
+       189: aload_0
+       190: instanceof    #224                // class java/lang/Byte
+       193: ifeq          217
+       196: aload_0
+       197: checkcast     #224                // class java/lang/Byte
+       200: astore        9
+       202: aload_1
+       203: aload         9
+       205: invokevirtual #226                // Method java/lang/Byte.shortValue:()S
+       208: invokeinterface #245,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(I)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       213: pop
+       214: goto          498
+       217: aload_0
+       218: instanceof    #227                // class java/lang/Number
+       221: ifeq          245
+       224: aload_0
+       225: checkcast     #227                // class java/lang/Number
+       228: astore        10
+       230: aload_1
+       231: aload         10
+       233: invokevirtual #229                // Method java/lang/Number.doubleValue:()D
+       236: invokeinterface #251,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(D)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       241: pop
+       242: goto          498
+       245: aload_0
+       246: ifnonnull     259
+       249: aload_1
+       250: invokeinterface #263,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.addNull:()Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       255: pop
+       256: goto          498
+       259: aload_0
+       260: instanceof    #236                // class "[B"
+       263: ifeq          291
+       266: aload_0
+       267: checkcast     #236                // class "[B"
+       270: astore        11
+       272: aload         11
+       274: invokestatic  #238                // Method toJsonArrayBuilder:([B)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       277: astore        15
+       279: aload_1
+       280: aload         15
+       282: invokeinterface #265,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(Lorg/apache/activemq/artemis/json/JsonArrayBuilder;)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       287: pop
+       288: goto          498
+       291: aload_0
+       292: instanceof    #268                // class "[Ljavax/management/openmbean/CompositeData;"
+       295: ifeq          393
+       298: aload_0
+       299: checkcast     #268                // class "[Ljavax/management/openmbean/CompositeData;"
+       302: astore        12
+       304: invokestatic  #1                  // Method org/apache/activemq/artemis/utils/JsonLoader.createArrayBuilder:()Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       307: astore        15
+       309: aload         12
+       311: astore        16
+       313: aload         16
+       315: arraylength
+       316: istore        17
+       318: iconst_0
+       319: istore        18
+       321: iload         18
+       323: iload         17
+       325: if_icmpge     361
+       328: aload         16
+       330: iload         18
+       332: aaload
+       333: astore        19
+       335: aload         19
+       337: checkcast     #165                // class javax/management/openmbean/CompositeDataSupport
+       340: invokestatic  #270                // Method org/apache/activemq/artemis/utils/Base64.encodeObject:(Ljava/io/Serializable;)Ljava/lang/String;
+       343: astore        20
+       345: aload         15
+       347: aload         20
+       349: invokeinterface #254,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(Ljava/lang/String;)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       354: pop
+       355: iinc          18, 1
+       358: goto          321
+       361: invokestatic  #274                // Method org/apache/activemq/artemis/utils/JsonLoader.createObjectBuilder:()Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       364: astore        16
+       366: aload         16
+       368: ldc           #120                // class javax/management/openmbean/CompositeData
+       370: invokevirtual #122                // Method java/lang/Class.getName:()Ljava/lang/String;
+       373: aload         15
+       375: invokeinterface #242,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;Lorg/apache/activemq/artemis/json/JsonArrayBuilder;)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       380: pop
+       381: aload_1
+       382: aload         16
+       384: invokeinterface #278,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(Lorg/apache/activemq/artemis/json/JsonObjectBuilder;)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       389: pop
+       390: goto          498
+       393: aload_0
+       394: instanceof    #131                // class "[Ljava/lang/Object;"
+       397: ifeq          462
+       400: aload_0
+       401: checkcast     #131                // class "[Ljava/lang/Object;"
+       404: astore        13
+       406: invokestatic  #1                  // Method org/apache/activemq/artemis/utils/JsonLoader.createArrayBuilder:()Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       409: astore        15
+       411: aload         13
+       413: astore        16
+       415: aload         16
+       417: arraylength
+       418: istore        17
+       420: iconst_0
+       421: istore        18
+       423: iload         18
+       425: iload         17
+       427: if_icmpge     450
+       430: aload         16
+       432: iload         18
+       434: aaload
+       435: astore        19
+       437: aload         19
+       439: aload         15
+       441: invokestatic  #7                  // Method addToArray:(Ljava/lang/Object;Lorg/apache/activemq/artemis/json/JsonArrayBuilder;)V
+       444: iinc          18, 1
+       447: goto          423
+       450: aload_1
+       451: aload         15
+       453: invokeinterface #265,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(Lorg/apache/activemq/artemis/json/JsonArrayBuilder;)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       458: pop
+       459: goto          498
+       462: aload_0
+       463: instanceof    #75                 // class org/apache/activemq/artemis/json/JsonValue
+       466: ifeq          487
+       469: aload_0
+       470: checkcast     #75                 // class org/apache/activemq/artemis/json/JsonValue
+       473: astore        14
+       475: aload_1
+       476: aload         14
+       478: invokeinterface #260,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(Lorg/apache/activemq/artemis/json/JsonValue;)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       483: pop
+       484: goto          498
+       487: aload_1
+       488: aload_0
+       489: invokevirtual #137                // Method java/lang/Object.toString:()Ljava/lang/String;
+       492: invokeinterface #254,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(Ljava/lang/String;)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       497: pop
+       498: return
+
+  public static org.apache.activemq.artemis.json.JsonArray toJsonArray(java.util.List<java.lang.String>);
+    Code:
+         0: invokestatic  #1                  // Method org/apache/activemq/artemis/utils/JsonLoader.createArrayBuilder:()Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+         3: astore_1
+         4: aload_0
+         5: ifnull        45
+         8: aload_0
+         9: invokeinterface #281,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        14: astore_2
+        15: aload_2
+        16: invokeinterface #53,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        21: ifeq          45
+        24: aload_2
+        25: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        30: checkcast     #63                 // class java/lang/String
+        33: astore_3
+        34: aload_1
+        35: aload_3
+        36: invokeinterface #254,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(Ljava/lang/String;)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+        41: pop
+        42: goto          15
+        45: aload_1
+        46: invokeinterface #13,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.build:()Lorg/apache/activemq/artemis/json/JsonArray;
+        51: areturn
+
+  public static org.apache.activemq.artemis.json.JsonObject toJsonObject(java.util.Map<java.lang.String, ?>);
+    Code:
+         0: invokestatic  #274                // Method org/apache/activemq/artemis/utils/JsonLoader.createObjectBuilder:()Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+         3: astore_1
+         4: aload_0
+         5: ifnull        61
+         8: aload_0
+         9: invokeinterface #284,  1          // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+        14: invokeinterface #47,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+        19: astore_2
+        20: aload_2
+        21: invokeinterface #53,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        26: ifeq          61
+        29: aload_2
+        30: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        35: checkcast     #287                // class java/util/Map$Entry
+        38: astore_3
+        39: aload_3
+        40: invokeinterface #289,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+        45: invokestatic  #292                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+        48: aload_3
+        49: invokeinterface #295,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+        54: aload_1
+        55: invokestatic  #298                // Method addToObject:(Ljava/lang/String;Ljava/lang/Object;Lorg/apache/activemq/artemis/json/JsonObjectBuilder;)V
+        58: goto          20
+        61: aload_1
+        62: invokeinterface #302,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.build:()Lorg/apache/activemq/artemis/json/JsonObject;
+        67: areturn
+
+  public static org.apache.activemq.artemis.json.JsonArrayBuilder toJsonArrayBuilder(byte[]);
+    Code:
+         0: invokestatic  #1                  // Method org/apache/activemq/artemis/utils/JsonLoader.createArrayBuilder:()Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+         3: astore_1
+         4: aload_0
+         5: ifnull        38
+         8: iconst_0
+         9: istore_2
+        10: iload_2
+        11: aload_0
+        12: arraylength
+        13: if_icmpge     38
+        16: aload_1
+        17: aload_0
+        18: iload_2
+        19: baload
+        20: invokestatic  #305                // Method java/lang/Byte.valueOf:(B)Ljava/lang/Byte;
+        23: invokevirtual #226                // Method java/lang/Byte.shortValue:()S
+        26: invokeinterface #245,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(I)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+        31: pop
+        32: iinc          2, 1
+        35: goto          10
+        38: aload_1
+        39: areturn
+
+  public static org.apache.activemq.artemis.json.JsonArray readJsonArray(java.lang.String);
+    Code:
+         0: new           #308                // class java/io/StringReader
+         3: dup
+         4: aload_0
+         5: invokespecial #310                // Method java/io/StringReader."<init>":(Ljava/lang/String;)V
+         8: invokestatic  #311                // Method org/apache/activemq/artemis/utils/JsonLoader.readArray:(Ljava/io/Reader;)Lorg/apache/activemq/artemis/json/JsonArray;
+        11: areturn
+
+  public static org.apache.activemq.artemis.json.JsonObject readJsonObject(java.lang.String);
+    Code:
+         0: new           #308                // class java/io/StringReader
+         3: dup
+         4: aload_0
+         5: invokespecial #310                // Method java/io/StringReader."<init>":(Ljava/lang/String;)V
+         8: invokestatic  #315                // Method org/apache/activemq/artemis/utils/JsonLoader.readObject:(Ljava/io/Reader;)Lorg/apache/activemq/artemis/json/JsonObject;
+        11: areturn
+
+  public static java.util.Map<java.lang.String, java.lang.String> readJsonProperties(java.lang.String);
+    Code:
+         0: new           #37                 // class java/util/HashMap
+         3: dup
+         4: invokespecial #39                 // Method java/util/HashMap."<init>":()V
+         7: astore_1
+         8: aload_0
+         9: ifnull        32
+        12: aload_0
+        13: invokestatic  #318                // Method readJsonObject:(Ljava/lang/String;)Lorg/apache/activemq/artemis/json/JsonObject;
+        16: invokeinterface #322,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonObject.entrySet:()Ljava/util/Set;
+        21: aload_1
+        22: invokedynamic #323,  0            // InvokeDynamic #0:accept:(Ljava/util/Map;)Ljava/util/function/Consumer;
+        27: invokeinterface #327,  2          // InterfaceMethod java/util/Set.forEach:(Ljava/util/function/Consumer;)V
+        32: aload_1
+        33: areturn
+
+  public static java.lang.Object convertJsonValue(java.lang.Object, java.lang.Class);
+    Code:
+         0: aload_0
+         1: instanceof    #90                 // class org/apache/activemq/artemis/json/JsonNumber
+         4: ifeq          95
+         7: aload_0
+         8: checkcast     #90                 // class org/apache/activemq/artemis/json/JsonNumber
+        11: astore_2
+        12: aload_1
+        13: ifnull        29
+        16: aload_1
+        17: ldc           #100                // class java/lang/Long
+        19: if_acmpeq     29
+        22: aload_1
+        23: getstatic     #331                // Field java/lang/Long.TYPE:Ljava/lang/Class;
+        26: if_acmpne     39
+        29: aload_2
+        30: invokeinterface #95,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonNumber.longValue:()J
+        35: invokestatic  #99                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        38: areturn
+        39: aload_1
+        40: ldc           #183                // class java/lang/Integer
+        42: if_acmpeq     52
+        45: aload_1
+        46: getstatic     #335                // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+        49: if_acmpne     62
+        52: aload_2
+        53: invokeinterface #336,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonNumber.intValue:()I
+        58: invokestatic  #337                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        61: areturn
+        62: aload_1
+        63: ldc           #110                // class java/lang/Double
+        65: if_acmpeq     75
+        68: aload_1
+        69: getstatic     #340                // Field java/lang/Double.TYPE:Ljava/lang/Class;
+        72: if_acmpne     85
+        75: aload_2
+        76: invokeinterface #105,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonNumber.doubleValue:()D
+        81: invokestatic  #109                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+        84: areturn
+        85: aload_2
+        86: invokeinterface #95,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonNumber.longValue:()J
+        91: invokestatic  #99                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        94: areturn
+        95: aload_0
+        96: instanceof    #68                 // class org/apache/activemq/artemis/json/JsonString
+        99: ifeq          114
+       102: aload_0
+       103: checkcast     #68                 // class org/apache/activemq/artemis/json/JsonString
+       106: astore_3
+       107: aload_3
+       108: invokeinterface #70,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonString.getString:()Ljava/lang/String;
+       113: areturn
+       114: aload_0
+       115: instanceof    #75                 // class org/apache/activemq/artemis/json/JsonValue
+       118: ifeq          150
+       121: aload_0
+       122: getstatic     #85                 // Field org/apache/activemq/artemis/json/JsonValue.TRUE:Lorg/apache/activemq/artemis/json/JsonValue;
+       125: if_acmpne     133
+       128: iconst_1
+       129: invokestatic  #341                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+       132: areturn
+       133: aload_0
+       134: getstatic     #74                 // Field org/apache/activemq/artemis/json/JsonValue.FALSE:Lorg/apache/activemq/artemis/json/JsonValue;
+       137: if_acmpne     145
+       140: iconst_0
+       141: invokestatic  #341                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+       144: areturn
+       145: aload_0
+       146: invokevirtual #137                // Method java/lang/Object.toString:()Ljava/lang/String;
+       149: areturn
+       150: aload_0
+       151: instanceof    #227                // class java/lang/Number
+       154: ifeq          253
+       157: aload_0
+       158: checkcast     #227                // class java/lang/Number
+       161: astore        4
+       163: aload_1
+       164: getstatic     #335                // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       167: if_acmpeq     176
+       170: aload_1
+       171: ldc           #183                // class java/lang/Integer
+       173: if_acmpne     185
+       176: aload         4
+       178: invokevirtual #344                // Method java/lang/Number.intValue:()I
+       181: invokestatic  #337                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       184: areturn
+       185: aload_1
+       186: getstatic     #331                // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       189: if_acmpeq     198
+       192: aload_1
+       193: ldc           #100                // class java/lang/Long
+       195: if_acmpne     207
+       198: aload         4
+       200: invokevirtual #345                // Method java/lang/Number.longValue:()J
+       203: invokestatic  #99                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       206: areturn
+       207: aload_1
+       208: getstatic     #340                // Field java/lang/Double.TYPE:Ljava/lang/Class;
+       211: if_acmpeq     220
+       214: aload_1
+       215: ldc           #110                // class java/lang/Double
+       217: if_acmpne     229
+       220: aload         4
+       222: invokevirtual #229                // Method java/lang/Number.doubleValue:()D
+       225: invokestatic  #109                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+       228: areturn
+       229: aload_1
+       230: getstatic     #346                // Field java/lang/Short.TYPE:Ljava/lang/Class;
+       233: if_acmpeq     242
+       236: aload_1
+       237: ldc           #218                // class java/lang/Short
+       239: if_acmpne     251
+       242: aload         4
+       244: invokevirtual #347                // Method java/lang/Number.shortValue:()S
+       247: invokestatic  #348                // Method java/lang/Short.valueOf:(S)Ljava/lang/Short;
+       250: areturn
+       251: aload_0
+       252: areturn
+       253: aload_0
+       254: instanceof    #131                // class "[Ljava/lang/Object;"
+       257: ifeq          323
+       260: aload_0
+       261: checkcast     #131                // class "[Ljava/lang/Object;"
+       264: astore        5
+       266: aload_1
+       267: ifnull        285
+       270: aload_1
+       271: aload         5
+       273: arraylength
+       274: invokestatic  #351                // Method java/lang/reflect/Array.newInstance:(Ljava/lang/Class;I)Ljava/lang/Object;
+       277: checkcast     #131                // class "[Ljava/lang/Object;"
+       280: astore        6
+       282: goto          289
+       285: aload         5
+       287: astore        6
+       289: iconst_0
+       290: istore        7
+       292: iload         7
+       294: aload         5
+       296: arraylength
+       297: if_icmpge     320
+       300: aload         6
+       302: iload         7
+       304: aload         5
+       306: iload         7
+       308: aaload
+       309: aload_1
+       310: invokestatic  #133                // Method convertJsonValue:(Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/Object;
+       313: aastore
+       314: iinc          7, 1
+       317: goto          292
+       320: aload         6
+       322: areturn
+       323: aload_0
+       324: areturn
+
+  private org.apache.activemq.artemis.api.core.JsonUtil();
+    Code:
+         0: aload_0
+         1: invokespecial #357                // Method java/lang/Object."<init>":()V
+         4: return
+
+  public static java.lang.String truncateString(java.lang.String, int);
+    Code:
+         0: iload_1
+         1: iflt          57
+         4: aload_0
+         5: invokevirtual #358                // Method java/lang/String.length:()I
+         8: iload_1
+         9: if_icmple     57
+        12: new           #361                // class java/lang/StringBuilder
+        15: dup
+        16: iload_1
+        17: bipush        32
+        19: iadd
+        20: invokespecial #363                // Method java/lang/StringBuilder."<init>":(I)V
+        23: aload_0
+        24: iconst_0
+        25: iload_1
+        26: invokevirtual #366                // Method java/lang/String.substring:(II)Ljava/lang/String;
+        29: invokevirtual #370                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        32: ldc_w         #374                // String , +
+        35: invokevirtual #370                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        38: aload_0
+        39: invokevirtual #358                // Method java/lang/String.length:()I
+        42: iload_1
+        43: isub
+        44: invokevirtual #376                // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+        47: ldc_w         #379                // String  more
+        50: invokevirtual #370                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        53: invokevirtual #381                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        56: areturn
+        57: aload_0
+        58: areturn
+
+  public static java.lang.Object truncate(java.lang.Object, int);
+    Code:
+         0: aload_0
+         1: ifnonnull     8
+         4: ldc_w         #382                // String
+         7: areturn
+         8: aload_0
+         9: astore_2
+        10: iload_1
+        11: iflt          114
+        14: ldc           #63                 // class java/lang/String
+        16: aload_0
+        17: invokevirtual #384                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+        20: invokevirtual #388                // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+        23: ifeq          38
+        26: aload_0
+        27: checkcast     #63                 // class java/lang/String
+        30: iload_1
+        31: invokestatic  #389                // Method truncateString:(Ljava/lang/String;I)Ljava/lang/String;
+        34: astore_2
+        35: goto          114
+        38: aload_0
+        39: invokevirtual #384                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+        42: invokevirtual #393                // Method java/lang/Class.isArray:()Z
+        45: ifeq          114
+        48: ldc           #236                // class "[B"
+        50: aload_0
+        51: invokevirtual #384                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+        54: invokevirtual #388                // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+        57: ifeq          82
+        60: aload_0
+        61: checkcast     #236                // class "[B"
+        64: arraylength
+        65: iload_1
+        66: if_icmple     114
+        69: aload_0
+        70: checkcast     #236                // class "[B"
+        73: iconst_0
+        74: iload_1
+        75: invokestatic  #396                // Method java/util/Arrays.copyOfRange:([BII)[B
+        78: astore_2
+        79: goto          114
+        82: ldc_w         #402                // class "[C"
+        85: aload_0
+        86: invokevirtual #384                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+        89: invokevirtual #388                // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+        92: ifeq          114
+        95: aload_0
+        96: checkcast     #402                // class "[C"
+        99: arraylength
+       100: iload_1
+       101: if_icmple     114
+       104: aload_0
+       105: checkcast     #402                // class "[C"
+       108: iconst_0
+       109: iload_1
+       110: invokestatic  #404                // Method java/util/Arrays.copyOfRange:([CII)[C
+       113: astore_2
+       114: aload_2
+       115: areturn
+
+  public static org.apache.activemq.artemis.json.JsonObject mergeAndUpdate(org.apache.activemq.artemis.json.JsonObject, org.apache.activemq.artemis.json.JsonObject);
+    Code:
+         0: invokestatic  #274                // Method org/apache/activemq/artemis/utils/JsonLoader.createObjectBuilder:()Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+         3: astore_2
+         4: aload_0
+         5: invokeinterface #322,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonObject.entrySet:()Ljava/util/Set;
+        10: invokeinterface #47,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+        15: astore_3
+        16: aload_3
+        17: invokeinterface #53,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        22: ifeq          66
+        25: aload_3
+        26: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        31: checkcast     #287                // class java/util/Map$Entry
+        34: astore        4
+        36: aload_2
+        37: aload         4
+        39: invokeinterface #289,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+        44: checkcast     #63                 // class java/lang/String
+        47: aload         4
+        49: invokeinterface #295,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+        54: checkcast     #75                 // class org/apache/activemq/artemis/json/JsonValue
+        57: invokeinterface #215,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;Lorg/apache/activemq/artemis/json/JsonValue;)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+        62: pop
+        63: goto          16
+        66: aload_1
+        67: invokeinterface #43,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonObject.keySet:()Ljava/util/Set;
+        72: invokeinterface #47,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+        77: astore_3
+        78: aload_3
+        79: invokeinterface #53,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        84: ifeq          380
+        87: aload_3
+        88: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        93: checkcast     #63                 // class java/lang/String
+        96: astore        4
+        98: aload_1
+        99: aload         4
+       101: invokeinterface #65,  2           // InterfaceMethod org/apache/activemq/artemis/json/JsonObject.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       106: checkcast     #75                 // class org/apache/activemq/artemis/json/JsonValue
+       109: astore        5
+       111: aload         5
+       113: ifnull        377
+       116: aload_0
+       117: aload         4
+       119: invokeinterface #407,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonObject.containsKey:(Ljava/lang/Object;)Z
+       124: ifne          141
+       127: aload_2
+       128: aload         4
+       130: aload         5
+       132: invokeinterface #215,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;Lorg/apache/activemq/artemis/json/JsonValue;)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       137: pop
+       138: goto          377
+       141: aload         5
+       143: invokeinterface #410,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonValue.getValueType:()Lorg/apache/activemq/artemis/json/JsonValue$ValueType;
+       148: getstatic     #414                // Field org/apache/activemq/artemis/json/JsonValue$ValueType.OBJECT:Lorg/apache/activemq/artemis/json/JsonValue$ValueType;
+       151: if_acmpne     184
+       154: aload_2
+       155: aload         4
+       157: aload_0
+       158: aload         4
+       160: invokeinterface #420,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonObject.getJsonObject:(Ljava/lang/String;)Lorg/apache/activemq/artemis/json/JsonObject;
+       165: aload         5
+       167: invokeinterface #423,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonValue.asJsonObject:()Lorg/apache/activemq/artemis/json/JsonObject;
+       172: invokestatic  #426                // Method mergeAndUpdate:(Lorg/apache/activemq/artemis/json/JsonObject;Lorg/apache/activemq/artemis/json/JsonObject;)Lorg/apache/activemq/artemis/json/JsonObject;
+       175: invokeinterface #215,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;Lorg/apache/activemq/artemis/json/JsonValue;)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       180: pop
+       181: goto          377
+       184: aload         5
+       186: invokeinterface #410,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonValue.getValueType:()Lorg/apache/activemq/artemis/json/JsonValue$ValueType;
+       191: getstatic     #430                // Field org/apache/activemq/artemis/json/JsonValue$ValueType.ARRAY:Lorg/apache/activemq/artemis/json/JsonValue$ValueType;
+       194: if_acmpne     366
+       197: invokestatic  #1                  // Method org/apache/activemq/artemis/utils/JsonLoader.createArrayBuilder:()Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       200: astore        6
+       202: aload_1
+       203: aload         4
+       205: invokeinterface #433,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonObject.getJsonArray:(Ljava/lang/String;)Lorg/apache/activemq/artemis/json/JsonArray;
+       210: astore        7
+       212: aload_0
+       213: aload         4
+       215: invokeinterface #433,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonObject.getJsonArray:(Ljava/lang/String;)Lorg/apache/activemq/artemis/json/JsonArray;
+       220: astore        8
+       222: iconst_0
+       223: istore        9
+       225: iload         9
+       227: aload         7
+       229: invokeinterface #19,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonArray.size:()I
+       234: if_icmpge     347
+       237: iload         9
+       239: aload         8
+       241: invokeinterface #19,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonArray.size:()I
+       246: if_icmpge     321
+       249: aload         7
+       251: iload         9
+       253: invokeinterface #27,  2           // InterfaceMethod org/apache/activemq/artemis/json/JsonArray.get:(I)Ljava/lang/Object;
+       258: checkcast     #75                 // class org/apache/activemq/artemis/json/JsonValue
+       261: astore        10
+       263: aload         10
+       265: invokeinterface #410,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonValue.getValueType:()Lorg/apache/activemq/artemis/json/JsonValue$ValueType;
+       270: getstatic     #414                // Field org/apache/activemq/artemis/json/JsonValue$ValueType.OBJECT:Lorg/apache/activemq/artemis/json/JsonValue$ValueType;
+       273: if_acmpne     308
+       276: aload         6
+       278: aload         8
+       280: iload         9
+       282: invokeinterface #437,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArray.getJsonObject:(I)Lorg/apache/activemq/artemis/json/JsonObject;
+       287: aload         7
+       289: iload         9
+       291: invokeinterface #437,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArray.getJsonObject:(I)Lorg/apache/activemq/artemis/json/JsonObject;
+       296: invokestatic  #426                // Method mergeAndUpdate:(Lorg/apache/activemq/artemis/json/JsonObject;Lorg/apache/activemq/artemis/json/JsonObject;)Lorg/apache/activemq/artemis/json/JsonObject;
+       299: invokeinterface #260,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(Lorg/apache/activemq/artemis/json/JsonValue;)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       304: pop
+       305: goto          318
+       308: aload         6
+       310: aload         10
+       312: invokeinterface #260,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(Lorg/apache/activemq/artemis/json/JsonValue;)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       317: pop
+       318: goto          341
+       321: aload         6
+       323: aload         7
+       325: iload         9
+       327: invokeinterface #27,  2           // InterfaceMethod org/apache/activemq/artemis/json/JsonArray.get:(I)Ljava/lang/Object;
+       332: checkcast     #75                 // class org/apache/activemq/artemis/json/JsonValue
+       335: invokeinterface #260,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.add:(Lorg/apache/activemq/artemis/json/JsonValue;)Lorg/apache/activemq/artemis/json/JsonArrayBuilder;
+       340: pop
+       341: iinc          9, 1
+       344: goto          225
+       347: aload_2
+       348: aload         4
+       350: aload         6
+       352: invokeinterface #13,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonArrayBuilder.build:()Lorg/apache/activemq/artemis/json/JsonArray;
+       357: invokeinterface #215,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;Lorg/apache/activemq/artemis/json/JsonValue;)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       362: pop
+       363: goto          377
+       366: aload_2
+       367: aload         4
+       369: aload         5
+       371: invokeinterface #215,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;Lorg/apache/activemq/artemis/json/JsonValue;)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+       376: pop
+       377: goto          78
+       380: aload_2
+       381: invokeinterface #302,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.build:()Lorg/apache/activemq/artemis/json/JsonObject;
+       386: areturn
+
+  public static org.apache.activemq.artemis.json.JsonObjectBuilder objectBuilderWithValueAtPath(java.lang.String, org.apache.activemq.artemis.json.JsonValue);
+    Code:
+         0: invokestatic  #274                // Method org/apache/activemq/artemis/utils/JsonLoader.createObjectBuilder:()Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+         3: astore_2
+         4: aload_0
+         5: ldc_w         #440                // String /
+         8: iconst_0
+         9: invokevirtual #442                // Method java/lang/String.split:(Ljava/lang/String;I)[Ljava/lang/String;
+        12: astore_3
+        13: aload_3
+        14: arraylength
+        15: iconst_1
+        16: isub
+        17: istore        4
+        19: iload         4
+        21: ifle          56
+        24: invokestatic  #274                // Method org/apache/activemq/artemis/utils/JsonLoader.createObjectBuilder:()Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+        27: astore        5
+        29: aload         5
+        31: aload_3
+        32: iload         4
+        34: aaload
+        35: aload_1
+        36: invokeinterface #215,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;Lorg/apache/activemq/artemis/json/JsonValue;)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+        41: pop
+        42: aload         5
+        44: invokeinterface #302,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.build:()Lorg/apache/activemq/artemis/json/JsonObject;
+        49: astore_1
+        50: iinc          4, -1
+        53: goto          19
+        56: aload_2
+        57: aload_3
+        58: iconst_0
+        59: aaload
+        60: aload_1
+        61: invokeinterface #215,  3          // InterfaceMethod org/apache/activemq/artemis/json/JsonObjectBuilder.add:(Ljava/lang/String;Lorg/apache/activemq/artemis/json/JsonValue;)Lorg/apache/activemq/artemis/json/JsonObjectBuilder;
+        66: pop
+        67: aload_2
+        68: areturn
+
+  public static java.lang.String arrayToString(org.apache.activemq.artemis.json.JsonObject, java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokeinterface #65,  2           // InterfaceMethod org/apache/activemq/artemis/json/JsonObject.get:(Ljava/lang/Object;)Ljava/lang/Object;
+         7: checkcast     #75                 // class org/apache/activemq/artemis/json/JsonValue
+        10: astore_2
+        11: aload_2
+        12: ifnull        27
+        15: aload_2
+        16: invokeinterface #410,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonValue.getValueType:()Lorg/apache/activemq/artemis/json/JsonValue$ValueType;
+        21: getstatic     #430                // Field org/apache/activemq/artemis/json/JsonValue$ValueType.ARRAY:Lorg/apache/activemq/artemis/json/JsonValue$ValueType;
+        24: if_acmpeq     31
+        27: ldc_w         #382                // String
+        30: areturn
+        31: aload_0
+        32: aload_1
+        33: invokeinterface #433,  2          // InterfaceMethod org/apache/activemq/artemis/json/JsonObject.getJsonArray:(Ljava/lang/String;)Lorg/apache/activemq/artemis/json/JsonArray;
+        38: invokeinterface #446,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonArray.stream:()Ljava/util/stream/Stream;
+        43: invokedynamic #450,  0            // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+        48: invokeinterface #454,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+        53: ldc_w         #460                // String ,
+        56: invokestatic  #462                // Method java/util/stream/Collectors.joining:(Ljava/lang/CharSequence;)Ljava/util/stream/Collector;
+        59: invokeinterface #468,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+        64: checkcast     #63                 // class java/lang/String
+        67: areturn
+
+  private static java.lang.String lambda$arrayToString$0(org.apache.activemq.artemis.json.JsonValue);
+    Code:
+         0: aload_0
+         1: checkcast     #68                 // class org/apache/activemq/artemis/json/JsonString
+         4: invokeinterface #70,  1           // InterfaceMethod org/apache/activemq/artemis/json/JsonString.getString:()Ljava/lang/String;
+         9: areturn
+
+  private static void lambda$readJsonProperties$0(java.util.Map, java.util.Map$Entry);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokeinterface #289,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+         7: checkcast     #63                 // class java/lang/String
+        10: aload_1
+        11: invokeinterface #295,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+        16: checkcast     #75                 // class org/apache/activemq/artemis/json/JsonValue
+        19: invokeinterface #472,  1          // InterfaceMethod org/apache/activemq/artemis/json/JsonValue.toString:()Ljava/lang/String;
+        24: invokeinterface #114,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        29: pop
+        30: return
+}

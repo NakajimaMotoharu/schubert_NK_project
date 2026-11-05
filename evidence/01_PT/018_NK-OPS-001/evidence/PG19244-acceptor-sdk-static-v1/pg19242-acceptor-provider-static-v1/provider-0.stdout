@@ -1,0 +1,502 @@
+Compiled from "JsonProviderImpl.java"
+public class org.apache.activemq.artemis.commons.shaded.johnzon.core.JsonProviderImpl extends org.apache.activemq.artemis.commons.shaded.json.spi.JsonProvider implements java.io.Serializable {
+  private final java.util.function.Supplier<org.apache.activemq.artemis.commons.shaded.johnzon.core.BufferStrategy$BufferProvider<char[]>> bufferProvider;
+
+  private final org.apache.activemq.artemis.commons.shaded.json.JsonReaderFactory readerFactory;
+
+  private final org.apache.activemq.artemis.commons.shaded.json.stream.JsonParserFactory parserFactory;
+
+  private final org.apache.activemq.artemis.commons.shaded.json.stream.JsonGeneratorFactory generatorFactory;
+
+  private final org.apache.activemq.artemis.commons.shaded.json.JsonWriterFactory writerFactory;
+
+  private final java.util.function.Supplier<org.apache.activemq.artemis.commons.shaded.json.JsonBuilderFactory> builderFactory;
+
+  private int maxBigDecimalScale;
+
+  private final org.apache.activemq.artemis.commons.shaded.johnzon.core.spi.JsonPointerFactory jsonPointerFactory;
+
+  public org.apache.activemq.artemis.commons.shaded.johnzon.core.JsonProviderImpl();
+    Code:
+         0: aload_0
+         1: invokespecial #43                 // Method org/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider."<init>":()V
+         4: aload_0
+         5: new           #11                 // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl$Cached
+         8: dup
+         9: invokedynamic #62,  0             // InvokeDynamic #0:get:()Ljava/util/function/Supplier;
+        14: aconst_null
+        15: invokespecial #65                 // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl$Cached."<init>":(Ljava/util/function/Supplier;Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl$1;)V
+        18: putfield      #67                 // Field bufferProvider:Ljava/util/function/Supplier;
+        21: aload_0
+        22: new           #69                 // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonReaderFactoryImpl
+        25: dup
+        26: aconst_null
+        27: aload_0
+        28: invokespecial #72                 // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonReaderFactoryImpl."<init>":(Ljava/util/Map;Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl;)V
+        31: putfield      #74                 // Field readerFactory:Lorg/apache/activemq/artemis/commons/shaded/json/JsonReaderFactory;
+        34: aload_0
+        35: new           #76                 // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonParserFactoryImpl
+        38: dup
+        39: aconst_null
+        40: aload_0
+        41: invokespecial #77                 // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonParserFactoryImpl."<init>":(Ljava/util/Map;Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl;)V
+        44: putfield      #79                 // Field parserFactory:Lorg/apache/activemq/artemis/commons/shaded/json/stream/JsonParserFactory;
+        47: aload_0
+        48: new           #81                 // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonGeneratorFactoryImpl
+        51: dup
+        52: aconst_null
+        53: invokespecial #84                 // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonGeneratorFactoryImpl."<init>":(Ljava/util/Map;)V
+        56: putfield      #86                 // Field generatorFactory:Lorg/apache/activemq/artemis/commons/shaded/json/stream/JsonGeneratorFactory;
+        59: aload_0
+        60: new           #88                 // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonWriterFactoryImpl
+        63: dup
+        64: aconst_null
+        65: invokespecial #89                 // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonWriterFactoryImpl."<init>":(Ljava/util/Map;)V
+        68: putfield      #91                 // Field writerFactory:Lorg/apache/activemq/artemis/commons/shaded/json/JsonWriterFactory;
+        71: aload_0
+        72: new           #11                 // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl$Cached
+        75: dup
+        76: aload_0
+        77: invokedynamic #100,  0            // InvokeDynamic #1:get:(Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl;)Ljava/util/function/Supplier;
+        82: aconst_null
+        83: invokespecial #65                 // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl$Cached."<init>":(Ljava/util/function/Supplier;Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl$1;)V
+        86: putfield      #102                // Field builderFactory:Ljava/util/function/Supplier;
+        89: aload_0
+        90: ldc           #104                // String johnzon.max-big-decimal-scale
+        92: sipush        1000
+        95: invokestatic  #110                // Method java/lang/Integer.getInteger:(Ljava/lang/String;I)Ljava/lang/Integer;
+        98: invokevirtual #114                // Method java/lang/Integer.intValue:()I
+       101: putfield      #116                // Field maxBigDecimalScale:I
+       104: aload_0
+       105: ldc           #118                // class org/apache/activemq/artemis/commons/shaded/johnzon/core/spi/JsonPointerFactory
+       107: invokestatic  #124                // Method java/util/ServiceLoader.load:(Ljava/lang/Class;)Ljava/util/ServiceLoader;
+       110: invokevirtual #128                // Method java/util/ServiceLoader.spliterator:()Ljava/util/Spliterator;
+       113: iconst_0
+       114: invokestatic  #134                // Method java/util/stream/StreamSupport.stream:(Ljava/util/Spliterator;Z)Ljava/util/stream/Stream;
+       117: invokedynamic #146,  0            // InvokeDynamic #2:apply:()Ljava/util/function/Function;
+       122: invokestatic  #152                // InterfaceMethod java/util/Comparator.comparing:(Ljava/util/function/Function;)Ljava/util/Comparator;
+       125: invokeinterface #158,  2          // InterfaceMethod java/util/stream/Stream.min:(Ljava/util/Comparator;)Ljava/util/Optional;
+       130: invokedynamic #165,  0            // InvokeDynamic #3:get:()Ljava/util/function/Supplier;
+       135: invokevirtual #171                // Method java/util/Optional.orElseGet:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+       138: checkcast     #118                // class org/apache/activemq/artemis/commons/shaded/johnzon/core/spi/JsonPointerFactory
+       141: putfield      #173                // Field jsonPointerFactory:Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/spi/JsonPointerFactory;
+       144: return
+
+  public org.apache.activemq.artemis.commons.shaded.json.stream.JsonParser createParser(java.io.InputStream);
+    Code:
+         0: aload_0
+         1: getfield      #79                 // Field parserFactory:Lorg/apache/activemq/artemis/commons/shaded/json/stream/JsonParserFactory;
+         4: aload_1
+         5: invokeinterface #182,  2          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/stream/JsonParserFactory.createParser:(Ljava/io/InputStream;)Lorg/apache/activemq/artemis/commons/shaded/json/stream/JsonParser;
+        10: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.stream.JsonParser createParser(java.io.Reader);
+    Code:
+         0: aload_0
+         1: getfield      #79                 // Field parserFactory:Lorg/apache/activemq/artemis/commons/shaded/json/stream/JsonParserFactory;
+         4: aload_1
+         5: invokeinterface #187,  2          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/stream/JsonParserFactory.createParser:(Ljava/io/Reader;)Lorg/apache/activemq/artemis/commons/shaded/json/stream/JsonParser;
+        10: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonReader createReader(java.io.InputStream);
+    Code:
+         0: aload_0
+         1: getfield      #74                 // Field readerFactory:Lorg/apache/activemq/artemis/commons/shaded/json/JsonReaderFactory;
+         4: aload_1
+         5: invokeinterface #194,  2          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonReaderFactory.createReader:(Ljava/io/InputStream;)Lorg/apache/activemq/artemis/commons/shaded/json/JsonReader;
+        10: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonReader createReader(java.io.Reader);
+    Code:
+         0: aload_0
+         1: getfield      #74                 // Field readerFactory:Lorg/apache/activemq/artemis/commons/shaded/json/JsonReaderFactory;
+         4: aload_1
+         5: invokeinterface #197,  2          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonReaderFactory.createReader:(Ljava/io/Reader;)Lorg/apache/activemq/artemis/commons/shaded/json/JsonReader;
+        10: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.stream.JsonParserFactory createParserFactory(java.util.Map<java.lang.String, ?>);
+    Code:
+         0: aload_1
+         1: ifnull        13
+         4: aload_1
+         5: invokeinterface #207,  1          // InterfaceMethod java/util/Map.isEmpty:()Z
+        10: ifeq          20
+        13: aload_0
+        14: getfield      #79                 // Field parserFactory:Lorg/apache/activemq/artemis/commons/shaded/json/stream/JsonParserFactory;
+        17: goto          29
+        20: new           #76                 // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonParserFactoryImpl
+        23: dup
+        24: aload_1
+        25: aload_0
+        26: invokespecial #77                 // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonParserFactoryImpl."<init>":(Ljava/util/Map;Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl;)V
+        29: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonReaderFactory createReaderFactory(java.util.Map<java.lang.String, ?>);
+    Code:
+         0: aload_1
+         1: ifnull        13
+         4: aload_1
+         5: invokeinterface #207,  1          // InterfaceMethod java/util/Map.isEmpty:()Z
+        10: ifeq          20
+        13: aload_0
+        14: getfield      #74                 // Field readerFactory:Lorg/apache/activemq/artemis/commons/shaded/json/JsonReaderFactory;
+        17: goto          29
+        20: new           #69                 // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonReaderFactoryImpl
+        23: dup
+        24: aload_1
+        25: aload_0
+        26: invokespecial #72                 // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonReaderFactoryImpl."<init>":(Ljava/util/Map;Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl;)V
+        29: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.stream.JsonGenerator createGenerator(java.io.Writer);
+    Code:
+         0: aload_0
+         1: getfield      #86                 // Field generatorFactory:Lorg/apache/activemq/artemis/commons/shaded/json/stream/JsonGeneratorFactory;
+         4: aload_1
+         5: invokeinterface #219,  2          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/stream/JsonGeneratorFactory.createGenerator:(Ljava/io/Writer;)Lorg/apache/activemq/artemis/commons/shaded/json/stream/JsonGenerator;
+        10: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.stream.JsonGenerator createGenerator(java.io.OutputStream);
+    Code:
+         0: aload_0
+         1: getfield      #86                 // Field generatorFactory:Lorg/apache/activemq/artemis/commons/shaded/json/stream/JsonGeneratorFactory;
+         4: aload_1
+         5: invokeinterface #224,  2          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/stream/JsonGeneratorFactory.createGenerator:(Ljava/io/OutputStream;)Lorg/apache/activemq/artemis/commons/shaded/json/stream/JsonGenerator;
+        10: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.stream.JsonGeneratorFactory createGeneratorFactory(java.util.Map<java.lang.String, ?>);
+    Code:
+         0: aload_1
+         1: ifnull        13
+         4: aload_1
+         5: invokeinterface #207,  1          // InterfaceMethod java/util/Map.isEmpty:()Z
+        10: ifeq          20
+        13: aload_0
+        14: getfield      #86                 // Field generatorFactory:Lorg/apache/activemq/artemis/commons/shaded/json/stream/JsonGeneratorFactory;
+        17: goto          28
+        20: new           #81                 // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonGeneratorFactoryImpl
+        23: dup
+        24: aload_1
+        25: invokespecial #84                 // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonGeneratorFactoryImpl."<init>":(Ljava/util/Map;)V
+        28: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonWriter createWriter(java.io.Writer);
+    Code:
+         0: aload_0
+         1: getfield      #91                 // Field writerFactory:Lorg/apache/activemq/artemis/commons/shaded/json/JsonWriterFactory;
+         4: aload_1
+         5: invokeinterface #234,  2          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonWriterFactory.createWriter:(Ljava/io/Writer;)Lorg/apache/activemq/artemis/commons/shaded/json/JsonWriter;
+        10: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonWriter createWriter(java.io.OutputStream);
+    Code:
+         0: aload_0
+         1: getfield      #91                 // Field writerFactory:Lorg/apache/activemq/artemis/commons/shaded/json/JsonWriterFactory;
+         4: aload_1
+         5: invokeinterface #237,  2          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonWriterFactory.createWriter:(Ljava/io/OutputStream;)Lorg/apache/activemq/artemis/commons/shaded/json/JsonWriter;
+        10: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonWriterFactory createWriterFactory(java.util.Map<java.lang.String, ?>);
+    Code:
+         0: aload_1
+         1: ifnull        13
+         4: aload_1
+         5: invokeinterface #207,  1          // InterfaceMethod java/util/Map.isEmpty:()Z
+        10: ifeq          20
+        13: aload_0
+        14: getfield      #91                 // Field writerFactory:Lorg/apache/activemq/artemis/commons/shaded/json/JsonWriterFactory;
+        17: goto          28
+        20: new           #88                 // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonWriterFactoryImpl
+        23: dup
+        24: aload_1
+        25: invokespecial #89                 // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonWriterFactoryImpl."<init>":(Ljava/util/Map;)V
+        28: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonObjectBuilder createObjectBuilder();
+    Code:
+         0: aload_0
+         1: getfield      #102                // Field builderFactory:Ljava/util/function/Supplier;
+         4: invokeinterface #246,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+         9: checkcast     #248                // class org/apache/activemq/artemis/commons/shaded/json/JsonBuilderFactory
+        12: invokeinterface #250,  1          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonBuilderFactory.createObjectBuilder:()Lorg/apache/activemq/artemis/commons/shaded/json/JsonObjectBuilder;
+        17: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonObjectBuilder createObjectBuilder(org.apache.activemq.artemis.commons.shaded.json.JsonObject);
+    Code:
+         0: aload_0
+         1: getfield      #102                // Field builderFactory:Ljava/util/function/Supplier;
+         4: invokeinterface #246,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+         9: checkcast     #248                // class org/apache/activemq/artemis/commons/shaded/json/JsonBuilderFactory
+        12: aload_1
+        13: invokeinterface #254,  2          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonBuilderFactory.createObjectBuilder:(Lorg/apache/activemq/artemis/commons/shaded/json/JsonObject;)Lorg/apache/activemq/artemis/commons/shaded/json/JsonObjectBuilder;
+        18: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonObjectBuilder createObjectBuilder(java.util.Map<java.lang.String, java.lang.Object>);
+    Code:
+         0: aload_0
+         1: getfield      #102                // Field builderFactory:Ljava/util/function/Supplier;
+         4: invokeinterface #246,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+         9: checkcast     #248                // class org/apache/activemq/artemis/commons/shaded/json/JsonBuilderFactory
+        12: aload_1
+        13: invokeinterface #260,  2          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonBuilderFactory.createObjectBuilder:(Ljava/util/Map;)Lorg/apache/activemq/artemis/commons/shaded/json/JsonObjectBuilder;
+        18: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonArrayBuilder createArrayBuilder();
+    Code:
+         0: aload_0
+         1: getfield      #102                // Field builderFactory:Ljava/util/function/Supplier;
+         4: invokeinterface #246,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+         9: checkcast     #248                // class org/apache/activemq/artemis/commons/shaded/json/JsonBuilderFactory
+        12: invokeinterface #265,  1          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonBuilderFactory.createArrayBuilder:()Lorg/apache/activemq/artemis/commons/shaded/json/JsonArrayBuilder;
+        17: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonArrayBuilder createArrayBuilder(org.apache.activemq.artemis.commons.shaded.json.JsonArray);
+    Code:
+         0: aload_0
+         1: getfield      #102                // Field builderFactory:Ljava/util/function/Supplier;
+         4: invokeinterface #246,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+         9: checkcast     #248                // class org/apache/activemq/artemis/commons/shaded/json/JsonBuilderFactory
+        12: aload_1
+        13: invokeinterface #269,  2          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonBuilderFactory.createArrayBuilder:(Lorg/apache/activemq/artemis/commons/shaded/json/JsonArray;)Lorg/apache/activemq/artemis/commons/shaded/json/JsonArrayBuilder;
+        18: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonArrayBuilder createArrayBuilder(java.util.Collection<?>);
+    Code:
+         0: aload_0
+         1: getfield      #102                // Field builderFactory:Ljava/util/function/Supplier;
+         4: invokeinterface #246,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+         9: checkcast     #248                // class org/apache/activemq/artemis/commons/shaded/json/JsonBuilderFactory
+        12: aload_1
+        13: invokeinterface #274,  2          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonBuilderFactory.createArrayBuilder:(Ljava/util/Collection;)Lorg/apache/activemq/artemis/commons/shaded/json/JsonArrayBuilder;
+        18: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonString createValue(java.lang.String);
+    Code:
+         0: new           #281                // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonStringImpl
+         3: dup
+         4: aload_1
+         5: invokespecial #284                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonStringImpl."<init>":(Ljava/lang/String;)V
+         8: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonNumber createValue(int);
+    Code:
+         0: new           #288                // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonLongImpl
+         3: dup
+         4: iload_1
+         5: i2l
+         6: invokespecial #291                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonLongImpl."<init>":(J)V
+         9: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonNumber createValue(long);
+    Code:
+         0: new           #288                // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonLongImpl
+         3: dup
+         4: lload_1
+         5: invokespecial #291                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonLongImpl."<init>":(J)V
+         8: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonNumber createValue(double);
+    Code:
+         0: new           #296                // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonDoubleImpl
+         3: dup
+         4: dload_1
+         5: invokespecial #299                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonDoubleImpl."<init>":(D)V
+         8: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonNumber createValue(java.math.BigDecimal);
+    Code:
+         0: new           #303                // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonNumberImpl
+         3: dup
+         4: aload_1
+         5: aload_0
+         6: invokedynamic #315,  0            // InvokeDynamic #4:accept:(Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl;)Ljava/util/function/Consumer;
+        11: invokespecial #318                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonNumberImpl."<init>":(Ljava/math/BigDecimal;Ljava/util/function/Consumer;)V
+        14: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonNumber createValue(java.math.BigInteger);
+    Code:
+         0: new           #303                // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonNumberImpl
+         3: dup
+         4: new           #322                // class java/math/BigDecimal
+         7: dup
+         8: aload_1
+         9: invokevirtual #328                // Method java/math/BigInteger.toString:()Ljava/lang/String;
+        12: invokespecial #329                // Method java/math/BigDecimal."<init>":(Ljava/lang/String;)V
+        15: aload_0
+        16: invokedynamic #315,  0            // InvokeDynamic #4:accept:(Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl;)Ljava/util/function/Consumer;
+        21: invokespecial #318                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonNumberImpl."<init>":(Ljava/math/BigDecimal;Ljava/util/function/Consumer;)V
+        24: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonBuilderFactory createBuilderFactory(java.util.Map<java.lang.String, ?>);
+    Code:
+         0: aload_0
+         1: getfield      #102                // Field builderFactory:Ljava/util/function/Supplier;
+         4: invokeinterface #246,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+         9: checkcast     #248                // class org/apache/activemq/artemis/commons/shaded/json/JsonBuilderFactory
+        12: astore_2
+        13: aload_1
+        14: ifnull        26
+        17: aload_1
+        18: invokeinterface #207,  1          // InterfaceMethod java/util/Map.isEmpty:()Z
+        23: ifeq          30
+        26: aload_2
+        27: goto          55
+        30: new           #335                // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonBuilderFactoryImpl
+        33: dup
+        34: aload_1
+        35: aload_0
+        36: getfield      #67                 // Field bufferProvider:Ljava/util/function/Supplier;
+        39: invokeinterface #246,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+        44: checkcast     #14                 // class org/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategy$BufferProvider
+        47: aload_1
+        48: invokestatic  #341                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/RejectDuplicateKeysMode.from:(Ljava/util/Map;)Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/RejectDuplicateKeysMode;
+        51: aload_0
+        52: invokespecial #344                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonBuilderFactoryImpl."<init>":(Ljava/util/Map;Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategy$BufferProvider;Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/RejectDuplicateKeysMode;Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl;)V
+        55: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonPatchBuilder createPatchBuilder();
+    Code:
+         0: new           #349                // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonPatchBuilderImpl
+         3: dup
+         4: aload_0
+         5: invokespecial #352                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonPatchBuilderImpl."<init>":(Lorg/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider;)V
+         8: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonPatchBuilder createPatchBuilder(org.apache.activemq.artemis.commons.shaded.json.JsonArray);
+    Code:
+         0: new           #349                // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonPatchBuilderImpl
+         3: dup
+         4: aload_0
+         5: aload_1
+         6: invokespecial #356                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonPatchBuilderImpl."<init>":(Lorg/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider;Lorg/apache/activemq/artemis/commons/shaded/json/JsonArray;)V
+         9: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonPointer createPointer(java.lang.String);
+    Code:
+         0: aload_0
+         1: getfield      #173                // Field jsonPointerFactory:Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/spi/JsonPointerFactory;
+         4: aload_0
+         5: aload_1
+         6: invokeinterface #362,  3          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/johnzon/core/spi/JsonPointerFactory.createPointer:(Lorg/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider;Ljava/lang/String;)Lorg/apache/activemq/artemis/commons/shaded/json/JsonPointer;
+        11: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonPatch createPatch(org.apache.activemq.artemis.commons.shaded.json.JsonArray);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokevirtual #367                // Method createPatchBuilder:(Lorg/apache/activemq/artemis/commons/shaded/json/JsonArray;)Lorg/apache/activemq/artemis/commons/shaded/json/JsonPatchBuilder;
+         5: invokeinterface #373,  1          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/json/JsonPatchBuilder.build:()Lorg/apache/activemq/artemis/commons/shaded/json/JsonPatch;
+        10: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonPatch createDiff(org.apache.activemq.artemis.commons.shaded.json.JsonStructure, org.apache.activemq.artemis.commons.shaded.json.JsonStructure);
+    Code:
+         0: new           #379                // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonPatchDiff
+         3: dup
+         4: aload_0
+         5: aload_1
+         6: aload_2
+         7: invokespecial #382                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonPatchDiff."<init>":(Lorg/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider;Lorg/apache/activemq/artemis/commons/shaded/json/JsonStructure;Lorg/apache/activemq/artemis/commons/shaded/json/JsonStructure;)V
+        10: invokevirtual #385                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonPatchDiff.calculateDiff:()Lorg/apache/activemq/artemis/commons/shaded/json/JsonPatch;
+        13: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonMergePatch createMergePatch(org.apache.activemq.artemis.commons.shaded.json.JsonValue);
+    Code:
+         0: new           #391                // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonMergePatchImpl
+         3: dup
+         4: aload_1
+         5: aload_0
+         6: getfield      #67                 // Field bufferProvider:Ljava/util/function/Supplier;
+         9: invokeinterface #246,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+        14: checkcast     #14                 // class org/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategy$BufferProvider
+        17: aload_0
+        18: invokespecial #394                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonMergePatchImpl."<init>":(Lorg/apache/activemq/artemis/commons/shaded/json/JsonValue;Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategy$BufferProvider;Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl;)V
+        21: areturn
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonMergePatch createMergeDiff(org.apache.activemq.artemis.commons.shaded.json.JsonValue, org.apache.activemq.artemis.commons.shaded.json.JsonValue);
+    Code:
+         0: new           #399                // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonMergePatchDiff
+         3: dup
+         4: aload_1
+         5: aload_2
+         6: aload_0
+         7: getfield      #67                 // Field bufferProvider:Ljava/util/function/Supplier;
+        10: invokeinterface #246,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+        15: checkcast     #14                 // class org/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategy$BufferProvider
+        18: aload_0
+        19: invokespecial #402                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonMergePatchDiff."<init>":(Lorg/apache/activemq/artemis/commons/shaded/json/JsonValue;Lorg/apache/activemq/artemis/commons/shaded/json/JsonValue;Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategy$BufferProvider;Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl;)V
+        22: invokevirtual #405                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonMergePatchDiff.calculateDiff:()Lorg/apache/activemq/artemis/commons/shaded/json/JsonMergePatch;
+        25: areturn
+
+  public int getMaxBigDecimalScale();
+    Code:
+         0: aload_0
+         1: getfield      #116                // Field maxBigDecimalScale:I
+         4: ireturn
+
+  public void setMaxBigDecimalScale(int);
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #116                // Field maxBigDecimalScale:I
+         5: return
+
+  public void checkBigDecimalScale(java.math.BigDecimal);
+    Code:
+         0: aload_0
+         1: getfield      #116                // Field maxBigDecimalScale:I
+         4: istore_2
+         5: aload_1
+         6: invokevirtual #411                // Method java/math/BigDecimal.scale:()I
+         9: invokestatic  #417                // Method java/lang/Math.abs:(I)I
+        12: istore_3
+        13: iload_3
+        14: iload_2
+        15: if_icmple     53
+        18: new           #419                // class java/lang/ArithmeticException
+        21: dup
+        22: ldc_w         #421                // String BigDecimal scale (%d) limit exceeds maximum allowed (%d)
+        25: iconst_2
+        26: anewarray     #423                // class java/lang/Object
+        29: dup
+        30: iconst_0
+        31: aload_1
+        32: invokevirtual #411                // Method java/math/BigDecimal.scale:()I
+        35: invokestatic  #427                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        38: aastore
+        39: dup
+        40: iconst_1
+        41: iload_2
+        42: invokestatic  #427                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        45: aastore
+        46: invokestatic  #433                // Method java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+        49: invokespecial #434                // Method java/lang/ArithmeticException."<init>":(Ljava/lang/String;)V
+        52: athrow
+        53: return
+
+  private org.apache.activemq.artemis.commons.shaded.json.JsonBuilderFactory lambda$new$1();
+    Code:
+         0: new           #335                // class org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonBuilderFactoryImpl
+         3: dup
+         4: aconst_null
+         5: aload_0
+         6: getfield      #67                 // Field bufferProvider:Ljava/util/function/Supplier;
+         9: invokeinterface #246,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+        14: checkcast     #14                 // class org/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategy$BufferProvider
+        17: getstatic     #440                // Field org/apache/activemq/artemis/commons/shaded/johnzon/core/RejectDuplicateKeysMode.DEFAULT:Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/RejectDuplicateKeysMode;
+        20: aload_0
+        21: invokespecial #344                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonBuilderFactoryImpl."<init>":(Ljava/util/Map;Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategy$BufferProvider;Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/RejectDuplicateKeysMode;Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl;)V
+        24: areturn
+
+  private static org.apache.activemq.artemis.commons.shaded.johnzon.core.BufferStrategy$BufferProvider lambda$new$0();
+    Code:
+         0: ldc_w         #442                // String org.apache.activemq.artemis.commons.shaded.johnzon.buffer-strategy
+         3: ldc_w         #444                // String QUEUE
+         6: invokestatic  #450                // Method java/lang/System.getProperty:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+         9: invokestatic  #455                // Method org/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategyFactory.valueOf:(Ljava/lang/String;)Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategy;
+        12: ldc_w         #457                // String org.apache.activemq.artemis.commons.shaded.johnzon.default-char-provider.length
+        15: sipush        1024
+        18: invokestatic  #110                // Method java/lang/Integer.getInteger:(Ljava/lang/String;I)Ljava/lang/Integer;
+        21: invokevirtual #114                // Method java/lang/Integer.intValue:()I
+        24: invokeinterface #461,  2          // InterfaceMethod org/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategy.newCharProvider:(I)Lorg/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategy$BufferProvider;
+        29: areturn
+}

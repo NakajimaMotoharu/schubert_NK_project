@@ -1,0 +1,207 @@
+Compiled from "JsonProvider.java"
+public abstract class org.apache.activemq.artemis.commons.shaded.json.spi.JsonProvider {
+  private static final java.lang.String DEFAULT_PROVIDER;
+
+  protected org.apache.activemq.artemis.commons.shaded.json.spi.JsonProvider();
+    Code:
+         0: aload_0
+         1: invokespecial #13                 // Method java/lang/Object."<init>":()V
+         4: return
+
+  public static org.apache.activemq.artemis.commons.shaded.json.spi.JsonProvider provider();
+    Code:
+         0: ldc           #2                  // class org/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider
+         2: invokestatic  #27                 // Method java/util/ServiceLoader.load:(Ljava/lang/Class;)Ljava/util/ServiceLoader;
+         5: astore_0
+         6: aload_0
+         7: invokevirtual #31                 // Method java/util/ServiceLoader.iterator:()Ljava/util/Iterator;
+        10: astore_1
+        11: aload_1
+        12: invokeinterface #37,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        17: ifeq          30
+        20: aload_1
+        21: invokeinterface #41,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        26: checkcast     #2                  // class org/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider
+        29: areturn
+        30: ldc           #9                  // String org.glassfish.json.JsonProviderImpl
+        32: invokestatic  #47                 // Method java/lang/Class.forName:(Ljava/lang/String;)Ljava/lang/Class;
+        35: astore_2
+        36: aload_2
+        37: invokevirtual #50                 // Method java/lang/Class.newInstance:()Ljava/lang/Object;
+        40: checkcast     #2                  // class org/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider
+        43: areturn
+        44: astore_2
+        45: new           #52                 // class org/apache/activemq/artemis/commons/shaded/json/JsonException
+        48: dup
+        49: ldc           #54                 // String Provider org.glassfish.json.JsonProviderImpl not found
+        51: aload_2
+        52: invokespecial #57                 // Method org/apache/activemq/artemis/commons/shaded/json/JsonException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+        55: athrow
+        56: astore_2
+        57: new           #52                 // class org/apache/activemq/artemis/commons/shaded/json/JsonException
+        60: dup
+        61: new           #59                 // class java/lang/StringBuilder
+        64: dup
+        65: invokespecial #60                 // Method java/lang/StringBuilder."<init>":()V
+        68: ldc           #62                 // String Provider org.glassfish.json.JsonProviderImpl could not be instantiated:
+        70: invokevirtual #66                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        73: aload_2
+        74: invokevirtual #69                 // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+        77: invokevirtual #73                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        80: aload_2
+        81: invokespecial #57                 // Method org/apache/activemq/artemis/commons/shaded/json/JsonException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+        84: athrow
+      Exception table:
+         from    to  target type
+            30    43    44   Class java/lang/ClassNotFoundException
+            30    43    56   Class java/lang/Exception
+
+  public abstract org.apache.activemq.artemis.commons.shaded.json.stream.JsonParser createParser(java.io.Reader);
+
+  public abstract org.apache.activemq.artemis.commons.shaded.json.stream.JsonParser createParser(java.io.InputStream);
+
+  public abstract org.apache.activemq.artemis.commons.shaded.json.stream.JsonParserFactory createParserFactory(java.util.Map<java.lang.String, ?>);
+
+  public abstract org.apache.activemq.artemis.commons.shaded.json.stream.JsonGenerator createGenerator(java.io.Writer);
+
+  public abstract org.apache.activemq.artemis.commons.shaded.json.stream.JsonGenerator createGenerator(java.io.OutputStream);
+
+  public abstract org.apache.activemq.artemis.commons.shaded.json.stream.JsonGeneratorFactory createGeneratorFactory(java.util.Map<java.lang.String, ?>);
+
+  public abstract org.apache.activemq.artemis.commons.shaded.json.JsonReader createReader(java.io.Reader);
+
+  public abstract org.apache.activemq.artemis.commons.shaded.json.JsonReader createReader(java.io.InputStream);
+
+  public abstract org.apache.activemq.artemis.commons.shaded.json.JsonWriter createWriter(java.io.Writer);
+
+  public abstract org.apache.activemq.artemis.commons.shaded.json.JsonWriter createWriter(java.io.OutputStream);
+
+  public abstract org.apache.activemq.artemis.commons.shaded.json.JsonWriterFactory createWriterFactory(java.util.Map<java.lang.String, ?>);
+
+  public abstract org.apache.activemq.artemis.commons.shaded.json.JsonReaderFactory createReaderFactory(java.util.Map<java.lang.String, ?>);
+
+  public abstract org.apache.activemq.artemis.commons.shaded.json.JsonObjectBuilder createObjectBuilder();
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonObjectBuilder createObjectBuilder(org.apache.activemq.artemis.commons.shaded.json.JsonObject);
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonObjectBuilder createObjectBuilder(java.util.Map<java.lang.String, java.lang.Object>);
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+
+  public abstract org.apache.activemq.artemis.commons.shaded.json.JsonArrayBuilder createArrayBuilder();
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonArrayBuilder createArrayBuilder(org.apache.activemq.artemis.commons.shaded.json.JsonArray);
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonPointer createPointer(java.lang.String);
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonPatchBuilder createPatchBuilder();
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonPatchBuilder createPatchBuilder(org.apache.activemq.artemis.commons.shaded.json.JsonArray);
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonPatch createPatch(org.apache.activemq.artemis.commons.shaded.json.JsonArray);
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonPatch createDiff(org.apache.activemq.artemis.commons.shaded.json.JsonStructure, org.apache.activemq.artemis.commons.shaded.json.JsonStructure);
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonMergePatch createMergePatch(org.apache.activemq.artemis.commons.shaded.json.JsonValue);
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonMergePatch createMergeDiff(org.apache.activemq.artemis.commons.shaded.json.JsonValue, org.apache.activemq.artemis.commons.shaded.json.JsonValue);
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonArrayBuilder createArrayBuilder(java.util.Collection<?>);
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+
+  public abstract org.apache.activemq.artemis.commons.shaded.json.JsonBuilderFactory createBuilderFactory(java.util.Map<java.lang.String, ?>);
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonString createValue(java.lang.String);
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonNumber createValue(int);
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonNumber createValue(long);
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonNumber createValue(double);
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonNumber createValue(java.math.BigDecimal);
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+
+  public org.apache.activemq.artemis.commons.shaded.json.JsonNumber createValue(java.math.BigInteger);
+    Code:
+         0: new           #114                // class java/lang/UnsupportedOperationException
+         3: dup
+         4: invokespecial #115                // Method java/lang/UnsupportedOperationException."<init>":()V
+         7: athrow
+}

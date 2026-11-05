@@ -1,0 +1,122 @@
+{
+  "atJST": "2026-11-05T20:48:24.393557+09:00",
+  "decision": "SOURCE_READY_TO_FREEZE_NOT_EXECUTED",
+  "mainUnchanged": true,
+  "expectedTests": 12,
+  "oldPureTests": 2,
+  "newTests": 10,
+  "prepareManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19248-mq-acceptor-port-compile-v1/manifest.safe.json",
+    "sha256": "2724720150623b88cc8b5bf8bee60f5a8194099c8fef503121b0031dbfa27689"
+  },
+  "staticManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19250-mq-acceptor-port-static-v1/manifest.safe.json",
+    "sha256": "e93a5470909d1e8467efde2cc58e22a9ff4d579f61e32183e649f95afcae5e4e"
+  },
+  "PMDRaw": 11,
+  "applicableFindings": 0,
+  "checkstyleFindings": 0,
+  "parserErrors": 0,
+  "individualStaticDecisions": [
+    {
+      "id": 1,
+      "file": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorObjectBoundaryTest.java",
+      "line": 36,
+      "rule": "UseProperClassLoader",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_REASON",
+      "reason": "J2EE contextloader rule not applicable to standalone JUnit marker Proxy; exact definingClientSession loader avoids arbitrarycontextloader/provider."
+    },
+    {
+      "id": 2,
+      "file": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorObjectBoundaryTest.java",
+      "line": 64,
+      "rule": "CloseResource",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_REASON",
+      "reason": "ClientSession is JDKProxy marker with no resource/provider; all methodcalls includingclose throwAssertionError. Closing borrowedmarker would violate nooperations fixture."
+    },
+    {
+      "id": 3,
+      "file": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorObjectBoundaryTest.java",
+      "line": 98,
+      "rule": "CloseResource",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_REASON",
+      "reason": "ClientSession is JDKProxy marker with no resource/provider; all methodcalls includingclose throwAssertionError. Closing borrowedmarker would violate nooperations fixture."
+    },
+    {
+      "id": 4,
+      "file": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorPolicyPortTest.java",
+      "line": 40,
+      "rule": "AvoidDuplicateLiterals",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_REASON",
+      "reason": "Standalone independent golden/map field or callback order labels and JSON negative literals are explicit repeated oracle data, not repeated businessimplementation; no productionconstant-derivedexpected. Specificliteral: The String literal \"host\" appears 4 times in this file; the first occurrence is on line 40"
+    },
+    {
+      "id": 5,
+      "file": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorPolicyPortTest.java",
+      "line": 46,
+      "rule": "AvoidDuplicateLiterals",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_REASON",
+      "reason": "Standalone independent golden/map field or callback order labels and JSON negative literals are explicit repeated oracle data, not repeated businessimplementation; no productionconstant-derivedexpected. Specificliteral: The String literal \"started\" appears 11 times in this file; the first occurrence is on line 46"
+    },
+    {
+      "id": 6,
+      "file": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorPolicyPortTest.java",
+      "line": 52,
+      "rule": "CloseResource",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_REASON",
+      "reason": "ClientSession is JDKProxy marker with no resource/provider; all methodcalls includingclose throwAssertionError. Closing borrowedmarker would violate nooperations fixture."
+    },
+    {
+      "id": 7,
+      "file": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorPolicyPortTest.java",
+      "line": 57,
+      "rule": "AvoidDuplicateLiterals",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_REASON",
+      "reason": "Standalone independent golden/map field or callback order labels and JSON negative literals are explicit repeated oracle data, not repeated businessimplementation; no productionconstant-derivedexpected. Specificliteral: The String literal \"acceptors\" appears 11 times in this file; the first occurrence is on line 57"
+    },
+    {
+      "id": 8,
+      "file": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorPolicyPortTest.java",
+      "line": 125,
+      "rule": "AvoidDuplicateLiterals",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_REASON",
+      "reason": "Standalone independent golden/map field or callback order labels and JSON negative literals are explicit repeated oracle data, not repeated businessimplementation; no productionconstant-derivedexpected. Specificliteral: The String literal \"\\\"name\\\":\\\"core\\\"\" appears 4 times in this file; the first occurrence is on line 125"
+    },
+    {
+      "id": 9,
+      "file": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorPolicyPortTest.java",
+      "line": 137,
+      "rule": "AvoidDuplicateLiterals",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_REASON",
+      "reason": "Standalone independent golden/map field or callback order labels and JSON negative literals are explicit repeated oracle data, not repeated businessimplementation; no productionconstant-derivedexpected. Specificliteral: The String literal \"null\" appears 4 times in this file; the first occurrence is on line 137"
+    },
+    {
+      "id": 10,
+      "file": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorPolicyPortTest.java",
+      "line": 150,
+      "rule": "AvoidDuplicateLiterals",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_REASON",
+      "reason": "Standalone independent golden/map field or callback order labels and JSON negative literals are explicit repeated oracle data, not repeated businessimplementation; no productionconstant-derivedexpected. Specificliteral: The String literal \"true\" appears 4 times in this file; the first occurrence is on line 150"
+    },
+    {
+      "id": 11,
+      "file": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorPolicyPortTest.java",
+      "line": 278,
+      "rule": "UseProperClassLoader",
+      "decision": "NOT_APPLICABLE_WITH_INDIVIDUAL_REASON",
+      "reason": "J2EE contextloader rule not applicable to standalone JUnit marker Proxy; exact definingClientSession loader avoids arbitrarycontextloader/provider."
+    }
+  ],
+  "sdkReview": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/008_acceptor_json_sdk_static_review.json",
+    "sha256": "63ba7878727140f99b85299fec3fee30272890bb1e3f5b65a61442e08e95b27a"
+  },
+  "producer": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/009_acceptor_policy_qualifier.py",
+    "sha256": "5655ac28fe9d22f35ab2b003bcf4024e310007380ca8f1c467c01283b8b77bfd"
+  },
+  "unprovedExceptionCondition": "SDK internal IllegalState catch member has static review only, not executed/PT PASS. Must retain as residual even if four counters100. Callback IllegalState identity test is separate. No unreachable/exclusion declaration.",
+  "preflightRetriedToolInvocation": "canonical SS lookup initially git quotedpathname with128, corrected read withls-tree -z; no product execution/retry",
+  "formalUpdated": false,
+  "newAccepted": 0
+}
