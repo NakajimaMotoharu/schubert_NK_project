@@ -65,7 +65,11 @@ def run(config, slot, public):
         f = raw[i]
         assert i not in old and f['rule'] == decision['rule']
         assert paths[f['path']] == f['sourceSha256'] == decision['sourceSha256']
-        assert f['attributes']['variable'] == decision['variable']
+        if 'attributeValues' in decision:
+            assert decision['attributeValues']
+            assert all(f['attributes'][k] == v for k, v in decision['attributeValues'].items())
+        else:
+            assert f['attributes']['variable'] == decision['variable']
         assert int(f['attributes']['beginline']) == decision['line']
         assert decision['reason'] and decision['requiredDynamicPostconditions']
         rows.append(dict(decision, id=f'{i:06d}:' + hashlib.sha256(canon(f)).hexdigest(), rawFinding=f, classification='CONTEXTUAL_NONAPPLICABLE', actualViolation=False, runtimeProven=False, ptExempt=False, newWbsAcceptance=False))

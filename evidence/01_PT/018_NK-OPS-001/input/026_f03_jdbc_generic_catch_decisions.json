@@ -1,0 +1,1256 @@
+{
+  "mainSource": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+  "slot": "pg19870-jdbc-generic-catch-context-v1",
+  "publicName": "PG19870-jdbc-generic-catch-context-v1",
+  "priorManifests": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19752-f03-finite-source-context-corrected-v1/manifest.json",
+      "sha256": "d4d8274a68727f8bb278ff89140b8778fa5293011263f4e75c8d195e8fe4cf14"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19760-f03-identity-context-v1/manifest.json",
+      "sha256": "40e501ddd751e8e7849721e7a063d69062d49ad3ba0e1e3429c345b5245723bf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19770-f03-map-monitor-context-v1/manifest.json",
+      "sha256": "6a272d4a9ecad5c26ee13e3af9765f766f9fcd2936ec1e0b39bf030a8778bae4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19830-resource-type-context-v1/manifest.json",
+      "sha256": "6c3055b08e58ec40e023bbf70dd56d667dc1ea50357e1c3d1703aee00534e8a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19840-resource-generic-catch-context-v1/manifest.json",
+      "sha256": "dcfaa6104f6bdd8f57093a235a56f04000d83702b03db55c78e45528fcbebf21"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19850-visibility-map-context-v1/manifest.json",
+      "sha256": "291d806a9539c8c6e331b5d621aaf872356cc8700dcf1b461f219269c15b3c11"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19860-jdbc-close-context-v1/manifest.json",
+      "sha256": "a57ff397b8465ebd306a521add6b9c609facae43c1f9f6abddf00bee64a90103"
+    }
+  ],
+  "priorCount": 360,
+  "newCount": 56,
+  "decisions": [
+    {
+      "rawOrdinal": 872,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 150,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "ResultSet",
+      "caughtType": "RuntimeException",
+      "reason": "BackupStepRepository.java.inspect owns an original ResultSet; this RuntimeException body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 873,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 150,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "ResultSet",
+      "caughtType": "Error",
+      "reason": "BackupStepRepository.java.inspect owns an original ResultSet; this Error body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 875,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 157,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "ResultSet",
+      "caughtType": "RuntimeException",
+      "reason": "BackupStepRepository.java.inspect directly closes the owned original ResultSet in finally. Catching RuntimeException here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 876,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 157,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "ResultSet",
+      "caughtType": "Error",
+      "reason": "BackupStepRepository.java.inspect directly closes the owned original ResultSet in finally. Catching Error here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 877,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 162,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "PreparedStatement",
+      "caughtType": "RuntimeException",
+      "reason": "BackupStepRepository.java.inspect owns an original PreparedStatement; this RuntimeException body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 878,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 162,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "PreparedStatement",
+      "caughtType": "Error",
+      "reason": "BackupStepRepository.java.inspect owns an original PreparedStatement; this Error body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 880,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 169,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "PreparedStatement",
+      "caughtType": "RuntimeException",
+      "reason": "BackupStepRepository.java.inspect directly closes the owned original PreparedStatement in finally. Catching RuntimeException here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 881,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 169,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "PreparedStatement",
+      "caughtType": "Error",
+      "reason": "BackupStepRepository.java.inspect directly closes the owned original PreparedStatement in finally. Catching Error here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 969,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 72,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "ResultSet",
+      "caughtType": "RuntimeException",
+      "reason": "CleanupStepRepository.java.execute owns an original ResultSet; this RuntimeException body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 970,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 72,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "ResultSet",
+      "caughtType": "Error",
+      "reason": "CleanupStepRepository.java.execute owns an original ResultSet; this Error body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 972,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 79,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "ResultSet",
+      "caughtType": "RuntimeException",
+      "reason": "CleanupStepRepository.java.execute directly closes the owned original ResultSet in finally. Catching RuntimeException here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 973,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 79,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "ResultSet",
+      "caughtType": "Error",
+      "reason": "CleanupStepRepository.java.execute directly closes the owned original ResultSet in finally. Catching Error here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 974,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 84,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "PreparedStatement",
+      "caughtType": "RuntimeException",
+      "reason": "CleanupStepRepository.java.execute owns an original PreparedStatement; this RuntimeException body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 975,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 84,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "PreparedStatement",
+      "caughtType": "Error",
+      "reason": "CleanupStepRepository.java.execute owns an original PreparedStatement; this Error body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 977,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 91,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "PreparedStatement",
+      "caughtType": "RuntimeException",
+      "reason": "CleanupStepRepository.java.execute directly closes the owned original PreparedStatement in finally. Catching RuntimeException here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 978,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "attributeValues": {
+        "method": "execute"
+      },
+      "line": 91,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "PreparedStatement",
+      "caughtType": "Error",
+      "reason": "CleanupStepRepository.java.execute directly closes the owned original PreparedStatement in finally. Catching Error here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1031,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 292,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "ResultSet",
+      "caughtType": "RuntimeException",
+      "reason": "ExpiryAuditRepository.java.read owns an original ResultSet; this RuntimeException body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1032,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 292,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "ResultSet",
+      "caughtType": "Error",
+      "reason": "ExpiryAuditRepository.java.read owns an original ResultSet; this Error body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1034,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 299,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "ResultSet",
+      "caughtType": "RuntimeException",
+      "reason": "ExpiryAuditRepository.java.read directly closes the owned original ResultSet in finally. Catching RuntimeException here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1035,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 299,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "ResultSet",
+      "caughtType": "Error",
+      "reason": "ExpiryAuditRepository.java.read directly closes the owned original ResultSet in finally. Catching Error here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1036,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 303,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "PreparedStatement",
+      "caughtType": "RuntimeException",
+      "reason": "ExpiryAuditRepository.java.read owns an original PreparedStatement; this RuntimeException body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1037,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 303,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "PreparedStatement",
+      "caughtType": "Error",
+      "reason": "ExpiryAuditRepository.java.read owns an original PreparedStatement; this Error body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1039,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 310,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "PreparedStatement",
+      "caughtType": "RuntimeException",
+      "reason": "ExpiryAuditRepository.java.read directly closes the owned original PreparedStatement in finally. Catching RuntimeException here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1040,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 310,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "PreparedStatement",
+      "caughtType": "Error",
+      "reason": "ExpiryAuditRepository.java.read directly closes the owned original PreparedStatement in finally. Catching Error here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1046,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 64,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "ResultSet",
+      "caughtType": "RuntimeException",
+      "reason": "InspectionSummaryRepository.java.read owns an original ResultSet; this RuntimeException body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1047,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 64,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "ResultSet",
+      "caughtType": "Error",
+      "reason": "InspectionSummaryRepository.java.read owns an original ResultSet; this Error body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1049,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 71,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "ResultSet",
+      "caughtType": "RuntimeException",
+      "reason": "InspectionSummaryRepository.java.read directly closes the owned original ResultSet in finally. Catching RuntimeException here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1050,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 71,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "ResultSet",
+      "caughtType": "Error",
+      "reason": "InspectionSummaryRepository.java.read directly closes the owned original ResultSet in finally. Catching Error here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1051,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 75,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "PreparedStatement",
+      "caughtType": "RuntimeException",
+      "reason": "InspectionSummaryRepository.java.read owns an original PreparedStatement; this RuntimeException body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1052,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 75,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "PreparedStatement",
+      "caughtType": "Error",
+      "reason": "InspectionSummaryRepository.java.read owns an original PreparedStatement; this Error body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1054,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 82,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "PreparedStatement",
+      "caughtType": "RuntimeException",
+      "reason": "InspectionSummaryRepository.java.read directly closes the owned original PreparedStatement in finally. Catching RuntimeException here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1055,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 82,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "PreparedStatement",
+      "caughtType": "Error",
+      "reason": "InspectionSummaryRepository.java.read directly closes the owned original PreparedStatement in finally. Catching Error here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1091,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 58,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "ResultSet",
+      "caughtType": "RuntimeException",
+      "reason": "RunReferenceRepository.java.read owns an original ResultSet; this RuntimeException body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1092,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 58,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "ResultSet",
+      "caughtType": "Error",
+      "reason": "RunReferenceRepository.java.read owns an original ResultSet; this Error body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1094,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 65,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "ResultSet",
+      "caughtType": "RuntimeException",
+      "reason": "RunReferenceRepository.java.read directly closes the owned original ResultSet in finally. Catching RuntimeException here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1095,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 65,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "ResultSet",
+      "caughtType": "Error",
+      "reason": "RunReferenceRepository.java.read directly closes the owned original ResultSet in finally. Catching Error here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1096,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 69,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "PreparedStatement",
+      "caughtType": "RuntimeException",
+      "reason": "RunReferenceRepository.java.read owns an original PreparedStatement; this RuntimeException body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1097,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 69,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "PreparedStatement",
+      "caughtType": "Error",
+      "reason": "RunReferenceRepository.java.read owns an original PreparedStatement; this Error body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1099,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 76,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "PreparedStatement",
+      "caughtType": "RuntimeException",
+      "reason": "RunReferenceRepository.java.read directly closes the owned original PreparedStatement in finally. Catching RuntimeException here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1100,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "attributeValues": {
+        "method": "read"
+      },
+      "line": 76,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "PreparedStatement",
+      "caughtType": "Error",
+      "reason": "RunReferenceRepository.java.read directly closes the owned original PreparedStatement in finally. Catching Error here lets JdbcResourceFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1108,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 112,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "ResultSet",
+      "caughtType": "RuntimeException",
+      "reason": "SchemaHistoryAdmission.java.inspect owns an original ResultSet; this RuntimeException body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1109,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 112,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "ResultSet",
+      "caughtType": "Error",
+      "reason": "SchemaHistoryAdmission.java.inspect owns an original ResultSet; this Error body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1111,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 119,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "ResultSet",
+      "caughtType": "RuntimeException",
+      "reason": "SchemaHistoryAdmission.java.inspect directly closes the owned original ResultSet in finally. Catching RuntimeException here lets JdbcAdmissionFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1112,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 119,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "ResultSet",
+      "caughtType": "Error",
+      "reason": "SchemaHistoryAdmission.java.inspect directly closes the owned original ResultSet in finally. Catching Error here lets JdbcAdmissionFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1113,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 123,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "PreparedStatement",
+      "caughtType": "RuntimeException",
+      "reason": "SchemaHistoryAdmission.java.inspect owns an original PreparedStatement; this RuntimeException body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1114,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 123,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "PreparedStatement",
+      "caughtType": "Error",
+      "reason": "SchemaHistoryAdmission.java.inspect owns an original PreparedStatement; this Error body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1116,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 130,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "PreparedStatement",
+      "caughtType": "RuntimeException",
+      "reason": "SchemaHistoryAdmission.java.inspect directly closes the owned original PreparedStatement in finally. Catching RuntimeException here lets JdbcAdmissionFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1117,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "attributeValues": {
+        "method": "inspect"
+      },
+      "line": 130,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "PreparedStatement",
+      "caughtType": "Error",
+      "reason": "SchemaHistoryAdmission.java.inspect directly closes the owned original PreparedStatement in finally. Catching Error here lets JdbcAdmissionFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1119,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "attributeValues": {
+        "method": "verify"
+      },
+      "line": 59,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "ResultSet",
+      "caughtType": "RuntimeException",
+      "reason": "ServiceDatabaseAdmission.java.verify owns an original ResultSet; this RuntimeException body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1120,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "attributeValues": {
+        "method": "verify"
+      },
+      "line": 59,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "ResultSet",
+      "caughtType": "Error",
+      "reason": "ServiceDatabaseAdmission.java.verify owns an original ResultSet; this Error body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1122,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "attributeValues": {
+        "method": "verify"
+      },
+      "line": 66,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "ResultSet",
+      "caughtType": "RuntimeException",
+      "reason": "ServiceDatabaseAdmission.java.verify directly closes the owned original ResultSet in finally. Catching RuntimeException here lets JdbcAdmissionFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1123,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "attributeValues": {
+        "method": "verify"
+      },
+      "line": 66,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "ResultSet",
+      "caughtType": "Error",
+      "reason": "ServiceDatabaseAdmission.java.verify directly closes the owned original ResultSet in finally. Catching Error here lets JdbcAdmissionFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1124,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "attributeValues": {
+        "method": "verify"
+      },
+      "line": 71,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "PreparedStatement",
+      "caughtType": "RuntimeException",
+      "reason": "ServiceDatabaseAdmission.java.verify owns an original PreparedStatement; this RuntimeException body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1125,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "attributeValues": {
+        "method": "verify"
+      },
+      "line": 71,
+      "catchRole": "BODY_PRIMARY_TRACKING",
+      "resource": "PreparedStatement",
+      "caughtType": "Error",
+      "reason": "ServiceDatabaseAdmission.java.verify owns an original PreparedStatement; this Error body catch records the identical primary then immediately rethrows it so its owning finally can directly close exactly once and resolve a second failure. Removing the catch would leave primary unrecorded and let a close failure incorrectly replace unknown body identity. This is not broad normalization of provider failures. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1127,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "attributeValues": {
+        "method": "verify"
+      },
+      "line": 78,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "PreparedStatement",
+      "caughtType": "RuntimeException",
+      "reason": "ServiceDatabaseAdmission.java.verify directly closes the owned original PreparedStatement in finally. Catching RuntimeException here lets JdbcAdmissionFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    },
+    {
+      "rawOrdinal": 1128,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "attributeValues": {
+        "method": "verify"
+      },
+      "line": 78,
+      "catchRole": "CLEANUP_COMPETITION",
+      "resource": "PreparedStatement",
+      "caughtType": "Error",
+      "reason": "ServiceDatabaseAdmission.java.verify directly closes the owned original PreparedStatement in finally. Catching Error here lets JdbcAdmissionFailures.replace select the approved two-failure priority after the one cleanup attempt; otherwise an incidental cleanup could override the unknown retained body primary. The helper never performs JDBC work or authorizes retry/success. The retained table is: no primary => original cleanup propagates; known SQL body with unknown cleanup => original cleanup; unknown body => same body with a newly fixed redacted secondary; SQL/SQL => fixed outer SQLException normalization. Same throwable is never added to itself. The outer catch accepts only SQLException; unknown Runtime/NPE/Error never becomes a normal result. Nested row cleanup precedes statement cleanup; early returns still execute finally. This classification concerns this catch syntax only and is independent of the previous CloseResource observations.",
+      "requiredDynamicPostconditions": [
+        "Every SQL/Runtime/NPE/Error body x SQL/Runtime/NPE/Error close, same and distinct Throwable, original identity and fixed non-secret secondary as this class requires",
+        "Null/acquisition/getter/projection/early-return paths close each acquired same original once in row-before-statement order, unacquired close zero",
+        "No borrowed connection config/commit/rollback/close; unknown provider termination remains unproven; no actual DB/Root/native qualification"
+      ]
+    }
+  ],
+  "sourceContexts": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/AsyncJobCountRepository.java",
+      "sha256": "e337ab556b1e6b7033626ab57740c11f4b13e35ae446a582f20f41f344f66b76",
+      "ranges": [
+        [
+          1,
+          69
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+      "sha256": "90b0d76c02ba974dc22034fe8a13003fb93298105b5f3b3e53f1f90d99544f16",
+      "ranges": [
+        [
+          1,
+          86
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java",
+      "sha256": "f14d52b486f8e263ba67f8c08ddb0e37c2aa2772b28f8e4e61f2717f27d4ab74",
+      "ranges": [
+        [
+          1,
+          104
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.java",
+      "sha256": "93e77b1a49c293d53683628f805b1a0047803ce6a2ad101ec27be4142b4a83e6",
+      "ranges": [
+        [
+          1,
+          64
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "sha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "ranges": [
+        [
+          1,
+          256
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "sha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "ranges": [
+        [
+          1,
+          120
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "sha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "ranges": [
+        [
+          1,
+          459
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "sha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "sha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "ranges": [
+        [
+          1,
+          96
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "sha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "ranges": [
+        [
+          1,
+          152
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "sha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "ranges": [
+        [
+          1,
+          97
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepository.java",
+      "sha256": "8eead2d8cdf54cec5ce702117a34074c7d55b5ea454cfc8f001f770eae09d5c5",
+      "ranges": [
+        [
+          1,
+          75
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "sha256": "f4cff9bb43cacfde5be699fd61d4e25526523d5ef5e478aa88dcbb8bdde6928a",
+      "ranges": [
+        [
+          1,
+          21
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+      "sha256": "bf179887c2496723d5ddb4ee0be02c5e599ecba781f5b8338367bb21648627a5",
+      "ranges": [
+        [
+          1,
+          24
+        ]
+      ]
+    }
+  ],
+  "designReferences": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 5
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 7
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 19
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "line": 25
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "line": 19
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "line": 81
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "line": 83
+    }
+  ],
+  "deferred": [
+    {
+      "rawOrdinal": 1075,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1076,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1077,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1078,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1079,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1080,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1081,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    }
+  ]
+}
