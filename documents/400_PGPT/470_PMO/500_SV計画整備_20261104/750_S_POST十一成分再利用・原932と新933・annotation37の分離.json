@@ -1,0 +1,511 @@
+{
+  "executionId": "PGPT-SV-20261104-01",
+  "atJST": "2026-11-05T13:00:02.480937+09:00",
+  "sourceBaseline": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "currentCoreMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+  "currentCharacterizationMain": "a8abb6956364c0a301b9bf25c79f3d2d4e6ff9b1",
+  "old698": {
+    "path": "698_二source差分・全六正常class同byteと七component再利用境界.json",
+    "sha256": "15b1f4c32f27c3d821e04f88ea03a417ab35da92e29db2c40e3de90de4842769"
+  },
+  "originalBaseRegistry": {
+    "rows": 932,
+    "counts": {
+      "NOT_IN_CURRENT_MEASUREMENT_REGISTRY": 282,
+      "NATURAL_ZERO_BRANCH": 213,
+      "FOUR100": 334,
+      "PARTIAL": 80,
+      "NO_CODE": 23
+    },
+    "unregistered": 282,
+    "rewrittenOrMerged": false
+  },
+  "currentSourceDefinition": {
+    "rawJavaFiles": 970,
+    "oldRawJavaFiles": 969,
+    "oldLogicalSourceRegistryRows": 932,
+    "currentLogicalSourcesExcludingPackageMetadata": 933,
+    "packageMetadata": 37,
+    "addedLogicalSources": [
+      "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java"
+    ],
+    "annotationMetadataAreNotNewWorkOrCoverageExclusions": true
+  },
+  "componentProofRows": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor.java",
+      "baseRegistryStatus": "NOT_IN_CURRENT_MEASUREMENT_REGISTRY",
+      "proof": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18586-internal-port-unit-v1/manifest.json",
+      "sha256": "86878d2da664c3ca3ede5c5e9a5aff2b79f1d240d4347df5d26d18ca9e0d561c",
+      "proofSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "currentCoreMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "decision": "ELIGIBLE_BYTE_IDENTICAL_COMPONENT_REUSE_NOT_CURRENT_WHOLE_SOURCE_RUN",
+      "compatibilityProof": "698_二source差分・全六正常class同byteと七component再利用境界.json",
+      "compatiblePhysicalClassScope": true,
+      "sameSourceCurrentWholeRunClaimed": false,
+      "parentWbsAccepted": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiConfigurationLoader.java",
+      "baseRegistryStatus": "NOT_IN_CURRENT_MEASUREMENT_REGISTRY",
+      "proof": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG18590-config-loaders-current-whole10-v1/manifest.json",
+      "sha256": "11fa28e22c5694dc260cb577dd804340261e4df3af1363f2813a1630273497e2",
+      "proofSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "currentCoreMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "decision": "ELIGIBLE_BYTE_IDENTICAL_COMPONENT_REUSE_NOT_CURRENT_WHOLE_SOURCE_RUN",
+      "compatibilityProof": "698_二source差分・全六正常class同byteと七component再利用境界.json",
+      "compatiblePhysicalClassScope": true,
+      "sameSourceCurrentWholeRunClaimed": false,
+      "parentWbsAccepted": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoader.java",
+      "baseRegistryStatus": "NOT_IN_CURRENT_MEASUREMENT_REGISTRY",
+      "proof": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG18590-config-loaders-current-whole10-v1/manifest.json",
+      "sha256": "11fa28e22c5694dc260cb577dd804340261e4df3af1363f2813a1630273497e2",
+      "proofSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "currentCoreMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "decision": "ELIGIBLE_BYTE_IDENTICAL_COMPONENT_REUSE_NOT_CURRENT_WHOLE_SOURCE_RUN",
+      "compatibilityProof": "698_二source差分・全六正常class同byteと七component再利用境界.json",
+      "compatiblePhysicalClassScope": true,
+      "sameSourceCurrentWholeRunClaimed": false,
+      "parentWbsAccepted": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.java",
+      "baseRegistryStatus": "NOT_IN_CURRENT_MEASUREMENT_REGISTRY",
+      "proof": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18602-jms-reply-envelope-unit-v1/manifest.json",
+      "sha256": "637fdb75971145c4e2b4d973870bc5d3dfdec02902acc3353d5f088a68e6b253",
+      "proofSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "currentCoreMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "decision": "ELIGIBLE_BYTE_IDENTICAL_COMPONENT_REUSE_NOT_CURRENT_WHOLE_SOURCE_RUN",
+      "compatibilityProof": "698_二source差分・全六正常class同byteと七component再利用境界.json",
+      "compatiblePhysicalClassScope": true,
+      "sameSourceCurrentWholeRunClaimed": false,
+      "parentWbsAccepted": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/ReplySender.java",
+      "baseRegistryStatus": "NOT_IN_CURRENT_MEASUREMENT_REGISTRY",
+      "proof": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18612-reply-stage-unit-v1/manifest.json",
+      "sha256": "d2db189fae80f126ebf3f42165dc5f326d6a5437de87a2ef348b78d5379d0d05",
+      "proofSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "currentCoreMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "decision": "ELIGIBLE_BYTE_IDENTICAL_COMPONENT_REUSE_NOT_CURRENT_WHOLE_SOURCE_RUN",
+      "compatibilityProof": "698_二source差分・全六正常class同byteと七component再利用境界.json",
+      "compatiblePhysicalClassScope": true,
+      "sameSourceCurrentWholeRunClaimed": false,
+      "parentWbsAccepted": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/DlqSender.java",
+      "baseRegistryStatus": "NOT_IN_CURRENT_MEASUREMENT_REGISTRY",
+      "proof": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18622-dlq-sender-unit-v1/manifest.json",
+      "sha256": "e643b92d0553c4b0b76413381d39d7cf6e2cf6509510ab0798492300eafb6404",
+      "proofSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "currentCoreMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "decision": "ELIGIBLE_BYTE_IDENTICAL_COMPONENT_REUSE_NOT_CURRENT_WHOLE_SOURCE_RUN",
+      "compatibilityProof": "698_二source差分・全六正常class同byteと七component再利用境界.json",
+      "compatiblePhysicalClassScope": true,
+      "sameSourceCurrentWholeRunClaimed": false,
+      "parentWbsAccepted": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyDlqSender.java",
+      "baseRegistryStatus": "NOT_IN_CURRENT_MEASUREMENT_REGISTRY",
+      "proof": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18630-web-reply-dlq-unit-v1/manifest.json",
+      "sha256": "41add48b582f0fd090ec392f49665fd3ccc36175bd23e5d9363c30a62041b704",
+      "proofSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "currentCoreMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "decision": "ELIGIBLE_BYTE_IDENTICAL_COMPONENT_REUSE_NOT_CURRENT_WHOLE_SOURCE_RUN",
+      "compatibilityProof": "698_二source差分・全六正常class同byteと七component再利用境界.json",
+      "compatiblePhysicalClassScope": true,
+      "sameSourceCurrentWholeRunClaimed": false,
+      "parentWbsAccepted": false
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "baseRegistryStatus": "NOT_IN_CURRENT_MEASUREMENT_REGISTRY",
+      "proof": "evidence/01_PT/020_NK-CHR-001/evidence/PG18784-metric-count-sixtysix-v1/manifest.json",
+      "sha256": "6641873848e09a56e3130ec80a928a81495142b889963f690282333927f9e6f3",
+      "proofSource": "a8abb6956364c0a301b9bf25c79f3d2d4e6ff9b1",
+      "currentCharacterizationMain": "a8abb6956364c0a301b9bf25c79f3d2d4e6ff9b1",
+      "decision": "CURRENT_CHARACTERIZATION_WHOLE_SOURCE_APPLICABLE_FOUR_COUNTER100_COMPONENT_ONLY",
+      "sameSourceCurrentWholeRunClaimed": true,
+      "parentWbsAccepted": false
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+      "baseRegistryStatus": "NEW_SOURCE_NOT_IN_BASE932",
+      "proof": "evidence/01_PT/020_NK-CHR-001/evidence/PG18784-metric-count-sixtysix-v1/manifest.json",
+      "sha256": "6641873848e09a56e3130ec80a928a81495142b889963f690282333927f9e6f3",
+      "proofSource": "a8abb6956364c0a301b9bf25c79f3d2d4e6ff9b1",
+      "currentCharacterizationMain": "a8abb6956364c0a301b9bf25c79f3d2d4e6ff9b1",
+      "decision": "CURRENT_CHARACTERIZATION_WHOLE_SOURCE_APPLICABLE_FOUR_COUNTER100_COMPONENT_ONLY",
+      "sameSourceCurrentWholeRunClaimed": true,
+      "parentWbsAccepted": false
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/TargetAdapter.java",
+      "baseRegistryStatus": "NOT_IN_CURRENT_MEASUREMENT_REGISTRY",
+      "proof": "evidence/01_PT/020_NK-CHR-001/evidence/PG18784-metric-count-sixtysix-v1/manifest.json",
+      "sha256": "6641873848e09a56e3130ec80a928a81495142b889963f690282333927f9e6f3",
+      "proofSource": "a8abb6956364c0a301b9bf25c79f3d2d4e6ff9b1",
+      "currentCharacterizationMain": "a8abb6956364c0a301b9bf25c79f3d2d4e6ff9b1",
+      "decision": "CURRENT_CHARACTERIZATION_WHOLE_SOURCE_APPLICABLE_FOUR_COUNTER100_COMPONENT_ONLY",
+      "sameSourceCurrentWholeRunClaimed": true,
+      "parentWbsAccepted": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaRangeService.java",
+      "baseRegistryStatus": "NOT_IN_CURRENT_MEASUREMENT_REGISTRY",
+      "proof": "evidence/01_PT/009_NK-MED-001/evidence/PG18802-media-range-port-eight-v1/manifest.json",
+      "sha256": "a27cf8ae9641080b558b4d07b9ae697c3fddd5aa075889a92b72228109579123",
+      "proofSource": "4300e7eb1b0991e816e5d1be370a4c0a15eadd95",
+      "currentCoreMain": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "decision": "CURRENT_CORE_WHOLE_SOURCE_APPLICABLE_FOUR_COUNTER100_MEMORY_PORT_ONLY",
+      "sameSourceCurrentWholeRunClaimed": true,
+      "parentWbsAccepted": false
+    }
+  ],
+  "componentReuseCounts": {
+    "eligibleComponents": 11,
+    "compatibleOldByteComponents": 7,
+    "directCurrentSourceComponents": 4,
+    "baseUnregisteredIntersection": 10,
+    "baseUnregisteredWithoutEligibleWholeComponentProof": 272,
+    "newSourceOutsideBase932": 1,
+    "fullSemanticallyReconciled282Claimed": false,
+    "registryActuallyMerged": false
+  },
+  "packageMetadata": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/package-info.java",
+      "sha256": "55fe25ac65c5dada4b0f708bf2f5af89d48f9a4bd9348b24fdacc07ca2de9b50",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/package-info.java",
+      "sha256": "16ab7158a137c125eb2ac88928839dfec34c3ad2a7038895d781ec614c770f10",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/package-info.java",
+      "sha256": "e87586e1779c1035d605abfb01df45fe85ed7ed558b161bd456147defc294600",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/package-info.java",
+      "sha256": "633d8f8820c8d1b5c4862cba1d1a902979e5badcad70c0e5aff074add485d33b",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/package-info.java",
+      "sha256": "319104c513bbb5834cbeaccb2821c5fb63e6aeedc470df811058a2feb8d7f8a4",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java",
+      "sha256": "9f28051696b527a1dee26618b554c0bf6f9d47cdc7324dcba733cb896156e04e",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/package-info.java",
+      "sha256": "545edb4601c05d33c738d8f573a3223d5a7b7813be1f2ab804646b3b256fd564",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/package-info.java",
+      "sha256": "a91727bb730f8cc691a3d9e256efb2c942e33ed5254d3cf3d3c03e6b486ad453",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/package-info.java",
+      "sha256": "6d496cedab57489acd06260f7192bb62bee6f1d5729ecdc6c92643cb720fc01b",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/package-info.java",
+      "sha256": "a9f7e2731c228ec539b2bb4b3e0e9a1161662e162cf33dad6e39789d0909ccdd",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/package-info.java",
+      "sha256": "456d04bff4a8fcb406f84ae47df14e72be906d74888f5f074edbb64d7a57eb6c",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/package-info.java",
+      "sha256": "777553aca12d21788602d6ab563a8b53bfa3e4cbdb52c9dd6abbaa779768637c",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/package-info.java",
+      "sha256": "9fda3fc02fe4b73a9322f239fe20b53e44939fc0a30f25d156f406e0f116ca04",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/package-info.java",
+      "sha256": "4e8a3b76dfcb01673d169b3bb2938049976fab84dab648f408bbe283ee7b79ad",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/package-info.java",
+      "sha256": "d83e875676602a977123a18d9ac0446ae902fba2faaa71e5c6dd419403fd7dda",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/package-info.java",
+      "sha256": "b2173a4f8d686f429b7252e180d479896d8e09f326033d14fac7b9b83cfc0ce5",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java",
+      "sha256": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/package-info.java",
+      "sha256": "3024da8f518755480fd1465df1932483613ab57179d72badd00d077181cd7bc2",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/package-info.java",
+      "sha256": "7219a69f7f8d33d3c9923fc9870f8703472a9a945a7ceb4580f08e529c4a6f95",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/package-info.java",
+      "sha256": "81360fb14c321eed795fb7fa2d68b5afabca317e44f41ab5b5ef9bf8844c3532",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+      "sha256": "009823dd0566a5c0e2a7f06af4b540c122629bec50003bc1585d5303c488d924",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/package-info.java",
+      "sha256": "54d4e868e34662474a3178298f16cb6db1f3a298e893413f5d8bafe3686138ef",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/package-info.java",
+      "sha256": "abd74d8806614494b8b00047075d64ff912ee59a900e9ea3ec990d2a62059fb0",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/package-info.java",
+      "sha256": "f42304f14cb1bfeeb78be2d4589366593f6a9903eedb95514462a30f37ea47c3",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/package-info.java",
+      "sha256": "2fbe92d4140d6941e535183ca3d276c9adbd10aae25286246a1ee3d38a1624c2",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/package-info.java",
+      "sha256": "021dd67243c48a3b1139c0adce2c092ed6696e07c033f10437bbd928cc8059d6",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/package-info.java",
+      "sha256": "10791580ee1eb4c0dbfbc16d04b979a3d6829eeaa330596e9faffc13fe77987b",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/package-info.java",
+      "sha256": "85e0d120423af8a1a8a3aa17a51f99e49a73a0a26f1486b30c880474d9f3c7b9",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java",
+      "sha256": "64e8bb6e4ebe10b606244200eec59e677465215d210c686aefd9da22c9a7bf6e",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/package-info.java",
+      "sha256": "aff885116b242f5aebd8c386981d4d73d4a93286fcff36f7a6f09ee1a1ee33d5",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/package-info.java",
+      "sha256": "61d2e2c3db6780bcd7c5d248d8516f714f0381a650e2ef79b58b7c908fe3dbea",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/package-info.java",
+      "sha256": "5b3d0f04dff20d2e3b538f4dfcd89c479ec2feea7cb1743e0a009cf2256e6ad1",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/package-info.java",
+      "sha256": "d59b108c0d1da342135c1536f8151986cb87cc8b58a919acb9e095c9be295b9d",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/package-info.java",
+      "sha256": "785d98841334b52c27cf6c3a1625a06bf0a8a7c61776214c0ad9375a09c18549",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/package-info.java",
+      "sha256": "2b2c6b1d5f75a5744f5910035f91dcb04135507c6f3a1a06b6c3ad04bec12dda",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/package-info.java",
+      "sha256": "24641c16e2937e6fdb40acd9c3f86139fb9b54588aaf5931c240d74471d93277",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/storage/package-info.java",
+      "sha256": "d02a504b450f71ea4349d467b4fc620555656dc6c1bf774620ec9caf0f92c7ed",
+      "kind": "EXISTING_JSPECIFY_PACKAGE_NULLMARKED_NO_EXECUTABLE_METHOD",
+      "buildAndNullAway": "Included inPG18642 normalMain inputs; not removed from build/static",
+      "originalBase932Membership": false
+    }
+  ],
+  "partialWholeSources": {
+    "GateCli.java": {
+      "INSTRUCTION": {
+        "missed": 1811,
+        "covered": 254
+      },
+      "BRANCH": {
+        "missed": 156,
+        "covered": 27
+      },
+      "LINE": {
+        "missed": 349,
+        "covered": 58
+      },
+      "COMPLEXITY": {
+        "missed": 124,
+        "covered": 20
+      },
+      "METHOD": {
+        "missed": 39,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "GateContractValidator.java": {
+      "INSTRUCTION": {
+        "missed": 720,
+        "covered": 1857
+      },
+      "BRANCH": {
+        "missed": 50,
+        "covered": 203
+      },
+      "LINE": {
+        "missed": 149,
+        "covered": 337
+      },
+      "COMPLEXITY": {
+        "missed": 45,
+        "covered": 134
+      },
+      "METHOD": {
+        "missed": 20,
+        "covered": 29
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "semanticResiduals": {
+    "originalMissingOrdinary2980": "151 prior semantic reviews frozen; this bind adds no claim that allold6Media native fixtures are qualified or allmissingtests unexecuted",
+    "originalPartial80": "Original total missed source counters remain history, no arithmetic from currentchar orunmeasuredMedia toreduce the80",
+    "individualWbs": "MediaP00904 ports8qualified but originalpartialdescriptor/files/native/auth/HTTP/otherownedcodecriteria unmet. P020 subdivisions have advisoryrouting only, no costallocation, same-run/fullgate/F02/QA051 final dependencies unresolved."
+  },
+  "newWbsAcceptance": 0,
+  "formalUpdated": false,
+  "newTestExecutions": 0,
+  "oldExecUnion": false,
+  "secondPilot": false,
+  "administrativeInventoryAssert": {
+    "receipt": "aede19",
+    "actualExit": 1,
+    "reason": "One-off reader assumed fullyqualified annotation syntax; blocked classification before writes. 3ba51c read showed both legal import/fullyqualified forms, classified exactly as such; no source/test change or execution."
+  }
+}
