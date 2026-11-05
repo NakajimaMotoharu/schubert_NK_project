@@ -1,0 +1,1564 @@
+{
+  "mainSource": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+  "slot": "pg19930-api-consumer-context-v1",
+  "publicName": "PG19930-api-consumer-context-v1",
+  "priorManifests": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19752-f03-finite-source-context-corrected-v1/manifest.json",
+      "sha256": "d4d8274a68727f8bb278ff89140b8778fa5293011263f4e75c8d195e8fe4cf14"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19760-f03-identity-context-v1/manifest.json",
+      "sha256": "40e501ddd751e8e7849721e7a063d69062d49ad3ba0e1e3429c345b5245723bf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19770-f03-map-monitor-context-v1/manifest.json",
+      "sha256": "6a272d4a9ecad5c26ee13e3af9765f766f9fcd2936ec1e0b39bf030a8778bae4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19830-resource-type-context-v1/manifest.json",
+      "sha256": "6c3055b08e58ec40e023bbf70dd56d667dc1ea50357e1c3d1703aee00534e8a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19840-resource-generic-catch-context-v1/manifest.json",
+      "sha256": "dcfaa6104f6bdd8f57093a235a56f04000d83702b03db55c78e45528fcbebf21"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19850-visibility-map-context-v1/manifest.json",
+      "sha256": "291d806a9539c8c6e331b5d621aaf872356cc8700dcf1b461f219269c15b3c11"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19860-jdbc-close-context-v1/manifest.json",
+      "sha256": "a57ff397b8465ebd306a521add6b9c609facae43c1f9f6abddf00bee64a90103"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19870-jdbc-generic-catch-context-v1/manifest.json",
+      "sha256": "f8ff492143ca570823f2c79a25191c67b175409aad8c242b54027ffa2afc2765"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19880-empty-catch-context-v1/manifest.json",
+      "sha256": "86a4bb1544fa83e25f151a04af5a52034200ea52a2a8ad72326d2961a4e98958"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19890-finally-priority-context-v1/manifest.json",
+      "sha256": "b294eccae2a4c5a27c979e9a5ddd96a36fb7f2a508a9445028ebdabf1d53ab35"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19900-batch-run-context-v1/manifest.json",
+      "sha256": "59327bb132893061eee966a0def91a5541be573b82708ad16195295e9bc916d2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19910-cleanup-twelve-context-v1/manifest.json",
+      "sha256": "35bf4572d4dd7952b0437b6951c123ee94760544491ff1dc0cbfc5ffac907a1f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19920-db-receipt-context-v1/manifest.json",
+      "sha256": "7ed71d1d06bb5da1236920fa326edc844ed8a0bcbbd7e7729bebcb0aabad57c3"
+    }
+  ],
+  "priorCount": 618,
+  "newCount": 72,
+  "decisions": [
+    {
+      "rawOrdinal": 199,
+      "rule": "CloseResource",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start",
+        "variable": "context"
+      },
+      "line": 57,
+      "reason": "QuestionWorkConsumers.java.start: The local JMSContext is an alias of the captured single-context owner or is added immediately to the preallocated four-context owner list inside its protected startup try. Success transfers that owner, and failure invokes its existing close/UNKNOWN policy. This local reference does not become an independent resource to close in parallel.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ]
+    },
+    {
+      "rawOrdinal": 200,
+      "rule": "CloseResource",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start",
+        "variable": "consumer"
+      },
+      "line": 62,
+      "reason": "QuestionWorkConsumers.java.start: The created JMSConsumer belongs to its captured owning JMSContext. Normal success returns the wrapper owner, while partial startup and later close use that same context owner; independently closing this local alias is not the designed lifetime. See externalStandardsReferences JMS31 for the context-contained consumer contract.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ]
+    },
+    {
+      "rawOrdinal": 201,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 78,
+      "reason": "QuestionWorkConsumers.java.start: The registered API delivery must halt/notify for direct Error and typed isolation/unconfirmed failures rather than treat them as ordinary retry. Each delivery has attempted/confirmed state from its own context; this is the API signal policy, not Web originalError rethrow. The optional directError rollback is attempted only once and can never certify a prior failed rollback.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "DELIVERY_FATAL"
+    },
+    {
+      "rawOrdinal": 202,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 80,
+      "reason": "QuestionWorkConsumers.java.start: The retained catch value can be typed isolation failure or Error; only direct Error plus attempted CAS permits one best-effort rollback. A catch split alone cannot establish the separate attempted/confirmed context state, and no prior rollback failure is retried.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "ONLY_DIRECT_ERROR_ROLLBACK"
+    },
+    {
+      "rawOrdinal": 204,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 83,
+      "reason": "QuestionWorkConsumers.java.start: A fatal delivery is already halted. The one permitted best-effort rollback may itself throw Runtime/Error; containing it preserves fatal/unconfirmed state and still reaches onFatal, without confirmed=true, ACK/commit or duplicate rollback. The previous EmptyCatch review and this generic-catch observation remain separate IDs.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "BEST_EFFORT_ROLLBACK"
+    },
+    {
+      "rawOrdinal": 205,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 83,
+      "reason": "QuestionWorkConsumers.java.start: A fatal delivery is already halted. The one permitted best-effort rollback may itself throw Runtime/Error; containing it preserves fatal/unconfirmed state and still reaches onFatal, without confirmed=true, ACK/commit or duplicate rollback. The previous EmptyCatch review and this generic-catch observation remain separate IDs.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "BEST_EFFORT_ROLLBACK"
+    },
+    {
+      "rawOrdinal": 206,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 88,
+      "reason": "QuestionWorkConsumers.java.start: Provider JMS/Runtime delivery failures must be gated through existing fatal-graph classification and this delivery rollbackConfirmed. Only confirmed nonfatal failures return to broker-controlled retry; unconfirmed or fatal graph halts/notifies. This catches the provider boundary, not arbitrary business exceptions as success. The graph helper itself is not invoked or qualified by this review.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "DELIVERY_RETRY_GATE"
+    },
+    {
+      "rawOrdinal": 207,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 92,
+      "reason": "QuestionWorkConsumers.java.start: An Error selected by the existing pure graph helper is translated into the existing registered API halt/notify path; after successful notification API does not rethrow, as SS321:21 explicitly specifies. Catching Error here is intentional policy selection, not an assertion that every fatal graph is currently detected. Helper dynamic scope remains held.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "API_GRAPH_FATAL_SIGNAL"
+    },
+    {
+      "rawOrdinal": 208,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 105,
+      "reason": "QuestionWorkConsumers.java.start: After owner capture, startup Runtime/Error must notify and attempt cleanup of captured contexts before fixed startup failure conversion. Notification and cleanup failures remain separately available for the legacy directError priority and subsequent graph checks. Removing this boundary skips owned partial-start cleanup; no normal startup is returned on failure.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "PARTIAL_START_FAILURE"
+    },
+    {
+      "rawOrdinal": 209,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 105,
+      "reason": "QuestionWorkConsumers.java.start: After owner capture, startup Runtime/Error must notify and attempt cleanup of captured contexts before fixed startup failure conversion. Notification and cleanup failures remain separately available for the legacy directError priority and subsequent graph checks. Removing this boundary skips owned partial-start cleanup; no normal startup is returned on failure.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "PARTIAL_START_FAILURE"
+    },
+    {
+      "rawOrdinal": 210,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 110,
+      "reason": "QuestionWorkConsumers.java.start: A failed notification is retained alongside startup failure rather than skipping required cleanup. A direct Error notification takes priority only over non-Error startup, otherwise the original startup remains primary and distinct notification is attached. Same throwable is never attached to itself. Required close is attempted afterwards before graph/fixed catalog handling.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_FAILURE"
+    },
+    {
+      "rawOrdinal": 211,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 110,
+      "reason": "QuestionWorkConsumers.java.start: A failed notification is retained alongside startup failure rather than skipping required cleanup. A direct Error notification takes priority only over non-Error startup, otherwise the original startup remains primary and distinct notification is attached. Same throwable is never attached to itself. Required close is attempted afterwards before graph/fixed catalog handling.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_FAILURE"
+    },
+    {
+      "rawOrdinal": 212,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 112,
+      "reason": "QuestionWorkConsumers.java.start: The tests compare two simultaneously retained failures: notification Error is selected only when startup is non-Error. This preserves the original directError competition table and avoids constructing a self-suppression relationship; required cleanup still follows.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_VS_STARTUP"
+    },
+    {
+      "rawOrdinal": 213,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 112,
+      "reason": "QuestionWorkConsumers.java.start: The tests compare two simultaneously retained failures: notification Error is selected only when startup is non-Error. This preserves the original directError competition table and avoids constructing a self-suppression relationship; required cleanup still follows.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_VS_STARTUP"
+    },
+    {
+      "rawOrdinal": 214,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 112,
+      "reason": "QuestionWorkConsumers.java.start: The tests compare two simultaneously retained failures: notification Error is selected only when startup is non-Error. This preserves the original directError competition table and avoids constructing a self-suppression relationship; required cleanup still follows.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_VS_STARTUP"
+    },
+    {
+      "rawOrdinal": 215,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 112,
+      "reason": "QuestionWorkConsumers.java.start: The tests compare two simultaneously retained failures: notification Error is selected only when startup is non-Error. This preserves the original directError competition table and avoids constructing a self-suppression relationship; required cleanup still follows.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_VS_STARTUP"
+    },
+    {
+      "rawOrdinal": 217,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 121,
+      "reason": "QuestionWorkConsumers.java.start: The partial owner close failure is retained separately until direct Error priority and graph classification. A direct closing Error can replace non-Error retained startup, while the selected startup Error stays primary. Distinct secondary is attached without self-suppression. An UNKNOWN ownership callback may not return; this review claims no cleanup/notification completion.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "PARTIAL_CLOSE_FAILURE"
+    },
+    {
+      "rawOrdinal": 218,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 121,
+      "reason": "QuestionWorkConsumers.java.start: The partial owner close failure is retained separately until direct Error priority and graph classification. A direct closing Error can replace non-Error retained startup, while the selected startup Error stays primary. Distinct secondary is attached without self-suppression. An UNKNOWN ownership callback may not return; this review claims no cleanup/notification completion.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "PARTIAL_CLOSE_FAILURE"
+    },
+    {
+      "rawOrdinal": 219,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 123,
+      "reason": "QuestionWorkConsumers.java.start: The caught closing failure is compared against the retained startup/notification primary after the owned cleanup attempt. Direct Error can take priority over a non-Error retained failure; distinct lower-priority secondary is preserved and later graph checks remain separate.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "CLOSE_VS_RETAINED"
+    },
+    {
+      "rawOrdinal": 220,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 123,
+      "reason": "QuestionWorkConsumers.java.start: The caught closing failure is compared against the retained startup/notification primary after the owned cleanup attempt. Direct Error can take priority over a non-Error retained failure; distinct lower-priority secondary is preserved and later graph checks remain separate.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "CLOSE_VS_RETAINED"
+    },
+    {
+      "rawOrdinal": 222,
+      "rule": "AvoidSynchronizedStatement",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "close"
+      },
+      "line": 142,
+      "reason": "QuestionWorkConsumers.java.close: The private final per-instance monitor serializes owned close and the confirmed closed/contextClosed phase state. It is not an exposed, mutable, interned or class-global lock. Delivery halt/terminal signals use separate atomics, and successful closed is published only after provider close returns. Retained UNKNOWN may keep this frame/monitor; actual deadlock freedom, deadline and termination remain separate unperformed dynamic conditions.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "privateFinalMonitor": "lock"
+    },
+    {
+      "rawOrdinal": 223,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "close"
+      },
+      "line": 146,
+      "reason": "QuestionWorkConsumers.java.close: The owned context close boundary passes unconfirmed failure to the existing owner policy. Only if that policy returns does direct Error retain its type and non-Error reach the fixed close wrapper. closed=true is written only after normal context.close. This is not provider failure swallowed as success or proof the UNKNOWN callback returned.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "OWNED_CLOSE_FAILURE"
+    },
+    {
+      "rawOrdinal": 224,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "close"
+      },
+      "line": 146,
+      "reason": "QuestionWorkConsumers.java.close: The owned context close boundary passes unconfirmed failure to the existing owner policy. Only if that policy returns does direct Error retain its type and non-Error reach the fixed close wrapper. closed=true is written only after normal context.close. This is not provider failure swallowed as success or proof the UNKNOWN callback returned.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "OWNED_CLOSE_FAILURE"
+    },
+    {
+      "rawOrdinal": 225,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "close"
+      },
+      "line": 148,
+      "reason": "QuestionWorkConsumers.java.close: This direct Error test occurs after unconfirmed ownership handoff, only if it returns. It preserves direct Error rather than wrapping it into the fixed close catalog. It does not prove handoff return, hidden graph classification or actual provider close.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "ERROR_AFTER_OWNER_HANDOFF"
+    },
+    {
+      "rawOrdinal": 226,
+      "rule": "CloseResource",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start",
+        "variable": "context"
+      },
+      "line": 80,
+      "reason": "SyncRequestConsumers.java.start: The local JMSContext is an alias of the captured single-context owner or is added immediately to the preallocated four-context owner list inside its protected startup try. Success transfers that owner, and failure invokes its existing close/UNKNOWN policy. This local reference does not become an independent resource to close in parallel.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ]
+    },
+    {
+      "rawOrdinal": 227,
+      "rule": "CloseResource",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start",
+        "variable": "consumer"
+      },
+      "line": 86,
+      "reason": "SyncRequestConsumers.java.start: The created JMSConsumer belongs to its captured owning JMSContext. Normal success returns the wrapper owner, while partial startup and later close use that same context owner; independently closing this local alias is not the designed lifetime. See externalStandardsReferences JMS31 for the context-contained consumer contract.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ]
+    },
+    {
+      "rawOrdinal": 228,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 105,
+      "reason": "SyncRequestConsumers.java.start: The registered API delivery must halt/notify for direct Error and typed isolation/unconfirmed failures rather than treat them as ordinary retry. Each delivery has attempted/confirmed state from its own context; this is the API signal policy, not Web originalError rethrow. The optional directError rollback is attempted only once and can never certify a prior failed rollback.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "DELIVERY_FATAL"
+    },
+    {
+      "rawOrdinal": 229,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 108,
+      "reason": "SyncRequestConsumers.java.start: The retained catch value can be typed isolation failure or Error; only direct Error plus attempted CAS permits one best-effort rollback. A catch split alone cannot establish the separate attempted/confirmed context state, and no prior rollback failure is retried.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "ONLY_DIRECT_ERROR_ROLLBACK"
+    },
+    {
+      "rawOrdinal": 231,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 111,
+      "reason": "SyncRequestConsumers.java.start: A fatal delivery is already halted. The one permitted best-effort rollback may itself throw Runtime/Error; containing it preserves fatal/unconfirmed state and still reaches onFatal, without confirmed=true, ACK/commit or duplicate rollback. The previous EmptyCatch review and this generic-catch observation remain separate IDs.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "BEST_EFFORT_ROLLBACK"
+    },
+    {
+      "rawOrdinal": 232,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 111,
+      "reason": "SyncRequestConsumers.java.start: A fatal delivery is already halted. The one permitted best-effort rollback may itself throw Runtime/Error; containing it preserves fatal/unconfirmed state and still reaches onFatal, without confirmed=true, ACK/commit or duplicate rollback. The previous EmptyCatch review and this generic-catch observation remain separate IDs.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "BEST_EFFORT_ROLLBACK"
+    },
+    {
+      "rawOrdinal": 233,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 117,
+      "reason": "SyncRequestConsumers.java.start: Provider JMS/Runtime delivery failures must be gated through existing fatal-graph classification and this delivery rollbackConfirmed. Only confirmed nonfatal failures return to broker-controlled retry; unconfirmed or fatal graph halts/notifies. This catches the provider boundary, not arbitrary business exceptions as success. The graph helper itself is not invoked or qualified by this review.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "DELIVERY_RETRY_GATE"
+    },
+    {
+      "rawOrdinal": 234,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 121,
+      "reason": "SyncRequestConsumers.java.start: An Error selected by the existing pure graph helper is translated into the existing registered API halt/notify path; after successful notification API does not rethrow, as SS321:21 explicitly specifies. Catching Error here is intentional policy selection, not an assertion that every fatal graph is currently detected. Helper dynamic scope remains held.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "API_GRAPH_FATAL_SIGNAL"
+    },
+    {
+      "rawOrdinal": 235,
+      "rule": "CloseResource",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start",
+        "variable": "context"
+      },
+      "line": 133,
+      "reason": "SyncRequestConsumers.java.start: The local JMSContext is an alias of the captured single-context owner or is added immediately to the preallocated four-context owner list inside its protected startup try. Success transfers that owner, and failure invokes its existing close/UNKNOWN policy. This local reference does not become an independent resource to close in parallel.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ]
+    },
+    {
+      "rawOrdinal": 236,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 137,
+      "reason": "SyncRequestConsumers.java.start: After owner capture, startup Runtime/Error must notify and attempt cleanup of captured contexts before fixed startup failure conversion. Notification and cleanup failures remain separately available for the legacy directError priority and subsequent graph checks. Removing this boundary skips owned partial-start cleanup; no normal startup is returned on failure.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "PARTIAL_START_FAILURE"
+    },
+    {
+      "rawOrdinal": 237,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 137,
+      "reason": "SyncRequestConsumers.java.start: After owner capture, startup Runtime/Error must notify and attempt cleanup of captured contexts before fixed startup failure conversion. Notification and cleanup failures remain separately available for the legacy directError priority and subsequent graph checks. Removing this boundary skips owned partial-start cleanup; no normal startup is returned on failure.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "PARTIAL_START_FAILURE"
+    },
+    {
+      "rawOrdinal": 238,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 142,
+      "reason": "SyncRequestConsumers.java.start: A failed notification is retained alongside startup failure rather than skipping required cleanup. A direct Error notification takes priority only over non-Error startup, otherwise the original startup remains primary and distinct notification is attached. Same throwable is never attached to itself. Required close is attempted afterwards before graph/fixed catalog handling.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_FAILURE"
+    },
+    {
+      "rawOrdinal": 239,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 142,
+      "reason": "SyncRequestConsumers.java.start: A failed notification is retained alongside startup failure rather than skipping required cleanup. A direct Error notification takes priority only over non-Error startup, otherwise the original startup remains primary and distinct notification is attached. Same throwable is never attached to itself. Required close is attempted afterwards before graph/fixed catalog handling.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_FAILURE"
+    },
+    {
+      "rawOrdinal": 240,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 144,
+      "reason": "SyncRequestConsumers.java.start: The tests compare two simultaneously retained failures: notification Error is selected only when startup is non-Error. This preserves the original directError competition table and avoids constructing a self-suppression relationship; required cleanup still follows.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_VS_STARTUP"
+    },
+    {
+      "rawOrdinal": 241,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 144,
+      "reason": "SyncRequestConsumers.java.start: The tests compare two simultaneously retained failures: notification Error is selected only when startup is non-Error. This preserves the original directError competition table and avoids constructing a self-suppression relationship; required cleanup still follows.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_VS_STARTUP"
+    },
+    {
+      "rawOrdinal": 242,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 144,
+      "reason": "SyncRequestConsumers.java.start: The tests compare two simultaneously retained failures: notification Error is selected only when startup is non-Error. This preserves the original directError competition table and avoids constructing a self-suppression relationship; required cleanup still follows.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_VS_STARTUP"
+    },
+    {
+      "rawOrdinal": 243,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 144,
+      "reason": "SyncRequestConsumers.java.start: The tests compare two simultaneously retained failures: notification Error is selected only when startup is non-Error. This preserves the original directError competition table and avoids constructing a self-suppression relationship; required cleanup still follows.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_VS_STARTUP"
+    },
+    {
+      "rawOrdinal": 245,
+      "rule": "AvoidSynchronizedStatement",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "close"
+      },
+      "line": 173,
+      "reason": "SyncRequestConsumers.java.close: The private final per-instance monitor serializes owned close and the confirmed closed/contextClosed phase state. It is not an exposed, mutable, interned or class-global lock. Delivery halt/terminal signals use separate atomics, and successful closed is published only after provider close returns. Retained UNKNOWN may keep this frame/monitor; actual deadlock freedom, deadline and termination remain separate unperformed dynamic conditions.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "privateFinalMonitor": "closeLock"
+    },
+    {
+      "rawOrdinal": 246,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "close"
+      },
+      "line": 182,
+      "reason": "SyncRequestConsumers.java.close: Each unconfirmed context failure is recorded in preallocated private scratch while remaining required contexts are still attempted. The first direct Error beats non-Error primary; successful context phases are retained and never closed again by later calls. Only after all attempts does onUnconfirmed receive ownership and, if it returns, direct/graph Error selection run. Scratch is cleared in finally, not exposed as public diagnostics.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "MULTI_CONTEXT_CLOSE_FAILURE"
+    },
+    {
+      "rawOrdinal": 247,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "close"
+      },
+      "line": 182,
+      "reason": "SyncRequestConsumers.java.close: Each unconfirmed context failure is recorded in preallocated private scratch while remaining required contexts are still attempted. The first direct Error beats non-Error primary; successful context phases are retained and never closed again by later calls. Only after all attempts does onUnconfirmed receive ownership and, if it returns, direct/graph Error selection run. Scratch is cleared in finally, not exposed as public diagnostics.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "MULTI_CONTEXT_CLOSE_FAILURE"
+    },
+    {
+      "rawOrdinal": 248,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "close"
+      },
+      "line": 184,
+      "reason": "SyncRequestConsumers.java.close: The caught per-context close failure is compared with the current multi-close selection. The first direct Error replaces non-Error while other phases still get their required close attempt; selection is delayed until after those attempts and ownership handoff, as SS321:14 requires.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "MULTI_CLOSE_ERROR_SELECTION"
+    },
+    {
+      "rawOrdinal": 250,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "closeAfterFailure"
+      },
+      "line": 211,
+      "reason": "SyncRequestConsumers.java.closeAfterFailure: closeAfterFailure runs the existing multi-context cleanup and returns a competing failure to startup policy. Direct closing Error takes priority only over non-Error startup; otherwise original startup is retained and distinct closing failure attached. It does not skip the required close attempt or turn an unknown result into success.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "STARTUP_CLOSE_COMPETITION"
+    },
+    {
+      "rawOrdinal": 251,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "closeAfterFailure"
+      },
+      "line": 211,
+      "reason": "SyncRequestConsumers.java.closeAfterFailure: closeAfterFailure runs the existing multi-context cleanup and returns a competing failure to startup policy. Direct closing Error takes priority only over non-Error startup; otherwise original startup is retained and distinct closing failure attached. It does not skip the required close attempt or turn an unknown result into success.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "STARTUP_CLOSE_COMPETITION"
+    },
+    {
+      "rawOrdinal": 252,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "closeAfterFailure"
+      },
+      "line": 212,
+      "reason": "SyncRequestConsumers.java.closeAfterFailure: The caught close failure is returned as selected fatal only when startup was non-Error; otherwise the original startup primary remains and a distinct close failure may be attached. These are two retained failures, not an attempt to detect ordinary business flow by exception type.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "CLOSE_VS_STARTUP"
+    },
+    {
+      "rawOrdinal": 256,
+      "rule": "CloseResource",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start",
+        "variable": "opened"
+      },
+      "line": 68,
+      "reason": "WebLogConsumers.java.start: The local JMSContext is an alias of the captured single-context owner or is added immediately to the preallocated four-context owner list inside its protected startup try. Success transfers that owner, and failure invokes its existing close/UNKNOWN policy. This local reference does not become an independent resource to close in parallel.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ]
+    },
+    {
+      "rawOrdinal": 257,
+      "rule": "CloseResource",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start",
+        "variable": "consumer"
+      },
+      "line": 74,
+      "reason": "WebLogConsumers.java.start: The created JMSConsumer belongs to its captured owning JMSContext. Normal success returns the wrapper owner, while partial startup and later close use that same context owner; independently closing this local alias is not the designed lifetime. See externalStandardsReferences JMS31 for the context-contained consumer contract.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ]
+    },
+    {
+      "rawOrdinal": 258,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 91,
+      "reason": "WebLogConsumers.java.start: The registered API delivery must halt/notify for direct Error and typed isolation/unconfirmed failures rather than treat them as ordinary retry. Each delivery has attempted/confirmed state from its own context; this is the API signal policy, not Web originalError rethrow. The optional directError rollback is attempted only once and can never certify a prior failed rollback.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "DELIVERY_FATAL"
+    },
+    {
+      "rawOrdinal": 259,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 94,
+      "reason": "WebLogConsumers.java.start: The retained catch value can be typed isolation failure or Error; only direct Error plus attempted CAS permits one best-effort rollback. A catch split alone cannot establish the separate attempted/confirmed context state, and no prior rollback failure is retried.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "ONLY_DIRECT_ERROR_ROLLBACK"
+    },
+    {
+      "rawOrdinal": 261,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 97,
+      "reason": "WebLogConsumers.java.start: A fatal delivery is already halted. The one permitted best-effort rollback may itself throw Runtime/Error; containing it preserves fatal/unconfirmed state and still reaches onFatal, without confirmed=true, ACK/commit or duplicate rollback. The previous EmptyCatch review and this generic-catch observation remain separate IDs.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "BEST_EFFORT_ROLLBACK"
+    },
+    {
+      "rawOrdinal": 262,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 97,
+      "reason": "WebLogConsumers.java.start: A fatal delivery is already halted. The one permitted best-effort rollback may itself throw Runtime/Error; containing it preserves fatal/unconfirmed state and still reaches onFatal, without confirmed=true, ACK/commit or duplicate rollback. The previous EmptyCatch review and this generic-catch observation remain separate IDs.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "BEST_EFFORT_ROLLBACK"
+    },
+    {
+      "rawOrdinal": 263,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 102,
+      "reason": "WebLogConsumers.java.start: Provider JMS/Runtime delivery failures must be gated through existing fatal-graph classification and this delivery rollbackConfirmed. Only confirmed nonfatal failures return to broker-controlled retry; unconfirmed or fatal graph halts/notifies. This catches the provider boundary, not arbitrary business exceptions as success. The graph helper itself is not invoked or qualified by this review.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "DELIVERY_RETRY_GATE"
+    },
+    {
+      "rawOrdinal": 264,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 106,
+      "reason": "WebLogConsumers.java.start: An Error selected by the existing pure graph helper is translated into the existing registered API halt/notify path; after successful notification API does not rethrow, as SS321:21 explicitly specifies. Catching Error here is intentional policy selection, not an assertion that every fatal graph is currently detected. Helper dynamic scope remains held.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "API_GRAPH_FATAL_SIGNAL"
+    },
+    {
+      "rawOrdinal": 265,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 120,
+      "reason": "WebLogConsumers.java.start: After owner capture, startup Runtime/Error must notify and attempt cleanup of captured contexts before fixed startup failure conversion. Notification and cleanup failures remain separately available for the legacy directError priority and subsequent graph checks. Removing this boundary skips owned partial-start cleanup; no normal startup is returned on failure.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "PARTIAL_START_FAILURE"
+    },
+    {
+      "rawOrdinal": 266,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 120,
+      "reason": "WebLogConsumers.java.start: After owner capture, startup Runtime/Error must notify and attempt cleanup of captured contexts before fixed startup failure conversion. Notification and cleanup failures remain separately available for the legacy directError priority and subsequent graph checks. Removing this boundary skips owned partial-start cleanup; no normal startup is returned on failure.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "PARTIAL_START_FAILURE"
+    },
+    {
+      "rawOrdinal": 267,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 125,
+      "reason": "WebLogConsumers.java.start: A failed notification is retained alongside startup failure rather than skipping required cleanup. A direct Error notification takes priority only over non-Error startup, otherwise the original startup remains primary and distinct notification is attached. Same throwable is never attached to itself. Required close is attempted afterwards before graph/fixed catalog handling.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_FAILURE"
+    },
+    {
+      "rawOrdinal": 268,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 125,
+      "reason": "WebLogConsumers.java.start: A failed notification is retained alongside startup failure rather than skipping required cleanup. A direct Error notification takes priority only over non-Error startup, otherwise the original startup remains primary and distinct notification is attached. Same throwable is never attached to itself. Required close is attempted afterwards before graph/fixed catalog handling.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_FAILURE"
+    },
+    {
+      "rawOrdinal": 269,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 127,
+      "reason": "WebLogConsumers.java.start: The tests compare two simultaneously retained failures: notification Error is selected only when startup is non-Error. This preserves the original directError competition table and avoids constructing a self-suppression relationship; required cleanup still follows.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_VS_STARTUP"
+    },
+    {
+      "rawOrdinal": 270,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 127,
+      "reason": "WebLogConsumers.java.start: The tests compare two simultaneously retained failures: notification Error is selected only when startup is non-Error. This preserves the original directError competition table and avoids constructing a self-suppression relationship; required cleanup still follows.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_VS_STARTUP"
+    },
+    {
+      "rawOrdinal": 271,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 127,
+      "reason": "WebLogConsumers.java.start: The tests compare two simultaneously retained failures: notification Error is selected only when startup is non-Error. This preserves the original directError competition table and avoids constructing a self-suppression relationship; required cleanup still follows.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_VS_STARTUP"
+    },
+    {
+      "rawOrdinal": 272,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 127,
+      "reason": "WebLogConsumers.java.start: The tests compare two simultaneously retained failures: notification Error is selected only when startup is non-Error. This preserves the original directError competition table and avoids constructing a self-suppression relationship; required cleanup still follows.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "NOTIFICATION_VS_STARTUP"
+    },
+    {
+      "rawOrdinal": 274,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 136,
+      "reason": "WebLogConsumers.java.start: The partial owner close failure is retained separately until direct Error priority and graph classification. A direct closing Error can replace non-Error retained startup, while the selected startup Error stays primary. Distinct secondary is attached without self-suppression. An UNKNOWN ownership callback may not return; this review claims no cleanup/notification completion.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "PARTIAL_CLOSE_FAILURE"
+    },
+    {
+      "rawOrdinal": 275,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 136,
+      "reason": "WebLogConsumers.java.start: The partial owner close failure is retained separately until direct Error priority and graph classification. A direct closing Error can replace non-Error retained startup, while the selected startup Error stays primary. Distinct secondary is attached without self-suppression. An UNKNOWN ownership callback may not return; this review claims no cleanup/notification completion.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "PARTIAL_CLOSE_FAILURE"
+    },
+    {
+      "rawOrdinal": 276,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 138,
+      "reason": "WebLogConsumers.java.start: The caught closing failure is compared against the retained startup/notification primary after the owned cleanup attempt. Direct Error can take priority over a non-Error retained failure; distinct lower-priority secondary is preserved and later graph checks remain separate.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "CLOSE_VS_RETAINED"
+    },
+    {
+      "rawOrdinal": 277,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 138,
+      "reason": "WebLogConsumers.java.start: The caught closing failure is compared against the retained startup/notification primary after the owned cleanup attempt. Direct Error can take priority over a non-Error retained failure; distinct lower-priority secondary is preserved and later graph checks remain separate.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "CLOSE_VS_RETAINED"
+    },
+    {
+      "rawOrdinal": 279,
+      "rule": "AvoidSynchronizedStatement",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "close"
+      },
+      "line": 162,
+      "reason": "WebLogConsumers.java.close: The private final per-instance monitor serializes owned close and the confirmed closed/contextClosed phase state. It is not an exposed, mutable, interned or class-global lock. Delivery halt/terminal signals use separate atomics, and successful closed is published only after provider close returns. Retained UNKNOWN may keep this frame/monitor; actual deadlock freedom, deadline and termination remain separate unperformed dynamic conditions.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "privateFinalMonitor": "closeLock"
+    },
+    {
+      "rawOrdinal": 280,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "close"
+      },
+      "line": 166,
+      "reason": "WebLogConsumers.java.close: The owned context close boundary passes unconfirmed failure to the existing owner policy. Only if that policy returns does direct Error retain its type and non-Error reach the fixed close wrapper. closed=true is written only after normal context.close. This is not provider failure swallowed as success or proof the UNKNOWN callback returned.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "OWNED_CLOSE_FAILURE"
+    },
+    {
+      "rawOrdinal": 281,
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "close"
+      },
+      "line": 166,
+      "reason": "WebLogConsumers.java.close: The owned context close boundary passes unconfirmed failure to the existing owner policy. Only if that policy returns does direct Error retain its type and non-Error reach the fixed close wrapper. closed=true is written only after normal context.close. This is not provider failure swallowed as success or proof the UNKNOWN callback returned.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "OWNED_CLOSE_FAILURE"
+    },
+    {
+      "rawOrdinal": 282,
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "close"
+      },
+      "line": 168,
+      "reason": "WebLogConsumers.java.close: This direct Error test occurs after unconfirmed ownership handoff, only if it returns. It preserves direct Error rather than wrapping it into the fixed close catalog. It does not prove handoff return, hidden graph classification or actual provider close.",
+      "requiredDynamicPostconditions": [
+        "Per-delivery attempted versus confirmed rollback, fatal/ordinary retry gates andAPI halt-notify separate fromWeb rethrow; helper/provider failures remain unperformed",
+        "Partial acquisition/listener/start/notification/each close competing Runtime/Error, identity/self-suppression, all required context attempts andconfirmed-phase skip",
+        "Owned-context consumer cleanup, same-owner UNKNOWN retention, concurrent close/private monitor behavior andreal budget/provider terminal outcomes require separate dynamic evidence"
+      ],
+      "role": "ERROR_AFTER_OWNER_HANDOFF"
+    }
+  ],
+  "sourceContexts": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers.java",
+      "sha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "ranges": [
+        [
+          1,
+          154
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers.java",
+      "sha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "ranges": [
+        [
+          1,
+          218
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java",
+      "sha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "ranges": [
+        [
+          1,
+          174
+        ]
+      ]
+    }
+  ],
+  "designReferences": [
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 14
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 16
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 21
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 23
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 25
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 29
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 31
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 33
+    }
+  ],
+  "deferred": [
+    {
+      "rawOrdinal": 1075,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1076,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1077,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1078,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1079,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1080,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1081,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1083,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1084,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1085,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1086,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1087,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    }
+  ],
+  "requiredScopedPartitions": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers.java",
+      "beforeOrdinals": [
+        199,
+        200,
+        201,
+        202,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        217,
+        218,
+        219,
+        220,
+        222,
+        223,
+        224,
+        225
+      ],
+      "selectedOrdinals": [
+        199,
+        200,
+        201,
+        202,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        217,
+        218,
+        219,
+        220,
+        222,
+        223,
+        224,
+        225
+      ],
+      "remainingOrdinals": [],
+      "remainingRuleCounts": {}
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers.java",
+      "beforeOrdinals": [
+        226,
+        227,
+        228,
+        229,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        245,
+        246,
+        247,
+        248,
+        250,
+        251,
+        252
+      ],
+      "selectedOrdinals": [
+        226,
+        227,
+        228,
+        229,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        245,
+        246,
+        247,
+        248,
+        250,
+        251,
+        252
+      ],
+      "remainingOrdinals": [],
+      "remainingRuleCounts": {}
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java",
+      "beforeOrdinals": [
+        256,
+        257,
+        258,
+        259,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        274,
+        275,
+        276,
+        277,
+        279,
+        280,
+        281,
+        282
+      ],
+      "selectedOrdinals": [
+        256,
+        257,
+        258,
+        259,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        274,
+        275,
+        276,
+        277,
+        279,
+        280,
+        281,
+        282
+      ],
+      "remainingOrdinals": [],
+      "remainingRuleCounts": {}
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+      "beforeOrdinals": [
+        1075,
+        1076,
+        1077,
+        1078,
+        1079,
+        1080,
+        1081,
+        1083,
+        1084,
+        1085,
+        1086,
+        1087
+      ],
+      "selectedOrdinals": [],
+      "remainingOrdinals": [
+        1075,
+        1076,
+        1077,
+        1078,
+        1079,
+        1080,
+        1081,
+        1083,
+        1084,
+        1085,
+        1086,
+        1087
+      ],
+      "remainingRuleCounts": {
+        "AvoidUsingVolatile": 7,
+        "AvoidCatchingGenericException": 4,
+        "DoNotThrowExceptionInFinally": 1
+      }
+    }
+  ],
+  "externalStandardsReferences": [
+    {
+      "id": "JMS31",
+      "url": "https://jakarta.ee/specifications/messaging/3.1/jakarta-messaging-spec-3.1.html",
+      "sections": [
+        "6.1.8",
+        "6.2.15"
+      ],
+      "observedAtJST": "2026-11-06",
+      "paraphrase": "A JMSContext owns its session-related consumers/producers; shared contexts can keep the connection active. This contract is not actual provider-close evidence.",
+      "actualApiJar": "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar",
+      "actualApiJarSha256": "6605e08075ab389c359451c7854808cf4b1575e1ea6317e534e9d4df088096df",
+      "jarVerifiedByExistingNormalInputCheck": true
+    }
+  ]
+}
