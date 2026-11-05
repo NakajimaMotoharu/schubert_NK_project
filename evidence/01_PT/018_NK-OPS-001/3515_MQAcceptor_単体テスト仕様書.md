@@ -36,3 +36,5 @@ SDK JsonException/非String field ClassCastExceptionはliteral負例で確認す
 |OPS-ACC-PORT-013|AcceptorPolicyPortTest.undeclaredParserRuntimeAndFatalKeepIdentityWithoutStartedRead|未知IllegalArgumentException/Error同一参照、started0、SDKcatchへ誤変換しない|
 
 追加faultはfactory/transportを呼ばないSDK例外valueのみ、input008の同SDKクラス静的解析を再利用し、新normalJarのservice metadata/全Maininputをfresh照合する。PG19270六Main NullAway/PG19272六SpotBugs/19280compile/19282static/19288全15/19290post予定。group3875の原1/3/6 cap10継続、S/V付替え0。
+
+最終source固定前829: newMain7d2cの六module build/NullAway0及び六SpotBugs0。Test重複文字列7群をTest内独立constantへ修正、最終compile19292/static19294 raw5(2definingLoader/3resourceなしmarker)個別非適用・適用0/CS0/parser0。旧19280/19282/19284/19286はcompile/staticのみで製品PT0、元証拠を残す。PG19288は予定のみ未起動、実行対象はPG19298全15/PG19300post、input012固定producer。source/CRC/全15はfresh newJarでのみ資格確認する。

@@ -19,6 +19,14 @@ import org.junit.jupiter.api.function.Executable;
 
 /** OPS-ACC-PORT-001..013; SS321/342 literal JSON only; no real management/session operation. */
 final class AcceptorPolicyPortTest {
+  private static final String HOST_FIELD = "host";
+  private static final String STARTED_FIELD = "started";
+  private static final String ACCEPTORS_CALL = "acceptors";
+  private static final String NAME_CORE_JSON = "\"name\":\"core\"";
+  private static final String JSON_NULL = "null";
+  private static final String JSON_TRUE = "true";
+
+  private static final String PUBLIC_FAULT_TEXT = "public fixture";
   private static final String FACTORY =
       "org.apache.activemq.artemis.core.remoting.impl.netty.NettyAcceptorFactory";
   private static final String PARAMS =
@@ -37,13 +45,13 @@ final class AcceptorPolicyPortTest {
           FACTORY,
           "scheme",
           "tcp",
-          "host",
+          HOST_FIELD,
           "127.0.0.1",
           "port",
           "61616",
           "protocols",
           "CORE",
-          "started",
+          STARTED_FIELD,
           "1");
 
   @Test
@@ -54,23 +62,30 @@ final class AcceptorPolicyPortTest {
         new ArtemisAcceptorReadinessClient(
             supplied -> {
               assertSame(session, supplied);
-              reads.add("acceptors");
+              reads.add(ACCEPTORS_CALL);
               return GOOD;
             },
             supplied -> {
               assertSame(session, supplied);
-              reads.add("started");
+              reads.add(STARTED_FIELD);
               return true;
             });
     Map<String, String> first = client.inspect(session);
     Map<String, String> second = client.inspect(session);
     assertEquals(EXPECTED, first);
     assertEquals(EXPECTED, second);
-    assertEquals(List.of("acceptors", "started", "acceptors", "started"), reads);
-    assertThrows(UnsupportedOperationException.class, () -> first.put("host", "other"));
+    assertEquals(List.of(ACCEPTORS_CALL, STARTED_FIELD, ACCEPTORS_CALL, STARTED_FIELD), reads);
+    assertThrows(UnsupportedOperationException.class, () -> first.put(HOST_FIELD, "other"));
     assertDoesNotThrow(() -> client.verify(session));
     assertEquals(
-        List.of("acceptors", "started", "acceptors", "started", "acceptors", "started"), reads);
+        List.of(
+            ACCEPTORS_CALL,
+            STARTED_FIELD,
+            ACCEPTORS_CALL,
+            STARTED_FIELD,
+            ACCEPTORS_CALL,
+            STARTED_FIELD),
+        reads);
   }
 
   @Test
@@ -122,9 +137,9 @@ final class AcceptorPolicyPortTest {
     for (String json :
         List.of(
             replaced(GOOD, "\"name\":\"core\",", ""),
-            replaced(GOOD, "\"name\":\"core\"", "\"name\":\"CORE\""),
-            replaced(GOOD, "\"name\":\"core\"", "\"name\":null"),
-            replaced(GOOD, "\"name\":\"core\"", "\"name\":7"),
+            replaced(GOOD, NAME_CORE_JSON, "\"name\":\"CORE\""),
+            replaced(GOOD, NAME_CORE_JSON, "\"name\":null"),
+            replaced(GOOD, NAME_CORE_JSON, "\"name\":7"),
             replaced(GOOD, FACTORY, "public.OtherAcceptor"),
             replaced(GOOD, "\"factoryClassName\":\"" + FACTORY + "\"", "\"factoryClassName\":null"),
             replaced(GOOD, "\"extraProps\":{}", "\"extraProps\":{},\"unexpected\":0"))) {
@@ -134,7 +149,8 @@ final class AcceptorPolicyPortTest {
 
   @Test
   void extraPropertiesMustBeAnEmptyObject() {
-    for (String extra : List.of("{\"publicFlag\":true}", "null", "[]", "1", "false", "\"data\"")) {
+    for (String extra :
+        List.of("{\"publicFlag\":true}", JSON_NULL, "[]", "1", "false", "\"data\"")) {
       rejectsBeforeStarted(replaced(GOOD, "\"extraProps\":{}", "\"extraProps\":" + extra));
     }
   }
@@ -144,10 +160,10 @@ final class AcceptorPolicyPortTest {
     for (String params :
         List.of(
             "{}",
-            "null",
+            JSON_NULL,
             "[]",
             "7",
-            "true",
+            JSON_TRUE,
             "\"data\"",
             replaced(PARAMS, "\"scheme\":\"tcp\",", ""),
             replaced(PARAMS, "\"scheme\":\"tcp\"", "\"scheme\":\"TCP\""),
@@ -157,16 +173,16 @@ final class AcceptorPolicyPortTest {
             replaced(PARAMS, "\"protocols\":\"CORE\"", "\"protocols\":\"CORE\",\"unknown\":1"))) {
       rejectsBeforeStarted(replaced(GOOD, PARAMS, params));
     }
-    for (String field : List.of("scheme", "host", "port", "protocols")) {
+    for (String field : List.of("scheme", HOST_FIELD, "port", "protocols")) {
       String normal =
           switch (field) {
             case "scheme" -> "tcp";
-            case "host" -> "127.0.0.1";
+            case HOST_FIELD -> "127.0.0.1";
             case "port" -> "61616";
             default -> "CORE";
           };
       String old = "\"" + field + "\":\"" + normal + "\"";
-      for (String value : List.of("null", "7", "true")) {
+      for (String value : List.of(JSON_NULL, "7", JSON_TRUE)) {
         rejectsBeforeStarted(replaced(GOOD, old, "\"" + field + "\":" + value));
       }
     }
@@ -174,20 +190,20 @@ final class AcceptorPolicyPortTest {
 
   @Test
   void startedMustBeTheBooleanTrueAndBothReadersAreCalledOnce() {
-    for (Object state : Arrays.asList(null, false, "true", "1", 1L)) {
+    for (Object state : Arrays.asList(null, false, JSON_TRUE, "1", 1L)) {
       var reads = new ArrayList<String>();
       var client =
           new ArtemisAcceptorReadinessClient(
               ignored -> {
-                reads.add("acceptors");
+                reads.add(ACCEPTORS_CALL);
                 return GOOD;
               },
               ignored -> {
-                reads.add("started");
+                reads.add(STARTED_FIELD);
                 return state;
               });
       rejected(() -> client.inspect(unusedSession()));
-      assertEquals(List.of("acceptors", "started"), reads);
+      assertEquals(List.of(ACCEPTORS_CALL, STARTED_FIELD), reads);
     }
   }
 
@@ -198,11 +214,11 @@ final class AcceptorPolicyPortTest {
             "",
             "[",
             "[}",
-            "null",
+            JSON_NULL,
             "{}",
             "7",
-            "true",
-            replaced(GOOD, "\"name\":\"core\"", "\"name\":{}"),
+            JSON_TRUE,
+            replaced(GOOD, NAME_CORE_JSON, "\"name\":{}"),
             replaced(
                 GOOD, "\"factoryClassName\":\"" + FACTORY + "\"", "\"factoryClassName\":[]"))) {
       rejectsBeforeStarted(json);
@@ -213,23 +229,24 @@ final class AcceptorPolicyPortTest {
   void readerRuntimeAndErrorsKeepIdentityAndSuccessfulCallsAreNotCached() {
     for (Throwable fault :
         List.of(
-            new IllegalStateException("public fixture"), new AssertionError("public fixture"))) {
+            new IllegalStateException(PUBLIC_FAULT_TEXT), new AssertionError(PUBLIC_FAULT_TEXT))) {
       for (boolean first : List.of(true, false)) {
         var calls = new ArrayList<String>();
         var client =
             new ArtemisAcceptorReadinessClient(
                 ignored -> {
-                  calls.add("acceptors");
+                  calls.add(ACCEPTORS_CALL);
                   if (first) fail(fault);
                   return GOOD;
                 },
                 ignored -> {
-                  calls.add("started");
+                  calls.add(STARTED_FIELD);
                   fail(fault);
                   return true;
                 });
         assertSame(fault, assertThrows(fault.getClass(), () -> client.inspect(unusedSession())));
-        assertEquals(first ? List.of("acceptors") : List.of("acceptors", "started"), calls);
+        assertEquals(
+            first ? List.of(ACCEPTORS_CALL) : List.of(ACCEPTORS_CALL, STARTED_FIELD), calls);
       }
     }
     var reads = new AtomicInteger();
@@ -246,9 +263,9 @@ final class AcceptorPolicyPortTest {
   void eachDeclaredParserExceptionIsRedactedBeforeStartedAndNeverRetried() {
     for (RuntimeException fault :
         List.of(
-            new org.apache.activemq.artemis.commons.shaded.json.JsonException("public fixture"),
-            new ClassCastException("public fixture"),
-            new IllegalStateException("public fixture"))) {
+            new org.apache.activemq.artemis.commons.shaded.json.JsonException(PUBLIC_FAULT_TEXT),
+            new ClassCastException(PUBLIC_FAULT_TEXT),
+            new IllegalStateException(PUBLIC_FAULT_TEXT))) {
       var parses = new AtomicInteger();
       var started = new AtomicInteger();
       var client =
@@ -292,7 +309,8 @@ final class AcceptorPolicyPortTest {
   void undeclaredParserRuntimeAndFatalKeepIdentityWithoutStartedRead() {
     for (Throwable fault :
         List.of(
-            new IllegalArgumentException("public fixture"), new AssertionError("public fixture"))) {
+            new IllegalArgumentException(PUBLIC_FAULT_TEXT),
+            new AssertionError(PUBLIC_FAULT_TEXT))) {
       var started = new AtomicInteger();
       var client =
           new ArtemisAcceptorReadinessClient(
