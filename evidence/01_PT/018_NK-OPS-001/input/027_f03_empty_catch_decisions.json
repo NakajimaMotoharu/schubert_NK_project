@@ -1,0 +1,457 @@
+{
+  "mainSource": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+  "slot": "pg19880-empty-catch-context-v1",
+  "publicName": "PG19880-empty-catch-context-v1",
+  "priorManifests": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19752-f03-finite-source-context-corrected-v1/manifest.json",
+      "sha256": "d4d8274a68727f8bb278ff89140b8778fa5293011263f4e75c8d195e8fe4cf14"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19760-f03-identity-context-v1/manifest.json",
+      "sha256": "40e501ddd751e8e7849721e7a063d69062d49ad3ba0e1e3429c345b5245723bf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19770-f03-map-monitor-context-v1/manifest.json",
+      "sha256": "6a272d4a9ecad5c26ee13e3af9765f766f9fcd2936ec1e0b39bf030a8778bae4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19830-resource-type-context-v1/manifest.json",
+      "sha256": "6c3055b08e58ec40e023bbf70dd56d667dc1ea50357e1c3d1703aee00534e8a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19840-resource-generic-catch-context-v1/manifest.json",
+      "sha256": "dcfaa6104f6bdd8f57093a235a56f04000d83702b03db55c78e45528fcbebf21"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19850-visibility-map-context-v1/manifest.json",
+      "sha256": "291d806a9539c8c6e331b5d621aaf872356cc8700dcf1b461f219269c15b3c11"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19860-jdbc-close-context-v1/manifest.json",
+      "sha256": "a57ff397b8465ebd306a521add6b9c609facae43c1f9f6abddf00bee64a90103"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19870-jdbc-generic-catch-context-v1/manifest.json",
+      "sha256": "f8ff492143ca570823f2c79a25191c67b175409aad8c242b54027ffa2afc2765"
+    }
+  ],
+  "priorCount": 416,
+  "newCount": 15,
+  "decisions": [
+    {
+      "rawOrdinal": 203,
+      "rule": "EmptyCatchBlock",
+      "sourceSha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 83,
+      "reason": "The registered Question callback is already halted on a fatal or unconfirmed-isolation path. Only a direct Error and rollbackAttempted CAS false->true permits this one best-effort rollback. If rollback itself throws, this catch never marks confirmed, commits or ACKs; onFatal is still invoked and later callbacks are halted. API registered consumers use halt/notify rather than the distinct Web rethrow policy. Empty rollback catch preserves that non-success flow, not an ordinary retry or rollback-success assertion.",
+      "requiredDynamicPostconditions": [
+        "Known typed failure vs unknown Runtime/Error and null boundaries; original failure/retained owner remain non-success",
+        "Actual provider rollback confirmation/notification/unknown retention/budget/generation/socket or terminal-audit consequences require separate scoped dynamic proof",
+        "No duplicate operational start/rollback/close, no invented readiness/after-count/clean marker; current held operation scopes remain held"
+      ]
+    },
+    {
+      "rawOrdinal": 230,
+      "rule": "EmptyCatchBlock",
+      "sourceSha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 111,
+      "reason": "The registered sync callback sets halted and wins terminal CAS before its optional one-time rollback. A rollback Runtime/Error remains unconfirmed in this empty catch; onFatal follows, no ACK/commit/second rollback is issued, and the consumer cannot resume deliveries. This is API fatal halt/notify policy, not proof of provider cleanup or original graph runtime behavior.",
+      "requiredDynamicPostconditions": [
+        "Known typed failure vs unknown Runtime/Error and null boundaries; original failure/retained owner remain non-success",
+        "Actual provider rollback confirmation/notification/unknown retention/budget/generation/socket or terminal-audit consequences require separate scoped dynamic proof",
+        "No duplicate operational start/rollback/close, no invented readiness/after-count/clean marker; current held operation scopes remain held"
+      ]
+    },
+    {
+      "rawOrdinal": 260,
+      "rule": "EmptyCatchBlock",
+      "sourceSha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "attributeValues": {
+        "method": "start"
+      },
+      "line": 97,
+      "reason": "Web-log API registered consumer sets halted/terminal before the one direct-Error best-effort rollback allowed by attempted CAS. The catch never sets confirmed or returns to ordinary retry; onFatal follows even if rollback throws. The empty body deliberately preserves fatal/unconfirmed state without exporting provider text or issuing duplicate rollback.",
+      "requiredDynamicPostconditions": [
+        "Known typed failure vs unknown Runtime/Error and null boundaries; original failure/retained owner remain non-success",
+        "Actual provider rollback confirmation/notification/unknown retention/budget/generation/socket or terminal-audit consequences require separate scoped dynamic proof",
+        "No duplicate operational start/rollback/close, no invented readiness/after-count/clean marker; current held operation scopes remain held"
+      ]
+    },
+    {
+      "rawOrdinal": 522,
+      "rule": "EmptyCatchBlock",
+      "sourceSha256": "f7100ed36f815cb45f44e6ab9d829d183d359f6aa437aed6c8203d27863b8c3b",
+      "attributeValues": {
+        "method": "executeAuthenticated"
+      },
+      "line": 260,
+      "reason": "Only the known ArtemisExpiryPurgeException is consumed here. after remains null and purgeSucceeded=false because both assignments occur only after the successful guarded purge result. Subsequent real health observation selects WARNING/COMMAND_FAILURE only if healthy, otherwise FAILED/SAFETY_FAILURE; audit.finish receives null after rather than fabricated purge counts. Unknown Runtime/Error is outside this catch. This source reason is not an executed purge, terminal audit or startup acceptance.",
+      "requiredDynamicPostconditions": [
+        "Known typed failure vs unknown Runtime/Error and null boundaries; original failure/retained owner remain non-success",
+        "Actual provider rollback confirmation/notification/unknown retention/budget/generation/socket or terminal-audit consequences require separate scoped dynamic proof",
+        "No duplicate operational start/rollback/close, no invented readiness/after-count/clean marker; current held operation scopes remain held"
+      ]
+    },
+    {
+      "rawOrdinal": 523,
+      "rule": "EmptyCatchBlock",
+      "sourceSha256": "f7100ed36f815cb45f44e6ab9d829d183d359f6aa437aed6c8203d27863b8c3b",
+      "attributeValues": {
+        "method": "executeAuthenticated"
+      },
+      "line": 266,
+      "reason": "healthy starts false and becomes the returned actual health only if work.healthy completes. The known management-readiness exception leaves false, so the result is FAILED/SAFETY_FAILURE rather than success; no health or purge retry is inside this catch. Unknown exceptions are not consumed by this typed catch. Actual MQ/DB/audit outcome remains unperformed.",
+      "requiredDynamicPostconditions": [
+        "Known typed failure vs unknown Runtime/Error and null boundaries; original failure/retained owner remain non-success",
+        "Actual provider rollback confirmation/notification/unknown retention/budget/generation/socket or terminal-audit consequences require separate scoped dynamic proof",
+        "No duplicate operational start/rollback/close, no invented readiness/after-count/clean marker; current held operation scopes remain held"
+      ]
+    },
+    {
+      "rawOrdinal": 590,
+      "rule": "EmptyCatchBlock",
+      "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+      "attributeValues": {
+        "method": "failure"
+      },
+      "line": 159,
+      "reason": "SS343 SSC326 explicitly makes CompletionProgress.failure a best-effort fixed IO/FATAL/RUNTIME diagnostic after a completion UNKNOWN. Runtime/Error from clock/sink/string generation is contained so control returns to the original completion catch retention path. Constructor/null boundaries and ordinary phase emit remain outside this protection; no clean marker or normal release is generated.",
+      "requiredDynamicPostconditions": [
+        "Known typed failure vs unknown Runtime/Error and null boundaries; original failure/retained owner remain non-success",
+        "Actual provider rollback confirmation/notification/unknown retention/budget/generation/socket or terminal-audit consequences require separate scoped dynamic proof",
+        "No duplicate operational start/rollback/close, no invented readiness/after-count/clean marker; current held operation scopes remain held"
+      ]
+    },
+    {
+      "rawOrdinal": 593,
+      "rule": "EmptyCatchBlock",
+      "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+      "attributeValues": {
+        "method": "publishCompleted"
+      },
+      "line": 302,
+      "reason": "Only readiness IOException is ignored inside the bounded Caddy observation loop after its start attempt. Every iteration live.verify and remaining floor checks precede observation; failure does not set ready or break the loop. pause follows, and budget/guard failure escapes to the owned stop/retained observation path. No same start/permit is reissued here; it is neither acceptance of unknown readiness nor a claim that cleanup completed.",
+      "requiredDynamicPostconditions": [
+        "Known typed failure vs unknown Runtime/Error and null boundaries; original failure/retained owner remain non-success",
+        "Actual provider rollback confirmation/notification/unknown retention/budget/generation/socket or terminal-audit consequences require separate scoped dynamic proof",
+        "No duplicate operational start/rollback/close, no invented readiness/after-count/clean marker; current held operation scopes remain held"
+      ]
+    },
+    {
+      "rawOrdinal": 606,
+      "rule": "EmptyCatchBlock",
+      "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+      "attributeValues": {
+        "method": "startService"
+      },
+      "line": 634,
+      "reason": "The catch is only ConnectException from a not-yet-listening fixed management HTTP acceptor. ready stays false and no promotion occurs. The enclosing loop checks same generation, parent and child budgets, original/DB consistency and previous dependencies each iteration; all other IO propagates. Successful readiness undergoes a second guarded check before returning; this is bounded observation, not an extra service start.",
+      "requiredDynamicPostconditions": [
+        "Known typed failure vs unknown Runtime/Error and null boundaries; original failure/retained owner remain non-success",
+        "Actual provider rollback confirmation/notification/unknown retention/budget/generation/socket or terminal-audit consequences require separate scoped dynamic proof",
+        "No duplicate operational start/rollback/close, no invented readiness/after-count/clean marker; current held operation scopes remain held"
+      ]
+    },
+    {
+      "rawOrdinal": 819,
+      "rule": "EmptyCatchBlock",
+      "sourceSha256": "e5e4b289865f86279ec541a13753fa4cc44f8f8ccacbf9d28a9f8d92735ccb9d",
+      "attributeValues": {
+        "method": "sockets"
+      },
+      "line": 404,
+      "reason": "Only a disappearing /proc fd symlink (NoSuchFileException) is skipped; it adds no socket inode to descriptors. Other IO propagates and fd enumeration count remains capped. listeners must match live proc socket data with retained descriptors; enclosing readiness requires nonempty owned listeners before HTTPS200 and an owned-socket intersection after same actor/manager checks. A vanished fd is never fabricated as ownership evidence.",
+      "requiredDynamicPostconditions": [
+        "Known typed failure vs unknown Runtime/Error and null boundaries; original failure/retained owner remain non-success",
+        "Actual provider rollback confirmation/notification/unknown retention/budget/generation/socket or terminal-audit consequences require separate scoped dynamic proof",
+        "No duplicate operational start/rollback/close, no invented readiness/after-count/clean marker; current held operation scopes remain held"
+      ]
+    },
+    {
+      "rawOrdinal": 826,
+      "rule": "EmptyCatchBlock",
+      "sourceSha256": "bb546fa7c261e71d7d923eedbc7b5d64efda3ceff6e6c7f05e570e2e12acb617",
+      "attributeValues": {
+        "method": "sockets"
+      },
+      "line": 243,
+      "reason": "Only NoSuchFileException for a concurrently-closed kernel FD is skipped, leaving no descriptor entry. Other IO and enumeration overflow remain failures. The returned listener set is built from proc tcp/tcp6 entries intersecting actually read descriptor inodes and the fixed management port, never an assumed socket. This empty catch excludes vanished ownership evidence; actual process/generation/readiness qualification is separate.",
+      "requiredDynamicPostconditions": [
+        "Known typed failure vs unknown Runtime/Error and null boundaries; original failure/retained owner remain non-success",
+        "Actual provider rollback confirmation/notification/unknown retention/budget/generation/socket or terminal-audit consequences require separate scoped dynamic proof",
+        "No duplicate operational start/rollback/close, no invented readiness/after-count/clean marker; current held operation scopes remain held"
+      ]
+    },
+    {
+      "rawOrdinal": 1137,
+      "rule": "EmptyCatchBlock",
+      "sourceSha256": "71c271ca7886d079b70d1d5e870317bd9dcfb13d5d0ab297399d8508a400abb4",
+      "attributeValues": {
+        "method": "diagnoseUnknownRelease"
+      },
+      "line": 243,
+      "reason": "SS343 SSC318/316 makes the fixed diagnostic strictly best effort in an UNKNOWN resource-release path. A println Runtime/Error must not unwind the retained outer borrowed-owner/failure frame; the caller stays in its non-returning observation loop. No raw failure, clean result, retry-close or restoration authority is emitted. The diagnostic helper itself returning is not cleanup returning.",
+      "requiredDynamicPostconditions": [
+        "Known typed failure vs unknown Runtime/Error and null boundaries; original failure/retained owner remain non-success",
+        "Actual provider rollback confirmation/notification/unknown retention/budget/generation/socket or terminal-audit consequences require separate scoped dynamic proof",
+        "No duplicate operational start/rollback/close, no invented readiness/after-count/clean marker; current held operation scopes remain held"
+      ]
+    },
+    {
+      "rawOrdinal": 1142,
+      "rule": "EmptyCatchBlock",
+      "sourceSha256": "71c271ca7886d079b70d1d5e870317bd9dcfb13d5d0ab297399d8508a400abb4",
+      "attributeValues": {
+        "method": "observeUnknownInterval"
+      },
+      "line": 254,
+      "reason": "The original UNKNOWN observation failed, then this catch contains a failure of the fixed fallback tick too. The enclosing retention loop still cannot return or release owners, and no new close/Root/repair action is requested. SS343 SSC318 explicitly keeps fallback/CPU/VM risk UNKNOWN; it does not guarantee timing or successful observation. Empty catch protects ownership, not normality.",
+      "requiredDynamicPostconditions": [
+        "Known typed failure vs unknown Runtime/Error and null boundaries; original failure/retained owner remain non-success",
+        "Actual provider rollback confirmation/notification/unknown retention/budget/generation/socket or terminal-audit consequences require separate scoped dynamic proof",
+        "No duplicate operational start/rollback/close, no invented readiness/after-count/clean marker; current held operation scopes remain held"
+      ]
+    },
+    {
+      "rawOrdinal": 1148,
+      "rule": "EmptyCatchBlock",
+      "sourceSha256": "71c271ca7886d079b70d1d5e870317bd9dcfb13d5d0ab297399d8508a400abb4",
+      "attributeValues": {
+        "method": "observeUnconfirmed"
+      },
+      "line": 276,
+      "reason": "InterruptedException ends only one fixed sleep observation tick. The native outer retention loop remains non-returning and retains its same failure/borrowed frame; an interrupt never means cleanup success or permission to unwind. SS343 SSC318 keeps IRQ/early park risk UNKNOWN. This reason makes no fixed timing, interrupt-delivery or actual native retention success claim.",
+      "requiredDynamicPostconditions": [
+        "Known typed failure vs unknown Runtime/Error and null boundaries; original failure/retained owner remain non-success",
+        "Actual provider rollback confirmation/notification/unknown retention/budget/generation/socket or terminal-audit consequences require separate scoped dynamic proof",
+        "No duplicate operational start/rollback/close, no invented readiness/after-count/clean marker; current held operation scopes remain held"
+      ]
+    },
+    {
+      "rawOrdinal": 1312,
+      "rule": "EmptyCatchBlock",
+      "sourceSha256": "0741f73cae738e645b957acf26d93cfdf21b44b05b655fa8962b55f701d377cb",
+      "attributeValues": {
+        "method": "diagnoseUnknown"
+      },
+      "line": 64,
+      "reason": "WebRuntimeExecution calls this fixed best-effort diagnostic only after close returned an unconfirmed failure. A diagnostic Runtime/Error must not escape before its loop/reachabilityFence keeps start/await/stop/close and failure reachable in the borrowed frame. No normal completion or second close is produced. SS343 SSC318/316 applies; no actual borrowed-owner/native termination is established.",
+      "requiredDynamicPostconditions": [
+        "Known typed failure vs unknown Runtime/Error and null boundaries; original failure/retained owner remain non-success",
+        "Actual provider rollback confirmation/notification/unknown retention/budget/generation/socket or terminal-audit consequences require separate scoped dynamic proof",
+        "No duplicate operational start/rollback/close, no invented readiness/after-count/clean marker; current held operation scopes remain held"
+      ]
+    },
+    {
+      "rawOrdinal": 1381,
+      "rule": "EmptyCatchBlock",
+      "sourceSha256": "134a6f35746447e6e27020ae8b82da5d67c136f0d20c46e94b41e5b8b81bc47f",
+      "attributeValues": {
+        "method": "deliveryFailure"
+      },
+      "line": 153,
+      "reason": "Web reply deliveryFailure has already selected an original Error, set halted/terminal, and permits best-effort rollback only through attempted CAS. A rollback Runtime/Error remains unconfirmed; no second rollback/ACK is issued. onFatal then executes in try/finally whose finally rethrows the selected same Error even if notification fails. This preserves the distinct Web fatal policy rather than replacing it with rollback/notification failure.",
+      "requiredDynamicPostconditions": [
+        "Known typed failure vs unknown Runtime/Error and null boundaries; original failure/retained owner remain non-success",
+        "Actual provider rollback confirmation/notification/unknown retention/budget/generation/socket or terminal-audit consequences require separate scoped dynamic proof",
+        "No duplicate operational start/rollback/close, no invented readiness/after-count/clean marker; current held operation scopes remain held"
+      ]
+    }
+  ],
+  "sourceContexts": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers.java",
+      "sha256": "fafc64d57c48e7a60209bebd4fc0f4ba2601defe835d285e799856736158a9d0",
+      "ranges": [
+        [
+          1,
+          154
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers.java",
+      "sha256": "f50f3368cdb9869bd35e7fa749fcc4e016049eb4b1cc7d5b3dc0d3043762efc6",
+      "ranges": [
+        [
+          1,
+          218
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java",
+      "sha256": "fd3468afbca377ff77c2a6c22fb2db917d0e0787690204a11affd0e17ef7f973",
+      "ranges": [
+        [
+          1,
+          174
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupExpiryExecution.java",
+      "sha256": "f7100ed36f815cb45f44e6ab9d829d183d359f6aa437aed6c8203d27863b8c3b",
+      "ranges": [
+        [
+          1,
+          424
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+      "sha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+      "ranges": [
+        [
+          1,
+          760
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.java",
+      "sha256": "e5e4b289865f86279ec541a13753fa4cc44f8f8ccacbf9d28a9f8d92735ccb9d",
+      "ranges": [
+        [
+          1,
+          457
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.java",
+      "sha256": "bb546fa7c261e71d7d923eedbc7b5d64efda3ceff6e6c7f05e570e2e12acb617",
+      "ranges": [
+        [
+          1,
+          285
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceProcessResources.java",
+      "sha256": "71c271ca7886d079b70d1d5e870317bd9dcfb13d5d0ab297399d8508a400abb4",
+      "ranges": [
+        [
+          1,
+          280
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.java",
+      "sha256": "0741f73cae738e645b957acf26d93cfdf21b44b05b655fa8962b55f701d377cb",
+      "ranges": [
+        [
+          1,
+          68
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumers.java",
+      "sha256": "134a6f35746447e6e27020ae8b82da5d67c136f0d20c46e94b41e5b8b81bc47f",
+      "ranges": [
+        [
+          1,
+          190
+        ]
+      ]
+    }
+  ],
+  "designReferences": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "line": 5
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "line": 9
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "line": 11
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "line": 15
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 16
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 21
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 23
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 29
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 31
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "line": 33
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "b721e6f7d0ee3f17cfe1a2d38512623814b0a10c8a7ad8ae737c62eeda192195",
+      "line": 39
+    }
+  ],
+  "deferred": [
+    {
+      "rawOrdinal": 1075,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1076,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1077,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1078,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1079,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1080,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1081,
+      "reason": "MorningDatabaseSession lifecycle field: full cross-method handoff/commit/invalidation ownership-state reasoning not yet complete. Volatile syntax or historical proof alone is insufficient; remains UNCLASSIFIED, no dynamic execution."
+    }
+  ]
+}
