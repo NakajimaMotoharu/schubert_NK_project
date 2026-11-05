@@ -1,0 +1,68 @@
+{
+  "atJST": "2026-11-06T01:52:32.883095+09:00",
+  "groupId": "PGPT-ORDINARY-USER-CRITICAL-AUDIT-JDBC-20261106",
+  "sourceBefore": "6bad5e806a7bcad47879d26cf5bdc644f5270caf",
+  "rows": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserAuditWriter.java",
+      "sha256": "f0458e7874c4c5884e4f4dc79a0aedb803d730ab95469b43c610f3618d2eb474",
+      "canonicalOwner": "WBS-P010-03",
+      "canonicalCostOwner": "WBS-P010-03",
+      "existingQualification": "1247 SQL fixed-row limitedspec, no whole3-source proof; no original success replay"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter.java",
+      "sha256": "026ea309fb97c59d525ac8c668f324ce2275cea0dd8c59e26acbfd37f0492b7f",
+      "canonicalOwner": "WBS-P010-01",
+      "canonicalCostOwner": "WBS-P010-01",
+      "existingQualification": "1247 SQL fixed-row limitedspec, no whole3-source proof; no original success replay"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter.java",
+      "sha256": "68568dfbd26fa58a01460ecee9911073b6e66cf2fdea88a69f6776c7892d65d1",
+      "canonicalOwner": "WBS-P010-03",
+      "canonicalCostOwner": "WBS-P010-03",
+      "existingQualification": "1247 SQL fixed-row limitedspec, no whole3-source proof; no original success replay"
+    }
+  ],
+  "changeOwner": "WBS-P010-03",
+  "sharedCostPrimary": "WBS-P010-03",
+  "referenceOnlyNoDuplicatedCost": [
+    "WBS-P010-01"
+  ],
+  "originalEstimatePp": {
+    "low": 2,
+    "base": 5,
+    "high": 9
+  },
+  "capPp": 10,
+  "chargedToSV": false,
+  "quotaBefore": {
+    "primary": {
+      "usedPercent": 21,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 21,
+    "remainingPercent": 79,
+    "observedAtUTC": "2026-11-05T16:47:07Z",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "50905c6d9e66102175bf95365de43c95014488830eec3752a872843e8e6bb4b3"
+  },
+  "scope": "Whole three critical User business/admission/query audit writers: exact borrowed JDBC SQL, enum catalogs, scalar allowlist/role display/NFC, success doubleinsert versus SECURITY-only, size bounds, rowcountfailure and close; independent fixture results.",
+  "decision": "PT_DEFAULT",
+  "fixtures": "Synthetic public actor/target IDs and metadata, immutable State/Change record data only. RequestDTO.decode only from bounded wire input. No password verification/hashing, no issued operation/session/auth credential. Any format field is public zero-format only, not an authority proof.",
+  "closedDependencies": [
+    "JDK java.sql/Proxy/time/Normalizer and Gson only",
+    "AuthenticatedActor/UserId/UserRole/ResultCode/UserMutationResult/response DTO constructors",
+    "UserCommandService$State/$Change constructors only; no outer service/DB/password method",
+    "AdminCommandAuthenticator$Mutation enum constants only; no authenticator or key class",
+    "UserQueryRequest/UserMutationRequest decode/header/mutation/target getters and close only; no canonical/HMAC/query/execute/authentication"
+  ],
+  "oracle": "Handwritten SS351/352 fixed SQL and per-event expectedJSON/column enums/levels/IDs; closed action table for7mutations; outcome/result/role/fieldabsence; independent UTF8 length1024/1025 strings; SQL rowcount1 only; independent exceptions/close sequence, two ownworkers.",
+  "normalReuse": "PG19630 normal six/NullAway and PG19632 sixSB exactly unchanged full current Main/POM input/JAR hashes, no rebuild. Qualify new Test against fixed existing normal Main, no oldexecunion.",
+  "acceptance": "All newlyselected @Tests true OS0/noFESaborted, all three Source whole counters100 incl all normalphysical/compilerstandardfilter/CRC/singleexec; PMD/CS applicable0; independentpost. No global451/formal/runtime/firstV replacement.",
+  "currentHolds": "all previous holds including VM/DB/Root/cohort/keys/native/four/heldtwo/RootFailedtwo/akoiori remain; full business admission/transaction/replay not accepted",
+  "next": "write new independent critical-audit Test/spec, reuse normalinputs only after exactbinding, run new pure suite and independentpost then continue ordinaryPGPT"
+}

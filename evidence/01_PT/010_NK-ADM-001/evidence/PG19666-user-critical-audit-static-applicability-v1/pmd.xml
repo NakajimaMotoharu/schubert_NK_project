@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-06T02:00:10.503">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCriticalAuditPortTest.java">
+<violation beginline="546" endline="546" begincolumn="9" endcolumn="15" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.admin" class="UserCriticalAuditPortTest" method="audit016AdmissionMissingOrClosedRequestIsNotSuccessfulAudit" variable="closed" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this UserMutationRequest object are closed after use
+</violation>
+<violation beginline="567" endline="567" begincolumn="24" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.admin" class="UserCriticalAuditPortTest" method="audit018ConcurrentWritersHaveNoSharedBindOrConnectionState" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="568" endline="568" begincolumn="19" endcolumn="52" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.admin" class="UserCriticalAuditPortTest" method="audit018ConcurrentWritersHaveNoSharedBindOrConnectionState" variable="first" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="569" endline="569" begincolumn="20" endcolumn="53" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.admin" class="UserCriticalAuditPortTest" method="audit018ConcurrentWritersHaveNoSharedBindOrConnectionState" variable="second" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="570" endline="570" begincolumn="19" endcolumn="52" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.admin" class="UserCriticalAuditPortTest" method="audit018ConcurrentWritersHaveNoSharedBindOrConnectionState" variable="third" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="815" endline="815" begincolumn="33" endcolumn="60" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.admin" class="UserCriticalAuditPortTest.Jdbc" variable="nullTypes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="833" endline="833" begincolumn="15" endcolumn="48" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.admin" class="UserCriticalAuditPortTest.Jdbc" method="connection" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="850" endline="850" begincolumn="15" endcolumn="55" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.admin" class="UserCriticalAuditPortTest.Jdbc" method="statement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+</pmd>

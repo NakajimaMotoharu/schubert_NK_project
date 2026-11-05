@@ -1,0 +1,256 @@
+{
+  "coreSource": "827983a97a9c3bf36b7671985a7924417ff0e8f7",
+  "compileManifestSha256": "100f7f3307371d818f4f50021120f345287f624568e95bc1b04b091b49859ef6",
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserAuditWriter.java": "f0458e7874c4c5884e4f4dc79a0aedb803d730ab95469b43c610f3618d2eb474",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter.java": "026ea309fb97c59d525ac8c668f324ce2275cea0dd8c59e26acbfd37f0492b7f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter.java": "68568dfbd26fa58a01460ecee9911073b6e66cf2fdea88a69f6776c7892d65d1",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCriticalAuditPortTest.java": "a707009744a511335e897bcc0137281a54ff76ad0961e8fa88c3196abff11575"
+  },
+  "stages": {
+    "pmd": {
+      "actualExit": 4,
+      "timedOut": false,
+      "startUTC": "2026-11-05T17:00:09.813188+00:00",
+      "endUTC": "2026-11-05T17:00:12.485542+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/record-fix-v1/pmd-record-1298.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/antlr4-runtime-4.13.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-ls_2.13-6.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-parser-5.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/better-files_2.13-3.9.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/checker-qual-3.55.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-better-files_2.13-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/error_prone_annotations-2.48.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/failureaccess-1.0.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/geny_2.13-0.6.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/groovy-5.1.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-extras-3.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/guava-33.7.1-jre.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/io_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/j2objc-annotations-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/java-diff-utils-4.16.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-native-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-terminal-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jna-5.12.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsoup-1.23.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsr250-api-1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jul-to-slf4j-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-build-tools-api-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-daemon-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-script-runtime-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-common-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-impl-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-jvm-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk7-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk8-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-analyzer-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-model-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-coroutines-core-jvm-1.8.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-core-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-json-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/mainargs_2.13-0.5.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/nice-xml-messages-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/outline-parser_2.13-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/parsers_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pcollections-4.0.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/picocli-4.7.7.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ant-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-apex-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cli-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-coco-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-core-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cpp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cs-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-css-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-dart-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-designer-7.19.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-fortran-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-gherkin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-go-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-groovy-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-html-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-java-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-javascript-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-jsp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-julia-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-kotlin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-lua-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-matlab-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-modelica-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-objectivec-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-perl-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-php-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-plsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-python-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ruby-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-rust-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-scala_2.13-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-swift-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-tsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-velocity-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-visualforce-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-xml-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/portable-scala-reflect_2.13-1.1.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/progressbar-0.10.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/rhino-1.7.15.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-collection-compat_2.13-2.8.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc-upickle-json-serializer_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-library-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-parallel-collections_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-reflect-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-xml_2.13-1.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scalajs-stubs_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-api-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-simple-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sobject-types-67.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sourcecode_2.13-0.4.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/standard-types-67.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/summit-ast-3.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/ujson_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upack_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-core_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-implicits_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/vf-parser-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3.jar",
+        "net.sourceforge.pmd.cli.PmdCli",
+        "check",
+        "--file-list",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19666-user-critical-audit-style-static-v1/source-list.txt",
+        "--rulesets",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/pmd.xml",
+        "--use-version",
+        "java-25",
+        "--minimum-priority",
+        "5",
+        "--aux-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "--no-cache",
+        "--format",
+        "xml",
+        "--report-file",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19666-user-critical-audit-style-static-v1/pmd.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19666-user-critical-audit-style-static-v1",
+      "stdoutSha256": "ddd863c131283e1ede47d8060f0a23cd3ed5202097931be27760c767e2a7c31a",
+      "stderrSha256": "51244753c63203e24100ba1ac0d946c18ec785f931179b6a72a0d67a7fb7c795"
+    },
+    "checkstyle": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-05T17:00:12.485913+00:00",
+      "endUTC": "2026-11-05T17:00:13.452770+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19666-user-critical-audit-style-static-v1/checkstyle.xml",
+        "@/home/mini/codex/project1/work/pgpt-runs/PG379/pg19666-user-critical-audit-style-static-v1/source-list.txt"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19666-user-critical-audit-style-static-v1",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "reports": {
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19666-user-critical-audit-style-static-v1/pmd.xml",
+      "sha256": "80f9475b94ab53d699c0baae8a5dcd27cd2bbd894a951d5d030a4bc5980ad4e5",
+      "findings": 8,
+      "processingErrors": 0,
+      "items": [
+        {
+          "beginline": "546",
+          "endline": "546",
+          "begincolumn": "9",
+          "endcolumn": "15",
+          "rule": "CloseResource",
+          "ruleset": "Error Prone",
+          "package": "dev.codex.schubert.nk.api.application.admin",
+          "class": "UserCriticalAuditPortTest",
+          "method": "audit016AdmissionMissingOrClosedRequestIsNotSuccessfulAudit",
+          "variable": "closed",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+          "priority": "3",
+          "message": "Ensure that resources like this UserMutationRequest object are closed after use"
+        },
+        {
+          "beginline": "567",
+          "endline": "567",
+          "begincolumn": "24",
+          "endcolumn": "55",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.application.admin",
+          "class": "UserCriticalAuditPortTest",
+          "method": "audit018ConcurrentWritersHaveNoSharedBindOrConnectionState",
+          "variable": "workers",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3",
+          "message": "To be compliant to J2EE, a webapp should not use any thread."
+        },
+        {
+          "beginline": "568",
+          "endline": "568",
+          "begincolumn": "19",
+          "endcolumn": "52",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.application.admin",
+          "class": "UserCriticalAuditPortTest",
+          "method": "audit018ConcurrentWritersHaveNoSharedBindOrConnectionState",
+          "variable": "first",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3",
+          "message": "To be compliant to J2EE, a webapp should not use any thread."
+        },
+        {
+          "beginline": "569",
+          "endline": "569",
+          "begincolumn": "20",
+          "endcolumn": "53",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.application.admin",
+          "class": "UserCriticalAuditPortTest",
+          "method": "audit018ConcurrentWritersHaveNoSharedBindOrConnectionState",
+          "variable": "second",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3",
+          "message": "To be compliant to J2EE, a webapp should not use any thread."
+        },
+        {
+          "beginline": "570",
+          "endline": "570",
+          "begincolumn": "19",
+          "endcolumn": "52",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.application.admin",
+          "class": "UserCriticalAuditPortTest",
+          "method": "audit018ConcurrentWritersHaveNoSharedBindOrConnectionState",
+          "variable": "third",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3",
+          "message": "To be compliant to J2EE, a webapp should not use any thread."
+        },
+        {
+          "beginline": "815",
+          "endline": "815",
+          "begincolumn": "33",
+          "endcolumn": "60",
+          "rule": "UseConcurrentHashMap",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.application.admin",
+          "class": "UserCriticalAuditPortTest.Jdbc",
+          "variable": "nullTypes",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+          "priority": "3",
+          "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+        },
+        {
+          "beginline": "833",
+          "endline": "833",
+          "begincolumn": "15",
+          "endcolumn": "48",
+          "rule": "UseProperClassLoader",
+          "ruleset": "Error Prone",
+          "package": "dev.codex.schubert.nk.api.application.admin",
+          "class": "UserCriticalAuditPortTest.Jdbc",
+          "method": "connection",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+          "priority": "3",
+          "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+        },
+        {
+          "beginline": "850",
+          "endline": "850",
+          "begincolumn": "15",
+          "endcolumn": "55",
+          "rule": "UseProperClassLoader",
+          "ruleset": "Error Prone",
+          "package": "dev.codex.schubert.nk.api.application.admin",
+          "class": "UserCriticalAuditPortTest.Jdbc",
+          "method": "statement",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+          "priority": "3",
+          "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+        }
+      ]
+    },
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19666-user-critical-audit-style-static-v1/checkstyle.xml",
+      "sha256": "b5b2c9cd3685c078a88caeaec093e025c3c6eb01444948d265881db007296d57",
+      "findings": 0,
+      "processingErrors": 0,
+      "items": []
+    }
+  },
+  "sameSourceSixMainSpotBugs": {
+    "manifest": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19632-web-outbox-current-six-static-reactor-v1/manifest.safe.json",
+    "sha256": "a607c0549bc695087d6e5162fd610546493e27f023d44b3fb60110b3303d3e5a",
+    "reports": {
+      "protocol": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "98ed5445a1efd27fd4f9fd797f66869d649d8f69c9779f80da8e8742e5bcbaae"
+      },
+      "storage": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "5988998932309b405279e1d9f266f6994fd2bdfb8d10efffcef17cb4d8304a36"
+      },
+      "bootstrap": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "038b1285dc5ed759a26688a0afa25bf3eb1b3422f3f0d38a60f6e7707f6fdd4f"
+      },
+      "api": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-api/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "dd6924652027bb2e6999ce5791ce83dd942ee13fe7f3148acbbdf791e19bac4c"
+      },
+      "web": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-web/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "29f932e8270a445c181d5819d93c241bd04cf1b67316f1262dc55599017468d3"
+      },
+      "batch": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-batch/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "0859e0f584ecd2dd8de5daeeb545af4909c82f77b5fb6fc75a710e4cb1ee10ea"
+      }
+    },
+    "currentAllMainInputsEqualPinnedNormalBuild": true
+  },
+  "rules": {
+    "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "suppressionAdded": false,
+  "testsExecuted": 0,
+  "formalUpdated": false,
+  "driverSha256": "ea98f6ee5e300cffccaa04951eabf3b4dd4b6d74494856daf8989ad2ad373818",
+  "configHash": "a9023a08ed9d06a3bbfb88dbf47567e14fbe38036ca73f37d163cf97f263fd8d"
+}
