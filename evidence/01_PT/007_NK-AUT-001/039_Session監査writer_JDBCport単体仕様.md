@@ -27,3 +27,7 @@ Null契約: security package-infoの@NullMarkedでconnection/client/messageId/co
 PG19780 compile0/19782 raw8中のlabel重複3をBUG2313/YKT2058へ修正前起票。旧Test/producer001/compile/rawはPG19782-historyへhash保全、JUnit未実行。操作traceのlabelだけ定数化し逆展開byte一致、SQL/JSON/外部期待値/九case不変更。新active producer003でunused19786compile/19787staticを行い、元19780/19782を上書き再実行しない。初回Unit19788/post19790は未使用のまま。
 
 881へstatic19787 raw5の全個別context（worker3/ownMap1/definingJDBCloader1）を保存、Main0/適用0-CS0-parser0/抑制0、初回Unit未実行。Null compile工具002はpinned API/protocol/JSpecify jarと同一copy親POM/同一Main default compiler設定を使う。自己所有positive/negative各新moduleでcompileだけを一度、positive0/negative1とactual source七行のNullAway診断を照合する。systemPath一時fixtureモデルwarningは原文保持し、本番POMを変えない。独立postは全source/argv/OS終端/hash/診断行を再構成する。これは七Product実行やcoverage測定ではない。
+
+## Null canary生成源のformat是正（BUG2314/YKT2059）
+
+元002/19784 positivebuild1（継承Spotless不適合）/negative未実行をPG19784-failed-historyに保全、NullAway受入へ算入0。新004は固定GJF1.36.1で整形済005/006源を読み、七null literal tokenのpostformat行を期待診断集合とする。工具/テンプレートsourceとhashをfreeze後、新unused19794へ正負各compile一度、原parent/Spotless/NullAway/processor flagsは不変更。skip/quality緩和/古いmoduleの再実行0。PG19788九JUnit初回0・originalpost0とGit artifact追加独立post19790は別の結果として保存、nullablecanaryの是正でJUnitを再演しない。

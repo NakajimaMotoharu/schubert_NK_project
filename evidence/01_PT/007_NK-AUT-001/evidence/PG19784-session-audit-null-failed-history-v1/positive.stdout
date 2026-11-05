@@ -1,0 +1,73 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for dev.codex.schubert:session-audit-null-contract-canary:jar:0.1.0-SNAPSHOT
+[WARNING] 'dependencies.dependency.systemPath' for fixture.pinned:api:jar should use a variable instead of a hard-coded path /home/mini/codex/project1/work/pgpt-runs/PG379/pg19740-f03-index-style-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar @ line 1, column 454
+[WARNING] 'dependencies.dependency.systemPath' for fixture.pinned:protocol:jar should use a variable instead of a hard-coded path /home/mini/codex/project1/work/pgpt-runs/PG379/pg19740-f03-index-style-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar @ line 1, column 772
+[WARNING] 'dependencies.dependency.systemPath' for fixture.pinned:jspecify:jar should use a variable instead of a hard-coded path /home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar @ line 1, column 1100
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] -------< dev.codex.schubert:session-audit-null-contract-canary >--------
+[INFO] Building session-audit-null-contract-canary 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (toolchain-and-dependency-contract) @ session-audit-null-contract-canary ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] Rule 2: org.apache.maven.enforcer.rules.dependency.DependencyConvergence passed
+[INFO] 
+[INFO] --- spotless:3.10.2:check (java-format-contract) @ session-audit-null-contract-canary ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 1 files clean - 1 needs changes to be clean, 0 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.746 s
+[INFO] Finished at: 2026-11-06T04:19:57+09:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal com.diffplug.spotless:spotless-maven-plugin:3.10.2:check (java-format-contract) on project session-audit-null-contract-canary: The following files had format violations:
+[ERROR]     src/dev/codex/schubert/nk/api/security/SessionAuditNonnullCaller.java
+[ERROR]         @@ -1,17 +1,26 @@
+[ERROR]          package·dev.codex.schubert.nk.api.security;
+[ERROR]         +
+[ERROR]          import·dev.codex.schubert.nk.protocol.header.ResultCode;
+[ERROR]         +import·java.net.InetAddress;
+[ERROR]          import·java.sql.Connection;
+[ERROR]          import·java.sql.SQLException;
+[ERROR]         -import·java.net.InetAddress;
+[ERROR]         +import·java.time.Instant;
+[ERROR]          import·java.util.Optional;
+[ERROR]          import·java.util.UUID;
+[ERROR]         -import·java.time.Instant;
+[ERROR]          import·org.jspecify.annotations.NullMarked;
+[ERROR]         +
+[ERROR]          @NullMarked
+[ERROR]          final·class·SessionAuditNonnullCaller·{
+[ERROR]         -··static·void·check(SessionAuditWriter·writer,·Connection·connection,
+[ERROR]         -······Optional<InetAddress>·client,·UUID·messageId,·UUID·correlationId,·Instant·at,
+[ERROR]         -······SessionRevocationReason·reason,·ResultCode·result)·throws·SQLException·{
+[ERROR]         +··static·void·check(
+[ERROR]         +······SessionAuditWriter·writer,
+[ERROR]         +······Connection·connection,
+[ERROR]         +······Optional<InetAddress>·client,
+[ERROR]         +······UUID·messageId,
+[ERROR]         +······UUID·correlationId,
+[ERROR]         +······Instant·at,
+[ERROR]         +······SessionRevocationReason·reason,
+[ERROR]         +······ResultCode·result)
+[ERROR]         +······throws·SQLException·{
+[ERROR]          ····writer.write(connection,·17,·41,·client,·messageId,·correlationId,·at,·reason,·result);
+[ERROR]          ··}
+[ERROR]          }
+[ERROR] Run 'mvn spotless:apply' to fix these violations.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
