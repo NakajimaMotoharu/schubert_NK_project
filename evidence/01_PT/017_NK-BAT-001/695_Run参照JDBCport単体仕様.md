@@ -1,0 +1,20 @@
+# Run参照 JDBC port単体仕様
+
+Program NK-BAT-001 / RunReferenceRepository全method / DAT009・OPS009・UI251・SS311/331§3.12/332/343・SSC055/063・PT-BAT082～089・411/451・787。既親connectionはcallerがOS/DB exclusionを保持し、当repositoryはconnection寿命/transaction/lock/fileを操作しない。SQLの呼出引数と返却projection/自己取得資源の後条件だけを検査する。
+
+|Test ID|RunReferencePortTest method・入力・独立期待|
+|---|---|
+|PT-BAT-RUNPORT001|literalSqlTimeoutBindingsAndOwnershipOrderMatchBorrowedParentContract。literal4列SQL/timeout5、固定UUID/cutoff UTCmicrosecondの二bind、auto-readonly-isolation→query→rowclose→stmtclose、四boolean値のliteral照合、owner connection操作禁止。|
+|PT-BAT-RUNPORT002|allSixteenProjectionTuplesKeepFourIndependentBooleansOrRejectOnlyInconsistentEmpty。手組16boolean組合せ、全falseの不整合だけ固定拒否、他15は各propertyを入力bitと直接比較。SUTfactoryをexpected算出へ使わない。|
+|PT-BAT-RUNPORT003|nullAndTransactionPreconditionsRejectBeforeAcquiringAnyOwnedResource。constructor/read nonnull契約NPE拒否、auto=true/readonly=true/isolation SERIALIZABLEは固定catalog/資源取得0。|
+|PT-BAT-RUNPORT004|nullAcquisitionsMissingDuplicateRowsAndRequiredColumnsNeverBecomeDefaults。statement/row null、行0/2、必須四列各nullは固定catalog/cause-suppressed0。存在するrow/stmtだけ各close1、nullをfalseへ補完しない。|
+|PT-BAT-RUNPORT005|eachProviderFailureHasFixedSqlOrOriginalUnknownIdentityAndAttemptsOwnedClose。precondition/prepare/timeout/bind/query/next/各列/各closeのSQL/RTE/Errorを注入。SQLは固定BatchRepositoryException、unknown/Errorは元同一性、取得段階ごとのclose回数。|
+|PT-BAT-RUNPORT006|declaredSqlUnknownCleanupSelectionUsesPrimaryIdentityAndFixedSecondaryOnly。body SQL/RTE/Error×row又はstmtclose SQL/RTE/Errorの18組。SS332/SSC063のSQLprimary＋unknowncloseだけsecondary、それ以外primary維持、unknownprimaryに固定Batch診断だけ。sameSQLException/selfsuppression0、suppression無効unknownも同一性保持。API/readiness専用SSC329/330を無断に移植しない。|
+|PT-BAT-RUNPORT007|ownWorkerInterruptionAtEntryOrAfterCleanupNeverLeaksResultOrInterruptsCaller。自分のworkerだけentry/rowclose/stmtcloseでIRQ、固定拒否し取得済資源close、flag保持、finallyでworkerflagclear、親JUnitflag不変。future5s有限。|
+|PT-BAT-RUNPORT008|independentBorrowedParentsNeverShareBindingsOrReturnedProjection。別二parentconnection/repositoryで固定UUID1/2と異なる四flag、二worker/有限get、各bindとresult独立、close各1。実OS/DB exclusionは未証明。|
+
+FixtureはJava JDBC interface Proxy、手組bool/null/ownThrowable/event recorderだけ。新connection/pool/driver/SQLengine/DB/storedfunction/Root/native/VM/permit/intent/実run/credential/鍵/保全物へアクセスしない。既RunReferenceRepositoryTestはBeforeAll実DBのためcompile/runへ含めない。NULL assignmentはDB結果negative fixtureだけで、productionNPEcatch/正常化なし。IRQは自作workerのJavaThread APIだけ、実process/job/Unit操作ではない。
+
+Mainの全method閉包はpureBatch DTO/局所JdbcResourceFailures/固定BatchRepositoryException/JavaSQL/IRQ読取のみでHELD四class呼出なし。Unknownfailureの選択は承認済SSC063の型/資源順位、他scopeのfatal graphや実lock/削除許可・再開権限を本測定で新たに認定しない。
+
+PG18976compile0/PG18978static raw31のentrylabel一適用をBUG2287/YKT2032へ修正前登録し全五同値const化。元compile/static/producer保持、Main/旧DBTest/期待値不変更。修正後PG18980compile/18982static、exactsource固定後PG18984全8/一class/正常Batchjar/単exec-session/全physical1/CRC/四counter100/HELD四probe0を独立post。Main6build/NullAway/SBはPG18642/18648全入力/JARpin一致で再利用。抑制/任意除外/旧exec合算なし。結果/時刻/OS-JDK/source/command/exit/hash/BUGは696へ。群終了枠はfreshgetter時刻>=post終端を必須assert、未達なら費用閉鎖しない。親WBS/実DB/Root/native/V/451/IT-STは未完。
