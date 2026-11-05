@@ -1,0 +1,110 @@
+{
+  "rawFindings": 12,
+  "applicableFindings": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionsAdded": false,
+  "classifications": [
+    {
+      "file": "PayloadCodec.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "169",
+      "rawMessage": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "classification": "NOT_APPLICABLE_WITH_EXPLICIT_SCOPE",
+      "reason": "method-local map created and consumed in one invocation; not shared across threads, order and nullable fixture semantics are intentional"
+    },
+    {
+      "file": "PayloadGoldenVectorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "141",
+      "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+      "classification": "NOT_APPLICABLE_WITH_EXPLICIT_SCOPE",
+      "reason": "standalone JUnit owned finite executor, joined via Future and closed; not deployed J2EE code"
+    },
+    {
+      "file": "PayloadGoldenVectorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "145",
+      "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+      "classification": "NOT_APPLICABLE_WITH_EXPLICIT_SCOPE",
+      "reason": "standalone JUnit owned finite executor, joined via Future and closed; not deployed J2EE code"
+    },
+    {
+      "file": "WebLogActionContractTest.java",
+      "rule": "NullAssignment",
+      "line": "179",
+      "rawMessage": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "classification": "NOT_APPLICABLE_WITH_EXPLICIT_SCOPE",
+      "reason": "explicit negative constructor fixture, asserts NullPointerException and never treats it as successful production outcome"
+    },
+    {
+      "file": "WebLogActionContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "208",
+      "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+      "classification": "NOT_APPLICABLE_WITH_EXPLICIT_SCOPE",
+      "reason": "standalone JUnit owned finite executor, joined via Future and closed; not deployed J2EE code"
+    },
+    {
+      "file": "WebLogActionContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "209",
+      "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+      "classification": "NOT_APPLICABLE_WITH_EXPLICIT_SCOPE",
+      "reason": "standalone JUnit owned finite executor, joined via Future and closed; not deployed J2EE code"
+    },
+    {
+      "file": "WebLogActionContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "210",
+      "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+      "classification": "NOT_APPLICABLE_WITH_EXPLICIT_SCOPE",
+      "reason": "standalone JUnit owned finite executor, joined via Future and closed; not deployed J2EE code"
+    },
+    {
+      "file": "IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "86",
+      "rawMessage": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "classification": "NOT_APPLICABLE_WITH_EXPLICIT_SCOPE",
+      "reason": "method-local map created and consumed in one invocation; not shared across threads, order and nullable fixture semantics are intentional"
+    },
+    {
+      "file": "IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "91",
+      "rawMessage": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "classification": "NOT_APPLICABLE_WITH_EXPLICIT_SCOPE",
+      "reason": "method-local map created and consumed in one invocation; not shared across threads, order and nullable fixture semantics are intentional"
+    },
+    {
+      "file": "IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "99",
+      "rawMessage": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "classification": "NOT_APPLICABLE_WITH_EXPLICIT_SCOPE",
+      "reason": "method-local map created and consumed in one invocation; not shared across threads, order and nullable fixture semantics are intentional"
+    },
+    {
+      "file": "IndependentNamedFieldOracle.java",
+      "rule": "NullAssignment",
+      "line": "185",
+      "rawMessage": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "classification": "NOT_APPLICABLE_WITH_EXPLICIT_SCOPE",
+      "reason": "explicit negative constructor fixture, asserts NullPointerException and never treats it as successful production outcome"
+    },
+    {
+      "file": "IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "192",
+      "rawMessage": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "classification": "NOT_APPLICABLE_WITH_EXPLICIT_SCOPE",
+      "reason": "method-local map created and consumed in one invocation; not shared across threads, order and nullable fixture semantics are intentional"
+    }
+  ],
+  "duplicateLiteralFindingsBeforeFix": 4,
+  "literalFixSource": "2eaf7dd2128c2fbc8584738c0dbd743ecda6159b",
+  "sixSpotbugsBugs": 0,
+  "sixSpotbugsMissing": 0,
+  "sixSpotbugsErrors": 0
+}
