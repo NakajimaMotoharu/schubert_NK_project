@@ -1,0 +1,18 @@
+# NK-CHR-001 gate定義JSON 単体実行結果
+
+Source45fab165144ad411f745c3a7151634f4181360a1、Core b093不変。PG18716/27296 251c86は35unique/6class、失敗/エラー/skipped/aborted0。新GateDefinitionDocumentsTest全11と変更Mainの関連24を同じ正常artifactで実行。全step終了0。独立post1159d0/0が全入力/Git/normalJar9physical CRC/単session/元XML全35method/六public JSONのhashとclasspath所属を確認。旧24と当35を加算しない。
+
+PT-CHR-DEF001～011の11methodは005仕様表/manifestのclass-methodで一意対応。実行commandはmanifest.begin/stepへ全引数を固定。Java25.0.4+Maven3.9.12、JUnit1.13.4、JaCoCo0.8.15、当branchdev-foundation。実時刻/OS/tool versionはcompile/Unit manifestと既toolchain記録を参照。全expectedはSS355/UI264とliteral code/table、不正値ごとに明示codeをassertしproductionから生成0。
+
+新validateDefinitionsと既validateContractShape/validateSchema/validateCatalog/expectedGroup/validateBrowser/validateDifferences/findDifference/validateRequirementsの9methodはline/method/branch全未達0（直接分岐計85）。whole GateContractValidatorはbranch99covered/102miss、line207covered/223miss、method16covered/24missで未受入。前sourceのbranch4covered/193missから95分岐を追加実行し、未達は91減（分母は新methodの4分岐増）。これを全PGPT完成率にしない。内側require/strings/lambdaも元XMLへ全counterを残し、方法/行を分母除外しない。
+
+他三Source（CorrelatedLogEvidenceValidator/ArtifactComparator/TargetAdapter）は同source/runの四counter100%で再資格。GateCliとGateContractValidator全体はpartialのまま。独自filter/除外/旧exec合算0、JaCoCo既定compiler filter不変更。旧正式1964PT53scope/歴史17/190/工数null/新leaf0、実CHR/全451/親P02001は未更新。
+
+BUG2274/YKT2019：初回PG18714は35中error11、classpath不足。Main/Test/正常jarを変えず、isolated snapshotの固定六resourceだけをclasspathへ加えた。元35 errors11と元xmlhash/commandを公開保持、成功へ転換せず新PG18716単execへ分離。生存jobや実環境は再発行0。影響する六ファイルと全class-selector、全hash/membershipをpostでも確認した。
+
+BUG2269/YKT2014の残四versioncallerを、null/text/floating/overflow/missing/0/2とBigInteger1で動的確認。同型predicateだけを直接試す代替ではなく本validateDefinitionsから既四validatorへ到達する。元相関version/observation versionの2callerと合わせて全六scopeの是正根拠が揃った。全実gate後段を受入とはしない。
+
+証跡 `evidence/PG18716-gate-definitions-thirtyfive-v1/manifest.json`
+SHA256 `0550ffe9016104b0eca82e0a13f2ef7a3687e97cf20d0f709b4f0c134c7115b3`
+
+原失敗 `evidence/PG18714-original-resource-fixture-errors-v1/public-pins.json`。PG本体同値証明721/静的722/資格723へ相互参照。実run/baseline/DB/Root/VM/Browser/capture/private原本・heldfilesアクセス0。
