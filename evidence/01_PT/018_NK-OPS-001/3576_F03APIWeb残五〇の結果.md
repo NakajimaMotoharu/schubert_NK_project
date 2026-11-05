@@ -1,0 +1,7 @@
+# F03APIWeb残五〇の文脈照合
+
+2026-11-06T08:12:18.550714+09:00 / dev-foundation / Main source 28af318d0198fe7432ca6fcd234d3fabbfd10173。PG20070 metadata真正0/独立post0。PG20070 metadata0/独立post0。1491=前1289+新50+残152、ID/ordinal/unique1439/duplicate52/Morning残4/transaction431保持。Main/POM/normal19740/SB19742/JAR/currentSS一致。Product/credential/codec/session/SQL/observer/worker/HTTP/ADMIN/native/Root/VM/PT実行0/coverage未測定。
+
+本群50件、先行と重複なし累計1339/生1491、未分類152。scope: API24/Web26 remaining catches: partial assembly, observation UNKNOWN, worker/storage/logout/servlet/process terminal boundaries. Style purpose classification only; not whole exception-priority/cleanup correctness proof.。全finding/source/context/hash/元ordinalは公開 evidence/01_PT/018_NK-OPS-001/evidence/PG20070-api-web-remaining-context-v1/manifest.json / SHA256 3effb36769255de65e3467385b45c9186ac26a61e74c56b780a3f9769b1564c2。関連仕様evidence/01_PT/018_NK-OPS-001/3575_F03APIWeb残五〇の仕様.md・計測documents/400_PGPT/470_PMO/500_SV計画整備_20261104/940_F03APIWeb残五〇の結果.json。
+
+rawGate1/全適用違反null/全F03・451未受入、Product実行0/coverage未測定/動的PT免除0/新個別受入0/技術成分46/正式1964-53/歴史17-190/工数null/第一V同HOLD。原群{'low': 0.5, 'base': 2, 'high': 5} cap6不変更、共有26→26=0ppをPGPT-20261008-3970へ一度（ordinary20/all27/S7残3）、専有N/Tnull。次=Review remaining batch121/bootstrap31 sites individually; prioritize transaction-owned maintenance and bootstrap fixed diagnostics. Keep transaction431 and unresolved functional/native contracts separate and unaccepted.、通常区切り停止不可。
