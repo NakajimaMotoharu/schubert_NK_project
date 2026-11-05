@@ -22,3 +22,5 @@ callbackのsynthetic6Queue/Long-Integer countとbytes、固定閾値の前/等�
 SDK18型とparent初期化はinput001へ凍結。初期静的guard1（SimpleString自己of/Message Predicatebootstrap未分類）は製品未実行のまま止まり、19JavaP OS0既存情報＋既SDK値class証拠とJDKLambdaMetafactory参照で静的確定。許可SDKset/Message生成lambda最大2をpostで照合し、実factory/ClientRequestor/channel/native/Owner初期化を許さない。CPは旧6SDK同hash・normalBootstrapGuard型/JSpecifyだけ追加。
 
 BUG2293/YKT2038はMQPRESS既1693とのID衝突へ修正前起票、新OPS-QPP-PORT-001～006へcomment/仕様を一貫改名。旧1693ID/期待値/Mainは不変更、他新5namespaceは各一classのみを確認。原PG19170/19172を保持し最終PG19180compile0/19182raw3全個別非適用・適用0-CS0-parser0、819。source固定/push後、新専用PG19178全6を一回→独立post。
+
+PG19178/source3b527全6初回0・53L12M4C28B未達0だが独立post未認定。SDKclass-initは実0でCoreSessionは検証行2だけ、型検証を初期化と混同しない。元工具のSDK非空必須をBUG2294/YKT2039へ修正前起票。原run/producer input002を保持し、Main/Test/期待値を変更・PT再実行せず、別Git固定input003 verifierから元producerGitblob/compile/runhashと自分のGitblob/hashを独立検証する。post Sourceは元3b527、verifier Sourceを別保持。SDK非空が必要な旧inboundは不変更、全CRC/全四100/原stagehash/HELD四/一exec条件は維持。820に是正前後と役割を記録、成功後の結果は3512/821へ。
