@@ -1,0 +1,128 @@
+{
+  "actualExit": 0,
+  "rawPmdExit": 4,
+  "rawFindings": 3,
+  "applicableFindings": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": 0,
+  "items": [
+    {
+      "source": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+      "line": 348,
+      "rule": "DoNotUseThreads",
+      "applicability": "NOT_APPLICABLE_TEST_SCOPE",
+      "reason": "StandaloneJUnit own2worker ExecutorService with5sFuture.get andscopeclose; captured entries CopyOnWrite + atomiccall2, no runtime thread/service or external resource."
+    },
+    {
+      "source": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+      "line": 350,
+      "rule": "DoNotUseThreads",
+      "applicability": "NOT_APPLICABLE_TEST_SCOPE",
+      "reason": "StandaloneJUnit own2worker ExecutorService with5sFuture.get andscopeclose; captured entries CopyOnWrite + atomiccall2, no runtime thread/service or external resource."
+    },
+    {
+      "source": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+      "line": 360,
+      "rule": "DoNotUseThreads",
+      "applicability": "NOT_APPLICABLE_TEST_SCOPE",
+      "reason": "StandaloneJUnit own2worker ExecutorService with5sFuture.get andscopeclose; captured entries CopyOnWrite + atomiccall2, no runtime thread/service or external resource."
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebMediaAudit.java": "d25e211a6d33544b7b96dbd4c245dc225b5b5a4fd90c4392c7524d0844fe3128",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java": "6c5b1611e64fceb12d1763832d94e30d4c24f00d33754b83ae888b9b48f5e93a"
+  },
+  "sameNormalSixSpotbugs": {
+    "manifest": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19632-web-outbox-current-six-static-reactor-v1/manifest.safe.json",
+    "sha256": "a607c0549bc695087d6e5162fd610546493e27f023d44b3fb60110b3303d3e5a",
+    "reports": {
+      "protocol": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "98ed5445a1efd27fd4f9fd797f66869d649d8f69c9779f80da8e8742e5bcbaae"
+      },
+      "storage": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "5988998932309b405279e1d9f266f6994fd2bdfb8d10efffcef17cb4d8304a36"
+      },
+      "bootstrap": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "038b1285dc5ed759a26688a0afa25bf3eb1b3422f3f0d38a60f6e7707f6fdd4f"
+      },
+      "api": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-api/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "dd6924652027bb2e6999ce5791ce83dd942ee13fe7f3148acbbdf791e19bac4c"
+      },
+      "web": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-web/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "29f932e8270a445c181d5819d93c241bd04cf1b67316f1262dc55599017468d3"
+      },
+      "batch": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19630-web-outbox-current-six-main-compile-v1/snapshot/src/schubert-nk-batch/target/spotbugsXml.xml",
+        "bugs": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "sha256": "0859e0f584ecd2dd8de5daeeb545af4909c82f77b5fb6fc75a710e4cb1ee10ea"
+      }
+    },
+    "currentAllMainInputsEqualPinnedNormalBuild": true
+  },
+  "bug": "BUG-2309",
+  "ykt": "YKT-2054",
+  "horizontalAllOtherFour": [
+    {
+      "manifest": "evidence/01_PT/015_NK-WEB-001/evidence/PG19642-web-outbox-static-applicability-v1/manifest.json",
+      "sha256": "716b6e64d35bd95b100f24aab4fb5d8eabe13de2cbd40756e713167f15f91edc",
+      "unchangedTargetTestSha256": "bfc43a279b680a1bb88465d39acc0f59ea7f5e5111322e130de9fe8894bc6090",
+      "aliasRawCount": 0,
+      "outcome": "UNCHANGED_TEST_WITH_PRIOR_WHOLE_STATIC_NO_ALIAS"
+    },
+    {
+      "manifest": "evidence/01_PT/010_NK-ADM-001/evidence/PG19666-user-critical-audit-static-applicability-v1/manifest.json",
+      "sha256": "d1c7e87ad1cf084aeeae7a04feafad9dd34a25ffaea4bb2deef03a52e88eafa9",
+      "unchangedTargetTestSha256": "a707009744a511335e897bcc0137281a54ff76ad0961e8fa88c3196abff11575",
+      "aliasRawCount": 0,
+      "outcome": "UNCHANGED_TEST_WITH_PRIOR_WHOLE_STATIC_NO_ALIAS"
+    },
+    {
+      "manifest": "evidence/01_PT/014_NK-QRY-001/evidence/PG19682-question-critical-audit-static-applicability-v1/manifest.json",
+      "sha256": "aea8b3dbaf20fa5553c158096467bb75574ec876a81b9ac87f4a67ed8e68de29",
+      "unchangedTargetTestSha256": "a0ae26af387cc48d71f28c47b89866a2c50c192b965838321860a773ea91daaf",
+      "aliasRawCount": 0,
+      "outcome": "UNCHANGED_TEST_WITH_PRIOR_WHOLE_STATIC_NO_ALIAS"
+    },
+    {
+      "manifest": "documents/400_PGPT/470_PMO/500_SV計画整備_20261104/867_WebSecurityAudit既六成功のbyte・oracle再利用照合.json",
+      "sha256": "79357d6e657777d1b203549c094d3c95715f180c4c55dc2d8dd455ad5289cf5b",
+      "testSha256": "4c73d76e9cc7067380497a8bf63c47b1678f59b20b6644350dc0fe83ab6d3819",
+      "outcome": "SAME_FIXED_SOURCE_4b5_AUDIT_PRINCIPAL_AND_CONTEXT12201_POST12203_NO_ALIAS"
+    }
+  ],
+  "aliasActuallyFixed": "ACTOR to MEDIA_PRINCIPAL; original4 preserved, no expected values changed",
+  "productOrTestExecuted": false,
+  "wholeF03": false,
+  "files": {
+    "pmd.stdout": "83ddcb4d394b67b89fd7992560334ddff7a0d54b28cc568d5d4225357f6c4a88",
+    "pmd.stderr": "7aae4b3230a9ca08f9027790857d9910e00b1cba600df6a6245de458eab31671",
+    "manifest.safe.json": "6c213195fb2c094e62b2f2eb2ce5e0d9eeb0e8917e60dcfeaf3e05c03838ba1f",
+    "checkstyle.xml": "b0ef15e561c30782a5ac3d6a17c79f4dc8c0f4b4f032f9335985c89da2ab3c84",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pmd.xml": "b93a5a0dc82fb2ec91f833ff56bb16555cfe119f98e542b82800414002a9a937",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
