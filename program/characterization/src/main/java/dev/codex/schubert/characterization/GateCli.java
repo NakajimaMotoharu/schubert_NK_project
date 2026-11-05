@@ -401,6 +401,39 @@ public final class GateCli {
     return false;
   }
 
+  /** SS355 / PT-CHR-NUM001..005: pure numeric metadata, no publication or permission grant. */
+  static BaselineNumbers baselineNumericMetadata(JsonNode expected, JsonNode browser) {
+    if (expected == null || browser == null) {
+      throw new IllegalArgumentException("baseline numeric documents are required");
+    }
+    return new BaselineNumbers(
+        baselineLong(expected.path(FIELD_MASTERFILECOUNT)),
+        baselineLong(expected.path(FIELD_MASTERBYTES)),
+        baselineInt(browser.path("browserRevision")));
+  }
+
+  private static long baselineLong(JsonNode value) {
+    if (!value.isIntegralNumber() || !value.canConvertToLong()) {
+      throw new IllegalArgumentException("baseline numeric field must be a representable integer");
+    }
+    return value.longValue();
+  }
+
+  private static int baselineInt(JsonNode value) {
+    if (!value.isIntegralNumber() || !value.canConvertToInt()) {
+      throw new IllegalArgumentException("baseline numeric field must be a representable integer");
+    }
+    return value.intValue();
+  }
+
+  record BaselineNumbers(long masterFileCount, long masterBytes, int browserRevision) {
+    BaselineNumbers {
+      if (masterFileCount < 0 || masterBytes < 0 || browserRevision < 1) {
+        throw new IllegalArgumentException("invalid baseline numeric metadata");
+      }
+    }
+  }
+
   static void promoteCurrent(Path projectRoot, Path sourceRun, Path baseline)
       throws IOException, NoSuchAlgorithmException {
     if (sourceRun == null)
@@ -419,8 +452,6 @@ public final class GateCli {
         }
       }
     }
-    copyTree(sourceRun.resolve(FIELD_ARTIFACTS), baseline.resolve(FIELD_ARTIFACTS));
-    copyTree(sourceRun.resolve(FIELD_SCREENSHOTS), baseline.resolve(FIELD_SCREENSHOTS));
     JsonNode expected =
         JSON.readTree(
             projectRoot
@@ -436,6 +467,7 @@ public final class GateCli {
             projectRoot
                 .resolve("program/characterization/tests/resources/browser/manifest.json")
                 .toFile());
+    BaselineNumbers numbers = baselineNumericMetadata(expected, browser);
     Map<String, Object> manifest = new LinkedHashMap<>();
     manifest.put("schemaVersion", 2);
     manifest.put("target", "current");
@@ -448,8 +480,8 @@ public final class GateCli {
     manifest.put(FIELD_SOURCEAGGREGATESHA256, expected.path(FIELD_SOURCEAGGREGATESHA256).asText());
     manifest.put(
         FIELD_DOCUMENTAGGREGATESHA256, expected.path(FIELD_DOCUMENTAGGREGATESHA256).asText());
-    manifest.put(FIELD_MASTERFILECOUNT, expected.path(FIELD_MASTERFILECOUNT).asLong());
-    manifest.put(FIELD_MASTERBYTES, expected.path(FIELD_MASTERBYTES).asLong());
+    manifest.put(FIELD_MASTERFILECOUNT, numbers.masterFileCount());
+    manifest.put(FIELD_MASTERBYTES, numbers.masterBytes());
     manifest.put(
         "environment",
         Map.of(
@@ -457,10 +489,12 @@ public final class GateCli {
             "javaVendor", System.getProperty("java.vendor"),
             "playwrightJava", browser.path("playwrightJava").asText(),
             "browser", browser.path("browser").asText(),
-            "browserRevision", browser.path("browserRevision").asInt(),
+            "browserRevision", numbers.browserRevision(),
             "locale", browser.path("locale").asText(),
             "timezone", browser.path("timezone").asText()));
     manifest.put("gateCommit", gateCommit);
+    copyTree(sourceRun.resolve(FIELD_ARTIFACTS), baseline.resolve(FIELD_ARTIFACTS));
+    copyTree(sourceRun.resolve(FIELD_SCREENSHOTS), baseline.resolve(FIELD_SCREENSHOTS));
     writeJson(baseline.resolve("manifest.json"), manifest);
   }
 
