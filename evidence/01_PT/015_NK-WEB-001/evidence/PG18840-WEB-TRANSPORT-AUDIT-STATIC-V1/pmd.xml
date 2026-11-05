@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-05T13:39:24.348">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java">
+<violation beginline="374" endline="374" begincolumn="21" endcolumn="52" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebSecurityAuditTest" method="web100ConcurrentAuditEventsStayIndependent" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="393" endline="393" begincolumn="7" endcolumn="19" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebSecurityAuditTest" method="web100ConcurrentAuditEventsStayIndependent" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="394" endline="394" begincolumn="24" endcolumn="44" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebSecurityAuditTest" method="web100ConcurrentAuditEventsStayIndependent" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java">
+<violation beginline="196" endline="196" begincolumn="13" endcolumn="34" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="CaddyTransportPortTest" method="emptyProxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="204" endline="204" begincolumn="31" endcolumn="59" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="CaddyTransportPortTest.Fixture" variable="attributes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="205" endline="205" begincolumn="37" endcolumn="62" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="CaddyTransportPortTest.Fixture" variable="headers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="224" endline="224" begincolumn="19" endcolumn="60" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="CaddyTransportPortTest.Fixture" method="Fixture" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="245" endline="245" begincolumn="42" endcolumn="58" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="CaddyTransportPortTest.Fixture" method="Fixture" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+<violation beginline="253" endline="253" begincolumn="19" endcolumn="61" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="CaddyTransportPortTest.Fixture" method="Fixture" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="268" endline="268" begincolumn="42" endcolumn="58" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="CaddyTransportPortTest.Fixture" method="Fixture" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+</file>
+</pmd>
