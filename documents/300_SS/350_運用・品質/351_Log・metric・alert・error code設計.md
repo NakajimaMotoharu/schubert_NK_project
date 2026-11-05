@@ -67,9 +67,9 @@ StringはNFC、CR/LF/TAB/Unicode line separatorをASCII spaceへ変換、上限�
 `path`はquery/fragmentを除いたroute templateまたは正規pathで、任意query値を保存しない。
 Cookie/Authorization/CSRF/Referer全文/request・response bodyをdetailsへ入れない。
 
-### 3.3 REQUEST投影の内部正規化（SSC-008）
+### 3.3 REQUEST正規化と限定ACTION投影（SSC-008/336）
 
-WLGEVT01はUI235のREQUEST専用eventであり、Web producerはAction=`HTTP_REQUEST_COMPLETED`を設定する。Wireで任意Actionが省略された場合も、APIは既知のREQUEST種別から同値を補ってDBの必須Actionへ保存する。他categoryのactionをREQUESTとして受理しない。これはlayout/必須区分の変更ではなく取込み時の正規化である。
+WLGEVT01はUI235 §12.2の閉じた組合せだけを受理する。REQUESTのWeb producerはAction=`HTTP_REQUEST_COMPLETED`を設定し、REQUESTに限りAction省略時もAPIが同値を補う（SSC-008）。QA-054承認によりACTION/`MENU_VIEWED`を限定追加する。ACTIONのAction省略、未知category/action、交差組合せ、Webからの`LOG_SEARCHED`はDB接続前に恒久不正として拒否し、REQUESTへ読み替えない。Log typeの必須二値化以外の物理layout/必須項目は不変更。以下Details・表示metadata・UK/ACK規則は両組合せに共通する。
 
 Detailsのwire入力は省略またはstrict JSON objectとし、次のkeyだけを許可する。重複key、未知key、null、末尾別document、コメント、型不一致を恒久不正としてDB接続前に拒否する。空objectは有効。Wire最大1,024 byteとDB JSONB表示最大1,024 byteの両方を維持する。
 
@@ -99,6 +99,8 @@ projection/local/metadata故障の固定internal codeは`WEB_REQUEST_LOG_PROJECT
 | Action | Category | 発火・必須context |
 |---|---|---|
 | `HTTP_REQUEST_COMPLETED` | REQUEST | request ID、method/path/status/elapsed |
+| `MENU_VIEWED` | ACTION | 認証済み正常メニューGET成功終端時、Web local/outbox/API UK、HTTP request ID、REQUESTと別event |
+| `LOG_SEARCHED` | ACTION | ADMINログ検索のAPI初回成功transaction内に一度、snapshot取得後、保存結果再送で追加0、query値なし |
 | `LOGIN_SUCCEEDED`,`LOGIN_FAILED`,`LOGIN_LOCKED` | SECURITY | request ID、remote IP、user有無を外部へ出さないreason code |
 | `LOGOUT_SUCCEEDED`,`LOGOUT_REVOCATION_QUEUED` | SECURITY | actor、request/message ID、raw contextなし |
 | `SESSION_REVOKED`,`SESSION_EXPIRED`,`SESSION_DECRYPT_FAILED` | SECURITY | reason、session ID/hashなし |
@@ -306,3 +308,14 @@ service daemon-reload/restartが必要な場合は計画停止内に行う。
 ## QA-050承認反映：Logout継続再試行の観測（2026-10-03）
 
 15分継続再試行の送信件数/秒・残件数・最古滞留時間・claim/lease競合・結果code/復号不能・解消件数・Logout要求から確定失効までの時間を観測する。IT/STでは同期画面p95/MQ待ち、API/DB CPU・lock待ち・接続pool、Inbox件数/容量・WAL、Broker pending/journal/diskを同じ負荷条件で測定する。raw/hash/contextや暗号本文をmetric/logへ含めない。滞留と鍵保持は警告・正規復旧へ引継ぎ、attempt100を解消扱いにしない。間隔の変更判定・再試験はSS354のQA050節に従う。
+
+## QA-054 独立期待表（UIC-011/SSC-336、2026-11-05承認）
+
+| 操作/観測 | 成功ACTION期待値 | REQUEST/保存・再送後条件 |
+|---|---|---|
+| 認証済みUSER/ADMINの正常メニューGET | MENU_VIEWED/ACTION 1件 | HTTP_REQUEST_COMPLETED/REQUEST 1件、別event ID/同HTTP request ID、各local/outbox/API DBの論理投影1件、各再配送で追加0 |
+| ADMINログ検索の初回成功 | LOG_SEARCHED/ACTION 1件、検索snapshot取得後に同成功transactionで保存 | 別REQUEST 1件、commit後DBのACTION 1件と応答snapshotを別照合、必要MQは別期待値 |
+| 保存済み検索結果の再送 | LOG_SEARCHED追加0 | 保存結果不変、必要INBOX_REPLAYED等と区別。新HTTP requestのREQUESTを業務成功ACTIONと混同しない |
+| 失敗・未認証・role拒否、メニュー以外/HEAD | 当該成功ACTION 0件 | 従来REQUEST・拒否/失敗監査はそれぞれ既存規則どおり |
+
+上記はUI235/252/264・SS312/323/324/355へ横断反映する。API LOG_SEARCHED保存失敗は初回成功transactionをrollbackし、Web投影で代替しない。Current baseline、保持済ログ、画面表示順/件数/明細を変更せず、実測から期待値を作らない。既存app_logs DDLはcategory ACTION/64-byte action/UKを収容しDDL変更不要。承認は実装/実PT/CHR/正式品質の受入を意味しない。

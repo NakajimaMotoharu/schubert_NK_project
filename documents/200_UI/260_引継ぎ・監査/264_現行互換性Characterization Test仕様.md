@@ -102,7 +102,7 @@ program/characterization/
 利用者は①ログactionをNK設計の名称へ統一すること、②全DB raw配列の一致だけでなく、既存ログを保全し今回操作との相関を明示した安全投影と独立したNK期待値で比較することを承認した。以下はCHR-L01の限定差分であり、他caseや業務結果の包括的な免除ではない。
 
 - HTTP REQUESTの空actionは、対応する実HTTP eventを確認した場合に`HTTP_REQUEST_COMPLETED`と対応付ける。`login_success`は`LOGIN_SUCCEEDED`、scenario検索の`search`は`SCENARIO_SEARCHED`と対応付ける。種別・操作が異なる行まで文字列置換しない。
-- その他のactionはSS351 §4のcatalogと実操作から個別に対応を定義する。`menu`/`log_search`相当の記録は削除・無視せず、操作とNK側記録の対応を示す。未対応は合格にしない。
+- QA-054（2026-11-05、UIC-011/SSC-336承認）により、Currentの`menu` ACTIONはNKの`MENU_VIEWED` ACTION、`log_search` ACTIONは`LOG_SEARCHED` ACTIONへ、同じ論理操作を相関確認した場合だけ対応付ける。正常メニューGETはACTION 1件と別REQUEST 1件、初回成功ログ検索はAPI ACTION 1件と別REQUEST 1件を期待し、必要なMQ記録は別検証する。保存結果再送で成功ACTION追加0、失敗・拒否で成功ACTION 0を確認する。検索snapshotと後発LOG_SEARCHED保存は別時点で検証し、応答に自身の監査がないことだけで欠落と判定しない。日時順・件数・明細等の差分を一括免除しない。その他のactionはSS351 §4から個別対応し、未対応は合格にしない。
 - Current baselineと既存ログは変更しない。専用fixture、before/after、操作ごとのrequest/event/message相関、観測時点を保存し、時刻や最大IDの水位だけで今回操作の行と断定しない。
 - local/outbox/DB間の各eventの到達・欠落0・重複0を独立に確認し、ACTION/SECURITY等の件数・category・actionは承認済みSSの期待表と比較する。NK実装や今回の実測値から期待値を作らない。
 - 追加category/技術行は、既存承認設計が要求する行だけを区別して検証する。任意の追加行の無視、category全体の除外、件数差の一律許容をしない。

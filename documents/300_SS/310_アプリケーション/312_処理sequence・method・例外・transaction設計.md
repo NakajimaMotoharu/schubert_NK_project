@@ -323,3 +323,9 @@ Exception messageを利用者へ直接表示しない。Result code、error/acti
 |---|---|
 | 2026-08-31 | 主要sequence、method契約、transaction/crash matrixを初版作成。 |
 | 2026-08-31 | 横断監査でLogin失敗counterを含む匿名Inbox transactionとlarge-result中間file清掃を整合。 |
+
+## QA-054 メニュー・ログ検索の成功ACTION（SSC-336、2026-11-05承認）
+
+1. MenuControllerの認証済みUSER/ADMINのメニューGET成功をrequest lifetimeへ明示し、§11の実応答終端で成功を確認した場合だけMENU_VIEWED/ACTIONを一度生成する。HEAD・別画面・認証/権限拒否・失敗を成功閲覧へ補正しない。REQUESTも従来どおり別eventで一度記録し、両者をHTTP request IDで結合する。各event IDをlocal→technical outbox→API UKで保持する。HTTP結果不変更・metadata安全化・worker/外側owner順序は§11のまま。
+2. APIの初回成功ログ検索は、結果snapshot取得後、業務成功・Inbox/再送用結果の確定と同じtransactionでLOG_SEARCHED/ACTIONを一度保存する。監査INSERT失敗はそのtransactionをrollbackする。保存済み応答の再送では結果を返し、検索業務/成功ACTIONを再発行しない。失敗・role拒否に成功ACTIONを生成せず既存拒否監査を維持する。INBOX_REPLAYEDとは区別する。
+3. 検索応答snapshotと後発監査確定のDB後条件を分け、自己の監査行が検索応答に現れないことを許容する一方、後条件では成功ACTION 1件を要求する。query値・秘密・raw contextを保存しない。実装/単体試験/CHR/正式受入は本設計反映とは別に未完。
