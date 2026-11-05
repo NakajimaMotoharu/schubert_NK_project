@@ -29,7 +29,7 @@ import javax.sql.DataSource;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-/** PT-WEB-RCPTPORT001..008. JDBC interfaces only; no driver, SQL engine, DB or real locator. */
+/** PT-WEB-RCPTPORT001..009. JDBC interfaces only; no driver, SQL engine, DB or real locator. */
 final class ReceiptReferencePortTest {
   private static final String ID = "00000000000000000000000001";
   private static final String OTHER_ID = "00000000000000000000000002";
@@ -41,6 +41,7 @@ final class ReceiptReferencePortTest {
       "insert into schubert_web_session.web_receipt_references"
           + " (receipt_id,question_id,submitted_at) values (?,?,?) on conflict(receipt_id) do"
           + " nothing";
+  private static final String POINT_SELECT = "select";
   private static final String POINT_AUTO = "auto";
   private static final String POINT_READONLY = "readonly";
   private static final String POINT_ISOLATION = "isolation";
@@ -66,7 +67,7 @@ final class ReceiptReferencePortTest {
             POINT_AUTO,
             POINT_READONLY,
             POINT_ISOLATION,
-            "select",
+            POINT_SELECT,
             "bind1",
             "query",
             POINT_FIRST_NEXT,
@@ -223,6 +224,50 @@ final class ReceiptReferencePortTest {
                   .register(new ReceiptReference(ID, 7, AT)));
       assertEquals(1, fixture.connections.getFirst().rollbacks);
       assertEquals(1, fixture.connections.getFirst().closeAttempts);
+    }
+  }
+
+  @Test
+  void insertStatementCloseUsesIndependentPrimaryAndSecondarySelectionTable() {
+    for (Throwable secondary : failures()) {
+      for (int primaryKind : new int[] {0, 1, 2, 3}) {
+        Fixture fixture = new Fixture();
+        Throwable primary =
+            switch (primaryKind) {
+              case 0 -> null;
+              case 1 -> new SQLException("own insert SQL");
+              case 2 -> new IllegalStateException("own insert runtime");
+              default -> new AssertionError("own insert error");
+            };
+        fixture.faults =
+            primary == null
+                ? Map.of(POINT_STATEMENT_CLOSE, secondary)
+                : Map.of("update", primary, POINT_STATEMENT_CLOSE, secondary);
+        // SS331/332 and rcpt005: SQL is catalogued; unknown primary keeps identity.
+        Throwable selected =
+            primary instanceof RuntimeException
+                    || primary instanceof Error
+                    || (primaryKind == 1 && secondary instanceof SQLException)
+                ? primary
+                : secondary;
+        expected(
+            selected,
+            () ->
+                new ReceiptReferenceRepository(fixture.source())
+                    .register(new ReceiptReference(ID, 7, AT)));
+        Conn connection = fixture.connections.getFirst();
+        assertEquals(1, connection.statements.size());
+        assertEquals(0, connection.commits);
+        assertEquals(1, connection.rollbacks);
+        assertEquals(1, connection.closeAttempts);
+        assertEquals(1, connection.events.stream().filter(POINT_STATEMENT_CLOSE::equals).count());
+        assertTrue(!connection.events.contains(POINT_SELECT));
+        if (primary instanceof RuntimeException || primary instanceof Error) {
+          assertEquals(1, primary.getSuppressed().length);
+          assertInstanceOf(ReceiptReferenceException.class, primary.getSuppressed()[0]);
+          assertEquals(FIXED_DIAGNOSTIC, primary.getSuppressed()[0].getMessage());
+        }
+      }
     }
   }
 

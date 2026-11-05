@@ -22,3 +22,13 @@ SQL期待はSS331の三column/PK同値/技術locatorだけを独立literal化し
 着手内PGレビュー判断: 接続setup（auto/readOnly/isolation）で失敗した場合はwork未開始なので追加rollbackを発行せず、owned closeを一回試行して失敗を伝播する。work/commit失敗ではrollback後close、成功commit後closeだけの失敗では再rollbackせず結果非脱出。Mockのrelease成否ではなくclose試行/順を期待する。初回compile/run前の独立oracle補足であり、失敗に合わせた期待値変更ではない。旧rcpt005はunknown primary＋secondary Errorでも原unknown同一性＋固定secondaryというWeb既契約を明示し、API/readinessの別補足と混同しない。
 
 初回製品実行前の境界追加: SQL/unknown同一Throwableをprimary/closeへ再送してself-suppressionしないこと、suppression無効unknownは同一identity/固定secondary保持不可でも正常化しないことを006/007内の追加fixtureで検査する。PG18850 compile0のdraftを保持し、新Test入力hashへ必要なcompile/staticだけ更新する（Mainbuild/旧全体は反復しない）。
+
+## 初回実行後の追加（769）
+
+PG18874/source e8ccb3918は全8成功・F/E/S0だがregisterのstatement.close例外行55/56に2line/2branch未通過が残ったため全Source100/独立post合格へ扱わない。元producer・単exec・XMLは不変保存する。
+
+|Test ID|追加method・独立期待|
+|---|---|
+|PT-WEB-RCPTPORT009|insertStatementCloseUsesIndependentPrimaryAndSecondarySelectionTable。登録body primaryなし/SQL/RTE/Error×statement.close SQL/RTE/Error。primaryなしはsecondary、SQLprimary＋SQLsecondaryは固定catalog、SQLprimary＋unknownはsecondary同一性、unknownprimaryはその同一性と固定suppressed。全12組でstatement一個、read/commit0、rollback/connectionclose各1、statementclose1を検査。SS331/332と既rcpt005順位から手作成した表。|
+
+当追加も765の同じ普通群。Main不変更、同じJDBC interface fixtureのみ。新9件全class・新単exec/sessionを実行し、元8のexecは合算しない。新compile PG18880、static PG18882、unit予定PG18888。
