@@ -371,7 +371,8 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
     while (end < bytes.length) {
       byte octet = memory.read(end);
       if (octet == 0) break;
-      bytes[end++] = octet;
+      bytes[end] = octet;
+      end++;
     }
     if (end > MAXIMUM_PROPERTY_UTF8_BYTES) throw SystemManagerObservation.unavailable();
     return new String(bytes, 0, end, java.nio.charset.StandardCharsets.UTF_8);

@@ -1,0 +1,59 @@
+{
+  "atJST": "2026-11-06T03:23:05.601133+09:00",
+  "rawObservation": {
+    "source": "827983a97a9c3bf36b7671985a7924417ff0e8f7",
+    "orchestrationHead": "41ec4146a1a812f2a1911ac94021c62252b25bfc",
+    "manifest": "evidence/01_PT/018_NK-OPS-001/evidence/PG19730-current-six-main-static-v1/manifest.json",
+    "manifestSha256": "d7a8d8839655712f46d385540d1a43df3a76969a000fec4897678c54a551c9d5",
+    "mainJava": 966,
+    "physicalMain": 1844,
+    "pmdRaw": 1492,
+    "checkstyleRaw": 0,
+    "processingErrors": 0,
+    "rawGateExit": 1,
+    "allSixSpotbugsExact": true,
+    "countsByRule": {
+      "AvoidCatchingGenericException": 745,
+      "CompareObjectsWithEquals": 64,
+      "DoNotUseThreads": 252,
+      "AvoidInstanceofChecksInCatchClause": 130,
+      "AvoidSynchronizedStatement": 96,
+      "DoNotThrowExceptionInFinally": 55,
+      "UseConcurrentHashMap": 21,
+      "NullAssignment": 5,
+      "ReturnEmptyCollectionRatherThanNull": 1,
+      "CloseResource": 80,
+      "HardCodedCryptoKey": 1,
+      "AvoidSynchronizedAtMethodLevel": 4,
+      "UnusedReturnValue": 4,
+      "EmptyCatchBlock": 15,
+      "AvoidUsingVolatile": 17,
+      "AssignmentInOperand": 1,
+      "UseProperClassLoader": 1
+    }
+  },
+  "warnings": "JLine tool native-loader warning retained, no native-access flag enabled. PMD autoadded same JAVA_HOME25.0.4 jrt-fs forjava25; path matches target, originalrun autoJRT sha notcaptured(null), no warning suppressed. Tool notices are not security refusal or Production native qualification.",
+  "fix": {
+    "bug": "BUG-2310",
+    "ykt": "YKT-2055",
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+    "beforeSha256": "c931c6ee998ba8e9b1e982d569f7f5ca79f083a0c2cfb36600e5862134518cc9",
+    "afterSha256": "d459337184c187b8d37a97989b8b9791d6a41fe549b8361d1c22055ee37a9607",
+    "exactInverseByteEquality": true,
+    "onlyChange": "bytes[end++] = octet; -> bytes[end] = octet; end++;",
+    "scope": "SS343354内の実装5・規約修正。local end increments on each nonNUL byte, whilebound end<4097 unchanged, NUL checked beforestore,4096limit andUTF8return unchanged. No external wire/UI/authority/owner/ABI change. No newSS/QA needed.",
+    "dynamicPT": "NOT_EXECUTED_HOLD; no newfixture/private-method extraction/native/Systemd operation",
+    "qualityRemaining": "New fixedsource normal six/NullAway/SB andcompleteMain PMD/CS required; old19730 nevernewsourcePASS."
+  },
+  "sameGroupOriginalEstimate": {
+    "low": 1,
+    "base": 3,
+    "high": 7
+  },
+  "cap": 10,
+  "originalWbsCostNotRevised": true,
+  "workClassification": "SOURCE_REQUALIFICATION plus discovered code-style DEFECT_REPAIR; no oldsuccess replay",
+  "formalAccepted": false,
+  "global451Accepted": false,
+  "effortRate": null
+}
