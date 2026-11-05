@@ -1,0 +1,107 @@
+{
+  "actualExit": 0,
+  "source": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+  "atJST": "2026-11-06T04:27:50.457737+09:00",
+  "checks": {
+    "positive": {
+      "expectedExit": 0,
+      "actualExit": 0,
+      "expectedSourceLines": {
+        "24": "VALID_NONNULL"
+      },
+      "actualUniqueNullAwayDiagnostics": {},
+      "sourceSha256": "3fc6f4bacc1cd5bfb9f58fee749269430304b471d34d6f6a81f38f82f1101391",
+      "pomSha256": "78e5fb28d919d5ec9c738c2756e5cdadcc8f9df261bab45118ae43675b0f2e05",
+      "passed": true
+    },
+    "negative": {
+      "expectedExit": 1,
+      "actualExit": 1,
+      "expectedSourceLines": {
+        "24": "LITERAL_NULL_ARGUMENT",
+        "25": "LITERAL_NULL_ARGUMENT",
+        "26": "LITERAL_NULL_ARGUMENT",
+        "27": "LITERAL_NULL_ARGUMENT",
+        "28": "LITERAL_NULL_ARGUMENT",
+        "29": "LITERAL_NULL_ARGUMENT",
+        "30": "LITERAL_NULL_ARGUMENT"
+      },
+      "actualUniqueNullAwayDiagnostics": {
+        "24": "passing @Nullable parameter 'null' where @NonNull is required",
+        "25": "passing @Nullable parameter 'null' where @NonNull is required",
+        "26": "passing @Nullable parameter 'null' where @NonNull is required",
+        "27": "passing @Nullable parameter 'null' where @NonNull is required",
+        "28": "passing @Nullable parameter 'null' where @NonNull is required",
+        "29": "passing @Nullable parameter 'null' where @NonNull is required",
+        "30": "passing @Nullable parameter 'null' where @NonNull is required"
+      },
+      "sourceSha256": "a35101af78291513eb67c2239399d2a01bde1e3d556736e2bfe26c9788dbb346",
+      "pomSha256": "78e5fb28d919d5ec9c738c2756e5cdadcc8f9df261bab45118ae43675b0f2e05",
+      "passed": true
+    }
+  },
+  "stages": {
+    "positive": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-05T19:27:44.047258+00:00",
+      "endUTC": "2026-11-05T19:27:47.118505+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19794-session-audit-null-style-compile-v1/positive/pom.xml",
+        "compile"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19794-session-audit-null-style-compile-v1/positive",
+      "stdoutSha256": "b866cf55db40c188144b37d3782969a999e9f562bce90247173381b583a65c76",
+      "stderrSha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4"
+    },
+    "negative": {
+      "actualExit": 1,
+      "timedOut": false,
+      "startUTC": "2026-11-05T19:27:47.119280+00:00",
+      "endUTC": "2026-11-05T19:27:50.443637+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19794-session-audit-null-style-compile-v1/negative/pom.xml",
+        "compile"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg19794-session-audit-null-style-compile-v1/negative",
+      "stdoutSha256": "8dad1ddf5b2283df67c6eaa9e8b5696ac6b15c17b299602977fb2a5483487e80",
+      "stderrSha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4"
+    }
+  },
+  "nonnullPositiveCompile": true,
+  "deliberateJavaNullRejectedAtSevenActualMainContractSites": true,
+  "productTestsExecuted": 0,
+  "coverageMeasured": false,
+  "canaryNotCountedAsJUnit": true,
+  "whole451Accepted": false,
+  "files": {
+    "begin.safe.json": "d0c1d0700383a3ce5f0396564d1f6edccaecf0a5ea47130eb1f4b08a9e7d14db",
+    "positive.stderr": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4",
+    "negative-begin.safe.json": "58b1e9d9d3104f091fbc6c89410de53ba7d9cdcbe77b8f7adc5b12075f60ddbc",
+    "positive-exit.safe.json": "3bd7ef7db03f382a6fd1c65601a764a5e4ab6f9f12f3389256063a76814afa4a",
+    "positive.stdout": "b866cf55db40c188144b37d3782969a999e9f562bce90247173381b583a65c76",
+    "positive-process.safe.json": "c7769596b96598b35675cd5324049a70246c8444f865fc21487ee614781f1a9c",
+    "positive-begin.safe.json": "3ff4c20b5549811b9888de6fbf34e579cffbbc43324bb3e5059433b1732800b6",
+    "negative.stderr": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4",
+    "parent-pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "negative-exit.safe.json": "a47a324be32d1ba8ce22d55694bcbde2b6fcbbe1d3836b1ded41bbd0e22499d7",
+    "negative-process.safe.json": "2c8793a31279748aecdf518bbab454443e84b0116845d8cd77204fc9633ca641",
+    "negative.stdout": "8dad1ddf5b2283df67c6eaa9e8b5696ac6b15c17b299602977fb2a5483487e80",
+    "negative/expected-lines.json": "bd15026fbc0999d658c99c2ca37e0015a9b9aec0a857f4b2eab38787b61093d5",
+    "negative/pom.xml": "78e5fb28d919d5ec9c738c2756e5cdadcc8f9df261bab45118ae43675b0f2e05",
+    "positive/expected-lines.json": "d3b3bbb7a845539d6b3df2af91654082323b2c3a268f839fc49b7969ccd84ee6",
+    "positive/pom.xml": "78e5fb28d919d5ec9c738c2756e5cdadcc8f9df261bab45118ae43675b0f2e05",
+    "positive/src/dev/codex/schubert/nk/api/security/SessionAuditNonnullCaller.java": "3fc6f4bacc1cd5bfb9f58fee749269430304b471d34d6f6a81f38f82f1101391",
+    "negative/src/dev/codex/schubert/nk/api/security/SessionAuditNonnullCaller.java": "a35101af78291513eb67c2239399d2a01bde1e3d556736e2bfe26c9788dbb346"
+  }
+}

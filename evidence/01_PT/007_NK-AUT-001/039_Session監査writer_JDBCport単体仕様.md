@@ -31,3 +31,5 @@ PG19780 compile0/19782 raw8中のlabel重複3をBUG2313/YKT2058へ修正前起�
 ## Null canary生成源のformat是正（BUG2314/YKT2059）
 
 元002/19784 positivebuild1（継承Spotless不適合）/negative未実行をPG19784-failed-historyに保全、NullAway受入へ算入0。新004は固定GJF1.36.1で整形済005/006源を読み、七null literal tokenのpostformat行を期待診断集合とする。工具/テンプレートsourceとhashをfreeze後、新unused19794へ正負各compile一度、原parent/Spotless/NullAway/processor flagsは不変更。skip/quality緩和/古いmoduleの再実行0。PG19788九JUnit初回0・originalpost0とGit artifact追加独立post19790は別の結果として保存、nullablecanaryの是正でJUnitを再演しない。
+
+最終計測closeは共通owned_port_closerを利用する。元postのlegacy optional producer descriptorがnullであることは原manifestに残し、19790追加独立postのGit-bound artifact（source112dd/producer003/全hash検証）だけをfallbackに用いる。nullを成功や任意pathへ補完せず、source/Git blob/current fileの三hash一致を必須とする。更新closerのhashを883へ記録し、Product/Null compileの成功再演はしない。
