@@ -77,6 +77,10 @@ def historical_bindings(rows):
     """Verify immutable old source-context facts, never transfer runtime qualification."""
     count = 0
     for row in rows:
+        for fact in row.get('sourceAssertions', []):
+            p = ROOT / fact['path']
+            assert sha(p) == fact['sha256']
+            assert p.read_text().splitlines()[fact['line'] - 1].strip() == fact['text']
         item = row.get('historicalStaticReview')
         if item is None:
             continue

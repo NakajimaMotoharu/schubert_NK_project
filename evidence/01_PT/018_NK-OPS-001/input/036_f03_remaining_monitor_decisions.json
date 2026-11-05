@@ -1,0 +1,887 @@
+{
+  "mainSource": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+  "slot": "pg19960-remaining-monitor-context-v1",
+  "publicName": "PG19960-remaining-monitor-context-v1",
+  "priorManifests": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19752-f03-finite-source-context-corrected-v1/manifest.json",
+      "sha256": "d4d8274a68727f8bb278ff89140b8778fa5293011263f4e75c8d195e8fe4cf14"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19760-f03-identity-context-v1/manifest.json",
+      "sha256": "40e501ddd751e8e7849721e7a063d69062d49ad3ba0e1e3429c345b5245723bf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19770-f03-map-monitor-context-v1/manifest.json",
+      "sha256": "6a272d4a9ecad5c26ee13e3af9765f766f9fcd2936ec1e0b39bf030a8778bae4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19830-resource-type-context-v1/manifest.json",
+      "sha256": "6c3055b08e58ec40e023bbf70dd56d667dc1ea50357e1c3d1703aee00534e8a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19840-resource-generic-catch-context-v1/manifest.json",
+      "sha256": "dcfaa6104f6bdd8f57093a235a56f04000d83702b03db55c78e45528fcbebf21"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19850-visibility-map-context-v1/manifest.json",
+      "sha256": "291d806a9539c8c6e331b5d621aaf872356cc8700dcf1b461f219269c15b3c11"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19860-jdbc-close-context-v1/manifest.json",
+      "sha256": "a57ff397b8465ebd306a521add6b9c609facae43c1f9f6abddf00bee64a90103"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19870-jdbc-generic-catch-context-v1/manifest.json",
+      "sha256": "f8ff492143ca570823f2c79a25191c67b175409aad8c242b54027ffa2afc2765"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19880-empty-catch-context-v1/manifest.json",
+      "sha256": "86a4bb1544fa83e25f151a04af5a52034200ea52a2a8ad72326d2961a4e98958"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19890-finally-priority-context-v1/manifest.json",
+      "sha256": "b294eccae2a4c5a27c979e9a5ddd96a36fb7f2a508a9445028ebdabf1d53ab35"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19900-batch-run-context-v1/manifest.json",
+      "sha256": "59327bb132893061eee966a0def91a5541be573b82708ad16195295e9bc916d2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19910-cleanup-twelve-context-v1/manifest.json",
+      "sha256": "35bf4572d4dd7952b0437b6951c123ee94760544491ff1dc0cbfc5ffac907a1f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19920-db-receipt-context-v1/manifest.json",
+      "sha256": "7ed71d1d06bb5da1236920fa326edc844ed8a0bcbbd7e7729bebcb0aabad57c3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19930-api-consumer-context-v1/manifest.json",
+      "sha256": "afd728733fff03c0c052382a45195343da6f0564a0324ac841cd92fcab4b8404"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19940-existing-context-preflight-v1/manifest.json",
+      "sha256": "6060a9066dcb8eba77bd1583d0302d7aa872dfc252790e03959005f9289f03eb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19950-private-monitor-context-v1/manifest.json",
+      "sha256": "94b5d4f9988fcdac2ee7b4b0c45f9b5d8ad0dd236b4f8fb248882eac94523daf"
+    }
+  ],
+  "priorCount": 773,
+  "newCount": 10,
+  "decisions": [
+    {
+      "rawOrdinal": 336,
+      "rule": "AvoidSynchronizedStatement",
+      "sourceSha256": "fe7fbb7d9858f05579839ab7ce6b80ec58566d90dbfc0d13d69a73aa730319ea",
+      "attributeValues": {
+        "class": "ApiReadOnlyObservationAttempt",
+        "method": "read"
+      },
+      "line": 51,
+      "reason": "The resource-free constructor allocates its private final lock andone-shot/cleanup state before any checkout. read holds that lock across attempted claim andits owned observation/cleanup flags; second calls cannot duplicate checkout. The only exposed status is a separate atomic unconfirmed flag, not the lock/Connection. This monitor implements411 section9 private lifetime/state exclusion; blocking provider/retention callbacks, fatal graph correctness andactual cleanup remain unperformed dependencies.",
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java",
+          "sha256": "fe7fbb7d9858f05579839ab7ce6b80ec58566d90dbfc0d13d69a73aa730319ea",
+          "line": 24,
+          "text": "private final Object lock = new Object();"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java",
+          "sha256": "fe7fbb7d9858f05579839ab7ce6b80ec58566d90dbfc0d13d69a73aa730319ea",
+          "line": 51,
+          "text": "synchronized (lock) {"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java",
+          "sha256": "fe7fbb7d9858f05579839ab7ce6b80ec58566d90dbfc0d13d69a73aa730319ea",
+          "line": 52,
+          "text": "if (attempted) throw new IllegalStateException(\"observation attempt already used\");"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java",
+          "sha256": "fe7fbb7d9858f05579839ab7ce6b80ec58566d90dbfc0d13d69a73aa730319ea",
+          "line": 53,
+          "text": "attempted = true;"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java",
+          "sha256": "fe7fbb7d9858f05579839ab7ce6b80ec58566d90dbfc0d13d69a73aa730319ea",
+          "line": 55,
+          "text": "@Nullable Connection supplied = pool.getConnection();"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Concurrent one-shot/status/phase/partial-owner transitions andblocked lock/provider/retention callbacks remain separate unperformed tests",
+        "Private constructor/owner handoff/unknown original frame anddeadline/interrupt invariants require their actual scoped quality evidence",
+        "No API graph helper/checkout/intent/permit/start/stop/retire/HTTP/Root/VM/native operation oroldruntime success transfer bythis review"
+      ]
+    },
+    {
+      "rawOrdinal": 725,
+      "rule": "AvoidSynchronizedStatement",
+      "sourceSha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+      "attributeValues": {
+        "class": "BackupUnitStartClient.Attempt",
+        "method": "status"
+      },
+      "line": 546,
+      "reason": "This opaque public Attempt cannot be its own caller-visible monitor (BUG1459). The only factory creates a fresh local Object before intent.begin orprocess start; allthree private-constructor callsites pass that same object, andthe constructor stores it in a private final stateLock. These methods synchronize status/retiring/poisoned/client ownership onthat hidden retained monitor. No lock getter orcaller-provided override exists. Current411 private-final-lock rule ismet despite constructor assignment rather thaninline initializer; actual native intent/start/retire/termination/deadlines are not executed orproved.",
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 364,
+          "text": "Object stateLock = new Object();"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 365,
+          "text": "MarkerLease marker = Objects.requireNonNull(intent.begin(), \"retained start marker\");"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 367,
+          "text": "return new Attempt(context, null, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 374,
+          "text": "return new Attempt(context, null, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 376,
+          "text": "var attempt = new Attempt(context, process, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 516,
+          "text": "private final Object stateLock;"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 537,
+          "text": "this.stateLock = stateLock;"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Concurrent one-shot/status/phase/partial-owner transitions andblocked lock/provider/retention callbacks remain separate unperformed tests",
+        "Private constructor/owner handoff/unknown original frame anddeadline/interrupt invariants require their actual scoped quality evidence",
+        "No API graph helper/checkout/intent/permit/start/stop/retire/HTTP/Root/VM/native operation oroldruntime success transfer bythis review"
+      ],
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14082-batch-retained-scope-monitor-v1/review.json",
+        "sha256": "d1055012d90e112c14de07795a2ee89a7641b2f478b71f18aa73cc6e743f5d5d",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14082-batch-retained-scope-monitor-v1/manifest.json",
+        "manifestSha256": "3ecf31a8456d8c44326f38dcbceefd7db115bc30444a79273777a1872b2dc515",
+        "rowPointer": [
+          "rows",
+          28
+        ],
+        "historicalReason": "SS341/343 Attempt private stateLockはclient/intent所有のUNKNOWN/poisoned/retiring/retireUncertainを保持。新stateLockをintent/process前に確保、同owner gateでretained/retire境界、start client0≠worker/ready/全Unit終端。stdin/stream閉鎖と有限waitは元parent残budget内だけだが外callback/lock待ちの有界性は未測定。全process/start/retire実行0、失敗/未知を再送や権限へ変換しない。",
+        "runtimeTransferred": false
+      }
+    },
+    {
+      "rawOrdinal": 726,
+      "rule": "AvoidSynchronizedStatement",
+      "sourceSha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+      "attributeValues": {
+        "class": "BackupUnitStartClient.Attempt",
+        "method": "requireRetained"
+      },
+      "line": 553,
+      "reason": "This opaque public Attempt cannot be its own caller-visible monitor (BUG1459). The only factory creates a fresh local Object before intent.begin orprocess start; allthree private-constructor callsites pass that same object, andthe constructor stores it in a private final stateLock. These methods synchronize status/retiring/poisoned/client ownership onthat hidden retained monitor. No lock getter orcaller-provided override exists. Current411 private-final-lock rule ismet despite constructor assignment rather thaninline initializer; actual native intent/start/retire/termination/deadlines are not executed orproved.",
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 364,
+          "text": "Object stateLock = new Object();"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 365,
+          "text": "MarkerLease marker = Objects.requireNonNull(intent.begin(), \"retained start marker\");"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 367,
+          "text": "return new Attempt(context, null, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 374,
+          "text": "return new Attempt(context, null, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 376,
+          "text": "var attempt = new Attempt(context, process, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 516,
+          "text": "private final Object stateLock;"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 537,
+          "text": "this.stateLock = stateLock;"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Concurrent one-shot/status/phase/partial-owner transitions andblocked lock/provider/retention callbacks remain separate unperformed tests",
+        "Private constructor/owner handoff/unknown original frame anddeadline/interrupt invariants require their actual scoped quality evidence",
+        "No API graph helper/checkout/intent/permit/start/stop/retire/HTTP/Root/VM/native operation oroldruntime success transfer bythis review"
+      ],
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14082-batch-retained-scope-monitor-v1/review.json",
+        "sha256": "d1055012d90e112c14de07795a2ee89a7641b2f478b71f18aa73cc6e743f5d5d",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14082-batch-retained-scope-monitor-v1/manifest.json",
+        "manifestSha256": "3ecf31a8456d8c44326f38dcbceefd7db115bc30444a79273777a1872b2dc515",
+        "rowPointer": [
+          "rows",
+          29
+        ],
+        "historicalReason": "SS341/343 Attempt private stateLockはclient/intent所有のUNKNOWN/poisoned/retiring/retireUncertainを保持。新stateLockをintent/process前に確保、同owner gateでretained/retire境界、start client0≠worker/ready/全Unit終端。stdin/stream閉鎖と有限waitは元parent残budget内だけだが外callback/lock待ちの有界性は未測定。全process/start/retire実行0、失敗/未知を再送や権限へ変換しない。",
+        "runtimeTransferred": false
+      }
+    },
+    {
+      "rawOrdinal": 727,
+      "rule": "AvoidSynchronizedStatement",
+      "sourceSha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+      "attributeValues": {
+        "class": "BackupUnitStartClient.Attempt",
+        "method": "retireReadyAfter"
+      },
+      "line": 572,
+      "reason": "This opaque public Attempt cannot be its own caller-visible monitor (BUG1459). The only factory creates a fresh local Object before intent.begin orprocess start; allthree private-constructor callsites pass that same object, andthe constructor stores it in a private final stateLock. These methods synchronize status/retiring/poisoned/client ownership onthat hidden retained monitor. No lock getter orcaller-provided override exists. Current411 private-final-lock rule ismet despite constructor assignment rather thaninline initializer; actual native intent/start/retire/termination/deadlines are not executed orproved.",
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 364,
+          "text": "Object stateLock = new Object();"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 365,
+          "text": "MarkerLease marker = Objects.requireNonNull(intent.begin(), \"retained start marker\");"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 367,
+          "text": "return new Attempt(context, null, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 374,
+          "text": "return new Attempt(context, null, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 376,
+          "text": "var attempt = new Attempt(context, process, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 516,
+          "text": "private final Object stateLock;"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 537,
+          "text": "this.stateLock = stateLock;"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Concurrent one-shot/status/phase/partial-owner transitions andblocked lock/provider/retention callbacks remain separate unperformed tests",
+        "Private constructor/owner handoff/unknown original frame anddeadline/interrupt invariants require their actual scoped quality evidence",
+        "No API graph helper/checkout/intent/permit/start/stop/retire/HTTP/Root/VM/native operation oroldruntime success transfer bythis review"
+      ],
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14082-batch-retained-scope-monitor-v1/review.json",
+        "sha256": "d1055012d90e112c14de07795a2ee89a7641b2f478b71f18aa73cc6e743f5d5d",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14082-batch-retained-scope-monitor-v1/manifest.json",
+        "manifestSha256": "3ecf31a8456d8c44326f38dcbceefd7db115bc30444a79273777a1872b2dc515",
+        "rowPointer": [
+          "rows",
+          30
+        ],
+        "historicalReason": "SS341/343 Attempt private stateLockはclient/intent所有のUNKNOWN/poisoned/retiring/retireUncertainを保持。新stateLockをintent/process前に確保、同owner gateでretained/retire境界、start client0≠worker/ready/全Unit終端。stdin/stream閉鎖と有限waitは元parent残budget内だけだが外callback/lock待ちの有界性は未測定。全process/start/retire実行0、失敗/未知を再送や権限へ変換しない。",
+        "runtimeTransferred": false
+      }
+    },
+    {
+      "rawOrdinal": 728,
+      "rule": "AvoidSynchronizedStatement",
+      "sourceSha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+      "attributeValues": {
+        "class": "BackupUnitStartClient.Attempt",
+        "method": "preserveObservation"
+      },
+      "line": 590,
+      "reason": "This opaque public Attempt cannot be its own caller-visible monitor (BUG1459). The only factory creates a fresh local Object before intent.begin orprocess start; allthree private-constructor callsites pass that same object, andthe constructor stores it in a private final stateLock. These methods synchronize status/retiring/poisoned/client ownership onthat hidden retained monitor. No lock getter orcaller-provided override exists. Current411 private-final-lock rule ismet despite constructor assignment rather thaninline initializer; actual native intent/start/retire/termination/deadlines are not executed orproved.",
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 364,
+          "text": "Object stateLock = new Object();"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 365,
+          "text": "MarkerLease marker = Objects.requireNonNull(intent.begin(), \"retained start marker\");"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 367,
+          "text": "return new Attempt(context, null, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 374,
+          "text": "return new Attempt(context, null, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 376,
+          "text": "var attempt = new Attempt(context, process, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 516,
+          "text": "private final Object stateLock;"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 537,
+          "text": "this.stateLock = stateLock;"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Concurrent one-shot/status/phase/partial-owner transitions andblocked lock/provider/retention callbacks remain separate unperformed tests",
+        "Private constructor/owner handoff/unknown original frame anddeadline/interrupt invariants require their actual scoped quality evidence",
+        "No API graph helper/checkout/intent/permit/start/stop/retire/HTTP/Root/VM/native operation oroldruntime success transfer bythis review"
+      ],
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14082-batch-retained-scope-monitor-v1/review.json",
+        "sha256": "d1055012d90e112c14de07795a2ee89a7641b2f478b71f18aa73cc6e743f5d5d",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14082-batch-retained-scope-monitor-v1/manifest.json",
+        "manifestSha256": "3ecf31a8456d8c44326f38dcbceefd7db115bc30444a79273777a1872b2dc515",
+        "rowPointer": [
+          "rows",
+          31
+        ],
+        "historicalReason": "SS341/343 Attempt private stateLockはclient/intent所有のUNKNOWN/poisoned/retiring/retireUncertainを保持。新stateLockをintent/process前に確保、同owner gateでretained/retire境界、start client0≠worker/ready/全Unit終端。stdin/stream閉鎖と有限waitは元parent残budget内だけだが外callback/lock待ちの有界性は未測定。全process/start/retire実行0、失敗/未知を再送や権限へ変換しない。",
+        "runtimeTransferred": false
+      }
+    },
+    {
+      "rawOrdinal": 729,
+      "rule": "AvoidSynchronizedStatement",
+      "sourceSha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+      "attributeValues": {
+        "class": "BackupUnitStartClient.Attempt",
+        "method": "retireAfter"
+      },
+      "line": 608,
+      "reason": "This opaque public Attempt cannot be its own caller-visible monitor (BUG1459). The only factory creates a fresh local Object before intent.begin orprocess start; allthree private-constructor callsites pass that same object, andthe constructor stores it in a private final stateLock. These methods synchronize status/retiring/poisoned/client ownership onthat hidden retained monitor. No lock getter orcaller-provided override exists. Current411 private-final-lock rule ismet despite constructor assignment rather thaninline initializer; actual native intent/start/retire/termination/deadlines are not executed orproved.",
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 364,
+          "text": "Object stateLock = new Object();"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 365,
+          "text": "MarkerLease marker = Objects.requireNonNull(intent.begin(), \"retained start marker\");"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 367,
+          "text": "return new Attempt(context, null, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 374,
+          "text": "return new Attempt(context, null, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 376,
+          "text": "var attempt = new Attempt(context, process, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 516,
+          "text": "private final Object stateLock;"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 537,
+          "text": "this.stateLock = stateLock;"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Concurrent one-shot/status/phase/partial-owner transitions andblocked lock/provider/retention callbacks remain separate unperformed tests",
+        "Private constructor/owner handoff/unknown original frame anddeadline/interrupt invariants require their actual scoped quality evidence",
+        "No API graph helper/checkout/intent/permit/start/stop/retire/HTTP/Root/VM/native operation oroldruntime success transfer bythis review"
+      ],
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14082-batch-retained-scope-monitor-v1/review.json",
+        "sha256": "d1055012d90e112c14de07795a2ee89a7641b2f478b71f18aa73cc6e743f5d5d",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14082-batch-retained-scope-monitor-v1/manifest.json",
+        "manifestSha256": "3ecf31a8456d8c44326f38dcbceefd7db115bc30444a79273777a1872b2dc515",
+        "rowPointer": [
+          "rows",
+          32
+        ],
+        "historicalReason": "SS341/343 Attempt private stateLockはclient/intent所有のUNKNOWN/poisoned/retiring/retireUncertainを保持。新stateLockをintent/process前に確保、同owner gateでretained/retire境界、start client0≠worker/ready/全Unit終端。stdin/stream閉鎖と有限waitは元parent残budget内だけだが外callback/lock待ちの有界性は未測定。全process/start/retire実行0、失敗/未知を再送や権限へ変換しない。",
+        "runtimeTransferred": false
+      }
+    },
+    {
+      "rawOrdinal": 730,
+      "rule": "AvoidSynchronizedStatement",
+      "sourceSha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+      "attributeValues": {
+        "class": "BackupUnitStartClient.Attempt",
+        "method": "awaitClient"
+      },
+      "line": 628,
+      "reason": "This opaque public Attempt cannot be its own caller-visible monitor (BUG1459). The only factory creates a fresh local Object before intent.begin orprocess start; allthree private-constructor callsites pass that same object, andthe constructor stores it in a private final stateLock. These methods synchronize status/retiring/poisoned/client ownership onthat hidden retained monitor. No lock getter orcaller-provided override exists. Current411 private-final-lock rule ismet despite constructor assignment rather thaninline initializer; actual native intent/start/retire/termination/deadlines are not executed orproved.",
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 364,
+          "text": "Object stateLock = new Object();"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 365,
+          "text": "MarkerLease marker = Objects.requireNonNull(intent.begin(), \"retained start marker\");"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 367,
+          "text": "return new Attempt(context, null, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 374,
+          "text": "return new Attempt(context, null, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 376,
+          "text": "var attempt = new Attempt(context, process, marker, budget, unit, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 516,
+          "text": "private final Object stateLock;"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+          "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+          "line": 537,
+          "text": "this.stateLock = stateLock;"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Concurrent one-shot/status/phase/partial-owner transitions andblocked lock/provider/retention callbacks remain separate unperformed tests",
+        "Private constructor/owner handoff/unknown original frame anddeadline/interrupt invariants require their actual scoped quality evidence",
+        "No API graph helper/checkout/intent/permit/start/stop/retire/HTTP/Root/VM/native operation oroldruntime success transfer bythis review"
+      ],
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14082-batch-retained-scope-monitor-v1/review.json",
+        "sha256": "d1055012d90e112c14de07795a2ee89a7641b2f478b71f18aa73cc6e743f5d5d",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14082-batch-retained-scope-monitor-v1/manifest.json",
+        "manifestSha256": "3ecf31a8456d8c44326f38dcbceefd7db115bc30444a79273777a1872b2dc515",
+        "rowPointer": [
+          "rows",
+          33
+        ],
+        "historicalReason": "SS341/343 Attempt private stateLockはclient/intent所有のUNKNOWN/poisoned/retiring/retireUncertainを保持。新stateLockをintent/process前に確保、同owner gateでretained/retire境界、start client0≠worker/ready/全Unit終端。stdin/stream閉鎖と有限waitは元parent残budget内だけだが外callback/lock待ちの有界性は未測定。全process/start/retire実行0、失敗/未知を再送や権限へ変換しない。",
+        "runtimeTransferred": false
+      }
+    },
+    {
+      "rawOrdinal": 785,
+      "rule": "AvoidSynchronizedStatement",
+      "sourceSha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+      "attributeValues": {
+        "class": "MaintenanceUnitStopClient.Attempt",
+        "method": "status"
+      },
+      "line": 170,
+      "reason": "The factory creates a fresh stateLock before the possibly-delivered native client andallthree private Attempt constructors receive that same object. private final stateLock retains this unexposed owner lock. status/awaitClient preserve UNKNOWN/poisoned/phase state underit; synchronizing onthe public Attempt would allowcaller interference, so the private lock isrequired by411 section9. A returned status isnot actual Unit/cgroup termination orstop authorization, andno stop/client operation occurs duringthis review.",
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+          "sha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+          "line": 117,
+          "text": "Object stateLock = new Object();"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+          "sha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+          "line": 133,
+          "text": "return new Attempt(unit, context, null, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+          "sha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+          "line": 135,
+          "text": "if (process == null) return new Attempt(unit, context, null, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+          "sha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+          "line": 136,
+          "text": "var attempt = new Attempt(unit, context, process, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+          "sha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+          "line": 148,
+          "text": "private final Object stateLock;"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+          "sha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+          "line": 159,
+          "text": "this.stateLock = stateLock;"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Concurrent one-shot/status/phase/partial-owner transitions andblocked lock/provider/retention callbacks remain separate unperformed tests",
+        "Private constructor/owner handoff/unknown original frame anddeadline/interrupt invariants require their actual scoped quality evidence",
+        "No API graph helper/checkout/intent/permit/start/stop/retire/HTTP/Root/VM/native operation oroldruntime success transfer bythis review"
+      ],
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14082-batch-retained-scope-monitor-v1/review.json",
+        "sha256": "d1055012d90e112c14de07795a2ee89a7641b2f478b71f18aa73cc6e743f5d5d",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14082-batch-retained-scope-monitor-v1/manifest.json",
+        "manifestSha256": "3ecf31a8456d8c44326f38dcbceefd7db115bc30444a79273777a1872b2dc515",
+        "rowPointer": [
+          "rows",
+          35
+        ],
+        "historicalReason": "SS341/343固定stop Attemptのprivate stateLockはnative要求前に確保。possibly delivered/nohandleはUNKNOWN保持、stdin一回consume・有限wait/stream閉鎖/context再認証後だけclient exit記録、poisonedは再試行不可。client終了はUnit/cgroup/Artemis正常証拠でなく親M/Aを解放しない。実stop/process/Root/再回収0、callback/stream/monitor待ち有界性は未実証。",
+        "runtimeTransferred": false
+      }
+    },
+    {
+      "rawOrdinal": 786,
+      "rule": "AvoidSynchronizedStatement",
+      "sourceSha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+      "attributeValues": {
+        "class": "MaintenanceUnitStopClient.Attempt",
+        "method": "awaitClient"
+      },
+      "line": 177,
+      "reason": "The factory creates a fresh stateLock before the possibly-delivered native client andallthree private Attempt constructors receive that same object. private final stateLock retains this unexposed owner lock. status/awaitClient preserve UNKNOWN/poisoned/phase state underit; synchronizing onthe public Attempt would allowcaller interference, so the private lock isrequired by411 section9. A returned status isnot actual Unit/cgroup termination orstop authorization, andno stop/client operation occurs duringthis review.",
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+          "sha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+          "line": 117,
+          "text": "Object stateLock = new Object();"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+          "sha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+          "line": 133,
+          "text": "return new Attempt(unit, context, null, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+          "sha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+          "line": 135,
+          "text": "if (process == null) return new Attempt(unit, context, null, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+          "sha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+          "line": 136,
+          "text": "var attempt = new Attempt(unit, context, process, stateLock);"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+          "sha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+          "line": 148,
+          "text": "private final Object stateLock;"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+          "sha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+          "line": 159,
+          "text": "this.stateLock = stateLock;"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Concurrent one-shot/status/phase/partial-owner transitions andblocked lock/provider/retention callbacks remain separate unperformed tests",
+        "Private constructor/owner handoff/unknown original frame anddeadline/interrupt invariants require their actual scoped quality evidence",
+        "No API graph helper/checkout/intent/permit/start/stop/retire/HTTP/Root/VM/native operation oroldruntime success transfer bythis review"
+      ],
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14082-batch-retained-scope-monitor-v1/review.json",
+        "sha256": "d1055012d90e112c14de07795a2ee89a7641b2f478b71f18aa73cc6e743f5d5d",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14082-batch-retained-scope-monitor-v1/manifest.json",
+        "manifestSha256": "3ecf31a8456d8c44326f38dcbceefd7db115bc30444a79273777a1872b2dc515",
+        "rowPointer": [
+          "rows",
+          36
+        ],
+        "historicalReason": "SS341/343固定stop Attemptのprivate stateLockはnative要求前に確保。possibly delivered/nohandleはUNKNOWN保持、stdin一回consume・有限wait/stream閉鎖/context再認証後だけclient exit記録、poisonedは再試行不可。client終了はUnit/cgroup/Artemis正常証拠でなく親M/Aを解放しない。実stop/process/Root/再回収0、callback/stream/monitor待ち有界性は未実証。",
+        "runtimeTransferred": false
+      }
+    },
+    {
+      "rawOrdinal": 1249,
+      "rule": "AvoidSynchronizedStatement",
+      "sourceSha256": "b1e458ef9a9a246f8bb70866dbf671a005bbb569b9c4e27c20b525c20b3180a5",
+      "attributeValues": {
+        "class": "WebHttpServer",
+        "method": "startWithOwner"
+      },
+      "line": 171,
+      "reason": "result is the local new WebHttpServer owner, whose lifecycleLock is a private final newObject field; result.lifecycleLock selects that exact private owner lock, not a caller monitor. Only after vendor context reports STARTED does the same field lock protect result.started publication. Its other lifecycle methods use that same private field. The compound selector was outside the prior simple-expression check but isnot a new/exposed lock; actual startup/vendor callback/HTTP/stop timing andpartial-owner cleanup remain unqualified.",
+      "sourceAssertions": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+          "sha256": "b1e458ef9a9a246f8bb70866dbf671a005bbb569b9c4e27c20b525c20b3180a5",
+          "line": 36,
+          "text": "private final Object lifecycleLock = new Object();"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+          "sha256": "b1e458ef9a9a246f8bb70866dbf671a005bbb569b9c4e27c20b525c20b3180a5",
+          "line": 114,
+          "text": "var result = new WebHttpServer(tomcatFactory);"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+          "sha256": "b1e458ef9a9a246f8bb70866dbf671a005bbb569b9c4e27c20b525c20b3180a5",
+          "line": 171,
+          "text": "synchronized (result.lifecycleLock) {"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+          "sha256": "b1e458ef9a9a246f8bb70866dbf671a005bbb569b9c4e27c20b525c20b3180a5",
+          "line": 172,
+          "text": "result.started = true;"
+        }
+      ],
+      "requiredDynamicPostconditions": [
+        "Concurrent one-shot/status/phase/partial-owner transitions andblocked lock/provider/retention callbacks remain separate unperformed tests",
+        "Private constructor/owner handoff/unknown original frame anddeadline/interrupt invariants require their actual scoped quality evidence",
+        "No API graph helper/checkout/intent/permit/start/stop/retire/HTTP/Root/VM/native operation oroldruntime success transfer bythis review"
+      ],
+      "historicalStaticReview": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14077-web-state-local-recording-monitor-v3/review.json",
+        "sha256": "c0a76cdf87146a927428cbc9df0088d670710e6c4f0f8235797e17e102031036",
+        "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14077-web-state-local-recording-monitor-v3/manifest.json",
+        "manifestSha256": "17fb76724e4105220c0c68c25baec3856d7d63f4d673000af9e02d9ab9560806",
+        "rowPointer": [
+          "rows",
+          3
+        ],
+        "historicalReason": "SS313/342 private lifecycleLockでstarted/closedとvendor stop/destroy段階を直列化。ownerをvendor mutation前に捕捉しstartedはcontext STARTED後だけ。port/mappingsはstartedかつnotclosedのみ、stop成功後だけstopped、destroy成功後だけdestroyed。vendor/mapper callbackはlock内となり有界性と並行停止実証は未取得、native ownerの外budgetへ合算しない。",
+        "runtimeTransferred": false
+      }
+    }
+  ],
+  "sourceContexts": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java",
+      "sha256": "fe7fbb7d9858f05579839ab7ce6b80ec58566d90dbfc0d13d69a73aa730319ea",
+      "ranges": [
+        [
+          1,
+          122
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+      "sha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+      "ranges": [
+        [
+          1,
+          685
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+      "sha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+      "ranges": [
+        [
+          1,
+          252
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+      "sha256": "b1e458ef9a9a246f8bb70866dbf671a005bbb569b9c4e27c20b525c20b3180a5",
+      "ranges": [
+        [
+          1,
+          259
+        ]
+      ]
+    },
+    {
+      "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+      "sha256": "f04cdc3ab62be8b6a3b1c89d23975cdc255177557b52c114e47c04ed1ccf9cd0",
+      "ranges": [
+        [
+          113,
+          121
+        ]
+      ]
+    }
+  ],
+  "designReferences": [],
+  "deferred": [
+    {
+      "rawOrdinal": 1075,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1076,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1077,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1078,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1079,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1080,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1081,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1083,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1084,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1085,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1086,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    },
+    {
+      "rawOrdinal": 1087,
+      "reason": "Full Morning lifecycle/state andrecheckConsistent restoration failure priority not yet reviewed; exact residual12=volatile7+genericcatch4+finally1. Remains unclassified, no dynamic execution."
+    }
+  ],
+  "requiredScopedPartitions": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+      "beforeOrdinals": [
+        1075,
+        1076,
+        1077,
+        1078,
+        1079,
+        1080,
+        1081,
+        1083,
+        1084,
+        1085,
+        1086,
+        1087
+      ],
+      "selectedOrdinals": [],
+      "remainingOrdinals": [
+        1075,
+        1076,
+        1077,
+        1078,
+        1079,
+        1080,
+        1081,
+        1083,
+        1084,
+        1085,
+        1086,
+        1087
+      ],
+      "remainingRuleCounts": {
+        "AvoidUsingVolatile": 7,
+        "AvoidCatchingGenericException": 4,
+        "DoNotThrowExceptionInFinally": 1
+      }
+    }
+  ],
+  "existingCandidateIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG19940-existing-context-preflight-v1/existing-context-candidates.safe.json",
+    "sha256": "aa168d1ef3d2f8a4723f7df5ccbb0056008ca723be01cf23fedcda2a7ba1eb36"
+  }
+}
