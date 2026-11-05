@@ -1,0 +1,125 @@
+{
+  "atJST": "2026-11-05T13:16:07.569372+09:00",
+  "beforeHead": "6b0a684034ccba457a619441572401b48a0ad8b3",
+  "sourceCore": "b09393b0e746b55fd480176d57996d65bd76a95d",
+  "newTestWip": true,
+  "PGReview": "Existingdecoder usesrequestlayout/type/record/id/mode binding anderrorcode emptyprojection, normalResult hasprivateconstructionthroughfacadedecode only; no Main change or trust/privateaccess widening",
+  "fixtureDependencyClosed": "Onlynew2Testclasses, normalWeb/protocol andjakartaJMS API3.1.0(no provider); fixedClock/synchronouslambdaMemoryRegistry/onReply. Private Result constructed byexistingnormalfacade/puredecoder; no reflection/realJMS/native/Root/F03/TempThrowable classifier path. Oldcontroller/nativefixture untouched/unselected.",
+  "newTestCompile": {
+    "run": "PG18808",
+    "actualExit": 0,
+    "manifestSha256": "4048dcb8d53ef1f52ed31918feb378b06c85318c3e3f9d773eb1ae9891fb242c",
+    "selectedTestMethods": 8,
+    "classes": 2,
+    "old4SourceUnchanged": true,
+    "MainRecompiled": false
+  },
+  "static": {
+    "run": "PG18810",
+    "manifestSha256": "e6f85f27787077788de4b7012ee078fc04b2bc65136194a2e783492375637b84",
+    "PMDraw": 5,
+    "applicability": [
+      {
+        "beginline": "215",
+        "endline": "215",
+        "begincolumn": "25",
+        "endcolumn": "56",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.media",
+        "class": "MediaResponseDecoderTest",
+        "method": "med040ConcurrentDecodeOwnsBytesAndIsolatesRequests",
+        "variable": "executor",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "decision": "NON_APPLICABLE_FINITE_STANDALONE_JUNIT_EXECUTOR_JOIN_CLOSE_NOT_APP_CONTAINER_THREAD"
+      },
+      {
+        "beginline": "220",
+        "endline": "243",
+        "begincolumn": "13",
+        "endcolumn": "19",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.media",
+        "class": "MediaResponseDecoderTest",
+        "method": "med040ConcurrentDecodeOwnsBytesAndIsolatesRequests",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "decision": "NON_APPLICABLE_FINITE_STANDALONE_JUNIT_EXECUTOR_JOIN_CLOSE_NOT_APP_CONTAINER_THREAD"
+      },
+      {
+        "beginline": "168",
+        "endline": "168",
+        "begincolumn": "24",
+        "endcolumn": "55",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.media",
+        "class": "MediaVerifiedProjectionTest",
+        "method": "concurrentProjectionOfOneImmutableResultHasIndependentBinding",
+        "variable": "workers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "decision": "NON_APPLICABLE_FINITE_STANDALONE_JUNIT_EXECUTOR_JOIN_CLOSE_NOT_APP_CONTAINER_THREAD"
+      },
+      {
+        "beginline": "169",
+        "endline": "169",
+        "begincolumn": "21",
+        "endcolumn": "95",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.media",
+        "class": "MediaVerifiedProjectionTest",
+        "method": "concurrentProjectionOfOneImmutableResultHasIndependentBinding",
+        "variable": "success",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "decision": "NON_APPLICABLE_FINITE_STANDALONE_JUNIT_EXECUTOR_JOIN_CLOSE_NOT_APP_CONTAINER_THREAD"
+      },
+      {
+        "beginline": "171",
+        "endline": "175",
+        "begincolumn": "11",
+        "endcolumn": "17",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.media",
+        "class": "MediaVerifiedProjectionTest",
+        "method": "concurrentProjectionOfOneImmutableResultHasIndependentBinding",
+        "variable": "failure",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "decision": "NON_APPLICABLE_FINITE_STANDALONE_JUNIT_EXECUTOR_JOIN_CLOSE_NOT_APP_CONTAINER_THREAD"
+      }
+    ],
+    "MainApplicableFindings": 0,
+    "Checkstyle": 0,
+    "processingErrors": 0,
+    "suppressionAdded": false,
+    "sixMainSpotBugs": "PG18648 existing sourceb093 all6zero pinned andnotrerun"
+  },
+  "publicEvidence": {
+    "pg18808-media-verified-projection-compile-v1": {
+      "path": "evidence/01_PT/009_NK-MED-001/evidence/PG18808-MEDIA-VERIFIED-PROJECTION-COMPILE-V1/public-pins.json",
+      "sha256": "ff2acef85c6a0a5847dfa5fb1cea4be7e57f8acc1756e9c51474516c0724530f"
+    },
+    "pg18810-media-verified-projection-static-v1": {
+      "path": "evidence/01_PT/009_NK-MED-001/evidence/PG18810-MEDIA-VERIFIED-PROJECTION-STATIC-V1/public-pins.json",
+      "sha256": "811abb80ad9775259b8e844b66191b3865096d384084d6a1545911013bc1130d"
+    }
+  },
+  "first8": "NOT_EXECUTED",
+  "physicalExpected": 3,
+  "normalMain": "PG18642 existing allsixMaininput/jar matches, normalbytes reused",
+  "remainingRealMediaFileAuthHttpAndParent": "NOT_ACCEPTED_HOLD",
+  "newAccepted": 0,
+  "formalUpdated": false,
+  "secondV": false
+}
