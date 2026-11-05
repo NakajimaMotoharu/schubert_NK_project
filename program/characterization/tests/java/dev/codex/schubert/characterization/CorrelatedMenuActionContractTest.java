@@ -17,6 +17,7 @@ final class CorrelatedMenuActionContractTest {
   private static final String LOCAL_STAGE = "LOCAL";
   private static final String STAGE_FIELD = "stage";
   private static final String HTTP_PATH = "/http";
+  private static final String RESPONSE_BYTES_FIELD = "responseBytes";
   private static final String PAYLOAD_FIELD = "payload";
   private static final String SEARCH_OPERATION = "OP_SEARCH";
   private static final String ROW_FIELD = "row";
@@ -154,6 +155,26 @@ final class CorrelatedMenuActionContractTest {
         }
     }
     assertEquals(List.of(PAIR_ERROR), CorrelatedLogEvidenceValidator.validate(input));
+  }
+
+  @Test
+  void qa054log007OptionalResponseBytesHaveIndependentUnsignedN12Boundaries() {
+    for (long value : new long[] {0L, 999_999_999_999L}) {
+      var input = fixture();
+      update(input, NK, MENU_EVENT, x -> object(x, HTTP_PATH).put(RESPONSE_BYTES_FIELD, value));
+      assertEquals(List.of(), CorrelatedLogEvidenceValidator.validate(input));
+    }
+    for (Consumer<ObjectNode> mutation :
+        List.<Consumer<ObjectNode>>of(
+            x -> object(x, HTTP_PATH).put(RESPONSE_BYTES_FIELD, -1),
+            x -> object(x, HTTP_PATH).put(RESPONSE_BYTES_FIELD, 1_000_000_000_000L),
+            x -> object(x, HTTP_PATH).put(RESPONSE_BYTES_FIELD, 0.5),
+            x -> object(x, HTTP_PATH).put(RESPONSE_BYTES_FIELD, "0"),
+            x -> object(x, HTTP_PATH).putNull(RESPONSE_BYTES_FIELD))) {
+      var input = fixture();
+      update(input, NK, MENU_EVENT, mutation);
+      assertTrue(CorrelatedLogEvidenceValidator.validate(input).contains(EXPECTED_ERROR));
+    }
   }
 
   private static ObjectNode fixture() {
