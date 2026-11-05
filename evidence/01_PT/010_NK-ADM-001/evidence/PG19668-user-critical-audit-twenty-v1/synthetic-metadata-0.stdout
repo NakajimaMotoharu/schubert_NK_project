@@ -1,0 +1,176 @@
+Classfile /home/mini/codex/project1/work/pgpt-runs/PG379/pg19668-user-critical-audit-twenty-unit-v1/component/dev/codex/schubert/nk/api/application/admin/UserAuditWriter$1.class
+  Last modified Nov 6, 2026; size 1278 bytes
+  SHA-256 checksum b6dd8a32bfd671a8d4d8f254c6860e4d38900f31d247713a2e4e768ae921a3f5
+  Compiled from "UserAuditWriter.java"
+class dev.codex.schubert.nk.api.application.admin.UserAuditWriter$1
+  minor version: 0
+  major version: 69
+  flags: (0x1020) ACC_SUPER, ACC_SYNTHETIC
+  this_class: #8                          // dev/codex/schubert/nk/api/application/admin/UserAuditWriter$1
+  super_class: #41                        // java/lang/Object
+  interfaces: 0, fields: 1, methods: 1, attributes: 4
+Constant pool:
+   #1 = Methodref          #2.#3          // dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.values:()[Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+   #2 = Class              #4             // dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation
+   #3 = NameAndType        #5:#6          // values:()[Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+   #4 = Utf8               dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation
+   #5 = Utf8               values
+   #6 = Utf8               ()[Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+   #7 = Fieldref           #8.#9          // dev/codex/schubert/nk/api/application/admin/UserAuditWriter$1.$SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+   #8 = Class              #10            // dev/codex/schubert/nk/api/application/admin/UserAuditWriter$1
+   #9 = NameAndType        #11:#12        // $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+  #10 = Utf8               dev/codex/schubert/nk/api/application/admin/UserAuditWriter$1
+  #11 = Utf8               $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation
+  #12 = Utf8               [I
+  #13 = Fieldref           #2.#14         // dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+  #14 = NameAndType        #15:#16        // CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+  #15 = Utf8               CREATE
+  #16 = Utf8               Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+  #17 = Methodref          #2.#18         // dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+  #18 = NameAndType        #19:#20        // ordinal:()I
+  #19 = Utf8               ordinal
+  #20 = Utf8               ()I
+  #21 = Class              #22            // java/lang/NoSuchFieldError
+  #22 = Utf8               java/lang/NoSuchFieldError
+  #23 = Fieldref           #2.#24         // dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ENABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+  #24 = NameAndType        #25:#16        // ENABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+  #25 = Utf8               ENABLE
+  #26 = Fieldref           #2.#27         // dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.DISABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+  #27 = NameAndType        #28:#16        // DISABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+  #28 = Utf8               DISABLE
+  #29 = Fieldref           #2.#30         // dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.PROMOTE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+  #30 = NameAndType        #31:#16        // PROMOTE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+  #31 = Utf8               PROMOTE
+  #32 = Fieldref           #2.#33         // dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.DEMOTE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+  #33 = NameAndType        #34:#16        // DEMOTE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+  #34 = Utf8               DEMOTE
+  #35 = Fieldref           #2.#36         // dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.RESET_PASSWORD:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+  #36 = NameAndType        #37:#16        // RESET_PASSWORD:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+  #37 = Utf8               RESET_PASSWORD
+  #38 = Fieldref           #2.#39         // dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.UNLOCK:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+  #39 = NameAndType        #40:#16        // UNLOCK:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+  #40 = Utf8               UNLOCK
+  #41 = Class              #42            // java/lang/Object
+  #42 = Utf8               java/lang/Object
+  #43 = Utf8               <clinit>
+  #44 = Utf8               ()V
+  #45 = Utf8               Code
+  #46 = Utf8               LineNumberTable
+  #47 = Utf8               LocalVariableTable
+  #48 = Utf8               StackMapTable
+  #49 = Utf8               SourceFile
+  #50 = Utf8               UserAuditWriter.java
+  #51 = Utf8               EnclosingMethod
+  #52 = Class              #53            // dev/codex/schubert/nk/api/application/admin/UserAuditWriter
+  #53 = Utf8               dev/codex/schubert/nk/api/application/admin/UserAuditWriter
+  #54 = Utf8               NestHost
+  #55 = Utf8               InnerClasses
+  #56 = Class              #57            // dev/codex/schubert/nk/api/security/AdminCommandAuthenticator
+  #57 = Utf8               dev/codex/schubert/nk/api/security/AdminCommandAuthenticator
+  #58 = Utf8               Mutation
+{
+  static final int[] $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation;
+    descriptor: [I
+    flags: (0x1018) ACC_STATIC, ACC_FINAL, ACC_SYNTHETIC
+
+  static {};
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=3, locals=1, args_size=0
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.values:()[Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ENABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        42: getstatic     #26                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.DISABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        45: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        57: getstatic     #29                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.PROMOTE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        60: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        63: iconst_4
+        64: iastore
+        65: goto          69
+        68: astore_0
+        69: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        72: getstatic     #32                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.DEMOTE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        75: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        78: iconst_5
+        79: iastore
+        80: goto          84
+        83: astore_0
+        84: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        87: getstatic     #35                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.RESET_PASSWORD:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        90: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        93: bipush        6
+        95: iastore
+        96: goto          100
+        99: astore_0
+       100: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+       103: getstatic     #38                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.UNLOCK:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+       106: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+       109: bipush        7
+       111: iastore
+       112: goto          116
+       115: astore_0
+       116: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+            54    65    68   Class java/lang/NoSuchFieldError
+            69    80    83   Class java/lang/NoSuchFieldError
+            84    96    99   Class java/lang/NoSuchFieldError
+           100   112   115   Class java/lang/NoSuchFieldError
+      LineNumberTable:
+        line 56: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+      StackMapTable: number_of_entries = 14
+        frame_type = 87 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 78 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 78 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+}
+SourceFile: "UserAuditWriter.java"
+EnclosingMethod: #52.#0                 // dev.codex.schubert.nk.api.application.admin.UserAuditWriter
+NestHost: class dev/codex/schubert/nk/api/application/admin/UserAuditWriter
+InnerClasses:
+  public static final #58= #2 of #56;     // Mutation=class dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation of class dev/codex/schubert/nk/api/security/AdminCommandAuthenticator
+  static #8;                              // class dev/codex/schubert/nk/api/application/admin/UserAuditWriter$1

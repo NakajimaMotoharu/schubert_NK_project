@@ -1,0 +1,184 @@
+{
+  "atJST": "2026-11-06T02:03:00.709047+09:00",
+  "source": "d851593ad63a6e7ba12e71b01a0a561fff9292de",
+  "productionCoreMain": "827983a97a9c3bf36b7671985a7924417ff0e8f7",
+  "mainChanged": false,
+  "run": "PG19668",
+  "tests": 20,
+  "actualExit": 0,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "aborted": 0,
+  "coverage": {
+    "LINE": {
+      "covered": 154,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 20,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 5,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 68,
+      "missed": 0
+    }
+  },
+  "physical": 6,
+  "post": "pg19670-user-critical-audit-independent-post-v1",
+  "postActualExit": 0,
+  "canonicalManifest": {
+    "path": "evidence/01_PT/010_NK-ADM-001/evidence/PG19668-user-critical-audit-twenty-v1/manifest.json",
+    "sha256": "ec8a7f2802909a75d0540ff493408eed6762529584bfb3ac2f8cbdbe1eac0472"
+  },
+  "supplementalPins": {
+    "environment.safe.json": "c9269707fabc30e21284baa21a2d6618d86971867f8a30c98046aeb478f2e322",
+    "scope.safe.json": "21cc12085dfa1ecfa15d49d145b7d00a01b4467f217c224ba890882913b16dff"
+  },
+  "producer": {
+    "source": "d851593ad63a6e7ba12e71b01a0a561fff9292de",
+    "path": "evidence/01_PT/010_NK-ADM-001/input/003_owned_user_audit_unit.py",
+    "sha256": "ea98f6ee5e300cffccaa04951eabf3b4dd4b6d74494856daf8989ad2ad373818"
+  },
+  "spec": "evidence/01_PT/010_NK-ADM-001/089_User監査三Source全JDBCport_単体テスト仕様.md",
+  "testIdMethods": [
+    [
+      "ADM-AUDIT-PORT001",
+      "audit001BusinessSuccessCatalogHasActionThenSecurityExceptResetUnlock"
+    ],
+    [
+      "ADM-AUDIT-PORT002",
+      "audit002EveryDefiniteDenialWritesOnlySecurityWithClosedResult"
+    ],
+    [
+      "ADM-AUDIT-PORT003",
+      "audit003BeforeAfterStateProjectionMatchesLiteralContract"
+    ],
+    [
+      "ADM-AUDIT-PORT004",
+      "audit004MissingStateOmitsFieldsAndLockTimeBoundaryIsStrict"
+    ],
+    [
+      "ADM-AUDIT-PORT005",
+      "audit005UsernameUsesAfterThenBeforeAndNfcControlsAreSanitized"
+    ],
+    [
+      "ADM-AUDIT-PORT006",
+      "audit006Utf8Limit1024And1025UseIndependentLiteralJsonSize"
+    ],
+    [
+      "ADM-AUDIT-PORT007",
+      "audit007AllWritersRequireOneAffectedRow"
+    ],
+    [
+      "ADM-AUDIT-PORT008",
+      "audit008BusinessFirstOrSecondSqlFailureStopsWithoutOwningConnection"
+    ],
+    [
+      "ADM-AUDIT-PORT009",
+      "audit009BusinessRequiredInputsRejectNullAndCloseOwnedStatements"
+    ],
+    [
+      "ADM-AUDIT-PORT010",
+      "audit010QueryAllClosedEventsAndOptionalActorMatchIndependentTable"
+    ],
+    [
+      "ADM-AUDIT-PORT011",
+      "audit011QueryMissingInputsAreContractFailures"
+    ],
+    [
+      "ADM-AUDIT-PORT012",
+      "audit012QuerySqlFailuresKeepIdentityAndCloseStatement"
+    ],
+    [
+      "ADM-AUDIT-PORT013",
+      "audit013AdmissionClosedCatalogAndOptionalActorMatchIndependentTable"
+    ],
+    [
+      "ADM-AUDIT-PORT014",
+      "audit014AdmissionCreateOmitsTargetAndNeverContainsRequestValues"
+    ],
+    [
+      "ADM-AUDIT-PORT015",
+      "audit015AdmissionTokenMismatchUsesEveryMutationActionWithoutInputSecrets"
+    ],
+    [
+      "ADM-AUDIT-PORT016",
+      "audit016AdmissionMissingOrClosedRequestIsNotSuccessfulAudit"
+    ],
+    [
+      "ADM-AUDIT-PORT017",
+      "audit017AdmissionSqlFailuresKeepIdentityAndCloseStatement"
+    ],
+    [
+      "ADM-AUDIT-PORT018",
+      "audit018ConcurrentWritersHaveNoSharedBindOrConnectionState"
+    ],
+    [
+      "ADM-AUDIT-PORT019",
+      "audit019UnknownRuntimeAndErrorAreNotNormalizedAsSuccessfulAudit"
+    ],
+    [
+      "ADM-AUDIT-PORT020",
+      "audit020PrimarySqlFailureRetainsSuppressedCloseAndBorrowedOwnership"
+    ]
+  ],
+  "verification": "Reused PG19630 normal sixMain827/NullAway and PG19632 sixSpotBugs0 only after all actualMain/POM/JAR hashes match, no new build. PG19664 testcompile0/19666 PMD raw8 individually nonapplicable(applicable0, CS0/parser0/suppression0); literal condition actuallyfixed(BUG2308/YKT2053), original19662/raw9/exactTest-driver preserved. PG19668 firstcurrentall20/FESaborted0, whole3source 154L20M5C68B100; normal6physical includes1 standard compilerSwitchMap filter metadata, all presentexec IDs (inclsynthetic) equal classinfo CRC, singleexec/session, full@Test matches, heldfourhits0, no storage/bootstrapMain initialized. PG19670 independentpost0.",
+  "scope": "All three original critical User audit writers with borrowed JDK JDBC proxies, Gson scalarJSON, synthetic immutable inputState/Change/metadata and bounded DTO decoding only. No actual DB/permission/authentication/user mutation/password/HMAC/key/session/crypto/VM/Root/cohort operation. Input generation uses existingcodec; expectedSQL/catalog/JSON/UTF8 are independent handwritten values. Own three workers with no shared JDBC state, JVM metadata is not zero-I/O proof.",
+  "unacceptedExternalCriteria": "Real DB syntax/atomic transaction/row locks/actual User authorization and mutation/replay/actual audit consistency; runtime/Web/CHR/native/global451/IT-ST, no WBS leaf closure or replacement firstV. Canonical P01003 and P01001 costowners retained, shared group primaryP01003 only/no exclusive allocation/duplicate cost.",
+  "original6bMainSameHash": true,
+  "currentTechnicalReusableComponents": 41,
+  "originalPartial80TechnicallyWhole": 15,
+  "originalPartialUnbound": 65,
+  "originalUnregistered282ProofIntersection": 24,
+  "originalUnregisteredUnbound": 258,
+  "globalRegistryUpdated": false,
+  "newIndividualWbsAcceptance": 0,
+  "formalUpdated": false,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "historicalAccepted": "17/190",
+  "effortRate": null,
+  "firstV": "SAME_FIRST_HOLD_NOT_REPLACED",
+  "quotaBefore": {
+    "primary": {
+      "usedPercent": 21,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 21,
+    "remainingPercent": 79,
+    "observedAtUTC": "2026-11-05T16:47:07Z",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "50905c6d9e66102175bf95365de43c95014488830eec3752a872843e8e6bb4b3"
+  },
+  "quotaAfter": {
+    "primary": {
+      "usedPercent": 21,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 21,
+    "remainingPercent": 79,
+    "observedAtUTC": "2026-11-05T17:02:10Z",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "6258534771236ada406d052f0a9b80a250bc31b7d01f75a46b96948ed9f5d2b2"
+  },
+  "sharedObservedPp": 0,
+  "actualAllocatedPp": null,
+  "tokenN": null,
+  "tokenT": null,
+  "ordinarySharedObservedPp": 15,
+  "allRecordedSharedPp": 22,
+  "SObservedPp": 7,
+  "SRemainingCapPp": 3,
+  "mayFinishTurn": false,
+  "next": "publish/push threeSource20; preflight next genuine remaining contract from originalpartial80/current followup, prefer business batch/API logic and no oldsuccessreplay; ordinary PGPT continues while all existingHOLD remain.",
+  "metadataCloserSha256": "1a27af71319e51370b020e81e0f0bcdf243e0560171496cb21cce742483b8fea"
+}
