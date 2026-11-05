@@ -1,0 +1,221 @@
+{
+  "atJST": "2026-11-05T10:35:35.297881+09:00",
+  "sourceBefore": "45fab165144ad411f745c3a7151634f4181360a1",
+  "groupId": "PGPT-20261105-CHR-DEFINITION-DOCUMENTS",
+  "originalEstimatePp": {
+    "low": 0.75,
+    "base": 2.5,
+    "high": 6
+  },
+  "capPp": 10,
+  "costNoAddedBudget": true,
+  "bug": "BUG2275",
+  "horizontal": "YKT2020",
+  "allConversionRows": [
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+      "line": 242,
+      "code": "|| http.path(FIELD_STATUS).asInt() < 100",
+      "classification": "ALREADY_GUARDED_TYPED_PROJECTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+      "line": 243,
+      "code": "|| http.path(FIELD_STATUS).asInt() > 599",
+      "classification": "ALREADY_GUARDED_TYPED_PROJECTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+      "line": 255,
+      "code": "&& value.asLong() >= 0",
+      "classification": "ALREADY_GUARDED_TYPED_PROJECTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+      "line": 256,
+      "code": "&& value.asLong() <= 999_999_999_999L;",
+      "classification": "ALREADY_GUARDED_TYPED_PROJECTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+      "line": 270,
+      "code": "&& value.asInt() == SUPPORTED_SCHEMA_VERSION;",
+      "classification": "ALREADY_GUARDED_TYPED_PROJECTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "line": 451,
+      "code": "manifest.put(FIELD_MASTERFILECOUNT, expected.path(FIELD_MASTERFILECOUNT).asLong());",
+      "classification": "CLI_METADATA_WRITER_REQUIRES_SEPARATE_SCOPE_NO_EXECUTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "line": 452,
+      "code": "manifest.put(FIELD_MASTERBYTES, expected.path(FIELD_MASTERBYTES).asLong());",
+      "classification": "CLI_METADATA_WRITER_REQUIRES_SEPARATE_SCOPE_NO_EXECUTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "line": 460,
+      "code": "\"browserRevision\", browser.path(\"browserRevision\").asInt(),",
+      "classification": "CLI_METADATA_WRITER_REQUIRES_SEPARATE_SCOPE_NO_EXECUTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 91,
+      "code": "metrics.put(\"currentApplicableCount\", contract.path(\"currentApplicableCount\").asInt());",
+      "classification": "OTHER_GATE_METADATA_STAGE_PENDING_NO_ACTUAL_GATE_EXECUTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 167,
+      "code": "require(cases.path(\"minItems\").asInt(-1) == 24, \"SCHEMA_MIN_ITEMS\", failures);",
+      "classification": "PURE_DEFINITIONS_SCHEMA_BROWSER"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 168,
+      "code": "require(cases.path(\"maxItems\").asInt(-1) == 24, \"SCHEMA_MAX_ITEMS\", failures);",
+      "classification": "PURE_DEFINITIONS_SCHEMA_BROWSER"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 233,
+      "code": "expected.path(\"browserRevision\").asInt() == browser.path(\"browserRevision\").asInt(),",
+      "classification": "PURE_DEFINITIONS_SCHEMA_BROWSER"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 245,
+      "code": "expected.path(\"desktopWidth\").asInt() == browser.path(\"desktop\").path(\"width\").asInt()",
+      "classification": "PURE_DEFINITIONS_SCHEMA_BROWSER"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 246,
+      "code": "&& expected.path(\"desktopHeight\").asInt()",
+      "classification": "PURE_DEFINITIONS_SCHEMA_BROWSER"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 247,
+      "code": "== browser.path(\"desktop\").path(\"height\").asInt(),",
+      "classification": "PURE_DEFINITIONS_SCHEMA_BROWSER"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 251,
+      "code": "expected.path(\"mobileWidth\").asInt() == browser.path(\"mobile\").path(\"width\").asInt()",
+      "classification": "PURE_DEFINITIONS_SCHEMA_BROWSER"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 252,
+      "code": "&& expected.path(\"mobileHeight\").asInt()",
+      "classification": "PURE_DEFINITIONS_SCHEMA_BROWSER"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 253,
+      "code": "== browser.path(\"mobile\").path(\"height\").asInt(),",
+      "classification": "PURE_DEFINITIONS_SCHEMA_BROWSER"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 257,
+      "code": "expected.path(FIELD_DEVICESCALEFACTOR).asInt()",
+      "classification": "PURE_DEFINITIONS_SCHEMA_BROWSER"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 258,
+      "code": "== browser.path(\"desktop\").path(FIELD_DEVICESCALEFACTOR).asInt()",
+      "classification": "PURE_DEFINITIONS_SCHEMA_BROWSER"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 259,
+      "code": "&& expected.path(FIELD_DEVICESCALEFACTOR).asInt()",
+      "classification": "PURE_DEFINITIONS_SCHEMA_BROWSER"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 260,
+      "code": "== browser.path(\"mobile\").path(FIELD_DEVICESCALEFACTOR).asInt(),",
+      "classification": "PURE_DEFINITIONS_SCHEMA_BROWSER"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 485,
+      "code": "require(comparison.path(\"firstFileCount\").asInt(-1) == 28, \"COMPARE_FIRST_COUNT\", failures);",
+      "classification": "OTHER_GATE_METADATA_STAGE_PENDING_NO_ACTUAL_GATE_EXECUTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 486,
+      "code": "require(comparison.path(\"secondFileCount\").asInt(-1) == 28, \"COMPARE_SECOND_COUNT\", failures);",
+      "classification": "OTHER_GATE_METADATA_STAGE_PENDING_NO_ACTUAL_GATE_EXECUTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 560,
+      "code": "preflight.path(\"freeBytes\").asLong() >= 20L * 1024 * 1024 * 1024,",
+      "classification": "OTHER_GATE_METADATA_STAGE_PENDING_NO_ACTUAL_GATE_EXECUTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 586,
+      "code": "require(checks.path(name).asBoolean(false), \"REVIEW_CHECK:\" + name, failures);",
+      "classification": "OTHER_GATE_METADATA_STAGE_PENDING_NO_ACTUAL_GATE_EXECUTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 601,
+      "code": "require(manifest.path(\"caseCount\").asInt(-1) == 24, \"BASELINE_CASE_COUNT\", failures);",
+      "classification": "OTHER_GATE_METADATA_STAGE_PENDING_NO_ACTUAL_GATE_EXECUTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 603,
+      "code": "manifest.path(\"screenshotFileCount\").asInt(-1) == 2, \"BASELINE_SCREENSHOT_COUNT\", failures);",
+      "classification": "OTHER_GATE_METADATA_STAGE_PENDING_NO_ACTUAL_GATE_EXECUTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 604,
+      "code": "require(manifest.path(\"differenceCount\").asInt(-1) == 16, \"BASELINE_DIF_COUNT\", failures);",
+      "classification": "OTHER_GATE_METADATA_STAGE_PENDING_NO_ACTUAL_GATE_EXECUTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 620,
+      "code": "manifest.path(\"masterFileCount\").asLong() == sourceReport.path(\"masterFileCount\").asLong(),",
+      "classification": "OTHER_GATE_METADATA_STAGE_PENDING_NO_ACTUAL_GATE_EXECUTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 624,
+      "code": "manifest.path(\"masterBytes\").asLong() == sourceReport.path(\"masterBytes\").asLong(),",
+      "classification": "OTHER_GATE_METADATA_STAGE_PENDING_NO_ACTUAL_GATE_EXECUTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 632,
+      "code": "manifest.path(FIELD_ENVIRONMENT).path(\"browserRevision\").asInt() == 1187,",
+      "classification": "OTHER_GATE_METADATA_STAGE_PENDING_NO_ACTUAL_GATE_EXECUTION"
+    },
+    {
+      "source": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "line": 645,
+      "code": "files.size() == contract.path(\"baselineFileCount\").asInt(),",
+      "classification": "OTHER_GATE_METADATA_STAGE_PENDING_NO_ACTUAL_GATE_EXECUTION"
+    }
+  ],
+  "rowCount": 33,
+  "classificationNotProofOfCompletion": true,
+  "scopeNow": "Only pure schema/browser15numeric fields, reject invalidtype/overflow/defaulting, genuine entrypoint is used by originalfullgate. Othergate/CLI scope staysOPEN; no realprocedure retry.",
+  "plannedTests": "New3 independentTest methods PT-CHR-DEF012..014; prior35 necessary relatedregression on newSource. Originalred onlynew3 before PG; old35 not confirmation rerun.",
+  "PGBeforeReproduction": false,
+  "formalUpdated": false,
+  "newAccepted": 0
+}

@@ -164,8 +164,8 @@ final class GateContractValidator {
         "SCHEMA_REQUIRED",
         failures);
     JsonNode cases = schema.path("properties").path(FIELD_CASES);
-    require(cases.path("minItems").asInt(-1) == 24, "SCHEMA_MIN_ITEMS", failures);
-    require(cases.path("maxItems").asInt(-1) == 24, "SCHEMA_MAX_ITEMS", failures);
+    require(integerEquals(cases.path("minItems"), 24), "SCHEMA_MIN_ITEMS", failures);
+    require(integerEquals(cases.path("maxItems"), 24), "SCHEMA_MAX_ITEMS", failures);
     require(
         strings(cases.path("items").path("required"))
             .equals(List.of("id", "group", FIELD_CURRENT, "nk")),
@@ -230,7 +230,7 @@ final class GateContractValidator {
         "BROWSER_NAME",
         failures);
     require(
-        expected.path("browserRevision").asInt() == browser.path("browserRevision").asInt(),
+        matchingInteger(expected.path("browserRevision"), browser.path("browserRevision")),
         "BROWSER_REVISION",
         failures);
     require(
@@ -242,22 +242,24 @@ final class GateContractValidator {
         "BROWSER_TIMEZONE",
         failures);
     require(
-        expected.path("desktopWidth").asInt() == browser.path("desktop").path("width").asInt()
-            && expected.path("desktopHeight").asInt()
-                == browser.path("desktop").path("height").asInt(),
+        matchingInteger(expected.path("desktopWidth"), browser.path("desktop").path("width"))
+            && matchingInteger(
+                expected.path("desktopHeight"), browser.path("desktop").path("height")),
         "BROWSER_DESKTOP_VIEWPORT",
         failures);
     require(
-        expected.path("mobileWidth").asInt() == browser.path("mobile").path("width").asInt()
-            && expected.path("mobileHeight").asInt()
-                == browser.path("mobile").path("height").asInt(),
+        matchingInteger(expected.path("mobileWidth"), browser.path("mobile").path("width"))
+            && matchingInteger(
+                expected.path("mobileHeight"), browser.path("mobile").path("height")),
         "BROWSER_MOBILE_VIEWPORT",
         failures);
     require(
-        expected.path(FIELD_DEVICESCALEFACTOR).asInt()
-                == browser.path("desktop").path(FIELD_DEVICESCALEFACTOR).asInt()
-            && expected.path(FIELD_DEVICESCALEFACTOR).asInt()
-                == browser.path("mobile").path(FIELD_DEVICESCALEFACTOR).asInt(),
+        matchingInteger(
+                expected.path(FIELD_DEVICESCALEFACTOR),
+                browser.path("desktop").path(FIELD_DEVICESCALEFACTOR))
+            && matchingInteger(
+                expected.path(FIELD_DEVICESCALEFACTOR),
+                browser.path("mobile").path(FIELD_DEVICESCALEFACTOR)),
         "BROWSER_DEVICE_SCALE",
         failures);
     require(!strings(browser.path("fonts")).isEmpty(), "BROWSER_FONTS", failures);
@@ -270,6 +272,17 @@ final class GateContractValidator {
         "reduce".equals(browser.path("reducedMotion").asText()),
         "BROWSER_REDUCED_MOTION",
         failures);
+  }
+
+  private static boolean integerEquals(JsonNode value, int expected) {
+    return value.isIntegralNumber() && value.canConvertToInt() && value.intValue() == expected;
+  }
+
+  private static boolean matchingInteger(JsonNode expected, JsonNode actual) {
+    return expected.isIntegralNumber()
+        && expected.canConvertToInt()
+        && expected.intValue() > 0
+        && integerEquals(actual, expected.intValue());
   }
 
   private static void validateDifferences(

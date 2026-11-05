@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+    "-o",
+    "--no-transfer-progress",
+    "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+    "-pl",
+    "program/characterization",
+    "-am",
+    "-Dmaven.test.skip=true",
+    "package",
+    "org.apache.maven.plugins:maven-dependency-plugin:3.9.0:build-classpath",
+    "-DincludeScope=test",
+    "-Dmdep.outputFile=target/pgpt-test-classpath.txt"
+  ],
+  "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18722-definition-numeric-compile-v1/snapshot",
+  "ownerPid": 138915,
+  "pid": 139025,
+  "startUTC": "2026-11-05T01:40:25.352616+00:00"
+}

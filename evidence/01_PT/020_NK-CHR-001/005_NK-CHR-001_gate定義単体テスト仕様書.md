@@ -23,3 +23,9 @@ PGはfull validate既存six段と後段の同値（721）を保存し、新pure�
 正常24は変更frameworkの必要関連回帰、当sourceに新11を加えた35unique/6class全methodで実行前固定。失敗/エラー/skipped/abortedは成功へ含めない。実commandはjava25/JUnit1.13.4 exact --select-class6、通常artifactはPG18704、JaCoCo0.8.15 appendfalse・fresh単session、全9Mainphysicalを分母から除外せず報告。新validateDefinitionsの全条件/nullと既存定義下位branchを確認するが、IO/実gate後段を行わずwholeGateContractValidator100%と予告しない。旧24等とのexec合算0。
 
 実行日時/対象commit/OS/JDK/tool/Input/command/終了code/XML/coverage/CRC/原失敗・hashは後続006結果とmanifestへ固定。現時点PG18704 compile0、11試験は未実行。再送はこのpure定義段に副作用/送信がないため非該当、実再送契約はP02001/他program/CHRの残依存。関連BUG2269/YKT2014の残四versioncallerを本scopeで検証し、realgate受入に変換しない。
+
+## PT-CHR-DEF012～014 / BUG2275・YKT2020の追加発見
+
+GateDefinitionNumericTest#schemaAndBrowserIntegersRejectTextFractionAndOverflowは15定義field×text/fraction/2^32加算BigIntegerの45独立不正を全拒否する。#equalMalformedExpectedAndObservedNumbersNeverValidateThroughDefaultZeroは6対応×null/文字列/boolean/0の24一致不正を拒否する。#validIntegralRepresentationsStayEquivalentAndDifferentIntegersFailは各15fieldでint/long/BigIntegerの同じ正整数（45）を許容し、1異なる整数を拒否する（15）。値はSS355/UI264六public定義の24/1187/1366/768/390/844/1をTest literalへ固定し、production生成0。browserのrevision/width/height/scaleは正の整数、schema min/maxはinteger24を要求する内部形式判断であり承認済UI寸法を変えない。
+
+PG18720/9bd7b7原redはMain45fabの正常jar、new全3methodだけ、3中failure2/error0/skip0、assertAllは45/24全不正が原実装で通ることを示した。正整数同値/異値は旧実装でも正常。原Main/Manifest ac422bb9…を保存し新PASSへ算入しない。新helperはtype/convertible/正値/数値同値を分離、純粋段15fieldを修正する。他比較/preflight/review/baseline/CLI/metricの33箇所先行表は未解決を残す。全35に新3を加えた当source38unique/7classで必要回帰、旧exec合算0。Testfixture helperはprivate→packageへ同値公開しただけで、六public resource以外の入力0。

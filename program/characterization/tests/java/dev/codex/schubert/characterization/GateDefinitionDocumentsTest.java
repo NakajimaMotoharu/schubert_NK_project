@@ -307,7 +307,7 @@ final class GateDefinitionDocumentsTest {
     assertEquals(List.of(), validate(valid));
   }
 
-  private static List<JsonNode> fixture() throws IOException {
+  static List<JsonNode> fixture() throws IOException {
     List<JsonNode> result = new ArrayList<>();
     for (String name : RESOURCES) {
       try (InputStream input = GateDefinitionDocumentsTest.class.getResourceAsStream("/" + name)) {
