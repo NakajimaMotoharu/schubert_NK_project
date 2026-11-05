@@ -62,6 +62,7 @@ public final class WebRequestTrace {
   private final AtomicReference<String> retainedRoute = new AtomicReference<>(UNKNOWN_ROUTE);
   private volatile Optional<TopBarViewModel> retainedActor = Optional.empty();
   private final AtomicBoolean completed = new AtomicBoolean();
+  private final AtomicBoolean menuViewCandidate = new AtomicBoolean();
 
   private WebRequestTrace(UUID requestId, UUID eventId) {
     this.retainedRequestId = requestId;
@@ -128,6 +129,17 @@ public final class WebRequestTrace {
     };
   }
 
+  /** Controller marks successful model construction; terminal status still decides success. */
+  public static void markMenuViewed() {
+    Scope scope = CURRENT.get();
+    if (scope != null) scope.trace.menuViewCandidate.set(true);
+    // Missing trace is already reported by the terminal hook; logging must not change HTTP.
+  }
+
+  public boolean menuViewCandidate() {
+    return menuViewCandidate.get();
+  }
+
   public UUID requestId() {
     return retainedRequestId;
   }
@@ -137,7 +149,13 @@ public final class WebRequestTrace {
   }
 
   public UUID correlationId() {
-    return messageId.get().orElse(retainedEventId);
+    return correlationIdFor(retainedEventId);
+  }
+
+  /** No business MQ means each projection event correlates to its own event Message ID. */
+  public UUID correlationIdFor(UUID eventId) {
+    Objects.requireNonNull(eventId, "eventId");
+    return messageId.get().orElse(eventId);
   }
 
   public String route() {

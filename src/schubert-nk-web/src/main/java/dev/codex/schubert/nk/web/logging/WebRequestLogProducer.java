@@ -114,11 +114,55 @@ public final class WebRequestLogProducer {
       String method,
       Optional<String> remoteAddress) {
     Objects.requireNonNull(trace, "trace");
+    if (!completeOne(
+        trace,
+        status,
+        elapsedNanos,
+        responseBytes,
+        method,
+        remoteAddress,
+        WebHttpLogKind.REQUEST,
+        trace.eventId(),
+        trace.correlationId())) return;
+    if (WebHttpLogKind.MENU_VIEWED.eligible(
+        trace.menuViewCandidate(), method, status, trace.route(), trace.actor().isPresent())) {
+      UUID eventId = retainedIdentifiers.get();
+      if (eventId == null
+          || eventId.equals(trace.eventId())
+          || eventId.equals(trace.requestId())
+          || eventId.equals(trace.correlationId())) {
+        metadataInvalid();
+        return;
+      }
+      completeOne(
+          trace,
+          status,
+          elapsedNanos,
+          responseBytes,
+          method,
+          remoteAddress,
+          WebHttpLogKind.MENU_VIEWED,
+          eventId,
+          trace.correlationIdFor(eventId));
+    }
+  }
+
+  private boolean completeOne(
+      WebRequestTrace trace,
+      int status,
+      long elapsedNanos,
+      long responseBytes,
+      String method,
+      Optional<String> remoteAddress,
+      WebHttpLogKind kind,
+      UUID eventId,
+      UUID correlationId) {
+    Objects.requireNonNull(trace, "trace");
     Objects.requireNonNull(method, "method");
     Objects.requireNonNull(remoteAddress, "remoteAddress");
     if (status < 100 || status > 599 || elapsedNanos < 0 || responseBytes < 0) {
       metadataInvalid();
-      return;
+      return false;
     }
     // BUG577: caller metadata must never reach even the local sink before numeric-IP validation.
     final Optional<String> address;
@@ -129,7 +173,7 @@ public final class WebRequestLogProducer {
                   InetAddress.ofLiteral(new LoginClientAddress(value).value()).getHostAddress());
     } catch (IllegalArgumentException invalidAddress) {
       metadataInvalid();
-      return;
+      return false;
     }
     Instant now = Objects.requireNonNull(clock.instant(), "instant").truncatedTo(ChronoUnit.MILLIS);
     String verb = METHODS.contains(method) ? method : "OTHER";
@@ -141,13 +185,13 @@ public final class WebRequestLogProducer {
     Level localLevel = status >= 500 ? Level.ERROR : status >= 400 ? Level.WARNING : Level.INFO;
     var json = base(now);
     json.addProperty("level", level.name());
-    json.addProperty("category", "REQUEST");
-    json.addProperty("action", "HTTP_REQUEST_COMPLETED");
+    json.addProperty("category", kind.category().name());
+    json.addProperty("action", kind.action());
     json.addProperty("outcome", status >= 400 ? "FAILURE" : "SUCCESS");
-    json.addProperty("messageId", trace.eventId().toString());
-    json.addProperty("correlationId", trace.correlationId().toString());
+    json.addProperty("messageId", eventId.toString());
+    json.addProperty("correlationId", correlationId.toString());
     json.addProperty("requestId", trace.requestId().toString());
-    json.addProperty("message", "HTTP request completed");
+    json.addProperty("message", kind.message());
     json.addProperty("httpMethod", verb);
     json.addProperty("path", trace.route());
     json.addProperty("status", status);
@@ -173,16 +217,17 @@ public final class WebRequestLogProducer {
     details.addProperty("projectionStatus", "PENDING");
     if (truncated) details.addProperty("truncated", true);
     json.add("details", details);
-    if (!local(localLevel, json)) return;
+    if (!local(localLevel, json)) return false;
     try {
       if (address.isEmpty())
         throw new IllegalArgumentException("verified transport is unavailable");
       var event =
           new WebLogEventData(
               now,
+              kind.category(),
               level,
-              Optional.of("HTTP_REQUEST_COMPLETED"),
-              "HTTP request completed",
+              Optional.of(kind.action()),
+              kind.message(),
               trace.requestId(),
               verb,
               trace.route(),
@@ -192,9 +237,9 @@ public final class WebRequestLogProducer {
               username,
               role,
               Optional.of(details.toString()));
-      byte[] wire = wire(trace, now, event);
+      byte[] wire = wire(eventId, correlationId, now, event);
       try {
-        var identity = new WebLogPayloadIdentity(trace.eventId(), trace.correlationId());
+        var identity = new WebLogPayloadIdentity(eventId, correlationId);
         project(identity, codec.encrypt(identity, wire), now);
       } finally {
         Arrays.fill(wire, (byte) 0);
@@ -207,8 +252,9 @@ public final class WebRequestLogProducer {
       details.addProperty("projectionStatus", "FAILED");
       json.addProperty("errorCode", "WEB_REQUEST_LOG_PROJECTION_FAILED");
       json.addProperty("level", localLevel == Level.ERROR ? "ERROR" : "WARN");
-      local(localLevel == Level.ERROR ? Level.ERROR : Level.WARNING, json);
+      return local(localLevel == Level.ERROR ? Level.ERROR : Level.WARNING, json);
     }
+    return true;
   }
 
   private JsonObject base(Instant now) {
@@ -244,7 +290,7 @@ public final class WebRequestLogProducer {
     return false;
   }
 
-  private static byte[] wire(WebRequestTrace trace, Instant now, WebLogEventData data) {
+  private static byte[] wire(UUID eventId, UUID correlationId, Instant now, WebLogEventData data) {
     var layout = new LayoutId("WLGEVT01");
     var header =
         new CommonHeader(
@@ -254,8 +300,8 @@ public final class WebRequestLogProducer {
             1,
             MessageKind.EVENT,
             InteractionKind.INTERNAL,
-            trace.eventId(),
-            trace.correlationId(),
+            eventId,
+            correlationId,
             now,
             Optional.empty(),
             256,

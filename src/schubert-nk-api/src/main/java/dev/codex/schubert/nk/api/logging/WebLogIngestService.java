@@ -93,8 +93,9 @@ public final class WebLogIngestService implements InternalEventProcessor {
     } catch (LayoutValidationException failure) {
       throw new PermanentProtocolException("REQUEST log payload semantics are invalid");
     }
-    if (!data.action().orElse("HTTP_REQUEST_COMPLETED").equals("HTTP_REQUEST_COMPLETED")
-        || data.path().startsWith("//")
+    // QA054/SSC336: named decode already enforces REQUEST/HTTP_REQUEST_COMPLETED or
+    // ACTION/MENU_VIEWED, rejecting all other category/action pairs before JDBC access.
+    if (data.path().startsWith("//")
         || data.path().contains("#")
         || data.remoteAddress().contains("%")) {
       throw new PermanentProtocolException("REQUEST log metadata violate the projection contract");
@@ -111,29 +112,31 @@ public final class WebLogIngestService implements InternalEventProcessor {
       throws SQLException {
     try (var statement =
         connection.prepareStatement(
-            "insert into schubert.app_logs (logged_at,service,category,level,action,message,request_id,"
-                + "message_id,correlation_id,source_message_id,actor_username,http_method,request_uri,"
-                + "status_code,remote_address,duration_ms,details) "
-                + "values(?,'WEB','REQUEST',?,'HTTP_REQUEST_COMPLETED',?,?,?,?,?,?,?,?,?,cast(? as inet),?,cast(? as jsonb)) "
-                + "on conflict(source_message_id) do nothing")) {
+            "insert into schubert.app_logs"
+                + " (logged_at,service,category,level,action,message,request_id,"
+                + "message_id,correlation_id,source_message_id,actor_username,http_method,request_uri,status_code,remote_address,duration_ms,details)"
+                + " values(?,'WEB',?,?,?,?,?,?,?,?,?,?,?,?,cast(? as inet),?,cast(? as jsonb)) on"
+                + " conflict(source_message_id) do nothing")) {
       statement.setObject(1, data.occurredAt().atOffset(java.time.ZoneOffset.UTC));
-      statement.setString(2, data.level().name());
-      statement.setString(3, data.message());
-      statement.setObject(4, data.httpRequestId());
-      statement.setObject(5, event.header().messageId());
-      statement.setObject(6, event.header().correlationId());
+      statement.setString(2, data.logType().wireValue());
+      statement.setString(3, data.level().name());
+      statement.setString(4, data.action().orElse("HTTP_REQUEST_COMPLETED"));
+      statement.setString(5, data.message());
+      statement.setObject(6, data.httpRequestId());
       statement.setObject(7, event.header().messageId());
+      statement.setObject(8, event.header().correlationId());
+      statement.setObject(9, event.header().messageId());
       if (data.username().isPresent()) {
-        statement.setString(8, data.username().orElseThrow());
+        statement.setString(10, data.username().orElseThrow());
       } else {
-        statement.setNull(8, Types.VARCHAR);
+        statement.setNull(10, Types.VARCHAR);
       }
-      statement.setString(9, data.httpMethod());
-      statement.setString(10, data.path());
-      statement.setInt(11, data.httpStatus().value());
-      statement.setString(12, address);
-      statement.setInt(13, data.elapsedMs().value());
-      statement.setString(14, details);
+      statement.setString(11, data.httpMethod());
+      statement.setString(12, data.path());
+      statement.setInt(13, data.httpStatus().value());
+      statement.setString(14, address);
+      statement.setInt(15, data.elapsedMs().value());
+      statement.setString(16, details);
       return statement.executeUpdate() == 1;
     }
   }

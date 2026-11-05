@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.web.controller;
 
+import dev.codex.schubert.nk.web.logging.WebRequestTrace;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import dev.codex.schubert.nk.web.session.SessionStoreException;
 import dev.codex.schubert.nk.web.view.MenuViewModel;
@@ -21,6 +22,8 @@ public final class MenuController {
     Objects.requireNonNull(model, "model");
     if (!(principal instanceof SessionPrincipal closed)) throw new SessionStoreException();
     model.addAttribute("page", MenuViewModel.from(closed));
+    WebRequestTrace
+        .markMenuViewed(); // QA054/SSC336: terminal GET/200 gate, not a new business call.
     return "menu";
   }
 }
