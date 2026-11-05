@@ -62,7 +62,7 @@ public final class WebRequestTrace {
   private final AtomicReference<String> retainedRoute = new AtomicReference<>(UNKNOWN_ROUTE);
   private volatile Optional<TopBarViewModel> retainedActor = Optional.empty();
   private final AtomicBoolean completed = new AtomicBoolean();
-  private final AtomicBoolean menuViewCandidate = new AtomicBoolean();
+  private final AtomicBoolean retainedMenuViewCandidate = new AtomicBoolean();
 
   private WebRequestTrace(UUID requestId, UUID eventId) {
     this.retainedRequestId = requestId;
@@ -132,12 +132,12 @@ public final class WebRequestTrace {
   /** Controller marks successful model construction; terminal status still decides success. */
   public static void markMenuViewed() {
     Scope scope = CURRENT.get();
-    if (scope != null) scope.trace.menuViewCandidate.set(true);
+    if (scope != null) scope.trace.retainedMenuViewCandidate.set(true);
     // Missing trace is already reported by the terminal hook; logging must not change HTTP.
   }
 
   public boolean menuViewCandidate() {
-    return menuViewCandidate.get();
+    return retainedMenuViewCandidate.get();
   }
 
   public UUID requestId() {
