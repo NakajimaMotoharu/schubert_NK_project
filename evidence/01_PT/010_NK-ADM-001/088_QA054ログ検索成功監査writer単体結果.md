@@ -1,0 +1,7 @@
+# QA054ログ検索成功監査writer 実行結果
+
+2026-11-06T00:03:41.764875+09:00 / dev-foundation / Main a077dddaae8ca05c98f6d8ba8ef9dd859744a2df、Test source 294d470211fd2887a04511252c0906eb1b2608c4。PG19470六Main/NullAway0、19472六SpotBugs全0/欠落解析error0/normaljar不変、19480 testcompile0、19482 PMD raw14個別非適用根拠/適用0-CS0-parser0-suppression0。PG19488全8は初回真正OS終了0/FESaborted0、同一exec/sessionの63line/4method/2class/35branch全100、normalphysical2/CRC/全@Test/held四probe0/独立post0。canonical evidence/01_PT/010_NK-ADM-001/evidence/PG19488-qa054-log-search-audit-eight-v1/manifest.json SHA256 5ac5349ff6decce61cd767827058861c740c46e162b758b34f0f2a0818ad7339。087のTestID-method入力/期待値表とXMLは一意、argv/終了code/OS-JDK/compile・static・coverage・exec/inputHashは同manifestに結合。Main/Event全分岐・SQL10bind・actorADMIN前提・NFC・null・rows・借用connection不操作・ownclose例外・二workerを固定独立oracleで確認。
+
+LogQueryApplicationService.persistの初回非replay成功hookも製造したが、held failuregraph/snapshot/Inboxに依存するためcaller動的PTは未実行/HOLD。848はPG強化レビューであり、実transaction/DB後条件/並行再送/実NK CHR/native/全体451/第一V成功へ転用しない。既critical DB監査/秘密除外を維持し、query値や本物context/credentialを使わない。新BUG0、headerのRootID同値/ミリ秒精度は実行前fixture補正。今後のcaller実測で未証明条件を閉じる。
+
+新しい技術成分1=writerの変更後fresh資格。原未収載282の同論理pathへnewsourceのproofを追加して交差20/未結合262、技術成分36、原80は15/残65。旧hash成功転用0、registry/新leaf0/正式1964-53/歴史17-190/工数nullを維持。共有20→20=0ppは3890へ一度、ordinary14/all21/S7残3/V同HOLD。原見積1/4/8 cap10維持、専有N-Tnull、共有報告0は無償を意味しない。次: publish/push APIwriter; continue approved WebMENU marker/eventfactory/producer and APIingest PG with independent purePT where allowed; heldgraphs remainHOLD。
