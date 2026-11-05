@@ -1,0 +1,73 @@
+{
+  "sourceMain": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+  "manifest": "evidence/01_PT/007_NK-AUT-001/evidence/PG19794-session-audit-null-style-compile-v1/manifest.json",
+  "manifestSha256": "fb87ff3984f7564afd50ed12a537a2549defa7442fc4ffee7221f196ea23e860",
+  "positive": {
+    "testId": "AUT-SESSION-NULL001",
+    "actualExit": 0,
+    "expectedExit": 0,
+    "productRuntimeExecuted": false
+  },
+  "negative": [
+    {
+      "testId": "AUT-SESSION-NULL002",
+      "parameter": "connection",
+      "sourceLine": 24,
+      "expected": "NullAway nonnull contract rejects literal null at compile time",
+      "actualDiagnostic": "passing @Nullable parameter 'null' where @NonNull is required",
+      "runtimeExecuted": false
+    },
+    {
+      "testId": "AUT-SESSION-NULL003",
+      "parameter": "client",
+      "sourceLine": 25,
+      "expected": "NullAway nonnull contract rejects literal null at compile time",
+      "actualDiagnostic": "passing @Nullable parameter 'null' where @NonNull is required",
+      "runtimeExecuted": false
+    },
+    {
+      "testId": "AUT-SESSION-NULL004",
+      "parameter": "messageId",
+      "sourceLine": 26,
+      "expected": "NullAway nonnull contract rejects literal null at compile time",
+      "actualDiagnostic": "passing @Nullable parameter 'null' where @NonNull is required",
+      "runtimeExecuted": false
+    },
+    {
+      "testId": "AUT-SESSION-NULL005",
+      "parameter": "correlationId",
+      "sourceLine": 27,
+      "expected": "NullAway nonnull contract rejects literal null at compile time",
+      "actualDiagnostic": "passing @Nullable parameter 'null' where @NonNull is required",
+      "runtimeExecuted": false
+    },
+    {
+      "testId": "AUT-SESSION-NULL006",
+      "parameter": "at",
+      "sourceLine": 28,
+      "expected": "NullAway nonnull contract rejects literal null at compile time",
+      "actualDiagnostic": "passing @Nullable parameter 'null' where @NonNull is required",
+      "runtimeExecuted": false
+    },
+    {
+      "testId": "AUT-SESSION-NULL007",
+      "parameter": "reason",
+      "sourceLine": 29,
+      "expected": "NullAway nonnull contract rejects literal null at compile time",
+      "actualDiagnostic": "passing @Nullable parameter 'null' where @NonNull is required",
+      "runtimeExecuted": false
+    },
+    {
+      "testId": "AUT-SESSION-NULL008",
+      "parameter": "result",
+      "sourceLine": 30,
+      "expected": "NullAway nonnull contract rejects literal null at compile time",
+      "actualDiagnostic": "passing @Nullable parameter 'null' where @NonNull is required",
+      "runtimeExecuted": false
+    }
+  ],
+  "sourceSha256": "a35101af78291513eb67c2239399d2a01bde1e3d556736e2bfe26c9788dbb346",
+  "productJUnitCountRemains9": true,
+  "coverageNotAdded": true,
+  "formalUpdated": false
+}
