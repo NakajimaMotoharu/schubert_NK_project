@@ -95,3 +95,5 @@
 }
 
 007のSHAPE001～003と既SNAPSHOTMAX001～003はselectedTestMethods/元XMLで一意対応。実時刻/command/終了codeはstage exit。再現（成功確認だけの反復なし）：`env PYTHONPATH=tools/quality python3 -B /home/mini/codex/project1/work/pgpt-runs/PG379/media_range_port_driver.py run snapshot 0420061453488a4dd642c1208dae3eaec5f17eac`と同sourceの`post snapshot`。input007/PG18960compile/PG18958static/正常APIjar等pinが必要。
+
+費用観測時点の追記訂正：785/3850/BUG2286。元784/3849の15:08:23は開始観測と同じでpost後終端ではない。fresh15:19:15（post後）used15/残85で正規共有差0を確認、専有費0とはしない。原見積/全製品6/coverage/source/run不変更。
