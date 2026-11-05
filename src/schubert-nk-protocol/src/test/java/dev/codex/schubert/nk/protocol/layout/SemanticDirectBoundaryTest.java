@@ -101,7 +101,8 @@ final class SemanticDirectBoundaryTest {
   }
 
   private static TypedPayloadValues log(String method, String path) {
-    return values("WLGEVT01", Map.of(METHOD, text(method), "Path", text(path)));
+    return values(
+        "WLGEVT01", Map.of("Log type", text("REQUEST"), METHOD, text(method), "Path", text(path)));
   }
 
   private static FieldValue text(String value) {

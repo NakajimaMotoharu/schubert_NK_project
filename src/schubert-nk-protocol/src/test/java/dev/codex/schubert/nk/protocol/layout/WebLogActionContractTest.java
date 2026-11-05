@@ -293,7 +293,7 @@ class WebLogActionContractTest {
     put(data, 654, GET_METHOD);
     put(data, 662, "/");
     put(data, 918, "200");
-    put(data, 921, "000000012");
+    put(data, 921, "12"); // X9: numeric text followed by spaces, UI235.
     put(data, 930, ADDRESS);
     put(data, 975, USERNAME);
     put(data, 1039, "USER");

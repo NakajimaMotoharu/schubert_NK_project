@@ -124,7 +124,7 @@ final class IndependentNamedFieldOracle {
       }
     }
     assertEquals(69, reviewed.size(), "SS323 complete named type inventory");
-    assertEquals(295, components, "independent canonical nonfixed component inventory");
+    assertEquals(296, components, "independent canonical nonfixed component inventory");
     assertEquals(79, optionals, "independent canonical X/C/O component inventory");
     assertEquals(4, emptyTypes, "explicit no-data request types");
     assertEquals(usedNames, accessors.keySet(), "no missing/extra independent public API binding");
