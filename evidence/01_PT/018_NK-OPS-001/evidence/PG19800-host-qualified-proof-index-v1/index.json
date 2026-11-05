@@ -1,0 +1,1273 @@
+{
+  "normalMainSource": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+  "normalManifestSha256": "45fa13f0a99583a03cb765e2c0ce05d94bd9d9adeadd89187ff3334c58f31d8b",
+  "normalJars": {
+    "protocol": "14ac7d805f8f6dfb51a394439c613cade0233056f96e1f58bf3bfe855b1d2430",
+    "storage": "5a5bf9dfa3a49347cd6a09d16cd858266d73633f419ee98d8c542bd4b8eeeb1f",
+    "bootstrap": "0c7d41aefd4b269925216b805f4715d3f4c362f9c966014a7dacb2b9d58ce6b3",
+    "api": "3fe433e09834d40e9a61778dd0e7f60a2a426d0e8790f9aeb303cff38b72b481",
+    "web": "fa4d053223f80d876da826ad1470d3a19f3b7919801d6d0847b731906599961e",
+    "batch": "d3dd1a59e5722bc87cb989833739d1b05ac7c8b3f850fdbf82583062bc0f8500"
+  },
+  "currentPhysicalClasses": 1844,
+  "crcWitness": {
+    "manifest": "evidence/01_PT/007_NK-AUT-001/evidence/PG19788-session-audit-nine-v1/manifest.json",
+    "sha256": "b5f2b873ff71454b878c7ce480fb64fec86135c4a0514b31da2de85a5237e2de",
+    "actualJaCoCoIdsMatched": true
+  },
+  "programsRead": [
+    "002_NK-PRO-002",
+    "005_NK-MSG-001",
+    "007_NK-AUT-001",
+    "008_NK-SCN-001",
+    "009_NK-MED-001",
+    "010_NK-ADM-001",
+    "011_NK-QST-001",
+    "014_NK-QRY-001",
+    "015_NK-WEB-001",
+    "016_NK-WEB-002",
+    "017_NK-BAT-001",
+    "020_NK-CHR-001"
+  ],
+  "publicModernSchemaCandidates": [
+    {
+      "manifest": "evidence/01_PT/005_NK-MSG-001/evidence/PG18948-inbound-transaction-port-eleven-v1/manifest.json",
+      "manifestSha256": "5097158bd6b8517c68d9f168d1b9f0d0a78fca5d20e1b17544f52d4a716949c5",
+      "source": "0e8097586f2c11cac10bba9a0fbddfadac25a75a",
+      "savedCore": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "tests": 11,
+      "session": "PG18948-INBOUND-TRANSACTION-PORT-11",
+      "countersAtSavedRun": {
+        "LINE": {
+          "covered": 34,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 6,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 4,
+          "missed": 0
+        }
+      },
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+          "savedSha256": "c2bfde63f582b8c8d9432c5dd15c4ce73ad49dec7304bdcccf290dfa63cc1248",
+          "currentShaMatches": true
+        }
+      ],
+      "testGitBlobBindings": [
+        {
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionsPrimaryContractTest.java",
+          "savedSource": "0e8097586f2c11cac10bba9a0fbddfadac25a75a",
+          "savedGitBlob": "200b6a60b2344797023c4792893b0b02c8ae6771",
+          "currentGitBlob": "200b6a60b2344797023c4792893b0b02c8ae6771",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionPortTest.java",
+          "savedSource": "0e8097586f2c11cac10bba9a0fbddfadac25a75a",
+          "savedGitBlob": "5644ac48e2641dbf245e0c558253d2b42318c277",
+          "currentGitBlob": "5644ac48e2641dbf245e0c558253d2b42318c277",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        }
+      ],
+      "physicalShaMatchCurrent": {
+        "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions": true
+      },
+      "savedUsedCoreClasses": 8,
+      "observedCoreClassIdDrift": [],
+      "unmappedProjectClassNamesIncludingOwnTestAndAux": [
+        "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionPortTest",
+        "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionPortTest$Fixture",
+        "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionsPrimaryContractTest",
+        "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionsPrimaryContractTest$EqualFailure",
+        "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionsPrimaryContractTest$Fixture"
+      ],
+      "savedCoreToCurrentMainPathsChanged": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java"
+      ],
+      "currentStatus": "SAVED_USED_CORE_CLASS_IDS_MATCH_CURRENT",
+      "currentScopeQualified": false,
+      "newTestsExecuted": 0,
+      "formalAccepted": false,
+      "qualificationNote": "Index binds existing target/test bytes and actually observed normal-core IDs only. Unobserved branches/dependencies, changed resources, SDK/native environment or old Source/test oracle applicability still require explicit impact review; no automatic source/run transfer or old exec union."
+    },
+    {
+      "manifest": "evidence/01_PT/007_NK-AUT-001/evidence/PG18904-login-audit-port-seven-v1/manifest.json",
+      "manifestSha256": "c303a72eaec84afb054bf88969573680fde1f9ad40a3eff83cf3d2850a62ea46",
+      "source": "d328141c9129d5e7dcd6bc3e6f2a82572ff711f4",
+      "savedCore": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "tests": 7,
+      "session": "PG18904-LOGIN-AUDIT-PORT-7",
+      "countersAtSavedRun": {
+        "LINE": {
+          "covered": 30,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 12,
+          "missed": 0
+        }
+      },
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditWriter.java",
+          "savedSha256": "e78c47b80b4037897a2ec8e3455759ebe183af845c28ce37e7f10833a7faee8b",
+          "currentShaMatches": true
+        }
+      ],
+      "testGitBlobBindings": [
+        {
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAuditPortTest.java",
+          "savedSource": "d328141c9129d5e7dcd6bc3e6f2a82572ff711f4",
+          "savedGitBlob": "f139ba3f2c0c0d2856f46cf5889dfafad62c5c1c",
+          "currentGitBlob": "f139ba3f2c0c0d2856f46cf5889dfafad62c5c1c",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        }
+      ],
+      "physicalShaMatchCurrent": {
+        "dev/codex/schubert/nk/api/security/LoginAuditWriter": true
+      },
+      "savedUsedCoreClasses": 10,
+      "observedCoreClassIdDrift": [],
+      "unmappedProjectClassNamesIncludingOwnTestAndAux": [
+        "dev/codex/schubert/nk/api/security/LoginAuditPortTest",
+        "dev/codex/schubert/nk/api/security/LoginAuditPortTest$Fixture"
+      ],
+      "savedCoreToCurrentMainPathsChanged": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java"
+      ],
+      "currentStatus": "SAVED_USED_CORE_CLASS_IDS_MATCH_CURRENT",
+      "currentScopeQualified": false,
+      "newTestsExecuted": 0,
+      "formalAccepted": false,
+      "qualificationNote": "Index binds existing target/test bytes and actually observed normal-core IDs only. Unobserved branches/dependencies, changed resources, SDK/native environment or old Source/test oracle applicability still require explicit impact review; no automatic source/run transfer or old exec union."
+    },
+    {
+      "manifest": "evidence/01_PT/007_NK-AUT-001/evidence/PG18932-login-attempt-port-ten-v1/manifest.json",
+      "manifestSha256": "945398eb9f718edcb56487a1bd2f7dff26ed8cf09a31e27b67b5889e0f54329e",
+      "source": "0bb07676a188fba63dae8684c9dc8944ecad21a0",
+      "savedCore": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "tests": 10,
+      "session": "PG18932-LOGIN-ATTEMPT-PORT-10",
+      "countersAtSavedRun": {
+        "LINE": {
+          "covered": 94,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 8,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 30,
+          "missed": 0
+        }
+      },
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java",
+          "savedSha256": "ed47df13b0b33a93bdfea58f0998bf299361c22b463c6e49a679df13a026bc02",
+          "currentShaMatches": true
+        }
+      ],
+      "testGitBlobBindings": [
+        {
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptPortTest.java",
+          "savedSource": "0bb07676a188fba63dae8684c9dc8944ecad21a0",
+          "savedGitBlob": "487b7ff75b26e12a2c431cd1aea281544b6f4750",
+          "currentGitBlob": "487b7ff75b26e12a2c431cd1aea281544b6f4750",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        }
+      ],
+      "physicalShaMatchCurrent": {
+        "dev/codex/schubert/nk/api/security/LoginAttemptRepository": true
+      },
+      "savedUsedCoreClasses": 9,
+      "observedCoreClassIdDrift": [],
+      "unmappedProjectClassNamesIncludingOwnTestAndAux": [
+        "dev/codex/schubert/nk/api/security/LoginAttemptPortTest",
+        "dev/codex/schubert/nk/api/security/LoginAttemptPortTest$Fixture",
+        "dev/codex/schubert/nk/api/security/LoginAttemptPortTest$Statement"
+      ],
+      "savedCoreToCurrentMainPathsChanged": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java"
+      ],
+      "currentStatus": "SAVED_USED_CORE_CLASS_IDS_MATCH_CURRENT",
+      "currentScopeQualified": false,
+      "newTestsExecuted": 0,
+      "formalAccepted": false,
+      "qualificationNote": "Index binds existing target/test bytes and actually observed normal-core IDs only. Unobserved branches/dependencies, changed resources, SDK/native environment or old Source/test oracle applicability still require explicit impact review; no automatic source/run transfer or old exec union."
+    },
+    {
+      "manifest": "evidence/01_PT/007_NK-AUT-001/evidence/PG19788-session-audit-nine-v1/manifest.json",
+      "manifestSha256": "b5f2b873ff71454b878c7ce480fb64fec86135c4a0514b31da2de85a5237e2de",
+      "source": "112dd625284038570852e74ffa1b98f132beb4cd",
+      "savedCore": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+      "tests": 9,
+      "session": "PG19788-SESSION-AUDIT-9",
+      "countersAtSavedRun": {
+        "LINE": {
+          "covered": 17,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 4,
+          "missed": 0
+        }
+      },
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionAuditWriter.java",
+          "savedSha256": "173393177007aeb17a945ae37894e4d4a4c8b9b7f386765628bdbede6d7ebb6d",
+          "currentShaMatches": true
+        }
+      ],
+      "testGitBlobBindings": [
+        {
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionAuditPortTest.java",
+          "savedSource": "112dd625284038570852e74ffa1b98f132beb4cd",
+          "savedGitBlob": "399e82002950f433df63d520230333257e7cd72f",
+          "currentGitBlob": "399e82002950f433df63d520230333257e7cd72f",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        }
+      ],
+      "physicalShaMatchCurrent": {
+        "dev/codex/schubert/nk/api/security/SessionAuditWriter": true
+      },
+      "savedUsedCoreClasses": 3,
+      "observedCoreClassIdDrift": [],
+      "unmappedProjectClassNamesIncludingOwnTestAndAux": [
+        "dev/codex/schubert/nk/api/security/SessionAuditPortTest",
+        "dev/codex/schubert/nk/api/security/SessionAuditPortTest$Fixture",
+        "dev/codex/schubert/nk/api/security/SessionAuditPortTest$SqlNull"
+      ],
+      "savedCoreToCurrentMainPathsChanged": [],
+      "currentStatus": "SAVED_USED_CORE_CLASS_IDS_MATCH_CURRENT",
+      "currentScopeQualified": false,
+      "newTestsExecuted": 0,
+      "formalAccepted": false,
+      "qualificationNote": "Index binds existing target/test bytes and actually observed normal-core IDs only. Unobserved branches/dependencies, changed resources, SDK/native environment or old Source/test oracle applicability still require explicit impact review; no automatic source/run transfer or old exec union."
+    },
+    {
+      "manifest": "evidence/01_PT/008_NK-SCN-001/evidence/PG18964-scenario-snapshot-shape-six-v1/manifest.json",
+      "manifestSha256": "29fbd0b49195a11819f1c8fac351457be410b89860b1f59f7c6a401c2f0e7cd9",
+      "source": "0420061453488a4dd642c1208dae3eaec5f17eac",
+      "savedCore": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "tests": 6,
+      "session": "PG18964-SCENARIO-SNAPSHOT-SHAPE-6",
+      "countersAtSavedRun": {
+        "LINE": {
+          "covered": 18,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 6,
+          "missed": 0
+        }
+      },
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshot.java",
+          "savedSha256": "a9adb21b9bddf514ad3b44218465762c767d8f4f8ba34d38c4526df74eb0dcc6",
+          "currentShaMatches": true
+        }
+      ],
+      "testGitBlobBindings": [
+        {
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshotBoundaryTest.java",
+          "savedSource": "0420061453488a4dd642c1208dae3eaec5f17eac",
+          "savedGitBlob": "a636ae2d37142bc50f7ee19a4ad613671ac6ed99",
+          "currentGitBlob": "a636ae2d37142bc50f7ee19a4ad613671ac6ed99",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioSnapshotShapeTest.java",
+          "savedSource": "0420061453488a4dd642c1208dae3eaec5f17eac",
+          "savedGitBlob": "c90e9e5fb243bae0b83fec5268596d0674af68af",
+          "currentGitBlob": "c90e9e5fb243bae0b83fec5268596d0674af68af",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        }
+      ],
+      "physicalShaMatchCurrent": {
+        "dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshot": true
+      },
+      "savedUsedCoreClasses": 45,
+      "observedCoreClassIdDrift": [
+        {
+          "class": "dev/codex/schubert/nk/protocol/codec/PayloadCodec$1",
+          "savedClassId": "160a2b21eaf8e770",
+          "currentClassIds": [
+            "7d7a2b20aebde634"
+          ]
+        },
+        {
+          "class": "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$1",
+          "savedClassId": "11245607473ab8f5",
+          "currentClassIds": [
+            "49847c041259eec0"
+          ]
+        },
+        {
+          "class": "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator",
+          "savedClassId": "ef94df6f76af4c09",
+          "currentClassIds": [
+            "63a71d645a501f0d"
+          ]
+        },
+        {
+          "class": "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog",
+          "savedClassId": "e501cac1a23c479b",
+          "currentClassIds": [
+            "ce1c232a318926c6"
+          ]
+        },
+        {
+          "class": "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$MutableFields",
+          "savedClassId": "77e9a48b3730032b",
+          "currentClassIds": [
+            "eef7a4b53483b5cd"
+          ]
+        },
+        {
+          "class": "dev/codex/schubert/nk/protocol/codec/PayloadCodec",
+          "savedClassId": "1d575ca6061ab86e",
+          "currentClassIds": [
+            "34031c4665cfa4c0"
+          ]
+        }
+      ],
+      "unmappedProjectClassNamesIncludingOwnTestAndAux": [
+        "dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshotBoundaryTest",
+        "dev/codex/schubert/nk/api/persistence/ScenarioSnapshotShapeTest"
+      ],
+      "savedCoreToCurrentMainPathsChanged": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java"
+      ],
+      "currentStatus": "OBSERVED_CURRENT_CORE_DEPENDENCY_DRIFT",
+      "currentScopeQualified": false,
+      "newTestsExecuted": 0,
+      "formalAccepted": false,
+      "qualificationNote": "Index binds existing target/test bytes and actually observed normal-core IDs only. Unobserved branches/dependencies, changed resources, SDK/native environment or old Source/test oracle applicability still require explicit impact review; no automatic source/run transfer or old exec union."
+    },
+    {
+      "manifest": "evidence/01_PT/011_NK-QST-001/evidence/PG19008-command-metadata-five-v1/manifest.json",
+      "manifestSha256": "71543524b2ed3d184638aaa4bc1c3cf4329673b73f1f3e8d747d2bae0e791f66",
+      "source": "f85525d010e5bf9af763cf584588921d0d0a1068",
+      "savedCore": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "tests": 5,
+      "session": "PG19008-COMMAND-METADATA-5",
+      "countersAtSavedRun": {
+        "LINE": {
+          "covered": 9,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 4,
+          "missed": 0
+        }
+      },
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.java",
+          "savedSha256": "c62cea835ecc09e2e811cdf704d2e8c562b207f802a50c8f1789868fff3cfc1c",
+          "currentShaMatches": true
+        }
+      ],
+      "testGitBlobBindings": [
+        {
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCommandTimeBoundaryTest.java",
+          "savedSource": "f85525d010e5bf9af763cf584588921d0d0a1068",
+          "savedGitBlob": "f6793f2a203934637e2b873027c4618d51d6d95c",
+          "currentGitBlob": "f6793f2a203934637e2b873027c4618d51d6d95c",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadataContractTest.java",
+          "savedSource": "f85525d010e5bf9af763cf584588921d0d0a1068",
+          "savedGitBlob": "6d24eabd1c2d5383d7452f770e7c6fba1f8f17f0",
+          "currentGitBlob": "6d24eabd1c2d5383d7452f770e7c6fba1f8f17f0",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        }
+      ],
+      "physicalShaMatchCurrent": {
+        "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata": true
+      },
+      "savedUsedCoreClasses": 1,
+      "observedCoreClassIdDrift": [],
+      "unmappedProjectClassNamesIncludingOwnTestAndAux": [
+        "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadataContractTest",
+        "dev/codex/schubert/nk/api/application/question/QuestionCommandTimeBoundaryTest"
+      ],
+      "savedCoreToCurrentMainPathsChanged": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java"
+      ],
+      "currentStatus": "SAVED_USED_CORE_CLASS_IDS_MATCH_CURRENT",
+      "currentScopeQualified": false,
+      "newTestsExecuted": 0,
+      "formalAccepted": false,
+      "qualificationNote": "Index binds existing target/test bytes and actually observed normal-core IDs only. Unobserved branches/dependencies, changed resources, SDK/native environment or old Source/test oracle applicability still require explicit impact review; no automatic source/run transfer or old exec union."
+    },
+    {
+      "manifest": "evidence/01_PT/015_NK-WEB-001/evidence/PG19348-web-saved-screen-eight-v1/manifest.json",
+      "manifestSha256": "1d4213dc4dd02d0d68882f4fa74fe3af2374a995f5cab891d936a1135d82d2d8",
+      "source": "024a6b8d23e4a773b2e5120aa3f7a72fb00e47d5",
+      "savedCore": "7d2c2fb64711531db8898d49b4b377670b58ff87",
+      "tests": 8,
+      "session": "PG19348-WEB-SAVED-SCREEN-8",
+      "countersAtSavedRun": {
+        "LINE": {
+          "covered": 27,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 6,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 12,
+          "missed": 0
+        }
+      },
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/SavedScreenTarget.java",
+          "savedSha256": "4d3535445d3d460ddabd71c496eaf461ddb6553c9d2e26486374367480ef639f",
+          "currentShaMatches": true
+        }
+      ],
+      "testGitBlobBindings": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SavedScreenTargetPortTest.java",
+          "savedSource": "024a6b8d23e4a773b2e5120aa3f7a72fb00e47d5",
+          "savedGitBlob": "cf5c913819a30229141ee001b69bd0414036b6c6",
+          "currentGitBlob": "cf5c913819a30229141ee001b69bd0414036b6c6",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        }
+      ],
+      "physicalShaMatchCurrent": {
+        "dev/codex/schubert/nk/web/security/SavedScreenTarget": true
+      },
+      "savedUsedCoreClasses": 2,
+      "observedCoreClassIdDrift": [],
+      "unmappedProjectClassNamesIncludingOwnTestAndAux": [
+        "dev/codex/schubert/nk/web/security/SavedScreenTargetPortTest"
+      ],
+      "savedCoreToCurrentMainPathsChanged": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java"
+      ],
+      "currentStatus": "SAVED_USED_CORE_CLASS_IDS_MATCH_CURRENT",
+      "currentScopeQualified": false,
+      "newTestsExecuted": 0,
+      "formalAccepted": false,
+      "qualificationNote": "Index binds existing target/test bytes and actually observed normal-core IDs only. Unobserved branches/dependencies, changed resources, SDK/native environment or old Source/test oracle applicability still require explicit impact review; no automatic source/run transfer or old exec union."
+    },
+    {
+      "manifest": "evidence/01_PT/015_NK-WEB-001/evidence/PG19368-web-error-controller-eight-v1/manifest.json",
+      "manifestSha256": "02d1c9ccf6351970fdb006cd7ba342225b94bc39fa32b1815ab0ac05bb794f75",
+      "source": "01a067bcde4429a6a3c08096830403b3e78b66c0",
+      "savedCore": "7d2c2fb64711531db8898d49b4b377670b58ff87",
+      "tests": 8,
+      "session": "PG19368-WEB-ERROR-CONTROLLER-8",
+      "countersAtSavedRun": {
+        "LINE": {
+          "covered": 19,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 6,
+          "missed": 0
+        }
+      },
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ErrorController.java",
+          "savedSha256": "ccc4587c76195542436f708aa6f87ee93b2d32e14d3d81350417c3f4e7b07fd5",
+          "currentShaMatches": true
+        }
+      ],
+      "testGitBlobBindings": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+          "savedSource": "01a067bcde4429a6a3c08096830403b3e78b66c0",
+          "savedGitBlob": "3617af18351083051a060e015cd1b20336e243f7",
+          "currentGitBlob": "3617af18351083051a060e015cd1b20336e243f7",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        }
+      ],
+      "physicalShaMatchCurrent": {
+        "dev/codex/schubert/nk/web/controller/ErrorController": true
+      },
+      "savedUsedCoreClasses": 13,
+      "observedCoreClassIdDrift": [],
+      "unmappedProjectClassNamesIncludingOwnTestAndAux": [
+        "dev/codex/schubert/nk/web/security/ErrorControllerPortTest",
+        "dev/codex/schubert/nk/web/security/ErrorControllerPortTest$Fixture",
+        "dev/codex/schubert/nk/web/security/ErrorControllerPortTest$ForeignDiagnostic"
+      ],
+      "savedCoreToCurrentMainPathsChanged": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java"
+      ],
+      "currentStatus": "SAVED_USED_CORE_CLASS_IDS_MATCH_CURRENT",
+      "currentScopeQualified": false,
+      "newTestsExecuted": 0,
+      "formalAccepted": false,
+      "qualificationNote": "Index binds existing target/test bytes and actually observed normal-core IDs only. Unobserved branches/dependencies, changed resources, SDK/native environment or old Source/test oracle applicability still require explicit impact review; no automatic source/run transfer or old exec union."
+    },
+    {
+      "manifest": "evidence/01_PT/015_NK-WEB-001/evidence/PG19388-web-display-snapshot-twelve-v1/manifest.json",
+      "manifestSha256": "7145cda12561d5093c9b75d8091cb2eda85725a6186a8e16d943e6c54dc6f21b",
+      "source": "1a20ae1357efe2ffc7ee9ce4d36f7f30b06ae2db",
+      "savedCore": "7d2c2fb64711531db8898d49b4b377670b58ff87",
+      "tests": 12,
+      "session": "PG19388-WEB-DISPLAY-SNAPSHOT-12",
+      "countersAtSavedRun": {
+        "LINE": {
+          "covered": 55,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 12,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 2,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 22,
+          "missed": 0
+        }
+      },
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebDisplayContext.java",
+          "savedSha256": "90441cabf35d6ca77950bd55d58f5d72b82b9a7bdfc4e5583247fa5b9fdab715",
+          "currentShaMatches": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebDisplayContextFilter.java",
+          "savedSha256": "62da66911d63ea1b3cb2101609047e7a268df2bddcb2eea5a8f9319799a60a5b",
+          "currentShaMatches": true
+        }
+      ],
+      "testGitBlobBindings": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest.java",
+          "savedSource": "1a20ae1357efe2ffc7ee9ce4d36f7f30b06ae2db",
+          "savedGitBlob": "8f7046b31db4ddc24ff1f84bc84f8c61ff995aff",
+          "currentGitBlob": "8f7046b31db4ddc24ff1f84bc84f8c61ff995aff",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        }
+      ],
+      "physicalShaMatchCurrent": {
+        "dev/codex/schubert/nk/web/security/WebDisplayContextFilter": true,
+        "dev/codex/schubert/nk/web/security/WebDisplayContext": true
+      },
+      "savedUsedCoreClasses": 8,
+      "observedCoreClassIdDrift": [],
+      "unmappedProjectClassNamesIncludingOwnTestAndAux": [
+        "dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest",
+        "dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest$Fixture",
+        "dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest$ThrowingToken",
+        "dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest$Token"
+      ],
+      "savedCoreToCurrentMainPathsChanged": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java"
+      ],
+      "currentStatus": "SAVED_USED_CORE_CLASS_IDS_MATCH_CURRENT",
+      "currentScopeQualified": false,
+      "newTestsExecuted": 0,
+      "formalAccepted": false,
+      "qualificationNote": "Index binds existing target/test bytes and actually observed normal-core IDs only. Unobserved branches/dependencies, changed resources, SDK/native environment or old Source/test oracle applicability still require explicit impact review; no automatic source/run transfer or old exec union."
+    },
+    {
+      "manifest": "evidence/01_PT/015_NK-WEB-001/evidence/PG19558-qa054-web-menu-fifteen-v1/manifest.json",
+      "manifestSha256": "d8be18461ee3436e92752f09ce00fe3e9f70ee5c2edcb51c3fa32aa7060c5adc",
+      "source": "850358cfc0b0f97ef40d081bc4b4497622f7574b",
+      "savedCore": "1ea9f29daf3923e8ae1bcb8bf7e15905388c3632",
+      "tests": 15,
+      "session": "PG19558-QA054-WEB-MENU-15",
+      "countersAtSavedRun": {
+        "LINE": {
+          "covered": 103,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 30,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 4,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 38,
+          "missed": 0
+        }
+      },
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+          "savedSha256": "f6f2729a533843f568d254ebbae1a17cf575c4570b2ab307023ff54154b9475c",
+          "currentShaMatches": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+          "savedSha256": "9ce1a469cbe242ba480fb6cc474bea4842b84466ef35d5ff4cf7cfca3f16e5e2",
+          "currentShaMatches": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+          "savedSha256": "f26a85c85d5ee4ed11e548d25a684956d2349a6ed1c43c0e021f6d4745c8acce",
+          "currentShaMatches": true
+        }
+      ],
+      "testGitBlobBindings": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+          "savedSource": "850358cfc0b0f97ef40d081bc4b4497622f7574b",
+          "savedGitBlob": "457cddc4cb1dec13c17269b7f8d63b19d8341498",
+          "currentGitBlob": "457cddc4cb1dec13c17269b7f8d63b19d8341498",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MenuAuditContractTest.java",
+          "savedSource": "850358cfc0b0f97ef40d081bc4b4497622f7574b",
+          "savedGitBlob": "1cae6528e125c7c15a7a11f12a37014cc4e68da6",
+          "currentGitBlob": "1cae6528e125c7c15a7a11f12a37014cc4e68da6",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        }
+      ],
+      "physicalShaMatchCurrent": {
+        "dev/codex/schubert/nk/web/controller/MenuController": true,
+        "dev/codex/schubert/nk/web/logging/WebRequestTrace": true,
+        "dev/codex/schubert/nk/web/logging/WebHttpLogKind": true,
+        "dev/codex/schubert/nk/web/logging/WebRequestTrace$Scope": true
+      },
+      "savedUsedCoreClasses": 20,
+      "observedCoreClassIdDrift": [],
+      "unmappedProjectClassNamesIncludingOwnTestAndAux": [
+        "dev/codex/schubert/nk/web/logging/MenuAuditContractTest",
+        "dev/codex/schubert/nk/web/logging/WebRequestTraceTest",
+        "dev/codex/schubert/nk/web/logging/WebRequestTraceTest$1"
+      ],
+      "savedCoreToCurrentMainPathsChanged": [
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java"
+      ],
+      "currentStatus": "SAVED_USED_CORE_CLASS_IDS_MATCH_CURRENT",
+      "currentScopeQualified": false,
+      "newTestsExecuted": 0,
+      "formalAccepted": false,
+      "qualificationNote": "Index binds existing target/test bytes and actually observed normal-core IDs only. Unobserved branches/dependencies, changed resources, SDK/native environment or old Source/test oracle applicability still require explicit impact review; no automatic source/run transfer or old exec union."
+    },
+    {
+      "manifest": "evidence/01_PT/015_NK-WEB-001/evidence/PG19638-web-outbox-jdbc-twenty-v1/manifest.json",
+      "manifestSha256": "b458c4282e6b95bee8cc8616cb236de9cbe56e23ab7bd57e1a2ba7ec9111fdc7",
+      "source": "411d97d6c98def68b064924b5f5dba3d0c459f7f",
+      "savedCore": "827983a97a9c3bf36b7671985a7924417ff0e8f7",
+      "tests": 20,
+      "session": "PG19638-WEB-OUTBOX-JDBC-20",
+      "countersAtSavedRun": {
+        "LINE": {
+          "covered": 95,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 10,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 31,
+          "missed": 0
+        }
+      },
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogOutboxRepository.java",
+          "savedSha256": "b37b87f7e787540b2ccf20ce92d014a2b71d7f038ae4cfecc22ab3133177933e",
+          "currentShaMatches": true
+        }
+      ],
+      "testGitBlobBindings": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogOutboxPortTest.java",
+          "savedSource": "411d97d6c98def68b064924b5f5dba3d0c459f7f",
+          "savedGitBlob": "49112085349afb76ba832bd2b67611b8f70cd2e6",
+          "currentGitBlob": "49112085349afb76ba832bd2b67611b8f70cd2e6",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        }
+      ],
+      "physicalShaMatchCurrent": {
+        "dev/codex/schubert/nk/web/logging/WebLogOutboxRepository": true
+      },
+      "savedUsedCoreClasses": 4,
+      "observedCoreClassIdDrift": [],
+      "unmappedProjectClassNamesIncludingOwnTestAndAux": [
+        "dev/codex/schubert/nk/web/logging/WebLogOutboxPortTest",
+        "dev/codex/schubert/nk/web/logging/WebLogOutboxPortTest$Jdbc"
+      ],
+      "savedCoreToCurrentMainPathsChanged": [
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java"
+      ],
+      "currentStatus": "SAVED_USED_CORE_CLASS_IDS_MATCH_CURRENT",
+      "currentScopeQualified": false,
+      "newTestsExecuted": 0,
+      "formalAccepted": false,
+      "qualificationNote": "Index binds existing target/test bytes and actually observed normal-core IDs only. Unobserved branches/dependencies, changed resources, SDK/native environment or old Source/test oracle applicability still require explicit impact review; no automatic source/run transfer or old exec union."
+    },
+    {
+      "manifest": "evidence/01_PT/016_NK-WEB-002/evidence/PG19328-web-revocation-repository-sixteen-v1/manifest.json",
+      "manifestSha256": "4b8f0c9fa9a2713eac6aeb167c3de45a5f5f99700c6f0fb7bdb38ac4908d512e",
+      "source": "eff5be52fcf8bd0fc3f5c0c4d42a744d6a3b8be7",
+      "savedCore": "7d2c2fb64711531db8898d49b4b377670b58ff87",
+      "tests": 16,
+      "session": "PG19328-WEB-REVOCATION-REPOSITORY-16",
+      "countersAtSavedRun": {
+        "LINE": {
+          "covered": 111,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 12,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 41,
+          "missed": 0
+        }
+      },
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/PendingRevocationRepository.java",
+          "savedSha256": "5c3cfd9965aa0e90666dc3344fe51513a9a3bb6fa51e2071d3f4290e3c028e4a",
+          "currentShaMatches": true
+        }
+      ],
+      "testGitBlobBindings": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+          "savedSource": "eff5be52fcf8bd0fc3f5c0c4d42a744d6a3b8be7",
+          "savedGitBlob": "7c23ccefcef15c9af056ece32b7e07cc6d206ae1",
+          "currentGitBlob": "7c23ccefcef15c9af056ece32b7e07cc6d206ae1",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        }
+      ],
+      "physicalShaMatchCurrent": {
+        "dev/codex/schubert/nk/web/revocation/PendingRevocationRepository": true
+      },
+      "savedUsedCoreClasses": 5,
+      "observedCoreClassIdDrift": [],
+      "unmappedProjectClassNamesIncludingOwnTestAndAux": [
+        "dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest",
+        "dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest$Fixture"
+      ],
+      "savedCoreToCurrentMainPathsChanged": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java"
+      ],
+      "currentStatus": "SAVED_USED_CORE_CLASS_IDS_MATCH_CURRENT",
+      "currentScopeQualified": false,
+      "newTestsExecuted": 0,
+      "formalAccepted": false,
+      "qualificationNote": "Index binds existing target/test bytes and actually observed normal-core IDs only. Unobserved branches/dependencies, changed resources, SDK/native environment or old Source/test oracle applicability still require explicit impact review; no automatic source/run transfer or old exec union."
+    },
+    {
+      "manifest": "evidence/01_PT/017_NK-BAT-001/evidence/PG18984-run-reference-port-eight-v1/manifest.json",
+      "manifestSha256": "c8f14f61046268cf8fa6d70076eb1c8473cafa28c97a88fe01af76f82eb098b9",
+      "source": "5920b9bc2483194f3ad1474fb9e933a97fa44587",
+      "savedCore": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "tests": 8,
+      "session": "PG18984-RUN-REFERENCE-PORT-8",
+      "countersAtSavedRun": {
+        "LINE": {
+          "covered": 52,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 4,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 24,
+          "missed": 0
+        }
+      },
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+          "savedSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+          "currentShaMatches": true
+        }
+      ],
+      "testGitBlobBindings": [
+        {
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+          "savedSource": "5920b9bc2483194f3ad1474fb9e933a97fa44587",
+          "savedGitBlob": "d3b150c25c8e72a4e1aed4c6d5e0709b3ebd9e9e",
+          "currentGitBlob": "d3b150c25c8e72a4e1aed4c6d5e0709b3ebd9e9e",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        }
+      ],
+      "physicalShaMatchCurrent": {
+        "dev/codex/schubert/nk/batch/repository/RunReferenceRepository": true
+      },
+      "savedUsedCoreClasses": 5,
+      "observedCoreClassIdDrift": [],
+      "unmappedProjectClassNamesIncludingOwnTestAndAux": [
+        "dev/codex/schubert/nk/batch/repository/RunReferencePortTest",
+        "dev/codex/schubert/nk/batch/repository/RunReferencePortTest$Fixture",
+        "dev/codex/schubert/nk/batch/repository/RunReferencePortTest$NoSuppression"
+      ],
+      "savedCoreToCurrentMainPathsChanged": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java"
+      ],
+      "currentStatus": "SAVED_USED_CORE_CLASS_IDS_MATCH_CURRENT",
+      "currentScopeQualified": false,
+      "newTestsExecuted": 0,
+      "formalAccepted": false,
+      "qualificationNote": "Index binds existing target/test bytes and actually observed normal-core IDs only. Unobserved branches/dependencies, changed resources, SDK/native environment or old Source/test oracle applicability still require explicit impact review; no automatic source/run transfer or old exec union."
+    },
+    {
+      "manifest": "evidence/01_PT/017_NK-BAT-001/evidence/PG19052-backup-pair-thirteen-v1/manifest.json",
+      "manifestSha256": "cbc5930180d196de075666562144d3cbcf48987afe7689745481b7f824fe7d64",
+      "source": "29dc0f7da3c22d6492610ad59040472e356dda98",
+      "savedCore": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "tests": 13,
+      "session": "PG19052-BACKUP-PAIR-PORT-13",
+      "countersAtSavedRun": {
+        "LINE": {
+          "covered": 150,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 12,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 2,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 100,
+          "missed": 0
+        }
+      },
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+          "savedSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+          "currentShaMatches": true
+        }
+      ],
+      "testGitBlobBindings": [
+        {
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupTerminalObservationTest.java",
+          "savedSource": "29dc0f7da3c22d6492610ad59040472e356dda98",
+          "savedGitBlob": "170bd35c8c9b341de51d8c9f7d96b99388f31d00",
+          "currentGitBlob": "170bd35c8c9b341de51d8c9f7d96b99388f31d00",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        },
+        {
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+          "savedSource": "29dc0f7da3c22d6492610ad59040472e356dda98",
+          "savedGitBlob": "9d0713f1314972f308be924840fa14ce2db8b580",
+          "currentGitBlob": "9d0713f1314972f308be924840fa14ce2db8b580",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        }
+      ],
+      "physicalShaMatchCurrent": {
+        "dev/codex/schubert/nk/batch/repository/BackupStepRepository": true,
+        "dev/codex/schubert/nk/batch/repository/BackupStepRepository$Terminal": true
+      },
+      "savedUsedCoreClasses": 17,
+      "observedCoreClassIdDrift": [],
+      "unmappedProjectClassNamesIncludingOwnTestAndAux": [
+        "dev/codex/schubert/nk/batch/repository/BackupPairPortTest",
+        "dev/codex/schubert/nk/batch/repository/BackupPairPortTest$Fixture",
+        "dev/codex/schubert/nk/batch/repository/BackupTerminalObservationTest"
+      ],
+      "savedCoreToCurrentMainPathsChanged": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java"
+      ],
+      "currentStatus": "SAVED_USED_CORE_CLASS_IDS_MATCH_CURRENT",
+      "currentScopeQualified": false,
+      "newTestsExecuted": 0,
+      "formalAccepted": false,
+      "qualificationNote": "Index binds existing target/test bytes and actually observed normal-core IDs only. Unobserved branches/dependencies, changed resources, SDK/native environment or old Source/test oracle applicability still require explicit impact review; no automatic source/run transfer or old exec union."
+    },
+    {
+      "manifest": "evidence/01_PT/017_NK-BAT-001/evidence/PG19108-cleanup-step-port-nine-v1/manifest.json",
+      "manifestSha256": "07aae3620a7f7787da94661980f41546bcf789a2dc6704cd0fe6851bdc36787b",
+      "source": "d659c81d94c02696d35c1c490018aa62d8a7c6f8",
+      "savedCore": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "tests": 9,
+      "session": "PG19108-CLEANUP-STEP-PORT-9",
+      "countersAtSavedRun": {
+        "LINE": {
+          "covered": 68,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 5,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 28,
+          "missed": 0
+        }
+      },
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+          "savedSha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+          "currentShaMatches": true
+        }
+      ],
+      "testGitBlobBindings": [
+        {
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepPortTest.java",
+          "savedSource": "d659c81d94c02696d35c1c490018aa62d8a7c6f8",
+          "savedGitBlob": "fdd721254dffbc668518c65c0b703baa0f4b1e86",
+          "currentGitBlob": "fdd721254dffbc668518c65c0b703baa0f4b1e86",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        }
+      ],
+      "physicalShaMatchCurrent": {
+        "dev/codex/schubert/nk/batch/repository/CleanupStepRepository": true
+      },
+      "savedUsedCoreClasses": 12,
+      "observedCoreClassIdDrift": [],
+      "unmappedProjectClassNamesIncludingOwnTestAndAux": [
+        "dev/codex/schubert/nk/batch/repository/CleanupStepPortTest",
+        "dev/codex/schubert/nk/batch/repository/CleanupStepPortTest$Fixture"
+      ],
+      "savedCoreToCurrentMainPathsChanged": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java"
+      ],
+      "currentStatus": "SAVED_USED_CORE_CLASS_IDS_MATCH_CURRENT",
+      "currentScopeQualified": false,
+      "newTestsExecuted": 0,
+      "formalAccepted": false,
+      "qualificationNote": "Index binds existing target/test bytes and actually observed normal-core IDs only. Unobserved branches/dependencies, changed resources, SDK/native environment or old Source/test oracle applicability still require explicit impact review; no automatic source/run transfer or old exec union."
+    },
+    {
+      "manifest": "evidence/01_PT/017_NK-BAT-001/evidence/PG19148-inspection-summary-port-eight-v1/manifest.json",
+      "manifestSha256": "c226658b3ead88981d31d56919d3948e28c28c6691119ad3487376b344ef2b78",
+      "source": "2b259139d16c8dfb1987fdd4bc92665bb79ef97a",
+      "savedCore": "b09393b0e746b55fd480176d57996d65bd76a95d",
+      "tests": 8,
+      "session": "PG19148-INSPECTION-SUMMARY-PORT-8",
+      "countersAtSavedRun": {
+        "LINE": {
+          "covered": 55,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 4,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 24,
+          "missed": 0
+        }
+      },
+      "mainSources": [
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+          "savedSha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+          "currentShaMatches": true
+        }
+      ],
+      "testGitBlobBindings": [
+        {
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+          "savedSource": "2b259139d16c8dfb1987fdd4bc92665bb79ef97a",
+          "savedGitBlob": "390ee7e33a4ccbe09e387c398bdef663b3912451",
+          "currentGitBlob": "390ee7e33a4ccbe09e387c398bdef663b3912451",
+          "sameTrackedBytes": true,
+          "bodyNotRead": true
+        }
+      ],
+      "physicalShaMatchCurrent": {
+        "dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository": true
+      },
+      "savedUsedCoreClasses": 6,
+      "observedCoreClassIdDrift": [],
+      "unmappedProjectClassNamesIncludingOwnTestAndAux": [
+        "dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest",
+        "dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest$Fixture"
+      ],
+      "savedCoreToCurrentMainPathsChanged": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java"
+      ],
+      "currentStatus": "SAVED_USED_CORE_CLASS_IDS_MATCH_CURRENT",
+      "currentScopeQualified": false,
+      "newTestsExecuted": 0,
+      "formalAccepted": false,
+      "qualificationNote": "Index binds existing target/test bytes and actually observed normal-core IDs only. Unobserved branches/dependencies, changed resources, SDK/native environment or old Source/test oracle applicability still require explicit impact review; no automatic source/run transfer or old exec union."
+    }
+  ],
+  "candidateCount": 16,
+  "unsupportedAfterBasicGuards": [],
+  "statusCounts": {
+    "SAVED_USED_CORE_CLASS_IDS_MATCH_CURRENT": 15,
+    "OBSERVED_CURRENT_CORE_DEPENDENCY_DRIFT": 1
+  },
+  "noTestBodiesRead": true,
+  "noPrivateRawRead": true,
+  "productExecuted": false,
+  "newTests": 0,
+  "newComponents": 0,
+  "newIndividualAccepted": 0,
+  "global451Accepted": false,
+  "formalUpdated": false,
+  "scopeCompleteForAllHistory": false,
+  "otherLegacyBindingsRemainAtOriginal867AndOtherDocuments": true
+}
