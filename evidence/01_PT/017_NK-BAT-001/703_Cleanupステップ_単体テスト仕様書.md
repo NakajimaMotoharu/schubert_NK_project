@@ -1,0 +1,23 @@
+# Cleanupステップ 単体テスト仕様書
+
+NK-BAT-001 / CleanupStepRepository全Source / DAT009・OPS009/UI251/SS331§3.14・332・341/SSC057・063/BAT162～169/451/809。Main b093不変更でPGレビューとPT並行。新CleanupStepPortTest全9、CLNPORT001～009。mixedDB旧CleanupStepRepositoryTestはBeforeAllでDBを起動するためcompile/選択しない。
+
+七列literal SQL/七typedbind/timeout5、全8 nonLOGS mapping、OK・LOCK_BUSY・BACKUP_GATE・FOREIGN_KEY_CONFLICT別のknown/null totals・complete/count関係、必須null/異常count/限界1～1000・row0/1/2、各JDBC SQL-RTE-Error/close優先/全close/親identity前後・nullacquisitionを独立手組入力と期待値で検査する。Kind.stepやproduction mapperでexpectedを生成しない。借用conn commit/rollback/close/config禁止、不明methodは失敗。再送/並行同connはcaller singleownerと原transactionの別契約、メモリ試験で実DELETEやexactlyonceを証明しない。
+
+既BackupManifest/Digest/Versions、CleanupCounts/ChunkのFOUR100証拠は再利用判定対象であり、新PTの成功へ加算しない。fixtureはUUID(0,1)/UTC2026-11-05T00Z・id7・try1のclaimだけ。実DB/SQLengine/削除/Root/Backup/原本/鍵/owner/permit/native/VM/network0。
+
+実command:既qualifier prepare/static/run/post cleanup_step。sourcefreeze/push→全9を一回→strictpost normal1physicalCRC/全@Test/単exec-session/四100/HELD四0。静的適用0・六Main同b093/NullAway/SBを確認、期待値はliteral状態表/SQL型・列とSSC063から作る。source/環境/工具argv/OS終了/失敗・BUG・coverage・path/hashと各method表を704/810以降へ記録する。原見積.75/2/5/cap10普通PGPT、S/V付替え0。新WBS受入/正式1964-53/工数null/第一V/実環境/451全体は別条件。
+
+|Test ID|class.method|期待値の根拠・検査|
+|---|---|---|
+|CLNPORT001|CleanupStepPortTest.literalSevenColumnSqlAndTypedBindingsKeepAllEightApprovedMappingsBorrowed|七列literal SQL/7bind型値・timeout5・全8非LOGS mapping・借用conn不変|
+|CLNPORT002|CleanupStepPortTest.literalOkEmptyBusyBackupGateAndQuestionConflictKeepKnownTotalsDistinctFromUnknown|OK0のみcomplete、LOCK_BUSY/BackupGateはunknown totals、FKはQUESTIONS/known totals|
+|CLNPORT003|CleanupStepPortTest.eachRequiredNullAndCounterOrPairedTotalViolationRejectsTheProjection|必須5null、negative5、deleted>target/不一致、skipped、paired totals全null関係|
+|CLNPORT004|CleanupStepPortTest.unknownReasonsWrongCompletionAndIncompatibleKindCannotBecomeSuccessfulCounts|未知reason/完了反転/total不足/不適kind・reason/count/known関係を一項ずつ拒否|
+|CLNPORT005|CleanupStepPortTest.everyNullMappingAndLimitViolationRejectsBeforeAcquisitionAndRowsCannotBeMissingOrDuplicate|nonnull/mapping/skip/limit範囲はSQL0、row0/2とnullstmt/rowは固定例外|
+|CLNPORT006|CleanupStepPortTest.allProviderPointsReallyReachedKeepUnknownIdentityAndCatalogOnlySql|全21JDBCポイントSQL-RTE-Error、実hitをassertしfault未到達を防ぐ|
+|CLNPORT007|CleanupStepPortTest.bodyAndEachClosingFailureUseIndependentPriorityAndSafeSecondaryWithoutSkippingClose|body×rowclose/stmtclose18組SSC063優先・固定secondary・全close|
+|CLNPORT008|CleanupStepPortTest.parentIdentityBeforeAndAfterAndInvalidBorrowedTransactionNeverReturnAResult|親前後identityfalse/readonly/auto/isolation不正は成功不可|
+|CLNPORT009|CleanupStepPortTest.exactLimitsOneAndThousandAcceptOnlyTheirBoundedCountsAndNeverCommitTheBorrowedConnection|limit1/1000等号許可とlimit+1拒否、SQL型・counts結果/borrowedcommit0|
+
+origin/main SS332 SSC175はlegacy7にWEB_RECEIPTSを追加しCLEAN_BATCH_RUNへ接続する。入力8mappingの独立根拠であり、このPTが実SQL functionの8kind削除を実測した意味ではない。PG19100compile0/PG19102 raw17全個別非適用・適用0/CS0/parser0、810。全9をsourcefreeze/push後に新専用PG19108へ一回実行。21ポイント（prepare/timeout/bind7/query/next2/列7/close2）の実到達assertはBUG2292横展開の予防である。810本文の22表記は箇所数の誤記で、明細と本仕様の21を正とする。

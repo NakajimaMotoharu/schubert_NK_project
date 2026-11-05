@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-05T18:08:31.824">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java">
+<violation beginline="38" endline="38" begincolumn="13" endcolumn="18" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepRepository" method="execute" variable="query" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this PreparedStatement object are closed after use
+</violation>
+<violation beginline="50" endline="50" begincolumn="15" endcolumn="18" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepRepository" method="execute" variable="row" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ResultSet object are closed after use
+</violation>
+<violation beginline="72" endline="72" begincolumn="33" endcolumn="49" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepRepository" method="execute" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="72" endline="72" begincolumn="52" endcolumn="57" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepRepository" method="execute" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="75" endline="83" begincolumn="11" endcolumn="10" rule="DoNotThrowExceptionInFinally" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepRepository" method="execute" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#donotthrowexceptioninfinally" priority="4">
+A throw statement in a finally block makes the control flow hard to understand.
+</violation>
+<violation beginline="79" endline="79" begincolumn="37" endcolumn="53" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepRepository" method="execute" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="79" endline="79" begincolumn="56" endcolumn="61" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepRepository" method="execute" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="84" endline="84" begincolumn="31" endcolumn="47" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepRepository" method="execute" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="84" endline="84" begincolumn="50" endcolumn="55" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepRepository" method="execute" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="87" endline="95" begincolumn="9" endcolumn="8" rule="DoNotThrowExceptionInFinally" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepRepository" method="execute" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#donotthrowexceptioninfinally" priority="4">
+A throw statement in a finally block makes the control flow hard to understand.
+</violation>
+<violation beginline="91" endline="91" begincolumn="35" endcolumn="51" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepRepository" method="execute" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="91" endline="91" begincolumn="54" endcolumn="59" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepRepository" method="execute" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepPortTest.java">
+<violation beginline="371" endline="371" begincolumn="40" endcolumn="73" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepPortTest.Fixture" variable="cleanupBindings" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="372" endline="372" begincolumn="42" endcolumn="66" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepPortTest.Fixture" variable="faults" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="395" endline="395" begincolumn="15" endcolumn="45" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepPortTest.Fixture" method="connection" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="421" endline="421" begincolumn="15" endcolumn="45" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepPortTest.Fixture" method="statement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="481" endline="481" begincolumn="15" endcolumn="45" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="CleanupStepPortTest.Fixture" method="resultSet" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+</pmd>
