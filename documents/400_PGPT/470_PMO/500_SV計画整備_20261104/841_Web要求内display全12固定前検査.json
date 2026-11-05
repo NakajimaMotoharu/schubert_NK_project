@@ -1,0 +1,85 @@
+{
+  "atJST": "2026-11-05T23:06:43.166395+09:00",
+  "decision": "SOURCE_READY_TO_FREEZE_NOT_EXECUTED",
+  "coreMain": "7d2c2fb64711531db8898d49b4b377670b58ff87",
+  "mainChanged": false,
+  "compile": {
+    "path": "PG19384",
+    "actualExit": 0,
+    "manifestSha256": "10d048aec4d7993bfbeb42e76fed31dadbd46c1f3e8fe667cae93bc602d32c97"
+  },
+  "static": {
+    "path": "PG19386",
+    "rawPMD": 6,
+    "applicable": 0,
+    "checkstyle": 0,
+    "parserErrors": 0,
+    "individualDecisions": [
+      {
+        "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest.java",
+        "line": 62,
+        "rule": "NullAssignment",
+        "decision": "NOT_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Intentional legal Servlet anonymous/null-principal fixture after priorcapture, proving snapshotindependence andanonymousclear; not unexpectedproductionnullable state."
+      },
+      {
+        "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest.java",
+        "line": 71,
+        "rule": "NullAssignment",
+        "decision": "NOT_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Intentional legal Servlet anonymous/null-principal fixture after priorcapture, proving snapshotindependence andanonymousclear; not unexpectedproductionnullable state."
+      },
+      {
+        "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest.java",
+        "line": 161,
+        "rule": "NullAssignment",
+        "decision": "NOT_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "Intentional legal Servlet anonymous/null-principal fixture after priorcapture, proving snapshotindependence andanonymousclear; not unexpectedproductionnullable state."
+      },
+      {
+        "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest.java",
+        "line": 403,
+        "rule": "UseConcurrentHashMap",
+        "decision": "NOT_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "RequestFixture maps are one-thread/perrequest and never shared; explicitnullable/mistyped attributes are negativefixtures, ConcurrentHashMap would reject null andchangefixture semantics."
+      },
+      {
+        "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest.java",
+        "line": 404,
+        "rule": "UseConcurrentHashMap",
+        "decision": "NOT_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "RequestFixture maps are one-thread/perrequest and never shared; explicitnullable/mistyped attributes are negativefixtures, ConcurrentHashMap would reject null andchangefixture semantics."
+      },
+      {
+        "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest.java",
+        "line": 456,
+        "rule": "UseProperClassLoader",
+        "decision": "NOT_APPLICABLE_WITH_SCOPE_REASON",
+        "reason": "ExactServlet definingloader for owned JDKProxy, standaloneJUnit notJ2EE/TCCL/provider."
+      }
+    ],
+    "manifestSha256": "4e2d705700f951bf7195eb2b23b8e1d818847dd29601d60d292e883b1b218682"
+  },
+  "initial19382": {
+    "raw": 11,
+    "actualCorrections": "Three independentTestlabel constants andexplicitnonHTTP3pairmatrix replace equalitycomparison; no product execution, originalcompile/staticpreserved"
+  },
+  "testPlan": {
+    "tests": 12,
+    "wholeSources": [
+      "WebDisplayContext",
+      "WebDisplayContextFilter"
+    ],
+    "physical": 2,
+    "run": "PG19388",
+    "post": "PG19390"
+  },
+  "scope": "requestonly memoryServlet/FilterChain, syntheticformat/Principal only. Noactualsecret/key/session/tokenissuance/crypto/Root/VM/failuregraph.",
+  "producer": {
+    "path": "evidence/01_PT/015_NK-WEB-001/input/003_display_snapshot_qualifier.py",
+    "sha256": "0d5ed6bc7670270b9e43a78fc3ff1b5e9beb95a209dcb39abb052c120d0615b7"
+  },
+  "qa054": "Userapproved, receipt in911/UIC011/SSC336 inthisfreeze; UI/SSreflection andPG/PT stillpending, unrelatedHOLD unchanged",
+  "formalUpdated": false,
+  "newAcceptance": 0
+}

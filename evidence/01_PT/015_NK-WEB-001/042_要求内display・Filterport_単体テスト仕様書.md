@@ -1,0 +1,32 @@
+# 要求内display・Filter port 単体テスト仕様書
+
+Program NK-WEB-001、WebDisplayContext全method＋WebDisplayContextFilter constructor/doFilter。RD AUT/TST、UI222/226、SS313SSC047/314/352。840/group3883原1/3/6pp cap10、普通PGPT、第一Vの代替なし。
+
+SS313SSC047はserver表示snapshotだけを共通errorへ渡し、認証済ならusername/role/Logout＋解決済hiddenCSRF、ない場合Menu/Login案内を要求する。正しいclosedPrincipalと_csrf parameterのformat検証済値だけをrequest内snapshotへ変換し、captureDeniedは先に旧snapshotを除去、restoreは外来CSRF二aliasを除去して保持済snapshotだけから固定X-CSRF-TOKEN/_csrfを復元、clearは全3属性だけ削除、FilterはHTTP二interfaceを確認しcapture後に同request/responseでchainを呼ぶ。この内部capture/restore順序と不変条件を独立tableで明示する。
+
+|Test ID|class.method|入力と独立期待|
+|---|---|---|
+|WEB-DISPLAY-PORT-001|DisplaySnapshotPortTest.closedPrincipalAndParsedCsrfCreateOnlyImmutableDisplayData|closedPrincipal/parsedCSRF→固定brand/name/role/redacted immutable|
+|WEB-DISPLAY-PORT-002|DisplaySnapshotPortTest.anonymousCaptureClearsPriorSnapshotWithoutReadingTokenProperties|anonymousは旧snapshotを削除、CSRF属性を読まない|
+|WEB-DISPLAY-PORT-003|DisplaySnapshotPortTest.foreignPrincipalMissingTokenWrongTypeAndParameterNeverCreateSnapshot|外来Principal/missingtoken/型不正/param不一致はfixedcatalog|
+|WEB-DISPLAY-PORT-004|DisplaySnapshotPortTest.deniedCaptureClearsOldSnapshotAndUsesOnlyExplicitActorWhenTokenPresent|denied: actor空/token欠落/present/不正を区別、旧snapshot先削除|
+|WEB-DISPLAY-PORT-005|DisplaySnapshotPortTest.allNullEntriesAndMistypedExistingContextAreExplicitFailures|全null入口failfast/既存snapshot欠落と型不正|
+|WEB-DISPLAY-PORT-006|DisplaySnapshotPortTest.clearRemovesExactlyDisplayAndBothCsrfAliasesAndIsIdempotent|clearはdisplayとCSRF二aliasだけ除去/冪等/他属性保持|
+|WEB-DISPLAY-PORT-007|DisplaySnapshotPortTest.restoreWithoutSnapshotRemovesForeignTokensAndCreatesNothing|snapshot無しrestoreはforeign token二aliasを除去し再生成0|
+|WEB-DISPLAY-PORT-008|DisplaySnapshotPortTest.restoreUsesRetainedValueAndFixedHeaderParameterDespiteReplacedForeignAttributes|snapshot有restoreは保持済値・固定header/paramのみ、foreign属性/principal不読|
+|WEB-DISPLAY-PORT-009|DisplaySnapshotPortTest.nullMalformedAndBoundaryTokenValuesRemainClosedFormatContracts|CSRF null値/63-64-128-129/不正alphabetは明示境界|
+|WEB-DISPLAY-PORT-010|DisplaySnapshotPortTest.unknownPortRuntimeAndErrorPreserveIdentityAcrossCaptureExistingClearAndRestore|全port未知Runtime/Error参照保持、token parameter/getToken両方|
+|WEB-DISPLAY-PORT-011|DisplaySnapshotPortTest.filterRejectsNullAndEveryNonHttpPairBeforePrincipalOrChain|Filter null3入口/nonHTTP3pairはcapture/chain前拒否|
+|WEB-DISPLAY-PORT-012|DisplaySnapshotPortTest.filterCapturesBeforeChainAndKeepsVerifiedDisplayAcrossDownstreamFailures|Filter capture→chain順序・anonymous/invalid・downstream4例外後もverifieddisplay保持|
+
+JDKProxy Servlet/FilterChain・own属性mapだけ、synthetic zero bytesからmemoryで生成した64文字placeholderとpublic-view/USER/ADMINのみを使用する。実session/CSRF/token/credential/鍵を読まず・保存/発行せず・値をevidenceへ出さない。WebCsrfTokenはparse/formValueだけ、generator/matches/暗号を実行しない。SessionStoreExceptionは固定constructorだけでfailuregraph/preserveFatal未実行。実HTTP・Container・Root/VM/cohort/intent/permit等や既拒否対象の再試行ではない。
+
+正常/境界/null/型不正/unknownRuntimeError/下流IOException-ServletException/Errorを個別確認。fixedSessionStoreException= session storage is unavailable/suppressed0、parserinvalid=CSRF token is invalid、token nullはexplicitcsrf NPE/正常扱い0、非HTTPはHTTP display boundary required。byte/golden返値をproduction methodから生成しない。capture/restoreのexpectedbrandとrole/属性集合はliteral、復元nonceのexpectedはfixtureで生成した同じ入力値でありproduction抽出値をoracleにしない。要求ごとのmapとimmutable snapshotだけを使いworker/共有sessionを所有しないため、実container並行/実token検証は別未実施、同Filterの別req/下流失敗間で状態分離を確認する。
+
+Main対応: Contextcapture→001002003009010012、captureDenied→004005、existing→001～012、clear→005006010、restore→005007008009010、privatecapture/constructor/topBar→001004008009012、toString→001、clinitは同exec共有。Filterconstructor→sharedfixture、doFilter→011012。全12IDはtestmethod/safeXMLへ一意対応。manual到達不能/除外/反射強制なし。
+
+Linux/JDK25.0.4/既Servlet6.1.0/Spring7.0.9/Security7.1.1/JSpecify/JUnit1.13.4/JaCoCo0.8.15。同CoreMain7d2c normal六module build/NullAway19270・六SpotBugs19272全0/全input/6jarを再利用し確認目的再build0。既framework prepare/static/run/post display_snapshot、旧19380compile/19382staticは製品実行前Testliteral/非HTTPmatrix是正の履歴、最終19384compile/19386static→source固定push→PG19388全12初回/post19390。normal全physical2/CRC/単exec-session/全@Test/line-method-class-branch100/HELD四0。実command/環境/commit/終了/XML/coverage/関連BUG/証跡path/hashを841以降と043へ保存する。
+
+実Web/HTML/実認証・CSRFAuth/DB/session保存/Root/VM/native/CHR/451/IT-STは別未受入。正式1964PT/53scope・歴史17/190・工数null・WBS個別新受入0/同第一V HOLDを維持。別QA054の利用者承認は911/UIC011/SSC336へ回答済みで保存し、このdisplay契約や他HOLDの変更に混ぜない。
+
+固定前841: final19384compile0/19386raw6(nullPrincipalfixture3/専有nullablemap2/definingServletLoader1)個別非適用、適用0-CS0-parser0。3literalgroupとnonHTTP3pairmatrixは実修正、suppression0、Main不変更、旧compile/staticは製品未実行履歴。input003 fixedproducer。QA054回答記録だけ同commitに保全し、対象UI/SS/実装変更とこの12PTを混同しない。
