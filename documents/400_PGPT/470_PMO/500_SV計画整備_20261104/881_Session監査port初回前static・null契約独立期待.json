@@ -1,0 +1,146 @@
+{
+  "atJST": "2026-11-06T04:19:11.882501+09:00",
+  "mainSource": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+  "compile19786": {
+    "actualExit": 0,
+    "manifestSha256": "9e522f7c424570acd3cf1f740b21ecea7424deb3aed606cae7fcb0227535c1ed"
+  },
+  "static19787": {
+    "manifestSha256": "0a9479b5af9a320def6794ba28af558ac063e3f8278e76c830839118b338c3dd",
+    "rawPmd": 5,
+    "applicable": 0,
+    "checkstyle": 0,
+    "parserErrors": 0,
+    "oldRaw8Preserved": true,
+    "suppressionAdded": false,
+    "perFindingContext": [
+      {
+        "raw": {
+          "beginline": "187",
+          "endline": "187",
+          "begincolumn": "24",
+          "endcolumn": "55",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.security",
+          "class": "SessionAuditPortTest",
+          "method": "twoOwnedWorkersKeepIndependentStatementsAndValues",
+          "variable": "workers",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3",
+          "message": "To be compliant to J2EE, a webapp should not use any thread."
+        },
+        "source": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionAuditPortTest.java",
+        "sourceSha256": "64179428f24f1c78e6e93e320de1a840dfa0beab09538396e1df02a98557c67e",
+        "applicability": "CONTEXTUAL_NONAPPLICABLE",
+        "reason": "Owned unit executor2 withtwo finite memory-only tasks/5sec futureget/TWRclose; no application/J2EE executor or actual backend worker. Expected first/secondresults independently asserted; not a blanketproduction lifecycle exemption.",
+        "ptExempt": false
+      },
+      {
+        "raw": {
+          "beginline": "189",
+          "endline": "194",
+          "begincolumn": "11",
+          "endcolumn": "17",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.security",
+          "class": "SessionAuditPortTest",
+          "method": "twoOwnedWorkersKeepIndependentStatementsAndValues",
+          "variable": "first",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3",
+          "message": "To be compliant to J2EE, a webapp should not use any thread."
+        },
+        "source": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionAuditPortTest.java",
+        "sourceSha256": "64179428f24f1c78e6e93e320de1a840dfa0beab09538396e1df02a98557c67e",
+        "applicability": "CONTEXTUAL_NONAPPLICABLE",
+        "reason": "Owned unit executor2 withtwo finite memory-only tasks/5sec futureget/TWRclose; no application/J2EE executor or actual backend worker. Expected first/secondresults independently asserted; not a blanketproduction lifecycle exemption.",
+        "ptExempt": false
+      },
+      {
+        "raw": {
+          "beginline": "196",
+          "endline": "201",
+          "begincolumn": "11",
+          "endcolumn": "17",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.security",
+          "class": "SessionAuditPortTest",
+          "method": "twoOwnedWorkersKeepIndependentStatementsAndValues",
+          "variable": "second",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3",
+          "message": "To be compliant to J2EE, a webapp should not use any thread."
+        },
+        "source": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionAuditPortTest.java",
+        "sourceSha256": "64179428f24f1c78e6e93e320de1a840dfa0beab09538396e1df02a98557c67e",
+        "applicability": "CONTEXTUAL_NONAPPLICABLE",
+        "reason": "Owned unit executor2 withtwo finite memory-only tasks/5sec futureget/TWRclose; no application/J2EE executor or actual backend worker. Expected first/secondresults independently asserted; not a blanketproduction lifecycle exemption.",
+        "ptExempt": false
+      },
+      {
+        "raw": {
+          "beginline": "269",
+          "endline": "269",
+          "begincolumn": "40",
+          "endcolumn": "72",
+          "rule": "UseConcurrentHashMap",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.security",
+          "class": "SessionAuditPortTest.Fixture",
+          "variable": "bindings",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+          "priority": "3",
+          "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+        },
+        "source": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionAuditPortTest.java",
+        "sourceSha256": "64179428f24f1c78e6e93e320de1a840dfa0beab09538396e1df02a98557c67e",
+        "applicability": "CONTEXTUAL_NONAPPLICABLE",
+        "reason": "Fixture.bindings per JDBC fixture, created and mutated only by one worker, read after its Future.get happens-before; no map shared between workers. Ordinary sequentialcases have sameconfinedfixture.",
+        "ptExempt": false
+      },
+      {
+        "raw": {
+          "beginline": "320",
+          "endline": "320",
+          "begincolumn": "45",
+          "endcolumn": "66",
+          "rule": "UseProperClassLoader",
+          "ruleset": "Error Prone",
+          "package": "dev.codex.schubert.nk.api.security",
+          "class": "SessionAuditPortTest",
+          "method": "proxy",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+          "priority": "3",
+          "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+        },
+        "source": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionAuditPortTest.java",
+        "sourceSha256": "64179428f24f1c78e6e93e320de1a840dfa0beab09538396e1df02a98557c67e",
+        "applicability": "CONTEXTUAL_NONAPPLICABLE",
+        "reason": "JDBC Proxy uses the defining java.sql Connection/PreparedStatement interface loader via actualClass.getClassLoader, no arbitraryambient application loader. No container loading or path/access modification.",
+        "ptExempt": false
+      }
+    ]
+  },
+  "bug": "BUG-2313",
+  "ykt": "YKT-2058",
+  "status": "TEST_SOURCE_FREEZE_BEFORE_FIRST_UNIT",
+  "plannedUnit": {
+    "tests": 9,
+    "slot": "pg19788-session-audit-nine-unit-v1",
+    "post": "pg19790-session-audit-independent-post-v1",
+    "scope": "pure memoryJDBC only, no session/key/actualDB/Root/VM"
+  },
+  "nullCanary": {
+    "tool": "evidence/01_PT/007_NK-AUT-001/input/002_owned_session_null_canary.py",
+    "slot": "pg19784-session-audit-null-compile-v1",
+    "oracle": "positiveMaven compile0, seven literal-null inputcall lines rejected by actual pinned SessionAuditWriter package@NullMarked metadata using unchanged rootdefault compiler ErrorProne2.50.0/NullAway0.14.1/JSpecifyJDKModels; no Product method execution, no JUnit or coverage credit",
+    "scope": "Own positive/negative tempmodules inherit copied same parentPOM, depend on hashpinned normal19740 API/protocol andJSpecify1.0.1 via systemPath. Maven ownfixture absolute-systemPath modelwarning retained; no Production POM/library/version/access change."
+  },
+  "formalUpdated": false,
+  "newIndividualAcceptance": 0,
+  "effortRate": null,
+  "firstV": "SAME_FIRST_HOLD"
+}
