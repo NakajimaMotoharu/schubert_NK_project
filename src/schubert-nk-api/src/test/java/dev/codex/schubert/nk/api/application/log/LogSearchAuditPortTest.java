@@ -39,7 +39,7 @@ import org.junit.jupiter.api.Test;
 final class LogSearchAuditPortTest {
   private static final Instant NOW = Instant.parse("2026-11-05T00:01:02.123456Z");
   private static final UUID MESSAGE = new UUID(0, 11);
-  private static final UUID CORRELATION = new UUID(0, 12);
+  private static final UUID CORRELATION = new UUID(0, 11);
   private static final AuthenticatedActor ADMIN =
       new AuthenticatedActor(17, "audit-admin", Role.ADMIN);
   private static final String PREPARE = "prepare";
@@ -301,7 +301,7 @@ final class LogSearchAuditPortTest {
             InteractionKind.SYNCHRONOUS,
             MESSAGE,
             CORRELATION,
-            NOW,
+            NOW.truncatedTo(java.time.temporal.ChronoUnit.MILLIS),
             Optional.of(AuthenticationContext.of("0".repeat(64))),
             256,
             656,
