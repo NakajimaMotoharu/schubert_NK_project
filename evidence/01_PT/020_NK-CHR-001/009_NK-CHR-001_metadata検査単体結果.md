@@ -1,0 +1,13 @@
+# NK-CHR-001 metadata型検査 限定結果
+
+Source317658f4dbb40526b7de032066bfe0db42bf1003、Core b093不変。PG18742/79502 7bd6ee:47unique/8class/FESaborted0、全step0。a3fb7b post0はGit/全入力/正常9physical CRC/単exec/session/元XML全47method/六publicresourceとclasspathを独立照合。新9methodは008のMETA001～009、旧38とのexec合算0。
+
+metadata段8methodの全line/method/branch未達0、直接72分岐。定義段11method/93分岐も当sourceで全未達0。whole GateContractValidatorはbranch179covered/64miss、line289covered/175miss、method26covered/20missで未受入。前sourceのbranch107covered/102missから72分岐を追加実行、未達38減・追加分岐34。これを全PGPT工数率や実gate合格へ変換しない。三Sourceだけ四counter100%、CLI/契約validator全体未達を分母から除外しない。
+
+原PG18734はalpha同値wrapperで旧helperを新9から実行し、failure5/error0/skip0、120の不正vectorが通る不足を保存。正常47はinteger比較、Long非負/範囲/同値、canonical hash、capacity型/境界、実boolean/check・role型/nullを是正したsource。元redのMain/Test/input/原XMLhashはpublic PG18734に保全、成功へ転換しない。
+
+値は六public SS355/UI264定義と独立literal。観測のsource59/doc18/master59627/19240707190等をproductionから生成せず、SS表と固定Sourcehash/fixtureで比較。既存writerはverifySource int/longとinventory queryLong/getLong及びvideo/music intをsourceだけで確認した。Current環境・DB・実Source検査・preflight・review・baseline・Rootは実行/原データ読取0、fixtureのPASS/APPROVED/0600/freeBytesを実環境資格へ利用しない。
+
+PG18738静的Main5 SpotBugs/解析0・CS0、PMD raw27はlocalMap17/finiteStandaloneJUnitThread9/outercontinue1の個別非該当、抑制0。BUG2275/YKT2020のbaseline/CLI/metric残はOPEN、全451/正式1964PT53scope/歴史17/190/工数null/新leaf0を維持。
+
+manifest `evidence/PG18742-metadata-fortyseven-v1/manifest.json` SHA256 `b5748a05ec1e86422b93cb49f9496d71c8a7264073a0e3377061518edc58f9a1`。環境/tool/実command/時刻/原input/expected/actual、Sourceと9physical/元XML/execの対応はmanifest・begin/step receipts・008仕様を正とする。
