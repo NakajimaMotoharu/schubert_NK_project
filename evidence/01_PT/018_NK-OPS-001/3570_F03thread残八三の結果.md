@@ -1,0 +1,7 @@
+# F03thread残八三の文脈照合
+
+2026-11-06T08:03:31.751488+09:00 / dev-foundation / Main source 28af318d0198fe7432ca6fcd234d3fabbfd10173。PG20040 metadata真正0/独立post0。PG20040 metadata0/独立post0。1491=前1126+新83+残282、全ordinal/ID/unique1439/duplicate52/Morning12/transaction431保持。Main/POM/normal19740/SB19742/JAR/currentSS/27sourceContexts一致。Product/thread/hook/reader/native/Root/VM再演0、動的race/join/停止/coverage未検証。
+
+本群83件、先行と重複なし累計1209/生1491、未分類282。scope: All remaining83 DoNotUseThreads per-site purposes: identity/interrupt/deadline, management bounded executor, explicit owned worker/hook/reader. No global suppression. Requested stop and actual join, API/Web IRQ table, UNKNOWN frame vs interval remain distinct.。全finding/source/context/hash/元ordinalは公開 evidence/01_PT/018_NK-OPS-001/evidence/PG20040-thread-remaining-context-v1/manifest.json / SHA256 b4264a494709de19d9a9ba040d7a7acef9dbb42e82cc93992e7eea77594f54e3。関連仕様evidence/01_PT/018_NK-OPS-001/3569_F03thread残八三の仕様.md・計測documents/400_PGPT/470_PMO/500_SV計画整備_20261104/934_F03thread残八三の結果.json。
+
+rawGate1/全適用違反null/全F03・451未受入、Product実行0/coverage未測定/動的PT免除0/新個別受入0/技術成分46/正式1964-53/歴史17-190/工数null/第一V同HOLD。原群{'low': 0.5, 'base': 2, 'high': 5} cap6不変更、共有26→26=0ppをPGPT-20261008-3964へ一度（ordinary20/all27/S7残3）、専有N/Tnull。次=Review remaining CloseResource18/finally2/volatile7 exact owner/borrowed and exceptional context; source only and retain held dynamic scopes. Remaining generic255 requires individual applicability, no blanket waiver.、通常区切り停止不可。
