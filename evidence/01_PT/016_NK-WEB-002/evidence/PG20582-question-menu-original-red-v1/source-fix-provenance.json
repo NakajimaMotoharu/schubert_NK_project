@@ -1,0 +1,30 @@
+{
+  "bug": "BUG-2341",
+  "horizontal": "YKT-2086",
+  "approvedRootLiteral": "/",
+  "canonicalMain": "8deb209723494008cad46b6649194a3b7b30e0da",
+  "fixes": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/questions/new.html",
+      "beforeSha256": "199d2b490c33bc708d6c459cf4681d2a4307eaf25f18a8fcd3617e1d94125cb4",
+      "afterSha256": "a71649b7e8237ad7962e32d92103d87dd92eb84343b77881f3970b3010038643",
+      "reason": "UI221/SS313 Menu root /, not a new UI behavior or route alias"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/questions/accepted.html",
+      "beforeSha256": "9c8ece6dc7ebc467ebeb53890a2bec12713cabcfb6e3bd804b6b4daf8b6caa9e",
+      "afterSha256": "eded646286168f2c25805deb9938ba8b0db31e321881f781356cbf4bda889f53",
+      "reason": "UI221/SS313 Menu root /, not a new UI behavior or route alias"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java",
+      "beforeSha256": "911bdfb597f7ee9dd434ef8a61439c304889f3955ea089d0bf8010d83e4a50b1",
+      "afterSha256": "3c29dd5362ca3253e2bb86279dfadc0794aa8374c3ce2998d4b6f2cf5ae8559c",
+      "reason": "Existing copied bad oracle corrected from UI221 root, full dynamic fixture held and not invoked"
+    }
+  ],
+  "sourceMenuAnnotation": "@GetMapping(\"/\")",
+  "CaddyAliasCount": 0,
+  "discoveredSourceReferences": 3,
+  "independentExpectedChangedFromCode": false
+}

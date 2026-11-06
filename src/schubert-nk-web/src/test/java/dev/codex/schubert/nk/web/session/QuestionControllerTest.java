@@ -1563,7 +1563,7 @@ class QuestionControllerTest {
           "<script>alert(1)</script>" + "😀".repeat(175), page.select(".question-body").text());
       assertTrue(page.select(".question-body script,.question-body img").isEmpty());
       assertEquals(
-          List.of("/notifications", FIXTURE_QUESTIONS_NEW_F89B3C4E, "/menu"),
+          List.of("/notifications", FIXTURE_QUESTIONS_NEW_F89B3C4E, "/"),
           page.select("main.question-accepted-page > nav a").eachAttr("href"));
       assertTrue(page.select("input[name=question],form.question-input").isEmpty());
       assertEquals(1, f.requests.size());

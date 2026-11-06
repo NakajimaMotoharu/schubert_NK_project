@@ -14,5 +14,5 @@
     <p>残り <span data-question-remaining>4096</span> byte</p>
     <p class="field-error" th:if="${page.issues.containsKey('question')}" th:text="${page.issues.question}"></p>
     <button type="submit">送信</button>
-  </form><a href="/menu">メニュー</a>
+  </form><a th:href="@{/}">メニュー</a>
 </main><script src="/js/question-input-validation.js" defer></script></body></html>

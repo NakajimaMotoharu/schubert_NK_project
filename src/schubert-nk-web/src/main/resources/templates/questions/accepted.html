@@ -8,5 +8,5 @@
   <dl><dt>受付ID</dt><dd class="receipt" th:text="${page.values.receiptId}"></dd>
     <dt>受付日時</dt><dd class="submitted-at" th:text="${page.values.submittedAt}"></dd>
     <dt>質問</dt><dd class="question-body" th:text="${page.values.question}"></dd></dl>
-  <nav><a href="/notifications">通知を確認</a><a href="/questions/new">続けて質問</a><a href="/menu">メニュー</a></nav>
+  <nav><a href="/notifications">通知を確認</a><a href="/questions/new">続けて質問</a><a th:href="@{/}">メニュー</a></nav>
 </main></body></html>
