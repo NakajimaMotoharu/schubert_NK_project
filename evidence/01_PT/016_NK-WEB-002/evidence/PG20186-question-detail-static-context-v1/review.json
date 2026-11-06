@@ -1,0 +1,43 @@
+[
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionDetailProjectionPortTest.java",
+    "sourceSha256": "7ebe8e793802578903879a3a0bdefde527b068dfced60c8fe815f5b1b6355054",
+    "finding": {
+      "beginline": "194",
+      "endline": "194",
+      "begincolumn": "24",
+      "endcolumn": "55",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.view",
+      "class": "QuestionDetailProjectionPortTest",
+      "method": "parallelProjectionDoesNotLeakOwners",
+      "variable": "workers",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3"
+    },
+    "lineText": "try (var workers = Executors.newFixedThreadPool(2)) {",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Own2worker/8 bounded tasks exercise immutable formatter/map/actor isolation; executor closed and10s future join. No production/J2EE scheduler or external process."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionDetailProjectionPortTest.java",
+    "sourceSha256": "7ebe8e793802578903879a3a0bdefde527b068dfced60c8fe815f5b1b6355054",
+    "finding": {
+      "beginline": "199",
+      "endline": "204",
+      "begincolumn": "13",
+      "endcolumn": "87",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.view",
+      "class": "QuestionDetailProjectionPortTest",
+      "method": "parallelProjectionDoesNotLeakOwners",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3"
+    },
+    "lineText": "workers.submit(",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Own2worker/8 bounded tasks exercise immutable formatter/map/actor isolation; executor closed and10s future join. No production/J2EE scheduler or external process."
+  }
+]

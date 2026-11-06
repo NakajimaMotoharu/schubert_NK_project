@@ -5,11 +5,17 @@ import xml.etree.ElementTree as E
 import pg9666_pagination_static as r
 root=Path.cwd();runs=root.parent/'pgpt-runs/PG379';tc=root.parent/'toolchain';jdk=tc/'jdk-25.0.4/bin';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();phase=sys.argv[1];profile=sys.argv[2];external=profile.endswith('.json');assert phase in {'prepare','static','run','post'} and (external or profile in {'range','verified','audit','receipt','login_audit','login_attempt','inbound','snapshot','run_reference','metadata','expiry','backup','batch_run','cleanup_step','cleanup_query','inspection_summary','pressure','topology','acceptor'})
 observationExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/052_api_observation_publication.json','evidence/01_PT/018_NK-OPS-001/input/053_api_observation_publication_style.json'}
+viewExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/054_question_detail_projection.json','evidence/01_PT/018_NK-OPS-001/input/055_question_detail_projection_style.json'}
 if external:
- assert observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
+ assert viewExternal or observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
  externalCfg=json.loads((root/profile).read_text())
  assert externalCfg['preflightDecision']=='PT_DEFAULT' and externalCfg['actualBackendActions']==0
- if observationExternal:
+ if viewExternal:
+  assert externalCfg['module']=='web' and externalCfg['main']=='QuestionDetailViewModel' and externalCfg['mainPackage']=='view'
+  assert externalCfg['tests']==['QuestionDetailProjectionPortTest'] and externalCfg['testPackages']==['view']
+  assert externalCfg['physical']==2 and externalCfg['abstract']==0 and externalCfg['expected']==8
+  assert externalCfg['syntheticNoCode']==['dev/codex/schubert/nk/web/view/QuestionDetailViewModel$1']
+ elif observationExternal:
   assert externalCfg['module']=='api' and externalCfg['main']=='ApiOutboxObservationSource' and externalCfg['mainPackage']=='monitoring'
   assert externalCfg['tests']==['ApiOutboxPublicationPortTest'] and externalCfg['testPackages']==['monitoring']
   assert externalCfg['physical']==2 and externalCfg['abstract']==0 and externalCfg['expected']==8
@@ -46,7 +52,7 @@ for n,h in base['begin']['inputHashes'].items():assert sha(root/n)==h
 for j in base['jars'].values():assert sha(j['path'])==j['sha256']
 console=tc/'junit-platform-console-standalone-1.13.4.jar';assert sha(console)=='3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892';deps=[Path(base['jars'][n]['path']) for n in ['protocol',module]]
 if external:
- if not observationExternal:deps.append(Path(base['jars']['bootstrap']['path']))
+ if not observationExternal and not viewExternal:deps.append(Path(base['jars']['bootstrap']['path']))
  deps.append(tc/'m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar')
  if observationExternal:
   dependency=tc/'m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar';assert sha(dependency)==cfg['micrometerCoreSha256'];deps.append(dependency)
