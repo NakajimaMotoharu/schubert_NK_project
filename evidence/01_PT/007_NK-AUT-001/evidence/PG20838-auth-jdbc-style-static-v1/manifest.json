@@ -1,0 +1,159 @@
+{
+  "atJST": "2026-11-06T20:31:19.517800+09:00",
+  "compileExit": 0,
+  "pmdActualExit": 4,
+  "pmdRaw": 4,
+  "processingErrors": 0,
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "notApplicable": [
+    {
+      "item": {
+        "beginline": "63",
+        "endline": "63",
+        "begincolumn": "45",
+        "endcolumn": "66",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AuthenticationVerifierJdbcPortTest",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3",
+        "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+      },
+      "reason": "JDBC interface class loader explicitly supplied to JDK Proxy in standalone JUnit; no J2EE/container context classloader or Product class loading"
+    },
+    {
+      "item": {
+        "beginline": "67",
+        "endline": "67",
+        "begincolumn": "31",
+        "endcolumn": "55",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AuthenticationVerifierJdbcPortTest.Fixture",
+        "variable": "fields",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3",
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+      },
+      "reason": "Each Fixture and fields map constructed within one task/invocation, no shared access; deliberate null-column fixture requires HashMap null support"
+    },
+    {
+      "item": {
+        "beginline": "382",
+        "endline": "382",
+        "begincolumn": "25",
+        "endcolumn": "56",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AuthenticationVerifierJdbcPortTest",
+        "method": "parallelFreshRowsDoNotShareActorOrTransactionState",
+        "variable": "executor",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "reason": "JUnit owns two-worker executor via TWR, joins every Future; no Product/J2EE-managed threads"
+    },
+    {
+      "item": {
+        "beginline": "386",
+        "endline": "394",
+        "begincolumn": "13",
+        "endcolumn": "19",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AuthenticationVerifierJdbcPortTest",
+        "method": "parallelFreshRowsDoNotShareActorOrTransactionState",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "reason": "JUnit owns two-worker executor via TWR, joins every Future; no Product/J2EE-managed threads"
+    }
+  ],
+  "suppressionAdded": false,
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java": "e4dc9150a2cded204ba286f63c2c85b18411a8d39cee96083bfb61530ef2a1d1",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationVerifierJdbcPortTest.java": "9f8e0b379cbfcbfc8bee9e64eb2f119d719435b433befbb9c43225487afae089"
+  },
+  "sameSourceSixMainSpotBugs": {
+    "manifest": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20114-log-tx-six-static-reactor-v1/manifest.safe.json",
+    "sha256": "6439d001af03b1807f29516b75b04ab8d7f1b2353e25b5e28eb3ef07d3b750a9",
+    "reports": {
+      "protocol": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/spotbugsXml.xml",
+        "sha256": "ee917dae88f16e58a8d9833e0d53394a7d054973f47defb2501e995c649c5973",
+        "bugs": 0,
+        "errors": 0,
+        "missing": 0
+      },
+      "storage": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/spotbugsXml.xml",
+        "sha256": "58fc1269e7ace64946c29cfd93d94f953624c713d4ebca2c0e9dce59f5fd5491",
+        "bugs": 0,
+        "errors": 0,
+        "missing": 0
+      },
+      "bootstrap": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/spotbugsXml.xml",
+        "sha256": "71479d12b0e3fe61e28c059586a92998b523bf1f19de0351716e1470cd156458",
+        "bugs": 0,
+        "errors": 0,
+        "missing": 0
+      },
+      "api": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-api/target/spotbugsXml.xml",
+        "sha256": "68cea12d540ad545bbd9744705f0266c7cb15aacec555cb3b12fd896c4cc4b91",
+        "bugs": 0,
+        "errors": 0,
+        "missing": 0
+      },
+      "web": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-web/target/spotbugsXml.xml",
+        "sha256": "b9ce692a0791b76891e241d6abb416c2703c39531ad0e07554c435dbca01e97b",
+        "bugs": 0,
+        "errors": 0,
+        "missing": 0
+      },
+      "batch": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-batch/target/spotbugsXml.xml",
+        "sha256": "79389e50d0bca28c1549b6784abf1d8102fe5d2eff1238b2c3beebddf95c7f28",
+        "bugs": 0,
+        "errors": 0,
+        "missing": 0
+      }
+    },
+    "currentAllMainInputsEqualPinnedNormalBuild": true,
+    "javaOnlyCrossSourceBinding": {
+      "referenceSource": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+      "currentSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+      "allJavaPomInputHashesEqual": true,
+      "all1844CodeDebugClassBytesEqual": true,
+      "onlyStaticProofReused": true,
+      "oldRuntimeOrTestSuccessTransferred": false
+    }
+  },
+  "files": {
+    "static-manifest.safe.json": "a63c3105c069743a4998ba443bdf6484ece01adf26b2178e92ccc550e59fc0c4",
+    "static-pmd.xml": "1e9c9e3b544a783c1acc993a5ddfb7aaceadb7dad26e296afc9762a48225359e",
+    "static-checkstyle.xml": "5d548cbee4732fe8aa0919d18570c6c00551c336aff4511af43242002f908850",
+    "static-pmd.stdout": "9402d396cc8bd5ae3eeac9ffd96f8e8e7011d1e131e28f78bd093e8e196b2ffc",
+    "static-pmd.stderr": "fb27932ec5539a703f0038df7c38e057ac3395e0b1e79554b415e6c30d9b1e3b",
+    "static-checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "static-checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-manifest.safe.json": "94c36148f79e7908417bb77e2182f11601c5f876e60093548a61c5177aaaa22d",
+    "compile-format.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-format.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-test-compile.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-test-compile.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "testsExecuted": 0,
+  "BUG2357": "FIVE_DUPLICATE_LITERAL_VIOLATIONS_FIXED_RETEST_PENDING_UNIT",
+  "YKT2102": "ALL_CURRENT_TEST_OCCURRENCES_CHECKED_RETEST_PENDING"
+}

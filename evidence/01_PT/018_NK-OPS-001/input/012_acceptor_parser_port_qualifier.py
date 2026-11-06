@@ -5,6 +5,8 @@ import xml.etree.ElementTree as E
 import pg9666_pagination_static as r
 root=Path.cwd();runs=root.parent/'pgpt-runs/PG379';tc=root.parent/'toolchain';jdk=tc/'jdk-25.0.4/bin';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();phase=sys.argv[1];profile=sys.argv[2];external=profile.endswith('.json');assert phase in {'prepare','static','run','post'} and (external or profile in {'range','verified','audit','receipt','login_audit','login_attempt','inbound','snapshot','run_reference','metadata','expiry','backup','batch_run','cleanup_step','cleanup_query','inspection_summary','pressure','topology','acceptor'})
 stateParserExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/089_unit_state_parser_bytes.json'
+authVerifierExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/090_authentication_verifier_jdbc.json'
+javaStaticCrossSource=stateParserExternal or authVerifierExternal
 errorRestoreExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/080_error_dispatch_restore.json'
 routerExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/077_internal_error_router.json','evidence/01_PT/018_NK-OPS-001/input/078_internal_error_router_style.json'}
 securityAuditExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/072_web_security_audit.json','evidence/01_PT/018_NK-OPS-001/input/073_web_security_audit_style.json','evidence/01_PT/018_NK-OPS-001/input/074_web_security_audit_logger.json'}
@@ -25,10 +27,14 @@ viewProfiles={
  'evidence/01_PT/018_NK-OPS-001/input/061_notification_list_projection_fixture.json':('NotificationListViewModel','NotificationListProjectionPortTest')}
 viewExternal=external and profile in viewProfiles
 if external:
- assert stateParserExternal or errorRestoreExternal or routerExternal or securityAuditExternal or csrfExternal or formExternal or sessionExternal or requestExternal or viewExternal or observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
+ assert authVerifierExternal or stateParserExternal or errorRestoreExternal or routerExternal or securityAuditExternal or csrfExternal or formExternal or sessionExternal or requestExternal or viewExternal or observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
  externalCfg=json.loads((root/profile).read_text())
  assert externalCfg['preflightDecision']=='PT_DEFAULT' and externalCfg['actualBackendActions']==0
- if stateParserExternal:
+ if authVerifierExternal:
+  assert externalCfg['module']=='api' and externalCfg['main']=='AuthenticationContextVerifier' and externalCfg['mainPackage']=='security'
+  assert externalCfg['tests']==['AuthenticationVerifierJdbcPortTest'] and externalCfg['testPackages']==['security']
+  assert externalCfg['physical']==2 and externalCfg['abstract']==0 and externalCfg['expected']==6
+ elif stateParserExternal:
   assert externalCfg['module']=='batch' and externalCfg['main']=='UnitStateParser' and externalCfg['mainPackage']=='platform'
   assert externalCfg['tests']==['UnitStateParserBytePortTest'] and externalCfg['testPackages']==['platform']
   assert externalCfg['physical']==1 and externalCfg['abstract']==0 and externalCfg['expected']==6
@@ -98,12 +104,12 @@ cfg={
  'receipt':dict(program='016_NK-WEB-002',main='ReceiptReferenceRepository',mainPackage='receipt',tests=['ReceiptReferencePortTest'],testPackages=['receipt'],prepare='pg18884-receipt-jdbc-port-compile-v1',static='pg18886-receipt-jdbc-port-static-v1',unit='pg18888-receipt-jdbc-port-nine-unit-v1',public='PG18888-receipt-jdbc-port-nine-v1',physical=2,abstract=1,expected=9,session='PG18888-RECEIPT-JDBC-PORT-9')
 }[profile] if not external else externalCfg
 module=cfg.get('module','web');mainNames=[cfg.get('mainPackage','media')+'/'+cfg['main'],*cfg.get('additionalMain',[])];mains=['src/schubert-nk-'+module+'/src/main/java/dev/codex/schubert/nk/'+module+'/'+n+'.java' for n in mainNames];main=mains[0];testPackages=cfg.get('testPackages',['media']*len(cfg['tests']));tests=['src/schubert-nk-'+module+'/src/test/java/dev/codex/schubert/nk/'+module+'/'+pkg+'/'+n+'.java' for n,pkg in zip(cfg['tests'],testPackages)];selected=['dev.codex.schubert.nk.'+module+'.'+pkg.replace('/','.')+'.'+n for n,pkg in zip(cfg['tests'],testPackages)];expectedCount=cfg.get('expected',8);core=cfg.get('coreSource','7d2c2fb64711531db8898d49b4b377670b58ff87');comp=runs/cfg.get('normalCompileSlot','pg19270-acceptor-parser-six-main-compile-v1');base=json.loads((comp/'manifest.safe.json').read_text());assert base['actualExit']==0 and base['source']==core
-if stateParserExternal:assert sha(comp/'manifest.safe.json')==cfg['normalCompileManifestSha256']
+if javaStaticCrossSource:assert sha(comp/'manifest.safe.json')==cfg['normalCompileManifestSha256']
 for n,h in base['begin']['inputHashes'].items():assert sha(root/n)==h
 for j in base['jars'].values():assert sha(j['path'])==j['sha256']
 console=tc/'junit-platform-console-standalone-1.13.4.jar';assert sha(console)=='3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892';deps=[Path(base['jars'][n]['path']) for n in ['protocol',module]]
 if external:
- if not observationExternal and not viewExternal and not requestExternal and not sessionExternal and not formExternal and not csrfExternal and not securityAuditExternal and not routerExternal and not errorRestoreExternal and not stateParserExternal:deps.append(Path(base['jars']['bootstrap']['path']))
+ if not observationExternal and not viewExternal and not requestExternal and not sessionExternal and not formExternal and not csrfExternal and not securityAuditExternal and not routerExternal and not errorRestoreExternal and not stateParserExternal and not authVerifierExternal:deps.append(Path(base['jars']['bootstrap']['path']))
  deps.append(tc/'m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar')
  if securityAuditExternal:
   assert len(cfg['gsonDependencies'])==2
@@ -162,7 +168,7 @@ if phase=='static':
  for key,path,tag in [('pmd',slot/'pmd.xml','violation'),('checkstyle',slot/'checkstyle.xml','error')]:
   x=E.parse(path).getroot();nodes=[n for n in x.iter() if n.tag.rsplit('}',1)[-1]==tag];errors=[n for n in x.iter() if n.tag.rsplit('}',1)[-1] in (('error','configerror') if key=='pmd' else ())];reports[key]={'path':str(path),'sha256':sha(path),'findings':len(nodes),'processingErrors':len(errors),'items':[dict(n.attrib,message=' '.join(''.join(n.itertext()).split())[:300]) for n in nodes]}
  old=runs/cfg.get('sixStaticSlot','pg19272-acceptor-parser-six-static-reactor-v1')/'manifest.safe.json';sb=json.loads(old.read_text());assert sb['actualExit']==0
- if stateParserExternal:
+ if javaStaticCrossSource:
   assert sb['source']==cfg['staticJavaReferenceSource'];ref=json.loads((runs/cfg['staticJavaReferenceNormalSlot']/'manifest.safe.json').read_text());assert ref['actualExit']==0 and ref['source']==sb['source']
   oldInputs=ref['begin']['inputHashes'];newInputs=base['begin']['inputHashes'];javaPom=lambda n:n.endswith('.java') or n.endswith('/pom.xml') or n=='pom.xml'
   assert {n:h for n,h in oldInputs.items() if javaPom(n)}=={n:h for n,h in newInputs.items() if javaPom(n)}
@@ -181,7 +187,7 @@ if phase=='static':
  if external:assert sha(old)==cfg['sixStaticManifestSha256']
  for n,x in sb['reports'].items():
   assert sha(x['path'])==x['sha256'];tree=E.parse(x['path']).getroot();assert not tree.findall('.//BugInstance') and not tree.findall('.//MissingClass') and not tree.findall('.//Error')
- assert all(sha(root/f)==h for f,h in pm['inputHashes'].items());value={'coreSource':core,'compileManifestSha256':sha(prepared/'manifest.safe.json'),'inputHashes':pm['inputHashes'],'stages':stages,'reports':reports,'sameSourceSixMainSpotBugs':{'manifest':str(old),'sha256':sha(old),'reports':sb['reports'],'currentAllMainInputsEqualPinnedNormalBuild':True,'javaOnlyCrossSourceBinding':staticBinding if stateParserExternal else None},'rules':{str(f):sha(f) for f in [rules/'pmd.xml',rules/'checkstyle.xml']},'suppressionAdded':False,'testsExecuted':0,'formalUpdated':False,'driverSha256':sha(__file__),'configHash':cfgHash};(slot/'manifest.safe.json').write_text(json.dumps(value,indent=2)+'\n');print(json.dumps({'manifestSha256':sha(slot/'manifest.safe.json'),'findings':{k:[v['findings'],v['processingErrors']] for k,v in reports.items()},'stages':{k:v['actualExit'] for k,v in stages.items()}}));raise SystemExit(0)
+ assert all(sha(root/f)==h for f,h in pm['inputHashes'].items());value={'coreSource':core,'compileManifestSha256':sha(prepared/'manifest.safe.json'),'inputHashes':pm['inputHashes'],'stages':stages,'reports':reports,'sameSourceSixMainSpotBugs':{'manifest':str(old),'sha256':sha(old),'reports':sb['reports'],'currentAllMainInputsEqualPinnedNormalBuild':True,'javaOnlyCrossSourceBinding':staticBinding if javaStaticCrossSource else None},'rules':{str(f):sha(f) for f in [rules/'pmd.xml',rules/'checkstyle.xml']},'suppressionAdded':False,'testsExecuted':0,'formalUpdated':False,'driverSha256':sha(__file__),'configHash':cfgHash};(slot/'manifest.safe.json').write_text(json.dumps(value,indent=2)+'\n');print(json.dumps({'manifestSha256':sha(slot/'manifest.safe.json'),'findings':{k:[v['findings'],v['processingErrors']] for k,v in reports.items()},'stages':{k:v['actualExit'] for k,v in stages.items()}}));raise SystemExit(0)
 head=sys.argv[3];slot=runs/cfg['unit'];session=cfg['session'];prefixes=['dev/codex/schubert/nk/'+module+'/'+n for n in mainNames]
 if phase=='run':
  assert not slot.exists();assert subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==head;slot.mkdir();r.SLOT=slot
@@ -280,6 +286,10 @@ if stateParserExternal:
  initializedState=set(re.findall(r"Initializing '([^']+)",(slot/'class-init.log').read_text()));allowedState={'dev/codex/schubert/nk/batch/platform/'+n for n in ['UnitStateParser','ApplicationUnit','StopGateException','StopGateFailure']}
  unexpectedState={n for n in initializedState if n.startswith('dev/codex/schubert/nk/') and not (n in allowedState or n.startswith('dev/codex/schubert/nk/batch/platform/UnitStateParserBytePortTest'))};assert not unexpectedState,sorted(unexpectedState)
  assert not any(n.startswith(('dev/codex/schubert/nk/storage/','dev/codex/schubert/nk/bootstrap/','org/apache/activemq/','io/netty/','com/zaxxer/','io/micrometer/')) for n in initializedState)
+if authVerifierExternal:
+ initializedAuth=set(re.findall(r"Initializing '([^']+)",(slot/'class-init.log').read_text()));allowedAuth={'dev/codex/schubert/nk/api/'+n for n in ['security/AuthenticationContextVerifier','security/AuthenticationContextVerifier$VerifiedSession','security/ContextHash','security/AuthenticationInfrastructureException','security/AuthenticationContextException','security/AuthenticatedActor','domain/Role','database/RequiredColumn']}
+ unexpectedAuth={n for n in initializedAuth if n.startswith('dev/codex/schubert/nk/') and not (n in allowedAuth or n=='dev/codex/schubert/nk/protocol/header/AuthenticationContext' or n.startswith('dev/codex/schubert/nk/api/security/AuthenticationVerifierJdbcPortTest'))};assert not unexpectedAuth,sorted(unexpectedAuth)
+ assert not any(n.startswith(('dev/codex/schubert/nk/storage/','dev/codex/schubert/nk/bootstrap/','org/apache/activemq/','org/postgresql/','io/netty/','com/zaxxer/','io/micrometer/','java/sql/DriverManager')) for n in initializedAuth)
 physical=m['physical'];assert len(physical)==cfg['physical']
 with zipfile.ZipFile(deps[1]) as z:
  for n,h in physical.items():assert sha(slot/'component'/(n+'.class'))==h and hashlib.sha256(z.read(n+'.class')).hexdigest()==h
