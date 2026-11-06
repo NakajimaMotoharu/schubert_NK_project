@@ -67,14 +67,16 @@ class CanonicalEventWriterTest(unittest.TestCase):
     """BUG2356: real writer against a temporary ledger, never the shared live ledger."""
     def exercise(self, callback):
         live = pg998_metrics.EVENTS
-        original = hashlib.sha256(live.read_bytes()).hexdigest()
+        original_open = Path.open
+        def owned_open(path, *args, **kwargs):
+            self.assertNotEqual(live,path,'metadata regression must not open the live ledger')
+            return original_open(path,*args,**kwargs)
         with tempfile.TemporaryDirectory(prefix='pgpt-owned-event-writer-') as directory:
             events = Path(directory) / 'events.jsonl'
             events.write_text(json.dumps(dict(eventId='PGPT-20261008-0001'))+'\n')
-            with patch.object(pg998_metrics,'EVENTS',events),patch.object(pg998_metrics.subprocess,'check_output',return_value='a'*40):
+            with patch.object(pg998_metrics,'EVENTS',events),patch.object(pg998_metrics.subprocess,'check_output',return_value='a'*40),patch.object(Path,'open',owned_open):
                 callback(events)
         self.assertEqual(live, pg998_metrics.EVENTS)
-        self.assertEqual(original, hashlib.sha256(live.read_bytes()).hexdigest())
 
     def values(self):
         return dict(costRevision='WBS-cost-v2-20261007-PMO',workCategory='ADMIN',
