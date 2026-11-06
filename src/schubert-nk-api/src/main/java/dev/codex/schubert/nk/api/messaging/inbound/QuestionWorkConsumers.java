@@ -17,7 +17,7 @@ import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
  * NK-ASY-001/MSG-002; ASY001..009/MQ006..010; UI213231; SS312321342/SSC156;
  * PG-D333/PT-JMS-CORE-001..006. Outer owner signals stop before draining this context.
  */
-public final class QuestionWorkConsumers implements AutoCloseable {
+public final class QuestionWorkConsumers implements InboundConsumerGroup {
   private final JMSContext context;
   private final Consumer<Throwable> onUnconfirmed;
   private final Object lock = new Object();
@@ -137,8 +137,13 @@ public final class QuestionWorkConsumers implements AutoCloseable {
   }
 
   @Override
-  public void close() {
+  public void stopDelivery() {
     halted.set(true);
+  }
+
+  @Override
+  public void close() {
+    stopDelivery();
     synchronized (lock) {
       if (closed) return;
       try {

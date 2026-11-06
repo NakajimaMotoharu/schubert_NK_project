@@ -19,7 +19,7 @@ import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
  * NK-MSG-001/002; RD MQ-006/008/010,MON-003/005; UI212/231/251; SS312 section 11,321 sections 6-10;
  * PG228/PT-JMS-015.
  */
-public final class WebLogConsumers implements AutoCloseable {
+public final class WebLogConsumers implements InboundConsumerGroup {
   private final JMSContext context;
   private final Consumer<Throwable> onUnconfirmed;
   private final AtomicBoolean terminal = new AtomicBoolean();
@@ -157,8 +157,13 @@ public final class WebLogConsumers implements AutoCloseable {
   }
 
   @Override
-  public void close() {
+  public void stopDelivery() {
     halted.set(true);
+  }
+
+  @Override
+  public void close() {
+    stopDelivery();
     synchronized (closeLock) {
       if (closed) return;
       try {

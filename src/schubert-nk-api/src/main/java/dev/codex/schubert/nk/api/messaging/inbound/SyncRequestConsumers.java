@@ -22,7 +22,7 @@ import org.jspecify.annotations.Nullable;
  * nonzero process exit after the terminal callback. Trace: NK-MSG-001; RD MQ-003/008/010; UI 231;
  * SS 311/321 sections 6-7; PG224/PT-JMS-013.
  */
-public final class SyncRequestConsumers implements AutoCloseable {
+public final class SyncRequestConsumers implements InboundConsumerGroup {
   public static final int CONCURRENCY = 4;
 
   private final List<JMSContext> contexts;
@@ -168,8 +168,13 @@ public final class SyncRequestConsumers implements AutoCloseable {
   }
 
   @Override
-  public void close() {
+  public void stopDelivery() {
     halted.set(true);
+  }
+
+  @Override
+  public void close() {
+    stopDelivery();
     synchronized (closeLock) {
       if (closed) return;
       try {

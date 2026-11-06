@@ -20,14 +20,14 @@ import org.jspecify.annotations.Nullable;
  */
 public final class ApiMessagingRuntime implements AutoCloseable {
   private static final int MAXIMUM_CONSUMER_GROUPS = 3;
-  private final List<AutoCloseable> groups;
+  private final List<InboundConsumerGroup> groups;
   private final AtomicBoolean terminal;
   private final AtomicBoolean stopping = new AtomicBoolean();
   private final Object closeLock = new Object();
   private final boolean[] groupClosed = new boolean[MAXIMUM_CONSUMER_GROUPS];
   private boolean closed;
 
-  private ApiMessagingRuntime(List<AutoCloseable> groups, AtomicBoolean terminal) {
+  private ApiMessagingRuntime(List<InboundConsumerGroup> groups, AtomicBoolean terminal) {
     this.groups = groups;
     this.terminal = terminal;
   }
@@ -155,7 +155,7 @@ public final class ApiMessagingRuntime implements AutoCloseable {
           if (terminal.compareAndSet(false, true)) onFatal.run();
         };
     // BUG1537: no first-add backing-array allocation after a group already owns JMS contexts.
-    var groups = new ArrayList<AutoCloseable>(MAXIMUM_CONSUMER_GROUPS);
+    var groups = new ArrayList<InboundConsumerGroup>(MAXIMUM_CONSUMER_GROUPS);
     var runtime = new ApiMessagingRuntime(groups, terminal);
     try {
       groups.add(
@@ -230,12 +230,15 @@ public final class ApiMessagingRuntime implements AutoCloseable {
     stopping.set(true);
     synchronized (closeLock) {
       if (closed) return;
+      // SSC314/BUG2407: stop every admission gate before the first child close can block.
+      // Index traversal uses the already prepared owner list without allocating an iterator.
+      for (int index = 0; index < groups.size(); index++) groups.get(index).stopDelivery();
       closeGroups(groups, groupClosed);
       closed = true;
     }
   }
 
-  private static void closeGroups(List<AutoCloseable> groups, boolean[] groupClosed) {
+  private static void closeGroups(List<InboundConsumerGroup> groups, boolean[] groupClosed) {
     Throwable failure = null;
     for (int index = groups.size() - 1; index >= 0; index--) {
       if (groupClosed[index]) continue;
