@@ -44,4 +44,25 @@ if phase=='run':
   for t in E.parse(p).getroot().findall('testcase'):cases.append(dict(classname=t.get('classname'),name=t.get('name'),failure=bool(t.findall('failure')),error=bool(t.findall('error')),skipped=bool(t.findall('skipped'))))
  value=dict(actualExit=stages['unit']['actualExit'],begin=begin,stages=stages,cases=cases,tests=len(cases),failures=sum(x['failure'] for x in cases),errors=sum(x['error'] for x in cases),skipped=sum(x['skipped'] for x in cases),physical=physical,formalUpdated=False);write(unit/'manifest.json',value);print(json.dumps({k:value[k] for k in ['actualExit','tests','failures','errors','skipped']}));sys.exit(value['actualExit'])
 assert phase=='post'
-raise SystemExit('Strict post implemented only from actual terminal and original pins, no Unit replay')
+assert not pub.exists();m=load(unit/'manifest.json');assert m['actualExit']==0 and m['tests']==8 and all(m[k]==0 for k in ['failures','errors','skipped']);assert m['begin']['inputHashes']==inputs and m['begin']['source']==source
+expected=set()
+for n,cls in zip(tests,selected):
+ expected.update((cls,v+'()') for v in re.findall(r'@Test\s+void\s+(\w+)\s*\(',Path(n).read_text()))
+actual={(v['classname'],v['name']) for v in m['cases']};assert actual==expected and len(expected)==8
+coverage={node.get('name'):{x.get('type'):dict(covered=int(x.get('covered')),missed=int(x.get('missed'))) for x in node.findall('counter')} for node in E.parse(unit/'coverage.xml').getroot().findall('.//package/class')}
+assert set(coverage)==set(m['physical']) and all(v['missed']==0 for cs in coverage.values() for v in cs.values())
+four={k:sum(cs.get(k,{}).get('covered',0) for cs in coverage.values()) for k in ['LINE','METHOD','CLASS','BRANCH']};assert four==dict(LINE=33,METHOD=5,CLASS=1,BRANCH=28)
+for key,stage in m['stages'].items():assert stage['actualExit']==0 and not stage['timedOut'] and sha(unit/(key+'.stdout'))==stage['stdoutSha256'] and sha(unit/(key+'.stderr'))==stage['stderrSha256']
+classes=set(re.findall(r"Initializing '([^']+)",(unit/'class-init.log').read_text()));allowed=['EncryptedSessionCsrfTokenRepository','WebCsrfToken','EncryptedSessionCsrfPortTest']
+assert not any(n.startswith(('dev/codex/schubert/nk/','org/postgresql/','com/microsoft/playwright/','org/apache/activemq/','java/net/Socket','sun/nio/ch/SocketChannelImpl','org/springframework/security/core/context/SecurityContextHolder','javax/crypto/Cipher','dev/codex/schubert/nk/storage/','dev/codex/schubert/nk/bootstrap/')) for n in classes)
+assert not any(n.startswith('dev/codex/schubert/nk/') and n!='dev/codex/schubert/nk/web/session/SessionStoreException' and not any(n.startswith(pkg+p) for p in allowed) for n in classes)
+ex=(unit/'execinfo.stdout').read_text();ids={n:crc for crc,n in re.findall(r'class 0x([0-9a-f]{16}) (\S+)',(unit/'classinfo.stdout').read_text())};assert set(ids)==set(m['physical']) and ex.count('Session "')==1 and 'Session "'+session+'"' in ex
+for n,crc in ids.items():assert re.search(r'^'+crc+r'\s+\d+ of\s+\d+\s+'+re.escape(n)+r'$',ex,re.M)
+static=load(sta/'manifest.json');classification=load(r/'evidence/01_PT/015_NK-WEB-001/evidence/PG21162-csrf-session-static-v1/manifest.json');assert static['inputHashes']==inputs==classification['inputHashes'];assert classification['pmdRaw']==5 and classification['applicableViolations']==classification['checkstyle']==classification['spotbugs']==classification['processingErrors']==0
+assert not static['reports']['spotbugs']['bugs'] and not static['reports']['spotbugs']['missing'] and not static['reports']['spotbugs']['errors']
+pub.mkdir();files={}
+for p in [*unit.iterdir(),*sorted((unit/'xml').glob('TEST-*.xml'))]:
+ if p.is_file():
+  name='original-class-init.stdout' if p.name=='class-init.log' else 'original-manifest.json' if p.name=='manifest.json' else p.name;assert name not in files;shutil.copyfile(p,pub/name);files[name]=sha(pub/name)
+value=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),source=source,normalSource=nm['source'],productionCoreMain=nm['source'],tests=8,newMethods=8,requalifiedExistingInvocations=0,failures=0,errors=0,skipped=0,selectedMethods=sorted(actual),inputHashes=inputs,physicalHashes=m['physical'],classIds=ids,coverage=coverage,fourCounters=four,session=session,originalManifest=dict(path=str(unit/'manifest.json'),sha256=sha(unit/'manifest.json')),originalXmlPins={str(p):sha(p) for p in (unit/'xml').glob('TEST-*.xml')},compileManifest=dict(path=str(pre/'manifest.json'),sha256=sha(pre/'manifest.json')),realBaselineAccess=False,realChrExecution=False,oldExecUnion=False,manualCoverageExclusions=[],staticManifest=dict(path=str(sta/'manifest.json'),sha256=sha(sta/'manifest.json')),driverSha256=inputs[driver],producerGitArtifact=producerGitArtifact,verifierGitArtifact=verifierGitArtifact,formalUpdated=False,newAcceptance=0,files=files)
+write(pub/'manifest.json',value);print(json.dumps(dict(actualExit=0,tests=8,newMethods=8,physical=1,fourCounters=four,manifestSha256=sha(pub/'manifest.json'))))
