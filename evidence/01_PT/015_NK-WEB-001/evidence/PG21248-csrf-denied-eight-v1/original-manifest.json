@@ -1,0 +1,192 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "005cb84da4c67f5dbd92e62d309cd43226970abb",
+    "normalSource": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+    "normalManifestSha256": "1db34d8f2ccee9fc90244bea86c3e446be0c0e010c66516a1e25c92df3426618",
+    "inputHashes": {
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java": "5b6b823ad0ea2d5a98b8f09711827b51c290c3ed44e04fb1615a3a37406dfa47",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfDeniedHandler.java": "b4f450f2056ad1948b5474fdf1b3a3f8afd3a8440e4bba6dfeec97c3da653c67",
+      "evidence/01_PT/015_NK-WEB-001/input/009_csrf_denied_port_qualifier.py": "5a264971d2057db9f48e80a38673a236fbe95111bf4e3b6b866bec33884c2a3b"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "28cdedd219fbf7137d4e7e4c5776824ce817d932b96b83d957d29b0f4c1bde38",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": "d33f6a79a723bbc07e66b45b8e413df561cbaad5ad711162ed9a5903fb49720a",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar": "941ced476427bde2533872f293da535fd0258de3f3a650a7f1bfe01ed2927302",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar": "8a31f465f3593bf2351531a5c952014eb839da96a605b5825b93dd54714c48c4",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar": "98a5011baa78df36fb184e6ce0e8e086ca9a64fcdd8f161c0a96475a3a0907bd",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-web/7.1.1/spring-security-web-7.1.1.jar": "dece134a2332c976a2c94ecf13f816c64e8ea7f2139795485afe655fba0408f3",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar": "4667724877f1d37a689202da191e23efa7657c62eef93ccdac406eccfe5cdd0a"
+    },
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "driverSha256": "5a264971d2057db9f48e80a38673a236fbe95111bf4e3b6b866bec33884c2a3b",
+    "compileManifestSha256": "eee964554b9cb36f282a4fb2b7d600963fc64f4a85e21bbd227960f92ef41f58",
+    "selected": [
+      "dev.codex.schubert.nk.web.security.CsrfDeniedHandlerPortTest"
+    ],
+    "existingMethodsSourceRequalification": 0,
+    "newMethods": 8,
+    "expectedTests": 8,
+    "realBaselineAccess": false,
+    "realChrExecution": false,
+    "session": "PG21248-CSRF-DENIED8",
+    "startUTC": "2026-11-06T16:46:57.679182+00:00"
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T16:46:57.679349+00:00",
+      "endUTC": "2026-11-06T16:46:58.796746+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Dspring.security.strategy=MODE_THREADLOCAL",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21248-csrf-denied-eight-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21248-csrf-denied-eight-unit-v1/jacoco.exec,sessionid=PG21248-CSRF-DENIED8,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21248-csrf-denied-eight-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21254-csrf-denied-eight-final-compile-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-web/7.1.1/spring-security-web-7.1.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21248-csrf-denied-eight-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.web.security.CsrfDeniedHandlerPortTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "1449ab4f39ecb7bc0b0858682c4a7d611f0f54544bf2c6f20c83a566bbfd7ea7",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T16:46:58.798923+00:00",
+      "endUTC": "2026-11-06T16:46:58.913476+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21248-csrf-denied-eight-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21248-csrf-denied-eight-unit-v1/component",
+        "--sourcefiles",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/main/java",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21248-csrf-denied-eight-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "21c8930dab98402569a3ecf5acf35f60843c9bf44ca55e7b0ccaded99248b56a",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T16:46:58.913826+00:00",
+      "endUTC": "2026-11-06T16:46:59.028647+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21248-csrf-denied-eight-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "d00874c3353a7d15cfa7fd87c08177329322df8c31a407bbc0c196f5197e89f4",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T16:46:59.028971+00:00",
+      "endUTC": "2026-11-06T16:46:59.143824+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21248-csrf-denied-eight-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e460f26d1dfec769f0243ac7da0c7f3275fa05319ea74a16495ef1d5731ff122",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CsrfDeniedHandlerPortTest",
+      "name": "untrustedAuthenticationAndMalformedDisplayInputFailBeforeAudit()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CsrfDeniedHandlerPortTest",
+      "name": "authenticatedSuppliedCsrfCapturesDisplayStringsWithoutLoggingSecretCanary()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CsrfDeniedHandlerPortTest",
+      "name": "terminalCallbackFailuresPreserveIdentityAndDoNotRetryOrContinue()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CsrfDeniedHandlerPortTest",
+      "name": "missingOrWrongTrustedRequestContextStopsBeforeAnyTerminalCallback()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CsrfDeniedHandlerPortTest",
+      "name": "twoWorkerThreadLocalActorsAndRequestAuditsRemainIndependent()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CsrfDeniedHandlerPortTest",
+      "name": "unauthenticatedDenialReturns403AndOneClosedAuditWithoutInspectingException()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CsrfDeniedHandlerPortTest",
+      "name": "authenticatedDenialWithoutSuppliedCsrfKeepsNoDisplaySnapshot()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CsrfDeniedHandlerPortTest",
+      "name": "nullBoundariesRejectBeforeRequestResponseOrAuditCallbacks()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 8,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/web/security/WebCsrfDeniedHandler": "b83283303a54f9ca7823a483b67377d1059a744851160a53e393c9295002b2b2"
+  },
+  "formalUpdated": false
+}

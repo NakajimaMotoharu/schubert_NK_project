@@ -1,0 +1,158 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T01:50:52.228678+09:00",
+  "source": "005cb84da4c67f5dbd92e62d309cd43226970abb",
+  "originalRun": "PG21248",
+  "originalExecSha256": "6bdcdc55b233169bdbf1111c7a52c22483eecd6975558ab0a9eeabe18d617511",
+  "normalWebJarSha256": "d33f6a79a723bbc07e66b45b8e413df561cbaad5ad711162ed9a5903fb49720a",
+  "physicalHashes": {
+    "dev/codex/schubert/nk/web/security/WebCsrfToken": "eeae846eb901e2c78059aa3e9b4f6eae28268a976a2b23947eb54c85722ae84b",
+    "dev/codex/schubert/nk/web/security/WebDisplayContext": "97479a8f41d9c311fc1882ba6e5eda3656473d8cd70fb4b476c0d96a2cc0873b",
+    "dev/codex/schubert/nk/web/security/WebRequestContext": "a342d032fff9391ae8d51232fd51ef16de53fa401d1189acacdbb19e462e6a71",
+    "dev/codex/schubert/nk/web/session/SessionStoreException": "834c44344725062843f77e5bd267e8084119f0988aa40b4643416ee89defef3a"
+  },
+  "executedMethods": {
+    "SessionStoreException": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      }
+    ],
+    "WebRequestContext": [
+      {
+        "name": "<init>",
+        "desc": "(Ljava/util/UUID;Ldev/codex/schubert/nk/web/security/LoginClientAddress;)V"
+      },
+      {
+        "name": "requestId",
+        "desc": "()Ljava/util/UUID;"
+      },
+      {
+        "name": "clientAddress",
+        "desc": "()Ldev/codex/schubert/nk/web/security/LoginClientAddress;"
+      },
+      {
+        "name": "require",
+        "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Ldev/codex/schubert/nk/web/security/WebRequestContext;"
+      },
+      {
+        "name": "existing",
+        "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;"
+      },
+      {
+        "name": "lambda$require$0",
+        "desc": "()Ljava/lang/IllegalStateException;"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "WebDisplayContext": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/view/TopBarViewModel;Ldev/codex/schubert/nk/web/security/WebCsrfToken;)V"
+      },
+      {
+        "name": "captureDenied",
+        "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ljava/util/Optional;)V"
+      },
+      {
+        "name": "capture",
+        "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ldev/codex/schubert/nk/web/session/SessionPrincipal;)V"
+      },
+      {
+        "name": "existing",
+        "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;"
+      },
+      {
+        "name": "topBar",
+        "desc": "()Ldev/codex/schubert/nk/web/view/TopBarViewModel;"
+      },
+      {
+        "name": "toString",
+        "desc": "()Ljava/lang/String;"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "WebCsrfToken": [
+      {
+        "name": "<init>",
+        "desc": "(Ljava/lang/String;)V"
+      },
+      {
+        "name": "parse",
+        "desc": "(Ljava/lang/String;)Ldev/codex/schubert/nk/web/security/WebCsrfToken;"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ]
+  },
+  "allowedMethods": {
+    "WebCsrfToken": [
+      "<clinit>",
+      "<init>",
+      "parse"
+    ],
+    "WebDisplayContext": [
+      "<clinit>",
+      "<init>",
+      "capture",
+      "captureDenied",
+      "existing",
+      "toString",
+      "topBar"
+    ],
+    "WebRequestContext": [
+      "<clinit>",
+      "<init>",
+      "clientAddress",
+      "existing",
+      "lambda$require$0",
+      "requestId",
+      "require"
+    ],
+    "SessionStoreException": [
+      "<init>"
+    ]
+  },
+  "testsReexecuted": 0,
+  "additionalWholeSourceCredit": 0,
+  "dependencyCoverageAccepted": false,
+  "actualSessionCryptoOrTokenGeneration": false,
+  "throwableGraphClassifierCalled": false,
+  "requestIdentityGenerated": false,
+  "stage": {
+    "actualExit": 0,
+    "timedOut": false,
+    "startUTC": "2026-11-06T16:50:52.061418+00:00",
+    "endUTC": "2026-11-06T16:50:52.226700+00:00",
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "report",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21248-csrf-denied-eight-unit-v1/jacoco.exec",
+      "--classfiles",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21262-csrf-denied-dependency-method-witness-v1/component",
+      "--xml",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21262-csrf-denied-dependency-method-witness-v1/dependency-methods.xml"
+    ],
+    "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+    "stdoutSha256": "9685412e6e2d6d5a669c2c3cd1d5e5d75564cc0f553379f26e39522c8327fa9b",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "files": {
+    "report.stdout": "9685412e6e2d6d5a669c2c3cd1d5e5d75564cc0f553379f26e39522c8327fa9b",
+    "report-exit.safe.json": "a801dc08164b51e7cab32ce1780d21fc5845d3209989ee4b2c65630aaa3a1edb",
+    "report-begin.safe.json": "8588fa258834786e6661ef2c1a353a181cb16c5ee48a8007f55b8d6bda9ad9c4",
+    "dependency-methods.xml": "f76dfa3acf96f1bd817978065834a3076b779a42fe14ae0825cb92e1361237b2",
+    "report-process.safe.json": "2db5d760621800564e5e5a4e13b54e9b2f44abddd46b463dce20267a655b87ca",
+    "report.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
