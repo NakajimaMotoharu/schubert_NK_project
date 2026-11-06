@@ -1,0 +1,9 @@
+# Media MVC 閉Bean配線単体結果
+
+2026-11-07T04:17:09.529279+09:00。仕様016126/PT-MED-MVC-BEAN001～002、source dd8c5497481d517be3ce290661a913f419be7459/checker69e6c1f0、Main4217 normal20990/static20992同byte。PG21574一回2/FESabort0/OS0、line2 method2 class1未網羅0、branch自然零N/A ratio null。strict 754f6a1c43e96e527856ecf9d30b8a944d0a6ebbdafd2f4328aed0e4f82e1391、独立21582 f31c68cb805b5d0fc262cf041202ba51e864899c4760b115819e0ce315729221。全input/元XML/command/exit/環境/CRC/単一execを照合、旧exec合算・除外・成功再演0。
+
+公開annotation・四port Bean署名と四null/client invalid service audit・fresh返却だけ。fresh元exec十七依存21578 596b76415927f96c1d0fc8661f4546195030c48f0845b0b6ba7c4f22a07aafeb、既共通十三samebyte exact descriptor＋当四constructor/local version/timestamp初期化のみ。Controller method/descriptor exchange/file read/Range配信/audit record/session/DB/crypto/ID/Root/VM/held四0。参照WebMVC init/invoke0、SDK全syscall0は未測定。共通fixture不変・共通製造費再加算0。
+
+BUG2394/YKT2139はUnit前にUTF-2工具誤指定を登録、七工具UTF-8へ修正。旧21570/21572保全、新21590compile0/21592 raw1既proxy loader非該当・適用0CS0/SB同byte0、21574 argv UTF-8。21596は過去六runの元argv/XML/ASCII assertionの静的影響照合のみ、元effective charset未測定を明示し過去成功の書換・再演0。有限工具範囲CLOSED、製品仕様期待変更0。
+
+累計51対象unique377=Java273+HTML97+CSS7、重複Router8別枠、wholeJava84/原282交差64残218/partial18残62。新leaf0/正式1964PT53scope/歴史17of190/工数null。485overlay/486pointerのみ再束縛・固定計画hash不変・元candidate監査HOLD。PGPT-20261008-4106→PGPT-20261008-4107 原.75/2/4 cap6、共有0pp/ordinary31/all43/群前gap0UNKNOWN配賦無し、N/Tnull。usage04:02:26次05:02:26/cursor維持。実Browser/CHR/native/QA051final/451別未完。次=Continue approved independent ordinary PG/PT: reconcile missing Main against both remaining-work seed and strict saved-proof index before creating Tests. Inspect complete dependencies for next Web factory/Servlet or another independent business port. Do not replay known successes. Keep Main4217/normal20990/sixStatic20992, actual session/Browser/native/CHR/QA051final/global451 and Root/VM/cohort/held4 holds. No new formal/WBS/effort acceptance.
