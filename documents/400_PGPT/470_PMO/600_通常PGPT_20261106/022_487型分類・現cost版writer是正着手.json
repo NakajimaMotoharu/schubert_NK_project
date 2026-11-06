@@ -1,0 +1,44 @@
+{
+  "atJST": "2026-11-06T19:51:58.661837+09:00",
+  "groupId": "PGPT-487-EVENT-WRITER-SCHEMA-REPAIR-20261106",
+  "sourceBefore": "ef997bc294f9e365a765dbaa10bf7386aa25eca4",
+  "costOwner": "WBS-K03.02",
+  "estimateAtGroupStartPp": {
+    "low": 0.25,
+    "base": 0.75,
+    "high": 2
+  },
+  "capPp": 3,
+  "chargedToSV": false,
+  "quotaBefore": {
+    "usedPercent": 35,
+    "remainingPercent": 65,
+    "resetsAt": 1794395640
+  },
+  "quotaReceipt": {
+    "sha256": "87eed3e7acdf98c0cc2ee629917055bcd1275ec4ef5b0bec3ac8920464960a18",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-06T10:51:58.538Z",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 35,
+        "remainingPercent": 65,
+        "resetsAt": 1794395640,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION",
+    "path": "/home/mini/codex/project1/work/PMO/pgpt-completion-stage-20261102/quota-receipts/87eed3e7acdf98c0cc2ee629917055bcd1275ec4ef5b0bec3ac8920464960a18.json"
+  },
+  "preflight": {
+    "decision": "PT_DEFAULT_METADATA_ONLY",
+    "target": "BUG2356/YKT2101 canonical writer/current cost revision and recent12 record overlay",
+    "fixtures": "TempDir events/receipt only, fake/no actual remote/VM/Product; no real events touched by tests",
+    "scope": "Correct existing pg998_metrics writer current484 cost revision support; run isolated TempDir metadata regression only, real events unchanged by tests. Append recent12 event projection corrections without changing raw history/cost/time/source/results, preserve older schema304/328 applicability backlog. Use canonical writer for subsequent stages, all Product/HOLD untouched.",
+    "holds": "Unrelated Root/VM/held4/QA055/native/CHR/whole451 untouched; no charges/reset/model changes"
+  },
+  "originalWbsEstimateUnchanged": true
+}

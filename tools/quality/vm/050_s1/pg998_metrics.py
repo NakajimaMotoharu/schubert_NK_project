@@ -57,8 +57,12 @@ def canonical_fields(values,event_type):
 
 def estimate_identity(values):
     revision=values.get('costRevision','PMO-remaining-v3-20261010')
-    paths={'PMO-remaining-v3-20261010':V3,'PMO-remaining-v4-20261018':V4}
+    paths={'PMO-remaining-v3-20261010':V3,'PMO-remaining-v4-20261018':V4,
+           'WBS-cost-v2-20261007-PMO':ROOT/'documents/400_PGPT/470_PMO/484_WBSコスト枠・細分化.json'}
     if revision not in paths:raise ValueError('known frozen estimate revision required')
+    if revision=='WBS-cost-v2-20261007-PMO':
+        if json.loads(paths[revision].read_bytes()).get('revision')!=revision:
+            raise ValueError('current cost file must declare the selected revision')
     digest=hashlib.sha256(paths[revision].read_bytes()).hexdigest()
     if values.get('estimateRevisionSha256',digest)!=digest:
         raise ValueError('estimate revision and explicit hash mismatch')

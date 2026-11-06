@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+import hashlib
 from unittest.mock import patch
 import pg998_metrics
 from pmo_quota_binding import append_start,digest,receipt
@@ -60,5 +61,81 @@ class QuotaWriterTest(unittest.TestCase):
             with self.assertRaises(ValueError):append_start('G',{},file.parent/'absent',digest(value),NOW)
             self.assertEqual([],calls)
         self.exercise(check)
+
+
+class CanonicalEventWriterTest(unittest.TestCase):
+    """BUG2356: real writer against a temporary ledger, never the shared live ledger."""
+    def exercise(self, callback):
+        live = pg998_metrics.EVENTS
+        original = hashlib.sha256(live.read_bytes()).hexdigest()
+        with tempfile.TemporaryDirectory(prefix='pgpt-owned-event-writer-') as directory:
+            events = Path(directory) / 'events.jsonl'
+            events.write_text(json.dumps(dict(eventId='PGPT-20261008-0001'))+'\n')
+            with patch.object(pg998_metrics,'EVENTS',events),patch.object(pg998_metrics.subprocess,'check_output',return_value='a'*40):
+                callback(events)
+        self.assertEqual(live, pg998_metrics.EVENTS)
+        self.assertEqual(original, hashlib.sha256(live.read_bytes()).hexdigest())
+
+    def values(self):
+        return dict(costRevision='WBS-cost-v2-20261007-PMO',workCategory='ADMIN',
+                    wbsLeafIds=['WBS-K03.02'],estimateAtGroupStartPp=dict(low=.25,base=.75,high=2))
+
+    def test_005_current_cost_revision_and_hash_are_explicit(self):
+        values=self.values()
+        revision,digest_value=pg998_metrics.estimate_identity(values)
+        expected=hashlib.sha256((pg998_metrics.ROOT/'documents/400_PGPT/470_PMO/484_WBSコスト枠・細分化.json').read_bytes()).hexdigest()
+        self.assertEqual(values['costRevision'],revision)
+        self.assertEqual(expected,digest_value)
+        with self.assertRaises(ValueError):
+            pg998_metrics.estimate_identity(dict(values,estimateRevisionSha256='0'*64))
+        with self.assertRaises(ValueError):
+            pg998_metrics.estimate_identity(dict(values,costRevision='UNKNOWN'))
+
+    def test_006_legacy_end_becomes_registered_checkpoint_with_same_estimate(self):
+        def check(events):
+            values=self.values()
+            self.assertEqual('PGPT-20261008-0002',pg998_metrics.append('OWNED','GROUP_END',values))
+            record=json.loads(events.read_text().splitlines()[-1])
+            self.assertEqual('CHECKPOINT',record['eventType'])
+            self.assertEqual('GROUP_END',record['requestedLegacyEventType'])
+            self.assertEqual('END',record['groupBoundary'])
+            self.assertEqual('ADMIN',record['workCategory'])
+            self.assertEqual(values['estimateAtGroupStartPp'],record['estimateAtGroupStartPp'])
+            self.assertEqual('PGPT-20261008-0001',record['previousEventId'])
+            self.assertIsNone(record['actualAllocatedPp'])
+        self.exercise(check)
+
+    def test_007_unregistered_category_type_parent_and_identity_never_write(self):
+        def check(events):
+            original=events.read_bytes()
+            variants=[('CHECKPOINT',dict(self.values(),workCategory='DETAIL_NOT_REGISTERED')),
+                      ('UNKNOWN',self.values()),
+                      ('CHECKPOINT',dict(self.values(),wbsLeafIds=['WBS-P018-04'])),
+                      ('CHECKPOINT',dict(self.values(),eventId='old')),
+                      ('CHECKPOINT',dict(self.values(),timeJST=AT))]
+            for event_type,values in variants:
+                with self.assertRaises(ValueError):pg998_metrics.append('OWNED',event_type,values)
+                self.assertEqual(original,events.read_bytes())
+        self.exercise(check)
+
+    def test_008_corrected_coarse_category_keeps_detail_separate(self):
+        def check(events):
+            values=dict(self.values(),workCategory='CONTRACT_AUDIT',workDetailCategory='ORIGINAL_PLAN_CONTRACT_ORACLE_TRACE_REUSE')
+            pg998_metrics.append('OWNED','CHECKPOINT',values)
+            record=json.loads(events.read_text().splitlines()[-1])
+            self.assertEqual('CONTRACT_AUDIT',record['workCategory'])
+            self.assertEqual(values['workDetailCategory'],record['workDetailCategory'])
+            self.assertEqual(values['wbsLeafIds'],record['wbsLeafIds'])
+        self.exercise(check)
+
+    def test_009_current_cost_file_cannot_be_relabelled(self):
+        with tempfile.TemporaryDirectory(prefix='pgpt-owned-cost-revision-') as directory:
+            root=Path(directory)
+            file=root/'documents/400_PGPT/470_PMO/484_WBSコスト枠・細分化.json'
+            file.parent.mkdir(parents=True)
+            file.write_text(json.dumps(dict(revision='DIFFERENT')))
+            with patch.object(pg998_metrics,'ROOT',root):
+                with self.assertRaises(ValueError):
+                    pg998_metrics.estimate_identity(self.values())
 
 if __name__=='__main__':unittest.main()
