@@ -6,7 +6,8 @@ import pg9666_pagination_static as r
 root=Path.cwd();runs=root.parent/'pgpt-runs/PG379';tc=root.parent/'toolchain';jdk=tc/'jdk-25.0.4/bin';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();phase=sys.argv[1];profile=sys.argv[2];external=profile.endswith('.json');assert phase in {'prepare','static','run','post'} and (external or profile in {'range','verified','audit','receipt','login_audit','login_attempt','inbound','snapshot','run_reference','metadata','expiry','backup','batch_run','cleanup_step','cleanup_query','inspection_summary','pressure','topology','acceptor'})
 stateParserExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/089_unit_state_parser_bytes.json'
 authVerifierExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/090_authentication_verifier_jdbc.json'
-javaStaticCrossSource=stateParserExternal or authVerifierExternal
+adminPreludeExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/091_admin_prelude_jdbc.json'
+javaStaticCrossSource=stateParserExternal or authVerifierExternal or adminPreludeExternal
 errorRestoreExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/080_error_dispatch_restore.json'
 routerExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/077_internal_error_router.json','evidence/01_PT/018_NK-OPS-001/input/078_internal_error_router_style.json'}
 securityAuditExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/072_web_security_audit.json','evidence/01_PT/018_NK-OPS-001/input/073_web_security_audit_style.json','evidence/01_PT/018_NK-OPS-001/input/074_web_security_audit_logger.json'}
@@ -27,10 +28,14 @@ viewProfiles={
  'evidence/01_PT/018_NK-OPS-001/input/061_notification_list_projection_fixture.json':('NotificationListViewModel','NotificationListProjectionPortTest')}
 viewExternal=external and profile in viewProfiles
 if external:
- assert authVerifierExternal or stateParserExternal or errorRestoreExternal or routerExternal or securityAuditExternal or csrfExternal or formExternal or sessionExternal or requestExternal or viewExternal or observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
+ assert adminPreludeExternal or authVerifierExternal or stateParserExternal or errorRestoreExternal or routerExternal or securityAuditExternal or csrfExternal or formExternal or sessionExternal or requestExternal or viewExternal or observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
  externalCfg=json.loads((root/profile).read_text())
  assert externalCfg['preflightDecision']=='PT_DEFAULT' and externalCfg['actualBackendActions']==0
- if authVerifierExternal:
+ if adminPreludeExternal:
+  assert externalCfg['module']=='api' and externalCfg['main']=='AdminCommandAuthenticator' and externalCfg['mainPackage']=='security'
+  assert externalCfg['tests']==['AdminPreludeJdbcPortTest'] and externalCfg['testPackages']==['security']
+  assert externalCfg['physical']==2 and externalCfg['abstract']==0 and externalCfg['expected']==8
+ elif authVerifierExternal:
   assert externalCfg['module']=='api' and externalCfg['main']=='AuthenticationContextVerifier' and externalCfg['mainPackage']=='security'
   assert externalCfg['tests']==['AuthenticationVerifierJdbcPortTest'] and externalCfg['testPackages']==['security']
   assert externalCfg['physical']==2 and externalCfg['abstract']==0 and externalCfg['expected']==6
@@ -109,7 +114,7 @@ for n,h in base['begin']['inputHashes'].items():assert sha(root/n)==h
 for j in base['jars'].values():assert sha(j['path'])==j['sha256']
 console=tc/'junit-platform-console-standalone-1.13.4.jar';assert sha(console)=='3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892';deps=[Path(base['jars'][n]['path']) for n in ['protocol',module]]
 if external:
- if not observationExternal and not viewExternal and not requestExternal and not sessionExternal and not formExternal and not csrfExternal and not securityAuditExternal and not routerExternal and not errorRestoreExternal and not stateParserExternal and not authVerifierExternal:deps.append(Path(base['jars']['bootstrap']['path']))
+ if not observationExternal and not viewExternal and not requestExternal and not sessionExternal and not formExternal and not csrfExternal and not securityAuditExternal and not routerExternal and not errorRestoreExternal and not stateParserExternal and not authVerifierExternal and not adminPreludeExternal:deps.append(Path(base['jars']['bootstrap']['path']))
  deps.append(tc/'m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar')
  if securityAuditExternal:
   assert len(cfg['gsonDependencies'])==2
@@ -149,16 +154,16 @@ if phase=='post' and len(sys.argv) in {6,7}:
  producerHash=hashlib.sha256(subprocess.check_output(['git','show',sys.argv[3]+':'+producerRelative])).hexdigest();verifierHead=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
  assert sha(root/verifierRelative)==sha(__file__) and hashlib.sha256(subprocess.check_output(['git','show',verifierHead+':'+verifierRelative])).hexdigest()==sha(__file__)
  producerGitArtifact={'source':sys.argv[3],'path':producerRelative,'sha256':producerHash};verifierGitArtifact={'source':verifierHead,'path':verifierRelative,'sha256':sha(__file__)}
-if phase=='post' and len(sys.argv)==7 and authVerifierExternal:
- reviewRelative=sys.argv[6];assert reviewRelative=='evidence/01_PT/007_NK-AUT-001/input/007_auth_jdbc_jdk_static_review.json' and producerGitArtifact is not None
+if phase=='post' and len(sys.argv)==7 and (authVerifierExternal or adminPreludeExternal):
+ reviewRelative=sys.argv[6];assert reviewRelative==('evidence/01_PT/007_NK-AUT-001/input/009_admin_prelude_jdk_static_review.json' if adminPreludeExternal else 'evidence/01_PT/007_NK-AUT-001/input/007_auth_jdbc_jdk_static_review.json') and producerGitArtifact is not None
  reviewHash=sha(root/reviewRelative);assert hashlib.sha256(subprocess.check_output(['git','show',verifierHead+':'+reviewRelative])).hexdigest()==reviewHash
- authJdkReview=json.loads((root/reviewRelative).read_text());assert authJdkReview['decision']=='STATIC_JDK_EXCEPTION_LOG_WRITER_CLOSURE' and authJdkReview['source']==sys.argv[3] and authJdkReview['originalRun']=='PG20840'
+ authJdkReview=json.loads((root/reviewRelative).read_text());assert authJdkReview['decision']=='STATIC_JDK_EXCEPTION_LOG_WRITER_CLOSURE' and authJdkReview['source']==sys.argv[3] and authJdkReview['originalRun']==('PG20874' if adminPreludeExternal else 'PG20840')
  assert authJdkReview['originalProducerSha256']==producerHash and authJdkReview['originalConfigSha256']==cfgHash and authJdkReview['testsReexecuted']==0 and authJdkReview['actualBackendActions']==0 and not authJdkReview['formalUpdated']
  assert sha(jdk.parent/'lib/modules')==authJdkReview['jdkModulesSha256'] and sha(jdk/'javap')==authJdkReview['jdkJavapSha256']
  assert authJdkReview['classpathDriverProviderEntries'] and all(not v for v in authJdkReview['classpathDriverProviderEntries'].values())
  assert authJdkReview['forbiddenObservedInitialization']==[] and authJdkReview['ordinaryJdbcQualificationOnly'] is True
  for name,h in authJdkReview['staticArtifacts'].items():
-  assert name.startswith('evidence/01_PT/007_NK-AUT-001/evidence/PG20846-auth-jdbc-jdk-static-review-v1/') and '..' not in Path(name).parts
+  assert name.startswith(('evidence/01_PT/007_NK-AUT-001/evidence/PG20846-auth-jdbc-jdk-static-review-v1/','evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/')) and '..' not in Path(name).parts
   assert sha(root/name)==h and hashlib.sha256(subprocess.check_output(['git','show',verifierHead+':'+name])).hexdigest()==h
  authJdkReviewBinding={'source':verifierHead,'path':reviewRelative,'sha256':reviewHash,'testsReexecuted':0}
 elif phase=='post' and len(sys.argv)==7:
@@ -299,9 +304,11 @@ if stateParserExternal:
  initializedState=set(re.findall(r"Initializing '([^']+)",(slot/'class-init.log').read_text()));allowedState={'dev/codex/schubert/nk/batch/platform/'+n for n in ['UnitStateParser','ApplicationUnit','StopGateException','StopGateFailure']}
  unexpectedState={n for n in initializedState if n.startswith('dev/codex/schubert/nk/') and not (n in allowedState or n.startswith('dev/codex/schubert/nk/batch/platform/UnitStateParserBytePortTest'))};assert not unexpectedState,sorted(unexpectedState)
  assert not any(n.startswith(('dev/codex/schubert/nk/storage/','dev/codex/schubert/nk/bootstrap/','org/apache/activemq/','io/netty/','com/zaxxer/','io/micrometer/')) for n in initializedState)
-if authVerifierExternal:
+if authVerifierExternal or adminPreludeExternal:
  initializedAuth=set(re.findall(r"Initializing '([^']+)",(slot/'class-init.log').read_text()));allowedAuth={'dev/codex/schubert/nk/api/'+n for n in ['security/AuthenticationContextVerifier','security/AuthenticationContextVerifier$VerifiedSession','security/ContextHash','security/AuthenticationInfrastructureException','security/AuthenticationContextException','security/AuthenticatedActor','domain/Role','database/RequiredColumn']}
- unexpectedAuth={n for n in initializedAuth if n.startswith('dev/codex/schubert/nk/') and not (n in allowedAuth or n=='dev/codex/schubert/nk/protocol/header/AuthenticationContext' or n.startswith('dev/codex/schubert/nk/api/security/AuthenticationVerifierJdbcPortTest'))};assert not unexpectedAuth,sorted(unexpectedAuth)
+ if adminPreludeExternal:allowedAuth.update({'dev/codex/schubert/nk/api/security/'+n for n in ['AdminCommandAuthenticator','AdminCommandAuthenticator$Mutation','AuthorizationService','AuthorizationException']});allowedAuth.add('dev/codex/schubert/nk/protocol/header/ResultCode')
+ testPrefix='dev/codex/schubert/nk/api/security/'+('AdminPreludeJdbcPortTest' if adminPreludeExternal else 'AuthenticationVerifierJdbcPortTest')
+ unexpectedAuth={n for n in initializedAuth if n.startswith('dev/codex/schubert/nk/') and not (n in allowedAuth or n=='dev/codex/schubert/nk/protocol/header/AuthenticationContext' or n.startswith(testPrefix))};assert not unexpectedAuth,sorted(unexpectedAuth)
  assert not any(n.startswith(('dev/codex/schubert/nk/storage/','dev/codex/schubert/nk/bootstrap/','org/apache/activemq/','org/postgresql/','io/netty/','com/zaxxer/','io/micrometer/','java/sql/DriverInfo','java/net/Socket','sun/nio/ch/SocketChannelImpl')) for n in initializedAuth)
  if 'java/sql/DriverManager' in initializedAuth:
   assert authJdkReview is not None and authJdkReviewBinding is not None
