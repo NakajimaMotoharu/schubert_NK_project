@@ -1,0 +1,87 @@
+{
+  "metadataOnly": true,
+  "actualExit": 0,
+  "terminalObservedUTC": "2026-11-06T06:04:53.794119+00:00",
+  "oldManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG440-full-question-input/manifest.json",
+    "sha256": "4ccf2e176c49e0637e46fcc3ace071c3bffec1c2f033dec04986859512fc4389"
+  },
+  "oldIdentifiedJUnitTests": 1,
+  "oldNodeSubcases": 8,
+  "oldCoverage": {
+    "testId": "PT-QST-JS001",
+    "nodeVersion": "v24.19.0",
+    "subcases": 8,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0,
+    "syntaxExit": 0,
+    "testExit": 0,
+    "lineCoverage": 100,
+    "functionCoverage": 100,
+    "branchCoverage": 100,
+    "productionFiles": 1,
+    "scriptSha256": "f181b9920dc95b580764a5266dcdc2294b678181dd20165b6cfde495d0a9709e",
+    "browserDom": "deterministic-event-double",
+    "actualNkGate": false
+  },
+  "bindings": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG440-full-question-input/logs/byte-counter.json",
+      "sha256": "be5b174b70f761983c1b45b5f8068e39d080554881b6c7c528a011c5e6dfa4bc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG440-full-question-input/logs/byte-counter.txt",
+      "sha256": "97409083ff3bce045bb5004c3d931262f4f6df5978000a782004857568f0dd0a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG440-full-question-input/junit/web/TEST-dev.codex.schubert.nk.web.view.QuestionInputScriptTest.xml",
+      "sha256": "e716c976d670627824977844c26a1ff4120082fd996f3d465f94f4fe9a03f6f1"
+    }
+  ],
+  "sourceComparisons": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/static/js/question-input-validation.js",
+      "currentSha256": "742ebf22201034123b5e96fbb82b9fe25d0f8a5f0260651a42c011389a10cafa",
+      "originalSource": "5dbef62f8bae71683bb19a34590387f05bb85613",
+      "originalSha256": "f181b9920dc95b580764a5266dcdc2294b678181dd20165b6cfde495d0a9709e",
+      "sameOriginalBytes": false,
+      "candidateSource": "44aa51e79fdcf8bb154f26a51a40d1d087babc32",
+      "candidateSha256": "742ebf22201034123b5e96fbb82b9fe25d0f8a5f0260651a42c011389a10cafa",
+      "sameCandidateBytes": true
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/javascript/question-input-validation.test.cjs",
+      "currentSha256": "869254f2f9b7b1a31d938d8f8537836a5b28f8813be99aaa60cbf4e5e7426f95",
+      "originalSource": "5dbef62f8bae71683bb19a34590387f05bb85613",
+      "originalSha256": "2598b8a1c5f8ced1b532830582f94a5747be5ea1122a81fedb35075128f6aea2",
+      "sameOriginalBytes": false,
+      "candidateSource": "44aa51e79fdcf8bb154f26a51a40d1d087babc32",
+      "candidateSha256": "869254f2f9b7b1a31d938d8f8537836a5b28f8813be99aaa60cbf4e5e7426f95",
+      "sameCandidateBytes": true
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionInputScriptTest.java",
+      "currentSha256": "3253e842449d2f82e25365fdd3077b9f4d35d36dd88ccca08edc713930c655b7",
+      "originalSource": "5dbef62f8bae71683bb19a34590387f05bb85613",
+      "originalSha256": "b4b1e2c6c882b6173407402122b924b45ba9698936beaa68d873941f71606e95",
+      "sameOriginalBytes": false
+    }
+  ],
+  "validateFunctionBodyUnchanged": true,
+  "oldOracleCasesA_C_D_E_F_GStillApplicable": true,
+  "currentRequiredButtonAndDisabledVectorB_H": "UI222§8/BUG1222/YKT988, added missing button and valid-disabled/invalid-enabled assertions",
+  "newerEightSuccessDeclaredInBug1222": true,
+  "newerOriginalManifestRecovered": false,
+  "pg2264NamedHostArtifacts": [],
+  "currentCaseAlreadyReferencedBy504": true,
+  "newCurrentCaseReferenceCount": 0,
+  "decision": "OLD_FULL_SOURCE_JS_SUCCESS_NOT_TRANSFERABLE_TO_CURRENT_CHANGED_JS; NEWER_SUCCESS_REQUIRES_ORIGINAL_BOUNDED_PROOF_BEFORE_PROMOTION",
+  "newProductExecutions": 0,
+  "newProductPasses": 0,
+  "newCoverage": 0,
+  "newSourceQualifications": 0,
+  "newWbsAcceptance": 0,
+  "formalUpdated": false,
+  "remaining": "Recover already executed newer bounded proof via known authorized location if supplied; do not restart currentNode8 just because original manifest not yet recovered. Continue independent PGPT."
+}
