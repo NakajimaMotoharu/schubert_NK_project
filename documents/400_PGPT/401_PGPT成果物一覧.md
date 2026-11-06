@@ -1,5 +1,10 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-07T00:52:49.403809+09:00 Gate工具限定資格
+
+020仕様020/結果021・PMO600044、PG21140全60/FES0/独立21146 post0・L488/M51/C2/B253未網羅0。新規6/既54source再認証を分離、元60 F5E1はTest工具誤りとして保全、Main変更不要。自所有synthetic入力のみ/実baseline・CHR無し。累計35対象の新method302=Java198+HTML97+CSS7、wholeJava68/原282交差48残234/partial18残62。新leaf0/正式1964-53/工数null。486 pointerだけ現485hashへ補正、全WBS監査は歴史current候補scope差HOLDを維持。
+
+
 ## 2026-11-07T00:26:23.278291+09:00 比較工具限定資格
 
 020仕様018/結果019・PMO600042、PG21102一回10成功/独立21116 post0・L214/M28/C2/B96全miss0。内訳新規2/既存8のsource再認証、8を新規実装へ加算0。Main不具合/NPE仮説は確認されず製造変更不要、原誤診断1/F1と静的履歴を保持。実baseline/adapter/CHR操作無し・synthetic fixtureのみ。34対象の新method累計296=Java192+HTML97+CSS7、wholeJava67/原282交差47残235/部分18残62。formal1964PT53scope/新leaf0/工数null・六Production Core4217不変。

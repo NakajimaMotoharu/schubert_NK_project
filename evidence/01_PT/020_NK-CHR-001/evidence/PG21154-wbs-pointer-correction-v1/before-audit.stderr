@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/wbs_progress_audit.py", line 431, in <module>
+    result = verify_baseline() if args.baseline_v1 else verify(args.master, args.snapshot, args.budget, args.inventory)
+                                                        ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/wbs_progress_audit.py", line 334, in verify
+    require(snapshot['inventorySha256'] == digest(ip), 'inventory hash mismatch')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/wbs_progress_audit.py", line 28, in require
+    raise ValueError(message)
+ValueError: inventory hash mismatch

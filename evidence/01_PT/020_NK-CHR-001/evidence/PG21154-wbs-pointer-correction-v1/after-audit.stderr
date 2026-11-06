@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/wbs_progress_audit.py", line 431, in <module>
+    result = verify_baseline() if args.baseline_v1 else verify(args.master, args.snapshot, args.budget, args.inventory)
+                                                        ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/wbs_progress_audit.py", line 368, in verify
+    current_candidate = candidate_trace.verify_candidate(inventory) if historical is not None else None
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/wbs_candidate_trace.py", line 147, in verify_candidate
+    require(set(paths)==expected==eligible(tracked),'current physical candidate exact Git/worktree scope')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/wbs_candidate_trace.py", line 26, in require
+    if not value:raise ValueError(message)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: current physical candidate exact Git/worktree scope
