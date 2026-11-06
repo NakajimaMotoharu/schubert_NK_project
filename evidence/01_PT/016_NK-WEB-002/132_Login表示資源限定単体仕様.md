@@ -1,0 +1,19 @@
+# Login HTML資源 限定単体仕様
+
+NK-WEB-002/WBS-P016-01、SCR001/FUN001/UI222226264・DIF001/SS313/355/PG219。988/event4021原1/3/6pp cap8。QA055/UIC012/SSC338のlocked表示方針は確認待ちであり、当仕様ではlocked paramを送らずその枝を未実行とする。実Login/CSRF/lock残時間/二重送信制御/全CHR-A01は受入しない。
+
+実normalD8 JARのlogin.htmlをrepo/抽出byteに結合し、Production Javaをclasspathへ置かずSpringTemplateEngine/WebContext/MockServletで派生DOMを作る。通常、error、logout、二messageの同時query、値の非反射、form/input/metadata、password常時空、query値空/false/多値、2worker8renderを独立literalで試験する。Query flagのpresenceはUI226の?error/?logout（値なしでも表示）から確認する。未知queryや値をmessage/フォームへ入れず、HTML/属性へ解釈させない。POSTは送信しない。
+
+|Test ID|class.method|期待値/fixture|
+|PT-LOGIN-DOM001|LoginDisplayResourcePortTest.initialPageKeepsApprovedBrandAndNoMessages|DIF001のtitle/brand、message0、空のpassword|
+|PT-LOGIN-DOM002|LoginDisplayResourcePortTest.errorAndLogoutUseFixedMessagesNotParameterValues|error/logout二DOM、UI226/Current独立固定文言|
+|PT-LOGIN-DOM003|LoginDisplayResourcePortTest.independentErrorAndLogoutConditionsDoNotConsumeEachOther|同時query二message・error/success区別、認証結果とみなさない|
+|PT-LOGIN-DOM004|LoginDisplayResourcePortTest.unrecognizedParametersNeverBecomeMarkupOrMessages|未知query markerの非反射/markup非生成|
+|PT-LOGIN-DOM005|LoginDisplayResourcePortTest.formLabelsInputMetadataAndStaticAssetsAreExplicit|label/id/lang/title/charset/viewport/css/formPOST/username autofocus/autocomplete/password typeを明示|
+|PT-LOGIN-DOM006|LoginDisplayResourcePortTest.submittedLookingQueryValuesNeverRefillUsernameOrPassword|公開dummy queryだけ、両input value空・body非反射、実credential無し|
+|PT-LOGIN-DOM007|LoginDisplayResourcePortTest.errorFlagPresenceWorksWithEmptyFalseAndMultipleValues|error空/false/多値の三DOMで同じ固定エラー文|
+|PT-LOGIN-DOM008|LoginDisplayResourcePortTest.eightConcurrentRenderingsKeepParameterMessagesSeparate|自己所有2worker8DOM・10秒join、条件混在無し|
+
+8method/18派生DOM、input011 qualifier/012 dependencies、prepare20554/static20556→Git固定→PG20560一度だけrun/post。初期原期待値はProduction formatter/Controller/既Testから生成せずUIの明示値と手作成mapに固定する。旧LoginControllerTest/Current成功の確認再演0、Current baseline改変0。hidden合成値があれば保存前redactしpassword valueは常に空のまま、実session/token/認証情報を出力しない。CSRF hidden injectionはProduction MVC/security連携側の別gateであり、このcontext無しHTML資源試験では測定しない。
+
+期待値正常性と全実行FESabort0/対象source/resource/dependency/元XML/OS-JDK/command/時刻/終了/出力hashを結果133へ保存。HTMLにはJava四counter無しnull、除外や100%補填をしない。QA055返答で設計が確定しても、未実行locked枝をこの18へ合算せず別の必要試験/証跡を記録する。
