@@ -1,0 +1,142 @@
+{
+  "decision": "STATIC_JDK_EXCEPTION_LOG_WRITER_CLOSURE",
+  "source": "14cb941d08f6fde9f9cb5d6aac2d99aabb85db29",
+  "productionCoreMain": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+  "originalRun": "PG20874",
+  "originalManifestSha256": "b7eec8b27e25dde243b1260f21b48dd2011272f950c233dab22e1404d8ef43b4",
+  "originalInitializationSha256": "2f006fdc02ba42ae790d827f41c6f0ab5f7ddc18e03beea6db48d3fbcc40c2e0",
+  "originalProducerSha256": "ad088d97a44221c77af9cc6d9570250cf4c20d2f87a34b6758018d87e91deeeb",
+  "originalConfigSha256": "a8450f8930b9883460ae4a9f729a467fc5e2e61e0127ed5f26b9c93f89366486",
+  "jdkModulesSha256": "89021c44e874a1d4e477c335c0c6f170c10933652130990357a5a9fe8b8aa7e8",
+  "jdkJavapSha256": "59d0b7cf9e1936f16cd6dd39d5214a0c8507a1d5895a1e9b95c52aa4f436d71b",
+  "scope": "SQLException constructors call DriverManager.getLogWriter; fixed JDK25.0.4 clinit only in-memory defaults/list/locks; getLogWriter field return; discovery/connect in separate unreachable reviewed entry methods. Test/Main javap has no DriverManager/DataSource/driver/network calls, explicit CP contains no JDBC driver provider; original init contains no driver/Socket. Not syscall-level observation, native/JVM/JCA/classpath activity unmeasured. No deployed DB/lock/session/security acceptance.",
+  "testsReexecuted": 0,
+  "actualBackendActions": 0,
+  "forbiddenObservedInitialization": [],
+  "originalXmlEnvironmentBindings": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20874-admin-prelude-jdbc-eight-unit-v1/xml/TEST-junit-jupiter.xml": {
+      "sha256": "4d75c8d94b5ce6eca376655b1280bea05e4eada9bbb0510ff557a1fa3adf49bf",
+      "checks": {
+        "ownedTmp": true,
+        "noJdbcDriversProperty": true,
+        "noJulConfigFile": true,
+        "noJulConfigClass": true,
+        "fixedJdk": true
+      }
+    },
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20874-admin-prelude-jdbc-eight-unit-v1/xml/TEST-junit-platform-suite.xml": {
+      "sha256": "496e5b6f383b8656cbc85604e3296610005dec0afd055befb9680cb19af052a9",
+      "checks": {
+        "ownedTmp": true,
+        "noJdbcDriversProperty": true,
+        "noJulConfigFile": true,
+        "noJulConfigClass": true,
+        "fixedJdk": true
+      }
+    },
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20874-admin-prelude-jdbc-eight-unit-v1/xml/TEST-junit-vintage.xml": {
+      "sha256": "8f81119f2fbb5a06b605db263057a9ab3ca0c954bb7939f732d43d970a47d05c",
+      "checks": {
+        "ownedTmp": true,
+        "noJdbcDriversProperty": true,
+        "noJulConfigFile": true,
+        "noJulConfigClass": true,
+        "fixedJdk": true
+      }
+    }
+  },
+  "classpathDriverProviderEntries": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20868-admin-prelude-jdbc-style-compile-v1/test-classes": [],
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": [],
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": []
+  },
+  "ordinaryJdbcQualificationOnly": true,
+  "heldDynamicFourUnchanged": true,
+  "formalUpdated": false,
+  "stages": {
+    "jdk": {
+      "reusedFixedJdkOnly": true,
+      "originalStage": {
+        "actualExit": 0,
+        "timedOut": false,
+        "startUTC": "2026-11-06T11:37:10.946347+00:00",
+        "endUTC": "2026-11-06T11:37:11.216112+00:00",
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+          "-c",
+          "-p",
+          "java.sql.SQLException",
+          "java.sql.DriverManager"
+        ],
+        "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+        "stdoutSha256": "6f611dfbf1a446f2beedad9c565836e5988ef190bb466cbe6b1c8b134059cc15",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "actualExit": 0
+    },
+    "test": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T11:54:26.218433+00:00",
+      "endUTC": "2026-11-06T11:54:26.483704+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-c",
+        "-p",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20868-admin-prelude-jdbc-style-compile-v1/test-classes",
+        "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+        "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest$Fixture"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "86813dc787d06f82f71b9a92c7596cca7e72f7cf1aad2eb0f579ff6a8ca3df40",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "main": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T11:54:26.484245+00:00",
+      "endUTC": "2026-11-06T11:54:26.850069+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-c",
+        "-p",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar",
+        "dev.codex.schubert.nk.api.security.AdminCommandAuthenticator",
+        "dev.codex.schubert.nk.api.security.AdminCommandAuthenticator$Mutation",
+        "dev.codex.schubert.nk.api.security.AuthenticationContextVerifier",
+        "dev.codex.schubert.nk.api.security.ContextHash",
+        "dev.codex.schubert.nk.api.security.AuthenticationInfrastructureException",
+        "dev.codex.schubert.nk.api.database.RequiredColumn"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "f73000911e0c63a7027fa955ff9389915d69ee713277ef09e25e77d84a330699",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "atJST": "2026-11-06T20:54:26.995710+09:00",
+  "originalInputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java": "8b91f57f37b99faccc394751ab7c9b5e15fdfa1b7a8a0e947832d7b672252ee7",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.java": "3e1ae38ba52644c2027a712bd22ea165c29e42f6d044712c6d61d70ce1d4516f"
+  },
+  "staticArtifacts": {
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/jdk-exit.safe.json": "bc9980242ab9855f85a5faabd78d0c292794cd5778f863ad50e3fa82b57dd313",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/test-exit.safe.json": "eadc49547f34447005d66d2c22706cc8a26606d2296f12497a39bbd12ce545d8",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/jdk.stdout": "6f611dfbf1a446f2beedad9c565836e5988ef190bb466cbe6b1c8b134059cc15",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/test-process.safe.json": "a452619e9757953bf5e9bceecd86db1de793a55b98b27c39a24b7db47941eced",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/test.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/main-begin.safe.json": "105635fa56291db744f29232f3e34cd366a9621636b995120e0e5d3a80e7c37e",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/jdk-begin.safe.json": "1744c5abac328889332704f936f9f8546c8327e67a33e4c96efa4be4db00b6cf",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/test.stdout": "86813dc787d06f82f71b9a92c7596cca7e72f7cf1aad2eb0f579ff6a8ca3df40",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/main.stdout": "f73000911e0c63a7027fa955ff9389915d69ee713277ef09e25e77d84a330699",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/original-class-init.stdout": "2f006fdc02ba42ae790d827f41c6f0ab5f7ddc18e03beea6db48d3fbcc40c2e0",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/jdk-process.safe.json": "0554c7d6747a523fc16261d23a752e739a2d692e1e4c87f82ce365d7e7c7f4db",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/main.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/main-exit.safe.json": "7ea600a936c5d8a66dc1a2147834c1d80b8266bd32c78c0d9e6f15f03a6b97b5",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/main-process.safe.json": "21860aae05188c26d9727d71b2e450ff324e00c276e32f62bc2e770e934793fb",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/jdk.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/test-begin.safe.json": "27d54aa1ed48b7a2fa000f04e18e9a3de98794f94cd39b4cbbc67ab4b5c8cf46"
+  }
+}

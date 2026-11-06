@@ -1,0 +1,2248 @@
+Compiled from "AdminPreludeJdbcPortTest.java"
+final class dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest {
+  private static final java.time.Instant NOW;
+
+  private static final dev.codex.schubert.nk.protocol.header.AuthenticationContext INPUT;
+
+  private static final java.lang.String HASH;
+
+  private static final long MAX_ID;
+
+  private static final java.lang.String OWNER_SQL;
+
+  private static final java.lang.String LOCKED_OWNER_SQL;
+
+  private static final java.lang.String ADVISORY_SQL;
+
+  private static final java.lang.String USERS_SQL;
+
+  private static final java.lang.String AUTH_USER_SQL;
+
+  private static final java.lang.String AUTH_SESSION_SQL;
+
+  private static final java.lang.String TOUCH_SQL;
+
+  private static final java.lang.String CANDIDATE;
+
+  private static final java.lang.String LOCKED;
+
+  private static final java.lang.String USERS;
+
+  private static final java.lang.String ADVISORY;
+
+  private static final java.lang.String AUTH_USER;
+
+  private static final java.lang.String AUTH_SESSION;
+
+  private static final java.lang.String TOUCH;
+
+  private static final java.lang.String PUBLIC_MARKER;
+
+  private static final java.lang.String INFRA;
+
+  private static final java.lang.String ADMIN;
+
+  private static final java.lang.String USER;
+
+  dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest();
+    Code:
+         0: aload_0
+         1: invokespecial #3                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  private static <T> T proxy(java.lang.Class<T>, java.lang.reflect.InvocationHandler);
+    Code:
+         0: aload_0
+         1: aload_0
+         2: invokevirtual #9                  // Method java/lang/Class.getClassLoader:()Ljava/lang/ClassLoader;
+         5: iconst_1
+         6: anewarray     #10                 // class java/lang/Class
+         9: dup
+        10: iconst_0
+        11: aload_0
+        12: aastore
+        13: aload_1
+        14: invokestatic  #15                 // Method java/lang/reflect/Proxy.newProxyInstance:(Ljava/lang/ClassLoader;[Ljava/lang/Class;Ljava/lang/reflect/InvocationHandler;)Ljava/lang/Object;
+        17: invokevirtual #21                 // Method java/lang/Class.cast:(Ljava/lang/Object;)Ljava/lang/Object;
+        20: areturn
+
+  private static dev.codex.schubert.nk.api.security.AdminCommandAuthenticator authenticator();
+    Code:
+         0: new           #25                 // class dev/codex/schubert/nk/api/security/AdminCommandAuthenticator
+         3: dup
+         4: new           #27                 // class dev/codex/schubert/nk/api/security/ContextHash
+         7: dup
+         8: invokespecial #29                 // Method dev/codex/schubert/nk/api/security/ContextHash."<init>":()V
+        11: invokespecial #30                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator."<init>":(Ldev/codex/schubert/nk/api/security/ContextHash;)V
+        14: areturn
+        15: astore_0
+        16: new           #35                 // class java/lang/AssertionError
+        19: dup
+        20: ldc           #37                 // String fixed JDK SHA-256 unavailable
+        22: aload_0
+        23: invokespecial #39                 // Method java/lang/AssertionError."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+        26: athrow
+      Exception table:
+         from    to  target type
+             0    14    15   Class java/security/NoSuchAlgorithmException
+
+  private static dev.codex.schubert.nk.api.security.AuthenticatedActor identity(dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest$Fixture, dev.codex.schubert.nk.api.security.AdminCommandAuthenticator$Mutation, java.util.OptionalLong);
+    Code:
+         0: invokestatic  #42                 // Method authenticator:()Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator;
+         3: aload_0
+         4: invokevirtual #46                 // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.connection:()Ljava/sql/Connection;
+         7: getstatic     #52                 // Field INPUT:Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;
+        10: aload_1
+        11: aload_2
+        12: getstatic     #56                 // Field NOW:Ljava/time/Instant;
+        15: invokevirtual #60                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.verifyIdentity:(Ljava/sql/Connection;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;Ljava/time/Instant;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        18: areturn
+
+  private static void infrastructure(dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest$Fixture, dev.codex.schubert.nk.api.security.AdminCommandAuthenticator$Mutation, java.util.OptionalLong);
+    Code:
+         0: ldc           #64                 // class dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException
+         2: aload_0
+         3: aload_1
+         4: aload_2
+         5: invokedynamic #66,  0             // InvokeDynamic #0:execute:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)Lorg/junit/jupiter/api/function/Executable;
+        10: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        13: checkcast     #64                 // class dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException
+        16: astore_3
+        17: ldc           #76                 // String authentication storage is unavailable
+        19: aload_3
+        20: invokevirtual #78                 // Method dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.getMessage:()Ljava/lang/String;
+        23: invokestatic  #82                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+        26: aload_3
+        27: invokevirtual #86                 // Method dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.getCause:()Ljava/lang/Throwable;
+        30: invokestatic  #90                 // Method org/junit/jupiter/api/Assertions.assertNull:(Ljava/lang/Object;)V
+        33: iconst_0
+        34: aload_3
+        35: invokevirtual #94                 // Method dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.getSuppressed:()[Ljava/lang/Throwable;
+        38: arraylength
+        39: invokestatic  #98                 // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+        42: aload_0
+        43: invokevirtual #101                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.ownerUnchanged:()V
+        46: return
+
+  void allMutationsUseIndependentOrderedPreludeAndUtcBindings();
+    Code:
+         0: invokestatic  #104                // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.values:()[Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+         3: astore_1
+         4: aload_1
+         5: arraylength
+         6: istore_2
+         7: iconst_0
+         8: istore_3
+         9: iload_3
+        10: iload_2
+        11: if_icmpge     316
+        14: aload_1
+        15: iload_3
+        16: aaload
+        17: astore        4
+        19: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+        22: dup
+        23: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+        26: astore        5
+        28: aload         4
+        30: getstatic     #111                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.DISABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        33: if_acmpeq     44
+        36: aload         4
+        38: getstatic     #115                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.DEMOTE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        41: if_acmpne     48
+        44: iconst_1
+        45: goto          49
+        48: iconst_0
+        49: istore        6
+        51: aload         4
+        53: getstatic     #118                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        56: if_acmpne     65
+        59: invokestatic  #121                // Method java/util/OptionalLong.empty:()Ljava/util/OptionalLong;
+        62: goto          71
+        65: ldc2_w        #127                // long 20l
+        68: invokestatic  #129                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+        71: astore        7
+        73: aload         5
+        75: aload         4
+        77: aload         7
+        79: invokestatic  #133                // Method identity:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        82: astore        8
+        84: new           #137                // class dev/codex/schubert/nk/api/security/AuthenticatedActor
+        87: dup
+        88: ldc2_w        #139                // long 7l
+        91: ldc           #141                // String fixture-admin
+        93: getstatic     #143                // Field dev/codex/schubert/nk/api/domain/Role.ADMIN:Ldev/codex/schubert/nk/api/domain/Role;
+        96: invokespecial #149                // Method dev/codex/schubert/nk/api/security/AuthenticatedActor."<init>":(JLjava/lang/String;Ldev/codex/schubert/nk/api/domain/Role;)V
+        99: aload         8
+       101: invokestatic  #82                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       104: new           #152                // class java/util/ArrayList
+       107: dup
+       108: invokespecial #154                // Method java/util/ArrayList."<init>":()V
+       111: astore        9
+       113: aload         9
+       115: ldc           #155                // String candidate
+       117: invokeinterface #157,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       122: pop
+       123: iload         6
+       125: ifeq          138
+       128: aload         9
+       130: ldc           #163                // String advisory
+       132: invokeinterface #157,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       137: pop
+       138: aload         9
+       140: ldc           #165                // String users
+       142: ldc           #167                // String locked
+       144: ldc           #169                // String auth-user
+       146: ldc           #171                // String auth-session
+       148: ldc           #173                // String touch
+       150: invokestatic  #175                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+       153: invokeinterface #178,  2          // InterfaceMethod java/util/List.addAll:(Ljava/util/Collection;)Z
+       158: pop
+       159: aload         9
+       161: aload         5
+       163: getfield      #182                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.order:Ljava/util/List;
+       166: invokestatic  #82                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       169: iconst_1
+       170: invokestatic  #186                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       173: ldc           #192                // String ffe054fe7ae0cb6dc65c3af9b61d5209f439851db43d0ba5997337df154668eb
+       175: invokestatic  #194                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+       178: aload         5
+       180: getfield      #199                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.bindings:Ljava/util/Map;
+       183: ldc           #155                // String candidate
+       185: invokeinterface #203,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       190: invokestatic  #82                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       193: iconst_1
+       194: invokestatic  #186                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       197: ldc           #192                // String ffe054fe7ae0cb6dc65c3af9b61d5209f439851db43d0ba5997337df154668eb
+       199: invokestatic  #194                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+       202: aload         5
+       204: getfield      #199                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.bindings:Ljava/util/Map;
+       207: ldc           #167                // String locked
+       209: invokeinterface #203,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       214: invokestatic  #82                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       217: iconst_1
+       218: invokestatic  #186                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       221: ldc2_w        #139                // long 7l
+       224: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       227: iconst_2
+       228: invokestatic  #186                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       231: aload         7
+       233: ldc2_w        #139                // long 7l
+       236: invokevirtual #211                // Method java/util/OptionalLong.orElse:(J)J
+       239: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       242: iconst_3
+       243: invokestatic  #186                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       246: iload         6
+       248: invokestatic  #215                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+       251: invokestatic  #220                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+       254: aload         5
+       256: getfield      #199                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.bindings:Ljava/util/Map;
+       259: ldc           #165                // String users
+       261: invokeinterface #203,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       266: invokestatic  #82                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       269: getstatic     #56                 // Field NOW:Ljava/time/Instant;
+       272: getstatic     #223                // Field java/time/ZoneOffset.UTC:Ljava/time/ZoneOffset;
+       275: invokevirtual #229                // Method java/time/Instant.atOffset:(Ljava/time/ZoneOffset;)Ljava/time/OffsetDateTime;
+       278: aload         5
+       280: getfield      #199                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.bindings:Ljava/util/Map;
+       283: ldc           #173                // String touch
+       285: invokeinterface #203,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       290: checkcast     #195                // class java/util/Map
+       293: iconst_1
+       294: invokestatic  #186                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       297: invokeinterface #203,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       302: invokestatic  #82                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       305: aload         5
+       307: invokevirtual #101                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.ownerUnchanged:()V
+       310: iinc          3, 1
+       313: goto          9
+       316: iconst_2
+       317: newarray       long
+       319: dup
+       320: iconst_0
+       321: lconst_1
+       322: lastore
+       323: dup
+       324: iconst_1
+       325: ldc2_w        #235                // long 999999999999l
+       328: lastore
+       329: astore_1
+       330: aload_1
+       331: arraylength
+       332: istore_2
+       333: iconst_0
+       334: istore_3
+       335: iload_3
+       336: iload_2
+       337: if_icmpge     411
+       340: aload_1
+       341: iload_3
+       342: laload
+       343: lstore        4
+       345: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+       348: dup
+       349: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+       352: astore        6
+       354: aload         6
+       356: getstatic     #237                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.UNLOCK:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+       359: lload         4
+       361: invokestatic  #129                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+       364: invokestatic  #133                // Method identity:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+       367: pop
+       368: lload         4
+       370: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       373: aload         6
+       375: getfield      #199                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.bindings:Ljava/util/Map;
+       378: ldc           #165                // String users
+       380: invokeinterface #203,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       385: checkcast     #195                // class java/util/Map
+       388: iconst_2
+       389: invokestatic  #186                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       392: invokeinterface #203,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       397: invokestatic  #82                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       400: aload         6
+       402: invokevirtual #101                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.ownerUnchanged:()V
+       405: iinc          3, 1
+       408: goto          335
+       411: return
+
+  void targetPresenceN12AndNullContractsFailBeforeAnySql();
+    Code:
+         0: ldc           #240                // class java/lang/NullPointerException
+         2: invokedynamic #242,  0            // InvokeDynamic #1:execute:()Lorg/junit/jupiter/api/function/Executable;
+         7: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        10: pop
+        11: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+        14: dup
+        15: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+        18: astore_1
+        19: invokestatic  #42                 // Method authenticator:()Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator;
+        22: astore_2
+        23: aload_1
+        24: invokevirtual #46                 // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.connection:()Ljava/sql/Connection;
+        27: astore_3
+        28: ldc2_w        #127                // long 20l
+        31: invokestatic  #129                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+        34: astore        4
+        36: ldc           #240                // class java/lang/NullPointerException
+        38: aload_2
+        39: aload         4
+        41: invokedynamic #245,  0            // InvokeDynamic #2:execute:(Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator;Ljava/util/OptionalLong;)Lorg/junit/jupiter/api/function/Executable;
+        46: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        49: pop
+        50: ldc           #240                // class java/lang/NullPointerException
+        52: aload_2
+        53: aload_3
+        54: aload         4
+        56: invokedynamic #248,  0            // InvokeDynamic #3:execute:(Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator;Ljava/sql/Connection;Ljava/util/OptionalLong;)Lorg/junit/jupiter/api/function/Executable;
+        61: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        64: pop
+        65: ldc           #240                // class java/lang/NullPointerException
+        67: aload_2
+        68: aload_3
+        69: aload         4
+        71: invokedynamic #251,  0            // InvokeDynamic #4:execute:(Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator;Ljava/sql/Connection;Ljava/util/OptionalLong;)Lorg/junit/jupiter/api/function/Executable;
+        76: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        79: pop
+        80: ldc           #240                // class java/lang/NullPointerException
+        82: aload_2
+        83: aload_3
+        84: invokedynamic #252,  0            // InvokeDynamic #5:execute:(Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator;Ljava/sql/Connection;)Lorg/junit/jupiter/api/function/Executable;
+        89: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        92: pop
+        93: ldc           #240                // class java/lang/NullPointerException
+        95: aload_2
+        96: aload_3
+        97: aload         4
+        99: invokedynamic #255,  0            // InvokeDynamic #6:execute:(Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator;Ljava/sql/Connection;Ljava/util/OptionalLong;)Lorg/junit/jupiter/api/function/Executable;
+       104: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       107: pop
+       108: ldc_w         #256                // class java/lang/IllegalArgumentException
+       111: aload_1
+       112: aload         4
+       114: invokedynamic #258,  0            // InvokeDynamic #7:execute:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ljava/util/OptionalLong;)Lorg/junit/jupiter/api/function/Executable;
+       119: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       122: pop
+       123: ldc_w         #256                // class java/lang/IllegalArgumentException
+       126: aload_1
+       127: invokedynamic #261,  0            // InvokeDynamic #8:execute:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;)Lorg/junit/jupiter/api/function/Executable;
+       132: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       135: pop
+       136: iconst_3
+       137: newarray       long
+       139: dup
+       140: iconst_0
+       141: ldc2_w        #264                // long -1l
+       144: lastore
+       145: dup
+       146: iconst_1
+       147: lconst_0
+       148: lastore
+       149: dup
+       150: iconst_2
+       151: ldc2_w        #266                // long 1000000000000l
+       154: lastore
+       155: astore        5
+       157: aload         5
+       159: arraylength
+       160: istore        6
+       162: iconst_0
+       163: istore        7
+       165: iload         7
+       167: iload         6
+       169: if_icmpge     200
+       172: aload         5
+       174: iload         7
+       176: laload
+       177: lstore        8
+       179: ldc_w         #256                // class java/lang/IllegalArgumentException
+       182: aload_1
+       183: lload         8
+       185: invokedynamic #268,  0            // InvokeDynamic #9:execute:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;J)Lorg/junit/jupiter/api/function/Executable;
+       190: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       193: pop
+       194: iinc          7, 1
+       197: goto          165
+       200: aload_1
+       201: getfield      #182                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.order:Ljava/util/List;
+       204: invokeinterface #271,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+       209: invokestatic  #275                // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+       212: aload_1
+       213: invokevirtual #101                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.ownerUnchanged:()V
+       216: iconst_3
+       217: anewarray     #279                // class "[Z"
+       220: dup
+       221: iconst_0
+       222: iconst_2
+       223: newarray       boolean
+       225: dup
+       226: iconst_0
+       227: iconst_1
+       228: bastore
+       229: dup
+       230: iconst_1
+       231: iconst_0
+       232: bastore
+       233: aastore
+       234: dup
+       235: iconst_1
+       236: iconst_2
+       237: newarray       boolean
+       239: dup
+       240: iconst_0
+       241: iconst_1
+       242: bastore
+       243: dup
+       244: iconst_1
+       245: iconst_1
+       246: bastore
+       247: aastore
+       248: dup
+       249: iconst_2
+       250: iconst_2
+       251: newarray       boolean
+       253: dup
+       254: iconst_0
+       255: iconst_0
+       256: bastore
+       257: dup
+       258: iconst_1
+       259: iconst_1
+       260: bastore
+       261: aastore
+       262: astore        5
+       264: aload         5
+       266: arraylength
+       267: istore        6
+       269: iconst_0
+       270: istore        7
+       272: iload         7
+       274: iload         6
+       276: if_icmpge     343
+       279: aload         5
+       281: iload         7
+       283: aaload
+       284: astore        8
+       286: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+       289: dup
+       290: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+       293: astore        9
+       295: aload         9
+       297: aload         8
+       299: iconst_0
+       300: baload
+       301: putfield      #281                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.autoCommit:Z
+       304: aload         9
+       306: aload         8
+       308: iconst_1
+       309: baload
+       310: putfield      #285                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.readOnly:Z
+       313: aload         9
+       315: getstatic     #118                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+       318: invokestatic  #121                // Method java/util/OptionalLong.empty:()Ljava/util/OptionalLong;
+       321: invokestatic  #288                // Method infrastructure:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)V
+       324: aload         9
+       326: getfield      #182                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.order:Ljava/util/List;
+       329: invokeinterface #271,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+       334: invokestatic  #275                // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+       337: iinc          7, 1
+       340: goto          272
+       343: return
+
+  void candidateLookupIsBoundedSingleRowAndNeverAnAuthorityGrant();
+    Code:
+         0: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+         3: dup
+         4: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+         7: astore_1
+         8: aload_1
+         9: invokestatic  #292                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+        12: putfield      #295                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.candidateRows:Ljava/util/List;
+        15: ldc_w         #298                // class dev/codex/schubert/nk/api/security/AuthenticationContextException
+        18: aload_1
+        19: invokedynamic #300,  0            // InvokeDynamic #10:execute:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;)Lorg/junit/jupiter/api/function/Executable;
+        24: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        27: pop
+        28: aload_1
+        29: invokevirtual #101                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.ownerUnchanged:()V
+        32: lconst_0
+        33: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        36: invokestatic  #301                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+        39: ldc2_w        #264                // long -1l
+        42: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        45: invokestatic  #301                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+        48: ldc2_w        #266                // long 1000000000000l
+        51: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        54: invokestatic  #301                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+        57: ldc2_w        #139                // long 7l
+        60: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        63: ldc2_w        #304                // long 8l
+        66: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        69: invokestatic  #306                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+        72: invokestatic  #309                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+        75: invokeinterface #312,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        80: astore_2
+        81: aload_2
+        82: invokeinterface #316,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        87: ifeq          142
+        90: aload_2
+        91: invokeinterface #321,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        96: checkcast     #158                // class java/util/List
+        99: astore_3
+       100: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+       103: dup
+       104: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+       107: astore        4
+       109: aload         4
+       111: aload_3
+       112: putfield      #295                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.candidateRows:Ljava/util/List;
+       115: aload         4
+       117: getstatic     #118                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+       120: invokestatic  #121                // Method java/util/OptionalLong.empty:()Ljava/util/OptionalLong;
+       123: invokestatic  #288                // Method infrastructure:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)V
+       126: ldc           #155                // String candidate
+       128: invokestatic  #301                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+       131: aload         4
+       133: getfield      #182                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.order:Ljava/util/List;
+       136: invokestatic  #82                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       139: goto          81
+       142: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+       145: dup
+       146: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+       149: astore_2
+       150: aload_2
+       151: iconst_1
+       152: putfield      #325                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.candidateNull:Z
+       155: aload_2
+       156: getstatic     #118                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+       159: invokestatic  #121                // Method java/util/OptionalLong.empty:()Ljava/util/OptionalLong;
+       162: invokestatic  #288                // Method infrastructure:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)V
+       165: iconst_2
+       166: newarray       long
+       168: dup
+       169: iconst_0
+       170: lconst_1
+       171: lastore
+       172: dup
+       173: iconst_1
+       174: ldc2_w        #235                // long 999999999999l
+       177: lastore
+       178: astore_3
+       179: aload_3
+       180: arraylength
+       181: istore        4
+       183: iconst_0
+       184: istore        5
+       186: iload         5
+       188: iload         4
+       190: if_icmpge     291
+       193: aload_3
+       194: iload         5
+       196: laload
+       197: lstore        6
+       199: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+       202: dup
+       203: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+       206: astore        8
+       208: aload         8
+       210: lload         6
+       212: putfield      #328                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.candidate:J
+       215: aload         8
+       217: lload         6
+       219: putfield      #331                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.actor:J
+       222: aload         8
+       224: lload         6
+       226: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       229: invokestatic  #301                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+       232: putfield      #295                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.candidateRows:Ljava/util/List;
+       235: aload         8
+       237: lload         6
+       239: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       242: invokestatic  #301                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+       245: putfield      #334                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.lockedRows:Ljava/util/List;
+       248: aload         8
+       250: lload         6
+       252: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       255: invokestatic  #301                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+       258: putfield      #337                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.userRows:Ljava/util/List;
+       261: lload         6
+       263: aload         8
+       265: getstatic     #118                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+       268: invokestatic  #121                // Method java/util/OptionalLong.empty:()Ljava/util/OptionalLong;
+       271: invokestatic  #133                // Method identity:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+       274: invokevirtual #340                // Method dev/codex/schubert/nk/api/security/AuthenticatedActor.userId:()J
+       277: invokestatic  #344                // Method org/junit/jupiter/api/Assertions.assertEquals:(JJ)V
+       280: aload         8
+       282: invokevirtual #101                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.ownerUnchanged:()V
+       285: iinc          5, 1
+       288: goto          186
+       291: return
+
+  void reducingAdvisoryAndSortedUserRowsRequireExactCardinality();
+    Code:
+         0: iconst_2
+         1: newarray       int
+         3: dup
+         4: iconst_0
+         5: iconst_0
+         6: iastore
+         7: dup
+         8: iconst_1
+         9: iconst_2
+        10: iastore
+        11: astore_1
+        12: aload_1
+        13: arraylength
+        14: istore_2
+        15: iconst_0
+        16: istore_3
+        17: iload_3
+        18: iload_2
+        19: if_icmpge     78
+        22: aload_1
+        23: iload_3
+        24: iaload
+        25: istore        4
+        27: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+        30: dup
+        31: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+        34: astore        5
+        36: aload         5
+        38: iload         4
+        40: putfield      #347                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.advisoryRows:I
+        43: aload         5
+        45: getstatic     #111                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.DISABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        48: ldc2_w        #127                // long 20l
+        51: invokestatic  #129                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+        54: invokestatic  #288                // Method infrastructure:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)V
+        57: ldc           #155                // String candidate
+        59: ldc           #163                // String advisory
+        61: invokestatic  #306                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+        64: aload         5
+        66: getfield      #182                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.order:Ljava/util/List;
+        69: invokestatic  #82                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+        72: iinc          3, 1
+        75: goto          17
+        78: invokestatic  #292                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+        81: ldc2_w        #351                // long 3l
+        84: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        87: ldc2_w        #353                // long 4l
+        90: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        93: invokestatic  #306                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+        96: ldc2_w        #139                // long 7l
+        99: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       102: ldc2_w        #139                // long 7l
+       105: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       108: invokestatic  #306                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+       111: ldc2_w        #127                // long 20l
+       114: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       117: ldc2_w        #139                // long 7l
+       120: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       123: invokestatic  #306                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+       126: lconst_0
+       127: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       130: ldc2_w        #139                // long 7l
+       133: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       136: invokestatic  #306                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+       139: invokestatic  #175                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+       142: invokeinterface #312,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       147: astore_1
+       148: aload_1
+       149: invokeinterface #316,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+       154: ifeq          210
+       157: aload_1
+       158: invokeinterface #321,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       163: checkcast     #158                // class java/util/List
+       166: astore_2
+       167: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+       170: dup
+       171: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+       174: astore_3
+       175: aload_3
+       176: aload_2
+       177: putfield      #337                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.userRows:Ljava/util/List;
+       180: aload_3
+       181: getstatic     #115                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.DEMOTE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+       184: ldc2_w        #127                // long 20l
+       187: invokestatic  #129                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+       190: invokestatic  #288                // Method infrastructure:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)V
+       193: aload_3
+       194: getfield      #182                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.order:Ljava/util/List;
+       197: ldc           #167                // String locked
+       199: invokeinterface #355,  2          // InterfaceMethod java/util/List.contains:(Ljava/lang/Object;)Z
+       204: invokestatic  #358                // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+       207: goto          148
+       210: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+       213: dup
+       214: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+       217: astore_1
+       218: aload_1
+       219: ldc2_w        #139                // long 7l
+       222: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       225: invokestatic  #301                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+       228: putfield      #337                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.userRows:Ljava/util/List;
+       231: ldc2_w        #139                // long 7l
+       234: aload_1
+       235: getstatic     #361                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ENABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+       238: ldc2_w        #127                // long 20l
+       241: invokestatic  #129                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+       244: invokestatic  #133                // Method identity:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+       247: invokevirtual #340                // Method dev/codex/schubert/nk/api/security/AuthenticatedActor.userId:()J
+       250: invokestatic  #344                // Method org/junit/jupiter/api/Assertions.assertEquals:(JJ)V
+       253: aload_1
+       254: getfield      #182                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.order:Ljava/util/List;
+       257: ldc           #163                // String advisory
+       259: invokeinterface #355,  2          // InterfaceMethod java/util/List.contains:(Ljava/lang/Object;)Z
+       264: invokestatic  #358                // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+       267: aload_1
+       268: invokevirtual #101                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.ownerUnchanged:()V
+       271: return
+
+  void lockedOwnerAndFreshVerifiedActorMustMatchTheCandidate();
+    Code:
+         0: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+         3: dup
+         4: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+         7: astore_1
+         8: aload_1
+         9: ldc2_w        #304                // long 8l
+        12: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        15: invokestatic  #301                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+        18: putfield      #334                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.lockedRows:Ljava/util/List;
+        21: ldc_w         #298                // class dev/codex/schubert/nk/api/security/AuthenticationContextException
+        24: aload_1
+        25: invokedynamic #364,  0            // InvokeDynamic #11:execute:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;)Lorg/junit/jupiter/api/function/Executable;
+        30: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        33: pop
+        34: aload_1
+        35: getfield      #182                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.order:Ljava/util/List;
+        38: ldc           #169                // String auth-user
+        40: invokeinterface #355,  2          // InterfaceMethod java/util/List.contains:(Ljava/lang/Object;)Z
+        45: invokestatic  #358                // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+        48: aload_1
+        49: invokevirtual #101                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.ownerUnchanged:()V
+        52: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+        55: dup
+        56: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+        59: astore_2
+        60: aload_2
+        61: invokestatic  #292                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+        64: putfield      #334                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.lockedRows:Ljava/util/List;
+        67: ldc_w         #298                // class dev/codex/schubert/nk/api/security/AuthenticationContextException
+        70: aload_2
+        71: invokedynamic #365,  0            // InvokeDynamic #12:execute:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;)Lorg/junit/jupiter/api/function/Executable;
+        76: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        79: pop
+        80: aload_2
+        81: invokevirtual #101                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.ownerUnchanged:()V
+        84: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+        87: dup
+        88: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+        91: astore_3
+        92: aload_3
+        93: ldc2_w        #304                // long 8l
+        96: putfield      #331                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.actor:J
+        99: aload_3
+       100: getstatic     #237                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.UNLOCK:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+       103: ldc2_w        #127                // long 20l
+       106: invokestatic  #129                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+       109: invokestatic  #288                // Method infrastructure:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)V
+       112: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+       115: dup
+       116: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+       119: astore        4
+       121: aload         4
+       123: iconst_0
+       124: putfield      #366                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.authenticated:Z
+       127: ldc_w         #298                // class dev/codex/schubert/nk/api/security/AuthenticationContextException
+       130: aload         4
+       132: invokedynamic #369,  0            // InvokeDynamic #13:execute:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;)Lorg/junit/jupiter/api/function/Executable;
+       137: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       140: pop
+       141: aload         4
+       143: getfield      #182                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.order:Ljava/util/List;
+       146: ldc           #173                // String touch
+       148: invokeinterface #355,  2          // InterfaceMethod java/util/List.contains:(Ljava/lang/Object;)Z
+       153: invokestatic  #358                // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+       156: aload         4
+       158: invokevirtual #101                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.ownerUnchanged:()V
+       161: return
+
+  void verifyRequiresFreshAdminButIdentityAloneCannotGrantIt();
+    Code:
+         0: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+         3: dup
+         4: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+         7: astore_1
+         8: getstatic     #143                // Field dev/codex/schubert/nk/api/domain/Role.ADMIN:Ldev/codex/schubert/nk/api/domain/Role;
+        11: invokestatic  #42                 // Method authenticator:()Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator;
+        14: aload_1
+        15: invokevirtual #46                 // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.connection:()Ljava/sql/Connection;
+        18: getstatic     #52                 // Field INPUT:Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;
+        21: getstatic     #118                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        24: invokestatic  #121                // Method java/util/OptionalLong.empty:()Ljava/util/OptionalLong;
+        27: getstatic     #56                 // Field NOW:Ljava/time/Instant;
+        30: invokevirtual #370                // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.verify:(Ljava/sql/Connection;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;Ljava/time/Instant;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        33: invokevirtual #373                // Method dev/codex/schubert/nk/api/security/AuthenticatedActor.role:()Ldev/codex/schubert/nk/api/domain/Role;
+        36: invokestatic  #82                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+        39: aload_1
+        40: invokevirtual #101                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.ownerUnchanged:()V
+        43: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+        46: dup
+        47: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+        50: astore_2
+        51: aload_2
+        52: ldc_w         #377                // String USER
+        55: putfield      #379                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.role:Ljava/lang/String;
+        58: getstatic     #382                // Field dev/codex/schubert/nk/api/domain/Role.USER:Ldev/codex/schubert/nk/api/domain/Role;
+        61: aload_2
+        62: getstatic     #118                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        65: invokestatic  #121                // Method java/util/OptionalLong.empty:()Ljava/util/OptionalLong;
+        68: invokestatic  #133                // Method identity:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        71: invokevirtual #373                // Method dev/codex/schubert/nk/api/security/AuthenticatedActor.role:()Ldev/codex/schubert/nk/api/domain/Role;
+        74: invokestatic  #82                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+        77: aload_2
+        78: invokevirtual #101                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.ownerUnchanged:()V
+        81: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+        84: dup
+        85: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+        88: astore_3
+        89: aload_3
+        90: ldc_w         #377                // String USER
+        93: putfield      #379                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.role:Ljava/lang/String;
+        96: ldc_w         #384                // class dev/codex/schubert/nk/api/security/AuthorizationException
+        99: aload_3
+       100: invokedynamic #386,  0            // InvokeDynamic #14:execute:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;)Lorg/junit/jupiter/api/function/Executable;
+       105: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       108: checkcast     #384                // class dev/codex/schubert/nk/api/security/AuthorizationException
+       111: astore        4
+       113: getstatic     #387                // Field dev/codex/schubert/nk/protocol/header/ResultCode.FORBIDDEN:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       116: aload         4
+       118: invokevirtual #393                // Method dev/codex/schubert/nk/api/security/AuthorizationException.resultCode:()Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       121: invokestatic  #82                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       124: aload_3
+       125: invokevirtual #101                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.ownerUnchanged:()V
+       128: return
+
+  void ordinaryJdbcAndCloseFailuresPreserveBorrowedOwnershipAndRedaction();
+    Code:
+         0: ldc           #155                // String candidate
+         2: ldc           #163                // String advisory
+         4: ldc           #165                // String users
+         6: ldc           #167                // String locked
+         8: ldc           #169                // String auth-user
+        10: ldc           #171                // String auth-session
+        12: ldc           #173                // String touch
+        14: invokestatic  #397                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+        17: invokeinterface #312,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        22: astore_1
+        23: aload_1
+        24: invokeinterface #316,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        29: ifeq          232
+        32: aload_1
+        33: invokeinterface #321,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        38: checkcast     #400                // class java/lang/String
+        41: astore_2
+        42: ldc_w         #402                // String prepare
+        45: aload_2
+        46: ldc           #173                // String touch
+        48: invokevirtual #404                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        51: ifeq          60
+        54: ldc_w         #407                // String executeUpdate
+        57: goto          63
+        60: ldc_w         #409                // String executeQuery
+        63: invokestatic  #306                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+        66: invokeinterface #312,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        71: astore_3
+        72: aload_3
+        73: invokeinterface #316,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        78: ifeq          131
+        81: aload_3
+        82: invokeinterface #321,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        87: checkcast     #400                // class java/lang/String
+        90: astore        4
+        92: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+        95: dup
+        96: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+        99: astore        5
+       101: aload         5
+       103: aload_2
+       104: aload         4
+       106: invokedynamic #411,  0            // InvokeDynamic #15:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+       111: putfield      #415                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.faultAt:Ljava/lang/String;
+       114: aload         5
+       116: getstatic     #111                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.DISABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+       119: ldc2_w        #127                // long 20l
+       122: invokestatic  #129                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+       125: invokestatic  #288                // Method infrastructure:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)V
+       128: goto          72
+       131: aload_2
+       132: ldc           #173                // String touch
+       134: invokevirtual #404                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       137: ifeq          149
+       140: ldc_w         #418                // String statement
+       143: invokestatic  #301                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+       146: goto          158
+       149: ldc_w         #420                // String row
+       152: ldc_w         #418                // String statement
+       155: invokestatic  #306                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+       158: invokeinterface #312,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       163: astore_3
+       164: aload_3
+       165: invokeinterface #316,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+       170: ifeq          229
+       173: aload_3
+       174: invokeinterface #321,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       179: checkcast     #400                // class java/lang/String
+       182: astore        4
+       184: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+       187: dup
+       188: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+       191: astore        5
+       193: aload         5
+       195: getfield      #422                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.badCloses:Ljava/util/List;
+       198: aload_2
+       199: aload         4
+       201: invokedynamic #411,  0            // InvokeDynamic #15:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+       206: invokeinterface #157,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       211: pop
+       212: aload         5
+       214: getstatic     #111                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.DISABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+       217: ldc2_w        #127                // long 20l
+       220: invokestatic  #129                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+       223: invokestatic  #288                // Method infrastructure:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)V
+       226: goto          164
+       229: goto          23
+       232: new           #256                // class java/lang/IllegalArgumentException
+       235: dup
+       236: ldc_w         #425                // String ordinary-prelude-fixture-marker
+       239: invokespecial #427                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+       242: new           #430                // class java/time/DateTimeException
+       245: dup
+       246: ldc_w         #425                // String ordinary-prelude-fixture-marker
+       249: invokespecial #432                // Method java/time/DateTimeException."<init>":(Ljava/lang/String;)V
+       252: invokestatic  #306                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+       255: invokeinterface #312,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       260: astore_1
+       261: aload_1
+       262: invokeinterface #316,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+       267: ifeq          316
+       270: aload_1
+       271: invokeinterface #321,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       276: checkcast     #433                // class java/lang/RuntimeException
+       279: astore_2
+       280: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+       283: dup
+       284: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+       287: astore_3
+       288: aload_3
+       289: aload_2
+       290: putfield      #435                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.runtimeFailure:Ljava/lang/RuntimeException;
+       293: aload_3
+       294: ldc_w         #439                // String users.executeQuery
+       297: putfield      #415                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.faultAt:Ljava/lang/String;
+       300: aload_3
+       301: getstatic     #361                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ENABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+       304: ldc2_w        #127                // long 20l
+       307: invokestatic  #129                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+       310: invokestatic  #288                // Method infrastructure:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)V
+       313: goto          261
+       316: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+       319: dup
+       320: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+       323: astore_1
+       324: aload_1
+       325: invokestatic  #292                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+       328: putfield      #295                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.candidateRows:Ljava/util/List;
+       331: aload_1
+       332: getfield      #422                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.badCloses:Ljava/util/List;
+       335: ldc_w         #441                // String candidate.row
+       338: invokeinterface #157,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       343: pop
+       344: aload_1
+       345: getstatic     #118                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+       348: invokestatic  #121                // Method java/util/OptionalLong.empty:()Ljava/util/OptionalLong;
+       351: invokestatic  #288                // Method infrastructure:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)V
+       354: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+       357: dup
+       358: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+       361: astore_2
+       362: aload_2
+       363: new           #443                // class java/lang/IllegalStateException
+       366: dup
+       367: ldc_w         #425                // String ordinary-prelude-fixture-marker
+       370: invokespecial #445                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       373: putfield      #435                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.runtimeFailure:Ljava/lang/RuntimeException;
+       376: aload_2
+       377: ldc_w         #439                // String users.executeQuery
+       380: putfield      #415                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.faultAt:Ljava/lang/String;
+       383: aload_2
+       384: getfield      #435                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.runtimeFailure:Ljava/lang/RuntimeException;
+       387: ldc_w         #443                // class java/lang/IllegalStateException
+       390: aload_2
+       391: invokedynamic #446,  0            // InvokeDynamic #16:execute:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;)Lorg/junit/jupiter/api/function/Executable;
+       396: invokestatic  #70                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       399: invokestatic  #447                // Method org/junit/jupiter/api/Assertions.assertSame:(Ljava/lang/Object;Ljava/lang/Object;)V
+       402: aload_2
+       403: invokevirtual #101                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.ownerUnchanged:()V
+       406: return
+
+  void parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership() throws java.lang.Exception;
+    Code:
+         0: iconst_2
+         1: invokestatic  #450                // Method java/util/concurrent/Executors.newFixedThreadPool:(I)Ljava/util/concurrent/ExecutorService;
+         4: astore_1
+         5: new           #152                // class java/util/ArrayList
+         8: dup
+         9: invokespecial #154                // Method java/util/ArrayList."<init>":()V
+        12: astore_2
+        13: lconst_1
+        14: lstore_3
+        15: lload_3
+        16: ldc2_w        #456                // long 32l
+        19: lcmp
+        20: ifgt          53
+        23: lload_3
+        24: lstore        5
+        26: aload_2
+        27: aload_1
+        28: lload         5
+        30: invokedynamic #458,  0            // InvokeDynamic #17:call:(J)Ljava/util/concurrent/Callable;
+        35: invokeinterface #462,  2          // InterfaceMethod java/util/concurrent/ExecutorService.submit:(Ljava/util/concurrent/Callable;)Ljava/util/concurrent/Future;
+        40: invokeinterface #157,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        45: pop
+        46: lload_3
+        47: lconst_1
+        48: ladd
+        49: lstore_3
+        50: goto          15
+        53: iconst_0
+        54: istore_3
+        55: iload_3
+        56: aload_2
+        57: invokeinterface #468,  1          // InterfaceMethod java/util/List.size:()I
+        62: if_icmpge     102
+        65: iload_3
+        66: i2l
+        67: lconst_1
+        68: ladd
+        69: aload_2
+        70: iload_3
+        71: invokeinterface #472,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+        76: checkcast     #475                // class java/util/concurrent/Future
+        79: ldc2_w        #477                // long 5l
+        82: getstatic     #479                // Field java/util/concurrent/TimeUnit.SECONDS:Ljava/util/concurrent/TimeUnit;
+        85: invokeinterface #485,  4          // InterfaceMethod java/util/concurrent/Future.get:(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;
+        90: checkcast     #207                // class java/lang/Long
+        93: invokestatic  #488                // Method org/junit/jupiter/api/Assertions.assertEquals:(JLjava/lang/Long;)V
+        96: iinc          3, 1
+        99: goto          55
+       102: aload_1
+       103: ifnull        137
+       106: aload_1
+       107: invokeinterface #491,  1          // InterfaceMethod java/util/concurrent/ExecutorService.close:()V
+       112: goto          137
+       115: astore_2
+       116: aload_1
+       117: ifnull        135
+       120: aload_1
+       121: invokeinterface #491,  1          // InterfaceMethod java/util/concurrent/ExecutorService.close:()V
+       126: goto          135
+       129: astore_3
+       130: aload_2
+       131: aload_3
+       132: invokevirtual #496                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       135: aload_2
+       136: athrow
+       137: return
+      Exception table:
+         from    to  target type
+             5   102   115   Class java/lang/Throwable
+           120   126   129   Class java/lang/Throwable
+
+  private static java.lang.Long lambda$parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership$0(long) throws java.lang.Exception;
+    Code:
+         0: new           #47                 // class dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture
+         3: dup
+         4: invokespecial #110                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture."<init>":()V
+         7: astore_2
+         8: aload_2
+         9: lload_0
+        10: putfield      #328                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.candidate:J
+        13: aload_2
+        14: lload_0
+        15: putfield      #331                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.actor:J
+        18: aload_2
+        19: lload_0
+        20: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        23: invokestatic  #301                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+        26: putfield      #295                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.candidateRows:Ljava/util/List;
+        29: aload_2
+        30: lload_0
+        31: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        34: invokestatic  #301                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+        37: putfield      #334                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.lockedRows:Ljava/util/List;
+        40: aload_2
+        41: lload_0
+        42: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        45: invokestatic  #301                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+        48: putfield      #337                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.userRows:Ljava/util/List;
+        51: aload_2
+        52: getstatic     #118                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        55: invokestatic  #121                // Method java/util/OptionalLong.empty:()Ljava/util/OptionalLong;
+        58: invokestatic  #133                // Method identity:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        61: invokevirtual #340                // Method dev/codex/schubert/nk/api/security/AuthenticatedActor.userId:()J
+        64: lstore_3
+        65: lload_0
+        66: lload_3
+        67: invokestatic  #344                // Method org/junit/jupiter/api/Assertions.assertEquals:(JJ)V
+        70: aload_2
+        71: invokevirtual #101                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.ownerUnchanged:()V
+        74: lload_3
+        75: invokestatic  #206                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        78: areturn
+
+  private static void lambda$ordinaryJdbcAndCloseFailuresPreserveBorrowedOwnershipAndRedaction$0(dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest$Fixture) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: getstatic     #361                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ENABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+         4: ldc2_w        #127                // long 20l
+         7: invokestatic  #129                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+        10: invokestatic  #133                // Method identity:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        13: pop
+        14: return
+
+  private static void lambda$verifyRequiresFreshAdminButIdentityAloneCannotGrantIt$0(dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest$Fixture) throws java.lang.Throwable;
+    Code:
+         0: invokestatic  #42                 // Method authenticator:()Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator;
+         3: aload_0
+         4: invokevirtual #46                 // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture.connection:()Ljava/sql/Connection;
+         7: getstatic     #52                 // Field INPUT:Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;
+        10: getstatic     #118                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        13: invokestatic  #121                // Method java/util/OptionalLong.empty:()Ljava/util/OptionalLong;
+        16: getstatic     #56                 // Field NOW:Ljava/time/Instant;
+        19: invokevirtual #370                // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.verify:(Ljava/sql/Connection;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;Ljava/time/Instant;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        22: pop
+        23: return
+
+  private static void lambda$lockedOwnerAndFreshVerifiedActorMustMatchTheCandidate$2(dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest$Fixture) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: getstatic     #237                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.UNLOCK:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+         4: ldc2_w        #127                // long 20l
+         7: invokestatic  #129                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+        10: invokestatic  #133                // Method identity:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        13: pop
+        14: return
+
+  private static void lambda$lockedOwnerAndFreshVerifiedActorMustMatchTheCandidate$1(dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest$Fixture) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: getstatic     #237                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.UNLOCK:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+         4: ldc2_w        #127                // long 20l
+         7: invokestatic  #129                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+        10: invokestatic  #133                // Method identity:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        13: pop
+        14: return
+
+  private static void lambda$lockedOwnerAndFreshVerifiedActorMustMatchTheCandidate$0(dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest$Fixture) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: getstatic     #237                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.UNLOCK:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+         4: ldc2_w        #127                // long 20l
+         7: invokestatic  #129                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+        10: invokestatic  #133                // Method identity:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        13: pop
+        14: return
+
+  private static void lambda$candidateLookupIsBoundedSingleRowAndNeverAnAuthorityGrant$0(dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest$Fixture) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: getstatic     #118                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+         4: invokestatic  #121                // Method java/util/OptionalLong.empty:()Ljava/util/OptionalLong;
+         7: invokestatic  #133                // Method identity:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        10: pop
+        11: return
+
+  private static void lambda$targetPresenceN12AndNullContractsFailBeforeAnySql$8(dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest$Fixture, long) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: getstatic     #237                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.UNLOCK:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+         4: lload_1
+         5: invokestatic  #129                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+         8: invokestatic  #133                // Method identity:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        11: pop
+        12: return
+
+  private static void lambda$targetPresenceN12AndNullContractsFailBeforeAnySql$7(dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest$Fixture) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: getstatic     #237                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.UNLOCK:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+         4: invokestatic  #121                // Method java/util/OptionalLong.empty:()Ljava/util/OptionalLong;
+         7: invokestatic  #133                // Method identity:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        10: pop
+        11: return
+
+  private static void lambda$targetPresenceN12AndNullContractsFailBeforeAnySql$6(dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest$Fixture, java.util.OptionalLong) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: getstatic     #118                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+         4: aload_1
+         5: invokestatic  #133                // Method identity:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+         8: pop
+         9: return
+
+  private static void lambda$targetPresenceN12AndNullContractsFailBeforeAnySql$5(dev.codex.schubert.nk.api.security.AdminCommandAuthenticator, java.sql.Connection, java.util.OptionalLong) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: getstatic     #52                 // Field INPUT:Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;
+         5: getstatic     #237                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.UNLOCK:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+         8: aload_2
+         9: aconst_null
+        10: invokevirtual #60                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.verifyIdentity:(Ljava/sql/Connection;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;Ljava/time/Instant;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        13: pop
+        14: return
+
+  private static void lambda$targetPresenceN12AndNullContractsFailBeforeAnySql$4(dev.codex.schubert.nk.api.security.AdminCommandAuthenticator, java.sql.Connection) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: getstatic     #52                 // Field INPUT:Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;
+         5: getstatic     #237                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.UNLOCK:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+         8: aconst_null
+         9: getstatic     #56                 // Field NOW:Ljava/time/Instant;
+        12: invokevirtual #60                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.verifyIdentity:(Ljava/sql/Connection;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;Ljava/time/Instant;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        15: pop
+        16: return
+
+  private static void lambda$targetPresenceN12AndNullContractsFailBeforeAnySql$3(dev.codex.schubert.nk.api.security.AdminCommandAuthenticator, java.sql.Connection, java.util.OptionalLong) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: getstatic     #52                 // Field INPUT:Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;
+         5: aconst_null
+         6: aload_2
+         7: getstatic     #56                 // Field NOW:Ljava/time/Instant;
+        10: invokevirtual #60                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.verifyIdentity:(Ljava/sql/Connection;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;Ljava/time/Instant;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        13: pop
+        14: return
+
+  private static void lambda$targetPresenceN12AndNullContractsFailBeforeAnySql$2(dev.codex.schubert.nk.api.security.AdminCommandAuthenticator, java.sql.Connection, java.util.OptionalLong) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aconst_null
+         3: getstatic     #237                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.UNLOCK:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+         6: aload_2
+         7: getstatic     #56                 // Field NOW:Ljava/time/Instant;
+        10: invokevirtual #60                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.verifyIdentity:(Ljava/sql/Connection;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;Ljava/time/Instant;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        13: pop
+        14: return
+
+  private static void lambda$targetPresenceN12AndNullContractsFailBeforeAnySql$1(dev.codex.schubert.nk.api.security.AdminCommandAuthenticator, java.util.OptionalLong) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: aconst_null
+         2: getstatic     #52                 // Field INPUT:Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;
+         5: getstatic     #237                // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.UNLOCK:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+         8: aload_1
+         9: getstatic     #56                 // Field NOW:Ljava/time/Instant;
+        12: invokevirtual #60                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.verifyIdentity:(Ljava/sql/Connection;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;Ljava/time/Instant;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+        15: pop
+        16: return
+
+  private static void lambda$targetPresenceN12AndNullContractsFailBeforeAnySql$0() throws java.lang.Throwable;
+    Code:
+         0: new           #25                 // class dev/codex/schubert/nk/api/security/AdminCommandAuthenticator
+         3: dup
+         4: aconst_null
+         5: invokespecial #30                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator."<init>":(Ldev/codex/schubert/nk/api/security/ContextHash;)V
+         8: pop
+         9: return
+
+  private static void lambda$infrastructure$0(dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest$Fixture, dev.codex.schubert.nk.api.security.AdminCommandAuthenticator$Mutation, java.util.OptionalLong) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: invokestatic  #133                // Method identity:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/OptionalLong;)Ldev/codex/schubert/nk/api/security/AuthenticatedActor;
+         6: pop
+         7: return
+
+  static {};
+    Code:
+         0: ldc_w         #500                // String 2026-11-06T00:00:00Z
+         3: invokestatic  #502                // Method java/time/Instant.parse:(Ljava/lang/CharSequence;)Ljava/time/Instant;
+         6: putstatic     #56                 // Field NOW:Ljava/time/Instant;
+         9: ldc_w         #506                // String a
+        12: bipush        64
+        14: invokevirtual #508                // Method java/lang/String.repeat:(I)Ljava/lang/String;
+        17: invokestatic  #512                // Method dev/codex/schubert/nk/protocol/header/AuthenticationContext.of:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;
+        20: putstatic     #52                 // Field INPUT:Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;
+        23: return
+}
+Compiled from "AdminPreludeJdbcPortTest.java"
+final class dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest$Fixture {
+  long candidate;
+
+  long actor;
+
+  java.util.List<java.lang.Long> candidateRows;
+
+  java.util.List<java.lang.Long> lockedRows;
+
+  java.util.List<java.lang.Long> userRows;
+
+  int advisoryRows;
+
+  boolean candidateNull;
+
+  boolean autoCommit;
+
+  boolean readOnly;
+
+  boolean authenticated;
+
+  java.lang.String role;
+
+  java.lang.String faultAt;
+
+  java.lang.RuntimeException runtimeFailure;
+
+  final java.util.List<java.lang.String> order;
+
+  final java.util.Map<java.lang.String, java.util.Map<java.lang.Integer, java.lang.Object>> bindings;
+
+  final java.util.List<java.lang.String> acquired;
+
+  final java.util.List<java.lang.String> closed;
+
+  final java.util.List<java.lang.String> badCloses;
+
+  int forbiddenOwnerCalls;
+
+  private dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest$Fixture();
+    Code:
+         0: aload_0
+         1: invokespecial #3                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: ldc2_w        #9                  // long 7l
+         8: putfield      #11                 // Field candidate:J
+        11: aload_0
+        12: ldc2_w        #9                  // long 7l
+        15: putfield      #17                 // Field actor:J
+        18: aload_0
+        19: ldc2_w        #9                  // long 7l
+        22: invokestatic  #20                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        25: invokestatic  #26                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+        28: putfield      #32                 // Field candidateRows:Ljava/util/List;
+        31: aload_0
+        32: ldc2_w        #9                  // long 7l
+        35: invokestatic  #20                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        38: invokestatic  #26                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+        41: putfield      #36                 // Field lockedRows:Ljava/util/List;
+        44: aload_0
+        45: ldc2_w        #39                 // long 3l
+        48: invokestatic  #20                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        51: ldc2_w        #9                  // long 7l
+        54: invokestatic  #20                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        57: ldc2_w        #41                 // long 20l
+        60: invokestatic  #20                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        63: invokestatic  #43                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+        66: putfield      #46                 // Field userRows:Ljava/util/List;
+        69: aload_0
+        70: iconst_1
+        71: putfield      #49                 // Field advisoryRows:I
+        74: aload_0
+        75: iconst_1
+        76: putfield      #53                 // Field authenticated:Z
+        79: aload_0
+        80: ldc           #57                 // String ADMIN
+        82: putfield      #59                 // Field role:Ljava/lang/String;
+        85: aload_0
+        86: ldc           #63                 // String
+        88: putfield      #65                 // Field faultAt:Ljava/lang/String;
+        91: aload_0
+        92: new           #68                 // class java/util/ArrayList
+        95: dup
+        96: invokespecial #70                 // Method java/util/ArrayList."<init>":()V
+        99: putfield      #71                 // Field order:Ljava/util/List;
+       102: aload_0
+       103: new           #74                 // class java/util/HashMap
+       106: dup
+       107: invokespecial #76                 // Method java/util/HashMap."<init>":()V
+       110: putfield      #77                 // Field bindings:Ljava/util/Map;
+       113: aload_0
+       114: new           #68                 // class java/util/ArrayList
+       117: dup
+       118: invokespecial #70                 // Method java/util/ArrayList."<init>":()V
+       121: putfield      #81                 // Field acquired:Ljava/util/List;
+       124: aload_0
+       125: new           #68                 // class java/util/ArrayList
+       128: dup
+       129: invokespecial #70                 // Method java/util/ArrayList."<init>":()V
+       132: putfield      #84                 // Field closed:Ljava/util/List;
+       135: aload_0
+       136: new           #68                 // class java/util/ArrayList
+       139: dup
+       140: invokespecial #70                 // Method java/util/ArrayList."<init>":()V
+       143: putfield      #87                 // Field badCloses:Ljava/util/List;
+       146: return
+
+  void fault(java.lang.String) throws java.sql.SQLException;
+    Code:
+         0: aload_0
+         1: getfield      #65                 // Field faultAt:Ljava/lang/String;
+         4: aload_1
+         5: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+         8: ifeq          35
+        11: aload_0
+        12: getfield      #96                 // Field runtimeFailure:Ljava/lang/RuntimeException;
+        15: ifnull        23
+        18: aload_0
+        19: getfield      #96                 // Field runtimeFailure:Ljava/lang/RuntimeException;
+        22: athrow
+        23: new           #100                // class java/sql/SQLException
+        26: dup
+        27: ldc           #102                // String ordinary-prelude-fixture-marker
+        29: ldc           #104                // String 08006
+        31: invokespecial #106                // Method java/sql/SQLException."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+        34: athrow
+        35: return
+
+  void close(java.lang.String) throws java.sql.SQLException;
+    Code:
+         0: aload_0
+         1: getfield      #84                 // Field closed:Ljava/util/List;
+         4: aload_1
+         5: invokeinterface #109,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        10: pop
+        11: aload_0
+        12: getfield      #87                 // Field badCloses:Ljava/util/List;
+        15: aload_1
+        16: invokeinterface #112,  2          // InterfaceMethod java/util/List.contains:(Ljava/lang/Object;)Z
+        21: ifeq          36
+        24: new           #100                // class java/sql/SQLException
+        27: dup
+        28: ldc           #102                // String ordinary-prelude-fixture-marker
+        30: ldc           #104                // String 08006
+        32: invokespecial #106                // Method java/sql/SQLException."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+        35: athrow
+        36: return
+
+  java.sql.Connection connection();
+    Code:
+         0: ldc           #115                // class java/sql/Connection
+         2: aload_0
+         3: invokedynamic #117,  0            // InvokeDynamic #0:invoke:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;)Ljava/lang/reflect/InvocationHandler;
+         8: invokestatic  #121                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.proxy:(Ljava/lang/Class;Ljava/lang/reflect/InvocationHandler;)Ljava/lang/Object;
+        11: checkcast     #115                // class java/sql/Connection
+        14: areturn
+
+  java.sql.PreparedStatement statement(java.lang.String) throws java.sql.SQLException;
+    Code:
+         0: aload_1
+         1: astore_3
+         2: iconst_m1
+         3: istore        4
+         5: aload_3
+         6: invokevirtual #125                // Method java/lang/String.hashCode:()I
+         9: lookupswitch  { // 7
+             -2031319920: 136
+             -1213631280: 91
+             -1176846000: 76
+              -143965894: 121
+               174131728: 166
+               505505613: 106
+              1664034111: 151
+                 default: 179
+            }
+        76: aload_3
+        77: ldc           #129                // String select user_id from schubert.auth_sessions where context_hash=?
+        79: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        82: ifeq          179
+        85: iconst_0
+        86: istore        4
+        88: goto          179
+        91: aload_3
+        92: ldc           #131                // String select user_id from schubert.auth_sessions where context_hash=? for update
+        94: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        97: ifeq          179
+       100: iconst_1
+       101: istore        4
+       103: goto          179
+       106: aload_3
+       107: ldc           #133                // String select id from schubert.app_users\n where id=? or id=? or (? and role=\'ADMIN\' and status=\'ACTIVE\')\n order by id for update\n
+       109: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       112: ifeq          179
+       115: iconst_2
+       116: istore        4
+       118: goto          179
+       121: aload_3
+       122: ldc           #135                // String select pg_advisory_xact_lock(71419601)
+       124: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       127: ifeq          179
+       130: iconst_3
+       131: istore        4
+       133: goto          179
+       136: aload_3
+       137: ldc           #137                // String select u.id from schubert.app_users u join schubert.auth_sessions s on s.user_id=u.id where s.context_hash=? for update of u
+       139: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       142: ifeq          179
+       145: iconst_4
+       146: istore        4
+       148: goto          179
+       151: aload_3
+       152: ldc           #139                // String select s.id,s.user_id,u.username,u.role,u.status,s.revoked,s.expires_at from schubert.auth_sessions s join schubert.app_users u on u.id=s.user_id where s.context_hash=? for update of s
+       154: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       157: ifeq          179
+       160: iconst_5
+       161: istore        4
+       163: goto          179
+       166: aload_3
+       167: ldc           #141                // String update schubert.auth_sessions set last_accessed_at=greatest(last_accessed_at,?),expires_at=greatest(expires_at,cast(? as timestamptz)+interval \'8 hours\') where id=? and not revoked
+       169: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       172: ifeq          179
+       175: bipush        6
+       177: istore        4
+       179: iload         4
+       181: tableswitch   { // 0 to 6
+                       0: 224
+                       1: 229
+                       2: 234
+                       3: 239
+                       4: 244
+                       5: 249
+                       6: 254
+                 default: 259
+            }
+       224: ldc           #143                // String candidate
+       226: goto          269
+       229: ldc           #144                // String locked
+       231: goto          269
+       234: ldc           #146                // String users
+       236: goto          269
+       239: ldc           #148                // String advisory
+       241: goto          269
+       244: ldc           #150                // String auth-user
+       246: goto          269
+       249: ldc           #152                // String auth-session
+       251: goto          269
+       254: ldc           #154                // String touch
+       256: goto          269
+       259: new           #156                // class java/lang/AssertionError
+       262: dup
+       263: ldc           #158                // String SQL outside independently fixed prelude
+       265: invokespecial #160                // Method java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+       268: athrow
+       269: astore_2
+       270: aload_0
+       271: getfield      #71                 // Field order:Ljava/util/List;
+       274: aload_2
+       275: invokeinterface #109,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       280: pop
+       281: aload_0
+       282: aload_2
+       283: invokedynamic #163,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       288: invokevirtual #167                // Method fault:(Ljava/lang/String;)V
+       291: aload_0
+       292: getfield      #81                 // Field acquired:Ljava/util/List;
+       295: aload_2
+       296: invokedynamic #171,  0            // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       301: invokeinterface #109,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       306: pop
+       307: new           #74                 // class java/util/HashMap
+       310: dup
+       311: invokespecial #76                 // Method java/util/HashMap."<init>":()V
+       314: astore_3
+       315: aload_0
+       316: getfield      #77                 // Field bindings:Ljava/util/Map;
+       319: aload_2
+       320: aload_3
+       321: invokeinterface #172,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       326: pop
+       327: ldc           #178                // class java/sql/PreparedStatement
+       329: aload_0
+       330: aload_2
+       331: aload_3
+       332: invokedynamic #180,  0            // InvokeDynamic #3:invoke:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ljava/lang/String;Ljava/util/Map;)Ljava/lang/reflect/InvocationHandler;
+       337: invokestatic  #121                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.proxy:(Ljava/lang/Class;Ljava/lang/reflect/InvocationHandler;)Ljava/lang/Object;
+       340: checkcast     #178                // class java/sql/PreparedStatement
+       343: areturn
+
+  java.sql.ResultSet row(java.lang.String);
+    Code:
+         0: aload_0
+         1: getfield      #81                 // Field acquired:Ljava/util/List;
+         4: aload_1
+         5: invokedynamic #183,  0            // InvokeDynamic #4:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+        10: invokeinterface #109,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        15: pop
+        16: aload_1
+        17: astore_3
+        18: iconst_m1
+        19: istore        4
+        21: aload_3
+        22: invokevirtual #125                // Method java/lang/String.hashCode:()I
+        25: lookupswitch  { // 3
+             -1097452790: 75
+               111578632: 90
+               508663171: 60
+                 default: 102
+            }
+        60: aload_3
+        61: ldc           #143                // String candidate
+        63: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        66: ifeq          102
+        69: iconst_0
+        70: istore        4
+        72: goto          102
+        75: aload_3
+        76: ldc           #144                // String locked
+        78: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        81: ifeq          102
+        84: iconst_1
+        85: istore        4
+        87: goto          102
+        90: aload_3
+        91: ldc           #146                // String users
+        93: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        96: ifeq          102
+        99: iconst_2
+       100: istore        4
+       102: iload         4
+       104: tableswitch   { // 0 to 2
+                       0: 132
+                       1: 139
+                       2: 146
+                 default: 153
+            }
+       132: aload_0
+       133: getfield      #32                 // Field candidateRows:Ljava/util/List;
+       136: goto          163
+       139: aload_0
+       140: getfield      #36                 // Field lockedRows:Ljava/util/List;
+       143: goto          163
+       146: aload_0
+       147: getfield      #46                 // Field userRows:Ljava/util/List;
+       150: goto          163
+       153: aload_0
+       154: getfield      #11                 // Field candidate:J
+       157: invokestatic  #20                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       160: invokestatic  #26                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+       163: astore_2
+       164: aload_1
+       165: ldc           #148                // String advisory
+       167: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       170: ifeq          180
+       173: aload_0
+       174: getfield      #49                 // Field advisoryRows:I
+       177: goto          206
+       180: aload_1
+       181: ldc           #150                // String auth-user
+       183: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       186: ifeq          200
+       189: aload_0
+       190: getfield      #53                 // Field authenticated:Z
+       193: ifne          200
+       196: iconst_0
+       197: goto          206
+       200: aload_2
+       201: invokeinterface #184,  1          // InterfaceMethod java/util/List.size:()I
+       206: istore_3
+       207: iconst_1
+       208: newarray       int
+       210: dup
+       211: iconst_0
+       212: iconst_m1
+       213: iastore
+       214: astore        4
+       216: ldc           #187                // class java/sql/ResultSet
+       218: aload_0
+       219: aload_1
+       220: aload         4
+       222: iload_3
+       223: aload_2
+       224: invokedynamic #189,  0            // InvokeDynamic #5:invoke:(Ldev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest$Fixture;Ljava/lang/String;[IILjava/util/List;)Ljava/lang/reflect/InvocationHandler;
+       229: invokestatic  #121                // Method dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.proxy:(Ljava/lang/Class;Ljava/lang/reflect/InvocationHandler;)Ljava/lang/Object;
+       232: checkcast     #187                // class java/sql/ResultSet
+       235: areturn
+
+  void ownerUnchanged();
+    Code:
+         0: iconst_0
+         1: aload_0
+         2: getfield      #192                // Field forbiddenOwnerCalls:I
+         5: invokestatic  #195                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+         8: aload_0
+         9: getfield      #81                 // Field acquired:Ljava/util/List;
+        12: invokeinterface #184,  1          // InterfaceMethod java/util/List.size:()I
+        17: aload_0
+        18: getfield      #84                 // Field closed:Ljava/util/List;
+        21: invokeinterface #184,  1          // InterfaceMethod java/util/List.size:()I
+        26: invokestatic  #195                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+        29: aload_0
+        30: getfield      #81                 // Field acquired:Ljava/util/List;
+        33: invokeinterface #201,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        38: astore_1
+        39: aload_1
+        40: invokeinterface #205,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        45: ifeq          95
+        48: aload_1
+        49: invokeinterface #211,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        54: checkcast     #91                 // class java/lang/String
+        57: astore_2
+        58: lconst_1
+        59: aload_0
+        60: getfield      #84                 // Field closed:Ljava/util/List;
+        63: invokeinterface #215,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+        68: aload_2
+        69: dup
+        70: invokestatic  #219                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        73: pop
+        74: invokedynamic #225,  0            // InvokeDynamic #6:test:(Ljava/lang/String;)Ljava/util/function/Predicate;
+        79: invokeinterface #229,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+        84: invokeinterface #235,  1          // InterfaceMethod java/util/stream/Stream.count:()J
+        89: invokestatic  #239                // Method org/junit/jupiter/api/Assertions.assertEquals:(JJ)V
+        92: goto          39
+        95: return
+
+  private java.lang.Object lambda$row$0(java.lang.String, int[], int, java.util.List, java.lang.Object, java.lang.reflect.Method, java.lang.Object[]) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload         6
+         4: invokevirtual #242                // Method java/lang/reflect/Method.getName:()Ljava/lang/String;
+         7: invokedynamic #248,  0            // InvokeDynamic #7:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        12: invokevirtual #167                // Method fault:(Ljava/lang/String;)V
+        15: aload         6
+        17: invokevirtual #242                // Method java/lang/reflect/Method.getName:()Ljava/lang/String;
+        20: astore        8
+        22: iconst_m1
+        23: istore        9
+        25: aload         8
+        27: invokevirtual #125                // Method java/lang/String.hashCode:()I
+        30: lookupswitch  { // 6
+               -75354382: 104
+                 3377907: 88
+                94756344: 170
+               672646709: 153
+               804029191: 136
+              1124427792: 120
+                 default: 184
+            }
+        88: aload         8
+        90: ldc           #251                // String next
+        92: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        95: ifeq          184
+        98: iconst_0
+        99: istore        9
+       101: goto          184
+       104: aload         8
+       106: ldc           #252                // String getLong
+       108: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       111: ifeq          184
+       114: iconst_1
+       115: istore        9
+       117: goto          184
+       120: aload         8
+       122: ldc           #254                // String wasNull
+       124: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       127: ifeq          184
+       130: iconst_2
+       131: istore        9
+       133: goto          184
+       136: aload         8
+       138: ldc_w         #256                // String getString
+       141: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       144: ifeq          184
+       147: iconst_3
+       148: istore        9
+       150: goto          184
+       153: aload         8
+       155: ldc_w         #258                // String getObject
+       158: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       161: ifeq          184
+       164: iconst_4
+       165: istore        9
+       167: goto          184
+       170: aload         8
+       172: ldc_w         #260                // String close
+       175: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       178: ifeq          184
+       181: iconst_5
+       182: istore        9
+       184: iload         9
+       186: tableswitch   { // 0 to 5
+                       0: 224
+                       1: 249
+                       2: 265
+                       3: 292
+                       4: 453
+                       5: 666
+                 default: 680
+            }
+       224: aload_2
+       225: iconst_0
+       226: dup2
+       227: iaload
+       228: iconst_1
+       229: iadd
+       230: iastore
+       231: aload_2
+       232: iconst_0
+       233: iaload
+       234: iload_3
+       235: if_icmpge     242
+       238: iconst_1
+       239: goto          243
+       242: iconst_0
+       243: invokestatic  #262                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+       246: goto          698
+       249: aload         4
+       251: aload_2
+       252: iconst_0
+       253: iaload
+       254: invokeinterface #267,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       259: checkcast     #21                 // class java/lang/Long
+       262: goto          698
+       265: aload_1
+       266: ldc           #143                // String candidate
+       268: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       271: ifeq          285
+       274: aload_0
+       275: getfield      #271                // Field candidateNull:Z
+       278: ifeq          285
+       281: iconst_1
+       282: goto          286
+       285: iconst_0
+       286: invokestatic  #262                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+       289: goto          698
+       292: aload         7
+       294: iconst_0
+       295: aaload
+       296: checkcast     #91                 // class java/lang/String
+       299: astore        10
+       301: iconst_m1
+       302: istore        11
+       304: aload         10
+       306: invokevirtual #125                // Method java/lang/String.hashCode:()I
+       309: lookupswitch  { // 3
+              -892481550: 344
+              -265713450: 361
+                 3506294: 378
+                 default: 392
+            }
+       344: aload         10
+       346: ldc_w         #274                // String status
+       349: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       352: ifeq          392
+       355: iconst_0
+       356: istore        11
+       358: goto          392
+       361: aload         10
+       363: ldc_w         #276                // String username
+       366: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       369: ifeq          392
+       372: iconst_1
+       373: istore        11
+       375: goto          392
+       378: aload         10
+       380: ldc_w         #278                // String role
+       383: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       386: ifeq          392
+       389: iconst_2
+       390: istore        11
+       392: iload         11
+       394: tableswitch   { // 0 to 2
+                       0: 420
+                       1: 426
+                       2: 432
+                 default: 439
+            }
+       420: ldc_w         #279                // String ACTIVE
+       423: goto          450
+       426: ldc_w         #281                // String fixture-admin
+       429: goto          450
+       432: aload_0
+       433: getfield      #59                 // Field role:Ljava/lang/String;
+       436: goto          450
+       439: new           #156                // class java/lang/AssertionError
+       442: dup
+       443: ldc_w         #283                // String unregistered text column
+       446: invokespecial #160                // Method java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+       449: athrow
+       450: goto          698
+       453: aload         7
+       455: iconst_0
+       456: aaload
+       457: checkcast     #91                 // class java/lang/String
+       460: astore        10
+       462: iconst_m1
+       463: istore        11
+       465: aload         10
+       467: invokevirtual #125                // Method java/lang/String.hashCode:()I
+       470: lookupswitch  { // 4
+              -833811170: 529
+              -147132913: 563
+                    3355: 546
+              1100137118: 512
+                 default: 577
+            }
+       512: aload         10
+       514: ldc_w         #285                // String revoked
+       517: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       520: ifeq          577
+       523: iconst_0
+       524: istore        11
+       526: goto          577
+       529: aload         10
+       531: ldc_w         #287                // String expires_at
+       534: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       537: ifeq          577
+       540: iconst_1
+       541: istore        11
+       543: goto          577
+       546: aload         10
+       548: ldc_w         #289                // String id
+       551: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       554: ifeq          577
+       557: iconst_2
+       558: istore        11
+       560: goto          577
+       563: aload         10
+       565: ldc_w         #291                // String user_id
+       568: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       571: ifeq          577
+       574: iconst_3
+       575: istore        11
+       577: iload         11
+       579: tableswitch   { // 0 to 3
+                       0: 608
+                       1: 615
+                       2: 633
+                       3: 642
+                 default: 652
+            }
+       608: iconst_0
+       609: invokestatic  #262                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+       612: goto          663
+       615: getstatic     #293                // Field dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.NOW:Ljava/time/Instant;
+       618: ldc2_w        #297                // long 28800l
+       621: invokevirtual #299                // Method java/time/Instant.plusSeconds:(J)Ljava/time/Instant;
+       624: getstatic     #305                // Field java/time/ZoneOffset.UTC:Ljava/time/ZoneOffset;
+       627: invokevirtual #311                // Method java/time/Instant.atOffset:(Ljava/time/ZoneOffset;)Ljava/time/OffsetDateTime;
+       630: goto          663
+       633: ldc_w         #315                // String 00000000-0000-4000-8000-000000000007
+       636: invokestatic  #317                // Method java/util/UUID.fromString:(Ljava/lang/String;)Ljava/util/UUID;
+       639: goto          663
+       642: aload_0
+       643: getfield      #17                 // Field actor:J
+       646: invokestatic  #20                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       649: goto          663
+       652: new           #156                // class java/lang/AssertionError
+       655: dup
+       656: ldc_w         #323                // String unregistered typed column
+       659: invokespecial #160                // Method java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+       662: athrow
+       663: goto          698
+       666: aload_0
+       667: aload_1
+       668: invokedynamic #183,  0            // InvokeDynamic #4:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       673: invokevirtual #325                // Method close:(Ljava/lang/String;)V
+       676: aconst_null
+       677: goto          698
+       680: new           #156                // class java/lang/AssertionError
+       683: dup
+       684: aload         6
+       686: invokevirtual #242                // Method java/lang/reflect/Method.getName:()Ljava/lang/String;
+       689: invokedynamic #327,  0            // InvokeDynamic #8:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       694: invokespecial #160                // Method java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+       697: athrow
+       698: areturn
+
+  private java.lang.Object lambda$statement$0(java.lang.String, java.util.Map, java.lang.Object, java.lang.reflect.Method, java.lang.Object[]) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload         4
+         4: invokevirtual #242                // Method java/lang/reflect/Method.getName:()Ljava/lang/String;
+         7: invokedynamic #248,  0            // InvokeDynamic #7:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        12: invokevirtual #167                // Method fault:(Ljava/lang/String;)V
+        15: aload         4
+        17: invokevirtual #242                // Method java/lang/reflect/Method.getName:()Ljava/lang/String;
+        20: astore        6
+        22: iconst_m1
+        23: istore        7
+        25: aload         6
+        27: invokevirtual #125                // Method java/lang/String.hashCode:()I
+        30: lookupswitch  { // 7
+             -1359179181: 164
+             -1256589978: 130
+                94756344: 198
+               458029633: 147
+               589412115: 96
+               924971166: 181
+              1984755198: 113
+                 default: 213
+            }
+        96: aload         6
+        98: ldc_w         #328                // String setString
+       101: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       104: ifeq          213
+       107: iconst_0
+       108: istore        7
+       110: goto          213
+       113: aload         6
+       115: ldc_w         #330                // String setLong
+       118: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       121: ifeq          213
+       124: iconst_1
+       125: istore        7
+       127: goto          213
+       130: aload         6
+       132: ldc_w         #332                // String setBoolean
+       135: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       138: ifeq          213
+       141: iconst_2
+       142: istore        7
+       144: goto          213
+       147: aload         6
+       149: ldc_w         #334                // String setObject
+       152: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       155: ifeq          213
+       158: iconst_3
+       159: istore        7
+       161: goto          213
+       164: aload         6
+       166: ldc_w         #336                // String executeQuery
+       169: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       172: ifeq          213
+       175: iconst_4
+       176: istore        7
+       178: goto          213
+       181: aload         6
+       183: ldc_w         #338                // String executeUpdate
+       186: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       189: ifeq          213
+       192: iconst_5
+       193: istore        7
+       195: goto          213
+       198: aload         6
+       200: ldc_w         #260                // String close
+       203: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       206: ifeq          213
+       209: bipush        6
+       211: istore        7
+       213: iload         7
+       215: tableswitch   { // 0 to 6
+                       0: 256
+                       1: 256
+                       2: 256
+                       3: 256
+                       4: 278
+                       5: 286
+                       6: 293
+                 default: 307
+            }
+       256: aload_2
+       257: aload         5
+       259: iconst_0
+       260: aaload
+       261: checkcast     #340                // class java/lang/Integer
+       264: aload         5
+       266: iconst_1
+       267: aaload
+       268: invokeinterface #172,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       273: pop
+       274: aconst_null
+       275: goto          325
+       278: aload_0
+       279: aload_1
+       280: invokevirtual #342                // Method row:(Ljava/lang/String;)Ljava/sql/ResultSet;
+       283: goto          325
+       286: iconst_1
+       287: invokestatic  #346                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       290: goto          325
+       293: aload_0
+       294: aload_1
+       295: invokedynamic #171,  0            // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       300: invokevirtual #325                // Method close:(Ljava/lang/String;)V
+       303: aconst_null
+       304: goto          325
+       307: new           #156                // class java/lang/AssertionError
+       310: dup
+       311: aload         4
+       313: invokevirtual #242                // Method java/lang/reflect/Method.getName:()Ljava/lang/String;
+       316: invokedynamic #349,  0            // InvokeDynamic #9:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       321: invokespecial #160                // Method java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+       324: athrow
+       325: areturn
+
+  private java.lang.Object lambda$connection$0(java.lang.Object, java.lang.reflect.Method, java.lang.Object[]) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: aload_2
+         2: invokevirtual #242                // Method java/lang/reflect/Method.getName:()Ljava/lang/String;
+         5: invokevirtual #167                // Method fault:(Ljava/lang/String;)V
+         8: aload_2
+         9: invokevirtual #242                // Method java/lang/reflect/Method.getName:()Ljava/lang/String;
+        12: astore        4
+        14: iconst_m1
+        15: istore        5
+        17: aload         4
+        19: invokevirtual #125                // Method java/lang/String.hashCode:()I
+        22: lookupswitch  { // 8
+             -1660954196: 113
+             -1354815177: 147
+             -1143247940: 96
+             -1113328600: 130
+              -369116728: 198
+              -259719452: 164
+                94756344: 181
+              1121636580: 216
+                 default: 231
+            }
+        96: aload         4
+        98: ldc_w         #350                // String getAutoCommit
+       101: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       104: ifeq          231
+       107: iconst_0
+       108: istore        5
+       110: goto          231
+       113: aload         4
+       115: ldc_w         #352                // String isReadOnly
+       118: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       121: ifeq          231
+       124: iconst_1
+       125: istore        5
+       127: goto          231
+       130: aload         4
+       132: ldc_w         #354                // String prepareStatement
+       135: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       138: ifeq          231
+       141: iconst_2
+       142: istore        5
+       144: goto          231
+       147: aload         4
+       149: ldc_w         #356                // String commit
+       152: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       155: ifeq          231
+       158: iconst_3
+       159: istore        5
+       161: goto          231
+       164: aload         4
+       166: ldc_w         #358                // String rollback
+       169: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       172: ifeq          231
+       175: iconst_4
+       176: istore        5
+       178: goto          231
+       181: aload         4
+       183: ldc_w         #260                // String close
+       186: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       189: ifeq          231
+       192: iconst_5
+       193: istore        5
+       195: goto          231
+       198: aload         4
+       200: ldc_w         #360                // String setAutoCommit
+       203: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       206: ifeq          231
+       209: bipush        6
+       211: istore        5
+       213: goto          231
+       216: aload         4
+       218: ldc_w         #362                // String setReadOnly
+       221: invokevirtual #90                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       224: ifeq          231
+       227: bipush        7
+       229: istore        5
+       231: iload         5
+       233: tableswitch   { // 0 to 7
+                       0: 280
+                       1: 290
+                       2: 300
+                       3: 313
+                       4: 313
+                       5: 313
+                       6: 313
+                       7: 313
+                 default: 334
+            }
+       280: aload_0
+       281: getfield      #364                // Field autoCommit:Z
+       284: invokestatic  #262                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+       287: goto          351
+       290: aload_0
+       291: getfield      #367                // Field readOnly:Z
+       294: invokestatic  #262                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+       297: goto          351
+       300: aload_0
+       301: aload_3
+       302: iconst_0
+       303: aaload
+       304: checkcast     #91                 // class java/lang/String
+       307: invokevirtual #370                // Method statement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+       310: goto          351
+       313: aload_0
+       314: dup
+       315: getfield      #192                // Field forbiddenOwnerCalls:I
+       318: iconst_1
+       319: iadd
+       320: putfield      #192                // Field forbiddenOwnerCalls:I
+       323: new           #156                // class java/lang/AssertionError
+       326: dup
+       327: ldc_w         #374                // String borrowed transaction changed
+       330: invokespecial #160                // Method java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+       333: athrow
+       334: new           #156                // class java/lang/AssertionError
+       337: dup
+       338: aload_2
+       339: invokevirtual #242                // Method java/lang/reflect/Method.getName:()Ljava/lang/String;
+       342: invokedynamic #376,  0            // InvokeDynamic #10:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       347: invokespecial #160                // Method java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+       350: athrow
+       351: areturn
+}
