@@ -1,0 +1,209 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "e7a8fe792ffe6b85a80a5fd897bd1dfe415e230f",
+    "normalSource": "087e81a679a576721d8b6d6124fdd881ae9192e5",
+    "normalManifestSha256": "068773debc310f76f580ef1eea8de2e5735cada128d2e6c677ce62ebdffd2e0a",
+    "inputHashes": {
+      "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorEmptyInputTest.java": "4cb2aa3657224f3ba033d3bbc8f8d437f4a536e5b729e21145e469ba6a65b570",
+      "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java": "601ad8cd134dbb0deb54bcc2387f8c7b6e68fd507dd914e6b77ee4c4257230bf",
+      "program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java": "decb8d68d011f2835b5a1202290e0847a68e154c742283148759fcdb21171a5d",
+      "program/characterization/tests/resources/cases/catalog.json": "df412392032ad324a5e5dd92b0703c03287a7744af47aa42cd34a0a617e46d38",
+      "program/characterization/tests/resources/cases/dif-allowlist.json": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6",
+      "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java": "c45b65bd922548785f6798ab88e2cfde0b880e163864414be102bbe980eab299",
+      "evidence/01_PT/020_NK-CHR-001/input/002_comparator_host_qualifier.py": "949d00ec72d1cdf453bdf0fca797c2a840b2728bc82eaa0e4d5ca01a83d7510b"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21088-characterization-tool-original-main-compile-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar": "4e46308ab580010e5c3a26d946c4764b3dfede9ca2b0c472e1090eb01b615ced",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar": "0a1bd4e9b0d670e632d40ee8c625ad376233502f03c2f5889baea95d025b47a7",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar": "e516743a316dcf83c572ffc9cb6e8c5e8c134880c8c5155b02f7b34e9c5dc3cf",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar": "aa77eaf29293a868c47372194f7c5287d77d9370b04ea25d3fffc1e4904b5880"
+    },
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "driverSha256": "949d00ec72d1cdf453bdf0fca797c2a840b2728bc82eaa0e4d5ca01a83d7510b",
+    "compileManifestSha256": "4fd679d84a0e02301fc961a7400208d405d889a530f30e23bfb57f4aeedcbca5",
+    "selected": [
+      "dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest",
+      "dev.codex.schubert.characterization.ArtifactComparatorTest"
+    ],
+    "existingMethodsSourceRequalification": 8,
+    "newMethods": 2,
+    "expectedTests": 10,
+    "realBaselineAccess": false,
+    "realChrExecution": false,
+    "session": "PG21102-COMPARATOR-SELECTED10",
+    "startUTC": "2026-11-06T15:16:21.016114+00:00"
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T15:16:21.016309+00:00",
+      "endUTC": "2026-11-06T15:16:22.835686+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21102-comparator-selected-ten-unit-v1/tmp",
+        "-Dchr.unitProjectRoot=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21110-comparator-selected-ten-final-compile-v1/design-only",
+        "-Dchr.projectRoot=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21102-comparator-selected-ten-unit-v1/unusable-default-own-root",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21102-comparator-selected-ten-unit-v1/jacoco.exec,sessionid=PG21102-COMPARATOR-SELECTED10,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21102-comparator-selected-ten-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21110-comparator-selected-ten-final-compile-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg21088-characterization-tool-original-main-compile-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21102-comparator-selected-ten-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.ArtifactComparatorTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "34cca15ad4c0839fb2fec8db5d06e31a9fc762a0c3a4a727b39a486977caa27d",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T15:16:22.836887+00:00",
+      "endUTC": "2026-11-06T15:16:23.001612+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21102-comparator-selected-ten-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21102-comparator-selected-ten-unit-v1/component",
+        "--sourcefiles",
+        "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/src/main/java",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21102-comparator-selected-ten-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "ad25fdb1071e1b1c385a65bfe0681a4e7083fc7a658fb5d28c141054a74828ac",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T15:16:23.001926+00:00",
+      "endUTC": "2026-11-06T15:16:23.166756+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21102-comparator-selected-ten-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "10a1c28fedb833d01517f6af7e098edc0b17601336c64e2f7c9e02860130167a",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T15:16:23.167048+00:00",
+      "endUTC": "2026-11-06T15:16:23.281978+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21102-comparator-selected-ten-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "57bde1551483f709380ca580849c1ae65958c1416421fcb27b8aa140493828b1",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest",
+      "name": "comparisonResultOwnsImmutableNonNullListSnapshots()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "name": "rejectsNullMissingAndWrongInputTypesWithoutNpe()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "name": "rejectsNonIntegralOrOversizedObservationVersions()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "name": "rejectsMalformedObservationEnvelope()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "name": "rejectsUnknownOutOfScopeBroadWrongOverlappingAndUnusedObservations()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest",
+      "name": "emptyJsonInputsFailClosedWithoutNullDereference()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "name": "rejectsMissingOrUncorrelatedL01ProjectionEvenWhenDifClaimsAreValid()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "name": "reportsCatalogArtifactStatusSetSymlinkAndUnregisteredDrift()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "name": "acceptsTwentyFourPassCasesAndExactlySixteenApprovedDifferences()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "name": "lexicalArtifactNamesRejectNullAndNamelessPathsBeforeDereference()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/characterization/ArtifactComparator": "5fed54ece4b199d241f3a8665adc8a5fc6633f534dd3fe323552a44093fe8c21",
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult": "2bf0898909242981fe67738e35790f1caaa0d869e3ba14da8398281e66ae57cb"
+  },
+  "formalUpdated": false
+}
