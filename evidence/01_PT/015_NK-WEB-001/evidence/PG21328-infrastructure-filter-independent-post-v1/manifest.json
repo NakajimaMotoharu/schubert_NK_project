@@ -1,0 +1,137 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T02:31:34.561687+09:00",
+  "source": "f39b516b76e1fb08bcc2afd248c50475c3dc7191",
+  "productionCoreMain": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+  "tests": 8,
+  "newMethods": 8,
+  "originalPost": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21316-infrastructure-filter-eight-v1/manifest.json",
+    "sha256": "d1cdbc14aa7c6f2595ee9cc972c976b79770671537a38488941cdb4406592f16"
+  },
+  "sourceTestIds": [
+    [
+      "PT-WEB-INFRA001",
+      "nullPortsFailBeforeAnyCallback"
+    ],
+    [
+      "PT-WEB-INFRA002",
+      "nonHttpRequestOrResponseFailsWithoutRunningCaller"
+    ],
+    [
+      "PT-WEB-INFRA003",
+      "successfulCallerIsUnchangedAndNeverQueriesFailureMetadata"
+    ],
+    [
+      "PT-WEB-INFRA004",
+      "typedStorageFailureMapsExactly503OutsideErrorDispatch"
+    ],
+    [
+      "PT-WEB-INFRA005",
+      "committedOutputRethrowsSameTypedFailureWithoutReadingDispatcher"
+    ],
+    [
+      "PT-WEB-INFRA006",
+      "errorDispatchRethrowsSameTypedFailureWithoutSecondErrorSignal"
+    ],
+    [
+      "PT-WEB-INFRA007",
+      "otherFailuresAndErrorCallbackFailuresPreserveIdentityWithoutRetry"
+    ],
+    [
+      "PT-WEB-INFRA008",
+      "sharedFilterKeepsEightConcurrentFailuresAndSuccessesRequestLocal"
+    ]
+  ],
+  "fourCounters": {
+    "LINE": 13,
+    "METHOD": 2,
+    "CLASS": 1,
+    "BRANCH": 8
+  },
+  "missed": 0,
+  "physical": 1,
+  "staticPost": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21322-infrastructure-filter-fixed-static-v1/manifest.json",
+    "sha256": "40f6166812d1b69b3b2fdd3d97f5258c401c1fda2c8d65ad94278736b3395d88"
+  },
+  "environment": [
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    },
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    },
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    }
+  ],
+  "initializedProduct": [
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest",
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest$$Lambda+0x000000006d13dd70",
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest$$Lambda+0x000000006d180000",
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest$$Lambda+0x000000006d180230",
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest$$Lambda+0x000000006d180460",
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest$$Lambda+0x000000006d180690",
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest$$Lambda+0x000000006d1808c0",
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest$$Lambda+0x000000006d180af0",
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest$$Lambda+0x000000006d180d20",
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest$$Lambda+0x000000006d180f50",
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest$$Lambda+0x000000006d181790",
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest$$Lambda+0x000000006d1819c0",
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest$$Lambda+0x000000006d181bf0",
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest$Frame",
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest$Frame$$Lambda+0x000000006d128aa8",
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest$Frame$$Lambda+0x000000006d13d000",
+    "dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest$Frame$$Lambda+0x000000006d13db40",
+    "dev/codex/schubert/nk/web/security/WebInfrastructureFailureFilter",
+    "dev/codex/schubert/nk/web/session/SessionStoreException"
+  ],
+  "fixedConsoleJdkReview": {
+    "path": "evidence/01_PT/015_NK-WEB-001/input/001_login_failure_sdk_static_review.json",
+    "sha256": "79633848d5904d37f1c6f8cd13ca5f0b55757dbba3014608ac659fc1da472093"
+  },
+  "driverProviderEntries": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": [],
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-web/7.1.1/spring-security-web-7.1.1.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-crypto/7.1.1/spring-security-crypto-7.1.1.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar": [],
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": []
+  },
+  "dependencyMethodWitness": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21326-infrastructure-dependency-method-v1/manifest.json",
+    "sha256": "249ab7a6eae61c64f70bd70d6ed0054ab567da8c68fca9d22e6524464bc3774a"
+  },
+  "productTestsReexecuted": 0,
+  "actualSessionOrDbOrTokenGeneration": false,
+  "actualBrowserOrHttp": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "original282Member": true,
+  "effortRate": null,
+  "checkerSha256": "769fa0c7bb4981b750a63e228f795fde9d13308a4ca2b56601d97a3a7dc4d6ac",
+  "checkerSource": "019e460bd01633042832d467cf8d059f106106a0"
+}
