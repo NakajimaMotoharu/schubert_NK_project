@@ -1,0 +1,59 @@
+{
+  "actualExit": 0,
+  "metadataExit": 0,
+  "compileExit": 0,
+  "prepareManifestSha256": "f12d12cb22f03d8671c89ad85c43b8c5712ab71dfe2db75cb925aa44ce90f758",
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserDetailTemplateResourcePortTest.java": "d8e5f9a8b7666df841a6eba84ce1219e9508c0de1652103c26a75c03738ef086",
+    "evidence/01_PT/016_NK-WEB-002/input/024_user_detail_resource_dependencies.json": "bf3ebe92f1b586f8de8e9cc780ea26f6874adb9dd64083af3970de1e8f66cb0e",
+    "evidence/01_PT/016_NK-WEB-002/input/023_user_detail_resource_qualifier.py": "9bb13640ba372b203e8870288c8f18e4e7de64bf3076b6ed4b847c6e622cf603",
+    "src/schubert-nk-web/src/main/resources/templates/admin/user-detail.html": "c74fe2ced5c6492369f243bf9930e52e88fef40b18492195a1ac01a9b05f8fba",
+    "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd"
+  },
+  "files": {
+    "original-manifest.json": "18df29286c6cce9cdbfc702aeb3f6df1340b97d5a58a33a0ce27623c7934b80c",
+    "pmd.xml": "c61bdbf752956ae445d6cb1ca0af9277f250d7c1cb49893449a2e80f8bee56e9",
+    "checkstyle.xml": "5cdd208507771f8a3745f83eea98cd2e65b243fe3a0f63d025a5781b56dac9d7",
+    "pmd.stdout": "9f3bca9876dd76080f7143a7d93c3052a1b482bfb4af3e8addad27e8f9dd36eb",
+    "pmd.stderr": "4e114156e4c7a536f6f10017a04f680a7cc8a7ca457f1aaccc280dbd3877210e",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "rawPmd": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": 318,
+      "method": "ownedConcurrentDetailPagesKeepTargetNamesAndFormsIsolated"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 323,
+      "method": "ownedConcurrentDetailPagesKeepTargetNamesAndFormsIsolated"
+    }
+  ],
+  "individualApplicability": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": 318,
+      "method": "ownedConcurrentDetailPagesKeepTargetNamesAndFormsIsolated",
+      "applicable": false,
+      "basis": "Owned standalone JUnit2worker/8future10s/TWR, no container/application/backend thread."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 323,
+      "method": "ownedConcurrentDetailPagesKeepTargetNamesAndFormsIsolated",
+      "applicable": false,
+      "basis": "Owned standalone JUnit2worker/8future10s/TWR, no container/application/backend thread."
+    }
+  ],
+  "applicableViolations": 0,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "testsExecuted": 0,
+  "priorFailure": "PG20652 Optional import compile1, original preserved; initial static guard never started process",
+  "bugRefs": [
+    "BUG-2348",
+    "YKT-2093"
+  ]
+}
