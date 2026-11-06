@@ -1,0 +1,1992 @@
+Compiled from "InboundConsumerGroup.java"
+interface dev.codex.schubert.nk.api.messaging.inbound.InboundConsumerGroup extends java.lang.AutoCloseable {
+  public abstract void stopDelivery();
+    descriptor: ()V
+
+  public abstract void close();
+    descriptor: ()V
+}
+Compiled from "ApiMessagingRuntime.java"
+public final class dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntime implements java.lang.AutoCloseable {
+  private static final int MAXIMUM_CONSUMER_GROUPS;
+    descriptor: I
+
+  private final java.util.List<dev.codex.schubert.nk.api.messaging.inbound.InboundConsumerGroup> groups;
+    descriptor: Ljava/util/List;
+
+  private final java.util.concurrent.atomic.AtomicBoolean terminal;
+    descriptor: Ljava/util/concurrent/atomic/AtomicBoolean;
+
+  private final java.util.concurrent.atomic.AtomicBoolean stopping;
+    descriptor: Ljava/util/concurrent/atomic/AtomicBoolean;
+
+  private final java.lang.Object closeLock;
+    descriptor: Ljava/lang/Object;
+
+  private final boolean[] groupClosed;
+    descriptor: [Z
+
+  private boolean closed;
+    descriptor: Z
+
+  private dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntime(java.util.List<dev.codex.schubert.nk.api.messaging.inbound.InboundConsumerGroup>, java.util.concurrent.atomic.AtomicBoolean);
+    descriptor: (Ljava/util/List;Ljava/util/concurrent/atomic/AtomicBoolean;)V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #7                  // class java/util/concurrent/atomic/AtomicBoolean
+         8: dup
+         9: invokespecial #9                  // Method java/util/concurrent/atomic/AtomicBoolean."<init>":()V
+        12: putfield      #10                 // Field stopping:Ljava/util/concurrent/atomic/AtomicBoolean;
+        15: aload_0
+        16: new           #2                  // class java/lang/Object
+        19: dup
+        20: invokespecial #1                  // Method java/lang/Object."<init>":()V
+        23: putfield      #16                 // Field closeLock:Ljava/lang/Object;
+        26: aload_0
+        27: iconst_3
+        28: newarray       boolean
+        30: putfield      #20                 // Field groupClosed:[Z
+        33: aload_0
+        34: aload_1
+        35: putfield      #24                 // Field groups:Ljava/util/List;
+        38: aload_0
+        39: aload_2
+        40: putfield      #28                 // Field terminal:Ljava/util/concurrent/atomic/AtomicBoolean;
+        43: return
+
+  public static dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntime start(java.util.function.Supplier<jakarta.jms.JMSContext>, java.util.function.Supplier<jakarta.jms.JMSContext>, dev.codex.schubert.nk.api.messaging.inbound.SyncRequestProcessor, dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessor, java.time.Clock, java.util.function.Consumer<dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException>);
+    descriptor: (Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;Ljava/util/function/Consumer;)Ldev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: aload_3
+         4: aconst_null
+         5: aload         4
+         7: aload         5
+         9: invokedynamic #31,  0             // InvokeDynamic #0:run:()Ljava/lang/Runnable;
+        14: iconst_0
+        15: invokestatic  #35                 // Method startSelected:(Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async;Ljava/time/Clock;Ljava/util/function/Consumer;Ljava/lang/Runnable;Z)Ldev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime;
+        18: areturn
+
+  public static dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntime start(java.util.function.Supplier<jakarta.jms.JMSContext>, java.util.function.Supplier<jakarta.jms.JMSContext>, java.util.function.Supplier<jakarta.jms.JMSContext>, dev.codex.schubert.nk.api.messaging.inbound.SyncRequestProcessor, dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessor, dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessor, java.time.Clock, java.util.function.Consumer<dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException>, java.lang.Runnable);
+    descriptor: (Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;Ljava/util/function/Consumer;Ljava/lang/Runnable;)Ldev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: aload_3
+         4: aload         4
+         6: aload         5
+         8: aload         6
+        10: aload         7
+        12: aload         8
+        14: iconst_0
+        15: invokestatic  #39                 // Method startComplete:(Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;Ljava/util/function/Consumer;Ljava/lang/Runnable;Z)Ldev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime;
+        18: areturn
+
+  public static dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntime startRetainingUnknown(java.util.function.Supplier<jakarta.jms.JMSContext>, java.util.function.Supplier<jakarta.jms.JMSContext>, java.util.function.Supplier<jakarta.jms.JMSContext>, dev.codex.schubert.nk.api.messaging.inbound.SyncRequestProcessor, dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessor, dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessor, java.time.Clock, java.util.function.Consumer<dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException>, java.lang.Runnable);
+    descriptor: (Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;Ljava/util/function/Consumer;Ljava/lang/Runnable;)Ldev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: aload_3
+         4: aload         4
+         6: aload         5
+         8: aload         6
+        10: aload         7
+        12: aload         8
+        14: iconst_1
+        15: invokestatic  #39                 // Method startComplete:(Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;Ljava/util/function/Consumer;Ljava/lang/Runnable;Z)Ldev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime;
+        18: areturn
+
+  private static dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntime startComplete(java.util.function.Supplier<jakarta.jms.JMSContext>, java.util.function.Supplier<jakarta.jms.JMSContext>, java.util.function.Supplier<jakarta.jms.JMSContext>, dev.codex.schubert.nk.api.messaging.inbound.SyncRequestProcessor, dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessor, dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessor, java.time.Clock, java.util.function.Consumer<dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException>, java.lang.Runnable, boolean);
+    descriptor: (Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;Ljava/util/function/Consumer;Ljava/lang/Runnable;Z)Ldev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_3
+         3: aload         4
+         5: new           #43                 // class dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async
+         8: dup
+         9: aload_2
+        10: ldc           #45                 // String async factory
+        12: invokestatic  #47                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        15: checkcast     #53                 // class java/util/function/Supplier
+        18: aload         5
+        20: ldc           #55                 // String question processor
+        22: invokestatic  #47                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        25: checkcast     #57                 // class dev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor
+        28: invokespecial #59                 // Method dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async."<init>":(Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;)V
+        31: aload         6
+        33: aload         7
+        35: aload         8
+        37: iload         9
+        39: invokestatic  #35                 // Method startSelected:(Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async;Ljava/time/Clock;Ljava/util/function/Consumer;Ljava/lang/Runnable;Z)Ldev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime;
+        42: areturn
+
+  private static dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntime startSelected(java.util.function.Supplier<jakarta.jms.JMSContext>, java.util.function.Supplier<jakarta.jms.JMSContext>, dev.codex.schubert.nk.api.messaging.inbound.SyncRequestProcessor, dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessor, dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntime$Async, java.time.Clock, java.util.function.Consumer<dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException>, java.lang.Runnable, boolean);
+    descriptor: (Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ldev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async;Ljava/time/Clock;Ljava/util/function/Consumer;Ljava/lang/Runnable;Z)Ldev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime;
+    Code:
+         0: aload_0
+         1: ldc           #62                 // String sync factory
+         3: invokestatic  #47                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #64                 // String Web Log factory
+        10: invokestatic  #47                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_2
+        15: ldc           #66                 // String syncProcessor
+        17: invokestatic  #47                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: aload_3
+        22: ldc           #68                 // String webLogProcessor
+        24: invokestatic  #47                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        27: pop
+        28: aload         5
+        30: ldc           #70                 // String clock
+        32: invokestatic  #47                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        35: pop
+        36: aload         6
+        38: ldc           #72                 // String onTerminal
+        40: invokestatic  #47                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        43: pop
+        44: aload         7
+        46: ldc           #74                 // String fatal signal
+        48: invokestatic  #47                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        51: pop
+        52: iload         8
+        54: ifeq          63
+        57: invokestatic  #76                 // Method dev/codex/schubert/nk/api/file/ServiceProcessResources.unknownReleasePolicy:()Ljava/util/function/Consumer;
+        60: goto          68
+        63: invokedynamic #82,  0             // InvokeDynamic #1:accept:()Ljava/util/function/Consumer;
+        68: astore        9
+        70: new           #7                  // class java/util/concurrent/atomic/AtomicBoolean
+        73: dup
+        74: invokespecial #9                  // Method java/util/concurrent/atomic/AtomicBoolean."<init>":()V
+        77: astore        10
+        79: aload         10
+        81: aload         6
+        83: invokedynamic #85,  0             // InvokeDynamic #2:accept:(Ljava/util/concurrent/atomic/AtomicBoolean;Ljava/util/function/Consumer;)Ljava/util/function/Consumer;
+        88: astore        11
+        90: aload         10
+        92: aload         7
+        94: invokedynamic #88,  0             // InvokeDynamic #3:run:(Ljava/util/concurrent/atomic/AtomicBoolean;Ljava/lang/Runnable;)Ljava/lang/Runnable;
+        99: astore        12
+       101: new           #91                 // class java/util/ArrayList
+       104: dup
+       105: iconst_3
+       106: invokespecial #93                 // Method java/util/ArrayList."<init>":(I)V
+       109: astore        13
+       111: new           #11                 // class dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime
+       114: dup
+       115: aload         13
+       117: aload         10
+       119: invokespecial #96                 // Method "<init>":(Ljava/util/List;Ljava/util/concurrent/atomic/AtomicBoolean;)V
+       122: astore        14
+       124: aload         13
+       126: aload_0
+       127: new           #99                 // class dev/codex/schubert/nk/api/messaging/inbound/SyncRequestListener
+       130: dup
+       131: aload_2
+       132: aload         5
+       134: invokespecial #101                // Method dev/codex/schubert/nk/api/messaging/inbound/SyncRequestListener."<init>":(Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestProcessor;Ljava/time/Clock;)V
+       137: aload         11
+       139: aload         12
+       141: aload         9
+       143: invokestatic  #104                // Method dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers.start:(Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestListener;Ljava/util/function/Consumer;Ljava/lang/Runnable;Ljava/util/function/Consumer;)Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers;
+       146: invokevirtual #110                // Method java/util/ArrayList.add:(Ljava/lang/Object;)Z
+       149: pop
+       150: aload         13
+       152: aload_1
+       153: new           #114                // class dev/codex/schubert/nk/api/messaging/inbound/WebLogListener
+       156: dup
+       157: aload_3
+       158: aload         5
+       160: invokespecial #116                // Method dev/codex/schubert/nk/api/messaging/inbound/WebLogListener."<init>":(Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;)V
+       163: aload         11
+       165: aload         12
+       167: aload         9
+       169: invokestatic  #119                // Method dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.start:(Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/WebLogListener;Ljava/util/function/Consumer;Ljava/lang/Runnable;Ljava/util/function/Consumer;)Ldev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers;
+       172: invokevirtual #110                // Method java/util/ArrayList.add:(Ljava/lang/Object;)Z
+       175: pop
+       176: aload         4
+       178: ifnull        215
+       181: aload         13
+       183: aload         4
+       185: invokevirtual #124                // Method dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.factory:()Ljava/util/function/Supplier;
+       188: new           #128                // class dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener
+       191: dup
+       192: aload         4
+       194: invokevirtual #130                // Method dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.processor:()Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;
+       197: aload         5
+       199: invokespecial #134                // Method dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener."<init>":(Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;)V
+       202: aload         11
+       204: aload         12
+       206: aload         9
+       208: invokestatic  #135                // Method dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers.start:(Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener;Ljava/util/function/Consumer;Ljava/lang/Runnable;Ljava/util/function/Consumer;)Ldev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers;
+       211: invokevirtual #110                // Method java/util/ArrayList.add:(Ljava/lang/Object;)Z
+       214: pop
+       215: aload         14
+       217: areturn
+       218: astore        15
+       220: aload         15
+       222: astore        16
+       224: aconst_null
+       225: astore        17
+       227: aconst_null
+       228: astore        18
+       230: aload         12
+       232: invokeinterface #144,  1          // InterfaceMethod java/lang/Runnable.run:()V
+       237: goto          290
+       240: astore        19
+       242: aload         19
+       244: astore        17
+       246: aload         19
+       248: instanceof    #142                // class java/lang/Error
+       251: ifeq          276
+       254: aload         15
+       256: instanceof    #142                // class java/lang/Error
+       259: ifne          276
+       262: aload         19
+       264: astore        16
+       266: aload         19
+       268: aload         15
+       270: invokevirtual #148                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       273: goto          290
+       276: aload         19
+       278: aload         15
+       280: if_acmpeq     290
+       283: aload         15
+       285: aload         19
+       287: invokevirtual #148                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       290: aload         14
+       292: invokevirtual #154                // Method close:()V
+       295: goto          370
+       298: astore        19
+       300: aload         19
+       302: instanceof    #142                // class java/lang/Error
+       305: ifeq          313
+       308: aload         19
+       310: goto          324
+       313: aload         19
+       315: invokevirtual #157                // Method java/lang/Throwable.getCause:()Ljava/lang/Throwable;
+       318: invokestatic  #161                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       321: checkcast     #149                // class java/lang/Throwable
+       324: astore        20
+       326: aload         20
+       328: astore        18
+       330: aload         20
+       332: instanceof    #142                // class java/lang/Error
+       335: ifeq          356
+       338: aload         20
+       340: checkcast     #142                // class java/lang/Error
+       343: astore        21
+       345: aload         16
+       347: instanceof    #142                // class java/lang/Error
+       350: ifne          356
+       353: aload         21
+       355: athrow
+       356: aload         20
+       358: aload         16
+       360: if_acmpeq     370
+       363: aload         16
+       365: aload         20
+       367: invokevirtual #148                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       370: aload         16
+       372: instanceof    #142                // class java/lang/Error
+       375: ifeq          388
+       378: aload         16
+       380: checkcast     #142                // class java/lang/Error
+       383: astore        19
+       385: aload         19
+       387: athrow
+       388: aload         16
+       390: invokestatic  #164                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       393: aload         17
+       395: ifnull        403
+       398: aload         17
+       400: invokestatic  #164                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       403: aload         18
+       405: ifnull        413
+       408: aload         18
+       410: invokestatic  #164                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       413: new           #169                // class java/lang/IllegalStateException
+       416: dup
+       417: ldc           #171                // String API messaging startup failed
+       419: aload         16
+       421: invokespecial #173                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+       424: athrow
+      Exception table:
+         from    to  target type
+           124   217   218   Class java/lang/RuntimeException
+           124   217   218   Class java/lang/Error
+           230   237   240   Class java/lang/RuntimeException
+           230   237   240   Class java/lang/Error
+           290   295   298   Class java/lang/RuntimeException
+           290   295   298   Class java/lang/Error
+
+  public boolean ready();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #10                 // Field stopping:Ljava/util/concurrent/atomic/AtomicBoolean;
+         4: invokevirtual #176                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+         7: ifne          24
+        10: aload_0
+        11: getfield      #28                 // Field terminal:Ljava/util/concurrent/atomic/AtomicBoolean;
+        14: invokevirtual #176                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+        17: ifne          24
+        20: iconst_1
+        21: goto          25
+        24: iconst_0
+        25: ireturn
+
+  public boolean terminalFailureObserved();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #28                 // Field terminal:Ljava/util/concurrent/atomic/AtomicBoolean;
+         4: invokevirtual #176                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+         7: ireturn
+
+  public void close();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: getfield      #10                 // Field stopping:Ljava/util/concurrent/atomic/AtomicBoolean;
+         4: iconst_1
+         5: invokevirtual #180                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+         8: aload_0
+         9: getfield      #16                 // Field closeLock:Ljava/lang/Object;
+        12: dup
+        13: astore_1
+        14: monitorenter
+        15: aload_0
+        16: getfield      #184                // Field closed:Z
+        19: ifeq          25
+        22: aload_1
+        23: monitorexit
+        24: return
+        25: iconst_0
+        26: istore_2
+        27: iload_2
+        28: aload_0
+        29: getfield      #24                 // Field groups:Ljava/util/List;
+        32: invokeinterface #188,  1          // InterfaceMethod java/util/List.size:()I
+        37: if_icmpge     64
+        40: aload_0
+        41: getfield      #24                 // Field groups:Ljava/util/List;
+        44: iload_2
+        45: invokeinterface #194,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+        50: checkcast     #197                // class dev/codex/schubert/nk/api/messaging/inbound/InboundConsumerGroup
+        53: invokeinterface #199,  1          // InterfaceMethod dev/codex/schubert/nk/api/messaging/inbound/InboundConsumerGroup.stopDelivery:()V
+        58: iinc          2, 1
+        61: goto          27
+        64: aload_0
+        65: getfield      #24                 // Field groups:Ljava/util/List;
+        68: aload_0
+        69: getfield      #20                 // Field groupClosed:[Z
+        72: invokestatic  #202                // Method closeGroups:(Ljava/util/List;[Z)V
+        75: aload_0
+        76: iconst_1
+        77: putfield      #184                // Field closed:Z
+        80: aload_1
+        81: monitorexit
+        82: goto          90
+        85: astore_3
+        86: aload_1
+        87: monitorexit
+        88: aload_3
+        89: athrow
+        90: return
+      Exception table:
+         from    to  target type
+            15    24    85   any
+            25    82    85   any
+            85    88    85   any
+
+  private static void closeGroups(java.util.List<dev.codex.schubert.nk.api.messaging.inbound.InboundConsumerGroup>, boolean[]);
+    descriptor: (Ljava/util/List;[Z)V
+    Code:
+         0: aconst_null
+         1: astore_2
+         2: aload_0
+         3: invokeinterface #188,  1          // InterfaceMethod java/util/List.size:()I
+         8: iconst_1
+         9: isub
+        10: istore_3
+        11: iload_3
+        12: iflt          91
+        15: aload_1
+        16: iload_3
+        17: baload
+        18: ifeq          24
+        21: goto          85
+        24: aload_0
+        25: iload_3
+        26: invokeinterface #194,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+        31: checkcast     #197                // class dev/codex/schubert/nk/api/messaging/inbound/InboundConsumerGroup
+        34: invokeinterface #206,  1          // InterfaceMethod dev/codex/schubert/nk/api/messaging/inbound/InboundConsumerGroup.close:()V
+        39: aload_1
+        40: iload_3
+        41: iconst_1
+        42: bastore
+        43: goto          85
+        46: astore        4
+        48: aload_2
+        49: ifnull        67
+        52: aload         4
+        54: instanceof    #142                // class java/lang/Error
+        57: ifeq          73
+        60: aload_2
+        61: instanceof    #142                // class java/lang/Error
+        64: ifne          73
+        67: aload         4
+        69: astore_2
+        70: goto          85
+        73: aload         4
+        75: aload_2
+        76: if_acmpeq     85
+        79: aload_2
+        80: aload         4
+        82: invokevirtual #148                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+        85: iinc          3, -1
+        88: goto          11
+        91: aload_2
+        92: instanceof    #142                // class java/lang/Error
+        95: ifeq          105
+        98: aload_2
+        99: checkcast     #142                // class java/lang/Error
+       102: astore_3
+       103: aload_3
+       104: athrow
+       105: aload_2
+       106: ifnull        124
+       109: aload_2
+       110: invokestatic  #164                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       113: new           #169                // class java/lang/IllegalStateException
+       116: dup
+       117: ldc           #209                // String API messaging close failed
+       119: aload_2
+       120: invokespecial #173                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+       123: athrow
+       124: return
+      Exception table:
+         from    to  target type
+            24    43    46   Class java/lang/Exception
+            24    43    46   Class java/lang/Error
+
+  private static void lambda$startSelected$2(java.util.concurrent.atomic.AtomicBoolean, java.lang.Runnable);
+    descriptor: (Ljava/util/concurrent/atomic/AtomicBoolean;Ljava/lang/Runnable;)V
+    Code:
+         0: aload_0
+         1: iconst_0
+         2: iconst_1
+         3: invokevirtual #211                // Method java/util/concurrent/atomic/AtomicBoolean.compareAndSet:(ZZ)Z
+         6: ifeq          15
+         9: aload_1
+        10: invokeinterface #144,  1          // InterfaceMethod java/lang/Runnable.run:()V
+        15: return
+
+  private static void lambda$startSelected$1(java.util.concurrent.atomic.AtomicBoolean, java.util.function.Consumer, dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException);
+    descriptor: (Ljava/util/concurrent/atomic/AtomicBoolean;Ljava/util/function/Consumer;Ldev/codex/schubert/nk/api/messaging/inbound/CommittedFatalInboundException;)V
+    Code:
+         0: aload_0
+         1: iconst_0
+         2: iconst_1
+         3: invokevirtual #211                // Method java/util/concurrent/atomic/AtomicBoolean.compareAndSet:(ZZ)Z
+         6: ifeq          16
+         9: aload_1
+        10: aload_2
+        11: invokeinterface #215,  2          // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+        16: return
+
+  private static void lambda$startSelected$0(java.lang.Throwable);
+    descriptor: (Ljava/lang/Throwable;)V
+    Code:
+         0: return
+
+  private static void lambda$start$0();
+    descriptor: ()V
+    Code:
+         0: return
+}
+Compiled from "SyncRequestConsumers.java"
+public final class dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumers implements dev.codex.schubert.nk.api.messaging.inbound.InboundConsumerGroup {
+  public static final int CONCURRENCY;
+    descriptor: I
+
+  private final java.util.List<jakarta.jms.JMSContext> contexts;
+    descriptor: Ljava/util/List;
+
+  private final java.util.function.Consumer<java.lang.Throwable> onUnconfirmed;
+    descriptor: Ljava/util/function/Consumer;
+
+  private final java.util.concurrent.atomic.AtomicBoolean terminal;
+    descriptor: Ljava/util/concurrent/atomic/AtomicBoolean;
+
+  private final java.util.concurrent.atomic.AtomicBoolean halted;
+    descriptor: Ljava/util/concurrent/atomic/AtomicBoolean;
+
+  private final java.lang.Object closeLock;
+    descriptor: Ljava/lang/Object;
+
+  private final boolean[] contextClosed;
+    descriptor: [Z
+
+  private final java.lang.Throwable[] closeFailures;
+    descriptor: [Ljava/lang/Throwable;
+
+  private boolean closed;
+    descriptor: Z
+
+  private dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumers(java.util.List<jakarta.jms.JMSContext>, java.util.function.Consumer<java.lang.Throwable>);
+    descriptor: (Ljava/util/List;Ljava/util/function/Consumer;)V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #7                  // class java/util/concurrent/atomic/AtomicBoolean
+         8: dup
+         9: invokespecial #9                  // Method java/util/concurrent/atomic/AtomicBoolean."<init>":()V
+        12: putfield      #10                 // Field terminal:Ljava/util/concurrent/atomic/AtomicBoolean;
+        15: aload_0
+        16: new           #7                  // class java/util/concurrent/atomic/AtomicBoolean
+        19: dup
+        20: invokespecial #9                  // Method java/util/concurrent/atomic/AtomicBoolean."<init>":()V
+        23: putfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+        26: aload_0
+        27: new           #2                  // class java/lang/Object
+        30: dup
+        31: invokespecial #1                  // Method java/lang/Object."<init>":()V
+        34: putfield      #19                 // Field closeLock:Ljava/lang/Object;
+        37: aload_0
+        38: iconst_4
+        39: newarray       boolean
+        41: putfield      #23                 // Field contextClosed:[Z
+        44: aload_0
+        45: iconst_4
+        46: anewarray     #27                 // class java/lang/Throwable
+        49: putfield      #29                 // Field closeFailures:[Ljava/lang/Throwable;
+        52: aload_0
+        53: aload_1
+        54: putfield      #33                 // Field contexts:Ljava/util/List;
+        57: aload_0
+        58: aload_2
+        59: putfield      #37                 // Field onUnconfirmed:Ljava/util/function/Consumer;
+        62: return
+
+  public static dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumers start(java.util.function.Supplier<jakarta.jms.JMSContext>, dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListener, java.util.function.Consumer<dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException>);
+    descriptor: (Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestListener;Ljava/util/function/Consumer;)Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: invokedynamic #41,  0             // InvokeDynamic #0:run:()Ljava/lang/Runnable;
+         8: invokestatic  #45                 // Method start:(Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestListener;Ljava/util/function/Consumer;Ljava/lang/Runnable;)Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers;
+        11: areturn
+
+  public static dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumers start(java.util.function.Supplier<jakarta.jms.JMSContext>, dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListener, java.util.function.Consumer<dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException>, java.lang.Runnable);
+    descriptor: (Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestListener;Ljava/util/function/Consumer;Ljava/lang/Runnable;)Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: aload_3
+         4: invokedynamic #49,  0             // InvokeDynamic #1:accept:()Ljava/util/function/Consumer;
+         9: invokestatic  #53                 // Method start:(Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestListener;Ljava/util/function/Consumer;Ljava/lang/Runnable;Ljava/util/function/Consumer;)Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers;
+        12: areturn
+
+  static dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumers start(java.util.function.Supplier<jakarta.jms.JMSContext>, dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListener, java.util.function.Consumer<dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException>, java.lang.Runnable, java.util.function.Consumer<java.lang.Throwable>);
+    descriptor: (Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestListener;Ljava/util/function/Consumer;Ljava/lang/Runnable;Ljava/util/function/Consumer;)Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers;
+    Code:
+         0: aload_0
+         1: ldc           #56                 // String factory
+         3: invokestatic  #58                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #64                 // String listener
+        10: invokestatic  #58                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_2
+        15: ldc           #66                 // String onTerminal
+        17: invokestatic  #58                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: aload_3
+        22: ldc           #68                 // String fatal signal
+        24: invokestatic  #58                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        27: pop
+        28: aload         4
+        30: ldc           #70                 // String unconfirmed close policy
+        32: invokestatic  #58                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        35: pop
+        36: new           #72                 // class java/util/ArrayList
+        39: dup
+        40: iconst_4
+        41: invokespecial #74                 // Method java/util/ArrayList."<init>":(I)V
+        44: astore        5
+        46: new           #11                 // class dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers
+        49: dup
+        50: aload         5
+        52: aload         4
+        54: invokespecial #77                 // Method "<init>":(Ljava/util/List;Ljava/util/function/Consumer;)V
+        57: astore        6
+        59: iconst_0
+        60: istore        7
+        62: iload         7
+        64: iconst_4
+        65: if_icmpge     224
+        68: new           #7                  // class java/util/concurrent/atomic/AtomicBoolean
+        71: dup
+        72: invokespecial #9                  // Method java/util/concurrent/atomic/AtomicBoolean."<init>":()V
+        75: astore        8
+        77: new           #7                  // class java/util/concurrent/atomic/AtomicBoolean
+        80: dup
+        81: invokespecial #9                  // Method java/util/concurrent/atomic/AtomicBoolean."<init>":()V
+        84: astore        9
+        86: aload         8
+        88: invokedynamic #80,  0             // InvokeDynamic #2:run:(Ljava/util/concurrent/atomic/AtomicBoolean;)Ljava/lang/Runnable;
+        93: astore        10
+        95: aload         9
+        97: invokedynamic #83,  0             // InvokeDynamic #3:run:(Ljava/util/concurrent/atomic/AtomicBoolean;)Ljava/lang/Runnable;
+       102: astore        11
+       104: aload_0
+       105: invokeinterface #84,  1           // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+       110: checkcast     #90                 // class jakarta/jms/JMSContext
+       113: ldc           #92                 // String JMS context
+       115: invokestatic  #58                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+       118: checkcast     #90                 // class jakarta/jms/JMSContext
+       121: astore        12
+       123: aload         5
+       125: aload         12
+       127: invokeinterface #94,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       132: pop
+       133: aload         12
+       135: iconst_0
+       136: invokeinterface #100,  2          // InterfaceMethod jakarta/jms/JMSContext.setAutoStart:(Z)V
+       141: aload         12
+       143: invokeinterface #104,  1          // InterfaceMethod jakarta/jms/JMSContext.getSessionMode:()I
+       148: ifeq          161
+       151: new           #108                // class java/lang/IllegalStateException
+       154: dup
+       155: ldc           #110                // String API sync consumer must be transacted
+       157: invokespecial #112                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       160: athrow
+       161: aload         12
+       163: new           #115                // class org/apache/activemq/artemis/jms/client/ActiveMQQueue
+       166: dup
+       167: getstatic     #117                // Field dev/codex/schubert/nk/protocol/transport/BrokerTopology.SYNC_REQUEST:Ldev/codex/schubert/nk/protocol/transport/BrokerTopology;
+       170: invokevirtual #123                // Method dev/codex/schubert/nk/protocol/transport/BrokerTopology.fullyQualifiedQueue:()Ljava/lang/String;
+       173: invokespecial #127                // Method org/apache/activemq/artemis/jms/client/ActiveMQQueue."<init>":(Ljava/lang/String;)V
+       176: invokeinterface #128,  2          // InterfaceMethod jakarta/jms/JMSContext.createConsumer:(Ljakarta/jms/Destination;)Ljakarta/jms/JMSConsumer;
+       181: ldc           #132                // String JMS consumer
+       183: invokestatic  #58                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+       186: checkcast     #134                // class jakarta/jms/JMSConsumer
+       189: astore        13
+       191: aload         13
+       193: aload         6
+       195: aload         8
+       197: aload         9
+       199: aload_1
+       200: aload         12
+       202: aload         10
+       204: aload         11
+       206: aload_2
+       207: aload_3
+       208: invokedynamic #136,  0            // InvokeDynamic #4:onMessage:(Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers;Ljava/util/concurrent/atomic/AtomicBoolean;Ljava/util/concurrent/atomic/AtomicBoolean;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestListener;Ljakarta/jms/JMSContext;Ljava/lang/Runnable;Ljava/lang/Runnable;Ljava/util/function/Consumer;Ljava/lang/Runnable;)Ljakarta/jms/MessageListener;
+       213: invokeinterface #140,  2          // InterfaceMethod jakarta/jms/JMSConsumer.setMessageListener:(Ljakarta/jms/MessageListener;)V
+       218: iinc          7, 1
+       221: goto          62
+       224: aload         5
+       226: invokeinterface #144,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       231: astore        7
+       233: aload         7
+       235: invokeinterface #148,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+       240: ifeq          265
+       243: aload         7
+       245: invokeinterface #154,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       250: checkcast     #90                 // class jakarta/jms/JMSContext
+       253: astore        8
+       255: aload         8
+       257: invokeinterface #157,  1          // InterfaceMethod jakarta/jms/JMSContext.start:()V
+       262: goto          233
+       265: aload         6
+       267: areturn
+       268: astore        7
+       270: aload         7
+       272: astore        8
+       274: aconst_null
+       275: astore        9
+       277: aload_3
+       278: invokeinterface #163,  1          // InterfaceMethod java/lang/Runnable.run:()V
+       283: goto          336
+       286: astore        10
+       288: aload         10
+       290: astore        9
+       292: aload         10
+       294: instanceof    #161                // class java/lang/Error
+       297: ifeq          322
+       300: aload         7
+       302: instanceof    #161                // class java/lang/Error
+       305: ifne          322
+       308: aload         10
+       310: astore        8
+       312: aload         10
+       314: aload         7
+       316: invokevirtual #167                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       319: goto          336
+       322: aload         10
+       324: aload         7
+       326: if_acmpeq     336
+       329: aload         7
+       331: aload         10
+       333: invokevirtual #167                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       336: aload         6
+       338: aload         8
+       340: invokevirtual #171                // Method closeAfterFailure:(Ljava/lang/Throwable;)Ljava/lang/Throwable;
+       343: astore        10
+       345: aload         8
+       347: instanceof    #161                // class java/lang/Error
+       350: ifeq          363
+       353: aload         8
+       355: checkcast     #161                // class java/lang/Error
+       358: astore        11
+       360: aload         11
+       362: athrow
+       363: aload         10
+       365: instanceof    #161                // class java/lang/Error
+       368: ifeq          381
+       371: aload         10
+       373: checkcast     #161                // class java/lang/Error
+       376: astore        11
+       378: aload         11
+       380: athrow
+       381: aload         8
+       383: invokestatic  #175                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       386: aload         9
+       388: ifnull        396
+       391: aload         9
+       393: invokestatic  #175                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       396: aload         10
+       398: ifnull        406
+       401: aload         10
+       403: invokestatic  #175                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       406: new           #108                // class java/lang/IllegalStateException
+       409: dup
+       410: ldc           #180                // String API sync consumer startup failed
+       412: aload         8
+       414: invokespecial #182                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+       417: athrow
+      Exception table:
+         from    to  target type
+            59   267   268   Class java/lang/RuntimeException
+            59   267   268   Class java/lang/Error
+           277   283   286   Class java/lang/RuntimeException
+           277   283   286   Class java/lang/Error
+
+  public boolean ready();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+         4: invokevirtual #185                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+         7: ifne          14
+        10: iconst_1
+        11: goto          15
+        14: iconst_0
+        15: ireturn
+
+  public boolean terminalFailureObserved();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #10                 // Field terminal:Ljava/util/concurrent/atomic/AtomicBoolean;
+         4: invokevirtual #185                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+         7: ireturn
+
+  public void stopDelivery();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+         4: iconst_1
+         5: invokevirtual #187                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+         8: return
+
+  public void close();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokevirtual #190                // Method stopDelivery:()V
+         4: aload_0
+         5: getfield      #19                 // Field closeLock:Ljava/lang/Object;
+         8: dup
+         9: astore_1
+        10: monitorenter
+        11: aload_0
+        12: getfield      #193                // Field closed:Z
+        15: ifeq          21
+        18: aload_1
+        19: monitorexit
+        20: return
+        21: aconst_null
+        22: astore_2
+        23: iconst_0
+        24: istore_3
+        25: iload_3
+        26: aload_0
+        27: getfield      #33                 // Field contexts:Ljava/util/List;
+        30: invokeinterface #197,  1          // InterfaceMethod java/util/List.size:()I
+        35: if_icmpge     131
+        38: aload_0
+        39: getfield      #23                 // Field contextClosed:[Z
+        42: iload_3
+        43: baload
+        44: ifeq          50
+        47: goto          125
+        50: aload_0
+        51: getfield      #33                 // Field contexts:Ljava/util/List;
+        54: iload_3
+        55: invokeinterface #200,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+        60: checkcast     #90                 // class jakarta/jms/JMSContext
+        63: invokeinterface #203,  1          // InterfaceMethod jakarta/jms/JMSContext.close:()V
+        68: aload_0
+        69: getfield      #23                 // Field contextClosed:[Z
+        72: iload_3
+        73: iconst_1
+        74: bastore
+        75: goto          125
+        78: astore        4
+        80: aload_0
+        81: getfield      #29                 // Field closeFailures:[Ljava/lang/Throwable;
+        84: iload_3
+        85: aload         4
+        87: aastore
+        88: aload_2
+        89: ifnull        107
+        92: aload         4
+        94: instanceof    #161                // class java/lang/Error
+        97: ifeq          113
+       100: aload_2
+       101: instanceof    #161                // class java/lang/Error
+       104: ifne          113
+       107: aload         4
+       109: astore_2
+       110: goto          125
+       113: aload         4
+       115: aload_2
+       116: if_acmpeq     125
+       119: aload_2
+       120: aload         4
+       122: invokevirtual #167                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       125: iinc          3, 1
+       128: goto          25
+       131: aload_2
+       132: ifnull        145
+       135: aload_0
+       136: getfield      #37                 // Field onUnconfirmed:Ljava/util/function/Consumer;
+       139: aload_2
+       140: invokeinterface #206,  2          // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+       145: aload_2
+       146: instanceof    #161                // class java/lang/Error
+       149: ifeq          159
+       152: aload_2
+       153: checkcast     #161                // class java/lang/Error
+       156: astore_3
+       157: aload_3
+       158: athrow
+       159: aload_2
+       160: ifnull        219
+       163: aload_2
+       164: invokestatic  #175                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       167: aload_0
+       168: getfield      #29                 // Field closeFailures:[Ljava/lang/Throwable;
+       171: astore_3
+       172: aload_3
+       173: arraylength
+       174: istore        4
+       176: iconst_0
+       177: istore        5
+       179: iload         5
+       181: iload         4
+       183: if_icmpge     208
+       186: aload_3
+       187: iload         5
+       189: aaload
+       190: astore        6
+       192: aload         6
+       194: ifnull        202
+       197: aload         6
+       199: invokestatic  #175                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       202: iinc          5, 1
+       205: goto          179
+       208: new           #108                // class java/lang/IllegalStateException
+       211: dup
+       212: ldc           #211                // String API sync consumer close failed
+       214: aload_2
+       215: invokespecial #182                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+       218: athrow
+       219: aload_0
+       220: iconst_1
+       221: putfield      #193                // Field closed:Z
+       224: aload_0
+       225: getfield      #29                 // Field closeFailures:[Ljava/lang/Throwable;
+       228: aconst_null
+       229: invokestatic  #213                // Method java/util/Arrays.fill:([Ljava/lang/Object;Ljava/lang/Object;)V
+       232: goto          248
+       235: astore        7
+       237: aload_0
+       238: getfield      #29                 // Field closeFailures:[Ljava/lang/Throwable;
+       241: aconst_null
+       242: invokestatic  #213                // Method java/util/Arrays.fill:([Ljava/lang/Object;Ljava/lang/Object;)V
+       245: aload         7
+       247: athrow
+       248: aload_1
+       249: monitorexit
+       250: goto          260
+       253: astore        8
+       255: aload_1
+       256: monitorexit
+       257: aload         8
+       259: athrow
+       260: return
+      Exception table:
+         from    to  target type
+            50    75    78   Class java/lang/RuntimeException
+            50    75    78   Class java/lang/Error
+            21   224   235   any
+           235   237   235   any
+            11    20   253   any
+            21   250   253   any
+           253   257   253   any
+
+  private java.lang.Throwable closeAfterFailure(java.lang.Throwable);
+    descriptor: (Ljava/lang/Throwable;)Ljava/lang/Throwable;
+    Code:
+         0: aload_0
+         1: invokevirtual #219                // Method close:()V
+         4: goto          41
+         7: astore_2
+         8: aload_2
+         9: instanceof    #161                // class java/lang/Error
+        12: ifeq          29
+        15: aload_2
+        16: checkcast     #161                // class java/lang/Error
+        19: astore_3
+        20: aload_1
+        21: instanceof    #161                // class java/lang/Error
+        24: ifne          29
+        27: aload_3
+        28: areturn
+        29: aload_2
+        30: aload_1
+        31: if_acmpeq     39
+        34: aload_1
+        35: aload_2
+        36: invokevirtual #167                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+        39: aload_2
+        40: areturn
+        41: aconst_null
+        42: areturn
+      Exception table:
+         from    to  target type
+             0     4     7   Class java/lang/RuntimeException
+             0     4     7   Class java/lang/Error
+
+  private static void lambda$start$4(dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumers, java.util.concurrent.atomic.AtomicBoolean, java.util.concurrent.atomic.AtomicBoolean, dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListener, jakarta.jms.JMSContext, java.lang.Runnable, java.lang.Runnable, java.util.function.Consumer, java.lang.Runnable, jakarta.jms.Message);
+    descriptor: (Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers;Ljava/util/concurrent/atomic/AtomicBoolean;Ljava/util/concurrent/atomic/AtomicBoolean;Ldev/codex/schubert/nk/api/messaging/inbound/SyncRequestListener;Ljakarta/jms/JMSContext;Ljava/lang/Runnable;Ljava/lang/Runnable;Ljava/util/function/Consumer;Ljava/lang/Runnable;Ljakarta/jms/Message;)V
+    Code:
+         0: aload_0
+         1: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+         4: invokevirtual #185                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+         7: ifeq          11
+        10: return
+        11: aload_1
+        12: iconst_0
+        13: invokevirtual #187                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+        16: aload_2
+        17: iconst_0
+        18: invokevirtual #187                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+        21: aload_3
+        22: aload         4
+        24: aload         9
+        26: aload         5
+        28: aload         6
+        30: invokevirtual #220                // Method dev/codex/schubert/nk/api/messaging/inbound/SyncRequestListener.onMessage:(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;Ljava/lang/Runnable;Ljava/lang/Runnable;)V
+        33: goto          188
+        36: astore        10
+        38: aload_0
+        39: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+        42: iconst_1
+        43: invokevirtual #187                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+        46: aload_0
+        47: getfield      #10                 // Field terminal:Ljava/util/concurrent/atomic/AtomicBoolean;
+        50: iconst_0
+        51: iconst_1
+        52: invokevirtual #227                // Method java/util/concurrent/atomic/AtomicBoolean.compareAndSet:(ZZ)Z
+        55: ifeq          67
+        58: aload         7
+        60: aload         10
+        62: invokeinterface #206,  2          // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+        67: goto          188
+        70: astore        10
+        72: aload_0
+        73: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+        76: iconst_1
+        77: invokevirtual #187                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+        80: aload_0
+        81: getfield      #10                 // Field terminal:Ljava/util/concurrent/atomic/AtomicBoolean;
+        84: iconst_0
+        85: iconst_1
+        86: invokevirtual #227                // Method java/util/concurrent/atomic/AtomicBoolean.compareAndSet:(ZZ)Z
+        89: ifeq          128
+        92: aload         10
+        94: instanceof    #161                // class java/lang/Error
+        97: ifeq          121
+       100: aload_1
+       101: iconst_0
+       102: iconst_1
+       103: invokevirtual #227                // Method java/util/concurrent/atomic/AtomicBoolean.compareAndSet:(ZZ)Z
+       106: ifeq          121
+       109: aload         4
+       111: invokeinterface #235,  1          // InterfaceMethod jakarta/jms/JMSContext.rollback:()V
+       116: goto          121
+       119: astore        11
+       121: aload         8
+       123: invokeinterface #163,  1          // InterfaceMethod java/lang/Runnable.run:()V
+       128: goto          188
+       131: astore        10
+       133: iconst_0
+       134: istore        11
+       136: aload         10
+       138: invokestatic  #175                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       141: goto          149
+       144: astore        12
+       146: iconst_1
+       147: istore        11
+       149: iload         11
+       151: ifne          161
+       154: aload_2
+       155: invokevirtual #185                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+       158: ifne          188
+       161: aload_0
+       162: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+       165: iconst_1
+       166: invokevirtual #187                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+       169: aload_0
+       170: getfield      #10                 // Field terminal:Ljava/util/concurrent/atomic/AtomicBoolean;
+       173: iconst_0
+       174: iconst_1
+       175: invokevirtual #227                // Method java/util/concurrent/atomic/AtomicBoolean.compareAndSet:(ZZ)Z
+       178: ifeq          188
+       181: aload         8
+       183: invokeinterface #163,  1          // InterfaceMethod java/lang/Runnable.run:()V
+       188: return
+      Exception table:
+         from    to  target type
+            21    33    36   Class dev/codex/schubert/nk/api/messaging/inbound/CommittedFatalInboundException
+            21    33    70   Class dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException
+            21    33    70   Class dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException
+            21    33    70   Class java/lang/Error
+           109   116   119   Class java/lang/RuntimeException
+           109   116   119   Class java/lang/Error
+            21    33   131   Class jakarta/jms/JMSException
+            21    33   131   Class java/lang/RuntimeException
+           136   141   144   Class java/lang/Error
+
+  private static void lambda$start$3(java.util.concurrent.atomic.AtomicBoolean);
+    descriptor: (Ljava/util/concurrent/atomic/AtomicBoolean;)V
+    Code:
+         0: aload_0
+         1: iconst_1
+         2: invokevirtual #187                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+         5: return
+
+  private static void lambda$start$2(java.util.concurrent.atomic.AtomicBoolean);
+    descriptor: (Ljava/util/concurrent/atomic/AtomicBoolean;)V
+    Code:
+         0: aload_0
+         1: iconst_1
+         2: invokevirtual #187                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+         5: return
+
+  private static void lambda$start$1(java.lang.Throwable);
+    descriptor: (Ljava/lang/Throwable;)V
+    Code:
+         0: return
+
+  private static void lambda$start$0();
+    descriptor: ()V
+    Code:
+         0: return
+}
+Compiled from "WebLogConsumers.java"
+public final class dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumers implements dev.codex.schubert.nk.api.messaging.inbound.InboundConsumerGroup {
+  private final jakarta.jms.JMSContext context;
+    descriptor: Ljakarta/jms/JMSContext;
+
+  private final java.util.function.Consumer<java.lang.Throwable> onUnconfirmed;
+    descriptor: Ljava/util/function/Consumer;
+
+  private final java.util.concurrent.atomic.AtomicBoolean terminal;
+    descriptor: Ljava/util/concurrent/atomic/AtomicBoolean;
+
+  private final java.util.concurrent.atomic.AtomicBoolean halted;
+    descriptor: Ljava/util/concurrent/atomic/AtomicBoolean;
+
+  private final java.lang.Object closeLock;
+    descriptor: Ljava/lang/Object;
+
+  private boolean closed;
+    descriptor: Z
+
+  private dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumers(java.util.function.Supplier<jakarta.jms.JMSContext>, java.util.function.Consumer<java.lang.Throwable>);
+    descriptor: (Ljava/util/function/Supplier;Ljava/util/function/Consumer;)V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #7                  // class java/util/concurrent/atomic/AtomicBoolean
+         8: dup
+         9: invokespecial #9                  // Method java/util/concurrent/atomic/AtomicBoolean."<init>":()V
+        12: putfield      #10                 // Field terminal:Ljava/util/concurrent/atomic/AtomicBoolean;
+        15: aload_0
+        16: new           #7                  // class java/util/concurrent/atomic/AtomicBoolean
+        19: dup
+        20: invokespecial #9                  // Method java/util/concurrent/atomic/AtomicBoolean."<init>":()V
+        23: putfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+        26: aload_0
+        27: new           #2                  // class java/lang/Object
+        30: dup
+        31: invokespecial #1                  // Method java/lang/Object."<init>":()V
+        34: putfield      #19                 // Field closeLock:Ljava/lang/Object;
+        37: aload_0
+        38: aload_2
+        39: putfield      #23                 // Field onUnconfirmed:Ljava/util/function/Consumer;
+        42: aload_0
+        43: aload_1
+        44: invokeinterface #27,  1           // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+        49: checkcast     #33                 // class jakarta/jms/JMSContext
+        52: ldc           #35                 // String JMS context
+        54: invokestatic  #37                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        57: checkcast     #33                 // class jakarta/jms/JMSContext
+        60: putfield      #43                 // Field context:Ljakarta/jms/JMSContext;
+        63: return
+
+  public static dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumers start(java.util.function.Supplier<jakarta.jms.JMSContext>, dev.codex.schubert.nk.api.messaging.inbound.WebLogListener, java.util.function.Consumer<dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException>);
+    descriptor: (Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/WebLogListener;Ljava/util/function/Consumer;)Ldev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: invokedynamic #47,  0             // InvokeDynamic #0:run:()Ljava/lang/Runnable;
+         8: invokestatic  #51                 // Method start:(Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/WebLogListener;Ljava/util/function/Consumer;Ljava/lang/Runnable;)Ldev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers;
+        11: areturn
+
+  public static dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumers start(java.util.function.Supplier<jakarta.jms.JMSContext>, dev.codex.schubert.nk.api.messaging.inbound.WebLogListener, java.util.function.Consumer<dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException>, java.lang.Runnable);
+    descriptor: (Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/WebLogListener;Ljava/util/function/Consumer;Ljava/lang/Runnable;)Ldev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: aload_3
+         4: invokedynamic #55,  0             // InvokeDynamic #1:accept:()Ljava/util/function/Consumer;
+         9: invokestatic  #59                 // Method start:(Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/WebLogListener;Ljava/util/function/Consumer;Ljava/lang/Runnable;Ljava/util/function/Consumer;)Ldev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers;
+        12: areturn
+
+  static dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumers start(java.util.function.Supplier<jakarta.jms.JMSContext>, dev.codex.schubert.nk.api.messaging.inbound.WebLogListener, java.util.function.Consumer<dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException>, java.lang.Runnable, java.util.function.Consumer<java.lang.Throwable>);
+    descriptor: (Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/WebLogListener;Ljava/util/function/Consumer;Ljava/lang/Runnable;Ljava/util/function/Consumer;)Ldev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers;
+    Code:
+         0: aload_0
+         1: ldc           #62                 // String factory
+         3: invokestatic  #37                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #64                 // String listener
+        10: invokestatic  #37                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_2
+        15: ldc           #66                 // String onTerminal
+        17: invokestatic  #37                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: aload_3
+        22: ldc           #68                 // String fatal signal
+        24: invokestatic  #37                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        27: pop
+        28: aload         4
+        30: ldc           #70                 // String unconfirmed close policy
+        32: invokestatic  #37                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        35: pop
+        36: new           #7                  // class java/util/concurrent/atomic/AtomicBoolean
+        39: dup
+        40: invokespecial #9                  // Method java/util/concurrent/atomic/AtomicBoolean."<init>":()V
+        43: astore        5
+        45: new           #7                  // class java/util/concurrent/atomic/AtomicBoolean
+        48: dup
+        49: invokespecial #9                  // Method java/util/concurrent/atomic/AtomicBoolean."<init>":()V
+        52: astore        6
+        54: aload         5
+        56: invokedynamic #72,  0             // InvokeDynamic #2:run:(Ljava/util/concurrent/atomic/AtomicBoolean;)Ljava/lang/Runnable;
+        61: astore        7
+        63: aload         6
+        65: invokedynamic #75,  0             // InvokeDynamic #3:run:(Ljava/util/concurrent/atomic/AtomicBoolean;)Ljava/lang/Runnable;
+        70: astore        8
+        72: new           #11                 // class dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers
+        75: dup
+        76: aload_0
+        77: aload         4
+        79: invokespecial #76                 // Method "<init>":(Ljava/util/function/Supplier;Ljava/util/function/Consumer;)V
+        82: astore        9
+        84: aload         9
+        86: getfield      #43                 // Field context:Ljakarta/jms/JMSContext;
+        89: astore        10
+        91: aload         10
+        93: iconst_0
+        94: invokeinterface #79,  2           // InterfaceMethod jakarta/jms/JMSContext.setAutoStart:(Z)V
+        99: aload         10
+       101: invokeinterface #83,  1           // InterfaceMethod jakarta/jms/JMSContext.getSessionMode:()I
+       106: ifeq          119
+       109: new           #87                 // class java/lang/IllegalStateException
+       112: dup
+       113: ldc           #89                 // String API Web log consumer must be transacted
+       115: invokespecial #91                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       118: athrow
+       119: aload         10
+       121: new           #94                 // class org/apache/activemq/artemis/jms/client/ActiveMQQueue
+       124: dup
+       125: getstatic     #96                 // Field dev/codex/schubert/nk/protocol/transport/BrokerTopology.WEB_LOG:Ldev/codex/schubert/nk/protocol/transport/BrokerTopology;
+       128: invokevirtual #102                // Method dev/codex/schubert/nk/protocol/transport/BrokerTopology.fullyQualifiedQueue:()Ljava/lang/String;
+       131: invokespecial #106                // Method org/apache/activemq/artemis/jms/client/ActiveMQQueue."<init>":(Ljava/lang/String;)V
+       134: invokeinterface #107,  2          // InterfaceMethod jakarta/jms/JMSContext.createConsumer:(Ljakarta/jms/Destination;)Ljakarta/jms/JMSConsumer;
+       139: ldc           #111                // String JMS consumer
+       141: invokestatic  #37                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+       144: checkcast     #113                // class jakarta/jms/JMSConsumer
+       147: astore        11
+       149: aload         11
+       151: aload         9
+       153: aload         5
+       155: aload         6
+       157: aload_1
+       158: aload         10
+       160: aload         7
+       162: aload         8
+       164: aload_2
+       165: aload_3
+       166: invokedynamic #115,  0            // InvokeDynamic #4:onMessage:(Ldev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers;Ljava/util/concurrent/atomic/AtomicBoolean;Ljava/util/concurrent/atomic/AtomicBoolean;Ldev/codex/schubert/nk/api/messaging/inbound/WebLogListener;Ljakarta/jms/JMSContext;Ljava/lang/Runnable;Ljava/lang/Runnable;Ljava/util/function/Consumer;Ljava/lang/Runnable;)Ljakarta/jms/MessageListener;
+       171: invokeinterface #119,  2          // InterfaceMethod jakarta/jms/JMSConsumer.setMessageListener:(Ljakarta/jms/MessageListener;)V
+       176: aload         10
+       178: invokeinterface #123,  1          // InterfaceMethod jakarta/jms/JMSContext.start:()V
+       183: aload         9
+       185: areturn
+       186: astore        11
+       188: aload         11
+       190: astore        12
+       192: aconst_null
+       193: astore        13
+       195: aload_3
+       196: invokeinterface #129,  1          // InterfaceMethod java/lang/Runnable.run:()V
+       201: goto          254
+       204: astore        14
+       206: aload         14
+       208: astore        13
+       210: aload         14
+       212: instanceof    #127                // class java/lang/Error
+       215: ifeq          240
+       218: aload         11
+       220: instanceof    #127                // class java/lang/Error
+       223: ifne          240
+       226: aload         14
+       228: astore        12
+       230: aload         14
+       232: aload         11
+       234: invokevirtual #133                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       237: goto          254
+       240: aload         14
+       242: aload         11
+       244: if_acmpeq     254
+       247: aload         11
+       249: aload         14
+       251: invokevirtual #133                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       254: aconst_null
+       255: astore        14
+       257: aload         9
+       259: invokevirtual #139                // Method close:()V
+       262: goto          311
+       265: astore        15
+       267: aload         15
+       269: astore        14
+       271: aload         15
+       273: instanceof    #127                // class java/lang/Error
+       276: ifeq          297
+       279: aload         15
+       281: checkcast     #127                // class java/lang/Error
+       284: astore        16
+       286: aload         12
+       288: instanceof    #127                // class java/lang/Error
+       291: ifne          297
+       294: aload         16
+       296: athrow
+       297: aload         15
+       299: aload         12
+       301: if_acmpeq     311
+       304: aload         12
+       306: aload         15
+       308: invokevirtual #133                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       311: aload         12
+       313: instanceof    #127                // class java/lang/Error
+       316: ifeq          329
+       319: aload         12
+       321: checkcast     #127                // class java/lang/Error
+       324: astore        15
+       326: aload         15
+       328: athrow
+       329: aload         12
+       331: invokestatic  #142                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       334: aload         13
+       336: ifnull        344
+       339: aload         13
+       341: invokestatic  #142                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       344: aload         14
+       346: ifnull        354
+       349: aload         14
+       351: invokestatic  #142                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       354: new           #87                 // class java/lang/IllegalStateException
+       357: dup
+       358: ldc           #147                // String API Web log consumer startup failed
+       360: aload         12
+       362: invokespecial #149                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+       365: athrow
+      Exception table:
+         from    to  target type
+            91   185   186   Class java/lang/RuntimeException
+            91   185   186   Class java/lang/Error
+           195   201   204   Class java/lang/RuntimeException
+           195   201   204   Class java/lang/Error
+           257   262   265   Class java/lang/RuntimeException
+           257   262   265   Class java/lang/Error
+
+  public boolean ready();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+         4: invokevirtual #152                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+         7: ifne          14
+        10: iconst_1
+        11: goto          15
+        14: iconst_0
+        15: ireturn
+
+  public boolean terminalFailureObserved();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #10                 // Field terminal:Ljava/util/concurrent/atomic/AtomicBoolean;
+         4: invokevirtual #152                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+         7: ireturn
+
+  public void stopDelivery();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+         4: iconst_1
+         5: invokevirtual #155                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+         8: return
+
+  public void close();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokevirtual #158                // Method stopDelivery:()V
+         4: aload_0
+         5: getfield      #19                 // Field closeLock:Ljava/lang/Object;
+         8: dup
+         9: astore_1
+        10: monitorenter
+        11: aload_0
+        12: getfield      #161                // Field closed:Z
+        15: ifeq          21
+        18: aload_1
+        19: monitorexit
+        20: return
+        21: aload_0
+        22: getfield      #43                 // Field context:Ljakarta/jms/JMSContext;
+        25: invokeinterface #165,  1          // InterfaceMethod jakarta/jms/JMSContext.close:()V
+        30: goto          69
+        33: astore_2
+        34: aload_0
+        35: getfield      #23                 // Field onUnconfirmed:Ljava/util/function/Consumer;
+        38: aload_2
+        39: invokeinterface #166,  2          // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+        44: aload_2
+        45: instanceof    #127                // class java/lang/Error
+        48: ifeq          58
+        51: aload_2
+        52: checkcast     #127                // class java/lang/Error
+        55: astore_3
+        56: aload_3
+        57: athrow
+        58: new           #87                 // class java/lang/IllegalStateException
+        61: dup
+        62: ldc           #171                // String API Web log consumer close failed
+        64: aload_2
+        65: invokespecial #149                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+        68: athrow
+        69: aload_0
+        70: iconst_1
+        71: putfield      #161                // Field closed:Z
+        74: aload_1
+        75: monitorexit
+        76: goto          86
+        79: astore        4
+        81: aload_1
+        82: monitorexit
+        83: aload         4
+        85: athrow
+        86: return
+      Exception table:
+         from    to  target type
+            21    30    33   Class java/lang/RuntimeException
+            21    30    33   Class java/lang/Error
+            11    20    79   any
+            21    76    79   any
+            79    83    79   any
+
+  private static void lambda$start$4(dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumers, java.util.concurrent.atomic.AtomicBoolean, java.util.concurrent.atomic.AtomicBoolean, dev.codex.schubert.nk.api.messaging.inbound.WebLogListener, jakarta.jms.JMSContext, java.lang.Runnable, java.lang.Runnable, java.util.function.Consumer, java.lang.Runnable, jakarta.jms.Message);
+    descriptor: (Ldev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers;Ljava/util/concurrent/atomic/AtomicBoolean;Ljava/util/concurrent/atomic/AtomicBoolean;Ldev/codex/schubert/nk/api/messaging/inbound/WebLogListener;Ljakarta/jms/JMSContext;Ljava/lang/Runnable;Ljava/lang/Runnable;Ljava/util/function/Consumer;Ljava/lang/Runnable;Ljakarta/jms/Message;)V
+    Code:
+         0: aload_0
+         1: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+         4: invokevirtual #152                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+         7: ifeq          11
+        10: return
+        11: aload_1
+        12: iconst_0
+        13: invokevirtual #155                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+        16: aload_2
+        17: iconst_0
+        18: invokevirtual #155                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+        21: aload_3
+        22: aload         4
+        24: aload         9
+        26: aload         5
+        28: aload         6
+        30: invokevirtual #173                // Method dev/codex/schubert/nk/api/messaging/inbound/WebLogListener.onMessage:(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;Ljava/lang/Runnable;Ljava/lang/Runnable;)V
+        33: goto          176
+        36: astore        10
+        38: aload_0
+        39: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+        42: iconst_1
+        43: invokevirtual #155                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+        46: aload_0
+        47: getfield      #10                 // Field terminal:Ljava/util/concurrent/atomic/AtomicBoolean;
+        50: iconst_1
+        51: invokevirtual #155                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+        54: aload         7
+        56: aload         10
+        58: invokeinterface #166,  2          // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+        63: goto          176
+        66: astore        10
+        68: aload_0
+        69: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+        72: iconst_1
+        73: invokevirtual #155                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+        76: aload_0
+        77: getfield      #10                 // Field terminal:Ljava/util/concurrent/atomic/AtomicBoolean;
+        80: iconst_1
+        81: invokevirtual #155                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+        84: aload         10
+        86: instanceof    #127                // class java/lang/Error
+        89: ifeq          113
+        92: aload_1
+        93: iconst_0
+        94: iconst_1
+        95: invokevirtual #184                // Method java/util/concurrent/atomic/AtomicBoolean.compareAndSet:(ZZ)Z
+        98: ifeq          113
+       101: aload         4
+       103: invokeinterface #188,  1          // InterfaceMethod jakarta/jms/JMSContext.rollback:()V
+       108: goto          113
+       111: astore        11
+       113: aload         8
+       115: invokeinterface #129,  1          // InterfaceMethod java/lang/Runnable.run:()V
+       120: goto          176
+       123: astore        10
+       125: iconst_0
+       126: istore        11
+       128: aload         10
+       130: invokestatic  #142                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       133: goto          141
+       136: astore        12
+       138: iconst_1
+       139: istore        11
+       141: iload         11
+       143: ifne          153
+       146: aload_2
+       147: invokevirtual #152                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+       150: ifne          176
+       153: aload_0
+       154: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+       157: iconst_1
+       158: invokevirtual #155                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+       161: aload_0
+       162: getfield      #10                 // Field terminal:Ljava/util/concurrent/atomic/AtomicBoolean;
+       165: iconst_1
+       166: invokevirtual #155                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+       169: aload         8
+       171: invokeinterface #129,  1          // InterfaceMethod java/lang/Runnable.run:()V
+       176: return
+      Exception table:
+         from    to  target type
+            21    33    36   Class dev/codex/schubert/nk/api/messaging/inbound/CommittedFatalInboundException
+            21    33    66   Class dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException
+            21    33    66   Class dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException
+            21    33    66   Class java/lang/Error
+           101   108   111   Class java/lang/RuntimeException
+           101   108   111   Class java/lang/Error
+            21    33   123   Class jakarta/jms/JMSException
+            21    33   123   Class java/lang/RuntimeException
+           128   133   136   Class java/lang/Error
+
+  private static void lambda$start$3(java.util.concurrent.atomic.AtomicBoolean);
+    descriptor: (Ljava/util/concurrent/atomic/AtomicBoolean;)V
+    Code:
+         0: aload_0
+         1: iconst_1
+         2: invokevirtual #155                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+         5: return
+
+  private static void lambda$start$2(java.util.concurrent.atomic.AtomicBoolean);
+    descriptor: (Ljava/util/concurrent/atomic/AtomicBoolean;)V
+    Code:
+         0: aload_0
+         1: iconst_1
+         2: invokevirtual #155                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+         5: return
+
+  private static void lambda$start$1(java.lang.Throwable);
+    descriptor: (Ljava/lang/Throwable;)V
+    Code:
+         0: return
+
+  private static void lambda$start$0();
+    descriptor: ()V
+    Code:
+         0: return
+}
+Compiled from "QuestionWorkConsumers.java"
+public final class dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumers implements dev.codex.schubert.nk.api.messaging.inbound.InboundConsumerGroup {
+  private final jakarta.jms.JMSContext context;
+    descriptor: Ljakarta/jms/JMSContext;
+
+  private final java.util.function.Consumer<java.lang.Throwable> onUnconfirmed;
+    descriptor: Ljava/util/function/Consumer;
+
+  private final java.lang.Object lock;
+    descriptor: Ljava/lang/Object;
+
+  private final java.util.concurrent.atomic.AtomicBoolean halted;
+    descriptor: Ljava/util/concurrent/atomic/AtomicBoolean;
+
+  private boolean closed;
+    descriptor: Z
+
+  private dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumers(java.util.function.Supplier<jakarta.jms.JMSContext>, java.util.function.Consumer<java.lang.Throwable>);
+    descriptor: (Ljava/util/function/Supplier;Ljava/util/function/Consumer;)V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #2                  // class java/lang/Object
+         8: dup
+         9: invokespecial #1                  // Method java/lang/Object."<init>":()V
+        12: putfield      #7                  // Field lock:Ljava/lang/Object;
+        15: aload_0
+        16: new           #13                 // class java/util/concurrent/atomic/AtomicBoolean
+        19: dup
+        20: invokespecial #15                 // Method java/util/concurrent/atomic/AtomicBoolean."<init>":()V
+        23: putfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+        26: aload_0
+        27: aload_2
+        28: putfield      #20                 // Field onUnconfirmed:Ljava/util/function/Consumer;
+        31: aload_0
+        32: aload_1
+        33: invokeinterface #24,  1           // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+        38: checkcast     #30                 // class jakarta/jms/JMSContext
+        41: ldc           #32                 // String async context
+        43: invokestatic  #34                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        46: checkcast     #30                 // class jakarta/jms/JMSContext
+        49: putfield      #40                 // Field context:Ljakarta/jms/JMSContext;
+        52: return
+
+  public static dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumers start(java.util.function.Supplier<jakarta.jms.JMSContext>, dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkListener, java.util.function.Consumer<dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException>, java.lang.Runnable);
+    descriptor: (Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener;Ljava/util/function/Consumer;Ljava/lang/Runnable;)Ldev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: aload_3
+         4: invokedynamic #44,  0             // InvokeDynamic #0:accept:()Ljava/util/function/Consumer;
+         9: invokestatic  #48                 // Method start:(Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener;Ljava/util/function/Consumer;Ljava/lang/Runnable;Ljava/util/function/Consumer;)Ldev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers;
+        12: areturn
+
+  static dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumers start(java.util.function.Supplier<jakarta.jms.JMSContext>, dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkListener, java.util.function.Consumer<dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException>, java.lang.Runnable, java.util.function.Consumer<java.lang.Throwable>);
+    descriptor: (Ljava/util/function/Supplier;Ldev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener;Ljava/util/function/Consumer;Ljava/lang/Runnable;Ljava/util/function/Consumer;)Ldev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers;
+    Code:
+         0: aload_0
+         1: ldc           #52                 // String async factory
+         3: invokestatic  #34                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #54                 // String work listener
+        10: invokestatic  #34                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_2
+        15: ldc           #56                 // String terminal signal
+        17: invokestatic  #34                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: aload_3
+        22: ldc           #58                 // String fatal signal
+        24: invokestatic  #34                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        27: pop
+        28: aload         4
+        30: ldc           #60                 // String unconfirmed close policy
+        32: invokestatic  #34                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        35: pop
+        36: new           #13                 // class java/util/concurrent/atomic/AtomicBoolean
+        39: dup
+        40: invokespecial #15                 // Method java/util/concurrent/atomic/AtomicBoolean."<init>":()V
+        43: astore        5
+        45: new           #13                 // class java/util/concurrent/atomic/AtomicBoolean
+        48: dup
+        49: invokespecial #15                 // Method java/util/concurrent/atomic/AtomicBoolean."<init>":()V
+        52: astore        6
+        54: aload         5
+        56: invokedynamic #62,  0             // InvokeDynamic #1:run:(Ljava/util/concurrent/atomic/AtomicBoolean;)Ljava/lang/Runnable;
+        61: astore        7
+        63: aload         6
+        65: invokedynamic #66,  0             // InvokeDynamic #2:run:(Ljava/util/concurrent/atomic/AtomicBoolean;)Ljava/lang/Runnable;
+        70: astore        8
+        72: new           #8                  // class dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers
+        75: dup
+        76: aload_0
+        77: aload         4
+        79: invokespecial #67                 // Method "<init>":(Ljava/util/function/Supplier;Ljava/util/function/Consumer;)V
+        82: astore        9
+        84: aload         9
+        86: getfield      #40                 // Field context:Ljakarta/jms/JMSContext;
+        89: astore        10
+        91: aload         10
+        93: iconst_0
+        94: invokeinterface #70,  2           // InterfaceMethod jakarta/jms/JMSContext.setAutoStart:(Z)V
+        99: aload         10
+       101: invokeinterface #74,  1           // InterfaceMethod jakarta/jms/JMSContext.getSessionMode:()I
+       106: ifeq          119
+       109: new           #78                 // class java/lang/IllegalStateException
+       112: dup
+       113: ldc           #80                 // String API Question consumer must be transacted
+       115: invokespecial #82                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       118: athrow
+       119: aload         10
+       121: new           #85                 // class org/apache/activemq/artemis/jms/client/ActiveMQQueue
+       124: dup
+       125: getstatic     #87                 // Field dev/codex/schubert/nk/protocol/transport/BrokerTopology.ASYNC_WORK:Ldev/codex/schubert/nk/protocol/transport/BrokerTopology;
+       128: invokevirtual #93                 // Method dev/codex/schubert/nk/protocol/transport/BrokerTopology.fullyQualifiedQueue:()Ljava/lang/String;
+       131: invokespecial #97                 // Method org/apache/activemq/artemis/jms/client/ActiveMQQueue."<init>":(Ljava/lang/String;)V
+       134: invokeinterface #98,  2           // InterfaceMethod jakarta/jms/JMSContext.createConsumer:(Ljakarta/jms/Destination;)Ljakarta/jms/JMSConsumer;
+       139: ldc           #102                // String async consumer
+       141: invokestatic  #34                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+       144: checkcast     #104                // class jakarta/jms/JMSConsumer
+       147: astore        11
+       149: aload         11
+       151: aload         9
+       153: aload         5
+       155: aload         6
+       157: aload_1
+       158: aload         10
+       160: aload         7
+       162: aload         8
+       164: aload_2
+       165: aload_3
+       166: invokedynamic #106,  0            // InvokeDynamic #3:onMessage:(Ldev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers;Ljava/util/concurrent/atomic/AtomicBoolean;Ljava/util/concurrent/atomic/AtomicBoolean;Ldev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener;Ljakarta/jms/JMSContext;Ljava/lang/Runnable;Ljava/lang/Runnable;Ljava/util/function/Consumer;Ljava/lang/Runnable;)Ljakarta/jms/MessageListener;
+       171: invokeinterface #110,  2          // InterfaceMethod jakarta/jms/JMSConsumer.setMessageListener:(Ljakarta/jms/MessageListener;)V
+       176: aload         10
+       178: invokeinterface #114,  1          // InterfaceMethod jakarta/jms/JMSContext.start:()V
+       183: aload         9
+       185: areturn
+       186: astore        11
+       188: aload         11
+       190: astore        12
+       192: aconst_null
+       193: astore        13
+       195: aload_3
+       196: invokeinterface #120,  1          // InterfaceMethod java/lang/Runnable.run:()V
+       201: goto          254
+       204: astore        14
+       206: aload         14
+       208: astore        13
+       210: aload         14
+       212: instanceof    #118                // class java/lang/Error
+       215: ifeq          240
+       218: aload         11
+       220: instanceof    #118                // class java/lang/Error
+       223: ifne          240
+       226: aload         14
+       228: astore        12
+       230: aload         14
+       232: aload         11
+       234: invokevirtual #124                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       237: goto          254
+       240: aload         14
+       242: aload         11
+       244: if_acmpeq     254
+       247: aload         11
+       249: aload         14
+       251: invokevirtual #124                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       254: aconst_null
+       255: astore        14
+       257: aload         9
+       259: invokevirtual #130                // Method close:()V
+       262: goto          311
+       265: astore        15
+       267: aload         15
+       269: astore        14
+       271: aload         15
+       273: instanceof    #118                // class java/lang/Error
+       276: ifeq          297
+       279: aload         15
+       281: checkcast     #118                // class java/lang/Error
+       284: astore        16
+       286: aload         12
+       288: instanceof    #118                // class java/lang/Error
+       291: ifne          297
+       294: aload         16
+       296: athrow
+       297: aload         15
+       299: aload         12
+       301: if_acmpeq     311
+       304: aload         12
+       306: aload         15
+       308: invokevirtual #124                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       311: aload         12
+       313: instanceof    #118                // class java/lang/Error
+       316: ifeq          329
+       319: aload         12
+       321: checkcast     #118                // class java/lang/Error
+       324: astore        15
+       326: aload         15
+       328: athrow
+       329: aload         12
+       331: invokestatic  #133                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       334: aload         13
+       336: ifnull        344
+       339: aload         13
+       341: invokestatic  #133                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       344: aload         14
+       346: ifnull        354
+       349: aload         14
+       351: invokestatic  #133                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       354: new           #78                 // class java/lang/IllegalStateException
+       357: dup
+       358: ldc           #138                // String API Question consumer startup failed
+       360: aload         12
+       362: invokespecial #140                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+       365: athrow
+      Exception table:
+         from    to  target type
+            91   185   186   Class java/lang/RuntimeException
+            91   185   186   Class java/lang/Error
+           195   201   204   Class java/lang/RuntimeException
+           195   201   204   Class java/lang/Error
+           257   262   265   Class java/lang/RuntimeException
+           257   262   265   Class java/lang/Error
+
+  public boolean ready();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+         4: invokevirtual #143                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+         7: ifne          14
+        10: iconst_1
+        11: goto          15
+        14: iconst_0
+        15: ireturn
+
+  public void stopDelivery();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+         4: iconst_1
+         5: invokevirtual #146                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+         8: return
+
+  public void close();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokevirtual #149                // Method stopDelivery:()V
+         4: aload_0
+         5: getfield      #7                  // Field lock:Ljava/lang/Object;
+         8: dup
+         9: astore_1
+        10: monitorenter
+        11: aload_0
+        12: getfield      #152                // Field closed:Z
+        15: ifeq          21
+        18: aload_1
+        19: monitorexit
+        20: return
+        21: aload_0
+        22: getfield      #40                 // Field context:Ljakarta/jms/JMSContext;
+        25: invokeinterface #156,  1          // InterfaceMethod jakarta/jms/JMSContext.close:()V
+        30: goto          69
+        33: astore_2
+        34: aload_0
+        35: getfield      #20                 // Field onUnconfirmed:Ljava/util/function/Consumer;
+        38: aload_2
+        39: invokeinterface #157,  2          // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+        44: aload_2
+        45: instanceof    #118                // class java/lang/Error
+        48: ifeq          58
+        51: aload_2
+        52: checkcast     #118                // class java/lang/Error
+        55: astore_3
+        56: aload_3
+        57: athrow
+        58: new           #78                 // class java/lang/IllegalStateException
+        61: dup
+        62: ldc           #162                // String API Question consumer close failed
+        64: aload_2
+        65: invokespecial #140                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+        68: athrow
+        69: aload_0
+        70: iconst_1
+        71: putfield      #152                // Field closed:Z
+        74: aload_1
+        75: monitorexit
+        76: goto          86
+        79: astore        4
+        81: aload_1
+        82: monitorexit
+        83: aload         4
+        85: athrow
+        86: return
+      Exception table:
+         from    to  target type
+            21    30    33   Class java/lang/RuntimeException
+            21    30    33   Class java/lang/Error
+            11    20    79   any
+            21    76    79   any
+            79    83    79   any
+
+  private static void lambda$start$3(dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumers, java.util.concurrent.atomic.AtomicBoolean, java.util.concurrent.atomic.AtomicBoolean, dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkListener, jakarta.jms.JMSContext, java.lang.Runnable, java.lang.Runnable, java.util.function.Consumer, java.lang.Runnable, jakarta.jms.Message);
+    descriptor: (Ldev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers;Ljava/util/concurrent/atomic/AtomicBoolean;Ljava/util/concurrent/atomic/AtomicBoolean;Ldev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener;Ljakarta/jms/JMSContext;Ljava/lang/Runnable;Ljava/lang/Runnable;Ljava/util/function/Consumer;Ljava/lang/Runnable;Ljakarta/jms/Message;)V
+    Code:
+         0: aload_0
+         1: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+         4: invokevirtual #143                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+         7: ifeq          11
+        10: return
+        11: aload_1
+        12: iconst_0
+        13: invokevirtual #146                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+        16: aload_2
+        17: iconst_0
+        18: invokevirtual #146                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+        21: aload_3
+        22: aload         4
+        24: aload         9
+        26: aload         5
+        28: aload         6
+        30: invokevirtual #164                // Method dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener.onMessage:(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;Ljava/lang/Runnable;Ljava/lang/Runnable;)V
+        33: goto          152
+        36: astore        10
+        38: aload_0
+        39: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+        42: iconst_1
+        43: invokevirtual #146                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+        46: aload         7
+        48: aload         10
+        50: invokeinterface #157,  2          // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+        55: goto          152
+        58: astore        10
+        60: aload_0
+        61: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+        64: iconst_1
+        65: invokevirtual #146                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+        68: aload         10
+        70: instanceof    #118                // class java/lang/Error
+        73: ifeq          97
+        76: aload_1
+        77: iconst_0
+        78: iconst_1
+        79: invokevirtual #175                // Method java/util/concurrent/atomic/AtomicBoolean.compareAndSet:(ZZ)Z
+        82: ifeq          97
+        85: aload         4
+        87: invokeinterface #179,  1          // InterfaceMethod jakarta/jms/JMSContext.rollback:()V
+        92: goto          97
+        95: astore        11
+        97: aload         8
+        99: invokeinterface #120,  1          // InterfaceMethod java/lang/Runnable.run:()V
+       104: goto          152
+       107: astore        10
+       109: iconst_0
+       110: istore        11
+       112: aload         10
+       114: invokestatic  #133                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       117: goto          125
+       120: astore        12
+       122: iconst_1
+       123: istore        11
+       125: iload         11
+       127: ifne          137
+       130: aload_2
+       131: invokevirtual #143                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+       134: ifne          152
+       137: aload_0
+       138: getfield      #16                 // Field halted:Ljava/util/concurrent/atomic/AtomicBoolean;
+       141: iconst_1
+       142: invokevirtual #146                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+       145: aload         8
+       147: invokeinterface #120,  1          // InterfaceMethod java/lang/Runnable.run:()V
+       152: return
+      Exception table:
+         from    to  target type
+            21    33    36   Class dev/codex/schubert/nk/api/messaging/inbound/CommittedFatalInboundException
+            21    33    58   Class dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException
+            21    33    58   Class dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException
+            21    33    58   Class java/lang/Error
+            85    92    95   Class java/lang/RuntimeException
+            85    92    95   Class java/lang/Error
+            21    33   107   Class jakarta/jms/JMSException
+            21    33   107   Class java/lang/RuntimeException
+           112   117   120   Class java/lang/Error
+
+  private static void lambda$start$2(java.util.concurrent.atomic.AtomicBoolean);
+    descriptor: (Ljava/util/concurrent/atomic/AtomicBoolean;)V
+    Code:
+         0: aload_0
+         1: iconst_1
+         2: invokevirtual #146                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+         5: return
+
+  private static void lambda$start$1(java.util.concurrent.atomic.AtomicBoolean);
+    descriptor: (Ljava/util/concurrent/atomic/AtomicBoolean;)V
+    Code:
+         0: aload_0
+         1: iconst_1
+         2: invokevirtual #146                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+         5: return
+
+  private static void lambda$start$0(java.lang.Throwable);
+    descriptor: (Ljava/lang/Throwable;)V
+    Code:
+         0: return
+}
