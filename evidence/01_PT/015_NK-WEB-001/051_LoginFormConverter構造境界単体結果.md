@@ -1,0 +1,11 @@
+# LoginFormAuthenticationConverter 構造境界 実行結果
+
+2026-11-06T12:54:56.750327+09:00 NK-WEB-001/関連NK-AUT-001、主WBS-P007-06、仕様050/PT-WEB-FORMPORT001..013全13method成功/FESabort0。MainD8不変更、Test/source 9a7945ae9f6e7bae25871486df298e26abe5167d、branch dev-foundation。PG20392/strictpost0、LINE44/44・METHOD4/4・CLASS1/1・BRANCH38/38全miss0/physical1・normal JAR CRC/単一session一致・除外/旧exec合成0。manifest evidence/01_PT/015_NK-WEB-001/evidence/PG20392-login-form-converter-thirteen-v1/manifest.json SHA256 01d9ef4206bc4aa2094c2e0d1febca72c0c58b1a3873961c1df93e34eb026d05へ実command/日時/元XML/input/dependency/exit/counters/hash、environment.safe.jsonへOS/JDK許可property exact結合（Linux/Java25.0.4）。shared012/profile068、compile20384=0、static20386 rawPMD6/CS0/parser0/個別適用違反0/抑制0、normal20112/SB20114 exact1844指摘0は再演0。
+
+固定memory HttpServletRequest proxyでPOST/path/UTF8/type+charset、query form名case/percent decode/壊れescape、parameter enum null/null element/未知/broken、username/passwordのnull/欠落/空/多値、取得fault IllegalArgument/State/NoSuchElementのcause無し固定message、fatal透過、numeric Caddy peer/header拒否の別例外を独立literal assert。正常はprincipalと未正規化文字・char[]/numeric detailを確認するが必ず未認証/authority空、provider/authmanagerは呼ばない。char[]をfinally zero/eraseCredentialsし後条件nullとzeroを確認、自己所有2worker8task/10秒joinでも別入力を保持。全13の選択methodは仕様050と一意結合。
+
+既SessionFormLoginTestはprovider/session/DB setupを含み呼出/抽出0。アプリ初期化はconverter/resolver/address/固定二例外/新Testのみ、SecurityContextHolder/storage/bootstrap/Artemis/Netty/Hikari/Micrometer無し・held4 probes0。Spring Security tokenは未認証のdata objectだけ。InetAddress.ofLiteralは固定numeric文字処理でDNS/接続は無く、JDK networking metadata/native初期化回数は未測定null、global syscall0と主張しない。実token/session/credential/key/backend/Root/VM/DB/HTTPは使用・保存しない。実Caddy/security-chain/CSRF/provider/認証成功/DIF016 session上限は未受入。
+
+静的6件は各行ごとに根拠確認：Map二件はCallableごとのfixture内confinedでnull negative/列挙順を保つLinkedHashMap、Proxy defining classloaderはpinned Servlet interfaceに必須で非J2EE、Object.equals identity比較はproxy.equalsの再帰を避ける所定Mock意味、thread二件はhost JUnit所有pool/join。raw未抑制・適用違反0、BUG/YKT新規0。
+
+4001→4002原1/3/6pp cap8、実終端後fresh共有0pp/ordinary24-all31/S7残3/第一V同HOLD、専有N/Tnull。各source技術54→55、元282交差35→36/残246、partial80結合17/残63不変。直近十一対象128unique=Java102+HTML26。正式1964/53・歴史17/190・新leaf0・工数null/全451/Root/native/CHR未受入、詳細967/968。独立PGPTへ継続。
