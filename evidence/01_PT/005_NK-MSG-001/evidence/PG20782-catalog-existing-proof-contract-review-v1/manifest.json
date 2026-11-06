@@ -1,0 +1,120 @@
+{
+  "atJST": "2026-11-06T19:12:52.053183+09:00",
+  "actualExit": 0,
+  "source": "5d5bd311c2c1ac046d99eea6519fedf6d051d0b6",
+  "kind": "EXISTING_PROOF_SEMANTIC_AND_SCOPE_REVIEW_NOT_NEW_PRODUCT_EXECUTION",
+  "currentNormalSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+  "mainDesignSource": "8deb209723494008cad46b6649194a3b7b30e0da",
+  "designHashes": {
+    "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "documents/200_UI/230_インターフェース/231_MQ論理構成設計.md": "5ad4cbff20353d678aa2c159ea7ddf1bfaabb0f8ad73f2e577869218fcef1d8b",
+    "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+  },
+  "originalSourcesPreserved": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14366-protocol-file-time-topology-whole-twenty-post-v1/manifest.json",
+      "sha256": "f0853ef479bb0cec0c665a985d10109f01720a048a16421a72277590df29f565",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14364-protocol-file-time-topology-whole-twenty-pt-v1/manifest.json",
+      "sha256": "f3157fb865d5125c00fbcf7072d2a4d83be11cc3c6a8b26021fd636527cd6a6b",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+    }
+  ],
+  "sourcePins": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/BrokerTopologyTest.java": "96e98d5d674681c90c863b7150c9fcfdb17c69e89d63f9462569daa004ab2630"
+  },
+  "currentNormalManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/manifest.safe.json",
+    "sha256": "8bf2c7ca6ada19b2e23a1e007ca2db680d6916d1e215d470f072f27508d23be9"
+  },
+  "currentClassByteSha256": "ffb26a6e704e399d6a190eff1d3a7ac6608b07ce6bf8eb33087894227724f675",
+  "oldClassByteSha256": "ffb26a6e704e399d6a190eff1d3a7ac6608b07ce6bf8eb33087894227724f675",
+  "physicalClosure": [
+    "dev/codex/schubert/nk/protocol/transport/BrokerTopology.class"
+  ],
+  "originalTestCases": [
+    "nullUnknownAndNearMatchAddressesAreDenied",
+    "sixDestinationsMatchTheIndependentPhysicalAndLimitOracle"
+  ],
+  "originalXmlSha256": "f48f40c41f873494d6ca8cfcf70b00a7d37137d09954b98b480b9ce6b61dfd69",
+  "originalXmlPath": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg14364-protocol-file-time-topology-whole-twenty-pt-v1/xml/TEST-dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest.xml",
+  "sixIndependentSs321Vectors": [
+    [
+      "SYNC_REQUEST",
+      "nk.sync.request",
+      1000000,
+      5000
+    ],
+    [
+      "SYNC_REPLY_WEB",
+      "nk.sync.reply.web",
+      1000000,
+      10000
+    ],
+    [
+      "ASYNC_WORK",
+      "nk.async.work",
+      1000,
+      0
+    ],
+    [
+      "WEB_LOG",
+      "nk.web.log",
+      10000,
+      0
+    ],
+    [
+      "DEAD_LETTER",
+      "nk.dead.letter",
+      1000000,
+      0
+    ],
+    [
+      "EXPIRY",
+      "nk.expiry",
+      1000000,
+      0
+    ]
+  ],
+  "referencedCounters": {
+    "BRANCH": {
+      "covered": 6,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 25,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 9,
+      "missed": 0
+    }
+  },
+  "counterOriginalSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "originalAggregateStrictFour100Gate": 1,
+  "originalAggregateTargetUnitFour100": false,
+  "originalAggregateNotRelabeled": true,
+  "newProductTests": 0,
+  "oldProductTestsReexecuted": 0,
+  "newSourceProofs": 0,
+  "newWbsAccepted": 0,
+  "criteriaSatisfied": [
+    "WBS-P005-01:scope"
+  ],
+  "criteriaRemaining": {
+    "WBS-P005-01:contract": "Exact six catalog mappings proven; MQ002 full correlation, MQ003 durable acceptance, MQ004 business DB/session-role separation and MQ005 service dispatch require individually joined P00502/03/P00703/P01805 proofs, not inferred from constants.",
+    "WBS-P005-01:quality": "Catalog saved2/FES0 and classbyte/Four100 are valid subproofs.451 formal same-source campaign/trace/CHR/secret and applicable dependency evidence not closed by local read."
+  },
+  "formalUpdated": false,
+  "effortPercent": null,
+  "chargedToSV": false,
+  "costOwner": "WBS-P005-01",
+  "suppliedProofNotValidatedRepresentativePilot": true
+}
