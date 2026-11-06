@@ -75,3 +75,7 @@ Test SHA256 `c36d1626a09970c99ed9223c92644284a71cd9958def7e9b72e728476122c80b`�
 ## Green準備時のformatter差分
 
 PG20116のTest compileは0。再度のGJF1.36.1がprogress role代入直前の改行/indent一箇所だけを変更し、追加のbyte同一assertは1で停止した。原red/Test c36d1626…はGit41e1ce63とPG20102/20104へ不変保全。現在Test12417a8b…は上記一箇所以外完全一致を独立byte置換比較で確認し、Java token/文字列/期待表/19methodは不変。Test classの行番号等は異なるため同一byteとは主張しない。evidence/PG20116-oracle-format-equivalence-v1/manifest.jsonに両hashと差分を保存。Green自身の入力/compile/source/classCRCを新たに固定し、その一runだけで判定する。旧red execは合成しない。
+
+## 依存postと必要な再資格
+
+PG20118は新D8の19件F/E/S0、L156/M15/C3/B68全miss0を計測したが、独立postは不要なstorage JARのclasspath混入で1となり未受入。原結果を保持し、既no-storage/no-native条件を変更せず、共有profileから不要JARだけを除いた。frozen Testはformat check-onlyへ固定し、PG20126 compile0・format検査0、Test source/全Test class byteはPG20116と完全一致。新profile712/PG20128で依存条件変更に必要な一回の再資格を行う。Main build/六SpotBugsと旧成功PTを確認目的で再演しない。原postの記録はevidence/PG20118-post-dependency-unaccepted-v1。
