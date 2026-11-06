@@ -1,0 +1,147 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-06T20:55:11.148735+09:00",
+  "source": "14cb941d08f6fde9f9cb5d6aac2d99aabb85db29",
+  "productionCoreMain": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+  "verifierSource": "f3e6988c65b5a09fe043c265f90edafd1832966e",
+  "originalPost": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20874-admin-prelude-jdbc-eight-v1/manifest.json",
+    "sha256": "ce7bf008353044a156a102689d02c164888de4825e629b4241039daab7ce1b6e"
+  },
+  "tests": 8,
+  "projection": {
+    "schema": "PGPT_PORT_PROJECTION_V1",
+    "source": "14cb941d08f6fde9f9cb5d6aac2d99aabb85db29",
+    "mainSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+    "tests": 8,
+    "testClasses": 1,
+    "fourCounters": {
+      "LINE": 75,
+      "METHOD": 9,
+      "CLASS": 2,
+      "BRANCH": 48
+    },
+    "missed": 0,
+    "physical": 2,
+    "noCodeClasses": [],
+    "selectedMethods": [
+      [
+        "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+        "allMutationsUseIndependentOrderedPreludeAndUtcBindings"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+        "candidateLookupIsBoundedSingleRowAndNeverAnAuthorityGrant"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+        "lockedOwnerAndFreshVerifiedActorMustMatchTheCandidate"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+        "ordinaryJdbcAndCloseFailuresPreserveBorrowedOwnershipAndRedaction"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+        "parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+        "reducingAdvisoryAndSortedUserRowsRequireExactCardinality"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+        "targetPresenceN12AndNullContractsFailBeforeAnySql"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+        "verifyRequiresFreshAdminButIdentityAloneCannotGrantIt"
+      ]
+    ],
+    "qualificationTransferred": false
+  },
+  "physicalNormalClassHashes": {
+    "dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation": "323ef5ceb26ff0e0621dd023de1fe72f0534e222f29647815efda1686ee796e0",
+    "dev/codex/schubert/nk/api/security/AdminCommandAuthenticator": "b13296b253975dfe4ced9134198363905260172cb2250009c6fc5886936bdfc0"
+  },
+  "sourceTestIds": [
+    [
+      "PT-AUT-PRE001",
+      "allMutationsUseIndependentOrderedPreludeAndUtcBindings"
+    ],
+    [
+      "PT-AUT-PRE002",
+      "targetPresenceN12AndNullContractsFailBeforeAnySql"
+    ],
+    [
+      "PT-AUT-PRE003",
+      "candidateLookupIsBoundedSingleRowAndNeverAnAuthorityGrant"
+    ],
+    [
+      "PT-AUT-PRE004",
+      "reducingAdvisoryAndSortedUserRowsRequireExactCardinality"
+    ],
+    [
+      "PT-AUT-PRE005",
+      "lockedOwnerAndFreshVerifiedActorMustMatchTheCandidate"
+    ],
+    [
+      "PT-AUT-PRE006",
+      "verifyRequiresFreshAdminButIdentityAloneCannotGrantIt"
+    ],
+    [
+      "PT-AUT-PRE007",
+      "ordinaryJdbcAndCloseFailuresPreserveBorrowedOwnershipAndRedaction"
+    ],
+    [
+      "PT-AUT-PRE008",
+      "parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership"
+    ]
+  ],
+  "checks": [
+    "original terminal/stages0",
+    "6 XML method bijection/FES0",
+    "all public artifact hashes",
+    "explicit Main/Test Git pins",
+    "separate producer/verifier/config Git pins",
+    "2physical normal jar bytes/CRC/session",
+    "four counters75/9/2/48 miss0",
+    "SDK exact original review",
+    "static raw6 individually nonapplicable",
+    "heldFourZero/no union/no manual exclusion"
+  ],
+  "staticPost": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20870-admin-prelude-style-static-v1/manifest.json",
+    "sha256": "bf812ace15959dcb5f3d1ded94452dd19b04ef982994e9a87c203334ac4f678d"
+  },
+  "environment": [
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    },
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    },
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    }
+  ],
+  "productTestsReexecuted": 0,
+  "reusedCheckerTemplate": "008 previously corrected canonical-config and physical-Git-pin semantics; its old prototype failure does not belong to this run",
+  "checkerSourceState": "CURRENT_WIP_METADATA_ONLY_PUBLISHED_NEXT_NOT_PRODUCT_SOURCE",
+  "checkerSha256": "012c557c978dffb7020c508bfe24986e9b251900bd948d7fb7e5f2f3eb55edcd",
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "effortRate": null
+}
