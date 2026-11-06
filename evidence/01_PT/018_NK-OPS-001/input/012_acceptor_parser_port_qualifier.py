@@ -4,7 +4,7 @@ import sys,os,json,hashlib,subprocess,datetime,zipfile,re,shutil
 import xml.etree.ElementTree as E
 import pg9666_pagination_static as r
 root=Path.cwd();runs=root.parent/'pgpt-runs/PG379';tc=root.parent/'toolchain';jdk=tc/'jdk-25.0.4/bin';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();phase=sys.argv[1];profile=sys.argv[2];external=profile.endswith('.json');assert phase in {'prepare','static','run','post'} and (external or profile in {'range','verified','audit','receipt','login_audit','login_attempt','inbound','snapshot','run_reference','metadata','expiry','backup','batch_run','cleanup_step','cleanup_query','inspection_summary','pressure','topology','acceptor'})
-securityAuditExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/072_web_security_audit.json','evidence/01_PT/018_NK-OPS-001/input/073_web_security_audit_style.json'}
+securityAuditExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/072_web_security_audit.json','evidence/01_PT/018_NK-OPS-001/input/073_web_security_audit_style.json','evidence/01_PT/018_NK-OPS-001/input/074_web_security_audit_logger.json'}
 csrfExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/069_form_csrf_request.json','evidence/01_PT/018_NK-OPS-001/input/070_form_csrf_request_style.json'}
 formExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/068_login_form_converter.json'
 sessionExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/067_web_session_snapshot.json'

@@ -205,7 +205,8 @@ final class WebSecurityAuditPortTest {
 
     @Override
     public void log(Level level, ResourceBundle bundle, String format, Object... args) {
-      throw new AssertionError("unexpected formatted logger overload");
+      assertNull(args);
+      log(level, bundle, format, (Throwable) null);
     }
   }
 

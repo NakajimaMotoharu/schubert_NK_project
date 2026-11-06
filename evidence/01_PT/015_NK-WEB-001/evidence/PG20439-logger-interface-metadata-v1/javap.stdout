@@ -1,0 +1,108 @@
+Compiled from "System.java"
+public interface java.lang.System$Logger {
+  public abstract java.lang.String getName();
+
+  public abstract boolean isLoggable(java.lang.System$Logger$Level);
+
+  public default void log(java.lang.System$Logger$Level, java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aconst_null
+         3: checkcast     #1                  // class java/util/ResourceBundle
+         6: aload_2
+         7: aconst_null
+         8: checkcast     #3                  // class "[Ljava/lang/Object;"
+        11: invokeinterface #5,  5            // InterfaceMethod log:(Ljava/lang/System$Logger$Level;Ljava/util/ResourceBundle;Ljava/lang/String;[Ljava/lang/Object;)V
+        16: return
+
+  public default void log(java.lang.System$Logger$Level, java.util.function.Supplier<java.lang.String>);
+    Code:
+         0: aload_2
+         1: invokestatic  #11                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+         4: pop
+         5: aload_0
+         6: aload_1
+         7: invokestatic  #11                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        10: checkcast     #17                 // class java/lang/System$Logger$Level
+        13: invokeinterface #19,  2           // InterfaceMethod isLoggable:(Ljava/lang/System$Logger$Level;)Z
+        18: ifeq          45
+        21: aload_0
+        22: aload_1
+        23: aconst_null
+        24: checkcast     #1                  // class java/util/ResourceBundle
+        27: aload_2
+        28: invokeinterface #23,  1           // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+        33: checkcast     #29                 // class java/lang/String
+        36: aconst_null
+        37: checkcast     #3                  // class "[Ljava/lang/Object;"
+        40: invokeinterface #5,  5            // InterfaceMethod log:(Ljava/lang/System$Logger$Level;Ljava/util/ResourceBundle;Ljava/lang/String;[Ljava/lang/Object;)V
+        45: return
+
+  public default void log(java.lang.System$Logger$Level, java.lang.Object);
+    Code:
+         0: aload_2
+         1: invokestatic  #11                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+         4: pop
+         5: aload_0
+         6: aload_1
+         7: invokestatic  #11                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        10: checkcast     #17                 // class java/lang/System$Logger$Level
+        13: invokeinterface #19,  2           // InterfaceMethod isLoggable:(Ljava/lang/System$Logger$Level;)Z
+        18: ifeq          40
+        21: aload_0
+        22: aload_1
+        23: aconst_null
+        24: checkcast     #1                  // class java/util/ResourceBundle
+        27: aload_2
+        28: invokevirtual #31                 // Method java/lang/Object.toString:()Ljava/lang/String;
+        31: aconst_null
+        32: checkcast     #3                  // class "[Ljava/lang/Object;"
+        35: invokeinterface #5,  5            // InterfaceMethod log:(Ljava/lang/System$Logger$Level;Ljava/util/ResourceBundle;Ljava/lang/String;[Ljava/lang/Object;)V
+        40: return
+
+  public default void log(java.lang.System$Logger$Level, java.lang.String, java.lang.Throwable);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aconst_null
+         3: aload_2
+         4: aload_3
+         5: invokeinterface #37,  5           // InterfaceMethod log:(Ljava/lang/System$Logger$Level;Ljava/util/ResourceBundle;Ljava/lang/String;Ljava/lang/Throwable;)V
+        10: return
+
+  public default void log(java.lang.System$Logger$Level, java.util.function.Supplier<java.lang.String>, java.lang.Throwable);
+    Code:
+         0: aload_2
+         1: invokestatic  #11                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+         4: pop
+         5: aload_0
+         6: aload_1
+         7: invokestatic  #11                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        10: checkcast     #17                 // class java/lang/System$Logger$Level
+        13: invokeinterface #19,  2           // InterfaceMethod isLoggable:(Ljava/lang/System$Logger$Level;)Z
+        18: ifeq          39
+        21: aload_0
+        22: aload_1
+        23: aconst_null
+        24: aload_2
+        25: invokeinterface #23,  1           // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+        30: checkcast     #29                 // class java/lang/String
+        33: aload_3
+        34: invokeinterface #37,  5           // InterfaceMethod log:(Ljava/lang/System$Logger$Level;Ljava/util/ResourceBundle;Ljava/lang/String;Ljava/lang/Throwable;)V
+        39: return
+
+  public default void log(java.lang.System$Logger$Level, java.lang.String, java.lang.Object...);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aconst_null
+         3: aload_2
+         4: aload_3
+         5: invokeinterface #5,  5            // InterfaceMethod log:(Ljava/lang/System$Logger$Level;Ljava/util/ResourceBundle;Ljava/lang/String;[Ljava/lang/Object;)V
+        10: return
+
+  public abstract void log(java.lang.System$Logger$Level, java.util.ResourceBundle, java.lang.String, java.lang.Throwable);
+
+  public abstract void log(java.lang.System$Logger$Level, java.util.ResourceBundle, java.lang.String, java.lang.Object...);
+}
