@@ -1,0 +1,152 @@
+{
+  "decision": "STATIC_JDK_EXCEPTION_LOG_WRITER_CLOSURE",
+  "source": "5720b037554171d092eddabcf0a04bfe95897350",
+  "productionCoreMain": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+  "originalRun": "PG20914",
+  "originalManifestSha256": "4b898809d6a25f58298d721aae41d0310ec03450cbbef4ada000dcafca8695fd",
+  "originalInitializationSha256": "6ae8d73f269eaa51c5ad8bf901860349e42b22032b5eaffaa3eb1ff6503cd46d",
+  "originalProducerSha256": "9d99213120dbf970cc86077196b68751e405c04b8c90758d7b08377197d43c48",
+  "originalConfigSha256": "702093d191f39790758559ba052ed6bb52ad48b96413d1a833e2fb7036c68e95",
+  "jdkModulesSha256": "89021c44e874a1d4e477c335c0c6f170c10933652130990357a5a9fe8b8aa7e8",
+  "jdkJavapSha256": "59d0b7cf9e1936f16cd6dd39d5214a0c8507a1d5895a1e9b95c52aa4f436d71b",
+  "scope": "Real memory JCA/Gson with PUBLIC non-secret zero32 AES vector key and deterministic synthetic random, never a live credential/session. Fixed JDK SDK/classpath/IP/provider/entropy metadata activity unmeasured, not syscall0. Only numeric InetAddress.getByAddress/getHostAddress calls, no DNS/connect or held4. Successful issuance uses only own fake JDBC callbacks; default SecureRandom/UUID supplier public constructor is rejected at transaction check before random/UUID issuance. AuthSessionService, AuthContextCodec, AuthContextIdentity, SessionAuditWriter and Test/Fixture/FixedRandom statically read. SQLException constructors call DriverManager.getLogWriter; fixed JDK25.0.4 clinit only in-memory defaults/list/locks; getLogWriter field return; discovery/connect in separate unreachable reviewed entry methods. Test/Main javap has no DriverManager/DataSource/driver/network calls, explicit CP contains no JDBC driver provider; original init contains no driver/Socket. Not syscall-level observation, native/JVM/JCA/classpath activity unmeasured. No deployed DB/lock/session/security acceptance.",
+  "testsReexecuted": 0,
+  "actualBackendActions": 0,
+  "forbiddenObservedInitialization": [],
+  "originalXmlEnvironmentBindings": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20914-session-issue-jdbc-eight-unit-v1/xml/TEST-junit-jupiter.xml": {
+      "sha256": "6fad404713acaad5332d90cb040be5ab0d90a55540bae14834750efe33ef8c52",
+      "checks": {
+        "noSecurityPropertyOverride": true,
+        "noCustomNetworkHandler": true,
+        "ownedTmp": true,
+        "noJdbcDriversProperty": true,
+        "noJulConfigFile": true,
+        "noJulConfigClass": true,
+        "fixedJdk": true
+      }
+    },
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20914-session-issue-jdbc-eight-unit-v1/xml/TEST-junit-platform-suite.xml": {
+      "sha256": "9b02497838aca39c33cafe2edf0e205a8e9ad4747b721379840ad0cf4832f10d",
+      "checks": {
+        "noSecurityPropertyOverride": true,
+        "noCustomNetworkHandler": true,
+        "ownedTmp": true,
+        "noJdbcDriversProperty": true,
+        "noJulConfigFile": true,
+        "noJulConfigClass": true,
+        "fixedJdk": true
+      }
+    },
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20914-session-issue-jdbc-eight-unit-v1/xml/TEST-junit-vintage.xml": {
+      "sha256": "0ab75471068f0babeb5c96e2b22a32d65f3536df6e94185240f4ad0156ee7527",
+      "checks": {
+        "noSecurityPropertyOverride": true,
+        "noCustomNetworkHandler": true,
+        "ownedTmp": true,
+        "noJdbcDriversProperty": true,
+        "noJulConfigFile": true,
+        "noJulConfigClass": true,
+        "fixedJdk": true
+      }
+    }
+  },
+  "classpathDriverProviderEntries": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20908-session-issue-jdbc-style-compile-v1/test-classes": [],
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": [],
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar": []
+  },
+  "ordinaryJdbcQualificationOnly": true,
+  "heldDynamicFourUnchanged": true,
+  "formalUpdated": false,
+  "stages": {
+    "jdk": {
+      "reusedFixedJdkOnly": true,
+      "originalStage": {
+        "actualExit": 0,
+        "timedOut": false,
+        "startUTC": "2026-11-06T11:37:10.946347+00:00",
+        "endUTC": "2026-11-06T11:37:11.216112+00:00",
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+          "-c",
+          "-p",
+          "java.sql.SQLException",
+          "java.sql.DriverManager"
+        ],
+        "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+        "stdoutSha256": "6f611dfbf1a446f2beedad9c565836e5988ef190bb466cbe6b1c8b134059cc15",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "actualExit": 0
+    },
+    "test": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T12:19:00.925307+00:00",
+      "endUTC": "2026-11-06T12:19:01.240553+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-c",
+        "-p",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20908-session-issue-jdbc-style-compile-v1/test-classes",
+        "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+        "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest$Fixture",
+        "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest$FixedRandom"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "acd150eb58ad29710569b448693b337572567dd2d878ed6344ea5a23cde0081c",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "main": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T12:19:01.240989+00:00",
+      "endUTC": "2026-11-06T12:19:01.556346+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-c",
+        "-p",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar",
+        "dev.codex.schubert.nk.api.security.AuthSessionService",
+        "dev.codex.schubert.nk.api.security.AuthContextCodec",
+        "dev.codex.schubert.nk.api.security.AuthContextIdentity",
+        "dev.codex.schubert.nk.api.security.SessionAuditWriter",
+        "dev.codex.schubert.nk.api.security.ContextHash",
+        "dev.codex.schubert.nk.api.security.AuthenticationInfrastructureException",
+        "dev.codex.schubert.nk.api.database.RequiredColumn"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e2100b6fdc64a6b03eca1f413b260b8e745a6cb632f5c220791f859a20fe1932",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "atJST": "2026-11-06T21:19:01.701897+09:00",
+  "originalInputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java": "1ec3c856c555f77de597745defbbd6ea6f60292013117a44daf81e78a5f5eda8",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionIssueJdbcPortTest.java": "367458b115a8e5f3705fb6cd5bbc4db1728d15ea6bae0b41c7e7832d06ea04d8"
+  },
+  "staticArtifacts": {
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/jdk-exit.safe.json": "bc9980242ab9855f85a5faabd78d0c292794cd5778f863ad50e3fa82b57dd313",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/test-exit.safe.json": "bf598ecd50a0da75c3145399d45000b7cb71956ed57d70ded28662036af163e6",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/jdk.stdout": "6f611dfbf1a446f2beedad9c565836e5988ef190bb466cbe6b1c8b134059cc15",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/test-process.safe.json": "4910feb73d5bb151a59a73c018541fa4d03daadc73c8b054cb5606f5b95e9a40",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/test.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/main-begin.safe.json": "ab1eb97ddb6b2dc7583f944584be29a4091be7d1ae1c5a92634bc46cd6cb921d",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/jdk-begin.safe.json": "1744c5abac328889332704f936f9f8546c8327e67a33e4c96efa4be4db00b6cf",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/test.stdout": "acd150eb58ad29710569b448693b337572567dd2d878ed6344ea5a23cde0081c",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/main.stdout": "e2100b6fdc64a6b03eca1f413b260b8e745a6cb632f5c220791f859a20fe1932",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/original-class-init.stdout": "6ae8d73f269eaa51c5ad8bf901860349e42b22032b5eaffaa3eb1ff6503cd46d",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/jdk-process.safe.json": "0554c7d6747a523fc16261d23a752e739a2d692e1e4c87f82ce365d7e7c7f4db",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/main.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/main-exit.safe.json": "f794148a7a7065197a4b4e38a528472842436c8e9e87ad5a5ea7edebf92ff86b",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/main-process.safe.json": "b5663dd7fa0b1f618fd3c9797e5d1ff1f6afa36741ac2dadbb2e525793425abe",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/jdk.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/test-begin.safe.json": "bc13c602acb31925aa03b1366417614e4d7a335214b53e2e23b3404ada81898f"
+  }
+}
