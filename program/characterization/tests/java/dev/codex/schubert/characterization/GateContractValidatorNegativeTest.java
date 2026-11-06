@@ -21,6 +21,18 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 /** Negative fixtures for BUG-001/YKT-001. Program: NK-CHR-001. */
 class GateContractValidatorNegativeTest {
+  private static final String VERSION = "version";
+  private static final String CASES = "cases";
+  private static final String BAD_VALUE = "bad";
+  private static final String CURRENT = "current";
+  private static final String UNKNOWN = "unknown";
+  private static final String HEIGHT = "height";
+  private static final String UNKNOWN_CASE = "CHR-Z99";
+  private static final String SELECTORS = "selectors";
+  private static final String STATUS = "status";
+  private static final String EVIDENCE = "evidence";
+  private static final String FAILED = "FAIL";
+  private static final String NOT_ARRAY = "not-array";
   private static final ObjectMapper JSON = new ObjectMapper();
   private static final Path SOURCE_ROOT =
       Path.of(System.getProperty("chr.unitProjectRoot")).toAbsolutePath().normalize();
@@ -33,7 +45,7 @@ class GateContractValidatorNegativeTest {
     fixture.mutate(
         "program/characterization/tests/resources/cases/gate-contract.json",
         root -> {
-          root.put("version", 0);
+          root.put(VERSION, 0);
           array(root, "gates").remove(5);
           ArrayNode cases = array(root, "caseOrder");
           cases.set(1, cases.get(0));
@@ -47,8 +59,8 @@ class GateContractValidatorNegativeTest {
         root -> {
           root.put("$schema", "unsupported");
           root.put("type", "array");
-          root.set("required", JSON.valueToTree(List.of("cases")));
-          ObjectNode cases = object(object(root, "properties"), "cases");
+          root.set("required", JSON.valueToTree(List.of(CASES)));
+          ObjectNode cases = object(object(root, "properties"), CASES);
           cases.put("minItems", 23);
           cases.put("maxItems", 25);
           object(cases, "items").set("required", JSON.valueToTree(List.of("id")));
@@ -56,28 +68,28 @@ class GateContractValidatorNegativeTest {
     fixture.mutate(
         "program/characterization/tests/resources/cases/catalog.json",
         root -> {
-          root.put("version", 0);
-          ArrayNode cases = array(root, "cases");
+          root.put(VERSION, 0);
+          ArrayNode cases = array(root, CASES);
           for (int index = 0; index < 2; index++) {
             ObjectNode item = (ObjectNode) cases.get(index);
             item.put("id", "BAD");
-            item.put("group", "bad");
-            item.put("current", "bad");
-            item.put("nk", "bad");
+            item.put("group", BAD_VALUE);
+            item.put(CURRENT, BAD_VALUE);
+            item.put("nk", BAD_VALUE);
           }
         });
     fixture.mutate(
         "program/characterization/tests/resources/browser/manifest.json",
         root -> {
           root.put("playwrightJava", "0");
-          root.put("browser", "unknown");
+          root.put("browser", UNKNOWN);
           root.put("browserRevision", 0);
           root.put("locale", "en-US");
           root.put("timezone", "UTC");
-          object(root, "desktop").put("width", 1).put("height", 1).put("deviceScaleFactor", 2);
-          object(root, "mobile").put("width", 1).put("height", 1).put("deviceScaleFactor", 2);
+          object(root, "desktop").put("width", 1).put(HEIGHT, 1).put("deviceScaleFactor", 2);
+          object(root, "mobile").put("width", 1).put(HEIGHT, 1).put("deviceScaleFactor", 2);
           root.set("fonts", JSON.createArrayNode());
-          root.put("fontReady", "unknown");
+          root.put("fontReady", UNKNOWN);
           root.put("colorScheme", "dark");
           root.put("reducedMotion", "no-preference");
         });
@@ -109,16 +121,16 @@ class GateContractValidatorNegativeTest {
     fixture.mutate(
         "program/characterization/tests/resources/cases/catalog.json",
         root -> {
-          ObjectNode item = (ObjectNode) array(root, "cases").get(23);
-          item.put("id", "CHR-Z99");
+          ObjectNode item = (ObjectNode) array(root, CASES).get(23);
+          item.put("id", UNKNOWN_CASE);
           item.put("group", "Operation");
-          item.put("current", "NK_ONLY");
+          item.put(CURRENT, "NK_ONLY");
         });
     fixture.mutate(
         "program/characterization/tests/resources/browser/manifest.json",
         root -> {
-          object(root, "desktop").put("height", 1);
-          object(root, "mobile").put("height", 1).put("deviceScaleFactor", 2);
+          object(root, "desktop").put(HEIGHT, 1);
+          object(root, "mobile").put(HEIGHT, 1).put("deviceScaleFactor", 2);
         });
     assertFailures(
         fixture.validate(),
@@ -136,23 +148,23 @@ class GateContractValidatorNegativeTest {
     fixture.mutate(
         "program/characterization/tests/resources/cases/dif-allowlist.json",
         root -> {
-          root.put("version", 0);
+          root.put(VERSION, 0);
           ArrayNode differences = array(root, "differences");
           ObjectNode first = (ObjectNode) differences.get(0);
           first.put("mode", "wildcard");
           first.put("selectorType", "xpath-all");
-          first.set("cases", JSON.createArrayNode());
-          first.set("selectors", JSON.createArrayNode());
-          first.put("current", "");
+          first.set(CASES, JSON.createArrayNode());
+          first.set(SELECTORS, JSON.createArrayNode());
+          first.put(CURRENT, "");
           first.put("nk", "");
           ObjectNode second = (ObjectNode) differences.get(1);
           second.put("field", first.path("field").asText());
-          second.set("cases", JSON.valueToTree(List.of("CHR-L01", "CHR-L01", "CHR-Z99")));
-          second.set("selectors", JSON.valueToTree(List.of("same", "same")));
-          ((ObjectNode) differences.get(2)).set("selectors", JSON.valueToTree(List.of("")));
-          ((ObjectNode) differences.get(3)).set("selectors", JSON.valueToTree(List.of("all*")));
-          ((ObjectNode) differences.get(4)).set("selectors", JSON.valueToTree(List.of("a..b")));
-          ((ObjectNode) differences.get(5)).set("selectors", JSON.valueToTree(List.of("$.all")));
+          second.set(CASES, JSON.valueToTree(List.of("CHR-L01", "CHR-L01", UNKNOWN_CASE)));
+          second.set(SELECTORS, JSON.valueToTree(List.of("same", "same")));
+          ((ObjectNode) differences.get(2)).set(SELECTORS, JSON.valueToTree(List.of("")));
+          ((ObjectNode) differences.get(3)).set(SELECTORS, JSON.valueToTree(List.of("all*")));
+          ((ObjectNode) differences.get(4)).set(SELECTORS, JSON.valueToTree(List.of("a..b")));
+          ((ObjectNode) differences.get(5)).set(SELECTORS, JSON.valueToTree(List.of("$.all")));
           ((ObjectNode) differences.get(14)).put("id", "DIF-X15");
         });
     assertFailures(
@@ -182,18 +194,18 @@ class GateContractValidatorNegativeTest {
     fixture.mutate(
         "program/characterization/tests/resources/cases/case-requirements.json",
         root -> {
-          root.put("version", 0);
+          root.put(VERSION, 0);
           ObjectNode requirements = object(root, "requirements");
           requirements.set("CHR-A01", JSON.valueToTree(List.of("caseId", "caseId")));
-          requirements.set("CHR-A02", JSON.valueToTree(List.of("status")));
+          requirements.set("CHR-A02", JSON.valueToTree(List.of(STATUS)));
           requirements.remove("CHR-O01");
           ObjectNode supplemental = object(root, "supplementalChecks");
           supplemental.set("CHR-A02", JSON.createArrayNode());
           supplemental.set(
               "CHR-A03", JSON.valueToTree(List.of("unsafe-post-denied", "unsafe-post-denied")));
-          supplemental.set("CHR-Z99", JSON.valueToTree(List.of("unknown")));
+          supplemental.set(UNKNOWN_CASE, JSON.valueToTree(List.of(UNKNOWN)));
           ObjectNode nkOnly = object(root, "nkOnlySupplementalChecks");
-          nkOnly.set("CHR-Z99", JSON.valueToTree(List.of("unknown")));
+          nkOnly.set(UNKNOWN_CASE, JSON.valueToTree(List.of(UNKNOWN)));
           nkOnly.set("CHR-E01", JSON.valueToTree(List.of("not-defined")));
         });
     assertFailures(
@@ -218,7 +230,7 @@ class GateContractValidatorNegativeTest {
     fixture.mutateRun(
         false,
         "artifacts/CHR-A02.json",
-        root -> root.put("caseId", "CHR-X00").put("status", "SKIPPED"));
+        root -> root.put("caseId", "CHR-X00").put(STATUS, "SKIPPED"));
     fixture.mutateRun(
         false,
         "artifacts/CHR-A03.json",
@@ -236,11 +248,11 @@ class GateContractValidatorNegativeTest {
         root -> {
           ObjectNode checks = object(root, "checks");
           ObjectNode ip = object(object(checks, "CHR-A02"), "ip-limit-observed-not-hardcoded");
-          ip.put("status", "NK_ONLY");
-          ip.set("evidence", JSON.createObjectNode());
+          ip.put(STATUS, "NK_ONLY");
+          ip.set(EVIDENCE, JSON.createObjectNode());
           ObjectNode csrf = object(object(checks, "CHR-A03"), "unsafe-post-denied");
-          csrf.put("status", "FAIL");
-          csrf.put("evidence", "invalid");
+          csrf.put(STATUS, FAILED);
+          csrf.put(EVIDENCE, "invalid");
         });
     assertFailures(
         fixture.validate(),
@@ -260,11 +272,11 @@ class GateContractValidatorNegativeTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"FAIL", "FAILED", "FLAKY", "SKIP", "SKIPPED", "DISABLED", "NOT_RUN"})
+  @ValueSource(strings = {FAILED, "FAILED", "FLAKY", "SKIP", "SKIPPED", "DISABLED", "NOT_RUN"})
   void rejectsEveryNonPassExecutionStatus(String rejectedStatus) throws Exception {
     Fixture fixture =
         fixture("rejected-status-" + rejectedStatus.toLowerCase(java.util.Locale.ROOT));
-    fixture.mutateRun(false, "artifacts/CHR-A02.json", root -> root.put("status", rejectedStatus));
+    fixture.mutateRun(false, "artifacts/CHR-A02.json", root -> root.put(STATUS, rejectedStatus));
     assertFailures(fixture.validate(), "run2_STATUS:CHR-A02", "run2_REJECTED_STATUS:CHR-A02");
   }
 
@@ -290,30 +302,30 @@ class GateContractValidatorNegativeTest {
     fixture.mutate(
         "program/characterization/reports/current-repeat-comparison.json",
         root -> {
-          root.put("status", "FAIL");
+          root.put(STATUS, FAILED);
           root.put("firstFileCount", 27);
           root.put("secondFileCount", 29);
-          root.put("missing", "not-array");
+          root.put("missing", NOT_ARRAY);
           root.set("extra", JSON.valueToTree(List.of("extra")));
           root.set("changed", JSON.valueToTree(List.of("changed")));
         });
     fixture.mutate(
         "program/characterization/reports/source-verification.json",
         root -> {
-          root.put("status", "FAIL");
+          root.put(STATUS, FAILED);
           root.put("sourceFileCount", 0);
-          root.put("sourceAggregateSha256", "bad");
+          root.put("sourceAggregateSha256", BAD_VALUE);
           root.put("documentFileCount", 0);
-          root.put("documentAggregateSha256", "bad");
+          root.put("documentAggregateSha256", BAD_VALUE);
           root.put("masterFileCount", 0);
           root.put("masterBytes", 0);
-          root.put("masterSymlinks", "not-array");
+          root.put("masterSymlinks", NOT_ARRAY);
         });
     fixture.mutateRun(
         true,
         "inventory.json",
         root -> {
-          root.put("status", "FAIL");
+          root.put(STATUS, FAILED);
           root.put("scenarioFileCount", 0);
           root.put("scenarioEntryCount", 0);
           root.put("audioMetadataCount", 0);
@@ -324,8 +336,8 @@ class GateContractValidatorNegativeTest {
     fixture.mutate(
         "program/characterization/reports/preflight.json",
         root -> {
-          root.put("status", "FAIL");
-          root.put("failures", "not-array");
+          root.put(STATUS, FAILED);
+          root.put("failures", NOT_ARRAY);
           root.put("credentialPermission", "INVALID");
           root.set("hostAllowlist", JSON.valueToTree(List.of("external")));
           root.put("freeBytes", 1);
@@ -333,10 +345,10 @@ class GateContractValidatorNegativeTest {
     fixture.mutate(
         "program/characterization/reports/review-record.json",
         root -> {
-          root.put("status", "REJECTED");
-          root.put("baselineCommit", "bad");
+          root.put(STATUS, "REJECTED");
+          root.put("baselineCommit", BAD_VALUE);
           root.put("reviewerRole", "");
-          root.put("evidence", "not-array");
+          root.put(EVIDENCE, NOT_ARRAY);
           object(root, "checks")
               .properties()
               .forEach(entry -> ((ObjectNode) root.path("checks")).put(entry.getKey(), false));
@@ -377,8 +389,8 @@ class GateContractValidatorNegativeTest {
           root.put("caseCount", 23);
           root.put("screenshotFileCount", 1);
           root.put("differenceCount", 15);
-          root.put("sourceAggregateSha256", "bad");
-          root.put("documentAggregateSha256", "bad");
+          root.put("sourceAggregateSha256", BAD_VALUE);
+          root.put("documentAggregateSha256", BAD_VALUE);
           root.put("masterFileCount", 0);
           root.put("masterBytes", 0);
           ObjectNode environment = object(root, "environment");
@@ -421,8 +433,8 @@ class GateContractValidatorNegativeTest {
         "program/characterization/reports/current-repeat-comparison.json",
         root -> {
           root.set("missing", JSON.valueToTree(List.of("missing")));
-          root.put("extra", "not-array");
-          root.put("changed", "not-array");
+          root.put("extra", NOT_ARRAY);
+          root.put("changed", NOT_ARRAY);
         });
     fixture.mutate(
         "program/characterization/reports/source-verification.json",
@@ -432,7 +444,7 @@ class GateContractValidatorNegativeTest {
         root -> root.set("failures", JSON.valueToTree(List.of("failure"))));
     fixture.mutate(
         "program/characterization/reports/review-record.json",
-        root -> root.set("evidence", JSON.valueToTree(List.of("one"))));
+        root -> root.set(EVIDENCE, JSON.valueToTree(List.of("one"))));
     assertFailures(
         fixture.validate(),
         "run1_SCREENSHOT_MOBILE",
@@ -474,7 +486,7 @@ class GateContractValidatorNegativeTest {
         SOURCE_ROOT.resolve("program/characterization/baseline/current"),
         root.resolve("program/characterization/baseline/current"));
     Path reports = root.resolve("program/characterization/reports");
-    Files.createDirectories(reports.resolve("current"));
+    Files.createDirectories(reports.resolve(CURRENT));
     for (String report :
         List.of(
             "source-verification.json",
