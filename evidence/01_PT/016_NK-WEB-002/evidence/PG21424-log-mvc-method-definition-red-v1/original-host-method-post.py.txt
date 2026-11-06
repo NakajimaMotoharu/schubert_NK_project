@@ -1,0 +1,25 @@
+from pathlib import Path
+import json,hashlib,zipfile,datetime,shutil
+import xml.etree.ElementTree as E
+import pg9666_pagination_static as c
+r=Path.cwd();runs=r.parent/'pgpt-runs/PG379';tc=r.parent/'toolchain';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();load=lambda p:json.loads(Path(p).read_text());unit=runs/'pg21414-log-mvc-three-unit-v1';m=load(unit/'manifest.json');assert m['actualExit']==0 and m['tests']==3 and m['begin']['source']=='42c71e730c96d638e9dc110578a5c3d1504a1828'
+normal=load(runs/'pg20990-outbox-required-six-main-compile-v1/manifest.safe.json');slot=runs/'pg21422-log-mvc-closed-constructor-method-v1';assert not slot.exists();slot.mkdir();(slot/'component').mkdir();c.SLOT=slot
+expected={
+'web/session/SessionPayloadCodec':{'<init>','<clinit>','close'},'web/session/SessionAttributeCodec':{'<init>','<clinit>'},'web/session/EncryptedSessionPayload':{'validateVersion'},'web/session/EncryptedWebSessionRepository':{'<init>'},'web/session/JdbcWebSessionStore':{'<init>'},'web/session/SpringEncryptedSessionRepository':{'<init>'},
+'web/messaging/LogSearchWireClient':{'<init>'},'web/messaging/ProtectedReadWireClient':{'<init>'},'web/messaging/JmsRequestReplyClient':{'<init>','<clinit>'},'web/messaging/ReplyCorrelationRegistry':{'<init>'},'web/security/ApiSessionInvalidHandler':{'<init>'},'web/logging/WebSecurityAudit':{'<init>','<clinit>','version'},'web/logging/WebSecurityAudit$Event':{'<init>','<clinit>'},'web/controller/LogController':{'<init>','search'},'web/error/WebResultMapper':{'<init>'},'web/session/SessionPrincipal':{'<init>','role'},'protocol/header/AuthenticationContext':{'<init>','<clinit>','of'},'protocol/layout/semantic/UserRole':{'<init>','<clinit>'}}
+physical={}
+for module in ['web','protocol']:
+ jar=normal['jars'][module];assert sha(jar['path'])==jar['sha256']
+ with zipfile.ZipFile(jar['path']) as z:
+  for suffix in expected:
+   if not suffix.startswith(module+'/'):continue
+   name='dev/codex/schubert/nk/'+suffix;p=slot/'component'/(name+'.class');p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(z.read(name+'.class'));physical[name]=sha(p)
+stage=c.step('method-report',[str(tc/'jdk-25.0.4/bin/java'),'-jar',str(tc/'org.jacoco.cli-0.8.15-nodeps.jar'),'report',str(unit/'jacoco.exec'),'--classfiles',str(slot/'component'),'--xml',str(slot/'methods.xml')],r);assert stage['actualExit']==0 and not stage['timedOut']
+cs=E.parse(slot/'methods.xml').getroot().findall('.//package/class');assert {x.get('name') for x in cs}==set(physical)
+executed={x.get('name'):[dict(name=y.get('name'),desc=y.get('desc')) for y in x.findall('method') if any(int(k.get('covered'))>0 for k in y.findall('counter'))] for x in cs}
+for name,methods in executed.items():assert {v['name'] for v in methods}<=expected[name.removeprefix('dev/codex/schubert/nk/')],(name,methods)
+assert all(executed[n] for n in physical)
+out=r/'evidence/01_PT/016_NK-WEB-002/evidence/PG21422-log-mvc-closed-constructor-method-v1';assert not out.exists();out.mkdir();files={}
+for n in ['methods.xml','method-report.stdout','method-report.stderr','method-report-exit.safe.json','method-report-begin.safe.json']:
+ shutil.copyfile(slot/n,out/n);files[n]=sha(out/n)
+(out/'manifest.json').write_text(json.dumps(dict(atJST=datetime.datetime.now().astimezone().isoformat(),actualExit=0,source=m['begin']['source'],originalRunManifest=dict(path=str(unit/'manifest.json'),sha256=sha(unit/'manifest.json')),originalExecSha256=sha(unit/'jacoco.exec'),normalJars={k:normal['jars'][k] for k in ['web','protocol']},physicalSha256=physical,executedMethods=executed,declaredAllowedNames={k:sorted(v) for k,v in expected.items()},limits='Constructors/constants/version validation/own key-copy close; controller.search only USER early403, partial controller coverage retained. No wire/DB/crypto/identity/session/handler invocation.',extraWholeSourceCredit=0,productTestsReexecuted=0,files=files),indent=2)+'\n');print(json.dumps(dict(actualExit=0,classes=len(executed),methods=executed,manifestSha256=sha(out/'manifest.json'))))
