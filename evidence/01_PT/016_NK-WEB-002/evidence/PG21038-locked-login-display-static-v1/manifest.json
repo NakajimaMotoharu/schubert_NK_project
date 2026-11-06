@@ -1,0 +1,68 @@
+{
+  "actualExit": 0,
+  "pmdRaw": 2,
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "classification": [
+    {
+      "beginline": "136",
+      "endline": "136",
+      "begincolumn": "21",
+      "endcolumn": "52",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.view",
+      "class": "LockedLoginDisplayResourcePortTest",
+      "method": "parallelLockedAndUnlockedRenderingsKeepTheirOwnFlags",
+      "variable": "pool",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "applicable": false,
+      "reason": "Bounded two-worker host JUnit pool uses try-with-resources; no threads created by a deployed web application."
+    },
+    {
+      "beginline": "141",
+      "endline": "147",
+      "begincolumn": "13",
+      "endcolumn": "37",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.view",
+      "class": "LockedLoginDisplayResourcePortTest",
+      "method": "parallelLockedAndUnlockedRenderingsKeepTheirOwnFlags",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "applicable": false,
+      "reason": "Bounded two-worker host JUnit pool uses try-with-resources; no threads created by a deployed web application."
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LockedLoginDisplayResourcePortTest.java": "ff803e914ae8aea58d479a980670593d5fa8077dadd970a91423615f17d8d304",
+    "evidence/01_PT/016_NK-WEB-002/input/038_locked_login_display_resource_dependencies.json": "bdeb83ba1406f5b8a25d47376224e66078a7575eb1550294db59cfc50bc81a55",
+    "evidence/01_PT/016_NK-WEB-002/input/039_locked_login_display_resource_qualifier.py": "ba1e5a4eac5d89ae27bd82aac9de532fd3e9095e4492eab82c1098aa1e7999c1",
+    "src/schubert-nk-web/src/main/resources/templates/login.html": "ba814efffec4be98d17338cacd63927d50aa552958188ba3fb7db0b77171443a"
+  },
+  "originalManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21038-locked-login-display-resource-static-v1/manifest.json",
+    "sha256": "a455d5a4345cd5bff916eaf7fbfef3284297671548ea18b9453b4b038906b873"
+  },
+  "suppressionsAdded": false,
+  "files": {
+    "pmd.stdout": "9f3bca9876dd76080f7143a7d93c3052a1b482bfb4af3e8addad27e8f9dd36eb",
+    "checkstyle-exit.safe.json": "a877c0437ff127fbcb5bb39f23cb53f2bc09a954a47d18f756d781710717d40f",
+    "pmd.stderr": "4e114156e4c7a536f6f10017a04f680a7cc8a7ca457f1aaccc280dbd3877210e",
+    "pmd-exit.safe.json": "6002c4d605517b0658c18d76abf60748ebb2d05fb3d5646cd2fb8c5a6df9c935",
+    "checkstyle-process.safe.json": "f5ab7bd2f6a250eac87917439a338a8b1abf92865caa3d3732bd85c35ba9d2ea",
+    "pmd-begin.safe.json": "0e10bc14494e2162f72c2643475700f8d17d0bf961c28741b28100afb4b6ae98",
+    "pmd-process.safe.json": "b198ddb28631a8c19708387912119f0af5daf5edca5b68c877e5a7a1ed687a5d",
+    "checkstyle.xml": "d76111dd75a8c9f28f7742d0732df6f58f25d277f7855f101225e7c45f021071",
+    "checkstyle-begin.safe.json": "b8efdbda187ef405f3578f958b23d0368cf4e0dba1211a411f31ac65efe8c2dd",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "manifest.json": "a455d5a4345cd5bff916eaf7fbfef3284297671548ea18b9453b4b038906b873",
+    "pmd.xml": "ac6dc80912dfe44ca54ae2d3851a9132ed991264f87862ce1117817eae90b050",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
