@@ -67,7 +67,7 @@ static/
 現行14 templateのファイル名は互換性追跡を容易にするため維持する。新規画面だけsubdirectoryへ配置する。Inline JavaScript、
 inline event handler、外部CDNを使用しない。TemplateはView Modelだけを参照し、protocol record、DB row、認証context raw、storage pathを参照しない。
 
-SSC-074/QA-045/UIC-005: SCR-001 LoginのGET controllerは`login` templateのみを返し、認証処理は既存POST `/login` filterへ委ねる。Login templateの可視brandは`schubert NK`、document titleは`schubert NK - ログイン`。Username autofocus/autocomplete、Passwordの空再表示、CSRF、既存error/locked/logout表示・操作はUI226とCurrent互換を維持する。title差分だけをDIF-001/CHR-A01に帰属し、他の比較項目を除外しない。
+SSC-074/QA-045/UIC-005: SCR-001 LoginのGET controllerは`login` templateのみを返し、認証処理は既存POST `/login` filterへ委ねる。Login templateの可視brandは`schubert NK`、document titleは`schubert NK - ログイン`。Username autofocus/autocomplete、Passwordの空再表示、CSRF、既存error/locked/logout表示・操作はUI226とCurrent互換を維持する。title差分だけをDIF-001/CHR-A01に帰属し、他の比較項目を除外しない。QA-055/UIC-012/SSC-338: locked表示はUI226のCurrent固定15分文を維持する。API確定の実残秒は既存HTTP Retry-Afterだけとし、GET controllerへの動的残秒handoffや新session属性を追加しない。
 
 ## 3. Controller共通規約
 
