@@ -1,5 +1,7 @@
 # SCR021 通知詳細pure表示 単体仕様
 
+RD exact追跡: FUN-108, NTF-004, NTF-005, NTF-008, QST-004, QST-010。関連requirementの表示層の部分を検証し、要件全体の受入ではない。canonical行/hash・class/method/TestID/manifest対応は `evidence/PG20212-detail-projection-rd-trace-v1/manifest.json`。
+
 NK-WEB-002/WBS-P016-21、UI224/236、SS313/314/323/332/351、PG-D349、NotificationDetailViewModel公開factory/getters/toString経由でprivate state/time表示へ到達。元未登録282の当sourceであり未試験との断定はしない。
 
 |TestID|method|独立期待値|

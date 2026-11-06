@@ -1,5 +1,7 @@
 # SCR023 質問詳細pure表示 単体仕様
 
+RD exact追跡: FUN-012, QST-006, QST-008。関連requirementの表示層の部分を検証し、要件全体の受入ではない。canonical行/hash・class/method/TestID/manifest対応は `evidence/PG20212-detail-projection-rd-trace-v1/manifest.json`。
+
 NK-WEB-002/WBS-P016-23、FUN質問参照/AUT owner・USER/ADMIN、UI224/236、SS313/314/323/332、PG-D350/368。対象QuestionDetailViewModelの公開factory/getters/toString、private label/projectionは公開factoryで到達。元未登録282の当class、既旧carrier Testが存在するため「未試験」とは断定しない。
 
 |TestID|method|独立期待値|

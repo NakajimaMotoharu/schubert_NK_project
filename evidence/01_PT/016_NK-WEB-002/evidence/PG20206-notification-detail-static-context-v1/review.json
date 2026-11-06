@@ -1,0 +1,43 @@
+[
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NotificationDetailProjectionPortTest.java",
+    "sourceSha256": "3da496b6cf05a0765ba5b6760416b3e6b9ebf14256c9c076fbace05381a6286c",
+    "finding": {
+      "beginline": "258",
+      "endline": "258",
+      "begincolumn": "24",
+      "endcolumn": "55",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.view",
+      "class": "NotificationDetailProjectionPortTest",
+      "method": "parallelProjectionKeepsActorsSeparate",
+      "variable": "workers",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3"
+    },
+    "lineText": "try (var workers = Executors.newFixedThreadPool(2)) {",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Own2worker/8 bounded immutable projection/actor-state isolation tasks; executor closes and all future10s join. No J2EE/production scheduler or external process."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NotificationDetailProjectionPortTest.java",
+    "sourceSha256": "3da496b6cf05a0765ba5b6760416b3e6b9ebf14256c9c076fbace05381a6286c",
+    "finding": {
+      "beginline": "264",
+      "endline": "267",
+      "begincolumn": "13",
+      "endcolumn": "92",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.view",
+      "class": "NotificationDetailProjectionPortTest",
+      "method": "parallelProjectionKeepsActorsSeparate",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3"
+    },
+    "lineText": "workers.submit(",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Own2worker/8 bounded immutable projection/actor-state isolation tasks; executor closes and all future10s join. No J2EE/production scheduler or external process."
+  }
+]

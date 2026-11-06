@@ -65,3 +65,35 @@ def append_start(group,values,receipt_path,expected_digest,now):
         bound=start_fields(group,values,observed,expected_digest,now,used,groups)
         bound['quotaReceipt']['path']=str(path)
         return append(group,'GROUP_START',bound)
+
+
+def end_fields(before, observed, expected_digest, now, terminal_at, cap_pp):
+    """BUG2322/YKT2067: bind a fresh post-terminal receipt; allow reserve-only preservation.
+
+    No API requests, resets, event appends, quota attribution or token estimation occur here.
+    A reset changes the measurement domain; its percentages cannot be subtracted.
+    """
+    require(set(observed)==KEYS and observed['schema']=='PGPT_FRESH_QUOTA_V1','exact sanitized receipt schema')
+    require(digest(observed)==expected_digest,'receipt immutable byte identity')
+    observed_at=utc(observed['observedAtUTC']);current=utc(now);terminal=utc(terminal_at)
+    require(type(cap_pp) in (int,float) and math.isfinite(cap_pp) and 0<cap_pp<=10,'explicit group cap within10pp')
+    require(0<=(current-observed_at).total_seconds()<=120,'fresh end receipt within120s')
+    require(terminal<=observed_at,'end receipt must follow the actual terminal')
+    require(observed['ordinaryUsageAllowed'] is None or type(observed['ordinaryUsageAllowed']) is bool,'explicit allowed state')
+    for key in ('primary','secondary'):
+        value=observed[key]
+        if value is not None:require(window(value)==value,'derived observed window, never caller literals')
+    primary=observed['primary'];previous=window(before.get('primary'))
+    same=primary is not None and previous is not None and all(primary[k]==previous[k] for k in ('resetsAt','windowDurationMins'))
+    delta=None
+    if same:
+        delta=primary['usedPercent']-previous['usedPercent']
+        require(delta>=0,'same-window usage cannot decrease; no reset inference')
+    quota_allows=observed['ordinaryUsageAllowed'] is True and primary is not None
+    quota_allows=quota_allows and all(w['remainingPercent']>10 and w['resetsAt']>current.timestamp() for w in (observed['primary'],observed['secondary']) if w is not None)
+    return dict(quotaAfter=observed,quotaReceipt=dict(sha256=expected_digest,observation=observed,
+      vendorSignatureAvailable=False,origin='FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION'),
+      observedSharedPp=delta,sameQuotaWindow=same,groupCapExceeded=delta is not None and delta>cap_pp,
+      newImplementationAllowedByQuota=quota_allows,attribution='UNKNOWN',actualAllocatedPp=None,
+      tokenTotals=None,terminalAtUTC=terminal.isoformat(),postTerminalReceiptVerified=True,
+      missingOrChangedWindowIsNotZero=delta is None)

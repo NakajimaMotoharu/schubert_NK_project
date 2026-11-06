@@ -1,5 +1,9 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-06 群末利用枠の終端後fresh結合（BUG2322/YKT2067）
+
+今後の開始は既pmo_quota_binding.start_fieldsでactual API観測を120秒以内・再利用なしで結合する。群末は同moduleのend_fieldsで、実run真正終端後に取得したfresh120秒以内の観測を結合する。cached stage値を群末に流用せず、古いAPI結果に新時刻を付けない。残10%以下/取得不能でも既成果の保全記録は許可し、新規実装を禁止する。同窓のみ差分、reset/欠測はnull、専有費/N/T不明を共有割合から生成しない。旧3984は元記録を保持して追加訂正で一度だけ差額を計上。仕様/451/群cap10/通常区切り継続・既HOLDは不変。詳細487・Program018 3584/3585、最新PG20222（旧PG20218は別sourceで保全）。終端結合のbeforeには開始eventのquotaReceipt.observationを渡し、flatの表示用quotaBeforeからwindow情報を推測しない。
+
 ## 2026-10-25 継続的利用者方針：停止時は当該範囲の静的PT設計レビューへ限定切替
 
 利用者の「今後も停止した場合は、同様にその時実施していた作業のPT作業等を静的に切り替えてください」を適用する。根拠は /home/mini/codex/project1/work/PMO/hourly-monitor/standing-static-pt-policy-20261025.txt（SHA-256 73b9d16a922afcb27d3252321a9c0a4b2f39b386861aed20002acec7c2c126c5）。今回の具体化は1975/9778、計画反映1976。以下のfresh現在窓残10%以下/取得不能・利用者停止・approval/認証/権限/アクセス停止が常に先行し、静的化を理由に解除しない。

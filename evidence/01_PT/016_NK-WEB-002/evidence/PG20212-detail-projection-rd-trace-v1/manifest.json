@@ -1,0 +1,147 @@
+{
+  "metadataVerificationExit": 0,
+  "canonicalMain": "8deb209723494008cad46b6649194a3b7b30e0da",
+  "canonicalRequirementRows": [
+    {
+      "id": "FUN-012",
+      "path": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+      "line": 18,
+      "text": "| FUN-012 | 質問回答検索 | 利用者が過去の質問・回答を一覧検索し、明細閲覧できること。 |",
+      "sha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018"
+    },
+    {
+      "id": "FUN-108",
+      "path": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+      "line": 41,
+      "text": "| FUN-108 | 利用者は通知情報一覧で受付通知、処理済通知、エラー通知を検索し、通知情報明細で状態、回答またはエラー内容を確認できること。 |",
+      "sha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018"
+    },
+    {
+      "id": "NTF-004",
+      "path": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+      "line": 22,
+      "text": "| NTF-004 | 処理完了時に受付通知を処理済通知へ遷移させ、明細から回答を確認できること。 |",
+      "sha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5"
+    },
+    {
+      "id": "NTF-005",
+      "path": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+      "line": 23,
+      "text": "| NTF-005 | 処理失敗時にエラー通知へ遷移させ、明細からエラー内容を確認できること。 |",
+      "sha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5"
+    },
+    {
+      "id": "NTF-008",
+      "path": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+      "line": 26,
+      "text": "| NTF-008 | 一覧の検索条件、並び順、page size、表示項目および明細項目はUI工程で定義する。 |",
+      "sha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5"
+    },
+    {
+      "id": "QST-004",
+      "path": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+      "line": 10,
+      "text": "| QST-004 | 空回答作成後に処理済通知を作成し、通知明細から質問と空回答を閲覧できること。 |",
+      "sha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64"
+    },
+    {
+      "id": "QST-006",
+      "path": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+      "line": 12,
+      "text": "| QST-006 | 質問回答明細画面を設け、質問内容、回答内容、受付日時および回答日時を閲覧できること。 |",
+      "sha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64"
+    },
+    {
+      "id": "QST-008",
+      "path": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+      "line": 14,
+      "text": "| QST-008 | USERは本人の質問・回答だけを検索・閲覧・削除できる。ADMINは全利用者の質問・回答を検索・閲覧・削除できる。API Java側でも所有者とroleを検証する。 |",
+      "sha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64"
+    },
+    {
+      "id": "QST-010",
+      "path": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+      "line": 16,
+      "text": "| QST-010 | 論理削除済み質問に対する処理済通知が自動削除まで残る場合、通知明細では質問・回答本文を表示せず削除済みであることを表示する。 |",
+      "sha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64"
+    }
+  ],
+  "scopedJoins": [
+    {
+      "className": "QuestionDetailViewModel",
+      "productionPath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionDetailViewModel.java",
+      "rd": [
+        "FUN-012",
+        "QST-006",
+        "QST-008"
+      ],
+      "ui": [
+        "224",
+        "236"
+      ],
+      "ss": [
+        "313",
+        "314",
+        "323",
+        "332"
+      ],
+      "methods": [
+        "from",
+        "getTopBar",
+        "getValues",
+        "toString",
+        "label",
+        "constructor"
+      ],
+      "testIds": "PT-WEB-QDETAIL001..008",
+      "spec": "118_質問詳細表示pure単体テスト仕様書.md",
+      "result": "119_質問詳細表示pure単体テスト実行結果.md",
+      "manifest": "PG20188-question-detail-projection-eight-v1/manifest.json",
+      "boundary": "Display projection and local USER/ADMIN owner check only; actual API authorization/SQL/HTTP/HTML not accepted",
+      "manifestSha256": "86434906c7559fbf0e7a65a6bd37b2f9a2bc9d81588a117d67743152c71cc352",
+      "mainSha256": "6a10ebbadbc52df317de2fec18b68aab3275d832b5f73e0c4edfe24935b1903c"
+    },
+    {
+      "className": "NotificationDetailViewModel",
+      "productionPath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/NotificationDetailViewModel.java",
+      "rd": [
+        "FUN-108",
+        "NTF-004",
+        "NTF-005",
+        "NTF-008",
+        "QST-004",
+        "QST-010"
+      ],
+      "ui": [
+        "224",
+        "236"
+      ],
+      "ss": [
+        "313",
+        "314",
+        "323",
+        "332",
+        "351"
+      ],
+      "methods": [
+        "from",
+        "getTopBar",
+        "getValues",
+        "toString",
+        "time",
+        "constructor"
+      ],
+      "testIds": "PT-WEB-NDETAIL001..008",
+      "spec": "120_通知詳細表示pure単体テスト仕様書.md",
+      "result": "121_通知詳細表示pure単体テスト実行結果.md",
+      "manifest": "PG20208-notification-detail-projection-eight-v1/manifest.json",
+      "boundary": "Display state/error/time/deleted-body/answer/link only; actual state transition/deletion/backup/API owner/auth/HTTP/template not accepted",
+      "manifestSha256": "2f76f9d2b49dd054a8523edd172944965f2ecf25721c8e806dc5895bbb149f4b",
+      "mainSha256": "4221d0482e8b5f84224a2ec7d91cba648046d5e23bcef3112c5bf6f48353a7cd"
+    }
+  ],
+  "oldSpecsPreservedByGit": true,
+  "productionAndOracleUnchanged": true,
+  "newWbsAcceptance": 0,
+  "globalTraceQualified": false
+}

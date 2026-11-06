@@ -1,0 +1,110 @@
+{
+  "metadataVerificationExit": 0,
+  "bug": "BUG2322",
+  "horizontal": "YKT2067",
+  "originalEvent": "PGPT-20261008-3984",
+  "correctionEvent": "PGPT-20261008-3985",
+  "endBinding": {
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-06T01:52:57.693000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 29,
+        "remainingPercent": 71,
+        "resetsAt": 1794395640,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "8ec97ee6aa27887b8b348ba976d70b676bd63c953d5600e6e00e0d815777a2fb",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-06T01:52:57.693000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 29,
+          "remainingPercent": 71,
+          "resetsAt": 1794395640,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 1,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-06T01:36:39.021340+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false
+  },
+  "accountingIncrementPp": 1,
+  "priorSample": "0 historical pre-terminal difference, not proper end measurement",
+  "currentEffectiveSharedPp": 1,
+  "ordinaryBefore": 22,
+  "ordinaryAfter": 23,
+  "allRecordedBefore": 29,
+  "allRecordedAfter": 30,
+  "N": null,
+  "T": null,
+  "actualAllocatedPp": null,
+  "technicalSourceCount": 50,
+  "formalAcceptanceChanged": false,
+  "productTestsRerun": 0,
+  "qualityToolTests": 8,
+  "qualityToolProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG20218-quota-end-guard-v1/manifest.json",
+    "sha256": "fb1656b26e8c314f9fe2a2e8562301572aacb878add3d86d64ea4d63f2eb9138"
+  },
+  "horizontalCases": [
+    {
+      "event": "PGPT-20261008-3976",
+      "manifestSha256": "3fc09c8d6889266d75afc2efc09a1337f8fe5dc7a39a68c283e338cb01e65c27",
+      "terminalAtUTC": "2026-11-06T00:46:13.708385+00:00",
+      "quotaAtUTC": "2026-11-06T00:54:43.004Z",
+      "originalPostTerminal": true,
+      "disposition": "NONAPPLICABLE_VALID_POST_TERMINAL"
+    },
+    {
+      "event": "PGPT-20261008-3978",
+      "manifestSha256": "611b292a664d88af214ab55e230cb9f81128517dcdd94e12df1220a6342a2315",
+      "terminalAtUTC": "2026-11-06T00:59:34.064722+00:00",
+      "quotaAtUTC": "2026-11-06T01:03:02.993Z",
+      "originalPostTerminal": true,
+      "disposition": "NONAPPLICABLE_VALID_POST_TERMINAL"
+    },
+    {
+      "event": "PGPT-20261008-3980",
+      "manifestSha256": "bd53f178b4d98509892aaa9eb6e25496e75f720330adee09b57c48569c74c4c0",
+      "terminalAtUTC": "2026-11-06T01:14:58.778450+00:00",
+      "quotaAtUTC": "2026-11-06T01:15:50.636Z",
+      "originalPostTerminal": true,
+      "disposition": "NONAPPLICABLE_VALID_POST_TERMINAL"
+    },
+    {
+      "event": "PGPT-20261008-3982",
+      "manifestSha256": "105bcdb9cbc16d9233db9c9c0e5c50159a6684ae661c76f46215018b5623d87a",
+      "terminalAtUTC": "2026-11-06T01:25:13.350274+00:00",
+      "quotaAtUTC": "2026-11-06T01:26:11.453Z",
+      "originalPostTerminal": true,
+      "disposition": "NONAPPLICABLE_VALID_POST_TERMINAL"
+    },
+    {
+      "event": "PGPT-20261008-3984",
+      "manifestSha256": "802df14bf5975d8a3162be65fb01d0dc075fe86234b80bcf7239619326ec0c7e",
+      "terminalAtUTC": "2026-11-06T01:36:39.021340+00:00",
+      "quotaAtUTC": "2026-11-06T01:26:11.453Z",
+      "originalPostTerminal": false,
+      "disposition": "CORRECTED_ONCE_3985"
+    }
+  ],
+  "oldStartMeasurements": "Historical observations preserved; no retroactive fresh120s/start_fields qualification. Future starts use immutable fresh API start_fields.",
+  "regression": "end_fields rejects pre-terminal/stale/future/hash mismatch; records reserve/no availability/reset/cap overrun without inventing tokens or preventing preservation"
+}
