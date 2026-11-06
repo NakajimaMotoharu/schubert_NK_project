@@ -1,0 +1,110 @@
+{
+  "atJST": "2026-11-07T04:23:03.243288+09:00",
+  "actualExit": 0,
+  "source": "92f8fe608569546f13b24179f9480a5d635bb9aa",
+  "classification": "METADATA_TOOL_TESTS_ONLY",
+  "metadataTests": 15,
+  "newMetadataTests": 8,
+  "productTests": 0,
+  "newSourceProofs": 0,
+  "newWbsAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "correctedMetadataStage": {
+    "actualExit": 0,
+    "timedOut": false,
+    "startUTC": "2026-11-06T19:23:03.124682+00:00",
+    "endUTC": "2026-11-06T19:23:03.239529+00:00",
+    "command": [
+      "env",
+      "PYTHONPATH=tools/quality",
+      "python3",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/quality/tests",
+      "-p",
+      "test_pgpt_program_proof_lookup.py",
+      "-v"
+    ],
+    "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSha256": "8cb770dbbab291ffad9e6ff8d17a20f3344b7cdf1615d93ac3c52bb1ecced639"
+  },
+  "inputHashes": {
+    "tools/quality/pgpt_program_proof_lookup.py": "d85152a38597984f053d756cdb31474e77f622659732b2fa047835edfe4394c9",
+    "tools/quality/tests/test_pgpt_program_proof_lookup.py": "c09399f1599889be696c173863dc9a097ee18b2e1a9af892da017214f150d751"
+  },
+  "originalLegacyCandidate": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18586-internal-port-unit-v1/manifest.json",
+    "manifestSha256": "86878d2da664c3ca3ede5c5e9a5aff2b79f1d240d4347df5d26d18ca9e0d561c",
+    "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+    "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor.java",
+    "mainSha256": "b9d8a661e85cceaca6fddc73de6e12faae9f9337e563cd33fe3df77f601c42d1",
+    "currentMainByteEqual": true,
+    "originalExit": 0,
+    "tests": 4,
+    "fourCounters": {
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 12,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 4,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "allFourMissedZero": false,
+    "lineMethodClassMissedZero": true,
+    "evidenceSchema": "SINGLE_TARGET_COUNTERS_BEGIN",
+    "branchAssessment": "EXPLICIT_NATURAL_ZERO_NOT_BRANCH100",
+    "acceptanceInferred": false,
+    "permissionInferred": false
+  },
+  "priorResultsReexecuted": 0,
+  "failedMetadataImportCounted": false,
+  "failedMetadataPath": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21604-proof-lookup-legacy-metadata-v1",
+  "files": {
+    "original-static-process.safe.json": "a1732638f880909df5b78d3d098d7c4af3de26b85db6ef7def83fc37644c2e3f",
+    "original-static.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-metadata.stderr": "b9fa9ccb510341c3806948b4068a376b847e8f878857b9328006111c34efda39",
+    "original-legacy-lookup-exit.safe.json": "b932d97b7a666389d4438ec8c517a7b57df5f2cccdd4bc0b8f113b36dd4c4754",
+    "original-static-exit.safe.json": "1508c4c81c67d3744e3e68a8c2939a9b79b756736aa6da186ce577b57672c8eb",
+    "original-legacy-lookup.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-static-begin.safe.json": "1931cd376c943cc43dae699ef4fb8581f705746b08942c9229d9a84e3d8d99a8",
+    "original-legacy-lookup-process.safe.json": "9f1cf6a627a62ecc0542494c0ceeab225d1c422eefbfc42448b6251c5e1cab68",
+    "original-metadata-begin.safe.json": "323a33a1eb063c5359c0c8e66fdaa17601fe33d93bcafb3e07db0e98df63d79d",
+    "original-metadata.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-metadata-process.safe.json": "dd207309e179fc2a3c98f74ccc4ee63f789417db889a56a03e4497e3c2665285",
+    "original-static.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-legacy-lookup-begin.safe.json": "90d577cf24bdeb25e4333bf86f7485e38d2b60e34b3ce60477e293baa562ed6d",
+    "original-legacy-lookup.stdout": "7081267d0b9714be2d50af3381ebe3ab10340f034051f87417d75819cc28776b",
+    "original-metadata-exit.safe.json": "c6ebe5a9f2a566d70bf5bbe92bcfb2e4b4916c68779add047765eb8a98d3bd42",
+    "corrected-metadata.stderr": "8cb770dbbab291ffad9e6ff8d17a20f3344b7cdf1615d93ac3c52bb1ecced639",
+    "corrected-metadata-begin.safe.json": "683fb374e9c1b8e6778275e345510d7a45212fbbee9881d83438195daf2a69f4",
+    "corrected-metadata.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "corrected-metadata-process.safe.json": "afc6bd9fec45e6d17eac69d905622279c39e9d129aff752f21aeaa1e1ce5bd5a",
+    "corrected-metadata-exit.safe.json": "7ccf251cb99c5194654db07e8c06251f2d1675068bc5178e93fc6cee6cf340ab"
+  },
+  "bugs": [
+    "BUG-2395"
+  ],
+  "horizontal": [
+    "YKT-2140"
+  ],
+  "limits": "Read-only discovery only. Omitted branch counter not manufactured; actual runtime/VM/Root and held scopes unchanged. Original static/lookup exit0 reused, metadata import failure retained, Product tests not rerun."
+}
