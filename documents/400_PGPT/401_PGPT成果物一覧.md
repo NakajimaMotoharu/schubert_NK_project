@@ -1,5 +1,10 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-07T01:07:12.158906+09:00 CSRF adapter限定資格
+
+015仕様062/結果063・PMO600046、PG21164新8/FES0/独立21174 post0・L33M5C1B28未網羅0、Main変更0/自己所有Servletだけ/実session・DB・乱数発行・Browser無し。累計36対象新method310=Java206+HTML97+CSS7、wholeJava69/原282交差49残233/partial18残62。新leaf0/正式1964-53/工数null・元candidate監査HOLD維持。
+
+
 ## 2026-11-07T00:52:49.403809+09:00 Gate工具限定資格
 
 020仕様020/結果021・PMO600044、PG21140全60/FES0/独立21146 post0・L488/M51/C2/B253未網羅0。新規6/既54source再認証を分離、元60 F5E1はTest工具誤りとして保全、Main変更不要。自所有synthetic入力のみ/実baseline・CHR無し。累計35対象の新method302=Java198+HTML97+CSS7、wholeJava68/原282交差48残234/partial18残62。新leaf0/正式1964-53/工数null。486 pointerだけ現485hashへ補正、全WBS監査は歴史current候補scope差HOLDを維持。

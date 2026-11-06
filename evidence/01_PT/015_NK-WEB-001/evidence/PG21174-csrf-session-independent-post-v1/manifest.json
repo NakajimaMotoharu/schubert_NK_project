@@ -1,0 +1,133 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T01:04:43.234092+09:00",
+  "source": "f07d3e507a31dd8103caca3f395a99defa913c39",
+  "productionCoreMain": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+  "tests": 8,
+  "newMethods": 8,
+  "originalPost": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21164-csrf-session-eight-v1/manifest.json",
+    "sha256": "7501be679d4af7f6a3cff669206b112452bdfaf80a3a707cd8da3e506edebe41"
+  },
+  "sourceTestIds": [
+    [
+      "PT-WEB-CSRFPORT001",
+      "generatesFromSuppliedAttributeWithoutRandomnessOrExistingSessionRotation"
+    ],
+    [
+      "PT-WEB-CSRFPORT002",
+      "existingSessionRequiresObservedNewIdentityAndUsesOnlyRotatedAttribute"
+    ],
+    [
+      "PT-WEB-CSRFPORT003",
+      "loadNeverCreatesSessionAndRejectsMalformedOrNonStringAttributes"
+    ],
+    [
+      "PT-WEB-CSRFPORT004",
+      "nullSaveInvalidatesOnlySuppliedExistingSessionAndNeverCreatesOne"
+    ],
+    [
+      "PT-WEB-CSRFPORT005",
+      "saveRequiresExactHeaderParameterAndPersistedValueWithoutWritingState"
+    ],
+    [
+      "PT-WEB-CSRFPORT006",
+      "nullBoundariesAndMissingGeneratedAttributeHaveExplicitFailureSignals"
+    ],
+    [
+      "PT-WEB-CSRFPORT007",
+      "callbackFailuresPreserveIdentityWithoutRetryOrCleanupAuthority"
+    ],
+    [
+      "PT-WEB-CSRFPORT008",
+      "concurrentSuppliedFramesKeepMaterializedValuesAndCallbacksSeparate"
+    ]
+  ],
+  "fourCounters": {
+    "LINE": 33,
+    "METHOD": 5,
+    "CLASS": 1,
+    "BRANCH": 28
+  },
+  "missed": 0,
+  "physical": 1,
+  "staticPost": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21162-csrf-session-static-v1/manifest.json",
+    "sha256": "d5e2bd7ad9407588bf9288af944df604134188faf0d979d79e1448300b5f0ccb"
+  },
+  "environment": [
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    },
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    },
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    }
+  ],
+  "initializedProduct": [
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$$Lambda+0x000000002b135470",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$$Lambda+0x000000002b1811a8",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$$Lambda+0x000000002b1813d8",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$$Lambda+0x000000002b181608",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$$Lambda+0x000000002b181838",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$$Lambda+0x000000002b181a68",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$$Lambda+0x000000002b181c98",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$$Lambda+0x000000002b181ec8",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$$Lambda+0x000000002b1820f8",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$$Lambda+0x000000002b182328",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$$Lambda+0x000000002b182558",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$$Lambda+0x000000002b182788",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$$Lambda+0x000000002b1829b8",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$Fixture",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$Fixture$$Lambda+0x000000002b13cdc8",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$Fixture$$Lambda+0x000000002b13e8a8",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$Fixture$$Lambda+0x000000002b13ead8",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$Fixture$$Lambda+0x000000002b180000",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$Session",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$Session$$Lambda+0x000000002b1358a8",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest$Session$$Lambda+0x000000002b135ad8",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository",
+    "dev/codex/schubert/nk/web/security/WebCsrfToken",
+    "dev/codex/schubert/nk/web/session/SessionStoreException"
+  ],
+  "fixedConsoleJdkReview": {
+    "path": "evidence/01_PT/015_NK-WEB-001/input/001_login_failure_sdk_static_review.json",
+    "sha256": "79633848d5904d37f1c6f8cd13ca5f0b55757dbba3014608ac659fc1da472093"
+  },
+  "driverProviderEntries": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": [],
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-web/7.1.1/spring-security-web-7.1.1.jar": [],
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": []
+  },
+  "productTestsReexecuted": 0,
+  "actualSessionOrDbOrTokenGeneration": false,
+  "actualBrowserOrHttp": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "original282Member": true,
+  "effortRate": null,
+  "checkerSha256": "09852d150a35c619c01a531b91f59cfee31dda455da48035018ffa0b08ea5069",
+  "checkerSource": "8372e9a08ba5ba2ba6118a9af7f176bdf6a37375"
+}
