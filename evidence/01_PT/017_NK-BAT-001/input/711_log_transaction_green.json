@@ -1,0 +1,27 @@
+{
+  "module": "batch",
+  "program": "017_NK-BAT-001",
+  "main": "LogCleanupService",
+  "mainPackage": "cleanup",
+  "tests": [
+    "LogCleanupTransactionPortTest"
+  ],
+  "testPackages": [
+    "cleanup"
+  ],
+  "prepare": "pg20116-log-tx-green-compile-v1",
+  "static": "pg20117-log-tx-green-static-v1",
+  "unit": "pg20118-log-tx-green-unit-v1",
+  "public": "PG20118-log-tx-green-v1",
+  "physical": 5,
+  "abstract": 2,
+  "expected": 19,
+  "session": "PG20118-LOG-TX-GREEN-19",
+  "preflightDecision": "PT_DEFAULT",
+  "actualBackendActions": 0,
+  "coreSource": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+  "normalCompileSlot": "pg20112-log-tx-six-main-compile-v1",
+  "sixStaticSlot": "pg20114-log-tx-six-static-reactor-v1",
+  "sixStaticManifestSha256": "6439d001af03b1807f29516b75b04ab8d7f1b2353e25b5e28eb3ef07d3b750a9",
+  "resourceScopeNote": "Same frozen nineteen-Test independent JDBC memory oracle; new same-source Main jars only, no old exec union or actual DB/native actions."
+}

@@ -581,8 +581,7 @@ final class LogCleanupTransactionPortTest {
         hit("body");
       } else if (sql.equals(
           "select target_count,deleted_count,skipped_count,complete from"
-              + " schubert.maintenance_read_log_cleanup_progress(?,?)"))
-        role = "progress";
+              + " schubert.maintenance_read_log_cleanup_progress(?,?)")) role = "progress";
       else if (sql.equals(
           "select pg_catalog.set_config('statement_timeout', ?, true) as bound_timeout"))
         role = "timeout";

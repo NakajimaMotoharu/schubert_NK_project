@@ -71,3 +71,7 @@ rollback一回→正常時だけautoCommit復元一回、失敗時追加復元/c
 |PT-BAT-LOGTX337019|LogCleanupTransactionPortTest.suppressionDisabledPrimary|
 
 Test SHA256 `c36d1626a09970c99ed9223c92644284a71cd9958def7e9b72e728476122c80b`、shared qualifier SHA256 `4f6e55731a119580f6f38f426790f766aead16bdc1dbd35928790ed1fe3bcffa`、red profile SHA256 `f81ece0ca9817d95b30ca188db882d6f932abf288a79ff1b382c7b0936042a24`、prepare manifest SHA256 `f21dd9cc0ea45f5c6f0e3015472cda2bcce9dacf210499b13657a68b483e7ad7`。実runではTest凍結commitを引数にしてGit object/hashを再照合し、JUnit exact class19件だけを選択する。既存DB fixture Testはcompile/実行しない。
+
+## Green準備時のformatter差分
+
+PG20116のTest compileは0。再度のGJF1.36.1がprogress role代入直前の改行/indent一箇所だけを変更し、追加のbyte同一assertは1で停止した。原red/Test c36d1626…はGit41e1ce63とPG20102/20104へ不変保全。現在Test12417a8b…は上記一箇所以外完全一致を独立byte置換比較で確認し、Java token/文字列/期待表/19methodは不変。Test classの行番号等は異なるため同一byteとは主張しない。evidence/PG20116-oracle-format-equivalence-v1/manifest.jsonに両hashと差分を保存。Green自身の入力/compile/source/classCRCを新たに固定し、その一runだけで判定する。旧red execは合成しない。
