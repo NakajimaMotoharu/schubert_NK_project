@@ -1,0 +1,37 @@
+{
+  "metadataExit": 0,
+  "rawPmd": 4,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "review": [
+    {
+      "rule": "AvoidCatchingGenericException",
+      "line": "35",
+      "reason": "OriginalMain init cleanup-only rethrows, no exception becomes success, both acquired callback owners cleanup in reverse; legacy exception priority retained per SS313. Not broad recovery hiding errors."
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": "90",
+      "reason": "HostJUnit JDKProxy uses exact Servlet interface definingloader; never container-selected or provider-discovered context loader."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "364",
+      "reason": "HostJUnit own2workers8empty-context callbacks, bounded10s joins and try-resource executor, no Production Servlet managed worker creation."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "369",
+      "reason": "HostJUnit own2workers8empty-context callbacks, bounded10s joins and try-resource executor, no Production Servlet managed worker creation."
+    }
+  ],
+  "files": {
+    "manifest.safe.json": "fbe2fb7ccd5e35222b3cced8c4ae217173978125ff5fbb7e422c9130fa656481",
+    "pmd.xml": "da36f667fa4420cf4d6e81d035967bb9433256282193b31c5d8c1ed5284b6795",
+    "checkstyle.xml": "08c446a4736f075a0c5581f6f7666e44062b575570d3af24ff749322a1cdf0c1"
+  },
+  "inverseOriginalTestSha256": "7dd8ecd4480e9dee17b6805f060ad637d7c1b789015271a92dbc562b905aacf3",
+  "initialPmdRaw": 5
+}

@@ -1,0 +1,297 @@
+Compiled from "SecurityContextHolder.java"
+public class org.springframework.security.core.context.SecurityContextHolder {
+  public static final java.lang.String MODE_THREADLOCAL;
+
+  public static final java.lang.String MODE_INHERITABLETHREADLOCAL;
+
+  public static final java.lang.String MODE_GLOBAL;
+
+  private static final java.lang.String MODE_PRE_INITIALIZED;
+
+  public static final java.lang.String SYSTEM_PROPERTY;
+
+  private static java.lang.String strategyName;
+
+  private static org.springframework.security.core.context.SecurityContextHolderStrategy strategy;
+
+  private static int initializeCount;
+
+  public org.springframework.security.core.context.SecurityContextHolder();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  private static void initialize();
+    Code:
+         0: invokestatic  #7                  // Method initializeStrategy:()V
+         3: getstatic     #12                 // Field initializeCount:I
+         6: iconst_1
+         7: iadd
+         8: putstatic     #12                 // Field initializeCount:I
+        11: return
+
+  private static void initializeStrategy();
+    Code:
+         0: ldc           #16                 // String MODE_PRE_INITIALIZED
+         2: getstatic     #18                 // Field strategyName:Ljava/lang/String;
+         5: invokevirtual #22                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+         8: ifeq          28
+        11: getstatic     #28                 // Field strategy:Lorg/springframework/security/core/context/SecurityContextHolderStrategy;
+        14: ifnull        21
+        17: iconst_1
+        18: goto          22
+        21: iconst_0
+        22: ldc           #32                 // String When using MODE_PRE_INITIALIZED, setContextHolderStrategy must be called with the fully constructed strategy
+        24: invokestatic  #34                 // Method org/springframework/util/Assert.state:(ZLjava/lang/String;)V
+        27: return
+        28: getstatic     #18                 // Field strategyName:Ljava/lang/String;
+        31: invokestatic  #40                 // Method org/springframework/util/StringUtils.hasText:(Ljava/lang/String;)Z
+        34: ifne          42
+        37: ldc           #46                 // String MODE_THREADLOCAL
+        39: putstatic     #18                 // Field strategyName:Ljava/lang/String;
+        42: getstatic     #18                 // Field strategyName:Ljava/lang/String;
+        45: ldc           #46                 // String MODE_THREADLOCAL
+        47: invokevirtual #22                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        50: ifeq          64
+        53: new           #48                 // class org/springframework/security/core/context/ThreadLocalSecurityContextHolderStrategy
+        56: dup
+        57: invokespecial #50                 // Method org/springframework/security/core/context/ThreadLocalSecurityContextHolderStrategy."<init>":()V
+        60: putstatic     #28                 // Field strategy:Lorg/springframework/security/core/context/SecurityContextHolderStrategy;
+        63: return
+        64: getstatic     #18                 // Field strategyName:Ljava/lang/String;
+        67: ldc           #51                 // String MODE_INHERITABLETHREADLOCAL
+        69: invokevirtual #22                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        72: ifeq          86
+        75: new           #53                 // class org/springframework/security/core/context/InheritableThreadLocalSecurityContextHolderStrategy
+        78: dup
+        79: invokespecial #55                 // Method org/springframework/security/core/context/InheritableThreadLocalSecurityContextHolderStrategy."<init>":()V
+        82: putstatic     #28                 // Field strategy:Lorg/springframework/security/core/context/SecurityContextHolderStrategy;
+        85: return
+        86: getstatic     #18                 // Field strategyName:Ljava/lang/String;
+        89: ldc           #56                 // String MODE_GLOBAL
+        91: invokevirtual #22                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        94: ifeq          108
+        97: new           #58                 // class org/springframework/security/core/context/GlobalSecurityContextHolderStrategy
+       100: dup
+       101: invokespecial #60                 // Method org/springframework/security/core/context/GlobalSecurityContextHolderStrategy."<init>":()V
+       104: putstatic     #28                 // Field strategy:Lorg/springframework/security/core/context/SecurityContextHolderStrategy;
+       107: return
+       108: getstatic     #18                 // Field strategyName:Ljava/lang/String;
+       111: invokestatic  #61                 // Method java/lang/Class.forName:(Ljava/lang/String;)Ljava/lang/Class;
+       114: astore_0
+       115: aload_0
+       116: iconst_0
+       117: anewarray     #62                 // class java/lang/Class
+       120: invokevirtual #67                 // Method java/lang/Class.getConstructor:([Ljava/lang/Class;)Ljava/lang/reflect/Constructor;
+       123: astore_1
+       124: aload_1
+       125: iconst_0
+       126: anewarray     #2                  // class java/lang/Object
+       129: invokevirtual #71                 // Method java/lang/reflect/Constructor.newInstance:([Ljava/lang/Object;)Ljava/lang/Object;
+       132: checkcast     #77                 // class org/springframework/security/core/context/SecurityContextHolderStrategy
+       135: putstatic     #28                 // Field strategy:Lorg/springframework/security/core/context/SecurityContextHolderStrategy;
+       138: goto          146
+       141: astore_0
+       142: aload_0
+       143: invokestatic  #81                 // Method org/springframework/util/ReflectionUtils.handleReflectionException:(Ljava/lang/Exception;)V
+       146: return
+      Exception table:
+         from    to  target type
+           108   138   141   Class java/lang/Exception
+
+  public static void clearContext();
+    Code:
+         0: getstatic     #28                 // Field strategy:Lorg/springframework/security/core/context/SecurityContextHolderStrategy;
+         3: invokeinterface #87,  1           // InterfaceMethod org/springframework/security/core/context/SecurityContextHolderStrategy.clearContext:()V
+         8: return
+
+  public static org.springframework.security.core.context.SecurityContext getContext();
+    Code:
+         0: getstatic     #28                 // Field strategy:Lorg/springframework/security/core/context/SecurityContextHolderStrategy;
+         3: invokeinterface #90,  1           // InterfaceMethod org/springframework/security/core/context/SecurityContextHolderStrategy.getContext:()Lorg/springframework/security/core/context/SecurityContext;
+         8: areturn
+
+  public static java.util.function.Supplier<org.springframework.security.core.context.SecurityContext> getDeferredContext();
+    Code:
+         0: getstatic     #28                 // Field strategy:Lorg/springframework/security/core/context/SecurityContextHolderStrategy;
+         3: invokeinterface #94,  1           // InterfaceMethod org/springframework/security/core/context/SecurityContextHolderStrategy.getDeferredContext:()Ljava/util/function/Supplier;
+         8: areturn
+
+  public static int getInitializeCount();
+    Code:
+         0: getstatic     #12                 // Field initializeCount:I
+         3: ireturn
+
+  public static void setContext(org.springframework.security.core.context.SecurityContext);
+    Code:
+         0: getstatic     #28                 // Field strategy:Lorg/springframework/security/core/context/SecurityContextHolderStrategy;
+         3: aload_0
+         4: invokeinterface #98,  2           // InterfaceMethod org/springframework/security/core/context/SecurityContextHolderStrategy.setContext:(Lorg/springframework/security/core/context/SecurityContext;)V
+         9: return
+
+  public static void setDeferredContext(java.util.function.Supplier<org.springframework.security.core.context.SecurityContext>);
+    Code:
+         0: getstatic     #28                 // Field strategy:Lorg/springframework/security/core/context/SecurityContextHolderStrategy;
+         3: aload_0
+         4: invokeinterface #102,  2          // InterfaceMethod org/springframework/security/core/context/SecurityContextHolderStrategy.setDeferredContext:(Ljava/util/function/Supplier;)V
+         9: return
+
+  public static void setStrategyName(java.lang.String);
+    Code:
+         0: aload_0
+         1: putstatic     #18                 // Field strategyName:Ljava/lang/String;
+         4: invokestatic  #106                // Method initialize:()V
+         7: return
+
+  public static void setContextHolderStrategy(org.springframework.security.core.context.SecurityContextHolderStrategy);
+    Code:
+         0: aload_0
+         1: ldc           #109                // String securityContextHolderStrategy cannot be null
+         3: invokestatic  #111                // Method org/springframework/util/Assert.notNull:(Ljava/lang/Object;Ljava/lang/String;)V
+         6: ldc           #16                 // String MODE_PRE_INITIALIZED
+         8: putstatic     #18                 // Field strategyName:Ljava/lang/String;
+        11: aload_0
+        12: putstatic     #28                 // Field strategy:Lorg/springframework/security/core/context/SecurityContextHolderStrategy;
+        15: invokestatic  #106                // Method initialize:()V
+        18: return
+
+  public static org.springframework.security.core.context.SecurityContextHolderStrategy getContextHolderStrategy();
+    Code:
+         0: getstatic     #28                 // Field strategy:Lorg/springframework/security/core/context/SecurityContextHolderStrategy;
+         3: areturn
+
+  public static org.springframework.security.core.context.SecurityContext createEmptyContext();
+    Code:
+         0: getstatic     #28                 // Field strategy:Lorg/springframework/security/core/context/SecurityContextHolderStrategy;
+         3: invokeinterface #115,  1          // InterfaceMethod org/springframework/security/core/context/SecurityContextHolderStrategy.createEmptyContext:()Lorg/springframework/security/core/context/SecurityContext;
+         8: areturn
+
+  public java.lang.String toString();
+    Code:
+         0: getstatic     #28                 // Field strategy:Lorg/springframework/security/core/context/SecurityContextHolderStrategy;
+         3: invokeinterface #118,  1          // InterfaceMethod org/springframework/security/core/context/SecurityContextHolderStrategy.getClass:()Ljava/lang/Class;
+         8: invokevirtual #122                // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+        11: getstatic     #12                 // Field initializeCount:I
+        14: invokedynamic #126,  0            // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;I)Ljava/lang/String;
+        19: areturn
+
+  static {};
+    Code:
+         0: ldc           #130                // String spring.security.strategy
+         2: invokestatic  #132                // Method java/lang/System.getProperty:(Ljava/lang/String;)Ljava/lang/String;
+         5: putstatic     #18                 // Field strategyName:Ljava/lang/String;
+         8: new           #48                 // class org/springframework/security/core/context/ThreadLocalSecurityContextHolderStrategy
+        11: dup
+        12: invokespecial #50                 // Method org/springframework/security/core/context/ThreadLocalSecurityContextHolderStrategy."<init>":()V
+        15: putstatic     #28                 // Field strategy:Lorg/springframework/security/core/context/SecurityContextHolderStrategy;
+        18: iconst_0
+        19: putstatic     #12                 // Field initializeCount:I
+        22: invokestatic  #106                // Method initialize:()V
+        25: return
+}
+Compiled from "ThreadLocalSecurityContextHolderStrategy.java"
+final class org.springframework.security.core.context.ThreadLocalSecurityContextHolderStrategy implements org.springframework.security.core.context.SecurityContextHolderStrategy {
+  private static final java.lang.ThreadLocal<java.util.function.Supplier<org.springframework.security.core.context.SecurityContext>> contextHolder;
+
+  org.springframework.security.core.context.ThreadLocalSecurityContextHolderStrategy();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  public void clearContext();
+    Code:
+         0: getstatic     #7                  // Field contextHolder:Ljava/lang/ThreadLocal;
+         3: invokevirtual #13                 // Method java/lang/ThreadLocal.remove:()V
+         6: return
+
+  public org.springframework.security.core.context.SecurityContext getContext();
+    Code:
+         0: aload_0
+         1: invokevirtual #18                 // Method getDeferredContext:()Ljava/util/function/Supplier;
+         4: invokeinterface #22,  1           // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+         9: checkcast     #28                 // class org/springframework/security/core/context/SecurityContext
+        12: areturn
+
+  public java.util.function.Supplier<org.springframework.security.core.context.SecurityContext> getDeferredContext();
+    Code:
+         0: getstatic     #7                  // Field contextHolder:Ljava/lang/ThreadLocal;
+         3: invokevirtual #30                 // Method java/lang/ThreadLocal.get:()Ljava/lang/Object;
+         6: checkcast     #23                 // class java/util/function/Supplier
+         9: astore_1
+        10: aload_1
+        11: ifnonnull     33
+        14: aload_0
+        15: invokevirtual #31                 // Method createEmptyContext:()Lorg/springframework/security/core/context/SecurityContext;
+        18: astore_2
+        19: aload_2
+        20: invokedynamic #35,  0             // InvokeDynamic #0:get:(Lorg/springframework/security/core/context/SecurityContext;)Ljava/util/function/Supplier;
+        25: astore_1
+        26: getstatic     #7                  // Field contextHolder:Ljava/lang/ThreadLocal;
+        29: aload_1
+        30: invokevirtual #38                 // Method java/lang/ThreadLocal.set:(Ljava/lang/Object;)V
+        33: aload_1
+        34: areturn
+
+  public void setContext(org.springframework.security.core.context.SecurityContext);
+    Code:
+         0: aload_1
+         1: ldc           #42                 // String Only non-null SecurityContext instances are permitted
+         3: invokestatic  #44                 // Method org/springframework/util/Assert.notNull:(Ljava/lang/Object;Ljava/lang/String;)V
+         6: getstatic     #7                  // Field contextHolder:Ljava/lang/ThreadLocal;
+         9: aload_1
+        10: invokedynamic #50,  0             // InvokeDynamic #1:get:(Lorg/springframework/security/core/context/SecurityContext;)Ljava/util/function/Supplier;
+        15: invokevirtual #38                 // Method java/lang/ThreadLocal.set:(Ljava/lang/Object;)V
+        18: return
+
+  public void setDeferredContext(java.util.function.Supplier<org.springframework.security.core.context.SecurityContext>);
+    Code:
+         0: aload_1
+         1: ldc           #51                 // String Only non-null Supplier instances are permitted
+         3: invokestatic  #44                 // Method org/springframework/util/Assert.notNull:(Ljava/lang/Object;Ljava/lang/String;)V
+         6: aload_1
+         7: invokedynamic #53,  0             // InvokeDynamic #2:get:(Ljava/util/function/Supplier;)Ljava/util/function/Supplier;
+        12: astore_2
+        13: getstatic     #7                  // Field contextHolder:Ljava/lang/ThreadLocal;
+        16: aload_2
+        17: invokevirtual #38                 // Method java/lang/ThreadLocal.set:(Ljava/lang/Object;)V
+        20: return
+
+  public org.springframework.security.core.context.SecurityContext createEmptyContext();
+    Code:
+         0: new           #56                 // class org/springframework/security/core/context/SecurityContextImpl
+         3: dup
+         4: invokespecial #58                 // Method org/springframework/security/core/context/SecurityContextImpl."<init>":()V
+         7: areturn
+
+  private static org.springframework.security.core.context.SecurityContext lambda$setDeferredContext$0(java.util.function.Supplier);
+    Code:
+         0: aload_0
+         1: invokeinterface #22,  1           // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+         6: checkcast     #28                 // class org/springframework/security/core/context/SecurityContext
+         9: astore_1
+        10: aload_1
+        11: ldc           #59                 // String A Supplier<SecurityContext> returned null and is not allowed.
+        13: invokestatic  #44                 // Method org/springframework/util/Assert.notNull:(Ljava/lang/Object;Ljava/lang/String;)V
+        16: aload_1
+        17: areturn
+
+  private static org.springframework.security.core.context.SecurityContext lambda$setContext$0(org.springframework.security.core.context.SecurityContext);
+    Code:
+         0: aload_0
+         1: areturn
+
+  private static org.springframework.security.core.context.SecurityContext lambda$getDeferredContext$0(org.springframework.security.core.context.SecurityContext);
+    Code:
+         0: aload_0
+         1: areturn
+
+  static {};
+    Code:
+         0: new           #14                 // class java/lang/ThreadLocal
+         3: dup
+         4: invokespecial #61                 // Method java/lang/ThreadLocal."<init>":()V
+         7: putstatic     #7                  // Field contextHolder:Ljava/lang/ThreadLocal;
+        10: return
+}
