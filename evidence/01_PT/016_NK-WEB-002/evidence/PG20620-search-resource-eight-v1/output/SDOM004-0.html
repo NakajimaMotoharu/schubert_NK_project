@@ -1,0 +1,38 @@
+<!doctype html>
+<!-- NK-WEB-002/SCR003/FUN003; UI222/223/234; SS313/352; PG202/PT-SCR026..033. -->
+<html lang="ja">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>schubert NK - 検索</title>
+  <link rel="stylesheet" href="/css/schubert.css">
+ </head>
+ <body>
+  <main class="page search-page">
+   <header class="topbar">
+    <h1>schubert NK - 検索</h1>
+    <div class="topbar-actions">
+     <div class="topbar-actions">
+      <nav class="nav-links" aria-label="共通ナビゲーション">
+       <a href="/">メニュー</a> <a href="/notifications">通知</a>
+      </nav>
+      <span class="login-user">fixture-reader</span> <span class="login-role">ADMIN</span>
+      <form class="logout-form" action="/logout" method="post">
+       <button type="submit">ログアウト</button>
+      </form>
+     </div>
+     <nav class="nav-links" aria-label="検索ナビゲーション">
+      <a href="/scenarios">一覧</a>
+     </nav>
+    </div>
+   </header>
+   <div id="search-errors" class="error-panel" role="alert" hidden>
+    <ul></ul>
+   </div>
+   <form class="filters" method="get" action="/search">
+    <label><span>本文</span> <input name="q" value="本文" placeholder="キーワード" aria-describedby="search-errors"> </label> <label><span>ゲーム</span> <select name="game" aria-describedby="search-errors"> <option value="">すべて</option> <option value="NUKITASHI2">NUKITASHI2</option> <option value="NUKITASHI1" selected>NUKITASHI1</option> </select> </label> <label><span>話者</span> <select name="speaker" aria-describedby="search-errors"> <option value="">すべて</option> <option value="乙">乙</option> <option value="甲" selected>甲</option> </select> </label> <label><span>章タイトル</span> <input name="chapter" value="章" placeholder="タイトル" aria-describedby="search-errors"> </label> <label><span>形態</span> <select name="entry_type" aria-describedby="search-errors"> <option value="" selected>すべて</option> <option value="dialogue">セリフ</option> <option value="narration">ナレーション</option> </select> </label> <label><span>音声</span> <select name="voice" aria-describedby="search-errors"> <option value="" selected>すべて</option> <option value="with">あり</option> <option value="without">なし</option> </select> </label> <button type="submit">検索</button>
+   </form>
+   <script defer src="/js/search-speaker-submit.js"></script>
+  </main>
+ </body>
+</html>
