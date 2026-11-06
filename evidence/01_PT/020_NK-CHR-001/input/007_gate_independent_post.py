@@ -13,7 +13,11 @@ assert sha(pub/'manifest.json')=='1d672d4a736b9b14b684a73822ef1602ee4065b18aa171
 assert m['actualExit']==0 and m['source']==source and m['tests']==60 and m['newMethods']==6 and m['requalifiedExistingInvocations']==54
 assert all(m[k]==0 for k in ['failures','errors','skipped']) and m['manualCoverageExclusions']==[] and not m['oldExecUnion'] and not m['realBaselineAccess'] and not m['realChrExecution']
 for name,h in m['files'].items():assert '/' not in name and sha(pub/name)==h
-for name,h in m['inputHashes'].items():assert sha(name)==h==hashlib.sha256(subprocess.check_output(['git','show',source+':'+name])).hexdigest()
+for name,h in m['inputHashes'].items():
+ assert h==hashlib.sha256(subprocess.check_output(['git','show',source+':'+name])).hexdigest()
+ if name==m['producerGitArtifact']['path']:
+  v=m['verifierGitArtifact'];assert v['path']==name and sha(name)==v['sha256']==hashlib.sha256(subprocess.check_output(['git','show',v['source']+':'+name])).hexdigest()
+ else:assert sha(name)==h
 for key in ['producerGitArtifact','verifierGitArtifact']:
  g=m[key];assert hashlib.sha256(subprocess.check_output(['git','show',g['source']+':'+g['path']])).hexdigest()==g['sha256']
 assert m['producerGitArtifact']['source']==source and m['driverSha256']==m['producerGitArtifact']['sha256']
