@@ -1,0 +1,5 @@
+# 既資格索引 metadata結果
+
+BUG2335/YKT2080、PG20458独立7metadata全成功・Production試験0/coverage増0/新Source資格0/新leaf0。元PG20456 strict-schema六metadataを保全し、絶対repo内公開manifestとlegacy sidecar参照を追加した076入力で7metadataへ拡張。120公開ref/hashを照合、45参照manifest/50targetの既source pinを索引化した。hash競合/非対応3はUNKNOWNのままであり全歴史索引ではない。path/hash一致を全依存・独立oracle・後条件・現source資格へ転用しない。PG19348のSavedScreenTarget全8・836/038039が既存と判明し、4011の追加Product実行を行わなかった。原start/977不変、群見積0.5/2/4cap6不変、候補追加成功0。
+
+manifest evidence/01_PT/018_NK-OPS-001/evidence/PG20458-known-source-evidence-index-legacy-v1/manifest.json SHA256 164eceb40166af1d96d123e231ec13df82180a126f7986fb5447bbffde2b376b、source 0d4dd61f1af5bc2ed2f5308091c11306d3f1b9c9時点workingtree driver/input hash固定。元公開refと全読取docsのhashはindexへ保存、実行環境/終端はterminal-observation。6/7は別metadataでありProductへ加算しない。401のpartial17/63残留は976の18/62へ訂正、元503は不変。共有差0pp/ordinary25-all32、専有N/Tnull。正式1964/53・工数null/全451不変。

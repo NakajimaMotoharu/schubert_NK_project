@@ -24,7 +24,7 @@ Java各19/8/8/8/14/16/8/8/13/9/10（計121）＋resource26（一覧12/19描画�
 
 同D8正常compile/NullAway/format/Werror PG20112、六SpotBugs1844 class exact/指摘0 PG20114を再利用。fresh966Main PMD1494/Checkstyle0/processing0 PG20150、全1494の個別style適用性/未分類0/適用違反0/独立post0 PG20154。rawGate1/生raw・重複を保持し抑制なし、全F03/451受入とは分ける。
 
-技術各source累計57、原部分80のcounter全網羅結合17/残63、元未登録282との証拠交差37/残245。正式1964PT/53scope・歴史17/190・新WBSleaf0・工数完成率null。異sourceの古い成功を最新全体へ自動転用しない。費用は3984のcached観測を3985で一度だけ追加訂正、ordinary共有25/all32/S7、専有N/Tnull。現況/費用/保留/次commandは456先頭・460・946/948/950/952/954/956/958/960/962/964/966/968/970/976・487を参照。QA054/SSC337設計はmain公開済み、PGPT全体・IT/STは未完。
+技術各source累計57、原部分80のcounter全網羅結合18/残62、元未登録282との証拠交差37/残245。正式1964PT/53scope・歴史17/190・新WBSleaf0・工数完成率null。異sourceの古い成功を最新全体へ自動転用しない。費用は3984のcached観測を3985で一度だけ追加訂正、ordinary共有25/all32/S7、専有N/Tnull。現況/費用/保留/次commandは456先頭・460・946/948/950/952/954/956/958/960/962/964/966/968/970/976・487を参照。QA054/SSC337設計はmain公開済み、PGPT全体・IT/STは未完。
 
 2026-11-05: 709～712、QA051初回14/原version2failure・全五静的0と新22Test compile/trace（green未実行）。Core b093不変更、実L01/全451未受入。
 
