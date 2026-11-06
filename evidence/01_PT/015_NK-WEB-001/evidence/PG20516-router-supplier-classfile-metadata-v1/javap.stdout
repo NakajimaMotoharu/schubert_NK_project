@@ -1,0 +1,571 @@
+Classfile jar:file:///home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar!/dev/codex/schubert/nk/web/security/WebRequestContext.class
+  Last modified Nov 6, 2026; size 4988 bytes
+  SHA-256 checksum a342d032fff9391ae8d51232fd51ef16de53fa401d1189acacdbb19e462e6a71
+  Compiled from "WebRequestContext.java"
+public final class dev.codex.schubert.nk.web.security.WebRequestContext
+  minor version: 0
+  major version: 69
+  flags: (0x0031) ACC_PUBLIC, ACC_FINAL, ACC_SUPER
+  this_class: #18                         // dev/codex/schubert/nk/web/security/WebRequestContext
+  super_class: #2                         // java/lang/Object
+  interfaces: 0, fields: 5, methods: 9, attributes: 3
+Constant pool:
+    #1 = Methodref          #2.#3         // java/lang/Object."<init>":()V
+    #2 = Class              #4            // java/lang/Object
+    #3 = NameAndType        #5:#6         // "<init>":()V
+    #4 = Utf8               java/lang/Object
+    #5 = Utf8               <init>
+    #6 = Utf8               ()V
+    #7 = String             #8            // requestId
+    #8 = Utf8               requestId
+    #9 = Methodref          #10.#11       // java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #10 = Class              #12           // java/util/Objects
+   #11 = NameAndType        #13:#14       // requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #12 = Utf8               java/util/Objects
+   #13 = Utf8               requireNonNull
+   #14 = Utf8               (Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #15 = Class              #16           // java/util/UUID
+   #16 = Utf8               java/util/UUID
+   #17 = Fieldref           #18.#19       // dev/codex/schubert/nk/web/security/WebRequestContext.retainedRequestId:Ljava/util/UUID;
+   #18 = Class              #20           // dev/codex/schubert/nk/web/security/WebRequestContext
+   #19 = NameAndType        #21:#22       // retainedRequestId:Ljava/util/UUID;
+   #20 = Utf8               dev/codex/schubert/nk/web/security/WebRequestContext
+   #21 = Utf8               retainedRequestId
+   #22 = Utf8               Ljava/util/UUID;
+   #23 = String             #24           // clientAddress
+   #24 = Utf8               clientAddress
+   #25 = Class              #26           // dev/codex/schubert/nk/web/security/LoginClientAddress
+   #26 = Utf8               dev/codex/schubert/nk/web/security/LoginClientAddress
+   #27 = Fieldref           #18.#28       // dev/codex/schubert/nk/web/security/WebRequestContext.retainedClientAddress:Ldev/codex/schubert/nk/web/security/LoginClientAddress;
+   #28 = NameAndType        #29:#30       // retainedClientAddress:Ldev/codex/schubert/nk/web/security/LoginClientAddress;
+   #29 = Utf8               retainedClientAddress
+   #30 = Utf8               Ldev/codex/schubert/nk/web/security/LoginClientAddress;
+   #31 = Methodref          #18.#32       // dev/codex/schubert/nk/web/security/WebRequestContext.existing:(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;
+   #32 = NameAndType        #33:#34       // existing:(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;
+   #33 = Utf8               existing
+   #34 = Utf8               (Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;
+   #35 = InvokeDynamic      #0:#36        // #0:get:()Ljava/util/function/Supplier;
+   #36 = NameAndType        #37:#38       // get:()Ljava/util/function/Supplier;
+   #37 = Utf8               get
+   #38 = Utf8               ()Ljava/util/function/Supplier;
+   #39 = Methodref          #40.#41       // java/util/Optional.orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+   #40 = Class              #42           // java/util/Optional
+   #41 = NameAndType        #43:#44       // orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+   #42 = Utf8               java/util/Optional
+   #43 = Utf8               orElseThrow
+   #44 = Utf8               (Ljava/util/function/Supplier;)Ljava/lang/Object;
+   #45 = String             #46           // request
+   #46 = Utf8               request
+   #47 = Fieldref           #18.#48       // dev/codex/schubert/nk/web/security/WebRequestContext.ATTRIBUTE:Ljava/lang/String;
+   #48 = NameAndType        #49:#50       // ATTRIBUTE:Ljava/lang/String;
+   #49 = Utf8               ATTRIBUTE
+   #50 = Utf8               Ljava/lang/String;
+   #51 = InterfaceMethodref #52.#53       // jakarta/servlet/http/HttpServletRequest.getAttribute:(Ljava/lang/String;)Ljava/lang/Object;
+   #52 = Class              #54           // jakarta/servlet/http/HttpServletRequest
+   #53 = NameAndType        #55:#56       // getAttribute:(Ljava/lang/String;)Ljava/lang/Object;
+   #54 = Utf8               jakarta/servlet/http/HttpServletRequest
+   #55 = Utf8               getAttribute
+   #56 = Utf8               (Ljava/lang/String;)Ljava/lang/Object;
+   #57 = Methodref          #40.#58       // java/util/Optional.empty:()Ljava/util/Optional;
+   #58 = NameAndType        #59:#60       // empty:()Ljava/util/Optional;
+   #59 = Utf8               empty
+   #60 = Utf8               ()Ljava/util/Optional;
+   #61 = Methodref          #40.#62       // java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+   #62 = NameAndType        #63:#64       // of:(Ljava/lang/Object;)Ljava/util/Optional;
+   #63 = Utf8               of
+   #64 = Utf8               (Ljava/lang/Object;)Ljava/util/Optional;
+   #65 = Class              #66           // java/lang/IllegalStateException
+   #66 = Utf8               java/lang/IllegalStateException
+   #67 = String             #68           // web request context is unavailable
+   #68 = Utf8               web request context is unavailable
+   #69 = Methodref          #65.#70       // java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+   #70 = NameAndType        #5:#71        // "<init>":(Ljava/lang/String;)V
+   #71 = Utf8               (Ljava/lang/String;)V
+   #72 = Class              #73           // java/lang/IllegalArgumentException
+   #73 = Utf8               java/lang/IllegalArgumentException
+   #74 = String             #75           // identifiers
+   #75 = Utf8               identifiers
+   #76 = Fieldref           #18.#77       // dev/codex/schubert/nk/web/security/WebRequestContext.ID_ATTRIBUTE:Ljava/lang/String;
+   #77 = NameAndType        #78:#50       // ID_ATTRIBUTE:Ljava/lang/String;
+   #78 = Utf8               ID_ATTRIBUTE
+   #79 = Methodref          #40.#80       // java/util/Optional.isPresent:()Z
+   #80 = NameAndType        #81:#82       // isPresent:()Z
+   #81 = Utf8               isPresent
+   #82 = Utf8               ()Z
+   #83 = Methodref          #40.#84       // java/util/Optional.orElseThrow:()Ljava/lang/Object;
+   #84 = NameAndType        #43:#85       // orElseThrow:()Ljava/lang/Object;
+   #85 = Utf8               ()Ljava/lang/Object;
+   #86 = Methodref          #18.#87       // dev/codex/schubert/nk/web/security/WebRequestContext.requestId:()Ljava/util/UUID;
+   #87 = NameAndType        #8:#88        // requestId:()Ljava/util/UUID;
+   #88 = Utf8               ()Ljava/util/UUID;
+   #89 = InterfaceMethodref #90.#91       // java/util/function/Supplier.get:()Ljava/lang/Object;
+   #90 = Class              #92           // java/util/function/Supplier
+   #91 = NameAndType        #37:#85       // get:()Ljava/lang/Object;
+   #92 = Utf8               java/util/function/Supplier
+   #93 = InterfaceMethodref #52.#94       // jakarta/servlet/http/HttpServletRequest.setAttribute:(Ljava/lang/String;Ljava/lang/Object;)V
+   #94 = NameAndType        #95:#96       // setAttribute:(Ljava/lang/String;Ljava/lang/Object;)V
+   #95 = Utf8               setAttribute
+   #96 = Utf8               (Ljava/lang/String;Ljava/lang/Object;)V
+   #97 = String             #98           // web request identity is unavailable
+   #98 = Utf8               web request identity is unavailable
+   #99 = Methodref          #15.#100      // java/util/UUID.equals:(Ljava/lang/Object;)Z
+  #100 = NameAndType        #101:#102     // equals:(Ljava/lang/Object;)Z
+  #101 = Utf8               equals
+  #102 = Utf8               (Ljava/lang/Object;)Z
+  #103 = String             #104          // WebRequestContext[REDACTED]
+  #104 = Utf8               WebRequestContext[REDACTED]
+  #105 = Methodref          #106.#107     // java/lang/Class.getName:()Ljava/lang/String;
+  #106 = Class              #108          // java/lang/Class
+  #107 = NameAndType        #109:#110     // getName:()Ljava/lang/String;
+  #108 = Utf8               java/lang/Class
+  #109 = Utf8               getName
+  #110 = Utf8               ()Ljava/lang/String;
+  #111 = InvokeDynamic      #1:#112       // #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+  #112 = NameAndType        #113:#114     // makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+  #113 = Utf8               makeConcatWithConstants
+  #114 = Utf8               (Ljava/lang/String;)Ljava/lang/String;
+  #115 = Utf8               LITERAL_WEB_REQUEST_CONTEXT_IS_UNAVAILABLE
+  #116 = Utf8               ConstantValue
+  #117 = Utf8               (Ljava/util/UUID;Ldev/codex/schubert/nk/web/security/LoginClientAddress;)V
+  #118 = Utf8               Code
+  #119 = Utf8               LineNumberTable
+  #120 = Utf8               LocalVariableTable
+  #121 = Utf8               this
+  #122 = Utf8               Ldev/codex/schubert/nk/web/security/WebRequestContext;
+  #123 = Utf8               ()Ldev/codex/schubert/nk/web/security/LoginClientAddress;
+  #124 = Utf8               require
+  #125 = Utf8               (Ljakarta/servlet/http/HttpServletRequest;)Ldev/codex/schubert/nk/web/security/WebRequestContext;
+  #126 = Utf8               Ljakarta/servlet/http/HttpServletRequest;
+  #127 = Utf8               context
+  #128 = Utf8               value
+  #129 = Utf8               Ljava/lang/Object;
+  #130 = Utf8               failure
+  #131 = Utf8               Ljava/lang/RuntimeException;
+  #132 = Utf8               StackMapTable
+  #133 = Class              #134          // java/lang/RuntimeException
+  #134 = Utf8               java/lang/RuntimeException
+  #135 = Utf8               Signature
+  #136 = Utf8               (Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional<Ldev/codex/schubert/nk/web/security/WebRequestContext;>;
+  #137 = Utf8               identify
+  #138 = Utf8               (Ljakarta/servlet/http/HttpServletRequest;Ljava/util/function/Supplier;)Ljava/util/UUID;
+  #139 = Utf8               attributeFailure
+  #140 = Utf8               id
+  #141 = Utf8               typed
+  #142 = Utf8               Ljava/util/function/Supplier;
+  #143 = Utf8               Ljava/util/Optional;
+  #144 = Utf8               LocalVariableTypeTable
+  #145 = Utf8               Ljava/util/function/Supplier<Ljava/util/UUID;>;
+  #146 = Utf8               Ljava/util/Optional<Ldev/codex/schubert/nk/web/security/WebRequestContext;>;
+  #147 = Utf8               (Ljakarta/servlet/http/HttpServletRequest;Ljava/util/function/Supplier<Ljava/util/UUID;>;)Ljava/util/UUID;
+  #148 = Utf8               toString
+  #149 = Utf8               lambda$require$0
+  #150 = Utf8               ()Ljava/lang/IllegalStateException;
+  #151 = Utf8               <clinit>
+  #152 = Utf8               SourceFile
+  #153 = Utf8               WebRequestContext.java
+  #154 = Utf8               BootstrapMethods
+  #155 = MethodType         #85           //  ()Ljava/lang/Object;
+  #156 = MethodHandle       6:#157        // REF_invokeStatic dev/codex/schubert/nk/web/security/WebRequestContext.lambda$require$0:()Ljava/lang/IllegalStateException;
+  #157 = Methodref          #18.#158      // dev/codex/schubert/nk/web/security/WebRequestContext.lambda$require$0:()Ljava/lang/IllegalStateException;
+  #158 = NameAndType        #149:#150     // lambda$require$0:()Ljava/lang/IllegalStateException;
+  #159 = MethodType         #150          //  ()Ljava/lang/IllegalStateException;
+  #160 = String             #161          // \u0001.requestId
+  #161 = Utf8               \u0001.requestId
+  #162 = MethodHandle       6:#163        // REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #163 = Methodref          #164.#165     // java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #164 = Class              #166          // java/lang/invoke/LambdaMetafactory
+  #165 = NameAndType        #167:#168     // metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #166 = Utf8               java/lang/invoke/LambdaMetafactory
+  #167 = Utf8               metafactory
+  #168 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #169 = MethodHandle       6:#170        // REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #170 = Methodref          #171.#172     // java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #171 = Class              #173          // java/lang/invoke/StringConcatFactory
+  #172 = NameAndType        #113:#174     // makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #173 = Utf8               java/lang/invoke/StringConcatFactory
+  #174 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #175 = Utf8               InnerClasses
+  #176 = Class              #177          // java/lang/invoke/MethodHandles$Lookup
+  #177 = Utf8               java/lang/invoke/MethodHandles$Lookup
+  #178 = Class              #179          // java/lang/invoke/MethodHandles
+  #179 = Utf8               java/lang/invoke/MethodHandles
+  #180 = Utf8               Lookup
+{
+  private static final java.lang.String LITERAL_WEB_REQUEST_CONTEXT_IS_UNAVAILABLE;
+    descriptor: Ljava/lang/String;
+    flags: (0x001a) ACC_PRIVATE, ACC_STATIC, ACC_FINAL
+    ConstantValue: String web request context is unavailable
+
+  static final java.lang.String ATTRIBUTE;
+    descriptor: Ljava/lang/String;
+    flags: (0x0018) ACC_STATIC, ACC_FINAL
+
+  private static final java.lang.String ID_ATTRIBUTE;
+    descriptor: Ljava/lang/String;
+    flags: (0x001a) ACC_PRIVATE, ACC_STATIC, ACC_FINAL
+
+  private final java.util.UUID retainedRequestId;
+    descriptor: Ljava/util/UUID;
+    flags: (0x0012) ACC_PRIVATE, ACC_FINAL
+
+  private final dev.codex.schubert.nk.web.security.LoginClientAddress retainedClientAddress;
+    descriptor: Ldev/codex/schubert/nk/web/security/LoginClientAddress;
+    flags: (0x0012) ACC_PRIVATE, ACC_FINAL
+
+  dev.codex.schubert.nk.web.security.WebRequestContext(java.util.UUID, dev.codex.schubert.nk.web.security.LoginClientAddress);
+    descriptor: (Ljava/util/UUID;Ldev/codex/schubert/nk/web/security/LoginClientAddress;)V
+    flags: (0x0000)
+    Code:
+      stack=3, locals=3, args_size=3
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: ldc           #7                  // String requestId
+         8: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        11: checkcast     #15                 // class java/util/UUID
+        14: putfield      #17                 // Field retainedRequestId:Ljava/util/UUID;
+        17: aload_0
+        18: aload_2
+        19: ldc           #23                 // String clientAddress
+        21: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        24: checkcast     #25                 // class dev/codex/schubert/nk/web/security/LoginClientAddress
+        27: putfield      #27                 // Field retainedClientAddress:Ldev/codex/schubert/nk/web/security/LoginClientAddress;
+        30: return
+      LineNumberTable:
+        line 23: 0
+        line 24: 4
+        line 25: 17
+        line 26: 30
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      31     0  this   Ldev/codex/schubert/nk/web/security/WebRequestContext;
+            0      31     1 requestId   Ljava/util/UUID;
+            0      31     2 clientAddress   Ldev/codex/schubert/nk/web/security/LoginClientAddress;
+
+  public java.util.UUID requestId();
+    descriptor: ()Ljava/util/UUID;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #17                 // Field retainedRequestId:Ljava/util/UUID;
+         4: areturn
+      LineNumberTable:
+        line 29: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Ldev/codex/schubert/nk/web/security/WebRequestContext;
+
+  public dev.codex.schubert.nk.web.security.LoginClientAddress clientAddress();
+    descriptor: ()Ldev/codex/schubert/nk/web/security/LoginClientAddress;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #27                 // Field retainedClientAddress:Ldev/codex/schubert/nk/web/security/LoginClientAddress;
+         4: areturn
+      LineNumberTable:
+        line 33: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Ldev/codex/schubert/nk/web/security/WebRequestContext;
+
+  public static dev.codex.schubert.nk.web.security.WebRequestContext require(jakarta.servlet.http.HttpServletRequest);
+    descriptor: (Ljakarta/servlet/http/HttpServletRequest;)Ldev/codex/schubert/nk/web/security/WebRequestContext;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: invokestatic  #31                 // Method existing:(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;
+         4: invokedynamic #35,  0             // InvokeDynamic #0:get:()Ljava/util/function/Supplier;
+         9: invokevirtual #39                 // Method java/util/Optional.orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+        12: checkcast     #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        15: areturn
+      LineNumberTable:
+        line 38: 0
+        line 39: 9
+        line 38: 15
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      16     0 request   Ljakarta/servlet/http/HttpServletRequest;
+
+  public static java.util.Optional<dev.codex.schubert.nk.web.security.WebRequestContext> existing(jakarta.servlet.http.HttpServletRequest);
+    descriptor: (Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=3, locals=3, args_size=1
+         0: aload_0
+         1: ldc           #45                 // String request
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_0
+         8: getstatic     #47                 // Field ATTRIBUTE:Ljava/lang/String;
+        11: invokeinterface #51,  2           // InterfaceMethod jakarta/servlet/http/HttpServletRequest.getAttribute:(Ljava/lang/String;)Ljava/lang/Object;
+        16: astore_1
+        17: aload_1
+        18: ifnonnull     25
+        21: invokestatic  #57                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+        24: areturn
+        25: aload_1
+        26: instanceof    #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        29: ifeq          42
+        32: aload_1
+        33: checkcast     #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        36: astore_2
+        37: aload_2
+        38: invokestatic  #61                 // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+        41: areturn
+        42: new           #65                 // class java/lang/IllegalStateException
+        45: dup
+        46: ldc           #67                 // String web request context is unavailable
+        48: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        51: athrow
+        52: astore_1
+        53: new           #65                 // class java/lang/IllegalStateException
+        56: dup
+        57: ldc           #67                 // String web request context is unavailable
+        59: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        62: athrow
+      Exception table:
+         from    to  target type
+             7    24    52   Class java/lang/IllegalArgumentException
+             7    24    52   Class java/lang/IllegalStateException
+            25    41    52   Class java/lang/IllegalArgumentException
+            25    41    52   Class java/lang/IllegalStateException
+            42    52    52   Class java/lang/IllegalArgumentException
+            42    52    52   Class java/lang/IllegalStateException
+      LineNumberTable:
+        line 43: 0
+        line 45: 7
+        line 46: 17
+        line 47: 25
+        line 48: 42
+        line 49: 52
+        line 50: 53
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           37       5     2 context   Ldev/codex/schubert/nk/web/security/WebRequestContext;
+           17      35     1 value   Ljava/lang/Object;
+           53      10     1 failure   Ljava/lang/RuntimeException;
+            0      63     0 request   Ljakarta/servlet/http/HttpServletRequest;
+      StackMapTable: number_of_entries = 3
+        frame_type = 252 /* append */
+          offset_delta = 25
+          locals = [ class java/lang/Object ]
+        frame_type = 16 /* same */
+        frame_type = 255 /* full_frame */
+          offset_delta = 9
+          locals = [ class jakarta/servlet/http/HttpServletRequest ]
+          stack = [ class java/lang/RuntimeException ]
+    Signature: #136                         // (Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional<Ldev/codex/schubert/nk/web/security/WebRequestContext;>;
+
+  public static java.util.UUID identify(jakarta.servlet.http.HttpServletRequest, java.util.function.Supplier<java.util.UUID>);
+    descriptor: (Ljakarta/servlet/http/HttpServletRequest;Ljava/util/function/Supplier;)Ljava/util/UUID;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=3, locals=7, args_size=2
+         0: aload_0
+         1: ldc           #45                 // String request
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #74                 // String identifiers
+        10: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_0
+        15: invokestatic  #31                 // Method existing:(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;
+        18: astore_2
+        19: aload_0
+        20: getstatic     #76                 // Field ID_ATTRIBUTE:Ljava/lang/String;
+        23: invokeinterface #51,  2           // InterfaceMethod jakarta/servlet/http/HttpServletRequest.getAttribute:(Ljava/lang/String;)Ljava/lang/Object;
+        28: astore_3
+        29: goto          44
+        32: astore        4
+        34: new           #65                 // class java/lang/IllegalStateException
+        37: dup
+        38: ldc           #67                 // String web request context is unavailable
+        40: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        43: athrow
+        44: aload_3
+        45: ifnonnull     113
+        48: aload_2
+        49: invokevirtual #79                 // Method java/util/Optional.isPresent:()Z
+        52: ifeq          68
+        55: aload_2
+        56: invokevirtual #83                 // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+        59: checkcast     #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        62: invokevirtual #86                 // Method requestId:()Ljava/util/UUID;
+        65: goto          85
+        68: aload_1
+        69: invokeinterface #89,  1           // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+        74: checkcast     #15                 // class java/util/UUID
+        77: ldc           #7                  // String requestId
+        79: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        82: checkcast     #15                 // class java/util/UUID
+        85: astore        4
+        87: aload_0
+        88: getstatic     #76                 // Field ID_ATTRIBUTE:Ljava/lang/String;
+        91: aload         4
+        93: invokeinterface #93,  3           // InterfaceMethod jakarta/servlet/http/HttpServletRequest.setAttribute:(Ljava/lang/String;Ljava/lang/Object;)V
+        98: goto          143
+       101: astore        6
+       103: new           #65                 // class java/lang/IllegalStateException
+       106: dup
+       107: ldc           #67                 // String web request context is unavailable
+       109: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       112: athrow
+       113: aload_3
+       114: instanceof    #15                 // class java/util/UUID
+       117: ifeq          133
+       120: aload_3
+       121: checkcast     #15                 // class java/util/UUID
+       124: astore        5
+       126: aload         5
+       128: astore        4
+       130: goto          143
+       133: new           #65                 // class java/lang/IllegalStateException
+       136: dup
+       137: ldc           #97                 // String web request identity is unavailable
+       139: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       142: athrow
+       143: aload_2
+       144: invokevirtual #79                 // Method java/util/Optional.isPresent:()Z
+       147: ifeq          178
+       150: aload_2
+       151: invokevirtual #83                 // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+       154: checkcast     #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+       157: invokevirtual #86                 // Method requestId:()Ljava/util/UUID;
+       160: aload         4
+       162: invokevirtual #99                 // Method java/util/UUID.equals:(Ljava/lang/Object;)Z
+       165: ifne          178
+       168: new           #65                 // class java/lang/IllegalStateException
+       171: dup
+       172: ldc           #97                 // String web request identity is unavailable
+       174: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       177: athrow
+       178: aload         4
+       180: areturn
+      Exception table:
+         from    to  target type
+            19    29    32   Class java/lang/IllegalArgumentException
+            19    29    32   Class java/lang/IllegalStateException
+            87    98   101   Class java/lang/IllegalArgumentException
+            87    98   101   Class java/lang/IllegalStateException
+      LineNumberTable:
+        line 56: 0
+        line 57: 7
+        line 58: 14
+        line 61: 19
+        line 64: 29
+        line 62: 32
+        line 63: 34
+        line 66: 44
+        line 68: 48
+        line 69: 55
+        line 70: 68
+        line 72: 87
+        line 75: 98
+        line 73: 101
+        line 74: 103
+        line 76: 113
+        line 77: 133
+        line 78: 143
+        line 79: 168
+        line 80: 178
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           29       3     3 value   Ljava/lang/Object;
+           34      10     4 attributeFailure   Ljava/lang/RuntimeException;
+          103      10     6 attributeFailure   Ljava/lang/RuntimeException;
+           87      26     4    id   Ljava/util/UUID;
+          130       3     4    id   Ljava/util/UUID;
+          126       7     5 typed   Ljava/util/UUID;
+            0     181     0 request   Ljakarta/servlet/http/HttpServletRequest;
+            0     181     1 identifiers   Ljava/util/function/Supplier;
+           19     162     2 context   Ljava/util/Optional;
+           44     137     3 value   Ljava/lang/Object;
+          143      38     4    id   Ljava/util/UUID;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0     181     1 identifiers   Ljava/util/function/Supplier<Ljava/util/UUID;>;
+           19     162     2 context   Ljava/util/Optional<Ldev/codex/schubert/nk/web/security/WebRequestContext;>;
+      StackMapTable: number_of_entries = 9
+        frame_type = 255 /* full_frame */
+          offset_delta = 32
+          locals = [ class jakarta/servlet/http/HttpServletRequest, class java/util/function/Supplier, class java/util/Optional ]
+          stack = [ class java/lang/RuntimeException ]
+        frame_type = 252 /* append */
+          offset_delta = 11
+          locals = [ class java/lang/Object ]
+        frame_type = 23 /* same */
+        frame_type = 80 /* same_locals_1_stack_item */
+          stack = [ class java/util/UUID ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 15
+          locals = [ class jakarta/servlet/http/HttpServletRequest, class java/util/function/Supplier, class java/util/Optional, class java/lang/Object, class java/util/UUID ]
+          stack = [ class java/lang/RuntimeException ]
+        frame_type = 250 /* chop */
+          offset_delta = 11
+        frame_type = 19 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 9
+          locals = [ class java/util/UUID ]
+        frame_type = 34 /* same */
+    Signature: #147                         // (Ljakarta/servlet/http/HttpServletRequest;Ljava/util/function/Supplier<Ljava/util/UUID;>;)Ljava/util/UUID;
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: ldc           #103                // String WebRequestContext[REDACTED]
+         2: areturn
+      LineNumberTable:
+        line 85: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       3     0  this   Ldev/codex/schubert/nk/web/security/WebRequestContext;
+
+  private static java.lang.IllegalStateException lambda$require$0();
+    descriptor: ()Ljava/lang/IllegalStateException;
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=3, locals=0, args_size=0
+         0: new           #65                 // class java/lang/IllegalStateException
+         3: dup
+         4: ldc           #67                 // String web request context is unavailable
+         6: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+         9: areturn
+      LineNumberTable:
+        line 39: 0
+
+  static {};
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: ldc           #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+         2: invokevirtual #105                // Method java/lang/Class.getName:()Ljava/lang/String;
+         5: putstatic     #47                 // Field ATTRIBUTE:Ljava/lang/String;
+         8: ldc           #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        10: invokevirtual #105                // Method java/lang/Class.getName:()Ljava/lang/String;
+        13: invokedynamic #111,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+        18: putstatic     #76                 // Field ID_ATTRIBUTE:Ljava/lang/String;
+        21: return
+      LineNumberTable:
+        line 18: 0
+        line 19: 8
+}
+SourceFile: "WebRequestContext.java"
+BootstrapMethods:
+  0: #162 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #155 ()Ljava/lang/Object;
+      #156 REF_invokeStatic dev/codex/schubert/nk/web/security/WebRequestContext.lambda$require$0:()Ljava/lang/IllegalStateException;
+      #159 ()Ljava/lang/IllegalStateException;
+  1: #169 REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #160 \u0001.requestId
+InnerClasses:
+  public static final #180= #176 of #178; // Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles
