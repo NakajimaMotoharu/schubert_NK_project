@@ -1,0 +1,43 @@
+[
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NotificationListProjectionPortTest.java",
+    "sourceSha256": "377a29d9848ce18e9c58a930630234ce2599c3df8c8f6194872033e566fb01e4",
+    "finding": {
+      "beginline": "325",
+      "endline": "325",
+      "begincolumn": "24",
+      "endcolumn": "55",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.view",
+      "class": "NotificationListProjectionPortTest",
+      "method": "parallelViewsKeepActorsSeparate",
+      "variable": "workers",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3"
+    },
+    "lineText": "try (var workers = Executors.newFixedThreadPool(2)) {",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Own2worker/8task for immutable row/topbar actor isolation, executor closed/all futures10s joined. No production/J2EE worker/container, no external process or backend."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NotificationListProjectionPortTest.java",
+    "sourceSha256": "377a29d9848ce18e9c58a930630234ce2599c3df8c8f6194872033e566fb01e4",
+    "finding": {
+      "beginline": "330",
+      "endline": "333",
+      "begincolumn": "13",
+      "endcolumn": "70",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.view",
+      "class": "NotificationListProjectionPortTest",
+      "method": "parallelViewsKeepActorsSeparate",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3"
+    },
+    "lineText": "workers.submit(",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Own2worker/8task for immutable row/topbar actor isolation, executor closed/all futures10s joined. No production/J2EE worker/container, no external process or backend."
+  }
+]
