@@ -1,0 +1,36 @@
+{
+  "preflightDecision": "PT_DEFAULT",
+  "actualBackendActions": 0,
+  "module": "api",
+  "program": "007_NK-AUT-001",
+  "main": "AuthSessionService",
+  "mainPackage": "security",
+  "tests": [
+    "SessionIssueJdbcPortTest"
+  ],
+  "testPackages": [
+    "security"
+  ],
+  "physical": 1,
+  "abstract": 0,
+  "expected": 8,
+  "syntheticNoCode": [],
+  "coreSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+  "normalCompileSlot": "pg20704-media-css-six-main-resource-compile-v1",
+  "sixStaticSlot": "pg20114-log-tx-six-static-reactor-v1",
+  "sixStaticManifestSha256": "6439d001af03b1807f29516b75b04ab8d7f1b2353e25b5e28eb3ef07d3b750a9",
+  "prepare": "pg20908-session-issue-jdbc-style-compile-v1",
+  "static": "pg20910-session-issue-jdbc-style-static-v1",
+  "unit": "pg20914-session-issue-jdbc-eight-unit-v1",
+  "public": "PG20914-session-issue-jdbc-eight-v1",
+  "session": "PG20914-SESSION-ISSUE-JDBC8",
+  "formatFrozen": false,
+  "resourceScopeNote": "DIF016 own fake JDBC only. Successful cases use deterministic PUBLIC test context bytes/AES256 all-zero test-only vector key/nonce/fixed UUID, independent Python AES-GCM golden, never production credential/live session/DB authority. Default JDK SecureRandom construction tested only before transaction rejection. Real memory JCA/Gson operations; SDK/provider/entropy/classpath/IP metadata activity unmeasured, no zero syscall assertion. InetAddress.getByAddress fixed4bytes, no DNS or network connect. Exact new Main/Test/CP/init/XML SDK review, borrowed connection/buffer wiping; no old realDB fixture extraction, held4, Root/VM/runtime/native/CHR.",
+  "normalCompileManifestSha256": "8bf2c7ca6ada19b2e23a1e007ca2db680d6916d1e215d470f072f27508d23be9",
+  "staticJavaReferenceSource": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+  "staticJavaReferenceNormalSlot": "pg20112-log-tx-six-main-compile-v1",
+  "gsonDependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar": "4667724877f1d37a689202da191e23efa7657c62eef93ccdac406eccfe5cdd0a"
+  }
+}

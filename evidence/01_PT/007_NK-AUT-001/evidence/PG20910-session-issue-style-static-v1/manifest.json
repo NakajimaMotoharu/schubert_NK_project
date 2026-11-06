@@ -1,0 +1,135 @@
+{
+  "atJST": "2026-11-06T21:15:49.798150+09:00",
+  "compileExit": 0,
+  "pmdActualExit": 4,
+  "pmdRaw": 5,
+  "processingErrors": 0,
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "notApplicable": [
+    {
+      "item": {
+        "beginline": "82",
+        "endline": "82",
+        "begincolumn": "45",
+        "endcolumn": "66",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionIssueJdbcPortTest",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3",
+        "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+      },
+      "reason": "Fixed java.sql interface loader for standalone JDK Proxy, not a J2EE/container Product class loading path."
+    },
+    {
+      "item": {
+        "beginline": "178",
+        "endline": "178",
+        "begincolumn": "28",
+        "endcolumn": "51",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionIssueJdbcPortTest.Fixture",
+        "method": "statement",
+        "variable": "bound",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3",
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+      },
+      "reason": "Statement bound map is allocated within a per-task Fixture, never shared between workers; caller reads after completing that same synchronous fixture operation."
+    },
+    {
+      "item": {
+        "beginline": "403",
+        "endline": "403",
+        "begincolumn": "18",
+        "endcolumn": "22",
+        "rule": "NullAssignment",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionIssueJdbcPortTest",
+        "method": "absentDisabledAndMissingColumnsFailBeforeIssuanceOrReplacement",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+        "priority": "3",
+        "message": "Assigning an Object to null is a code smell. Consider refactoring."
+      },
+      "reason": "Intentional missing-DB-column negative test to explicitly Nullable fixture status; expected fixed Infrastructure and no later issuance. Removing this input would weaken required null-boundary coverage, not change a Product nullable field."
+    },
+    {
+      "item": {
+        "beginline": "523",
+        "endline": "523",
+        "begincolumn": "24",
+        "endcolumn": "55",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionIssueJdbcPortTest",
+        "method": "parallelPrivateFixturesDoNotShareContextBuffersOrAuditState",
+        "variable": "workers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "reason": "Two-worker JUnit-owned executor has TWR lifecycle and every Future is retrieved; no Product/container unmanaged thread."
+    },
+    {
+      "item": {
+        "beginline": "528",
+        "endline": "539",
+        "begincolumn": "13",
+        "endcolumn": "19",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionIssueJdbcPortTest",
+        "method": "parallelPrivateFixturesDoNotShareContextBuffersOrAuditState",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "reason": "Two-worker JUnit-owned executor has TWR lifecycle and every Future is retrieved; no Product/container unmanaged thread."
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java": "1ec3c856c555f77de597745defbbd6ea6f60292013117a44daf81e78a5f5eda8",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionIssueJdbcPortTest.java": "367458b115a8e5f3705fb6cd5bbc4db1728d15ea6bae0b41c7e7832d06ea04d8"
+  },
+  "normalSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+  "sameJavaStaticSource": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+  "all1844ClassBytesAndJavaPomEqual": true,
+  "bug": "BUG2362/YKT2107 field/helper case-insensitive name corrected; original20906 raw6 preserved",
+  "suppressionAdded": false,
+  "productTestsExecuted": 0,
+  "files": {
+    "pmd.stdout": "d6e652ea4ea9e3006b390fd289c52065d2313c4c98fef2eeb7a82c25ea9fe12f",
+    "source-list.txt": "8534448864f8640a1ac8293fb2ce6e31b5a8ecb00a3ff477a754ae3fb0c2f5e8",
+    "compile-format.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checkstyle-exit.safe.json": "b60c7e9a7de686cb1c90fa83b571dda2c45d2779392e7c5bc10d4273ce10cedb",
+    "compile-format.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-test-compile-exit.safe.json": "2b7626cabb2797f408bd6ed893ac111511491bbce9693c79c02f69ea80b95b65",
+    "compile-manifest.safe.json": "f6fdb3fd18489b57668271711fad5bf073b342d8c7be9f0febda47beecb44dba",
+    "pmd.stderr": "141eb65d74f7997b8eef554fecec67bc550322bbe8156e05a8f2f34e7c0a69e8",
+    "compile-test-compile.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pmd-exit.safe.json": "1fd28b21610df3d22f75abaee95f62a6250abde0d641c7d470de16b8bb867e7f",
+    "manifest.safe.json": "15892dd7f234b77ba00a2e1e698281ec2f3a2795ed6f05d00474b094a203322b",
+    "compile-test-compile-process.safe.json": "7b7347e82b0f697e6eb49bd2dca33c840d96336c7bd3827e33c50bfa275cae83",
+    "checkstyle-process.safe.json": "75d90d822d7076843fdac98f13c5eec8696b33aaa0cb899a742913119d703153",
+    "compile-format-exit.safe.json": "00bd30fc6bac295335a6ca71e9020f25e9915562f19543437d9367e69b1178fa",
+    "pmd-begin.safe.json": "91c58e8c8529391be1760072c687c255b643d028b06accfeb44d81c665aedb12",
+    "pmd-process.safe.json": "200df2921a190613ff7d6817417b4966a0703354d441008786014c27834a0d2e",
+    "checkstyle.xml": "d95f43aa8b83bb0204ba0f55d4a78a167c5bf6a66f264cbd026724f55e6e3d19",
+    "compile-test-compile-begin.safe.json": "6f03970927d2b8dc6b89be0b09a308c7831fa7f8159b66898397a5d8de974362",
+    "checkstyle-begin.safe.json": "4610b8d6ec69e95d42146f01c43931ba8160812e5d1ca26207245bba5ba1d3e3",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-format-process.safe.json": "66ecd38b886c4e2f8e944dd744d3b35ce21e5b4ed30041adf7d6f77984dcec5f",
+    "compile-format-begin.safe.json": "f300b93809f4092592a64706b61c1e2a8de9a66cbf4f80c6a40687bc00fc7c41",
+    "compile-test-compile.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pmd.xml": "3aaccd3d66f988e06f56535e40bd7e46a429d1b67a360851f42cd10bb706c1e0",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
