@@ -1,0 +1,146 @@
+{
+  "actualExit": 0,
+  "pmdRaw": 4,
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "classification": [
+    {
+      "beginline": "52",
+      "endline": "52",
+      "begincolumn": "45",
+      "endcolumn": "66",
+      "rule": "UseProperClassLoader",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.web.security",
+      "class": "MqLoginFailurePortTest",
+      "method": "port",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+      "priority": "3",
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "applicable": false,
+      "reason": "Only a self-owned JDK/Servlet interface Proxy; use exact interface loader, no J2EE/container plugin lookup."
+    },
+    {
+      "beginline": "98",
+      "endline": "98",
+      "begincolumn": "39",
+      "endcolumn": "64",
+      "rule": "UseConcurrentHashMap",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.security",
+      "class": "MqLoginFailurePortTest.Fixture",
+      "variable": "headers",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+      "priority": "3",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "applicable": false,
+      "reason": "Response headers Map is per Fixture and used only by its owning worker; shared audit uses ConcurrentLinkedQueue."
+    },
+    {
+      "beginline": "284",
+      "endline": "284",
+      "begincolumn": "21",
+      "endcolumn": "52",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.security",
+      "class": "MqLoginFailurePortTest",
+      "method": "sharedHandlerParallelCallsKeepOwnDelayHeadersAndRequestAudit",
+      "variable": "pool",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "applicable": false,
+      "reason": "Host-only bounded two-worker JUnit regression uses try-with-resources; no deployed webapp threads."
+    },
+    {
+      "beginline": "289",
+      "endline": "298",
+      "begincolumn": "13",
+      "endcolumn": "19",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.security",
+      "class": "MqLoginFailurePortTest",
+      "method": "sharedHandlerParallelCallsKeepOwnDelayHeadersAndRequestAudit",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "applicable": false,
+      "reason": "Host-only bounded two-worker JUnit regression uses try-with-resources; no deployed webapp threads."
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginFailureHandler.java": "8d2663bca11722d79875316bc0542fd7723694cae656d0a78302b87e4f42de9d",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginFailurePortTest.java": "3b70e5c73c52960db73ee96c7cf632c6399ec2a167de47846baae277bcee1815"
+  },
+  "sameSourceSixMainSpotBugs": {
+    "manifest": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20992-outbox-required-six-static-reactor-v1/manifest.safe.json",
+    "sha256": "2d3130234ce662ebf2b0bb1f57e74c123ec68e7a307feb10844231bd9822a20a",
+    "reports": {
+      "protocol": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/spotbugsXml.xml",
+        "sha256": "5495ab95f5d78b8b646473e23a63e56965fd11725eb007542e2f7ef455813519",
+        "bugs": 0,
+        "missing": 0,
+        "errors": 0
+      },
+      "storage": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/spotbugsXml.xml",
+        "sha256": "0d1abb943cd271e6346e67d2ae6caaae5a0da003faea3c80e33213089510100a",
+        "bugs": 0,
+        "missing": 0,
+        "errors": 0
+      },
+      "bootstrap": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/spotbugsXml.xml",
+        "sha256": "425e8714303256de97a8e9862f71e3a9f6008ce8721082bf5c9d61964496a0b4",
+        "bugs": 0,
+        "missing": 0,
+        "errors": 0
+      },
+      "api": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-api/target/spotbugsXml.xml",
+        "sha256": "3eed17c2c2701d9cfdd3ffd4765a4991aa601556df356117ac1e2eff3eb347bb",
+        "bugs": 0,
+        "missing": 0,
+        "errors": 0
+      },
+      "web": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/spotbugsXml.xml",
+        "sha256": "d296aaf08c90f0509965b695f127127b7a5e703297a9db8090fd767a877bf3f6",
+        "bugs": 0,
+        "missing": 0,
+        "errors": 0
+      },
+      "batch": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-batch/target/spotbugsXml.xml",
+        "sha256": "d615cbfca4817bcc37c0f3b93dbb62251e90a28f01347b5124fc3c90981d9bf2",
+        "bugs": 0,
+        "missing": 0,
+        "errors": 0
+      }
+    },
+    "currentAllMainInputsEqualPinnedNormalBuild": true,
+    "javaOnlyCrossSourceBinding": null
+  },
+  "testsExecuted": 0,
+  "formalUpdated": false,
+  "files": {
+    "pmd.stdout": "9402d396cc8bd5ae3eeac9ffd96f8e8e7011d1e131e28f78bd093e8e196b2ffc",
+    "source-list.txt": "fd4b64215f4784cb31dd30066a854563e6ae05c38deeabeef33977038fa32af3",
+    "checkstyle-exit.safe.json": "459ebc0078f0c23081ab435590d760abd835ccef46d79ef45d6dfcd90e66c1b1",
+    "pmd.stderr": "fb27932ec5539a703f0038df7c38e057ac3395e0b1e79554b415e6c30d9b1e3b",
+    "pmd-exit.safe.json": "fef151ebd43618f9cbd23d6ab3a1a67ef385247f042bd87852cb7c2bcd980905",
+    "manifest.safe.json": "044fbee744a9171542a2ec73a4850c5a5cd6b8e91f29fce242d31ca030a4728d",
+    "checkstyle-process.safe.json": "ed6e1ebefacd917d43c5148fb88b72b9ae59254a3b50f1b68bd8ea7300f3c41c",
+    "pmd-begin.safe.json": "ca03a5a0b77b381b69bd31533e5dcb0e81ee80485a29198c9e7e4c7df1d2fbdd",
+    "pmd-process.safe.json": "b4b56280c85e8712020c34463473a2dd4d44f46b4e80634a4010c5379ac4abf8",
+    "checkstyle.xml": "15dbae13f4f2b1d0eea532135933ba43f065fc2e2686dd0a0e0f2df39c1df203",
+    "checkstyle-begin.safe.json": "5b30261061a18d850cd2c93a485f9df5f57dc5bb20d2c26308a4402adaad671f",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pmd.xml": "e0107d834423a6f47e57d34f4ae3b9d38ac49996d5b5bf2359f8aa8e463a77ad",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

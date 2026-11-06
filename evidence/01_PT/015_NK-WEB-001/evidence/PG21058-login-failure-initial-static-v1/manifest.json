@@ -1,0 +1,162 @@
+{
+  "actualExit": 0,
+  "pmdRaw": 5,
+  "applicableViolations": 1,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "classification": [
+    {
+      "beginline": "51",
+      "endline": "51",
+      "begincolumn": "45",
+      "endcolumn": "66",
+      "rule": "UseProperClassLoader",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.web.security",
+      "class": "MqLoginFailurePortTest",
+      "method": "port",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+      "priority": "3",
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "applicable": false,
+      "reason": "Only a self-owned JDK/Servlet interface Proxy; use exact interface loader, no J2EE/container plugin lookup."
+    },
+    {
+      "beginline": "97",
+      "endline": "97",
+      "begincolumn": "39",
+      "endcolumn": "64",
+      "rule": "UseConcurrentHashMap",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.security",
+      "class": "MqLoginFailurePortTest.Fixture",
+      "variable": "headers",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+      "priority": "3",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "applicable": false,
+      "reason": "Response headers Map is per Fixture and used only by its owning worker; shared audit uses ConcurrentLinkedQueue."
+    },
+    {
+      "beginline": "194",
+      "endline": "194",
+      "begincolumn": "20",
+      "endcolumn": "21",
+      "rule": "AvoidLiteralsInIfCondition",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.web.security",
+      "class": "MqLoginFailurePortTest",
+      "method": "badFormProxyAndServiceFailuresRemainDistinctClosedHttpOutcomes",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition",
+      "priority": "3",
+      "message": "Avoid using literals such as 2 in if statements",
+      "applicable": true,
+      "reason": "Proxy case position is a meaningful constant, corrected in new Test source without suppression."
+    },
+    {
+      "beginline": "283",
+      "endline": "283",
+      "begincolumn": "21",
+      "endcolumn": "52",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.security",
+      "class": "MqLoginFailurePortTest",
+      "method": "sharedHandlerParallelCallsKeepOwnDelayHeadersAndRequestAudit",
+      "variable": "pool",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "applicable": false,
+      "reason": "Host-only bounded two-worker JUnit regression uses try-with-resources; no deployed webapp threads."
+    },
+    {
+      "beginline": "288",
+      "endline": "297",
+      "begincolumn": "13",
+      "endcolumn": "19",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.security",
+      "class": "MqLoginFailurePortTest",
+      "method": "sharedHandlerParallelCallsKeepOwnDelayHeadersAndRequestAudit",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "applicable": false,
+      "reason": "Host-only bounded two-worker JUnit regression uses try-with-resources; no deployed webapp threads."
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginFailureHandler.java": "8d2663bca11722d79875316bc0542fd7723694cae656d0a78302b87e4f42de9d",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginFailurePortTest.java": "dbda31f698d79f7a1fb2d1f537781d8243401389c6c388926dffefd9d4b00bf3"
+  },
+  "sameSourceSixMainSpotBugs": {
+    "manifest": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20992-outbox-required-six-static-reactor-v1/manifest.safe.json",
+    "sha256": "2d3130234ce662ebf2b0bb1f57e74c123ec68e7a307feb10844231bd9822a20a",
+    "reports": {
+      "protocol": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/spotbugsXml.xml",
+        "sha256": "5495ab95f5d78b8b646473e23a63e56965fd11725eb007542e2f7ef455813519",
+        "bugs": 0,
+        "missing": 0,
+        "errors": 0
+      },
+      "storage": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/spotbugsXml.xml",
+        "sha256": "0d1abb943cd271e6346e67d2ae6caaae5a0da003faea3c80e33213089510100a",
+        "bugs": 0,
+        "missing": 0,
+        "errors": 0
+      },
+      "bootstrap": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/spotbugsXml.xml",
+        "sha256": "425e8714303256de97a8e9862f71e3a9f6008ce8721082bf5c9d61964496a0b4",
+        "bugs": 0,
+        "missing": 0,
+        "errors": 0
+      },
+      "api": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-api/target/spotbugsXml.xml",
+        "sha256": "3eed17c2c2701d9cfdd3ffd4765a4991aa601556df356117ac1e2eff3eb347bb",
+        "bugs": 0,
+        "missing": 0,
+        "errors": 0
+      },
+      "web": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/spotbugsXml.xml",
+        "sha256": "d296aaf08c90f0509965b695f127127b7a5e703297a9db8090fd767a877bf3f6",
+        "bugs": 0,
+        "missing": 0,
+        "errors": 0
+      },
+      "batch": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-batch/target/spotbugsXml.xml",
+        "sha256": "d615cbfca4817bcc37c0f3b93dbb62251e90a28f01347b5124fc3c90981d9bf2",
+        "bugs": 0,
+        "missing": 0,
+        "errors": 0
+      }
+    },
+    "currentAllMainInputsEqualPinnedNormalBuild": true,
+    "javaOnlyCrossSourceBinding": null
+  },
+  "testsExecuted": 0,
+  "formalUpdated": false,
+  "files": {
+    "pmd.stdout": "b02008b3a0235a663ee562730342e7ea61e84c5dd1c4668d12b8dc27788020c5",
+    "source-list.txt": "fd4b64215f4784cb31dd30066a854563e6ae05c38deeabeef33977038fa32af3",
+    "checkstyle-exit.safe.json": "9fd24e7a6b06d54a72480fa41e3fcf4107590965f3eed9c7a94f87d382322e36",
+    "pmd.stderr": "141eb65d74f7997b8eef554fecec67bc550322bbe8156e05a8f2f34e7c0a69e8",
+    "pmd-exit.safe.json": "3f92f219d37cafa59be2d1e071cdb74c3db965200c19f10943f525dc0966c219",
+    "manifest.safe.json": "f101c48c219a69e89a05a81fd735d7f66c92906a019765f907459f7bbfb8f1cf",
+    "checkstyle-process.safe.json": "1a517114c6f541ae79dffe7eac7d2ec05325e799ec84caf62fcf0ad2dc102ecf",
+    "pmd-begin.safe.json": "c1938712acf331ebeacf037822ebe277cc3f9aab9b221dec66050eb5e05a66c1",
+    "pmd-process.safe.json": "a3a6f2c863846b33d3641f308ed267c3592f68c0bedd0d81e2cc8671316c4cf8",
+    "checkstyle.xml": "15dbae13f4f2b1d0eea532135933ba43f065fc2e2686dd0a0e0f2df39c1df203",
+    "checkstyle-begin.safe.json": "742e135d57f0bf9b44bb5fa2b29194b5b8cfb8d1854da2041395945f5a3dc459",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pmd.xml": "b5345a47715f4a1759e029ed99c60f9798b199dc6df69c00065cf9aed3b24545",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

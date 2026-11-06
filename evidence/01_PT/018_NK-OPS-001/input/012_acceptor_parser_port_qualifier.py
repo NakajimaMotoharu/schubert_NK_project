@@ -4,6 +4,7 @@ import sys,os,json,hashlib,subprocess,datetime,zipfile,re,shutil
 import xml.etree.ElementTree as E
 import pg9666_pagination_static as r
 root=Path.cwd();runs=root.parent/'pgpt-runs/PG379';tc=root.parent/'toolchain';jdk=tc/'jdk-25.0.4/bin';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();phase=sys.argv[1];profile=sys.argv[2];external=profile.endswith('.json');assert phase in {'prepare','static','run','post'} and (external or profile in {'range','verified','audit','receipt','login_audit','login_attempt','inbound','snapshot','run_reference','metadata','expiry','backup','batch_run','cleanup_step','cleanup_query','inspection_summary','pressure','topology','acceptor'})
+loginFailureExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/097_login_failure_http.json'
 outboxJdbcExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/096_outbox_jdbc.json'
 stateParserExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/089_unit_state_parser_bytes.json'
 authVerifierExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/090_authentication_verifier_jdbc.json'
@@ -31,10 +32,14 @@ viewProfiles={
  'evidence/01_PT/018_NK-OPS-001/input/061_notification_list_projection_fixture.json':('NotificationListViewModel','NotificationListProjectionPortTest')}
 viewExternal=external and profile in viewProfiles
 if external:
- assert outboxJdbcExternal or sessionRevocationExternal or sessionIssueExternal or adminPreludeExternal or authVerifierExternal or stateParserExternal or errorRestoreExternal or routerExternal or securityAuditExternal or csrfExternal or formExternal or sessionExternal or requestExternal or viewExternal or observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
+ assert loginFailureExternal or outboxJdbcExternal or sessionRevocationExternal or sessionIssueExternal or adminPreludeExternal or authVerifierExternal or stateParserExternal or errorRestoreExternal or routerExternal or securityAuditExternal or csrfExternal or formExternal or sessionExternal or requestExternal or viewExternal or observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
  externalCfg=json.loads((root/profile).read_text())
  assert externalCfg['preflightDecision']=='PT_DEFAULT' and externalCfg['actualBackendActions']==0
- if outboxJdbcExternal:
+ if loginFailureExternal:
+  assert externalCfg['module']=='web' and externalCfg['main']=='MqLoginFailureHandler' and externalCfg['mainPackage']=='security'
+  assert externalCfg['tests']==['MqLoginFailurePortTest'] and externalCfg['testPackages']==['security']
+  assert externalCfg['physical']==1 and externalCfg['abstract']==0 and externalCfg['expected']==6
+ elif outboxJdbcExternal:
   assert externalCfg['module']=='api' and externalCfg['main']=='JdbcOutboxRepository' and externalCfg['mainPackage']=='messaging/outbound'
   assert externalCfg['tests']==['JdbcOutboxPortTest','OutboxReturningIdContractTest'] and externalCfg['testPackages']==['messaging/outbound','messaging/outbound']
   assert externalCfg['physical']==1 and externalCfg['abstract']==0 and externalCfg['expected']==9
@@ -129,13 +134,13 @@ for n,h in base['begin']['inputHashes'].items():assert sha(root/n)==h
 for j in base['jars'].values():assert sha(j['path'])==j['sha256']
 console=tc/'junit-platform-console-standalone-1.13.4.jar';assert sha(console)=='3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892';deps=[Path(base['jars'][n]['path']) for n in ['protocol',module]]
 if external:
- if not outboxJdbcExternal and not observationExternal and not viewExternal and not requestExternal and not sessionExternal and not formExternal and not csrfExternal and not securityAuditExternal and not routerExternal and not errorRestoreExternal and not stateParserExternal and not authVerifierExternal and not adminPreludeExternal and not sessionIssueExternal and not sessionRevocationExternal:deps.append(Path(base['jars']['bootstrap']['path']))
+ if not loginFailureExternal and not outboxJdbcExternal and not observationExternal and not viewExternal and not requestExternal and not sessionExternal and not formExternal and not csrfExternal and not securityAuditExternal and not routerExternal and not errorRestoreExternal and not stateParserExternal and not authVerifierExternal and not adminPreludeExternal and not sessionIssueExternal and not sessionRevocationExternal:deps.append(Path(base['jars']['bootstrap']['path']))
  deps.append(tc/'m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar')
- if securityAuditExternal or sessionIssueExternal or sessionRevocationExternal:
+ if loginFailureExternal or securityAuditExternal or sessionIssueExternal or sessionRevocationExternal:
   assert len(cfg['gsonDependencies'])==2
   for name,h in cfg['gsonDependencies'].items():
    assert '/toolchain/m2/repository/' in name and any(v in name for v in ['/gson/2.14.0/','/error_prone_annotations/2.50.0/']) and sha(name)==h;deps.append(Path(name))
- if formExternal or csrfExternal or routerExternal or errorRestoreExternal:
+ if loginFailureExternal or formExternal or csrfExternal or routerExternal or errorRestoreExternal:
   assert len(cfg['converterDependencies'])==6
   for name,h in cfg['converterDependencies'].items():
    assert '/toolchain/m2/repository/' in name and any(v in name for v in ['/commons-logging/1.4.0/','/spring-core/7.0.9/','/spring-web/7.0.9/','/jakarta.servlet-api/6.1.0/','/spring-security-core/7.1.1/','/spring-security-web/7.1.1/']) and sha(name)==h;deps.append(Path(name))
@@ -366,6 +371,15 @@ if outboxJdbcExternal:
   assert b['inputHashes']==authJdkReview['originalInputHashes']
   for file,binding in authJdkReview['originalXmlEnvironmentBindings'].items():
    assert Path(file).parent==slot/'xml' and sha(file)==binding['sha256'] and all(binding['checks'].values())
+
+
+if loginFailureExternal:
+ initializedLogin=set(re.findall(r"Initializing '([^']+)",(slot/'class-init.log').read_text()));securityPrefix='dev/codex/schubert/nk/web/security/';loggingPrefix='dev/codex/schubert/nk/web/logging/'
+ allowedLogin={securityPrefix+n for n in ['MqLoginFailureHandler','WebRequestContext','LoginClientAddress','MqLoginLockedException','LoginFormRejectedException','CaddyRequestRejectedException']};allowedLogin.update(loggingPrefix+n for n in ['WebSecurityAudit','WebSecurityAudit$Event','WebSecurityAudit$Route'])
+ loginLambdas={securityPrefix+'WebRequestContext$$Lambda':1,loggingPrefix+'WebSecurityAudit$$Lambda':3}
+ for p,maximum in loginLambdas.items():assert sum(n.startswith(p) for n in initializedLogin)<=maximum
+ unexpectedLogin={n for n in initializedLogin if n.startswith('dev/codex/schubert/nk/') and not (n in allowedLogin or n.startswith(securityPrefix+'MqLoginFailurePortTest') or any(n.startswith(p) for p in loginLambdas))};assert not unexpectedLogin,sorted(unexpectedLogin)
+ assert not any(n.startswith(('dev/codex/schubert/nk/storage/','dev/codex/schubert/nk/bootstrap/','org/apache/activemq/','org/postgresql/','io/netty/','com/zaxxer/','io/micrometer/','org/springframework/security/core/context/SecurityContextHolder','java/sql/DriverManager','java/sql/DriverInfo','java/net/Socket','sun/nio/ch/SocketChannelImpl')) for n in initializedLogin)
 
 physical=m['physical'];assert len(physical)==cfg['physical']
 with zipfile.ZipFile(deps[1]) as z:
