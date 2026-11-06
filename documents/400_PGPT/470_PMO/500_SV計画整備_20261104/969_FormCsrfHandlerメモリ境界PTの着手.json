@@ -1,0 +1,49 @@
+{
+  "groupId": "PGPT-ORDINARY-FORM-CSRF-REQUEST-20261106",
+  "atJST": "2026-11-06T12:57:43.291607+09:00",
+  "sourceBefore": "e0cfbfb7266352e117e00e620c56a073b8fbe7a4",
+  "mainSourceBefore": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+  "estimateAtGroupStartPp": {
+    "low": 0.5,
+    "base": 2,
+    "high": 4
+  },
+  "capPp": 6,
+  "costOwner": "WBS-P015-02",
+  "chargedToSV": false,
+  "quotaBefore": {
+    "usedPercent": 30,
+    "remainingPercent": 70,
+    "resetsAt": 1794395640
+  },
+  "quotaReceipt": {
+    "sha256": "a4c99e64135030b60e4d49d7d25f47f69758001f0d0430f9564d0d0fbb731d0f",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-06T03:57:43.121000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 30,
+        "remainingPercent": 70,
+        "resetsAt": 1794395640,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION",
+    "path": "/home/mini/codex/project1/work/PMO/pgpt-completion-stage-20261102/quota-receipts/a4c99e64135030b60e4d49d7d25f47f69758001f0d0430f9564d0d0fbb731d0f.json"
+  },
+  "workCategory": "ORIGINAL_PLAN_PT_EVIDENCE_GAP",
+  "preflight": {
+    "decision": "PT_DEFAULT",
+    "source": "FormCsrfTokenRequestHandler unchanged. Local request-attribute/supplied-value resolution only, no CSRF authorization/filter decision; WebCsrfToken.parse only validates synthetic string schema",
+    "tests": "FormCsrfRequestPortTest exact9 methods using JDK memory Servlet request/response proxies and fixed synthetic CsrfToken supplier; no legacy integration setup",
+    "sdk": "Pinned SpringSecurity7.1.1 CsrfTokenRequestAttributeHandler/SupplierCsrfToken javap metadata inspected: lazy alias attributes and supplier getters only, no session/store/generation. Logs contain attribute names only",
+    "scope": "Two attribute aliases/lazy supply, null API contracts,64/128 value schema/multiplicity/malformed/query fixed_csrf and percent encoding, query faults vs body faults/fatal propagation, deferred null/failure, own2worker8requests",
+    "sideEffects": "No actual token/cookie/session/key/HTTP/DB/JMS/VM/Root/cryptography/auth provider/securitycontext/held4. All fixed placeholder values stay in memory, public evidence has hashes and summary only",
+    "quality": "Whole Source9, class1/four100/currentCRC/one session/strictpost, normal20112/SB20114 reused, exact app init handler/WebCsrfToken/Test",
+    "unaccepted": "Not real CSRF verification/matching/generation, session storage, actual request-chain/Browser or authorization acceptance"
+  },
+  "originalWbsEstimateUnchanged": true
+}

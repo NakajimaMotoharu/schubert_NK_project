@@ -1,0 +1,42 @@
+{
+  "metadataExit": 0,
+  "rawPmd": 6,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "review": [
+    {
+      "rule": "UseConcurrentHashMap",
+      "line": "43",
+      "reason": "Fixture attribute map is created/accessed inside one Callable/test thread; no shared mutable map, preserving request attribute identity scope."
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": "48",
+      "reason": "JDK-only proxy must implement pinned Servlet interface under its defining loader, no J2EE context; correct interface loader is intentional."
+    },
+    {
+      "rule": "CompareObjectsWithEquals",
+      "line": "66",
+      "reason": "Proxy Object.equals handler defines identity; proxy.equals would recursively enter handler, so reference comparison is required."
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": "78",
+      "reason": "JDK-only proxy must implement pinned Servlet interface under its defining loader, no J2EE context; correct interface loader is intentional."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "251",
+      "reason": "Host JUnit own2worker8task/10second joins/try-resource pool, no managed web runtime threads."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "256",
+      "reason": "Host JUnit own2worker8task/10second joins/try-resource pool, no managed web runtime threads."
+    }
+  ],
+  "bug": "BUG-2330",
+  "horizontal": "YKT-2075"
+}

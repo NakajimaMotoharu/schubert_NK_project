@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-06T13:01:28.206">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/FormCsrfRequestPortTest.java">
+<violation beginline="43" endline="43" begincolumn="31" endcolumn="65" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="FormCsrfRequestPortTest.Fixture" variable="attributes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="48" endline="48" begincolumn="15" endcolumn="56" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="FormCsrfRequestPortTest.Fixture" method="asRequest" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="66" endline="66" begincolumn="36" endcolumn="52" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="FormCsrfRequestPortTest.Fixture" method="asRequest" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+<violation beginline="78" endline="78" begincolumn="13" endcolumn="55" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="FormCsrfRequestPortTest" method="response" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="251" endline="251" begincolumn="24" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="FormCsrfRequestPortTest" method="sharedHandlerKeepsParallelRequestAttributesSeparate" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="256" endline="268" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="FormCsrfRequestPortTest" method="sharedHandlerKeepsParallelRequestAttributesSeparate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+</pmd>
