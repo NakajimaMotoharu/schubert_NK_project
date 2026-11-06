@@ -1,0 +1,26 @@
+{
+  "metadataExit": 0,
+  "rawPmd": 2,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "review": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": "385",
+      "method": "parallelViewsKeepActorsSeparate",
+      "reason": "Host JUnit own fixed2 executor/8tasks, try-resource shutdown and each10s join; not production managed servlet threads."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "390",
+      "method": "parallelViewsKeepActorsSeparate",
+      "reason": "Host JUnit own fixed2 executor/8tasks, try-resource shutdown and each10s join; not production managed servlet threads."
+    }
+  ],
+  "bug": "BUG-2324",
+  "horizontal": "YKT-2069",
+  "casefoldFieldMethodIntersection": [],
+  "originalStatic": "PG20282 raw3 preserved; applicable1 name correction only"
+}

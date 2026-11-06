@@ -1,0 +1,32 @@
+{
+  "metadataExit": 0,
+  "rawPmd": 2,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "review": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": "385",
+      "method": "parallelViewsKeepActorsSeparate",
+      "reason": "Host JUnit own fixed2 executor/8tasks, try-resource shutdown and each10s join; not production managed servlet threads."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "390",
+      "method": "parallelViewsKeepActorsSeparate",
+      "reason": "Host JUnit own fixed2 executor/8tasks, try-resource shutdown and each10s join; not production managed servlet threads."
+    }
+  ],
+  "bug": "BUG-2324",
+  "horizontal": "YKT-2069",
+  "casefoldFieldMethodIntersection": [],
+  "originalStatic": "PG20282 raw3 preserved; applicable1 name correction only",
+  "files": {
+    "manifest.safe.json": "ef0780486665e72534242c59fdc9205479631c53f04c4b155a6060b5a0258852",
+    "checkstyle.xml": "dc105cc3e69bc7fc73a476e8861bdf5e4612671a7c6a1eb349956d9216299266",
+    "review.json": "b06314e7ca87e2f7006f181fbfa3c4c323bdb273e3c5cd879a215661ae6f5675",
+    "pmd.xml": "d1fbde0abfd0a4c0bfe92dc41501d14b12046197c361050c2b97707f72c25862"
+  }
+}

@@ -6,6 +6,8 @@ import pg9666_pagination_static as r
 root=Path.cwd();runs=root.parent/'pgpt-runs/PG379';tc=root.parent/'toolchain';jdk=tc/'jdk-25.0.4/bin';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();phase=sys.argv[1];profile=sys.argv[2];external=profile.endswith('.json');assert phase in {'prepare','static','run','post'} and (external or profile in {'range','verified','audit','receipt','login_audit','login_attempt','inbound','snapshot','run_reference','metadata','expiry','backup','batch_run','cleanup_step','cleanup_query','inspection_summary','pressure','topology','acceptor'})
 observationExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/052_api_observation_publication.json','evidence/01_PT/018_NK-OPS-001/input/053_api_observation_publication_style.json'}
 viewProfiles={
+ 'evidence/01_PT/018_NK-OPS-001/input/063_question_list_projection_style.json':('QuestionListViewModel','QuestionListProjectionPortTest'),
+ 'evidence/01_PT/018_NK-OPS-001/input/062_question_list_projection.json':('QuestionListViewModel','QuestionListProjectionPortTest'),
  'evidence/01_PT/018_NK-OPS-001/input/054_question_detail_projection.json':('QuestionDetailViewModel','QuestionDetailProjectionPortTest'),
  'evidence/01_PT/018_NK-OPS-001/input/055_question_detail_projection_style.json':('QuestionDetailViewModel','QuestionDetailProjectionPortTest'),
  'evidence/01_PT/018_NK-OPS-001/input/056_notification_detail_projection.json':('NotificationDetailViewModel','NotificationDetailProjectionPortTest'),
@@ -21,8 +23,8 @@ if external:
  if viewExternal:
   assert externalCfg['module']=='web' and externalCfg['main']==viewProfiles[profile][0] and externalCfg['mainPackage']=='view'
   assert externalCfg['tests']==[viewProfiles[profile][1]] and externalCfg['testPackages']==['view']
-  assert externalCfg['physical']==2 and externalCfg['abstract']==0 and externalCfg['expected']==(14 if externalCfg['main']=='NotificationListViewModel' else 8)
-  assert externalCfg['syntheticNoCode']==['dev/codex/schubert/nk/web/view/'+viewProfiles[profile][0]+'$1']
+  assert externalCfg['abstract']==0
+  assert (externalCfg['physical'],externalCfg['expected'],externalCfg['syntheticNoCode'])==((1,16,[]) if externalCfg['main']=='QuestionListViewModel' else (2,14 if externalCfg['main']=='NotificationListViewModel' else 8,['dev/codex/schubert/nk/web/view/'+viewProfiles[profile][0]+'$1']))
  elif observationExternal:
   assert externalCfg['module']=='api' and externalCfg['main']=='ApiOutboxObservationSource' and externalCfg['mainPackage']=='monitoring'
   assert externalCfg['tests']==['ApiOutboxPublicationPortTest'] and externalCfg['testPackages']==['monitoring']
@@ -64,7 +66,7 @@ if external:
  deps.append(tc/'m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar')
  if observationExternal:
   dependency=tc/'m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar';assert sha(dependency)==cfg['micrometerCoreSha256'];deps.append(dependency)
- if viewExternal and cfg['main']=='NotificationListViewModel':
+ if viewExternal and cfg['main'] in {'NotificationListViewModel','QuestionListViewModel'}:
   reference=root/'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG13218-spotbugs-fresh-aux-plan-recovery-v1/manifest.json';assert sha(reference)=='a60a6ff0579588e9a10b5a2de6b2d2f4587f983408645a87e8cd4c7ad6917564';aux=json.loads(reference.read_text())['auxiliaryClasspathHashes']
   assert len(cfg['uriLibraryDependencies'])==3 and all('/toolchain/m2/repository/' in name and any(v in name for v in ['/spring-core/7.0.9/','/spring-web/7.0.9/','/commons-logging/1.4.0/']) for name in cfg['uriLibraryDependencies'])
   for name,h in cfg['uriLibraryDependencies'].items():assert aux[name]==h==sha(name);deps.append(Path(name))
@@ -176,9 +178,10 @@ if profile in {'expiry','backup','batch_run','cleanup_step','cleanup_query','ins
 if observationExternal:
  initializedApp=set(re.findall(r"Initializing '([^']+)",(slot/'class-init.log').read_text()));assert not any(n.startswith(('io/micrometer/','dev/codex/schubert/nk/storage/','dev/codex/schubert/nk/bootstrap/','org/apache/activemq/')) for n in initializedApp),sorted(initializedApp)
  assert 'dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt' in initializedApp
-if viewExternal and cfg['main']=='NotificationListViewModel':
- initializedPure=set(re.findall(r"Initializing '([^']+)",(slot/'class-init.log').read_text()));unexpected={n for n in initializedPure if n.startswith('dev/codex/schubert/nk/') and not (n.startswith(('dev/codex/schubert/nk/protocol/','dev/codex/schubert/nk/web/view/')) or n in {'dev/codex/schubert/nk/web/form/NotificationSearchForm','dev/codex/schubert/nk/web/session/SessionPrincipal'} or n.startswith(('dev/codex/schubert/nk/web/form/NotificationSearchForm$$Lambda','dev/codex/schubert/nk/web/session/SessionPrincipal$$Lambda')))};assert not unexpected,sorted(unexpected)
- for owner,maximum in [('dev/codex/schubert/nk/web/form/NotificationSearchForm$$Lambda',2),('dev/codex/schubert/nk/web/session/SessionPrincipal$$Lambda',1)]:assert sum(n.startswith(owner) for n in initializedPure)<=maximum
+if viewExternal and cfg['main'] in {'NotificationListViewModel','QuestionListViewModel'}:
+ formClass='dev/codex/schubert/nk/web/form/'+('QuestionSearchForm' if cfg['main']=='QuestionListViewModel' else 'NotificationSearchForm')
+ initializedPure=set(re.findall(r"Initializing '([^']+)",(slot/'class-init.log').read_text()));unexpected={n for n in initializedPure if n.startswith('dev/codex/schubert/nk/') and not (n.startswith(('dev/codex/schubert/nk/protocol/','dev/codex/schubert/nk/web/view/')) or n in {formClass,'dev/codex/schubert/nk/web/session/SessionPrincipal'} or n.startswith((formClass+'$$Lambda','dev/codex/schubert/nk/web/session/SessionPrincipal$$Lambda')))};assert not unexpected,sorted(unexpected)
+ for owner,maximum in [(formClass+'$$Lambda',2),('dev/codex/schubert/nk/web/session/SessionPrincipal$$Lambda',1)]:assert sum(n.startswith(owner) for n in initializedPure)<=maximum
  assert not any(n.startswith(('org/springframework/context/','org/springframework/beans/','org/springframework/web/client/','org/springframework/jdbc/','org/apache/activemq/','io/netty/','com/zaxxer/')) for n in initializedPure)
 physical=m['physical'];assert len(physical)==cfg['physical']
 with zipfile.ZipFile(deps[1]) as z:
