@@ -1,5 +1,10 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-07T04:05:35.802808+09:00 User MVC 参照Bean限定資格
+
+016仕様124/結果125・PMO600076、PG21554新2/FES0/独立21562post0・L2M2C1未網羅0/branch自然零N/A。公開annotation/Bean/null/fresh・2引数read constructor＋固定purpose辞書clinitのみ、管理操作/token/全Controller method/wire/session/DB/ID/実HTTP0。十五依存exact descriptor/共通fixture不変/費用再加算0・新障害0・Main不変。累計50対象新unique375=Java271+HTML97+CSS7、重複Router8別枠、wholeJava83/原282交差63残219/partial18残62。新leaf0/正式1964-53/工数null。
+
+
 ## 2026-11-07T04:01:08.228476+09:00 Notification MVC 参照Bean限定資格
 
 016仕様122/結果123・PMO600074、PG21534新2/FES0/独立21542post0・L2M2C1未網羅0/branch自然零N/A。公開annotation/Bean/null/fresh・2引数read constructorのみ、token/全Controller method/wire/session/DB/ID/実HTTP0。十五依存exact descriptor/共通fixture不変/費用再加算0・新障害0・Main不変。累計49対象新unique373=Java269+HTML97+CSS7、重複Router8別枠、wholeJava82/原282交差62残220/partial18残62。新leaf0/正式1964-53/工数null。
