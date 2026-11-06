@@ -1,5 +1,10 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-07T03:00:09.038494+09:00 停止gate固定callback限定資格
+
+018仕様3594/結果3595・PMO600060、PG21374新6/FES0/独立21382post0・L14M4C1B4未網羅0。固定memory状態だけ・default状態取得classはconstructorのみでread/起動lambda0、実systemctl/OS状態/Unit/VM/Root操作0・Main変更0。累計42対象新unique358=Java254+HTML97+CSS7、追加重複Router8は別枠、wholeJava75/原282交差55残227/partial18残62。新leaf0/正式1964-53/工数null・元candidate監査HOLD保持。
+
+
 ## 2026-11-07T02:47:04.563263+09:00 Router重複選定の是正
 
 015仕様074/結果075・PMO600058、追加PG21342八件/FES0・独立21348post0/L28M4C1B8未網羅0。ただし既20514十件が同Main byteで独立資格済みのため、今回8は重複・新計画/source/unique進捗0。BUG2388/2389・YKT2133/34の有限工具是正、21364管理7成功/静的0をProduct加算0。累計41対象新unique352=Java248+HTML97+CSS7、wholeJava74/原282交差54残228/partial18残62を維持。新leaf0/正式1964-53/工数null。次回候補は最新program結果/manifest lookup/485照合必須。
