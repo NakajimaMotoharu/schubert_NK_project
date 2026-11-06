@@ -1,0 +1,379 @@
+{
+  "schema": "PGPT_APPEND_ONLY_DESCRIPTION_CORRECTION_V1",
+  "atJST": "2026-11-06T22:38:33.727567+09:00",
+  "bug": "BUG-2365",
+  "horizontal": "YKT-2110",
+  "corrections": [
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/input/008_auth_jdbc_independent_post.py",
+      "originalCheckerGit": "d0c727df0d974e2523eff7e9cd9f2c4a2eb01347",
+      "originalCheckerSha256": "428efde54b99d1da56f9d67649ba598f80954a8f021f1892800c2b6f0e43dfd0",
+      "originalManifest": "evidence/01_PT/007_NK-AUT-001/evidence/PG20850-authentication-jdbc-independent-post-v1/manifest.json",
+      "originalManifestSha256": "5d353b3a5ea5a57be2702a9a4f62d282821d4d267bed94893271e442766b4970",
+      "originalSource": "f16526371daf0352925fda5c9686425a64e4a40b",
+      "originalAtJST": "2026-11-06T20:40:54.923500+09:00",
+      "originalPost": {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20840-authentication-verifier-jdbc-six-v1/manifest.json",
+        "sha256": "9ed3f1b415ee21c3439a2be2aa554692ea51f5509c507ebbd3c1d5c51f5adc03"
+      },
+      "measuredProjection": {
+        "schema": "PGPT_PORT_PROJECTION_V1",
+        "source": "f16526371daf0352925fda5c9686425a64e4a40b",
+        "mainSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+        "tests": 6,
+        "testClasses": 1,
+        "fourCounters": {
+          "LINE": 66,
+          "METHOD": 6,
+          "CLASS": 2,
+          "BRANCH": 25
+        },
+        "missed": 0,
+        "physical": 2,
+        "noCodeClasses": [],
+        "selectedMethods": [
+          [
+            "dev.codex.schubert.nk.api.security.AuthenticationVerifierJdbcPortTest",
+            "missingRevokedExpiredAndDisabledRowsNeverReachTouch"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.AuthenticationVerifierJdbcPortTest",
+            "nullColumnsUnknownRoleAffectedRowsAndApiNullsFailClosed"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.AuthenticationVerifierJdbcPortTest",
+            "ordinaryJdbcCloseFaultsPreserveCleanupAndUnknownIdentity"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.AuthenticationVerifierJdbcPortTest",
+            "parallelFreshRowsDoNotShareActorOrTransactionState"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.AuthenticationVerifierJdbcPortTest",
+            "readOnlyPreflightNeverLocksTouchesOrChangesConnectionMode"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.AuthenticationVerifierJdbcPortTest",
+            "writerUsesCurrentActorLockOrderUtcBindingsAndBorrowedTransaction"
+          ]
+        ],
+        "qualificationTransferred": false
+      },
+      "originalChecks": [
+        "original terminal/stages0",
+        "6 XML method bijection/FES0",
+        "all public artifact hashes",
+        "explicit Main/Test Git pins",
+        "separate producer/verifier/config Git pins",
+        "2physical normal jar bytes/CRC/session",
+        "four counters66/6/2/25 miss0",
+        "SDK exact original review",
+        "static raw4 individually nonapplicable",
+        "heldFourZero/no union/no manual exclusion"
+      ],
+      "correctedChecks": [
+        "original terminal/stages0",
+        "6 XML method bijection/FES0",
+        "all public artifact hashes",
+        "explicit Main/Test Git pins",
+        "separate producer/verifier/config Git pins",
+        "2physical normal jar bytes/CRC/session",
+        "four counters66/6/2/25 miss0",
+        "SDK exact original review",
+        "static raw4 individually nonapplicable",
+        "heldFourZero/no union/no manual exclusion"
+      ],
+      "changed": false,
+      "currentCheckerSha256": "6bc7e503e6a5c2fbb3981f61dd97f6634b83e302b1cf61ed35a0f6e313536d8a",
+      "originalUntouched": true
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/input/010_admin_prelude_independent_post.py",
+      "originalCheckerGit": "d0c727df0d974e2523eff7e9cd9f2c4a2eb01347",
+      "originalCheckerSha256": "012c557c978dffb7020c508bfe24986e9b251900bd948d7fb7e5f2f3eb55edcd",
+      "originalManifest": "evidence/01_PT/007_NK-AUT-001/evidence/PG20880-admin-prelude-independent-post-v1/manifest.json",
+      "originalManifestSha256": "fc8355dd4650567ede22bb30ca23b0f5cd1c1addde87566900dd4b8fa49d917f",
+      "originalSource": "14cb941d08f6fde9f9cb5d6aac2d99aabb85db29",
+      "originalAtJST": "2026-11-06T20:55:11.148735+09:00",
+      "originalPost": {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20874-admin-prelude-jdbc-eight-v1/manifest.json",
+        "sha256": "ce7bf008353044a156a102689d02c164888de4825e629b4241039daab7ce1b6e"
+      },
+      "measuredProjection": {
+        "schema": "PGPT_PORT_PROJECTION_V1",
+        "source": "14cb941d08f6fde9f9cb5d6aac2d99aabb85db29",
+        "mainSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+        "tests": 8,
+        "testClasses": 1,
+        "fourCounters": {
+          "LINE": 75,
+          "METHOD": 9,
+          "CLASS": 2,
+          "BRANCH": 48
+        },
+        "missed": 0,
+        "physical": 2,
+        "noCodeClasses": [],
+        "selectedMethods": [
+          [
+            "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+            "allMutationsUseIndependentOrderedPreludeAndUtcBindings"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+            "candidateLookupIsBoundedSingleRowAndNeverAnAuthorityGrant"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+            "lockedOwnerAndFreshVerifiedActorMustMatchTheCandidate"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+            "ordinaryJdbcAndCloseFailuresPreserveBorrowedOwnershipAndRedaction"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+            "parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+            "reducingAdvisoryAndSortedUserRowsRequireExactCardinality"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+            "targetPresenceN12AndNullContractsFailBeforeAnySql"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest",
+            "verifyRequiresFreshAdminButIdentityAloneCannotGrantIt"
+          ]
+        ],
+        "qualificationTransferred": false
+      },
+      "originalChecks": [
+        "original terminal/stages0",
+        "6 XML method bijection/FES0",
+        "all public artifact hashes",
+        "explicit Main/Test Git pins",
+        "separate producer/verifier/config Git pins",
+        "2physical normal jar bytes/CRC/session",
+        "four counters75/9/2/48 miss0",
+        "SDK exact original review",
+        "static raw6 individually nonapplicable",
+        "heldFourZero/no union/no manual exclusion"
+      ],
+      "correctedChecks": [
+        "original terminal/stages0",
+        "8 XML method bijection/FES0",
+        "all public artifact hashes",
+        "explicit Main/Test Git pins",
+        "separate producer/verifier/config Git pins",
+        "2physical normal jar bytes/CRC/session",
+        "four counters75/9/2/48 miss0",
+        "SDK exact original review",
+        "static raw6 individually nonapplicable",
+        "heldFourZero/no union/no manual exclusion"
+      ],
+      "changed": true,
+      "currentCheckerSha256": "c5ee10e10e3224f80af64be5200f0cff67b865c0d46782cbde71c70fb5fb7451",
+      "originalUntouched": true
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/input/012_session_issue_independent_post.py",
+      "originalCheckerGit": "d0c727df0d974e2523eff7e9cd9f2c4a2eb01347",
+      "originalCheckerSha256": "7069e021dae5ee764b0ff1caf07177c45baba20b951eab5c17de4cdc732133bf",
+      "originalManifest": "evidence/01_PT/007_NK-AUT-001/evidence/PG20920-session-issue-independent-post-v1/manifest.json",
+      "originalManifestSha256": "b573d901bee705b5d2c1b8249702c9cdb2187e019e9e53644811288697340f61",
+      "originalSource": "5720b037554171d092eddabcf0a04bfe95897350",
+      "originalAtJST": "2026-11-06T21:20:10.771069+09:00",
+      "originalPost": {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20914-session-issue-jdbc-eight-v1/manifest.json",
+        "sha256": "b51345dd72a3a46cf9d8ead259b301c442c1de7dba965ec75cb3ad7d190554ed"
+      },
+      "measuredProjection": {
+        "schema": "PGPT_PORT_PROJECTION_V1",
+        "source": "5720b037554171d092eddabcf0a04bfe95897350",
+        "mainSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+        "tests": 8,
+        "testClasses": 1,
+        "fourCounters": {
+          "LINE": 69,
+          "METHOD": 3,
+          "CLASS": 1,
+          "BRANCH": 20
+        },
+        "missed": 0,
+        "physical": 1,
+        "noCodeClasses": [],
+        "selectedMethods": [
+          [
+            "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+            "absentDisabledAndMissingColumnsFailBeforeIssuanceOrReplacement"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+            "dif016RetainsTwoAndReplacesOldestWithAtomicAuditStaging"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+            "insertReplacementAndAuditRequireExactlyOneAffectedRow"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+            "insertsIndependentEnvelopeHashUtcAndEightHourExpiry"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+            "ordinaryJdbcAndEveryOwnedCloseFailWithFixedRedaction"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+            "parallelPrivateFixturesDoNotShareContextBuffersOrAuditState"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+            "publicAndInjectedConstructorsAndApiNullBoundsAreExplicit"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+            "randomCodecAndUnknownRuntimeFailuresKeepBuffersAndIdentity"
+          ]
+        ],
+        "qualificationTransferred": false
+      },
+      "originalChecks": [
+        "original terminal/stages0",
+        "6 XML method bijection/FES0",
+        "all public artifact hashes",
+        "explicit Main/Test Git pins",
+        "separate producer/verifier/config Git pins",
+        "2physical normal jar bytes/CRC/session",
+        "four counters69/3/1/20 miss0",
+        "SDK exact original review",
+        "static raw5 individually nonapplicable",
+        "heldFourZero/no union/no manual exclusion"
+      ],
+      "correctedChecks": [
+        "original terminal/stages0",
+        "8 XML method bijection/FES0",
+        "all public artifact hashes",
+        "explicit Main/Test Git pins",
+        "separate producer/verifier/config Git pins",
+        "1physical normal jar bytes/CRC/session",
+        "four counters69/3/1/20 miss0",
+        "SDK exact original review",
+        "static raw5 individually nonapplicable",
+        "heldFourZero/no union/no manual exclusion"
+      ],
+      "changed": true,
+      "currentCheckerSha256": "d21f57ad36f855b67eb0818bcba1989d913c53ebe2fc5716f66a31999619c18c",
+      "originalUntouched": true
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/input/015_session_revocation_independent_post.py",
+      "originalCheckerGit": "d0c727df0d974e2523eff7e9cd9f2c4a2eb01347",
+      "originalCheckerSha256": "d6afb4998db0490a3facbdb9b561c51e48603933ef9be583bec4abf53f838f18",
+      "originalManifest": "evidence/01_PT/007_NK-AUT-001/evidence/PG20964-session-revocation-independent-post-v1/manifest.json",
+      "originalManifestSha256": "478831522707b849ab95ea59d0e6306296be64c58d8b15f20f9de4cb911928d2",
+      "originalSource": "3a2c29bd755f0ed6158464ad3b5715bc51be4617",
+      "originalAtJST": "2026-11-06T22:06:54.861513+09:00",
+      "originalPost": {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20958-session-revocation-oracle-fixed-eight-v1/manifest.json",
+        "sha256": "4c312a768b0a51edf5ae7efce76bc4023c3b1e453f4cf16bdd82b3128ac69d95"
+      },
+      "measuredProjection": {
+        "schema": "PGPT_PORT_PROJECTION_V1",
+        "source": "3a2c29bd755f0ed6158464ad3b5715bc51be4617",
+        "mainSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+        "tests": 8,
+        "testClasses": 1,
+        "fourCounters": {
+          "LINE": 110,
+          "METHOD": 7,
+          "CLASS": 1,
+          "BRANCH": 36
+        },
+        "missed": 0,
+        "physical": 1,
+        "noCodeClasses": [],
+        "selectedMethods": [
+          [
+            "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest",
+            "administrativeRevocationStagesEachTargetInFixedOrderForAllowedReasons"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest",
+            "affectedSqlAndEveryCloseFailureRemainUnsuccessfulAndRedacted"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest",
+            "alreadyRevokedReturnsOriginalInstantWithoutTouchOrPrincipal"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest",
+            "boundaryNullOwnerReasonAndCurrentAdminContractsPrecedeSql"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest",
+            "expiryDisabledAbsentAndNullRowsFailClosedWithRequiredAuditOnly"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest",
+            "invalidValuesAndUnknownProviderExceptionsKeepTheirDefinedBoundary"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest",
+            "logoutSamplesCurrentClockAfterBothLocksAndStagesExactUtcAudit"
+          ],
+          [
+            "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest",
+            "sharedServiceParallelCallsRetainOwnResultCorrelationAndResourceState"
+          ]
+        ],
+        "qualificationTransferred": false
+      },
+      "originalChecks": [
+        "original terminal/stages0",
+        "6 XML method bijection/FES0",
+        "all public artifact hashes",
+        "explicit Main/Test Git pins",
+        "separate producer/verifier/config Git pins",
+        "2physical normal jar bytes/CRC/session",
+        "four counters110/7/1/36 miss0",
+        "SDK exact original review",
+        "static raw6 individually nonapplicable",
+        "heldFourZero/no union/no manual exclusion"
+      ],
+      "correctedChecks": [
+        "original terminal/stages0",
+        "8 XML method bijection/FES0",
+        "all public artifact hashes",
+        "explicit Main/Test Git pins",
+        "separate producer/verifier/config Git pins",
+        "1physical normal jar bytes/CRC/session",
+        "four counters110/7/1/36 miss0",
+        "SDK exact original review",
+        "static raw6 individually nonapplicable",
+        "heldFourZero/no union/no manual exclusion"
+      ],
+      "changed": true,
+      "currentCheckerSha256": "2217a5fce08a17edfeffc3a0e3a001eaf8b59d0b2d9ed21d73fea0bcf89222b9",
+      "originalUntouched": true
+    }
+  ],
+  "metadataTests": 6,
+  "actualExit": 0,
+  "productTestsReexecuted": 0,
+  "newProductTests": 0,
+  "newAcceptance": 0,
+  "newCoverage": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "costReallocation": false,
+  "priorResultPreserved": true,
+  "files": {
+    "metadata-test-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "metadata-test-stderr.txt": "6c34b14b50ab93841b89588759f7f5369835366e364443a4e70addaf796fc35b",
+    "metadata-test-manifest.json": "3823a881bd0a54c22baf66884d6741846e429d848006f96582a3cd53a803f70c"
+  }
+}

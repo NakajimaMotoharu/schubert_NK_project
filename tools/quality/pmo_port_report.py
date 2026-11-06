@@ -76,3 +76,29 @@ def render_port(projection, evidence_path, evidence_hash, spec_path):
             f"manifest: {evidence_path}\nSHA256: {evidence_hash}\n\n"
             "この文書は独立後検証済みmanifestの数値projectionであり、source/依存/独立oracle/後条件の資格認定は別途必要。"
             "個別WBS受入・正式1964PT/53scope・工数完成率・全451・IT/STは更新しない。\n")
+
+
+def port_check_labels(projection, pmd_raw):
+    """Describe already checked measurements, without reading or reexecuting anything."""
+    require(isinstance(projection, dict) and projection.get('schema') == 'PGPT_PORT_PROJECTION_V1', 'validated port projection required')
+    count, physical = projection.get('tests'), projection.get('physical')
+    four, no_code = projection.get('fourCounters'), projection.get('noCodeClasses')
+    require(integer(count) and count > 0 and integer(physical) and physical > 0, 'explicit positive measured counts required')
+    require(integer(pmd_raw), 'explicit nonnegative raw static count required')
+    require(isinstance(no_code, list) and all(isinstance(x, str) for x in no_code) and len(set(no_code)) == len(no_code), 'explicit unique no-code class list required')
+    require(isinstance(four, dict) and set(four) == {'LINE', 'METHOD', 'CLASS', 'BRANCH'} and all(integer(x) for x in four.values()), 'all four measured counters required')
+    require(four['CLASS'] == physical - len(no_code), 'physical and executable class counts must agree')
+    counters = '/'.join(str(four[k]) for k in ('LINE', 'METHOD', 'CLASS', 'BRANCH'))
+    return ['original terminal/stages0', f'{count} XML method bijection/FES0',
+            'all public artifact hashes', 'explicit Main/Test Git pins',
+            'separate producer/verifier/config Git pins',
+            f'{physical}physical normal jar bytes/CRC/session',
+            f'four counters{counters} miss0', 'SDK exact original review',
+            f'static raw{pmd_raw} individually nonapplicable',
+            'heldFourZero/no union/no manual exclusion']
+
+
+def validate_port_check_labels(projection, pmd_raw, labels):
+    """Reject stale prose independently of the numerical projection's validity."""
+    require(isinstance(labels, list) and labels == port_check_labels(projection, pmd_raw),
+            'check descriptions must match measured tests, physical classes and counters')
