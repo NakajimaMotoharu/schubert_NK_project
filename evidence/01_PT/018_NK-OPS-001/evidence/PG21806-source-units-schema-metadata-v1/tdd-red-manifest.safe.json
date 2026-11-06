@@ -1,0 +1,35 @@
+{
+  "actualExit": 1,
+  "expectedUnimplementedTddRed": true,
+  "newMetadataTests": 10,
+  "productTests": 0,
+  "stage": {
+    "actualExit": 1,
+    "timedOut": false,
+    "startUTC": "2026-11-06T21:35:26.957764+00:00",
+    "endUTC": "2026-11-06T21:35:27.073467+00:00",
+    "command": [
+      "env",
+      "PYTHONPATH=tools/quality:tools/quality/tests",
+      "python3",
+      "-B",
+      "-m",
+      "unittest",
+      "-v",
+      "test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_exact_class_pin_and_normal_identity",
+      "test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_failure_and_changed_bytes_stay_visible",
+      "test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_partial_and_missing_branch_are_not_full",
+      "test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_missing_fields_do_not_fall_back_or_guess",
+      "test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_ambiguous_class_and_source_pin_rejected",
+      "test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_unsafe_paths_or_incorrect_module_namespace_rejected",
+      "test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_malformed_hash_crc_and_aggregate_scope_rejected",
+      "test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_tool_main_path_is_explicitly_supported",
+      "test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_test_pin_cannot_masquerade_as_main",
+      "test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_never_transfer_source_or_permission"
+    ],
+    "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSha256": "e6c3a5600a18d8e12bdd309c03ac006f5e0ff68ac591a6e3fb4673e99740b01a"
+  },
+  "testSourceSha256": "f94f806a5f5ee558de4f5aa432c32ba9795ee1912a45a2282ddb904c0a6105d0"
+}

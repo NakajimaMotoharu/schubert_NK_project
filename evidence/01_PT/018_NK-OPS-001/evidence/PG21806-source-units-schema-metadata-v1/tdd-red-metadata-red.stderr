@@ -1,0 +1,60 @@
+test_source_units_exact_class_pin_and_normal_identity (test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_exact_class_pin_and_normal_identity) ... ERROR
+test_source_units_failure_and_changed_bytes_stay_visible (test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_failure_and_changed_bytes_stay_visible) ... ERROR
+test_source_units_partial_and_missing_branch_are_not_full (test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_partial_and_missing_branch_are_not_full) ... ERROR
+test_source_units_missing_fields_do_not_fall_back_or_guess (test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_missing_fields_do_not_fall_back_or_guess) ... ok
+test_source_units_ambiguous_class_and_source_pin_rejected (test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_ambiguous_class_and_source_pin_rejected) ... ok
+test_source_units_unsafe_paths_or_incorrect_module_namespace_rejected (test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_unsafe_paths_or_incorrect_module_namespace_rejected) ... ok
+test_source_units_malformed_hash_crc_and_aggregate_scope_rejected (test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_malformed_hash_crc_and_aggregate_scope_rejected) ... ok
+test_source_units_tool_main_path_is_explicitly_supported (test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_tool_main_path_is_explicitly_supported) ... ERROR
+test_source_units_test_pin_cannot_masquerade_as_main (test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_test_pin_cannot_masquerade_as_main) ... ok
+test_source_units_never_transfer_source_or_permission (test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_never_transfer_source_or_permission) ... ERROR
+
+======================================================================
+ERROR: test_source_units_exact_class_pin_and_normal_identity (test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_exact_class_pin_and_normal_identity)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/tests/test_pgpt_program_proof_lookup.py", line 114, in test_source_units_exact_class_pin_and_normal_identity
+    self.assertEqual('SOURCE_UNITS_SOURCE_PINS',row['evidenceSchema'])
+                                                ~~~^^^^^^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+ERROR: test_source_units_failure_and_changed_bytes_stay_visible (test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_failure_and_changed_bytes_stay_visible)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/tests/test_pgpt_program_proof_lookup.py", line 124, in test_source_units_failure_and_changed_bytes_stay_visible
+    self.assertEqual(143,row['originalExit'])
+                         ~~~^^^^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+ERROR: test_source_units_partial_and_missing_branch_are_not_full (test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_partial_and_missing_branch_are_not_full)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/tests/test_pgpt_program_proof_lookup.py", line 130, in test_source_units_partial_and_missing_branch_are_not_full
+    self.assertFalse(candidate(value,'Port','a'*64)['allFourMissedZero'])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+ERROR: test_source_units_tool_main_path_is_explicitly_supported (test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_tool_main_path_is_explicitly_supported)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/tests/test_pgpt_program_proof_lookup.py", line 171, in test_source_units_tool_main_path_is_explicitly_supported
+    self.assertEqual('program/characterization/src/main/java/pkg/Port.java',row['mainPath'])
+                                                                            ~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+ERROR: test_source_units_never_transfer_source_or_permission (test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_source_units_never_transfer_source_or_permission)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/tests/test_pgpt_program_proof_lookup.py", line 183, in test_source_units_never_transfer_source_or_permission
+    self.assertFalse(row['wholeSourceQualificationInferred'])
+                     ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.001s
+
+FAILED (errors=5)

@@ -1,0 +1,203 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T06:37:04.211246+09:00",
+  "source": "0b0c319b2888177d76febcc95e57aad3fbeef0bd",
+  "begin": {
+    "source": "0b0c319b2888177d76febcc95e57aad3fbeef0bd",
+    "atUTC": "2026-11-06T21:37:04.021955+00:00",
+    "inputHashes": {
+      "tools/quality/pgpt_program_proof_lookup.py": "5bfbb21c4660aed05faf3a6d2a07cceececad7872e6f7c028d6f1f4a54e41b76",
+      "tools/quality/tests/test_pgpt_program_proof_lookup.py": "f94f806a5f5ee558de4f5aa432c32ba9795ee1912a45a2282ddb904c0a6105d0",
+      "evidence/01_PT/018_NK-OPS-001/3614_公開sourceUnits証拠形式の限定対応仕様.md": "14b2fc225ae560411f59d01b28978f11888d5c49312faf9702eec18de6ab03e6",
+      "evidence/01_PT/018_NK-OPS-001/input/145_source_units_schema_metadata_qualifier.py": "f26380bcf4048c8bf20229fa112e3039d2129d7bd240ea9b5621e1fb79552571"
+    },
+    "os": "Linux-7.0.0-42-generic-x86_64-with-glibc2.43",
+    "pythonVersion": "3.14.4",
+    "productTests": 0,
+    "metadataTests": 25
+  },
+  "stages": {
+    "python-static": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T21:37:04.025552+00:00",
+      "endUTC": "2026-11-06T21:37:04.140424+00:00",
+      "command": [
+        "env",
+        "PYTHONPATH=/home/mini/codex/project1/work/toolchain/pyflakes-3.4.0/runtime",
+        "python3",
+        "-B",
+        "-m",
+        "pyflakes",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/pgpt_program_proof_lookup.py",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/tests/test_pgpt_program_proof_lookup.py",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/145_source_units_schema_metadata_qualifier.py"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "metadata": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T21:37:04.140734+00:00",
+      "endUTC": "2026-11-06T21:37:04.205272+00:00",
+      "command": [
+        "env",
+        "PYTHONPATH=tools/quality",
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/quality/tests",
+        "-p",
+        "test_pgpt_program_proof_lookup.py",
+        "-v"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "97fb76dd9b868d7a6f2ae0ea8a6379c15b88b48ebb52e23be968b7f03b422a32"
+    }
+  },
+  "files": {
+    "python-static-exit.safe.json": "05f013249da48b54dd814786e386ddd6572b8c5c56571597f701ad0b43091511",
+    "metadata.stderr": "97fb76dd9b868d7a6f2ae0ea8a6379c15b88b48ebb52e23be968b7f03b422a32",
+    "python-static.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "python-static.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "metadata-begin.safe.json": "3e445fd1cfe5ba94ab0820c6fa40403ae25f4d22918f8b22b6292806b92fc876",
+    "metadata.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "begin.json": "3b4922490024ad849110037f0fdf1f8dd2afa0544a70ec4d0794dc398f076f2d",
+    "metadata-process.safe.json": "92b9384d07a473d16f9377ed877dfc6dd34f28c966a7936ffc4c8dbb77535d6c",
+    "python-static-process.safe.json": "004adf30bcd7f13e5add5c5e66245f831d26e6bc2cc7bc23cbc4422653446c4c",
+    "metadata-exit.safe.json": "d8f8de25da53a1ab5f2a095994c497585c4a97122e7ae5b77920603ee6cfd7d3",
+    "python-static-begin.safe.json": "a20414444d38a5644127ab1f3091af96ffdf5ef9bee28e9f8ef5d7d02e009421",
+    "tdd-red-manifest.safe.json": "13c7d0df92d0258ba9b9a5e10e0d55be59d4d37925bb204bf2aa9ad2548d833a",
+    "tdd-red-metadata-red.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tdd-red-metadata-red.stderr": "e6c3a5600a18d8e12bdd309c03ac006f5e0ff68ac591a6e3fb4673e99740b01a"
+  },
+  "newMetadataTests": 10,
+  "necessaryExistingMetadataRegression": 15,
+  "totalMetadataTests": 25,
+  "productTests": 0,
+  "originalReceipt": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18644-jms-uuid-normal-post-v1/manifest.json",
+    "sha256": "5cafcb6a2f2d4a8b61dcc33a614de0338b5e4dc99980da102a10a1f0ea8d3ba6",
+    "source": "b09393b0e746b55fd480176d57996d65bd76a95d",
+    "originalTests": 14
+  },
+  "normalManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/manifest.safe.json",
+    "sha256": "1db34d8f2ccee9fc90244bea86c3e446be0c0e010c66516a1e25c92df3426618"
+  },
+  "qualifiedMetadataCandidates": [
+    {
+      "className": "JmsMessageGuard",
+      "module": "api",
+      "physicalCurrentNormalBound": true,
+      "proof": {
+        "source": "b09393b0e746b55fd480176d57996d65bd76a95d",
+        "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard.java",
+        "mainSha256": "68f3ac3e1ddba2e6e3afac97303a04b58b652c3cc357b4afed82d2bf85cd77ed",
+        "currentMainByteEqual": true,
+        "originalExit": 0,
+        "tests": 14,
+        "fourCounters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 255
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 42
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 66
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 31
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 10
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "allFourMissedZero": true,
+        "lineMethodClassMissedZero": true,
+        "evidenceSchema": "SOURCE_UNITS_SOURCE_PINS",
+        "branchAssessment": "MEASURED_COUNTER",
+        "declaredNormalClassSha256": "8f43baae80f92e683ef0c0d592516f402945c481068dec6f8e3e0525da797191",
+        "declaredCrc64": "10d925165591aabd",
+        "counterScope": "NAMED_CLASS_OR_METHOD_SUBSET_COUNTERS",
+        "wholeSourceQualificationInferred": false,
+        "acceptanceInferred": false,
+        "permissionInferred": false
+      }
+    },
+    {
+      "className": "JmsReplyDecoder",
+      "module": "web",
+      "physicalCurrentNormalBound": true,
+      "proof": {
+        "source": "b09393b0e746b55fd480176d57996d65bd76a95d",
+        "mainPath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoder.java",
+        "mainSha256": "fe609be3a5742587cfa6594691ee2c82fae3dc393e94f5fb0783113a88e21da2",
+        "currentMainByteEqual": true,
+        "originalExit": 0,
+        "tests": 14,
+        "fourCounters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 268
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 40
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 70
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 30
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 10
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "allFourMissedZero": true,
+        "lineMethodClassMissedZero": true,
+        "evidenceSchema": "SOURCE_UNITS_SOURCE_PINS",
+        "branchAssessment": "MEASURED_COUNTER",
+        "declaredNormalClassSha256": "669807892f6ccb050fcf6392ade93a4b29930b39070e2d0cfea833486d6c0ebd",
+        "declaredCrc64": "8f2ccd699ecb1e73",
+        "counterScope": "NAMED_CLASS_OR_METHOD_SUBSET_COUNTERS",
+        "wholeSourceQualificationInferred": false,
+        "acceptanceInferred": false,
+        "permissionInferred": false
+      }
+    }
+  ],
+  "lookupFullScanRepeated": false,
+  "oldProductTestsReplayed": false,
+  "newMethods": 0,
+  "newSourceProofs": 0,
+  "newAcceptance": 0,
+  "wholeSourceQualificationInferred": false,
+  "wholeG13Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null
+}
