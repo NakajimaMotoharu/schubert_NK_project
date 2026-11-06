@@ -1,0 +1,102 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T08:23:38.341684+09:00",
+  "source": "4d113c975a43bfb5bf25b66c446efa36a685a05b",
+  "productionCoreMain": "56720d75714f60d7e31da59c3da8c02baf05de52",
+  "inputHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntimeTest.java": "333e0a6bfd79fc1435359c6a1095bb6f6f551d2d567a30adf2efa103a7d99bda",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumersTest.java": "ade64550211c79c0ec0381ba271af5ce0c6c55b65bc92326517b53007eade135",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumersTest.java": "e4dd867d832ab7d3f57d5cf4adf1ddac29e6da26f9a5effe1a53ab9275eada1b",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumersTest.java": "73beedcffb51fbb0a4611c8c58457254a85886807756bfd39249ba4085feb87c",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InternalEventListenerTest.java": "6683710b7186b2b5f2f12015cc77efe3ffd475ce24c40418e2a33c87bdc4a1ce",
+    "evidence/01_PT/005_NK-MSG-001/026_APIconsumer停止fanout是正・独立PT仕様.md": "9251d2f189b1c5b59cba238a776ae78312df72759a8e798719a37664706e269c",
+    "evidence/01_PT/005_NK-MSG-001/028_停止fanout六PT設計レビュー・既28method対応.md": "7a2f87c4351a586211070c64c959f6bc4de4b24a4400c0b8c71eec7f83668715",
+    "evidence/01_PT/005_NK-MSG-001/input/028_consumer_stop_six_test_design_binding.py": "c6b0d89c0cc933adb90a5d3449a5218a0fbe2bacb0326d2a31d8ab1c0b1c232f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java": "a23b448ccf004cf49925c662d05fad65c65ad678885c7ba2dedfd88c4eff7fd4",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers.java": "41ec51edcf2c353efc87c6e130c1f53f5bb57001feb878d20f400592edbbecee",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java": "08a590ebc3ab4dd19cc06d4f89fa598ca5eb8458f14d406910e63139cabc01f7",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers.java": "47f4c3f1f56ce340dc578d84ea506c5b0d596c62cb99bfacccf932985ebf1494",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundConsumerGroup.java": "a540f01769d36ddfcd0747c1c37097fd823757c8b95b7277e9b24d67a3bf2766"
+  },
+  "existingTestMethodsDesignOnly": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntimeTest.java": [
+      "core001ActualSixContextsThirdFifoProfileAndOneFatalAcrossThreeQueues",
+      "core002EveryPartialFactoryRuntimeOrFatalReleasesAllEarlierContexts",
+      "core003CompleteNullPortsFailBeforeOpeningAnyContext",
+      "approvedSyncAndWebLogProfilesHaveSeparateRuntimeSuppliers",
+      "opensFiveConsumersAndSignalsOneTerminalAcrossGroups",
+      "validatesAllPortsBeforeOpeningAnyContext",
+      "fifthContextFailureClosesFourEarlierContexts",
+      "failedSecondStartupPreservesFirstCloseFailure",
+      "closeAttemptsBothGroupsAndPreservesBothFailures",
+      "closeHandlesOnlySyncFailure"
+    ],
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumersTest.java": [
+      "fourConsumersReceiveAndCommitOneReply",
+      "invalidMessageCommitsToDlqAndSignalsTerminal",
+      "temporaryBusinessFailureRollsBackAndRedelivers",
+      "closeIsIdempotentAndAggregatesAllContextFailures",
+      "failedStartupPreservesClosingFailureAsSuppressed",
+      "partialStartupRejectsWrongSessionAndClosesAll"
+    ],
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumersTest.java": [
+      "jmsown002AcquisitionFailureAndNullKeepIdentityWithoutFatalNotification",
+      "oneConsumerCommitsValidatedWebLog",
+      "temporaryProcessorFailureRollsBackAndRedelivers",
+      "permanentInvalidEventsCommitDlqAndSignalTerminalOnce",
+      "startupRejectsNullAndWrongModeBeforeDelivery",
+      "closeIsIdempotentAndStartupPreservesCloseFailure"
+    ],
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumersTest.java": [
+      "jmsown001AcquisitionFailureAndNullKeepIdentityWithoutFatalNotification",
+      "core008SameCloseThrowableNeverSuppressesItselfOrSkipsLaterContexts",
+      "core007AllPartialOwnersSignalStopBeforeCloseAndPreserveNotificationFaults",
+      "core004EveryPartialContextStageClosesAndFatalPriorityIsPreserved",
+      "core005ActualErrorRollbackNeverAcknowledgesOrLeaksBusinessContinuation",
+      "core006NullPortsAndFactoryDoNotGrantReady"
+    ]
+  },
+  "existingTestDesignMethodCount": 28,
+  "newPendingTestIds": [
+    "PT-JMS-STOP-GROUP001",
+    "PT-JMS-STOP-GROUP002",
+    "PT-JMS-STOP-GROUP003",
+    "PT-JMS-STOP-GROUP004",
+    "PT-JMS-STOP-GROUP005",
+    "PT-JMS-STOP-GROUP006"
+  ],
+  "newTestStatuses": {
+    "PT-JMS-STOP-GROUP001": "NOT_RUN_HOLD",
+    "PT-JMS-STOP-GROUP002": "NOT_RUN_HOLD",
+    "PT-JMS-STOP-GROUP003": "NOT_RUN_HOLD",
+    "PT-JMS-STOP-GROUP004": "NOT_RUN_HOLD",
+    "PT-JMS-STOP-GROUP005": "NOT_RUN_HOLD",
+    "PT-JMS-STOP-GROUP006": "NOT_RUN_HOLD"
+  },
+  "helperBodyReview": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InternalEventListenerTest.java",
+    "methods": [
+      "queue",
+      "sendEvent",
+      "eventWire",
+      "ascii",
+      "start"
+    ],
+    "wholeTestClassReviewed": false
+  },
+  "oldTransportFixtureNotTypedBusinessProof": true,
+  "productTestsExecuted": 0,
+  "newProductTests": 0,
+  "newMethods": 0,
+  "newSourceProofs": 0,
+  "newAcceptance": 0,
+  "coverage": null,
+  "bugsRemainOpen": [
+    "BUG-2407",
+    "YKT-2152"
+  ],
+  "ptExecutionExempt": false,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null
+}
