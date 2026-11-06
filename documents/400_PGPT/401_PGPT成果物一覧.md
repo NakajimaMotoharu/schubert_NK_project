@@ -1,5 +1,10 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-07T03:07:44.389369+09:00 不正session行例外 固定診断限定資格
+
+015仕様076/結果077・PMO600062、PG21394新2/FES0/独立21402post0・L1M1C1未網羅0/branch自然零N/A。SSE constructorだけ・graph0、実DB/session行・provider情報/RootVM0・Main変更0。累計43対象新unique360=Java256+HTML97+CSS7、重複Router8別枠、wholeJava76/原282交差56残226/partial18残62。新leaf0/正式1964-53/工数null。
+
+
 ## 2026-11-07T03:00:09.038494+09:00 停止gate固定callback限定資格
 
 018仕様3594/結果3595・PMO600060、PG21374新6/FES0/独立21382post0・L14M4C1B4未網羅0。固定memory状態だけ・default状態取得classはconstructorのみでread/起動lambda0、実systemctl/OS状態/Unit/VM/Root操作0・Main変更0。累計42対象新unique358=Java254+HTML97+CSS7、追加重複Router8は別枠、wholeJava75/原282交差55残227/partial18残62。新leaf0/正式1964-53/工数null・元candidate監査HOLD保持。
