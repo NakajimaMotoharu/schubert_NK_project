@@ -1,0 +1,39 @@
+Compiled from "JdbcOutboxRepository.java"
+public final class dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxRepository {
+  private final java.util.function.IntSupplier jitterPermille;
+    descriptor: Ljava/util/function/IntSupplier;
+  private static final java.lang.String CLAIM_SQL = "with due as (select id from schubert.mq_outbox where status in ('PENDING','ERROR') and next_attempt_at<=? and (lease_until is null or lease_until<?) order by next_attempt_at,id for update skip locked limit ?) update schubert.mq_outbox o set lease_owner=?,lease_until=? from due where o.id=due.id returning o.id,o.message_id,o.correlation_id,o.destination,o.layout_id,o.layout_version,o.body,o.attempt_count,o.next_attempt_at,o.created_at,o.lease_owner,o.lease_until,o.dlq_original_message_id,o.dlq_original_transport_id,o.dlq_delivery_count,o.dlq_error_code,o.dlq_detected_at";
+    descriptor: Ljava/lang/String;
+  public dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxRepository();
+    descriptor: ()V
+
+  public dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxRepository(java.util.function.IntSupplier);
+    descriptor: (Ljava/util/function/IntSupplier;)V
+
+  public long enqueue(java.sql.Connection, dev.codex.schubert.nk.api.messaging.outbound.OutboxRequest) throws java.sql.SQLException;
+    descriptor: (Ljava/sql/Connection;Ldev/codex/schubert/nk/api/messaging/outbound/OutboxRequest;)J
+
+  public java.util.List<dev.codex.schubert.nk.api.messaging.outbound.OutboxEntry> claim(java.sql.Connection, java.lang.String, java.time.Instant, int) throws java.sql.SQLException;
+    descriptor: (Ljava/sql/Connection;Ljava/lang/String;Ljava/time/Instant;I)Ljava/util/List;
+
+  public boolean markSent(java.sql.Connection, dev.codex.schubert.nk.api.messaging.outbound.OutboxEntry, java.time.Instant) throws java.sql.SQLException;
+    descriptor: (Ljava/sql/Connection;Ldev/codex/schubert/nk/api/messaging/outbound/OutboxEntry;Ljava/time/Instant;)Z
+
+  public boolean markFailure(java.sql.Connection, dev.codex.schubert.nk.api.messaging.outbound.OutboxEntry, java.time.Instant, java.lang.String, java.lang.String) throws java.sql.SQLException;
+    descriptor: (Ljava/sql/Connection;Ldev/codex/schubert/nk/api/messaging/outbound/OutboxEntry;Ljava/time/Instant;Ljava/lang/String;Ljava/lang/String;)Z
+
+  static dev.codex.schubert.nk.api.messaging.outbound.OutboxEntry read(java.sql.ResultSet) throws java.sql.SQLException;
+    descriptor: (Ljava/sql/ResultSet;)Ldev/codex/schubert/nk/api/messaging/outbound/OutboxEntry;
+
+  private static java.util.Optional<dev.codex.schubert.nk.api.messaging.outbound.OutboxDlqMetadata> readDlqMetadata(java.sql.ResultSet) throws java.sql.SQLException;
+    descriptor: (Ljava/sql/ResultSet;)Ljava/util/Optional;
+
+  private static void requireTransaction(java.sql.Connection) throws java.sql.SQLException;
+    descriptor: (Ljava/sql/Connection;)V
+
+  private static java.lang.String requireError(java.lang.String, int, java.lang.String);
+    descriptor: (Ljava/lang/String;ILjava/lang/String;)Ljava/lang/String;
+
+  private static int lambda$new$0();
+    descriptor: ()I
+}
