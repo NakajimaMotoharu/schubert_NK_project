@@ -123,9 +123,12 @@ for row in m['rows']:
         else:
             for raw, pin in old['originalXmlPins'].items():
                 cp = oldp.parent/Path(raw).name
-                if not cp.is_file():
+                public_pin = old['files'].get(Path(raw).name)
+                if public_pin is not None:
+                    assert cp.is_file() and sha(cp) == public_pin
+                else:
                     cp = Path(raw)
-                assert sha(cp) == pin
+                    assert sha(cp) == pin
                 case_paths.append(cp)
         cases = []
         for cp in case_paths:
