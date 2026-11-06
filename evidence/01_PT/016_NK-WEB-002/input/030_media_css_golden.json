@@ -1,0 +1,197 @@
+{
+  "marker": "BUG2350/YKT2095 retained Current video/music CSS",
+  "before": {
+    "source": "70fb6768e76564022901874e294a659e2fe1506f",
+    "sha256": "1466825b3caeb2654a181cd88356e4b6599e0549bf527a81f5826fef6d34a11d",
+    "snapshot": "evidence/01_PT/016_NK-WEB-002/evidence/PG20698-css-contract-preflight-v1/source-before.css"
+  },
+  "current": {
+    "path": "/home/mini/codex/project1/schubert_project/program/app/src/main/resources/static/styles.css",
+    "sha256": "bf146326fc9fbb72474cbcc31c2fc9b860d6b9aa9b42ac350be8f0e99fe770e7",
+    "sourceKind": "PUBLIC_PROGRAM_STYLESHEET_READONLY_NOT_MASTER_DATA"
+  },
+  "rules": [
+    {
+      "case": 1,
+      "context": [],
+      "selector": ".video-page",
+      "properties": {
+        "max-width": "1280px"
+      }
+    },
+    {
+      "case": 2,
+      "context": [],
+      "selector": ".video-shell",
+      "properties": {
+        "background": "#111",
+        "border": "1px solid #2f3338",
+        "border-radius": "8px",
+        "overflow": "hidden"
+      }
+    },
+    {
+      "case": 3,
+      "context": [],
+      "selector": ".video-shell video",
+      "properties": {
+        "display": "block",
+        "width": "100%",
+        "max-height": "calc(100vh - 150px)",
+        "background": "#000",
+        "aspect-ratio": "16 / 9"
+      }
+    },
+    {
+      "case": 4,
+      "context": [],
+      "selector": ".music-list",
+      "properties": {
+        "display": "grid",
+        "gap": "8px"
+      }
+    },
+    {
+      "case": 4,
+      "context": [],
+      "selector": ".music-row",
+      "properties": {
+        "display": "grid",
+        "grid-template-columns": "minmax(0, 1fr) 320px",
+        "align-items": "center",
+        "gap": "14px",
+        "padding": "13px 14px",
+        "background": "#fff",
+        "border": "1px solid #dde1e6",
+        "border-radius": "8px"
+      }
+    },
+    {
+      "case": 4,
+      "context": [],
+      "selector": ".music-info",
+      "properties": {
+        "display": "grid",
+        "gap": "7px",
+        "min-width": "0"
+      }
+    },
+    {
+      "case": 4,
+      "context": [],
+      "selector": ".music-info strong",
+      "properties": {
+        "overflow-wrap": "anywhere"
+      }
+    },
+    {
+      "case": 5,
+      "context": [],
+      "selector": ".music-player, .song-player",
+      "properties": {
+        "display": "grid",
+        "grid-template-columns": "minmax(0, 1fr) auto",
+        "align-items": "center",
+        "gap": "8px",
+        "min-width": "0"
+      }
+    },
+    {
+      "case": 5,
+      "context": [],
+      "selector": ".music-player audio, .song-player audio",
+      "properties": {
+        "width": "100%",
+        "max-width": "100%",
+        "height": "34px"
+      }
+    },
+    {
+      "case": 5,
+      "context": [],
+      "selector": ".song-row",
+      "properties": {
+        "grid-template-columns": "minmax(180px, 280px) minmax(0, 1fr)"
+      }
+    },
+    {
+      "case": 5,
+      "context": [],
+      "selector": ".song-players",
+      "properties": {
+        "display": "grid",
+        "grid-template-columns": "minmax(0, 1fr) minmax(0, 1fr)",
+        "gap": "12px",
+        "min-width": "0"
+      }
+    },
+    {
+      "case": 5,
+      "context": [],
+      "selector": ".song-player span",
+      "properties": {
+        "grid-column": "1 / -1",
+        "color": "#5f6368",
+        "font-size": "12px",
+        "font-weight": "700"
+      }
+    },
+    {
+      "case": 5,
+      "context": [],
+      "selector": ".song-player-placeholder",
+      "properties": {
+        "display": "grid",
+        "place-items": "center",
+        "min-height": "58px",
+        "color": "#5f6368",
+        "background": "#f6f7f9",
+        "border": "1px dashed #c9ced6",
+        "border-radius": "6px",
+        "font-size": "12px"
+      }
+    },
+    {
+      "case": 5,
+      "context": [],
+      "selector": ".music-player .download, .song-player .download",
+      "properties": {
+        "display": "inline-grid",
+        "place-items": "center",
+        "min-width": "34px",
+        "height": "30px",
+        "padding": "0 8px",
+        "border": "1px solid #c9ced6",
+        "border-radius": "6px",
+        "color": "#1f6feb",
+        "text-decoration": "none",
+        "font-weight": "700",
+        "background": "#fff"
+      }
+    },
+    {
+      "case": 6,
+      "context": [
+        "media:(max-width:900px)"
+      ],
+      "selector": ".music-row",
+      "properties": {
+        "grid-template-columns": "1fr"
+      }
+    },
+    {
+      "case": 6,
+      "context": [
+        "media:(max-width:900px)"
+      ],
+      "selector": ".song-players",
+      "properties": {
+        "grid-template-columns": "1fr"
+      }
+    }
+  ],
+  "expectedBasis": "Manual literal transcription from UI223 sections6/7 and Current CSS570..587/635..700/900px rules; audio max-width/height from Current global audio, download properties scoped to Music only. Not generated from NK Production or its method.",
+  "metadataChecks": 5,
+  "productContracts": 7,
+  "formalUpdated": false
+}

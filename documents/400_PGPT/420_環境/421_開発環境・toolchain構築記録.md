@@ -485,3 +485,13 @@ Production依存ではないoperator専用Python読取環境を `work/toolchain/
 参照はPyPI公式各version JSON/固定wheel URL、[hypervisor公式](https://github.com/fox-it/dissect.hypervisor)、[API公式](https://github.com/fox-it/dissect-docs/blob/main/docs/source/advanced/api.rst)。QCow2のabsolute backing自動解決を用いず、保持baseとcloud backingの各rb handleを明示結合→GPT root partition→ExtFS inode読取。新VM・mount・device attach・full raw disk copy・snapshot適用0。
 
 PG1128 commandは上記runtimeをPYTHONPATHへ指定して `python3 -B tools/quality/vm/050_s1/pg1128_preserve_retired_backup.py`。一回実施済み、再実行/上書き禁止。旧原本の5entry metadata/四file hashを保持beforeから独立照合、11420273byte/4fileを私有700/600へ保存。manifest SHA256 `511b28d0358d2573cbb1cbb145c04c8ccd3a3bd28d9fd189f91742ba5ff295e4`。元image/backing identityは前後同一、事前認証済みdisk全SHAを今回再測定したとは記録しない。現在VM/DB/Backup変更0、秘密内容/DB dump/暗号credential/file本体はGit外。PG1129はこのpin・file hash/size・link/modeと9field安定性を再照合、atimeを安定性へ混ぜない。PG/PT正式加点0。
+
+
+## 2026-11-06 CSS静的資源PTの専用parser（BUG2350/YKT2095）
+
+Python host3.14、専用directory `/home/mini/codex/project1/work/toolchain/css-contract-parser-1.4.0/site`。global環境/POM/browser/Java依存不変更。新規pure wheel二つをofficial PyPI metadataのSHA256で検証後、absolute/.. /symlinkを拒否し専用siteへ展開。setup/build scriptは実行しない。
+
+- tinycss2 1.4.0 / https://pypi.org/pypi/tinycss2/1.4.0/json / wheel SHA256 3a49cf47b7675da0b15d0c6e1df8df4ebd96e9394bb905a5775adb0d884c5289 / https://files.pythonhosted.org/packages/e6/34/ebdc18bae6aa14fbee1a08b63c015c72b64868ff7dae68808ab500c492e2/tinycss2-1.4.0-py3-none-any.whl
+- webencodings 0.5.1 / https://pypi.org/pypi/webencodings/0.5.1/json / wheel SHA256 a0af1213f3c2226497a97e2b3aa01a7e4bee4f403f95be16fc9acd2947514a78 / https://files.pythonhosted.org/packages/f4/24/2a3e3df732393fed8b3ebf2ec078f05546de641fe1b667ee316ec1dcf3b7/webencodings-0.5.1-py2.py3-none-any.whl
+
+087_install_css_parser.pyとpublic PG20698 toolchain-manifestにsource/全展開file hash/actual日時/Python/reproを記録。再現は同じwheel hashを検証して新しい専用siteへ展開し、`PYTHONPATH=<site> python3 -B .../029_media_css_contracts.py metadata <newOutput>`。実使用tinycss2 1.4.0/APIを独立metadata5件で検証、web docs requestedv1.4 URLは取得時1.5.1表示なのでその版を導入済と誤認しない。parseは構文層のみ、property意味は独立Current62値で比較する。media/master/DB/鍵/VMへaccess無し、実Browser/IT-ST代替ではない。

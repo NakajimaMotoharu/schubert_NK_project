@@ -1,0 +1,165 @@
+/* NK-WEB-001/SCR-002; SYS-006/FUN-002; UI222/223; SS313; PG-D-115/PT-WEB-142..147.
+ * Current menu dimensions/colors retained; shared styles are extended with each approved screen. */
+:root {
+  color-scheme: light;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #202124;
+  background: #f6f7f9;
+  font-size: 16px;
+}
+body { margin: 0; }
+/* PG219/SCR001: Current centered Login card, with QA-045 approved NK brand only. */
+.login-page { min-height: 100vh; display: grid; place-items: center; }
+.login-shell { width: min(420px, calc(100% - 32px)); }
+.login-card { padding: 28px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; }
+.login-description { color: #5f6368; line-height: 1.5; }
+.login-form { display: grid; gap: 10px; }
+.login-form input { width: 100%; box-sizing: border-box; min-height: 40px; border: 1px solid #c9ced6; border-radius: 6px; padding: 0 10px; font: inherit; }
+.login-form button { min-height: 40px; border: 1px solid #1f6feb; border-radius: 6px; background: #1f6feb; color: #fff; font-weight: 700; }
+.login-message { padding: 10px 12px; border-radius: 6px; }
+.login-message.error { color: #8a1c1c; background: #fdecec; }
+.login-message.success { color: #176b37; background: #eaf7ee; }
+.page { max-width: 1180px; margin: 0 auto; padding: 24px; }
+.topbar { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.topbar-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
+.nav-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; }
+.nav-links a { color: #1f6feb; text-decoration: none; font-weight: 700; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 2px solid #1f6feb; outline-offset: 3px; }
+.menu-grid { display: grid; grid-template-columns: repeat(2, minmax(220px, 1fr)); gap: 14px; }
+.menu-item { display: grid; gap: 8px; min-height: 132px; align-content: center; padding: 20px; background: #ffffff; border: 1px solid #dde1e6; border-radius: 8px; color: inherit; text-decoration: none; }
+.menu-item strong { font-size: 22px; }
+.menu-item span { color: #5f6368; line-height: 1.5; }
+/* NK-WEB-002/SCR004..006; Current hierarchy metrics, UI222/223, SS313, PG194/PT-SCR-010. */
+.subtitle { margin-top: 6px; color: #5f6368; font-size: 13px; }
+.scenario-list { display: grid; gap: 8px; }
+.scenario-link { display: grid; gap: 7px; padding: 13px 14px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; color: inherit; text-decoration: none; }
+.scenario-title { font-weight: 700; }
+.scenario-link:hover .scenario-title { text-decoration: underline; }
+.scenario-meta { display: flex; flex-wrap: wrap; gap: 8px; color: #5f6368; font-size: 12px; }
+.scenario-meta span { min-width: 0; overflow-wrap: anywhere; }
+h1 { margin: 0; font-size: 28px; font-weight: 700; }
+.login-user { overflow-wrap: anywhere; }
+.login-role { font-size: 14px; color: #5f6368; }
+.error-panel { padding: 20px; border: 1px solid #dde1e6; border-radius: 8px; color: #8a1c1c; background: #fdecec; overflow-wrap: anywhere; }
+button { font: inherit; cursor: pointer; }
+.logout-form { margin: 0; }
+.logout-form button { padding: 8px 12px; border: 1px solid #dde1e6; border-radius: 6px; background: #ffffff; color: #202124; }
+@media (max-width: 900px) {
+  .page { padding: 14px; }
+  .topbar, .topbar-actions { align-items: flex-start; flex-direction: column; }
+  .menu-grid { grid-template-columns: 1fr; }
+}
+/* PG196/SCR007/PT-SCR-017..024: Current scenario values, scoped to avoid other screens. */
+.scenario-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+.scenario-nav a, .scenario-nav span { min-height: 40px; display: flex; align-items: center; padding: 0 12px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; }
+.scenario-nav a { color: #1f6feb; text-decoration: none; font-weight: 700; }
+.scenario-nav a:hover { text-decoration: underline; }
+.scenario-nav a:last-child, .scenario-nav span:last-child { justify-content: flex-end; }
+.script-body { display: grid; gap: 6px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; padding: 12px; }
+.script-entry { display: grid; grid-template-columns: 92px minmax(0, 1fr) 220px; gap: 12px; padding: 7px 0; border-bottom: 1px solid #edf0f4; }
+.script-entry:last-child { border-bottom: 0; }
+.script-entry .audio { grid-column: 3; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; justify-items: end; margin-top: 0; align-items: center; color: #5f6368; font-size: 12px; }
+.script-entry .audio span { grid-column: 1 / -1; justify-self: end; overflow-wrap: anywhere; text-align: right; }
+.line-meta { display: flex; flex-direction: column; gap: 4px; color: #5f6368; font-size: 12px; }
+.dialogue .line-meta span:last-child { color: #202124; font-weight: 700; }
+.narration p { color: #34383f; }
+.bottom-nav { margin-top: 12px; margin-bottom: 0; }
+.script-entry:target { margin: 0 -8px; padding: 9px 8px; background: #fff8d8; border: 1px solid #f0d36a; border-radius: 8px; }
+.script-entry p { white-space: pre-wrap; line-height: 1.7; margin: 10px 0 0; }
+.script-entry .download { display: inline-grid; place-items: center; min-width: 34px; height: 30px; padding: 0 8px; border: 1px solid #c9ced6; border-radius: 6px; color: #1f6feb; text-decoration: none; font-weight: 700; background: #fff; }
+.script-entry audio { width: 320px; max-width: 100%; height: 34px; }
+@media (max-width: 900px) {
+  .scenario-nav { grid-template-columns: 1fr; }
+  .scenario-nav a:last-child, .scenario-nav span:last-child { justify-content: flex-start; }
+  .script-entry { grid-template-columns: 1fr; gap: 4px; }
+  .script-entry .audio { grid-column: 1; justify-items: stretch; }
+  .script-entry .audio span { justify-self: start; text-align: left; }
+}
+/* End PG196 scenario styles. */
+/* PG202/SCR003/PT-SCR026..033: Current search metrics scoped to the search page. */
+.search-page .count { color: #5f6368; font-size: 14px; }
+.search-page .filters { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 10px; align-items: end; padding: 14px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; margin-bottom: 16px; }
+.search-page .filters label:nth-child(1) { grid-column: span 3; }
+.search-page .filters label:nth-child(2), .search-page .filters label:nth-child(3), .search-page .filters label:nth-child(4) { grid-column: span 2; }
+.search-page .filters label:nth-child(5), .search-page .filters label:nth-child(6), .search-page .filters button { grid-column: span 1; }
+.search-page .filters label { display: grid; gap: 5px; font-size: 12px; color: #5f6368; min-width: 0; }
+.search-page .filters input, .search-page .filters select, .search-page .filters button { width: 100%; min-width: 0; box-sizing: border-box; min-height: 38px; border: 1px solid #c9ced6; border-radius: 6px; padding: 0 10px; font: inherit; background: #fff; color: #202124; }
+.search-page .filters button { border-color: #1f6feb; background: #1f6feb; color: #fff; font-weight: 700; cursor: pointer; }
+.search-page .results { display: grid; gap: 10px; }
+.search-page .pagination { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; margin-bottom: 12px; }
+.search-page .pagination > a, .search-page .pagination > span, .search-page .pagination > div { min-height: 40px; display: flex; align-items: center; padding: 0 12px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; }
+.search-page .pagination > a:last-child, .search-page .pagination > span:last-child { justify-content: flex-end; }
+.search-page .pagination > div { gap: 4px; color: #5f6368; font-size: 13px; }
+.search-page .pagination > a, .search-page .scenario-open { color: #1f6feb; text-decoration: none; font-weight: 700; }
+.search-page .pagination.bottom-nav { margin-top: 12px; margin-bottom: 0; }
+.search-page .result { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 14px; align-items: start; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; padding: 14px; }
+.search-page .result-actions { display: grid; gap: 8px; justify-items: end; }
+.search-page .result-actions .scenario-open { display: inline-grid; place-items: center; width: 54px; min-height: 34px; margin: 0; border: 1px solid #c9ced6; border-radius: 6px; background: #fff; font-size: 13px; }
+.search-page .result-actions .audio { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 8px; margin: 0; width: 220px; color: #5f6368; font-size: 12px; }
+.search-page .result-actions audio { width: 160px; max-width: 100%; height: 34px; }
+.search-page .result-body { min-width: 0; }
+.search-page .meta { display: flex; flex-wrap: wrap; gap: 8px; color: #5f6368; font-size: 12px; }
+.search-page .meta span { padding: 2px 7px; background: #eef1f5; border-radius: 999px; }
+.search-page .result-body p { white-space: pre-wrap; line-height: 1.7; margin: 10px 0 0; }
+.search-page .download { display: inline-grid; place-items: center; min-width: 34px; height: 30px; padding: 0 8px; border: 1px solid #c9ced6; border-radius: 6px; color: #1f6feb; text-decoration: none; font-weight: 700; background: #fff; }
+@media (max-width: 900px) {
+  .search-page .pagination { grid-template-columns: 1fr; }
+  .search-page .pagination > a:last-child, .search-page .pagination > span:last-child { justify-content: flex-start; }
+  .search-page .result { grid-template-columns: 1fr; }
+  .search-page .result-actions { grid-template-columns: auto minmax(0, 1fr); align-items: center; justify-items: stretch; }
+  .search-page .result-actions audio { width: 100%; }
+  .search-page .filters { grid-template-columns: 1fr 1fr; }
+  .search-page .filters label:nth-child(n), .search-page .filters label:first-child, .search-page .filters button { grid-column: 1 / -1; }
+}
+/* End PG202 search styles. */
+/* PG205/SCR008,009/PT-SCR046..053: Current Animation rules scoped to its pages. */
+.animation-page .animation-main-link, .animation-page .subtrack-link { color: #1f6feb; text-decoration: none; font-weight: 700; }
+.animation-page .animation-main-link:hover .scenario-title, .animation-page .subtrack-link:hover { text-decoration: underline; }
+.animation-page .animation-list .scenario-title { font-size: 17px; }
+.animation-page .animation-row { grid-template-columns: minmax(0, 1fr) 110px; align-items: center; gap: 14px; }
+.animation-page .animation-main-link { display: grid; gap: 7px; min-width: 0; color: inherit; }
+.animation-page .subtrack-link, .animation-page .subtrack-placeholder { display: inline-grid; place-items: center; min-height: 34px; }
+.animation-page .subtrack-link { border: 1px solid #c9ced6; border-radius: 6px; background: #fff; font-size: 12px; }
+@media (max-width: 900px) {
+  .animation-page .animation-row { grid-template-columns: minmax(0, 1fr) 94px; }
+}
+/* End PG205 Animation styles. */
+/* PG216/SCR014/PT-SCR084..091: Current Log rules, scoped; DIF010 adds two date fields. */
+.log-page .count { color: #5f6368; font-size: 14px; }
+.log-page .filters { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 10px; align-items: end; padding: 14px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; margin-bottom: 16px; }
+.log-page .log-filters label:nth-child(1) { grid-column: span 3; }
+.log-page .log-filters label:nth-child(2), .log-page .log-filters label:nth-child(3), .log-page .log-filters label:nth-child(4), .log-page .log-filters label:nth-child(5) { grid-column: span 2; }
+.log-page .log-filters label:nth-child(6), .log-page .log-filters label:nth-child(7) { grid-column: span 3; }
+.log-page .log-filters button { grid-column: span 1; }
+.log-page .filters label { display: grid; gap: 5px; font-size: 12px; color: #5f6368; min-width: 0; }
+.log-page .filters input, .log-page .filters select, .log-page .filters button { width: 100%; min-width: 0; box-sizing: border-box; min-height: 38px; border: 1px solid #c9ced6; border-radius: 6px; padding: 0 10px; font: inherit; background: #fff; color: #202124; }
+.log-page .filters button { border-color: #1f6feb; background: #1f6feb; color: #fff; font-weight: 700; cursor: pointer; }
+.log-page .log-results { display: grid; gap: 10px; }
+.log-page .pagination { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; margin-bottom: 12px; }
+.log-page .pagination > a, .log-page .pagination > span, .log-page .pagination > div { min-height: 40px; display: flex; align-items: center; padding: 0 12px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; }
+.log-page .pagination > a:last-child, .log-page .pagination > span:last-child { justify-content: flex-end; }
+.log-page .pagination > div { gap: 4px; color: #5f6368; font-size: 13px; }
+.log-page .pagination > a { color: #1f6feb; text-decoration: none; font-weight: 700; }
+.log-page .pagination.bottom-nav { margin-top: 12px; margin-bottom: 0; }
+.log-page .log-row { display: grid; gap: 8px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; padding: 14px; }
+.log-page .log-main { display: flex; flex-wrap: wrap; gap: 8px; color: #5f6368; font-size: 12px; }
+.log-page .log-main span, .log-page .log-main strong { padding: 2px 7px; background: #eef1f5; border-radius: 999px; }
+.log-page .log-fields { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; color: #5f6368; font-size: 12px; }
+.log-page .log-fields div { display: flex; gap: 4px; padding: 2px 7px; background: #f6f7f9; border-radius: 999px; }
+.log-page .log-fields dt { font-weight: 700; }
+.log-page .log-fields dd { margin: 0; }
+.log-page .log-details summary { color: #1f6feb; cursor: pointer; font-size: 13px; font-weight: 700; }
+.log-page .log-details pre { overflow: auto; margin: 8px 0 0; padding: 10px; background: #f6f7f9; border-radius: 6px; font-size: 12px; }
+@media (max-width: 900px) {
+  .log-page .pagination { grid-template-columns: 1fr; }
+  .log-page .pagination > a:last-child, .log-page .pagination > span:last-child { justify-content: flex-start; }
+  .log-page .filters { grid-template-columns: 1fr 1fr; }
+  .log-page .log-filters label:nth-child(n), .log-page .log-filters button { grid-column: 1 / -1; }
+}
+/* End PG216 Log styles. */
+/* SCR020/UI224/SS313/PG-D347: retain question-summary spaces, no legacy selector overlap. */
+.notification-page .notification-summary { white-space: pre-wrap; }
+.notification-detail-page .question-body, .notification-detail-page .answer-body { white-space: pre-wrap; }
+.question-detail-page .question-body, .question-detail-page .answer-body { white-space: pre-wrap; }
+.question-input textarea { width: 100%; box-sizing: border-box; }
