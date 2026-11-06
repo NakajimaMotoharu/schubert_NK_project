@@ -1,5 +1,10 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-07T00:26:23.278291+09:00 比較工具限定資格
+
+020仕様018/結果019・PMO600042、PG21102一回10成功/独立21116 post0・L214/M28/C2/B96全miss0。内訳新規2/既存8のsource再認証、8を新規実装へ加算0。Main不具合/NPE仮説は確認されず製造変更不要、原誤診断1/F1と静的履歴を保持。実baseline/adapter/CHR操作無し・synthetic fixtureのみ。34対象の新method累計296=Java192+HTML97+CSS7、wholeJava67/原282交差47残235/部分18残62。formal1964PT53scope/新leaf0/工数null・六Production Core4217不変。
+
+
 ## 2026-11-06T23:29:57.407416+09:00 Login失敗HTTP限定増分
 
 015仕様060/結果061・PMO600038、PG21064一回新6/FESabort0・L33/M2/C1/B8全miss0/独立21078 post0。同Main4217のQA055固定DOM4とheader6局所証明、Browser/controller組立/実CHR/全451は別未受入。Console SDKの型converter登録を静的に特定、旧五説明は21072追記訂正のみ・旧成功再演0。累計33対象294=Java190+HTML97+CSS7・wholeMain66/原282交差46残236/部分18残62、新leaf0/正式1964PT53scope/工数null。
