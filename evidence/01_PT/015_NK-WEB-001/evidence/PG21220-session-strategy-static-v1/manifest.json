@@ -1,0 +1,72 @@
+{
+  "actualExit": 0,
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SessionAuthenticationStrategyPortTest.java": "6fc89409d0c075cb793d101534461761f105a59849ed34aac38563c71bc7c391",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionAuthenticationStrategy.java": "ce68220123914829f5a3c91593760e4bb71db658693c0c378e98a0aa325ac30f",
+    "evidence/01_PT/015_NK-WEB-001/input/007_session_strategy_port_qualifier.py": "50531b014f5a42bba41d24c77a8f262aaa45307795eaef1803330f1b26d02b81"
+  },
+  "pmdRaw": 6,
+  "classification": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SessionAuthenticationStrategyPortTest.java",
+      "line": 149,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "reason": "Self-owned host JUnit two-worker mutation separation; try-with-resources closes executor; no container thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SessionAuthenticationStrategyPortTest.java",
+      "line": 153,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "reason": "Self-owned host JUnit two-worker mutation separation; try-with-resources closes executor; no container thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SessionAuthenticationStrategyPortTest.java",
+      "line": 197,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "reason": "JDK Proxy uses only explicit supplied interface defining loader, no deployed web app/context loader assumption."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SessionAuthenticationStrategyPortTest.java",
+      "line": 209,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "reason": "JDK Proxy uses only explicit supplied interface defining loader, no deployed web app/context loader assumption."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SessionAuthenticationStrategyPortTest.java",
+      "line": 229,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "reason": "JDK Proxy uses only explicit supplied interface defining loader, no deployed web app/context loader assumption."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java",
+      "line": 21,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "reason": "JDK Proxy uses only explicit supplied interface defining loader, no deployed web app/context loader assumption."
+    }
+  ],
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "processingErrors": 0,
+  "normalManifestSha256": "1db34d8f2ccee9fc90244bea86c3e446be0c0e010c66516a1e25c92df3426618",
+  "spotbugsReusedOnlyForUnchangedNormalWeb": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20992-outbox-required-six-static-reactor-v1/manifest.safe.json",
+    "sha256": "2d3130234ce662ebf2b0bb1f57e74c123ec68e7a307feb10844231bd9822a20a"
+  },
+  "files": {
+    "original-manifest.json": "1a49fbf097c711f456ef322c08a6488706305880740a2a05d0eef93137bc9ee2",
+    "pmd.xml": "8e028904489668cc716f5e34c93a1df1d14c4b4cb5229d6fc34f28b1718db8be",
+    "checkstyle.xml": "c9ba46108e5caf09223ae9859bc7665b8c9ab69609edfa1002e8a67329c15d3a",
+    "pmd.stdout": "7f29007d9d5c1cd103b36987ca92fecddf3e0c4550542a856ec624af4119828a",
+    "pmd.stderr": "0345ca0b2c1012fe5d0aeb91a22cbbfaedebf6054584b763030d9b61af11a25a",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
