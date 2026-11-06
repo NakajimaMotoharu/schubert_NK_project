@@ -81,7 +81,8 @@ final class GateSyntheticRunPortTest {
     Files.writeString(root.resolve(CONTRACT), "{malformed");
     assertThrows(IOException.class, () -> validate(root));
     Files.delete(root.resolve(SECOND + "inventory.json"));
-    Files.copy(OWN_INPUT.resolve(CONTRACT), root.resolve(CONTRACT));
+    Files.copy(
+        OWN_INPUT.resolve(CONTRACT), root.resolve(CONTRACT), StandardCopyOption.REPLACE_EXISTING);
     assertTrue(validate(root).failures().contains("run2_INVENTORY_STATUS"));
   }
 

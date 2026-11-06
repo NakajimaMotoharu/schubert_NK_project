@@ -68,3 +68,5 @@ Program NK-CHR-001、Main GateContractValidator/ValidationResult。RD112/181 SCP
 実行はinput006 prepare/static/run <固定source>/post。JDK25.0.4、normal tool21088 original087のjar/5Main10class、CPは固定Jackson2.19.2三jar/Jspecify/JUnitConsoleのみ（driver/Playwright無し）。全target2physicalをnormal jar CRCに結合、単一JaCoCo0.8.15 exec、LINE/METHOD/CLASS/BRANCH100要求、manual exclude/旧exec union無し。未網羅なら結果を未完として追加観点を判断し、数合わせのassertは禁止。全60成功でも実G01～06/実CHR/Browser/API/DB/JMS/VM/Root/native/QA051final/全451/新leaf/正式受入は増やさない。既held四/held二/RootFailed二は非アクセス。Main全10class SpotBugs21096は同byteの既真正0を参照し再演しない。PMD/Checkstyleは対象MainとTestに実行し全指摘個別分類。静的指摘を一括抑制しない。独立postで元XML/source/Git/classCRC/session/driver/fixture manifest/checkerを再読結合する。
 
 初期状態：未実行。結果・真正exit・日時/OS/command/全input/実際値/hash/coverageはrun manifestと結果021へ記録。関連BUGは発見時修正前起票。
+
+原PG21124は60/F5/E1/OS1のharness不具合で全体不合格、BUG2376/YKT2121。公開6JSONを別private public-definitions classpathへ原bytecopyし、chr.unitProjectRootはsynthetic rootのまま。fixture復旧copyにREPLACE_EXISTING。新slotPG21136 compile/21138 static/21140全60の真正結果を採用予定、元54成功の合算0。既負Test12literalはBUG2375/YKT2120として定数化、固定値/期待codeは不変。
