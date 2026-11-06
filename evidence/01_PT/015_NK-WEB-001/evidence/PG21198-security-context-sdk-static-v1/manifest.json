@@ -1,0 +1,72 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T01:17:52.678289+09:00",
+  "source": "fa8c9337018b933f6616bd99be57f009c94c947e",
+  "originalRun": "PG21188",
+  "stages": {
+    "sdk": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T16:17:51.991930+00:00",
+      "endUTC": "2026-11-06T16:17:52.306988+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-constants",
+        "-c",
+        "-p",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21192-security-context-twelve-final-compile-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/session/spring-session-core/4.1.1/spring-session-core-4.1.1.jar",
+        "java.security.SecureRandom",
+        "org.springframework.session.web.http.SessionRepositoryFilter"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "657e8540c5ad6340c6330d69d98739bfe32588116a6305f15799a42e0abd41bd",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "callers": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T16:17:52.307390+00:00",
+      "endUTC": "2026-11-06T16:17:52.674834+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-constants",
+        "-c",
+        "-p",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21192-security-context-twelve-final-compile-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/session/spring-session-core/4.1.1/spring-session-core-4.1.1.jar",
+        "dev.codex.schubert.nk.web.security.EncryptedSessionSecurityContextRepository",
+        "dev.codex.schubert.nk.web.security.EncryptedSessionSecurityContextRepository$Deferred",
+        "dev.codex.schubert.nk.web.session.SecurityContextOwnerPortFixture",
+        "dev.codex.schubert.nk.web.session.SecurityContextOwnerPortFixture$NeverRandom",
+        "dev.codex.schubert.nk.web.session.SessionPayloadCodec",
+        "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepository",
+        "dev.codex.schubert.nk.web.session.JdbcWebSessionStore"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "696737a810106cf99c0fe7e6e3bf7bb366c5d0fbe4e18643871dd47012221a84",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "files": {
+    "callers-begin.safe.json": "d42e22198545e1af208b6e4bcc5f5fe4b1dddce92d31cd128521df5e28df22aa",
+    "sdk.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdk-begin.safe.json": "2f8c02b206a56a2386d5862e5ad7639ce4f36cf8868ca994f48b5e4d97fc5cbf",
+    "sdk-exit.safe.json": "564ec9937befc0c3767d933954f70ef3d9844677b9f53f8c18d60b4e082a44c1",
+    "sdk.stdout": "657e8540c5ad6340c6330d69d98739bfe32588116a6305f15799a42e0abd41bd",
+    "callers-exit.safe.json": "cef1709a495986021fbe0b84594b802bdc5d78ac9f1bc0dcf75c56aa7826919a",
+    "callers.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "callers.stdout": "696737a810106cf99c0fe7e6e3bf7bb366c5d0fbe4e18643871dd47012221a84",
+    "sdk-process.safe.json": "c9e962f9a2edbece30e5cf91f592eca56beaa279965f5723fa0316b804d7121c",
+    "callers-process.safe.json": "e5de21804e6e50a7e3b0b31442c694b8d65e4c7421db245fffa4fe4badec96a9"
+  },
+  "jdkModulesSha256": "89021c44e874a1d4e477c335c0c6f170c10933652130990357a5a9fe8b8aa7e8",
+  "jdkJavapSha256": "59d0b7cf9e1936f16cd6dd39d5214a0c8507a1d5895a1e9b95c52aa4f436d71b",
+  "sdkJar": {
+    "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/session/spring-session-core/4.1.1/spring-session-core-4.1.1.jar",
+    "sha256": "01b836bfcc5b64f7039c3430980878112a10db5066eda4274a1d3eb874e49733"
+  },
+  "actualBytecodeExecution": false,
+  "javaTestsReexecuted": 0,
+  "limitations": "Static constructor/method closure only; JVM/SDK syscalls not measured, no actual auth/session/Root readiness certificate."
+}
