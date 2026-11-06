@@ -1,0 +1,85 @@
+{
+  "schema": "PGPT_DIAGNOSTIC_V1",
+  "source": "5d8a086901a1d4ccaef4fda23a602244c52edf14",
+  "productionCoreMain": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+  "atJST": "2026-11-06T22:40:54.318881+09:00",
+  "test": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxReturningIdContractTest.java",
+    "sha256": "97c9821b373b751b1844b57633de957b55ef467868a1f173437346c027d7c59f"
+  },
+  "normal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/manifest.safe.json",
+    "sha256": "8bf2c7ca6ada19b2e23a1e007ca2db680d6916d1e215d470f072f27508d23be9"
+  },
+  "stages": {
+    "compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T13:40:52.583544+00:00",
+      "endUTC": "2026-11-06T13:40:53.299692+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20982-outbox-null-id-diagnostic-v1/classes",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxReturningIdContractTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "unit": {
+      "actualExit": 1,
+      "timedOut": false,
+      "startUTC": "2026-11-06T13:40:53.300004+00:00",
+      "endUTC": "2026-11-06T13:40:54.318433+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20982-outbox-null-id-diagnostic-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.api.messaging.outbound.OutboxReturningIdContractTest",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20982-outbox-null-id-diagnostic-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "7401d90924995dd604d09b340f86b4ee1007bcf3217eb7d6153837ae4c34763f",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "actualExit": 1,
+  "qualification": false,
+  "realBackendOperations": 0,
+  "coverageMeasured": false,
+  "tests": 1,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "files": {
+    "compile-exit.safe.json": "ab9b2f572b6afdb3395adc87ac2c045b33aa010cbd683e346590332e7a461b20",
+    "compile.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "manifest.safe.json": "9dadd1fdc0ddfd4269f632bf392e544b7f5892be0d26f7a0fcf1d7b2104a68c9",
+    "compile.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-exit.safe.json": "56e58a84ce2982b4e27134252408600749601a412c18de5997dd903a79fceb6d",
+    "unit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit.stdout": "7401d90924995dd604d09b340f86b4ee1007bcf3217eb7d6153837ae4c34763f",
+    "xml/TEST-junit-platform-suite.xml": "70c72ed51fb5183d22ae01cbf78e766920de66d7f30a13e1621e34279ddba24e",
+    "xml/TEST-junit-vintage.xml": "895b3c6316302bac9c8c3128a8e08247e5a9a7288ce3f2d8f5c8187b7f37194b",
+    "xml/TEST-junit-jupiter.xml": "14c37a51a495ab0e7cbe09786d8e25c479228fabdc74dea8b2e7781c678ecb95"
+  },
+  "bug": "BUG-2366",
+  "horizontal": "YKT-2111"
+}

@@ -83,7 +83,8 @@ public final class JdbcOutboxRepository {
         if (!result.next()) {
           throw new OutboxIntegrityException("outbox insert returned no identifier");
         }
-        return result.getLong(1);
+        // BUG2366/YKT2111: SQL NULL must not become a successful primitive zero.
+        return requireValue(result.getObject(1, Long.class));
       }
     }
   }
@@ -175,7 +176,7 @@ public final class JdbcOutboxRepository {
           requireValue(result.getString("layout_id")),
           requireValue(result.getString("layout_version")),
           requireValue(result.getBytes("body")),
-          result.getInt("attempt_count"),
+          requireValue(result.getObject("attempt_count", Integer.class)),
           requireValue(result.getObject("next_attempt_at", java.time.OffsetDateTime.class))
               .toInstant(),
           requireValue(result.getObject("created_at", java.time.OffsetDateTime.class)).toInstant(),
