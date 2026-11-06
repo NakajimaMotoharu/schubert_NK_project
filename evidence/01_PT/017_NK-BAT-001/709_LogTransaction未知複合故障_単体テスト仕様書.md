@@ -2,7 +2,7 @@
 
 - 関連: OPS-009/DAT-009、UI251、SS331 §3.14・SS332・SS341 §6.6/7.2/SSC337、BUG-2317/YKT-2062。設計正本origin/main854f0c1ac23ff01646b329c495d62ffce2a3c491 / PR205。
 - Program/class/method: LogCleanupServiceのpublic execute/withOwner、constructor、transaction/check/owned/replace/known、SessionLease acquire/closeとChunkProgress。TestはLogCleanupTransactionPortTestの公開入口だけ、private抽出・reflection呼出なし。
-- 状態: 試験設計・Test source作成中、実行未着手。旧source成功を新sourceへ加算しない。
+- 現況（2026-11-06）: 最新PG20138限定19PT成功・四counter100%・strict post0。結果710/独立crossjoin PG20142を参照。以下の準備・失敗記録は時点履歴として保全し、実DB/native/全工程の成功へ拡張しない。
 
 ## 独立oracleとfixture
 
