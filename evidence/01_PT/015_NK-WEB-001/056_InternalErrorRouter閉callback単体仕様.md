@@ -16,3 +16,20 @@ NK-WEB-001/WBS-P016-24、FUN/AUT/TST・UI221222226・SS313SSC047/314/352/PG-D116
 SDK SecurityContextHolderは新しいTest JVMだけ `-Dspring.security.strategy=MODE_THREADLOCAL` に固定し、empty SecurityContext以外を保持しない。Authenticationを作成・setしない。既service/アクセス経路を変更しない。static SDK bytecodeでThreadLocal.removeを照合する。Production source/clear method以外の実session/authfilterは初期化禁止、JDK/Spring metadata syscall数は未計測null。
 
 独立oracleは明示順序配列/Filterとrequestの参照同一性/固定例外オブジェクト/入力dispatcher表、Productionからexpectedを生成しない。profile077/shared012、prepare20500/static20502→Git固定→20506全10/一exec/全physical/四100/CRC/post。実行環境/JDK25.0.4/inputHash/source/command/終了/coverage/BUG/証跡は結果057へ保存。既正常Main/SBを再確認目的に再演しない。全SCR090/実chain/CHR/native/451/個別leafは別未受入。
+
+## Test IDとmethodの明示結合
+
+上記固定oracle・正常/境界/例外の目的を当sourceの選択全methodへ一意に対応付ける。番号はTest sourceの宣言順であり、追加PTや再実行を意味しない。
+
+|Test ID|class.method|
+|---|---|
+|PT-WEB-ROUTERPORT001|InternalErrorRouterPortTest.constructorAndConfigurationNullContractsReject|
+|PT-WEB-ROUTERPORT002|InternalErrorRouterPortTest.initializationUsesTheSameConfigAndFixedDelegateOrder|
+|PT-WEB-ROUTERPORT003|InternalErrorRouterPortTest.firstDelegateFailureDoesNotInitializeOrDestroyTheSecond|
+|PT-WEB-ROUTERPORT004|InternalErrorRouterPortTest.secondDelegateInitFailureStopsBothInReverseOrderAndKeepsLegacyPriority|
+|PT-WEB-ROUTERPORT005|InternalErrorRouterPortTest.destructionAlwaysAttemptsBothAndPreservesFinallyExceptionPriority|
+|PT-WEB-ROUTERPORT006|InternalErrorRouterPortTest.everyDispatcherAndPathCombinationInvokesExactlyOneDelegate|
+|PT-WEB-ROUTERPORT007|InternalErrorRouterPortTest.internalErrorRequiresTrustedRequestContextBeforeAnyCallback|
+|PT-WEB-ROUTERPORT008|InternalErrorRouterPortTest.callbackCheckedRuntimeAndFatalFailuresPropagateAndClearOnlyEmptyContext|
+|PT-WEB-ROUTERPORT009|InternalErrorRouterPortTest.nullAndNonHttpBoundariesRejectWithoutAnyCallback|
+|PT-WEB-ROUTERPORT010|InternalErrorRouterPortTest.eightOwnedTasksKeepRequestsCallbacksAndEmptyContextsIsolated|

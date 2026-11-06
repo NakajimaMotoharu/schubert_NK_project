@@ -1,6 +1,6 @@
 # PGPT成果物一覧・進捗
 
-## 2026-11-06 現Main D8・直近十五対象の限定成果
+## 2026-11-06 現Main D8・直近十六対象の限定成果
 
 製造候補D8 `d8ff9efb16a7da1b073bdf9770487e3e6415b636`。配備済み/正式認定sourceとは区別する。以下は独立した各source/runの最新結果であり、全体coverageを合成したものではない。
 
@@ -21,12 +21,13 @@
 |Web監査閉catalog|PG20448 / 0|10|89/11/3/52|015:054/055|
 |Music曲一覧HTML資源|PG20492 / 0|8（18派生描画）|HTMLのためJava counter無し|016:130/131|
 |内部error振分けcallback|PG20514 / 0|10|28/4/1/8|015:056/057|
+|内部error表示属性復元|PG20544 / 0|8|11/2/1/8|015:058/059|
 
-Java各19/8/8/8/14/16/8/8/13/9/10/10（計131）＋resource34（一覧12/19描画＋明細14/23描画＋Music8/18描画）=165は異なるTestclassのunique methodで、再試行runの重複加算なし。Log実DB/native、監視owner内部失敗、両画面HTTP/実Browserは未受入又はHOLD。両detailのexact RD9/class/method/TestID joinは016/PG20212。工具PG20222の最新8check（旧PG20218保全）は別domainでProduction PTに足さない。
+Java各19/8/8/8/14/16/8/8/13/9/10/10/8（計139）＋resource34（一覧12/19描画＋明細14/23描画＋Music8/18描画）=173は異なるTestclassのunique methodで、再試行runの重複加算なし。Log実DB/native、監視owner内部失敗、両画面HTTP/実Browserは未受入又はHOLD。両detailのexact RD9/class/method/TestID joinは016/PG20212。工具PG20222の最新8check（旧PG20218保全）は別domainでProduction PTに足さない。
 
 同D8正常compile/NullAway/format/Werror PG20112、六SpotBugs1844 class exact/指摘0 PG20114を再利用。fresh966Main PMD1494/Checkstyle0/processing0 PG20150、全1494の個別style適用性/未分類0/適用違反0/独立post0 PG20154。rawGate1/生raw・重複を保持し抑制なし、全F03/451受入とは分ける。
 
-技術各source累計58、原部分80のcounter全網羅結合18/残62、元未登録282との証拠交差38/残244。正式1964PT/53scope・歴史17/190・新WBSleaf0・工数完成率null。異sourceの古い成功を最新全体へ自動転用しない。費用は3984のcached観測を3985で一度だけ追加訂正、ordinary共有25/all32/S7、専有N/Tnull。現況/費用/保留/次commandは456先頭・460・946/948/950/952/954/956/958/960/962/964/966/968/970/976/981/983・487を参照。QA054/SSC337設計はmain公開済み、PGPT全体・IT/STは未完。
+技術各source累計59、原部分80のcounter全網羅結合18/残62、元未登録282との証拠交差39/残243。正式1964PT/53scope・歴史17/190・新WBSleaf0・工数完成率null。異sourceの古い成功を最新全体へ自動転用しない。費用は3984のcached観測を3985で一度だけ追加訂正、ordinary共有25/all32/S7、専有N/Tnull。現況/費用/保留/次commandは456先頭・460・946/948/950/952/954/956/958/960/962/964/966/968/970/976/981/983/987・487を参照。QA054/SSC337設計はmain公開済み、PGPT全体・IT/STは未完。
 
 2026-11-05: 709～712、QA051初回14/原version2failure・全五静的0と新22Test compile/trace（green未実行）。Core b093不変更、実L01/全451未受入。
 

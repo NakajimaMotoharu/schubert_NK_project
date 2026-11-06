@@ -22,3 +22,20 @@ shared012/profile072、Gson2.14.0/annotation2.50.0 exactsha。prepare/static→G
 |PT-WEB-SECAUD010|concurrentRecordsKeepRequestIdsAndActorsSeparate|
 
 BUG2333/YKT2078: initial072のhelper命名1をexpected不変で是正、最新073でcompile/staticを取り直し、全10は最新sourceだけを一回実行する。原static20430のraw3は保持。
+
+## Test IDとmethodの明示結合
+
+上記固定oracle・正常/境界/例外の目的を当sourceの選択全methodへ一意に対応付ける。番号はTest sourceの宣言順であり、追加PTや再実行を意味しない。
+
+|Test ID|class.method|
+|---|---|
+|PT-WEB-AUDITPORT001|WebSecurityAuditPortTest.allTenEventsMatchIndependentCatalogAndJsonSchema|
+|PT-WEB-AUDITPORT002|WebSecurityAuditPortTest.allFiveRegisteredRoutesAndOptionalFieldsRemainClosed|
+|PT-WEB-AUDITPORT003|WebSecurityAuditPortTest.actorSeparatorsAreRedactedAndContextNeverAppears|
+|PT-WEB-AUDITPORT004|WebSecurityAuditPortTest.lockRetryBoundariesZeroOneAndNineHundredAreExplicit|
+|PT-WEB-AUDITPORT005|WebSecurityAuditPortTest.invalidMetadataNeverEmitsARecord|
+|PT-WEB-AUDITPORT006|WebSecurityAuditPortTest.nullConstructorAndRecordContractsReject|
+|PT-WEB-AUDITPORT007|WebSecurityAuditPortTest.literalAddressesCanonicalizeWithoutDnsAndInvalidInputsDoNotLog|
+|PT-WEB-AUDITPORT008|WebSecurityAuditPortTest.versionOneAndSixtyFourAreRetainedAndInvalidFormatsReject|
+|PT-WEB-AUDITPORT009|WebSecurityAuditPortTest.clockAndLoggerFailuresPropagateWithoutProviderDiagnostics|
+|PT-WEB-AUDITPORT010|WebSecurityAuditPortTest.concurrentRecordsKeepRequestIdsAndActorsSeparate|

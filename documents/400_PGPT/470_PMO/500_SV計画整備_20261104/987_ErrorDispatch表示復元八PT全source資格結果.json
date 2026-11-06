@@ -1,0 +1,176 @@
+{
+  "atJST": "2026-11-06T14:31:15.869628+09:00",
+  "groupId": "PGPT-ORDINARY-ERROR-DISPATCH-RESTORE-20261106",
+  "startEvent": "PGPT-20261008-4019",
+  "endEvent": "PGPT-20261008-4020",
+  "projection": {
+    "schema": "PGPT_PORT_PROJECTION_V1",
+    "source": "2466b0e474830fafb2808c7091a2062a9b1b2e58",
+    "mainSource": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+    "tests": 8,
+    "testClasses": 1,
+    "fourCounters": {
+      "LINE": 11,
+      "METHOD": 2,
+      "CLASS": 1,
+      "BRANCH": 8
+    },
+    "missed": 0,
+    "physical": 1,
+    "noCodeClasses": [],
+    "selectedMethods": [
+      [
+        "dev.codex.schubert.nk.web.security.ErrorDispatchRestorePortTest",
+        "anonymousRestoreRemovesBothAliasesAndNeverReadsSessionOrPrincipal"
+      ],
+      [
+        "dev.codex.schubert.nk.web.security.ErrorDispatchRestorePortTest",
+        "attributeAndCallbackFailuresPropagateWithoutFallback"
+      ],
+      [
+        "dev.codex.schubert.nk.web.security.ErrorDispatchRestorePortTest",
+        "corruptSnapshotNeverRestoresOrInvokesCallback"
+      ],
+      [
+        "dev.codex.schubert.nk.web.security.ErrorDispatchRestorePortTest",
+        "eightConcurrentRequestsKeepRestoredAndAnonymousAttributesSeparate"
+      ],
+      [
+        "dev.codex.schubert.nk.web.security.ErrorDispatchRestorePortTest",
+        "nonHttpRequestAndResponseRejectBeforeAttributeAccess"
+      ],
+      [
+        "dev.codex.schubert.nk.web.security.ErrorDispatchRestorePortTest",
+        "nullContractsDoNotReadRequestOrRunChain"
+      ],
+      [
+        "dev.codex.schubert.nk.web.security.ErrorDispatchRestorePortTest",
+        "onlyErrorDispatcherAndExactErrorPathCanRestore"
+      ],
+      [
+        "dev.codex.schubert.nk.web.security.ErrorDispatchRestorePortTest",
+        "userAndAdminSnapshotsRestoreOnlyParsedDisplayToken"
+      ]
+    ],
+    "qualificationTransferred": false
+  },
+  "source": "2466b0e474830fafb2808c7091a2062a9b1b2e58",
+  "productionCoreMain": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+  "run": "PG20544",
+  "actualExit": 0,
+  "tests": 8,
+  "fourCounters": {
+    "LINE": 11,
+    "METHOD": 2,
+    "CLASS": 1,
+    "BRANCH": 8
+  },
+  "manifest": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG20544-error-dispatch-restore-eight-v1/manifest.json",
+    "sha256": "72485e05cca76596e6c9cfe124d0ef6c5f60e3083bb930b06c67e02d89039ae9"
+  },
+  "independentPost": 0,
+  "testIdMethods": [
+    [
+      "PT-WEB-ERRORRESTORE001",
+      "nullContractsDoNotReadRequestOrRunChain"
+    ],
+    [
+      "PT-WEB-ERRORRESTORE002",
+      "nonHttpRequestAndResponseRejectBeforeAttributeAccess"
+    ],
+    [
+      "PT-WEB-ERRORRESTORE003",
+      "onlyErrorDispatcherAndExactErrorPathCanRestore"
+    ],
+    [
+      "PT-WEB-ERRORRESTORE004",
+      "anonymousRestoreRemovesBothAliasesAndNeverReadsSessionOrPrincipal"
+    ],
+    [
+      "PT-WEB-ERRORRESTORE005",
+      "userAndAdminSnapshotsRestoreOnlyParsedDisplayToken"
+    ],
+    [
+      "PT-WEB-ERRORRESTORE006",
+      "corruptSnapshotNeverRestoresOrInvokesCallback"
+    ],
+    [
+      "PT-WEB-ERRORRESTORE007",
+      "attributeAndCallbackFailuresPropagateWithoutFallback"
+    ],
+    [
+      "PT-WEB-ERRORRESTORE008",
+      "eightConcurrentRequestsKeepRestoredAndAnonymousAttributesSeparate"
+    ]
+  ],
+  "static": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG20540-error-restore-static-v1/manifest.json",
+    "sha256": "fc18dabd4f4c9b0bb53b9c76cd364cd5793f8a039f290268d825a1504bea9d9a",
+    "rawPmd": 5,
+    "applicableViolations": 0,
+    "checkstyle": 0
+  },
+  "newBugs": 0,
+  "mainChanged": false,
+  "currentTechnicalReusableComponentsBefore": 58,
+  "currentTechnicalReusableComponentsAfter": 59,
+  "originalUnregistered282ProofIntersectionBefore": 38,
+  "originalUnregistered282ProofIntersectionAfter": 39,
+  "originalUnregisteredUnbound": 243,
+  "originalPartial80Bound": 18,
+  "originalPartialUnbound": 62,
+  "latestUniqueProductTests": 173,
+  "javaTests": 139,
+  "htmlResourceTests": 34,
+  "newWbsAccepted": 0,
+  "formal": "1964PT/53scope unchanged",
+  "effortRate": null,
+  "estimateAtGroupStartPp": {
+    "low": 1,
+    "base": 3,
+    "high": 6
+  },
+  "capPp": 8,
+  "quotaBefore": {
+    "usedPercent": 32,
+    "remainingPercent": 68,
+    "resetsAt": 1794395640
+  },
+  "quotaBeforeReceipt": {
+    "sha256": "a9fa83f17e4d6a2e604a52ccf27f9637535ff6fbc06263f921e8eefd1718490d",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-06T05:24:44.614000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 32,
+        "remainingPercent": 68,
+        "resetsAt": 1794395640,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION",
+    "path": "/home/mini/codex/project1/work/PMO/pgpt-completion-stage-20261102/quota-receipts/a9fa83f17e4d6a2e604a52ccf27f9637535ff6fbc06263f921e8eefd1718490d.json"
+  },
+  "quotaAfter": {
+    "observedAtUTC": "2026-11-06T05:31:15.704000+00:00",
+    "usedPercent": 32,
+    "remainingPercent": 68,
+    "resetsAt": 1794395640,
+    "windowDurationMins": 10080,
+    "secondary": null,
+    "ordinaryUsageAllowed": true,
+    "receiptSha256": "9fa2ba73f5e8fa192060766e754ebd3b361071db24e9c2211097686bb82114f7"
+  },
+  "observedSharedPp": 0,
+  "ordinarySharedObservedPp": 26,
+  "allRecordedSharedPp": 33,
+  "actualAllocatedPp": null,
+  "N": null,
+  "T": null,
+  "mayFinishTurn": false,
+  "nextCommand": "Preflight actual login template-only DOM conditional messages/title/blankpassword/input/POST markup against canonical UI222226 and DIF001, no real login submission or CSRF/security-chain acceptance. If independent new resource branches exist, finite new test; do not replay old LoginController proof."
+}
