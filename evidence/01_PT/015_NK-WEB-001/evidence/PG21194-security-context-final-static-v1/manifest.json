@@ -1,0 +1,93 @@
+{
+  "actualExit": 0,
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java": "566ee1b11c9f69ab1adf9192d63bb7ded248d752882980daf8cff38da7d3ee8d",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository.java": "d6ff8eec25554583f88ad34f79ced1bf34aec6303b286ceb65b6ddae15835da2",
+    "evidence/01_PT/015_NK-WEB-001/input/005_security_context_port_qualifier.py": "ec6b3acf8c43d109db84c8f0c393bf01ac4c2d6e6bdfcc7b5a877409c91eb04d"
+  },
+  "pmdRaw": 9,
+  "classification": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository.java",
+      "line": 94,
+      "rule": "CompareObjectsWithEquals",
+      "applicable": false,
+      "reason": "SS3147.2.6 configured owner MUST be the same object; equals cannot authorize a different configured repository."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
+      "line": 144,
+      "rule": "NullAssignment",
+      "applicable": false,
+      "reason": "Explicit Test fault injection reset to absent after failed metadata read; no Production nullable assignment."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
+      "line": 241,
+      "rule": "NullAssignment",
+      "applicable": false,
+      "reason": "Explicit Test fault injection reset to absent after failed metadata read; no Production nullable assignment."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
+      "line": 251,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "reason": "Own host JUnit two-worker cache isolation, executor closed, no container thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
+      "line": 256,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "reason": "Own host JUnit two-worker cache isolation, executor closed, no container thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
+      "line": 293,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "reason": "JDK Proxy supplied Servlet/DataSource interface defining loader only; no app deployment/context loader assumption."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
+      "line": 327,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "reason": "JDK Proxy supplied Servlet/DataSource interface defining loader only; no app deployment/context loader assumption."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
+      "line": 347,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "reason": "JDK Proxy supplied Servlet/DataSource interface defining loader only; no app deployment/context loader assumption."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java",
+      "line": 21,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "reason": "JDK Proxy supplied Servlet/DataSource interface defining loader only; no app deployment/context loader assumption."
+    }
+  ],
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "processingErrors": 0,
+  "normalManifestSha256": "1db34d8f2ccee9fc90244bea86c3e446be0c0e010c66516a1e25c92df3426618",
+  "spotbugsReusedOnlyForUnchangedNormalWeb": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20992-outbox-required-six-static-reactor-v1/manifest.safe.json",
+    "sha256": "2d3130234ce662ebf2b0bb1f57e74c123ec68e7a307feb10844231bd9822a20a"
+  },
+  "files": {
+    "original-manifest.json": "b6c57c2f8d05fff6450f63c1321f61e5f797ef84ea08399c22816a78aba03c87",
+    "pmd.xml": "e41d09f93737c46dd1f9428b8b8a655de5335c14ff6df6d070616b5f2d1f6b94",
+    "checkstyle.xml": "e8330f5fa847de987ff527e7e73bffc845eae209288368c6c1538c6d343bf1fa",
+    "pmd.stdout": "d5365c9fb57111b40108daba1031afad609f46e4fc4ba193119c4617704760dc",
+    "pmd.stderr": "91c2a7fa23697b34812378a4f931b636783640631a3342ea1859d1191bf0068b",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

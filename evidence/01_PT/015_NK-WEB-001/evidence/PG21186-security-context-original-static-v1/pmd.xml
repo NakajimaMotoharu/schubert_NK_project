@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-07T01:14:45.870">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository.java">
+<violation beginline="94" endline="94" begincolumn="9" endcolumn="90" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="EncryptedSessionSecurityContextRepository" method="requireConfigured" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java">
+<violation beginline="135" endline="135" begincolumn="42" endcolumn="54" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="EncryptedSecurityContextPortTest" method="storedMetadataArgumentAndStateFailuresUseFixedNonSensitiveSignal" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "public bad" appears 4 times in this file; the first occurrence is on line 135
+</violation>
+<violation beginline="143" endline="143" begincolumn="27" endcolumn="31" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="EncryptedSecurityContextPortTest" method="storedMetadataArgumentAndStateFailuresUseFixedNonSensitiveSignal" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+<violation beginline="240" endline="240" begincolumn="25" endcolumn="29" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="EncryptedSecurityContextPortTest" method="failedInitialReadUnlocksAndNeverCachesPartialContext" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+<violation beginline="250" endline="250" begincolumn="24" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="EncryptedSecurityContextPortTest" method="concurrentSharedDeferredAndSeparateRequestCachesRemainOwned" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="255" endline="255" begincolumn="57" endcolumn="86" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="EncryptedSecurityContextPortTest" method="concurrentSharedDeferredAndSeparateRequestCachesRemainOwned" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="292" endline="292" begincolumn="19" endcolumn="53" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="EncryptedSecurityContextPortTest.Session" method="Session" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="326" endline="326" begincolumn="19" endcolumn="60" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="EncryptedSecurityContextPortTest.Frame" method="Frame" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="346" endline="346" begincolumn="19" endcolumn="61" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="EncryptedSecurityContextPortTest.Frame" method="Frame" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java">
+<violation beginline="15" endline="15" begincolumn="50" endcolumn="58" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="SecurityContextOwnerPortFixture" variable="sessions" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field sessions has the same name as a method
+</violation>
+<violation beginline="21" endline="21" begincolumn="17" endcolumn="50" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="SecurityContextOwnerPortFixture" method="SecurityContextOwnerPortFixture" variable="database" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+</pmd>

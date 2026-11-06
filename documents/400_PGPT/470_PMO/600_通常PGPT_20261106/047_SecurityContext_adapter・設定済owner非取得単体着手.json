@@ -1,0 +1,21 @@
+{
+  "groupId": "PGPT-SECURITY-CONTEXT-ADAPTER-OWNED-PORT-20261107",
+  "eventId": "PGPT-20261008-4076",
+  "sourceBefore": "15e36068b652c182b5599ad300f1ad907d3bc6f9",
+  "productionCoreMain": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+  "costOwner": "WBS-P015-02",
+  "estimateAtGroupStartPp": {
+    "low": 1.5,
+    "base": 4,
+    "high": 7
+  },
+  "capPp": 10,
+  "scope": "EncryptedSessionSecurityContextRepository and Deferred physical2, supplied Servlet request/session callbacks and framework SecurityContext DTO only. Resource-free configured owner construction uses standalone callback DataSource that throws on every method; SessionPayloadCodec receives only public zero32 fixture bytes and closes its own copies, no encrypt/decrypt/nonce/session generation/persistence; EncryptedWebSessionRepository and JdbcWebSessionStore constructors hold ports only. Test helper in session package supplies deterministic SecureRandom subclass whose nextBytes always fails and public constant identifiers, no source/fixture extraction from old DB Test. Do not call lifecycle methods, graph classifiers or held4. ClosedWebAuthentication remains original FOUR100 and is not separately replayed/credited.",
+  "dependencyReview": "Reviewed target all methods; SpringEncryptedSessionRepository ctor stores nonnull lifecycle/clock; EncryptedWebSessionRepository package ctor stores nonnull ports and constructs empty JdbcWebSessionStore; SessionPayloadCodec package ctor validates fixed version/byte32/copies key, own SessionAttributeCodec ctor only static AUTH_FIELDS; close erases only own copies. No WebStartupException call/initialization intended, no real Root/owner/DB/key file. Actual class init and held4 probes must confirm before qualification. Disallowed direct encrypted session lifecycle calls remain HOLD; not a substitute fixture for original SessionSecurityContextTest DB suite.",
+  "oracle": "UI226/SS3147.2.6/352: configured owner identity, deferred stable initial generated/context per request, missing/wrong types/closed principal equality, fixate only supplied session setAttribute once, no lifecycle/creation/SQL/retry. Twelve new methods with typed fixed failures/null/exception/concurrency literal oracle planned.",
+  "acceptance": "No Main changes expected; new selected full source physical2 same normal20990 CRC/one exec/four100/static0/independent post. Original closed auth whole and old successes not credited; actual session/Browser/CHR/Root/451/newleaf/formal unchanged.",
+  "receipt": {
+    "path": "/home/mini/codex/project1/work/PMO/pgpt-completion-stage-20261102/quota-receipts/646b214e8dd4e0e248ffb0dfb0c46e52814bf83381b938352af3ff33cb8a3924.json",
+    "sha256": "646b214e8dd4e0e248ffb0dfb0c46e52814bf83381b938352af3ff33cb8a3924"
+  }
+}
