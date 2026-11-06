@@ -1,0 +1,64 @@
+{
+  "actualExit": 0,
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest.java": "7d05042b8d72d86e88adb4703a4ce7a3f0f5186cc7fcc56890a9d5dd7326d2c1",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository.java": "a6635c9d50282a5e9b7cbe318c51bddcea3334a5ec8f543768aa0e64106efcc9",
+    "evidence/01_PT/015_NK-WEB-001/input/003_csrf_session_port_qualifier.py": "44a20da6b4ffe996e0bf3265c7478a69345c15d4eeb45a28c161a15aa58292ea"
+  },
+  "pmdRaw": 5,
+  "classification": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest.java",
+      "line": 177,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "reason": "Own host-only JUnit two-worker frames, executor closed; no web container/Production thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest.java",
+      "line": 182,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "reason": "Own host-only JUnit two-worker frames, executor closed; no web container/Production thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest.java",
+      "line": 218,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "reason": "JDK Proxy explicitly implements one supplied Servlet interface with that interface defining loader, no web application deployment/context-loader lookup."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest.java",
+      "line": 255,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "reason": "JDK Proxy explicitly implements one supplied Servlet interface with that interface defining loader, no web application deployment/context-loader lookup."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest.java",
+      "line": 280,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "reason": "JDK Proxy explicitly implements one supplied Servlet interface with that interface defining loader, no web application deployment/context-loader lookup."
+    }
+  ],
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "processingErrors": 0,
+  "normalManifestSha256": "1db34d8f2ccee9fc90244bea86c3e446be0c0e010c66516a1e25c92df3426618",
+  "spotbugsReusedOnlyForUnchangedNormalWeb": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20992-outbox-required-six-static-reactor-v1/manifest.safe.json",
+    "sha256": "2d3130234ce662ebf2b0bb1f57e74c123ec68e7a307feb10844231bd9822a20a"
+  },
+  "files": {
+    "original-manifest.json": "25f486a5946e0990a071ca6c7c5fa080508f2377b3343338fd908a2a13aa5e25",
+    "pmd.xml": "e99be4eb8e471d325e86bf7b41d58282c9d60c8cd24611844cf9acc25fd7d4ba",
+    "checkstyle.xml": "afce9a6c6c91af5aec9dfa307a4de29e7114314185b8ee37a01e1a35836ac3db",
+    "pmd.stdout": "ab360d17d4d7390a753cc9b1ec27b5ce63b15f55ced61f0aae948dbd7a7d310e",
+    "pmd.stderr": "141eb65d74f7997b8eef554fecec67bc550322bbe8156e05a8f2f34e7c0a69e8",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
