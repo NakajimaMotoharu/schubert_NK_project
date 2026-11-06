@@ -1,0 +1,40 @@
+{
+  "atJST": "2026-11-07T07:58:47.493560+09:00",
+  "groupId": "PGPT-API-BROKER-WHOLE-CONTRACT-STATIC-REVIEW-20261107",
+  "startEvent": "PGPT-20261008-4146",
+  "endEvent": "PGPT-20261008-4147",
+  "source": "cee163d708ba4c2b18b57a67716ad7cc94dcfacd",
+  "productionCoreMain": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+  "manifest": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG21900-api-broker-whole-static-review-v1/manifest.json",
+    "sha256": "1ede5727da0c6425d21ee620157242b3ce3d8fcbfdc01c7616aba50ef147fbab"
+  },
+  "staticReviewCriteria": 20,
+  "existingTestDesignMethods": 26,
+  "newProductTests": 0,
+  "newMethods": 0,
+  "newSourceProofs": 0,
+  "newAcceptance": 0,
+  "coverage": null,
+  "ptExecutionExempt": false,
+  "estimateAtGroupStartPp": {
+    "low": 0.5,
+    "base": 2,
+    "high": 5
+  },
+  "capPp": 6,
+  "observedSharedPp": 1,
+  "actualAllocatedPp": null,
+  "N": null,
+  "T": null,
+  "status": "STATIC_DESIGN_REVIEW_ONLY_DYNAMIC_HOLD_SCOPE_UNRESOLVED",
+  "unresolved": [
+    "explicit concurrent open-close measurement",
+    "real provider/runtime/native postconditions including ASYNC credential/broker scope",
+    "current whole dependency execution and four coverage counters",
+    "exact refusal scope"
+  ],
+  "formal": "1964PT/53scope unchanged",
+  "effortRate": null,
+  "nextCommand": "Review existing API consumer lifecycle sources against approved SS321 SSC314/316, focusing on prepare-before-acquire, four-context successful-close phases, callback admission, reverse parent stop and UNKNOWN dependencies. Reuse unchanged normal20990/static20992. All Product/fixture/broker/Root/VM/native/DB/held-four execution remains held; do not infer a whole dynamic PASS or repeat successful metadata checks."
+}

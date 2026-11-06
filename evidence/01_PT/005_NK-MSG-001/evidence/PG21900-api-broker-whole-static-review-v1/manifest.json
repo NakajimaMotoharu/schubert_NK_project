@@ -1,0 +1,127 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T07:57:52.771567+09:00",
+  "source": "cee163d708ba4c2b18b57a67716ad7cc94dcfacd",
+  "productionCoreMain": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+  "main": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java": "af4602cd8c0906045e5985cba6a4e7e32d43b74e59a060f207705b3166f10330",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java": "e34f85fb6c359595962afb863089e0f4c874dd78a4108981e1d623ec03b2d6e8",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContextsTest.java": "c68c223bd6408c4bf39fb1a918b4127904c19fa472b49a2cc8954a729d7a76fd",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerFactoryRemainderTest.java": "d62312f5b79d7b297e0f55275324e74024761bbeb110c9161bd9f9760407fddf",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/config/BrokerGraph334Test.java": "f661441e37e283bd7769bacb59966d04c0eee47fd5d1ef25c8ad7491623b9277",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/config/ApiFactoryNativeRetentionTest.java": "6bc6473b4bf83aa4c3709fe21ac8686bfcf03f49fed1c5e6c6f59587f4426aba",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/config/ApiFactoryOwnershipTest.java": "f232c7e72f1c96afbd64b2edcaa930c79e95b06f031c5701d251bc136fc6890c",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProviderTest.java": "3e4625c821ed7dfe9a3d24fe7b014692074bfd899d2db6cd5937d077617d3d54",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/ApiBrokerContextsCredentialTest.java": "51bc45f9611c483dfe7cdbf4bbf5c190a860fc8d3c7f0f484348dc808614ac3e",
+    "evidence/01_PT/005_NK-MSG-001/023_APIbroker三factory所有静的レビュー仕様.md": "43b63f38f586a34b6b21747377de38a8647d961cb7e2e747a299344992eafb53",
+    "evidence/01_PT/005_NK-MSG-001/024_APIbroker三factory所有静的レビュー結果.md": "508a37d1abd7e0c8b1add10a95a59bb163d73ce1cc0bbf1d1a3f3741a994ab1f",
+    "evidence/01_PT/005_NK-MSG-001/input/022_api_broker_static_review_binding.py": "c5e5493df651bd5d034553b5dee53e149cd81ba7d99fd17b73000d7c8e278c7b",
+    "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+    "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+  },
+  "physicalHashes": {
+    "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider$ConsumerProfile.class": "293150382901907c70c2177e866c9f8ede8903ce74854e7d792f213280e4f988",
+    "api:dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.class": "02c965af155cb8126b4ad53cac54af4ca6b03fb2654a89969a688af4d929c37b",
+    "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.class": "8a0f4fc121112988fbc284557b618c713a6b0947668d6dcb1072254bf4d14e52"
+  },
+  "designSource": "42450b515b0737b4f519945e161cae93195e1edf",
+  "reviewIds": [
+    "ABRO001",
+    "ABRO002",
+    "ABRO003",
+    "ABRO004",
+    "ABRO005",
+    "ABRO006",
+    "ABRO007",
+    "ABRO008",
+    "ABRO009",
+    "ABRO010",
+    "ABRO011",
+    "ABRO012",
+    "ABRO013",
+    "ABRO014",
+    "ABRO015",
+    "ABRO016",
+    "ABRO017",
+    "ABRO018",
+    "ABRO019",
+    "ABRO020"
+  ],
+  "relatedProvider": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+  "primaryCostOwner": "WBS-P005-03",
+  "relatedCostOwner": "WBS-P005-04",
+  "relatedAdditionalBudgetPp": 0,
+  "existingTestDesignMethods": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContextsTest.java": [
+      "closePhaseRetriesOnlyUnknownFactoryAndNeverReadsSecretsAfterStop",
+      "completeThirdProfileOwnsDistinctFactoryErasesCopyAndClosesAllOnFault",
+      "distinctSyncAndLogFactoriesUseFixedRoleAndEraseEveryCopy",
+      "missingDependenciesFailBeforeContextCreation",
+      "passwordAcquisitionFaultsAreRedacted",
+      "invalidLengthsNullAndProviderFaultEraseOwnedCopies",
+      "closeIsIdempotentAndRejectsEscapedSupplierBeforeSecretAccess",
+      "closeTriesBothFactoriesAndPreservesFatalPriority"
+    ],
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerFactoryRemainderTest.java": [
+      "fact315004NullAtEveryPositionAndCompleteOwnerHaveLiteralReverseCleanup",
+      "everyPartialFactoryFaultClosesEarlierProfilesAndPreservesIdentity",
+      "nullInternalPortsRejectBeforeAnyFactoryOrPasswordCopy"
+    ],
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/config/BrokerGraph334Test.java": [
+      "fact334001ApiOpenPreRedactionAndCopyCleanup",
+      "fact334002ApiMultiOwnerCloseRetainsLateGraphAndSuccessfulPhases",
+      "fact334003ApiPartialConstructionClassifiesOnlyUnretainedSecondaryAfterAllClose",
+      "fact334004ApiFactoryNoSuppSecondaryAfterOwnedClose"
+    ],
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/config/ApiFactoryNativeRetentionTest.java": [
+      "hold316006FinitePolicyStillFailsAndNullPolicyPrecedesAcquisition",
+      "hold316007ProviderPartialAndReturnedBrokerKeepOuterFrameWithoutRetry"
+    ],
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/config/ApiFactoryOwnershipTest.java": [
+      "apiFact315001IndependentLiteralsAndAcquisitionBoundaryReturnLiveOwner",
+      "apiFact315002EachSetterFailureClosesOnceAndPreservesPrimary",
+      "apiFact315003IndependentCloseTableAndSameThrowableNeverSelfSuppress",
+      "apiFact315004AllThreeIndependentWindowVectorsAndNullProfile"
+    ],
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProviderTest.java": [
+      "commonConnectionAndReconnectPolicyIsExactAndCredentialFree",
+      "consumerWindowProfilesAreOneMibZeroAndSixtyFourKib",
+      "admittedLoopbackEndpointControlsActualConnectorWithoutFallback"
+    ],
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/ApiBrokerContextsCredentialTest.java": [
+      "admittedApiCredentialSetCreatesTwoConfiguredFactoriesWithoutOpeningContext",
+      "loadedApiCredentialOpensBothProfilesAgainstIsolatedRealBroker"
+    ]
+  },
+  "existingTestDesignMethodCount": 26,
+  "staticReferences": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/manifest.safe.json",
+      "sha256": "1db34d8f2ccee9fc90244bea86c3e446be0c0e010c66516a1e25c92df3426618"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20992-outbox-required-six-static-reactor-v1/manifest.safe.json",
+      "sha256": "2d3130234ce662ebf2b0bb1f57e74c123ec68e7a307feb10844231bd9822a20a"
+    }
+  ],
+  "firstPass": "ACQUISITION_ORDER_DATA_LIFETIME",
+  "secondPass": "STATE_FAILURE_PRIORITY_BORROW_BOUNDARY",
+  "status": "STATIC_DESIGN_REVIEW_ONLY_DYNAMIC_HOLD_SCOPE_UNRESOLVED",
+  "unresolved": [
+    "explicit concurrent open-close measurement",
+    "real provider/runtime/native postconditions including ASYNC credential/broker scope",
+    "current whole dependency execution and four coverage counters",
+    "exact refusal scope"
+  ],
+  "productTestsExecuted": 0,
+  "newProductTests": 0,
+  "newMethods": 0,
+  "newSourceProofs": 0,
+  "newAcceptance": 0,
+  "coverage": null,
+  "ptExecutionExempt": false,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null
+}
