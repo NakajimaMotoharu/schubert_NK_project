@@ -1,0 +1,99 @@
+Compiled from "Utf8.java"
+public final class org.springframework.security.crypto.codec.Utf8 {
+  private static final java.nio.charset.Charset CHARSET;
+
+  private org.springframework.security.crypto.codec.Utf8();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  public static byte[] encode(java.lang.CharSequence);
+    Code:
+         0: aload_0
+         1: ifnonnull     14
+         4: new           #7                  // class java/lang/IllegalArgumentException
+         7: dup
+         8: ldc           #9                  // String String cannot be null
+        10: invokespecial #11                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        13: athrow
+        14: getstatic     #14                 // Field CHARSET:Ljava/nio/charset/Charset;
+        17: invokevirtual #20                 // Method java/nio/charset/Charset.newEncoder:()Ljava/nio/charset/CharsetEncoder;
+        20: aload_0
+        21: invokestatic  #26                 // Method java/nio/CharBuffer.wrap:(Ljava/lang/CharSequence;)Ljava/nio/CharBuffer;
+        24: invokevirtual #32                 // Method java/nio/charset/CharsetEncoder.encode:(Ljava/nio/CharBuffer;)Ljava/nio/ByteBuffer;
+        27: astore_1
+        28: aload_1
+        29: invokevirtual #38                 // Method java/nio/ByteBuffer.limit:()I
+        32: newarray       byte
+        34: astore_2
+        35: aload_1
+        36: invokevirtual #44                 // Method java/nio/ByteBuffer.array:()[B
+        39: iconst_0
+        40: aload_2
+        41: iconst_0
+        42: aload_1
+        43: invokevirtual #38                 // Method java/nio/ByteBuffer.limit:()I
+        46: invokestatic  #48                 // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+        49: aload_2
+        50: areturn
+        51: astore_1
+        52: new           #7                  // class java/lang/IllegalArgumentException
+        55: dup
+        56: ldc           #56                 // String Encoding failed
+        58: aload_1
+        59: invokespecial #58                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+        62: athrow
+      Exception table:
+         from    to  target type
+            14    50    51   Class java/nio/charset/CharacterCodingException
+
+  public static java.lang.String decode(byte[]);
+    Code:
+         0: getstatic     #14                 // Field CHARSET:Ljava/nio/charset/Charset;
+         3: invokevirtual #61                 // Method java/nio/charset/Charset.newDecoder:()Ljava/nio/charset/CharsetDecoder;
+         6: aload_0
+         7: invokestatic  #65                 // Method java/nio/ByteBuffer.wrap:([B)Ljava/nio/ByteBuffer;
+        10: invokevirtual #68                 // Method java/nio/charset/CharsetDecoder.decode:(Ljava/nio/ByteBuffer;)Ljava/nio/CharBuffer;
+        13: invokevirtual #74                 // Method java/nio/CharBuffer.toString:()Ljava/lang/String;
+        16: areturn
+        17: astore_1
+        18: new           #7                  // class java/lang/IllegalArgumentException
+        21: dup
+        22: ldc           #78                 // String Decoding failed
+        24: aload_1
+        25: invokespecial #58                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+        28: athrow
+      Exception table:
+         from    to  target type
+             0    16    17   Class java/nio/charset/CharacterCodingException
+
+  public static boolean isEqual(java.lang.CharSequence, java.lang.CharSequence);
+    Code:
+         0: aload_0
+         1: invokestatic  #80                 // Method bytesUtf8:(Ljava/lang/CharSequence;)[B
+         4: astore_2
+         5: aload_1
+         6: invokestatic  #80                 // Method bytesUtf8:(Ljava/lang/CharSequence;)[B
+         9: astore_3
+        10: aload_2
+        11: aload_3
+        12: invokestatic  #84                 // Method java/security/MessageDigest.isEqual:([B[B)Z
+        15: ireturn
+
+  private static byte[] bytesUtf8(java.lang.CharSequence);
+    Code:
+         0: aload_0
+         1: ifnull        11
+         4: aload_0
+         5: invokestatic  #90                 // Method encode:(Ljava/lang/CharSequence;)[B
+         8: goto          12
+        11: aconst_null
+        12: areturn
+
+  static {};
+    Code:
+         0: getstatic     #92                 // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+         3: putstatic     #14                 // Field CHARSET:Ljava/nio/charset/Charset;
+         6: return
+}

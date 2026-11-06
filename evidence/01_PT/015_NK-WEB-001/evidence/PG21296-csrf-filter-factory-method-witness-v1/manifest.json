@@ -1,0 +1,156 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T02:17:55.352559+09:00",
+  "source": "42b6ab8685ecfa8d52675ddd7f740780b202cfd8",
+  "originalRun": "PG21290",
+  "originalExecSha256": "558c56e70e4f2866cd98364c85a326e11c50145190f60707d3e56d1c824ad588",
+  "physicalHashes": {
+    "dev/codex/schubert/nk/web/security/WebCsrfToken": "eeae846eb901e2c78059aa3e9b4f6eae28268a976a2b23947eb54c85722ae84b",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository": "bc7d9aa5eb0a37eb90c641a823bd78ec18d306525f177e193dd95bfdc0e63d21",
+    "dev/codex/schubert/nk/web/security/FormCsrfTokenRequestHandler": "b3f36526141a79ca05f71e9454a2e97bca75e03dd287865bd534b0c50f2cfdf2",
+    "org/springframework/security/web/csrf/XorCsrfTokenRequestAttributeHandler": "f116f2814622c484639be93e2c4f3c57b9d16151aadb085bbab1812ab2c069a3",
+    "org/springframework/security/crypto/codec/Utf8": "c4a4267bb4f486e2d9319e1f7b6d7a9a72f6ff43abb8acdf20b039dfeefb1ae8"
+  },
+  "classJarSources": {
+    "dev/codex/schubert/nk/web/security/WebCsrfToken": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar",
+    "dev/codex/schubert/nk/web/security/FormCsrfTokenRequestHandler": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar",
+    "org/springframework/security/web/csrf/XorCsrfTokenRequestAttributeHandler": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-web/7.1.1/spring-security-web-7.1.1.jar",
+    "org/springframework/security/crypto/codec/Utf8": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-crypto/7.1.1/spring-security-crypto-7.1.1.jar"
+  },
+  "jarHashes": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": "d33f6a79a723bbc07e66b45b8e413df561cbaad5ad711162ed9a5903fb49720a",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-web/7.1.1/spring-security-web-7.1.1.jar": "dece134a2332c976a2c94ecf13f816c64e8ea7f2139795485afe655fba0408f3",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-crypto/7.1.1/spring-security-crypto-7.1.1.jar": "6e8bb2337faccabd30626f917ed1d2bfa9dde982229b6b373b644d1a01635403"
+  },
+  "executedMethods": {
+    "XorCsrfTokenRequestAttributeHandler": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "EncryptedSessionCsrfTokenRepository": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      },
+      {
+        "name": "loadToken",
+        "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Lorg/springframework/security/web/csrf/CsrfToken;"
+      },
+      {
+        "name": "materialize",
+        "desc": "(Ljakarta/servlet/http/HttpSession;)Lorg/springframework/security/web/csrf/CsrfToken;"
+      }
+    ],
+    "FormCsrfTokenRequestHandler": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      },
+      {
+        "name": "handle",
+        "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;Ljava/util/function/Supplier;)V"
+      },
+      {
+        "name": "resolveCsrfTokenValue",
+        "desc": "(Ljakarta/servlet/http/HttpServletRequest;Lorg/springframework/security/web/csrf/CsrfToken;)Ljava/lang/String;"
+      }
+    ],
+    "WebCsrfToken": [
+      {
+        "name": "<init>",
+        "desc": "(Ljava/lang/String;)V"
+      },
+      {
+        "name": "parse",
+        "desc": "(Ljava/lang/String;)Ldev/codex/schubert/nk/web/security/WebCsrfToken;"
+      },
+      {
+        "name": "formValue",
+        "desc": "()Ljava/lang/String;"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "Utf8": [
+      {
+        "name": "encode",
+        "desc": "(Ljava/lang/CharSequence;)[B"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ]
+  },
+  "allowedMethods": {
+    "WebCsrfToken": [
+      "<clinit>",
+      "<init>",
+      "formValue",
+      "parse"
+    ],
+    "EncryptedSessionCsrfTokenRepository": [
+      "<init>",
+      "loadToken",
+      "materialize"
+    ],
+    "FormCsrfTokenRequestHandler": [
+      "<init>",
+      "handle",
+      "resolveCsrfTokenValue"
+    ],
+    "XorCsrfTokenRequestAttributeHandler": [
+      "<clinit>",
+      "<init>"
+    ],
+    "Utf8": [
+      "<clinit>",
+      "encode"
+    ]
+  },
+  "testsReexecuted": 0,
+  "reportReexecuted": false,
+  "additionalWholeSourceCredit": 0,
+  "dependencyCoverageAccepted": false,
+  "xorMaskingOrNoncePathCalled": false,
+  "csrfGenerationOrMutationCalled": false,
+  "actualSessionOrDbCalled": false,
+  "jvmPrngProviderIoMeasured": false,
+  "stage": {
+    "actualExit": 0,
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "report",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21290-csrf-filter-factory-eight-unit-v1/jacoco.exec",
+      "--classfiles",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21296-csrf-filter-factory-method-witness-v1/component",
+      "--xml",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21296-csrf-filter-factory-method-witness-v1/dependency-methods.xml"
+    ],
+    "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+    "endUTC": "2026-11-06T17:16:16.767269+00:00",
+    "startUTC": "2026-11-06T17:16:16.602803+00:00",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdoutSha256": "479552c7c1eed241db80018a95a37d664fc8c560154d883fbae8b040332067a9",
+    "timedOut": false
+  },
+  "files": {
+    "report.stdout": "479552c7c1eed241db80018a95a37d664fc8c560154d883fbae8b040332067a9",
+    "report-exit.safe.json": "c745b5024dd0002031c2fe3dcc2cd370da666164d3d0f06b3ac19b2262ed4690",
+    "report-begin.safe.json": "d447d3a8ae777318cb106f30da9c02cdbf1b8166b1a9d0f0e95420af0364f74a",
+    "dependency-methods.xml": "152829e903af38b582ee2c7c33e22c4c286a6e1d79c30cdba5bca1bf54cd1654",
+    "report-process.safe.json": "8ac17d57f15be758b186e311e6b74bcbc182d9347c66cf7be2d1e9bb7e0f8149",
+    "report.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
