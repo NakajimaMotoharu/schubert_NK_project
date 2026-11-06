@@ -1,0 +1,26 @@
+{
+  "atJST": "2026-11-06T14:38:41.195426+09:00",
+  "decision": "QA055_PENDING_LOCKED_ORACLE_HOLD",
+  "canonicalMain": "8deb209723494008cad46b6649194a3b7b30e0da",
+  "currentSources": [
+    {
+      "path": "program/app/src/main/resources/templates/login.html",
+      "sha256": "7bea6d2fda3a61ee161b10450c461e753932ee2f1a406de8a77898c86091b104",
+      "fact": "Fixed15minute lock message"
+    },
+    {
+      "path": "program/app/src/main/java/dev/codex/schubert/security/LoginAuthenticationFailureHandler.java",
+      "sha256": "ffa42b5bd28533e3fd56b491eeb340e87825af73ece29c04870d5163e5772de3",
+      "fact": "Retry-After header and302/login?locked"
+    }
+  ],
+  "qa": "QA-055",
+  "ui": "UIC-012",
+  "ss": "SSC-338",
+  "bug": "BUG-2340",
+  "horizontal": "YKT-2085",
+  "productionChanged": false,
+  "baselineChanged": false,
+  "newTests": 0,
+  "independentWorkContinues": true
+}
