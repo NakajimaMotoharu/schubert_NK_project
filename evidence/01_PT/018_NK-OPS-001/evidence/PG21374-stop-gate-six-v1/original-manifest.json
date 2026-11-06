@@ -1,0 +1,170 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "bdc216068475b4825635f209b8aff881db6d94e6",
+    "normalSource": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+    "normalManifestSha256": "1db34d8f2ccee9fc90244bea86c3e446be0c0e010c66516a1e25c92df3426618",
+    "inputHashes": {
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGateStatePortTest.java": "db38982f34c746f871ee5953247426c0828d5a3648fa5b1329714a8643dfc0a7",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGate.java": "8b4a740a515af46718400d17c8d9eb060d39c4aabed4358722ae47e86baaf405",
+      "evidence/01_PT/018_NK-OPS-001/input/130_stop_gate_state_port_qualifier.py": "8dcb7b8c2007624d4a7a8fc5f51c2a4136bd18b5efc8113b08c322df0c7b9786"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "28cdedd219fbf7137d4e7e4c5776824ce817d932b96b83d957d29b0f4c1bde38",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar": "ae4d9788efa53b414df93949e4549ed721fc86b689dd30cb5ee3704b8e1599d4",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar": "e7503d75416ef627507c5325cdef6cb5228607ba1c78b44843758cbb36c4753b",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "driverSha256": "8dcb7b8c2007624d4a7a8fc5f51c2a4136bd18b5efc8113b08c322df0c7b9786",
+    "compileManifestSha256": "27d0c2c4a133bc57476988e21d8a57f3e2c48d6be02afc4a21c602afd2dc501f",
+    "selected": [
+      "dev.codex.schubert.nk.batch.platform.ApplicationStopGateStatePortTest"
+    ],
+    "existingMethodsSourceRequalification": 0,
+    "newMethods": 6,
+    "expectedTests": 6,
+    "realBaselineAccess": false,
+    "realChrExecution": false,
+    "session": "PG21374-APPLICATION-STOP-GATE6",
+    "startUTC": "2026-11-06T17:56:55.071662+00:00"
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T17:56:55.071834+00:00",
+      "endUTC": "2026-11-06T17:56:56.440757+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21374-stop-gate-six-unit-v1/tmp",
+        "-Dfile.encoding=UTF-6",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21374-stop-gate-six-unit-v1/jacoco.exec,sessionid=PG21374-APPLICATION-STOP-GATE6,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21374-stop-gate-six-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21370-stop-gate-six-compile-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21374-stop-gate-six-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.platform.ApplicationStopGateStatePortTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "fa846bdff01d06d8b5ac4cf53840518a9a9b409577ea4fa38147ef63b552ed77",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T17:56:56.442949+00:00",
+      "endUTC": "2026-11-06T17:56:56.557384+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21374-stop-gate-six-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21374-stop-gate-six-unit-v1/component",
+        "--sourcefiles",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21374-stop-gate-six-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e67b5685c386f2139b60a1d41ef4700499ce68876647c138b92c0eb9a4f52a66",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T17:56:56.557806+00:00",
+      "endUTC": "2026-11-06T17:56:56.672364+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21374-stop-gate-six-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "5e38114a1763a241bad7aafa4da5373e7ddcc974abdbcdb689f1cc142360964b",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T17:56:56.672679+00:00",
+      "endUTC": "2026-11-06T17:56:56.787277+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21374-stop-gate-six-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "3c988ddad3b79c540bf4ce41b33a54bbf33a50c8c3e4657fcddbe2bcb510434f",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.batch.platform.ApplicationStopGateStatePortTest",
+      "name": "failedProjectionDoesNotBecomeCachedSuccessAndLaterCheckReadsFreshBothUnits()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.platform.ApplicationStopGateStatePortTest",
+      "name": "existingAndCallbackInterruptionsRetainFlagAndStopAtEachOwnedBoundary()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.platform.ApplicationStopGateStatePortTest",
+      "name": "sharedGateUsesSixteenIndependentWorkerProjectionsWithoutSharedCache()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.platform.ApplicationStopGateStatePortTest",
+      "name": "constructorsRequireSourceAndFactoryOnlyBuildsIndependentDormantGates()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.platform.ApplicationStopGateStatePortTest",
+      "name": "sourceFailuresAndInvalidBytesRejectBeforeLaterUnitWithoutNormalizingFailure()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.platform.ApplicationStopGateStatePortTest",
+      "name": "everyCheckReadsBothFixedProjectionsInApiThenWebOrderWithoutCaching()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 6,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/batch/platform/ApplicationStopGate": "2a80212de4cd6ef59781dce8c428cbd5d6c6a4debe7789a4befc9673bc15371d"
+  },
+  "formalUpdated": false
+}
