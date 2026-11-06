@@ -9,3 +9,5 @@ PT-OPS-QA054-TRACE001（metadata）: 元manifest/coverage.xml/公開case XML/beg
 PT-OPS-QA054-TRACE002（metadata）: coverage.xmlの当2classの全6/17methodとdescriptor/各counterを残し、独立仕様のTest ID集合へ結合する。Web kindの定数/metadataはMENU002、eligibleの条件/nullはMENU001/002で照合。validatorはschema/相関/閉field/欠落/重複/保持行/数値境界/限定ACTIONの全16IDを一つの実行集合として各methodに結合する。各helperをどの単一caseがhitしたかの個別実測は存在しないので、suite集合内の少なくとも一つが実行したという範囲に限る。実行集合とmethod counterの結合を単一caseのprobe attributionと偽称しない。
 
 全2artifactのbyte/23method/case集合のtraceだけを補い、全G13/全method-assertion trace/全F03/451・WBS leaf受入は未完。新Product method/source証明/実行PT/受入0、正式1964/53・工数率null維持。不一致や未記載Test IDがあれば未確認で保存し、確認目的の再実行へ進まない。
+
+BUG-2403/YKT-2148: 原1a4c4eda/input141は表形式だけを解釈し、正本020001の追記COR009/011を未記載と誤判定した（session78627/exit1、新trace生成前・製品呼出し0）。元Git/観測を保全し、正本の全文ID追記とvalidator短縮ID追記の二形式を明示的に追加する。unknown/duplicateは引き続き拒否。015044の既10methodは単一IDを作らず、testId=null＋元REQ004/006/007/008群と実methodの参照を残す。別PG21780でmetadataだけ再資格し、元15/16PTの再演は行わない。

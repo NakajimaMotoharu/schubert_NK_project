@@ -21,6 +21,11 @@ charspec = r / 'evidence/01_PT/020_NK-CHR-001/001_NK-CHR-001_相関ログ証拠�
 qaspec = r / 'evidence/01_PT/020_NK-CHR-001/016_QA054相関ログ限定ACTION単体仕様.md'
 original_ids = dict((method, ident) for ident, method in re.findall(
     r'\|\s*(PT-CHR-[A-Z0-9-]+)\s*\|\s*(?:CorrelatedLogEvidenceValidatorTest)?#([A-Za-z0-9_]+)', charspec.read_text()))
+for pattern in [r'PT-CHR-LOG-COR-(\d{3}) / #([A-Za-z0-9_]+)',
+                r'COR-(\d{3})はvalidator#([A-Za-z0-9_]+)']:
+    for number, method in re.findall(pattern, charspec.read_text()):
+        assert method not in original_ids
+        original_ids[method] = 'PT-CHR-LOG-COR-' + number
 targets = [
     ('015_NK-WEB-001/evidence/PG19558-qa054-web-menu-fifteen-v1', 'd8be18461ee3436e92752f09ce00fe3e9f70ee5c2edcb51c3fa32aa7060c5adc',
      'src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java',
@@ -60,18 +65,20 @@ for directory, expected, main, cls, owner, count, methods in targets:
     assert xmlpairs == {tuple(x) for x in m['selectedTestMethods']} and len(xmlpairs) == count
     ids = []
     for classname, method in m['selectedTestMethods']:
+        regression_group = None
         if classname.endswith('MenuAuditContractTest'):
             code = 'PT-WEB-MENU' + re.fullmatch(r'menu(\d{3}).*', method)[1]
             assert code in webspec.read_text() and method in webspec.read_text()
         elif classname.endswith('WebRequestTraceTest'):
-            code = 'EXISTING-REQ-GROUP:' + method
+            code = None
+            regression_group = 'REQ004/006/007/008 (015044 existing whole10 group)'
         elif classname.endswith('CorrelatedMenuActionContractTest'):
             code = 'PT-CHR-QA054' + re.fullmatch(r'qa054log(\d{3}).*', method)[1]
             assert 'PT-CHR-QA054001..007' in qaspec.read_text()
         else:
             assert classname.endswith('CorrelatedLogEvidenceValidatorTest') and method in original_ids
             code = original_ids[method]
-        ids.append(dict(testId=code, className=classname, method=method))
+        ids.append(dict(testId=code, originalRegressionGroup=regression_group, className=classname, method=method))
     xml = ET.parse(p.parent / 'coverage.xml')
     classes = [c for c in xml.findall('.//class') if c.get('name') == cls]
     assert len(classes) == 1
@@ -82,7 +89,7 @@ for directory, expected, main, cls, owner, count, methods in targets:
     for method in c.findall('method'):
         cs = {x.get('type'): dict(covered=int(x.get('covered')), missed=int(x.get('missed'))) for x in method.findall('counter')}
         assert cs['METHOD'] == dict(covered=1, missed=0) and all(v['missed'] == 0 for v in cs.values())
-        applicable = [x['testId'] for x in ids if not x['testId'].startswith('EXISTING-REQ-GROUP:')]
+        applicable = [x['testId'] for x in ids if x['testId'] is not None]
         if count == 15:
             applicable = ['PT-WEB-MENU001', 'PT-WEB-MENU002'] if method.get('name') == 'eligible' else ['PT-WEB-MENU002']
         measured.append(dict(name=method.get('name'), descriptor=method.get('desc'), counters=cs,
@@ -97,7 +104,7 @@ for directory, expected, main, cls, owner, count, methods in targets:
 spec = r / 'evidence/01_PT/018_NK-OPS-001/3610_QA054追加二artifact既存証拠trace仕様.md'
 for p in [spec, Path(__file__)]:
     assert hashlib.sha256(subprocess.check_output(['git', 'show', head + ':' + str(p.relative_to(r))])).hexdigest() == sha(p)
-out = r / 'evidence/01_PT/018_NK-OPS-001/evidence/PG21778-qa054-two-artifact-existing-proof-trace-v1'
+out = r / 'evidence/01_PT/018_NK-OPS-001/evidence/PG21780-qa054-two-artifact-existing-proof-trace-v2'
 assert not out.exists()
 out.mkdir()
 m = dict(actualExit=0, atJST=datetime.datetime.now().astimezone().isoformat(), observerSource=head,
@@ -106,6 +113,7 @@ m = dict(actualExit=0, atJST=datetime.datetime.now().astimezone().isoformat(), o
     independentOracleSpecifications=[dict(path=str(p.relative_to(r)), sha256=sha(p)) for p in [webspec, charspec, qaspec]],
     existingTestInvocationsReferenced=31, newlyExecutedTests=0, boundArtifacts=2, boundMethods=23,
     currentCombinedRun=False, oldExecUnion=False, newMethods=0, newSourceProofs=0,
-    newAcceptance=0, exactAssertionLevelTraceVerified=False, wholeG13Accepted=False, effortRate=None)
+    newAcceptance=0, exactAssertionLevelTraceVerified=False, wholeG13Accepted=False,
+    relatedBug='BUG-2403', relatedHorizontal='YKT-2148', effortRate=None)
 (out / 'manifest.json').write_text(json.dumps(m, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps(dict(actualExit=0, boundArtifacts=2, boundMethods=23, newlyExecutedTests=0, manifestSha256=sha(out / 'manifest.json'))))
