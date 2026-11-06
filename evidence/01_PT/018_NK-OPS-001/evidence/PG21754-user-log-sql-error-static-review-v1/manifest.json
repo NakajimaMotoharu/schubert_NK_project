@@ -1,0 +1,227 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T06:04:06.351483+09:00",
+  "source": "fda686edbd250fa5646c08b499276c73340fba5d",
+  "productionMainSource": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+  "driverSha256": "6b925778c89057aba0e4c316ab0cbefe743882ac1445639ee86eca9d5351d1b6",
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryRepository.java": "e5fa4a4a646adc7d1a1bbeddc3135fbd90872d4a85c018bd0a06dbf014b5167f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/LogQueryRepository.java": "6ee33c4b5c5ea6d765aa809a3f9a714fe46f5069dfcd1d3b703acaee638c860d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryException.java": "43b3e1294cec96541b0899dbf6bff8478689fee51d92b4ea2494465f59593082",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/LogQueryException.java": "f515674300bc1dcf0fa23632cf608ad33021ef68f806d63664f0b94bce15a2de",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java": "1a2121d84e092a0fae4a973452370cf9ea0aa5d9fb56d023ae7015b0061fae7d"
+  },
+  "normalManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/manifest.safe.json",
+    "sha256": "1db34d8f2ccee9fc90244bea86c3e446be0c0e010c66516a1e25c92df3426618"
+  },
+  "existingStatic": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG21706-current4217-main-style-binding-v1/manifest.json",
+      "sha256": "e13126918bb2510850c82125826816a4b39fc2c7d0804d4c7c93249dc247ccc0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG21708-current4217-style-binding-independent-v1/manifest.json",
+      "sha256": "3e94d6d8d907996a783a98bafb9c14713087269b942577997d5e62037fad5c14"
+    }
+  ],
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "originMain": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47",
+      "anchors": [
+        {
+          "line": 19,
+          "text": "SQLException/RuntimeExceptionを固定catalogや業務SQLstateへ変換する前に、捕捉したfinite exception graphのcause/suppressed/SQLException.nextへ到達可能なErrorを元objectで伝播する。非fatal graphはidentity visitedで有限帰還し、provider text/cause/suppressedを新catalogへ保持しない。ordinary APIの共有分類はapi.error.TemporaryInfrastructureExceptionのpure static portへ置き、API内で再利用する（新module/GAV/権限依存なし）。既Authのsuppressed優先とWeb/sessionのcause優先はSSC328を維持する。Web内部の同分類は既SessionStoreException portを使い、production Web→API依存を追加しない。"
+        },
+        {
+          "line": 21,
+          "text": "owned transactionはhandler/commitのSQL・Runtime・Error失敗時にrollbackを一回試み、owned connection closeも一回完了させてから結果を返すか失敗を伝播する。rollbackのSQL/Runtime/Errorは元primaryへ同一object以外だけ一時attachし、直接primary Errorのidentity/優先を維持する。TWRが同一Throwableのself-suppressionを別例外へ包んだ場合も、そのcause内Errorを通常catalogへ縮退させない。commit後close失敗はcommitを取り消せたことにせず、応答/ACKの成功を返さない。borrowed repositoryはConnectionのcommit/rollback/closeを新しく所有せず、既Statement/ResultSet closeの後に変換前fatal分類を行う。既通常catalog/SQL/更新数/DB role/再送・DIFは不変更。BUG1592/YKT1345、実原本DB/Root/VM/cohort/keysへの操作権限を追加しない。"
+        },
+        {
+          "line": 23,
+          "text": "SSC156（2026-10-02、Worker実装前）：retry_countはmin(actual count-1,3)、実delivery metadataは非cap。AnswerResult.answeredAtの有限UTCµsをstarted/received以上で検査し、answer/job/notificationの同完了stampへ使用、wireだけms。通常最終ERRORは既存DのSENT後だけ元ACK。ERROR+D commit～元ACKにhard crash/session rollbackが起きると、固定Broker max4が元WをDLQ移動し、startup dispatcherのD送信と2物理コピーになり得る。双方を同Wの論理隔離として保全し、353 §7.2で個別照合/承認整理する。ERROR時のprovider再実行、新D生成、ordinary W proof変更は禁止。停止要求でD未確認の待機を解く場合は正常復帰せずrollbackする。shared stop→consumer drain/close→Outbox join→DB/factory/key/root closeの所有順を守り、待機中DB/JMSを保持しない。"
+        },
+        {
+          "line": 25,
+          "text": "PG/PT内部接続補足（SSC153154155、2026-10-01、実装前）：普通APIは31 requestとQWK/WebLog、全3consumer、専用Outbox lifecycleを実接続するまでready/A releaseを許さない。共通event portはguard検証済みactual delivery count・bounded transport ID・UTC受信時刻をQuestionへ渡す。Questionのcount-less呼出しをdelivery1と推測しない。"
+        },
+        {
+          "line": 142,
+          "text": "`ContextRevocationRetrier.retryDue(Instant now, int limit)`はdue rowを`FOR UPDATE SKIP LOCKED`で最大100件claimし、唯一lease UUID/期限を確定して短DB transactionを閉じてからJMSへ送信する。更新/削除は自分の現在leaseをCASし、検証済0000/0200だけを自動削除根拠とする。expires_at=NULL/推測期限/一般0102/不明/復号不能は保持・警告。初期5秒/30秒/5分後は15分、attempt_count=100飽和後も継続し、IT/ST性能問題時に間隔を見直す（QA050、SS314 §10）。JMS待機中にDB接続/lockを保持しない。"
+        },
+        {
+          "line": 157,
+          "text": "最大10,000件へmaterializeし、commit後にfile生成する。上限超過は`9001`、途中I/O失敗は`.part`を即時best-effort削除し、"
+        },
+        {
+          "line": 305,
+          "text": "| `CapacityExceededException` | 受付/生成しない | Reply後commit | 9001 / 503 |"
+        }
+      ]
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "originMain": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "anchors": [
+        {
+          "line": 13,
+          "text": "SSC175（2026-10-04、QA048/SS331§9.4）：受付参照の孤児cleanupは固定`WEB_RECEIPTS` kindと`maintenance_cleanup_web_receipt_references(uuid,timestamptz,integer)`を用い、既存`CLEAN_BATCH_RUN` handleのatomic chunk境界へ接続する。NULL/無限・範囲外cutoff、limit1..1000、閉じたkind、同run/date/完全step identity・RUNNING状態を既存同様に検査する。親OS/session advisoryを保持した既定の順、両backup共有lock→現在run参照→親step NOWAIT→locator候補を維持し、statement中の観測だけで決定する。候補はreceipt_id順/最大1,000/FOR UPDATE SKIP LOCKED、現在業務questionsにquestion_idが存在しないものだけ。DELETE＋既存step target/success累積は同transactionで、共有step全kindの順序/累積を維持する。chunk0でもeligible EXISTSが真ならLOCK_BUSY非完了、未知/SQL/commit/close失敗はcallerがrollback/隔離し、単なるDML成功をstep成功にしない。単独孤児functionを呼んだ結果だけで親step終了を証明しない。SECURITY DEFINER/nk_owner・固定search_path/UTC・PUBLIC EXECUTE0、batchに完全signature EXECUTEのみ、Web/business直接権限は増やさない。新operation UUID生成/質問再発行/業務DB修復は本保守の責務ではない。"
+        },
+        {
+          "line": 27,
+          "text": "SSC055/PG163（先行898cc267）: 親BatchRunRepositoryの全仕様は331 §8.3。親がexplicit transaction/RW/READ_COMMITTEDを所有し、前後の同run参照/自己DB排他、日別stepの最大99行FOR UPDATE、明示同run RUNNING recovery、通常成功skip/backup例外、全identity CASと同値terminal replayを実施する。Connection commit/rollback/close/config変更を行わず、返却後commitの成否はcallerが判定する。全bindは型付き・UTC4.2、同date/step内の過去別runを現在原本cutoffへ再束縛せず、legacy診断を投影しない。失敗時の一部DMLは未確定でrollback必須、単なるexecuteUpdate成功をstep完了にしない。"
+        },
+        {
+          "line": 29,
+          "text": "SSC049/PG162（先行d23b1afd）: 親Inspector summaryは331 §3.13の固定4列readだけを借用Connectionで実施する。InspectorLockHandoffと同じparent autoCommit=true/readOnly=false/READ COMMITTED、queryTimeout5秒、UUID＋JDBC4.2 UTC OffsetDateTimeの固定bind。開始時/返却直前割込を拒否し、statement/result全close後だけ0/1行のOptional値を返す。null4列/複数行/不正counts/SQL・close故障は原因/suppressedなし固定BatchRepositoryException。constructor/run nullや未知runtime/NPEは成功化しない。connection commit/rollback/close/config変更/新接続・progress補完を行わない。子引渡し前後の独立fresh queryであり、関数が実子状態やOS lockを認証するものではない。"
+        },
+        {
+          "line": 47,
+          "text": "SSC056/PG160（先行8002b28b・3cf06b00）: Java InstantとPostgreSQL timestamptzの境界はJDBC4.2を使い、setObject(index, instant.atOffset(ZoneOffset.UTC))、getObject(column,OffsetDateTime.class)→null契約確認→toInstantに統一する。java.sql.Timestamp/getTimestamp/setTimestampで歴史暦やdefault timezoneを経由しない。SQL NULLは既存Optional/必須列検査を維持し、値0やepochへ補完しない。PG-D-159もこの規則を適用する。年月日だけのLocalDateは時刻へ変換せず既存date型対応を維持する。既存SQL/parameter番号/transaction/lock/µs範囲・wire表示は不変、新DB columnや推測backfillを追加しない。"
+        },
+        {
+          "line": 49,
+          "text": "独立PTは明示UTCのSQL literal/extract(epoch)と原本Instantで期待値を決め、同じJDBC変換でfixtureとexpectedを生成しない。UTC0001・1582前後・1900・現代µs・UTC9999とUTC/JST/NewYork session、両方向bind/projection、NULL/欠落/未知、全JDBC fault/close所有を対象classへ横展開する。元Timestampの年0001反例を固定記録し、同じ方式へ戻ることをstatic/architecture canaryで拒否する。現在の23 classと既存OffsetDateTime classの全回帰が完了するまでYKT128/SSC056を閉じない。"
+        },
+        {
+          "line": 67,
+          "text": "- Scenario検索・Logは100件、User・通知・質問回答は50件とし、UI 222～225の機能別page sizeを変更しない。"
+        },
+        {
+          "line": 93,
+          "text": "Listは`e.display_order,e.id`順、100件。複数voiceは最小link `display_order,audio_file_id`の1件だけを代表音声にし、countはentry単位。UI234 PAGED48の99,999,900件を超えれば9001。必須line NULL/0、未知enum等は架空値へ補完せず一時整合異常9000、移行検証でも検出する。"
+        },
+        {
+          "line": 102,
+          "text": "- 最大10,000件をJavaのimmutable snapshotへ取得しcommitした後、`.part`へ固定長recordを書く。超過は`9001`。"
+        },
+        {
+          "line": 110,
+          "text": "- Speaker一覧は指定game（未指定は全game）のentryを名前`GROUP BY s.name`で集計し、`count(e.id)` desc、`s.name` asc。同名はgameをまたいでも1候補、wire内部IDは集計対象の`min(s.id)`。Narration/未使用speakerは一覧に出さない。最大500候補超は9001。Routeはgame/prefix集計・prefix昇順、UI223固定map外は未分類、2桁でないmetadataを勝手に補完しない。"
+        },
+        {
+          "line": 138,
+          "text": "CHECK例外へ依存せず事前検査で`9001`。Password resetとstatus/role変更の成功時は、対象のactive"
+        },
+        {
+          "line": 241,
+          "text": "3. Providerの`AnswerResult.answeredAt`を有限UTC microsecondへ正規化し、job started_at/received_at以前を拒否する。同じ値でanswer answered_at、Job/notification state_changed/completed/answered_atを更新する（SSC156）。STUBは現在時刻・空本文。wire projectionだけmillisecondへ切詰め、DB時刻をwire精度に合わせて変更しない。"
+        },
+        {
+          "line": 354,
+          "text": "| Scenario search | 99,661 entry、100件page | selective検索p95 1.5秒以内、stable order、不要seq scanなし |"
+        },
+        {
+          "line": 373,
+          "text": "| N12/N9上限 | `9001` | 容量異常としalert |"
+        },
+        {
+          "line": 396,
+          "text": "| 2026-08-31 | 横断監査でpage sizeをUIの100/50件に機能別統一し、offsetを`pageSize`基準へ是正。 |"
+        }
+      ]
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "originMain": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d",
+      "anchors": [
+        {
+          "line": 16,
+          "text": "| N12 ID | `long`＋`*Id` wrapper | `long` | `bigint` | 0/1～999999999999、identity MAXVALUE/CK |"
+        },
+        {
+          "line": 17,
+          "text": "| N9 count/version/size | `long` | `long` | `bigint` | field別上限、version 0～999999999 |"
+        },
+        {
+          "line": 18,
+          "text": "| N6 page/count | `int` | `int` | `integer`/算出値 | 0～999999、pageは1以上 |"
+        },
+        {
+          "line": 46,
+          "text": "| `SRCREQ01` 672/0/0/928 | `ScenarioSearchRequestData` | `ScenarioSearchHandler` | Query parameterへmap | Page=1..999999、size=100、全条件allowlist |"
+        },
+        {
+          "line": 137,
+          "text": "Total countがpage size別のUI上限を超える場合はrecordを一部返さず`9001`。"
+        },
+        {
+          "line": 210,
+          "text": "Message ID/context/時刻/reserved/paddingをfieldへ含めず、operation tokenは参照layoutなので持たない。Strict wireのlayout/version/Q/S/固定長/record0/semanticを通過した同じtyped値をread-only ADMIN queryへ渡す。canonicalはcallerがcloseし、request自体を認証・query実行許可にしない。UDT responseは要求target IDと一致、USR responseは固定50件page-size/最終補正/total/page/record件数の整合を確認する。Snapshotは当該query時点の結果であり、replayに現在DBの内容/版を混ぜない。PG-D-088/PT-ADM-040～047。"
+        },
+        {
+          "line": 223,
+          "text": "| 6 | fromAt | T1 | decodeしたInstantのUTC ISO-8601表記（Instant.toString） |"
+        },
+        {
+          "line": 224,
+          "text": "| 7 | toAt | T1 | decodeしたInstantのUTC ISO-8601表記（Instant.toString） |"
+        },
+        {
+          "line": 230,
+          "text": "LGSRSP01保存結果はrequest/owner/layout/versionへ拘束した暗号化全電文とする。初回0000はCOMPLETED/NONE、確定9001だけERROR/NONE。保存時headerはms、completed_atはμs、retentionは後段Inboxが完了時刻から24時間を所有する。再送成功だけ0200へ変更し、保存record・9001は不変、応答ID/context/correlation/timeは現在要求から再構成する。現在ADMIN認証、HMAC、transaction、JMSは後段application責務であり、このvalue/replay部品だけで認可済みとみなさない。"
+        }
+      ]
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+      "originMain": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "8f9abda07bc93262c264eae723c74245165bf0806b273b0d007e9fa46f37fa46",
+      "anchors": [
+        {
+          "line": 16,
+          "text": "| Effective page | 1 | 6 | N | M | 1～999999 |"
+        },
+        {
+          "line": 18,
+          "text": "| Total count | 10 | 9 | N | M | Page size 50は0～49,999,950、100は0～99,999,900 |"
+        },
+        {
+          "line": 25,
+          "text": "一部だけを返さず`9001`とし、詳細設計で各対象table/検索viewへ上限constraintまたは運用guardを割り当てる。"
+        },
+        {
+          "line": 128,
+          "text": "| Page | 664 | 6 | N | M | 1～999999 |"
+        },
+        {
+          "line": 135,
+          "text": "### 7.3 `SRCRSP01` record（5,584 byte、最大100件）"
+        },
+        {
+          "line": 171,
+          "text": "### 8.3 `RTERSP01` record（72 byte、最大50件）"
+        }
+      ]
+    }
+  ],
+  "specification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/3606_UserLog残SQL異常静的レビュー仕様.md",
+    "sha256": "daf3edd3ac341d66ecfc709e7104e553d8fe7b144c9de7e2b1a196a87c47be9e"
+  },
+  "reviewIds": [
+    "RV-ADM-SQLERR001",
+    "RV-ADM-SQLERR002",
+    "RV-ADM-SQLERR003",
+    "RV-ADM-SQLERR004",
+    "RV-ADM-SQLERR005",
+    "RV-ADM-SQLERR006"
+  ],
+  "productTests": 0,
+  "productInvocations": 0,
+  "fixturesCreated": 0,
+  "newMethods": 0,
+  "newSourceProofs": 0,
+  "newAcceptance": 0,
+  "reviewIsExecutedPT": false,
+  "dynamicHoldMaintained": true,
+  "refusalScopeUnresolved": true,
+  "ptExemptionGranted": false,
+  "coverageMeasured": false,
+  "coverage": null,
+  "effortRate": null
+}
