@@ -1,0 +1,42 @@
+{
+  "metadataExit": 0,
+  "rawPmd": 4,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "review": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": "241",
+      "method": "parallelCopiesAndControlledCloseKeepIndependentOwnership",
+      "reason": "Host JUnit own2worker: 8copy tasks joined before 2latch-coordinated read/close tasks; every get/await10seconds, executor try-resource and request manual finally, not production J2EE thread management."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "243",
+      "method": "parallelCopiesAndControlledCloseKeepIndependentOwnership",
+      "reason": "Host JUnit own2worker: 8copy tasks joined before 2latch-coordinated read/close tasks; every get/await10seconds, executor try-resource and request manual finally, not production J2EE thread management."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "252",
+      "method": "parallelCopiesAndControlledCloseKeepIndependentOwnership",
+      "reason": "Host JUnit own2worker: 8copy tasks joined before 2latch-coordinated read/close tasks; every get/await10seconds, executor try-resource and request manual finally, not production J2EE thread management."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "262",
+      "method": "parallelCopiesAndControlledCloseKeepIndependentOwnership",
+      "reason": "Host JUnit own2worker: 8copy tasks joined before 2latch-coordinated read/close tasks; every get/await10seconds, executor try-resource and request manual finally, not production J2EE thread management."
+    }
+  ],
+  "bugs": [
+    "BUG-2328",
+    "BUG-2329"
+  ],
+  "horizontal": [
+    "YKT-2073",
+    "YKT-2074"
+  ]
+}

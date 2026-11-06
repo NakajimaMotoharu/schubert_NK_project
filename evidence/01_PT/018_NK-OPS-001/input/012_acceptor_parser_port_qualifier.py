@@ -4,6 +4,7 @@ import sys,os,json,hashlib,subprocess,datetime,zipfile,re,shutil
 import xml.etree.ElementTree as E
 import pg9666_pagination_static as r
 root=Path.cwd();runs=root.parent/'pgpt-runs/PG379';tc=root.parent/'toolchain';jdk=tc/'jdk-25.0.4/bin';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();phase=sys.argv[1];profile=sys.argv[2];external=profile.endswith('.json');assert phase in {'prepare','static','run','post'} and (external or profile in {'range','verified','audit','receipt','login_audit','login_attempt','inbound','snapshot','run_reference','metadata','expiry','backup','batch_run','cleanup_step','cleanup_query','inspection_summary','pressure','topology','acceptor'})
+requestExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/064_question_submit_request.json','evidence/01_PT/018_NK-OPS-001/input/065_question_submit_request_style.json','evidence/01_PT/018_NK-OPS-001/input/066_question_submit_request_boundary_style.json'}
 observationExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/052_api_observation_publication.json','evidence/01_PT/018_NK-OPS-001/input/053_api_observation_publication_style.json'}
 viewProfiles={
  'evidence/01_PT/018_NK-OPS-001/input/063_question_list_projection_style.json':('QuestionListViewModel','QuestionListProjectionPortTest'),
@@ -17,7 +18,7 @@ viewProfiles={
  'evidence/01_PT/018_NK-OPS-001/input/061_notification_list_projection_fixture.json':('NotificationListViewModel','NotificationListProjectionPortTest')}
 viewExternal=external and profile in viewProfiles
 if external:
- assert viewExternal or observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
+ assert requestExternal or viewExternal or observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
  externalCfg=json.loads((root/profile).read_text())
  assert externalCfg['preflightDecision']=='PT_DEFAULT' and externalCfg['actualBackendActions']==0
  if viewExternal:
@@ -25,6 +26,10 @@ if external:
   assert externalCfg['tests']==[viewProfiles[profile][1]] and externalCfg['testPackages']==['view']
   assert externalCfg['abstract']==0
   assert (externalCfg['physical'],externalCfg['expected'],externalCfg['syntheticNoCode'])==((1,16,[]) if externalCfg['main']=='QuestionListViewModel' else (2,14 if externalCfg['main']=='NotificationListViewModel' else 8,['dev/codex/schubert/nk/web/view/'+viewProfiles[profile][0]+'$1']))
+ elif requestExternal:
+  assert externalCfg['module']=='api' and externalCfg['main']=='QuestionSubmitRequest' and externalCfg['mainPackage']=='application/question'
+  assert externalCfg['tests']==['QuestionSubmitRequestPortTest'] and externalCfg['testPackages']==['application/question']
+  assert externalCfg['physical']==1 and externalCfg['abstract']==0 and externalCfg['expected']==8
  elif observationExternal:
   assert externalCfg['module']=='api' and externalCfg['main']=='ApiOutboxObservationSource' and externalCfg['mainPackage']=='monitoring'
   assert externalCfg['tests']==['ApiOutboxPublicationPortTest'] and externalCfg['testPackages']==['monitoring']
@@ -62,7 +67,7 @@ for n,h in base['begin']['inputHashes'].items():assert sha(root/n)==h
 for j in base['jars'].values():assert sha(j['path'])==j['sha256']
 console=tc/'junit-platform-console-standalone-1.13.4.jar';assert sha(console)=='3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892';deps=[Path(base['jars'][n]['path']) for n in ['protocol',module]]
 if external:
- if not observationExternal and not viewExternal:deps.append(Path(base['jars']['bootstrap']['path']))
+ if not observationExternal and not viewExternal and not requestExternal:deps.append(Path(base['jars']['bootstrap']['path']))
  deps.append(tc/'m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar')
  if observationExternal:
   dependency=tc/'m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar';assert sha(dependency)==cfg['micrometerCoreSha256'];deps.append(dependency)
@@ -183,6 +188,10 @@ if viewExternal and cfg['main'] in {'NotificationListViewModel','QuestionListVie
  initializedPure=set(re.findall(r"Initializing '([^']+)",(slot/'class-init.log').read_text()));unexpected={n for n in initializedPure if n.startswith('dev/codex/schubert/nk/') and not (n.startswith(('dev/codex/schubert/nk/protocol/','dev/codex/schubert/nk/web/view/')) or n in {formClass,'dev/codex/schubert/nk/web/session/SessionPrincipal'} or n.startswith((formClass+'$$Lambda','dev/codex/schubert/nk/web/session/SessionPrincipal$$Lambda')))};assert not unexpected,sorted(unexpected)
  for owner,maximum in [(formClass+'$$Lambda',2),('dev/codex/schubert/nk/web/session/SessionPrincipal$$Lambda',1)]:assert sum(n.startswith(owner) for n in initializedPure)<=maximum
  assert not any(n.startswith(('org/springframework/context/','org/springframework/beans/','org/springframework/web/client/','org/springframework/jdbc/','org/apache/activemq/','io/netty/','com/zaxxer/')) for n in initializedPure)
+if requestExternal:
+ initializedRequest=set(re.findall(r"Initializing '([^']+)",(slot/'class-init.log').read_text()));allowedRequest={'dev/codex/schubert/nk/api/application/question/QuestionSubmitRequest','dev/codex/schubert/nk/api/domain/Role','dev/codex/schubert/nk/api/security/AuthenticatedActor','dev/codex/schubert/nk/api/idempotency/CanonicalRequest','dev/codex/schubert/nk/api/idempotency/CanonicalField'}
+ unexpectedRequest={n for n in initializedRequest if n.startswith('dev/codex/schubert/nk/') and not (n.startswith('dev/codex/schubert/nk/protocol/') or n in allowedRequest or n.startswith(('dev/codex/schubert/nk/api/application/question/QuestionSubmitRequestPortTest','dev/codex/schubert/nk/api/idempotency/CanonicalRequest$$Lambda')))};assert not unexpectedRequest,sorted(unexpectedRequest)
+ assert not any(n.startswith(('dev/codex/schubert/nk/storage/','dev/codex/schubert/nk/bootstrap/','org/apache/activemq/','io/netty/','com/zaxxer/','io/micrometer/')) for n in initializedRequest)
 physical=m['physical'];assert len(physical)==cfg['physical']
 with zipfile.ZipFile(deps[1]) as z:
  for n,h in physical.items():assert sha(slot/'component'/(n+'.class'))==h and hashlib.sha256(z.read(n+'.class')).hexdigest()==h

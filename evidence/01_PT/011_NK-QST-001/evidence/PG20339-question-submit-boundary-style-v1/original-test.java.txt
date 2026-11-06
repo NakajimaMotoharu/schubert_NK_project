@@ -1,0 +1,275 @@
+package dev.codex.schubert.nk.api.application.question;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import dev.codex.schubert.nk.api.domain.Role;
+import dev.codex.schubert.nk.api.idempotency.CanonicalRequest;
+import dev.codex.schubert.nk.api.security.AuthenticatedActor;
+import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
+import java.nio.charset.StandardCharsets;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.Test;
+
+/** QST001/ASY001/UI236/SS312323324/PT-QST-PORT001..008, no HMAC/keys/DB/acceptance. */
+final class QuestionSubmitRequestPortTest {
+  private static final String LAYOUT = "QSBREQ01";
+  private static final String BODY = "公開fixture";
+  private static final String CLOSED = "question submit request is closed";
+  private static final UUID TOKEN = new UUID(60, 1);
+  private static final UUID MESSAGE = new UUID(70, 1);
+  private static final Instant AT = Instant.parse("2026-11-06T00:00:00Z");
+  private static final AuthenticatedActor ACTOR = new AuthenticatedActor(1, "reader", Role.USER);
+
+  private static byte[] data(String body, UUID token) {
+    byte[] result = new byte[4144];
+    Arrays.fill(result, (byte) ' ');
+    byte[] text = body.getBytes(StandardCharsets.UTF_8);
+    if (text.length > 4096) throw new AssertionError("fixture body exceeds independent offset");
+    System.arraycopy(text, 0, result, 0, text.length);
+    System.arraycopy(token.toString().getBytes(StandardCharsets.US_ASCII), 0, result, 4096, 36);
+    return result;
+  }
+
+  private static WireMessage<FixedPayload> wire(String layout, byte[] bytes, UUID message) {
+    var header =
+        new CommonHeader(
+            "SCHBNK01",
+            1,
+            new LayoutId(layout),
+            1,
+            MessageKind.REQUEST,
+            InteractionKind.ASYNC_ACCEPTANCE,
+            message,
+            message,
+            AT,
+            Optional.of(AuthenticationContext.of("b".repeat(64))),
+            256,
+            bytes.length,
+            0,
+            0,
+            256 + bytes.length,
+            Optional.empty());
+    return new WireMessage<>(header, new FixedPayload(bytes, 0, List.of()));
+  }
+
+  private static QuestionSubmitRequest decoded(String text) {
+    return QuestionSubmitRequest.decode(wire(LAYOUT, data(text, TOKEN), MESSAGE));
+  }
+
+  private static void reject(byte[] bytes) {
+    var failure =
+        assertThrows(
+            PermanentProtocolException.class,
+            () -> QuestionSubmitRequest.decode(wire(LAYOUT, bytes, MESSAGE)));
+    assertEquals("question submit request is invalid", failure.getMessage());
+    assertEquals(null, failure.getCause());
+    assertEquals(0, failure.getSuppressed().length);
+  }
+
+  private static void canonical(CanonicalRequest value, String owner, String text) {
+    assertEquals(owner, value.ownerScope());
+    assertEquals(LAYOUT, value.layoutId());
+    assertEquals("001", value.layoutVersion());
+    assertEquals("QUESTION:NEW", value.target());
+    assertEquals(1, value.fields().size());
+    assertEquals("question", value.fields().getFirst().name());
+    assertEquals("X1", value.fields().getFirst().typeVersion());
+    assertArrayEquals(text.getBytes(StandardCharsets.UTF_8), value.fields().getFirst().value());
+  }
+
+  @Test
+  void literalOffsetsAndCanonicalFields() {
+    var wire = wire(LAYOUT, data(BODY, TOKEN), MESSAGE);
+    try (var request = QuestionSubmitRequest.decode(wire);
+        var value = request.canonical(ACTOR)) {
+      assertSame(wire.header(), request.header());
+      assertEquals(TOKEN, request.operationToken());
+      assertArrayEquals(BODY.toCharArray(), request.copyQuestion());
+      canonical(value, "1", BODY);
+      assertEquals("QuestionSubmitRequest[REDACTED]", request.toString());
+      assertFalse(value.toString().contains(BODY));
+      assertFalse(value.toString().contains(TOKEN.toString()));
+    }
+  }
+
+  @Test
+  void independentByteAndUnicodeBoundaries() {
+    for (String text :
+        List.of("a", "a".repeat(4096), "é".repeat(2048), "😀".repeat(1024), " A", "a　")) {
+      try (var request = decoded(text);
+          var value = request.canonical(ACTOR)) {
+        assertArrayEquals(text.toCharArray(), request.copyQuestion());
+        canonical(value, "1", text);
+      }
+    }
+    try (var request = decoded("a ")) {
+      assertArrayEquals(new char[] {'a'}, request.copyQuestion());
+    }
+    for (String text : List.of("", "\r", "\n", "\t", "\0", "e\u0301")) reject(data(text, TOKEN));
+    byte[] malformed = data("a", TOKEN);
+    malformed[0] = (byte) 0xc3;
+    malformed[1] = 0x28;
+    reject(malformed);
+    reject(Arrays.copyOf(data("a".repeat(4096), TOKEN), 4145));
+    reject(Arrays.copyOf(data(BODY, TOKEN), 4143));
+  }
+
+  @Test
+  void reservedTokenAndUnsupportedLayoutReject() {
+    byte[] good = data(BODY, TOKEN);
+    for (int offset = 4132; offset < 4144; offset++) {
+      byte[] changed = good.clone();
+      changed[offset] = 'X';
+      reject(changed);
+    }
+    for (int offset : new int[] {4096, 4104, 4131}) {
+      byte[] changed = good.clone();
+      changed[offset] = 'Z';
+      reject(changed);
+    }
+    assertThrows(
+        PermanentProtocolException.class,
+        () -> QuestionSubmitRequest.decode(wire("LOGREQ01", good, MESSAGE)));
+  }
+
+  @Test
+  void nullBoundariesRejectWithoutCloseLeak() {
+    assertThrows(NullPointerException.class, () -> QuestionSubmitRequest.decode(null));
+    try (var request = decoded(BODY)) {
+      assertThrows(NullPointerException.class, () -> request.canonical(null));
+      assertArrayEquals(BODY.toCharArray(), request.copyQuestion());
+      assertEquals(TOKEN, request.operationToken());
+    }
+  }
+
+  @Test
+  void sourceAndReturnedBuffersHaveSeparateOwners() {
+    byte[] bytes = data(BODY, TOKEN);
+    var wire = wire(LAYOUT, bytes, MESSAGE);
+    byte[] wireBefore = wire.payload().copyData();
+    try (var request = QuestionSubmitRequest.decode(wire);
+        var second = request.canonical(ACTOR)) {
+      var first = request.canonical(ACTOR);
+      try {
+        Arrays.fill(bytes, (byte) 'Z');
+        char[] copy = request.copyQuestion();
+        Arrays.fill(copy, 'X');
+        byte[] field = first.fields().getFirst().value();
+        Arrays.fill(field, (byte) 'X');
+        assertArrayEquals(BODY.toCharArray(), request.copyQuestion());
+        canonical(first, "1", BODY);
+        canonical(second, "1", BODY);
+        assertArrayEquals(wireBefore, wire.payload().copyData());
+        first.close();
+        assertArrayEquals(
+            new byte[BODY.getBytes(StandardCharsets.UTF_8).length],
+            first.fields().getFirst().value());
+        canonical(second, "1", BODY);
+      } finally {
+        first.close();
+      }
+    }
+  }
+
+  @Test
+  void closeIsTerminalAndReturnedCanonicalStaysOwned() {
+    var request = decoded(BODY);
+    try (var value = request.canonical(ACTOR)) {
+      request.close();
+      request.close();
+      assertEquals(CLOSED, assertThrows(IllegalStateException.class, request::header).getMessage());
+      assertEquals(
+          CLOSED, assertThrows(IllegalStateException.class, request::operationToken).getMessage());
+      assertEquals(
+          CLOSED, assertThrows(IllegalStateException.class, request::copyQuestion).getMessage());
+      assertEquals(
+          CLOSED,
+          assertThrows(IllegalStateException.class, () -> request.canonical(ACTOR)).getMessage());
+      canonical(value, "1", BODY);
+      assertEquals("QuestionSubmitRequest[REDACTED]", request.toString());
+    } finally {
+      request.close();
+    }
+  }
+
+  @Test
+  void traceMetadataExcludedAndActorBodyIncluded() {
+    try (var first = decoded(BODY);
+        var second =
+            QuestionSubmitRequest.decode(
+                wire(LAYOUT, data(BODY, new UUID(60, 2)), new UUID(70, 2)));
+        var otherBody = decoded("different");
+        var a = first.canonical(ACTOR);
+        var b = second.canonical(ACTOR);
+        var c = first.canonical(new AuthenticatedActor(2, "other", Role.ADMIN));
+        var d = otherBody.canonical(ACTOR)) {
+      canonical(a, "1", BODY);
+      canonical(b, "1", BODY);
+      canonical(c, "2", BODY);
+      canonical(d, "1", "different");
+      assertArrayEquals(a.fields().getFirst().value(), b.fields().getFirst().value());
+      assertFalse(Arrays.equals(a.fields().getFirst().value(), d.fields().getFirst().value()));
+      assertEquals(new UUID(60, 2), second.operationToken());
+    }
+  }
+
+  @Test
+  void parallelCopiesAndControlledCloseKeepIndependentOwnership() throws Exception {
+    var request = decoded(BODY);
+    try (var workers = Executors.newFixedThreadPool(2)) {
+      var pending = new ArrayList<Future<char[]>>();
+      for (int i = 0; i < 8; i++) pending.add(workers.submit(request::copyQuestion));
+      for (var task : pending) {
+        char[] copy = task.get(10, TimeUnit.SECONDS);
+        assertArrayEquals(BODY.toCharArray(), copy);
+        Arrays.fill(copy, 'X');
+      }
+      var copied = new CountDownLatch(1);
+      var retired = new CountDownLatch(1);
+      var reader =
+          workers.submit(
+              () -> {
+                char[] copy = request.copyQuestion();
+                copied.countDown();
+                if (!retired.await(10, TimeUnit.SECONDS))
+                  throw new AssertionError("owned close worker deadline");
+                assertThrows(IllegalStateException.class, request::copyQuestion);
+                return copy;
+              });
+      var closer =
+          workers.submit(
+              () -> {
+                if (!copied.await(10, TimeUnit.SECONDS))
+                  throw new AssertionError("owned copy worker deadline");
+                request.close();
+                retired.countDown();
+                return true;
+              });
+      assertEquals(true, closer.get(10, TimeUnit.SECONDS));
+      assertArrayEquals(BODY.toCharArray(), reader.get(10, TimeUnit.SECONDS));
+      assertThrows(IllegalStateException.class, request::header);
+    } finally {
+      request.close();
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "metadataExit": 0,
+  "rawPmd": 4,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "review": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": "241",
+      "method": "parallelCopiesAndControlledCloseKeepIndependentOwnership",
+      "reason": "Host JUnit own2worker: 8copy tasks joined before 2latch-coordinated read/close tasks; every get/await10seconds, executor try-resource and request manual finally, not production J2EE thread management."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "243",
+      "method": "parallelCopiesAndControlledCloseKeepIndependentOwnership",
+      "reason": "Host JUnit own2worker: 8copy tasks joined before 2latch-coordinated read/close tasks; every get/await10seconds, executor try-resource and request manual finally, not production J2EE thread management."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "252",
+      "method": "parallelCopiesAndControlledCloseKeepIndependentOwnership",
+      "reason": "Host JUnit own2worker: 8copy tasks joined before 2latch-coordinated read/close tasks; every get/await10seconds, executor try-resource and request manual finally, not production J2EE thread management."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "262",
+      "method": "parallelCopiesAndControlledCloseKeepIndependentOwnership",
+      "reason": "Host JUnit own2worker: 8copy tasks joined before 2latch-coordinated read/close tasks; every get/await10seconds, executor try-resource and request manual finally, not production J2EE thread management."
+    }
+  ],
+  "bugs": [
+    "BUG-2328",
+    "BUG-2329"
+  ],
+  "horizontal": [
+    "YKT-2073",
+    "YKT-2074"
+  ],
+  "files": {
+    "manifest.safe.json": "5eca88b65deb1a2ce27b610ae76f8e82180f0495a044ef49af3d51d65b820b76",
+    "checkstyle.xml": "1b933986edc879057952bd98311cb0a21f9951680346b4527b587d5249fcd8ee",
+    "review.json": "ad04bd314a12a0ef5b0beecefb078a51448ff685c19896d53255d225e6abca0c",
+    "pmd.xml": "da5537dd152eb08fb62318abb2068b85ed21775fb0c0e16266a0641ced0b41e8"
+  }
+}
