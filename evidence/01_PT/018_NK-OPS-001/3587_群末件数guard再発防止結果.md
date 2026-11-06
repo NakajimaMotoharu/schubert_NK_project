@@ -1,0 +1,7 @@
+# 群末件数guard 再発防止結果
+
+2026-11-06T13:18:47.806586+09:00 NK-OPS-001/WBS-P018-04.03、仕様3586、着手972。PG20416 metadata unittest7/Failed-Error-Skipped0、Production PT0/Sourceproof0/受入0。manifest evidence/01_PT/018_NK-OPS-001/evidence/PG20416-event-summary-count-guard-v1/manifest.json SHA256 ed72ed21a462c1eb411d0729f4665bc55ba1bd9c0f2322dfcc6f84e4fce4f742、PG20420 Git byte結合post0 SHA256 dc8d752cb526a5f2e0f167b886caa0c1734b593f0a3313e019fada8bb29c9f9f、source ca622bf5d7062e6615910551ae8360fcf2203d09/push0。Code inputは実行時workingtree hashで固定し、後のGit artifact/helper/driverが同byteと別postで確認、metadata試験の再演0。実commandは仕様3586、OS/Python/終端確認はterminal-observation.json、Linux/Python3.14。Tool actual exit0受領後の保守的な終端観測時刻を記録し、その後fresh quotaを結合した。
+
+固定5summary文字列、invalid count6種/unknown・曖昧・0・leadingzero label6種、実4002のsummary8とqualified13不一致、追加4004の13訂正、実4005/qualified9、直近全8GROUP_ENDとpublicmanifest hashの一致を独立期待値で確認。helperは検証済み件数からcanonical文字列を作り、単一宣言数との一致だけを点検する。文字列一致だけでPT/coverage/gate合格にはしない。元event4002/成功XML/証拠/実費は不変更、修正後の未来summaryが固定8をコピーしないための道具。BUG2331/YKT2076はsourceca622bf5d7062e6615910551ae8360fcf2203d09・7否定/正常metadata・8実記録照合/post0で有限CLOSED。元4004/971訂正は保持、追加Product試験/費用/受入再加算0。
+
+群4006→4007原0.1/0.5/2pp cap3、実終端確認後fresh共有差0/ordinary25-all32、専有N/Tnull。S7残3/第一V同HOLD、MainD8・各source技術56/原282交差37・partial80結合17・直近Production137/正式1964-53/歴史17-190/工数null不変。metadata7は別domain、全451等未受入。続いてWebSecurityAudit local memory sinkの許可済み境界を事前確認する。
