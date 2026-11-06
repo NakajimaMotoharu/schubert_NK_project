@@ -1,0 +1,44 @@
+<!doctype html>
+<!-- SCR013/FUN007/UI223235/SS313/PG-D365/PT-CONTENT. API stored pair/order only. -->
+<html lang="ja">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Music</title>
+  <link rel="stylesheet" href="/css/schubert.css">
+ </head>
+ <body>
+  <main class="page">
+   <header class="topbar">
+    <div>
+     <h1>Music</h1>
+     <div class="subtitle">1曲</div>
+    </div>
+    <div class="topbar-actions">
+     <div class="topbar-actions">
+      <nav class="nav-links" aria-label="共通ナビゲーション">
+       <a href="/">メニュー</a> <a href="/notifications">通知</a>
+      </nav>
+      <span class="login-user">fixture-reader</span> <span class="login-role">USER</span>
+      <form class="logout-form" action="/logout" method="post">
+       <button type="submit">ログアウト</button>
+      </form>
+     </div>
+     <nav class="nav-links">
+      <a href="/music">音楽</a> <a href="/music/BGM">BGM</a><a href="/search">検索</a>
+     </nav>
+    </div>
+   </header>
+   <section class="music-list">
+    <article class="music-row">
+     <div class="music-info">
+      <strong>曲&lt;script&gt;&amp;"</strong> <span class="scenario-meta"><span>&lt;img onerror=bad&gt; 日本</span> <span>0.0 MB</span> </span>
+     </div>
+     <div class="music-player">
+      <audio controls preload="none" src="/music/media/plain"></audio> <a class="download" href="/music/download/plain">DL</a>
+     </div>
+    </article>
+   </section>
+  </main>
+ </body>
+</html>
