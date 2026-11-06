@@ -4,6 +4,7 @@ import sys,os,json,hashlib,subprocess,datetime,zipfile,re,shutil
 import xml.etree.ElementTree as E
 import pg9666_pagination_static as r
 root=Path.cwd();runs=root.parent/'pgpt-runs/PG379';tc=root.parent/'toolchain';jdk=tc/'jdk-25.0.4/bin';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();phase=sys.argv[1];profile=sys.argv[2];external=profile.endswith('.json');assert phase in {'prepare','static','run','post'} and (external or profile in {'range','verified','audit','receipt','login_audit','login_attempt','inbound','snapshot','run_reference','metadata','expiry','backup','batch_run','cleanup_step','cleanup_query','inspection_summary','pressure','topology','acceptor'})
+formExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/068_login_form_converter.json'
 sessionExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/067_web_session_snapshot.json'
 requestExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/064_question_submit_request.json','evidence/01_PT/018_NK-OPS-001/input/065_question_submit_request_style.json','evidence/01_PT/018_NK-OPS-001/input/066_question_submit_request_boundary_style.json'}
 observationExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/052_api_observation_publication.json','evidence/01_PT/018_NK-OPS-001/input/053_api_observation_publication_style.json'}
@@ -19,7 +20,7 @@ viewProfiles={
  'evidence/01_PT/018_NK-OPS-001/input/061_notification_list_projection_fixture.json':('NotificationListViewModel','NotificationListProjectionPortTest')}
 viewExternal=external and profile in viewProfiles
 if external:
- assert sessionExternal or requestExternal or viewExternal or observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
+ assert formExternal or sessionExternal or requestExternal or viewExternal or observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
  externalCfg=json.loads((root/profile).read_text())
  assert externalCfg['preflightDecision']=='PT_DEFAULT' and externalCfg['actualBackendActions']==0
  if viewExternal:
@@ -27,6 +28,10 @@ if external:
   assert externalCfg['tests']==[viewProfiles[profile][1]] and externalCfg['testPackages']==['view']
   assert externalCfg['abstract']==0
   assert (externalCfg['physical'],externalCfg['expected'],externalCfg['syntheticNoCode'])==((1,16,[]) if externalCfg['main']=='QuestionListViewModel' else (2,14 if externalCfg['main']=='NotificationListViewModel' else 8,['dev/codex/schubert/nk/web/view/'+viewProfiles[profile][0]+'$1']))
+ elif formExternal:
+  assert externalCfg['module']=='web' and externalCfg['main']=='LoginFormAuthenticationConverter' and externalCfg['mainPackage']=='security'
+  assert externalCfg['tests']==['LoginFormConverterPortTest'] and externalCfg['testPackages']==['security']
+  assert externalCfg['physical']==1 and externalCfg['abstract']==0 and externalCfg['expected']==13
  elif sessionExternal:
   assert externalCfg['module']=='web' and externalCfg['main']=='WebSessionSnapshot' and externalCfg['mainPackage']=='session'
   assert externalCfg['tests']==['WebSessionSnapshotPortTest'] and externalCfg['testPackages']==['session']
@@ -72,8 +77,12 @@ for n,h in base['begin']['inputHashes'].items():assert sha(root/n)==h
 for j in base['jars'].values():assert sha(j['path'])==j['sha256']
 console=tc/'junit-platform-console-standalone-1.13.4.jar';assert sha(console)=='3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892';deps=[Path(base['jars'][n]['path']) for n in ['protocol',module]]
 if external:
- if not observationExternal and not viewExternal and not requestExternal and not sessionExternal:deps.append(Path(base['jars']['bootstrap']['path']))
+ if not observationExternal and not viewExternal and not requestExternal and not sessionExternal and not formExternal:deps.append(Path(base['jars']['bootstrap']['path']))
  deps.append(tc/'m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar')
+ if formExternal:
+  assert len(cfg['converterDependencies'])==6
+  for name,h in cfg['converterDependencies'].items():
+   assert '/toolchain/m2/repository/' in name and any(v in name for v in ['/commons-logging/1.4.0/','/spring-core/7.0.9/','/spring-web/7.0.9/','/jakarta.servlet-api/6.1.0/','/spring-security-core/7.1.1/','/spring-security-web/7.1.1/']) and sha(name)==h;deps.append(Path(name))
  if observationExternal:
   dependency=tc/'m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar';assert sha(dependency)==cfg['micrometerCoreSha256'];deps.append(dependency)
  if viewExternal and cfg['main'] in {'NotificationListViewModel','QuestionListViewModel'}:
@@ -133,7 +142,7 @@ if phase=='run':
  for f,h in pm['inputHashes'].items():assert hashlib.sha256(subprocess.check_output(['git','show',head+':'+f])).hexdigest()==h
  agent=tc/'m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar';cli=tc/'org.jacoco.cli-0.8.15-nodeps.jar';assert sha(cli)=='d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1';(slot/'tmp').mkdir();cmd=[str(jdk/'java'),'-Djava.io.tmpdir='+str(slot/'tmp'),'-Dfile.encoding=UTF-8','-Duser.language=ja','-Duser.country=JP','-Duser.timezone=Asia/Tokyo','-javaagent:'+str(agent)+'=destfile='+str(slot/'jacoco.exec')+',sessionid='+session+',append=false','-Xlog:class+init=info:file='+str(slot/'class-init.log'),'-jar',str(console),'execute','--disable-banner','--class-path',os.pathsep.join([str(prepared/'test-classes'),*map(str,deps)]),'--reports-dir',str(slot/'xml'),'--fail-if-no-tests','--details','summary']
  for cls in selected:cmd+=['--select-class',cls]
- begin={'coreSource':core,'source':head,'session':session,'compileManifestSha256':sha(prepared/'manifest.safe.json'),'mainCompileManifestSha256':sha(comp/'manifest.safe.json'),'inputHashes':pm['inputHashes'],'classHashes':pm['classHashes'],'dependencies':{str(p):sha(p) for p in deps},'tools':{str(p):sha(p) for p in [console,agent,cli]},'selectedClasses':selected,'expectedTests':expectedCount,'onlyMemoryCallbackFixtures':True,'actualNativeFsDbVmNetworkActions':0,'resourceScopeNote':cfg.get('resourceScopeNote','No actual business backend operations; SDK/JVM activity reviewed separately'),'startUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'driverSha256':sha(__file__),'configHash':cfgHash};(slot/'begin.safe.json').write_text(json.dumps(begin,indent=2)+'\n');stages={'unit':r.step('unit',cmd,root,timeout=120)};component=slot/'component';component.mkdir();physical={}
+ begin={'coreSource':core,'source':head,'session':session,'compileManifestSha256':sha(prepared/'manifest.safe.json'),'mainCompileManifestSha256':sha(comp/'manifest.safe.json'),'inputHashes':pm['inputHashes'],'classHashes':pm['classHashes'],'dependencies':{str(p):sha(p) for p in deps},'tools':{str(p):sha(p) for p in [console,agent,cli]},'selectedClasses':selected,'expectedTests':expectedCount,'onlyMemoryCallbackFixtures':True,'actualNativeFsDbVmNetworkActions':None if formExternal else 0,'actualBusinessBackendOperations':0,'actionCountScope':'BUSINESS_BACKEND_NOT_JVM_SDK_SYSCALL_COUNTS','resourceScopeNote':cfg.get('resourceScopeNote','No actual business backend operations; SDK/JVM activity reviewed separately'),'startUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'driverSha256':sha(__file__),'configHash':cfgHash};(slot/'begin.safe.json').write_text(json.dumps(begin,indent=2)+'\n');stages={'unit':r.step('unit',cmd,root,timeout=120)};component=slot/'component';component.mkdir();physical={}
  with zipfile.ZipFile(deps[1]) as z:
   for n in z.namelist():
    if any(n==prefix+'.class' or n.startswith(prefix+'$') and n.endswith('.class') for prefix in prefixes):
@@ -201,6 +210,10 @@ if sessionExternal:
  initializedSession=set(re.findall(r"Initializing '([^']+)",(slot/'class-init.log').read_text()));allowedSession={'dev/codex/schubert/nk/web/session/'+n for n in ['WebSessionSnapshot','WebSessionId','WebSessionRow','SessionPayloadIdentity','EncryptedSessionPayload','SessionAttributes']}
  unexpectedSession={n for n in initializedSession if n.startswith('dev/codex/schubert/nk/') and not (n in allowedSession or n.startswith(('dev/codex/schubert/nk/web/session/WebSessionSnapshotPortTest','dev/codex/schubert/nk/web/session/SessionAttributes$$Lambda')))};assert not unexpectedSession,sorted(unexpectedSession)
  assert not any(n.startswith(('dev/codex/schubert/nk/storage/','dev/codex/schubert/nk/bootstrap/','org/apache/activemq/','io/netty/','com/zaxxer/','io/micrometer/','javax/crypto/Cipher')) for n in initializedSession)
+if formExternal:
+ initializedForm=set(re.findall(r"Initializing '([^']+)",(slot/'class-init.log').read_text()));allowedForm={'dev/codex/schubert/nk/web/security/'+n for n in ['LoginFormAuthenticationConverter','CaddyClientAddressResolver','LoginClientAddress','LoginFormRejectedException','CaddyRequestRejectedException']}
+ unexpectedForm={n for n in initializedForm if n.startswith('dev/codex/schubert/nk/') and not (n in allowedForm or n.startswith('dev/codex/schubert/nk/web/security/LoginFormConverterPortTest'))};assert not unexpectedForm,sorted(unexpectedForm)
+ assert not any(n.startswith(('dev/codex/schubert/nk/storage/','dev/codex/schubert/nk/bootstrap/','org/apache/activemq/','io/netty/','com/zaxxer/','io/micrometer/','org/springframework/security/core/context/SecurityContextHolder')) for n in initializedForm)
 physical=m['physical'];assert len(physical)==cfg['physical']
 with zipfile.ZipFile(deps[1]) as z:
  for n,h in physical.items():assert sha(slot/'component'/(n+'.class'))==h and hashlib.sha256(z.read(n+'.class')).hexdigest()==h

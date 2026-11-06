@@ -1,0 +1,46 @@
+{
+  "metadataExit": 0,
+  "rawPmd": 6,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "review": [
+    {
+      "rule": "UseConcurrentHashMap",
+      "line": "65",
+      "reason": "Each fixture/maps is created and accessed by exactly one test thread; even parallel test creates one fixture inside each Callable. LinkedHashMap preserves controlled enumeration and allows deliberately null negative values; no shared mutable map."
+    },
+    {
+      "rule": "UseConcurrentHashMap",
+      "line": "66",
+      "reason": "Each fixture/maps is created and accessed by exactly one test thread; even parallel test creates one fixture inside each Callable. LinkedHashMap preserves controlled enumeration and allows deliberately null negative values; no shared mutable map."
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": "99",
+      "reason": "JDK-only proxy must implement exact pinned HttpServletRequest interface under its defining loader; no J2EE container/context loader. Correct loader prevents cross-loader incompatibility."
+    },
+    {
+      "rule": "CompareObjectsWithEquals",
+      "line": "116",
+      "reason": "Proxy Object.equals invocation handler intentionally defines identity equality proxy==arg; calling proxy.equals would recursively reenter handler, so value-equality rule is inapplicable."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "307",
+      "reason": "Host JUnit own2worker8task, every10second join/try-resource pool; no managed servlet/J2EE production threads."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "312",
+      "reason": "Host JUnit own2worker8task, every10second join/try-resource pool; no managed servlet/J2EE production threads."
+    }
+  ],
+  "files": {
+    "manifest.safe.json": "36d1b414602c949ccfc8b01de179718545d48f2cdfd73dc46d416aacdf738882",
+    "checkstyle.xml": "bee31249bf79afe31cf4751b16bfdfe4f8ab92b9d19f14881d82c1e0cc57f1a3",
+    "review.json": "91fd95b9bb415fcbf60aad75d2cd3886a3b5cc3613651f3f82e1fc1937fe7324",
+    "pmd.xml": "394e76158d65c40a9160b0c9c5585c594696620634a8b541e3c1df0cd79b4edd"
+  }
+}
