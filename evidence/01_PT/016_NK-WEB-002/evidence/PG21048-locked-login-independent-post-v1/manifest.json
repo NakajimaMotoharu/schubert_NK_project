@@ -1,0 +1,258 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-06T23:07:33.372656+09:00",
+  "source": "a777b0d1aebf0f35ea8f8b488a379316586e44f1",
+  "productionCoreMain": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+  "originalPost": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/manifest.json",
+    "sha256": "49348869da807cfb0a97c9241f1a8584c7a675fb59662bf213e8f8711b678ba0"
+  },
+  "tests": 4,
+  "testMethods": [
+    "parallelLockedAndUnlockedRenderingsKeepTheirOwnFlags",
+    "allegedRemainingSecondsAndCredentialsNeverBecomeDynamicDisplay",
+    "independentErrorLockedLogoutFlagsKeepCurrentOrderAndFixedText",
+    "approvedLockedMessageDependsOnFlagPresenceNotItsValues"
+  ],
+  "sourceTestIds": [
+    [
+      "PT-LOCK-DOM001",
+      "approvedLockedMessageDependsOnFlagPresenceNotItsValues"
+    ],
+    [
+      "PT-LOCK-DOM002",
+      "independentErrorLockedLogoutFlagsKeepCurrentOrderAndFixedText"
+    ],
+    [
+      "PT-LOCK-DOM003",
+      "allegedRemainingSecondsAndCredentialsNeverBecomeDynamicDisplay"
+    ],
+    [
+      "PT-LOCK-DOM004",
+      "parallelLockedAndUnlockedRenderingsKeepTheirOwnFlags"
+    ]
+  ],
+  "snapshots": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM001-0.html",
+      "sha256": "4b036a69cf9faca03757e459d857e572807cc5e393a338aa75ccda499905d618",
+      "expectedMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ],
+      "actualMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM001-1.html",
+      "sha256": "4b036a69cf9faca03757e459d857e572807cc5e393a338aa75ccda499905d618",
+      "expectedMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ],
+      "actualMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM001-2.html",
+      "sha256": "4b036a69cf9faca03757e459d857e572807cc5e393a338aa75ccda499905d618",
+      "expectedMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ],
+      "actualMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM002-0.html",
+      "sha256": "4b036a69cf9faca03757e459d857e572807cc5e393a338aa75ccda499905d618",
+      "expectedMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ],
+      "actualMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM002-1.html",
+      "sha256": "874db05037ac4136c081df68ea402547233d7157ae8612efc270e04b60dd23d2",
+      "expectedMessages": [
+        "ユーザー名またはパスワードが正しくありません。",
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ],
+      "actualMessages": [
+        "ユーザー名またはパスワードが正しくありません。",
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM002-2.html",
+      "sha256": "8dd995a9e871b42bca56a42b5db8ac76055914f59927e9c2be2dd5f6673686c7",
+      "expectedMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。",
+        "ログアウトしました。"
+      ],
+      "actualMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。",
+        "ログアウトしました。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM002-3.html",
+      "sha256": "54c6b16df9e80d9e8cae063cd226452f5203eb76bc44d06299f566917985a710",
+      "expectedMessages": [
+        "ユーザー名またはパスワードが正しくありません。",
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。",
+        "ログアウトしました。"
+      ],
+      "actualMessages": [
+        "ユーザー名またはパスワードが正しくありません。",
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。",
+        "ログアウトしました。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM003-0.html",
+      "sha256": "4b036a69cf9faca03757e459d857e572807cc5e393a338aa75ccda499905d618",
+      "expectedMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ],
+      "actualMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM003-1.html",
+      "sha256": "4b036a69cf9faca03757e459d857e572807cc5e393a338aa75ccda499905d618",
+      "expectedMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ],
+      "actualMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM003-2.html",
+      "sha256": "4b036a69cf9faca03757e459d857e572807cc5e393a338aa75ccda499905d618",
+      "expectedMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ],
+      "actualMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM003-3.html",
+      "sha256": "4b036a69cf9faca03757e459d857e572807cc5e393a338aa75ccda499905d618",
+      "expectedMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ],
+      "actualMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM003-4.html",
+      "sha256": "4b036a69cf9faca03757e459d857e572807cc5e393a338aa75ccda499905d618",
+      "expectedMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ],
+      "actualMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM003-5.html",
+      "sha256": "4b036a69cf9faca03757e459d857e572807cc5e393a338aa75ccda499905d618",
+      "expectedMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ],
+      "actualMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM004-0.html",
+      "sha256": "4b036a69cf9faca03757e459d857e572807cc5e393a338aa75ccda499905d618",
+      "expectedMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ],
+      "actualMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM004-1.html",
+      "sha256": "a73b57979ed1a6ee38063a014fcefdcb88a88dc296a5a63866b93c6e41394fd6",
+      "expectedMessages": [],
+      "actualMessages": []
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM004-2.html",
+      "sha256": "4b036a69cf9faca03757e459d857e572807cc5e393a338aa75ccda499905d618",
+      "expectedMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ],
+      "actualMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM004-3.html",
+      "sha256": "a73b57979ed1a6ee38063a014fcefdcb88a88dc296a5a63866b93c6e41394fd6",
+      "expectedMessages": [],
+      "actualMessages": []
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM004-4.html",
+      "sha256": "4b036a69cf9faca03757e459d857e572807cc5e393a338aa75ccda499905d618",
+      "expectedMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ],
+      "actualMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM004-5.html",
+      "sha256": "a73b57979ed1a6ee38063a014fcefdcb88a88dc296a5a63866b93c6e41394fd6",
+      "expectedMessages": [],
+      "actualMessages": []
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM004-6.html",
+      "sha256": "4b036a69cf9faca03757e459d857e572807cc5e393a338aa75ccda499905d618",
+      "expectedMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ],
+      "actualMessages": [
+        "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"
+      ]
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21044-locked-login-display-resource-four-v1/output/LOCKDOM004-7.html",
+      "sha256": "a73b57979ed1a6ee38063a014fcefdcb88a88dc296a5a63866b93c6e41394fd6",
+      "expectedMessages": [],
+      "actualMessages": []
+    }
+  ],
+  "approvedOracle": {
+    "path": "evidence/01_PT/016_NK-WEB-002/input/040_locked_login_approved_oracle.json",
+    "sha256": "bd72e50df7835fcdce40fe940d458396cea2794f866843cd337c3c14dbc40a4e"
+  },
+  "staticPost": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21038-locked-login-display-static-v1/manifest.json",
+    "sha256": "10626bbc328c19cc7b1bb4841f08a33ff4ac4dc6342c0591ffc11d18670dadb9"
+  },
+  "originalInitializationHash": "1d987fb6c426e49382873af52c3765def36563a67c87afe6eb5dcd18af6dd230",
+  "checkerSource": "cd60f56de6cdb7c93ae980f3ec0692384d7f628a",
+  "checkerSha256": "038e2bbf89cc3951ea9e1e5f16c1a33c53261e3798f481c316378b009f0db236",
+  "productTestsReexecuted": 0,
+  "productionJavaClasspath": false,
+  "javaCoverage": null,
+  "actualAuthenticationOrBrowser": false,
+  "headerBoundaryAccepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}
