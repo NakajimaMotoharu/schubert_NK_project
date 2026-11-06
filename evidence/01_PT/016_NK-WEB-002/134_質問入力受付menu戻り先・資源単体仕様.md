@@ -1,0 +1,19 @@
+# 質問入力・受付 menu戻り先とHTML資源単体仕様
+
+NK-WEB-002/WBS-P016-18（P016-19共通参照費0）、SCR018019/FUN010/UI221224/SS313314/PG-D357・BUG2341/YKT2086。993/event4026原1/3/6pp cap8。正本8deb UI221 SCR002とSS313 route表からmenuの独立期待値はGET `/`。/menuを期待した旧QuestionControllerTestは同根oracle不備である。
+
+修正前はMainD8 normalJARのnew/accepted/layoutを用いる新8method/17DOMで戻り先二件をREDにする。起票済み障害でありTDD未実装の失敗とはしない。次に二hrefをThymeleafのroot URLに修正、旧Test expected一literalを正本へ訂正する。入力/token/CSRF/POST/業務API/receipt照合を変更しない。新sourceのnormal資源artifactを作り、全Java source/class同一性を旧normalと別記し、source固定の同8method/17DOMでGREEN/static/postを確認する。旧RED/旧JAR/原JUnitを保持、合算0。
+
+|Test ID|class.method|入力/独立期待値|
+|PT-QST-DOM001|QuestionFormReturnResourcePortTest.newPageMenuHrefUsesApprovedCanonicalPath|質問入力の直接menu linkは /、通知等の共通navとは別に確認|
+|PT-QST-DOM002|QuestionFormReturnResourcePortTest.acceptedPageNavigationUsesApprovedTargets|受付navは通知/続けて質問/menuの順、/notifications /questions/new /|
+|PT-QST-DOM003|QuestionFormReturnResourcePortTest.emptyInputHasExplicitFormAndScriptContract|空textarea/required/rows6/label/POST action/非生成synthetic operation field/残4096/外部JSだけ|
+|PT-QST-DOM004|QuestionFormReturnResourcePortTest.noticeValidationAndQuestionTextEscapeWithoutMarkup|独立notice/issue/body literalsをescape、summary anchorとfield error一致、本文保持|
+|PT-QST-DOM005|QuestionFormReturnResourcePortTest.userAndAdminDisplayValuesStaySeparate|二roleの表示値/共通nav順、動的認可とはしない|
+|PT-QST-DOM006|QuestionFormReturnResourcePortTest.acceptedReadonlyDataUsesExplicitReceiptTimeAndEscapedBody|固定receipt/JST時刻/body、再POSTform/hidden操作token無し|
+|PT-QST-DOM007|QuestionFormReturnResourcePortTest.fourThousandNinetySixByteBodyIsNotTruncatedByEitherTemplate|ASCII4096byteを両templateへ供給、全byte/本文保持。入力検証自体は別Java/JS契約|
+|PT-QST-DOM008|QuestionFormReturnResourcePortTest.concurrentInputAndAcceptedPagesKeepValuesSeparate|2worker8request/10秒join、両pageの値と出力非混在|
+
+FixtureはThymeleaf/WebContext/MockServlet/plainmapのみ。期待値はUI221/224と固定map、Production viewmodelやControllerでexpectedを生成しない。schemaだけのsynthetic operation UUIDは実token発行・消費とせず、HTML保存前にoperation_token/_csrf valueをredactし元値不在を検査する。実credential/session/DB/key/Root/VM/Browser/JS実行無し。HTMLはJava四counter対象無しnullでありcoverage100を作らない。
+
+旧QuestionControllerTest動的fixtureは四held依存のため実行/切出しせず、変更literalの正本根拠と限定compile/staticを別記し成功PTに算入しない。QA055 locked表示は引き続きHOLD。Input013/014でRED prepare20576/static20578→Git固定→PG20580、GREEN用新source/newslotと必要normalBuild後は別input/証跡へ。全source/run/resource/JAR/hash/XML/環境/command/actualexit/BUGは結果135へ保存、正式/実HTTP/CHR/native/全451は未受入のまま。
