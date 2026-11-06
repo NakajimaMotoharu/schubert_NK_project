@@ -1,5 +1,10 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-07T04:35:43.847216+09:00 Login filter入口判定単体資格
+
+015仕様078/結果079・PMO600083、PG21622新4/独立21640、対象factory/匿名2physical L17M4C2B4未網羅0。exact route/早期不正encoding拒否/所有callbackだけ、認証/session/JMS/DB未実行。十八依存exact descriptor、BUG2396/97・YKT2141/42有限工具CLOSED。累計52対象unique381=Java277+HTML97+CSS7/whole85/原282交差65残217、正式1964-53/新leaf0/工数null。
+
+
 ## 2026-11-07T04:17:09.529279+09:00 Media MVC 閉Bean限定資格
 
 016仕様126/結果127・PMO600078、PG21574新2/独立21582post0、L2M2C1未網羅0/branch自然零N/A。十七依存constructor/local version/timestampのみ、descriptor/file/配信/監査記録/実HTTP0。BUG2394/YKT2139有限工具是正、旧六run保持。累計51対象新unique377=Java273+HTML97+CSS7、wholeJava84/原282交差64残218。正式1964-53・新leaf0・工数null。
