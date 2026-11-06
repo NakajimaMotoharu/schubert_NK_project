@@ -2,7 +2,40 @@
 from pathlib import Path
 import datetime, hashlib, json, re, subprocess, zipfile
 import xml.etree.ElementTree as ET
-import pg9666_pagination_static as c
+
+def crc64_java25(data):
+ assert data[:4]==bytes.fromhex('cafebabe') and int.from_bytes(data[6:8],'big')==69
+ table=[]
+ for value in range(256):
+  for _ in range(8):value=(value>>1)^0xd800000000000000 if value&1 else value>>1
+  table.append(value)
+ value=0
+ for byte in data:value=(value>>8)^table[(value^byte)&255]
+ return format(value,'016x')
+
+def no_code_package_metadata(data):
+ pos=8
+ def u2():
+  nonlocal pos
+  value=int.from_bytes(data[pos:pos+2],'big');pos+=2;return value
+ count=u2();index=1
+ while index<count:
+  tag=data[pos];pos+=1
+  if tag==1:length=u2();pos+=length
+  elif tag in (3,4):pos+=4
+  elif tag in (5,6):pos+=8;index+=1
+  elif tag in (7,8,16,19,20):pos+=2
+  elif tag in (9,10,11,12,17,18):pos+=4
+  elif tag==15:pos+=3
+  else:raise ValueError('unknown constant pool tag')
+  index+=1
+ access=u2();u2();u2();interfaces=u2();pos+=2*interfaces
+ fields=u2()
+ for _ in range(fields):
+  pos+=6;attributes=u2()
+  for _ in range(attributes):pos+=2;size=int.from_bytes(data[pos:pos+4],'big');pos+=4+size
+ methods=u2();assert methods==0 and fields==0 and access&0x0200
+ return dict(methodCount=0,fieldCount=0,accessFlags=access,reason='PACKAGE_INFO_ANNOTATION_METADATA_NO_EXECUTABLE_CODE_NOT_COVERAGE_EXCLUSION')
 r=Path.cwd();runs=r.parent/'pgpt-runs/PG379';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();load=lambda p:json.loads(p.read_text())
 p=r/'evidence/01_PT/005_NK-MSG-001/evidence/PG21824-jms-reply-current-codec-seven-v1/manifest.json';assert sha(p)=='e1e108aa4bd43cea0a131debbaf910063ca812c268bee1d64a665e4460659a55';m=load(p);ctx=m['context']
 assert m['actualExit']==m['failures']==m['errors']==m['skipped']==m['aborted']==0 and m['tests']==m['requalifiedExistingInvocations']==7 and m['newMethods']==0
@@ -23,23 +56,30 @@ assert not any(s in ctx['classpath'] for s in ['schubert-nk-api-','schubert-nk-s
 forbidden={'dev/codex/schubert/nk/api/error/TemporaryInfrastructureException','dev/codex/schubert/nk/web/bootstrap/WebStartupException','dev/codex/schubert/nk/api/idempotency/FingerprintKeyRing','dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec'}
 init=set(re.findall(r"Initializing '([^']+)",(p.parent/'unit-class-init.stdout').read_text()));assert not (init & forbidden)
 head=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip();assert hashlib.sha256(subprocess.check_output(['git','show',head+':'+str(Path(__file__).relative_to(r))])).hexdigest()==sha(Path(__file__))
-slot=runs/'pg21828-jms-reply-current-codec-independent-v1';assert not slot.exists();slot.mkdir();c.SLOT=slot
+slot=runs/'pg21828-jms-reply-current-codec-independent-v1';assert slot.is_dir()
 java=str(r.parent/'toolchain/jdk-25.0.4/bin/java');cli=str(r.parent/'toolchain/org.jacoco.cli-0.8.15-nodeps.jar');jars=[web['path'],protocol['path']]
 # These JARs are analyzer arguments, never the tool runtime classpath. No class is extracted.
-stages={}
-stages['normal-classinfo']=c.step('normal-classinfo',[java,'-Xlog:class+init=info:file='+str(slot/'classinfo-init.stdout'),'-jar',cli,'classinfo',*jars],r,timeout=60)
-stages['dependency-report']=c.step('dependency-report',[java,'-Xlog:class+init=info:file='+str(slot/'report-init.stdout'),'-jar',cli,'report',str(p.parent/'jacoco.exec'),'--classfiles',web['path'],'--classfiles',protocol['path'],'--xml',str(slot/'dependency-coverage.xml')],r,timeout=60)
+expected_commands={
+ 'normal-classinfo':[java,'-Xlog:class+init=info:file='+str(slot/'classinfo-init.stdout'),'-jar',cli,'classinfo',*jars],
+ 'dependency-report':[java,'-Xlog:class+init=info:file='+str(slot/'report-init.stdout'),'-jar',cli,'report',str(p.parent/'jacoco.exec'),'--classfiles',web['path'],'--classfiles',protocol['path'],'--xml',str(slot/'dependency-coverage.xml')]}
+stages={name:load(slot/(name+'-exit.safe.json')) for name in expected_commands}
+for name,stage in stages.items():
+ assert stage['command']==expected_commands[name] and stage['stdoutSha256']==sha(slot/(name+'.stdout')) and stage['stderrSha256']==sha(slot/(name+'.stderr'))
 assert all(s['actualExit']==0 and not s['timedOut'] for s in stages.values())
 for name in ['classinfo-init.stdout','report-init.stdout']:
  assert not any(n.startswith('dev/codex/schubert/nk/') for n in re.findall(r"Initializing '([^']+)",(slot/name).read_text()))
 ids={n:i for i,n in re.findall(r'(?:class|interface|enum|record) 0x([0-9a-f]{16})\s+(\S+)',(slot/'normal-classinfo.stdout').read_text())}
-physical={}
+physical={};calculated_ids={};no_code={}
 for module,jar in [('web',web),('protocol',protocol)]:
  with zipfile.ZipFile(jar['path']) as z:
   for name in z.namelist():
    if name.endswith('.class') and not name.startswith('META-INF/'):
-    cls=name[:-6];h=hashlib.sha256(z.read(name)).hexdigest();assert normal['normalPhysicalClassHashes'][module+':'+name]==h;assert cls not in physical;physical[cls]=h
-assert len(physical)==535 and set(ids)==set(physical)
+    data=z.read(name);cls=name[:-6];h=hashlib.sha256(data).hexdigest();assert normal['normalPhysicalClassHashes'][module+':'+name]==h;assert cls not in physical;physical[cls]=h;calculated_ids[cls]=crc64_java25(data)
+    if cls not in ids:
+     assert cls.endswith('/package-info');no_code[cls]=dict(**no_code_package_metadata(data),normalClassSha256=h,crc64=calculated_ids[cls])
+assert len(physical)==535 and len(ids)==520 and len(no_code)==15 and set(ids)|set(no_code)==set(physical)
+assert all(calculated_ids[n]==value for n,value in ids.items())
+ids=calculated_ids
 execs={n:dict(id=i,hits=int(h),probes=int(v)) for i,h,v,n in re.findall(r'^([0-9a-f]{16})\s+(\d+) of\s+(\d+)\s+(\S+)$',(p.parent/'execinfo.stdout').read_text(),re.M)}
 compiled=runs/'pg21818-jms-reply-current-codec-compile-v1/test-classes'
 test_names={str(q.relative_to(compiled))[:-6] for q in compiled.rglob('*.class')}
@@ -59,11 +99,11 @@ for node in tree.findall('.//class'):
   partial[name]={a.get('type'):dict(covered=int(a.get('covered')),missed=int(a.get('missed'))) for a in node.findall('counter')}
 assert all(n in methods for n in m['coverage'])
 for n,cs in m['coverage'].items():assert partial[n]==cs
-out=r/'evidence/01_PT/005_NK-MSG-001/evidence/PG21828-jms-reply-current-codec-independent-post-v1';assert not out.exists();out.mkdir();files={}
+out=r/'evidence/01_PT/005_NK-MSG-001/evidence/PG21830-jms-reply-current-codec-independent-post-v2';assert not out.exists();out.mkdir();files={}
 for q in slot.iterdir():
  if q.is_file():
   data=q.read_bytes();(out/q.name).write_bytes(data);files[q.name]=sha(out/q.name)
-witness=dict(normalMetadataClasses=535,normalJarHashes=dict(web=web['sha256'],protocol=protocol['sha256']),positiveMainClasses=positive,reportedCoveredMethods=methods,reportedPartialCounters=partial,positiveClassesWithoutReportedMethod=sorted(set(positive)-set(methods)),wholeDependencyCoverageAccepted=False,oldExecUnion=False,heldMainInitialized=[],heldMainExecutedProbes=0,productClassExtractionPerformed=False,analyzerProductInitializations=0)
+witness=dict(normalMetadataClasses=535,classinfoExecutableIdentities=520,noExecutableMetadataClasses=no_code,crc64ComputedAll535AndMatchedAll520Classinfo=True,normalJarHashes=dict(web=web['sha256'],protocol=protocol['sha256']),positiveMainClasses=positive,reportedCoveredMethods=methods,reportedPartialCounters=partial,positiveClassesWithoutReportedMethod=sorted(set(positive)-set(methods)),wholeDependencyCoverageAccepted=False,oldExecUnion=False,heldMainInitialized=[],heldMainExecutedProbes=0,productClassExtractionPerformed=False,analyzerProductInitializations=0,originalClassinfoAndReportReexecuted=False)
 (out/'dependency-witness.json').write_text(json.dumps(witness,ensure_ascii=False,indent=2)+'\n');files['dependency-witness.json']=sha(out/'dependency-witness.json')
-v=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),source=m['source'],checkerSource=head,checkerSha256=sha(Path(__file__)),productionCoreMain=m['productionCoreMain'],original=dict(path=str(p.relative_to(r)),sha256=sha(p)),tests=7,newMethods=0,requalifiedExistingInvocations=7,newSourceProofs=0,newAcceptance=0,coverage=m['coverage'],naturalZeroBranchClasses=m['naturalZeroBranchClasses'],normalMetadataClasses=535,positiveMainClassCount=len(positive),reportedMethodCount=sum(map(len,methods.values())),dependencyWitness=dict(path='dependency-witness.json',sha256=files['dependency-witness.json']),stages=stages,files=files,heldInitAndProbeHits=0,analyzerProductInitializations=0,wholeDependencyCoverageAccepted=False,whole451Accepted=False,formalUpdated=False,effortRate=None)
+v=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),source=m['source'],checkerSource=head,checkerSha256=sha(Path(__file__)),productionCoreMain=m['productionCoreMain'],original=dict(path=str(p.relative_to(r)),sha256=sha(p)),tests=7,newMethods=0,requalifiedExistingInvocations=7,newSourceProofs=0,newAcceptance=0,coverage=m['coverage'],naturalZeroBranchClasses=m['naturalZeroBranchClasses'],normalMetadataClasses=535,noExecutableMetadataClassCount=15,positiveMainClassCount=len(positive),reportedMethodCount=sum(map(len,methods.values())),dependencyWitness=dict(path='dependency-witness.json',sha256=files['dependency-witness.json']),stages=stages,files=files,heldInitAndProbeHits=0,analyzerProductInitializations=0,wholeDependencyCoverageAccepted=False,whole451Accepted=False,formalUpdated=False,relatedBug='BUG-2404',relatedHorizontal='YKT-2149',effortRate=None)
 (out/'manifest.json').write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,tests=7,newMethods=0,normalMetadataClasses=535,positiveMainClasses=len(positive),reportedMethods=sum(map(len,methods.values())),manifestSha256=sha(out/'manifest.json'))))
