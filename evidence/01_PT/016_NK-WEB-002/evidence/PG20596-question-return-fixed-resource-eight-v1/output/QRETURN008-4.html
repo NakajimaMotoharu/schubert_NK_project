@@ -1,0 +1,33 @@
+<!doctype html>
+<!-- SCR018/UI224236/SS313314/QA049/PG-D357/RCPT006A..D,F. Request-only body/token. -->
+<html lang="ja">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>質問要求</title>
+  <link rel="stylesheet" href="/css/schubert.css">
+ </head>
+ <body>
+  <main class="page question-new-page">
+   <header class="topbar">
+    <h1>質問要求</h1>
+    <div class="topbar-actions">
+     <nav class="nav-links" aria-label="共通ナビゲーション">
+      <a href="/">メニュー</a> <a href="/notifications">通知</a>
+     </nav>
+     <span class="login-user">fixture-reader</span> <span class="login-role">USER</span>
+     <form class="logout-form" action="/logout" method="post">
+      <button type="submit">ログアウト</button>
+     </form>
+    </div>
+   </header>
+   <form class="question-input" method="post" action="/questions/new">
+    <input type="hidden" name="operation_token" value="[REDACTED-SYNTHETIC]"> <label for="question">質問</label><textarea id="question" name="question" rows="6" required>question-4</textarea>
+    <p>残り <span data-question-remaining>4096</span> byte</p>
+    <button type="submit">送信</button>
+   </form>
+   <a href="/">メニュー</a>
+  </main>
+  <script src="/js/question-input-validation.js" defer></script>
+ </body>
+</html>

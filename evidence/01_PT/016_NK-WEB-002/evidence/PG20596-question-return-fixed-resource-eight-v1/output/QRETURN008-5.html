@@ -1,0 +1,38 @@
+<!doctype html>
+<!-- SCR019/UI224236/SS313/QA048/PG-D357/RCPT006E,F. Every GET uses current API result. -->
+<html lang="ja">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>質問受付完了</title>
+  <link rel="stylesheet" href="/css/schubert.css">
+ </head>
+ <body>
+  <main class="page question-accepted-page">
+   <header class="topbar">
+    <h1>質問受付完了</h1>
+    <div class="topbar-actions">
+     <nav class="nav-links" aria-label="共通ナビゲーション">
+      <a href="/">メニュー</a> <a href="/notifications">通知</a>
+     </nav>
+     <span class="login-user">fixture-reader</span> <span class="login-role">USER</span>
+     <form class="logout-form" action="/logout" method="post">
+      <button type="submit">ログアウト</button>
+     </form>
+    </div>
+   </header>
+   <p class="accepted-message">質問を受け付けました。</p>
+   <dl>
+    <dt>受付ID</dt>
+    <dd class="receipt">10000000-0000-0000-0000-000000000001</dd>
+    <dt>受付日時</dt>
+    <dd class="submitted-at">2026-11-06 12:34:56</dd>
+    <dt>質問</dt>
+    <dd class="question-body">question-5</dd>
+   </dl>
+   <nav>
+    <a href="/notifications">通知を確認</a><a href="/questions/new">続けて質問</a><a href="/">メニュー</a>
+   </nav>
+  </main>
+ </body>
+</html>
