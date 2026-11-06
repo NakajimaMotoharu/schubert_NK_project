@@ -1,0 +1,40 @@
+{
+  "metadataExit": 0,
+  "rawPmd": 5,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "review": [
+    {
+      "rule": "UseConcurrentHashMap",
+      "line": "51",
+      "reason": "Each Fixture/HashMap belongs to one JUnit/worker task; no shared concurrent map access."
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": "72",
+      "reason": "JDKProxy exact Servlet interface definingloader in standalone host Test, no managed app loader lookup."
+    },
+    {
+      "rule": "NullAssignment",
+      "line": "114",
+      "reason": "Explicitly clear nullable synthetic preparedPrincipal after snapshot capture, preventing principal retention/access during restore; no null success conversion."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "266",
+      "reason": "Own hostJUnit2workers8independent fixtures/10s joins/try-resource executor; no container-managed Production thread creation."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "271",
+      "reason": "Own hostJUnit2workers8independent fixtures/10s joins/try-resource executor; no container-managed Production thread creation."
+    }
+  ],
+  "files": {
+    "manifest.safe.json": "34eb17cd1bf0554c749ae36e8d99d842024d99c7427d86c082c3db65d83b0e00",
+    "pmd.xml": "043b132c4361435b86cfcfee39fbacf0e18e981d65fd12444382cbbc238b1692",
+    "checkstyle.xml": "c24db1df83a464ffe13e09586993cbeda6ddc75bf74d3ca3922aca8933b3e282"
+  }
+}

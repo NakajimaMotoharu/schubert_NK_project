@@ -1,0 +1,17 @@
+# WebErrorDispatchFilter 表示復元 単体仕様
+
+NK-WEB-001/WBS-P016-24、AUT/TST/UI222226/SS313SSC047/314/352・PG-D116、PT-WEB-ERRORRESTORE001..008。986/event4019原1/3/6pp cap8。MainD8 normalphysical1、後発indexに当whole proof無し。既WebDisplayContext/Filterの12PTとRouter10は別証拠として再計上しない。
+
+|Test ID|class.method|独立期待値・事前条件|
+|PT-WEB-ERRORRESTORE001|ErrorDispatchRestorePortTest.nullContractsDoNotReadRequestOrRunChain|request/response/chain nullはNPEを明示拒否、属性/chain操作0|
+|PT-WEB-ERRORRESTORE002|ErrorDispatchRestorePortTest.nonHttpRequestAndResponseRejectBeforeAttributeAccess|Servlet非HTTP二経路は固定ServletException、属性/chain0|
+|PT-WEB-ERRORRESTORE003|ErrorDispatchRestorePortTest.onlyErrorDispatcherAndExactErrorPathCanRestore|ERROR以外4type及びERRORの別pathを拒否、保存属性不変|
+|PT-WEB-ERRORRESTORE004|ErrorDispatchRestorePortTest.anonymousRestoreRemovesBothAliasesAndNeverReadsSessionOrPrincipal|snapshot欠落でcsrf二alias除去、関係ない属性同一、chain一回|
+|PT-WEB-ERRORRESTORE005|ErrorDispatchRestorePortTest.userAndAdminSnapshotsRestoreOnlyParsedDisplayToken|事前に公開zero64文法dataからsnapshot作成、古いaliasをObjectへ替え、同DefaultCsrfToken参照を二aliasへrestore、username/roleだけの表示保持、getPrincipal/session呼出0|
+|PT-WEB-ERRORRESTORE006|ErrorDispatchRestorePortTest.corruptSnapshotNeverRestoresOrInvokesCallback|snapshot誤型はSessionStoreException、token未追加/chain0|
+|PT-WEB-ERRORRESTORE007|ErrorDispatchRestorePortTest.attributeAndCallbackFailuresPropagateWithoutFallback|get/remove/set runtime/fatal及びchain IO/Servlet/runtime/fatal同一性維持、該当後条件とchain有無を固定表で検査|
+|PT-WEB-ERRORRESTORE008|ErrorDispatchRestorePortTest.eightConcurrentRequestsKeepRestoredAndAnonymousAttributesSeparate|自己所有2worker8request/10秒join、snapshot有無と二alias/chainが非混在|
+
+独立oracleは上記callback/属性の明示順序と参照、固定例外、別々のUSER/ADMIN表示literal。FixtureはJDK Servlet Proxyと自己所有mapだけ。WebDisplayContext.captureを準備に使うが期待値はそこから生成しない。SessionPrincipalのAuthContext/CSRFは公開zero文法fixtureであり認証/照合/発行は行わない。parse/formValueだけでgenerate/matches/Cipher/実keyを呼ばず、fixture principalはcapture後除去し、target中のprincipal/session取得はAssertionErrorにする。private raw/実session/DB/HTTP/Root/VM/四held無し、JVM/SDK metadata/syscall数は未測定null。
+
+profile080/shared012 prepare20538/static20540→Git固定→PG20544全8/一exec/全physical/四counter100/normalCRC/strictpost、既正常Main/SBは確認再演0。source/TestID/XML/command/JDK25.0.4/input/dependency/coverage/exit/hash/BUGは結果059へ結合、共通pmo_port_reportで数値転記をguardする。全errorchain/実Browser/native/CHR/451/正式認定/個別leafは別未受入。
