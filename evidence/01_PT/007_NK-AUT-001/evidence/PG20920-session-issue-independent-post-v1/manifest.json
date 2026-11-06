@@ -1,0 +1,151 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-06T21:20:10.771069+09:00",
+  "source": "5720b037554171d092eddabcf0a04bfe95897350",
+  "productionCoreMain": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+  "verifierSource": "6d9ccf9ff77358d730c0a4a533bb422a20886614",
+  "originalPost": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20914-session-issue-jdbc-eight-v1/manifest.json",
+    "sha256": "b51345dd72a3a46cf9d8ead259b301c442c1de7dba965ec75cb3ad7d190554ed"
+  },
+  "tests": 8,
+  "projection": {
+    "schema": "PGPT_PORT_PROJECTION_V1",
+    "source": "5720b037554171d092eddabcf0a04bfe95897350",
+    "mainSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+    "tests": 8,
+    "testClasses": 1,
+    "fourCounters": {
+      "LINE": 69,
+      "METHOD": 3,
+      "CLASS": 1,
+      "BRANCH": 20
+    },
+    "missed": 0,
+    "physical": 1,
+    "noCodeClasses": [],
+    "selectedMethods": [
+      [
+        "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+        "absentDisabledAndMissingColumnsFailBeforeIssuanceOrReplacement"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+        "dif016RetainsTwoAndReplacesOldestWithAtomicAuditStaging"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+        "insertReplacementAndAuditRequireExactlyOneAffectedRow"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+        "insertsIndependentEnvelopeHashUtcAndEightHourExpiry"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+        "ordinaryJdbcAndEveryOwnedCloseFailWithFixedRedaction"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+        "parallelPrivateFixturesDoNotShareContextBuffersOrAuditState"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+        "publicAndInjectedConstructorsAndApiNullBoundsAreExplicit"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.SessionIssueJdbcPortTest",
+        "randomCodecAndUnknownRuntimeFailuresKeepBuffersAndIdentity"
+      ]
+    ],
+    "qualificationTransferred": false
+  },
+  "physicalNormalClassHashes": {
+    "dev/codex/schubert/nk/api/security/AuthSessionService": "11fe88d62a4975091d1db74b99cd6fab02155dee6ba288213e81df36de673510"
+  },
+  "sourceTestIds": [
+    [
+      "PT-AUT-ISS001",
+      "insertsIndependentEnvelopeHashUtcAndEightHourExpiry"
+    ],
+    [
+      "PT-AUT-ISS002",
+      "dif016RetainsTwoAndReplacesOldestWithAtomicAuditStaging"
+    ],
+    [
+      "PT-AUT-ISS003",
+      "publicAndInjectedConstructorsAndApiNullBoundsAreExplicit"
+    ],
+    [
+      "PT-AUT-ISS004",
+      "absentDisabledAndMissingColumnsFailBeforeIssuanceOrReplacement"
+    ],
+    [
+      "PT-AUT-ISS005",
+      "insertReplacementAndAuditRequireExactlyOneAffectedRow"
+    ],
+    [
+      "PT-AUT-ISS006",
+      "ordinaryJdbcAndEveryOwnedCloseFailWithFixedRedaction"
+    ],
+    [
+      "PT-AUT-ISS007",
+      "randomCodecAndUnknownRuntimeFailuresKeepBuffersAndIdentity"
+    ],
+    [
+      "PT-AUT-ISS008",
+      "parallelPrivateFixturesDoNotShareContextBuffersOrAuditState"
+    ]
+  ],
+  "checks": [
+    "original terminal/stages0",
+    "6 XML method bijection/FES0",
+    "all public artifact hashes",
+    "explicit Main/Test Git pins",
+    "separate producer/verifier/config Git pins",
+    "2physical normal jar bytes/CRC/session",
+    "four counters69/3/1/20 miss0",
+    "SDK exact original review",
+    "static raw5 individually nonapplicable",
+    "heldFourZero/no union/no manual exclusion"
+  ],
+  "staticPost": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20910-session-issue-style-static-v1/manifest.json",
+    "sha256": "4b27c7a21ec6fdb7134ca7668fb3733831febaf6fcc85ac5f7a274957fe2298e"
+  },
+  "environment": [
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    },
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    },
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    }
+  ],
+  "productTestsReexecuted": 0,
+  "reusedCheckerTemplate": "008 previously corrected canonical-config and physical-Git-pin semantics; its old prototype failure does not belong to this run",
+  "checkerSourceState": "CURRENT_WIP_METADATA_ONLY_PUBLISHED_NEXT_NOT_PRODUCT_SOURCE",
+  "checkerSha256": "7069e021dae5ee764b0ff1caf07177c45baba20b951eab5c17de4cdc732133bf",
+  "independentGolden": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20902-session-public-golden-vectors-v1/manifest.json",
+    "sha256": "19e53c2f86c9dc391b733f1a53621c50d40e98920bbf8e9fbf404a6bea4bbb5c"
+  },
+  "actualLiveSessionIssued": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "effortRate": null
+}
