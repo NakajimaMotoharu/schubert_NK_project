@@ -1,0 +1,31 @@
+
+Failures (1):
+  JUnit Jupiter:CsrfFilterFactoryPortTest:missingMalformedWrongAndDuplicateFormValuesAreDeniedWithoutChain()
+    MethodSource [className = 'dev.codex.schubert.nk.web.security.CsrfFilterFactoryPortTest', methodName = 'missingMalformedWrongAndDuplicateFormValuesAreDeniedWithoutChain', methodParameterTypes = '']
+    => java.lang.NoClassDefFoundError: org/springframework/security/crypto/codec/Utf8
+       org.springframework.security.web.csrf.CsrfFilter.equalsConstantTime(CsrfFilter.java:202)
+       org.springframework.security.web.csrf.CsrfFilter.doFilterInternal(CsrfFilter.java:126)
+       org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+       dev.codex.schubert.nk.web.security.CsrfFilterFactoryPortTest.missingMalformedWrongAndDuplicateFormValuesAreDeniedWithoutChain(CsrfFilterFactoryPortTest.java:107)
+       java.base/java.lang.reflect.Method.invoke(Method.java:565)
+       [...]
+     Caused by: java.lang.ClassNotFoundException: org.springframework.security.crypto.codec.Utf8
+       java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:377)
+       java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:557)
+       java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:490)
+       [...]
+
+Test run finished after 266 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         8 tests found           ]
+[         0 tests skipped         ]
+[         8 tests started         ]
+[         0 tests aborted         ]
+[         7 tests successful      ]
+[         1 tests failed          ]
+
