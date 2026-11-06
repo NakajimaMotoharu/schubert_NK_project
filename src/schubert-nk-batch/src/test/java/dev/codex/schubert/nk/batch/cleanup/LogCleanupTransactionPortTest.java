@@ -34,6 +34,14 @@ import org.junit.jupiter.api.Test;
 
 /** NK-BAT-001/OPS009/DAT009/UI251/SS331,341/SSC337; BUG2317/YKT2062; spec709. */
 final class LogCleanupTransactionPortTest {
+  private static final String ROW_FALSE = "FALSE";
+  private static final String ROLE_LOCK = "lock";
+  private static final String POINT_BODY = "body";
+  private static final String RECOVER_ROLLBACK = "rollback";
+  private static final String RECOVER_RESTORE = "restore";
+  private static final String ROLE_CHUNK = "chunk";
+  private static final int FIRST_UNKNOWN_KIND = 3;
+  private static final int INTERRUPT_CHECK_SAMPLE = 2;
   private static final BatchRun RUN =
       new BatchRun(new UUID(0, 337), Instant.parse("2026-11-06T00:00:00Z"));
   private static final long LIMIT = 1_800_000_000_000L;
@@ -71,7 +79,8 @@ final class LogCleanupTransactionPortTest {
           () ->
               new LogCleanupService(
                       () -> {
-                        if (calls.incrementAndGet() == 2) Thread.currentThread().interrupt();
+                        if (calls.incrementAndGet() == INTERRUPT_CHECK_SAMPLE)
+                          Thread.currentThread().interrupt();
                         return 0;
                       })
                   .execute(new Fixture().connection, RUN));
@@ -137,11 +146,11 @@ final class LogCleanupTransactionPortTest {
 
   @Test
   void lockRows() {
-    for (String mode : List.of("NONE", "NULL", "FALSE", "MANY")) {
+    for (String mode : List.of("NONE", "NULL", ROW_FALSE, "MANY")) {
       var f = new Fixture();
-      f.modes.put("lock", mode);
+      f.modes.put(ROLE_LOCK, mode);
       stopped(
-          mode.equals("FALSE") ? CleanupStopReason.LOCK_BUSY : CleanupStopReason.DATABASE_FAILURE,
+          mode.equals(ROW_FALSE) ? CleanupStopReason.LOCK_BUSY : CleanupStopReason.DATABASE_FAILURE,
           () -> service().execute(f.connection, RUN));
       assertEquals(0, f.begins);
       assertEquals(0, f.commits);
@@ -151,7 +160,7 @@ final class LogCleanupTransactionPortTest {
 
   @Test
   void unlockRows() {
-    for (String mode : List.of("NONE", "NULL", "FALSE", "MANY")) {
+    for (String mode : List.of("NONE", "NULL", ROW_FALSE, "MANY")) {
       var f = new Fixture();
       f.modes.put("unlock", mode);
       stopped(CleanupStopReason.DATABASE_FAILURE, () -> service().execute(f.connection, RUN));
@@ -166,9 +175,9 @@ final class LogCleanupTransactionPortTest {
     for (int kind = 0; kind < 6; kind++) {
       var f = new Fixture();
       var primary = fault(kind, false);
-      f.failures.put("body", primary);
+      f.failures.put(POINT_BODY, primary);
       Throwable actual = assertThrows(Throwable.class, () -> service().execute(f.connection, RUN));
-      if (kind >= 3) {
+      if (kind >= FIRST_UNKNOWN_KIND) {
         assertSame(primary, actual);
         assertEquals(0, actual.getSuppressed().length);
       } else
@@ -185,28 +194,28 @@ final class LogCleanupTransactionPortTest {
 
   @Test
   void rollbackMatrix() {
-    matrix("rollback");
+    matrix(RECOVER_ROLLBACK);
   }
 
   @Test
   void restoreMatrix() {
-    matrix("restore");
+    matrix(RECOVER_RESTORE);
   }
 
   @Test
   void sameFailureIdentity() {
-    for (String phase : List.of("rollback", "restore")) {
+    for (String phase : List.of(RECOVER_ROLLBACK, RECOVER_RESTORE)) {
       for (int kind = 3; kind < 6; kind++) {
         var f = new Fixture();
         var same = fault(kind, false);
-        f.failures.put("body", same);
+        f.failures.put(POINT_BODY, same);
         f.failures.put(phase, same);
         Throwable actual =
             assertThrows(Throwable.class, () -> service().execute(f.connection, RUN));
         assertSame(same, actual);
         fixedSecondaries(actual, 2);
         assertEquals(1, f.rollbacks);
-        assertEquals(phase.equals("rollback") ? 0 : 1, f.restores);
+        assertEquals(phase.equals(RECOVER_ROLLBACK) ? 0 : 1, f.restores);
         f.assertBorrowed();
       }
     }
@@ -215,8 +224,8 @@ final class LogCleanupTransactionPortTest {
   @Test
   void rollbackGatesRestore() {
     var f = new Fixture();
-    f.failures.put("body", new SQLException("SYNTHETIC_BODY"));
-    f.failures.put("rollback", new SQLException("SYNTHETIC_ROLLBACK"));
+    f.failures.put(POINT_BODY, new SQLException("SYNTHETIC_BODY"));
+    f.failures.put(RECOVER_ROLLBACK, new SQLException("SYNTHETIC_ROLLBACK"));
     stopped(CleanupStopReason.DATABASE_FAILURE, () -> service().execute(f.connection, RUN));
     assertEquals(List.of("LOCK", "BEGIN", "BODY", "ROLLBACK"), f.events);
     assertFalse(f.autoCommit);
@@ -237,7 +246,7 @@ final class LogCleanupTransactionPortTest {
     for (var pair : pairs) {
       for (int first = -1; first < 6; first++) {
         for (int second = 0; second < 6; second++) resource(pair, first, second, false);
-        if (first >= 3) resource(pair, first, first, true);
+        if (first >= FIRST_UNKNOWN_KIND) resource(pair, first, first, true);
       }
     }
   }
@@ -274,9 +283,9 @@ final class LogCleanupTransactionPortTest {
     for (int kind = 0; kind < 6; kind++) {
       var f = new Fixture();
       var secondary = fault(kind, false);
-      f.failures.put("restore", secondary);
+      f.failures.put(RECOVER_RESTORE, secondary);
       Throwable actual = assertThrows(Throwable.class, () -> service().execute(f.connection, RUN));
-      if (kind >= 3) {
+      if (kind >= FIRST_UNKNOWN_KIND) {
         assertSame(secondary, actual);
         fixedSecondaries(actual, 1);
       } else
@@ -296,7 +305,7 @@ final class LogCleanupTransactionPortTest {
       var failure = fault(kind, false);
       f.failures.put("begin", failure);
       Throwable actual = assertThrows(Throwable.class, () -> service().execute(f.connection, RUN));
-      if (kind >= 3) assertSame(failure, actual);
+      if (kind >= FIRST_UNKNOWN_KIND) assertSame(failure, actual);
       else
         fixed(
             actual, kind == 2 ? CleanupStopReason.TIME_LIMIT : CleanupStopReason.DATABASE_FAILURE);
@@ -322,8 +331,8 @@ final class LogCleanupTransactionPortTest {
   void providerNullResources() {
     for (String stage : List.of("statement", "result")) {
       var f = new Fixture();
-      if (stage.equals("statement")) f.nullStatements.add("lock");
-      else f.nullResults.add("lock");
+      if (stage.equals("statement")) f.nullStatements.add(ROLE_LOCK);
+      else f.nullResults.add(ROLE_LOCK);
       assertThrows(NullPointerException.class, () -> service().execute(f.connection, RUN));
       assertEquals(0, f.commits);
       assertEquals(0, f.rollbacks);
@@ -354,16 +363,16 @@ final class LogCleanupTransactionPortTest {
 
   @Test
   void suppressionDisabledPrimary() {
-    for (String phase : List.of("rollback", "restore")) {
+    for (String phase : List.of(RECOVER_ROLLBACK, RECOVER_RESTORE)) {
       var f = new Fixture();
       var primary = new SuppressionDisabled();
-      f.failures.put("body", primary);
+      f.failures.put(POINT_BODY, primary);
       f.failures.put(phase, new SQLException("SYNTHETIC_SECONDARY"));
       assertSame(
           primary, assertThrows(Throwable.class, () -> service().execute(f.connection, RUN)));
       assertEquals(0, primary.getSuppressed().length);
       assertEquals(1, f.rollbacks);
-      assertEquals(phase.equals("rollback") ? 0 : 1, f.restores);
+      assertEquals(phase.equals(RECOVER_ROLLBACK) ? 0 : 1, f.restores);
       f.assertBorrowed();
     }
   }
@@ -419,20 +428,20 @@ final class LogCleanupTransactionPortTest {
         var f = new Fixture();
         var primary = fault(first, false);
         var cleanup = fault(second, false);
-        f.failures.put("body", primary);
+        f.failures.put(POINT_BODY, primary);
         f.failures.put(phase, cleanup);
         Throwable actual =
             assertThrows(Throwable.class, () -> service().execute(f.connection, RUN));
         // Independent literal K={0,1,2}, U={3,4,5}, as specified in SS341 SSC337.
-        if (first >= 3) {
+        if (first >= FIRST_UNKNOWN_KIND) {
           assertSame(primary, actual);
           fixedSecondaries(actual, 2); // transaction recovery, then retained lease disposal.
-        } else if (second >= 3) {
+        } else if (second >= FIRST_UNKNOWN_KIND) {
           assertSame(cleanup, actual);
           fixedSecondaries(actual, 1); // only lease disposal remains after cleanup selection.
         } else fixed(actual, CleanupStopReason.DATABASE_FAILURE);
         assertEquals(1, f.rollbacks);
-        assertEquals(phase.equals("rollback") ? 0 : 1, f.restores);
+        assertEquals(phase.equals(RECOVER_ROLLBACK) ? 0 : 1, f.restores);
         assertEquals(0, f.commits);
         assertFalse(f.autoCommit);
         f.assertBorrowed();
@@ -459,9 +468,9 @@ final class LogCleanupTransactionPortTest {
               return 0;
             });
     Throwable actual = assertThrows(Throwable.class, () -> service.execute(f.connection, RUN));
-    if (first >= 3 || second >= 3) {
-      assertSame(first >= 3 ? primary : secondary, actual);
-      fixedSecondaries(actual, first >= 3 ? 1 : 0);
+    if (first >= FIRST_UNKNOWN_KIND || second >= FIRST_UNKNOWN_KIND) {
+      assertSame(first >= FIRST_UNKNOWN_KIND ? primary : secondary, actual);
+      fixedSecondaries(actual, first >= FIRST_UNKNOWN_KIND ? 1 : 0);
     } else {
       int retained = first < 0 ? second : first;
       fixed(
@@ -500,7 +509,7 @@ final class LogCleanupTransactionPortTest {
     final Set<String> nullResults = new HashSet<>();
     final List<String> events = new ArrayList<>();
     final List<String> unexpected = new ArrayList<>();
-    final Connection connection = proxy(Connection.class, this::connection);
+    final Connection connection = proxy(Connection.class, this::invokeConnection);
     List<Plan> plans = List.of(EMPTY);
     boolean autoCommit = true;
     int transaction = -1;
@@ -522,7 +531,7 @@ final class LogCleanupTransactionPortTest {
       }
     }
 
-    Object connection(Object ignored, java.lang.reflect.Method method, Object[] args)
+    Object invokeConnection(Object ignored, java.lang.reflect.Method method, Object[] args)
         throws Throwable {
       return switch (method.getName()) {
         case "getAutoCommit" -> autoCommit;
@@ -532,7 +541,7 @@ final class LogCleanupTransactionPortTest {
           if ((Boolean) args[0]) {
             events.add("RESTORE");
             restores++;
-            hit("restore");
+            hit(RECOVER_RESTORE);
             autoCommit = true;
           } else {
             events.add("BEGIN");
@@ -544,10 +553,10 @@ final class LogCleanupTransactionPortTest {
           yield null;
         }
         case "prepareStatement" -> prepare((String) args[0]);
-        case "rollback" -> {
+        case RECOVER_ROLLBACK -> {
           events.add("ROLLBACK");
           rollbacks++;
-          hit("rollback");
+          hit(RECOVER_ROLLBACK);
           yield null;
         }
         case "commit" -> {
@@ -561,14 +570,14 @@ final class LogCleanupTransactionPortTest {
           throw new AssertionError("borrowed Connection was closed");
         }
         case "toString" -> "OWNED_MEMORY_JDBC";
-        default -> throw unexpected(method.getName());
+        default -> throw unexpectedMethod(method.getName());
       };
     }
 
     Object prepare(String sql) throws Throwable {
       final String role;
       if (sql.equals("select pg_try_advisory_lock(71419602) as held")) {
-        role = "lock";
+        role = ROLE_LOCK;
         events.add("LOCK");
       } else if (sql.equals("select pg_advisory_unlock(71419602) as released")) {
         role = "unlock";
@@ -576,16 +585,16 @@ final class LogCleanupTransactionPortTest {
       } else if (sql.equals(
           "select target_count,deleted_count,skipped_count,reason_code from"
               + " schubert.maintenance_cleanup_logs(?,?,?)")) {
-        role = "chunk";
+        role = ROLE_CHUNK;
         events.add("BODY");
-        hit("body");
+        hit(POINT_BODY);
       } else if (sql.equals(
           "select target_count,deleted_count,skipped_count,complete from"
               + " schubert.maintenance_read_log_cleanup_progress(?,?)")) role = "progress";
       else if (sql.equals(
           "select pg_catalog.set_config('statement_timeout', ?, true) as bound_timeout"))
         role = "timeout";
-      else throw unexpected("unknown SQL fixture");
+      else throw unexpectedMethod("unknown SQL fixture");
       hit(role + ".prepare");
       if (nullStatements.contains(role)) return null;
       return proxy(
@@ -613,7 +622,7 @@ final class LogCleanupTransactionPortTest {
                   timeoutValue = (String) a[1];
                   yield null;
                 }
-                default -> throw unexpected("statement." + m.getName());
+                default -> throw unexpectedMethod("statement." + m.getName());
               });
     }
 
@@ -632,18 +641,18 @@ final class LogCleanupTransactionPortTest {
                 case "getObject" -> {
                   String column = (String) a[0];
                   String mode = modes.getOrDefault(role, "ONE");
-                  if (role.equals("lock") || role.equals("unlock"))
-                    yield mode.equals("NULL") ? null : !mode.equals("FALSE");
+                  if (role.equals(ROLE_LOCK) || role.equals("unlock"))
+                    yield mode.equals("NULL") ? null : !mode.equals(ROW_FALSE);
                   Plan plan = plans.get(Math.min(transaction, plans.size() - 1));
                   yield switch (column) {
                     case "target_count" ->
-                        role.equals("chunk") ? plan.target() : plan.totalTarget();
+                        role.equals(ROLE_CHUNK) ? plan.target() : plan.totalTarget();
                     case "deleted_count" ->
-                        role.equals("chunk") ? plan.deleted() : plan.totalDeleted();
+                        role.equals(ROLE_CHUNK) ? plan.deleted() : plan.totalDeleted();
                     case "skipped_count" ->
-                        role.equals("chunk") ? plan.skipped() : plan.totalSkipped();
+                        role.equals(ROLE_CHUNK) ? plan.skipped() : plan.totalSkipped();
                     case "complete" -> plan.complete();
-                    default -> throw unexpected("unknown column");
+                    default -> throw unexpectedMethod("unknown column");
                   };
                 }
                 case "getString" ->
@@ -654,11 +663,11 @@ final class LogCleanupTransactionPortTest {
                   hit(role + ".resultClose");
                   yield null;
                 }
-                default -> throw unexpected("rows." + m.getName());
+                default -> throw unexpectedMethod("rows." + m.getName());
               });
     }
 
-    AssertionError unexpected(String method) {
+    AssertionError unexpectedMethod(String method) {
       unexpected.add(method);
       return new AssertionError("unexpected memory fixture method: " + method);
     }

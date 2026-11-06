@@ -79,3 +79,9 @@ PG20116のTest compileは0。再度のGJF1.36.1がprogress role代入直前の�
 ## 依存postと必要な再資格
 
 PG20118は新D8の19件F/E/S0、L156/M15/C3/B68全miss0を計測したが、独立postは不要なstorage JARのclasspath混入で1となり未受入。原結果を保持し、既no-storage/no-native条件を変更せず、共有profileから不要JARだけを除いた。frozen Testはformat check-onlyへ固定し、PG20126 compile0・format検査0、Test source/全Test class byteはPG20116と完全一致。新profile712/PG20128で依存条件変更に必要な一回の再資格を行う。Main build/六SpotBugsと旧成功PTを確認目的で再演しない。原postの記録はevidence/PG20118-post-dependency-unaccepted-v1。
+
+## Test静的規約の是正（BUG2318/YKT2063）
+
+PG20127の58生指摘のうち15件（重複literal6/if literal7/field-handler同名2）を修正前起票し、独立fixtureの定数化・handler名だけ分離した。期待literal/制御条件/19methodは変更せず、format前の変換は逆変換で元sourceへ完全復元できることを確認した。PG20136 Test compile0、PG20137 PMD43/Checkstyle0/processing0。残43は各source/line/SSと目的を個別照合し局所適用違反0（抑制追加0）、全F03/451受入ではない。Main30件は所有資源/未知例外/IRQ確認、Test13件は自己所有thread9/Fixture独立map3/JDK Proxy loader1の目的である。詳細evidence/PG20137-log-tx-static-context-v1。
+
+Test版変更に必要なwhole19再試験/単一exec四counter/strict postはprofile713・PG20138へ固定する。Main D8のbuild/NullAway/6SBはbyte不変なので再実行しない。BUG2318は再資格未完、PG20128の限定成功は別証跡として保持し加算しない。

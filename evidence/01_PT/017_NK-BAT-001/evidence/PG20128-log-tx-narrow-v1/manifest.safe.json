@@ -1,0 +1,280 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "coreSource": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+    "source": "721541a42f7db30b6ac0fb39be7695fb03212b20",
+    "session": "PG20128-LOG-TX-NARROW-19",
+    "compileManifestSha256": "a878a4d608c72a4f9dd02f6d43719a383b91978169ab01cc794a6aa39f8b02d8",
+    "mainCompileManifestSha256": "d85227b4a6b230826d1028d4298d000f187b619ff2b0356efa05634f6afa1dcb",
+    "inputHashes": {
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java": "5a05867d4c6176fae934d2d4936e43b6a9ddabd1983cf072c78285fe3c8ffe4f",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java": "12417a8b5a0fd71ef1010dc339e3088373a590d14edeae4f7a4c186547a89e2a"
+    },
+    "classHashes": {
+      "dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest$Fixture.class": "baff17d73a49b0ee5fdf49d2be14ebf7c378e6a6b05f7592ccc3fd645086e6a8",
+      "dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest$SuppressionDisabled.class": "c04997edd097c4ea9389c722cdf45aa53e1308cc8c1a5d6d96081ff2dad23ce3",
+      "dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest$Plan.class": "bcf02b6d602fdc174f189d0a5a60bd4e00c0e20ba489d86b6c0426bd5b6795d8",
+      "dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.class": "1f83b3d572a0bbfb913d862038a11a95629a85cb4b58edadad5c2280c2b98fa7"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "f53883f24ae8d453f914acfa0c5e84a0ca1ce4e574edb0a62403ed44be274537",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar": "8e1f80b2b8916ee6ddbc1160a0805ea1656c6503a71bdf5e8d583424d547e0cf",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar": "7e20b83311667baecce1784eb3722d20bf06f95a5acacbfd8a2ac3ef9a7edc7f",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    "tools": {
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1"
+    },
+    "selectedClasses": [
+      "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest"
+    ],
+    "expectedTests": 19,
+    "onlyMemoryCallbackFixtures": true,
+    "actualNativeFsDbVmNetworkActions": 0,
+    "resourceScopeNote": "Only memory JDBC proxies and Guard interface; no storage JAR/runtime classes, DB, driver, VM, native or actual owner. Existing no-storage/no-native post guards retained. Same oracle; narrowed unused dependency and format verification only.",
+    "startUTC": "2026-11-06T00:34:24.153867+00:00",
+    "driverSha256": "41c9942c4e4e1d075ded149af7adc2543ff8ab0cd1cd84a1acf7f6e1c8eea5d3",
+    "configHash": "476c383625fb5a7c00357288d39306350a23cd6a885e7f0f56ceb9d7f0fbbc14"
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T00:34:24.154162+00:00",
+      "endUTC": "2026-11-06T00:34:25.321430+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg20128-log-tx-narrow-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.language=ja",
+        "-Duser.country=JP",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg20128-log-tx-narrow-unit-v1/jacoco.exec,sessionid=PG20128-LOG-TX-NARROW-19,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg20128-log-tx-narrow-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20126-log-tx-narrow-compile-v1/test-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20128-log-tx-narrow-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "0d506202f0d26d1039a004fc2a943a5b811e23dec3298c8a246f0d2e00feca5b",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T00:34:25.325527+00:00",
+      "endUTC": "2026-11-06T00:34:25.490088+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20128-log-tx-narrow-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20128-log-tx-narrow-unit-v1/component",
+        "--sourcefiles",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20128-log-tx-narrow-unit-v1/coverage.xml",
+        "--csv",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20128-log-tx-narrow-unit-v1/coverage.csv"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "f4fe6096563b455dffec8504f4a94f5a8d064376dc681ee48ab207958b4b96df",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T00:34:25.490482+00:00",
+      "endUTC": "2026-11-06T00:34:25.605231+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20128-log-tx-narrow-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "09e048c8f4501ac4ec14dfcc567f0eb0b8bba84b62bece45bac08349b6cdb14a",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T00:34:25.605545+00:00",
+      "endUTC": "2026-11-06T00:34:25.720214+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20128-log-tx-narrow-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "aa5a1a13197b637372274f03f2b0a406323ff7ae699e24a012c18388c012a814",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "restoreMatrix()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "cumulativeDeltas()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "sameFailureIdentity()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "rollbackGatesRestore()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "suppressionDisabledPrimary()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "knownStops()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "bodyFaultsWithCleanRecovery()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "allResourceBoundaries()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "ownerTimeoutBinding()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "successfulCommitRestoreFailure()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "boundariesAndDeadline()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "unlockRows()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "postcommitOwnerFailure()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "independentConnectionsInParallel()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "rollbackMatrix()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "providerNullResources()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "beginFailure()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "lockRows()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupTransactionPortTest",
+      "name": "emptyAndLoop()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 19,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupService": "9b9689e006764e007d3ac8e13e320e1d805112c30fc9824c43852d8a6f81ff4a",
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease": "dde03f19c69b8139fc224b4903c8f0cc0d0d6b7d79c6bf96f603f7f20e42034c",
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease": "40f1b902338a10166a9b2f0c414f018b48c72d508aa4658fbe574ebcb9085ce9",
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction": "686628de5254a52d66d38a6e738bb874e52f6a587f38737461a15e22b1fe8c11",
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress": "8657c21c37c318f659effe0e02ffcb4ffb0337072dbb756f633423d889316907"
+  },
+  "noOldExecUnion": true,
+  "formalUpdated": false,
+  "newAccepted": 0
+}

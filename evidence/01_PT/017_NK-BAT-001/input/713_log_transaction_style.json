@@ -1,0 +1,28 @@
+{
+  "module": "batch",
+  "program": "017_NK-BAT-001",
+  "main": "LogCleanupService",
+  "mainPackage": "cleanup",
+  "tests": [
+    "LogCleanupTransactionPortTest"
+  ],
+  "testPackages": [
+    "cleanup"
+  ],
+  "prepare": "pg20136-log-tx-style-compile-v1",
+  "static": "pg20137-log-tx-style-static-v1",
+  "unit": "pg20138-log-tx-style-unit-v1",
+  "public": "PG20138-log-tx-style-v1",
+  "physical": 5,
+  "abstract": 2,
+  "expected": 19,
+  "session": "PG20138-LOG-TX-STYLE-19",
+  "preflightDecision": "PT_DEFAULT",
+  "actualBackendActions": 0,
+  "coreSource": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+  "normalCompileSlot": "pg20112-log-tx-six-main-compile-v1",
+  "sixStaticSlot": "pg20114-log-tx-six-static-reactor-v1",
+  "sixStaticManifestSha256": "6439d001af03b1807f29516b75b04ab8d7f1b2353e25b5e28eb3ef07d3b750a9",
+  "resourceScopeNote": "Only memory JDBC proxies and Guard interface; no storage JAR/runtime classes, DB, driver, VM, native or actual owner. Existing no-storage/no-native post guards retained. Same oracle; narrowed unused dependency and format verification only.",
+  "formatFrozen": false
+}

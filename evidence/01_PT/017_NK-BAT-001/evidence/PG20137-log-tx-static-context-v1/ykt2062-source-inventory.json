@@ -1,0 +1,109 @@
+{
+  "sourceCore": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+  "nameCandidates": 14,
+  "actualCallSources": 9,
+  "fixedTargets": 1,
+  "sourceCases": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+      "sha256": "c57ed4ca018b637f6c5aaa683da533489dfbf24c316dc0e806b5948e88aea1b4",
+      "actualRollbackCall": true,
+      "classification": "NONAPPLICABLE_EXISTING_TYPED_POLICY",
+      "reason": "Already catches body and cleanup SQL/Runtime/Error, preserves unknown primary via fresh fixed secondary, selects unknown cleanup over known primary; no Log SQL-only rollback defect. No source changed; not a fresh dynamic PASS."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+      "sha256": "27bda4446e8b0a112963704b95d530af2357d254f3f6bced1ce04284fb5e88e2",
+      "actualRollbackCall": true,
+      "classification": "NONAPPLICABLE_SUCCESS_READONLY_ROLLBACK",
+      "reason": "Rollback/restoration are normal successful readback path, not nested cleanup after retained body failure. Unknown body/rollback propagates to owner/disposal instead of subsequent recovery replacing prior failure. No actual native/DB/parent proof asserted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "sha256": "5a05867d4c6176fae934d2d4936e43b6a9ddabd1983cf072c78285fe3c8ffe4f",
+      "actualRollbackCall": true,
+      "classification": "FIXED_TARGET",
+      "reason": "SSC337 unknown-primary recovery table now explicit, regression nineteen memory JDBC tests and final current-Test qualification required."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "sha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "actualRollbackCall": false,
+      "classification": "NONAPPLICABLE_COMMENT_ONLY",
+      "reason": "rollback token only in borrowed/no-rollback contract or monotonic clock/metric commentary, no executable rollback call or method reference."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+      "sha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+      "actualRollbackCall": true,
+      "classification": "NONAPPLICABLE_EXISTING_TYPED_POLICY",
+      "reason": "Already catches body and cleanup SQL/Runtime/Error, preserves unknown primary via fresh fixed secondary, selects unknown cleanup over known primary; no Log SQL-only rollback defect. No source changed; not a fresh dynamic PASS."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "sha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "actualRollbackCall": false,
+      "classification": "NONAPPLICABLE_COMMENT_ONLY",
+      "reason": "rollback token only in borrowed/no-rollback contract or monotonic clock/metric commentary, no executable rollback call or method reference."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "sha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "actualRollbackCall": false,
+      "classification": "NONAPPLICABLE_COMMENT_ONLY",
+      "reason": "rollback token only in borrowed/no-rollback contract or monotonic clock/metric commentary, no executable rollback call or method reference."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchStandardMetricSource.java",
+      "sha256": "cf99b34c95dec1f63c0d3a6366d93caaa1614e98b94f622b0fbedd6043129752",
+      "actualRollbackCall": false,
+      "classification": "NONAPPLICABLE_COMMENT_ONLY",
+      "reason": "rollback token only in borrowed/no-rollback contract or monotonic clock/metric commentary, no executable rollback call or method reference."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.java",
+      "sha256": "698e7630ddfbd10e195c4c1c31d767818494bb53d592595e23a8dc1eae7fd95f",
+      "actualRollbackCall": false,
+      "classification": "NONAPPLICABLE_COMMENT_ONLY",
+      "reason": "rollback token only in borrowed/no-rollback contract or monotonic clock/metric commentary, no executable rollback call or method reference."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupMaintenanceWork.java",
+      "sha256": "f7dee7031e7ebbfafedc8c349065c1f6abc1bbff1899b0b34dc8d57181937f3f",
+      "actualRollbackCall": true,
+      "classification": "NONAPPLICABLE_SUCCESS_READONLY_ROLLBACK",
+      "reason": "Rollback/restoration are normal successful readback path, not nested cleanup after retained body failure. Unknown body/rollback propagates to owner/disposal instead of subsequent recovery replacing prior failure. No actual native/DB/parent proof asserted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupExpiryExecution.java",
+      "sha256": "f7100ed36f815cb45f44e6ab9d829d183d359f6aa437aed6c8203d27863b8c3b",
+      "actualRollbackCall": true,
+      "classification": "NONAPPLICABLE_SUCCESS_READONLY_ROLLBACK",
+      "reason": "Rollback/restoration are normal successful readback path, not nested cleanup after retained body failure. Unknown body/rollback propagates to owner/disposal instead of subsequent recovery replacing prior failure. No actual native/DB/parent proof asserted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupNativeExecution.java",
+      "sha256": "9421d882cafba60cc8f5b81fb027fffd57a9b8525209e592c684dd8e95b0d2b0",
+      "actualRollbackCall": true,
+      "classification": "NONAPPLICABLE_SUCCESS_READONLY_ROLLBACK",
+      "reason": "Rollback/restoration are normal successful readback path, not nested cleanup after retained body failure. Unknown body/rollback propagates to owner/disposal instead of subsequent recovery replacing prior failure. No actual native/DB/parent proof asserted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.java",
+      "sha256": "c8688816049150012c537335fd6db146c105857c85edb83bbf85d8a6dc85b383",
+      "actualRollbackCall": true,
+      "classification": "NONAPPLICABLE_EXISTING_TYPED_POLICY",
+      "reason": "Already catches body and cleanup SQL/Runtime/Error, preserves unknown primary via fresh fixed secondary, selects unknown cleanup over known primary; no Log SQL-only rollback defect. No source changed; not a fresh dynamic PASS."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupBundleCompletion.java",
+      "sha256": "da0d37a333df14669170152bca340005297afff196d4d9a97aeae90ba7f278f4",
+      "actualRollbackCall": true,
+      "classification": "NONAPPLICABLE_SUCCESS_READONLY_ROLLBACK",
+      "reason": "Rollback/restoration are normal successful readback path, not nested cleanup after retained body failure. Unknown body/rollback propagates to owner/disposal instead of subsequent recovery replacing prior failure. No actual native/DB/parent proof asserted."
+    }
+  ],
+  "regressionReference": "PG20128 current MainD8 nineteen/no old exec union; latest style Test run pending",
+  "actualDBOrNativeVerified": false,
+  "notSearchOnlyClosure": true
+}
