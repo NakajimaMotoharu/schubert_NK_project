@@ -11721,6 +11721,69 @@
         "oldAcceptanceNotTransferred": true,
         "productTestsReexecuted": 0,
         "newProductTests": 0
+      },
+      "partialContractReferencesPG20790": {
+        "source": "71eee2f86fcefe80ac46b7c430778c7259875c8a",
+        "observerBindingSource": "5b0450dd333bb1c57b36ecad2d98391704ae060f",
+        "evidence": [
+          {
+            "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG20790-correlation-authorization-saved-contract-join-v1/manifest.json",
+            "sha256": "5d29dda179ff5d50d88914a6027a714141aef3a75d6473a5a174772323040367"
+          },
+          {
+            "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG20792-explicit-name-selection-guard-v1/manifest.json",
+            "sha256": "03d5f414114bb47c5dc6ccf43db1927d88ae86f6cb4cc0df95c1263f532d3d85"
+          },
+          {
+            "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG20798-correlation-contract-observer-git-binding-v1/manifest.json",
+            "sha256": "46c6e5d7f4924c1db0c4806168ceab06aa7731f5f65791c865573929aee7c62b"
+          }
+        ],
+        "newCriteria": [],
+        "wholeLeafAccepted": false,
+        "requirementSubcontracts": [
+          {
+            "requirement": "MQ-002",
+            "supported": [
+              "Registration precedes one send, defensive reply copies",
+              "One correlation winner; late/unknown ignored, capacity release after timeout/interrupt/send failure",
+              "1ns..2s timeout, configured1..20 bound and exactly once send",
+              "26 literal reply headers preserve correlation/message/layout/version001"
+            ],
+            "evidenceRows": [
+              0,
+              1,
+              3
+            ],
+            "remaining": "Registered live transport and current broker/CHR remain separate"
+          },
+          {
+            "requirement": "MQ-003",
+            "supported": [
+              "Sync S/S and approved QSB S/A acceptance reply identity only"
+            ],
+            "evidenceRows": [
+              3
+            ],
+            "remaining": "DB/outbox atomic durability/worker commit and persistent send not proven by a factory"
+          },
+          {
+            "requirement": "MQ-004",
+            "supported": [
+              "USER/ADMIN/notification-owner/question-scope matrix, N12/null fixed error"
+            ],
+            "evidenceRows": [
+              2
+            ],
+            "remaining": "Session context verification/lifetime/revocation, SQL owner predicates and Web business DB isolation require their witnesses"
+          },
+          {
+            "requirement": "MQ-005",
+            "supported": [],
+            "evidenceRows": [],
+            "remaining": "ApiSyncRequestDispatcher and service routing not this proof"
+          }
+        ]
       }
     },
     {
