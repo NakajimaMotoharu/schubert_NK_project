@@ -1,0 +1,208 @@
+Compiled from "WebRequestContext.java"
+public final class dev.codex.schubert.nk.web.security.WebRequestContext {
+  private static final java.lang.String LITERAL_WEB_REQUEST_CONTEXT_IS_UNAVAILABLE;
+
+  static final java.lang.String ATTRIBUTE;
+
+  private static final java.lang.String ID_ATTRIBUTE;
+
+  private final java.util.UUID retainedRequestId;
+
+  private final dev.codex.schubert.nk.web.security.LoginClientAddress retainedClientAddress;
+
+  dev.codex.schubert.nk.web.security.WebRequestContext(java.util.UUID, dev.codex.schubert.nk.web.security.LoginClientAddress);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: ldc           #7                  // String requestId
+         8: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        11: checkcast     #15                 // class java/util/UUID
+        14: putfield      #17                 // Field retainedRequestId:Ljava/util/UUID;
+        17: aload_0
+        18: aload_2
+        19: ldc           #23                 // String clientAddress
+        21: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        24: checkcast     #25                 // class dev/codex/schubert/nk/web/security/LoginClientAddress
+        27: putfield      #27                 // Field retainedClientAddress:Ldev/codex/schubert/nk/web/security/LoginClientAddress;
+        30: return
+
+  public java.util.UUID requestId();
+    Code:
+         0: aload_0
+         1: getfield      #17                 // Field retainedRequestId:Ljava/util/UUID;
+         4: areturn
+
+  public dev.codex.schubert.nk.web.security.LoginClientAddress clientAddress();
+    Code:
+         0: aload_0
+         1: getfield      #27                 // Field retainedClientAddress:Ldev/codex/schubert/nk/web/security/LoginClientAddress;
+         4: areturn
+
+  public static dev.codex.schubert.nk.web.security.WebRequestContext require(jakarta.servlet.http.HttpServletRequest);
+    Code:
+         0: aload_0
+         1: invokestatic  #31                 // Method existing:(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;
+         4: invokedynamic #35,  0             // InvokeDynamic #0:get:()Ljava/util/function/Supplier;
+         9: invokevirtual #39                 // Method java/util/Optional.orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+        12: checkcast     #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        15: areturn
+
+  public static java.util.Optional<dev.codex.schubert.nk.web.security.WebRequestContext> existing(jakarta.servlet.http.HttpServletRequest);
+    Code:
+         0: aload_0
+         1: ldc           #45                 // String request
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_0
+         8: getstatic     #47                 // Field ATTRIBUTE:Ljava/lang/String;
+        11: invokeinterface #51,  2           // InterfaceMethod jakarta/servlet/http/HttpServletRequest.getAttribute:(Ljava/lang/String;)Ljava/lang/Object;
+        16: astore_1
+        17: aload_1
+        18: ifnonnull     25
+        21: invokestatic  #57                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+        24: areturn
+        25: aload_1
+        26: instanceof    #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        29: ifeq          42
+        32: aload_1
+        33: checkcast     #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        36: astore_2
+        37: aload_2
+        38: invokestatic  #61                 // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+        41: areturn
+        42: new           #65                 // class java/lang/IllegalStateException
+        45: dup
+        46: ldc           #67                 // String web request context is unavailable
+        48: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        51: athrow
+        52: astore_1
+        53: new           #65                 // class java/lang/IllegalStateException
+        56: dup
+        57: ldc           #67                 // String web request context is unavailable
+        59: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        62: athrow
+      Exception table:
+         from    to  target type
+             7    24    52   Class java/lang/IllegalArgumentException
+             7    24    52   Class java/lang/IllegalStateException
+            25    41    52   Class java/lang/IllegalArgumentException
+            25    41    52   Class java/lang/IllegalStateException
+            42    52    52   Class java/lang/IllegalArgumentException
+            42    52    52   Class java/lang/IllegalStateException
+
+  public static java.util.UUID identify(jakarta.servlet.http.HttpServletRequest, java.util.function.Supplier<java.util.UUID>);
+    Code:
+         0: aload_0
+         1: ldc           #45                 // String request
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #74                 // String identifiers
+        10: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_0
+        15: invokestatic  #31                 // Method existing:(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;
+        18: astore_2
+        19: aload_0
+        20: getstatic     #76                 // Field ID_ATTRIBUTE:Ljava/lang/String;
+        23: invokeinterface #51,  2           // InterfaceMethod jakarta/servlet/http/HttpServletRequest.getAttribute:(Ljava/lang/String;)Ljava/lang/Object;
+        28: astore_3
+        29: goto          44
+        32: astore        4
+        34: new           #65                 // class java/lang/IllegalStateException
+        37: dup
+        38: ldc           #67                 // String web request context is unavailable
+        40: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        43: athrow
+        44: aload_3
+        45: ifnonnull     113
+        48: aload_2
+        49: invokevirtual #79                 // Method java/util/Optional.isPresent:()Z
+        52: ifeq          68
+        55: aload_2
+        56: invokevirtual #83                 // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+        59: checkcast     #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        62: invokevirtual #86                 // Method requestId:()Ljava/util/UUID;
+        65: goto          85
+        68: aload_1
+        69: invokeinterface #89,  1           // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+        74: checkcast     #15                 // class java/util/UUID
+        77: ldc           #7                  // String requestId
+        79: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        82: checkcast     #15                 // class java/util/UUID
+        85: astore        4
+        87: aload_0
+        88: getstatic     #76                 // Field ID_ATTRIBUTE:Ljava/lang/String;
+        91: aload         4
+        93: invokeinterface #93,  3           // InterfaceMethod jakarta/servlet/http/HttpServletRequest.setAttribute:(Ljava/lang/String;Ljava/lang/Object;)V
+        98: goto          143
+       101: astore        6
+       103: new           #65                 // class java/lang/IllegalStateException
+       106: dup
+       107: ldc           #67                 // String web request context is unavailable
+       109: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       112: athrow
+       113: aload_3
+       114: instanceof    #15                 // class java/util/UUID
+       117: ifeq          133
+       120: aload_3
+       121: checkcast     #15                 // class java/util/UUID
+       124: astore        5
+       126: aload         5
+       128: astore        4
+       130: goto          143
+       133: new           #65                 // class java/lang/IllegalStateException
+       136: dup
+       137: ldc           #97                 // String web request identity is unavailable
+       139: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       142: athrow
+       143: aload_2
+       144: invokevirtual #79                 // Method java/util/Optional.isPresent:()Z
+       147: ifeq          178
+       150: aload_2
+       151: invokevirtual #83                 // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+       154: checkcast     #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+       157: invokevirtual #86                 // Method requestId:()Ljava/util/UUID;
+       160: aload         4
+       162: invokevirtual #99                 // Method java/util/UUID.equals:(Ljava/lang/Object;)Z
+       165: ifne          178
+       168: new           #65                 // class java/lang/IllegalStateException
+       171: dup
+       172: ldc           #97                 // String web request identity is unavailable
+       174: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       177: athrow
+       178: aload         4
+       180: areturn
+      Exception table:
+         from    to  target type
+            19    29    32   Class java/lang/IllegalArgumentException
+            19    29    32   Class java/lang/IllegalStateException
+            87    98   101   Class java/lang/IllegalArgumentException
+            87    98   101   Class java/lang/IllegalStateException
+
+  public java.lang.String toString();
+    Code:
+         0: ldc           #103                // String WebRequestContext[REDACTED]
+         2: areturn
+
+  private static java.lang.IllegalStateException lambda$require$0();
+    Code:
+         0: new           #65                 // class java/lang/IllegalStateException
+         3: dup
+         4: ldc           #67                 // String web request context is unavailable
+         6: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+         9: areturn
+
+  static {};
+    Code:
+         0: ldc           #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+         2: invokevirtual #105                // Method java/lang/Class.getName:()Ljava/lang/String;
+         5: putstatic     #47                 // Field ATTRIBUTE:Ljava/lang/String;
+         8: ldc           #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        10: invokevirtual #105                // Method java/lang/Class.getName:()Ljava/lang/String;
+        13: invokedynamic #111,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+        18: putstatic     #76                 // Field ID_ATTRIBUTE:Ljava/lang/String;
+        21: return
+}
