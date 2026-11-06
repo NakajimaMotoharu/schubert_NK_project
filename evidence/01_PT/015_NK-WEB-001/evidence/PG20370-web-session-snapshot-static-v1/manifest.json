@@ -1,0 +1,28 @@
+{
+  "metadataExit": 0,
+  "rawPmd": 2,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "review": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": "131",
+      "method": "parallelSnapshotsKeepDistinctRows",
+      "reason": "Host-only JUnit own2worker/8task, each10second join, try-resource executor, immutable synthetic data. J2EE managed-thread rule not applicable to this test, production scope unchanged."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "136",
+      "method": "parallelSnapshotsKeepDistinctRows",
+      "reason": "Host-only JUnit own2worker/8task, each10second join, try-resource executor, immutable synthetic data. J2EE managed-thread rule not applicable to this test, production scope unchanged."
+    }
+  ],
+  "files": {
+    "manifest.safe.json": "b9f81ef1a94e1ca75642d5e1284344ac8458e497b51327fd34d8ef88504978c2",
+    "checkstyle.xml": "bee5e6029a395686e4fa957f337c5ae86e60493c5dbbb0266dadd44fe5fb5fca",
+    "review.json": "65ff101c175544884dbb5f71155da3fca31f3f71c7bf31138b3218bf4ec6e58d",
+    "pmd.xml": "92381543c8ac00cfe2b89f6c4d30ca095e78b40e44d68f29f83592cebd799bcd"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "metadataExit": 0,
+  "rawPmd": 2,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "review": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": "131",
+      "method": "parallelSnapshotsKeepDistinctRows",
+      "reason": "Host-only JUnit own2worker/8task, each10second join, try-resource executor, immutable synthetic data. J2EE managed-thread rule not applicable to this test, production scope unchanged."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "136",
+      "method": "parallelSnapshotsKeepDistinctRows",
+      "reason": "Host-only JUnit own2worker/8task, each10second join, try-resource executor, immutable synthetic data. J2EE managed-thread rule not applicable to this test, production scope unchanged."
+    }
+  ]
+}
