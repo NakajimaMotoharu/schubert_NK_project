@@ -20,6 +20,7 @@ import org.jspecify.annotations.Nullable;
  * NK-BAT-001; OPS-009/DAT-009; UI251; SS341§3/7.2; SSC-051; PG-D-138; PT-BAT-018..029. Borrows the
  * parent's single-owner connection; caller MUST discard/close it after any failure. Does not
  * certify OS flock, actual backup files, inactive applications or whole morning sequence.
+ * SSC337/BUG2317/YKT2062: borrowed transaction compounds, PT-BAT-LOGTX337001..019, spec709.
  */
 @NullMarked
 public final class LogCleanupService {
@@ -165,14 +166,21 @@ public final class LogCleanupService {
       c.commit();
       committed = true;
       mutation.check();
-    } catch (SQLException | RuntimeException failure) {
+    } catch (SQLException | RuntimeException | Error failure) {
       if (committed) throw failure; // Caller disposes the connection; the chunk remains durable.
       try {
         c.rollback();
-      } catch (SQLException rollbackFailure) {
+        c.setAutoCommit(true);
+      } catch (SQLException | RuntimeException | Error cleanupFailure) {
+        // SSC337/BUG2317: retain unknown primary identity, including a repeated same object.
+        // Only fresh fixed diagnostics cross this borrowed-transaction recovery boundary.
+        if (!known(failure)) {
+          failure.addSuppressed(new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE));
+          throw failure;
+        }
+        if (!known(cleanupFailure)) throw cleanupFailure;
         throw new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE);
       }
-      c.setAutoCommit(true);
       throw failure;
     }
     c.setAutoCommit(true);
