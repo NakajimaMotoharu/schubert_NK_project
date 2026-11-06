@@ -1,0 +1,51 @@
+{
+  "atJST": "2026-11-07T02:30:13.169718+09:00",
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest.java": "546efa9b0597c0bc9e040af46fe205e9f5e9dbf9e1b39e0835e2c53b691762dd",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebInfrastructureFailureFilter.java": "2011dfa51a0bf7c7c696fc23cc2c7333ecc1885f1aea1cab462b8f51c4d9c195",
+    "evidence/01_PT/015_NK-WEB-001/input/013_infrastructure_failure_filter_qualifier.py": "0e9eaca51b0e5dbf458ae88ba06ac31c09f127696fdfe2b7bf531f21739cbf54"
+  },
+  "staticManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21322-infrastructure-filter-eight-fixed-static-v1/manifest.json",
+    "sha256": "9a847369b1a00a5fcf87f7d344d3a80f7f7c2e6694adf6df738faf35a028c3d3"
+  },
+  "pmdRaw": 5,
+  "individualClassifications": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": 154,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone host JUnit child owns two bounded workers with Future.get and try-with-resources; no webapp thread lifecycle"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 159,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone host JUnit child owns two bounded workers with Future.get and try-with-resources; no webapp thread lifecycle"
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": 177,
+      "classification": "NOT_APPLICABLE",
+      "reason": "JDK proxy implements exact supplied Servlet interface; defining loader is necessary for that same interface; no deployment classloader lookup"
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": 205,
+      "classification": "NOT_APPLICABLE",
+      "reason": "JDK proxy implements exact supplied Servlet interface; defining loader is necessary for that same interface; no deployment classloader lookup"
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": 217,
+      "classification": "NOT_APPLICABLE",
+      "reason": "JDK proxy implements exact supplied Servlet interface; defining loader is necessary for that same interface; no deployment classloader lookup"
+    }
+  ],
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "processingErrors": 0,
+  "staticSuppressionsAdded": 0,
+  "testsExecuted": 0
+}
