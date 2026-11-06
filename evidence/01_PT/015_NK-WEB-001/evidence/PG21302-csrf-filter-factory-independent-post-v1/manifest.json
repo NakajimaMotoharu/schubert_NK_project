@@ -1,0 +1,149 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T02:19:59.509086+09:00",
+  "source": "42b6ab8685ecfa8d52675ddd7f740780b202cfd8",
+  "productionCoreMain": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+  "tests": 8,
+  "newMethods": 8,
+  "originalPost": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21290-csrf-filter-factory-eight-v1/manifest.json",
+    "sha256": "0a352e8d4cb8ea312fd370ae39e3af408ee95d8c30deed337e7073a08cf22c38"
+  },
+  "sourceTestIds": [
+    [
+      "PT-WEB-CSRF-FILTER001",
+      "factoryRejectsNullDependenciesAndReturnsIndependentFilterInstances"
+    ],
+    [
+      "PT-WEB-CSRF-FILTER002",
+      "safeMethodsExposeSuppliedUnmaskedFormTokenWithoutCreatingSession"
+    ],
+    [
+      "PT-WEB-CSRF-FILTER003",
+      "unsafeMethodsAcceptOnlySingleMatchingFormValueAndIgnoreHeaderValue"
+    ],
+    [
+      "PT-WEB-CSRF-FILTER004",
+      "missingMalformedWrongAndDuplicateFormValuesAreDeniedWithoutChain"
+    ],
+    [
+      "PT-WEB-CSRF-FILTER005",
+      "reservedQueryKeyRejectsEvenWithValidFormAndEncodedKey"
+    ],
+    [
+      "PT-WEB-CSRF-FILTER006",
+      "suppliedDeniedHandlerReceivesExactPortsAndItsIoFailureIsNotReplaced"
+    ],
+    [
+      "PT-WEB-CSRF-FILTER007",
+      "callerChainIoFailureIsPreservedAndRequestMarkerIsAlwaysRemoved"
+    ],
+    [
+      "PT-WEB-CSRF-FILTER008",
+      "sharedConfiguredFilterKeepsEightConcurrentSuppliedTokensRequestLocal"
+    ]
+  ],
+  "fourCounters": {
+    "LINE": 7,
+    "METHOD": 2,
+    "CLASS": 1,
+    "BRANCH": 0
+  },
+  "missed": 0,
+  "physical": 1,
+  "staticPost": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21288-csrf-filter-factory-fixed-static-v1/manifest.json",
+    "sha256": "9f27ad44220a0b9d985911e7cb98ac04e05b05abe738ee0971aa1ee789da3e2e"
+  },
+  "environment": [
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    },
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    },
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    }
+  ],
+  "initializedProduct": [
+    "dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest",
+    "dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest$$Lambda+0x000000008d18c428",
+    "dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest$$Lambda+0x000000008d18c680",
+    "dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest$$Lambda+0x000000008d18c8b0",
+    "dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest$$Lambda+0x000000008d18d130",
+    "dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest$$Lambda+0x000000008d18d358",
+    "dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest$$Lambda+0x000000008d18d588",
+    "dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest$$Lambda+0x000000008d18d7b8",
+    "dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest$$Lambda+0x000000008d18d9e8",
+    "dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest$$Lambda+0x000000008d18dc18",
+    "dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest$Frame",
+    "dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest$Frame$$Lambda+0x000000008d1290e0",
+    "dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest$Frame$$Lambda+0x000000008d1299b0",
+    "dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest$Frame$$Lambda+0x000000008d12b9c0",
+    "dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest$Frame$$Lambda+0x000000008d180208",
+    "dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest$Frame$$Lambda+0x000000008d180438",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository",
+    "dev/codex/schubert/nk/web/security/FormCsrfTokenRequestHandler",
+    "dev/codex/schubert/nk/web/security/WebCsrfFilterFactory",
+    "dev/codex/schubert/nk/web/security/WebCsrfToken"
+  ],
+  "fixedConsoleJdkReview": {
+    "path": "evidence/01_PT/015_NK-WEB-001/input/001_login_failure_sdk_static_review.json",
+    "sha256": "79633848d5904d37f1c6f8cd13ca5f0b55757dbba3014608ac659fc1da472093"
+  },
+  "driverProviderEntries": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": [],
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-web/7.1.1/spring-security-web-7.1.1.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-crypto/7.1.1/spring-security-crypto-7.1.1.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar": [],
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": []
+  },
+  "productTestsReexecuted": 0,
+  "branchStatus": "NATURAL_ZERO_BRANCH",
+  "branchRatio": null,
+  "sdkConstructorReview": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21278-csrf-filter-factory-sdk-static-v1/manifest.json",
+    "sha256": "60fcc9b2c77ff2218170cf1dc1aaf31166c06640d53aa7b423f8c3e0f9257a06"
+  },
+  "sdkUtf8Review": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21296-csrf-filter-factory-method-witness-v1/utf8-static-manifest.json",
+    "sha256": "8ce2eea4ea1ab7f1763b26ac8dad1e6fcc5015f3ea9bcf7c4081f1d7e98ad0b2"
+  },
+  "dependencyMethodWitness": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21296-csrf-filter-factory-method-witness-v1/manifest.json",
+    "sha256": "bb44f3b2b4043b747a1a11318244c8aa5f4376cda86ec3de5b80767c10d16e64"
+  },
+  "originalFailedRunCredited": 0,
+  "actualSessionOrDbOrTokenGeneration": false,
+  "actualBrowserOrHttp": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "original282Member": true,
+  "effortRate": null,
+  "checkerSha256": "3817d01327bd3e4540ef9922caccf2e5cbbfb245618fd0f7e1fcb10fcb73461c",
+  "checkerSource": "ef5e19843acee6181fb79e28b13bbc778d61cd98"
+}

@@ -1,5 +1,10 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-07T02:26:07.865568+09:00 CSRF filter factory限定資格
+
+015仕様070/結果071・PMO600054、PG21290新8/FES0/独立21302post0・L7M2C1未網羅0/branch自然零N/A。元SDK五依存methodが既token読取比較だけ・生成/nonce/mask0を証明、実session/DB/Browser0・Main変更0。累計40対象新method344=Java240+HTML97+CSS7、wholeJava73/原282交差53残229/partial18残62。新leaf0/正式1964-53/工数null・元candidate監査HOLD保持。
+
+
 ## 2026-11-07T01:56:35.076824+09:00 CSRF拒否403・監査限定資格
 
 015仕様068/結果069・PMO600052、PG21248新8/FES0/独立21264 post0・L15M2C1未網羅0/branch自然零N/A。専用childのThreadLocalと四dependency元method証人が表示/parse/固定例外・既contextだけを証明、実認証/session/DB/暗号/Browser0・Main変更0。累計39対象新method336=Java232+HTML97+CSS7、wholeJava72/原282交差52残230/partial18残62。新leaf0/正式1964-53/工数null・元candidate監査HOLD保持。
