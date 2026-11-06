@@ -495,3 +495,8 @@ Python host3.14、専用directory `/home/mini/codex/project1/work/toolchain/css-
 - webencodings 0.5.1 / https://pypi.org/pypi/webencodings/0.5.1/json / wheel SHA256 a0af1213f3c2226497a97e2b3aa01a7e4bee4f403f95be16fc9acd2947514a78 / https://files.pythonhosted.org/packages/f4/24/2a3e3df732393fed8b3ebf2ec078f05546de641fe1b667ee316ec1dcf3b7/webencodings-0.5.1-py2.py3-none-any.whl
 
 087_install_css_parser.pyとpublic PG20698 toolchain-manifestにsource/全展開file hash/actual日時/Python/reproを記録。再現は同じwheel hashを検証して新しい専用siteへ展開し、`PYTHONPATH=<site> python3 -B .../029_media_css_contracts.py metadata <newOutput>`。実使用tinycss2 1.4.0/APIを独立metadata5件で検証、web docs requestedv1.4 URLは取得時1.5.1表示なのでその版を導入済と誤認しない。parseは構文層のみ、property意味は独立Current62値で比較する。media/master/DB/鍵/VMへaccess無し、実Browser/IT-ST代替ではない。
+
+
+## 2026-11-06 現1844 Architecture再利用
+
+既ArchUnit1.4.2/SLF4J2.0.18・JDK25.0.4/ModuleDependencyAudit source108e8をそのまま使用し、normal20704六JAR1844を静的import、五規則0/初期化0/独立post0。旧1669/11canaryは歴史参照で再演0。新observer compileと旧保存classの全byte一致を確認。新tool導入・Production POM変更無し。版/入手元/hashの旧記録は保持、再現command/現ソース/結果/範囲は018仕様3594・結果3595/PG20808/20810。全F02/正式451・PT/coverage受入の意味は拡大しない。

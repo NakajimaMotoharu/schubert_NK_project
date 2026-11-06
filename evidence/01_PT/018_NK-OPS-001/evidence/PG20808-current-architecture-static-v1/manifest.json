@@ -1,0 +1,120 @@
+{
+  "source": "c6b83de5ede4ad84caa6fae220734fe9cf878354",
+  "normalSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+  "actualExit": 0,
+  "atJST": "2026-11-06T19:38:31.332767+09:00",
+  "stages": {
+    "observer-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T10:38:28.543527+00:00",
+      "endUTC": "2026-11-06T10:38:29.209866+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20808-current-architecture-static-v1/tool-classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/ModuleDependencyAudit.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "architecture": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T10:38:29.212441+00:00",
+      "endUTC": "2026-11-06T10:38:31.332397+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg20808-current-architecture-static-v1/class-init.stdout",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20808-current-architecture-static-v1/tool-classes:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "protocol=/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "storage=/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "bootstrap=/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "api=/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar",
+        "web=/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar",
+        "batch=/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "d0dbe963eb22ac520115eeffd4aa10d723b327f8e38cf9e3ece1fd78ba56b719",
+      "stderrSha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+    }
+  },
+  "toolClasses": {
+    "ModuleDependencyAudit.class": "3048d05f1cd65bc79df4d57de500ea07f8ef13873ac27aab4e0a742104ee162f"
+  },
+  "oldCompiledToolClassesSameBytes": true,
+  "toolVersions": {
+    "java": "25.0.4",
+    "archunit": "1.4.2",
+    "slf4j": "2.0.18"
+  },
+  "toolSourceSha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1",
+  "observerRuntimeClasspath": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20808-current-architecture-static-v1/tool-classes:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+  "productionRuntimeClasspath": false,
+  "testsExecuted": 0,
+  "oldCanaryExecutions": 0,
+  "oldCanariesReferenced": 11,
+  "oldCanaryManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG6960-archunit-static-v1/manifest.json",
+    "sha256": "7f80c3f1b1f1356ba51ada7f6c7dc55dfe82756072edcf3c7e88dcc164bbbb1f",
+    "source": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa"
+  },
+  "normalManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20704-media-css-six-main-resource-compile-v1/manifest.safe.json",
+    "sha256": "8bf2c7ca6ada19b2e23a1e007ca2db680d6916d1e215d470f072f27508d23be9"
+  },
+  "inputSourceCount": 1035,
+  "physicalDelta": {
+    "old": 1669,
+    "current": 1844,
+    "added": 175,
+    "removed": 0,
+    "changed": 76
+  },
+  "toolHashes": {
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1",
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac": "2136da000c36cd6ea5e714ecf8ea7fb4e41f29c75849b6b7e62531373b91a3b1",
+    "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar": "6d8adf69a3f109ebe1b395764feb07f919e9e0e2ab5e2ea141d2e6251ba7d17f",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55",
+    "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/ModuleDependencyAudit.java": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1"
+  },
+  "targetClassInitializations": [],
+  "whole451Accepted": false,
+  "F02Accepted": false,
+  "formalUpdated": false,
+  "newProductTests": 0,
+  "newSourceProofs": 0,
+  "newLeafAccepted": 0,
+  "actualBusinessBackendActions": 0,
+  "unmeasuredJvmSdkSyscalls": true,
+  "files": {
+    "input.safe.json": "2c814bc03cb48d7804fb333d89bad3d95834a8ef252fb08627e44ca694fe9ddb",
+    "physical-delta.json": "b2f6b3135decddc86b0cdceca76d2af64d673307384c9086f7c4cf62f6c63797",
+    "original-manifest.json": "20e21ead6cfd5fe27cb7946a6dfc55f50816e15c5dc2f6c3f032726c11ea7e95",
+    "observer-compile.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "observer-compile.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "observer-compile-begin.safe.json": "3d52a802ad2bf50421bee91f4f0d1bfb5356aa6b3a97c96deb1e25b58e2c25ad",
+    "observer-compile-process.safe.json": "8b4222fdc0584bac7ae4b4878e674e103abe2d5961ccc564dcf1e27e11851b8a",
+    "observer-compile-exit.safe.json": "235ced94beb6a7c1d444e05d428e19a4d828fde9f4457475d95221fcad44bc7d",
+    "architecture.stdout": "d0dbe963eb22ac520115eeffd4aa10d723b327f8e38cf9e3ece1fd78ba56b719",
+    "architecture.stderr": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58",
+    "architecture-begin.safe.json": "4fc86aec9912e591e46c72b8728372e9eeea5e9933a827765e11ee39d3390dc0",
+    "architecture-process.safe.json": "aadd39b2c3b75ed0c12b6e79f541b5da5f9936dec2f0ea48500f0ced416b7620",
+    "architecture-exit.safe.json": "9d77e62d791da40a41bb5e4612747ede6177e9ec60f9de25c56e22e0c8793d2e",
+    "class-init.stdout": "936dc928ed126e563610972e2979b0350a4295c3234ef9e2341801fddc17e711"
+  },
+  "originalManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20808-current-architecture-static-v1/manifest.json",
+    "sha256": "20e21ead6cfd5fe27cb7946a6dfc55f50816e15c5dc2f6c3f032726c11ea7e95"
+  }
+}

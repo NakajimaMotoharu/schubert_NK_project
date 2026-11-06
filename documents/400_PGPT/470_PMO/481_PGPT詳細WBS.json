@@ -14052,7 +14052,74 @@
       ],
       "historicalMeasurementStatus": "ARTIFACT_CONFIRMED",
       "historicalBaselineStatus": "ARTIFACT_CONFIRMED",
-      "historicalAssessment": "LIMITED_DELIVERABLE_VERIFIED"
+      "historicalAssessment": "LIMITED_DELIVERABLE_VERIFIED",
+      "partialArchitectureProofPG20808": {
+        "atJST": "2026-11-06T19:42:54.306701+09:00",
+        "groupId": "PGPT-F02-CURRENT-1844-ARCHITECTURE-20261106",
+        "source": "c6b83de5ede4ad84caa6fae220734fe9cf878354",
+        "currentMainSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+        "run": "PG20808",
+        "independentPost": "PG20810",
+        "actualExit": 0,
+        "evidence": [
+          {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG20808-current-architecture-static-v1/manifest.json",
+            "sha256": "83445800f1e503b41bce4c60bd03630d45a907baecb9117e490a437257e95926"
+          },
+          {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG20810-current-architecture-independent-post-v1/manifest.json",
+            "sha256": "a4c10fced0eab0813dbfdd1360d7d5e37710628822b0da8d1e8c4f13ec211bdb"
+          }
+        ],
+        "physical": 1844,
+        "originalPhysical": 1669,
+        "physicalDelta": {
+          "old": 1669,
+          "current": 1844,
+          "added": 175,
+          "removed": 0,
+          "changed": 76
+        },
+        "modules": {
+          "api": 467,
+          "batch": 645,
+          "bootstrap": 117,
+          "protocol": 176,
+          "storage": 80,
+          "web": 359
+        },
+        "rules": {
+          "CONTROLLER_BOUNDARY": 0,
+          "FRAMEWORK_FENCES": 0,
+          "INTERNAL_OWNER": 0,
+          "MODULE_EDGES": 0,
+          "REPOSITORY_DIRECTION": 0
+        },
+        "dependencies": 83600,
+        "codeAccesses": 59184,
+        "productInitializations": 0,
+        "newProductTests": 0,
+        "newSourceProofs": 0,
+        "newWbsAccepted": 0,
+        "whole451Accepted": false,
+        "F02Accepted": false,
+        "estimateAtGroupStartPp": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
+        "capPp": 4,
+        "observedSharedPp": 0,
+        "ordinarySharedObservedPp": 28,
+        "allRecordedSharedPp": 36,
+        "actualAllocatedPp": null,
+        "N": null,
+        "T": null,
+        "formalUnchanged": "1964/53",
+        "historicalAccepted": "17/190",
+        "effortRate": null,
+        "nextCommand": "Inspect remaining actual quality/tooling gaps before new unit selection; investigate pmo_quota_binding.append_start unresolved pg998_metrics import through metadata-only isolated tests, register a defect before correction if reproduced. Preserve all existing source/PT proofs and Root/runtime/held4/QA055/native/CHR/whole451 holds. No success-confirmation rerun."
+      }
     },
     {
       "id": "WBS-F03",
