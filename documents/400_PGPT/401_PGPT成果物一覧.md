@@ -1,5 +1,10 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-07T02:47:04.563263+09:00 Router重複選定の是正
+
+015仕様074/結果075・PMO600058、追加PG21342八件/FES0・独立21348post0/L28M4C1B8未網羅0。ただし既20514十件が同Main byteで独立資格済みのため、今回8は重複・新計画/source/unique進捗0。BUG2388/2389・YKT2133/34の有限工具是正、21364管理7成功/静的0をProduct加算0。累計41対象新unique352=Java248+HTML97+CSS7、wholeJava74/原282交差54残228/partial18残62を維持。新leaf0/正式1964-53/工数null。次回候補は最新program結果/manifest lookup/485照合必須。
+
+
 ## 2026-11-07T02:32:56.498213+09:00 基盤障害filter限定資格
 
 015仕様072/結果073・PMO600056、PG21316新8/FES0/独立21328post0・L13M2C1B8未網羅0。SSE元method証人はconstructorのみ、graph分類0・実session/DB/Browser0・Main変更0。累計41対象新method352=Java248+HTML97+CSS7、wholeJava74/原282交差54残228/partial18残62。新leaf0/正式1964-53/工数null・元candidate監査HOLD保持。
