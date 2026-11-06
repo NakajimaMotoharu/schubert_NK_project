@@ -500,3 +500,8 @@ Python host3.14、専用directory `/home/mini/codex/project1/work/toolchain/css-
 ## 2026-11-06 現1844 Architecture再利用
 
 既ArchUnit1.4.2/SLF4J2.0.18・JDK25.0.4/ModuleDependencyAudit source108e8をそのまま使用し、normal20704六JAR1844を静的import、五規則0/初期化0/独立post0。旧1669/11canaryは歴史参照で再演0。新observer compileと旧保存classの全byte一致を確認。新tool導入・Production POM変更無し。版/入手元/hashの旧記録は保持、再現command/現ソース/結果/範囲は018仕様3594・結果3595/PG20808/20810。全F02/正式451・PT/coverage受入の意味は拡大しない。
+
+
+## 2026-11-06 独立AES-GCM public oracle（PG20902/20926）
+
+既存host Python 3.14.4 / cryptography 46.0.5 / OpenSSL 3.5.5 27 Jan 2026を利用、導入操作無し。実install入手元は未検証でPyPI由来と推測しない。007/evidence/PG20926へmodule/Rust binding path・hash、version、取得元未確認、再現commandを保存。007/input/013は実施済みinline generatorと同等の再現用sourceを後保存したもので、元source凍結済みと称さず、暗号計算の再演はしない。新規導入が必要なら隔離venvへ同versionを承認済み検証済み入手元から導入する。PUBLIC zero32 key/固定nonce/ASCIIa64/三synthetic ownerだけで、実credential/鍵ファイル/DB/Root無し。既定nonce安全性・実運用鍵/全toolchain provenanceを合格にしない。元golden manifest 19e53c2f86c9dc391b733f1a53621c50d40e98920bbf8e9fbf404a6bea4bbb5cは不変更。

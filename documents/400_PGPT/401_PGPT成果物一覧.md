@@ -1,5 +1,17 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-06 認証三対象の新規22PT・三source追加
+
+Production JavaはD8同byte、現normal20704/resource source fb189。各々の実source/runを分け、全体coverageへ合成しない。
+
+|対象|実run / 独立post|新PT|全physicalのL/M/C/B（各miss0）|仕様/結果|
+|---|---|---:|---|---|
+|AuthenticationContextVerifier|PG20840 / PG20850|6|66/6/2/25|007:041/042|
+|AdminCommandAuthenticator|PG20874 / PG20880|8|75/9/2/48|007:043/044|
+|AuthSessionService・DIF016|PG20914 / PG20920|8|69/3/1/20|007:045/046|
+
+直近集計は29対象267unique=Java167+HTML93+CSS7、wholeJavaSource63・原282交差43残239・partial80の18残62。これらは技術実績で、新WBS leaf0、正式1964PT/53scope・歴史17/190・工数nullは保持。下の二十六対象表はそれ以前の比較履歴。JDBCは自己所有interfaceだけ、実DB/lock/実session/運用鍵/VM/Root/native/CHR/全451は未受入。DIF016のPUBLIC暗号vector3と再現source・既存Pythonライブラリの取得元未確認は007:PG20902/20926と421に記録する。600:024～029/485/456460を参照。
+
 ## 2026-11-06 F02 現全1844物理の依存検査
 
 PG20808/20810はSS311の五規則0、1844全件import/83600依存/59184access・Product初期化0。旧1669から追加175/削除0/既存byte差76を含む現在集合を新検査し、旧11canaryは再演せず参照。0183594/3595・600020/021。これはarchitecture静的subsetで、下の新PT245やwholeMain60/全F02/正式451へ加算しない。
