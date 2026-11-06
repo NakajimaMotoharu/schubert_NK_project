@@ -122,7 +122,7 @@ User不存在でもIP制御と同程度の処理経路を取り、timing/respons
 APIは`retry_after_seconds = ceil(locked_until-now)`を0～900で返す。WebはHTTP `Retry-After`を設定し待機messageを表示する。
 Remaining attemptsは存在推測を避け通常認証失敗では0とし、運用logだけ内部counterを保持する。
 
-SSC-046: Form Loginの失敗/lockは351 §5.1の補足どおり現行302 `/login?error`または`/login?locked`を維持し、lockのRetry-AfterはAPI確定値だけを使用する。Webで失敗counter/lock時刻を再計算しない。成功handlerはcustom fixation後の永続principal同値を検査し、閉SavedRequestまたは`/`へ302する。汎用Spring認証例外のsession保存やURL session rewritingを使用しない。Login画面の残時間表示への引渡しはUI226の表示条件を満たす別controller接続gateであり、handler単体のRetry-After成功だけで画面完了としない。
+SSC-046: Form Loginの失敗/lockは351 §5.1の補足どおり現行302 `/login?error`または`/login?locked`を維持し、lockのRetry-AfterはAPI確定値だけを使用する。Webで失敗counter/lock時刻を再計算しない。成功handlerはcustom fixation後の永続principal同値を検査し、閉SavedRequestまたは`/`へ302する。汎用Spring認証例外のsession保存やURL session rewritingを使用しない。QA-055/UIC-012/SSC-338（2026-11-06承認）: GET `/login?locked`はCurrentと同じ固定文「ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。」を表示し、実残秒は画面へ引き渡さない。実残秒は既存の失敗応答HTTP `Retry-After`（API確定0～900）だけに返す。新たなsession属性・query parameter・残秒計算・動的表示を設けない。固定文のHTTP/DOMとheader境界の個別試験を行い、handler単体の成功だけで画面/CHR完了としない。
 
 ## 6. API認証context
 
