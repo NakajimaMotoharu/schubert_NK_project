@@ -1,0 +1,16 @@
+# API consumer停止fanout不備・静的再現
+
+PGPT-20261008-4148、原.75/3/6pp cap8、WBS-P005-03。ApiMessagingRuntime/SyncRequestConsumers/WebLogConsumers/QuestionWorkConsumersの全Mainを読取した段階でBUG-2407/YKT-2152を発見し、修正前に起票した。既直接Test4sourceの全bodyレビューは未完であり、完了へ計上しない。新しいProduct/fixture/Unit/native/Root/VM/DB/broker実行0。
+
+独立期待はorigin/main SS321SSC314の「停止通知後はready DOWN、新callback非受理」。実装からexpectedを作っていない。静的な反例は次の順で成立する。
+
+1. 正常な親が三groupを保持。各childはhalted=false。
+2. 親closeはstopping=trueにする。これは親readyにだけ参照される。
+3. closeGroupsは逆順でQuestionWorkConsumers.closeへ入り、同childのhaltedだけtrueにしてcontext.closeを呼ぶ。
+4. そのcloseが既配送の完了を待つ間、SYNC/WebLogの新callbackは自身のhalted=falseを読み、listener.onMessageへ進める。
+
+これは実環境で再現済みという意味ではない。親所有リストに実際に入る型と各callbackの先頭guardから導いた到達可能なPG経路である。先に全子の既haltedを立てれば、新entryだけを排除し、guard通過済み処理のACK/rollbackを中断しない。停止順の変更をclose順の変更へ広げない。
+
+反証点検では別の疑いも調べた。親closeGroupsの最初のfailureがsuppression無効だと後続fatal graphが失われる可能性は、実際の子三型のcloseが通常Runtimeを新しいsuppression有効wrapper/causeに保持して返す境界を確認できるため、任意型を親のprivate groupsへ注入する反例を製品障害として採用しなかった。未知の型を注入するfixtureや部分抽出は作らない。
+
+次の是正は既SS契約内の内部実装判断で、business/queue/window/credential/role/外部結果を変えない。取得前に用意するowner集合の型を狭め、全子へ資源操作のない停止flag通知を先に行い、その後に既逆順close/成功phase処理へ進む。callback間の同時競合、既処理保持、未知closeの資源後条件、実runtime/coverage/451はHOLDのまま。再発防止Test IDはPT-JMS-STOP-GROUP001、後続の独立PT設計へ期待を固定し、未実行をPASSにしない。
