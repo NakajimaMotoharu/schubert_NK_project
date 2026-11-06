@@ -1,0 +1,99 @@
+{
+  "atJST": "2026-11-07T02:56:44.551969+09:00",
+  "inputHashes": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGateStatePortTest.java": "db38982f34c746f871ee5953247426c0828d5a3648fa5b1329714a8643dfc0a7",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGate.java": "8b4a740a515af46718400d17c8d9eb060d39c4aabed4358722ae47e86baaf405",
+    "evidence/01_PT/018_NK-OPS-001/input/130_stop_gate_state_port_qualifier.py": "8dcb7b8c2007624d4a7a8fc5f51c2a4136bd18b5efc8113b08c322df0c7b9786"
+  },
+  "staticManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21372-stop-gate-six-static-v1/manifest.json",
+    "sha256": "e73854bb6af592d6233de901cdfd0b01873c986ee49f4fe89edae859b29c4f62"
+  },
+  "pmdRaw": 13,
+  "individualClassifications": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": 40,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Batch Main reads current caller interrupt status to honor cancellation, no thread creation, J2EE lifecycle rule not applicable to batch gate."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 43,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Host Test requires clean own thread interrupt state before fixture."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 48,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Host Test restores only own thread flag after negative interruption cases."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 83,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Host Test asserts successful call does not set current own interrupt flag."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 143,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Negative Test sets only own caller flag before call to assert no callback reads."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 148,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Negative Test checks flag retained on typed interruption failure."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 151,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Finally clears own flag for subsequent independent negative case."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 159,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Fake callback sets own caller flag at selected API/Web boundary; no external thread interrupt."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 166,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Negative Test verifies selected boundary retains flag."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 173,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Finally restores caller thread after each boundary case."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 206,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone host Test owns bounded two-worker pool with try-with-resources and all Future deadlines."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 210,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Host Test submits isolated memory state checks, not webapp threads."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 214,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Each own worker checks initial interrupt cleanliness, no process/Unit mutation."
+    }
+  ],
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "processingErrors": 0,
+  "staticSuppressionsAdded": 0,
+  "testsExecuted": 0
+}
