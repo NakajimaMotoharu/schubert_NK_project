@@ -1,0 +1,57 @@
+{
+  "atJST": "2026-11-07T02:36:45.568727+09:00",
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRouterPortTest.java": "1d204bd56bd055e8d19a14223a6dc4af17b74ea80e208f6defe6d835a27da5b6",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/InternalErrorDispatchRouter.java": "f10da434b1a7ec9ba2e96f8e5106e174ca8dfae5ba64f484ae6b282d15700660",
+    "evidence/01_PT/015_NK-WEB-001/input/015_error_router_port_qualifier.py": "0e6a9705207436e6187d98e9c968b105765eab37860dcb6eac8d4ac6eefb8305"
+  },
+  "staticManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21340-error-router-eight-static-v1/manifest.json",
+    "sha256": "f55048e36e0aa979a1e2d05b470762c0895651a1f2d0580f1c623546ba9e64e0"
+  },
+  "pmdRaw": 6,
+  "individualClassifications": [
+    {
+      "rule": "AvoidCatchingGenericException",
+      "line": 35,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Main init cleanup boundary deliberately catches ServletException or RuntimeException, destroys only two supplied components in reverse order and rethrows original; no success conversion/diagnostic retention. New tests prove typed/runtime and cleanup-failure finally precedence."
+    },
+    {
+      "rule": "NullAssignment",
+      "line": 176,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Negative Test explicitly removes supplied request context to check mandatory context rejection; fixture state only, no production nullable invariant weakened."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 210,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone child JUnit owns bounded two-worker pool, closes it and awaits all Futures; not deployed webapp worker creation."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 215,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Each host Test task owns its empty context and supplied ports; finally clear and Future.get/try-with-resources guarantee local test ownership."
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": 238,
+      "classification": "NOT_APPLICABLE",
+      "reason": "JDK proxy must implement exact supplied Servlet interface, uses its defining loader only; no container lookup."
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": 311,
+      "classification": "NOT_APPLICABLE",
+      "reason": "Exact HttpServletRequest interface defining loader for own proxy, no service/application classloader access."
+    }
+  ],
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "processingErrors": 0,
+  "staticSuppressionsAdded": 0,
+  "testsExecuted": 0
+}
