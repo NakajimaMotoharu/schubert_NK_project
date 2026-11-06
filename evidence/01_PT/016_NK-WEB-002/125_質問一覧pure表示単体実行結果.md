@@ -1,0 +1,9 @@
+# SCR022 質問一覧pure表示 単体実行結果
+
+2026-11-06T11:58:44.216723+09:00 Program NK-WEB-002/WBS-P016-22。仕様124のPT-WEB-QLIST001..016全16method成功、F/E/S/abort0。対象Main D8不変更、Test/source df56b09407f95f55a0b1b9f8b0223ec325c14376、branch dev-foundation。最新単一run PG20288/strictpost0、manifest evidence/01_PT/016_NK-WEB-002/evidence/PG20288-question-list-sixteen-v1/manifest.json SHA256 b3612ef210d63e1627400adf8b846971ff693b9358f25ead1dc5bec84650e378。LINE77/77・METHOD16/16・CLASS1/1・BRANCH38/38、全miss0/物理1。全normal Main/source/JAR/classCRC/単一session照合、旧exec合成/手動除外0、held4 probes0。実command・開始終端・OS/JDK/version・XML・input/output/期待結果はmanifestとenvironment.safe.jsonへ結合、Linux/Java25.0.4。shared012 profile063 prepare/static/run/post、最新compile20284=0。Main正常20112/六SB20114 exact1844指摘0再利用、成功確認だけの全回帰再演0。
+
+独立固定10fieldと3状態label/JST、USER同owner/ADMIN別ownerと両role不一致拒否、filter NFC/keyword・state・date・username一致50行、first/middle/last/clampのliteralURI、空/invalid/count/duplicate/order/Unicode99/100/101/null/immutable snapshot、自己所有2worker8taskのactor分離を全16で確認。正常fixtureは検索条件に一致、negativeの矛盾は意図的。期待値をproduction URI/rowから生成しない。Spring string encoder以外のContext/beans/JDBC/HTTPclient/Artemis/Netty/Hikari初期化0、アプリはpure view/form/Principal/protocolのみ。実owner認可・HTTP/DOM/Browser・DB/JMS/再送/Root/native/CHR/全451は未受入。
+
+BUG2324/YKT2069は新TestのREADER/reader同名1件。修正前起票しhelper displayReaderのみ是正、PG20283逆変換byte完全一致/expected不変。原static20282生3保持、最新20286生2はJUnit所有bounded poolのJ2EE rule非該当を各箇所確認、適用違反0/CS0/parser0/抑制追加0。全field/method casefold交差0、是正commit df56b09407f95f55a0b1b9f8b0223ec325c14376 push0、最新16/四100/post0で有限CLOSED。Main/上位仕様不変更。
+
+群3990→3991原1/3/6pp cap8不変、真正終端後fresh結合/共有差0pp（専有/N/Tnull、丸め0は無償の意味でない）、ordinary23/all30。各source技術累計51→52、原未登録282交差32→33/残249、partial80結合17/残63。正式1964/53・歴史17/190・新leaf0・工数null。全SCR022/終了依存WBS-P015-02は未受入、技術進捗を全工程完成へ換算しない。詳細957/958。
