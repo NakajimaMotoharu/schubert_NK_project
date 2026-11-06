@@ -1,0 +1,33 @@
+<!doctype html>
+<!-- SCR016/UI225236/SS313314/SSC177/PG-D366/PT-USER-BIZ001..012. No retained password. -->
+<html lang="ja">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User追加</title>
+  <link rel="stylesheet" href="/css/schubert.css">
+ </head>
+ <body>
+  <main class="page user-new">
+   <header class="topbar">
+    <h1>User追加</h1>
+    <div class="topbar-actions">
+     <nav class="nav-links" aria-label="共通ナビゲーション">
+      <a href="/">メニュー</a> <a href="/notifications">通知</a>
+     </nav>
+     <span class="login-user">public-admin</span> <span class="login-role">ADMIN</span>
+     <form class="logout-form" action="/logout" method="post">
+      <button type="submit">ログアウト</button>
+     </form>
+    </div>
+   </header>
+   <nav>
+    <a href="/admin/users">User一覧</a>
+   </nav>
+   <form method="post" data-operation-submit action="/admin/users/new">
+    <input type="hidden" name="operation_token" value="[REDACTED-SYNTHETIC]"> <label>Username<input name="username" required maxlength="64" value="public-0"></label> <label>初期Password<input type="password" name="password" required autocomplete="new-password"></label> <label>Password確認<input type="password" name="password_confirmation" required autocomplete="new-password"></label> <label>Role<select name="role"><option value="USER">USER</option><option value="ADMIN" selected>ADMIN</option></select></label> <label>有効<select name="enabled"><option value="true">有効</option><option value="false" selected>無効</option></select></label> <button type="submit">作成</button>
+   </form>
+  </main>
+  <script src="/js/operation-post-submit.js" defer></script>
+ </body>
+</html>
