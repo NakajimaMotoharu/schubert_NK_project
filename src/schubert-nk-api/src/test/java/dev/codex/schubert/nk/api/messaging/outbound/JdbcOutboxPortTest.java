@@ -35,6 +35,9 @@ final class JdbcOutboxPortTest {
   private static final UUID MESSAGE = UUID.fromString("00000000-0000-4000-8000-000000000001");
   private static final UUID CORRELATION = UUID.fromString("00000000-0000-4000-8000-000000000002");
   private static final UUID ORIGINAL = UUID.fromString("00000000-0000-4000-8000-000000000003");
+  private static final String LAYOUT = "QWKREQ01";
+  private static final String VERSION = "001";
+  private static final String DESTINATION = "destination";
   private static final String OWNER = "owned-worker";
   private static final String CODE = "TEMPORARY";
   private static final String DETAIL = "bounded public failure";
@@ -69,8 +72,8 @@ final class JdbcOutboxPortTest {
         MESSAGE,
         CORRELATION,
         dead ? OutboxDestination.DLQ : OutboxDestination.ASYNC_WORK,
-        "QWKREQ01",
-        "001",
+        LAYOUT,
+        VERSION,
         body(),
         NOW,
         NOW.minusSeconds(1),
@@ -83,8 +86,8 @@ final class JdbcOutboxPortTest {
         MESSAGE,
         CORRELATION,
         OutboxDestination.ASYNC_WORK,
-        "QWKREQ01",
-        "001",
+        LAYOUT,
+        VERSION,
         body(),
         attempt,
         NOW,
@@ -98,9 +101,9 @@ final class JdbcOutboxPortTest {
     values.put("id", id);
     values.put("message_id", MESSAGE);
     values.put("correlation_id", CORRELATION);
-    values.put("destination", "nk.async.work");
-    values.put("layout_id", "QWKREQ01");
-    values.put("layout_version", "001");
+    values.put(DESTINATION, "nk.async.work");
+    values.put("layout_id", LAYOUT);
+    values.put("layout_version", VERSION);
     values.put("body", body());
     values.put(ATTEMPT, 0);
     values.put(NEXT, utc(next));
@@ -146,7 +149,8 @@ final class JdbcOutboxPortTest {
               return null;
             }
             if (operation.equals("next")) {
-              return ++index < rows.size();
+              index++;
+              return index < rows.size();
             }
             if (operation.startsWith("get")) {
               Object value = rows.get(index).get(args[0]);
@@ -232,8 +236,8 @@ final class JdbcOutboxPortTest {
       assertEquals(MESSAGE, f.parameters.get(1));
       assertEquals(CORRELATION, f.parameters.get(2));
       assertEquals(dead ? "nk.dead.letter" : "nk.async.work", f.parameters.get(3));
-      assertEquals("QWKREQ01", f.parameters.get(4));
-      assertEquals("001", f.parameters.get(5));
+      assertEquals(LAYOUT, f.parameters.get(4));
+      assertEquals(VERSION, f.parameters.get(5));
       assertArrayEquals(body(), (byte[]) f.parameters.get(6));
       assertEquals(utc(NOW), f.parameters.get(7));
       assertEquals(utc(NOW.minusSeconds(1)), f.parameters.get(8));
@@ -316,7 +320,7 @@ final class JdbcOutboxPortTest {
             "id",
             "message_id",
             "correlation_id",
-            "destination",
+            DESTINATION,
             "layout_id",
             "layout_version",
             "body",
@@ -340,7 +344,7 @@ final class JdbcOutboxPortTest {
         Map.of(
             "id",
             -1L,
-            "destination",
+            DESTINATION,
             "unknown",
             "layout_id",
             "bad",
@@ -391,7 +395,7 @@ final class JdbcOutboxPortTest {
     for (String missing : List.of(TRANSPORT, DELIVERY, ERROR_CODE, DETECTED)) {
       var f = new Fixture();
       var values = row(7, NOW);
-      values.put("destination", "nk.dead.letter");
+      values.put(DESTINATION, "nk.dead.letter");
       values.putAll(fields);
       values.put(missing, null);
       f.rows.add(values);
@@ -400,7 +404,7 @@ final class JdbcOutboxPortTest {
     }
     var good = new Fixture();
     var values = row(7, NOW);
-    values.put("destination", "nk.dead.letter");
+    values.put(DESTINATION, "nk.dead.letter");
     values.putAll(fields);
     good.rows.add(values);
     assertEquals(
@@ -600,9 +604,12 @@ final class JdbcOutboxPortTest {
             pool.submit(
                 () -> {
                   var f = new Fixture();
-                  f.rows.add(row(id, NOW));
+                  var ownRow = row(id, NOW);
+                  ownRow.put(LEASE_OWNER, OWNER + id);
+                  f.rows.add(ownRow);
                   var found = repository.claim(f.connection(), OWNER + id, NOW, 1).getFirst();
                   assertEquals(OWNER + id, f.parameters.get(4));
+                  assertEquals(OWNER + id, found.leaseOwner());
                   assertArrayEquals(body(), found.body());
                   assertTrue(f.resultClosed && f.statementClosed);
                   f.borrowed();

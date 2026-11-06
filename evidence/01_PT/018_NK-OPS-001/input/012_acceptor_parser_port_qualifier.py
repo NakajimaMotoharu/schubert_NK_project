@@ -4,6 +4,7 @@ import sys,os,json,hashlib,subprocess,datetime,zipfile,re,shutil
 import xml.etree.ElementTree as E
 import pg9666_pagination_static as r
 root=Path.cwd();runs=root.parent/'pgpt-runs/PG379';tc=root.parent/'toolchain';jdk=tc/'jdk-25.0.4/bin';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();phase=sys.argv[1];profile=sys.argv[2];external=profile.endswith('.json');assert phase in {'prepare','static','run','post'} and (external or profile in {'range','verified','audit','receipt','login_audit','login_attempt','inbound','snapshot','run_reference','metadata','expiry','backup','batch_run','cleanup_step','cleanup_query','inspection_summary','pressure','topology','acceptor'})
+outboxJdbcExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/096_outbox_jdbc.json'
 stateParserExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/089_unit_state_parser_bytes.json'
 authVerifierExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/090_authentication_verifier_jdbc.json'
 adminPreludeExternal=external and profile=='evidence/01_PT/018_NK-OPS-001/input/091_admin_prelude_jdbc.json'
@@ -30,10 +31,14 @@ viewProfiles={
  'evidence/01_PT/018_NK-OPS-001/input/061_notification_list_projection_fixture.json':('NotificationListViewModel','NotificationListProjectionPortTest')}
 viewExternal=external and profile in viewProfiles
 if external:
- assert sessionRevocationExternal or sessionIssueExternal or adminPreludeExternal or authVerifierExternal or stateParserExternal or errorRestoreExternal or routerExternal or securityAuditExternal or csrfExternal or formExternal or sessionExternal or requestExternal or viewExternal or observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
+ assert outboxJdbcExternal or sessionRevocationExternal or sessionIssueExternal or adminPreludeExternal or authVerifierExternal or stateParserExternal or errorRestoreExternal or routerExternal or securityAuditExternal or csrfExternal or formExternal or sessionExternal or requestExternal or viewExternal or observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
  externalCfg=json.loads((root/profile).read_text())
  assert externalCfg['preflightDecision']=='PT_DEFAULT' and externalCfg['actualBackendActions']==0
- if sessionRevocationExternal:
+ if outboxJdbcExternal:
+  assert externalCfg['module']=='api' and externalCfg['main']=='JdbcOutboxRepository' and externalCfg['mainPackage']=='messaging/outbound'
+  assert externalCfg['tests']==['JdbcOutboxPortTest','OutboxReturningIdContractTest'] and externalCfg['testPackages']==['messaging/outbound','messaging/outbound']
+  assert externalCfg['physical']==1 and externalCfg['abstract']==0 and externalCfg['expected']==9
+ elif sessionRevocationExternal:
   assert externalCfg['module']=='api' and externalCfg['main']=='AuthSessionRevocationService' and externalCfg['mainPackage']=='security'
   assert externalCfg['tests']==['SessionRevocationJdbcPortTest'] and externalCfg['testPackages']==['security']
   assert externalCfg['physical']==1 and externalCfg['abstract']==0 and externalCfg['expected']==8
@@ -124,7 +129,7 @@ for n,h in base['begin']['inputHashes'].items():assert sha(root/n)==h
 for j in base['jars'].values():assert sha(j['path'])==j['sha256']
 console=tc/'junit-platform-console-standalone-1.13.4.jar';assert sha(console)=='3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892';deps=[Path(base['jars'][n]['path']) for n in ['protocol',module]]
 if external:
- if not observationExternal and not viewExternal and not requestExternal and not sessionExternal and not formExternal and not csrfExternal and not securityAuditExternal and not routerExternal and not errorRestoreExternal and not stateParserExternal and not authVerifierExternal and not adminPreludeExternal and not sessionIssueExternal and not sessionRevocationExternal:deps.append(Path(base['jars']['bootstrap']['path']))
+ if not outboxJdbcExternal and not observationExternal and not viewExternal and not requestExternal and not sessionExternal and not formExternal and not csrfExternal and not securityAuditExternal and not routerExternal and not errorRestoreExternal and not stateParserExternal and not authVerifierExternal and not adminPreludeExternal and not sessionIssueExternal and not sessionRevocationExternal:deps.append(Path(base['jars']['bootstrap']['path']))
  deps.append(tc/'m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar')
  if securityAuditExternal or sessionIssueExternal or sessionRevocationExternal:
   assert len(cfg['gsonDependencies'])==2
@@ -180,16 +185,16 @@ if phase=='post' and len(sys.argv) in {6,7}:
  producerHash=hashlib.sha256(subprocess.check_output(['git','show',sys.argv[3]+':'+producerRelative])).hexdigest();verifierHead=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
  assert sha(root/verifierRelative)==sha(__file__) and hashlib.sha256(subprocess.check_output(['git','show',verifierHead+':'+verifierRelative])).hexdigest()==sha(__file__)
  producerGitArtifact={'source':sys.argv[3],'path':producerRelative,'sha256':producerHash};verifierGitArtifact={'source':verifierHead,'path':verifierRelative,'sha256':sha(__file__)}
-if phase=='post' and len(sys.argv)==7 and (authVerifierExternal or adminPreludeExternal or sessionIssueExternal or sessionRevocationExternal):
- reviewRelative=sys.argv[6];assert reviewRelative==('evidence/01_PT/007_NK-AUT-001/input/014_session_revocation_jdk_static_review.json' if sessionRevocationExternal else 'evidence/01_PT/007_NK-AUT-001/input/011_session_issue_jdk_static_review.json' if sessionIssueExternal else 'evidence/01_PT/007_NK-AUT-001/input/009_admin_prelude_jdk_static_review.json' if adminPreludeExternal else 'evidence/01_PT/007_NK-AUT-001/input/007_auth_jdbc_jdk_static_review.json') and producerGitArtifact is not None
+if phase=='post' and len(sys.argv)==7 and (outboxJdbcExternal or authVerifierExternal or adminPreludeExternal or sessionIssueExternal or sessionRevocationExternal):
+ reviewRelative=sys.argv[6];assert reviewRelative==('evidence/01_PT/006_NK-MSG-002/input/001_outbox_jdbc_jdk_static_review.json' if outboxJdbcExternal else 'evidence/01_PT/007_NK-AUT-001/input/014_session_revocation_jdk_static_review.json' if sessionRevocationExternal else 'evidence/01_PT/007_NK-AUT-001/input/011_session_issue_jdk_static_review.json' if sessionIssueExternal else 'evidence/01_PT/007_NK-AUT-001/input/009_admin_prelude_jdk_static_review.json' if adminPreludeExternal else 'evidence/01_PT/007_NK-AUT-001/input/007_auth_jdbc_jdk_static_review.json') and producerGitArtifact is not None
  reviewHash=sha(root/reviewRelative);assert hashlib.sha256(subprocess.check_output(['git','show',verifierHead+':'+reviewRelative])).hexdigest()==reviewHash
- authJdkReview=json.loads((root/reviewRelative).read_text());assert authJdkReview['decision']=='STATIC_JDK_EXCEPTION_LOG_WRITER_CLOSURE' and authJdkReview['source']==sys.argv[3] and authJdkReview['originalRun']==('PG20958' if sessionRevocationExternal else 'PG20914' if sessionIssueExternal else 'PG20874' if adminPreludeExternal else 'PG20840')
+ authJdkReview=json.loads((root/reviewRelative).read_text());assert authJdkReview['decision']=='STATIC_JDK_EXCEPTION_LOG_WRITER_CLOSURE' and authJdkReview['source']==sys.argv[3] and authJdkReview['originalRun']==('PG21004' if outboxJdbcExternal else 'PG20958' if sessionRevocationExternal else 'PG20914' if sessionIssueExternal else 'PG20874' if adminPreludeExternal else 'PG20840')
  assert authJdkReview['originalProducerSha256']==producerHash and authJdkReview['originalConfigSha256']==cfgHash and authJdkReview['testsReexecuted']==0 and authJdkReview['actualBackendActions']==0 and not authJdkReview['formalUpdated']
  assert sha(jdk.parent/'lib/modules')==authJdkReview['jdkModulesSha256'] and sha(jdk/'javap')==authJdkReview['jdkJavapSha256']
  assert authJdkReview['classpathDriverProviderEntries'] and all(not v for v in authJdkReview['classpathDriverProviderEntries'].values())
  assert authJdkReview['forbiddenObservedInitialization']==[] and authJdkReview['ordinaryJdbcQualificationOnly'] is True
  for name,h in authJdkReview['staticArtifacts'].items():
-  assert name.startswith(('evidence/01_PT/007_NK-AUT-001/evidence/PG20846-auth-jdbc-jdk-static-review-v1/','evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/','evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/','evidence/01_PT/007_NK-AUT-001/evidence/PG20960-session-revocation-jdk-static-review-v1/')) and '..' not in Path(name).parts
+  assert name.startswith(('evidence/01_PT/007_NK-AUT-001/evidence/PG20846-auth-jdbc-jdk-static-review-v1/','evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/','evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/','evidence/01_PT/007_NK-AUT-001/evidence/PG20960-session-revocation-jdk-static-review-v1/','evidence/01_PT/006_NK-MSG-002/evidence/PG21006-outbox-jdbc-jdk-static-review-v1/')) and '..' not in Path(name).parts
   assert sha(root/name)==h and hashlib.sha256(subprocess.check_output(['git','show',verifierHead+':'+name])).hexdigest()==h
  authJdkReviewBinding={'source':verifierHead,'path':reviewRelative,'sha256':reviewHash,'testsReexecuted':0}
 elif phase=='post' and len(sys.argv)==7:
@@ -348,6 +353,20 @@ if authVerifierExternal or adminPreludeExternal or sessionIssueExternal or sessi
   assert b['inputHashes']==authJdkReview['originalInputHashes']
   for file,binding in authJdkReview['originalXmlEnvironmentBindings'].items():
    assert Path(file).parent==slot/'xml' and sha(file)==binding['sha256'] and all(binding['checks'].values())
+if outboxJdbcExternal:
+ initializedOutbox=set(re.findall(r"Initializing '([^']+)",(slot/'class-init.log').read_text()));prefix='dev/codex/schubert/nk/api/messaging/outbound/'
+ allowedOutbox={prefix+n for n in ['JdbcOutboxRepository','OutboxRequest','OutboxEntry','OutboxDlqMetadata','OutboxDestination','OutboxRetrySchedule','OutboxIntegrityException']};allowedOutbox.add('dev/codex/schubert/nk/api/database/RequiredColumn')
+ lambdaPrefixes={prefix+'JdbcOutboxRepository$$Lambda':4,prefix+'OutboxDestination$$Lambda':2}
+ for p,maximum in lambdaPrefixes.items():assert sum(n.startswith(p) for n in initializedOutbox)<=maximum
+ unexpectedOutbox={n for n in initializedOutbox if n.startswith('dev/codex/schubert/nk/') and not (n in allowedOutbox or n.startswith(prefix+'JdbcOutboxPortTest') or n.startswith(prefix+'OutboxReturningIdContractTest') or any(n.startswith(p) for p in lambdaPrefixes))};assert not unexpectedOutbox,sorted(unexpectedOutbox)
+ assert not any(n.startswith(('dev/codex/schubert/nk/storage/','dev/codex/schubert/nk/bootstrap/','org/apache/activemq/','org/postgresql/','io/netty/','com/zaxxer/','io/micrometer/','java/sql/DriverInfo','java/net/Socket','sun/nio/ch/SocketChannelImpl')) for n in initializedOutbox)
+ if 'java/sql/DriverManager' in initializedOutbox:
+  assert authJdkReview is not None and authJdkReviewBinding is not None
+  assert sha(slot/'manifest.safe.json')==authJdkReview['originalManifestSha256'] and sha(slot/'class-init.log')==authJdkReview['originalInitializationSha256']
+  assert b['inputHashes']==authJdkReview['originalInputHashes']
+  for file,binding in authJdkReview['originalXmlEnvironmentBindings'].items():
+   assert Path(file).parent==slot/'xml' and sha(file)==binding['sha256'] and all(binding['checks'].values())
+
 physical=m['physical'];assert len(physical)==cfg['physical']
 with zipfile.ZipFile(deps[1]) as z:
  for n,h in physical.items():assert sha(slot/'component'/(n+'.class'))==h and hashlib.sha256(z.read(n+'.class')).hexdigest()==h

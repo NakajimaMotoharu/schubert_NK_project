@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-06T22:51:02.312">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java">
+<violation beginline="100" endline="100" begincolumn="25" endcolumn="49" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxPortTest" method="row" variable="values" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="117" endline="117" begincolumn="45" endcolumn="66" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxPortTest" method="port" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="121" endline="121" begincolumn="40" endcolumn="68" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxPortTest.Fixture" variable="parameters" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="122" endline="122" begincolumn="41" endcolumn="68" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxPortTest.Fixture" variable="nullTypes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="599" endline="599" begincolumn="21" endcolumn="52" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxPortTest" method="sharedRepositoryParallelCallsKeepOwnRowsBindingsAndBody" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="604" endline="617" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxPortTest" method="sharedRepositoryParallelCallsKeepOwnRowsBindingsAndBody" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxReturningIdContractTest.java">
+<violation beginline="17" endline="17" begincolumn="45" endcolumn="66" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="OutboxReturningIdContractTest" method="port" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="34" endline="34" begincolumn="23" endcolumn="32" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="OutboxReturningIdContractTest" method="sqlNullReturningIdentifierCannotBecomeSuccessfulZero" variable="statement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this PreparedStatement object are closed after use
+</violation>
+<violation beginline="46" endline="46" begincolumn="16" endcolumn="26" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="OutboxReturningIdContractTest" method="sqlNullReturningIdentifierCannotBecomeSuccessfulZero" variable="connection" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Connection object are closed after use
+</violation>
+</file>
+</pmd>
