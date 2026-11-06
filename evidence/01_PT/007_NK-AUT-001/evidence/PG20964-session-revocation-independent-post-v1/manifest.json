@@ -1,0 +1,151 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-06T22:06:54.861513+09:00",
+  "source": "3a2c29bd755f0ed6158464ad3b5715bc51be4617",
+  "productionCoreMain": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+  "verifierSource": "4373189910f6ac008899c7b684acc9cc5e19ac45",
+  "originalPost": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20958-session-revocation-oracle-fixed-eight-v1/manifest.json",
+    "sha256": "4c312a768b0a51edf5ae7efce76bc4023c3b1e453f4cf16bdd82b3128ac69d95"
+  },
+  "tests": 8,
+  "projection": {
+    "schema": "PGPT_PORT_PROJECTION_V1",
+    "source": "3a2c29bd755f0ed6158464ad3b5715bc51be4617",
+    "mainSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+    "tests": 8,
+    "testClasses": 1,
+    "fourCounters": {
+      "LINE": 110,
+      "METHOD": 7,
+      "CLASS": 1,
+      "BRANCH": 36
+    },
+    "missed": 0,
+    "physical": 1,
+    "noCodeClasses": [],
+    "selectedMethods": [
+      [
+        "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest",
+        "administrativeRevocationStagesEachTargetInFixedOrderForAllowedReasons"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest",
+        "affectedSqlAndEveryCloseFailureRemainUnsuccessfulAndRedacted"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest",
+        "alreadyRevokedReturnsOriginalInstantWithoutTouchOrPrincipal"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest",
+        "boundaryNullOwnerReasonAndCurrentAdminContractsPrecedeSql"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest",
+        "expiryDisabledAbsentAndNullRowsFailClosedWithRequiredAuditOnly"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest",
+        "invalidValuesAndUnknownProviderExceptionsKeepTheirDefinedBoundary"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest",
+        "logoutSamplesCurrentClockAfterBothLocksAndStagesExactUtcAudit"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest",
+        "sharedServiceParallelCallsRetainOwnResultCorrelationAndResourceState"
+      ]
+    ],
+    "qualificationTransferred": false
+  },
+  "physicalNormalClassHashes": {
+    "dev/codex/schubert/nk/api/security/AuthSessionRevocationService": "7a95c995f54ddbd4e6fbe282ae07b61a6213de1dd8fed9fddc733040a61e0027"
+  },
+  "sourceTestIds": [
+    [
+      "PT-AUT-REV001",
+      "logoutSamplesCurrentClockAfterBothLocksAndStagesExactUtcAudit"
+    ],
+    [
+      "PT-AUT-REV002",
+      "alreadyRevokedReturnsOriginalInstantWithoutTouchOrPrincipal"
+    ],
+    [
+      "PT-AUT-REV003",
+      "expiryDisabledAbsentAndNullRowsFailClosedWithRequiredAuditOnly"
+    ],
+    [
+      "PT-AUT-REV004",
+      "administrativeRevocationStagesEachTargetInFixedOrderForAllowedReasons"
+    ],
+    [
+      "PT-AUT-REV005",
+      "boundaryNullOwnerReasonAndCurrentAdminContractsPrecedeSql"
+    ],
+    [
+      "PT-AUT-REV006",
+      "affectedSqlAndEveryCloseFailureRemainUnsuccessfulAndRedacted"
+    ],
+    [
+      "PT-AUT-REV007",
+      "invalidValuesAndUnknownProviderExceptionsKeepTheirDefinedBoundary"
+    ],
+    [
+      "PT-AUT-REV008",
+      "sharedServiceParallelCallsRetainOwnResultCorrelationAndResourceState"
+    ]
+  ],
+  "checks": [
+    "original terminal/stages0",
+    "6 XML method bijection/FES0",
+    "all public artifact hashes",
+    "explicit Main/Test Git pins",
+    "separate producer/verifier/config Git pins",
+    "2physical normal jar bytes/CRC/session",
+    "four counters110/7/1/36 miss0",
+    "SDK exact original review",
+    "static raw6 individually nonapplicable",
+    "heldFourZero/no union/no manual exclusion"
+  ],
+  "staticPost": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20956-session-revocation-code-fixed-static-v1/manifest.json",
+    "sha256": "16a32a76de158a6b42edd8a17c4469744d64d90524f33b1ab041ebc78af90f91"
+  },
+  "environment": [
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    },
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    },
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    }
+  ],
+  "productTestsReexecuted": 0,
+  "reusedCheckerTemplate": "008 previously corrected canonical-config and physical-Git-pin semantics; its old prototype failure does not belong to this run",
+  "checkerSourceState": "CURRENT_WIP_METADATA_ONLY_PUBLISHED_NEXT_NOT_PRODUCT_SOURCE",
+  "checkerSha256": "d6afb4998db0490a3facbdb9b561c51e48603933ef9be583bec4abf53f838f18",
+  "independentGolden": {
+    "path": "evidence/01_PT/007_NK-AUT-001/input/016_revocation_expected_code_oracle.json",
+    "sha256": "af477f274c6385f57ba8e9afc040e01ce04fe03f95af51bb0f49decfe9efd68d"
+  },
+  "actualLiveSessionIssued": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "effortRate": null
+}

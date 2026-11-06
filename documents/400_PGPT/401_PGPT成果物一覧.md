@@ -1,5 +1,9 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-06 Logout・管理失効の新規八PT
+
+PG20958/source3a2c29・独立PG20964は8/FESaborted0、全physical1 L110/M7/C1/B36のmiss0、仕様007047/結果048・600030031。元PG20940/source7caa F1/E1は不合格のまま保全。fixture0001を、凍結正本UI234/SS351/SS354の0200へ訂正し、事前code表guardを追加した。Product/上位/Current変更0、旧6成功・RED/GREEN execの加算無し。直近30対象275unique=Java175+HTML93+CSS7・wholeMain64/原282交差44残238/partial18残62。新WBS0/正式1964PT53scope/歴史17of190/工数nullは不変、実DB・実Logout/ADMIN・Root/native/CHR/451は未受入。下の集計は各保存時点の比較履歴。
+
 ## 2026-11-06 認証三対象の新規22PT・三source追加
 
 Production JavaはD8同byte、現normal20704/resource source fb189。各々の実source/runを分け、全体coverageへ合成しない。
