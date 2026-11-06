@@ -1,5 +1,10 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-07T03:48:23.521791+09:00 Animation MVC Bean限定資格
+
+016仕様116/結果117・PMO600068、PG21474新2/FES0/独立21482post0・L2M2C1未網羅0/branch自然零N/A。公開annotation/Bean/null/freshのみ、十五依存は既十三samebyte descriptor＋new二constructor、Controller method/wire/session/DB/ID/実HTTP0。共通fixture不変・費用再加算0・新障害0・Main不変。累計46対象新unique367=Java263+HTML97+CSS7、重複Router8別枠、wholeJava79/原282交差59残223/partial18残62。新leaf0/正式1964-53/工数null。
+
+
 ## 2026-11-07T03:43:09.827538+09:00 Music MVC Bean限定資格
 
 016仕様114/結果115・PMO600066、PG21442新2/FES0/独立21458post0・L2M2C1未網羅0/branch自然零N/A。公開annotation/Bean/null/freshのみ、十五依存は既十三samebyte descriptor＋new二constructorだけ、Controller method/wire/session/DB/ID/実HTTP0。BUG2392/2393・YKT2137/38有限close・Main不変。累計45対象新unique365=Java261+HTML97+CSS7、重複Router8別枠、wholeJava78/原282交差58残224/partial18残62。新leaf0/正式1964-53/工数null。
