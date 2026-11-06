@@ -1,0 +1,194 @@
+[
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSource.java",
+    "sourceSha256": "1d2c0e44fab847e256b794a04bdabd3bf770db3deb59afe37c8e3a80faaccc3d",
+    "finding": {
+      "beginline": "49",
+      "endline": "49",
+      "begincolumn": "5",
+      "endcolumn": "17",
+      "rule": "AvoidSynchronizedStatement",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.api.monitoring",
+      "class": "ApiOutboxObservationSource",
+      "method": "observe",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+      "priority": "3"
+    },
+    "lineText": "synchronized (writerLock) {",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Private final per-instance monitor serializes only owned writes as SS351/PG-D631; get/missing remain nonblocking atomics. Not exposed/interned/provider monitor; publication uses unique Entry CAS. Not global synchronization waiver.",
+    "wholeQualityAccepted": false
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSource.java",
+    "sourceSha256": "1d2c0e44fab847e256b794a04bdabd3bf770db3deb59afe37c8e3a80faaccc3d",
+    "finding": {
+      "beginline": "65",
+      "endline": "65",
+      "begincolumn": "5",
+      "endcolumn": "17",
+      "rule": "AvoidSynchronizedStatement",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.api.monitoring",
+      "class": "ApiOutboxObservationSource",
+      "method": "observe",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+      "priority": "3"
+    },
+    "lineText": "synchronized (writerLock) {",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Private final per-instance monitor serializes only owned writes as SS351/PG-D631; get/missing remain nonblocking atomics. Not exposed/interned/provider monitor; publication uses unique Entry CAS. Not global synchronization waiver.",
+    "wholeQualityAccepted": false
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxPublicationPortTest.java",
+    "sourceSha256": "ced23dbc3046eb10ed953b5b3f3268a027d3c1cf55e2dd6f4d24f2d081492838",
+    "finding": {
+      "beginline": "111",
+      "endline": "111",
+      "begincolumn": "23",
+      "endcolumn": "58",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.api.monitoring",
+      "class": "ApiOutboxPublicationPortTest",
+      "method": "borrowedInvalidationRaces",
+      "variable": "worker",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3"
+    },
+    "lineText": "try (var worker = Executors.newSingleThreadExecutor()) {",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Own bounded single worker/latches for explicit publication race; completion joined with10s and executor scope closed; IRQ restored if fixture interrupted. No J2EE container/production worker or outside process.",
+    "wholeQualityAccepted": false
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxPublicationPortTest.java",
+    "sourceSha256": "ced23dbc3046eb10ed953b5b3f3268a027d3c1cf55e2dd6f4d24f2d081492838",
+    "finding": {
+      "beginline": "112",
+      "endline": "112",
+      "begincolumn": "21",
+      "endcolumn": "74",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.api.monitoring",
+      "class": "ApiOutboxPublicationPortTest",
+      "method": "borrowedInvalidationRaces",
+      "variable": "pending",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3"
+    },
+    "lineText": "var pending = worker.submit(() -> value.observe(f.connection, NOW));",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Own bounded single worker/latches for explicit publication race; completion joined with10s and executor scope closed; IRQ restored if fixture interrupted. No J2EE container/production worker or outside process.",
+    "wholeQualityAccepted": false
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxPublicationPortTest.java",
+    "sourceSha256": "ced23dbc3046eb10ed953b5b3f3268a027d3c1cf55e2dd6f4d24f2d081492838",
+    "finding": {
+      "beginline": "179",
+      "endline": "179",
+      "begincolumn": "7",
+      "endcolumn": "13",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.api.monitoring",
+      "class": "ApiOutboxPublicationPortTest",
+      "method": "await",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3"
+    },
+    "lineText": "Thread.currentThread().interrupt();",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Own bounded single worker/latches for explicit publication race; completion joined with10s and executor scope closed; IRQ restored if fixture interrupted. No J2EE container/production worker or outside process.",
+    "wholeQualityAccepted": false
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxPublicationPortTest.java",
+    "sourceSha256": "ced23dbc3046eb10ed953b5b3f3268a027d3c1cf55e2dd6f4d24f2d081492838",
+    "finding": {
+      "beginline": "205",
+      "endline": "205",
+      "begincolumn": "19",
+      "endcolumn": "52",
+      "rule": "UseProperClassLoader",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.api.monitoring",
+      "class": "ApiOutboxPublicationPortTest.Fixture",
+      "method": "Fixture",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+      "priority": "3"
+    },
+    "lineText": "Connection.class.getClassLoader(),",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "JDK interface defining loader is required for synthetic Proxy.newProxyInstance; no classpath/file/plugin lookup or thread context loader change.",
+    "wholeQualityAccepted": false
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxPublicationPortTest.java",
+    "sourceSha256": "ced23dbc3046eb10ed953b5b3f3268a027d3c1cf55e2dd6f4d24f2d081492838",
+    "finding": {
+      "beginline": "251",
+      "endline": "251",
+      "begincolumn": "19",
+      "endcolumn": "52",
+      "rule": "UseProperClassLoader",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.api.monitoring",
+      "class": "ApiOutboxPublicationPortTest.Fixture",
+      "method": "attempt",
+      "variable": "pool",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+      "priority": "3"
+    },
+    "lineText": "DataSource.class.getClassLoader(),",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "JDK interface defining loader is required for synthetic Proxy.newProxyInstance; no classpath/file/plugin lookup or thread context loader change.",
+    "wholeQualityAccepted": false
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxPublicationPortTest.java",
+    "sourceSha256": "ced23dbc3046eb10ed953b5b3f3268a027d3c1cf55e2dd6f4d24f2d081492838",
+    "finding": {
+      "beginline": "268",
+      "endline": "268",
+      "begincolumn": "15",
+      "endcolumn": "55",
+      "rule": "UseProperClassLoader",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.api.monitoring",
+      "class": "ApiOutboxPublicationPortTest.Fixture",
+      "method": "statement",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+      "priority": "3"
+    },
+    "lineText": "PreparedStatement.class.getClassLoader(),",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "JDK interface defining loader is required for synthetic Proxy.newProxyInstance; no classpath/file/plugin lookup or thread context loader change.",
+    "wholeQualityAccepted": false
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxPublicationPortTest.java",
+    "sourceSha256": "ced23dbc3046eb10ed953b5b3f3268a027d3c1cf55e2dd6f4d24f2d081492838",
+    "finding": {
+      "beginline": "290",
+      "endline": "290",
+      "begincolumn": "15",
+      "endcolumn": "47",
+      "rule": "UseProperClassLoader",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.api.monitoring",
+      "class": "ApiOutboxPublicationPortTest.Fixture",
+      "method": "resultSet",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+      "priority": "3"
+    },
+    "lineText": "ResultSet.class.getClassLoader(),",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "JDK interface defining loader is required for synthetic Proxy.newProxyInstance; no classpath/file/plugin lookup or thread context loader change.",
+    "wholeQualityAccepted": false
+  }
+]

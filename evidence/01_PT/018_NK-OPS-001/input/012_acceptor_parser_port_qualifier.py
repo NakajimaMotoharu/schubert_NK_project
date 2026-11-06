@@ -4,16 +4,22 @@ import sys,os,json,hashlib,subprocess,datetime,zipfile,re,shutil
 import xml.etree.ElementTree as E
 import pg9666_pagination_static as r
 root=Path.cwd();runs=root.parent/'pgpt-runs/PG379';tc=root.parent/'toolchain';jdk=tc/'jdk-25.0.4/bin';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();phase=sys.argv[1];profile=sys.argv[2];external=profile.endswith('.json');assert phase in {'prepare','static','run','post'} and (external or profile in {'range','verified','audit','receipt','login_audit','login_attempt','inbound','snapshot','run_reference','metadata','expiry','backup','batch_run','cleanup_step','cleanup_query','inspection_summary','pressure','topology','acceptor'})
+observationExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/052_api_observation_publication.json','evidence/01_PT/018_NK-OPS-001/input/053_api_observation_publication_style.json'}
 if external:
- assert re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
+ assert observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
  externalCfg=json.loads((root/profile).read_text())
  assert externalCfg['preflightDecision']=='PT_DEFAULT' and externalCfg['actualBackendActions']==0
- assert externalCfg['module']=='batch' and externalCfg['main']=='LogCleanupService' and externalCfg['mainPackage']=='cleanup'
- assert externalCfg['tests']==['LogCleanupTransactionPortTest'] and externalCfg['testPackages']==['cleanup']
+ if observationExternal:
+  assert externalCfg['module']=='api' and externalCfg['main']=='ApiOutboxObservationSource' and externalCfg['mainPackage']=='monitoring'
+  assert externalCfg['tests']==['ApiOutboxPublicationPortTest'] and externalCfg['testPackages']==['monitoring']
+  assert externalCfg['physical']==2 and externalCfg['abstract']==0 and externalCfg['expected']==8
+ else:
+  assert externalCfg['module']=='batch' and externalCfg['main']=='LogCleanupService' and externalCfg['mainPackage']=='cleanup'
+  assert externalCfg['tests']==['LogCleanupTransactionPortTest'] and externalCfg['testPackages']==['cleanup']
+  assert externalCfg['physical']==5 and externalCfg['abstract']==2 and externalCfg['expected']==19
  assert re.fullmatch('[0-9a-f]{40}',externalCfg['coreSource'])
  for key in ['normalCompileSlot','sixStaticSlot','prepare','static','unit']:
   assert re.fullmatch(r'pg[0-9]+-[a-z0-9-]+-v[0-9]+',externalCfg[key])
- assert externalCfg['physical']==5 and externalCfg['abstract']==2 and externalCfg['expected']==19
 cfg={
  'acceptor':dict(module='batch',program='018_NK-OPS-001',main='ArtemisAcceptorReadinessClient',mainPackage='mq',tests=['AcceptorObjectBoundaryTest','AcceptorPolicyPortTest'],testPackages=['mq','mq'],prepare='pg19292-mq-acceptor-port-compile-v1',static='pg19294-mq-acceptor-port-static-v1',unit='pg19298-mq-acceptor-port-fifteen-unit-v1',public='PG19298-mq-acceptor-port-fifteen-v1',physical=2,abstract=1,expected=15,session='PG19298-MQ-ACCEPTOR-PORT-15',sdkReview='evidence/01_PT/018_NK-OPS-001/input/011_acceptor_parser_port_sdk_review.json',sdkReviewSha256='658d8823beb8001ade2a83418d7f787ab53cc63267c50782bf7e6d3484b480ec',resourceScopeNote='MemoryJSON fixture; SDK may read classpath services/default JVM properties. Business backend operation count0, not globalSDK syscall0'),
  'topology':dict(module='batch',program='018_NK-OPS-001',main='ArtemisReadinessClient',mainPackage='mq',tests=['TopologyQueryPortTest'],testPackages=['mq'],prepare='pg19210-mq-topology-port-compile-v1',static='pg19212-mq-topology-port-static-v1',unit='pg19218-mq-topology-port-six-unit-v1',public='PG19218-mq-topology-port-six-v1',physical=1,abstract=0,expected=6,session='PG19218-MQ-TOPOLOGY-PORT-6',sdkReview='evidence/01_PT/018_NK-OPS-001/input/004_mq_topology_sdk_static_review.json',sdkReviewSha256='78c04314faae4343166bc69d434ea5584294df09e5ce175d10df4aebda32c50e'),
@@ -40,8 +46,10 @@ for n,h in base['begin']['inputHashes'].items():assert sha(root/n)==h
 for j in base['jars'].values():assert sha(j['path'])==j['sha256']
 console=tc/'junit-platform-console-standalone-1.13.4.jar';assert sha(console)=='3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892';deps=[Path(base['jars'][n]['path']) for n in ['protocol',module]]
 if external:
- deps.append(Path(base['jars']['bootstrap']['path']))
+ if not observationExternal:deps.append(Path(base['jars']['bootstrap']['path']))
  deps.append(tc/'m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar')
+ if observationExternal:
+  dependency=tc/'m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar';assert sha(dependency)==cfg['micrometerCoreSha256'];deps.append(dependency)
 if profile in {'inbound','pressure','topology','acceptor'}:
  sdkManifest=root/'evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18622-dlq-sender-unit-v1/manifest.json';assert sha(sdkManifest)=='e643b92d0553c4b0b76413381d39d7cf6e2cf6509510ab0798492300eafb6404';sdkPrior=json.loads(sdkManifest.read_text());sdkDeps=sdkPrior['inputProvenance']['sdkDependencies'];assert all(sha(f)==h for f,h in sdkDeps.items());deps.extend([tc/'m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar',*map(Path,sdkDeps)])
 if profile in {'expiry','pressure'}:deps.extend([Path(base['jars']['bootstrap']['path']),tc/'m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar'])
@@ -146,6 +154,9 @@ if sdkExtension:
 
 if profile in {'expiry','backup','batch_run','cleanup_step','cleanup_query','inspection_summary','pressure','topology','acceptor'}:
  initializedApp=set(re.findall(r'Initializing \'(dev/codex/schubert/nk/[^\']+)',(slot/'class-init.log').read_text()));assert not any(n.startswith('dev/codex/schubert/nk/storage/') or n in {'dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame','dev/codex/schubert/nk/batch/repository/MorningDatabaseSession'} for n in initializedApp),sorted(initializedApp)
+if observationExternal:
+ initializedApp=set(re.findall(r"Initializing '([^']+)",(slot/'class-init.log').read_text()));assert not any(n.startswith(('io/micrometer/','dev/codex/schubert/nk/storage/','dev/codex/schubert/nk/bootstrap/','org/apache/activemq/')) for n in initializedApp),sorted(initializedApp)
+ assert 'dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt' in initializedApp
 physical=m['physical'];assert len(physical)==cfg['physical']
 with zipfile.ZipFile(deps[1]) as z:
  for n,h in physical.items():assert sha(slot/'component'/(n+'.class'))==h and hashlib.sha256(z.read(n+'.class')).hexdigest()==h

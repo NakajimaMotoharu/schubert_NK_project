@@ -1,0 +1,45 @@
+{
+  "groupId": "PGPT-ORDINARY-API-OBSERVATION-PUBLICATION-20261106",
+  "atJST": "2026-11-06T10:09:33.447579+09:00",
+  "sourceBefore": "268faa8c5e4f548b633df4b260d5d969d2bef05f",
+  "mainSourceBefore": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+  "estimateAtGroupStartPp": {
+    "low": 1,
+    "base": 3,
+    "high": 6
+  },
+  "capPp": 8,
+  "costOwner": "WBS-P018-09",
+  "chargedToSV": false,
+  "quotaBefore": {
+    "primary": {
+      "usedPercent": 28,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 28,
+    "remainingPercent": 72,
+    "observedAtUTC": "2026-11-06T01:08:52.370Z",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "57d6a2ead7d4bcb3fa3109d9e02731ba7896e676e3a1a1f98fb2e39cf055cc57"
+  },
+  "workCategory": "ORIGINAL_PLAN_PT_GAP",
+  "scope": "ApiOutboxObservationSource whole physical2 original partial target, eight independent memory JDBC publication tests, no Main change. Borrowed exceptions and invalidation; owned positive cleanup and stale invalidation/one-shot precondition only. No invocation of ApiReadOnlyObservationAttempt failure cleanup that references held TemporaryInfrastructureException. Such dependency remains NOT_RUN_HOLD and not in PASS.",
+  "preflight": {
+    "decision": "PT_DEFAULT_FOR_EIGHT_EXACT_METHODS",
+    "test": "ApiOutboxPublicationPortTest",
+    "fixture": "JDK DataSource/Connection/PS/RS synthetic proxies; own bounded Executor/latches; literal SQL/rows/timestamps; no real pool/driver/DB/network",
+    "command": "shared012 prepare/static/run/post frozen external profile052; expected8; Main D8 jars PG20112 and SB20114 reused",
+    "ProductTargets": [
+      "ApiOutboxObservationSource public constructor/observe/get/missing",
+      "ApiReadOnlyObservationAttempt successful read only, resource cleanup confirmed by proxy",
+      "OutboxObservationRepository.read with fixed rows"
+    ],
+    "nulls": "constructor/null API boundary NPE asserted, never catch NPE in Product to normalize",
+    "heldDependencies": "TemporaryInfrastructureException/otherheld4 invocation0; no extraction/replacement or alternate route to held failure behavior",
+    "excludedTests": "Original20 include SDK metric context cases; unchanged historical Test retained, not selected/compiled or counted. New exact8 self-contained and named in specification.",
+    "sideEffects": "new own tmp/class/Jacoco outputs and own bounded threads only; no driver, actual SQL, VM/Root/systemd/keys/permit/intent/cohort",
+    "acceptance": "Actual8/fourcounters separately measured; unmeasured owned failure dependency not PASS. No formal/leaf closure from coverage alone."
+  }
+}
