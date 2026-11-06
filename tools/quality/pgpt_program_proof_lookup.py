@@ -16,22 +16,59 @@ def candidate(value, class_name, current_hash):
         raise ValueError('exact simple Java class name required')
     coverage = value.get('coverage')
     inputs = value.get('inputHashes')
-    if not isinstance(coverage, dict) or not isinstance(inputs, dict):
+    schema = 'COVERAGE_INPUT_HASHES'
+    branch = value.get('branch')
+    natural_zero = value.get('branchStatus') == 'NATURAL_ZERO_BRANCH' and value.get('branchRatio') is None
+    if isinstance(coverage, dict) and isinstance(inputs, dict):
+        targets = [key for key in coverage if key.rsplit('/', 1)[-1] == class_name]
+        sources = [key for key in inputs if key.endswith('/src/main/java/' + targets[0] + '.java')] if len(targets) == 1 else []
+        if len(sources) != 1:
+            return None
+        source_path = sources[0]
+        source_hash = inputs[source_path]
+        counters = coverage[targets[0]]
+    else:
+        # Only the explicit single-target legacy receipt is supported. Never infer a
+        # Main from a Test filename or apply aggregate counters to multiple targets.
+        begin = value.get('begin')
+        counters = value.get('counters')
+        if not isinstance(begin, dict) or not isinstance(counters, dict):
+            return None
+        physical = begin.get('targetPhysicalClasses')
+        source_hash = begin.get('targetMainSourceSha256')
+        test_path = begin.get('testPath')
+        if (not isinstance(physical, list) or len(physical) != 1
+                or not isinstance(physical[0], str)
+                or physical[0].rsplit('/', 1)[-1] != class_name
+                or not re.fullmatch(r'[A-Za-z_$][\w$]*(?:/[A-Za-z_$][\w$]*)+', physical[0])
+                or not isinstance(source_hash, str) or not re.fullmatch(r'[0-9a-f]{64}', source_hash)
+                or not isinstance(test_path, str)
+                or not re.fullmatch(r'src/[^/]+/src/test/java/[A-Za-z0-9_$/]+\.java', test_path)
+                or value.get('sourcePhysicalScopeComplete') is not True):
+            return None
+        source_path = test_path.split('/src/test/java/', 1)[0] + '/src/main/java/' + physical[0] + '.java'
+        schema = 'SINGLE_TARGET_COUNTERS_BEGIN'
+        natural_zero = (isinstance(branch, dict) and branch.get('meaning') == 'NATURAL_ZERO_NO_SOURCE_CONDITIONAL_INSTRUCTIONS_NA'
+                        and type(branch.get('covered')) is int and branch['covered'] == 0
+                        and type(branch.get('missed')) is int and branch['missed'] == 0)
+    if not isinstance(counters, dict):
         return None
-    targets = [key for key in coverage if key.rsplit('/', 1)[-1] == class_name]
-    sources = [key for key in inputs if key.endswith('/src/main/java/' + targets[0] + '.java')] if len(targets) == 1 else []
-    if len(sources) != 1:
-        return None
-    counters = coverage[targets[0]]
-    full = isinstance(counters, dict) and all(
-        isinstance(counters.get(key), dict) and counters[key].get('missed') == 0
-        and isinstance(counters[key].get('covered'), int) and counters[key]['covered'] >= 0
-        for key in ['LINE', 'METHOD', 'CLASS', 'BRANCH'])
-    full = full and all(counters[key]['covered'] > 0 for key in ['LINE', 'METHOD', 'CLASS'])
-    return dict(source=value.get('source'), mainPath=sources[0], mainSha256=inputs[sources[0]],
-                currentMainByteEqual=inputs[sources[0]] == current_hash,
+
+    def zero_missed(key):
+        item = counters.get(key)
+        return (isinstance(item, dict) and type(item.get('missed')) is int and item['missed'] == 0
+                and type(item.get('covered')) is int and item['covered'] >= 0)
+
+    three = all(zero_missed(key) and counters[key]['covered'] > 0 for key in ['LINE', 'METHOD', 'CLASS'])
+    full = three and zero_missed('BRANCH')
+    # An omitted BRANCH counter remains omitted. Natural zero is not measured branch100.
+    assessment = ('MEASURED_COUNTER' if 'BRANCH' in counters else
+                  'EXPLICIT_NATURAL_ZERO_NOT_BRANCH100' if natural_zero else 'UNMEASURED')
+    return dict(source=value.get('source'), mainPath=source_path, mainSha256=source_hash,
+                currentMainByteEqual=source_hash == current_hash,
                 originalExit=value.get('actualExit'), tests=value.get('tests'),
                 fourCounters=counters, allFourMissedZero=bool(full),
+                lineMethodClassMissedZero=three, evidenceSchema=schema, branchAssessment=assessment,
                 acceptanceInferred=False, permissionInferred=False)
 
 

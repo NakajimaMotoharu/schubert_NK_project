@@ -46,6 +46,62 @@ class ProgramProofLookupTest(unittest.TestCase):
         self.assertTrue(row['allFourMissedZero'])
         self.assertNotIn('ratio',row)
 
+    def legacy(self):
+        return dict(source='legacy-source',actualExit=0,tests=4,sourcePhysicalScopeComplete=True,
+                    begin=dict(targetPhysicalClasses=['pkg/Port'],targetMainSourceSha256='a'*64,
+                               testPath='src/module/src/test/java/pkg/PortContractTest.java'),
+                    counters={key:dict(covered=count,missed=0) for key,count in [('LINE',4),('METHOD',1),('CLASS',1)]},
+                    branch=dict(covered=0,missed=0,meaning='NATURAL_ZERO_NO_SOURCE_CONDITIONAL_INSTRUCTIONS_NA'))
+
+    def test_legacy_single_target_binds_exact_hash_and_main_module(self):
+        row=candidate(self.legacy(),'Port','a'*64)
+        self.assertEqual('src/module/src/main/java/pkg/Port.java',row['mainPath'])
+        self.assertEqual('SINGLE_TARGET_COUNTERS_BEGIN',row['evidenceSchema'])
+        self.assertTrue(row['currentMainByteEqual'])
+        self.assertTrue(row['lineMethodClassMissedZero'])
+        self.assertEqual('EXPLICIT_NATURAL_ZERO_NOT_BRANCH100',row['branchAssessment'])
+        self.assertNotIn('BRANCH',row['fourCounters'])
+        self.assertFalse(row['allFourMissedZero'])
+        self.assertFalse(row['acceptanceInferred'])
+        self.assertFalse(row['permissionInferred'])
+
+    def test_legacy_different_byte_is_history_only(self):
+        self.assertFalse(candidate(self.legacy(),'Port','b'*64)['currentMainByteEqual'])
+
+    def test_legacy_multiple_physical_targets_never_split_aggregate(self):
+        value=self.legacy();value['begin']['targetPhysicalClasses'].append('pkg/Other')
+        self.assertIsNone(candidate(value,'Port','a'*64))
+
+    def test_legacy_missing_hash_or_incomplete_scope_is_not_bound(self):
+        for key in ['targetMainSourceSha256','targetPhysicalClasses','testPath']:
+            value=self.legacy();del value['begin'][key]
+            self.assertIsNone(candidate(value,'Port','a'*64))
+        value=self.legacy();value['sourcePhysicalScopeComplete']=False
+        self.assertIsNone(candidate(value,'Port','a'*64))
+
+    def test_legacy_unsafe_or_ambiguous_paths_are_rejected(self):
+        for key,value in [('testPath','src/module/../src/test/java/pkg/PortTest.java'),
+                          ('testPath','elsewhere/pkg/PortTest.java'),
+                          ('targetPhysicalClasses',['pkg/../Port']),
+                          ('targetMainSourceSha256','unknown')]:
+            receipt=self.legacy();receipt['begin'][key]=value
+            self.assertIsNone(candidate(receipt,'Port','a'*64))
+
+    def test_missing_natural_zero_evidence_stays_unmeasured(self):
+        value=self.legacy();del value['branch']
+        self.assertEqual('UNMEASURED',candidate(value,'Port','a'*64)['branchAssessment'])
+        value=self.legacy();value['branch']['meaning']='guessed'
+        self.assertEqual('UNMEASURED',candidate(value,'Port','a'*64)['branchAssessment'])
+
+    def test_booleans_and_negative_counters_are_not_measured_zero(self):
+        for field,bad in [('covered',True),('covered',-1),('missed',False),('missed',1)]:
+            value=self.legacy();value['counters']['METHOD'][field]=bad
+            self.assertFalse(candidate(value,'Port','a'*64)['lineMethodClassMissedZero'])
+
+    def test_legacy_failure_is_not_converted_to_success(self):
+        value=self.legacy();value['actualExit']=143
+        self.assertEqual(143,candidate(value,'Port','a'*64)['originalExit'])
+
 
 if __name__=='__main__':
     unittest.main()
