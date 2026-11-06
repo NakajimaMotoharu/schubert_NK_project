@@ -185,6 +185,134 @@ def post(config, slot, public):
     print(json.dumps({'actualExit': 0, 'new': len(rows), 'combined': config['priorCount'] + len(rows), 'remaining': len(value['remaining']), 'manifestSha256': sha(public / 'manifest.json')}))
 
 
+def requalify(config):
+    """Rebind exact immutable per-site source facts to a fresh changed-source report."""
+    spec = importlib.util.spec_from_file_location('normal_current', ROOT / 'evidence/01_PT/018_NK-OPS-001/input/014_owned_current_main_static_repaired.py')
+    normal = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(normal)
+    normal.configure('evidence/01_PT/018_NK-OPS-001/input/050_current_d8_main_static.json')
+    normal.read_inputs()
+    def pinned(item):
+        p = ROOT / item['path']
+        assert sha(p) == item['sha256']
+        return p, load(p)
+    fresh_path, fresh = pinned(config['freshManifest'])
+    old_path, old = pinned(config['historicalManifest'])
+    assert fresh['normalSource'] == config['mainSource'] and fresh['analysisComplete'] and fresh['allMainSpotbugsClassSetsExact']
+    assert fresh['productTestsExecuted'] == 0 and fresh['testSourceCount'] == 0 and not fresh['processingErrors']
+    for name, digest in fresh['files'].items():
+        assert sha(fresh_path.parent / name) == digest
+    for name, digest in old['files'].items():
+        assert sha(old_path.parent / name) == digest
+    raw = load(fresh_path.parent / 'findings.json')
+    prior_raw = load(old_path.parent / 'findings.json')
+    log = config['changedMainPath']
+    changed = [p for p, h in old['sourceInputHashes'].items() if fresh['sourceInputHashes'].get(p) != h]
+    assert changed == [log] and len(fresh['sourceInputHashes']) == len(old['sourceInputHashes']) == 966
+    assert collections.Counter(canon(f) for f in raw if f['path'] != log) == collections.Counter(canon(f) for f in prior_raw if f['path'] != log)
+    by_fact = collections.defaultdict(collections.deque)
+    for i, f in enumerate(raw):
+        if f['path'] != log:
+            by_fact[canon(f)].append(i)
+    rows, old_ordinals, designs = [], set(), {}
+    def span(lines, item):
+        assert lines[item['firstLine'] - 1:item['lastLine']] == item['lines']
+    for item in config['historicalReviews']:
+        mp, manifest = pinned(item)
+        review_path = mp.parent / 'review.json'
+        review = load(review_path)
+        assert manifest.get('reviewSha256') == sha(review_path) or manifest.get('files', {}).get('review.json') == sha(review_path)
+        for context in review.get('sourceContexts', []):
+            if context['path'] == log:
+                continue
+            assert sha(ROOT / context['path']) == context['sha256']
+            lines = (ROOT / context['path']).read_text().splitlines()
+            for section in context.get('spans', []):
+                span(lines, section)
+        for ref in review.get('canonicalDesignReferences', []):
+            current = subprocess.check_output(['git', 'show', 'origin/main:' + ref['path']])
+            assert sha(ROOT / ref['path']) == hashlib.sha256(current).hexdigest()
+            previous = subprocess.check_output(['git', 'show', config['historicalSource'] + ':' + ref['path']])
+            assert hashlib.sha256(previous).hexdigest() == ref['sha256']
+            assert current == previous or (ref['path'] == config['appendedDesignPath'] and current.startswith(previous))
+            line = current.decode().splitlines()[ref['line'] - 1]
+            assert line == ref['text']
+            designs[(ref['path'], ref['line'])] = dict(path=ref['path'], line=ref['line'], text=line, currentSha256=hashlib.sha256(current).hexdigest(), historicalSha256=ref['sha256'], exactOrAppendOnly=True)
+        for row in review['classified']:
+            ordinal = row['rawOrdinal']
+            assert ordinal not in old_ordinals and row['rawFinding'] == prior_raw[ordinal]
+            old_ordinals.add(ordinal)
+            assert row['id'] == f'{ordinal:06d}:' + hashlib.sha256(canon(row['rawFinding'])).hexdigest()
+            if row['rawFinding']['path'] == log:
+                continue
+            f = row['rawFinding']
+            assert row['classification'] == 'CONTEXTUAL_NONAPPLICABLE' and row['actualViolation'] is False and row['ptExempt'] is False and row['runtimeProven'] is False and row['reason']
+            assert sha(ROOT / f['path']) == f['sourceSha256']
+            lines = (ROOT / f['path']).read_text().splitlines()
+            if 'sourceContext' in row:
+                span(lines, row['sourceContext'])
+            for declaration in row.get('ownerDeclarations', []):
+                assert lines[declaration['line'] - 1] == declaration['text']
+            historical_bindings([row])
+            index = by_fact[canon(f)].popleft()
+            rows.append(dict(rawOrdinal=index, id=f'{index:06d}:' + hashlib.sha256(canon(f)).hexdigest(), rawFinding=f, classification='CONTEXTUAL_NONAPPLICABLE', actualViolation=False, reason=row['reason'], historicalRow=dict(manifestPath=item['path'], manifestSha256=item['sha256'], reviewSha256=sha(review_path), rawOrdinal=ordinal, id=row['id']), exactCurrentSourceVerified=True, runtimeTransferred=False, ptExempt=False))
+    assert len(old_ordinals) == 1490 and len(rows) == 1464 and not any(by_fact.values())
+    lp, lm = pinned(config['logReviewManifest'])
+    log_review = load(lp.parent / 'review.json')
+    assert sha(lp.parent / 'review.json') == lm['reviewSha256']
+    remaining_log = collections.defaultdict(collections.deque)
+    for item in log_review:
+        if item['path'] == log:
+            remaining_log[canon(item['finding'])].append(item)
+    for index, f in enumerate(raw):
+        if f['path'] != log:
+            continue
+        finding = dict(f['attributes'], message=f['message'])
+        item = remaining_log[canon(finding)].popleft()
+        assert item['sourceSha256'] == f['sourceSha256'] == sha(ROOT / log)
+        assert (ROOT / log).read_text().splitlines()[int(f['attributes']['beginline']) - 1].strip() == item['lineText'].strip()
+        assert item['reason'] and item['classification'] == 'CONTEXTUAL_NONAPPLICABLE'
+        rows.append(dict(rawOrdinal=index, id=f'{index:06d}:' + hashlib.sha256(canon(f)).hexdigest(), rawFinding=f, classification='CONTEXTUAL_NONAPPLICABLE', actualViolation=False, reason=item['reason'], currentLogReview=dict(manifestPath=config['logReviewManifest']['path'], sha256=config['logReviewManifest']['sha256'], ordinal=item['ordinal']), runtimeTransferred=False, ptExempt=False))
+    assert not any(remaining_log.values()) and len(rows) == len(raw) == 1494
+    assert {x['rawOrdinal'] for x in rows} == set(range(len(raw)))
+    unit_path, unit = pinned(config['logUnitManifest'])
+    assert unit['actualExit'] == 0 and unit['productionCoreMain'] == config['mainSource'] and unit['tests'] == 19 and all(unit[k] == 0 for k in ['failures', 'errors', 'skipped', 'aborted'])
+    assert unit['inputHashes'][log] == fresh['sourceInputHashes'][log]
+    multiplicity = collections.Counter(canon(f) for f in raw)
+    return dict(source=config['mainSource'], rawCount=len(raw), currentReviewed=len(rows), unchangedOtherMainReviewed=1464, changedLogReviewed=30, canonicalUnique=len(multiplicity), duplicateGroups=sum(n > 1 for n in multiplicity.values()), rawMultiplicityPreserved=True, classified=sorted(rows, key=lambda x:x['rawOrdinal']), canonicalDesignReferences=list(designs.values()), sourceSetOnlyChanged=[log], rawGateUnchanged=fresh['rawGateExit'], styleApplicableViolations=0, individualReviewOnly=True, suppressed=0, productExecuted=False, coverageMeasured=False, runtimeTransferred=False, wholeF03Accepted=False, whole451Accepted=False, formalUpdated=False, newAccepted=0, safetyHoldsUnchanged=True)
+
+
+def requal_run(config, slot, public):
+    assert not slot.exists() and not public.exists()
+    value = requalify(config)
+    slot.mkdir()
+    (slot / 'review.json').write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n')
+    manifest = dict(actualExit=0, source=config['mainSource'], atJST=datetime.datetime.now().astimezone().isoformat(), driverSha256=sha(__file__), configSha256=sha(sys.argv[2]), reviewSha256=sha(slot / 'review.json'), raw=1494, reviewed=1494, remaining=0, newAccepted=0, wholeF03Accepted=False, whole451Accepted=False, productExecuted=False, coverageMeasured=False)
+    (slot / 'manifest.safe.json').write_text(json.dumps(manifest, indent=2) + '\n')
+    print(json.dumps(dict(actualExit=0, reviewed=1494, remaining=0)))
+
+
+def requal_post(config, slot, public):
+    m = load(slot / 'manifest.safe.json')
+    assert m['actualExit'] == 0 and m['driverSha256'] == sha(__file__) and m['configSha256'] == sha(sys.argv[2]) and m['reviewSha256'] == sha(slot / 'review.json')
+    assert load(slot / 'review.json') == requalify(config)
+    assert not public.exists()
+    public.mkdir()
+    for p in slot.iterdir():
+        shutil.copyfile(p, public / p.name)
+    m = dict(m, independentPostReconstruction=True, files={p.name:sha(p) for p in public.iterdir()})
+    (public / 'manifest.json').write_text(json.dumps(m, indent=2) + '\n')
+    print(json.dumps(dict(actualExit=0, reviewed=1494, remaining=0, manifestSha256=sha(public / 'manifest.json'))))
+
+
+if __name__ == '__main__' and len(sys.argv)==3 and sys.argv[1] in ['requal-run','requal-post']:
+    assert sys.argv[2]=='evidence/01_PT/018_NK-OPS-001/input/051_current_d8_source_requalification.json'
+    config=load(sys.argv[2]);assert config['mainSource']=='d8ff9efb16a7da1b073bdf9770487e3e6415b636'
+    assert config['slot']=='pg20154-current-d8-context-requalification-v1' and config['publicName']=='PG20154-current-d8-context-requalification-v1'
+    slot=ROOT.parent/'pgpt-runs/PG379'/config['slot'];public=BASE/config['publicName']
+    (requal_run if sys.argv[1]=='requal-run' else requal_post)(config,slot,public)
+    raise SystemExit(0)
+
 if __name__ == '__main__':
     assert len(sys.argv) == 3 and sys.argv[1] in ['run', 'post']
     config = load(sys.argv[2])
