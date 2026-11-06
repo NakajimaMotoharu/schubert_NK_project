@@ -1,0 +1,41 @@
+{
+  "atJST": "2026-11-07T08:03:25.540705+09:00",
+  "groupId": "PGPT-API-CONSUMER-CLOSE-PHASE-STATIC-REVIEW-20261107",
+  "startEvent": "PGPT-20261008-4148",
+  "endEvent": "PGPT-20261008-4149",
+  "source": "4e8e0af5b5b33a1bdfd2faf098c1f3d56995e220",
+  "productionCoreMain": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+  "manifest": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG21910-consumer-stop-static-finding-v1/manifest.json",
+    "sha256": "16906425d0b0bc2a4c0bb1ca546d8c0553ce95035c1dc355d39c869016298bf0"
+  },
+  "staticCounterexamples": 1,
+  "reviewedMainSources": 4,
+  "existingFullTestBodyReviewComplete": false,
+  "newProductTests": 0,
+  "newMethods": 0,
+  "newSourceProofs": 0,
+  "newAcceptance": 0,
+  "coverage": null,
+  "ptExecutionExempt": false,
+  "estimateAtGroupStartPp": {
+    "low": 0.75,
+    "base": 3,
+    "high": 6
+  },
+  "capPp": 8,
+  "observedSharedPp": 0,
+  "actualAllocatedPp": null,
+  "N": null,
+  "T": null,
+  "status": "IMPLEMENTATION_DEFECT_STATIC_PATH_CONFIRMED_DYNAMIC_HOLD",
+  "unresolved": [
+    "BUG-2407",
+    "YKT-2152",
+    "direct Test body review incomplete",
+    "dynamic HOLD"
+  ],
+  "formal": "1964PT/53scope unchanged",
+  "effortRate": null,
+  "nextCommand": "Start a separately estimated approved internal PG correction for BUG2407/YKT2152 under existing SS321SSC314. Add a no-resource stop-delivery contract to the three consumer owners; parent broadcasts stop to all owned groups before its first blocking close. Preserve prior callback completion, ACK/rollback, close order, successful phases, failure/UNKNOWN policy. Dynamic Product/fixture execution remains held; prepare independent pending PT specification and compile/static validation for fresh source."
+}
