@@ -1,0 +1,158 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-06T22:57:29.081527+09:00",
+  "source": "03eeef1a3d6cfb93000641bcb87f83507a1f3f4d",
+  "productionCoreMain": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+  "verifierSource": "ceacbb3c942a67c52fb8153be6bee134dfbfd859",
+  "originalPost": {
+    "path": "evidence/01_PT/006_NK-MSG-002/evidence/PG21014-outbox-null-oracle-nine-v1/manifest.json",
+    "sha256": "6bd69944333c32d39180928c51cfa00ba0b063af77cef142a4907e23c99b5685"
+  },
+  "tests": 9,
+  "projection": {
+    "schema": "PGPT_PORT_PROJECTION_V1",
+    "source": "03eeef1a3d6cfb93000641bcb87f83507a1f3f4d",
+    "mainSource": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+    "tests": 9,
+    "testClasses": 2,
+    "fourCounters": {
+      "LINE": 122,
+      "METHOD": 11,
+      "CLASS": 1,
+      "BRANCH": 32
+    },
+    "missed": 0,
+    "physical": 1,
+    "noCodeClasses": [],
+    "selectedMethods": [
+      [
+        "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+        "argumentsAndTransactionsPreventSqlAndRespectErrorBounds"
+      ],
+      [
+        "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+        "claimUsesBoundedLeaseStableOrderAndImmutableRowBody"
+      ],
+      [
+        "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+        "dlqMetadataIsAllOrNoneAndPreservesClosedProjection"
+      ],
+      [
+        "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+        "enqueueBindsExactUtcAndOptionalDlqWithoutOwningTransaction"
+      ],
+      [
+        "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+        "ordinarySqlFaultsCloseOnlyRepositoryResourcesAndRemainFailures"
+      ],
+      [
+        "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+        "requiredAndInvalidRowsFailClosedIncludingNullableAttempt"
+      ],
+      [
+        "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+        "sentAndFailureCompareAndSetUseIndependentRetryTableAndCap"
+      ],
+      [
+        "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+        "sharedRepositoryParallelCallsKeepOwnRowsBindingsAndBody"
+      ],
+      [
+        "dev.codex.schubert.nk.api.messaging.outbound.OutboxReturningIdContractTest",
+        "sqlNullReturningIdentifierCannotBecomeSuccessfulZero"
+      ]
+    ],
+    "qualificationTransferred": false
+  },
+  "physicalNormalClassHashes": {
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository": "d49dcec8e24914880a8ac9e6ec40057f6fe5ce6fdd18f91541a4468f9a871937"
+  },
+  "sourceTestIds": [
+    [
+      "PT-OUT-JDBC001",
+      "enqueueBindsExactUtcAndOptionalDlqWithoutOwningTransaction"
+    ],
+    [
+      "PT-OUT-JDBC002",
+      "claimUsesBoundedLeaseStableOrderAndImmutableRowBody"
+    ],
+    [
+      "PT-OUT-JDBC003",
+      "requiredAndInvalidRowsFailClosedIncludingNullableAttempt"
+    ],
+    [
+      "PT-OUT-JDBC004",
+      "dlqMetadataIsAllOrNoneAndPreservesClosedProjection"
+    ],
+    [
+      "PT-OUT-JDBC005",
+      "sentAndFailureCompareAndSetUseIndependentRetryTableAndCap"
+    ],
+    [
+      "PT-OUT-JDBC006",
+      "argumentsAndTransactionsPreventSqlAndRespectErrorBounds"
+    ],
+    [
+      "PT-OUT-JDBC007",
+      "ordinarySqlFaultsCloseOnlyRepositoryResourcesAndRemainFailures"
+    ],
+    [
+      "PT-OUT-JDBC008",
+      "sharedRepositoryParallelCallsKeepOwnRowsBindingsAndBody"
+    ],
+    [
+      "PT-OUT-JDBC009",
+      "sqlNullReturningIdentifierCannotBecomeSuccessfulZero"
+    ]
+  ],
+  "checks": [
+    "original terminal/stages0",
+    "9 XML method bijection/FES0",
+    "all public artifact hashes",
+    "explicit Main/Test Git pins",
+    "separate producer/verifier/config Git pins",
+    "1physical normal jar bytes/CRC/session",
+    "four counters122/11/1/32 miss0",
+    "SDK exact original review",
+    "static raw9 individually nonapplicable",
+    "heldFourZero/no union/no manual exclusion"
+  ],
+  "staticPost": {
+    "path": "evidence/01_PT/006_NK-MSG-002/evidence/PG21012-outbox-null-oracle-static-v1/manifest.json",
+    "sha256": "7ceeec0936e33df3489a91ab5519f46a31c1b134002784885e84eaa69ac38c58"
+  },
+  "environment": [
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    },
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    },
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    }
+  ],
+  "productTestsReexecuted": 0,
+  "checkerSha256": "67eef5e298c09757013540ec6d9e376d98a5099f925b3c1ddc4b5eee7e246288",
+  "checkerSource": "f3c091ff2b09b7fe2a0324999fad5bf6e591f82b",
+  "requiredNullOracle": {
+    "path": "evidence/01_PT/006_NK-MSG-002/input/002_outbox_required_null_oracle.json",
+    "sha256": "7932dd6f4d42d7a244a17dcae3633ff004e382b7a735269b489929942ed77989"
+  },
+  "actualDatabaseOrJmsOperation": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "effortRate": null
+}

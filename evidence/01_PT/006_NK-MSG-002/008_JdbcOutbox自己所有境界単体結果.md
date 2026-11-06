@@ -1,0 +1,13 @@
+# JdbcOutboxRepository 自己所有JDBC境界単体結果
+
+2026-11-06T23:00:43.149105+09:00。仕様007全TestID009とXML9/2classを一意照合。Test source 03eeef1a3d6cfb93000641bcb87f83507a1f3f4d、Main 4217e14083c6ecac116216e08d57f4361eb2f12d、PG21014全9/FESaborted0/OS0、LINE122/METHOD11/CLASS1/BRANCH32全miss0。全physical1 CRC通常20990/単一exec session一致、除外/合成無し。strictpost 6bd69944333c32d39180928c51cfa00ba0b063af77cef142a4907e23c99b5685、独立21028 b18528ee8a1f967d7f0bb5503fc3ff9768c00090aadab5b90ec1bb01e9378009。OS/JDK25.0.4/command/真正exit/入力/実際値/原XML/hash/producer-verifier別Git/独立oracleはmanifest参照。
+
+PG20982診断1/F1は既実装のSQL NULL採番が0成功になることを示し、BUG2366/YKT2111修正前登録。enqueue idとread attempt_countだけtyped nullable getter＋既RequiredColumnで必須検査、正常値/DDL/電文/transactionは不変更。原診断は当初例外型仮定の誤りも含むため正常な新oracleへ流用しない。新Main4217で全六通常20990/NullAway成功、1844物理の変更は想定1のみ、六SpotBugs20992はbugs/missing/error全0。旧Main静的20114の新source転用0。対象Main＋全2Test PMD21012 raw9を一件ずつ所有/worker/JDK loaderの適用性分類、適用0/CS0/processing0、抑制追加0。
+
+PG21004全9/F3は既RequiredColumnのSQLDataException/22004とTestのOutboxIntegrity仮定の不一致。SS332 NULL補完禁止と変更前fb189の明示契約/hashからoracle002を固定し、NULL各必須列/partialDLQの22004、id0/部分metadata/不正投影のOutboxIntegrityを区別した。BUG2368/YKT2113、是正Test03eeから全9をfresh再試験、旧6成功・旧execを合成0。PG20998 raw13適用4はBUG2367/YKT2112へ修正前起票し定数3/operand1を是正、元指摘を保持。後検証はOutboxDlqMetadataのpureASCII predicate1の分類不足で一度失敗し、BUG2369/YKT2114起票→保存済みjavapに基づくexact生成prefix<=1のverifierceacで同runへpost0、Product再試験0。禁止prefixや四heldを除去せず旧failure保持。
+
+正常INSERT13binding/typedNULL5/UTC、claim limit1/100・SKIPLOCKED・lease10秒/時刻id昇順/空・不変body、必須12列NULL/各不正、DLQ all-none全短絡/欠落/完全、SENT/ERROR CAS0/1/2、独立retry表1/5/30/60/300秒・jitter±10%・99/100飽和後継続、default jitter範囲、null/空/limit/error64/256/control/invalidjitter、SQL/取得close失敗・borrowedConnection無commit/rollback/close、共有Repo二worker16分離を確認。固定public320byte/UUID/UTCのみで実DB/JMS/worker/driver/native/業務操作無し。SDK21016は固定JDK20846 byteだけ再利用し新Main/Test/CP/init/XMLを結合、JVM/SDK syscalls全0という主張なし。
+
+今回新unique9/wholeSource1、31対象284=Java184+HTML93+CSS7、wholeMain65。原282交差は確認済44を維持し、新Outboxの原seed集合membershipは厳密join未了として未加算。部分18/残62、新WBS0/正式1964PT53scope/歴史17of190/工数null。PGPT-20261008-4063→PGPT-20261008-4065、原1.5/4/7cap10、共有1pp/ordinary30/all39、専有N/Tnull。元計画9と追加NULL障害・Testoracle手戻り・tool修理を別記、費用を元成果へ再配賦しない。受入は当一sourceの限定技術証明のみ。実DB/JMS/CHR/native/全451/IT/STは未受入。
+
+次: Continue permitted ordinary PG/PT with QA055 approved fixed locked-login display: exact saved nonlocked8 and handler header proofs are references only, define genuinely missing locked DOM/combined flags/Retry-After boundary and source bindings before new selected tests. Use current Outbox-fixed normal20990/SpotBugs20992; preserve successful original9 without replay, Root/VM/held4/native/CHR/global451 holds. No deploy or real login/session operation.

@@ -1,5 +1,10 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-06T23:00 JST Outbox限定増分
+
+006仕様007/結果008・PMO600033、PG21014新source全9成功/独立21028 post0、L122/M11/C1/B32全miss0。Production候補4217（未配備）NN採番/再送countの必須検証を是正、全六通常20990/NullAway・SpotBugs20992全0。累計31対象284=Java184+HTML93+CSS7・wholeMain65、原282交差は44確認を維持し当新sourceの原seed所属joinは未加算。新leaf0/正式1964PT53scope/工数null。QA055は現行固定文承認・PR207/main42450b5公開済み、locked局所PT次/実CHR別未受入。
+
+
 ## 2026-11-06 Logout・管理失効の新規八PT
 
 PG20958/source3a2c29・独立PG20964は8/FESaborted0、全physical1 L110/M7/C1/B36のmiss0、仕様007047/結果048・600030031。元PG20940/source7caa F1/E1は不合格のまま保全。fixture0001を、凍結正本UI234/SS351/SS354の0200へ訂正し、事前code表guardを追加した。Product/上位/Current変更0、旧6成功・RED/GREEN execの加算無し。直近30対象275unique=Java175+HTML93+CSS7・wholeMain64/原282交差44残238/partial18残62。新WBS0/正式1964PT53scope/歴史17of190/工数nullは不変、実DB・実Logout/ADMIN・Root/native/CHR/451は未受入。下の集計は各保存時点の比較履歴。
