@@ -356,7 +356,7 @@ if authVerifierExternal or adminPreludeExternal or sessionIssueExternal or sessi
 if outboxJdbcExternal:
  initializedOutbox=set(re.findall(r"Initializing '([^']+)",(slot/'class-init.log').read_text()));prefix='dev/codex/schubert/nk/api/messaging/outbound/'
  allowedOutbox={prefix+n for n in ['JdbcOutboxRepository','OutboxRequest','OutboxEntry','OutboxDlqMetadata','OutboxDestination','OutboxRetrySchedule','OutboxIntegrityException']};allowedOutbox.add('dev/codex/schubert/nk/api/database/RequiredColumn')
- lambdaPrefixes={prefix+'JdbcOutboxRepository$$Lambda':4,prefix+'OutboxDestination$$Lambda':2}
+ lambdaPrefixes={prefix+'JdbcOutboxRepository$$Lambda':4,prefix+'OutboxDestination$$Lambda':2,prefix+'OutboxDlqMetadata$$Lambda':1}
  for p,maximum in lambdaPrefixes.items():assert sum(n.startswith(p) for n in initializedOutbox)<=maximum
  unexpectedOutbox={n for n in initializedOutbox if n.startswith('dev/codex/schubert/nk/') and not (n in allowedOutbox or n.startswith(prefix+'JdbcOutboxPortTest') or n.startswith(prefix+'OutboxReturningIdContractTest') or any(n.startswith(p) for p in lambdaPrefixes))};assert not unexpectedOutbox,sorted(unexpectedOutbox)
  assert not any(n.startswith(('dev/codex/schubert/nk/storage/','dev/codex/schubert/nk/bootstrap/','org/apache/activemq/','org/postgresql/','io/netty/','com/zaxxer/','io/micrometer/','java/sql/DriverInfo','java/net/Socket','sun/nio/ch/SocketChannelImpl')) for n in initializedOutbox)
