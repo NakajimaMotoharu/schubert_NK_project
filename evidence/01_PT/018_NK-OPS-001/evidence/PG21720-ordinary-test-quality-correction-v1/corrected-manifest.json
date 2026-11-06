@@ -1,0 +1,91 @@
+{
+  "actualExit": 0,
+  "stages": {
+    "format": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T20:37:32.567180+00:00",
+      "endUTC": "2026-11-06T20:37:33.033342+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/googlejavaformat/google-java-format/1.36.1/google-java-format-1.36.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/guava/guava/33.5.0-jre/guava-33.5.0-jre.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/commonmark/commonmark/0.28.0/commonmark-0.28.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/commonmark/commonmark-ext-gfm-tables/0.28.0/commonmark-ext-gfm-tables-0.28.0.jar",
+        "com.google.googlejavaformat.java.Main",
+        "--replace",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqFormLoginFactoryRoutePortTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "format-check": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T20:37:33.033789+00:00",
+      "endUTC": "2026-11-06T20:37:33.499880+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/googlejavaformat/google-java-format/1.36.1/google-java-format-1.36.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/guava/guava/33.5.0-jre/guava-33.5.0-jre.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/commonmark/commonmark/0.28.0/commonmark-0.28.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/commonmark/commonmark-ext-gfm-tables/0.28.0/commonmark-ext-gfm-tables-0.28.0.jar",
+        "com.google.googlejavaformat.java.Main",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqFormLoginFactoryRoutePortTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "python": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T20:37:33.500339+00:00",
+      "endUTC": "2026-11-06T20:37:33.615247+00:00",
+      "command": [
+        "env",
+        "PYTHONPATH=/home/mini/codex/project1/work/toolchain/pyflakes-3.4.0/runtime",
+        "python3",
+        "-B",
+        "-m",
+        "pyflakes",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/134_current_main_style_binding.py"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "changedSources": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqFormLoginFactoryRoutePortTest.java",
+    "evidence/01_PT/018_NK-OPS-001/input/134_current_main_style_binding.py"
+  ],
+  "before": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/MediaMvcBeanPortTest.java": "908d3cba6b6359f474be3dd473b8b7cfc502da61a65dffd334fd57027c77063a",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqFormLoginFactoryRoutePortTest.java": "08fe85409d00b2411725063bf58fd4191fb815fa3191b082e6fc7dd14fc66a42",
+    "evidence/01_PT/018_NK-OPS-001/input/132_remaining_source_public_proof_join.py": "3d2c58e7bc7904669d72a8c637aba1634ebee6dcdbc8be5431a2eac7055e1ad8",
+    "evidence/01_PT/018_NK-OPS-001/input/133_current_main_architecture_qualifier.py": "8ad478bec054062c8faeffba8656fe9c5d204e12dd36ae5bc15a468315efbfb2",
+    "evidence/01_PT/018_NK-OPS-001/input/134_current_main_style_binding.py": "5e56f4a8c9d08349a8dd761954802f19d137dc1cd997b3f319dc3d3ac5e13726"
+  },
+  "after": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/MediaMvcBeanPortTest.java": "908d3cba6b6359f474be3dd473b8b7cfc502da61a65dffd334fd57027c77063a",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqFormLoginFactoryRoutePortTest.java": "6c46a3b0162410a3795cb41664d9dbaef45b1e128fd5aed12009275470bdee02",
+    "evidence/01_PT/018_NK-OPS-001/input/132_remaining_source_public_proof_join.py": "3d2c58e7bc7904669d72a8c637aba1634ebee6dcdbc8be5431a2eac7055e1ad8",
+    "evidence/01_PT/018_NK-OPS-001/input/133_current_main_architecture_qualifier.py": "8ad478bec054062c8faeffba8656fe9c5d204e12dd36ae5bc15a468315efbfb2",
+    "evidence/01_PT/018_NK-OPS-001/input/134_current_main_style_binding.py": "d62b241fd4bc074ccfdc8fc83ef3b6866f9c59a64b2fdf21d984694239131088"
+  },
+  "unchangedOtherThreeBound": true,
+  "productTests": 0,
+  "oldResultsUnchanged": true
+}

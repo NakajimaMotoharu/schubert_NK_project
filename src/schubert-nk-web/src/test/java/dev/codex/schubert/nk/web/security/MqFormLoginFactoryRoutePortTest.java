@@ -172,7 +172,8 @@ final class MqFormLoginFactoryRoutePortTest {
               if (call.getName().equals("getRequestURI")) return uri;
               if (call.getName().equals("getCharacterEncoding") && encodingReadable)
                 return "ISO-8859-1";
-              throw new AssertionError("form, session or address access forbidden: " + call.getName());
+              throw new AssertionError(
+                  "form, session or address access forbidden: " + call.getName());
             });
   }
 

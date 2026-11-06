@@ -1,0 +1,68 @@
+{
+  "atJST": "2026-11-07T05:34:58.029933+09:00",
+  "stages": {
+    "format": {
+      "actualExit": 1,
+      "timedOut": false,
+      "startUTC": "2026-11-06T20:34:57.448813+00:00",
+      "endUTC": "2026-11-06T20:34:57.914319+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/googlejavaformat/google-java-format/1.36.1/google-java-format-1.36.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/guava/guava/33.5.0-jre/guava-33.5.0-jre.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/commonmark/commonmark/0.28.0/commonmark-0.28.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/commonmark/commonmark-ext-gfm-tables/0.28.0/commonmark-ext-gfm-tables-0.28.0.jar",
+        "com.google.googlejavaformat.java.Main",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/MediaMvcBeanPortTest.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqFormLoginFactoryRoutePortTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "0f6599394a5a2eaea15b6d4158e7489b9f7f2dc877bed2ed82ae7ba8cdf5a289",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "python": {
+      "actualExit": 1,
+      "timedOut": false,
+      "startUTC": "2026-11-06T20:34:57.914787+00:00",
+      "endUTC": "2026-11-06T20:34:58.029484+00:00",
+      "command": [
+        "env",
+        "PYTHONPATH=/home/mini/codex/project1/work/toolchain/pyflakes-3.4.0/runtime",
+        "python3",
+        "-B",
+        "-m",
+        "pyflakes",
+        "evidence/01_PT/018_NK-OPS-001/input/132_remaining_source_public_proof_join.py",
+        "evidence/01_PT/018_NK-OPS-001/input/133_current_main_architecture_qualifier.py",
+        "evidence/01_PT/018_NK-OPS-001/input/134_current_main_style_binding.py"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "22b53284b342fc5ae240e5ccc737c7a237fb43f647d78a9fef8cd48abfcb23e3",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/MediaMvcBeanPortTest.java": "908d3cba6b6359f474be3dd473b8b7cfc502da61a65dffd334fd57027c77063a",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqFormLoginFactoryRoutePortTest.java": "08fe85409d00b2411725063bf58fd4191fb815fa3191b082e6fc7dd14fc66a42",
+    "evidence/01_PT/018_NK-OPS-001/input/132_remaining_source_public_proof_join.py": "3d2c58e7bc7904669d72a8c637aba1634ebee6dcdbc8be5431a2eac7055e1ad8",
+    "evidence/01_PT/018_NK-OPS-001/input/133_current_main_architecture_qualifier.py": "8ad478bec054062c8faeffba8656fe9c5d204e12dd36ae5bc15a468315efbfb2",
+    "evidence/01_PT/018_NK-OPS-001/input/134_current_main_style_binding.py": "5e56f4a8c9d08349a8dd761954802f19d137dc1cd997b3f319dc3d3ac5e13726"
+  },
+  "productTests": 0,
+  "sourceChanged": false,
+  "formatterToolHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/googlejavaformat/google-java-format/1.36.1/google-java-format-1.36.1.jar": "57f9b550a662dcbbdf344073e3f5812b837a0e6e430548d8a0a3c9090cada65d",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/guava/guava/33.5.0-jre/guava-33.5.0-jre.jar": "1e301f0c52ac248b0b14fdc3d12283c77252d4d6f48521d572e7d8c4c2cc4ac7",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar": "cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar": "4667724877f1d37a689202da191e23efa7657c62eef93ccdac406eccfe5cdd0a",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/commonmark/commonmark/0.28.0/commonmark-0.28.0.jar": "f8b28e00f97c568329ee1b2496cfec5c3ef8664b565ea09cf8988894183b956d",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/commonmark/commonmark-ext-gfm-tables/0.28.0/commonmark-ext-gfm-tables-0.28.0.jar": "80439c7c4809daa6c35ccb260f48f8b71cda30e8cc923dbd68bb3be049359ecb"
+  }
+}

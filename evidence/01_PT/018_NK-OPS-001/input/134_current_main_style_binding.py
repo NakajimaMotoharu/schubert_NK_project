@@ -1,6 +1,6 @@
 """Compose exact Main-only style facts; no Product, PMD, Checkstyle or PT replay."""
 from pathlib import Path
-import json,hashlib,datetime,subprocess,collections,itertools,re,shutil
+import json,hashlib,datetime,subprocess,itertools,re,shutil
 import xml.etree.ElementTree as E
 import pg9666_pagination_static as c
 r=Path.cwd();runs=r.parent/'pgpt-runs/PG379';load=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();base=r/'evidence/01_PT/018_NK-OPS-001/evidence';prior=base/'PG20154-current-d8-context-requalification-v1';raw=base/'PG20150-current-d8-six-main-static-v1';changed=r/'evidence/01_PT/006_NK-MSG-002/evidence/PG21012-outbox-null-oracle-static-v1';normalpath=runs/'pg20990-outbox-required-six-main-compile-v1/manifest.safe.json';nm=load(normalpath);assert sha(normalpath)=='1db34d8f2ccee9fc90244bea86c3e446be0c0e010c66516a1e25c92df3426618' and nm['source']=='4217e14083c6ecac116216e08d57f4361eb2f12d'
