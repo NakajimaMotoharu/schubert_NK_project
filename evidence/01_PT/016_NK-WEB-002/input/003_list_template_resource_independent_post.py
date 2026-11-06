@@ -28,12 +28,16 @@ for name,h in old['files'].items():
  if name!='manifest.json':assert sha(OLD.parent/name)==h
 html=sorted((U/'output').glob('*.html'));assert len(html)==19 and {p.name.split('-')[0].split('.')[0] for p in html}=={'LDOM'+str(i).zfill(3) for i in range(1,13)}
 # Metadata regression: destination collision and self-reference are rejected, actual tampering differs.
-pairs=[(U/'manifest.json','original-manifest.json'),(U/'begin.json','begin.json'),(U/'unit.stdout','unit.stdout'),(U/'unit.stderr','unit.stderr'),(U/'unit-begin.safe.json','unit-begin.safe.json'),(U/'unit-process.safe.json','unit-process.safe.json'),(U/'unit-exit.safe.json','unit-exit.safe.json')]+[(p,'output/'+p.name) for p in html];names=[name for _,name in pairs];assert len(names)==len(set(names)) and 'manifest.json' not in names
-bad=[x for x in names if x=='manifest.json']+['manifest.json'];assert 'manifest.json' in bad;assert hashlib.sha256(b'original').digest()!=hashlib.sha256(b'changed').digest()
+pairs=[(U/'manifest.json','original-manifest.json'),(U/'begin.json','begin.json'),(U/'unit.stdout','unit.stdout'),(U/'unit.stderr','unit.stderr'),(U/'unit-begin.safe.json','unit-begin.safe.json'),(U/'unit-process.safe.json','unit-process.safe.json'),(U/'unit-exit.safe.json','unit-exit.safe.json')]+[(p,'output/'+p.name) for p in html];names=[name for _,name in pairs]
+def valid_names(values):return len(values)==len(set(values)) and all(n!='manifest.json' and not Path(n).is_absolute() and '..' not in Path(n).parts for n in values)
+assert valid_names(names)
+assert not valid_names(names+['manifest.json']) and not valid_names(names+[names[0]]) and not valid_names(names+['../outside.json'])
 O.mkdir();files={}
 for src,name in pairs:
  dest=O/name;dest.parent.mkdir(exist_ok=True);shutil.copyfile(src,dest);files[name]=sha(dest)
-for name,h in files.items():assert sha(O/name)==h
+def valid_hashes(mapping):return valid_names(list(mapping)) and all(sha(O/name)==h for name,h in mapping.items())
+assert valid_hashes(files)
+corrupt=dict(files);corrupt['original-manifest.json']='0'*64;assert not valid_hashes(corrupt)
 out=dict(actualExit=0,source=SOURCE,productionCoreMain=CORE,tests=12,failures=0,errors=0,skipped=0,aborted=0,testMethods=sorted(cases),inputHashes=begin['inputHashes'],producerDriverSha256=begin['driverSha256'],verifierSha256=sha(__file__),verifierSource='TO_BE_FIXED_BEFORE_EXECUTION',originalManifest=dict(path=str(U/'manifest.json'),sha256=sha(U/'manifest.json')),originalXmlPins=xmlpins,environment=env,resourceHashes=pm['resourceHashes'],normalWebJarSha256=jar['sha256'],snapshotCount=19,files=files,oldPublicQualification=dict(path=str(OLD.relative_to(R)),sha256=sha(OLD),status='UNACCEPTED_BASENAME_COLLISION_PRESERVED'),metadataChecks=dict(uniqueDestinations=True,noQualifiedManifestSelfReference=True,actualFilesHashMatched=True,oldSelfReferenceRejected=True),productionJavaClasspath=False,applicationInitializations=[],forbiddenBusinessInitializations=[],javaCoverage=None,javaCoverageReason='HTML resource-only, no Production Java on classpath or initialized; no exclusions/100 invention/old exec union',formalUpdated=False,newAccepted=0,fullMvcOrBrowserAccepted=False,productTestsReexecuted=0,bug='BUG-2327',horizontal='YKT-2072',atJST=datetime.datetime.now().astimezone().isoformat())
 # A separate verifier source is pinned now; producer source remains the original Unit source.
 head=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip();relative=str(Path(__file__).resolve().relative_to(R));assert hashlib.sha256(subprocess.check_output(['git','show',head+':'+relative])).hexdigest()==sha(__file__);out['verifierSource']=head;(O/'manifest.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n');assert all(sha(O/n)==h for n,h in out['files'].items());print(dict(postExit=0,tests=12,snapshots=19,unitRerun=False,manifestSha256=sha(O/'manifest.json')))
