@@ -1,0 +1,300 @@
+{
+  "atJST": "2026-11-07T04:33:00.607538+09:00",
+  "actualExit": 0,
+  "source": "5ff4bcfab0a49b1b191e743ec62c8e22e39867bc",
+  "originalExecSha256": "b39d21db7046ffc4a32d98c5dab29ab372829fc0ed45fc4fb507225d1cff10a0",
+  "normalJars": {
+    "web": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar",
+      "sha256": "d33f6a79a723bbc07e66b45b8e413df561cbaad5ad711162ed9a5903fb49720a"
+    },
+    "protocol": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "sha256": "28cdedd219fbf7137d4e7e4c5776824ce817d932b96b83d957d29b0f4c1bde38"
+    }
+  },
+  "executedMethods": {
+    "dev/codex/schubert/nk/protocol/layout/LayoutId": [
+      {
+        "name": "<init>",
+        "desc": "(Ljava/lang/String;)V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      },
+      {
+        "name": "<init>",
+        "desc": "(I)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry;Ljava/time/Clock;I)V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/protocol/header/ResultCode": [
+      {
+        "name": "<init>",
+        "desc": "(Ljava/lang/String;ILjava/lang/String;Z)V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository": [
+      {
+        "name": "<init>",
+        "desc": "(Ljavax/sql/DataSource;Ldev/codex/schubert/nk/web/session/SessionPayloadCodec;Ljava/time/Clock;Ljava/security/SecureRandom;Ljava/util/function/Supplier;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/session/EncryptedSessionPayload": [
+      {
+        "name": "validateVersion",
+        "desc": "(Ljava/lang/String;)Ljava/lang/String;"
+      }
+    ],
+    "dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/session/EncryptedWebSessionRepository;Ljava/time/Clock;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/session/SessionPayloadCodec": [
+      {
+        "name": "<init>",
+        "desc": "(Ljava/lang/String;[BLjava/lang/String;[BLjava/security/SecureRandom;)V"
+      },
+      {
+        "name": "validateKey",
+        "desc": "([B)V"
+      },
+      {
+        "name": "close",
+        "desc": "()V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/session/JdbcWebSessionStore": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/session/SessionAttributeCodec": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/security/EncryptedSessionAuthenticationStrategy": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/security/LoginFormAuthenticationConverter": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/security/CaddyClientAddressResolver;)V"
+      },
+      {
+        "name": "convert",
+        "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Lorg/springframework/security/core/Authentication;"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/security/CaddyClientAddressResolver": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/security/LoginFormRejectedException": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/security/MqAuthenticationProvider": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/security/MqLoginClient;Ldev/codex/schubert/nk/web/security/MqLoginContextProbe;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/security/MqLoginClient": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyClient;Ldev/codex/schubert/nk/web/messaging/JmsRequestSender;Ljava/time/Clock;Ljava/util/function/Supplier;Ljava/time/Duration;)V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/security/MqLoginContextProbe": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyClient;Ldev/codex/schubert/nk/web/messaging/JmsRequestSender;Ljava/time/Clock;Ljava/util/function/Supplier;Ljava/time/Duration;)V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ]
+  },
+  "physicalSha256": {
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry": "e0f96e0e6e9cf85633d8ca1c0c772421559ce169d3aad9bf050d56338d07c84d",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient": "54a1aeff1136917d88193d462e572e6538fe372080ee3356d32145d66009d5e8",
+    "dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository": "26dc1eea6f0d7ae00a4b97d3460b81766f6bfe00ed0505df1796609745e081d4",
+    "dev/codex/schubert/nk/web/session/EncryptedSessionPayload": "3d9a2e68c4fb8c8a9a95e56b74ba67305e974adec0fc4e2e784db9ab1baa5682",
+    "dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository": "534ddba10d8adcf2025e48d7971d2285c61a0b5b74cbdec3838e0c3edf52cd63",
+    "dev/codex/schubert/nk/web/session/SessionPayloadCodec": "b636b53a0a7e4d6bd507cffd81d1a26787babe2518813b0aa7eaa0224016a7ae",
+    "dev/codex/schubert/nk/web/session/JdbcWebSessionStore": "f0b5e4a60079168b8972d4aa4567c9a1eaf241ae01bfff52d2555e97a75ddd82",
+    "dev/codex/schubert/nk/web/session/SessionAttributeCodec": "75d2adcdde801e230b704d491f08aaffea088dce34c52fa7b93897dbf24447de",
+    "dev/codex/schubert/nk/web/security/MqLoginClient": "a0fefaa4c3fdf478512d8f3d4e36bf0b88ee6d41158d8788ee8baaaedd9f7c09",
+    "dev/codex/schubert/nk/web/security/MqLoginContextProbe": "1a3a92d24f2eb912ce4754987baaf3eb9a73cc7dbb8c242dfa5d76586bbadfbf",
+    "dev/codex/schubert/nk/web/security/MqAuthenticationProvider": "d5190f2b6bf3f5110791fb0696f192346baddf5aeb4071cc2b15a21b666fae17",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository": "9de65e26b226e8713357ed1da0a0860ffb49bfc1ff1f85ed6d210e2bbf94b40b",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionAuthenticationStrategy": "3583a4c7192857fa3d9a4fa2be0616324609c08c48055642f48f4d5a6d480eb5",
+    "dev/codex/schubert/nk/web/security/LoginFormAuthenticationConverter": "440f795f815c7752dd3b81e98e1a95fc133c97561be974bdf7420c620ab40a63",
+    "dev/codex/schubert/nk/web/security/CaddyClientAddressResolver": "dff66c43dae715bee2a79c5246d980dae3477edb3c720fd9f1bb6a4cdf867a6b",
+    "dev/codex/schubert/nk/web/security/LoginFormRejectedException": "5bf76b28850528a01820d9ce8b494f9edb9c7c53c0b715b2d5d9c6628b55e3b2",
+    "dev/codex/schubert/nk/protocol/layout/LayoutId": "40643fc30454fbb577d65115f940766673f58ff1c074eea884973f7c46158384",
+    "dev/codex/schubert/nk/protocol/header/ResultCode": "4f7a958a5aa48b481ca95bac4f7154b18605903c327280397735ac2f99b6be81"
+  },
+  "priorAdmittedClosure": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21426-log-mvc-closed-method-witness-v1/manifest.json",
+    "sha256": "e2d6a399483d3f6a52ea0d5ca5262afa6a31c05896cf252cc9000da18da3cc73",
+    "commonClassCount": 8,
+    "allPhysicalAndDescriptorsExactlyEqual": true
+  },
+  "newExactMethods": {
+    "dev/codex/schubert/nk/web/security/MqLoginClient": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyClient;Ldev/codex/schubert/nk/web/messaging/JmsRequestSender;Ljava/time/Clock;Ljava/util/function/Supplier;Ljava/time/Duration;)V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/security/MqLoginContextProbe": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyClient;Ldev/codex/schubert/nk/web/messaging/JmsRequestSender;Ljava/time/Clock;Ljava/util/function/Supplier;Ljava/time/Duration;)V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/security/MqAuthenticationProvider": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/security/MqLoginClient;Ldev/codex/schubert/nk/web/security/MqLoginContextProbe;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/security/EncryptedSessionAuthenticationStrategy": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/security/LoginFormAuthenticationConverter": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/security/CaddyClientAddressResolver;)V"
+      },
+      {
+        "name": "convert",
+        "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Lorg/springframework/security/core/Authentication;"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/security/CaddyClientAddressResolver": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/security/LoginFormRejectedException": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/protocol/layout/LayoutId": [
+      {
+        "name": "<init>",
+        "desc": "(Ljava/lang/String;)V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/protocol/header/ResultCode": [
+      {
+        "name": "<init>",
+        "desc": "(Ljava/lang/String;ILjava/lang/String;Z)V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ]
+  },
+  "allPositiveProductClassesBound": true,
+  "providerAuthenticateOrClientExchange": false,
+  "sessionRepositoryMethodsCalled": false,
+  "productTestsReexecuted": 0,
+  "extraWholeSourceCredit": 0,
+  "files": {
+    "methods.stdout": "420a486c2205269b17ce6e3912d4dbdc7e2d7c0798e0fdbb9b2bcddfcbf4bc95",
+    "methods-begin.safe.json": "1408e92028e3dec4475d42bb45273bd4320574264f82f6fc35f614bbcf890e51",
+    "methods.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "methods-exit.safe.json": "99097d0240a0121489a8e4716ff1da12b09e9fe335d0c019b47e997fdb8c3ad5",
+    "methods.xml": "77ac24eaab97f04e932d13e4ce940f2967dccd70a5f44770ed659d1e1d82bb77",
+    "methods-process.safe.json": "722f7a536555b7ebafd86043b477c0b933b629a405d886518b08793acc3838bb"
+  },
+  "limits": "Only fixed constructors/static public layout-result constants and malformed encoding converter path; provider/probe/exchange/credentials/session/database/address resolution/held four not executed."
+}
