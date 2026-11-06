@@ -1,5 +1,22 @@
 # Module・Program一覧
 
+## 現candidate56720：consumer停止契約の製造差分（2026-11-07、PG-D1141）
+
+これは未配備・全体未受入のPG差分。RD MQ-003/006/008/010、UI212/213/231/251、SS312/321SSC314/342に対応。共通是正群の費用主担当はWBS-P005-03一つ、関連leafへの追加費/遡及配賦0。既各classのcanonical責任は次表のまま保持する。
+
+| Program/Module | class/method | canonical担当 | 新独立PT ID・状態 | 当source製造証拠 |
+|---|---|---|---|---|
+| NK-MSG-001 / API | ApiMessagingRuntime.close/closeGroups、groupsの内部型 | WBS-P005-03 | PT-JMS-STOP-GROUP001..006、全NOT_RUN/HOLD | 005026/027/028、21922/21924/21928/21930 |
+| NK-MSG-001 / API | SyncRequestConsumers.stopDelivery/close、4contextのcallback guard | WBS-P005-03 | 同001/002/003/004/005/006、全NOT_RUN/HOLD | 同上。新flag method1、既callback/close phase維持 |
+| NK-MSG-001/NK-MSG-002 / API | WebLogConsumers.stopDelivery/close、単一context guard | WBS-P006-05（共通費の関連参照だけ） | 同001/002/003/004/005/006、全NOT_RUN/HOLD | 同上。新flag method1、typed業務記録確認とは分離 |
+| NK-ASY-001/NK-MSG-002 / API | QuestionWorkConsumers.stopDelivery/close、単一FIFO guard | WBS-P012-01（共通費の関連参照だけ） | 同001/003/004/005/006、全NOT_RUN/HOLD | 同上。新flag method1、legacy profileにASYNC無し |
+| NK-MSG-001 / API共通内部契約 | InboundConsumerGroup.stopDelivery/close（新interface） | WBS-P005-03 | 同001..006を通じた型/順序契約。動的結果無し | 21930 abstract/noCode確認、21942/21944担当対応。coverage成功/除外へ加算しない |
+
+current descriptorは21942/21944の1068artifact/Java972、通常六moduleは21922の967Java/1845physical。tool21088の5Javaは別sourceの不変証拠で、全体実行へ合算しない。新4Main修正＋interface1/production method3を記録し、新Test/PASS/newSource四counter資格/leaf受入0。Main-only静的F02は21964/21966の1845・5rule0、F03は21976/21978の967source/原1494occurrence・適用0/未分類0で、全F02/F03/451の認定とは分ける。
+
+関連BUG-2407/YKT-2152はOPEN。正規dynamic/PT/native/CHR/QA051finalと全HOLDを維持し、正式1964PT/53scope・unique Test387/whole Source88・工数率nullを変更しない。以下の既traceは元source/runの履歴として保持する。
+
+
 2026-10-25追加trace：NK-OPS-001/PG-D389・639後続/1888-89/source64446不変更、ApiProcessMain.applicationReadiness/runtimeReadiness→既PT-OPS-API-HEALTH001～003、RD171/UI252/SS342・owner/costP018-05/関連P018-06追加0。9284実3/1→9286全Main三class L8/176M4/34C1/1B10/18（metadata interface自然0含む/四100未完）→9288原6a721ba7 same1843/256owner・7反例/再build等0。Main object/admission/HTTP/native/全451はHOLD未受入。
 
 2026-10-25追加trace：NK-OPS-001/PG-D412・640後続/1886-87/source64446不変更、ApiProcessLifetime.committedFailureHandler/fail/stop/await→既ApiCommittedFatalBindingTest fatalBinding001/002、RD171/UI252/SS321342・owner/costP018-05/関連P018-06追加0。9272実2/1→9274全Life L27/68M9/19C1/2B4/14（未網羅/$1未実行保持）→9276v2原05bb33c3 same1843/255owner・8反例/再build等0。新ID/Main追加0、実JMS/DLQ/Main/Hook/native/全451未受入HOLD、tool反例是正/原v1未資格1887。
