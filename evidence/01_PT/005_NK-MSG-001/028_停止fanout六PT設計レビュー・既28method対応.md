@@ -1,0 +1,22 @@
+# 停止fanout六PT設計レビュー・既28method対応
+
+WBS-P005-03、PGPT-20261008-4154、原.5/2/5pp cap6。candidate56720、normal21922/六静的21924、descriptor21942/21944。005026の6TestはNOT_RUN/HOLD、BUG2407/YKT2152 OPENを維持する。以下は既sourceの設計レビューであり、28件の新PASS、coverage、PT実行免除、正式受入ではない。
+
+全bodyを点検した直接TestはApiMessagingRuntimeTest10、SyncRequestConsumersTest6、WebLogConsumersTest6、QuestionWorkConsumersTest6の28method。InternalEventListenerTestは呼ばれるqueue/sendEvent/eventWire/ascii/start helperのbodyだけを点検し、同classの他Testをレビュー済みにしない。
+
+| 新Test ID | 対象Main・固定する独立期待 | 参照できる既method | 追加で未証明の条件 |
+|---|---|---|---|
+| PT-JMS-STOP-GROUP001 | 親closeの最初のASYNC drain待機地点で、全4SYNC＋WEB_LOG＋ASYNCの新callbackからbusiness呼出し0。SS321SSC314 | RuntimeTest.core001ActualSixContextsThirdFifoProfileAndOneFatalAcrossThreeQueues | 既core001は三queueのfatal通知一回と4/1/1 consumer数。正常親停止の待機中に他groupへ新callbackを到着させていない。現在の全stopループbytecodeを実並行証拠にしない |
+| PT-JMS-STOP-GROUP002 | legacy4+1でも最初のWEB_LOG drain待機中に新SYNC business呼出し0 | RuntimeTest.opensFiveConsumersAndSignalsOneTerminalAcrossGroups、approvedSyncAndWebLogProfilesHaveSeparateRuntimeSuppliers | 既5consumerのterminal停止/close後0と通常supplier分離は、正常stop時の親全子fanout競合と別 |
+| PT-JMS-STOP-GROUP003 | guard通過済みcallbackは既ACK/rollbackを完了し、新entryだけを拒否。正常処理commit1、通常一時失敗のbroker再送、fatalのcommit0等を変更しない | SyncTest.fourConsumersReceiveAndCommitOneReply/temporaryBusinessFailureRollsBackAndRedelivers、WebLogTest.oneConsumerCommitsValidatedWebLog/temporaryProcessorFailureRollsBackAndRedelivers、QuestionTest.core005ActualErrorRollbackNeverAcknowledgesOrLeaksBusinessContinuation | 既期待はreply byte一致/processed1、一時失敗attempts2、Work fatal commits0/rollback1/business1。normal stopと進行中callbackの重なりは未実測 |
+| PT-JMS-STOP-GROUP004 | 停止gateを維持し、既逆順group/既context順/確認済みphaseを保持、成功子を再closeせずUNKNOWNを成功にしない | SyncTest.closeIsIdempotentAndAggregatesAllContextFailures、RuntimeTest.closeAttemptsBothGroupsAndPreservesBothFailures、QuestionTest.core008SameCloseThrowableNeverSuppressesItselfOrSkipsLaterContexts | 既Syncはclose4→再試行6（失敗2だけ）、Runtime all-failedは5→10、shared close faultは4→8。新fanoutに伴う各成功/未確認組合せとUNKNOWN外側資源は未実測 |
+| PT-JMS-STOP-GROUP005 | child単独/反復stopと親close並行で新entryを拒否。stopDeliveryはterminalFailureObservedを新たにtrueにしない、既close lock/closed phaseを保持 | WebLogTest.closeIsIdempotentAndStartupPreservesCloseFailure、SyncTest.closeIsIdempotentAndAggregatesAllContextFailures、RuntimeTest.closeAttemptsBothGroupsAndPreservesBothFailures | 既Testは各close後ready false、未確認close再試行を確認する設計。stop-only反復と親child同時要求、正常stopのterminal flagは別未証明 |
+| PT-JMS-STOP-GROUP006 | partial owner集合0/1/2/3だけへ通知し未取得をcloseしない。null/unknown callbackも停止gate後にbody/processorへ進まない。元preflight/通知fault順位を保持 | RuntimeTest.core002EveryPartialFactoryRuntimeOrFatalReleasesAllEarlierContexts/core003CompleteNullPortsFailBeforeOpeningAnyContext、QuestionTest.core007AllPartialOwnersSignalStopBeforeCloseAndPreserveNotificationFaults/core004EveryPartialContextStageClosesAndFatalPriorityIsPreserved/core006NullPortsAndFactoryDoNotGrantReady、WebLogTest.jmsown002AcquisitionFailureAndNullKeepIdentityWithoutFatalNotification | 既partialはfail位置1..6でclose=位置-1、各context stageのcleanup1、通知先行と元fault順位、未取得nullのsignal0。新全group admission停止そのものは旧外部stopped booleanのassertから推定できない |
+
+関連する原group参照はPT-JMS-013/015/016、CORE/OWNの原本文に限る。既methodに明示個別IDのないものへ架空の一意IDを与えず、原class/method＋group参照で記録する。6新IDは026にのみ対応し、まだTest実装・実行済みとはしない。
+
+期待値の独立性も点検した。Sync wire helperはSS322のoffset/lengthと固定UUID/JST/ASCII値から手組みで、production encoderをexpected生成に使わない。WebLog/InternalEvent helperも固定256 headerとdataLength/totalLengthの手組みである。ただしそのpayloadは空白主体で、processorが検査しないtransport-only fixture。FixedWidthDecoderはheader/route/長さを検査してpayload byteをcopyし、typed PayloadTypeCatalog.decodeはこの境界で呼ばない。したがって「validWire」「validated」というTest名からQA054のtyped WebLog業務記録/種別を合格と推定しない。これは既JMS境界のscopeであり、typed oracleの実装不具合とは判定していない。
+
+実行依存: 原四Testはembedded Artemis/TempDirとbroker start/stop、JMS context/consumer/send/commit/rollback、失敗注入、例外graphを含む。Question core005はInternalEventListenerTest.start/sendEvent/eventWire helperも呼ぶ。今回これらのfixture/loader/子processを起動せず、新fixture・method選択・抜粋でHOLDを再演しない。四held型や実Root/native/VM/DBへの初期化/アクセス0。
+
+反証点検: (a) parent ready DOWNだけでは子guard停止の証拠にならない、(b) 28原Testの成功歴から6新競合を充足しない、(c) failed close再確認回数と成功phaseの区別を失わない、(d) carrierに原causeを保持したtransport fixtureをtyped business fixtureへ昇格しない、(e) flag-only compiled methodの確認をcallback scheduling/資源回収の実測へ変換しない。全6条件の動的結果/coverageはnullであり、正式1964PT/53scope・工数率nullは不変。
