@@ -1,0 +1,1125 @@
+Compiled from "MqLoginFailurePortTest.java"
+final class dev.codex.schubert.nk.web.security.MqLoginFailurePortTest {
+  private static final int PROXY_FAILURE_INDEX;
+
+  private static final java.lang.String RETRY;
+
+  private static final java.lang.String LOCATION;
+
+  private static final java.lang.String LOCKED_URL;
+
+  private static final java.lang.String ERROR_URL;
+
+  private static final java.lang.String ACTION;
+
+  private static final java.lang.String DETAILS;
+
+  private static final java.lang.String REQUEST_ID;
+
+  private static final java.lang.String MARKER;
+
+  private static final java.time.Clock CLOCK;
+
+  dev.codex.schubert.nk.web.security.MqLoginFailurePortTest();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  private static <T> T port(java.lang.Class<T>, java.lang.reflect.InvocationHandler);
+    Code:
+         0: aload_0
+         1: aload_0
+         2: invokevirtual #7                  // Method java/lang/Class.getClassLoader:()Ljava/lang/ClassLoader;
+         5: iconst_1
+         6: anewarray     #8                  // class java/lang/Class
+         9: dup
+        10: iconst_0
+        11: aload_0
+        12: aastore
+        13: aload_1
+        14: invokestatic  #13                 // Method java/lang/reflect/Proxy.newProxyInstance:(Ljava/lang/ClassLoader;[Ljava/lang/Class;Ljava/lang/reflect/InvocationHandler;)Ljava/lang/Object;
+        17: invokevirtual #19                 // Method java/lang/Class.cast:(Ljava/lang/Object;)Ljava/lang/Object;
+        20: areturn
+
+  private static dev.codex.schubert.nk.web.security.MqLoginFailureHandler handler(dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$MemoryLog);
+    Code:
+         0: new           #23                 // class dev/codex/schubert/nk/web/security/MqLoginFailureHandler
+         3: dup
+         4: new           #25                 // class dev/codex/schubert/nk/web/logging/WebSecurityAudit
+         7: dup
+         8: aload_0
+         9: getstatic     #27                 // Field CLOCK:Ljava/time/Clock;
+        12: ldc           #33                 // String pt-public
+        14: ldc           #35                 // String pt-config
+        16: invokespecial #37                 // Method dev/codex/schubert/nk/web/logging/WebSecurityAudit."<init>":(Ljava/lang/System$Logger;Ljava/time/Clock;Ljava/lang/String;Ljava/lang/String;)V
+        19: invokespecial #40                 // Method dev/codex/schubert/nk/web/security/MqLoginFailureHandler."<init>":(Ldev/codex/schubert/nk/web/logging/WebSecurityAudit;)V
+        22: areturn
+
+  void lockedApiDelayIsExactHeaderWithCurrentRedirectAndOneRedactedAudit() throws java.lang.Exception;
+    Code:
+         0: iconst_0
+         1: invokestatic  #43                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+         4: iconst_1
+         5: invokestatic  #43                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+         8: sipush        899
+        11: invokestatic  #43                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        14: sipush        900
+        17: invokestatic  #43                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        20: invokestatic  #49                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+        23: invokeinterface #55,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        28: astore_1
+        29: aload_1
+        30: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        35: ifeq          260
+        38: aload_1
+        39: invokeinterface #65,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        44: checkcast     #44                 // class java/lang/Integer
+        47: invokevirtual #69                 // Method java/lang/Integer.intValue:()I
+        50: istore_2
+        51: new           #73                 // class dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture
+        54: dup
+        55: iload_2
+        56: iconst_1
+        57: iadd
+        58: i2l
+        59: invokespecial #75                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture."<init>":(J)V
+        62: astore_3
+        63: new           #78                 // class dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog
+        66: dup
+        67: invokespecial #80                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog."<init>":()V
+        70: astore        4
+        72: aload         4
+        74: invokestatic  #81                 // Method handler:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;)Ldev/codex/schubert/nk/web/security/MqLoginFailureHandler;
+        77: aload_3
+        78: invokevirtual #85                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.request:()Ljakarta/servlet/http/HttpServletRequest;
+        81: aload_3
+        82: invokevirtual #89                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.response:()Ljakarta/servlet/http/HttpServletResponse;
+        85: new           #93                 // class dev/codex/schubert/nk/web/security/MqLoginLockedException
+        88: dup
+        89: iload_2
+        90: invokespecial #95                 // Method dev/codex/schubert/nk/web/security/MqLoginLockedException."<init>":(I)V
+        93: invokevirtual #98                 // Method dev/codex/schubert/nk/web/security/MqLoginFailureHandler.onAuthenticationFailure:(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;Lorg/springframework/security/core/AuthenticationException;)V
+        96: sipush        302
+        99: aload_3
+       100: getfield      #102                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.status:I
+       103: invokestatic  #106                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+       106: ldc           #112                // String Retry-After
+       108: iload_2
+       109: invokestatic  #114                // Method java/lang/Integer.toString:(I)Ljava/lang/String;
+       112: ldc           #118                // String Location
+       114: ldc           #120                // String /login?locked
+       116: invokestatic  #122                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+       119: aload_3
+       120: getfield      #127                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.headers:Ljava/util/Map;
+       123: invokestatic  #131                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       126: ldc           #134                // String request.getAttribute
+       128: ldc           #136                // String response.setHeader:Retry-After
+       130: ldc           #138                // String response.setHeader:Location
+       132: ldc           #140                // String response.setStatus
+       134: invokestatic  #49                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+       137: aload_3
+       138: getfield      #142                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.calls:Ljava/util/List;
+       141: invokestatic  #131                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       144: aload         4
+       146: invokevirtual #146                // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog.json:()Ljava/util/List;
+       149: invokeinterface #150,  1          // InterfaceMethod java/util/List.getFirst:()Ljava/lang/Object;
+       154: checkcast     #153                // class com/google/gson/JsonObject
+       157: astore        5
+       159: iconst_1
+       160: aload         4
+       162: invokevirtual #146                // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog.json:()Ljava/util/List;
+       165: invokeinterface #155,  1          // InterfaceMethod java/util/List.size:()I
+       170: invokestatic  #106                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+       173: ldc           #158                // String LOGIN_LOCKED
+       175: aload         5
+       177: ldc           #160                // String action
+       179: invokevirtual #162                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+       182: invokevirtual #166                // Method com/google/gson/JsonElement.getAsString:()Ljava/lang/String;
+       185: invokestatic  #131                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       188: aload_3
+       189: getfield      #172                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.id:Ljava/util/UUID;
+       192: invokevirtual #176                // Method java/util/UUID.toString:()Ljava/lang/String;
+       195: aload         5
+       197: ldc           #180                // String requestId
+       199: invokevirtual #162                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+       202: invokevirtual #166                // Method com/google/gson/JsonElement.getAsString:()Ljava/lang/String;
+       205: invokestatic  #131                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       208: iload_2
+       209: aload         5
+       211: ldc           #182                // String details
+       213: invokevirtual #184                // Method com/google/gson/JsonObject.getAsJsonObject:(Ljava/lang/String;)Lcom/google/gson/JsonObject;
+       216: ldc           #188                // String retryAfterSeconds
+       218: invokevirtual #162                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+       221: invokevirtual #190                // Method com/google/gson/JsonElement.getAsInt:()I
+       224: invokestatic  #106                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+       227: ldc           #193                // String /login
+       229: aload         5
+       231: ldc           #182                // String details
+       233: invokevirtual #184                // Method com/google/gson/JsonObject.getAsJsonObject:(Ljava/lang/String;)Lcom/google/gson/JsonObject;
+       236: ldc           #195                // String route
+       238: invokevirtual #162                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+       241: invokevirtual #166                // Method com/google/gson/JsonElement.getAsString:()Ljava/lang/String;
+       244: invokestatic  #131                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       247: aload         5
+       249: ldc           #197                // String actorUsername
+       251: invokevirtual #199                // Method com/google/gson/JsonObject.has:(Ljava/lang/String;)Z
+       254: invokestatic  #203                // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+       257: goto          29
+       260: ldc           #207                // class java/lang/IllegalArgumentException
+       262: invokedynamic #209,  0            // InvokeDynamic #0:execute:()Lorg/junit/jupiter/api/function/Executable;
+       267: invokestatic  #213                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       270: pop
+       271: ldc           #207                // class java/lang/IllegalArgumentException
+       273: invokedynamic #217,  0            // InvokeDynamic #1:execute:()Lorg/junit/jupiter/api/function/Executable;
+       278: invokestatic  #213                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       281: pop
+       282: return
+
+  void badFormProxyAndServiceFailuresRemainDistinctClosedHttpOutcomes() throws java.lang.Exception;
+    Code:
+         0: new           #218                // class org/springframework/security/authentication/BadCredentialsException
+         3: dup
+         4: ldc           #220                // String public-unissued-diagnostic-marker
+         6: invokespecial #222                // Method org/springframework/security/authentication/BadCredentialsException."<init>":(Ljava/lang/String;)V
+         9: new           #225                // class dev/codex/schubert/nk/web/security/LoginFormRejectedException
+        12: dup
+        13: invokespecial #227                // Method dev/codex/schubert/nk/web/security/LoginFormRejectedException."<init>":()V
+        16: new           #228                // class dev/codex/schubert/nk/web/security/CaddyRequestRejectedException
+        19: dup
+        20: invokespecial #230                // Method dev/codex/schubert/nk/web/security/CaddyRequestRejectedException."<init>":()V
+        23: new           #231                // class org/springframework/security/authentication/AuthenticationServiceException
+        26: dup
+        27: ldc           #220                // String public-unissued-diagnostic-marker
+        29: invokespecial #233                // Method org/springframework/security/authentication/AuthenticationServiceException."<init>":(Ljava/lang/String;)V
+        32: invokestatic  #49                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+        35: astore_1
+        36: sipush        302
+        39: invokestatic  #43                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        42: sipush        400
+        45: invokestatic  #43                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        48: sipush        403
+        51: invokestatic  #43                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        54: sipush        503
+        57: invokestatic  #43                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        60: invokestatic  #49                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+        63: astore_2
+        64: iconst_0
+        65: istore_3
+        66: iload_3
+        67: aload_1
+        68: invokeinterface #155,  1          // InterfaceMethod java/util/List.size:()I
+        73: if_icmpge     341
+        76: new           #73                 // class dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture
+        79: dup
+        80: iload_3
+        81: iconst_1
+        82: iadd
+        83: i2l
+        84: invokespecial #75                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture."<init>":(J)V
+        87: astore        4
+        89: new           #78                 // class dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog
+        92: dup
+        93: invokespecial #80                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog."<init>":()V
+        96: astore        5
+        98: aload         5
+       100: invokestatic  #81                 // Method handler:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;)Ldev/codex/schubert/nk/web/security/MqLoginFailureHandler;
+       103: aload         4
+       105: invokevirtual #85                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.request:()Ljakarta/servlet/http/HttpServletRequest;
+       108: aload         4
+       110: invokevirtual #89                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.response:()Ljakarta/servlet/http/HttpServletResponse;
+       113: aload_1
+       114: iload_3
+       115: invokeinterface #234,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       120: checkcast     #237                // class org/springframework/security/core/AuthenticationException
+       123: invokevirtual #98                 // Method dev/codex/schubert/nk/web/security/MqLoginFailureHandler.onAuthenticationFailure:(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;Lorg/springframework/security/core/AuthenticationException;)V
+       126: aload_2
+       127: iload_3
+       128: invokeinterface #234,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       133: checkcast     #44                 // class java/lang/Integer
+       136: aload         4
+       138: getfield      #102                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.status:I
+       141: invokestatic  #239                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Integer;I)V
+       144: iload_3
+       145: ifne          158
+       148: ldc           #118                // String Location
+       150: ldc           #242                // String /login?error
+       152: invokestatic  #244                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+       155: goto          161
+       158: invokestatic  #247                // InterfaceMethod java/util/Map.of:()Ljava/util/Map;
+       161: aload         4
+       163: getfield      #127                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.headers:Ljava/util/Map;
+       166: invokestatic  #131                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       169: aload         4
+       171: getfield      #127                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.headers:Ljava/util/Map;
+       174: ldc           #112                // String Retry-After
+       176: invokeinterface #250,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+       181: invokestatic  #203                // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+       184: iload_3
+       185: ifeq          193
+       188: iload_3
+       189: iconst_2
+       190: if_icmpne     197
+       193: iconst_1
+       194: goto          198
+       197: iconst_0
+       198: aload         5
+       200: getfield      #254                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog.events:Ljava/util/concurrent/ConcurrentLinkedQueue;
+       203: invokevirtual #258                // Method java/util/concurrent/ConcurrentLinkedQueue.size:()I
+       206: invokestatic  #106                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+       209: iload_3
+       210: ifne          266
+       213: ldc_w         #261                // String LOGIN_FAILED
+       216: aload         5
+       218: invokevirtual #146                // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog.json:()Ljava/util/List;
+       221: invokeinterface #150,  1          // InterfaceMethod java/util/List.getFirst:()Ljava/lang/Object;
+       226: checkcast     #153                // class com/google/gson/JsonObject
+       229: ldc           #160                // String action
+       231: invokevirtual #162                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+       234: invokevirtual #166                // Method com/google/gson/JsonElement.getAsString:()Ljava/lang/String;
+       237: invokestatic  #131                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       240: aload         5
+       242: invokevirtual #146                // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog.json:()Ljava/util/List;
+       245: invokeinterface #150,  1          // InterfaceMethod java/util/List.getFirst:()Ljava/lang/Object;
+       250: checkcast     #153                // class com/google/gson/JsonObject
+       253: ldc           #182                // String details
+       255: invokevirtual #184                // Method com/google/gson/JsonObject.getAsJsonObject:(Ljava/lang/String;)Lcom/google/gson/JsonObject;
+       258: ldc           #188                // String retryAfterSeconds
+       260: invokevirtual #199                // Method com/google/gson/JsonObject.has:(Ljava/lang/String;)Z
+       263: invokestatic  #203                // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+       266: iload_3
+       267: iconst_2
+       268: if_icmpne     335
+       271: aload         5
+       273: invokevirtual #146                // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog.json:()Ljava/util/List;
+       276: invokeinterface #150,  1          // InterfaceMethod java/util/List.getFirst:()Ljava/lang/Object;
+       281: checkcast     #153                // class com/google/gson/JsonObject
+       284: astore        6
+       286: ldc_w         #263                // String AUTHORIZATION_DENIED
+       289: aload         6
+       291: ldc           #160                // String action
+       293: invokevirtual #162                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+       296: invokevirtual #166                // Method com/google/gson/JsonElement.getAsString:()Ljava/lang/String;
+       299: invokestatic  #131                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       302: ldc_w         #265                // String PROXY
+       305: aload         6
+       307: ldc           #182                // String details
+       309: invokevirtual #184                // Method com/google/gson/JsonObject.getAsJsonObject:(Ljava/lang/String;)Lcom/google/gson/JsonObject;
+       312: ldc_w         #267                // String reason
+       315: invokevirtual #162                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+       318: invokevirtual #166                // Method com/google/gson/JsonElement.getAsString:()Ljava/lang/String;
+       321: invokestatic  #131                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       324: aload         6
+       326: ldc_w         #269                // String remoteAddress
+       329: invokevirtual #199                // Method com/google/gson/JsonObject.has:(Ljava/lang/String;)Z
+       332: invokestatic  #203                // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+       335: iinc          3, 1
+       338: goto          66
+       341: return
+
+  void nullAndMissingInternalContextNeverProduceSuccessfulResponseOrAudit();
+    Code:
+         0: new           #78                 // class dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog
+         3: dup
+         4: invokespecial #80                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog."<init>":()V
+         7: astore_1
+         8: new           #73                 // class dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture
+        11: dup
+        12: lconst_1
+        13: invokespecial #75                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture."<init>":(J)V
+        16: astore_2
+        17: new           #218                // class org/springframework/security/authentication/BadCredentialsException
+        20: dup
+        21: ldc           #220                // String public-unissued-diagnostic-marker
+        23: invokespecial #222                // Method org/springframework/security/authentication/BadCredentialsException."<init>":(Ljava/lang/String;)V
+        26: astore_3
+        27: ldc_w         #271                // class java/lang/NullPointerException
+        30: invokedynamic #273,  0            // InvokeDynamic #2:execute:()Lorg/junit/jupiter/api/function/Executable;
+        35: invokestatic  #213                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        38: pop
+        39: ldc_w         #271                // class java/lang/NullPointerException
+        42: aload_1
+        43: aload_2
+        44: aload_3
+        45: invokedynamic #274,  0            // InvokeDynamic #3:execute:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture;Lorg/springframework/security/authentication/BadCredentialsException;)Lorg/junit/jupiter/api/function/Executable;
+        50: invokestatic  #213                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        53: pop
+        54: ldc_w         #271                // class java/lang/NullPointerException
+        57: aload_1
+        58: aload_2
+        59: aload_3
+        60: invokedynamic #277,  0            // InvokeDynamic #4:execute:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture;Lorg/springframework/security/authentication/BadCredentialsException;)Lorg/junit/jupiter/api/function/Executable;
+        65: invokestatic  #213                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        68: pop
+        69: ldc_w         #271                // class java/lang/NullPointerException
+        72: aload_1
+        73: aload_2
+        74: invokedynamic #278,  0            // InvokeDynamic #5:execute:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture;)Lorg/junit/jupiter/api/function/Executable;
+        79: invokestatic  #213                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        82: pop
+        83: iconst_2
+        84: anewarray     #2                  // class java/lang/Object
+        87: dup
+        88: iconst_0
+        89: aconst_null
+        90: aastore
+        91: dup
+        92: iconst_1
+        93: ldc_w         #281                // String public-wrong-type
+        96: aastore
+        97: astore        4
+        99: aload         4
+       101: arraylength
+       102: istore        5
+       104: iconst_0
+       105: istore        6
+       107: iload         6
+       109: iload         5
+       111: if_icmpge     148
+       114: aload         4
+       116: iload         6
+       118: aaload
+       119: astore        7
+       121: aload_2
+       122: aload         7
+       124: putfield      #283                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.context:Ljava/lang/Object;
+       127: ldc_w         #287                // class java/lang/IllegalStateException
+       130: aload_1
+       131: aload_2
+       132: aload_3
+       133: invokedynamic #289,  0            // InvokeDynamic #6:execute:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture;Lorg/springframework/security/authentication/BadCredentialsException;)Lorg/junit/jupiter/api/function/Executable;
+       138: invokestatic  #213                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       141: pop
+       142: iinc          6, 1
+       145: goto          107
+       148: iconst_0
+       149: aload_2
+       150: getfield      #102                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.status:I
+       153: invokestatic  #106                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+       156: aload_2
+       157: getfield      #127                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.headers:Ljava/util/Map;
+       160: invokeinterface #290,  1          // InterfaceMethod java/util/Map.isEmpty:()Z
+       165: invokestatic  #293                // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+       168: aload_1
+       169: getfield      #254                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog.events:Ljava/util/concurrent/ConcurrentLinkedQueue;
+       172: invokevirtual #296                // Method java/util/concurrent/ConcurrentLinkedQueue.isEmpty:()Z
+       175: invokestatic  #293                // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+       178: return
+
+  void memoryAuditFailurePropagatesBeforeLockedOrBadCredentialResponse();
+    Code:
+         0: new           #93                 // class dev/codex/schubert/nk/web/security/MqLoginLockedException
+         3: dup
+         4: sipush        900
+         7: invokespecial #95                 // Method dev/codex/schubert/nk/web/security/MqLoginLockedException."<init>":(I)V
+        10: new           #218                // class org/springframework/security/authentication/BadCredentialsException
+        13: dup
+        14: ldc           #220                // String public-unissued-diagnostic-marker
+        16: invokespecial #222                // Method org/springframework/security/authentication/BadCredentialsException."<init>":(Ljava/lang/String;)V
+        19: invokestatic  #297                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+        22: invokeinterface #55,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        27: astore_1
+        28: aload_1
+        29: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        34: ifeq          137
+        37: aload_1
+        38: invokeinterface #65,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        43: checkcast     #237                // class org/springframework/security/core/AuthenticationException
+        46: astore_2
+        47: new           #73                 // class dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture
+        50: dup
+        51: lconst_1
+        52: invokespecial #75                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture."<init>":(J)V
+        55: astore_3
+        56: new           #78                 // class dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog
+        59: dup
+        60: invokespecial #80                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog."<init>":()V
+        63: astore        4
+        65: aload         4
+        67: new           #287                // class java/lang/IllegalStateException
+        70: dup
+        71: ldc_w         #300                // String public audit sink failure
+        74: invokespecial #302                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        77: putfield      #303                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog.failure:Ljava/lang/RuntimeException;
+        80: aload         4
+        82: getfield      #303                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog.failure:Ljava/lang/RuntimeException;
+        85: ldc_w         #287                // class java/lang/IllegalStateException
+        88: aload         4
+        90: aload_3
+        91: aload_2
+        92: invokedynamic #307,  0            // InvokeDynamic #7:execute:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture;Lorg/springframework/security/core/AuthenticationException;)Lorg/junit/jupiter/api/function/Executable;
+        97: invokestatic  #213                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       100: invokestatic  #310                // Method org/junit/jupiter/api/Assertions.assertSame:(Ljava/lang/Object;Ljava/lang/Object;)V
+       103: iconst_0
+       104: aload_3
+       105: getfield      #102                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.status:I
+       108: invokestatic  #106                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+       111: aload_3
+       112: getfield      #127                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.headers:Ljava/util/Map;
+       115: invokeinterface #290,  1          // InterfaceMethod java/util/Map.isEmpty:()Z
+       120: invokestatic  #293                // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+       123: aload         4
+       125: getfield      #254                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog.events:Ljava/util/concurrent/ConcurrentLinkedQueue;
+       128: invokevirtual #296                // Method java/util/concurrent/ConcurrentLinkedQueue.isEmpty:()Z
+       131: invokestatic  #293                // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+       134: goto          28
+       137: return
+
+  void responseCallbackFailuresKeepTheirIdentityAndDoNotBecomeCompletedRedirects();
+    Code:
+         0: ldc_w         #313                // String setHeader:Retry-After
+         3: ldc_w         #315                // String setHeader:Location
+         6: ldc_w         #317                // String setStatus
+         9: invokestatic  #319                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+        12: invokeinterface #55,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        17: astore_1
+        18: aload_1
+        19: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        24: ifeq          104
+        27: aload_1
+        28: invokeinterface #65,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        33: checkcast     #322                // class java/lang/String
+        36: astore_2
+        37: new           #73                 // class dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture
+        40: dup
+        41: lconst_1
+        42: invokespecial #75                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture."<init>":(J)V
+        45: astore_3
+        46: aload_3
+        47: aload_2
+        48: putfield      #324                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.failPoint:Ljava/lang/String;
+        51: new           #78                 // class dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog
+        54: dup
+        55: invokespecial #80                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog."<init>":()V
+        58: astore        4
+        60: aload_3
+        61: getfield      #328                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.responseFailure:Ljava/lang/RuntimeException;
+        64: ldc_w         #287                // class java/lang/IllegalStateException
+        67: aload         4
+        69: aload_3
+        70: invokedynamic #331,  0            // InvokeDynamic #8:execute:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture;)Lorg/junit/jupiter/api/function/Executable;
+        75: invokestatic  #213                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        78: invokestatic  #310                // Method org/junit/jupiter/api/Assertions.assertSame:(Ljava/lang/Object;Ljava/lang/Object;)V
+        81: iconst_1
+        82: aload         4
+        84: getfield      #254                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog.events:Ljava/util/concurrent/ConcurrentLinkedQueue;
+        87: invokevirtual #258                // Method java/util/concurrent/ConcurrentLinkedQueue.size:()I
+        90: invokestatic  #106                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+        93: iconst_0
+        94: aload_3
+        95: getfield      #102                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.status:I
+        98: invokestatic  #106                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+       101: goto          18
+       104: new           #225                // class dev/codex/schubert/nk/web/security/LoginFormRejectedException
+       107: dup
+       108: invokespecial #227                // Method dev/codex/schubert/nk/web/security/LoginFormRejectedException."<init>":()V
+       111: new           #231                // class org/springframework/security/authentication/AuthenticationServiceException
+       114: dup
+       115: ldc           #220                // String public-unissued-diagnostic-marker
+       117: invokespecial #233                // Method org/springframework/security/authentication/AuthenticationServiceException."<init>":(Ljava/lang/String;)V
+       120: invokestatic  #297                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+       123: invokeinterface #55,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       128: astore_1
+       129: aload_1
+       130: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+       135: ifeq          217
+       138: aload_1
+       139: invokeinterface #65,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       144: checkcast     #237                // class org/springframework/security/core/AuthenticationException
+       147: astore_2
+       148: new           #73                 // class dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture
+       151: dup
+       152: lconst_1
+       153: invokespecial #75                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture."<init>":(J)V
+       156: astore_3
+       157: aload_3
+       158: ldc_w         #332                // String sendError
+       161: putfield      #324                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.failPoint:Ljava/lang/String;
+       164: new           #78                 // class dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog
+       167: dup
+       168: invokespecial #80                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog."<init>":()V
+       171: astore        4
+       173: aload_3
+       174: getfield      #334                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.ioFailure:Ljava/io/IOException;
+       177: ldc_w         #338                // class java/io/IOException
+       180: aload         4
+       182: aload_3
+       183: aload_2
+       184: invokedynamic #340,  0            // InvokeDynamic #9:execute:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture;Lorg/springframework/security/core/AuthenticationException;)Lorg/junit/jupiter/api/function/Executable;
+       189: invokestatic  #213                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       192: invokestatic  #310                // Method org/junit/jupiter/api/Assertions.assertSame:(Ljava/lang/Object;Ljava/lang/Object;)V
+       195: aload         4
+       197: getfield      #254                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog.events:Ljava/util/concurrent/ConcurrentLinkedQueue;
+       200: invokevirtual #296                // Method java/util/concurrent/ConcurrentLinkedQueue.isEmpty:()Z
+       203: invokestatic  #293                // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+       206: iconst_0
+       207: aload_3
+       208: getfield      #102                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.status:I
+       211: invokestatic  #106                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+       214: goto          129
+       217: return
+
+  void sharedHandlerParallelCallsKeepOwnDelayHeadersAndRequestAudit() throws java.lang.Exception;
+    Code:
+         0: new           #78                 // class dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog
+         3: dup
+         4: invokespecial #80                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog."<init>":()V
+         7: astore_1
+         8: aload_1
+         9: invokestatic  #81                 // Method handler:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;)Ldev/codex/schubert/nk/web/security/MqLoginFailureHandler;
+        12: astore_2
+        13: iconst_2
+        14: invokestatic  #341                // Method java/util/concurrent/Executors.newFixedThreadPool:(I)Ljava/util/concurrent/ExecutorService;
+        17: astore_3
+        18: new           #347                // class java/util/ArrayList
+        21: dup
+        22: invokespecial #349                // Method java/util/ArrayList."<init>":()V
+        25: astore        4
+        27: iconst_0
+        28: istore        5
+        30: iload         5
+        32: bipush        16
+        34: if_icmpge     67
+        37: iload         5
+        39: istore        6
+        41: aload         4
+        43: aload_3
+        44: iload         6
+        46: aload_2
+        47: invokedynamic #350,  0            // InvokeDynamic #10:call:(ILdev/codex/schubert/nk/web/security/MqLoginFailureHandler;)Ljava/util/concurrent/Callable;
+        52: invokeinterface #354,  2          // InterfaceMethod java/util/concurrent/ExecutorService.submit:(Ljava/util/concurrent/Callable;)Ljava/util/concurrent/Future;
+        57: invokevirtual #360                // Method java/util/ArrayList.add:(Ljava/lang/Object;)Z
+        60: pop
+        61: iinc          5, 1
+        64: goto          30
+        67: new           #363                // class java/util/HashSet
+        70: dup
+        71: invokespecial #365                // Method java/util/HashSet."<init>":()V
+        74: astore        5
+        76: aload         4
+        78: invokevirtual #366                // Method java/util/ArrayList.iterator:()Ljava/util/Iterator;
+        81: astore        6
+        83: aload         6
+        85: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        90: ifeq          133
+        93: aload         6
+        95: invokeinterface #65,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       100: checkcast     #367                // class java/util/concurrent/Future
+       103: astore        7
+       105: aload         5
+       107: aload         7
+       109: ldc2_w        #369                // long 10l
+       112: getstatic     #371                // Field java/util/concurrent/TimeUnit.SECONDS:Ljava/util/concurrent/TimeUnit;
+       115: invokeinterface #377,  4          // InterfaceMethod java/util/concurrent/Future.get:(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;
+       120: checkcast     #177                // class java/util/UUID
+       123: invokevirtual #176                // Method java/util/UUID.toString:()Ljava/lang/String;
+       126: invokevirtual #380                // Method java/util/HashSet.add:(Ljava/lang/Object;)Z
+       129: pop
+       130: goto          83
+       133: aload         5
+       135: new           #363                // class java/util/HashSet
+       138: dup
+       139: aload_1
+       140: invokevirtual #146                // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog.json:()Ljava/util/List;
+       143: invokeinterface #381,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+       148: invokedynamic #385,  0            // InvokeDynamic #11:apply:()Ljava/util/function/Function;
+       153: invokeinterface #389,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+       158: invokeinterface #395,  1          // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+       163: invokespecial #398                // Method java/util/HashSet."<init>":(Ljava/util/Collection;)V
+       166: invokestatic  #131                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       169: bipush        16
+       171: aload_1
+       172: getfield      #254                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog.events:Ljava/util/concurrent/ConcurrentLinkedQueue;
+       175: invokevirtual #258                // Method java/util/concurrent/ConcurrentLinkedQueue.size:()I
+       178: invokestatic  #106                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+       181: aload_3
+       182: ifnull        221
+       185: aload_3
+       186: invokeinterface #401,  1          // InterfaceMethod java/util/concurrent/ExecutorService.close:()V
+       191: goto          221
+       194: astore        4
+       196: aload_3
+       197: ifnull        218
+       200: aload_3
+       201: invokeinterface #401,  1          // InterfaceMethod java/util/concurrent/ExecutorService.close:()V
+       206: goto          218
+       209: astore        5
+       211: aload         4
+       213: aload         5
+       215: invokevirtual #406                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       218: aload         4
+       220: athrow
+       221: return
+      Exception table:
+         from    to  target type
+            18   181   194   Class java/lang/Throwable
+           200   206   209   Class java/lang/Throwable
+
+  private static java.lang.String lambda$sharedHandlerParallelCallsKeepOwnDelayHeadersAndRequestAudit$1(com.google.gson.JsonObject);
+    Code:
+         0: aload_0
+         1: ldc           #180                // String requestId
+         3: invokevirtual #162                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+         6: invokevirtual #166                // Method com/google/gson/JsonElement.getAsString:()Ljava/lang/String;
+         9: areturn
+
+  private static java.util.UUID lambda$sharedHandlerParallelCallsKeepOwnDelayHeadersAndRequestAudit$0(int, dev.codex.schubert.nk.web.security.MqLoginFailureHandler) throws java.lang.Exception;
+    Code:
+         0: new           #73                 // class dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture
+         3: dup
+         4: iload_0
+         5: iconst_1
+         6: iadd
+         7: i2l
+         8: invokespecial #75                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture."<init>":(J)V
+        11: astore_2
+        12: aload_1
+        13: aload_2
+        14: invokevirtual #85                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.request:()Ljakarta/servlet/http/HttpServletRequest;
+        17: aload_2
+        18: invokevirtual #89                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.response:()Ljakarta/servlet/http/HttpServletResponse;
+        21: new           #93                 // class dev/codex/schubert/nk/web/security/MqLoginLockedException
+        24: dup
+        25: iload_0
+        26: invokespecial #95                 // Method dev/codex/schubert/nk/web/security/MqLoginLockedException."<init>":(I)V
+        29: invokevirtual #98                 // Method dev/codex/schubert/nk/web/security/MqLoginFailureHandler.onAuthenticationFailure:(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;Lorg/springframework/security/core/AuthenticationException;)V
+        32: sipush        302
+        35: aload_2
+        36: getfield      #102                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.status:I
+        39: invokestatic  #106                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+        42: ldc           #112                // String Retry-After
+        44: iload_0
+        45: invokestatic  #114                // Method java/lang/Integer.toString:(I)Ljava/lang/String;
+        48: ldc           #118                // String Location
+        50: ldc           #120                // String /login?locked
+        52: invokestatic  #122                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+        55: aload_2
+        56: getfield      #127                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.headers:Ljava/util/Map;
+        59: invokestatic  #131                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+        62: aload_2
+        63: getfield      #172                // Field dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.id:Ljava/util/UUID;
+        66: areturn
+
+  private static void lambda$responseCallbackFailuresKeepTheirIdentityAndDoNotBecomeCompletedRedirects$1(dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$MemoryLog, dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$Fixture, org.springframework.security.core.AuthenticationException) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: invokestatic  #81                 // Method handler:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;)Ldev/codex/schubert/nk/web/security/MqLoginFailureHandler;
+         4: aload_1
+         5: invokevirtual #85                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.request:()Ljakarta/servlet/http/HttpServletRequest;
+         8: aload_1
+         9: invokevirtual #89                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.response:()Ljakarta/servlet/http/HttpServletResponse;
+        12: aload_2
+        13: invokevirtual #98                 // Method dev/codex/schubert/nk/web/security/MqLoginFailureHandler.onAuthenticationFailure:(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;Lorg/springframework/security/core/AuthenticationException;)V
+        16: return
+
+  private static void lambda$responseCallbackFailuresKeepTheirIdentityAndDoNotBecomeCompletedRedirects$0(dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$MemoryLog, dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$Fixture) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: invokestatic  #81                 // Method handler:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;)Ldev/codex/schubert/nk/web/security/MqLoginFailureHandler;
+         4: aload_1
+         5: invokevirtual #85                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.request:()Ljakarta/servlet/http/HttpServletRequest;
+         8: aload_1
+         9: invokevirtual #89                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.response:()Ljakarta/servlet/http/HttpServletResponse;
+        12: new           #93                 // class dev/codex/schubert/nk/web/security/MqLoginLockedException
+        15: dup
+        16: iconst_1
+        17: invokespecial #95                 // Method dev/codex/schubert/nk/web/security/MqLoginLockedException."<init>":(I)V
+        20: invokevirtual #98                 // Method dev/codex/schubert/nk/web/security/MqLoginFailureHandler.onAuthenticationFailure:(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;Lorg/springframework/security/core/AuthenticationException;)V
+        23: return
+
+  private static void lambda$memoryAuditFailurePropagatesBeforeLockedOrBadCredentialResponse$0(dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$MemoryLog, dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$Fixture, org.springframework.security.core.AuthenticationException) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: invokestatic  #81                 // Method handler:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;)Ldev/codex/schubert/nk/web/security/MqLoginFailureHandler;
+         4: aload_1
+         5: invokevirtual #85                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.request:()Ljakarta/servlet/http/HttpServletRequest;
+         8: aload_1
+         9: invokevirtual #89                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.response:()Ljakarta/servlet/http/HttpServletResponse;
+        12: aload_2
+        13: invokevirtual #98                 // Method dev/codex/schubert/nk/web/security/MqLoginFailureHandler.onAuthenticationFailure:(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;Lorg/springframework/security/core/AuthenticationException;)V
+        16: return
+
+  private static void lambda$nullAndMissingInternalContextNeverProduceSuccessfulResponseOrAudit$4(dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$MemoryLog, dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$Fixture, org.springframework.security.authentication.BadCredentialsException) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: invokestatic  #81                 // Method handler:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;)Ldev/codex/schubert/nk/web/security/MqLoginFailureHandler;
+         4: aload_1
+         5: invokevirtual #85                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.request:()Ljakarta/servlet/http/HttpServletRequest;
+         8: aload_1
+         9: invokevirtual #89                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.response:()Ljakarta/servlet/http/HttpServletResponse;
+        12: aload_2
+        13: invokevirtual #98                 // Method dev/codex/schubert/nk/web/security/MqLoginFailureHandler.onAuthenticationFailure:(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;Lorg/springframework/security/core/AuthenticationException;)V
+        16: return
+
+  private static void lambda$nullAndMissingInternalContextNeverProduceSuccessfulResponseOrAudit$3(dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$MemoryLog, dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$Fixture) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: invokestatic  #81                 // Method handler:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;)Ldev/codex/schubert/nk/web/security/MqLoginFailureHandler;
+         4: aload_1
+         5: invokevirtual #85                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.request:()Ljakarta/servlet/http/HttpServletRequest;
+         8: aload_1
+         9: invokevirtual #89                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.response:()Ljakarta/servlet/http/HttpServletResponse;
+        12: aconst_null
+        13: invokevirtual #98                 // Method dev/codex/schubert/nk/web/security/MqLoginFailureHandler.onAuthenticationFailure:(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;Lorg/springframework/security/core/AuthenticationException;)V
+        16: return
+
+  private static void lambda$nullAndMissingInternalContextNeverProduceSuccessfulResponseOrAudit$2(dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$MemoryLog, dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$Fixture, org.springframework.security.authentication.BadCredentialsException) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: invokestatic  #81                 // Method handler:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;)Ldev/codex/schubert/nk/web/security/MqLoginFailureHandler;
+         4: aload_1
+         5: invokevirtual #85                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.request:()Ljakarta/servlet/http/HttpServletRequest;
+         8: aconst_null
+         9: aload_2
+        10: invokevirtual #98                 // Method dev/codex/schubert/nk/web/security/MqLoginFailureHandler.onAuthenticationFailure:(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;Lorg/springframework/security/core/AuthenticationException;)V
+        13: return
+
+  private static void lambda$nullAndMissingInternalContextNeverProduceSuccessfulResponseOrAudit$1(dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$MemoryLog, dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$Fixture, org.springframework.security.authentication.BadCredentialsException) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: invokestatic  #81                 // Method handler:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$MemoryLog;)Ldev/codex/schubert/nk/web/security/MqLoginFailureHandler;
+         4: aconst_null
+         5: aload_1
+         6: invokevirtual #89                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture.response:()Ljakarta/servlet/http/HttpServletResponse;
+         9: aload_2
+        10: invokevirtual #98                 // Method dev/codex/schubert/nk/web/security/MqLoginFailureHandler.onAuthenticationFailure:(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;Lorg/springframework/security/core/AuthenticationException;)V
+        13: return
+
+  private static void lambda$nullAndMissingInternalContextNeverProduceSuccessfulResponseOrAudit$0() throws java.lang.Throwable;
+    Code:
+         0: new           #23                 // class dev/codex/schubert/nk/web/security/MqLoginFailureHandler
+         3: dup
+         4: aconst_null
+         5: invokespecial #40                 // Method dev/codex/schubert/nk/web/security/MqLoginFailureHandler."<init>":(Ldev/codex/schubert/nk/web/logging/WebSecurityAudit;)V
+         8: pop
+         9: return
+
+  private static void lambda$lockedApiDelayIsExactHeaderWithCurrentRedirectAndOneRedactedAudit$1() throws java.lang.Throwable;
+    Code:
+         0: new           #93                 // class dev/codex/schubert/nk/web/security/MqLoginLockedException
+         3: dup
+         4: sipush        901
+         7: invokespecial #95                 // Method dev/codex/schubert/nk/web/security/MqLoginLockedException."<init>":(I)V
+        10: pop
+        11: return
+
+  private static void lambda$lockedApiDelayIsExactHeaderWithCurrentRedirectAndOneRedactedAudit$0() throws java.lang.Throwable;
+    Code:
+         0: new           #93                 // class dev/codex/schubert/nk/web/security/MqLoginLockedException
+         3: dup
+         4: iconst_m1
+         5: invokespecial #95                 // Method dev/codex/schubert/nk/web/security/MqLoginLockedException."<init>":(I)V
+         8: pop
+         9: return
+
+  static {};
+    Code:
+         0: ldc_w         #410                // String 2026-01-02T03:04:05Z
+         3: invokestatic  #412                // Method java/time/Instant.parse:(Ljava/lang/CharSequence;)Ljava/time/Instant;
+         6: getstatic     #418                // Field java/time/ZoneOffset.UTC:Ljava/time/ZoneOffset;
+         9: invokestatic  #424                // Method java/time/Clock.fixed:(Ljava/time/Instant;Ljava/time/ZoneId;)Ljava/time/Clock;
+        12: putstatic     #27                 // Field CLOCK:Ljava/time/Clock;
+        15: return
+}
+Compiled from "MqLoginFailurePortTest.java"
+final class dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$Fixture {
+  private final java.util.UUID id;
+
+  private final java.util.List<java.lang.String> calls;
+
+  private final java.util.Map<java.lang.String, java.lang.String> headers;
+
+  private java.lang.Object context;
+
+  private int status;
+
+  private java.lang.String failPoint;
+
+  private final java.lang.RuntimeException responseFailure;
+
+  private final java.io.IOException ioFailure;
+
+  private dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$Fixture(long);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #7                  // class java/util/ArrayList
+         8: dup
+         9: invokespecial #9                  // Method java/util/ArrayList."<init>":()V
+        12: putfield      #10                 // Field calls:Ljava/util/List;
+        15: aload_0
+        16: new           #16                 // class java/util/HashMap
+        19: dup
+        20: invokespecial #18                 // Method java/util/HashMap."<init>":()V
+        23: putfield      #19                 // Field headers:Ljava/util/Map;
+        26: aload_0
+        27: ldc           #23                 // String
+        29: putfield      #25                 // Field failPoint:Ljava/lang/String;
+        32: aload_0
+        33: new           #29                 // class java/lang/IllegalStateException
+        36: dup
+        37: ldc           #31                 // String public response failure
+        39: invokespecial #33                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        42: putfield      #36                 // Field responseFailure:Ljava/lang/RuntimeException;
+        45: aload_0
+        46: new           #40                 // class java/io/IOException
+        49: dup
+        50: ldc           #42                 // String public sendError failure
+        52: invokespecial #44                 // Method java/io/IOException."<init>":(Ljava/lang/String;)V
+        55: putfield      #45                 // Field ioFailure:Ljava/io/IOException;
+        58: aload_0
+        59: new           #49                 // class java/util/UUID
+        62: dup
+        63: lconst_0
+        64: lload_1
+        65: invokespecial #51                 // Method java/util/UUID."<init>":(JJ)V
+        68: putfield      #54                 // Field id:Ljava/util/UUID;
+        71: aload_0
+        72: new           #58                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        75: dup
+        76: aload_0
+        77: getfield      #54                 // Field id:Ljava/util/UUID;
+        80: new           #60                 // class dev/codex/schubert/nk/web/security/LoginClientAddress
+        83: dup
+        84: ldc           #62                 // String 192.0.2.1
+        86: invokespecial #64                 // Method dev/codex/schubert/nk/web/security/LoginClientAddress."<init>":(Ljava/lang/String;)V
+        89: invokespecial #65                 // Method dev/codex/schubert/nk/web/security/WebRequestContext."<init>":(Ljava/util/UUID;Ldev/codex/schubert/nk/web/security/LoginClientAddress;)V
+        92: putfield      #68                 // Field context:Ljava/lang/Object;
+        95: return
+
+  private jakarta.servlet.http.HttpServletRequest request();
+    Code:
+         0: ldc           #72                 // class jakarta/servlet/http/HttpServletRequest
+         2: aload_0
+         3: invokedynamic #74,  0             // InvokeDynamic #0:invoke:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture;)Ljava/lang/reflect/InvocationHandler;
+         8: invokestatic  #78                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest.port:(Ljava/lang/Class;Ljava/lang/reflect/InvocationHandler;)Ljava/lang/Object;
+        11: checkcast     #72                 // class jakarta/servlet/http/HttpServletRequest
+        14: areturn
+
+  private jakarta.servlet.http.HttpServletResponse response();
+    Code:
+         0: ldc           #84                 // class jakarta/servlet/http/HttpServletResponse
+         2: aload_0
+         3: invokedynamic #86,  0             // InvokeDynamic #1:invoke:(Ldev/codex/schubert/nk/web/security/MqLoginFailurePortTest$Fixture;)Ljava/lang/reflect/InvocationHandler;
+         8: invokestatic  #78                 // Method dev/codex/schubert/nk/web/security/MqLoginFailurePortTest.port:(Ljava/lang/Class;Ljava/lang/reflect/InvocationHandler;)Ljava/lang/Object;
+        11: checkcast     #84                 // class jakarta/servlet/http/HttpServletResponse
+        14: areturn
+
+  private java.lang.Object lambda$response$0(java.lang.Object, java.lang.reflect.Method, java.lang.Object[]) throws java.lang.Throwable;
+    Code:
+         0: aload_2
+         1: invokevirtual #87                 // Method java/lang/reflect/Method.getName:()Ljava/lang/String;
+         4: astore        4
+         6: aload         4
+         8: ldc           #93                 // String setHeader
+        10: invokevirtual #95                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        13: ifeq          32
+        16: aload         4
+        18: aload_3
+        19: iconst_0
+        20: aaload
+        21: invokestatic  #101                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+        24: invokedynamic #105,  0            // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        29: goto          34
+        32: aload         4
+        34: astore        5
+        36: aload_0
+        37: getfield      #10                 // Field calls:Ljava/util/List;
+        40: aload         5
+        42: invokedynamic #109,  0            // InvokeDynamic #3:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+        47: invokeinterface #112,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        52: pop
+        53: aload         5
+        55: aload_0
+        56: getfield      #25                 // Field failPoint:Ljava/lang/String;
+        59: invokevirtual #95                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        62: ifeq          85
+        65: aload         4
+        67: ldc           #117                // String sendError
+        69: invokevirtual #95                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        72: ifeq          80
+        75: aload_0
+        76: getfield      #45                 // Field ioFailure:Ljava/io/IOException;
+        79: athrow
+        80: aload_0
+        81: getfield      #36                 // Field responseFailure:Ljava/lang/RuntimeException;
+        84: athrow
+        85: aload         4
+        87: astore        6
+        89: iconst_m1
+        90: istore        7
+        92: aload         6
+        94: invokevirtual #119                // Method java/lang/String.hashCode:()I
+        97: lookupswitch  { // 3
+                 2656096: 164
+               260127119: 132
+               588916468: 148
+                 default: 177
+            }
+       132: aload         6
+       134: ldc           #93                 // String setHeader
+       136: invokevirtual #95                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       139: ifeq          177
+       142: iconst_0
+       143: istore        7
+       145: goto          177
+       148: aload         6
+       150: ldc           #123                // String setStatus
+       152: invokevirtual #95                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       155: ifeq          177
+       158: iconst_1
+       159: istore        7
+       161: goto          177
+       164: aload         6
+       166: ldc           #117                // String sendError
+       168: invokevirtual #95                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       171: ifeq          177
+       174: iconst_2
+       175: istore        7
+       177: iload         7
+       179: tableswitch   { // 0 to 2
+                       0: 204
+                       1: 229
+                       2: 229
+                 default: 245
+            }
+       204: aload_0
+       205: getfield      #19                 // Field headers:Ljava/util/Map;
+       208: aload_3
+       209: iconst_0
+       210: aaload
+       211: checkcast     #96                 // class java/lang/String
+       214: aload_3
+       215: iconst_1
+       216: aaload
+       217: checkcast     #96                 // class java/lang/String
+       220: invokeinterface #125,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       225: pop
+       226: goto          260
+       229: aload_0
+       230: aload_3
+       231: iconst_0
+       232: aaload
+       233: checkcast     #131                // class java/lang/Integer
+       236: invokevirtual #133                // Method java/lang/Integer.intValue:()I
+       239: putfield      #136                // Field status:I
+       242: goto          260
+       245: new           #140                // class java/lang/AssertionError
+       248: dup
+       249: aload         4
+       251: invokedynamic #142,  0            // InvokeDynamic #4:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       256: invokespecial #143                // Method java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+       259: athrow
+       260: aconst_null
+       261: areturn
+
+  private java.lang.Object lambda$request$0(java.lang.Object, java.lang.reflect.Method, java.lang.Object[]) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: getfield      #10                 // Field calls:Ljava/util/List;
+         4: aload_2
+         5: invokevirtual #87                 // Method java/lang/reflect/Method.getName:()Ljava/lang/String;
+         8: invokedynamic #146,  0            // InvokeDynamic #5:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+        13: invokeinterface #112,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        18: pop
+        19: ldc           #147                // String getAttribute
+        21: aload_2
+        22: invokevirtual #87                 // Method java/lang/reflect/Method.getName:()Ljava/lang/String;
+        25: ldc           #149                // String no credential/body/session/header access
+        27: invokestatic  #151                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+        30: ldc           #58                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        32: invokevirtual #157                // Method java/lang/Class.getName:()Ljava/lang/String;
+        35: aload_3
+        36: iconst_0
+        37: aaload
+        38: invokestatic  #160                // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+        41: aload_0
+        42: getfield      #68                 // Field context:Ljava/lang/Object;
+        45: areturn
+}
+Compiled from "MqLoginFailurePortTest.java"
+final class dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$MemoryLog implements java.lang.System$Logger {
+  private final java.util.concurrent.ConcurrentLinkedQueue<java.lang.String> events;
+
+  private java.lang.RuntimeException failure;
+
+  private dev.codex.schubert.nk.web.security.MqLoginFailurePortTest$MemoryLog();
+    Code:
+         0: aload_0
+         1: invokespecial #3                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #9                  // class java/util/concurrent/ConcurrentLinkedQueue
+         8: dup
+         9: invokespecial #11                 // Method java/util/concurrent/ConcurrentLinkedQueue."<init>":()V
+        12: putfield      #12                 // Field events:Ljava/util/concurrent/ConcurrentLinkedQueue;
+        15: return
+
+  public java.lang.String getName();
+    Code:
+         0: ldc           #18                 // String owned-memory-only
+         2: areturn
+
+  public boolean isLoggable(java.lang.System$Logger$Level);
+    Code:
+         0: iconst_1
+         1: ireturn
+
+  public void log(java.lang.System$Logger$Level, java.util.ResourceBundle, java.lang.String, java.lang.Throwable);
+    Code:
+         0: new           #20                 // class java/lang/AssertionError
+         3: dup
+         4: ldc           #22                 // String diagnostics must not be passed to the audit sink
+         6: invokespecial #24                 // Method java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+         9: athrow
+
+  public void log(java.lang.System$Logger$Level, java.util.ResourceBundle, java.lang.String, java.lang.Object...);
+    Code:
+         0: aload_2
+         1: invokestatic  #27                 // Method org/junit/jupiter/api/Assertions.assertNull:(Ljava/lang/Object;)V
+         4: aload         4
+         6: ifnull        15
+         9: aload         4
+        11: arraylength
+        12: ifne          19
+        15: iconst_1
+        16: goto          20
+        19: iconst_0
+        20: invokestatic  #32                 // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+        23: aload_0
+        24: getfield      #36                 // Field failure:Ljava/lang/RuntimeException;
+        27: ifnull        35
+        30: aload_0
+        31: getfield      #36                 // Field failure:Ljava/lang/RuntimeException;
+        34: athrow
+        35: getstatic     #40                 // Field java/lang/System$Logger$Level.WARNING:Ljava/lang/System$Logger$Level;
+        38: aload_1
+        39: invokestatic  #46                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+        42: aload_3
+        43: ldc           #50                 // String public-unissued-diagnostic-marker
+        45: invokevirtual #52                 // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+        48: invokestatic  #58                 // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+        51: aload_0
+        52: getfield      #12                 // Field events:Ljava/util/concurrent/ConcurrentLinkedQueue;
+        55: aload_3
+        56: invokevirtual #61                 // Method java/util/concurrent/ConcurrentLinkedQueue.add:(Ljava/lang/Object;)Z
+        59: pop
+        60: return
+
+  private java.util.List<com.google.gson.JsonObject> json();
+    Code:
+         0: aload_0
+         1: getfield      #12                 // Field events:Ljava/util/concurrent/ConcurrentLinkedQueue;
+         4: invokevirtual #65                 // Method java/util/concurrent/ConcurrentLinkedQueue.stream:()Ljava/util/stream/Stream;
+         7: invokedynamic #69,  0             // InvokeDynamic #0:apply:()Ljava/util/function/Function;
+        12: invokeinterface #73,  2           // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+        17: invokeinterface #79,  1           // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+        22: areturn
+
+  private static com.google.gson.JsonObject lambda$json$0(java.lang.String);
+    Code:
+         0: aload_0
+         1: invokestatic  #83                 // Method com/google/gson/JsonParser.parseString:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+         4: invokevirtual #89                 // Method com/google/gson/JsonElement.getAsJsonObject:()Lcom/google/gson/JsonObject;
+         7: areturn
+}

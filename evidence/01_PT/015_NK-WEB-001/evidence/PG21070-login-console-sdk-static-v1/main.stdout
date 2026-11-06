@@ -1,0 +1,797 @@
+Compiled from "MqLoginFailureHandler.java"
+public final class dev.codex.schubert.nk.web.security.MqLoginFailureHandler implements org.springframework.security.web.authentication.AuthenticationFailureHandler {
+  private final dev.codex.schubert.nk.web.logging.WebSecurityAudit audit;
+
+  public dev.codex.schubert.nk.web.security.MqLoginFailureHandler(dev.codex.schubert.nk.web.logging.WebSecurityAudit);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: ldc           #7                  // String audit
+         8: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        11: checkcast     #15                 // class dev/codex/schubert/nk/web/logging/WebSecurityAudit
+        14: putfield      #17                 // Field audit:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit;
+        17: return
+
+  public void onAuthenticationFailure(jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse, org.springframework.security.core.AuthenticationException) throws java.io.IOException;
+    Code:
+         0: aload_1
+         1: ldc           #22                 // String request
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_2
+         8: ldc           #24                 // String response
+        10: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_3
+        15: ldc           #26                 // String failure
+        17: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: aload_1
+        22: invokestatic  #28                 // Method dev/codex/schubert/nk/web/security/WebRequestContext.require:(Ljakarta/servlet/http/HttpServletRequest;)Ldev/codex/schubert/nk/web/security/WebRequestContext;
+        25: astore        4
+        27: aload_3
+        28: instanceof    #34                 // class dev/codex/schubert/nk/web/security/MqLoginLockedException
+        31: ifeq          115
+        34: aload_3
+        35: checkcast     #34                 // class dev/codex/schubert/nk/web/security/MqLoginLockedException
+        38: astore        5
+        40: aload_0
+        41: getfield      #17                 // Field audit:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit;
+        44: aload         4
+        46: invokevirtual #36                 // Method dev/codex/schubert/nk/web/security/WebRequestContext.requestId:()Ljava/util/UUID;
+        49: getstatic     #40                 // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.LOGIN_LOCKED:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;
+        52: aload         4
+        54: invokevirtual #46                 // Method dev/codex/schubert/nk/web/security/WebRequestContext.clientAddress:()Ldev/codex/schubert/nk/web/security/LoginClientAddress;
+        57: invokevirtual #50                 // Method dev/codex/schubert/nk/web/security/LoginClientAddress.value:()Ljava/lang/String;
+        60: invokestatic  #56                 // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+        63: invokestatic  #62                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+        66: aload         5
+        68: invokevirtual #66                 // Method dev/codex/schubert/nk/web/security/MqLoginLockedException.retryAfterSeconds:()I
+        71: getstatic     #70                 // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Route.LOGIN:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Route;
+        74: invokevirtual #76                 // Method dev/codex/schubert/nk/web/logging/WebSecurityAudit.record:(Ljava/util/UUID;Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;Ljava/util/Optional;Ljava/util/Optional;ILdev/codex/schubert/nk/web/logging/WebSecurityAudit$Route;)V
+        77: aload_2
+        78: ldc           #80                 // String Retry-After
+        80: aload         5
+        82: invokevirtual #66                 // Method dev/codex/schubert/nk/web/security/MqLoginLockedException.retryAfterSeconds:()I
+        85: invokestatic  #82                 // Method java/lang/Integer.toString:(I)Ljava/lang/String;
+        88: invokeinterface #88,  3           // InterfaceMethod jakarta/servlet/http/HttpServletResponse.setHeader:(Ljava/lang/String;Ljava/lang/String;)V
+        93: aload_2
+        94: ldc           #94                 // String Location
+        96: ldc           #96                 // String /login?locked
+        98: invokeinterface #88,  3           // InterfaceMethod jakarta/servlet/http/HttpServletResponse.setHeader:(Ljava/lang/String;Ljava/lang/String;)V
+       103: aload_2
+       104: sipush        302
+       107: invokeinterface #98,  2           // InterfaceMethod jakarta/servlet/http/HttpServletResponse.setStatus:(I)V
+       112: goto          249
+       115: aload_3
+       116: instanceof    #102                // class org/springframework/security/authentication/BadCredentialsException
+       119: ifeq          177
+       122: aload_0
+       123: getfield      #17                 // Field audit:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit;
+       126: aload         4
+       128: invokevirtual #36                 // Method dev/codex/schubert/nk/web/security/WebRequestContext.requestId:()Ljava/util/UUID;
+       131: getstatic     #104                // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.LOGIN_FAILED:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;
+       134: aload         4
+       136: invokevirtual #46                 // Method dev/codex/schubert/nk/web/security/WebRequestContext.clientAddress:()Ldev/codex/schubert/nk/web/security/LoginClientAddress;
+       139: invokevirtual #50                 // Method dev/codex/schubert/nk/web/security/LoginClientAddress.value:()Ljava/lang/String;
+       142: invokestatic  #56                 // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       145: invokestatic  #62                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+       148: iconst_0
+       149: getstatic     #70                 // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Route.LOGIN:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Route;
+       152: invokevirtual #76                 // Method dev/codex/schubert/nk/web/logging/WebSecurityAudit.record:(Ljava/util/UUID;Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;Ljava/util/Optional;Ljava/util/Optional;ILdev/codex/schubert/nk/web/logging/WebSecurityAudit$Route;)V
+       155: aload_2
+       156: ldc           #94                 // String Location
+       158: ldc           #107                // String /login?error
+       160: invokeinterface #88,  3           // InterfaceMethod jakarta/servlet/http/HttpServletResponse.setHeader:(Ljava/lang/String;Ljava/lang/String;)V
+       165: aload_2
+       166: sipush        302
+       169: invokeinterface #98,  2           // InterfaceMethod jakarta/servlet/http/HttpServletResponse.setStatus:(I)V
+       174: goto          249
+       177: aload_3
+       178: instanceof    #109                // class dev/codex/schubert/nk/web/security/LoginFormRejectedException
+       181: ifeq          196
+       184: aload_2
+       185: sipush        400
+       188: invokeinterface #111,  2          // InterfaceMethod jakarta/servlet/http/HttpServletResponse.sendError:(I)V
+       193: goto          249
+       196: aload_3
+       197: instanceof    #114                // class dev/codex/schubert/nk/web/security/CaddyRequestRejectedException
+       200: ifeq          240
+       203: aload_2
+       204: sipush        403
+       207: invokeinterface #98,  2           // InterfaceMethod jakarta/servlet/http/HttpServletResponse.setStatus:(I)V
+       212: aload_0
+       213: getfield      #17                 // Field audit:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit;
+       216: aload         4
+       218: invokevirtual #36                 // Method dev/codex/schubert/nk/web/security/WebRequestContext.requestId:()Ljava/util/UUID;
+       221: getstatic     #116                // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.PROXY_DENIED:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;
+       224: invokestatic  #62                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+       227: invokestatic  #62                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+       230: iconst_0
+       231: getstatic     #70                 // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Route.LOGIN:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Route;
+       234: invokevirtual #76                 // Method dev/codex/schubert/nk/web/logging/WebSecurityAudit.record:(Ljava/util/UUID;Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;Ljava/util/Optional;Ljava/util/Optional;ILdev/codex/schubert/nk/web/logging/WebSecurityAudit$Route;)V
+       237: goto          249
+       240: aload_2
+       241: sipush        503
+       244: invokeinterface #111,  2          // InterfaceMethod jakarta/servlet/http/HttpServletResponse.sendError:(I)V
+       249: return
+}
+Compiled from "WebRequestContext.java"
+public final class dev.codex.schubert.nk.web.security.WebRequestContext {
+  private static final java.lang.String LITERAL_WEB_REQUEST_CONTEXT_IS_UNAVAILABLE;
+
+  static final java.lang.String ATTRIBUTE;
+
+  private static final java.lang.String ID_ATTRIBUTE;
+
+  private final java.util.UUID retainedRequestId;
+
+  private final dev.codex.schubert.nk.web.security.LoginClientAddress retainedClientAddress;
+
+  dev.codex.schubert.nk.web.security.WebRequestContext(java.util.UUID, dev.codex.schubert.nk.web.security.LoginClientAddress);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: ldc           #7                  // String requestId
+         8: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        11: checkcast     #15                 // class java/util/UUID
+        14: putfield      #17                 // Field retainedRequestId:Ljava/util/UUID;
+        17: aload_0
+        18: aload_2
+        19: ldc           #23                 // String clientAddress
+        21: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        24: checkcast     #25                 // class dev/codex/schubert/nk/web/security/LoginClientAddress
+        27: putfield      #27                 // Field retainedClientAddress:Ldev/codex/schubert/nk/web/security/LoginClientAddress;
+        30: return
+
+  public java.util.UUID requestId();
+    Code:
+         0: aload_0
+         1: getfield      #17                 // Field retainedRequestId:Ljava/util/UUID;
+         4: areturn
+
+  public dev.codex.schubert.nk.web.security.LoginClientAddress clientAddress();
+    Code:
+         0: aload_0
+         1: getfield      #27                 // Field retainedClientAddress:Ldev/codex/schubert/nk/web/security/LoginClientAddress;
+         4: areturn
+
+  public static dev.codex.schubert.nk.web.security.WebRequestContext require(jakarta.servlet.http.HttpServletRequest);
+    Code:
+         0: aload_0
+         1: invokestatic  #31                 // Method existing:(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;
+         4: invokedynamic #35,  0             // InvokeDynamic #0:get:()Ljava/util/function/Supplier;
+         9: invokevirtual #39                 // Method java/util/Optional.orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+        12: checkcast     #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        15: areturn
+
+  public static java.util.Optional<dev.codex.schubert.nk.web.security.WebRequestContext> existing(jakarta.servlet.http.HttpServletRequest);
+    Code:
+         0: aload_0
+         1: ldc           #45                 // String request
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_0
+         8: getstatic     #47                 // Field ATTRIBUTE:Ljava/lang/String;
+        11: invokeinterface #51,  2           // InterfaceMethod jakarta/servlet/http/HttpServletRequest.getAttribute:(Ljava/lang/String;)Ljava/lang/Object;
+        16: astore_1
+        17: aload_1
+        18: ifnonnull     25
+        21: invokestatic  #57                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+        24: areturn
+        25: aload_1
+        26: instanceof    #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        29: ifeq          42
+        32: aload_1
+        33: checkcast     #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        36: astore_2
+        37: aload_2
+        38: invokestatic  #61                 // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+        41: areturn
+        42: new           #65                 // class java/lang/IllegalStateException
+        45: dup
+        46: ldc           #67                 // String web request context is unavailable
+        48: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        51: athrow
+        52: astore_1
+        53: new           #65                 // class java/lang/IllegalStateException
+        56: dup
+        57: ldc           #67                 // String web request context is unavailable
+        59: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        62: athrow
+      Exception table:
+         from    to  target type
+             7    24    52   Class java/lang/IllegalArgumentException
+             7    24    52   Class java/lang/IllegalStateException
+            25    41    52   Class java/lang/IllegalArgumentException
+            25    41    52   Class java/lang/IllegalStateException
+            42    52    52   Class java/lang/IllegalArgumentException
+            42    52    52   Class java/lang/IllegalStateException
+
+  public static java.util.UUID identify(jakarta.servlet.http.HttpServletRequest, java.util.function.Supplier<java.util.UUID>);
+    Code:
+         0: aload_0
+         1: ldc           #45                 // String request
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #74                 // String identifiers
+        10: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_0
+        15: invokestatic  #31                 // Method existing:(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;
+        18: astore_2
+        19: aload_0
+        20: getstatic     #76                 // Field ID_ATTRIBUTE:Ljava/lang/String;
+        23: invokeinterface #51,  2           // InterfaceMethod jakarta/servlet/http/HttpServletRequest.getAttribute:(Ljava/lang/String;)Ljava/lang/Object;
+        28: astore_3
+        29: goto          44
+        32: astore        4
+        34: new           #65                 // class java/lang/IllegalStateException
+        37: dup
+        38: ldc           #67                 // String web request context is unavailable
+        40: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        43: athrow
+        44: aload_3
+        45: ifnonnull     113
+        48: aload_2
+        49: invokevirtual #79                 // Method java/util/Optional.isPresent:()Z
+        52: ifeq          68
+        55: aload_2
+        56: invokevirtual #83                 // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+        59: checkcast     #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        62: invokevirtual #86                 // Method requestId:()Ljava/util/UUID;
+        65: goto          85
+        68: aload_1
+        69: invokeinterface #89,  1           // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+        74: checkcast     #15                 // class java/util/UUID
+        77: ldc           #7                  // String requestId
+        79: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        82: checkcast     #15                 // class java/util/UUID
+        85: astore        4
+        87: aload_0
+        88: getstatic     #76                 // Field ID_ATTRIBUTE:Ljava/lang/String;
+        91: aload         4
+        93: invokeinterface #93,  3           // InterfaceMethod jakarta/servlet/http/HttpServletRequest.setAttribute:(Ljava/lang/String;Ljava/lang/Object;)V
+        98: goto          143
+       101: astore        6
+       103: new           #65                 // class java/lang/IllegalStateException
+       106: dup
+       107: ldc           #67                 // String web request context is unavailable
+       109: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       112: athrow
+       113: aload_3
+       114: instanceof    #15                 // class java/util/UUID
+       117: ifeq          133
+       120: aload_3
+       121: checkcast     #15                 // class java/util/UUID
+       124: astore        5
+       126: aload         5
+       128: astore        4
+       130: goto          143
+       133: new           #65                 // class java/lang/IllegalStateException
+       136: dup
+       137: ldc           #97                 // String web request identity is unavailable
+       139: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       142: athrow
+       143: aload_2
+       144: invokevirtual #79                 // Method java/util/Optional.isPresent:()Z
+       147: ifeq          178
+       150: aload_2
+       151: invokevirtual #83                 // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+       154: checkcast     #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+       157: invokevirtual #86                 // Method requestId:()Ljava/util/UUID;
+       160: aload         4
+       162: invokevirtual #99                 // Method java/util/UUID.equals:(Ljava/lang/Object;)Z
+       165: ifne          178
+       168: new           #65                 // class java/lang/IllegalStateException
+       171: dup
+       172: ldc           #97                 // String web request identity is unavailable
+       174: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       177: athrow
+       178: aload         4
+       180: areturn
+      Exception table:
+         from    to  target type
+            19    29    32   Class java/lang/IllegalArgumentException
+            19    29    32   Class java/lang/IllegalStateException
+            87    98   101   Class java/lang/IllegalArgumentException
+            87    98   101   Class java/lang/IllegalStateException
+
+  public java.lang.String toString();
+    Code:
+         0: ldc           #103                // String WebRequestContext[REDACTED]
+         2: areturn
+
+  private static java.lang.IllegalStateException lambda$require$0();
+    Code:
+         0: new           #65                 // class java/lang/IllegalStateException
+         3: dup
+         4: ldc           #67                 // String web request context is unavailable
+         6: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+         9: areturn
+
+  static {};
+    Code:
+         0: ldc           #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+         2: invokevirtual #105                // Method java/lang/Class.getName:()Ljava/lang/String;
+         5: putstatic     #47                 // Field ATTRIBUTE:Ljava/lang/String;
+         8: ldc           #18                 // class dev/codex/schubert/nk/web/security/WebRequestContext
+        10: invokevirtual #105                // Method java/lang/Class.getName:()Ljava/lang/String;
+        13: invokedynamic #111,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+        18: putstatic     #76                 // Field ID_ATTRIBUTE:Ljava/lang/String;
+        21: return
+}
+Compiled from "LoginClientAddress.java"
+public final class dev.codex.schubert.nk.web.security.LoginClientAddress extends java.lang.Record {
+  private final java.lang.String value;
+
+  public dev.codex.schubert.nk.web.security.LoginClientAddress(java.lang.String);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+         4: aload_1
+         5: ldc           #7                  // String value
+         7: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        10: pop
+        11: aload_1
+        12: invokestatic  #15                 // Method java/net/InetAddress.ofLiteral:(Ljava/lang/String;)Ljava/net/InetAddress;
+        15: invokevirtual #21                 // Method java/net/InetAddress.getHostAddress:()Ljava/lang/String;
+        18: ldc           #25                 // String %
+        20: invokevirtual #27                 // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+        23: ifne          35
+        26: aload_1
+        27: invokevirtual #33                 // Method java/lang/String.length:()I
+        30: bipush        45
+        32: if_icmple     45
+        35: new           #37                 // class java/lang/IllegalArgumentException
+        38: dup
+        39: ldc           #39                 // String invalid IP
+        41: invokespecial #41                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        44: athrow
+        45: goto          59
+        48: astore_2
+        49: new           #37                 // class java/lang/IllegalArgumentException
+        52: dup
+        53: ldc           #44                 // String login client address is invalid
+        55: invokespecial #41                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        58: athrow
+        59: aload_0
+        60: aload_1
+        61: putfield      #46                 // Field value:Ljava/lang/String;
+        64: return
+      Exception table:
+         from    to  target type
+            11    45    48   Class java/lang/IllegalArgumentException
+
+  public java.lang.String toString();
+    Code:
+         0: ldc           #51                 // String LoginClientAddress[REDACTED]
+         2: areturn
+
+  public final int hashCode();
+    Code:
+         0: aload_0
+         1: invokedynamic #53,  0             // InvokeDynamic #0:hashCode:(Ldev/codex/schubert/nk/web/security/LoginClientAddress;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #57,  0             // InvokeDynamic #0:equals:(Ldev/codex/schubert/nk/web/security/LoginClientAddress;Ljava/lang/Object;)Z
+         7: ireturn
+
+  public java.lang.String value();
+    Code:
+         0: aload_0
+         1: getfield      #46                 // Field value:Ljava/lang/String;
+         4: areturn
+}
+Compiled from "MqLoginLockedException.java"
+public final class dev.codex.schubert.nk.web.security.MqLoginLockedException extends org.springframework.security.authentication.LockedException {
+  private static final long serialVersionUID;
+
+  private final int lockDelaySeconds;
+
+  public dev.codex.schubert.nk.web.security.MqLoginLockedException(int);
+    Code:
+         0: aload_0
+         1: ldc           #1                  // String login temporarily locked
+         3: invokespecial #3                  // Method org/springframework/security/authentication/LockedException."<init>":(Ljava/lang/String;)V
+         6: iload_1
+         7: iflt          17
+        10: iload_1
+        11: sipush        900
+        14: if_icmple     27
+        17: new           #9                  // class java/lang/IllegalArgumentException
+        20: dup
+        21: ldc           #11                 // String login lock delay is outside 0..900
+        23: invokespecial #13                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        26: athrow
+        27: aload_0
+        28: iload_1
+        29: putfield      #14                 // Field lockDelaySeconds:I
+        32: return
+
+  public int retryAfterSeconds();
+    Code:
+         0: aload_0
+         1: getfield      #14                 // Field lockDelaySeconds:I
+         4: ireturn
+}
+Compiled from "LoginFormRejectedException.java"
+public final class dev.codex.schubert.nk.web.security.LoginFormRejectedException extends org.springframework.security.core.AuthenticationException {
+  private static final long serialVersionUID;
+
+  public dev.codex.schubert.nk.web.security.LoginFormRejectedException();
+    Code:
+         0: aload_0
+         1: ldc           #1                  // String login form is invalid
+         3: invokespecial #3                  // Method org/springframework/security/core/AuthenticationException."<init>":(Ljava/lang/String;)V
+         6: return
+}
+Compiled from "CaddyRequestRejectedException.java"
+public final class dev.codex.schubert.nk.web.security.CaddyRequestRejectedException extends org.springframework.security.core.AuthenticationException {
+  private static final long serialVersionUID;
+
+  public dev.codex.schubert.nk.web.security.CaddyRequestRejectedException();
+    Code:
+         0: aload_0
+         1: ldc           #1                  // String request proxy is invalid
+         3: invokespecial #3                  // Method org/springframework/security/core/AuthenticationException."<init>":(Ljava/lang/String;)V
+         6: return
+}
+Compiled from "WebSecurityAudit.java"
+public final class dev.codex.schubert.nk.web.logging.WebSecurityAudit {
+  private static final int MAXIMUM_IP_LITERAL_CHARACTERS;
+
+  private static final java.lang.String LITERAL_DENIED;
+
+  private static final java.lang.String LITERAL_AUTHORIZATION_DENIED;
+
+  private static final java.util.Set<dev.codex.schubert.nk.web.logging.WebSecurityAudit$Event> LOGIN;
+
+  private static final java.util.Set<dev.codex.schubert.nk.web.logging.WebSecurityAudit$Event> LOGOUT;
+
+  private static final java.time.format.DateTimeFormatter TIMESTAMP;
+
+  private final java.lang.System$Logger logger;
+
+  private final java.time.Clock clock;
+
+  private final java.lang.String appVersion;
+
+  private final java.lang.String configVersion;
+
+  public dev.codex.schubert.nk.web.logging.WebSecurityAudit(java.lang.System$Logger, java.time.Clock, java.lang.String, java.lang.String);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: ldc           #7                  // String logger
+         8: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        11: checkcast     #15                 // class java/lang/System$Logger
+        14: putfield      #17                 // Field logger:Ljava/lang/System$Logger;
+        17: aload_0
+        18: aload_2
+        19: ldc           #22                 // String clock
+        21: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        24: checkcast     #24                 // class java/time/Clock
+        27: putfield      #26                 // Field clock:Ljava/time/Clock;
+        30: aload_0
+        31: aload_3
+        32: invokestatic  #29                 // Method version:(Ljava/lang/String;)Ljava/lang/String;
+        35: putfield      #33                 // Field appVersion:Ljava/lang/String;
+        38: aload_0
+        39: aload         4
+        41: invokestatic  #29                 // Method version:(Ljava/lang/String;)Ljava/lang/String;
+        44: putfield      #37                 // Field configVersion:Ljava/lang/String;
+        47: return
+
+  public void record(java.util.UUID, dev.codex.schubert.nk.web.logging.WebSecurityAudit$Event, java.util.Optional<java.lang.String>, java.util.Optional<dev.codex.schubert.nk.web.session.SessionPrincipal>, int, dev.codex.schubert.nk.web.logging.WebSecurityAudit$Route);
+    Code:
+         0: aload_1
+         1: ldc           #40                 // String requestId
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_2
+         8: ldc           #42                 // String event
+        10: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_3
+        15: ldc           #44                 // String remoteAddress
+        17: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: aload         4
+        23: ldc           #46                 // String actor
+        25: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        28: pop
+        29: aload         6
+        31: ldc           #48                 // String route
+        33: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        36: pop
+        37: iload         5
+        39: iflt          212
+        42: iload         5
+        44: sipush        900
+        47: if_icmpgt     212
+        50: aload_2
+        51: getstatic     #50                 // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.LOGIN_LOCKED:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;
+        54: if_acmpeq     62
+        57: iload         5
+        59: ifne          212
+        62: aload_2
+        63: getstatic     #56                 // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.LOGIN_SUCCEEDED:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;
+        66: if_acmpne     77
+        69: aload         4
+        71: invokevirtual #59                 // Method java/util/Optional.isEmpty:()Z
+        74: ifne          212
+        77: aload_2
+        78: getstatic     #65                 // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.AUTHENTICATION_REQUIRED:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;
+        81: if_acmpne     92
+        84: aload         4
+        86: invokevirtual #68                 // Method java/util/Optional.isPresent:()Z
+        89: ifne          212
+        92: aload_2
+        93: getstatic     #71                 // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.LOGIN_FAILED:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;
+        96: if_acmpeq     106
+        99: aload_2
+       100: getstatic     #50                 // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.LOGIN_LOCKED:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;
+       103: if_acmpne     114
+       106: aload         4
+       108: invokevirtual #68                 // Method java/util/Optional.isPresent:()Z
+       111: ifne          212
+       114: getstatic     #74                 // Field LOGIN:Ljava/util/Set;
+       117: aload_2
+       118: invokeinterface #78,  2           // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+       123: ifeq          133
+       126: aload_3
+       127: invokevirtual #59                 // Method java/util/Optional.isEmpty:()Z
+       130: ifne          212
+       133: getstatic     #74                 // Field LOGIN:Ljava/util/Set;
+       136: aload_2
+       137: invokeinterface #78,  2           // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+       142: ifeq          153
+       145: aload         6
+       147: getstatic     #84                 // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Route.LOGIN:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Route;
+       150: if_acmpne     212
+       153: getstatic     #89                 // Field LOGOUT:Ljava/util/Set;
+       156: aload_2
+       157: invokeinterface #78,  2           // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+       162: ifeq          173
+       165: aload         4
+       167: invokevirtual #59                 // Method java/util/Optional.isEmpty:()Z
+       170: ifne          212
+       173: getstatic     #89                 // Field LOGOUT:Ljava/util/Set;
+       176: aload_2
+       177: invokeinterface #78,  2           // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+       182: ifeq          192
+       185: aload_3
+       186: invokevirtual #59                 // Method java/util/Optional.isEmpty:()Z
+       189: ifne          212
+       192: getstatic     #89                 // Field LOGOUT:Ljava/util/Set;
+       195: aload_2
+       196: invokeinterface #78,  2           // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+       201: ifeq          222
+       204: aload         6
+       206: getstatic     #92                 // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Route.LOGOUT:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Route;
+       209: if_acmpeq     222
+       212: new           #94                 // class java/lang/IllegalArgumentException
+       215: dup
+       216: ldc           #96                 // String security audit metadata is invalid
+       218: invokespecial #98                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+       221: athrow
+       222: aload_3
+       223: invokedynamic #101,  0            // InvokeDynamic #0:apply:()Ljava/util/function/Function;
+       228: invokevirtual #105                // Method java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+       231: astore        7
+       233: new           #109                // class com/google/gson/JsonObject
+       236: dup
+       237: invokespecial #111                // Method com/google/gson/JsonObject."<init>":()V
+       240: astore        8
+       242: aload         8
+       244: ldc           #112                // String timestamp
+       246: getstatic     #114                // Field TIMESTAMP:Ljava/time/format/DateTimeFormatter;
+       249: aload_0
+       250: getfield      #26                 // Field clock:Ljava/time/Clock;
+       253: invokevirtual #118                // Method java/time/Clock.instant:()Ljava/time/Instant;
+       256: ldc           #122                // String instant
+       258: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+       261: checkcast     #123                // class java/time/temporal/TemporalAccessor
+       264: invokevirtual #125                // Method java/time/format/DateTimeFormatter.format:(Ljava/time/temporal/TemporalAccessor;)Ljava/lang/String;
+       267: invokevirtual #131                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       270: aload         8
+       272: ldc           #135                // String level
+       274: aload_2
+       275: getfield      #137                // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.level:Ljava/lang/System$Logger$Level;
+       278: getstatic     #140                // Field java/lang/System$Logger$Level.INFO:Ljava/lang/System$Logger$Level;
+       281: if_acmpne     289
+       284: ldc           #145                // String INFO
+       286: goto          291
+       289: ldc           #146                // String WARN
+       291: invokevirtual #131                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       294: aload         8
+       296: ldc           #148                // String service
+       298: ldc           #150                // String WEB
+       300: invokevirtual #131                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       303: aload         8
+       305: ldc           #152                // String appVersion
+       307: aload_0
+       308: getfield      #33                 // Field appVersion:Ljava/lang/String;
+       311: invokevirtual #131                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       314: aload         8
+       316: ldc           #153                // String configVersion
+       318: aload_0
+       319: getfield      #37                 // Field configVersion:Ljava/lang/String;
+       322: invokevirtual #131                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       325: aload         8
+       327: ldc           #154                // String category
+       329: ldc           #156                // String SECURITY
+       331: invokevirtual #131                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       334: aload         8
+       336: ldc           #158                // String action
+       338: aload_2
+       339: getfield      #160                // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.action:Ljava/lang/String;
+       342: invokevirtual #131                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       345: aload         8
+       347: ldc           #162                // String outcome
+       349: aload_2
+       350: getfield      #164                // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.outcome:Ljava/lang/String;
+       353: invokevirtual #131                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       356: aload         8
+       358: ldc           #40                 // String requestId
+       360: aload_1
+       361: invokevirtual #166                // Method java/util/UUID.toString:()Ljava/lang/String;
+       364: invokevirtual #131                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       367: aload         4
+       369: aload         8
+       371: invokedynamic #172,  0            // InvokeDynamic #1:accept:(Lcom/google/gson/JsonObject;)Ljava/util/function/Consumer;
+       376: invokevirtual #176                // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+       379: aload         7
+       381: aload         8
+       383: invokedynamic #180,  0            // InvokeDynamic #2:accept:(Lcom/google/gson/JsonObject;)Ljava/util/function/Consumer;
+       388: invokevirtual #176                // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+       391: new           #109                // class com/google/gson/JsonObject
+       394: dup
+       395: invokespecial #111                // Method com/google/gson/JsonObject."<init>":()V
+       398: astore        9
+       400: aload         9
+       402: ldc           #181                // String reason
+       404: aload_2
+       405: getfield      #183                // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.reason:Ljava/lang/String;
+       408: invokevirtual #131                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       411: aload         9
+       413: ldc           #48                 // String route
+       415: aload         6
+       417: getfield      #185                // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Route.template:Ljava/lang/String;
+       420: invokevirtual #131                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       423: aload         9
+       425: ldc           #188                // String targetType
+       427: ldc           #190                // String HTTP_REQUEST
+       429: invokevirtual #131                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       432: aload_2
+       433: getstatic     #50                 // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.LOGIN_LOCKED:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;
+       436: if_acmpne     451
+       439: aload         9
+       441: ldc           #192                // String retryAfterSeconds
+       443: iload         5
+       445: invokestatic  #194                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       448: invokevirtual #200                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/Number;)V
+       451: aload         8
+       453: ldc           #203                // String details
+       455: aload         9
+       457: invokevirtual #205                // Method com/google/gson/JsonObject.add:(Ljava/lang/String;Lcom/google/gson/JsonElement;)V
+       460: aload_0
+       461: getfield      #17                 // Field logger:Ljava/lang/System$Logger;
+       464: aload_2
+       465: getfield      #137                // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.level:Ljava/lang/System$Logger$Level;
+       468: aload         8
+       470: invokevirtual #209                // Method com/google/gson/JsonObject.toString:()Ljava/lang/String;
+       473: invokeinterface #210,  3          // InterfaceMethod java/lang/System$Logger.log:(Ljava/lang/System$Logger$Level;Ljava/lang/String;)V
+       478: return
+
+  private static java.lang.String version(java.lang.String);
+    Code:
+         0: aload_0
+         1: ldc           #214                // String version
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_0
+         8: ldc           #215                // String [A-Za-z0-9][A-Za-z0-9._+\\-]{0,63}
+        10: invokevirtual #217                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+        13: ifne          26
+        16: new           #94                 // class java/lang/IllegalArgumentException
+        19: dup
+        20: ldc           #223                // String security audit version is invalid
+        22: invokespecial #98                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        25: athrow
+        26: aload_0
+        27: areturn
+
+  private static java.lang.String canonicalAddress(java.lang.String);
+    Code:
+         0: aload_0
+         1: invokevirtual #225                // Method java/lang/String.length:()I
+         4: bipush        45
+         6: if_icmple     17
+         9: new           #94                 // class java/lang/IllegalArgumentException
+        12: dup
+        13: invokespecial #229                // Method java/lang/IllegalArgumentException."<init>":()V
+        16: athrow
+        17: aload_0
+        18: invokestatic  #230                // Method java/net/InetAddress.ofLiteral:(Ljava/lang/String;)Ljava/net/InetAddress;
+        21: invokevirtual #236                // Method java/net/InetAddress.getHostAddress:()Ljava/lang/String;
+        24: astore_1
+        25: aload_1
+        26: ldc           #239                // String %
+        28: invokevirtual #241                // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+        31: ifeq          42
+        34: new           #94                 // class java/lang/IllegalArgumentException
+        37: dup
+        38: invokespecial #229                // Method java/lang/IllegalArgumentException."<init>":()V
+        41: athrow
+        42: aload_1
+        43: areturn
+        44: astore_1
+        45: new           #94                 // class java/lang/IllegalArgumentException
+        48: dup
+        49: ldc           #244                // String security audit address is invalid
+        51: invokespecial #98                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        54: athrow
+      Exception table:
+         from    to  target type
+             0    43    44   Class java/lang/IllegalArgumentException
+
+  private static void lambda$record$1(com.google.gson.JsonObject, java.lang.String);
+    Code:
+         0: aload_0
+         1: ldc           #44                 // String remoteAddress
+         3: aload_1
+         4: invokevirtual #131                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+         7: return
+
+  private static void lambda$record$0(com.google.gson.JsonObject, dev.codex.schubert.nk.web.session.SessionPrincipal);
+    Code:
+         0: aload_0
+         1: ldc           #246                // String actorUsername
+         3: aload_1
+         4: invokevirtual #248                // Method dev/codex/schubert/nk/web/session/SessionPrincipal.username:()Ljava/lang/String;
+         7: ldc           #253                // String [\\r\\n\\t\\u2028\\u2029]
+         9: ldc           #255                // String
+        11: invokevirtual #257                // Method java/lang/String.replaceAll:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        14: invokevirtual #131                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+        17: aload_0
+        18: ldc_w         #261                // String actorRole
+        21: aload_1
+        22: invokevirtual #263                // Method dev/codex/schubert/nk/web/session/SessionPrincipal.role:()Ldev/codex/schubert/nk/protocol/layout/semantic/UserRole;
+        25: invokevirtual #267                // Method dev/codex/schubert/nk/protocol/layout/semantic/UserRole.name:()Ljava/lang/String;
+        28: invokevirtual #131                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+        31: return
+
+  static {};
+    Code:
+         0: getstatic     #56                 // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.LOGIN_SUCCEEDED:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;
+         3: getstatic     #71                 // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.LOGIN_FAILED:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;
+         6: getstatic     #50                 // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.LOGIN_LOCKED:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;
+         9: invokestatic  #272                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+        12: putstatic     #74                 // Field LOGIN:Ljava/util/Set;
+        15: getstatic     #276                // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.LOGOUT_SUCCEEDED:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;
+        18: getstatic     #279                // Field dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.LOGOUT_REVOCATION_QUEUED:Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;
+        21: invokestatic  #282                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+        24: putstatic     #89                 // Field LOGOUT:Ljava/util/Set;
+        27: new           #285                // class java/time/format/DateTimeFormatterBuilder
+        30: dup
+        31: invokespecial #287                // Method java/time/format/DateTimeFormatterBuilder."<init>":()V
+        34: iconst_3
+        35: invokevirtual #288                // Method java/time/format/DateTimeFormatterBuilder.appendInstant:(I)Ljava/time/format/DateTimeFormatterBuilder;
+        38: getstatic     #292                // Field java/util/Locale.ROOT:Ljava/util/Locale;
+        41: invokevirtual #298                // Method java/time/format/DateTimeFormatterBuilder.toFormatter:(Ljava/util/Locale;)Ljava/time/format/DateTimeFormatter;
+        44: putstatic     #114                // Field TIMESTAMP:Ljava/time/format/DateTimeFormatter;
+        47: return
+}

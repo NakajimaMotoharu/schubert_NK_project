@@ -1,0 +1,183 @@
+{
+  "actualExit": 0,
+  "metadataOnly": true,
+  "bug": "BUG-2371",
+  "horizontal": "YKT-2116",
+  "fixedConsoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+  "currentStaticReview": {
+    "path": "evidence/01_PT/015_NK-WEB-001/input/001_login_failure_sdk_static_review.json",
+    "sha256": "79633848d5904d37f1c6f8cd13ca5f0b55757dbba3014608ac659fc1da472093"
+  },
+  "rows": [
+    {
+      "originalReview": {
+        "path": "evidence/01_PT/007_NK-AUT-001/input/007_auth_jdbc_jdk_static_review.json",
+        "sha256": "3bca57089bcedf40a126f7e3f3d61d64a3b2b55c1ed781f4ab43e3fa4430da6b"
+      },
+      "originalSource": "f16526371daf0352925fda5c9686425a64e4a40b",
+      "originalRun": "PG20840",
+      "initialization": {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20846-auth-jdbc-jdk-static-review-v1/original-class-init.log",
+        "sha256": "d3672dbab80aa458497c6ee856e93e8fb03829dc5a846430268fcdec0e6feeea"
+      },
+      "driverManagerBeforeFirstProductInitialization": true,
+      "context": [
+        "[0.230s][info][class,init] 1179 Initializing 'org/junit/platform/console/shadow/picocli/CommandLine$BuiltIn$ISO8601TimeConverter'(no method) (0x000000003e06c4d8) by thread \"main\"",
+        "[0.231s][info][class,init] Start class verification for: java.sql.Wrapper",
+        "[0.231s][info][class,init] End class verification for: java.sql.Wrapper",
+        "[0.231s][info][class,init] Start class verification for: java.sql.Connection",
+        "[0.233s][info][class,init] End class verification for: java.sql.Connection",
+        "[0.233s][info][class,init] 1180 Initializing 'java/sql/Connection'(no method) (0x000000003e0704f8) by thread \"main\"",
+        "[0.235s][info][class,init] Start class verification for: java.sql.DriverManager",
+        "[0.235s][info][class,init] End class verification for: java.sql.DriverManager",
+        "[0.235s][info][class,init] 1181 Initializing 'java/sql/DriverManager' (0x000000003e071000) by thread \"main\"",
+        "[0.236s][info][class,init] 1182 Initializing 'java/lang/invoke/LambdaForm$DMH+0x000000003e071800' (0x000000003e071800) by thread \"main\"",
+        "[0.236s][info][class,init] 1183 Initializing 'java/lang/invoke/ConstantBootstraps'(no method) (0x000000003e01d378) by thread \"main\"",
+        "[0.236s][info][class,init] 1184 Initializing 'java/lang/invoke/LambdaForm$MH+0x000000003e071c00' (0x000000003e071c00) by thread \"main\"",
+        "[0.237s][info][class,init] Start class verification for: org.junit.platform.console.shadow.picocli.CommandLine$BuiltIn$ReflectionConverter"
+      ],
+      "qualificationDelta": 0,
+      "correction": "Observed startup registration and current same fixed Console/JDK bytecode explain initialization; original SQLException getter is a valid possible JDK call path but not the sole witnessed cause. Original result/source/checker/artifacts preserved.",
+      "originalProducerExplicitConsolePinVerified": true,
+      "originalJdkBytesSameAsCurrentStaticReview": true,
+      "originalSourceProducerSha256": "605c7156506230343fba548fe0a2e0fe349442675b5d5786f5ecd4eb6a2e1ee0"
+    },
+    {
+      "originalReview": {
+        "path": "evidence/01_PT/007_NK-AUT-001/input/009_admin_prelude_jdk_static_review.json",
+        "sha256": "4d98870f33324f1378a61e67d933bc36dc83dfe5440d0125d9e0490c19444caf"
+      },
+      "originalSource": "14cb941d08f6fde9f9cb5d6aac2d99aabb85db29",
+      "originalRun": "PG20874",
+      "initialization": {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/original-class-init.stdout",
+        "sha256": "2f006fdc02ba42ae790d827f41c6f0ab5f7ddc18e03beea6db48d3fbcc40c2e0"
+      },
+      "driverManagerBeforeFirstProductInitialization": true,
+      "context": [
+        "[0.259s][info][class,init] 1179 Initializing 'org/junit/platform/console/shadow/picocli/CommandLine$BuiltIn$ISO8601TimeConverter'(no method) (0x000000009706c4d8) by thread \"main\"",
+        "[0.260s][info][class,init] Start class verification for: java.sql.Wrapper",
+        "[0.260s][info][class,init] End class verification for: java.sql.Wrapper",
+        "[0.260s][info][class,init] Start class verification for: java.sql.Connection",
+        "[0.261s][info][class,init] End class verification for: java.sql.Connection",
+        "[0.262s][info][class,init] 1180 Initializing 'java/sql/Connection'(no method) (0x00000000970704f8) by thread \"main\"",
+        "[0.264s][info][class,init] Start class verification for: java.sql.DriverManager",
+        "[0.264s][info][class,init] End class verification for: java.sql.DriverManager",
+        "[0.264s][info][class,init] 1181 Initializing 'java/sql/DriverManager' (0x0000000097071000) by thread \"main\"",
+        "[0.265s][info][class,init] 1182 Initializing 'java/lang/invoke/LambdaForm$DMH+0x0000000097071800' (0x0000000097071800) by thread \"main\"",
+        "[0.265s][info][class,init] 1183 Initializing 'java/lang/invoke/ConstantBootstraps'(no method) (0x000000009701d378) by thread \"main\"",
+        "[0.265s][info][class,init] 1184 Initializing 'java/lang/invoke/LambdaForm$MH+0x0000000097071c00' (0x0000000097071c00) by thread \"main\"",
+        "[0.267s][info][class,init] Start class verification for: org.junit.platform.console.shadow.picocli.CommandLine$BuiltIn$ReflectionConverter"
+      ],
+      "qualificationDelta": 0,
+      "correction": "Observed startup registration and current same fixed Console/JDK bytecode explain initialization; original SQLException getter is a valid possible JDK call path but not the sole witnessed cause. Original result/source/checker/artifacts preserved.",
+      "originalProducerExplicitConsolePinVerified": true,
+      "originalJdkBytesSameAsCurrentStaticReview": true,
+      "originalSourceProducerSha256": "ad088d97a44221c77af9cc6d9570250cf4c20d2f87a34b6758018d87e91deeeb"
+    },
+    {
+      "originalReview": {
+        "path": "evidence/01_PT/007_NK-AUT-001/input/011_session_issue_jdk_static_review.json",
+        "sha256": "aa52a0773351c57693d4abf583e0d51e4dc4e0923eded84a97237a55c6c7b20f"
+      },
+      "originalSource": "5720b037554171d092eddabcf0a04bfe95897350",
+      "originalRun": "PG20914",
+      "initialization": {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/original-class-init.stdout",
+        "sha256": "6ae8d73f269eaa51c5ad8bf901860349e42b22032b5eaffaa3eb1ff6503cd46d"
+      },
+      "driverManagerBeforeFirstProductInitialization": true,
+      "context": [
+        "[0.241s][info][class,init] 1179 Initializing 'org/junit/platform/console/shadow/picocli/CommandLine$BuiltIn$ISO8601TimeConverter'(no method) (0x000000007a06c4d8) by thread \"main\"",
+        "[0.242s][info][class,init] Start class verification for: java.sql.Wrapper",
+        "[0.242s][info][class,init] End class verification for: java.sql.Wrapper",
+        "[0.242s][info][class,init] Start class verification for: java.sql.Connection",
+        "[0.243s][info][class,init] End class verification for: java.sql.Connection",
+        "[0.243s][info][class,init] 1180 Initializing 'java/sql/Connection'(no method) (0x000000007a0704f8) by thread \"main\"",
+        "[0.246s][info][class,init] Start class verification for: java.sql.DriverManager",
+        "[0.246s][info][class,init] End class verification for: java.sql.DriverManager",
+        "[0.246s][info][class,init] 1181 Initializing 'java/sql/DriverManager' (0x000000007a071000) by thread \"main\"",
+        "[0.246s][info][class,init] 1182 Initializing 'java/lang/invoke/LambdaForm$DMH+0x000000007a071800' (0x000000007a071800) by thread \"main\"",
+        "[0.246s][info][class,init] 1183 Initializing 'java/lang/invoke/ConstantBootstraps'(no method) (0x000000007a01d378) by thread \"main\"",
+        "[0.247s][info][class,init] 1184 Initializing 'java/lang/invoke/LambdaForm$MH+0x000000007a071c00' (0x000000007a071c00) by thread \"main\"",
+        "[0.247s][info][class,init] Start class verification for: org.junit.platform.console.shadow.picocli.CommandLine$BuiltIn$ReflectionConverter"
+      ],
+      "qualificationDelta": 0,
+      "correction": "Observed startup registration and current same fixed Console/JDK bytecode explain initialization; original SQLException getter is a valid possible JDK call path but not the sole witnessed cause. Original result/source/checker/artifacts preserved.",
+      "originalProducerExplicitConsolePinVerified": true,
+      "originalJdkBytesSameAsCurrentStaticReview": true,
+      "originalSourceProducerSha256": "9d99213120dbf970cc86077196b68751e405c04b8c90758d7b08377197d43c48"
+    },
+    {
+      "originalReview": {
+        "path": "evidence/01_PT/007_NK-AUT-001/input/014_session_revocation_jdk_static_review.json",
+        "sha256": "49ce73b6361c9e1bcd3fc7c7fb4ebb2666b6f32c839823a2f6abfec8de6614e7"
+      },
+      "originalSource": "3a2c29bd755f0ed6158464ad3b5715bc51be4617",
+      "originalRun": "PG20958",
+      "initialization": {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20960-session-revocation-jdk-static-review-v1/original-class-init.stdout",
+        "sha256": "73e9a324651798bfddabc7bc394508225d3b7b47fc6ff770705cc9d380918f01"
+      },
+      "driverManagerBeforeFirstProductInitialization": true,
+      "context": [
+        "[0.232s][info][class,init] 1179 Initializing 'org/junit/platform/console/shadow/picocli/CommandLine$BuiltIn$ISO8601TimeConverter'(no method) (0x000000008706c4e0) by thread \"main\"",
+        "[0.233s][info][class,init] Start class verification for: java.sql.Wrapper",
+        "[0.233s][info][class,init] End class verification for: java.sql.Wrapper",
+        "[0.233s][info][class,init] Start class verification for: java.sql.Connection",
+        "[0.234s][info][class,init] End class verification for: java.sql.Connection",
+        "[0.234s][info][class,init] 1180 Initializing 'java/sql/Connection'(no method) (0x00000000870704f8) by thread \"main\"",
+        "[0.236s][info][class,init] Start class verification for: java.sql.DriverManager",
+        "[0.237s][info][class,init] End class verification for: java.sql.DriverManager",
+        "[0.237s][info][class,init] 1181 Initializing 'java/sql/DriverManager' (0x0000000087071000) by thread \"main\"",
+        "[0.237s][info][class,init] 1182 Initializing 'java/lang/invoke/LambdaForm$DMH+0x0000000087071800' (0x0000000087071800) by thread \"main\"",
+        "[0.237s][info][class,init] 1183 Initializing 'java/lang/invoke/ConstantBootstraps'(no method) (0x000000008701d378) by thread \"main\"",
+        "[0.237s][info][class,init] 1184 Initializing 'java/lang/invoke/LambdaForm$MH+0x0000000087071c00' (0x0000000087071c00) by thread \"main\"",
+        "[0.239s][info][class,init] Start class verification for: org.junit.platform.console.shadow.picocli.CommandLine$BuiltIn$ReflectionConverter"
+      ],
+      "qualificationDelta": 0,
+      "correction": "Observed startup registration and current same fixed Console/JDK bytecode explain initialization; original SQLException getter is a valid possible JDK call path but not the sole witnessed cause. Original result/source/checker/artifacts preserved.",
+      "originalProducerExplicitConsolePinVerified": true,
+      "originalJdkBytesSameAsCurrentStaticReview": true,
+      "originalSourceProducerSha256": "b719f08178ef514b82e0761966416ad8c9eb56d805c857f96560cd3822e1f32e"
+    },
+    {
+      "originalReview": {
+        "path": "evidence/01_PT/006_NK-MSG-002/input/001_outbox_jdbc_jdk_static_review.json",
+        "sha256": "32f9cfd71d76e08f3a2a0df89130802511cf5a4e83eafbe5cf4eebe59225949c"
+      },
+      "originalSource": "03eeef1a3d6cfb93000641bcb87f83507a1f3f4d",
+      "originalRun": "PG21014",
+      "initialization": {
+        "path": "evidence/01_PT/006_NK-MSG-002/evidence/PG21016-outbox-jdbc-jdk-static-review-v1/original-class-init.stdout",
+        "sha256": "15cbce849350fc2e1bf2cc063510ba8bcf227aae24d30652f3b3591f1b8a270b"
+      },
+      "driverManagerBeforeFirstProductInitialization": true,
+      "context": [
+        "[0.229s][info][class,init] 1179 Initializing 'org/junit/platform/console/shadow/picocli/CommandLine$BuiltIn$ISO8601TimeConverter'(no method) (0x000000008306c4d8) by thread \"main\"",
+        "[0.230s][info][class,init] Start class verification for: java.sql.Wrapper",
+        "[0.230s][info][class,init] End class verification for: java.sql.Wrapper",
+        "[0.230s][info][class,init] Start class verification for: java.sql.Connection",
+        "[0.232s][info][class,init] End class verification for: java.sql.Connection",
+        "[0.232s][info][class,init] 1180 Initializing 'java/sql/Connection'(no method) (0x00000000830704f8) by thread \"main\"",
+        "[0.235s][info][class,init] Start class verification for: java.sql.DriverManager",
+        "[0.236s][info][class,init] End class verification for: java.sql.DriverManager",
+        "[0.236s][info][class,init] 1181 Initializing 'java/sql/DriverManager' (0x0000000083071000) by thread \"main\"",
+        "[0.236s][info][class,init] 1182 Initializing 'java/lang/invoke/LambdaForm$DMH+0x0000000083071800' (0x0000000083071800) by thread \"main\"",
+        "[0.236s][info][class,init] 1183 Initializing 'java/lang/invoke/ConstantBootstraps'(no method) (0x000000008301d378) by thread \"main\"",
+        "[0.237s][info][class,init] 1184 Initializing 'java/lang/invoke/LambdaForm$MH+0x0000000083071c00' (0x0000000083071c00) by thread \"main\"",
+        "[0.238s][info][class,init] Start class verification for: org.junit.platform.console.shadow.picocli.CommandLine$BuiltIn$ReflectionConverter"
+      ],
+      "qualificationDelta": 0,
+      "correction": "Observed startup registration and current same fixed Console/JDK bytecode explain initialization; original SQLException getter is a valid possible JDK call path but not the sole witnessed cause. Original result/source/checker/artifacts preserved.",
+      "originalProducerExplicitConsolePinVerified": true,
+      "originalJdkBytesSameAsCurrentStaticReview": true,
+      "originalSourceProducerSha256": "3b1094db03339e829389d1e0832bceeab6b90a6464b95a3bab837904cc5e536c"
+    }
+  ],
+  "productTestsReexecuted": 0,
+  "newProductTests": 0,
+  "newAcceptance": 0,
+  "oldCostsReallocated": false,
+  "formalUpdated": false
+}
