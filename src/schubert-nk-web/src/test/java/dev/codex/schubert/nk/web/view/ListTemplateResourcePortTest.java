@@ -1,0 +1,396 @@
+package dev.codex.schubert.nk.web.view;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.junit.jupiter.api.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockServletContext;
+import org.thymeleaf.context.WebContext;
+import org.thymeleaf.spring6.SpringTemplateEngine;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.thymeleaf.web.servlet.JakartaServletWebApplication;
+
+/** UI236/SS313/PT-WEB-LDOM001..012: exact HTML resources, literal map fixtures, no app Java. */
+final class ListTemplateResourcePortTest {
+  private static final String ANSWERED_STATE = "ANSWERED";
+  private static final String ERROR_STATE = "ERROR";
+  private static final String INVALID_MESSAGE = "入力項目を確認してください。";
+
+  private static final String QUESTIONS = "questions/list";
+  private static final String NOTIFICATIONS = "notifications/list";
+  private static final String USERNAME = "reader";
+  private static final String KEY_PAGE = "page";
+  private static final String KEY_ADMIN = "admin";
+  private static final String KEY_VALUES = "values";
+  private static final String KEY_USERNAME = "username";
+  private static final String KEY_STATE = "state";
+  private static final String KEY_TYPE = "type";
+  private static final String KEY_FROM = "from";
+  private static final String KEY_TO = "to";
+  private static final String KEY_KEYWORD = "keyword";
+  private static final String ATTR_HREF = "href";
+  private static final String ATTR_VALUE = "value";
+  private static final String ATTR_SELECTED = "selected";
+  private static final String ATTR_HIDDEN = "hidden";
+  private static final String RECEIPT = "0".repeat(26);
+  private static final String DATE = "2026-11-01";
+  private static final String JST = "2026-11-01 09:00:00";
+  private static final String ATTACK_TEXT =
+      "<img src=x onerror='alert(1)'> & <script>example</script>";
+  private static final String Q_ROW = ".question-row";
+  private static final String N_ROW = ".notification-row";
+  private static final String Q_ERRORS = "#question-errors";
+  private static final String N_ERRORS = "#notification-errors";
+  private static final String COUNT = ".count";
+  private static final String EMPTY_TEXT = "該当するデータはありません";
+
+  private static Map<String, Object> qrow(long id, String state, String label, String text) {
+    return Map.ofEntries(
+        Map.entry("id", id),
+        Map.entry("receiptId", RECEIPT),
+        Map.entry(KEY_USERNAME, USERNAME),
+        Map.entry("summary", text),
+        Map.entry(KEY_STATE, state),
+        Map.entry("stateLabel", label),
+        Map.entry("submittedAt", JST),
+        Map.entry("answeredAt", state.equals(ANSWERED_STATE) ? "2026-11-01 09:00:01" : ""),
+        Map.entry("detailHref", "/questions/" + id),
+        Map.entry("deleteHref", "/questions/" + id + "#delete-confirm"));
+  }
+
+  private static Map<String, Object> nrow(long id, String type, String text) {
+    return Map.ofEntries(
+        Map.entry("id", id),
+        Map.entry("receiptId", RECEIPT),
+        Map.entry(KEY_TYPE, type),
+        Map.entry(KEY_STATE, ERROR_STATE),
+        Map.entry("submittedAt", JST),
+        Map.entry("lastUpdatedAt", "2026-11-01 09:00:01"),
+        Map.entry("summary", text),
+        Map.entry("deleted", text.equals("削除済み")),
+        Map.entry("detailHref", "/notifications/" + id));
+  }
+
+  private static Map<String, String> values() {
+    return new HashMap<>(
+        Map.of(
+            KEY_KEYWORD,
+            "",
+            KEY_USERNAME,
+            "",
+            KEY_STATE,
+            "",
+            KEY_TYPE,
+            "",
+            KEY_FROM,
+            "",
+            KEY_TO,
+            ""));
+  }
+
+  private static Map<String, Object> model(
+      boolean admin,
+      Map<String, String> values,
+      Map<String, String> issues,
+      List<Map<String, Object>> rows,
+      long total,
+      int page,
+      int pages,
+      Optional<String> previous,
+      Optional<String> next) {
+    var count = Map.of("totalCount", total, "effectivePage", page, "totalPages", pages);
+    return Map.of(
+        "topBar",
+        Map.of(KEY_USERNAME, USERNAME, "role", admin ? "ADMIN" : "USER"),
+        "filters",
+        Map.of(KEY_ADMIN, admin, KEY_VALUES, values, "issues", issues),
+        KEY_PAGE,
+        issues.isEmpty() ? Optional.of(count) : Optional.empty(),
+        "rows",
+        rows,
+        "previousHref",
+        previous,
+        "nextHref",
+        next);
+  }
+
+  private static Map<String, Object> simple(boolean admin, List<Map<String, Object>> rows) {
+    return model(
+        admin, values(), Map.of(), rows, rows.size(), 1, 1, Optional.empty(), Optional.empty());
+  }
+
+  private static Document render(String id, String template, Map<String, Object> model)
+      throws Exception {
+    var servlet = new MockServletContext();
+    var request = new MockHttpServletRequest(servlet);
+    request.setMethod("GET");
+    request.setRequestURI(template.equals(QUESTIONS) ? "/questions" : "/notifications");
+    var exchange =
+        JakartaServletWebApplication.buildApplication(servlet)
+            .buildExchange(request, new MockHttpServletResponse());
+    var resolver = new ClassLoaderTemplateResolver();
+    resolver.setPrefix("templates/");
+    resolver.setSuffix(".html");
+    resolver.setTemplateMode("HTML");
+    resolver.setCharacterEncoding("UTF-8");
+    resolver.setCacheable(false);
+    var engine = new SpringTemplateEngine();
+    engine.setTemplateResolver(resolver);
+    String html =
+        engine.process(template, new WebContext(exchange, Locale.JAPAN, Map.of(KEY_PAGE, model)));
+    Files.writeString(
+        Path.of(System.getProperty("owned.output"), id + ".html"),
+        html,
+        StandardOpenOption.CREATE_NEW);
+    var dom = Jsoup.parse(html);
+    assertTrue(dom.select("[th\\:text],[th\\:if],[th\\:replace]").isEmpty());
+    return dom;
+  }
+
+  @Test
+  void questionEmptyUserView() throws Exception {
+    var d = render("LDOM001", QUESTIONS, simple(false, List.of()));
+    assertEquals("質問回答", d.title());
+    assertEquals(EMPTY_TEXT, d.select(".empty-results").text());
+    assertEquals("0 questions / page 1 of 1", d.select(COUNT).text());
+    assertTrue(d.select("table,.owner-heading,.owner,#question-owner").isEmpty());
+    assertTrue(d.select(Q_ERRORS).hasAttr(ATTR_HIDDEN));
+    assertEquals("/questions", d.select("form[method=get]").attr("action"));
+    assertTrue(d.select("a.previous,a.next").isEmpty());
+  }
+
+  @Test
+  void questionAdminRowsEscapeText() throws Exception {
+    var d =
+        render(
+            "LDOM002",
+            QUESTIONS,
+            simple(true, List.of(qrow(12, "UNANSWERED", "未回答", ATTACK_TEXT))));
+    assertEquals(1, d.select(Q_ROW).size());
+    assertEquals(USERNAME, d.select(Q_ROW + " .owner").text());
+    assertEquals(ATTACK_TEXT, d.select(".question-summary").text());
+    assertTrue(d.select("img,script,[onerror]").isEmpty());
+    assertEquals(1, d.select("#question-owner").size());
+    assertEquals(1, d.select(".owner-heading").size());
+    assertEquals("/questions/12", d.select(Q_ROW + " a.detail").attr(ATTR_HREF));
+    assertEquals("/questions/12#delete-confirm", d.select(Q_ROW + " a.delete").attr(ATTR_HREF));
+    assertEquals(JST, d.select(Q_ROW + " .submitted-at").text());
+    assertEquals("", d.select(Q_ROW + " .answered-at").text());
+  }
+
+  @Test
+  void questionUserRowsHideOwner() throws Exception {
+    var d =
+        render(
+            "LDOM003", QUESTIONS, simple(false, List.of(qrow(12, ANSWERED_STATE, "回答済み", "本文"))));
+    assertTrue(d.select("#question-owner,.owner-heading,.owner").isEmpty());
+    assertEquals("回答済み", d.select(Q_ROW + " .state").text());
+    assertEquals("2026-11-01 09:00:01", d.select(Q_ROW + " .answered-at").text());
+    assertEquals(5, d.select(Q_ROW + " td").size());
+  }
+
+  @Test
+  void questionInvalidShowsIssuesWithoutResults() throws Exception {
+    var v = values();
+    v.put(KEY_STATE, "BAD");
+    var d =
+        render(
+            "LDOM004",
+            QUESTIONS,
+            model(
+                false,
+                v,
+                Map.of(KEY_STATE, INVALID_MESSAGE),
+                List.of(),
+                0,
+                1,
+                1,
+                Optional.empty(),
+                Optional.empty()));
+    assertFalse(d.select(Q_ERRORS).hasAttr(ATTR_HIDDEN));
+    assertEquals(INVALID_MESSAGE, d.select("#error-state").text());
+    assertTrue(d.select("section," + COUNT + ",table,.empty-results").isEmpty());
+  }
+
+  @Test
+  void questionPagingAndFilterPreservation() throws Exception {
+    var v = values();
+    v.put(KEY_KEYWORD, "é &+");
+    v.put(KEY_STATE, ANSWERED_STATE);
+    v.put(KEY_FROM, DATE);
+    v.put(KEY_TO, DATE);
+    v.put(KEY_USERNAME, USERNAME);
+    var rows = new ArrayList<Map<String, Object>>();
+    for (int i = 0; i < 50; i++) rows.add(qrow(200 - i, ANSWERED_STATE, "回答済み", "é &+ 本文"));
+    String prefix =
+        "/questions?keyword=%C3%A9%20%26%2B&state=ANSWERED&from=2026-11-01&to=2026-11-01&username=reader&page=";
+    var d =
+        render(
+            "LDOM005",
+            QUESTIONS,
+            model(
+                true,
+                v,
+                Map.of(),
+                rows,
+                101,
+                2,
+                3,
+                Optional.of(prefix + "1"),
+                Optional.of(prefix + "3")));
+    assertEquals(50, d.select(Q_ROW).size());
+    assertEquals("101 questions / page 2 of 3", d.select(COUNT).text());
+    assertEquals("é &+", d.select("#question-keyword").attr(ATTR_VALUE));
+    assertEquals(DATE, d.select("#question-from").attr(ATTR_VALUE));
+    assertEquals(DATE, d.select("#question-to").attr(ATTR_VALUE));
+    assertEquals(USERNAME, d.select("#question-owner").attr(ATTR_VALUE));
+    assertEquals(prefix + "1", d.select("a.previous").attr(ATTR_HREF));
+    assertEquals(prefix + "3", d.select("a.next").attr(ATTR_HREF));
+    assertTrue(d.select("option[value=ANSWERED]").hasAttr(ATTR_SELECTED));
+    assertFalse(d.select("option[value='']").hasAttr(ATTR_SELECTED));
+  }
+
+  @Test
+  void questionAllStateOptions() throws Exception {
+    for (String state : List.of("", ANSWERED_STATE, "UNANSWERED", ERROR_STATE)) {
+      var v = values();
+      v.put(KEY_STATE, state);
+      var d =
+          render(
+              "LDOM006-" + (state.isEmpty() ? "ALL" : state),
+              QUESTIONS,
+              model(false, v, Map.of(), List.of(), 0, 1, 1, Optional.empty(), Optional.empty()));
+      assertEquals(1, d.select("#question-state option[selected]").size());
+      assertEquals(state, d.select("#question-state option[selected]").attr(ATTR_VALUE));
+    }
+  }
+
+  @Test
+  void notificationEmptyView() throws Exception {
+    var d = render("LDOM007", NOTIFICATIONS, simple(false, List.of()));
+    assertEquals("通知", d.title());
+    assertEquals(EMPTY_TEXT, d.select(".empty-results").text());
+    assertEquals("0 notifications / page 1 of 1", d.select(COUNT).text());
+    assertTrue(d.select("table,a.previous,a.next").isEmpty());
+    assertTrue(d.select(N_ERRORS).hasAttr(ATTR_HIDDEN));
+    assertEquals("/notifications", d.select("form[method=get]").attr("action"));
+  }
+
+  @Test
+  void notificationRowsEscapeAndPreserveOrder() throws Exception {
+    var d =
+        render(
+            "LDOM008",
+            NOTIFICATIONS,
+            simple(false, List.of(nrow(12, "エラー通知", ATTACK_TEXT), nrow(11, "エラー通知", "削除済み"))));
+    assertEquals(2, d.select(N_ROW).size());
+    assertEquals(ATTACK_TEXT, d.select(".notification-summary").getFirst().text());
+    assertEquals(
+        List.of("/notifications/12", "/notifications/11"),
+        d.select(N_ROW + " a.detail").eachAttr(ATTR_HREF));
+    assertEquals(List.of(RECEIPT, RECEIPT), d.select(N_ROW + " .receipt").eachText());
+    assertEquals(List.of(JST, JST), d.select(N_ROW + " .submitted-at").eachText());
+    assertTrue(d.select("img,script,[onerror]").isEmpty());
+  }
+
+  @Test
+  void notificationInvalidShowsIssuesWithoutResults() throws Exception {
+    var v = values();
+    v.put(KEY_TYPE, "BAD");
+    var d =
+        render(
+            "LDOM009",
+            NOTIFICATIONS,
+            model(
+                false,
+                v,
+                Map.of(KEY_TYPE, INVALID_MESSAGE),
+                List.of(),
+                0,
+                1,
+                1,
+                Optional.empty(),
+                Optional.empty()));
+    assertFalse(d.select(N_ERRORS).hasAttr(ATTR_HIDDEN));
+    assertEquals(INVALID_MESSAGE, d.select("#error-type").text());
+    assertTrue(d.select("section," + COUNT + ",table,.empty-results").isEmpty());
+  }
+
+  @Test
+  void notificationPagingAndFilterPreservation() throws Exception {
+    var v = values();
+    v.put(KEY_TYPE, ERROR_STATE);
+    v.put(KEY_FROM, DATE);
+    v.put(KEY_TO, DATE);
+    var rows = new ArrayList<Map<String, Object>>();
+    for (int i = 0; i < 50; i++) rows.add(nrow(200 - i, "エラー通知", "本文"));
+    String prefix = "/notifications?type=ERROR&from=2026-11-01&to=2026-11-01&page=";
+    var d =
+        render(
+            "LDOM010",
+            NOTIFICATIONS,
+            model(
+                false,
+                v,
+                Map.of(),
+                rows,
+                101,
+                2,
+                3,
+                Optional.of(prefix + "1"),
+                Optional.of(prefix + "3")));
+    assertEquals(50, d.select(N_ROW).size());
+    assertEquals("101 notifications / page 2 of 3", d.select(COUNT).text());
+    assertEquals(DATE, d.select("input[name=from]").attr(ATTR_VALUE));
+    assertEquals(DATE, d.select("input[name=to]").attr(ATTR_VALUE));
+    assertTrue(d.select("option[value=ERROR]").hasAttr(ATTR_SELECTED));
+    assertEquals(prefix + "1", d.select("a.previous").attr(ATTR_HREF));
+    assertEquals(prefix + "3", d.select("a.next").attr(ATTR_HREF));
+  }
+
+  @Test
+  void notificationAllTypeOptions() throws Exception {
+    for (String type : List.of("", "ACCEPTED", "COMPLETED", ERROR_STATE)) {
+      var v = values();
+      v.put(KEY_TYPE, type);
+      var d =
+          render(
+              "LDOM011-" + (type.isEmpty() ? "ALL" : type),
+              NOTIFICATIONS,
+              model(false, v, Map.of(), List.of(), 0, 1, 1, Optional.empty(), Optional.empty()));
+      assertEquals(1, d.select("select[name=type] option[selected]").size());
+      assertEquals(type, d.select("select[name=type] option[selected]").attr(ATTR_VALUE));
+    }
+  }
+
+  @Test
+  void sharedLayoutLinksAndLogoutAreRendered() throws Exception {
+    for (String template : List.of(QUESTIONS, NOTIFICATIONS)) {
+      var d =
+          render(
+              "LDOM012-" + (template.equals(QUESTIONS) ? "Q" : "N"),
+              template,
+              simple(false, List.of()));
+      assertEquals(USERNAME, d.select(".login-user").text());
+      assertEquals("USER", d.select(".login-role").text());
+      assertEquals(List.of("/", "/notifications"), d.select(".nav-links a").eachAttr(ATTR_HREF));
+      assertEquals("/logout", d.select("form.logout-form").attr("action"));
+      assertEquals("post", d.select("form.logout-form").attr("method"));
+      assertEquals("/css/schubert.css", d.select("link[rel=stylesheet]").attr(ATTR_HREF));
+    }
+  }
+}
