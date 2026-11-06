@@ -1,0 +1,1333 @@
+Compiled from "AuthSessionRevocationService.java"
+public final class dev.codex.schubert.nk.api.security.AuthSessionRevocationService {
+  private static final int EXPECTED_AFFECTED_ROWS;
+
+  private final dev.codex.schubert.nk.api.security.ContextHash hashes;
+
+  private final dev.codex.schubert.nk.api.security.SessionAuditWriter audit;
+
+  public dev.codex.schubert.nk.api.security.AuthSessionRevocationService(dev.codex.schubert.nk.api.security.ContextHash);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #7                  // class dev/codex/schubert/nk/api/security/SessionAuditWriter
+         8: dup
+         9: invokespecial #9                  // Method dev/codex/schubert/nk/api/security/SessionAuditWriter."<init>":()V
+        12: putfield      #10                 // Field audit:Ldev/codex/schubert/nk/api/security/SessionAuditWriter;
+        15: aload_0
+        16: aload_1
+        17: ldc           #16                 // String hashes
+        19: invokestatic  #18                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        22: checkcast     #24                 // class dev/codex/schubert/nk/api/security/ContextHash
+        25: putfield      #26                 // Field hashes:Ldev/codex/schubert/nk/api/security/ContextHash;
+        28: return
+
+  public dev.codex.schubert.nk.api.security.RevokedContext logout(java.sql.Connection, dev.codex.schubert.nk.protocol.header.AuthenticationContext, java.util.Optional<java.net.InetAddress>, java.util.UUID, java.util.UUID, java.time.Instant);
+    Code:
+         0: aload_2
+         1: ldc           #29                 // String raw
+         3: invokestatic  #18                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: aload_3
+         9: aload         4
+        11: aload         5
+        13: aload         6
+        15: invokestatic  #31                 // Method arguments:(Ljava/sql/Connection;Ljava/util/Optional;Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;)Ljava/time/Instant;
+        18: astore        7
+        20: aload_0
+        21: aload_1
+        22: aload_2
+        23: aload_3
+        24: aload         4
+        26: aload         5
+        28: aload         7
+        30: getstatic     #35                 // Field java/time/ZoneOffset.UTC:Ljava/time/ZoneOffset;
+        33: invokestatic  #41                 // Method java/time/Clock.fixed:(Ljava/time/Instant;Ljava/time/ZoneId;)Ljava/time/Clock;
+        36: invokevirtual #47                 // Method logoutCurrent:(Ljava/sql/Connection;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ljava/util/Optional;Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Clock;)Ldev/codex/schubert/nk/api/security/RevokedContext;
+        39: areturn
+
+  public dev.codex.schubert.nk.api.security.RevokedContext logoutCurrent(java.sql.Connection, dev.codex.schubert.nk.protocol.header.AuthenticationContext, java.util.Optional<java.net.InetAddress>, java.util.UUID, java.util.UUID, java.time.Clock);
+    Code:
+         0: aload_1
+         1: ldc           #51                 // String connection
+         3: invokestatic  #18                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_2
+         8: ldc           #29                 // String raw
+        10: invokestatic  #18                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_3
+        15: ldc           #53                 // String client
+        17: invokestatic  #18                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: aload         4
+        23: ldc           #55                 // String messageId
+        25: invokestatic  #18                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        28: pop
+        29: aload         5
+        31: ldc           #57                 // String correlationId
+        33: invokestatic  #18                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        36: pop
+        37: aload         6
+        39: ldc           #59                 // String clock
+        41: invokestatic  #18                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        44: pop
+        45: aload_1
+        46: invokestatic  #61                 // Method requireTransaction:(Ljava/sql/Connection;)V
+        49: aload_0
+        50: getfield      #26                 // Field hashes:Ldev/codex/schubert/nk/api/security/ContextHash;
+        53: aload_2
+        54: invokevirtual #65                 // Method dev/codex/schubert/nk/api/security/ContextHash.calculate:(Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;)Ljava/lang/String;
+        57: astore        7
+        59: aload_1
+        60: ldc           #69                 // String select u.id from schubert.app_users u join schubert.auth_sessions s on s.user_id=u.id where s.context_hash=? for update of u
+        62: invokeinterface #71,  2           // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+        67: astore        8
+        69: aload         8
+        71: iconst_1
+        72: aload         7
+        74: invokeinterface #77,  3           // InterfaceMethod java/sql/PreparedStatement.setString:(ILjava/lang/String;)V
+        79: aload         8
+        81: invokeinterface #83,  1           // InterfaceMethod java/sql/PreparedStatement.executeQuery:()Ljava/sql/ResultSet;
+        86: astore        9
+        88: aload         9
+        90: invokeinterface #87,  1           // InterfaceMethod java/sql/ResultSet.next:()Z
+        95: ifne          106
+        98: new           #93                 // class dev/codex/schubert/nk/api/security/AuthenticationContextException
+       101: dup
+       102: invokespecial #95                 // Method dev/codex/schubert/nk/api/security/AuthenticationContextException."<init>":()V
+       105: athrow
+       106: aload         9
+       108: ifnull        150
+       111: aload         9
+       113: invokeinterface #96,  1           // InterfaceMethod java/sql/ResultSet.close:()V
+       118: goto          150
+       121: astore        10
+       123: aload         9
+       125: ifnull        147
+       128: aload         9
+       130: invokeinterface #96,  1           // InterfaceMethod java/sql/ResultSet.close:()V
+       135: goto          147
+       138: astore        11
+       140: aload         10
+       142: aload         11
+       144: invokevirtual #101                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       147: aload         10
+       149: athrow
+       150: aload         8
+       152: ifnull        194
+       155: aload         8
+       157: invokeinterface #105,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       162: goto          194
+       165: astore        9
+       167: aload         8
+       169: ifnull        191
+       172: aload         8
+       174: invokeinterface #105,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       179: goto          191
+       182: astore        10
+       184: aload         9
+       186: aload         10
+       188: invokevirtual #101                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       191: aload         9
+       193: athrow
+       194: aload_1
+       195: ldc           #106                // String select s.id,s.user_id,s.revoked,s.revoked_at,s.expires_at,u.status from schubert.auth_sessions s join schubert.app_users u on u.id=s.user_id where s.context_hash=? for update of s
+       197: invokeinterface #71,  2           // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+       202: astore        12
+       204: aload         12
+       206: iconst_1
+       207: aload         7
+       209: invokeinterface #77,  3           // InterfaceMethod java/sql/PreparedStatement.setString:(ILjava/lang/String;)V
+       214: aload         12
+       216: invokeinterface #83,  1           // InterfaceMethod java/sql/PreparedStatement.executeQuery:()Ljava/sql/ResultSet;
+       221: astore        13
+       223: aload         13
+       225: invokeinterface #87,  1           // InterfaceMethod java/sql/ResultSet.next:()Z
+       230: ifne          241
+       233: new           #93                 // class dev/codex/schubert/nk/api/security/AuthenticationContextException
+       236: dup
+       237: invokespecial #95                 // Method dev/codex/schubert/nk/api/security/AuthenticationContextException."<init>":()V
+       240: athrow
+       241: aload         6
+       243: invokevirtual #108                // Method java/time/Clock.instant:()Ljava/time/Instant;
+       246: getstatic     #112                // Field java/time/temporal/ChronoUnit.MICROS:Ljava/time/temporal/ChronoUnit;
+       249: invokevirtual #118                // Method java/time/Instant.truncatedTo:(Ljava/time/temporal/TemporalUnit;)Ljava/time/Instant;
+       252: astore        9
+       254: new           #124                // class dev/codex/schubert/nk/api/security/AuthContextIdentity
+       257: dup
+       258: aload         13
+       260: ldc           #126                // String id
+       262: ldc           #128                // class java/util/UUID
+       264: invokeinterface #130,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       269: checkcast     #128                // class java/util/UUID
+       272: invokestatic  #134                // Method dev/codex/schubert/nk/api/database/RequiredColumn.requireValue:(Ljava/lang/Object;)Ljava/lang/Object;
+       275: checkcast     #128                // class java/util/UUID
+       278: aload         13
+       280: ldc           #140                // String user_id
+       282: ldc           #142                // class java/lang/Long
+       284: invokeinterface #130,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       289: checkcast     #142                // class java/lang/Long
+       292: invokestatic  #134                // Method dev/codex/schubert/nk/api/database/RequiredColumn.requireValue:(Ljava/lang/Object;)Ljava/lang/Object;
+       295: checkcast     #142                // class java/lang/Long
+       298: invokevirtual #144                // Method java/lang/Long.longValue:()J
+       301: invokespecial #148                // Method dev/codex/schubert/nk/api/security/AuthContextIdentity."<init>":(Ljava/util/UUID;J)V
+       304: astore        8
+       306: aload         13
+       308: ldc           #151                // String revoked
+       310: ldc           #153                // class java/lang/Boolean
+       312: invokeinterface #130,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       317: checkcast     #153                // class java/lang/Boolean
+       320: invokestatic  #134                // Method dev/codex/schubert/nk/api/database/RequiredColumn.requireValue:(Ljava/lang/Object;)Ljava/lang/Object;
+       323: checkcast     #153                // class java/lang/Boolean
+       326: invokevirtual #155                // Method java/lang/Boolean.booleanValue:()Z
+       329: istore        14
+       331: iload         14
+       333: ifeq          369
+       336: aload         13
+       338: ldc           #158                // String revoked_at
+       340: ldc           #160                // class java/time/OffsetDateTime
+       342: invokeinterface #130,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       347: checkcast     #160                // class java/time/OffsetDateTime
+       350: invokestatic  #134                // Method dev/codex/schubert/nk/api/database/RequiredColumn.requireValue:(Ljava/lang/Object;)Ljava/lang/Object;
+       353: checkcast     #160                // class java/time/OffsetDateTime
+       356: invokevirtual #162                // Method java/time/OffsetDateTime.toInstant:()Ljava/time/Instant;
+       359: astore        10
+       361: getstatic     #165                // Field dev/codex/schubert/nk/protocol/header/ResultCode.IDEMPOTENT_SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       364: astore        11
+       366: goto          501
+       369: aload         13
+       371: ldc           #171                // String expires_at
+       373: ldc           #160                // class java/time/OffsetDateTime
+       375: invokeinterface #130,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       380: checkcast     #160                // class java/time/OffsetDateTime
+       383: invokestatic  #134                // Method dev/codex/schubert/nk/api/database/RequiredColumn.requireValue:(Ljava/lang/Object;)Ljava/lang/Object;
+       386: checkcast     #160                // class java/time/OffsetDateTime
+       389: invokevirtual #162                // Method java/time/OffsetDateTime.toInstant:()Ljava/time/Instant;
+       392: astore        15
+       394: aload         13
+       396: ldc           #173                // String status
+       398: invokeinterface #175,  2          // InterfaceMethod java/sql/ResultSet.getString:(Ljava/lang/String;)Ljava/lang/String;
+       403: invokestatic  #134                // Method dev/codex/schubert/nk/api/database/RequiredColumn.requireValue:(Ljava/lang/Object;)Ljava/lang/Object;
+       406: checkcast     #179                // class java/lang/String
+       409: astore        16
+       411: aload         15
+       413: aload         9
+       415: invokevirtual #181                // Method java/time/Instant.isAfter:(Ljava/time/Instant;)Z
+       418: ifne          474
+       421: aload_1
+       422: aload         8
+       424: invokevirtual #185                // Method dev/codex/schubert/nk/api/security/AuthContextIdentity.sessionId:()Ljava/util/UUID;
+       427: aload         9
+       429: getstatic     #189                // Field dev/codex/schubert/nk/api/security/SessionRevocationReason.EXPIRED:Ldev/codex/schubert/nk/api/security/SessionRevocationReason;
+       432: invokestatic  #195                // Method update:(Ljava/sql/Connection;Ljava/util/UUID;Ljava/time/Instant;Ldev/codex/schubert/nk/api/security/SessionRevocationReason;)V
+       435: aload_0
+       436: getfield      #10                 // Field audit:Ldev/codex/schubert/nk/api/security/SessionAuditWriter;
+       439: aload_1
+       440: aload         8
+       442: invokevirtual #199                // Method dev/codex/schubert/nk/api/security/AuthContextIdentity.userId:()J
+       445: aload         8
+       447: invokevirtual #199                // Method dev/codex/schubert/nk/api/security/AuthContextIdentity.userId:()J
+       450: aload_3
+       451: aload         4
+       453: aload         5
+       455: aload         9
+       457: getstatic     #189                // Field dev/codex/schubert/nk/api/security/SessionRevocationReason.EXPIRED:Ldev/codex/schubert/nk/api/security/SessionRevocationReason;
+       460: getstatic     #202                // Field dev/codex/schubert/nk/protocol/header/ResultCode.SESSION_INVALID:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       463: invokevirtual #205                // Method dev/codex/schubert/nk/api/security/SessionAuditWriter.write:(Ljava/sql/Connection;JJLjava/util/Optional;Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;Ldev/codex/schubert/nk/api/security/SessionRevocationReason;Ldev/codex/schubert/nk/protocol/header/ResultCode;)V
+       466: new           #93                 // class dev/codex/schubert/nk/api/security/AuthenticationContextException
+       469: dup
+       470: invokespecial #95                 // Method dev/codex/schubert/nk/api/security/AuthenticationContextException."<init>":()V
+       473: athrow
+       474: aload         16
+       476: ldc           #209                // String ACTIVE
+       478: invokevirtual #211                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       481: ifne          492
+       484: new           #93                 // class dev/codex/schubert/nk/api/security/AuthenticationContextException
+       487: dup
+       488: invokespecial #95                 // Method dev/codex/schubert/nk/api/security/AuthenticationContextException."<init>":()V
+       491: athrow
+       492: aload         9
+       494: astore        10
+       496: getstatic     #215                // Field dev/codex/schubert/nk/protocol/header/ResultCode.SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       499: astore        11
+       501: aload         13
+       503: ifnull        545
+       506: aload         13
+       508: invokeinterface #96,  1           // InterfaceMethod java/sql/ResultSet.close:()V
+       513: goto          545
+       516: astore        14
+       518: aload         13
+       520: ifnull        542
+       523: aload         13
+       525: invokeinterface #96,  1           // InterfaceMethod java/sql/ResultSet.close:()V
+       530: goto          542
+       533: astore        15
+       535: aload         14
+       537: aload         15
+       539: invokevirtual #101                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       542: aload         14
+       544: athrow
+       545: aload         12
+       547: ifnull        589
+       550: aload         12
+       552: invokeinterface #105,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       557: goto          589
+       560: astore        13
+       562: aload         12
+       564: ifnull        586
+       567: aload         12
+       569: invokeinterface #105,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       574: goto          586
+       577: astore        14
+       579: aload         13
+       581: aload         14
+       583: invokevirtual #101                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       586: aload         13
+       588: athrow
+       589: aload         11
+       591: getstatic     #215                // Field dev/codex/schubert/nk/protocol/header/ResultCode.SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       594: if_acmpne     611
+       597: aload_1
+       598: aload         8
+       600: invokevirtual #185                // Method dev/codex/schubert/nk/api/security/AuthContextIdentity.sessionId:()Ljava/util/UUID;
+       603: aload         9
+       605: getstatic     #218                // Field dev/codex/schubert/nk/api/security/SessionRevocationReason.LOGOUT:Ldev/codex/schubert/nk/api/security/SessionRevocationReason;
+       608: invokestatic  #195                // Method update:(Ljava/sql/Connection;Ljava/util/UUID;Ljava/time/Instant;Ldev/codex/schubert/nk/api/security/SessionRevocationReason;)V
+       611: aload_0
+       612: getfield      #10                 // Field audit:Ldev/codex/schubert/nk/api/security/SessionAuditWriter;
+       615: aload_1
+       616: aload         8
+       618: invokevirtual #199                // Method dev/codex/schubert/nk/api/security/AuthContextIdentity.userId:()J
+       621: aload         8
+       623: invokevirtual #199                // Method dev/codex/schubert/nk/api/security/AuthContextIdentity.userId:()J
+       626: aload_3
+       627: aload         4
+       629: aload         5
+       631: aload         9
+       633: getstatic     #218                // Field dev/codex/schubert/nk/api/security/SessionRevocationReason.LOGOUT:Ldev/codex/schubert/nk/api/security/SessionRevocationReason;
+       636: aload         11
+       638: invokevirtual #205                // Method dev/codex/schubert/nk/api/security/SessionAuditWriter.write:(Ljava/sql/Connection;JJLjava/util/Optional;Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;Ldev/codex/schubert/nk/api/security/SessionRevocationReason;Ldev/codex/schubert/nk/protocol/header/ResultCode;)V
+       641: new           #221                // class dev/codex/schubert/nk/api/security/RevokedContext
+       644: dup
+       645: aload         8
+       647: aload         10
+       649: aload         11
+       651: invokespecial #223                // Method dev/codex/schubert/nk/api/security/RevokedContext."<init>":(Ldev/codex/schubert/nk/api/security/AuthContextIdentity;Ljava/time/Instant;Ldev/codex/schubert/nk/protocol/header/ResultCode;)V
+       654: areturn
+       655: astore        7
+       657: aload         7
+       659: invokestatic  #232                // Method dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       662: new           #233                // class dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException
+       665: dup
+       666: invokespecial #237                // Method dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException."<init>":()V
+       669: athrow
+       670: astore        7
+       672: aload         7
+       674: invokestatic  #232                // Method dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       677: aload         7
+       679: invokevirtual #238                // Method dev/codex/schubert/nk/api/security/AuthenticationContextException.getSuppressed:()[Ljava/lang/Throwable;
+       682: arraylength
+       683: ifeq          694
+       686: new           #233                // class dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException
+       689: dup
+       690: invokespecial #237                // Method dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException."<init>":()V
+       693: athrow
+       694: new           #93                 // class dev/codex/schubert/nk/api/security/AuthenticationContextException
+       697: dup
+       698: invokespecial #95                 // Method dev/codex/schubert/nk/api/security/AuthenticationContextException."<init>":()V
+       701: athrow
+      Exception table:
+         from    to  target type
+            88   106   121   Class java/lang/Throwable
+           128   135   138   Class java/lang/Throwable
+            69   150   165   Class java/lang/Throwable
+           172   179   182   Class java/lang/Throwable
+           223   501   516   Class java/lang/Throwable
+           523   530   533   Class java/lang/Throwable
+           204   545   560   Class java/lang/Throwable
+           567   574   577   Class java/lang/Throwable
+            45   654   655   Class java/sql/SQLException
+            45   654   655   Class java/lang/IllegalArgumentException
+            45   654   655   Class java/time/DateTimeException
+            45   654   670   Class dev/codex/schubert/nk/api/security/AuthenticationContextException
+
+  public int revokeAll(java.sql.Connection, dev.codex.schubert.nk.api.security.AuthenticatedActor, long, dev.codex.schubert.nk.api.security.SessionRevocationReason, java.util.Optional<java.net.InetAddress>, java.util.UUID, java.util.UUID, java.time.Instant);
+    Code:
+         0: new           #242                // class dev/codex/schubert/nk/api/security/AuthorizationService
+         3: dup
+         4: invokespecial #244                // Method dev/codex/schubert/nk/api/security/AuthorizationService."<init>":()V
+         7: aload_2
+         8: invokevirtual #245                // Method dev/codex/schubert/nk/api/security/AuthorizationService.requireAdmin:(Ldev/codex/schubert/nk/api/security/AuthenticatedActor;)V
+        11: aload         5
+        13: ldc           #249                // String reason
+        15: invokestatic  #18                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        18: pop
+        19: lload_3
+        20: lconst_1
+        21: lcmp
+        22: iflt          33
+        25: lload_3
+        26: ldc2_w        #251                // long 999999999999l
+        29: lcmp
+        30: ifle          43
+        33: new           #228                // class java/lang/IllegalArgumentException
+        36: dup
+        37: ldc           #253                // String revocation target is outside N12
+        39: invokespecial #255                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        42: athrow
+        43: aload         5
+        45: getstatic     #258                // Field dev/codex/schubert/nk/api/security/SessionRevocationReason.DISABLED:Ldev/codex/schubert/nk/api/security/SessionRevocationReason;
+        48: if_acmpeq     78
+        51: aload         5
+        53: getstatic     #261                // Field dev/codex/schubert/nk/api/security/SessionRevocationReason.PASSWORD_RESET:Ldev/codex/schubert/nk/api/security/SessionRevocationReason;
+        56: if_acmpeq     78
+        59: aload         5
+        61: getstatic     #264                // Field dev/codex/schubert/nk/api/security/SessionRevocationReason.ADMIN:Ldev/codex/schubert/nk/api/security/SessionRevocationReason;
+        64: if_acmpeq     78
+        67: new           #228                // class java/lang/IllegalArgumentException
+        70: dup
+        71: ldc_w         #267                // String invalid administrative revocation reason
+        74: invokespecial #255                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        77: athrow
+        78: aload_1
+        79: aload         6
+        81: aload         7
+        83: aload         8
+        85: aload         9
+        87: invokestatic  #31                 // Method arguments:(Ljava/sql/Connection;Ljava/util/Optional;Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;)Ljava/time/Instant;
+        90: astore        10
+        92: aload_1
+        93: invokestatic  #61                 // Method requireTransaction:(Ljava/sql/Connection;)V
+        96: aload_1
+        97: ldc_w         #269                // String select id from schubert.app_users where id=? for update
+       100: invokeinterface #71,  2           // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+       105: astore        11
+       107: aload         11
+       109: iconst_1
+       110: lload_3
+       111: invokeinterface #271,  4          // InterfaceMethod java/sql/PreparedStatement.setLong:(IJ)V
+       116: aload         11
+       118: invokeinterface #83,  1           // InterfaceMethod java/sql/PreparedStatement.executeQuery:()Ljava/sql/ResultSet;
+       123: astore        12
+       125: aload         12
+       127: invokeinterface #87,  1           // InterfaceMethod java/sql/ResultSet.next:()Z
+       132: ifne          146
+       135: new           #275                // class dev/codex/schubert/nk/api/security/AuthorizationException
+       138: dup
+       139: getstatic     #277                // Field dev/codex/schubert/nk/protocol/header/ResultCode.NOT_FOUND:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       142: invokespecial #280                // Method dev/codex/schubert/nk/api/security/AuthorizationException."<init>":(Ldev/codex/schubert/nk/protocol/header/ResultCode;)V
+       145: athrow
+       146: aload         12
+       148: ifnull        190
+       151: aload         12
+       153: invokeinterface #96,  1           // InterfaceMethod java/sql/ResultSet.close:()V
+       158: goto          190
+       161: astore        13
+       163: aload         12
+       165: ifnull        187
+       168: aload         12
+       170: invokeinterface #96,  1           // InterfaceMethod java/sql/ResultSet.close:()V
+       175: goto          187
+       178: astore        14
+       180: aload         13
+       182: aload         14
+       184: invokevirtual #101                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       187: aload         13
+       189: athrow
+       190: aload         11
+       192: ifnull        234
+       195: aload         11
+       197: invokeinterface #105,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       202: goto          234
+       205: astore        12
+       207: aload         11
+       209: ifnull        231
+       212: aload         11
+       214: invokeinterface #105,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       219: goto          231
+       222: astore        13
+       224: aload         12
+       226: aload         13
+       228: invokevirtual #101                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       231: aload         12
+       233: athrow
+       234: new           #283                // class java/util/ArrayList
+       237: dup
+       238: invokespecial #285                // Method java/util/ArrayList."<init>":()V
+       241: astore        11
+       243: aload_1
+       244: ldc_w         #286                // String select id from schubert.auth_sessions where user_id=? and not revoked order by id for update
+       247: invokeinterface #71,  2           // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+       252: astore        12
+       254: aload         12
+       256: iconst_1
+       257: lload_3
+       258: invokeinterface #271,  4          // InterfaceMethod java/sql/PreparedStatement.setLong:(IJ)V
+       263: aload         12
+       265: invokeinterface #83,  1           // InterfaceMethod java/sql/PreparedStatement.executeQuery:()Ljava/sql/ResultSet;
+       270: astore        13
+       272: aload         13
+       274: invokeinterface #87,  1           // InterfaceMethod java/sql/ResultSet.next:()Z
+       279: ifeq          311
+       282: aload         11
+       284: aload         13
+       286: ldc           #126                // String id
+       288: ldc           #128                // class java/util/UUID
+       290: invokeinterface #130,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       295: checkcast     #128                // class java/util/UUID
+       298: invokestatic  #134                // Method dev/codex/schubert/nk/api/database/RequiredColumn.requireValue:(Ljava/lang/Object;)Ljava/lang/Object;
+       301: checkcast     #128                // class java/util/UUID
+       304: invokevirtual #288                // Method java/util/ArrayList.add:(Ljava/lang/Object;)Z
+       307: pop
+       308: goto          272
+       311: aload         13
+       313: ifnull        355
+       316: aload         13
+       318: invokeinterface #96,  1           // InterfaceMethod java/sql/ResultSet.close:()V
+       323: goto          355
+       326: astore        14
+       328: aload         13
+       330: ifnull        352
+       333: aload         13
+       335: invokeinterface #96,  1           // InterfaceMethod java/sql/ResultSet.close:()V
+       340: goto          352
+       343: astore        15
+       345: aload         14
+       347: aload         15
+       349: invokevirtual #101                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       352: aload         14
+       354: athrow
+       355: aload         12
+       357: ifnull        399
+       360: aload         12
+       362: invokeinterface #105,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       367: goto          399
+       370: astore        13
+       372: aload         12
+       374: ifnull        396
+       377: aload         12
+       379: invokeinterface #105,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       384: goto          396
+       387: astore        14
+       389: aload         13
+       391: aload         14
+       393: invokevirtual #101                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       396: aload         13
+       398: athrow
+       399: aload         11
+       401: invokevirtual #291                // Method java/util/ArrayList.iterator:()Ljava/util/Iterator;
+       404: astore        12
+       406: aload         12
+       408: invokeinterface #295,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+       413: ifeq          467
+       416: aload         12
+       418: invokeinterface #300,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       423: checkcast     #128                // class java/util/UUID
+       426: astore        13
+       428: aload_1
+       429: aload         13
+       431: aload         10
+       433: aload         5
+       435: invokestatic  #195                // Method update:(Ljava/sql/Connection;Ljava/util/UUID;Ljava/time/Instant;Ldev/codex/schubert/nk/api/security/SessionRevocationReason;)V
+       438: aload_0
+       439: getfield      #10                 // Field audit:Ldev/codex/schubert/nk/api/security/SessionAuditWriter;
+       442: aload_1
+       443: aload_2
+       444: invokevirtual #303                // Method dev/codex/schubert/nk/api/security/AuthenticatedActor.userId:()J
+       447: lload_3
+       448: aload         6
+       450: aload         7
+       452: aload         8
+       454: aload         10
+       456: aload         5
+       458: getstatic     #215                // Field dev/codex/schubert/nk/protocol/header/ResultCode.SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       461: invokevirtual #205                // Method dev/codex/schubert/nk/api/security/SessionAuditWriter.write:(Ljava/sql/Connection;JJLjava/util/Optional;Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;Ldev/codex/schubert/nk/api/security/SessionRevocationReason;Ldev/codex/schubert/nk/protocol/header/ResultCode;)V
+       464: goto          406
+       467: aload         11
+       469: invokevirtual #306                // Method java/util/ArrayList.size:()I
+       472: ireturn
+       473: astore        11
+       475: aload         11
+       477: invokestatic  #232                // Method dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       480: new           #233                // class dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException
+       483: dup
+       484: invokespecial #237                // Method dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException."<init>":()V
+       487: athrow
+       488: astore        11
+       490: aload         11
+       492: invokestatic  #232                // Method dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       495: aload         11
+       497: invokevirtual #310                // Method dev/codex/schubert/nk/api/security/AuthorizationException.getSuppressed:()[Ljava/lang/Throwable;
+       500: arraylength
+       501: ifeq          512
+       504: new           #233                // class dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException
+       507: dup
+       508: invokespecial #237                // Method dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException."<init>":()V
+       511: athrow
+       512: new           #275                // class dev/codex/schubert/nk/api/security/AuthorizationException
+       515: dup
+       516: getstatic     #277                // Field dev/codex/schubert/nk/protocol/header/ResultCode.NOT_FOUND:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       519: invokespecial #280                // Method dev/codex/schubert/nk/api/security/AuthorizationException."<init>":(Ldev/codex/schubert/nk/protocol/header/ResultCode;)V
+       522: athrow
+      Exception table:
+         from    to  target type
+           125   146   161   Class java/lang/Throwable
+           168   175   178   Class java/lang/Throwable
+           107   190   205   Class java/lang/Throwable
+           212   219   222   Class java/lang/Throwable
+           272   311   326   Class java/lang/Throwable
+           333   340   343   Class java/lang/Throwable
+           254   355   370   Class java/lang/Throwable
+           377   384   387   Class java/lang/Throwable
+            92   472   473   Class java/sql/SQLException
+            92   472   488   Class dev/codex/schubert/nk/api/security/AuthorizationException
+
+  private static java.time.Instant arguments(java.sql.Connection, java.util.Optional<java.net.InetAddress>, java.util.UUID, java.util.UUID, java.time.Instant);
+    Code:
+         0: aload_0
+         1: ldc           #51                 // String connection
+         3: invokestatic  #18                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #53                 // String client
+        10: invokestatic  #18                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_2
+        15: ldc_w         #311                // String message
+        18: invokestatic  #18                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        21: pop
+        22: aload_3
+        23: ldc_w         #313                // String correlation
+        26: invokestatic  #18                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        29: pop
+        30: aload         4
+        32: ldc_w         #315                // String now
+        35: invokestatic  #18                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        38: checkcast     #119                // class java/time/Instant
+        41: getstatic     #112                // Field java/time/temporal/ChronoUnit.MICROS:Ljava/time/temporal/ChronoUnit;
+        44: invokevirtual #118                // Method java/time/Instant.truncatedTo:(Ljava/time/temporal/TemporalUnit;)Ljava/time/Instant;
+        47: areturn
+
+  private static void requireTransaction(java.sql.Connection) throws java.sql.SQLException;
+    Code:
+         0: aload_0
+         1: invokeinterface #317,  1          // InterfaceMethod java/sql/Connection.getAutoCommit:()Z
+         6: ifeq          23
+         9: new           #226                // class java/sql/SQLException
+        12: dup
+        13: ldc_w         #320                // String revocation requires explicit transaction
+        16: ldc_w         #322                // String 25000
+        19: invokespecial #324                // Method java/sql/SQLException."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+        22: athrow
+        23: return
+
+  private static void update(java.sql.Connection, java.util.UUID, java.time.Instant, dev.codex.schubert.nk.api.security.SessionRevocationReason) throws java.sql.SQLException;
+    Code:
+         0: aload_0
+         1: ldc_w         #327                // String update schubert.auth_sessions set revoked=true,revoked_at=?,revoke_reason=? where id=? and not revoked
+         4: invokeinterface #71,  2           // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+         9: astore        4
+        11: aload         4
+        13: iconst_1
+        14: aload_2
+        15: getstatic     #35                 // Field java/time/ZoneOffset.UTC:Ljava/time/ZoneOffset;
+        18: invokevirtual #329                // Method java/time/Instant.atOffset:(Ljava/time/ZoneOffset;)Ljava/time/OffsetDateTime;
+        21: invokeinterface #333,  3          // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+        26: aload         4
+        28: iconst_2
+        29: aload_3
+        30: invokevirtual #337                // Method dev/codex/schubert/nk/api/security/SessionRevocationReason.name:()Ljava/lang/String;
+        33: invokeinterface #77,  3           // InterfaceMethod java/sql/PreparedStatement.setString:(ILjava/lang/String;)V
+        38: aload         4
+        40: iconst_3
+        41: aload_1
+        42: invokeinterface #333,  3          // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+        47: aload         4
+        49: invokeinterface #341,  1          // InterfaceMethod java/sql/PreparedStatement.executeUpdate:()I
+        54: iconst_1
+        55: if_icmpeq     72
+        58: new           #226                // class java/sql/SQLException
+        61: dup
+        62: ldc_w         #344                // String session changed during revocation
+        65: ldc_w         #346                // String 40001
+        68: invokespecial #324                // Method java/sql/SQLException."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+        71: athrow
+        72: aload         4
+        74: ifnull        116
+        77: aload         4
+        79: invokeinterface #105,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+        84: goto          116
+        87: astore        5
+        89: aload         4
+        91: ifnull        113
+        94: aload         4
+        96: invokeinterface #105,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       101: goto          113
+       104: astore        6
+       106: aload         5
+       108: aload         6
+       110: invokevirtual #101                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       113: aload         5
+       115: athrow
+       116: return
+      Exception table:
+         from    to  target type
+            11    72    87   Class java/lang/Throwable
+            94   101   104   Class java/lang/Throwable
+}
+Compiled from "AuthorizationService.java"
+public final class dev.codex.schubert.nk.api.security.AuthorizationService {
+  public dev.codex.schubert.nk.api.security.AuthorizationService();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  public void requireAdmin(dev.codex.schubert.nk.api.security.AuthenticatedActor);
+    Code:
+         0: aload_1
+         1: ldc           #7                  // String actor
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: invokevirtual #15                 // Method dev/codex/schubert/nk/api/security/AuthenticatedActor.role:()Ldev/codex/schubert/nk/api/domain/Role;
+        11: getstatic     #21                 // Field dev/codex/schubert/nk/api/domain/Role.ADMIN:Ldev/codex/schubert/nk/api/domain/Role;
+        14: if_acmpeq     28
+        17: new           #27                 // class dev/codex/schubert/nk/api/security/AuthorizationException
+        20: dup
+        21: getstatic     #29                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.FORBIDDEN:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        24: invokespecial #35                 // Method dev/codex/schubert/nk/api/security/AuthorizationException."<init>":(Ldev/codex/schubert/nk/protocol/header/ResultCode;)V
+        27: athrow
+        28: return
+
+  public void requireNotificationOwner(dev.codex.schubert.nk.api.security.AuthenticatedActor, long);
+    Code:
+         0: aload_1
+         1: ldc           #7                  // String actor
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: lload_2
+         8: invokestatic  #38                 // Method requireOwnerId:(J)V
+        11: aload_1
+        12: invokevirtual #44                 // Method dev/codex/schubert/nk/api/security/AuthenticatedActor.userId:()J
+        15: lload_2
+        16: lcmp
+        17: ifeq          31
+        20: new           #27                 // class dev/codex/schubert/nk/api/security/AuthorizationException
+        23: dup
+        24: getstatic     #48                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.NOT_FOUND:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        27: invokespecial #35                 // Method dev/codex/schubert/nk/api/security/AuthorizationException."<init>":(Ldev/codex/schubert/nk/protocol/header/ResultCode;)V
+        30: athrow
+        31: return
+
+  public void requireQuestionOwner(dev.codex.schubert.nk.api.security.AuthenticatedActor, long);
+    Code:
+         0: aload_1
+         1: ldc           #7                  // String actor
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: lload_2
+         8: invokestatic  #38                 // Method requireOwnerId:(J)V
+        11: aload_1
+        12: invokevirtual #15                 // Method dev/codex/schubert/nk/api/security/AuthenticatedActor.role:()Ldev/codex/schubert/nk/api/domain/Role;
+        15: getstatic     #21                 // Field dev/codex/schubert/nk/api/domain/Role.ADMIN:Ldev/codex/schubert/nk/api/domain/Role;
+        18: if_acmpeq     41
+        21: aload_1
+        22: invokevirtual #44                 // Method dev/codex/schubert/nk/api/security/AuthenticatedActor.userId:()J
+        25: lload_2
+        26: lcmp
+        27: ifeq          41
+        30: new           #27                 // class dev/codex/schubert/nk/api/security/AuthorizationException
+        33: dup
+        34: getstatic     #48                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.NOT_FOUND:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        37: invokespecial #35                 // Method dev/codex/schubert/nk/api/security/AuthorizationException."<init>":(Ldev/codex/schubert/nk/protocol/header/ResultCode;)V
+        40: athrow
+        41: return
+
+  private static void requireOwnerId(long);
+    Code:
+         0: lload_0
+         1: lconst_1
+         2: lcmp
+         3: iflt          14
+         6: lload_0
+         7: ldc2_w        #51                 // long 999999999999l
+        10: lcmp
+        11: ifle          24
+        14: new           #53                 // class java/lang/IllegalArgumentException
+        17: dup
+        18: ldc           #55                 // String owner ID is outside N12
+        20: invokespecial #57                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        23: athrow
+        24: return
+}
+Compiled from "AuthorizationException.java"
+public final class dev.codex.schubert.nk.api.security.AuthorizationException extends java.lang.RuntimeException {
+  private static final long serialVersionUID;
+
+  private final dev.codex.schubert.nk.protocol.header.ResultCode denialCode;
+
+  dev.codex.schubert.nk.api.security.AuthorizationException(dev.codex.schubert.nk.protocol.header.ResultCode);
+    Code:
+         0: aload_0
+         1: ldc           #1                  // String operation is not available
+         3: invokespecial #3                  // Method java/lang/RuntimeException."<init>":(Ljava/lang/String;)V
+         6: aload_0
+         7: aload_1
+         8: ldc           #9                  // String resultCode
+        10: invokestatic  #11                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: checkcast     #17                 // class dev/codex/schubert/nk/protocol/header/ResultCode
+        16: putfield      #19                 // Field denialCode:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        19: aload_1
+        20: getstatic     #25                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.FORBIDDEN:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        23: if_acmpeq     43
+        26: aload_1
+        27: getstatic     #28                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.NOT_FOUND:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        30: if_acmpeq     43
+        33: new           #31                 // class java/lang/IllegalArgumentException
+        36: dup
+        37: ldc           #33                 // String unsupported authorization denial code
+        39: invokespecial #35                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        42: athrow
+        43: return
+
+  public dev.codex.schubert.nk.protocol.header.ResultCode resultCode();
+    Code:
+         0: aload_0
+         1: getfield      #19                 // Field denialCode:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+         4: areturn
+}
+Compiled from "RevokedContext.java"
+public final class dev.codex.schubert.nk.api.security.RevokedContext extends java.lang.Record {
+  private final dev.codex.schubert.nk.api.security.AuthContextIdentity identity;
+
+  private final java.time.Instant revokedAt;
+
+  private final dev.codex.schubert.nk.protocol.header.ResultCode resultCode;
+
+  public dev.codex.schubert.nk.api.security.RevokedContext(dev.codex.schubert.nk.api.security.AuthContextIdentity, java.time.Instant, dev.codex.schubert.nk.protocol.header.ResultCode);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+         4: aload_1
+         5: ldc           #7                  // String identity
+         7: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        10: pop
+        11: aload_2
+        12: ldc           #15                 // String revokedAt
+        14: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        17: pop
+        18: aload_3
+        19: ldc           #17                 // String resultCode
+        21: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        24: pop
+        25: aload_3
+        26: getstatic     #19                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        29: if_acmpeq     49
+        32: aload_3
+        33: getstatic     #25                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.IDEMPOTENT_SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        36: if_acmpeq     49
+        39: new           #28                 // class java/lang/IllegalArgumentException
+        42: dup
+        43: ldc           #30                 // String invalid logout result
+        45: invokespecial #32                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        48: athrow
+        49: aload_0
+        50: aload_1
+        51: putfield      #35                 // Field identity:Ldev/codex/schubert/nk/api/security/AuthContextIdentity;
+        54: aload_0
+        55: aload_2
+        56: putfield      #40                 // Field revokedAt:Ljava/time/Instant;
+        59: aload_0
+        60: aload_3
+        61: putfield      #43                 // Field resultCode:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        64: return
+
+  public java.lang.String toString();
+    Code:
+         0: ldc           #45                 // String RevokedContext[REDACTED]
+         2: areturn
+
+  public final int hashCode();
+    Code:
+         0: aload_0
+         1: invokedynamic #47,  0             // InvokeDynamic #0:hashCode:(Ldev/codex/schubert/nk/api/security/RevokedContext;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #51,  0             // InvokeDynamic #0:equals:(Ldev/codex/schubert/nk/api/security/RevokedContext;Ljava/lang/Object;)Z
+         7: ireturn
+
+  public dev.codex.schubert.nk.api.security.AuthContextIdentity identity();
+    Code:
+         0: aload_0
+         1: getfield      #35                 // Field identity:Ldev/codex/schubert/nk/api/security/AuthContextIdentity;
+         4: areturn
+
+  public java.time.Instant revokedAt();
+    Code:
+         0: aload_0
+         1: getfield      #40                 // Field revokedAt:Ljava/time/Instant;
+         4: areturn
+
+  public dev.codex.schubert.nk.protocol.header.ResultCode resultCode();
+    Code:
+         0: aload_0
+         1: getfield      #43                 // Field resultCode:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+         4: areturn
+}
+Compiled from "AuthContextIdentity.java"
+public final class dev.codex.schubert.nk.api.security.AuthContextIdentity extends java.lang.Record {
+  private final java.util.UUID sessionId;
+
+  private final long userId;
+
+  public dev.codex.schubert.nk.api.security.AuthContextIdentity(java.util.UUID, long);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+         4: aload_1
+         5: ldc           #7                  // String sessionId
+         7: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        10: pop
+        11: lload_2
+        12: lconst_1
+        13: lcmp
+        14: iflt          25
+        17: lload_2
+        18: ldc2_w        #15                 // long 999999999999l
+        21: lcmp
+        22: ifle          35
+        25: new           #17                 // class java/lang/IllegalArgumentException
+        28: dup
+        29: ldc           #19                 // String auth context owner is outside N12
+        31: invokespecial #21                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        34: athrow
+        35: aload_0
+        36: aload_1
+        37: putfield      #24                 // Field sessionId:Ljava/util/UUID;
+        40: aload_0
+        41: lload_2
+        42: putfield      #29                 // Field userId:J
+        45: return
+
+  byte[] aad(java.lang.String);
+    Code:
+         0: aload_1
+         1: ldc           #33                 // String keyVersion
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #35                 // String [A-Za-z0-9][A-Za-z0-9._-]{0,15}
+        10: invokevirtual #37                 // Method java/lang/String.matches:(Ljava/lang/String;)Z
+        13: ifne          26
+        16: new           #17                 // class java/lang/IllegalArgumentException
+        19: dup
+        20: ldc           #43                 // String auth context key version is invalid
+        22: invokespecial #21                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        25: athrow
+        26: new           #45                 // class java/io/ByteArrayOutputStream
+        29: dup
+        30: invokespecial #47                 // Method java/io/ByteArrayOutputStream."<init>":()V
+        33: astore_2
+        34: bipush        6
+        36: anewarray     #38                 // class java/lang/String
+        39: dup
+        40: iconst_0
+        41: ldc           #48                 // String SCHUBERT-NK-AUTHCTX-v1
+        43: aastore
+        44: dup
+        45: iconst_1
+        46: ldc           #50                 // String schubert.auth_sessions
+        48: aastore
+        49: dup
+        50: iconst_2
+        51: aload_0
+        52: getfield      #24                 // Field sessionId:Ljava/util/UUID;
+        55: invokevirtual #52                 // Method java/util/UUID.toString:()Ljava/lang/String;
+        58: aastore
+        59: dup
+        60: iconst_3
+        61: aload_0
+        62: getfield      #29                 // Field userId:J
+        65: invokestatic  #58                 // Method java/lang/Long.toString:(J)Ljava/lang/String;
+        68: aastore
+        69: dup
+        70: iconst_4
+        71: ldc           #63                 // String 1
+        73: aastore
+        74: dup
+        75: iconst_5
+        76: aload_1
+        77: aastore
+        78: astore_3
+        79: aload_3
+        80: arraylength
+        81: istore        4
+        83: iconst_0
+        84: istore        5
+        86: iload         5
+        88: iload         4
+        90: if_icmpge     138
+        93: aload_3
+        94: iload         5
+        96: aaload
+        97: astore        6
+        99: aload         6
+       101: getstatic     #65                 // Field java/nio/charset/StandardCharsets.US_ASCII:Ljava/nio/charset/Charset;
+       104: invokevirtual #71                 // Method java/lang/String.getBytes:(Ljava/nio/charset/Charset;)[B
+       107: astore        7
+       109: aload_2
+       110: iconst_4
+       111: invokestatic  #75                 // Method java/nio/ByteBuffer.allocate:(I)Ljava/nio/ByteBuffer;
+       114: aload         7
+       116: arraylength
+       117: invokevirtual #81                 // Method java/nio/ByteBuffer.putInt:(I)Ljava/nio/ByteBuffer;
+       120: invokevirtual #84                 // Method java/nio/ByteBuffer.array:()[B
+       123: invokevirtual #88                 // Method java/io/ByteArrayOutputStream.writeBytes:([B)V
+       126: aload_2
+       127: aload         7
+       129: invokevirtual #88                 // Method java/io/ByteArrayOutputStream.writeBytes:([B)V
+       132: iinc          5, 1
+       135: goto          86
+       138: aload_2
+       139: invokevirtual #92                 // Method java/io/ByteArrayOutputStream.toByteArray:()[B
+       142: areturn
+
+  public final java.lang.String toString();
+    Code:
+         0: aload_0
+         1: invokedynamic #95,  0             // InvokeDynamic #0:toString:(Ldev/codex/schubert/nk/api/security/AuthContextIdentity;)Ljava/lang/String;
+         6: areturn
+
+  public final int hashCode();
+    Code:
+         0: aload_0
+         1: invokedynamic #98,  0             // InvokeDynamic #0:hashCode:(Ldev/codex/schubert/nk/api/security/AuthContextIdentity;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #102,  0            // InvokeDynamic #0:equals:(Ldev/codex/schubert/nk/api/security/AuthContextIdentity;Ljava/lang/Object;)Z
+         7: ireturn
+
+  public java.util.UUID sessionId();
+    Code:
+         0: aload_0
+         1: getfield      #24                 // Field sessionId:Ljava/util/UUID;
+         4: areturn
+
+  public long userId();
+    Code:
+         0: aload_0
+         1: getfield      #29                 // Field userId:J
+         4: lreturn
+}
+Compiled from "SessionAuditWriter.java"
+public final class dev.codex.schubert.nk.api.security.SessionAuditWriter {
+  private static final int EXPECTED_AFFECTED_ROWS;
+
+  public dev.codex.schubert.nk.api.security.SessionAuditWriter();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  void write(java.sql.Connection, long, long, java.util.Optional<java.net.InetAddress>, java.util.UUID, java.util.UUID, java.time.Instant, dev.codex.schubert.nk.api.security.SessionRevocationReason, dev.codex.schubert.nk.protocol.header.ResultCode) throws java.sql.SQLException;
+    Code:
+         0: new           #7                  // class com/google/gson/JsonObject
+         3: dup
+         4: invokespecial #9                  // Method com/google/gson/JsonObject."<init>":()V
+         7: astore        12
+         9: aload         12
+        11: ldc           #10                 // String targetUserId
+        13: lload         4
+        15: invokestatic  #12                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        18: invokevirtual #18                 // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/Number;)V
+        21: aload         12
+        23: ldc           #22                 // String reason
+        25: aload         10
+        27: invokevirtual #24                 // Method dev/codex/schubert/nk/api/security/SessionRevocationReason.name:()Ljava/lang/String;
+        30: invokevirtual #30                 // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+        33: aload         12
+        35: ldc           #33                 // String resultCode
+        37: aload         11
+        39: invokevirtual #35                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.wireValue:()Ljava/lang/String;
+        42: invokevirtual #30                 // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+        45: aload_1
+        46: ldc           #40                 // String insert into schubert.app_logs (logged_at,service,category,level,action,message,message_id,correlation_id,actor_user_id,remote_address,details) values(?,\'API\',\'SECURITY\',\'INFO\',\'SESSION_REVOKED\',\'SESSION_REVOKED\',?,?,?,cast(? as inet),cast(? as jsonb))
+        48: invokeinterface #42,  2           // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+        53: astore        13
+        55: aload         13
+        57: iconst_1
+        58: aload         9
+        60: getstatic     #48                 // Field java/time/ZoneOffset.UTC:Ljava/time/ZoneOffset;
+        63: invokevirtual #54                 // Method java/time/Instant.atOffset:(Ljava/time/ZoneOffset;)Ljava/time/OffsetDateTime;
+        66: invokeinterface #60,  3           // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+        71: aload         13
+        73: iconst_2
+        74: aload         7
+        76: invokeinterface #60,  3           // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+        81: aload         13
+        83: iconst_3
+        84: aload         8
+        86: invokeinterface #60,  3           // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+        91: aload         13
+        93: iconst_4
+        94: lload_2
+        95: invokeinterface #66,  4           // InterfaceMethod java/sql/PreparedStatement.setLong:(IJ)V
+       100: aload         6
+       102: invokevirtual #70                 // Method java/util/Optional.isPresent:()Z
+       105: ifeq          130
+       108: aload         13
+       110: iconst_5
+       111: aload         6
+       113: invokevirtual #76                 // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+       116: checkcast     #80                 // class java/net/InetAddress
+       119: invokevirtual #82                 // Method java/net/InetAddress.getHostAddress:()Ljava/lang/String;
+       122: invokeinterface #85,  3           // InterfaceMethod java/sql/PreparedStatement.setString:(ILjava/lang/String;)V
+       127: goto          140
+       130: aload         13
+       132: iconst_5
+       133: bipush        12
+       135: invokeinterface #91,  3           // InterfaceMethod java/sql/PreparedStatement.setNull:(II)V
+       140: aload         13
+       142: bipush        6
+       144: aload         12
+       146: invokevirtual #95                 // Method com/google/gson/JsonObject.toString:()Ljava/lang/String;
+       149: invokeinterface #85,  3           // InterfaceMethod java/sql/PreparedStatement.setString:(ILjava/lang/String;)V
+       154: aload         13
+       156: invokeinterface #98,  1           // InterfaceMethod java/sql/PreparedStatement.executeUpdate:()I
+       161: iconst_1
+       162: if_icmpeq     177
+       165: new           #104                // class java/sql/SQLException
+       168: dup
+       169: ldc           #106                // String critical session audit did not create one row
+       171: ldc           #108                // String 40001
+       173: invokespecial #110                // Method java/sql/SQLException."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+       176: athrow
+       177: aload         13
+       179: ifnull        221
+       182: aload         13
+       184: invokeinterface #112,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       189: goto          221
+       192: astore        14
+       194: aload         13
+       196: ifnull        218
+       199: aload         13
+       201: invokeinterface #112,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       206: goto          218
+       209: astore        15
+       211: aload         14
+       213: aload         15
+       215: invokevirtual #117                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       218: aload         14
+       220: athrow
+       221: return
+      Exception table:
+         from    to  target type
+            55   177   192   Class java/lang/Throwable
+           199   206   209   Class java/lang/Throwable
+}
+Compiled from "ContextHash.java"
+public final class dev.codex.schubert.nk.api.security.ContextHash {
+  private final java.lang.Object stateLock;
+
+  private final java.security.MessageDigest digest;
+
+  public dev.codex.schubert.nk.api.security.ContextHash() throws java.security.NoSuchAlgorithmException;
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #2                  // class java/lang/Object
+         8: dup
+         9: invokespecial #1                  // Method java/lang/Object."<init>":()V
+        12: putfield      #7                  // Field stateLock:Ljava/lang/Object;
+        15: aload_0
+        16: ldc           #13                 // String SHA-256
+        18: invokestatic  #15                 // Method java/security/MessageDigest.getInstance:(Ljava/lang/String;)Ljava/security/MessageDigest;
+        21: putfield      #21                 // Field digest:Ljava/security/MessageDigest;
+        24: return
+
+  public java.lang.String calculate(dev.codex.schubert.nk.protocol.header.AuthenticationContext);
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field stateLock:Ljava/lang/Object;
+         4: dup
+         5: astore_2
+         6: monitorenter
+         7: aload_1
+         8: ldc           #25                 // String context
+        10: invokestatic  #27                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_1
+        15: invokevirtual #33                 // Method dev/codex/schubert/nk/protocol/header/AuthenticationContext.wireValue:()Ljava/lang/String;
+        18: getstatic     #39                 // Field java/nio/charset/StandardCharsets.US_ASCII:Ljava/nio/charset/Charset;
+        21: invokevirtual #45                 // Method java/lang/String.getBytes:(Ljava/nio/charset/Charset;)[B
+        24: astore_3
+        25: aload_0
+        26: getfield      #21                 // Field digest:Ljava/security/MessageDigest;
+        29: aload_3
+        30: invokevirtual #51                 // Method java/security/MessageDigest.digest:([B)[B
+        33: astore        4
+        35: invokestatic  #54                 // Method java/util/HexFormat.of:()Ljava/util/HexFormat;
+        38: aload         4
+        40: invokevirtual #60                 // Method java/util/HexFormat.formatHex:([B)Ljava/lang/String;
+        43: astore        5
+        45: aload         4
+        47: iconst_0
+        48: invokestatic  #64                 // Method java/util/Arrays.fill:([BB)V
+        51: aload_3
+        52: iconst_0
+        53: invokestatic  #64                 // Method java/util/Arrays.fill:([BB)V
+        56: aload_2
+        57: monitorexit
+        58: aload         5
+        60: areturn
+        61: astore        6
+        63: aload         4
+        65: iconst_0
+        66: invokestatic  #64                 // Method java/util/Arrays.fill:([BB)V
+        69: aload         6
+        71: athrow
+        72: astore        7
+        74: aload_3
+        75: iconst_0
+        76: invokestatic  #64                 // Method java/util/Arrays.fill:([BB)V
+        79: aload         7
+        81: athrow
+        82: astore        8
+        84: aload_2
+        85: monitorexit
+        86: aload         8
+        88: athrow
+      Exception table:
+         from    to  target type
+            35    45    61   any
+            61    63    61   any
+            25    51    72   any
+            61    74    72   any
+             7    58    82   any
+            61    86    82   any
+}
+Compiled from "AuthenticationInfrastructureException.java"
+public final class dev.codex.schubert.nk.api.security.AuthenticationInfrastructureException extends java.lang.RuntimeException {
+  private static final long serialVersionUID;
+
+  dev.codex.schubert.nk.api.security.AuthenticationInfrastructureException();
+    Code:
+         0: aload_0
+         1: ldc           #1                  // String authentication storage is unavailable
+         3: invokespecial #3                  // Method java/lang/RuntimeException."<init>":(Ljava/lang/String;)V
+         6: return
+
+  public static void preserveFatal(java.lang.Throwable);
+    Code:
+         0: new           #9                  // class java/util/ArrayDeque
+         3: dup
+         4: invokespecial #11                 // Method java/util/ArrayDeque."<init>":()V
+         7: astore_1
+         8: new           #14                 // class java/util/IdentityHashMap
+        11: dup
+        12: invokespecial #16                 // Method java/util/IdentityHashMap."<init>":()V
+        15: astore_2
+        16: aload_1
+        17: aload_0
+        18: invokevirtual #17                 // Method java/util/ArrayDeque.add:(Ljava/lang/Object;)Z
+        21: pop
+        22: aload_1
+        23: invokevirtual #21                 // Method java/util/ArrayDeque.isEmpty:()Z
+        26: ifne          158
+        29: aload_1
+        30: invokevirtual #25                 // Method java/util/ArrayDeque.removeFirst:()Ljava/lang/Object;
+        33: checkcast     #29                 // class java/lang/Throwable
+        36: astore_3
+        37: aload_2
+        38: aload_3
+        39: getstatic     #31                 // Field java/lang/Boolean.TRUE:Ljava/lang/Boolean;
+        42: invokevirtual #37                 // Method java/util/IdentityHashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        45: ifnull        51
+        48: goto          22
+        51: aload_3
+        52: instanceof    #41                 // class java/lang/Error
+        55: ifeq          67
+        58: aload_3
+        59: checkcast     #41                 // class java/lang/Error
+        62: astore        4
+        64: aload         4
+        66: athrow
+        67: aload_3
+        68: invokevirtual #43                 // Method java/lang/Throwable.getSuppressed:()[Ljava/lang/Throwable;
+        71: astore        4
+        73: aload         4
+        75: arraylength
+        76: istore        5
+        78: iconst_0
+        79: istore        6
+        81: iload         6
+        83: iload         5
+        85: if_icmpge     107
+        88: aload         4
+        90: iload         6
+        92: aaload
+        93: astore        7
+        95: aload_1
+        96: aload         7
+        98: invokevirtual #47                 // Method java/util/ArrayDeque.addLast:(Ljava/lang/Object;)V
+       101: iinc          6, 1
+       104: goto          81
+       107: aload_3
+       108: invokevirtual #51                 // Method java/lang/Throwable.getCause:()Ljava/lang/Throwable;
+       111: astore        4
+       113: aload         4
+       115: ifnull        124
+       118: aload_1
+       119: aload         4
+       121: invokevirtual #47                 // Method java/util/ArrayDeque.addLast:(Ljava/lang/Object;)V
+       124: aload_3
+       125: instanceof    #55                 // class java/sql/SQLException
+       128: ifeq          155
+       131: aload_3
+       132: checkcast     #55                 // class java/sql/SQLException
+       135: astore        5
+       137: aload         5
+       139: invokevirtual #57                 // Method java/sql/SQLException.getNextException:()Ljava/sql/SQLException;
+       142: astore        6
+       144: aload         6
+       146: ifnull        155
+       149: aload_1
+       150: aload         6
+       152: invokevirtual #47                 // Method java/util/ArrayDeque.addLast:(Ljava/lang/Object;)V
+       155: goto          22
+       158: return
+}
+Compiled from "RequiredColumn.java"
+public final class dev.codex.schubert.nk.api.database.RequiredColumn {
+  private dev.codex.schubert.nk.api.database.RequiredColumn();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  public static <T> T requireValue(T) throws java.sql.SQLDataException;
+    Code:
+         0: aload_0
+         1: ifnonnull     16
+         4: new           #7                  // class java/sql/SQLDataException
+         7: dup
+         8: ldc           #9                  // String required database value is missing
+        10: ldc           #11                 // String 22004
+        12: invokespecial #13                 // Method java/sql/SQLDataException."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+        15: athrow
+        16: aload_0
+        17: areturn
+}
