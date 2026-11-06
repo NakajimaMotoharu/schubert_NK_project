@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.messaging.outbound;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.lang.reflect.InvocationHandler;
@@ -7,6 +8,7 @@ import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLDataException;
 import java.time.Instant;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -63,8 +65,11 @@ final class OutboxReturningIdContractTest {
             new byte[320],
             now,
             now);
-    assertThrows(
-        OutboxIntegrityException.class,
-        () -> new JdbcOutboxRepository(() -> 0).enqueue(connection, request));
+    assertEquals(
+        "22004",
+        assertThrows(
+                SQLDataException.class,
+                () -> new JdbcOutboxRepository(() -> 0).enqueue(connection, request))
+            .getSQLState());
   }
 }

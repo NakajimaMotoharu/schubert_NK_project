@@ -1,0 +1,64 @@
+
+Failures (3):
+  JUnit Jupiter:JdbcOutboxPortTest:requiredAndInvalidRowsFailClosedIncludingNullableAttempt()
+    MethodSource [className = 'dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest', methodName = 'requiredAndInvalidRowsFailClosedIncludingNullableAttempt', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: message_id ==> Unexpected exception type thrown, expected: <dev.codex.schubert.nk.api.messaging.outbound.OutboxIntegrityException> but was: <java.sql.SQLDataException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:39)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3153)
+       dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest.requiredAndInvalidRowsFailClosedIncludingNullableAttempt(JdbcOutboxPortTest.java:336)
+       [...]
+     Caused by: java.sql.SQLDataException: required database value is missing
+       dev.codex.schubert.nk.api.database.RequiredColumn.requireValue(RequiredColumn.java:17)
+       dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxRepository.read(JdbcOutboxRepository.java:173)
+       dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxRepository.claim(JdbcOutboxRepository.java:110)
+       dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest.lambda$requiredAndInvalidRowsFailClosedIncludingNullableAttempt$1(JdbcOutboxPortTest.java:338)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:JdbcOutboxPortTest:dlqMetadataIsAllOrNoneAndPreservesClosedProjection()
+    MethodSource [className = 'dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest', methodName = 'dlqMetadataIsAllOrNoneAndPreservesClosedProjection', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <dev.codex.schubert.nk.api.messaging.outbound.OutboxIntegrityException> but was: <java.sql.SQLDataException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest.dlqMetadataIsAllOrNoneAndPreservesClosedProjection(JdbcOutboxPortTest.java:402)
+       [...]
+     Caused by: java.sql.SQLDataException: required database value is missing
+       dev.codex.schubert.nk.api.database.RequiredColumn.requireValue(RequiredColumn.java:17)
+       dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxRepository.readDlqMetadata(JdbcOutboxRepository.java:205)
+       dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxRepository.read(JdbcOutboxRepository.java:185)
+       dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxRepository.claim(JdbcOutboxRepository.java:110)
+       dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest.lambda$dlqMetadataIsAllOrNoneAndPreservesClosedProjection$2(JdbcOutboxPortTest.java:403)
+       [...]
+  JUnit Jupiter:OutboxReturningIdContractTest:sqlNullReturningIdentifierCannotBecomeSuccessfulZero()
+    MethodSource [className = 'dev.codex.schubert.nk.api.messaging.outbound.OutboxReturningIdContractTest', methodName = 'sqlNullReturningIdentifierCannotBecomeSuccessfulZero', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <dev.codex.schubert.nk.api.messaging.outbound.OutboxIntegrityException> but was: <java.sql.SQLDataException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.api.messaging.outbound.OutboxReturningIdContractTest.sqlNullReturningIdentifierCannotBecomeSuccessfulZero(OutboxReturningIdContractTest.java:66)
+       [...]
+     Caused by: java.sql.SQLDataException: required database value is missing
+       dev.codex.schubert.nk.api.database.RequiredColumn.requireValue(RequiredColumn.java:17)
+       dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxRepository.enqueue(JdbcOutboxRepository.java:87)
+       dev.codex.schubert.nk.api.messaging.outbound.OutboxReturningIdContractTest.lambda$sqlNullReturningIdentifierCannotBecomeSuccessfulZero$3(OutboxReturningIdContractTest.java:68)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+
+Test run finished after 311 ms
+[         5 containers found      ]
+[         0 containers skipped    ]
+[         5 containers started    ]
+[         0 containers aborted    ]
+[         5 containers successful ]
+[         0 containers failed     ]
+[         9 tests found           ]
+[         0 tests skipped         ]
+[         9 tests started         ]
+[         0 tests aborted         ]
+[         6 tests successful      ]
+[         3 tests failed          ]
+

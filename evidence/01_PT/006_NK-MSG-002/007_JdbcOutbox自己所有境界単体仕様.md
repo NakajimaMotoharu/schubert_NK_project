@@ -21,3 +21,7 @@ Production method: constructors/enqueue/claim/markSent/markFailure/read/readDlqM
 原診断PG20982はsource5d8a0869/normal20704の1件F1/OS1・資格0、全保存。実装済みのNN不備として修正前起票済み。全9method/2Test classを是正後同source一runで実行し、Failed/flaky/skipped/not-runを成功へ算入しない。LINE/METHOD/CLASS/BRANCHの全miss0、全branch/例外/境界・nullの意味を確認し、除外/exec合成なし。変更Mainはfresh六module通常compile/NullAway/静的を行い、旧20114全Java同一という前提を新sourceへ転用しない。
 
 実行: 018/input094 normal <frozen-source> →095 static <same-source> →012 qualifier prepare/static/run/post（Outbox専用profile）→独立post。正確command・OS/JDK・日時/branch/source/入力期待actual・終了code/coverage/BUG/hashは各manifestと008結果へ記録する。JDK SQLExceptionログgetter/ThreadLocalRandom SDK activityを別途既reviewと実class-initへ結合し、全syscall0とは主張しない。四held/Root/native/CHR/全451正式未受入を維持する。
+
+## 必須列例外oracle補正（BUG2368/YKT2113、2026-11-06）
+
+原PG21004は9/F3/OS1の未資格。SS332のNULL補完禁止と、Main修正前からのRequiredColumn.requireValue（source fb189、SQLDataException/SQLSTATE22004）を独立根拠とし、PT003/004/009の必須NULL期待を22004へ確定する。read.idのNULL→0は既id>0のOutboxIntegrityException、DLQoriginal無しの他部分有りもOutboxIntegrityException、非null無効投影はOutboxIntegrityException＋IAE。表003の例外保持はこの区分を指す。元診断は例外0を示し欠落拒否不足自体は確認済みだが、例外型OutboxIntegrityという当初のTest仮定は誤りとして保全し、新期待の根拠へ使用しない。Production/既null契約/設計/Current oracleは変更しない。是正後の新source全9を再試験し旧6成功を流用しない。

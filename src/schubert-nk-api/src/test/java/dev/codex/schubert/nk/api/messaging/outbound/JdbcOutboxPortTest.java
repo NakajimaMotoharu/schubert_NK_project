@@ -14,6 +14,7 @@ import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.time.OffsetDateTime;
@@ -333,10 +334,18 @@ final class JdbcOutboxPortTest {
       var values = row(7, NOW);
       values.put(column, null);
       f.rows.add(values);
-      assertThrows(
-          OutboxIntegrityException.class,
-          () -> repository.claim(f.connection(), OWNER, NOW, 1),
-          column);
+      if (column.equals("id")) {
+        assertThrows(
+            OutboxIntegrityException.class, () -> repository.claim(f.connection(), OWNER, NOW, 1));
+      } else {
+        assertEquals(
+            "22004",
+            assertThrows(
+                    SQLDataException.class,
+                    () -> repository.claim(f.connection(), OWNER, NOW, 1),
+                    column)
+                .getSQLState());
+      }
       assertTrue(f.resultClosed && f.statementClosed);
       f.borrowed();
     }
@@ -399,8 +408,11 @@ final class JdbcOutboxPortTest {
       values.putAll(fields);
       values.put(missing, null);
       f.rows.add(values);
-      assertThrows(
-          OutboxIntegrityException.class, () -> repository.claim(f.connection(), OWNER, NOW, 1));
+      assertEquals(
+          "22004",
+          assertThrows(
+                  SQLDataException.class, () -> repository.claim(f.connection(), OWNER, NOW, 1))
+              .getSQLState());
     }
     var good = new Fixture();
     var values = row(7, NOW);

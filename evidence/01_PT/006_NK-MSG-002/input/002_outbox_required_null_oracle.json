@@ -1,0 +1,19 @@
+{
+  "schema": "PGPT_INDEPENDENT_NULL_ORACLE_V1",
+  "unchangedContractSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+  "requiredColumn": {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java",
+    "sha256": "1a2121d84e092a0fae4a973452370cf9ea0aa5d9fb56d023ae7015b0061fae7d"
+  },
+  "expected": {
+    "requiredNullException": "java.sql.SQLDataException",
+    "sqlState": "22004",
+    "invalidProjectionException": "OutboxIntegrityException",
+    "absentDlqOriginalWithPartialMetadata": "OutboxIntegrityException"
+  },
+  "originalFailingUnit": "PG21004",
+  "productionUsedToComputeExpected": false,
+  "reason": "Existing explicit exception contract predates Outbox fix; SS332 forbids replacing SQL NULL with zero. No expected value computed by calling a Production method.",
+  "bug": "BUG-2368",
+  "horizontal": "YKT-2113"
+}
