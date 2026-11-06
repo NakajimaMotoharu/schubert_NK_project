@@ -1,0 +1,22 @@
+{
+  "metadataExit": 0,
+  "rawPmd": 2,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "review": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": "524",
+      "reason": "Host JUnit own2worker8record/10second join/try-resource executor; memory sink uses concurrent queue and atomic count, no production managed servlet threads."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "529",
+      "reason": "Host JUnit own2worker8record/10second join/try-resource executor; memory sink uses concurrent queue and atomic count, no production managed servlet threads."
+    }
+  ],
+  "bug": "BUG-2333",
+  "horizontal": "YKT-2078"
+}

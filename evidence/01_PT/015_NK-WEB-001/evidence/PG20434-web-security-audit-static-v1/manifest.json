@@ -1,0 +1,28 @@
+{
+  "metadataExit": 0,
+  "rawPmd": 2,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "review": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": "524",
+      "reason": "Host JUnit own2worker8record/10second join/try-resource executor; memory sink uses concurrent queue and atomic count, no production managed servlet threads."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "529",
+      "reason": "Host JUnit own2worker8record/10second join/try-resource executor; memory sink uses concurrent queue and atomic count, no production managed servlet threads."
+    }
+  ],
+  "bug": "BUG-2333",
+  "horizontal": "YKT-2078",
+  "files": {
+    "manifest.safe.json": "457308a99f273f5f5cbf0805f6fadc88f7a237f513573a903af1665274110e24",
+    "checkstyle.xml": "68fb582f5c0530a3489b31c821a2453f2afabda2cd7b5c4c006f21584a28b6f6",
+    "review.json": "ea6211c093da721803b997043e01dc8683dffc6202befa82728fa398f5b7dce7",
+    "pmd.xml": "38f87efd5072b3ac20feafbb9881cf3838e0fd30b8bdbf56f19c2c9eec387814"
+  }
+}
