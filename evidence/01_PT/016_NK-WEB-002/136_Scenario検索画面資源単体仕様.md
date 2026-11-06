@@ -18,3 +18,8 @@ Program NK-WEB-002 / SearchTemplateResourcePortTest、WBS-P016-03。関連RD FUN
 全8method/22派生DOM。Optional欠落・空collection・未知値・空文字・0/1/100/201件・page端・並行を上記に含む。Java null契約/全MVC/入力validation自体/実HTTP/順序SQLは別programの責務、ここで合格にしない。HTMLにJava四counterは存在せずnull、除外で100%へ補完しない。全HTML分岐に対して上表のtrue/false入力を明記し、全工程coverage100とは区別する。
 
 実行command: `env PYTHONPATH=tools/quality python3 -B evidence/01_PT/016_NK-WEB-002/input/019_search_resource_qualifier.py prepare|static|run <frozenHEAD>|post <sameHEAD>`。prepare/staticは固定済み入力、実Product Unitは新規一回だけ。XML全method名・F/E/S/aborted0・22DOM・source/resource/dependency/normalJAR/inputHash・実終了codeをstrictpostで結合する。原prepare説明の複製残留BUG2345/YKT2090は原20604を保持し当工具metadataだけ是正、旧成功PT流用0。結果137/公開PG20620 manifestへ終了時記載。全451/正式認定1964-53/QA055/工数null保持。
+
+
+## BUG2349/YKT2094による通常fixture是正
+
+旧PG20620のfield保持測定は保全するが、通常Scenarioリンクfixtureのsingular /scenario は正本UI221/SS313の /scenarios/{id} と不一致。resultRow入力と005独立expectedを /scenarios/17#entry-9 へ修正し、現Test sourceの必要8/22DOM回帰をinput027/PG20684で実施する。元expectedを製品都合で変更せず、正本routeへ整合するTest障害是正。元8と新8は同TestIDで一度だけ数え、旧新source成功を混合しない。結果137の旧source記述は歴史として保持、追加実結果は144へ保存。

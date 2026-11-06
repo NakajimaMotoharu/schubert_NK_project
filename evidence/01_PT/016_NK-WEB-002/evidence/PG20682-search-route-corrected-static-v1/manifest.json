@@ -1,0 +1,55 @@
+{
+  "actualExit": 0,
+  "metadataExit": 0,
+  "compileExit": 0,
+  "prepareManifestSha256": "345a2f1a962acf047ae3f0a69c103e4fb2229b033d90b669a7d8133bf4687020",
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/SearchTemplateResourcePortTest.java": "a97edd67d1730bc4f426753e8b43933e1fee88dab3bfc100d5b6f3953a28f032",
+    "evidence/01_PT/016_NK-WEB-002/input/020_search_resource_dependencies.json": "924384013b59a9692fedb9364a957ecc039cd5194f754fb2439e91b7c671c9b0",
+    "evidence/01_PT/016_NK-WEB-002/input/027_search_route_corrected_qualifier.py": "db7945b13a787f590e7d10db0e1ec93f85b2d5531b11a51a2b7c42bbde70bd50",
+    "src/schubert-nk-web/src/main/resources/templates/search.html": "e3db4ebdc9372eb396d2fe95cf56aced827d400503cca1317b3572e53a69c4a7",
+    "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd",
+    "src/schubert-nk-web/src/main/resources/templates/fragments/pagination.html": "ddf3ccc9a1f88adf5bd61c8c9aa8928022f97c6e8f314c48941aad267bd5cb80"
+  },
+  "files": {
+    "original-manifest.json": "83c492aeb8ea1b8b32d25f9e6f492c7397f7ae4173901198c20bc5a7200006ae",
+    "pmd.xml": "6abd43074f17fd51960c77f5e9d5479b5990554e0b0491194be5c73b6d7ed409",
+    "checkstyle.xml": "165947f2f66690b5cf2de3809a0f53e27aaf44b9e9d8a26e6554df5e8598b630",
+    "pmd.stdout": "2ac4db619b31450b424d141a67271614e96179c84f21f8f1a41a56524a1a940d",
+    "pmd.stderr": "4e114156e4c7a536f6f10017a04f680a7cc8a7ca457f1aaccc280dbd3877210e",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "rawPmd": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": 321,
+      "method": "ownedConcurrentRenderersNeverShareFiltersOrRows"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 326,
+      "method": "ownedConcurrentRenderersNeverShareFiltersOrRows"
+    }
+  ],
+  "individualApplicability": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": 321,
+      "method": "ownedConcurrentRenderersNeverShareFiltersOrRows",
+      "applicable": false,
+      "basis": "Owned standalone JUnit2worker/8future10s/TWR; no container/application/backend thread."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 326,
+      "method": "ownedConcurrentRenderersNeverShareFiltersOrRows",
+      "applicable": false,
+      "basis": "Owned standalone JUnit2worker/8future10s/TWR; no container/application/backend thread."
+    }
+  ],
+  "applicableViolations": 0,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "testsExecuted": 0
+}

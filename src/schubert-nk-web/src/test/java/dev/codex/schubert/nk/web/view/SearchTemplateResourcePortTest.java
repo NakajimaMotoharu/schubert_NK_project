@@ -85,7 +85,7 @@ final class SearchTemplateResourcePortTest {
         BODY,
         body,
         "scenarioHref",
-        "/scenario/17#entry-9",
+        "/scenarios/17#entry-9",
         AUDIO,
         audio
             ? Optional.of(
@@ -270,7 +270,7 @@ final class SearchTemplateResourcePortTest {
               ? "NUKITASHI1 chapter セリフ speaker script/one.txt:7 voice/one.ogg"
               : "NUKITASHI1 ナレーション script/one.txt:7",
           d.select(".meta").text());
-      assertEquals("/scenario/17#entry-9", d.select(".scenario-open").attr(HREF));
+      assertEquals("/scenarios/17#entry-9", d.select(".scenario-open").attr(HREF));
       assertEquals(i == 0 ? 1 : 0, d.select(AUDIO).size());
       if (i == 0) {
         assertEquals("/audio/71", d.select(AUDIO).attr("src"));

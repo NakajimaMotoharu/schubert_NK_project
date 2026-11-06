@@ -1,0 +1,54 @@
+{
+  "actualExit": 0,
+  "metadataExit": 0,
+  "compileExit": 0,
+  "prepareManifestSha256": "62ea960ea3857fe5acf97a3f347b047463d38b3d4bebeade28e043b6119b6a6e",
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailTemplateResourcePortTest.java": "93586db2fb28a66c85d50ac698dd93c248ae638170af9c8d337eaa6fc8c052a4",
+    "evidence/01_PT/016_NK-WEB-002/input/026_scenario_detail_resource_dependencies.json": "c94739c357361537d1646ab76d3005d5c07a2486c66f9a364c14248647a40dfc",
+    "evidence/01_PT/016_NK-WEB-002/input/025_scenario_detail_resource_qualifier.py": "97430bd0a77d507a2ac83425a740d89afe6f266e7c1aa32f2357da59c4d59fbf",
+    "src/schubert-nk-web/src/main/resources/templates/scenario.html": "b9709c596a3f98653d854f637ae48e742704b80537460c6f3acc5d6bd342a245",
+    "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd"
+  },
+  "files": {
+    "original-manifest.json": "35bc00823cbbf6d4c5cad462cf6233b2735976202a57aea834f650e16ffff2cd",
+    "pmd.xml": "906665a2c124dbebea3e6fae4d552d16eb64d06911a5aaec3c86cfa74949b9d4",
+    "checkstyle.xml": "8c6224140cb1e9453aa9c6629fd13674dacdaca10bdbef3715b5679285f087ec",
+    "pmd.stdout": "5bd4223cc0e98b1de93e98181c1c2e800672b76f2d5943fd57e4bb36e8667d53",
+    "pmd.stderr": "4e114156e4c7a536f6f10017a04f680a7cc8a7ca457f1aaccc280dbd3877210e",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "rawPmd": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": 241,
+      "method": "ownedConcurrentPagesKeepTheirBodiesAndTitlesIsolated"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 246,
+      "method": "ownedConcurrentPagesKeepTheirBodiesAndTitlesIsolated"
+    }
+  ],
+  "individualApplicability": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": 241,
+      "method": "ownedConcurrentPagesKeepTheirBodiesAndTitlesIsolated",
+      "applicable": false,
+      "basis": "Owned standalone JUnit2worker/8future10s/TWR; no container/application/backend thread."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 246,
+      "method": "ownedConcurrentPagesKeepTheirBodiesAndTitlesIsolated",
+      "applicable": false,
+      "basis": "Owned standalone JUnit2worker/8future10s/TWR; no container/application/backend thread."
+    }
+  ],
+  "applicableViolations": 0,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "testsExecuted": 0
+}

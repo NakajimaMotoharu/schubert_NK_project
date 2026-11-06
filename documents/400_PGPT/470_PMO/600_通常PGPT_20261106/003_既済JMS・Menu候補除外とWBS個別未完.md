@@ -1,0 +1,9 @@
+# 既済候補の除外と個別未完
+
+PG20670は保存済indexと元manifest/actual exit/FESabort0/当target SHAを照合したmetadataだけ。JmsMessageFactoryはPG18602四PT/L16M2C1B6全miss0（元source6b53）、MenuController/WebRequestTraceはPG19558のQA054十五PTが既にある。古い503のNOT_IN...やMarkdown-only followupの欠落を未実行とせず、これらの確認Unit再演0・新PT/Source資格/受入/費用の追加計上0。現source全体へ旧成功を転用せず、既proof59/当213unique/正式1964-53/工数nullを保持する。
+
+再発防止の候補照合順は、PG20458 indexでexact Production pathを先に引く→原manifest/対象source/Test/hashを確認→後続Markdownを補助参照。index未掲載も未実行の証明ではなくUNKNOWN、profile準備前に原証拠を探す。JMS同時試験・再署名・VM操作は発行しない。
+
+WBS-P016-17は12 ownedArtifacts/3 acceptanceChecks/P015-02 exit依存。今回資源HTML1の独立oracleが追加されたが、11 Java/実4更新/同source依存/485 joinは未閉鎖。全leaf/全工程の割合へ1/12を外挿しない。MediaRequest全体候補のRepository故障pathはheld TemporaryInfrastructureExceptionへ到達するため、今回動的に広げない（codec/descriptorの別独立作業まで免除/HOLD拡張する意図はない）。既2977の境界・source資格を調べず再実行しない。
+
+次は現Scenario詳細HTMLの既資源証拠を照合し、未補完の独立表示枝だけを通常PGPTとして進める。通常区切り/PMO待ちで停止しない。QA055・Root/runtime/native/CHR/全451の既HOLDを維持。
