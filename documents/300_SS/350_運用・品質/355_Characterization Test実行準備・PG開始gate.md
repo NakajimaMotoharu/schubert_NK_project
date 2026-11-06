@@ -128,7 +128,7 @@ status/redirect、Content-Type/Disposition/Length/Range、security/cache header�
 
 1. Currentで正規化artifactを取得し、同一currentへ再実行して0 diffを確認する。
 2. NKは原則baseline完全一致。UI 264のDIF-001～016に記載したcase・項目・NK期待値だけを許容する。
-   QA-045/UIC-005/SSC-074によりDIF-001のbrand/title対象へCHR-A01を追加する。Current baselineのLogin titleは変更せず、NKの`schubert NK - ログイン`だけを比較時に登録した差分として扱う。
+   QA-045/UIC-005/SSC-074によりDIF-001のbrand/title対象へCHR-A01を追加する。Current baselineのLogin titleは変更せず、NKの`schubert NK - ログイン`だけを比較時に登録した差分として扱う。QA-055/UIC-012/SSC-338はlock時のCurrent固定15分文とHTTP Retry-Afterを維持する確認であり、新DIF・動的残秒表示・baseline改訂を追加しない。DOM固定文とAPI確定header値は別期待値で検証し、実NK CHR未実行をPASSにしない。
 3. DIFは包括wildcardでDOM/page全体を除外せず、JSON Pointer、semantic element key、header名、before/afterまで指定する。
 4. 未登録diff、未使用DIF、対象case外のDIF、過度なnormalizationはgate失敗とする。
 

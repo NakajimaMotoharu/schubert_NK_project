@@ -48,7 +48,7 @@ program/characterization/
 
 | Case | 対象 | Current baseline・比較内容 | 証跡 |
 |---|---|---|---|
-| CHR-A01 | Login表示 | Username autofocus/autocomplete、password autocomplete、CSRF、error/lock/logout message、password非再表示 | DOM/header |
+| CHR-A01 | Login表示 | Username autofocus/autocomplete、password autocomplete、CSRF、error/lock/logout message、password非再表示。QA-055/UIC-012: lockはUI226のCurrent固定15分文、実残秒はHTTP Retry-Afterだけ。動的画面残秒の差分を追加しない | DOM/header |
 | CHR-A02 | Login制御 | User 5回、IP 10回、15分lock、成功clear。現行は設定と異なり3 sessionとも継続（DIF-016）、NKは最大2 session・最古失効 | HTTP/監査結果 |
 | CHR-A03 | Logout・期限 | POST logout、302、期限切れGET/POST、保存済みsafe GET復帰 | HTTP遷移 |
 | CHR-U01 | Menu | 2列card、現行の業務4機能＋Log照会の5 cardのtitle/順、top bar、responsive 1列 | DOM/PNG |
