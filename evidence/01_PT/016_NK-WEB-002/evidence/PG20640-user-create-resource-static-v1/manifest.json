@@ -1,0 +1,62 @@
+{
+  "actualExit": 0,
+  "metadataExit": 0,
+  "compileExit": 0,
+  "prepareManifestSha256": "4b9a5366594f7ec2659e34b33f55d67bf555899077745d6df69a32b78dd470d7",
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserCreateTemplateResourcePortTest.java": "cb95f761ddcbad3c9e7a0e0adc96c018b0f0fb4abacb985a1b3745b40d630425",
+    "evidence/01_PT/016_NK-WEB-002/input/022_user_create_resource_dependencies.json": "e89a464b93da29a7b6eb96b190699a5b3084860cc7f4cd99c37a6d80e085cf1f",
+    "evidence/01_PT/016_NK-WEB-002/input/021_user_create_resource_qualifier.py": "a5ffd05fdb62c5202416ca8716dda5ae7202d316563288248db51127354de87f",
+    "src/schubert-nk-web/src/main/resources/templates/admin/user-new.html": "97fd0f78dbfbe4538ca36e5ddda507ed55d762c040d12b09d544fc568b0dbedd",
+    "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd"
+  },
+  "files": {
+    "original-manifest.json": "62538e8a458c9d21d1eb8363b8a633483f88fa9d79c957f4b4d1e6b17d22b44d",
+    "pmd.xml": "6b6048a3eb2cefa18580ad602ab3534ab22c45d8d666e1eb9cec36e2a2a36f89",
+    "checkstyle.xml": "dceb4e5b9a6d5b08e50d5be8115143b9b5c1e7831d1bcbbfa37a40860bb41578",
+    "pmd.stdout": "9f3bca9876dd76080f7143a7d93c3052a1b482bfb4af3e8addad27e8f9dd36eb",
+    "pmd.stderr": "4e114156e4c7a536f6f10017a04f680a7cc8a7ca457f1aaccc280dbd3877210e",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "rawPmd": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": 221,
+      "method": "ownedConcurrentFormsDoNotShareUsernamesOrSelections"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 226,
+      "method": "ownedConcurrentFormsDoNotShareUsernamesOrSelections"
+    }
+  ],
+  "individualApplicability": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": 221,
+      "method": "ownedConcurrentFormsDoNotShareUsernamesOrSelections",
+      "applicable": false,
+      "basis": "Standalone owned two-worker JUnit renderer; TWR and8futures10second join. No application/container thread."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 226,
+      "method": "ownedConcurrentFormsDoNotShareUsernamesOrSelections",
+      "applicable": false,
+      "basis": "Standalone owned two-worker JUnit renderer; TWR and8futures10second join. No application/container thread."
+    }
+  ],
+  "applicableViolations": 0,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "checkstyleErrors": 0,
+  "testsExecuted": 0,
+  "priorFailuresPreserved": [
+    "PG20634 original raw4 of which2 applicable"
+  ],
+  "bugRefs": [
+    "BUG-2347",
+    "YKT-2092"
+  ]
+}
