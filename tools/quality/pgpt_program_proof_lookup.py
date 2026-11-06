@@ -17,6 +17,8 @@ def candidate(value, class_name, current_hash):
     coverage = value.get('coverage')
     inputs = value.get('inputHashes')
     schema = 'COVERAGE_INPUT_HASHES'
+    normal_class_hash = None
+    crc64 = None
     branch = value.get('branch')
     natural_zero = value.get('branchStatus') == 'NATURAL_ZERO_BRANCH' and value.get('branchRatio') is None
     if isinstance(coverage, dict) and isinstance(inputs, dict):
@@ -27,6 +29,43 @@ def candidate(value, class_name, current_hash):
         source_path = sources[0]
         source_hash = inputs[source_path]
         counters = coverage[targets[0]]
+    elif 'sourceUnits' in value or 'sourcePins' in value:
+        # Explicit per-class receipts only. An aggregate or ambiguous source pin
+        # cannot be split into a claim about a guessed Main or source family.
+        units, pins = value.get('sourceUnits'), value.get('sourcePins')
+        if not isinstance(units, dict) or not isinstance(pins, dict):
+            return None
+        targets = [key for key in units if isinstance(key, str)
+                   and key.rsplit('/', 1)[-1] == class_name]
+        if len(targets) != 1 or not re.fullmatch(r'[A-Za-z_$][\w$]*(?:/[A-Za-z_$][\w$]*)+', targets[0]):
+            return None
+        target = targets[0]
+        sources = [key for key in pins if isinstance(key, str)
+                   and key.endswith('/src/main/java/' + target + '.java')]
+        if len(sources) != 1:
+            return None
+        source_path = sources[0]
+        if (not re.fullmatch(r'(?:src/[A-Za-z0-9_.-]+|program/characterization)/src/main/java/'
+                             + re.escape(target) + r'\.java', source_path)
+                or any(part in ('.', '..') for part in source_path.split('/'))):
+            return None
+        source_hash = pins[source_path]
+        unit = units[target]
+        if not isinstance(unit, dict):
+            return None
+        normal_class_hash, crc64 = unit.get('normalClassSha256'), unit.get('crc64')
+        counters = unit.get('counters')
+        if (not isinstance(source_hash, str) or not re.fullmatch('[0-9a-f]{64}', source_hash)
+                or not isinstance(normal_class_hash, str) or not re.fullmatch('[0-9a-f]{64}', normal_class_hash)
+                or not isinstance(crc64, str) or not re.fullmatch('[0-9a-f]{16}', crc64)
+                or not isinstance(counters, dict)):
+            return None
+        classes = counters.get('CLASS')
+        if (not isinstance(classes, dict)
+                or any(type(classes.get(k)) is not int or classes[k] < 0 for k in ('covered', 'missed'))
+                or classes['covered'] + classes['missed'] != 1):
+            return None
+        schema = 'SOURCE_UNITS_SOURCE_PINS'
     else:
         # Only the explicit single-target legacy receipt is supported. Never infer a
         # Main from a Test filename or apply aggregate counters to multiple targets.
@@ -69,6 +108,8 @@ def candidate(value, class_name, current_hash):
                 originalExit=value.get('actualExit'), tests=value.get('tests'),
                 fourCounters=counters, allFourMissedZero=bool(full),
                 lineMethodClassMissedZero=three, evidenceSchema=schema, branchAssessment=assessment,
+                declaredNormalClassSha256=normal_class_hash, declaredCrc64=crc64,
+                counterScope='NAMED_CLASS_OR_METHOD_SUBSET_COUNTERS', wholeSourceQualificationInferred=False,
                 acceptanceInferred=False, permissionInferred=False)
 
 
