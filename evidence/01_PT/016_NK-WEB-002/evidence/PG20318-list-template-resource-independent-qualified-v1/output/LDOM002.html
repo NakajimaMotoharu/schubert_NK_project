@@ -1,0 +1,42 @@
+<!doctype html>
+<!-- SCR022/UI224236/SS313314/PG-D350368/PT-QRY-HTTP008,QDL-BIZ; QA049 approved. -->
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>質問回答</title>
+    <link rel="stylesheet" href="/css/schubert.css">
+  </head>
+<body><main class="page question-list-page">
+  <header class="topbar"><h1>質問回答</h1><div class="topbar-actions">
+        <nav class="nav-links" aria-label="共通ナビゲーション">
+          <a href="/">メニュー</a>
+          <a href="/notifications">通知</a>
+        </nav>
+        <span class="login-user">reader</span>
+        <span class="login-role">ADMIN</span>
+        <form class="logout-form" action="/logout" method="post">
+          <button type="submit">ログアウト</button>
+        </form>
+      </div></header>
+  <div id="question-errors" role="alert" hidden="hidden"><ul></ul></div>
+  <form method="get" action="/questions">
+    <label for="question-keyword">Keyword</label><input id="question-keyword" name="keyword" value="" aria-describedby="question-errors">
+    <label for="question-from">受付日From</label><input id="question-from" type="date" name="from" value="" aria-describedby="question-errors">
+    <label for="question-to">受付日To</label><input id="question-to" type="date" name="to" value="" aria-describedby="question-errors">
+    <div><label for="question-owner">利用者名</label><input id="question-owner" name="username" value="" aria-describedby="question-errors"></div>
+    <label for="question-state">回答状態</label><select id="question-state" name="state" aria-describedby="question-errors">
+      <option value="" selected="selected">すべて</option>
+      <option value="ANSWERED">回答済み</option>
+      <option value="UNANSWERED">未回答</option>
+      <option value="ERROR">エラー</option>
+    </select><button type="submit">検索</button>
+  </form>
+  <p class="count">1 questions / page 1 of 1</p>
+  <nav aria-label="ページ"></nav>
+  <section>
+    
+    <table><thead><tr><th>受付日時</th><th class="owner-heading">利用者</th><th>質問</th><th>回答状態</th><th>回答日時</th><th>操作</th></tr></thead>
+    <tbody><tr class="question-row"><td class="submitted-at">2026-11-01 09:00:00</td><td class="owner">reader</td><td class="question-summary">&lt;img src=x onerror=&#39;alert(1)&#39;&gt; &amp; &lt;script&gt;example&lt;/script&gt;</td><td class="state">未回答</td><td class="answered-at"></td><td><a class="detail" href="/questions/12">明細</a> <a class="delete" href="/questions/12#delete-confirm">削除</a></td></tr></tbody></table>
+  </section>
+</main></body></html>

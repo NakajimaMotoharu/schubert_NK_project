@@ -1,0 +1,41 @@
+<!doctype html>
+<!-- SCR022/UI224236/SS313314/PG-D350368/PT-QRY-HTTP008,QDL-BIZ; QA049 approved. -->
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>質問回答</title>
+    <link rel="stylesheet" href="/css/schubert.css">
+  </head>
+<body><main class="page question-list-page">
+  <header class="topbar"><h1>質問回答</h1><div class="topbar-actions">
+        <nav class="nav-links" aria-label="共通ナビゲーション">
+          <a href="/">メニュー</a>
+          <a href="/notifications">通知</a>
+        </nav>
+        <span class="login-user">reader</span>
+        <span class="login-role">USER</span>
+        <form class="logout-form" action="/logout" method="post">
+          <button type="submit">ログアウト</button>
+        </form>
+      </div></header>
+  <div id="question-errors" role="alert" hidden="hidden"><ul></ul></div>
+  <form method="get" action="/questions">
+    <label for="question-keyword">Keyword</label><input id="question-keyword" name="keyword" value="" aria-describedby="question-errors">
+    <label for="question-from">受付日From</label><input id="question-from" type="date" name="from" value="" aria-describedby="question-errors">
+    <label for="question-to">受付日To</label><input id="question-to" type="date" name="to" value="" aria-describedby="question-errors">
+    
+    <label for="question-state">回答状態</label><select id="question-state" name="state" aria-describedby="question-errors">
+      <option value="">すべて</option>
+      <option value="ANSWERED" selected="selected">回答済み</option>
+      <option value="UNANSWERED">未回答</option>
+      <option value="ERROR">エラー</option>
+    </select><button type="submit">検索</button>
+  </form>
+  <p class="count">0 questions / page 1 of 1</p>
+  <nav aria-label="ページ"></nav>
+  <section>
+    <p class="empty-results">該当するデータはありません</p>
+    
+  </section>
+</main></body></html>

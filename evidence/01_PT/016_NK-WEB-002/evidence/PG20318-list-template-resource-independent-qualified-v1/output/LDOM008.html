@@ -1,0 +1,49 @@
+<!doctype html>
+<!-- NK-WEB-002/SCR020/NTF/UI224,236/SS313,332/PG-D347/PT-NTF-HTTP001..010. -->
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>通知</title>
+    <link rel="stylesheet" href="/css/schubert.css">
+  </head>
+<body><main class="page notification-page">
+  <header class="topbar"><h1>通知</h1><div class="topbar-actions">
+        <nav class="nav-links" aria-label="共通ナビゲーション">
+          <a href="/">メニュー</a>
+          <a href="/notifications">通知</a>
+        </nav>
+        <span class="login-user">reader</span>
+        <span class="login-role">USER</span>
+        <form class="logout-form" action="/logout" method="post">
+          <button type="submit">ログアウト</button>
+        </form>
+      </div></header>
+  <div id="notification-errors" role="alert" hidden="hidden"><ul></ul></div>
+  <form method="get" action="/notifications">
+    <label>通知区分<select name="type" aria-describedby="notification-errors">
+      <option value="" selected="selected">すべて</option>
+      <option value="ACCEPTED">受付通知</option>
+      <option value="COMPLETED">処理済通知</option>
+      <option value="ERROR">エラー通知</option>
+    </select></label>
+    <label>受付日From<input type="date" name="from" value="" aria-describedby="notification-errors"></label>
+    <label>受付日To<input type="date" name="to" value="" aria-describedby="notification-errors"></label>
+    <button type="submit">検索</button>
+  </form>
+  <p class="count">2 notifications / page 1 of 1</p>
+  <nav aria-label="ページ"></nav>
+  <section>
+    
+    <table><thead><tr><th>区分</th><th>受付ID</th><th>受付日時</th><th>最終更新日時</th><th>概要</th><th>操作</th></tr></thead>
+    <tbody><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">&lt;img src=x onerror=&#39;alert(1)&#39;&gt; &amp; &lt;script&gt;example&lt;/script&gt;</td><td><a class="detail" href="/notifications/12">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">削除済み</td><td><a class="detail" href="/notifications/11">明細</a></td>
+    </tr></tbody></table>
+  </section>
+</main></body></html>
