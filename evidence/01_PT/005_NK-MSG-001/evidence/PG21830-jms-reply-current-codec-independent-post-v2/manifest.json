@@ -1,0 +1,145 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T07:07:42.940117+09:00",
+  "source": "759204523b987c3e9527ee418c5ad47375c087d7",
+  "checkerSource": "b4abb7bbe783a5e46d194d281ed6846fc8c1d130",
+  "checkerSha256": "35c3ac59795b273c6bc0d60f65ea1ed968c0976264a81bb442818fae3c66e43d",
+  "productionCoreMain": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+  "original": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG21824-jms-reply-current-codec-seven-v1/manifest.json",
+    "sha256": "e1e108aa4bd43cea0a131debbaf910063ca812c268bee1d64a665e4460659a55"
+  },
+  "tests": 7,
+  "newMethods": 0,
+  "requalifiedExistingInvocations": 7,
+  "newSourceProofs": 0,
+  "newAcceptance": 0,
+  "coverage": {
+    "dev/codex/schubert/nk/web/messaging/JmsReplyDecoder": {
+      "INSTRUCTION": {
+        "covered": 268,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 40,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 70,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 30,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 10,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/messaging/ValidatedReply": {
+      "INSTRUCTION": {
+        "covered": 31,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 7,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 3,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "naturalZeroBranchClasses": [
+    "dev/codex/schubert/nk/web/messaging/ValidatedReply"
+  ],
+  "normalMetadataClasses": 535,
+  "noExecutableMetadataClassCount": 15,
+  "positiveMainClassCount": 23,
+  "reportedMethodCount": 86,
+  "dependencyWitness": {
+    "path": "dependency-witness.json",
+    "sha256": "2195dc4e636047e171de5f93299db80498ceedc99edf410c99704aeeab4db324"
+  },
+  "stages": {
+    "normal-classinfo": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21828-jms-reply-current-codec-independent-v1/classinfo-init.stdout",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-06T22:04:17.591130+00:00",
+      "startUTC": "2026-11-06T22:04:17.225720+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "5a39619c4b1c81baa7f9bdc1d1b78973d0698a830c67777c8681500c54d6a6fc",
+      "timedOut": false
+    },
+    "dependency-report": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21828-jms-reply-current-codec-independent-v1/report-init.stdout",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/005_NK-MSG-001/evidence/PG21824-jms-reply-current-codec-seven-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21828-jms-reply-current-codec-independent-v1/dependency-coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-06T22:04:18.057522+00:00",
+      "startUTC": "2026-11-06T22:04:17.591518+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "5661d75df0f763a5277d5a468b31f2007a1f38237a2d68b62de09721439d6b44",
+      "timedOut": false
+    }
+  },
+  "files": {
+    "dependency-report-exit.safe.json": "7d824e1c9861cab235a2c77afac2bdc55b39b8c29a0faec652d75e6472489e29",
+    "normal-classinfo-begin.safe.json": "39f9a9aa29249be2385c90b16f92999db506a1d3307bd18dc0a9fa7126df2541",
+    "normal-classinfo.stdout": "5a39619c4b1c81baa7f9bdc1d1b78973d0698a830c67777c8681500c54d6a6fc",
+    "classinfo-init.stdout": "c6adb9854a35ef9df76fa7533b5466888e2ba1a621a97f3e25786e97afbf151f",
+    "dependency-report-process.safe.json": "c9d20a71c0d337c9a895ecf2d83d22b6385894fbb55022982ecba58573437e2a",
+    "report-init.stdout": "18d5912cc0a9e7f3d03c4d09788c2ed5dda53cfc2b7d537a5d2fc470a8fd29ef",
+    "dependency-report-begin.safe.json": "ee79ff2646fe0ed9e19548adecba0f6bd7cbc607d1600ec3c5db311fe4fa8811",
+    "dependency-coverage.xml": "d3abd999095d79e519472a95f09d0981b162cff741c46813f0c618f606bfa8ce",
+    "normal-classinfo-exit.safe.json": "97142c256590a09798b034c1babed671bd2578ba1af087157b02abad3ee7a97b",
+    "dependency-report.stdout": "5661d75df0f763a5277d5a468b31f2007a1f38237a2d68b62de09721439d6b44",
+    "dependency-report.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "normal-classinfo-process.safe.json": "0ed990597db2c1ddae4a5420a61afa4105f2f4df8fb27eae4293b2e31acff653",
+    "normal-classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "dependency-witness.json": "2195dc4e636047e171de5f93299db80498ceedc99edf410c99704aeeab4db324"
+  },
+  "heldInitAndProbeHits": 0,
+  "analyzerProductInitializations": 0,
+  "wholeDependencyCoverageAccepted": false,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "relatedBug": "BUG-2404",
+  "relatedHorizontal": "YKT-2149",
+  "effortRate": null
+}
