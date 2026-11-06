@@ -16,3 +16,9 @@ OracleはSS332のSQL/ロック順とJDBC4.2 OffsetDateTime UTC/8h greatest式を
 実行環境JDK25.0.4/JUnit1.13.4/JaCoCo0.8.15/Linux、normal20704/sourcefb189を固定、全1844Java/POM同byteを検証して静的20114 D8をJavaだけ参照。prepare/static→source commit/push→単一6method run→strictpost、全物理2class/CRC/session1/全@Test/FESabort0/四countermiss0、旧exec混算・手動除外無しを必要条件とする。自然record/Java compiler標準filterは不変更、架空到達/無意味なassertionで満たさない。command=PYTHONPATH=tools/quality python3 -B evidence/01_PT/018_NK-OPS-001/input/012_acceptor_parser_port_qualifier.py prepare|static|run|post evidence/01_PT/018_NK-OPS-001/input/090_authentication_verifier_jdbc.json [frozenHEAD]。canonical API実受入/全007/全451とは別。
 
 BUG2357/YKT2102原compile0/static9/Unit未実行を保存。五literalを固定定数へ共通化、profileは未使用20836/20838へ変更し旧source/結果不変。新compile0/raw4は各原行/所有でClassLoader/JUnit thread/task専有null-mapの非適用を明示し、抑制せず適用0/CS0。最初のUnitで当六方法を検証してから有限closeする。原.75/2/4cap6/計測4055開始を維持、見積/消費を固定し品質/予算/modelを変更しない。結果042へ実source/run/coverage/hash/BUGを記録する。
+
+## BUG2358/YKT2103 元run後のSDK前提訂正
+
+原PG20840/sourcef165263六件は終了0、元postはJDK DriverManager初期化guardで終了1、資格未認定。原command/config/driver/execは不変更。固定JDK25.0.4のjavapでSQLException constructor→DriverManager.getLogWriterが初期化要因と確認、clinitはnull logWriter/logStream・空list・lock作成のみ、getLogWriterはfield返却のみ。driver発見/接続は別method。Main/依存4型/Test2型のbytecodeにはDriverManager/DataSource/driver/通信呼出が無く、実CP全4箇所にdriver/providerが無い。元全XMLはownedtmp/JDK/設定欠落を確認、元initはdriver/Socket無し。PG20846はProduct再実行0の静的確認、JVM/JCA/classpathの全syscall観測ではない。
+
+初期の「DriverManager無し」は直接呼出/接続無しと初期化無しを混同した不正確な記述として履歴保存する。postはGit固定した元producer/config/sourceをそのまま照合し、別Git固定review007/全静的artifact/hashと元run/init/XMLを結合した場合だけ当JDK初期化を認める。単なる観測class名許容/業務期待値変更ではなく、元HOLD四型のinit/probe0・DB/サービス操作無しは維持。原6Unitを再演しない。
