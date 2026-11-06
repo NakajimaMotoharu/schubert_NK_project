@@ -1,0 +1,112 @@
+{
+  "atJST": "2026-11-06T13:07:13.586806+09:00",
+  "bug": "BUG-2331",
+  "horizontal": "YKT-2076",
+  "checks": [
+    {
+      "eventId": "PGPT-20261008-3989",
+      "summaryTests": 14,
+      "manifestTests": 14,
+      "consistent": true,
+      "manifest": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG20268-notification-list-valid-fixture-fourteen-v1/manifest.json",
+        "sha256": "5e589e583538adcbee6b6ae7ab3f2ed78de976155aa3cc7be82d7ef68ae3aa59"
+      }
+    },
+    {
+      "eventId": "PGPT-20261008-3991",
+      "summaryTests": 16,
+      "manifestTests": 16,
+      "consistent": true,
+      "manifest": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG20288-question-list-sixteen-v1/manifest.json",
+        "sha256": "b3612ef210d63e1627400adf8b846971ff693b9358f25ead1dc5bec84650e378"
+      }
+    },
+    {
+      "eventId": "PGPT-20261008-3994",
+      "summaryTests": 12,
+      "manifestTests": 12,
+      "consistent": true,
+      "manifest": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG20318-list-template-resource-independent-qualified-v1/manifest.json",
+        "sha256": "b7bd68af1e0f91be0ebfe0d3bf5972284c9915873ea0b429e93ba3b9a9cfeb5b"
+      }
+    },
+    {
+      "eventId": "PGPT-20261008-3996",
+      "summaryTests": 8,
+      "manifestTests": 8,
+      "consistent": true,
+      "manifest": {
+        "path": "evidence/01_PT/011_NK-QST-001/evidence/PG20344-question-submit-style-eight-v1/manifest.json",
+        "sha256": "1ec49a01d4f503040ed4712715f5c4a71d52c33c3a9da3ab1735da59125a769a"
+      }
+    },
+    {
+      "eventId": "PGPT-20261008-3998",
+      "summaryTests": 14,
+      "manifestTests": 14,
+      "consistent": true,
+      "manifest": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG20360-detail-template-resource-fourteen-v1/manifest.json",
+        "sha256": "c968cd2b26a99f22fd974a7fd67df5e56ec9f9b6d78ef41df1fad7be05af41b0"
+      }
+    },
+    {
+      "eventId": "PGPT-20261008-4000",
+      "summaryTests": 8,
+      "manifestTests": 8,
+      "consistent": true,
+      "manifest": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG20376-web-session-snapshot-eight-v1/manifest.json",
+        "sha256": "3d3746899dffed0ca900c5e55a231d834f29dbc0ae18bf64e399a2c6ad2c41af"
+      }
+    },
+    {
+      "eventId": "PGPT-20261008-4002",
+      "summaryTests": 8,
+      "manifestTests": 13,
+      "consistent": false,
+      "manifest": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG20392-login-form-converter-thirteen-v1/manifest.json",
+        "sha256": "01d9ef4206bc4aa2094c2e0d1febca72c0c58b1a3873961c1df93e34eb026d05"
+      }
+    }
+  ],
+  "correctedEvent": {
+    "eventId": "PGPT-20261008-4004",
+    "previousEventId": "PGPT-20261008-4003",
+    "eventType": "EVENT_FIELD_CORRECTION",
+    "timeJST": "2026-11-06T13:07:13.586806+09:00",
+    "groupId": "PGPT-ORDINARY-LOGIN-FORM-CONVERTER-20261106",
+    "chargedToExecutionGroup": "PGPT-ORDINARY-FORM-CSRF-REQUEST-20261106",
+    "correctsEventId": "PGPT-20261008-4002",
+    "field": "attemptResult",
+    "originalValue": "ALL8_PASS_FOUR100_POST0",
+    "correctedValue": "ALL13_PASS_FOUR100_POST0",
+    "basis": "Original qualified public manifest has actual13, selected methods/XML already qualified; no test replay, original event preserved",
+    "bug": "BUG-2331",
+    "horizontal": "YKT-2076",
+    "sourceEvidenceRefs": [
+      {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG20392-login-form-converter-thirteen-v1/manifest.json",
+        "sha256": "01d9ef4206bc4aa2094c2e0d1febca72c0c58b1a3873961c1df93e34eb026d05"
+      }
+    ],
+    "acceptedDelta": {
+      "closedIds": []
+    },
+    "observedSharedPp": null,
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "additionalProductionTests": 0,
+    "costEffect": "No extra fee event/delta; metadata work included in active group4003 end observation"
+  },
+  "futureSummaryFromManifest": true,
+  "preventionDetectedActualMismatch": true,
+  "pgptAcceptedDelta": 0,
+  "additionalTests": 0,
+  "actualCostsNotReadded": true,
+  "qualityAndOracleUnchanged": true
+}
