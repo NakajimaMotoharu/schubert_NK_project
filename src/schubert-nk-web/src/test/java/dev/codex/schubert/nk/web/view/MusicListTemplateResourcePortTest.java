@@ -192,7 +192,8 @@ final class MusicListTemplateResourcePortTest {
       assertEquals(
           List.of("/music", "/music/BGM", "/search"),
           d.select("header nav:not([aria-label]) a").eachAttr(HREF));
-      assertEquals(READER + " (" + role + ")", d.select(".login-user").text());
+      assertEquals(READER, d.select(".login-user").text());
+      assertEquals(role, d.select(".login-role").text());
       assertEquals(1, d.select("form[action=/logout][method=post]").size());
     }
   }
