@@ -1,0 +1,100 @@
+{
+  "actualExit": 1,
+  "atJST": "2026-11-06T23:45:17.328901+09:00",
+  "source": "087e81a679a576721d8b6d6124fdd881ae9192e5",
+  "normalManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21088-characterization-tool-original-main-compile-v1/manifest.safe.json",
+    "sha256": "068773debc310f76f580ef1eea8de2e5735cada128d2e6c677ce62ebdffd2e0a"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21088-characterization-tool-original-main-compile-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar": "4e46308ab580010e5c3a26d946c4764b3dfede9ca2b0c472e1090eb01b615ced",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar": "0a1bd4e9b0d670e632d40ee8c625ad376233502f03c2f5889baea95d025b47a7",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar": "e516743a316dcf83c572ffc9cb6e8c5e8c134880c8c5155b02f7b34e9c5dc3cf",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar": "aa77eaf29293a868c47372194f7c5287d77d9370b04ea25d3fffc1e4904b5880"
+  },
+  "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+  "test": {
+    "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorEmptyInputTest.java",
+    "sha256": "fda140e2cc2a697ee28fea3be92eead7316ba4c5291e5c2560b89e18d1448e90"
+  },
+  "stages": {
+    "dependencies": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T14:45:14.019852+00:00",
+      "endUTC": "2026-11-06T14:45:16.141521+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21088-characterization-tool-original-main-compile-v1/snapshot/program/characterization/pom.xml",
+        "org.apache.maven.plugins:maven-dependency-plugin:3.9.0:build-classpath",
+        "-DincludeScope=compile",
+        "-Dmdep.outputFile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21090-comparator-empty-json-original-diagnostic-v1/compile-classpath.txt"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21088-characterization-tool-original-main-compile-v1/snapshot",
+      "stdoutSha256": "999a9fd31ed671667530b179c80f25130de9ebaca4df7681b855fa8be7917b88",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T14:45:16.145301+00:00",
+      "endUTC": "2026-11-06T14:45:16.661352+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21088-characterization-tool-original-main-compile-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21090-comparator-empty-json-original-diagnostic-v1/classes",
+        "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorEmptyInputTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "unit": {
+      "actualExit": 1,
+      "timedOut": false,
+      "startUTC": "2026-11-06T14:45:16.661707+00:00",
+      "endUTC": "2026-11-06T14:45:17.327807+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21090-comparator-empty-json-original-diagnostic-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21090-comparator-empty-json-original-diagnostic-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg21088-characterization-tool-original-main-compile-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar",
+        "--select-class",
+        "dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21090-comparator-empty-json-original-diagnostic-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "72e05c6dd76a6f53dfc271a83ee4bc51ea7c61c0731b29d3464fb18fd0b637f7",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "tests": 1,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "actualCharacterizationRun": false,
+  "onlyOwnSyntheticTempFiles": true,
+  "currentBaselineReadOrWritten": false,
+  "qualified": false
+}
