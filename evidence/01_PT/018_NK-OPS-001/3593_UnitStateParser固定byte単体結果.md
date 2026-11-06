@@ -1,0 +1,9 @@
+# UnitStateParser 固定byte単体結果
+
+2026-11-06T19:03:56.098012+09:00、source f510cf455e4b52513def7736be6b61a65bd50a17 push済/Production Java不変更、normal20704 fb189。6/FESaborted0、L28/M3/C1/B36全miss0、exec一session・CRC719c3dc88d846d0d、旧exec合成/手動除外/反射constructor呼出無し。PG20770 strictpost0 manifest f133dc95c12a225b90e7eeadaa5571f8083fa3dcc8ca9aebf6b57b76674ec8b8、独立PG20774 post0 manifest 6a0ef148955b5eda0a8f2c8665f29c2ba84160c6c06ecaf056a1108a0f20fc21。TestID/実XML/全入力Git/normalclass/coverage/command時刻・真正終了code/hash・JDK25環境は両manifestとpublic original-manifestへ結合。原007は旧gate/Process含む歴史、当runはparserの6methodだけで原16/実service成功へ加算しない。
+
+byte0/1024/1025、ASCIIの不正6値と合法端、7line一意/framing/equal/key/ID、各状態6箇所、失敗後の非汚染、入力全byte不変、2worker32独立解析を固定literalで照合。Product初期化はparser/enum/診断型だけ、ApplicationStopGate/SystemctlStateSource/Process/実状態/VM/Root/DB/通信/held4無し。自然private空constructorはJaCoCo標準filter、手動除外無し、実停止・lease/owner/Root readiness証拠ではない。
+
+PG20764 compile0、PG20766 PMDraw2はstandalone JUnitがTWR所有する2workerだけのJ2EE規則非適用、適用0/CS0、生4保持・抑制無し。D8静的20114は旧新Java/POM全入力一致・全六JAR1844code/debug同byteの専用bindingを付け静的だけ再利用。BUG2354/YKT2099の旧normal三資源guard/indent失敗は当初状態で保持、compile/Unit未起動、修正commit f510cf455e4b52513def7736be6b61a65bd50a17・状態CLOSED/完了日2026-11-06。横展開は新089のみ是正、古い成功profileは各sourceを維持し再演0、resource034は20704固定で非該当。
+
+4044→4045原1/3/5cap8/共有0pp、ordinary28/all36、専有費N/Tnull。主担当は503/485のP01804、着手02誤記は元eventを残し014追記・当endへ訂正、予算増額/重複費0。26対象245unique=Java145+HTML93+CSS7、wholeSource60/原282交差40残242/partial18残62、正式1964-53/歴史17-190/新leaf0/工数null。実VM/Browser/Root/QA055/native/CHR/全451のHOLDは不変。
