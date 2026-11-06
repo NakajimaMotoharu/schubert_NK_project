@@ -1,0 +1,462 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T07:00:11.368596+09:00",
+  "source": "759204523b987c3e9527ee418c5ad47375c087d7",
+  "productionCoreMain": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+  "context": {
+    "source": "759204523b987c3e9527ee418c5ad47375c087d7",
+    "productionCoreMain": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+    "atJST": "2026-11-07T06:58:47.096668+09:00",
+    "inputHashes": {
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java": "e26b68f3de97575ba40842a775258679d0c630586155822c799ff167425a8b6b",
+      "evidence/01_PT/005_NK-MSG-001/input/019_jms_reply_current_codec_requalifier.py": "8a5d639ef12004fa95c5772fbfa70934703ee25e9582c83b0c548d00673d6593",
+      "evidence/01_PT/005_NK-MSG-001/019_JMSReply現codec接続・既七PT再資格仕様.md": "6633f0bf70c8d7ae65c5c93fb78d0136ac948813cd676972f2ef3ab189e5c049",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoder.java": "fe609be3a5742587cfa6594691ee2c82fae3dc393e94f5fb0783113a88e21da2",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ValidatedReply.java": "5003b09aff1093dab0f672518d1962d5b2a9f0b95698d11d0295639ebe3b3a54"
+    },
+    "runtimeInputs": {
+      "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar": "6605e08075ab389c359451c7854808cf4b1575e1ea6317e534e9d4df088096df",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar": "89eb1f27e583119db4c1c23db26cbc1916c82bfc5fcc23dbcb7ef040602f09d6",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar": "111cbc7a359b5597085b5328ab74c2f81dd40e7211d07bd12e6ffa83d9de99d9",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar": "02b43c47403dd0ef6dcd4573d0744bc6bae935edae016eb19f2d4ebb5eb33722",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar": "f474b14c7734f15e0540394cb6f39d67777b7581a42919e4ac89d253d4efd929",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar": "d31926b01adcc07af86f5e27b81b6d6c115df17d366e835d1fc3f5a1924e7e52",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": "d33f6a79a723bbc07e66b45b8e413df561cbaad5ad711162ed9a5903fb49720a",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "28cdedd219fbf7137d4e7e4c5776824ce817d932b96b83d957d29b0f4c1bde38",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d",
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1",
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac": "2136da000c36cd6ea5e714ecf8ea7fb4e41f29c75849b6b7e62531373b91a3b1"
+    },
+    "normalManifest": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/manifest.safe.json",
+      "sha256": "1db34d8f2ccee9fc90244bea86c3e446be0c0e010c66516a1e25c92df3426618"
+    },
+    "mainStatic": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20992-outbox-required-six-static-reactor-v1/manifest.safe.json",
+      "sha256": "2d3130234ce662ebf2b0bb1f57e74c123ec68e7a307feb10844231bd9822a20a"
+    },
+    "original14": {
+      "path": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18644-jms-uuid-normal-post-v1/manifest.json",
+      "sha256": "5cafcb6a2f2d4a8b61dcc33a614de0338b5e4dc99980da102a10a1f0ea8d3ba6"
+    },
+    "classpath": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+    "jars": {
+      "web": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar",
+        "sha256": "d33f6a79a723bbc07e66b45b8e413df561cbaad5ad711162ed9a5903fb49720a"
+      },
+      "protocol": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "28cdedd219fbf7137d4e7e4c5776824ce817d932b96b83d957d29b0f4c1bde38"
+      }
+    },
+    "physicalHashes": {
+      "dev/codex/schubert/nk/web/messaging/JmsReplyDecoder": "669807892f6ccb050fcf6392ade93a4b29930b39070e2d0cfea833486d6c0ebd",
+      "dev/codex/schubert/nk/web/messaging/ValidatedReply": "e9edd612876faa74141a41c63b3c40f4f5840187291e7d924c40d59879d035bc"
+    },
+    "testClass": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+    "expectedMethods": [
+      "acceptanceReplyUsesExactRegisteredAsyncProfile",
+      "destinationMustBeThePermanentApprovedAddressWithoutReplyTo",
+      "identityPropertiesMustRetainExactLowercaseCanonicalUuidText",
+      "nullTypeBodyLengthAndCopyAnomaliesAreRejected",
+      "requiredHeadersPropertiesAndValuesDenyMissingBlankAndMalformedInputs",
+      "transportAndWireValuesMustExactlyMatchTheReplyHeaderAndRoute",
+      "validReplyProducesAnImmutableRedactedResult"
+    ],
+    "expectedTests": 7,
+    "javaVersion": "25.0.4",
+    "os": "Linux-7.0.0-42-generic-x86_64-with-glibc2.43",
+    "session": "PG21822-JMS-REPLY-CURRENT-CODEC7",
+    "sdkGlobalSyscallZeroMeasured": false,
+    "actualBackendActions": false
+  },
+  "files": {
+    "compile-compile-exit.safe.json": "70f8e6b452ff1677ff668d9f22576b20e13540d96e934d759572923fcf583b3a",
+    "compile-compile.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-compile-begin.safe.json": "aab5da5af6a67c22078c6a3d917a78bae5253e5c963ebf2489ca8498cfa8c015",
+    "compile-compile-process.safe.json": "6432e6ff24524d55453a608a2a41cb1c83269d9a3afd69ccf6c75a2a8189c172",
+    "compile-manifest.safe.json": "265b36b63f82b8ad09ccb313b99dfb6d763955e3593ece77c54b5f3bd08ea62e",
+    "compile-context.safe.json": "3c697ce36ec60230cf4f2b343fa11f6d7b29787b008607b8b4bb017da505f6bb",
+    "compile-compile.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "static-pmd.stdout": "b965810b6d3558dee94e6767d0d6741a71cec7a522d3046ac62bb5c736e1d767",
+    "static-source-list.txt": "4e493321ef60ec54a7d768e201ec9264bcba155aefe6c30a9f242cf74c95b01d",
+    "static-checkstyle-exit.safe.json": "ae0f191de28ab4e344c397b2ff764102ecbdd420b864ee1eb2970d3472d75953",
+    "static-pmd.stderr": "141eb65d74f7997b8eef554fecec67bc550322bbe8156e05a8f2f34e7c0a69e8",
+    "static-pmd-exit.safe.json": "e73c14b8d562f6d3a5b89048607936cacf1551e357b82a2514ccf0ed644220b3",
+    "static-manifest.safe.json": "dd378cee4be0a1c4fc900651588736b0be00a6712ef006889d190a88c84b9518",
+    "static-checkstyle-process.safe.json": "79bcf58fcc8ca8677ea1c2b8b4fac1c71a65ef1d3b90cf555447286c4ef423ae",
+    "static-pmd-begin.safe.json": "fd6ac05f46dfff15c20706aef966fa8d7e5819b243062bbeb6842512ee2f31fc",
+    "static-pmd-process.safe.json": "2192654ea568258a7c9bf6ba735be42ca8116d72c3e2e7da52410b0141f992da",
+    "static-checkstyle.xml": "2c4a350352a2c0c0574602663bf1307f9d17fb66acf3993325c4b9aa2f335833",
+    "static-checkstyle-begin.safe.json": "68566b122f150a4096dc7436ad9fe298b403000bb8dde418fc3f044367100c2b",
+    "static-checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "static-pmd.xml": "7c4018f563b8193d7dd5908806249794550cd84f436c2fd9cfe0c7082a343f7f",
+    "static-checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-begin.safe.json": "b7abf3ddce95bf0b940fd09416eb28cf0edd17ab75cbb14131750eacd821ee4e",
+    "unit-class-init.stdout": "65687bfdf7588834c82a32570123c922944751f2c933e1d6d5dbbfef051a3d05",
+    "unit-unit-begin.safe.json": "36edfd2d6da3765125a6d98ec97f2325bd4c24301df18dc2aa6fb6729fd04276",
+    "unit-manifest.safe.json": "833246bf7b34b27fad7cd65219a51695adfcd5cef87dd88c0bd9556cf34ecc96",
+    "unit-unit-process.safe.json": "a406086af200c012fbc6d04e5d08b113bdfdc62b8d2fb1c55838a119359d4e2b",
+    "jacoco.exec": "604c55a029dd15b8f5a54eab0e42ea7120ad05da23f240650f37cbd59825ff5b",
+    "unit-unit-exit.safe.json": "3ca79b1d3e8e277a2f0062416a48554eac1bb98e46557414f5f70b3ff3e39088",
+    "unit-unit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-unit.stdout": "7c925c8a3cb7ae36385c984d3db3a90e1803ad05042746fc71e793e8322418c5",
+    "classinfo-begin.safe.json": "998cf7c149ea07f55d595b54b0451924b1888ded6d73cb9143116530e8107df7",
+    "coverage.stdout": "dc2141754741789fd33eee12302ed61235da149b1055f9e199ac14aedcc7fd57",
+    "execinfo-begin.safe.json": "6989b6cbe4f05c19470edd52837b0db936226d1fed757b152c2a551eeadd7f5a",
+    "coverage-exit.safe.json": "4ec354652725c2e93d1db44cb7c97cebf4ce7fb37f28479057363218fe2bb096",
+    "coverage.csv": "a3c428726e2092e5c8c617013726dbaf6251c7d2a2b2ee0ec781c634c5361016",
+    "classinfo-exit.safe.json": "be0fcc1dbfe77d6afb81f1672cc3b4e8ae84d210c9beb3a893faca2419381dd6",
+    "coverage-begin.safe.json": "394421f16efa248dfeb5d125e215309f49f5f0059846a916306d782f931e0cc5",
+    "classinfo.stdout": "c9e42488fef71fadb9a86cd8270ee0d92edba344730494b94a4aa25b5f7f5245",
+    "execinfo-process.safe.json": "948c79ee03c98a0d492ca57a2503211da54c70927ee8ae8c13b8719d74e642c7",
+    "coverage.xml": "62bb97066fdfdc0f4730b9f71e7e799120f9a9283e2c1e77119357b05c081c51",
+    "coverage-process.safe.json": "e1b62b5efe62da4b976f75a22219bd3040c6a5b74af3af88fa5757d429d25774",
+    "execinfo-exit.safe.json": "6493e6206af45dc4c9cbb4fd27a43df9b28fac7731769e018375ed07e60ad37a",
+    "execinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "execinfo.stdout": "582dd394f05d97d482256cc664230e94964dab356d8a32179391bc0b9105d5c7",
+    "classinfo-process.safe.json": "2c63144fc52fbc56125cf1fb88900bb888e074afd42e2ff019c63e9bb92113cd",
+    "classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "coverage.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "testcases.safe.xml": "a832a1ba7e255c886520d71a5bf43145c89ea756b5d693b67e563ac1b7d703f8"
+  },
+  "tests": 7,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "aborted": 0,
+  "newMethods": 0,
+  "requalifiedExistingInvocations": 7,
+  "newSourceProofs": 0,
+  "newAcceptance": 0,
+  "selectedTestMethods": [
+    [
+      "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+      "acceptanceReplyUsesExactRegisteredAsyncProfile"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+      "destinationMustBeThePermanentApprovedAddressWithoutReplyTo"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+      "identityPropertiesMustRetainExactLowercaseCanonicalUuidText"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+      "nullTypeBodyLengthAndCopyAnomaliesAreRejected"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+      "requiredHeadersPropertiesAndValuesDenyMissingBlankAndMalformedInputs"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+      "transportAndWireValuesMustExactlyMatchTheReplyHeaderAndRoute"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+      "validReplyProducesAnImmutableRedactedResult"
+    ]
+  ],
+  "coverage": {
+    "dev/codex/schubert/nk/web/messaging/JmsReplyDecoder": {
+      "INSTRUCTION": {
+        "covered": 268,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 40,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 70,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 30,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 10,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/messaging/ValidatedReply": {
+      "INSTRUCTION": {
+        "covered": 31,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 7,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 3,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "physicalHashes": {
+    "dev/codex/schubert/nk/web/messaging/JmsReplyDecoder": "669807892f6ccb050fcf6392ade93a4b29930b39070e2d0cfea833486d6c0ebd",
+    "dev/codex/schubert/nk/web/messaging/ValidatedReply": "e9edd612876faa74141a41c63b3c40f4f5840187291e7d924c40d59879d035bc"
+  },
+  "classIds": {
+    "dev/codex/schubert/nk/web/messaging/ValidatedReply": "585568aabac20ad6",
+    "dev/codex/schubert/nk/web/messaging/JmsReplyDecoder": "8f2ccd699ecb1e73"
+  },
+  "execMatches": {
+    "dev/codex/schubert/nk/web/messaging/JmsReplyDecoder": {
+      "id": "8f2ccd699ecb1e73",
+      "hits": 70,
+      "probes": 70
+    },
+    "dev/codex/schubert/nk/web/messaging/ValidatedReply": {
+      "id": "585568aabac20ad6",
+      "hits": 7,
+      "probes": 9
+    }
+  },
+  "session": "PG21822-JMS-REPLY-CURRENT-CODEC7",
+  "originalXmlPins": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21822-jms-reply-current-codec-seven-unit-v1/xml/TEST-junit-jupiter.xml": "a9229a2292f5fa6ef179b030ca65295c38bb78314e52bfb3b088341ba5f1476d",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21822-jms-reply-current-codec-seven-unit-v1/xml/TEST-junit-platform-suite.xml": "d0cffcb8969a3b7cbb97ffb4011693adb2c7a72f24bdf5139dcfea645e697e3d",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21822-jms-reply-current-codec-seven-unit-v1/xml/TEST-junit-vintage.xml": "d3d7e7770bcd459455dc52d778696138fe3ffe870430e0374a1fefa684edd934"
+  },
+  "unitTerminal": {
+    "actualExit": 0,
+    "source": "759204523b987c3e9527ee418c5ad47375c087d7",
+    "stage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T21:59:43.224888+00:00",
+      "endUTC": "2026-11-06T21:59:44.592535+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.language=ja",
+        "-Duser.country=JP",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21822-jms-reply-current-codec-seven-unit-v1/tmp",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21822-jms-reply-current-codec-seven-unit-v1/jacoco.exec,sessionid=PG21822-JMS-REPLY-CURRENT-CODEC7,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg21822-jms-reply-current-codec-seven-unit-v1/class-init.stdout",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21818-jms-reply-current-codec-compile-v1/test-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21822-jms-reply-current-codec-seven-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "7c925c8a3cb7ae36385c984d3db3a90e1803ad05042746fc71e793e8322418c5",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "contextSha256": "3c697ce36ec60230cf4f2b343fa11f6d7b29787b008607b8b4bb017da505f6bb"
+  },
+  "reportStages": {
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T22:00:10.914600+00:00",
+      "endUTC": "2026-11-06T22:00:11.079529+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21822-jms-reply-current-codec-seven-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21818-jms-reply-current-codec-compile-v1/component",
+        "--sourcefiles",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/main/java",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21824-jms-reply-current-codec-seven-post-v1/coverage.xml",
+        "--csv",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21824-jms-reply-current-codec-seven-post-v1/coverage.csv"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "dc2141754741789fd33eee12302ed61235da149b1055f9e199ac14aedcc7fd57",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T22:00:11.079975+00:00",
+      "endUTC": "2026-11-06T22:00:11.244755+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21818-jms-reply-current-codec-compile-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "c9e42488fef71fadb9a86cd8270ee0d92edba344730494b94a4aa25b5f7f5245",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-06T22:00:11.245055+00:00",
+      "endUTC": "2026-11-06T22:00:11.359721+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21822-jms-reply-current-codec-seven-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "582dd394f05d97d482256cc664230e94964dab356d8a32179391bc0b9105d5c7",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "static": {
+    "actualExit": 0,
+    "rawPmdExit": 4,
+    "checkstyleExit": 0,
+    "findings": [
+      {
+        "rule": "UseConcurrentHashMap",
+        "line": 216,
+        "endline": 216,
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+        "classification": "CONTEXTUAL_NONAPPLICABLE",
+        "actualViolation": false,
+        "reason": "Fresh per-case local Map and synchronous public-JMS Proxy; no shared worker or concurrent mutation."
+      },
+      {
+        "rule": "UseConcurrentHashMap",
+        "line": 233,
+        "endline": 233,
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+        "classification": "CONTEXTUAL_NONAPPLICABLE",
+        "actualViolation": false,
+        "reason": "Fresh per-case local Map and synchronous public-JMS Proxy; no shared worker or concurrent mutation."
+      },
+      {
+        "rule": "UseConcurrentHashMap",
+        "line": 239,
+        "endline": 239,
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+        "classification": "CONTEXTUAL_NONAPPLICABLE",
+        "actualViolation": false,
+        "reason": "Fresh per-case local Map and synchronous public-JMS Proxy; no shared worker or concurrent mutation."
+      },
+      {
+        "rule": "UseProperClassLoader",
+        "line": 256,
+        "endline": 256,
+        "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+        "classification": "CONTEXTUAL_NONAPPLICABLE",
+        "actualViolation": false,
+        "reason": "Proxy must implement the public JMS interface using its exact defining loader."
+      },
+      {
+        "rule": "CompareObjectsWithEquals",
+        "line": 298,
+        "endline": 298,
+        "message": "Use equals() to compare object references.",
+        "classification": "CONTEXTUAL_NONAPPLICABLE",
+        "actualViolation": false,
+        "reason": "Own Proxy Object.equals deliberately compares proxy identity."
+      }
+    ],
+    "applicableViolations": 0,
+    "source": "759204523b987c3e9527ee418c5ad47375c087d7",
+    "inputHashes": {
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java": "e26b68f3de97575ba40842a775258679d0c630586155822c799ff167425a8b6b"
+    },
+    "stages": {
+      "pmd": {
+        "actualExit": 4,
+        "timedOut": false,
+        "startUTC": "2026-11-06T21:58:47.954360+00:00",
+        "endUTC": "2026-11-06T21:58:50.377715+00:00",
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+          "-cp",
+          "/home/mini/codex/project1/work/toolchain/static-gates-20261015/record-fix-v1/pmd-record-1298.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/antlr4-runtime-4.13.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-ls_2.13-6.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-parser-5.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/better-files_2.13-3.9.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/checker-qual-3.55.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-better-files_2.13-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/error_prone_annotations-2.48.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/failureaccess-1.0.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/geny_2.13-0.6.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/groovy-5.1.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-extras-3.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/guava-33.7.1-jre.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/io_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/j2objc-annotations-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/java-diff-utils-4.16.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-native-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-terminal-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jna-5.12.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsoup-1.23.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsr250-api-1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jul-to-slf4j-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-build-tools-api-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-daemon-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-script-runtime-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-common-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-impl-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-jvm-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk7-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk8-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-analyzer-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-model-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-coroutines-core-jvm-1.8.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-core-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-json-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/mainargs_2.13-0.5.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/nice-xml-messages-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/outline-parser_2.13-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/parsers_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pcollections-4.0.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/picocli-4.7.7.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ant-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-apex-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cli-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-coco-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-core-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cpp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cs-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-css-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-dart-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-designer-7.19.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-fortran-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-gherkin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-go-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-groovy-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-html-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-java-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-javascript-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-jsp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-julia-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-kotlin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-lua-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-matlab-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-modelica-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-objectivec-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-perl-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-php-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-plsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-python-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ruby-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-rust-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-scala_2.13-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-swift-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-tsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-velocity-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-visualforce-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-xml-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/portable-scala-reflect_2.13-1.1.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/progressbar-0.10.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/rhino-1.7.15.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-collection-compat_2.13-2.8.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc-upickle-json-serializer_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-library-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-parallel-collections_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-reflect-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-xml_2.13-1.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scalajs-stubs_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-api-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-simple-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sobject-types-67.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sourcecode_2.13-0.4.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/standard-types-67.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/summit-ast-3.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/ujson_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upack_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-core_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-implicits_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/vf-parser-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3.jar",
+          "net.sourceforge.pmd.cli.PmdCli",
+          "check",
+          "--file-list",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21820-jms-reply-current-codec-static-v1/source-list.txt",
+          "--rulesets",
+          "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/pmd.xml",
+          "--use-version",
+          "java-25",
+          "--minimum-priority",
+          "5",
+          "--aux-classpath",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg20990-outbox-required-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+          "--no-cache",
+          "--format",
+          "xml",
+          "--report-file",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21820-jms-reply-current-codec-static-v1/pmd.xml"
+        ],
+        "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+        "stdoutSha256": "b965810b6d3558dee94e6767d0d6741a71cec7a522d3046ac62bb5c736e1d767",
+        "stderrSha256": "141eb65d74f7997b8eef554fecec67bc550322bbe8156e05a8f2f34e7c0a69e8"
+      },
+      "checkstyle": {
+        "actualExit": 0,
+        "timedOut": false,
+        "startUTC": "2026-11-06T21:58:50.377958+00:00",
+        "endUTC": "2026-11-06T21:58:51.094237+00:00",
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+          "-jar",
+          "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+          "-c",
+          "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+          "-f",
+          "xml",
+          "-o",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21820-jms-reply-current-codec-static-v1/checkstyle.xml",
+          "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java"
+        ],
+        "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "suppressionAdded": false
+  },
+  "naturalZeroBranchClasses": [
+    "dev/codex/schubert/nk/web/messaging/ValidatedReply"
+  ],
+  "oldExecUnion": false,
+  "manualCoverageExclusions": false,
+  "defaultCompilerFiltersOnly": true,
+  "heldInitializationHits": [],
+  "heldExecutedProbes": 0,
+  "actualBackendActions": false,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null
+}
