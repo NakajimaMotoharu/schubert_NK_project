@@ -1,0 +1,342 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-06T17:47:00.659294+09:00",
+  "runtimeSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+  "producerPath": "evidence/01_PT/016_NK-WEB-002/input/031_media_css_independent_post.py",
+  "producerSha256": "a5810806d1aef18c99f4312259f827df4ee5fd8d408f50a0759bf563406d6cbb",
+  "producerGitBinding": "PENDING_NEXT_PUBLICATION_SEPARATE_VERIFIER_SOURCE",
+  "normalManifestSha256": "8bf2c7ca6ada19b2e23a1e007ca2db680d6916d1e215d470f072f27508d23be9",
+  "greenManifestSha256": "fcfa01f10f3f5a669514807be6880d6a0f2bf4e3c1bd5e4e2501cb4c6d9017d0",
+  "tests": 7,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "aborted": 0,
+  "xmlMethods": [
+    "test_001_video_page_keeps_current_1280_bound",
+    "test_002_video_frame_keeps_current_clipping_and_colors",
+    "test_003_video_player_keeps_current_16_9_and_height_policy",
+    "test_004_music_rows_titles_and_spacing_keep_current_layout",
+    "test_005_music_pair_players_placeholders_and_controls_keep_current",
+    "test_006_mobile_music_and_pair_columns_keep_current_900_breakpoint",
+    "test_007_existing_prefix_is_unchanged_and_suffix_has_only_target_rules"
+  ],
+  "comparisons": [
+    {
+      "context": [],
+      "selector": ".video-page",
+      "expected": {
+        "max-width": "1280px"
+      },
+      "actual": {
+        "max-width": "1280px"
+      },
+      "matched": true
+    },
+    {
+      "context": [],
+      "selector": ".video-shell",
+      "expected": {
+        "background": "#111",
+        "border": "1px solid #2f3338",
+        "border-radius": "8px",
+        "overflow": "hidden"
+      },
+      "actual": {
+        "background": "#111",
+        "border": "1px solid #2f3338",
+        "border-radius": "8px",
+        "overflow": "hidden"
+      },
+      "matched": true
+    },
+    {
+      "context": [],
+      "selector": ".video-shell video",
+      "expected": {
+        "display": "block",
+        "width": "100%",
+        "max-height": "calc(100vh - 150px)",
+        "background": "#000",
+        "aspect-ratio": "16 / 9"
+      },
+      "actual": {
+        "display": "block",
+        "width": "100%",
+        "max-height": "calc(100vh - 150px)",
+        "background": "#000",
+        "aspect-ratio": "16 / 9"
+      },
+      "matched": true
+    },
+    {
+      "context": [],
+      "selector": ".music-list",
+      "expected": {
+        "display": "grid",
+        "gap": "8px"
+      },
+      "actual": {
+        "display": "grid",
+        "gap": "8px"
+      },
+      "matched": true
+    },
+    {
+      "context": [],
+      "selector": ".music-row",
+      "expected": {
+        "display": "grid",
+        "grid-template-columns": "minmax(0, 1fr) 320px",
+        "align-items": "center",
+        "gap": "14px",
+        "padding": "13px 14px",
+        "background": "#fff",
+        "border": "1px solid #dde1e6",
+        "border-radius": "8px"
+      },
+      "actual": {
+        "display": "grid",
+        "grid-template-columns": "minmax(0, 1fr) 320px",
+        "align-items": "center",
+        "gap": "14px",
+        "padding": "13px 14px",
+        "background": "#fff",
+        "border": "1px solid #dde1e6",
+        "border-radius": "8px"
+      },
+      "matched": true
+    },
+    {
+      "context": [],
+      "selector": ".music-info",
+      "expected": {
+        "display": "grid",
+        "gap": "7px",
+        "min-width": "0"
+      },
+      "actual": {
+        "display": "grid",
+        "gap": "7px",
+        "min-width": "0"
+      },
+      "matched": true
+    },
+    {
+      "context": [],
+      "selector": ".music-info strong",
+      "expected": {
+        "overflow-wrap": "anywhere"
+      },
+      "actual": {
+        "overflow-wrap": "anywhere"
+      },
+      "matched": true
+    },
+    {
+      "context": [],
+      "selector": ".music-player, .song-player",
+      "expected": {
+        "display": "grid",
+        "grid-template-columns": "minmax(0, 1fr) auto",
+        "align-items": "center",
+        "gap": "8px",
+        "min-width": "0"
+      },
+      "actual": {
+        "display": "grid",
+        "grid-template-columns": "minmax(0, 1fr) auto",
+        "align-items": "center",
+        "gap": "8px",
+        "min-width": "0"
+      },
+      "matched": true
+    },
+    {
+      "context": [],
+      "selector": ".music-player audio, .song-player audio",
+      "expected": {
+        "width": "100%",
+        "max-width": "100%",
+        "height": "34px"
+      },
+      "actual": {
+        "width": "100%",
+        "max-width": "100%",
+        "height": "34px"
+      },
+      "matched": true
+    },
+    {
+      "context": [],
+      "selector": ".song-row",
+      "expected": {
+        "grid-template-columns": "minmax(180px, 280px) minmax(0, 1fr)"
+      },
+      "actual": {
+        "grid-template-columns": "minmax(180px, 280px) minmax(0, 1fr)"
+      },
+      "matched": true
+    },
+    {
+      "context": [],
+      "selector": ".song-players",
+      "expected": {
+        "display": "grid",
+        "grid-template-columns": "minmax(0, 1fr) minmax(0, 1fr)",
+        "gap": "12px",
+        "min-width": "0"
+      },
+      "actual": {
+        "display": "grid",
+        "grid-template-columns": "minmax(0, 1fr) minmax(0, 1fr)",
+        "gap": "12px",
+        "min-width": "0"
+      },
+      "matched": true
+    },
+    {
+      "context": [],
+      "selector": ".song-player span",
+      "expected": {
+        "grid-column": "1 / -1",
+        "color": "#5f6368",
+        "font-size": "12px",
+        "font-weight": "700"
+      },
+      "actual": {
+        "grid-column": "1 / -1",
+        "color": "#5f6368",
+        "font-size": "12px",
+        "font-weight": "700"
+      },
+      "matched": true
+    },
+    {
+      "context": [],
+      "selector": ".song-player-placeholder",
+      "expected": {
+        "display": "grid",
+        "place-items": "center",
+        "min-height": "58px",
+        "color": "#5f6368",
+        "background": "#f6f7f9",
+        "border": "1px dashed #c9ced6",
+        "border-radius": "6px",
+        "font-size": "12px"
+      },
+      "actual": {
+        "display": "grid",
+        "place-items": "center",
+        "min-height": "58px",
+        "color": "#5f6368",
+        "background": "#f6f7f9",
+        "border": "1px dashed #c9ced6",
+        "border-radius": "6px",
+        "font-size": "12px"
+      },
+      "matched": true
+    },
+    {
+      "context": [],
+      "selector": ".music-player .download, .song-player .download",
+      "expected": {
+        "display": "inline-grid",
+        "place-items": "center",
+        "min-width": "34px",
+        "height": "30px",
+        "padding": "0 8px",
+        "border": "1px solid #c9ced6",
+        "border-radius": "6px",
+        "color": "#1f6feb",
+        "text-decoration": "none",
+        "font-weight": "700",
+        "background": "#fff"
+      },
+      "actual": {
+        "display": "inline-grid",
+        "place-items": "center",
+        "min-width": "34px",
+        "height": "30px",
+        "padding": "0 8px",
+        "border": "1px solid #c9ced6",
+        "border-radius": "6px",
+        "color": "#1f6feb",
+        "text-decoration": "none",
+        "font-weight": "700",
+        "background": "#fff"
+      },
+      "matched": true
+    },
+    {
+      "context": [
+        "media:(max-width:900px)"
+      ],
+      "selector": ".music-row",
+      "expected": {
+        "grid-template-columns": "1fr"
+      },
+      "actual": {
+        "grid-template-columns": "1fr"
+      },
+      "matched": true
+    },
+    {
+      "context": [
+        "media:(max-width:900px)"
+      ],
+      "selector": ".song-players",
+      "expected": {
+        "grid-template-columns": "1fr"
+      },
+      "actual": {
+        "grid-template-columns": "1fr"
+      },
+      "matched": true
+    }
+  ],
+  "ruleContractsMatched": 16,
+  "propertiesMatched": 62,
+  "oldPrefixBytesPreserved": true,
+  "oldPrefixSha256": "1466825b3caeb2654a181cd88356e4b6599e0549bf527a81f5826fef6d34a11d",
+  "actualCssSha256": "fbd384882662d4ae16d6b65e3576b5b135a5257241b919862a763f99b08c3456",
+  "oldRed": {
+    "source": "dd1a916c70c30cf3760103d22208a68063d28fd9",
+    "tests": 7,
+    "failures": 7,
+    "notCounted": true
+  },
+  "classIdentity": {
+    "referenceSource": "70fb6768e76564022901874e294a659e2fe1506f",
+    "referenceNormalManifestSha256": "fc1d464e00926ca61857fd64949737259f3c184279b2f136613989ea8844c6fc",
+    "physicalClasses": 1844,
+    "codeOrDebugDifferences": 0,
+    "allJavaMainSourceBytesUnchanged": true,
+    "allPomBytesUnchanged": true,
+    "notRuntimeOrWholeReleaseQualification": true
+  },
+  "affectedTemplates": {
+    "src/schubert-nk-web/src/main/resources/templates/animation-watch.html": [
+      "video-shell"
+    ],
+    "src/schubert-nk-web/src/main/resources/templates/music-list.html": [
+      "music-player",
+      "song-player"
+    ]
+  },
+  "scope": "Static CSS asset/Current values only. No computed Browser/layout/media/API/runtime/native/CHR/451 or old source union.",
+  "productTestsReexecutedByPost": 0,
+  "javaCoverage": null,
+  "newAccepted": 0,
+  "formalUpdated": false,
+  "toolchainManifestSha256": "e1f127cffeec1f9817876364062d3ba6160852a88bc4700e9eb665c0fd17e761",
+  "canonicalOwner": "WBS-P016-25",
+  "changeOwners": [
+    "WBS-P016-10",
+    "WBS-P016-13"
+  ],
+  "bugs": [
+    "BUG-2350",
+    "YKT-2095"
+  ]
+}
