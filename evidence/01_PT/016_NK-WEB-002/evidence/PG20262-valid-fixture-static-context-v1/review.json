@@ -1,0 +1,43 @@
+[
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NotificationListProjectionPortTest.java",
+    "sourceSha256": "bd7e30fa4defff06f24e6d0fe0809d6694224ea2a9fb43d16e3168e17e2ab398",
+    "finding": {
+      "beginline": "347",
+      "endline": "347",
+      "begincolumn": "24",
+      "endcolumn": "55",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.view",
+      "class": "NotificationListProjectionPortTest",
+      "method": "parallelViewsKeepActorsSeparate",
+      "variable": "workers",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3"
+    },
+    "lineText": "try (var workers = Executors.newFixedThreadPool(2)) {",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Self-owned2worker/8task immutable projection test, all10s future joins/executor close. No production scheduler/container/OS process; source whole method inspected."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NotificationListProjectionPortTest.java",
+    "sourceSha256": "bd7e30fa4defff06f24e6d0fe0809d6694224ea2a9fb43d16e3168e17e2ab398",
+    "finding": {
+      "beginline": "352",
+      "endline": "355",
+      "begincolumn": "13",
+      "endcolumn": "70",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.view",
+      "class": "NotificationListProjectionPortTest",
+      "method": "parallelViewsKeepActorsSeparate",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3"
+    },
+    "lineText": "workers.submit(",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Self-owned2worker/8task immutable projection test, all10s future joins/executor close. No production scheduler/container/OS process; source whole method inspected."
+  }
+]

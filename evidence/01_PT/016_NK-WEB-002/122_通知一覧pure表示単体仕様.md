@@ -28,3 +28,5 @@ shared012/frozen059でprepare/static→Git固定→選択全14→単一JaCoCo/no
 |PT-WEB-NLIST014|parallelViewsKeepActorsSeparate|自己所有2worker8taskのactor分離/10秒join|
 
 実行前工具pin照合PG20238はprepare後の工具guard追補によりexit1、Unit slot作成/製品実行前に拒否。原compile/static/driverを保持し、規則を緩和せず工具を固定した最新060/PG20240・20242・20248へ分離する。Main/Test/期待値不変更、GJFはdry-runで固定、旧新class hashも照合。新全14のみを実行し旧成功runの再演/合成ではない。
+
+BUG2323/YKT2068: 原PG20248の14/pass/four100/post0は保持するがNLIST003の条件不一致fixtureで未受入。最新061はERROR/条件内2026-11-01固定50行と独立label/JSTassertを追加、既期待URL/件数/Mainを変更せず新全14を実行する。他の正常fixtureはtype/date無し、negativefixtureは意図した矛盾なので非該当。旧exec/14を最新へ加算しない。

@@ -80,6 +80,24 @@ final class NotificationListProjectionPortTest {
     return rows;
   }
 
+  private static List<NotificationRecord> filteredFifty() {
+    var rows = new ArrayList<NotificationRecord>();
+    Instant submitted = Instant.parse("2026-11-01T00:00:00Z");
+    for (int i = 0; i < 50; i++) {
+      rows.add(
+          new NotificationRecord(
+              new NotificationId(200 - i),
+              RECEIPT,
+              NotificationType.ERROR,
+              NotificationState.ERROR,
+              submitted,
+              submitted.plusSeconds(1),
+              BODY,
+              false));
+    }
+    return rows;
+  }
+
   @Test
   void emptyReturnsPlainView() {
     var filters = form(1);
@@ -153,10 +171,14 @@ final class NotificationListProjectionPortTest {
                 List.of("2026-11-02")));
     var middle =
         NotificationListViewModel.success(
-            actor(READER), filters, new PagedResponseData(2, 50, 101, 3, 51, 100), fifty());
+            actor(READER), filters, new PagedResponseData(2, 50, 101, 3, 51, 100), filteredFifty());
     assertEquals(Optional.of(FILTERED_QUERY + "1"), middle.getPreviousHref());
     assertEquals(Optional.of(FILTERED_QUERY + "3"), middle.getNextHref());
     assertEquals(50, middle.getRows().size());
+    assertTrue(middle.getRows().stream().allMatch(value -> value.get(K_TYPE).equals("エラー通知")));
+    assertTrue(
+        middle.getRows().stream()
+            .allMatch(value -> value.get("submittedAt").equals("2026-11-01 09:00:00")));
     var clamped =
         NotificationListViewModel.success(
             actor(READER),
