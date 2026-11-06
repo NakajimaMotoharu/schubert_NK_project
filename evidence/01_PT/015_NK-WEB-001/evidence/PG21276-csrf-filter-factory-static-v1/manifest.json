@@ -1,0 +1,71 @@
+{
+  "actualExit": 0,
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java": "11dcc3cb60d7b6843dbd2875c9a0b9820a24a6d1fad02071c2feef4b94917913",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfFilterFactory.java": "59b90846fa612073e4c38e0e8bcce4c92db29360fff001817dd3ebae014b8730",
+    "evidence/01_PT/015_NK-WEB-001/input/011_csrf_filter_factory_port_qualifier.py": "1124fde263c87c4b3a99a6b1c21969e938437ae81a1b829e578dccfb1328e7a9"
+  },
+  "pmdRaw": 6,
+  "classification": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java",
+      "line": 184,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "reason": "Own host-only JUnit two-worker request separation, executor closed, not container thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java",
+      "line": 189,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "reason": "Own host-only JUnit two-worker request separation, executor closed, not container thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java",
+      "line": 221,
+      "rule": "UseConcurrentHashMap",
+      "applicable": false,
+      "reason": "One synchronous Frame attribute map per request/worker, never shared concurrently even when filter is shared."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java",
+      "line": 240,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "reason": "JDK Proxy explicitly uses supplied Servlet interface defining loader, not deployment/context-loader assumption."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java",
+      "line": 250,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "reason": "JDK Proxy explicitly uses supplied Servlet interface defining loader, not deployment/context-loader assumption."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java",
+      "line": 294,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "reason": "JDK Proxy explicitly uses supplied Servlet interface defining loader, not deployment/context-loader assumption."
+    }
+  ],
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "processingErrors": 0,
+  "normalManifestSha256": "1db34d8f2ccee9fc90244bea86c3e446be0c0e010c66516a1e25c92df3426618",
+  "spotbugsReusedOnlyForUnchangedNormalWeb": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20992-outbox-required-six-static-reactor-v1/manifest.safe.json",
+    "sha256": "2d3130234ce662ebf2b0bb1f57e74c123ec68e7a307feb10844231bd9822a20a"
+  },
+  "files": {
+    "original-manifest.json": "764a654034ce9c295a4448da68bf1cbfa3bb49a96ee78caae644ffb8606471a5",
+    "pmd.xml": "9b4aebaf994bdde3c6ea59f436eec59115ccacabefc7045b2fd381dd7408f3a0",
+    "checkstyle.xml": "2a1444d0ae003393f0d81898a43a7ce4059f03d460e931becab3e44d8308f16e",
+    "pmd.stdout": "38449a71244db7c8c8c9b90f93fc69ae19193a8b454f27c3dec140a3dd11c56c",
+    "pmd.stderr": "0345ca0b2c1012fe5d0aeb91a22cbbfaedebf6054584b763030d9b61af11a25a",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
