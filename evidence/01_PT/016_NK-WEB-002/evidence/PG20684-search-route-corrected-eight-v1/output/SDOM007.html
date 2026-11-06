@@ -1,0 +1,1155 @@
+<!doctype html>
+<!-- NK-WEB-002/SCR003/FUN003; UI222/223/234; SS313/352; PG202/PT-SCR026..033. -->
+<html lang="ja">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>schubert NK - 検索</title>
+  <link rel="stylesheet" href="/css/schubert.css">
+ </head>
+ <body>
+  <main class="page search-page">
+   <header class="topbar">
+    <h1>schubert NK - 検索</h1>
+    <div class="topbar-actions">
+     <div class="topbar-actions">
+      <nav class="nav-links" aria-label="共通ナビゲーション">
+       <a href="/">メニュー</a> <a href="/notifications">通知</a>
+      </nav>
+      <span class="login-user">fixture-reader</span> <span class="login-role">USER</span>
+      <form class="logout-form" action="/logout" method="post">
+       <button type="submit">ログアウト</button>
+      </form>
+     </div>
+     <nav class="nav-links" aria-label="検索ナビゲーション">
+      <a href="/scenarios">一覧</a>
+     </nav>
+     <div class="count">100 results / page 1 of 1</div>
+    </div>
+   </header>
+   <div id="search-errors" class="error-panel" role="alert" hidden>
+    <ul></ul>
+   </div>
+   <form class="filters" method="get" action="/search">
+    <label><span>本文</span> <input name="q" value="" placeholder="キーワード" aria-describedby="search-errors"> </label> <label><span>ゲーム</span> <select name="game" aria-describedby="search-errors"> <option value="" selected>すべて</option> <option value="NUKITASHI2">NUKITASHI2</option> <option value="NUKITASHI1">NUKITASHI1</option> </select> </label> <label><span>話者</span> <select name="speaker" aria-describedby="search-errors"> <option value="" selected>すべて</option> <option value="乙">乙</option> <option value="甲">甲</option> </select> </label> <label><span>章タイトル</span> <input name="chapter" value="" placeholder="タイトル" aria-describedby="search-errors"> </label> <label><span>形態</span> <select name="entry_type" aria-describedby="search-errors"> <option value="" selected>すべて</option> <option value="dialogue">セリフ</option> <option value="narration">ナレーション</option> </select> </label> <label><span>音声</span> <select name="voice" aria-describedby="search-errors"> <option value="" selected>すべて</option> <option value="with">あり</option> <option value="without">なし</option> </select> </label> <button type="submit">検索</button>
+   </form>
+   <nav class="pagination" aria-label="search pagination">
+    <span>前の100件</span>
+    <div>
+     <span>1</span> <span>-</span> <span>100</span> <span>/</span> <span>100</span>
+    </div>
+    <span>次の100件</span>
+   </nav>
+   <section class="results">
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>first</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-1</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-2</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-3</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-4</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-5</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-6</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-7</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-8</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-9</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-10</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-11</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-12</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-13</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-14</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-15</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-16</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-17</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-18</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-19</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-20</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-21</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-22</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-23</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-24</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-25</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-26</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-27</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-28</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-29</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-30</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-31</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-32</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-33</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-34</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-35</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-36</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-37</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-38</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-39</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-40</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-41</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-42</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-43</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-44</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-45</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-46</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-47</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-48</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-49</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-50</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-51</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-52</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-53</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-54</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-55</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-56</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-57</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-58</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-59</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-60</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-61</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-62</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-63</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-64</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-65</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-66</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-67</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-68</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-69</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-70</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-71</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-72</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-73</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-74</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-75</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-76</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-77</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-78</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-79</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-80</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-81</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-82</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-83</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-84</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-85</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-86</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-87</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-88</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-89</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-90</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-91</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-92</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-93</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-94</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-95</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-96</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-97</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>row-98</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+    <article class="result">
+     <div class="result-body">
+      <div class="meta">
+       <span>NUKITASHI1</span> <span>chapter</span> <span>セリフ</span> <span>speaker</span> <span>script/one.txt:7</span>
+      </div>
+      <p>last</p>
+     </div>
+     <div class="result-actions">
+      <a class="scenario-open" href="/scenarios/17#entry-9">開く</a>
+     </div>
+    </article>
+   </section>
+   <nav class="pagination bottom-nav" aria-label="search pagination bottom">
+    <span>前の100件</span>
+    <div>
+     <span>1</span> <span>-</span> <span>100</span> <span>/</span> <span>100</span>
+    </div>
+    <span>次の100件</span>
+   </nav>
+   <script defer src="/js/search-speaker-submit.js"></script>
+  </main>
+ </body>
+</html>

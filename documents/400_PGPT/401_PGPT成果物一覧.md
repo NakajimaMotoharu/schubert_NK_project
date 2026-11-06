@@ -1,6 +1,6 @@
 # PGPT成果物一覧・進捗
 
-## 2026-11-06 現Main D8・直近二十一対象の限定成果
+## 2026-11-06 現Main D8・直近二十二対象の限定成果
 
 製造候補D8 `d8ff9efb16a7da1b073bdf9770487e3e6415b636`。配備済み/正式認定sourceとは区別する。以下は独立した各source/runの最新結果であり、全体coverageを合成したものではない。
 
@@ -24,11 +24,12 @@
 |内部error表示属性復元|PG20544 / 0|8|11/2/1/8|015:058/059|
 |Login非lock HTML資源|PG20560 / 0|8（18派生描画）|HTMLのためJava counter無し、locked QA055保留|016:132/133|
 |質問入力受付menu戻り先|PG20596 / 0|8（17派生描画）|HTML資源2修正・Java byte全一致、旧RED2保持|016:134/135|
-|Scenario検索HTML資源|PG20620 / 0|8（22派生描画）|Java counter無し、実MVC未受入|016:136/137|
+|Scenario検索HTML資源|PG20684 / 0（原20620保全）|8（22派生描画、再試験で加算0）|BUG2349通常route fixture是正、Java counter無し/実MVC未受入|016:136/137/144|
 |User追加HTML資源|PG20642 / 0|8（21派生描画）|Java counter無し、実User作成未受入|016:138/139|
 |User詳細HTML資源|PG20662 / 0|8（22派生描画）|Java counter無し、4更新処理未受入|016:140/141|
+|Scenario本文HTML資源|PG20678 / 0|8（23派生描画）|Java counter無し、実file/API未受入|016:142/143|
 
-Java各19/8/8/8/14/16/8/8/13/9/10/10/8（計139）＋resource74（一覧12/19描画＋明細14/23描画＋Music8/18描画＋Login非lock8/18描画＋質問戻り先8/17描画＋検索8/22描画＋User追加8/21描画＋User詳細8/22描画）=213は異なるTestclassのunique methodで、再試行runの重複加算なし。Log実DB/native、監視owner内部失敗、両画面HTTP/実Browserは未受入又はHOLD。両detailのexact RD9/class/method/TestID joinは016/PG20212。工具PG20222の最新8check（旧PG20218保全）は別domainでProduction PTに足さない。
+Java各19/8/8/8/14/16/8/8/13/9/10/10/8（計139）＋resource82（一覧12/19描画＋明細14/23描画＋Music8/18描画＋Login非lock8/18描画＋質問戻り先8/17描画＋検索8/22描画＋User追加8/21描画＋User詳細8/22描画＋Scenario本文8/23描画）=221は異なるTestclassのunique methodで、再試行runの重複加算なし。Log実DB/native、監視owner内部失敗、両画面HTTP/実Browserは未受入又はHOLD。両detailのexact RD9/class/method/TestID joinは016/PG20212。工具PG20222の最新8check（旧PG20218保全）は別domainでProduction PTに足さない。
 
 同D8正常compile/NullAway/format/Werror PG20112、六SpotBugs1844 class exact/指摘0 PG20114を再利用。fresh966Main PMD1494/Checkstyle0/processing0 PG20150、全1494の個別style適用性/未分類0/適用違反0/独立post0 PG20154。rawGate1/生raw・重複を保持し抑制なし、全F03/451受入とは分ける。
 
