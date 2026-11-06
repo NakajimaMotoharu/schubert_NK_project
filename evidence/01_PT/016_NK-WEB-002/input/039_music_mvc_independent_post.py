@@ -25,7 +25,7 @@ for n,h in m['originalXmlPins'].items():
   assert not any(t.findall(k) for k in ['failure','error','skipped']);actual.append((t.get('classname'),t.get('name').removesuffix('()')))
  props={x.get('name'):x.get('value') for x in tree.findall('properties/property')};assert props['java.io.tmpdir']==str(slot/'tmp');environment.append({k:props.get(k) for k in ['os.name','os.arch','os.version','java.version','java.vendor']})
 assert len(actual)==len(set(actual))==2 and sorted((c,n+'()') for c,n in actual)==sorted(map(tuple,m['selectedMethods']))
-spec=Path('evidence/01_PT/016_NK-WEB-002/114_Music_MVC明示Bean配線単体仕様.md').read_text();pairs=re.findall(r'\|(PT-SCR-MUSIC-BEAN\d{2})\|(\w+)\|',spec)
+spec=Path('evidence/01_PT/016_NK-WEB-002/114_Music_MVC明示Bean配線単体仕様.md').read_text();pairs=re.findall(r'\|(PT-SCR-MUSIC-BEAN\d{3})\|(\w+)\|',spec)
 assert len(pairs)==2 and {n for _,n in pairs}=={n for _,n in actual}
 normal=load(runs/'pg20990-outbox-required-six-main-compile-v1/manifest.safe.json');assert normal['source']==core and normal['actualExit']==0
 for n,h in normal['begin']['inputHashes'].items():assert sha(n)==h
