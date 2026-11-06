@@ -10,7 +10,8 @@ viewProfiles={
  'evidence/01_PT/018_NK-OPS-001/input/055_question_detail_projection_style.json':('QuestionDetailViewModel','QuestionDetailProjectionPortTest'),
  'evidence/01_PT/018_NK-OPS-001/input/056_notification_detail_projection.json':('NotificationDetailViewModel','NotificationDetailProjectionPortTest'),
  'evidence/01_PT/018_NK-OPS-001/input/057_notification_detail_projection_style.json':('NotificationDetailViewModel','NotificationDetailProjectionPortTest'),
- 'evidence/01_PT/018_NK-OPS-001/input/059_notification_list_projection.json':('NotificationListViewModel','NotificationListProjectionPortTest')}
+ 'evidence/01_PT/018_NK-OPS-001/input/059_notification_list_projection.json':('NotificationListViewModel','NotificationListProjectionPortTest'),
+ 'evidence/01_PT/018_NK-OPS-001/input/060_notification_list_projection_frozen.json':('NotificationListViewModel','NotificationListProjectionPortTest')}
 viewExternal=external and profile in viewProfiles
 if external:
  assert viewExternal or observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)

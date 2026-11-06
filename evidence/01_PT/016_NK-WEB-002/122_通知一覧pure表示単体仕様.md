@@ -26,3 +26,5 @@ shared012/frozen059でprepare/static→Git固定→選択全14→単一JaCoCo/no
 |PT-WEB-NLIST012|copiedInputDoesNotChangeRows|callerのmutable input変更後もsnapshot維持|
 |PT-WEB-NLIST013|unicodeSummaryBoundaryAndDeletedLiteral|Unicode99/100と削除済literalの正常境界|
 |PT-WEB-NLIST014|parallelViewsKeepActorsSeparate|自己所有2worker8taskのactor分離/10秒join|
+
+実行前工具pin照合PG20238はprepare後の工具guard追補によりexit1、Unit slot作成/製品実行前に拒否。原compile/static/driverを保持し、規則を緩和せず工具を固定した最新060/PG20240・20242・20248へ分離する。Main/Test/期待値不変更、GJFはdry-runで固定、旧新class hashも照合。新全14のみを実行し旧成功runの再演/合成ではない。
