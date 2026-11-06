@@ -102,6 +102,89 @@ class ProgramProofLookupTest(unittest.TestCase):
         value=self.legacy();value['actualExit']=143
         self.assertEqual(143,candidate(value,'Port','a'*64)['originalExit'])
 
+    def source_units(self):
+        return dict(source='original-unit-source', actualExit=0, tests=14,
+                    sourcePins={'src/module/src/main/java/pkg/Port.java': 'a'*64},
+                    sourceUnits={'pkg/Port': dict(normalClassSha256='b'*64, crc64='1234567890abcdef',
+                        counters={key:dict(covered=count,missed=0) for key,count in
+                                  [('LINE',66),('METHOD',10),('CLASS',1),('BRANCH',42)]})})
+
+    def test_source_units_exact_class_pin_and_normal_identity(self):
+        row=candidate(self.source_units(),'Port','a'*64)
+        self.assertEqual('SOURCE_UNITS_SOURCE_PINS',row['evidenceSchema'])
+        self.assertEqual('src/module/src/main/java/pkg/Port.java',row['mainPath'])
+        self.assertEqual('b'*64,row['declaredNormalClassSha256'])
+        self.assertEqual('1234567890abcdef',row['declaredCrc64'])
+        self.assertTrue(row['currentMainByteEqual'])
+        self.assertTrue(row['allFourMissedZero'])
+
+    def test_source_units_failure_and_changed_bytes_stay_visible(self):
+        value=self.source_units();value['actualExit']=143
+        row=candidate(value,'Port','c'*64)
+        self.assertEqual(143,row['originalExit'])
+        self.assertFalse(row['currentMainByteEqual'])
+        self.assertFalse(row['wholeSourceQualificationInferred'])
+
+    def test_source_units_partial_and_missing_branch_are_not_full(self):
+        value=self.source_units();value['sourceUnits']['pkg/Port']['counters']['BRANCH']['missed']=1
+        self.assertFalse(candidate(value,'Port','a'*64)['allFourMissedZero'])
+        del value['sourceUnits']['pkg/Port']['counters']['BRANCH']
+        row=candidate(value,'Port','a'*64)
+        self.assertFalse(row['allFourMissedZero'])
+        self.assertEqual('UNMEASURED',row['branchAssessment'])
+
+    def test_source_units_missing_fields_do_not_fall_back_or_guess(self):
+        for key in ['sourceUnits','sourcePins']:
+            value=self.source_units();del value[key]
+            self.assertIsNone(candidate(value,'Port','a'*64))
+        for key in ['normalClassSha256','crc64','counters']:
+            value=self.source_units();del value['sourceUnits']['pkg/Port'][key]
+            self.assertIsNone(candidate(value,'Port','a'*64))
+
+    def test_source_units_ambiguous_class_and_source_pin_rejected(self):
+        value=self.source_units();value['sourceUnits']['other/Port']=value['sourceUnits']['pkg/Port']
+        self.assertIsNone(candidate(value,'Port','a'*64))
+        value=self.source_units();value['sourcePins']['src/other/src/main/java/pkg/Port.java']='a'*64
+        self.assertIsNone(candidate(value,'Port','a'*64))
+
+    def test_source_units_unsafe_paths_or_incorrect_module_namespace_rejected(self):
+        for path in ['src/../src/main/java/pkg/Port.java','src/module/src/main/java/pkg/../Port.java',
+                     'private/pkg/Port.java','src/module//src/main/java/pkg/Port.java',
+                     'src/module/src/main/java/pkg\\Port.java']:
+            value=self.source_units();value['sourcePins']={path:'a'*64}
+            self.assertIsNone(candidate(value,'Port','a'*64))
+
+    def test_source_units_malformed_hash_crc_and_aggregate_scope_rejected(self):
+        for key,bad in [('normalClassSha256','unknown'),('normalClassSha256',None),
+                        ('crc64','short'),('crc64',12)]:
+            value=self.source_units();value['sourceUnits']['pkg/Port'][key]=bad
+            self.assertIsNone(candidate(value,'Port','a'*64))
+        for count in [2,True,-1]:
+            value=self.source_units();value['sourceUnits']['pkg/Port']['counters']['CLASS']['covered']=count
+            self.assertIsNone(candidate(value,'Port','a'*64))
+        value=self.source_units();value['sourcePins']['src/module/src/main/java/pkg/Port.java']='unknown'
+        self.assertIsNone(candidate(value,'Port','a'*64))
+
+    def test_source_units_tool_main_path_is_explicitly_supported(self):
+        value=self.source_units();value['sourcePins']={'program/characterization/src/main/java/pkg/Port.java':'a'*64}
+        row=candidate(value,'Port','a'*64)
+        self.assertEqual('program/characterization/src/main/java/pkg/Port.java',row['mainPath'])
+        self.assertFalse(row['wholeSourceQualificationInferred'])
+
+    def test_source_units_test_pin_cannot_masquerade_as_main(self):
+        value=self.source_units();value['sourcePins']={'src/module/src/test/java/pkg/Port.java':'a'*64}
+        self.assertIsNone(candidate(value,'Port','a'*64))
+        value=self.source_units();value['sourceUnits']={'pkg/Other':value['sourceUnits']['pkg/Port']}
+        self.assertIsNone(candidate(value,'Port','a'*64))
+
+    def test_source_units_never_transfer_source_or_permission(self):
+        value=self.source_units();value['scope']='FULL_SOURCE_100_AND_ACCEPTED_BY_SOMEONE'
+        row=candidate(value,'Port','a'*64)
+        self.assertFalse(row['wholeSourceQualificationInferred'])
+        self.assertFalse(row['acceptanceInferred'])
+        self.assertFalse(row['permissionInferred'])
+        self.assertEqual('NAMED_CLASS_OR_METHOD_SUBSET_COUNTERS',row['counterScope'])
+
 
 if __name__=='__main__':
     unittest.main()
