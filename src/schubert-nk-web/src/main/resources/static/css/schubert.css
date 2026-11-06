@@ -163,3 +163,120 @@ button { font: inherit; cursor: pointer; }
 .notification-detail-page .question-body, .notification-detail-page .answer-body { white-space: pre-wrap; }
 .question-detail-page .question-body, .question-detail-page .answer-body { white-space: pre-wrap; }
 .question-input textarea { width: 100%; box-sizing: border-box; }
+
+
+/* NK-WEB-002 / WBS-P016-25; UI223/SS313/PG-D365.
+ * BUG2350/YKT2095 retained Current video/music CSS.
+ * Existing prefix unchanged; Current global media controls are scoped to Music. */
+.video-page {
+  max-width: 1280px;
+}
+
+.video-shell {
+  background: #111;
+  border: 1px solid #2f3338;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video-shell video {
+  display: block;
+  width: 100%;
+  max-height: calc(100vh - 150px);
+  background: #000;
+  aspect-ratio: 16 / 9;
+}
+
+.music-list {
+  display: grid;
+  gap: 8px;
+}
+
+.music-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 14px;
+  background: #fff;
+  border: 1px solid #dde1e6;
+  border-radius: 8px;
+}
+
+.music-info {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+
+.music-info strong {
+  overflow-wrap: anywhere;
+}
+
+.music-player, .song-player {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.music-player audio, .song-player audio {
+  width: 100%;
+  max-width: 100%;
+  height: 34px;
+}
+
+.song-row {
+  grid-template-columns: minmax(180px, 280px) minmax(0, 1fr);
+}
+
+.song-players {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+  min-width: 0;
+}
+
+.song-player span {
+  grid-column: 1 / -1;
+  color: #5f6368;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.song-player-placeholder {
+  display: grid;
+  place-items: center;
+  min-height: 58px;
+  color: #5f6368;
+  background: #f6f7f9;
+  border: 1px dashed #c9ced6;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.music-player .download, .song-player .download {
+  display: inline-grid;
+  place-items: center;
+  min-width: 34px;
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid #c9ced6;
+  border-radius: 6px;
+  color: #1f6feb;
+  text-decoration: none;
+  font-weight: 700;
+  background: #fff;
+}
+
+@media (max-width: 900px) {
+  .music-row {
+    grid-template-columns: 1fr;
+  }
+
+  .song-players {
+    grid-template-columns: 1fr;
+  }
+
+}
