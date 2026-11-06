@@ -1,0 +1,127 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T01:19:12.913611+09:00",
+  "source": "fa8c9337018b933f6616bd99be57f009c94c947e",
+  "originalRun": "PG21188",
+  "originalExecSha256": "4e350885f086ad980064da96ab5271720c5f6e2c390e071e3af187995ec16dc0",
+  "normalWebJarSha256": "d33f6a79a723bbc07e66b45b8e413df561cbaad5ad711162ed9a5903fb49720a",
+  "physicalHashes": {
+    "dev/codex/schubert/nk/web/session/SessionPayloadCodec": "b636b53a0a7e4d6bd507cffd81d1a26787babe2518813b0aa7eaa0224016a7ae",
+    "dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository": "26dc1eea6f0d7ae00a4b97d3460b81766f6bfe00ed0505df1796609745e081d4",
+    "dev/codex/schubert/nk/web/session/JdbcWebSessionStore": "f0b5e4a60079168b8972d4aa4567c9a1eaf241ae01bfff52d2555e97a75ddd82",
+    "dev/codex/schubert/nk/web/session/SessionAttributeCodec": "75d2adcdde801e230b704d491f08aaffea088dce34c52fa7b93897dbf24447de",
+    "dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository": "534ddba10d8adcf2025e48d7971d2285c61a0b5b74cbdec3838e0c3edf52cd63",
+    "dev/codex/schubert/nk/web/session/EncryptedSessionPayload": "3d9a2e68c4fb8c8a9a95e56b74ba67305e974adec0fc4e2e784db9ab1baa5682"
+  },
+  "executedMethods": {
+    "EncryptedWebSessionRepository": [
+      {
+        "name": "<init>",
+        "desc": "(Ljavax/sql/DataSource;Ldev/codex/schubert/nk/web/session/SessionPayloadCodec;Ljava/time/Clock;Ljava/security/SecureRandom;Ljava/util/function/Supplier;)V"
+      }
+    ],
+    "SessionPayloadCodec": [
+      {
+        "name": "<init>",
+        "desc": "(Ljava/lang/String;[BLjava/lang/String;[BLjava/security/SecureRandom;)V"
+      },
+      {
+        "name": "validateKey",
+        "desc": "([B)V"
+      },
+      {
+        "name": "close",
+        "desc": "()V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "JdbcWebSessionStore": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      }
+    ],
+    "SessionAttributeCodec": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "EncryptedSessionPayload": [
+      {
+        "name": "validateVersion",
+        "desc": "(Ljava/lang/String;)Ljava/lang/String;"
+      }
+    ],
+    "SpringEncryptedSessionRepository": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/session/EncryptedWebSessionRepository;Ljava/time/Clock;)V"
+      }
+    ]
+  },
+  "allowedMethods": {
+    "SessionPayloadCodec": [
+      "<clinit>",
+      "<init>",
+      "close",
+      "validateKey"
+    ],
+    "EncryptedWebSessionRepository": [
+      "<init>"
+    ],
+    "JdbcWebSessionStore": [
+      "<init>"
+    ],
+    "SessionAttributeCodec": [
+      "<clinit>",
+      "<init>"
+    ],
+    "SpringEncryptedSessionRepository": [
+      "<init>"
+    ],
+    "EncryptedSessionPayload": [
+      "validateVersion"
+    ]
+  },
+  "testsReexecuted": 0,
+  "additionalTestCredit": 0,
+  "additionalWholeSourceCredit": 0,
+  "dependencyCoverageAccepted": false,
+  "actualDbOrEncryptionOrSessionGenerated": false,
+  "stage": {
+    "actualExit": 0,
+    "timedOut": false,
+    "startUTC": "2026-11-06T16:19:12.745263+00:00",
+    "endUTC": "2026-11-06T16:19:12.910118+00:00",
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "report",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21188-security-context-twelve-unit-v1/jacoco.exec",
+      "--classfiles",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21202-security-context-constructor-method-witness-v1/component",
+      "--xml",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21202-security-context-constructor-method-witness-v1/dependency-methods.xml"
+    ],
+    "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+    "stdoutSha256": "552f132127fda3ba05d80843957e9a75bac280188f704e79cb390f0433befa8d",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "files": {
+    "report.stdout": "552f132127fda3ba05d80843957e9a75bac280188f704e79cb390f0433befa8d",
+    "report-exit.safe.json": "2fd1e3b3881452d40ba1dbe2f0300db7a1a6c540dd2c4ef59a971d54d510b8b6",
+    "report-begin.safe.json": "cc1dbc04506c81a8e058669983a2f0d43661bf3d0c2b12c3895327491155500f",
+    "dependency-methods.xml": "65d175f2528383ec0f54d4fe536945f6a6c75f227903d4b2b06a7f21f8aec28f",
+    "report-process.safe.json": "92b34610df5a567b0d511cc7b6650b71f11e91083f6ef03df02a321b3d0dc080",
+    "report.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
