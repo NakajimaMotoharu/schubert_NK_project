@@ -1,0 +1,47 @@
+<!doctype html>
+<!-- SCR023/UI224236/SS313314/PG-D350368/PT-QRY-HTTP008,QDL-BIZ; QA049 approved. -->
+<html lang="ja">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>質問回答明細</title>
+  <link rel="stylesheet" href="/css/schubert.css">
+ </head>
+ <body>
+  <main class="page question-detail-page">
+   <header class="topbar">
+    <h1>質問回答明細</h1>
+    <div class="topbar-actions">
+     <nav class="nav-links" aria-label="共通ナビゲーション">
+      <a href="/">メニュー</a> <a href="/notifications">通知</a>
+     </nav>
+     <span class="login-user">reader</span> <span class="login-role">USER</span>
+     <form class="logout-form" action="/logout" method="post">
+      <button type="submit">ログアウト</button>
+     </form>
+    </div>
+   </header>
+   <dl>
+    <dt>受付ID</dt>
+    <dd class="receipt">00000000000000000000000000</dd>
+    <dt>受付日時</dt>
+    <dd class="submitted-at">2026-11-01 09:00:00</dd>
+    <dt>回答状態</dt>
+    <dd class="state">未回答</dd>
+    <dt>質問</dt>
+    <dd class="question-body">&lt;img src=x onerror='example'&gt; &amp; 質問</dd>
+   </dl>
+   <p class="operation-notice" role="alert">表示 &lt;b&gt;通知&lt;/b&gt;</p>
+   <section id="delete-confirm">
+    <h2>質問・回答の削除確認</h2>
+    <p class="delete-summary">&lt;img src=x onerror='example'&gt; &amp; 質問</p>
+    <div class="operation-errors" role="alert"></div>
+    <form class="delete-form" method="post" data-operation-submit action="/questions/12">
+     <input type="hidden" name="operation" value="DELETE"> <input type="hidden" name="id" value="12"> <input type="hidden" name="operation_token" value="[REDACTED-SYNTHETIC]"> <input type="hidden" name="_csrf" value="[REDACTED-SYNTHETIC]"> <label><input type="checkbox" name="confirm" value="true" required checked>質問・回答の削除を確認しました</label> <button type="submit">質問・回答を削除</button>
+    </form>
+   </section>
+   <a class="back" href="/questions">質問回答一覧</a>
+  </main>
+  <script src="/js/operation-post-submit.js" defer></script>
+ </body>
+</html>

@@ -1,0 +1,9 @@
+# 質問・通知明細template resource 実行結果
+
+2026-11-06T12:35:05.606397+09:00 NK-WEB-002/主WBS-P016-21、P016-23/P015-02参照費0。仕様128/PT-WEB-DDOM001..014全14method成功、F/E/S/abort0、23描画/独立post0。Unit PG20360/source cc9b8515bdfba8af50573e72f3c08978d6697edf、MainD8・HTML不変更、branch dev-foundation。manifest evidence/01_PT/016_NK-WEB-002/evidence/PG20360-detail-template-resource-fourteen-v1/manifest.json SHA256 c968cd2b26a99f22fd974a7fd67df5e56ec9f9b6d78ef41df1fad7be05af41b0へ実command/開始終端/exit/元XML/OS/JDK/tool/依存/input/全派生DOM/hashを結合。Linux/Java25.0.4、Thymeleaf3.1.5・Spring7.0.9・Servlet6.1・Jsoup1.23.2、compile20352=0、static20354 rawPMD0/CS0/parser0/抑制追加0。normal20112 web JARの三資源をrepo/抽出byteと照合、Main正常build/SBの成功確認再演0。
+
+独立UI236 map fixtureから実テンプレートを描画。質問USER/ADMIN・未回答/回答済み/エラー、回答空/有・owner表示、通知5stateの各日時/状態・削除済body/answer/link非表示、error code/message、notice null/空/有とescape、確認formのchecked有無/validation errors/id/operation/action/method/hidden・backlink/deferred operation JSを固定DOM期待値で照合した。フォーム送信/JS実行/実Browser/Controller/security/CSRF資格/operation token資格/DB/JMSは実施しない。実業務処理やQuestionMutationRequest.applyの代替ではない。
+
+Synthetic hidden operation/CSRFは一時DOMでだけassertし、永続化前にREDACTEDへ置換。全23snapshotで元synthetic値不在を独立postと群末で確認、保存物は派生redacted DOMとして扱いraw HTML byteとは呼ばない。実token/session/credential/key使用・保存0。Production Javaはclasspath不在/初期化0、ApplicationContext refresh/BeanFactory/Servlet container/VM/Root/実DB/backend/held4初期化0。Java四counterはHTMLに存在しないためnull、100補完/除外/古いexec合成0。正常sourceのlookupや資格範囲と分離する。
+
+新規BUG/YKT0、failed/flaky/skipped/not-run加算0。群3997→3998原1/3/6cap8、真正終端後fresh共有差0pp/ordinary24-all31、専有N/Tnull・丸め0も無償ではない。追加HTML二資源、共通layoutは参照で重複費0。直近九対象107unique=Java81+resource26（一覧12/19描画＋明細14/23描画）。Main各source技術53・原282交差34/残248・partial80結合17/残63は不変、正式1964/53・歴史17/190・新leaf0・工数null/全451/CHR/native/Root/QA051 final未受入。詳細963/964、独立PGPTを継続する。

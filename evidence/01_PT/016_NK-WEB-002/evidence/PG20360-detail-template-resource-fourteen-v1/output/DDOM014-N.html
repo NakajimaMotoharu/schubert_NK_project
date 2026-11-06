@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- SCR021/UI224236/SS313314323/PG-D349368/PT-NTF-DETAIL001..008,NTC-BIZ; QA049 approved. -->
+<html lang="ja">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>通知明細</title>
+  <link rel="stylesheet" href="/css/schubert.css">
+ </head>
+ <body>
+  <main class="page notification-detail-page">
+   <header class="topbar">
+    <h1>通知明細</h1>
+    <div class="topbar-actions">
+     <nav class="nav-links" aria-label="共通ナビゲーション">
+      <a href="/">メニュー</a> <a href="/notifications">通知</a>
+     </nav>
+     <span class="login-user">reader</span> <span class="login-role">USER</span>
+     <form class="logout-form" action="/logout" method="post">
+      <button type="submit">ログアウト</button>
+     </form>
+    </div>
+   </header>
+   <dl class="notification-detail">
+    <dt>受付ID</dt>
+    <dd class="receipt">00000000000000000000000000</dd>
+    <dt>状態</dt>
+    <dd class="state">受付中</dd>
+    <dt>受付日時</dt>
+    <dd class="submitted-at">2026-11-01 09:00:00</dd>
+   </dl>
+   <section>
+    <h2>質問</h2>
+    <p class="question-body">&lt;img src=x onerror='example'&gt; &amp; 質問</p>
+   </section>
+   <a class="back" href="/notifications">通知一覧へ戻る</a>
+  </main>
+  <script src="/js/operation-post-submit.js" defer></script>
+ </body>
+</html>
