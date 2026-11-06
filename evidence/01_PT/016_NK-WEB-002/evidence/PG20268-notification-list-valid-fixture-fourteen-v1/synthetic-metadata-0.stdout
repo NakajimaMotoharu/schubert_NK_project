@@ -1,0 +1,203 @@
+Classfile /home/mini/codex/project1/work/pgpt-runs/PG379/pg20268-notification-list-valid-fixture-fourteen-unit-v1/component/dev/codex/schubert/nk/web/view/NotificationListViewModel$1.class
+  Last modified Nov 6, 2026; size 1538 bytes
+  SHA-256 checksum 34f8ab02cb15e6ed4d7628c7f0ef1dc466cf8986b33e00204eb6a8270d73c14c
+  Compiled from "NotificationListViewModel.java"
+class dev.codex.schubert.nk.web.view.NotificationListViewModel$1
+  minor version: 0
+  major version: 69
+  flags: (0x1020) ACC_SUPER, ACC_SYNTHETIC
+  this_class: #8                          // dev/codex/schubert/nk/web/view/NotificationListViewModel$1
+  super_class: #52                        // java/lang/Object
+  interfaces: 0, fields: 2, methods: 1, attributes: 4
+Constant pool:
+   #1 = Methodref          #2.#3          // dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.values:()[Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+   #2 = Class              #4             // dev/codex/schubert/nk/protocol/layout/semantic/NotificationType
+   #3 = NameAndType        #5:#6          // values:()[Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+   #4 = Utf8               dev/codex/schubert/nk/protocol/layout/semantic/NotificationType
+   #5 = Utf8               values
+   #6 = Utf8               ()[Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+   #7 = Fieldref           #8.#9          // dev/codex/schubert/nk/web/view/NotificationListViewModel$1.$SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationType:[I
+   #8 = Class              #10            // dev/codex/schubert/nk/web/view/NotificationListViewModel$1
+   #9 = NameAndType        #11:#12        // $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationType:[I
+  #10 = Utf8               dev/codex/schubert/nk/web/view/NotificationListViewModel$1
+  #11 = Utf8               $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationType
+  #12 = Utf8               [I
+  #13 = Fieldref           #2.#14         // dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.ACCEPTED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+  #14 = NameAndType        #15:#16        // ACCEPTED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+  #15 = Utf8               ACCEPTED
+  #16 = Utf8               Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+  #17 = Methodref          #2.#18         // dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.ordinal:()I
+  #18 = NameAndType        #19:#20        // ordinal:()I
+  #19 = Utf8               ordinal
+  #20 = Utf8               ()I
+  #21 = Class              #22            // java/lang/NoSuchFieldError
+  #22 = Utf8               java/lang/NoSuchFieldError
+  #23 = Fieldref           #2.#24         // dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.COMPLETED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+  #24 = NameAndType        #25:#16        // COMPLETED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+  #25 = Utf8               COMPLETED
+  #26 = Fieldref           #2.#27         // dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.ERROR:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+  #27 = NameAndType        #28:#16        // ERROR:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+  #28 = Utf8               ERROR
+  #29 = Methodref          #30.#31        // dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.values:()[Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+  #30 = Class              #32            // dev/codex/schubert/nk/protocol/layout/semantic/NotificationState
+  #31 = NameAndType        #5:#33         // values:()[Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+  #32 = Utf8               dev/codex/schubert/nk/protocol/layout/semantic/NotificationState
+  #33 = Utf8               ()[Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+  #34 = Fieldref           #8.#35         // dev/codex/schubert/nk/web/view/NotificationListViewModel$1.$SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+  #35 = NameAndType        #36:#12        // $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+  #36 = Utf8               $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState
+  #37 = Fieldref           #30.#38        // dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.RECEIVED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+  #38 = NameAndType        #39:#40        // RECEIVED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+  #39 = Utf8               RECEIVED
+  #40 = Utf8               Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+  #41 = Methodref          #30.#18        // dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ordinal:()I
+  #42 = Fieldref           #30.#43        // dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.PROCESSING:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+  #43 = NameAndType        #44:#40        // PROCESSING:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+  #44 = Utf8               PROCESSING
+  #45 = Fieldref           #30.#46        // dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.CANCELLED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+  #46 = NameAndType        #47:#40        // CANCELLED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+  #47 = Utf8               CANCELLED
+  #48 = Fieldref           #30.#49        // dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.COMPLETED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+  #49 = NameAndType        #25:#40        // COMPLETED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+  #50 = Fieldref           #30.#51        // dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ERROR:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+  #51 = NameAndType        #28:#40        // ERROR:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+  #52 = Class              #53            // java/lang/Object
+  #53 = Utf8               java/lang/Object
+  #54 = Utf8               <clinit>
+  #55 = Utf8               ()V
+  #56 = Utf8               Code
+  #57 = Utf8               LineNumberTable
+  #58 = Utf8               LocalVariableTable
+  #59 = Utf8               StackMapTable
+  #60 = Utf8               SourceFile
+  #61 = Utf8               NotificationListViewModel.java
+  #62 = Utf8               EnclosingMethod
+  #63 = Class              #64            // dev/codex/schubert/nk/web/view/NotificationListViewModel
+  #64 = Utf8               dev/codex/schubert/nk/web/view/NotificationListViewModel
+  #65 = Utf8               NestHost
+  #66 = Utf8               InnerClasses
+{
+  static final int[] $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState;
+    descriptor: [I
+    flags: (0x1018) ACC_STATIC, ACC_FINAL, ACC_SYNTHETIC
+
+  static final int[] $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationType;
+    descriptor: [I
+    flags: (0x1018) ACC_STATIC, ACC_FINAL, ACC_SYNTHETIC
+
+  static {};
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=3, locals=1, args_size=0
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.values:()[Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationType:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationType:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.ACCEPTED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationType:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.COMPLETED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationType:[I
+        42: getstatic     #26                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.ERROR:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+        45: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: invokestatic  #29                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.values:()[Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+        57: arraylength
+        58: newarray       int
+        60: putstatic     #34                 // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+        63: getstatic     #34                 // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+        66: getstatic     #37                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.RECEIVED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+        69: invokevirtual #41                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ordinal:()I
+        72: iconst_1
+        73: iastore
+        74: goto          78
+        77: astore_0
+        78: getstatic     #34                 // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+        81: getstatic     #42                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.PROCESSING:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+        84: invokevirtual #41                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ordinal:()I
+        87: iconst_2
+        88: iastore
+        89: goto          93
+        92: astore_0
+        93: getstatic     #34                 // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+        96: getstatic     #45                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.CANCELLED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+        99: invokevirtual #41                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ordinal:()I
+       102: iconst_3
+       103: iastore
+       104: goto          108
+       107: astore_0
+       108: getstatic     #34                 // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+       111: getstatic     #48                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.COMPLETED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+       114: invokevirtual #41                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ordinal:()I
+       117: iconst_4
+       118: iastore
+       119: goto          123
+       122: astore_0
+       123: getstatic     #34                 // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+       126: getstatic     #50                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ERROR:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+       129: invokevirtual #41                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ordinal:()I
+       132: iconst_5
+       133: iastore
+       134: goto          138
+       137: astore_0
+       138: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+            63    74    77   Class java/lang/NoSuchFieldError
+            78    89    92   Class java/lang/NoSuchFieldError
+            93   104   107   Class java/lang/NoSuchFieldError
+           108   119   122   Class java/lang/NoSuchFieldError
+           123   134   137   Class java/lang/NoSuchFieldError
+      LineNumberTable:
+        line 92: 0
+        line 62: 54
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+      StackMapTable: number_of_entries = 16
+        frame_type = 87 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 86 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+}
+SourceFile: "NotificationListViewModel.java"
+EnclosingMethod: #63.#0                 // dev.codex.schubert.nk.web.view.NotificationListViewModel
+NestHost: class dev/codex/schubert/nk/web/view/NotificationListViewModel
+InnerClasses:
+  static #8;                              // class dev/codex/schubert/nk/web/view/NotificationListViewModel$1
