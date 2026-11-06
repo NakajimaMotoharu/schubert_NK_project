@@ -1,0 +1,11 @@
+{
+  "atJST": "2026-11-07T04:29:41.066154+09:00",
+  "review": "STATIC_SDK_BYTECODE_REVIEW_NOT_PT",
+  "sdkClass": "org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter",
+  "sdkJarSha256": "dece134a2332c976a2c94ecf13f816c64e8ea7f2139795485afe655fba0408f3",
+  "javapOutputSha256": "dfffae7b201d1c244f08cc6eadca199d62fa59c202fb1fcd759c81fe3d40e6ac",
+  "observed": "doFilter unmatched delegates once; matched invokes attemptAuthentication; converter throws before authenticationManager; catch AuthenticationException invokes unsuccessfulAuthentication, ThreadLocal clear, trace logger and no-op RememberMe then caller failure handler. Test uses own failure handler, no default saveException/session creation. Success/strategy/repository/probe/provider authenticate unreachable on malformed encoding.",
+  "jdkThreadLocalMode": "owned Unit JVM -Dspring.security.strategy=MODE_THREADLOCAL; no global host setting",
+  "limits": "SDK initialization and metadata/trace checks are not global zero-I/O proof. No actual request/session/authentication/Caddy/DB/JMS operation qualified.",
+  "productTestsExecuted": 0
+}
