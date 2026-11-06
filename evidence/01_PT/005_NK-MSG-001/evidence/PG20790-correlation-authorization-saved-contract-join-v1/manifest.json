@@ -1,0 +1,572 @@
+{
+  "atJST": "2026-11-06T19:22:51.635378+09:00",
+  "actualExit": 0,
+  "source": "71eee2f86fcefe80ac46b7c430778c7259875c8a",
+  "kind": "FOUR_SHARED_EXISTING_PROOF_CONTRACT_JOIN",
+  "normalSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+  "normalManifestSha256": "8bf2c7ca6ada19b2e23a1e007ca2db680d6916d1e215d470f072f27508d23be9",
+  "rows": [
+    {
+      "target": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java",
+      "sourcePin": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java",
+        "sha256": "cc0689a25334f9b2eb12983e5e952a0a19af703c28ff4898ff8b57f2a6aa7b39"
+      },
+      "currentClassSha256": "54a1aeff1136917d88193d462e572e6538fe372080ee3356d32145d66009d5e8",
+      "oldPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14318-web-memory-coordinator-whole-seventeen-post-v1/manifest.json",
+        "sha256": "7b2205bf1d214dc1262512fc8d46b184ab7ff13294742e96476e35f004b7985d",
+        "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+      },
+      "oldUnit": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14316-web-memory-coordinator-whole-seventeen-pt-v1/manifest.json",
+        "sha256": "6cfe25512a9b30680f847a36f022c6486844e924225725920024c1db5cc61215",
+        "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+      },
+      "currentNormalSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+      "allOriginalPhysicalClassesSameCurrentBytes": 5,
+      "sourcePhysicalClosure": [
+        "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient"
+      ],
+      "explicitTestSourcesUnchanged": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+          "sha256": "3a115c2a3508f914b58a9b4702ae718abd6234b185a6df1996d32bec98da9c3d"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+          "sha256": "2b35e3a19dd33b72ba123a7e2f5d098499e9257b1dd90e080139b81e7a160461"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java",
+          "sha256": "ded026184e89c0427125c85b513742d4c3863e769d5bbb818ee474788a86b1d1"
+        }
+      ],
+      "originalSelectedTests": 17,
+      "originalCaseMethods": [
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "name": "approvedConfiguredWaitsAccept1To20AndRejectTheNextWithoutSending",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "name": "exchangeRegistersBeforeOneSendAndReturnsDefensiveReply",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "name": "constructorRegistryAndRequestBoundsDenyInvalidInputBeforeSend",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "name": "replyAtDeadlineFailsTheWaitingFutureAsLate",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "name": "elapsedWaitExpiresAndSubsequentReplyIsLate",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "name": "sendFailureCancelsRegistrationAndPropagatesJmsException",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "name": "exceptionReasonIsAClosedNonSecretClassification",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "name": "interruptedWaitRemovesRegistrationAndRestoresInterruptFlag",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+          "name": "lateCompletionAndExplicitExpiryFailTheWaiterWithoutDelivery",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+          "name": "registrationIsBoundedDuplicateSafeAndReleasesCapacityOnCancel",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+          "name": "oneOfOneHundredSimultaneousResponsesWins",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+          "name": "nullDeadlineAndCapacityContractsFailBeforeMutation",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+          "name": "successfulCompletionIsAtomicAndDefensivelyCopiesBody",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+          "name": "concurrentRegistrationsRespectCapacityAndReuseAllSlots",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+          "name": "terminalRaceHasOneWinnerAndReturnsThePermit",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+          "name": "callerCompletionViewCannotSetOrCancelTheRegistryPromise",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+          "name": "nanosecondDeadlineAndCopiesStayIndependent",
+          "nonPass": [],
+          "result": "PASS"
+        }
+      ],
+      "referencedCounters": {
+        "BRANCH": {
+          "covered": 18,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 51,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 10,
+          "missed": 0
+        }
+      },
+      "canonicalOwner": "WBS-P005-02",
+      "referenceFee": 0,
+      "originalAggregateTargetUnitFour100": false,
+      "wholeFormalClaim": false
+    },
+    {
+      "target": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java",
+      "sourcePin": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java",
+        "sha256": "1a28f9d8ec9438f13621358c02181557fdc3a19f4afd55303ad727ce6fc9ed75"
+      },
+      "currentClassSha256": "e0f96e0e6e9cf85633d8ca1c0c772421559ce169d3aad9bf050d56338d07c84d",
+      "oldPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14318-web-memory-coordinator-whole-seventeen-post-v1/manifest.json",
+        "sha256": "7b2205bf1d214dc1262512fc8d46b184ab7ff13294742e96476e35f004b7985d",
+        "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+      },
+      "oldUnit": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14316-web-memory-coordinator-whole-seventeen-pt-v1/manifest.json",
+        "sha256": "6cfe25512a9b30680f847a36f022c6486844e924225725920024c1db5cc61215",
+        "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+      },
+      "currentNormalSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+      "allOriginalPhysicalClassesSameCurrentBytes": 5,
+      "sourcePhysicalClosure": [
+        "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry"
+      ],
+      "explicitTestSourcesUnchanged": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+          "sha256": "3a115c2a3508f914b58a9b4702ae718abd6234b185a6df1996d32bec98da9c3d"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+          "sha256": "2b35e3a19dd33b72ba123a7e2f5d098499e9257b1dd90e080139b81e7a160461"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java",
+          "sha256": "ded026184e89c0427125c85b513742d4c3863e769d5bbb818ee474788a86b1d1"
+        }
+      ],
+      "originalSelectedTests": 17,
+      "originalCaseMethods": [
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "name": "approvedConfiguredWaitsAccept1To20AndRejectTheNextWithoutSending",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "name": "exchangeRegistersBeforeOneSendAndReturnsDefensiveReply",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "name": "constructorRegistryAndRequestBoundsDenyInvalidInputBeforeSend",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "name": "replyAtDeadlineFailsTheWaitingFutureAsLate",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "name": "elapsedWaitExpiresAndSubsequentReplyIsLate",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "name": "sendFailureCancelsRegistrationAndPropagatesJmsException",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "name": "exceptionReasonIsAClosedNonSecretClassification",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "name": "interruptedWaitRemovesRegistrationAndRestoresInterruptFlag",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+          "name": "lateCompletionAndExplicitExpiryFailTheWaiterWithoutDelivery",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+          "name": "registrationIsBoundedDuplicateSafeAndReleasesCapacityOnCancel",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+          "name": "oneOfOneHundredSimultaneousResponsesWins",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+          "name": "nullDeadlineAndCapacityContractsFailBeforeMutation",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+          "name": "successfulCompletionIsAtomicAndDefensivelyCopiesBody",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+          "name": "concurrentRegistrationsRespectCapacityAndReuseAllSlots",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+          "name": "terminalRaceHasOneWinnerAndReturnsThePermit",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+          "name": "callerCompletionViewCannotSetOrCancelTheRegistryPromise",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+          "name": "nanosecondDeadlineAndCopiesStayIndependent",
+          "nonPass": [],
+          "result": "PASS"
+        }
+      ],
+      "referencedCounters": {
+        "BRANCH": {
+          "covered": 22,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 61,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 9,
+          "missed": 0
+        }
+      },
+      "canonicalOwner": "WBS-P005-02",
+      "referenceFee": 0,
+      "originalAggregateTargetUnitFour100": false,
+      "wholeFormalClaim": false
+    },
+    {
+      "target": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthorizationService.java",
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthorizationService.java",
+        "sha256": "8aa174fe39b5d71afe07443beb133063418edd1de095c16b3e288ac26d1faebb"
+      },
+      "currentClassSha256": "a439f9bf8b7793408cbabc1fd8eaccd20e2cebb8f98a5343e9c401edd10639a5",
+      "oldPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15392-pure-authorization-two-post-v2/manifest.json",
+        "sha256": "baa867dc17450ec2c1d8e85d62abc23a7f6ce86543fda6a5d0136b16d622d495",
+        "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+      },
+      "oldUnit": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15390-pure-authorization-two-pt-v1/manifest.json",
+        "sha256": "a089e2fca2e137e95e64431b841ab6af80bd93d4f2c025e0e52f5d77a1c6a122",
+        "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+      },
+      "currentNormalSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+      "allOriginalPhysicalClassesSameCurrentBytes": 3,
+      "sourcePhysicalClosure": [
+        "dev/codex/schubert/nk/api/security/AuthorizationService"
+      ],
+      "explicitTestSourcesUnchanged": [
+        {
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthorizationServiceTest.java",
+          "sha256": "f290e044393ebbdd7778fdf474aaff8a211987c8f9c7686cba60591ef1aa465b"
+        }
+      ],
+      "originalSelectedTests": 2,
+      "originalCaseMethods": [
+        {
+          "classname": "dev.codex.schubert.nk.api.security.AuthorizationServiceTest",
+          "name": "actorOwnerAndErrorNullInvariantsFailAtBoundaries",
+          "nonPass": [],
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.api.security.AuthorizationServiceTest",
+          "name": "literalOwnerAndAdminMatrixNeverExposesOtherNotifications",
+          "nonPass": [],
+          "result": "PASS"
+        }
+      ],
+      "referencedCounters": {
+        "BRANCH": {
+          "covered": 12,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 18,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 5,
+          "missed": 0
+        }
+      },
+      "canonicalOwner": "WBS-P007-03",
+      "referenceFee": 0,
+      "originalAggregateTargetUnitFour100": true,
+      "wholeFormalClaim": false
+    },
+    {
+      "target": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.java",
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.java",
+        "sha256": "90c2401c0755b6ef1bb7e15c3847d268d9401a30d7ea9a4409f7516d7c500957"
+      },
+      "currentClassSha256": "6e70fd6fc5a9699baba079e661819ab30f20090e76e8949145f755f9e38133e4",
+      "oldPost": {
+        "path": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18602-jms-reply-envelope-unit-v1/manifest.json",
+        "sha256": "637fdb75971145c4e2b4d973870bc5d3dfdec02902acc3353d5f088a68e6b253",
+        "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+      },
+      "currentNormalSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+      "explicitTestSourcesUnchanged": [
+        {
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JmsReplyEnvelopeContractTest.java",
+          "sha256": "9187f5a6b40e071a5eec53eb5df476c4147023556f35ac517b338a88e04739c9"
+        }
+      ],
+      "originalSelectedTests": 4,
+      "originalCaseMethods": [
+        {
+          "classname": "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+          "name": "envelope001LiteralSyncAndApprovedAsyncRepliesKeepBodyAndExactProperties",
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+          "name": "envelope002NullMalformedRequestOversizeAndLengthMismatchNeverAcquireMessage",
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+          "name": "envelope003ProviderFailuresKeepIdentityAndNeverRetryOrContinue",
+          "result": "PASS"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+          "name": "envelope004NullProviderResultFailsBeforeAnyMessageOperation",
+          "result": "PASS"
+        }
+      ],
+      "referencedCounters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 69
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 6
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 16
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "canonicalOwner": "WBS-P005-03",
+      "referenceFee": 0,
+      "literalVectors": 26,
+      "wholeFormalClaim": false
+    }
+  ],
+  "sourceDistinctOriginalProofs": {
+    "PG14318-web-memory-coordinator-whole-seventeen-post-v1": {
+      "tests": 17,
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "sha256": "7b2205bf1d214dc1262512fc8d46b184ab7ff13294742e96476e35f004b7985d"
+    },
+    "PG15392-pure-authorization-two-post-v2": {
+      "tests": 2,
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "sha256": "baa867dc17450ec2c1d8e85d62abc23a7f6ce86543fda6a5d0136b16d622d495"
+    },
+    "PG18602": {
+      "tests": 4,
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "sha256": "637fdb75971145c4e2b4d973870bc5d3dfdec02902acc3353d5f088a68e6b253"
+    }
+  },
+  "originalMethodsReferencedDeduplicated": 23,
+  "newProductTests": 0,
+  "productReexecution": 0,
+  "newSourceProofs": 0,
+  "newCriteriaSatisfied": [],
+  "newLeafAccepted": 0,
+  "requirementSubcontracts": [
+    {
+      "requirement": "MQ-002",
+      "supported": [
+        "Registration precedes one send, defensive reply copies",
+        "One correlation winner; late/unknown ignored, capacity release after timeout/interrupt/send failure",
+        "1ns..2s timeout, configured1..20 bound and exactly once send",
+        "26 literal reply headers preserve correlation/message/layout/version001"
+      ],
+      "evidenceRows": [
+        0,
+        1,
+        3
+      ],
+      "remaining": "Registered live transport and current broker/CHR remain separate"
+    },
+    {
+      "requirement": "MQ-003",
+      "supported": [
+        "Sync S/S and approved QSB S/A acceptance reply identity only"
+      ],
+      "evidenceRows": [
+        3
+      ],
+      "remaining": "DB/outbox atomic durability/worker commit and persistent send not proven by a factory"
+    },
+    {
+      "requirement": "MQ-004",
+      "supported": [
+        "USER/ADMIN/notification-owner/question-scope matrix, N12/null fixed error"
+      ],
+      "evidenceRows": [
+        2
+      ],
+      "remaining": "Session context verification/lifetime/revocation, SQL owner predicates and Web business DB isolation require their witnesses"
+    },
+    {
+      "requirement": "MQ-005",
+      "supported": [],
+      "evidenceRows": [],
+      "remaining": "ApiSyncRequestDispatcher and service routing not this proof"
+    }
+  ],
+  "existingScopeCriteriaPreserved": [
+    "WBS-P005-01:scope"
+  ],
+  "contractCriterionStillOpen": true,
+  "qualityCriterionStillOpen": true,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortPercent": null,
+  "costOwner": "WBS-P005-01",
+  "referenceOwnersFeeZero": [
+    "WBS-P005-02",
+    "WBS-P005-03",
+    "WBS-P007-03"
+  ],
+  "dedicatedCost": null,
+  "actualBusinessActions": 0,
+  "selectionGuard": {
+    "path": "tools/quality/source_evidence_binding.py",
+    "sha256": "bbe4e187c57fedf51ccb9e8d710c5641d6a58b26634f81cf01d6d92f4bb1d0c5",
+    "checkManifest": "evidence/01_PT/005_NK-MSG-001/evidence/PG20792-explicit-name-selection-guard-v1/manifest.json",
+    "metadataChecks": 12,
+    "forbiddenFileReadsByCorrectedAudit": 0
+  },
+  "initialAuditFailure": {
+    "actualExit": 1,
+    "productTestsStarted": 0,
+    "reason": "Nonselected snapshot fixture differs, initial audit did not emit result; subsequent diagnostic scope error BUG2355/YKT2100 recorded separately",
+    "notPlatformRefusal": true
+  }
+}
