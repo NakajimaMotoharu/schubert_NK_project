@@ -1,0 +1,92 @@
+{
+  "actualExit": 0,
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java": "a18b922a3c6517dbc08de535d883271725574dca215f00b44f16658bd21ce32d",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfDeniedHandler.java": "b4f450f2056ad1948b5474fdf1b3a3f8afd3a8440e4bba6dfeec97c3da653c67",
+    "evidence/01_PT/015_NK-WEB-001/input/009_csrf_denied_port_qualifier.py": "6554935586c86bb2d174ad35436c5bab33b9d1e7aa56fe833c7f091a19fb0b4f"
+  },
+  "pmdRaw": 9,
+  "classification": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
+      "line": 192,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "reason": "Own host JUnit worker isolation only, executor closes, not web container threading."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
+      "line": 197,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "reason": "Own host JUnit worker isolation only, executor closes, not web container threading."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
+      "line": 236,
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "applicable": true,
+      "reason": "Applicable redundant Test-only synchronization/generic callback adaptation, simplified before first Unit without changing expected behavior."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
+      "line": 315,
+      "rule": "AvoidCatchingGenericException",
+      "applicable": true,
+      "reason": "Applicable redundant Test-only synchronization/generic callback adaptation, simplified before first Unit without changing expected behavior."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
+      "line": 315,
+      "rule": "AvoidCatchingGenericException",
+      "applicable": true,
+      "reason": "Applicable redundant Test-only synchronization/generic callback adaptation, simplified before first Unit without changing expected behavior."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
+      "line": 317,
+      "rule": "AvoidCatchingGenericException",
+      "applicable": true,
+      "reason": "Applicable redundant Test-only synchronization/generic callback adaptation, simplified before first Unit without changing expected behavior."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
+      "line": 327,
+      "rule": "UseConcurrentHashMap",
+      "applicable": false,
+      "reason": "One self-owned Frame Map per Test/worker; never shared concurrently, mutable only by the same synchronous callback chain."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
+      "line": 345,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "reason": "Supplied Servlet JDK Proxy interface defining loader, no deployed app/context-loader assumption."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
+      "line": 369,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "reason": "Supplied Servlet JDK Proxy interface defining loader, no deployed app/context-loader assumption."
+    }
+  ],
+  "applicableViolations": 4,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "processingErrors": 0,
+  "normalManifestSha256": "1db34d8f2ccee9fc90244bea86c3e446be0c0e010c66516a1e25c92df3426618",
+  "spotbugsReusedOnlyForUnchangedNormalWeb": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20992-outbox-required-six-static-reactor-v1/manifest.safe.json",
+    "sha256": "2d3130234ce662ebf2b0bb1f57e74c123ec68e7a307feb10844231bd9822a20a"
+  },
+  "files": {
+    "original-manifest.json": "618905818a5f4368bd4db39dadf2bdb3295f21e91c21ad3b354617ce5306a753",
+    "pmd.xml": "729527ac993e1a58d74ec19a90608b8ba3c019c11d816d033639d3c19d004175",
+    "checkstyle.xml": "f396ecf944b6a9cb518e127849f4a44ca9d828b4e3942506ad42caea58e09e6b",
+    "pmd.stdout": "9613886cb042164d97722d8198479534b7aeb3a32c9eed6f762a99aa22c6c7dd",
+    "pmd.stderr": "91c2a7fa23697b34812378a4f931b636783640631a3342ea1859d1191bf0068b",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-07T01:42:57.393">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java">
+<violation beginline="192" endline="192" begincolumn="24" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="CsrfDeniedHandlerPortTest" method="twoWorkerThreadLocalActorsAndRequestAuditsRemainIndependent" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="197" endline="209" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="CsrfDeniedHandlerPortTest" method="twoWorkerThreadLocalActorsAndRequestAuditsRemainIndependent" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="236" endline="236" begincolumn="37" endcolumn="45" rule="AvoidSynchronizedAtMethodLevel" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="CsrfDeniedHandlerPortTest" method="getCause" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedatmethodlevel" priority="3">
+Use block level locking rather than method level synchronization
+</violation>
+<violation beginline="315" endline="315" begincolumn="16" endcolumn="32" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="CsrfDeniedHandlerPortTest.MemoryLog" method="log" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="315" endline="315" begincolumn="35" endcolumn="40" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="CsrfDeniedHandlerPortTest.MemoryLog" method="log" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="317" endline="317" begincolumn="16" endcolumn="25" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="CsrfDeniedHandlerPortTest.MemoryLog" method="log" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Throwable in try-catch block
+</violation>
+<violation beginline="327" endline="327" begincolumn="39" endcolumn="67" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="CsrfDeniedHandlerPortTest.Frame" variable="attributes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="345" endline="345" begincolumn="19" endcolumn="60" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="CsrfDeniedHandlerPortTest.Frame" method="Frame" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="369" endline="369" begincolumn="19" endcolumn="61" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="CsrfDeniedHandlerPortTest.Frame" method="Frame" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+</pmd>
