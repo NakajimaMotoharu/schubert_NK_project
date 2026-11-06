@@ -1,0 +1,66 @@
+{
+  "actualExit": 0,
+  "metadataExit": 0,
+  "compileExit": 0,
+  "prepareManifestSha256": "df976abb649ec7abe7372fb417891190a9baee010685de83323b5f3ff9e4ec6d",
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/SearchTemplateResourcePortTest.java": "33a65016221797ab01c0cf64f35c9a86293990f420a4de2ccdb396303269e265",
+    "evidence/01_PT/016_NK-WEB-002/input/020_search_resource_dependencies.json": "924384013b59a9692fedb9364a957ecc039cd5194f754fb2439e91b7c671c9b0",
+    "evidence/01_PT/016_NK-WEB-002/input/019_search_resource_qualifier.py": "64cd001e3c721ced4a93c5ee3b6f87bfb5538f29f819dee43020e59b1a124452",
+    "src/schubert-nk-web/src/main/resources/templates/search.html": "e3db4ebdc9372eb396d2fe95cf56aced827d400503cca1317b3572e53a69c4a7",
+    "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd",
+    "src/schubert-nk-web/src/main/resources/templates/fragments/pagination.html": "ddf3ccc9a1f88adf5bd61c8c9aa8928022f97c6e8f314c48941aad267bd5cb80"
+  },
+  "files": {
+    "original-manifest.json": "4a5b1f3a41af130328ea701fd58a8d9c43b34444a6f21ff2adecab67d1b5cc2c",
+    "pmd.xml": "2315e32ebc32ad65096b72ffddb278ee8097b9aeaddd4bb36e9dcb1f14e4dc63",
+    "checkstyle.xml": "165947f2f66690b5cf2de3809a0f53e27aaf44b9e9d8a26e6554df5e8598b630",
+    "pmd.stdout": "9f3bca9876dd76080f7143a7d93c3052a1b482bfb4af3e8addad27e8f9dd36eb",
+    "pmd.stderr": "4e114156e4c7a536f6f10017a04f680a7cc8a7ca457f1aaccc280dbd3877210e",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "rawPmd": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": 321,
+      "method": "ownedConcurrentRenderersNeverShareFiltersOrRows"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 326,
+      "method": "ownedConcurrentRenderersNeverShareFiltersOrRows"
+    }
+  ],
+  "individualApplicability": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": 321,
+      "method": "ownedConcurrentRenderersNeverShareFiltersOrRows",
+      "applicable": false,
+      "basis": "Standalone owned two-worker JUnit fixture; executor TWR,8tasks with10second join. No application/container worker; no actual backend thread."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 326,
+      "method": "ownedConcurrentRenderersNeverShareFiltersOrRows",
+      "applicable": false,
+      "basis": "Standalone owned two-worker JUnit fixture; executor TWR,8tasks with10second join. No application/container worker; no actual backend thread."
+    }
+  ],
+  "applicableViolations": 0,
+  "individualApplicableViolations": 0,
+  "checkstyle": 0,
+  "checkstyleErrors": 0,
+  "testsExecuted": 0,
+  "priorFailuresPreserved": [
+    "PG20604 metadata copy defect",
+    "PG20612 original raw9 of which7 applicable"
+  ],
+  "bugRefs": [
+    "BUG-2345",
+    "BUG-2346",
+    "YKT-2090",
+    "YKT-2091"
+  ]
+}
