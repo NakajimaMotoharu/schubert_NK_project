@@ -87,6 +87,9 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** Independent UI224236 wholebyte/DOM/HTTP oracles; PG-D350/016063/PT-QRY-HTTP001..012. */
 class QuestionControllerTest {
+  private static final String LABEL_ANSWERED = "回答済み";
+  private static final String LABEL_UNANSWERED = "未回答";
+  private static final String LABEL_ERROR = "エラー";
   private static final String FIXTURE_QUESTIONS_NEW_193F26D5 = "questions/new";
   private static final String FIXTURE_QSBREQ01_F9A27626 = "QSBREQ01";
   private static final String FIXTURE_LITERAL_30C2AF62 = "literal";
@@ -220,7 +223,7 @@ class QuestionControllerTest {
           var page =
               assertInstanceOf(QuestionListViewModel.class, model.get(FIXTURE_PAGE_861424BC));
           assertEquals("é &+", page.getFilters().getValues().get(FIXTURE_KEYWORD_C56BDFC4));
-          assertEquals("回答済み", page.getRows().getFirst().get("stateLabel"));
+          assertEquals(LABEL_ANSWERED, page.getRows().getFirst().get("stateLabel"));
           byte[] expected = request("QSSREQ01", 384, "a".repeat(64), new UUID(0, 1));
           put(expected, 256, 256, "é &+");
           if (role == UserRole.ADMIN) put(expected, 512, 64, FIXTURE_READER_F734AAEA);
@@ -399,11 +402,11 @@ class QuestionControllerTest {
               assertEquals(
                   Map.of(
                           FIXTURE_ANSWERED_6CA66E97,
-                          "回答済み",
+                          LABEL_ANSWERED,
                           FIXTURE_UNANSWERED_8B420ADF,
-                          "未回答",
+                          LABEL_UNANSWERED,
                           FIXTURE_ERROR_F717E7D8,
-                          "エラー")
+                          LABEL_ERROR)
                       .get(state),
                   row.get("stateLabel"));
               assertEquals(FIXTURE_READER_F734AAEA, row.get(FIXTURE_USERNAME_72488FAE));
@@ -622,11 +625,11 @@ class QuestionControllerTest {
               assertEquals(
                   Map.of(
                           FIXTURE_ANSWERED_6CA66E97,
-                          "回答済み",
+                          LABEL_ANSWERED,
                           FIXTURE_UNANSWERED_8B420ADF,
-                          "未回答",
+                          LABEL_UNANSWERED,
                           FIXTURE_ERROR_F717E7D8,
-                          "エラー")
+                          LABEL_ERROR)
                       .get(expectedQuestionStateWire(state)),
                   page.getValues().get("stateLabel"));
               assertEquals(
@@ -816,11 +819,11 @@ class QuestionControllerTest {
           assertEquals(
               Map.of(
                       FIXTURE_ANSWERED_6CA66E97,
-                      "回答済み",
+                      LABEL_ANSWERED,
                       FIXTURE_UNANSWERED_8B420ADF,
-                      "未回答",
+                      LABEL_UNANSWERED,
                       FIXTURE_ERROR_F717E7D8,
-                      "エラー")
+                      LABEL_ERROR)
                   .get(expectedQuestionStateWire(state)),
               dom.select(".question-row .state").text());
           assertTrue(dom.select(".question-summary script").isEmpty());
@@ -842,11 +845,11 @@ class QuestionControllerTest {
           assertEquals(
               Map.of(
                       FIXTURE_ANSWERED_6CA66E97,
-                      "回答済み",
+                      LABEL_ANSWERED,
                       FIXTURE_UNANSWERED_8B420ADF,
-                      "未回答",
+                      LABEL_UNANSWERED,
                       FIXTURE_ERROR_F717E7D8,
-                      "エラー")
+                      LABEL_ERROR)
                   .get(expectedQuestionStateWire(state)),
               detailDom.select(".state").text());
           assertTrue(detailDom.select(".question-body script,.answer-body script").isEmpty());
@@ -1822,16 +1825,18 @@ class QuestionControllerTest {
       assertThrows(NullPointerException.class, () -> QuestionSubmitViewModel.newForm(null, token));
       assertThrows(
           NullPointerException.class, () -> QuestionSubmitViewModel.redisplay(actor, null, ""));
-      var form =
+      QuestionSubmitForm form;
+      try (var ownedForm =
           QuestionSubmitForm.bind(
               params(
                   FIXTURE_QUESTION_6D6CA52E,
                   FIXTURE_LITERAL_30C2AF62,
                   FIXTURE_OPERATION_TOKEN_6C771227,
-                  token.token().toString()));
-      assertThrows(
-          NullPointerException.class, () -> QuestionSubmitViewModel.redisplay(actor, form, null));
-      form.close();
+                  token.token().toString()))) {
+        form = ownedForm;
+        assertThrows(
+            NullPointerException.class, () -> QuestionSubmitViewModel.redisplay(actor, form, null));
+      }
       assertThrows(IllegalStateException.class, form::operationToken);
       var reference = new ReceiptReference(RECEIPT, 1, SUBMITTED);
       var data =

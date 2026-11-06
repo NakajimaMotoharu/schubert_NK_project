@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-06T15:49:43.653">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java">
+<violation beginline="1004" endline="1004" begincolumn="20" endcolumn="51" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest" method="qry010ConcurrentTargetsContextsAndMessages" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="1009" endline="1031" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest" method="qry010ConcurrentTargetsContextsAndMessages" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="1679" endline="1679" begincolumn="20" endcolumn="51" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest" method="rcpt006HConcurrentSameTokenAndImmutableLocator" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="1688" endline="1708" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest" method="rcpt006HConcurrentSameTokenAndImmutableLocator" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="1828" endline="1828" begincolumn="26" endcolumn="30" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest" method="rcpt006GCurrentCompletionFailureAndInputContracts" variable="form" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this QuestionSubmitForm object are closed after use
+</violation>
+<violation beginline="2081" endline="2081" begincolumn="17" endcolumn="50" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest.Fixture" variable="ownedSource" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="2091" endline="2091" begincolumn="27" endcolumn="60" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest.Fixture" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="2108" endline="2108" begincolumn="22" endcolumn="33" rule="AvoidUsingVolatile" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest.Fixture" variable="failReceipt" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile" priority="2">
+Use of modifier volatile is not recommended.
+</violation>
+<violation beginline="2109" endline="2109" begincolumn="22" endcolumn="41" rule="AvoidUsingVolatile" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest.Fixture" variable="verifyNoTransaction" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile" priority="2">
+Use of modifier volatile is not recommended.
+</violation>
+<violation beginline="2110" endline="2110" begincolumn="23" endcolumn="33" rule="AvoidUsingVolatile" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest.Fixture" variable="afterReply" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile" priority="2">
+Use of modifier volatile is not recommended.
+</violation>
+<violation beginline="2115" endline="2115" begincolumn="21" endcolumn="54" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest.Fixture" variable="receipts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="2127" endline="2127" begincolumn="21" endcolumn="25" rule="AvoidUsingVolatile" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest.Fixture" variable="code" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile" priority="2">
+Use of modifier volatile is not recommended.
+</violation>
+<violation beginline="2128" endline="2128" begincolumn="21" endcolumn="26" rule="AvoidUsingVolatile" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest.Fixture" variable="state" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile" priority="2">
+Use of modifier volatile is not recommended.
+</violation>
+<violation beginline="2129" endline="2129" begincolumn="21" endcolumn="28" rule="AvoidUsingVolatile" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest.Fixture" variable="summary" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile" priority="2">
+Use of modifier volatile is not recommended.
+</violation>
+<violation beginline="2130" endline="2130" begincolumn="21" endcolumn="27" rule="AvoidUsingVolatile" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest.Fixture" variable="answer" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile" priority="2">
+Use of modifier volatile is not recommended.
+</violation>
+<violation beginline="2131" endline="2131" begincolumn="21" endcolumn="26" rule="AvoidUsingVolatile" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest.Fixture" variable="owner" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile" priority="2">
+Use of modifier volatile is not recommended.
+</violation>
+<violation beginline="2132" endline="2132" begincolumn="18" endcolumn="23" rule="AvoidUsingVolatile" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest.Fixture" variable="count" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile" priority="2">
+Use of modifier volatile is not recommended.
+</violation>
+<violation beginline="2133" endline="2133" begincolumn="18" endcolumn="23" rule="AvoidUsingVolatile" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest.Fixture" variable="total" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile" priority="2">
+Use of modifier volatile is not recommended.
+</violation>
+<violation beginline="2134" endline="2134" begincolumn="19" endcolumn="26" rule="AvoidUsingVolatile" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest.Fixture" variable="replyId" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile" priority="2">
+Use of modifier volatile is not recommended.
+</violation>
+<violation beginline="2135" endline="2135" begincolumn="47" endcolumn="56" rule="AvoidUsingVolatile" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="QuestionControllerTest.Fixture" variable="responder" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile" priority="2">
+Use of modifier volatile is not recommended.
+</violation>
+</file>
+</pmd>

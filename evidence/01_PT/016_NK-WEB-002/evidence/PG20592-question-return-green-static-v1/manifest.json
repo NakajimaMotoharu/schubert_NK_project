@@ -1,0 +1,66 @@
+{
+  "actualExit": 0,
+  "originalCompileExit": null,
+  "files": {
+    "pmd.stdout": "9f3bca9876dd76080f7143a7d93c3052a1b482bfb4af3e8addad27e8f9dd36eb",
+    "checkstyle-exit.safe.json": "a305a23e47d1e5fba8d6bd9d0e1934e6751ae704d21f0abf5b3d6d50767d788c",
+    "pmd.stderr": "4e114156e4c7a536f6f10017a04f680a7cc8a7ca457f1aaccc280dbd3877210e",
+    "pmd-exit.safe.json": "8b5ea88eb155c8a98afa72bbb9f297f4c7cca4937a63904a9f5fb0028bbdfd04",
+    "checkstyle-process.safe.json": "617537adc6a8805fab2f45d598a90f11bb0a074770f4c6f5982bc6ff7ba1445d",
+    "pmd-begin.safe.json": "aa42156e4e4ba35d2d786894941407a4b0c35331cc1dd42aaedf35fc6b325d87",
+    "pmd-process.safe.json": "c8504aeff15776c989ca637192b07a3996b669901545242eb592a6eb87b9e3fd",
+    "checkstyle.xml": "0d60f653e1015abd46142d514d98a24b58c6a55f293120ddb9d3fbf0e1086f66",
+    "checkstyle-begin.safe.json": "388b9308bc09895ff5d63dedffb72f4dbd02e96aebae1088444aa15afdecd9c8",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-manifest.json": "581d9849d1418638c7c764d20b7ce0ff1959d30f13bf82cfb7613ab5bf1c4318",
+    "pmd.xml": "7fdf33a1604348771446d000bafe948dd3f04e67d650bd4e8196be105c998a42",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "rawPmd": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": 194,
+      "method": "concurrentInputAndAcceptedPagesKeepValuesSeparate"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 199,
+      "method": "concurrentInputAndAcceptedPagesKeepValuesSeparate"
+    }
+  ],
+  "rawCounts": {
+    "DoNotUseThreads": 2
+  },
+  "individualApplicability": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": 194,
+      "method": "concurrentInputAndAcceptedPagesKeepValuesSeparate",
+      "applicable": false,
+      "basis": "Owned bounded two-worker JUnit concurrency rendering fixture; shutdown via try-with-resources; webapp thread prohibition does not apply to standalone Test."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 199,
+      "method": "concurrentInputAndAcceptedPagesKeepValuesSeparate",
+      "applicable": false,
+      "basis": "Owned bounded two-worker JUnit concurrency rendering fixture; shutdown via try-with-resources; webapp thread prohibition does not apply to standalone Test."
+    }
+  ],
+  "applicableViolations": 0,
+  "checkstyleErrors": 0,
+  "testsExecuted": false,
+  "testStatus": "NOT_RUN_STATIC_ONLY_NO_PASS",
+  "productionMainArtifactSource": "70fb6768e76564022901874e294a659e2fe1506f",
+  "testSource": "WORKTREE_INPUT_HASHES_PENDING_GIT_BYTE_POST",
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionFormReturnResourcePortTest.java": "603eada4ad8c741c2e1cb0e2f1c8f0fb381d6441b5cf875fb8d287dd42fdd3b8",
+    "evidence/01_PT/016_NK-WEB-002/input/018_question_return_green_dependencies.json": "1f5c7b4049a1556a195d48148a950d2b5bc131181d85593c231f6fa3f6b32a58",
+    "evidence/01_PT/016_NK-WEB-002/input/017_question_return_green_qualifier.py": "886a3f1ef087cb89355954c0ad57ac6f30858859d6287c8f0190e0ebcf73950c",
+    "src/schubert-nk-web/src/main/resources/templates/questions/new.html": "a71649b7e8237ad7962e32d92103d87dd92eb84343b77881f3970b3010038643",
+    "src/schubert-nk-web/src/main/resources/templates/questions/accepted.html": "eded646286168f2c25805deb9938ba8b0db31e321881f781356cbf4bda889f53",
+    "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd"
+  },
+  "originalSourceLabelCoversMainArtifactsOnly": true,
+  "noFailureConvertedToPass": true
+}
