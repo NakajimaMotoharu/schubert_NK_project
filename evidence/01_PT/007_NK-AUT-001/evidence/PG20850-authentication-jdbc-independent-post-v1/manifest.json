@@ -1,0 +1,135 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-06T20:40:54.923500+09:00",
+  "source": "f16526371daf0352925fda5c9686425a64e4a40b",
+  "productionCoreMain": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+  "verifierSource": "f34a61fdde299e134f016c31164ea93d4af192f6",
+  "originalPost": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20840-authentication-verifier-jdbc-six-v1/manifest.json",
+    "sha256": "9ed3f1b415ee21c3439a2be2aa554692ea51f5509c507ebbd3c1d5c51f5adc03"
+  },
+  "tests": 6,
+  "projection": {
+    "schema": "PGPT_PORT_PROJECTION_V1",
+    "source": "f16526371daf0352925fda5c9686425a64e4a40b",
+    "mainSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+    "tests": 6,
+    "testClasses": 1,
+    "fourCounters": {
+      "LINE": 66,
+      "METHOD": 6,
+      "CLASS": 2,
+      "BRANCH": 25
+    },
+    "missed": 0,
+    "physical": 2,
+    "noCodeClasses": [],
+    "selectedMethods": [
+      [
+        "dev.codex.schubert.nk.api.security.AuthenticationVerifierJdbcPortTest",
+        "missingRevokedExpiredAndDisabledRowsNeverReachTouch"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.AuthenticationVerifierJdbcPortTest",
+        "nullColumnsUnknownRoleAffectedRowsAndApiNullsFailClosed"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.AuthenticationVerifierJdbcPortTest",
+        "ordinaryJdbcCloseFaultsPreserveCleanupAndUnknownIdentity"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.AuthenticationVerifierJdbcPortTest",
+        "parallelFreshRowsDoNotShareActorOrTransactionState"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.AuthenticationVerifierJdbcPortTest",
+        "readOnlyPreflightNeverLocksTouchesOrChangesConnectionMode"
+      ],
+      [
+        "dev.codex.schubert.nk.api.security.AuthenticationVerifierJdbcPortTest",
+        "writerUsesCurrentActorLockOrderUtcBindingsAndBorrowedTransaction"
+      ]
+    ],
+    "qualificationTransferred": false
+  },
+  "physicalNormalClassHashes": {
+    "dev/codex/schubert/nk/api/security/AuthenticationContextVerifier$VerifiedSession": "025230a8a7a50c4d9db5743dc3d1e845f1d8691d3493f2ebfcfb327debb95b08",
+    "dev/codex/schubert/nk/api/security/AuthenticationContextVerifier": "0c3d5fa186229eca1164ea69026fc4b8b6bc40753aef7b2654ddd3c5dc3c924d"
+  },
+  "sourceTestIds": [
+    [
+      "PT-AUT-JDBC001",
+      "writerUsesCurrentActorLockOrderUtcBindingsAndBorrowedTransaction"
+    ],
+    [
+      "PT-AUT-JDBC002",
+      "readOnlyPreflightNeverLocksTouchesOrChangesConnectionMode"
+    ],
+    [
+      "PT-AUT-JDBC003",
+      "missingRevokedExpiredAndDisabledRowsNeverReachTouch"
+    ],
+    [
+      "PT-AUT-JDBC004",
+      "nullColumnsUnknownRoleAffectedRowsAndApiNullsFailClosed"
+    ],
+    [
+      "PT-AUT-JDBC005",
+      "ordinaryJdbcCloseFaultsPreserveCleanupAndUnknownIdentity"
+    ],
+    [
+      "PT-AUT-JDBC006",
+      "parallelFreshRowsDoNotShareActorOrTransactionState"
+    ]
+  ],
+  "checks": [
+    "original terminal/stages0",
+    "6 XML method bijection/FES0",
+    "all public artifact hashes",
+    "explicit Main/Test Git pins",
+    "separate producer/verifier/config Git pins",
+    "2physical normal jar bytes/CRC/session",
+    "four counters66/6/2/25 miss0",
+    "SDK exact original review",
+    "static raw4 individually nonapplicable",
+    "heldFourZero/no union/no manual exclusion"
+  ],
+  "staticPost": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20838-auth-jdbc-style-static-v1/manifest.json",
+    "sha256": "4414b1d9404d87cd798f92d4e4e1e08d68c075d5b03d817674a847657a4a1fdd"
+  },
+  "environment": [
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    },
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    },
+    {
+      "os.name": "Linux",
+      "os.arch": "amd64",
+      "os.version": "7.0.0-42-generic",
+      "java.version": "25.0.4",
+      "java.vendor": "Ubuntu"
+    }
+  ],
+  "productTestsReexecuted": 0,
+  "initialMetadataDevelopmentAttempt": {
+    "actualExit": 1,
+    "reason": "New checker initially compared physical JSON bytes with producer canonical JSON digest; corrected to compare both semantics hash and frozen file Git hash before first delivery",
+    "productTestsReexecuted": 0
+  },
+  "checkerSourceState": "CURRENT_WIP_METADATA_ONLY_PUBLISHED_NEXT_NOT_PRODUCT_SOURCE",
+  "checkerSha256": "428efde54b99d1da56f9d67649ba598f80954a8f021f1892800c2b6f0e43dfd0",
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "effortRate": null
+}
