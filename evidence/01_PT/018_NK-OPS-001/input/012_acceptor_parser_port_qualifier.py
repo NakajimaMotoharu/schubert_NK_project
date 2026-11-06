@@ -5,16 +5,21 @@ import xml.etree.ElementTree as E
 import pg9666_pagination_static as r
 root=Path.cwd();runs=root.parent/'pgpt-runs/PG379';tc=root.parent/'toolchain';jdk=tc/'jdk-25.0.4/bin';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();phase=sys.argv[1];profile=sys.argv[2];external=profile.endswith('.json');assert phase in {'prepare','static','run','post'} and (external or profile in {'range','verified','audit','receipt','login_audit','login_attempt','inbound','snapshot','run_reference','metadata','expiry','backup','batch_run','cleanup_step','cleanup_query','inspection_summary','pressure','topology','acceptor'})
 observationExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/052_api_observation_publication.json','evidence/01_PT/018_NK-OPS-001/input/053_api_observation_publication_style.json'}
-viewExternal=external and profile in {'evidence/01_PT/018_NK-OPS-001/input/054_question_detail_projection.json','evidence/01_PT/018_NK-OPS-001/input/055_question_detail_projection_style.json'}
+viewProfiles={
+ 'evidence/01_PT/018_NK-OPS-001/input/054_question_detail_projection.json':('QuestionDetailViewModel','QuestionDetailProjectionPortTest'),
+ 'evidence/01_PT/018_NK-OPS-001/input/055_question_detail_projection_style.json':('QuestionDetailViewModel','QuestionDetailProjectionPortTest'),
+ 'evidence/01_PT/018_NK-OPS-001/input/056_notification_detail_projection.json':('NotificationDetailViewModel','NotificationDetailProjectionPortTest'),
+ 'evidence/01_PT/018_NK-OPS-001/input/057_notification_detail_projection_style.json':('NotificationDetailViewModel','NotificationDetailProjectionPortTest')}
+viewExternal=external and profile in viewProfiles
 if external:
  assert viewExternal or observationExternal or re.fullmatch(r'evidence/01_PT/017_NK-BAT-001/input/[0-9]{3}_log_transaction_[a-z]+\.json',profile)
  externalCfg=json.loads((root/profile).read_text())
  assert externalCfg['preflightDecision']=='PT_DEFAULT' and externalCfg['actualBackendActions']==0
  if viewExternal:
-  assert externalCfg['module']=='web' and externalCfg['main']=='QuestionDetailViewModel' and externalCfg['mainPackage']=='view'
-  assert externalCfg['tests']==['QuestionDetailProjectionPortTest'] and externalCfg['testPackages']==['view']
+  assert externalCfg['module']=='web' and externalCfg['main']==viewProfiles[profile][0] and externalCfg['mainPackage']=='view'
+  assert externalCfg['tests']==[viewProfiles[profile][1]] and externalCfg['testPackages']==['view']
   assert externalCfg['physical']==2 and externalCfg['abstract']==0 and externalCfg['expected']==8
-  assert externalCfg['syntheticNoCode']==['dev/codex/schubert/nk/web/view/QuestionDetailViewModel$1']
+  assert externalCfg['syntheticNoCode']==['dev/codex/schubert/nk/web/view/'+viewProfiles[profile][0]+'$1']
  elif observationExternal:
   assert externalCfg['module']=='api' and externalCfg['main']=='ApiOutboxObservationSource' and externalCfg['mainPackage']=='monitoring'
   assert externalCfg['tests']==['ApiOutboxPublicationPortTest'] and externalCfg['testPackages']==['monitoring']
