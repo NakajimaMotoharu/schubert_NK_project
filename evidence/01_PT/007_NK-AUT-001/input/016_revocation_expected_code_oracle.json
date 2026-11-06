@@ -1,0 +1,108 @@
+{
+  "atJST": "2026-11-06T21:57:02.284519+09:00",
+  "metadataOnly": true,
+  "designSource": "8deb209723494008cad46b6649194a3b7b30e0da",
+  "designDocuments": {
+    "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md": {
+      "sha256": "8f9abda07bc93262c264eae723c74245165bf0806b273b0d007e9fa46f37fa46",
+      "selectedLines": [
+        {
+          "line": 68,
+          "text": "既に失効済みの場合は`0200`で同じ失効結果を返す。"
+        }
+      ]
+    },
+    "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md": {
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916",
+      "selectedLines": [
+        {
+          "line": 141,
+          "text": "| `0000` | 200/302 | 新規成功 | INFO/ACTION |"
+        },
+        {
+          "line": 142,
+          "text": "| `0100` | 400 | Field error、修正後再送 | INFO/REQUEST |"
+        },
+        {
+          "line": 143,
+          "text": "| `0101` | 401 | 認証失敗、存在有無を区別しない | WARN/SECURITY |"
+        },
+        {
+          "line": 144,
+          "text": "| `0102` | 401 | HTTP session破棄、Loginへ | INFO/SECURITY |"
+        },
+        {
+          "line": 145,
+          "text": "| `0103` | 403 | 認可拒否、自動再試行なし | WARN/SECURITY |"
+        },
+        {
+          "line": 146,
+          "text": "| `0104` | 404 | 非scope/不存在を区別しない | INFO/WARN |"
+        },
+        {
+          "line": 147,
+          "text": "| `0105` | 409 | 最新再表示・新token | INFO、HMAC不一致はWARN/SECURITY |"
+        },
+        {
+          "line": 148,
+          "text": "| `0106` | 429相当 | Lock残時間を案内 | WARN/SECURITY |"
+        },
+        {
+          "line": 149,
+          "text": "| `0107` | 409 | 取消不可・最新状態表示 | INFO/ACTION |"
+        },
+        {
+          "line": 150,
+          "text": "| `0200` | 200/302 | 冪等成功、保存済み結果 | INFO/ACTION |"
+        },
+        {
+          "line": 151,
+          "text": "| `9000` | 503 | 一時障害、再操作案内 | ERROR/SYSTEMまたはMQ |"
+        },
+        {
+          "line": 152,
+          "text": "| `9001` | 503 | 容量/resource上限、新規受付停止 | ERROR/SYSTEM、alert |"
+        }
+      ]
+    },
+    "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md": {
+      "sha256": "edfd716ed55ff4b72739ed2e142c1dd7812a9682ba24895a765c1934b49bb0ae",
+      "selectedLines": [
+        {
+          "line": 297,
+          "text": "SSC-015: Logoutはknown contextのowner lookupからInboxへ入り、同Message再送で失効/監査の追加0、別Messageの既失効0200で元時刻/監査1を確認する。Snapshot/AUTH_SESSION/owner/hash/失効日時の不整合と鍵/DB故障はdeny closed。Known ownerの0102は元error維持、unknown contextはInbox0、通常業務のactor発行/idle延長0。LOGREQにない現在client IPを過去Login IPから補わず、失効監査SQL NULLとLogin/REPLACEDの当該IP維持を負/正常testする。"
+        }
+      ]
+    }
+  },
+  "approvedCodes": [
+    "0000",
+    "0100",
+    "0101",
+    "0102",
+    "0103",
+    "0104",
+    "0105",
+    "0106",
+    "0107",
+    "0200",
+    "9000",
+    "9001"
+  ],
+  "subjectExpected": {
+    "freshLogout": "0000",
+    "alreadyRevoked": "0200",
+    "expired": "0102"
+  },
+  "originalCodeLiteral": "0001",
+  "originalCodeIsApproved": false,
+  "productionChange": false,
+  "upperDesignChange": false,
+  "bug": "BUG2364/YKT2109",
+  "originalFailedRun": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20940-session-revocation-red-original-v1/manifest.json",
+    "sha256": "16cb0698838d05e9a6f22d32227c3705100754c93211e94a165962f3654f2750"
+  },
+  "oldPassesReexecuted": 0,
+  "newProductTests": 0
+}

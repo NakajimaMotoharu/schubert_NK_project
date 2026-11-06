@@ -151,6 +151,22 @@ if profile=='audit':deps.extend([tc/'m2/repository/jakarta/servlet/jakarta.servl
 if profile in {'pressure','topology','acceptor'}:
  assert sha(root/cfg['sdkReview'])==cfg['sdkReviewSha256'];sdkReview=json.loads((root/cfg['sdkReview']).read_text());assert sdkReview['decision']=='STATIC_PASS_BEFORE_ANY_FIXTURE_OR_PRODUCT_RUN'
 assert all(p.is_file() for p in deps);classpath=os.pathsep.join(map(str,[*deps,console]));prepared=runs/cfg['prepare'];cfgHash=hashlib.sha256(json.dumps(cfg,sort_keys=True).encode()).hexdigest()
+if sessionRevocationExternal:
+ # BUG2364/YKT2109: expected values come from immutable approved design, never
+ # from a Product enum/method or the observed failed run's actual value.
+ oracleRelative='evidence/01_PT/007_NK-AUT-001/input/016_revocation_expected_code_oracle.json'
+ assert cfg['expectedCodeOracle']==oracleRelative and sha(root/oracleRelative)==cfg['expectedCodeOracleSha256']
+ codeOracle=json.loads((root/oracleRelative).read_text());assert codeOracle['designSource']=='8deb209723494008cad46b6649194a3b7b30e0da'
+ assert codeOracle['subjectExpected']==dict(freshLogout='0000',alreadyRevoked='0200',expired='0102')
+ for name,binding in codeOracle['designDocuments'].items():
+  assert name.startswith(('documents/200_UI/230_インターフェース/','documents/300_SS/350_運用・品質/')) and '..' not in Path(name).parts and name.endswith('.md')
+  blob=subprocess.check_output(['git','show',codeOracle['designSource']+':'+name]);assert hashlib.sha256(blob).hexdigest()==binding['sha256']
+  lines=blob.decode().splitlines()
+  for row in binding['selectedLines']:assert lines[row['line']-1]==row['text']
+ assert '0200' in codeOracle['approvedCodes'] and '0001' not in codeOracle['approvedCodes']
+ expectedLiterals=set(re.findall(r'"([0-9]{4})"',(root/tests[0]).read_text().replace('\\"','"')))
+ assert expectedLiterals<=set(codeOracle['approvedCodes']),sorted(expectedLiterals-set(codeOracle['approvedCodes']))
+ if phase in {'run','post'}:assert hashlib.sha256(subprocess.check_output(['git','show',sys.argv[3]+':'+oracleRelative])).hexdigest()==cfg['expectedCodeOracleSha256']
 if phase=='prepare':
  slot=prepared;assert not slot.exists();slot.mkdir();r.SLOT=slot;stages={};formatNew=cfg.get('formatNewTests',1);assert 1<=formatNew<=len(tests);oldTestHashes={n:sha(root/n) for n in tests[:-formatNew]};stages['format']=r.step('format',[str(jdk/'java'),'-jar',str(tc/'google-java-format-1.36.1-all-deps.jar'),*(['--dry-run','--set-exit-if-changed'] if cfg.get('formatFrozen',False) else ['--replace']),*[str(root/n) for n in tests[-formatNew:]]],root);assert stages['format']['actualExit']==0
  inputs={n:sha(root/n) for n in [*mains,*tests]};classes=slot/'test-classes';classes.mkdir();stages['test-compile']=r.step('test-compile',[str(jdk/'javac'),'--release','25','-proc:none','-Xlint:all','-Werror','-cp',classpath,'-d',str(classes),*[str(root/n) for n in tests]],root)
@@ -167,13 +183,13 @@ if phase=='post' and len(sys.argv) in {6,7}:
 if phase=='post' and len(sys.argv)==7 and (authVerifierExternal or adminPreludeExternal or sessionIssueExternal or sessionRevocationExternal):
  reviewRelative=sys.argv[6];assert reviewRelative==('evidence/01_PT/007_NK-AUT-001/input/014_session_revocation_jdk_static_review.json' if sessionRevocationExternal else 'evidence/01_PT/007_NK-AUT-001/input/011_session_issue_jdk_static_review.json' if sessionIssueExternal else 'evidence/01_PT/007_NK-AUT-001/input/009_admin_prelude_jdk_static_review.json' if adminPreludeExternal else 'evidence/01_PT/007_NK-AUT-001/input/007_auth_jdbc_jdk_static_review.json') and producerGitArtifact is not None
  reviewHash=sha(root/reviewRelative);assert hashlib.sha256(subprocess.check_output(['git','show',verifierHead+':'+reviewRelative])).hexdigest()==reviewHash
- authJdkReview=json.loads((root/reviewRelative).read_text());assert authJdkReview['decision']=='STATIC_JDK_EXCEPTION_LOG_WRITER_CLOSURE' and authJdkReview['source']==sys.argv[3] and authJdkReview['originalRun']==('PG20940' if sessionRevocationExternal else 'PG20914' if sessionIssueExternal else 'PG20874' if adminPreludeExternal else 'PG20840')
+ authJdkReview=json.loads((root/reviewRelative).read_text());assert authJdkReview['decision']=='STATIC_JDK_EXCEPTION_LOG_WRITER_CLOSURE' and authJdkReview['source']==sys.argv[3] and authJdkReview['originalRun']==('PG20958' if sessionRevocationExternal else 'PG20914' if sessionIssueExternal else 'PG20874' if adminPreludeExternal else 'PG20840')
  assert authJdkReview['originalProducerSha256']==producerHash and authJdkReview['originalConfigSha256']==cfgHash and authJdkReview['testsReexecuted']==0 and authJdkReview['actualBackendActions']==0 and not authJdkReview['formalUpdated']
  assert sha(jdk.parent/'lib/modules')==authJdkReview['jdkModulesSha256'] and sha(jdk/'javap')==authJdkReview['jdkJavapSha256']
  assert authJdkReview['classpathDriverProviderEntries'] and all(not v for v in authJdkReview['classpathDriverProviderEntries'].values())
  assert authJdkReview['forbiddenObservedInitialization']==[] and authJdkReview['ordinaryJdbcQualificationOnly'] is True
  for name,h in authJdkReview['staticArtifacts'].items():
-  assert name.startswith(('evidence/01_PT/007_NK-AUT-001/evidence/PG20846-auth-jdbc-jdk-static-review-v1/','evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/','evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/','evidence/01_PT/007_NK-AUT-001/evidence/PG20942-session-revocation-jdk-static-review-v1/')) and '..' not in Path(name).parts
+  assert name.startswith(('evidence/01_PT/007_NK-AUT-001/evidence/PG20846-auth-jdbc-jdk-static-review-v1/','evidence/01_PT/007_NK-AUT-001/evidence/PG20876-admin-prelude-jdk-static-review-v1/','evidence/01_PT/007_NK-AUT-001/evidence/PG20916-session-issue-jdk-static-review-v1/','evidence/01_PT/007_NK-AUT-001/evidence/PG20960-session-revocation-jdk-static-review-v1/')) and '..' not in Path(name).parts
   assert sha(root/name)==h and hashlib.sha256(subprocess.check_output(['git','show',verifierHead+':'+name])).hexdigest()==h
  authJdkReviewBinding={'source':verifierHead,'path':reviewRelative,'sha256':reviewHash,'testsReexecuted':0}
 elif phase=='post' and len(sys.argv)==7:

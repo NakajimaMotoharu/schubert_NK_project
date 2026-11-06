@@ -1,0 +1,47 @@
+
+Failures (2):
+  JUnit Jupiter:SessionRevocationJdbcPortTest:sharedServiceParallelCallsRetainOwnResultCorrelationAndResourceState()
+    MethodSource [className = 'dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest', methodName = 'sharedServiceParallelCallsRetainOwnResultCorrelationAndResourceState', methodParameterTypes = '']
+    => java.util.concurrent.ExecutionException: org.opentest4j.AssertionFailedError: expected: <{2=00000000-0000-0000-0000-000000000064, 1=2026-11-06T00:00:00.123456Z, 6={"targetUserId":7,"reason":"LOGOUT","resultCode":"0001"}, 5=SQL_NULL_VARCHAR, 4=7, 3=00000000-0000-0000-0000-0000000000c8}> but was: <{1=2026-11-06T00:00:00.123456Z, 2=00000000-0000-0000-0000-000000000064, 3=00000000-0000-0000-0000-0000000000c8, 4=7, 5=SQL_NULL_VARCHAR, 6={"targetUserId":7,"reason":"LOGOUT","resultCode":"0200"}}>
+       java.base/java.util.concurrent.FutureTask.report(FutureTask.java:124)
+       java.base/java.util.concurrent.FutureTask.get(FutureTask.java:207)
+       dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest.sharedServiceParallelCallsRetainOwnResultCorrelationAndResourceState(SessionRevocationJdbcPortTest.java:771)
+       java.base/java.lang.reflect.Method.invoke(Method.java:565)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+       [...]
+     Caused by: org.opentest4j.AssertionFailedError: expected: <{2=00000000-0000-0000-0000-000000000064, 1=2026-11-06T00:00:00.123456Z, 6={"targetUserId":7,"reason":"LOGOUT","resultCode":"0001"}, 5=SQL_NULL_VARCHAR, 4=7, 3=00000000-0000-0000-0000-0000000000c8}> but was: <{1=2026-11-06T00:00:00.123456Z, 2=00000000-0000-0000-0000-000000000064, 3=00000000-0000-0000-0000-0000000000c8, 4=7, 5=SQL_NULL_VARCHAR, 6={"targetUserId":7,"reason":"LOGOUT","resultCode":"0200"}}>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+       [...]
+  JUnit Jupiter:SessionRevocationJdbcPortTest:alreadyRevokedReturnsOriginalInstantWithoutTouchOrPrincipal()
+    MethodSource [className = 'dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest', methodName = 'alreadyRevokedReturnsOriginalInstantWithoutTouchOrPrincipal', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <{2=00000000-0000-0000-0000-00000000000a, 1=2026-11-06T00:00:00.123456Z, 6={"targetUserId":7,"reason":"LOGOUT","resultCode":"0001"}, 5=SQL_NULL_VARCHAR, 4=7, 3=00000000-0000-0000-0000-00000000000b}> but was: <{1=2026-11-06T00:00:00.123456Z, 2=00000000-0000-0000-0000-00000000000a, 3=00000000-0000-0000-0000-00000000000b, 4=7, 5=SQL_NULL_VARCHAR, 6={"targetUserId":7,"reason":"LOGOUT","resultCode":"0200"}}>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+       org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+       dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest$Fixture.audit(SessionRevocationJdbcPortTest.java:280)
+       dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest.alreadyRevokedReturnsOriginalInstantWithoutTouchOrPrincipal(SessionRevocationJdbcPortTest.java:361)
+       java.base/java.lang.reflect.Method.invoke(Method.java:565)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+       [...]
+
+Test run finished after 345 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         8 tests found           ]
+[         0 tests skipped         ]
+[         8 tests started         ]
+[         0 tests aborted         ]
+[         6 tests successful      ]
+[         2 tests failed          ]
+

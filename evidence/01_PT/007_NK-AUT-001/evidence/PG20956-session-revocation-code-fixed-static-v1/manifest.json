@@ -1,0 +1,153 @@
+{
+  "atJST": "2026-11-06T22:03:32.196717+09:00",
+  "compileExit": 0,
+  "pmdActualExit": 4,
+  "pmdRaw": 6,
+  "processingErrors": 0,
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "notApplicable": [
+    {
+      "item": {
+        "beginline": "85",
+        "endline": "85",
+        "begincolumn": "45",
+        "endcolumn": "66",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionRevocationJdbcPortTest",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3",
+        "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+      },
+      "reason": "Fixed java.sql interface loader for standalone JDK Proxy, not Product/J2EE dynamic classloading."
+    },
+    {
+      "item": {
+        "beginline": "91",
+        "endline": "91",
+        "begincolumn": "41",
+        "endcolumn": "65",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionRevocationJdbcPortTest.Fixture",
+        "variable": "fields",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3",
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+      },
+      "reason": "Each row/statement map belongs to its own per-task Fixture; shared Service holds only ContextHash/SessionAuditWriter, not these maps. Nullable-column map explicitly admits SQL NULL inputs, no concurrent access."
+    },
+    {
+      "item": {
+        "beginline": "165",
+        "endline": "165",
+        "begincolumn": "28",
+        "endcolumn": "51",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionRevocationJdbcPortTest.Fixture",
+        "method": "statement",
+        "variable": "bound",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3",
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+      },
+      "reason": "Each row/statement map belongs to its own per-task Fixture; shared Service holds only ContextHash/SessionAuditWriter, not these maps. Nullable-column map explicitly admits SQL NULL inputs, no concurrent access."
+    },
+    {
+      "item": {
+        "beginline": "467",
+        "endline": "467",
+        "begincolumn": "9",
+        "endcolumn": "10",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionRevocationJdbcPortTest",
+        "method": "boundaryNullOwnerReasonAndCurrentAdminContractsPrecedeSql",
+        "variable": "c",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this Connection object are closed after use"
+      },
+      "reason": "c is an in-memory interface stub, no underlying JDBC/OS resource; its close deliberately detects forbidden borrowed-Connection ownership changes. Actual row/statement acquisitions are checked for exactly-one close."
+    },
+    {
+      "item": {
+        "beginline": "743",
+        "endline": "743",
+        "begincolumn": "24",
+        "endcolumn": "55",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionRevocationJdbcPortTest",
+        "method": "sharedServiceParallelCallsRetainOwnResultCorrelationAndResourceState",
+        "variable": "workers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "reason": "Two-worker standalone JUnit owns ExecutorService by TWR, every Future retrieved, no Product/container unmanaged threads."
+    },
+    {
+      "item": {
+        "beginline": "748",
+        "endline": "768",
+        "begincolumn": "13",
+        "endcolumn": "19",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionRevocationJdbcPortTest",
+        "method": "sharedServiceParallelCallsRetainOwnResultCorrelationAndResourceState",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "reason": "Two-worker standalone JUnit owns ExecutorService by TWR, every Future retrieved, no Product/container unmanaged threads."
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java": "014b66889f0fcff7372ca4b709e8124852bde3c084e18a6ba0cadf663604c0b9",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionRevocationJdbcPortTest.java": "4fa2ce49efef57b89472882f7347c50d6ccf61705d8e559c5bed1e2a3d8425dc"
+  },
+  "normalSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+  "sameJavaStaticSource": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+  "all1844ClassBytesAndJavaPomEqual": true,
+  "originalFailure": "BUG2364/YKT2109 PG20940 F1/E1 retained; code oracle bound to frozen8deb approved0200, no Product change",
+  "suppressionAdded": false,
+  "productTestsExecuted": 0,
+  "files": {
+    "pmd.stdout": "38449a71244db7c8c8c9b90f93fc69ae19193a8b454f27c3dec140a3dd11c56c",
+    "source-list.txt": "85457c7676dd8e2a53c72aa3c4f2eb38e10e52a4a9160402e29c8d1e0b7d4730",
+    "compile-format.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checkstyle-exit.safe.json": "8d14f7dec9c48b9ced9b96428339c6fa7c0eb813959f5dfc8d830fc073f3cbbe",
+    "compile-format.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-test-compile-exit.safe.json": "3eaf5a83e9045bc0d63bce903057a6c5087ff923ee25e9a6e4e0dd516be0563f",
+    "compile-manifest.safe.json": "3ba108bc9606aec10ad42e7075abe21a7e4f8d456b80e568e35c1b956e47da57",
+    "pmd.stderr": "0345ca0b2c1012fe5d0aeb91a22cbbfaedebf6054584b763030d9b61af11a25a",
+    "compile-test-compile.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pmd-exit.safe.json": "89b880e34167c5f4bcced5f0793016cadd38a8fa4f7b50ba3afc091cc3b803d8",
+    "manifest.safe.json": "52ca1a25dbf7f10ff4a1c9737bea6c0cdee6e691b6994b51d18dce69b5686e4c",
+    "compile-test-compile-process.safe.json": "fdff6ab22f10eba6939735347f244701e70d05c6ab10c1882bb73cc7d18491ff",
+    "checkstyle-process.safe.json": "a53329517ab4c58b9f2fd39fe6972b27047121826fcc74e2c8e05b60bec43676",
+    "compile-format-exit.safe.json": "c4560f508dd4bc63d6478cf989b72d637e54f60dac3c2f3bdec2b1436ba660d4",
+    "pmd-begin.safe.json": "29f640d0058899fb0b0f7f035e3613045480581d574ac81b7224191795278d40",
+    "pmd-process.safe.json": "f8b284543d44cb456e65c28d7534c086e3e4b0e71787fb8a710b5be54cb4a026",
+    "checkstyle.xml": "b903f9b39eb4c1d0864cf9a59a7ae9c812b5dae301f36b37edf79e79cbc6f8f1",
+    "compile-test-compile-begin.safe.json": "67f3a413a68b214d2fe94b5095fadfd95149bb60bf2394f125d72149d167b614",
+    "checkstyle-begin.safe.json": "e16c88945a26bf89209d866850652e18b0e9e12a0b3db531640a03ae490d8183",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-format-process.safe.json": "7fab0f5a7f9d1d063484775e0dff964954bbb578e47a028ee0ed9d88ab165591",
+    "compile-format-begin.safe.json": "da0c7cd8cf302e4b2f767463636da157c641196f6ae49afa8c3c848e2fbb7ed6",
+    "compile-test-compile.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pmd.xml": "1d6ad9c6bf7d9580cbded8ce77747bf59faa5890a6959c34b79c4d7b7a1bec1f",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

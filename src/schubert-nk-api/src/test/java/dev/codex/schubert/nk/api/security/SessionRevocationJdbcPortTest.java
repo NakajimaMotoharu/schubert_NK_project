@@ -358,7 +358,7 @@ final class SessionRevocationJdbcPortTest {
     assertEquals(List.of(U, S, L), f.order);
     assertFalse(f.getters.contains(COL_EXPIRES));
     assertFalse(f.getters.contains(COL_STATUS));
-    f.audit(2, 7, 7, ACTION_LOGOUT, "0001", MESSAGE, CORRELATION);
+    f.audit(2, 7, 7, ACTION_LOGOUT, "0200", MESSAGE, CORRELATION);
     assertEquals("RevokedContext[REDACTED]", out.toString());
     f.owned();
   }
@@ -762,7 +762,7 @@ final class SessionRevocationJdbcPortTest {
                   assertEquals(Map.of(1, HASH), f.bindings.get(0));
                   assertEquals(Map.of(1, HASH), f.bindings.get(1));
                   f.audit(
-                      revoked ? 2 : 3, 7, 7, ACTION_LOGOUT, revoked ? "0001" : "0000", msg, corr);
+                      revoked ? 2 : 3, 7, 7, ACTION_LOGOUT, revoked ? "0200" : "0000", msg, corr);
                   f.owned();
                   return f.order.size();
                 }));
