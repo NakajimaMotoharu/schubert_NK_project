@@ -1,0 +1,9 @@
+# 現protocol四source・原63証拠結合仕様
+
+G13.07の差分照合だけ。QA054の原028/029・PG19458/19462を、現4217/normal20990のLayoutFieldCatalog・PayloadCodec・PayloadSemanticValidator・WebLogEventDataへ結合する。4sourceと全7physicalのbyte同一を先に確認した。原63件を再実行せず、新sourceの全体runや新規Test件数へ加算しない。
+
+PT-OPS-PROTOCOL-TRACE001（metadata）：原manifest/独立post/終了/元XML63集合・全Main/Test inputの原Git hash・手組golden/spec参照を確認する。現在Main4source/7class hashはnormal20990と一致を要求する。原XMLのsourcefile単位4counterを保ち、4sourceの合計661line/89method/5code class/400branchは歴史実測値と明記する。WebLogEventDataの自然branch0はN/Aで、未測定を100に補完しない。
+
+全7physicalのうちLayoutFieldCatalog$1/PayloadCodec$1は原独立postと現在byteのACC_SYNTHETICを確認し、JaCoCo既定compiler filterの扱いを説明する。手動除外なし。旧exec/successの合成や現JMS7との算術加算なし。特定の単一caseがどのhelperをhitしたかは未測定で、原63case集合への多対多traceに限定する。全G13/451・実Runtime/CHR/native/QA051final・親leafは未受入、新Product method/source証明/受入0・工数null。
+
+独立postは元current Main byte/7physical/4sourcefile counter/原case集合・golden/spec・owner/costを別処理で照合する。Root/VM/DB/JMS接続/Currentbaseline/原本の読取・実行0。CLI/Unit/report/compiler/静的engineの再演0。原63の成功・失敗史・sourceと現在sourceを混同しない。
