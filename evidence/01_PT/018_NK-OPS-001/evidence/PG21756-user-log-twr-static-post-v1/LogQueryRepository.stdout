@@ -1,0 +1,651 @@
+Compiled from "LogQueryRepository.java"
+public final class dev.codex.schubert.nk.api.persistence.LogQueryRepository {
+  private static final int MAXIMUM_PAGED_TOTAL_RECORDS;
+
+  private static final java.lang.String COLUMNS;
+
+  public dev.codex.schubert.nk.api.persistence.LogQueryRepository();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  public dev.codex.schubert.nk.protocol.layout.TypedPayloadValues search(java.sql.Connection, dev.codex.schubert.nk.api.security.AuthenticatedActor, dev.codex.schubert.nk.protocol.layout.log.LogSearchRequestData);
+    Code:
+         0: aload_1
+         1: ldc           #7                  // String connection
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_2
+         8: ldc           #15                 // String actor
+        10: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_3
+        15: ldc           #17                 // String request
+        17: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: new           #19                 // class dev/codex/schubert/nk/api/security/AuthorizationService
+        24: dup
+        25: invokespecial #21                 // Method dev/codex/schubert/nk/api/security/AuthorizationService."<init>":()V
+        28: aload_2
+        29: invokevirtual #22                 // Method dev/codex/schubert/nk/api/security/AuthorizationService.requireAdmin:(Ldev/codex/schubert/nk/api/security/AuthenticatedActor;)V
+        32: new           #26                 // class dev/codex/schubert/nk/protocol/layout/TypedPayloadValues
+        35: dup
+        36: new           #28                 // class dev/codex/schubert/nk/protocol/layout/LayoutId
+        39: dup
+        40: ldc           #30                 // String LGSREQ01
+        42: invokespecial #32                 // Method dev/codex/schubert/nk/protocol/layout/LayoutId."<init>":(Ljava/lang/String;)V
+        45: aload_3
+        46: invokestatic  #35                 // InterfaceMethod java/util/List.of:()Ljava/util/List;
+        49: invokespecial #41                 // Method dev/codex/schubert/nk/protocol/layout/TypedPayloadValues."<init>":(Ldev/codex/schubert/nk/protocol/layout/LayoutId;Ldev/codex/schubert/nk/protocol/layout/PayloadData;Ljava/util/List;)V
+        52: invokestatic  #44                 // Method validate:(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;)Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;
+        55: pop
+        56: new           #50                 // class java/util/ArrayList
+        59: dup
+        60: ldc           #52                 // String level in (\'INFO\',\'WARN\',\'ERROR\')
+        62: invokestatic  #54                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+        65: invokespecial #57                 // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+        68: astore        4
+        70: new           #50                 // class java/util/ArrayList
+        73: dup
+        74: invokespecial #60                 // Method java/util/ArrayList."<init>":()V
+        77: astore        5
+        79: aload_3
+        80: invokevirtual #61                 // Method dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData.keyword:()Ljava/util/Optional;
+        83: invokestatic  #67                 // Method clean:(Ljava/util/Optional;)Ljava/util/Optional;
+        86: aload         4
+        88: aload         5
+        90: invokedynamic #71,  0             // InvokeDynamic #0:accept:(Ljava/util/List;Ljava/util/List;)Ljava/util/function/Consumer;
+        95: invokevirtual #75                 // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+        98: aload_3
+        99: invokevirtual #81                 // Method dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData.logType:()Ljava/util/Optional;
+       102: aload         4
+       104: aload         5
+       106: invokedynamic #84,  0             // InvokeDynamic #1:accept:(Ljava/util/List;Ljava/util/List;)Ljava/util/function/Consumer;
+       111: invokevirtual #75                 // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+       114: aload_3
+       115: invokevirtual #85                 // Method dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData.action:()Ljava/util/Optional;
+       118: invokestatic  #67                 // Method clean:(Ljava/util/Optional;)Ljava/util/Optional;
+       121: aload         4
+       123: aload         5
+       125: invokedynamic #88,  0             // InvokeDynamic #2:accept:(Ljava/util/List;Ljava/util/List;)Ljava/util/function/Consumer;
+       130: invokevirtual #75                 // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+       133: aload_3
+       134: invokevirtual #89                 // Method dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData.path:()Ljava/util/Optional;
+       137: invokestatic  #67                 // Method clean:(Ljava/util/Optional;)Ljava/util/Optional;
+       140: aload         4
+       142: aload         5
+       144: invokedynamic #92,  0             // InvokeDynamic #3:accept:(Ljava/util/List;Ljava/util/List;)Ljava/util/function/Consumer;
+       149: invokevirtual #75                 // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+       152: aload_3
+       153: invokevirtual #93                 // Method dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData.level:()Ljava/util/Optional;
+       156: aload         4
+       158: aload         5
+       160: invokedynamic #96,  0             // InvokeDynamic #4:accept:(Ljava/util/List;Ljava/util/List;)Ljava/util/function/Consumer;
+       165: invokevirtual #75                 // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+       168: aload_3
+       169: invokevirtual #97                 // Method dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData.fromAt:()Ljava/util/Optional;
+       172: aload         4
+       174: aload         5
+       176: invokedynamic #100,  0            // InvokeDynamic #5:accept:(Ljava/util/List;Ljava/util/List;)Ljava/util/function/Consumer;
+       181: invokevirtual #75                 // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+       184: aload_3
+       185: invokevirtual #101                // Method dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData.toAt:()Ljava/util/Optional;
+       188: aload         4
+       190: aload         5
+       192: invokedynamic #104,  0            // InvokeDynamic #6:accept:(Ljava/util/List;Ljava/util/List;)Ljava/util/function/Consumer;
+       197: invokevirtual #75                 // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+       200: ldc           #105                // String  and
+       202: aload         4
+       204: invokestatic  #107                // Method java/lang/String.join:(Ljava/lang/CharSequence;Ljava/lang/Iterable;)Ljava/lang/String;
+       207: invokedynamic #113,  0            // InvokeDynamic #7:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       212: astore        6
+       214: aload_1
+       215: invokeinterface #117,  1          // InterfaceMethod java/sql/Connection.getAutoCommit:()Z
+       220: ifne          236
+       223: aload_1
+       224: invokeinterface #123,  1          // InterfaceMethod java/sql/Connection.isReadOnly:()Z
+       229: ifeq          236
+       232: iconst_1
+       233: goto          237
+       236: iconst_0
+       237: invokestatic  #126                // Method require:(Z)V
+       240: aload_1
+       241: aload         6
+       243: invokeinterface #130,  2          // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+       248: astore        8
+       250: iconst_0
+       251: istore        9
+       253: iload         9
+       255: aload         5
+       257: invokeinterface #134,  1          // InterfaceMethod java/util/List.size:()I
+       262: if_icmpge     291
+       265: aload         8
+       267: iload         9
+       269: iconst_1
+       270: iadd
+       271: aload         5
+       273: iload         9
+       275: invokeinterface #138,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       280: invokeinterface #142,  3          // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+       285: iinc          9, 1
+       288: goto          253
+       291: aload         8
+       293: aload         5
+       295: invokeinterface #134,  1          // InterfaceMethod java/util/List.size:()I
+       300: iconst_1
+       301: iadd
+       302: aload_3
+       303: invokevirtual #148                // Method dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData.page:()I
+       306: invokeinterface #151,  3          // InterfaceMethod java/sql/PreparedStatement.setInt:(II)V
+       311: aload         8
+       313: invokeinterface #155,  1          // InterfaceMethod java/sql/PreparedStatement.executeQuery:()Ljava/sql/ResultSet;
+       318: astore        9
+       320: aload         9
+       322: invokeinterface #159,  1          // InterfaceMethod java/sql/ResultSet.next:()Z
+       327: invokestatic  #126                // Method require:(Z)V
+       330: aload         9
+       332: ldc           #164                // String total
+       334: invokestatic  #166                // Method number:(Ljava/sql/ResultSet;Ljava/lang/String;)J
+       337: lstore        10
+       339: lload         10
+       341: ldc2_w        #170                // long 99999900l
+       344: lcmp
+       345: ifle          357
+       348: new           #172                // class dev/codex/schubert/nk/api/persistence/LogQueryException
+       351: dup
+       352: iconst_1
+       353: invokespecial #174                // Method dev/codex/schubert/nk/api/persistence/LogQueryException."<init>":(Z)V
+       356: athrow
+       357: aload         9
+       359: ldc           #176                // String pages
+       361: invokestatic  #166                // Method number:(Ljava/sql/ResultSet;Ljava/lang/String;)J
+       364: invokestatic  #178                // Method java/lang/Math.toIntExact:(J)I
+       367: istore        12
+       369: aload         9
+       371: ldc           #184                // String effective
+       373: invokestatic  #166                // Method number:(Ljava/sql/ResultSet;Ljava/lang/String;)J
+       376: invokestatic  #178                // Method java/lang/Math.toIntExact:(J)I
+       379: istore        13
+       381: lload         10
+       383: lconst_0
+       384: lcmp
+       385: iflt          427
+       388: iload         12
+       390: i2l
+       391: lconst_1
+       392: lload         10
+       394: ldc2_w        #186                // long 99l
+       397: ladd
+       398: ldc2_w        #188                // long 100l
+       401: ldiv
+       402: invokestatic  #190                // Method java/lang/Math.max:(JJ)J
+       405: lcmp
+       406: ifne          427
+       409: iload         13
+       411: aload_3
+       412: invokevirtual #148                // Method dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData.page:()I
+       415: iload         12
+       417: invokestatic  #194                // Method java/lang/Math.min:(II)I
+       420: if_icmpne     427
+       423: iconst_1
+       424: goto          428
+       427: iconst_0
+       428: invokestatic  #126                // Method require:(Z)V
+       431: new           #50                 // class java/util/ArrayList
+       434: dup
+       435: invokespecial #60                 // Method java/util/ArrayList."<init>":()V
+       438: astore        14
+       440: lload         10
+       442: aload         9
+       444: ldc           #164                // String total
+       446: invokestatic  #166                // Method number:(Ljava/sql/ResultSet;Ljava/lang/String;)J
+       449: lcmp
+       450: ifne          485
+       453: iload         12
+       455: i2l
+       456: aload         9
+       458: ldc           #176                // String pages
+       460: invokestatic  #166                // Method number:(Ljava/sql/ResultSet;Ljava/lang/String;)J
+       463: lcmp
+       464: ifne          485
+       467: iload         13
+       469: i2l
+       470: aload         9
+       472: ldc           #184                // String effective
+       474: invokestatic  #166                // Method number:(Ljava/sql/ResultSet;Ljava/lang/String;)J
+       477: lcmp
+       478: ifne          485
+       481: iconst_1
+       482: goto          486
+       485: iconst_0
+       486: invokestatic  #126                // Method require:(Z)V
+       489: aload         9
+       491: ldc           #198                // String id
+       493: invokeinterface #200,  2          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;)Ljava/lang/Object;
+       498: ifnull        514
+       501: aload         14
+       503: aload         9
+       505: invokestatic  #204                // Method record:(Ljava/sql/ResultSet;)Ldev/codex/schubert/nk/protocol/layout/log/LogRecord;
+       508: invokeinterface #208,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       513: pop
+       514: aload         9
+       516: invokeinterface #159,  1          // InterfaceMethod java/sql/ResultSet.next:()Z
+       521: ifne          440
+       524: lload         10
+       526: lconst_0
+       527: lcmp
+       528: ifne          535
+       531: lconst_0
+       532: goto          546
+       535: iload         13
+       537: i2l
+       538: lconst_1
+       539: lsub
+       540: ldc2_w        #188                // long 100l
+       543: lmul
+       544: lconst_1
+       545: ladd
+       546: lstore        15
+       548: iload         13
+       550: i2l
+       551: ldc2_w        #188                // long 100l
+       554: lmul
+       555: lload         10
+       557: invokestatic  #212                // Method java/lang/Math.min:(JJ)J
+       560: lstore        17
+       562: aload         14
+       564: invokeinterface #134,  1          // InterfaceMethod java/util/List.size:()I
+       569: i2l
+       570: lload         10
+       572: lconst_0
+       573: lcmp
+       574: ifne          581
+       577: lconst_0
+       578: goto          588
+       581: lload         17
+       583: lload         15
+       585: lsub
+       586: lconst_1
+       587: ladd
+       588: lcmp
+       589: ifne          596
+       592: iconst_1
+       593: goto          597
+       596: iconst_0
+       597: invokestatic  #126                // Method require:(Z)V
+       600: new           #26                 // class dev/codex/schubert/nk/protocol/layout/TypedPayloadValues
+       603: dup
+       604: new           #28                 // class dev/codex/schubert/nk/protocol/layout/LayoutId
+       607: dup
+       608: ldc           #214                // String LGSRSP01
+       610: invokespecial #32                 // Method dev/codex/schubert/nk/protocol/layout/LayoutId."<init>":(Ljava/lang/String;)V
+       613: new           #216                // class dev/codex/schubert/nk/protocol/layout/common/PagedResponseData
+       616: dup
+       617: iload         13
+       619: bipush        100
+       621: lload         10
+       623: iload         12
+       625: lload         15
+       627: lload         17
+       629: invokespecial #218                // Method dev/codex/schubert/nk/protocol/layout/common/PagedResponseData."<init>":(IIJIJJ)V
+       632: aload         14
+       634: invokespecial #41                 // Method dev/codex/schubert/nk/protocol/layout/TypedPayloadValues."<init>":(Ldev/codex/schubert/nk/protocol/layout/LayoutId;Ldev/codex/schubert/nk/protocol/layout/PayloadData;Ljava/util/List;)V
+       637: invokestatic  #44                 // Method validate:(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;)Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;
+       640: astore        7
+       642: aload         9
+       644: ifnull        686
+       647: aload         9
+       649: invokeinterface #221,  1          // InterfaceMethod java/sql/ResultSet.close:()V
+       654: goto          686
+       657: astore        10
+       659: aload         9
+       661: ifnull        683
+       664: aload         9
+       666: invokeinterface #221,  1          // InterfaceMethod java/sql/ResultSet.close:()V
+       671: goto          683
+       674: astore        11
+       676: aload         10
+       678: aload         11
+       680: invokevirtual #226                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       683: aload         10
+       685: athrow
+       686: aload         8
+       688: ifnull        730
+       691: aload         8
+       693: invokeinterface #230,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       698: goto          730
+       701: astore        9
+       703: aload         8
+       705: ifnull        727
+       708: aload         8
+       710: invokeinterface #230,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       715: goto          727
+       718: astore        10
+       720: aload         9
+       722: aload         10
+       724: invokevirtual #226                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       727: aload         9
+       729: athrow
+       730: aload         7
+       732: areturn
+       733: astore        7
+       735: aload         7
+       737: invokestatic  #231                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       740: new           #172                // class dev/codex/schubert/nk/api/persistence/LogQueryException
+       743: dup
+       744: aload         7
+       746: invokevirtual #236                // Method dev/codex/schubert/nk/api/persistence/LogQueryException.getSuppressed:()[Ljava/lang/Throwable;
+       749: arraylength
+       750: ifne          757
+       753: iconst_1
+       754: goto          758
+       757: iconst_0
+       758: invokespecial #174                // Method dev/codex/schubert/nk/api/persistence/LogQueryException."<init>":(Z)V
+       761: athrow
+       762: astore        7
+       764: aload         7
+       766: invokestatic  #231                // Method dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.preserveFatal:(Ljava/lang/Throwable;)V
+       769: new           #172                // class dev/codex/schubert/nk/api/persistence/LogQueryException
+       772: dup
+       773: iconst_0
+       774: invokespecial #174                // Method dev/codex/schubert/nk/api/persistence/LogQueryException."<init>":(Z)V
+       777: athrow
+      Exception table:
+         from    to  target type
+           320   642   657   Class java/lang/Throwable
+           664   671   674   Class java/lang/Throwable
+           250   686   701   Class java/lang/Throwable
+           708   715   718   Class java/lang/Throwable
+           214   732   733   Class dev/codex/schubert/nk/api/persistence/LogQueryException
+           214   732   762   Class java/sql/SQLException
+           214   732   762   Class java/lang/IllegalArgumentException
+           214   732   762   Class java/lang/IllegalStateException
+           214   732   762   Class java/lang/ArithmeticException
+
+  private static dev.codex.schubert.nk.protocol.layout.log.LogRecord record(java.sql.ResultSet) throws java.sql.SQLException;
+    Code:
+         0: new           #248                // class dev/codex/schubert/nk/protocol/layout/log/LogRecord
+         3: dup
+         4: new           #250                // class dev/codex/schubert/nk/protocol/layout/semantic/LogId
+         7: dup
+         8: aload_0
+         9: ldc           #198                // String id
+        11: invokestatic  #166                // Method number:(Ljava/sql/ResultSet;Ljava/lang/String;)J
+        14: invokespecial #252                // Method dev/codex/schubert/nk/protocol/layout/semantic/LogId."<init>":(J)V
+        17: aload_0
+        18: ldc           #255                // String logged_at
+        20: ldc_w         #257                // class java/time/OffsetDateTime
+        23: invokeinterface #259,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+        28: checkcast     #257                // class java/time/OffsetDateTime
+        31: invokestatic  #262                // Method dev/codex/schubert/nk/api/database/RequiredColumn.requireValue:(Ljava/lang/Object;)Ljava/lang/Object;
+        34: checkcast     #257                // class java/time/OffsetDateTime
+        37: invokevirtual #268                // Method java/time/OffsetDateTime.toInstant:()Ljava/time/Instant;
+        40: getstatic     #272                // Field java/time/temporal/ChronoUnit.MILLIS:Ljava/time/temporal/ChronoUnit;
+        43: invokevirtual #278                // Method java/time/Instant.truncatedTo:(Ljava/time/temporal/TemporalUnit;)Ljava/time/Instant;
+        46: aload_0
+        47: ldc_w         #284                // String category
+        50: invokeinterface #286,  2          // InterfaceMethod java/sql/ResultSet.getString:(Ljava/lang/String;)Ljava/lang/String;
+        55: invokestatic  #262                // Method dev/codex/schubert/nk/api/database/RequiredColumn.requireValue:(Ljava/lang/Object;)Ljava/lang/Object;
+        58: checkcast     #108                // class java/lang/String
+        61: invokestatic  #289                // Method dev/codex/schubert/nk/protocol/layout/semantic/LogType.valueOf:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/semantic/LogType;
+        64: aload_0
+        65: ldc_w         #295                // String level
+        68: invokeinterface #286,  2          // InterfaceMethod java/sql/ResultSet.getString:(Ljava/lang/String;)Ljava/lang/String;
+        73: invokestatic  #262                // Method dev/codex/schubert/nk/api/database/RequiredColumn.requireValue:(Ljava/lang/Object;)Ljava/lang/Object;
+        76: checkcast     #108                // class java/lang/String
+        79: invokestatic  #296                // Method dev/codex/schubert/nk/protocol/layout/semantic/LogLevel.valueOf:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/semantic/LogLevel;
+        82: aload_0
+        83: ldc_w         #301                // String action
+        86: invokeinterface #286,  2          // InterfaceMethod java/sql/ResultSet.getString:(Ljava/lang/String;)Ljava/lang/String;
+        91: invokestatic  #262                // Method dev/codex/schubert/nk/api/database/RequiredColumn.requireValue:(Ljava/lang/Object;)Ljava/lang/Object;
+        94: checkcast     #108                // class java/lang/String
+        97: invokestatic  #302                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       100: aload_0
+       101: ldc_w         #305                // String message
+       104: invokeinterface #286,  2          // InterfaceMethod java/sql/ResultSet.getString:(Ljava/lang/String;)Ljava/lang/String;
+       109: invokestatic  #262                // Method dev/codex/schubert/nk/api/database/RequiredColumn.requireValue:(Ljava/lang/Object;)Ljava/lang/Object;
+       112: checkcast     #108                // class java/lang/String
+       115: aload_0
+       116: ldc_w         #307                // String request_id
+       119: ldc_w         #309                // class java/util/UUID
+       122: invokeinterface #259,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       127: checkcast     #309                // class java/util/UUID
+       130: invokestatic  #311                // Method java/util/Optional.ofNullable:(Ljava/lang/Object;)Ljava/util/Optional;
+       133: aload_0
+       134: ldc_w         #314                // String message_id
+       137: ldc_w         #309                // class java/util/UUID
+       140: invokeinterface #259,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       145: checkcast     #309                // class java/util/UUID
+       148: invokestatic  #311                // Method java/util/Optional.ofNullable:(Ljava/lang/Object;)Ljava/util/Optional;
+       151: aload_0
+       152: ldc_w         #316                // String correlation_id
+       155: ldc_w         #309                // class java/util/UUID
+       158: invokeinterface #259,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       163: checkcast     #309                // class java/util/UUID
+       166: invokestatic  #311                // Method java/util/Optional.ofNullable:(Ljava/lang/Object;)Ljava/util/Optional;
+       169: aload_0
+       170: ldc_w         #318                // String http_method
+       173: invokeinterface #286,  2          // InterfaceMethod java/sql/ResultSet.getString:(Ljava/lang/String;)Ljava/lang/String;
+       178: invokestatic  #311                // Method java/util/Optional.ofNullable:(Ljava/lang/Object;)Ljava/util/Optional;
+       181: aload_0
+       182: ldc_w         #320                // String request_uri
+       185: invokeinterface #286,  2          // InterfaceMethod java/sql/ResultSet.getString:(Ljava/lang/String;)Ljava/lang/String;
+       190: invokestatic  #311                // Method java/util/Optional.ofNullable:(Ljava/lang/Object;)Ljava/util/Optional;
+       193: aload_0
+       194: ldc_w         #322                // String status_code
+       197: ldc_w         #324                // class java/lang/Integer
+       200: invokeinterface #259,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       205: checkcast     #324                // class java/lang/Integer
+       208: invokestatic  #311                // Method java/util/Optional.ofNullable:(Ljava/lang/Object;)Ljava/util/Optional;
+       211: invokedynamic #326,  0            // InvokeDynamic #8:apply:()Ljava/util/function/Function;
+       216: invokevirtual #330                // Method java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+       219: aload_0
+       220: ldc_w         #334                // String duration_ms
+       223: ldc_w         #336                // class java/lang/Long
+       226: invokeinterface #259,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       231: checkcast     #336                // class java/lang/Long
+       234: invokestatic  #311                // Method java/util/Optional.ofNullable:(Ljava/lang/Object;)Ljava/util/Optional;
+       237: invokedynamic #338,  0            // InvokeDynamic #9:apply:()Ljava/util/function/Function;
+       242: invokevirtual #330                // Method java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+       245: aload_0
+       246: ldc_w         #339                // String remote_address
+       249: invokeinterface #286,  2          // InterfaceMethod java/sql/ResultSet.getString:(Ljava/lang/String;)Ljava/lang/String;
+       254: invokestatic  #311                // Method java/util/Optional.ofNullable:(Ljava/lang/Object;)Ljava/util/Optional;
+       257: aload_0
+       258: ldc_w         #341                // String details
+       261: invokeinterface #286,  2          // InterfaceMethod java/sql/ResultSet.getString:(Ljava/lang/String;)Ljava/lang/String;
+       266: invokestatic  #262                // Method dev/codex/schubert/nk/api/database/RequiredColumn.requireValue:(Ljava/lang/Object;)Ljava/lang/Object;
+       269: checkcast     #108                // class java/lang/String
+       272: invokestatic  #302                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       275: invokespecial #343                // Method dev/codex/schubert/nk/protocol/layout/log/LogRecord."<init>":(Ldev/codex/schubert/nk/protocol/layout/semantic/LogId;Ljava/time/Instant;Ldev/codex/schubert/nk/protocol/layout/semantic/LogType;Ldev/codex/schubert/nk/protocol/layout/semantic/LogLevel;Ljava/util/Optional;Ljava/lang/String;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;)V
+       278: areturn
+
+  private static java.util.Optional<java.lang.String> clean(java.util.Optional<java.lang.String>);
+    Code:
+         0: aload_0
+         1: invokedynamic #346,  0            // InvokeDynamic #10:apply:()Ljava/util/function/Function;
+         6: invokevirtual #330                // Method java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+         9: invokedynamic #347,  0            // InvokeDynamic #11:test:()Ljava/util/function/Predicate;
+        14: invokevirtual #351                // Method java/util/Optional.filter:(Ljava/util/function/Predicate;)Ljava/util/Optional;
+        17: areturn
+
+  private static java.lang.String pattern(java.lang.String);
+    Code:
+         0: aload_0
+         1: ldc_w         #355                // String \\
+         4: ldc_w         #357                // String \\\\
+         7: invokevirtual #359                // Method java/lang/String.replace:(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+        10: ldc_w         #363                // String %
+        13: ldc_w         #365                // String \\%
+        16: invokevirtual #359                // Method java/lang/String.replace:(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+        19: ldc_w         #367                // String _
+        22: ldc_w         #369                // String \\_
+        25: invokevirtual #359                // Method java/lang/String.replace:(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+        28: invokedynamic #371,  0            // InvokeDynamic #12:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+        33: areturn
+
+  private static long number(java.sql.ResultSet, java.lang.String) throws java.sql.SQLException;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokeinterface #372,  2          // InterfaceMethod java/sql/ResultSet.getLong:(Ljava/lang/String;)J
+         7: lstore_2
+         8: aload_0
+         9: invokeinterface #376,  1          // InterfaceMethod java/sql/ResultSet.wasNull:()Z
+        14: ifne          21
+        17: iconst_1
+        18: goto          22
+        21: iconst_0
+        22: invokestatic  #126                // Method require:(Z)V
+        25: lload_2
+        26: lreturn
+
+  private static dev.codex.schubert.nk.protocol.layout.TypedPayloadValues validate(dev.codex.schubert.nk.protocol.layout.TypedPayloadValues);
+    Code:
+         0: invokestatic  #379                // Method dev/codex/schubert/nk/protocol/codec/PayloadCodec.standard:()Ldev/codex/schubert/nk/protocol/codec/PayloadCodec;
+         3: aload_0
+         4: invokestatic  #385                // Method dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.encode:(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;)Ldev/codex/schubert/nk/protocol/layout/PayloadValues;
+         7: iconst_0
+         8: invokevirtual #391                // Method dev/codex/schubert/nk/protocol/codec/PayloadCodec.encode:(Ldev/codex/schubert/nk/protocol/layout/PayloadValues;Z)Ldev/codex/schubert/nk/protocol/layout/FixedPayload;
+        11: pop
+        12: aload_0
+        13: areturn
+
+  private static void require(boolean) throws java.sql.SQLException;
+    Code:
+         0: iload_0
+         1: ifne          15
+         4: new           #240                // class java/sql/SQLException
+         7: dup
+         8: ldc_w         #394                // String log projection is inconsistent
+        11: invokespecial #396                // Method java/sql/SQLException."<init>":(Ljava/lang/String;)V
+        14: athrow
+        15: return
+
+  private static boolean lambda$clean$1(java.lang.String);
+    Code:
+         0: aload_0
+         1: invokevirtual #397                // Method java/lang/String.isEmpty:()Z
+         4: ifne          11
+         7: iconst_1
+         8: goto          12
+        11: iconst_0
+        12: ireturn
+
+  private static java.lang.String lambda$clean$0(java.lang.String);
+    Code:
+         0: aload_0
+         1: getstatic     #400                // Field java/text/Normalizer$Form.NFC:Ljava/text/Normalizer$Form;
+         4: invokestatic  #406                // Method java/text/Normalizer.normalize:(Ljava/lang/CharSequence;Ljava/text/Normalizer$Form;)Ljava/lang/String;
+         7: invokevirtual #412                // Method java/lang/String.trim:()Ljava/lang/String;
+        10: areturn
+
+  private static dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds lambda$record$0(java.lang.Long);
+    Code:
+         0: new           #416                // class dev/codex/schubert/nk/protocol/layout/semantic/ElapsedMilliseconds
+         3: dup
+         4: aload_0
+         5: invokevirtual #418                // Method java/lang/Long.longValue:()J
+         8: invokestatic  #178                // Method java/lang/Math.toIntExact:(J)I
+        11: invokespecial #422                // Method dev/codex/schubert/nk/protocol/layout/semantic/ElapsedMilliseconds."<init>":(I)V
+        14: areturn
+
+  private static void lambda$search$6(java.util.List, java.util.List, java.time.Instant);
+    Code:
+         0: aload_0
+         1: ldc_w         #425                // String logged_at<=?
+         4: invokeinterface #208,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+         9: pop
+        10: aload_1
+        11: aload_2
+        12: getstatic     #427                // Field java/time/ZoneOffset.UTC:Ljava/time/ZoneOffset;
+        15: invokevirtual #433                // Method java/time/Instant.atOffset:(Ljava/time/ZoneOffset;)Ljava/time/OffsetDateTime;
+        18: invokeinterface #208,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        23: pop
+        24: return
+
+  private static void lambda$search$5(java.util.List, java.util.List, java.time.Instant);
+    Code:
+         0: aload_0
+         1: ldc_w         #437                // String logged_at>=?
+         4: invokeinterface #208,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+         9: pop
+        10: aload_1
+        11: aload_2
+        12: getstatic     #427                // Field java/time/ZoneOffset.UTC:Ljava/time/ZoneOffset;
+        15: invokevirtual #433                // Method java/time/Instant.atOffset:(Ljava/time/ZoneOffset;)Ljava/time/OffsetDateTime;
+        18: invokeinterface #208,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        23: pop
+        24: return
+
+  private static void lambda$search$4(java.util.List, java.util.List, dev.codex.schubert.nk.protocol.layout.semantic.LogLevel);
+    Code:
+         0: aload_0
+         1: ldc_w         #439                // String level=?
+         4: invokeinterface #208,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+         9: pop
+        10: aload_1
+        11: aload_2
+        12: invokevirtual #441                // Method dev/codex/schubert/nk/protocol/layout/semantic/LogLevel.wireValue:()Ljava/lang/String;
+        15: invokeinterface #208,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        20: pop
+        21: return
+
+  private static void lambda$search$3(java.util.List, java.util.List, java.lang.String);
+    Code:
+         0: aload_0
+         1: ldc_w         #444                // String request_uri ilike ? escape \'\\\'
+         4: invokeinterface #208,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+         9: pop
+        10: aload_1
+        11: aload_2
+        12: invokestatic  #446                // Method pattern:(Ljava/lang/String;)Ljava/lang/String;
+        15: invokeinterface #208,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        20: pop
+        21: return
+
+  private static void lambda$search$2(java.util.List, java.util.List, java.lang.String);
+    Code:
+         0: aload_0
+         1: ldc_w         #449                // String action=?
+         4: invokeinterface #208,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+         9: pop
+        10: aload_1
+        11: aload_2
+        12: invokeinterface #208,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        17: pop
+        18: return
+
+  private static void lambda$search$1(java.util.List, java.util.List, dev.codex.schubert.nk.protocol.layout.semantic.LogType);
+    Code:
+         0: aload_0
+         1: ldc_w         #451                // String category=?
+         4: invokeinterface #208,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+         9: pop
+        10: aload_1
+        11: aload_2
+        12: invokevirtual #453                // Method dev/codex/schubert/nk/protocol/layout/semantic/LogType.wireValue:()Ljava/lang/String;
+        15: invokeinterface #208,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        20: pop
+        21: return
+
+  private static void lambda$search$0(java.util.List, java.util.List, java.lang.String);
+    Code:
+         0: aload_0
+         1: ldc_w         #454                // String (message ilike ? escape \'\\\' or details::text ilike ? escape \'\\\')
+         4: invokeinterface #208,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+         9: pop
+        10: aload_2
+        11: invokestatic  #446                // Method pattern:(Ljava/lang/String;)Ljava/lang/String;
+        14: astore_3
+        15: aload_1
+        16: aload_3
+        17: invokeinterface #208,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        22: pop
+        23: aload_1
+        24: aload_3
+        25: invokeinterface #208,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        30: pop
+        31: return
+}
