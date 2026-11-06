@@ -21,20 +21,28 @@ assert len({a['path'] for a in prior}) == 1065
 held = {'RootFailedStartRecoveryTest.java', 'RootFailedStartPairRecoveryTest.java',
         'SnapshotKeyCloseWitness.java', 'pg9892_snapshot_key_close_witness.py'}
 eligible = lambda p: ('/src/main/java/' in p and p.endswith('.java')) or '/src/main/resources/' in p or p.startswith('src/deployment/')
-names = [a['path'] for a in prior]
+additions = {
+    'program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java':
+        ('WBS-P020-01', 'a9417e64d787e32a92fdb2001b5e8f58772bd647'),
+    'src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java':
+        ('WBS-P006-03', 'add0743fcbffeffba476ab7c313d53eee841e184')}
+previous = {a['path']: a for a in prior}
+names = sorted(set(previous) | set(additions))
 assert all(eligible(n) and Path(n).name not in held for n in names)
 def paths_at(rev):
     data = subprocess.check_output(['git', 'ls-tree', '-r', '-z', '--name-only', rev, '--', 'src', 'program/characterization'])
     return {n for n in data.decode().split('\0') if n and eligible(n)}
 tracked = subprocess.check_output(['git', 'ls-files', '-z', '--', 'src', 'program/characterization']).decode().split('\0')
-assert set(names) == paths_at(old['source']) == paths_at(source) == paths_at(head) == {n for n in tracked if eligible(n)}
+assert set(previous) == paths_at(old['source'])
+assert set(names) == paths_at(source) == paths_at(head) == {n for n in tracked if eligible(n)}
+assert len(names) == 1067
 assert not subprocess.check_output(['git', 'diff', '--name-only', source, head, '--', *names])
 raw = subprocess.check_output(['git', 'cat-file', '--batch'], input=''.join(source + ':' + n + '\n' for n in names).encode())
 position = 0
 current = []
 changed = []
-for a in prior:
-    n = a['path']
+added = []
+for n in names:
     end = raw.index(b'\n', position)
     header = raw[position:end].decode().split()
     assert len(header) == 3 and header[1] == 'blob'
@@ -46,19 +54,34 @@ for a in prior:
     position += 1
     p = r / n
     assert p.is_file() and not p.is_symlink() and sha(p.read_bytes()) == sha(blob)
-    row = copy.deepcopy(a)
+    if n in previous:
+        a = previous[n]
+        row = copy.deepcopy(a)
+        row.update(previousLineage=a['lineage'],
+            lineage=dict(source=old['source'], path=n, oldSha256=a['sha256'], byteChanged=sha(blob) != a['sha256'],
+                domain='SAME_PATH_RESPONSIBILITY_RETAINED_NOT_ACCEPTANCE'))
+        assert row['owner'] == a['owner'] and row['costOwner'] == a['costOwner']
+        assert row['additionalBudgetPp'] == a['additionalBudgetPp'] == 0
+        if sha(blob) != a['sha256']:
+            changed.append(dict(path=n, owner=a['owner'], costOwner=a['costOwner'], kind=a['kind'],
+                oldSha256=a['sha256'], currentSha256=sha(blob)))
+    else:
+        owner, origin = additions[n]
+        assert n in paths_at(origin)
+        row = dict(path=n, kind='JAVA', owner=owner, costOwner=owner, additionalBudgetPp=0,
+            previousLineage=None, lineage=dict(source=old['source'], path=n, oldSha256=None,
+                byteChanged=True, domain='ADDED_SUPPORT_OF_EXISTING_LEAF_NOT_ACCEPTANCE', originCommit=origin))
+        added.append(dict(path=n, owner=owner, costOwner=owner, kind='JAVA', originCommit=origin,
+            currentSha256=sha(blob), additionalBudgetPp=0, retrospectiveCostReallocation=False))
     row.update(sha256=sha(blob), staticSource=source, acceptance='UNASSESSED',
         qualification='UNQUALIFIED_STATIC_DESCRIPTOR_ONLY', runtimeQualificationTransferred=False,
-        methodTestRequirementTrace='NOT_VERIFIED', previousLineage=a['lineage'],
-        lineage=dict(source=old['source'], path=n, oldSha256=a['sha256'], byteChanged=sha(blob) != a['sha256'],
-            domain='SAME_PATH_RESPONSIBILITY_RETAINED_NOT_ACCEPTANCE'))
-    assert row['owner'] == a['owner'] and row['costOwner'] == a['costOwner']
-    assert row['additionalBudgetPp'] == a['additionalBudgetPp'] == 0
+        methodTestRequirementTrace='NOT_VERIFIED')
     current.append(row)
-    if sha(blob) != a['sha256']:
-        changed.append(dict(path=n, owner=a['owner'], costOwner=a['costOwner'], kind=a['kind'],
-            oldSha256=a['sha256'], currentSha256=sha(blob)))
-assert position == len(raw) and len(changed) == 25
+assert position == len(raw) and len(changed) == 23 and len(added) == 2
+status = [x.split('\t') for x in subprocess.check_output(['git', 'diff', '--name-status', '--no-renames', old['source'], source, '--', *names], text=True).splitlines()]
+assert {p for k, p in status if k == 'M'} == {a['path'] for a in changed}
+assert {p for k, p in status if k == 'A'} == set(additions)
+assert len(status) == 25 and all(k in ('A', 'M') for k, _ in status)
 normal_refs = []
 normal_inputs = {}
 for name, expected, expected_java in [
@@ -77,23 +100,23 @@ assert java == normal_inputs and len(java) == 971
 spec = r / 'evidence/01_PT/018_NK-OPS-001/3608_現4217静的artifact差分再束縛仕様.md'
 for p in [spec, Path(__file__)]:
     assert sha(subprocess.check_output(['git', 'show', head + ':' + str(p.relative_to(r))])) == sha(p.read_bytes())
-out = r / 'evidence/01_PT/018_NK-OPS-001/evidence/PG21764-current4217-static-artifact-lineage-v1'
+out = r / 'evidence/01_PT/018_NK-OPS-001/evidence/PG21766-current4217-static-artifact-lineage-v2'
 assert not out.exists()
 out.mkdir()
-for name, data in [('artifacts.json', current), ('changed-artifacts.json', changed)]:
+for name, data in [('artifacts.json', current), ('changed-artifacts.json', changed), ('added-artifacts.json', added)]:
     (out / name).write_text(json.dumps(data, ensure_ascii=False, sort_keys=True, indent=2) + '\n')
 m = dict(actualExit=0, atJST=datetime.datetime.now().astimezone().isoformat(), observerSource=head,
     source=source, driverSha256=sha(Path(__file__).read_bytes()),
     specification=dict(path=str(spec.relative_to(r)), sha256=sha(spec.read_bytes())),
     previous=dict(path=str(oldp.relative_to(r)), sha256=sha(oldp.read_bytes()), source=old['source']),
-    normalManifests=normal_refs, artifactCount=1065, javaSources=971,
-    changedArtifacts=25, unchangedArtifacts=1040, addedArtifacts=0, removedArtifacts=0,
+    normalManifests=normal_refs, artifactCount=1067, javaSources=971,
+    changedArtifacts=23, unchangedArtifacts=1042, addedArtifacts=2, removedArtifacts=0,
     ownerAndCostOwnerPreserved=True, additionalBudgetPp=0,
-    files={n: sha((out / n).read_bytes()) for n in ['artifacts.json', 'changed-artifacts.json']},
+    files={n: sha((out / n).read_bytes()) for n in ['artifacts.json', 'changed-artifacts.json', 'added-artifacts.json']},
     currentWholeSourceQualified=False, exactMethodTestRequirementTraceVerified=False,
     qualifiedHistoricalCandidateModified=False, wholeG13Accepted=False, whole451Accepted=False,
     productTests=0, productInvocations=0, newMethods=0, newSourceProofs=0, newAcceptance=0,
-    heldNamesExcludedBeforeIO=sorted(held), effortRate=None)
+    heldNamesExcludedBeforeIO=sorted(held), relatedBug='BUG-2402', relatedHorizontal='YKT-2147', effortRate=None)
 (out / 'manifest.json').write_text(json.dumps(m, ensure_ascii=False, indent=2) + '\n')
-print(json.dumps(dict(actualExit=0, artifacts=1065, changed=25, unchanged=1040, productTests=0,
+print(json.dumps(dict(actualExit=0, artifacts=1067, changed=23, added=2, unchanged=1042, productTests=0,
     manifestSha256=sha((out / 'manifest.json').read_bytes()))))
