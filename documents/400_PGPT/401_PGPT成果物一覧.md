@@ -1,5 +1,10 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-06T23:42 JST Login失敗HTTP限定増分
+
+015仕様060/結果061・PMO600038、PG21064一回新6/FESabort0・L33/M2/C1/B8全miss0/独立21078 post0。同Main4217のQA055固定DOM4とheader6局所証明、Browser/controller組立/実CHR/全451は別未受入。Console SDKの型converter登録を静的に特定、旧五説明は21072追記訂正のみ・旧成功再演0。累計33対象294=Java190+HTML97+CSS7・wholeMain66/原282交差46残236/部分18残62、新leaf0/正式1964PT53scope/工数null。
+
+
 ## 2026-11-06T23:11 JST QA055固定locked限定増分
 
 016仕様151/結果152・PMO600035、PG21044新source4成功/21HTML・独立21048 post0。QA055承認正本main42450b5の固定文を維持、Production変更0、元非locked8再演0。累計32対象288=Java184+HTML97+CSS7・wholeMain65/原282交差45残237（036でOutbox所属一行join、旧033 pending保全・新source再加算0）。header元web115証拠joinと実CHR/全451未完、BUG2340/YKT2085 IN_PROGRESS。正式1964/53/新leaf0/工数null不変。
