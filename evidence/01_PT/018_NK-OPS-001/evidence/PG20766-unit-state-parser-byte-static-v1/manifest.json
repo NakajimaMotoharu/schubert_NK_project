@@ -1,0 +1,138 @@
+{
+  "atJST": "2026-11-06T19:00:59.123800+09:00",
+  "compileExit": 0,
+  "pmdActualExit": 4,
+  "pmdRaw": 2,
+  "pmdProcessingErrors": 0,
+  "checkstyle": 0,
+  "applicableViolations": 0,
+  "notApplicable": [
+    {
+      "item": {
+        "beginline": "149",
+        "endline": "149",
+        "begincolumn": "25",
+        "endcolumn": "56",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "UnitStateParserBytePortTest",
+        "method": "independentMemoryProjectionsDoNotShareIntermediateState",
+        "variable": "executor",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "reason": "Standalone JUnit-owned two-worker fixture joined via Future.get and TWR; no J2EE servlet/service-managed executor created by Product"
+    },
+    {
+      "item": {
+        "beginline": "153",
+        "endline": "159",
+        "begincolumn": "13",
+        "endcolumn": "19",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "UnitStateParserBytePortTest",
+        "method": "independentMemoryProjectionsDoNotShareIntermediateState",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "reason": "Standalone JUnit-owned two-worker fixture joined via Future.get and TWR; no J2EE servlet/service-managed executor created by Product"
+    }
+  ],
+  "suppressionAdded": false,
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/UnitStateParser.java": "287990df64ca2c8b4a0aa872497abaeaaf8f9de1dbec59c536203ef3acabe948",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/UnitStateParserBytePortTest.java": "5502cdcc889900367fe8b4361c2ecd081e1eeda9213c4d7786e89f90a1946b3f"
+  },
+  "sameSourceSixMainSpotBugs": {
+    "manifest": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20114-log-tx-six-static-reactor-v1/manifest.safe.json",
+    "sha256": "6439d001af03b1807f29516b75b04ab8d7f1b2353e25b5e28eb3ef07d3b750a9",
+    "reports": {
+      "protocol": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/spotbugsXml.xml",
+        "sha256": "ee917dae88f16e58a8d9833e0d53394a7d054973f47defb2501e995c649c5973",
+        "bugs": 0,
+        "errors": 0,
+        "missing": 0
+      },
+      "storage": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/spotbugsXml.xml",
+        "sha256": "58fc1269e7ace64946c29cfd93d94f953624c713d4ebca2c0e9dce59f5fd5491",
+        "bugs": 0,
+        "errors": 0,
+        "missing": 0
+      },
+      "bootstrap": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/spotbugsXml.xml",
+        "sha256": "71479d12b0e3fe61e28c059586a92998b523bf1f19de0351716e1470cd156458",
+        "bugs": 0,
+        "errors": 0,
+        "missing": 0
+      },
+      "api": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-api/target/spotbugsXml.xml",
+        "sha256": "68cea12d540ad545bbd9744705f0266c7cb15aacec555cb3b12fd896c4cc4b91",
+        "bugs": 0,
+        "errors": 0,
+        "missing": 0
+      },
+      "web": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-web/target/spotbugsXml.xml",
+        "sha256": "b9ce692a0791b76891e241d6abb416c2703c39531ad0e07554c435dbca01e97b",
+        "bugs": 0,
+        "errors": 0,
+        "missing": 0
+      },
+      "batch": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20112-log-tx-six-main-compile-v1/snapshot/src/schubert-nk-batch/target/spotbugsXml.xml",
+        "sha256": "79389e50d0bca28c1549b6784abf1d8102fe5d2eff1238b2c3beebddf95c7f28",
+        "bugs": 0,
+        "errors": 0,
+        "missing": 0
+      }
+    },
+    "currentAllMainInputsEqualPinnedNormalBuild": true,
+    "javaOnlyCrossSourceBinding": {
+      "referenceSource": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+      "currentSource": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+      "allJavaPomInputHashesEqual": true,
+      "all1844CodeDebugClassBytesEqual": true,
+      "onlyStaticProofReused": true,
+      "oldRuntimeOrTestSuccessTransferred": false
+    }
+  },
+  "metadataGuardFailures": [
+    {
+      "command": "012 prepare 089",
+      "exit": 1,
+      "stage": "before slot creation",
+      "reason": "Original20112 three public resource input hashes differ, guarded correctly"
+    },
+    {
+      "command": "012 prepare 089 after crosssource binding edit",
+      "exit": 1,
+      "stage": "Python parse before slot creation",
+      "reason": "IndentationError, corrected before any compile/Unit"
+    }
+  ],
+  "files": {
+    "static-manifest.safe.json": "eda6a6c14c99573519ae964a7ec75152f2bc274874b4b4390d748498a9b59593",
+    "static-pmd.xml": "ace5432ff625d57e8bf134cc2eed585e801550833e1ee5389facf87ef992b2c5",
+    "static-checkstyle.xml": "4a6e9d7150a81cc947825bf9756336437efc5215d04e897363d7fde2a36a32ad",
+    "static-pmd.stdout": "a4158708cab869140efe083625eb5ad22311dece089416345da90978feb9def7",
+    "static-pmd.stderr": "4e114156e4c7a536f6f10017a04f680a7cc8a7ca457f1aaccc280dbd3877210e",
+    "static-checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "static-checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-manifest.safe.json": "4178220a8f6dac9ec0327db5d24e84e4d1bc7a5f8a2e29dec1394df0e73f902c",
+    "compile-format.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-format.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-test-compile.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-test-compile.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "testsExecuted": 0,
+  "formalUpdated": false
+}
