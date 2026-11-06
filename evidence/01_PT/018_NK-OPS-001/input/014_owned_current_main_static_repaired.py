@@ -13,7 +13,19 @@ NORMAL_SHA='45fa13f0a99583a03cb765e2c0ce05d94bd9d9adeadd89187ff3334c58f31d8b'
 SOURCE='28af318d0198fe7432ca6fcd234d3fabbfd10173'
 sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
 
+CONFIG=None;CONFIG_SHA=None;SB_SHA=None
+
+def configure(path):
+ global CONFIG,CONFIG_SHA,SB_SHA,NORMAL,NORMAL_SHA,SB,SLOT,PUBLIC,SOURCE
+ p=Path(path);assert p.parent==Path('evidence/01_PT/018_NK-OPS-001/input') and p.name=='050_current_d8_main_static.json'
+ CONFIG=ROOT/p;CONFIG_SHA=sha(CONFIG);c=json.loads(CONFIG.read_text());assert set(c)=={'source','normalSlot','normalSha256','sbSlot','sbSha256','slot','publicName'}
+ assert c['source']=='d8ff9efb16a7da1b073bdf9770487e3e6415b636'
+ assert c['normalSlot']=='pg20112-log-tx-six-main-compile-v1' and c['sbSlot']=='pg20114-log-tx-six-static-reactor-v1'
+ assert c['slot']=='pg20150-current-d8-six-main-static-v1' and c['publicName']=='PG20150-current-d8-six-main-static-v1'
+ SOURCE=c['source'];NORMAL=RUNS/c['normalSlot'];NORMAL_SHA=c['normalSha256'];SB=RUNS/c['sbSlot'];SB_SHA=c['sbSha256'];SLOT=RUNS/c['slot'];PUBLIC=ROOT/'evidence/01_PT/018_NK-OPS-001/evidence'/c['publicName']
+
 def read_inputs():
+ if CONFIG is not None:assert sha(CONFIG)==CONFIG_SHA and sha(SB/'manifest.safe.json')==SB_SHA
  assert sha(NORMAL/'manifest.safe.json')==NORMAL_SHA and sha(RUNTIME)==RUNTIME_SHA
  normal=json.loads((NORMAL/'manifest.safe.json').read_text());old=json.loads(RUNTIME.read_text());sb=json.loads((SB/'manifest.safe.json').read_text())
  assert normal['source']==sb['source']==SOURCE and normal['actualExit']==sb['actualExit']==0 and normal['testsExecuted']==0
@@ -79,6 +91,7 @@ def post():
  value=dict(m,originalManifestSha256=sha(SLOT/'manifest.safe.json'),independentPostReconstruction=True,productClassesExecuted=0,files={p.name:sha(p) for p in PUBLIC.iterdir() if p.is_file()});(PUBLIC/'manifest.json').write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n');print(json.dumps({'actualExit':0,'main':len(m['sourceInputHashes']),'rawGateExit':m['rawGateExit'],'rawCounts':m['rawCounts'],'manifestSha256':sha(PUBLIC/'manifest.json')}))
 
 if __name__=='__main__':
- assert len(sys.argv)==2 and sys.argv[1] in ['run','post']
+ assert len(sys.argv) in [2,3] and sys.argv[1] in ['run','post']
+ if len(sys.argv)==3:configure(sys.argv[2])
  if sys.argv[1]=='run':run()
  else:post()

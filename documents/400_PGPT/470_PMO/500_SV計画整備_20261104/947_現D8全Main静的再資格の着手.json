@@ -1,0 +1,40 @@
+{
+  "groupId": "PGPT-ORDINARY-CURRENT-D8-F03-20261106",
+  "atJST": "2026-11-06T09:58:38.231425+09:00",
+  "sourceBefore": "0e014d84dd8aca9b6b6a115e0560f612ca6b2050",
+  "mainSourceBefore": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+  "estimateAtGroupStartPp": {
+    "low": 0.5,
+    "base": 2,
+    "high": 5
+  },
+  "capPp": 6,
+  "costOwner": "WBS-F03",
+  "chargedToSV": false,
+  "quotaBefore": {
+    "primary": {
+      "usedPercent": 28,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794395640
+    },
+    "secondary": null,
+    "usedPercent": 28,
+    "remainingPercent": 72,
+    "observedAtUTC": "2026-11-06T00:54:43.004Z",
+    "provenance": "fresh get_usage_limits direct structured response",
+    "previousObservationSha256": "95acce77a5e87ecca9d9e39f362dc1a9c96ec884e4fc93bc9e1facf173d64a05"
+  },
+  "workCategory": "SOURCE_REQUALIFICATION",
+  "scope": "Fresh PMD/Checkstyle index on saved D8 Main-only normal snapshot. Reuse same-source build/SB bytes; no Product/PT execution. Requalify historical per-site style facts only if exact current report/source/context pins match; Log30 new review. No rule waiver or runtime/native acceptance.",
+  "preflight": {
+    "decision": "PERMITTED_STATIC_ONLY_NO_TEST_WRAPPER",
+    "sourceCount": 966,
+    "testReadOrExecution": false,
+    "ProductInvocation": false,
+    "VM_DB_Root_heldActions": false,
+    "sameSourceNormal": "PG20112",
+    "sameSourceSB": "PG20114",
+    "command": "014_owned_current_main_static_repaired.py run/post input050 frozen D8 profile",
+    "reason": "One Main changed; old28af raw index cannot qualify D8; all966 source sets/current sixJAR/currentaux checked; no successful analysis replay of D8 allMain yet."
+  }
+}
