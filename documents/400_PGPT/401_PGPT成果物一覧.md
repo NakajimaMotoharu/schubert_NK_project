@@ -1,5 +1,10 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-07T01:24:32.892230+09:00 SecurityContext adapter限定資格
+
+015仕様064/結果065・PMO600048、PG21188新12/FES0/独立21204 post0・L56M12C2B14未網羅0。六依存の元method probeがconstructor/validation/自己copy消去だけと証明し、実session/暗号/DB/Browser0、Main変更0。累計37対象の新method322=Java218+HTML97+CSS7、wholeJava70/原282交差50残232/partial18残62。新leaf0/正式1964-53/工数null、元candidate監査HOLD保持。
+
+
 ## 2026-11-07T01:07:12.158906+09:00 CSRF adapter限定資格
 
 015仕様062/結果063・PMO600046、PG21164新8/FES0/独立21174 post0・L33M5C1B28未網羅0、Main変更0/自己所有Servletだけ/実session・DB・乱数発行・Browser無し。累計36対象新method310=Java206+HTML97+CSS7、wholeJava69/原282交差49残233/partial18残62。新leaf0/正式1964-53/工数null・元candidate監査HOLD維持。
