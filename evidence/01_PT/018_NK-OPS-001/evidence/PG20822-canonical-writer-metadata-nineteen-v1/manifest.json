@@ -1,0 +1,83 @@
+{
+  "atJST": "2026-11-06T19:56:54.894859+09:00",
+  "source": "74b556c293fe0f97f1022a474f22b07968bf4d1f",
+  "actualExit": 0,
+  "stage": {
+    "actualExit": 0,
+    "timedOut": false,
+    "startUTC": "2026-11-06T10:56:54.727093+00:00",
+    "endUTC": "2026-11-06T10:56:54.892007+00:00",
+    "command": [
+      "/usr/bin/env",
+      "PYTHONPATH=tools/quality:tools/quality/vm/050_s1",
+      "/usr/bin/python3",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/quality/tests",
+      "-p",
+      "test_pmo_quota_binding*.py",
+      "-v"
+    ],
+    "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSha256": "38b1f50891026dd89b024afd929d2357aac717de3494e265e0686c24b4ec4b51"
+  },
+  "inputHashes": {
+    "tools/quality/pmo_quota_binding.py": "f85c96354f54790923ee2bf930d099592a257d84844c13c641ff78ec9af0a3e6",
+    "tools/quality/vm/050_s1/pg998_metrics.py": "fd496979d53311d7b792da516c5c156486305daa723ddd216254f7318227457c",
+    "tools/quality/tests/test_pmo_quota_binding.py": "6006bdc45c0308b48731573d8c7af26188041fca6a77a567765f9a9922dfd5ba",
+    "tools/quality/tests/test_pmo_quota_binding_writer.py": "456704b5d8637731a923540f63bd62644d6fc06ded25993b97f3612ac20419aa",
+    "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json": "7b7fa625dafafdf6e39248bd465375012af03bd165afb9fdb3514fb8d357bdd2",
+    "documents/400_PGPT/470_PMO/484_WBSコスト枠・細分化.json": "7e931d6139d6cd17be240ca9d88a2677e0b7d8828be482b546df1ca00d06e02f",
+    "documents/400_PGPT/470_PMO/487_WBS実行計測規約.json": "77f708d9874ad2ffee7776867df072f9ed71f2afa60dbc84a37c5e6775f67eed"
+  },
+  "metadataTests": 19,
+  "metadataCaseNames": [
+    "test_001_actual24_is_bound_without_old23_literal (test_pmo_quota_binding.QuotaBindingTest.test_001_actual24_is_bound_without_old23_literal)",
+    "test_002_old_literal_is_rejected_not_overwritten_silently (test_pmo_quota_binding.QuotaBindingTest.test_002_old_literal_is_rejected_not_overwritten_silently)",
+    "test_003_weekly10_or_less_blocks_new_group (test_pmo_quota_binding.QuotaBindingTest.test_003_weekly10_or_less_blocks_new_group)",
+    "test_004_relevant_secondary10_blocks_even_with_weekly76 (test_pmo_quota_binding.QuotaBindingTest.test_004_relevant_secondary10_blocks_even_with_weekly76)",
+    "test_005_unknown_or_disallowed_is_not_zero (test_pmo_quota_binding.QuotaBindingTest.test_005_unknown_or_disallowed_is_not_zero)",
+    "test_006_stale_future_and_expired_marker_rejected (test_pmo_quota_binding.QuotaBindingTest.test_006_stale_future_and_expired_marker_rejected)",
+    "test_007_invalid_numbers_and_markers_rejected (test_pmo_quota_binding.QuotaBindingTest.test_007_invalid_numbers_and_markers_rejected)",
+    "test_008_duplicate_receipt_and_group_rejected (test_pmo_quota_binding.QuotaBindingTest.test_008_duplicate_receipt_and_group_rejected)",
+    "test_009_mutated_value_and_remaining_rejected (test_pmo_quota_binding.QuotaBindingTest.test_009_mutated_value_and_remaining_rejected)",
+    "test_010_codex_bucket_preferred_and_unneeded_account_fields_dropped (test_pmo_quota_binding.QuotaBindingTest.test_010_codex_bucket_preferred_and_unneeded_account_fields_dropped)",
+    "test_005_current_cost_revision_and_hash_are_explicit (test_pmo_quota_binding_writer.CanonicalEventWriterTest.test_005_current_cost_revision_and_hash_are_explicit)",
+    "test_006_legacy_end_becomes_registered_checkpoint_with_same_estimate (test_pmo_quota_binding_writer.CanonicalEventWriterTest.test_006_legacy_end_becomes_registered_checkpoint_with_same_estimate)",
+    "test_007_unregistered_category_type_parent_and_identity_never_write (test_pmo_quota_binding_writer.CanonicalEventWriterTest.test_007_unregistered_category_type_parent_and_identity_never_write)",
+    "test_008_corrected_coarse_category_keeps_detail_separate (test_pmo_quota_binding_writer.CanonicalEventWriterTest.test_008_corrected_coarse_category_keeps_detail_separate)",
+    "test_009_current_cost_file_cannot_be_relabelled (test_pmo_quota_binding_writer.CanonicalEventWriterTest.test_009_current_cost_file_cannot_be_relabelled)",
+    "test_001_saved_fresh24_reaches_writer_unchanged (test_pmo_quota_binding_writer.QuotaWriterTest.test_001_saved_fresh24_reaches_writer_unchanged)",
+    "test_002_old_literal_and_tampered_receipt_never_append (test_pmo_quota_binding_writer.QuotaWriterTest.test_002_old_literal_and_tampered_receipt_never_append)",
+    "test_003_previous_group_or_receipt_is_rejected (test_pmo_quota_binding_writer.QuotaWriterTest.test_003_previous_group_or_receipt_is_rejected)",
+    "test_004_low_unknown_stale_and_missing_inputs_never_append (test_pmo_quota_binding_writer.QuotaWriterTest.test_004_low_unknown_stale_and_missing_inputs_never_append)"
+  ],
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "aborted": 0,
+  "newProductTests": 0,
+  "productionTouched": false,
+  "liveLedgerOpenedByCanonicalWriterTests": false,
+  "temporaryLedgerOnly": true,
+  "initialWipMetadata18PassedBeforeFinalRevisionAndIoGuards": true,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "files": {
+    "metadata.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "metadata.stderr": "38b1f50891026dd89b024afd929d2357aac717de3494e265e0686c24b4ec4b51",
+    "metadata-begin.safe.json": "07366bf72ed554396cd6a57fb9547a12a83e468da066870dd7c21528294445fe",
+    "metadata-process.safe.json": "e708ee62d271d667fad600c4d3f072194957a299b1ea22149e7b364ff00b00f9",
+    "metadata-exit.safe.json": "9912d9d6dfd8cc7c4d6657211dec88b30ec8cdefbd5585f1d5b3be9302725a4f"
+  },
+  "bugs": [
+    "BUG-2356"
+  ],
+  "horizontal": [
+    "YKT-2101"
+  ]
+}
