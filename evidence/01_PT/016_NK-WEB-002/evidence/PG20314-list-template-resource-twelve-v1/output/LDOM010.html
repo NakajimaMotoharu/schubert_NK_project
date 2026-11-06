@@ -1,0 +1,241 @@
+<!doctype html>
+<!-- NK-WEB-002/SCR020/NTF/UI224,236/SS313,332/PG-D347/PT-NTF-HTTP001..010. -->
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>通知</title>
+    <link rel="stylesheet" href="/css/schubert.css">
+  </head>
+<body><main class="page notification-page">
+  <header class="topbar"><h1>通知</h1><div class="topbar-actions">
+        <nav class="nav-links" aria-label="共通ナビゲーション">
+          <a href="/">メニュー</a>
+          <a href="/notifications">通知</a>
+        </nav>
+        <span class="login-user">reader</span>
+        <span class="login-role">USER</span>
+        <form class="logout-form" action="/logout" method="post">
+          <button type="submit">ログアウト</button>
+        </form>
+      </div></header>
+  <div id="notification-errors" role="alert" hidden="hidden"><ul></ul></div>
+  <form method="get" action="/notifications">
+    <label>通知区分<select name="type" aria-describedby="notification-errors">
+      <option value="">すべて</option>
+      <option value="ACCEPTED">受付通知</option>
+      <option value="COMPLETED">処理済通知</option>
+      <option value="ERROR" selected="selected">エラー通知</option>
+    </select></label>
+    <label>受付日From<input type="date" name="from" value="2026-11-01" aria-describedby="notification-errors"></label>
+    <label>受付日To<input type="date" name="to" value="2026-11-01" aria-describedby="notification-errors"></label>
+    <button type="submit">検索</button>
+  </form>
+  <p class="count">101 notifications / page 2 of 3</p>
+  <nav aria-label="ページ"><a class="previous" href="/notifications?type=ERROR&amp;from=2026-11-01&amp;to=2026-11-01&amp;page=1">前へ</a><a class="next" href="/notifications?type=ERROR&amp;from=2026-11-01&amp;to=2026-11-01&amp;page=3">次へ</a></nav>
+  <section>
+    
+    <table><thead><tr><th>区分</th><th>受付ID</th><th>受付日時</th><th>最終更新日時</th><th>概要</th><th>操作</th></tr></thead>
+    <tbody><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/200">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/199">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/198">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/197">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/196">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/195">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/194">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/193">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/192">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/191">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/190">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/189">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/188">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/187">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/186">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/185">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/184">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/183">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/182">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/181">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/180">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/179">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/178">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/177">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/176">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/175">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/174">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/173">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/172">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/171">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/170">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/169">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/168">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/167">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/166">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/165">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/164">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/163">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/162">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/161">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/160">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/159">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/158">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/157">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/156">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/155">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/154">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/153">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/152">明細</a></td>
+    </tr><tr class="notification-row">
+      <td class="type">エラー通知</td><td class="receipt">00000000000000000000000000</td>
+      <td class="submitted-at">2026-11-01 09:00:00</td><td class="updated-at">2026-11-01 09:00:01</td>
+      <td class="notification-summary">本文</td><td><a class="detail" href="/notifications/151">明細</a></td>
+    </tr></tbody></table>
+  </section>
+</main></body></html>
