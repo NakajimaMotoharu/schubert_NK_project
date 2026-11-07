@@ -1,0 +1,7 @@
+# G07公開SQLcatch digest二path限定・結果
+
+仕様3765、observer sourcee83876eb03255c52de648b857b3cef6ae708e1c2/Main7aed不変。PG23518metadata0/23520独立0 manifest SHA256 9f84c1bba6c326a689e88bb33db029886a7ef163b207f3a134ea317b001d5403。元4493/既9+2のmultiset/残4482、PG6542公開metadata113のうち元検出73をJSON spanと独立pretty object indexで照合。明示二current sourceはnormal22084/sourceSha一致、しかしこの73のsource witness名には該当二が0。新false-positive分類0、未分類4482/22binary限界/actualSecretCount null/全G07未受入を維持。
+
+BUG2490/YKT2228の初ad hoc checksum guard漏れは公開Main10file/13siteへのscope外hash読取だけ、事実と不足guardを23524へ保存。修正前起票後、二source exact whitelistをI-O前に適用し、producer/post全経路で未知/保護二工具/二RootTest/Root/auth/private等の10path拒否と誤減額・秘密0・falsePositive架空等8metadata反例を確認。元offscope checksumを分類に用いず、修正commit e83876eb・独立postで限定CLOSED、過去行為の無かったこと化/一般HOLD解除ではない。23526 draft JSONDecoder endをlength扱いした失敗1はsource witness前の失敗としてbefore保存、算術のみ是正。Product/scanner/元operator/native/Root/VM/DB/鍵/auth/旧PTの実行0、私有raw/archive0、値・値hash出力0。
+
+この有限read-setは消化したが、G07全候補や全元sourceの分類完了ではない。次の安全な独立群は別見積/事前根拠を要し、型/来歴が証明できなければUNKNOWNを保持する。今回Product PT/coverage/新Source資格/正式受入/工数率を増やさない。472=Java368+HTML97+CSS7/whole暫定93/候補111/pending9/正式1964-53/newleaf0/工数null不変。原見積と費用・既成功・失敗・原本/stash7/baselineを保持、通常477継続。
