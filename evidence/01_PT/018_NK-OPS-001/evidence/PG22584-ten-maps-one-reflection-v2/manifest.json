@@ -1,0 +1,58 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T15:52:51.645629+09:00",
+  "source": "be84ae72271c18d37be6f86dd76e17550a83ffbc",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "inputHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCriticalAuditPortTest.java": "e7dfcb613716ae6af147137e9ceabda1cf25006a4d02651031d3c9813cbdb88f",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java": "60029426a27efd8f06ec26ab2adf7409d026d8e39b303c59503336fcebd3913a",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAuditPortTest.java": "4fce0913d8f41edf31ffd8d6097b758845005a0e4021e111c1ff182a54d2c834",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunAuditPortTest.java": "4b8f593bfa4071f47d1586ef2576b01228140a36fd40c40c80f60b5cbd7a6315",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java": "28271ad49820af2c90e99eb6d7bff01a680754086cf24c4f396777b6e3125c7d",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPredicateContractTest.java": "2eeecafc5a1af7a1451937572ea38f3e9c6fec8a0a358101d71850ad2f2c7ddb",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogOutboxPortTest.java": "bfc43a279b680a1bb88465d39acc0f59ea7f5e5111322e130de9fe8894bc6090",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java": "7e7e59d58974d577196b547038a1f9aa7e4b470a76a09b038b941606458eba4a",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java": "0327b5f0f28080e942ac08e0ad5de9f16360531714c0fd0a5e26a3e8cf14b54f",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java": "b3af1540089f2a9325938b1086ffdcd2d20281a63fc7f6a3bc023861e6bccbb2"
+  },
+  "mainWitness": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "witnesses": [
+      "private record History(long id, UUID runId, int attempt, Instant started, String status)",
+      "return \"BatchStepHistory[identity/time=<redacted>]\";"
+    ]
+  },
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/224_ten_maps_one_reflection.json",
+    "sha256": "a36a3a6611ec6a688fd88dca864eac4ef5c64c74c9777b681da374d7d4005cfc"
+  },
+  "originalRawManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22382-ordinary85-test-static-v1/manifest.json",
+    "sha256": "e4eea946c71b78db2cca778259ef366cd4cd60c208708941a61067f48cee25a2"
+  },
+  "selectedMapSites": 10,
+  "selectedReflectionSites": 1,
+  "newIndividualClassifications": 11,
+  "originalRaw347Preserved": true,
+  "currentReconstructedRaw": 346,
+  "currentSubsetClassifiedBefore": 283,
+  "currentSubsetClassifiedAfter": 294,
+  "currentSubsetUnclassifiedBefore": 63,
+  "currentSubsetUnclassifiedAfter": 52,
+  "productTestsExecuted": 0,
+  "newProductTests": 0,
+  "newSourceProofs": 0,
+  "newAcceptance": 0,
+  "effortRate": null,
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "suppressionAdded": false,
+  "files": {
+    "sites.json": "2f2b1449719b1c9a054a2517bd5a72d2f16850a9f5d12a601897aea1e534cc57"
+  },
+  "producer": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/225_ten_maps_reflection_collect.py",
+    "sha256": "5dc9acb93c47179a1c2a78dd970e18473b99d269d6ebe14a3a779a64383ed80b"
+  }
+}

@@ -15,7 +15,7 @@ def profile(row,text,body):
  if p=='LOCAL_EXPECTED_HANDLE_VECTOR':return 'values.put(first, 7L);' in body and 'return values;' in body and 'expected.put(5, null);' in text
  if p=='ROW_VECTOR_OWNED_PER_CALL_AND_PARALLEL_WORKER':return 'values.put("id", id);' in body and 'return values;' in body and re.search(r'pool\.submit\(\s*\(\) -> \{\s*var f = new Fixture\(\);\s*var ownRow = row\(id, NOW\);',text) is not None and 'f.rows.add(ownRow);' in text and 'jobs.get(index).get(10, TimeUnit.SECONDS)' in text
  if p=='WORKER_OWN_REQUEST_FRAME':return 'var frame = new Frame(' in body and 'workers.submit(' in body and 'get(10, java.util.concurrent.TimeUnit.SECONDS)' in body
- if p=='WORKER_OWN_JDBC_FIXTURE':return 'var f = new Jdbc();' in body and not re.search(r'static\s+(?:final\s+)?Map\b',text)
+ if p=='WORKER_OWN_JDBC_FIXTURE':return 'var f = new Jdbc();' in body and not re.search(r'\bstatic\b',row['declaration'])
  return False
 
 def main():
