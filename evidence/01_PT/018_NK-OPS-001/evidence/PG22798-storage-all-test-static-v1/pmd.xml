@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-07T18:07:07.163">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ChildDirectoryPublicationTest.java">
+<violation beginline="278" endline="278" begincolumn="24" endcolumn="67" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="ChildDirectoryPublicationTest" method="concurrentNoReplace" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="284" endline="293" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="ChildDirectoryPublicationTest" method="concurrentNoReplace" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="327" endline="327" begincolumn="34" endcolumn="58" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="ChildDirectoryPublicationTest.Fixture" variable="faults" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="338" endline="338" begincolumn="19" endcolumn="46" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="ChildDirectoryPublicationTest.Fixture" method="Fixture" variable="calls" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ExistingFileAccessTest.java">
+<violation beginline="226" endline="226" begincolumn="24" endcolumn="67" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="ExistingFileAccessTest" method="med025ConcurrentAndReplacedNamesRetainIndependentInodes" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="228" endline="228" begincolumn="7" endcolumn="19" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="ExistingFileAccessTest" method="med025ConcurrentAndReplacedNamesRetainIndependentInodes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="232" endline="248" begincolumn="15" endcolumn="21" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="ExistingFileAccessTest" method="med025ConcurrentAndReplacedNamesRetainIndependentInodes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="326" endline="326" begincolumn="23" endcolumn="50" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="ExistingFileAccessTest" method="compoundOwnership" variable="calls" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="390" endline="390" begincolumn="9" endcolumn="19" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="ExistingFileAccessTest.FaultIo" variable="attributes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field attributes has the same name as a method
+</violation>
+<violation beginline="406" endline="407" begincolumn="27" endcolumn="88" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="ExistingFileAccessTest.FaultIo" method="attributes" variable="result" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="415" endline="415" begincolumn="27" endcolumn="35" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="ExistingFileAccessTest.FaultIo" method="openReadOnly" variable="delegate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this SeekableByteChannel object are closed after use
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java">
+<violation beginline="318" endline="318" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="FactoryResourceScopeTest" method="factory012NestedAndParallelScopesKeepIndependentOwnership" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="321" endline="321" begincolumn="19" endcolumn="59" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="FactoryResourceScopeTest" method="factory012NestedAndParallelScopesKeepIndependentOwnership" variable="first" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="322" endline="322" begincolumn="20" endcolumn="60" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="FactoryResourceScopeTest" method="factory012NestedAndParallelScopesKeepIndependentOwnership" variable="second" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="563" endline="563" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="FactoryResourceScopeTest" method="factory018ParallelCompleteOwnersNeverShareTransferState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="569" endline="569" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="FactoryResourceScopeTest" method="factory018ParallelCompleteOwnersNeverShareTransferState" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="571" endline="580" begincolumn="11" endcolumn="33" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="FactoryResourceScopeTest" method="factory018ParallelCompleteOwnersNeverShareTransferState" variable="first" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="582" endline="591" begincolumn="11" endcolumn="33" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="FactoryResourceScopeTest" method="factory018ParallelCompleteOwnersNeverShareTransferState" variable="second" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxDirectoryCallsTest.java">
+<violation beginline="66" endline="66" begincolumn="25" endcolumn="57" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxDirectoryCallsTest" method="w01CreateNewHasOneWinnerAndPreservesExistingFileAndSymlinkTargets" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="81" endline="81" begincolumn="30" endcolumn="37" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxDirectoryCallsTest" method="w01CreateNewHasOneWinnerAndPreservesExistingFileAndSymlinkTargets" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="96" endline="96" begincolumn="25" endcolumn="50" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxDirectoryCallsTest" method="w01CreateNewHasOneWinnerAndPreservesExistingFileAndSymlinkTargets" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="236" endline="236" begincolumn="25" endcolumn="57" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxDirectoryCallsTest" method="f03OneOf100ConcurrentPublishersWinsWithoutReplacingWinner" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="256" endline="256" begincolumn="25" endcolumn="50" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxDirectoryCallsTest" method="f03OneOf100ConcurrentPublishersWinsWithoutReplacingWinner" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxExecDescriptorsTest.java">
+<violation beginline="265" endline="265" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxExecDescriptorsTest" method="opsXfd007ConcurrentDisjointCapabilities" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="275" endline="275" begincolumn="25" endcolumn="49" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxExecDescriptorsTest" method="opsXfd007ConcurrentDisjointCapabilities" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="293" endline="293" begincolumn="25" endcolumn="60" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxExecDescriptorsTest" method="opsXfd008RealExecInheritsSameFlockUntilProcessExit" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="298" endline="298" begincolumn="13" endcolumn="46" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxExecDescriptorsTest" method="opsXfd008RealExecInheritsSameFlockUntilProcessExit" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxFileLockTest.java">
+<violation beginline="86" endline="86" begincolumn="31" endcolumn="66" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxFileLockTest" method="externalFlockInteroperability" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="102" endline="102" begincolumn="39" endcolumn="72" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxFileLockTest" method="externalFlockInteroperability" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="260" endline="260" begincolumn="20" endcolumn="22" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxFileLockTest" method="nativeErrorsAndFlags" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 11 in if statements
+</violation>
+<violation beginline="382" endline="382" begincolumn="31" endcolumn="63" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxFileLockTest" method="concurrentSingleWinner" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="401" endline="401" begincolumn="29" endcolumn="53" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxFileLockTest" method="concurrentSingleWinner" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxHostDirectoryCallsTest.java">
+<violation beginline="154" endline="154" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxHostDirectoryCallsTest" method="opsHost008ConcurrentScopesKeepOnlyOwnPointers" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="164" endline="164" begincolumn="25" endcolumn="49" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxHostDirectoryCallsTest" method="opsHost008ConcurrentScopesKeepOnlyOwnPointers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxInodeSecurityTest.java">
+<violation beginline="267" endline="267" begincolumn="21" endcolumn="53" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxInodeSecurityTest" method="concurrentReadsStayIndependent" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="283" endline="283" begincolumn="25" endcolumn="46" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxInodeSecurityTest" method="concurrentReadsStayIndependent" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxProcessExecTest.java">
+<violation beginline="257" endline="257" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxProcessExecTest" method="opsExec007ConcurrentInputsRemainIndependent" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="275" endline="275" begincolumn="25" endcolumn="49" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxProcessExecTest" method="opsExec007ConcurrentInputsRemainIndependent" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxSealedProofTest.java">
+<violation beginline="241" endline="241" begincolumn="57" endcolumn="61" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxSealedProofTest" method="opsSeal006UnknownCompoundAndAllOwnedClose" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+<violation beginline="276" endline="276" begincolumn="28" endcolumn="35" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxSealedProofTest" method="opsSeal007RealMemfdModeSealsAndMutationRefusal" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="300" endline="300" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxSealedProofTest" method="opsSeal008NativeConcurrentProofsNeverMix" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="313" endline="313" begincolumn="25" endcolumn="49" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxSealedProofTest" method="opsSeal008NativeConcurrentProofsNeverMix" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxStartupAdmissionTest.java">
+<violation beginline="45" endline="45" begincolumn="13" endcolumn="20" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest" method="attrs" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="61" endline="62" begincolumn="45" endcolumn="63" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest.Fixture" variable="attrs" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="80" endline="80" begincolumn="18" endcolumn="19" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest.Fixture" method="fcntl" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 1 in if statements
+</violation>
+<violation beginline="81" endline="81" begincolumn="18" endcolumn="22" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest.Fixture" method="fcntl" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 1034 in if statements
+</violation>
+<violation beginline="82" endline="82" begincolumn="18" endcolumn="19" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest.Fixture" method="fcntl" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 3 in if statements
+</violation>
+<violation beginline="165" endline="165" begincolumn="29" endcolumn="30" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest" method="close" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 1 in if statements
+</violation>
+<violation beginline="166" endline="166" begincolumn="29" endcolumn="30" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest" method="close" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 2 in if statements
+</violation>
+<violation beginline="167" endline="167" begincolumn="29" endcolumn="30" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest" method="close" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 3 in if statements
+</violation>
+<violation beginline="176" endline="176" begincolumn="26" endcolumn="27" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest" method="childfd010OwnerSetCompoundFailuresKeepIndependentPriorityAndBothConsumption" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 2 in if statements
+</violation>
+<violation beginline="185" endline="185" begincolumn="35" endcolumn="36" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest" method="childfd010OwnerSetCompoundFailuresKeepIndependentPriorityAndBothConsumption" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 2 in if statements
+</violation>
+<violation beginline="319" endline="319" begincolumn="42" endcolumn="49" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest" method="childfd004EveryTypedAttributeRootModeLinkSizeAndUnsignedIdentity" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="388" endline="388" begincolumn="13" endcolumn="25" rule="ReturnEmptyCollectionRatherThanNull" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest" method="proof" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#returnemptycollectionratherthannull" priority="1">
+Return an empty collection rather than null.
+</violation>
+<violation beginline="468" endline="468" begincolumn="9" endcolumn="17" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest" method="childfd007ConcurrentReadyAndOuterCleanupConsumeAExactlyOnce" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="468" endline="468" begincolumn="20" endcolumn="51" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest" method="childfd007ConcurrentReadyAndOuterCleanupConsumeAExactlyOnce" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="484" endline="484" begincolumn="37" endcolumn="61" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest" method="childfd007ConcurrentReadyAndOuterCleanupConsumeAExactlyOnce" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="486" endline="486" begincolumn="19" endcolumn="25" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest" method="childfd007ConcurrentReadyAndOuterCleanupConsumeAExactlyOnce" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="494" endline="494" begincolumn="7" endcolumn="29" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxStartupAdmissionTest" method="childfd007ConcurrentReadyAndOuterCleanupConsumeAExactlyOnce" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxStartupFileLockTest.java">
+<violation beginline="76" endline="76" begincolumn="20" endcolumn="22" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxStartupFileLockTest" method="opsAfd002ContentionAndOtherNativeErrors" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 11 in if statements
+</violation>
+<violation beginline="144" endline="144" begincolumn="53" endcolumn="57" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="LinuxStartupFileLockTest" method="opsAfd004UnknownAndCompoundFailurePriority" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+<violation beginline="265" endline="265" begincolumn="33" endcolumn="65" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxStartupFileLockTest" method="opsAfd007ConcurrentOnlyOneCallbackOwnsA" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="285" endline="285" begincolumn="33" endcolumn="57" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="LinuxStartupFileLockTest" method="opsAfd007ConcurrentOnlyOneCallbackOwnsA" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/OwnedDirectoryFactoryTest.java">
+<violation beginline="55" endline="55" begincolumn="9" endcolumn="13" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="OwnedDirectoryFactoryTest" method="dirfactory003CloseFailureConsumesDescriptorAndConfiguredRootStillRefusesSlash" variable="root" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this OwnedTransferDirectory object are closed after use
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/OwnedTransferDirectoryTest.java">
+<violation beginline="50" endline="50" begincolumn="36" endcolumn="49" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="med018ExistingAssetChildrenAndEntriesRetainReadOnlyInodes" variable="asset" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "\u97f3\u6e90 name.ogg" appears 7 times in this file; the first occurrence is on line 50
+</violation>
+<violation beginline="250" endline="250" begincolumn="30" endcolumn="37" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="w02CreateOwnsInodeBeforeCallbackAndNameReplacementCannotRedirectWrite" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="300" endline="300" begincolumn="36" endcolumn="37" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="w02NullCallbackAndCloseFaultsReleaseFdButNeverDeletePartImplicitly" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 1 in if statements
+</violation>
+<violation beginline="386" endline="386" begincolumn="25" endcolumn="32" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="a04SymlinkAndHardLinkAreRejectedBeforeOpeningAReadChannel" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="386" endline="386" begincolumn="88" endcolumn="95" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="a04SymlinkAndHardLinkAreRejectedBeforeOpeningAReadChannel" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="503" endline="503" begincolumn="24" endcolumn="67" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="bug036CallerMonitorCannotBlockAnyDirectoryOperation" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="504" endline="504" begincolumn="30" endcolumn="35" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="bug036CallerMonitorCannotBlockAnyDirectoryOperation" variable="child" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this OwnedTransferDirectory object are closed after use
+</violation>
+<violation beginline="505" endline="505" begincolumn="7" endcolumn="19" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="bug036CallerMonitorCannotBlockAnyDirectoryOperation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="506" endline="506" begincolumn="17" endcolumn="61" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="bug036CallerMonitorCannotBlockAnyDirectoryOperation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="509" endline="515" begincolumn="13" endcolumn="23" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="bug036CallerMonitorCannotBlockAnyDirectoryOperation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="518" endline="518" begincolumn="7" endcolumn="19" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="bug036CallerMonitorCannotBlockAnyDirectoryOperation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="519" endline="540" begincolumn="9" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="bug036CallerMonitorCannotBlockAnyDirectoryOperation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="587" endline="587" begincolumn="9" endcolumn="14" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="f02ExistingDateIndependentChildLifetimeAndSafeIoFailures" variable="child" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this OwnedTransferDirectory object are closed after use
+</violation>
+<violation beginline="724" endline="724" begincolumn="24" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="f02CloseCannotReuseDescriptorWhileFileCallbackIsInFlight" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="725" endline="725" begincolumn="11" endcolumn="16" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="f02CloseCannotReuseDescriptorWhileFileCallbackIsInFlight" variable="child" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this OwnedTransferDirectory object are closed after use
+</violation>
+<violation beginline="731" endline="744" begincolumn="11" endcolumn="26" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="f02CloseCannotReuseDescriptorWhileFileCallbackIsInFlight" variable="file" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="740" endline="740" begincolumn="27" endcolumn="33" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="f02CloseCannotReuseDescriptorWhileFileCallbackIsInFlight" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="747" endline="753" begincolumn="11" endcolumn="17" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="f02CloseCannotReuseDescriptorWhileFileCallbackIsInFlight" variable="close" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="830" endline="830" begincolumn="26" endcolumn="27" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="compoundOwnership" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 1 in if statements
+</violation>
+<violation beginline="831" endline="831" begincolumn="46" endcolumn="56" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="compoundOwnership" variable="date" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to sequence in operand
+</violation>
+<violation beginline="844" endline="844" begincolumn="43" endcolumn="53" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest" method="compoundOwnership" variable="name" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to sequence in operand
+</violation>
+<violation beginline="954" endline="954" begincolumn="24" endcolumn="28" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="OwnedTransferDirectoryTest.FaultCalls" method="close" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/PrivateChildDirectoryTest.java">
+<violation beginline="56" endline="56" begincolumn="22" endcolumn="26" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="PrivateChildDirectoryTest" method="nativePrivateCreation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="56" endline="56" begincolumn="83" endcolumn="87" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="PrivateChildDirectoryTest" method="nativePrivateCreation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="178" endline="178" begincolumn="17" endcolumn="21" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="PrivateChildDirectoryTest" method="everyNativeFailure" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="181" endline="181" begincolumn="23" endcolumn="27" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="PrivateChildDirectoryTest" method="everyNativeFailure" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="260" endline="260" begincolumn="20" endcolumn="51" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="PrivateChildDirectoryTest" method="concurrentNewOnly" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="262" endline="262" begincolumn="7" endcolumn="19" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="PrivateChildDirectoryTest" method="concurrentNewOnly" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="265" endline="274" begincolumn="15" endcolumn="21" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="PrivateChildDirectoryTest" method="concurrentNewOnly" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="329" endline="329" begincolumn="19" endcolumn="46" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="PrivateChildDirectoryTest.Fixture" method="Fixture" variable="calls" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="348" endline="348" begincolumn="21" endcolumn="33" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="PrivateChildDirectoryTest.Fixture" method="Fixture" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/PrivateDirectoryEntryTest.java">
+<violation beginline="46" endline="46" begincolumn="30" endcolumn="37" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="PrivateDirectoryEntryTest" method="nativePrivateCreation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="61" endline="61" begincolumn="26" endcolumn="33" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="PrivateDirectoryEntryTest" method="nativePrivateCreation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="88" endline="88" begincolumn="26" endcolumn="33" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="PrivateDirectoryEntryTest" method="nfile193001NamedEntryHasHeldPrivateInodeAndNeverReopensReplacement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="172" endline="172" begincolumn="24" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="PrivateDirectoryEntryTest" method="nfile193004ConcurrentNamedEntryHasExactlyOneWriter" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="176" endline="190" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="PrivateDirectoryEntryTest" method="nfile193004ConcurrentNamedEntryHasExactlyOneWriter" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="196" endline="196" begincolumn="11" endcolumn="18" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="PrivateDirectoryEntryTest" method="nfile193004ConcurrentNamedEntryHasExactlyOneWriter" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="221" endline="221" begincolumn="20" endcolumn="27" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="PrivateDirectoryEntryTest" method="atomicNoReplace" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="250" endline="250" begincolumn="21" endcolumn="22" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="PrivateDirectoryEntryTest" method="scopedOwnership" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 2 in if statements
+</violation>
+<violation beginline="373" endline="373" begincolumn="24" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="PrivateDirectoryEntryTest" method="concurrentSinglePublication" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="378" endline="389" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="PrivateDirectoryEntryTest" method="concurrentSinglePublication" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java">
+<violation beginline="246" endline="246" begincolumn="21" endcolumn="64" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="ResourceScopeTest" method="concurrentScopes" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="251" endline="251" begincolumn="13" endcolumn="92" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="ResourceScopeTest" method="concurrentScopes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceConfigFilesTest.java">
+<violation beginline="37" endline="37" begincolumn="43" endcolumn="70" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="ServiceConfigFilesTest" method="root" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "nk.db.pool.api.max: \'8\'\n" appears 4 times in this file; the first occurrence is on line 37
+</violation>
+<violation beginline="149" endline="149" begincolumn="25" endcolumn="32" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="ServiceConfigFilesTest" method="opsCfgfile005IndependentAttributeMutationMatrix" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="210" endline="210" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="ServiceConfigFilesTest" method="opsCfgfile006NullConcurrentAndOwnedCloseFailure" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="213" endline="213" begincolumn="18" endcolumn="83" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="ServiceConfigFilesTest" method="opsCfgfile006NullConcurrentAndOwnedCloseFailure" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="272" endline="272" begincolumn="18" endcolumn="34" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="ServiceConfigFilesTest.FaultIo" method="attributes" variable="call" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to attributeCalls in operand
+</violation>
+<violation beginline="285" endline="285" begincolumn="11" endcolumn="25" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="ServiceConfigFilesTest.FaultIo" method="openReadOnly" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to channelCalls in operand
+</violation>
+<violation beginline="304" endline="304" begincolumn="18" endcolumn="29" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="ServiceConfigFilesTest.FaultChannel" method="read" variable="call" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to readCalls in operand
+</violation>
+<violation beginline="325" endline="325" begincolumn="18" endcolumn="29" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="ServiceConfigFilesTest.FaultChannel" method="size" variable="call" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to sizeCalls in operand
+</violation>
+<violation beginline="416" endline="416" begincolumn="11" endcolumn="19" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="ServiceConfigFilesTest.CloseFaultCalls" method="close" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to closed in operand
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java">
+<violation beginline="66" endline="66" begincolumn="21" endcolumn="52" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="ServiceCredentialLocationTest" method="opsCredloc005ConcurrentFreshMapsDoNotChangeSnapshot" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="69" endline="69" begincolumn="19" endcolumn="99" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="ServiceCredentialLocationTest" method="opsCredloc005ConcurrentFreshMapsDoNotChangeSnapshot" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageAttributeGuardTest.java">
+<violation beginline="279" endline="279" begincolumn="25" endcolumn="49" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="StorageAttributeGuardTest" method="directory" variable="result" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageRootInspectionTest.java">
+<violation beginline="65" endline="65" begincolumn="25" endcolumn="48" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="StorageRootInspectionTest" method="a07MetadataAndProviderNegativeMatrix" variable="valid" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="66" endline="66" begincolumn="23" endcolumn="29" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="StorageRootInspectionTest" method="a07MetadataAndProviderNegativeMatrix" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="76" endline="76" begincolumn="27" endcolumn="57" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="StorageRootInspectionTest" method="a07MetadataAndProviderNegativeMatrix" variable="missing" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="81" endline="81" begincolumn="46" endcolumn="53" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="StorageRootInspectionTest" method="a07MetadataAndProviderNegativeMatrix" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="81" endline="81" begincolumn="55" endcolumn="61" rule="AvoidUsingOctalValues" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="StorageRootInspectionTest" method="a07MetadataAndProviderNegativeMatrix" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidusingoctalvalues" priority="3">
+Avoid integer literals that start with zero (interpreted as octal), remove the leading 0 to get a decimal literal (or use explicit 0x, 0b prefixes)
+</violation>
+<violation beginline="82" endline="82" begincolumn="27" endcolumn="57" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="StorageRootInspectionTest" method="a07MetadataAndProviderNegativeMatrix" variable="changed" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="87" endline="87" begincolumn="25" endcolumn="57" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="StorageRootInspectionTest" method="a07MetadataAndProviderNegativeMatrix" variable="zeroLinks" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="90" endline="90" begincolumn="25" endcolumn="58" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="StorageRootInspectionTest" method="a07MetadataAndProviderNegativeMatrix" variable="wrongLinks" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="94" endline="94" begincolumn="25" endcolumn="58" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="StorageRootInspectionTest" method="a07MetadataAndProviderNegativeMatrix" variable="wrongOwner" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="98" endline="98" begincolumn="25" endcolumn="58" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.storage" class="StorageRootInspectionTest" method="a07MetadataAndProviderNegativeMatrix" variable="wrongGroup" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="105" endline="105" begincolumn="27" endcolumn="35" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="StorageRootInspectionTest" method="a07MetadataAndProviderNegativeMatrix" variable="ordinary" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this DirectoryStream object are closed after use
+</violation>
+<violation beginline="185" endline="187" begincolumn="11" endcolumn="10" rule="EmptyCatchBlock" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="StorageRootInspectionTest" method="directoryDescriptors" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#emptycatchblock" priority="3">
+Avoid empty catch blocks
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageRootLayoutTest.java">
+<violation beginline="46" endline="46" begincolumn="24" endcolumn="28" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.storage" class="StorageRootLayoutTest" method="a05EveryPairRejectsEqualAndBothAncestorDirectionsWithoutStringPrefixConfusion" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+</file>
+</pmd>

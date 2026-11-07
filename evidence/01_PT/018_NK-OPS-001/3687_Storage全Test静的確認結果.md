@@ -1,0 +1,9 @@
+# Storage全Test・静的確認結果（適用性未分類）
+
+PG22796で全29tracked regular sourceを固定。PG22798 PMD raw132/Checkstyle0/format差分0、processing0、各engine Product初期化0。PG22800独立0 manifest `532923e001649b37b69ca0cfb25ad077eb79435ea612e4d6c82ba2c7ec8510b6`（全29のGit/source/hash、全engine command/exit/XMLとformat read-only/非native flag/実初期化なし、全tool/rule/SDK/JDK hash）。正常Main7aed/storage Jarのsymbol metadataだけを使用。元Test compile/run/child main/FFM/native/Root/VM/backend/credential動作0。
+
+raw規則別：DoNotUseThreads57、UseConcurrentHashMap11、UseProperClassLoader3、AvoidSynchronizedStatement5、AvoidFieldNameMatchingMethodName1、CloseResource7、AvoidUsingOctalValues20、AvoidLiteralsInIfCondition13、NullAssignment4、ReturnEmptyCollectionRatherThanNull1、AvoidDuplicateLiterals2、AssignmentInOperand7、EmptyCatchBlock1。
+
+現時点で未分類132/適用数null。これは静的証跡の回収・独立照合成功であり、132指摘の合格でもStorage品質完了でもない。以後、native/process/Rootなど元TestのHOLDを維持したsource所有・独立数値oracle・資源解放のPG強化レビューで各siteを分類する。真の違反は修正前登録し、拒否対象の実行や新fixture置換をしない。未解決項目/未実行をPASSや実測coverageへ混ぜない。
+
+新PT/coverage/unique/whole/leaf加点0、438/Java334/whole94/正式1964PT-53scope/工数null・全HOLD不変。既Main静的や元成功Testを再演していない。
