@@ -254,8 +254,8 @@ final class EncryptedSecurityContextPortTest {
               java.util.concurrent.Future<
                   org.springframework.security.core.context.SecurityContext>>();
       for (int index = 0; index < 16; index++) jobs.add(workers.submit(deferred::get));
-      var expected = jobs.getFirst().get();
-      for (var job : jobs) assertSame(expected, job.get());
+      var expected = jobs.getFirst().get(10, java.util.concurrent.TimeUnit.SECONDS);
+      for (var job : jobs) assertSame(expected, job.get(10, java.util.concurrent.TimeUnit.SECONDS));
       assertEquals(actor(), expected.getAuthentication().getPrincipal());
     }
     assertEquals(1, frame.sessionReads);

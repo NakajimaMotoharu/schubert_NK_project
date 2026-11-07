@@ -1,0 +1,169 @@
+{
+  "programId": "NK-WEB-001",
+  "bug": "BUG-2434",
+  "ykt": "YKT-2177",
+  "testClasses": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
+      "originalSha256": "5b6b823ad0ea2d5a98b8f09711827b51c290c3ed44e04fb1615a3a37406dfa47",
+      "expectedWholeTests": 8,
+      "target": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfDeniedHandler.java",
+      "patches": [
+        {
+          "originalLine": 212,
+          "before": "job.get()",
+          "after": "job.get(10, java.util.concurrent.TimeUnit.SECONDS)"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java",
+      "originalSha256": "11dcc3cb60d7b6843dbd2875c9a0b9820a24a6d1fad02071c2feef4b94917913",
+      "expectedWholeTests": 8,
+      "target": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfFilterFactory.java",
+      "patches": [
+        {
+          "originalLine": 199,
+          "before": "job.get()",
+          "after": "job.get(10, java.util.concurrent.TimeUnit.SECONDS)"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
+      "originalSha256": "566ee1b11c9f69ab1adf9192d63bb7ded248d752882980daf8cff38da7d3ee8d",
+      "expectedWholeTests": 12,
+      "target": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository.java",
+      "patches": [
+        {
+          "originalLine": 257,
+          "before": "jobs.getFirst().get()",
+          "after": "jobs.getFirst().get(10, java.util.concurrent.TimeUnit.SECONDS)"
+        },
+        {
+          "originalLine": 258,
+          "before": "job.get()",
+          "after": "job.get(10, java.util.concurrent.TimeUnit.SECONDS)"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest.java",
+      "originalSha256": "7d05042b8d72d86e88adb4703a4ce7a3f0f5186cc7fcc56890a9d5dd7326d2c1",
+      "expectedWholeTests": 8,
+      "target": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository.java",
+      "patches": [
+        {
+          "originalLine": 195,
+          "before": "jobs.get(index).get()",
+          "after": "jobs.get(index).get(10, java.util.concurrent.TimeUnit.SECONDS)"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRouterPortTest.java",
+      "originalSha256": "1d204bd56bd055e8d19a14223a6dc4af17b74ea80e208f6defe6d835a27da5b6",
+      "expectedWholeTests": 8,
+      "target": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/InternalErrorDispatchRouter.java",
+      "patches": [
+        {
+          "originalLine": 231,
+          "before": "job.get()",
+          "after": "job.get(10, java.util.concurrent.TimeUnit.SECONDS)"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest.java",
+      "originalSha256": "546efa9b0597c0bc9e040af46fe205e9f5e9dbf9e1b39e0835e2c53b691762dd",
+      "expectedWholeTests": 8,
+      "target": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebInfrastructureFailureFilter.java",
+      "patches": [
+        {
+          "originalLine": 170,
+          "before": "job.get()",
+          "after": "job.get(10, java.util.concurrent.TimeUnit.SECONDS)"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SessionAuthenticationStrategyPortTest.java",
+      "originalSha256": "6fc89409d0c075cb793d101534461761f105a59849ed34aac38563c71bc7c391",
+      "expectedWholeTests": 6,
+      "target": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionAuthenticationStrategy.java",
+      "patches": [
+        {
+          "originalLine": 161,
+          "before": "job.get()",
+          "after": "job.get(10, java.util.concurrent.TimeUnit.SECONDS)"
+        }
+      ]
+    }
+  ],
+  "totalWholeTests": 58,
+  "newUniqueTests": 0,
+  "retainedWholeTargetSources": 7,
+  "targetPhysical": {
+    "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository": "bc7d9aa5eb0a37eb90c641a823bd78ec18d306525f177e193dd95bfdc0e63d21",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository": "9de65e26b226e8713357ed1da0a0860ffb49bfc1ff1f85ed6d210e2bbf94b40b",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository$Deferred": "54ebeda02aaf3e707902ca1cb079e7d6391b52016672c4da3cc7523effc8c0ba",
+    "dev/codex/schubert/nk/web/security/EncryptedSessionAuthenticationStrategy": "3583a4c7192857fa3d9a4fa2be0616324609c08c48055642f48f4d5a6d480eb5",
+    "dev/codex/schubert/nk/web/security/WebCsrfDeniedHandler": "b83283303a54f9ca7823a483b67377d1059a744851160a53e393c9295002b2b2",
+    "dev/codex/schubert/nk/web/security/WebCsrfFilterFactory": "faaee73e45055ec546baecd0cdd599532082d308105521af6f428ada7407cb8d",
+    "dev/codex/schubert/nk/web/security/WebInfrastructureFailureFilter": "613bd9c7cd169b4c24a1d9ef96c4c02347c09c707444f044844164ef5047e8d0",
+    "dev/codex/schubert/nk/web/security/InternalErrorDispatchRouter": "31e41cb8710a61626aaa22397f4deba9fd733336fa9b25a2c7a72b11eff64f2b"
+  },
+  "priorQualifications": [
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21164-csrf-session-eight-v1/manifest.json",
+      "sha256": "7501be679d4af7f6a3cff669206b112452bdfaf80a3a707cd8da3e506edebe41",
+      "tests": 8,
+      "testSource": "f07d3e507a31dd8103caca3f395a99defa913c39"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21188-security-context-twelve-v1/manifest.json",
+      "sha256": "cdaeebc0e0fb7da58772b7e0e79598a7107fab82c981ae1ebbcf0d4d758b5af9",
+      "tests": 12,
+      "testSource": "fa8c9337018b933f6616bd99be57f009c94c947e"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21222-session-strategy-six-v1/manifest.json",
+      "sha256": "311fab066dc75e0a2e90dcf7f073a05b01ee41b5e8ed94a92af0a926fd4545e3",
+      "tests": 6,
+      "testSource": "2cd33c9f358c63a6586136a71cebc37ab251a7d8"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21248-csrf-denied-eight-v1/manifest.json",
+      "sha256": "620d2e1cb9943e8195e58bd475b46df9baeb62d8cb013eedfa0781fccaa1fe59",
+      "tests": 8,
+      "testSource": "005cb84da4c67f5dbd92e62d309cd43226970abb"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21290-csrf-filter-factory-eight-v1/manifest.json",
+      "sha256": "0a352e8d4cb8ea312fd370ae39e3af408ee95d8c30deed337e7073a08cf22c38",
+      "tests": 8,
+      "testSource": "42b6ab8685ecfa8d52675ddd7f740780b202cfd8"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21316-infrastructure-filter-eight-v1/manifest.json",
+      "sha256": "d1cdbc14aa7c6f2595ee9cc972c976b79770671537a38488941cdb4406592f16",
+      "tests": 8,
+      "testSource": "f39b516b76e1fb08bcc2afd248c50475c3dc7191"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21342-error-router-eight-v1/manifest.json",
+      "sha256": "19cc343f763b829f794d1dce7b16d3ce90bccbde1696b3b8d6952d0d09e5a08b",
+      "tests": 8,
+      "testSource": "2557ad77595ed5fa5d6af0f8bcfbab794fcce11c"
+    }
+  ],
+  "support": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java",
+    "sha256": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8"
+  },
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+  "preflight": "ALL_SEVEN_EXISTING_WHOLE_PORT_SCOPES; exact Test bytes and target physical match prior; no new fixture or held backend Test extraction",
+  "runtimeAllowedGraph": "Same original owned Mock Servlet/public supplied DTO/local SessionStoreException graph only. Real authentication, token/nonce/session ID generation, crypto, DB/JMS, Root/native, guarded four excluded.",
+  "formalUpdated": false
+}

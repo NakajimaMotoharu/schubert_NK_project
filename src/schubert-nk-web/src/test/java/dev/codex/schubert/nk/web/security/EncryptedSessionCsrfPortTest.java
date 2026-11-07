@@ -192,7 +192,9 @@ final class EncryptedSessionCsrfPortTest {
                 }));
       }
       for (int index = 0; index < jobs.size(); index++)
-        assertEquals(index % 2 == 0 ? VALUE : OTHER, jobs.get(index).get());
+        assertEquals(
+            index % 2 == 0 ? VALUE : OTHER,
+            jobs.get(index).get(10, java.util.concurrent.TimeUnit.SECONDS));
     }
   }
 

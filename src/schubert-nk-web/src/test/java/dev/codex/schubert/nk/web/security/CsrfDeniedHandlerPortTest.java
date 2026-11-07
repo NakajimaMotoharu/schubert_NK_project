@@ -209,7 +209,7 @@ final class CsrfDeniedHandlerPortTest {
                 }));
       }
       var ids = new HashSet<String>();
-      for (var job : jobs) assertTrue(ids.add(job.get()));
+      for (var job : jobs) assertTrue(ids.add(job.get(10, java.util.concurrent.TimeUnit.SECONDS)));
       assertEquals(8, ids.size());
     }
     assertNull(SecurityContextHolder.getContext().getAuthentication());

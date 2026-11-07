@@ -228,7 +228,7 @@ final class ErrorDispatchRouterPortTest {
                   return null;
                 }));
       }
-      for (var job : jobs) job.get();
+      for (var job : jobs) job.get(10, java.util.concurrent.TimeUnit.SECONDS);
     }
   }
 

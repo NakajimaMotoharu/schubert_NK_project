@@ -158,7 +158,7 @@ final class SessionAuthenticationStrategyPortTest {
                   assertSame(authentication.getPrincipal(), frame.assigned);
                   assertEquals(List.of(OWNER, SESSION, WRITE), frame.events);
                 }));
-      for (var job : jobs) job.get();
+      for (var job : jobs) job.get(10, java.util.concurrent.TimeUnit.SECONDS);
     }
   }
 
