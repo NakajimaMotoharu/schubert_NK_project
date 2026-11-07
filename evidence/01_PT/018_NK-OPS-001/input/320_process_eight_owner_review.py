@@ -1,0 +1,33 @@
+"""Eight existing process start contracts from public source only; no Process created or controlled."""
+from pathlib import Path
+import datetime,hashlib,json,subprocess
+R=Path(__file__).resolve().parents[4];B=R/'evidence/01_PT/018_NK-OPS-001';RUNS=R.parent/'pgpt-runs/PG379';BASE=B/'evidence/PG23014-storage-ten-wait-independent-v1/manifest.json';PRE=RUNS/'pg23010-storage-ten-wait-prepare-v1';OUT=B/'evidence/PG23020-process-eight-source-owner-review-v1';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();load=lambda p:json.loads(Path(p).read_bytes())
+METHODS={'LinuxExecDescriptorsTest.java':('opsXfd008RealExecInheritsSameFlockUntilProcessExit',['child','competitor','after']),'LinuxFileLockTest.java':None,'LinuxInodeSecurityTest.java':('setAcl',['process']),'LinuxProcessExecTest.java':('opsExec008ActualReplacementKeepsPidAndOnlyPreparedEnvironment',['child']),'LinuxStartupFileLockTest.java':('external',['child'])}
+def main():
+ assert not OUT.exists();assert sha(BASE)=='78c8f917ae2961b5f23dce614c9a59a0d47084d5b2a48ac0f09c50a15d617c04';base=load(BASE);assert base['actualExit']==0;h=base['currentStorage29']['currentInputHashes'];assert len(h)==29;pre=load(PRE/'manifest.json');assert pre['actualExit']==0;methods=[]
+ for line in (PRE/'parse.stdout').read_text().splitlines():
+  n,owner,method,start,end=line.split('\t');methods.append(dict(path=n,owner=owner,method=method,beginline=int(start),endline=int(end)))
+ candidates=[]
+ for n,value in h.items():
+  assert n.startswith('src/schubert-nk-storage/src/test/java/') and not any(x in n for x in ['RootFailedStart','SnapshotKeyCloseWitness','pg9892_']) and sha(R/n)==value
+  for i,line in enumerate((R/n).read_text().splitlines(),1):
+   if 'new ProcessBuilder(' in line:candidates.append(dict(path=n,line=i,sourceSha256=value))
+ assert len(candidates)==8 and len({v['path'] for v in candidates})==5;rows=[];scopeKeys=set();ordinals={}
+ for v in candidates:
+  n=v['path'];name=Path(n).name;assert n in pre['currentHashes'] and pre['currentHashes'][n]==h[n];matches=[s for s in methods if s['path']==n and s['beginline']<=v['line']<=s['endline']];assert len(matches)==1;scope=matches[0];lines=(R/n).read_text().splitlines();body='\n'.join(lines[scope['beginline']-1:scope['endline']]);scopeKey=n+'#'+scope['method'];scopeKeys.add(scopeKey);ordinal=ordinals.get(scopeKey,0);ordinals[scopeKey]=ordinal+1
+  if name=='LinuxFileLockTest.java':assert scope['method'] in ['externalFlockInteroperability','external'];variable='child'
+  else:
+   expected,names=METHODS[name];assert scope['method']==expected;variable=names[ordinal]
+  if name=='LinuxExecDescriptorsTest.java' and variable in ['competitor','after']:
+   category='LOCAL_SECONDARY_CHILD_NO_FAILURE_FINALLY';wait=variable+'.waitFor(5, TimeUnit.SECONDS)';cleanup='NONE';gap='Timeout/assertion failure skips local cleanup. Main child finally does not own this separate Process.'
+  elif name=='LinuxInodeSecurityTest.java':
+   category='LOCAL_ACL_CHILD_FORCE_REQUEST_WITHOUT_JOIN';wait='process.waitFor(5, TimeUnit.SECONDS)';cleanup='process.destroyForcibly();';gap='Finally issues force request only; API does not imply immediate terminal. Failure exit not reaped; output stream owner remains a review requirement.'
+  else:
+   category='LOCAL_CHILD_DESTROY_REQUEST_WITHOUT_POST_EXIT';wait='child.waitFor('+('10' if name=='LinuxProcessExecTest.java' else '5')+', TimeUnit.SECONDS)';cleanup='if (child.isAlive()) child.destroy();';gap='Normal body waits and exitValue are finite success oracles. Failure finally only requests destroy, without post-exit confirmation.'
+   if name=='LinuxExecDescriptorsTest.java' or name=='LinuxFileLockTest.java' and scope['method']=='externalFlockInteroperability':gap+=' Process starts before stream/executor resource acquisition; inner finally is not yet entered if acquisition fails. Cleanup must cover immediately after start and precede blocking reader/executor close.'
+  assert wait in body and 'exitValue()' in body and '.start()' in body
+  if cleanup!='NONE':assert cleanup in body
+  helperReturn='INT_EXIT_VALUE_NOT_PROCESS' if scope['method']=='external' else 'VOID_NO_PROCESS_TRANSFER';assert 'return child;' not in body and 'return process;' not in body
+  rows.append(dict(candidateId='PC'+str(len(rows)+1).zfill(2),**v,methodScope=scope,methodBodySha256=hashlib.sha256(body.encode()).hexdigest(),processVariable=variable,builderOccurrenceInMethod=ordinal+1,ownership='METHOD_LOCAL_NOT_TRANSFERRED',returnContract=helperReturn,normalFiniteWait=wait,existingFailureCleanup=cleanup,classification='CONFIRMED_SOURCE_OWNER_REMEDIATION_REQUIRED',category=category,sourceDefect=gap,requiredRemedy=['Cover start-to-scope-acquisition failures for this exact Process handle.','On failed/unfinished child, request owned termination then finite wait and retain unconfirmed terminal as failure, never success.','Ensure original streams/executor unwind after termination attempt, preserve caller interrupt and original failure/suppression.','Retain original command/argv/environment/public PID-flock-ACL oracle and success exit checks.'],runtimeValidated=False))
+ assert len(rows)==8 and len(scopeKeys)==6;OUT.mkdir();out=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),source=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),productionCoreMain=base['productionCoreMain'],baseline=dict(path=str(BASE.relative_to(R)),sha256=sha(BASE)),reusedParse=dict(path=str((PRE/'manifest.json')),sha256=sha(PRE/'manifest.json'),stdoutSha256=sha(PRE/'parse.stdout')),sourceHashes=h,candidates=rows,owningTestClasses=5,owningMethods=6,allCandidatesLocallyOwned=True,newlyConfirmedCandidates=3,sourceChanged=False,ruleConfigurationChanged=False,productTestsExecuted=0,originalTestsCompiled=False,parserRerun=False,actualProcessStartDestroyWaitRecovery=False,originalNativeTestsRun=False,ptPassCount=None,coverage=None,newProductTests=0,newSourceProofs=0,newAcceptance=0,wholeF03Accepted=False,whole451Accepted=False,effortRate=None,bug='BUG-2467',ykt='YKT-2205',primaryApi=dict(url='https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Process.html#destroyForcibly()',contract='A termination request can return before the process is no longer alive; waitFor/onExit confirms exit. Streams retain resources until closed/unreferenced. Source remedy must not claim actual exit here.'),producer=dict(path=str(Path(__file__).relative_to(R)),sha256=sha(__file__)));(OUT/'manifest.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,candidates=8,classes=5,methods=6,newlyConfirmed=3,actualProcessActions=0)))
+if __name__=='__main__':main()
