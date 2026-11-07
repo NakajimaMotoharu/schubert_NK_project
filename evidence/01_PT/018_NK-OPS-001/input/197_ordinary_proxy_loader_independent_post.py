@@ -8,7 +8,7 @@ import pg9666_pagination_static as c
 R=Path(__file__).resolve().parents[4];RUNS=R.parent/'pgpt-runs/PG379'
 P=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG22392-ordinary-proxy-loader93-v1'
 BASE=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG22382-ordinary85-test-static-v1'
-OUT=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG22394-ordinary-proxy-loader93-independent-v1';SLOT=RUNS/'pg22394-ordinary-proxy-loader93-independent-v1'
+OUT=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG22398-ordinary-proxy-loader93-independent-v2';SLOT=RUNS/'pg22398-ordinary-proxy-loader93-independent-v2'
 sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
 load=lambda p:json.loads(Path(p).read_bytes())
 def main():
@@ -17,8 +17,8 @@ def main():
         assert not any(x in name for x in ['RootFailedStart','SnapshotKeyCloseWitness','pg9892_']) and '/src/test/java/' in name
         assert sha(R/name)==h==hashlib.sha256(subprocess.check_output(['git','show',m['source']+':'+name],cwd=R)).hexdigest()
     tool=R/'evidence/01_PT/018_NK-OPS-001/input/198_TestProxyLoaderAstCheck.java';head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip();assert hashlib.sha256(subprocess.check_output(['git','show',head+':'+str(tool.relative_to(R))],cwd=R)).hexdigest()==sha(tool)
-    SLOT.mkdir();(SLOT/'classes').mkdir();c.SLOT=SLOT;jdk=R.parent/'toolchain/jdk-25.0.4/bin';stages={}
-    stages['tool-javac']=c.step('tool-javac',[str(jdk/'javac'),'-proc:none','-encoding','UTF-8','-Xlint:all','-Werror','-d',str(SLOT/'classes'),str(tool)],R);assert stages['tool-javac']['actualExit']==0
+    SLOT.mkdir();(SLOT/'classes').mkdir();(SLOT/'source').mkdir();mirror=SLOT/'source/TestProxyLoaderAstCheck.java';mirror.write_bytes(tool.read_bytes());assert sha(mirror)==sha(tool);c.SLOT=SLOT;jdk=R.parent/'toolchain/jdk-25.0.4/bin';stages={}
+    stages['tool-javac']=c.step('tool-javac',[str(jdk/'javac'),'-proc:none','-encoding','UTF-8','-Xlint:all','-Werror','-d',str(SLOT/'classes'),str(mirror)],R);assert stages['tool-javac']['actualExit']==0
     stages['parse']=c.step('parse',[str(jdk/'java'),'-cp',str(SLOT/'classes'),'TestProxyLoaderAstCheck',str(R),*sorted(m['inputHashes'])],R,timeout=120);assert stages['parse']['actualExit']==0 and not stages['parse']['timedOut']
     ast={}
     for line in (SLOT/'parse.stdout').read_text().splitlines():
@@ -33,6 +33,6 @@ def main():
     OUT.mkdir();files={}
     for name in ['tool-javac.stdout','tool-javac.stderr','tool-javac-exit.safe.json','parse.stdout','parse.stderr','parse-exit.safe.json']:
         data=(SLOT/name).read_bytes();(OUT/name).write_bytes(data);files[name]=sha(OUT/name)
-    result=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),source=m['source'],productionCoreMain=m['productionCoreMain'],originalClassificationManifest=dict(path=str((P/'manifest.json').relative_to(R)),sha256=sha(P/'manifest.json')),rawManifest=m['originalManifest'],targetSites=93,independentlyParsedAstSites=93,newIndividualClassifications=93,rawSitesRetained=347,subsetUnclassifiedAfter=254,productTestsExecuted=0,newProductTests=0,newSourceProofs=0,newAcceptance=0,sourceBytesUnchanged=True,ruleConfigurationChanged=False,suppressionAdded=False,wholeF03Accepted=False,whole451Accepted=False,effortRate=None,stages=stages,files=files,tool=dict(path=str(tool.relative_to(R)),sha256=sha(tool)),verifier=dict(path=str(Path(__file__).relative_to(R)),sha256=sha(__file__),source=head))
+    result=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),source=m['source'],productionCoreMain=m['productionCoreMain'],originalClassificationManifest=dict(path=str((P/'manifest.json').relative_to(R)),sha256=sha(P/'manifest.json')),rawManifest=m['originalManifest'],targetSites=93,independentlyParsedAstSites=93,newIndividualClassifications=93,rawSitesRetained=347,subsetUnclassifiedAfter=254,productTestsExecuted=0,newProductTests=0,newSourceProofs=0,newAcceptance=0,sourceBytesUnchanged=True,ruleConfigurationChanged=False,suppressionAdded=False,wholeF03Accepted=False,whole451Accepted=False,effortRate=None,stages=stages,files=files,tool=dict(path=str(tool.relative_to(R)),sha256=sha(tool),mirrorPath=str(mirror),mirrorSha256=sha(mirror)),verifier=dict(path=str(Path(__file__).relative_to(R)),sha256=sha(__file__),source=head))
     (OUT/'manifest.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,astSites=93,classified=93,remaining=254,manifestSha256=sha(OUT/'manifest.json'))))
 if __name__=='__main__':main()
