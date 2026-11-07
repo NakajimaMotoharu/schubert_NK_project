@@ -1,0 +1,107 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T09:53:53.638065+09:00",
+  "source": "db91036a8df7b18c605beb6a03eb4f380b03182f",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "jar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar",
+    "sha256": "1d816c9e5510723a10dfde2b19a8ddc9c5423d425039b891eb497d3b6e963fdb"
+  },
+  "stages": {
+    "budget": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T00:53:52.537778+00:00",
+      "endUTC": "2026-11-07T00:53:52.802712+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-J-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22096-api-stop-state-bytecode-format-v1/budget-init.stdout",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar",
+        "-p",
+        "-c",
+        "-s",
+        "dev.codex.schubert.nk.api.bootstrap.ApiStopBudget"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "c843220f98440c4e073d7d1c3e7838b2cea69314b9af0a7b6bda0f74ad687838",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "lifetime": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T00:53:52.803844+00:00",
+      "endUTC": "2026-11-07T00:53:53.068876+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-J-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22096-api-stop-state-bytecode-format-v1/lifetime-init.stdout",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar",
+        "-p",
+        "-c",
+        "-s",
+        "dev.codex.schubert.nk.api.bootstrap.ApiProcessLifetime"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "5418f97c5010dfc173e23106b05d69eef66821d3b13aa53264c12c567d53ae41",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "format": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T00:53:53.070037+00:00",
+      "endUTC": "2026-11-07T00:53:53.636118+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/googlejavaformat/google-java-format/1.36.1/google-java-format-1.36.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/guava/guava/33.5.0-jre/guava-33.5.0-jre.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/commonmark/commonmark/0.28.0/commonmark-0.28.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/commonmark/commonmark-ext-gfm-tables/0.28.0/commonmark-ext-gfm-tables-0.28.0.jar",
+        "com.google.googlejavaformat.java.Main",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudget.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "files": {
+    "budget-begin.safe.json": "091d9ac9f6b69d78fc3dcc8e469c46c3995928edec74fdf62a7623d28a93e228",
+    "lifetime-process.safe.json": "53eaa869d27b5c5c21dae4933cd0c31901f0640e826f0eca9fabef2bb6cb696a",
+    "lifetime-init.stdout": "4483052dca65712d64a07e011590d7eafb0beb1a76989a2ac82ecc8c2d43be44",
+    "lifetime-exit.safe.json": "05f95c8a234d92ddee8c521293a6d394618ab7ac4ca2b747ca787edc2528eef1",
+    "lifetime.stdout": "5418f97c5010dfc173e23106b05d69eef66821d3b13aa53264c12c567d53ae41",
+    "format.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "budget-process.safe.json": "25300274463ec827883a51b90c5ae866f6857d9096b8f862952614ac39450c20",
+    "lifetime-begin.safe.json": "ab6ce5a203979aa0cd6dd10bbb6cdcbe722ed089b5eeb975212208d6607846b0",
+    "format-process.safe.json": "bf0b51fb5595cba458b9883821397e2138eaac79fb0042b5cb028c2f19208263",
+    "format-begin.safe.json": "dab708212d47625bab0d95f8d9f195d357944b2d28c4db509555f7f40aacb01d",
+    "lifetime.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "format.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "format-exit.safe.json": "426459c3abdd0292fe4fa8fe44f6bd3c27c9a8b3c4a763d93cee242883132563",
+    "budget.stdout": "c843220f98440c4e073d7d1c3e7838b2cea69314b9af0a7b6bda0f74ad687838",
+    "budget-exit.safe.json": "9134b47b13554dfd4e9d1ac81b9a961cae19af664fa64e8a1473f103308b1ba1",
+    "budget.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "budget-init.stdout": "1af1cde51b2acf73e9c062807a3c0926f47ba7eb88ba273630500f3adf850833"
+  },
+  "sourceInputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudget.java": "295ea9fd574937e40a600e5213077466774b712cc9a0425a9ec2c887880e6f55",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime.java": "7067db22f9b001ec76e5ccaf5eed6c4022baab51a7f889795d5c64da74684165",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a"
+  },
+  "firstClaimBeforeClock": true,
+  "sameClaimPublishedThroughBudget": true,
+  "remainingUnderOriginalLock": true,
+  "productInitialisations": 0,
+  "productTestsExecuted": 0,
+  "callerDynamicStatus": "NOT_RUN_HOLD",
+  "whole451Accepted": false
+}

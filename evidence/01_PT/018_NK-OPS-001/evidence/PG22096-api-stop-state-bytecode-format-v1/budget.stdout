@@ -1,0 +1,194 @@
+Compiled from "ApiStopBudget.java"
+final class dev.codex.schubert.nk.api.bootstrap.ApiStopBudget {
+  private static final long LIMIT_NANOS;
+    descriptor: J
+
+  private final java.lang.Object lock;
+    descriptor: Ljava/lang/Object;
+
+  private final java.util.function.LongSupplier nanos;
+    descriptor: Ljava/util/function/LongSupplier;
+
+  private final java.util.concurrent.atomic.AtomicBoolean begun;
+    descriptor: Ljava/util/concurrent/atomic/AtomicBoolean;
+
+  private boolean expired;
+    descriptor: Z
+
+  private long began;
+    descriptor: J
+
+  dev.codex.schubert.nk.api.bootstrap.ApiStopBudget(java.util.function.LongSupplier);
+    descriptor: (Ljava/util/function/LongSupplier;)V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #2                  // class java/lang/Object
+         8: dup
+         9: invokespecial #1                  // Method java/lang/Object."<init>":()V
+        12: putfield      #7                  // Field lock:Ljava/lang/Object;
+        15: aload_0
+        16: new           #13                 // class java/util/concurrent/atomic/AtomicBoolean
+        19: dup
+        20: invokespecial #15                 // Method java/util/concurrent/atomic/AtomicBoolean."<init>":()V
+        23: putfield      #16                 // Field begun:Ljava/util/concurrent/atomic/AtomicBoolean;
+        26: aload_0
+        27: aload_1
+        28: ldc           #20                 // String API stop monotonic clock
+        30: invokestatic  #22                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        33: checkcast     #28                 // class java/util/function/LongSupplier
+        36: putfield      #30                 // Field nanos:Ljava/util/function/LongSupplier;
+        39: return
+
+  void begin();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field lock:Ljava/lang/Object;
+         4: dup
+         5: astore_1
+         6: monitorenter
+         7: aload_0
+         8: getfield      #16                 // Field begun:Ljava/util/concurrent/atomic/AtomicBoolean;
+        11: invokevirtual #34                 // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+        14: ifeq          20
+        17: aload_1
+        18: monitorexit
+        19: return
+        20: aload_0
+        21: getfield      #16                 // Field begun:Ljava/util/concurrent/atomic/AtomicBoolean;
+        24: iconst_1
+        25: invokevirtual #38                 // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+        28: aload_0
+        29: aload_0
+        30: invokevirtual #42                 // Method time:()J
+        33: putfield      #46                 // Field began:J
+        36: aload_1
+        37: monitorexit
+        38: goto          46
+        41: astore_2
+        42: aload_1
+        43: monitorexit
+        44: aload_2
+        45: athrow
+        46: return
+      Exception table:
+         from    to  target type
+             7    19    41   any
+            20    38    41   any
+            41    44    41   any
+
+  boolean stopping();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #16                 // Field begun:Ljava/util/concurrent/atomic/AtomicBoolean;
+         4: invokevirtual #34                 // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+         7: ireturn
+
+  long remainingNanos();
+    descriptor: ()J
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field lock:Ljava/lang/Object;
+         4: dup
+         5: astore_1
+         6: monitorenter
+         7: aload_0
+         8: getfield      #16                 // Field begun:Ljava/util/concurrent/atomic/AtomicBoolean;
+        11: invokevirtual #34                 // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+        14: ifne          27
+        17: new           #50                 // class java/lang/IllegalStateException
+        20: dup
+        21: ldc           #52                 // String API stop budget not begun
+        23: invokespecial #54                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        26: athrow
+        27: aload_0
+        28: getfield      #57                 // Field expired:Z
+        31: ifeq          38
+        34: lconst_0
+        35: aload_1
+        36: monitorexit
+        37: lreturn
+        38: aload_0
+        39: invokevirtual #42                 // Method time:()J
+        42: aload_0
+        43: getfield      #46                 // Field began:J
+        46: lsub
+        47: lstore_2
+        48: lload_2
+        49: lconst_0
+        50: lcmp
+        51: iflt          62
+        54: lload_2
+        55: getstatic     #61                 // Field LIMIT_NANOS:J
+        58: lcmp
+        59: iflt          71
+        62: aload_0
+        63: iconst_1
+        64: putfield      #57                 // Field expired:Z
+        67: lconst_0
+        68: aload_1
+        69: monitorexit
+        70: lreturn
+        71: getstatic     #61                 // Field LIMIT_NANOS:J
+        74: lload_2
+        75: lsub
+        76: aload_1
+        77: monitorexit
+        78: lreturn
+        79: astore        4
+        81: aload_1
+        82: monitorexit
+        83: aload         4
+        85: athrow
+      Exception table:
+         from    to  target type
+             7    37    79   any
+            38    70    79   any
+            71    78    79   any
+            79    83    79   any
+
+  private long time();
+    descriptor: ()J
+    Code:
+         0: iconst_0
+         1: istore_1
+         2: aload_0
+         3: getfield      #30                 // Field nanos:Ljava/util/function/LongSupplier;
+         6: invokeinterface #64,  1           // InterfaceMethod java/util/function/LongSupplier.getAsLong:()J
+        11: lstore_2
+        12: iconst_1
+        13: istore_1
+        14: lload_2
+        15: lstore        4
+        17: iload_1
+        18: ifne          26
+        21: aload_0
+        22: iconst_1
+        23: putfield      #57                 // Field expired:Z
+        26: lload         4
+        28: lreturn
+        29: astore        6
+        31: iload_1
+        32: ifne          40
+        35: aload_0
+        36: iconst_1
+        37: putfield      #57                 // Field expired:Z
+        40: aload         6
+        42: athrow
+      Exception table:
+         from    to  target type
+             2    17    29   any
+            29    31    29   any
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: getstatic     #67                 // Field java/util/concurrent/TimeUnit.SECONDS:Ljava/util/concurrent/TimeUnit;
+         3: ldc2_w        #73                 // long 60l
+         6: invokevirtual #75                 // Method java/util/concurrent/TimeUnit.toNanos:(J)J
+         9: putstatic     #61                 // Field LIMIT_NANOS:J
+        12: return
+}

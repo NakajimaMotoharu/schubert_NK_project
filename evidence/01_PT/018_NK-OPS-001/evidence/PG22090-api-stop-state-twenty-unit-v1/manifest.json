@@ -1,0 +1,361 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T09:53:03.772409+09:00",
+  "source": "db91036a8df7b18c605beb6a03eb4f380b03182f",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "begin": {
+    "source": "db91036a8df7b18c605beb6a03eb4f380b03182f",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "normalManifest": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/manifest.safe.json",
+      "sha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27"
+    },
+    "inputHashes": {
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudget.java": "295ea9fd574937e40a600e5213077466774b712cc9a0425a9ec2c887880e6f55",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "evidence/01_PT/018_NK-OPS-001/input/169_api_stop_state_twenty_qualifier.py": "37b9364806a9a45735fb7507dd68a937672b94ebba8bed8a1c7fc4e84492c621"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar": "1d816c9e5510723a10dfde2b19a8ddc9c5423d425039b891eb497d3b6e963fdb"
+    },
+    "toolHashes": {
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1",
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1",
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac": "2136da000c36cd6ea5e714ecf8ea7fb4e41f29c75849b6b7e62531373b91a3b1"
+    },
+    "testsExpected": 20,
+    "newUniqueTests": 2,
+    "existingCasesRequalified": 18,
+    "selectedClass": "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+    "session": "PG22090-API-STOP-ATOMIC20",
+    "manualCoverageExclusions": [],
+    "oldExecUnion": false,
+    "independence": "Whole original pure ApiStopBudgetTest/Fixture; only JDK primitives and own bounded threads; no ApiProcessLifetime or external runtime construction"
+  },
+  "stages": {
+    "compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T00:52:59.819833+00:00",
+      "endUTC": "2026-11-07T00:53:00.936716+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22090-api-stop-state-twenty-unit-v1/classes",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T00:53:00.937085+00:00",
+      "endUTC": "2026-11-07T00:53:03.167028+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22090-api-stop-state-twenty-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22090-api-stop-state-twenty-unit-v1/class-init.stdout",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22090-api-stop-state-twenty-unit-v1/jacoco.exec,sessionid=PG22090-API-STOP-ATOMIC20,append=false",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22090-api-stop-state-twenty-unit-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22090-api-stop-state-twenty-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--config",
+        "junit.jupiter.execution.parallel.enabled=false",
+        "--config",
+        "junit.jupiter.extensions.autodetection.enabled=false",
+        "--select-class",
+        "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "ea00351b1cb209c91cb7f2444070f32163d83a6784537a91bd14187ccde0e6b0",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T00:53:03.174763+00:00",
+      "endUTC": "2026-11-07T00:53:03.390409+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22090-api-stop-state-twenty-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22090-api-stop-state-twenty-unit-v1/component",
+        "--sourcefiles",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22090-api-stop-state-twenty-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "2dd439a6e3c278358a6b41fe9eadbd5bff2abfe27468e46988ca624a3a9817e2",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T00:53:03.390875+00:00",
+      "endUTC": "2026-11-07T00:53:03.606078+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22090-api-stop-state-twenty-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e947bfd6c644bbdc9faa84c53eed6d900b698a82935a697b00a66810aa5949d0",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T00:53:03.606471+00:00",
+      "endUTC": "2026-11-07T00:53:03.771287+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22090-api-stop-state-twenty-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "1442869eb761049e6682aecbd486b7afb5378d1d656081c6ac2a2c3ab8d4b9ee",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "tests": 20,
+  "newUniqueTests": 2,
+  "requalifiedExistingTests": 18,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "cases": [
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop001()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop012()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop011()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop010()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop005()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop016()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop004()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop015()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop020FailedFirstClockKeepsThePublishedStopAndExhaustedBudget()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop003()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop014()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop002()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop013()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop009()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop008()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop007()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop018()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop006()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop017()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ApiStopBudgetTest",
+      "apiStop019AtomicClaimPublishesStopAndWaitsForTheFirstClock()"
+    ]
+  ],
+  "coverage": {
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudget": {
+      "INSTRUCTION": {
+        "covered": 117,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 12,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 26,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 12,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 6,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "fourCounters": {
+    "LINE": {
+      "covered": 26,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 6,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 12,
+      "missed": 0
+    }
+  },
+  "physical": {
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudget": "ac8cd8450bf1b6ccfc4a7f92d9ea3dc3cb433313e5869f30eeb121fb0d2bb480"
+  },
+  "classIds": [
+    [
+      "aac04d643a58f83d",
+      "dev/codex/schubert/nk/api/bootstrap/ApiStopBudget"
+    ]
+  ],
+  "session": "PG22090-API-STOP-ATOMIC20",
+  "initialisedProduct": [
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudget",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$$Lambda+0x000000009a148230",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$$Lambda+0x000000009a148460",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$$Lambda+0x000000009a148690",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$$Lambda+0x000000009a1488c0",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$$Lambda+0x000000009a148af0",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$$Lambda+0x000000009a148d20",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$$Lambda+0x000000009a149400",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$$Lambda+0x000000009a149800",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$$Lambda+0x000000009a149a30",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$$Lambda+0x000000009a149c60",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$$Lambda+0x000000009a150000",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$$Lambda+0x000000009a150230",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$$Lambda+0x000000009a150460",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$$Lambda+0x000000009a150690",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$$Lambda+0x000000009a1508c0",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$$Lambda+0x000000009a150ae8",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$Fixture",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$Fixture$$Lambda+0x000000009a0b4c28",
+    "dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest$Fixture$$Lambda+0x000000009a148000"
+  ],
+  "heldFourInitialisations": 0,
+  "callerTests": "ApiProcessLifetimeTest NOT_RUN_HOLD",
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "effortRate": null,
+  "originalManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22090-api-stop-state-twenty-unit-v1/manifest.json",
+    "sha256": "d3b640c6eadf25dd4ff0b907d8dd0995da82e6785cab52ca1573f6331255572a"
+  },
+  "files": {
+    "compile-exit.safe.json": "e5468a410a2e4af028a441be204444fd11e9f07a53e85399f4cad2d8a9794002",
+    "classinfo-begin.safe.json": "7cadbcb111dbe7ce8e00e2d98cf57dfcefde4c19c5076944c416a790a8dca291",
+    "compile.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "coverage.stdout": "2dd439a6e3c278358a6b41fe9eadbd5bff2abfe27468e46988ca624a3a9817e2",
+    "compile-begin.safe.json": "7682fc0ed3d01c286b97e6a65e1825d4897127ea6938658c7646a8d83ec80d6a",
+    "execinfo-begin.safe.json": "704f0dee15dd7ec667224feb3e72f490b5976b71788e26de22f2e428561b9a65",
+    "compile-process.safe.json": "79a214b26aa06ddf1b84e370e26965ce62155c32848a3db2b12ee57d89b705e7",
+    "coverage-exit.safe.json": "b1fb259e3a7606616e511e19a59b8fc6fdfb7451088ffc7b92171d020e06b452",
+    "class-init.stdout": "6146fe7c378b0e62c3d5972c7e4aacc74e8944fd0dbe4f92e1aac10acf41aebe",
+    "classinfo-exit.safe.json": "5393675ddb6c064a36637dd44b0ae32073cb681c7791825fe1c7ef64716ada66",
+    "unit-begin.safe.json": "58c997ad70d8987cfbba7d04d7c014bbef76ae7aec6fcf8f0d528d81c873d6e7",
+    "unit-process.safe.json": "debc61bc0913f5f8840893bc2849ad9b5d699f56d98f44c1b78a6a003259d16d",
+    "coverage-begin.safe.json": "960058f56d4aced5c6d3072085a5a486c8fd5e77a60492f12d30c4cbc896b9ff",
+    "classinfo.stdout": "e947bfd6c644bbdc9faa84c53eed6d900b698a82935a697b00a66810aa5949d0",
+    "compile.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "execinfo-process.safe.json": "afa6893a8683a8c161c443006dfe7f8821ded4e02698be9d6a588571e0e9bff1",
+    "coverage.xml": "c944a53199f95322403b895e2c56d2fb2a5a59d7bc09adb40a1d1084222cc9e5",
+    "coverage-process.safe.json": "30f9162f90b2a761f90eb4f47d505605083ec12c9919fc01634da1237372ba95",
+    "execinfo-exit.safe.json": "c8b851e8a3e831be022d33bd767c6713a1eb2f46052b17e496a9773b44823af6",
+    "execinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "jacoco.exec": "73d3738aa336304a221d2807a048ea1850e95b6b13c9d7e53245ee35b5611779",
+    "execinfo.stdout": "1442869eb761049e6682aecbd486b7afb5378d1d656081c6ac2a2c3ab8d4b9ee",
+    "begin.json": "d12df30f85d3e79ba4b3008351694eff927dd25675308cc975821dfc672d355a",
+    "unit-exit.safe.json": "1e0c586d0a5fbdf7f5696fdeecd4f2394abc174b3b9c7c9f19aa0e8961c1c797",
+    "classinfo-process.safe.json": "68fe6c2fff4c79d20bc1e92fec7c1e24e5e0f92fa659198208c65d5a38275581",
+    "unit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-manifest.json": "d3b640c6eadf25dd4ff0b907d8dd0995da82e6785cab52ca1573f6331255572a",
+    "classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "coverage.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit.stdout": "ea00351b1cb209c91cb7f2444070f32163d83a6784537a91bd14187ccde0e6b0",
+    "TEST-junit-jupiter.xml": "46b5183b19abc77d66ca6aba64539b3b474b271c9ac5fbb1e61960557be38392",
+    "TEST-junit-platform-suite.xml": "5c2362c39465d45fc6f3f16462811b26a901713bd21e8cd98842f00038c65d48",
+    "TEST-junit-vintage.xml": "0a9237e829ef6548f60ea26188289c9cd1eefb2cc4baeee9ce7e3255bcd39e42"
+  }
+}
