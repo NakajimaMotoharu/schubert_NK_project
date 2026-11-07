@@ -1,0 +1,11 @@
+# flock五同PID方式 source是正結果
+
+source `44f344bafe8886b630d0e8a9ccf2f8712a1bfc0c`、Production Main7aed不変。PG23140独立exit0、manifest `evidence/01_PT/018_NK-OPS-001/evidence/PG23140-flock-five-independent-v1/manifest.json` SHA256 `ce571b0766e79f9ae196c7fd6e68b9a96d1651cbfd5113a1cf63475b59cda94f`。BUG2468対象のTest三class五commandにだけ明示--no-forkを追加し、元の他argv/normal assertions/戻り値/fixture操作は全token逆復元で一致。元argv保持を約束した前群成果は書換えず、当群の内部Test実装判断として変更5を明示した。
+
+正本origin/main SS341の実util-linux相互排他要件は不変で、Testのfork方式は上位設計で固定されていない。installed primary flock man SHA30cc3599a6e29f04fd70a80a38455d827a712e6e75e70a2419ba1cbe1a3692c5にある同PID command置換/lock保持・--close非互換を根拠にした。QA/SSCを要する画面/電文/DB/本番command/承認oracleの変更なし。sourceはflockが別command子を作る原因を除去するが、実binary適合とcommand自身のdescendant/lock後条件は未測定HOLD。
+
+BUG2475の初回注釈newline欠落は23136 GJF1と独立guard1で元Product起動前に検出、PG23150へ三partial source/原formatter失敗を保存。GJF部分comment折返しによる是正marker count3 assert・oldslot再利用拒否もProduct0で保存し、短い注釈＋newline5箇所を事前検査後に修正。23144 own format/parse0、元Testcompile0。23134のmanifestはmetadata否定12（旗種/command/改行欠落）を含み、最初のstdout表記9はstaleだったためscriptを12へ訂正、証拠本体12が正。
+
+23146 typed PMD raw11（Thread10/null負例1）を全method/ASTbody/hashへ束縛し個別非該当、適用0/未分類0、CS0。新helperは同byteの23126 static compile/class hashとJDK25jrtをaux再利用、helperや元成功Unitの確認再演なし。旧29は不変26+変3の現82理由を再束縛、新helper13は別枠。全30engine/全F03/451の受入ではない。command/実exit/SDK/hashは公開manifestと原static reportへ。
+
+元native/process Test・子Mainのcompile/run0、実Product process/VM/FS/DB/Root等操作0。実PT PASS/coverage=null、新unique/whole/leaf0。親source8/8とflock fork原因source5/5のPG成果を実終端/UNKNOWN解決としない。current442/whole94/正式1964-53/工数null、IT/ST未実施。
