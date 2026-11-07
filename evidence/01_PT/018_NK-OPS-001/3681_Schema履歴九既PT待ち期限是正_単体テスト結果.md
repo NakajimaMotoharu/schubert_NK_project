@@ -1,0 +1,13 @@
+# Schema履歴九既PT・待ち期限是正結果
+
+3680/239240241、全opsSchema001..009、Test/run source d8935a18a98f1f3fb51fd1c6e54b7d5ac40d683a、Main7aed8eace7c844c2f79f2e39db766faf914890d5、Verifier 4ca656d652f89fe8b8f8d91607f01d5d3188eb13、branch dev-foundation。元whole Test/型根拠22654を保持し、Future.getとBarrier.awaitへ5SECONDSを追加した。全九Test/fixture/具体六列SQL oracle/Productionは維持。
+
+22658 format0/22660 compile0/22662 raw14の適用style四件をBUG2444/YKT2187へ先行登録して原22656保持。field SCHEMA/FIRSTのidentifierだけをSCHEMA_ROW/FIRST_ROWへ（文字列SCHEMA不変）、引用schema literal七件は同値SCHEMA_SCRIPT定数へ、private int indexのincrementは比較直前statementへ分離。22672 format0/22674 lint-Werror0/22676 raw10はowned interrupt/worker八件・private Probe map一件・JDK Proxy defining-loader一件を個別判断、適用0CS0/MainSB0。22680は全変換を原sourceから独立照合し他token/具体値不変、三否定guardとsigned32評価順の境界12組を検査した。後者はmetadata checkで製品PTへ加算しない。
+
+PG22664全九F-E-S-abort0/真正0、一回のnewexec-session。22668同exec method metadata/javap0、22670独立post0 manifest `fcc03f7813d28be2ba5ca1ff3f0af06b46005b07eb59501efe5fd04926e1b42d`。対象SchemaHistoryAdmission/Row/JdbcAdmissionFailures三physical全CodeはL89/M8/C3/B78未達0、INSTRUCTION389。各CRCはcurrent normal class byteから独立Python CRC64で計算し実execへ照合。raw実値はOuter90/94・Row29/32・helper9/10、標準Finally/Record/PrivateEmptyNoArgConstructor filtersと分け、raw100%とは呼ばない。手動除外0。private空constructorのbytecodeとrecord生成ObjectMethodsの三callsiteも確認。
+
+最初postのInvokeDynamic総数三つという誤仮定は、Row constructorの通常JDK StringConcatFactory一件を誤認して終了1/OUTなし。BUG2445/YKT2188を先行登録し原22686保持、三ObjectMethods＋通常連結一つをrole別に許可し他roleを拒否するguardへ是正した。Contents237はconstructor連結なしの実三件で非該当、既成功を確認再演しない。製品九件/metadataの再演0。
+
+実初期化/実methodの製品範囲は当三型だけ、既Probe/JDK JDBC Proxyの固定six-column Rowsと標準例外/owned threadである。実DB/migration/実admission authority/Root/native/credential/四held型/元RootTestの操作0。全入力/期待値は元Testのliteral、取得rowがexpected list同一objectでないassertion、query/timeout/余剰不足/全列null/例外/close順序/borrowed Connection不変更/interrupt/競合を丸ごと保持。OS/JDK25.0.4/JUnit1.13.4/依存/全command/exit/日時/source/CRC/XML/hashはpost.files/原stageへ保存。
+
+再資格九・新unique0、既HOST_COUNTERS_CLOSED系の当範囲を現Testへ再資格した証拠であり未完対象群whole94を新96へ推測加算しない。unique438/Java334+HTML97+CSS7、元282交差74残208/元partial18残62/正式1964PT-53scope/新leaf0/工数null/全HOLD不変。BUG2443/2444/2445とYKT2187/2188は有限CLOSED、YKT2177は当二waitの再資格済みを追記するがQuestion動的HOLD等を残して全体OPEN。owner P01901、今回是正費F03・原2/5/9cap10保持、追加tool費/N-T不明null。

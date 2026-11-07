@@ -1,0 +1,202 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "d8935a18a98f1f3fb51fd1c6e54b7d5ac40d683a",
+    "normalSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+    "inputHashes": {
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java": "f0385a09de9ad0c9045c90b70356eccd7e4ae0b47c1cd7862135f0331cc7b861",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": "bf179887c2496723d5ddb4ee0be02c5e599ecba781f5b8338367bb21648627a5",
+      "evidence/01_PT/018_NK-OPS-001/input/239_schema_nine_wait_qualifier.py": "c84c8450fc59edc919582b0432cccef12b9cbd6ead955941b91512d9e41050c4"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "bc6acaa867859b0f1d2f2e24dc27ba5627e7bf7c332448ae88bb077ea1b36fa7",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar": "9b5bf5bf449e93f571524b26496e3e8215b9015dc97dd3a0b2c75a7073401ef6",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar": "cd07d7031d042a9224995445e1974f24cceedece141fff69cac28cf392db496d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar": "1d816c9e5510723a10dfde2b19a8ddc9c5423d425039b891eb497d3b6e963fdb",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar": "28fa4befaddce5d7b79b07c68e7c12fa27c5d9282c4229528717971606661ea3"
+    },
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "compileManifestSha256": "b1f449a98134a1e0905f447f2c01cc64e10e2aefd4a23fce75532b32d403627f",
+    "selected": [
+      "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest"
+    ],
+    "expectedTests": 9,
+    "newMethods": 0,
+    "requalifiedExistingMethods": 9,
+    "targetPhysical": [
+      "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission",
+      "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+      "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures"
+    ],
+    "parentWholeQualified": false,
+    "session": "PG22664-SCHEMA-NINE",
+    "startUTC": "2026-11-07T07:47:36.669692+00:00",
+    "noActualReleaseOrRootOrNativeOrDb": true
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T07:47:36.669987+00:00",
+      "endUTC": "2026-11-07T07:47:38.694432+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22664-schema-nine-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22664-schema-nine-unit-v1/jacoco.exec,sessionid=PG22664-SCHEMA-NINE,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22664-schema-nine-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22674-schema-nine-compile-v2/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22664-schema-nine-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "dc33ca6e1e6c1d6aedb0e2a530a8b1cd931103188406d3afc352a3c52c494a4a",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T07:47:38.696176+00:00",
+      "endUTC": "2026-11-07T07:47:38.861025+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22664-schema-nine-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22664-schema-nine-unit-v1/component",
+        "--sourcefiles",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22664-schema-nine-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "03855457fe278b63cc8dbfea04792f86b1d1ebc6c23992a1fc4673d33e8062f8",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T07:47:38.861330+00:00",
+      "endUTC": "2026-11-07T07:47:38.976380+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22664-schema-nine-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "f7d5e13aa4e5b998a9eeb988862e2f9aac4b9a9f5d05c57f56b6ca7ecc5e77d5",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T07:47:38.976694+00:00",
+      "endUTC": "2026-11-07T07:47:39.091186+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22664-schema-nine-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "375ae02b88c989203a7638c93626406d571244efcd50ebc0f6a2d1c1a3d70299",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema003ExpectedRowInvariantBoundaries()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema004ExpectedProfileOrderingAndDefensiveCopy()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema008IndependentConcurrentOwners()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema007InterruptBeforeAndAfterNeverAccepts()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema009ActualRowsAreIndependentlyReadAndImmutableAfterBothOwnersClose()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema006KnownUnknownCloseMatrixAndSameThrowable()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema002EveryColumnMissingExtraAndFailedRow()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema005NullProviderSqlExceptionsAndAllOwnership()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema001ExactFixedQueryAndBorrowedOwner()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 9,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission": "7b23f2059b4684ff4d9ac5f1338e05c2339e6dc426a8ee376e5fc4eb49771105",
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row": "8eff8dc4e76ec03bcbc9d7e6ef664c80be62646df10b388aa3723e1c8bdf3fa7",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures": "b50a7e880821b3b076c6f24d6e3a32a4af25e25e070171268a2416695bd1b41b"
+  },
+  "formalUpdated": false
+}
