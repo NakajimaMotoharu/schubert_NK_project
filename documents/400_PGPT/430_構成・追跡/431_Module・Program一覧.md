@@ -673,3 +673,10 @@ NK-WEB-002: WebNativeRuntime（ordinary借用DB/5credential→三codec/readonly 
 |---|---|---|---|
 | NK-OPS-001 ApiStopBudget.begin/stopping/remainingNanos/time | RD171/UI252/SS342351、PG-D637/638/1143、BUG2416/YKT2161 | APISTOP001..020全20/PG22090・22110、全source四counter100、原FOUR100から再資格/新unique2 | WBS-P018-05共通費一回 |
 | NK-OPS-001 ApiProcessLifetime.stop/stopping/remainingStopNanos | 同上、既stop/fail/shutdown/close責務不変 | 正常22084・六静的22086・委譲bytecode22096、OWNER001..003とwhole既TestはNOT_RUN/HOLD。primitive PTを親全体へ転用0 | WBS-P018-05、重複費追加0 |
+
+### 2026-11-07 Logout MVC生成契約の独立単体
+
+| Program/class/method | 関連設計・判断 | Test・証拠 | canonical owner/cost |
+|---|---|---|---|
+| NK-WEB-002 LogoutMvcConfiguration constructor/logoutController | AUT004/UI226/SS313314/PG-D363/1144 | PT-WEB-LOGOUT-MVC-BEAN001/002、016153/154・22200/22204。新2/一whole source、branch自然0/N/A。HTTP/business handlerは別未受入 | WBS-P015-04、群一回 |
+| Test support BusinessMvcOwnerPortFixture.localSessions/同一owner constructor-close | 同上/既PT-SCR-BIZBEAN001..006 | 元Business6を共有fixture変更後に同8-case runで再資格、新規件数へ加算0。元三Main factory再資格、support31全source資格に転用0 | 既canonical所有不変、関連owner追加予算/遡及配賦0 |
