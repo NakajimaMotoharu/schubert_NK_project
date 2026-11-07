@@ -1,0 +1,9 @@
+# Protocol全Test・静的品質確認結果
+
+PG22758で全25tracked regular sourceを固定、Main7aedの不変protocol Jar/ルール/SDK/toolchain hashへ対応。PG22760 fresh PMD raw11/Checkstyle0/format差分0、engine実初期化ログでProduct初期化0。PG22762独立照合0（source全25/Git/input/tool/command/実exit/XML/format非変更）。製品Test compile/run/fixture/backend/Root/native0。
+
+PG22766全11の個別理由・PG22768独立0、manifest `6345389efd1c990a35a7dd598a5c092d99fd7d50bae180f169bfdf0d6de6a76b`。Thread5はowned standalone executor/site（うちGolden2は既22722へ照合し再試験0）、Map4はIndependentNamedFieldOracleの各同期call/loop-localと保全された元956構文宣言、NullAssignment2は独立引数arrayのclone/一要素nullによるconstructor拒否negative case。PMD当規則の適用0/未分類0、metadata否定4。品質条件の抑制や規則変更は無し。
+
+別契約としてWebLogActionContractTestの二Future.get無期限をsourceで発見しBUG2450へ修正前登録。raw Thread非該当をこの不足の合格にしない。Protocol module quality/全F03/451は未認定。次群で二deadline以外のtoken/固定golden不変を確認し、元全12を新sourceで再資格する。元静的snapshotは不変保全し、変更後の影響sourceだけ新しい静的結果へ結合する。
+
+新Test/PT/coverage/unique/whole/leaf加点0、unique438/whole94/正式1964PT-53scope/工数nullと全HOLDは不変。原85/current346とは別corpusで重複加算しない。main remoteはfetch照合済み42450b515（QA055）で承認正本不変更。
