@@ -1,0 +1,62 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T04:32:37.183081+09:00",
+  "inputHashes": {
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/UnsupportedDirectoryDefaultsPortTest.java": "9557f76bfb15ef536988b2bd25ccabd175f1eb5a9cd4133f2c3d9ef704ca2a17",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/DirectoryCalls.java": "4449a5a316c2e9e4da3e3bbd2068707974557fe032cd0708dcbe7306532cdaaf",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "2a1233e46a8f05a0dbf7e42034ad3e34afecf14814ebf5111527db6b6e179284",
+    "evidence/01_PT/018_NK-OPS-001/input/442_directory_defaults_qualifier.py": "48f0f62f244da26eaf78b3c7ac1104acbf4823de925aa22f5ac867733db96d96",
+    "evidence/01_PT/018_NK-OPS-001/input/443_directory_defaults_scope.json": "42f91307d0724a2305c6024ce02ed4840942cfb991b76f71cf28219260505513"
+  },
+  "dependencySourceHashes": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/DirectoryCalls.java": "4449a5a316c2e9e4da3e3bbd2068707974557fe032cd0708dcbe7306532cdaaf",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "2a1233e46a8f05a0dbf7e42034ad3e34afecf14814ebf5111527db6b6e179284"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar": "9b5bf5bf449e93f571524b26496e3e8215b9015dc97dd3a0b2c75a7073401ef6",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+  },
+  "compileManifestSha256": "10944b64e5ae4b1240a1a6c28853cf672be3551f427932a2cea48401680f0ac2",
+  "staticManifestSha256": "1e9a1750066fb563c24f114d1ec77bc5a45b85cc7e38912165c726bb42dac67d",
+  "normalMainStaticUnchanged": "0580a14592d3fc00820183034c584208e45b002802d2e3e173b5f752c7cf19f2",
+  "expectedTests": 4,
+  "newUniqueTests": 4,
+  "sourceAssertionRecipes": [
+    "assertEquals(StorageIoException.Reason.UNAVAILABLE, failure.reason());",
+    "assertEquals(FIXED_MESSAGE, failure.getMessage());",
+    "assertNull(failure.getCause());",
+    "assertEquals(0, failure.getSuppressed().length);",
+    "assertNotSame(first, second);",
+    "assertNotSame(first, third);",
+    "assertNotSame(second, third);",
+    "assertEquals(1, first.getSuppressed().length);",
+    "assertEquals(0, calls.abstractCalls);",
+    "List.of(0, 7, Integer.MIN_VALUE, Integer.MAX_VALUE)",
+    "calls.createPrivateFile(7, null)",
+    "calls.createPrivateDirectory(7, null)",
+    "calls.removeEmptyDirectory(7, null)",
+    "assertFailure(nullFile);",
+    "assertFailure(nullDirectory);",
+    "assertFailure(nullRemoval);",
+    "private static final String FIXED_MESSAGE = \"transfer storage operation failed\";"
+  ],
+  "sourceDefaultMethods": [
+    "createPrivateFile",
+    "createPrivateDirectory",
+    "removeEmptyDirectory"
+  ],
+  "abstractPorts": 9,
+  "pmdRaw": 0,
+  "pmdApplicable": 0,
+  "checkstyle": 0,
+  "unclassified": 0,
+  "styleInverse": true,
+  "plannedNullNegativeVectors": 3,
+  "actualBackendActions": 0,
+  "actualFilesystemOrDescriptorActions": 0,
+  "heldFourInitializations": 0,
+  "productTestsExecuted": 0,
+  "productClassesInitialized": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false
+}
