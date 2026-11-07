@@ -1,0 +1,41 @@
+{
+  "atJST": "2026-11-07T12:43:38.199603+09:00",
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebSecurityFactoryGuardPortTest.java": "342576c88a16da7b3d51292ad9045e6e03655c35fac71a88853ebfc7b5505668",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebSecurityFilterFactory.java": "6a12be19cd84bfe7800443cc104a65b615d9c26c116b12fac184d719c0305a7a",
+    "evidence/01_PT/015_NK-WEB-001/input/034_security_factory_guard_qualifier.py": "60e29142817f30c8b9d0e58a737d6d7fba3de7901699abc38d613ace780b2c59"
+  },
+  "rawPmdExit": 4,
+  "pmdRaw": 1,
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "processingErrors": 0,
+  "individualClassifications": [
+    {
+      "beginline": "21",
+      "endline": "21",
+      "begincolumn": "17",
+      "endcolumn": "50",
+      "rule": "UseProperClassLoader",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.web.session",
+      "class": "SecurityContextOwnerPortFixture",
+      "method": "SecurityContextOwnerPortFixture",
+      "variable": "database",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+      "priority": "3",
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Unchanged standalone no-backend fixture uses the DataSource defining loader for forbidden-callback Proxy; same prior classification, no J2EE TCCL/global change."
+    }
+  ],
+  "staticManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22302-security-factory-four-static-v1/manifest.json",
+    "sha256": "37932a28584cbe626805a26cd08b5eb477c6971b78b0a1dcb69af383ad75aa95"
+  },
+  "productTestsExecuted": 0,
+  "suppressionAdded": false,
+  "wholeF03Accepted": false
+}
