@@ -1,0 +1,1808 @@
+Compiled from "SocketProperties.java"
+public class org.apache.tomcat.util.net.SocketProperties {
+  private static final org.apache.juli.logging.Log log;
+    descriptor: Lorg/apache/juli/logging/Log;
+
+  private static final org.apache.tomcat.util.res.StringManager sm;
+    descriptor: Lorg/apache/tomcat/util/res/StringManager;
+
+  protected int processorCache;
+    descriptor: I
+
+  protected int eventCache;
+    descriptor: I
+
+  protected boolean directBuffer;
+    descriptor: Z
+
+  protected boolean directSslBuffer;
+    descriptor: Z
+
+  protected java.lang.Integer rxBufSize;
+    descriptor: Ljava/lang/Integer;
+
+  protected java.lang.Integer txBufSize;
+    descriptor: Ljava/lang/Integer;
+
+  protected int appReadBufSize;
+    descriptor: I
+
+  protected int appWriteBufSize;
+    descriptor: I
+
+  protected int bufferPool;
+    descriptor: I
+
+  protected int bufferPoolSize;
+    descriptor: I
+
+  protected java.lang.Boolean tcpNoDelay;
+    descriptor: Ljava/lang/Boolean;
+
+  protected java.lang.Boolean soKeepAlive;
+    descriptor: Ljava/lang/Boolean;
+
+  protected java.lang.Boolean ooBInline;
+    descriptor: Ljava/lang/Boolean;
+
+  protected java.lang.Boolean soReuseAddress;
+    descriptor: Ljava/lang/Boolean;
+
+  protected java.lang.Boolean soLingerOn;
+    descriptor: Ljava/lang/Boolean;
+
+  protected java.lang.Integer soLingerTime;
+    descriptor: Ljava/lang/Integer;
+
+  protected java.lang.Integer soTimeout;
+    descriptor: Ljava/lang/Integer;
+
+  protected java.lang.Integer performanceConnectionTime;
+    descriptor: Ljava/lang/Integer;
+
+  protected java.lang.Integer performanceLatency;
+    descriptor: Ljava/lang/Integer;
+
+  protected java.lang.Integer performanceBandwidth;
+    descriptor: Ljava/lang/Integer;
+
+  protected long timeoutInterval;
+    descriptor: J
+
+  protected int unlockTimeout;
+    descriptor: I
+
+  private javax.management.ObjectName oname;
+    descriptor: Ljavax/management/ObjectName;
+
+  public org.apache.tomcat.util.net.SocketProperties();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: iconst_0
+         6: putfield      #7                  // Field processorCache:I
+         9: aload_0
+        10: iconst_0
+        11: putfield      #13                 // Field eventCache:I
+        14: aload_0
+        15: iconst_0
+        16: putfield      #16                 // Field directBuffer:Z
+        19: aload_0
+        20: iconst_0
+        21: putfield      #20                 // Field directSslBuffer:Z
+        24: aload_0
+        25: aconst_null
+        26: putfield      #23                 // Field rxBufSize:Ljava/lang/Integer;
+        29: aload_0
+        30: aconst_null
+        31: putfield      #27                 // Field txBufSize:Ljava/lang/Integer;
+        34: aload_0
+        35: sipush        8192
+        38: putfield      #30                 // Field appReadBufSize:I
+        41: aload_0
+        42: sipush        8192
+        45: putfield      #33                 // Field appWriteBufSize:I
+        48: aload_0
+        49: bipush        -2
+        51: putfield      #36                 // Field bufferPool:I
+        54: aload_0
+        55: bipush        -2
+        57: putfield      #39                 // Field bufferPoolSize:I
+        60: aload_0
+        61: getstatic     #42                 // Field java/lang/Boolean.TRUE:Ljava/lang/Boolean;
+        64: putfield      #48                 // Field tcpNoDelay:Ljava/lang/Boolean;
+        67: aload_0
+        68: aconst_null
+        69: putfield      #51                 // Field soKeepAlive:Ljava/lang/Boolean;
+        72: aload_0
+        73: aconst_null
+        74: putfield      #54                 // Field ooBInline:Ljava/lang/Boolean;
+        77: aload_0
+        78: aconst_null
+        79: putfield      #57                 // Field soReuseAddress:Ljava/lang/Boolean;
+        82: aload_0
+        83: aconst_null
+        84: putfield      #60                 // Field soLingerOn:Ljava/lang/Boolean;
+        87: aload_0
+        88: aconst_null
+        89: putfield      #63                 // Field soLingerTime:Ljava/lang/Integer;
+        92: aload_0
+        93: sipush        20000
+        96: invokestatic  #66                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        99: putfield      #72                 // Field soTimeout:Ljava/lang/Integer;
+       102: aload_0
+       103: aconst_null
+       104: putfield      #75                 // Field performanceConnectionTime:Ljava/lang/Integer;
+       107: aload_0
+       108: aconst_null
+       109: putfield      #78                 // Field performanceLatency:Ljava/lang/Integer;
+       112: aload_0
+       113: aconst_null
+       114: putfield      #81                 // Field performanceBandwidth:Ljava/lang/Integer;
+       117: aload_0
+       118: ldc2_w        #84                 // long 1000l
+       121: putfield      #86                 // Field timeoutInterval:J
+       124: aload_0
+       125: sipush        250
+       128: putfield      #90                 // Field unlockTimeout:I
+       131: aload_0
+       132: aconst_null
+       133: putfield      #93                 // Field oname:Ljavax/management/ObjectName;
+       136: return
+
+  public void setProperties(java.net.Socket) throws java.net.SocketException;
+    descriptor: (Ljava/net/Socket;)V
+    Code:
+         0: aload_0
+         1: getfield      #23                 // Field rxBufSize:Ljava/lang/Integer;
+         4: ifnull        18
+         7: aload_1
+         8: aload_0
+         9: getfield      #23                 // Field rxBufSize:Ljava/lang/Integer;
+        12: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+        15: invokevirtual #101                // Method java/net/Socket.setReceiveBufferSize:(I)V
+        18: aload_0
+        19: getfield      #27                 // Field txBufSize:Ljava/lang/Integer;
+        22: ifnull        36
+        25: aload_1
+        26: aload_0
+        27: getfield      #27                 // Field txBufSize:Ljava/lang/Integer;
+        30: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+        33: invokevirtual #107                // Method java/net/Socket.setSendBufferSize:(I)V
+        36: aload_0
+        37: getfield      #54                 // Field ooBInline:Ljava/lang/Boolean;
+        40: ifnull        54
+        43: aload_1
+        44: aload_0
+        45: getfield      #54                 // Field ooBInline:Ljava/lang/Boolean;
+        48: invokevirtual #110                // Method java/lang/Boolean.booleanValue:()Z
+        51: invokevirtual #114                // Method java/net/Socket.setOOBInline:(Z)V
+        54: aload_0
+        55: getfield      #51                 // Field soKeepAlive:Ljava/lang/Boolean;
+        58: ifnull        72
+        61: aload_1
+        62: aload_0
+        63: getfield      #51                 // Field soKeepAlive:Ljava/lang/Boolean;
+        66: invokevirtual #110                // Method java/lang/Boolean.booleanValue:()Z
+        69: invokevirtual #118                // Method java/net/Socket.setKeepAlive:(Z)V
+        72: aload_0
+        73: getfield      #75                 // Field performanceConnectionTime:Ljava/lang/Integer;
+        76: ifnull        118
+        79: aload_0
+        80: getfield      #78                 // Field performanceLatency:Ljava/lang/Integer;
+        83: ifnull        118
+        86: aload_0
+        87: getfield      #81                 // Field performanceBandwidth:Ljava/lang/Integer;
+        90: ifnull        118
+        93: aload_1
+        94: aload_0
+        95: getfield      #75                 // Field performanceConnectionTime:Ljava/lang/Integer;
+        98: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+       101: aload_0
+       102: getfield      #78                 // Field performanceLatency:Ljava/lang/Integer;
+       105: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+       108: aload_0
+       109: getfield      #81                 // Field performanceBandwidth:Ljava/lang/Integer;
+       112: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+       115: invokevirtual #121                // Method java/net/Socket.setPerformancePreferences:(III)V
+       118: aload_0
+       119: getfield      #57                 // Field soReuseAddress:Ljava/lang/Boolean;
+       122: ifnull        136
+       125: aload_1
+       126: aload_0
+       127: getfield      #57                 // Field soReuseAddress:Ljava/lang/Boolean;
+       130: invokevirtual #110                // Method java/lang/Boolean.booleanValue:()Z
+       133: invokevirtual #125                // Method java/net/Socket.setReuseAddress:(Z)V
+       136: aload_0
+       137: getfield      #60                 // Field soLingerOn:Ljava/lang/Boolean;
+       140: ifnull        168
+       143: aload_0
+       144: getfield      #63                 // Field soLingerTime:Ljava/lang/Integer;
+       147: ifnull        168
+       150: aload_1
+       151: aload_0
+       152: getfield      #60                 // Field soLingerOn:Ljava/lang/Boolean;
+       155: invokevirtual #110                // Method java/lang/Boolean.booleanValue:()Z
+       158: aload_0
+       159: getfield      #63                 // Field soLingerTime:Ljava/lang/Integer;
+       162: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+       165: invokevirtual #128                // Method java/net/Socket.setSoLinger:(ZI)V
+       168: aload_0
+       169: getfield      #72                 // Field soTimeout:Ljava/lang/Integer;
+       172: ifnull        196
+       175: aload_0
+       176: getfield      #72                 // Field soTimeout:Ljava/lang/Integer;
+       179: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+       182: iflt          196
+       185: aload_1
+       186: aload_0
+       187: getfield      #72                 // Field soTimeout:Ljava/lang/Integer;
+       190: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+       193: invokevirtual #132                // Method java/net/Socket.setSoTimeout:(I)V
+       196: aload_0
+       197: getfield      #48                 // Field tcpNoDelay:Ljava/lang/Boolean;
+       200: ifnull        218
+       203: aload_1
+       204: aload_0
+       205: getfield      #48                 // Field tcpNoDelay:Ljava/lang/Boolean;
+       208: invokevirtual #110                // Method java/lang/Boolean.booleanValue:()Z
+       211: invokevirtual #135                // Method java/net/Socket.setTcpNoDelay:(Z)V
+       214: goto          218
+       217: astore_2
+       218: return
+      Exception table:
+         from    to  target type
+           203   214   217   Class java/net/SocketException
+
+  public void setProperties(java.net.ServerSocket) throws java.net.SocketException;
+    descriptor: (Ljava/net/ServerSocket;)V
+    Code:
+         0: aload_0
+         1: getfield      #23                 // Field rxBufSize:Ljava/lang/Integer;
+         4: ifnull        18
+         7: aload_1
+         8: aload_0
+         9: getfield      #23                 // Field rxBufSize:Ljava/lang/Integer;
+        12: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+        15: invokevirtual #140                // Method java/net/ServerSocket.setReceiveBufferSize:(I)V
+        18: aload_0
+        19: getfield      #75                 // Field performanceConnectionTime:Ljava/lang/Integer;
+        22: ifnull        64
+        25: aload_0
+        26: getfield      #78                 // Field performanceLatency:Ljava/lang/Integer;
+        29: ifnull        64
+        32: aload_0
+        33: getfield      #81                 // Field performanceBandwidth:Ljava/lang/Integer;
+        36: ifnull        64
+        39: aload_1
+        40: aload_0
+        41: getfield      #75                 // Field performanceConnectionTime:Ljava/lang/Integer;
+        44: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+        47: aload_0
+        48: getfield      #78                 // Field performanceLatency:Ljava/lang/Integer;
+        51: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+        54: aload_0
+        55: getfield      #81                 // Field performanceBandwidth:Ljava/lang/Integer;
+        58: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+        61: invokevirtual #143                // Method java/net/ServerSocket.setPerformancePreferences:(III)V
+        64: aload_0
+        65: getfield      #57                 // Field soReuseAddress:Ljava/lang/Boolean;
+        68: ifnull        82
+        71: aload_1
+        72: aload_0
+        73: getfield      #57                 // Field soReuseAddress:Ljava/lang/Boolean;
+        76: invokevirtual #110                // Method java/lang/Boolean.booleanValue:()Z
+        79: invokevirtual #144                // Method java/net/ServerSocket.setReuseAddress:(Z)V
+        82: aload_0
+        83: getfield      #72                 // Field soTimeout:Ljava/lang/Integer;
+        86: ifnull        110
+        89: aload_0
+        90: getfield      #72                 // Field soTimeout:Ljava/lang/Integer;
+        93: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+        96: iflt          110
+        99: aload_1
+       100: aload_0
+       101: getfield      #72                 // Field soTimeout:Ljava/lang/Integer;
+       104: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+       107: invokevirtual #145                // Method java/net/ServerSocket.setSoTimeout:(I)V
+       110: return
+
+  public void setProperties(java.nio.channels.AsynchronousSocketChannel) throws java.io.IOException;
+    descriptor: (Ljava/nio/channels/AsynchronousSocketChannel;)V
+    Code:
+         0: aload_0
+         1: getfield      #23                 // Field rxBufSize:Ljava/lang/Integer;
+         4: ifnull        19
+         7: aload_1
+         8: getstatic     #146                // Field java/net/StandardSocketOptions.SO_RCVBUF:Ljava/net/SocketOption;
+        11: aload_0
+        12: getfield      #23                 // Field rxBufSize:Ljava/lang/Integer;
+        15: invokevirtual #152                // Method java/nio/channels/AsynchronousSocketChannel.setOption:(Ljava/net/SocketOption;Ljava/lang/Object;)Ljava/nio/channels/AsynchronousSocketChannel;
+        18: pop
+        19: aload_0
+        20: getfield      #27                 // Field txBufSize:Ljava/lang/Integer;
+        23: ifnull        38
+        26: aload_1
+        27: getstatic     #158                // Field java/net/StandardSocketOptions.SO_SNDBUF:Ljava/net/SocketOption;
+        30: aload_0
+        31: getfield      #27                 // Field txBufSize:Ljava/lang/Integer;
+        34: invokevirtual #152                // Method java/nio/channels/AsynchronousSocketChannel.setOption:(Ljava/net/SocketOption;Ljava/lang/Object;)Ljava/nio/channels/AsynchronousSocketChannel;
+        37: pop
+        38: aload_0
+        39: getfield      #51                 // Field soKeepAlive:Ljava/lang/Boolean;
+        42: ifnull        57
+        45: aload_1
+        46: getstatic     #161                // Field java/net/StandardSocketOptions.SO_KEEPALIVE:Ljava/net/SocketOption;
+        49: aload_0
+        50: getfield      #51                 // Field soKeepAlive:Ljava/lang/Boolean;
+        53: invokevirtual #152                // Method java/nio/channels/AsynchronousSocketChannel.setOption:(Ljava/net/SocketOption;Ljava/lang/Object;)Ljava/nio/channels/AsynchronousSocketChannel;
+        56: pop
+        57: aload_0
+        58: getfield      #57                 // Field soReuseAddress:Ljava/lang/Boolean;
+        61: ifnull        76
+        64: aload_1
+        65: getstatic     #164                // Field java/net/StandardSocketOptions.SO_REUSEADDR:Ljava/net/SocketOption;
+        68: aload_0
+        69: getfield      #57                 // Field soReuseAddress:Ljava/lang/Boolean;
+        72: invokevirtual #152                // Method java/nio/channels/AsynchronousSocketChannel.setOption:(Ljava/net/SocketOption;Ljava/lang/Object;)Ljava/nio/channels/AsynchronousSocketChannel;
+        75: pop
+        76: aload_0
+        77: getfield      #60                 // Field soLingerOn:Ljava/lang/Boolean;
+        80: ifnull        112
+        83: aload_0
+        84: getfield      #60                 // Field soLingerOn:Ljava/lang/Boolean;
+        87: invokevirtual #110                // Method java/lang/Boolean.booleanValue:()Z
+        90: ifeq          112
+        93: aload_0
+        94: getfield      #63                 // Field soLingerTime:Ljava/lang/Integer;
+        97: ifnull        112
+       100: aload_1
+       101: getstatic     #167                // Field java/net/StandardSocketOptions.SO_LINGER:Ljava/net/SocketOption;
+       104: aload_0
+       105: getfield      #63                 // Field soLingerTime:Ljava/lang/Integer;
+       108: invokevirtual #152                // Method java/nio/channels/AsynchronousSocketChannel.setOption:(Ljava/net/SocketOption;Ljava/lang/Object;)Ljava/nio/channels/AsynchronousSocketChannel;
+       111: pop
+       112: aload_0
+       113: getfield      #48                 // Field tcpNoDelay:Ljava/lang/Boolean;
+       116: ifnull        131
+       119: aload_1
+       120: getstatic     #170                // Field java/net/StandardSocketOptions.TCP_NODELAY:Ljava/net/SocketOption;
+       123: aload_0
+       124: getfield      #48                 // Field tcpNoDelay:Ljava/lang/Boolean;
+       127: invokevirtual #152                // Method java/nio/channels/AsynchronousSocketChannel.setOption:(Ljava/net/SocketOption;Ljava/lang/Object;)Ljava/nio/channels/AsynchronousSocketChannel;
+       130: pop
+       131: return
+
+  public void setProperties(java.nio.channels.AsynchronousServerSocketChannel) throws java.io.IOException;
+    descriptor: (Ljava/nio/channels/AsynchronousServerSocketChannel;)V
+    Code:
+         0: aload_0
+         1: getfield      #23                 // Field rxBufSize:Ljava/lang/Integer;
+         4: ifnull        19
+         7: aload_1
+         8: getstatic     #146                // Field java/net/StandardSocketOptions.SO_RCVBUF:Ljava/net/SocketOption;
+        11: aload_0
+        12: getfield      #23                 // Field rxBufSize:Ljava/lang/Integer;
+        15: invokevirtual #173                // Method java/nio/channels/AsynchronousServerSocketChannel.setOption:(Ljava/net/SocketOption;Ljava/lang/Object;)Ljava/nio/channels/AsynchronousServerSocketChannel;
+        18: pop
+        19: aload_0
+        20: getfield      #57                 // Field soReuseAddress:Ljava/lang/Boolean;
+        23: ifnull        38
+        26: aload_1
+        27: getstatic     #164                // Field java/net/StandardSocketOptions.SO_REUSEADDR:Ljava/net/SocketOption;
+        30: aload_0
+        31: getfield      #57                 // Field soReuseAddress:Ljava/lang/Boolean;
+        34: invokevirtual #173                // Method java/nio/channels/AsynchronousServerSocketChannel.setOption:(Ljava/net/SocketOption;Ljava/lang/Object;)Ljava/nio/channels/AsynchronousServerSocketChannel;
+        37: pop
+        38: return
+
+  public boolean getDirectBuffer();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #16                 // Field directBuffer:Z
+         4: ireturn
+
+  public boolean getDirectSslBuffer();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #20                 // Field directSslBuffer:Z
+         4: ireturn
+
+  public boolean getOoBInline();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #54                 // Field ooBInline:Ljava/lang/Boolean;
+         4: ifnonnull     11
+         7: iconst_0
+         8: goto          18
+        11: aload_0
+        12: getfield      #54                 // Field ooBInline:Ljava/lang/Boolean;
+        15: invokevirtual #110                // Method java/lang/Boolean.booleanValue:()Z
+        18: ireturn
+
+  public int getPerformanceBandwidth();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #81                 // Field performanceBandwidth:Ljava/lang/Integer;
+         4: ifnonnull     11
+         7: iconst_0
+         8: goto          18
+        11: aload_0
+        12: getfield      #81                 // Field performanceBandwidth:Ljava/lang/Integer;
+        15: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+        18: ireturn
+
+  public int getPerformanceConnectionTime();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #75                 // Field performanceConnectionTime:Ljava/lang/Integer;
+         4: ifnonnull     11
+         7: iconst_0
+         8: goto          18
+        11: aload_0
+        12: getfield      #75                 // Field performanceConnectionTime:Ljava/lang/Integer;
+        15: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+        18: ireturn
+
+  public int getPerformanceLatency();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #78                 // Field performanceLatency:Ljava/lang/Integer;
+         4: ifnonnull     11
+         7: iconst_0
+         8: goto          18
+        11: aload_0
+        12: getfield      #78                 // Field performanceLatency:Ljava/lang/Integer;
+        15: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+        18: ireturn
+
+  public int getRxBufSize();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #23                 // Field rxBufSize:Ljava/lang/Integer;
+         4: ifnonnull     11
+         7: iconst_0
+         8: goto          18
+        11: aload_0
+        12: getfield      #23                 // Field rxBufSize:Ljava/lang/Integer;
+        15: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+        18: ireturn
+
+  public boolean getSoKeepAlive();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #51                 // Field soKeepAlive:Ljava/lang/Boolean;
+         4: ifnonnull     11
+         7: iconst_0
+         8: goto          18
+        11: aload_0
+        12: getfield      #51                 // Field soKeepAlive:Ljava/lang/Boolean;
+        15: invokevirtual #110                // Method java/lang/Boolean.booleanValue:()Z
+        18: ireturn
+
+  public boolean getSoLingerOn();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #60                 // Field soLingerOn:Ljava/lang/Boolean;
+         4: ifnonnull     11
+         7: iconst_0
+         8: goto          18
+        11: aload_0
+        12: getfield      #60                 // Field soLingerOn:Ljava/lang/Boolean;
+        15: invokevirtual #110                // Method java/lang/Boolean.booleanValue:()Z
+        18: ireturn
+
+  public int getSoLingerTime();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #63                 // Field soLingerTime:Ljava/lang/Integer;
+         4: ifnonnull     11
+         7: iconst_0
+         8: goto          18
+        11: aload_0
+        12: getfield      #63                 // Field soLingerTime:Ljava/lang/Integer;
+        15: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+        18: ireturn
+
+  public boolean getSoReuseAddress();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #57                 // Field soReuseAddress:Ljava/lang/Boolean;
+         4: ifnonnull     11
+         7: iconst_0
+         8: goto          18
+        11: aload_0
+        12: getfield      #57                 // Field soReuseAddress:Ljava/lang/Boolean;
+        15: invokevirtual #110                // Method java/lang/Boolean.booleanValue:()Z
+        18: ireturn
+
+  public int getSoTimeout();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #72                 // Field soTimeout:Ljava/lang/Integer;
+         4: ifnonnull     11
+         7: iconst_0
+         8: goto          18
+        11: aload_0
+        12: getfield      #72                 // Field soTimeout:Ljava/lang/Integer;
+        15: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+        18: ireturn
+
+  public boolean getTcpNoDelay();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #48                 // Field tcpNoDelay:Ljava/lang/Boolean;
+         4: ifnonnull     11
+         7: iconst_0
+         8: goto          18
+        11: aload_0
+        12: getfield      #48                 // Field tcpNoDelay:Ljava/lang/Boolean;
+        15: invokevirtual #110                // Method java/lang/Boolean.booleanValue:()Z
+        18: ireturn
+
+  public int getTxBufSize();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #27                 // Field txBufSize:Ljava/lang/Integer;
+         4: ifnonnull     11
+         7: iconst_0
+         8: goto          18
+        11: aload_0
+        12: getfield      #27                 // Field txBufSize:Ljava/lang/Integer;
+        15: invokevirtual #97                 // Method java/lang/Integer.intValue:()I
+        18: ireturn
+
+  public int getBufferPool();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #36                 // Field bufferPool:I
+         4: ireturn
+
+  public int getBufferPoolSize();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #39                 // Field bufferPoolSize:I
+         4: ireturn
+
+  public int getEventCache();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #13                 // Field eventCache:I
+         4: ireturn
+
+  public int getAppReadBufSize();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #30                 // Field appReadBufSize:I
+         4: ireturn
+
+  public int getAppWriteBufSize();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #33                 // Field appWriteBufSize:I
+         4: ireturn
+
+  public int getProcessorCache();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field processorCache:I
+         4: ireturn
+
+  public long getTimeoutInterval();
+    descriptor: ()J
+    Code:
+         0: aload_0
+         1: getfield      #86                 // Field timeoutInterval:J
+         4: lreturn
+
+  public int getDirectBufferPool();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #36                 // Field bufferPool:I
+         4: ireturn
+
+  public void setPerformanceConnectionTime(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: invokestatic  #66                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+         5: putfield      #75                 // Field performanceConnectionTime:Ljava/lang/Integer;
+         8: return
+
+  public void setTxBufSize(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: invokestatic  #66                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+         5: putfield      #27                 // Field txBufSize:Ljava/lang/Integer;
+         8: return
+
+  public void setTcpNoDelay(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: invokestatic  #178                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+         5: putfield      #48                 // Field tcpNoDelay:Ljava/lang/Boolean;
+         8: return
+
+  public void setSoTimeout(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: invokestatic  #66                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+         5: putfield      #72                 // Field soTimeout:Ljava/lang/Integer;
+         8: return
+
+  public void setSoReuseAddress(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: invokestatic  #178                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+         5: putfield      #57                 // Field soReuseAddress:Ljava/lang/Boolean;
+         8: return
+
+  public void setSoLingerTime(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: invokestatic  #66                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+         5: putfield      #63                 // Field soLingerTime:Ljava/lang/Integer;
+         8: return
+
+  public void setSoKeepAlive(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: invokestatic  #178                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+         5: putfield      #51                 // Field soKeepAlive:Ljava/lang/Boolean;
+         8: return
+
+  public void setRxBufSize(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: invokestatic  #66                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+         5: putfield      #23                 // Field rxBufSize:Ljava/lang/Integer;
+         8: return
+
+  public void setPerformanceLatency(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: invokestatic  #66                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+         5: putfield      #78                 // Field performanceLatency:Ljava/lang/Integer;
+         8: return
+
+  public void setPerformanceBandwidth(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: invokestatic  #66                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+         5: putfield      #81                 // Field performanceBandwidth:Ljava/lang/Integer;
+         8: return
+
+  public void setOoBInline(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: invokestatic  #178                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+         5: putfield      #54                 // Field ooBInline:Ljava/lang/Boolean;
+         8: return
+
+  public void setDirectBuffer(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #16                 // Field directBuffer:Z
+         5: return
+
+  public void setDirectSslBuffer(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #20                 // Field directSslBuffer:Z
+         5: return
+
+  public void setSoLingerOn(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: invokestatic  #178                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+         5: putfield      #60                 // Field soLingerOn:Ljava/lang/Boolean;
+         8: return
+
+  public void setBufferPool(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #36                 // Field bufferPool:I
+         5: return
+
+  public void setBufferPoolSize(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #39                 // Field bufferPoolSize:I
+         5: return
+
+  public void setEventCache(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #13                 // Field eventCache:I
+         5: return
+
+  public void setAppReadBufSize(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #30                 // Field appReadBufSize:I
+         5: return
+
+  public void setAppWriteBufSize(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #33                 // Field appWriteBufSize:I
+         5: return
+
+  public void setProcessorCache(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #7                  // Field processorCache:I
+         5: return
+
+  public void setTimeoutInterval(long);
+    descriptor: (J)V
+    Code:
+         0: aload_0
+         1: lload_1
+         2: putfield      #86                 // Field timeoutInterval:J
+         5: return
+
+  public void setDirectBufferPool(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #36                 // Field bufferPool:I
+         5: return
+
+  public int getUnlockTimeout();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #90                 // Field unlockTimeout:I
+         4: ireturn
+
+  public void setUnlockTimeout(int);
+    descriptor: (I)V
+    Code:
+         0: iload_1
+         1: ifle          12
+         4: aload_0
+         5: iload_1
+         6: putfield      #90                 // Field unlockTimeout:I
+         9: goto          28
+        12: getstatic     #181                // Field log:Lorg/apache/juli/logging/Log;
+        15: getstatic     #185                // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+        18: ldc           #189                // String socketProperties.negativeUnlockTimeout
+        20: invokevirtual #191                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+        23: invokeinterface #197,  2          // InterfaceMethod org/apache/juli/logging/Log.warn:(Ljava/lang/Object;)V
+        28: return
+
+  public int getActualBufferPool(int);
+    descriptor: (I)I
+    Code:
+         0: aload_0
+         1: getfield      #36                 // Field bufferPool:I
+         4: bipush        -2
+         6: if_icmpeq     14
+         9: aload_0
+        10: getfield      #36                 // Field bufferPool:I
+        13: ireturn
+        14: aload_0
+        15: getfield      #39                 // Field bufferPoolSize:I
+        18: iconst_m1
+        19: if_icmpne     24
+        22: iconst_m1
+        23: ireturn
+        24: aload_0
+        25: getfield      #39                 // Field bufferPoolSize:I
+        28: ifne          33
+        31: iconst_0
+        32: ireturn
+        33: aload_0
+        34: getfield      #39                 // Field bufferPoolSize:I
+        37: i2l
+        38: lstore_2
+        39: lload_2
+        40: ldc2_w        #203                // long -2l
+        43: lcmp
+        44: ifne          76
+        47: invokestatic  #205                // Method java/lang/Runtime.getRuntime:()Ljava/lang/Runtime;
+        50: invokevirtual #211                // Method java/lang/Runtime.maxMemory:()J
+        53: lstore        6
+        55: lload         6
+        57: ldc2_w        #215                // long 2147483647l
+        60: lcmp
+        61: ifle          74
+        64: lload         6
+        66: ldc2_w        #217                // long 32l
+        69: ldiv
+        70: lstore_2
+        71: goto          76
+        74: iconst_0
+        75: ireturn
+        76: aload_0
+        77: getfield      #30                 // Field appReadBufSize:I
+        80: aload_0
+        81: getfield      #33                 // Field appWriteBufSize:I
+        84: iadd
+        85: iload_1
+        86: iadd
+        87: istore        6
+        89: iload         6
+        91: ifne          96
+        94: iconst_0
+        95: ireturn
+        96: lload_2
+        97: iload         6
+        99: i2l
+       100: ldiv
+       101: lstore        4
+       103: lload         4
+       105: ldc2_w        #215                // long 2147483647l
+       108: lcmp
+       109: ifle          115
+       112: ldc           #219                // int 2147483647
+       114: ireturn
+       115: lload         4
+       117: l2i
+       118: ireturn
+
+  void setObjectName(javax.management.ObjectName);
+    descriptor: (Ljavax/management/ObjectName;)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #93                 // Field oname:Ljavax/management/ObjectName;
+         5: return
+
+  javax.management.ObjectName getObjectName();
+    descriptor: ()Ljavax/management/ObjectName;
+    Code:
+         0: aload_0
+         1: getfield      #93                 // Field oname:Ljavax/management/ObjectName;
+         4: areturn
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: ldc           #8                  // class org/apache/tomcat/util/net/SocketProperties
+         2: invokestatic  #220                // Method org/apache/juli/logging/LogFactory.getLog:(Ljava/lang/Class;)Lorg/apache/juli/logging/Log;
+         5: putstatic     #181                // Field log:Lorg/apache/juli/logging/Log;
+         8: ldc           #8                  // class org/apache/tomcat/util/net/SocketProperties
+        10: invokestatic  #226                // Method org/apache/tomcat/util/res/StringManager.getManager:(Ljava/lang/Class;)Lorg/apache/tomcat/util/res/StringManager;
+        13: putstatic     #185                // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+        16: return
+}
+Compiled from "AbstractProtocol.java"
+public class org.apache.coyote.AbstractProtocol$ConnectionHandler<S> implements org.apache.tomcat.util.net.AbstractEndpoint$Handler<S> {
+  private final org.apache.coyote.AbstractProtocol<S> proto;
+    descriptor: Lorg/apache/coyote/AbstractProtocol;
+
+  private final org.apache.coyote.RequestGroupInfo global;
+    descriptor: Lorg/apache/coyote/RequestGroupInfo;
+
+  private final java.util.concurrent.atomic.AtomicLong registerCount;
+    descriptor: Ljava/util/concurrent/atomic/AtomicLong;
+
+  private final org.apache.coyote.AbstractProtocol$RecycledProcessors recycledProcessors;
+    descriptor: Lorg/apache/coyote/AbstractProtocol$RecycledProcessors;
+
+  public org.apache.coyote.AbstractProtocol$ConnectionHandler(org.apache.coyote.AbstractProtocol<S>);
+    descriptor: (Lorg/apache/coyote/AbstractProtocol;)V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #7                  // class org/apache/coyote/RequestGroupInfo
+         8: dup
+         9: invokespecial #9                  // Method org/apache/coyote/RequestGroupInfo."<init>":()V
+        12: putfield      #10                 // Field global:Lorg/apache/coyote/RequestGroupInfo;
+        15: aload_0
+        16: new           #16                 // class java/util/concurrent/atomic/AtomicLong
+        19: dup
+        20: lconst_0
+        21: invokespecial #18                 // Method java/util/concurrent/atomic/AtomicLong."<init>":(J)V
+        24: putfield      #21                 // Field registerCount:Ljava/util/concurrent/atomic/AtomicLong;
+        27: aload_0
+        28: new           #25                 // class org/apache/coyote/AbstractProtocol$RecycledProcessors
+        31: dup
+        32: aload_0
+        33: invokespecial #27                 // Method org/apache/coyote/AbstractProtocol$RecycledProcessors."<init>":(Lorg/apache/coyote/AbstractProtocol$ConnectionHandler;)V
+        36: putfield      #30                 // Field recycledProcessors:Lorg/apache/coyote/AbstractProtocol$RecycledProcessors;
+        39: aload_0
+        40: aload_1
+        41: putfield      #34                 // Field proto:Lorg/apache/coyote/AbstractProtocol;
+        44: return
+
+  protected org.apache.coyote.AbstractProtocol<S> getProtocol();
+    descriptor: ()Lorg/apache/coyote/AbstractProtocol;
+    Code:
+         0: aload_0
+         1: getfield      #34                 // Field proto:Lorg/apache/coyote/AbstractProtocol;
+         4: areturn
+
+  protected org.apache.juli.logging.Log getLog();
+    descriptor: ()Lorg/apache/juli/logging/Log;
+    Code:
+         0: aload_0
+         1: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+         4: invokevirtual #42                 // Method org/apache/coyote/AbstractProtocol.getLog:()Lorg/apache/juli/logging/Log;
+         7: areturn
+
+  public java.lang.Object getGlobal();
+    descriptor: ()Ljava/lang/Object;
+    Code:
+         0: aload_0
+         1: getfield      #10                 // Field global:Lorg/apache/coyote/RequestGroupInfo;
+         4: areturn
+
+  public void recycle();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: getfield      #30                 // Field recycledProcessors:Lorg/apache/coyote/AbstractProtocol$RecycledProcessors;
+         4: invokevirtual #48                 // Method org/apache/coyote/AbstractProtocol$RecycledProcessors.clear:()V
+         7: return
+
+  public org.apache.tomcat.util.net.AbstractEndpoint$Handler$SocketState process(org.apache.tomcat.util.net.SocketWrapperBase<S>, org.apache.tomcat.util.net.SocketEvent);
+    descriptor: (Lorg/apache/tomcat/util/net/SocketWrapperBase;Lorg/apache/tomcat/util/net/SocketEvent;)Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+    Code:
+         0: aload_0
+         1: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+         4: invokeinterface #52,  1           // InterfaceMethod org/apache/juli/logging/Log.isTraceEnabled:()Z
+         9: ifeq          44
+        12: aload_0
+        13: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+        16: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+        19: ldc           #62                 // String abstractConnectionHandler.process
+        21: iconst_2
+        22: anewarray     #2                  // class java/lang/Object
+        25: dup
+        26: iconst_0
+        27: aload_1
+        28: invokevirtual #64                 // Method org/apache/tomcat/util/net/SocketWrapperBase.getSocket:()Ljava/lang/Object;
+        31: aastore
+        32: dup
+        33: iconst_1
+        34: aload_2
+        35: aastore
+        36: invokevirtual #70                 // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+        39: invokeinterface #76,  2           // InterfaceMethod org/apache/juli/logging/Log.trace:(Ljava/lang/Object;)V
+        44: aload_1
+        45: ifnonnull     52
+        48: getstatic     #80                 // Field org/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState.CLOSED:Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+        51: areturn
+        52: aload_1
+        53: invokevirtual #64                 // Method org/apache/tomcat/util/net/SocketWrapperBase.getSocket:()Ljava/lang/Object;
+        56: astore_3
+        57: aload_1
+        58: invokevirtual #86                 // Method org/apache/tomcat/util/net/SocketWrapperBase.takeCurrentProcessor:()Ljava/lang/Object;
+        61: checkcast     #89                 // class org/apache/coyote/Processor
+        64: astore        4
+        66: aload_0
+        67: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+        70: invokeinterface #52,  1           // InterfaceMethod org/apache/juli/logging/Log.isTraceEnabled:()Z
+        75: ifeq          108
+        78: aload_0
+        79: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+        82: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+        85: ldc           #91                 // String abstractConnectionHandler.connectionsGet
+        87: iconst_2
+        88: anewarray     #2                  // class java/lang/Object
+        91: dup
+        92: iconst_0
+        93: aload         4
+        95: aastore
+        96: dup
+        97: iconst_1
+        98: aload_3
+        99: aastore
+       100: invokevirtual #70                 // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+       103: invokeinterface #76,  2           // InterfaceMethod org/apache/juli/logging/Log.trace:(Ljava/lang/Object;)V
+       108: getstatic     #93                 // Field org/apache/tomcat/util/net/SocketEvent.TIMEOUT:Lorg/apache/tomcat/util/net/SocketEvent;
+       111: aload_2
+       112: if_acmpne     164
+       115: aload         4
+       117: ifnull        160
+       120: aload         4
+       122: invokeinterface #99,  1           // InterfaceMethod org/apache/coyote/Processor.isAsync:()Z
+       127: ifne          140
+       130: aload         4
+       132: invokeinterface #102,  1          // InterfaceMethod org/apache/coyote/Processor.isUpgrade:()Z
+       137: ifeq          160
+       140: aload         4
+       142: invokeinterface #99,  1           // InterfaceMethod org/apache/coyote/Processor.isAsync:()Z
+       147: ifeq          164
+       150: aload         4
+       152: invokeinterface #105,  1          // InterfaceMethod org/apache/coyote/Processor.checkAsyncTimeoutGeneration:()Z
+       157: ifne          164
+       160: getstatic     #108                // Field org/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState.OPEN:Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+       163: areturn
+       164: aload         4
+       166: ifnull        181
+       169: aload_0
+       170: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+       173: aload         4
+       175: invokevirtual #111                // Method org/apache/coyote/AbstractProtocol.removeWaitingProcessor:(Lorg/apache/coyote/Processor;)V
+       178: goto          199
+       181: aload_2
+       182: getstatic     #115                // Field org/apache/tomcat/util/net/SocketEvent.DISCONNECT:Lorg/apache/tomcat/util/net/SocketEvent;
+       185: if_acmpeq     195
+       188: aload_2
+       189: getstatic     #118                // Field org/apache/tomcat/util/net/SocketEvent.ERROR:Lorg/apache/tomcat/util/net/SocketEvent;
+       192: if_acmpne     199
+       195: getstatic     #80                 // Field org/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState.CLOSED:Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+       198: areturn
+       199: aload         4
+       201: ifnonnull     352
+       204: aload_1
+       205: invokevirtual #121                // Method org/apache/tomcat/util/net/SocketWrapperBase.getNegotiatedProtocol:()Ljava/lang/String;
+       208: astore        5
+       210: aload         5
+       212: ifnull        352
+       215: aload         5
+       217: invokevirtual #125                // Method java/lang/String.isEmpty:()Z
+       220: ifne          352
+       223: aload_0
+       224: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+       227: aload         5
+       229: invokevirtual #130                // Method org/apache/coyote/AbstractProtocol.getNegotiatedProtocol:(Ljava/lang/String;)Lorg/apache/coyote/UpgradeProtocol;
+       232: astore        6
+       234: aload         6
+       236: ifnull        297
+       239: aload         6
+       241: aload_1
+       242: aload_0
+       243: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+       246: invokevirtual #133                // Method org/apache/coyote/AbstractProtocol.getAdapter:()Lorg/apache/coyote/Adapter;
+       249: invokeinterface #137,  3          // InterfaceMethod org/apache/coyote/UpgradeProtocol.getProcessor:(Lorg/apache/tomcat/util/net/SocketWrapperBase;Lorg/apache/coyote/Adapter;)Lorg/apache/coyote/Processor;
+       254: astore        4
+       256: aload_0
+       257: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       260: invokeinterface #52,  1           // InterfaceMethod org/apache/juli/logging/Log.isTraceEnabled:()Z
+       265: ifeq          352
+       268: aload_0
+       269: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       272: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+       275: ldc           #143                // String abstractConnectionHandler.processorCreate
+       277: iconst_1
+       278: anewarray     #2                  // class java/lang/Object
+       281: dup
+       282: iconst_0
+       283: aload         4
+       285: aastore
+       286: invokevirtual #70                 // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+       289: invokeinterface #76,  2           // InterfaceMethod org/apache/juli/logging/Log.trace:(Ljava/lang/Object;)V
+       294: goto          352
+       297: aload         5
+       299: ldc           #145                // String http/1.1
+       301: invokevirtual #147                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       304: ifeq          310
+       307: goto          352
+       310: aload_0
+       311: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       314: invokeinterface #151,  1          // InterfaceMethod org/apache/juli/logging/Log.isDebugEnabled:()Z
+       319: ifeq          348
+       322: aload_0
+       323: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       326: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+       329: ldc           #154                // String abstractConnectionHandler.negotiatedProcessor.fail
+       331: iconst_1
+       332: anewarray     #2                  // class java/lang/Object
+       335: dup
+       336: iconst_0
+       337: aload         5
+       339: aastore
+       340: invokevirtual #70                 // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+       343: invokeinterface #156,  2          // InterfaceMethod org/apache/juli/logging/Log.debug:(Ljava/lang/Object;)V
+       348: getstatic     #80                 // Field org/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState.CLOSED:Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+       351: areturn
+       352: aload         4
+       354: ifnonnull     404
+       357: aload_0
+       358: getfield      #30                 // Field recycledProcessors:Lorg/apache/coyote/AbstractProtocol$RecycledProcessors;
+       361: invokevirtual #159                // Method org/apache/coyote/AbstractProtocol$RecycledProcessors.pop:()Lorg/apache/coyote/Processor;
+       364: astore        4
+       366: aload_0
+       367: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       370: invokeinterface #52,  1           // InterfaceMethod org/apache/juli/logging/Log.isTraceEnabled:()Z
+       375: ifeq          404
+       378: aload_0
+       379: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       382: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+       385: ldc           #163                // String abstractConnectionHandler.processorPop
+       387: iconst_1
+       388: anewarray     #2                  // class java/lang/Object
+       391: dup
+       392: iconst_0
+       393: aload         4
+       395: aastore
+       396: invokevirtual #70                 // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+       399: invokeinterface #76,  2           // InterfaceMethod org/apache/juli/logging/Log.trace:(Ljava/lang/Object;)V
+       404: aload         4
+       406: ifnonnull     462
+       409: aload_0
+       410: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+       413: invokevirtual #165                // Method org/apache/coyote/AbstractProtocol.createProcessor:()Lorg/apache/coyote/Processor;
+       416: astore        4
+       418: aload_0
+       419: aload         4
+       421: invokevirtual #168                // Method register:(Lorg/apache/coyote/Processor;)V
+       424: aload_0
+       425: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       428: invokeinterface #52,  1           // InterfaceMethod org/apache/juli/logging/Log.isTraceEnabled:()Z
+       433: ifeq          462
+       436: aload_0
+       437: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       440: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+       443: ldc           #143                // String abstractConnectionHandler.processorCreate
+       445: iconst_1
+       446: anewarray     #2                  // class java/lang/Object
+       449: dup
+       450: iconst_0
+       451: aload         4
+       453: aastore
+       454: invokevirtual #70                 // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+       457: invokeinterface #76,  2           // InterfaceMethod org/apache/juli/logging/Log.trace:(Ljava/lang/Object;)V
+       462: aload         4
+       464: aload_1
+       465: invokevirtual #171                // Method org/apache/tomcat/util/net/SocketWrapperBase.getSslSupport:()Lorg/apache/tomcat/util/net/SSLSupport;
+       468: invokeinterface #175,  2          // InterfaceMethod org/apache/coyote/Processor.setSslSupport:(Lorg/apache/tomcat/util/net/SSLSupport;)V
+       473: aload         4
+       475: aload_1
+       476: aload_2
+       477: invokeinterface #179,  3          // InterfaceMethod org/apache/coyote/Processor.process:(Lorg/apache/tomcat/util/net/SocketWrapperBase;Lorg/apache/tomcat/util/net/SocketEvent;)Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+       482: astore        5
+       484: aload         5
+       486: getstatic     #183                // Field org/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState.UPGRADING:Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+       489: if_acmpne     782
+       492: aload         4
+       494: invokeinterface #186,  1          // InterfaceMethod org/apache/coyote/Processor.getUpgradeToken:()Lorg/apache/coyote/UpgradeToken;
+       499: astore        6
+       501: aload         4
+       503: invokeinterface #190,  1          // InterfaceMethod org/apache/coyote/Processor.getLeftoverInput:()Ljava/nio/ByteBuffer;
+       508: astore        7
+       510: aload_1
+       511: aload         7
+       513: invokevirtual #194                // Method org/apache/tomcat/util/net/SocketWrapperBase.unRead:(Ljava/nio/ByteBuffer;)V
+       516: aload         6
+       518: ifnonnull     609
+       521: aload_0
+       522: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+       525: ldc           #198                // String h2c
+       527: invokevirtual #200                // Method org/apache/coyote/AbstractProtocol.getUpgradeProtocol:(Ljava/lang/String;)Lorg/apache/coyote/UpgradeProtocol;
+       530: astore        8
+       532: aload         8
+       534: ifnull        563
+       537: aload_0
+       538: aload         4
+       540: invokevirtual #203                // Method release:(Lorg/apache/coyote/Processor;)V
+       543: aload         8
+       545: aload_1
+       546: aload_0
+       547: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+       550: invokevirtual #133                // Method org/apache/coyote/AbstractProtocol.getAdapter:()Lorg/apache/coyote/Adapter;
+       553: invokeinterface #137,  3          // InterfaceMethod org/apache/coyote/UpgradeProtocol.getProcessor:(Lorg/apache/tomcat/util/net/SocketWrapperBase;Lorg/apache/coyote/Adapter;)Lorg/apache/coyote/Processor;
+       558: astore        4
+       560: goto          606
+       563: aload_0
+       564: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       567: invokeinterface #151,  1          // InterfaceMethod org/apache/juli/logging/Log.isDebugEnabled:()Z
+       572: ifeq          601
+       575: aload_0
+       576: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       579: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+       582: ldc           #154                // String abstractConnectionHandler.negotiatedProcessor.fail
+       584: iconst_1
+       585: anewarray     #2                  // class java/lang/Object
+       588: dup
+       589: iconst_0
+       590: ldc           #198                // String h2c
+       592: aastore
+       593: invokevirtual #70                 // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+       596: invokeinterface #156,  2          // InterfaceMethod org/apache/juli/logging/Log.debug:(Ljava/lang/Object;)V
+       601: getstatic     #80                 // Field org/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState.CLOSED:Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+       604: astore        5
+       606: goto          782
+       609: aload         6
+       611: invokevirtual #206                // Method org/apache/coyote/UpgradeToken.httpUpgradeHandler:()Ljakarta/servlet/http/HttpUpgradeHandler;
+       614: astore        8
+       616: aload_0
+       617: aload         4
+       619: invokevirtual #203                // Method release:(Lorg/apache/coyote/Processor;)V
+       622: aload_0
+       623: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+       626: aload_1
+       627: aload         6
+       629: invokevirtual #212                // Method org/apache/coyote/AbstractProtocol.createUpgradeProcessor:(Lorg/apache/tomcat/util/net/SocketWrapperBase;Lorg/apache/coyote/UpgradeToken;)Lorg/apache/coyote/Processor;
+       632: astore        4
+       634: aload_0
+       635: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       638: invokeinterface #52,  1           // InterfaceMethod org/apache/juli/logging/Log.isTraceEnabled:()Z
+       643: ifeq          676
+       646: aload_0
+       647: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       650: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+       653: ldc           #216                // String abstractConnectionHandler.upgradeCreate
+       655: iconst_2
+       656: anewarray     #2                  // class java/lang/Object
+       659: dup
+       660: iconst_0
+       661: aload         4
+       663: aastore
+       664: dup
+       665: iconst_1
+       666: aload_1
+       667: aastore
+       668: invokevirtual #70                 // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+       671: invokeinterface #76,  2           // InterfaceMethod org/apache/juli/logging/Log.trace:(Ljava/lang/Object;)V
+       676: aload         6
+       678: invokevirtual #218                // Method org/apache/coyote/UpgradeToken.instanceManager:()Lorg/apache/tomcat/InstanceManager;
+       681: ifnonnull     699
+       684: aload         8
+       686: aload         4
+       688: checkcast     #222                // class jakarta/servlet/http/WebConnection
+       691: invokeinterface #224,  2          // InterfaceMethod jakarta/servlet/http/HttpUpgradeHandler.init:(Ljakarta/servlet/http/WebConnection;)V
+       696: goto          756
+       699: aload         6
+       701: invokevirtual #230                // Method org/apache/coyote/UpgradeToken.contextBind:()Lorg/apache/tomcat/ContextBind;
+       704: aconst_null
+       705: invokeinterface #234,  2          // InterfaceMethod org/apache/tomcat/ContextBind.bind:(Ljava/lang/ClassLoader;)Ljava/lang/ClassLoader;
+       710: astore        9
+       712: aload         8
+       714: aload         4
+       716: checkcast     #222                // class jakarta/servlet/http/WebConnection
+       719: invokeinterface #224,  2          // InterfaceMethod jakarta/servlet/http/HttpUpgradeHandler.init:(Ljakarta/servlet/http/WebConnection;)V
+       724: aload         6
+       726: invokevirtual #230                // Method org/apache/coyote/UpgradeToken.contextBind:()Lorg/apache/tomcat/ContextBind;
+       729: aload         9
+       731: invokeinterface #240,  2          // InterfaceMethod org/apache/tomcat/ContextBind.unbind:(Ljava/lang/ClassLoader;)V
+       736: goto          756
+       739: astore        10
+       741: aload         6
+       743: invokevirtual #230                // Method org/apache/coyote/UpgradeToken.contextBind:()Lorg/apache/tomcat/ContextBind;
+       746: aload         9
+       748: invokeinterface #240,  2          // InterfaceMethod org/apache/tomcat/ContextBind.unbind:(Ljava/lang/ClassLoader;)V
+       753: aload         10
+       755: athrow
+       756: aload         8
+       758: instanceof    #244                // class org/apache/coyote/http11/upgrade/InternalHttpUpgradeHandler
+       761: ifeq          782
+       764: aload         8
+       766: checkcast     #244                // class org/apache/coyote/http11/upgrade/InternalHttpUpgradeHandler
+       769: invokeinterface #246,  1          // InterfaceMethod org/apache/coyote/http11/upgrade/InternalHttpUpgradeHandler.hasAsyncIO:()Z
+       774: ifeq          782
+       777: getstatic     #249                // Field org/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState.ASYNC_IO:Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+       780: astore        5
+       782: aload         5
+       784: getstatic     #183                // Field org/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState.UPGRADING:Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+       787: if_acmpeq     473
+       790: aload         5
+       792: getstatic     #252                // Field org/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState.LONG:Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+       795: if_acmpne     827
+       798: aload_0
+       799: aload_1
+       800: aload         4
+       802: invokevirtual #255                // Method longPoll:(Lorg/apache/tomcat/util/net/SocketWrapperBase;Lorg/apache/coyote/Processor;)V
+       805: aload         4
+       807: invokeinterface #99,  1           // InterfaceMethod org/apache/coyote/Processor.isAsync:()Z
+       812: ifeq          949
+       815: aload_0
+       816: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+       819: aload         4
+       821: invokevirtual #259                // Method org/apache/coyote/AbstractProtocol.addWaitingProcessor:(Lorg/apache/coyote/Processor;)V
+       824: goto          949
+       827: aload         5
+       829: getstatic     #108                // Field org/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState.OPEN:Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+       832: if_acmpne     851
+       835: aload_0
+       836: aload         4
+       838: invokevirtual #203                // Method release:(Lorg/apache/coyote/Processor;)V
+       841: aconst_null
+       842: astore        4
+       844: aload_1
+       845: invokevirtual #262                // Method org/apache/tomcat/util/net/SocketWrapperBase.registerReadInterest:()V
+       848: goto          949
+       851: aload         5
+       853: getstatic     #265                // Field org/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState.SENDFILE:Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+       856: if_acmpne     862
+       859: goto          949
+       862: aload         5
+       864: getstatic     #268                // Field org/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState.UPGRADED:Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+       867: if_acmpne     896
+       870: aload_2
+       871: getstatic     #271                // Field org/apache/tomcat/util/net/SocketEvent.OPEN_WRITE:Lorg/apache/tomcat/util/net/SocketEvent;
+       874: if_acmpeq     949
+       877: aload_0
+       878: aload_1
+       879: aload         4
+       881: invokevirtual #255                // Method longPoll:(Lorg/apache/tomcat/util/net/SocketWrapperBase;Lorg/apache/coyote/Processor;)V
+       884: aload_0
+       885: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+       888: aload         4
+       890: invokevirtual #259                // Method org/apache/coyote/AbstractProtocol.addWaitingProcessor:(Lorg/apache/coyote/Processor;)V
+       893: goto          949
+       896: aload         5
+       898: getstatic     #249                // Field org/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState.ASYNC_IO:Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+       901: if_acmpne     923
+       904: aload_2
+       905: getstatic     #271                // Field org/apache/tomcat/util/net/SocketEvent.OPEN_WRITE:Lorg/apache/tomcat/util/net/SocketEvent;
+       908: if_acmpeq     949
+       911: aload_0
+       912: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+       915: aload         4
+       917: invokevirtual #259                // Method org/apache/coyote/AbstractProtocol.addWaitingProcessor:(Lorg/apache/coyote/Processor;)V
+       920: goto          949
+       923: aload         5
+       925: getstatic     #274                // Field org/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState.SUSPENDED:Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+       928: if_acmpne     934
+       931: goto          949
+       934: aload_0
+       935: aload         4
+       937: invokevirtual #277                // Method cleanUpIfUpgrade:(Lorg/apache/coyote/Processor;)V
+       940: aload_0
+       941: aload         4
+       943: invokevirtual #203                // Method release:(Lorg/apache/coyote/Processor;)V
+       946: aconst_null
+       947: astore        4
+       949: aload         4
+       951: ifnull        960
+       954: aload_1
+       955: aload         4
+       957: invokevirtual #280                // Method org/apache/tomcat/util/net/SocketWrapperBase.setCurrentProcessor:(Ljava/lang/Object;)V
+       960: aload         5
+       962: areturn
+       963: astore        5
+       965: aload_0
+       966: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       969: invokeinterface #151,  1          // InterfaceMethod org/apache/juli/logging/Log.isDebugEnabled:()Z
+       974: ifeq          997
+       977: aload_0
+       978: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       981: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+       984: ldc_w         #285                // String abstractConnectionHandler.socketexception.debug
+       987: invokevirtual #287                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+       990: aload         5
+       992: invokeinterface #290,  3          // InterfaceMethod org/apache/juli/logging/Log.debug:(Ljava/lang/Object;Ljava/lang/Throwable;)V
+       997: goto          1126
+      1000: astore        5
+      1002: aload_0
+      1003: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+      1006: invokeinterface #151,  1          // InterfaceMethod org/apache/juli/logging/Log.isDebugEnabled:()Z
+      1011: ifeq          1034
+      1014: aload_0
+      1015: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+      1018: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+      1021: ldc_w         #295                // String abstractConnectionHandler.ioexception.debug
+      1024: invokevirtual #287                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+      1027: aload         5
+      1029: invokeinterface #290,  3          // InterfaceMethod org/apache/juli/logging/Log.debug:(Ljava/lang/Object;Ljava/lang/Throwable;)V
+      1034: goto          1126
+      1037: astore        5
+      1039: aload_0
+      1040: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+      1043: invokeinterface #151,  1          // InterfaceMethod org/apache/juli/logging/Log.isDebugEnabled:()Z
+      1048: ifeq          1071
+      1051: aload_0
+      1052: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+      1055: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+      1058: ldc_w         #299                // String abstractConnectionHandler.protocolexception.debug
+      1061: invokevirtual #287                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+      1064: aload         5
+      1066: invokeinterface #290,  3          // InterfaceMethod org/apache/juli/logging/Log.debug:(Ljava/lang/Object;Ljava/lang/Throwable;)V
+      1071: goto          1126
+      1074: astore        5
+      1076: aload_0
+      1077: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+      1080: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+      1083: ldc_w         #303                // String abstractConnectionHandler.oome
+      1086: invokevirtual #287                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+      1089: aload         5
+      1091: invokeinterface #305,  3          // InterfaceMethod org/apache/juli/logging/Log.error:(Ljava/lang/Object;Ljava/lang/Throwable;)V
+      1096: goto          1126
+      1099: astore        5
+      1101: aload         5
+      1103: invokestatic  #310                // Method org/apache/tomcat/util/ExceptionUtils.handleThrowable:(Ljava/lang/Throwable;)V
+      1106: aload_0
+      1107: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+      1110: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+      1113: ldc_w         #316                // String abstractConnectionHandler.error
+      1116: invokevirtual #287                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+      1119: aload         5
+      1121: invokeinterface #305,  3          // InterfaceMethod org/apache/juli/logging/Log.error:(Ljava/lang/Object;Ljava/lang/Throwable;)V
+      1126: aload_0
+      1127: aload         4
+      1129: invokevirtual #277                // Method cleanUpIfUpgrade:(Lorg/apache/coyote/Processor;)V
+      1132: aload_0
+      1133: aload         4
+      1135: invokevirtual #203                // Method release:(Lorg/apache/coyote/Processor;)V
+      1138: getstatic     #80                 // Field org/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState.CLOSED:Lorg/apache/tomcat/util/net/AbstractEndpoint$Handler$SocketState;
+      1141: areturn
+      Exception table:
+         from    to  target type
+           712   724   739   any
+           739   741   739   any
+           199   351   963   Class java/net/SocketException
+           352   962   963   Class java/net/SocketException
+           199   351  1000   Class java/io/IOException
+           352   962  1000   Class java/io/IOException
+           199   351  1037   Class org/apache/coyote/ProtocolException
+           352   962  1037   Class org/apache/coyote/ProtocolException
+           199   351  1074   Class java/lang/OutOfMemoryError
+           352   962  1074   Class java/lang/OutOfMemoryError
+           199   351  1099   Class java/lang/Throwable
+           352   962  1099   Class java/lang/Throwable
+
+  private void cleanUpIfUpgrade(org.apache.coyote.Processor);
+    descriptor: (Lorg/apache/coyote/Processor;)V
+    Code:
+         0: aload_1
+         1: ifnull        169
+         4: aload_1
+         5: invokeinterface #102,  1          // InterfaceMethod org/apache/coyote/Processor.isUpgrade:()Z
+        10: ifeq          169
+        13: aload_1
+        14: invokeinterface #186,  1          // InterfaceMethod org/apache/coyote/Processor.getUpgradeToken:()Lorg/apache/coyote/UpgradeToken;
+        19: astore_2
+        20: aload_2
+        21: invokevirtual #206                // Method org/apache/coyote/UpgradeToken.httpUpgradeHandler:()Ljakarta/servlet/http/HttpUpgradeHandler;
+        24: astore_3
+        25: aload_2
+        26: invokevirtual #218                // Method org/apache/coyote/UpgradeToken.instanceManager:()Lorg/apache/tomcat/InstanceManager;
+        29: astore        4
+        31: aload         4
+        33: ifnonnull     45
+        36: aload_3
+        37: invokeinterface #318,  1          // InterfaceMethod jakarta/servlet/http/HttpUpgradeHandler.destroy:()V
+        42: goto          169
+        45: aload_2
+        46: invokevirtual #230                // Method org/apache/coyote/UpgradeToken.contextBind:()Lorg/apache/tomcat/ContextBind;
+        49: aconst_null
+        50: invokeinterface #234,  2          // InterfaceMethod org/apache/tomcat/ContextBind.bind:(Ljava/lang/ClassLoader;)Ljava/lang/ClassLoader;
+        55: astore        5
+        57: aload_3
+        58: invokeinterface #318,  1          // InterfaceMethod jakarta/servlet/http/HttpUpgradeHandler.destroy:()V
+        63: aload         4
+        65: aload_3
+        66: invokeinterface #321,  2          // InterfaceMethod org/apache/tomcat/InstanceManager.destroyInstance:(Ljava/lang/Object;)V
+        71: goto          101
+        74: astore        6
+        76: aload         6
+        78: invokestatic  #310                // Method org/apache/tomcat/util/ExceptionUtils.handleThrowable:(Ljava/lang/Throwable;)V
+        81: aload_0
+        82: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+        85: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+        88: ldc_w         #316                // String abstractConnectionHandler.error
+        91: invokevirtual #287                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+        94: aload         6
+        96: invokeinterface #305,  3          // InterfaceMethod org/apache/juli/logging/Log.error:(Ljava/lang/Object;Ljava/lang/Throwable;)V
+       101: aload_2
+       102: invokevirtual #230                // Method org/apache/coyote/UpgradeToken.contextBind:()Lorg/apache/tomcat/ContextBind;
+       105: aload         5
+       107: invokeinterface #240,  2          // InterfaceMethod org/apache/tomcat/ContextBind.unbind:(Ljava/lang/ClassLoader;)V
+       112: goto          169
+       115: astore        7
+       117: aload         4
+       119: aload_3
+       120: invokeinterface #321,  2          // InterfaceMethod org/apache/tomcat/InstanceManager.destroyInstance:(Ljava/lang/Object;)V
+       125: goto          155
+       128: astore        8
+       130: aload         8
+       132: invokestatic  #310                // Method org/apache/tomcat/util/ExceptionUtils.handleThrowable:(Ljava/lang/Throwable;)V
+       135: aload_0
+       136: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       139: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+       142: ldc_w         #316                // String abstractConnectionHandler.error
+       145: invokevirtual #287                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+       148: aload         8
+       150: invokeinterface #305,  3          // InterfaceMethod org/apache/juli/logging/Log.error:(Ljava/lang/Object;Ljava/lang/Throwable;)V
+       155: aload_2
+       156: invokevirtual #230                // Method org/apache/coyote/UpgradeToken.contextBind:()Lorg/apache/tomcat/ContextBind;
+       159: aload         5
+       161: invokeinterface #240,  2          // InterfaceMethod org/apache/tomcat/ContextBind.unbind:(Ljava/lang/ClassLoader;)V
+       166: aload         7
+       168: athrow
+       169: return
+      Exception table:
+         from    to  target type
+            63    71    74   Class java/lang/Throwable
+            57    63   115   any
+           117   125   128   Class java/lang/Throwable
+           115   117   115   any
+
+  protected void longPoll(org.apache.tomcat.util.net.SocketWrapperBase<?>, org.apache.coyote.Processor);
+    descriptor: (Lorg/apache/tomcat/util/net/SocketWrapperBase;Lorg/apache/coyote/Processor;)V
+    Code:
+         0: aload_2
+         1: invokeinterface #99,  1           // InterfaceMethod org/apache/coyote/Processor.isAsync:()Z
+         6: ifne          13
+         9: aload_1
+        10: invokevirtual #262                // Method org/apache/tomcat/util/net/SocketWrapperBase.registerReadInterest:()V
+        13: return
+
+  private void release(org.apache.coyote.Processor);
+    descriptor: (Lorg/apache/coyote/Processor;)V
+    Code:
+         0: aload_1
+         1: ifnull        69
+         4: aload_1
+         5: invokeinterface #326,  1          // InterfaceMethod org/apache/coyote/Processor.recycle:()V
+        10: aload_1
+        11: invokeinterface #102,  1          // InterfaceMethod org/apache/coyote/Processor.isUpgrade:()Z
+        16: ifeq          30
+        19: aload_0
+        20: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+        23: aload_1
+        24: invokevirtual #111                // Method org/apache/coyote/AbstractProtocol.removeWaitingProcessor:(Lorg/apache/coyote/Processor;)V
+        27: goto          69
+        30: aload_0
+        31: getfield      #30                 // Field recycledProcessors:Lorg/apache/coyote/AbstractProtocol$RecycledProcessors;
+        34: aload_1
+        35: invokevirtual #329                // Method org/apache/coyote/AbstractProtocol$RecycledProcessors.push:(Lorg/apache/coyote/Processor;)Z
+        38: pop
+        39: aload_0
+        40: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+        43: invokeinterface #52,  1           // InterfaceMethod org/apache/juli/logging/Log.isTraceEnabled:()Z
+        48: ifeq          69
+        51: aload_0
+        52: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+        55: aload_1
+        56: invokestatic  #333                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+        59: invokedynamic #337,  0            // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+        64: invokeinterface #76,  2           // InterfaceMethod org/apache/juli/logging/Log.trace:(Ljava/lang/Object;)V
+        69: return
+
+  public void release(org.apache.tomcat.util.net.SocketWrapperBase<S>);
+    descriptor: (Lorg/apache/tomcat/util/net/SocketWrapperBase;)V
+    Code:
+         0: aload_1
+         1: invokevirtual #86                 // Method org/apache/tomcat/util/net/SocketWrapperBase.takeCurrentProcessor:()Ljava/lang/Object;
+         4: checkcast     #89                 // class org/apache/coyote/Processor
+         7: astore_2
+         8: aload_0
+         9: aload_2
+        10: invokevirtual #277                // Method cleanUpIfUpgrade:(Lorg/apache/coyote/Processor;)V
+        13: aload_0
+        14: aload_2
+        15: invokevirtual #203                // Method release:(Lorg/apache/coyote/Processor;)V
+        18: return
+
+  protected void register(org.apache.coyote.Processor);
+    descriptor: (Lorg/apache/coyote/Processor;)V
+    Code:
+         0: aload_0
+         1: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+         4: invokevirtual #340                // Method org/apache/coyote/AbstractProtocol.getDomain:()Ljava/lang/String;
+         7: ifnull        167
+        10: aload_0
+        11: dup
+        12: astore_2
+        13: monitorenter
+        14: aload_0
+        15: getfield      #21                 // Field registerCount:Ljava/util/concurrent/atomic/AtomicLong;
+        18: invokevirtual #343                // Method java/util/concurrent/atomic/AtomicLong.incrementAndGet:()J
+        21: lstore_3
+        22: aload_1
+        23: invokeinterface #347,  1          // InterfaceMethod org/apache/coyote/Processor.getRequest:()Lorg/apache/coyote/Request;
+        28: invokevirtual #351                // Method org/apache/coyote/Request.getRequestProcessor:()Lorg/apache/coyote/RequestInfo;
+        31: astore        5
+        33: aload         5
+        35: aload_0
+        36: getfield      #10                 // Field global:Lorg/apache/coyote/RequestGroupInfo;
+        39: invokevirtual #357                // Method org/apache/coyote/RequestInfo.setGlobalProcessor:(Lorg/apache/coyote/RequestGroupInfo;)V
+        42: new           #363                // class javax/management/ObjectName
+        45: dup
+        46: aload_0
+        47: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+        50: invokevirtual #340                // Method org/apache/coyote/AbstractProtocol.getDomain:()Ljava/lang/String;
+        53: aload_0
+        54: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+        57: invokevirtual #365                // Method org/apache/coyote/AbstractProtocol.getName:()Ljava/lang/String;
+        60: aload_0
+        61: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+        64: invokevirtual #368                // Method org/apache/coyote/AbstractProtocol.getProtocolName:()Ljava/lang/String;
+        67: lload_3
+        68: invokedynamic #371,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)Ljava/lang/String;
+        73: invokespecial #374                // Method javax/management/ObjectName."<init>":(Ljava/lang/String;)V
+        76: astore        6
+        78: aload_0
+        79: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+        82: invokeinterface #52,  1           // InterfaceMethod org/apache/juli/logging/Log.isTraceEnabled:()Z
+        87: ifeq          113
+        90: aload_0
+        91: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+        94: aload_1
+        95: invokestatic  #333                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+        98: aload         6
+       100: invokestatic  #333                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+       103: invokedynamic #377,  0            // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+       108: invokeinterface #76,  2           // InterfaceMethod org/apache/juli/logging/Log.trace:(Ljava/lang/Object;)V
+       113: aconst_null
+       114: invokestatic  #380                // Method org/apache/tomcat/util/modeler/Registry.getRegistry:(Ljava/lang/Object;)Lorg/apache/tomcat/util/modeler/Registry;
+       117: aload         5
+       119: aload         6
+       121: aconst_null
+       122: invokevirtual #386                // Method org/apache/tomcat/util/modeler/Registry.registerComponent:(Ljava/lang/Object;Ljavax/management/ObjectName;Ljava/lang/String;)V
+       125: aload         5
+       127: aload         6
+       129: invokevirtual #390                // Method org/apache/coyote/RequestInfo.setRpName:(Ljavax/management/ObjectName;)V
+       132: goto          155
+       135: astore_3
+       136: aload_0
+       137: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       140: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+       143: ldc_w         #396                // String abstractProtocol.processorRegisterError
+       146: invokevirtual #287                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+       149: aload_3
+       150: invokeinterface #398,  3          // InterfaceMethod org/apache/juli/logging/Log.warn:(Ljava/lang/Object;Ljava/lang/Throwable;)V
+       155: aload_2
+       156: monitorexit
+       157: goto          167
+       160: astore        7
+       162: aload_2
+       163: monitorexit
+       164: aload         7
+       166: athrow
+       167: return
+      Exception table:
+         from    to  target type
+            14   132   135   Class java/lang/Exception
+            14   157   160   any
+           160   164   160   any
+
+  protected void unregister(org.apache.coyote.Processor);
+    descriptor: (Lorg/apache/coyote/Processor;)V
+    Code:
+         0: aload_0
+         1: invokevirtual #38                 // Method getProtocol:()Lorg/apache/coyote/AbstractProtocol;
+         4: invokevirtual #340                // Method org/apache/coyote/AbstractProtocol.getDomain:()Ljava/lang/String;
+         7: ifnull        128
+        10: aload_0
+        11: dup
+        12: astore_2
+        13: monitorenter
+        14: aload_1
+        15: invokeinterface #347,  1          // InterfaceMethod org/apache/coyote/Processor.getRequest:()Lorg/apache/coyote/Request;
+        20: astore_3
+        21: aload_3
+        22: ifnonnull     28
+        25: aload_2
+        26: monitorexit
+        27: return
+        28: aload_3
+        29: invokevirtual #351                // Method org/apache/coyote/Request.getRequestProcessor:()Lorg/apache/coyote/RequestInfo;
+        32: astore        4
+        34: aload         4
+        36: aconst_null
+        37: invokevirtual #357                // Method org/apache/coyote/RequestInfo.setGlobalProcessor:(Lorg/apache/coyote/RequestGroupInfo;)V
+        40: aload         4
+        42: invokevirtual #401                // Method org/apache/coyote/RequestInfo.getRpName:()Ljavax/management/ObjectName;
+        45: astore        5
+        47: aload_0
+        48: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+        51: invokeinterface #52,  1           // InterfaceMethod org/apache/juli/logging/Log.isTraceEnabled:()Z
+        56: ifeq          78
+        59: aload_0
+        60: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+        63: aload         5
+        65: invokestatic  #333                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+        68: invokedynamic #405,  0            // InvokeDynamic #3:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+        73: invokeinterface #76,  2           // InterfaceMethod org/apache/juli/logging/Log.trace:(Ljava/lang/Object;)V
+        78: aconst_null
+        79: invokestatic  #380                // Method org/apache/tomcat/util/modeler/Registry.getRegistry:(Ljava/lang/Object;)Lorg/apache/tomcat/util/modeler/Registry;
+        82: aload         5
+        84: invokevirtual #406                // Method org/apache/tomcat/util/modeler/Registry.unregisterComponent:(Ljavax/management/ObjectName;)V
+        87: aload         4
+        89: aconst_null
+        90: invokevirtual #390                // Method org/apache/coyote/RequestInfo.setRpName:(Ljavax/management/ObjectName;)V
+        93: goto          116
+        96: astore_3
+        97: aload_0
+        98: invokevirtual #51                 // Method getLog:()Lorg/apache/juli/logging/Log;
+       101: getstatic     #58                 // Field org/apache/coyote/AbstractProtocol.sm:Lorg/apache/tomcat/util/res/StringManager;
+       104: ldc_w         #409                // String abstractProtocol.processorUnregisterError
+       107: invokevirtual #287                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+       110: aload_3
+       111: invokeinterface #398,  3          // InterfaceMethod org/apache/juli/logging/Log.warn:(Ljava/lang/Object;Ljava/lang/Throwable;)V
+       116: aload_2
+       117: monitorexit
+       118: goto          128
+       121: astore        6
+       123: aload_2
+       124: monitorexit
+       125: aload         6
+       127: athrow
+       128: return
+      Exception table:
+         from    to  target type
+            14    25    96   Class java/lang/Exception
+            28    93    96   Class java/lang/Exception
+            14    27   121   any
+            28   118   121   any
+           121   125   121   any
+
+  public final void pause();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: getfield      #34                 // Field proto:Lorg/apache/coyote/AbstractProtocol;
+         4: invokevirtual #411                // Method org/apache/coyote/AbstractProtocol.getEndpoint:()Lorg/apache/tomcat/util/net/AbstractEndpoint;
+         7: invokevirtual #415                // Method org/apache/tomcat/util/net/AbstractEndpoint.getConnections:()Ljava/util/Set;
+        10: invokeinterface #421,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+        15: astore_1
+        16: aload_1
+        17: invokeinterface #427,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        22: ifeq          56
+        25: aload_1
+        26: invokeinterface #432,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        31: checkcast     #65                 // class org/apache/tomcat/util/net/SocketWrapperBase
+        34: astore_2
+        35: aload_2
+        36: invokevirtual #435                // Method org/apache/tomcat/util/net/SocketWrapperBase.getCurrentProcessor:()Ljava/lang/Object;
+        39: checkcast     #89                 // class org/apache/coyote/Processor
+        42: astore_3
+        43: aload_3
+        44: ifnull        53
+        47: aload_3
+        48: invokeinterface #438,  1          // InterfaceMethod org/apache/coyote/Processor.pause:()V
+        53: goto          16
+        56: return
+}

@@ -1,0 +1,36 @@
+"""Fixed SDK javap/source metadata preflight; no Product/Test compile or initialization."""
+from pathlib import Path
+import hashlib,json,datetime,re,zipfile,os,shutil
+import pg9666_pagination_static as c
+R=Path(__file__).resolve().parents[4];B=R/'evidence/01_PT/018_NK-OPS-001';T=R.parent/'toolchain';P=R.parent/'pgpt-runs/PG379/pg23368-web-service-sdk-passive-v1';O=B/'evidence/PG23368-web-service-sdk-passive-v1';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();load=lambda p:json.loads(p.read_bytes())
+assert not P.exists() and not O.exists();assert not any(os.environ.get(k) for k in ['JAVA_TOOL_OPTIONS','JDK_JAVA_OPTIONS','_JAVA_OPTIONS']);sdkp=B/'evidence/provisional/PG8170-prometheus-sdk-prepare-v1/manifest.json';assert sha(sdkp)=='371004a7bcadce5d398059e765ef8f3dc876a7ea004fced60ba8ceb05fad123a';sdk=load(sdkp);postp=B/'evidence/provisional/PG8173-prometheus-sdk-exact-source-post-v1/manifest.json';assert sha(postp)=='a5a2bfbe93bf8b8cc9521b67d1ce4a4c540bc967d7814927b0417807c6b30572';assert load(postp)['actualExit']==0;deps={v['jar']['path']:v['jar']['sha256'] for v in sdk['downloaded'].values()};deps.update({v['path']:v['sha256'] for v in sdk['reused'].values()});assert len(deps)==15
+legacy=B/'evidence/provisional/PG8948-web-metric-pipeline-host-v1/manifest.json';lm=load(legacy);assert lm['actualExit']==0 and lm['qualification']=='RAW_TERMINAL_ONLY_POST_PENDING';wanted={'tomcat-embed-core-11.0.25.jar','HikariCP-7.1.0.jar','slf4j-api-2.0.18.jar'}
+for p,h in lm['begin']['dependencyHashes'].items():
+ if Path(p).name in wanted:deps[p]=h
+assert wanted<={Path(p).name for p in deps} and all(sha(Path(p))==h for p,h in deps.items())
+entries={};services={};notices={}
+for path,h in deps.items():
+ with zipfile.ZipFile(path) as z:
+  names=z.namelist();entries[path]=set(names)
+  for n in names:
+   if n.startswith('META-INF/services/') and not n.endswith('/'):services[Path(path).name+':'+n]=z.read(n).decode('utf-8')
+   if n in ['META-INF/NOTICE','META-INF/NOTICE.txt']:notices[Path(path).stem+'-NOTICE.stdout']=z.read(n)
+for n in ['META-INF/services/org.slf4j.spi.SLF4JServiceProvider','org/postgresql/Driver.class','io/opentelemetry/api/GlobalOpenTelemetry.class','io/opentelemetry/sdk/OpenTelemetrySdk.class']:
+ assert not any(n in names for names in entries.values()),n
+classes=['io.micrometer.core.instrument.binder.jvm.JvmGcMetrics','io.micrometer.core.instrument.binder.system.ProcessorMetrics','io.micrometer.core.instrument.binder.system.FileDescriptorMetrics','io.micrometer.prometheusmetrics.PrometheusMeterRegistry','io.prometheus.metrics.model.registry.PrometheusRegistry','io.micrometer.core.instrument.simple.SimpleMeterRegistry','org.apache.catalina.connector.Connector','org.apache.catalina.connector.Request','org.apache.catalina.connector.Response','org.apache.coyote.http11.Http11NioProtocol','org.apache.tomcat.util.net.NioEndpoint','org.apache.coyote.Request','org.apache.coyote.Response','org.apache.catalina.valves.ValveBase']
+for n in classes:assert sum(n.replace('.','/')+'.class' in v for v in entries.values())==1,n
+P.mkdir();c.SLOT=P;stage=c.step('sdk-passive-javap',[str(T/'jdk-25.0.4/bin/javap'),'-classpath',':'.join(deps),'-p','-c','-s',*classes],R,timeout=180);assert stage['actualExit']==0
+normal=R.parent/'pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/manifest.safe.json';assert sha(normal)=='b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27';nm=load(normal);assert nm['actualExit']==0;webroot='src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/';graph=['monitoring/'+n for n in ['WebServiceMetricBinding','WebMetricContext','WebDbPoolMetricBinding','WebDbPoolMetricObservation','WebDbPoolMetricCollector','WebDbPoolMetricRecorder','HttpMetricValve','HttpMetricRecorder','HttpMetricContract','OverflowSafeHttpMeterRegistry','WebStandardMetricSource','WebStandardMetrics','WebJvmMetrics','WebSystemMetrics','WebGcMetricRegistration','WebCustomMetricPayload']]+['logging/WebRequestTrace','security/WebRequestContext'];sources={webroot+n+'.java':sha(R/(webroot+n+'.java')) for n in graph};assert all(nm['begin']['inputHashes'][p]==h for p,h in sources.items());tests={}
+for name in ['WebServiceMetricBindingTest','WebDbPoolMetricObservationTest']:
+ p='src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/'+name+'.java';tests[p]=sha(R/p)
+t=R/next(n for n in tests if n.endswith('WebServiceMetricBindingTest.java'));text=t.read_text();methods=re.findall(r'void\s+(webservice\d+\w+)\s*\(',text);assert len(methods)==22 and text.count('@Test')==22;held=next(n for n in methods if n.startswith('webservice009'));selected=[n for n in methods if n!=held];assert len(selected)==21
+# No Product or original Test invocation occurs. Runtime selection requires a separate explicit
+# source/static/SDK review and fresh group. Merely excluding a held path is never a PASS.
+O.mkdir();files={}
+for name in ['sdk-passive-javap.stdout','sdk-passive-javap.stderr','sdk-passive-javap-begin.safe.json','sdk-passive-javap-exit.safe.json']:
+ shutil.copyfile(P/name,O/name);files[name]=sha(O/name)
+for name,data in notices.items():(O/name).write_bytes(data);files[name]=sha(O/name)
+licensep=B/'evidence/PG23286-pool-sdk-license-provenance-v1/vendor-LICENSE.txt'
+if not licensep.exists():licensep=Path('/usr/share/common-licenses/Apache-2.0')
+shutil.copyfile(licensep,O/'vendor-LICENSE.txt');files['vendor-LICENSE.txt']=sha(O/'vendor-LICENSE.txt')
+value=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),source=__import__('subprocess').check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip(),productionCoreMain=nm['source'],legacyRawTerminal=dict(path=str(legacy.relative_to(R)),sha256=sha(legacy),source=lm['source'],cases=len(lm['cases']),qualification=lm['qualification'],fullCurrentSourceProofTransferred=False),sdkManifest=dict(path=str(sdkp.relative_to(R)),sha256=sha(sdkp)),sdkExactPost=dict(path=str(postp.relative_to(R)),sha256=sha(postp)),sdkJarHashes=deps,services=services,classesDisassembled=classes,javap=stage,mainSourceHashes=sources,testSourceHashes=tests,currentServiceTestMethods=methods,heldMethods=[dict(name=held,reason='Calls HttpMetricValve.signalFailure -> WebStartupException.preserveFatal; explicit four-held initialization not permitted.',state='NOT_EXECUTED_HOLD_NOT_PASS')],candidateMethods=selected,candidateCount=21,passiveGraphReviewStatus='SDK_METHOD_AND_CONFIGURATION_REVIEW_STILL_REQUIRED_BEFORE_ANY_RUNTIME',plannedFutureEmptyPrometheusConfig=True,plannedJvmOrdinaryCallbacks='Own JDK management/GC notifications, owned registry closure, unstarted Tomcat value metadata, own bounded executor only; no real backend, remote JMX, service/start/admission or target process control.',productTestsExecuted=0,productClassesInitialized=0,sdkClassesInitialized=0,actualBackendActions=0,formalUpdated=False,whole451Accepted=False,newAcceptance=0,effortRate=None,files=files,tool=dict(path=str(Path(__file__).relative_to(R)),sha256=sha(Path(__file__))));(O/'manifest.json').write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,sdkClassesDisassembled=14,currentTestMethods=22,candidate21=21,held=1,productTestsExecuted=0,fullProofTransferred=False,manifestSha256=sha(O/'manifest.json'))))
