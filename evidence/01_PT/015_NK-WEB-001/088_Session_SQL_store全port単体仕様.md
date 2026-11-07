@@ -29,3 +29,8 @@ PT_DEFAULT。全239行を確認し、必須calleeは公開format-only SessionPay
 null/欠落/空/未知型/境界/各SQLとowned close例外/二row/再送CAS0/独立並行を全15methodで確認する。unknown provider runtimeを成功へしない。Main全physical/全Code L/M/C/B未達0が必要で、標準compiler filterだけ、support DTO/helperをwhole sourceへ加算しない。SDK/JDBC interface以外のdriver・providerはclasspath/runtimeから除外、Main既normal22084/六静的22086は同byteで再利用、新Testだけlint/Werror/PMD/CS/GJFを実施。source固定push後一Unit、実exit/XML/F-E-S-abort0/一exec-session/CRC/probe/全実method/initを独立postで照合する。旧exec/旧sourceを合算しない。
 
 元/v3/v4/v5・正式1964-53・工数null・QA051final・全HOLD不変。群開始2/5/9pp cap10、開始unique415/whole93。実DB後条件・constraint・grant・race/real crypto・実session/filter/runtime/CHR/451/親leafは別未受入。新規unit自身が不成立なら欠測/失敗のまま保持する。
+
+
+## 実測後の標準生成code分母確認
+
+normal physicalはJdbcWebSessionStoreとprivate InvalidStoredRowの二class。後者の暗黙private無引数constructorはaload_0/super RuntimeException.<init>/returnだけで、標準JaCoCo0.8.15 PrivateEmptyNoArgConstructorFilterがCode分母から除く。22370のclassfile/tool metadataで確認し、設定追加・独自除外なし。対象はこの生成constructor一methodだけで、marker自体は原execのraw1/1へ到達している。手書本体はL123/M13/C1/B30全未達0、markerはCode0/N-Aでphysicalを欠落させない。raw本体160/172は標準TWR filter前の値として保持し、172/172とは主張しない。record DTOの生成getter等も標準filterで受動method表に出ないが、手書aad/暗号/lifecycleはhit0を別確認し、支援全source資格へ変換しない。
