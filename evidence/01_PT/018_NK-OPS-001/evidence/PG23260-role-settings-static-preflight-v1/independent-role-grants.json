@@ -1,0 +1,14 @@
+{
+  "nk.sync.request": "nk_web:send;nk_api:consume;nk_ops:browse",
+  "nk.sync.reply.web": "nk_web:consume;nk_api:send;nk_ops:browse",
+  "nk.async.work": "nk_api:send,consume;nk_ops:send,browse",
+  "nk.web.log": "nk_web:send;nk_api:consume;nk_ops:browse",
+  "nk.dead.letter": "nk_web:send;nk_api:send;nk_ops:consume,browse,manage",
+  "nk.expiry": "nk_mq_maintenance:consume,browse;nk_ops:consume,browse,manage",
+  "activemq.management.#": "nk_ops:send,consume,manage,createAddress,deleteAddress,createNonDurableQueue,deleteNonDurableQueue;nk_mq_maintenance:send,consume,manage,createAddress,deleteAddress,createNonDurableQueue,deleteNonDurableQueue",
+  "mops.#": "nk_ops:manage,view,edit",
+  "mops.queue.nk.expiry.q.countMessages": "nk_ops:manage,view;nk_mq_maintenance:manage,view",
+  "mops.queue.nk.expiry.q.getMessageCount": "nk_ops:manage,view;nk_mq_maintenance:manage,view",
+  "mops.queue.nk.expiry.q.getPersistentSize": "nk_ops:manage,view;nk_mq_maintenance:manage,view",
+  "mops.queue.nk.expiry.q.removeMessages": "nk_ops:manage,edit;nk_mq_maintenance:manage,edit"
+}

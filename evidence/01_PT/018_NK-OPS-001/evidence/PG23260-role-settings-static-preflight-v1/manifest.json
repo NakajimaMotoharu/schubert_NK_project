@@ -1,0 +1,70 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T00:28:55.122685+09:00",
+  "source": "dfc1fe8a16becdd4107bca48a6d3020ef0059169",
+  "inputHashes": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/RoleSettingsProjectionPortTest.java": "d51d6ccc84e05657d7f8678bf5733f945f51ebbe3aead20bf24fb8b4eea3582a",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java": "0ffaf0718252a5853bde6b40fa7a604b42340898723eebb00ccf031e6b056647",
+    "evidence/01_PT/018_NK-OPS-001/input/378_role_settings_qualifier.py": "2e48c70731d0d7f97592c53359d8d867903238be11b7233fc6f14e3573c05014",
+    "evidence/01_PT/018_NK-OPS-001/input/379_role_settings_scope.json": "9bd4cbb9bd86a1629efab394749980c7b411285464df30b312922c4b94d8acd7"
+  },
+  "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+  "compileManifestSha256": "d3087b3bd078ec47e2bb3de6d83231bc4eb1bced0b51e6d806cdb448004a2db4",
+  "staticManifestSha256": "6667ab9ad4c7267a1d9fc339920dbcd220361f9069457784cb4f3478bfbdaba2",
+  "pmdRaw": 1,
+  "pmdApplicable": 0,
+  "checkstyle": 0,
+  "unclassified": 0,
+  "sourceRemedyInverseTokens": true,
+  "jsonPrefixReplacementSites": 8,
+  "independentGoldenMatches": 12,
+  "independentGoldenRoles": 27,
+  "independentGoldenBooleanValues": 324,
+  "goldenSha256": "0d1f4b7e72843ed61a8cb01532e26c8827a2388a42916c57c09fe15cc663a7e4",
+  "goldenNegativeChecks": 1,
+  "designRefs": [
+    {
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+    }
+  ],
+  "pmdClassifications": [
+    {
+      "finding": {
+        "beginline": "246",
+        "endline": "246",
+        "begincolumn": "13",
+        "endcolumn": "49",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.mq",
+        "class": "RoleSettingsProjectionPortTest",
+        "method": "unusedSession",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3",
+        "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+      },
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Exact public interface defining loader for a standalone JUnit proxy, no J2EE owner. Every session method raises; no provider/session/network operation. Context loader replacement introduces ambient type resolution."
+    }
+  ],
+  "sdkReview": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/011_acceptor_parser_port_sdk_review.json",
+    "sha256": "658d8823beb8001ade2a83418d7f787ab53cc63267c50782bf7e6d3484b480ec",
+    "parentObjectPreflightSha256": "a3a72df4799631ca5f31c75f647931c0bbc2b2c136d991fff131eda4fb55e738",
+    "parserClosure": "JsonUtil.readJsonArray(String)->StringReader->JsonLoader.readArray(Reader)->explicit new shaded JsonProviderImpl/JsonReaderFactoryImpl->fresh JsonReaderImpl/JsonStreamParserImpl/JSON value wrappers->close StringReader; no externalInputStream or file/DB/session factory"
+  },
+  "expectedTests": 4,
+  "originalTestsCompiled": 0,
+  "productTestsExecuted": 0,
+  "actualBackendActions": 0,
+  "heldFourInitializationsAllowed": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/380_role_settings_static_preflight.py",
+    "sha256": "1284d9fa7571b0db585d44a11b6af4f8a2b88240fbc84a80c3d5a5fd5d864b11"
+  }
+}

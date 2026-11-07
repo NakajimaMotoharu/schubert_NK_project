@@ -1,0 +1,30 @@
+{
+  "groupId": "PGPT-ROLE-SETTINGS-IMMUTABLE-PROJECTION-20261108",
+  "eventId": "PGPT-20261008-4302",
+  "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+  "contextGroupId": "PGPT-ROLE-SETTINGS-IMMUTABLE-PROJECTION-20261108",
+  "workCategory": "SELECTED_TEST",
+  "workDetailCategory": "PGPT-ROLE-SETTINGS-IMMUTABLE-PROJECTION-20261108",
+  "workAttributionKind": "ORIGINAL_PLAN",
+  "workScope": "# Role設定観測Map・通常PT仕様書\n\nProgram NK-OPS-001 / ArtemisRoleReadinessClient.inspect/verify/constructors、RD MQ001002009010/SYS004、UI231251253、SS321§10/13・SSC075076130/SS342§4。既Test本文=ArtemisRoleReadinessClientTest全source確認、既verifyのpermission全drift/unknown/projection拒否を再演目的にしない。今回追加はinspect返却の12match/27role/324boolean・三階層不変snapshotと、partial収集後の第五read失敗で返却無し/後続read無しを明示する通常PT。旧一般permission拒否assertionは同じ第四/第五read境界の補助assertionとしてのみ再利用し、新規caseを水増ししない。PG22234では対応schema不明、失敗/未実装を断定しない。\n\nOPS-ROLE-MAP-001=SS321§10の独立literal role grant表から12match・27role・各12permissionの返却値を全照合。\n002=outer/match/permission Map変更拒否、同source別snapshot identity分離。\n003=第五readで不整合（余剰/不足/重複role、nonobject、name type、missing/extra key、boolean以外・許否drift）または独自RTE/Errorを注入、四つの先行成功をpartial返却せず、同failure identity/後続照会なし・前の完全snapshot不変。\n004=null/reader非String/malformed JSON・default無通信組立・verify同12回読みの契約。\n\nPT_DEFAULT：既設Readerへ固定JSON、ClientSession全method拒否proxy。主codeはnormal22084同byte未変更。actual broker/JMS接続・認証・role設定・権限/アクセス経路変更0、VM/DB/Root/native/process/business files/鍵/四heldclass初期化なし。旧mixed broker Test/helperはcompile/runせず、Main抽出/置換/旧成功確認再演なし。SDK JsonArray経路は既011/PG19244の157class受動レビュー・同jar pinを再利用、実initializationを照合。JVM metadata/default parser property読取を業務I/O0と混同しない。\n\n独立expectedはSS321原表とmanagement namespace承認例外のliteral grant一覧、12permissionを明示しProduction approved()/inspect()でexpected生成しない。着手見積0.5/2/5pp cap7、cost ownerP00501・追加通常PT、正式/leaf/工数非更新。Main physical全Code/nocode・record無し・一exec/session・CRC・実init・四counterの測定を保存。四counter未達を補完せず、global451/real role readiness/IT-ST未受入。source固定→4件真正終了/XML/静的分類/独立post→文書・台帳・checkpointへ。\n",
+  "oracleReferences": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/3737_Role設定観測Map_通常PT仕様書.md",
+      "sha256": "8a0bf1529e1d6ac699edd73031550b1611e0e7bc1d1f0736b0e4dde7df289ca0"
+    }
+  ],
+  "wbsRevision": "WBS-v2-20261007-PMO",
+  "costRevision": "WBS-cost-v2-20261007-PMO",
+  "wbsLeafIds": [
+    "WBS-P005-01"
+  ],
+  "source": "dfc1fe8a16becdd4107bca48a6d3020ef0059169",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "estimateAtGroupStartPp": {
+    "low": 0.5,
+    "base": 2,
+    "high": 5
+  },
+  "capPp": 7,
+  "newAcceptance": 0
+}
