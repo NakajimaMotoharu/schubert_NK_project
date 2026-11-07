@@ -1,0 +1,9 @@
+# 七security port待ち期限是正・全58再資格結果
+
+090/input040042、Main 7aed8eace7c844c2f79f2e39db766faf914890d5、Test/run source e876330336ff85c3c45b510445d3327e34da8149、Verifier 92e8107f5ccadd9b8b26b8c29a245530f223d660。七class八Future.getに10SECONDSのみ追加、全他token/期待値/fixture不変。22512原source、22514 format0、22526 lint/Werror0、22518 rawPMD39全site理由/CS0/MainSB0。最初SDK不足22516 compile1・property欠落22520全58/失敗16を保全し、七旧公開beginのSDK14集合/元JVM必須条件へ工具是正した。失敗を合格加算しない。
+
+PG22542全58/F-E-S-abort0/真正0、一回の新exec-session。22544受動method metadata、22546独立post0 manifest `c83dc755afa467842001f033eb35c5e54fae55bdd42cacf85bbbadae5b093d72`。L163/M29/C8/B58全未達0、八physicalCRC/各raw値は旧資格と完全一致、新execだけから実測。Deferred raw19/20と標準フィルタ後100%を区別しraw100%とは呼ばない。Factoryの自然branch0はN/A、合計branch58を各classへ転用しない。Product初期化33uniqueは元七許可graphの集合と一致（lambda addressだけ正規化、七JVMの初期化回数一致は主張しない）。実methodは供給DTO/Mock/localport範囲、session codec/storeはconstructor/validateKey/close等の明示限定、実DB/暗号/認証/Root/native/四held型初期化0。一般JVM/provider初期化はあり、全JVM I/O零とは呼ばない。
+
+独立工具はrawprobe全点guard誤り22550と空白chunk誤り22554を保存し、raw実値比較/Java字句比較・negative guardsへ是正した。compile/staticを変更されたdriverのためだけに反復せず、その他全inputの一致を検査した。22558は旧85中当39siteの同rule/変数/messageを新sourceへ再束縛、globalのMap62/reflection1は未完。
+
+元command/終了code/日時/OS/JDK/依存/source/XML/CRC/exec/coverage/実method/path/hashはmanifest.filesと原stageに一意。新unique0/再資格58/既whole七保持・追加0、unique430/whole94/正式1964PT-53scope/新leaf0/工数null。BUG2434有限是正と2435..2438工具是正は閉鎖、YKT2177はQuestion動的HOLD/残receiver未解決を維持。451全体/CHR/native/IT-STを閉鎖しない。原2/5/9cap10・WBS-F03 REWORK、追加工具費分離null。

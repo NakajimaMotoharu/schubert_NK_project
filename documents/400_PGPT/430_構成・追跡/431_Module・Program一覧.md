@@ -723,3 +723,8 @@ NK-WEB-002: WebNativeRuntime（ordinary借用DB/5credential→三codec/readonly 
 | Program/class/method | 関連設計・判断 | Test・証拠 | canonical owner/cost |
 |---|---|---|---|
 | NK-ADM-001 三audit writer不変/UserCriticalAuditPortTest.audit016 finally回収 | FUN009/MON004/UI226236/SS312323324332351352/411/PG-D1150 | ADM-AUDIT-PORT001..020、010091092、22434/22438/22444、既20再資格・新unique0/whole追加0、YKT残六OPEN | 元Main P01003/QueryP01001・今回Test是正費F03のみ |
+
+
+## 2026-11-07 七security port有限Future是正
+
+NK-WEB-001七security port（015040定義）、関連SS312323324332351352/411/451/PG-D1151、元58Test IDは22546 expectedcase完全一致、015090091。Main owner変更0/費用F03のみ、全他assertion不変。

@@ -1,0 +1,418 @@
+{
+  "dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/System$Logger$Level;)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/logging/WebSecurityAudit$Route": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;ILjava/lang/String;)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/logging/WebSecurityAudit": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/System$Logger;Ljava/time/Clock;Ljava/lang/String;Ljava/lang/String;)V"
+    },
+    {
+      "name": "record",
+      "desc": "(Ljava/util/UUID;Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;Ljava/util/Optional;Ljava/util/Optional;ILdev/codex/schubert/nk/web/logging/WebSecurityAudit$Route;)V"
+    },
+    {
+      "name": "version",
+      "desc": "(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "name": "canonicalAddress",
+      "desc": "(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "name": "lambda$record$1",
+      "desc": "(Lcom/google/gson/JsonObject;Ljava/lang/String;)V"
+    },
+    {
+      "name": "lambda$record$0",
+      "desc": "(Lcom/google/gson/JsonObject;Ldev/codex/schubert/nk/web/session/SessionPrincipal;)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/view/TopBarViewModel": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/session/SessionPrincipal;)V"
+    },
+    {
+      "name": "from",
+      "desc": "(Ldev/codex/schubert/nk/web/session/SessionPrincipal;)Ldev/codex/schubert/nk/web/view/TopBarViewModel;"
+    },
+    {
+      "name": "getBrand",
+      "desc": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getUsername",
+      "desc": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getRole",
+      "desc": "()Ljava/lang/String;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SessionPayloadCodec": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;[BLjava/lang/String;[BLjava/security/SecureRandom;)V"
+    },
+    {
+      "name": "validateKey",
+      "desc": "([B)V"
+    },
+    {
+      "name": "close",
+      "desc": "()V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/JdbcWebSessionStore": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/session/EncryptedWebSessionRepository;Ljava/time/Clock;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SessionAttributeCodec": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SessionPrincipal": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;Ldev/codex/schubert/nk/protocol/layout/semantic/UserRole;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ljava/time/Instant;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SessionStoreException": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository": [
+    {
+      "name": "<init>",
+      "desc": "(Ljavax/sql/DataSource;Ldev/codex/schubert/nk/web/session/SessionPayloadCodec;Ljava/time/Clock;Ljava/security/SecureRandom;Ljava/util/function/Supplier;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/EncryptedSessionPayload": [
+    {
+      "name": "validateVersion",
+      "desc": "(Ljava/lang/String;)Ljava/lang/String;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebCsrfDeniedHandler": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/logging/WebSecurityAudit;)V"
+    },
+    {
+      "name": "handle",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;Lorg/springframework/security/access/AccessDeniedException;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebCsrfFilterFactory": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "create",
+      "desc": "(Ldev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository;Lorg/springframework/security/web/access/AccessDeniedHandler;)Lorg/springframework/security/web/csrf/CsrfFilter;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/ClosedWebAuthentication": [
+    {
+      "name": "authenticated",
+      "desc": "(Ldev/codex/schubert/nk/web/session/SessionPrincipal;)Lorg/springframework/security/core/Authentication;"
+    },
+    {
+      "name": "principal",
+      "desc": "(Lorg/springframework/security/core/Authentication;)Ljava/util/Optional;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/LoginClientAddress": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository;)V"
+    },
+    {
+      "name": "loadContext",
+      "desc": "(Lorg/springframework/security/web/context/HttpRequestResponseHolder;)Lorg/springframework/security/core/context/SecurityContext;"
+    },
+    {
+      "name": "loadDeferredContext",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Lorg/springframework/security/core/context/DeferredSecurityContext;"
+    },
+    {
+      "name": "containsContext",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Z"
+    },
+    {
+      "name": "saveContext",
+      "desc": "(Lorg/springframework/security/core/context/SecurityContext;Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;)V"
+    },
+    {
+      "name": "fixate",
+      "desc": "(Lorg/springframework/security/core/Authentication;Ljakarta/servlet/http/HttpServletRequest;)V"
+    },
+    {
+      "name": "stored",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;"
+    },
+    {
+      "name": "requireConfigured",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebInfrastructureFailureFilter": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "doFilter",
+      "desc": "(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebRequestContext": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/util/UUID;Ldev/codex/schubert/nk/web/security/LoginClientAddress;)V"
+    },
+    {
+      "name": "requestId",
+      "desc": "()Ljava/util/UUID;"
+    },
+    {
+      "name": "clientAddress",
+      "desc": "()Ldev/codex/schubert/nk/web/security/LoginClientAddress;"
+    },
+    {
+      "name": "require",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Ldev/codex/schubert/nk/web/security/WebRequestContext;"
+    },
+    {
+      "name": "existing",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;"
+    },
+    {
+      "name": "lambda$require$0",
+      "desc": "()Ljava/lang/IllegalStateException;"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "generateToken",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Lorg/springframework/security/web/csrf/CsrfToken;"
+    },
+    {
+      "name": "loadToken",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Lorg/springframework/security/web/csrf/CsrfToken;"
+    },
+    {
+      "name": "saveToken",
+      "desc": "(Lorg/springframework/security/web/csrf/CsrfToken;Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;)V"
+    },
+    {
+      "name": "materialize",
+      "desc": "(Ljakarta/servlet/http/HttpSession;)Lorg/springframework/security/web/csrf/CsrfToken;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebCsrfToken": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "parse",
+      "desc": "(Ljava/lang/String;)Ldev/codex/schubert/nk/web/security/WebCsrfToken;"
+    },
+    {
+      "name": "formValue",
+      "desc": "()Ljava/lang/String;"
+    },
+    {
+      "name": "matches",
+      "desc": "(Ljava/lang/String;)Z"
+    },
+    {
+      "name": "padded",
+      "desc": "(Ljava/lang/String;)[B"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository$Deferred": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository;Ljakarta/servlet/http/HttpServletRequest;)V"
+    },
+    {
+      "name": "get",
+      "desc": "()Lorg/springframework/security/core/context/SecurityContext;"
+    },
+    {
+      "name": "isGenerated",
+      "desc": "()Z"
+    },
+    {
+      "name": "lambda$get$0",
+      "desc": "(Lorg/springframework/security/core/context/SecurityContext;Ldev/codex/schubert/nk/web/session/SessionPrincipal;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/FormCsrfTokenRequestHandler": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "handle",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;Ljava/util/function/Supplier;)V"
+    },
+    {
+      "name": "resolveCsrfTokenValue",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;Lorg/springframework/security/web/csrf/CsrfToken;)Ljava/lang/String;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebDisplayContext": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/view/TopBarViewModel;Ldev/codex/schubert/nk/web/security/WebCsrfToken;)V"
+    },
+    {
+      "name": "captureDenied",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ljava/util/Optional;)V"
+    },
+    {
+      "name": "capture",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ldev/codex/schubert/nk/web/session/SessionPrincipal;)V"
+    },
+    {
+      "name": "existing",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;"
+    },
+    {
+      "name": "topBar",
+      "desc": "()Ldev/codex/schubert/nk/web/view/TopBarViewModel;"
+    },
+    {
+      "name": "toString",
+      "desc": "()Ljava/lang/String;"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/EncryptedSessionAuthenticationStrategy": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository;)V"
+    },
+    {
+      "name": "onAuthentication",
+      "desc": "(Lorg/springframework/security/core/Authentication;Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/InternalErrorDispatchRouter": [
+    {
+      "name": "<init>",
+      "desc": "(Ljakarta/servlet/Filter;Ljakarta/servlet/Filter;)V"
+    },
+    {
+      "name": "init",
+      "desc": "(Ljakarta/servlet/FilterConfig;)V"
+    },
+    {
+      "name": "destroy",
+      "desc": "()V"
+    },
+    {
+      "name": "doFilter",
+      "desc": "(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/semantic/UserRole": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;ILjava/lang/String;)V"
+    },
+    {
+      "name": "wireValue",
+      "desc": "()Ljava/lang/String;"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/header/AuthenticationContext": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "of",
+      "desc": "(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;"
+    },
+    {
+      "name": "equals",
+      "desc": "(Ljava/lang/Object;)Z"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ]
+}
