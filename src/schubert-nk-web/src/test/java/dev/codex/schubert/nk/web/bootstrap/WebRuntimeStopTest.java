@@ -12,10 +12,51 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.Test;
 
-/** SS342352 / PT-OPS-NWEB-STOP001..005. Independent literal 30s/phase/UNKNOWN oracle. */
+/** SS342352 / PT-OPS-NWEB-STOP001..006. Independent literal 30s/phase/UNKNOWN oracle. */
 final class WebRuntimeStopTest {
   private static final String FIXTURE_HTTP_DA90D362 = "HTTP";
   private static final String FIXTURE_BROKER_4F6E4F9C = "broker";
+
+  @Test
+  void stop006SignedClockWrapKeepsRelativeBudgetAndDetectsExpiry() throws Exception {
+    // BUG2409/YKT2154: independent signed-long vectors, 30 seconds minus 5 = 25 seconds.
+    var clock = new AtomicLong(9_223_372_026_854_775_807L);
+    var owner = new WebRuntimeStop(clock::get);
+    owner.begin();
+    var calls = new ArrayList<Duration>();
+    owner.close(
+        new WebRuntimeStop.Step[] {
+          left -> {
+            assertEquals(Duration.ofSeconds(30), left);
+            calls.add(left);
+            clock.set(9_223_372_031_854_775_807L);
+          },
+          left -> {
+            assertEquals(Duration.ofSeconds(25), left);
+            calls.add(left);
+          }
+        });
+    assertEquals(List.of(Duration.ofSeconds(30), Duration.ofSeconds(25)), calls);
+
+    clock.set(9_223_372_026_854_775_807L);
+    var expired = new WebRuntimeStop(clock::get);
+    expired.begin();
+    // Signed wrap of start + 30 seconds + 1 nanosecond, calculated independently.
+    clock.set(-9_223_372_016_854_775_808L);
+    var failure =
+        assertThrows(
+            IOException.class,
+            () ->
+                expired.close(
+                    new WebRuntimeStop.Step[] {
+                      left -> assertEquals(Duration.ZERO, left),
+                      left -> {
+                        throw new AssertionError("expired wrapped budget retains later resource");
+                      }
+                    }));
+    assertEquals("Web stop unconfirmed", failure.getMessage());
+    assertNull(failure.getCause());
+  }
 
   @Test
   void stop001NormalPhaseOrderAndRepeatedCloseNeverReleaseTwice() throws Exception {
