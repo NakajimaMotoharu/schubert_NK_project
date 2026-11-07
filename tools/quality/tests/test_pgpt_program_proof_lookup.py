@@ -186,5 +186,88 @@ class ProgramProofLookupTest(unittest.TestCase):
         self.assertEqual('NAMED_CLASS_OR_METHOD_SUBSET_COUNTERS',row['counterScope'])
 
 
+    def provenance(self):
+        return dict(source='1'*40, actualExit=0, tests=8,
+                    inputProvenance=dict(source='1'*40,
+                        mainInputPath='src/module/src/main/java/pkg/Sender.java',mainInputHash='a'*64,
+                        testInputPath='src/module/src/test/java/pkg/SenderContractTest.java',testInputHash='c'*64),
+                    physical={'pkg/Sender':'b'*64},physicalClosureComplete=True,
+                    counterExclusions=[],oldExecCombined=False,
+                    crc=[['1234567890abcdef','pkg/Sender']],
+                    counters={key:dict(covered=count,missed=0) for key,count in
+                              [('LINE',49),('METHOD',9),('CLASS',1),('BRANCH',18)]})
+
+    def test_provenance_explicit_single_target_is_visible_without_acceptance(self):
+        row=candidate(self.provenance(),'Sender','a'*64)
+        self.assertIsNotNone(row)
+        self.assertEqual('SINGLE_TARGET_INPUT_PROVENANCE',row['evidenceSchema'])
+        self.assertEqual('src/module/src/main/java/pkg/Sender.java',row['mainPath'])
+        self.assertEqual('b'*64,row['declaredNormalClassSha256'])
+        self.assertEqual('1234567890abcdef',row['declaredCrc64'])
+        self.assertTrue(row['currentMainByteEqual'])
+        self.assertTrue(row['allFourMissedZero'])
+        self.assertFalse(row['wholeSourceQualificationInferred'])
+        self.assertFalse(row['acceptanceInferred'])
+        self.assertFalse(row['permissionInferred'])
+
+    def test_provenance_failure_partial_and_changed_bytes_remain_history(self):
+        value=self.provenance();value['actualExit']=143
+        row=candidate(value,'Sender','d'*64)
+        self.assertEqual(143,row['originalExit'])
+        self.assertFalse(row['currentMainByteEqual'])
+        value['counters']['BRANCH']['missed']=1
+        self.assertFalse(candidate(value,'Sender','a'*64)['allFourMissedZero'])
+
+    def test_provenance_missing_hash_path_or_physical_never_guesses(self):
+        for key in ['mainInputPath','mainInputHash','testInputPath','testInputHash','source']:
+            value=self.provenance();del value['inputProvenance'][key]
+            self.assertIsNone(candidate(value,'Sender','a'*64),key)
+        for key in ['physical','physicalClosureComplete','crc','counterExclusions','oldExecCombined']:
+            value=self.provenance();del value[key]
+            self.assertIsNone(candidate(value,'Sender','a'*64),key)
+
+    def test_provenance_aggregate_incomplete_excluded_or_combined_scope_is_rejected(self):
+        for key,bad in [('physical',{'pkg/Sender':'b'*64,'pkg/Other':'c'*64}),
+                        ('physicalClosureComplete',False),('counterExclusions',['private-helper']),
+                        ('oldExecCombined',True)]:
+            value=self.provenance();value[key]=bad
+            self.assertIsNone(candidate(value,'Sender','a'*64),key)
+        value=self.provenance();value['counters']['CLASS']['covered']=2
+        self.assertIsNone(candidate(value,'Sender','a'*64))
+
+    def test_provenance_unsafe_or_mismatched_source_namespace_is_rejected(self):
+        for key,bad in [('mainInputPath','src/module/src/main/java/pkg/../Sender.java'),
+                        ('mainInputPath','src/module/src/main/java/elsewhere/Sender.java'),
+                        ('mainInputPath','src/module/src/test/java/pkg/Sender.java'),
+                        ('testInputPath','src/other/src/test/java/pkg/SenderTest.java'),
+                        ('testInputPath','src/module/src/test/java/pkg/../SenderTest.java'),
+                        ('mainInputHash','unknown'),('testInputHash','unknown'),('source','2'*40)]:
+            value=self.provenance();value['inputProvenance'][key]=bad
+            self.assertIsNone(candidate(value,'Sender','a'*64),(key,bad))
+        self.assertIsNone(candidate(self.provenance(),'Send','a'*64))
+        value=self.provenance();value['physical']={'pkg/Sender':'not-a-hash'}
+        self.assertIsNone(candidate(value,'Sender','a'*64))
+
+    def test_provenance_invalid_ambiguous_or_mismatched_crc_is_rejected(self):
+        for bad in [None,[],[['unknown','pkg/Sender']], [['1234567890abcdef','pkg/Other']],
+                    [['1234567890abcdef','pkg/Sender'],['1234567890abcdef','pkg/Sender']],
+                    {'pkg/Sender':'1234567890abcdef'},[['1234567890abcdef']]]:
+            value=self.provenance();value['crc']=bad
+            self.assertIsNone(candidate(value,'Sender','a'*64),bad)
+
+    def test_provenance_absent_branch_or_malformed_counters_never_means_four100(self):
+        value=self.provenance();del value['counters']['BRANCH']
+        row=candidate(value,'Sender','a'*64)
+        self.assertEqual('UNMEASURED',row['branchAssessment'])
+        self.assertFalse(row['allFourMissedZero'])
+        for bad in [True,-1,None]:
+            value=self.provenance();value['counters']['METHOD']['covered']=bad
+            self.assertFalse(candidate(value,'Sender','a'*64)['allFourMissedZero'])
+
+    def test_provenance_invalid_marker_does_not_fall_back_to_guessed_legacy(self):
+        value=self.legacy();value['inputProvenance']={}
+        self.assertIsNone(candidate(value,'Port','a'*64))
+
+
 if __name__=='__main__':
     unittest.main()

@@ -1,0 +1,9 @@
+# 証跡候補検索の明示provenance対応・BUG2415/YKT2160
+
+対象tools/quality/pgpt_program_proof_lookup.candidate/lookup、G13.07、487の重複試験防止。原Web返信DLQは005011/012・PG18630の八Test/126vectorで成功済み、今回Productを再実行しない。現Main同byteの候補として返し、原source/exit/counters/hash/CRCを保持することだけが期待結果。正式受入/全source資格/実行許可を推測しない。
+
+既toolはcoverage/inputHashes、sourceUnits/sourcePins、begin/countersのschemaに対応するが、inputProvenance/counters/physical schemaのexplicit receiptを見落とす。既原manifest SHA-256 41add48b582f0fd090ec392f49665fd3ccc36175bd23e5d9363c30a62041b704、初期lookup候補0と元sourceを保持し、既成功なしとは扱わない。
+
+追加tool Testは8件。Test先行の最初の一件で元toolの候補missを再現後、strict single-target schemaを追加する。明示Main pathとphysical内部class一致、Main/Test同moduleの安全なpath、両hash、元source一致、唯一CRC/physical hash/full closure、除外無し/旧exec合算無し/CLASS計1を要求する。aggregate・曖昧scope・path traversal・namespace mismatch・不正hash/CRC・欠落markerを拒否する。失敗exit/旧byte/partialは履歴のまま表示、欠落BRANCHは未測定で四counter100にしない。
+
+既全25件＋追加8件のtool-only regressionを実行し、公開元receiptの読取だけで候補表示/原hash/CRC/source/exit/coverage保持を独立確認する。schema対応対象の横展開はtracked公開manifest名に限定し、held名/privateをI/O前除外。候補検索は元source/run/独立postの再資格を省く権限ではない。Product新試験/新sourceproof/leaf増分0、unique388/whole88/正式1964-53/工数null維持。actual command/終了/結果/path/hashは3632に記録する。
