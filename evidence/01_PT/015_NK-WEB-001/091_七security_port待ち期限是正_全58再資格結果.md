@@ -7,3 +7,6 @@ PG22542全58/F-E-S-abort0/真正0、一回の新exec-session。22544受動method
 独立工具はrawprobe全点guard誤り22550と空白chunk誤り22554を保存し、raw実値比較/Java字句比較・negative guardsへ是正した。compile/staticを変更されたdriverのためだけに反復せず、その他全inputの一致を検査した。22558は旧85中当39siteの同rule/変数/messageを新sourceへ再束縛、globalのMap62/reflection1は未完。
 
 元command/終了code/日時/OS/JDK/依存/source/XML/CRC/exec/coverage/実method/path/hashはmanifest.filesと原stageに一意。新unique0/再資格58/既whole七保持・追加0、unique430/whole94/正式1964PT-53scope/新leaf0/工数null。BUG2434有限是正と2435..2438工具是正は閉鎖、YKT2177はQuestion動的HOLD/残receiver未解決を維持。451全体/CHR/native/IT-STを閉鎖しない。原2/5/9cap10・WBS-F03 REWORK、追加工具費分離null。
+
+
+実行量の明確化：PG22520は58実行/失敗16を含む未資格run、PG22542は58実行/FES0の資格runで、合計実行invocationは116。再資格の実績は後者58だけで、新規unique0。元event4227のtestsExecuted58は資格runの件数として保持し、失敗runを隠した総実行量とは解釈しない。費用の再加算0、原失敗証跡22532を保持。
