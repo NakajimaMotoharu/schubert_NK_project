@@ -1,0 +1,41 @@
+{
+  "atJST": "2026-11-07T12:35:26.003555+09:00",
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAccessFailurePortTest.java": "a9723c925269eae2e6a677c84b29a6f79055e9690e4c38f7a50b38a7e33c2243",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebAccessFailureHandler.java": "4e164255bc480266cb6bafc631f85217fcc215478ce3f3198c3925868180171a",
+    "evidence/01_PT/015_NK-WEB-001/input/031_access_failure_handler_qualifier.py": "88b020b2fb3f06a44f80b431e9e21b9bd59fc8e852302081242702a433d53940"
+  },
+  "rawPmdExit": 4,
+  "pmdRaw": 1,
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "processingErrors": 0,
+  "individualClassifications": [
+    {
+      "beginline": "21",
+      "endline": "21",
+      "begincolumn": "17",
+      "endcolumn": "50",
+      "rule": "UseProperClassLoader",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.web.session",
+      "class": "SecurityContextOwnerPortFixture",
+      "method": "SecurityContextOwnerPortFixture",
+      "variable": "database",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+      "priority": "3",
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Unchanged standalone owner fixture uses DataSource interface defining loader for its forbidden-callback Proxy. No J2EE TCCL/DB connection/global loader mutation; same original reasoning as22218/22256."
+    }
+  ],
+  "staticManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22276-access-failure-six-static-v1/manifest.json",
+    "sha256": "9d3516533f113d8aacabf02459d02164a2f19c5f19d54d4f167ddaba95611824"
+  },
+  "productTestsExecuted": 0,
+  "suppressionAdded": false,
+  "wholeF03Accepted": false
+}
