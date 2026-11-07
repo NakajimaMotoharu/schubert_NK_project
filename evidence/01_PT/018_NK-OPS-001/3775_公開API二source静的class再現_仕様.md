@@ -1,0 +1,11 @@
+# 公開API二full-source・静的class再現仕様
+
+WBS-G07/群4339原0.5/2/5pp cap7。PG4430 result.allPhysicalMainSha256のAccessRejected二値の公開artifact来歴が未証明のため、新たな欠落証拠を作る静的処理。旧成功/旧Main/Test/buildの確認再演ではなく、同一公開source二fileから導出可能なclass byteが元hashと完全一致するかだけを確認する。旧又は現実行/coverage/全build/正式PGPTの資格は一切増やさない。
+
+preflight468/PG23574 f619be3f31a787b6849499ad30a208cba2d304ac23b65236ddbd9a78ecd5d395。recorded公開commit964e96e45bb588e7e75798b5adf425cbd9985427のMediaApplicationService.java/ScenarioApplicationService.java full byteを変えずnew owned scratchへcopy。切出し/改変/format/stub無し、現在src上書き無し。Root/native/process Test/helper・四held Main sourceはcompiler引数に入れず、class pathのMain type情報だけを使い初期化/呼出/実装抽出はしない。原Scenario3/旧source/stash7/baseline/原本を保全する。
+
+当時pom.xml/API pomのcompiler3.14.0/release25、宣言-Xlint:all/-Werror、固定既installed plugin descriptorのdebug=true/parameters=falseを確認。計画初稿のsrc/pom.xml不存在はRoot pom.xmlへmetadataで訂正しcompile0、compilerArgs空前提guard失敗1は23582before保存して宣言lint二argを正しく保持（緩和/無視0）。依存は正常22084六Main jar＋JSpecify1.0.1のみ、全hashpin/自動Javac Plugin・Processor descriptor無し、JDK25.0.4。Source compilerは-proc:none/-implicit:none/isolated sourcepath/--release25/-g/-Xlint:all/-Werror、JVM class-init log・自tmp・c.ENV、timeout120秒。Maven/plugin/processor/Java Main/Testを起動しない。JDK自身tool/classpath/file I-O効果はあるがProduct Runtime/FFM/DB/JMS/VM/Root/auth/session/key/credential操作0。compile失敗/byte不一致はUNKNOWNを保持、変種・source改変・stubで期待値へ合わせない。
+
+469 runner/23576は二source exact Git blobとcompiler command/exit/SDK/JDK/source/hash/環境/全output aggregate hash/自己class-initを保存、バイナリと公開source snapshotは再現用private owned code artifactでGitへ混在させない。470独立post/23578は別source-byte/command/出力class内部名・byte SHAと元JSON typed位置/rule complete capture・元4493-128-新の非重複を検査。元capture値/値hashを新規出力せずpublic input/jar/source/aggregate hashと一致boolだけ。新private compiler-source/code output/logは業務私有raw/原本DB/Backup/鍵ではない。
+
+元期待hashは旧公開qualificationに固定、expectedをProduction methodから作らない。compiler outputが完全一致した対象だけknown-public-code-digest分類、元2値と不一致なら0分類。反例はtool metadataで製品PTへ算入0。Source4 actual初期化/Root/native/VM/DB等のHOLDは解除しない。actualSecretCount null/22binary限界/G07-451未受入、472/whole暫定93/候補111/pending9/正式1964-53/newleaf0/工数null維持。仕様結果3775/3776/PMO309310、close471/公開23580予定。原見積/費用/前0群/67+50成果を保全、fresh10%停止5%保全/477通常継続。
