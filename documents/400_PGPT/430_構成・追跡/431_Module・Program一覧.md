@@ -660,3 +660,9 @@ NK-WEB-002: WebApplication同core/Spring bridge、WebBusinessAssembly full17port
 # PG454 C3/C4追跡追加（2026-10-04）
 
 NK-WEB-002: WebNativeRuntime（ordinary借用DB/5credential→三codec/readonly roots/reply/Log/revoke/fullMVC32/管理five-info/一回Ready/初回停止30秒）、WebProcessLifetime（通知/confirmed通知・UNKNOWN frame保持）、WebApplication/WebHttpServer先行partial owner、全validated config/MQ20/media1..20。NK-OPS-001: ServiceProcessResources.executeRetainingUnknown/native release（API/Web外側）、ApiProcessMain同guard。根拠SS313314321342343352/QA047049050/PG-D369370、Test NATIVE-OWNER/BUDGET/CONFIG/LIFE/OUTER・既存各scopeは016085086/安全173manifestへ対応。ordinary native/mainの未到達counterを保持、全source fresh回帰/実VM/正式まで認定0。
+
+### 2026-11-07 WebRuntimeStop期限是正の追跡
+
+| Program/class/method | 関連設計・判断 | Test/証拠 | canonical owner/cost |
+|---|---|---|---|
+| NK-WEB-002/NK-OPS-001 WebRuntimeStop.begin/close・Step | RD運用停止/UI314/SS314§10・342/352、PG-D377/1142、BUG2409/YKT2154 | STOP001..006、0183626/27/28、Main正常22012・静的22014、六PT22024・独立22026。新規1/既5再資格、Step noCode、全451/実runtime別未完 | WBS-P018-06、追加発見是正費を一回だけ。旧whole-source FOUR100と二重計上しない |
