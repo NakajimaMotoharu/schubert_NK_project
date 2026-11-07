@@ -1,0 +1,331 @@
+package dev.codex.schubert.nk.web.security;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import dev.codex.schubert.nk.web.session.SecurityContextOwnerPortFixture;
+import dev.codex.schubert.nk.web.session.SessionStoreException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.function.BiConsumer;
+import org.jspecify.annotations.Nullable;
+import org.junit.jupiter.api.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.session.web.http.SessionRepositoryFilter;
+
+/** PT-WEB-SAVEDPORT001..009; SS314. Actual cache, heap Servlet ports; no DB or auth grant. */
+final class SavedGetCachePortTest {
+  private static final String PATH = "/scenarios";
+  private static final String QUERY = "page=2";
+  private static final String LOCATION = "/scenarios?page=2";
+  private static final String SAVED = "savedRequest";
+  private static final String FIXED_FAILURE = "session storage is unavailable";
+
+  @Test
+  void constructorAndEveryConfiguredBoundaryRejectMissingOwnerOrArguments() {
+    assertThrows(NullPointerException.class, () -> new EncryptedSessionRequestCache(null));
+    try (var owner = new SecurityContextOwnerPortFixture()) {
+      var cache = new EncryptedSessionRequestCache(owner.sessions());
+      var response = new MockHttpServletResponse();
+      for (BiConsumer<HttpServletRequest, HttpServletResponse> operation : operations(cache)) {
+        assertThrows(NullPointerException.class, () -> operation.accept(null, response));
+        var request = request(owner, "GET", PATH, QUERY, new Session());
+        assertThrows(NullPointerException.class, () -> operation.accept(request, null));
+        request.removeAttribute(SessionRepositoryFilter.SESSION_REPOSITORY_ATTR);
+        assertFixed(() -> operation.accept(request, response));
+        request.setAttribute(SessionRepositoryFilter.SESSION_REPOSITORY_ATTR, new Object());
+        assertFixed(() -> operation.accept(request, response));
+        assertEquals(0, request.lookups);
+      }
+    }
+  }
+
+  @Test
+  void saveWritesOnlyOneLiteralStringAndPreservesRawRelativeQuery() {
+    try (var owner = new SecurityContextOwnerPortFixture()) {
+      var cache = new EncryptedSessionRequestCache(owner.sessions());
+      for (String query : new String[] {null, QUERY}) {
+        var session = new Session();
+        var request = request(owner, "GET", PATH, query, session);
+        var response = new MockHttpServletResponse();
+        cache.saveRequest(request, response);
+        assertEquals(query == null ? PATH : LOCATION, session.getAttribute(SAVED));
+        assertEquals(List.of(SAVED), session.writtenNames);
+        assertEquals(1, request.creatingLookups);
+        assertEquals(1, request.lookups);
+        assertEquals(200, response.getStatus());
+        assertNull(response.getHeader("Location"));
+      }
+    }
+  }
+
+  @Test
+  void rejectedMethodsAjaxAndNonScreenPathsNeverObtainOrChangeSession() {
+    try (var owner = new SecurityContextOwnerPortFixture()) {
+      var cache = new EncryptedSessionRequestCache(owner.sessions());
+      for (String[] vector :
+          List.of(
+              new String[] {"POST", PATH, ""},
+              new String[] {"GET", PATH, "xmlhttprequest"},
+              new String[] {"GET", "/audio/7", ""},
+              new String[] {"GET", "/login", ""},
+              new String[] {"GET", "//foreign.invalid/", ""})) {
+        var session = new Session();
+        var request = request(owner, vector[0], vector[1], null, session);
+        if (!vector[2].isEmpty()) request.addHeader("X-Requested-With", vector[2]);
+        cache.saveRequest(request, new MockHttpServletResponse());
+        assertEquals(0, request.lookups);
+        assertTrue(session.writtenNames.isEmpty());
+      }
+    }
+  }
+
+  @Test
+  void retrievalKeepsMissingValuesAbsentAndRejectsForeignOrMalformedProjection() {
+    try (var owner = new SecurityContextOwnerPortFixture()) {
+      var cache = new EncryptedSessionRequestCache(owner.sessions());
+      var response = new MockHttpServletResponse();
+      var request = request(owner, "GET", PATH, null, null);
+      assertNull(cache.getRequest(request, response));
+      assertEquals(0, request.creatingLookups);
+      var session = new Session();
+      request.session = session;
+      assertNull(cache.getRequest(request, response));
+      for (Object invalid :
+          List.of(new Object(), "/login", "https://foreign.invalid/x", "/audio/7")) {
+        session.setAttribute(SAVED, invalid);
+        assertFixed(() -> cache.getRequest(request, response));
+      }
+      assertEquals(0, request.creatingLookups);
+    }
+  }
+
+  @Test
+  void savedProjectionContainsOnlyGetUrlAndEmptyReplayCollections() {
+    try (var owner = new SecurityContextOwnerPortFixture()) {
+      var cache = new EncryptedSessionRequestCache(owner.sessions());
+      var session = new Session();
+      session.setAttribute(SAVED, LOCATION);
+      var request = request(owner, "GET", PATH, QUERY, session);
+      SavedRequest saved = cache.getRequest(request, new MockHttpServletResponse());
+      assertNotNull(saved);
+      assertEquals(LOCATION, saved.getRedirectUrl());
+      assertEquals("GET", saved.getMethod());
+      assertEquals(List.of(), saved.getCookies());
+      assertEquals(List.of(), saved.getHeaderValues("X-Public"));
+      assertThrows(NullPointerException.class, () -> saved.getHeaderValues(null));
+      assertEquals(List.of(), saved.getHeaderNames());
+      assertEquals(List.of(), saved.getLocales());
+      assertNull(saved.getParameterValues("page"));
+      assertThrows(NullPointerException.class, () -> saved.getParameterValues(null));
+      assertEquals(java.util.Map.of(), saved.getParameterMap());
+      assertThrows(
+          UnsupportedOperationException.class,
+          () -> saved.getParameterMap().put("page", new String[] {"9"}));
+      assertEquals("SavedGet[REDACTED]", saved.toString());
+      assertEquals(1, session.writtenNames.size());
+    }
+  }
+
+  @Test
+  void matchingConsumesOnlyAnExactReissuedGetAndReturnsOriginalRequest() {
+    try (var owner = new SecurityContextOwnerPortFixture()) {
+      var cache = new EncryptedSessionRequestCache(owner.sessions());
+      var response = new MockHttpServletResponse();
+      var session = new Session();
+      var request = request(owner, "GET", PATH, QUERY, session);
+      assertNull(cache.getMatchingRequest(request, response));
+      session.setAttribute(SAVED, LOCATION);
+      request.setMethod("POST");
+      assertNull(cache.getMatchingRequest(request, response));
+      request.setMethod("GET");
+      request.setQueryString("page=3");
+      assertNull(cache.getMatchingRequest(request, response));
+      assertEquals(LOCATION, session.getAttribute(SAVED));
+      assertEquals(0, session.removals);
+      request.setQueryString(QUERY);
+      request.addHeader("X-Public", "live-request");
+      request.setParameter("page", "current");
+      assertSame(request, cache.getMatchingRequest(request, response));
+      assertEquals(1, session.removals);
+      assertNull(session.getAttribute(SAVED));
+      assertEquals("live-request", request.getHeader("X-Public"));
+      assertEquals("current", request.getParameter("page"));
+      assertNull(cache.getMatchingRequest(request, response));
+      assertEquals(1, session.removals);
+      assertEquals(0, request.creatingLookups);
+    }
+  }
+
+  @Test
+  void servletArgumentAndStateFailuresAreFixedWhileDirectFatalKeepsIdentity() {
+    try (var owner = new SecurityContextOwnerPortFixture()) {
+      var cache = new EncryptedSessionRequestCache(owner.sessions());
+      var response = new MockHttpServletResponse();
+      for (boolean state : new boolean[] {false, true}) {
+        for (BiConsumer<HttpServletRequest, HttpServletResponse> operation : operations(cache)) {
+          var request = request(owner, "GET", PATH, QUERY, new Session());
+          request.lookupFailure =
+              state
+                  ? new IllegalStateException("public fixture")
+                  : new IllegalArgumentException("public fixture");
+          assertFixed(() -> operation.accept(request, response));
+        }
+        var session = new Session();
+        var request = request(owner, "GET", PATH, QUERY, session);
+        RuntimeException failure =
+            state
+                ? new IllegalStateException("public fixture")
+                : new IllegalArgumentException("public fixture");
+        session.writeFailure = failure;
+        assertFixed(() -> cache.saveRequest(request, response));
+        session.readFailure = failure;
+        assertFixed(() -> cache.getRequest(request, response));
+        session.removeFailure = failure;
+        assertFixed(() -> cache.removeRequest(request, response));
+      }
+      for (BiConsumer<HttpServletRequest, HttpServletResponse> operation : operations(cache)) {
+        var request = request(owner, "GET", PATH, QUERY, new Session());
+        var fatal = new AssertionError("owned direct fatal");
+        request.fatal = fatal;
+        assertSame(
+            fatal, assertThrows(AssertionError.class, () -> operation.accept(request, response)));
+      }
+    }
+  }
+
+  @Test
+  void explicitRemovalDoesNotCreateSessionOrRemoveUnrelatedState() {
+    try (var owner = new SecurityContextOwnerPortFixture()) {
+      var cache = new EncryptedSessionRequestCache(owner.sessions());
+      var response = new MockHttpServletResponse();
+      var request = request(owner, "GET", PATH, null, null);
+      cache.removeRequest(request, response);
+      assertEquals(0, request.creatingLookups);
+      var session = new Session();
+      session.setAttribute(SAVED, LOCATION);
+      session.setAttribute("ordinary", "retained");
+      request.session = session;
+      cache.removeRequest(request, response);
+      assertNull(session.getAttribute(SAVED));
+      assertEquals("retained", session.getAttribute("ordinary"));
+      assertEquals(1, session.removals);
+      assertEquals(0, request.creatingLookups);
+    }
+  }
+
+  @Test
+  void independentConcurrentRequestsNeverExchangeSavedTargets() throws Exception {
+    try (var owner = new SecurityContextOwnerPortFixture();
+        var executor = Executors.newFixedThreadPool(2)) {
+      var cache = new EncryptedSessionRequestCache(owner.sessions());
+      var futures = new java.util.ArrayList<java.util.concurrent.Future<?>>();
+      for (String query : List.of("page=1", "page=2")) {
+        futures.add(
+            executor.submit(
+                () -> {
+                  for (int i = 0; i < 40; i++) {
+                    var session = new Session();
+                    var request = request(owner, "GET", PATH, query, session);
+                    var response = new MockHttpServletResponse();
+                    cache.saveRequest(request, response);
+                    assertEquals("/scenarios?" + query, session.getAttribute(SAVED));
+                    assertSame(request, cache.getMatchingRequest(request, response));
+                    assertNull(cache.getRequest(request, response));
+                    assertEquals(1, session.removals);
+                  }
+                }));
+      }
+      for (var future : futures) future.get(10, TimeUnit.SECONDS);
+    }
+  }
+
+  private static List<BiConsumer<HttpServletRequest, HttpServletResponse>> operations(
+      EncryptedSessionRequestCache cache) {
+    return List.of(
+        cache::saveRequest, cache::getRequest, cache::getMatchingRequest, cache::removeRequest);
+  }
+
+  private static void assertFixed(Runnable action) {
+    var exception = assertThrows(SessionStoreException.class, action::run);
+    assertEquals(FIXED_FAILURE, exception.getMessage());
+    assertNull(exception.getCause());
+    assertEquals(0, exception.getSuppressed().length);
+  }
+
+  private static Request request(
+      SecurityContextOwnerPortFixture owner,
+      String method,
+      String path,
+      @Nullable String query,
+      @Nullable Session session) {
+    var request = new Request();
+    request.setMethod(method);
+    request.setRequestURI(path);
+    request.setQueryString(query);
+    request.session = session;
+    request.setAttribute(SessionRepositoryFilter.SESSION_REPOSITORY_ATTR, owner.sessions());
+    return request;
+  }
+
+  private static final class Request extends MockHttpServletRequest {
+    private @Nullable Session session;
+    private @Nullable RuntimeException lookupFailure;
+    private @Nullable Error fatal;
+    private int lookups;
+    private int creatingLookups;
+
+    @Override
+    public @Nullable HttpSession getSession(boolean create) {
+      lookups++;
+      if (create) creatingLookups++;
+      if (lookupFailure != null) throw lookupFailure;
+      if (fatal != null) throw fatal;
+      if (create && session == null) throw new AssertionError("unexpected session creation");
+      return session;
+    }
+  }
+
+  private static final class Session extends MockHttpSession {
+    private final java.util.ArrayList<String> writtenNames = new java.util.ArrayList<>();
+    private @Nullable RuntimeException writeFailure;
+    private @Nullable RuntimeException readFailure;
+    private @Nullable RuntimeException removeFailure;
+    private int removals;
+
+    Session() {
+      super(null, "public-cache-fixture");
+    }
+
+    @Override
+    public void setAttribute(String name, @Nullable Object value) {
+      if (writeFailure != null) throw writeFailure;
+      writtenNames.add(name);
+      super.setAttribute(name, value);
+    }
+
+    @Override
+    public @Nullable Object getAttribute(String name) {
+      if (readFailure != null) throw readFailure;
+      return super.getAttribute(name);
+    }
+
+    @Override
+    public void removeAttribute(String name) {
+      if (removeFailure != null) throw removeFailure;
+      removals++;
+      super.removeAttribute(name);
+    }
+  }
+}

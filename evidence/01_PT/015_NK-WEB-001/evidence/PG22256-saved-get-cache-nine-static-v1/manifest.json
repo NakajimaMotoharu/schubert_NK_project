@@ -1,0 +1,90 @@
+{
+  "atJST": "2026-11-07T12:26:34.860106+09:00",
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SavedGetCachePortTest.java": "f448eba06f11adc0f1a8455c1ab6934f410b56bf6c6dd415c19d78d572f5ca8a",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache.java": "e4cff5e703bf4613c4f2e5097b1f26de5599fcdf465de75f96577e8d6afee972",
+    "evidence/01_PT/015_NK-WEB-001/input/028_saved_get_cache_qualifier.py": "22519cc01e1617f4714ea2d963a6d47f4cc57bda9012fc1b488ce27886697ea6"
+  },
+  "rawPmdExit": 4,
+  "pmdRaw": 4,
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "processingErrors": 0,
+  "individualClassifications": [
+    {
+      "beginline": "91",
+      "endline": "91",
+      "begincolumn": "9",
+      "endcolumn": "90",
+      "rule": "CompareObjectsWithEquals",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.web.security",
+      "class": "EncryptedSessionRequestCache",
+      "method": "requireConfigured",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+      "priority": "3",
+      "message": "Use equals() to compare object references.",
+      "classification": "NOT_APPLICABLE",
+      "reason": "SS314 requires exact borrowed repository owner identity. equals would admit another owner and cannot replace reference comparison. Null/wrong/same object vectors are explicit001."
+    },
+    {
+      "beginline": "234",
+      "endline": "234",
+      "begincolumn": "24",
+      "endcolumn": "55",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.security",
+      "class": "SavedGetCachePortTest",
+      "method": "independentConcurrentRequestsNeverExchangeSavedTargets",
+      "variable": "executor",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone host Unit only, finite two-worker executor owned by try-with-resources and 10-second futures,40 iterations, no servlet container/backend work; tests cache stateless independent requests. No Product or server thread ownership changed."
+    },
+    {
+      "beginline": "239",
+      "endline": "251",
+      "begincolumn": "13",
+      "endcolumn": "19",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.security",
+      "class": "SavedGetCachePortTest",
+      "method": "independentConcurrentRequestsNeverExchangeSavedTargets",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone host Unit only, finite two-worker executor owned by try-with-resources and 10-second futures,40 iterations, no servlet container/backend work; tests cache stateless independent requests. No Product or server thread ownership changed."
+    },
+    {
+      "beginline": "21",
+      "endline": "21",
+      "begincolumn": "17",
+      "endcolumn": "50",
+      "rule": "UseProperClassLoader",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.web.session",
+      "class": "SecurityContextOwnerPortFixture",
+      "method": "SecurityContextOwnerPortFixture",
+      "variable": "database",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+      "priority": "3",
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Same unchanged constructor-only fixture must define java.sql.DataSource Proxy in the interface defining loader; standalone non-J2EE fixture/no global TCCL change/no connection. Original classification retained."
+    }
+  ],
+  "staticManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22256-saved-get-cache-nine-static-v1/manifest.json",
+    "sha256": "db6d4cc209c2e58fa720d08c1a3b52ddce2f2862154c2122bff8df77d42bb47c"
+  },
+  "productTestsExecuted": 0,
+  "suppressionAdded": false,
+  "wholeF03Accepted": false
+}
