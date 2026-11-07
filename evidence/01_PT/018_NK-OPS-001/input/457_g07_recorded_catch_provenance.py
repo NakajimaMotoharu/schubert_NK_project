@@ -1,0 +1,42 @@
+"""Existing public-token provenance policy applied to one fixed typed metadata input."""
+from pathlib import Path
+from collections import Counter
+import datetime,json,hashlib,re,subprocess
+from public_java_digest_provenance import digests,captures
+R=Path(__file__).resolve().parents[4];B=R/'evidence/01_PT/018_NK-OPS-001/evidence';O=B/'PG23546-g07-recorded-catch-provenance-v1';C=R/'evidence/01_PT/018_NK-OPS-001/input/456_g07_recorded_catch_scope.json';load=lambda p:json.loads(p.read_bytes());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();write=lambda p,v:p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n');key=lambda x:tuple(x[n] for n in ['path','ruleId','startLine','endLine','inputSha256']);cfg=load(C);allowed=set(cfg['allowedSources']);assert len(allowed)==40 and all(n.startswith(('src/schubert-nk-api/src/main/java/','src/schubert-nk-web/src/main/java/')) and not any(v in n.lower() for v in cfg['denyTokens']) for n in allowed)
+assert not O.exists();origin=B/'provisional/PG9888-g07-capture-shape-v1';om=load(origin/'manifest.json');metadata=origin/'residual-metadata-shapes.json';assert sha(metadata)==om['residualMetadataSha256']=='a3de442acaed6f826bd6428eec3885a58b07e5a4f0a16f9b1b06b2318ffefd72';rows=load(metadata);original=Counter(map(key,rows));assert len(rows)==4493;prior=[];refs=[]
+for name in ['PG22160-g07-three-public-test-symbols-v1','PG22170-g07-four-selector-symbols-v1','PG22184-g07-two-public-class-references-v2','PG22328-g07-two-typed-class-symbols-v1']:
+ p=B/name/'manifest.json';m=load(p);u=p.with_name('updates.json');assert sha(u)==m['updatesSha256'];prior.extend(load(u));refs.append(dict(path=str(u.relative_to(R)),sha256=sha(u)))
+old=Counter(map(key,prior));assert len(prior)==11 and sum((original-old).values())==4482
+inputp=R/cfg['artifactPath'];assert sha(inputp)==cfg['artifactSha256'];text=inputp.read_text();sites=load(inputp);assert len(sites)==113 and text==json.dumps(sites,sort_keys=True,ensure_ascii=False,indent=2)+'\n';selected=[v for v in rows if v['path']==cfg['artifactPath'] and not old[key(v)]];assert len(selected)==73 and all(v['inputSha256']==sha(inputp) for v in selected)
+assert subprocess.check_output(['git','cat-file','-t',cfg['historicalSource']],cwd=R,text=True).strip()=='commit'
+tree=subprocess.check_output(['git','ls-tree','-r',cfg['historicalSource'],'--',*sorted(allowed)],cwd=R,text=True);blobs={line.split('\t',1)[1]:line.split('\t',1)[0].split()[2] for line in tree.splitlines()};assert set(blobs)<=allowed
+expected={}
+for site in sites:expected.setdefault(site['sourcePath'],set()).add(site['sourceSha256'])
+assert all(len(v)==1 for v in expected.values());pins={};proofs={};sitecounts={};unavailable={}
+for name in sorted(allowed):
+ assert name in allowed and not any(v in name.lower() for v in cfg['denyTokens'])
+ if name not in blobs:unavailable[name]='RECORDED_COMMIT_PATH_MISSING';continue
+ assert re.fullmatch('[0-9a-f]{40}',blobs[name]);raw=subprocess.check_output(['git','cat-file','blob',blobs[name]],cwd=R);h=hashlib.sha256(raw).hexdigest()
+ if {h}!=expected[name]:unavailable[name]='RECORDED_PUBLIC_BLOB_SOURCE_SHA_MISMATCH';continue
+ assert hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()==blobs[name];pins[name]=h;matches=digests(raw.decode('utf-8'));sitecounts[name]=len(matches)
+ for match in matches:proofs[(name,match['catchLine'])]=dict(value=match['publicTokenDigest'],witness=dict(sourcePath=name,sourceSha256=h,gitObject=blobs[name],catchLine=match['catchLine'],proofKind='EXACT_RECORDED_PUBLIC_JAVA_SQLCATCH_TOKEN_DIGEST'))
+# Original capture must occupy exactly the declared hash value of this typed JSON object.
+dec=json.JSONDecoder();at=1;spans=[]
+while True:
+ while text[at].isspace() or text[at]==',':at+=1
+ if text[at]==']':break
+ value,end=dec.raw_decode(text,at);spans.append((value,at,end));at=end
+assert [v for v,_,_ in spans]==sites
+rule=B/'provisional/PG8979-gitleaks-rule-provenance-v1/manifest.json';assert sha(rule)=='97b57201394a789a6871fa2f73b6521d71e48e5452ff2b426a6e23e4ca580c8a';rx=re.compile(load(rule)['rules']['generic-api-key']['regex'],re.ASCII);lines=text.splitlines(keepends=True);updates=[];retained=[]
+for finding in selected:
+ start=sum(map(len,lines[:finding['startLine']-1]));stop=sum(map(len,lines[:finding['endLine']]));objects=[v for v,a,z in spans if a<=start and stop<=z+1];assert len(objects)==1;v=objects[0];n=v['sourcePath'];base={k:finding[k] for k in ['path','ruleId','startLine','endLine','inputSha256']}
+ if n not in allowed:retained.append(dict(**base,status='ORIGINAL_SOURCE_OUTSIDE_READ_SET'));continue
+ raw=''.join(lines[finding['startLine']-1:finding['endLine']]);token=re.fullmatch(r'\s+"bodyTokenSha256": "([a-f0-9]{64})",?\n?',raw);exact=captures(lines,finding,rx);assert token and exact=={token[1]}=={v['bodyTokenSha256']}
+ if n in unavailable:retained.append(dict(**base,status=unavailable[n]));continue
+ bound=proofs.get((n,v['beginLine']))
+ if bound is None or bound['value']!=token[1]:retained.append(dict(**base,status='RECORDED_PUBLIC_CATCH_DERIVATION_UNPROVEN'));continue
+ assert pins[n]==v['sourceSha256'];updates.append(dict(**base,disposition='FALSE_POSITIVE_EXACT_RECORDED_PUBLIC_SQLCATCH_DIGEST',fieldRole='bodyTokenSha256',exactCaptureCount=1,wholeExactCapturePubliclyDerived=True,publicWitness=bound['witness'],historicalWholeFileSourceIdentityQualified=True,historicalSameCatchLocationQualified=True,oldOrCurrentExecutionQualified=False,currentSourceIdentityQualified=False,capturedValueWritten=False,captureValueHashWritten=False))
+
+new=Counter(map(key,updates));assert not new.keys()&old.keys() and all(v==1 and original[k]==1 for k,v in new.items());remaining=sum((original-old-new).values());assert len(updates)+len(retained)==73 and remaining==4482-len(updates)
+O.mkdir();write(O/'updates.json',updates);write(O/'retained.json',retained);out=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),observerHeadAtExecution=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip(),currentNormalCoreSource=cfg['normalSource'],historicalPublicSource=cfg['historicalSource'],historicalScanSource='fb9fce0f91de3d9fdfa634fe277592700f915e45',originalMetadata=dict(path=str(metadata.relative_to(R)),sha256=sha(metadata)),input=dict(path=cfg['artifactPath'],sha256=sha(inputp)),config=dict(path=str(C.relative_to(R)),sha256=sha(C)),priorUpdateRefs=refs,ruleManifestSha256=sha(rule),recordedPublicBlobReadCount=len(blobs),unavailableSources=unavailable,sourcePins=pins,sourceGitBlobs=blobs,currentPublicCatchCounts=sitecounts,normalizationReference=dict(path='tools/quality/pg6542_jdbc_catch_inventory.py',sha256=sha(R/'tools/quality/pg6542_jdbc_catch_inventory.py')),normalizer=dict(path='tools/quality/public_java_digest_provenance.py',sha256=sha(R/'tools/quality/public_java_digest_provenance.py')),candidateRows=73,sourceReadCount=len(pins),newFalsePositives=len(updates),remainingUnclassified=remaining,historicalWholeFileSourceIdentityUnqualifiedUpdates=sum(not x['historicalWholeFileSourceIdentityQualified'] for x in updates),updatesSha256=sha(O/'updates.json'),retainedSha256=sha(O/'retained.json'),publicTokenPolicyReference='PG9000/PG9002_PUBLIC_JAVA_SQLCATCH_TOKEN_DIGEST',actualSecretCount=None,binaryOrContainerLimited=22,productTestsExecuted=0,scannerExecuted=False,operatorMainExecuted=False,targetsExecuted=False,privateRawRead=False,historyGraphWalkOrFetch=False,exactRecordedHistoricalPublicBlobsRead=True,actualAuthOrDbActions=0,heldFourInitializations=0,capturedValuesWritten=False,captureValueHashesWritten=False,wholeG07Accepted=False,whole451Accepted=False,newAcceptance=0,effortRate=None,tool=dict(path=str(Path(__file__).relative_to(R)),sha256=sha(Path(__file__))));write(O/'manifest.json',out);print(json.dumps(dict(actualExit=0,classified=len(updates),retained=len(retained),remaining=remaining,historicalSourceNotQualified=out['historicalWholeFileSourceIdentityUnqualifiedUpdates'],manifestSha256=sha(O/'manifest.json'))))
