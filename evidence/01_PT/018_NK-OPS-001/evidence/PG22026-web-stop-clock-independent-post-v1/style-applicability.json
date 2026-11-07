@@ -1,0 +1,63 @@
+{
+  "raw": {
+    "tool": "pmd.xml",
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop.java",
+    "attributes": {
+      "beginline": "35",
+      "endline": "35",
+      "begincolumn": "71",
+      "endcolumn": "87",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.web.bootstrap",
+      "class": "WebRuntimeStop",
+      "method": "close",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3"
+    },
+    "message": "Avoid catching RuntimeException in try-catch block"
+  },
+  "classification": "CONTEXTUAL_NONAPPLICABLE",
+  "actualViolation": false,
+  "prior": {
+    "rawOrdinal": 1318,
+    "id": "001318:246f4573071e7823ea544fc537f032e3fc377b22b7859311c059ef5e38e36399",
+    "rawFinding": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop.java",
+      "sourceSha256": "0cedc1417ddc419a11896516ad7e2d76cd6277c42711815120f35191e1cd7a6a",
+      "attributes": {
+        "beginline": "34",
+        "endline": "34",
+        "begincolumn": "71",
+        "endcolumn": "87",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "class": "WebRuntimeStop",
+        "method": "close",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "priority": "3"
+      },
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "applicability": "UNCLASSIFIED",
+      "actualViolation": null,
+      "ptExecutionExempt": false
+    },
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "actualViolation": false,
+    "reason": "WebRuntimeStop.java.close: A failed stopping phase leaves confirmed state unchanged andcannot release later owners asifcomplete. The existing fatal-preservation boundary precedes fixed unconfirmed failure; this catch isnot NPE-as-success oractual native termination. Its per-component normalization isnot replaced witha different ResourceScope/JDBC rule. CompleteMain SHA/fullPMD attributes/immutable oldreview pointer bindthe specific role; allhistorical raw warnings remain andno rule-wide/runtime exemption follows.",
+    "historicalRow": {
+      "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG19980-bound-remaining-context-v1/manifest.json",
+      "manifestSha256": "f1f2e9cfe4c207bbb46d313ecdcc0effd22bb69864a8d4443f64bd49521b992c",
+      "reviewSha256": "dc3694efbd53b4594e445993250880061eeb6837ed5063d843b0a2b7f1f70437",
+      "rawOrdinal": 1315,
+      "id": "001315:246f4573071e7823ea544fc537f032e3fc377b22b7859311c059ef5e38e36399"
+    },
+    "exactCurrentSourceVerified": true,
+    "runtimeTransferred": false,
+    "ptExempt": false
+  },
+  "reason": "Exact unchanged catch/normalization role: preserve fatal identity then fixed IOException, do not catch NPE as success; only deadline signed comparison changed. Existing independent 004/005 confirm fixed failure/unchanged phase/Error identity. No rule suppression or runtime/native acceptance."
+}
