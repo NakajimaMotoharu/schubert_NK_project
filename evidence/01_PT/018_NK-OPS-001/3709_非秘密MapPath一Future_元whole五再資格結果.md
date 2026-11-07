@@ -1,0 +1,7 @@
+# 非秘密Map/Path一Futureの元whole五再資格結果
+
+source5dc8e51315464d93afc2042858e9aa460b55e595/Main7aed。BUG2465 task Futureのみ10SECONDS、他全token/固定Map/Path.of独立expected/4096・alias・control・null・message/redaction不変、期限/unit/expected否定3。PG22984元一class compile0/22986raw2当method個別非該当CS0/不変Main六static0、22988元whole5一回・真正0/FESabortnotrun0、22990独立0 manifest65a16d269871e589d55b3c259fc77876675511c26bfb3a328e860f2865ff068d。
+
+Code一physical L21M5C1B26 missed0、通常Jar一CRC/単一exec/実初期化ServiceCredentialLocation一つ・生成0。Main/Testは供給Map/String/Path構文とimmutable値だけ、実environment/Files/credential実体/inode/ACL/keys/native/VM/Root/DB/process0。元2032既承認pure graphをそのまま使用し、別fixtureの実行ではない。既五再資格/新unique-whole-leaf0、unique438/whole94/正式1964-53/工数null/QA051final/全nativeHOLD維持。
+
+現Storage29不変28+変更1、raw82不変/既34+当Thread2分類=36、未分類48→46。全29engine再演0。BUG2465/YKT2203有限対象CLOSED、YKT2177 known29sourcefixed=動的26+Question1/Storage2元PT-HOLD3/global型未確定OPEN。対象Code100を全Storage/451へ一般化しない。
