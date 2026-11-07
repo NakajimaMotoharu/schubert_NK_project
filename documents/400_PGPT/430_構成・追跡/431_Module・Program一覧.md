@@ -666,3 +666,10 @@ NK-WEB-002: WebNativeRuntime（ordinary借用DB/5credential→三codec/readonly 
 | Program/class/method | 関連設計・判断 | Test/証拠 | canonical owner/cost |
 |---|---|---|---|
 | NK-WEB-002/NK-OPS-001 WebRuntimeStop.begin/close・Step | RD運用停止/UI314/SS314§10・342/352、PG-D377/1142、BUG2409/YKT2154 | STOP001..006、0183626/27/28、Main正常22012・静的22014、六PT22024・独立22026。新規1/既5再資格、Step noCode、全451/実runtime別未完 | WBS-P018-06、追加発見是正費を一回だけ。旧whole-source FOUR100と二重計上しない |
+
+### 2026-11-07 API停止通知・budget claimの一体化
+
+| Program/class/method | 関連設計・判断 | 実行PT・未完範囲 | canonical owner/cost |
+|---|---|---|---|
+| NK-OPS-001 ApiStopBudget.begin/stopping/remainingNanos/time | RD171/UI252/SS342351、PG-D637/638/1143、BUG2416/YKT2161 | APISTOP001..020全20/PG22090・22110、全source四counter100、原FOUR100から再資格/新unique2 | WBS-P018-05共通費一回 |
+| NK-OPS-001 ApiProcessLifetime.stop/stopping/remainingStopNanos | 同上、既stop/fail/shutdown/close責務不変 | 正常22084・六静的22086・委譲bytecode22096、OWNER001..003とwhole既TestはNOT_RUN/HOLD。primitive PTを親全体へ転用0 | WBS-P018-05、重複費追加0 |

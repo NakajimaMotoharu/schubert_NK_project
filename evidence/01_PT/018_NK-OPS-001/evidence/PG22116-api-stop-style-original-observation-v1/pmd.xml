@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-07T09:51:01.949">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime.java">
+<violation beginline="25" endline="25" begincolumn="32" endcolumn="38" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiProcessLifetime" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="26" endline="26" begincolumn="35" endcolumn="41" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiProcessLifetime" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="102" endline="102" begincolumn="9" endcolumn="15" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiProcessLifetime" method="await" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="104" endline="104" begincolumn="9" endcolumn="15" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiProcessLifetime" method="await" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="113" endline="113" begincolumn="9" endcolumn="15" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiProcessLifetime" method="shutdown" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="113" endline="113" begincolumn="9" endcolumn="40" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ApiProcessLifetime" method="shutdown" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+<violation beginline="123" endline="123" begincolumn="22" endcolumn="28" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiProcessLifetime" method="shutdown" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudget.java">
+<violation beginline="28" endline="28" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudget" method="begin" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="42" endline="42" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudget" method="remainingNanos" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java">
+<violation beginline="28" endline="28" begincolumn="24" endcolumn="31" rule="AvoidUsingVolatile" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest.Fixture" variable="failure" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile" priority="2">
+Use of modifier volatile is not recommended.
+</violation>
+<violation beginline="29" endline="29" begincolumn="23" endcolumn="33" rule="AvoidUsingVolatile" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest.Fixture" variable="beforeTime" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile" priority="2">
+Use of modifier volatile is not recommended.
+</violation>
+<violation beginline="46" endline="46" begincolumn="7" endcolumn="13" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest" method="await" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="59" endline="59" begincolumn="32" endcolumn="33" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest" method="apiStop019AtomicClaimPublishesStopAndWaitsForTheFirstClock" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 1 in if statements
+</violation>
+<violation beginline="65" endline="65" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest" method="apiStop019AtomicClaimPublishesStopAndWaitsForTheFirstClock" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="66" endline="66" begincolumn="19" endcolumn="51" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest" method="apiStop019AtomicClaimPublishesStopAndWaitsForTheFirstClock" variable="first" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="71" endline="71" begincolumn="21" endcolumn="62" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest" method="apiStop019AtomicClaimPublishesStopAndWaitsForTheFirstClock" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="92" endline="92" begincolumn="17" endcolumn="21" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest" method="apiStop020FailedFirstClockKeepsThePublishedStopAndExhaustedBudget" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+<violation beginline="204" endline="204" begincolumn="17" endcolumn="21" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest" method="apiStop011" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+<violation beginline="216" endline="216" begincolumn="17" endcolumn="21" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest" method="apiStop012" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+<violation beginline="229" endline="229" begincolumn="17" endcolumn="21" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest" method="apiStop013" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+<violation beginline="241" endline="241" begincolumn="17" endcolumn="21" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest" method="apiStop014" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+<violation beginline="256" endline="256" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest" method="apiStop015" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="257" endline="257" begincolumn="19" endcolumn="51" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest" method="apiStop015" variable="first" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="261" endline="261" begincolumn="18" endcolumn="50" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest" method="apiStop015" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="278" endline="278" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest" method="apiStop016" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="280" endline="280" begincolumn="46" endcolumn="87" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiStopBudgetTest" method="apiStop016" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+</pmd>

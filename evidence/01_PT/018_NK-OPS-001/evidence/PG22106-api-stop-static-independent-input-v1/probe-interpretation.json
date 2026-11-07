@@ -1,0 +1,28 @@
+{
+  "actualExit": 0,
+  "sourceMethod": "ApiStopBudget.time",
+  "rawHit": 27,
+  "rawTotal": 29,
+  "unhit": [
+    23,
+    25
+  ],
+  "unhitLocations": {
+    "23": "offline BCI42..51: normal return finally copy with returned=false, despite preceding assignment=true",
+    "25": "offline BCI66..70: exception finally copy with returned=true; supplier throw precedes that assignment"
+  },
+  "logicalSourceCondition": "if (!returned) expired=true; normal success and supplier RuntimeException/Error both exercised",
+  "coveredSiblingProbes": [
+    22,
+    24,
+    26,
+    27
+  ],
+  "sourceConditionBranches": {
+    "covered": 2,
+    "missed": 0
+  },
+  "reportPolicy": "Standard JaCoCo0.8.15 javac duplicated-finally filtering; no manual excludes, no artificial calls or forced VM faults",
+  "wholePhysicalSourceIncluded": true,
+  "newCoverageExecution": false
+}

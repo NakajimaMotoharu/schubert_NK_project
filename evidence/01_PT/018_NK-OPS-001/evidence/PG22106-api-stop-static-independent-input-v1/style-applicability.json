@@ -1,0 +1,801 @@
+{
+  "rawPmd": 25,
+  "rawPmdExit": 4,
+  "mainFindings": 9,
+  "testFindings": 16,
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "suppressionsAdded": false,
+  "judgments": [
+    {
+      "ordinal": 0,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime.java",
+        "attributes": {
+          "beginline": "25",
+          "endline": "25",
+          "begincolumn": "32",
+          "endcolumn": "38",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiProcessLifetime",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3"
+        },
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "7067db22f9b001ec76e5ccaf5eed6c4022baab51a7f889795d5c64da74684165",
+      "sourceSpan": [
+        "  private final Thread owner = Thread.currentThread();"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiProcessLifetime.field: standalone API owns fixed owner/hook notification and interrupt preservation; not a J2EE deployment. Same source span and existing independent context judgment; no hook/TERM execution or stopping-completion inference.",
+      "priorMatches": [
+        "000087:202a5f38ed402a473c5ccab6b7006cc10716be096e7a67b1657f682f3b2d852d"
+      ],
+      "priorReasons": [
+        "Owner identity plus one registered shutdown hook and completion latch. Polling sleep is stop/failure observation, hook waits for actual owner completion, never self-join or successful unknown release. Exact site: private final Thread owner = Thread.currentThread();. Local source-role applicability only; generic container-managed-thread warning does not establish an error at this explicit standalone owner/identity boundary. Actual race/deadline/interrupt/provider/cleanup behavior remains separate PT obligation."
+      ]
+    },
+    {
+      "ordinal": 1,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime.java",
+        "attributes": {
+          "beginline": "26",
+          "endline": "26",
+          "begincolumn": "35",
+          "endcolumn": "41",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiProcessLifetime",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3"
+        },
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "7067db22f9b001ec76e5ccaf5eed6c4022baab51a7f889795d5c64da74684165",
+      "sourceSpan": [
+        "  private final Thread hook = new Thread(this::shutdown, \"api-stop-owner\");"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiProcessLifetime.field: standalone API owns fixed owner/hook notification and interrupt preservation; not a J2EE deployment. Same source span and existing independent context judgment; no hook/TERM execution or stopping-completion inference.",
+      "priorMatches": [
+        "000088:633bd89949ffcde1d172e4f2b566fb07837a61d7188855cf7f9358eccd224cf8"
+      ],
+      "priorReasons": [
+        "Owner identity plus one registered shutdown hook and completion latch. Polling sleep is stop/failure observation, hook waits for actual owner completion, never self-join or successful unknown release. Exact site: private final Thread hook = new Thread(this::shutdown, \"api-stop-owner\");. Local source-role applicability only; generic container-managed-thread warning does not establish an error at this explicit standalone owner/identity boundary. Actual race/deadline/interrupt/provider/cleanup behavior remains separate PT obligation."
+      ]
+    },
+    {
+      "ordinal": 2,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime.java",
+        "attributes": {
+          "beginline": "102",
+          "endline": "102",
+          "begincolumn": "9",
+          "endcolumn": "15",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiProcessLifetime",
+          "method": "await",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3"
+        },
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "7067db22f9b001ec76e5ccaf5eed6c4022baab51a7f889795d5c64da74684165",
+      "sourceSpan": [
+        "        Thread.sleep(100);"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiProcessLifetime.await: standalone API owns fixed owner/hook notification and interrupt preservation; not a J2EE deployment. Same source span and existing independent context judgment; no hook/TERM execution or stopping-completion inference.",
+      "priorMatches": [
+        "000089:dd75dd2f60951d072e0a9fff18e55d5a6c8edbc001fa4c671e205bd3440ee730"
+      ],
+      "priorReasons": [
+        "Owner identity plus one registered shutdown hook and completion latch. Polling sleep is stop/failure observation, hook waits for actual owner completion, never self-join or successful unknown release. Exact site: Thread.sleep(100);. Local source-role applicability only; generic container-managed-thread warning does not establish an error at this explicit standalone owner/identity boundary. Actual race/deadline/interrupt/provider/cleanup behavior remains separate PT obligation."
+      ]
+    },
+    {
+      "ordinal": 3,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime.java",
+        "attributes": {
+          "beginline": "104",
+          "endline": "104",
+          "begincolumn": "9",
+          "endcolumn": "15",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiProcessLifetime",
+          "method": "await",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3"
+        },
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "7067db22f9b001ec76e5ccaf5eed6c4022baab51a7f889795d5c64da74684165",
+      "sourceSpan": [
+        "        Thread.currentThread().interrupt();"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiProcessLifetime.await: standalone API owns fixed owner/hook notification and interrupt preservation; not a J2EE deployment. Same source span and existing independent context judgment; no hook/TERM execution or stopping-completion inference.",
+      "priorMatches": [
+        "000090:e2121978dfc2080cf00ea0d9b033ee87c053341d21e2868113b54f1259cd9e0b"
+      ],
+      "priorReasons": [
+        "Preserve/propagate current interrupt status; no thread creation. Does not certify surrounding cleanup, deadline, or external termination. PMD rule explicitly targets unmanaged J2EE thread creation. SS311 standalone Java/embedded Web and 411 interrupt discipline apply; no global lifecycle or business behavior waiver."
+      ]
+    },
+    {
+      "ordinal": 4,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime.java",
+        "attributes": {
+          "beginline": "113",
+          "endline": "113",
+          "begincolumn": "9",
+          "endcolumn": "15",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiProcessLifetime",
+          "method": "shutdown",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3"
+        },
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "7067db22f9b001ec76e5ccaf5eed6c4022baab51a7f889795d5c64da74684165",
+      "sourceSpan": [
+        "    if (Thread.currentThread() == owner) return;"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiProcessLifetime.shutdown: standalone API owns fixed owner/hook notification and interrupt preservation; not a J2EE deployment. Same source span and existing independent context judgment; no hook/TERM execution or stopping-completion inference.",
+      "priorMatches": [
+        "000091:e4c17e952f513238ece9a2281a5dca9ef138af238887cd4863d069196e9afc8f"
+      ],
+      "priorReasons": [
+        "Owner identity plus one registered shutdown hook and completion latch. Polling sleep is stop/failure observation, hook waits for actual owner completion, never self-join or successful unknown release. Exact site: if (Thread.currentThread() == owner) return;. Local source-role applicability only; generic container-managed-thread warning does not establish an error at this explicit standalone owner/identity boundary. Actual race/deadline/interrupt/provider/cleanup behavior remains separate PT obligation."
+      ]
+    },
+    {
+      "ordinal": 5,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime.java",
+        "attributes": {
+          "beginline": "113",
+          "endline": "113",
+          "begincolumn": "9",
+          "endcolumn": "40",
+          "rule": "CompareObjectsWithEquals",
+          "ruleset": "Error Prone",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiProcessLifetime",
+          "method": "shutdown",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+          "priority": "3"
+        },
+        "message": "Use equals() to compare object references."
+      },
+      "sourceSha256": "7067db22f9b001ec76e5ccaf5eed6c4022baab51a7f889795d5c64da74684165",
+      "sourceSpan": [
+        "    if (Thread.currentThread() == owner) return;"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiProcessLifetime.shutdown: Thread.currentThread()==owner is identity of the exact captured cleanup owner; substituting arbitrary Thread.equals would alter the owner gate. Stop publication change does not touch this line.",
+      "priorMatches": [
+        "000092:e063158cf3f66d84aa17ca056921a208f0032caa1b8fae3fae687e65250a4c93"
+      ],
+      "priorReasons": [
+        "Compare the actual current Thread object with a captured owner/worker reference. The fields/local owner declarations and currentThread acquisition are preserved as context. A value-equal object is not the executing owner. No thread start/wait/interrupt cleanup/native qualification."
+      ]
+    },
+    {
+      "ordinal": 6,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime.java",
+        "attributes": {
+          "beginline": "123",
+          "endline": "123",
+          "begincolumn": "22",
+          "endcolumn": "28",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiProcessLifetime",
+          "method": "shutdown",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3"
+        },
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "7067db22f9b001ec76e5ccaf5eed6c4022baab51a7f889795d5c64da74684165",
+      "sourceSpan": [
+        "    if (interrupted) Thread.currentThread().interrupt();"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiProcessLifetime.shutdown: standalone API owns fixed owner/hook notification and interrupt preservation; not a J2EE deployment. Same source span and existing independent context judgment; no hook/TERM execution or stopping-completion inference.",
+      "priorMatches": [
+        "000093:d1485610d6fc8c7c2e4745a048c09e5e113ea5b248204b2139e2e8d5cbe4988c"
+      ],
+      "priorReasons": [
+        "Preserve/propagate current interrupt status; no thread creation. Does not certify surrounding cleanup, deadline, or external termination. PMD rule explicitly targets unmanaged J2EE thread creation. SS311 standalone Java/embedded Web and 411 interrupt discipline apply; no global lifecycle or business behavior waiver."
+      ]
+    },
+    {
+      "ordinal": 7,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudget.java",
+        "attributes": {
+          "beginline": "28",
+          "endline": "28",
+          "begincolumn": "5",
+          "endcolumn": "17",
+          "rule": "AvoidSynchronizedStatement",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudget",
+          "method": "begin",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+          "priority": "3"
+        },
+        "message": "Use ReentrantLock rather than synchronization"
+      },
+      "sourceSha256": "295ea9fd574937e40a600e5213077466774b712cc9a0425a9ec2c887880e6f55",
+      "sourceSpan": [
+        "    synchronized (lock) {"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudget.begin: same private lock must serialize first clock capture and remaining readers. Atomic publication does not remove that mutual exclusion. Actual production supplier is System.nanoTime, no arbitrary I/O. No blanket Java25 monitor/native-performance exemption.",
+      "priorMatches": [
+        "000096:cdd04936941a1a6aed0bbd4bf5b79da970e29454e54e5f2eb287a8cc927cead9"
+      ],
+      "priorReasons": [
+        "ApiStopBudget.java.begin: current411 section9 explicitly requires private final state/resource lifetime locks rather than caller-accessible this/class monitors. This exact occurrence uses lock with the private final newObject declaration below. The existing per-method purpose andprotectedstate rationale is bound by the complete unchanged Main SHA, exactPMD attributes andimmutable oldreview/manifest pointer; only the monitor purpose is reused, not old runtime/IO/native qualification. The oldstyle reference to411 section9 is reconciled withactual currentlines113-121, includingline116. No blanket exception forall Java25 monitors follows fromthis classification. Existing callbacks/resource/deadline/secret/Unit behavior remains unproven andheld as originally required."
+      ]
+    },
+    {
+      "ordinal": 8,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudget.java",
+        "attributes": {
+          "beginline": "42",
+          "endline": "42",
+          "begincolumn": "5",
+          "endcolumn": "17",
+          "rule": "AvoidSynchronizedStatement",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudget",
+          "method": "remainingNanos",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+          "priority": "3"
+        },
+        "message": "Use ReentrantLock rather than synchronization"
+      },
+      "sourceSha256": "295ea9fd574937e40a600e5213077466774b712cc9a0425a9ec2c887880e6f55",
+      "sourceSpan": [
+        "    synchronized (lock) {"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudget.remainingNanos: same private lock must serialize first clock capture and remaining readers. Atomic publication does not remove that mutual exclusion. Actual production supplier is System.nanoTime, no arbitrary I/O. No blanket Java25 monitor/native-performance exemption.",
+      "priorMatches": [
+        "000097:912e13203891ff44637ffb18f843fb226a475fa4d87fbf2eea608b213f474dcc"
+      ],
+      "priorReasons": [
+        "ApiStopBudget.java.remainingNanos: current411 section9 explicitly requires private final state/resource lifetime locks rather than caller-accessible this/class monitors. This exact occurrence uses lock with the private final newObject declaration below. The existing per-method purpose andprotectedstate rationale is bound by the complete unchanged Main SHA, exactPMD attributes andimmutable oldreview/manifest pointer; only the monitor purpose is reused, not old runtime/IO/native qualification. The oldstyle reference to411 section9 is reconciled withactual currentlines113-121, includingline116. No blanket exception forall Java25 monitors follows fromthis classification. Existing callbacks/resource/deadline/secret/Unit behavior remains unproven andheld as originally required."
+      ]
+    },
+    {
+      "ordinal": 9,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "attributes": {
+          "beginline": "29",
+          "endline": "29",
+          "begincolumn": "24",
+          "endcolumn": "31",
+          "rule": "AvoidUsingVolatile",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudgetTest.Fixture",
+          "variable": "failure",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+          "priority": "2"
+        },
+        "message": "Use of modifier volatile is not recommended."
+      },
+      "sourceSha256": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "sourceSpan": [
+        "    volatile Throwable failure;"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudgetTest.Fixture: explicit volatile Throwable/Runnable port provides cross-thread visibility for the two owned test workers. No compound mutation is justified by volatile; counts/latches remain atomic/synchronized.",
+      "priorMatches": [],
+      "priorReasons": []
+    },
+    {
+      "ordinal": 10,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "attributes": {
+          "beginline": "30",
+          "endline": "30",
+          "begincolumn": "23",
+          "endcolumn": "33",
+          "rule": "AvoidUsingVolatile",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudgetTest.Fixture",
+          "variable": "beforeTime",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+          "priority": "2"
+        },
+        "message": "Use of modifier volatile is not recommended."
+      },
+      "sourceSha256": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "sourceSpan": [
+        "    volatile Runnable beforeTime = () -> {};"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudgetTest.Fixture: explicit volatile Throwable/Runnable port provides cross-thread visibility for the two owned test workers. No compound mutation is justified by volatile; counts/latches remain atomic/synchronized.",
+      "priorMatches": [],
+      "priorReasons": []
+    },
+    {
+      "ordinal": 11,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "attributes": {
+          "beginline": "47",
+          "endline": "47",
+          "begincolumn": "7",
+          "endcolumn": "13",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudgetTest",
+          "method": "await",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3"
+        },
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "sourceSpan": [
+        "      Thread.currentThread().interrupt();"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudgetTest.await: own finite latch/pool/Future scenario and interrupt restoration. Original helper/015/016 or new019 only; JVM180s owns all test threads, no external worker/runtime. J2EE restriction is inapplicable to this standalone JUnit test.",
+      "priorMatches": [],
+      "priorReasons": []
+    },
+    {
+      "ordinal": 12,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "attributes": {
+          "beginline": "66",
+          "endline": "66",
+          "begincolumn": "25",
+          "endcolumn": "56",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudgetTest",
+          "method": "apiStop019AtomicClaimPublishesStopAndWaitsForTheFirstClock",
+          "variable": "executor",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3"
+        },
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "sourceSpan": [
+        "    try (var executor = Executors.newFixedThreadPool(2)) {"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudgetTest.apiStop019AtomicClaimPublishesStopAndWaitsForTheFirstClock: own finite latch/pool/Future scenario and interrupt restoration. Original helper/015/016 or new019 only; JVM180s owns all test threads, no external worker/runtime. J2EE restriction is inapplicable to this standalone JUnit test.",
+      "priorMatches": [],
+      "priorReasons": []
+    },
+    {
+      "ordinal": 13,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "attributes": {
+          "beginline": "67",
+          "endline": "67",
+          "begincolumn": "19",
+          "endcolumn": "51",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudgetTest",
+          "method": "apiStop019AtomicClaimPublishesStopAndWaitsForTheFirstClock",
+          "variable": "first",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3"
+        },
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "sourceSpan": [
+        "      var first = executor.submit(f.budget::begin);"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudgetTest.apiStop019AtomicClaimPublishesStopAndWaitsForTheFirstClock: own finite latch/pool/Future scenario and interrupt restoration. Original helper/015/016 or new019 only; JVM180s owns all test threads, no external worker/runtime. J2EE restriction is inapplicable to this standalone JUnit test.",
+      "priorMatches": [],
+      "priorReasons": []
+    },
+    {
+      "ordinal": 14,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "attributes": {
+          "beginline": "72",
+          "endline": "72",
+          "begincolumn": "21",
+          "endcolumn": "62",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudgetTest",
+          "method": "apiStop019AtomicClaimPublishesStopAndWaitsForTheFirstClock",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3"
+        },
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "sourceSpan": [
+        "        remaining = executor.submit(f.budget::remainingNanos);"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudgetTest.apiStop019AtomicClaimPublishesStopAndWaitsForTheFirstClock: own finite latch/pool/Future scenario and interrupt restoration. Original helper/015/016 or new019 only; JVM180s owns all test threads, no external worker/runtime. J2EE restriction is inapplicable to this standalone JUnit test.",
+      "priorMatches": [],
+      "priorReasons": []
+    },
+    {
+      "ordinal": 15,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "attributes": {
+          "beginline": "93",
+          "endline": "93",
+          "begincolumn": "17",
+          "endcolumn": "21",
+          "rule": "NullAssignment",
+          "ruleset": "Error Prone",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudgetTest",
+          "method": "apiStop020FailedFirstClockKeepsThePublishedStopAndExhaustedBudget",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+          "priority": "3"
+        },
+        "message": "Assigning an Object to null is a code smell. Consider refactoring."
+      },
+      "sourceSha256": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "sourceSpan": [
+        "    f.failure = null;"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudgetTest.apiStop020FailedFirstClockKeepsThePublishedStopAndExhaustedBudget: clear only the synthetic failure injection, then verify already published stop/sticky exhausted budget without another clock read. Not Production null normalization or live resource disposal.",
+      "priorMatches": [],
+      "priorReasons": []
+    },
+    {
+      "ordinal": 16,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "attributes": {
+          "beginline": "205",
+          "endline": "205",
+          "begincolumn": "17",
+          "endcolumn": "21",
+          "rule": "NullAssignment",
+          "ruleset": "Error Prone",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudgetTest",
+          "method": "apiStop011",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+          "priority": "3"
+        },
+        "message": "Assigning an Object to null is a code smell. Consider refactoring."
+      },
+      "sourceSha256": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "sourceSpan": [
+        "    f.failure = null;"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudgetTest.apiStop011: clear only the synthetic failure injection, then verify already published stop/sticky exhausted budget without another clock read. Not Production null normalization or live resource disposal.",
+      "priorMatches": [],
+      "priorReasons": []
+    },
+    {
+      "ordinal": 17,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "attributes": {
+          "beginline": "217",
+          "endline": "217",
+          "begincolumn": "17",
+          "endcolumn": "21",
+          "rule": "NullAssignment",
+          "ruleset": "Error Prone",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudgetTest",
+          "method": "apiStop012",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+          "priority": "3"
+        },
+        "message": "Assigning an Object to null is a code smell. Consider refactoring."
+      },
+      "sourceSha256": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "sourceSpan": [
+        "    f.failure = null;"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudgetTest.apiStop012: clear only the synthetic failure injection, then verify already published stop/sticky exhausted budget without another clock read. Not Production null normalization or live resource disposal.",
+      "priorMatches": [],
+      "priorReasons": []
+    },
+    {
+      "ordinal": 18,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "attributes": {
+          "beginline": "230",
+          "endline": "230",
+          "begincolumn": "17",
+          "endcolumn": "21",
+          "rule": "NullAssignment",
+          "ruleset": "Error Prone",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudgetTest",
+          "method": "apiStop013",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+          "priority": "3"
+        },
+        "message": "Assigning an Object to null is a code smell. Consider refactoring."
+      },
+      "sourceSha256": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "sourceSpan": [
+        "    f.failure = null;"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudgetTest.apiStop013: clear only the synthetic failure injection, then verify already published stop/sticky exhausted budget without another clock read. Not Production null normalization or live resource disposal.",
+      "priorMatches": [],
+      "priorReasons": []
+    },
+    {
+      "ordinal": 19,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "attributes": {
+          "beginline": "242",
+          "endline": "242",
+          "begincolumn": "17",
+          "endcolumn": "21",
+          "rule": "NullAssignment",
+          "ruleset": "Error Prone",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudgetTest",
+          "method": "apiStop014",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+          "priority": "3"
+        },
+        "message": "Assigning an Object to null is a code smell. Consider refactoring."
+      },
+      "sourceSha256": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "sourceSpan": [
+        "    f.failure = null;"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudgetTest.apiStop014: clear only the synthetic failure injection, then verify already published stop/sticky exhausted budget without another clock read. Not Production null normalization or live resource disposal.",
+      "priorMatches": [],
+      "priorReasons": []
+    },
+    {
+      "ordinal": 20,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "attributes": {
+          "beginline": "257",
+          "endline": "257",
+          "begincolumn": "25",
+          "endcolumn": "56",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudgetTest",
+          "method": "apiStop015",
+          "variable": "executor",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3"
+        },
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "sourceSpan": [
+        "    try (var executor = Executors.newFixedThreadPool(2)) {"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudgetTest.apiStop015: own finite latch/pool/Future scenario and interrupt restoration. Original helper/015/016 or new019 only; JVM180s owns all test threads, no external worker/runtime. J2EE restriction is inapplicable to this standalone JUnit test.",
+      "priorMatches": [],
+      "priorReasons": []
+    },
+    {
+      "ordinal": 21,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "attributes": {
+          "beginline": "258",
+          "endline": "258",
+          "begincolumn": "19",
+          "endcolumn": "51",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudgetTest",
+          "method": "apiStop015",
+          "variable": "first",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3"
+        },
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "sourceSpan": [
+        "      var first = executor.submit(f.budget::begin);"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudgetTest.apiStop015: own finite latch/pool/Future scenario and interrupt restoration. Original helper/015/016 or new019 only; JVM180s owns all test threads, no external worker/runtime. J2EE restriction is inapplicable to this standalone JUnit test.",
+      "priorMatches": [],
+      "priorReasons": []
+    },
+    {
+      "ordinal": 22,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "attributes": {
+          "beginline": "262",
+          "endline": "262",
+          "begincolumn": "18",
+          "endcolumn": "50",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudgetTest",
+          "method": "apiStop015",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3"
+        },
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "sourceSpan": [
+        "        second = executor.submit(f.budget::begin);"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudgetTest.apiStop015: own finite latch/pool/Future scenario and interrupt restoration. Original helper/015/016 or new019 only; JVM180s owns all test threads, no external worker/runtime. J2EE restriction is inapplicable to this standalone JUnit test.",
+      "priorMatches": [],
+      "priorReasons": []
+    },
+    {
+      "ordinal": 23,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "attributes": {
+          "beginline": "279",
+          "endline": "279",
+          "begincolumn": "25",
+          "endcolumn": "56",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudgetTest",
+          "method": "apiStop016",
+          "variable": "executor",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3"
+        },
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "sourceSpan": [
+        "    try (var executor = Executors.newFixedThreadPool(4)) {"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudgetTest.apiStop016: own finite latch/pool/Future scenario and interrupt restoration. Original helper/015/016 or new019 only; JVM180s owns all test threads, no external worker/runtime. J2EE restriction is inapplicable to this standalone JUnit test.",
+      "priorMatches": [],
+      "priorReasons": []
+    },
+    {
+      "ordinal": 24,
+      "raw": {
+        "tool": "pmd.xml",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "attributes": {
+          "beginline": "281",
+          "endline": "281",
+          "begincolumn": "46",
+          "endcolumn": "87",
+          "rule": "DoNotUseThreads",
+          "ruleset": "Multithreading",
+          "package": "dev.codex.schubert.nk.api.bootstrap",
+          "class": "ApiStopBudgetTest",
+          "method": "apiStop016",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+          "priority": "3"
+        },
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+      "sourceSpan": [
+        "      for (int i = 0; i < 8; i++) values.add(executor.submit(f.budget::remainingNanos));"
+      ],
+      "classification": "CONTEXTUAL_NONAPPLICABLE",
+      "actualViolation": false,
+      "reason": "ApiStopBudgetTest.apiStop016: own finite latch/pool/Future scenario and interrupt restoration. Original helper/015/016 or new019 only; JVM180s owns all test threads, no external worker/runtime. J2EE restriction is inapplicable to this standalone JUnit test.",
+      "priorMatches": [],
+      "priorReasons": []
+    }
+  ]
+}
