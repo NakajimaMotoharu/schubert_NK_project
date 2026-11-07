@@ -688,3 +688,10 @@ NK-WEB-002: WebNativeRuntime（ordinary借用DB/5credential→三codec/readonly 
 |---|---|---|---|
 | NK-WEB-001 WebAccessExceptionFilterFactory constructor/create | 015080のRD/UI/SS対応・PG-D1145 | 015080/081、新whole4/PG22220・独立22228、L5M2C1未達0/branch自然0N-A | WBS-P015-02、群一回 |
 | 支援 WebAccessFailureHandler/EncryptedSessionRequestCache/Mock owner fixture | 同上、302/403/一回String保存・監査literal | 同runのsupport17実method限定、whole source信用0。実認証/DB/session暗号/HTTP/Root/nativeは別未受入 | 既所有不変/追加費配賦0 |
+
+
+### 2026-11-07 保存GET cache全単体
+
+| Program/class/method | 関連設計・判断 | Test・証拠 | canonical owner/cost |
+|---|---|---|---|
+| NK-WEB-001 EncryptedSessionRequestCache constructor/save/get/getMatching/remove/private candidate・requireConfigured、SavedGet全Code | FUN001/AUT/UI221226/SS313314351352/PG-D104・1146 | PT-WEB-SAVEDPORT001..009、015082/083、22248/22250、全L62M17C2B22未達0 | WBS-P015-02一群、実sessionDB/fullchainは別未受入 |

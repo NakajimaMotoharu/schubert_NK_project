@@ -1,0 +1,180 @@
+{
+  "dev/codex/schubert/nk/web/session/SessionPayloadCodec": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;[BLjava/lang/String;[BLjava/security/SecureRandom;)V"
+    },
+    {
+      "name": "validateKey",
+      "desc": "([B)V"
+    },
+    {
+      "name": "close",
+      "desc": "()V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/JdbcWebSessionStore": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/session/EncryptedWebSessionRepository;Ljava/time/Clock;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SessionAttributeCodec": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SessionStoreException": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository": [
+    {
+      "name": "<init>",
+      "desc": "(Ljavax/sql/DataSource;Ldev/codex/schubert/nk/web/session/SessionPayloadCodec;Ljava/time/Clock;Ljava/security/SecureRandom;Ljava/util/function/Supplier;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/EncryptedSessionPayload": [
+    {
+      "name": "validateVersion",
+      "desc": "(Ljava/lang/String;)Ljava/lang/String;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository;)V"
+    },
+    {
+      "name": "saveRequest",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;)V"
+    },
+    {
+      "name": "getRequest",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;)Lorg/springframework/security/web/savedrequest/SavedRequest;"
+    },
+    {
+      "name": "getMatchingRequest",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;)Ljakarta/servlet/http/HttpServletRequest;"
+    },
+    {
+      "name": "removeRequest",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;)V"
+    },
+    {
+      "name": "requireConfigured",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;)V"
+    },
+    {
+      "name": "candidate",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache$SavedGet": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "getRedirectUrl",
+      "desc": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getMethod",
+      "desc": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getCookies",
+      "desc": "()Ljava/util/List;"
+    },
+    {
+      "name": "getHeaderValues",
+      "desc": "(Ljava/lang/String;)Ljava/util/List;"
+    },
+    {
+      "name": "getHeaderNames",
+      "desc": "()Ljava/util/Collection;"
+    },
+    {
+      "name": "getLocales",
+      "desc": "()Ljava/util/List;"
+    },
+    {
+      "name": "getParameterValues",
+      "desc": "(Ljava/lang/String;)[Ljava/lang/String;"
+    },
+    {
+      "name": "getParameterMap",
+      "desc": "()Ljava/util/Map;"
+    },
+    {
+      "name": "toString",
+      "desc": "()Ljava/lang/String;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/SavedScreenTarget": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "fromGet",
+      "desc": "(Ljava/lang/String;Ljava/lang/String;)Ldev/codex/schubert/nk/web/security/SavedScreenTarget;"
+    },
+    {
+      "name": "location",
+      "desc": "()Ljava/lang/String;"
+    },
+    {
+      "name": "invalid",
+      "desc": "()Ljava/lang/IllegalArgumentException;"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/SavedRequestTarget": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "fromGet",
+      "desc": "(Ljava/lang/String;Ljava/lang/String;)Ldev/codex/schubert/nk/web/security/SavedRequestTarget;"
+    },
+    {
+      "name": "location",
+      "desc": "()Ljava/lang/String;"
+    },
+    {
+      "name": "require",
+      "desc": "(Z)V"
+    },
+    {
+      "name": "invalid",
+      "desc": "()Ljava/lang/IllegalArgumentException;"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ]
+}
