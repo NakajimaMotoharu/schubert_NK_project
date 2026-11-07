@@ -1,0 +1,810 @@
+Compiled from "URISupport.java"
+public class org.apache.activemq.artemis.utils.uri.URISupport {
+  public org.apache.activemq.artemis.utils.uri.URISupport();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  public static java.lang.StringBuilder appendParameters(java.lang.StringBuilder, java.util.Map<java.lang.String, java.lang.String>);
+    Code:
+         0: aload_1
+         1: invokeinterface #7,  1            // InterfaceMethod java/util/Map.isEmpty:()Z
+         6: ifne          25
+         9: aload_0
+        10: bipush        63
+        12: invokevirtual #13                 // Method java/lang/StringBuilder.append:(C)Ljava/lang/StringBuilder;
+        15: pop
+        16: aload_0
+        17: aload_1
+        18: invokestatic  #19                 // Method createQueryString:(Ljava/util/Map;)Ljava/lang/String;
+        21: invokevirtual #25                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        24: pop
+        25: aload_0
+        26: areturn
+
+  public static java.util.Map<java.lang.String, java.lang.String> parseQuery(java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_0
+         2: ldc           #28                 // String ?
+         4: invokevirtual #30                 // Method java/lang/String.lastIndexOf:(Ljava/lang/String;)I
+         7: iconst_1
+         8: iadd
+         9: invokevirtual #36                 // Method java/lang/String.substring:(I)Ljava/lang/String;
+        12: astore_0
+        13: new           #40                 // class java/util/HashMap
+        16: dup
+        17: invokespecial #42                 // Method java/util/HashMap."<init>":()V
+        20: astore_1
+        21: aload_0
+        22: ifnull        42
+        25: aload_0
+        26: invokevirtual #43                 // Method java/lang/String.isEmpty:()Z
+        29: ifne          42
+        32: aload_1
+        33: aload_0
+        34: ldc           #44                 // String [&;]
+        36: invokevirtual #46                 // Method java/lang/String.split:(Ljava/lang/String;)[Ljava/lang/String;
+        39: invokestatic  #50                 // Method parseParameters:(Ljava/util/Map;[Ljava/lang/String;)V
+        42: aload_1
+        43: areturn
+
+  public static java.lang.String stripQuery(java.lang.String);
+    Code:
+         0: aload_0
+         1: iconst_0
+         2: aload_0
+         3: bipush        63
+         5: invokevirtual #54                 // Method java/lang/String.indexOf:(I)I
+         8: invokevirtual #58                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+        11: areturn
+
+  public static boolean containsQuery(java.lang.String);
+    Code:
+         0: aload_0
+         1: ldc           #28                 // String ?
+         3: invokevirtual #61                 // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+         6: ireturn
+
+  public static boolean containsQuery(org.apache.activemq.artemis.api.core.SimpleString);
+    Code:
+         0: aload_0
+         1: bipush        63
+         3: invokevirtual #65                 // Method org/apache/activemq/artemis/api/core/SimpleString.contains:(C)Z
+         6: ireturn
+
+  private static void parseParameters(java.util.Map<java.lang.String, java.lang.String>, java.lang.String[]);
+    Code:
+         0: aload_1
+         1: astore_2
+         2: aload_2
+         3: arraylength
+         4: istore_3
+         5: iconst_0
+         6: istore        4
+         8: iload         4
+        10: iload_3
+        11: if_icmpge     97
+        14: aload_2
+        15: iload         4
+        17: aaload
+        18: astore        5
+        20: aload         5
+        22: ldc           #70                 // String =
+        24: invokevirtual #72                 // Method java/lang/String.indexOf:(Ljava/lang/String;)I
+        27: istore        6
+        29: iload         6
+        31: iflt          81
+        34: aload         5
+        36: iconst_0
+        37: iload         6
+        39: invokevirtual #58                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+        42: getstatic     #74                 // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+        45: invokestatic  #80                 // Method java/net/URLDecoder.decode:(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/lang/String;
+        48: astore        7
+        50: aload         5
+        52: iload         6
+        54: iconst_1
+        55: iadd
+        56: invokevirtual #36                 // Method java/lang/String.substring:(I)Ljava/lang/String;
+        59: getstatic     #74                 // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+        62: invokestatic  #80                 // Method java/net/URLDecoder.decode:(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/lang/String;
+        65: astore        8
+        67: aload_0
+        68: aload         7
+        70: aload         8
+        72: invokeinterface #86,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        77: pop
+        78: goto          91
+        81: aload_0
+        82: aload         5
+        84: aconst_null
+        85: invokeinterface #86,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        90: pop
+        91: iinc          4, 1
+        94: goto          8
+        97: return
+
+  public static java.util.Map<java.lang.String, java.lang.String> parseParameters(java.net.URI) throws java.net.URISyntaxException;
+    Code:
+         0: aload_0
+         1: invokestatic  #90                 // Method isCompositeURI:(Ljava/net/URI;)Z
+         4: ifne          58
+         7: aload_0
+         8: invokevirtual #94                 // Method java/net/URI.getQuery:()Ljava/lang/String;
+        11: ifnonnull     20
+        14: invokestatic  #100                // Method emptyMap:()Ljava/util/Map;
+        17: goto          32
+        20: aload_0
+        21: invokevirtual #94                 // Method java/net/URI.getQuery:()Ljava/lang/String;
+        24: ldc           #28                 // String ?
+        26: invokestatic  #104                // Method stripPrefix:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        29: invokestatic  #108                // Method parseQuery:(Ljava/lang/String;)Ljava/util/Map;
+        32: areturn
+        33: astore_1
+        34: new           #114                // class java/net/URISyntaxException
+        37: dup
+        38: aload_0
+        39: invokevirtual #116                // Method java/net/URI.toString:()Ljava/lang/String;
+        42: aload_1
+        43: invokevirtual #119                // Method java/lang/IllegalArgumentException.getMessage:()Ljava/lang/String;
+        46: invokespecial #122                // Method java/net/URISyntaxException."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+        49: astore_2
+        50: aload_2
+        51: aload_1
+        52: invokevirtual #125                // Method java/net/URISyntaxException.initCause:(Ljava/lang/Throwable;)Ljava/lang/Throwable;
+        55: pop
+        56: aload_2
+        57: athrow
+        58: aload_0
+        59: invokestatic  #129                // Method parseComposite:(Ljava/net/URI;)Lorg/apache/activemq/artemis/utils/uri/URISupport$CompositeData;
+        62: astore_1
+        63: new           #40                 // class java/util/HashMap
+        66: dup
+        67: invokespecial #42                 // Method java/util/HashMap."<init>":()V
+        70: astore_2
+        71: aload_2
+        72: aload_1
+        73: invokevirtual #133                // Method org/apache/activemq/artemis/utils/uri/URISupport$CompositeData.getParameters:()Ljava/util/Map;
+        76: invokeinterface #138,  2          // InterfaceMethod java/util/Map.putAll:(Ljava/util/Map;)V
+        81: aload_2
+        82: invokeinterface #7,  1            // InterfaceMethod java/util/Map.isEmpty:()Z
+        87: ifeq          94
+        90: invokestatic  #100                // Method emptyMap:()Ljava/util/Map;
+        93: astore_2
+        94: aload_2
+        95: areturn
+      Exception table:
+         from    to  target type
+             7    32    33   Class java/lang/IllegalArgumentException
+
+  public static java.net.URI applyParameters(java.net.URI, java.util.Map<java.lang.String, java.lang.String>) throws java.net.URISyntaxException;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: ldc           #142                // String
+         4: invokestatic  #144                // Method applyParameters:(Ljava/net/URI;Ljava/util/Map;Ljava/lang/String;)Ljava/net/URI;
+         7: areturn
+
+  public static java.net.URI applyParameters(java.net.URI, java.util.Map<java.lang.String, java.lang.String>, java.lang.String) throws java.net.URISyntaxException;
+    Code:
+         0: aload_1
+         1: ifnull        164
+         4: aload_1
+         5: invokeinterface #7,  1            // InterfaceMethod java/util/Map.isEmpty:()Z
+        10: ifne          164
+        13: aload_0
+        14: invokevirtual #148                // Method java/net/URI.getRawQuery:()Ljava/lang/String;
+        17: ifnull        34
+        20: new           #14                 // class java/lang/StringBuilder
+        23: dup
+        24: aload_0
+        25: invokevirtual #148                // Method java/net/URI.getRawQuery:()Ljava/lang/String;
+        28: invokespecial #151                // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+        31: goto          41
+        34: new           #14                 // class java/lang/StringBuilder
+        37: dup
+        38: invokespecial #154                // Method java/lang/StringBuilder."<init>":()V
+        41: astore_3
+        42: aload_1
+        43: invokeinterface #155,  1          // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+        48: invokeinterface #159,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+        53: astore        4
+        55: aload         4
+        57: invokeinterface #165,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        62: ifeq          155
+        65: aload         4
+        67: invokeinterface #170,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        72: checkcast     #174                // class java/util/Map$Entry
+        75: astore        5
+        77: aload         5
+        79: invokeinterface #176,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+        84: checkcast     #31                 // class java/lang/String
+        87: aload_2
+        88: invokevirtual #179                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+        91: ifeq          152
+        94: aload_3
+        95: invokevirtual #183                // Method java/lang/StringBuilder.isEmpty:()Z
+        98: ifne          108
+       101: aload_3
+       102: bipush        38
+       104: invokevirtual #13                 // Method java/lang/StringBuilder.append:(C)Ljava/lang/StringBuilder;
+       107: pop
+       108: aload         5
+       110: invokeinterface #176,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+       115: checkcast     #31                 // class java/lang/String
+       118: aload_2
+       119: invokevirtual #184                // Method java/lang/String.length:()I
+       122: invokevirtual #36                 // Method java/lang/String.substring:(I)Ljava/lang/String;
+       125: astore        6
+       127: aload_3
+       128: aload         6
+       130: invokevirtual #25                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       133: bipush        61
+       135: invokevirtual #13                 // Method java/lang/StringBuilder.append:(C)Ljava/lang/StringBuilder;
+       138: aload         5
+       140: invokeinterface #188,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+       145: checkcast     #31                 // class java/lang/String
+       148: invokevirtual #25                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       151: pop
+       152: goto          55
+       155: aload_0
+       156: aload_3
+       157: invokevirtual #191                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       160: invokestatic  #192                // Method createURIWithQuery:(Ljava/net/URI;Ljava/lang/String;)Ljava/net/URI;
+       163: astore_0
+       164: aload_0
+       165: areturn
+
+  private static java.util.Map<java.lang.String, java.lang.String> emptyMap();
+    Code:
+         0: invokestatic  #196                // Method java/util/Collections.emptyMap:()Ljava/util/Map;
+         3: areturn
+
+  public static java.net.URI removeQuery(java.net.URI) throws java.net.URISyntaxException;
+    Code:
+         0: aload_0
+         1: aconst_null
+         2: invokestatic  #192                // Method createURIWithQuery:(Ljava/net/URI;Ljava/lang/String;)Ljava/net/URI;
+         5: areturn
+
+  public static java.net.URI createURIWithQuery(java.net.URI, java.lang.String) throws java.net.URISyntaxException;
+    Code:
+         0: aload_0
+         1: invokevirtual #199                // Method java/net/URI.getRawSchemeSpecificPart:()Ljava/lang/String;
+         4: astore_2
+         5: aload_2
+         6: ldc           #28                 // String ?
+         8: invokevirtual #30                 // Method java/lang/String.lastIndexOf:(Ljava/lang/String;)I
+        11: istore_3
+        12: iload_3
+        13: aload_2
+        14: ldc           #202                // String )
+        16: invokevirtual #30                 // Method java/lang/String.lastIndexOf:(Ljava/lang/String;)I
+        19: if_icmpge     24
+        22: iconst_m1
+        23: istore_3
+        24: iload_3
+        25: ifle          35
+        28: aload_2
+        29: iconst_0
+        30: iload_3
+        31: invokevirtual #58                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+        34: astore_2
+        35: aload_1
+        36: ifnull        54
+        39: aload_1
+        40: invokevirtual #43                 // Method java/lang/String.isEmpty:()Z
+        43: ifne          54
+        46: aload_2
+        47: aload_1
+        48: invokedynamic #204,  0            // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        53: astore_2
+        54: new           #95                 // class java/net/URI
+        57: dup
+        58: aload_0
+        59: invokevirtual #207                // Method java/net/URI.getScheme:()Ljava/lang/String;
+        62: aload_2
+        63: aload_0
+        64: invokevirtual #210                // Method java/net/URI.getFragment:()Ljava/lang/String;
+        67: invokespecial #213                // Method java/net/URI."<init>":(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+        70: areturn
+
+  public static org.apache.activemq.artemis.utils.uri.URISupport$CompositeData parseComposite(java.net.URI) throws java.net.URISyntaxException;
+    Code:
+         0: new           #134                // class org/apache/activemq/artemis/utils/uri/URISupport$CompositeData
+         3: dup
+         4: invokespecial #216                // Method org/apache/activemq/artemis/utils/uri/URISupport$CompositeData."<init>":()V
+         7: astore_1
+         8: aload_1
+         9: aload_0
+        10: invokevirtual #207                // Method java/net/URI.getScheme:()Ljava/lang/String;
+        13: putfield      #217                // Field org/apache/activemq/artemis/utils/uri/URISupport$CompositeData.scheme:Ljava/lang/String;
+        16: aload_0
+        17: invokevirtual #199                // Method java/net/URI.getRawSchemeSpecificPart:()Ljava/lang/String;
+        20: invokevirtual #221                // Method java/lang/String.trim:()Ljava/lang/String;
+        23: ldc           #224                // String //
+        25: invokestatic  #104                // Method stripPrefix:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        28: invokevirtual #221                // Method java/lang/String.trim:()Ljava/lang/String;
+        31: astore_2
+        32: aload_0
+        33: aload_1
+        34: aload_2
+        35: invokestatic  #226                // Method parseComposite:(Ljava/net/URI;Lorg/apache/activemq/artemis/utils/uri/URISupport$CompositeData;Ljava/lang/String;)V
+        38: aload_1
+        39: aload_0
+        40: invokevirtual #210                // Method java/net/URI.getFragment:()Ljava/lang/String;
+        43: putfield      #229                // Field org/apache/activemq/artemis/utils/uri/URISupport$CompositeData.fragment:Ljava/lang/String;
+        46: aload_1
+        47: areturn
+
+  public static boolean isCompositeURI(java.net.URI);
+    Code:
+         0: aload_0
+         1: invokevirtual #199                // Method java/net/URI.getRawSchemeSpecificPart:()Ljava/lang/String;
+         4: invokevirtual #221                // Method java/lang/String.trim:()Ljava/lang/String;
+         7: ldc           #224                // String //
+         9: invokestatic  #104                // Method stripPrefix:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        12: invokevirtual #221                // Method java/lang/String.trim:()Ljava/lang/String;
+        15: astore_1
+        16: aload_1
+        17: bipush        40
+        19: invokevirtual #54                 // Method java/lang/String.indexOf:(I)I
+        22: ifne          34
+        25: aload_1
+        26: invokestatic  #232                // Method checkParenthesis:(Ljava/lang/String;)Z
+        29: ifeq          34
+        32: iconst_1
+        33: ireturn
+        34: iconst_0
+        35: ireturn
+
+  public static int indexOfParenthesisMatch(java.lang.String, int) throws java.net.URISyntaxException;
+    Code:
+         0: iconst_m1
+         1: istore_2
+         2: iload_1
+         3: iflt          14
+         6: iload_1
+         7: aload_0
+         8: invokevirtual #184                // Method java/lang/String.length:()I
+        11: if_icmple     28
+        14: new           #112                // class java/lang/IllegalArgumentException
+        17: dup
+        18: iload_1
+        19: invokedynamic #235,  0            // InvokeDynamic #1:makeConcatWithConstants:(I)Ljava/lang/String;
+        24: invokespecial #237                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        27: athrow
+        28: aload_0
+        29: iload_1
+        30: invokevirtual #238                // Method java/lang/String.charAt:(I)C
+        33: bipush        40
+        35: if_icmpeq     48
+        38: new           #112                // class java/lang/IllegalArgumentException
+        41: dup
+        42: ldc           #242                // String character at indicated position is not a parenthesis
+        44: invokespecial #237                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        47: athrow
+        48: iconst_1
+        49: istore_3
+        50: aload_0
+        51: invokevirtual #244                // Method java/lang/String.toCharArray:()[C
+        54: astore        4
+        56: iload_1
+        57: iconst_1
+        58: iadd
+        59: istore_2
+        60: iload_2
+        61: aload         4
+        63: arraylength
+        64: if_icmpge     109
+        67: aload         4
+        69: iload_2
+        70: caload
+        71: istore        5
+        73: iload         5
+        75: bipush        40
+        77: if_icmpne     86
+        80: iinc          3, 1
+        83: goto          103
+        86: iload         5
+        88: bipush        41
+        90: if_icmpne     103
+        93: iinc          3, -1
+        96: iload_3
+        97: ifne          103
+       100: goto          109
+       103: iinc          2, 1
+       106: goto          60
+       109: iload_3
+       110: ifeq          124
+       113: new           #114                // class java/net/URISyntaxException
+       116: dup
+       117: aload_0
+       118: ldc           #248                // String URI did not contain a matching parenthesis.
+       120: invokespecial #122                // Method java/net/URISyntaxException."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+       123: athrow
+       124: iload_2
+       125: ireturn
+
+  private static void parseComposite(java.net.URI, org.apache.activemq.artemis.utils.uri.URISupport$CompositeData, java.lang.String) throws java.net.URISyntaxException;
+    Code:
+         0: aload_2
+         1: invokestatic  #232                // Method checkParenthesis:(Ljava/lang/String;)Z
+         4: ifne          21
+         7: new           #114                // class java/net/URISyntaxException
+        10: dup
+        11: aload_0
+        12: invokevirtual #116                // Method java/net/URI.toString:()Ljava/lang/String;
+        15: ldc           #250                // String Not a matching number of \'(\' and \')\' parenthesis
+        17: invokespecial #122                // Method java/net/URISyntaxException."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+        20: athrow
+        21: aload_2
+        22: ldc           #252                // String (
+        24: invokevirtual #72                 // Method java/lang/String.indexOf:(Ljava/lang/String;)I
+        27: istore        6
+        29: iload         6
+        31: ifne          124
+        34: aload_1
+        35: aload_2
+        36: iconst_0
+        37: iload         6
+        39: invokevirtual #58                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+        42: putfield      #254                // Field org/apache/activemq/artemis/utils/uri/URISupport$CompositeData.host:Ljava/lang/String;
+        45: aload_1
+        46: getfield      #254                // Field org/apache/activemq/artemis/utils/uri/URISupport$CompositeData.host:Ljava/lang/String;
+        49: ldc_w         #257                // String /
+        52: invokevirtual #72                 // Method java/lang/String.indexOf:(Ljava/lang/String;)I
+        55: istore        5
+        57: iload         5
+        59: iflt          89
+        62: aload_1
+        63: aload_1
+        64: getfield      #254                // Field org/apache/activemq/artemis/utils/uri/URISupport$CompositeData.host:Ljava/lang/String;
+        67: iload         5
+        69: invokevirtual #36                 // Method java/lang/String.substring:(I)Ljava/lang/String;
+        72: putfield      #259                // Field org/apache/activemq/artemis/utils/uri/URISupport$CompositeData.path:Ljava/lang/String;
+        75: aload_1
+        76: aload_1
+        77: getfield      #254                // Field org/apache/activemq/artemis/utils/uri/URISupport$CompositeData.host:Ljava/lang/String;
+        80: iconst_0
+        81: iload         5
+        83: invokevirtual #58                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+        86: putfield      #254                // Field org/apache/activemq/artemis/utils/uri/URISupport$CompositeData.host:Ljava/lang/String;
+        89: aload_2
+        90: iload         6
+        92: invokestatic  #262                // Method indexOfParenthesisMatch:(Ljava/lang/String;I)I
+        95: istore        5
+        97: aload_2
+        98: iload         6
+       100: iconst_1
+       101: iadd
+       102: iload         5
+       104: invokevirtual #58                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+       107: astore_3
+       108: aload_2
+       109: iload         5
+       111: iconst_1
+       112: iadd
+       113: invokevirtual #36                 // Method java/lang/String.substring:(I)Ljava/lang/String;
+       116: invokevirtual #221                // Method java/lang/String.trim:()Ljava/lang/String;
+       119: astore        4
+       121: goto          130
+       124: aload_2
+       125: astore_3
+       126: ldc           #142                // String
+       128: astore        4
+       130: aload_3
+       131: invokestatic  #266                // Method splitComponents:(Ljava/lang/String;)[Ljava/lang/String;
+       134: astore        7
+       136: aload_1
+       137: aload         7
+       139: arraylength
+       140: anewarray     #95                 // class java/net/URI
+       143: putfield      #269                // Field org/apache/activemq/artemis/utils/uri/URISupport$CompositeData.components:[Ljava/net/URI;
+       146: iconst_0
+       147: istore        8
+       149: iload         8
+       151: aload         7
+       153: arraylength
+       154: if_icmpge     185
+       157: aload_1
+       158: getfield      #269                // Field org/apache/activemq/artemis/utils/uri/URISupport$CompositeData.components:[Ljava/net/URI;
+       161: iload         8
+       163: new           #95                 // class java/net/URI
+       166: dup
+       167: aload         7
+       169: iload         8
+       171: aaload
+       172: invokevirtual #221                // Method java/lang/String.trim:()Ljava/lang/String;
+       175: invokespecial #273                // Method java/net/URI."<init>":(Ljava/lang/String;)V
+       178: aastore
+       179: iinc          8, 1
+       182: goto          149
+       185: aload         4
+       187: ldc           #28                 // String ?
+       189: invokevirtual #72                 // Method java/lang/String.indexOf:(Ljava/lang/String;)I
+       192: istore        5
+       194: iload         5
+       196: iflt          241
+       199: iload         5
+       201: ifle          222
+       204: aload_1
+       205: aload         4
+       207: iconst_0
+       208: iload         5
+       210: invokevirtual #58                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+       213: ldc_w         #257                // String /
+       216: invokestatic  #104                // Method stripPrefix:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+       219: putfield      #259                // Field org/apache/activemq/artemis/utils/uri/URISupport$CompositeData.path:Ljava/lang/String;
+       222: aload_1
+       223: aload         4
+       225: iload         5
+       227: iconst_1
+       228: iadd
+       229: invokevirtual #36                 // Method java/lang/String.substring:(I)Ljava/lang/String;
+       232: invokestatic  #108                // Method parseQuery:(Ljava/lang/String;)Ljava/util/Map;
+       235: putfield      #274                // Field org/apache/activemq/artemis/utils/uri/URISupport$CompositeData.parameters:Ljava/util/Map;
+       238: goto          268
+       241: aload         4
+       243: invokevirtual #43                 // Method java/lang/String.isEmpty:()Z
+       246: ifne          261
+       249: aload_1
+       250: aload         4
+       252: ldc_w         #257                // String /
+       255: invokestatic  #104                // Method stripPrefix:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+       258: putfield      #259                // Field org/apache/activemq/artemis/utils/uri/URISupport$CompositeData.path:Ljava/lang/String;
+       261: aload_1
+       262: invokestatic  #100                // Method emptyMap:()Ljava/util/Map;
+       265: putfield      #274                // Field org/apache/activemq/artemis/utils/uri/URISupport$CompositeData.parameters:Ljava/util/Map;
+       268: return
+
+  private static java.lang.String[] splitComponents(java.lang.String);
+    Code:
+         0: new           #278                // class java/util/ArrayList
+         3: dup
+         4: invokespecial #280                // Method java/util/ArrayList."<init>":()V
+         7: astore_1
+         8: iconst_0
+         9: istore_2
+        10: iconst_0
+        11: istore_3
+        12: aload_0
+        13: invokevirtual #244                // Method java/lang/String.toCharArray:()[C
+        16: astore        4
+        18: iconst_0
+        19: istore        5
+        21: iload         5
+        23: aload         4
+        25: arraylength
+        26: if_icmpge     116
+        29: aload         4
+        31: iload         5
+        33: caload
+        34: tableswitch   { // 40 to 44
+                      40: 68
+                      41: 74
+                      42: 110
+                      43: 110
+                      44: 80
+                 default: 110
+            }
+        68: iinc          3, 1
+        71: goto          110
+        74: iinc          3, -1
+        77: goto          110
+        80: iload_3
+        81: ifne          110
+        84: aload_0
+        85: iload_2
+        86: iload         5
+        88: invokevirtual #58                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+        91: astore        6
+        93: aload_1
+        94: aload         6
+        96: invokeinterface #281,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       101: pop
+       102: iload         5
+       104: iconst_1
+       105: iadd
+       106: istore_2
+       107: goto          110
+       110: iinc          5, 1
+       113: goto          21
+       116: aload_0
+       117: iload_2
+       118: invokevirtual #36                 // Method java/lang/String.substring:(I)Ljava/lang/String;
+       121: astore        5
+       123: aload         5
+       125: invokevirtual #43                 // Method java/lang/String.isEmpty:()Z
+       128: ifne          140
+       131: aload_1
+       132: aload         5
+       134: invokeinterface #281,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       139: pop
+       140: aload_1
+       141: invokeinterface #287,  1          // InterfaceMethod java/util/List.size:()I
+       146: anewarray     #31                 // class java/lang/String
+       149: astore        6
+       151: aload_1
+       152: aload         6
+       154: invokeinterface #290,  2          // InterfaceMethod java/util/List.toArray:([Ljava/lang/Object;)[Ljava/lang/Object;
+       159: pop
+       160: aload         6
+       162: areturn
+
+  public static java.lang.String stripPrefix(java.lang.String, java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokevirtual #179                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+         5: ifeq          17
+         8: aload_0
+         9: aload_1
+        10: invokevirtual #184                // Method java/lang/String.length:()I
+        13: invokevirtual #36                 // Method java/lang/String.substring:(I)Ljava/lang/String;
+        16: areturn
+        17: aload_0
+        18: areturn
+
+  public static java.net.URI stripScheme(java.net.URI) throws java.net.URISyntaxException;
+    Code:
+         0: new           #95                 // class java/net/URI
+         3: dup
+         4: aload_0
+         5: invokevirtual #294                // Method java/net/URI.getSchemeSpecificPart:()Ljava/lang/String;
+         8: invokevirtual #221                // Method java/lang/String.trim:()Ljava/lang/String;
+        11: ldc           #224                // String //
+        13: invokestatic  #104                // Method stripPrefix:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        16: invokespecial #273                // Method java/net/URI."<init>":(Ljava/lang/String;)V
+        19: areturn
+
+  public static java.lang.String createQueryString(java.util.Map<java.lang.String, ? extends java.lang.Object>);
+    Code:
+         0: aload_0
+         1: invokeinterface #7,  1            // InterfaceMethod java/util/Map.isEmpty:()Z
+         6: ifne          145
+         9: new           #14                 // class java/lang/StringBuilder
+        12: dup
+        13: invokespecial #154                // Method java/lang/StringBuilder."<init>":()V
+        16: astore_1
+        17: iconst_1
+        18: istore_2
+        19: new           #278                // class java/util/ArrayList
+        22: dup
+        23: invokespecial #280                // Method java/util/ArrayList."<init>":()V
+        26: astore_3
+        27: aload_3
+        28: aload_0
+        29: invokeinterface #297,  1          // InterfaceMethod java/util/Map.keySet:()Ljava/util/Set;
+        34: invokeinterface #300,  2          // InterfaceMethod java/util/List.addAll:(Ljava/util/Collection;)Z
+        39: pop
+        40: aload_3
+        41: invokestatic  #304                // Method java/util/Collections.sort:(Ljava/util/List;)V
+        44: aload_3
+        45: invokeinterface #308,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        50: astore        4
+        52: aload         4
+        54: invokeinterface #165,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        59: ifeq          140
+        62: aload         4
+        64: invokeinterface #170,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        69: checkcast     #31                 // class java/lang/String
+        72: astore        5
+        74: iload_2
+        75: ifeq          83
+        78: iconst_0
+        79: istore_2
+        80: goto          91
+        83: aload_1
+        84: ldc_w         #309                // String &
+        87: invokevirtual #25                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        90: pop
+        91: aload_0
+        92: aload         5
+        94: invokeinterface #311,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+        99: checkcast     #31                 // class java/lang/String
+       102: astore        6
+       104: aload_1
+       105: aload         5
+       107: getstatic     #74                 // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+       110: invokestatic  #315                // Method java/net/URLEncoder.encode:(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/lang/String;
+       113: invokevirtual #25                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       116: pop
+       117: aload_1
+       118: ldc           #70                 // String =
+       120: invokevirtual #25                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       123: pop
+       124: aload_1
+       125: aload         6
+       127: getstatic     #74                 // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+       130: invokestatic  #315                // Method java/net/URLEncoder.encode:(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/lang/String;
+       133: invokevirtual #25                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       136: pop
+       137: goto          52
+       140: aload_1
+       141: invokevirtual #191                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       144: areturn
+       145: ldc           #142                // String
+       147: areturn
+
+  public static java.net.URI createRemainingURI(java.net.URI, java.util.Map<java.lang.String, java.lang.String>) throws java.net.URISyntaxException;
+    Code:
+         0: aload_1
+         1: invokestatic  #19                 // Method createQueryString:(Ljava/util/Map;)Ljava/lang/String;
+         4: astore_2
+         5: aload_2
+         6: invokevirtual #43                 // Method java/lang/String.isEmpty:()Z
+         9: ifeq          14
+        12: aconst_null
+        13: astore_2
+        14: aload_0
+        15: aload_2
+        16: invokestatic  #192                // Method createURIWithQuery:(Ljava/net/URI;Ljava/lang/String;)Ljava/net/URI;
+        19: areturn
+
+  public static java.net.URI changeScheme(java.net.URI, java.lang.String) throws java.net.URISyntaxException;
+    Code:
+         0: new           #95                 // class java/net/URI
+         3: dup
+         4: aload_1
+         5: aload_0
+         6: invokevirtual #320                // Method java/net/URI.getUserInfo:()Ljava/lang/String;
+         9: aload_0
+        10: invokevirtual #323                // Method java/net/URI.getHost:()Ljava/lang/String;
+        13: aload_0
+        14: invokevirtual #326                // Method java/net/URI.getPort:()I
+        17: aload_0
+        18: invokevirtual #329                // Method java/net/URI.getPath:()Ljava/lang/String;
+        21: aload_0
+        22: invokevirtual #94                 // Method java/net/URI.getQuery:()Ljava/lang/String;
+        25: aload_0
+        26: invokevirtual #210                // Method java/net/URI.getFragment:()Ljava/lang/String;
+        29: invokespecial #332                // Method java/net/URI."<init>":(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+        32: areturn
+
+  public static boolean checkParenthesis(java.lang.String);
+    Code:
+         0: iconst_1
+         1: istore_1
+         2: aload_0
+         3: ifnull        73
+         6: iconst_0
+         7: istore_2
+         8: iconst_0
+         9: istore_3
+        10: iconst_0
+        11: istore        4
+        13: aload_0
+        14: bipush        40
+        16: iload         4
+        18: invokevirtual #335                // Method java/lang/String.indexOf:(II)I
+        21: dup
+        22: istore        4
+        24: iflt          36
+        27: iinc          4, 1
+        30: iinc          2, 1
+        33: goto          13
+        36: iconst_0
+        37: istore        4
+        39: aload_0
+        40: bipush        41
+        42: iload         4
+        44: invokevirtual #335                // Method java/lang/String.indexOf:(II)I
+        47: dup
+        48: istore        4
+        50: iflt          62
+        53: iinc          4, 1
+        56: iinc          3, 1
+        59: goto          39
+        62: iload_2
+        63: iload_3
+        64: if_icmpne     71
+        67: iconst_1
+        68: goto          72
+        71: iconst_0
+        72: istore_1
+        73: iload_1
+        74: ireturn
+}
