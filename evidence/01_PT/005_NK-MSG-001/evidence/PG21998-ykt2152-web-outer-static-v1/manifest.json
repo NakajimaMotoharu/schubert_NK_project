@@ -1,0 +1,43 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T09:08:09.201921+09:00",
+  "source": "d77a10913db27f26f69999462c043c847c36363d",
+  "productionCoreMain": "56720d75714f60d7e31da59c3da8c02baf05de52",
+  "normalManifestSha256": "e925b4c24e0eff9e70f7b3fad0b595d80e90f1a444c87329215d6e4b3d5d8d1f",
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumers.java": "134a6f35746447e6e27020ae8b82da5d67c136f0d20c46e94b41e5b8b81bc47f",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java": "c9701244fed7a903c0858a5b8ef4bd78a3ddd499b76bbb9358a5f7181c4bec45",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop.java": "0cedc1417ddc419a11896516ad7e2d76cd6277c42711815120f35191e1cd7a6a",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java": "dd0cda3ed6582fed7cd1d05ce1505d8b4bbfa77eb2984cd275b7c585e57ee130",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmissionValve.java": "8318b77646af9bbbee9e3a839c6f850548eef82999b640cbc274b61b83a5606f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiLogPathApplicationRuntime.java": "c48ab148fb695a6ec0e859406fb473fd56ccbe56dd229e1dd5f6296e9d348157",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest.java": "d38668723e67f81c94c184dde8a960f44aa9056b75814df3fc8d90653a75f55c",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumersTest.java": "5eb23d7687175e67237c82b595f0e7aeb222864d903236bdfdc7094c6a63c36c",
+    "evidence/01_PT/005_NK-MSG-001/029_YKT2152_Web応答・外側owner静的横展開.md": "b75b0cb10f7d5c6c6f299a8c716e67eea035cfe67e6ca50a129849a168d55ac0"
+  },
+  "reviewTargets": [
+    "ArtemisReplyConsumers: one context, no untouched sibling fanout",
+    "WebNativeRuntime: HTTP admission refusal followed by existing HTTP/worker/reply order",
+    "ApiLogPathApplicationRuntime: delegates to fixed messaging owner"
+  ],
+  "existingTestDesignOnly": {
+    "WebRuntimeStopTest": "whole five bodies",
+    "ArtemisReplyConsumersTest": "closeIsIdempotentAndPreservesStartupAndCloseFailures body only"
+  },
+  "newFinding": "BUG-2409/YKT-2154 signed clock deadline comparison; separate cause, not runtime reproduction",
+  "productTestsExecuted": 0,
+  "newProductTests": 0,
+  "newMethods": 0,
+  "newSourceProofs": 0,
+  "newAcceptance": 0,
+  "coverage": null,
+  "bugsRemainOpen": [
+    "BUG-2407",
+    "YKT-2152",
+    "BUG-2409",
+    "YKT-2154"
+  ],
+  "ptExecutionExempt": false,
+  "whole451Accepted": false,
+  "effortRate": null
+}
