@@ -1,0 +1,11 @@
+# Pure ResourceScope五Futureの元whole26再資格結果
+
+source1c75c8a40572ddce1305fcd21dbeab34eda87512/Main7aed。BUG2464のFactory4/Resource1 Futureを10SECONDSへ、他全token/fixture/手書きoracle不変を独立逆変換で確認、期限否定4。PG22964元二Test compile0/22966raw9個別非該当CS0/不変Main六module静的0、PG22968元whole26一回・真正0/FESabortnotrun0、PG22970独立0 manifest8a4b286fcdeb02e97c82c4649cbda91fb66c19364aeaba262231a84d017c3105。
+
+手書きclose/event/identity/null/nullable/3×4winner-suppression表に対する期待と実際が一致。ResourceScope一Code physical L52M5C1B20 missed0、同source一exec/CRC一致。四nested portは正規Jarとpassive7type（PG22972）のinterface/abstract/noCodeを確認、Source closure全5physicalに残しcounterを捏造しない。全観測normal3（ResourceScope/StorageIoException/Reason）CRC/実初期化とResourceScope ownerのJDK生成lambda2、未知owner否定2。Mainコードを呼んでexpected生成0、過去exec合算0。
+
+元2733既承認pure graphを今回再確認し、native/FD/Root/VM/Files/DB/JMS/HTTP/credential実体/外部process/fourheld実行0。元Test-local Token/Atomic/List/callbackと元の手動Throwable注入だけ、元二classを別fixtureへ抽出していない。Native等の全HOLDは維持した独立通常PTであり、静的代替のPT成功転記ではない。
+
+Storage全29は不変27+変更2のhash/新XML位置を対応しraw82不変、当9Thread siteを各methodと実完了/所有へ分類。既25+9=34分類/未分類57→48、全29静的engine再演0。有限wait BUG2464/YKT2202の五siteは再試験CLOSED、YKT2177既知28sourcefixed=動的25+Question1/Storage2HOLD3・全索引型未確定OPEN。
+
+既26再資格/新unique-whole-leaf0、unique438/whole94/正式1964-53/工数null/QA051final不変。対象Code四100をstorage全体100や451全合格へ一般化しない。

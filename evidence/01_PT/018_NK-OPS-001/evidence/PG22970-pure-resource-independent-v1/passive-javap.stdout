@@ -1,0 +1,1169 @@
+Classfile jar:file:///home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar!/dev/codex/schubert/nk/storage/ResourceScope.class
+  Last modified Nov 7, 2026; size 6163 bytes
+  SHA-256 checksum 0e538ce9c35a6b9eeae6d0326270f99e6fa57c561ebae3140122fb9baeee2115
+  Compiled from "ResourceScope.java"
+public final class dev.codex.schubert.nk.storage.ResourceScope
+  minor version: 0
+  major version: 69
+  flags: (0x0031) ACC_PUBLIC, ACC_FINAL, ACC_SUPER
+  this_class: #28                         // dev/codex/schubert/nk/storage/ResourceScope
+  super_class: #2                         // java/lang/Object
+  interfaces: 0, fields: 0, methods: 6, attributes: 5
+Constant pool:
+    #1 = Methodref          #2.#3         // java/lang/Object."<init>":()V
+    #2 = Class              #4            // java/lang/Object
+    #3 = NameAndType        #5:#6         // "<init>":()V
+    #4 = Utf8               java/lang/Object
+    #5 = Utf8               <init>
+    #6 = Utf8               ()V
+    #7 = String             #8            // resource acquire
+    #8 = Utf8               resource acquire
+    #9 = Methodref          #10.#11       // java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #10 = Class              #12           // java/util/Objects
+   #11 = NameAndType        #13:#14       // requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #12 = Utf8               java/util/Objects
+   #13 = Utf8               requireNonNull
+   #14 = Utf8               (Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #15 = String             #16           // resource release
+   #16 = Utf8               resource release
+   #17 = String             #18           // complete owner assembly
+   #18 = Utf8               complete owner assembly
+   #19 = InvokeDynamic      #0:#20        // #0:close:([ZLdev/codex/schubert/nk/storage/ResourceScope$Release;)Ldev/codex/schubert/nk/storage/ResourceScope$Release;
+   #20 = NameAndType        #21:#22       // close:([ZLdev/codex/schubert/nk/storage/ResourceScope$Release;)Ldev/codex/schubert/nk/storage/ResourceScope$Release;
+   #21 = Utf8               close
+   #22 = Utf8               ([ZLdev/codex/schubert/nk/storage/ResourceScope$Release;)Ldev/codex/schubert/nk/storage/ResourceScope$Release;
+   #23 = InvokeDynamic      #1:#24        // #1:run:(Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;[Z)Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;
+   #24 = NameAndType        #25:#26       // run:(Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;[Z)Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;
+   #25 = Utf8               run
+   #26 = Utf8               (Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;[Z)Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;
+   #27 = Methodref          #28.#29       // dev/codex/schubert/nk/storage/ResourceScope.acquire:(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;
+   #28 = Class              #30           // dev/codex/schubert/nk/storage/ResourceScope
+   #29 = NameAndType        #31:#32       // acquire:(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;
+   #30 = Utf8               dev/codex/schubert/nk/storage/ResourceScope
+   #31 = Utf8               acquire
+   #32 = Utf8               (Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;
+   #33 = String             #34           // resource action
+   #34 = Utf8               resource action
+   #35 = InterfaceMethodref #36.#37       // dev/codex/schubert/nk/storage/ResourceScope$Acquire.open:()Ljava/lang/Object;
+   #36 = Class              #38           // dev/codex/schubert/nk/storage/ResourceScope$Acquire
+   #37 = NameAndType        #39:#40       // open:()Ljava/lang/Object;
+   #38 = Utf8               dev/codex/schubert/nk/storage/ResourceScope$Acquire
+   #39 = Utf8               open
+   #40 = Utf8               ()Ljava/lang/Object;
+   #41 = String             #42           // acquired resource
+   #42 = Utf8               acquired resource
+   #43 = InterfaceMethodref #44.#45       // dev/codex/schubert/nk/storage/ResourceScope$OwnedAction.run:(Ljava/lang/Object;)Ljava/lang/Object;
+   #44 = Class              #46           // dev/codex/schubert/nk/storage/ResourceScope$OwnedAction
+   #45 = NameAndType        #25:#47       // run:(Ljava/lang/Object;)Ljava/lang/Object;
+   #46 = Utf8               dev/codex/schubert/nk/storage/ResourceScope$OwnedAction
+   #47 = Utf8               (Ljava/lang/Object;)Ljava/lang/Object;
+   #48 = Class              #49           // java/io/IOException
+   #49 = Utf8               java/io/IOException
+   #50 = Class              #51           // java/lang/RuntimeException
+   #51 = Utf8               java/lang/RuntimeException
+   #52 = Class              #53           // java/lang/Error
+   #53 = Utf8               java/lang/Error
+   #54 = InterfaceMethodref #55.#56       // dev/codex/schubert/nk/storage/ResourceScope$Release.close:(Ljava/lang/Object;)V
+   #55 = Class              #57           // dev/codex/schubert/nk/storage/ResourceScope$Release
+   #56 = NameAndType        #21:#58       // close:(Ljava/lang/Object;)V
+   #57 = Utf8               dev/codex/schubert/nk/storage/ResourceScope$Release
+   #58 = Utf8               (Ljava/lang/Object;)V
+   #59 = Class              #60           // dev/codex/schubert/nk/storage/StorageIoException
+   #60 = Utf8               dev/codex/schubert/nk/storage/StorageIoException
+   #61 = Fieldref           #62.#63       // dev/codex/schubert/nk/storage/StorageIoException$Reason.UNAVAILABLE:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+   #62 = Class              #64           // dev/codex/schubert/nk/storage/StorageIoException$Reason
+   #63 = NameAndType        #65:#66       // UNAVAILABLE:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+   #64 = Utf8               dev/codex/schubert/nk/storage/StorageIoException$Reason
+   #65 = Utf8               UNAVAILABLE
+   #66 = Utf8               Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+   #67 = Methodref          #59.#68       // dev/codex/schubert/nk/storage/StorageIoException."<init>":(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V
+   #68 = NameAndType        #5:#69        // "<init>":(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V
+   #69 = Utf8               (Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V
+   #70 = Methodref          #71.#72       // java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+   #71 = Class              #73           // java/lang/Throwable
+   #72 = NameAndType        #74:#75       // addSuppressed:(Ljava/lang/Throwable;)V
+   #73 = Utf8               java/lang/Throwable
+   #74 = Utf8               addSuppressed
+   #75 = Utf8               (Ljava/lang/Throwable;)V
+   #76 = Methodref          #48.#77       // java/io/IOException.getSuppressed:()[Ljava/lang/Throwable;
+   #77 = NameAndType        #78:#79       // getSuppressed:()[Ljava/lang/Throwable;
+   #78 = Utf8               getSuppressed
+   #79 = Utf8               ()[Ljava/lang/Throwable;
+   #80 = Methodref          #59.#81       // dev/codex/schubert/nk/storage/StorageIoException.reason:()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+   #81 = NameAndType        #82:#83       // reason:()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+   #82 = Utf8               reason
+   #83 = Utf8               ()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+   #84 = InterfaceMethodref #85.#86       // dev/codex/schubert/nk/storage/ResourceScope$Action.run:()Ljava/lang/Object;
+   #85 = Class              #87           // dev/codex/schubert/nk/storage/ResourceScope$Action
+   #86 = NameAndType        #25:#40       // run:()Ljava/lang/Object;
+   #87 = Utf8               dev/codex/schubert/nk/storage/ResourceScope$Action
+   #88 = InterfaceMethodref #89.#90       // java/io/Closeable.close:()V
+   #89 = Class              #91           // java/io/Closeable
+   #90 = NameAndType        #21:#6        // close:()V
+   #91 = Utf8               java/io/Closeable
+   #92 = String             #93           // complete resource owner
+   #93 = Utf8               complete resource owner
+   #94 = Utf8               Code
+   #95 = Utf8               LineNumberTable
+   #96 = Utf8               LocalVariableTable
+   #97 = Utf8               this
+   #98 = Utf8               Ldev/codex/schubert/nk/storage/ResourceScope;
+   #99 = Utf8               handoff
+  #100 = Utf8               Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;
+  #101 = Utf8               release
+  #102 = Utf8               Ldev/codex/schubert/nk/storage/ResourceScope$Release;
+  #103 = Utf8               assemble
+  #104 = Utf8               Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;
+  #105 = Utf8               transferred
+  #106 = Utf8               [Z
+  #107 = Utf8               LocalVariableTypeTable
+  #108 = Utf8               Ldev/codex/schubert/nk/storage/ResourceScope$Acquire<TR;TE;>;
+  #109 = Utf8               Ldev/codex/schubert/nk/storage/ResourceScope$Release<TR;>;
+  #110 = Utf8               Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction<TR;TT;>;
+  #111 = Utf8               Exceptions
+  #112 = Utf8               Signature
+  #113 = Utf8               <R:Ljava/lang/Object;T:Ljava/lang/Object;E:Ljava/io/IOException;>(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire<TR;TE;>;Ldev/codex/schubert/nk/storage/ResourceScope$Release<TR;>;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction<TR;TT;>;)TT;^TE;^Ldev/codex/schubert/nk/storage/StorageIoException;
+  #114 = Utf8               RuntimeVisibleTypeAnnotations
+  #115 = Utf8               Lorg/jspecify/annotations/Nullable;
+  #116 = Utf8               result
+  #117 = Utf8               Ljava/lang/Object;
+  #118 = Utf8               owned
+  #119 = Utf8               secondary
+  #120 = Utf8               Ljava/lang/Throwable;
+  #121 = Utf8               primary
+  #122 = Utf8               storage
+  #123 = Utf8               Ldev/codex/schubert/nk/storage/StorageIoException;
+  #124 = Utf8               failure
+  #125 = Utf8               Ljava/io/IOException;
+  #126 = Utf8               action
+  #127 = Utf8               resource
+  #128 = Utf8               TT;
+  #129 = Utf8               TR;
+  #130 = Utf8               StackMapTable
+  #131 = Utf8               use
+  #132 = Utf8               (Ljava/io/Closeable;Ldev/codex/schubert/nk/storage/ResourceScope$Action;)Ljava/lang/Object;
+  #133 = Utf8               Ljava/io/Closeable;
+  #134 = Utf8               Ldev/codex/schubert/nk/storage/ResourceScope$Action;
+  #135 = Utf8               Ldev/codex/schubert/nk/storage/ResourceScope$Action<TT;>;
+  #136 = Utf8               <T:Ljava/lang/Object;>(Ljava/io/Closeable;Ldev/codex/schubert/nk/storage/ResourceScope$Action<TT;>;)TT;
+  #137 = Utf8               lambda$handoff$1
+  #138 = Utf8               (Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;[ZLjava/lang/Object;)Ljava/lang/Object;
+  #139 = Utf8               complete
+  #140 = Utf8               lambda$handoff$0
+  #141 = Utf8               ([ZLdev/codex/schubert/nk/storage/ResourceScope$Release;Ljava/lang/Object;)V
+  #142 = Utf8               SourceFile
+  #143 = Utf8               ResourceScope.java
+  #144 = Utf8               RuntimeVisibleAnnotations
+  #145 = Utf8               Lorg/jspecify/annotations/NullMarked;
+  #146 = Utf8               NestMembers
+  #147 = Utf8               BootstrapMethods
+  #148 = MethodType         #58           //  (Ljava/lang/Object;)V
+  #149 = MethodHandle       6:#150        // REF_invokeStatic dev/codex/schubert/nk/storage/ResourceScope.lambda$handoff$0:([ZLdev/codex/schubert/nk/storage/ResourceScope$Release;Ljava/lang/Object;)V
+  #150 = Methodref          #28.#151      // dev/codex/schubert/nk/storage/ResourceScope.lambda$handoff$0:([ZLdev/codex/schubert/nk/storage/ResourceScope$Release;Ljava/lang/Object;)V
+  #151 = NameAndType        #140:#141     // lambda$handoff$0:([ZLdev/codex/schubert/nk/storage/ResourceScope$Release;Ljava/lang/Object;)V
+  #152 = MethodType         #47           //  (Ljava/lang/Object;)Ljava/lang/Object;
+  #153 = MethodHandle       6:#154        // REF_invokeStatic dev/codex/schubert/nk/storage/ResourceScope.lambda$handoff$1:(Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;[ZLjava/lang/Object;)Ljava/lang/Object;
+  #154 = Methodref          #28.#155      // dev/codex/schubert/nk/storage/ResourceScope.lambda$handoff$1:(Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;[ZLjava/lang/Object;)Ljava/lang/Object;
+  #155 = NameAndType        #137:#138     // lambda$handoff$1:(Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;[ZLjava/lang/Object;)Ljava/lang/Object;
+  #156 = MethodHandle       6:#157        // REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #157 = Methodref          #158.#159     // java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #158 = Class              #160          // java/lang/invoke/LambdaMetafactory
+  #159 = NameAndType        #161:#162     // metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #160 = Utf8               java/lang/invoke/LambdaMetafactory
+  #161 = Utf8               metafactory
+  #162 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #163 = Utf8               InnerClasses
+  #164 = Utf8               Release
+  #165 = Utf8               OwnedAction
+  #166 = Utf8               Acquire
+  #167 = Utf8               Reason
+  #168 = Utf8               Action
+  #169 = Class              #170          // java/lang/invoke/MethodHandles$Lookup
+  #170 = Utf8               java/lang/invoke/MethodHandles$Lookup
+  #171 = Class              #172          // java/lang/invoke/MethodHandles
+  #172 = Utf8               java/lang/invoke/MethodHandles
+  #173 = Utf8               Lookup
+{
+  private dev.codex.schubert.nk.storage.ResourceScope();
+    descriptor: ()V
+    flags: (0x0002) ACC_PRIVATE
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 16: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Ldev/codex/schubert/nk/storage/ResourceScope;
+
+  public static <R extends java.lang.Object, T extends java.lang.Object, E extends java.io.IOException> T handoff(dev.codex.schubert.nk.storage.ResourceScope$Acquire<R, E>, dev.codex.schubert.nk.storage.ResourceScope$Release<R>, dev.codex.schubert.nk.storage.ResourceScope$OwnedAction<R, T>) throws E, dev.codex.schubert.nk.storage.StorageIoException;
+    descriptor: (Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=4, locals=4, args_size=3
+         0: aload_0
+         1: ldc           #7                  // String resource acquire
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #15                 // String resource release
+        10: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_2
+        15: ldc           #17                 // String complete owner assembly
+        17: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: iconst_1
+        22: newarray       boolean
+        24: astore_3
+        25: aload_0
+        26: aload_3
+        27: aload_1
+        28: invokedynamic #19,  0             // InvokeDynamic #0:close:([ZLdev/codex/schubert/nk/storage/ResourceScope$Release;)Ldev/codex/schubert/nk/storage/ResourceScope$Release;
+        33: aload_2
+        34: aload_3
+        35: invokedynamic #23,  0             // InvokeDynamic #1:run:(Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;[Z)Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;
+        40: invokestatic  #27                 // Method acquire:(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;
+        43: areturn
+      LineNumberTable:
+        line 49: 0
+        line 50: 7
+        line 51: 14
+        line 52: 21
+        line 53: 25
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      44     0 acquire   Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;
+            0      44     1 release   Ldev/codex/schubert/nk/storage/ResourceScope$Release;
+            0      44     2 assemble   Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;
+           25      19     3 transferred   [Z
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0      44     0 acquire   Ldev/codex/schubert/nk/storage/ResourceScope$Acquire<TR;TE;>;
+            0      44     1 release   Ldev/codex/schubert/nk/storage/ResourceScope$Release<TR;>;
+            0      44     2 assemble   Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction<TR;TT;>;
+    Exceptions:
+      throws java.io.IOException, dev.codex.schubert.nk.storage.StorageIoException
+    Signature: #113                         // <R:Ljava/lang/Object;T:Ljava/lang/Object;E:Ljava/io/IOException;>(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire<TR;TE;>;Ldev/codex/schubert/nk/storage/ResourceScope$Release<TR;>;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction<TR;TT;>;)TT;^TE;^Ldev/codex/schubert/nk/storage/StorageIoException;
+    RuntimeVisibleTypeAnnotations:
+      0: #115(): METHOD_TYPE_PARAMETER_BOUND, param_index=1, bound_index=0
+        org.jspecify.annotations.Nullable
+
+  public static <R extends java.lang.Object, T extends java.lang.Object, E extends java.io.IOException> T acquire(dev.codex.schubert.nk.storage.ResourceScope$Acquire<R, E>, dev.codex.schubert.nk.storage.ResourceScope$Release<R>, dev.codex.schubert.nk.storage.ResourceScope$OwnedAction<R, T>) throws E, dev.codex.schubert.nk.storage.StorageIoException;
+    descriptor: (Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=4, locals=8, args_size=3
+         0: aload_0
+         1: ldc           #7                  // String resource acquire
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #15                 // String resource release
+        10: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_2
+        15: ldc           #33                 // String resource action
+        17: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: aload_0
+        22: invokeinterface #35,  1           // InterfaceMethod dev/codex/schubert/nk/storage/ResourceScope$Acquire.open:()Ljava/lang/Object;
+        27: astore_3
+        28: aload_3
+        29: ldc           #41                 // String acquired resource
+        31: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        34: astore        5
+        36: aload_2
+        37: aload         5
+        39: invokeinterface #43,  2           // InterfaceMethod dev/codex/schubert/nk/storage/ResourceScope$OwnedAction.run:(Ljava/lang/Object;)Ljava/lang/Object;
+        44: astore        4
+        46: goto          104
+        49: astore        6
+        51: aload_3
+        52: ifnull        101
+        55: aload_1
+        56: aload_3
+        57: invokeinterface #54,  2           // InterfaceMethod dev/codex/schubert/nk/storage/ResourceScope$Release.close:(Ljava/lang/Object;)V
+        62: goto          101
+        65: astore        7
+        67: aload         6
+        69: instanceof    #48                 // class java/io/IOException
+        72: ifeq          86
+        75: aload         7
+        77: instanceof    #48                 // class java/io/IOException
+        80: ifne          86
+        83: aload         7
+        85: athrow
+        86: aload         6
+        88: new           #59                 // class dev/codex/schubert/nk/storage/StorageIoException
+        91: dup
+        92: getstatic     #61                 // Field dev/codex/schubert/nk/storage/StorageIoException$Reason.UNAVAILABLE:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+        95: invokespecial #67                 // Method dev/codex/schubert/nk/storage/StorageIoException."<init>":(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V
+        98: invokevirtual #70                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       101: aload         6
+       103: athrow
+       104: aload_1
+       105: aload         5
+       107: invokeinterface #54,  2           // InterfaceMethod dev/codex/schubert/nk/storage/ResourceScope$Release.close:(Ljava/lang/Object;)V
+       112: aload         4
+       114: areturn
+       115: astore        4
+       117: new           #59                 // class dev/codex/schubert/nk/storage/StorageIoException
+       120: dup
+       121: aload         4
+       123: instanceof    #59                 // class dev/codex/schubert/nk/storage/StorageIoException
+       126: ifeq          153
+       129: aload         4
+       131: checkcast     #59                 // class dev/codex/schubert/nk/storage/StorageIoException
+       134: astore        5
+       136: aload         4
+       138: invokevirtual #76                 // Method java/io/IOException.getSuppressed:()[Ljava/lang/Throwable;
+       141: arraylength
+       142: ifne          153
+       145: aload         5
+       147: invokevirtual #80                 // Method dev/codex/schubert/nk/storage/StorageIoException.reason:()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+       150: goto          156
+       153: getstatic     #61                 // Field dev/codex/schubert/nk/storage/StorageIoException$Reason.UNAVAILABLE:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+       156: invokespecial #67                 // Method dev/codex/schubert/nk/storage/StorageIoException."<init>":(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V
+       159: athrow
+      Exception table:
+         from    to  target type
+            28    46    49   Class java/io/IOException
+            28    46    49   Class java/lang/RuntimeException
+            28    46    49   Class java/lang/Error
+            55    62    65   Class java/io/IOException
+            55    62    65   Class java/lang/RuntimeException
+            55    62    65   Class java/lang/Error
+            28   114   115   Class java/io/IOException
+      LineNumberTable:
+        line 72: 0
+        line 73: 7
+        line 74: 14
+        line 75: 21
+        line 80: 28
+        line 81: 36
+        line 93: 46
+        line 82: 49
+        line 83: 51
+        line 85: 55
+        line 90: 62
+        line 86: 65
+        line 87: 67
+        line 88: 83
+        line 89: 86
+        line 92: 101
+        line 94: 104
+        line 95: 112
+        line 96: 115
+        line 97: 117
+        line 98: 121
+        line 99: 145
+        line 100: 153
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           46       3     4 result   Ljava/lang/Object;
+           36      13     5 owned   Ljava/lang/Object;
+           67      34     7 secondary   Ljava/lang/Throwable;
+           51      53     6 primary   Ljava/lang/Throwable;
+          104      11     4 result   Ljava/lang/Object;
+          104      11     5 owned   Ljava/lang/Object;
+          136      17     5 storage   Ldev/codex/schubert/nk/storage/StorageIoException;
+          117      43     4 failure   Ljava/io/IOException;
+            0     160     0 acquire   Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;
+            0     160     1 release   Ldev/codex/schubert/nk/storage/ResourceScope$Release;
+            0     160     2 action   Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;
+           28     132     3 resource   Ljava/lang/Object;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+           46       3     4 result   TT;
+           36      13     5 owned   TR;
+          104      11     4 result   TT;
+          104      11     5 owned   TR;
+            0     160     0 acquire   Ldev/codex/schubert/nk/storage/ResourceScope$Acquire<TR;TE;>;
+            0     160     1 release   Ldev/codex/schubert/nk/storage/ResourceScope$Release<TR;>;
+            0     160     2 action   Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction<TR;TT;>;
+           28     132     3 resource   TR;
+      StackMapTable: number_of_entries = 8
+        frame_type = 255 /* full_frame */
+          offset_delta = 49
+          locals = [ class dev/codex/schubert/nk/storage/ResourceScope$Acquire, class dev/codex/schubert/nk/storage/ResourceScope$Release, class dev/codex/schubert/nk/storage/ResourceScope$OwnedAction, class java/lang/Object ]
+          stack = [ class java/lang/Throwable ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 15
+          locals = [ class dev/codex/schubert/nk/storage/ResourceScope$Acquire, class dev/codex/schubert/nk/storage/ResourceScope$Release, class dev/codex/schubert/nk/storage/ResourceScope$OwnedAction, class java/lang/Object, top, top, class java/lang/Throwable ]
+          stack = [ class java/lang/Throwable ]
+        frame_type = 252 /* append */
+          offset_delta = 20
+          locals = [ class java/lang/Throwable ]
+        frame_type = 250 /* chop */
+          offset_delta = 14
+        frame_type = 255 /* full_frame */
+          offset_delta = 2
+          locals = [ class dev/codex/schubert/nk/storage/ResourceScope$Acquire, class dev/codex/schubert/nk/storage/ResourceScope$Release, class dev/codex/schubert/nk/storage/ResourceScope$OwnedAction, class java/lang/Object, class java/lang/Object, class java/lang/Object ]
+          stack = []
+        frame_type = 255 /* full_frame */
+          offset_delta = 10
+          locals = [ class dev/codex/schubert/nk/storage/ResourceScope$Acquire, class dev/codex/schubert/nk/storage/ResourceScope$Release, class dev/codex/schubert/nk/storage/ResourceScope$OwnedAction, class java/lang/Object ]
+          stack = [ class java/io/IOException ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 37
+          locals = [ class dev/codex/schubert/nk/storage/ResourceScope$Acquire, class dev/codex/schubert/nk/storage/ResourceScope$Release, class dev/codex/schubert/nk/storage/ResourceScope$OwnedAction, class java/lang/Object, class java/io/IOException ]
+          stack = [ uninitialized 117, uninitialized 117 ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 2
+          locals = [ class dev/codex/schubert/nk/storage/ResourceScope$Acquire, class dev/codex/schubert/nk/storage/ResourceScope$Release, class dev/codex/schubert/nk/storage/ResourceScope$OwnedAction, class java/lang/Object, class java/io/IOException ]
+          stack = [ uninitialized 117, uninitialized 117, class dev/codex/schubert/nk/storage/StorageIoException$Reason ]
+      RuntimeVisibleTypeAnnotations:
+        0: #115(): LOCAL_VARIABLE, {start_pc=28, length=132, index=3}
+          org.jspecify.annotations.Nullable
+    Exceptions:
+      throws java.io.IOException, dev.codex.schubert.nk.storage.StorageIoException
+    Signature: #113                         // <R:Ljava/lang/Object;T:Ljava/lang/Object;E:Ljava/io/IOException;>(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire<TR;TE;>;Ldev/codex/schubert/nk/storage/ResourceScope$Release<TR;>;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction<TR;TT;>;)TT;^TE;^Ldev/codex/schubert/nk/storage/StorageIoException;
+    RuntimeVisibleTypeAnnotations:
+      0: #115(): METHOD_TYPE_PARAMETER_BOUND, param_index=1, bound_index=0
+        org.jspecify.annotations.Nullable
+
+  public static <T extends java.lang.Object> T use(java.io.Closeable, dev.codex.schubert.nk.storage.ResourceScope$Action<T>) throws dev.codex.schubert.nk.storage.StorageIoException;
+    descriptor: (Ljava/io/Closeable;Ldev/codex/schubert/nk/storage/ResourceScope$Action;)Ljava/lang/Object;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=4, locals=5, args_size=2
+         0: aload_0
+         1: ldc           #15                 // String resource release
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #33                 // String resource action
+        10: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_1
+        15: invokeinterface #84,  1           // InterfaceMethod dev/codex/schubert/nk/storage/ResourceScope$Action.run:()Ljava/lang/Object;
+        20: astore_2
+        21: goto          70
+        24: astore_3
+        25: aload_0
+        26: invokeinterface #88,  1           // InterfaceMethod java/io/Closeable.close:()V
+        31: goto          68
+        34: astore        4
+        36: aload_3
+        37: instanceof    #48                 // class java/io/IOException
+        40: ifeq          54
+        43: aload         4
+        45: instanceof    #48                 // class java/io/IOException
+        48: ifne          54
+        51: aload         4
+        53: athrow
+        54: aload_3
+        55: new           #59                 // class dev/codex/schubert/nk/storage/StorageIoException
+        58: dup
+        59: getstatic     #61                 // Field dev/codex/schubert/nk/storage/StorageIoException$Reason.UNAVAILABLE:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+        62: invokespecial #67                 // Method dev/codex/schubert/nk/storage/StorageIoException."<init>":(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V
+        65: invokevirtual #70                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+        68: aload_3
+        69: athrow
+        70: aload_0
+        71: invokeinterface #88,  1           // InterfaceMethod java/io/Closeable.close:()V
+        76: aload_2
+        77: areturn
+        78: astore_2
+        79: new           #59                 // class dev/codex/schubert/nk/storage/StorageIoException
+        82: dup
+        83: aload_2
+        84: instanceof    #59                 // class dev/codex/schubert/nk/storage/StorageIoException
+        87: ifeq          110
+        90: aload_2
+        91: checkcast     #59                 // class dev/codex/schubert/nk/storage/StorageIoException
+        94: astore_3
+        95: aload_2
+        96: invokevirtual #76                 // Method java/io/IOException.getSuppressed:()[Ljava/lang/Throwable;
+        99: arraylength
+       100: ifne          110
+       103: aload_3
+       104: invokevirtual #80                 // Method dev/codex/schubert/nk/storage/StorageIoException.reason:()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+       107: goto          113
+       110: getstatic     #61                 // Field dev/codex/schubert/nk/storage/StorageIoException$Reason.UNAVAILABLE:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+       113: invokespecial #67                 // Method dev/codex/schubert/nk/storage/StorageIoException."<init>":(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V
+       116: athrow
+      Exception table:
+         from    to  target type
+            14    21    24   Class java/io/IOException
+            14    21    24   Class java/lang/RuntimeException
+            14    21    24   Class java/lang/Error
+            25    31    34   Class java/io/IOException
+            25    31    34   Class java/lang/RuntimeException
+            25    31    34   Class java/lang/Error
+            14    77    78   Class java/io/IOException
+      LineNumberTable:
+        line 106: 0
+        line 107: 7
+        line 111: 14
+        line 121: 21
+        line 112: 24
+        line 114: 25
+        line 119: 31
+        line 115: 34
+        line 116: 36
+        line 117: 51
+        line 118: 54
+        line 120: 68
+        line 122: 70
+        line 123: 76
+        line 124: 78
+        line 125: 79
+        line 126: 83
+        line 127: 103
+        line 128: 110
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           21       3     2 result   Ljava/lang/Object;
+           36      32     4 secondary   Ljava/lang/Throwable;
+           25      45     3 primary   Ljava/lang/Throwable;
+           70       8     2 result   Ljava/lang/Object;
+           95      15     3 storage   Ldev/codex/schubert/nk/storage/StorageIoException;
+           79      38     2 failure   Ljava/io/IOException;
+            0     117     0 release   Ljava/io/Closeable;
+            0     117     1 action   Ldev/codex/schubert/nk/storage/ResourceScope$Action;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+           21       3     2 result   TT;
+           70       8     2 result   TT;
+            0     117     1 action   Ldev/codex/schubert/nk/storage/ResourceScope$Action<TT;>;
+      StackMapTable: number_of_entries = 8
+        frame_type = 88 /* same_locals_1_stack_item */
+          stack = [ class java/lang/Throwable ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 9
+          locals = [ class java/io/Closeable, class dev/codex/schubert/nk/storage/ResourceScope$Action, top, class java/lang/Throwable ]
+          stack = [ class java/lang/Throwable ]
+        frame_type = 252 /* append */
+          offset_delta = 19
+          locals = [ class java/lang/Throwable ]
+        frame_type = 250 /* chop */
+          offset_delta = 13
+        frame_type = 255 /* full_frame */
+          offset_delta = 1
+          locals = [ class java/io/Closeable, class dev/codex/schubert/nk/storage/ResourceScope$Action, class java/lang/Object ]
+          stack = []
+        frame_type = 255 /* full_frame */
+          offset_delta = 7
+          locals = [ class java/io/Closeable, class dev/codex/schubert/nk/storage/ResourceScope$Action ]
+          stack = [ class java/io/IOException ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 31
+          locals = [ class java/io/Closeable, class dev/codex/schubert/nk/storage/ResourceScope$Action, class java/io/IOException ]
+          stack = [ uninitialized 79, uninitialized 79 ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 2
+          locals = [ class java/io/Closeable, class dev/codex/schubert/nk/storage/ResourceScope$Action, class java/io/IOException ]
+          stack = [ uninitialized 79, uninitialized 79, class dev/codex/schubert/nk/storage/StorageIoException$Reason ]
+    Exceptions:
+      throws dev.codex.schubert.nk.storage.StorageIoException
+    Signature: #136                         // <T:Ljava/lang/Object;>(Ljava/io/Closeable;Ldev/codex/schubert/nk/storage/ResourceScope$Action<TT;>;)TT;
+    RuntimeVisibleTypeAnnotations:
+      0: #115(): METHOD_TYPE_PARAMETER_BOUND, param_index=0, bound_index=0
+        org.jspecify.annotations.Nullable
+
+  private static java.lang.Object lambda$handoff$1(dev.codex.schubert.nk.storage.ResourceScope$OwnedAction, boolean[], java.lang.Object) throws java.io.IOException;
+    descriptor: (Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;[ZLjava/lang/Object;)Ljava/lang/Object;
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=3, locals=4, args_size=3
+         0: aload_0
+         1: aload_2
+         2: invokeinterface #43,  2           // InterfaceMethod dev/codex/schubert/nk/storage/ResourceScope$OwnedAction.run:(Ljava/lang/Object;)Ljava/lang/Object;
+         7: ldc           #92                 // String complete resource owner
+         9: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        12: astore_3
+        13: aload_1
+        14: iconst_0
+        15: iconst_1
+        16: bastore
+        17: aload_3
+        18: areturn
+      LineNumberTable:
+        line 59: 0
+        line 60: 13
+        line 61: 17
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      19     0 assemble   Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;
+            0      19     1 transferred   [Z
+            0      19     2 resource   Ljava/lang/Object;
+           13       6     3 complete   Ljava/lang/Object;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+           13       6     3 complete   TT;
+    Exceptions:
+      throws java.io.IOException
+
+  private static void lambda$handoff$0(boolean[], dev.codex.schubert.nk.storage.ResourceScope$Release, java.lang.Object) throws java.io.IOException;
+    descriptor: ([ZLdev/codex/schubert/nk/storage/ResourceScope$Release;Ljava/lang/Object;)V
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=2, locals=3, args_size=3
+         0: aload_0
+         1: iconst_0
+         2: baload
+         3: ifne          13
+         6: aload_1
+         7: aload_2
+         8: invokeinterface #54,  2           // InterfaceMethod dev/codex/schubert/nk/storage/ResourceScope$Release.close:(Ljava/lang/Object;)V
+        13: return
+      LineNumberTable:
+        line 56: 0
+        line 57: 13
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      14     0 transferred   [Z
+            0      14     1 release   Ldev/codex/schubert/nk/storage/ResourceScope$Release;
+            0      14     2 resource   Ljava/lang/Object;
+      StackMapTable: number_of_entries = 1
+        frame_type = 13 /* same */
+    Exceptions:
+      throws java.io.IOException
+}
+SourceFile: "ResourceScope.java"
+RuntimeVisibleAnnotations:
+  0: #145()
+    org.jspecify.annotations.NullMarked
+NestMembers:
+  dev/codex/schubert/nk/storage/ResourceScope$OwnedAction
+  dev/codex/schubert/nk/storage/ResourceScope$Release
+  dev/codex/schubert/nk/storage/ResourceScope$Acquire
+  dev/codex/schubert/nk/storage/ResourceScope$Action
+BootstrapMethods:
+  0: #156 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #148 (Ljava/lang/Object;)V
+      #149 REF_invokeStatic dev/codex/schubert/nk/storage/ResourceScope.lambda$handoff$0:([ZLdev/codex/schubert/nk/storage/ResourceScope$Release;Ljava/lang/Object;)V
+      #148 (Ljava/lang/Object;)V
+  1: #156 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #152 (Ljava/lang/Object;)Ljava/lang/Object;
+      #153 REF_invokeStatic dev/codex/schubert/nk/storage/ResourceScope.lambda$handoff$1:(Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;[ZLjava/lang/Object;)Ljava/lang/Object;
+      #152 (Ljava/lang/Object;)Ljava/lang/Object;
+InnerClasses:
+  public static #164= #55 of #28;         // Release=class dev/codex/schubert/nk/storage/ResourceScope$Release of class dev/codex/schubert/nk/storage/ResourceScope
+  public static #165= #44 of #28;         // OwnedAction=class dev/codex/schubert/nk/storage/ResourceScope$OwnedAction of class dev/codex/schubert/nk/storage/ResourceScope
+  public static #166= #36 of #28;         // Acquire=class dev/codex/schubert/nk/storage/ResourceScope$Acquire of class dev/codex/schubert/nk/storage/ResourceScope
+  public static final #167= #62 of #59;   // Reason=class dev/codex/schubert/nk/storage/StorageIoException$Reason of class dev/codex/schubert/nk/storage/StorageIoException
+  public static #168= #85 of #28;         // Action=class dev/codex/schubert/nk/storage/ResourceScope$Action of class dev/codex/schubert/nk/storage/ResourceScope
+  public static final #173= #169 of #171; // Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles
+Classfile jar:file:///home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar!/dev/codex/schubert/nk/storage/ResourceScope$Action.class
+  Last modified Nov 7, 2026; size 576 bytes
+  SHA-256 checksum 3d6e9dc674275dce70291887b24fbb95cc15617a31ac49a6328cff3f2f5e3291
+  Compiled from "ResourceScope.java"
+public interface dev.codex.schubert.nk.storage.ResourceScope$Action<T extends java.lang.Object>
+  minor version: 0
+  major version: 69
+  flags: (0x0601) ACC_PUBLIC, ACC_INTERFACE, ACC_ABSTRACT
+  this_class: #1                          // dev/codex/schubert/nk/storage/ResourceScope$Action
+  super_class: #3                         // java/lang/Object
+  interfaces: 0, fields: 0, methods: 1, attributes: 6
+Constant pool:
+   #1 = Class              #2             // dev/codex/schubert/nk/storage/ResourceScope$Action
+   #2 = Utf8               dev/codex/schubert/nk/storage/ResourceScope$Action
+   #3 = Class              #4             // java/lang/Object
+   #4 = Utf8               java/lang/Object
+   #5 = Utf8               run
+   #6 = Utf8               ()Ljava/lang/Object;
+   #7 = Utf8               Exceptions
+   #8 = Class              #9             // java/io/IOException
+   #9 = Utf8               java/io/IOException
+  #10 = Utf8               Signature
+  #11 = Utf8               ()TT;
+  #12 = Utf8               <T:Ljava/lang/Object;>Ljava/lang/Object;
+  #13 = Utf8               SourceFile
+  #14 = Utf8               ResourceScope.java
+  #15 = Utf8               RuntimeVisibleAnnotations
+  #16 = Utf8               Ljava/lang/FunctionalInterface;
+  #17 = Utf8               RuntimeVisibleTypeAnnotations
+  #18 = Utf8               Lorg/jspecify/annotations/Nullable;
+  #19 = Utf8               NestHost
+  #20 = Class              #21            // dev/codex/schubert/nk/storage/ResourceScope
+  #21 = Utf8               dev/codex/schubert/nk/storage/ResourceScope
+  #22 = Utf8               InnerClasses
+  #23 = Utf8               Action
+{
+  public abstract T run() throws java.io.IOException;
+    descriptor: ()Ljava/lang/Object;
+    flags: (0x0401) ACC_PUBLIC, ACC_ABSTRACT
+    Exceptions:
+      throws java.io.IOException
+    Signature: #11                          // ()TT;
+}
+Signature: #12                          // <T:Ljava/lang/Object;>Ljava/lang/Object;
+SourceFile: "ResourceScope.java"
+RuntimeVisibleAnnotations:
+  0: #16()
+    java.lang.FunctionalInterface
+RuntimeVisibleTypeAnnotations:
+  0: #18(): CLASS_TYPE_PARAMETER_BOUND, param_index=0, bound_index=0
+    org.jspecify.annotations.Nullable
+NestHost: class dev/codex/schubert/nk/storage/ResourceScope
+InnerClasses:
+  public static #23= #1 of #20;           // Action=class dev/codex/schubert/nk/storage/ResourceScope$Action of class dev/codex/schubert/nk/storage/ResourceScope
+Classfile jar:file:///home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar!/dev/codex/schubert/nk/storage/ResourceScope$Acquire.class
+  Last modified Nov 7, 2026; size 604 bytes
+  SHA-256 checksum e50a2e03b678c0f47f0d00190542b7f1e8f631acb27055d49e4c969b1cd31a91
+  Compiled from "ResourceScope.java"
+public interface dev.codex.schubert.nk.storage.ResourceScope$Acquire<R extends java.lang.Object, E extends java.io.IOException>
+  minor version: 0
+  major version: 69
+  flags: (0x0601) ACC_PUBLIC, ACC_INTERFACE, ACC_ABSTRACT
+  this_class: #1                          // dev/codex/schubert/nk/storage/ResourceScope$Acquire
+  super_class: #3                         // java/lang/Object
+  interfaces: 0, fields: 0, methods: 1, attributes: 5
+Constant pool:
+   #1 = Class              #2             // dev/codex/schubert/nk/storage/ResourceScope$Acquire
+   #2 = Utf8               dev/codex/schubert/nk/storage/ResourceScope$Acquire
+   #3 = Class              #4             // java/lang/Object
+   #4 = Utf8               java/lang/Object
+   #5 = Utf8               open
+   #6 = Utf8               ()Ljava/lang/Object;
+   #7 = Utf8               Exceptions
+   #8 = Class              #9             // java/io/IOException
+   #9 = Utf8               java/io/IOException
+  #10 = Utf8               Signature
+  #11 = Utf8               ()TR;^TE;
+  #12 = Utf8               RuntimeVisibleTypeAnnotations
+  #13 = Utf8               Lorg/jspecify/annotations/Nullable;
+  #14 = Utf8               <R:Ljava/lang/Object;E:Ljava/io/IOException;>Ljava/lang/Object;
+  #15 = Utf8               SourceFile
+  #16 = Utf8               ResourceScope.java
+  #17 = Utf8               RuntimeVisibleAnnotations
+  #18 = Utf8               Ljava/lang/FunctionalInterface;
+  #19 = Utf8               NestHost
+  #20 = Class              #21            // dev/codex/schubert/nk/storage/ResourceScope
+  #21 = Utf8               dev/codex/schubert/nk/storage/ResourceScope
+  #22 = Utf8               InnerClasses
+  #23 = Utf8               Acquire
+{
+  public abstract R open() throws E;
+    descriptor: ()Ljava/lang/Object;
+    flags: (0x0401) ACC_PUBLIC, ACC_ABSTRACT
+    Exceptions:
+      throws java.io.IOException
+    Signature: #11                          // ()TR;^TE;
+    RuntimeVisibleTypeAnnotations:
+      0: #13(): METHOD_RETURN
+        org.jspecify.annotations.Nullable
+}
+Signature: #14                          // <R:Ljava/lang/Object;E:Ljava/io/IOException;>Ljava/lang/Object;
+SourceFile: "ResourceScope.java"
+RuntimeVisibleAnnotations:
+  0: #18()
+    java.lang.FunctionalInterface
+NestHost: class dev/codex/schubert/nk/storage/ResourceScope
+InnerClasses:
+  public static #23= #1 of #20;           // Acquire=class dev/codex/schubert/nk/storage/ResourceScope$Acquire of class dev/codex/schubert/nk/storage/ResourceScope
+Classfile jar:file:///home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar!/dev/codex/schubert/nk/storage/ResourceScope$Release.class
+  Last modified Nov 7, 2026; size 496 bytes
+  SHA-256 checksum c9f519c33f71a3eb4f120bcd6f22592c7b5efc3ff05164591f904b98d508f96c
+  Compiled from "ResourceScope.java"
+public interface dev.codex.schubert.nk.storage.ResourceScope$Release<R extends java.lang.Object>
+  minor version: 0
+  major version: 69
+  flags: (0x0601) ACC_PUBLIC, ACC_INTERFACE, ACC_ABSTRACT
+  this_class: #1                          // dev/codex/schubert/nk/storage/ResourceScope$Release
+  super_class: #3                         // java/lang/Object
+  interfaces: 0, fields: 0, methods: 1, attributes: 5
+Constant pool:
+   #1 = Class              #2             // dev/codex/schubert/nk/storage/ResourceScope$Release
+   #2 = Utf8               dev/codex/schubert/nk/storage/ResourceScope$Release
+   #3 = Class              #4             // java/lang/Object
+   #4 = Utf8               java/lang/Object
+   #5 = Utf8               close
+   #6 = Utf8               (Ljava/lang/Object;)V
+   #7 = Utf8               Exceptions
+   #8 = Class              #9             // java/io/IOException
+   #9 = Utf8               java/io/IOException
+  #10 = Utf8               Signature
+  #11 = Utf8               (TR;)V
+  #12 = Utf8               <R:Ljava/lang/Object;>Ljava/lang/Object;
+  #13 = Utf8               SourceFile
+  #14 = Utf8               ResourceScope.java
+  #15 = Utf8               RuntimeVisibleAnnotations
+  #16 = Utf8               Ljava/lang/FunctionalInterface;
+  #17 = Utf8               NestHost
+  #18 = Class              #19            // dev/codex/schubert/nk/storage/ResourceScope
+  #19 = Utf8               dev/codex/schubert/nk/storage/ResourceScope
+  #20 = Utf8               InnerClasses
+  #21 = Utf8               Release
+{
+  public abstract void close(R) throws java.io.IOException;
+    descriptor: (Ljava/lang/Object;)V
+    flags: (0x0401) ACC_PUBLIC, ACC_ABSTRACT
+    Exceptions:
+      throws java.io.IOException
+    Signature: #11                          // (TR;)V
+}
+Signature: #12                          // <R:Ljava/lang/Object;>Ljava/lang/Object;
+SourceFile: "ResourceScope.java"
+RuntimeVisibleAnnotations:
+  0: #16()
+    java.lang.FunctionalInterface
+NestHost: class dev/codex/schubert/nk/storage/ResourceScope
+InnerClasses:
+  public static #21= #1 of #18;           // Release=class dev/codex/schubert/nk/storage/ResourceScope$Release of class dev/codex/schubert/nk/storage/ResourceScope
+Classfile jar:file:///home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar!/dev/codex/schubert/nk/storage/ResourceScope$OwnedAction.class
+  Last modified Nov 7, 2026; size 627 bytes
+  SHA-256 checksum 5942d0b8d678b791ae99e042d65552ebcd657030b6637bb80754d36aaf83bf83
+  Compiled from "ResourceScope.java"
+public interface dev.codex.schubert.nk.storage.ResourceScope$OwnedAction<R extends java.lang.Object, T extends java.lang.Object>
+  minor version: 0
+  major version: 69
+  flags: (0x0601) ACC_PUBLIC, ACC_INTERFACE, ACC_ABSTRACT
+  this_class: #1                          // dev/codex/schubert/nk/storage/ResourceScope$OwnedAction
+  super_class: #3                         // java/lang/Object
+  interfaces: 0, fields: 0, methods: 1, attributes: 6
+Constant pool:
+   #1 = Class              #2             // dev/codex/schubert/nk/storage/ResourceScope$OwnedAction
+   #2 = Utf8               dev/codex/schubert/nk/storage/ResourceScope$OwnedAction
+   #3 = Class              #4             // java/lang/Object
+   #4 = Utf8               java/lang/Object
+   #5 = Utf8               run
+   #6 = Utf8               (Ljava/lang/Object;)Ljava/lang/Object;
+   #7 = Utf8               Exceptions
+   #8 = Class              #9             // java/io/IOException
+   #9 = Utf8               java/io/IOException
+  #10 = Utf8               Signature
+  #11 = Utf8               (TR;)TT;
+  #12 = Utf8               <R:Ljava/lang/Object;T:Ljava/lang/Object;>Ljava/lang/Object;
+  #13 = Utf8               SourceFile
+  #14 = Utf8               ResourceScope.java
+  #15 = Utf8               RuntimeVisibleAnnotations
+  #16 = Utf8               Ljava/lang/FunctionalInterface;
+  #17 = Utf8               RuntimeVisibleTypeAnnotations
+  #18 = Utf8               Lorg/jspecify/annotations/Nullable;
+  #19 = Utf8               NestHost
+  #20 = Class              #21            // dev/codex/schubert/nk/storage/ResourceScope
+  #21 = Utf8               dev/codex/schubert/nk/storage/ResourceScope
+  #22 = Utf8               InnerClasses
+  #23 = Utf8               OwnedAction
+{
+  public abstract T run(R) throws java.io.IOException;
+    descriptor: (Ljava/lang/Object;)Ljava/lang/Object;
+    flags: (0x0401) ACC_PUBLIC, ACC_ABSTRACT
+    Exceptions:
+      throws java.io.IOException
+    Signature: #11                          // (TR;)TT;
+}
+Signature: #12                          // <R:Ljava/lang/Object;T:Ljava/lang/Object;>Ljava/lang/Object;
+SourceFile: "ResourceScope.java"
+RuntimeVisibleAnnotations:
+  0: #16()
+    java.lang.FunctionalInterface
+RuntimeVisibleTypeAnnotations:
+  0: #18(): CLASS_TYPE_PARAMETER_BOUND, param_index=1, bound_index=0
+    org.jspecify.annotations.Nullable
+NestHost: class dev/codex/schubert/nk/storage/ResourceScope
+InnerClasses:
+  public static #23= #1 of #20;           // OwnedAction=class dev/codex/schubert/nk/storage/ResourceScope$OwnedAction of class dev/codex/schubert/nk/storage/ResourceScope
+Classfile jar:file:///home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar!/dev/codex/schubert/nk/storage/StorageIoException.class
+  Last modified Nov 7, 2026; size 1022 bytes
+  SHA-256 checksum 4d421d4ad90741c3522a25b43d50d4607a0cf96bc96771452e126a709c81aa91
+  Compiled from "StorageIoException.java"
+public final class dev.codex.schubert.nk.storage.StorageIoException extends java.io.IOException
+  minor version: 0
+  major version: 69
+  flags: (0x0031) ACC_PUBLIC, ACC_FINAL, ACC_SUPER
+  this_class: #20                         // dev/codex/schubert/nk/storage/StorageIoException
+  super_class: #4                         // java/io/IOException
+  interfaces: 0, fields: 2, methods: 2, attributes: 3
+Constant pool:
+   #1 = String             #2             // transfer storage operation failed
+   #2 = Utf8               transfer storage operation failed
+   #3 = Methodref          #4.#5          // java/io/IOException."<init>":(Ljava/lang/String;)V
+   #4 = Class              #6             // java/io/IOException
+   #5 = NameAndType        #7:#8          // "<init>":(Ljava/lang/String;)V
+   #6 = Utf8               java/io/IOException
+   #7 = Utf8               <init>
+   #8 = Utf8               (Ljava/lang/String;)V
+   #9 = String             #10            // reason
+  #10 = Utf8               reason
+  #11 = Methodref          #12.#13        // java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+  #12 = Class              #14            // java/util/Objects
+  #13 = NameAndType        #15:#16        // requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+  #14 = Utf8               java/util/Objects
+  #15 = Utf8               requireNonNull
+  #16 = Utf8               (Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+  #17 = Class              #18            // dev/codex/schubert/nk/storage/StorageIoException$Reason
+  #18 = Utf8               dev/codex/schubert/nk/storage/StorageIoException$Reason
+  #19 = Fieldref           #20.#21        // dev/codex/schubert/nk/storage/StorageIoException.failureReason:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+  #20 = Class              #22            // dev/codex/schubert/nk/storage/StorageIoException
+  #21 = NameAndType        #23:#24        // failureReason:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+  #22 = Utf8               dev/codex/schubert/nk/storage/StorageIoException
+  #23 = Utf8               failureReason
+  #24 = Utf8               Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+  #25 = Utf8               serialVersionUID
+  #26 = Utf8               J
+  #27 = Utf8               ConstantValue
+  #28 = Long               1l
+  #30 = Utf8               (Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V
+  #31 = Utf8               Code
+  #32 = Utf8               LineNumberTable
+  #33 = Utf8               LocalVariableTable
+  #34 = Utf8               this
+  #35 = Utf8               Ldev/codex/schubert/nk/storage/StorageIoException;
+  #36 = Utf8               ()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+  #37 = Utf8               SourceFile
+  #38 = Utf8               StorageIoException.java
+  #39 = Utf8               NestMembers
+  #40 = Utf8               InnerClasses
+  #41 = Utf8               Reason
+{
+  private static final long serialVersionUID;
+    descriptor: J
+    flags: (0x001a) ACC_PRIVATE, ACC_STATIC, ACC_FINAL
+    ConstantValue: long 1l
+
+  private final dev.codex.schubert.nk.storage.StorageIoException$Reason failureReason;
+    descriptor: Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+    flags: (0x0012) ACC_PRIVATE, ACC_FINAL
+
+  public dev.codex.schubert.nk.storage.StorageIoException(dev.codex.schubert.nk.storage.StorageIoException$Reason);
+    descriptor: (Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=2, args_size=2
+         0: aload_0
+         1: ldc           #1                  // String transfer storage operation failed
+         3: invokespecial #3                  // Method java/io/IOException."<init>":(Ljava/lang/String;)V
+         6: aload_0
+         7: aload_1
+         8: ldc           #9                  // String reason
+        10: invokestatic  #11                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: checkcast     #17                 // class dev/codex/schubert/nk/storage/StorageIoException$Reason
+        16: putfield      #19                 // Field failureReason:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+        19: return
+      LineNumberTable:
+        line 19: 0
+        line 20: 6
+        line 21: 19
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      20     0  this   Ldev/codex/schubert/nk/storage/StorageIoException;
+            0      20     1 reason   Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+
+  public dev.codex.schubert.nk.storage.StorageIoException$Reason reason();
+    descriptor: ()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #19                 // Field failureReason:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+         4: areturn
+      LineNumberTable:
+        line 24: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Ldev/codex/schubert/nk/storage/StorageIoException;
+}
+SourceFile: "StorageIoException.java"
+NestMembers:
+  dev/codex/schubert/nk/storage/StorageIoException$Reason
+InnerClasses:
+  public static final #41= #17 of #20;    // Reason=class dev/codex/schubert/nk/storage/StorageIoException$Reason of class dev/codex/schubert/nk/storage/StorageIoException
+Classfile jar:file:///home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar!/dev/codex/schubert/nk/storage/StorageIoException$Reason.class
+  Last modified Nov 7, 2026; size 1437 bytes
+  SHA-256 checksum 8508ca85bfbca22e66b27d20020a96078f9fbb4662c686a48300b4361dbb61f7
+  Compiled from "StorageIoException.java"
+public final class dev.codex.schubert.nk.storage.StorageIoException$Reason extends java.lang.Enum<dev.codex.schubert.nk.storage.StorageIoException$Reason>
+  minor version: 0
+  major version: 69
+  flags: (0x4031) ACC_PUBLIC, ACC_FINAL, ACC_SUPER, ACC_ENUM
+  this_class: #1                          // dev/codex/schubert/nk/storage/StorageIoException$Reason
+  super_class: #23                        // java/lang/Enum
+  interfaces: 0, fields: 4, methods: 5, attributes: 4
+Constant pool:
+   #1 = Class              #2             // dev/codex/schubert/nk/storage/StorageIoException$Reason
+   #2 = Utf8               dev/codex/schubert/nk/storage/StorageIoException$Reason
+   #3 = Fieldref           #1.#4          // dev/codex/schubert/nk/storage/StorageIoException$Reason.COLLISION:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+   #4 = NameAndType        #5:#6          // COLLISION:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+   #5 = Utf8               COLLISION
+   #6 = Utf8               Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+   #7 = Fieldref           #1.#8          // dev/codex/schubert/nk/storage/StorageIoException$Reason.MISSING:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+   #8 = NameAndType        #9:#6          // MISSING:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+   #9 = Utf8               MISSING
+  #10 = Fieldref           #1.#11         // dev/codex/schubert/nk/storage/StorageIoException$Reason.UNAVAILABLE:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+  #11 = NameAndType        #12:#6         // UNAVAILABLE:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+  #12 = Utf8               UNAVAILABLE
+  #13 = Fieldref           #1.#14         // dev/codex/schubert/nk/storage/StorageIoException$Reason.$VALUES:[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+  #14 = NameAndType        #15:#16        // $VALUES:[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+  #15 = Utf8               $VALUES
+  #16 = Utf8               [Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+  #17 = Methodref          #18.#19        // "[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;".clone:()Ljava/lang/Object;
+  #18 = Class              #16            // "[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+  #19 = NameAndType        #20:#21        // clone:()Ljava/lang/Object;
+  #20 = Utf8               clone
+  #21 = Utf8               ()Ljava/lang/Object;
+  #22 = Methodref          #23.#24        // java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+  #23 = Class              #25            // java/lang/Enum
+  #24 = NameAndType        #26:#27        // valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+  #25 = Utf8               java/lang/Enum
+  #26 = Utf8               valueOf
+  #27 = Utf8               (Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+  #28 = Methodref          #23.#29        // java/lang/Enum."<init>":(Ljava/lang/String;I)V
+  #29 = NameAndType        #30:#31        // "<init>":(Ljava/lang/String;I)V
+  #30 = Utf8               <init>
+  #31 = Utf8               (Ljava/lang/String;I)V
+  #32 = String             #5             // COLLISION
+  #33 = Methodref          #1.#29         // dev/codex/schubert/nk/storage/StorageIoException$Reason."<init>":(Ljava/lang/String;I)V
+  #34 = String             #9             // MISSING
+  #35 = String             #12            // UNAVAILABLE
+  #36 = Methodref          #1.#37         // dev/codex/schubert/nk/storage/StorageIoException$Reason.$values:()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+  #37 = NameAndType        #38:#39        // $values:()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+  #38 = Utf8               $values
+  #39 = Utf8               ()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+  #40 = Utf8               values
+  #41 = Utf8               Code
+  #42 = Utf8               LineNumberTable
+  #43 = Utf8               (Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+  #44 = Utf8               LocalVariableTable
+  #45 = Utf8               name
+  #46 = Utf8               Ljava/lang/String;
+  #47 = Utf8               MethodParameters
+  #48 = Utf8               this
+  #49 = Utf8               Signature
+  #50 = Utf8               ()V
+  #51 = Utf8               <clinit>
+  #52 = Utf8               Ljava/lang/Enum<Ldev/codex/schubert/nk/storage/StorageIoException$Reason;>;
+  #53 = Utf8               SourceFile
+  #54 = Utf8               StorageIoException.java
+  #55 = Utf8               NestHost
+  #56 = Class              #57            // dev/codex/schubert/nk/storage/StorageIoException
+  #57 = Utf8               dev/codex/schubert/nk/storage/StorageIoException
+  #58 = Utf8               InnerClasses
+  #59 = Utf8               Reason
+{
+  public static final dev.codex.schubert.nk.storage.StorageIoException$Reason COLLISION;
+    descriptor: Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static final dev.codex.schubert.nk.storage.StorageIoException$Reason MISSING;
+    descriptor: Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static final dev.codex.schubert.nk.storage.StorageIoException$Reason UNAVAILABLE;
+    descriptor: Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  private static final dev.codex.schubert.nk.storage.StorageIoException$Reason[] $VALUES;
+    descriptor: [Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+    flags: (0x101a) ACC_PRIVATE, ACC_STATIC, ACC_FINAL, ACC_SYNTHETIC
+
+  public static dev.codex.schubert.nk.storage.StorageIoException$Reason[] values();
+    descriptor: ()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: getstatic     #13                 // Field $VALUES:[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+         3: invokevirtual #17                 // Method "[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;".clone:()Ljava/lang/Object;
+         6: checkcast     #18                 // class "[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+         9: areturn
+      LineNumberTable:
+        line 10: 0
+
+  public static dev.codex.schubert.nk.storage.StorageIoException$Reason valueOf(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: ldc           #1                  // class dev/codex/schubert/nk/storage/StorageIoException$Reason
+         2: aload_0
+         3: invokestatic  #22                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+         6: checkcast     #1                  // class dev/codex/schubert/nk/storage/StorageIoException$Reason
+         9: areturn
+      LineNumberTable:
+        line 10: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0  name   Ljava/lang/String;
+    MethodParameters:
+      Name                           Flags
+      <no name>                      mandated
+
+  private dev.codex.schubert.nk.storage.StorageIoException$Reason();
+    descriptor: (Ljava/lang/String;I)V
+    flags: (0x0002) ACC_PRIVATE
+    Code:
+      stack=3, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: iload_2
+         3: invokespecial #28                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+         6: return
+      LineNumberTable:
+        line 10: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       7     0  this   Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+    MethodParameters:
+      Name                           Flags
+      <no name>                      synthetic
+      <no name>                      synthetic
+    Signature: #50                          // ()V
+
+  private static dev.codex.schubert.nk.storage.StorageIoException$Reason[] $values();
+    descriptor: ()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=4, locals=0, args_size=0
+         0: iconst_3
+         1: anewarray     #1                  // class dev/codex/schubert/nk/storage/StorageIoException$Reason
+         4: dup
+         5: iconst_0
+         6: getstatic     #3                  // Field COLLISION:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+         9: aastore
+        10: dup
+        11: iconst_1
+        12: getstatic     #7                  // Field MISSING:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+        15: aastore
+        16: dup
+        17: iconst_2
+        18: getstatic     #10                 // Field UNAVAILABLE:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+        21: aastore
+        22: areturn
+      LineNumberTable:
+        line 10: 0
+
+  static {};
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=4, locals=0, args_size=0
+         0: new           #1                  // class dev/codex/schubert/nk/storage/StorageIoException$Reason
+         3: dup
+         4: ldc           #32                 // String COLLISION
+         6: iconst_0
+         7: invokespecial #33                 // Method "<init>":(Ljava/lang/String;I)V
+        10: putstatic     #3                  // Field COLLISION:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+        13: new           #1                  // class dev/codex/schubert/nk/storage/StorageIoException$Reason
+        16: dup
+        17: ldc           #34                 // String MISSING
+        19: iconst_1
+        20: invokespecial #33                 // Method "<init>":(Ljava/lang/String;I)V
+        23: putstatic     #7                  // Field MISSING:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+        26: new           #1                  // class dev/codex/schubert/nk/storage/StorageIoException$Reason
+        29: dup
+        30: ldc           #35                 // String UNAVAILABLE
+        32: iconst_2
+        33: invokespecial #33                 // Method "<init>":(Ljava/lang/String;I)V
+        36: putstatic     #10                 // Field UNAVAILABLE:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+        39: invokestatic  #36                 // Method $values:()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+        42: putstatic     #13                 // Field $VALUES:[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+        45: return
+      LineNumberTable:
+        line 11: 0
+        line 12: 13
+        line 13: 26
+        line 10: 39
+}
+Signature: #52                          // Ljava/lang/Enum<Ldev/codex/schubert/nk/storage/StorageIoException$Reason;>;
+SourceFile: "StorageIoException.java"
+NestHost: class dev/codex/schubert/nk/storage/StorageIoException
+InnerClasses:
+  public static final #59= #1 of #56;     // Reason=class dev/codex/schubert/nk/storage/StorageIoException$Reason of class dev/codex/schubert/nk/storage/StorageIoException
