@@ -1,0 +1,276 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "ac1919389902fd4d96ec771d9451c4ab224a8556",
+    "normalSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+    "inputHashes": {
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCriticalAuditPortTest.java": "e7dfcb613716ae6af147137e9ceabda1cf25006a4d02651031d3c9813cbdb88f",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserAuditWriter.java": "f0458e7874c4c5884e4f4dc79a0aedb803d730ab95469b43c610f3618d2eb474",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter.java": "68568dfbd26fa58a01460ecee9911073b6e66cf2fdea88a69f6776c7892d65d1",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter.java": "026ea309fb97c59d525ac8c668f324ce2275cea0dd8c59e26acbfd37f0492b7f",
+      "evidence/01_PT/010_NK-ADM-001/input/004_user_audit_cleanup_qualifier.py": "5964157e1f34e870966f3fd32beb91e4b2538155de9ebc7817993f9f48525d5d"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "bc6acaa867859b0f1d2f2e24dc27ba5627e7bf7c332448ae88bb077ea1b36fa7",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar": "1d816c9e5510723a10dfde2b19a8ddc9c5423d425039b891eb497d3b6e963fdb",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar": "4667724877f1d37a689202da191e23efa7657c62eef93ccdac406eccfe5cdd0a"
+    },
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "compileManifestSha256": "702ad42c5a603968066b257e99e57f2af8da6f3d4e856076c8a14b88bc497a15",
+    "selected": [
+      "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest"
+    ],
+    "expectedTests": 20,
+    "newMethods": 0,
+    "requalifiedExistingMethods": 20,
+    "session": "PG22434-USER-AUDIT-CLEANUP20",
+    "startUTC": "2026-11-07T05:25:16.214824+00:00",
+    "realDbOrCryptoOrAuthOrRootNative": false
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T05:25:16.214987+00:00",
+      "endUTC": "2026-11-07T05:25:17.783792+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22434-user-audit-cleanup-twenty-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22434-user-audit-cleanup-twenty-unit-v1/jacoco.exec,sessionid=PG22434-USER-AUDIT-CLEANUP20,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22434-user-audit-cleanup-twenty-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22430-user-audit-cleanup-twenty-compile-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22434-user-audit-cleanup-twenty-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "049d917bcc681a90f9744871751206b0a3744058af23b982c64fab709c03b1a5",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T05:25:17.786322+00:00",
+      "endUTC": "2026-11-07T05:25:17.951235+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22434-user-audit-cleanup-twenty-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22434-user-audit-cleanup-twenty-unit-v1/component",
+        "--sourcefiles",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22434-user-audit-cleanup-twenty-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "0ec60e2c515cd1c825195c5ec147c9bfe3783d68380b8bbe65ba0172553fa973",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T05:25:17.951575+00:00",
+      "endUTC": "2026-11-07T05:25:18.116465+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22434-user-audit-cleanup-twenty-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "5b35ac17d9783f4965fe5c33799ba95a3cd4e5b8418d1d34c8c184e378f7ef06",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T05:25:18.116821+00:00",
+      "endUTC": "2026-11-07T05:25:18.231660+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22434-user-audit-cleanup-twenty-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "4db1d2847eb4bc792dbc695a58bdc253d6d26563cd2e79edb7d7bd95b69125d8",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit009BusinessRequiredInputsRejectNullAndCloseOwnedStatements()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit014AdmissionCreateOmitsTargetAndNeverContainsRequestValues()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit004MissingStateOmitsFieldsAndLockTimeBoundaryIsStrict()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit007AllWritersRequireOneAffectedRow()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit013AdmissionClosedCatalogAndOptionalActorMatchIndependentTable()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit015AdmissionTokenMismatchUsesEveryMutationActionWithoutInputSecrets()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit001BusinessSuccessCatalogHasActionThenSecurityExceptResetUnlock()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit018ConcurrentWritersHaveNoSharedBindOrConnectionState()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit006Utf8Limit1024And1025UseIndependentLiteralJsonSize()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit020PrimarySqlFailureRetainsSuppressedCloseAndBorrowedOwnership()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit016AdmissionMissingOrClosedRequestIsNotSuccessfulAudit()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit008BusinessFirstOrSecondSqlFailureStopsWithoutOwningConnection()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit003BeforeAfterStateProjectionMatchesLiteralContract()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit017AdmissionSqlFailuresKeepIdentityAndCloseStatement()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit002EveryDefiniteDenialWritesOnlySecurityWithClosedResult()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit012QuerySqlFailuresKeepIdentityAndCloseStatement()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit019UnknownRuntimeAndErrorAreNotNormalizedAsSuccessfulAudit()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit011QueryMissingInputsAreContractFailures()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit005UsernameUsesAfterThenBeforeAndNfcControlsAreSanitized()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.admin.UserCriticalAuditPortTest",
+      "name": "audit010QueryAllClosedEventsAndOptionalActorMatchIndependentTable()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 20,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/api/application/admin/UserAuditWriter": "222fd0f6d38f07ad409f296a3d5e4bf8b6ec81f2983f5131a251fa4f0626ac68",
+    "dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter": "8eccc687962cdaf9a8961a7c5b68136985015ddee037c4108810da3515651374",
+    "dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter$Event": "d846d7c53034f97c33e752335fb803f8cf15ad6607114e51f3321136e9c236b6",
+    "dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter$Event": "c206a3d8f59977d045a34490a5e27108776fcc285b8bdda6de869de562616158",
+    "dev/codex/schubert/nk/api/application/admin/UserAuditWriter$1": "b6dd8a32bfd671a8d4d8f254c6860e4d38900f31d247713a2e4e768ae921a3f5",
+    "dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter": "a3ed1e22e925be7d46950c39175f377168e51f456f66ef04c640e7a1ad74be0e"
+  },
+  "formalUpdated": false
+}

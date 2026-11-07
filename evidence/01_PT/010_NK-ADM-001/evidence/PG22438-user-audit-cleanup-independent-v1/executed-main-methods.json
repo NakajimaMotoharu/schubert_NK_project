@@ -1,0 +1,942 @@
+{
+  "dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation": [
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/api/security/AuthenticatedActor": [
+    {
+      "name": "<init>",
+      "desc": "(JLjava/lang/String;Ldev/codex/schubert/nk/api/domain/Role;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/api/application/admin/UserCommandService$State": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/semantic/UserId;Ljava/lang/String;Ldev/codex/schubert/nk/protocol/layout/semantic/UserRole;ZJLjava/util/Optional;I)V"
+    }
+  ],
+  "dev/codex/schubert/nk/api/application/admin/UserMutationResult": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/header/ResultCode;Ljava/util/Optional;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/api/application/admin/UserAuditWriter": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "write",
+      "desc": "(Ljava/sql/Connection;Ldev/codex/schubert/nk/api/security/AuthenticatedActor;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ldev/codex/schubert/nk/api/application/admin/UserCommandService$Change;Ldev/codex/schubert/nk/api/application/admin/UserCommandMetadata;)V"
+    },
+    {
+      "name": "state",
+      "desc": "(Ldev/codex/schubert/nk/api/application/admin/UserCommandService$State;Ldev/codex/schubert/nk/api/application/admin/UserCommandMetadata;)Lcom/google/gson/JsonObject;"
+    },
+    {
+      "name": "action",
+      "desc": "(Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;)Ljava/lang/String;"
+    },
+    {
+      "name": "insert",
+      "desc": "(Ljava/sql/Connection;Ldev/codex/schubert/nk/api/security/AuthenticatedActor;Ldev/codex/schubert/nk/api/application/admin/UserCommandMetadata;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V"
+    },
+    {
+      "name": "safe",
+      "desc": "(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "name": "lambda$state$0",
+      "desc": "(Ldev/codex/schubert/nk/api/application/admin/UserCommandMetadata;Ljava/time/Instant;)Ljava/lang/Boolean;"
+    },
+    {
+      "name": "lambda$write$3",
+      "desc": "(Lcom/google/gson/JsonObject;Ldev/codex/schubert/nk/api/application/admin/UserCommandService$State;)V"
+    },
+    {
+      "name": "lambda$write$2",
+      "desc": "(Lcom/google/gson/JsonObject;Ldev/codex/schubert/nk/api/application/admin/UserCommandMetadata;Ldev/codex/schubert/nk/api/application/admin/UserCommandService$State;)V"
+    },
+    {
+      "name": "lambda$write$1",
+      "desc": "(Lcom/google/gson/JsonObject;Ldev/codex/schubert/nk/api/application/admin/UserCommandMetadata;Ldev/codex/schubert/nk/api/application/admin/UserCommandService$State;)V"
+    },
+    {
+      "name": "lambda$write$0",
+      "desc": "(Lcom/google/gson/JsonObject;Ldev/codex/schubert/nk/protocol/layout/semantic/UserId;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/api/application/admin/UserCommandMetadata": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/api/application/admin/UserMutationRequest": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/header/CommonHeader;Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;ZJLjava/util/UUID;Ljava/lang/String;)V"
+    },
+    {
+      "name": "decode",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/WireMessage;)Ldev/codex/schubert/nk/api/application/admin/UserMutationRequest;"
+    },
+    {
+      "name": "header",
+      "desc": "()Ldev/codex/schubert/nk/protocol/header/CommonHeader;"
+    },
+    {
+      "name": "mutation",
+      "desc": "()Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;"
+    },
+    {
+      "name": "targetUserId",
+      "desc": "()Ljava/util/OptionalLong;"
+    },
+    {
+      "name": "ensureOpen",
+      "desc": "()V"
+    },
+    {
+      "name": "close",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter$Event": [
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "write",
+      "desc": "(Ljava/sql/Connection;Ljava/util/Optional;Ldev/codex/schubert/nk/api/application/admin/UserMutationRequest;Ldev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter$Event;Ljava/time/Instant;)V"
+    },
+    {
+      "name": "lambda$write$1",
+      "desc": "(Lcom/google/gson/JsonObject;Ldev/codex/schubert/nk/api/security/AuthenticatedActor;)V"
+    },
+    {
+      "name": "lambda$write$0",
+      "desc": "(Lcom/google/gson/JsonObject;J)V"
+    }
+  ],
+  "dev/codex/schubert/nk/api/application/admin/UserQueryRequest": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/header/CommonHeader;Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;)V"
+    },
+    {
+      "name": "decode",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/WireMessage;)Ldev/codex/schubert/nk/api/application/admin/UserQueryRequest;"
+    },
+    {
+      "name": "header",
+      "desc": "()Ldev/codex/schubert/nk/protocol/header/CommonHeader;"
+    },
+    {
+      "name": "require",
+      "desc": "(Z)V"
+    }
+  ],
+  "dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter$Event": [
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "write",
+      "desc": "(Ljava/sql/Connection;Ljava/util/Optional;Ldev/codex/schubert/nk/api/application/admin/UserQueryRequest;Ldev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter$Event;Ljava/time/Instant;)V"
+    },
+    {
+      "name": "lambda$write$0",
+      "desc": "(Lcom/google/gson/JsonObject;Ldev/codex/schubert/nk/api/security/AuthenticatedActor;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/api/application/admin/UserCommandService$Change": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/api/application/admin/UserMutationResult;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/api/domain/Role": [
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$RecordMapping": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/Class;Ljava/util/function/Function;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/LayoutDefinition": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;ILdev/codex/schubert/nk/protocol/header/MessageKind;Ldev/codex/schubert/nk/protocol/header/InteractionKind;IIII)V"
+    },
+    {
+      "name": "totalLengthFor",
+      "desc": "(I)I"
+    },
+    {
+      "name": "validateDeclaredLength",
+      "desc": "(Ljava/lang/String;I)V"
+    },
+    {
+      "name": "calculateMaximumTotal",
+      "desc": "(III)I"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;Ljava/lang/Class;Ljava/util/function/Function;Ljava/util/Optional;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/FieldValue$Unset": [
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/PayloadValues": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/util/List;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator": [
+    {
+      "name": "validate",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;)V"
+    },
+    {
+      "name": "validateUserCreation",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;)V"
+    },
+    {
+      "name": "validatePassword",
+      "desc": "(Ljava/lang/String;Ljava/util/Optional;)V"
+    },
+    {
+      "name": "text",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "name": "require",
+      "desc": "(ZLjava/lang/String;)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/WireType": [
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/LayoutId": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/FieldValue$Flag": [
+    {
+      "name": "<init>",
+      "desc": "(Z)V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/FieldValue$Numeric": [
+    {
+      "name": "<init>",
+      "desc": "(J)V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/FieldValueSet": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/util/Map;)V"
+    },
+    {
+      "name": "names",
+      "desc": "()Ljava/util/Set;"
+    },
+    {
+      "name": "getOrUnset",
+      "desc": "(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/Presence": [
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/LayoutRegistry": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/util/Collection;)V"
+    },
+    {
+      "name": "validatedIndex",
+      "desc": "(Ljava/util/Collection;)Ljava/util/LinkedHashMap;"
+    },
+    {
+      "name": "standard",
+      "desc": "()Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;"
+    },
+    {
+      "name": "all",
+      "desc": "()Ljava/util/List;"
+    },
+    {
+      "name": "require",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;I)Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;"
+    },
+    {
+      "name": "require",
+      "desc": "(Ljava/lang/String;I)Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;"
+    },
+    {
+      "name": "key",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;I)Ljava/lang/String;"
+    },
+    {
+      "name": "validateIdentifierKind",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;)V"
+    },
+    {
+      "name": "ifEvent",
+      "desc": "(Ljava/lang/String;)Z"
+    },
+    {
+      "name": "standardDefinitions",
+      "desc": "()Ljava/util/List;"
+    },
+    {
+      "name": "d",
+      "desc": "(Ljava/lang/String;Ldev/codex/schubert/nk/protocol/header/MessageKind;Ldev/codex/schubert/nk/protocol/header/InteractionKind;IIII)Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$MutableFields": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/WireMessage": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/header/CommonHeader;Ldev/codex/schubert/nk/protocol/layout/LayoutPayload;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/util/List;)V"
+    },
+    {
+      "name": "standard",
+      "desc": "()Ldev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog;"
+    },
+    {
+      "name": "require",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;)Ldev/codex/schubert/nk/protocol/layout/LayoutFields;"
+    },
+    {
+      "name": "parse",
+      "desc": "(Ljava/lang/String;Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;)Ldev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog;"
+    },
+    {
+      "name": "parseArea",
+      "desc": "(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/FieldArea;"
+    },
+    {
+      "name": "parseWireType",
+      "desc": "(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/WireType;"
+    },
+    {
+      "name": "parsePresence",
+      "desc": "(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/Presence;"
+    },
+    {
+      "name": "paddingFor",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/WireType;)Ldev/codex/schubert/nk/protocol/layout/Padding;"
+    },
+    {
+      "name": "validateFixedField",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;Ljava/lang/String;Ldev/codex/schubert/nk/protocol/layout/Presence;)V"
+    },
+    {
+      "name": "javaTypeFor",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/WireType;)Ljava/lang/Class;"
+    },
+    {
+      "name": "parsePositiveInt",
+      "desc": "(Ljava/lang/String;Ljava/lang/String;)I"
+    },
+    {
+      "name": "lambda$parse$1",
+      "desc": "(Ljava/lang/String;Ldev/codex/schubert/nk/protocol/layout/FieldDefinition;)Z"
+    },
+    {
+      "name": "lambda$parse$0",
+      "desc": "(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$MutableFields;"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/FixedPayload": [
+    {
+      "name": "<init>",
+      "desc": "([BILjava/util/List;)V"
+    },
+    {
+      "name": "dataLength",
+      "desc": "()I"
+    },
+    {
+      "name": "recordLength",
+      "desc": "()I"
+    },
+    {
+      "name": "recordCount",
+      "desc": "()I"
+    },
+    {
+      "name": "copyData",
+      "desc": "()[B"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/FieldValue$Text": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/TypedFieldValues": [
+    {
+      "name": "requiredText",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/FieldValue$Text;"
+    },
+    {
+      "name": "requiredNumeric",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/FieldValue$Numeric;"
+    },
+    {
+      "name": "requiredFlag",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/FieldValue$Flag;"
+    },
+    {
+      "name": "requiredString",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "name": "requiredLong",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)J"
+    },
+    {
+      "name": "requireUnsignedRange",
+      "desc": "(Ljava/lang/String;JI)V"
+    },
+    {
+      "name": "requiredBoolean",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Z"
+    },
+    {
+      "name": "requiredId",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;Ljava/util/function/LongFunction;)Ldev/codex/schubert/nk/protocol/layout/semantic/ProtocolId;"
+    },
+    {
+      "name": "requiredEnum",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Enum;"
+    },
+    {
+      "name": "requiredUuid",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ljava/util/UUID;"
+    },
+    {
+      "name": "text",
+      "desc": "(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;"
+    },
+    {
+      "name": "numeric",
+      "desc": "(J)Ldev/codex/schubert/nk/protocol/layout/FieldValue;"
+    },
+    {
+      "name": "flag",
+      "desc": "(Z)Ldev/codex/schubert/nk/protocol/layout/FieldValue;"
+    },
+    {
+      "name": "id",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/semantic/ProtocolId;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;"
+    },
+    {
+      "name": "enumValue",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/semantic/WireEnum;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;"
+    },
+    {
+      "name": "uuid",
+      "desc": "(Ljava/util/UUID;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;"
+    },
+    {
+      "name": "require",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;"
+    },
+    {
+      "name": "canonicalUuid",
+      "desc": "(Ljava/lang/String;)Ljava/util/UUID;"
+    },
+    {
+      "name": "enumConstant",
+      "desc": "(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;"
+    },
+    {
+      "name": "semanticId",
+      "desc": "(Ljava/lang/String;JLjava/util/function/LongFunction;)Ldev/codex/schubert/nk/protocol/layout/semantic/ProtocolId;"
+    },
+    {
+      "name": "semantic",
+      "desc": "(Ljava/lang/String;Ljava/lang/String;Ljava/util/function/Function;)Ljava/lang/Object;"
+    },
+    {
+      "name": "lambda$requiredEnum$0",
+      "desc": "(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/FieldArea": [
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/LayoutFields": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;Ljava/util/List;Ljava/util/List;)V"
+    },
+    {
+      "name": "id",
+      "desc": "()Ldev/codex/schubert/nk/protocol/layout/LayoutId;"
+    },
+    {
+      "name": "validateArea",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldArea;ILjava/util/List;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog": [
+    {
+      "name": "decode",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/PayloadValues;)Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;"
+    },
+    {
+      "name": "encode",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;)Ldev/codex/schubert/nk/protocol/layout/PayloadValues;"
+    },
+    {
+      "name": "decodeRecords",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/PayloadValues;Ljava/util/Optional;)Ljava/util/List;"
+    },
+    {
+      "name": "validateRecordTypes",
+      "desc": "(Ljava/util/List;Ljava/util/Optional;)V"
+    },
+    {
+      "name": "require",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;"
+    },
+    {
+      "name": "mapping",
+      "desc": "(Ljava/lang/String;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;"
+    },
+    {
+      "name": "mapping",
+      "desc": "(Ljava/lang/String;Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/Padding": [
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/FieldDefinition": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldArea;Ljava/lang/String;IILdev/codex/schubert/nk/protocol/layout/WireType;Ldev/codex/schubert/nk/protocol/layout/Presence;Ldev/codex/schubert/nk/protocol/layout/Padding;Ljava/lang/Class;Ljava/lang/String;)V"
+    },
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldArea;Ljava/lang/String;IIILdev/codex/schubert/nk/protocol/layout/WireType;Ldev/codex/schubert/nk/protocol/layout/Presence;Ldev/codex/schubert/nk/protocol/layout/Padding;Ljava/lang/Class;Ljava/lang/String;)V"
+    },
+    {
+      "name": "checkedEnd",
+      "desc": "(II)I"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/TypedPayloadValues": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;Ldev/codex/schubert/nk/protocol/layout/PayloadData;Ljava/util/List;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/codec/PayloadCodec": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog;)V"
+    },
+    {
+      "name": "standard",
+      "desc": "()Ldev/codex/schubert/nk/protocol/codec/PayloadCodec;"
+    },
+    {
+      "name": "encode",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/PayloadValues;Z)Ldev/codex/schubert/nk/protocol/layout/FixedPayload;"
+    },
+    {
+      "name": "encode",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/PayloadValues;ZLjava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/FixedPayload;"
+    },
+    {
+      "name": "decode",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;[BLjava/util/List;Z)Ldev/codex/schubert/nk/protocol/layout/PayloadValues;"
+    },
+    {
+      "name": "decode",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;[BLjava/util/List;ZLjava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/PayloadValues;"
+    },
+    {
+      "name": "encodeArea",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/util/List;ZLdev/codex/schubert/nk/protocol/layout/LayoutId;Ljava/util/Optional;)[B"
+    },
+    {
+      "name": "decodeArea",
+      "desc": "([BLjava/util/List;ZLdev/codex/schubert/nk/protocol/layout/LayoutId;Ljava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;"
+    },
+    {
+      "name": "validateNames",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/util/List;)V"
+    },
+    {
+      "name": "encodeField",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldDefinition;Ldev/codex/schubert/nk/protocol/layout/FieldValue;Z)[B"
+    },
+    {
+      "name": "decodeField",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldDefinition;[BZ)Ldev/codex/schubert/nk/protocol/layout/FieldValue;"
+    },
+    {
+      "name": "validateErrorOverride",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;ZLjava/util/Optional;)V"
+    },
+    {
+      "name": "validateErrorOverrideForEncode",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;ZLjava/util/Optional;)V"
+    },
+    {
+      "name": "maximumForDigits",
+      "desc": "(I)J"
+    },
+    {
+      "name": "lambda$validateNames$0",
+      "desc": "(Ljava/lang/String;Ldev/codex/schubert/nk/protocol/layout/FieldDefinition;)Z"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/codec/FieldCodec": [
+    {
+      "name": "encodeText",
+      "desc": "(Ljava/lang/String;IZ)[B"
+    },
+    {
+      "name": "decodeText",
+      "desc": "([BZ)Ljava/util/Optional;"
+    },
+    {
+      "name": "encodeNumeric",
+      "desc": "(JIJJ)[B"
+    },
+    {
+      "name": "decodeNumeric",
+      "desc": "([BJJ)J"
+    },
+    {
+      "name": "encodeBoolean",
+      "desc": "(Ljava/lang/Boolean;Z)[B"
+    },
+    {
+      "name": "decodeBoolean",
+      "desc": "([BZ)Ljava/util/Optional;"
+    },
+    {
+      "name": "requireSpaces",
+      "desc": "([B)V"
+    },
+    {
+      "name": "validateTextCharactersForEncode",
+      "desc": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "validateTextCharactersForDecode",
+      "desc": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "containsForbiddenControl",
+      "desc": "(Ljava/lang/String;)Z"
+    },
+    {
+      "name": "allBytes",
+      "desc": "([BB)Z"
+    },
+    {
+      "name": "filled",
+      "desc": "(IB)[B"
+    },
+    {
+      "name": "requirePositiveLength",
+      "desc": "(I)V"
+    },
+    {
+      "name": "requireNonEmptyField",
+      "desc": "([B)V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/semantic/UserRole": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;ILjava/lang/String;)V"
+    },
+    {
+      "name": "wireValue",
+      "desc": "()Ljava/lang/String;"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/semantic/UserId": [
+    {
+      "name": "<init>",
+      "desc": "(J)V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/semantic/IdValue": [
+    {
+      "name": "validate",
+      "desc": "(J)V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/admin/UserUnlockRequestData": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/semantic/UserId;JLjava/util/UUID;)V"
+    },
+    {
+      "name": "from",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;)Ldev/codex/schubert/nk/protocol/layout/admin/UserUnlockRequestData;"
+    },
+    {
+      "name": "fields",
+      "desc": "()Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/semantic/UserId;Ljava/lang/String;JLjava/util/UUID;)V"
+    },
+    {
+      "name": "from",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;)Ldev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData;"
+    },
+    {
+      "name": "fields",
+      "desc": "()Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/admin/UserRoleRequestData": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/semantic/UserId;Ldev/codex/schubert/nk/protocol/layout/semantic/UserRole;JLjava/util/UUID;)V"
+    },
+    {
+      "name": "from",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;)Ldev/codex/schubert/nk/protocol/layout/admin/UserRoleRequestData;"
+    },
+    {
+      "name": "fields",
+      "desc": "()Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/semantic/UserId;J)V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/admin/UserCreateRequestData": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;Ljava/lang/String;Ldev/codex/schubert/nk/protocol/layout/semantic/UserRole;ZLjava/util/UUID;)V"
+    },
+    {
+      "name": "from",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;)Ldev/codex/schubert/nk/protocol/layout/admin/UserCreateRequestData;"
+    },
+    {
+      "name": "fields",
+      "desc": "()Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/admin/UserDetailRequestData": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/semantic/UserId;)V"
+    },
+    {
+      "name": "from",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;)Ldev/codex/schubert/nk/protocol/layout/admin/UserDetailRequestData;"
+    },
+    {
+      "name": "fields",
+      "desc": "()Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/admin/UserStatusRequestData": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/semantic/UserId;ZJLjava/util/UUID;)V"
+    },
+    {
+      "name": "from",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;)Ldev/codex/schubert/nk/protocol/layout/admin/UserStatusRequestData;"
+    },
+    {
+      "name": "fields",
+      "desc": "()Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/header/CommonHeader": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;ILdev/codex/schubert/nk/protocol/layout/LayoutId;ILdev/codex/schubert/nk/protocol/header/MessageKind;Ldev/codex/schubert/nk/protocol/header/InteractionKind;Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;Ljava/util/Optional;IIIIILjava/util/Optional;)V"
+    },
+    {
+      "name": "validateAgainst",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;)V"
+    },
+    {
+      "name": "calculateTotal",
+      "desc": "(III)I"
+    },
+    {
+      "name": "validateKinds",
+      "desc": "(Ldev/codex/schubert/nk/protocol/header/MessageKind;Ldev/codex/schubert/nk/protocol/header/InteractionKind;)V"
+    },
+    {
+      "name": "validateCorrelation",
+      "desc": "(Ldev/codex/schubert/nk/protocol/header/MessageKind;Ljava/util/UUID;Ljava/util/UUID;)V"
+    },
+    {
+      "name": "validateResult",
+      "desc": "(Ldev/codex/schubert/nk/protocol/header/MessageKind;ILjava/util/Optional;)V"
+    },
+    {
+      "name": "validateAuthentication",
+      "desc": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;Ldev/codex/schubert/nk/protocol/header/MessageKind;Ljava/util/Optional;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/header/ResultCode": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;ILjava/lang/String;Z)V"
+    },
+    {
+      "name": "wireValue",
+      "desc": "()Ljava/lang/String;"
+    },
+    {
+      "name": "usesSuccessProfile",
+      "desc": "()Z"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/header/MessageKind": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;IC)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/header/AuthenticationContext": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "of",
+      "desc": "(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/header/InteractionKind": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;IC)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ]
+}
