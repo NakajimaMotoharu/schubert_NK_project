@@ -34,3 +34,7 @@ Javaの4指標は全100%。shellは引数/placeholder/child exit/case4status/def
 SSC-053/BUG-137/YKT-107追補: PT002に固定od executableだけ一時test fixtureへ差替える非zero faultとJava executable欠落を追加。本番にはtool差替え入力を持たせない。PT003は正規15byteの全16挿入位置へNULを入れ、高bit/余分LF等と合わせ29入力をすべて50とする。raw値をshell変数へ入れず、出力＋JVM status markerを固定odのhexへ変換して4独立vectorと比較する。50件の実tool/sh呼出しをmethod別にtargetへ保存し、正式clean verify後にcollector022が全件数を照合しsanitizeして採取する。Java test method数8と実tool呼出し50を混算しない。
 
 root clean verifyの8 Java testとして実行し、002・evidence/manifest.jsonへ日時/環境/source/branch/command/exit、各IDの期待・実際、sanitized script trace/静的解析結果、unit profile対応、source hashを保存する。collectorは全8完全method名とfail/error/skipped/unknown/重複を検証し、他scopeと同run/source/hashへ束ねる。既存24 DB部品220 PTやbatch29 PTとは重複加算しない。PGPT/IT/ST完了を宣言しない。
+
+## 借用JDBC属性検証の独立通常Port（2026-11-08）
+
+ServiceDatabaseAdmissionPortTest/PT-OPS-DBPORT-001～015、SourceFile二physical（compiler enum switch helperを含む）、仕様3791/input500・実行前502/PG23652（manifest3f18a00ff151a9fb14d9f92a04efb8ea3c71061cd80116cf62c293ee512ec873）。main7aed/normal22084/static22086不変、new Testのcompile23670/static23672は完了、PMDraw6をnull negative4/standalone own thread2の各文脈で非該当・適用0/CS0、規則抑制0。元実DB Test/fixtureは未実行HOLD、当十五もこのsource保存時点ではまだ未実行。結果3792/PG23656で真正実行後に更新し、正式1964-53や実DB接続/起動の資格へ加算しない。BUG2491/YKT2229は新Test cursor式の修正前起票・23662before、修正内容以外token逆同値を23652で確認。
