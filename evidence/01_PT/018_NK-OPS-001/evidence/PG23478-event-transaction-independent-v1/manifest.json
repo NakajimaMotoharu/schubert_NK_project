@@ -1,0 +1,323 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T04:22:21.024520+09:00",
+  "source": "e81baca610f3d9b4337f8b1f477b42ee37cf1f4a",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "tests": 9,
+  "newUniqueTests": 9,
+  "requalifiedSemanticContracts": 0,
+  "newDirectWholeSourceProof": 1,
+  "registeredWholeComponentDelta": null,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 167,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 6,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 41,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 8,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 5,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "wholeTargetCodeCoverage100": true,
+  "branchStatus": "MEASURED_NONZERO_ALL_COVERED",
+  "branchRatio": 1.0,
+  "sourceFilePhysicalClosure": {
+    "dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener": {
+      "name": "dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener",
+      "sourceFile": "TransactedEventListener.java",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/transport/BrokerTopology;Ldev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata$DetectedBy;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;)V",
+          "code": true
+        },
+        {
+          "name": "onMessage",
+          "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;)V",
+          "code": true
+        },
+        {
+          "name": "onMessage",
+          "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;Ljava/lang/Runnable;Ljava/lang/Runnable;)V",
+          "code": true
+        },
+        {
+          "name": "lambda$static$0",
+          "descriptor": "()V",
+          "code": true
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "code": true
+        }
+      ]
+    }
+  },
+  "physical": {
+    "dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener": "bf6e525d8c73063017c10da809f7084bf23d9a1523f4e8d50d82d197a542476c"
+  },
+  "classIds": {
+    "dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener": "020098a80b69541b"
+  },
+  "normalObservedCrc": {
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec": "6fa0c7617e24a83b",
+    "dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata": "abdcc987c1dbc29b",
+    "dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException": "e1de16636a0bec84",
+    "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata$DetectedBy": "d20992b18c0df5fc",
+    "dev/codex/schubert/nk/protocol/codec/ExpectedRoute": "a89a136b1ce302ad",
+    "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions": "a845e84df4618899",
+    "dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage": "76e528c8f38313b4",
+    "dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder": "b0f122cf65204c3f",
+    "dev/codex/schubert/nk/protocol/header/CommonHeader": "635561c9b38fcc05",
+    "dev/codex/schubert/nk/protocol/codec/ProtocolValidator": "43ae50bb70aad62b",
+    "dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException": "14b052329ec91c60",
+    "dev/codex/schubert/nk/protocol/time/JstWireTimestamp": "9745ee633b5db32a",
+    "dev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor": "77e2bf41e8c1025d",
+    "dev/codex/schubert/nk/api/messaging/outbound/DlqSender": "4949ef444abc9015",
+    "dev/codex/schubert/nk/protocol/layout/WireMessage": "bd621d5883054703",
+    "dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener": "020098a80b69541b",
+    "dev/codex/schubert/nk/protocol/layout/LayoutRegistry": "df8b252679de0740",
+    "dev/codex/schubert/nk/protocol/codec/TransportBodyType": "439179502827eea6",
+    "dev/codex/schubert/nk/api/messaging/inbound/CommittedFatalInboundException": "88fef954c58b9759",
+    "dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard": "10d925165591aabd",
+    "dev/codex/schubert/nk/protocol/header/InteractionKind": "59edd232c0a667b6",
+    "dev/codex/schubert/nk/protocol/layout/FixedPayload": "ab7232ec5b03f2f5",
+    "dev/codex/schubert/nk/protocol/codec/HeaderCodec": "d15aef124154a044",
+    "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata": "84e50b9e15298108",
+    "dev/codex/schubert/nk/protocol/transport/BrokerTopology": "7413a7ffdc75d549",
+    "dev/codex/schubert/nk/protocol/header/MessageKind": "9ffaa7b0e8de22aa",
+    "dev/codex/schubert/nk/protocol/layout/LayoutDefinition": "722f79b5130af6e4",
+    "dev/codex/schubert/nk/protocol/codec/TransportMetadata": "73563a1b06736c49",
+    "dev/codex/schubert/nk/protocol/layout/LayoutId": "240169cacdc45dd7",
+    "dev/codex/schubert/nk/protocol/layout/LayoutValidationException": "172946afc5ba5e3f",
+    "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException": "b2a728de55d0d3b9"
+  },
+  "normalProductInitializations": [
+    "dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage",
+    "dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard",
+    "dev/codex/schubert/nk/api/messaging/inbound/CommittedFatalInboundException",
+    "dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata",
+    "dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata$$Lambda+0x0000000074188ad8",
+    "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions",
+    "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions$$Lambda+0x000000007418a178",
+    "dev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor",
+    "dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener",
+    "dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener$$Lambda+0x00000000740d1a90",
+    "dev/codex/schubert/nk/api/messaging/outbound/DlqSender",
+    "dev/codex/schubert/nk/api/messaging/outbound/DlqSender$$Lambda+0x0000000074189cc8",
+    "dev/codex/schubert/nk/api/messaging/outbound/DlqSender$$Lambda+0x0000000074189f20",
+    "dev/codex/schubert/nk/api/messaging/outbound/DlqSender$$Lambda+0x000000007418a5b8",
+    "dev/codex/schubert/nk/api/messaging/outbound/DlqSender$$Lambda+0x000000007418b458",
+    "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata",
+    "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata$DetectedBy",
+    "dev/codex/schubert/nk/protocol/codec/ExpectedRoute",
+    "dev/codex/schubert/nk/protocol/codec/ExpectedRoute$$Lambda+0x0000000074184218",
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec",
+    "dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder",
+    "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+    "dev/codex/schubert/nk/protocol/codec/HeaderCodec$$Lambda+0x0000000074180a18",
+    "dev/codex/schubert/nk/protocol/codec/HeaderCodec$$Lambda+0x0000000074188000",
+    "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException",
+    "dev/codex/schubert/nk/protocol/codec/ProtocolValidator",
+    "dev/codex/schubert/nk/protocol/codec/TransportBodyType",
+    "dev/codex/schubert/nk/protocol/codec/TransportMetadata",
+    "dev/codex/schubert/nk/protocol/codec/TransportMetadata$$Lambda+0x0000000074183408",
+    "dev/codex/schubert/nk/protocol/header/CommonHeader",
+    "dev/codex/schubert/nk/protocol/header/InteractionKind",
+    "dev/codex/schubert/nk/protocol/header/MessageKind",
+    "dev/codex/schubert/nk/protocol/layout/FixedPayload",
+    "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+    "dev/codex/schubert/nk/protocol/layout/LayoutId",
+    "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+    "dev/codex/schubert/nk/protocol/layout/LayoutValidationException",
+    "dev/codex/schubert/nk/protocol/layout/WireMessage",
+    "dev/codex/schubert/nk/protocol/time/JstWireTimestamp",
+    "dev/codex/schubert/nk/protocol/transport/BrokerTopology",
+    "dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException",
+    "dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException"
+  ],
+  "normalDependencyInitCount": 42,
+  "methodClosure": [
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener",
+      "normalCodeMethods": 5,
+      "reportMethods": 5,
+      "standardRecordFilteredMethods": [],
+      "rawProbeCovered": 37,
+      "rawProbeTotal": 37,
+      "rawProbesNotClaimedAllExecuted": true
+    }
+  ],
+  "wholeTargetDelegateCodeQualified": true,
+  "wholeDependencyQualified": false,
+  "manualCoverageExclusions": [],
+  "oldExecCombined": false,
+  "sourceAssertionNegativeChecks": 4,
+  "staticRaw": 11,
+  "staticApplicable": 0,
+  "checkstyle": 0,
+  "staticPreflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23472-event-transaction-preflight-v1/manifest.json",
+    "sha256": "3f7089f00341fa15bfa3a09a90f169e79ff940c2019fb356a06c3006ea1de8fb"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java": "21761ba9106fbc9a7fbc9e2db1bdd0b960e8ab4168175be3855f712fd5f65d61",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener.java": "a037c6586a68f6aa48424e2b9cc020aa37e2f357014299379b1ba01bdbed0cbc",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogListener.java": "7ed75f6a4a7a81a96ae5c95e9c6bba192d7f6fe2aa8437622cf5052ebea67df5",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener.java": "0194df119dfda86475466c13a25cc2dc79af63d423b72e2a55101022d5b53177",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor.java": "b9d8a661e85cceaca6fddc73de6e12faae9f9337e563cd33fe3df77f601c42d1",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata.java": "6d87d23892dd6f43a52ce58149943070375a8b2288e5cd9569ec0991e557057f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java": "c2bfde63f582b8c8d9432c5dd15c4ce73ad49dec7304bdcccf290dfa63cc1248",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/DlqSender.java": "43202ae1c72c9ce38bdfd48e33851ef74384eb67223e368db6ce6b40ccbe28e9",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata.java": "ecb1f660cd83fbc28c7133e38f1ea1a67ef47f7bf46085e220b810047d963efc",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard.java": "68f3ac3e1ddba2e6e3afac97303a04b58b652c3cc357b4afed82d2bf85cd77ed",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage.java": "6c8c70ef3872a2de673eb4a5af6a4eaefc52516403b5f08e9465a762b897cbad",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder.java": "dd3701dd1c9bad9d8e0116ffbec56287afefe3a618a25f954ebb6cc70f4ec9d5",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ProtocolValidator.java": "34b7707426eadec20b44d245c8a6dde5e2b7ad4cd3323625eb30a0a8822a5b70",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportMetadata.java": "198dac5e9cad2046e8e78a4323bfe2e0e2a4a3842044015e8088c1149fcdf646",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ExpectedRoute.java": "e512bf8bb9a289e5ef3d12ecc4c11f4e01feec3a1e0b8716e2db64ffd416baf2",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java": "6c8f5806097d9827a02058f8c1b53f108e2e40f28ef190ead2a7f9140be080f8",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java": "d4ad2f50f40e9cb860786af43875583ac324fd2e6055f0bee1e6804101257d5d",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java": "7aee31bed1ddf707311f1aac8568c8de71907d9b19986261e80f92e5fe86f263",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValue.java": "6f50d333720aaedf58b714be1f84c298297ae80398e8b8f7afb0ec7341d98041",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FixedPayload.java": "e6323fb27286a91eb41481a7458fef14dd897c90a961c35f40d00b19eae59e0f",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/WireMessage.java": "521ec97482cfe772177fd96abb829a441177371986c622584d820e7fb2e641a9",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/CommonHeader.java": "13d093f420eeb2d41883e17e2a0cddb9defe04e8528a511f29bc6ef861518f8d",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java": "3b003356680171b300d7c5d680b05cec255f4267190907c62cfaec3261a920a0",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java": "5424c3f1ad90de3965e298380da683ec72644ecd8fae80117c01001d1d0aa620",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java": "277dc29b07a2531b8c7d8307c0226762ff6b76fa2caef3849007bbcaf6aaffbc",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5",
+    "evidence/01_PT/018_NK-OPS-001/input/436_event_transaction_qualifier.py": "c44baa3973ec9385b38f068de4d9777b38d0c1abdfc5d2662e459b65a8ce08b8",
+    "evidence/01_PT/018_NK-OPS-001/input/437_event_transaction_scope.json": "72ee5aebef9e05b7db47dbbf6e9d2c3293678d582d172664629ca606e68181b0"
+  },
+  "environment": {
+    "file.encoding": "UTF-8",
+    "java.version": "25.0.4",
+    "os.arch": "amd64",
+    "os.name": "Linux",
+    "user.timezone": "Asia/Tokyo"
+  },
+  "caseTimings": [
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest",
+      "name": "txp005ClockProcessorAndCommitFailuresPreserveIdentityAndRollbackPhase()",
+      "seconds": "0.006"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest",
+      "name": "txp006PermanentProtocolFailureCommitsBodyPreservingIsolationAndSignalsTerminal()",
+      "seconds": "0.004"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest",
+      "name": "txp001BothRoutesDecodeLiteralGoldenAndCommitOnlyAfterProcessor()",
+      "seconds": "0.135"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest",
+      "name": "txp002ConstructorRejectsNullDependenciesAndEveryNonEventDestination()",
+      "seconds": "0.002"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest",
+      "name": "txp004TransportFailureRollsBackOnceWithLegacyOrConfirmedCallbackPorts()",
+      "seconds": "0.003"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest",
+      "name": "txp003NullAndNonTransactedInputsHaveNoBodyBusinessOrRollbackEffects()",
+      "seconds": "0.004"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest",
+      "name": "txp007InvalidDeliveryMetadataIsIsolatedBeforeProcessorWithBoundedDiagnostic()",
+      "seconds": "0.017"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest",
+      "name": "txp009UnconfirmedRollbackRetainsUnknownPhaseAndNeverRetriesOrConfirms()",
+      "seconds": "0.004"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest",
+      "name": "txp008FailedIsolationPreservesPrimaryAndConfirmedRollbackWithoutCommitSuccess()",
+      "seconds": "0.003"
+    }
+  ],
+  "files": {
+    "original-classinfo-begin.safe.json": "d2096934cda4afe0316d8798809bbae39cd6bf946fa255ce205de7519ac4c743",
+    "original-coverage.stdout": "7a932428a3da2120080f909e0991747ead44fca6c0157cff22e5fe980afff4a6",
+    "original-execinfo-begin.safe.json": "353844558835bf049aa4aef5ff265902ba3345aebc41b3ef95580596c5962871",
+    "original-coverage-exit.safe.json": "37621ecefe73a0a43c86eb13658300591e927183b09e0589e33b10225fe333cf",
+    "original-classinfo-exit.safe.json": "f17b029ecf3e6125b64313df80c3a595b9329ab1a5dfbbc89483a0a000c380f1",
+    "original-unit-begin.safe.json": "dff200fc14a53008f17ac473c0622a6c1f03910549e57f9c17f0cc803201b469",
+    "original-unit-process.safe.json": "ba6e62c0b835c9c1c6791f5d3fb5ebbf6a7096710cb48699b8da65a3a98849e0",
+    "original-coverage-begin.safe.json": "ec797974791879150d40436446179dbbbfeb4d1b292df8fb00e5eeff82819698",
+    "original-classinfo.stdout": "7121f22719a4e84c371a5bccaee434de0bea0e6c52155bdae85f8b781b68fecb",
+    "original-execinfo-process.safe.json": "e056e468f01b805ac9c358827ebd1df95dfa289609699c1927ec3db50e6f698a",
+    "original-coverage.xml": "10c53e5da3da3fd5ed8352d600d1c2801effd6a8291f84c41a9fa79991bc9351",
+    "original-coverage-process.safe.json": "0e97f699b565c49f64b903df35ad9686dd866231066923846f05dc13393334da",
+    "original-execinfo-exit.safe.json": "843162900168404730f747b523c19dd38a4757b1152c9f9189d63e217b6594ad",
+    "original-execinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "jacoco.exec": "267ae296353a00c03ab653b06890badf2fbbb302d51e76728badec638b3cddbc",
+    "original-execinfo.stdout": "3fac8742d3a3262592e5b25ea2598f9d5d42f0c67096e56b545d3763bfc04296",
+    "original-begin.json": "7820e66886cfb2540a3fa8385dc9cd6748e55f809ed8b8637c336107d82657ef",
+    "original-unit-exit.safe.json": "502b2cd68fb63b6a429910228ccd458389f1688378ea3150c1ef25148cce3a7a",
+    "original-classinfo-process.safe.json": "60bea888379a01691c58e3db09e4cf3988219124cb28e46f106ccfec57c894a8",
+    "original-unit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-manifest.json": "ffa98030d0740840fcfb914b4ab3e3edd3d780f833ce2f83e489d9c276d961bc",
+    "original-classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-coverage.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-class-init.stdout": "7f87a9a5e7deda19afd0bfcc5d4e1702a661b2f1d74f6fd7e07d6fd83ee01358",
+    "original-unit.stdout": "4af41ac6f135a435dc5af3e90192424e56617b1ab3bf0604635a2b5ea15bbefb",
+    "original-TEST-junit-jupiter.xml": "d9d90277bd6ccf178f63b0a22bd3cfcd3d90fd5c24b59b800a3225d63ded9379",
+    "original-TEST-junit-platform-suite.xml": "6fe8f5dd42c70121c2a63ecfb2d736b7d9374eb5c9695297da6317ded241c42b",
+    "original-TEST-junit-vintage.xml": "a4fbb4e84269d76f21a8ace0d6c61fa0aae0cc4711449708816be00c6bbb96ca",
+    "static-pmd.stdout": "716b37670691764b5997cb8955482dd84083465565749a723779d97410cf7df7",
+    "static-checkstyle-exit.safe.json": "43ee8eb97bc2b5213b830245fe70c554d0d2eedc5454b05f7f44100c99eccdbf",
+    "static-pmd.stderr": "2b83bda125e873b8f33a1e2b902918454916d84231ff516fb573d8701a4a3d2f",
+    "static-pmd-exit.safe.json": "1484b8f8d95d9d02a4f533c1085ba965b40f0613d796717f16c08168454879c8",
+    "static-checkstyle-process.safe.json": "2f180065dcb518784c957267dc70ee8a095f36da596a4cfd136821047dd32478",
+    "static-pmd-begin.safe.json": "ea277a5ed4faea9a7cd9b73807df50023d3c4287de9d2ecf2ad985e17f7b11cf",
+    "static-sources.txt": "0ba018a72fe430eaa965576d95edc231e9c2a15b26b0cc585a45652395a26f47",
+    "static-pmd-process.safe.json": "27e67f5ffdd682dc82c5132a32bd5ae75e508343f16e72d8737e3e73bc91d09e",
+    "static-checkstyle.xml": "5bcc7284d6d04ac71e0488d0d92c6a8a02bca8265423ce2d4e32e827c1b27d0f",
+    "static-checkstyle-begin.safe.json": "0979435a3aa7b7cebb6b0807d2aae1c56873caf88de92174ae58d7b66cc4ba57",
+    "static-checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "static-manifest.json": "603c39caa827718f2fbf85b1cd50cea662a3a24db00246b66f044a42d37bd0f6",
+    "static-pmd.xml": "8fdbdb946b82bc640e03433c10f3267e0e556aa5a1f7617d05ea4646d73ddcd0",
+    "static-checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "originalDbTestCompiled": 0,
+  "actualBackendActions": 0,
+  "heldFourInitializations": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/439_event_transaction_independent_post.py",
+    "sha256": "68740626e57ff46796c44f0945d0923803658a95f361138f4c1011562da12dd1"
+  }
+}

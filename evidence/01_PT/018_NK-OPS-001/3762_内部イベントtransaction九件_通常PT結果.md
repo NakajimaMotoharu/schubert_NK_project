@@ -1,0 +1,9 @@
+# 内部イベントtransaction九件・通常PT結果
+
+仕様3761、source e81baca610f3d9b4337f8b1f477b42ee37cf1f4a/Main7aed不変。PG23476の初回九methodすべて成功、真正exit0、failure/error/skipped/aborted0。PG23478独立post0、manifest SHA256 3d9b27a9d8bc04eea13b0cc81622df70070bb05089d0d712f0fd49f50041d455。Test ID PT-JMS-TXP-001..009/原XML/source recipe/caseTimings一意。
+
+TransactedEventListenerの全一SourceFile/全normal physical一/全Code五（constructor/両onMessage/既noop lambda/clinit）、line41/method5/class1/branch6全miss0、四counter100%。JaCoCo標準record filter対象無し、手動除外0、同normal CRC/一exec/一session・旧exec合算0。実Main初期化42は176source保守的identity closure内、Product四held/actual broker/provider/DB/VM/Root/native初期化0。依存の部分実行は全域受入にしない。提供メモリJMSProducer callbackのsendは実配信を意味しない。JDK/SDK queue value/URI/charset/time-zone自身動作はsyscall-zeroではない。
+
+正常commit・全無効constructor destination・null/非transaction bodyReads0・JMS読取例外/Clock/processor/commit失敗・両route不正magicの元body/同message保持・SS十property/persistent2/TTL0/DLQ正規名・transport129のUNAVAILABLE・isolation failure primary/protocol同一性・通常/隔離rollback未確認の例外/通知/一回だけを全独立oracleで確認。新実行前のBUG2487 cardinality誤記11→SS321十名称10、BUG2488反復literal六→一命名は23482before保存/原source保全、修正commit e81baca6、23486compile0/23488PMDraw11全source/span理由付きN-A・適用0/CS0/23472preflight0。post四反例がcount11/transport128/未知property/別DLQの誤oracleを拒否、いずれも追加PT件数ではない。YKT2225/2226の当全target/非該当/再発防止を結合し限定CLOSED、globalF03等は未完。
+
+追加unique9で459→468=Java364+HTML97+CSS7、current正常Code proof1はpending8/名前候補110へ、暫定whole93を加算しない。既InternalEventProcessor18586/DeliveryMetadata14244は参照だけ/新target credit無し。正式1964PT/53scope・新leaf0・工数null、native/実再送/全451/IT-ST/PGPT全完了としない。実command/OS/JDK/source/inputhash/期待source recipe/actualXML/coverage/証跡hashは独立manifestへ。群末freshと477に従い次の独立未充足boundaryへ継続。
