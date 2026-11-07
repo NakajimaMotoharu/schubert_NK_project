@@ -17,12 +17,17 @@ import java.util.concurrent.TimeUnit;
  */
 final class OwnedTestProcess implements AutoCloseable {
   private static final long WAIT_NANOS = TimeUnit.SECONDS.toNanos(5);
+  // At most six failure records along any cleanup branch; reserve two additional slots.
+  private final List<Throwable> cleanupFailures = new ArrayList<>(8);
+  private final IOException terminalUnknown =
+      new IOException("owned test child terminal state unknown");
   private final Process ownedChild;
   private boolean closeAttempted;
   private boolean interrupted;
 
-  OwnedTestProcess(Process process) {
-    this.ownedChild = Objects.requireNonNull(process, "owned test child");
+  OwnedTestProcess(ProcessBuilder builder) throws IOException {
+    // Instance state is ready before the final acquisition; no caller starts an unprepared owner.
+    this.ownedChild = Objects.requireNonNull(builder, "owned test builder").start();
   }
 
   Process process() {
@@ -38,7 +43,7 @@ final class OwnedTestProcess implements AutoCloseable {
     if (closeAttempted) return;
     closeAttempted = true;
     interrupted = Thread.interrupted();
-    var failures = new ArrayList<Throwable>();
+    var failures = cleanupFailures;
     boolean terminated = false;
     try {
       try {
@@ -68,7 +73,7 @@ final class OwnedTestProcess implements AutoCloseable {
         closeStream(ownedChild.getInputStream(), failures);
         closeStream(ownedChild.getErrorStream(), failures);
       } else {
-        failures.add(new IOException("owned test child terminal state unknown"));
+        failures.add(terminalUnknown);
       }
     } finally {
       if (interrupted) Thread.currentThread().interrupt();

@@ -291,8 +291,7 @@ final class LinuxExecDescriptorsTest {
                         System.getProperty("java.class.path"),
                         LinuxExecDescriptorsChild.class.getName(),
                         root.toString())
-                    .redirectErrorStream(true)
-                    .start())) {
+                    .redirectErrorStream(true))) {
       var child = childOwner.process();
       try (var reader = child.inputReader()) {
         try {
@@ -302,15 +301,14 @@ final class LinuxExecDescriptorsTest {
           try (var competitorOwner =
               new OwnedTestProcess(
                   new ProcessBuilder(
-                          "/usr/bin/flock",
-                          "--no-fork", // BUG2468: keep the command in this PID.
-                          "-x",
-                          "-n",
-                          "-E",
-                          "20",
-                          root.resolve("lock").toString(),
-                          "/bin/true")
-                      .start())) {
+                      "/usr/bin/flock",
+                      "--no-fork", // BUG2468: keep the command in this PID.
+                      "-x",
+                      "-n",
+                      "-E",
+                      "20",
+                      root.resolve("lock").toString(),
+                      "/bin/true"))) {
             var competitor = competitorOwner.process();
             assertTrue(competitor.waitFor(5, TimeUnit.SECONDS));
             assertEquals(20, competitor.exitValue());
@@ -323,15 +321,14 @@ final class LinuxExecDescriptorsTest {
           try (var afterOwner =
               new OwnedTestProcess(
                   new ProcessBuilder(
-                          "/usr/bin/flock",
-                          "--no-fork", // BUG2468: keep the command in this PID.
-                          "-x",
-                          "-n",
-                          "-E",
-                          "20",
-                          root.resolve("lock").toString(),
-                          "/bin/true")
-                      .start())) {
+                      "/usr/bin/flock",
+                      "--no-fork", // BUG2468: keep the command in this PID.
+                      "-x",
+                      "-n",
+                      "-E",
+                      "20",
+                      root.resolve("lock").toString(),
+                      "/bin/true"))) {
             var after = afterOwner.process();
             assertTrue(after.waitFor(5, TimeUnit.SECONDS));
             assertEquals(0, after.exitValue());

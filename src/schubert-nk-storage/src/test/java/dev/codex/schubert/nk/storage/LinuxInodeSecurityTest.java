@@ -328,8 +328,7 @@ final class LinuxInodeSecurityTest {
                     "--set=u::r--,u:" + uid + ":r--,g::---,m::r--,o::---",
                     "--",
                     file.toString())
-                .redirectErrorStream(true)
-                .start())) {
+                .redirectErrorStream(true))) {
       Process process = processOwner.process();
       assertTrue(process.waitFor(5, TimeUnit.SECONDS));
       assertEquals(0, process.exitValue());

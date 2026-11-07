@@ -309,15 +309,14 @@ final class LinuxStartupFileLockTest {
     try (var childOwner =
         new OwnedTestProcess(
             new ProcessBuilder(
-                    "/usr/bin/flock",
-                    "--no-fork", // BUG2468: keep the command in this PID.
-                    "-x",
-                    "-n",
-                    "-E",
-                    "20",
-                    file.toString(),
-                    "/bin/true")
-                .start())) {
+                "/usr/bin/flock",
+                "--no-fork", // BUG2468: keep the command in this PID.
+                "-x",
+                "-n",
+                "-E",
+                "20",
+                file.toString(),
+                "/bin/true"))) {
       var child = childOwner.process();
       assertTrue(child.waitFor(5, TimeUnit.SECONDS));
       return child.exitValue();

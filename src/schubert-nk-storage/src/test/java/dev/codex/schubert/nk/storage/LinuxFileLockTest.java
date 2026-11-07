@@ -89,17 +89,16 @@ final class LinuxFileLockTest {
             try (var childOwner =
                 new OwnedTestProcess(
                     new ProcessBuilder(
-                            "/usr/bin/flock",
-                            "--no-fork", // BUG2468: keep the command in this PID.
-                            "-x",
-                            "-n",
-                            "-E",
-                            "20",
-                            root.resolve(FIXTURE_LOCK_E9DEB047).toString(),
-                            "/bin/sh",
-                            "-c",
-                            "printf 'READY\\n'; read -r ignored || :")
-                        .start())) {
+                        "/usr/bin/flock",
+                        "--no-fork", // BUG2468: keep the command in this PID.
+                        "-x",
+                        "-n",
+                        "-E",
+                        "20",
+                        root.resolve(FIXTURE_LOCK_E9DEB047).toString(),
+                        "/bin/sh",
+                        "-c",
+                        "printf 'READY\\n'; read -r ignored || :"))) {
               var child = childOwner.process();
               try (var reader = child.inputReader();
                   var writer = child.getOutputStream()) {
@@ -477,15 +476,14 @@ final class LinuxFileLockTest {
     try (var childOwner =
         new OwnedTestProcess(
             new ProcessBuilder(
-                    "/usr/bin/flock",
-                    "--no-fork", // BUG2468: keep the command in this PID.
-                    "-x",
-                    "-n",
-                    "-E",
-                    "20",
-                    file.toString(),
-                    "/bin/true")
-                .start())) {
+                "/usr/bin/flock",
+                "--no-fork", // BUG2468: keep the command in this PID.
+                "-x",
+                "-n",
+                "-E",
+                "20",
+                file.toString(),
+                "/bin/true"))) {
       var child = childOwner.process();
       assertTrue(child.waitFor(5, TimeUnit.SECONDS));
       return child.exitValue();
