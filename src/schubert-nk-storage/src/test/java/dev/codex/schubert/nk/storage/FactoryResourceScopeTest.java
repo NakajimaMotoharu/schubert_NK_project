@@ -320,8 +320,8 @@ final class FactoryResourceScopeTest {
       var b = new Harness();
       var first = executor.submit(() -> a.run(null, null));
       var second = executor.submit(() -> b.run(null, null));
-      assertEquals("result", first.get());
-      assertEquals("result", second.get());
+      assertEquals("result", first.get(10, TimeUnit.SECONDS));
+      assertEquals("result", second.get(10, TimeUnit.SECONDS));
       a.closed();
       b.closed();
       assertNotSame(a.token, b.token);
@@ -589,8 +589,8 @@ final class FactoryResourceScopeTest {
                       },
                       owned -> closed.incrementAndGet(),
                       assembly));
-      assertSame(a, first.get());
-      assertSame(b, second.get());
+      assertSame(a, first.get(10, TimeUnit.SECONDS));
+      assertSame(b, second.get(10, TimeUnit.SECONDS));
       assertNotSame(a, b);
       assertTrue(a.live);
       assertTrue(b.live);

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
@@ -250,7 +251,7 @@ final class ResourceScopeTest {
         futures.add(
             pool.submit(() -> ResourceScope.use(closed::incrementAndGet, () -> value + 42)));
       }
-      for (int i = 0; i < 64; i++) assertEquals(i + 42, futures.get(i).get());
+      for (int i = 0; i < 64; i++) assertEquals(i + 42, futures.get(i).get(10, TimeUnit.SECONDS));
     }
     assertEquals(64, closed.get());
   }
