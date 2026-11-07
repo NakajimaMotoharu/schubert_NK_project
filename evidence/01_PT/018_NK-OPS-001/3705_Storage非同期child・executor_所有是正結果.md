@@ -1,0 +1,9 @@
+# Storage非同期child・executorの所有是正結果
+
+source72c733bd37daee7a0c4bbd82eab76a6393ff427e/Main7aed。PG22940原二/22942 guard4/22944format-own parse0（元Test compile0）/22946 raw19→17 CS0processing0/22954独立0、manifestc2e7721b8429fe3afe14512f9bf1d585013ecec391c2bffa7a0cd0a78f2158cd。BUG036 workerは同parent monitor下でopenDateを自分のTWR内で閉じてdirectory predicateを返す。callerが同DATE既存childを明示所有、同じchild monitor下で元データ/明示close/negative oracleを保持、内側既executor TWRでexecutor→childの後処理順。独立逆変換で追加所有actionだけを除き元source全tokenへ復元、元fixture/他methodは不変。
+
+StartupAdmissionは既shutdownNowをTWR内finallyに保持しcancel-before-close。実worker/nativeの取消応答、close待ち上限、資源後条件は未測定。JDK closeの終了待ち契約をsource責任にしただけで実動作認定ではない。元Test/native/Root/VM/FS/DB compile-run0、実PTPASS/covnull、静的代替のみ。
+
+current29不変27+変更2、全保持17と既理由25を新hash/座標へ束縛、raw84→82/分類25/是正残0（当review済み分）/未分類57。元全29engine再演0。BUG2460五/五source是正、BUG2461source是正、両方runtimePT_HOLD。BUG2463はretained witness indent差の失敗22952を保持、唯一lease.close/return null fragmentのtoken不変と現/旧textを対応、return値mutationを否定し七guard、有限metadata CLOSED。全般空白やliteral差の容認はしない。
+
+unique438/whole94/正式1964-53/新leaf0/工数null/QA051 final/全HOLD不変。次は残57 DoNotUseThreadsを各JUnit methodとowner/worker完了/cleanup根拠で確認し、規則文脈の非該当と有限待ち/所有違反の有無を別々に記録する。
