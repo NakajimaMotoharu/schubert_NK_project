@@ -695,3 +695,10 @@ NK-WEB-002: WebNativeRuntime（ordinary借用DB/5credential→三codec/readonly 
 | Program/class/method | 関連設計・判断 | Test・証拠 | canonical owner/cost |
 |---|---|---|---|
 | NK-WEB-001 EncryptedSessionRequestCache constructor/save/get/getMatching/remove/private candidate・requireConfigured、SavedGet全Code | FUN001/AUT/UI221226/SS313314351352/PG-D104・1146 | PT-WEB-SAVEDPORT001..009、015082/083、22248/22250、全L62M17C2B22未達0 | WBS-P015-02一群、実sessionDB/fullchainは別未受入 |
+
+
+### 2026-11-07 WebAccess失敗handler全単体
+
+| Program/class/method | 関連設計・判断 | Test・証拠 | canonical owner/cost |
+|---|---|---|---|
+| NK-WEB-001 WebAccessFailureHandler constructor/commence/handle/isNavigation/static matcher | FUN001/AUT/UI221226252/SS313314351352/PG-D112・1147 | PT-WEB-ACCESSPORT001..006、015084/085、22278/22284、全L37M5C1B10未達0 | WBS-P015-02一群、実認証/role/DB/fullchainは別未受入 |

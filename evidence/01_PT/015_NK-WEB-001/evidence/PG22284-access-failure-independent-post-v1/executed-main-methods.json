@@ -1,0 +1,228 @@
+{
+  "dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/System$Logger$Level;)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/logging/WebSecurityAudit$Route": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;ILjava/lang/String;)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/logging/WebSecurityAudit": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/System$Logger;Ljava/time/Clock;Ljava/lang/String;Ljava/lang/String;)V"
+    },
+    {
+      "name": "record",
+      "desc": "(Ljava/util/UUID;Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;Ljava/util/Optional;Ljava/util/Optional;ILdev/codex/schubert/nk/web/logging/WebSecurityAudit$Route;)V"
+    },
+    {
+      "name": "version",
+      "desc": "(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "name": "canonicalAddress",
+      "desc": "(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "name": "lambda$record$1",
+      "desc": "(Lcom/google/gson/JsonObject;Ljava/lang/String;)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SessionPayloadCodec": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;[BLjava/lang/String;[BLjava/security/SecureRandom;)V"
+    },
+    {
+      "name": "validateKey",
+      "desc": "([B)V"
+    },
+    {
+      "name": "close",
+      "desc": "()V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/JdbcWebSessionStore": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/session/EncryptedWebSessionRepository;Ljava/time/Clock;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SessionAttributeCodec": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SessionStoreException": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository": [
+    {
+      "name": "<init>",
+      "desc": "(Ljavax/sql/DataSource;Ldev/codex/schubert/nk/web/session/SessionPayloadCodec;Ljava/time/Clock;Ljava/security/SecureRandom;Ljava/util/function/Supplier;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/EncryptedSessionPayload": [
+    {
+      "name": "validateVersion",
+      "desc": "(Ljava/lang/String;)Ljava/lang/String;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/ClosedWebAuthentication": [
+    {
+      "name": "principal",
+      "desc": "(Lorg/springframework/security/core/Authentication;)Ljava/util/Optional;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/LoginClientAddress": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository;)V"
+    },
+    {
+      "name": "saveRequest",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;)V"
+    },
+    {
+      "name": "requireConfigured",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;)V"
+    },
+    {
+      "name": "candidate",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebRequestContext": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/util/UUID;Ldev/codex/schubert/nk/web/security/LoginClientAddress;)V"
+    },
+    {
+      "name": "requestId",
+      "desc": "()Ljava/util/UUID;"
+    },
+    {
+      "name": "clientAddress",
+      "desc": "()Ldev/codex/schubert/nk/web/security/LoginClientAddress;"
+    },
+    {
+      "name": "require",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Ldev/codex/schubert/nk/web/security/WebRequestContext;"
+    },
+    {
+      "name": "existing",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;"
+    },
+    {
+      "name": "lambda$require$0",
+      "desc": "()Ljava/lang/IllegalStateException;"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/SavedScreenTarget": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "fromGet",
+      "desc": "(Ljava/lang/String;Ljava/lang/String;)Ldev/codex/schubert/nk/web/security/SavedScreenTarget;"
+    },
+    {
+      "name": "location",
+      "desc": "()Ljava/lang/String;"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebAccessFailureHandler": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/security/EncryptedSessionRequestCache;Ldev/codex/schubert/nk/web/logging/WebSecurityAudit;)V"
+    },
+    {
+      "name": "commence",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;Lorg/springframework/security/core/AuthenticationException;)V"
+    },
+    {
+      "name": "isNavigation",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Z"
+    },
+    {
+      "name": "handle",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;Lorg/springframework/security/access/AccessDeniedException;)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/SavedRequestTarget": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "fromGet",
+      "desc": "(Ljava/lang/String;Ljava/lang/String;)Ldev/codex/schubert/nk/web/security/SavedRequestTarget;"
+    },
+    {
+      "name": "location",
+      "desc": "()Ljava/lang/String;"
+    },
+    {
+      "name": "require",
+      "desc": "(Z)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ]
+}
