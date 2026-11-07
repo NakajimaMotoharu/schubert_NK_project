@@ -1,0 +1,385 @@
+Compiled from "ApiStopBudget.java"
+final class dev.codex.schubert.nk.api.bootstrap.ApiStopBudget {
+  private static final long LIMIT_NANOS;
+
+  private final java.lang.Object lock;
+
+  private final java.util.function.LongSupplier nanos;
+
+  private final java.util.concurrent.atomic.AtomicBoolean begun;
+
+  private boolean expired;
+
+  private long began;
+
+  dev.codex.schubert.nk.api.bootstrap.ApiStopBudget(java.util.function.LongSupplier);
+    Code:
+         0: ldc           #104                // Dynamic #0:$jacocoData:Ljava/lang/Object;
+         2: checkcast     #106                // class "[Z"
+         5: astore_3
+         6: aload_0
+         7: invokespecial #1                  // Method java/lang/Object."<init>":()V
+        10: aload_3
+        11: iconst_0
+        12: iconst_1
+        13: bastore
+        14: aload_0
+        15: new           #2                  // class java/lang/Object
+        18: dup
+        19: invokespecial #1                  // Method java/lang/Object."<init>":()V
+        22: putfield      #7                  // Field lock:Ljava/lang/Object;
+        25: aload_3
+        26: iconst_1
+        27: iconst_1
+        28: bastore
+        29: aload_0
+        30: new           #13                 // class java/util/concurrent/atomic/AtomicBoolean
+        33: dup
+        34: invokespecial #15                 // Method java/util/concurrent/atomic/AtomicBoolean."<init>":()V
+        37: putfield      #16                 // Field begun:Ljava/util/concurrent/atomic/AtomicBoolean;
+        40: aload_3
+        41: iconst_2
+        42: iconst_1
+        43: bastore
+        44: aload_0
+        45: aload_1
+        46: ldc           #20                 // String API stop monotonic clock
+        48: invokestatic  #22                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        51: checkcast     #28                 // class java/util/function/LongSupplier
+        54: putfield      #30                 // Field nanos:Ljava/util/function/LongSupplier;
+        57: aload_3
+        58: iconst_3
+        59: iconst_1
+        60: bastore
+        61: return
+      LineNumberTable:
+        line 22: 6
+        line 16: 14
+        line 18: 29
+        line 23: 44
+        line 24: 57
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      62     0  this   Ldev/codex/schubert/nk/api/bootstrap/ApiStopBudget;
+            0      62     1 nanos   Ljava/util/function/LongSupplier;
+
+  void begin();
+    Code:
+         0: ldc           #104                // Dynamic #0:$jacocoData:Ljava/lang/Object;
+         2: checkcast     #106                // class "[Z"
+         5: astore_2
+         6: aload_0
+         7: getfield      #7                  // Field lock:Ljava/lang/Object;
+        10: dup
+        11: astore_3
+        12: monitorenter
+        13: aload_2
+        14: iconst_4
+        15: iconst_1
+        16: bastore
+        17: aload_0
+        18: getfield      #16                 // Field begun:Ljava/util/concurrent/atomic/AtomicBoolean;
+        21: invokevirtual #34                 // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+        24: ifne          34
+        27: aload_2
+        28: iconst_5
+        29: iconst_1
+        30: bastore
+        31: goto          42
+        34: aload_3
+        35: monitorexit
+        36: aload_2
+        37: bipush        6
+        39: iconst_1
+        40: bastore
+        41: return
+        42: aload_0
+        43: getfield      #16                 // Field begun:Ljava/util/concurrent/atomic/AtomicBoolean;
+        46: iconst_1
+        47: invokevirtual #38                 // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+        50: aload_2
+        51: bipush        7
+        53: iconst_1
+        54: bastore
+        55: aload_0
+        56: aload_0
+        57: invokevirtual #42                 // Method time:()J
+        60: putfield      #46                 // Field began:J
+        63: aload_3
+        64: monitorexit
+        65: goto          80
+        68: astore        4
+        70: aload_3
+        71: monitorexit
+        72: aload         4
+        74: aload_2
+        75: bipush        8
+        77: iconst_1
+        78: bastore
+        79: athrow
+        80: aload_2
+        81: bipush        9
+        83: iconst_1
+        84: bastore
+        85: return
+      Exception table:
+         from    to  target type
+            13    36    68   any
+            42    65    68   any
+            68    72    68   any
+      LineNumberTable:
+        line 28: 6
+        line 29: 17
+        line 30: 42
+        line 31: 55
+        line 32: 63
+        line 33: 80
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      86     0  this   Ldev/codex/schubert/nk/api/bootstrap/ApiStopBudget;
+
+  boolean stopping();
+    Code:
+         0: ldc           #104                // Dynamic #0:$jacocoData:Ljava/lang/Object;
+         2: checkcast     #106                // class "[Z"
+         5: astore_2
+         6: aload_0
+         7: getfield      #16                 // Field begun:Ljava/util/concurrent/atomic/AtomicBoolean;
+        10: invokevirtual #34                 // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+        13: aload_2
+        14: bipush        10
+        16: iconst_1
+        17: bastore
+        18: ireturn
+      LineNumberTable:
+        line 37: 6
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      19     0  this   Ldev/codex/schubert/nk/api/bootstrap/ApiStopBudget;
+
+  long remainingNanos();
+    Code:
+         0: ldc           #104                // Dynamic #0:$jacocoData:Ljava/lang/Object;
+         2: checkcast     #106                // class "[Z"
+         5: astore_2
+         6: aload_0
+         7: getfield      #7                  // Field lock:Ljava/lang/Object;
+        10: dup
+        11: astore_3
+        12: monitorenter
+        13: aload_2
+        14: bipush        11
+        16: iconst_1
+        17: bastore
+        18: aload_0
+        19: getfield      #16                 // Field begun:Ljava/util/concurrent/atomic/AtomicBoolean;
+        22: invokevirtual #34                 // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+        25: ifne          43
+        28: new           #50                 // class java/lang/IllegalStateException
+        31: dup
+        32: ldc           #52                 // String API stop budget not begun
+        34: invokespecial #54                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        37: aload_2
+        38: bipush        12
+        40: iconst_1
+        41: bastore
+        42: athrow
+        43: aload_0
+        44: getfield      #57                 // Field expired:Z
+        47: ifne          58
+        50: aload_2
+        51: bipush        13
+        53: iconst_1
+        54: bastore
+        55: goto          67
+        58: lconst_0
+        59: aload_3
+        60: monitorexit
+        61: aload_2
+        62: bipush        14
+        64: iconst_1
+        65: bastore
+        66: lreturn
+        67: aload_0
+        68: invokevirtual #42                 // Method time:()J
+        71: aload_0
+        72: getfield      #46                 // Field began:J
+        75: lsub
+        76: lstore        4
+        78: lload         4
+        80: lconst_0
+        81: lcmp
+        82: ifge          93
+        85: aload_2
+        86: bipush        15
+        88: iconst_1
+        89: bastore
+        90: goto          115
+        93: lload         4
+        95: getstatic     #61                 // Field LIMIT_NANOS:J
+        98: lcmp
+        99: ifge          110
+       102: aload_2
+       103: bipush        16
+       105: iconst_1
+       106: bastore
+       107: goto          129
+       110: aload_2
+       111: bipush        17
+       113: iconst_1
+       114: bastore
+       115: aload_0
+       116: iconst_1
+       117: putfield      #57                 // Field expired:Z
+       120: lconst_0
+       121: aload_3
+       122: monitorexit
+       123: aload_2
+       124: bipush        18
+       126: iconst_1
+       127: bastore
+       128: lreturn
+       129: getstatic     #61                 // Field LIMIT_NANOS:J
+       132: lload         4
+       134: lsub
+       135: aload_3
+       136: monitorexit
+       137: aload_2
+       138: bipush        19
+       140: iconst_1
+       141: bastore
+       142: lreturn
+       143: astore        6
+       145: aload_3
+       146: monitorexit
+       147: aload         6
+       149: aload_2
+       150: bipush        20
+       152: iconst_1
+       153: bastore
+       154: athrow
+      Exception table:
+         from    to  target type
+            13    61   143   any
+            67   123   143   any
+           129   137   143   any
+           143   147   143   any
+      LineNumberTable:
+        line 42: 6
+        line 43: 18
+        line 44: 43
+        line 45: 67
+        line 46: 78
+        line 47: 115
+        line 48: 120
+        line 50: 129
+        line 51: 143
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           78      65     4 elapsed   J
+            0     155     0  this   Ldev/codex/schubert/nk/api/bootstrap/ApiStopBudget;
+
+  private long time();
+    Code:
+         0: ldc           #104                // Dynamic #0:$jacocoData:Ljava/lang/Object;
+         2: checkcast     #106                // class "[Z"
+         5: astore_2
+         6: iconst_0
+         7: istore_3
+         8: aload_2
+         9: bipush        21
+        11: iconst_1
+        12: bastore
+        13: aload_0
+        14: getfield      #30                 // Field nanos:Ljava/util/function/LongSupplier;
+        17: invokeinterface #64,  1           // InterfaceMethod java/util/function/LongSupplier.getAsLong:()J
+        22: lstore        4
+        24: iconst_1
+        25: istore_3
+        26: lload         4
+        28: lstore        6
+        30: iload_3
+        31: ifeq          42
+        34: aload_2
+        35: bipush        22
+        37: iconst_1
+        38: bastore
+        39: goto          52
+        42: aload_0
+        43: iconst_1
+        44: putfield      #57                 // Field expired:Z
+        47: aload_2
+        48: bipush        23
+        50: iconst_1
+        51: bastore
+        52: lload         6
+        54: aload_2
+        55: bipush        24
+        57: iconst_1
+        58: bastore
+        59: lreturn
+        60: astore        8
+        62: iload_3
+        63: ifeq          74
+        66: aload_2
+        67: bipush        25
+        69: iconst_1
+        70: bastore
+        71: goto          84
+        74: aload_0
+        75: iconst_1
+        76: putfield      #57                 // Field expired:Z
+        79: aload_2
+        80: bipush        26
+        82: iconst_1
+        83: bastore
+        84: aload         8
+        86: aload_2
+        87: bipush        27
+        89: iconst_1
+        90: bastore
+        91: athrow
+      Exception table:
+         from    to  target type
+             8    30    60   any
+            60    62    60   any
+      LineNumberTable:
+        line 55: 6
+        line 57: 13
+        line 58: 24
+        line 59: 26
+        line 63: 30
+        line 59: 52
+        line 63: 60
+        line 64: 84
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           24      36     4 value   J
+            0      92     0  this   Ldev/codex/schubert/nk/api/bootstrap/ApiStopBudget;
+           13      79     3 returned   Z
+
+  static {};
+    Code:
+         0: ldc           #104                // Dynamic #0:$jacocoData:Ljava/lang/Object;
+         2: checkcast     #106                // class "[Z"
+         5: astore_1
+         6: getstatic     #67                 // Field java/util/concurrent/TimeUnit.SECONDS:Ljava/util/concurrent/TimeUnit;
+         9: ldc2_w        #73                 // long 60l
+        12: invokevirtual #75                 // Method java/util/concurrent/TimeUnit.toNanos:(J)J
+        15: putstatic     #61                 // Field LIMIT_NANOS:J
+        18: aload_1
+        19: bipush        28
+        21: iconst_1
+        22: bastore
+        23: return
+      LineNumberTable:
+        line 15: 6
+
+  private static boolean[] $jacocoInit(java.lang.invoke.MethodHandles$Lookup, java.lang.String, java.lang.Class);
+    Code:
+         0: ldc2_w        #107                // long -6142824798862378947l
+         3: ldc           #109                // String dev/codex/schubert/nk/api/bootstrap/ApiStopBudget
+         5: bipush        29
+         7: invokestatic  #115                // Method org/jacoco/agent/rt/internal_bac9136/Offline.getProbes:(JLjava/lang/String;I)[Z
+        10: areturn
+}

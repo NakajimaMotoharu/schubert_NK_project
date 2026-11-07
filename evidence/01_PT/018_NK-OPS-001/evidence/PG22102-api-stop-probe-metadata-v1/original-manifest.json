@@ -1,0 +1,71 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T09:57:06.438009+09:00",
+  "observerSource": "5d831afeda547eb849b60a540c59f6d9d71c96a5",
+  "unitSource": "db91036a8df7b18c605beb6a03eb4f380b03182f",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "originalUnitManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22090-api-stop-state-twenty-unit-v1/manifest.json",
+    "sha256": "95faef01085b82bf04edbb5ed8e34df304c98684e61c672b00b9245d6cc215ee"
+  },
+  "execSha256": "73d3738aa336304a221d2807a048ea1850e95b6b13c9d7e53245ee35b5611779",
+  "session": "PG22090-API-STOP-ATOMIC20",
+  "probeRecords": [
+    {
+      "crc": "aac04d643a58f83d",
+      "name": "dev/codex/schubert/nk/api/bootstrap/ApiStopBudget",
+      "probeCount": 29,
+      "unhit": [
+        23,
+        25
+      ]
+    }
+  ],
+  "originalClassSha256": "ac8cd8450bf1b6ccfc4a7f92d9ea3dc3cb433313e5869f30eeb121fb0d2bb480",
+  "instrumentedClassSha256": "131ee4b6243f2053d16ea0e059b7a3bbfd49e6752c7f3b2ff59b0b058e60fd0d",
+  "stages": {
+    "instrument": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T00:57:06.056662+00:00",
+      "endUTC": "2026-11-07T00:57:06.221355+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22102-api-stop-probe-metadata-v1/instrument-init.stdout",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "instrument",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22090-api-stop-state-twenty-unit-v1/component",
+        "--dest",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22102-api-stop-probe-metadata-v1/instrumented"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "3e70363611dbc407294c39afae47dc05c7c60072014c1fb80011980a1074841c",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "javap": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T00:57:06.221721+00:00",
+      "endUTC": "2026-11-07T00:57:06.436624+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-J-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22102-api-stop-probe-metadata-v1/javap-init.stdout",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22102-api-stop-probe-metadata-v1/instrumented",
+        "-p",
+        "-c",
+        "-l",
+        "dev.codex.schubert.nk.api.bootstrap.ApiStopBudget"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "b86daac5e6d97e37f38a744738f8e9870a778f60efe2b483fbbbfe895ace039a",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "productInitialisations": 0,
+  "productTestsExecuted": 0,
+  "oldExecUnion": false,
+  "manualCoverageExclusions": [],
+  "interpretation": "OFFLINE_PROBE_LOCATIONS_REQUIRE_SOURCE_REVIEW_NOT_NEW_COVERAGE"
+}
