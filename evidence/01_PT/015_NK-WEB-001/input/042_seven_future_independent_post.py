@@ -11,6 +11,8 @@ def counters(t):return {x.get('type'):dict(covered=int(x.get('covered')),missed=
 def initnames(p):return {re.sub(r'\$\$Lambda\+0x[0-9a-f]+','$$Lambda',s) for s in re.findall(r"Initializing '([^']+)",Path(p).read_text()) if s.startswith('dev/codex/schubert/nk/') and 'Test' not in s and 'Fixture' not in s}
 def projection(d):return {k:v for k,v in d.items() if not k.endswith('/041_seven_security_port_future_qualifier.py')}
 def checkdeps(actual,expected):need(actual==expected,'exact SDK dependency union');need(all(sha(p)==h for p,h in actual.items()),'SDK byte hashes')
+def java_tokens(s):
+ return re.findall(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'|//[^\n]*|/\*[\s\S]*?\*/|[A-Za-z_$][A-Za-z0-9_$]*|\d+(?:\.\d+)?|>>>=|>>=|<<=|>>>|>>|<<|==|!=|<=|>=|&&|\|\||\+\+|--|->|::|\S',s)
 def main():
  need(not OUT.exists(),'one post only');cfg=load(R/'evidence/01_PT/015_NK-WEB-001/input/040_seven_security_port_future_requalification.json');m=load(U/'manifest.json');b=load(U/'begin.json');need(m['begin']==b and (b['source'],b['normalSource'])==(SOURCE,CORE),'source identity');need((m['actualExit'],m['tests'],m['failures'],m['errors'],m['skipped'])==(0,58,0,0,0),'actual whole terminal')
  for p,h in b['inputHashes'].items():need(sha(R/p)==h==hashlib.sha256(subprocess.check_output(['git','show',SOURCE+':'+p],cwd=R)).hexdigest(),'frozen input')
@@ -57,13 +59,13 @@ def main():
  for row in cfg['testClasses']:
   p=original/Path(row['path']).name;need(sha(p)==row['originalSha256'],'preserved original Test');s=p.read_text()
   for patch in row['patches']:need(s.count(patch['before'])>=1,'original patch site');s=s.replace(patch['before'],patch['after'])
-  need(re.findall(r'\S+',s)==re.findall(r'\S+',(R/row['path']).read_text()),'only eight finite wait argument additions')
+  need(java_tokens(s)==java_tokens((R/row['path']).read_text()),'only eight finite wait argument additions')
  stat=R/'evidence/01_PT/015_NK-WEB-001/evidence/PG22518-seven-security-port-static-applicability-v1/manifest.json';st=load(stat);need(st['pmdRaw']==39 and all(st[k]==0 for k in ['applicableViolations','checkstyle','spotbugs','processingErrors']),'static exact scope zero applicable');need(all(x['classification']=='NOT_APPLICABLE' and x['reason'] for x in st['individualClassifications']),'all39 individual reasons');need(projection(st['inputHashes'])==projection(b['inputHashes']),'same static Test inputs')
  negative=0
  for changed in [dict(list(expecteddeps.items())[1:]),dict(expecteddeps,**{next(iter(expecteddeps)):'0'*64})]:
   try:checkdeps(changed,expecteddeps)
   except ValueError:negative+=1
- need(negative==2,'dependency drop/hash negative guards')
+ need(negative==2,'dependency drop/hash negative guards');need(java_tokens('assertEquals( x, y);')==java_tokens('assertEquals(\n x,\n y);'),'format-only delimiter change');need(java_tokens('foo bar')!=java_tokens('foobar') and java_tokens('\"a b\"')!=java_tokens('\"ab\"'),'identifier and literal content preserved')
  OUT.mkdir();files={}
  for base,prefix in [(U,'original-'),(META,'passive-')]:
   for p in [*base.iterdir(),*sorted((base/'xml').glob('TEST-*.xml'))]:
