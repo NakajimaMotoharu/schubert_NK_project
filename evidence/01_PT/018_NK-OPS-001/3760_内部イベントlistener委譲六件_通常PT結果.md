@@ -1,0 +1,11 @@
+# 内部イベントlistener委譲六件・通常PT結果
+
+仕様3759、source57be3858e2dac6fce41bdb846d1d26a9a5671a80、Production Main7aed8eac不変。PG23436初回一runの真正exit0、六PTすべて成功、failure/error/skipped/abort0。PG23438独立post exit0、manifest SHA-256 d6e9cc5f7eebbc10c7db435e3b8a08f2eaec2159a56785b6a02e6cfba17d0f01。Test ID001..006は原XML/caseTimings/source recipeと一意対応。
+
+QuestionWorkListener/WebLogListenerの全SourceFile二/physical二/全Code六method、LINE14/METHOD6/CLASS2 miss0で100%、branch分母0は自然ゼロ・該当なし・比率null（branch100の実測ではない）。一exec/sessionとnormal classSHA/CRC一致、除外0・旧exec合算0・実Main初期化36は175sourceの保守的closure内、SDK queue value/URI文字列処理のみ。JMS broker/provider/consumer/server/実DB/VM/Root/nativeFFM/四held実初期化0。共通delegate/DLQ/codec/業務再送の全分岐や実経路を今回の2ファイルから推定しない。005本文未読はsource順序根拠で独立read counter未測定。
+
+静的原23430raw9の実適用phase literal三はBUG2486/YKT2224を修正前起票、23442before保存後六phase命名・全他literal/token逆一致、23446compile0/23448raw6全個別非該当・適用0/CS0/23432 preflight0。CloseResource4は提供メモリProxy・非所有callbackのclose禁止、UseProperClassLoader2はexact interface定義loader、理由/source/line/span hashをpreflightに束縛。設定抑制0。修正commit57be3858、六PT/postで限定CLOSED、globalF03/YKT2218へ閉鎖拡大0。
+
+準備draftは空oracle参照writer前拒否、preflight assertion formatting二/逆token比較一を23456/58/60、post依存SourceFileをtargetへ誤混入一を23462へbefore保存。source/期待値は変更せずselector精密化のみ、実六PT再実行0。SDK passive23450/52/54は初期化0で七型の値constructor/親/URI '?'走査を確認。これらmetadata反例/準備修正をPT実行数へ加算しない。
+
+追加unique六で453→459=Java355+HTML97+CSS7、二current正常Code proofはpending名簿へ、既暫定whole93は加算保留/候補109/pending7、正式1964PT/53scopeと新leaf0/工数nullを維持。current run全451/実再配信/DLQ/IT-ST/PGPT全完了ではない。独立manifestには日時/command/JDK25.0.4/OS/source/pin/input/期待recipe/実XML/四counter/証跡file hashを保存。次群は477と群末freshに従い継続。

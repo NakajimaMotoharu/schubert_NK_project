@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-08T04:08:43.746">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventListenerForwardingPortTest.java">
+<violation beginline="101" endline="101" begincolumn="11" endcolumn="18" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventListenerForwardingPortTest" method="port003BothObserverEntriesCommitEachCallerDeliveryWithoutRollbackNotifications" variable="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this JMSContext object are closed after use
+</violation>
+<violation beginline="127" endline="127" begincolumn="11" endcolumn="18" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventListenerForwardingPortTest" method="port004NullContractsRejectBeforeAnyMessageOrTransactionOperation" variable="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this JMSContext object are closed after use
+</violation>
+<violation beginline="155" endline="155" begincolumn="11" endcolumn="18" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventListenerForwardingPortTest" method="port005NonTransactedContextsRejectBeforeBodyBusinessOrRollback" variable="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this JMSContext object are closed after use
+</violation>
+<violation beginline="180" endline="180" begincolumn="11" endcolumn="18" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventListenerForwardingPortTest" method="port006BusinessFailurePreservesIdentityAndConfirmsRollbackInOrder" variable="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this JMSContext object are closed after use
+</violation>
+<violation beginline="275" endline="275" begincolumn="13" endcolumn="48" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventListenerForwardingPortTest" method="message" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="320" endline="320" begincolumn="15" endcolumn="48" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventListenerForwardingPortTest.Port" method="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+</pmd>

@@ -48,7 +48,7 @@ for p in (U/'xml').glob('TEST-*.xml'):
  x=E.parse(p).getroot();assert not any(x.findall('.//'+tag) for tag in ['failure','error','skipped']);cases += [(c.get('classname'),c.get('name')) for c in x.findall('testcase')];timings += [dict(className=c.get('classname'),name=c.get('name'),seconds=c.get('time')) for c in x.findall('testcase')];env.update({c.get('name'):c.get('value') for c in x.findall('./properties/property') if c.get('name') in ['os.name','os.arch','java.version','file.encoding','user.timezone']})
 assert len(cases)==6 and set(cases)==expected
 for s in ['6 tests found','6 tests started','6 tests successful','0 tests aborted','0 tests skipped','0 containers aborted']:assert s in (U/'unit.stdout').read_text()
-normal=RUN/'pg22084-api-stop-state-six-main-compile-v1/manifest.safe.json';assert sha(normal)==b['normalManifestSha256'];nm=load(normal);normalBytes={};closure={};dependencyPhysical={};preflight=B/'evidence/PG23432-event-listener-preflight-v1/manifest.json';pf=load(preflight);names={Path(n).name for n in cfg['mainPaths']};graph={Path(n).name for n in pf['dependencySourceHashes']}
+normal=RUN/'pg22084-api-stop-state-six-main-compile-v1/manifest.safe.json';assert sha(normal)==b['normalManifestSha256'];nm=load(normal);normalBytes={};closure={};dependencyPhysical={};preflight=B/'evidence/PG23432-event-listener-preflight-v1/manifest.json';pf=load(preflight);names={Path(n).name for n in cfg['mainPaths'][:2]};graph={Path(n).name for n in pf['dependencySourceHashes']}
 for module in ['api','protocol']:
  jar=Path(nm['jars'][module]['path']);assert sha(jar)==nm['jars'][module]['sha256']
  with zipfile.ZipFile(jar) as z:

@@ -1,0 +1,315 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T04:12:22.151003+09:00",
+  "source": "57be3858e2dac6fce41bdb846d1d26a9a5671a80",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "tests": 6,
+  "newUniqueTests": 6,
+  "requalifiedSemanticContracts": 0,
+  "newDirectWholeSourceProof": 2,
+  "registeredWholeComponentDelta": null,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 52,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 14,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 6,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 6,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 2,
+      "missed": 0
+    }
+  },
+  "wholeTargetCodeCoverage100": true,
+  "branchStatus": "NATURAL_ZERO_NOT_APPLICABLE_RATIO_NULL",
+  "branchRatio": null,
+  "sourceFilePhysicalClosure": {
+    "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener": {
+      "name": "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener",
+      "sourceFile": "WebLogListener.java",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;)V",
+          "code": true
+        },
+        {
+          "name": "onMessage",
+          "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;)V",
+          "code": true
+        },
+        {
+          "name": "onMessage",
+          "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;Ljava/lang/Runnable;Ljava/lang/Runnable;)V",
+          "code": true
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener": {
+      "name": "dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener",
+      "sourceFile": "QuestionWorkListener.java",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;)V",
+          "code": true
+        },
+        {
+          "name": "onMessage",
+          "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;)V",
+          "code": true
+        },
+        {
+          "name": "onMessage",
+          "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;Ljava/lang/Runnable;Ljava/lang/Runnable;)V",
+          "code": true
+        }
+      ]
+    }
+  },
+  "physical": {
+    "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener": "4bb579daefa2921c7e0763b2333a5a61219f32406976ac154ce8a3734b5d0ad6",
+    "dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener": "e2e93b6c6a2029b3921d3c07aa6b2aace98559f367e2fdb48ca480152dc1ce4d"
+  },
+  "classIds": {
+    "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener": "7aec3464c1c5761f",
+    "dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener": "2921b6c7a0659831"
+  },
+  "normalObservedCrc": {
+    "dev/codex/schubert/nk/protocol/layout/LayoutId": "240169cacdc45dd7",
+    "dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage": "76e528c8f38313b4",
+    "dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata": "abdcc987c1dbc29b",
+    "dev/codex/schubert/nk/protocol/codec/ProtocolValidator": "43ae50bb70aad62b",
+    "dev/codex/schubert/nk/protocol/layout/FixedPayload": "ab7232ec5b03f2f5",
+    "dev/codex/schubert/nk/protocol/codec/TransportMetadata": "73563a1b06736c49",
+    "dev/codex/schubert/nk/protocol/codec/TransportBodyType": "439179502827eea6",
+    "dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener": "2921b6c7a0659831",
+    "dev/codex/schubert/nk/protocol/codec/ExpectedRoute": "a89a136b1ce302ad",
+    "dev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor": "77e2bf41e8c1025d",
+    "dev/codex/schubert/nk/protocol/layout/WireMessage": "bd621d5883054703",
+    "dev/codex/schubert/nk/protocol/header/MessageKind": "9ffaa7b0e8de22aa",
+    "dev/codex/schubert/nk/protocol/layout/LayoutDefinition": "722f79b5130af6e4",
+    "dev/codex/schubert/nk/protocol/transport/BrokerTopology": "7413a7ffdc75d549",
+    "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata$DetectedBy": "d20992b18c0df5fc",
+    "dev/codex/schubert/nk/protocol/header/InteractionKind": "59edd232c0a667b6",
+    "dev/codex/schubert/nk/protocol/layout/LayoutRegistry": "df8b252679de0740",
+    "dev/codex/schubert/nk/protocol/header/CommonHeader": "635561c9b38fcc05",
+    "dev/codex/schubert/nk/protocol/codec/HeaderCodec": "d15aef124154a044",
+    "dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder": "b0f122cf65204c3f",
+    "dev/codex/schubert/nk/api/messaging/outbound/DlqSender": "4949ef444abc9015",
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec": "6fa0c7617e24a83b",
+    "dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener": "020098a80b69541b",
+    "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions": "a845e84df4618899",
+    "dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard": "10d925165591aabd",
+    "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener": "7aec3464c1c5761f",
+    "dev/codex/schubert/nk/protocol/time/JstWireTimestamp": "9745ee633b5db32a"
+  },
+  "normalProductInitializations": [
+    "dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage",
+    "dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard",
+    "dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata",
+    "dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata$$Lambda+0x000000001218dad8",
+    "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions",
+    "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions$$Lambda+0x0000000012195670",
+    "dev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor",
+    "dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener",
+    "dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener",
+    "dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener$$Lambda+0x0000000012184db0",
+    "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener",
+    "dev/codex/schubert/nk/api/messaging/outbound/DlqSender",
+    "dev/codex/schubert/nk/api/messaging/outbound/DlqSender$$Lambda+0x00000000121951c0",
+    "dev/codex/schubert/nk/api/messaging/outbound/DlqSender$$Lambda+0x0000000012195418",
+    "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata$DetectedBy",
+    "dev/codex/schubert/nk/protocol/codec/ExpectedRoute",
+    "dev/codex/schubert/nk/protocol/codec/ExpectedRoute$$Lambda+0x0000000012187b10",
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec",
+    "dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder",
+    "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+    "dev/codex/schubert/nk/protocol/codec/HeaderCodec$$Lambda+0x000000001218d000",
+    "dev/codex/schubert/nk/protocol/codec/HeaderCodec$$Lambda+0x000000001218fa18",
+    "dev/codex/schubert/nk/protocol/codec/ProtocolValidator",
+    "dev/codex/schubert/nk/protocol/codec/TransportBodyType",
+    "dev/codex/schubert/nk/protocol/codec/TransportMetadata",
+    "dev/codex/schubert/nk/protocol/codec/TransportMetadata$$Lambda+0x000000001218ed08",
+    "dev/codex/schubert/nk/protocol/header/CommonHeader",
+    "dev/codex/schubert/nk/protocol/header/InteractionKind",
+    "dev/codex/schubert/nk/protocol/header/MessageKind",
+    "dev/codex/schubert/nk/protocol/layout/FixedPayload",
+    "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+    "dev/codex/schubert/nk/protocol/layout/LayoutId",
+    "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+    "dev/codex/schubert/nk/protocol/layout/WireMessage",
+    "dev/codex/schubert/nk/protocol/time/JstWireTimestamp",
+    "dev/codex/schubert/nk/protocol/transport/BrokerTopology"
+  ],
+  "normalDependencyInitCount": 36,
+  "methodClosure": [
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener",
+      "normalCodeMethods": 3,
+      "reportMethods": 3,
+      "standardRecordFilteredMethods": [],
+      "rawProbeCovered": 4,
+      "rawProbeTotal": 4,
+      "rawProbesNotClaimedAllExecuted": true
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener",
+      "normalCodeMethods": 3,
+      "reportMethods": 3,
+      "standardRecordFilteredMethods": [],
+      "rawProbeCovered": 4,
+      "rawProbeTotal": 4,
+      "rawProbesNotClaimedAllExecuted": true
+    }
+  ],
+  "wholeDelegateQualified": false,
+  "manualCoverageExclusions": [],
+  "oldExecCombined": false,
+  "sourceAssertionNegativeChecks": 4,
+  "staticRaw": 6,
+  "staticApplicable": 0,
+  "checkstyle": 0,
+  "staticPreflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23432-event-listener-preflight-v1/manifest.json",
+    "sha256": "03ca35421d752ce327575c39924d3058f31259bbfa747a9e1e8594cd88502972"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventListenerForwardingPortTest.java": "aaa98911087ca34b32c3079c61807a04766caddfb9e95e06b0b2655f258692f7",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener.java": "a037c6586a68f6aa48424e2b9cc020aa37e2f357014299379b1ba01bdbed0cbc",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogListener.java": "7ed75f6a4a7a81a96ae5c95e9c6bba192d7f6fe2aa8437622cf5052ebea67df5",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener.java": "0194df119dfda86475466c13a25cc2dc79af63d423b72e2a55101022d5b53177",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor.java": "b9d8a661e85cceaca6fddc73de6e12faae9f9337e563cd33fe3df77f601c42d1",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata.java": "6d87d23892dd6f43a52ce58149943070375a8b2288e5cd9569ec0991e557057f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java": "c2bfde63f582b8c8d9432c5dd15c4ce73ad49dec7304bdcccf290dfa63cc1248",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/DlqSender.java": "43202ae1c72c9ce38bdfd48e33851ef74384eb67223e368db6ce6b40ccbe28e9",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata.java": "ecb1f660cd83fbc28c7133e38f1ea1a67ef47f7bf46085e220b810047d963efc",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard.java": "68f3ac3e1ddba2e6e3afac97303a04b58b652c3cc357b4afed82d2bf85cd77ed",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage.java": "6c8c70ef3872a2de673eb4a5af6a4eaefc52516403b5f08e9465a762b897cbad",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder.java": "dd3701dd1c9bad9d8e0116ffbec56287afefe3a618a25f954ebb6cc70f4ec9d5",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ProtocolValidator.java": "34b7707426eadec20b44d245c8a6dde5e2b7ad4cd3323625eb30a0a8822a5b70",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportMetadata.java": "198dac5e9cad2046e8e78a4323bfe2e0e2a4a3842044015e8088c1149fcdf646",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ExpectedRoute.java": "e512bf8bb9a289e5ef3d12ecc4c11f4e01feec3a1e0b8716e2db64ffd416baf2",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java": "6c8f5806097d9827a02058f8c1b53f108e2e40f28ef190ead2a7f9140be080f8",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java": "d4ad2f50f40e9cb860786af43875583ac324fd2e6055f0bee1e6804101257d5d",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java": "7aee31bed1ddf707311f1aac8568c8de71907d9b19986261e80f92e5fe86f263",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValue.java": "6f50d333720aaedf58b714be1f84c298297ae80398e8b8f7afb0ec7341d98041",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FixedPayload.java": "e6323fb27286a91eb41481a7458fef14dd897c90a961c35f40d00b19eae59e0f",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/WireMessage.java": "521ec97482cfe772177fd96abb829a441177371986c622584d820e7fb2e641a9",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/CommonHeader.java": "13d093f420eeb2d41883e17e2a0cddb9defe04e8528a511f29bc6ef861518f8d",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java": "3b003356680171b300d7c5d680b05cec255f4267190907c62cfaec3261a920a0",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java": "5424c3f1ad90de3965e298380da683ec72644ecd8fae80117c01001d1d0aa620",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java": "277dc29b07a2531b8c7d8307c0226762ff6b76fa2caef3849007bbcaf6aaffbc",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5",
+    "evidence/01_PT/018_NK-OPS-001/input/430_event_listener_qualifier.py": "fd9272b486ed58365b811264d030f338b5b57a78397bb89686184289f61d622b",
+    "evidence/01_PT/018_NK-OPS-001/input/431_event_listener_scope.json": "6964b75bbe6d21ac9c01da0a820340324be8a1b4c557adfe95696d21587f6b93"
+  },
+  "environment": {
+    "file.encoding": "UTF-8",
+    "java.version": "25.0.4",
+    "os.arch": "amd64",
+    "os.name": "Linux",
+    "user.timezone": "Asia/Tokyo"
+  },
+  "caseTimings": [
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest",
+      "name": "port005NonTransactedContextsRejectBeforeBodyBusinessOrRollback()",
+      "seconds": "0.067"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest",
+      "name": "port003BothObserverEntriesCommitEachCallerDeliveryWithoutRollbackNotifications()",
+      "seconds": "0.026"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest",
+      "name": "port006BusinessFailurePreservesIdentityAndConfirmsRollbackInOrder()",
+      "seconds": "0.007"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest",
+      "name": "port004NullContractsRejectBeforeAnyMessageOrTransactionOperation()",
+      "seconds": "0.003"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest",
+      "name": "port002WebLogPublicEntryForwardsLegacyProcessorAndExactGoldenData()",
+      "seconds": "0.001"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest",
+      "name": "port001QuestionPublicEntryForwardsDeliveryAndExactGoldenData()",
+      "seconds": "0.002"
+    }
+  ],
+  "files": {
+    "original-classinfo-begin.safe.json": "0d5f7ffe66e00d99459ba5e8012c40c73305e6a578e12ae162011fc30357dca4",
+    "original-coverage.stdout": "a4a3917fc6bcdc238d9d701f2bfffd6fe0d02b9ad9678e3b4a2523f58058c19c",
+    "original-execinfo-begin.safe.json": "2b93bbd39bcbcc8ed13696401328f75b78dec7c503cda90c85d83df65455af00",
+    "original-coverage-exit.safe.json": "cd12836d6df93d2ae3cb3ac2690d0f879c1f7f0e3cb45328c16832ac0797d967",
+    "original-classinfo-exit.safe.json": "66ca14212d57d172d17b2a3cccd97a04d1eabb853465a435a69ef85838386939",
+    "original-unit-begin.safe.json": "80261d51511983d6458a8bc4d2d69c3e5f2b8e83dd47153f09f48b63d5c2d7fc",
+    "original-unit-process.safe.json": "c8feaa9da61d765f6652d2d0674dc7304b9bf722749c4fcca1ddb03f476280d1",
+    "original-coverage-begin.safe.json": "5864088c87b8f207f7c0ea055c50eab474a8dc5d113a68e5da37daa7f5f092fb",
+    "original-classinfo.stdout": "91705f65d98aae284ddd93d72eb72a11731abbdb8355d86c370c9d0985d166cf",
+    "original-execinfo-process.safe.json": "af2ba32d96a951f31a21060d5c0f9081d597dd36bd276343cfc6eed4730206e5",
+    "original-coverage.xml": "84938dfa34051a809c3136544ebbcefd318659c7b2fa6c01226c585bd1f2f9cd",
+    "original-coverage-process.safe.json": "58ba11670d02badaf1bf100c535417f0c1675a2808dc335bba72819a678bfee7",
+    "original-execinfo-exit.safe.json": "88ddb34fb102a194f0d372ff8b13a7f60951ac1aebada4179a6fc7a190abeca3",
+    "original-execinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "jacoco.exec": "b85b02aa46ad59676546728abb86c59d0ad70f53260fdc2096e96e787b0d6d47",
+    "original-execinfo.stdout": "59ec44e029aa76b85d491347b209cff0e0a937845125ccebb64355c8ad0655a0",
+    "original-begin.json": "82032c637ab3baaf5558fc651a6a6bd37d59164b4420b535ec59cb2ca600b963",
+    "original-unit-exit.safe.json": "c6efc27ed0251a33027320a9de45ea51437970932606cab15d41d2bb0d295e1b",
+    "original-classinfo-process.safe.json": "a83bacd18b867b28e01ce088226952b9029a65b8969b69c518bf2cffcc7768cc",
+    "original-unit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-manifest.json": "8cf459cbd36c80e3eef542adbbb0416fdb00fc253587adcde7a0e72b131f63eb",
+    "original-classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-coverage.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-class-init.stdout": "25e5fa98ad878480bd3bba4875ed07a3c1deac504eb32f12f4231439a2b5b6b1",
+    "original-unit.stdout": "ee6e415ad179ea75238593ff1bad49d1dde490b94adf8c07599b49ff2435b38f",
+    "original-TEST-junit-jupiter.xml": "0900ff0060ebc9c4feac28c468d7bdaebcdf42b0209a2b98014893bed656f951",
+    "original-TEST-junit-platform-suite.xml": "322feefdb3c17ffcfafd5b5c88899b8e7b6ecaaffcb714885c8bad7c93c65361",
+    "original-TEST-junit-vintage.xml": "8aefd56057d0075f8fab1e8e3d0344a8a404b3aa216ab4827d4421eda40d571f",
+    "static-pmd.stdout": "39a17648bd36b1726a766d797da1e1aecfad5baba19530d71b9c429bc0f63f7b",
+    "static-checkstyle-exit.safe.json": "689632f7fe464879ec36fb97e807360f14c3254fcea561153b7f9ee637d59ae4",
+    "static-pmd.stderr": "72fbc0455ef62c7c37826830de091633f3283e3b529d60b7adfc474f5551e8fe",
+    "static-pmd-exit.safe.json": "6e5689a0e03bbb2e31dc86f55aba16f752257f0b581f1d569843ed1aa1184deb",
+    "static-checkstyle-process.safe.json": "63d46e0d3613a9e2d4efd8b6666eae0bb7ca42c15ed4848d89fac4a54522517d",
+    "static-pmd-begin.safe.json": "3ea81ea6bffc260db33635e10ce65805f3d361f1a43f2343ff6097cb42506f27",
+    "static-sources.txt": "2c4cfdc986d717388649e504c94aca168b16b390fbb43c728042800adb47b4d8",
+    "static-pmd-process.safe.json": "70c63a80be2578a6c681e28b2232c2709f7a2b08cbbc0d369b1eee143564195b",
+    "static-checkstyle.xml": "a9e55cf65b325d4836b72a28bc1b591928e4df54189a5f0e05f5c084aac948ed",
+    "static-checkstyle-begin.safe.json": "b4fb2cb983a2fa909169e5865f330b438d777ace30088f9ea8a9444490588939",
+    "static-checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "static-manifest.json": "12eaabc8a9e0d531fd54de2e5e2f741865856cfa5a1806f53089f3da3700203e",
+    "static-pmd.xml": "e83a06fb0dcb2a82da8fef287d5a5e842f03c04f737aff2db1153775106d0d2b",
+    "static-checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "originalDbTestCompiled": 0,
+  "actualBackendActions": 0,
+  "heldFourInitializations": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/433_event_listener_independent_post.py",
+    "sha256": "27a5f0b092b6e00aea457a70ee719800e12ce4a01d04565bf9625ad7dcd7423a"
+  }
+}
