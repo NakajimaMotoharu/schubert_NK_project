@@ -1,0 +1,7 @@
+# Storage十一Map・五同期の所有契約レビュー仕様
+
+F03/411451/SS311333341343352354、原1/3/7pp cap9、CONTRACT_AUDIT/SOURCE_REQUALIFICATION。PG22858 current29 raw89/分類8/未分類81を固定し、UseConcurrentHashMap11とAvoidSynchronizedStatement5の全16siteを個別確認する。全29hash/現source位置・所有・公開・guard・独立assertの根拠を保存する。既分類8を再加算しない。
+
+Mapは同期呼出し内の独立属性copy、nullを含む負例、workerごとのFaultIo、開始前設定/close-only並行、MainのstateLockで保護されたpublish callbackを区別する。公開wrapper monitorを保持したまま別worker完了を求める四siteはBUG036系の実oracleで、別のlockへ置換すると試験目的を消す。一方、private live集合の複合FD bookkeepingのmonitorは同じ理由で免除せず、通常規約の適用を判定する。
+
+producerと別postで全16の位置/hash/witness・現29・既分類8・差分計数・metadata否定を確認。実障害は是正前915/916へ登録。Main/Test/ruleの変更0、元Test compile/run/native/Root/process/filesystem/credential/VM0、fixture生成/置換0。静的理由の確認をPT PASS/実測coverage/正式受入/工数率に変換しない。対象外Thread57/close7/empty1と実runtimeのHOLDは維持する。
