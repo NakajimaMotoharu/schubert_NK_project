@@ -1,0 +1,9 @@
+# Golden並行待ち期限・全三再資格結果
+
+BUG2447を修正前登録、start/ready await二箇所assertTrue+10SECONDS、Future.get一箇所10SECONDS。他Java token/独立golden TSV287hash/固定offset byte/fixture/Main不変更。修正/run source7b729407bd9e348f953f292af2984f15e3d2bb6a、Main7aed。
+
+PG22712 compile0、PG22714 rawDoNotUseThreads二はstandalone host executor8/submit各siteの所有・有限待ち目的で非該当、processing0/CS0、Mainstaticは既source六module0を照合。PG22716全3/FESabort0/真正0、一session・新execのみ。PG22722独立0、manifest `2f535d83a15f9d11a27b0ffa187440d71aa3042ecd9e20b9fe66b3d96aef4be3`（input/environment/CRC/static理由/全evidence path/hash）。独立検証はsource変換以外のtoken/元TSV不変・metadata否定3、全3原method/真正exit、159normalphysical CRC、実初期化normal26+二normal ownerからJDK生成Lambda4・受動javap/否定3。実DB/Root/native/fourheld0。
+
+当3Testだけのprotocol全159physical測定はL561 covered/2917 missed、M100/642、C23/136、B226/788。これは部分coverageでありwhole module100/全451ではない。以前のexecを合成しない。再資格3、新unique0/whole追加0/leaf0、unique438/whole94/正式1964PT-53scope/工数nullのまま。
+
+工具post初回assert1はBUG2448/YKT2189/PG22730へ保持、normal Lambda四とjar physicalの混同を是正し同Unitへ再post、Unit再演0。PG22724 publisherは当既存Testの未登録pathを正規guardが拒否したため保存操作前に停止、既承認当一pathだけを一覧追加して別PG22726で通常commit/push0。保護path条件は不変更。関連BUG2447/2448・YKT2189は有限CLOSED、YKT2177はglobal/Question等残OPEN。

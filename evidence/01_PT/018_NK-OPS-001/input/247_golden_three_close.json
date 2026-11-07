@@ -1,0 +1,58 @@
+{
+  "groupId": "PGPT-F03-CODEC-GOLDEN-THREE-BOUNDED-WAITS-20261107",
+  "expectedExistingTests": 3,
+  "endQuotaFile": "end-quota-PG22722.json",
+  "manifestPath": "evidence/01_PT/002_NK-PRO-002/evidence/PG22722-golden-three-independent-v1/manifest.json",
+  "run": "PG22710/PG22712/PG22714/PG22716/PG22722/PG22728",
+  "technicalMeasurementDelta": {
+    "existingWholeClassTestsRequalified": 3,
+    "waitDeadlineAdditions": 3,
+    "newProductTests": 0,
+    "newSourceProofs": 0,
+    "newAcceptance": 0,
+    "wholeProtocolCoverage100": false,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 3012,
+        "missed": 14448
+      },
+      "BRANCH": {
+        "covered": 226,
+        "missed": 788
+      },
+      "LINE": {
+        "covered": 561,
+        "missed": 2917
+      },
+      "COMPLEXITY": {
+        "covered": 173,
+        "missed": 1103
+      },
+      "METHOD": {
+        "covered": 100,
+        "missed": 642
+      },
+      "CLASS": {
+        "covered": 23,
+        "missed": 136
+      }
+    },
+    "jvmGeneratedLambdaOwners": 2,
+    "lambdaInstances": 4
+  },
+  "failureIds": [
+    "BUG-2447",
+    "BUG-2448",
+    "YKT-2177",
+    "YKT-2189"
+  ],
+  "endAttributionKind": "MIXED_UNALLOCATED",
+  "additionalScope": " Independent post erroneously treated JDK-generated Lambdas as normal JAR physical classes; preserved failure, strict two-owner passive qualification and three negative guards; no Unit replay. Tool versus repair cost unknown.",
+  "status": "EXISTING3_REQUALIFIED_FINITE3_FIXED_PARTIAL_COVERAGE_GLOBAL_HOLDS",
+  "nextCommand": "Proceed to the pure in-memory ReplyCorrelationRegistry/PendingReply original Test graph, inspect whole existing Registry and TerminalRace classes and saved evidence before correcting confirmed unbounded waits. Preserve Product/Main/oracles, no unchanged-success replay or fixture bypass. Synchronous completed joins require state proof, not timeout that could masquerade as expected TimeoutException.",
+  "resultPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/214_CodecGolden待ち期限結果.json",
+  "checkpointText": "F03原2/5/9cap10、PRO002006/007/input006007、BUG2447三wait10SECONDS化、他token/独立TSV287hash/384offset期待値不変。run7b7294/Main7aed、22712 compile0/22714 raw2個別非該当CS0/不変Main静的0、22716全三FESabort0/真正0/新一exec、22722独立0 manifest2f535d83a15f9d11a27b0ffa187440d71aa3042ecd9e20b9fe66b3d96aef4be3。normal159全CRC、実初期化normal26+JDK生成二owner四を22728受動0で識別、元post1/22730/BUG2448YKT2189保持後是正/否定3・Unit再演0。module測定L561/3478 M100/742 C23/159 B226/1014は部分、全100/451へ加算0。既3再資格/新unique・whole・leaf0、unique438/Java334/whole94/正式1964-53/工数null/全HOLD/YKT2177 OPEN、既知14sourcefixed/13動的/Question1HOLD。usage17:18:16/bb784658/次18:18:16。",
+  "title": "Codec golden全三・有限wait再資格と部分coverage",
+  "phase": "CODEC_GOLDEN_THREE_REQUALIFIED_SELECT_NEXT_WHOLE_GRAPH",
+  "checkpointKey": "latestCodecGoldenFiniteWaitRequalification"
+}
