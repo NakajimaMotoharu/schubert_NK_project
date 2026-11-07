@@ -38,7 +38,21 @@ def main():
  ex=(U/'execinfo.stdout').read_text();assert ex.count('Session "')==1 and 'Session "PG22716-GOLDEN-THREE"' in ex;probes={n:[c,int(hit),int(total)] for c,hit,total,n in re.findall(r'^([0-9a-f]{16})\s+(\d+) of\s+(\d+)\s+(\S+)$',ex,re.M)}
  for name,p in probes.items():
   if name.startswith('dev/codex/schubert/nk/') and not name.startswith(selected.replace('.','/')):assert name in ids and ids[name]==p[0]
- init={n for n in re.findall(r"Initializing '([^']+)",(U/'class-init.log').read_text()) if n.startswith('dev/codex/schubert/nk/') and not n.startswith(selected.replace('.','/'))};assert init and init<=set(ids)
+ init={n for n in re.findall(r"Initializing '([^']+)",(U/'class-init.log').read_text()) if n.startswith('dev/codex/schubert/nk/') and not n.startswith(selected.replace('.','/'))}
+ owners={'dev/codex/schubert/nk/protocol/codec/PayloadCodec','dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog'}
+ def lambda_owner(name):
+  match=re.fullmatch(r'(dev/codex/schubert/nk/protocol/(?:codec/PayloadCodec|layout/LayoutFieldCatalog))\$\$Lambda\+0x[0-9a-f]+',name)
+  return match.group(1) if match else None
+ generated=init-set(ids);assert len(generated)==4 and all(lambda_owner(n) in owners for n in generated)
+ assert all(sum(lambda_owner(n)==owner for n in generated)==2 for owner in owners)
+ assert init-generated<=set(ids) and init-generated
+ for bad in ['dev/codex/schubert/nk/protocol/codec/Other$$Lambda+0x123','dev/codex/schubert/nk/protocol/codec/PayloadCodec$$Lambda+nothex','dev/codex/schubert/nk/api/codec/PayloadCodec$$Lambda+0x123']:assert lambda_owner(bad) is None
+ meta=RUNS/'pg22728-golden-lambda-metadata-v1';lm=load(meta/'manifest.json');assert lm['actualExit']==0 and lm['productTestsExecuted']==0 and lm['normalProtocolJarSha256']==sha(jar)
+ for stream in ['stdout','stderr']:assert sha(meta/('javap.'+stream))==lm['stage'][stream+'Sha256']
+ blocks=(meta/'javap.stdout').read_text().split('Classfile ')[1:];assert len(blocks)==2
+ for owner in owners:
+  block=next(x for x in blocks if owner+'.class' in x.splitlines()[0]);assert 'java/lang/invoke/LambdaMetafactory.metafactory' in block and 'InvokeDynamic' in block
+
  root=E.parse(U/'coverage.xml').getroot();assert {x.get('name') for x in root.findall('.//class')}==set(ids);counters={x.get('type'):dict(covered=int(x.get('covered')),missed=int(x.get('missed'))) for x in root.findall('counter')};assert counters['LINE']['covered']>0;coverage100=all(x['missed']==0 for x in counters.values())
  sm=load(S/'manifest.json');assert sm['inputHashes']==b['inputHashes'] and sm['mainInputs']==b['mainInputs'];assert not sm['reports']['checkstyle']['items'];assert all(not rep['processingErrors'] for rep in sm['reports'].values());findings=sm['reports']['pmd']['items'];assert len(findings)==2
  classified=[]
@@ -48,10 +62,10 @@ def main():
  assert sm['stages']['pmd']['actualExit']==4 and sm['stages']['checkstyle']['actualExit']==0
  cp=RUNS/'pg22712-golden-three-compile-v1/manifest.json';assert sha(cp)==b['compileManifestSha256'] and load(cp)['actualExit']==0 and load(cp)['inputHashes']==b['inputHashes']
  O.mkdir();files={}
- for base,prefix in [(U,'original-'),(S,'static-')]:
+ for base,prefix in [(U,'original-'),(S,'static-'),(meta,'passive-')]:
   for p in [*base.iterdir(),*sorted((base/'xml').glob('TEST-*.xml'))]:
    if p.is_file():
     name=prefix+('class-init.stdout' if p.name=='class-init.log' else p.name);assert name not in files;shutil.copyfile(p,O/name);files[name]=sha(O/name)
- result=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),source=b['source'],productionCoreMain=b['normalSource'],tests=3,newUniqueTests=0,requalifiedExistingTests=3,newSourceProofs=0,newAcceptance=0,waitDeadlineAdditions=3,sourceTransformNegativeChecks=3,allOtherJavaTokensAndGoldenOracleUnchanged=True,resourceSha256=sha(R/resource),coverage=counters,wholeProtocolCoverage100=coverage100,coverageScope='This single whole original Test class only; unvisited module Code remains missed. Not a whole-module requalification and not additive to historical exec.',physical=physical,classIds=ids,rawProbes={n:probes[n] for n in ids if n in probes},productInitializations=sorted(init),backendRootNativeFourHeldActions=0,staticRaw=2,individualStaticClassifications=classified,staticApplicable=0,checkstyle=0,unchangedMainSpotbugs=sm['unchangedMainStaticSha256'],oldExecCombined=False,whole451Accepted=False,formalUpdated=False,effortRate=None,inputHashes=b['inputHashes'],environment=environment,files=files,bug='BUG-2447',yktStillOpen='YKT-2177',verifier=dict(path=str(Path(__file__).relative_to(R)),sha256=sha(__file__),source=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip()))
+ result=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),source=b['source'],productionCoreMain=b['normalSource'],tests=3,newUniqueTests=0,requalifiedExistingTests=3,newSourceProofs=0,newAcceptance=0,waitDeadlineAdditions=3,sourceTransformNegativeChecks=3,allOtherJavaTokensAndGoldenOracleUnchanged=True,resourceSha256=sha(R/resource),coverage=counters,wholeProtocolCoverage100=coverage100,coverageScope='This single whole original Test class only; unvisited module Code remains missed. Not a whole-module requalification and not additive to historical exec.',physical=physical,classIds=ids,rawProbes={n:probes[n] for n in ids if n in probes},productInitializations=sorted(init),physicalProductInitializations=sorted(init-generated),jvmGeneratedLambdaOwners={n:lambda_owner(n) for n in sorted(generated)},lambdaOwnerNegativeGuards=3,backendRootNativeFourHeldActions=0,staticRaw=2,individualStaticClassifications=classified,staticApplicable=0,checkstyle=0,unchangedMainSpotbugs=sm['unchangedMainStaticSha256'],oldExecCombined=False,whole451Accepted=False,formalUpdated=False,effortRate=None,inputHashes=b['inputHashes'],environment=environment,files=files,bug='BUG-2447',yktStillOpen='YKT-2177',verifier=dict(path=str(Path(__file__).relative_to(R)),sha256=sha(__file__),source=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip()))
  (O/'manifest.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,requalified=3,newUnique=0,counters=counters,wholeProtocolCoverage100=coverage100,manifestSha256=sha(O/'manifest.json'))))
 if __name__=='__main__':main()
