@@ -1,0 +1,5 @@
+# Storage七資源・一catchの所有解放レビュー結果
+
+PG22908/22910 source e02dd779/Main7aed、独立0 manifest184b8b614376f7dfb7df091ef73f851e44a03ac7d409a333954d022be6a8eefb。全29現hash/原88と八site・五metadata否定照合。返却wrapper delegate1はMain ResourceScopeへの所有移転、NoSuchFile限定catch1は既close済みsnapshot entryを無視する理由を確認。これは実runtime安全の認定ではない。
+
+五resourceは途中assert失敗で独立root/child/no-op streamの明示closeを飛ばすsource不備としてBUG2460/YKT2198へ登録。executor1はshutdownNowと真正終端の混同でBUG2461/YKT2199、Future done/cancelledはworker終了保証にしない。分類23→31（非該当25/是正対象6）、未分類65→57。原raw88不変。元Test compile/run/native/Root/実FS/VM/process0、実PTPASS/covnull、新unique-whole-leaf0/438/whole94/正式1964-53/工数null/全HOLD維持。
