@@ -321,20 +321,19 @@ final class LinuxInodeSecurityTest {
   }
 
   private static void setAcl(Path file, int uid) throws Exception {
-    Process process =
-        new ProcessBuilder(
-                "/usr/bin/setfacl",
-                "--set=u::r--,u:" + uid + ":r--,g::---,m::r--,o::---",
-                "--",
-                file.toString())
-            .redirectErrorStream(true)
-            .start();
-    try {
+    try (var processOwner =
+        new OwnedTestProcess(
+            new ProcessBuilder(
+                    "/usr/bin/setfacl",
+                    "--set=u::r--,u:" + uid + ":r--,g::---,m::r--,o::---",
+                    "--",
+                    file.toString())
+                .redirectErrorStream(true)
+                .start())) {
+      Process process = processOwner.process();
       assertTrue(process.waitFor(5, TimeUnit.SECONDS));
       assertEquals(0, process.exitValue());
       assertEquals("", new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8));
-    } finally {
-      process.destroyForcibly();
     }
   }
 

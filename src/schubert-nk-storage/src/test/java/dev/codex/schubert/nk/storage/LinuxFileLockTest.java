@@ -86,32 +86,35 @@ final class LinuxFileLockTest {
                   }));
           assertEquals(0, external(root.resolve(FIXTURE_LOCK_E9DEB047)));
           try (var executor = Executors.newSingleThreadExecutor()) {
-            var child =
-                new ProcessBuilder(
-                        "/usr/bin/flock",
-                        "-x",
-                        "-n",
-                        "-E",
-                        "20",
-                        root.resolve(FIXTURE_LOCK_E9DEB047).toString(),
-                        "/bin/sh",
-                        "-c",
-                        "printf 'READY\\n'; read -r ignored || :")
-                    .start();
-            try (var reader = child.inputReader();
-                var writer = child.getOutputStream()) {
-              try {
-                assertEquals("READY", executor.submit(reader::readLine).get(5, TimeUnit.SECONDS));
-                var calls = new AtomicInteger();
-                assertEquals(
-                    Optional.empty(), lock.tryExclusive(path, () -> calls.incrementAndGet()));
-                assertEquals(0, calls.get());
-                writer.write('\n');
-                writer.flush();
-                assertTrue(child.waitFor(5, TimeUnit.SECONDS));
-                assertEquals(0, child.exitValue());
-              } finally {
-                if (child.isAlive()) child.destroy();
+            try (var childOwner =
+                new OwnedTestProcess(
+                    new ProcessBuilder(
+                            "/usr/bin/flock",
+                            "-x",
+                            "-n",
+                            "-E",
+                            "20",
+                            root.resolve(FIXTURE_LOCK_E9DEB047).toString(),
+                            "/bin/sh",
+                            "-c",
+                            "printf 'READY\\n'; read -r ignored || :")
+                        .start())) {
+              var child = childOwner.process();
+              try (var reader = child.inputReader();
+                  var writer = child.getOutputStream()) {
+                try {
+                  assertEquals("READY", executor.submit(reader::readLine).get(5, TimeUnit.SECONDS));
+                  var calls = new AtomicInteger();
+                  assertEquals(
+                      Optional.empty(), lock.tryExclusive(path, () -> calls.incrementAndGet()));
+                  assertEquals(0, calls.get());
+                  writer.write('\n');
+                  writer.flush();
+                  assertTrue(child.waitFor(5, TimeUnit.SECONDS));
+                  assertEquals(0, child.exitValue());
+                } finally {
+                  childOwner.close();
+                }
               }
             }
           }
@@ -470,14 +473,14 @@ final class LinuxFileLockTest {
   }
 
   private int external(Path file) throws Exception {
-    var child =
-        new ProcessBuilder("/usr/bin/flock", "-x", "-n", "-E", "20", file.toString(), "/bin/true")
-            .start();
-    try {
+    try (var childOwner =
+        new OwnedTestProcess(
+            new ProcessBuilder(
+                    "/usr/bin/flock", "-x", "-n", "-E", "20", file.toString(), "/bin/true")
+                .start())) {
+      var child = childOwner.process();
       assertTrue(child.waitFor(5, TimeUnit.SECONDS));
       return child.exitValue();
-    } finally {
-      if (child.isAlive()) child.destroy();
     }
   }
 

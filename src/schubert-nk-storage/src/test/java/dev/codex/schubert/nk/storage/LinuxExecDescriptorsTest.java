@@ -299,35 +299,41 @@ final class LinuxExecDescriptorsTest {
           assertEquals(
               "PID=" + child.pid() + " INHERITED=128,129",
               executor.submit(reader::readLine).get(10, TimeUnit.SECONDS));
-          var competitor =
-              new ProcessBuilder(
-                      "/usr/bin/flock",
-                      "-x",
-                      "-n",
-                      "-E",
-                      "20",
-                      root.resolve("lock").toString(),
-                      "/bin/true")
-                  .start();
-          assertTrue(competitor.waitFor(5, TimeUnit.SECONDS));
-          assertEquals(20, competitor.exitValue());
+          try (var competitorOwner =
+              new OwnedTestProcess(
+                  new ProcessBuilder(
+                          "/usr/bin/flock",
+                          "-x",
+                          "-n",
+                          "-E",
+                          "20",
+                          root.resolve("lock").toString(),
+                          "/bin/true")
+                      .start())) {
+            var competitor = competitorOwner.process();
+            assertTrue(competitor.waitFor(5, TimeUnit.SECONDS));
+            assertEquals(20, competitor.exitValue());
+          }
           child.getOutputStream().write('\n');
           child.getOutputStream().flush();
           assertTrue(child.waitFor(5, TimeUnit.SECONDS));
           assertEquals(0, child.exitValue());
           assertNull(reader.readLine());
-          var after =
-              new ProcessBuilder(
-                      "/usr/bin/flock",
-                      "-x",
-                      "-n",
-                      "-E",
-                      "20",
-                      root.resolve("lock").toString(),
-                      "/bin/true")
-                  .start();
-          assertTrue(after.waitFor(5, TimeUnit.SECONDS));
-          assertEquals(0, after.exitValue());
+          try (var afterOwner =
+              new OwnedTestProcess(
+                  new ProcessBuilder(
+                          "/usr/bin/flock",
+                          "-x",
+                          "-n",
+                          "-E",
+                          "20",
+                          root.resolve("lock").toString(),
+                          "/bin/true")
+                      .start())) {
+            var after = afterOwner.process();
+            assertTrue(after.waitFor(5, TimeUnit.SECONDS));
+            assertEquals(0, after.exitValue());
+          }
         } finally {
           childOwner.close();
         }

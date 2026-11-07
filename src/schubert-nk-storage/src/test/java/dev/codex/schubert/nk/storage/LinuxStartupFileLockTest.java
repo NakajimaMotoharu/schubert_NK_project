@@ -306,14 +306,14 @@ final class LinuxStartupFileLockTest {
   }
 
   private int external(Path file) throws Exception {
-    var child =
-        new ProcessBuilder("/usr/bin/flock", "-x", "-n", "-E", "20", file.toString(), "/bin/true")
-            .start();
-    try {
+    try (var childOwner =
+        new OwnedTestProcess(
+            new ProcessBuilder(
+                    "/usr/bin/flock", "-x", "-n", "-E", "20", file.toString(), "/bin/true")
+                .start())) {
+      var child = childOwner.process();
       assertTrue(child.waitFor(5, TimeUnit.SECONDS));
       return child.exitValue();
-    } finally {
-      if (child.isAlive()) child.destroy();
     }
   }
 
