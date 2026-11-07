@@ -248,7 +248,7 @@ class OwnedTransferDirectoryTest {
               ID,
               handle -> {
                 assertEquals(3, calls.live.size());
-                assertEquals(0100640, Files.getAttribute(handle, "unix:mode"));
+                assertEquals(0x81a0 /* POSIX 0100640 */, Files.getAttribute(handle, "unix:mode"));
                 assertEquals(0L, Files.getAttribute(handle, "unix:size"));
                 Files.move(part, retained);
                 Files.write(part, new byte[] {9}, StandardOpenOption.CREATE_NEW);
@@ -384,7 +384,9 @@ class OwnedTransferDirectoryTest {
                   ID,
                   handle -> {
                     assertEquals(
-                        0120000, ((Integer) Files.getAttribute(handle, "unix:mode")) & 0170000);
+                        0xa000 /* POSIX 0120000 */,
+                        ((Integer) Files.getAttribute(handle, "unix:mode"))
+                            & 0xf000 /* POSIX 0170000 */);
                     StorageAttributeGuard.file(
                         Files.readAttributes(
                             handle, FIXTURE_UNIX_OWNER_GROUP_MODE_NLINK_SIZE_69F67BAF),

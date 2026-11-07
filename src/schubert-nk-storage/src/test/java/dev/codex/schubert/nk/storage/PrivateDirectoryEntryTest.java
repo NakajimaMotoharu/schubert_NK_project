@@ -43,7 +43,9 @@ class PrivateDirectoryEntryTest {
           directory.createPrivatePart(
               ID,
               path -> {
-                assertEquals(0100600, Files.getAttribute(path, FIXTURE_UNIX_MODE_18F40B0C));
+                assertEquals(
+                    0x8180 /* POSIX 0100600 */,
+                    Files.getAttribute(path, FIXTURE_UNIX_MODE_18F40B0C));
                 assertEquals(1, Files.getAttribute(path, "unix:nlink"));
                 assertEquals(2, calls.live.size());
                 write(path, CONTENT);
@@ -58,7 +60,8 @@ class PrivateDirectoryEntryTest {
       directory.createPart(
           regular,
           path -> {
-            assertEquals(0100640, Files.getAttribute(path, FIXTURE_UNIX_MODE_18F40B0C));
+            assertEquals(
+                0x81a0 /* POSIX 0100640 */, Files.getAttribute(path, FIXTURE_UNIX_MODE_18F40B0C));
             write(path, CONTENT);
             return true;
           });
@@ -85,7 +88,8 @@ class PrivateDirectoryEntryTest {
       directory.createPrivateEntry(
           name,
           held -> {
-            assertEquals(0100600, Files.getAttribute(held, FIXTURE_UNIX_MODE_18F40B0C));
+            assertEquals(
+                0x8180 /* POSIX 0100600 */, Files.getAttribute(held, FIXTURE_UNIX_MODE_18F40B0C));
             assertEquals(1, Files.getAttribute(held, "unix:nlink"));
             assertEquals(2, calls.live.size());
             Files.move(root.resolve(name), root.resolve(FIXTURE_RETAINED_EXEC_1FEFDEDD));
@@ -193,7 +197,8 @@ class PrivateDirectoryEntryTest {
       assertEquals(1, winners);
       assertArrayEquals(CONTENT, Files.readAllBytes(root.resolve("one.exec")));
       assertEquals(
-          0100600, Files.getAttribute(root.resolve("one.exec"), FIXTURE_UNIX_MODE_18F40B0C));
+          0x8180 /* POSIX 0100600 */,
+          Files.getAttribute(root.resolve("one.exec"), FIXTURE_UNIX_MODE_18F40B0C));
     }
   }
 
@@ -218,7 +223,8 @@ class PrivateDirectoryEntryTest {
       directory.publishAs(ID, TARGET);
       assertFalse(Files.exists(part(ID)));
       assertArrayEquals(CONTENT, Files.readAllBytes(target));
-      assertEquals(0100600, Files.getAttribute(target, FIXTURE_UNIX_MODE_18F40B0C));
+      assertEquals(
+          0x8180 /* POSIX 0100600 */, Files.getAttribute(target, FIXTURE_UNIX_MODE_18F40B0C));
       failure(StorageIoException.Reason.MISSING, () -> directory.publishAs(ID, "other"));
       assertFalse(Files.exists(root.resolve("other")));
       directory.unlinkEntry(TARGET);

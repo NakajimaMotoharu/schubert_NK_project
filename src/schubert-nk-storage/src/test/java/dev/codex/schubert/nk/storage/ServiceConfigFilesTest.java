@@ -147,7 +147,16 @@ final class ServiceConfigFilesTest {
     }
     for (Map.Entry<String, Object> mutation :
         Map.<String, Object>of(
-                "mode", 0100600, "nlink", 0, "dev", -1L, "ino", 0L, FIXTURE_SIZE_EB1E91E4, -1L)
+                "mode",
+                0x8180 /* POSIX 0100600 */,
+                "nlink",
+                0,
+                "dev",
+                -1L,
+                "ino",
+                0L,
+                FIXTURE_SIZE_EB1E91E4,
+                -1L)
             .entrySet()) {
       var changed = new HashMap<>(genuine);
       changed.put(mutation.getKey(), mutation.getValue());

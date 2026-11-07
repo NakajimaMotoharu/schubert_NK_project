@@ -273,7 +273,7 @@ final class LinuxSealedProofTest {
               saved[0] = fd;
               var path = Path.of("/proc/self/fd/" + fd);
               var metadata = Files.readAttributes(path, "unix:mode,nlink,size");
-              assertEquals(0100600, metadata.get("mode"));
+              assertEquals(0x8180 /* POSIX 0100600 */, metadata.get("mode"));
               assertEquals(0, metadata.get("nlink"));
               assertEquals((long) VECTOR.length, metadata.get("size"));
               assertArrayEquals(VECTOR, proof.read(fd));

@@ -63,7 +63,7 @@ class StorageRootInspectionTest {
   void a07MetadataAndProviderNegativeMatrix() throws Exception {
     StorageIdentity expected = new StorageIdentity(FIXTURE_OWNER_622F06CB, FIXTURE_GROUP_654E1E20);
     Map<String, Object> valid = new HashMap<>();
-    valid.put("mode", 040700);
+    valid.put("mode", 0x41c0 /* POSIX 040700 */);
     valid.put(FIXTURE_NLINK_3DDD828B, 2);
     valid.put(FIXTURE_OWNER_622F06CB, (UserPrincipal) () -> FIXTURE_OWNER_622F06CB);
     valid.put(FIXTURE_GROUP_654E1E20, (GroupPrincipal) () -> FIXTURE_GROUP_654E1E20);
@@ -78,7 +78,8 @@ class StorageRootInspectionTest {
       assertThrows(
           StorageIoException.class, () -> StorageRootInspection.requireBackup(missing, expected));
     }
-    for (Object wrong : new Object[] {"bad", 0100700, 040750}) {
+    for (Object wrong :
+        new Object[] {"bad", 0x81c0 /* POSIX 0100700 */, 0x41e8 /* POSIX 040750 */}) {
       Map<String, Object> changed = new HashMap<>(valid);
       changed.put("mode", wrong);
       assertThrows(

@@ -42,7 +42,7 @@ final class LinuxStartupAdmissionTest {
     return new HashMap<>(
         Map.of(
             "mode",
-            0100600,
+            0x8180 /* POSIX 0100600 */,
             FIXTURE_UID_0C18F38C,
             0,
             "gid",
@@ -316,7 +316,7 @@ final class LinuxStartupAdmissionTest {
     for (int fd : List.of(A, P))
       for (var bad :
           List.of(
-              Map.entry("mode", (Object) 0100640),
+              Map.entry("mode", (Object) 0x81a0 /* POSIX 0100640 */),
               Map.entry(FIXTURE_UID_0C18F38C, (Object) 1),
               Map.entry("gid", (Object) 1),
               Map.entry(FIXTURE_DEV_8A17302D, (Object) 0L),

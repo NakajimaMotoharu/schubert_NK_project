@@ -78,7 +78,7 @@ class LinuxDirectoryCallsTest {
               }
               try {
                 Path handle = Path.of("/proc/self/fd", Integer.toString(fd));
-                assertEquals(0100640, Files.getAttribute(handle, "unix:mode"));
+                assertEquals(0x81a0 /* POSIX 0100640 */, Files.getAttribute(handle, "unix:mode"));
                 try (var stream =
                     java.nio.channels.FileChannel.open(handle, StandardOpenOption.WRITE)) {
                   assertEquals(

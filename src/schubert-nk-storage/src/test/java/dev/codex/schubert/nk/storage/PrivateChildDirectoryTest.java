@@ -53,7 +53,9 @@ final class PrivateChildDirectoryTest {
                 FIXTURE_SYNC_PARENT_02AB780D),
             f.events);
         Path created = f.path.resolve("new.part");
-        assertEquals(0700, ((Integer) Files.getAttribute(created, "unix:mode")) & 0777);
+        assertEquals(
+            0x1c0 /* POSIX 0700 */,
+            ((Integer) Files.getAttribute(created, "unix:mode")) & 0x1ff /* POSIX 0777 */);
         assertEquals(
             Files.getAttribute(f.path, "unix:uid"), Files.getAttribute(created, "unix:uid"));
         assertEquals(
@@ -175,10 +177,10 @@ final class PrivateChildDirectoryTest {
               Files.exists(f.path.resolve(FIXTURE_PARTIAL_8AC24611)));
           if (Files.exists(f.path.resolve(FIXTURE_PARTIAL_8AC24611))) {
             assertEquals(
-                0700,
+                0x1c0 /* POSIX 0700 */,
                 ((Integer)
                         Files.getAttribute(f.path.resolve(FIXTURE_PARTIAL_8AC24611), "unix:mode"))
-                    & 0777);
+                    & 0x1ff /* POSIX 0777 */);
             try (var entries = Files.list(f.path.resolve(FIXTURE_PARTIAL_8AC24611))) {
               assertEquals(0, entries.count());
             }
