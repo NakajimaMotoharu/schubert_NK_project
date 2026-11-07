@@ -1,0 +1,5 @@
+# G07公開header候補の限定判定
+
+event4203原.25/.75/2cap3、元9888に固定された公開NativeStreamInspect531.javaの13/15行だけをlexical import/type参照候補として選択した。元input hash同一を確認し、原ruleでは各一captureだが、許可したimport profileに一致しなかった。型来歴を推測してoperator処理本体/旧Root/native/私有input/failed-cohort回収へ拡大せず、両指摘をUNCLASSIFIEDのまま保持する。対象はimport候補として確認したデータであり、実際にJava header/importであるとは記録しない。
+
+018input192/PG22338は終了0、独立PG22340は同入力hashと非import・二件保持を別に確認し終了0。新分類0/未分類4482/22、Product/Test/再scan/工具実行/私有raw/VM/Root/native/coverage/source資格/leaf追加0。Code本文/値/値hash/raw全文を新規出力しない。独立manifest SHA256 `1d40a45e03e6486f708fb66d4182d95a4c944094695e06725398083fbb97466f`。本書は着手175/event4203で固定した範囲と結果を整理し、事前作成を主張しない。unique415/whole93/正式1964-53/工数null/全HOLD不変更。
