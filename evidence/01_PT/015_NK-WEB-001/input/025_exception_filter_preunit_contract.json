@@ -1,0 +1,90 @@
+{
+  "atJST": "2026-11-07T12:00:01.103091+09:00",
+  "actualExit": 0,
+  "classification": "PT_DEFAULT",
+  "coreSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+  "target": "dev/codex/schubert/nk/web/security/WebAccessExceptionFilterFactory",
+  "selectedWholeTest": "dev.codex.schubert.nk.web.security.WebAccessExceptionFactoryPortTest",
+  "expectedTests": 4,
+  "ownedContextMode": "MODE_THREADLOCAL_EMPTY_BEFORE_AFTER_NO_AUTHENTICATION_MINTED",
+  "mockSessionScope": "FIXED_PUBLIC_ID_HEAP_STRING_ONLY_NOT_REAL_SPRING_SESSION",
+  "loggerScope": "OWN_HEAP_JSON_CALLBACK_NOT_EXTERNAL_LOG_SERVICE",
+  "springMockJarSha256": "6ce8fc116f5d309b9ac50a6738bd1b15ea4012a4a5563c0ee89b795bfc9af0dc",
+  "sourceReviewedMethods": {
+    "WebAccessExceptionFilterFactory": [
+      "constructor",
+      "create"
+    ],
+    "WebAccessFailureHandler": [
+      "constructor",
+      "commence",
+      "handle",
+      "isNavigation",
+      "MEDIA static initialization"
+    ],
+    "EncryptedSessionRequestCache": [
+      "constructor",
+      "saveRequest",
+      "requireConfigured",
+      "candidate"
+    ],
+    "WebRequestContext": [
+      "constructor",
+      "require",
+      "existing",
+      "requestId",
+      "clientAddress",
+      "static constants"
+    ],
+    "LoginClientAddress": [
+      "constructor",
+      "value"
+    ],
+    "SavedScreenTarget": [
+      "fromGet",
+      "constructor",
+      "location",
+      "static patterns"
+    ],
+    "SavedRequestTarget": [
+      "fromGet",
+      "constructor",
+      "location"
+    ],
+    "ClosedWebAuthentication": [
+      "principal(null)"
+    ],
+    "WebSecurityAudit": [
+      "constructor",
+      "version",
+      "record",
+      "canonicalAddress",
+      "static enum/set/formatter"
+    ]
+  },
+  "forbiddenOperations": [
+    "actual authentication/provider",
+    "actual encrypted session/repository transaction",
+    "wire/network/server",
+    "cipher/nonce/real key",
+    "Root/native/cohort/VM",
+    "held four Main initialization/invocation",
+    "private reflection",
+    "held whole Test extraction"
+  ],
+  "expectedAudit": {
+    "action": "AUTHORIZATION_DENIED",
+    "getReason": "UNAUTHENTICATED",
+    "roleBoundaryReason": "ROLE",
+    "outcome": "DENIED",
+    "actorPresent": false
+  },
+  "independentOracleReferences": [
+    "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+    "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+    "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md"
+  ],
+  "normalCallerSemantics": "NullRequestCache prevents framework DefaultSavedRequest object save; only actual handler safeGET String save once. Role callback tested with empty local context and no claim of real user authorization.",
+  "unitNotYetExecuted": true
+}

@@ -1,0 +1,59 @@
+{
+  "atJST": "2026-11-07T12:00:01.102982+09:00",
+  "actualExit": 0,
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAccessExceptionFactoryPortTest.java": "667536f79154ac296e3821444e548dc17365765693c9bb4a868f7092254329bf",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebAccessExceptionFilterFactory.java": "715a348155606f4b507c0c61fb4b6d52d02132da5ea707a312c8b2917ef72e81",
+    "evidence/01_PT/015_NK-WEB-001/input/024_exception_filter_factory_qualifier.py": "939be8842124087b0e0cb1a6745e3c20e85fed7f80eed10b27a716a40401febb"
+  },
+  "pmdRaw": 1,
+  "rawPmdExit": 4,
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "processingErrors": 0,
+  "individualClassifications": [
+    {
+      "raw": {
+        "beginline": "21",
+        "endline": "21",
+        "begincolumn": "17",
+        "endcolumn": "50",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.session",
+        "class": "SecurityContextOwnerPortFixture",
+        "method": "SecurityContextOwnerPortFixture",
+        "variable": "database",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3",
+        "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+      },
+      "classification": "NOT_APPLICABLE",
+      "reason": "Exactly the existing standalone DataSource Proxy uses DataSource defining loader, never a J2EE context/provider. All database callbacks unconditionally throw; no TCCL or connection use. Same unchanged helper hash and lexical role as the qualified owned constructor fixture."
+    }
+  ],
+  "staticManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22218-exception-filter-factory-four-static-v1/manifest.json",
+    "sha256": "e68948b19df3ca22ed1b077d7c434154358fc94546a23d3946ae29bd4474d5ae"
+  },
+  "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+  "productTestsExecuted": 0,
+  "files": {
+    "pmd.stdout": "4fb9317d68aaddd6a32223eb551e9ee217cc6b400dd582f3c6604cb960fe5de8",
+    "checkstyle-exit.safe.json": "9011db0776f1c493d2e4b52a1565774c1ee7c8d979e26852e28967d219859fbf",
+    "pmd.stderr": "1040175360791a5fef6057b5dcf60e27fa4344762ef145961d292d72aaa627c5",
+    "pmd-exit.safe.json": "7edfdaf13502e8802fa2d61461956972b76022765c638cd5c6d830a88362d47a",
+    "checkstyle-process.safe.json": "fd81e961d9658317bbd60ccc13ce357590534ca01a5199b0a1fdfd827568811d",
+    "pmd-begin.safe.json": "5ad0ea88617c097378a6d46fa84cde2d71b86be4e9a66bc748f23d240ef4edc3",
+    "sources.txt": "500905f854480e950648ff52c926b93c35f3d4ae8c5043b881a9f26ca6b0fe2e",
+    "pmd-process.safe.json": "b3d5e8c395249dbc4172a3c0d1fd2c2a52c4e269b57f9801b0a4d375d1cadde4",
+    "checkstyle.xml": "a4cdcc74bd994031b26a6db465068ee84d23c88125ecadd8cade3e97b3edd2d8",
+    "checkstyle-begin.safe.json": "6e58037301d9cb1a598f6123fb1923a63a5a35a86fc6378c62efc18ec7dbd0c0",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-manifest.json": "e68948b19df3ca22ed1b077d7c434154358fc94546a23d3946ae29bd4474d5ae",
+    "pmd.xml": "eccc221193c773f56215b3a7b13c5be4f290a149b09c397c2c3a350731cc7765",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
