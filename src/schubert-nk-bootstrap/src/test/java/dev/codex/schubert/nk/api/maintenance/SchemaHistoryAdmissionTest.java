@@ -28,6 +28,7 @@ import org.junit.jupiter.api.Test;
 
 /** SSC095/PG312/PT-OPS-SCHEMA001..008. Literal six-column oracle, no observed DB expected. */
 final class SchemaHistoryAdmissionTest {
+  private static final String SCHEMA_SCRIPT = "\"schubert_meta\"";
   private static final String FIXTURE_SCHEMA_E38F1889 = "SCHEMA";
   private static final String FIXTURE_001_A3FEAA64 = "001";
   private static final String FIXTURE_SQL_5B7E398D = "SQL";
@@ -44,9 +45,9 @@ final class SchemaHistoryAdmissionTest {
   private static final String FIXTURE_ROWCLOSE_4440E762 = "rowClose";
   private static final String FIXTURE_STATEMENTCLOSE_D5A13A63 = "statementClose";
   private static final String FIXTURE_PRIVATE_D45CA6F9 = "PRIVATE";
-  private static final Row SCHEMA =
-      new Row(0, null, FIXTURE_SCHEMA_E38F1889, "\"schubert_meta\"", null, true);
-  private static final Row FIRST =
+  private static final Row SCHEMA_ROW =
+      new Row(0, null, FIXTURE_SCHEMA_E38F1889, SCHEMA_SCRIPT, null, true);
+  private static final Row FIRST_ROW =
       new Row(
           1,
           FIXTURE_001_A3FEAA64,
@@ -54,7 +55,7 @@ final class SchemaHistoryAdmissionTest {
           FIXTURE_V001_FIRST_SQL_F20888AE,
           -170000001,
           true);
-  private static final List<Row> RELEASE = List.of(SCHEMA, FIRST);
+  private static final List<Row> RELEASE = List.of(SCHEMA_ROW, FIRST_ROW);
 
   @Test
   void opsSchema009ActualRowsAreIndependentlyReadAndImmutableAfterBothOwnersClose()
@@ -63,7 +64,7 @@ final class SchemaHistoryAdmissionTest {
     var observed = new SchemaHistoryAdmission(RELEASE).inspect(probe.connection());
     assertEquals(
         List.of(
-            new Row(0, null, FIXTURE_SCHEMA_E38F1889, "\"schubert_meta\"", null, true),
+            new Row(0, null, FIXTURE_SCHEMA_E38F1889, SCHEMA_SCRIPT, null, true),
             new Row(
                 1,
                 FIXTURE_001_A3FEAA64,
@@ -72,8 +73,8 @@ final class SchemaHistoryAdmissionTest {
                 -170000001,
                 true)),
         observed);
-    assertNotSame(SCHEMA, observed.getFirst());
-    assertNotSame(FIRST, observed.getLast());
+    assertNotSame(SCHEMA_ROW, observed.getFirst());
+    assertNotSame(FIRST_ROW, observed.getLast());
     assertArrayEquals(new int[] {1, 1, 0}, probe.closed);
     assertThrows(UnsupportedOperationException.class, observed::clear);
     probe.rows.getLast().put(FIXTURE_SCRIPT_5BBD8BBB, "V002__changed.sql");
@@ -96,7 +97,8 @@ final class SchemaHistoryAdmissionTest {
         probe.sql);
     assertEquals(5, probe.timeout);
     assertArrayEquals(new int[] {1, 1, 0}, probe.closed);
-    new SchemaHistoryAdmission(List.of(SCHEMA)).verify(new Probe(List.of(schema())).connection());
+    new SchemaHistoryAdmission(List.of(SCHEMA_ROW))
+        .verify(new Probe(List.of(schema())).connection());
   }
 
   @Test
@@ -151,14 +153,14 @@ final class SchemaHistoryAdmissionTest {
         () -> new Row(0, null, FIXTURE_SCHEMA_E38F1889, null, null, true));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new Row(0, null, FIXTURE_SCHEMA_E38F1889, "\"schubert_meta\"", null, false));
+        () -> new Row(0, null, FIXTURE_SCHEMA_E38F1889, SCHEMA_SCRIPT, null, false));
     assertThrows(
         IllegalArgumentException.class, () -> new Row(0, null, "UNKNOWN", "x", null, true));
     for (RowInput input :
         List.of(
-            new RowInput(1, null, null, "\"schubert_meta\""),
-            new RowInput(0, FIXTURE_001_A3FEAA64, null, "\"schubert_meta\""),
-            new RowInput(0, null, 1, "\"schubert_meta\""),
+            new RowInput(1, null, null, SCHEMA_SCRIPT),
+            new RowInput(0, FIXTURE_001_A3FEAA64, null, SCHEMA_SCRIPT),
+            new RowInput(0, null, 1, SCHEMA_SCRIPT),
             new RowInput(0, null, null, "schubert_meta")))
       assertThrows(
           IllegalArgumentException.class,
@@ -216,16 +218,17 @@ final class SchemaHistoryAdmissionTest {
   void opsSchema004ExpectedProfileOrderingAndDefensiveCopy() throws Exception {
     assertThrows(NullPointerException.class, () -> new SchemaHistoryAdmission(null));
     assertThrows(
-        NullPointerException.class, () -> new SchemaHistoryAdmission(Arrays.asList(SCHEMA, null)));
+        NullPointerException.class,
+        () -> new SchemaHistoryAdmission(Arrays.asList(SCHEMA_ROW, null)));
     for (List<Row> invalid :
         List.of(
             List.<Row>of(),
-            Collections.nCopies(1001, SCHEMA),
-            List.of(FIRST),
-            List.of(SCHEMA, SCHEMA),
+            Collections.nCopies(1001, SCHEMA_ROW),
+            List.of(FIRST_ROW),
+            List.of(SCHEMA_ROW, SCHEMA_ROW),
             List.of(
-                SCHEMA,
-                FIRST,
+                SCHEMA_ROW,
+                FIRST_ROW,
                 new Row(
                     2,
                     FIXTURE_001_A3FEAA64,
@@ -239,7 +242,7 @@ final class SchemaHistoryAdmissionTest {
     mutable.clear();
     admission.verify(new Probe().connection());
     var maximal = new ArrayList<Row>();
-    maximal.add(SCHEMA);
+    maximal.add(SCHEMA_ROW);
     for (int i = 1; i <= 999; i++) {
       String version = String.format(Locale.ROOT, "%03d", i);
       maximal.add(new Row(i, version, FIXTURE_SQL_5B7E398D, "V" + version + "__a.sql", 1, true));
@@ -366,11 +369,12 @@ final class SchemaHistoryAdmissionTest {
             executor.submit(
                 () -> {
                   var probe = new Probe();
-                  barrier.await();
+                  barrier.await(5, java.util.concurrent.TimeUnit.SECONDS);
                   admission.verify(probe.connection());
                   return probe.closed;
                 }));
-      for (var task : tasks) assertArrayEquals(new int[] {1, 1, 0}, task.get());
+      for (var task : tasks)
+        assertArrayEquals(new int[] {1, 1, 0}, task.get(5, java.util.concurrent.TimeUnit.SECONDS));
     }
   }
 
@@ -407,7 +411,7 @@ final class SchemaHistoryAdmissionTest {
     row.put(FIXTURE_INSTALLED_RANK_C438B369, 0);
     row.put(FIXTURE_VERSION_43CCC4D0, null);
     row.put("type", FIXTURE_SCHEMA_E38F1889);
-    row.put(FIXTURE_SCRIPT_5BBD8BBB, "\"schubert_meta\"");
+    row.put(FIXTURE_SCRIPT_5BBD8BBB, SCHEMA_SCRIPT);
     row.put(FIXTURE_CHECKSUM_CCB2C25E, null);
     row.put(FIXTURE_SUCCESS_68E7A699, true);
     return row;
@@ -463,7 +467,8 @@ final class SchemaHistoryAdmissionTest {
                 throwIf(name);
                 return switch (name) {
                   case FIXTURE_NEXT_CA1733B5 -> {
-                    boolean next = ++index < rows.size();
+                    index++;
+                    boolean next = index < rows.size();
                     if (!next && interruptAtEnd) Thread.currentThread().interrupt();
                     yield next;
                   }
