@@ -1,0 +1,30 @@
+{
+  "groupId": "PGPT-F03-LEGACY-PACKAGE-HELPER-OUTPUT-BINDING-20261107",
+  "eventId": "PGPT-20261008-4298",
+  "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+  "contextGroupId": "PGPT-F03-LEGACY-PACKAGE-HELPER-OUTPUT-BINDING-20261107",
+  "workCategory": "CONTRACT_AUDIT",
+  "workDetailCategory": "PGPT-F03-LEGACY-PACKAGE-HELPER-OUTPUT-BINDING-20261107",
+  "workAttributionKind": "ADDITIONAL_FINDING",
+  "workScope": "# 旧package compilerと残二十七型出力の適用\n\nBUG2474/YKT2212、3731/32/PG23194/23200/23202/23204後続。残27のcurrent source pinを持つ旧六module package compiler PG10024だけを代表として、公開manifest/terminal/pomPreflightから実compile処理と保存出力候補を確認する。package/skipTestsは原Unit未実行を意味しても、Test compileの有無を単独で確定しない。\n\n既jar pathからMaven標準target/test-classesを候補として求める際は、compiler-owned host snapshot内・private/guest/archive外・helper FQN prefix/保護name除外をIO前に確認する。原source archiveやSnapshot内protected Java sourceを読まない。現helper source hashとsaved compile source pinが一致するものだけ、そのhelper classfileの存在/header/現在hashを受動観測。元class digestが記録されていなければ「原compile時byte同一未証明」を明示し、新PT/coverage/正式Source資格へ転用しない。\n\n存在しない/変化/不明を元試験失敗や未実装に読み替えず、再package/compile/Unit/field initializer/OOM/VM/DB/Root/実process/私有rawへの操作0を守る。全957Source再parse/8242manifest再索引や元成功Unit/Main静的/covの再演なし。必要な次のtyped metadata/静的範囲は実証から限定する。\n\n着手見積0.5/2/5pp、cap7。追加品質の証拠適用確認。新unique/whole/leaf0、442/whole94/正式1964-53/工数null・全HOLD維持。検証command/SDK/branch/HEAD/対象helper/hash/元compiler/観測結果/未証明事項をmanifestへ、旧原証拠は上書きしない。\n",
+  "oracleReferences": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/3733_旧package compiler・残二十七型出力_適用仕様.md",
+      "sha256": "77388019ad148db97879270cb2c18cca5a8ecfd822b35021359a2987390497a4"
+    }
+  ],
+  "wbsRevision": "WBS-v2-20261007-PMO",
+  "costRevision": "WBS-cost-v2-20261007-PMO",
+  "wbsLeafIds": [
+    "WBS-F03"
+  ],
+  "source": "91a4131c852e084173b49680285655f6ad936ba4",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "estimateAtGroupStartPp": {
+    "low": 0.5,
+    "base": 2,
+    "high": 5
+  },
+  "capPp": 7,
+  "newAcceptance": 0
+}
