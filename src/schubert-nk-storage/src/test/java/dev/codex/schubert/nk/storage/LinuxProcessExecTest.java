@@ -289,15 +289,13 @@ final class LinuxProcessExecTest {
                 LinuxProcessExecChild.class.getName())
             .redirectErrorStream(true);
     builder.environment().put("PGPT_EXEC_UNEXPECTED", "public_fixture");
-    var child = builder.start();
-    try {
+    try (var childOwner = new OwnedTestProcess(builder.start())) {
+      var child = childOwner.process();
       assertTrue(child.waitFor(10, TimeUnit.SECONDS));
       assertEquals(0, child.exitValue());
       assertEquals(
           "PID=" + child.pid() + " ENV=fixture_only\n", child.inputReader().readLine() + "\n");
       assertEquals(-1, child.getInputStream().read());
-    } finally {
-      if (child.isAlive()) child.destroy();
     }
   }
 

@@ -281,53 +281,56 @@ final class LinuxExecDescriptorsTest {
   @Test
   void opsXfd008RealExecInheritsSameFlockUntilProcessExit() throws Exception {
     Files.write(root.resolve("lock"), new byte[0]);
-    var child =
-        new ProcessBuilder(
-                Path.of(System.getProperty("java.home"), "bin/java").toString(),
-                "--enable-native-access=ALL-UNNAMED",
-                "-cp",
-                System.getProperty("java.class.path"),
-                LinuxExecDescriptorsChild.class.getName(),
-                root.toString())
-            .redirectErrorStream(true)
-            .start();
     try (var executor = Executors.newSingleThreadExecutor();
-        var reader = child.inputReader()) {
-      try {
-        assertEquals(
-            "PID=" + child.pid() + " INHERITED=128,129",
-            executor.submit(reader::readLine).get(10, TimeUnit.SECONDS));
-        var competitor =
-            new ProcessBuilder(
-                    "/usr/bin/flock",
-                    "-x",
-                    "-n",
-                    "-E",
-                    "20",
-                    root.resolve("lock").toString(),
-                    "/bin/true")
-                .start();
-        assertTrue(competitor.waitFor(5, TimeUnit.SECONDS));
-        assertEquals(20, competitor.exitValue());
-        child.getOutputStream().write('\n');
-        child.getOutputStream().flush();
-        assertTrue(child.waitFor(5, TimeUnit.SECONDS));
-        assertEquals(0, child.exitValue());
-        assertNull(reader.readLine());
-        var after =
-            new ProcessBuilder(
-                    "/usr/bin/flock",
-                    "-x",
-                    "-n",
-                    "-E",
-                    "20",
-                    root.resolve("lock").toString(),
-                    "/bin/true")
-                .start();
-        assertTrue(after.waitFor(5, TimeUnit.SECONDS));
-        assertEquals(0, after.exitValue());
-      } finally {
-        if (child.isAlive()) child.destroy();
+        var childOwner =
+            new OwnedTestProcess(
+                new ProcessBuilder(
+                        Path.of(System.getProperty("java.home"), "bin/java").toString(),
+                        "--enable-native-access=ALL-UNNAMED",
+                        "-cp",
+                        System.getProperty("java.class.path"),
+                        LinuxExecDescriptorsChild.class.getName(),
+                        root.toString())
+                    .redirectErrorStream(true)
+                    .start())) {
+      var child = childOwner.process();
+      try (var reader = child.inputReader()) {
+        try {
+          assertEquals(
+              "PID=" + child.pid() + " INHERITED=128,129",
+              executor.submit(reader::readLine).get(10, TimeUnit.SECONDS));
+          var competitor =
+              new ProcessBuilder(
+                      "/usr/bin/flock",
+                      "-x",
+                      "-n",
+                      "-E",
+                      "20",
+                      root.resolve("lock").toString(),
+                      "/bin/true")
+                  .start();
+          assertTrue(competitor.waitFor(5, TimeUnit.SECONDS));
+          assertEquals(20, competitor.exitValue());
+          child.getOutputStream().write('\n');
+          child.getOutputStream().flush();
+          assertTrue(child.waitFor(5, TimeUnit.SECONDS));
+          assertEquals(0, child.exitValue());
+          assertNull(reader.readLine());
+          var after =
+              new ProcessBuilder(
+                      "/usr/bin/flock",
+                      "-x",
+                      "-n",
+                      "-E",
+                      "20",
+                      root.resolve("lock").toString(),
+                      "/bin/true")
+                  .start();
+          assertTrue(after.waitFor(5, TimeUnit.SECONDS));
+          assertEquals(0, after.exitValue());
+        } finally {
+          childOwner.close();
+        }
       }
     }
   }

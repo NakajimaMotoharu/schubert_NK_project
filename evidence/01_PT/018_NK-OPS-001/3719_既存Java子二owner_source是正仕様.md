@@ -1,0 +1,9 @@
+# 既存Java子二owner source是正仕様
+
+BUG2467/YKT2205、411451/SS333341343。LinuxExecDescriptorsTest.opsXfd008のmain childとLinuxProcessExecTest.opsExec008 child、各一つを対象。元5class八ProcessBuilder中2/8であり、flock五やsetfacl一の終了依存は未解決。BUG2468 fork五は一切変更しない。
+
+PG23022で既Java childsource二のsamePID execとsource内fork無を確認済み、正常成功再演はしない。固定argv/環境/期待PID/FD/exit/データassertionを保持し、start直後から所有するTest用Closeableを追加。終了依頼だけで終了とせずTERM5s→force5sで同じProcessの真正終了を待つ。wait中のinterruptを記録し期限を延長せず、全cleanup後に再設定。closeは同一owner一回だけ、UNKNOWN/timeoutはIOExceptionで明示、別PID/descendantの所有を推測しない。初期化/取得途中のstream/executor例外もTWR ownerで保護する。読み取りworkerの終了を妨げないよう明示inner-finallyでprocess終了を先行し、外側owner.close再呼出は処理再発行しない。Executorはprocess取得前に作成し、process終了→reader/stream→executorの逆順を維持。
+
+実start/destroy/wait/回収/FS/FFM/Root/native/VM/DB/鍵0。既Test compile/runもHOLD、別fixtureや代替runtime試験を作らない。自作JavacTask.parse-only/formatとsource-only PMD/Checkstyle、元sourceの明示変更以外の全token/argv/oracleを独立逆復元、owner・期限・interrupt・close順の反証guardで確認する。元実PT成功/coverageを新sourceへ移さず実PT PASS/covはnull。
+
+着手見積低1/標準3/高7pp、cap9。追加発見BUG2467の製造是正と静的代替、元計画消化/正式受入delta0。current442/whole94/正式1964-53/工数null維持、既29静的raw82の変更2sourceは未再束縛として分離。

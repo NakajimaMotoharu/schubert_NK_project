@@ -1,0 +1,46 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T21:48:46.271863+09:00",
+  "inputs": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxExecDescriptorsTest.java",
+      "oldSha256": "a8363a46f0be9ef6a77d870a45021f6cf7812399559d193adf8d449e78071eb4",
+      "sha256": "c753c66b069cfe7fe327e39f548cd2652bf1d2c43c80b8f45ca036134f5721a3",
+      "allOtherOracleArgvAndMethodTokensPreserved": true
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxProcessExecTest.java",
+      "oldSha256": "178843223db9944b2e436162ee58d382117ce7995c611614c9ea4a8fc0647c15",
+      "sha256": "1ad55bb510dd8cf3f13c7051f76c4647f69fe395b40a22c46fdb5d7a6b80f380",
+      "allOtherOracleArgvAndMethodTokensPreserved": true
+    }
+  ],
+  "helper": {
+    "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/OwnedTestProcess.java",
+    "sha256": "ce261273707a572d50eddf6c8d10f35d3b8d794b3f01103ffc0547dea956483a"
+  },
+  "metadataNegativeGuards": [
+    "LinuxExecDescriptorsTest.java:owner accessor",
+    "LinuxProcessExecTest.java:owner accessor",
+    "toNanos(5)",
+    "closeAttempted = true",
+    "WAIT_NANOS - (System.nanoTime() - started)",
+    "process.waitFor(remaining, TimeUnit.NANOSECONDS)",
+    "if (interrupted) Thread.currentThread().interrupt();",
+    "process.destroyForcibly();"
+  ],
+  "scope": "SOURCE_ONLY_TWO_JAVA_PARENTS_NOT_FORK_CHILDREN_OR_RUNTIME_PROOF",
+  "originalTestsCompiled": false,
+  "productTestsExecuted": 0,
+  "processActions": 0,
+  "actualPass": null,
+  "coverage": null,
+  "bugs": [
+    "BUG-2467"
+  ],
+  "ykts": [
+    "YKT-2205"
+  ],
+  "remainingParentSites": 6,
+  "forkSitesUnchanged": 5
+}
