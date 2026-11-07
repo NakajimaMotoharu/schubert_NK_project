@@ -5,3 +5,6 @@
 原PMD XML/現在source/hash/全method・fixture所有・元個別証拠を照合する。既五Mapは新sourceに束縛された同一所有根拠を使い、原文や別sourceの成功を新scopeへ無根拠転用しない。方法内五Mapは生成/全使用/返却先の限定を明示し、単なるTest所属で非該当にしない。reflectionは固定自module Historyの表示redaction検査であること、productionアクセス経路変更や任意targetでないことを静的確認する。
 
 許可済みsource/公開manifest/独立parse metadataのみ、Product/元Test/fixtureの実行・compile/VM/DB/Root/native/held source0。原Test/期待値/Main変更0。新試験/coverage/unique/正式加点0、十一根拠の独立照合成功分だけsubset分類へ加算。否定vector=target型/変数/根拠/hash/範囲の誤りを拒否。原1/3/7pp cap9、WBS-F03 ORIGINAL_PLAN、N/T・専有費不明null。
+
+
+BUG2439/YKT2183追記訂正：JdbcOutbox.rowは既並行methodでも各worker内new Fixture/new rowで隔離される。no-workerという候補理由は22580へ原保全して撤回、worker生成/格納/10秒joinの実sourceで確認する。対象十一/原見積は不変、22576は未受入候補で正規結果へ加算しない。

@@ -1,7 +1,7 @@
 """Individual source judgments, immutable raw findings and current declarations; no Product action."""
 from pathlib import Path
 import collections,datetime,hashlib,json,subprocess,xml.etree.ElementTree as E
-R=Path(__file__).resolve().parents[4];OUT=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG22576-ten-maps-one-reflection-v1'
+R=Path(__file__).resolve().parents[4];OUT=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG22584-ten-maps-one-reflection-v2'
 sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
 load=lambda p:json.loads(Path(p).read_bytes())
 def main():

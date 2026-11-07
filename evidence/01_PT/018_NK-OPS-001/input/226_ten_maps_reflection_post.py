@@ -2,7 +2,7 @@
 from pathlib import Path
 import datetime,hashlib,json,subprocess,copy,re
 import pg9666_pagination_static as c
-R=Path(__file__).resolve().parents[4];RUNS=R.parent/'pgpt-runs/PG379';P=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG22576-ten-maps-one-reflection-v1';OUT=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG22578-ten-maps-one-reflection-independent-v1';SLOT=RUNS/'pg22578-ten-maps-one-reflection-independent-v1'
+R=Path(__file__).resolve().parents[4];RUNS=R.parent/'pgpt-runs/PG379';P=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG22584-ten-maps-one-reflection-v2';OUT=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG22586-ten-maps-one-reflection-independent-v2';SLOT=RUNS/'pg22578-ten-maps-one-reflection-independent-v1'
 sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
 load=lambda p:json.loads(Path(p).read_bytes())
 def profile(row,text,body):
@@ -13,15 +13,15 @@ def profile(row,text,body):
  if p=='LOCAL_EXPECTED_HTTP_HEADERS':return 'assertEquals(headers, reply.headers);' in body and 'return headers;' not in body
  if p=='LOCAL_EXPECTED_COPY':return 'new HashMap<>(fixture.bindings)' in body and 'values.remove(10);' in body and 'return values;' in body
  if p=='LOCAL_EXPECTED_HANDLE_VECTOR':return 'values.put(first, 7L);' in body and 'return values;' in body and 'expected.put(5, null);' in text
- if p=='LOCAL_ROW_VECTOR_RETURNED_ONLY_TO_SYNCHRONOUS_TEST':return 'values.put("id", id);' in body and 'return values;' in body and not re.search(r'\b(?:ExecutorService|Executors|Thread|CompletableFuture)\b|\.parallel\(',text)
+ if p=='ROW_VECTOR_OWNED_PER_CALL_AND_PARALLEL_WORKER':return 'values.put("id", id);' in body and 'return values;' in body and re.search(r'pool\.submit\(\s*\(\) -> \{\s*var f = new Fixture\(\);\s*var ownRow = row\(id, NOW\);',text) is not None and 'f.rows.add(ownRow);' in text and 'jobs.get(index).get(10, TimeUnit.SECONDS)' in text
  if p=='WORKER_OWN_REQUEST_FRAME':return 'var frame = new Frame(' in body and 'workers.submit(' in body and 'get(10, java.util.concurrent.TimeUnit.SECONDS)' in body
  if p=='WORKER_OWN_JDBC_FIXTURE':return 'var f = new Jdbc();' in body and not re.search(r'static\s+(?:final\s+)?Map\b',text)
  return False
 
 def main():
- assert not OUT.exists() and not SLOT.exists();m=load(P/'manifest.json');assert m['actualExit']==0 and m['productTestsExecuted']==0;sites=load(P/'sites.json');assert len(sites)==11 and sum(x['originalAttributes']['rule']=='UseConcurrentHashMap' for x in sites)==10
+ assert not OUT.exists() and SLOT.exists();m=load(P/'manifest.json');assert m['actualExit']==0 and m['productTestsExecuted']==0;sites=load(P/'sites.json');assert len(sites)==11 and sum(x['originalAttributes']['rule']=='UseConcurrentHashMap' for x in sites)==10
  for p,h in m['inputHashes'].items():assert sha(R/p)==h==hashlib.sha256(subprocess.check_output(['git','show',m['source']+':'+p],cwd=R)).hexdigest()
- prior=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG22410-ordinary-thread158-independent-v1/manifest.json';assert sha(prior)=='b7a9022920798dd9c82e80a3e5165fca4a19a82de4d700568c46382c86f929f4';tool=load(prior)['tool'];owned=RUNS/'pg22410-ordinary-thread158-independent-v1';assert sha(R/tool['path'])==tool['sha256']==sha(owned/'source/TestMethodScopeAstCheck.java');classes={p.name:sha(p) for p in (owned/'classes').glob('*.class')};assert set(classes)=={'TestMethodScopeAstCheck.class','TestMethodScopeAstCheck$1.class'};SLOT.mkdir();c.SLOT=SLOT;stage=c.step('parse',[str(R.parent/'toolchain/jdk-25.0.4/bin/java'),'-cp',str(owned/'classes'),'TestMethodScopeAstCheck',str(R),*sorted(m['inputHashes'])],R,timeout=120);assert stage['actualExit']==0 and not stage['timedOut'];methods={}
+ prior=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG22410-ordinary-thread158-independent-v1/manifest.json';assert sha(prior)=='b7a9022920798dd9c82e80a3e5165fca4a19a82de4d700568c46382c86f929f4';tool=load(prior)['tool'];owned=RUNS/'pg22410-ordinary-thread158-independent-v1';assert sha(R/tool['path'])==tool['sha256']==sha(owned/'source/TestMethodScopeAstCheck.java');classes={p.name:sha(p) for p in (owned/'classes').glob('*.class')};assert set(classes)=={'TestMethodScopeAstCheck.class','TestMethodScopeAstCheck$1.class'};stage=load(SLOT/'parse-exit.safe.json');assert stage['actualExit']==0 and not stage['timedOut'];assert stage['command']==[str(R.parent/'toolchain/jdk-25.0.4/bin/java'),'-cp',str(owned/'classes'),'TestMethodScopeAstCheck',str(R),*sorted(m['inputHashes'])];methods={}
  for line in (SLOT/'parse.stdout').read_text().splitlines():
   p,cl,method,lo,hi=line.split('\t');methods.setdefault((p,cl,method),[]).append((int(lo),int(hi)))
  checked=[]

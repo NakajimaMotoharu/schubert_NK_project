@@ -42,11 +42,15 @@
         "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
         "priority": "3"
       },
-      "profile": "LOCAL_ROW_VECTOR_RETURNED_ONLY_TO_SYNCHRONOUS_TEST",
-      "reason": "Fresh values map on each row fixture call, populated sequentially then returned to its own synthetic result row; this Test has no worker/executor/parallel launch. The map is an independent literal result vector, not shared application state.",
+      "profile": "ROW_VECTOR_OWNED_PER_CALL_AND_PARALLEL_WORKER",
+      "reason": "Fresh values map on each row call. Existing parallel method creates new Fixture and ownRow inside each submitted worker and puts it only into that worker fixture; other row calls are local fixture setup or deliberate mutation. Parent joins each Future with10SECONDS. No map object is shared by workers.",
       "witnesses": [
         "return values;",
-        "values.put(\"id\", id);"
+        "values.put(\"id\", id);",
+        "void sharedRepositoryParallelCallsKeepOwnRowsBindingsAndBody()",
+        "var ownRow = row(id, NOW);",
+        "f.rows.add(ownRow);",
+        "jobs.get(index).get(10, TimeUnit.SECONDS)"
       ],
       "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
     },
