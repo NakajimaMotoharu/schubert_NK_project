@@ -1,0 +1,147 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "657a03f4317e51d899344122a5c2ebd8bdf9f736",
+    "normalSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+    "inputHashes": {
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiPoolSourceOwnershipPortTest.java": "0d134cf2523403de25f77791bf0c1ffd72ce54e62792f53005cf4f990f9058e1",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebPoolSourceOwnershipPortTest.java": "4c0265e9372f3d7cbc1360c02e018472651456a893eb762818a3c6fb1dc614eb",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool.java": "81d1ef1dcdd511e2bb7eae1bfdee58e50432edd2bca81ce6085aa344e57ce312",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebJdbcPool.java": "a322547b005ea0a71e1beeaab971c2d4195e36657b440e0b449c6292bc316526",
+      "evidence/01_PT/018_NK-OPS-001/input/393_pool_ownership_qualifier.py": "781ca42060a47b99e4c9487e60cc4e6c3d6a903a6fbbeb9100b753d40730f137",
+      "evidence/01_PT/018_NK-OPS-001/input/394_pool_ownership_scope.json": "5d5a2c82ce3f509c683f67e711702f2b5a0f6b6f7bf4da9390fd2ef79b742576"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/toolchain/m2/repository/com/zaxxer/HikariCP/7.1.0/HikariCP-7.1.0.jar": "2be45c641b841e81df87292e181f2c203500c5f0e9a1676f135927387f3cf40b",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar": "1d816c9e5510723a10dfde2b19a8ddc9c5423d425039b891eb497d3b6e963fdb",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": "622ae1b70d2627b7b162a2cd1b07bc5201092e0628d9a50986892f2cbe7e98f9",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "compileManifestSha256": "7fb4568ac39ed8a67671264cc80485646bf6620e789d9e557c3c1f0e706b386d",
+    "selected": [
+      "dev.codex.schubert.nk.api.bootstrap.ApiPoolSourceOwnershipPortTest",
+      "dev.codex.schubert.nk.web.bootstrap.WebPoolSourceOwnershipPortTest"
+    ],
+    "expectedTests": 2,
+    "newMethods": 2,
+    "requalifiedExistingMethods": 0,
+    "session": "PG23308-POOL-SOURCE-OWNERSHIP",
+    "startUTC": "2026-11-07T16:46:06.803627+00:00"
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T16:46:06.803785+00:00",
+      "endUTC": "2026-11-07T16:46:09.930754+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg23308-pool-ownership-port-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg23308-pool-ownership-port-unit-v1/jacoco.exec,sessionid=PG23308-POOL-SOURCE-OWNERSHIP,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg23308-pool-ownership-port-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23302-pool-ownership-port-compile-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/com/zaxxer/HikariCP/7.1.0/HikariCP-7.1.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23308-pool-ownership-port-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.api.bootstrap.ApiPoolSourceOwnershipPortTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.bootstrap.WebPoolSourceOwnershipPortTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "915eefe32348d26a036a9f5509e0b495d6b8a095cd085211a8861fc3e5259211",
+      "stderrSha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T16:46:09.935136+00:00",
+      "endUTC": "2026-11-07T16:46:10.102473+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23308-pool-ownership-port-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23308-pool-ownership-port-unit-v1/component",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23308-pool-ownership-port-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e20efd9b24250972b9d33bb0e0ba45d51f4aebf3b14e1134f24f601da67f970b",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T16:46:10.102789+00:00",
+      "endUTC": "2026-11-07T16:46:10.217491+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23308-pool-ownership-port-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "a8246bef7b5acdf8d23374495c7d6fba28c040bac8987c0767cdcd926ded8e57",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T16:46:10.217822+00:00",
+      "endUTC": "2026-11-07T16:46:10.332522+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23308-pool-ownership-port-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "5d2e4ae0c87a5c0b5a93ae03ef7580361cb1314d5ee60e6306ec257e0a1067de",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.web.bootstrap.WebPoolSourceOwnershipPortTest",
+      "name": "poolOwn002FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.ApiPoolSourceOwnershipPortTest",
+      "name": "poolOwn001FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 2,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool": "7a17f4f53c36252dd9a91905e71e1fa35300cceb2a0d8c2f0e46efa94d9bdc94",
+    "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool": "b2fd930a5feaf6398d7cf07575bb05e0c09fa0788f0fe72dd3e45c148b125c16"
+  },
+  "formalUpdated": false
+}

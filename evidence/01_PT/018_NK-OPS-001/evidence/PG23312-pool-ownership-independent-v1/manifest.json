@@ -1,0 +1,282 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T01:54:20.461601+09:00",
+  "source": "657a03f4317e51d899344122a5c2ebd8bdf9f736",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "tests": 2,
+  "newUniqueTests": 2,
+  "observations": [
+    {
+      "caseClass": "dev.codex.schubert.nk.api.bootstrap.ApiPoolSourceOwnershipPortTest",
+      "poolName": "schubert-nk-api",
+      "successfulGenerations": 2,
+      "nullResultConstructorFailures": 1,
+      "failFastCallbackBeforeLoan": true,
+      "maximumPoolSize": 8,
+      "minimumIdle": 2,
+      "connectionTimeoutMillis": 3000,
+      "validationTimeoutMillis": 2000,
+      "initializationFailTimeoutMillis": 1,
+      "autoCommit": true,
+      "readOnly": false,
+      "registerMbeans": false,
+      "callerSourceCloseWhilePoolOrFailedConstructor": 0,
+      "callerFixtureSourceFinalCloses": 2,
+      "allIssuedMemoryConnectionsClosed": true,
+      "absoluteIssuedConnectionCount": null,
+      "absoluteClosedConnectionCount": null,
+      "absoluteCountNote": "Relational count equality was asserted at every terminal; absolute totals were not emitted, so retained as null.",
+      "sdkOwnedWorkersAliveAfterEachAttempt": 0,
+      "noSqlOrDriverCallbacksAccepted": true,
+      "scope": "VALUES_BOUND_BY_FIXED_SOURCE_ASSERTIONS_AND_TRUE_TERMINAL_XML_NOT_REALDB_OBSERVATION"
+    },
+    {
+      "caseClass": "dev.codex.schubert.nk.web.bootstrap.WebPoolSourceOwnershipPortTest",
+      "poolName": "schubert-nk-web",
+      "successfulGenerations": 2,
+      "nullResultConstructorFailures": 1,
+      "failFastCallbackBeforeLoan": true,
+      "maximumPoolSize": 2,
+      "minimumIdle": 1,
+      "connectionTimeoutMillis": 3000,
+      "validationTimeoutMillis": 2000,
+      "initializationFailTimeoutMillis": 1,
+      "autoCommit": true,
+      "readOnly": false,
+      "registerMbeans": false,
+      "callerSourceCloseWhilePoolOrFailedConstructor": 0,
+      "callerFixtureSourceFinalCloses": 2,
+      "allIssuedMemoryConnectionsClosed": true,
+      "absoluteIssuedConnectionCount": null,
+      "absoluteClosedConnectionCount": null,
+      "absoluteCountNote": "Relational count equality was asserted at every terminal; absolute totals were not emitted, so retained as null.",
+      "sdkOwnedWorkersAliveAfterEachAttempt": 0,
+      "noSqlOrDriverCallbacksAccepted": true,
+      "scope": "VALUES_BOUND_BY_FIXED_SOURCE_ASSERTIONS_AND_TRUE_TERMINAL_XML_NOT_REALDB_OBSERVATION"
+    }
+  ],
+  "successfulPoolGenerations": 4,
+  "expectedNullResultConstructorFailures": 2,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 92,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 28,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 4,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 4,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 2,
+      "missed": 0
+    }
+  },
+  "wholeTargetCodeCoverage100": true,
+  "branchStatus": "NATURAL_ZERO_BRANCH",
+  "branchCounterPresent": false,
+  "branchRatio": null,
+  "sourceFilePhysicalClosure": {
+    "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool": {
+      "name": "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool",
+      "sourceFile": "ApiJdbcPool.java",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "code": true
+        },
+        {
+          "name": "open",
+          "descriptor": "(Ljavax/sql/DataSource;)Lcom/zaxxer/hikari/HikariDataSource;",
+          "code": true
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool": {
+      "name": "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool",
+      "sourceFile": "WebJdbcPool.java",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "code": true
+        },
+        {
+          "name": "open",
+          "descriptor": "(Ljavax/sql/DataSource;)Lcom/zaxxer/hikari/HikariDataSource;",
+          "code": true
+        }
+      ]
+    }
+  },
+  "physical": {
+    "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool": "7a17f4f53c36252dd9a91905e71e1fa35300cceb2a0d8c2f0e46efa94d9bdc94",
+    "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool": "b2fd930a5feaf6398d7cf07575bb05e0c09fa0788f0fe72dd3e45c148b125c16"
+  },
+  "classIds": {
+    "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool": "32a519e800d2b1dd",
+    "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool": "f085745612765f2c"
+  },
+  "sourcePhysicalCount": 2,
+  "normalCodeClasses": 2,
+  "abstractNoCode": 0,
+  "normalProductInitializations": [
+    "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool",
+    "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool"
+  ],
+  "normalObservedCrc": {
+    "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool": "f085745612765f2c",
+    "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool": "32a519e800d2b1dd"
+  },
+  "sdkHikariInitializations": [
+    "com/zaxxer/hikari/HikariConfig",
+    "com/zaxxer/hikari/HikariDataSource",
+    "com/zaxxer/hikari/pool/HikariPool",
+    "com/zaxxer/hikari/pool/HikariPool$$Lambda+0x00000000271876a0",
+    "com/zaxxer/hikari/pool/HikariPool$$Lambda+0x000000002718abd8",
+    "com/zaxxer/hikari/pool/HikariPool$$Lambda+0x000000002718ae18",
+    "com/zaxxer/hikari/pool/HikariPool$HouseKeeper",
+    "com/zaxxer/hikari/pool/HikariPool$KeepaliveTask",
+    "com/zaxxer/hikari/pool/HikariPool$MaxLifetimeTask",
+    "com/zaxxer/hikari/pool/HikariPool$PoolEntryCreator",
+    "com/zaxxer/hikari/pool/HikariPool$PoolInitializationException",
+    "com/zaxxer/hikari/pool/HikariProxyConnection",
+    "com/zaxxer/hikari/pool/PoolBase",
+    "com/zaxxer/hikari/pool/PoolBase$IMetricsTrackerDelegate",
+    "com/zaxxer/hikari/pool/PoolBase$NopMetricsTrackerDelegate",
+    "com/zaxxer/hikari/pool/PoolEntry",
+    "com/zaxxer/hikari/pool/ProxyConnection",
+    "com/zaxxer/hikari/pool/ProxyConnection$ClosedConnection",
+    "com/zaxxer/hikari/pool/ProxyConnection$ClosedConnection$$Lambda+0x000000002718a9b0",
+    "com/zaxxer/hikari/pool/ProxyFactory",
+    "com/zaxxer/hikari/pool/ProxyLeakTask",
+    "com/zaxxer/hikari/pool/ProxyLeakTask$1",
+    "com/zaxxer/hikari/pool/ProxyLeakTaskFactory",
+    "com/zaxxer/hikari/util/ClockSource",
+    "com/zaxxer/hikari/util/ClockSource$Factory",
+    "com/zaxxer/hikari/util/ClockSource$NanosecondClockSource",
+    "com/zaxxer/hikari/util/ConcurrentBag",
+    "com/zaxxer/hikari/util/ConcurrentBag$$Lambda+0x0000000027187000",
+    "com/zaxxer/hikari/util/ConcurrentBag$$Lambda+0x000000002718b048",
+    "com/zaxxer/hikari/util/Credentials",
+    "com/zaxxer/hikari/util/FastList",
+    "com/zaxxer/hikari/util/SuspendResumeLock",
+    "com/zaxxer/hikari/util/SuspendResumeLock$1",
+    "com/zaxxer/hikari/util/UtilityElf",
+    "com/zaxxer/hikari/util/UtilityElf$CustomDiscardPolicy",
+    "com/zaxxer/hikari/util/UtilityElf$DefaultThreadFactory"
+  ],
+  "sdkHikariInitCount": 36,
+  "sdkGeneratedLambdaOwners": {
+    "com/zaxxer/hikari/util/ConcurrentBag$$Lambda+0x000000002718b048": "com/zaxxer/hikari/util/ConcurrentBag",
+    "com/zaxxer/hikari/util/ConcurrentBag$$Lambda+0x0000000027187000": "com/zaxxer/hikari/util/ConcurrentBag",
+    "com/zaxxer/hikari/pool/ProxyConnection$ClosedConnection$$Lambda+0x000000002718a9b0": "com/zaxxer/hikari/pool/ProxyConnection$ClosedConnection",
+    "com/zaxxer/hikari/pool/HikariPool$$Lambda+0x000000002718abd8": "com/zaxxer/hikari/pool/HikariPool",
+    "com/zaxxer/hikari/pool/HikariPool$$Lambda+0x00000000271876a0": "com/zaxxer/hikari/pool/HikariPool",
+    "com/zaxxer/hikari/pool/HikariPool$$Lambda+0x000000002718ae18": "com/zaxxer/hikari/pool/HikariPool"
+  },
+  "sourceRecipeNegativeChecks": 6,
+  "staticRaw": 10,
+  "staticApplicable": 0,
+  "checkstyle": 0,
+  "staticPreflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23310-pool-ownership-source-preflight-v1/manifest.json",
+    "sha256": "279ae441f47b86a98235fe3d65500e7d61d097004df29c0e7b52e35d97eb7f5c"
+  },
+  "newDirectWholeSourceProof": 2,
+  "registeredWholeComponentDelta": null,
+  "registryDedupRequired": true,
+  "originalTestsCompiled": 0,
+  "manualCoverageExclusions": [],
+  "standardCompilerFilters": "None required for these two ordinary classes; all four normal Code methods retained.",
+  "oldExecCombined": false,
+  "actualDatabaseDriverSqlNetworkRoleAdmissionVmRootNativeOperations": 0,
+  "heldFourInitializations": 0,
+  "diagnosticUuidFoundInPublicOrdinaryLogs": 0,
+  "absoluteCallbackCountsNotInvented": true,
+  "environment": {
+    "file.encoding": "UTF-8",
+    "java.version": "25.0.4",
+    "os.arch": "amd64",
+    "os.name": "Linux",
+    "user.timezone": "Asia/Tokyo"
+  },
+  "caseTimings": [
+    {
+      "className": "dev.codex.schubert.nk.web.bootstrap.WebPoolSourceOwnershipPortTest",
+      "seconds": "1.005"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ApiPoolSourceOwnershipPortTest",
+      "seconds": "1.116"
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiPoolSourceOwnershipPortTest.java": "0d134cf2523403de25f77791bf0c1ffd72ce54e62792f53005cf4f990f9058e1",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebPoolSourceOwnershipPortTest.java": "4c0265e9372f3d7cbc1360c02e018472651456a893eb762818a3c6fb1dc614eb",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool.java": "81d1ef1dcdd511e2bb7eae1bfdee58e50432edd2bca81ce6085aa344e57ce312",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebJdbcPool.java": "a322547b005ea0a71e1beeaab971c2d4195e36657b440e0b449c6292bc316526",
+    "evidence/01_PT/018_NK-OPS-001/input/393_pool_ownership_qualifier.py": "781ca42060a47b99e4c9487e60cc4e6c3d6a903a6fbbeb9100b753d40730f137",
+    "evidence/01_PT/018_NK-OPS-001/input/394_pool_ownership_scope.json": "5d5a2c82ce3f509c683f67e711702f2b5a0f6b6f7bf4da9390fd2ef79b742576"
+  },
+  "files": {
+    "original-classinfo-begin.safe.json": "88f5ad5acb742b35c5e1880212463a9dcc51d2e66c13f364c25d0164a4a67d68",
+    "original-coverage.stdout": "e20efd9b24250972b9d33bb0e0ba45d51f4aebf3b14e1134f24f601da67f970b",
+    "original-execinfo-begin.safe.json": "f8504bc69d936fcaf55b323e2e2109ecad9c4d38c13fdf8803e839defffbf3fd",
+    "original-coverage-exit.safe.json": "eec2f7c8a8bab2be816d0c5f3d8534f75afbc5351bba397b10b40631cbd4cfd8",
+    "original-classinfo-exit.safe.json": "ee37960ccc45264119eeb605dc3b3ad037ebed3899e41a7bf28318a742a4e1c3",
+    "original-unit-begin.safe.json": "5829f2538ab9068c400449425ab75502d212111c815a372d14d4298bbcf33d67",
+    "original-unit-process.safe.json": "e9d9f6514e341d8aae1760029d9558614597acc1b06f7ff23291dbfae2ac8d0c",
+    "original-coverage-begin.safe.json": "9587353e1d40a84c17c47d0f36aaa8e9232b137ad24608b0aa4927096a4f8a00",
+    "original-classinfo.stdout": "a8246bef7b5acdf8d23374495c7d6fba28c040bac8987c0767cdcd926ded8e57",
+    "original-execinfo-process.safe.json": "e94b996cc3cd4bad37047e1f679f5610fa1cc892a5357b442838fa5217b04bcf",
+    "original-coverage.xml": "1dd7188f0ea0c0be49b1c7ad7c3b021940bf8993502c896780f019a44905d5be",
+    "original-coverage-process.safe.json": "f8ab0db7af06db93e4874f5647129ea983af62889fc62cba64da2ba5efe72604",
+    "original-execinfo-exit.safe.json": "936914cb960867ae05bbe5efff9a2caa631f38a9c601d37c0f2e3808cc8fc62f",
+    "original-execinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "jacoco.exec": "63f1d6a16237cc444ea76e62a66b979b7f5669699087c5d272eea7edc8f4bcf7",
+    "original-execinfo.stdout": "5d2e4ae0c87a5c0b5a93ae03ef7580361cb1314d5ee60e6306ec257e0a1067de",
+    "original-begin.json": "0a038dadeda6c4f00252e6ad15e00976665f556973ef0d460b271c9eb3196924",
+    "original-unit-exit.safe.json": "dc8db7b11e3fcf5e0525b9ac2b1283f0f81e8c16a573ff50c00ef62643548ac6",
+    "original-classinfo-process.safe.json": "4a3381d6dad4cffc3748a3858a4180198f283bc85b27a7bc10f2a68d051f3a30",
+    "original-unit.stderr": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58",
+    "original-manifest.json": "c9929d07edac51c84f72f8343fd4f9708db0fac473ef45aca1898e05b587b079",
+    "original-classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-coverage.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-class-init.stdout": "ede75bfd5be8ca4744fb9780d69cfa21d9f1e819c7a20633f6ca28a05d89dbcd",
+    "original-unit.stdout": "915eefe32348d26a036a9f5509e0b495d6b8a095cd085211a8861fc3e5259211",
+    "original-TEST-junit-jupiter.xml": "1ffd1bc0a12f94aa2473e64909531bc037e567fb7c2429b3b72ead99d93fa71a",
+    "original-TEST-junit-platform-suite.xml": "7b850e4b854579da24004d2c96f355246da2789dc3f647e309af68a7b0b348ec",
+    "original-TEST-junit-vintage.xml": "7cf914e50906adbddc47f65d5e5ed06cac91327d75d4de72305c6649405175c6",
+    "static-pmd.stdout": "d452800fbb58c4260f33274a19d30172b07315a1c2fbe8df4578dde70afb7be8",
+    "static-checkstyle-exit.safe.json": "a0dfbaf854652c3a046ec01f7f4fad14137d0c88318ad28001a1e342c11796b9",
+    "static-pmd.stderr": "56c2f84bce5e968d452419d7056430224958eb95049579787378c5465fe5390f",
+    "static-pmd-exit.safe.json": "15e9779af2fea230cd49959457e088e6491046fe6d86a9da605e5d7a1027674f",
+    "static-checkstyle-process.safe.json": "b00fdba1bcd5b771f5c13c327cf03304eae1f09195de5457ac89e69a8269f0a1",
+    "static-pmd-begin.safe.json": "6c8b6fffabd26474a75ab4797d8248a74376c9741bc578c34df4e6c01f4e6176",
+    "static-sources.txt": "170d5d2a62a3ba14a0cb93646d718fee6feb510e85e45eead2478bbca9c75d4f",
+    "static-pmd-process.safe.json": "345ae8fa328620d50a5e8d3516eebcf04c5fa4d4ce7332e8127f7063ba77d349",
+    "static-checkstyle.xml": "d8340c6f0c45ebf4489d2925d577fdc50af09e04067073352afaa7c3867b08e9",
+    "static-checkstyle-begin.safe.json": "764fdf5f763a342b03fb42359e39791557c47b1f1f86072790229fb6c19621b1",
+    "static-checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "static-manifest.json": "bbebf772e7b298c17689c09837a948741ef7ca20ff8be12a4a456c57089383f4",
+    "static-pmd.xml": "5869dc230fa97c7a08cb34b887be467dad71f4939a4120786d9003f0aba21dc8",
+    "static-checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/397_pool_ownership_independent_post.py",
+    "sha256": "f791a4029875f9f9271766a19411ded6cc8b4e87ca7f47d8971d1c0c557f13f0"
+  }
+}

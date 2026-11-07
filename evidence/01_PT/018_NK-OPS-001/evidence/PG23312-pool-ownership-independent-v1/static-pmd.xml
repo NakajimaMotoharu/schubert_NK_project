@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-08T01:28:04.544">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiPoolSourceOwnershipPortTest.java">
+<violation beginline="66" endline="66" begincolumn="21" endcolumn="27" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiPoolSourceOwnershipPortTest" method="poolOwn001FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="91" endline="91" begincolumn="11" endcolumn="17" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiPoolSourceOwnershipPortTest" method="awaitOwnedWorkers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="97" endline="97" begincolumn="12" endcolumn="18" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ApiPoolSourceOwnershipPortTest" method="awaitOwnedWorkers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="132" endline="132" begincolumn="19" endcolumn="52" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ApiPoolSourceOwnershipPortTest.SourcePort" method="getConnection" variable="connection" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="148" endline="148" begincolumn="42" endcolumn="82" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ApiPoolSourceOwnershipPortTest.SourcePort" method="getConnection" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebPoolSourceOwnershipPortTest.java">
+<violation beginline="66" endline="66" begincolumn="21" endcolumn="27" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.bootstrap" class="WebPoolSourceOwnershipPortTest" method="poolOwn002FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="91" endline="91" begincolumn="11" endcolumn="17" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.bootstrap" class="WebPoolSourceOwnershipPortTest" method="awaitOwnedWorkers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="97" endline="97" begincolumn="12" endcolumn="18" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.bootstrap" class="WebPoolSourceOwnershipPortTest" method="awaitOwnedWorkers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="132" endline="132" begincolumn="19" endcolumn="52" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.bootstrap" class="WebPoolSourceOwnershipPortTest.SourcePort" method="getConnection" variable="connection" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="148" endline="148" begincolumn="42" endcolumn="82" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.web.bootstrap" class="WebPoolSourceOwnershipPortTest.SourcePort" method="getConnection" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+</file>
+</pmd>
