@@ -709,3 +709,10 @@ NK-WEB-002: WebNativeRuntime（ordinary借用DB/5credential→三codec/readonly 
 | Program/class/method | 関連設計・判断 | Test・証拠 | canonical owner/cost |
 |---|---|---|---|
 | NK-WEB-001 WebSecurityFilterFactory constructor/create | FUN/AUT/SYS006/UI221222226252/SS313314342351352/PG-D113114116・1148 | PT-WEB-SECCONSTRUCT001..004、015086/087、22304/22308、L26M2C1未達0/branch自然0N-A、positive business chain未受入 | WBS-P015-02一群 |
+
+
+### 2026-11-07 Session SQL store全port単体
+
+| Program/class/method | 関連設計・判断 | Test・証拠 | canonical owner/cost |
+|---|---|---|---|
+| NK-WEB-001 JdbcWebSessionStore全public/private手書method・InvalidStoredRow | FUN/AUT/UI221222226/SS314331332352/PG-D1149 | PT-WEB-JDBCSTOREPORT001..015、015088/089、22350/22368、L123M13C1B30未達0・physical2/Code1、実DB未受入 | WBS-P015-01一群 |

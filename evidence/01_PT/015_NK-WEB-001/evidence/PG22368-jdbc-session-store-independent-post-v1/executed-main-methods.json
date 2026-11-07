@@ -1,0 +1,102 @@
+{
+  "dev/codex/schubert/nk/web/session/InvalidSessionRowException": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/JdbcWebSessionStore": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "findLocked",
+      "desc": "(Ljava/sql/Connection;Ljava/lang/String;)Ljava/util/Optional;"
+    },
+    {
+      "name": "insert",
+      "desc": "(Ljava/sql/Connection;Ldev/codex/schubert/nk/web/session/WebSessionRow;)V"
+    },
+    {
+      "name": "replace",
+      "desc": "(Ljava/sql/Connection;Ldev/codex/schubert/nk/web/session/WebSessionRow;Ldev/codex/schubert/nk/web/session/WebSessionRow;)Z"
+    },
+    {
+      "name": "delete",
+      "desc": "(Ljava/sql/Connection;Ldev/codex/schubert/nk/web/session/SessionPayloadIdentity;J)Z"
+    },
+    {
+      "name": "read",
+      "desc": "(Ljava/sql/ResultSet;)Ldev/codex/schubert/nk/web/session/WebSessionRow;"
+    },
+    {
+      "name": "deleteByHash",
+      "desc": "(Ljava/sql/Connection;Ljava/lang/String;)Z"
+    },
+    {
+      "name": "requireHash",
+      "desc": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "column",
+      "desc": "(Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "name": "identity",
+      "desc": "(Ljava/sql/PreparedStatement;ILdev/codex/schubert/nk/web/session/SessionPayloadIdentity;)V"
+    },
+    {
+      "name": "changed",
+      "desc": "(I)Z"
+    },
+    {
+      "name": "transaction",
+      "desc": "(Ljava/sql/Connection;)V"
+    },
+    {
+      "name": "required",
+      "desc": "(Ljava/lang/Object;)Ljava/lang/Object;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SessionPayloadIdentity": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/util/UUID;Ljava/lang/String;Ljava/time/Instant;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SessionStoreException": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "preserveFatal",
+      "desc": "(Ljava/lang/Throwable;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/WebSessionRow": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/session/SessionPayloadIdentity;Ldev/codex/schubert/nk/web/session/EncryptedSessionPayload;Ljava/time/Instant;Ljava/time/Instant;IJ)V"
+    },
+    {
+      "name": "requireVersion",
+      "desc": "(J)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/EncryptedSessionPayload": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;[B)V"
+    },
+    {
+      "name": "validateVersion",
+      "desc": "(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "name": "ciphertext",
+      "desc": "()[B"
+    }
+  ]
+}

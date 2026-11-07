@@ -550737,4 +550737,43 @@
   "parentAccepted": false,
   "wholeG13Accepted": false
 }
+,
+  "currentJdbcWebSessionStoreWholeSqlPortQualification20261107": {
+  "source": "d87efbe02857b397d6af100d61ede8a77dcf69ce",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "manifest": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22368-jdbc-session-store-independent-post-v1/manifest.json",
+    "sha256": "9c7aa208176af48724db565d5f60cb123d69deb2d90b329bb8362bc455398591"
+  },
+  "record": "evidence/01_PT/015_NK-WEB-001/089_Session_SQL_store全port単体結果.md",
+  "rows": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/JdbcSessionStorePortTest.java",
+      "sha256": "8ce537e9d32a9fa49ac17554b47eccd924f652fda07e6a0c26a9efb59a85ef38",
+      "source": "d87efbe02857b397d6af100d61ede8a77dcf69ce",
+      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "role": "TARGET_TEST",
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/JdbcWebSessionStore.java",
+      "sha256": "4af4ff9c66f6ef611713f1329f14140bfeb526f35a94907e4274c187445ddd6c",
+      "source": "d87efbe02857b397d6af100d61ede8a77dcf69ce",
+      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "role": "TARGET",
+      "newAcceptance": false
+    }
+  ],
+  "newTestPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/JdbcSessionStorePortTest.java",
+  "newUniqueTests": 15,
+  "requalifiedExistingTests": 0,
+  "newSourceProofs": 1,
+  "sourceProofRetained": 0,
+  "branchStatus": "ALL_30_COVERED",
+  "scope": "BORROWED_JDBC_INTERFACE_SQL_BIND_GETTER_RESOURCE_ONLY_REAL_DB_UNACCEPTED",
+  "parentAccepted": false,
+  "wholeG13Accepted": false,
+  "physicalClassCount": 2,
+  "codeClassCount": 1
+}
 }

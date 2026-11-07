@@ -1,0 +1,231 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "d87efbe02857b397d6af100d61ede8a77dcf69ce",
+    "normalSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+    "inputHashes": {
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/JdbcSessionStorePortTest.java": "8ce537e9d32a9fa49ac17554b47eccd924f652fda07e6a0c26a9efb59a85ef38",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/JdbcWebSessionStore.java": "4af4ff9c66f6ef611713f1329f14140bfeb526f35a94907e4274c187445ddd6c",
+      "evidence/01_PT/015_NK-WEB-001/input/037_jdbc_session_store_qualifier.py": "cf5e41b9753379f504aa33d3e5b022b28e34532c1187e3c7de15962d5226c3d5"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": "622ae1b70d2627b7b162a2cd1b07bc5201092e0628d9a50986892f2cbe7e98f9",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "compileManifestSha256": "2f82b79e40912a8a83f2c0f041f4baacbe86aae2612ae0fe41ec78487a54430f",
+    "selected": [
+      "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest"
+    ],
+    "expectedTests": 15,
+    "newMethods": 15,
+    "session": "PG22350-JDBC-SESSION-STORE15",
+    "startUTC": "2026-11-07T04:44:57.001305+00:00",
+    "realDbOrCryptoOrAuthOrRootNative": false
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T04:44:57.001547+00:00",
+      "endUTC": "2026-11-07T04:44:58.823226+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22350-session-jdbc-store-fifteen-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22350-session-jdbc-store-fifteen-unit-v1/jacoco.exec,sessionid=PG22350-JDBC-SESSION-STORE15,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22350-session-jdbc-store-fifteen-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22360-session-jdbc-store-fifteen-compile-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22350-session-jdbc-store-fifteen-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "0e62bcf49ae86efc69d9e977ed13a25b7d307e9679ebf5865b2cfadc5f36a93c",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T04:44:58.827292+00:00",
+      "endUTC": "2026-11-07T04:44:59.042951+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22350-session-jdbc-store-fifteen-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22350-session-jdbc-store-fifteen-unit-v1/component",
+        "--sourcefiles",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/main/java",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22350-session-jdbc-store-fifteen-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "c012830f06b8f323d596fb59e8ff5aea8ba0e6c2b4a7b94d8c169d9ffb35cc6b",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T04:44:59.043245+00:00",
+      "endUTC": "2026-11-07T04:44:59.157931+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22350-session-jdbc-store-fifteen-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "08ce960968c7480321227e133f90bf556bfa0acac546bf835e07d202ddac7072",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T04:44:59.158252+00:00",
+      "endUTC": "2026-11-07T04:44:59.272831+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22350-session-jdbc-store-fifteen-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "279a101294ff392fb5d57c7163cbe93ec7731e6d580adac97209a698385e83e6",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest",
+      "name": "replaceHasExactTenCasBindsAndReturnsOnlyZeroOrOne()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest",
+      "name": "insertHasNineLiteralBindsAndNeverUpdatesOrOwnsTransaction()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest",
+      "name": "everyRequiredJdbcStageFaultIsFixedAndCreatedResourcesStillClose()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest",
+      "name": "eachNullOrMalformedDetachedColumnIsInvalidAfterCleanClose()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest",
+      "name": "presentFindDetachesNineTypedColumnsAndCiphertextBeforeClosing()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest",
+      "name": "directAndNestedFatalPrioritySurvivesMultipleOwnedCleanupFailures()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest",
+      "name": "duplicateRowsNeverEscapeAsAValidSessionProjection()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest",
+      "name": "offsetDateTimeRangeFailureIsFixedAfterOwnedStatementClose()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest",
+      "name": "independentConcurrentConnectionsNeverExchangeBindsOrRows()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest",
+      "name": "bothDeleteFormsRetainTheirDistinctIdentityPredicatesAndCountBounds()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest",
+      "name": "fatalMalformedCleanupAndGetterCauseKeepOriginalIdentityAfterClose()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest",
+      "name": "absentFindUsesLiteralSqlAndClosesOnlyOwnedResources()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest",
+      "name": "malformedRowsWithCleanupFailureNeverGrantInvalidationClassification()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest",
+      "name": "publicNullHashVersionAndReplacementBoundsNeverReachJdbc()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.JdbcSessionStorePortTest",
+      "name": "transactionAndMissingJdbcObjectsFailBeforeUnownedEffects()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 15,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/web/session/JdbcWebSessionStore$InvalidStoredRow": "d7a122c885959cbaf079a308c490c52652863a6d1c7798bb35a3867021b8f703",
+    "dev/codex/schubert/nk/web/session/JdbcWebSessionStore": "f0b5e4a60079168b8972d4aa4567c9a1eaf241ae01bfff52d2555e97a75ddd82"
+  },
+  "formalUpdated": false
+}
