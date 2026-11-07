@@ -1,0 +1,9 @@
+# 共有三補助型・二十source 受動型静的仕様
+
+BUG2474/YKT2212、3725/3726/PG23156/58の後続。本文symbol参照18をdedupし三helper込み20 current sourceを固定。MvcBeanPortFixtureとSecurityContextOwnerPortFixtureは既21448、BusinessMvcOwnerPortFixtureは既22196のcurrent input一致・成功compiler class hashを再利用する。保存bytecodeから該当三helperとnestedだけをnew-only passive auxへ同byteコピー、Main/別Test/四heldのclassを追加しない。実初期化/コンストラクタ/元Test実行なし。
+
+current normal Main22084のprotocol/storage/web Jar、同成功compileの第三者依存、JDK25jrt先頭と当helper auxを明示してPMD7.28で20sourceを必要な型静的解析。class/source/SDK/hashと実exit/処理error/全raw・個別適用性を独立確認、製品class初期化log0を検証する。Main静的/coverage/元成功Unitの再演なし。Checkstyleは旧22382と同source13を再利用、未結合7sourceだけ限定確認。20全source/hashは今のHEADへ束縛、old成功の新source転用やallscope100の推定をしない。
+
+型依存補完で新たな適用指摘を発見したら先に915/916へ起票してからsource是正、元engine失敗/unknownは保持。個別resolvedの実証不足を一律成功とせず、PD実行PT PASS/covとは分離。候補他30の未調査を維持し、当20のsource静的完了を全F03/451へ換算しない。
+
+PT_DEFAULT通常成功済みの独立sourceに対する受動staticのみ、元process/native/Root/VM/FS/DB/鍵/四held実初期化HOLD不変。元Testcompile0/Unit0、own static tool processのみ。source Main/設計/Currentbaseline変更0。着手見積1/3/7pp、cap9、追加発見/工具費。新unique/whole/leaf0、442/whole94/正式1964-53/工数null。
