@@ -1,0 +1,9 @@
+# Storage非同期child・executorの所有是正仕様
+
+F03/411451/SS311333341343352354、原2/5/9pp cap10、IMPLEMENTATION/ADDITIONAL_FINDING。BUG2460/YKT2198残一とBUG2461/YKT2199一をsource是正する。current PG22934 raw84/分類27（非該当25+是正2）/未分類57を固定。
+
+BUG036: async openDateが返したchildを外で受け取る所有移転をなくし、同じparent public-monitor内でworkerがopenDate→既存TWRでcloseまで所有する。結果は独立Files.isDirectoryでtrueを確認する。後段はcallerが同じDATEのopenExistingDateで独立childを取得し、child-monitorを保持して元の全write/publish/read/delete/sync/explicit close/postclose rejectを実行。childと既executorのTWRを内側に置き、executor終了→child fallbackを維持、outer既executorの再closeはJDKの冪等契約。既monitor二箇所・全literal/data/exception oracle・他method/fixtureは保持。追加openExistingDate一回とopenDate worker内directory確認はsourceの所有改善として明記し、全token不変とは偽らない。
+
+StartupAdmission: 元executor生成をTWRにし、その内側の既try/finally shutdownNowを維持。cancel依頼の後でcloseが実worker終了まで責任を持つ。JDK closeは終了まで待つため、native/workerが取消へ応答しない場合の上限は未証明、元runtimeHOLDのまま。done/cancelled Futureと実worker終端を混同しない。
+
+元二source・29hash/84diagnostics/27理由を保存し、全変換を事前検査後に変更。別postで元method/全sourceへの逆変換・追加所有scopeとworker close・逆cleanup順・shutdown-before-closeのsource witness・負例を確認。許可format/own201 parse-only/PMD/CSだけ、元Test compile/run/fixture生成/native/Root/VM/実FS/DB0。actualPTPASS/covはnull、正式受入/工数率へ加算0。目標raw82/分類25/未分類57は真正XML確認後のみ計上。

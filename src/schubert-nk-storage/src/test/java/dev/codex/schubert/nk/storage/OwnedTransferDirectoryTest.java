@@ -507,9 +507,17 @@ class OwnedTransferDirectoryTest {
     FaultCalls calls = new FaultCalls();
     try (var parent = OwnedTransferDirectory.open(calls, root);
         var executor = Executors.newVirtualThreadPerTaskExecutor()) {
-      OwnedTransferDirectory child;
       synchronized (parent) {
-        child = executor.submit(() -> parent.openDate(DATE)).get(5, TimeUnit.SECONDS);
+        assertEquals(
+            Boolean.TRUE,
+            executor
+                .submit(
+                    () -> {
+                      try (var opened = parent.openDate(DATE)) {
+                        return opened.atDirectory(path -> Files.isDirectory(path));
+                      }
+                    })
+                .get(5, TimeUnit.SECONDS));
         assertEquals(
             Boolean.TRUE,
             executor
@@ -521,30 +529,33 @@ class OwnedTransferDirectoryTest {
                     })
                 .get(5, TimeUnit.SECONDS));
       }
-      synchronized (child) {
-        executor
-            .submit(
-                () -> {
-                  assertEquals(3L, child.atPart(ID, OwnedTransferDirectoryTest::write));
-                  child.publish(ID);
-                  assertArrayEquals(
-                      new byte[] {1, 2, 3},
-                      child.atReadyHandle(ID, OwnedTransferDirectoryTest::readHeld));
-                  assertArrayEquals(
-                      new byte[] {1, 2, 3}, child.atReady(ID, OwnedTransferDirectoryTest::read));
-                  child.atPart(ID, OwnedTransferDirectoryTest::write);
-                  assertArrayEquals(
-                      new byte[] {1, 2, 3},
-                      child.atPartHandle(ID, OwnedTransferDirectoryTest::readHeld));
-                  child.deletePart(ID);
-                  assertEquals(Boolean.TRUE, child.createPart(ID, handle -> Boolean.TRUE));
-                  child.deletePart(ID);
-                  child.sync();
-                  child.close();
-                  failure(StorageIoException.Reason.UNAVAILABLE, child::sync);
-                  return 0;
-                })
-            .get(5, TimeUnit.SECONDS);
+      try (var child = parent.openExistingDate(DATE);
+          executor) {
+        synchronized (child) {
+          executor
+              .submit(
+                  () -> {
+                    assertEquals(3L, child.atPart(ID, OwnedTransferDirectoryTest::write));
+                    child.publish(ID);
+                    assertArrayEquals(
+                        new byte[] {1, 2, 3},
+                        child.atReadyHandle(ID, OwnedTransferDirectoryTest::readHeld));
+                    assertArrayEquals(
+                        new byte[] {1, 2, 3}, child.atReady(ID, OwnedTransferDirectoryTest::read));
+                    child.atPart(ID, OwnedTransferDirectoryTest::write);
+                    assertArrayEquals(
+                        new byte[] {1, 2, 3},
+                        child.atPartHandle(ID, OwnedTransferDirectoryTest::readHeld));
+                    child.deletePart(ID);
+                    assertEquals(Boolean.TRUE, child.createPart(ID, handle -> Boolean.TRUE));
+                    child.deletePart(ID);
+                    child.sync();
+                    child.close();
+                    failure(StorageIoException.Reason.UNAVAILABLE, child::sync);
+                    return 0;
+                  })
+              .get(5, TimeUnit.SECONDS);
+        }
       }
     }
     assertTrue(calls.live.isEmpty());

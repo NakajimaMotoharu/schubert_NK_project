@@ -473,33 +473,34 @@ final class LinuxStartupAdmissionTest {
   void childfd007ConcurrentReadyAndOuterCleanupConsumeAExactlyOnce() throws Exception {
     var f = new Fixture();
     var subject = f.subject();
-    var executor = Executors.newFixedThreadPool(8);
-    try {
-      assertEquals(
-          (Object) 1,
-          subject.withAdmitted(
-              A,
-              P,
-              (lease, bytes) -> {
-                var jobs = new ArrayList<Callable<Void>>();
-                for (int i = 0; i < 32; i++)
-                  jobs.add(
-                      () -> {
-                        lease.close();
-                        return null;
-                      });
-                try {
-                  for (var future : executor.invokeAll(jobs, 10, TimeUnit.SECONDS)) future.get();
-                } catch (InterruptedException e) {
-                  Thread.currentThread().interrupt();
-                  throw new IOException();
-                } catch (ExecutionException e) {
-                  throw new IOException();
-                }
-                return 1;
-              }));
-    } finally {
-      executor.shutdownNow();
+    try (var executor = Executors.newFixedThreadPool(8)) {
+      try {
+        assertEquals(
+            (Object) 1,
+            subject.withAdmitted(
+                A,
+                P,
+                (lease, bytes) -> {
+                  var jobs = new ArrayList<Callable<Void>>();
+                  for (int i = 0; i < 32; i++)
+                    jobs.add(
+                        () -> {
+                          lease.close();
+                          return null;
+                        });
+                  try {
+                    for (var future : executor.invokeAll(jobs, 10, TimeUnit.SECONDS)) future.get();
+                  } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    throw new IOException();
+                  } catch (ExecutionException e) {
+                    throw new IOException();
+                  }
+                  return 1;
+                }));
+      } finally {
+        executor.shutdownNow();
+      }
     }
     assertEquals(List.of(P, A), f.closed);
   }
