@@ -544,16 +544,20 @@ final class UserCriticalAuditPortTest {
           () -> writer.write(f.connection(), Optional.of(ADMIN), request, event, null));
     }
     var closed = mutation(Mutation.ENABLE);
-    closed.close();
-    assertThrows(
-        IllegalStateException.class,
-        () ->
-            writer.write(
-                f.connection(),
-                Optional.of(ADMIN),
-                closed,
-                UserRequestAuditWriter.Event.REPLAY,
-                NOW));
+    try {
+      closed.close();
+      assertThrows(
+          IllegalStateException.class,
+          () ->
+              writer.write(
+                  f.connection(),
+                  Optional.of(ADMIN),
+                  closed,
+                  UserRequestAuditWriter.Event.REPLAY,
+                  NOW));
+    } finally {
+      closed.close();
+    }
     assertEquals(f.prepared, f.closes);
   }
 
