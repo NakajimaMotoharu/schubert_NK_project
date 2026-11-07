@@ -1,0 +1,14 @@
+# User更新結果値・通常PT仕様書
+
+Program NK-ADM-001/NK-PRO-001、UserMutationResult constructor/accepted/rejected/toString、UserCommandMetadata constructor/toString、UserMutationResponseData constructor/from/fields/toString。RD FUN009/AUT002/MON004、UI232§7/236§応答DATA offset0/12/21・length12/9/3、SS312/323/332/351、PT-ADM-023。原Main22084/source7aed・六静的22086を再利用。原UserCommandServiceTest adm023は実DB更新/auditを含むので読取のみ・compile/run0。UserMutationRequest decode/canonical/apply全体は今回対象外、四held参照を含むUserCommandServiceのDB/失効/例外経路はHOLD。
+
+既承認純粋値境界だけの別Test、PT_DEFAULT。Mainの三sourceと依存ResultCode/UserId/IdValue/FieldValueSet/FieldValue/TypedFieldValues及びinterface/validation例外の全source graphを閲覧、new Unitに実DB・driver・thread・entropy・通信・認証・秘密key・service・VM/Root/native・四held実初期化は無い。classpathはnormal API/protocol/common/必要JSpecifyとJUnitのみ、原Test/helperはcompileしない。各Test10秒/whole tool120秒、無限待機・OS子process API・native access無し。SDK変更/Production抽出/代替実行module作成無し。
+
+ADM-VALUE-001: literal success0000/0200×payloadあり、非成功0100/0104/0105/9001×payloadなしだけ許可、他profile/payload組合せは独立literal表で拒否。全12code/24組合せとnull境界・redactionを確認。expectedはProduction usesSuccessProfileから生成しない。
+ADM-VALUE-002: approved N12 ID1..999999999999・N9 version0..999999999のfactory境界、accepted/rejectedのpayload整合・null/負/桁超過。成功dataのcaller instance/内容を保持、失敗に架空dataを作らない。
+ADM-VALUE-003: caller提供固定UUID二値とUTC Instantのmicrosecond切捨、epoch直前の負時間・micro境界・Instant min/max・null。期待時刻は固定ISO文字列で作りProduction ChronoUnitで算出しない。表示は固定REDACTEDでID/時刻を含めない。実operation token/session/credential発行無し。
+ADM-VALUE-004: responseの二項目User ID/更新後versionを独立Mapと数値で照合。fromへ独立FieldValueSet literalを入力し二accessorを直接検証、欠落/型違い/範囲外/nullを拒否。fieldsとfromで同じProduction roundtripをexpectedに使わない。wire encode/DB SQLの合格へ転用しない。
+
+既adm023/protocol値検証と重複し得るため今回四methodは再資格としてnewUnique=0を保守的に固定、累計453不変。実行四件・当source三Codeの独立normalCRC/SourceFile全physical/Code四counterを確認し、自然branch0はN/A。自動生成record methodは標準JaCoCo filterを明記しbyte/CRCを保持、手動coverage除外0。source全名簿未完のため登録aggregate delta-null/暫定93を維持。正式1964PT/53scope/新leaf0/工数null、全DB/Root/HOLD維持。
+
+着手前見積0.5/2/5pp cap7、source/runを固定して一度だけ実行。限定検証・coverageを全451/正式受入へ加算しない。閉鎖後も477continuous-v2で独立後続を継続。利用枠残10%以下/取得不能で新規停止、5%までに保全。source/debug/runを混同しない。
