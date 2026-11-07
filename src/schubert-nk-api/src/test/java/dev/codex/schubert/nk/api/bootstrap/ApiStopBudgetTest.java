@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 /** 1870/APISTOP001..020: literal arithmetic and own finite clock ports, no runtime hooks/TERM. */
 final class ApiStopBudgetTest {
+  private static final int FIRST_CLOCK_READ = 1;
   private static final String FIXTURE_CLOCK_49F3C56E = "clock";
 
   private static final class Fixture {
@@ -56,7 +57,7 @@ final class ApiStopBudgetTest {
     var release = new CountDownLatch(1);
     f.beforeTime =
         () -> {
-          if (f.reads.get() == 1) {
+          if (f.reads.get() == FIRST_CLOCK_READ) {
             entered.countDown();
             await(release);
           }

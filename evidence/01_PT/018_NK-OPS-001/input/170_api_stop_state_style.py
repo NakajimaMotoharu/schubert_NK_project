@@ -9,7 +9,7 @@ r=Path.cwd();w=r.parent/'pgpt-runs/PG379';sha=lambda p:hashlib.sha256(Path(p).re
 nm=load(w/'pg22084-api-stop-state-six-main-compile-v1/manifest.safe.json');assert nm['actualExit']==0
 names=['src/schubert-nk-api/src/'+p+'/java/dev/codex/schubert/nk/api/bootstrap/'+n+'.java' for p,n in [('main','ApiStopBudget'),('main','ApiProcessLifetime'),('test','ApiStopBudgetTest')]]
 for n in names[:2]:assert sha(r/n)==nm['begin']['inputHashes'][n]
-old=r/'evidence/01_PT/006_NK-MSG-002/evidence/PG21012-outbox-null-oracle-static-v1';pmd=load(old/'pmd-begin.safe.json')['command'];cs=load(old/'checkstyle-begin.safe.json')['command'];slot=w/'pg22088-api-stop-state-style-v1';assert not slot.exists();slot.mkdir();c.SLOT=slot
+old=r/'evidence/01_PT/006_NK-MSG-002/evidence/PG21012-outbox-null-oracle-static-v1';pmd=load(old/'pmd-begin.safe.json')['command'];cs=load(old/'checkstyle-begin.safe.json')['command'];slot=w/'pg22094-api-stop-state-style-v2';assert not slot.exists();slot.mkdir();c.SLOT=slot
 listing=slot/'source-list.txt';listing.write_text(''.join(str(r/n)+'\n' for n in names));tc=r.parent/'toolchain';cp=':'.join([*[v['path'] for v in nm['jars'].values()],str(tc/'junit-platform-console-standalone-1.13.4.jar'),str(tc/'m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar')])
 for flag,value in [('--file-list',str(listing)),('--report-file',str(slot/'pmd.xml')),('--aux-classpath',cp)]:pmd[pmd.index(flag)+1]=value
 cs[cs.index('-o')+1]=str(slot/'checkstyle.xml');cs[-1]='@'+str(listing)
