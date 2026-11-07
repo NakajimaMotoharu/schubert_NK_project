@@ -1,0 +1,303 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T16:07:10.577987+09:00",
+  "source": "13edb9722a5ada280a574fa4f84f3a97a8b9e193",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "originalRawManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22382-ordinary85-test-static-v1/manifest.json",
+    "sha256": "e4eea946c71b78db2cca778259ef366cd4cd60c208708941a61067f48cee25a2"
+  },
+  "originalRawSites": 347,
+  "removedActualDefect": {
+    "tool": "pmd",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCriticalAuditPortTest.java",
+    "sourceSha256": "a707009744a511335e897bcc0137281a54ff76ad0961e8fa88c3196abff11575",
+    "ordinal": 1,
+    "attributes": {
+      "beginline": "546",
+      "endline": "546",
+      "begincolumn": "9",
+      "endcolumn": "15",
+      "rule": "CloseResource",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.api.application.admin",
+      "class": "UserCriticalAuditPortTest",
+      "method": "audit016AdmissionMissingOrClosedRequestIsNotSuccessfulAudit",
+      "variable": "closed",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+      "priority": "3"
+    },
+    "message": "Ensure that resources like this UserMutationRequest object are closed after use",
+    "classification": "UNCLASSIFIED"
+  },
+  "removedDefectPost": {
+    "path": "evidence/01_PT/010_NK-ADM-001/evidence/PG22438-user-audit-cleanup-independent-v1/manifest.json",
+    "sha256": "48d5f83b00ebb47bc4adf700b198c6bb5246344b32a4552d139bbf165097ff12"
+  },
+  "currentSourceHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCriticalAuditPortTest.java": "e7dfcb613716ae6af147137e9ceabda1cf25006a4d02651031d3c9813cbdb88f",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadataContractTest.java": "35defc94dd7470149d6e4c741ee00cc9196d5ad6731dd5290aecbcd61f9ce71c",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest.java": "a0ae26af387cc48d71f28c47b89866a2c50c192b965838321860a773ea91daaf",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequestPortTest.java": "99b117de7d104daca7113ce323f20e1c406ddb698e2e0ff5dfafa58dd0ba2ccf",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionPortTest.java": "7b43c7f43b71023db194e7bfda91ca808323839f5f456e30c39f5cdd2ca76ffa",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java": "60029426a27efd8f06ec26ab2adf7409d026d8e39b303c59503336fcebd3913a",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxReturningIdContractTest.java": "a2b97f85348f8f5f9eea61f734e5093fdcad1d8e27e14e6cfb31b9e2ce130ef9",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxPublicationPortTest.java": "ced23dbc3046eb10ed953b5b3f3268a027d3c1cf55e2dd6f4d24f2d081492838",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioSnapshotShapeTest.java": "c1f205a1e81e9edd886fc6230ae438851d0c4442901997ab57c31a0aecd7ed7b",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.java": "3e1ae38ba52644c2027a712bd22ea165c29e42f6d044712c6d61d70ce1d4516f",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationVerifierJdbcPortTest.java": "9f8e0b379cbfcbfc8bee9e64eb2f119d719435b433befbb9c43225487afae089",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptPortTest.java": "597ac4c0db04c217937a1bec0a37d2ca2bc441825f648aaff5014e862b27f4f1",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAuditPortTest.java": "4fce0913d8f41edf31ffd8d6097b758845005a0e4021e111c1ff182a54d2c834",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionAuditPortTest.java": "64179428f24f1c78e6e93e320de1a840dfa0beab09538396e1df02a98557c67e",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionIssueJdbcPortTest.java": "367458b115a8e5f3705fb6cd5bbc4db1728d15ea6bae0b41c7e7832d06ea04d8",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionRevocationJdbcPortTest.java": "4fa2ce49efef57b89472882f7347c50d6ccf61705d8e559c5bed1e2a3d8425dc",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java": "5a864a1941b8a9e3e36cef80b296b32c01c5b3910923cc502735920469822ca0",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorPolicyPortTest.java": "939b60c7aa351a123682b5e2542f707ba26b104cefd5eaa2baffbc828e0f2774",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/QueuePressurePolicyTest.java": "ecd3414896569f9a81fe3be323c405e02eb3d34472fb54a7d89377f1a60bb570",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/TopologyQueryPortTest.java": "c644e3b17656f568490c89e7e0f92aaa1b0d211997f25a111ae3f203f85b4fcf",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGateStatePortTest.java": "db38982f34c746f871ee5953247426c0828d5a3648fa5b1329714a8643dfc0a7",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/UnitStateParserBytePortTest.java": "5502cdcc889900367fe8b4361c2ecd081e1eeda9213c4d7786e89f90a1946b3f",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java": "8e73b55c5cb6f850fe41c64c5ff5684f190fdbec16742782c2bc26af4078feb9",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunAuditPortTest.java": "4b8f593bfa4071f47d1586ef2576b01228140a36fd40c40c80f60b5cbd7a6315",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupQueryPortTest.java": "b7517573044d2ba929a57914956194b2db053cf189d464af443932619eba7387",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepPortTest.java": "64711edddb85a9862ebfd892a27d03582847bad648759025185babbb00e77e52",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java": "28271ad49820af2c90e99eb6d7bff01a680754086cf24c4f396777b6e3125c7d",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPredicateContractTest.java": "2eeecafc5a1af7a1451937572ea38f3e9c6fec8a0a358101d71850ad2f2c7ddb",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java": "76b7c2644998b3d1cc617990ae777e36c0fc05a7fc08905c1f0dbd6360b82df5",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java": "0f11af78f2d7f3daa6eed7e4b54379c70b5f2c28548711730088efd86abc1730",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/AnimationMvcBeanPortTest.java": "95b9418b9658ca06fcd96909de0e68f99194c066dd266e2978b7026d11bf7a9f",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/BusinessMvcBeanPortTest.java": "798186f1ab4a8820d5813c2187632b9de1d96e55b3d56ae5e8710e2b2f4f02ab",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/LogMvcBeanPortTest.java": "3fedff557f34afbfa43351eb49bf444af38dde486d40e54890915218f152fc59",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/MediaMvcBeanPortTest.java": "908d3cba6b6359f474be3dd473b8b7cfc502da61a65dffd334fd57027c77063a",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/MusicMvcBeanPortTest.java": "35ecdaa1750a39435642166c93f7e76242340261e682bae7a8513a489c34e7ec",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/MvcBeanPortFixture.java": "43cc6f48e131b787516aa6e48af2cf262fbe8535883099b0aac672abafd04369",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/NotificationMvcBeanPortTest.java": "f23122c9d41e7727563a31d30afef077f1f64a06a410bcf98d319ca1006f9ea4",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/QuestionMvcBeanPortTest.java": "030ba596f4c8d98007c23b3f4a01da692f553d837145c312df7b26c5b8e22654",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/ScenarioMvcBeanPortTest.java": "621afc7a649a546ce200dc043bba47bb8214e15966f6cb5ab8b527e4196e17ce",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/UserMvcBeanPortTest.java": "b9970681c2c0b8d039418b0960e88b045371b42a7ff0d2ed79b95892df7a5138",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java": "6c5b1611e64fceb12d1763832d94e30d4c24f00d33754b83ae888b9b48f5e93a",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogOutboxPortTest.java": "bfc43a279b680a1bb88465d39acc0f59ea7f5e5111322e130de9fe8894bc6090",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditPortTest.java": "b98726fe1cef435bfa11718c0bf562461b23d1942a091cb2b29d908ace8b4e5d",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java": "7e7e59d58974d577196b547038a1f9aa7e4b470a76a09b038b941606458eba4a",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaVerifiedProjectionTest.java": "5a4ae3d37f9b2b31f54cd50a8e1c135d05ea36f4fac197bdf465459d4d71cc52",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferencePortTest.java": "5821c43a250ff36ef1280d505da9664aa87189fc8fed472f792eebc64642b3de",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java": "4b4d55796b4fbfe687936912ce556a9e919923cc5a949182af3f7f5f58352e77",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java": "57a78155f162e62428fbe44c8bf8777e98555dbef15e3dc42c17e02074e0cc40",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java": "0327b5f0f28080e942ac08e0ad5de9f16360531714c0fd0a5e26a3e8cf14b54f",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java": "b3af1540089f2a9325938b1086ffdcd2d20281a63fc7f6a3bc023861e6bccbb2",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest.java": "799e9338db6423bbcdc1229b6cd84473e04c437933dfcfe2011cf85026897147",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java": "0d499f54ee4720968b4732839f610dd43d162ffc5d00b4db5ec6990627b535c9",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest.java": "b0a47f249e24beef3e2186f048b31043aa5f99ba6a2961a865ba2eca111e7736",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java": "1b23abc3012748d36be489230038a2509825049d1b24a58997ae6bde07e3b886",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRestorePortTest.java": "f60066157a18c43c02ba149168feb56e92cfc80c394a162281678084a3a195a7",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRouterPortTest.java": "735fd06e311206d2d547e6eda0dfa042a7fc7ba78a565b88a47a32d3459d8ea0",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/FormCsrfRequestPortTest.java": "d311bc55d91dd0dde8473fa27d7feb074d19d88e3e3d797f0efdc73a564aeb86",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest.java": "c27bea45bac748b725a4da576406741b70f742bd9d8305eb7ef979ffcd1ac274",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InternalErrorRouterPortTest.java": "48832e4824132c3518ceaed9d451065a94265a5ea90850e1f136701628fd982e",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/LoginFormConverterPortTest.java": "dbe0637da47f5140a71942574e7f6faeb22a9896608b681fec0bfe73a6de8334",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqFormLoginFactoryRoutePortTest.java": "6c46a3b0162410a3795cb41664d9dbaef45b1e128fd5aed12009275470bdee02",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginFailurePortTest.java": "3b70e5c73c52960db73ee96c7cf632c6399ec2a167de47846baae277bcee1815",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SavedScreenTargetPortTest.java": "683b1c00b142140bbb65787dd1caa8cc839f626e5c6694a91b369fd99e3658be",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SessionAuthenticationStrategyPortTest.java": "9549e2d2e7701295378db18391e252af69a668b1c783edec987c925b437f7fba",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/BusinessMvcOwnerPortFixture.java": "629aa97d6cc8af6e22c3aa0ca316eb2698dd380e7635f65b3d5974aaf6cb617d",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/InvalidSessionRowPortTest.java": "26310781b9d568fc66188b0e2ae67adf31a5ab51f51c506c51c75ea6bd9414ef",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java": "007a8bc2e809d5fa430986f5a9d3fe86cb9b2f48d87b11054a95e2e34359ed08",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/WebSessionSnapshotPortTest.java": "07c2bf38b0e268e87218c29c673065d052c89ac2d7966a941eb50e531bd419fd",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationBrowseTemplateResourcePortTest.java": "54200498e48b3f2a3fa9730886b3ecde463effb146a1519f0e722481c05facd3",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationWatchTemplateResourcePortTest.java": "e44bd0cea63f0e3b0ad2904a3c18318ba21c8cfa3507f1c379e569d12f2b6830",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/DetailTemplateResourcePortTest.java": "ecda365e0af7e9c8b0f5a418800c4b714120005b2cf2eef0cf2724032b7e731f",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ListTemplateResourcePortTest.java": "d1540f0e718948762d734b9a2ea9e3e85b8cc87bc151e878e828b390c6527845",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LockedLoginDisplayResourcePortTest.java": "ff803e914ae8aea58d479a980670593d5fa8077dadd970a91423615f17d8d304",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LoginDisplayResourcePortTest.java": "7641fb39dfd22145235690539cb458bb6656dd46ef95888bcadcf93dc4730866",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicListTemplateResourcePortTest.java": "be90c1ac372df79b8f900c69e0f36b2c670793b07a8481cdcb89db3a734a4277",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NotificationDetailProjectionPortTest.java": "3da496b6cf05a0765ba5b6760416b3e6b9ebf14256c9c076fbace05381a6286c",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NotificationListProjectionPortTest.java": "bd7e30fa4defff06f24e6d0fe0809d6694224ea2a9fb43d16e3168e17e2ab398",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionDetailProjectionPortTest.java": "7ebe8e793802578903879a3a0bdefde527b068dfced60c8fe815f5b1b6355054",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionFormReturnResourcePortTest.java": "603eada4ad8c741c2e1cb0e2f1c8f0fb381d6441b5cf875fb8d287dd42fdd3b8",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionListProjectionPortTest.java": "53a5fe8bcee32fb4ac282d06210d61820d42c295fbf7d48cfb008a87c1eac50d",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailTemplateResourcePortTest.java": "93586db2fb28a66c85d50ac698dd93c248ae638170af9c8d337eaa6fc8c052a4",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/SearchTemplateResourcePortTest.java": "a97edd67d1730bc4f426753e8b43933e1fee88dab3bfc100d5b6f3953a28f032",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserCreateTemplateResourcePortTest.java": "cb95f761ddcbad3c9e7a0e0adc96c018b0f0fb4abacb985a1b3745b40d630425",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserDetailTemplateResourcePortTest.java": "d8e5f9a8b7666df841a6eba84ce1219e9508c0de1652103c26a75c03738ef086"
+  },
+  "changedSources": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCriticalAuditPortTest.java",
+      "sha256": "e7dfcb613716ae6af147137e9ceabda1cf25006a4d02651031d3c9813cbdb88f",
+      "post": {
+        "path": "evidence/01_PT/010_NK-ADM-001/evidence/PG22438-user-audit-cleanup-independent-v1/manifest.json",
+        "sha256": "48d5f83b00ebb47bc4adf700b198c6bb5246344b32a4552d139bbf165097ff12"
+      }
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
+      "sha256": "0327b5f0f28080e942ac08e0ad5de9f16360531714c0fd0a5e26a3e8cf14b54f",
+      "post": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22546-seven-future-independent-v1/manifest.json",
+        "sha256": "c83dc755afa467842001f033eb35c5e54fae55bdd42cacf85bbbadae5b093d72"
+      }
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java",
+      "sha256": "b3af1540089f2a9325938b1086ffdcd2d20281a63fc7f6a3bc023861e6bccbb2",
+      "post": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22546-seven-future-independent-v1/manifest.json",
+        "sha256": "c83dc755afa467842001f033eb35c5e54fae55bdd42cacf85bbbadae5b093d72"
+      }
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
+      "sha256": "0d499f54ee4720968b4732839f610dd43d162ffc5d00b4db5ec6990627b535c9",
+      "post": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22546-seven-future-independent-v1/manifest.json",
+        "sha256": "c83dc755afa467842001f033eb35c5e54fae55bdd42cacf85bbbadae5b093d72"
+      }
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest.java",
+      "sha256": "b0a47f249e24beef3e2186f048b31043aa5f99ba6a2961a865ba2eca111e7736",
+      "post": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22546-seven-future-independent-v1/manifest.json",
+        "sha256": "c83dc755afa467842001f033eb35c5e54fae55bdd42cacf85bbbadae5b093d72"
+      }
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRouterPortTest.java",
+      "sha256": "735fd06e311206d2d547e6eda0dfa042a7fc7ba78a565b88a47a32d3459d8ea0",
+      "post": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22546-seven-future-independent-v1/manifest.json",
+        "sha256": "c83dc755afa467842001f033eb35c5e54fae55bdd42cacf85bbbadae5b093d72"
+      }
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest.java",
+      "sha256": "c27bea45bac748b725a4da576406741b70f742bd9d8305eb7ef979ffcd1ac274",
+      "post": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22546-seven-future-independent-v1/manifest.json",
+        "sha256": "c83dc755afa467842001f033eb35c5e54fae55bdd42cacf85bbbadae5b093d72"
+      }
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SessionAuthenticationStrategyPortTest.java",
+      "sha256": "9549e2d2e7701295378db18391e252af69a668b1c783edec987c925b437f7fba",
+      "post": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22546-seven-future-independent-v1/manifest.json",
+        "sha256": "c83dc755afa467842001f033eb35c5e54fae55bdd42cacf85bbbadae5b093d72"
+      }
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java",
+      "sha256": "007a8bc2e809d5fa430986f5a9d3fe86cb9b2f48d87b11054a95e2e34359ed08",
+      "post": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22492-question-bounded-wait-independent-v1/manifest.json",
+        "sha256": "ffad73f7bc65607fec32704ae359270ea84d6f4820dab2331e6b5218923067e6"
+      }
+    }
+  ],
+  "unchangedSources": 76,
+  "changedSourceCount": 9,
+  "classificationParts": [
+    {
+      "collector": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22392-ordinary-proxy-loader93-v1/manifest.json",
+        "sha256": "00c3bd27210de3f564494ce592aed761dbae8e9e0c77d79d3634ba694c207267"
+      },
+      "independentPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22398-ordinary-proxy-loader93-independent-v2/manifest.json",
+        "sha256": "90745f51f6b81c7c2c1153068ba2ec08ae8096c57feac1c96aba62f177a437bb"
+      },
+      "count": 93
+    },
+    {
+      "collector": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22408-ordinary-thread158-scope-v1/manifest.json",
+        "sha256": "be92fb45f6222e260be325529431f70be217a4dc1cd7656b53f484b2dd052709"
+      },
+      "independentPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22410-ordinary-thread158-independent-v1/manifest.json",
+        "sha256": "b7a9022920798dd9c82e80a3e5165fca4a19a82de4d700568c46382c86f929f4"
+      },
+      "count": 158
+    },
+    {
+      "collector": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22418-null-identity14-sites-v1/manifest.json",
+        "sha256": "d5d8672750fbd6bb36764a9d770777cc1391735ac0160b382d221935d00b6f6e"
+      },
+      "independentPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22420-null-identity14-independent-v1/manifest.json",
+        "sha256": "ea5a1850d7849dbed2d4b64868db29cd07f37866f2724b7251323a615647dbad"
+      },
+      "count": 14
+    },
+    {
+      "collector": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22456-close-resource-six-ownership-v1/manifest.json",
+        "sha256": "06caab4775f5650dae53cae6a97e2b3011743121cec6cb41866c00b43e252735"
+      },
+      "independentPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22458-close-resource-six-independent-v1/manifest.json",
+        "sha256": "b5d6505443b1452ca00b7a4457e5e2173c71424e15bb2bb9705ad0a7395d5e6b"
+      },
+      "count": 6
+    },
+    {
+      "collector": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22470-question-volatile12-context-v2/manifest.json",
+        "sha256": "b58e0dd8024f343bf54392ac8f94947af271fe250c69cd436e6b45a48206b649"
+      },
+      "independentPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22474-question-volatile12-independent-v1/manifest.json",
+        "sha256": "5871872955bce57c6d9e48d0090df72ee56cf694f663f73e497853f6503d7125"
+      },
+      "count": 12
+    },
+    {
+      "collector": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22584-ten-maps-one-reflection-v2/manifest.json",
+        "sha256": "1519fe178d8448d033155af7bd7b9fbbb04a0deb4584707e2f9cffea3bb3a0e5"
+      },
+      "independentPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22586-ten-maps-one-reflection-independent-v2/manifest.json",
+        "sha256": "9065e20cbb54cddbffd55b0a2c6be0ef65c60dca6888031cb3f0a5280098c2cc"
+      },
+      "count": 11
+    },
+    {
+      "collector": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22598-remaining52-map-owners-v1/manifest.json",
+        "sha256": "5adfbb07f6ea4bb9122a9805d432bd5d7e53246a5549224726e85d5e9847cf11"
+      },
+      "independentPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22600-remaining52-map-owners-independent-v1/manifest.json",
+        "sha256": "21741fd87a6ddad874e10bd8b19649e5407fdee3ab1c7a5a1c60e756ed245b66"
+      },
+      "count": 52
+    }
+  ],
+  "currentComposedRaw": 346,
+  "classifiedSites": 346,
+  "applicableSites": 0,
+  "unclassifiedSites": 0,
+  "duplicateSites": 0,
+  "missingSites": 0,
+  "reconstructedNotFreshAll85EngineRun": true,
+  "productTestsExecuted": 0,
+  "newProductTests": 0,
+  "newSourceProofs": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "questionDynamicHold": true,
+  "ykt2177Closed": false,
+  "files": {
+    "sites.json": "c86a2bbd5d7a753556c85efd394ac4d618ff37500d30a4f3112aa7aca89df3ec"
+  },
+  "producer": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/232_ordinary85_classification_source_seal.py",
+    "sha256": "9968312ecff5f5d4ab57660993ad78e00fe184ead64d15b66ea36ed36b649f25"
+  }
+}
