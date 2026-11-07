@@ -680,3 +680,11 @@ NK-WEB-002: WebNativeRuntime（ordinary借用DB/5credential→三codec/readonly 
 |---|---|---|---|
 | NK-WEB-002 LogoutMvcConfiguration constructor/logoutController | AUT004/UI226/SS313314/PG-D363/1144 | PT-WEB-LOGOUT-MVC-BEAN001/002、016153/154・22200/22204。新2/一whole source、branch自然0/N/A。HTTP/business handlerは別未受入 | WBS-P015-04、群一回 |
 | Test support BusinessMvcOwnerPortFixture.localSessions/同一owner constructor-close | 同上/既PT-SCR-BIZBEAN001..006 | 元Business6を共有fixture変更後に同8-case runで再資格、新規件数へ加算0。元三Main factory再資格、support31全source資格に転用0 | 既canonical所有不変、関連owner追加予算/遡及配賦0 |
+
+
+### 2026-11-07 例外Filter生成・SavedGET単体
+
+| Program/class/method | 関連設計・判断 | Test・証拠 | canonical owner/cost |
+|---|---|---|---|
+| NK-WEB-001 WebAccessExceptionFilterFactory constructor/create | 015080のRD/UI/SS対応・PG-D1145 | 015080/081、新whole4/PG22220・独立22228、L5M2C1未達0/branch自然0N-A | WBS-P015-02、群一回 |
+| 支援 WebAccessFailureHandler/EncryptedSessionRequestCache/Mock owner fixture | 同上、302/403/一回String保存・監査literal | 同runのsupport17実method限定、whole source信用0。実認証/DB/session暗号/HTTP/Root/nativeは別未受入 | 既所有不変/追加費配賦0 |
