@@ -43,19 +43,19 @@ final class ReplyCorrelationTerminalRaceTest {
           terminals.add(
               workers.submit(
                   () -> {
-                    start.await();
+                    assertTrue(start.await(5, TimeUnit.SECONDS));
                     return registry.complete(FIRST, new byte[] {7, 8, 9}, DEADLINE.minusNanos(1));
                   }));
           terminals.add(
               workers.submit(
                   () -> {
-                    start.await();
+                    assertTrue(start.await(5, TimeUnit.SECONDS));
                     return registry.cancel(FIRST);
                   }));
           terminals.add(
               workers.submit(
                   () -> {
-                    start.await();
+                    assertTrue(start.await(5, TimeUnit.SECONDS));
                     return registry.expire(FIRST, DEADLINE);
                   }));
         } finally {
@@ -102,7 +102,7 @@ final class ReplyCorrelationTerminalRaceTest {
           calls.add(
               workers.submit(
                   () -> {
-                    start.await();
+                    assertTrue(start.await(5, TimeUnit.SECONDS));
                     return registry.register(id, DEADLINE, NOW);
                   }));
         }

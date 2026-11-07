@@ -110,7 +110,7 @@ final class ReplyCorrelationRegistryTest {
         tasks.add(
             executor.submit(
                 () -> {
-                  start.await();
+                  assertTrue(start.await(5, TimeUnit.SECONDS));
                   if (registry.complete(ID_1, new byte[] {(byte) marker}, NOW.plusSeconds(1))) {
                     winners.incrementAndGet();
                   }
