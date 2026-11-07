@@ -550776,4 +550776,66 @@
   "physicalClassCount": 2,
   "codeClassCount": 1
 }
+,
+  "currentUserAuditClosedRequestCleanupRequalification20261107": {
+  "source": "ac1919389902fd4d96ec771d9451c4ab224a8556",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "manifest": {
+    "path": "evidence/01_PT/010_NK-ADM-001/evidence/PG22438-user-audit-cleanup-independent-v1/manifest.json",
+    "sha256": "48d5f83b00ebb47bc4adf700b198c6bb5246344b32a4552d139bbf165097ff12"
+  },
+  "record": "evidence/01_PT/010_NK-ADM-001/092_User監査closed_request回収是正・全二十再資格結果.md",
+  "rows": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCriticalAuditPortTest.java",
+      "sha256": "e7dfcb613716ae6af147137e9ceabda1cf25006a4d02651031d3c9813cbdb88f",
+      "source": "ac1919389902fd4d96ec771d9451c4ab224a8556",
+      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "role": "CHANGED_WHOLE_TEST",
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserAuditWriter.java",
+      "sha256": "f0458e7874c4c5884e4f4dc79a0aedb803d730ab95469b43c610f3618d2eb474",
+      "source": "ac1919389902fd4d96ec771d9451c4ab224a8556",
+      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "role": "TARGET_MAIN_UNCHANGED",
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter.java",
+      "sha256": "68568dfbd26fa58a01460ecee9911073b6e66cf2fdea88a69f6776c7892d65d1",
+      "source": "ac1919389902fd4d96ec771d9451c4ab224a8556",
+      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "role": "TARGET_MAIN_UNCHANGED",
+      "newAcceptance": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter.java",
+      "sha256": "026ea309fb97c59d525ac8c668f324ce2275cea0dd8c59e26acbfd37f0492b7f",
+      "source": "ac1919389902fd4d96ec771d9451c4ab224a8556",
+      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "role": "TARGET_MAIN_UNCHANGED",
+      "newAcceptance": false
+    }
+  ],
+  "testsExecuted": 20,
+  "newUniqueTests": 0,
+  "requalifiedExistingTests": 20,
+  "newSourceProofs": 0,
+  "retainedWholeSources": 3,
+  "staticRebinding": {
+    "path": "evidence/01_PT/010_NK-ADM-001/evidence/PG22444-user-audit-static-source-rebinding-v1/manifest.json",
+    "sha256": "ecfb571808328036ab9c60c3cb4bed5fc8882ed00736998c4431c9316ac76f74"
+  },
+  "rawOriginal347Preserved": true,
+  "reconstructedSubsetRaw": 346,
+  "subsetClassified": 265,
+  "subsetUnclassified": 81,
+  "bug": "BUG-2431",
+  "ykt": "YKT-2176",
+  "yktClosed": false,
+  "parentAccepted": false,
+  "wholeG13Accepted": false
+}
 }

@@ -716,3 +716,10 @@ NK-WEB-002: WebNativeRuntime（ordinary借用DB/5credential→三codec/readonly 
 | Program/class/method | 関連設計・判断 | Test・証拠 | canonical owner/cost |
 |---|---|---|---|
 | NK-WEB-001 JdbcWebSessionStore全public/private手書method・InvalidStoredRow | FUN/AUT/UI221222226/SS314331332352/PG-D1149 | PT-WEB-JDBCSTOREPORT001..015、015088/089、22350/22368、L123M13C1B30未達0・physical2/Code1、実DB未受入 | WBS-P015-01一群 |
+
+
+### 2026-11-07 User監査全20Testの回収是正・再資格
+
+| Program/class/method | 関連設計・判断 | Test・証拠 | canonical owner/cost |
+|---|---|---|---|
+| NK-ADM-001 三audit writer不変/UserCriticalAuditPortTest.audit016 finally回収 | FUN009/MON004/UI226236/SS312323324332351352/411/PG-D1150 | ADM-AUDIT-PORT001..020、010091092、22434/22438/22444、既20再資格・新unique0/whole追加0、YKT残六OPEN | 元Main P01003/QueryP01001・今回Test是正費F03のみ |
