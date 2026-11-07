@@ -1,0 +1,401 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T02:16:22.968530+09:00",
+  "source": "9f2243e2e7e366411a3a15fb95dc2350e59977b0",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "tests": 4,
+  "newUniqueTests": 0,
+  "requalifiedSemanticContracts": 4,
+  "newDirectWholeSourceProof": 3,
+  "registeredWholeComponentDelta": null,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 145,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 6,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 31,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 13,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 10,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 3,
+      "missed": 0
+    }
+  },
+  "wholeTargetCodeCoverage100": true,
+  "branchStatus": "MEASURED_NONZERO_6_OF_6",
+  "sourceFilePhysicalClosure": {
+    "dev/codex/schubert/nk/api/application/admin/UserCommandMetadata": {
+      "name": "dev/codex/schubert/nk/api/application/admin/UserCommandMetadata",
+      "sourceFile": "UserCommandMetadata.java",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;)V",
+          "code": true
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "code": true
+        },
+        {
+          "name": "hashCode",
+          "descriptor": "()I",
+          "code": true
+        },
+        {
+          "name": "equals",
+          "descriptor": "(Ljava/lang/Object;)Z",
+          "code": true
+        },
+        {
+          "name": "messageId",
+          "descriptor": "()Ljava/util/UUID;",
+          "code": true
+        },
+        {
+          "name": "correlationId",
+          "descriptor": "()Ljava/util/UUID;",
+          "code": true
+        },
+        {
+          "name": "at",
+          "descriptor": "()Ljava/time/Instant;",
+          "code": true
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/api/application/admin/UserMutationResult": {
+      "name": "dev/codex/schubert/nk/api/application/admin/UserMutationResult",
+      "sourceFile": "UserMutationResult.java",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/header/ResultCode;Ljava/util/Optional;)V",
+          "code": true
+        },
+        {
+          "name": "accepted",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/semantic/UserId;JLdev/codex/schubert/nk/protocol/header/ResultCode;)Ldev/codex/schubert/nk/api/application/admin/UserMutationResult;",
+          "code": true
+        },
+        {
+          "name": "rejected",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/header/ResultCode;)Ldev/codex/schubert/nk/api/application/admin/UserMutationResult;",
+          "code": true
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "code": true
+        },
+        {
+          "name": "hashCode",
+          "descriptor": "()I",
+          "code": true
+        },
+        {
+          "name": "equals",
+          "descriptor": "(Ljava/lang/Object;)Z",
+          "code": true
+        },
+        {
+          "name": "resultCode",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/header/ResultCode;",
+          "code": true
+        },
+        {
+          "name": "data",
+          "descriptor": "()Ljava/util/Optional;",
+          "code": true
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData": {
+      "name": "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData",
+      "sourceFile": "UserMutationResponseData.java",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/semantic/UserId;J)V",
+          "code": true
+        },
+        {
+          "name": "from",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;)Ldev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData;",
+          "code": true
+        },
+        {
+          "name": "fields",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;",
+          "code": true
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "code": true
+        },
+        {
+          "name": "hashCode",
+          "descriptor": "()I",
+          "code": true
+        },
+        {
+          "name": "equals",
+          "descriptor": "(Ljava/lang/Object;)Z",
+          "code": true
+        },
+        {
+          "name": "userId",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/semantic/UserId;",
+          "code": true
+        },
+        {
+          "name": "updatedVersion",
+          "descriptor": "()J",
+          "code": true
+        }
+      ]
+    }
+  },
+  "physical": {
+    "dev/codex/schubert/nk/api/application/admin/UserCommandMetadata": "59a73a30196bad8f9047767052475b75128787d33969e19bf750ccd22f9b2309",
+    "dev/codex/schubert/nk/api/application/admin/UserMutationResult": "b1b6f4c907027970a4c892c1c48448e074a1104fc5e08de465cf2b90304c9b07",
+    "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData": "dd89d2b22d026a2cdeb12aa9c7636a16903cae685e69f02a7ad2a5c3cff303b5"
+  },
+  "classIds": {
+    "dev/codex/schubert/nk/api/application/admin/UserCommandMetadata": "a1ec591eb8fadca9",
+    "dev/codex/schubert/nk/api/application/admin/UserMutationResult": "f87ff71a21bddecf",
+    "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData": "74089c904d3f452f"
+  },
+  "normalObservedCrc": {
+    "dev/codex/schubert/nk/protocol/header/ResultCode": "f58efe6d2d007087",
+    "dev/codex/schubert/nk/protocol/layout/semantic/UserId": "f8dd7cbd731b7a66",
+    "dev/codex/schubert/nk/protocol/layout/FieldValue$Numeric": "c95b8c562e6611e7",
+    "dev/codex/schubert/nk/api/application/admin/UserCommandMetadata": "a1ec591eb8fadca9",
+    "dev/codex/schubert/nk/protocol/layout/FieldValue$Unset": "1ae321176443d8b6",
+    "dev/codex/schubert/nk/protocol/layout/TypedFieldValues": "66cb82472d2472c8",
+    "dev/codex/schubert/nk/protocol/layout/LayoutValidationException": "172946afc5ba5e3f",
+    "dev/codex/schubert/nk/protocol/layout/FieldValueSet": "a7faad52f1cb4185",
+    "dev/codex/schubert/nk/protocol/layout/FieldValue$Text": "d0c16605ffc1b5eb",
+    "dev/codex/schubert/nk/api/application/admin/UserMutationResult": "f87ff71a21bddecf",
+    "dev/codex/schubert/nk/protocol/layout/semantic/IdValue": "1118813a4338f049",
+    "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData": "74089c904d3f452f"
+  },
+  "normalProductInitializations": [
+    "dev/codex/schubert/nk/api/application/admin/UserCommandMetadata",
+    "dev/codex/schubert/nk/api/application/admin/UserMutationResult",
+    "dev/codex/schubert/nk/protocol/header/ResultCode",
+    "dev/codex/schubert/nk/protocol/layout/FieldValue$Numeric",
+    "dev/codex/schubert/nk/protocol/layout/FieldValue$Text",
+    "dev/codex/schubert/nk/protocol/layout/FieldValue$Unset",
+    "dev/codex/schubert/nk/protocol/layout/FieldValueSet",
+    "dev/codex/schubert/nk/protocol/layout/LayoutValidationException",
+    "dev/codex/schubert/nk/protocol/layout/TypedFieldValues",
+    "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData",
+    "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData$$Lambda+0x000000007813e630",
+    "dev/codex/schubert/nk/protocol/layout/semantic/IdValue",
+    "dev/codex/schubert/nk/protocol/layout/semantic/UserId"
+  ],
+  "normalDependencyInitCount": 13,
+  "standardRecordFilters": [
+    {
+      "className": "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData",
+      "normalCodeMethods": 8,
+      "reportMethods": 4,
+      "standardRecordFilteredMethods": [
+        {
+          "name": "equals",
+          "descriptor": "(Ljava/lang/Object;)Z"
+        },
+        {
+          "name": "hashCode",
+          "descriptor": "()I"
+        },
+        {
+          "name": "updatedVersion",
+          "descriptor": "()J"
+        },
+        {
+          "name": "userId",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/semantic/UserId;"
+        }
+      ],
+      "rawProbeCovered": 13,
+      "rawProbeTotal": 15,
+      "rawProbesNotClaimedAllExecuted": true
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/admin/UserMutationResult",
+      "normalCodeMethods": 8,
+      "reportMethods": 4,
+      "standardRecordFilteredMethods": [
+        {
+          "name": "data",
+          "descriptor": "()Ljava/util/Optional;"
+        },
+        {
+          "name": "equals",
+          "descriptor": "(Ljava/lang/Object;)Z"
+        },
+        {
+          "name": "hashCode",
+          "descriptor": "()I"
+        },
+        {
+          "name": "resultCode",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/header/ResultCode;"
+        }
+      ],
+      "rawProbeCovered": 17,
+      "rawProbeTotal": 19,
+      "rawProbesNotClaimedAllExecuted": true
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/admin/UserCommandMetadata",
+      "normalCodeMethods": 7,
+      "reportMethods": 2,
+      "standardRecordFilteredMethods": [
+        {
+          "name": "at",
+          "descriptor": "()Ljava/time/Instant;"
+        },
+        {
+          "name": "correlationId",
+          "descriptor": "()Ljava/util/UUID;"
+        },
+        {
+          "name": "equals",
+          "descriptor": "(Ljava/lang/Object;)Z"
+        },
+        {
+          "name": "hashCode",
+          "descriptor": "()I"
+        },
+        {
+          "name": "messageId",
+          "descriptor": "()Ljava/util/UUID;"
+        }
+      ],
+      "rawProbeCovered": 8,
+      "rawProbeTotal": 10,
+      "rawProbesNotClaimedAllExecuted": true
+    }
+  ],
+  "manualCoverageExclusions": [],
+  "oldExecCombined": false,
+  "sourceAssertionNegativeChecks": 3,
+  "unknownModuleNegative": 1,
+  "staticRaw": 0,
+  "staticApplicable": 0,
+  "checkstyle": 0,
+  "staticPreflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23328-user-mutation-values-preflight-v1/manifest.json",
+    "sha256": "44832af6c1a5db53fddd6ee66e6f60f6b9071f1df082aa302b32c2f4471cf330"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationOutcomeValuePortTest.java": "73ac62592a3b5a812f6fdb419f3c412e89dce68735e0ff692af98c01ba84a30a",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationResult.java": "fd070960f128b22813c6e01de6cdd6ddd3f4813291cf47abf435a08d8bd1d146",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.java": "2f2eeb0e07a5682a657ea23ca912b036b14b08e3ad5cf30cd0d5582a526e14a0",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData.java": "5bf98b1c3f7c67fc33e331c122b64672eb216b2398208107ca225131e870629b",
+    "evidence/01_PT/018_NK-OPS-001/input/400_user_mutation_values_qualifier.py": "454b7c1ee6ba7b79bdc37d5fcb8db5be83099a3285220b418e4bee55ef1ed3d0",
+    "evidence/01_PT/018_NK-OPS-001/input/401_user_mutation_values_scope.json": "46cf96fb7f4fe7af207c24093c6969fb6f4bc14eabd66a941c7c929d9ec024f4"
+  },
+  "environment": {
+    "file.encoding": "UTF-8",
+    "java.version": "25.0.4",
+    "os.arch": "amd64",
+    "os.name": "Linux",
+    "user.timezone": "Asia/Tokyo"
+  },
+  "caseTimings": [
+    {
+      "className": "dev.codex.schubert.nk.api.application.admin.UserMutationOutcomeValuePortTest",
+      "name": "value001ClosedProfileTableRejectsEveryOtherPayloadCombination()",
+      "seconds": "0.002"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.application.admin.UserMutationOutcomeValuePortTest",
+      "name": "value004ResponseProjectionAndParsingUseIndependentNamedLiteralFields()",
+      "seconds": "0.047"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.application.admin.UserMutationOutcomeValuePortTest",
+      "name": "value003MicrosecondFloorPreservesTraceValuesAtNegativeEpochAndInstantLimits()",
+      "seconds": "0.004"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.application.admin.UserMutationOutcomeValuePortTest",
+      "name": "value002FactoriesKeepIdentityAndN9BoundsWithoutFabricatingFailureData()",
+      "seconds": "0.004"
+    }
+  ],
+  "files": {
+    "original-classinfo-begin.safe.json": "a099576ba86a72da3fd7b11ca81f0fff156135db0e6baf8a449e6757f9fb74fb",
+    "original-coverage.stdout": "8575ee0a330c86362105327490cd5b5b64096e83d1c097a0b1e8b511a888179c",
+    "original-execinfo-begin.safe.json": "6c34552a6b85afa4afebe9de7348352280aaf40491c6c9d0a478b60a0ab6c009",
+    "original-coverage-exit.safe.json": "1b72e80b83e79ba5947c96359ec265c495c6aa0694a495f4dd67d6e8a33bfe48",
+    "original-classinfo-exit.safe.json": "e7787c81af1dffec4d984651679d264c9792b406a2df5aef2b90b8b319c1b9d7",
+    "original-unit-begin.safe.json": "e63a4b7c06b0ff966c08cdcd2fbbba5c9b8b1a822fa21e501b161d7129eb0c5e",
+    "original-unit-process.safe.json": "b72a99ac9cee6fbf174e65e97bc1d74a8ec64b4416c92fb540ee233be59a4650",
+    "original-coverage-begin.safe.json": "b717b0081c25360690136f0e31be331f3e99c22cc91919f4e009bee146c7e6db",
+    "original-classinfo.stdout": "f11d2ac34d8b667d7863f2c9d2e8581b5527498d541988e46c8cd7db7adc36bf",
+    "original-execinfo-process.safe.json": "5465730404b16d326262701af506dd1cb06b187d2621d3eb91f979d1ba4b7c80",
+    "original-coverage.xml": "5d98bfad4a7be0039979fb271f19595fb1bbbb021b4c080a60aef446cdef120b",
+    "original-coverage-process.safe.json": "49b7a6eb033670badbd5e962c1f92ff53ef6edb8815e5cd9a9cabaf25c16486a",
+    "original-execinfo-exit.safe.json": "118481dc8641c046eb5818d121758974a21c9f65b967ed72d76fa79092235823",
+    "original-execinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "jacoco.exec": "9246498ab77d0cd9036f8f9a520155bcac48ac3c80d1c0057c512ba9ee5d8f0e",
+    "original-execinfo.stdout": "72986e3fa018ee856210e724a5fe34ee784004414975a84e8e0ef6ed86b58226",
+    "original-begin.json": "2e59f91d2c956e4e4306dd06dcbcba4d8a85b07c0a0df5ad856c5ab1ca1f5444",
+    "original-unit-exit.safe.json": "79afc3a4dc502cde20e9abdf6a34a0d56b690d5901b464292feb3647def1ecd8",
+    "original-classinfo-process.safe.json": "74b49592212c95c8461cbbef3f5445d75df2a27ad56af48eb0090563a7c92837",
+    "original-unit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-manifest.json": "4fec4e84471f9727dfae1e50f5d8d6f253ae75a34430d932296f554e4005093d",
+    "original-classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-coverage.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-class-init.stdout": "af7ed631ba5d4a15c7a1a555ae27e40b5239a3b243d8196e24e482ef26e43876",
+    "original-unit.stdout": "1c58421e429b5c7796976ecc8e75145acc32a304edc4a55651b4fdaf00a8750f",
+    "original-TEST-junit-jupiter.xml": "72c3e2750ae4b0e133a40762f96416a66a2a5fbc69fb476c3d41ce604a9220d6",
+    "original-TEST-junit-platform-suite.xml": "e8fbbf352fa9585135c85fae3f015b9e6cb3758b5577dabdfe17813c1d21b312",
+    "original-TEST-junit-vintage.xml": "5594641997c097594ddda5c81c7abbc4dc5c98aa8c3fe764ce1fc980d8bd4902",
+    "static-pmd.stdout": "1792b04caa226185d75c50313183fb9f5fcf9218e26db3137697adca03af6e57",
+    "static-checkstyle-exit.safe.json": "23da2e8c80f0e06d6770e7b2ea9a7a3b2b4480dca3fe83f57525262ba9b2a226",
+    "static-pmd.stderr": "1862d7faee8bc4d1469a03164fe1f58a50eafab72b4a0ff282c8d67bf7823e00",
+    "static-pmd-exit.safe.json": "756797766881ba5198bd875c446a69cedb90613722c9d710edae39b8b6721e8d",
+    "static-checkstyle-process.safe.json": "86cc3913fb9a7a3381a14220eaa0d1194fe862287ef9927a3aa5a278272eecf3",
+    "static-pmd-begin.safe.json": "9655f153fd2b3fb12198112add4e4557969d2aa306e75861877a76ebe2158808",
+    "static-sources.txt": "34246c7bdd7da53db1af0f825f5c2eb20d0d221608e959e1d941810d2038c8e8",
+    "static-pmd-process.safe.json": "6a81848278148afa84253cbc8b12ce584dde9835ab67946281973cf8465c6857",
+    "static-checkstyle.xml": "86c41f0ec80a18abda096a402003918e47947415907ccb18a0b32b6b03e6300c",
+    "static-checkstyle-begin.safe.json": "b96a9b319492e4f9aa0eb3c3fdb4b5e2df00918d544735384c9c08918c6cc06e",
+    "static-checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "static-manifest.json": "c8c2580b2364b5c3a5b9e91c05947c8565fba999bc096f4b64a0372e77c185fb",
+    "static-pmd.xml": "ee0fb8528ad7cfebd5dce635c91354f2c1dfe4cca228f8bf1458b8eb0dd6dfae",
+    "static-checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "originalDbTestCompiled": 0,
+  "actualBackendActions": 0,
+  "heldFourInitializations": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/403_user_mutation_values_independent_post.py",
+    "sha256": "cca07e9831919c24cb107c3ed34f5e025ad10464300f2a22cb07f887021dd864"
+  }
+}
