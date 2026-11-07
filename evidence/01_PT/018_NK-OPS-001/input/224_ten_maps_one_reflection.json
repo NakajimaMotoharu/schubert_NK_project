@@ -1,0 +1,288 @@
+{
+  "sites": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCriticalAuditPortTest.java",
+      "sourceSha256": "e7dfcb613716ae6af147137e9ceabda1cf25006a4d02651031d3c9813cbdb88f",
+      "originalAttributes": {
+        "beginline": "815",
+        "endline": "815",
+        "begincolumn": "33",
+        "endcolumn": "60",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.application.admin",
+        "class": "UserCriticalAuditPortTest.Jdbc",
+        "variable": "nullTypes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_OWN_JDBC_FIXTURE",
+      "reason": "Every writeOne worker constructs its own Jdbc and its nullTypes map, synchronous synthetic JDBC bind callbacks stay on that worker; parent inspection follows timed Future.get. No map is shared by the three workers.",
+      "witnesses": [
+        "private static",
+        "var f = new Jdbc();",
+        "workers.submit(() -> writeOne(0))"
+      ],
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "sourceSha256": "60029426a27efd8f06ec26ab2adf7409d026d8e39b303c59503336fcebd3913a",
+      "originalAttributes": {
+        "beginline": "101",
+        "endline": "101",
+        "begincolumn": "25",
+        "endcolumn": "49",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "JdbcOutboxPortTest",
+        "method": "row",
+        "variable": "values",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "LOCAL_ROW_VECTOR_RETURNED_ONLY_TO_SYNCHRONOUS_TEST",
+      "reason": "Fresh values map on each row fixture call, populated sequentially then returned to its own synthetic result row; this Test has no worker/executor/parallel launch. The map is an independent literal result vector, not shared application state.",
+      "witnesses": [
+        "return values;",
+        "values.put(\"id\", id);"
+      ],
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAuditPortTest.java",
+      "sourceSha256": "4fce0913d8f41edf31ffd8d6097b758845005a0e4021e111c1ff182a54d2c834",
+      "originalAttributes": {
+        "beginline": "279",
+        "endline": "279",
+        "begincolumn": "26",
+        "endcolumn": "66",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "LoginAuditPortTest",
+        "method": "withoutDetails",
+        "variable": "values",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "LOCAL_EXPECTED_COPY",
+      "reason": "Fresh copy of one completed fixture bindings; removes one details key and returns the expected comparison map. Calls are assertion preparation on the owning Test thread, never submitted as mutable worker state.",
+      "witnesses": [
+        "new HashMap<>(fixture.bindings)",
+        "values.remove(10);",
+        "return values;"
+      ],
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunAuditPortTest.java",
+      "sourceSha256": "4b8f593bfa4071f47d1586ef2576b01228140a36fd40c40c80f60b5cbd7a6315",
+      "originalAttributes": {
+        "beginline": "521",
+        "endline": "521",
+        "begincolumn": "5",
+        "endcolumn": "36",
+        "rule": "AvoidAccessibilityAlteration",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "BatchRunAuditPortTest",
+        "method": "internalHistoryRenderingUsesFixedRedactionWithoutExposingItsInputIdentityOrTime",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidaccessibilityalteration",
+        "priority": "3"
+      },
+      "profile": "FIXED_OWN_PRIVATE_RECORD_REDACTION_TEST",
+      "reason": "Only this owned Test opens the fixed own-module History record constructor to assert literal redaction and absence of supplied identity/time. No arbitrary class/member selection, application access configuration or production reflection path is changed. Static rule target is a Test-only assertion mechanism; ordinary compatibility/access-control acceptance is not inferred.",
+      "witnesses": [
+        "Class.forName(\"dev.codex.schubert.nk.batch.repository.BatchRunRepository$History\")",
+        "type.getDeclaredConstructor(long.class, UUID.class, int.class, Instant.class, String.class)",
+        "constructor.setAccessible(true);",
+        "assertEquals(\"BatchStepHistory[identity/time=<redacted>]\", history.toString());"
+      ],
+      "classification": "NOT_APPLICABLE_FIXED_OWN_TEST_REFLECTION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java",
+      "sourceSha256": "28271ad49820af2c90e99eb6d7bff01a680754086cf24c4f396777b6e3125c7d",
+      "originalAttributes": {
+        "beginline": "533",
+        "endline": "533",
+        "begincolumn": "26",
+        "endcolumn": "50",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "ExpiryAuditPortTest",
+        "method": "handleBindings",
+        "variable": "values",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "LOCAL_EXPECTED_HANDLE_VECTOR",
+      "reason": "Fresh expected SQL bindings vector, subsequently completed by synchronous assertFinishBindings/assertAbandonBindings. Intentional SQL-null entries in expected values require nullable oracle maps; no shared mutable fixture field.",
+      "witnesses": [
+        "return values;",
+        "var expected = handleBindings(8);",
+        "expected.put(5, null);"
+      ],
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPredicateContractTest.java",
+      "sourceSha256": "2eeecafc5a1af7a1451937572ea38f3e9c6fec8a0a358101d71850ad2f2c7ddb",
+      "originalAttributes": {
+        "beginline": "217",
+        "endline": "217",
+        "begincolumn": "25",
+        "endcolumn": "47",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "ExpiryAuditPredicateContractTest",
+        "method": "mutate",
+        "variable": "data",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "LOCAL_COPY_TO_IMMUTABLE_SNAPSHOT",
+      "reason": "Fresh mutable field-replacement vector consumed entirely inside mutate to construct the returned immutable Snapshot. No Map escapes; missing/null columns are deliberately modelled, so ConcurrentHashMap null prohibition would change the oracle.",
+      "witnesses": [
+        "data.put(field, value);",
+        "return new ExpiryAuditRepository.Snapshot("
+      ],
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogOutboxPortTest.java",
+      "sourceSha256": "bfc43a279b680a1bb88465d39acc0f59ea7f5e5111322e130de9fe8894bc6090",
+      "originalAttributes": {
+        "beginline": "532",
+        "endline": "532",
+        "begincolumn": "32",
+        "endcolumn": "61",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.logging",
+        "class": "WebLogOutboxPortTest.Jdbc",
+        "variable": "binds",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_OWN_JDBC_FIXTURE",
+      "reason": "Each readWorker constructs a distinct Jdbc with binds and faults maps, used by its own synchronous proxy operations; parent compares returned values only after timed Future.get. A new Jdbc in each worker separates both maps.",
+      "witnesses": [
+        "var f = new Jdbc();",
+        "workers.submit(() -> readWorker(1))",
+        "workers.submit(() -> readWorker(2))"
+      ],
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogOutboxPortTest.java",
+      "sourceSha256": "bfc43a279b680a1bb88465d39acc0f59ea7f5e5111322e130de9fe8894bc6090",
+      "originalAttributes": {
+        "beginline": "536",
+        "endline": "536",
+        "begincolumn": "34",
+        "endcolumn": "58",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.logging",
+        "class": "WebLogOutboxPortTest.Jdbc",
+        "variable": "faults",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_OWN_JDBC_FIXTURE",
+      "reason": "Each readWorker constructs a distinct Jdbc with binds and faults maps, used by its own synchronous proxy operations; parent compares returned values only after timed Future.get. A new Jdbc in each worker separates both maps.",
+      "witnesses": [
+        "var f = new Jdbc();",
+        "workers.submit(() -> readWorker(1))",
+        "workers.submit(() -> readWorker(2))"
+      ],
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java",
+      "sourceSha256": "7e7e59d58974d577196b547038a1f9aa7e4b470a76a09b038b941606458eba4a",
+      "originalAttributes": {
+        "beginline": "380",
+        "endline": "395",
+        "begincolumn": "25",
+        "endcolumn": "43",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.media",
+        "class": "MediaRangePortTest",
+        "method": "verify",
+        "variable": "headers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "LOCAL_EXPECTED_HTTP_HEADERS",
+      "reason": "Fresh expected headers inside verify, completed before assertEquals to the reply immutable headers. Only method-local expected map is mutable; assertion lambda mutates reply.headers to verify rejection and does not capture headers.",
+      "witnesses": [
+        "if (contentRange != null) headers.put(CONTENT_RANGE, contentRange);",
+        "assertEquals(headers, reply.headers);"
+      ],
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
+      "sourceSha256": "0327b5f0f28080e942ac08e0ad5de9f16360531714c0fd0a5e26a3e8cf14b54f",
+      "originalAttributes": {
+        "beginline": "321",
+        "endline": "321",
+        "begincolumn": "39",
+        "endcolumn": "67",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "CsrfDeniedHandlerPortTest.Frame",
+        "variable": "attributes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_OWN_REQUEST_FRAME",
+      "reason": "Frame and attributes map are freshly created inside each worker; configured audit/router callbacks never publish one Frame to another worker. Independent full58 requalification22546 includes these current-source workers.",
+      "witnesses": [
+        "var frame = new Frame(100 + item);",
+        "job.get(10, java.util.concurrent.TimeUnit.SECONDS)"
+      ],
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java",
+      "sourceSha256": "b3af1540089f2a9325938b1086ffdcd2d20281a63fc7f6a3bc023861e6bccbb2",
+      "originalAttributes": {
+        "beginline": "221",
+        "endline": "221",
+        "begincolumn": "39",
+        "endcolumn": "67",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "CsrfFilterFactoryPortTest.Frame",
+        "variable": "attributes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_OWN_REQUEST_FRAME",
+      "reason": "Each worker creates a new request Frame and attributes map inside its submitted lambda. Shared configured filter is separate from the request-owned map; current full58 already independently requalified.",
+      "witnesses": [
+        "var frame = new Frame(POST, value, new String[] {value});",
+        "job.get(10, java.util.concurrent.TimeUnit.SECONDS)"
+      ],
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    }
+  ],
+  "mainWitness": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "witnesses": [
+      "private record History(long id, UUID runId, int attempt, Instant started, String status)",
+      "return \"BatchStepHistory[identity/time=<redacted>]\";"
+    ]
+  }
+}
