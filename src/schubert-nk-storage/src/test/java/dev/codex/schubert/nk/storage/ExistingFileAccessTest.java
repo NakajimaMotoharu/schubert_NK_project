@@ -387,7 +387,7 @@ class ExistingFileAccessTest {
   private static final class FaultIo implements ExistingFileAccess.Io {
     final String fault;
     final List<SeekableByteChannel> channels = new ArrayList<>();
-    int attributes;
+    int attributeCalls;
     int opens;
     int closes;
     Throwable closeFailure;
@@ -398,14 +398,14 @@ class ExistingFileAccessTest {
 
     @Override
     public Map<String, Object> attributes(Path held) throws IOException {
-      attributes++;
-      if (fault.equals("attrs" + attributes))
+      attributeCalls++;
+      if (fault.equals("attrs" + attributeCalls))
         throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
       if (fault.equals("unsupported"))
         throw new UnsupportedOperationException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
       Map<String, Object> result =
           new HashMap<>(Files.readAttributes(held, "unix:owner,group,mode,nlink,size"));
-      if (fault.equals("bad-post") && attributes == 4) result.put("nlink", 2);
+      if (fault.equals("bad-post") && attributeCalls == 4) result.put("nlink", 2);
       return result;
     }
 

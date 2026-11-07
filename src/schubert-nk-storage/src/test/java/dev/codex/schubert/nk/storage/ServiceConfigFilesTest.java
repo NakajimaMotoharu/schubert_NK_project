@@ -25,6 +25,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-OPS-CFGFILE-001..007, SS343 fixed file names and held-inode byte contract. */
 final class ServiceConfigFilesTest {
+  private static final String API_POOL_FIXTURE_DOCUMENT = "nk.db.pool.api.max: '8'\n";
   private static final String FIXTURE_API_YML_77F26866 = "api.yml";
   private static final String FIXTURE_WRONG_D78ED9EF = "wrong";
   private static final String FIXTURE_SIZE_EB1E91E4 = "size";
@@ -34,7 +35,7 @@ final class ServiceConfigFilesTest {
     Path root = Files.createDirectory(temporary.resolve("config"));
     Files.setPosixFilePermissions(root, PosixFilePermissions.fromString("rwxr-x---"));
     write(root, "common.yml", "nk.protocol.version: '001'\n");
-    write(root, FIXTURE_API_YML_77F26866, "nk.db.pool.api.max: '8'\n");
+    write(root, FIXTURE_API_YML_77F26866, API_POOL_FIXTURE_DOCUMENT);
     write(root, "web.yml", "nk.web.http.port: '8080'\n");
     return root;
   }
@@ -75,7 +76,7 @@ final class ServiceConfigFilesTest {
     var api = read(root, ServiceConfigFiles.Service.API);
     var web = read(root, ServiceConfigFiles.Service.WEB);
     assertEquals("nk.protocol.version: '001'\n", api.commonYaml());
-    assertEquals("nk.db.pool.api.max: '8'\n", api.serviceYaml());
+    assertEquals(API_POOL_FIXTURE_DOCUMENT, api.serviceYaml());
     assertEquals("nk.protocol.version: '001'\n", web.commonYaml());
     assertEquals("nk.web.http.port: '8080'\n", web.serviceYaml());
   }
@@ -126,7 +127,7 @@ final class ServiceConfigFilesTest {
                 LinuxDirectoryCalls.create(),
                 ServiceConfigFiles.Service.API));
     assertEquals(
-        "nk.db.pool.api.max: '8'\n", read(root, ServiceConfigFiles.Service.API).serviceYaml());
+        API_POOL_FIXTURE_DOCUMENT, read(root, ServiceConfigFiles.Service.API).serviceYaml());
   }
 
   @Test
@@ -224,7 +225,7 @@ final class ServiceConfigFilesTest {
     Path root = root();
     StorageIdentity identity = identity(root);
     assertEquals(
-        "nk.db.pool.api.max: '8'\n",
+        API_POOL_FIXTURE_DOCUMENT,
         ServiceConfigFiles.read(
                 root,
                 identity,
@@ -269,7 +270,8 @@ final class ServiceConfigFilesTest {
     public Map<String, Object> attributes(Path path) throws IOException {
       Map<String, Object> real =
           Files.readAttributes(path, "unix:owner,group,mode,nlink,dev,ino,size,ctime");
-      int call = ++attributeCalls;
+      int call = attributeCalls + 1;
+      attributeCalls = call;
       if ((kind == FaultKind.ROOT_DRIFT && call == 6)
           || (kind == FaultKind.FILE_DRIFT && call == 5)) {
         var changed = new HashMap<>(real);
@@ -282,8 +284,9 @@ final class ServiceConfigFilesTest {
     @Override
     public SeekableByteChannel openReadOnly(Path path) throws IOException {
       SeekableByteChannel real = Files.newByteChannel(path, Set.of(StandardOpenOption.READ));
-      if (++channelCalls != 2 || kind == FaultKind.ROOT_DRIFT || kind == FaultKind.FILE_DRIFT)
-        return real;
+      int call = channelCalls + 1;
+      channelCalls = call;
+      if (call != 2 || kind == FaultKind.ROOT_DRIFT || kind == FaultKind.FILE_DRIFT) return real;
       return new FaultChannel(real, kind);
     }
   }
@@ -301,7 +304,8 @@ final class ServiceConfigFilesTest {
 
     @Override
     public int read(ByteBuffer destination) throws IOException {
-      int call = ++readCalls;
+      int call = readCalls + 1;
+      readCalls = call;
       if (kind == FaultKind.ZERO_READ && call == 1) return 0;
       if (kind == FaultKind.SHORT_READ && call == 2) return -1;
       if (kind == FaultKind.SHORT_READ && call == 1) {
@@ -322,7 +326,8 @@ final class ServiceConfigFilesTest {
 
     @Override
     public long size() throws IOException {
-      int call = ++sizeCalls;
+      int call = sizeCalls + 1;
+      sizeCalls = call;
       if ((kind == FaultKind.FIRST_SIZE && call == 1)
           || (kind == FaultKind.FINAL_SIZE && call == 2)) return real.size() + 1;
       return real.size();
@@ -413,7 +418,9 @@ final class ServiceConfigFilesTest {
     @Override
     public void close(int directory) throws StorageIoException {
       real.close(directory);
-      if (++closed == failAt) throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+      int call = closed + 1;
+      closed = call;
+      if (call == failAt) throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
     }
   }
 }

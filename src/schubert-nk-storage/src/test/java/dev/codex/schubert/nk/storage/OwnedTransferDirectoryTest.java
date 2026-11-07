@@ -30,6 +30,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Native FD ownership and path replacement tests. NK-SCN-001; SSC-019; PT-SCN-008-F02. */
 class OwnedTransferDirectoryTest {
+  private static final String ASSET_ENTRY_NAME = "音源 name.ogg";
   private static final String FIXTURE_UNIX_OWNER_GROUP_MODE_NLINK_SIZE_69F67BAF =
       "unix:owner,group,mode,nlink,size";
   private static final String FIXTURE_OUTSIDE_F78EA721 = "outside";
@@ -47,10 +48,10 @@ class OwnedTransferDirectoryTest {
   @Test
   void med018ExistingAssetChildrenAndEntriesRetainReadOnlyInodes() throws Exception {
     Path directory = Files.createDirectory(root.resolve("音楽 folder"));
-    Path asset = directory.resolve("音源 name.ogg");
+    Path asset = directory.resolve(ASSET_ENTRY_NAME);
     write(asset);
     Path outside = Files.createDirectory(root.resolve(FIXTURE_OUTSIDE_F78EA721));
-    Files.write(outside.resolve("音源 name.ogg"), new byte[] {9});
+    Files.write(outside.resolve(ASSET_ENTRY_NAME), new byte[] {9});
     FaultCalls calls = new FaultCalls();
     calls.readOnly = true;
     var parent = OwnedTransferDirectory.open(calls, root);
@@ -64,12 +65,12 @@ class OwnedTransferDirectoryTest {
       assertArrayEquals(
           new byte[] {1, 2, 3},
           child.atExistingEntryHandle(
-              "音源 name.ogg",
+              ASSET_ENTRY_NAME,
               handle -> {
                 assertEquals(2, calls.live.size());
-                Files.move(retained.resolve("音源 name.ogg"), retained.resolve("saved.ogg"));
+                Files.move(retained.resolve(ASSET_ENTRY_NAME), retained.resolve("saved.ogg"));
                 Files.createSymbolicLink(
-                    retained.resolve("音源 name.ogg"), outside.resolve("音源 name.ogg"));
+                    retained.resolve(ASSET_ENTRY_NAME), outside.resolve(ASSET_ENTRY_NAME));
                 StorageAttributeGuard.existingFile(
                     Files.readAttributes(handle, FIXTURE_UNIX_OWNER_GROUP_MODE_NLINK_SIZE_69F67BAF),
                     expected,
@@ -77,7 +78,7 @@ class OwnedTransferDirectoryTest {
                 return readHeld(handle);
               }));
       assertEquals(1, calls.live.size());
-      assertArrayEquals(new byte[] {9}, Files.readAllBytes(outside.resolve("音源 name.ogg")));
+      assertArrayEquals(new byte[] {9}, Files.readAllBytes(outside.resolve(ASSET_ENTRY_NAME)));
       assertArrayEquals(new byte[] {1, 2, 3}, Files.readAllBytes(retained.resolve("saved.ogg")));
     } finally {
       parent.close();
@@ -828,7 +829,9 @@ class OwnedTransferDirectoryTest {
             int before = calls.closes;
             calls.closeFailure = cleanup;
             if (scope == 1) {
-              LocalDate date = DATE.plusDays(sequence++);
+              int sequenceValue = sequence;
+              sequence++;
+              LocalDate date = DATE.plusDays(sequenceValue);
               assertSame(
                   cleanup,
                   assertThrows(
@@ -841,7 +844,9 @@ class OwnedTransferDirectoryTest {
                                 return true;
                               })));
             } else {
-              String name = "compound-" + sequence++;
+              int sequenceValue = sequence;
+              sequence++;
+              String name = "compound-" + sequenceValue;
               write(root.resolve(name));
               assertSame(
                   cleanup,
