@@ -1,0 +1,11 @@
+# 未対応directory既定拒否四件・通常PT結果
+
+仕様3763/sourcee5c8567c3d8cc1179aefdfcb7d0ba06475415f40/Main7aed不変、PG23502初四method・真正exit0/FESabort0、23504独立post0 manifest SHA256 75c2a9aa1603b5a65a2a1ecf942856b0f8f67ba46d09f66b34d0beb5fda716f2。Test ID PT-SCN-DDEFAULT-001..004/source recipe/原XML/caseTimings一意。
+
+全一SourceFile/一normalphysical interfaceの三default Code、line3/method3/class1miss0=100%、branch0自然N-A率null、九abstractはCode無し（9件成功でもcoverage手動除外でもない）。一exec/session/normalCRC一致、旧exec合算0、実Main初期化はDirectoryCalls/StorageIoException/Reason三だけ。九abstract callbackは全拒否で実呼出0、native/ファイル/FD/Root/VM/DB/credential/held4実行0、元LinuxTest/helper compile-run0。StorageIoException既資格は新Source credit無し。
+
+SS333未対応default拒否に従いprivateFileのopaque parent0/7/INT境界・privateDirectoryの空/dot/dotdot/slash/NUL・emptyDirectoryの拒否・三operation null名でUNAVAILABLE固定例外を確認、名前policyや実FS能力の受理としない。各例外distinct/固定診断/cause0/suppressed隔離、fallback createFile/createDirectory/unlink/sync/close等0。期待はSSと独立literalでありProductからexpected生成無し。四metadata反例はreason違い/任意診断/null試験喪失/abstract呼出1を拒否し、実行PT件数へ加算しない。
+
+BUG2489/YKT2227はchild四literalのstatic実適用を修正前起票/23508before保存、定数四置換と予定null negative三追加を区別、他token逆一致、23512compile0/23514PMD-CS0/23498preflight0・初四PT/postで当範囲CLOSED。原23494/23496は保全し旧sourceの成功転用無し。開始event4326のP00901は実装前WBS正本titleを確認し4327でP00803原子公開基盤へ帰属追記訂正、元見積0.5/2/5pp cap7と費用は保持、再着手/受入増加扱いにしない。
+
+追加unique4で468→472=Java368+HTML97+CSS7、直接全Code proof一はpending9/名前候補111、暫定whole93は未増。正式1964PT/53scope・新leaf0・工数null、全451/実filesystem/IT-ST/PGPT全完了としない。実command/OS/JDK/branch/source/input/期待recipe/actualXML/coverage/hashは独立manifest、次は477通常継続。
