@@ -1,0 +1,9 @@
+# Java子二owner source是正結果
+
+source `a9ab182aa54f22e5d7b8dcff13915ed96c735f62`/Production Main7aed不変、独立PG23100 exit0 SHA256 `3f5e50180e76dd7f23a91a3da0da5cb5dc9d0723bb9b576318f2408d02699bf7`。BUG2467八ProcessBuilder owner中、Java child二つのみPG source是正。`OwnedTestProcess`が同じProcessをstart直後から保持し、LinuxExecDescriptorのexecutorは取得前作成/reader取得失敗はTWR ownerへ。inner finallyでprocess終了処理をreader/executor closeより先行、close再呼出はat-most-onceで操作再発行しない。通常argv/FD/PID/exit/入力/assertionの全非cleanup tokenは元sourceへ独立逆復元、否定8。
+
+closeはTERM5秒待機→必要時force5秒待機、wait中interruptは期限を再開せず全cleanup後restore。終端不明ならIOException、直接ErrorをRuntime/IOExceptionより優先し、例外suppressionは両向きidentity graphで新cycleを作らない。終了済みを確認してから標準streamをclose。これは待機budgetのsource契約であり、stream close/reader/executorの実遅延やOS全体の終了上限を証明しない。実same-PID/FD/lock/descendantの後条件は未測定HOLD。
+
+23096/23104: standalone自作JavacTask.parse-onlyとformat0、元Test compile/run0。23098原三source PMD raw20/CS0からBUG2473 field命名一件を是正、23106 helperのみraw13/CS0、元二sourceは同hashのraw6を再利用。現変更三source raw19全件をmethod/ASTbody/hashへ束縛して個別非該当、適用0/未分類0。元29は不変27+変2の82件を再束縛、新helper13を別計上。全30engineの再実行・wholeStorage/F03/451受入はしていない。JDK25.0.4/PMD7.28/Checkstyle14.3、command/実exit/hashはmanifest/初期・helper reportsへ。
+
+元native/process/Root/VM/FS/DBの操作0、別fixture/元Test/子Mainの実行・compile0、実PT PASS/covはnull、新unique/whole/leaf0。current442/whole94/正式1964-53/工数null。BUG2467残親6・BUG2468 fork5はOPEN。helperの新codeも実PT未確認で正常終了としない。335草稿のJavadoc単語誤検出は元Productを起動せずtoken条件へ修正し原failureを経過保存。
