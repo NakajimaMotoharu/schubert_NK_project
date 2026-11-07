@@ -40,11 +40,13 @@ source=sys.argv[2];assert re.fullmatch('[0-9a-f]{40}',source)
 for n,h in inputs.items():assert hashlib.sha256(subprocess.check_output(['git','show',source+':'+n])).hexdigest()==h
 session='PG22220-EXCEPTION-FACTORY4';agent=tc/'m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar';cli=tc/'org.jacoco.cli-0.8.15-nodeps.jar'
 if phase=='run':
+ with zipfile.ZipFile(nm['jars']['web']['path']) as normalJar:
+  expectedFamily={pkg+'WebAccessExceptionFilterFactory.class'};actualFamily={name for name in normalJar.namelist() if name==pkg+'WebAccessExceptionFilterFactory.class' or name.startswith(pkg+'WebAccessExceptionFilterFactory$')};assert actualFamily==expectedFamily
  assert not unit.exists();unit.mkdir();c.SLOT=unit;(unit/'tmp').mkdir();(unit/'component').mkdir();cmd=[str(jdk/'java'),'-Djava.io.tmpdir='+str(unit/'tmp'),'-Dfile.encoding=UTF-8','-Dspring.security.strategy=MODE_THREADLOCAL','-Djunit.jupiter.extensions.autodetection.enabled=false','-Djunit.jupiter.execution.parallel.enabled=false','-Duser.timezone=Asia/Tokyo','-javaagent:'+str(agent)+'=destfile='+str(unit/'jacoco.exec')+',sessionid='+session+',append=false','-Xlog:class+init=info:file='+str(unit/'class-init.log'),'-jar',str(console),'execute','--disable-banner','--class-path',str(pre/'classes')+':'+':'.join(deps),'--reports-dir',str(unit/'xml'),'--fail-if-no-tests','--details','summary']
  for name in selected:cmd.extend(['--select-class',name])
  begin=dict(source=source,normalSource=nm['source'],normalManifestSha256=sha(normal),inputHashes=inputs,dependencies=deps,consoleSha256=sha(console),driverSha256=sha(__file__),compileManifestSha256=sha(pre/'manifest.json'),selected=selected,existingMethodsSourceRequalification=0,newMethods=4,expectedTests=4,realBaselineAccess=False,realChrExecution=False,session=session,startUTC=datetime.datetime.now(datetime.timezone.utc).isoformat());write(unit/'begin.json',begin);stages={'unit':c.step('unit',cmd,r,timeout=180)};physical={}
  with zipfile.ZipFile(nm['jars']['web']['path']) as z:
-  names=[n for n in z.namelist() if n in [pkg+'WebAccessExceptionFilterFactory.class',pkg+'WebAccessExceptionFilterFactory$1.class']];assert len(names)==2
+  names=[n for n in z.namelist() if n in [pkg+'WebAccessExceptionFilterFactory.class']];assert len(names)==1
   for name in names:
    p=unit/'component'/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(z.read(name));physical[name[:-6]]=sha(p)
  for label,args in [('coverage',['report',str(unit/'jacoco.exec'),'--classfiles',str(unit/'component'),'--sourcefiles',str(r/'src/schubert-nk-web/src/main/java'),'--xml',str(unit/'coverage.xml')]),('classinfo',['classinfo',str(unit/'component')]),('execinfo',['execinfo',str(unit/'jacoco.exec')])]:stages[label]=c.step(label,[str(jdk/'java'),'-jar',str(cli),*args],r)
