@@ -17,16 +17,16 @@ import java.util.concurrent.TimeUnit;
  */
 final class OwnedTestProcess implements AutoCloseable {
   private static final long WAIT_NANOS = TimeUnit.SECONDS.toNanos(5);
-  private final Process process;
+  private final Process ownedChild;
   private boolean closeAttempted;
   private boolean interrupted;
 
   OwnedTestProcess(Process process) {
-    this.process = Objects.requireNonNull(process, "owned test child");
+    this.ownedChild = Objects.requireNonNull(process, "owned test child");
   }
 
   Process process() {
-    return process;
+    return ownedChild;
   }
 
   /**
@@ -42,7 +42,7 @@ final class OwnedTestProcess implements AutoCloseable {
     boolean terminated = false;
     try {
       try {
-        if (process.isAlive()) process.destroy();
+        if (ownedChild.isAlive()) ownedChild.destroy();
       } catch (RuntimeException | Error failure) {
         failures.add(failure);
       }
@@ -53,7 +53,7 @@ final class OwnedTestProcess implements AutoCloseable {
       }
       if (!terminated) {
         try {
-          process.destroyForcibly();
+          ownedChild.destroyForcibly();
         } catch (RuntimeException | Error failure) {
           failures.add(failure);
         }
@@ -64,9 +64,9 @@ final class OwnedTestProcess implements AutoCloseable {
         }
       }
       if (terminated) {
-        closeStream(process.getOutputStream(), failures);
-        closeStream(process.getInputStream(), failures);
-        closeStream(process.getErrorStream(), failures);
+        closeStream(ownedChild.getOutputStream(), failures);
+        closeStream(ownedChild.getInputStream(), failures);
+        closeStream(ownedChild.getErrorStream(), failures);
       } else {
         failures.add(new IOException("owned test child terminal state unknown"));
       }
@@ -95,9 +95,9 @@ final class OwnedTestProcess implements AutoCloseable {
     long started = System.nanoTime();
     while (true) {
       long remaining = WAIT_NANOS - (System.nanoTime() - started);
-      if (remaining <= 0) return !process.isAlive();
+      if (remaining <= 0) return !ownedChild.isAlive();
       try {
-        if (process.waitFor(remaining, TimeUnit.NANOSECONDS)) return true;
+        if (ownedChild.waitFor(remaining, TimeUnit.NANOSECONDS)) return true;
       } catch (InterruptedException failure) {
         interrupted = true; // Keep the original deadline, restore only after cleanup.
       }
