@@ -1,0 +1,1331 @@
+{
+  "sites": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest.java",
+      "sourceSha256": "a0ae26af387cc48d71f28c47b89866a2c50c192b965838321860a773ea91daaf",
+      "originalAttributes": {
+        "beginline": "451",
+        "endline": "451",
+        "begincolumn": "32",
+        "endcolumn": "61",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.application.question",
+        "class": "QuestionCriticalAuditPortTest.Jdbc",
+        "variable": "binds",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "HELPER_NEW_OWNER",
+      "parallelMethod": "port008IndependentWorkersShareNoMutableJdbcOrJson",
+      "helperMethod": "readOne",
+      "witnesses": [
+        "workers.submit(() -> readOne(0))",
+        "workers.submit(() -> readOne(1))",
+        "var f = new Jdbc();"
+      ],
+      "reason": "Each readOne call creates a new Jdbc, binds/nullTypes belong only to that worker; parent reads only joined immutable JSON results.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest.java",
+      "sourceSha256": "a0ae26af387cc48d71f28c47b89866a2c50c192b965838321860a773ea91daaf",
+      "originalAttributes": {
+        "beginline": "452",
+        "endline": "452",
+        "begincolumn": "33",
+        "endcolumn": "60",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.application.question",
+        "class": "QuestionCriticalAuditPortTest.Jdbc",
+        "variable": "nullTypes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "HELPER_NEW_OWNER",
+      "parallelMethod": "port008IndependentWorkersShareNoMutableJdbcOrJson",
+      "helperMethod": "readOne",
+      "witnesses": [
+        "workers.submit(() -> readOne(0))",
+        "workers.submit(() -> readOne(1))",
+        "var f = new Jdbc();"
+      ],
+      "reason": "Each readOne call creates a new Jdbc, binds/nullTypes belong only to that worker; parent reads only joined immutable JSON results.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionPortTest.java",
+      "sourceSha256": "7b43c7f43b71023db194e7bfda91ca808323839f5f456e30c39f5cdd2ca76ffa",
+      "originalAttributes": {
+        "beginline": "243",
+        "endline": "243",
+        "begincolumn": "31",
+        "endcolumn": "59",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.inbound",
+        "class": "InboundTransactionPortTest.Fixture",
+        "variable": "properties",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The InboundTransactionPortTest fixture/Port owns this freshly initialized properties map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "sourceSha256": "60029426a27efd8f06ec26ab2adf7409d026d8e39b303c59503336fcebd3913a",
+      "originalAttributes": {
+        "beginline": "122",
+        "endline": "122",
+        "begincolumn": "40",
+        "endcolumn": "68",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "JdbcOutboxPortTest.Fixture",
+        "variable": "parameters",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "sharedRepositoryParallelCallsKeepOwnRowsBindingsAndBody",
+      "helperMethod": null,
+      "witnesses": [
+        "var f = new Fixture();",
+        "var ownRow = row(id, NOW);",
+        "f.rows.add(ownRow);"
+      ],
+      "reason": "Each worker creates its own Fixture. parameters/nullTypes are that synthetic statement-owner fixture state; all callbacks on the same worker.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "sourceSha256": "60029426a27efd8f06ec26ab2adf7409d026d8e39b303c59503336fcebd3913a",
+      "originalAttributes": {
+        "beginline": "123",
+        "endline": "123",
+        "begincolumn": "41",
+        "endcolumn": "68",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "JdbcOutboxPortTest.Fixture",
+        "variable": "nullTypes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "sharedRepositoryParallelCallsKeepOwnRowsBindingsAndBody",
+      "helperMethod": null,
+      "witnesses": [
+        "var f = new Fixture();",
+        "var ownRow = row(id, NOW);",
+        "f.rows.add(ownRow);"
+      ],
+      "reason": "Each worker creates its own Fixture. parameters/nullTypes are that synthetic statement-owner fixture state; all callbacks on the same worker.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.java",
+      "sourceSha256": "3e1ae38ba52644c2027a712bd22ea165c29e42f6d044712c6d61d70ce1d4516f",
+      "originalAttributes": {
+        "beginline": "92",
+        "endline": "92",
+        "begincolumn": "45",
+        "endcolumn": "71",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AdminPreludeJdbcPortTest.Fixture",
+        "variable": "bindings",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture f = new Fixture();",
+        "identity(f, Mutation.CREATE, OptionalLong.empty())"
+      ],
+      "reason": "Worker creates a distinct Fixture; its bindings index and each statement-local bound map remain with that owner and are not shared across workers.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.java",
+      "sourceSha256": "3e1ae38ba52644c2027a712bd22ea165c29e42f6d044712c6d61d70ce1d4516f",
+      "originalAttributes": {
+        "beginline": "143",
+        "endline": "143",
+        "begincolumn": "28",
+        "endcolumn": "51",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AdminPreludeJdbcPortTest.Fixture",
+        "method": "statement",
+        "variable": "bound",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture f = new Fixture();",
+        "identity(f, Mutation.CREATE, OptionalLong.empty())"
+      ],
+      "reason": "Worker creates a distinct Fixture; its bindings index and each statement-local bound map remain with that owner and are not shared across workers.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationVerifierJdbcPortTest.java",
+      "sourceSha256": "9f8e0b379cbfcbfc8bee9e64eb2f119d719435b433befbb9c43225487afae089",
+      "originalAttributes": {
+        "beginline": "67",
+        "endline": "67",
+        "begincolumn": "31",
+        "endcolumn": "55",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AuthenticationVerifierJdbcPortTest.Fixture",
+        "variable": "fields",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "parallelFreshRowsDoNotShareActorOrTransactionState",
+      "helperMethod": null,
+      "witnesses": [
+        "var f = new Fixture();",
+        "f.fields.put(\"user_id\", expected);"
+      ],
+      "reason": "fields map is newly constructed by each Fixture inside the worker, synchronous proxy reads do not publish that map to peers.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptPortTest.java",
+      "sourceSha256": "597ac4c0db04c217937a1bec0a37d2ca2bc441825f648aaff5014e862b27f4f1",
+      "originalAttributes": {
+        "beginline": "474",
+        "endline": "474",
+        "begincolumn": "31",
+        "endcolumn": "53",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "LoginAttemptPortTest.Fixture",
+        "variable": "user",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "DISTINCT_PREBUILT_OWNERS",
+      "parallelMethod": "concurrentIndependentAttemptsNeverShareBorrowedStatementsOrRowSnapshots",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture one = new Fixture();",
+        "Fixture two = new Fixture();",
+        "workers.submit(() -> lock(one, NAME, NOW))",
+        "workers.submit(() -> lock(two, \"second\", NOW))"
+      ],
+      "reason": "Separate one/two Fixtures are created and seeded before workers start. user/ip/changed maps and each Statement.bindings belong to one fixture; parent inspections occur after both timed joins.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptPortTest.java",
+      "sourceSha256": "597ac4c0db04c217937a1bec0a37d2ca2bc441825f648aaff5014e862b27f4f1",
+      "originalAttributes": {
+        "beginline": "475",
+        "endline": "475",
+        "begincolumn": "31",
+        "endcolumn": "51",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "LoginAttemptPortTest.Fixture",
+        "variable": "ip",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "DISTINCT_PREBUILT_OWNERS",
+      "parallelMethod": "concurrentIndependentAttemptsNeverShareBorrowedStatementsOrRowSnapshots",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture one = new Fixture();",
+        "Fixture two = new Fixture();",
+        "workers.submit(() -> lock(one, NAME, NOW))",
+        "workers.submit(() -> lock(two, \"second\", NOW))"
+      ],
+      "reason": "Separate one/two Fixtures are created and seeded before workers start. user/ip/changed maps and each Statement.bindings belong to one fixture; parent inspections occur after both timed joins.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptPortTest.java",
+      "sourceSha256": "597ac4c0db04c217937a1bec0a37d2ca2bc441825f648aaff5014e862b27f4f1",
+      "originalAttributes": {
+        "beginline": "478",
+        "endline": "478",
+        "begincolumn": "33",
+        "endcolumn": "58",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "LoginAttemptPortTest.Fixture",
+        "variable": "changed",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "DISTINCT_PREBUILT_OWNERS",
+      "parallelMethod": "concurrentIndependentAttemptsNeverShareBorrowedStatementsOrRowSnapshots",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture one = new Fixture();",
+        "Fixture two = new Fixture();",
+        "workers.submit(() -> lock(one, NAME, NOW))",
+        "workers.submit(() -> lock(two, \"second\", NOW))"
+      ],
+      "reason": "Separate one/two Fixtures are created and seeded before workers start. user/ip/changed maps and each Statement.bindings belong to one fixture; parent inspections occur after both timed joins.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptPortTest.java",
+      "sourceSha256": "597ac4c0db04c217937a1bec0a37d2ca2bc441825f648aaff5014e862b27f4f1",
+      "originalAttributes": {
+        "beginline": "551",
+        "endline": "551",
+        "begincolumn": "32",
+        "endcolumn": "58",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "LoginAttemptPortTest.Statement",
+        "variable": "bindings",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "DISTINCT_PREBUILT_OWNERS",
+      "parallelMethod": "concurrentIndependentAttemptsNeverShareBorrowedStatementsOrRowSnapshots",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture one = new Fixture();",
+        "Fixture two = new Fixture();",
+        "workers.submit(() -> lock(one, NAME, NOW))",
+        "workers.submit(() -> lock(two, \"second\", NOW))"
+      ],
+      "reason": "Separate one/two Fixtures are created and seeded before workers start. user/ip/changed maps and each Statement.bindings belong to one fixture; parent inspections occur after both timed joins.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAuditPortTest.java",
+      "sourceSha256": "4fce0913d8f41edf31ffd8d6097b758845005a0e4021e111c1ff182a54d2c834",
+      "originalAttributes": {
+        "beginline": "300",
+        "endline": "300",
+        "begincolumn": "32",
+        "endcolumn": "58",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "LoginAuditPortTest.Fixture",
+        "variable": "bindings",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "DISTINCT_PREBUILT_OWNERS",
+      "parallelMethod": "concurrentWriterUsesOnlyEachCallersSeparateStatement",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture first = new Fixture();",
+        "Fixture second = new Fixture();",
+        "write(first, DENIED",
+        "write(second, accepted()"
+      ],
+      "reason": "Separate first/second fixture binding maps are handed to different workers; no parent modification while workers run, assertions follow both timed joins.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionAuditPortTest.java",
+      "sourceSha256": "64179428f24f1c78e6e93e320de1a840dfa0beab09538396e1df02a98557c67e",
+      "originalAttributes": {
+        "beginline": "269",
+        "endline": "269",
+        "begincolumn": "40",
+        "endcolumn": "72",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionAuditPortTest.Fixture",
+        "variable": "bindings",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "twoOwnedWorkersKeepIndependentStatementsAndValues",
+      "helperMethod": null,
+      "witnesses": [
+        "var fixture = new Fixture();",
+        "first.get(5, TimeUnit.SECONDS)",
+        "second.get(5, TimeUnit.SECONDS)"
+      ],
+      "reason": "Each submitted worker constructs its own Fixture/statement bindings; returned fixture inspected only after its own successful join.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionIssueJdbcPortTest.java",
+      "sourceSha256": "367458b115a8e5f3705fb6cd5bbc4db1728d15ea6bae0b41c7e7832d06ea04d8",
+      "originalAttributes": {
+        "beginline": "178",
+        "endline": "178",
+        "begincolumn": "28",
+        "endcolumn": "51",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionIssueJdbcPortTest.Fixture",
+        "method": "statement",
+        "variable": "bound",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "parallelPrivateFixturesDoNotShareContextBuffersOrAuditState",
+      "helperMethod": null,
+      "witnesses": [
+        "try (Fixture f = new Fixture())",
+        "f.issue();"
+      ],
+      "reason": "Each worker owns a fresh TWR Fixture and each statement allocates a fresh bound map; the fixture bindings list is not shared by workers.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionRevocationJdbcPortTest.java",
+      "sourceSha256": "4fa2ce49efef57b89472882f7347c50d6ccf61705d8e559c5bed1e2a3d8425dc",
+      "originalAttributes": {
+        "beginline": "91",
+        "endline": "91",
+        "begincolumn": "41",
+        "endcolumn": "65",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionRevocationJdbcPortTest.Fixture",
+        "variable": "fields",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "sharedServiceParallelCallsRetainOwnResultCorrelationAndResourceState",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture f = new Fixture();",
+        "f.fields.put(COL_REVOKED, revoked);"
+      ],
+      "reason": "Shared service is stateless with respect to these maps; each worker creates a separate Fixture.fields and statement-local bound map, no mutable map passes to another worker.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionRevocationJdbcPortTest.java",
+      "sourceSha256": "4fa2ce49efef57b89472882f7347c50d6ccf61705d8e559c5bed1e2a3d8425dc",
+      "originalAttributes": {
+        "beginline": "165",
+        "endline": "165",
+        "begincolumn": "28",
+        "endcolumn": "51",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionRevocationJdbcPortTest.Fixture",
+        "method": "statement",
+        "variable": "bound",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "sharedServiceParallelCallsRetainOwnResultCorrelationAndResourceState",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture f = new Fixture();",
+        "f.fields.put(COL_REVOKED, revoked);"
+      ],
+      "reason": "Shared service is stateless with respect to these maps; each worker creates a separate Fixture.fields and statement-local bound map, no mutable map passes to another worker.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "sourceSha256": "5a864a1941b8a9e3e36cef80b296b32c01c5b3910923cc502735920469822ca0",
+      "originalAttributes": {
+        "beginline": "505",
+        "endline": "505",
+        "begincolumn": "34",
+        "endcolumn": "60",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.cleanup",
+        "class": "LogCleanupTransactionPortTest.Fixture",
+        "variable": "failures",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "independentConnectionsInParallel",
+      "helperMethod": null,
+      "witnesses": [
+        "var f = new Fixture();",
+        "return f;",
+        "future.get(3, TimeUnit.SECONDS)"
+      ],
+      "reason": "Each worker owns its Fixture.failures/hits/modes and synthetic connection; parent assertions follow timed Future completion.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "sourceSha256": "5a864a1941b8a9e3e36cef80b296b32c01c5b3910923cc502735920469822ca0",
+      "originalAttributes": {
+        "beginline": "506",
+        "endline": "506",
+        "begincolumn": "32",
+        "endcolumn": "54",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.cleanup",
+        "class": "LogCleanupTransactionPortTest.Fixture",
+        "variable": "hits",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "independentConnectionsInParallel",
+      "helperMethod": null,
+      "witnesses": [
+        "var f = new Fixture();",
+        "return f;",
+        "future.get(3, TimeUnit.SECONDS)"
+      ],
+      "reason": "Each worker owns its Fixture.failures/hits/modes and synthetic connection; parent assertions follow timed Future completion.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "sourceSha256": "5a864a1941b8a9e3e36cef80b296b32c01c5b3910923cc502735920469822ca0",
+      "originalAttributes": {
+        "beginline": "507",
+        "endline": "507",
+        "begincolumn": "31",
+        "endcolumn": "54",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.cleanup",
+        "class": "LogCleanupTransactionPortTest.Fixture",
+        "variable": "modes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "independentConnectionsInParallel",
+      "helperMethod": null,
+      "witnesses": [
+        "var f = new Fixture();",
+        "return f;",
+        "future.get(3, TimeUnit.SECONDS)"
+      ],
+      "reason": "Each worker owns its Fixture.failures/hits/modes and synthetic connection; parent assertions follow timed Future completion.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/QueuePressurePolicyTest.java",
+      "sourceSha256": "ecd3414896569f9a81fe3be323c405e02eb3d34472fb54a7d89377f1a60bb570",
+      "originalAttributes": {
+        "beginline": "219",
+        "endline": "219",
+        "begincolumn": "41",
+        "endcolumn": "66",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.mq",
+        "class": "QueuePressurePolicyTest.Fixture",
+        "variable": "samples",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The QueuePressurePolicyTest fixture/Port owns this freshly initialized samples map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/QueuePressurePolicyTest.java",
+      "sourceSha256": "ecd3414896569f9a81fe3be323c405e02eb3d34472fb54a7d89377f1a60bb570",
+      "originalAttributes": {
+        "beginline": "220",
+        "endline": "220",
+        "begincolumn": "45",
+        "endcolumn": "68",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.mq",
+        "class": "QueuePressurePolicyTest.Fixture",
+        "variable": "reads",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The QueuePressurePolicyTest fixture/Port owns this freshly initialized reads map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/TopologyQueryPortTest.java",
+      "sourceSha256": "c644e3b17656f568490c89e7e0f92aaa1b0d211997f25a111ae3f203f85b4fcf",
+      "originalAttributes": {
+        "beginline": "229",
+        "endline": "229",
+        "begincolumn": "39",
+        "endcolumn": "71",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.mq",
+        "class": "TopologyQueryPortTest.Fixture",
+        "variable": "addressChanges",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The TopologyQueryPortTest fixture/Port owns this freshly initialized addressChanges map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/TopologyQueryPortTest.java",
+      "sourceSha256": "c644e3b17656f568490c89e7e0f92aaa1b0d211997f25a111ae3f203f85b4fcf",
+      "originalAttributes": {
+        "beginline": "230",
+        "endline": "230",
+        "begincolumn": "39",
+        "endcolumn": "69",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.mq",
+        "class": "TopologyQueryPortTest.Fixture",
+        "variable": "queueChanges",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The TopologyQueryPortTest fixture/Port owns this freshly initialized queueChanges map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+      "sourceSha256": "8e73b55c5cb6f850fe41c64c5ff5684f190fdbec16742782c2bc26af4078feb9",
+      "originalAttributes": {
+        "beginline": "447",
+        "endline": "447",
+        "begincolumn": "42",
+        "endcolumn": "66",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "BackupPairPortTest.Fixture",
+        "variable": "faults",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The BackupPairPortTest fixture/Port owns this freshly initialized faults map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunAuditPortTest.java",
+      "sourceSha256": "4b8f593bfa4071f47d1586ef2576b01228140a36fd40c40c80f60b5cbd7a6315",
+      "originalAttributes": {
+        "beginline": "652",
+        "endline": "652",
+        "begincolumn": "59",
+        "endcolumn": "85",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "BatchRunAuditPortTest.Fixture",
+        "variable": "bindings",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The BatchRunAuditPortTest fixture/Port owns this freshly initialized bindings map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunAuditPortTest.java",
+      "sourceSha256": "4b8f593bfa4071f47d1586ef2576b01228140a36fd40c40c80f60b5cbd7a6315",
+      "originalAttributes": {
+        "beginline": "653",
+        "endline": "653",
+        "begincolumn": "42",
+        "endcolumn": "66",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "BatchRunAuditPortTest.Fixture",
+        "variable": "faults",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The BatchRunAuditPortTest fixture/Port owns this freshly initialized faults map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupQueryPortTest.java",
+      "sourceSha256": "b7517573044d2ba929a57914956194b2db053cf189d464af443932619eba7387",
+      "originalAttributes": {
+        "beginline": "327",
+        "endline": "327",
+        "begincolumn": "42",
+        "endcolumn": "66",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "CleanupQueryPortTest.Fixture",
+        "variable": "faults",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The CleanupQueryPortTest fixture/Port owns this freshly initialized faults map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupQueryPortTest.java",
+      "sourceSha256": "b7517573044d2ba929a57914956194b2db053cf189d464af443932619eba7387",
+      "originalAttributes": {
+        "beginline": "329",
+        "endline": "329",
+        "begincolumn": "40",
+        "endcolumn": "66",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "CleanupQueryPortTest.Fixture",
+        "variable": "bindings",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The CleanupQueryPortTest fixture/Port owns this freshly initialized bindings map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepPortTest.java",
+      "sourceSha256": "64711edddb85a9862ebfd892a27d03582847bad648759025185babbb00e77e52",
+      "originalAttributes": {
+        "beginline": "371",
+        "endline": "371",
+        "begincolumn": "40",
+        "endcolumn": "73",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "CleanupStepPortTest.Fixture",
+        "variable": "cleanupBindings",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The CleanupStepPortTest fixture/Port owns this freshly initialized cleanupBindings map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepPortTest.java",
+      "sourceSha256": "64711edddb85a9862ebfd892a27d03582847bad648759025185babbb00e77e52",
+      "originalAttributes": {
+        "beginline": "372",
+        "endline": "372",
+        "begincolumn": "42",
+        "endcolumn": "66",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "CleanupStepPortTest.Fixture",
+        "variable": "faults",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The CleanupStepPortTest fixture/Port owns this freshly initialized faults map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java",
+      "sourceSha256": "28271ad49820af2c90e99eb6d7bff01a680754086cf24c4f396777b6e3125c7d",
+      "originalAttributes": {
+        "beginline": "595",
+        "endline": "595",
+        "begincolumn": "31",
+        "endcolumn": "57",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "ExpiryAuditPortTest.Fixture",
+        "variable": "snapshot",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The ExpiryAuditPortTest fixture/Port owns this freshly initialized snapshot map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java",
+      "sourceSha256": "28271ad49820af2c90e99eb6d7bff01a680754086cf24c4f396777b6e3125c7d",
+      "originalAttributes": {
+        "beginline": "695",
+        "endline": "695",
+        "begincolumn": "32",
+        "endcolumn": "58",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "ExpiryAuditPortTest.Port",
+        "variable": "bindings",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The ExpiryAuditPortTest fixture/Port owns this freshly initialized bindings map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "sourceSha256": "76b7c2644998b3d1cc617990ae777e36c0fc05a7fc08905c1f0dbd6360b82df5",
+      "originalAttributes": {
+        "beginline": "286",
+        "endline": "286",
+        "begincolumn": "42",
+        "endcolumn": "66",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "InspectionSummaryPortTest.Fixture",
+        "variable": "faults",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "beforeAndAfterInterruptRejectOnAnOwnedWorkerAndNeverChangeTheParentFlag",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture fixture = new Fixture();",
+        "fixture.interruptOnRowClose = !before;"
+      ],
+      "reason": "Single worker creates fresh fixture/faults/bindings on each iteration; parent interrupt-status assertion does not access maps while worker runs.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "sourceSha256": "76b7c2644998b3d1cc617990ae777e36c0fc05a7fc08905c1f0dbd6360b82df5",
+      "originalAttributes": {
+        "beginline": "288",
+        "endline": "288",
+        "begincolumn": "40",
+        "endcolumn": "66",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "InspectionSummaryPortTest.Fixture",
+        "variable": "bindings",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "beforeAndAfterInterruptRejectOnAnOwnedWorkerAndNeverChangeTheParentFlag",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture fixture = new Fixture();",
+        "fixture.interruptOnRowClose = !before;"
+      ],
+      "reason": "Single worker creates fresh fixture/faults/bindings on each iteration; parent interrupt-status assertion does not access maps while worker runs.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "sourceSha256": "0f11af78f2d7f3daa6eed7e4b54379c70b5f2c28548711730088efd86abc1730",
+      "originalAttributes": {
+        "beginline": "296",
+        "endline": "296",
+        "begincolumn": "32",
+        "endcolumn": "58",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "RunReferencePortTest.Fixture",
+        "variable": "bindings",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "DISTINCT_OWNERS_AND_SINGLE_HANDOFF",
+      "parallelMethod": "independentBorrowedParentsNeverShareBindingsOrReturnedProjection",
+      "helperMethod": "ownWorkerInterruptionAtEntryOrAfterCleanupNeverLeaksResultOrInterruptsCaller",
+      "witnesses": [
+        "Fixture one = new Fixture();",
+        "Fixture two = new Fixture();",
+        "one.connection()",
+        "two.connection()",
+        "task.get(5, TimeUnit.SECONDS)"
+      ],
+      "reason": "Parallel path uses distinct preseeded one/two fixtures. Interrupt path exclusively transfers one fixture to one worker, waits/closes executor before parent fixture inspection; map is never simultaneously mutated/read by parent.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferencePortTest.java",
+      "sourceSha256": "5821c43a250ff36ef1280d505da9664aa87189fc8fed472f792eebc64642b3de",
+      "originalAttributes": {
+        "beginline": "517",
+        "endline": "517",
+        "begincolumn": "32",
+        "endcolumn": "58",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.receipt",
+        "class": "ReceiptReferencePortTest.Statement",
+        "variable": "bindings",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "NEW_STATEMENT_PER_CONNECTION",
+      "parallelMethod": "concurrentIndependentReadsNeverShareConnectionsStatementsOrResults",
+      "helperMethod": "source",
+      "witnesses": [
+        "Conn connection = new Conn(this);",
+        "new Statement(this,",
+        "final Map<Integer, Object> bindings = new HashMap<>();",
+        "final List<Conn> connections = new CopyOnWriteArrayList<>();"
+      ],
+      "reason": "The shared DataSource fixture creates a new Conn for every getConnection; every prepare creates its own Statement/bindings. Shared connection publication uses CopyOnWriteArrayList, not the selected map. Parent inspects only after timed joins; selected bindings never crosses connections.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "sourceSha256": "4b4d55796b4fbfe687936912ce556a9e919923cc5a949182af3f7f5f58352e77",
+      "originalAttributes": {
+        "beginline": "588",
+        "endline": "588",
+        "begincolumn": "32",
+        "endcolumn": "64",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.revocation",
+        "class": "PendingRevocationPortTest.Fixture",
+        "variable": "bindings",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "oneRepositoryHasIndependentConcurrentBorrowedConnectionsAndImmutableRows",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture f = new Fixture();",
+        "f.bindings.get(4)"
+      ],
+      "reason": "Each submitted lambda creates a different Fixture with binds/faults, synchronous claim callbacks stay on that worker and immutable results are joined later.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "sourceSha256": "4b4d55796b4fbfe687936912ce556a9e919923cc5a949182af3f7f5f58352e77",
+      "originalAttributes": {
+        "beginline": "590",
+        "endline": "590",
+        "begincolumn": "34",
+        "endcolumn": "58",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.revocation",
+        "class": "PendingRevocationPortTest.Fixture",
+        "variable": "faults",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "oneRepositoryHasIndependentConcurrentBorrowedConnectionsAndImmutableRows",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture f = new Fixture();",
+        "f.bindings.get(4)"
+      ],
+      "reason": "Each submitted lambda creates a different Fixture with binds/faults, synchronous claim callbacks stay on that worker and immutable results are joined later.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java",
+      "sourceSha256": "57a78155f162e62428fbe44c8bf8777e98555dbef15e3dc42c17e02074e0cc40",
+      "originalAttributes": {
+        "beginline": "204",
+        "endline": "204",
+        "begincolumn": "31",
+        "endcolumn": "59",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "CaddyTransportPortTest.Fixture",
+        "variable": "attributes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The CaddyTransportPortTest fixture/Port owns this freshly initialized attributes map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java",
+      "sourceSha256": "57a78155f162e62428fbe44c8bf8777e98555dbef15e3dc42c17e02074e0cc40",
+      "originalAttributes": {
+        "beginline": "205",
+        "endline": "205",
+        "begincolumn": "37",
+        "endcolumn": "62",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "CaddyTransportPortTest.Fixture",
+        "variable": "headers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The CaddyTransportPortTest fixture/Port owns this freshly initialized headers map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest.java",
+      "sourceSha256": "799e9338db6423bbcdc1229b6cd84473e04c437933dfcfe2011cf85026897147",
+      "originalAttributes": {
+        "beginline": "403",
+        "endline": "403",
+        "begincolumn": "31",
+        "endcolumn": "59",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "DisplaySnapshotPortTest.Fixture",
+        "variable": "attributes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The DisplaySnapshotPortTest fixture/Port owns this freshly initialized attributes map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest.java",
+      "sourceSha256": "799e9338db6423bbcdc1229b6cd84473e04c437933dfcfe2011cf85026897147",
+      "originalAttributes": {
+        "beginline": "404",
+        "endline": "404",
+        "begincolumn": "34",
+        "endcolumn": "58",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "DisplaySnapshotPortTest.Fixture",
+        "variable": "faults",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "SYNCHRONOUS_LOCAL_FIXTURE",
+      "parallelMethod": null,
+      "helperMethod": null,
+      "witnesses": [],
+      "reason": "The DisplaySnapshotPortTest fixture/Port owns this freshly initialized faults map; this file contains no worker/executor/parallel launch or static fixture owner. Synthetic proxy callbacks execute in the caller. Mutations and assertions run sequentially; nullable fault/result vectors are deliberately retained. This is an ownership-specific Test map, not shared application state.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+      "sourceSha256": "1b23abc3012748d36be489230038a2509825049d1b24a58997ae6bde07e3b886",
+      "originalAttributes": {
+        "beginline": "258",
+        "endline": "258",
+        "begincolumn": "31",
+        "endcolumn": "59",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "ErrorControllerPortTest.Fixture",
+        "variable": "attributes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "sharedControllerHasIndependentConcurrentRequestAndModelState",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture f = new Fixture(new UUID(0, 1));",
+        "Fixture f = new Fixture(new UUID(0, 2));"
+      ],
+      "reason": "Each request worker owns a separate Fixture and attributes/modelValues/headers/faults; the shared controller stores none of these mutable fixture maps.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+      "sourceSha256": "1b23abc3012748d36be489230038a2509825049d1b24a58997ae6bde07e3b886",
+      "originalAttributes": {
+        "beginline": "259",
+        "endline": "259",
+        "begincolumn": "31",
+        "endcolumn": "60",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "ErrorControllerPortTest.Fixture",
+        "variable": "modelValues",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "sharedControllerHasIndependentConcurrentRequestAndModelState",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture f = new Fixture(new UUID(0, 1));",
+        "Fixture f = new Fixture(new UUID(0, 2));"
+      ],
+      "reason": "Each request worker owns a separate Fixture and attributes/modelValues/headers/faults; the shared controller stores none of these mutable fixture maps.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+      "sourceSha256": "1b23abc3012748d36be489230038a2509825049d1b24a58997ae6bde07e3b886",
+      "originalAttributes": {
+        "beginline": "260",
+        "endline": "260",
+        "begincolumn": "31",
+        "endcolumn": "56",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "ErrorControllerPortTest.Fixture",
+        "variable": "headers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "sharedControllerHasIndependentConcurrentRequestAndModelState",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture f = new Fixture(new UUID(0, 1));",
+        "Fixture f = new Fixture(new UUID(0, 2));"
+      ],
+      "reason": "Each request worker owns a separate Fixture and attributes/modelValues/headers/faults; the shared controller stores none of these mutable fixture maps.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+      "sourceSha256": "1b23abc3012748d36be489230038a2509825049d1b24a58997ae6bde07e3b886",
+      "originalAttributes": {
+        "beginline": "261",
+        "endline": "261",
+        "begincolumn": "34",
+        "endcolumn": "58",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "ErrorControllerPortTest.Fixture",
+        "variable": "faults",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "sharedControllerHasIndependentConcurrentRequestAndModelState",
+      "helperMethod": null,
+      "witnesses": [
+        "Fixture f = new Fixture(new UUID(0, 1));",
+        "Fixture f = new Fixture(new UUID(0, 2));"
+      ],
+      "reason": "Each request worker owns a separate Fixture and attributes/modelValues/headers/faults; the shared controller stores none of these mutable fixture maps.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRestorePortTest.java",
+      "sourceSha256": "f60066157a18c43c02ba149168feb56e92cfc80c394a162281678084a3a195a7",
+      "originalAttributes": {
+        "beginline": "51",
+        "endline": "51",
+        "begincolumn": "39",
+        "endcolumn": "67",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "ErrorDispatchRestorePortTest.Fixture",
+        "variable": "attributes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "eightConcurrentRequestsKeepRestoredAndAnonymousAttributesSeparate",
+      "helperMethod": null,
+      "witnesses": [
+        "var f = new Fixture();",
+        "FILTER.doFilter(f.request, f.response, f.chain);"
+      ],
+      "reason": "Each submitted request creates a fresh Fixture.attributes, synchronous filter chain only; only Boolean values leave the worker.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/FormCsrfRequestPortTest.java",
+      "sourceSha256": "d311bc55d91dd0dde8473fa27d7feb074d19d88e3e3d797f0efdc73a564aeb86",
+      "originalAttributes": {
+        "beginline": "43",
+        "endline": "43",
+        "begincolumn": "31",
+        "endcolumn": "65",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "FormCsrfRequestPortTest.Fixture",
+        "variable": "attributes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "sharedHandlerKeepsParallelRequestAttributesSeparate",
+      "helperMethod": null,
+      "witnesses": [
+        "var f = new Fixture();",
+        "HANDLER.handle("
+      ],
+      "reason": "Each submitted worker creates fresh Fixture.attributes and passes its own request through the shared stateless handler; joined return is a token value, not mutable map.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/LoginFormConverterPortTest.java",
+      "sourceSha256": "dbe0637da47f5140a71942574e7f6faeb22a9896608b681fec0bfe73a6de8334",
+      "originalAttributes": {
+        "beginline": "65",
+        "endline": "65",
+        "begincolumn": "33",
+        "endcolumn": "67",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "LoginFormConverterPortTest.Fixture",
+        "variable": "parameters",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "sharedConverterKeepsParallelInputsSeparate",
+      "helperMethod": null,
+      "witnesses": [
+        "var f = new Fixture();",
+        "f.parameters.put(USERNAME",
+        "CONVERTER.convert(f.asRequest())"
+      ],
+      "reason": "Each worker creates fresh parameters/headers Fixture, converter reads only that request. Maps are not stored in the shared converter; only result authentication is returned.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/LoginFormConverterPortTest.java",
+      "sourceSha256": "dbe0637da47f5140a71942574e7f6faeb22a9896608b681fec0bfe73a6de8334",
+      "originalAttributes": {
+        "beginline": "66",
+        "endline": "66",
+        "begincolumn": "37",
+        "endcolumn": "68",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "LoginFormConverterPortTest.Fixture",
+        "variable": "headers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "sharedConverterKeepsParallelInputsSeparate",
+      "helperMethod": null,
+      "witnesses": [
+        "var f = new Fixture();",
+        "f.parameters.put(USERNAME",
+        "CONVERTER.convert(f.asRequest())"
+      ],
+      "reason": "Each worker creates fresh parameters/headers Fixture, converter reads only that request. Maps are not stored in the shared converter; only result authentication is returned.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginFailurePortTest.java",
+      "sourceSha256": "3b70e5c73c52960db73ee96c7cf632c6399ec2a167de47846baae277bcee1815",
+      "originalAttributes": {
+        "beginline": "98",
+        "endline": "98",
+        "begincolumn": "39",
+        "endcolumn": "64",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "MqLoginFailurePortTest.Fixture",
+        "variable": "headers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3"
+      },
+      "profile": "WORKER_NEW_OWNER",
+      "parallelMethod": "sharedHandlerParallelCallsKeepOwnDelayHeadersAndRequestAudit",
+      "helperMethod": null,
+      "witnesses": [
+        "var f = new Fixture(delay + 1);",
+        "f.headers);"
+      ],
+      "reason": "Each request worker creates fresh Fixture.headers and its response callback updates only that map. Shared MemoryLog is a separate concurrent collection, not this map.",
+      "classification": "NOT_APPLICABLE_OWNED_TEST_MAP"
+    }
+  ],
+  "classificationIsNotWholeLiveness": true
+}
