@@ -1,0 +1,7 @@
+# API/Webプール・取得結果null/失敗時所有の追加観点
+
+3743・OPS-POOL-OWN-001/002の各case内へ、DataSource API結果がnullという故障注入を追加する。元見積1/3/7 cap9、source/WBS/二caseは維持、新method/別枠を増やさない。DB結果null契約を明示し、未実行のまま後回しにしない。
+
+独立期待=既Hikari7.1.0 PoolBase.newConnectionはnullをSQLTransientConnectionException、HikariPool.throwPoolInitializationExceptionはhousekeeping終了要求後PoolInitializationExceptionへする。Main factoryは例外を握り潰さない。caller DataSource close0、virtual Connection発行0/closed0、当Unit JVMの同SDK worker終端を独立確認、最後にfixture ownerだけsource.close一回。実driver/backend/SQL/guest操作や四held初期化は含まない。
+
+同じSDK23278 disassemblyの既failure helperをsource/hash付きで受動結合してから新Testを固定する。二成功poolの逐次借用と正常後条件は保持。旧23292 compile/23294 staticと元Testは23296へ保存、新sourceで23302 compile/23304 staticを行い、初Unitは23308とする。旧Unit予定23298は起動無し/PASS0であり、成功確認を再実行しない。

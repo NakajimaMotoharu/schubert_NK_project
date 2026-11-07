@@ -1,0 +1,292 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T01:32:54.739955+09:00",
+  "source": "7463edc372097f0ae4005d0b98e51e8e0ca5924b",
+  "inputHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiPoolSourceOwnershipPortTest.java": "0d134cf2523403de25f77791bf0c1ffd72ce54e62792f53005cf4f990f9058e1",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebPoolSourceOwnershipPortTest.java": "4c0265e9372f3d7cbc1360c02e018472651456a893eb762818a3c6fb1dc614eb",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool.java": "81d1ef1dcdd511e2bb7eae1bfdee58e50432edd2bca81ce6085aa344e57ce312",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebJdbcPool.java": "a322547b005ea0a71e1beeaab971c2d4195e36657b440e0b449c6292bc316526",
+    "evidence/01_PT/018_NK-OPS-001/input/393_pool_ownership_qualifier.py": "781ca42060a47b99e4c9487e60cc4e6c3d6a903a6fbbeb9100b753d40730f137",
+    "evidence/01_PT/018_NK-OPS-001/input/394_pool_ownership_scope.json": "5d5a2c82ce3f509c683f67e711702f2b5a0f6b6f7bf4da9390fd2ef79b742576"
+  },
+  "compileManifestSha256": "7fb4568ac39ed8a67671264cc80485646bf6620e789d9e557c3c1f0e706b386d",
+  "staticManifestSha256": "bbebf772e7b298c17689c09837a948741ef7ca20ff8be12a4a456c57089383f4",
+  "sourceCases": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiPoolSourceOwnershipPortTest.java",
+      "sha256": "0d134cf2523403de25f77791bf0c1ffd72ce54e62792f53005cf4f990f9058e1",
+      "className": "dev.codex.schubert.nk.api.bootstrap.ApiPoolSourceOwnershipPortTest",
+      "normalMaximum": 8,
+      "normalMinimum": 2,
+      "declaredCaseCount": 1,
+      "successfulPoolGenerations": 2,
+      "expectedNullResultConstructorFailure": 1,
+      "actualRoleOrConnectionAdmission": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebPoolSourceOwnershipPortTest.java",
+      "sha256": "4c0265e9372f3d7cbc1360c02e018472651456a893eb762818a3c6fb1dc614eb",
+      "className": "dev.codex.schubert.nk.web.bootstrap.WebPoolSourceOwnershipPortTest",
+      "normalMaximum": 2,
+      "normalMinimum": 1,
+      "declaredCaseCount": 1,
+      "successfulPoolGenerations": 2,
+      "expectedNullResultConstructorFailure": 1,
+      "actualRoleOrConnectionAdmission": false
+    }
+  ],
+  "expectedTests": 2,
+  "expectedSuccessfulPoolGenerations": 4,
+  "expectedNullResultConstructorFailures": 2,
+  "pmdRaw": 10,
+  "individualStaticClassifications": [
+    {
+      "finding": {
+        "beginline": "66",
+        "endline": "66",
+        "begincolumn": "21",
+        "endcolumn": "27",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "class": "ApiPoolSourceOwnershipPortTest",
+        "method": "poolOwn001FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiPoolSourceOwnershipPortTest.java",
+      "sourceSha256": "0d134cf2523403de25f77791bf0c1ffd72ce54e62792f53005cf4f990f9058e1",
+      "lineTextSha256": "62d91d34b7102615aa94a267d2723729b5b2306043b1bbb8d5a64e96edecfef1",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Unit checks caller interrupt flag after owned cleanup; no thread creation or J2EE deployed application thread management."
+    },
+    {
+      "finding": {
+        "beginline": "91",
+        "endline": "91",
+        "begincolumn": "11",
+        "endcolumn": "17",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "class": "ApiPoolSourceOwnershipPortTest",
+        "method": "awaitOwnedWorkers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiPoolSourceOwnershipPortTest.java",
+      "sourceSha256": "0d134cf2523403de25f77791bf0c1ffd72ce54e62792f53005cf4f990f9058e1",
+      "lineTextSha256": "6c45b3db073307785683b9e3c92b69eea98f2f0f488e235c3261d717f85b1363",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Isolated standalone Unit JVM: read only worker Thread references filtered by fixed source-owned Hikari pool namespace; finite single10s deadline/timedJoin after actual owned SDK close. No stack data stored, no host/guest PID/Unit observation or foreign thread stop. Default SDK ThreadFactory/no overrides reviewed23280."
+    },
+    {
+      "finding": {
+        "beginline": "97",
+        "endline": "97",
+        "begincolumn": "12",
+        "endcolumn": "18",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "class": "ApiPoolSourceOwnershipPortTest",
+        "method": "awaitOwnedWorkers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiPoolSourceOwnershipPortTest.java",
+      "sourceSha256": "0d134cf2523403de25f77791bf0c1ffd72ce54e62792f53005cf4f990f9058e1",
+      "lineTextSha256": "38f3817f909949c246cbd9a15db0b56ab29c85a2295d7287afad13c257684c3a",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Isolated standalone Unit JVM: read only worker Thread references filtered by fixed source-owned Hikari pool namespace; finite single10s deadline/timedJoin after actual owned SDK close. No stack data stored, no host/guest PID/Unit observation or foreign thread stop. Default SDK ThreadFactory/no overrides reviewed23280."
+    },
+    {
+      "finding": {
+        "beginline": "132",
+        "endline": "132",
+        "begincolumn": "19",
+        "endcolumn": "52",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "class": "ApiPoolSourceOwnershipPortTest.SourcePort",
+        "method": "getConnection",
+        "variable": "connection",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3",
+        "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+      },
+      "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiPoolSourceOwnershipPortTest.java",
+      "sourceSha256": "0d134cf2523403de25f77791bf0c1ffd72ce54e62792f53005cf4f990f9058e1",
+      "lineTextSha256": "a4bf8a8ef6eec0442dc67cd350a8cacd5014dd197cb545b92f34f368b7207b33",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone exact public java.sql.Connection defining loader for proxy visibility, no DB provider/driver. Ambient TCCL replacement would introduce unapproved type-resolution dependencies."
+    },
+    {
+      "finding": {
+        "beginline": "148",
+        "endline": "148",
+        "begincolumn": "42",
+        "endcolumn": "82",
+        "rule": "CompareObjectsWithEquals",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "class": "ApiPoolSourceOwnershipPortTest.SourcePort",
+        "method": "getConnection",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+        "priority": "3",
+        "message": "Use equals() to compare object references."
+      },
+      "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiPoolSourceOwnershipPortTest.java",
+      "sourceSha256": "0d134cf2523403de25f77791bf0c1ffd72ce54e62792f53005cf4f990f9058e1",
+      "lineTextSha256": "fed18007d64df42a92145e9e4972658194b3c1bb57d0d395244804e914c79112",
+      "classification": "NOT_APPLICABLE",
+      "reason": "InvocationHandler implements Object.equals reference identity. Calling proxy.equals inside itself recurses; no domain equality or secret comparison. JDK supplies one nullable equals argument in a non-null args array."
+    },
+    {
+      "finding": {
+        "beginline": "66",
+        "endline": "66",
+        "begincolumn": "21",
+        "endcolumn": "27",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "class": "WebPoolSourceOwnershipPortTest",
+        "method": "poolOwn002FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourcePath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebPoolSourceOwnershipPortTest.java",
+      "sourceSha256": "4c0265e9372f3d7cbc1360c02e018472651456a893eb762818a3c6fb1dc614eb",
+      "lineTextSha256": "62d91d34b7102615aa94a267d2723729b5b2306043b1bbb8d5a64e96edecfef1",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Unit checks caller interrupt flag after owned cleanup; no thread creation or J2EE deployed application thread management."
+    },
+    {
+      "finding": {
+        "beginline": "91",
+        "endline": "91",
+        "begincolumn": "11",
+        "endcolumn": "17",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "class": "WebPoolSourceOwnershipPortTest",
+        "method": "awaitOwnedWorkers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourcePath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebPoolSourceOwnershipPortTest.java",
+      "sourceSha256": "4c0265e9372f3d7cbc1360c02e018472651456a893eb762818a3c6fb1dc614eb",
+      "lineTextSha256": "6c45b3db073307785683b9e3c92b69eea98f2f0f488e235c3261d717f85b1363",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Isolated standalone Unit JVM: read only worker Thread references filtered by fixed source-owned Hikari pool namespace; finite single10s deadline/timedJoin after actual owned SDK close. No stack data stored, no host/guest PID/Unit observation or foreign thread stop. Default SDK ThreadFactory/no overrides reviewed23280."
+    },
+    {
+      "finding": {
+        "beginline": "97",
+        "endline": "97",
+        "begincolumn": "12",
+        "endcolumn": "18",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "class": "WebPoolSourceOwnershipPortTest",
+        "method": "awaitOwnedWorkers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourcePath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebPoolSourceOwnershipPortTest.java",
+      "sourceSha256": "4c0265e9372f3d7cbc1360c02e018472651456a893eb762818a3c6fb1dc614eb",
+      "lineTextSha256": "38f3817f909949c246cbd9a15db0b56ab29c85a2295d7287afad13c257684c3a",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Isolated standalone Unit JVM: read only worker Thread references filtered by fixed source-owned Hikari pool namespace; finite single10s deadline/timedJoin after actual owned SDK close. No stack data stored, no host/guest PID/Unit observation or foreign thread stop. Default SDK ThreadFactory/no overrides reviewed23280."
+    },
+    {
+      "finding": {
+        "beginline": "132",
+        "endline": "132",
+        "begincolumn": "19",
+        "endcolumn": "52",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "class": "WebPoolSourceOwnershipPortTest.SourcePort",
+        "method": "getConnection",
+        "variable": "connection",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3",
+        "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+      },
+      "sourcePath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebPoolSourceOwnershipPortTest.java",
+      "sourceSha256": "4c0265e9372f3d7cbc1360c02e018472651456a893eb762818a3c6fb1dc614eb",
+      "lineTextSha256": "a4bf8a8ef6eec0442dc67cd350a8cacd5014dd197cb545b92f34f368b7207b33",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone exact public java.sql.Connection defining loader for proxy visibility, no DB provider/driver. Ambient TCCL replacement would introduce unapproved type-resolution dependencies."
+    },
+    {
+      "finding": {
+        "beginline": "148",
+        "endline": "148",
+        "begincolumn": "42",
+        "endcolumn": "82",
+        "rule": "CompareObjectsWithEquals",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "class": "WebPoolSourceOwnershipPortTest.SourcePort",
+        "method": "getConnection",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+        "priority": "3",
+        "message": "Use equals() to compare object references."
+      },
+      "sourcePath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebPoolSourceOwnershipPortTest.java",
+      "sourceSha256": "4c0265e9372f3d7cbc1360c02e018472651456a893eb762818a3c6fb1dc614eb",
+      "lineTextSha256": "fed18007d64df42a92145e9e4972658194b3c1bb57d0d395244804e914c79112",
+      "classification": "NOT_APPLICABLE",
+      "reason": "InvocationHandler implements Object.equals reference identity. Calling proxy.equals inside itself recurses; no domain equality or secret comparison. JDK supplies one nullable equals argument in a non-null args array."
+    }
+  ],
+  "pmdApplicable": 0,
+  "unclassified": 0,
+  "checkstyle": 0,
+  "sdkReview": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23280-pool-sdk-review-v1/manifest.json",
+    "sha256": "6f89e6ee0dc9fb9724f74dcc820742f949435b60379151798c612ff7e081bc54"
+  },
+  "sdkIndependent": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23284-pool-sdk-independent-post-v1/manifest.json",
+    "sha256": "8d9a3e26c583178f471b0bd20605e7b28bbc4ce17ca261942e1aa18d9336f6b8"
+  },
+  "nullConstructorCleanupSliceSha256": "9932bff4ef795bb64d4dd17cc2c51fb192c6e499c42b5a4718d0fd51f598fdc7",
+  "driverOrLoggerProviderResources": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/zaxxer/HikariCP/7.1.0/HikariCP-7.1.0.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar": [],
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar": [],
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": []
+  },
+  "classpathNoRealDatabaseDriver": true,
+  "explicitOverrideGuardsInTest": true,
+  "workerTerminalIsSeparateFromPoolClosed": true,
+  "branchStatus": "NATURAL_ZERO_BRANCH_NEVER_REPORTED_AS_MEASURED_BRANCH100",
+  "normalMainStaticUnchanged": "0580a14592d3fc00820183034c584208e45b002802d2e3e173b5f752c7cf19f2",
+  "productTestsExecuted": 0,
+  "productClassesInitialized": 0,
+  "actualBackendActions": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/395_pool_ownership_source_preflight.py",
+    "sha256": "172ccd2519ff9c42445b31a47b1282a4a4049ca3af961b41e7e4610d85a894da"
+  }
+}

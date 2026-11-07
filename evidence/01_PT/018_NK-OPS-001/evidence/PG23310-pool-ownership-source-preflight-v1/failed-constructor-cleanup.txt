@@ -1,0 +1,10 @@
+private void throwPoolInitializationException(java.lang.Throwable);
+    Code:
+         0: aload_0
+         1: invokevirtual #133                // Method destroyHouseKeepingExecutorService:()V
+         4: new           #252                // class com/zaxxer/hikari/pool/HikariPool$PoolInitializationException
+         7: dup
+         8: aload_1
+         9: invokespecial #253                // Method com/zaxxer/hikari/pool/HikariPool$PoolInitializationException."<init>":(Ljava/lang/Throwable;)V
+        12: athrow
+
