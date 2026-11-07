@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** PT-OPS-CREDLOC-001..005; independent SS343/systemd location boundary. */
@@ -67,7 +68,7 @@ final class ServiceCredentialLocationTest {
       var tasks = new java.util.ArrayList<java.util.concurrent.Future<Path>>();
       for (int i = 0; i < 32; i++)
         tasks.add(pool.submit(() -> ServiceCredentialLocation.read(Map.of(KEY, ROOT)).directory()));
-      for (var task : tasks) assertEquals(expected, task.get());
+      for (var task : tasks) assertEquals(expected, task.get(10, TimeUnit.SECONDS));
     }
   }
 

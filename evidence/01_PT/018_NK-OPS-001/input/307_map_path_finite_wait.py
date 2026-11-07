@@ -1,0 +1,16 @@
+"""One original pure Map/Path Test Future bound; no actual credential or Product operation."""
+from pathlib import Path
+import datetime,hashlib,importlib.util,json,sys
+R=Path(__file__).resolve().parents[4];B=R/'evidence/01_PT/018_NK-OPS-001';F=B/'evidence/PG22978-map-path-original-v1';G=B/'evidence/PG22980-map-path-guard-v1';n='src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();load=lambda p:json.loads(Path(p).read_bytes())
+def transformed(text):
+ assert text.count('task.get()')==1 and text.count('import java.util.concurrent.Executors;')==1;return text.replace('import java.util.concurrent.Executors;','import java.util.concurrent.Executors;\nimport java.util.concurrent.TimeUnit;').replace('task.get()','task.get(10, TimeUnit.SECONDS)')
+def main():
+ phase=sys.argv[1];assert phase in ['apply','guard']
+ if phase=='apply':
+  assert not F.exists();baseline=B/'evidence/PG22970-pure-resource-independent-v1/manifest.json';assert sha(baseline)=='8a4b286fcdeb02e97c82c4649cbda91fb66c19364aeaba262231a84d017c3105';m=load(baseline);assert m['actualExit']==0;c=m['currentStorage29']
+  for path,h in c['currentInputHashes'].items():assert path.startswith('src/schubert-nk-storage/src/test/java/') and not any(x in path for x in ['RootFailedStart','SnapshotKeyCloseWitness','pg9892_']) and sha(R/path)==h
+  p=R/n;new=transformed(p.read_text());F.mkdir();snap=F/p.name;snap.write_bytes(p.read_bytes());v=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),tests=[dict(path=n,className='dev.codex.schubert.nk.storage.ServiceCredentialLocationTest',sha256=sha(p),snapshotPath=str(snap.relative_to(R)),waitSites=1)],currentStorage29=c,baseline=dict(path=str(baseline.relative_to(R)),sha256=sha(baseline)),productTestsExecuted=0);(F/'manifest.json').write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n');p.write_text(new);print('one original pure Map/Path Future source-fixed10SECONDS');return
+ assert not G.exists();m=load(F/'manifest.json');item=m['tests'][0];old=R/item['snapshotPath'];assert sha(old)==item['sha256'];sp=importlib.util.spec_from_file_location('map_path_token_guard',R/'evidence/01_PT/015_NK-WEB-001/input/042_seven_future_independent_post.py');lib=importlib.util.module_from_spec(sp);sp.loader.exec_module(lib);tok=lib.java_tokens;current=(R/n).read_text();assert tok(current)==tok(transformed(old.read_text()));negative=0
+ for a,z in [('10, TimeUnit.SECONDS','0, TimeUnit.SECONDS'),('10, TimeUnit.SECONDS','10, TimeUnit.MINUTES'),('Path expected = Path.of(ROOT);','Path expected = Path.of("/wrong");')]:assert tok(current.replace(a,z,1))!=tok(current);negative+=1
+ G.mkdir();v=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),originalManifest=dict(path=str((F/'manifest.json').relative_to(R)),sha256=sha(F/'manifest.json')),currentHash=sha(R/n),waitDeadlineAdditions=1,metadataNegativeGuards=negative,allOtherTokensFixturesAndOracleUnchanged=True,productTestsExecuted=0);(G/'manifest.json').write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,negative=negative)))
+if __name__=='__main__':main()
