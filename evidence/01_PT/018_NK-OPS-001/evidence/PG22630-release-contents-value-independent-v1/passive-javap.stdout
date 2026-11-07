@@ -1,0 +1,145 @@
+Compiled from "StartupReleaseManifest.java"
+public final class dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$Contents extends java.lang.Record {
+  private final java.lang.String version;
+
+  private final java.lang.String sha256;
+
+  private final java.util.List<dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission$Row> migrations;
+
+  private final java.util.Map<java.lang.String, java.lang.String> build;
+
+  private final java.util.Map<java.lang.String, java.lang.String> platform;
+
+  private final java.util.Map<java.lang.String, java.lang.String> versions;
+
+  private final java.util.Map<java.lang.String, java.lang.String> artifactHashes;
+
+  public dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$Contents(java.lang.String, java.lang.String, java.util.List<dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission$Row>, java.util.Map<java.lang.String, java.lang.String>, java.util.Map<java.lang.String, java.lang.String>);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: aload_3
+         4: aload         4
+         6: aload         5
+         8: invokestatic  #1                  // InterfaceMethod java/util/Map.of:()Ljava/util/Map;
+        11: invokestatic  #1                  // InterfaceMethod java/util/Map.of:()Ljava/util/Map;
+        14: invokespecial #7                  // Method "<init>":(Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;)V
+        17: return
+
+  public dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$Contents(java.lang.String, java.lang.String, java.util.List<dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission$Row>, java.util.Map<java.lang.String, java.lang.String>, java.util.Map<java.lang.String, java.lang.String>, java.util.Map<java.lang.String, java.lang.String>, java.util.Map<java.lang.String, java.lang.String>);
+    Code:
+         0: aload_0
+         1: invokespecial #13                 // Method java/lang/Record."<init>":()V
+         4: aload_1
+         5: ldc           #18                 // String release version
+         7: invokestatic  #20                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        10: pop
+        11: aload_2
+        12: ldc           #26                 // String manifest digest
+        14: invokestatic  #20                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        17: pop
+        18: aload_3
+        19: invokestatic  #28                 // InterfaceMethod java/util/List.copyOf:(Ljava/util/Collection;)Ljava/util/List;
+        22: astore_3
+        23: aload         4
+        25: invokestatic  #34                 // InterfaceMethod java/util/Map.copyOf:(Ljava/util/Map;)Ljava/util/Map;
+        28: astore        4
+        30: aload         5
+        32: invokestatic  #34                 // InterfaceMethod java/util/Map.copyOf:(Ljava/util/Map;)Ljava/util/Map;
+        35: astore        5
+        37: aload         6
+        39: invokestatic  #34                 // InterfaceMethod java/util/Map.copyOf:(Ljava/util/Map;)Ljava/util/Map;
+        42: astore        6
+        44: aload         7
+        46: invokestatic  #34                 // InterfaceMethod java/util/Map.copyOf:(Ljava/util/Map;)Ljava/util/Map;
+        49: astore        7
+        51: aload_0
+        52: aload_1
+        53: putfield      #37                 // Field version:Ljava/lang/String;
+        56: aload_0
+        57: aload_2
+        58: putfield      #41                 // Field sha256:Ljava/lang/String;
+        61: aload_0
+        62: aload_3
+        63: putfield      #44                 // Field migrations:Ljava/util/List;
+        66: aload_0
+        67: aload         4
+        69: putfield      #48                 // Field build:Ljava/util/Map;
+        72: aload_0
+        73: aload         5
+        75: putfield      #52                 // Field platform:Ljava/util/Map;
+        78: aload_0
+        79: aload         6
+        81: putfield      #55                 // Field versions:Ljava/util/Map;
+        84: aload_0
+        85: aload         7
+        87: putfield      #58                 // Field artifactHashes:Ljava/util/Map;
+        90: return
+
+  public java.util.List<dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission$Row> migrations();
+    Code:
+         0: aload_0
+         1: getfield      #44                 // Field migrations:Ljava/util/List;
+         4: invokestatic  #28                 // InterfaceMethod java/util/List.copyOf:(Ljava/util/Collection;)Ljava/util/List;
+         7: areturn
+
+  public java.util.Map<java.lang.String, java.lang.String> build();
+    Code:
+         0: aload_0
+         1: getfield      #48                 // Field build:Ljava/util/Map;
+         4: invokestatic  #34                 // InterfaceMethod java/util/Map.copyOf:(Ljava/util/Map;)Ljava/util/Map;
+         7: areturn
+
+  public java.util.Map<java.lang.String, java.lang.String> platform();
+    Code:
+         0: aload_0
+         1: getfield      #52                 // Field platform:Ljava/util/Map;
+         4: invokestatic  #34                 // InterfaceMethod java/util/Map.copyOf:(Ljava/util/Map;)Ljava/util/Map;
+         7: areturn
+
+  public java.util.Map<java.lang.String, java.lang.String> versions();
+    Code:
+         0: aload_0
+         1: getfield      #55                 // Field versions:Ljava/util/Map;
+         4: invokestatic  #34                 // InterfaceMethod java/util/Map.copyOf:(Ljava/util/Map;)Ljava/util/Map;
+         7: areturn
+
+  public java.util.Map<java.lang.String, java.lang.String> artifactHashes();
+    Code:
+         0: aload_0
+         1: getfield      #58                 // Field artifactHashes:Ljava/util/Map;
+         4: invokestatic  #34                 // InterfaceMethod java/util/Map.copyOf:(Ljava/util/Map;)Ljava/util/Map;
+         7: areturn
+
+  public final java.lang.String toString();
+    Code:
+         0: aload_0
+         1: invokedynamic #61,  0             // InvokeDynamic #0:toString:(Ldev/codex/schubert/nk/bootstrap/StartupReleaseManifest$Contents;)Ljava/lang/String;
+         6: areturn
+
+  public final int hashCode();
+    Code:
+         0: aload_0
+         1: invokedynamic #65,  0             // InvokeDynamic #0:hashCode:(Ldev/codex/schubert/nk/bootstrap/StartupReleaseManifest$Contents;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #69,  0             // InvokeDynamic #0:equals:(Ldev/codex/schubert/nk/bootstrap/StartupReleaseManifest$Contents;Ljava/lang/Object;)Z
+         7: ireturn
+
+  public java.lang.String version();
+    Code:
+         0: aload_0
+         1: getfield      #37                 // Field version:Ljava/lang/String;
+         4: areturn
+
+  public java.lang.String sha256();
+    Code:
+         0: aload_0
+         1: getfield      #41                 // Field sha256:Ljava/lang/String;
+         4: areturn
+}
