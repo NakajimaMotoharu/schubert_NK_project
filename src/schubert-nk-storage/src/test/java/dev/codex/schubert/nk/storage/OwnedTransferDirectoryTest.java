@@ -589,43 +589,44 @@ class OwnedTransferDirectoryTest {
   @Test
   void f02ExistingDateIndependentChildLifetimeAndSafeIoFailures() throws Exception {
     FaultCalls calls = new FaultCalls();
-    var parent = OwnedTransferDirectory.open(calls, root);
-    var child = parent.openDate(DATE);
-    try (var second = parent.openDate(DATE)) {
-      assertEquals(3L, second.atPart(ID, OwnedTransferDirectoryTest::write));
+    try (var parent = OwnedTransferDirectory.open(calls, root);
+        var child = parent.openDate(DATE)) {
+      try (var second = parent.openDate(DATE)) {
+        assertEquals(3L, second.atPart(ID, OwnedTransferDirectoryTest::write));
+        failure(
+            StorageIoException.Reason.COLLISION,
+            () -> child.atPart(ID, OwnedTransferDirectoryTest::write));
+      }
+      parent.close();
+      parent.close();
+      child.publish(ID);
+      assertArrayEquals(new byte[] {1, 2, 3}, child.atReady(ID, OwnedTransferDirectoryTest::read));
       failure(
-          StorageIoException.Reason.COLLISION,
-          () -> child.atPart(ID, OwnedTransferDirectoryTest::write));
+          StorageIoException.Reason.MISSING,
+          () -> child.atPart(ID, OwnedTransferDirectoryTest::read));
+      failure(
+          StorageIoException.Reason.UNAVAILABLE,
+          () ->
+              child.atReady(
+                  ID,
+                  path -> {
+                    IOException ex = new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
+                    ex.addSuppressed(new IOException("SYNTHETIC_PRIVATE_CAUSE"));
+                    throw ex;
+                  }));
+      child.close();
+      child.close();
+      assertTrue(calls.live.isEmpty());
+      failure(StorageIoException.Reason.UNAVAILABLE, () -> child.openDate(DATE));
+      failure(
+          StorageIoException.Reason.UNAVAILABLE,
+          () -> child.atPart(ID, OwnedTransferDirectoryTest::read));
+      failure(
+          StorageIoException.Reason.UNAVAILABLE,
+          () -> child.atReady(ID, OwnedTransferDirectoryTest::read));
+      failure(StorageIoException.Reason.UNAVAILABLE, () -> child.publish(ID));
+      failure(StorageIoException.Reason.UNAVAILABLE, () -> child.deletePart(ID));
     }
-    parent.close();
-    parent.close();
-    child.publish(ID);
-    assertArrayEquals(new byte[] {1, 2, 3}, child.atReady(ID, OwnedTransferDirectoryTest::read));
-    failure(
-        StorageIoException.Reason.MISSING,
-        () -> child.atPart(ID, OwnedTransferDirectoryTest::read));
-    failure(
-        StorageIoException.Reason.UNAVAILABLE,
-        () ->
-            child.atReady(
-                ID,
-                path -> {
-                  IOException ex = new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
-                  ex.addSuppressed(new IOException("SYNTHETIC_PRIVATE_CAUSE"));
-                  throw ex;
-                }));
-    child.close();
-    child.close();
-    assertTrue(calls.live.isEmpty());
-    failure(StorageIoException.Reason.UNAVAILABLE, () -> child.openDate(DATE));
-    failure(
-        StorageIoException.Reason.UNAVAILABLE,
-        () -> child.atPart(ID, OwnedTransferDirectoryTest::read));
-    failure(
-        StorageIoException.Reason.UNAVAILABLE,
-        () -> child.atReady(ID, OwnedTransferDirectoryTest::read));
-    failure(StorageIoException.Reason.UNAVAILABLE, () -> child.publish(ID));
-    failure(StorageIoException.Reason.UNAVAILABLE, () -> child.deletePart(ID));
   }
 
   @Test
@@ -727,8 +728,8 @@ class OwnedTransferDirectoryTest {
   void f02CloseCannotReuseDescriptorWhileFileCallbackIsInFlight() throws Exception {
     FaultCalls calls = new FaultCalls();
     try (var parent = OwnedTransferDirectory.open(calls, root);
+        var child = parent.openDate(DATE);
         var executor = Executors.newFixedThreadPool(2)) {
-      var child = parent.openDate(DATE);
       CountDownLatch entered = new CountDownLatch(1);
       CountDownLatch release = new CountDownLatch(1);
       CountDownLatch closing = new CountDownLatch(1);

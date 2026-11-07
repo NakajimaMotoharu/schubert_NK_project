@@ -103,7 +103,7 @@ class StorageRootInspectionTest {
     try (DirectoryStream<Path> secure = Files.newDirectoryStream(temporary)) {
       StorageRootInspection.requireSecureStream(secure);
     }
-    DirectoryStream<Path> ordinary =
+    try (DirectoryStream<Path> ordinary =
         new DirectoryStream<>() {
           @Override
           public java.util.Iterator<Path> iterator() {
@@ -112,9 +112,10 @@ class StorageRootInspectionTest {
 
           @Override
           public void close() {}
-        };
-    assertThrows(
-        StorageIoException.class, () -> StorageRootInspection.requireSecureStream(ordinary));
+        }) {
+      assertThrows(
+          StorageIoException.class, () -> StorageRootInspection.requireSecureStream(ordinary));
+    }
     assertThrows(NullPointerException.class, () -> StorageRootInspection.requireSecureStream(null));
   }
 

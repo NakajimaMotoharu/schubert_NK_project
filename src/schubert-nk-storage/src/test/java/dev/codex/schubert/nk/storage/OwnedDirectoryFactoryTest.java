@@ -52,18 +52,20 @@ final class OwnedDirectoryFactoryTest {
   void dirfactory003CloseFailureConsumesDescriptorAndConfiguredRootStillRefusesSlash()
       throws Exception {
     var calls = new Calls();
-    var root = OwnedTransferDirectory.openRoot(calls);
-    var failure = new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
-    calls.closeFailure = failure;
-    assertSame(failure, assertThrows(StorageIoException.class, root::close));
-    assertEquals(1, calls.closes);
-    root.close();
-    assertEquals(1, calls.closes);
-    var unopened = new Calls();
-    assertThrows(
-        IllegalArgumentException.class, () -> OwnedTransferDirectory.open(unopened, Path.of("/")));
-    assertEquals(0, unopened.opens);
-    assertEquals(0, unopened.closes);
+    try (var root = OwnedTransferDirectory.openRoot(calls)) {
+      var failure = new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+      calls.closeFailure = failure;
+      assertSame(failure, assertThrows(StorageIoException.class, root::close));
+      assertEquals(1, calls.closes);
+      root.close();
+      assertEquals(1, calls.closes);
+      var unopened = new Calls();
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> OwnedTransferDirectory.open(unopened, Path.of("/")));
+      assertEquals(0, unopened.opens);
+      assertEquals(0, unopened.closes);
+    }
   }
 
   private static final class Calls implements DirectoryCalls {
