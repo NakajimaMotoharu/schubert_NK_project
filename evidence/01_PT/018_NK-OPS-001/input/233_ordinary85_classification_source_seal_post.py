@@ -31,8 +31,12 @@ def main():
  for directory in [R/'evidence/01_PT/010_NK-ADM-001/evidence/PG22432-user-audit-cleanup-static-applicability-v1',R/'evidence/01_PT/015_NK-WEB-001/evidence/PG22518-seven-security-port-static-applicability-v1']:
   v=load(directory/'manifest.json')
   for x in v['individualClassifications']:
-   if x['sourcePath'] in changed:
-    a={k:x[k] for k in attrs if k in x};projections[ident(x['sourcePath'],a)]=x['message'];assert v['inputHashes'][x['sourcePath']]==m['currentSourceHashes'][x['sourcePath']]
+   candidate=x.get('sourcePath');choices=[n for n in v['inputHashes'] if '/src/test/java/' in n and n.endswith('.java')]
+   if candidate is None:
+    assert len(choices)==1;candidate=choices[0]
+   assert candidate in choices
+   if candidate in changed:
+    a={k:x[k] for k in attrs if k in x};projections[ident(candidate,a)]=x['message'];assert v['inputHashes'][candidate]==m['currentSourceHashes'][candidate]
  q=OPS/'PG22488-question-bounded-wait-static-v1';qm=load(q/'manifest.json');assert sha(q/'pmd.xml')==qm['files']['pmd.xml']
  for f in E.parse(q/'pmd.xml').getroot():
   for x in f:

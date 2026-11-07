@@ -8,6 +8,11 @@ write=lambda p,v:Path(p).write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\
 ref=lambda p:dict(path=str(p.relative_to(R)),sha256=sha(p))
 def key(p,a):return (p,json.dumps(a,sort_keys=True))
 def stable(row):return (row['path'],json.dumps({k:v for k,v in row['attributes'].items() if k not in ['beginline','endline','begincolumn','endcolumn']},sort_keys=True),row['message'])
+def source_for(row,manifest):
+ choices=[p for p in manifest['inputHashes'] if '/src/test/java/' in p and p.endswith('.java')];p=row.get('sourcePath')
+ if p is None:
+  assert len(choices)==1,'source ambiguity';p=choices[0]
+ assert p in choices,'unknown source';return p
 def main():
  assert not OUT.exists();raw=OPS/'PG22382-ordinary85-test-static-v1';rm=load(raw/'manifest.json');assert sha(raw/'manifest.json')=='e4eea946c71b78db2cca778259ef366cd4cd60c208708941a61067f48cee25a2';assert sha(raw/'unclassified-sites.json')==rm['files']['unclassified-sites.json'];original=load(raw/'unclassified-sites.json');assert len(original)==347;index={key(x['path'],x['attributes']):x for x in original};assert len(index)==347;binding={};parts=[]
  definitions=[('PG22392-ordinary-proxy-loader93-v1','PG22398-ordinary-proxy-loader93-independent-v2',93),('PG22408-ordinary-thread158-scope-v1','PG22410-ordinary-thread158-independent-v1',158),('PG22418-null-identity14-sites-v1','PG22420-null-identity14-independent-v1',14),('PG22456-close-resource-six-ownership-v1','PG22458-close-resource-six-independent-v1',6)]
@@ -36,7 +41,7 @@ def main():
  for p in [ADM/'PG22432-user-audit-cleanup-static-applicability-v1/manifest.json',WEB/'PG22518-seven-security-port-static-applicability-v1/manifest.json']:
   m=load(p);assert m['applicableViolations']==m['checkstyle']==m['spotbugs']==m['processingErrors']==0
   for row in m['individualClassifications']:
-   if row['sourcePath'] in changed:fresh.append(dict(path=row['sourcePath'],attributes={k:row[k] for k in ['beginline','endline','begincolumn','endcolumn','rule','ruleset','package','class','method','variable','externalInfoUrl','priority'] if k in row},message=row['message'],freshProjection=ref(p)))
+   if source_for(row,m) in changed:fresh.append(dict(path=source_for(row,m),attributes={k:row[k] for k in ['beginline','endline','begincolumn','endcolumn','rule','ruleset','package','class','method','variable','externalInfoUrl','priority'] if k in row},message=row['message'],freshProjection=ref(p)))
  p=OPS/'PG22488-question-bounded-wait-static-v1';qm=load(p/'manifest.json');assert qm['actualExit']==0 and sha(p/'pmd.xml')==qm['files']['pmd.xml']
  for f in E.parse(p/'pmd.xml').getroot():
   for x in f:
