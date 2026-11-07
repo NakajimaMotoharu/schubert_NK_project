@@ -1,0 +1,7 @@
+# G07公開class hash実byte来歴仕様
+
+G07旧scan/source/content/ruleは元9888/8979を固定し変更しない。PG3954公開manifest SHA60b36e321b16806b428b1948ca78374b27089f807f5b22abc2df7d22c70bf766の73残指摘は同じminified lineを共有し、元ruleのexact captureは84個ある。declared SHAだけをdigest来歴の証明としない。
+
+既所有normal22084の六Main Jarをmanifest hashで固定し、allPhysicalMainSha256のmodule/classEntry/文字列value token spanと元captureの全体一致を確認して、Jar内同entryの実byte SHAと比較する。Class memberはZIP内で読むmetadataのみ、抽出・実行・scanner再演・旧remote producer/Jar取得は行わない。四guarded Mainもmetadataだけで初期化・method呼出なし。二held工具/二heldTest memberは名前判定を先行し、未知/不在/byte不一致/非class tokenは未証明として保持する。値・値hash・raw全文・credentialは新規出力しない。
+
+84個すべてが証明された場合だけ同一lineを共有する元73個の指摘multisetを更新できる。一部一致では一件も減らさず、既4484/22・actualSecretCount nullを維持する。独立postはJSON token位置・元73 multiset/前九更新との非重複・全Jar実byteを別に検査する。正常/欠落/byte不一致/曖昧位置をmetadata negative条件で確認する。Product PT・currentSource資格・実native/旧source成果の転用0。開始.5/1.5/4cap5、原見積/正式/工数null/全HOLD不変更。
