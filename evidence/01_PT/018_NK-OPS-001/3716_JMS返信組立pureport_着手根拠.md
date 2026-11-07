@@ -1,0 +1,9 @@
+# JMS返信組立pure portの着手根拠
+
+WBS-P005-04/NK-MSG-001/MQ003008/UI231232/SS311321322、原1/4/8pp cap10、SELECTED_TEST/ORIGINAL_PLAN。Current Main7aedのJmsMessageFactory.java同hash90c2401c...を確認。元282registryはNOT_IN_CURRENT_MEASUREMENT_REGISTRY、PG22234の候補lookupはUNKNOWN_OR_UNSUPPORTEDで、未実装/未試験とは推定しない。元OutboundJmsAdapterTestはEmbeddedArtemisを含み実broker依存、契約1526はそれとArtemisTransportContractTestを参照する。旧成功の再演やproof転用はしない。
+
+対象enumのcreateReplyはHeaderCodec.peek/純JDK registry/headerとcaller-provided JMSContext/BytesMessage interfaceに限定。新しい直接単体Testは全Main body/enum initializationの正常/各条件/境界/null/checked stage exception/provider Runtimeを独立goldenと厳格port記録で検証する。JMS portはlocal InvocationHandlerだけ、JMS API3.1.0のみをclasspathに置きArtemis providerを入れない。DB/VM/Root/HTTP/環境/実broker/connection/session/transaction/send/commit/rollback/close/四held初期化0。元実broker/transaction Testの代替fixtureとしてその元Testを実行するものではなく、factory assemblyという独立したProduction責任だけの通常PT。backend/IT受入は増やさない。
+
+Expectedはorigin/main42450b515のUI232 header byte位置とUI234/236 data配置、SS321 property対応から手書き。positive LOGRSP01はrevoked-at17+reserved7、QSBRSP01はpublic receipt26/questionId12/JST17/reserved9。synthetic非live context/UUIDだけ、実credentialやsessionにアクセス/保存しない。期待をproduction encode/peek/createReplyから生成0。詳細はMSG005032へ。
+
+新8method/一sourceのnormal-code complete proofを目標とし、既whole94のnamed proof重複は別照合まで自動加算しない。原見積/新case数/実counter/未登録候補と既実績を分離。Main/上位設計/Current baseline変更0。正常Main六compile/static既成果同hashを再利用し、明示新Test compile/static→source固定→当8一回/単一exec/正常CRC/実初期化/全物理/独立postを要求。四counter未達は未達、自然0はN/A、手動除外/合算なし。元native/process/Root/held4/保護二sourceと二untrackedの全HOLD維持、正式1964-53/工数null。
