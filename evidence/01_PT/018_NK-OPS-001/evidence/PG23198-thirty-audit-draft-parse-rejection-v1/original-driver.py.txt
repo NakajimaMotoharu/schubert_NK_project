@@ -1,0 +1,47 @@
+"""Single bounded public metadata index for30 helper names; no Unit/native/backend/private-raw access."""
+from pathlib import Path
+import datetime,hashlib,json,re,subprocess
+import pg9666_pagination_static as c
+R=Path(__file__).resolve().parents[4];B=R/'evidence/01_PT/018_NK-OPS-001';RUNS=R.parent/'pgpt-runs/PG379';O=B/'evidence/PG23194-thirty-helper-receipt-audit-v1';P=RUNS/'pg23196-thirty-helper-identifier-parse-v1';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();load=lambda p:json.loads(Path(p).read_bytes());HELD={'RootFailedStartRecoveryTest.java','RootFailedStartPairRecoveryTest.java','SnapshotKeyCloseWitness.java','pg9892_snapshot_key_close_witness.py'};seed=load(B/'evidence/PG23156-three-fixture-aux-audit-v1/manifest.json');helpers=sorted(set(seed['inventoryCandidateNamesOnly'])-set(seed['selectedHelperHashes']));assert len(helpers)==30;assert all(Path(n).name not in HELD and n.startswith('src/') and '/src/test/java/' in n for n in helpers);pins={n:sha(R/n) for n in helpers};simple={Path(n).stem:n for n in helpers};assert len(simple)==30;tracked=subprocess.check_output(['git','ls-files','-z','src'],cwd=R).decode().split('\0');sources=sorted(n for n in tracked if n and n.endswith('.java') and '/src/test/java/' in n and Path(n).name not in HELD);assert all(not any(v in n for v in ['\n','\r','\t']) for n in sources);assert not O.exists() and not P.exists();P.mkdir();(P/'source').mkdir();(P/'classes').mkdir();sourceList=P/'sources.txt';sourceList.write_text(''.join(n+'\n' for n in sources));helperList=P/'helpers.txt';helperList.write_text(''.join(n+'\n' for n in simple));tool=B/'input/363_HelperReferenceParse.java';mirror=P/'source/HelperReferenceParse.java';mirror.write_bytes(tool.read_bytes());JDK=R.parent/'toolchain/jdk-25.0.4/bin';c.SLOT=P;compileStage=c.step('own-javac',[str(JDK/'javac'),'-proc:none','--release','25','-Xlint:all','-Werror','-d',str(P/'classes'),str(mirror)],R);assert compileStage['actualExit']==0;parse=c.step('parse',[str(JDK/'java'),'-Xmx512m','-Xlog:class+init=info:file='+str(P/'class-init.stdout'),'-cp',str(P/'classes'),'HelperReferenceParse',str(R),str(sourceList),str(helperList)],R,timeout=180);assert parse['actualExit']==0 and not re.search(r"Initializing '(?:dev/codex/schubert/nk/|dev\.codex\.schubert\.nk\.)",(P/'class-init.stdout').read_text());refs={n:[] for n in helpers}
+for line in (P/'parse.stdout').read_text().splitlines():
+ n,found=line.split('\t');assert n in sources
+ for key in found.split(','):
+  helper=simple[key]
+  if n!=helper:refs[helper].append(n)
+# Read only tracked public JSON receipts. Reject private/name exclusions before any stat/read.
+manifests=subprocess.check_output(['git','ls-files','--','evidence/01_PT/**/manifest.json'],cwd=R,text=True).splitlines();patterns=[Path(n).name.encode() for n in helpers];records={n:[] for n in helpers};checked=0;matched=0;parseErrors=[];allowedFields={'inputHashes','sourcePins','currentInputHashes','currentHashes','sourceHashes'}
+def pinMaps(v,path=''):
+ if isinstance(v,dict):
+  for k,x in v.items():
+   if k in allowedFields and isinstance(x,dict):yield path+'/'+k,x
+   elif isinstance(x,(dict,list)):yield from pinMaps(x,path+'/'+k)
+ elif isinstance(v,list):
+  for i,x in enumerate(v):
+   if isinstance(x,(dict,list)):yield from pinMaps(x,path+'/'+str(i))
+for name in manifests:
+ if Path(name).name in HELD or any(part.lower()=='private' for part in Path(name).parts) or any(v in name for v in ['RootFailedStartRecoveryTest','RootFailedStartPairRecoveryTest','SnapshotKeyCloseWitness','pg9892_snapshot_key_close_witness']):continue
+ p=R/name;assert p.is_file() and not p.is_symlink();data=p.read_bytes();checked+=1
+ if not any(pattern in data for pattern in patterns):continue
+ try:m=json.loads(data)
+ except (ValueError,UnicodeError):parseErrors.append(name);continue
+ matched+=1;byHelper={}
+ for field,pinmap in pinMaps(m):
+  for helper in helpers:
+   h=pinmap.get(helper)
+   if isinstance(h,str) and re.fullmatch('[0-9a-f]{64}',h):byHelper.setdefault(helper,[]).append(dict(field=field,sourceSha256=h,currentSourceEqual=h==pins[helper]))
+ for helper,bindings in byHelper.items():
+  stem=helper.split('/src/test/java/',1)[1][:-5];declared={}
+  for key in ['classes','classHashes','compiledTestClasses']:
+   values=m.get(key) if isinstance(m,dict) else None
+   if isinstance(values,dict):
+    for n,h in values.items():
+     if isinstance(n,str) and (n==stem+'.class' or n.startswith(stem+'$')) and isinstance(h,str) and re.fullmatch('[0-9a-f]{64}',h):declared[n]=h
+  compileRefs=[]
+  for key in ['compileManifest','testCompileManifest']:
+   ref=m.get(key) if isinstance(m,dict) else None
+   if isinstance(ref,dict) and isinstance(ref.get('path'),str) and re.fullmatch('[0-9a-f]{64}',str(ref.get('sha256',''))):compileRefs.append(dict(field=key,path=ref['path'],sha256=ref['sha256']))
+  records[helper].append(dict(manifest=dict(path=name,sha256=hashlib.sha256(data).hexdigest()),manifestDeclaredExit=m.get('actualExit') if isinstance(m,dict) else None,sourceBindings=bindings,declaredHelperClassHashes=declared,compilerReferencesNotDereferenced=compileRefs,notCompilerQualificationOrRuntimeEvidence=True))
+assert all(sha(R/n)==h for n,h in pins.items());rows=[]
+for n in helpers:
+ rr=records[n];current=[v for v in rr if any(b['currentSourceEqual'] for b in v['sourceBindings'])];oldOnly=bool(rr) and not current;declaredCurrent=[v for v in current if v['declaredHelperClassHashes']];compileRefCurrent=[v for v in current if v['compilerReferencesNotDereferenced']];status='CURRENT_SOURCE_PIN_WITH_DECLARED_CLASS_HASHES_NEEDS_COMPILER_BINDING' if declaredCurrent else 'CURRENT_SOURCE_PIN_WITH_COMPILER_REFERENCE_NEEDS_BOUND_DEREFERENCE' if compileRefCurrent else 'CURRENT_SOURCE_PIN_ONLY_NOT_COMPILER_PROOF' if current else 'HISTORICAL_SOURCE_PIN_ONLY_NOT_CURRENT' if oldOnly else 'NO_SUPPORTED_EXPLICIT_SOURCE_PIN_SCHEMA_UNKNOWN_NOT_UNIMPLEMENTED';rows.append(dict(helper=n,currentSourceSha256=pins[n],observedSourceIdentifierCallers=sorted(set(refs[n])),protectedCallerCompletenessUnknown=True,reflectionStringGraphNotAssessed=True,receiptStatus=status,currentPinReceiptCount=len(current),historicalPinReceiptCount=len(rr)-len(current),declaredCurrentClassReceipts=len(declaredCurrent),currentCompilerReferenceReceipts=len(compileRefCurrent),records=rr))
+O.mkdir();value=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),source=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip(),sourceHashPins=pins,selectedHelpers=30,trackedPublicManifestNameCount=len(manifests),publicManifestFilesReadOnce=checked,matchingHelperFilenameManifests=matched,unsupportedJsonFiles=parseErrors,sourceIdentifierParsedFiles=len(sources),excludedProtectedNamesBeforeIO=sorted(HELD),protectedSourceCallerGraphComplete=False,otherReflectionRuntimeGraphComplete=False,helperRows=rows,statusCounts={status:sum(r['receiptStatus']==status for r in rows) for status in sorted({r['receiptStatus'] for r in rows})},ownParser=dict(path=str(tool.relative_to(R)),sha256=sha(tool),mirrorSha256=sha(mirror),compileStage=compileStage,parseStage=parse,classes={str(p.relative_to(P/'classes')):sha(p) for p in (P/'classes').rglob('*.class')},originalTestsCompiled=0,productTestsExecuted=0,actualProductProcessActions=0,productClassesInitialized=0,privateRawOrArchiveAccess=0,actualPass=None,coverage=None,sourceOrTestAbsenceInferred=False,compilerReferencesFollowed=0,newProductTests=0,newSourceProofs=0,newAcceptance=0,formalUpdated=False,whole451Accepted=False,effortRate=None);(O/'manifest.json').write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,helpers30=True,sourceIdentifierFiles=len(sources),publicManifestRead=checked,statusCounts=value['statusCounts'],originalTestCompileRun=0,manifestSha256=sha(O/'manifest.json'))))

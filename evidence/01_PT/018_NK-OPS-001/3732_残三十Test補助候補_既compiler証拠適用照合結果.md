@@ -1,0 +1,11 @@
+# 残三十Test補助候補：既compiler証拠の適用結果
+
+sourcef390a0f/Production Main7aed不変。33 filename候補のうち既三型に続く残30が対象で、全Test補助classの網羅集合とは主張しない。保護二Test/二tool nameをIO前に除外し、own363だけをコンパイル、957許可Test sourceをJavacTask.parse-onlyして識別子参照を抽出した。コメント/文字列を型依存とせず、型解決/反射/未読protected callerの完全性は未確定。
+
+PG23194は公開tracked manifest8242を一回だけ索引、30全てのcurrent source pin、22907occurrence/787distinct receiptを確認した。しかし全source snapshotのhashは、そのhelperが実際にcompile/Testされた証明ではない。PG23200で元hashとmetadata否定3を独立確認し、scopeの未確認を未実装/未試験と断定しなかった。364初draftのnested dict括弧不足parse1は23198に原source保存、IO/own parser/Product起動前に是正。
+
+既787だけへbegin.classHashes/FQN-keyという旧形式を追加照合し、三DB fixtureの現sourceに対するhash宣言を検出（PG23202）。PG23204では旧18554 proc:none compilerの対象source/実exit0/owned output directoryと、旧18558追加試験基盤12の記録class hashを対応付け、BatchDatabaseFixture/ApiLogDatabaseFixture/WebLogDatabaseFixtureのouter class三つだけを受動hash/header69で照合した。nested全closure、原Unit再実行、新Product PTやcoverageへは換算しない。
+
+独立manifest `evidence/01_PT/018_NK-OPS-001/evidence/PG23204-three-database-helper-class-binding-v1/manifest.json` SHA256 `2a4085f395b8d6bedce8b631408681747689aaa8faaa37aaae81317652c935b6`。残27は対応するcompiler output/hash bindingをsupported schemaで未確認。旧six-module package compilerのsource fingerprint、test compilationの実処理、出力先を限定metadataから次に確認する。旧packageの-DskipTests=true/Unit未実行だけでTest未compileや新PT成功としない。private raw/archive/baseline/VM/DB/稼働処理へ広げない。
+
+元helper/Test compile-run0/実Product操作0、三既classの受動読取のみ。旧追加試験基盤12は元枠のまま、442へ足さない。新unique/whole/leaf0、current442/whole94/正式1964-53/工数null、YKT2212 global OPEN/全runtimeHOLD維持。費用1/3/7cap9、共有0ppは整数丸めで無料ではない。
