@@ -1,0 +1,72 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T00:16:05.579395+09:00",
+  "source": "25e889494819f6414dbde5040213b1043e570872",
+  "inputHashes": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AddressSettingsProjectionPortTest.java": "f3c8e0c57f9bfa54fa4307bccd30017c74a9c712bbc0208daab32097f7866308",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java": "3d2eb71dd8ef910acb5e18650c15d68cd5c438a9f4917fa970f0f5c91bcf50e4",
+    "evidence/01_PT/018_NK-OPS-001/input/372_address_settings_qualifier.py": "ad72c100febe86ba9ce4b65ed9266bf2b4db8f5f25d6dbfa5861ebd21e408027",
+    "evidence/01_PT/018_NK-OPS-001/input/373_address_settings_scope.json": "2d28acb133bb61eb866069c26098bf970bbb707ff7eb3d7e688585ba97e86082"
+  },
+  "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+  "compileManifestSha256": "0cd001c7997acfa1be9f59a084ddf7c37aaf7b99b349e2830d2e93540bcfd8e0",
+  "staticManifestSha256": "f26e7948987dd26344b3705bb0eb4e096a28a7c7dbd036d973a331e47c62d02f",
+  "literalRemedyInverseTokens": true,
+  "pmdRaw": 1,
+  "pmdApplicable": 0,
+  "pmdClassifications": [
+    {
+      "beginline": "199",
+      "endline": "199",
+      "begincolumn": "13",
+      "endcolumn": "49",
+      "rule": "UseProperClassLoader",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.batch.mq",
+      "class": "AddressSettingsProjectionPortTest",
+      "method": "unusedSession",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+      "priority": "3",
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Standalone host JUnit interface-only proxy, loader of exact public ClientSession interface ensures matching definition; not J2EE deployed code. TCCL replacement would introduce ambient loader dependency. Every session method fails, no provider/session open."
+    }
+  ],
+  "checkstyle": 0,
+  "unclassified": 0,
+  "sdkReview": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/011_acceptor_parser_port_sdk_review.json",
+    "sha256": "658d8823beb8001ade2a83418d7f787ab53cc63267c50782bf7e6d3484b480ec",
+    "staticArtifacts": {
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG19244-acceptor-sdk-static-v1/pg19240-acceptor-json-static-v1/json-1.stdout": "58abc731d7d93fe7eb2f890e46d59c4f5071690ef62ceccf6b935c2d5cbece21",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG19244-acceptor-sdk-static-v1/pg19240-acceptor-json-static-v1/json-0.stdout": "d363e7b2c4048e9c29adce07a97179fe8cde7cf86fbe1614ed4ebc9102c985a0",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG19244-acceptor-sdk-static-v1/pg19240-acceptor-json-static-v1/json-1.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG19244-acceptor-sdk-static-v1/pg19240-acceptor-json-static-v1/manifest.safe.json": "edb9d79d94d6308275c7199a77c1df8e7c9b16170d0d5450289767f655a834dc",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG19244-acceptor-sdk-static-v1/pg19240-acceptor-json-static-v1/json-0.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG19244-acceptor-sdk-static-v1/pg19242-acceptor-provider-static-v1/manifest.safe.json": "5d63de49f25d3c60b56e8f325b34a466f5f0050aac52489f7c856ba2801a1afd",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG19244-acceptor-sdk-static-v1/pg19242-acceptor-provider-static-v1/provider-1.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG19244-acceptor-sdk-static-v1/pg19242-acceptor-provider-static-v1/provider-2.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG19244-acceptor-sdk-static-v1/pg19242-acceptor-provider-static-v1/provider-1.stdout": "53b2aae94acf00c35232a58c68af564aa4c8821f16939f2674c32aadf0190ab2",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG19244-acceptor-sdk-static-v1/pg19242-acceptor-provider-static-v1/provider-0.stdout": "7989af77e64e996bd911b5868717ec48c1d8d48c75126ea10ae1146fea64b250",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG19244-acceptor-sdk-static-v1/pg19242-acceptor-provider-static-v1/provider-0.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG19244-acceptor-sdk-static-v1/pg19242-acceptor-provider-static-v1/provider-2.stdout": "dfef92a80d6169e3b8c932cf582bf9924b5fa579b48db9360968d075b2b662f1",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG19244-acceptor-sdk-static-v1/pg19244-acceptor-json-package-static-v1/json-values.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG19244-acceptor-sdk-static-v1/pg19244-acceptor-json-package-static-v1/manifest.safe.json": "86e460b0abc844d1e5e5c1a151a8d3c2b5eda03ab7057f5735f55cb2aa72b6fb",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG19244-acceptor-sdk-static-v1/pg19244-acceptor-json-package-static-v1/json-values.stdout": "5bd6203f2e38268a13b2b021d49598849ecd5975f1a80c011a97bff7b8ca594b"
+    },
+    "objectParserClosure": "Existing saved157 shaded JSON classes plus JsonUtil StringReader/JsonLoader.readObject/JsonReader.readObject; explicit provider, no management call or network. Classpath metadata/default property reads permitted, not global host I/O0."
+  },
+  "expectedGoldenBasis": "origin/main SS321§5.1/5.3/5.4 approved literals, independent byte integer vectors in new Test",
+  "expectedTests": 5,
+  "originalTestsCompiled": 0,
+  "productTestsExecuted": 0,
+  "actualBackendActions": 0,
+  "heldFourInitializationsAllowed": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/374_address_settings_static_preflight.py",
+    "sha256": "91d80d517433672c42926e7afd91984f31a7b2cfe97f2d1f9cec2b405630d1af"
+  }
+}
