@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -93,7 +94,7 @@ class LinuxDirectoryCallsTest {
       }
       int winner = -1;
       int count = 0;
-      for (var result : executor.invokeAll(tasks)) {
+      for (var result : executor.invokeAll(tasks, 30, TimeUnit.SECONDS)) {
         int contender = result.get();
         if (contender >= 0) {
           winner = contender;
@@ -253,7 +254,7 @@ class LinuxDirectoryCallsTest {
             });
       }
       int wins = 0;
-      for (var future : executor.invokeAll(tasks)) {
+      for (var future : executor.invokeAll(tasks, 30, TimeUnit.SECONDS)) {
         int id = future.get();
         if (id >= 0) {
           wins++;

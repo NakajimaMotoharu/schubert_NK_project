@@ -310,7 +310,8 @@ final class LinuxSealedProofTest {
                       return true;
                     }));
       }
-      for (var result : executor.invokeAll(work)) assertTrue(result.get(10, TimeUnit.SECONDS));
+      for (var result : executor.invokeAll(work, 30, TimeUnit.SECONDS))
+        assertTrue(result.get(10, TimeUnit.SECONDS));
     }
   }
 

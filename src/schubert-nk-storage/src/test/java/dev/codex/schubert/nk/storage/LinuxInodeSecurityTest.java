@@ -280,7 +280,8 @@ final class LinuxInodeSecurityTest {
                     });
               }
             });
-      for (var result : pool.invokeAll(tasks)) assertTrue(result.get(5, TimeUnit.SECONDS));
+      for (var result : pool.invokeAll(tasks, 30, TimeUnit.SECONDS))
+        assertTrue(result.get(5, TimeUnit.SECONDS));
     }
   }
 

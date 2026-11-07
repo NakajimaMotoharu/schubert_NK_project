@@ -284,7 +284,7 @@ final class LinuxStartupFileLockTest {
                       return result;
                     });
               int winners = 0;
-              for (var result : executor.invokeAll(work))
+              for (var result : executor.invokeAll(work, 30, TimeUnit.SECONDS))
                 if (result.get(15, TimeUnit.SECONDS).isPresent()) winners++;
               assertEquals(1, winners);
               assertEquals(0L, losers.getCount());

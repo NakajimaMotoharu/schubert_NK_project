@@ -400,7 +400,7 @@ final class LinuxFileLockTest {
                   });
             }
             int winners = 0;
-            for (var done : executor.invokeAll(work))
+            for (var done : executor.invokeAll(work, 30, TimeUnit.SECONDS))
               if (done.get(10, TimeUnit.SECONDS).isPresent()) winners++;
             assertEquals(1, winners);
             assertEquals(0, rejected.getCount());

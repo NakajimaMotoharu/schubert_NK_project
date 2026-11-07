@@ -272,7 +272,8 @@ final class LinuxProcessExecTest {
               }
             });
       }
-      for (var result : executor.invokeAll(work)) assertTrue(result.get(5, TimeUnit.SECONDS));
+      for (var result : executor.invokeAll(work, 30, TimeUnit.SECONDS))
+        assertTrue(result.get(5, TimeUnit.SECONDS));
     }
     assertEquals(32, calls.get());
   }

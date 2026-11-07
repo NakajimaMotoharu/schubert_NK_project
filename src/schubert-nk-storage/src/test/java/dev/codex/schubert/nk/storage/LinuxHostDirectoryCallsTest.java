@@ -161,7 +161,8 @@ final class LinuxHostDirectoryCallsTest {
               assertFalse(Objects.requireNonNull(fixture.pointer).scope().isAlive());
               return true;
             });
-      for (var result : executor.invokeAll(work)) assertTrue(result.get(5, TimeUnit.SECONDS));
+      for (var result : executor.invokeAll(work, 30, TimeUnit.SECONDS))
+        assertTrue(result.get(5, TimeUnit.SECONDS));
     }
   }
 
