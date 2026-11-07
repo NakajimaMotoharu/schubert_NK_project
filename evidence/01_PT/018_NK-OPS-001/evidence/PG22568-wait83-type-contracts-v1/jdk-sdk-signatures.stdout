@@ -1,0 +1,160 @@
+Compiled from "AtomicInteger.java"
+public class java.util.concurrent.atomic.AtomicInteger extends java.lang.Number implements java.io.Serializable {
+  public java.util.concurrent.atomic.AtomicInteger(int);
+  public java.util.concurrent.atomic.AtomicInteger();
+  public final int get();
+  public final void set(int);
+  public final void lazySet(int);
+  public final int getAndSet(int);
+  public final boolean compareAndSet(int, int);
+  public final boolean weakCompareAndSet(int, int);
+  public final boolean weakCompareAndSetPlain(int, int);
+  public final int getAndIncrement();
+  public final int getAndDecrement();
+  public final int getAndAdd(int);
+  public final int incrementAndGet();
+  public final int decrementAndGet();
+  public final int addAndGet(int);
+  public final int getAndUpdate(java.util.function.IntUnaryOperator);
+  public final int updateAndGet(java.util.function.IntUnaryOperator);
+  public final int getAndAccumulate(int, java.util.function.IntBinaryOperator);
+  public final int accumulateAndGet(int, java.util.function.IntBinaryOperator);
+  public java.lang.String toString();
+  public int intValue();
+  public long longValue();
+  public float floatValue();
+  public double doubleValue();
+  public final int getPlain();
+  public final void setPlain(int);
+  public final int getOpaque();
+  public final void setOpaque(int);
+  public final int getAcquire();
+  public final void setRelease(int);
+  public final int compareAndExchange(int, int);
+  public final int compareAndExchangeAcquire(int, int);
+  public final int compareAndExchangeRelease(int, int);
+  public final boolean weakCompareAndSetVolatile(int, int);
+  public final boolean weakCompareAndSetAcquire(int, int);
+  public final boolean weakCompareAndSetRelease(int, int);
+  static {};
+}
+Compiled from "AtomicLong.java"
+public class java.util.concurrent.atomic.AtomicLong extends java.lang.Number implements java.io.Serializable {
+  public java.util.concurrent.atomic.AtomicLong(long);
+  public java.util.concurrent.atomic.AtomicLong();
+  public final long get();
+  public final void set(long);
+  public final void lazySet(long);
+  public final long getAndSet(long);
+  public final boolean compareAndSet(long, long);
+  public final boolean weakCompareAndSet(long, long);
+  public final boolean weakCompareAndSetPlain(long, long);
+  public final long getAndIncrement();
+  public final long getAndDecrement();
+  public final long getAndAdd(long);
+  public final long incrementAndGet();
+  public final long decrementAndGet();
+  public final long addAndGet(long);
+  public final long getAndUpdate(java.util.function.LongUnaryOperator);
+  public final long updateAndGet(java.util.function.LongUnaryOperator);
+  public final long getAndAccumulate(long, java.util.function.LongBinaryOperator);
+  public final long accumulateAndGet(long, java.util.function.LongBinaryOperator);
+  public java.lang.String toString();
+  public int intValue();
+  public long longValue();
+  public float floatValue();
+  public double doubleValue();
+  public final long getPlain();
+  public final void setPlain(long);
+  public final long getOpaque();
+  public final void setOpaque(long);
+  public final long getAcquire();
+  public final void setRelease(long);
+  public final long compareAndExchange(long, long);
+  public final long compareAndExchangeAcquire(long, long);
+  public final long compareAndExchangeRelease(long, long);
+  public final boolean weakCompareAndSetVolatile(long, long);
+  public final boolean weakCompareAndSetAcquire(long, long);
+  public final boolean weakCompareAndSetRelease(long, long);
+  static {};
+}
+Compiled from "AtomicReference.java"
+public class java.util.concurrent.atomic.AtomicReference<V> implements java.io.Serializable {
+  public java.util.concurrent.atomic.AtomicReference(V);
+  public java.util.concurrent.atomic.AtomicReference();
+  public final V get();
+  public final void set(V);
+  public final void lazySet(V);
+  public final boolean compareAndSet(V, V);
+  public final boolean weakCompareAndSet(V, V);
+  public final boolean weakCompareAndSetPlain(V, V);
+  public final V getAndSet(V);
+  public final V getAndUpdate(java.util.function.UnaryOperator<V>);
+  public final V updateAndGet(java.util.function.UnaryOperator<V>);
+  public final V getAndAccumulate(V, java.util.function.BinaryOperator<V>);
+  public final V accumulateAndGet(V, java.util.function.BinaryOperator<V>);
+  public java.lang.String toString();
+  public final V getPlain();
+  public final void setPlain(V);
+  public final V getOpaque();
+  public final void setOpaque(V);
+  public final V getAcquire();
+  public final void setRelease(V);
+  public final V compareAndExchange(V, V);
+  public final V compareAndExchangeAcquire(V, V);
+  public final V compareAndExchangeRelease(V, V);
+  public final boolean weakCompareAndSetVolatile(V, V);
+  public final boolean weakCompareAndSetAcquire(V, V);
+  public final boolean weakCompareAndSetRelease(V, V);
+  static {};
+}
+Compiled from "ThreadLocal.java"
+public class java.lang.ThreadLocal<T> {
+  static final boolean $assertionsDisabled;
+  protected T initialValue();
+  public static <S> java.lang.ThreadLocal<S> withInitial(java.util.function.Supplier<? extends S>);
+  public java.lang.ThreadLocal();
+  public T get();
+  T getCarrierThreadLocal();
+  public void set(T);
+  void setCarrierThreadLocal(T);
+  public void remove();
+  void removeCarrierThreadLocal();
+  java.lang.ThreadLocal$ThreadLocalMap getMap(java.lang.Thread);
+  void createMap(java.lang.Thread, T);
+  static java.lang.ThreadLocal$ThreadLocalMap createInheritedMap(java.lang.ThreadLocal$ThreadLocalMap);
+  T childValue(T);
+  static {};
+}
+Compiled from "Optional.java"
+public final class java.util.Optional<T> {
+  public static <T> java.util.Optional<T> empty();
+  public static <T> java.util.Optional<T> of(T);
+  public static <T> java.util.Optional<T> ofNullable(T);
+  public T get();
+  public boolean isPresent();
+  public boolean isEmpty();
+  public void ifPresent(java.util.function.Consumer<? super T>);
+  public void ifPresentOrElse(java.util.function.Consumer<? super T>, java.lang.Runnable);
+  public java.util.Optional<T> filter(java.util.function.Predicate<? super T>);
+  public <U> java.util.Optional<U> map(java.util.function.Function<? super T, ? extends U>);
+  public <U> java.util.Optional<U> flatMap(java.util.function.Function<? super T, ? extends java.util.Optional<? extends U>>);
+  public java.util.Optional<T> or(java.util.function.Supplier<? extends java.util.Optional<? extends T>>);
+  public java.util.stream.Stream<T> stream();
+  public T orElse(T);
+  public T orElseGet(java.util.function.Supplier<? extends T>);
+  public T orElseThrow();
+  public <X extends java.lang.Throwable> T orElseThrow(java.util.function.Supplier<? extends X>) throws X;
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Supplier.java"
+public interface java.util.function.Supplier<T> {
+  public abstract T get();
+}
+Compiled from "DeferredSecurityContext.java"
+public interface org.springframework.security.core.context.DeferredSecurityContext extends java.util.function.Supplier<org.springframework.security.core.context.SecurityContext> {
+  public abstract boolean isGenerated();
+}
