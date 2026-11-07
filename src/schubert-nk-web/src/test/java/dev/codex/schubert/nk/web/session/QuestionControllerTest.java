@@ -1706,7 +1706,8 @@ class QuestionControllerTest {
                   assertEquals(302, reply.getStatus());
                   return reply.getHeader(FIXTURE_LOCATION_FB077BAD);
                 }));
-      for (var job : jobs) assertEquals(FIXTURE_QUESTIONS_ACCEPTED_3838E205 + RECEIPT, job.get());
+      for (var job : jobs)
+        assertEquals(FIXTURE_QUESTIONS_ACCEPTED_3838E205 + RECEIPT, job.get(10, TimeUnit.SECONDS));
       assertEquals(100, f.requests.size());
       var ids = new HashSet<String>();
       for (var bytes : f.requests) {
