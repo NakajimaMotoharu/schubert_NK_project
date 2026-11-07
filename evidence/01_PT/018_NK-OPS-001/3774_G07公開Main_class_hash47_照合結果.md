@@ -1,0 +1,9 @@
+# G07公開Main class hash47・照合結果
+
+仕様3773/PG23564 metadata終了0/PG23566独立post終了0、manifest SHA256 5ffd41cbad3498567801b88e7c8786a460251ed9b73b677de91c28cf749e6e66。元PG4430の検出47に対し、選択したresult.allPhysicalMainSha256 role内は15件、23360index候補一致0。独立postはfrozen正常六jarの実member byteをメモリで読み内部binary名/全byte SHAを確認、15すべて旧値と不一致だった。残32はresult.jarHashesの1とmodule.xmlHashesの31であり今scope対象外、異値や意味未証明を誤検出へ分類しない。
+
+新分類0、未分類4365/22binary限界/actualSecretCount null/全G07-451未受入を維持。元4493/既更新128は保存。8誤ゼロ/Java class初期化/実行偽装等のmetadata反例は製品PTではない。全javaCode/Classの実行・初期化/Root/native/VM/DB/auth/credential/鍵操作0、code jar memberのメモリ読取だけでruntime archive/FS展開0、保護二工具二RootTestはI-O前除外、値/値hash出力0。旧qualificationのPT/FES/global100/native/formal値を現在sourceの成功へ転用しない。
+
+これ以降のcurrent-normal member再比較を繰り返さず、別の前提照合から、元productionSource964e96e45bb588e7e75798b5adf425cbd9985427の通常API二full-source（MediaApplicationService/ScenarioApplicationService）の静的コンパイル出力でAccessRejected.class二値を再現可能か検討する。Main/Test/helper実行、源の切出し/改変/stub、四held source compile、Root/native/process Test/helper、私有raw/VM/DB等は含めない。安全・固定依存が確認できない又はbyte不一致ならUNKNOWNのまま、別の独立PG/traceへ進む。宣言hashだけで旧byte実在や現在の実行資格を証明しない。
+
+472/whole暫定93/候補111/pending9/正式1964-53/newleaf0/工数null不変、原見積0.5/2/5pp cap7・既成果/費用/原本/stash7/baseline/全actualHOLD保持。fresh10%停止5%保全と477通常継続。

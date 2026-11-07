@@ -1,0 +1,40 @@
+"""One typed class-hash map, actual owned normal class bytes; no target initialization."""
+from pathlib import Path
+from collections import Counter
+import datetime,json,hashlib,re,zipfile,subprocess
+R=Path(__file__).resolve().parents[4];B=R/'evidence/01_PT/018_NK-OPS-001/evidence';O=B/'PG23564-g07-main-class-hash47-provenance-v1';C=R/'evidence/01_PT/018_NK-OPS-001/input/464_g07_main_class_hash_scope.json';load=lambda p:json.loads(p.read_bytes());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();write=lambda p,v:p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n');key=lambda x:tuple(x[n] for n in ['path','ruleId','startLine','endLine','inputSha256']);cfg=load(C)
+def class_name(data):
+ assert data[:4]==b'\xca\xfe\xba\xbe' and int.from_bytes(data[6:8],'big')==69;p=10;pool={};i=1
+ while i<int.from_bytes(data[8:10],'big'):
+  tag=data[p];p+=1
+  if tag==1:n=int.from_bytes(data[p:p+2],'big');p+=2;pool[i]=data[p:p+n];p+=n
+  elif tag in [7,8,16,19,20]:pool[i]=int.from_bytes(data[p:p+2],'big');p+=2
+  elif tag in [3,4,9,10,11,12,17,18]:p+=4
+  elif tag in [5,6]:p+=8;i+=1
+  elif tag==15:p+=3
+  else:raise AssertionError('unsupported class metadata tag')
+  i+=1
+ return pool[pool[int.from_bytes(data[p+2:p+4],'big')]].decode()
+assert not O.exists();origin=B/'provisional/PG9888-g07-capture-shape-v1/residual-metadata-shapes.json';assert sha(origin)=='a3de442acaed6f826bd6428eec3885a58b07e5a4f0a16f9b1b06b2318ffefd72';rows=load(origin);original=Counter(map(key,rows));assert len(rows)==4493;prior=[];refs=[]
+for name in ['PG22160-g07-three-public-test-symbols-v1','PG22170-g07-four-selector-symbols-v1','PG22184-g07-two-public-class-references-v2','PG22328-g07-two-typed-class-symbols-v1','PG23546-g07-recorded-catch-provenance-v1','PG23556-g07-boundary-catch-provenance-v1']:
+ p=B/name/'manifest.json';m=load(p);u=p.with_name('updates.json');assert sha(u)==m['updatesSha256'];prior+=load(u);refs.append(dict(path=str(u.relative_to(R)),sha256=sha(u)))
+old=Counter(map(key,prior));assert len(prior)==128 and sum((original-old).values())==4365
+inputp=R/cfg['artifactPath'];assert sha(inputp)==cfg['artifactSha256'];text=inputp.read_text();data=load(inputp);mapping=data['result']['allPhysicalMainSha256'];assert len(mapping)==1644 and all(isinstance(v,str) and re.fullmatch('[a-f0-9]{64}',v) for v in mapping.values());selected=[x for x in rows if x['path']==cfg['artifactPath'] and not old[key(x)]];assert len(selected)==47 and all(x['inputSha256']==sha(inputp) for x in selected)
+start=list(re.finditer(r'^    "allPhysicalMainSha256": ',text,re.M));assert len(start)==1;at=start[0].end();obj,end=json.JSONDecoder().raw_decode(text,at);assert obj==mapping
+normal=R.parent/'pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/manifest.safe.json';assert sha(normal)==cfg['normalManifestSha256'];nm=load(normal);assert nm['actualExit']==0 and nm['source']==cfg['normalSource'];assert set(nm['jars'])=={'api','web','protocol','storage','bootstrap','batch'};assert all(sha(Path(v['path']))==v['sha256'] for v in nm['jars'].values());indexp=R/cfg['indexPath'];assert sha(indexp)==cfg['indexSha256'];index=load(indexp)
+rule=B/'provisional/PG8979-gitleaks-rule-provenance-v1/manifest.json';assert sha(rule)=='97b57201394a789a6871fa2f73b6521d71e48e5452ff2b426a6e23e4ca580c8a';rx=re.compile(load(rule)['rules']['generic-api-key']['regex'],re.ASCII);lines=text.splitlines(keepends=True);updates=[];retained=[];classReads=0
+for f in selected:
+ base={k:f[k] for k in ['path','ruleId','startLine','endLine','inputSha256']};begin=sum(map(len,lines[:f['startLine']-1]));stop=sum(map(len,lines[:f['endLine']]));line=''.join(lines[f['startLine']-1:f['endLine']]);match=re.fullmatch(r'\s+("(?:\\.|[^"\\])*"): "([a-f0-9]{64})",?\n?',line)
+ if f['startLine']!=f['endLine'] or not at<=begin<stop<=end+1 or match is None:retained.append(dict(**base,status='UNKNOWN_NONSCALAR_OR_OUTSIDE_TYPED_MAP'));continue
+ token=json.loads(match[1]);value=match[2];assert mapping.get(token)==value;lo=max(0,f['startLine']-2);window=''.join(lines[lo:min(len(lines),f['endLine']+1)]);captures={m[1] for m in rx.finditer(window) if f['startLine']<=lo+window[:m.start(1)].count('\n')+1<=lo+window[:m.end(1)].count('\n')+1<=f['endLine']};assert captures=={value}
+ if any(v.lower() in token.lower() for v in cfg['protectedNameTokens']):retained.append(dict(**base,status='PROTECTED_NAME_NO_MEMBER_IO'));continue
+ parsed=re.fullmatch(r'(api|web|protocol|storage|bootstrap|batch):(dev/codex/schubert/nk/[A-Za-z0-9_$/]+\.class)',token)
+ if parsed is None or '..' in token:retained.append(dict(**base,status='UNKNOWN_MAIN_MEMBER_KEY'));continue
+ module,member=parsed.groups();fqn=member[:-6];idx=index.get(fqn)
+ if idx is None:retained.append(dict(**base,status='CURRENT_NORMAL_CLASS_UNAVAILABLE'));continue
+ source_module=idx['path'].split('/')[1].removeprefix('schubert-nk-')
+ if source_module!=module or idx['sha256']!=value:retained.append(dict(**base,status='CURRENT_NORMAL_MODULE_OR_BYTE_SHA_MISMATCH'));continue
+ with zipfile.ZipFile(nm['jars'][module]['path']) as jar:raw=jar.read(member)
+ classReads+=1;assert hashlib.sha256(raw).hexdigest()==value and class_name(raw)==fqn;updates.append(dict(**base,disposition='FALSE_POSITIVE_ACTUAL_PUBLIC_NORMAL_MAIN_CLASS_DIGEST',fieldRole='result.allPhysicalMainSha256',exactCaptureCount=1,wholeExactCapturePubliclyDerived=True,normalModule=module,classEntry=member,internalBinaryName=fqn,normalCompileManifestSha256=sha(normal),normalJarSha256=nm['jars'][module]['sha256'],actualClassMemberHashMatched=True,guardedClassMetadataOnly=any(x in member for x in ['TemporaryInfrastructureException','FingerprintKeyRing','ResponseSnapshotCodec','WebStartupException']),oldOrCurrentRunQualified=False,capturedValueWritten=False,captureValueHashWritten=False))
+new=Counter(map(key,updates));assert not new.keys()&old.keys() and all(v==1 and original[k]==1 for k,v in new.items());remaining=sum((original-old-new).values());assert len(updates)+len(retained)==47 and remaining==4365-len(updates)
+O.mkdir();write(O/'updates.json',updates);write(O/'retained.json',retained);out=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),observerHeadAtExecution=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip(),normalCoreSource=nm['source'],input=dict(path=cfg['artifactPath'],sha256=sha(inputp)),config=dict(path=str(C.relative_to(R)),sha256=sha(C)),originalMetadata=dict(path=str(origin.relative_to(R)),sha256=sha(origin)),priorUpdateRefs=refs,normalManifest=dict(path=str(normal),sha256=sha(normal)),normalIndex=dict(path=cfg['indexPath'],sha256=sha(indexp)),ruleManifestSha256=sha(rule),candidateRows=47,actualClassMemberReads=classReads,newFalsePositives=len(updates),retainedRows=len(retained),remainingUnclassified=remaining,updatesSha256=sha(O/'updates.json'),retainedSha256=sha(O/'retained.json'),actualSecretCount=None,binaryOrContainerLimited=22,productTestsExecuted=0,productClassesInitialized=0,heldFourInitializations=0,actualAuthOrDbActions=0,scannerExecuted=False,oldProducerExecuted=False,targetsExecuted=False,privateRawRead=False,runtimeArchiveRead=False,jarMembersExtractedToFilesystem=False,capturedValuesWritten=False,captureValueHashesWritten=False,oldOrCurrentRunQualified=False,wholeG07Accepted=False,whole451Accepted=False,newAcceptance=0,effortRate=None,tool=dict(path=str(Path(__file__).relative_to(R)),sha256=sha(Path(__file__))));write(O/'manifest.json',out);print(json.dumps(dict(actualExit=0,classified=len(updates),retained=len(retained),remaining=remaining,classMembersRead=classReads,manifestSha256=sha(O/'manifest.json'))))
