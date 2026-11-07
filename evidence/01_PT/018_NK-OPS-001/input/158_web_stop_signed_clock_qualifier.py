@@ -49,7 +49,7 @@ assert all(n in allowed or n.startswith(pkg+'WebRuntimeStopTest$$Lambda') for n 
 assert not any(n.startswith(('org/postgresql/','org/apache/activemq/','com/microsoft/playwright/','sun/nio/ch/SocketChannelImpl')) for n in initialised)
 coverage={};physical={};four={}
 if mode=='red':
- assert stages['unit']['actualExit']==1 and sum(t['failure'] for t in cases)==1 and not any(t['error'] or t['skipped'] for t in cases)
+ assert stages['unit']['actualExit']==1 and sum(t['error'] for t in cases)==1 and not any(t['failure'] or t['skipped'] for t in cases)
  assert 'Web stop unconfirmed' in ''.join(p.read_text() for p in (slot/'xml').glob('TEST-*.xml'))
  status='EXPECTED_EXISTING_BUG_REPRODUCED_NOT_PASS'
 else:

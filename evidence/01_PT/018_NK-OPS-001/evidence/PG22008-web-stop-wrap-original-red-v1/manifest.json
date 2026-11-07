@@ -1,0 +1,107 @@
+{
+  "actualExit": 1,
+  "status": "EXPECTED_EXISTING_BUG_REPRODUCED_NOT_PASS",
+  "atJST": "2026-11-07T09:13:59.563645+09:00",
+  "source": "8cd49c3a2099b07b861cff1ebf39bc6b70fdcb12",
+  "productionCoreMain": "56720d75714f60d7e31da59c3da8c02baf05de52",
+  "begin": {
+    "atJST": "2026-11-07T09:12:52.358076+09:00",
+    "mode": "red",
+    "source": "8cd49c3a2099b07b861cff1ebf39bc6b70fdcb12",
+    "productionCoreMain": "56720d75714f60d7e31da59c3da8c02baf05de52",
+    "normalManifest": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21922-consumer-stop-six-main-compile-v1/manifest.safe.json",
+      "sha256": "e925b4c24e0eff9e70f7b3fad0b595d80e90f1a444c87329215d6e4b3d5d8d1f"
+    },
+    "inputHashes": {
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop.java": "0cedc1417ddc419a11896516ad7e2d76cd6277c42711815120f35191e1cd7a6a",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest.java": "92be3afc905bf8698e8d148c99f34cc68b1429a26d6f15f804d8299f734d4cdb",
+      "evidence/01_PT/018_NK-OPS-001/input/158_web_stop_signed_clock_qualifier.py": "a5124a5204f8f5b23e6bb52d543524ce984dfd68fdeb41ae645a361f4cb4d648"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21922-consumer-stop-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": "8c768d6dd668cfb08781c0f240f25aafba7c096bb800feb59649e7f5d3fcab6e",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/tomcat/embed/tomcat-embed-core/11.0.25/tomcat-embed-core-11.0.25.jar": "282b65b9fe43647b1459c0df11101f8599a58de5832075acff485c3705ba4894",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "testSelection": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest#stop006SignedClockWrapKeepsRelativeBudgetAndDetectsExpiry",
+    "independence": "Whole original Test, only lambdas/AtomicLong/JDK exceptions; SessionStoreException graph walk, no external operations; Tomcat LifecycleException value only",
+    "testsExpected": 1,
+    "scope": "WebRuntimeStop whole source and all original five tests plus one new independent vector",
+    "noOldExecUnion": true,
+    "manualCoverageExclusions": []
+  },
+  "unitTerminal": {
+    "actualExit": 1,
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22008-web-stop-wrap-original-red-v1/tmp",
+      "-Duser.timezone=Asia/Tokyo",
+      "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22008-web-stop-wrap-original-red-v1/class-init.log",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "execute",
+      "--disable-banner",
+      "--class-path",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22008-web-stop-wrap-original-red-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg21922-consumer-stop-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/tomcat/embed/tomcat-embed-core/11.0.25/tomcat-embed-core-11.0.25.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "--reports-dir",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22008-web-stop-wrap-original-red-v1/xml",
+      "--fail-if-no-tests",
+      "--details",
+      "summary",
+      "--select-method",
+      "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest#stop006SignedClockWrapKeepsRelativeBudgetAndDetectsExpiry"
+    ],
+    "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+    "endUTC": "2026-11-07T00:12:53.759300+00:00",
+    "startUTC": "2026-11-07T00:12:53.193146+00:00",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdoutSha256": "27b55926b989666becc3e2cd48c096bc67a896b6962bb0d8019bc6113c0a0286",
+    "timedOut": false
+  },
+  "tests": 1,
+  "failures": 0,
+  "errors": 1,
+  "skipped": 0,
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+      "name": "stop006SignedClockWrapKeepsRelativeBudgetAndDetectsExpiry()",
+      "failure": false,
+      "error": true,
+      "skipped": false
+    }
+  ],
+  "metadataRecoveryOnly": true,
+  "originalCheckerSha256": "a5124a5204f8f5b23e6bb52d543524ce984dfd68fdeb41ae645a361f4cb4d648",
+  "productReexecutions": 0,
+  "coverage": null,
+  "newAcceptedTests": 0,
+  "files": {
+    "compile-exit.safe.json": "d517cff424724270b576e98df9481cb23f3504cabba4e0f62dd2d0f1af9b2c84",
+    "exception-metadata-begin.safe.json": "21a76b5c12e7326a9ce3e632b0a6fce8403b395aa53efe9d429d30eb03ea3127",
+    "compile.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-begin.safe.json": "d299d142d5b30ceed75907859d3ff557ae3e1f2edf9db3a34dd6f513fc62ee52",
+    "compile-process.safe.json": "f00a6a87bd67f99e90ce414d8e6c28391b4dea8bbe958ef17db08903aabf2f2f",
+    "unit-begin.safe.json": "a327976e2fb09be421d0bf8e73f4a46db89dc79db60d020ee91c2128c86fddf7",
+    "exception-metadata.stdout": "a90096d3c86bcd0c1fbdde56cc057b59fa2b48e9ebe8693a59e17b194a1f90cc",
+    "unit-process.safe.json": "0273b85c1db44ab4fe452b1a91e041ebfcd50a5987b11990cc9515c020480505",
+    "exception-metadata-exit.safe.json": "f111dd0414bff71fc7a69ae7a85d2779082a0e9b6e270883e434513386e75cc8",
+    "compile.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "begin.json": "5b772bc252b98b48ec6b8f69efdf4a6876f0531a97cbc0f4eb042a69155e6554",
+    "exception-metadata.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-exit.safe.json": "36279bf26d8816d602b0cdd2a8df822ada3d2d7eb46b90fd2a7f617f9af97d31",
+    "unit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "exception-metadata-process.safe.json": "5071e453eba03b1e29232c44d2b158b2a5cfac8357d43c2ce6e41059d25bad46",
+    "original-class-init.stdout": "30186a606be00c542d1f1d2bca42595f770fce9c108dc702de890edd85c9baf7",
+    "unit.stdout": "27b55926b989666becc3e2cd48c096bc67a896b6962bb0d8019bc6113c0a0286",
+    "TEST-junit-jupiter.xml": "c120701f1dc911ea3774be96efbcda0708666b60d0d7ed240f42b04e76357ba2",
+    "TEST-junit-platform-suite.xml": "77aeedbfa7063ff792b694f75972c1b4f14146159bbac8c875bbadc351fd41ae",
+    "TEST-junit-vintage.xml": "1f0e68e710628feb99ea8b04e037e7c1509793d585e2436b8d55f5eb0daac8a9"
+  },
+  "bugs": [
+    "BUG-2409",
+    "BUG-2412",
+    "YKT-2157"
+  ]
+}

@@ -8,8 +8,9 @@ import java.util.function.LongSupplier;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * NK-WEB-002/NK-OPS-001; SS342352; PG-D377; PT-OPS-NWEB-STOP001..005. Same owner-lock guarded
- * confirmed phase/deadline algorithm; never closes a later unknown phase.
+ * NK-WEB-002/NK-OPS-001; SS342352; PG-D377/1142; PT-OPS-NWEB-STOP001..006. Owner-lock guarded
+ * phases; BUG2409/YKT2154 uses relative time across signed clock wrap; later unknown phases stay
+ * owned.
  */
 @NullMarked
 final class WebRuntimeStop {
@@ -36,7 +37,7 @@ final class WebRuntimeStop {
         throw new IOException("Web stop unconfirmed");
       }
       confirmed++;
-      if (nanoTime.getAsLong() > deadline) throw new IOException("Web stop unconfirmed");
+      if (deadline - nanoTime.getAsLong() < 0) throw new IOException("Web stop unconfirmed");
     }
   }
 
