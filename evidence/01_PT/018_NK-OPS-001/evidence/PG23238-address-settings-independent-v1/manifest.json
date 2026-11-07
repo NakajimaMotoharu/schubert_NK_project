@@ -1,0 +1,332 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T00:19:52.686374+09:00",
+  "source": "01dbe0a53a245ed43e17c2b81acc12d11c450d29",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "tests": 5,
+  "newUniqueTests": 5,
+  "newDirectWholeSourceProof": 1,
+  "registeredWholeComponentDelta": null,
+  "registryDedupRequired": true,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 404,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 10,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 68,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 14,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 9,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 2,
+      "missed": 0
+    }
+  },
+  "wholeTargetCodeCoverage100": true,
+  "physical": {
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient": "c71fa03c8abdd3db3ae9b52ed8961b55f0bdc3c372b18c4728f6948c32c4b5b3",
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Reader": "88260528f64947ac26d8bd1c442ccfc822e18d3862e9363be23a54da79ca38f6",
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity": "9a3f72c76cf5d7ac7bcfa7ddbe8cf0c95b1a2889df2d50d144c6b5e39d08f144"
+  },
+  "sourceFilePhysicalClosure": {
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient": {
+      "name": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+      "sourceFile": "ArtemisAddressSettingsReadinessClient.java",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "code": true
+        },
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Reader;)V",
+          "code": true
+        },
+        {
+          "name": "verify",
+          "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;)V",
+          "code": true
+        },
+        {
+          "name": "inspect",
+          "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;)Ljava/util/Map;",
+          "code": true
+        },
+        {
+          "name": "verifyResponse",
+          "descriptor": "(Ljava/lang/String;Ldev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity;)Ljava/util/Map;",
+          "code": true
+        },
+        {
+          "name": "expect",
+          "descriptor": "(Lorg/apache/activemq/artemis/json/JsonObject;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+          "code": true
+        },
+        {
+          "name": "capacities",
+          "descriptor": "()Ljava/util/Map;",
+          "code": true
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "code": true
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Reader": {
+      "name": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Reader",
+      "sourceFile": "ArtemisAddressSettingsReadinessClient.java",
+      "methods": [
+        {
+          "name": "read",
+          "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;Ljava/lang/String;)Ljava/lang/Object;",
+          "code": false
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity": {
+      "name": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity",
+      "sourceFile": "ArtemisAddressSettingsReadinessClient.java",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(JJJJ)V",
+          "code": true
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "code": true
+        },
+        {
+          "name": "hashCode",
+          "descriptor": "()I",
+          "code": true
+        },
+        {
+          "name": "equals",
+          "descriptor": "(Ljava/lang/Object;)Z",
+          "code": true
+        },
+        {
+          "name": "memoryMib",
+          "descriptor": "()J",
+          "code": true
+        },
+        {
+          "name": "memoryMessages",
+          "descriptor": "()J",
+          "code": true
+        },
+        {
+          "name": "pageMib",
+          "descriptor": "()J",
+          "code": true
+        },
+        {
+          "name": "pageMessages",
+          "descriptor": "()J",
+          "code": true
+        }
+      ]
+    }
+  },
+  "sourcePhysicalCount": 3,
+  "normalCodeClasses": 2,
+  "abstractNoCode": 1,
+  "standardCompilerFilters": "JaCoCo0.8.15 standard record-generated accessor/equality/hash/toString filters, all original Capacity bytes retained. These7 generated methods are not manually excluded or claimed independently executed; outer8 user/initializer methods and record ctor1 measured.",
+  "manualCoverageExclusions": [],
+  "oldExecCombined": false,
+  "classIds": {
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient": "d05c33ca826f0137",
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Reader": "d7fd60ebdabf21e0",
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity": "76a14f535c49dfc0"
+  },
+  "normalObservedCrc": {
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient": "d05c33ca826f0137",
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity": "76a14f535c49dfc0",
+    "dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessException": "920418e6ef78ae72"
+  },
+  "normalProductInitializations": [
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity",
+    "dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessException"
+  ],
+  "jvmGeneratedLambdaOwners": {
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$$Lambda+0x000000002e1948a8": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient"
+  },
+  "sdkInitializationsWithinPriorStaticReview": [
+    "org/apache/activemq/artemis/api/core/JsonUtil",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/AbstractJsonFactory",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategyFactory",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategyFactory$$Lambda+0x000000002e180668",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategyFactory$$Lambda+0x000000002e181198",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategyFactory$$Lambda+0x000000002e181868",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategyFactory$$Lambda+0x000000002e181f40",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategyFactory$CharBufferQueueProvider",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/BufferStrategyFactory$QueueProvider",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/DefaultJsonPointerFactory",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JohnzonJsonParser",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JohnzonJsonParserImpl",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonArrayBuilderImpl",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonArrayImpl",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonChars",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonGeneratorFactoryImpl",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonGeneratorFactoryImpl$$Lambda+0x000000002e1869e0",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonGeneratorFactoryImpl$$Lambda+0x000000002e186c28",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonGeneratorFactoryImpl$Buffer",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonLocationImpl",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonLongImpl",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonNumberImpl",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonNumberImpl$$Lambda+0x000000002e18e000",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonObjectBuilderImpl",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonObjectImpl",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonParserFactoryImpl",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonParserFactoryImpl$$Lambda+0x000000002e186000",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl$$Lambda+0x000000002e13da58",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl$$Lambda+0x000000002e185000",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl$$Lambda+0x000000002e187518",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl$$Lambda+0x000000002e187950",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonProviderImpl$Cached",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonReaderFactoryImpl",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonReaderImpl",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonReaderImpl$$Lambda+0x000000002e18bc78",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonReaderImpl$1",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonReaderImpl$NothingToRead",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonStreamParserImpl",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonStreamParserImpl$StructureElement",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonStringImpl",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/JsonWriterFactoryImpl",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/RejectDuplicateKeysMode",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/RejectDuplicateKeysMode$$Lambda+0x000000002e1825c0",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/RejectDuplicateKeysMode$$Lambda+0x000000002e1827e8",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/Strings",
+    "org/apache/activemq/artemis/commons/shaded/johnzon/core/spi/JsonPointerFactory",
+    "org/apache/activemq/artemis/commons/shaded/json/EmptyArray",
+    "org/apache/activemq/artemis/commons/shaded/json/EmptyObject",
+    "org/apache/activemq/artemis/commons/shaded/json/JsonArray",
+    "org/apache/activemq/artemis/commons/shaded/json/JsonArrayBuilder",
+    "org/apache/activemq/artemis/commons/shaded/json/JsonException",
+    "org/apache/activemq/artemis/commons/shaded/json/JsonNumber",
+    "org/apache/activemq/artemis/commons/shaded/json/JsonObjectBuilder",
+    "org/apache/activemq/artemis/commons/shaded/json/JsonReader",
+    "org/apache/activemq/artemis/commons/shaded/json/JsonStructure",
+    "org/apache/activemq/artemis/commons/shaded/json/JsonValue",
+    "org/apache/activemq/artemis/commons/shaded/json/JsonValue$ValueType",
+    "org/apache/activemq/artemis/commons/shaded/json/JsonValueImpl",
+    "org/apache/activemq/artemis/commons/shaded/json/spi/JsonProvider",
+    "org/apache/activemq/artemis/commons/shaded/json/stream/JsonParser",
+    "org/apache/activemq/artemis/commons/shaded/json/stream/JsonParser$Event",
+    "org/apache/activemq/artemis/commons/shaded/json/stream/JsonParsingException",
+    "org/apache/activemq/artemis/json/JsonArray",
+    "org/apache/activemq/artemis/json/JsonNumber",
+    "org/apache/activemq/artemis/json/JsonValue",
+    "org/apache/activemq/artemis/json/impl/JsonArrayImpl",
+    "org/apache/activemq/artemis/json/impl/JsonNumberImpl",
+    "org/apache/activemq/artemis/json/impl/JsonObjectImpl",
+    "org/apache/activemq/artemis/json/impl/JsonStringImpl",
+    "org/apache/activemq/artemis/json/impl/JsonValueImpl",
+    "org/apache/activemq/artemis/utils/JsonLoader"
+  ],
+  "sdkInitCount": 72,
+  "sourceRecipeNegativeChecks": 3,
+  "staticRaw": 1,
+  "staticApplicable": 0,
+  "checkstyle": 0,
+  "staticPreflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23232-address-settings-static-preflight-v1/manifest.json",
+    "sha256": "a3a72df4799631ca5f31c75f647931c0bbc2b2c136d991fff131eda4fb55e738"
+  },
+  "environment": {
+    "file.encoding": "UTF-8",
+    "java.version": "25.0.4",
+    "os.arch": "amd64",
+    "os.name": "Linux",
+    "user.timezone": "Asia/Tokyo"
+  },
+  "inputHashes": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AddressSettingsProjectionPortTest.java": "f3c8e0c57f9bfa54fa4307bccd30017c74a9c712bbc0208daab32097f7866308",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java": "3d2eb71dd8ef910acb5e18650c15d68cd5c438a9f4917fa970f0f5c91bcf50e4",
+    "evidence/01_PT/018_NK-OPS-001/input/372_address_settings_qualifier.py": "ad72c100febe86ba9ce4b65ed9266bf2b4db8f5f25d6dbfa5861ebd21e408027",
+    "evidence/01_PT/018_NK-OPS-001/input/373_address_settings_scope.json": "2d28acb133bb61eb866069c26098bf970bbb707ff7eb3d7e688585ba97e86082"
+  },
+  "files": {
+    "original-classinfo-begin.safe.json": "c222b17364d28cbb8b913157c72e02c45375f0c54d1cecc790aad5b90e5c8827",
+    "original-coverage.stdout": "4f9c18286202e68a4251073d324e94d463caad51c3abd4fbcbacba8aa5cb2688",
+    "original-execinfo-begin.safe.json": "9c4f5c15f97af11d437423711d5c4e4f656e1f32736bb55b077020b64b6558fb",
+    "original-coverage-exit.safe.json": "9713b7a1eb7725fe14ea3428abd25f5d48cc4ff69ab4999e89360119cb2d6cf4",
+    "original-classinfo-exit.safe.json": "f6b506ffc17a6a074bd319d0f8ac1ab659ddb8a11643adfac291e763643779ed",
+    "original-unit-begin.safe.json": "761c2667e641ea6071c1b9adfff4d0f8dcc0ab8db44f81043f5dc241c1ba0071",
+    "original-unit-process.safe.json": "53ca6a579111520b54e1e43563e2e3e4e3525477c927f53924eb29db63ab4e68",
+    "original-coverage-begin.safe.json": "1e950834d6a5fc272a50e94c52dc2554fc5f70bddbfe745c4db11c02c923dff1",
+    "original-classinfo.stdout": "ce0263c09a3bf1b1b573f0144707c5359baa34012da323a71d472346240c7a7b",
+    "original-execinfo-process.safe.json": "fd44a27c66083035a999e8240881eaef0cf966e1c28482a8cefb58069e7f0350",
+    "original-coverage.xml": "c3cf0ff0ab9732648c733490f2d6d3c2131eb694236599e3faedcf239bff82c0",
+    "original-coverage-process.safe.json": "1674fd4d4772263883e8d189a60e8cf0c2e740768c63576d0f32064135ab786e",
+    "original-execinfo-exit.safe.json": "cdccc57c45e185c542d8e462cc621a200ed1c5e524ff8f6043e78786030c8cfd",
+    "original-execinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "jacoco.exec": "13d925c245a377cb3de637a4bb30eeb1b437f79a8b90737a0c4a608097b604dd",
+    "original-execinfo.stdout": "3916f07de95812313eb945deed85cfb0d9b9713a0883b93ca3f810e9f3370655",
+    "original-begin.json": "1b21f0dbd223e1b472ebf7f58932b01e4740ca744b6ae34258eda7b68598976b",
+    "original-unit-exit.safe.json": "91fa7e4d110c760052f5b41314f40c7500701bdea007bf9968afdf02950d33a3",
+    "original-classinfo-process.safe.json": "ffbd79b28a8f8cfd4ae598a8ccac834102aabe05e56d56b89573dc777c1ef45f",
+    "original-unit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-manifest.json": "8331f6e04ab1e6a9973da327ff6964de33a7298232c2bfa5bea9e620e06bcdd6",
+    "original-classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-coverage.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-class-init.stdout": "6d0f2b9c7de76bbe36d41461f6e9ae3b4f29aae1596b2b20f2d693631dba2598",
+    "original-unit.stdout": "07ca6f5d34294a4ff758f1c8b552205fb6f4e5b09f32edf4dfc89b1e40866f28",
+    "original-TEST-junit-jupiter.xml": "8ec57cd8ee01035a28192f61bdf2a73954fc0c5102b90e0ff3198935352e1cb3",
+    "original-TEST-junit-platform-suite.xml": "0cd049605716113a2023a8b6b99a67c8bc4d4e907ead402d76903f8c4be638f4",
+    "original-TEST-junit-vintage.xml": "80dde6c971b4bebe310d68627c521941cc8fe0a1dab9ce68902737d82380e935",
+    "static-pmd.stdout": "a3ba9023750bf0e6590d92acd6bf1793eb0dc883fdd4a54a8c4edf163319a34e",
+    "static-checkstyle-exit.safe.json": "e062720579a0ae1c6d5244e3e49b417de908af0d39e8979f30d01ab5a27e37b8",
+    "static-pmd.stderr": "aef3108e6ef4a39518c5b55d4563bc4cab83827971d57a25ad88a9f638d8f4dc",
+    "static-pmd-exit.safe.json": "ad781c6905a00077e1f9459f774f6d9bf4c262836ba4874d620eb8e1f49bedd0",
+    "static-checkstyle-process.safe.json": "dbccd0c88a1d703fe415d0f41b0eca33623d89eb12995e87acc355f1d083e5eb",
+    "static-pmd-begin.safe.json": "f4b2e6e838179971e7128b4953ad2b8f29a84ce239cc7040c693dba559582f68",
+    "static-sources.txt": "f10bb5331d4d85a65e102d3a75890cb099a2e4ad0531648a20ff006e64832948",
+    "static-pmd-process.safe.json": "bec142414b811b9ffe842b669772636d103953a51e6ca8e7b4fbb8571ebd1b34",
+    "static-checkstyle.xml": "8f8f0c57d855cb5df289a5d0e63377f30ea413dbaad320dc65921034434b33f5",
+    "static-checkstyle-begin.safe.json": "7fc4396d1814dfa971c19956353af063b7be9de81b172183b3465e5c3515c4ba",
+    "static-checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "static-manifest.json": "f26e7948987dd26344b3705bb0eb4e096a28a7c7dbd036d973a331e47c62d02f",
+    "static-pmd.xml": "4df563de925b57c9c990e933a336de895f7f39e667f5e801c4e2294acb6ac18c",
+    "static-checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "actualBrokerConnections": 0,
+  "sessionOperations": 0,
+  "actualVMDatabaseRootNativeCredentialOperations": 0,
+  "heldFourInitializations": 0,
+  "originalTestsCompiled": 0,
+  "newFixtureReplacesHeldBackendTest": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "bugs": [
+    "BUG-2478"
+  ],
+  "ykts": [
+    "YKT-2216"
+  ],
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/375_address_settings_independent_post.py",
+    "sha256": "bbeda5c963d09ef3ec3fb137a903fda37b1a27b95cd9b34a83cb1ebcd26b2ef5"
+  }
+}
