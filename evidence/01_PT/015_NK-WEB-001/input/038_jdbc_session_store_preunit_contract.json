@@ -1,0 +1,61 @@
+{
+  "decision": "PT_DEFAULT_WHOLE_BORROWED_JDBC_TECHNICAL_ADAPTER",
+  "expectedTests": 15,
+  "mainSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "normalClassFamily": [
+    "JdbcWebSessionStore",
+    "JdbcWebSessionStore$InvalidStoredRow"
+  ],
+  "runtimeProductJarModules": [
+    "web"
+  ],
+  "jdkInterfaces": [
+    "java.sql.Connection",
+    "java.sql.PreparedStatement",
+    "java.sql.ResultSet"
+  ],
+  "sqlInterpretedOrExecuted": false,
+  "borrowedConnectionLifecycleOrTransactionMutation": "FORBIDDEN_BY_FIXTURE",
+  "realDbDriverProviderCryptoSessionIdAuthRoleRootVmNetworkProductNative": false,
+  "opaqueDataFixtures": "PUBLIC_ZERO64_OR_FORMAT_BOUNDARY_ARRAYS_FIXED_UUID_HASH_VERSION_TIME_NO_REAL_SESSION",
+  "moduleLocalFatalPolicy": "3423 independent SessionStoreException helper only; finite plain SQLException/cause/suppressed Error fixtures, no preserved Root/provider graph",
+  "allowedMainSupport": {
+    "SessionPayloadIdentity": [
+      "<init>",
+      "id",
+      "sessionIdHash",
+      "createdAt",
+      "equals"
+    ],
+    "EncryptedSessionPayload": [
+      "<init>",
+      "validateVersion",
+      "keyVersion",
+      "ciphertext"
+    ],
+    "WebSessionRow": [
+      "<init>",
+      "requireVersion",
+      "identity",
+      "payload",
+      "lastAccessedAt",
+      "expiresAt",
+      "maxInactiveSeconds",
+      "version"
+    ],
+    "SessionStoreException": [
+      "<init>",
+      "preserveFatal"
+    ],
+    "InvalidSessionRowException": [
+      "<init>"
+    ]
+  },
+  "noAadCipherOrLifecycleMethods": true,
+  "heldFourInitialisations": 0,
+  "originalRealDatabaseTestUnchangedAndNotExecuted": true,
+  "realSqlConstraintsOrLocksQualified": false,
+  "sourceWholeCredit": 1,
+  "supportWholeCredit": 0,
+  "formalUpdated": false
+}
