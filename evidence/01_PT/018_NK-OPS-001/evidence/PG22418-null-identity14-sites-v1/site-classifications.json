@@ -1,0 +1,408 @@
+[
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionIssueJdbcPortTest.java",
+      "sourceSha256": "367458b115a8e5f3705fb6cd5bbc4db1728d15ea6bae0b41c7e7832d06ea04d8",
+      "ordinal": 74,
+      "attributes": {
+        "beginline": "403",
+        "endline": "403",
+        "begincolumn": "18",
+        "endcolumn": "22",
+        "rule": "NullAssignment",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionIssueJdbcPortTest",
+        "method": "absentDisabledAndMissingColumnsFailBeforeIssuanceOrReplacement",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+        "priority": "3"
+      },
+      "message": "Assigning an Object to null is a code smell. Consider refactoring.",
+      "classification": "UNCLASSIFIED"
+    },
+    "classification": "NOT_APPLICABLE",
+    "reason": "Missing user status must fail infrastructure before session issuance; fixed SQL-order assertion follows.",
+    "expectedSourceLine": "f.status = null;",
+    "localWitness": "infra(f);",
+    "localWindowSha256": "78b7fa7e1bfce80b97a95b45b9b5ef870005b6041ebe1a285b93d9c0dae5d8b0",
+    "dynamicAssertionReexecuted": false
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "sourceSha256": "0f11af78f2d7f3daa6eed7e4b54379c70b5f2c28548711730088efd86abc1730",
+      "ordinal": 162,
+      "attributes": {
+        "beginline": "146",
+        "endline": "146",
+        "begincolumn": "32",
+        "endcolumn": "36",
+        "rule": "NullAssignment",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "RunReferencePortTest",
+        "method": "nullAcquisitionsMissingDuplicateRowsAndRequiredColumnsNeverBecomeDefaults",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+        "priority": "3"
+      },
+      "message": "Assigning an Object to null is a code smell. Consider refactoring.",
+      "classification": "UNCLASSIFIED"
+    },
+    "classification": "NOT_APPLICABLE",
+    "reason": "Every required column missing is a deliberate negative vector; fixed failure catalog and both owned close assertions follow.",
+    "expectedSourceLine": "fixture.values[column] = null;",
+    "localWitness": "fixture.assertClosed(1, 1);",
+    "localWindowSha256": "b569eda77dd87b2b6ce5cf88187ab046269528082510d703c1987d3d6bbfa4cf",
+    "dynamicAssertionReexecuted": false
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest.java",
+      "sourceSha256": "799e9338db6423bbcdc1229b6cd84473e04c437933dfcfe2011cf85026897147",
+      "ordinal": 228,
+      "attributes": {
+        "beginline": "62",
+        "endline": "62",
+        "begincolumn": "21",
+        "endcolumn": "25",
+        "rule": "NullAssignment",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "DisplaySnapshotPortTest",
+        "method": "closedPrincipalAndParsedCsrfCreateOnlyImmutableDisplayData",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+        "priority": "3"
+      },
+      "message": "Assigning an Object to null is a code smell. Consider refactoring.",
+      "classification": "UNCLASSIFIED"
+    },
+    "classification": "NOT_APPLICABLE",
+    "reason": "Remove source principal after capture; retained display remains unchanged by an independent fixed username assertion.",
+    "expectedSourceLine": "f.principal = null;",
+    "localWitness": "snapshot.topBar().getUsername()",
+    "localWindowSha256": "b742ef94ef14a2a9f2c8d7e62131ec422b6ecb6df9e06e7629fb2d59e40ccdf3",
+    "dynamicAssertionReexecuted": false
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest.java",
+      "sourceSha256": "799e9338db6423bbcdc1229b6cd84473e04c437933dfcfe2011cf85026897147",
+      "ordinal": 229,
+      "attributes": {
+        "beginline": "71",
+        "endline": "71",
+        "begincolumn": "19",
+        "endcolumn": "23",
+        "rule": "NullAssignment",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "DisplaySnapshotPortTest",
+        "method": "anonymousCaptureClearsPriorSnapshotWithoutReadingTokenProperties",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+        "priority": "3"
+      },
+      "message": "Assigning an Object to null is a code smell. Consider refactoring.",
+      "classification": "UNCLASSIFIED"
+    },
+    "classification": "NOT_APPLICABLE",
+    "reason": "Anonymous capture intentionally removes prior snapshot and forbids token-property reads.",
+    "expectedSourceLine": "f.principal = null;",
+    "localWitness": "assertTrue(WebDisplayContext.existing(f.request).isEmpty());",
+    "localWindowSha256": "a93568a8ebb1da6ec26496a01cf8cbc7263e2b34d35e686f5e387dfaeca23e46",
+    "dynamicAssertionReexecuted": false
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest.java",
+      "sourceSha256": "799e9338db6423bbcdc1229b6cd84473e04c437933dfcfe2011cf85026897147",
+      "ordinal": 230,
+      "attributes": {
+        "beginline": "161",
+        "endline": "161",
+        "begincolumn": "19",
+        "endcolumn": "23",
+        "rule": "NullAssignment",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "DisplaySnapshotPortTest",
+        "method": "restoreUsesRetainedValueAndFixedHeaderParameterDespiteReplacedForeignAttributes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+        "priority": "3"
+      },
+      "message": "Assigning an Object to null is a code smell. Consider refactoring.",
+      "classification": "UNCLASSIFIED"
+    },
+    "classification": "NOT_APPLICABLE",
+    "reason": "Restore uses retained projection even after principal replacement; explicit callback prohibition prevents re-reading.",
+    "expectedSourceLine": "f.principal = null;",
+    "localWitness": "restore must not read principal",
+    "localWindowSha256": "aedf778a766a9b81c819538962a8f6d0597f6a728c43e3a6f88576e362e22ab3",
+    "dynamicAssertionReexecuted": false
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
+      "sourceSha256": "566ee1b11c9f69ab1adf9192d63bb7ded248d752882980daf8cff38da7d3ee8d",
+      "ordinal": 234,
+      "attributes": {
+        "beginline": "144",
+        "endline": "144",
+        "begincolumn": "27",
+        "endcolumn": "31",
+        "rule": "NullAssignment",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "EncryptedSecurityContextPortTest",
+        "method": "storedMetadataArgumentAndStateFailuresUseFixedNonSensitiveSignal",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+        "priority": "3"
+      },
+      "message": "Assigning an Object to null is a code smell. Consider refactoring.",
+      "classification": "UNCLASSIFIED"
+    },
+    "classification": "NOT_APPLICABLE",
+    "reason": "Clear the preceding read fault before injecting the distinct session-metadata failure; never a production null default.",
+    "expectedSourceLine": "frame.readFailure = null;",
+    "localWitness": "frame.session.failure = failure;",
+    "localWindowSha256": "52b6c18f5c1128b32c2baf92acedfc4d82b2cf66e5e3cedfa3fdb1685fb2b589",
+    "dynamicAssertionReexecuted": false
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
+      "sourceSha256": "566ee1b11c9f69ab1adf9192d63bb7ded248d752882980daf8cff38da7d3ee8d",
+      "ordinal": 235,
+      "attributes": {
+        "beginline": "241",
+        "endline": "241",
+        "begincolumn": "25",
+        "endcolumn": "29",
+        "rule": "NullAssignment",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "EncryptedSecurityContextPortTest",
+        "method": "failedInitialReadUnlocksAndNeverCachesPartialContext",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+        "priority": "3"
+      },
+      "message": "Assigning an Object to null is a code smell. Consider refactoring.",
+      "classification": "UNCLASSIFIED"
+    },
+    "classification": "NOT_APPLICABLE",
+    "reason": "Retry the same deferred read after deliberate initial failure; ensure partial context was not cached and exactly two reads occurred.",
+    "expectedSourceLine": "frame.readFailure = null;",
+    "localWitness": "assertEquals(2, frame.sessionReads);",
+    "localWindowSha256": "5a25b056f0b3c613a40ddbc0605bca3e6dc366b3865a9466009ccd0f09a0fa44",
+    "dynamicAssertionReexecuted": false
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+      "sourceSha256": "1b23abc3012748d36be489230038a2509825049d1b24a58997ae6bde07e3b886",
+      "ordinal": 253,
+      "attributes": {
+        "beginline": "363",
+        "endline": "363",
+        "begincolumn": "21",
+        "endcolumn": "25",
+        "rule": "NullAssignment",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "ErrorControllerPortTest.Fixture",
+        "method": "prepareDisplay",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+        "priority": "3"
+      },
+      "message": "Assigning an Object to null is a code smell. Consider refactoring.",
+      "classification": "UNCLASSIFIED"
+    },
+    "classification": "NOT_APPLICABLE",
+    "reason": "Own fixture finally releases its temporary display-preparation principal and phase marker; does not retain an authentication grant.",
+    "expectedSourceLine": "principal = null;",
+    "localWitness": "preparingDisplay = false;",
+    "localWindowSha256": "38f04f90ce3bc41c1988e1d469f88198fd50117d3513e8e04b6e70f239695251",
+    "dynamicAssertionReexecuted": false
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRestorePortTest.java",
+      "sourceSha256": "f60066157a18c43c02ba149168feb56e92cfc80c394a162281678084a3a195a7",
+      "ordinal": 257,
+      "attributes": {
+        "beginline": "114",
+        "endline": "114",
+        "begincolumn": "29",
+        "endcolumn": "33",
+        "rule": "NullAssignment",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "ErrorDispatchRestorePortTest.Fixture",
+        "method": "captured",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+        "priority": "3"
+      },
+      "message": "Assigning an Object to null is a code smell. Consider refactoring.",
+      "classification": "UNCLASSIFIED"
+    },
+    "classification": "NOT_APPLICABLE",
+    "reason": "Own fixture finally clears temporary captured principal/phase and operations before the error-dispatch vector.",
+    "expectedSourceLine": "preparedPrincipal = null;",
+    "localWitness": "capturing = false;",
+    "localWindowSha256": "837bbaec5403c7f92d13c553a28af35db608c0bdd8929b9573ee68136ba78222",
+    "dynamicAssertionReexecuted": false
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRouterPortTest.java",
+      "sourceSha256": "1d204bd56bd055e8d19a14223a6dc4af17b74ea80e208f6defe6d835a27da5b6",
+      "ordinal": 260,
+      "attributes": {
+        "beginline": "176",
+        "endline": "176",
+        "begincolumn": "23",
+        "endcolumn": "27",
+        "rule": "NullAssignment",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "ErrorDispatchRouterPortTest",
+        "method": "missingContextAndAllCallbackFailuresClearOnlyOwnThreadAndNeverRetry",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+        "priority": "3"
+      },
+      "message": "Assigning an Object to null is a code smell. Consider refactoring.",
+      "classification": "UNCLASSIFIED"
+    },
+    "classification": "NOT_APPLICABLE",
+    "reason": "Explicit absent request-context vector must reject and clear only own thread; preserves original assertion without runtime replay.",
+    "expectedSourceLine": "missing.context = null;",
+    "localWitness": "assertThrows(",
+    "localWindowSha256": "e7883c83718260e440f033c6edca73d3cb9feeac710f86e079f63392c269f620",
+    "dynamicAssertionReexecuted": false
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java",
+      "sourceSha256": "57a78155f162e62428fbe44c8bf8777e98555dbef15e3dc42c17e02074e0cc40",
+      "ordinal": 214,
+      "attributes": {
+        "beginline": "245",
+        "endline": "245",
+        "begincolumn": "42",
+        "endcolumn": "58",
+        "rule": "CompareObjectsWithEquals",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "CaddyTransportPortTest.Fixture",
+        "method": "Fixture",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+        "priority": "3"
+      },
+      "message": "Use equals() to compare object references.",
+      "classification": "UNCLASSIFIED"
+    },
+    "classification": "NOT_APPLICABLE",
+    "reason": "Own HttpServletRequest Proxy implements Object identity equality and matching identity hashCode; invoking equals would recurse into this handler.",
+    "expectedSourceLine": "case \"equals\" -> proxy == args[0];",
+    "localWitness": "case \"hashCode\" -> System.identityHashCode(proxy);",
+    "localWindowSha256": "a5486bea05626c103e18e270fd62332162ee6a730ccc9f803815c2f0c3423b41",
+    "dynamicAssertionReexecuted": false
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java",
+      "sourceSha256": "57a78155f162e62428fbe44c8bf8777e98555dbef15e3dc42c17e02074e0cc40",
+      "ordinal": 216,
+      "attributes": {
+        "beginline": "268",
+        "endline": "268",
+        "begincolumn": "42",
+        "endcolumn": "58",
+        "rule": "CompareObjectsWithEquals",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "CaddyTransportPortTest.Fixture",
+        "method": "Fixture",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+        "priority": "3"
+      },
+      "message": "Use equals() to compare object references.",
+      "classification": "UNCLASSIFIED"
+    },
+    "classification": "NOT_APPLICABLE",
+    "reason": "Own HttpServletResponse Proxy implements Object identity equality and matching identity hashCode; no domain value comparison.",
+    "expectedSourceLine": "case \"equals\" -> proxy == args[0];",
+    "localWitness": "case \"hashCode\" -> System.identityHashCode(proxy);",
+    "localWindowSha256": "b723cd9d5747f3a040d442afd6575a65c41dd3827aacb390896373186cac1e63",
+    "dynamicAssertionReexecuted": false
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/FormCsrfRequestPortTest.java",
+      "sourceSha256": "d311bc55d91dd0dde8473fa27d7feb074d19d88e3e3d797f0efdc73a564aeb86",
+      "ordinal": 267,
+      "attributes": {
+        "beginline": "66",
+        "endline": "66",
+        "begincolumn": "36",
+        "endcolumn": "52",
+        "rule": "CompareObjectsWithEquals",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "FormCsrfRequestPortTest.Fixture",
+        "method": "asRequest",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+        "priority": "3"
+      },
+      "message": "Use equals() to compare object references.",
+      "classification": "UNCLASSIFIED"
+    },
+    "classification": "NOT_APPLICABLE",
+    "reason": "Own synthetic request Object.equals handler deliberately uses identity with matching hashCode; no value equality exemption.",
+    "expectedSourceLine": "case \"equals\" -> proxy == args[0];",
+    "localWitness": "case \"hashCode\" -> System.identityHashCode(proxy);",
+    "localWindowSha256": "83ad8afc900d696ed50c417948692f9ac8dd69c3bb8f9f1fd2eb7466d6ba6760",
+    "dynamicAssertionReexecuted": false
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/LoginFormConverterPortTest.java",
+      "sourceSha256": "dbe0637da47f5140a71942574e7f6faeb22a9896608b681fec0bfe73a6de8334",
+      "ordinal": 282,
+      "attributes": {
+        "beginline": "116",
+        "endline": "116",
+        "begincolumn": "36",
+        "endcolumn": "52",
+        "rule": "CompareObjectsWithEquals",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "LoginFormConverterPortTest.Fixture",
+        "method": "asRequest",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+        "priority": "3"
+      },
+      "message": "Use equals() to compare object references.",
+      "classification": "UNCLASSIFIED"
+    },
+    "classification": "NOT_APPLICABLE",
+    "reason": "Own synthetic Servlet request Object.equals implementation must not call itself recursively; identity-only port behavior.",
+    "expectedSourceLine": "case \"equals\" -> proxy == args[0];",
+    "localWitness": "case \"hashCode\" -> System.identityHashCode(proxy);",
+    "localWindowSha256": "caab4be6643ccfab7b1a8fba0c9e9f8f6daf81a098c356bba0b475e4d02f8b46",
+    "dynamicAssertionReexecuted": false
+  }
+]
