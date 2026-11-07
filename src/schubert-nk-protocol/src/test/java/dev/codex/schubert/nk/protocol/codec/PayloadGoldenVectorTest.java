@@ -145,14 +145,15 @@ class PayloadGoldenVectorTest {
             executor.submit(
                 () -> {
                   ready.countDown();
-                  start.await();
+                  assertTrue(start.await(10, java.util.concurrent.TimeUnit.SECONDS));
                   return codec.encode(values, false).copyData();
                 }));
       }
-      ready.await();
+      assertTrue(ready.await(10, java.util.concurrent.TimeUnit.SECONDS));
       start.countDown();
       for (Future<byte[]> future : futures) {
-        assertTrue(MessageDigest.isEqual(expected, future.get()));
+        assertTrue(
+            MessageDigest.isEqual(expected, future.get(10, java.util.concurrent.TimeUnit.SECONDS)));
       }
     }
     assertSame(codec, PayloadCodec.standard());
