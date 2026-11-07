@@ -24,6 +24,8 @@ import org.junit.jupiter.api.Test;
 
 /** NK-MSG-001/MQ003008/UI231232/SS321322; PT-JMS-MFACT001..008. No broker/provider. */
 final class JmsMessageFactoryPortTest {
+  private static final char EVENT_KIND = 'E';
+  private static final char RESPONSE_KIND = 'S';
   private static final String REQUEST_ID = "00000000-0000-0000-0000-000000000001";
   private static final String RESPONSE_ID = "00000000-0000-0000-0000-000000000002";
   private static final String SENT_AT = "20261107210000000";
@@ -183,13 +185,14 @@ final class JmsMessageFactoryPortTest {
     put(wire, 24, kind == 'Q' ? REQUEST_ID : RESPONSE_ID);
     put(wire, 60, REQUEST_ID);
     put(wire, 96, SENT_AT);
-    if (kind != 'E') put(wire, 113, "a".repeat(64)); // Public, non-live synthetic context only.
+    if (kind != EVENT_KIND)
+      put(wire, 113, "a".repeat(64)); // Public, non-live synthetic context only.
     put(wire, 177, "0256");
     put(wire, 181, String.format(Locale.ROOT, "%06d", dataLength));
     put(wire, 187, "000000");
     put(wire, 193, "000000");
     put(wire, 199, String.format(Locale.ROOT, "%09d", wire.length));
-    if (kind == 'S') put(wire, 208, "0000");
+    if (kind == RESPONSE_KIND) put(wire, 208, "0000");
     if (layout.equals(LOG_RESPONSE)) put(wire, 256, SENT_AT);
     if (layout.equals(ASYNC_RESPONSE) || layout.equals(INTERNAL_EVENT)) {
       put(wire, 256, "R".repeat(26));
