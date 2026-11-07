@@ -1,0 +1,469 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T03:10:14.687475+09:00",
+  "source": "5eebf3a86fbba3e6b74edda93ba20612d3eda4f5",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "tests": 21,
+  "newUniqueTests": 0,
+  "requalifiedExistingMethods": 21,
+  "declaredOriginalMethods": 22,
+  "notRunDeclaredMethods": [
+    {
+      "name": "webservice009MissingTerminalMetadataSignalsOwnerWithoutSuccessSample",
+      "reason": "Calls HttpMetricValve.signalFailure -> WebStartupException.preserveFatal; explicit four-held initialization not permitted.",
+      "state": "NOT_EXECUTED_HOLD_NOT_PASS"
+    }
+  ],
+  "wholeOriginal22Accepted": false,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 153,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 8,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 30,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 10,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 6,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "wholeTargetCodeCoverage100": true,
+  "currentDirectWholeSourceProof": 1,
+  "registeredWholeComponentDelta": null,
+  "sourceFilePhysicalClosure": {
+    "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding": {
+      "name": "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding",
+      "sourceFile": "WebServiceMetricBinding.java",
+      "methods": [
+        {
+          "name": "prepareContext",
+          "descriptor": "(Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/lang/Runnable;)Ldev/codex/schubert/nk/web/monitoring/WebMetricContext;",
+          "code": true
+        },
+        {
+          "name": "<init>",
+          "descriptor": "(Lcom/zaxxer/hikari/HikariPoolMXBean;Lcom/zaxxer/hikari/HikariConfigMXBean;Lio/micrometer/core/instrument/MeterRegistry;Ljava/lang/String;Ljava/lang/Runnable;)V",
+          "code": true
+        },
+        {
+          "name": "refresh",
+          "descriptor": "()V",
+          "code": true
+        },
+        {
+          "name": "createHttpObserver",
+          "descriptor": "()Ldev/codex/schubert/nk/web/monitoring/HttpMetricValve;",
+          "code": true
+        },
+        {
+          "name": "withHttpObserver",
+          "descriptor": "(Ljava/util/Map;)Ljava/util/Map;",
+          "code": true
+        },
+        {
+          "name": "lambda$prepareContext$0",
+          "descriptor": "(Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/lang/String;Ljava/lang/Runnable;Lio/micrometer/core/instrument/MeterRegistry;)Ldev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding;",
+          "code": true
+        }
+      ]
+    }
+  },
+  "physical": {
+    "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding": "632a4d99cbbc24242cf5f2ec31f187f37924b89cd1b5a222d617039e30b813e0"
+  },
+  "classIds": {
+    "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding": "865b65657f5efde2"
+  },
+  "normalObservedCrc": {
+    "dev/codex/schubert/nk/web/monitoring/WebMetricScrape": "992ecc4d349d9985",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource": "33887a765cf3f992",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetrics": "b780b17274fb295c",
+    "dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistration": "20ce4d0fae90e96f",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricBinding": "6cf7e9b5ff05ea06",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Method": "a3f6ef695aeb8ce0",
+    "dev/codex/schubert/nk/web/security/WebRequestContext": "e42b70150fa782df",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract": "b96a4a1a6bd5a8b1",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Metric": "abe268e3a3e71170",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Labels": "132e1c4462717b1a",
+    "dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporter": "010c22bafb5e879a",
+    "dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayload": "21eb01b2a4e90284",
+    "dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporter": "2e177567f6d586da",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricRecorder": "d19f0ab2d580c480",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder": "04a83c51d6fe5459",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricContext": "53d08daab115a01e",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricText": "073971182b6471fb",
+    "dev/codex/schubert/nk/web/monitoring/WebJvmMetrics": "8fcdfdf67055d85f",
+    "dev/codex/schubert/nk/web/logging/WebRequestTrace": "25604774c7e57112",
+    "dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry$OverflowSafeTimer": "0e82a6b808c09f35",
+    "dev/codex/schubert/nk/web/monitoring/WebSystemMetrics": "037de4fe7ccfc635",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$Counts": "a5d60413b34bf2c9",
+    "dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry": "fa5190ef8f6a9ebc",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservation": "89423cab2dbdd307",
+    "dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporter": "3e3f1dd1bb6b5fd9",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollector": "4cc538b0ac34f41c",
+    "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding": "865b65657f5efde2",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Status": "6c1c548555e371b4",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricValve": "f051ac5e3a6978c6",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricValve$Completion": "fda4cff7dbe455a4",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricCatalog": "c6fb51e7076fb8fe",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$State": "8013827b7743a951",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Route": "47b8326be6fad100"
+  },
+  "normalObservedCodeClasses": 33,
+  "normalProductInitializations": [
+    "dev/codex/schubert/nk/web/logging/WebRequestTrace",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$$Lambda+0x00000000101c5210",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Labels",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Method",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Metric",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Route",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Status",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricRecorder",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricRecorder$$Lambda+0x000000001019b330",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricValve",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricValve$Completion",
+    "dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry",
+    "dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry$$Lambda+0x0000000010199248",
+    "dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry$OverflowSafeTimer",
+    "dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporter",
+    "dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporter$$Lambda+0x00000000101ca5d8",
+    "dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporter$$Lambda+0x00000000101cac90",
+    "dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayload",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricBinding",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollector",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservation",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$$Lambda+0x000000001019c450",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$$Lambda+0x00000000101c8000",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$Counts",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$State",
+    "dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporter",
+    "dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporter$$Lambda+0x00000000101caed8",
+    "dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporter$$Lambda+0x00000000101cbcd0",
+    "dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporter",
+    "dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporter$$Lambda+0x00000000101c8250",
+    "dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporter$$Lambda+0x00000000101c8920",
+    "dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistration",
+    "dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistration$$Lambda+0x00000000101c3188",
+    "dev/codex/schubert/nk/web/monitoring/WebJvmMetrics",
+    "dev/codex/schubert/nk/web/monitoring/WebJvmMetrics$$Lambda+0x00000000101b5c40",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricCatalog",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricCatalog$$Lambda+0x00000000101c5458",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricContext",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricContext$$Lambda+0x0000000010194d40",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricContext$$Lambda+0x0000000010196b00",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricContext$$Lambda+0x0000000010197600",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricScrape",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricText",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricText$$Lambda+0x00000000101c58a8",
+    "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding",
+    "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding$$Lambda+0x00000000101948b8",
+    "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding$$Lambda+0x0000000010194b08",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource$$Lambda+0x0000000010195580",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource$$Lambda+0x00000000101957a8",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource$$Lambda+0x0000000010197190",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource$$Lambda+0x00000000101973c8",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource$$Lambda+0x00000000101b4f30",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetrics",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetrics$$Lambda+0x00000000101b53a0",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetrics$$Lambda+0x00000000101b55d0",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetrics$$Lambda+0x00000000101b5800",
+    "dev/codex/schubert/nk/web/monitoring/WebSystemMetrics",
+    "dev/codex/schubert/nk/web/monitoring/WebSystemMetrics$$Lambda+0x00000000101c1538",
+    "dev/codex/schubert/nk/web/security/WebRequestContext"
+  ],
+  "normalProductInitCount": 62,
+  "generatedLambdaOwners": {
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$$Lambda+0x00000000101c5210": "dev/codex/schubert/nk/web/monitoring/HttpMetricContract",
+    "dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporter$$Lambda+0x00000000101ca5d8": "dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporter",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricContext$$Lambda+0x0000000010194d40": "dev/codex/schubert/nk/web/monitoring/WebMetricContext",
+    "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding$$Lambda+0x0000000010194b08": "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding",
+    "dev/codex/schubert/nk/web/monitoring/WebSystemMetrics$$Lambda+0x00000000101c1538": "dev/codex/schubert/nk/web/monitoring/WebSystemMetrics",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource$$Lambda+0x0000000010197190": "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricRecorder$$Lambda+0x000000001019b330": "dev/codex/schubert/nk/web/monitoring/HttpMetricRecorder",
+    "dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporter$$Lambda+0x00000000101c8920": "dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporter",
+    "dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporter$$Lambda+0x00000000101cbcd0": "dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporter",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource$$Lambda+0x00000000101973c8": "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricContext$$Lambda+0x0000000010197600": "dev/codex/schubert/nk/web/monitoring/WebMetricContext",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$$Lambda+0x00000000101c8000": "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder",
+    "dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporter$$Lambda+0x00000000101c8250": "dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporter",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource$$Lambda+0x00000000101b4f30": "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetrics$$Lambda+0x00000000101b55d0": "dev/codex/schubert/nk/web/monitoring/WebStandardMetrics",
+    "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding$$Lambda+0x00000000101948b8": "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricCatalog$$Lambda+0x00000000101c5458": "dev/codex/schubert/nk/web/monitoring/WebMetricCatalog",
+    "dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporter$$Lambda+0x00000000101cac90": "dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporter",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetrics$$Lambda+0x00000000101b53a0": "dev/codex/schubert/nk/web/monitoring/WebStandardMetrics",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetrics$$Lambda+0x00000000101b5800": "dev/codex/schubert/nk/web/monitoring/WebStandardMetrics",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$$Lambda+0x000000001019c450": "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource$$Lambda+0x0000000010195580": "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource",
+    "dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporter$$Lambda+0x00000000101caed8": "dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporter",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricContext$$Lambda+0x0000000010196b00": "dev/codex/schubert/nk/web/monitoring/WebMetricContext",
+    "dev/codex/schubert/nk/web/monitoring/WebJvmMetrics$$Lambda+0x00000000101b5c40": "dev/codex/schubert/nk/web/monitoring/WebJvmMetrics",
+    "dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistration$$Lambda+0x00000000101c3188": "dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistration",
+    "dev/codex/schubert/nk/web/monitoring/WebMetricText$$Lambda+0x00000000101c58a8": "dev/codex/schubert/nk/web/monitoring/WebMetricText",
+    "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource$$Lambda+0x00000000101957a8": "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource",
+    "dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry$$Lambda+0x0000000010199248": "dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry"
+  },
+  "staticRaw": 9,
+  "staticApplicable": 0,
+  "checkstyle": 0,
+  "staticPreflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23390-web-service-metric21-source-preflight-v1/manifest.json",
+    "sha256": "0c23806c4dd43b822c3db6a85ad8accaf4c0d511f4874a681eac8d9b5e1fca14"
+  },
+  "styleRemedy": {
+    "bug": "BUG-2485",
+    "horizontal": "YKT-2223",
+    "before": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23400-web-service-metric-style-before-v1/manifest.json",
+      "sha256": "69cfb75abeaa05a5a8db3ffbc5a32a931ed085b148b4b746440b7f0f084a68ab"
+    },
+    "onlyAddedConstant": 1,
+    "onlyReplacedConditions": 4,
+    "allOtherCharactersEqualAfterInverse": true
+  },
+  "manualCoverageExclusions": [],
+  "standardCompilerFilters": "None required for this normal ordinary class; all six Code methods retained.",
+  "oldExecCombined": false,
+  "fixtureMethodsExecuted": 0,
+  "methodSelectionMetadataNegativeChecks": 2,
+  "sourceOracleRecipes": [
+    "status_class=\\\"2xx\\\"} 1.0",
+    "assertSame(primary, assertThrows(AssertionError.class, () -> valve.log(null, null, 1)));",
+    "assertEquals(2, duplicate.entrySet().size());",
+    "assertNotSame(first, second);"
+  ],
+  "emptyConfigHashes": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23394-web-service-metric21-unit-v1/empty-prometheus.properties": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23404-web-service-metric21-compile-v1/classes/prometheus.properties": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "actualWrapperTimeoutSeconds": 120,
+  "declaredToolUpperBoundSeconds": 180,
+  "ownSdkJdkActivity": [
+    "New ordinary selected Unit group and fresh quota; no original failed/native/Root scope invocation.",
+    "Compile only unchanged current WebServiceMetricBindingTest and its same public management-bean Fixture class, no original toolkit launcher; select-method exactly21.",
+    "Pinned normal source/JARs, SDK18 and JUnit; explicit own empty prometheus.config file plus first-CP empty prometheus.properties; c.ENV isolated, no logging/OTEL/driver provider.",
+    "Own JDK management/GC notification callbacks, possible JDK-internal own-VM OS counters/entropy are disclosed SDK effects, not custom FFM/target process or syscall-zero claims.",
+    "Never create/start/bind/stop a Tomcat server/Connector/Endpoint; only unstarted Request/Response metadata and declared fixed4 executor.",
+    "All contexts and registries close via original TWR/finally; all21 require true terminal XML/CRC/SourceFile counter/post and held4 init0. GC close evidence is code/vendor contract, not independently measured notification-listener cardinality.",
+    "No rewrite/extract/suppress original22 methods; held009 stays NOT_EXECUTED_HOLD, no success/skipped credit; full451/program/backend/native remains open."
+  ],
+  "independentGcListenerCardinality": null,
+  "sdkCloseEvidence": "Original TWR/finally assertions plus pinned vendor removeNotificationListener cleanup byte contract; listener cardinality is not independently measured.",
+  "actualTargetBackendRootVmNativeOperations": 0,
+  "heldFourInitializations": 0,
+  "environment": {
+    "file.encoding": "UTF-8",
+    "java.version": "25.0.4",
+    "os.arch": "amd64",
+    "os.name": "Linux",
+    "user.timezone": "Asia/Tokyo"
+  },
+  "caseTimings": [
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice010PoolSupplierFailureOrNullNeverAcquiresConfigurationOrRetries()",
+      "seconds": "0.003"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice002FactoryRejectsNullReferencesAndModeBeforeAcquisition()",
+      "seconds": "0.007"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice007TerminalIsRecordedOnceInSameCustomPayloadAsDatabase()",
+      "seconds": "0.037"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice008RedispatchAndConcurrentTerminalRetainRequestOwnedClaim()",
+      "seconds": "0.055"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice017NullMapEntryTypeAndValueNeverBecomeObserverDependencies()",
+      "seconds": "0.009"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice021TwoDependencySnapshotsOwnDistinctObserversButShareOneRecorder()",
+      "seconds": "0.027"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice001ConstructorBoundariesRejectWithoutGetterOrInvalidModeSeries()",
+      "seconds": "0.059"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice005IndependentObserversBorrowOneRetainedRecorderAndDatabaseRefresh()",
+      "seconds": "0.081"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice012DatabaseFailureNeverReturnsPartialTextOrReplaysHttpSuccess()",
+      "seconds": "0.029"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice003StandardFactoryDoesNotReadAnyDetailedSupplierOrCreateObserver()",
+      "seconds": "0.004"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice004DebugCapturesOwnerBeforeSetupThenDefersStatisticsUntilRender()",
+      "seconds": "0.237"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice020DependencyProviderFailureIsOriginalAndNeverRetriedOrFormatted()",
+      "seconds": "0.009"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice011ConfigurationSupplierFailureOrNullRetainsOriginalPrimaryAndPartialOwner()",
+      "seconds": "0.001"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice019ExistingObserverIsNotReplacedOrRegisteredTwice()",
+      "seconds": "0.008"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice006StandaloneStandardObserverNeverCreatesDetailedSeries()",
+      "seconds": "0"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice015EmptyDependenciesReceiveOneFreshObserverInImmutableCopy()",
+      "seconds": "0.008"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice013TerminalSignalFailureIsOriginalAndDoesNotTransferOwnership()",
+      "seconds": "0.026"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice014QuiescentContextCloseReleasesOnlyOwnedSdkAndRejectsNewAccess()",
+      "seconds": "0.026"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice018TypeMismatchAndPrimitiveKeyAreRejectedWithoutInputChanges()",
+      "seconds": "0.008"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice016DependencySnapshotPreservesValueIdentityAndIgnoresLaterInputMutation()",
+      "seconds": "0.007"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest",
+      "name": "webservice022MalformedMapDuplicateTypeNeverOverwritesDependencies()",
+      "seconds": "0.01"
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBindingTest.java": "9e9270a8d3c585ed255689878918db623848d6821b0a34dd5e2e602395963b8b",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservationTest.java": "a23735273bf31a1c8b7c68737355364b19bc5d20e18ab3c422448de4016ed98b",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java": "ee7591d71269a4238cdda10c5fbae3c7a61b37b8230f893776329e9d1df7ef64",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricContext.java": "75eb5457ae1a264b1606ef910fed53b148075456992c534a58f28455b1952b4f",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricBinding.java": "2ea187f82ff17dea4e1597ac2802cc72bb83b6c9cec2bfb7cadfb079753b1946",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservation.java": "327d739bd9ca972fe535baf86dfbe3d1e01a32f921f98c1a1114ab3ad302f021",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollector.java": "dc1b278e0d111128b2679b7943ae1cabe56ea55eb7cbdc0104503e2b99a46210",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java": "059f2723ecf118084c7b192d28f5d86a9e6e91e4769195efaec7300b54891a24",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricValve.java": "f7dd88544d4d690d19a519488904e058a4ee8c2d8b7595c75b0494b872204a75",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorder.java": "9ca3687779ab82d12966d3300d35d7acd8320e6020ad2d8acd0e829b55990483",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContract.java": "019f126d38fdfbfd60baf8f38c254201db2427e7a0c2087e052712812a889c03",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry.java": "29df7d74914a7a854c8d9ea345056ede3ca4d60cc0100f7c51b23efb2851a5a5",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource.java": "79b6691a61e4fc6cb716d7fe84a6390b7272df3d0944e693003bcdb51798a12c",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetrics.java": "18d8487e76e869b11147bab3786d7e765148d624b1a85c18dce33324e1eeca37",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebJvmMetrics.java": "5123139871a0b35ec106d067c6c8eab4b2b8a2e449c2ead53f54e1e797799b71",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebSystemMetrics.java": "3109070e589ccf2b8773a8aa49f74316f2db3c48a2d27747d733379d4f45d6b9",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistration.java": "2f75b4bd051580a5a5420b481ffb8beb5f00ef5707bbfc9ec8102cfd78e76af8",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayload.java": "bec3ebee4b555ed96ae14813c7c0e48744dd20c35b294c55ce791a14af527d44",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java": "f6f2729a533843f568d254ebbae1a17cf575c4570b2ab307023ff54154b9475c",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java": "b14439675537e10360d052246415ed3addcb68a757a78452d3127af767f6c9eb",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricScrape.java": "8eede3e2f4e31276765a6b9eb13eac2da118102aad8fef73647d0c08e10031d0",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporter.java": "63804a5937d78024748f2013e9f74fc5293e4174137599d5dfee4790dab00022",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporter.java": "a2524762cdc76d3f430cc76a6caf884cef86f39e61d341f399251006dee551d2",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporter.java": "a57917dc639fc2b920a22e97abae60e48cb0ca590e917737acef1902dfa3f49c",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricText.java": "082d4e882e21f430d8ccac9e01b7796ea722103fc144465f4ccc64aebf23d375",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalog.java": "dc32190fea57bb5e2082bc9bd52f3db51873c149cb4d23a524b0ca21dba6e17b",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeDurationSupport.java": "9e16eee7268e7d6f4d5821d1e61411eacf74568b8871424ba90f41edd2caaca2",
+    "evidence/01_PT/018_NK-OPS-001/input/418_web_service_metric21_qualifier.py": "76598be7eb333eb732d9ffbd9f88644274ace360f80c82f68a0eadde1a6f04e8",
+    "evidence/01_PT/018_NK-OPS-001/input/419_web_service_metric_scope.json": "cd33582200cc67fef3e79692107d7d74e89ad255d5b33c729aeb4afb4480114c"
+  },
+  "files": {
+    "original-classinfo-begin.safe.json": "f913618c83c1d9790de7bbf9d2e35d169e3c2a322d3f0aae80a10c0636e8db61",
+    "original-coverage.stdout": "235188873159f6f3131fc9f04f08ee26a3423dbe6e50261c5e90af1cda93d086",
+    "original-execinfo-begin.safe.json": "e1198d97d3e5f631ea2e44306bef71e94e109453f1c72b2627d68e57907f7916",
+    "original-coverage-exit.safe.json": "99643ddf51da4d33c95408d47a0d7acedfef4cc47b6f46375e609da56868fd10",
+    "original-classinfo-exit.safe.json": "ce3f8e5fd407da0f98c4e8aa27669045ef255cad22abc83ce889bb4397166657",
+    "original-unit-begin.safe.json": "438a4cb2efc5ccda1725a5e002130364c3ab947adcab5645089dcc1faed87866",
+    "original-unit-process.safe.json": "52c2e8b774f58c1583c6f6a75d5a86882d0a674b6b00e18f06c31e07bd8b9341",
+    "original-coverage-begin.safe.json": "8eb8eb503039d7309871c96bf656b15f139ae75705715893aa7d6e2e5b732ccf",
+    "original-classinfo.stdout": "dfae2f6baa8fea5f86ea9034fbc43ef59d58113790a7a666867ab6e3432a2874",
+    "original-empty-prometheus.properties": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-execinfo-process.safe.json": "5d873d5ecd1053dadb5baee3af1af99eb56b9f6cf6c497cf1fa448e9d00de473",
+    "original-coverage.xml": "b9890dcacd80fe67a9293fdba379a176e3d7aacf4eb6ba92b415b9beb35ee779",
+    "original-coverage-process.safe.json": "40ea91168cc994dcc087cdbc46c34e6e1db673776ea6624a564630c6f33810f8",
+    "original-execinfo-exit.safe.json": "5fbc179ccd4df51af39449b68687dded515399881332ed13f9002586362acaac",
+    "original-execinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "jacoco.exec": "6f9ccbfe016e36af70849750c490d668c159c157ae3bf7a913e982245660719c",
+    "original-execinfo.stdout": "a32cb9ac7a9131fb3008dafaad45f9632af8e7e9bc1e5ef525abf129d915d0ec",
+    "original-begin.json": "1a84872d63b409565f06e51d5f67414850995a880945382643ebe9f3a48d50ff",
+    "original-unit-exit.safe.json": "951bb8f8c31bf549db86ffa296d6e45760c58f8ad21acfb6ea4a58486bf226fc",
+    "original-classinfo-process.safe.json": "9fb8ef6c20f144576b3e029a515aa2abfc74b5bb66c12062533be9aac3c10ec6",
+    "original-unit.stderr": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58",
+    "original-manifest.json": "a7d0caecdc470a10fc5179f0ae4e2ea88f072b50a9053122c00a34e8472cc9e8",
+    "original-classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-coverage.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-class-init.stdout": "8166686430fd19391b8c1721c210b7239101c9df173d1beddb4538545937593f",
+    "original-unit.stdout": "e0eb981e5e4efed3c0f8a6d4a0d31cde54b739edb116cfc07a0976174fb72ee0",
+    "original-TEST-junit-jupiter.xml": "4dc97cdab290da4ff8c592ab38a67c1eb9f40a75c6f69463cd3d3bdf5a29d152",
+    "original-TEST-junit-platform-suite.xml": "d38e7ed44443ada741018fad4b1f0adafecc4edc665c3fe279fbc6bdf956cc28",
+    "original-TEST-junit-vintage.xml": "d262a921592508e22b1cd81bd484fd8e7b9088cda68196634760895b4db13283",
+    "static-pmd.stdout": "68c45c29f1afff379c4836ff2fb755f3f7284edfac6ea7ab36ab5a1b080641a9",
+    "static-checkstyle-exit.safe.json": "90edef09e1c5ef9d09bdecb46847142212c52f212dd39d30a0a401af6632a134",
+    "static-pmd.stderr": "e147a5d3585f0f8fc167e3fd3a142b9b625756c4cd83c742be2382a20c7cdbb1",
+    "static-pmd-exit.safe.json": "23111939b60c6e925b94ef1cfc7fd5a4710f407ca0945bfb16d44b8e5033597b",
+    "static-checkstyle-process.safe.json": "409ab72298b8f0d018b43227b6af3e0fa484c2200075a56ff74335f253a85b5d",
+    "static-pmd-begin.safe.json": "010e1f11add141cf3def03740655d1db176476be9a65a29ea0b874d1512863d0",
+    "static-sources.txt": "533a7e2c8e1f9532c18ad22cda168b1954b12ee20aa292cae87fdb2f460f4e1a",
+    "static-pmd-process.safe.json": "9ad609c8472dec42341987280c2dbd1665faf25fc3f88886801d2d89accbab74",
+    "static-checkstyle.xml": "f496606809fca79d99c461c678ec6d9d45075e57210e9fb3401e31513e1b63a7",
+    "static-checkstyle-begin.safe.json": "2931c8bfd9b59d979a55bd72e6b8d340a173e916adc54c13bb7c29732914e859",
+    "static-checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "static-manifest.json": "beb84fd52b2017468f3d1b73791218bbbd2f370711c2afa430755b116a1e3b3e",
+    "static-pmd.xml": "0aec04eca6e7f007edc09f576319763e9ce02f76b8f03c781d95e3827fc80164",
+    "static-checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/421_web_service_metric21_independent_post.py",
+    "sha256": "5b58ec5c197c3a0a3a09f108a41f71ff0061b80d2553109a9648830cb747c841"
+  }
+}

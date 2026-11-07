@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-08T03:02:58.055">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservationTest.java">
+<violation beginline="35" endline="35" begincolumn="34" endcolumn="58" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.web.monitoring" class="WebDbPoolMetricObservationTest.Fixture" variable="faults" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="49" endline="49" begincolumn="15" endcolumn="54" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.monitoring" class="WebDbPoolMetricObservationTest.Fixture" method="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="63" endline="63" begincolumn="15" endcolumn="56" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.monitoring" class="WebDbPoolMetricObservationTest.Fixture" method="config" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="179" endline="179" begincolumn="21" endcolumn="52" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.monitoring" class="WebDbPoolMetricObservationTest" method="webPoolRead007ParallelOwnedInterfacesCannotShareMutableObservationState" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="180" endline="180" begincolumn="20" endcolumn="83" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.monitoring" class="WebDbPoolMetricObservationTest" method="webPoolRead007ParallelOwnedInterfacesCannotShareMutableObservationState" variable="actual" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBindingTest.java">
+<violation beginline="291" endline="291" begincolumn="23" endcolumn="54" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.monitoring" class="WebServiceMetricBindingTest" method="webservice008RedispatchAndConcurrentTerminalRetainRequestOwnedClaim" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="300" endline="300" begincolumn="18" endcolumn="81" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.monitoring" class="WebServiceMetricBindingTest" method="webservice008RedispatchAndConcurrentTerminalRetainRequestOwnedClaim" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="572" endline="579" begincolumn="39" endcolumn="12" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.web.monitoring" class="WebServiceMetricBindingTest" method="webservice020DependencyProviderFailureIsOriginalAndNeverRetriedOrFormatted" variable="bad" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="584" endline="591" begincolumn="39" endcolumn="12" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.web.monitoring" class="WebServiceMetricBindingTest" method="webservice020DependencyProviderFailureIsOriginalAndNeverRetriedOrFormatted" variable="fatalMap" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+</file>
+</pmd>
