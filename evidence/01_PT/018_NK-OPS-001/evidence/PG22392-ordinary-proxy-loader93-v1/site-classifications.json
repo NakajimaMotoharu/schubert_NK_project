@@ -1,0 +1,3171 @@
+[
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCriticalAuditPortTest.java",
+      "sourceSha256": "a707009744a511335e897bcc0137281a54ff76ad0961e8fa88c3196abff11575",
+      "ordinal": 7,
+      "attributes": {
+        "beginline": "833",
+        "endline": "833",
+        "begincolumn": "15",
+        "endcolumn": "48",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.application.admin",
+        "class": "UserCriticalAuditPortTest.Jdbc",
+        "method": "connection",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Connection.class.getClassLoader()",
+      "interfaceExpression": "Connection.class",
+      "resolvedInterface": "java.sql.Connection",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Connection.class.getClassLoader(),\n              new Class<?>[] {Connection.class},",
+      "callPrefixSha256": "f34bb43eafbc01e587a94162b734ee45978601008b9e964ca4ea03fc9a0a08ee",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCriticalAuditPortTest.java",
+      "sourceSha256": "a707009744a511335e897bcc0137281a54ff76ad0961e8fa88c3196abff11575",
+      "ordinal": 8,
+      "attributes": {
+        "beginline": "850",
+        "endline": "850",
+        "begincolumn": "15",
+        "endcolumn": "55",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.application.admin",
+        "class": "UserCriticalAuditPortTest.Jdbc",
+        "method": "statement",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "PreparedStatement.class.getClassLoader()",
+      "interfaceExpression": "PreparedStatement.class",
+      "resolvedInterface": "java.sql.PreparedStatement",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              PreparedStatement.class.getClassLoader(),\n              new Class<?>[] {PreparedStatement.class},",
+      "callPrefixSha256": "b6a59a8d277384ac9ec9ca5c6d02e747af90a596c22a397f36fbd396ae29309a",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest.java",
+      "sourceSha256": "a0ae26af387cc48d71f28c47b89866a2c50c192b965838321860a773ea91daaf",
+      "ordinal": 14,
+      "attributes": {
+        "beginline": "473",
+        "endline": "473",
+        "begincolumn": "15",
+        "endcolumn": "48",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.application.question",
+        "class": "QuestionCriticalAuditPortTest.Jdbc",
+        "method": "connection",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Connection.class.getClassLoader()",
+      "interfaceExpression": "Connection.class",
+      "resolvedInterface": "java.sql.Connection",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Connection.class.getClassLoader(),\n              new Class<?>[] {Connection.class},",
+      "callPrefixSha256": "f34bb43eafbc01e587a94162b734ee45978601008b9e964ca4ea03fc9a0a08ee",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCriticalAuditPortTest.java",
+      "sourceSha256": "a0ae26af387cc48d71f28c47b89866a2c50c192b965838321860a773ea91daaf",
+      "ordinal": 15,
+      "attributes": {
+        "beginline": "489",
+        "endline": "489",
+        "begincolumn": "15",
+        "endcolumn": "55",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.application.question",
+        "class": "QuestionCriticalAuditPortTest.Jdbc",
+        "method": "statement",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "PreparedStatement.class.getClassLoader()",
+      "interfaceExpression": "PreparedStatement.class",
+      "resolvedInterface": "java.sql.PreparedStatement",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              PreparedStatement.class.getClassLoader(),\n              new Class<?>[] {PreparedStatement.class},",
+      "callPrefixSha256": "b6a59a8d277384ac9ec9ca5c6d02e747af90a596c22a397f36fbd396ae29309a",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionPortTest.java",
+      "sourceSha256": "7b43c7f43b71023db194e7bfda91ca808323839f5f456e30c39f5cdd2ca76ffa",
+      "ordinal": 21,
+      "attributes": {
+        "beginline": "264",
+        "endline": "264",
+        "begincolumn": "15",
+        "endcolumn": "48",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.messaging.inbound",
+        "class": "InboundTransactionPortTest.Fixture",
+        "method": "context",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "JMSContext.class.getClassLoader()",
+      "interfaceExpression": "JMSContext.class",
+      "resolvedInterface": "jakarta.jms.JMSContext",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              JMSContext.class.getClassLoader(),\n              new Class<?>[] {JMSContext.class},",
+      "callPrefixSha256": "239a1d8c23b6fbdc9d6a8e74ec6e7c9b6572e599f6ad71b5c2b7949ccd6c2dc4",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionPortTest.java",
+      "sourceSha256": "7b43c7f43b71023db194e7bfda91ca808323839f5f456e30c39f5cdd2ca76ffa",
+      "ordinal": 22,
+      "attributes": {
+        "beginline": "289",
+        "endline": "289",
+        "begincolumn": "15",
+        "endcolumn": "49",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.messaging.inbound",
+        "class": "InboundTransactionPortTest.Fixture",
+        "method": "producer",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "JMSProducer.class.getClassLoader()",
+      "interfaceExpression": "JMSProducer.class",
+      "resolvedInterface": "jakarta.jms.JMSProducer",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              JMSProducer.class.getClassLoader(),\n              new Class<?>[] {JMSProducer.class},",
+      "callPrefixSha256": "f1c3cee2ea3a9710292412ade20d9c4879c4004a17076914153fb50c88a98787",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionPortTest.java",
+      "sourceSha256": "7b43c7f43b71023db194e7bfda91ca808323839f5f456e30c39f5cdd2ca76ffa",
+      "ordinal": 23,
+      "attributes": {
+        "beginline": "316",
+        "endline": "316",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.messaging.inbound",
+        "class": "InboundTransactionPortTest.Fixture",
+        "method": "message",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Message.class.getClassLoader()",
+      "interfaceExpression": "Message.class",
+      "resolvedInterface": "jakarta.jms.Message",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Message.class.getClassLoader(),\n              new Class<?>[] {Message.class},",
+      "callPrefixSha256": "147f07cfed571232e78f6d46dc247483af73ea4355c88b500269a830d4e72ae3",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "sourceSha256": "60029426a27efd8f06ec26ab2adf7409d026d8e39b303c59503336fcebd3913a",
+      "ordinal": 25,
+      "attributes": {
+        "beginline": "118",
+        "endline": "118",
+        "begincolumn": "45",
+        "endcolumn": "66",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "JdbcOutboxPortTest",
+        "method": "port",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type},",
+      "callPrefixSha256": "1b03bdc1bc834e96a5df630ea21feabcc1c1eff15c2f15bd20779472853b88e1",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxReturningIdContractTest.java",
+      "sourceSha256": "a2b97f85348f8f5f9eea61f734e5093fdcad1d8e27e14e6cfb31b9e2ce130ef9",
+      "ordinal": 30,
+      "attributes": {
+        "beginline": "19",
+        "endline": "19",
+        "begincolumn": "45",
+        "endcolumn": "66",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OutboxReturningIdContractTest",
+        "method": "port",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type},",
+      "callPrefixSha256": "1b03bdc1bc834e96a5df630ea21feabcc1c1eff15c2f15bd20779472853b88e1",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxPublicationPortTest.java",
+      "sourceSha256": "ced23dbc3046eb10ed953b5b3f3268a027d3c1cf55e2dd6f4d24f2d081492838",
+      "ordinal": 36,
+      "attributes": {
+        "beginline": "205",
+        "endline": "205",
+        "begincolumn": "19",
+        "endcolumn": "52",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "class": "ApiOutboxPublicationPortTest.Fixture",
+        "method": "Fixture",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Connection.class.getClassLoader()",
+      "interfaceExpression": "Connection.class",
+      "resolvedInterface": "java.sql.Connection",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  Connection.class.getClassLoader(),\n                  new Class<?>[] {Connection.class},",
+      "callPrefixSha256": "d3eaa0831db0c765640def00d5fb725a41c869ed7ead6ee18048ac4906d806f3",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxPublicationPortTest.java",
+      "sourceSha256": "ced23dbc3046eb10ed953b5b3f3268a027d3c1cf55e2dd6f4d24f2d081492838",
+      "ordinal": 37,
+      "attributes": {
+        "beginline": "251",
+        "endline": "251",
+        "begincolumn": "19",
+        "endcolumn": "52",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "class": "ApiOutboxPublicationPortTest.Fixture",
+        "method": "attempt",
+        "variable": "pool",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "DataSource.class.getClassLoader()",
+      "interfaceExpression": "DataSource.class",
+      "resolvedInterface": "javax.sql.DataSource",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  DataSource.class.getClassLoader(),\n                  new Class<?>[] {DataSource.class},",
+      "callPrefixSha256": "4deb6f6cbb9781751a2336c5d0132a4156a5d9b3696aad81edaccfc831995e64",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxPublicationPortTest.java",
+      "sourceSha256": "ced23dbc3046eb10ed953b5b3f3268a027d3c1cf55e2dd6f4d24f2d081492838",
+      "ordinal": 38,
+      "attributes": {
+        "beginline": "268",
+        "endline": "268",
+        "begincolumn": "15",
+        "endcolumn": "55",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "class": "ApiOutboxPublicationPortTest.Fixture",
+        "method": "statement",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "PreparedStatement.class.getClassLoader()",
+      "interfaceExpression": "PreparedStatement.class",
+      "resolvedInterface": "java.sql.PreparedStatement",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              PreparedStatement.class.getClassLoader(),\n              new Class<?>[] {PreparedStatement.class},",
+      "callPrefixSha256": "b6a59a8d277384ac9ec9ca5c6d02e747af90a596c22a397f36fbd396ae29309a",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxPublicationPortTest.java",
+      "sourceSha256": "ced23dbc3046eb10ed953b5b3f3268a027d3c1cf55e2dd6f4d24f2d081492838",
+      "ordinal": 39,
+      "attributes": {
+        "beginline": "290",
+        "endline": "290",
+        "begincolumn": "15",
+        "endcolumn": "47",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "class": "ApiOutboxPublicationPortTest.Fixture",
+        "method": "resultSet",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "ResultSet.class.getClassLoader()",
+      "interfaceExpression": "ResultSet.class",
+      "resolvedInterface": "java.sql.ResultSet",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              ResultSet.class.getClassLoader(),\n              new Class<?>[] {ResultSet.class},",
+      "callPrefixSha256": "967e116ca94ab5aaf187b052e8929ddf17a2189aec2505b4768b60ffdb2d3ff0",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.java",
+      "sourceSha256": "3e1ae38ba52644c2027a712bd22ea165c29e42f6d044712c6d61d70ce1d4516f",
+      "ordinal": 40,
+      "attributes": {
+        "beginline": "74",
+        "endline": "74",
+        "begincolumn": "45",
+        "endcolumn": "66",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AdminPreludeJdbcPortTest",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type},",
+      "callPrefixSha256": "1b03bdc1bc834e96a5df630ea21feabcc1c1eff15c2f15bd20779472853b88e1",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationVerifierJdbcPortTest.java",
+      "sourceSha256": "9f8e0b379cbfcbfc8bee9e64eb2f119d719435b433befbb9c43225487afae089",
+      "ordinal": 46,
+      "attributes": {
+        "beginline": "63",
+        "endline": "63",
+        "begincolumn": "45",
+        "endcolumn": "66",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AuthenticationVerifierJdbcPortTest",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type},",
+      "callPrefixSha256": "1b03bdc1bc834e96a5df630ea21feabcc1c1eff15c2f15bd20779472853b88e1",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptPortTest.java",
+      "sourceSha256": "597ac4c0db04c217937a1bec0a37d2ca2bc441825f648aaff5014e862b27f4f1",
+      "ordinal": 56,
+      "attributes": {
+        "beginline": "512",
+        "endline": "512",
+        "begincolumn": "15",
+        "endcolumn": "48",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "LoginAttemptPortTest.Fixture",
+        "method": "connection",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Connection.class.getClassLoader()",
+      "interfaceExpression": "Connection.class",
+      "resolvedInterface": "java.sql.Connection",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Connection.class.getClassLoader(),\n              new Class<?>[] {Connection.class},",
+      "callPrefixSha256": "f34bb43eafbc01e587a94162b734ee45978601008b9e964ca4ea03fc9a0a08ee",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptPortTest.java",
+      "sourceSha256": "597ac4c0db04c217937a1bec0a37d2ca2bc441825f648aaff5014e862b27f4f1",
+      "ordinal": 58,
+      "attributes": {
+        "beginline": "570",
+        "endline": "570",
+        "begincolumn": "15",
+        "endcolumn": "55",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "LoginAttemptPortTest.Statement",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "PreparedStatement.class.getClassLoader()",
+      "interfaceExpression": "PreparedStatement.class",
+      "resolvedInterface": "java.sql.PreparedStatement",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              PreparedStatement.class.getClassLoader(),\n              new Class<?>[] {PreparedStatement.class},",
+      "callPrefixSha256": "b6a59a8d277384ac9ec9ca5c6d02e747af90a596c22a397f36fbd396ae29309a",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptPortTest.java",
+      "sourceSha256": "597ac4c0db04c217937a1bec0a37d2ca2bc441825f648aaff5014e862b27f4f1",
+      "ordinal": 59,
+      "attributes": {
+        "beginline": "609",
+        "endline": "609",
+        "begincolumn": "15",
+        "endcolumn": "47",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "LoginAttemptPortTest.Statement",
+        "method": "rows",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "ResultSet.class.getClassLoader()",
+      "interfaceExpression": "ResultSet.class",
+      "resolvedInterface": "java.sql.ResultSet",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              ResultSet.class.getClassLoader(),\n              new Class<?>[] {ResultSet.class},",
+      "callPrefixSha256": "967e116ca94ab5aaf187b052e8929ddf17a2189aec2505b4768b60ffdb2d3ff0",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAuditPortTest.java",
+      "sourceSha256": "4fce0913d8f41edf31ffd8d6097b758845005a0e4021e111c1ff182a54d2c834",
+      "ordinal": 65,
+      "attributes": {
+        "beginline": "317",
+        "endline": "317",
+        "begincolumn": "15",
+        "endcolumn": "48",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "LoginAuditPortTest.Fixture",
+        "method": "connection",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Connection.class.getClassLoader()",
+      "interfaceExpression": "Connection.class",
+      "resolvedInterface": "java.sql.Connection",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Connection.class.getClassLoader(),\n              new Class<?>[] {Connection.class},",
+      "callPrefixSha256": "f34bb43eafbc01e587a94162b734ee45978601008b9e964ca4ea03fc9a0a08ee",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAuditPortTest.java",
+      "sourceSha256": "4fce0913d8f41edf31ffd8d6097b758845005a0e4021e111c1ff182a54d2c834",
+      "ordinal": 66,
+      "attributes": {
+        "beginline": "331",
+        "endline": "331",
+        "begincolumn": "15",
+        "endcolumn": "55",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "LoginAuditPortTest.Fixture",
+        "method": "statement",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "PreparedStatement.class.getClassLoader()",
+      "interfaceExpression": "PreparedStatement.class",
+      "resolvedInterface": "java.sql.PreparedStatement",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              PreparedStatement.class.getClassLoader(),\n              new Class<?>[] {PreparedStatement.class},",
+      "callPrefixSha256": "b6a59a8d277384ac9ec9ca5c6d02e747af90a596c22a397f36fbd396ae29309a",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionAuditPortTest.java",
+      "sourceSha256": "64179428f24f1c78e6e93e320de1a840dfa0beab09538396e1df02a98557c67e",
+      "ordinal": 71,
+      "attributes": {
+        "beginline": "320",
+        "endline": "320",
+        "begincolumn": "45",
+        "endcolumn": "66",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionAuditPortTest",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type},",
+      "callPrefixSha256": "1b03bdc1bc834e96a5df630ea21feabcc1c1eff15c2f15bd20779472853b88e1",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionIssueJdbcPortTest.java",
+      "sourceSha256": "367458b115a8e5f3705fb6cd5bbc4db1728d15ea6bae0b41c7e7832d06ea04d8",
+      "ordinal": 72,
+      "attributes": {
+        "beginline": "82",
+        "endline": "82",
+        "begincolumn": "45",
+        "endcolumn": "66",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionIssueJdbcPortTest",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type},",
+      "callPrefixSha256": "1b03bdc1bc834e96a5df630ea21feabcc1c1eff15c2f15bd20779472853b88e1",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionRevocationJdbcPortTest.java",
+      "sourceSha256": "4fa2ce49efef57b89472882f7347c50d6ccf61705d8e559c5bed1e2a3d8425dc",
+      "ordinal": 77,
+      "attributes": {
+        "beginline": "85",
+        "endline": "85",
+        "begincolumn": "45",
+        "endcolumn": "66",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "SessionRevocationJdbcPortTest",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type},",
+      "callPrefixSha256": "1b03bdc1bc834e96a5df630ea21feabcc1c1eff15c2f15bd20779472853b88e1",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "sourceSha256": "5a864a1941b8a9e3e36cef80b296b32c01c5b3910923cc502735920469822ca0",
+      "ordinal": 95,
+      "attributes": {
+        "beginline": "682",
+        "endline": "682",
+        "begincolumn": "45",
+        "endcolumn": "66",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.cleanup",
+        "class": "LogCleanupTransactionPortTest",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type},",
+      "callPrefixSha256": "1b03bdc1bc834e96a5df630ea21feabcc1c1eff15c2f15bd20779472853b88e1",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorPolicyPortTest.java",
+      "sourceSha256": "939b60c7aa351a123682b5e2542f707ba26b104cefd5eaa2baffbc828e0f2774",
+      "ordinal": 96,
+      "attributes": {
+        "beginline": "364",
+        "endline": "364",
+        "begincolumn": "13",
+        "endcolumn": "49",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.mq",
+        "class": "AcceptorPolicyPortTest",
+        "method": "unusedSession",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "ClientSession.class.getClassLoader()",
+      "interfaceExpression": "ClientSession.class",
+      "resolvedInterface": "org.apache.activemq.artemis.api.core.client.ClientSession",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n            ClientSession.class.getClassLoader(),\n            new Class<?>[] {ClientSession.class},",
+      "callPrefixSha256": "2c7d52f87d85d9b8f0ec04016cbee2d73e683cdd720cef8243221c4126f4b43e",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/QueuePressurePolicyTest.java",
+      "sourceSha256": "ecd3414896569f9a81fe3be323c405e02eb3d34472fb54a7d89377f1a60bb570",
+      "ordinal": 99,
+      "attributes": {
+        "beginline": "225",
+        "endline": "225",
+        "begincolumn": "17",
+        "endcolumn": "47",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.mq",
+        "class": "QueuePressurePolicyTest.Fixture",
+        "variable": "borrowed",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "ClientSession.class",
+      "resolvedInterface": "org.apache.activemq.artemis.api.core.client.ClientSession",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                Fixture.class.getClassLoader(),\n                new Class<?>[] {ClientSession.class},",
+      "callPrefixSha256": "562b6098884294a1184caf47efa61d79bbe230614989d642515fc526279d6193",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/TopologyQueryPortTest.java",
+      "sourceSha256": "c644e3b17656f568490c89e7e0f92aaa1b0d211997f25a111ae3f203f85b4fcf",
+      "ordinal": 102,
+      "attributes": {
+        "beginline": "241",
+        "endline": "241",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.mq",
+        "class": "TopologyQueryPortTest.Fixture",
+        "method": "session",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "ClientSession.class",
+      "resolvedInterface": "org.apache.activemq.artemis.api.core.client.ClientSession",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {ClientSession.class},",
+      "callPrefixSha256": "66ab2584b33de468e82b43dc961623ba21c345e5124edc02621c762f88a0a03a",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/TopologyQueryPortTest.java",
+      "sourceSha256": "c644e3b17656f568490c89e7e0f92aaa1b0d211997f25a111ae3f203f85b4fcf",
+      "ordinal": 103,
+      "attributes": {
+        "beginline": "282",
+        "endline": "282",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.mq",
+        "class": "TopologyQueryPortTest.Fixture",
+        "method": "addressResponse",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "ClientSession.AddressQuery.class",
+      "resolvedInterface": "org.apache.activemq.artemis.api.core.client.ClientSession.AddressQuery",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {ClientSession.AddressQuery.class},",
+      "callPrefixSha256": "72625284209de303649d512aa7a0b928e21f3ae9debff4a4f1bff46f34ec3cb7",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/TopologyQueryPortTest.java",
+      "sourceSha256": "c644e3b17656f568490c89e7e0f92aaa1b0d211997f25a111ae3f203f85b4fcf",
+      "ordinal": 104,
+      "attributes": {
+        "beginline": "310",
+        "endline": "310",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.mq",
+        "class": "TopologyQueryPortTest.Fixture",
+        "method": "queueResponse",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "ClientSession.QueueQuery.class",
+      "resolvedInterface": "org.apache.activemq.artemis.api.core.client.ClientSession.QueueQuery",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {ClientSession.QueueQuery.class},",
+      "callPrefixSha256": "58df0ed49ad9125f3411e15e240b635af2142281f6330efb63e3eb80ed3f79de",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+      "sourceSha256": "8e73b55c5cb6f850fe41c64c5ff5684f190fdbec16742782c2bc26af4078feb9",
+      "ordinal": 120,
+      "attributes": {
+        "beginline": "355",
+        "endline": "355",
+        "begincolumn": "19",
+        "endcolumn": "60",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "BackupPairPortTest",
+        "method": "terminalFalseSkipBranchAndTypedColumnFailuresDoNotCreateCapabilities",
+        "variable": "driver",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "BackupPairPortTest.class.getClassLoader()",
+      "interfaceExpression": "ResultSet.class",
+      "resolvedInterface": "java.sql.ResultSet",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  BackupPairPortTest.class.getClassLoader(),\n                  new Class<?>[] {ResultSet.class},",
+      "callPrefixSha256": "76e737b50e2af85607bbb043657389bd9c41c2455672009457d7d05a2a002c9e",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+      "sourceSha256": "8e73b55c5cb6f850fe41c64c5ff5684f190fdbec16742782c2bc26af4078feb9",
+      "ordinal": 122,
+      "attributes": {
+        "beginline": "463",
+        "endline": "463",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "BackupPairPortTest.Fixture",
+        "method": "connection",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "Connection.class",
+      "resolvedInterface": "java.sql.Connection",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {Connection.class},",
+      "callPrefixSha256": "e93e8ab36f48ca5ab60cc3904f0c36d9a814441a31953928fcb7d22bff8d3f25",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+      "sourceSha256": "8e73b55c5cb6f850fe41c64c5ff5684f190fdbec16742782c2bc26af4078feb9",
+      "ordinal": 123,
+      "attributes": {
+        "beginline": "488",
+        "endline": "488",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "BackupPairPortTest.Fixture",
+        "method": "statement",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "PreparedStatement.class",
+      "resolvedInterface": "java.sql.PreparedStatement",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {PreparedStatement.class},",
+      "callPrefixSha256": "3fc507a0832986b1064c60e17aabf36d8c16fd40ffa772a74c2e1181cc30fb9f",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+      "sourceSha256": "8e73b55c5cb6f850fe41c64c5ff5684f190fdbec16742782c2bc26af4078feb9",
+      "ordinal": 124,
+      "attributes": {
+        "beginline": "558",
+        "endline": "558",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "BackupPairPortTest.Fixture",
+        "method": "result",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "ResultSet.class",
+      "resolvedInterface": "java.sql.ResultSet",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {ResultSet.class},",
+      "callPrefixSha256": "b38b4f0eb1f10007f3d8854c5092e7962ac8a35ab53f2ae193d1a41860836642",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunAuditPortTest.java",
+      "sourceSha256": "4b8f593bfa4071f47d1586ef2576b01228140a36fd40c40c80f60b5cbd7a6315",
+      "ordinal": 128,
+      "attributes": {
+        "beginline": "674",
+        "endline": "674",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "BatchRunAuditPortTest.Fixture",
+        "method": "connection",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "Connection.class",
+      "resolvedInterface": "java.sql.Connection",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {Connection.class},",
+      "callPrefixSha256": "e93e8ab36f48ca5ab60cc3904f0c36d9a814441a31953928fcb7d22bff8d3f25",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunAuditPortTest.java",
+      "sourceSha256": "4b8f593bfa4071f47d1586ef2576b01228140a36fd40c40c80f60b5cbd7a6315",
+      "ordinal": 129,
+      "attributes": {
+        "beginline": "712",
+        "endline": "712",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "BatchRunAuditPortTest.Fixture",
+        "method": "statement",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "PreparedStatement.class",
+      "resolvedInterface": "java.sql.PreparedStatement",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {PreparedStatement.class},",
+      "callPrefixSha256": "3fc507a0832986b1064c60e17aabf36d8c16fd40ffa772a74c2e1181cc30fb9f",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunAuditPortTest.java",
+      "sourceSha256": "4b8f593bfa4071f47d1586ef2576b01228140a36fd40c40c80f60b5cbd7a6315",
+      "ordinal": 130,
+      "attributes": {
+        "beginline": "774",
+        "endline": "774",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "BatchRunAuditPortTest.Fixture",
+        "method": "rows",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "ResultSet.class",
+      "resolvedInterface": "java.sql.ResultSet",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {ResultSet.class},",
+      "callPrefixSha256": "b38b4f0eb1f10007f3d8854c5092e7962ac8a35ab53f2ae193d1a41860836642",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupQueryPortTest.java",
+      "sourceSha256": "b7517573044d2ba929a57914956194b2db053cf189d464af443932619eba7387",
+      "ordinal": 133,
+      "attributes": {
+        "beginline": "350",
+        "endline": "350",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "CleanupQueryPortTest.Fixture",
+        "method": "connection",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "Connection.class",
+      "resolvedInterface": "java.sql.Connection",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {Connection.class},",
+      "callPrefixSha256": "e93e8ab36f48ca5ab60cc3904f0c36d9a814441a31953928fcb7d22bff8d3f25",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupQueryPortTest.java",
+      "sourceSha256": "b7517573044d2ba929a57914956194b2db053cf189d464af443932619eba7387",
+      "ordinal": 134,
+      "attributes": {
+        "beginline": "372",
+        "endline": "372",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "CleanupQueryPortTest.Fixture",
+        "method": "statement",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "PreparedStatement.class",
+      "resolvedInterface": "java.sql.PreparedStatement",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {PreparedStatement.class},",
+      "callPrefixSha256": "3fc507a0832986b1064c60e17aabf36d8c16fd40ffa772a74c2e1181cc30fb9f",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupQueryPortTest.java",
+      "sourceSha256": "b7517573044d2ba929a57914956194b2db053cf189d464af443932619eba7387",
+      "ordinal": 135,
+      "attributes": {
+        "beginline": "402",
+        "endline": "402",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "CleanupQueryPortTest.Fixture",
+        "method": "resultSet",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "ResultSet.class",
+      "resolvedInterface": "java.sql.ResultSet",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {ResultSet.class},",
+      "callPrefixSha256": "b38b4f0eb1f10007f3d8854c5092e7962ac8a35ab53f2ae193d1a41860836642",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepPortTest.java",
+      "sourceSha256": "64711edddb85a9862ebfd892a27d03582847bad648759025185babbb00e77e52",
+      "ordinal": 138,
+      "attributes": {
+        "beginline": "395",
+        "endline": "395",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "CleanupStepPortTest.Fixture",
+        "method": "connection",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "Connection.class",
+      "resolvedInterface": "java.sql.Connection",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {Connection.class},",
+      "callPrefixSha256": "e93e8ab36f48ca5ab60cc3904f0c36d9a814441a31953928fcb7d22bff8d3f25",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepPortTest.java",
+      "sourceSha256": "64711edddb85a9862ebfd892a27d03582847bad648759025185babbb00e77e52",
+      "ordinal": 139,
+      "attributes": {
+        "beginline": "421",
+        "endline": "421",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "CleanupStepPortTest.Fixture",
+        "method": "statement",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "PreparedStatement.class",
+      "resolvedInterface": "java.sql.PreparedStatement",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {PreparedStatement.class},",
+      "callPrefixSha256": "3fc507a0832986b1064c60e17aabf36d8c16fd40ffa772a74c2e1181cc30fb9f",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepPortTest.java",
+      "sourceSha256": "64711edddb85a9862ebfd892a27d03582847bad648759025185babbb00e77e52",
+      "ordinal": 140,
+      "attributes": {
+        "beginline": "481",
+        "endline": "481",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "CleanupStepPortTest.Fixture",
+        "method": "resultSet",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "ResultSet.class",
+      "resolvedInterface": "java.sql.ResultSet",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {ResultSet.class},",
+      "callPrefixSha256": "b38b4f0eb1f10007f3d8854c5092e7962ac8a35ab53f2ae193d1a41860836642",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java",
+      "sourceSha256": "28271ad49820af2c90e99eb6d7bff01a680754086cf24c4f396777b6e3125c7d",
+      "ordinal": 143,
+      "attributes": {
+        "beginline": "642",
+        "endline": "642",
+        "begincolumn": "15",
+        "endcolumn": "48",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "ExpiryAuditPortTest.Fixture",
+        "method": "connection",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Connection.class.getClassLoader()",
+      "interfaceExpression": "Connection.class",
+      "resolvedInterface": "java.sql.Connection",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Connection.class.getClassLoader(),\n              new Class<?>[] {Connection.class},",
+      "callPrefixSha256": "f34bb43eafbc01e587a94162b734ee45978601008b9e964ca4ea03fc9a0a08ee",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java",
+      "sourceSha256": "28271ad49820af2c90e99eb6d7bff01a680754086cf24c4f396777b6e3125c7d",
+      "ordinal": 145,
+      "attributes": {
+        "beginline": "711",
+        "endline": "711",
+        "begincolumn": "15",
+        "endcolumn": "55",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "ExpiryAuditPortTest.Port",
+        "method": "statement",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "PreparedStatement.class.getClassLoader()",
+      "interfaceExpression": "PreparedStatement.class",
+      "resolvedInterface": "java.sql.PreparedStatement",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              PreparedStatement.class.getClassLoader(),\n              new Class<?>[] {PreparedStatement.class},",
+      "callPrefixSha256": "b6a59a8d277384ac9ec9ca5c6d02e747af90a596c22a397f36fbd396ae29309a",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java",
+      "sourceSha256": "28271ad49820af2c90e99eb6d7bff01a680754086cf24c4f396777b6e3125c7d",
+      "ordinal": 146,
+      "attributes": {
+        "beginline": "750",
+        "endline": "750",
+        "begincolumn": "15",
+        "endcolumn": "47",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "ExpiryAuditPortTest.Port",
+        "method": "rows",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "ResultSet.class.getClassLoader()",
+      "interfaceExpression": "ResultSet.class",
+      "resolvedInterface": "java.sql.ResultSet",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              ResultSet.class.getClassLoader(),\n              new Class<?>[] {ResultSet.class},",
+      "callPrefixSha256": "967e116ca94ab5aaf187b052e8929ddf17a2189aec2505b4768b60ffdb2d3ff0",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "sourceSha256": "76b7c2644998b3d1cc617990ae777e36c0fc05a7fc08905c1f0dbd6360b82df5",
+      "ordinal": 158,
+      "attributes": {
+        "beginline": "306",
+        "endline": "306",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "InspectionSummaryPortTest.Fixture",
+        "method": "connection",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "Connection.class",
+      "resolvedInterface": "java.sql.Connection",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {Connection.class},",
+      "callPrefixSha256": "e93e8ab36f48ca5ab60cc3904f0c36d9a814441a31953928fcb7d22bff8d3f25",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "sourceSha256": "76b7c2644998b3d1cc617990ae777e36c0fc05a7fc08905c1f0dbd6360b82df5",
+      "ordinal": 159,
+      "attributes": {
+        "beginline": "339",
+        "endline": "339",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "InspectionSummaryPortTest.Fixture",
+        "method": "statement",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "PreparedStatement.class",
+      "resolvedInterface": "java.sql.PreparedStatement",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {PreparedStatement.class},",
+      "callPrefixSha256": "3fc507a0832986b1064c60e17aabf36d8c16fd40ffa772a74c2e1181cc30fb9f",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "sourceSha256": "76b7c2644998b3d1cc617990ae777e36c0fc05a7fc08905c1f0dbd6360b82df5",
+      "ordinal": 160,
+      "attributes": {
+        "beginline": "371",
+        "endline": "371",
+        "begincolumn": "15",
+        "endcolumn": "45",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "InspectionSummaryPortTest.Fixture",
+        "method": "resultSet",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Fixture.class.getClassLoader()",
+      "interfaceExpression": "ResultSet.class",
+      "resolvedInterface": "java.sql.ResultSet",
+      "profile": "OWN_TEST_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Fixture.class.getClassLoader(),\n              new Class<?>[] {ResultSet.class},",
+      "callPrefixSha256": "b38b4f0eb1f10007f3d8854c5092e7962ac8a35ab53f2ae193d1a41860836642",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "sourceSha256": "0f11af78f2d7f3daa6eed7e4b54379c70b5f2c28548711730088efd86abc1730",
+      "ordinal": 175,
+      "attributes": {
+        "beginline": "325",
+        "endline": "325",
+        "begincolumn": "15",
+        "endcolumn": "48",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "RunReferencePortTest.Fixture",
+        "method": "connection",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Connection.class.getClassLoader()",
+      "interfaceExpression": "Connection.class",
+      "resolvedInterface": "java.sql.Connection",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              Connection.class.getClassLoader(),\n              new Class<?>[] {Connection.class},",
+      "callPrefixSha256": "f34bb43eafbc01e587a94162b734ee45978601008b9e964ca4ea03fc9a0a08ee",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "sourceSha256": "0f11af78f2d7f3daa6eed7e4b54379c70b5f2c28548711730088efd86abc1730",
+      "ordinal": 176,
+      "attributes": {
+        "beginline": "354",
+        "endline": "354",
+        "begincolumn": "15",
+        "endcolumn": "55",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "RunReferencePortTest.Fixture",
+        "method": "statement",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "PreparedStatement.class.getClassLoader()",
+      "interfaceExpression": "PreparedStatement.class",
+      "resolvedInterface": "java.sql.PreparedStatement",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              PreparedStatement.class.getClassLoader(),\n              new Class<?>[] {PreparedStatement.class},",
+      "callPrefixSha256": "b6a59a8d277384ac9ec9ca5c6d02e747af90a596c22a397f36fbd396ae29309a",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "sourceSha256": "0f11af78f2d7f3daa6eed7e4b54379c70b5f2c28548711730088efd86abc1730",
+      "ordinal": 177,
+      "attributes": {
+        "beginline": "386",
+        "endline": "386",
+        "begincolumn": "15",
+        "endcolumn": "47",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.repository",
+        "class": "RunReferencePortTest.Fixture",
+        "method": "row",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "ResultSet.class.getClassLoader()",
+      "interfaceExpression": "ResultSet.class",
+      "resolvedInterface": "java.sql.ResultSet",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              ResultSet.class.getClassLoader(),\n              new Class<?>[] {ResultSet.class},",
+      "callPrefixSha256": "967e116ca94ab5aaf187b052e8929ddf17a2189aec2505b4768b60ffdb2d3ff0",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/LogMvcBeanPortTest.java",
+      "sourceSha256": "3fedff557f34afbfa43351eb49bf444af38dde486d40e54890915218f152fc59",
+      "ordinal": 178,
+      "attributes": {
+        "beginline": "92",
+        "endline": "92",
+        "begincolumn": "19",
+        "endcolumn": "60",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.config",
+        "class": "LogMvcBeanPortTest",
+        "method": "returnedControllerRejectsUserRoleWithSingle403AndNoRequestOrBackendWork",
+        "variable": "request",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletRequest.class.getClassLoader()",
+      "interfaceExpression": "HttpServletRequest.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletRequest",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletRequest.class.getClassLoader(),\n                  new Class<?>[] {HttpServletRequest.class},",
+      "callPrefixSha256": "bed27149f25a4868c2509f25c3f0c07f5268827133c47d55113b9c407b672731",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/LogMvcBeanPortTest.java",
+      "sourceSha256": "3fedff557f34afbfa43351eb49bf444af38dde486d40e54890915218f152fc59",
+      "ordinal": 179,
+      "attributes": {
+        "beginline": "101",
+        "endline": "101",
+        "begincolumn": "19",
+        "endcolumn": "61",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.config",
+        "class": "LogMvcBeanPortTest",
+        "method": "returnedControllerRejectsUserRoleWithSingle403AndNoRequestOrBackendWork",
+        "variable": "response",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletResponse.class.getClassLoader()",
+      "interfaceExpression": "HttpServletResponse.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletResponse",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletResponse.class.getClassLoader(),\n                  new Class<?>[] {HttpServletResponse.class},",
+      "callPrefixSha256": "9134bfe7b6cfe064e620d9b7541d3d61f3538b96228209d2c4c96f9c0c540a13",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogOutboxPortTest.java",
+      "sourceSha256": "bfc43a279b680a1bb88465d39acc0f59ea7f5e5111322e130de9fe8894bc6090",
+      "ordinal": 186,
+      "attributes": {
+        "beginline": "525",
+        "endline": "525",
+        "begincolumn": "13",
+        "endcolumn": "34",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.logging",
+        "class": "WebLogOutboxPortTest",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(\n            type.getClassLoader(),\n            new Class<?>[] {type},",
+      "callPrefixSha256": "5f1c94175c2aeb193f40b972e6a09f9b355f151363161597db08dc6e906bb311",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferencePortTest.java",
+      "sourceSha256": "5821c43a250ff36ef1280d505da9664aa87189fc8fed472f792eebc64642b3de",
+      "ordinal": 203,
+      "attributes": {
+        "beginline": "588",
+        "endline": "588",
+        "begincolumn": "45",
+        "endcolumn": "66",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.receipt",
+        "class": "ReceiptReferencePortTest",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type},",
+      "callPrefixSha256": "1b03bdc1bc834e96a5df630ea21feabcc1c1eff15c2f15bd20779472853b88e1",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "sourceSha256": "4b4d55796b4fbfe687936912ce556a9e919923cc5a949182af3f7f5f58352e77",
+      "ordinal": 209,
+      "attributes": {
+        "beginline": "680",
+        "endline": "680",
+        "begincolumn": "13",
+        "endcolumn": "34",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.revocation",
+        "class": "PendingRevocationPortTest",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(\n            type.getClassLoader(),\n            new Class<?>[] {type},",
+      "callPrefixSha256": "5f1c94175c2aeb193f40b972e6a09f9b355f151363161597db08dc6e906bb311",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java",
+      "sourceSha256": "57a78155f162e62428fbe44c8bf8777e98555dbef15e3dc42c17e02074e0cc40",
+      "ordinal": 210,
+      "attributes": {
+        "beginline": "196",
+        "endline": "196",
+        "begincolumn": "13",
+        "endcolumn": "34",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "CaddyTransportPortTest",
+        "method": "emptyProxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(\n            type.getClassLoader(),\n            new Class<?>[] {type},",
+      "callPrefixSha256": "5f1c94175c2aeb193f40b972e6a09f9b355f151363161597db08dc6e906bb311",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java",
+      "sourceSha256": "57a78155f162e62428fbe44c8bf8777e98555dbef15e3dc42c17e02074e0cc40",
+      "ordinal": 213,
+      "attributes": {
+        "beginline": "224",
+        "endline": "224",
+        "begincolumn": "19",
+        "endcolumn": "60",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "CaddyTransportPortTest.Fixture",
+        "method": "Fixture",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletRequest.class.getClassLoader()",
+      "interfaceExpression": "HttpServletRequest.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletRequest",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletRequest.class.getClassLoader(),\n                  new Class<?>[] {HttpServletRequest.class},",
+      "callPrefixSha256": "bed27149f25a4868c2509f25c3f0c07f5268827133c47d55113b9c407b672731",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java",
+      "sourceSha256": "57a78155f162e62428fbe44c8bf8777e98555dbef15e3dc42c17e02074e0cc40",
+      "ordinal": 215,
+      "attributes": {
+        "beginline": "253",
+        "endline": "253",
+        "begincolumn": "19",
+        "endcolumn": "61",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "CaddyTransportPortTest.Fixture",
+        "method": "Fixture",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletResponse.class.getClassLoader()",
+      "interfaceExpression": "HttpServletResponse.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletResponse",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletResponse.class.getClassLoader(),\n                  new Class<?>[] {HttpServletResponse.class},",
+      "callPrefixSha256": "9134bfe7b6cfe064e620d9b7541d3d61f3538b96228209d2c4c96f9c0c540a13",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
+      "sourceSha256": "5b6b823ad0ea2d5a98b8f09711827b51c290c3ed44e04fb1615a3a37406dfa47",
+      "ordinal": 220,
+      "attributes": {
+        "beginline": "339",
+        "endline": "339",
+        "begincolumn": "19",
+        "endcolumn": "60",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "CsrfDeniedHandlerPortTest.Frame",
+        "method": "Frame",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletRequest.class.getClassLoader()",
+      "interfaceExpression": "HttpServletRequest.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletRequest",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletRequest.class.getClassLoader(),\n                  new Class<?>[] {HttpServletRequest.class},",
+      "callPrefixSha256": "bed27149f25a4868c2509f25c3f0c07f5268827133c47d55113b9c407b672731",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
+      "sourceSha256": "5b6b823ad0ea2d5a98b8f09711827b51c290c3ed44e04fb1615a3a37406dfa47",
+      "ordinal": 221,
+      "attributes": {
+        "beginline": "363",
+        "endline": "363",
+        "begincolumn": "19",
+        "endcolumn": "61",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "CsrfDeniedHandlerPortTest.Frame",
+        "method": "Frame",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletResponse.class.getClassLoader()",
+      "interfaceExpression": "HttpServletResponse.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletResponse",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletResponse.class.getClassLoader(),\n                  new Class<?>[] {HttpServletResponse.class},",
+      "callPrefixSha256": "9134bfe7b6cfe064e620d9b7541d3d61f3538b96228209d2c4c96f9c0c540a13",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java",
+      "sourceSha256": "11dcc3cb60d7b6843dbd2875c9a0b9820a24a6d1fad02071c2feef4b94917913",
+      "ordinal": 225,
+      "attributes": {
+        "beginline": "240",
+        "endline": "240",
+        "begincolumn": "19",
+        "endcolumn": "53",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "CsrfFilterFactoryPortTest.Frame",
+        "method": "Frame",
+        "variable": "session",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpSession.class.getClassLoader()",
+      "interfaceExpression": "HttpSession.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpSession",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpSession.class.getClassLoader(),\n                  new Class<?>[] {HttpSession.class},",
+      "callPrefixSha256": "2f343392005f0230759b447ab7e5bf8b38c7f1b00757c666ae8ebd835d8025d9",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java",
+      "sourceSha256": "11dcc3cb60d7b6843dbd2875c9a0b9820a24a6d1fad02071c2feef4b94917913",
+      "ordinal": 226,
+      "attributes": {
+        "beginline": "250",
+        "endline": "250",
+        "begincolumn": "19",
+        "endcolumn": "60",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "CsrfFilterFactoryPortTest.Frame",
+        "method": "Frame",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletRequest.class.getClassLoader()",
+      "interfaceExpression": "HttpServletRequest.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletRequest",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletRequest.class.getClassLoader(),\n                  new Class<?>[] {HttpServletRequest.class},",
+      "callPrefixSha256": "bed27149f25a4868c2509f25c3f0c07f5268827133c47d55113b9c407b672731",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java",
+      "sourceSha256": "11dcc3cb60d7b6843dbd2875c9a0b9820a24a6d1fad02071c2feef4b94917913",
+      "ordinal": 227,
+      "attributes": {
+        "beginline": "294",
+        "endline": "294",
+        "begincolumn": "19",
+        "endcolumn": "61",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "CsrfFilterFactoryPortTest.Frame",
+        "method": "Frame",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletResponse.class.getClassLoader()",
+      "interfaceExpression": "HttpServletResponse.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletResponse",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletResponse.class.getClassLoader(),\n                  new Class<?>[] {HttpServletResponse.class},",
+      "callPrefixSha256": "9134bfe7b6cfe064e620d9b7541d3d61f3538b96228209d2c4c96f9c0c540a13",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/DisplaySnapshotPortTest.java",
+      "sourceSha256": "799e9338db6423bbcdc1229b6cd84473e04c437933dfcfe2011cf85026897147",
+      "ordinal": 233,
+      "attributes": {
+        "beginline": "456",
+        "endline": "456",
+        "begincolumn": "13",
+        "endcolumn": "34",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "DisplaySnapshotPortTest",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(\n            type.getClassLoader(),\n            new Class<?>[] {type},",
+      "callPrefixSha256": "5f1c94175c2aeb193f40b972e6a09f9b355f151363161597db08dc6e906bb311",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
+      "sourceSha256": "566ee1b11c9f69ab1adf9192d63bb7ded248d752882980daf8cff38da7d3ee8d",
+      "ordinal": 238,
+      "attributes": {
+        "beginline": "293",
+        "endline": "293",
+        "begincolumn": "19",
+        "endcolumn": "53",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "EncryptedSecurityContextPortTest.Session",
+        "method": "Session",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpSession.class.getClassLoader()",
+      "interfaceExpression": "HttpSession.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpSession",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpSession.class.getClassLoader(),\n                  new Class<?>[] {HttpSession.class},",
+      "callPrefixSha256": "2f343392005f0230759b447ab7e5bf8b38c7f1b00757c666ae8ebd835d8025d9",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
+      "sourceSha256": "566ee1b11c9f69ab1adf9192d63bb7ded248d752882980daf8cff38da7d3ee8d",
+      "ordinal": 239,
+      "attributes": {
+        "beginline": "327",
+        "endline": "327",
+        "begincolumn": "19",
+        "endcolumn": "60",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "EncryptedSecurityContextPortTest.Frame",
+        "method": "Frame",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletRequest.class.getClassLoader()",
+      "interfaceExpression": "HttpServletRequest.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletRequest",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletRequest.class.getClassLoader(),\n                  new Class<?>[] {HttpServletRequest.class},",
+      "callPrefixSha256": "bed27149f25a4868c2509f25c3f0c07f5268827133c47d55113b9c407b672731",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
+      "sourceSha256": "566ee1b11c9f69ab1adf9192d63bb7ded248d752882980daf8cff38da7d3ee8d",
+      "ordinal": 240,
+      "attributes": {
+        "beginline": "347",
+        "endline": "347",
+        "begincolumn": "19",
+        "endcolumn": "61",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "EncryptedSecurityContextPortTest.Frame",
+        "method": "Frame",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletResponse.class.getClassLoader()",
+      "interfaceExpression": "HttpServletResponse.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletResponse",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletResponse.class.getClassLoader(),\n                  new Class<?>[] {HttpServletResponse.class},",
+      "callPrefixSha256": "9134bfe7b6cfe064e620d9b7541d3d61f3538b96228209d2c4c96f9c0c540a13",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest.java",
+      "sourceSha256": "7d05042b8d72d86e88adb4703a4ce7a3f0f5186cc7fcc56890a9d5dd7326d2c1",
+      "ordinal": 243,
+      "attributes": {
+        "beginline": "218",
+        "endline": "218",
+        "begincolumn": "19",
+        "endcolumn": "53",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "EncryptedSessionCsrfPortTest.Session",
+        "method": "Session",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpSession.class.getClassLoader()",
+      "interfaceExpression": "HttpSession.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpSession",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpSession.class.getClassLoader(),\n                  new Class<?>[] {HttpSession.class},",
+      "callPrefixSha256": "2f343392005f0230759b447ab7e5bf8b38c7f1b00757c666ae8ebd835d8025d9",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest.java",
+      "sourceSha256": "7d05042b8d72d86e88adb4703a4ce7a3f0f5186cc7fcc56890a9d5dd7326d2c1",
+      "ordinal": 244,
+      "attributes": {
+        "beginline": "255",
+        "endline": "255",
+        "begincolumn": "19",
+        "endcolumn": "60",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "EncryptedSessionCsrfPortTest.Fixture",
+        "method": "Fixture",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletRequest.class.getClassLoader()",
+      "interfaceExpression": "HttpServletRequest.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletRequest",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletRequest.class.getClassLoader(),\n                  new Class<?>[] {HttpServletRequest.class},",
+      "callPrefixSha256": "bed27149f25a4868c2509f25c3f0c07f5268827133c47d55113b9c407b672731",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest.java",
+      "sourceSha256": "7d05042b8d72d86e88adb4703a4ce7a3f0f5186cc7fcc56890a9d5dd7326d2c1",
+      "ordinal": 245,
+      "attributes": {
+        "beginline": "280",
+        "endline": "280",
+        "begincolumn": "19",
+        "endcolumn": "61",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "EncryptedSessionCsrfPortTest.Fixture",
+        "method": "Fixture",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletResponse.class.getClassLoader()",
+      "interfaceExpression": "HttpServletResponse.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletResponse",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletResponse.class.getClassLoader(),\n                  new Class<?>[] {HttpServletResponse.class},",
+      "callPrefixSha256": "9134bfe7b6cfe064e620d9b7541d3d61f3538b96228209d2c4c96f9c0c540a13",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+      "sourceSha256": "1b23abc3012748d36be489230038a2509825049d1b24a58997ae6bde07e3b886",
+      "ordinal": 254,
+      "attributes": {
+        "beginline": "377",
+        "endline": "377",
+        "begincolumn": "13",
+        "endcolumn": "34",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "ErrorControllerPortTest",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(\n            type.getClassLoader(),\n            new Class<?>[] {type},",
+      "callPrefixSha256": "5f1c94175c2aeb193f40b972e6a09f9b355f151363161597db08dc6e906bb311",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRestorePortTest.java",
+      "sourceSha256": "f60066157a18c43c02ba149168feb56e92cfc80c394a162281678084a3a195a7",
+      "ordinal": 256,
+      "attributes": {
+        "beginline": "72",
+        "endline": "72",
+        "begincolumn": "15",
+        "endcolumn": "36",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "ErrorDispatchRestorePortTest.Fixture",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(\n              type.getClassLoader(),\n              new Class<?>[] {type},",
+      "callPrefixSha256": "7828a2a1467c02fd3073f4357f1bd790759ae339b1cc668219cfd6d15892432a",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRouterPortTest.java",
+      "sourceSha256": "1d204bd56bd055e8d19a14223a6dc4af17b74ea80e208f6defe6d835a27da5b6",
+      "ordinal": 263,
+      "attributes": {
+        "beginline": "238",
+        "endline": "238",
+        "begincolumn": "13",
+        "endcolumn": "34",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "ErrorDispatchRouterPortTest",
+        "method": "unusedPort",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(\n            type.getClassLoader(),\n            new Class<?>[] {type},",
+      "callPrefixSha256": "5f1c94175c2aeb193f40b972e6a09f9b355f151363161597db08dc6e906bb311",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRouterPortTest.java",
+      "sourceSha256": "1d204bd56bd055e8d19a14223a6dc4af17b74ea80e208f6defe6d835a27da5b6",
+      "ordinal": 264,
+      "attributes": {
+        "beginline": "311",
+        "endline": "311",
+        "begincolumn": "19",
+        "endcolumn": "60",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "ErrorDispatchRouterPortTest.Frame",
+        "method": "Frame",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletRequest.class.getClassLoader()",
+      "interfaceExpression": "HttpServletRequest.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletRequest",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletRequest.class.getClassLoader(),\n                  new Class<?>[] {HttpServletRequest.class},",
+      "callPrefixSha256": "bed27149f25a4868c2509f25c3f0c07f5268827133c47d55113b9c407b672731",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/FormCsrfRequestPortTest.java",
+      "sourceSha256": "d311bc55d91dd0dde8473fa27d7feb074d19d88e3e3d797f0efdc73a564aeb86",
+      "ordinal": 266,
+      "attributes": {
+        "beginline": "48",
+        "endline": "48",
+        "begincolumn": "15",
+        "endcolumn": "56",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "FormCsrfRequestPortTest.Fixture",
+        "method": "asRequest",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletRequest.class.getClassLoader()",
+      "interfaceExpression": "HttpServletRequest.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletRequest",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              HttpServletRequest.class.getClassLoader(),\n              new Class<?>[] {HttpServletRequest.class},",
+      "callPrefixSha256": "76b3010cdd889c85e1e551678ce14db29737d36aab23fb9855996792f2a50ef4",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/FormCsrfRequestPortTest.java",
+      "sourceSha256": "d311bc55d91dd0dde8473fa27d7feb074d19d88e3e3d797f0efdc73a564aeb86",
+      "ordinal": 268,
+      "attributes": {
+        "beginline": "78",
+        "endline": "78",
+        "begincolumn": "13",
+        "endcolumn": "55",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "FormCsrfRequestPortTest",
+        "method": "response",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletResponse.class.getClassLoader()",
+      "interfaceExpression": "HttpServletResponse.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletResponse",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n            HttpServletResponse.class.getClassLoader(),\n            new Class<?>[] {HttpServletResponse.class},",
+      "callPrefixSha256": "deebf5a3be07daf5957029effdae292aec9cbd396dde0f22d6fecccd033027e1",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest.java",
+      "sourceSha256": "546efa9b0597c0bc9e040af46fe205e9f5e9dbf9e1b39e0835e2c53b691762dd",
+      "ordinal": 273,
+      "attributes": {
+        "beginline": "177",
+        "endline": "177",
+        "begincolumn": "13",
+        "endcolumn": "34",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "InfrastructureFailureFilterPortTest",
+        "method": "port",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(\n            type.getClassLoader(),\n            new Class<?>[] {type},",
+      "callPrefixSha256": "5f1c94175c2aeb193f40b972e6a09f9b355f151363161597db08dc6e906bb311",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest.java",
+      "sourceSha256": "546efa9b0597c0bc9e040af46fe205e9f5e9dbf9e1b39e0835e2c53b691762dd",
+      "ordinal": 274,
+      "attributes": {
+        "beginline": "205",
+        "endline": "205",
+        "begincolumn": "19",
+        "endcolumn": "60",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "InfrastructureFailureFilterPortTest.Frame",
+        "method": "Frame",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletRequest.class.getClassLoader()",
+      "interfaceExpression": "HttpServletRequest.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletRequest",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletRequest.class.getClassLoader(),\n                  new Class<?>[] {HttpServletRequest.class},",
+      "callPrefixSha256": "bed27149f25a4868c2509f25c3f0c07f5268827133c47d55113b9c407b672731",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest.java",
+      "sourceSha256": "546efa9b0597c0bc9e040af46fe205e9f5e9dbf9e1b39e0835e2c53b691762dd",
+      "ordinal": 275,
+      "attributes": {
+        "beginline": "217",
+        "endline": "217",
+        "begincolumn": "19",
+        "endcolumn": "61",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "InfrastructureFailureFilterPortTest.Frame",
+        "method": "Frame",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletResponse.class.getClassLoader()",
+      "interfaceExpression": "HttpServletResponse.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletResponse",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletResponse.class.getClassLoader(),\n                  new Class<?>[] {HttpServletResponse.class},",
+      "callPrefixSha256": "9134bfe7b6cfe064e620d9b7541d3d61f3538b96228209d2c4c96f9c0c540a13",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InternalErrorRouterPortTest.java",
+      "sourceSha256": "48832e4824132c3518ceaed9d451065a94265a5ea90850e1f136701628fd982e",
+      "ordinal": 276,
+      "attributes": {
+        "beginline": "90",
+        "endline": "90",
+        "begincolumn": "13",
+        "endcolumn": "34",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "InternalErrorRouterPortTest",
+        "method": "servlet",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(\n            type.getClassLoader(),\n            new Class<?>[] {type},",
+      "callPrefixSha256": "5f1c94175c2aeb193f40b972e6a09f9b355f151363161597db08dc6e906bb311",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/LoginFormConverterPortTest.java",
+      "sourceSha256": "dbe0637da47f5140a71942574e7f6faeb22a9896608b681fec0bfe73a6de8334",
+      "ordinal": 281,
+      "attributes": {
+        "beginline": "99",
+        "endline": "99",
+        "begincolumn": "15",
+        "endcolumn": "56",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "LoginFormConverterPortTest.Fixture",
+        "method": "asRequest",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletRequest.class.getClassLoader()",
+      "interfaceExpression": "HttpServletRequest.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletRequest",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n              HttpServletRequest.class.getClassLoader(),\n              new Class<?>[] {HttpServletRequest.class},",
+      "callPrefixSha256": "76b3010cdd889c85e1e551678ce14db29737d36aab23fb9855996792f2a50ef4",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqFormLoginFactoryRoutePortTest.java",
+      "sourceSha256": "6c46a3b0162410a3795cb41664d9dbaef45b1e128fd5aed12009275470bdee02",
+      "ordinal": 285,
+      "attributes": {
+        "beginline": "168",
+        "endline": "168",
+        "begincolumn": "13",
+        "endcolumn": "54",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "MqFormLoginFactoryRoutePortTest",
+        "method": "request",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletRequest.class.getClassLoader()",
+      "interfaceExpression": "HttpServletRequest.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletRequest",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n            HttpServletRequest.class.getClassLoader(),\n            new Class<?>[] {HttpServletRequest.class},",
+      "callPrefixSha256": "010369e0ac19c8ad0d5b4f0c2d43b1ac7f97668dedd9ad364f7ba8f5cf136ca5",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqFormLoginFactoryRoutePortTest.java",
+      "sourceSha256": "6c46a3b0162410a3795cb41664d9dbaef45b1e128fd5aed12009275470bdee02",
+      "ordinal": 286,
+      "attributes": {
+        "beginline": "183",
+        "endline": "183",
+        "begincolumn": "13",
+        "endcolumn": "55",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "MqFormLoginFactoryRoutePortTest",
+        "method": "response",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletResponse.class.getClassLoader()",
+      "interfaceExpression": "HttpServletResponse.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletResponse",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n            HttpServletResponse.class.getClassLoader(),\n            new Class<?>[] {HttpServletResponse.class},",
+      "callPrefixSha256": "deebf5a3be07daf5957029effdae292aec9cbd396dde0f22d6fecccd033027e1",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginFailurePortTest.java",
+      "sourceSha256": "3b70e5c73c52960db73ee96c7cf632c6399ec2a167de47846baae277bcee1815",
+      "ordinal": 287,
+      "attributes": {
+        "beginline": "52",
+        "endline": "52",
+        "begincolumn": "45",
+        "endcolumn": "66",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "MqLoginFailurePortTest",
+        "method": "port",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "type.getClassLoader()",
+      "interfaceExpression": "type",
+      "resolvedInterface": "Class<T> type",
+      "profile": "CLASS_PARAMETER_SAME_INTERFACE_ARRAY",
+      "callPrefix": "Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type},",
+      "callPrefixSha256": "1b03bdc1bc834e96a5df630ea21feabcc1c1eff15c2f15bd20779472853b88e1",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SessionAuthenticationStrategyPortTest.java",
+      "sourceSha256": "6fc89409d0c075cb793d101534461761f105a59849ed34aac38563c71bc7c391",
+      "ordinal": 293,
+      "attributes": {
+        "beginline": "197",
+        "endline": "197",
+        "begincolumn": "19",
+        "endcolumn": "53",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "SessionAuthenticationStrategyPortTest.Frame",
+        "method": "Frame",
+        "variable": "session",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpSession.class.getClassLoader()",
+      "interfaceExpression": "HttpSession.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpSession",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpSession.class.getClassLoader(),\n                  new Class<?>[] {HttpSession.class},",
+      "callPrefixSha256": "2f343392005f0230759b447ab7e5bf8b38c7f1b00757c666ae8ebd835d8025d9",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SessionAuthenticationStrategyPortTest.java",
+      "sourceSha256": "6fc89409d0c075cb793d101534461761f105a59849ed34aac38563c71bc7c391",
+      "ordinal": 294,
+      "attributes": {
+        "beginline": "209",
+        "endline": "209",
+        "begincolumn": "19",
+        "endcolumn": "60",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "SessionAuthenticationStrategyPortTest.Frame",
+        "method": "Frame",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletRequest.class.getClassLoader()",
+      "interfaceExpression": "HttpServletRequest.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletRequest",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletRequest.class.getClassLoader(),\n                  new Class<?>[] {HttpServletRequest.class},",
+      "callPrefixSha256": "bed27149f25a4868c2509f25c3f0c07f5268827133c47d55113b9c407b672731",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SessionAuthenticationStrategyPortTest.java",
+      "sourceSha256": "6fc89409d0c075cb793d101534461761f105a59849ed34aac38563c71bc7c391",
+      "ordinal": 295,
+      "attributes": {
+        "beginline": "229",
+        "endline": "229",
+        "begincolumn": "19",
+        "endcolumn": "61",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.security",
+        "class": "SessionAuthenticationStrategyPortTest.Frame",
+        "method": "Frame",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "HttpServletResponse.class.getClassLoader()",
+      "interfaceExpression": "HttpServletResponse.class",
+      "resolvedInterface": "jakarta.servlet.http.HttpServletResponse",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                  HttpServletResponse.class.getClassLoader(),\n                  new Class<?>[] {HttpServletResponse.class},",
+      "callPrefixSha256": "9134bfe7b6cfe064e620d9b7541d3d61f3538b96228209d2c4c96f9c0c540a13",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/BusinessMvcOwnerPortFixture.java",
+      "sourceSha256": "629aa97d6cc8af6e22c3aa0ca316eb2698dd380e7635f65b3d5974aaf6cb617d",
+      "ordinal": 296,
+      "attributes": {
+        "beginline": "27",
+        "endline": "27",
+        "begincolumn": "17",
+        "endcolumn": "50",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.session",
+        "class": "BusinessMvcOwnerPortFixture",
+        "method": "BusinessMvcOwnerPortFixture",
+        "variable": "database",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "DataSource.class.getClassLoader()",
+      "interfaceExpression": "DataSource.class",
+      "resolvedInterface": "javax.sql.DataSource",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                DataSource.class.getClassLoader(),\n                new Class<?>[] {DataSource.class},",
+      "callPrefixSha256": "66d9b270dea729c6c934d6f3c21d7edd2beae5f52ebc0e001c7df4e595e8aec8",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java",
+      "sourceSha256": "c3b09a3109fb0713735654dd314d32e129662f031ebcdd86261d13a7af3f00b3",
+      "ordinal": 302,
+      "attributes": {
+        "beginline": "2081",
+        "endline": "2081",
+        "begincolumn": "17",
+        "endcolumn": "50",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.session",
+        "class": "QuestionControllerTest.Fixture",
+        "variable": "ownedSource",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "DataSource.class.getClassLoader()",
+      "interfaceExpression": "DataSource.class",
+      "resolvedInterface": "javax.sql.DataSource",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                DataSource.class.getClassLoader(),\n                new Class<?>[] {DataSource.class},",
+      "callPrefixSha256": "66d9b270dea729c6c934d6f3c21d7edd2beae5f52ebc0e001c7df4e595e8aec8",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java",
+      "sourceSha256": "c3b09a3109fb0713735654dd314d32e129662f031ebcdd86261d13a7af3f00b3",
+      "ordinal": 303,
+      "attributes": {
+        "beginline": "2091",
+        "endline": "2091",
+        "begincolumn": "27",
+        "endcolumn": "60",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.session",
+        "class": "QuestionControllerTest.Fixture",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "Connection.class.getClassLoader()",
+      "interfaceExpression": "Connection.class",
+      "resolvedInterface": "java.sql.Connection",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                          Connection.class.getClassLoader(),\n                          new Class<?>[] {Connection.class},",
+      "callPrefixSha256": "416b8efeb440dc6241d3c4ec2b7cfa7fa7520561a5a0ad424cf718d59466245f",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java",
+      "sourceSha256": "c3b09a3109fb0713735654dd314d32e129662f031ebcdd86261d13a7af3f00b3",
+      "ordinal": 307,
+      "attributes": {
+        "beginline": "2115",
+        "endline": "2115",
+        "begincolumn": "21",
+        "endcolumn": "54",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.session",
+        "class": "QuestionControllerTest.Fixture",
+        "variable": "receipts",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "DataSource.class.getClassLoader()",
+      "interfaceExpression": "DataSource.class",
+      "resolvedInterface": "javax.sql.DataSource",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                    DataSource.class.getClassLoader(),\n                    new Class<?>[] {DataSource.class},",
+      "callPrefixSha256": "734f789e811f902b7850c987dee4664aa39d18c6dbee096028a3e589c8e37b70",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  },
+  {
+    "original": {
+      "tool": "pmd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java",
+      "sourceSha256": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
+      "ordinal": 317,
+      "attributes": {
+        "beginline": "21",
+        "endline": "21",
+        "begincolumn": "17",
+        "endcolumn": "50",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.session",
+        "class": "SecurityContextOwnerPortFixture",
+        "method": "SecurityContextOwnerPortFixture",
+        "variable": "database",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3"
+      },
+      "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead.",
+      "classification": "UNCLASSIFIED"
+    },
+    "assessment": {
+      "loaderExpression": "DataSource.class.getClassLoader()",
+      "interfaceExpression": "DataSource.class",
+      "resolvedInterface": "javax.sql.DataSource",
+      "profile": "INTERFACE_DEFINING_LOADER",
+      "callPrefix": "Proxy.newProxyInstance(\n                DataSource.class.getClassLoader(),\n                new Class<?>[] {DataSource.class},",
+      "callPrefixSha256": "66d9b270dea729c6c934d6f3c21d7edd2beae5f52ebc0e001c7df4e595e8aec8",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone Test-owned java.lang.reflect.Proxy creation; the explicitly bound loader and interface array define this synthetic port. This source is outside Production Main/J2EE application and does not modify the thread context loader; the J2EE TCCL preference is inapplicable at this exact call only."
+    },
+    "status": "CLASSIFIED_INDIVIDUALLY"
+  }
+]
