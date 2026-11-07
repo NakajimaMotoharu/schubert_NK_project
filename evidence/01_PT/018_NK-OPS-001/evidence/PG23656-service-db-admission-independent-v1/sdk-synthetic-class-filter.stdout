@@ -1,0 +1,26 @@
+Compiled from "SyntheticClassFilter.java"
+final class org.jacoco.cli.internal.core.internal.analysis.filter.SyntheticClassFilter implements org.jacoco.cli.internal.core.internal.analysis.filter.IFilter {
+  org.jacoco.cli.internal.core.internal.analysis.filter.SyntheticClassFilter();
+    Code:
+         0: aload_0
+         1: invokespecial #11                 // Method java/lang/Object."<init>":()V
+         4: return
+
+  public void filter(org.jacoco.cli.internal.asm.tree.MethodNode, org.jacoco.cli.internal.core.internal.analysis.filter.IFilterContext, org.jacoco.cli.internal.core.internal.analysis.filter.IFilterOutput);
+    Code:
+         0: aload_2
+         1: invokeinterface #21,  1           // InterfaceMethod org/jacoco/cli/internal/core/internal/analysis/filter/IFilterContext.getClassAccess:()I
+         6: sipush        4096
+         9: iand
+        10: ifne          14
+        13: return
+        14: aload_3
+        15: aload_1
+        16: getfield      #27                 // Field org/jacoco/cli/internal/asm/tree/MethodNode.instructions:Lorg/jacoco/cli/internal/asm/tree/InsnList;
+        19: invokevirtual #33                 // Method org/jacoco/cli/internal/asm/tree/InsnList.getFirst:()Lorg/jacoco/cli/internal/asm/tree/AbstractInsnNode;
+        22: aload_1
+        23: getfield      #27                 // Field org/jacoco/cli/internal/asm/tree/MethodNode.instructions:Lorg/jacoco/cli/internal/asm/tree/InsnList;
+        26: invokevirtual #36                 // Method org/jacoco/cli/internal/asm/tree/InsnList.getLast:()Lorg/jacoco/cli/internal/asm/tree/AbstractInsnNode;
+        29: invokeinterface #42,  3           // InterfaceMethod org/jacoco/cli/internal/core/internal/analysis/filter/IFilterOutput.ignore:(Lorg/jacoco/cli/internal/asm/tree/AbstractInsnNode;Lorg/jacoco/cli/internal/asm/tree/AbstractInsnNode;)V
+        34: return
+}

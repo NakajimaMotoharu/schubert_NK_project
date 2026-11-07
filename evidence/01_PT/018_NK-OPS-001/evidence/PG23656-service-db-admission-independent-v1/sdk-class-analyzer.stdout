@@ -1,0 +1,413 @@
+Compiled from "ClassAnalyzer.java"
+public class org.jacoco.cli.internal.core.internal.analysis.ClassAnalyzer extends org.jacoco.cli.internal.core.internal.flow.ClassProbesVisitor implements org.jacoco.cli.internal.core.internal.analysis.filter.IFilterContext {
+  private final org.jacoco.cli.internal.core.internal.analysis.ClassCoverageImpl coverage;
+
+  private final boolean[] probes;
+
+  private final org.jacoco.cli.internal.core.internal.analysis.StringPool stringPool;
+
+  private final java.util.Set<java.lang.String> classAnnotations;
+
+  private final java.util.Set<java.lang.String> classAttributes;
+
+  private int classAccess;
+
+  private java.lang.String sourceDebugExtension;
+
+  private org.jacoco.cli.internal.core.internal.analysis.filter.KotlinSMAP smap;
+
+  private final java.util.HashMap<java.lang.String, org.jacoco.cli.internal.core.internal.analysis.SourceNodeImpl> fragments;
+
+  private final org.jacoco.cli.internal.core.internal.analysis.filter.IFilter filter;
+
+  public org.jacoco.cli.internal.core.internal.analysis.ClassAnalyzer(org.jacoco.cli.internal.core.internal.analysis.ClassCoverageImpl, boolean[], org.jacoco.cli.internal.core.internal.analysis.StringPool);
+    Code:
+         0: aload_0
+         1: invokespecial #45                 // Method org/jacoco/cli/internal/core/internal/flow/ClassProbesVisitor."<init>":()V
+         4: aload_0
+         5: new           #47                 // class java/util/HashSet
+         8: dup
+         9: invokespecial #48                 // Method java/util/HashSet."<init>":()V
+        12: putfield      #50                 // Field classAnnotations:Ljava/util/Set;
+        15: aload_0
+        16: new           #47                 // class java/util/HashSet
+        19: dup
+        20: invokespecial #48                 // Method java/util/HashSet."<init>":()V
+        23: putfield      #52                 // Field classAttributes:Ljava/util/Set;
+        26: aload_0
+        27: new           #54                 // class java/util/HashMap
+        30: dup
+        31: invokespecial #55                 // Method java/util/HashMap."<init>":()V
+        34: putfield      #57                 // Field fragments:Ljava/util/HashMap;
+        37: aload_0
+        38: aload_1
+        39: putfield      #59                 // Field coverage:Lorg/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl;
+        42: aload_0
+        43: aload_2
+        44: putfield      #61                 // Field probes:[Z
+        47: aload_0
+        48: aload_3
+        49: putfield      #63                 // Field stringPool:Lorg/jacoco/cli/internal/core/internal/analysis/StringPool;
+        52: aload_0
+        53: invokestatic  #69                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/Filters.all:()Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilter;
+        56: putfield      #71                 // Field filter:Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilter;
+        59: return
+
+  public void visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]);
+    Code:
+         0: aload_0
+         1: iload_2
+         2: putfield      #77                 // Field classAccess:I
+         5: aload_0
+         6: getfield      #59                 // Field coverage:Lorg/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl;
+         9: aload_0
+        10: getfield      #63                 // Field stringPool:Lorg/jacoco/cli/internal/core/internal/analysis/StringPool;
+        13: aload         4
+        15: invokevirtual #83                 // Method org/jacoco/cli/internal/core/internal/analysis/StringPool.get:(Ljava/lang/String;)Ljava/lang/String;
+        18: invokevirtual #89                 // Method org/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl.setSignature:(Ljava/lang/String;)V
+        21: aload_0
+        22: getfield      #59                 // Field coverage:Lorg/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl;
+        25: aload_0
+        26: getfield      #63                 // Field stringPool:Lorg/jacoco/cli/internal/core/internal/analysis/StringPool;
+        29: aload         5
+        31: invokevirtual #83                 // Method org/jacoco/cli/internal/core/internal/analysis/StringPool.get:(Ljava/lang/String;)Ljava/lang/String;
+        34: invokevirtual #92                 // Method org/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl.setSuperName:(Ljava/lang/String;)V
+        37: aload_0
+        38: getfield      #59                 // Field coverage:Lorg/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl;
+        41: aload_0
+        42: getfield      #63                 // Field stringPool:Lorg/jacoco/cli/internal/core/internal/analysis/StringPool;
+        45: aload         6
+        47: invokevirtual #95                 // Method org/jacoco/cli/internal/core/internal/analysis/StringPool.get:([Ljava/lang/String;)[Ljava/lang/String;
+        50: invokevirtual #99                 // Method org/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl.setInterfaces:([Ljava/lang/String;)V
+        53: return
+
+  public org.jacoco.cli.internal.asm.AnnotationVisitor visitAnnotation(java.lang.String, boolean);
+    Code:
+         0: aload_0
+         1: getfield      #110                // Field sourceDebugExtension:Ljava/lang/String;
+         4: ifnull        40
+         7: ldc           #112                // String Lkotlin/Metadata;
+         9: aload_1
+        10: invokevirtual #118                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        13: ifeq          40
+        16: aload_0
+        17: new           #11                 // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP
+        20: dup
+        21: aload_0
+        22: invokevirtual #122                // Method getSourceFileName:()Ljava/lang/String;
+        25: aload_0
+        26: getfield      #110                // Field sourceDebugExtension:Ljava/lang/String;
+        29: invokespecial #125                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+        32: putfield      #127                // Field smap:Lorg/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP;
+        35: aload_0
+        36: aconst_null
+        37: putfield      #110                // Field sourceDebugExtension:Ljava/lang/String;
+        40: aload_0
+        41: getfield      #50                 // Field classAnnotations:Ljava/util/Set;
+        44: aload_1
+        45: invokeinterface #132,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+        50: pop
+        51: aload_0
+        52: aload_1
+        53: iload_2
+        54: invokespecial #134                // Method org/jacoco/cli/internal/core/internal/flow/ClassProbesVisitor.visitAnnotation:(Ljava/lang/String;Z)Lorg/jacoco/cli/internal/asm/AnnotationVisitor;
+        57: areturn
+
+  public void visitAttribute(org.jacoco.cli.internal.asm.Attribute);
+    Code:
+         0: aload_0
+         1: getfield      #52                 // Field classAttributes:Ljava/util/Set;
+         4: aload_1
+         5: getfield      #144                // Field org/jacoco/cli/internal/asm/Attribute.type:Ljava/lang/String;
+         8: invokeinterface #132,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+        13: pop
+        14: return
+
+  public void visitSource(java.lang.String, java.lang.String);
+    Code:
+         0: aload_0
+         1: getfield      #59                 // Field coverage:Lorg/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl;
+         4: aload_0
+         5: getfield      #63                 // Field stringPool:Lorg/jacoco/cli/internal/core/internal/analysis/StringPool;
+         8: aload_1
+         9: invokevirtual #83                 // Method org/jacoco/cli/internal/core/internal/analysis/StringPool.get:(Ljava/lang/String;)Ljava/lang/String;
+        12: invokevirtual #150                // Method org/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl.setSourceFileName:(Ljava/lang/String;)V
+        15: aload_0
+        16: aload_2
+        17: putfield      #110                // Field sourceDebugExtension:Ljava/lang/String;
+        20: return
+
+  public org.jacoco.cli.internal.core.internal.flow.MethodProbesVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]);
+    Code:
+         0: aload_2
+         1: aload_0
+         2: getfield      #59                 // Field coverage:Lorg/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl;
+         5: invokevirtual #157                // Method org/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl.getName:()Ljava/lang/String;
+         8: invokestatic  #162                // Method org/jacoco/cli/internal/core/internal/instr/InstrSupport.assertNotInstrumented:(Ljava/lang/String;Ljava/lang/String;)V
+        11: new           #164                // class org/jacoco/cli/internal/core/internal/analysis/InstructionsBuilder
+        14: dup
+        15: aload_0
+        16: getfield      #61                 // Field probes:[Z
+        19: invokespecial #167                // Method org/jacoco/cli/internal/core/internal/analysis/InstructionsBuilder."<init>":([Z)V
+        22: astore        6
+        24: new           #14                 // class org/jacoco/cli/internal/core/internal/analysis/ClassAnalyzer$1
+        27: dup
+        28: aload_0
+        29: aload         6
+        31: aload_2
+        32: aload_3
+        33: aload         4
+        35: aload         6
+        37: invokespecial #170                // Method org/jacoco/cli/internal/core/internal/analysis/ClassAnalyzer$1."<init>":(Lorg/jacoco/cli/internal/core/internal/analysis/ClassAnalyzer;Lorg/jacoco/cli/internal/core/internal/analysis/InstructionsBuilder;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/jacoco/cli/internal/core/internal/analysis/InstructionsBuilder;)V
+        40: areturn
+
+  private void addMethodCoverage(java.lang.String, java.lang.String, java.lang.String, org.jacoco.cli.internal.core.internal.analysis.InstructionsBuilder, org.jacoco.cli.internal.asm.tree.MethodNode);
+    Code:
+         0: aload         4
+         2: invokevirtual #179                // Method org/jacoco/cli/internal/core/internal/analysis/InstructionsBuilder.getInstructions:()Ljava/util/Map;
+         5: astore        6
+         7: aload_0
+         8: aload         6
+        10: invokespecial #183                // Method calculateFragments:(Ljava/util/Map;)V
+        13: new           #185                // class org/jacoco/cli/internal/core/internal/analysis/MethodCoverageCalculator
+        16: dup
+        17: aload         6
+        19: invokespecial #187                // Method org/jacoco/cli/internal/core/internal/analysis/MethodCoverageCalculator."<init>":(Ljava/util/Map;)V
+        22: astore        7
+        24: aload_0
+        25: getfield      #71                 // Field filter:Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilter;
+        28: aload         5
+        30: aload_0
+        31: aload         7
+        33: invokeinterface #192,  4          // InterfaceMethod org/jacoco/cli/internal/core/internal/analysis/filter/IFilter.filter:(Lorg/jacoco/cli/internal/asm/tree/MethodNode;Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilterContext;Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilterOutput;)V
+        38: new           #194                // class org/jacoco/cli/internal/core/internal/analysis/MethodCoverageImpl
+        41: dup
+        42: aload_1
+        43: aload_2
+        44: aload_3
+        45: invokespecial #197                // Method org/jacoco/cli/internal/core/internal/analysis/MethodCoverageImpl."<init>":(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+        48: astore        8
+        50: aload         7
+        52: aload         8
+        54: invokevirtual #201                // Method org/jacoco/cli/internal/core/internal/analysis/MethodCoverageCalculator.calculate:(Lorg/jacoco/cli/internal/core/internal/analysis/MethodCoverageImpl;)V
+        57: aload         8
+        59: invokevirtual #205                // Method org/jacoco/cli/internal/core/internal/analysis/MethodCoverageImpl.containsCode:()Z
+        62: ifeq          74
+        65: aload_0
+        66: getfield      #59                 // Field coverage:Lorg/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl;
+        69: aload         8
+        71: invokevirtual #209                // Method org/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl.addMethod:(Lorg/jacoco/cli/internal/core/analysis/IMethodCoverage;)V
+        74: return
+
+  private void calculateFragments(java.util.Map<org.jacoco.cli.internal.asm.tree.AbstractInsnNode, org.jacoco.cli.internal.core.internal.analysis.Instruction>);
+    Code:
+         0: aload_0
+         1: getfield      #127                // Field smap:Lorg/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP;
+         4: ifnonnull     8
+         7: return
+         8: aload_0
+         9: getfield      #127                // Field smap:Lorg/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP;
+        12: invokevirtual #224                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP.mappings:()Ljava/util/List;
+        15: invokeinterface #230,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        20: astore_2
+        21: aload_2
+        22: invokeinterface #235,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        27: ifeq          228
+        30: aload_2
+        31: invokeinterface #239,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        36: checkcast     #9                  // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP$Mapping
+        39: astore_3
+        40: aload_0
+        41: getfield      #59                 // Field coverage:Lorg/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl;
+        44: invokevirtual #157                // Method org/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl.getName:()Ljava/lang/String;
+        47: aload_3
+        48: invokevirtual #242                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP$Mapping.inputClassName:()Ljava/lang/String;
+        51: invokevirtual #118                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        54: ifeq          71
+        57: aload_3
+        58: invokevirtual #246                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP$Mapping.inputStartLine:()I
+        61: aload_3
+        62: invokevirtual #249                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP$Mapping.outputStartLine:()I
+        65: if_icmpne     71
+        68: goto          21
+        71: aload_0
+        72: getfield      #57                 // Field fragments:Ljava/util/HashMap;
+        75: aload_3
+        76: invokevirtual #242                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP$Mapping.inputClassName:()Ljava/lang/String;
+        79: invokevirtual #252                // Method java/util/HashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+        82: checkcast     #254                // class org/jacoco/cli/internal/core/internal/analysis/SourceNodeImpl
+        85: astore        4
+        87: aload         4
+        89: ifnonnull     120
+        92: new           #254                // class org/jacoco/cli/internal/core/internal/analysis/SourceNodeImpl
+        95: dup
+        96: aconst_null
+        97: aload_3
+        98: invokevirtual #242                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP$Mapping.inputClassName:()Ljava/lang/String;
+       101: invokespecial #257                // Method org/jacoco/cli/internal/core/internal/analysis/SourceNodeImpl."<init>":(Lorg/jacoco/cli/internal/core/analysis/ICoverageNode$ElementType;Ljava/lang/String;)V
+       104: astore        4
+       106: aload_0
+       107: getfield      #57                 // Field fragments:Ljava/util/HashMap;
+       110: aload_3
+       111: invokevirtual #242                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP$Mapping.inputClassName:()Ljava/lang/String;
+       114: aload         4
+       116: invokevirtual #261                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       119: pop
+       120: aload_3
+       121: invokevirtual #249                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP$Mapping.outputStartLine:()I
+       124: aload_3
+       125: invokevirtual #264                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP$Mapping.repeatCount:()I
+       128: iadd
+       129: iconst_1
+       130: isub
+       131: istore        5
+       133: aload_1
+       134: invokeinterface #270,  1          // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+       139: invokeinterface #273,  1          // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+       144: astore        6
+       146: aload         6
+       148: invokeinterface #235,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+       153: ifeq          225
+       156: aload         6
+       158: invokeinterface #239,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       163: checkcast     #275                // class org/jacoco/cli/internal/core/internal/analysis/Instruction
+       166: astore        7
+       168: aload_3
+       169: invokevirtual #249                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP$Mapping.outputStartLine:()I
+       172: aload         7
+       174: invokevirtual #278                // Method org/jacoco/cli/internal/core/internal/analysis/Instruction.getLine:()I
+       177: if_icmpgt     222
+       180: aload         7
+       182: invokevirtual #278                // Method org/jacoco/cli/internal/core/internal/analysis/Instruction.getLine:()I
+       185: iload         5
+       187: if_icmpgt     222
+       190: aload_3
+       191: invokevirtual #246                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP$Mapping.inputStartLine:()I
+       194: aload         7
+       196: invokevirtual #278                // Method org/jacoco/cli/internal/core/internal/analysis/Instruction.getLine:()I
+       199: iadd
+       200: aload_3
+       201: invokevirtual #249                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP$Mapping.outputStartLine:()I
+       204: isub
+       205: istore        8
+       207: aload         4
+       209: aload         7
+       211: invokevirtual #282                // Method org/jacoco/cli/internal/core/internal/analysis/Instruction.getInstructionCounter:()Lorg/jacoco/cli/internal/core/analysis/ICounter;
+       214: getstatic     #288                // Field org/jacoco/cli/internal/core/internal/analysis/CounterImpl.COUNTER_0_0:Lorg/jacoco/cli/internal/core/internal/analysis/CounterImpl;
+       217: iload         8
+       219: invokevirtual #292                // Method org/jacoco/cli/internal/core/internal/analysis/SourceNodeImpl.increment:(Lorg/jacoco/cli/internal/core/analysis/ICounter;Lorg/jacoco/cli/internal/core/analysis/ICounter;I)V
+       222: goto          146
+       225: goto          21
+       228: return
+
+  public org.jacoco.cli.internal.asm.FieldVisitor visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object);
+    Code:
+         0: aload_2
+         1: aload_0
+         2: getfield      #59                 // Field coverage:Lorg/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl;
+         5: invokevirtual #157                // Method org/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl.getName:()Ljava/lang/String;
+         8: invokestatic  #162                // Method org/jacoco/cli/internal/core/internal/instr/InstrSupport.assertNotInstrumented:(Ljava/lang/String;Ljava/lang/String;)V
+        11: aload_0
+        12: iload_1
+        13: aload_2
+        14: aload_3
+        15: aload         4
+        17: aload         5
+        19: invokespecial #306                // Method org/jacoco/cli/internal/core/internal/flow/ClassProbesVisitor.visitField:(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;)Lorg/jacoco/cli/internal/asm/FieldVisitor;
+        22: areturn
+
+  public void visitTotalProbeCount(int);
+    Code:
+         0: return
+
+  public void visitEnd();
+    Code:
+         0: aload_0
+         1: getfield      #57                 // Field fragments:Ljava/util/HashMap;
+         4: invokevirtual #315                // Method java/util/HashMap.isEmpty:()Z
+         7: ifne          36
+        10: aload_0
+        11: getfield      #59                 // Field coverage:Lorg/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl;
+        14: aload_0
+        15: getfield      #57                 // Field fragments:Ljava/util/HashMap;
+        18: invokevirtual #316                // Method java/util/HashMap.values:()Ljava/util/Collection;
+        21: iconst_0
+        22: anewarray     #254                // class org/jacoco/cli/internal/core/internal/analysis/SourceNodeImpl
+        25: invokeinterface #320,  2          // InterfaceMethod java/util/Collection.toArray:([Ljava/lang/Object;)[Ljava/lang/Object;
+        30: invokestatic  #326                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+        33: invokevirtual #330                // Method org/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl.setFragments:(Ljava/util/Collection;)V
+        36: return
+
+  public java.lang.String getClassName();
+    Code:
+         0: aload_0
+         1: getfield      #59                 // Field coverage:Lorg/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl;
+         4: invokevirtual #157                // Method org/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl.getName:()Ljava/lang/String;
+         7: areturn
+
+  public java.lang.String getSuperClassName();
+    Code:
+         0: aload_0
+         1: getfield      #59                 // Field coverage:Lorg/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl;
+         4: invokevirtual #335                // Method org/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl.getSuperName:()Ljava/lang/String;
+         7: areturn
+
+  public java.util.Set<java.lang.String> getClassAnnotations();
+    Code:
+         0: aload_0
+         1: getfield      #50                 // Field classAnnotations:Ljava/util/Set;
+         4: areturn
+
+  public java.util.Set<java.lang.String> getClassAttributes();
+    Code:
+         0: aload_0
+         1: getfield      #52                 // Field classAttributes:Ljava/util/Set;
+         4: areturn
+
+  public int getClassAccess();
+    Code:
+         0: aload_0
+         1: getfield      #77                 // Field classAccess:I
+         4: ireturn
+
+  public java.lang.String getSourceFileName();
+    Code:
+         0: aload_0
+         1: getfield      #59                 // Field coverage:Lorg/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl;
+         4: invokevirtual #341                // Method org/jacoco/cli/internal/core/internal/analysis/ClassCoverageImpl.getSourceFileName:()Ljava/lang/String;
+         7: areturn
+
+  public org.jacoco.cli.internal.core.internal.analysis.filter.KotlinSMAP getKotlinSMAP();
+    Code:
+         0: aload_0
+         1: getfield      #127                // Field smap:Lorg/jacoco/cli/internal/core/internal/analysis/filter/KotlinSMAP;
+         4: areturn
+
+  public org.jacoco.cli.internal.asm.MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]);
+    Code:
+         0: aload_0
+         1: iload_1
+         2: aload_2
+         3: aload_3
+         4: aload         4
+         6: aload         5
+         8: invokevirtual #346                // Method visitMethod:(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)Lorg/jacoco/cli/internal/core/internal/flow/MethodProbesVisitor;
+        11: areturn
+
+  static org.jacoco.cli.internal.core.internal.analysis.StringPool access$000(org.jacoco.cli.internal.core.internal.analysis.ClassAnalyzer);
+    Code:
+         0: aload_0
+         1: getfield      #63                 // Field stringPool:Lorg/jacoco/cli/internal/core/internal/analysis/StringPool;
+         4: areturn
+
+  static void access$100(org.jacoco.cli.internal.core.internal.analysis.ClassAnalyzer, java.lang.String, java.lang.String, java.lang.String, org.jacoco.cli.internal.core.internal.analysis.InstructionsBuilder, org.jacoco.cli.internal.asm.tree.MethodNode);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: aload_3
+         4: aload         4
+         6: aload         5
+         8: invokespecial #357                // Method addMethodCoverage:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/jacoco/cli/internal/core/internal/analysis/InstructionsBuilder;Lorg/jacoco/cli/internal/asm/tree/MethodNode;)V
+        11: return
+}

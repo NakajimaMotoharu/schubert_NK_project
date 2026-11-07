@@ -1,0 +1,337 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T08:54:40.825304+09:00",
+  "source": "bfb6cd69928a4ca1259ce81977cd64c2f6591ade",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "tests": 15,
+  "newUniqueTests": 15,
+  "requalifiedSemanticContracts": 0,
+  "newDirectWholeSourceProof": 1,
+  "registeredWholeComponentDelta": null,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 171,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 32,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 48,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 21,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 5,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "wholeWrittenTargetCodeCoverage100": true,
+  "branchStatus": "FOUR_COUNTERS_100",
+  "sourceFilePhysicalClosure": {
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission$1": {
+      "name": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission$1",
+      "access": 4128,
+      "sourceFile": "ServiceDatabaseAdmission.java",
+      "methods": [
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "code": true,
+          "access": 8
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission": {
+      "name": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission",
+      "access": 49,
+      "sourceFile": "ServiceDatabaseAdmission.java",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;Ljava/lang/String;)V",
+          "code": true,
+          "access": 1
+        },
+        {
+          "name": "verify",
+          "descriptor": "(Ljava/sql/Connection;)V",
+          "code": true,
+          "access": 1
+        },
+        {
+          "name": "unavailable",
+          "descriptor": "()Ljava/sql/SQLException;",
+          "code": true,
+          "access": 10
+        },
+        {
+          "name": "required",
+          "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+          "code": true,
+          "access": 10
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "code": true,
+          "access": 8
+        }
+      ]
+    }
+  },
+  "physical": {
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission$1": "ec0686a32f8ca38c46b4af0d55df2347737a237a0bf97f3d3fe5c0e81776b4d0",
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission": "6e017834573dea6528e96e9d5d766d2220a376baeb4eaf29f67dd278b6c69c16"
+  },
+  "classIds": {
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission$1": "605cf4684fad9433",
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission": "22356225c9480ae6"
+  },
+  "normalObservedCrc": {
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission$1": "605cf4684fad9433",
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission": "22356225c9480ae6",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures": "e71892e3fd7a4ca6",
+    "dev/codex/schubert/nk/storage/ServiceConfigFiles$Service": "b6da8fae75d6f6c6"
+  },
+  "normalProductInitializations": [
+    "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures",
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission",
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission$1",
+    "dev/codex/schubert/nk/storage/ServiceConfigFiles$Service"
+  ],
+  "normalDependencyInitCount": 4,
+  "methodClosure": [
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission$1",
+      "normalCodeMethods": 1,
+      "reportMethods": 0,
+      "compilerFilteredCodeMethods": 1,
+      "rawProbeCovered": 4,
+      "rawProbeTotal": 6,
+      "rawProbesNotClaimedAllExecuted": true
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission",
+      "normalCodeMethods": 5,
+      "reportMethods": 5,
+      "compilerFilteredCodeMethods": 0,
+      "rawProbeCovered": 60,
+      "rawProbeTotal": 65,
+      "rawProbesNotClaimedAllExecuted": true
+    }
+  ],
+  "automaticCompilerGeneratedFiltering": [
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission$1",
+      "sourceFile": "ServiceDatabaseAdmission.java",
+      "classAccess": 4128,
+      "methodNames": [
+        {
+          "name": "<clinit>",
+          "descriptor": "()V"
+        }
+      ],
+      "reason": "JAVAC_COMPILER_ENUM_SWITCH_TABLE_ACC_SYNTHETIC_CLASS_PINNED_STANDARD_SYNTHETIC_CLASS_FILTER",
+      "eligibleCounterDenominator": 0,
+      "ratio": null,
+      "actualNormalClassId": "605cf4684fad9433",
+      "rawProbeCovered": 4,
+      "rawProbeTotal": 6,
+      "physicalClassRetained": true
+    }
+  ],
+  "pinnedDefaultFilterMetadataManifestSha256": "e46fa84478c0a164f0bb4d923dbf8e926592a7778d6f668d2de1b043ff9c8f2e",
+  "wholeDependencyQualified": false,
+  "manualCoverageExclusions": [],
+  "oldExecCombined": false,
+  "sourceAssertionNegativeChecks": 6,
+  "staticRaw": 6,
+  "staticApplicable": 0,
+  "checkstyle": 0,
+  "staticPreflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23652-service-db-admission-preflight-v1/manifest.json",
+    "sha256": "3f18a00ff151a9fb14d9f92a04efb8ea3c71061cd80116cf62c293ee512ec873"
+  },
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java": "895f340ff7d9464b24de5f357c799a8d61b0a3d25479cd9ff57b80e48f19166c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": "bf179887c2496723d5ddb4ee0be02c5e599ecba781f5b8338367bb21648627a5",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java": "11b33bed1889750459c6e27c65a7cacd69c51c79f78cd85da252093c504912d6",
+    "evidence/01_PT/018_NK-OPS-001/input/501_service_db_admission_qualifier.py": "36cbeb64612b4d73de75598e2845dbff62321b602ce331a37e4aaa935c3b8d7d",
+    "evidence/01_PT/018_NK-OPS-001/input/500_service_db_admission_scope.json": "65ad26c7fb7359484eab38ac4efa7ef1e3543d37c94ed7a54653aafd1ea144ff"
+  },
+  "environment": {
+    "file.encoding": "UTF-8",
+    "java.version": "25.0.4",
+    "os.arch": "amd64",
+    "os.name": "Linux",
+    "user.timezone": "Asia/Tokyo"
+  },
+  "caseTimings": [
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "name": "dbAdmission001UrlBoundsAndBothRoles()",
+      "seconds": "0.004"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "name": "dbAdmission002InvalidUrlsAndNullConstructorInputs()",
+      "seconds": "0.002"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "name": "dbAdmission014TwoCloseFaultsAlwaysAttemptReverseOrder()",
+      "seconds": "0.001"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "name": "dbAdmission010ErrorFaultIdentityAndCleanup()",
+      "seconds": "0.002"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "name": "dbAdmission015RepeatAndParallelUseIndependentBorrowedPorts()",
+      "seconds": "0.008"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "name": "dbAdmission004ConnectionSettingsAndNullContract()",
+      "seconds": "0.001"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "name": "dbAdmission007EachSqlFaultIsFixedAndSanitized()",
+      "seconds": "0.072"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "name": "dbAdmission011KnownSqlBodyYieldsToUnknownClose()",
+      "seconds": "0.001"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "name": "dbAdmission012UnknownPrimaryRetainsOnlyFixedSecondary()",
+      "seconds": "0.003"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "name": "dbAdmission008SqlCloseFaultCannotReturnSuccess()",
+      "seconds": "0.002"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "name": "dbAdmission003FixedProjectionAndBorrowedConnection()",
+      "seconds": "0.001"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "name": "dbAdmission013ErrorPrimaryAndBothCloseFaultsRetainIdentity()",
+      "seconds": "0.001"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "name": "dbAdmission006MissingStatementAndRowsCloseOnlyAcquiredPorts()",
+      "seconds": "0.001"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "name": "dbAdmission005EachProjectionInvariantFailsClosed()",
+      "seconds": "0.004"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "name": "dbAdmission009RuntimeFaultIdentityAndCleanup()",
+      "seconds": "0.001"
+    }
+  ],
+  "files": {
+    "original-classinfo-begin.safe.json": "2601a7251cc01fcf426e02ea3b61f9c1fda658e32dd6dd9cf8450f9f0376488d",
+    "original-coverage.stdout": "dc59463a750c6ed1d2a3c722cfc53955d74cd34dbd77d6a2d3eb2543ccccf61e",
+    "original-execinfo-begin.safe.json": "bba5bcc5486a0b8fb2c1985a38d92608c25f09eee8cbc28bdc72bc3948d256e2",
+    "original-coverage-exit.safe.json": "e4354292c00570d5384fc8b985c78f18461c52b0475658e92c497e9f8bbda235",
+    "original-classinfo-exit.safe.json": "6e5fcaebc61b7974f69bc64790e78e857f1da5b4a3c19e0b9955fc3c077df181",
+    "original-unit-begin.safe.json": "9f8d52b676b0bec3e81f231493176b7e29bd45c37e8dcbee955b6d6b9e1bf601",
+    "original-unit-process.safe.json": "9fd63f2dfb786ef6a87e0facde1d01bb86bac48e51c069c2433d9a5684c7d92e",
+    "original-coverage-begin.safe.json": "f084de80ba258514c2f142dacf3f7ef3df77e7993770c9d32c50929bd90f45f8",
+    "original-classinfo.stdout": "6c2b8eadd063d761cad30f2da982b2c9297edd6ba0e9d6ff389ee9b00a67d4ff",
+    "original-execinfo-process.safe.json": "8b13007bffb020e561deac77354c887d035f40b5790b05776232bd7d08c20f0a",
+    "original-coverage.xml": "0dffe237f1ccd299a58d44844384b7983d4500f0f9ee23c47a04f1d5639fe6da",
+    "original-coverage-process.safe.json": "5788cbaad68aba76135b8bfc64c04ae751cc41f0cdbe8501e9692fe938b60b20",
+    "original-execinfo-exit.safe.json": "3646deb3011f195454ce52286d1f23b1ca391304b09078954848a4dcfb2d8b6e",
+    "original-execinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "jacoco.exec": "bd4b03af4a6c911053cab2e9c38bc2fa31020e8987ee48495509db8e06531647",
+    "original-execinfo.stdout": "5884420171124f6aa568d3d999378029f2ec9a0c7869ab71a2fa103cfb54e08f",
+    "original-begin.json": "2720ac3dfc702323ab5e675d7497881e365bd9d21ec791d386e88436211769e3",
+    "original-unit-exit.safe.json": "7433e8d83c6e30694ed53827814207da1fdf487f550b9020cbc9319eaeaf36a1",
+    "original-classinfo-process.safe.json": "3b9360a02b31d6d2559a73336c2a065aba03587b7d732cdbccf210ac2cebe09d",
+    "original-unit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-manifest.json": "c99f0c4473772b9a9af51b59417abd67630e380b0702ae7b94c215cbe00cc74f",
+    "original-classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-coverage.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-class-init.stdout": "7e5e8b03de97e3430ea058155e7f6994e7e7afc945823e10eb5dec691b4b36fa",
+    "original-unit.stdout": "f79e65cc8d2a6897c5d2087e543e785d81a4d34e55dece8a49704babb9084dc1",
+    "original-TEST-junit-jupiter.xml": "c3504eb5223ec570cd54023ebca178d94ed9750dd31f19b82e7f650c71651b0a",
+    "original-TEST-junit-platform-suite.xml": "3670bc6f301c7ce2d01b0c09b956d26ac8fd1fd091df1abf1dfebf992d0e95fc",
+    "original-TEST-junit-vintage.xml": "e268401ff34954c5440d147e487ca0b977d304c1cdad1e6c148edd837d947efd",
+    "static-pmd.stdout": "ebffd9de695acd4045759794bbc50d95216142f9b34e7185858e8caa1d5bff11",
+    "static-checkstyle-exit.safe.json": "2cea036e09f6a758a5478038aa15afb7df807f48a2e0bba2e0ca915cf4ba909c",
+    "static-pmd.stderr": "72fbc0455ef62c7c37826830de091633f3283e3b529d60b7adfc474f5551e8fe",
+    "static-pmd-exit.safe.json": "6abfdb295fc1aa948b212dd6f2bb721c1e29b8ca835a0cb1feaee8b3641cad34",
+    "static-checkstyle-process.safe.json": "9ed0ebd8d1eb498142e5608aff7945cd3e686c981562131ae45e99506a35bb68",
+    "static-pmd-begin.safe.json": "c8d4bf1ac0bbb47c0df1ab9e5723412a71bd52a76109d68d14517570ec7701ad",
+    "static-sources.txt": "e1e4c5b4dbc4266d6128029d97756c64e1f37fb349c0230fc7308e0be093b472",
+    "static-pmd-process.safe.json": "5e54ec68cbe22e3d1fbbc11593595ebd681bea044d80ab57cc4016ea14b522ab",
+    "static-checkstyle.xml": "97a57530759387b9546980521d5352a5da393974a47e62d8ba4b4a916931cd60",
+    "static-checkstyle-begin.safe.json": "606f9cbee8d3dbd2c3af25268d67569395c7b57341da039ef090d5916e2911e8",
+    "static-checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "static-manifest.json": "75a4f7ac782410151a9605b583078c1af29c459c29c76a15342285cad9d35e4c",
+    "static-pmd.xml": "f61986c16d57b520c54b16577b49162edc8ed70dea2c3e908aec297014e87e08",
+    "static-checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdk-class-analyzer.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdk-default-filters.stdout": "9c81f437a8ff45571a9bcc5347a1ffdd57031dd852c153960506457a40717998",
+    "sdk-class-analyzer-exit.safe.json": "88af4bace2b98326c443523b87db82ec0beb3f04582a9d76fc202a8ad7a98fde",
+    "sdk-synthetic-filter-begin.safe.json": "1bfd29eefe3af20056ba54bd444b19f6875151c62a397fafc2f3933aeb989811",
+    "sdk-synthetic-class-filter.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdk-synthetic-filter-process.safe.json": "e85872e684fea2efb5cd44465ee4366836e902c09ab1420962c5bb9863b5ea44",
+    "sdk-default-filters-exit.safe.json": "40c18d8eefd61a36934ff56123c20d15bd3c73e09b9c758493aa01936bee0829",
+    "sdk-class-analyzer.stdout": "7ca5a48840e62979d0254437d08769b887ba285e6c9411116e6f68e91ce02fcc",
+    "sdk-class-analyzer-begin.safe.json": "1b6224cee15596fa9fc4afe4a511d8c5b632b18b06eccb9d94675f86edf6fba4",
+    "sdk-synthetic-filter.stdout": "a6381bfb2e5aa60ef72e325dc4f502c1fdcf9e1ce38fb51c80f6423f6248dfe5",
+    "sdk-synthetic-filter.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdk-synthetic-filter-exit.safe.json": "7233022c45d7e8367a3455d1b497dc1d978275699a3ffbc5cd5884173ded7814",
+    "sdk-default-filters-begin.safe.json": "13a1c31142e4987b04d7b6523aaacb91d513e818e2b7de47f735ef1994361fda",
+    "sdk-synthetic-class-filter.stdout": "61da69e6161d46b5f17017106f181f964d8e2fbca7fafe793b421e84b3e483c2",
+    "sdk-default-filters.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdk-synthetic-class-filter-exit.safe.json": "94f61544aac9d4a9c82394fadb8d90ea73080629c0e79f86e9ba2b2fd67d0a86",
+    "sdk-synthetic-class-filter-process.safe.json": "46c6c9f748fe40053198a12a933abeeb59c1f04c5784d1d856a460b20d5cfcf5",
+    "sdk-default-filters-process.safe.json": "fe816d881253973433893b0dba8ce2cc7bac6977ddd6d249b4572e5120f72238",
+    "sdk-class-analyzer-process.safe.json": "535ba018fed5740755374462064e3d0366e7249e6f6f8798c7be2a7efc9c1d6c",
+    "sdk-synthetic-class-filter-begin.safe.json": "d75b88fc3a0fd2ff2c5b15ad54c4d1262204ff55726bb4c840f55f6cebcd82f2",
+    "sdk-manifest.json": "e46fa84478c0a164f0bb4d923dbf8e926592a7778d6f668d2de1b043ff9c8f2e"
+  },
+  "originalRealDatabaseTestsCompiled": 0,
+  "actualJdbcDriverOrDatabaseActions": 0,
+  "actualFilesystemOrDescriptorActions": 0,
+  "actualBackendActions": 0,
+  "heldFourInitializations": 0,
+  "ownVirtualThreadTasks": 8,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "bug": "BUG-2491",
+  "ykt": "YKT-2229",
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/503_service_db_admission_independent_post.py",
+    "sha256": "751f6c7c20913885948d7b9435ba8caacdc83eee5a1af10e6e524368f153268a"
+  }
+}

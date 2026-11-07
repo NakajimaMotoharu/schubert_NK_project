@@ -38,3 +38,7 @@ root clean verifyの8 Java testとして実行し、002・evidence/manifest.json
 ## 借用JDBC属性検証の独立通常Port（2026-11-08）
 
 ServiceDatabaseAdmissionPortTest/PT-OPS-DBPORT-001～015、SourceFile二physical（compiler enum switch helperを含む）、仕様3791/input500・実行前502/PG23652（manifest3f18a00ff151a9fb14d9f92a04efb8ea3c71061cd80116cf62c293ee512ec873）。main7aed/normal22084/static22086不変、new Testのcompile23670/static23672は完了、PMDraw6をnull negative4/standalone own thread2の各文脈で非該当・適用0/CS0、規則抑制0。元実DB Test/fixtureは未実行HOLD、当十五もこのsource保存時点ではまだ未実行。結果3792/PG23656で真正実行後に更新し、正式1964-53や実DB接続/起動の資格へ加算しない。BUG2491/YKT2229は新Test cursor式の修正前起票・23662before、修正内容以外token逆同値を23652で確認。
+
+### 借用JDBC Port十五の限定実行完了
+
+初23654全15成功/FESabort0、23656独立post0（9d40975e1b15b7737d4c9cc1d45336d5ed0aa14bb0c10a117f567e3d3b9ccd73）。通常Main L48/M5/C1/B32miss0、compiler生成$1は物理/CRCに含め標準filterによる分母0を3792へ明記、手動除外0。Main不変、実DB元Test/fixtureはHOLD、正式1964-53/工数null不変。仕様3791・sourcebfb6・BUG2491/YKT2229の限定是正/五対象非該当と初15実行を結合済。

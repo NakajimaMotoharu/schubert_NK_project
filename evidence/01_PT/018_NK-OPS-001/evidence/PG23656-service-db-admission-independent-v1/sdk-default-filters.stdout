@@ -1,0 +1,301 @@
+Compiled from "Filters.java"
+public final class org.jacoco.cli.internal.core.internal.analysis.filter.Filters {
+  public static final java.lang.String KOTLIN_METADATA_DESC;
+
+  public static final org.jacoco.cli.internal.core.internal.analysis.filter.IFilter NONE;
+
+  private org.jacoco.cli.internal.core.internal.analysis.filter.Filters();
+    Code:
+         0: aload_0
+         1: invokespecial #17                 // Method java/lang/Object."<init>":()V
+         4: return
+
+  public static org.jacoco.cli.internal.core.internal.analysis.filter.IFilter all();
+    Code:
+         0: invokestatic  #24                 // Method allCommonFilters:()Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilter;
+         3: astore_0
+         4: invokestatic  #27                 // Method allKotlinFilters:()Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilter;
+         7: astore_1
+         8: invokestatic  #30                 // Method allNonKotlinFilters:()Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilter;
+        11: astore_2
+        12: new           #7                  // class org/jacoco/cli/internal/core/internal/analysis/filter/Filters$1
+        15: dup
+        16: aload_0
+        17: aload_1
+        18: aload_2
+        19: invokespecial #33                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/Filters$1."<init>":(Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilter;Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilter;Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilter;)V
+        22: areturn
+
+  private static org.jacoco.cli.internal.core.internal.analysis.filter.IFilter allCommonFilters();
+    Code:
+         0: new           #35                 // class org/jacoco/cli/internal/core/internal/analysis/filter/FilterSet
+         3: dup
+         4: bipush        17
+         6: anewarray     #37                 // class org/jacoco/cli/internal/core/internal/analysis/filter/IFilter
+         9: dup
+        10: iconst_0
+        11: new           #39                 // class org/jacoco/cli/internal/core/internal/analysis/filter/SyntheticClassFilter
+        14: dup
+        15: invokespecial #40                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/SyntheticClassFilter."<init>":()V
+        18: aastore
+        19: dup
+        20: iconst_1
+        21: new           #42                 // class org/jacoco/cli/internal/core/internal/analysis/filter/EnumFilter
+        24: dup
+        25: invokespecial #43                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/EnumFilter."<init>":()V
+        28: aastore
+        29: dup
+        30: iconst_2
+        31: new           #45                 // class org/jacoco/cli/internal/core/internal/analysis/filter/BridgeFilter
+        34: dup
+        35: invokespecial #46                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/BridgeFilter."<init>":()V
+        38: aastore
+        39: dup
+        40: iconst_3
+        41: new           #48                 // class org/jacoco/cli/internal/core/internal/analysis/filter/SynchronizedFilter
+        44: dup
+        45: invokespecial #49                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/SynchronizedFilter."<init>":()V
+        48: aastore
+        49: dup
+        50: iconst_4
+        51: new           #51                 // class org/jacoco/cli/internal/core/internal/analysis/filter/TryWithResourcesJavac11Filter
+        54: dup
+        55: invokespecial #52                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/TryWithResourcesJavac11Filter."<init>":()V
+        58: aastore
+        59: dup
+        60: iconst_5
+        61: new           #54                 // class org/jacoco/cli/internal/core/internal/analysis/filter/TryWithResourcesJavacFilter
+        64: dup
+        65: invokespecial #55                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/TryWithResourcesJavacFilter."<init>":()V
+        68: aastore
+        69: dup
+        70: bipush        6
+        72: new           #57                 // class org/jacoco/cli/internal/core/internal/analysis/filter/TryWithResourcesEcjFilter
+        75: dup
+        76: invokespecial #58                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/TryWithResourcesEcjFilter."<init>":()V
+        79: aastore
+        80: dup
+        81: bipush        7
+        83: new           #60                 // class org/jacoco/cli/internal/core/internal/analysis/filter/FinallyFilter
+        86: dup
+        87: invokespecial #61                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/FinallyFilter."<init>":()V
+        90: aastore
+        91: dup
+        92: bipush        8
+        94: new           #63                 // class org/jacoco/cli/internal/core/internal/analysis/filter/PrivateEmptyNoArgConstructorFilter
+        97: dup
+        98: invokespecial #64                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/PrivateEmptyNoArgConstructorFilter."<init>":()V
+       101: aastore
+       102: dup
+       103: bipush        9
+       105: new           #66                 // class org/jacoco/cli/internal/core/internal/analysis/filter/AssertFilter
+       108: dup
+       109: invokespecial #67                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/AssertFilter."<init>":()V
+       112: aastore
+       113: dup
+       114: bipush        10
+       116: new           #69                 // class org/jacoco/cli/internal/core/internal/analysis/filter/StringSwitchJavacFilter
+       119: dup
+       120: invokespecial #70                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/StringSwitchJavacFilter."<init>":()V
+       123: aastore
+       124: dup
+       125: bipush        11
+       127: new           #72                 // class org/jacoco/cli/internal/core/internal/analysis/filter/StringSwitchFilter
+       130: dup
+       131: invokespecial #73                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/StringSwitchFilter."<init>":()V
+       134: aastore
+       135: dup
+       136: bipush        12
+       138: new           #75                 // class org/jacoco/cli/internal/core/internal/analysis/filter/EnumEmptyConstructorFilter
+       141: dup
+       142: invokespecial #76                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/EnumEmptyConstructorFilter."<init>":()V
+       145: aastore
+       146: dup
+       147: bipush        13
+       149: new           #78                 // class org/jacoco/cli/internal/core/internal/analysis/filter/RecordsFilter
+       152: dup
+       153: invokespecial #79                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/RecordsFilter."<init>":()V
+       156: aastore
+       157: dup
+       158: bipush        14
+       160: new           #81                 // class org/jacoco/cli/internal/core/internal/analysis/filter/ExhaustiveSwitchFilter
+       163: dup
+       164: invokespecial #82                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/ExhaustiveSwitchFilter."<init>":()V
+       167: aastore
+       168: dup
+       169: bipush        15
+       171: new           #84                 // class org/jacoco/cli/internal/core/internal/analysis/filter/RecordPatternFilter
+       174: dup
+       175: invokespecial #85                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/RecordPatternFilter."<init>":()V
+       178: aastore
+       179: dup
+       180: bipush        16
+       182: new           #87                 // class org/jacoco/cli/internal/core/internal/analysis/filter/AnnotationGeneratedFilter
+       185: dup
+       186: invokespecial #88                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/AnnotationGeneratedFilter."<init>":()V
+       189: aastore
+       190: invokespecial #91                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/FilterSet."<init>":([Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilter;)V
+       193: areturn
+
+  private static org.jacoco.cli.internal.core.internal.analysis.filter.IFilter allNonKotlinFilters();
+    Code:
+         0: new           #35                 // class org/jacoco/cli/internal/core/internal/analysis/filter/FilterSet
+         3: dup
+         4: iconst_1
+         5: anewarray     #37                 // class org/jacoco/cli/internal/core/internal/analysis/filter/IFilter
+         8: dup
+         9: iconst_0
+        10: new           #93                 // class org/jacoco/cli/internal/core/internal/analysis/filter/SyntheticFilter
+        13: dup
+        14: invokespecial #94                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/SyntheticFilter."<init>":()V
+        17: aastore
+        18: invokespecial #91                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/FilterSet."<init>":([Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilter;)V
+        21: areturn
+
+  private static org.jacoco.cli.internal.core.internal.analysis.filter.IFilter allKotlinFilters();
+    Code:
+         0: new           #35                 // class org/jacoco/cli/internal/core/internal/analysis/filter/FilterSet
+         3: dup
+         4: bipush        19
+         6: anewarray     #37                 // class org/jacoco/cli/internal/core/internal/analysis/filter/IFilter
+         9: dup
+        10: iconst_0
+        11: new           #96                 // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinGeneratedFilter
+        14: dup
+        15: invokespecial #97                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinGeneratedFilter."<init>":()V
+        18: aastore
+        19: dup
+        20: iconst_1
+        21: new           #99                 // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSyntheticAccessorsFilter
+        24: dup
+        25: invokespecial #100                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSyntheticAccessorsFilter."<init>":()V
+        28: aastore
+        29: dup
+        30: iconst_2
+        31: new           #102                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSerializableFilter
+        34: dup
+        35: invokespecial #103                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSerializableFilter."<init>":()V
+        38: aastore
+        39: dup
+        40: iconst_3
+        41: new           #105                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinEnumFilter
+        44: dup
+        45: invokespecial #106                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinEnumFilter."<init>":()V
+        48: aastore
+        49: dup
+        50: iconst_4
+        51: new           #108                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinJvmOverloadsFilter
+        54: dup
+        55: invokespecial #109                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinJvmOverloadsFilter."<init>":()V
+        58: aastore
+        59: dup
+        60: iconst_5
+        61: new           #111                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinJvmStaticFilter
+        64: dup
+        65: invokespecial #112                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinJvmStaticFilter."<init>":()V
+        68: aastore
+        69: dup
+        70: bipush        6
+        72: new           #114                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSafeCallOperatorFilter
+        75: dup
+        76: invokespecial #115                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinSafeCallOperatorFilter."<init>":()V
+        79: aastore
+        80: dup
+        81: bipush        7
+        83: new           #117                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinLateinitFilter
+        86: dup
+        87: invokespecial #118                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinLateinitFilter."<init>":()V
+        90: aastore
+        91: dup
+        92: bipush        8
+        94: new           #120                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinWhenFilter
+        97: dup
+        98: invokespecial #121                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinWhenFilter."<init>":()V
+       101: aastore
+       102: dup
+       103: bipush        9
+       105: new           #123                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinWhenStringFilter
+       108: dup
+       109: invokespecial #124                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinWhenStringFilter."<init>":()V
+       112: aastore
+       113: dup
+       114: bipush        10
+       116: new           #126                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinUnsafeCastOperatorFilter
+       119: dup
+       120: invokespecial #127                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinUnsafeCastOperatorFilter."<init>":()V
+       123: aastore
+       124: dup
+       125: bipush        11
+       127: new           #129                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinNotNullOperatorFilter
+       130: dup
+       131: invokespecial #130                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinNotNullOperatorFilter."<init>":()V
+       134: aastore
+       135: dup
+       136: bipush        12
+       138: new           #132                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinInlineClassFilter
+       141: dup
+       142: invokespecial #133                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinInlineClassFilter."<init>":()V
+       145: aastore
+       146: dup
+       147: bipush        13
+       149: new           #135                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinExposeBoxedFilter
+       152: dup
+       153: invokespecial #136                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinExposeBoxedFilter."<init>":()V
+       156: aastore
+       157: dup
+       158: bipush        14
+       160: new           #138                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinDefaultArgumentsFilter
+       163: dup
+       164: invokespecial #139                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinDefaultArgumentsFilter."<init>":()V
+       167: aastore
+       168: dup
+       169: bipush        15
+       171: new           #141                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinInlineFilter
+       174: dup
+       175: invokespecial #142                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinInlineFilter."<init>":()V
+       178: aastore
+       179: dup
+       180: bipush        16
+       182: new           #144                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinCoroutineFilter
+       185: dup
+       186: invokespecial #145                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinCoroutineFilter."<init>":()V
+       189: aastore
+       190: dup
+       191: bipush        17
+       193: new           #147                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinDefaultMethodsFilter
+       196: dup
+       197: invokespecial #148                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinDefaultMethodsFilter."<init>":()V
+       200: aastore
+       201: dup
+       202: bipush        18
+       204: new           #150                // class org/jacoco/cli/internal/core/internal/analysis/filter/KotlinComposeFilter
+       207: dup
+       208: invokespecial #151                // Method org/jacoco/cli/internal/core/internal/analysis/filter/KotlinComposeFilter."<init>":()V
+       211: aastore
+       212: invokespecial #91                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/FilterSet."<init>":([Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilter;)V
+       215: areturn
+
+  private static boolean isKotlinClass(org.jacoco.cli.internal.core.internal.analysis.filter.IFilterContext);
+    Code:
+         0: aload_0
+         1: invokeinterface #159,  1          // InterfaceMethod org/jacoco/cli/internal/core/internal/analysis/filter/IFilterContext.getClassAnnotations:()Ljava/util/Set;
+         6: ldc           #11                 // String Lkotlin/Metadata;
+         8: invokeinterface #165,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+        13: ireturn
+
+  static boolean access$000(org.jacoco.cli.internal.core.internal.analysis.filter.IFilterContext);
+    Code:
+         0: aload_0
+         1: invokestatic  #170                // Method isKotlinClass:(Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilterContext;)Z
+         4: ireturn
+
+  static {};
+    Code:
+         0: new           #35                 // class org/jacoco/cli/internal/core/internal/analysis/filter/FilterSet
+         3: dup
+         4: iconst_0
+         5: anewarray     #37                 // class org/jacoco/cli/internal/core/internal/analysis/filter/IFilter
+         8: invokespecial #91                 // Method org/jacoco/cli/internal/core/internal/analysis/filter/FilterSet."<init>":([Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilter;)V
+        11: putstatic     #174                // Field NONE:Lorg/jacoco/cli/internal/core/internal/analysis/filter/IFilter;
+        14: return
+}
