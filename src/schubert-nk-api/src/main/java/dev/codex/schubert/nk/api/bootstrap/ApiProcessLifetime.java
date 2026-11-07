@@ -20,7 +20,6 @@ import java.util.function.LongSupplier;
  * context or calls System.exit. SS312321342/SSC158/PG-D334/PT-OPS-API-READY001..008.
  */
 final class ApiProcessLifetime implements AutoCloseable {
-  private final AtomicBoolean retainedStopping = new AtomicBoolean();
   private final AtomicBoolean failed = new AtomicBoolean();
   private final CountDownLatch finished = new CountDownLatch(1);
   private final Thread owner = Thread.currentThread();
@@ -43,11 +42,10 @@ final class ApiProcessLifetime implements AutoCloseable {
   }
 
   boolean stopping() {
-    return retainedStopping.get();
+    return stopBudget.stopping();
   }
 
   void stop() {
-    retainedStopping.set(true);
     stopBudget.begin();
   }
 

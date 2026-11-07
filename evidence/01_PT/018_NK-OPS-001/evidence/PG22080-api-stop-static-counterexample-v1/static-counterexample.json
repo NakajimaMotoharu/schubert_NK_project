@@ -1,0 +1,15 @@
+{
+  "atJST": "2026-11-07T09:46:43.876737+09:00",
+  "classification": "STATIC_ORDER_COUNTEREXAMPLE_NOT_DYNAMIC_REPRODUCTION",
+  "sequence": [
+    "A: retainedStopping.set(true)",
+    "A: preempt before stopBudget.begin",
+    "B: stopping()==true",
+    "B: remainingStopNanos -> remainingNanos -> !begun -> IllegalStateException"
+  ],
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime.java": "ab638ca6a7701bc8cd176c08b4a645f2d8ee1f63acfdb95923dd8b446eccdeea",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudget.java": "6ae561e25cfcdcce0b6b61641b3b2afd7867cf0eaa646059c8b3606dd915e28b"
+  },
+  "productTestsExecuted": 0
+}

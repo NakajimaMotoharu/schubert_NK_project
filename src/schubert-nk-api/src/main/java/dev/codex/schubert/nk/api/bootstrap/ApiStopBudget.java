@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.bootstrap;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.LongSupplier;
 
 /**
@@ -14,7 +15,7 @@ final class ApiStopBudget {
   private static final long LIMIT_NANOS = TimeUnit.SECONDS.toNanos(60);
   private final Object lock = new Object();
   private final LongSupplier nanos;
-  private boolean begun;
+  private final AtomicBoolean begun = new AtomicBoolean();
   private boolean expired;
   private long began;
 
@@ -25,16 +26,21 @@ final class ApiStopBudget {
   /** One claim before reading time; a failed first clock cannot permit a later fresh deadline. */
   void begin() {
     synchronized (lock) {
-      if (begun) return;
-      begun = true;
+      if (begun.get()) return;
+      begun.set(true);
       began = time();
     }
+  }
+
+  /** BUG2416/YKT2161/PG-D1143: the budget claim is also the stop notification. */
+  boolean stopping() {
+    return begun.get();
   }
 
   /** Pre-notification use is refused; expiry, reverse time and clock failure never revive. */
   long remainingNanos() {
     synchronized (lock) {
-      if (!begun) throw new IllegalStateException("API stop budget not begun");
+      if (!begun.get()) throw new IllegalStateException("API stop budget not begun");
       if (expired) return 0;
       long elapsed = time() - began;
       if (elapsed < 0 || elapsed >= LIMIT_NANOS) {

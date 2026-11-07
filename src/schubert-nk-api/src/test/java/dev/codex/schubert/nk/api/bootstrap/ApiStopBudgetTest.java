@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -12,11 +13,12 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.Test;
 
-/** 1870/APISTOP001..018: literal arithmetic and own finite clock ports, no runtime hooks/TERM. */
+/** 1870/APISTOP001..020: literal arithmetic and own finite clock ports, no runtime hooks/TERM. */
 final class ApiStopBudgetTest {
   private static final String FIXTURE_CLOCK_49F3C56E = "clock";
 
@@ -44,6 +46,53 @@ final class ApiStopBudgetTest {
       Thread.currentThread().interrupt();
       throw new AssertionError(interrupted);
     }
+  }
+
+  @Test
+  void apiStop019AtomicClaimPublishesStopAndWaitsForTheFirstClock() throws Exception {
+    var f = new Fixture();
+    f.now.set(37);
+    var entered = new CountDownLatch(1);
+    var release = new CountDownLatch(1);
+    f.beforeTime =
+        () -> {
+          if (f.reads.get() == 1) {
+            entered.countDown();
+            await(release);
+          }
+        };
+    assertFalse(f.budget.stopping());
+    try (var executor = Executors.newFixedThreadPool(2)) {
+      var first = executor.submit(f.budget::begin);
+      Future<Long> remaining;
+      try {
+        await(entered);
+        assertTrue(f.budget.stopping());
+        remaining = executor.submit(f.budget::remainingNanos);
+        assertThrows(TimeoutException.class, () -> remaining.get(50, TimeUnit.MILLISECONDS));
+        assertEquals(1, f.reads.get());
+      } finally {
+        release.countDown();
+      }
+      first.get(10, TimeUnit.SECONDS);
+      assertEquals(60_000_000_000L, remaining.get(10, TimeUnit.SECONDS));
+      assertEquals(2, f.reads.get());
+      assertTrue(f.budget.stopping());
+    }
+  }
+
+  @Test
+  void apiStop020FailedFirstClockKeepsThePublishedStopAndExhaustedBudget() {
+    var f = new Fixture();
+    var failure = new IllegalStateException(FIXTURE_CLOCK_49F3C56E);
+    f.failure = failure;
+    assertFalse(f.budget.stopping());
+    assertSame(failure, assertThrows(IllegalStateException.class, f.budget::begin));
+    assertTrue(f.budget.stopping());
+    f.failure = null;
+    f.budget.begin();
+    assertEquals(0, f.budget.remainingNanos());
+    assertEquals(1, f.reads.get());
   }
 
   @Test
