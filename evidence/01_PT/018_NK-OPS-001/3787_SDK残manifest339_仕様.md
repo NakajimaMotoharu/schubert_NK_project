@@ -1,0 +1,5 @@
+# SDK残manifest339の限定仕様
+
+Separate remaining339 fixed public manifest inputs from original metadata, prior host68 exhausted and excluded. Exact same nine allowlisted existing Maven SDK coordinates/versions and two typed dependencyHashes roles only; no new artifact versions or runtime actions. Each public manifest hash bounded, no private raw/runtime archive/gitleaks capture files or protected paths, root/VM/native success metadata never execution evidence. SDK opaque bytes only/no JAR load/Maven/compiler/Java/PT/scanner/old producer/network. Input map schema/whole exact capture/actual SDK byte match plus independent post and multiset; unsupported/missing/mismatches UNKNOWN. Prior784 updates/remaining3709+22/actualSecretCountnull, formal unchanged. Frozen1/4/8 cap10.
+
+入力492/producer493/PG23630、独立post494/23632、close495/結果3788/PMO323/公開23634予定。元4493の固定集合から残file339/検出1488を先に選び、SDK9座標を増やさない。Public原manifestのnative/Root/VMの数字をruntime受入へ転用0。SDK旧製品jarや原本/DB/Backup/鍵/private raw/archiveへI-O0。元見積/費用を保持し追加発見を分離、meta反例はPT数でない。
