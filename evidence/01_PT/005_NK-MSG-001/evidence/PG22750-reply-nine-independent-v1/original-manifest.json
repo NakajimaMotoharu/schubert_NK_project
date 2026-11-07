@@ -1,0 +1,194 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "4188123e7c3fd5aa30cef9665369bcb2cf31a105",
+    "normalSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+    "inputHashes": {
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java": "d550340e90a7abef4ee03bd2099a87c5295e15029e13c2bffe8377e3dc171011",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java": "02b7320233f9bd86ad1eaf936718d16c5a2a6e15cd41cbca9b070868a9b9353e",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java": "1a28f9d8ec9438f13621358c02181557fdc3a19f4afd55303ad727ce6fc9ed75",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/PendingReply.java": "346a3d7ddf65889875a3f1907eda05fd061a4788aabf5d7361b461790185c42b",
+      "evidence/01_PT/018_NK-OPS-001/input/248_reply_wait_whole_qualifier.py": "031d71d30e25495a9bd255a99e14fe5dc6657370e832bbe06e3d2ca3771966e6",
+      "evidence/01_PT/018_NK-OPS-001/input/249_reply_wait_scope.json": "a83ad0b846ebccdeaf9f391ed8cfe1cd6351dbe6a33d7bad80333096c921e90d"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "bc6acaa867859b0f1d2f2e24dc27ba5627e7bf7c332448ae88bb077ea1b36fa7",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": "622ae1b70d2627b7b162a2cd1b07bc5201092e0628d9a50986892f2cbe7e98f9",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "compileManifestSha256": "086d2756d778f37b440803f81788bbc847fe994f4a2e23d75cc688a2589858e2",
+    "selected": [
+      "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest"
+    ],
+    "expectedTests": 9,
+    "newMethods": 0,
+    "requalifiedExistingMethods": 9,
+    "session": "PG22748-REPLY-NINE",
+    "startUTC": "2026-11-07T08:38:51.794055+00:00"
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T08:38:51.794172+00:00",
+      "endUTC": "2026-11-07T08:38:53.212811+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22748-reply-nine-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22748-reply-nine-unit-v1/jacoco.exec,sessionid=PG22748-REPLY-NINE,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22748-reply-nine-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22744-reply-nine-compile-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22748-reply-nine-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "6898a7ca28f4c36a935f9844bec1cd18f688480fd1d393e725c9d41d14c98a90",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T08:38:53.215115+00:00",
+      "endUTC": "2026-11-07T08:38:53.380130+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22748-reply-nine-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22748-reply-nine-unit-v1/component",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22748-reply-nine-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "ed3b78f5313cb71695a10c3cb61e2e31136d18e28d47e4da5f23ac9b340ba1fc",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T08:38:53.380423+00:00",
+      "endUTC": "2026-11-07T08:38:53.495436+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22748-reply-nine-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "ce39ec5be2e07b711ff0d79ab489418c5ed1ce2029168599daef6c62cb8670e5",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T08:38:53.495789+00:00",
+      "endUTC": "2026-11-07T08:38:53.610753+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22748-reply-nine-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "c37ea78cb8442e29eab10ed98faa3d96615a6b56cb4c4a5afe788c891ed3a13f",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "registrationIsBoundedDuplicateSafeAndReleasesCapacityOnCancel()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+      "name": "nanosecondDeadlineAndCopiesStayIndependent()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "lateCompletionAndExplicitExpiryFailTheWaiterWithoutDelivery()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "successfulCompletionIsAtomicAndDefensivelyCopiesBody()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+      "name": "concurrentRegistrationsRespectCapacityAndReuseAllSlots()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "oneOfOneHundredSimultaneousResponsesWins()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+      "name": "callerCompletionViewCannotSetOrCancelTheRegistryPromise()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+      "name": "terminalRaceHasOneWinnerAndReturnsThePermit()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "nullDeadlineAndCapacityContractsFailBeforeMutation()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 9,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry": "e0f96e0e6e9cf85633d8ca1c0c772421559ce169d3aad9bf050d56338d07c84d",
+    "dev/codex/schubert/nk/web/messaging/PendingReply": "c19ff358f56c4496c14c37bc498789d44c9efacdbda8b79c6d38261908e51c2d"
+  },
+  "formalUpdated": false
+}

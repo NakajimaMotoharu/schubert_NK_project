@@ -1,0 +1,350 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T17:39:17.614377+09:00",
+  "source": "4188123e7c3fd5aa30cef9665369bcb2cf31a105",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "tests": 9,
+  "newUniqueTests": 0,
+  "requalifiedExistingTests": 9,
+  "newSourceProofs": 0,
+  "newAcceptance": 0,
+  "waitDeadlineAdditions": 5,
+  "sourceTransformNegativeChecks": 4,
+  "allOtherJavaTokensFixturesAndOracleUnchanged": true,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 287,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 22,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 74,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 28,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 17,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 2,
+      "missed": 0
+    }
+  },
+  "familyCoverage": {
+    "dev/codex/schubert/nk/web/messaging/PendingReply": {
+      "INSTRUCTION": {
+        "covered": 57,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 13,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 8,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 8,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry": {
+      "INSTRUCTION": {
+        "covered": 230,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 22,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 61,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 20,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 9,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "wholeTargetCodeCoverage100": true,
+  "physical": {
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry": "e0f96e0e6e9cf85633d8ca1c0c772421559ce169d3aad9bf050d56338d07c84d",
+    "dev/codex/schubert/nk/web/messaging/PendingReply": "c19ff358f56c4496c14c37bc498789d44c9efacdbda8b79c6d38261908e51c2d"
+  },
+  "classIds": {
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry": "4a6c4db1d34d43ea",
+    "dev/codex/schubert/nk/web/messaging/PendingReply": "b423d06442672e85"
+  },
+  "rawProbes": {
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry": [
+      "4a6c4db1d34d43ea",
+      46,
+      46
+    ],
+    "dev/codex/schubert/nk/web/messaging/PendingReply": [
+      "b423d06442672e85",
+      11,
+      11
+    ]
+  },
+  "physicalProductInitializations": [
+    "dev/codex/schubert/nk/web/messaging/PendingReply",
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry"
+  ],
+  "jvmGeneratedLambdaOwners": {
+    "dev/codex/schubert/nk/web/messaging/PendingReply$$Lambda+0x000000009b0c8c48": "dev/codex/schubert/nk/web/messaging/PendingReply",
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry$$Lambda+0x000000009b13c000": "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry"
+  },
+  "lambdaOwnerNegativeGuards": 2,
+  "backendRootNativeFourHeldActions": 0,
+  "staticRaw": 8,
+  "individualStaticClassifications": [
+    {
+      "finding": {
+        "beginline": "107",
+        "endline": "107",
+        "begincolumn": "37",
+        "endcolumn": "69",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "ReplyCorrelationRegistryTest",
+        "method": "oneOfOneHundredSimultaneousResponsesWins",
+        "variable": "executor",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone PT owns bounded executor (Registry16/terminal3/registration20) and submits only in-memory Registry actions. Each start latch asserts five-second deadline, caller Future already5/10SECONDS; try-with-resources joins workers. Not container/application thread creation. Exact owner/site retained."
+    },
+    {
+      "finding": {
+        "beginline": "111",
+        "endline": "118",
+        "begincolumn": "13",
+        "endcolumn": "19",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "ReplyCorrelationRegistryTest",
+        "method": "oneOfOneHundredSimultaneousResponsesWins",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone PT owns bounded executor (Registry16/terminal3/registration20) and submits only in-memory Registry actions. Each start latch asserts five-second deadline, caller Future already5/10SECONDS; try-with-resources joins workers. Not container/application thread creation. Exact owner/site retained."
+    },
+    {
+      "finding": {
+        "beginline": "36",
+        "endline": "36",
+        "begincolumn": "36",
+        "endcolumn": "67",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "ReplyCorrelationTerminalRaceTest",
+        "method": "terminalRaceHasOneWinnerAndReturnsThePermit",
+        "variable": "workers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone PT owns bounded executor (Registry16/terminal3/registration20) and submits only in-memory Registry actions. Each start latch asserts five-second deadline, caller Future already5/10SECONDS; try-with-resources joins workers. Not container/application thread creation. Exact owner/site retained."
+    },
+    {
+      "finding": {
+        "beginline": "44",
+        "endline": "48",
+        "begincolumn": "15",
+        "endcolumn": "21",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "ReplyCorrelationTerminalRaceTest",
+        "method": "terminalRaceHasOneWinnerAndReturnsThePermit",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone PT owns bounded executor (Registry16/terminal3/registration20) and submits only in-memory Registry actions. Each start latch asserts five-second deadline, caller Future already5/10SECONDS; try-with-resources joins workers. Not container/application thread creation. Exact owner/site retained."
+    },
+    {
+      "finding": {
+        "beginline": "50",
+        "endline": "54",
+        "begincolumn": "15",
+        "endcolumn": "21",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "ReplyCorrelationTerminalRaceTest",
+        "method": "terminalRaceHasOneWinnerAndReturnsThePermit",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone PT owns bounded executor (Registry16/terminal3/registration20) and submits only in-memory Registry actions. Each start latch asserts five-second deadline, caller Future already5/10SECONDS; try-with-resources joins workers. Not container/application thread creation. Exact owner/site retained."
+    },
+    {
+      "finding": {
+        "beginline": "56",
+        "endline": "60",
+        "begincolumn": "15",
+        "endcolumn": "21",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "ReplyCorrelationTerminalRaceTest",
+        "method": "terminalRaceHasOneWinnerAndReturnsThePermit",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone PT owns bounded executor (Registry16/terminal3/registration20) and submits only in-memory Registry actions. Each start latch asserts five-second deadline, caller Future already5/10SECONDS; try-with-resources joins workers. Not container/application thread creation. Exact owner/site retained."
+    },
+    {
+      "finding": {
+        "beginline": "98",
+        "endline": "98",
+        "begincolumn": "36",
+        "endcolumn": "68",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "ReplyCorrelationTerminalRaceTest",
+        "method": "concurrentRegistrationsRespectCapacityAndReuseAllSlots",
+        "variable": "workers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone PT owns bounded executor (Registry16/terminal3/registration20) and submits only in-memory Registry actions. Each start latch asserts five-second deadline, caller Future already5/10SECONDS; try-with-resources joins workers. Not container/application thread creation. Exact owner/site retained."
+    },
+    {
+      "finding": {
+        "beginline": "103",
+        "endline": "107",
+        "begincolumn": "15",
+        "endcolumn": "21",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "ReplyCorrelationTerminalRaceTest",
+        "method": "concurrentRegistrationsRespectCapacityAndReuseAllSlots",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone PT owns bounded executor (Registry16/terminal3/registration20) and submits only in-memory Registry actions. Each start latch asserts five-second deadline, caller Future already5/10SECONDS; try-with-resources joins workers. Not container/application thread creation. Exact owner/site retained."
+    }
+  ],
+  "staticApplicable": 0,
+  "checkstyle": 0,
+  "unchangedMainSpotbugs": "0580a14592d3fc00820183034c584208e45b002802d2e3e173b5f752c7cf19f2",
+  "oldExecCombined": false,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java": "d550340e90a7abef4ee03bd2099a87c5295e15029e13c2bffe8377e3dc171011",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java": "02b7320233f9bd86ad1eaf936718d16c5a2a6e15cd41cbca9b070868a9b9353e",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java": "1a28f9d8ec9438f13621358c02181557fdc3a19f4afd55303ad727ce6fc9ed75",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/PendingReply.java": "346a3d7ddf65889875a3f1907eda05fd061a4788aabf5d7361b461790185c42b",
+    "evidence/01_PT/018_NK-OPS-001/input/248_reply_wait_whole_qualifier.py": "031d71d30e25495a9bd255a99e14fe5dc6657370e832bbe06e3d2ca3771966e6",
+    "evidence/01_PT/018_NK-OPS-001/input/249_reply_wait_scope.json": "a83ad0b846ebccdeaf9f391ed8cfe1cd6351dbe6a33d7bad80333096c921e90d"
+  },
+  "environment": {
+    "file.encoding": "UTF-8",
+    "java.version": "25.0.4",
+    "os.arch": "amd64",
+    "os.name": "Linux",
+    "user.timezone": "Asia/Tokyo"
+  },
+  "files": {
+    "original-classinfo-begin.safe.json": "af19be97508c5bcf9a8ba39bb9af7e75e5302fb7d151ad8ba859be091fbef8e8",
+    "original-coverage.stdout": "ed3b78f5313cb71695a10c3cb61e2e31136d18e28d47e4da5f23ac9b340ba1fc",
+    "original-execinfo-begin.safe.json": "0d1276356112cb51f933a7d53eb0b19e36161e1d4ca6442748ef5e05a7317156",
+    "original-coverage-exit.safe.json": "92ce39f7abf74af470dbcffa26c351a01d7c7d7f3d38af01f3cf0d5522503b76",
+    "original-classinfo-exit.safe.json": "ee00e07da0302555f74e3e4b6b575da1b7c7853e054c6af35632a13c85b42401",
+    "original-unit-begin.safe.json": "2013bf5cfce23f133c560aaa5e31e63d077cd5855a62ae7495f1f7df3dc32b1e",
+    "original-unit-process.safe.json": "c46e1e934d145529170d98e5100a8a3fce96048b3a5e218f5101d95cdfc30b7c",
+    "original-coverage-begin.safe.json": "01894c64cfacc802a0d85201296fabe290ecd565b209f2ed120fcfc282ad72d3",
+    "original-classinfo.stdout": "ce39ec5be2e07b711ff0d79ab489418c5ed1ce2029168599daef6c62cb8670e5",
+    "original-execinfo-process.safe.json": "9020530256989071dac612f803fcfb1f46da95d865e0656211459d00ad1c9e1f",
+    "original-coverage.xml": "9908fa2d456ff41f756ccd1303ef0a4beeb2feae332082f0f5a106a17dc72f32",
+    "original-coverage-process.safe.json": "2bce2449adba21781c49fc807c1b35b08556290c94343fd351b7770e7bfca204",
+    "original-execinfo-exit.safe.json": "0399aed9ce3b4cf3a91d3bc51f22e032ac4eed8a07be01a70c83edbd1c843ae0",
+    "original-execinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "jacoco.exec": "b872fd487380148d53acf245f873c2e2221bf0838cc8be1718e34ccc9f5888ac",
+    "original-execinfo.stdout": "c37ea78cb8442e29eab10ed98faa3d96615a6b56cb4c4a5afe788c891ed3a13f",
+    "original-begin.json": "d4226e7d2f5d4f71c15eb64b22e65ef1006535089b706c68e7de67b26554a590",
+    "original-unit-exit.safe.json": "2efab13d599b1edc94b0ccb5114177ae9881926bb5d3726fe4e0004db7c1bc19",
+    "original-classinfo-process.safe.json": "630a1a450b80ce4a8cb2fdb6164da369787386ee6eb51a4d2d0795937e1b21a1",
+    "original-unit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-manifest.json": "87ae580308801e6dfc45505738450f913d5da37e7e3cf09e0f8177b2ca319eb5",
+    "original-classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-coverage.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-class-init.stdout": "d383a8b17fd5a3697f6b3debb4e74783e4eae1525c7c0640bbfdcb1e9e494812",
+    "original-unit.stdout": "6898a7ca28f4c36a935f9844bec1cd18f688480fd1d393e725c9d41d14c98a90",
+    "original-TEST-junit-jupiter.xml": "1a8d34e4028389cdc26ee31e19de43cbfa78d32b57b2e0800a49bde67d8b7afc",
+    "original-TEST-junit-platform-suite.xml": "35210cc53af2a2ef7753d5e769d4d4d67599f67929e8a02389ac80e19094f7bc",
+    "original-TEST-junit-vintage.xml": "316231f1cc376aa69696e078e95d3f57d3344a4670a5b5f2531a6be39fe74ae1",
+    "static-pmd.stdout": "698bd3e22d7e73448b632cb17a96037be3759f14bcb1a957cb16c0f723769188",
+    "static-checkstyle-exit.safe.json": "7e023e8746bc029e302f2c67e029efd5489e88ebb0e39507cb7419ebf6bda6fd",
+    "static-pmd.stderr": "51244753c63203e24100ba1ac0d946c18ec785f931179b6a72a0d67a7fb7c795",
+    "static-pmd-exit.safe.json": "6c36af9a0f112674f3d8ba5f9174de2267e24a2997bf3cc4c6f92c376885463e",
+    "static-checkstyle-process.safe.json": "eb907fff2e6ff03eff133550fcce7a6eadd6d0522c0f0cdf5c0cdf63a360b664",
+    "static-pmd-begin.safe.json": "1772d23e7635f9c21e3a9a19efb94c8325755f43e501daed46eded2b3bdf72bc",
+    "static-sources.txt": "381880b5a32834f5e3e54065bedcbc99e6e13736fa3c2c0d32c576076561217c",
+    "static-pmd-process.safe.json": "f41dbd9105ea10abde3a33bcf9b654c15613db4c8f8616cd2fceda13bff6653c",
+    "static-checkstyle.xml": "c912d8067e31cb9f269b0e746d2f4fb9c60866ceb494d6a5b6b1b35c1f56626b",
+    "static-checkstyle-begin.safe.json": "de0ab8c3a654bc86c47e446b841f42cf200c7ea1904374605bc91d83b509fcce",
+    "static-checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "static-manifest.json": "20f5a11644e237ea11b85804917a34d3e0b4c69f52fe1bc149b3e1eb920e59c4",
+    "static-pmd.xml": "3dbf4bfe455a43bf591d949b68654ff0bd6353be52619440a3a43eae614515c4",
+    "static-checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "passive-javap-exit.safe.json": "976298075123241e620044972ce1eb105a7d07615310aeb88e072defae1a8ab8",
+    "passive-javap.stdout": "7108943ab565672982399a84b9fa557c8e6193d5c84048e596ad2d39ca0a105e",
+    "passive-javap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "passive-javap-process.safe.json": "caf0558fbb1bf444ecaddbe6d3984dc061d52a2bda6edf17aca1453c2c31fb6e",
+    "passive-javap-begin.safe.json": "f4003684234ee94528c41b46b3471fc472b70a55582b80f2874602b75a353197",
+    "passive-manifest.json": "dc2eee4daa6c8550b818ff3ccb0c7f52fc0aaca345b8fc62ba6460d776f7078d"
+  },
+  "bug": "BUG-2449",
+  "yktStillOpen": "YKT-2177",
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/250_reply_wait_independent_post.py",
+    "sha256": "93c7f5bc67c7bdd03f71970ba5e4484b592320bb36a5a5963a41dffcfdbcc950",
+    "source": "4188123e7c3fd5aa30cef9665369bcb2cf31a105"
+  }
+}

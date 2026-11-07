@@ -1,0 +1,7 @@
+# ReplyCorrelation待ち期限・既存全九再資格結果
+
+BUG2449修正/run source4188123e7c3fd5aa30cef9665369bcb2cf31a105（Main7aed不変）。RegistryTest全5/TerminalRaceTest全4のworker開始Latch五箇所だけassertTrue+5SECONDSへ。PG22744明示二class compile0/22746 raw8は各standalone executor16・3・20とsubmitの所有siteとして個別非該当、CS0/parser0、Mainstaticは不変正規六module0を照合。
+
+PG22748全9/FES・abort0/真正0、一session・新execだけ。PG22750独立0、manifest `309eb54f6a0e2d144ac12493f7a213e6166f399ba78a1875d9c80f5568684174`。source変換の他token/UUID/Instant/byte/fixture不変・metadata否定4、元全9method集合/exit、normal二physical CRCと実初期化exact二、JDK生成Lambda二は各owner/受動22752Metafactoryと未知owner否定2で別記。実DB/JMS/Root/VM/native/四held0。
+
+対象全custom CodeのLINE74/METHOD17/CLASS2/BRANCH22はすべて未達0（instruction287）。scopeはRegistry/PendingReplyの既全二で、旧execの合成なし。再資格9、新unique0/whole追加0/leaf0、unique438/whole94/正式1964PT-53scope/工数null不変。BUG2449有限CLOSED、YKT2177の既知sourcefixed19/動的再資格18/Question一HOLD・global型未確定OPEN。全Program/全F03/451未認定。
