@@ -1,0 +1,90 @@
+{
+  "atJST": "2026-11-07T16:27:02.885209+09:00",
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/StartupReleaseContentsValueTest.java": "30d2c82b6e73c3593534f3a4aca11548b576f0114f7d58950facac58b94efd8b",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java": "3f2ae514697c8bac938eb9e0202a4e25346774b8875ce08c63d8117538753937",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+    "evidence/01_PT/018_NK-OPS-001/input/236_release_contents_value_qualifier.py": "b5e5b42096667c0e394d245869d25bcc04573c42c4657a2b18e0f05684c654b6"
+  },
+  "pmdRaw": 4,
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "processingErrors": 0,
+  "individualClassifications": [
+    {
+      "beginline": "120",
+      "endline": "120",
+      "begincolumn": "27",
+      "endcolumn": "55",
+      "rule": "UseConcurrentHashMap",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.bootstrap",
+      "class": "StartupReleaseContentsValueTest",
+      "method": "contents005NullElementsKeysAndValuesCannotEnterSnapshot",
+      "variable": "missingKey",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+      "priority": "3",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "classification": "NOT_APPLICABLE",
+      "reason": "This is a method-local null-key or null-value negative input, never shared with workers. ConcurrentHashMap rejects construction of the deliberately invalid map before the constructor under Test can inspect it."
+    },
+    {
+      "beginline": "122",
+      "endline": "122",
+      "begincolumn": "27",
+      "endcolumn": "57",
+      "rule": "UseConcurrentHashMap",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.bootstrap",
+      "class": "StartupReleaseContentsValueTest",
+      "method": "contents005NullElementsKeysAndValuesCannotEnterSnapshot",
+      "variable": "missingValue",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+      "priority": "3",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "classification": "NOT_APPLICABLE",
+      "reason": "This is a method-local null-key or null-value negative input, never shared with workers. ConcurrentHashMap rejects construction of the deliberately invalid map before the constructor under Test can inspect it."
+    },
+    {
+      "beginline": "176",
+      "endline": "176",
+      "begincolumn": "24",
+      "endcolumn": "55",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.bootstrap",
+      "class": "StartupReleaseContentsValueTest",
+      "method": "contents008ConcurrentCopiesKeepOnlyEachWorkersOriginalMap",
+      "variable": "workers",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone JUnit owns its two-worker pool through try-with-resources; exactly32 finite in-memory copy tasks create separate mutable maps and every future uses5SECONDS. No service/Root/native/background lifecycle ownership."
+    },
+    {
+      "beginline": "181",
+      "endline": "191",
+      "begincolumn": "13",
+      "endcolumn": "19",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.bootstrap",
+      "class": "StartupReleaseContentsValueTest",
+      "method": "contents008ConcurrentCopiesKeepOnlyEachWorkersOriginalMap",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone JUnit owns its two-worker pool through try-with-resources; exactly32 finite in-memory copy tasks create separate mutable maps and every future uses5SECONDS. No service/Root/native/background lifecycle ownership."
+    }
+  ],
+  "staticManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22634-release-contents-eight-static-v2/manifest.json",
+    "sha256": "cf1a8caa32761812ffb4da70754b08a77045feb88aaeb837c5ff52f2effffc5d"
+  },
+  "productTestsExecuted": 0,
+  "suppressionAdded": false,
+  "wholeF03Accepted": false
+}
