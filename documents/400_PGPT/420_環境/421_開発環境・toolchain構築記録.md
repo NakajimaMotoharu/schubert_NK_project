@@ -505,3 +505,9 @@ Python host3.14、専用directory `/home/mini/codex/project1/work/toolchain/css-
 ## 2026-11-06 独立AES-GCM public oracle（PG20902/20926）
 
 既存host Python 3.14.4 / cryptography 46.0.5 / OpenSSL 3.5.5 27 Jan 2026を利用、導入操作無し。実install入手元は未検証でPyPI由来と推測しない。007/evidence/PG20926へmodule/Rust binding path・hash、version、取得元未確認、再現commandを保存。007/input/013は実施済みinline generatorと同等の再現用sourceを後保存したもので、元source凍結済みと称さず、暗号計算の再演はしない。新規導入が必要なら隔離venvへ同versionを承認済み検証済み入手元から導入する。PUBLIC zero32 key/固定nonce/ASCIIa64/三synthetic ownerだけで、実credential/鍵ファイル/DB/Root無し。既定nonce安全性・実運用鍵/全toolchain provenanceを合格にしない。元golden manifest 19e53c2f86c9dc391b733f1a53621c50d40e98920bbf8e9fbf404a6bea4bbb5cは不変更。
+
+### 2026-11-07 公開SDK mode値の独立参照（追加導入・設定変更なし）
+
+PG22826/22828/22834はhost既設`linux-libc-dev 7.0.0-42.42`、`libc6-dev 2.43-2ubuntu2.4`の公開`/usr/include/linux/stat.h`と`/usr/include/x86_64-linux-gnu/bits/stat.h`をread-onlyで使用した。入手元は当hostの既installed distro SDK packageで、今回download/installはしていない。Versionは`dpkg-query -W -f='${Package} ${Version}\n' linux-libc-dev libc6-dev`、原headerのhash・各site/値の独立式はOPS018 PG22826 manifest/PG22828 integerValueWitnessesに固定する。
+
+再確認は同commandとheaderのS_IFMT/S_IFREG/S_IFDIR/S_IFLNK/S_IRWXU等の定義をread-onlyで照合する。これはtarget guest/kernelやnative syscallの実測ではない。元Test compile/run/Root/VM/権限操作はHOLDのままで、再現の名目で実行しない。JDK25.0.4/既PMD7.28 patch/Checkstyle14.3/GJFとルールのversion・設定は不変、元source/失敗/成功manifestを上書きしない。
