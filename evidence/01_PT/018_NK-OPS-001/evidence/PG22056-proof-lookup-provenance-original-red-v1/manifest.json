@@ -1,0 +1,36 @@
+{
+  "actualExit": 1,
+  "status": "EXPECTED_EXISTING_LOOKUP_MISS_NOT_PASS",
+  "source": "871510a7899e546ae6f1e396209003213cb0d902",
+  "stage": {
+    "actualExit": 1,
+    "timedOut": false,
+    "startUTC": "2026-11-07T00:31:22.196225+00:00",
+    "endUTC": "2026-11-07T00:31:22.311266+00:00",
+    "command": [
+      "/usr/bin/env",
+      "PYTHONPATH=tools/quality:tools/quality/tests",
+      "python3",
+      "-B",
+      "-m",
+      "unittest",
+      "test_pgpt_program_proof_lookup.ProgramProofLookupTest.test_provenance_explicit_single_target_is_visible_without_acceptance"
+    ],
+    "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSha256": "5c8a383cf3ce36efc391118349794b2e99296f86c28cbeba5ea1712f2a43a0df"
+  },
+  "toolTests": 1,
+  "productTests": 0,
+  "files": {
+    "unit-begin.safe.json": "f07d08fef18427e58402b8af19182851aa93542f50c6c759eff08ffbc1f2f139",
+    "unit-process.safe.json": "69efafe52ac399f71e0b650f9cf95e3553993f5fd1fba2b75aab1f2d10d5e0d8",
+    "unit-exit.safe.json": "2e70a0feddc72fef8442d2c96bc17398908128428ffeed6bef0d7b7c816ce4ee",
+    "unit.stderr": "5c8a383cf3ce36efc391118349794b2e99296f86c28cbeba5ea1712f2a43a0df",
+    "unit.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "inputHashes": {
+    "tools/quality/pgpt_program_proof_lookup.py": "5bfbb21c4660aed05faf3a6d2a07cceececad7872e6f7c028d6f1f4a54e41b76",
+    "tools/quality/tests/test_pgpt_program_proof_lookup.py": "581189e8f6dc582c8776f08e5b14de25c1d86a5f7e24da3df23055ba829e5863"
+  }
+}

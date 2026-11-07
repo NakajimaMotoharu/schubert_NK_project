@@ -66,6 +66,53 @@ def candidate(value, class_name, current_hash):
                 or classes['covered'] + classes['missed'] != 1):
             return None
         schema = 'SOURCE_UNITS_SOURCE_PINS'
+    elif 'inputProvenance' in value:
+        # BUG2415/YKT2160: this older explicit receipt is discovery evidence only.
+        # Never derive Main names from Test names or split aggregate counters.
+        provenance = value['inputProvenance']
+        physical = value.get('physical')
+        counters = value.get('counters')
+        crc = value.get('crc')
+        if (not isinstance(provenance, dict) or not isinstance(physical, dict)
+                or len(physical) != 1 or not isinstance(counters, dict)
+                or value.get('physicalClosureComplete') is not True
+                or value.get('counterExclusions') != []
+                or value.get('oldExecCombined') is not False):
+            return None
+        target, normal_class_hash = next(iter(physical.items()))
+        source_path = provenance.get('mainInputPath')
+        source_hash = provenance.get('mainInputHash')
+        test_path = provenance.get('testInputPath')
+        test_hash = provenance.get('testInputHash')
+        if (not isinstance(target, str)
+                or not re.fullmatch(r'[A-Za-z_$][\w$]*(?:/[A-Za-z_$][\w$]*)+', target)
+                or target.rsplit('/', 1)[-1] != class_name
+                or not isinstance(source_path, str)
+                or not re.fullmatch(r'src/[A-Za-z0-9_.-]+/src/main/java/'
+                                    + re.escape(target) + r'\.java', source_path)
+                or any(p in ('.', '..') for p in source_path.split('/'))
+                or not isinstance(test_path, str)
+                or not re.fullmatch(re.escape(source_path.split('/src/main/java/')[0])
+                                    + r'/src/test/java/[A-Za-z0-9_$/]+\.java', test_path)
+                or any(not isinstance(h, str) or not re.fullmatch('[0-9a-f]{64}', h)
+                       for h in (source_hash, test_hash, normal_class_hash))
+                or not isinstance(provenance.get('source'), str)
+                or not re.fullmatch('[0-9a-f]{40}', provenance['source'])
+                or provenance['source'] != value.get('source')):
+            return None
+        if (not isinstance(crc, list) or len(crc) != 1
+                or not isinstance(crc[0], list) or len(crc[0]) != 2
+                or not isinstance(crc[0][0], str)
+                or not re.fullmatch('[0-9a-f]{16}', crc[0][0]) or crc[0][1] != target):
+            return None
+        classes = counters.get('CLASS')
+        if (not isinstance(classes, dict)
+                or any(type(classes.get(k)) is not int or classes[k] < 0
+                       for k in ('covered', 'missed'))
+                or classes['covered'] + classes['missed'] != 1):
+            return None
+        crc64 = crc[0][0]
+        schema = 'SINGLE_TARGET_INPUT_PROVENANCE'
     else:
         # Only the explicit single-target legacy receipt is supported. Never infer a
         # Main from a Test filename or apply aggregate counters to multiple targets.
