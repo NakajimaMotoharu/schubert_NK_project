@@ -1,0 +1,210 @@
+{
+  "atJST": "2026-11-07T11:27:56.531050+09:00",
+  "actualExit": 0,
+  "mainSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+  "priorMethodWitness": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21664-business-mvc-closed-method-witness-v1/manifest.json",
+    "sha256": "be3fe9aaf71686a557f26035e65a1d43da8f2eea373825257140e9f835b92520"
+  },
+  "allPriorConstructorMainBytesUnchanged": true,
+  "priorExecutedMethods": {
+    "dev/codex/schubert/nk/web/controller/QuestionController": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/messaging/QuestionWireClient;Ldev/codex/schubert/nk/web/security/ApiSessionInvalidHandler;Ldev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository;Ldev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/controller/NotificationController": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/messaging/NotificationWireClient;Ldev/codex/schubert/nk/web/security/ApiSessionInvalidHandler;Ldev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/controller/UserAdminController": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/messaging/UserAdministrationWireClient;Ldev/codex/schubert/nk/web/security/ApiSessionInvalidHandler;Ldev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle;)V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/messaging/QuestionWireClient": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyClient;Ldev/codex/schubert/nk/web/messaging/JmsRequestSender;Ljava/time/Clock;Ljava/util/function/Supplier;Ljava/time/Duration;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/messaging/NotificationWireClient": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyClient;Ldev/codex/schubert/nk/web/messaging/JmsRequestSender;Ljava/time/Clock;Ljava/util/function/Supplier;Ljava/time/Duration;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/messaging/UserAdministrationWireClient": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyClient;Ldev/codex/schubert/nk/web/messaging/JmsRequestSender;Ljava/time/Clock;Ljava/util/function/Supplier;Ljava/time/Duration;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient": [
+      {
+        "name": "<init>",
+        "desc": "(Ljava/util/Set;Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyClient;Ldev/codex/schubert/nk/web/messaging/JmsRequestSender;Ljava/time/Clock;Ljava/util/function/Supplier;Ljava/time/Duration;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      },
+      {
+        "name": "<init>",
+        "desc": "(I)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry;Ljava/time/Clock;I)V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/error/WebResultMapper": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/logging/WebSecurityAudit": [
+      {
+        "name": "<init>",
+        "desc": "(Ljava/lang/System$Logger;Ljava/time/Clock;Ljava/lang/String;Ljava/lang/String;)V"
+      },
+      {
+        "name": "version",
+        "desc": "(Ljava/lang/String;)Ljava/lang/String;"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event": [
+      {
+        "name": "<init>",
+        "desc": "(Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/System$Logger$Level;)V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository": [
+      {
+        "name": "<init>",
+        "desc": "(Ljavax/sql/DataSource;Ldev/codex/schubert/nk/web/session/SessionPayloadCodec;Ljava/time/Clock;Ljava/security/SecureRandom;Ljava/util/function/Supplier;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/session/EncryptedSessionPayload": [
+      {
+        "name": "validateVersion",
+        "desc": "(Ljava/lang/String;)Ljava/lang/String;"
+      }
+    ],
+    "dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/session/EncryptedWebSessionRepository;Ljava/time/Clock;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/session/SessionPayloadCodec": [
+      {
+        "name": "<init>",
+        "desc": "(Ljava/lang/String;[BLjava/lang/String;[BLjava/security/SecureRandom;)V"
+      },
+      {
+        "name": "validateKey",
+        "desc": "([B)V"
+      },
+      {
+        "name": "close",
+        "desc": "()V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/session/JdbcWebSessionStore": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/session/SessionAttributeCodec": [
+      {
+        "name": "<init>",
+        "desc": "()V"
+      },
+      {
+        "name": "<clinit>",
+        "desc": "()V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/session/EncryptedWebSessionRepository;Ljava/time/Clock;Ljava/util/function/Supplier;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler": [
+      {
+        "name": "<init>",
+        "desc": "(Ldev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository;Ldev/codex/schubert/nk/web/logging/WebSecurityAudit;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository": [
+      {
+        "name": "<init>",
+        "desc": "(Ljavax/sql/DataSource;)V"
+      }
+    ]
+  },
+  "newMainMethodAllowlist": {
+    "dev/codex/schubert/nk/web/config/LogoutMvcConfiguration": [
+      "<init>",
+      "logoutController"
+    ],
+    "dev/codex/schubert/nk/web/controller/LogoutController": [
+      "<init>"
+    ],
+    "dev/codex/schubert/nk/web/security/LocalLogoutHandler": [
+      "<init>"
+    ],
+    "dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinator": [
+      "<init>"
+    ],
+    "dev/codex/schubert/nk/web/messaging/LogoutWireClient": [
+      "<init>"
+    ],
+    "dev/codex/schubert/nk/web/revocation/RevocationPayloadCodec": [
+      "<clinit>",
+      "<init>",
+      "validateKey",
+      "close"
+    ],
+    "dev/codex/schubert/nk/web/revocation/EncryptedRevocationPayload": [
+      "validateVersion"
+    ]
+  },
+  "constructorSourceReview": "All new source bodies reviewed before execution. Revocation codec only package-private five-arg format constructor/validateVersion/validateKey/static ASCII magic/owned zero-copy close. No encrypt/decrypt/Cipher/nonce or API authentication.",
+  "noNewRootOrDbOrWireCapability": true,
+  "oldSuccessReplay": false,
+  "preUnitNotPass": true
+}

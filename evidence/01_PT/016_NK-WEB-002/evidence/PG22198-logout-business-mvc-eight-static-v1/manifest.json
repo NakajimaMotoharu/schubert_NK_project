@@ -1,0 +1,67 @@
+{
+  "atJST": "2026-11-07T11:27:56.527396+09:00",
+  "actualExit": 0,
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/config/BusinessMvcBeanPortTest.java": "798186f1ab4a8820d5813c2187632b9de1d96e55b3d56ae5e8710e2b2f4f02ab",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/BusinessMvcOwnerPortFixture.java": "629aa97d6cc8af6e22c3aa0ca316eb2698dd380e7635f65b3d5974aaf6cb617d",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/LogoutMvcBeanPortTest.java": "781ecc8d8687be3206b08fd76b625175994ea325d6bbf74ee91ed979777f0ca0",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/NotificationBusinessMvcConfiguration.java": "b80f7275d73a387f3cddc4ae12c90d3182296bf3cd19b60904dcd85780ee3bba",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/UserBusinessMvcConfiguration.java": "9a0131aad87ee4373e6cf7ffe19a171380d1d514f601e463e848f7a28b6702f6",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/QuestionAcceptanceMvcConfiguration.java": "4a0b8f748fe6e7fd825763821a5c7ebcc09b3215a3e299d1617e45433518ea15",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/LogoutMvcConfiguration.java": "30b066a53b873c54e273836fd611ebc48bde69a1bb8bf04b0f7654804e216d68",
+    "evidence/01_PT/016_NK-WEB-002/input/056_logout_mvc_qualifier.py": "36280ccb47ea036e5e92f7c04276c8208b6f0668ea7083ef9588670ba494586f"
+  },
+  "pmdRaw": 1,
+  "rawPmdExit": 4,
+  "applicableViolations": 0,
+  "checkstyle": 0,
+  "processingErrors": 0,
+  "spotbugs": 0,
+  "individualClassifications": [
+    {
+      "raw": {
+        "beginline": "27",
+        "endline": "27",
+        "begincolumn": "17",
+        "endcolumn": "50",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.session",
+        "class": "BusinessMvcOwnerPortFixture",
+        "method": "BusinessMvcOwnerPortFixture",
+        "variable": "database",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3",
+        "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+      },
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone JDK Proxy for exactly javax.sql.DataSource uses that interface defining loader. Callback unconditionally throws; no connection, J2EE/container deployment, ambient context loader or provider lookup occurs. Same exact syntactic role/diagnostic as original21656; no suppression/rule or finding removal."
+    }
+  ],
+  "staticManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22198-logout-business-mvc-eight-static-v1/manifest.json",
+    "sha256": "9b3a0670773f5178f7b235959394a990197f57cfaea8121d2f9fee85c7a1b4b5"
+  },
+  "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+  "originalRoleReference": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG21656-business-mvc-static-v1/manifest.json",
+    "sha256": "7e77088ef8c7bde4f22c985560a3775ae4e27477aacd4b2eecced1d7232f88cf"
+  },
+  "files": {
+    "pmd.stdout": "cabc3b1ac3c58c1d2bbaf9437a8f7e886213101c611dca53bc722564a6935eba",
+    "checkstyle-exit.safe.json": "0d191fd3016cb4a5c3dbaeb01f262c2bba497ea258f00c65e51012943b5b2d58",
+    "pmd.stderr": "1040175360791a5fef6057b5dcf60e27fa4344762ef145961d292d72aaa627c5",
+    "pmd-exit.safe.json": "001f1a4e8126f4b0933b2f6ee4980ae83d16bd56aa8596a91772cc5de7196e22",
+    "checkstyle-process.safe.json": "7594c32a2ae5bebac081a241c21700093605391cf289402791abc33764136167",
+    "pmd-begin.safe.json": "e9c7ce058c1e85281e4b6a35330ab8b5aaa989a4f58915315bad8c089761de71",
+    "sources.txt": "4b307b0ae8465c498b1b53f234d18ab6243b95b8be3cba0c3f154a7ed96b7d96",
+    "pmd-process.safe.json": "2134d85b893f8415e231f0af87c61084afc8d4651def934b2770910980b582b2",
+    "checkstyle.xml": "fe8d3d9c08c70f356fa762636e150b379c005b1990a41341e1e1d72998e2b959",
+    "checkstyle-begin.safe.json": "d3226fd8fdf7afa639d0c7c80e312018c655bcaa95b283d3b34216519dde4f24",
+    "checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-manifest.json": "9b3a0670773f5178f7b235959394a990197f57cfaea8121d2f9fee85c7a1b4b5",
+    "pmd.xml": "4aee1346febd4567879109f70df8c8f70689985f9ea8d43ff4766c47b8b02f4a",
+    "checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "productTestsExecuted": 0
+}

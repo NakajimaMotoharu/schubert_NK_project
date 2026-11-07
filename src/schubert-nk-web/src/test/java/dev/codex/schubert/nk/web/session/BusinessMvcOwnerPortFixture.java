@@ -18,6 +18,7 @@ public final class BusinessMvcOwnerPortFixture implements AutoCloseable {
   private final SessionOperationTokenLifecycle retainedTokens;
   private final ReceiptReferenceRepository retainedReceipts;
   private final SpringEncryptedSessionRepository retainedRepository;
+  private final EncryptedWebSessionRepository retainedLifecycle;
 
   public BusinessMvcOwnerPortFixture() {
     DataSource database =
@@ -32,7 +33,7 @@ public final class BusinessMvcOwnerPortFixture implements AutoCloseable {
     var clock = Clock.fixed(Instant.parse("2026-01-01T00:00:00Z"), ZoneOffset.UTC);
     // Public zero bytes are a constructor-format canary only; no encrypt/decrypt is called.
     codec = new SessionPayloadCodec("public-fixture", new byte[32], null, null, random);
-    var lifecycle =
+    retainedLifecycle =
         new EncryptedWebSessionRepository(
             database,
             codec,
@@ -41,10 +42,10 @@ public final class BusinessMvcOwnerPortFixture implements AutoCloseable {
             () -> {
               throw new AssertionError("session identifier generation forbidden");
             });
-    retainedRepository = new SpringEncryptedSessionRepository(lifecycle, clock);
+    retainedRepository = new SpringEncryptedSessionRepository(retainedLifecycle, clock);
     retainedTokens =
         new SessionOperationTokenLifecycle(
-            lifecycle,
+            retainedLifecycle,
             clock,
             () -> {
               throw new AssertionError("operation identifier generation forbidden");
@@ -54,6 +55,11 @@ public final class BusinessMvcOwnerPortFixture implements AutoCloseable {
 
   public SpringEncryptedSessionRepository sessions() {
     return retainedRepository;
+  }
+
+  /** Same borrowed owner for Logout composition; no session operation or new capability. */
+  public EncryptedWebSessionRepository localSessions() {
+    return retainedLifecycle;
   }
 
   public SessionOperationTokenLifecycle tokens() {
