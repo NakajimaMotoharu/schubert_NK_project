@@ -1,0 +1,9 @@
+# 共有Test補助三型のaux適用照合
+
+BUG2474/YKT2212横展開。filename metadata候補33のうち、既PT_DEFAULT成功済みのMvcBeanPortFixture/BusinessMvcOwnerPortFixture/SecurityContextOwnerPortFixtureだけを最初の有限対象にする。他30候補は未調査で、全体を除外/保留/合格にしない。保護4nameは一覧の前から除外、元Test/Root/VM/process/native/DB等実行・compile0。
+
+当三helperの実source/hash/呼出しTestと、private checkpointの対応する既Unit/compile/static manifestの固定source/input/class hashes/全commandを照合する。既JUnit成功の再演なし、既normalMain静的/coverage/実PT件数は変更しない。静的source listにhelperを含むか、auxに同byte compiled helperが入るかを区別し、型binding根拠不足をゼロへ補完しない。元成功のjavacとPMDの依存根拠は別記録とする。
+
+成果は三helperと全関連callerの既証拠対応表と、必要な限定typed static後続範囲。必要なsource/static是正は具体的に識別して別群へ。単なるfilename UNKNOWNから未実装を推論しない。通常PTが必要なsource変更は現sourceへ固定して必要分のみ、具体安全依存不明なら当範囲HOLD。今回は読取metadata/独立postのみで動的安全境界を探らない。
+
+着手見積0.5/2/5pp、cap7、追加発見/既証拠再認証/工具費の専有比率不明null。新unique/whole/leaf0、442/whole94/正式1964-53/工数null維持。
