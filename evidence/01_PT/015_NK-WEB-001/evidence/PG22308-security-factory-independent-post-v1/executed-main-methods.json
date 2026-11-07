@@ -1,0 +1,392 @@
+{
+  "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "<init>",
+      "desc": "(I)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry;Ljava/time/Clock;I)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/System$Logger$Level;)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/logging/WebSecurityAudit$Route": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;ILjava/lang/String;)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/logging/WebSecurityAudit": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/System$Logger;Ljava/time/Clock;Ljava/lang/String;Ljava/lang/String;)V"
+    },
+    {
+      "name": "record",
+      "desc": "(Ljava/util/UUID;Ldev/codex/schubert/nk/web/logging/WebSecurityAudit$Event;Ljava/util/Optional;Ljava/util/Optional;ILdev/codex/schubert/nk/web/logging/WebSecurityAudit$Route;)V"
+    },
+    {
+      "name": "version",
+      "desc": "(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SessionPayloadCodec": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;[BLjava/lang/String;[BLjava/security/SecureRandom;)V"
+    },
+    {
+      "name": "validateKey",
+      "desc": "([B)V"
+    },
+    {
+      "name": "close",
+      "desc": "()V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/JdbcWebSessionStore": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/session/EncryptedWebSessionRepository;Ljava/time/Clock;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/SessionAttributeCodec": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/WebSessionFilterFactory": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "create",
+      "desc": "(Ldev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository;)Lorg/springframework/session/web/http/SessionRepositoryFilter;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository": [
+    {
+      "name": "<init>",
+      "desc": "(Ljavax/sql/DataSource;Ldev/codex/schubert/nk/web/session/SessionPayloadCodec;Ljava/time/Clock;Ljava/security/SecureRandom;Ljava/util/function/Supplier;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/session/EncryptedSessionPayload": [
+    {
+      "name": "validateVersion",
+      "desc": "(Ljava/lang/String;)Ljava/lang/String;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/CaddyTransportContextFilter": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/util/function/Supplier;Ldev/codex/schubert/nk/web/security/CaddyClientAddressResolver;Ldev/codex/schubert/nk/web/logging/WebSecurityAudit;)V"
+    },
+    {
+      "name": "doFilter",
+      "desc": "(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebSecurityFilterFactory": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "create",
+      "desc": "(Ldev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository;Ldev/codex/schubert/nk/web/security/MqAuthenticationProvider;Ldev/codex/schubert/nk/web/logging/WebSecurityAudit;Ljava/util/function/Supplier;)Ljakarta/servlet/Filter;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebCsrfDeniedHandler": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/logging/WebSecurityAudit;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebCsrfFilterFactory": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "create",
+      "desc": "(Ldev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository;Lorg/springframework/security/web/access/AccessDeniedHandler;)Lorg/springframework/security/web/csrf/CsrfFilter;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/LoginClientAddress": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebInfrastructureFailureFilter": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/MqLoginFailureHandler": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/logging/WebSecurityAudit;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/CaddyRequestRejectedException": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebRequestContext": [
+    {
+      "name": "existing",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Ljava/util/Optional;"
+    },
+    {
+      "name": "identify",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ljava/util/function/Supplier;)Ljava/util/UUID;"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/ClosedServletSecurityFilter": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/MqAuthenticationProvider": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/security/MqLoginClient;Ldev/codex/schubert/nk/web/security/MqLoginContextProbe;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebErrorDispatchFilter": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/MqFormLoginFilterFactory$1": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/security/MqFormLoginFilterFactory;Lorg/springframework/security/web/util/matcher/RequestMatcher;Lorg/springframework/security/authentication/AuthenticationManager;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebDisplayContextFilter": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/MqLoginClient": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyClient;Ldev/codex/schubert/nk/web/messaging/JmsRequestSender;Ljava/time/Clock;Ljava/util/function/Supplier;Ljava/time/Duration;)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebAccessExceptionFilterFactory": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "create",
+      "desc": "(Ldev/codex/schubert/nk/web/security/WebAccessFailureHandler;)Lorg/springframework/security/web/access/ExceptionTranslationFilter;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/FormCsrfTokenRequestHandler": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/CaddyClientAddressResolver": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "resolve",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;)Ldev/codex/schubert/nk/web/security/LoginClientAddress;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebAuthorizationFilterFactory": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "create",
+      "desc": "()Lorg/springframework/security/web/access/intercept/AuthorizationFilter;"
+    },
+    {
+      "name": "readResource",
+      "desc": "(Ljava/lang/String;)Lorg/springframework/security/web/util/matcher/RequestMatcher;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/MqFormLoginFilterFactory": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "create",
+      "desc": "(Ldev/codex/schubert/nk/web/security/MqAuthenticationProvider;Ldev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository;Lorg/springframework/security/web/authentication/AuthenticationSuccessHandler;Lorg/springframework/security/web/authentication/AuthenticationFailureHandler;)Lorg/springframework/security/web/authentication/AbstractAuthenticationProcessingFilter;"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebAccessFailureHandler": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/security/EncryptedSessionRequestCache;Ldev/codex/schubert/nk/web/logging/WebSecurityAudit;)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/EncryptedSessionAuthenticationStrategy": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/MqLoginContextProbe": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyClient;Ldev/codex/schubert/nk/web/messaging/JmsRequestSender;Ljava/time/Clock;Ljava/util/function/Supplier;Ljava/time/Duration;)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebSecurityHeaderWriter": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "writeHeaders",
+      "desc": "(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/LoginFormAuthenticationConverter": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/security/CaddyClientAddressResolver;)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/MqLoginSuccessHandler": [
+    {
+      "name": "<init>",
+      "desc": "(Ldev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository;Ldev/codex/schubert/nk/web/security/EncryptedSessionRequestCache;Ldev/codex/schubert/nk/web/logging/WebSecurityAudit;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/InternalErrorDispatchRouter": [
+    {
+      "name": "<init>",
+      "desc": "(Ljakarta/servlet/Filter;Ljakarta/servlet/Filter;)V"
+    }
+  ],
+  "dev/codex/schubert/nk/web/security/WebSecurityHeaderFilterFactory": [
+    {
+      "name": "<init>",
+      "desc": "()V"
+    },
+    {
+      "name": "create",
+      "desc": "()Lorg/springframework/security/web/header/HeaderWriterFilter;"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/layout/LayoutId": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ],
+  "dev/codex/schubert/nk/protocol/header/ResultCode": [
+    {
+      "name": "<init>",
+      "desc": "(Ljava/lang/String;ILjava/lang/String;Z)V"
+    },
+    {
+      "name": "<clinit>",
+      "desc": "()V"
+    }
+  ]
+}
