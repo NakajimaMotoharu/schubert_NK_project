@@ -9,3 +9,8 @@ PG対象はrcpt006Hのjob.get()を、同file先行並行Testと同じget(10, Tim
 current85 subsetの当file以外84は同hashを確認し、現UserAudit是正sourceを含めた新構成raw/19既分類の新位置への束縛を行う。旧Questionの20指摘とvolatile12/loader/thread根拠は、修正がget引数一箇所だけで他statement/method/decl/writeが不変と証明できたものだけ再資格する。元347/current構成346を上書きしない。Map62/reflect1と全F03/451は未受入。
 
 再発防止のstatic guardは、元unbounded正形を拒否し、新bounded一call/peerの10SECONDS・全他token保持・ASTのunbounded-get消失を確認する。YKT2177の全85既明示Testの他Future待ちsource調査は別群で、検索だけで閉鎖しない。unique430/whole94/正式1964PT-53scope/新leaf0/工数null・全HOLD/モデル/料金条件不変。
+
+
+## 再束縛数の追記訂正（BUG2433/YKT2178）
+
+当fileは原/現とも全20指摘=thread4/loader3/CloseResource1/volatile12、全20が既分類済み。「19」は計画ラベル誤記、Map指摘は当fileにない。元spec/start/event4221は22490とGitへ保持し、対象全20で旧/新属性と意味不変を確認する。current346/分類283/未分類63と元見積・元費用は変えない。
