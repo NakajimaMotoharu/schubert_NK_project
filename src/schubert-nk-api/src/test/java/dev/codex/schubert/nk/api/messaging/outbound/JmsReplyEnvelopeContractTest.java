@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 /** NK-MSG-001; MQ003/008; UI231/232/233; SS321 section8/SSC151; PT-JMS-ENV001..004. */
 final class JmsReplyEnvelopeContractTest {
+  private static final String TEST_VERSION = "001";
   private static final String REQUEST_ID = "00000000-0000-0000-0000-000000000001";
   private static final String RESPONSE = "00000000-0000-0000-0000-000000000002";
   private static final String STAGE_CREATE = "create";
@@ -54,7 +55,7 @@ final class JmsReplyEnvelopeContractTest {
               LAYOUT_PROPERTY,
               async ? "QSBRSP01" : "LGNRSP01",
               VERSION_PROPERTY,
-              "001"),
+              TEST_VERSION),
           fixture.properties);
       assertEquals(STAGES, fixture.events);
     }
@@ -118,6 +119,88 @@ final class JmsReplyEnvelopeContractTest {
     assertEquals(List.of(STAGE_CREATE), fixture.events);
   }
 
+  /** PT-JMS-ENV005: new LOG success profile; header/payload offsets come from UI232/234. */
+  @Test
+  void envelope005LogoutSuccessKeepsLiteralBodyAndProperties() throws Exception {
+    byte[] input = logoutReply();
+    byte[] before = input.clone();
+    var fixture = new Fixture(null, null, false);
+    assertSame(fixture.message, JmsMessageFactory.INSTANCE.createReply(fixture.context, input));
+    assertArrayEquals(before, input);
+    assertArrayEquals(before, fixture.body);
+    assertEquals(280, fixture.body.length);
+    assertEquals(REQUEST_ID, fixture.correlation);
+    assertEquals(
+        Map.of(
+            MESSAGE_PROPERTY,
+            RESPONSE,
+            LAYOUT_PROPERTY,
+            "LOGRSP01",
+            VERSION_PROPERTY,
+            TEST_VERSION),
+        fixture.properties);
+    assertEquals(STAGES, fixture.events);
+  }
+
+  /** PT-JMS-ENV006: additions to original malformed255 case, before acquiring a JMS message. */
+  @Test
+  void envelope006EmptyAndReservedHeaderNeverAcquireMessage() {
+    var fixture = new Fixture(null, null, false);
+    byte[] reserved = logoutReply();
+    reserved[212] = 'X';
+    for (byte[] invalid : List.of(new byte[0], reserved)) {
+      assertThrows(
+          PermanentProtocolException.class,
+          () -> JmsMessageFactory.INSTANCE.createReply(fixture.context, invalid));
+    }
+    assertEquals(List.of(), fixture.events);
+  }
+
+  /** PT-JMS-ENV007: independent E/I event is valid protocol but not an outbound response. */
+  @Test
+  void envelope007InternalEventNeverAcquiresMessage() {
+    byte[] event = header(320, "QWKREQ01", "E", "I");
+    put(event, 24, RESPONSE);
+    put(event, 60, REQUEST_ID);
+    put(event, 181, "000064");
+    put(event, 199, "000000320");
+    put(event, 256, "R".repeat(26));
+    put(event, 282, "000000000001");
+    put(event, 294, "000000000002");
+    var fixture = new Fixture(null, null, false);
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> JmsMessageFactory.INSTANCE.createReply(fixture.context, event));
+    assertEquals(List.of(), fixture.events);
+  }
+
+  /** PT-JMS-ENV008: original long/cap+1 are preserved; add shorter and exact-cap mismatch. */
+  @Test
+  void envelope008ShortBodyAndExactCapMismatchNeverAcquireMessage() {
+    var fixture = new Fixture(null, null, false);
+    byte[] valid = logoutReply();
+    for (int length : new int[] {279, 1_000_000}) {
+      byte[] invalid = Arrays.copyOf(valid, length);
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> JmsMessageFactory.INSTANCE.createReply(fixture.context, invalid));
+    }
+    assertEquals(List.of(), fixture.events);
+  }
+
+  private static byte[] logoutReply() {
+    byte[] body = header(280, "LOGRSP01", "S", "S");
+    put(body, 24, RESPONSE);
+    put(body, 60, REQUEST_ID);
+    put(body, 96, "20261107210000000");
+    put(body, 113, "a".repeat(64)); // Public synthetic context, no runtime authentication.
+    put(body, 181, "000024");
+    put(body, 199, "000000280");
+    put(body, 208, "0000");
+    put(body, 256, "20261107210000000");
+    return body;
+  }
+
   /** Literal UI232 offsets; no production encoder or runtime authentication is used. */
   private static byte[] reply(boolean async) {
     byte[] body =
@@ -145,9 +228,9 @@ final class JmsReplyEnvelopeContractTest {
     byte[] body = new byte[length];
     Arrays.fill(body, (byte) ' ');
     put(body, 0, "SCHBNK01");
-    put(body, 8, "001");
+    put(body, 8, TEST_VERSION);
     put(body, 11, layout);
-    put(body, 19, "001");
+    put(body, 19, TEST_VERSION);
     put(body, 22, kind);
     put(body, 23, interaction);
     put(body, 96, "20260903120000000");
