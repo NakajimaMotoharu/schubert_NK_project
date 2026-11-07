@@ -1,0 +1,265 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T21:12:52.564354+09:00",
+  "source": "ea41acba49b6615386ac2d291241291f8e43b89f",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "tests": 8,
+  "newUniqueTests": 8,
+  "requalifiedExistingTests": 0,
+  "newDirectWholeSourceProof": 1,
+  "registeredWholeComponentDelta": null,
+  "registryDedupRequired": true,
+  "newAcceptance": 0,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 69,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 6,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 16,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 5,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 2,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "wholeTargetCodeCoverage100": true,
+  "physical": {
+    "dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory": "6e70fd6fc5a9699baba079e661819ab30f20090e76e8949145f755f9e38133e4"
+  },
+  "classIds": {
+    "dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory": "7b2689768bfed517"
+  },
+  "sourcePhysicalClosureCount": 1,
+  "enumGeneratedMethods": "Standard JaCoCo enum compiler-generated method filters only; whole normal physical class retained; manual excludes0",
+  "manualCoverageExclusions": [],
+  "oldExecCombined": false,
+  "normalObservedCrc": {
+    "dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory": "7b2689768bfed517",
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec": "6fa0c7617e24a83b",
+    "dev/codex/schubert/nk/protocol/codec/HeaderCodec": "d15aef124154a044",
+    "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException": "b2a728de55d0d3b9",
+    "dev/codex/schubert/nk/protocol/header/AuthenticationContext": "a931162e0a83d341",
+    "dev/codex/schubert/nk/protocol/header/CommonHeader": "635561c9b38fcc05",
+    "dev/codex/schubert/nk/protocol/header/InteractionKind": "59edd232c0a667b6",
+    "dev/codex/schubert/nk/protocol/header/MessageKind": "9ffaa7b0e8de22aa",
+    "dev/codex/schubert/nk/protocol/header/ResultCode": "f58efe6d2d007087",
+    "dev/codex/schubert/nk/protocol/layout/LayoutDefinition": "722f79b5130af6e4",
+    "dev/codex/schubert/nk/protocol/layout/LayoutId": "240169cacdc45dd7",
+    "dev/codex/schubert/nk/protocol/layout/LayoutRegistry": "df8b252679de0740",
+    "dev/codex/schubert/nk/protocol/time/JstWireTimestamp": "9745ee633b5db32a",
+    "dev/codex/schubert/nk/protocol/transport/BrokerTopology": "7413a7ffdc75d549"
+  },
+  "physicalProductInitializations": [
+    "dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory",
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec",
+    "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+    "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException",
+    "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+    "dev/codex/schubert/nk/protocol/header/CommonHeader",
+    "dev/codex/schubert/nk/protocol/header/InteractionKind",
+    "dev/codex/schubert/nk/protocol/header/MessageKind",
+    "dev/codex/schubert/nk/protocol/header/ResultCode",
+    "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+    "dev/codex/schubert/nk/protocol/layout/LayoutId",
+    "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+    "dev/codex/schubert/nk/protocol/time/JstWireTimestamp",
+    "dev/codex/schubert/nk/protocol/transport/BrokerTopology"
+  ],
+  "jvmGeneratedLambdaOwners": {
+    "dev/codex/schubert/nk/protocol/codec/HeaderCodec$$Lambda+0x000000005813ef68": "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+    "dev/codex/schubert/nk/protocol/codec/HeaderCodec$$Lambda+0x000000005813f400": "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+    "dev/codex/schubert/nk/protocol/header/ResultCode$$Lambda+0x000000005813f848": "dev/codex/schubert/nk/protocol/header/ResultCode",
+    "dev/codex/schubert/nk/protocol/header/ResultCode$$Lambda+0x000000005813faa8": "dev/codex/schubert/nk/protocol/header/ResultCode"
+  },
+  "lambdaOwnerNegativeGuards": 2,
+  "independentGoldenInput": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG23034-jms-factory-independent-input-v1/manifest.json",
+    "sha256": "7cc17fda23a5c64088b6fa446304eb80953f921c882fb30ea747d62e86b1cb32"
+  },
+  "sourceRecipeNegativeGuards": [
+    "put(wire, 177, \"0256\");",
+    "put(wire, 282, \"000000000001\");",
+    "private static final String VERSION = \"001\";"
+  ],
+  "staticRaw": 4,
+  "individualStaticClassifications": [
+    {
+      "finding": {
+        "beginline": "228",
+        "endline": "228",
+        "begincolumn": "39",
+        "endcolumn": "73",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "JmsMessageFactoryPortTest.Port",
+        "variable": "properties",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3",
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+      },
+      "classification": "NOT_APPLICABLE",
+      "reason": "Per-Port LinkedHashMap is private to one synchronous original test call chain. No worker/executor/native callback exists; eight selected tests run with parallel disabled. Ordered local property recording is not concurrent shared state.",
+      "testSourceSha256": "458f2db382ac5709e0e950eabb7767f076175a0934312a81140af05e14397d63"
+    },
+    {
+      "finding": {
+        "beginline": "240",
+        "endline": "240",
+        "begincolumn": "19",
+        "endcolumn": "54",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "JmsMessageFactoryPortTest.Port",
+        "method": "Port",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3",
+        "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+      },
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone fixed JMSContext or BytesMessage interface port uses that exact API interface defining loader for Proxy visibility, not a J2EE resource/classloader lookup. Actual construction and all8 pure tests succeeded in this exact classpath with no provider.",
+      "testSourceSha256": "458f2db382ac5709e0e950eabb7767f076175a0934312a81140af05e14397d63"
+    },
+    {
+      "finding": {
+        "beginline": "246",
+        "endline": "246",
+        "begincolumn": "19",
+        "endcolumn": "52",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "JmsMessageFactoryPortTest.Port",
+        "method": "Port",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3",
+        "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+      },
+      "classification": "NOT_APPLICABLE",
+      "reason": "Standalone fixed JMSContext or BytesMessage interface port uses that exact API interface defining loader for Proxy visibility, not a J2EE resource/classloader lookup. Actual construction and all8 pure tests succeeded in this exact classpath with no provider.",
+      "testSourceSha256": "458f2db382ac5709e0e950eabb7767f076175a0934312a81140af05e14397d63"
+    },
+    {
+      "finding": {
+        "beginline": "295",
+        "endline": "295",
+        "begincolumn": "26",
+        "endcolumn": "66",
+        "rule": "CompareObjectsWithEquals",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "JmsMessageFactoryPortTest.Port",
+        "method": "objectCall",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+        "priority": "3",
+        "message": "Use equals() to compare object references."
+      },
+      "classification": "NOT_APPLICABLE",
+      "reason": "InvocationHandler implements Object.equals identity for the dynamic test proxy. Calling proxy.equals from this handler would recurse into the same handler; reference identity is the declared fixture Object contract, not domain value equality.",
+      "testSourceSha256": "458f2db382ac5709e0e950eabb7767f076175a0934312a81140af05e14397d63"
+    }
+  ],
+  "staticApplicable": 0,
+  "checkstyle": 0,
+  "unchangedMainStatic": "0580a14592d3fc00820183034c584208e45b002802d2e3e173b5f752c7cf19f2",
+  "newFixtureReplacesHeldBackendTest": false,
+  "actualBrokerConnectionSessionTransactionSendCommitRollbackCloseRootNativeFourHeldActions": 0,
+  "previousToolFailurePreserved": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23040-jms-factory-tool-failure-v1/manifest.json",
+    "sha256": "f772f894efb7ccd585da612c0a2b59b4f5380b9656bc5080baed0f8ba19832e9"
+  },
+  "bugs": [
+    "BUG-2469",
+    "BUG-2470"
+  ],
+  "ykts": [
+    "YKT-2207",
+    "YKT-2208"
+  ],
+  "inputHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactoryPortTest.java": "458f2db382ac5709e0e950eabb7767f076175a0934312a81140af05e14397d63",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.java": "90c2401c0755b6ef1bb7e15c3847d268d9401a30d7ea9a4409f7516d7c500957",
+    "evidence/01_PT/018_NK-OPS-001/input/323_jms_factory_port_qualifier.py": "b7fb940c5dd5f17ceae17547be4f96ab23e47be650878da3fbd3e41d0aebab68",
+    "evidence/01_PT/018_NK-OPS-001/input/324_jms_factory_port_scope.json": "684f2ccc2c40456ae9a203ceb871fb477c8eb2355c67082817c7a645f9642397"
+  },
+  "environment": {
+    "file.encoding": "UTF-8",
+    "java.version": "25.0.4",
+    "os.arch": "amd64",
+    "os.name": "Linux",
+    "user.timezone": "Asia/Tokyo"
+  },
+  "files": {
+    "original-classinfo-begin.safe.json": "7b703bc3ea280483b2012514ae7ae1de1acc1874f6f6ba02bb64fa15c0c8ae4e",
+    "original-coverage.stdout": "8a0dc2848a05d91ceebe5ccdd870b41b1249b344374d49473bf70213feab1467",
+    "original-execinfo-begin.safe.json": "a72402e84bde2b08e3fa3f64a06e76fd3dc796cd877123e13c78d4a79e741898",
+    "original-coverage-exit.safe.json": "6dd6c74009c4d29fd50cba9fe93c1cdfa9d10396411b6f3f75ff340c9a7ff03b",
+    "original-classinfo-exit.safe.json": "a228e5498950122998bd10c33d8e6b0f732bb2b8fa5ea700de0eb1c779cb7dc6",
+    "original-unit-begin.safe.json": "b6eb9548bb61488ee5bc3267bbd748d400be63e75cee407b530b365ffb135e60",
+    "original-unit-process.safe.json": "a7fce6c957814468c6f550989e8611eaa245d3d2ceac776554513bf095056962",
+    "original-coverage-begin.safe.json": "51854af6271a9f1c95c9066ebbc37ebd1cb3b04cc0285919b9f31eb63e5e5109",
+    "original-classinfo.stdout": "f847a3dd544888609fe85907a4cf5b6e348daa571e6a9f1cf5882f2820113883",
+    "original-execinfo-process.safe.json": "74aec739401794c63fb9141b252a54cfbbfae825e0e593920bbacb652611ce33",
+    "original-coverage.xml": "4f34794c4ac2f6792530d5f457f9d322dbc59943d14ebe84d726538d587452f5",
+    "original-coverage-process.safe.json": "92f0f56854823b51d0b94160ea5221fca723c8f89160eecdcceedb009b1382e7",
+    "original-execinfo-exit.safe.json": "1656a7198558e92729db114e5c5337ceb4ab7b2a1ad3e81eb0f18a56efd4a83f",
+    "original-execinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "jacoco.exec": "3f0e9a4d3eb687edbcfbcd439ecdef9ab8e67a865f169c29a54ad76aa43723d0",
+    "original-execinfo.stdout": "3cccccc930bd377f88dc804af858e8d3b59106a6da0af3969f248cf4031391df",
+    "original-begin.json": "727a43f8528f327856edfe0343fc494d86e1eff0d5ba5c6eac0fa6abad7980a8",
+    "original-unit-exit.safe.json": "f54ca1d82a643b21da085483507b4be027af4b48d84071c79729485ab406141f",
+    "original-classinfo-process.safe.json": "7acdbf347a2d07a79aa22673795d7586ce3af78d967ae8fdb51d9e62cdf4cf27",
+    "original-unit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-manifest.json": "17fc6c375bbe1b6a481a16e032123a01ae778df7e0cd4081eda52ead2d2f7518",
+    "original-classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-coverage.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-class-init.stdout": "1fbff9881c663b301a6da83ec9a782e202c24b0fbd21e4df8fae66bd323fd541",
+    "original-unit.stdout": "dfded783616923f723e8b024f4d2ba126f005e9f3fb89ae88ff27e53a15d001b",
+    "original-TEST-junit-jupiter.xml": "679a4363062302d11dc3c629c85202eca6cce6802d99a1cce37988302146a5e7",
+    "original-TEST-junit-platform-suite.xml": "80f8843fefd7570063e197907c87e39c73625a0bd2bb80d1e7758c0dd40a3411",
+    "original-TEST-junit-vintage.xml": "cfcd16bd15643ab3e31bae2b5ff49aca93593b12505f400683cc7a052eb90e75",
+    "static-pmd.stdout": "ce035ec866df74233046eff3a269342b44f9bea560f5084064f1b0f7843b6615",
+    "static-checkstyle-exit.safe.json": "2264966f04f70c6f2ec5ac8912be213e0eb37b2bd8eed19f0ae153f156011602",
+    "static-pmd.stderr": "fb27932ec5539a703f0038df7c38e057ac3395e0b1e79554b415e6c30d9b1e3b",
+    "static-pmd-exit.safe.json": "340fdd01eeb7e34eae82d72670fbc3f098bdaa4cf4913c2ef6d940ad99990e7a",
+    "static-checkstyle-process.safe.json": "4e29936f65f34d644ef865d3bc4ad5bb9e5eb7e9a1c5238ea813e4f7665f0c6a",
+    "static-pmd-begin.safe.json": "26022642a9ee02cecf7c7523c4995e1dee24759efdc53a6dec3be9227faf5cd6",
+    "static-sources.txt": "b518474eb5b035b6e53a85d9d3e3d0c53dc8631e3519b1ac9bbea53ff544d07d",
+    "static-pmd-process.safe.json": "ae601c8ae3b58b4f38e8fe11b91118eedfb648c126f9dde110f493fd0a3df90b",
+    "static-checkstyle.xml": "7119f6eaa7a423f28d7dbcb35f62db7a0af7a8a815b8ac9f9bcb654f631798f0",
+    "static-checkstyle-begin.safe.json": "779fbdabb660617af867cc871e2343683f305d2db4a38fda381dc6dba9fd66f3",
+    "static-checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "static-manifest.json": "71548112e69d3a4a6d2f35ca2f87b9239b7db481cad708ab3ec01786b55c6bd5",
+    "static-pmd.xml": "abe96e85a3fb888067ac1aff71c2f43984ff4804c2ca7a412d7d268fde470130",
+    "static-checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "passive-javap-exit.safe.json": "76d0afdc5d8b231ccbfe54cbbc73bea76c65063f66a02acb1d6aa171ad74e98d",
+    "passive-javap.stdout": "09b672b21caac0d46c1f94287c3f4fcd86bfd5d3a3dff1fa44db3b1b97e0c170",
+    "passive-javap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "passive-javap-process.safe.json": "8b747a7292d62d943096f3dcf1425bba6145c18aaad7480de38af1613a4fe084",
+    "passive-javap-begin.safe.json": "6f46214c7db83f297173294f1519b98499ad3f5bb1764c4af6daf0c69693f506",
+    "passive-manifest.json": "1f519b796894c4d0be5b9bac9fa63e3dfe62f0a810173986a21eeb5b0a0c9db3"
+  },
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/325_jms_factory_independent_post.py",
+    "sha256": "b5d8ad5624796c0539e1a3a2c9ae1f1862c1775ef3013c15089b1d020ff1d9aa",
+    "source": "ea41acba49b6615386ac2d291241291f8e43b89f"
+  }
+}

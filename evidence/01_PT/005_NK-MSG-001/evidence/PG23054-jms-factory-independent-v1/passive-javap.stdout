@@ -1,0 +1,2052 @@
+Classfile jar:file:///home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar!/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.class
+  Last modified Nov 7, 2026; size 3369 bytes
+  SHA-256 checksum 6e70fd6fc5a9699baba079e661819ab30f20090e76e8949145f755f9e38133e4
+  Compiled from "JmsMessageFactory.java"
+public final class dev.codex.schubert.nk.api.messaging.outbound.JmsMessageFactory extends java.lang.Enum<dev.codex.schubert.nk.api.messaging.outbound.JmsMessageFactory>
+  minor version: 0
+  major version: 69
+  flags: (0x4031) ACC_PUBLIC, ACC_FINAL, ACC_SUPER, ACC_ENUM
+  this_class: #1                          // dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory
+  super_class: #17                        // java/lang/Enum
+  interfaces: 0, fields: 2, methods: 6, attributes: 2
+Constant pool:
+    #1 = Class              #2            // dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory
+    #2 = Utf8               dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory
+    #3 = Fieldref           #1.#4         // dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.INSTANCE:Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+    #4 = NameAndType        #5:#6         // INSTANCE:Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+    #5 = Utf8               INSTANCE
+    #6 = Utf8               Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+    #7 = Fieldref           #1.#8         // dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.$VALUES:[Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+    #8 = NameAndType        #9:#10        // $VALUES:[Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+    #9 = Utf8               $VALUES
+   #10 = Utf8               [Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+   #11 = Methodref          #12.#13       // "[Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;".clone:()Ljava/lang/Object;
+   #12 = Class              #10           // "[Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;"
+   #13 = NameAndType        #14:#15       // clone:()Ljava/lang/Object;
+   #14 = Utf8               clone
+   #15 = Utf8               ()Ljava/lang/Object;
+   #16 = Methodref          #17.#18       // java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+   #17 = Class              #19           // java/lang/Enum
+   #18 = NameAndType        #20:#21       // valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+   #19 = Utf8               java/lang/Enum
+   #20 = Utf8               valueOf
+   #21 = Utf8               (Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+   #22 = Methodref          #17.#23       // java/lang/Enum."<init>":(Ljava/lang/String;I)V
+   #23 = NameAndType        #24:#25       // "<init>":(Ljava/lang/String;I)V
+   #24 = Utf8               <init>
+   #25 = Utf8               (Ljava/lang/String;I)V
+   #26 = String             #27           // context
+   #27 = Utf8               context
+   #28 = Methodref          #29.#30       // java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #29 = Class              #31           // java/util/Objects
+   #30 = NameAndType        #32:#33       // requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #31 = Utf8               java/util/Objects
+   #32 = Utf8               requireNonNull
+   #33 = Utf8               (Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #34 = String             #35           // encodedBody
+   #35 = Utf8               encodedBody
+   #36 = Methodref          #37.#38       // dev/codex/schubert/nk/protocol/codec/HeaderCodec.standard:()Ldev/codex/schubert/nk/protocol/codec/HeaderCodec;
+   #37 = Class              #39           // dev/codex/schubert/nk/protocol/codec/HeaderCodec
+   #38 = NameAndType        #40:#41       // standard:()Ldev/codex/schubert/nk/protocol/codec/HeaderCodec;
+   #39 = Utf8               dev/codex/schubert/nk/protocol/codec/HeaderCodec
+   #40 = Utf8               standard
+   #41 = Utf8               ()Ldev/codex/schubert/nk/protocol/codec/HeaderCodec;
+   #42 = Methodref          #37.#43       // dev/codex/schubert/nk/protocol/codec/HeaderCodec.peek:([B)Ldev/codex/schubert/nk/protocol/header/CommonHeader;
+   #43 = NameAndType        #44:#45       // peek:([B)Ldev/codex/schubert/nk/protocol/header/CommonHeader;
+   #44 = Utf8               peek
+   #45 = Utf8               ([B)Ldev/codex/schubert/nk/protocol/header/CommonHeader;
+   #46 = Fieldref           #47.#48       // dev/codex/schubert/nk/protocol/transport/BrokerTopology.SYNC_REPLY_WEB:Ldev/codex/schubert/nk/protocol/transport/BrokerTopology;
+   #47 = Class              #49           // dev/codex/schubert/nk/protocol/transport/BrokerTopology
+   #48 = NameAndType        #50:#51       // SYNC_REPLY_WEB:Ldev/codex/schubert/nk/protocol/transport/BrokerTopology;
+   #49 = Utf8               dev/codex/schubert/nk/protocol/transport/BrokerTopology
+   #50 = Utf8               SYNC_REPLY_WEB
+   #51 = Utf8               Ldev/codex/schubert/nk/protocol/transport/BrokerTopology;
+   #52 = Methodref          #47.#53       // dev/codex/schubert/nk/protocol/transport/BrokerTopology.maximumBodyLength:()I
+   #53 = NameAndType        #54:#55       // maximumBodyLength:()I
+   #54 = Utf8               maximumBodyLength
+   #55 = Utf8               ()I
+   #56 = Methodref          #57.#58       // dev/codex/schubert/nk/protocol/header/CommonHeader.messageKind:()Ldev/codex/schubert/nk/protocol/header/MessageKind;
+   #57 = Class              #59           // dev/codex/schubert/nk/protocol/header/CommonHeader
+   #58 = NameAndType        #60:#61       // messageKind:()Ldev/codex/schubert/nk/protocol/header/MessageKind;
+   #59 = Utf8               dev/codex/schubert/nk/protocol/header/CommonHeader
+   #60 = Utf8               messageKind
+   #61 = Utf8               ()Ldev/codex/schubert/nk/protocol/header/MessageKind;
+   #62 = Fieldref           #63.#64       // dev/codex/schubert/nk/protocol/header/MessageKind.RESPONSE:Ldev/codex/schubert/nk/protocol/header/MessageKind;
+   #63 = Class              #65           // dev/codex/schubert/nk/protocol/header/MessageKind
+   #64 = NameAndType        #66:#67       // RESPONSE:Ldev/codex/schubert/nk/protocol/header/MessageKind;
+   #65 = Utf8               dev/codex/schubert/nk/protocol/header/MessageKind
+   #66 = Utf8               RESPONSE
+   #67 = Utf8               Ldev/codex/schubert/nk/protocol/header/MessageKind;
+   #68 = Methodref          #57.#69       // dev/codex/schubert/nk/protocol/header/CommonHeader.totalLength:()I
+   #69 = NameAndType        #70:#55       // totalLength:()I
+   #70 = Utf8               totalLength
+   #71 = Class              #72           // java/lang/IllegalArgumentException
+   #72 = Utf8               java/lang/IllegalArgumentException
+   #73 = String             #74           // encoded outbound reply identity is inconsistent
+   #74 = Utf8               encoded outbound reply identity is inconsistent
+   #75 = Methodref          #71.#76       // java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+   #76 = NameAndType        #24:#77       // "<init>":(Ljava/lang/String;)V
+   #77 = Utf8               (Ljava/lang/String;)V
+   #78 = InterfaceMethodref #79.#80       // jakarta/jms/JMSContext.createBytesMessage:()Ljakarta/jms/BytesMessage;
+   #79 = Class              #81           // jakarta/jms/JMSContext
+   #80 = NameAndType        #82:#83       // createBytesMessage:()Ljakarta/jms/BytesMessage;
+   #81 = Utf8               jakarta/jms/JMSContext
+   #82 = Utf8               createBytesMessage
+   #83 = Utf8               ()Ljakarta/jms/BytesMessage;
+   #84 = InterfaceMethodref #85.#86       // jakarta/jms/BytesMessage.writeBytes:([B)V
+   #85 = Class              #87           // jakarta/jms/BytesMessage
+   #86 = NameAndType        #88:#89       // writeBytes:([B)V
+   #87 = Utf8               jakarta/jms/BytesMessage
+   #88 = Utf8               writeBytes
+   #89 = Utf8               ([B)V
+   #90 = Methodref          #57.#91       // dev/codex/schubert/nk/protocol/header/CommonHeader.correlationId:()Ljava/util/UUID;
+   #91 = NameAndType        #92:#93       // correlationId:()Ljava/util/UUID;
+   #92 = Utf8               correlationId
+   #93 = Utf8               ()Ljava/util/UUID;
+   #94 = Methodref          #95.#96       // java/util/UUID.toString:()Ljava/lang/String;
+   #95 = Class              #97           // java/util/UUID
+   #96 = NameAndType        #98:#99       // toString:()Ljava/lang/String;
+   #97 = Utf8               java/util/UUID
+   #98 = Utf8               toString
+   #99 = Utf8               ()Ljava/lang/String;
+  #100 = InterfaceMethodref #85.#101      // jakarta/jms/BytesMessage.setJMSCorrelationID:(Ljava/lang/String;)V
+  #101 = NameAndType        #102:#77      // setJMSCorrelationID:(Ljava/lang/String;)V
+  #102 = Utf8               setJMSCorrelationID
+  #103 = String             #104          // NKMessageID
+  #104 = Utf8               NKMessageID
+  #105 = Methodref          #57.#106      // dev/codex/schubert/nk/protocol/header/CommonHeader.messageId:()Ljava/util/UUID;
+  #106 = NameAndType        #107:#93      // messageId:()Ljava/util/UUID;
+  #107 = Utf8               messageId
+  #108 = InterfaceMethodref #85.#109      // jakarta/jms/BytesMessage.setStringProperty:(Ljava/lang/String;Ljava/lang/String;)V
+  #109 = NameAndType        #110:#111     // setStringProperty:(Ljava/lang/String;Ljava/lang/String;)V
+  #110 = Utf8               setStringProperty
+  #111 = Utf8               (Ljava/lang/String;Ljava/lang/String;)V
+  #112 = String             #113          // NKLayoutID
+  #113 = Utf8               NKLayoutID
+  #114 = Methodref          #57.#115      // dev/codex/schubert/nk/protocol/header/CommonHeader.layoutId:()Ldev/codex/schubert/nk/protocol/layout/LayoutId;
+  #115 = NameAndType        #116:#117     // layoutId:()Ldev/codex/schubert/nk/protocol/layout/LayoutId;
+  #116 = Utf8               layoutId
+  #117 = Utf8               ()Ldev/codex/schubert/nk/protocol/layout/LayoutId;
+  #118 = Methodref          #119.#120     // dev/codex/schubert/nk/protocol/layout/LayoutId.value:()Ljava/lang/String;
+  #119 = Class              #121          // dev/codex/schubert/nk/protocol/layout/LayoutId
+  #120 = NameAndType        #122:#99      // value:()Ljava/lang/String;
+  #121 = Utf8               dev/codex/schubert/nk/protocol/layout/LayoutId
+  #122 = Utf8               value
+  #123 = String             #124          // NKProtocolVersion
+  #124 = Utf8               NKProtocolVersion
+  #125 = String             #126          // 001
+  #126 = Utf8               001
+  #127 = String             #5            // INSTANCE
+  #128 = Methodref          #1.#23        // dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory."<init>":(Ljava/lang/String;I)V
+  #129 = Methodref          #1.#130       // dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.$values:()[Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+  #130 = NameAndType        #131:#132     // $values:()[Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+  #131 = Utf8               $values
+  #132 = Utf8               ()[Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+  #133 = Utf8               values
+  #134 = Utf8               Code
+  #135 = Utf8               LineNumberTable
+  #136 = Utf8               (Ljava/lang/String;)Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+  #137 = Utf8               LocalVariableTable
+  #138 = Utf8               name
+  #139 = Utf8               Ljava/lang/String;
+  #140 = Utf8               MethodParameters
+  #141 = Utf8               this
+  #142 = Utf8               Signature
+  #143 = Utf8               ()V
+  #144 = Utf8               createReply
+  #145 = Utf8               (Ljakarta/jms/JMSContext;[B)Ljakarta/jms/BytesMessage;
+  #146 = Utf8               Ljakarta/jms/JMSContext;
+  #147 = Utf8               [B
+  #148 = Utf8               header
+  #149 = Utf8               Ldev/codex/schubert/nk/protocol/header/CommonHeader;
+  #150 = Utf8               reply
+  #151 = Utf8               Ljakarta/jms/BytesMessage;
+  #152 = Utf8               StackMapTable
+  #153 = Utf8               Exceptions
+  #154 = Class              #155          // jakarta/jms/JMSException
+  #155 = Utf8               jakarta/jms/JMSException
+  #156 = Utf8               <clinit>
+  #157 = Utf8               Ljava/lang/Enum<Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;>;
+  #158 = Utf8               SourceFile
+  #159 = Utf8               JmsMessageFactory.java
+{
+  public static final dev.codex.schubert.nk.api.messaging.outbound.JmsMessageFactory INSTANCE;
+    descriptor: Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  private static final dev.codex.schubert.nk.api.messaging.outbound.JmsMessageFactory[] $VALUES;
+    descriptor: [Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+    flags: (0x101a) ACC_PRIVATE, ACC_STATIC, ACC_FINAL, ACC_SYNTHETIC
+
+  public static dev.codex.schubert.nk.api.messaging.outbound.JmsMessageFactory[] values();
+    descriptor: ()[Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: getstatic     #7                  // Field $VALUES:[Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+         3: invokevirtual #11                 // Method "[Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;".clone:()Ljava/lang/Object;
+         6: checkcast     #12                 // class "[Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;"
+         9: areturn
+      LineNumberTable:
+        line 17: 0
+
+  public static dev.codex.schubert.nk.api.messaging.outbound.JmsMessageFactory valueOf(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: ldc           #1                  // class dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory
+         2: aload_0
+         3: invokestatic  #16                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+         6: checkcast     #1                  // class dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory
+         9: areturn
+      LineNumberTable:
+        line 17: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0  name   Ljava/lang/String;
+    MethodParameters:
+      Name                           Flags
+      <no name>                      mandated
+
+  private dev.codex.schubert.nk.api.messaging.outbound.JmsMessageFactory();
+    descriptor: (Ljava/lang/String;I)V
+    flags: (0x0002) ACC_PRIVATE
+    Code:
+      stack=3, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: iload_2
+         3: invokespecial #22                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+         6: return
+      LineNumberTable:
+        line 17: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       7     0  this   Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+    MethodParameters:
+      Name                           Flags
+      <no name>                      synthetic
+      <no name>                      synthetic
+    Signature: #143                         // ()V
+
+  public jakarta.jms.BytesMessage createReply(jakarta.jms.JMSContext, byte[]) throws jakarta.jms.JMSException;
+    descriptor: (Ljakarta/jms/JMSContext;[B)Ljakarta/jms/BytesMessage;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=5, args_size=3
+         0: aload_1
+         1: ldc           #26                 // String context
+         3: invokestatic  #28                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_2
+         8: ldc           #34                 // String encodedBody
+        10: invokestatic  #28                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: invokestatic  #36                 // Method dev/codex/schubert/nk/protocol/codec/HeaderCodec.standard:()Ldev/codex/schubert/nk/protocol/codec/HeaderCodec;
+        17: aload_2
+        18: invokevirtual #42                 // Method dev/codex/schubert/nk/protocol/codec/HeaderCodec.peek:([B)Ldev/codex/schubert/nk/protocol/header/CommonHeader;
+        21: astore_3
+        22: aload_2
+        23: arraylength
+        24: getstatic     #46                 // Field dev/codex/schubert/nk/protocol/transport/BrokerTopology.SYNC_REPLY_WEB:Ldev/codex/schubert/nk/protocol/transport/BrokerTopology;
+        27: invokevirtual #52                 // Method dev/codex/schubert/nk/protocol/transport/BrokerTopology.maximumBodyLength:()I
+        30: if_icmpgt     52
+        33: aload_3
+        34: invokevirtual #56                 // Method dev/codex/schubert/nk/protocol/header/CommonHeader.messageKind:()Ldev/codex/schubert/nk/protocol/header/MessageKind;
+        37: getstatic     #62                 // Field dev/codex/schubert/nk/protocol/header/MessageKind.RESPONSE:Ldev/codex/schubert/nk/protocol/header/MessageKind;
+        40: if_acmpne     52
+        43: aload_3
+        44: invokevirtual #68                 // Method dev/codex/schubert/nk/protocol/header/CommonHeader.totalLength:()I
+        47: aload_2
+        48: arraylength
+        49: if_icmpeq     62
+        52: new           #71                 // class java/lang/IllegalArgumentException
+        55: dup
+        56: ldc           #73                 // String encoded outbound reply identity is inconsistent
+        58: invokespecial #75                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        61: athrow
+        62: aload_1
+        63: invokeinterface #78,  1           // InterfaceMethod jakarta/jms/JMSContext.createBytesMessage:()Ljakarta/jms/BytesMessage;
+        68: astore        4
+        70: aload         4
+        72: aload_2
+        73: invokeinterface #84,  2           // InterfaceMethod jakarta/jms/BytesMessage.writeBytes:([B)V
+        78: aload         4
+        80: aload_3
+        81: invokevirtual #90                 // Method dev/codex/schubert/nk/protocol/header/CommonHeader.correlationId:()Ljava/util/UUID;
+        84: invokevirtual #94                 // Method java/util/UUID.toString:()Ljava/lang/String;
+        87: invokeinterface #100,  2          // InterfaceMethod jakarta/jms/BytesMessage.setJMSCorrelationID:(Ljava/lang/String;)V
+        92: aload         4
+        94: ldc           #103                // String NKMessageID
+        96: aload_3
+        97: invokevirtual #105                // Method dev/codex/schubert/nk/protocol/header/CommonHeader.messageId:()Ljava/util/UUID;
+       100: invokevirtual #94                 // Method java/util/UUID.toString:()Ljava/lang/String;
+       103: invokeinterface #108,  3          // InterfaceMethod jakarta/jms/BytesMessage.setStringProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       108: aload         4
+       110: ldc           #112                // String NKLayoutID
+       112: aload_3
+       113: invokevirtual #114                // Method dev/codex/schubert/nk/protocol/header/CommonHeader.layoutId:()Ldev/codex/schubert/nk/protocol/layout/LayoutId;
+       116: invokevirtual #118                // Method dev/codex/schubert/nk/protocol/layout/LayoutId.value:()Ljava/lang/String;
+       119: invokeinterface #108,  3          // InterfaceMethod jakarta/jms/BytesMessage.setStringProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       124: aload         4
+       126: ldc           #123                // String NKProtocolVersion
+       128: ldc           #125                // String 001
+       130: invokeinterface #108,  3          // InterfaceMethod jakarta/jms/BytesMessage.setStringProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       135: aload         4
+       137: areturn
+      LineNumberTable:
+        line 22: 0
+        line 23: 7
+        line 24: 14
+        line 25: 22
+        line 26: 34
+        line 27: 44
+        line 28: 52
+        line 31: 62
+        line 32: 70
+        line 33: 78
+        line 34: 92
+        line 35: 108
+        line 36: 124
+        line 37: 135
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0     138     0  this   Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+            0     138     1 context   Ljakarta/jms/JMSContext;
+            0     138     2 encodedBody   [B
+           22     116     3 header   Ldev/codex/schubert/nk/protocol/header/CommonHeader;
+           70      68     4 reply   Ljakarta/jms/BytesMessage;
+      StackMapTable: number_of_entries = 2
+        frame_type = 252 /* append */
+          offset_delta = 52
+          locals = [ class dev/codex/schubert/nk/protocol/header/CommonHeader ]
+        frame_type = 9 /* same */
+    Exceptions:
+      throws jakarta.jms.JMSException
+
+  private static dev.codex.schubert.nk.api.messaging.outbound.JmsMessageFactory[] $values();
+    descriptor: ()[Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=4, locals=0, args_size=0
+         0: iconst_1
+         1: anewarray     #1                  // class dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory
+         4: dup
+         5: iconst_0
+         6: getstatic     #3                  // Field INSTANCE:Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+         9: aastore
+        10: areturn
+      LineNumberTable:
+        line 17: 0
+
+  static {};
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=4, locals=0, args_size=0
+         0: new           #1                  // class dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory
+         3: dup
+         4: ldc           #127                // String INSTANCE
+         6: iconst_0
+         7: invokespecial #128                // Method "<init>":(Ljava/lang/String;I)V
+        10: putstatic     #3                  // Field INSTANCE:Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+        13: invokestatic  #129                // Method $values:()[Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+        16: putstatic     #7                  // Field $VALUES:[Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;
+        19: return
+      LineNumberTable:
+        line 18: 0
+        line 17: 13
+}
+Signature: #157                         // Ljava/lang/Enum<Ldev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory;>;
+SourceFile: "JmsMessageFactory.java"
+Classfile jar:file:///home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar!/dev/codex/schubert/nk/protocol/codec/HeaderCodec.class
+  Last modified Nov 7, 2026; size 8446 bytes
+  SHA-256 checksum 49fd7f743dc4f83efd9398eb42adb913dc90399935f43b815d673742cdf7703d
+  Compiled from "HeaderCodec.java"
+public final class dev.codex.schubert.nk.protocol.codec.HeaderCodec
+  minor version: 0
+  major version: 69
+  flags: (0x0031) ACC_PUBLIC, ACC_FINAL, ACC_SUPER
+  this_class: #18                         // dev/codex/schubert/nk/protocol/codec/HeaderCodec
+  super_class: #2                         // java/lang/Object
+  interfaces: 0, fields: 4, methods: 9, attributes: 3
+Constant pool:
+    #1 = Methodref          #2.#3         // java/lang/Object."<init>":()V
+    #2 = Class              #4            // java/lang/Object
+    #3 = NameAndType        #5:#6         // "<init>":()V
+    #4 = Utf8               java/lang/Object
+    #5 = Utf8               <init>
+    #6 = Utf8               ()V
+    #7 = String             #8            // registry
+    #8 = Utf8               registry
+    #9 = Methodref          #10.#11       // java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #10 = Class              #12           // java/util/Objects
+   #11 = NameAndType        #13:#14       // requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #12 = Utf8               java/util/Objects
+   #13 = Utf8               requireNonNull
+   #14 = Utf8               (Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #15 = Class              #16           // dev/codex/schubert/nk/protocol/layout/LayoutRegistry
+   #16 = Utf8               dev/codex/schubert/nk/protocol/layout/LayoutRegistry
+   #17 = Fieldref           #18.#19       // dev/codex/schubert/nk/protocol/codec/HeaderCodec.registry:Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;
+   #18 = Class              #20           // dev/codex/schubert/nk/protocol/codec/HeaderCodec
+   #19 = NameAndType        #8:#21        // registry:Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;
+   #20 = Utf8               dev/codex/schubert/nk/protocol/codec/HeaderCodec
+   #21 = Utf8               Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;
+   #22 = Methodref          #15.#23       // dev/codex/schubert/nk/protocol/layout/LayoutRegistry.standard:()Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;
+   #23 = NameAndType        #24:#25       // standard:()Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;
+   #24 = Utf8               standard
+   #25 = Utf8               ()Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;
+   #26 = Methodref          #18.#27       // dev/codex/schubert/nk/protocol/codec/HeaderCodec."<init>":(Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;)V
+   #27 = NameAndType        #5:#28        // "<init>":(Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;)V
+   #28 = Utf8               (Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;)V
+   #29 = String             #30           // header
+   #30 = Utf8               header
+   #31 = Methodref          #32.#33       // dev/codex/schubert/nk/protocol/header/CommonHeader.layoutId:()Ldev/codex/schubert/nk/protocol/layout/LayoutId;
+   #32 = Class              #34           // dev/codex/schubert/nk/protocol/header/CommonHeader
+   #33 = NameAndType        #35:#36       // layoutId:()Ldev/codex/schubert/nk/protocol/layout/LayoutId;
+   #34 = Utf8               dev/codex/schubert/nk/protocol/header/CommonHeader
+   #35 = Utf8               layoutId
+   #36 = Utf8               ()Ldev/codex/schubert/nk/protocol/layout/LayoutId;
+   #37 = Methodref          #32.#38       // dev/codex/schubert/nk/protocol/header/CommonHeader.layoutVersion:()I
+   #38 = NameAndType        #39:#40       // layoutVersion:()I
+   #39 = Utf8               layoutVersion
+   #40 = Utf8               ()I
+   #41 = Methodref          #15.#42       // dev/codex/schubert/nk/protocol/layout/LayoutRegistry.require:(Ldev/codex/schubert/nk/protocol/layout/LayoutId;I)Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;
+   #42 = NameAndType        #43:#44       // require:(Ldev/codex/schubert/nk/protocol/layout/LayoutId;I)Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;
+   #43 = Utf8               require
+   #44 = Utf8               (Ldev/codex/schubert/nk/protocol/layout/LayoutId;I)Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;
+   #45 = Methodref          #32.#46       // dev/codex/schubert/nk/protocol/header/CommonHeader.validateAgainst:(Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;)V
+   #46 = NameAndType        #47:#48       // validateAgainst:(Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;)V
+   #47 = Utf8               validateAgainst
+   #48 = Utf8               (Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;)V
+   #49 = Methodref          #32.#50       // dev/codex/schubert/nk/protocol/header/CommonHeader.protocolIdentifier:()Ljava/lang/String;
+   #50 = NameAndType        #51:#52       // protocolIdentifier:()Ljava/lang/String;
+   #51 = Utf8               protocolIdentifier
+   #52 = Utf8               ()Ljava/lang/String;
+   #53 = Methodref          #54.#55       // dev/codex/schubert/nk/protocol/codec/FieldCodec.encodeText:(Ljava/lang/String;IZ)[B
+   #54 = Class              #56           // dev/codex/schubert/nk/protocol/codec/FieldCodec
+   #55 = NameAndType        #57:#58       // encodeText:(Ljava/lang/String;IZ)[B
+   #56 = Utf8               dev/codex/schubert/nk/protocol/codec/FieldCodec
+   #57 = Utf8               encodeText
+   #58 = Utf8               (Ljava/lang/String;IZ)[B
+   #59 = Methodref          #18.#60       // dev/codex/schubert/nk/protocol/codec/HeaderCodec.put:([BI[B)V
+   #60 = NameAndType        #61:#62       // put:([BI[B)V
+   #61 = Utf8               put
+   #62 = Utf8               ([BI[B)V
+   #63 = Methodref          #32.#64       // dev/codex/schubert/nk/protocol/header/CommonHeader.headerVersion:()I
+   #64 = NameAndType        #65:#40       // headerVersion:()I
+   #65 = Utf8               headerVersion
+   #66 = Methodref          #54.#67       // dev/codex/schubert/nk/protocol/codec/FieldCodec.encodeNumeric:(JIJJ)[B
+   #67 = NameAndType        #68:#69       // encodeNumeric:(JIJJ)[B
+   #68 = Utf8               encodeNumeric
+   #69 = Utf8               (JIJJ)[B
+   #70 = Methodref          #71.#72       // dev/codex/schubert/nk/protocol/layout/LayoutId.value:()Ljava/lang/String;
+   #71 = Class              #73           // dev/codex/schubert/nk/protocol/layout/LayoutId
+   #72 = NameAndType        #74:#52       // value:()Ljava/lang/String;
+   #73 = Utf8               dev/codex/schubert/nk/protocol/layout/LayoutId
+   #74 = Utf8               value
+   #75 = Methodref          #32.#76       // dev/codex/schubert/nk/protocol/header/CommonHeader.messageKind:()Ldev/codex/schubert/nk/protocol/header/MessageKind;
+   #76 = NameAndType        #77:#78       // messageKind:()Ldev/codex/schubert/nk/protocol/header/MessageKind;
+   #77 = Utf8               messageKind
+   #78 = Utf8               ()Ldev/codex/schubert/nk/protocol/header/MessageKind;
+   #79 = Methodref          #80.#81       // dev/codex/schubert/nk/protocol/header/MessageKind.wireValue:()C
+   #80 = Class              #82           // dev/codex/schubert/nk/protocol/header/MessageKind
+   #81 = NameAndType        #83:#84       // wireValue:()C
+   #82 = Utf8               dev/codex/schubert/nk/protocol/header/MessageKind
+   #83 = Utf8               wireValue
+   #84 = Utf8               ()C
+   #85 = Methodref          #32.#86       // dev/codex/schubert/nk/protocol/header/CommonHeader.interactionKind:()Ldev/codex/schubert/nk/protocol/header/InteractionKind;
+   #86 = NameAndType        #87:#88       // interactionKind:()Ldev/codex/schubert/nk/protocol/header/InteractionKind;
+   #87 = Utf8               interactionKind
+   #88 = Utf8               ()Ldev/codex/schubert/nk/protocol/header/InteractionKind;
+   #89 = Methodref          #90.#81       // dev/codex/schubert/nk/protocol/header/InteractionKind.wireValue:()C
+   #90 = Class              #91           // dev/codex/schubert/nk/protocol/header/InteractionKind
+   #91 = Utf8               dev/codex/schubert/nk/protocol/header/InteractionKind
+   #92 = Methodref          #32.#93       // dev/codex/schubert/nk/protocol/header/CommonHeader.messageId:()Ljava/util/UUID;
+   #93 = NameAndType        #94:#95       // messageId:()Ljava/util/UUID;
+   #94 = Utf8               messageId
+   #95 = Utf8               ()Ljava/util/UUID;
+   #96 = Methodref          #97.#98       // java/util/UUID.toString:()Ljava/lang/String;
+   #97 = Class              #99           // java/util/UUID
+   #98 = NameAndType        #100:#52      // toString:()Ljava/lang/String;
+   #99 = Utf8               java/util/UUID
+  #100 = Utf8               toString
+  #101 = Methodref          #32.#102      // dev/codex/schubert/nk/protocol/header/CommonHeader.correlationId:()Ljava/util/UUID;
+  #102 = NameAndType        #103:#95      // correlationId:()Ljava/util/UUID;
+  #103 = Utf8               correlationId
+  #104 = Methodref          #32.#105      // dev/codex/schubert/nk/protocol/header/CommonHeader.sentAt:()Ljava/time/Instant;
+  #105 = NameAndType        #106:#107     // sentAt:()Ljava/time/Instant;
+  #106 = Utf8               sentAt
+  #107 = Utf8               ()Ljava/time/Instant;
+  #108 = Methodref          #109.#110     // dev/codex/schubert/nk/protocol/time/JstWireTimestamp.format:(Ljava/time/Instant;)Ljava/lang/String;
+  #109 = Class              #111          // dev/codex/schubert/nk/protocol/time/JstWireTimestamp
+  #110 = NameAndType        #112:#113     // format:(Ljava/time/Instant;)Ljava/lang/String;
+  #111 = Utf8               dev/codex/schubert/nk/protocol/time/JstWireTimestamp
+  #112 = Utf8               format
+  #113 = Utf8               (Ljava/time/Instant;)Ljava/lang/String;
+  #114 = Fieldref           #115.#116     // java/nio/charset/StandardCharsets.US_ASCII:Ljava/nio/charset/Charset;
+  #115 = Class              #117          // java/nio/charset/StandardCharsets
+  #116 = NameAndType        #118:#119     // US_ASCII:Ljava/nio/charset/Charset;
+  #117 = Utf8               java/nio/charset/StandardCharsets
+  #118 = Utf8               US_ASCII
+  #119 = Utf8               Ljava/nio/charset/Charset;
+  #120 = Methodref          #121.#122     // java/lang/String.getBytes:(Ljava/nio/charset/Charset;)[B
+  #121 = Class              #123          // java/lang/String
+  #122 = NameAndType        #124:#125     // getBytes:(Ljava/nio/charset/Charset;)[B
+  #123 = Utf8               java/lang/String
+  #124 = Utf8               getBytes
+  #125 = Utf8               (Ljava/nio/charset/Charset;)[B
+  #126 = Methodref          #32.#127      // dev/codex/schubert/nk/protocol/header/CommonHeader.authenticationContext:()Ljava/util/Optional;
+  #127 = NameAndType        #128:#129     // authenticationContext:()Ljava/util/Optional;
+  #128 = Utf8               authenticationContext
+  #129 = Utf8               ()Ljava/util/Optional;
+  #130 = InvokeDynamic      #0:#131       // #0:apply:()Ljava/util/function/Function;
+  #131 = NameAndType        #132:#133     // apply:()Ljava/util/function/Function;
+  #132 = Utf8               apply
+  #133 = Utf8               ()Ljava/util/function/Function;
+  #134 = Methodref          #135.#136     // java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+  #135 = Class              #137          // java/util/Optional
+  #136 = NameAndType        #138:#139     // map:(Ljava/util/function/Function;)Ljava/util/Optional;
+  #137 = Utf8               java/util/Optional
+  #138 = Utf8               map
+  #139 = Utf8               (Ljava/util/function/Function;)Ljava/util/Optional;
+  #140 = Methodref          #135.#141     // java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+  #141 = NameAndType        #142:#143     // orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+  #142 = Utf8               orElse
+  #143 = Utf8               (Ljava/lang/Object;)Ljava/lang/Object;
+  #144 = Methodref          #32.#145      // dev/codex/schubert/nk/protocol/header/CommonHeader.headerLength:()I
+  #145 = NameAndType        #146:#40      // headerLength:()I
+  #146 = Utf8               headerLength
+  #147 = Long               256l
+  #149 = Methodref          #32.#150      // dev/codex/schubert/nk/protocol/header/CommonHeader.dataLength:()I
+  #150 = NameAndType        #151:#40      // dataLength:()I
+  #151 = Utf8               dataLength
+  #152 = Long               999999l
+  #154 = Methodref          #32.#155      // dev/codex/schubert/nk/protocol/header/CommonHeader.recordLength:()I
+  #155 = NameAndType        #156:#40      // recordLength:()I
+  #156 = Utf8               recordLength
+  #157 = Methodref          #32.#158      // dev/codex/schubert/nk/protocol/header/CommonHeader.recordCount:()I
+  #158 = NameAndType        #159:#40      // recordCount:()I
+  #159 = Utf8               recordCount
+  #160 = Methodref          #32.#161      // dev/codex/schubert/nk/protocol/header/CommonHeader.totalLength:()I
+  #161 = NameAndType        #162:#40      // totalLength:()I
+  #162 = Utf8               totalLength
+  #163 = Long               1000000l
+  #165 = Methodref          #32.#166      // dev/codex/schubert/nk/protocol/header/CommonHeader.resultCode:()Ljava/util/Optional;
+  #166 = NameAndType        #167:#129     // resultCode:()Ljava/util/Optional;
+  #167 = Utf8               resultCode
+  #168 = InvokeDynamic      #1:#131       // #1:apply:()Ljava/util/function/Function;
+  #169 = Methodref          #170.#171     // java/util/Arrays.fill:([BIIB)V
+  #170 = Class              #172          // java/util/Arrays
+  #171 = NameAndType        #173:#174     // fill:([BIIB)V
+  #172 = Utf8               java/util/Arrays
+  #173 = Utf8               fill
+  #174 = Utf8               ([BIIB)V
+  #175 = Class              #176          // java/lang/IllegalArgumentException
+  #176 = Utf8               java/lang/IllegalArgumentException
+  #177 = Class              #178          // dev/codex/schubert/nk/protocol/codec/MessageEncodingException
+  #178 = Utf8               dev/codex/schubert/nk/protocol/codec/MessageEncodingException
+  #179 = String             #180          // header could not be encoded
+  #180 = Utf8               header could not be encoded
+  #181 = Methodref          #177.#182     // dev/codex/schubert/nk/protocol/codec/MessageEncodingException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+  #182 = NameAndType        #5:#183       // "<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+  #183 = Utf8               (Ljava/lang/String;Ljava/lang/Throwable;)V
+  #184 = Class              #185          // dev/codex/schubert/nk/protocol/codec/PermanentProtocolException
+  #185 = Utf8               dev/codex/schubert/nk/protocol/codec/PermanentProtocolException
+  #186 = String             #187          // message body is null
+  #187 = Utf8               message body is null
+  #188 = Methodref          #184.#189     // dev/codex/schubert/nk/protocol/codec/PermanentProtocolException."<init>":(Ljava/lang/String;)V
+  #189 = NameAndType        #5:#190       // "<init>":(Ljava/lang/String;)V
+  #190 = Utf8               (Ljava/lang/String;)V
+  #191 = String             #192          // message body is shorter than the common header
+  #192 = Utf8               message body is shorter than the common header
+  #193 = Methodref          #18.#194      // dev/codex/schubert/nk/protocol/codec/HeaderCodec.requiredText:([BII)Ljava/lang/String;
+  #194 = NameAndType        #195:#196     // requiredText:([BII)Ljava/lang/String;
+  #195 = Utf8               requiredText
+  #196 = Utf8               ([BII)Ljava/lang/String;
+  #197 = Methodref          #18.#198      // dev/codex/schubert/nk/protocol/codec/HeaderCodec.numericInt:([BIIII)I
+  #198 = NameAndType        #199:#200     // numericInt:([BIIII)I
+  #199 = Utf8               numericInt
+  #200 = Utf8               ([BIIII)I
+  #201 = Methodref          #71.#189      // dev/codex/schubert/nk/protocol/layout/LayoutId."<init>":(Ljava/lang/String;)V
+  #202 = Methodref          #80.#203      // dev/codex/schubert/nk/protocol/header/MessageKind.fromWire:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/MessageKind;
+  #203 = NameAndType        #204:#205     // fromWire:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/MessageKind;
+  #204 = Utf8               fromWire
+  #205 = Utf8               (Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/MessageKind;
+  #206 = Methodref          #90.#207      // dev/codex/schubert/nk/protocol/header/InteractionKind.fromWire:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/InteractionKind;
+  #207 = NameAndType        #204:#208     // fromWire:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/InteractionKind;
+  #208 = Utf8               (Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/InteractionKind;
+  #209 = Methodref          #18.#210      // dev/codex/schubert/nk/protocol/codec/HeaderCodec.canonicalUuid:(Ljava/lang/String;)Ljava/util/UUID;
+  #210 = NameAndType        #211:#212     // canonicalUuid:(Ljava/lang/String;)Ljava/util/UUID;
+  #211 = Utf8               canonicalUuid
+  #212 = Utf8               (Ljava/lang/String;)Ljava/util/UUID;
+  #213 = Methodref          #109.#214     // dev/codex/schubert/nk/protocol/time/JstWireTimestamp.parse:(Ljava/lang/String;)Ljava/time/Instant;
+  #214 = NameAndType        #215:#216     // parse:(Ljava/lang/String;)Ljava/time/Instant;
+  #215 = Utf8               parse
+  #216 = Utf8               (Ljava/lang/String;)Ljava/time/Instant;
+  #217 = Methodref          #18.#218      // dev/codex/schubert/nk/protocol/codec/HeaderCodec.slice:([BII)[B
+  #218 = NameAndType        #219:#220     // slice:([BII)[B
+  #219 = Utf8               slice
+  #220 = Utf8               ([BII)[B
+  #221 = Methodref          #54.#222      // dev/codex/schubert/nk/protocol/codec/FieldCodec.decodeText:([BZ)Ljava/util/Optional;
+  #222 = NameAndType        #223:#224     // decodeText:([BZ)Ljava/util/Optional;
+  #223 = Utf8               decodeText
+  #224 = Utf8               ([BZ)Ljava/util/Optional;
+  #225 = InvokeDynamic      #2:#131       // #2:apply:()Ljava/util/function/Function;
+  #226 = Integer            999999
+  #227 = Integer            1000000
+  #228 = InvokeDynamic      #3:#131       // #3:apply:()Ljava/util/function/Function;
+  #229 = Methodref          #54.#230      // dev/codex/schubert/nk/protocol/codec/FieldCodec.requireSpaces:([B)V
+  #230 = NameAndType        #231:#232     // requireSpaces:([B)V
+  #231 = Utf8               requireSpaces
+  #232 = Utf8               ([B)V
+  #233 = Methodref          #32.#234      // dev/codex/schubert/nk/protocol/header/CommonHeader."<init>":(Ljava/lang/String;ILdev/codex/schubert/nk/protocol/layout/LayoutId;ILdev/codex/schubert/nk/protocol/header/MessageKind;Ldev/codex/schubert/nk/protocol/header/InteractionKind;Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;Ljava/util/Optional;IIIIILjava/util/Optional;)V
+  #234 = NameAndType        #5:#235       // "<init>":(Ljava/lang/String;ILdev/codex/schubert/nk/protocol/layout/LayoutId;ILdev/codex/schubert/nk/protocol/header/MessageKind;Ldev/codex/schubert/nk/protocol/header/InteractionKind;Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;Ljava/util/Optional;IIIIILjava/util/Optional;)V
+  #235 = Utf8               (Ljava/lang/String;ILdev/codex/schubert/nk/protocol/layout/LayoutId;ILdev/codex/schubert/nk/protocol/header/MessageKind;Ldev/codex/schubert/nk/protocol/header/InteractionKind;Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;Ljava/util/Optional;IIIIILjava/util/Optional;)V
+  #236 = String             #237          // common header validation failed
+  #237 = Utf8               common header validation failed
+  #238 = Methodref          #184.#182     // dev/codex/schubert/nk/protocol/codec/PermanentProtocolException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+  #239 = Methodref          #97.#240      // java/util/UUID.fromString:(Ljava/lang/String;)Ljava/util/UUID;
+  #240 = NameAndType        #241:#212     // fromString:(Ljava/lang/String;)Ljava/util/UUID;
+  #241 = Utf8               fromString
+  #242 = Methodref          #121.#243     // java/lang/String.equals:(Ljava/lang/Object;)Z
+  #243 = NameAndType        #244:#245     // equals:(Ljava/lang/Object;)Z
+  #244 = Utf8               equals
+  #245 = Utf8               (Ljava/lang/Object;)Z
+  #246 = String             #247          // UUID is not lowercase canonical form
+  #247 = Utf8               UUID is not lowercase canonical form
+  #248 = Methodref          #175.#189     // java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+  #249 = Methodref          #135.#250     // java/util/Optional.orElseThrow:()Ljava/lang/Object;
+  #250 = NameAndType        #251:#252     // orElseThrow:()Ljava/lang/Object;
+  #251 = Utf8               orElseThrow
+  #252 = Utf8               ()Ljava/lang/Object;
+  #253 = Methodref          #54.#254      // dev/codex/schubert/nk/protocol/codec/FieldCodec.decodeNumeric:([BJJ)J
+  #254 = NameAndType        #255:#256     // decodeNumeric:([BJJ)J
+  #255 = Utf8               decodeNumeric
+  #256 = Utf8               ([BJJ)J
+  #257 = Methodref          #258.#259     // java/lang/Math.toIntExact:(J)I
+  #258 = Class              #260          // java/lang/Math
+  #259 = NameAndType        #261:#262     // toIntExact:(J)I
+  #260 = Utf8               java/lang/Math
+  #261 = Utf8               toIntExact
+  #262 = Utf8               (J)I
+  #263 = Methodref          #170.#264     // java/util/Arrays.copyOfRange:([BII)[B
+  #264 = NameAndType        #265:#220     // copyOfRange:([BII)[B
+  #265 = Utf8               copyOfRange
+  #266 = Methodref          #267.#268     // java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+  #267 = Class              #269          // java/lang/System
+  #268 = NameAndType        #270:#271     // arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+  #269 = Utf8               java/lang/System
+  #270 = Utf8               arraycopy
+  #271 = Utf8               (Ljava/lang/Object;ILjava/lang/Object;II)V
+  #272 = Utf8               HEADER_LENGTH
+  #273 = Utf8               I
+  #274 = Utf8               ConstantValue
+  #275 = Integer            256
+  #276 = Utf8               RESULT_START
+  #277 = Integer            208
+  #278 = Utf8               RESERVED_START
+  #279 = Integer            212
+  #280 = Utf8               Code
+  #281 = Utf8               LineNumberTable
+  #282 = Utf8               LocalVariableTable
+  #283 = Utf8               this
+  #284 = Utf8               Ldev/codex/schubert/nk/protocol/codec/HeaderCodec;
+  #285 = Utf8               ()Ldev/codex/schubert/nk/protocol/codec/HeaderCodec;
+  #286 = Utf8               encode
+  #287 = Utf8               (Ldev/codex/schubert/nk/protocol/header/CommonHeader;)[B
+  #288 = Utf8               definition
+  #289 = Utf8               Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;
+  #290 = Utf8               encoded
+  #291 = Utf8               [B
+  #292 = Utf8               exception
+  #293 = Utf8               Ljava/lang/IllegalArgumentException;
+  #294 = Utf8               Ldev/codex/schubert/nk/protocol/header/CommonHeader;
+  #295 = Utf8               StackMapTable
+  #296 = Utf8               peek
+  #297 = Utf8               ([B)Ldev/codex/schubert/nk/protocol/header/CommonHeader;
+  #298 = Utf8               protocol
+  #299 = Utf8               Ljava/lang/String;
+  #300 = Utf8               Ldev/codex/schubert/nk/protocol/layout/LayoutId;
+  #301 = Utf8               Ldev/codex/schubert/nk/protocol/header/MessageKind;
+  #302 = Utf8               Ldev/codex/schubert/nk/protocol/header/InteractionKind;
+  #303 = Utf8               Ljava/util/UUID;
+  #304 = Utf8               Ljava/time/Instant;
+  #305 = Utf8               Ljava/util/Optional;
+  #306 = Utf8               Ldev/codex/schubert/nk/protocol/codec/PermanentProtocolException;
+  #307 = Utf8               body
+  #308 = Utf8               LocalVariableTypeTable
+  #309 = Utf8               Ljava/util/Optional<Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;>;
+  #310 = Utf8               Ljava/util/Optional<Ldev/codex/schubert/nk/protocol/header/ResultCode;>;
+  #311 = Utf8               RuntimeVisibleTypeAnnotations
+  #312 = Utf8               Lorg/jspecify/annotations/Nullable;
+  #313 = Utf8               uuid
+  #314 = Utf8               start
+  #315 = Utf8               end
+  #316 = Utf8               minimum
+  #317 = Utf8               maximum
+  #318 = Utf8               source
+  #319 = Utf8               target
+  #320 = Utf8               SourceFile
+  #321 = Utf8               HeaderCodec.java
+  #322 = Utf8               BootstrapMethods
+  #323 = MethodType         #143          //  (Ljava/lang/Object;)Ljava/lang/Object;
+  #324 = MethodHandle       5:#325        // REF_invokeVirtual dev/codex/schubert/nk/protocol/header/AuthenticationContext.wireValue:()Ljava/lang/String;
+  #325 = Methodref          #326.#327     // dev/codex/schubert/nk/protocol/header/AuthenticationContext.wireValue:()Ljava/lang/String;
+  #326 = Class              #328          // dev/codex/schubert/nk/protocol/header/AuthenticationContext
+  #327 = NameAndType        #83:#52       // wireValue:()Ljava/lang/String;
+  #328 = Utf8               dev/codex/schubert/nk/protocol/header/AuthenticationContext
+  #329 = MethodType         #330          //  (Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;)Ljava/lang/String;
+  #330 = Utf8               (Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;)Ljava/lang/String;
+  #331 = MethodHandle       5:#332        // REF_invokeVirtual dev/codex/schubert/nk/protocol/header/ResultCode.wireValue:()Ljava/lang/String;
+  #332 = Methodref          #333.#327     // dev/codex/schubert/nk/protocol/header/ResultCode.wireValue:()Ljava/lang/String;
+  #333 = Class              #334          // dev/codex/schubert/nk/protocol/header/ResultCode
+  #334 = Utf8               dev/codex/schubert/nk/protocol/header/ResultCode
+  #335 = MethodType         #336          //  (Ldev/codex/schubert/nk/protocol/header/ResultCode;)Ljava/lang/String;
+  #336 = Utf8               (Ldev/codex/schubert/nk/protocol/header/ResultCode;)Ljava/lang/String;
+  #337 = MethodHandle       6:#338        // REF_invokeStatic dev/codex/schubert/nk/protocol/header/AuthenticationContext.of:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;
+  #338 = Methodref          #326.#339     // dev/codex/schubert/nk/protocol/header/AuthenticationContext.of:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;
+  #339 = NameAndType        #340:#341     // of:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;
+  #340 = Utf8               of
+  #341 = Utf8               (Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;
+  #342 = MethodType         #341          //  (Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;
+  #343 = MethodHandle       6:#344        // REF_invokeStatic dev/codex/schubert/nk/protocol/header/ResultCode.fromWire:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/ResultCode;
+  #344 = Methodref          #333.#345     // dev/codex/schubert/nk/protocol/header/ResultCode.fromWire:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/ResultCode;
+  #345 = NameAndType        #204:#346     // fromWire:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/ResultCode;
+  #346 = Utf8               (Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/ResultCode;
+  #347 = MethodType         #346          //  (Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/ResultCode;
+  #348 = MethodHandle       6:#349        // REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #349 = Methodref          #350.#351     // java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #350 = Class              #352          // java/lang/invoke/LambdaMetafactory
+  #351 = NameAndType        #353:#354     // metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #352 = Utf8               java/lang/invoke/LambdaMetafactory
+  #353 = Utf8               metafactory
+  #354 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #355 = Utf8               InnerClasses
+  #356 = Class              #357          // java/lang/invoke/MethodHandles$Lookup
+  #357 = Utf8               java/lang/invoke/MethodHandles$Lookup
+  #358 = Class              #359          // java/lang/invoke/MethodHandles
+  #359 = Utf8               java/lang/invoke/MethodHandles
+  #360 = Utf8               Lookup
+{
+  private static final int HEADER_LENGTH;
+    descriptor: I
+    flags: (0x001a) ACC_PRIVATE, ACC_STATIC, ACC_FINAL
+    ConstantValue: int 256
+
+  private static final int RESULT_START;
+    descriptor: I
+    flags: (0x001a) ACC_PRIVATE, ACC_STATIC, ACC_FINAL
+    ConstantValue: int 208
+
+  private static final int RESERVED_START;
+    descriptor: I
+    flags: (0x001a) ACC_PRIVATE, ACC_STATIC, ACC_FINAL
+    ConstantValue: int 212
+
+  private final dev.codex.schubert.nk.protocol.layout.LayoutRegistry registry;
+    descriptor: Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;
+    flags: (0x0012) ACC_PRIVATE, ACC_FINAL
+
+  public dev.codex.schubert.nk.protocol.codec.HeaderCodec(dev.codex.schubert.nk.protocol.layout.LayoutRegistry);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=2, args_size=2
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: ldc           #7                  // String registry
+         8: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        11: checkcast     #15                 // class dev/codex/schubert/nk/protocol/layout/LayoutRegistry
+        14: putfield      #17                 // Field registry:Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;
+        17: return
+      LineNumberTable:
+        line 28: 0
+        line 29: 4
+        line 30: 17
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      18     0  this   Ldev/codex/schubert/nk/protocol/codec/HeaderCodec;
+            0      18     1 registry   Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;
+
+  public static dev.codex.schubert.nk.protocol.codec.HeaderCodec standard();
+    descriptor: ()Ldev/codex/schubert/nk/protocol/codec/HeaderCodec;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=3, locals=0, args_size=0
+         0: new           #18                 // class dev/codex/schubert/nk/protocol/codec/HeaderCodec
+         3: dup
+         4: invokestatic  #22                 // Method dev/codex/schubert/nk/protocol/layout/LayoutRegistry.standard:()Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;
+         7: invokespecial #26                 // Method "<init>":(Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;)V
+        10: areturn
+      LineNumberTable:
+        line 33: 0
+
+  public byte[] encode(dev.codex.schubert.nk.protocol.header.CommonHeader);
+    descriptor: (Ldev/codex/schubert/nk/protocol/header/CommonHeader;)[B
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=9, locals=4, args_size=2
+         0: aload_1
+         1: ldc           #29                 // String header
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_0
+         8: getfield      #17                 // Field registry:Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;
+        11: aload_1
+        12: invokevirtual #31                 // Method dev/codex/schubert/nk/protocol/header/CommonHeader.layoutId:()Ldev/codex/schubert/nk/protocol/layout/LayoutId;
+        15: aload_1
+        16: invokevirtual #37                 // Method dev/codex/schubert/nk/protocol/header/CommonHeader.layoutVersion:()I
+        19: invokevirtual #41                 // Method dev/codex/schubert/nk/protocol/layout/LayoutRegistry.require:(Ldev/codex/schubert/nk/protocol/layout/LayoutId;I)Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;
+        22: astore_2
+        23: aload_1
+        24: aload_2
+        25: invokevirtual #45                 // Method dev/codex/schubert/nk/protocol/header/CommonHeader.validateAgainst:(Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;)V
+        28: sipush        256
+        31: newarray       byte
+        33: astore_3
+        34: aload_3
+        35: iconst_0
+        36: aload_1
+        37: invokevirtual #49                 // Method dev/codex/schubert/nk/protocol/header/CommonHeader.protocolIdentifier:()Ljava/lang/String;
+        40: bipush        8
+        42: iconst_1
+        43: invokestatic  #53                 // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.encodeText:(Ljava/lang/String;IZ)[B
+        46: invokestatic  #59                 // Method put:([BI[B)V
+        49: aload_3
+        50: bipush        8
+        52: aload_1
+        53: invokevirtual #63                 // Method dev/codex/schubert/nk/protocol/header/CommonHeader.headerVersion:()I
+        56: i2l
+        57: iconst_3
+        58: lconst_1
+        59: lconst_1
+        60: invokestatic  #66                 // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.encodeNumeric:(JIJJ)[B
+        63: invokestatic  #59                 // Method put:([BI[B)V
+        66: aload_3
+        67: bipush        11
+        69: aload_1
+        70: invokevirtual #31                 // Method dev/codex/schubert/nk/protocol/header/CommonHeader.layoutId:()Ldev/codex/schubert/nk/protocol/layout/LayoutId;
+        73: invokevirtual #70                 // Method dev/codex/schubert/nk/protocol/layout/LayoutId.value:()Ljava/lang/String;
+        76: bipush        8
+        78: iconst_1
+        79: invokestatic  #53                 // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.encodeText:(Ljava/lang/String;IZ)[B
+        82: invokestatic  #59                 // Method put:([BI[B)V
+        85: aload_3
+        86: bipush        19
+        88: aload_1
+        89: invokevirtual #37                 // Method dev/codex/schubert/nk/protocol/header/CommonHeader.layoutVersion:()I
+        92: i2l
+        93: iconst_3
+        94: lconst_1
+        95: lconst_1
+        96: invokestatic  #66                 // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.encodeNumeric:(JIJJ)[B
+        99: invokestatic  #59                 // Method put:([BI[B)V
+       102: aload_3
+       103: bipush        22
+       105: aload_1
+       106: invokevirtual #75                 // Method dev/codex/schubert/nk/protocol/header/CommonHeader.messageKind:()Ldev/codex/schubert/nk/protocol/header/MessageKind;
+       109: invokevirtual #79                 // Method dev/codex/schubert/nk/protocol/header/MessageKind.wireValue:()C
+       112: i2b
+       113: bastore
+       114: aload_3
+       115: bipush        23
+       117: aload_1
+       118: invokevirtual #85                 // Method dev/codex/schubert/nk/protocol/header/CommonHeader.interactionKind:()Ldev/codex/schubert/nk/protocol/header/InteractionKind;
+       121: invokevirtual #89                 // Method dev/codex/schubert/nk/protocol/header/InteractionKind.wireValue:()C
+       124: i2b
+       125: bastore
+       126: aload_3
+       127: bipush        24
+       129: aload_1
+       130: invokevirtual #92                 // Method dev/codex/schubert/nk/protocol/header/CommonHeader.messageId:()Ljava/util/UUID;
+       133: invokevirtual #96                 // Method java/util/UUID.toString:()Ljava/lang/String;
+       136: bipush        36
+       138: iconst_1
+       139: invokestatic  #53                 // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.encodeText:(Ljava/lang/String;IZ)[B
+       142: invokestatic  #59                 // Method put:([BI[B)V
+       145: aload_3
+       146: bipush        60
+       148: aload_1
+       149: invokevirtual #101                // Method dev/codex/schubert/nk/protocol/header/CommonHeader.correlationId:()Ljava/util/UUID;
+       152: invokevirtual #96                 // Method java/util/UUID.toString:()Ljava/lang/String;
+       155: bipush        36
+       157: iconst_1
+       158: invokestatic  #53                 // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.encodeText:(Ljava/lang/String;IZ)[B
+       161: invokestatic  #59                 // Method put:([BI[B)V
+       164: aload_3
+       165: bipush        96
+       167: aload_1
+       168: invokevirtual #104                // Method dev/codex/schubert/nk/protocol/header/CommonHeader.sentAt:()Ljava/time/Instant;
+       171: invokestatic  #108                // Method dev/codex/schubert/nk/protocol/time/JstWireTimestamp.format:(Ljava/time/Instant;)Ljava/lang/String;
+       174: getstatic     #114                // Field java/nio/charset/StandardCharsets.US_ASCII:Ljava/nio/charset/Charset;
+       177: invokevirtual #120                // Method java/lang/String.getBytes:(Ljava/nio/charset/Charset;)[B
+       180: invokestatic  #59                 // Method put:([BI[B)V
+       183: aload_3
+       184: bipush        113
+       186: aload_1
+       187: invokevirtual #126                // Method dev/codex/schubert/nk/protocol/header/CommonHeader.authenticationContext:()Ljava/util/Optional;
+       190: invokedynamic #130,  0            // InvokeDynamic #0:apply:()Ljava/util/function/Function;
+       195: invokevirtual #134                // Method java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+       198: aconst_null
+       199: invokevirtual #140                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+       202: checkcast     #121                // class java/lang/String
+       205: bipush        64
+       207: iconst_0
+       208: invokestatic  #53                 // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.encodeText:(Ljava/lang/String;IZ)[B
+       211: invokestatic  #59                 // Method put:([BI[B)V
+       214: aload_3
+       215: sipush        177
+       218: aload_1
+       219: invokevirtual #144                // Method dev/codex/schubert/nk/protocol/header/CommonHeader.headerLength:()I
+       222: i2l
+       223: iconst_4
+       224: ldc2_w        #147                // long 256l
+       227: ldc2_w        #147                // long 256l
+       230: invokestatic  #66                 // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.encodeNumeric:(JIJJ)[B
+       233: invokestatic  #59                 // Method put:([BI[B)V
+       236: aload_3
+       237: sipush        181
+       240: aload_1
+       241: invokevirtual #149                // Method dev/codex/schubert/nk/protocol/header/CommonHeader.dataLength:()I
+       244: i2l
+       245: bipush        6
+       247: lconst_0
+       248: ldc2_w        #152                // long 999999l
+       251: invokestatic  #66                 // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.encodeNumeric:(JIJJ)[B
+       254: invokestatic  #59                 // Method put:([BI[B)V
+       257: aload_3
+       258: sipush        187
+       261: aload_1
+       262: invokevirtual #154                // Method dev/codex/schubert/nk/protocol/header/CommonHeader.recordLength:()I
+       265: i2l
+       266: bipush        6
+       268: lconst_0
+       269: ldc2_w        #152                // long 999999l
+       272: invokestatic  #66                 // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.encodeNumeric:(JIJJ)[B
+       275: invokestatic  #59                 // Method put:([BI[B)V
+       278: aload_3
+       279: sipush        193
+       282: aload_1
+       283: invokevirtual #157                // Method dev/codex/schubert/nk/protocol/header/CommonHeader.recordCount:()I
+       286: i2l
+       287: bipush        6
+       289: lconst_0
+       290: ldc2_w        #152                // long 999999l
+       293: invokestatic  #66                 // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.encodeNumeric:(JIJJ)[B
+       296: invokestatic  #59                 // Method put:([BI[B)V
+       299: aload_3
+       300: sipush        199
+       303: aload_1
+       304: invokevirtual #160                // Method dev/codex/schubert/nk/protocol/header/CommonHeader.totalLength:()I
+       307: i2l
+       308: bipush        9
+       310: ldc2_w        #147                // long 256l
+       313: ldc2_w        #163                // long 1000000l
+       316: invokestatic  #66                 // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.encodeNumeric:(JIJJ)[B
+       319: invokestatic  #59                 // Method put:([BI[B)V
+       322: aload_3
+       323: sipush        208
+       326: aload_1
+       327: invokevirtual #165                // Method dev/codex/schubert/nk/protocol/header/CommonHeader.resultCode:()Ljava/util/Optional;
+       330: invokedynamic #168,  0            // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+       335: invokevirtual #134                // Method java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+       338: aconst_null
+       339: invokevirtual #140                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+       342: checkcast     #121                // class java/lang/String
+       345: iconst_4
+       346: iconst_0
+       347: invokestatic  #53                 // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.encodeText:(Ljava/lang/String;IZ)[B
+       350: invokestatic  #59                 // Method put:([BI[B)V
+       353: aload_3
+       354: sipush        212
+       357: sipush        256
+       360: bipush        32
+       362: invokestatic  #169                // Method java/util/Arrays.fill:([BIIB)V
+       365: aload_3
+       366: areturn
+       367: astore_2
+       368: new           #177                // class dev/codex/schubert/nk/protocol/codec/MessageEncodingException
+       371: dup
+       372: ldc           #179                // String header could not be encoded
+       374: aload_2
+       375: invokespecial #181                // Method dev/codex/schubert/nk/protocol/codec/MessageEncodingException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+       378: athrow
+      Exception table:
+         from    to  target type
+             7   366   367   Class java/lang/IllegalArgumentException
+      LineNumberTable:
+        line 37: 0
+        line 39: 7
+        line 40: 23
+        line 41: 28
+        line 42: 34
+        line 43: 49
+        line 44: 66
+        line 45: 85
+        line 46: 102
+        line 47: 114
+        line 48: 126
+        line 49: 145
+        line 50: 164
+        line 53: 168
+        line 50: 180
+        line 54: 183
+        line 58: 187
+        line 57: 208
+        line 54: 211
+        line 61: 214
+        line 62: 236
+        line 63: 257
+        line 64: 278
+        line 65: 299
+        line 66: 322
+        line 70: 327
+        line 69: 347
+        line 66: 350
+        line 71: 353
+        line 72: 365
+        line 73: 367
+        line 74: 368
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           23     344     2 definition   Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;
+           34     333     3 encoded   [B
+          368      11     2 exception   Ljava/lang/IllegalArgumentException;
+            0     379     0  this   Ldev/codex/schubert/nk/protocol/codec/HeaderCodec;
+            0     379     1 header   Ldev/codex/schubert/nk/protocol/header/CommonHeader;
+      StackMapTable: number_of_entries = 1
+        frame_type = 247 /* same_locals_1_stack_item_frame_extended */
+          offset_delta = 367
+          stack = [ class java/lang/IllegalArgumentException ]
+
+  public dev.codex.schubert.nk.protocol.header.CommonHeader peek(byte[]);
+    descriptor: ([B)Ldev/codex/schubert/nk/protocol/header/CommonHeader;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=18, locals=19, args_size=2
+         0: aload_1
+         1: ifnonnull     14
+         4: new           #184                // class dev/codex/schubert/nk/protocol/codec/PermanentProtocolException
+         7: dup
+         8: ldc           #186                // String message body is null
+        10: invokespecial #188                // Method dev/codex/schubert/nk/protocol/codec/PermanentProtocolException."<init>":(Ljava/lang/String;)V
+        13: athrow
+        14: aload_1
+        15: arraylength
+        16: sipush        256
+        19: if_icmpge     32
+        22: new           #184                // class dev/codex/schubert/nk/protocol/codec/PermanentProtocolException
+        25: dup
+        26: ldc           #191                // String message body is shorter than the common header
+        28: invokespecial #188                // Method dev/codex/schubert/nk/protocol/codec/PermanentProtocolException."<init>":(Ljava/lang/String;)V
+        31: athrow
+        32: aload_1
+        33: iconst_0
+        34: bipush        8
+        36: invokestatic  #193                // Method requiredText:([BII)Ljava/lang/String;
+        39: astore_2
+        40: aload_1
+        41: bipush        8
+        43: bipush        11
+        45: iconst_1
+        46: iconst_1
+        47: invokestatic  #197                // Method numericInt:([BIIII)I
+        50: istore_3
+        51: new           #71                 // class dev/codex/schubert/nk/protocol/layout/LayoutId
+        54: dup
+        55: aload_1
+        56: bipush        11
+        58: bipush        19
+        60: invokestatic  #193                // Method requiredText:([BII)Ljava/lang/String;
+        63: invokespecial #201                // Method dev/codex/schubert/nk/protocol/layout/LayoutId."<init>":(Ljava/lang/String;)V
+        66: astore        4
+        68: aload_1
+        69: bipush        19
+        71: bipush        22
+        73: iconst_1
+        74: iconst_1
+        75: invokestatic  #197                // Method numericInt:([BIIII)I
+        78: istore        5
+        80: aload_1
+        81: bipush        22
+        83: bipush        23
+        85: invokestatic  #193                // Method requiredText:([BII)Ljava/lang/String;
+        88: invokestatic  #202                // Method dev/codex/schubert/nk/protocol/header/MessageKind.fromWire:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/MessageKind;
+        91: astore        6
+        93: aload_1
+        94: bipush        23
+        96: bipush        24
+        98: invokestatic  #193                // Method requiredText:([BII)Ljava/lang/String;
+       101: invokestatic  #206                // Method dev/codex/schubert/nk/protocol/header/InteractionKind.fromWire:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/InteractionKind;
+       104: astore        7
+       106: aload_1
+       107: bipush        24
+       109: bipush        60
+       111: invokestatic  #193                // Method requiredText:([BII)Ljava/lang/String;
+       114: invokestatic  #209                // Method canonicalUuid:(Ljava/lang/String;)Ljava/util/UUID;
+       117: astore        8
+       119: aload_1
+       120: bipush        60
+       122: bipush        96
+       124: invokestatic  #193                // Method requiredText:([BII)Ljava/lang/String;
+       127: invokestatic  #209                // Method canonicalUuid:(Ljava/lang/String;)Ljava/util/UUID;
+       130: astore        9
+       132: aload_1
+       133: bipush        96
+       135: bipush        113
+       137: invokestatic  #193                // Method requiredText:([BII)Ljava/lang/String;
+       140: invokestatic  #213                // Method dev/codex/schubert/nk/protocol/time/JstWireTimestamp.parse:(Ljava/lang/String;)Ljava/time/Instant;
+       143: astore        10
+       145: aload_1
+       146: bipush        113
+       148: sipush        177
+       151: invokestatic  #217                // Method slice:([BII)[B
+       154: iconst_0
+       155: invokestatic  #221                // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.decodeText:([BZ)Ljava/util/Optional;
+       158: invokedynamic #225,  0            // InvokeDynamic #2:apply:()Ljava/util/function/Function;
+       163: invokevirtual #134                // Method java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+       166: astore        11
+       168: aload_1
+       169: sipush        177
+       172: sipush        181
+       175: sipush        256
+       178: sipush        256
+       181: invokestatic  #197                // Method numericInt:([BIIII)I
+       184: istore        12
+       186: aload_1
+       187: sipush        181
+       190: sipush        187
+       193: iconst_0
+       194: ldc           #226                // int 999999
+       196: invokestatic  #197                // Method numericInt:([BIIII)I
+       199: istore        13
+       201: aload_1
+       202: sipush        187
+       205: sipush        193
+       208: iconst_0
+       209: ldc           #226                // int 999999
+       211: invokestatic  #197                // Method numericInt:([BIIII)I
+       214: istore        14
+       216: aload_1
+       217: sipush        193
+       220: sipush        199
+       223: iconst_0
+       224: ldc           #226                // int 999999
+       226: invokestatic  #197                // Method numericInt:([BIIII)I
+       229: istore        15
+       231: aload_1
+       232: sipush        199
+       235: sipush        208
+       238: sipush        256
+       241: ldc           #227                // int 1000000
+       243: invokestatic  #197                // Method numericInt:([BIIII)I
+       246: istore        16
+       248: aload_1
+       249: sipush        208
+       252: sipush        212
+       255: invokestatic  #217                // Method slice:([BII)[B
+       258: iconst_0
+       259: invokestatic  #221                // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.decodeText:([BZ)Ljava/util/Optional;
+       262: invokedynamic #228,  0            // InvokeDynamic #3:apply:()Ljava/util/function/Function;
+       267: invokevirtual #134                // Method java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+       270: astore        17
+       272: aload_1
+       273: sipush        212
+       276: sipush        256
+       279: invokestatic  #217                // Method slice:([BII)[B
+       282: invokestatic  #229                // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.requireSpaces:([B)V
+       285: new           #32                 // class dev/codex/schubert/nk/protocol/header/CommonHeader
+       288: dup
+       289: aload_2
+       290: iload_3
+       291: aload         4
+       293: iload         5
+       295: aload         6
+       297: aload         7
+       299: aload         8
+       301: aload         9
+       303: aload         10
+       305: aload         11
+       307: iload         12
+       309: iload         13
+       311: iload         14
+       313: iload         15
+       315: iload         16
+       317: aload         17
+       319: invokespecial #233                // Method dev/codex/schubert/nk/protocol/header/CommonHeader."<init>":(Ljava/lang/String;ILdev/codex/schubert/nk/protocol/layout/LayoutId;ILdev/codex/schubert/nk/protocol/header/MessageKind;Ldev/codex/schubert/nk/protocol/header/InteractionKind;Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;Ljava/util/Optional;IIIIILjava/util/Optional;)V
+       322: astore        18
+       324: aload         18
+       326: aload_0
+       327: getfield      #17                 // Field registry:Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;
+       330: aload         4
+       332: iload         5
+       334: invokevirtual #41                 // Method dev/codex/schubert/nk/protocol/layout/LayoutRegistry.require:(Ldev/codex/schubert/nk/protocol/layout/LayoutId;I)Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;
+       337: invokevirtual #45                 // Method dev/codex/schubert/nk/protocol/header/CommonHeader.validateAgainst:(Ldev/codex/schubert/nk/protocol/layout/LayoutDefinition;)V
+       340: aload         18
+       342: areturn
+       343: astore_2
+       344: aload_2
+       345: athrow
+       346: astore_2
+       347: new           #184                // class dev/codex/schubert/nk/protocol/codec/PermanentProtocolException
+       350: dup
+       351: ldc           #236                // String common header validation failed
+       353: aload_2
+       354: invokespecial #238                // Method dev/codex/schubert/nk/protocol/codec/PermanentProtocolException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+       357: athrow
+      Exception table:
+         from    to  target type
+            32   342   343   Class dev/codex/schubert/nk/protocol/codec/PermanentProtocolException
+            32   342   346   Class java/lang/IllegalArgumentException
+      LineNumberTable:
+        line 79: 0
+        line 80: 4
+        line 82: 14
+        line 83: 22
+        line 86: 32
+        line 87: 40
+        line 88: 51
+        line 89: 68
+        line 90: 80
+        line 91: 93
+        line 92: 106
+        line 93: 119
+        line 94: 132
+        line 95: 145
+        line 96: 151
+        line 97: 168
+        line 98: 186
+        line 99: 201
+        line 100: 216
+        line 101: 231
+        line 102: 248
+        line 103: 255
+        line 104: 267
+        line 105: 272
+        line 106: 285
+        line 124: 324
+        line 125: 340
+        line 126: 343
+        line 127: 344
+        line 128: 346
+        line 129: 347
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           40     303     2 protocol   Ljava/lang/String;
+           51     292     3 headerVersion   I
+           68     275     4 layoutId   Ldev/codex/schubert/nk/protocol/layout/LayoutId;
+           80     263     5 layoutVersion   I
+           93     250     6 messageKind   Ldev/codex/schubert/nk/protocol/header/MessageKind;
+          106     237     7 interactionKind   Ldev/codex/schubert/nk/protocol/header/InteractionKind;
+          119     224     8 messageId   Ljava/util/UUID;
+          132     211     9 correlationId   Ljava/util/UUID;
+          145     198    10 sentAt   Ljava/time/Instant;
+          168     175    11 authenticationContext   Ljava/util/Optional;
+          186     157    12 headerLength   I
+          201     142    13 dataLength   I
+          216     127    14 recordLength   I
+          231     112    15 recordCount   I
+          248      95    16 totalLength   I
+          272      71    17 resultCode   Ljava/util/Optional;
+          324      19    18 header   Ldev/codex/schubert/nk/protocol/header/CommonHeader;
+          344       2     2 exception   Ldev/codex/schubert/nk/protocol/codec/PermanentProtocolException;
+          347      11     2 exception   Ljava/lang/IllegalArgumentException;
+            0     358     0  this   Ldev/codex/schubert/nk/protocol/codec/HeaderCodec;
+            0     358     1  body   [B
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+          168     175    11 authenticationContext   Ljava/util/Optional<Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;>;
+          272      71    17 resultCode   Ljava/util/Optional<Ldev/codex/schubert/nk/protocol/header/ResultCode;>;
+      StackMapTable: number_of_entries = 4
+        frame_type = 14 /* same */
+        frame_type = 17 /* same */
+        frame_type = 247 /* same_locals_1_stack_item_frame_extended */
+          offset_delta = 310
+          stack = [ class dev/codex/schubert/nk/protocol/codec/PermanentProtocolException ]
+        frame_type = 66 /* same_locals_1_stack_item */
+          stack = [ class java/lang/IllegalArgumentException ]
+    RuntimeVisibleTypeAnnotations:
+      0: #312(): METHOD_FORMAL_PARAMETER, param_index=0
+        org.jspecify.annotations.Nullable
+
+  private static java.util.UUID canonicalUuid(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/util/UUID;
+    flags: (0x000a) ACC_PRIVATE, ACC_STATIC
+    Code:
+      stack=3, locals=2, args_size=1
+         0: aload_0
+         1: invokestatic  #239                // Method java/util/UUID.fromString:(Ljava/lang/String;)Ljava/util/UUID;
+         4: astore_1
+         5: aload_1
+         6: invokevirtual #96                 // Method java/util/UUID.toString:()Ljava/lang/String;
+         9: aload_0
+        10: invokevirtual #242                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        13: ifne          26
+        16: new           #175                // class java/lang/IllegalArgumentException
+        19: dup
+        20: ldc           #246                // String UUID is not lowercase canonical form
+        22: invokespecial #248                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        25: athrow
+        26: aload_1
+        27: areturn
+      LineNumberTable:
+        line 134: 0
+        line 135: 5
+        line 136: 16
+        line 138: 26
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      28     0 value   Ljava/lang/String;
+            5      23     1  uuid   Ljava/util/UUID;
+      StackMapTable: number_of_entries = 1
+        frame_type = 252 /* append */
+          offset_delta = 26
+          locals = [ class java/util/UUID ]
+
+  private static java.lang.String requiredText(byte[], int, int);
+    descriptor: ([BII)Ljava/lang/String;
+    flags: (0x000a) ACC_PRIVATE, ACC_STATIC
+    Code:
+      stack=3, locals=3, args_size=3
+         0: aload_0
+         1: iload_1
+         2: iload_2
+         3: invokestatic  #217                // Method slice:([BII)[B
+         6: iconst_1
+         7: invokestatic  #221                // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.decodeText:([BZ)Ljava/util/Optional;
+        10: invokevirtual #249                // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+        13: checkcast     #121                // class java/lang/String
+        16: areturn
+      LineNumberTable:
+        line 142: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      17     0  body   [B
+            0      17     1 start   I
+            0      17     2   end   I
+
+  private static int numericInt(byte[], int, int, int, int);
+    descriptor: ([BIIII)I
+    flags: (0x000a) ACC_PRIVATE, ACC_STATIC
+    Code:
+      stack=5, locals=5, args_size=5
+         0: aload_0
+         1: iload_1
+         2: iload_2
+         3: invokestatic  #217                // Method slice:([BII)[B
+         6: iload_3
+         7: i2l
+         8: iload         4
+        10: i2l
+        11: invokestatic  #253                // Method dev/codex/schubert/nk/protocol/codec/FieldCodec.decodeNumeric:([BJJ)J
+        14: invokestatic  #257                // Method java/lang/Math.toIntExact:(J)I
+        17: ireturn
+      LineNumberTable:
+        line 146: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      18     0  body   [B
+            0      18     1 start   I
+            0      18     2   end   I
+            0      18     3 minimum   I
+            0      18     4 maximum   I
+
+  private static byte[] slice(byte[], int, int);
+    descriptor: ([BII)[B
+    flags: (0x000a) ACC_PRIVATE, ACC_STATIC
+    Code:
+      stack=3, locals=3, args_size=3
+         0: aload_0
+         1: iload_1
+         2: iload_2
+         3: invokestatic  #263                // Method java/util/Arrays.copyOfRange:([BII)[B
+         6: areturn
+      LineNumberTable:
+        line 150: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       7     0 source   [B
+            0       7     1 start   I
+            0       7     2   end   I
+
+  private static void put(byte[], int, byte[]);
+    descriptor: ([BI[B)V
+    flags: (0x000a) ACC_PRIVATE, ACC_STATIC
+    Code:
+      stack=5, locals=3, args_size=3
+         0: aload_2
+         1: iconst_0
+         2: aload_0
+         3: iload_1
+         4: aload_2
+         5: arraylength
+         6: invokestatic  #266                // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+         9: return
+      LineNumberTable:
+        line 154: 0
+        line 155: 9
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0 target   [B
+            0      10     1 start   I
+            0      10     2 value   [B
+}
+SourceFile: "HeaderCodec.java"
+BootstrapMethods:
+  0: #348 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #323 (Ljava/lang/Object;)Ljava/lang/Object;
+      #324 REF_invokeVirtual dev/codex/schubert/nk/protocol/header/AuthenticationContext.wireValue:()Ljava/lang/String;
+      #329 (Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;)Ljava/lang/String;
+  1: #348 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #323 (Ljava/lang/Object;)Ljava/lang/Object;
+      #331 REF_invokeVirtual dev/codex/schubert/nk/protocol/header/ResultCode.wireValue:()Ljava/lang/String;
+      #335 (Ldev/codex/schubert/nk/protocol/header/ResultCode;)Ljava/lang/String;
+  2: #348 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #323 (Ljava/lang/Object;)Ljava/lang/Object;
+      #337 REF_invokeStatic dev/codex/schubert/nk/protocol/header/AuthenticationContext.of:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;
+      #342 (Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;
+  3: #348 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #323 (Ljava/lang/Object;)Ljava/lang/Object;
+      #343 REF_invokeStatic dev/codex/schubert/nk/protocol/header/ResultCode.fromWire:(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/ResultCode;
+      #347 (Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/ResultCode;
+InnerClasses:
+  public static final #360= #356 of #358; // Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles
+Classfile jar:file:///home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar!/dev/codex/schubert/nk/protocol/header/ResultCode.class
+  Last modified Nov 7, 2026; size 4089 bytes
+  SHA-256 checksum 4f7a958a5aa48b481ca95bac4f7154b18605903c327280397735ac2f99b6be81
+  Compiled from "ResultCode.java"
+public final class dev.codex.schubert.nk.protocol.header.ResultCode extends java.lang.Enum<dev.codex.schubert.nk.protocol.header.ResultCode>
+  minor version: 0
+  major version: 69
+  flags: (0x4031) ACC_PUBLIC, ACC_FINAL, ACC_SUPER, ACC_ENUM
+  this_class: #1                          // dev/codex/schubert/nk/protocol/header/ResultCode
+  super_class: #50                        // java/lang/Enum
+  interfaces: 0, fields: 15, methods: 10, attributes: 4
+Constant pool:
+    #1 = Class              #2            // dev/codex/schubert/nk/protocol/header/ResultCode
+    #2 = Utf8               dev/codex/schubert/nk/protocol/header/ResultCode
+    #3 = Fieldref           #1.#4         // dev/codex/schubert/nk/protocol/header/ResultCode.SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    #4 = NameAndType        #5:#6         // SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    #5 = Utf8               SUCCESS
+    #6 = Utf8               Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    #7 = Fieldref           #1.#8         // dev/codex/schubert/nk/protocol/header/ResultCode.VALIDATION_ERROR:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    #8 = NameAndType        #9:#6         // VALIDATION_ERROR:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    #9 = Utf8               VALIDATION_ERROR
+   #10 = Fieldref           #1.#11        // dev/codex/schubert/nk/protocol/header/ResultCode.AUTHENTICATION_FAILED:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #11 = NameAndType        #12:#6        // AUTHENTICATION_FAILED:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #12 = Utf8               AUTHENTICATION_FAILED
+   #13 = Fieldref           #1.#14        // dev/codex/schubert/nk/protocol/header/ResultCode.SESSION_INVALID:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #14 = NameAndType        #15:#6        // SESSION_INVALID:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #15 = Utf8               SESSION_INVALID
+   #16 = Fieldref           #1.#17        // dev/codex/schubert/nk/protocol/header/ResultCode.FORBIDDEN:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #17 = NameAndType        #18:#6        // FORBIDDEN:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #18 = Utf8               FORBIDDEN
+   #19 = Fieldref           #1.#20        // dev/codex/schubert/nk/protocol/header/ResultCode.NOT_FOUND:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #20 = NameAndType        #21:#6        // NOT_FOUND:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #21 = Utf8               NOT_FOUND
+   #22 = Fieldref           #1.#23        // dev/codex/schubert/nk/protocol/header/ResultCode.CONFLICT:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #23 = NameAndType        #24:#6        // CONFLICT:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #24 = Utf8               CONFLICT
+   #25 = Fieldref           #1.#26        // dev/codex/schubert/nk/protocol/header/ResultCode.LOCKED:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #26 = NameAndType        #27:#6        // LOCKED:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #27 = Utf8               LOCKED
+   #28 = Fieldref           #1.#29        // dev/codex/schubert/nk/protocol/header/ResultCode.NOT_CANCELLABLE:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #29 = NameAndType        #30:#6        // NOT_CANCELLABLE:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #30 = Utf8               NOT_CANCELLABLE
+   #31 = Fieldref           #1.#32        // dev/codex/schubert/nk/protocol/header/ResultCode.IDEMPOTENT_SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #32 = NameAndType        #33:#6        // IDEMPOTENT_SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #33 = Utf8               IDEMPOTENT_SUCCESS
+   #34 = Fieldref           #1.#35        // dev/codex/schubert/nk/protocol/header/ResultCode.TEMPORARY_FAILURE:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #35 = NameAndType        #36:#6        // TEMPORARY_FAILURE:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #36 = Utf8               TEMPORARY_FAILURE
+   #37 = Fieldref           #1.#38        // dev/codex/schubert/nk/protocol/header/ResultCode.RESOURCE_LIMIT:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #38 = NameAndType        #39:#6        // RESOURCE_LIMIT:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #39 = Utf8               RESOURCE_LIMIT
+   #40 = Fieldref           #1.#41        // dev/codex/schubert/nk/protocol/header/ResultCode.$VALUES:[Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #41 = NameAndType        #42:#43       // $VALUES:[Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #42 = Utf8               $VALUES
+   #43 = Utf8               [Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #44 = Methodref          #45.#46       // "[Ldev/codex/schubert/nk/protocol/header/ResultCode;".clone:()Ljava/lang/Object;
+   #45 = Class              #43           // "[Ldev/codex/schubert/nk/protocol/header/ResultCode;"
+   #46 = NameAndType        #47:#48       // clone:()Ljava/lang/Object;
+   #47 = Utf8               clone
+   #48 = Utf8               ()Ljava/lang/Object;
+   #49 = Methodref          #50.#51       // java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+   #50 = Class              #52           // java/lang/Enum
+   #51 = NameAndType        #53:#54       // valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+   #52 = Utf8               java/lang/Enum
+   #53 = Utf8               valueOf
+   #54 = Utf8               (Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+   #55 = Methodref          #50.#56       // java/lang/Enum."<init>":(Ljava/lang/String;I)V
+   #56 = NameAndType        #57:#58       // "<init>":(Ljava/lang/String;I)V
+   #57 = Utf8               <init>
+   #58 = Utf8               (Ljava/lang/String;I)V
+   #59 = Fieldref           #1.#60        // dev/codex/schubert/nk/protocol/header/ResultCode.encodedValue:Ljava/lang/String;
+   #60 = NameAndType        #61:#62       // encodedValue:Ljava/lang/String;
+   #61 = Utf8               encodedValue
+   #62 = Utf8               Ljava/lang/String;
+   #63 = Fieldref           #1.#64        // dev/codex/schubert/nk/protocol/header/ResultCode.successProfile:Z
+   #64 = NameAndType        #65:#66       // successProfile:Z
+   #65 = Utf8               successProfile
+   #66 = Utf8               Z
+   #67 = String             #68           // value
+   #68 = Utf8               value
+   #69 = Methodref          #70.#71       // java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #70 = Class              #72           // java/util/Objects
+   #71 = NameAndType        #73:#74       // requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #72 = Utf8               java/util/Objects
+   #73 = Utf8               requireNonNull
+   #74 = Utf8               (Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #75 = Methodref          #1.#76        // dev/codex/schubert/nk/protocol/header/ResultCode.values:()[Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #76 = NameAndType        #77:#78       // values:()[Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #77 = Utf8               values
+   #78 = Utf8               ()[Ldev/codex/schubert/nk/protocol/header/ResultCode;
+   #79 = Methodref          #80.#81       // java/util/Arrays.stream:([Ljava/lang/Object;)Ljava/util/stream/Stream;
+   #80 = Class              #82           // java/util/Arrays
+   #81 = NameAndType        #83:#84       // stream:([Ljava/lang/Object;)Ljava/util/stream/Stream;
+   #82 = Utf8               java/util/Arrays
+   #83 = Utf8               stream
+   #84 = Utf8               ([Ljava/lang/Object;)Ljava/util/stream/Stream;
+   #85 = InvokeDynamic      #0:#86        // #0:test:(Ljava/lang/String;)Ljava/util/function/Predicate;
+   #86 = NameAndType        #87:#88       // test:(Ljava/lang/String;)Ljava/util/function/Predicate;
+   #87 = Utf8               test
+   #88 = Utf8               (Ljava/lang/String;)Ljava/util/function/Predicate;
+   #89 = InterfaceMethodref #90.#91       // java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+   #90 = Class              #92           // java/util/stream/Stream
+   #91 = NameAndType        #93:#94       // filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+   #92 = Utf8               java/util/stream/Stream
+   #93 = Utf8               filter
+   #94 = Utf8               (Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+   #95 = InterfaceMethodref #90.#96       // java/util/stream/Stream.findFirst:()Ljava/util/Optional;
+   #96 = NameAndType        #97:#98       // findFirst:()Ljava/util/Optional;
+   #97 = Utf8               findFirst
+   #98 = Utf8               ()Ljava/util/Optional;
+   #99 = InvokeDynamic      #1:#100       // #1:get:()Ljava/util/function/Supplier;
+  #100 = NameAndType        #101:#102     // get:()Ljava/util/function/Supplier;
+  #101 = Utf8               get
+  #102 = Utf8               ()Ljava/util/function/Supplier;
+  #103 = Methodref          #104.#105     // java/util/Optional.orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+  #104 = Class              #106          // java/util/Optional
+  #105 = NameAndType        #107:#108     // orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+  #106 = Utf8               java/util/Optional
+  #107 = Utf8               orElseThrow
+  #108 = Utf8               (Ljava/util/function/Supplier;)Ljava/lang/Object;
+  #109 = Class              #110          // java/lang/IllegalArgumentException
+  #110 = Utf8               java/lang/IllegalArgumentException
+  #111 = String             #112          // unknown result code
+  #112 = Utf8               unknown result code
+  #113 = Methodref          #109.#114     // java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+  #114 = NameAndType        #57:#115      // "<init>":(Ljava/lang/String;)V
+  #115 = Utf8               (Ljava/lang/String;)V
+  #116 = Methodref          #117.#118     // java/lang/String.equals:(Ljava/lang/Object;)Z
+  #117 = Class              #119          // java/lang/String
+  #118 = NameAndType        #120:#121     // equals:(Ljava/lang/Object;)Z
+  #119 = Utf8               java/lang/String
+  #120 = Utf8               equals
+  #121 = Utf8               (Ljava/lang/Object;)Z
+  #122 = String             #5            // SUCCESS
+  #123 = String             #124          // 0000
+  #124 = Utf8               0000
+  #125 = Methodref          #1.#126       // dev/codex/schubert/nk/protocol/header/ResultCode."<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+  #126 = NameAndType        #57:#127      // "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+  #127 = Utf8               (Ljava/lang/String;ILjava/lang/String;Z)V
+  #128 = String             #9            // VALIDATION_ERROR
+  #129 = String             #130          // 0100
+  #130 = Utf8               0100
+  #131 = String             #12           // AUTHENTICATION_FAILED
+  #132 = String             #133          // 0101
+  #133 = Utf8               0101
+  #134 = String             #15           // SESSION_INVALID
+  #135 = String             #136          // 0102
+  #136 = Utf8               0102
+  #137 = String             #18           // FORBIDDEN
+  #138 = String             #139          // 0103
+  #139 = Utf8               0103
+  #140 = String             #21           // NOT_FOUND
+  #141 = String             #142          // 0104
+  #142 = Utf8               0104
+  #143 = String             #24           // CONFLICT
+  #144 = String             #145          // 0105
+  #145 = Utf8               0105
+  #146 = String             #27           // LOCKED
+  #147 = String             #148          // 0106
+  #148 = Utf8               0106
+  #149 = String             #30           // NOT_CANCELLABLE
+  #150 = String             #151          // 0107
+  #151 = Utf8               0107
+  #152 = String             #33           // IDEMPOTENT_SUCCESS
+  #153 = String             #154          // 0200
+  #154 = Utf8               0200
+  #155 = String             #36           // TEMPORARY_FAILURE
+  #156 = String             #157          // 9000
+  #157 = Utf8               9000
+  #158 = String             #39           // RESOURCE_LIMIT
+  #159 = String             #160          // 9001
+  #160 = Utf8               9001
+  #161 = Methodref          #1.#162       // dev/codex/schubert/nk/protocol/header/ResultCode.$values:()[Ldev/codex/schubert/nk/protocol/header/ResultCode;
+  #162 = NameAndType        #163:#78      // $values:()[Ldev/codex/schubert/nk/protocol/header/ResultCode;
+  #163 = Utf8               $values
+  #164 = Utf8               Code
+  #165 = Utf8               LineNumberTable
+  #166 = Utf8               (Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/ResultCode;
+  #167 = Utf8               LocalVariableTable
+  #168 = Utf8               name
+  #169 = Utf8               MethodParameters
+  #170 = Utf8               this
+  #171 = Utf8               wireValue
+  #172 = Utf8               Signature
+  #173 = Utf8               (Ljava/lang/String;Z)V
+  #174 = Utf8               ()Ljava/lang/String;
+  #175 = Utf8               usesSuccessProfile
+  #176 = Utf8               ()Z
+  #177 = Utf8               fromWire
+  #178 = Utf8               lambda$fromWire$1
+  #179 = Utf8               ()Ljava/lang/IllegalArgumentException;
+  #180 = Utf8               lambda$fromWire$0
+  #181 = Utf8               (Ljava/lang/String;Ldev/codex/schubert/nk/protocol/header/ResultCode;)Z
+  #182 = Utf8               candidate
+  #183 = Utf8               <clinit>
+  #184 = Utf8               ()V
+  #185 = Utf8               Ljava/lang/Enum<Ldev/codex/schubert/nk/protocol/header/ResultCode;>;
+  #186 = Utf8               SourceFile
+  #187 = Utf8               ResultCode.java
+  #188 = Utf8               BootstrapMethods
+  #189 = MethodType         #121          //  (Ljava/lang/Object;)Z
+  #190 = MethodHandle       6:#191        // REF_invokeStatic dev/codex/schubert/nk/protocol/header/ResultCode.lambda$fromWire$0:(Ljava/lang/String;Ldev/codex/schubert/nk/protocol/header/ResultCode;)Z
+  #191 = Methodref          #1.#192       // dev/codex/schubert/nk/protocol/header/ResultCode.lambda$fromWire$0:(Ljava/lang/String;Ldev/codex/schubert/nk/protocol/header/ResultCode;)Z
+  #192 = NameAndType        #180:#181     // lambda$fromWire$0:(Ljava/lang/String;Ldev/codex/schubert/nk/protocol/header/ResultCode;)Z
+  #193 = MethodType         #194          //  (Ldev/codex/schubert/nk/protocol/header/ResultCode;)Z
+  #194 = Utf8               (Ldev/codex/schubert/nk/protocol/header/ResultCode;)Z
+  #195 = MethodType         #48           //  ()Ljava/lang/Object;
+  #196 = MethodHandle       6:#197        // REF_invokeStatic dev/codex/schubert/nk/protocol/header/ResultCode.lambda$fromWire$1:()Ljava/lang/IllegalArgumentException;
+  #197 = Methodref          #1.#198       // dev/codex/schubert/nk/protocol/header/ResultCode.lambda$fromWire$1:()Ljava/lang/IllegalArgumentException;
+  #198 = NameAndType        #178:#179     // lambda$fromWire$1:()Ljava/lang/IllegalArgumentException;
+  #199 = MethodType         #179          //  ()Ljava/lang/IllegalArgumentException;
+  #200 = MethodHandle       6:#201        // REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #201 = Methodref          #202.#203     // java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #202 = Class              #204          // java/lang/invoke/LambdaMetafactory
+  #203 = NameAndType        #205:#206     // metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #204 = Utf8               java/lang/invoke/LambdaMetafactory
+  #205 = Utf8               metafactory
+  #206 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #207 = Utf8               InnerClasses
+  #208 = Class              #209          // java/lang/invoke/MethodHandles$Lookup
+  #209 = Utf8               java/lang/invoke/MethodHandles$Lookup
+  #210 = Class              #211          // java/lang/invoke/MethodHandles
+  #211 = Utf8               java/lang/invoke/MethodHandles
+  #212 = Utf8               Lookup
+{
+  public static final dev.codex.schubert.nk.protocol.header.ResultCode SUCCESS;
+    descriptor: Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static final dev.codex.schubert.nk.protocol.header.ResultCode VALIDATION_ERROR;
+    descriptor: Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static final dev.codex.schubert.nk.protocol.header.ResultCode AUTHENTICATION_FAILED;
+    descriptor: Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static final dev.codex.schubert.nk.protocol.header.ResultCode SESSION_INVALID;
+    descriptor: Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static final dev.codex.schubert.nk.protocol.header.ResultCode FORBIDDEN;
+    descriptor: Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static final dev.codex.schubert.nk.protocol.header.ResultCode NOT_FOUND;
+    descriptor: Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static final dev.codex.schubert.nk.protocol.header.ResultCode CONFLICT;
+    descriptor: Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static final dev.codex.schubert.nk.protocol.header.ResultCode LOCKED;
+    descriptor: Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static final dev.codex.schubert.nk.protocol.header.ResultCode NOT_CANCELLABLE;
+    descriptor: Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static final dev.codex.schubert.nk.protocol.header.ResultCode IDEMPOTENT_SUCCESS;
+    descriptor: Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static final dev.codex.schubert.nk.protocol.header.ResultCode TEMPORARY_FAILURE;
+    descriptor: Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static final dev.codex.schubert.nk.protocol.header.ResultCode RESOURCE_LIMIT;
+    descriptor: Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  private final java.lang.String encodedValue;
+    descriptor: Ljava/lang/String;
+    flags: (0x0012) ACC_PRIVATE, ACC_FINAL
+
+  private final boolean successProfile;
+    descriptor: Z
+    flags: (0x0012) ACC_PRIVATE, ACC_FINAL
+
+  private static final dev.codex.schubert.nk.protocol.header.ResultCode[] $VALUES;
+    descriptor: [Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x101a) ACC_PRIVATE, ACC_STATIC, ACC_FINAL, ACC_SYNTHETIC
+
+  public static dev.codex.schubert.nk.protocol.header.ResultCode[] values();
+    descriptor: ()[Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: getstatic     #40                 // Field $VALUES:[Ldev/codex/schubert/nk/protocol/header/ResultCode;
+         3: invokevirtual #44                 // Method "[Ldev/codex/schubert/nk/protocol/header/ResultCode;".clone:()Ljava/lang/Object;
+         6: checkcast     #45                 // class "[Ldev/codex/schubert/nk/protocol/header/ResultCode;"
+         9: areturn
+      LineNumberTable:
+        line 7: 0
+
+  public static dev.codex.schubert.nk.protocol.header.ResultCode valueOf(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: ldc           #1                  // class dev/codex/schubert/nk/protocol/header/ResultCode
+         2: aload_0
+         3: invokestatic  #49                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+         6: checkcast     #1                  // class dev/codex/schubert/nk/protocol/header/ResultCode
+         9: areturn
+      LineNumberTable:
+        line 7: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0  name   Ljava/lang/String;
+    MethodParameters:
+      Name                           Flags
+      <no name>                      mandated
+
+  private dev.codex.schubert.nk.protocol.header.ResultCode(java.lang.String, boolean);
+    descriptor: (Ljava/lang/String;ILjava/lang/String;Z)V
+    flags: (0x0002) ACC_PRIVATE
+    Code:
+      stack=3, locals=5, args_size=5
+         0: aload_0
+         1: aload_1
+         2: iload_2
+         3: invokespecial #55                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+         6: aload_0
+         7: aload_3
+         8: putfield      #59                 // Field encodedValue:Ljava/lang/String;
+        11: aload_0
+        12: iload         4
+        14: putfield      #63                 // Field successProfile:Z
+        17: return
+      LineNumberTable:
+        line 24: 0
+        line 25: 6
+        line 26: 11
+        line 27: 17
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      18     0  this   Ldev/codex/schubert/nk/protocol/header/ResultCode;
+            0      18     3 wireValue   Ljava/lang/String;
+            0      18     4 successProfile   Z
+    MethodParameters:
+      Name                           Flags
+      <no name>                      synthetic
+      <no name>                      synthetic
+      <no name>
+      <no name>
+    Signature: #173                         // (Ljava/lang/String;Z)V
+
+  public java.lang.String wireValue();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #59                 // Field encodedValue:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 30: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Ldev/codex/schubert/nk/protocol/header/ResultCode;
+
+  public boolean usesSuccessProfile();
+    descriptor: ()Z
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #63                 // Field successProfile:Z
+         4: ireturn
+      LineNumberTable:
+        line 34: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Ldev/codex/schubert/nk/protocol/header/ResultCode;
+
+  public static dev.codex.schubert.nk.protocol.header.ResultCode fromWire(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: ldc           #67                 // String value
+         3: invokestatic  #69                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: invokestatic  #75                 // Method values:()[Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        10: invokestatic  #79                 // Method java/util/Arrays.stream:([Ljava/lang/Object;)Ljava/util/stream/Stream;
+        13: aload_0
+        14: invokedynamic #85,  0             // InvokeDynamic #0:test:(Ljava/lang/String;)Ljava/util/function/Predicate;
+        19: invokeinterface #89,  2           // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+        24: invokeinterface #95,  1           // InterfaceMethod java/util/stream/Stream.findFirst:()Ljava/util/Optional;
+        29: invokedynamic #99,  0             // InvokeDynamic #1:get:()Ljava/util/function/Supplier;
+        34: invokevirtual #103                // Method java/util/Optional.orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+        37: checkcast     #1                  // class dev/codex/schubert/nk/protocol/header/ResultCode
+        40: areturn
+      LineNumberTable:
+        line 38: 0
+        line 39: 7
+        line 40: 19
+        line 41: 24
+        line 42: 34
+        line 39: 40
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      41     0 value   Ljava/lang/String;
+
+  private static dev.codex.schubert.nk.protocol.header.ResultCode[] $values();
+    descriptor: ()[Ldev/codex/schubert/nk/protocol/header/ResultCode;
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=4, locals=0, args_size=0
+         0: bipush        12
+         2: anewarray     #1                  // class dev/codex/schubert/nk/protocol/header/ResultCode
+         5: dup
+         6: iconst_0
+         7: getstatic     #3                  // Field SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        10: aastore
+        11: dup
+        12: iconst_1
+        13: getstatic     #7                  // Field VALIDATION_ERROR:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        16: aastore
+        17: dup
+        18: iconst_2
+        19: getstatic     #10                 // Field AUTHENTICATION_FAILED:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        22: aastore
+        23: dup
+        24: iconst_3
+        25: getstatic     #13                 // Field SESSION_INVALID:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        28: aastore
+        29: dup
+        30: iconst_4
+        31: getstatic     #16                 // Field FORBIDDEN:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        34: aastore
+        35: dup
+        36: iconst_5
+        37: getstatic     #19                 // Field NOT_FOUND:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        40: aastore
+        41: dup
+        42: bipush        6
+        44: getstatic     #22                 // Field CONFLICT:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        47: aastore
+        48: dup
+        49: bipush        7
+        51: getstatic     #25                 // Field LOCKED:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        54: aastore
+        55: dup
+        56: bipush        8
+        58: getstatic     #28                 // Field NOT_CANCELLABLE:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        61: aastore
+        62: dup
+        63: bipush        9
+        65: getstatic     #31                 // Field IDEMPOTENT_SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        68: aastore
+        69: dup
+        70: bipush        10
+        72: getstatic     #34                 // Field TEMPORARY_FAILURE:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        75: aastore
+        76: dup
+        77: bipush        11
+        79: getstatic     #37                 // Field RESOURCE_LIMIT:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        82: aastore
+        83: areturn
+      LineNumberTable:
+        line 7: 0
+
+  private static java.lang.IllegalArgumentException lambda$fromWire$1();
+    descriptor: ()Ljava/lang/IllegalArgumentException;
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=3, locals=0, args_size=0
+         0: new           #109                // class java/lang/IllegalArgumentException
+         3: dup
+         4: ldc           #111                // String unknown result code
+         6: invokespecial #113                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+         9: areturn
+      LineNumberTable:
+        line 42: 0
+
+  private static boolean lambda$fromWire$0(java.lang.String, dev.codex.schubert.nk.protocol.header.ResultCode);
+    descriptor: (Ljava/lang/String;Ldev/codex/schubert/nk/protocol/header/ResultCode;)Z
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_1
+         1: getfield      #59                 // Field encodedValue:Ljava/lang/String;
+         4: aload_0
+         5: invokevirtual #116                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+         8: ireturn
+      LineNumberTable:
+        line 40: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       9     0 value   Ljava/lang/String;
+            0       9     1 candidate   Ldev/codex/schubert/nk/protocol/header/ResultCode;
+
+  static {};
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=6, locals=0, args_size=0
+         0: new           #1                  // class dev/codex/schubert/nk/protocol/header/ResultCode
+         3: dup
+         4: ldc           #122                // String SUCCESS
+         6: iconst_0
+         7: ldc           #123                // String 0000
+         9: iconst_1
+        10: invokespecial #125                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+        13: putstatic     #3                  // Field SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        16: new           #1                  // class dev/codex/schubert/nk/protocol/header/ResultCode
+        19: dup
+        20: ldc           #128                // String VALIDATION_ERROR
+        22: iconst_1
+        23: ldc           #129                // String 0100
+        25: iconst_0
+        26: invokespecial #125                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+        29: putstatic     #7                  // Field VALIDATION_ERROR:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        32: new           #1                  // class dev/codex/schubert/nk/protocol/header/ResultCode
+        35: dup
+        36: ldc           #131                // String AUTHENTICATION_FAILED
+        38: iconst_2
+        39: ldc           #132                // String 0101
+        41: iconst_0
+        42: invokespecial #125                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+        45: putstatic     #10                 // Field AUTHENTICATION_FAILED:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        48: new           #1                  // class dev/codex/schubert/nk/protocol/header/ResultCode
+        51: dup
+        52: ldc           #134                // String SESSION_INVALID
+        54: iconst_3
+        55: ldc           #135                // String 0102
+        57: iconst_0
+        58: invokespecial #125                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+        61: putstatic     #13                 // Field SESSION_INVALID:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        64: new           #1                  // class dev/codex/schubert/nk/protocol/header/ResultCode
+        67: dup
+        68: ldc           #137                // String FORBIDDEN
+        70: iconst_4
+        71: ldc           #138                // String 0103
+        73: iconst_0
+        74: invokespecial #125                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+        77: putstatic     #16                 // Field FORBIDDEN:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        80: new           #1                  // class dev/codex/schubert/nk/protocol/header/ResultCode
+        83: dup
+        84: ldc           #140                // String NOT_FOUND
+        86: iconst_5
+        87: ldc           #141                // String 0104
+        89: iconst_0
+        90: invokespecial #125                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+        93: putstatic     #19                 // Field NOT_FOUND:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        96: new           #1                  // class dev/codex/schubert/nk/protocol/header/ResultCode
+        99: dup
+       100: ldc           #143                // String CONFLICT
+       102: bipush        6
+       104: ldc           #144                // String 0105
+       106: iconst_0
+       107: invokespecial #125                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+       110: putstatic     #22                 // Field CONFLICT:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       113: new           #1                  // class dev/codex/schubert/nk/protocol/header/ResultCode
+       116: dup
+       117: ldc           #146                // String LOCKED
+       119: bipush        7
+       121: ldc           #147                // String 0106
+       123: iconst_0
+       124: invokespecial #125                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+       127: putstatic     #25                 // Field LOCKED:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       130: new           #1                  // class dev/codex/schubert/nk/protocol/header/ResultCode
+       133: dup
+       134: ldc           #149                // String NOT_CANCELLABLE
+       136: bipush        8
+       138: ldc           #150                // String 0107
+       140: iconst_0
+       141: invokespecial #125                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+       144: putstatic     #28                 // Field NOT_CANCELLABLE:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       147: new           #1                  // class dev/codex/schubert/nk/protocol/header/ResultCode
+       150: dup
+       151: ldc           #152                // String IDEMPOTENT_SUCCESS
+       153: bipush        9
+       155: ldc           #153                // String 0200
+       157: iconst_1
+       158: invokespecial #125                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+       161: putstatic     #31                 // Field IDEMPOTENT_SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       164: new           #1                  // class dev/codex/schubert/nk/protocol/header/ResultCode
+       167: dup
+       168: ldc           #155                // String TEMPORARY_FAILURE
+       170: bipush        10
+       172: ldc           #156                // String 9000
+       174: iconst_0
+       175: invokespecial #125                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+       178: putstatic     #34                 // Field TEMPORARY_FAILURE:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       181: new           #1                  // class dev/codex/schubert/nk/protocol/header/ResultCode
+       184: dup
+       185: ldc           #158                // String RESOURCE_LIMIT
+       187: bipush        11
+       189: ldc           #159                // String 9001
+       191: iconst_0
+       192: invokespecial #125                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+       195: putstatic     #37                 // Field RESOURCE_LIMIT:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       198: invokestatic  #161                // Method $values:()[Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       201: putstatic     #40                 // Field $VALUES:[Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       204: return
+      LineNumberTable:
+        line 8: 0
+        line 9: 16
+        line 10: 32
+        line 11: 48
+        line 12: 64
+        line 13: 80
+        line 14: 96
+        line 15: 113
+        line 16: 130
+        line 17: 147
+        line 18: 164
+        line 19: 181
+        line 7: 198
+}
+Signature: #185                         // Ljava/lang/Enum<Ldev/codex/schubert/nk/protocol/header/ResultCode;>;
+SourceFile: "ResultCode.java"
+BootstrapMethods:
+  0: #200 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #189 (Ljava/lang/Object;)Z
+      #190 REF_invokeStatic dev/codex/schubert/nk/protocol/header/ResultCode.lambda$fromWire$0:(Ljava/lang/String;Ldev/codex/schubert/nk/protocol/header/ResultCode;)Z
+      #193 (Ldev/codex/schubert/nk/protocol/header/ResultCode;)Z
+  1: #200 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #195 ()Ljava/lang/Object;
+      #196 REF_invokeStatic dev/codex/schubert/nk/protocol/header/ResultCode.lambda$fromWire$1:()Ljava/lang/IllegalArgumentException;
+      #199 ()Ljava/lang/IllegalArgumentException;
+InnerClasses:
+  public static final #212= #208 of #210; // Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles
