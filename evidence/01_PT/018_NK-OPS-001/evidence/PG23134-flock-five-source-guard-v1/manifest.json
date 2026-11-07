@@ -1,0 +1,97 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T22:08:56.893441+09:00",
+  "inputs": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxExecDescriptorsTest.java",
+      "oldSha256": "4a3e1a06852c5c18b2613d5efec2bdc862ae4d348e6cf9d7a2f83a9632d2713f",
+      "sha256": "2b060afe69e649fd61b4381c86bb4443d021d7d96459fdc660af992897a34342",
+      "flagAdditions": 2,
+      "allOtherJavaTokensOraclesAndCommandsPreserved": true
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxFileLockTest.java",
+      "oldSha256": "17f74038649053ac0c9b97e74f3e2e862068d56e22588cd5519db77290f4fcbf",
+      "sha256": "e617dcb942d17e09fa4c7cda0376e029044837282b8ee3b2854aa408a543af35",
+      "flagAdditions": 2,
+      "allOtherJavaTokensOraclesAndCommandsPreserved": true
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxStartupFileLockTest.java",
+      "oldSha256": "b0018a08c0953527873100f302f68f9217a0872abdc71109281de85f9c959cdb",
+      "sha256": "de455cf425156f730823b5a0d4177632281bd1bc26e21eb1d75bec77bc100c26",
+      "flagAdditions": 1,
+      "allOtherJavaTokensOraclesAndCommandsPreserved": true
+    }
+  ],
+  "primaryManual": {
+    "path": "/usr/share/man/man1/flock.1.gz",
+    "sha256": "30cc3599a6e29f04fd70a80a38455d827a712e6e75e70a2419ba1cbe1a3692c5",
+    "version": "util-linux2.41.3",
+    "readOnly": true
+  },
+  "designRef": {
+    "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+    "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+    "sha256": "a1ef2c3baa02ce3c4396cdca3f9d2082be882044811907cffe4e4a07f8b17794"
+  },
+  "newFlagAdditions": 5,
+  "allOtherOracleTokensUnchanged": true,
+  "metadataNegativeGuards": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxExecDescriptorsTest.java",
+      "mutation": "\"--no-fork\"→\"--close\""
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxExecDescriptorsTest.java",
+      "mutation": "\"--no-fork\"→\"--shared\""
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxExecDescriptorsTest.java",
+      "mutation": "\"/usr/bin/flock\"→\"/usr/bin/other\""
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxFileLockTest.java",
+      "mutation": "\"--no-fork\"→\"--close\""
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxFileLockTest.java",
+      "mutation": "\"--no-fork\"→\"--shared\""
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxFileLockTest.java",
+      "mutation": "\"/usr/bin/flock\"→\"/usr/bin/other\""
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxStartupFileLockTest.java",
+      "mutation": "\"--no-fork\"→\"--close\""
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxStartupFileLockTest.java",
+      "mutation": "\"--no-fork\"→\"--shared\""
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxStartupFileLockTest.java",
+      "mutation": "\"/usr/bin/flock\"→\"/usr/bin/other\""
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxExecDescriptorsTest.java",
+      "mutation": "remove inserted comment newline"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxFileLockTest.java",
+      "mutation": "remove inserted comment newline"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxStartupFileLockTest.java",
+      "mutation": "remove inserted comment newline"
+    }
+  ],
+  "originalTestsCompiled": false,
+  "productTestsExecuted": 0,
+  "actualProductProcessActions": 0,
+  "actualPass": null,
+  "coverage": null,
+  "sourceFixStatus": "FLOCK_COMMAND_SAME_PID_SOURCE_DESIGN_ONLY_RUNTIME_HOLD",
+  "residualRisk": "Actual util-linux and command binaries, shell descendants, wait/close and lock postconditions must be authenticated/measured later. No current VM/process evidence inferred."
+}

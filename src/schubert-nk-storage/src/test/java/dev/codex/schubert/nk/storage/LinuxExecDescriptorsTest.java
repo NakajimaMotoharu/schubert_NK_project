@@ -303,6 +303,7 @@ final class LinuxExecDescriptorsTest {
               new OwnedTestProcess(
                   new ProcessBuilder(
                           "/usr/bin/flock",
+                          "--no-fork", // BUG2468: keep the command in this PID.
                           "-x",
                           "-n",
                           "-E",
@@ -323,6 +324,7 @@ final class LinuxExecDescriptorsTest {
               new OwnedTestProcess(
                   new ProcessBuilder(
                           "/usr/bin/flock",
+                          "--no-fork", // BUG2468: keep the command in this PID.
                           "-x",
                           "-n",
                           "-E",
