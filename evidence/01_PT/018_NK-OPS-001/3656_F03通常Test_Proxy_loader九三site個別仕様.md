@@ -7,3 +7,8 @@ WBS-F03、402/451/SS351352。着手見積1/3/7pp cap9。先行3654/3655の347 ra
 既個別静的判断の検索を拡大する代わりに、今回の93実source位置・call引数を直接確認する。scopeは元85内だけ、原held名はIO前拒否。製品/Test/fixture/compile/PMD再実行やreflection invocation、外部接続0。実sourceを静的データとして扱い、Root二Test/保護二fileを読まない。synthetic metadata反例で適用条件の拒否を検査する。
 
 source編集・抑制・規則緩和なし。原rawレポートと新sidecarの個別reasonを分離し、独立postが元347・対象93・sourcehash・context/arg/import・否定条件・対象外不変を確認する。静的分類はProduct PT/coverage/新leaf/正式/工数率へ換算しない。全Test/global F03・451/全HOLDは維持し、未証明siteを成功へしない。
+
+
+## 規約参照番号の追記訂正（2026-11-07、BUG2430/YKT2175）
+
+上記402は411の誤記。実正本はdocuments/400_PGPT/410_工程標準/411_コーディング規約.md。元本文・event/予算/期待値は保全し、この番号訂正は仕様/規則設定/抑制/実装変更ではない。
