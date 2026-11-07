@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
 
 /** 1835 WEBSERVICE001..014: own unstarted requests/SDK only, never a server/DB/native startup. */
 final class WebServiceMetricBindingTest {
+  private static final int FATAL_SUPPLIER_KIND = 1;
   private static final String FIXTURE_DEBUG_B6DFBABB = "DEBUG";
   private static final String FIXTURE_POOL_3DB42356 = "pool";
   private static final String FIXTURE_CONFIG_48882AB4 = "config";
@@ -334,7 +335,7 @@ final class WebServiceMetricBindingTest {
               () -> {
                 reads.incrementAndGet();
                 if (selected == 0) throw runtime;
-                if (selected == 1) throw fatal;
+                if (selected == FATAL_SUPPLIER_KIND) throw fatal;
                 return null;
               },
               () -> {
@@ -343,7 +344,7 @@ final class WebServiceMetricBindingTest {
               () -> {})) {
         if (selected == 0)
           assertSame(runtime, assertThrows(IllegalStateException.class, context::initialize));
-        else if (selected == 1)
+        else if (selected == FATAL_SUPPLIER_KIND)
           assertSame(fatal, assertThrows(AssertionError.class, context::initialize));
         else assertThrows(NullPointerException.class, context::initialize);
         assertThrows(IllegalStateException.class, context::initialize);
@@ -371,13 +372,13 @@ final class WebServiceMetricBindingTest {
               () -> {
                 order.add(FIXTURE_CONFIG_48882AB4);
                 if (selected == 0) throw runtime;
-                if (selected == 1) throw fatal;
+                if (selected == FATAL_SUPPLIER_KIND) throw fatal;
                 return null;
               },
               () -> {})) {
         if (selected == 0)
           assertSame(runtime, assertThrows(IllegalArgumentException.class, context::initialize));
-        else if (selected == 1)
+        else if (selected == FATAL_SUPPLIER_KIND)
           assertSame(fatal, assertThrows(AssertionError.class, context::initialize));
         else assertThrows(NullPointerException.class, context::initialize);
         assertEquals(List.of(FIXTURE_POOL_3DB42356, FIXTURE_CONFIG_48882AB4), order);

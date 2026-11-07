@@ -1,0 +1,76 @@
+{
+  "testClasses": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBindingTest.java": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest"
+  },
+  "fixtureSources": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservationTest.java"
+  ],
+  "mainPaths": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricContext.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricBinding.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservation.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollector.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricValve.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorder.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContract.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetrics.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebJvmMetrics.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebSystemMetrics.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistration.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayload.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricScrape.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporter.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporter.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporter.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricText.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalog.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeDurationSupport.java"
+  ],
+  "targetPhysical": [
+    "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding"
+  ],
+  "selectedMethods": [
+    "webservice001ConstructorBoundariesRejectWithoutGetterOrInvalidModeSeries",
+    "webservice002FactoryRejectsNullReferencesAndModeBeforeAcquisition",
+    "webservice003StandardFactoryDoesNotReadAnyDetailedSupplierOrCreateObserver",
+    "webservice004DebugCapturesOwnerBeforeSetupThenDefersStatisticsUntilRender",
+    "webservice005IndependentObserversBorrowOneRetainedRecorderAndDatabaseRefresh",
+    "webservice006StandaloneStandardObserverNeverCreatesDetailedSeries",
+    "webservice007TerminalIsRecordedOnceInSameCustomPayloadAsDatabase",
+    "webservice008RedispatchAndConcurrentTerminalRetainRequestOwnedClaim",
+    "webservice010PoolSupplierFailureOrNullNeverAcquiresConfigurationOrRetries",
+    "webservice011ConfigurationSupplierFailureOrNullRetainsOriginalPrimaryAndPartialOwner",
+    "webservice012DatabaseFailureNeverReturnsPartialTextOrReplaysHttpSuccess",
+    "webservice013TerminalSignalFailureIsOriginalAndDoesNotTransferOwnership",
+    "webservice014QuiescentContextCloseReleasesOnlyOwnedSdkAndRejectsNewAccess",
+    "webservice015EmptyDependenciesReceiveOneFreshObserverInImmutableCopy",
+    "webservice016DependencySnapshotPreservesValueIdentityAndIgnoresLaterInputMutation",
+    "webservice017NullMapEntryTypeAndValueNeverBecomeObserverDependencies",
+    "webservice018TypeMismatchAndPrimitiveKeyAreRejectedWithoutInputChanges",
+    "webservice019ExistingObserverIsNotReplacedOrRegisteredTwice",
+    "webservice020DependencyProviderFailureIsOriginalAndNeverRetriedOrFormatted",
+    "webservice021TwoDependencySnapshotsOwnDistinctObserversButShareOneRecorder",
+    "webservice022MalformedMapDuplicateTypeNeverOverwritesDependencies"
+  ],
+  "heldMethods": [
+    {
+      "name": "webservice009MissingTerminalMetadataSignalsOwnerWithoutSuccessSample",
+      "reason": "Calls HttpMetricValve.signalFailure -> WebStartupException.preserveFatal; explicit four-held initialization not permitted.",
+      "state": "NOT_EXECUTED_HOLD_NOT_PASS"
+    }
+  ],
+  "expectedTests": 21,
+  "newUniqueTests": 0,
+  "wholeOriginal22Accepted": false,
+  "reviewManifest": "evidence/01_PT/018_NK-OPS-001/evidence/PG23370-web-service-sdk-independent-v1/manifest.json",
+  "reviewSha256": "c659294b6cb19ba64bf0b08b3fc815c6e9e684c2a10c51d208bbdc47136b7c82",
+  "preflight": "PT_DEFAULT_EXISTING_METHOD21_OWN_SDK_NO_BACKEND_OR_HELD_INIT",
+  "heldFourInitializationAllowed": false,
+  "actualBackendActions": 0
+}
