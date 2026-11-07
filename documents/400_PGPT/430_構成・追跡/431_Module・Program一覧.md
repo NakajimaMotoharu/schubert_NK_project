@@ -728,3 +728,8 @@ NK-WEB-002: WebNativeRuntime（ordinary借用DB/5credential→三codec/readonly 
 ## 2026-11-07 七security port有限Future是正
 
 NK-WEB-001七security port（015040定義）、関連SS312323324332351352/411/451/PG-D1151、元58Test IDは22546 expectedcase完全一致、015090091。Main owner変更0/費用F03のみ、全他assertion不変。
+
+
+## 2026-11-07 Release Contents公開値型の八PT
+
+NK-OPS-001/StartupReleaseManifest.Contents、SYS002004/OPS009/UI251/SS342343/SSC089095/PG-D1152、CONTENTS001..008/0183678-3679・22626/22630/22644。対象一physicalの全custom Codeだけ、親StartupReleaseManifest全体/HOLD/Source wholeを増やさず、WBS-P018-02へ帰属する。
