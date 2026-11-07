@@ -1,0 +1,10 @@
+# G07公開symbol三参照仕様
+
+event4201原.25/1/3cap4。元9888のMIXED単一capture候補から公開doc1017:45、PG3416:418、PG5752:32の三行だけを対象とする。operator source read-setは拡張せず、対象manifest/docをdataとして読むだけで元工具・Root/VM/認証/graph/native/scannerを実行しない。
+
+PG3416はactualWitnesses.witnesses[].key/module/classの型宣言、PG5752はtargetCountersのmodule:class keyと四counter field型に束縛し、capture全体と実Java package/class宣言を独立に確認する。元witness結果やcounterを製品成功/現source資格へ転用しない。class名らしい見た目や部分一致だけで分類しない。doc1017は完全な型来歴が確定しなければ未分類のまま、private原本/鍵/role情報取得へ進まない。
+
+元4493の指摘multiset、先九件の更新とPG22320の追加0を保持し、同じ指摘の再加算を禁止する。独立postは二行のJSON role/位置/declaration hashと先更新非重複を別に照合する。値/値hash/raw全文を書き出さず、hashは既公開入力と実sourceのみ。正常/field誤同定/誤型/異moduleをmetadata反例として検査。Product Test/coverage/source資格/leaf追加0、正式/工数null/全HOLD/原予算不変更。
+
+
+BUG2426/YKT2171の実schema是正：PG3416のkeyはMain targetだがclass/methodはTest witnessであり同一FQNではない。module＋keyを直接Main宣言へ束縛し、別のclass/methodをTestの実package/class/method宣言へ検査する。Test名からMainを推測する規則は使わず、元witnessの成功/失敗を分類の根拠にしない。初回assert1と元producerは22330へ保持し、元見積・原指摘・許可scopeは不変更。
