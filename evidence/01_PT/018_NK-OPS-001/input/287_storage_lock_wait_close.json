@@ -1,0 +1,36 @@
+{
+  "groupId": "PGPT-F03-STORAGE-PRIVATE-LOCK-TWO-WAITS-20261107",
+  "endQuotaFile": "end-quota-PG22904.json",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG22904-storage-lock-wait-independent-v1/manifest.json",
+  "run": "PG22884/22886/22888/22890/PG22904",
+  "technicalMeasurementDelta": {
+    "checkedSources": 29,
+    "sourceFixedFiles": 3,
+    "privateMonitorCorrections": 1,
+    "finiteWaitCorrections": 2,
+    "currentStorageRaw": 88,
+    "individuallyClassified": 23,
+    "unclassifiedStaticFindings": 65,
+    "totalApplicableFindings": null,
+    "productTestsExecuted": 0,
+    "originalTestsCompiled": false,
+    "newProductTests": 0,
+    "newSourceProofs": 0,
+    "newAcceptance": 0,
+    "metadataNegativeGuards": 8
+  },
+  "status": "PRIVATE_LOCK_AND_TWO_WAITS_SOURCE_FIXED_STATIC_ALTERNATIVE_NATIVE_PT_HOLD",
+  "nextCommand": "Review exact remaining7 CloseResource and1 EmptyCatchBlock storage sites against complete ownership, resource escape/intentional close-failure and independent assertions before classification or correction. Current29 source binding is PG22904; original native/Test compile/run/fixture/process/filesystem/Root/VM operations remain HOLD. Preserve four public-monitor oracles, JDK invokeAll completed-Future reasoning and Executor.close residual risk. No unchanged success replay, no new acceptance or coverage inference. Hourly usage due20:19:15.",
+  "resultPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/234_Storage私有lock二期限是正結果.json",
+  "checkpointText": "F03原2/5/9cap10、0183698/3699/input284285286、BUG2455/56 sourcef01aa74/Main7aed。private sync1→same-body ReentrantLock/finally、二wait10SECONDS、22886 guard4/22888 own parse-format0元Testcompile0/22890 raw16→15 CS0/22904独立逆token全復元・否定8/保持15+既23再束縛0 manifestc3013c52fbb0dd515cfdbb6e991f0117ec4ffbfcf9f770baf12540e704b121a9。current29不変26+3 changed raw89→88/分類23/残65。元Test/runtimeHOLD/実PTPASS-covnull・新unique-whole-leaf0/438/whole94/正式1964-53/工数null。BUG2457import/2458format byte/2459同method siteの工具失敗22872/22898/22902保持後有限CLOSED、既成功再演0。YKT2177 known23sourcefixed20dynamic+Question1/Storage2HOLD、globalOPEN。",
+  "title": "Storage私有lock・二期限source是正／静的代替と残65",
+  "phase": "STORAGE_LOCK_WAIT_SOURCE_FIXED_STATIC_ALTERNATIVE_NATIVE_HOLD",
+  "checkpointKey": "latestStorageLockWaitStaticAlternative",
+  "endAttributionKind": "MIXED_UNALLOCATED",
+  "failureIds": [
+    "BUG-2457",
+    "BUG-2458",
+    "BUG-2459"
+  ],
+  "additionalActivityAllocatedPp": null
+}
