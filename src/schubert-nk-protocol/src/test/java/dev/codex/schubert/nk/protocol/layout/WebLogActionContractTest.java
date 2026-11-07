@@ -208,8 +208,11 @@ class WebLogActionContractTest {
     try (var workers = Executors.newFixedThreadPool(2)) {
       var first = workers.submit(() -> encode(legacy(Optional.empty())));
       var second = workers.submit(() -> encode(value(LogType.ACTION, Optional.of(MENU_ACTION))));
-      assertArrayEquals(golden(REQUEST_CATEGORY, ""), first.get());
-      assertArrayEquals(golden(ACTION_CATEGORY, MENU_ACTION), second.get());
+      assertArrayEquals(
+          golden(REQUEST_CATEGORY, ""), first.get(10, java.util.concurrent.TimeUnit.SECONDS));
+      assertArrayEquals(
+          golden(ACTION_CATEGORY, MENU_ACTION),
+          second.get(10, java.util.concurrent.TimeUnit.SECONDS));
     }
   }
 
