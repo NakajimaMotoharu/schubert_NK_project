@@ -34,6 +34,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-OPS-001/PT-OPS-FLOCK-001..008; SS311/341/343; actual isolated Linux flock interop. */
 final class LinuxFileLockTest {
+  private static final int EAGAIN_ERRNO = 11;
+
   private static final String FIXTURE_LOCK_E9DEB047 = "lock";
   private static final String FIXTURE_PROC_SELF_FD_9_A033018C = "/proc/self/fd/9";
   private static final String FIXTURE_OPEN_35FF74AE = "open";
@@ -257,7 +259,7 @@ final class LinuxFileLockTest {
     for (int error : List.of(11, 4, 9, 22, 37)) {
       var calls = new ArrayList<String>();
       var lock = fake(17, -1, error, 0, calls);
-      if (error == 11)
+      if (error == EAGAIN_ERRNO)
         assertEquals(
             Optional.empty(),
             lock.tryExclusive(

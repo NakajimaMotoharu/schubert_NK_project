@@ -33,6 +33,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-OPS-AFD-001..008; A-only borrowed FD, independent syscall/ownership/interop oracles. */
 final class LinuxStartupFileLockTest {
+  private static final int EAGAIN_ERRNO = 11;
+
   private static final String FIXTURE_OPEN_35FF74AE = "open";
   private static final String FIXTURE_CLOSE_128_7836A21E = "close:128";
   private static final String FIXTURE_CLOSE_17_F1422F88 = "close:17";
@@ -73,7 +75,7 @@ final class LinuxStartupFileLockTest {
       var f = new Fixture();
       f.lockResult = -1;
       f.errno = errno;
-      if (errno == 11)
+      if (errno == EAGAIN_ERRNO)
         assertEquals(
             Optional.empty(),
             assertDoesNotThrow(() -> f.calls().tryExclusiveForStartup(HELD, fd -> fail())));

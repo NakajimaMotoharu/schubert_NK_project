@@ -27,6 +27,13 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-CHILDFD-001..008; independent root metadata/syscall vectors, native positive in VM015. */
 final class LinuxStartupAdmissionTest {
+  private static final int F_GETFD_COMMAND = 1;
+  private static final int F_GET_SEALS_COMMAND = 1034;
+  private static final int F_GETFL_COMMAND = 3;
+  private static final int CLOSE_ERRNO_VARIANT = 1;
+  private static final int CLOSE_RUNTIME_VARIANT = 2;
+  private static final int CLOSE_FATAL_VARIANT = 3;
+
   private static final String FIXTURE_UID_0C18F38C = "uid";
   private static final String FIXTURE_NLINK_3DDD828B = "nlink";
   private static final String FIXTURE_SIZE_EB1E91E4 = "size";
@@ -77,9 +84,9 @@ final class LinuxStartupAdmissionTest {
       calls.add(fd + ":" + cmd + ":" + arg);
       syscall++;
       if (syscall == fault) return -1;
-      if (cmd == 1) return initial;
-      if (cmd == 1034) return seal;
-      if (cmd == 3) return flags;
+      if (cmd == F_GETFD_COMMAND) return initial;
+      if (cmd == F_GET_SEALS_COMMAND) return seal;
+      if (cmd == F_GETFL_COMMAND) return flags;
       return 0;
     }
 
@@ -162,9 +169,9 @@ final class LinuxStartupAdmissionTest {
               public int close(int fd) {
                 closed.add(fd);
                 int kind = fd == P ? firstKind : lastKind;
-                if (kind == 1) return -1;
-                if (kind == 2) throw fd == P ? p : a;
-                if (kind == 3) throw fd == P ? pe : ae;
+                if (kind == CLOSE_ERRNO_VARIANT) return -1;
+                if (kind == CLOSE_RUNTIME_VARIANT) throw fd == P ? p : a;
+                if (kind == CLOSE_FATAL_VARIANT) throw fd == P ? pe : ae;
                 return 0;
               }
             };
@@ -173,7 +180,7 @@ final class LinuxStartupAdmissionTest {
           assertDoesNotThrow(owners::close);
         } else {
           Throwable actual = assertThrows(Throwable.class, owners::close);
-          if (primary >= 2) {
+          if (primary >= CLOSE_RUNTIME_VARIANT) {
             assertSame(primary == 2 ? p : pe, actual);
             assertEquals(secondary == 0 ? 0 : 1, actual.getSuppressed().length);
             if (secondary != 0) {
@@ -182,7 +189,7 @@ final class LinuxStartupAdmissionTest {
               assertEquals("transfer storage operation failed", redacted.getMessage());
               assertNull(redacted.getCause());
             }
-          } else if (secondary >= 2) {
+          } else if (secondary >= CLOSE_RUNTIME_VARIANT) {
             assertSame(secondary == 2 ? a : ae, actual);
             assertEquals(0, actual.getSuppressed().length);
           } else {

@@ -27,6 +27,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-OPS-001; OPS-009/UI251/SS333/343 §6.10; PG-D-153; PT-OPS-PFILE-001..008. */
 class PrivateDirectoryEntryTest {
+  private static final int UNCHECKED_BODY_VARIANT = 2;
+
   private static final String FIXTURE_UNIX_MODE_18F40B0C = "unix:mode";
   private static final String FIXTURE_RETAINED_EXEC_1FEFDEDD = "retained.exec";
   private static final String FIXTURE_CLOSE_97959247 = "close";
@@ -253,7 +255,7 @@ class PrivateDirectoryEntryTest {
         int mode = kind;
         UUID id = new UUID(2, kind);
         int closed = calls.closes;
-        if (kind == 2) {
+        if (kind == UNCHECKED_BODY_VARIANT) {
           var expected = new IllegalStateException("synthetic unchecked failure");
           assertSame(
               expected,

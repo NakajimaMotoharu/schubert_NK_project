@@ -30,6 +30,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Native FD ownership and path replacement tests. NK-SCN-001; SSC-019; PT-SCN-008-F02. */
 class OwnedTransferDirectoryTest {
+  private static final int CLEANUP_ONLY_FAULT_VARIANT = 1;
+  private static final int DATE_CHILD_SCOPE = 1;
+
   private static final String ASSET_ENTRY_NAME = "音源 name.ogg";
   private static final String FIXTURE_UNIX_OWNER_GROUP_MODE_NLINK_SIZE_69F67BAF =
       "unix:owner,group,mode,nlink,size";
@@ -298,7 +301,7 @@ class OwnedTransferDirectoryTest {
                     ID,
                     handle -> {
                       calls.failClose = fault != 0;
-                      if (fault != 1)
+                      if (fault != CLEANUP_ONLY_FAULT_VARIANT)
                         throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
                       return Boolean.TRUE;
                     }));
@@ -830,7 +833,7 @@ class OwnedTransferDirectoryTest {
           try (var parent = OwnedTransferDirectory.open(calls, root)) {
             int before = calls.closes;
             calls.closeFailure = cleanup;
-            if (scope == 1) {
+            if (scope == DATE_CHILD_SCOPE) {
               int sequenceValue = sequence;
               sequence++;
               LocalDate date = DATE.plusDays(sequenceValue);
