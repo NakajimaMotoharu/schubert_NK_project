@@ -1,0 +1,31 @@
+Compiled from "OwnedTestProcess.java"
+final class dev.codex.schubert.nk.storage.OwnedTestProcess implements java.lang.AutoCloseable {
+  private static final long WAIT_NANOS;
+    descriptor: J
+  private final java.lang.Process ownedChild;
+    descriptor: Ljava/lang/Process;
+  private boolean closeAttempted;
+    descriptor: Z
+  private boolean interrupted;
+    descriptor: Z
+  dev.codex.schubert.nk.storage.OwnedTestProcess(java.lang.Process);
+    descriptor: (Ljava/lang/Process;)V
+
+  java.lang.Process process();
+    descriptor: ()Ljava/lang/Process;
+
+  public void close() throws java.io.IOException;
+    descriptor: ()V
+
+  private boolean awaitExit();
+    descriptor: ()Z
+
+  private static void closeStream(java.io.Closeable, java.util.List<java.lang.Throwable>);
+    descriptor: (Ljava/io/Closeable;Ljava/util/List;)V
+
+  private static boolean reaches(java.lang.Throwable, java.lang.Throwable);
+    descriptor: (Ljava/lang/Throwable;Ljava/lang/Throwable;)Z
+
+  static {};
+    descriptor: ()V
+}
