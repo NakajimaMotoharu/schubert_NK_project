@@ -1,0 +1,90 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T10:24:58.162591+09:00",
+  "source": "87cc431632fcbaff82e9014300dda71844f8c923",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "inputHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetimeTest.java": "54a9545bfd6557d341f0480e4d007fb967e2de690d0878650b37ac6472ab15bc",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime.java": "7067db22f9b001ec76e5ccaf5eed6c4022baab51a7f889795d5c64da74684165",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudget.java": "295ea9fd574937e40a600e5213077466774b712cc9a0425a9ec2c887880e6f55",
+    "evidence/01_PT/018_NK-OPS-001/3637_API停止caller全十四Test_静的設計レビュー.md": "a07b40995b624514b29ec4537c8724dbf35533e74af1610e5547057fd1b99778"
+  },
+  "wholeExistingTestMethodsReviewedOnly": [
+    "lifeBudget001",
+    "lifeBudget002",
+    "lifeBudget003",
+    "lifeBudget004",
+    "lifeBudget005",
+    "lifeBudget006",
+    "lifeBudget007",
+    "lifeBudget008",
+    "lifeBudget009",
+    "lifeBudget010",
+    "ready006ActualJvmTermWaitsMainOwnerAndNeverSelfExits",
+    "ready004BorrowedDelegatesStopGuardAndActualDeliveryPreserved",
+    "ready005HealthFailureInterruptedAndNormalStopDistinct",
+    "ready006HookWaitsOuterOwnerAndRestoresInterrupt"
+  ],
+  "reviewIds": [
+    "REV-API-CALLER001",
+    "REV-API-CALLER002",
+    "REV-API-CALLER003",
+    "REV-API-CALLER004",
+    "REV-API-CALLER005",
+    "REV-API-CALLER006",
+    "REV-API-CALLER007",
+    "REV-API-CALLER008",
+    "REV-API-CALLER009",
+    "REV-API-CALLER010",
+    "REV-API-CALLER011",
+    "REV-API-CALLER012",
+    "REV-API-CALLER013",
+    "REV-API-CALLER014"
+  ],
+  "existingOracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/305_NK-OPS-001_API管理ready・所有寿命単体テスト仕様書.md",
+      "sha256": "6f651d4423edc237f2dad505e62aa066be92ea7145b2775f526e26b6adc9956f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1872_APILifetimeBudget_限定製造・単体仕様.md",
+      "sha256": "27d0dd72ea4d86ac6dde7018d8157f65567ae6fad786a2e4bd8b3e1de9f99b66"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/3633_API停止通知一体化_独立PT仕様.md",
+      "sha256": "fd61771d82be70f727b97a2f7bb78af9c688d16d99356a951dbadd39e1e90acf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/3634_API停止通知一体化_実行結果.md",
+      "sha256": "b6854bfd4cdfd64ad3e480eb079e79503be775b3709f46353ed626550f56419e"
+    }
+  ],
+  "helperSourceOnly": [
+    "event",
+    "HookDriver.main"
+  ],
+  "legacyReady006Subcases": {
+    "TERM": "ready006ActualJvmTermWaitsMainOwnerAndNeverSelfExits",
+    "HOOK": "ready006HookWaitsOuterOwnerAndRestoresInterrupt"
+  },
+  "callerNewPendingIds": [
+    "PT-OPS-API-STOP-OWNER001",
+    "PT-OPS-API-STOP-OWNER002",
+    "PT-OPS-API-STOP-OWNER003"
+  ],
+  "testStatus": "NOT_RUN_HOLD",
+  "compileAndProductInvocations": 0,
+  "productTestsExecuted": 0,
+  "newProductTests": 0,
+  "newSourceProofs": 0,
+  "newAcceptance": 0,
+  "coverage": null,
+  "ptExecutionExempt": false,
+  "bugsRemainOpen": [
+    "BUG-2416",
+    "YKT-2161"
+  ],
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null
+}
