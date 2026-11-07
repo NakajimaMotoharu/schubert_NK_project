@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 /** SS342352 / PT-OPS-NWEB-STOP001..006. Independent literal 30s/phase/UNKNOWN oracle. */
 final class WebRuntimeStopTest {
+  private static final String EXPECTED_STOP_FAILURE = "Web stop unconfirmed";
   private static final String FIXTURE_HTTP_DA90D362 = "HTTP";
   private static final String FIXTURE_BROKER_4F6E4F9C = "broker";
 
@@ -54,7 +55,7 @@ final class WebRuntimeStopTest {
                         throw new AssertionError("expired wrapped budget retains later resource");
                       }
                     }));
-    assertEquals("Web stop unconfirmed", failure.getMessage());
+    assertEquals(EXPECTED_STOP_FAILURE, failure.getMessage());
     assertNull(failure.getCause());
   }
 
@@ -103,7 +104,7 @@ final class WebRuntimeStopTest {
       }
     };
     var failure = assertThrows(IOException.class, () -> owner.close(failed));
-    assertEquals("Web stop unconfirmed", failure.getMessage());
+    assertEquals(EXPECTED_STOP_FAILURE, failure.getMessage());
     assertNull(failure.getCause());
     assertEquals(0, failure.getSuppressed().length);
     clock.set(5_000_000_000L);
@@ -148,7 +149,7 @@ final class WebRuntimeStopTest {
                         throw new AssertionError("deadline exhausted before next phase");
                       }
                     }));
-    assertEquals("Web stop unconfirmed", error.getMessage());
+    assertEquals(EXPECTED_STOP_FAILURE, error.getMessage());
     assertNull(error.getCause());
   }
 
@@ -167,7 +168,7 @@ final class WebRuntimeStopTest {
       };
       for (int attempt = 0; attempt < 2; attempt++) {
         var failure = assertThrows(IOException.class, () -> owner.close(steps));
-        assertEquals("Web stop unconfirmed", failure.getMessage());
+        assertEquals(EXPECTED_STOP_FAILURE, failure.getMessage());
         assertNull(failure.getCause());
       }
       assertEquals(2, calls.get());

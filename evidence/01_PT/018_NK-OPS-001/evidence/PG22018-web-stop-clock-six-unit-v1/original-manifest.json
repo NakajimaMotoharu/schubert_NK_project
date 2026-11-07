@@ -1,0 +1,301 @@
+{
+  "actualExit": 0,
+  "status": "CHANGED_SOURCE_SIX_CASES_FOUR_COUNTERS100",
+  "atJST": "2026-11-07T09:16:51.537678+09:00",
+  "source": "54d5c19da0117db49edff7b5ae46207fdee59acc",
+  "productionCoreMain": "54d5c19da0117db49edff7b5ae46207fdee59acc",
+  "begin": {
+    "atJST": "2026-11-07T09:16:48.884274+09:00",
+    "mode": "full",
+    "source": "54d5c19da0117db49edff7b5ae46207fdee59acc",
+    "productionCoreMain": "54d5c19da0117db49edff7b5ae46207fdee59acc",
+    "normalManifest": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22012-web-stop-clock-six-main-compile-v1/manifest.safe.json",
+      "sha256": "e91d5a386618f7fc8f3fe374be760451b57bfc4d620de40a76771800d4845640"
+    },
+    "inputHashes": {
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop.java": "f050814abef82cd0d2b02b4767b827348f3d111b8cfb02756e8f77f7db09d0be",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest.java": "92be3afc905bf8698e8d148c99f34cc68b1429a26d6f15f804d8299f734d4cdb",
+      "evidence/01_PT/018_NK-OPS-001/input/158_web_stop_signed_clock_qualifier.py": "f24579abb631690a7c38197184ddd2331506d372587384d86dede78f9eaad6ee"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22012-web-stop-clock-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": "eade2a5ce52032c632f97b947e5d7e4f7b77d0e6cdfd70bf6e3d27c1a8d3bd5e",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/tomcat/embed/tomcat-embed-core/11.0.25/tomcat-embed-core-11.0.25.jar": "282b65b9fe43647b1459c0df11101f8599a58de5832075acff485c3705ba4894",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "testSelection": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+    "independence": "Whole original Test, only lambdas/AtomicLong/JDK exceptions; SessionStoreException graph walk, no external operations; Tomcat LifecycleException value only",
+    "testsExpected": 6,
+    "scope": "WebRuntimeStop whole source and all original five tests plus one new independent vector",
+    "noOldExecUnion": true,
+    "manualCoverageExclusions": []
+  },
+  "stages": {
+    "compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T00:16:48.887000+00:00",
+      "endUTC": "2026-11-07T00:16:49.653607+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22012-web-stop-clock-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/tomcat/embed/tomcat-embed-core/11.0.25/tomcat-embed-core-11.0.25.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22018-web-stop-clock-six-unit-v1/classes",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "exception-metadata": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T00:16:49.653934+00:00",
+      "endUTC": "2026-11-07T00:16:49.919085+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/tomcat/embed/tomcat-embed-core/11.0.25/tomcat-embed-core-11.0.25.jar",
+        "-c",
+        "-p",
+        "org.apache.catalina.LifecycleException"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "a90096d3c86bcd0c1fbdde56cc057b59fa2b48e9ebe8693a59e17b194a1f90cc",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T00:16:49.919551+00:00",
+      "endUTC": "2026-11-07T00:16:51.086753+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22018-web-stop-clock-six-unit-v1/tmp",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22018-web-stop-clock-six-unit-v1/class-init.log",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg22018-web-stop-clock-six-unit-v1/jacoco.exec,sessionid=PG22018-web-stop-clock-six-unit-v1-WEBSTOP,append=false",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22018-web-stop-clock-six-unit-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22012-web-stop-clock-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/tomcat/embed/tomcat-embed-core/11.0.25/tomcat-embed-core-11.0.25.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22018-web-stop-clock-six-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "7606d9de61fc80a990e91f47572eede64d333719d28b32c117cf08d545e4eead",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T00:16:51.091847+00:00",
+      "endUTC": "2026-11-07T00:16:51.256730+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22018-web-stop-clock-six-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22018-web-stop-clock-six-unit-v1/component",
+        "--sourcefiles",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/main/java",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22018-web-stop-clock-six-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "d68cc63cb1a36cf027ce2febdc38bc5a4042242b9ab09468828f1924f2f70c17",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T00:16:51.257033+00:00",
+      "endUTC": "2026-11-07T00:16:51.371985+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22018-web-stop-clock-six-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "7f6b243246eca26f4c3e0655303062c0602b770c272c2e41e2551b4ee3aa6041",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-07T00:16:51.372278+00:00",
+      "endUTC": "2026-11-07T00:16:51.537093+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22018-web-stop-clock-six-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "2ce97d23183362da2efc007d49343dfa8e530529713d850d59380b810a557b89",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "tests": 6,
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+      "name": "stop006SignedClockWrapKeepsRelativeBudgetAndDetectsExpiry()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+      "name": "stop004LifecycleAndRuntimeFailuresRemainFixedAndDoNotAdvance()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+      "name": "stop003DeadlineBoundaryDoesNotExtendAndExpiredRemainingIsZero()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+      "name": "stop001NormalPhaseOrderAndRepeatedCloseNeverReleaseTwice()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+      "name": "stop005FatalIdentityDirectAndNestedNeverTurnsIntoNormalStop()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+      "name": "stop002UnknownPhaseRetainsLaterResourcesAndRetryUsesOriginalDeadline()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop$Step": "652c71d1a8ff8d4ad7a09927180da2dc5095ce854ccc208c850b2f2b8ae672d5",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop": "d54cf206508e5cbe38797fddb60f21e9ca9843a650ef4440fb5b2fa8c82e6498"
+  },
+  "coverage": {
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop$Step": {},
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop": {
+      "INSTRUCTION": {
+        "covered": 71,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 4,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 16,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 5,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "fourCounters": {
+    "LINE": {
+      "covered": 16,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 3,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 4,
+      "missed": 0
+    }
+  },
+  "productInitialised": [
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d0c8c08",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d134c00",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d138000",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d138230",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d138458",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d1388f0",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d138b18",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d138d48",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d138f78",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d1391a8",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d1393d0",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d139600",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d139830",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d139a58",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d139c80",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d13a800",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d13aa30",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d13ac60",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d184000",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d184230",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d184460",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d184690",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d1848b8",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d184ae8",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d184d18",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d184f48",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d185178",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d1853a8",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d1855d0",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d1857f8",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d185a20",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d185c50",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest$$Lambda+0x000000006d185e80",
+    "dev/codex/schubert/nk/web/session/SessionStoreException"
+  ],
+  "heldFourInitialisations": 0,
+  "newUniqueMethods": 1,
+  "requalifiedExistingMethods": 5,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null
+}

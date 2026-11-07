@@ -1,0 +1,45 @@
+{
+  "actualExit": 0,
+  "metadataOnly": true,
+  "rawExit": 4,
+  "findings": [
+    {
+      "tool": "pmd.xml",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop.java",
+      "attributes": {
+        "beginline": "35",
+        "endline": "35",
+        "begincolumn": "71",
+        "endcolumn": "87",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "class": "WebRuntimeStop",
+        "method": "close",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "priority": "3"
+      },
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "tool": "pmd.xml",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest.java",
+      "attributes": {
+        "beginline": "57",
+        "endline": "57",
+        "begincolumn": "18",
+        "endcolumn": "40",
+        "rule": "AvoidDuplicateLiterals",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "class": "WebRuntimeStopTest",
+        "method": "stop006SignedClockWrapKeepsRelativeBudgetAndDetectsExpiry",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals",
+        "priority": "3"
+      },
+      "message": "The String literal \"Web stop unconfirmed\" appears 4 times in this file; the first occurrence is on line 57"
+    }
+  ],
+  "productExecuted": 0,
+  "styleEngineReexecuted": 0
+}
