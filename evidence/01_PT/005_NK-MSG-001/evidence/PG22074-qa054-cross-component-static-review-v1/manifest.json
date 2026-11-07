@@ -1,0 +1,77 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-07T09:40:26.900056+09:00",
+  "source": "fb9eb3b28c7b7e182a37d9c26977f2f6df10f10d",
+  "productionCoreMain": "54d5c19da0117db49edff7b5ae46207fdee59acc",
+  "normalManifestSha256": "e91d5a386618f7fc8f3fe374be760451b57bfc4d620de40a76771800d4845640",
+  "mainBodiesReviewed": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java"
+  ],
+  "helperReviewScope": "Exact helper methods and code spans in030; no whole Test body review inferred",
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java": "f5aebc2691f9fe089be0f808962edcf9e639233b89b38a95a062661f43116b00",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java": "9ce1a469cbe242ba480fb6cc474bea4842b84466ef35d5ff4cf7cfca3f16e5e2",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java": "8ea171d65f2229f41fc033dff6a66078159d9761106d7b1d264a83a421879036",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java": "cf74fa263488cf9ae7c3199724630c735dd4b35c26b7fb20152883979773d1f5",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/HttpRequestLoggingValve.java": "19af893a76f867e565339218b60043d667f745d494df1085916036f6c3f0a66f",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java": "f6f2729a533843f568d254ebbae1a17cf575c4570b2ab307023ff54154b9475c",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java": "f26a85c85d5ee4ed11e548d25a684956d2349a6ed1c43c0e021f6d4745c8acce",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ClosedServletSecurityFilter.java": "24abf2cf2260772671c29caaa2d84bb7f6f24d22052881615705d896ab3d2194",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java": "48a0381ddf09f251b50b4b2e7882511d0f64aa83ff7d7c9bc63efae306070d8e",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/RequestLogDetails.java": "96467f5d3475d8e2fe5fe02124ce7d8571403f9141527a87ea880c9640117aa1",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java": "017a222b4b91b48c450336f21ea5efd46ac444dbbee7274c56f5c7559d63893f",
+    "evidence/01_PT/005_NK-MSG-001/030_QA054メニュー・検索監査経路静的点検.md": "b20781deb17cf25cf26f7e50420c0d4d6f0352b3640d1e69577b88403a46bb0c"
+  },
+  "reviewIds": [
+    "REV-QA054-01",
+    "REV-QA054-02",
+    "REV-QA054-03",
+    "REV-QA054-04",
+    "REV-QA054-05",
+    "REV-QA054-06",
+    "REV-QA054-07",
+    "REV-QA054-08"
+  ],
+  "originalOracleRefs": [
+    {
+      "path": "evidence/01_PT/010_NK-ADM-001/087_QA054ログ検索成功監査writer単体仕様.md",
+      "sha256": "253a5a5ef3b65de7ca4dec46c58b3f7c1be6722752da07feb5b438b0097782fc"
+    },
+    {
+      "path": "evidence/01_PT/010_NK-ADM-001/088_QA054ログ検索成功監査writer単体結果.md",
+      "sha256": "b80224bae9f076a44599b52be69b87d5f83b5f021f46852546e39897779bbed0"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/044_QA054メニューmarker・Trace・Controller単体仕様.md",
+      "sha256": "a9b0c234aac579db26797a294ae40cffbcae740f8bfd63020d415def1637922c"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/045_QA054メニューmarker・Trace・Controller単体結果.md",
+      "sha256": "a2b7babd33f3c611dee2f39cfb3841a69e98ca16b305c6ba6e1ce225db026b14"
+    }
+  ],
+  "scopeClarification": "SSC337 is LogCleanup/SS341, not authority for QA054 success actions; original start preserved",
+  "canonicalCostOwner": "WBS-P006-03",
+  "relatedOwners": [
+    "WBS-P006-05",
+    "WBS-P010-04"
+  ],
+  "additionalBudgetPp": 0,
+  "productTestsExecuted": 0,
+  "newProductTests": 0,
+  "newSourceProofs": 0,
+  "newAcceptance": 0,
+  "coverage": null,
+  "ptExecutionExempt": false,
+  "unmeasured": [
+    "Producer encryption/outbox",
+    "API SQL duplicate and JMS ACK",
+    "Search caller snapshot/Inbox/audit transaction/rollback/concurrent replay",
+    "Actual HTTP/CHR/native/whole451"
+  ],
+  "formalUpdated": false,
+  "effortRate": null
+}
