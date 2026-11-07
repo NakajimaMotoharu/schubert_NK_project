@@ -1,0 +1,7 @@
+# Storage所有同期・二期限の製造／静的代替仕様
+
+F03/411451/SS311333341343352354、原2/5/9pp cap10、IMPLEMENTATION/ADDITIONAL_FINDING。BUG2455/YKT2193のprivate FD複合critical section一つをprivate final ReentrantLockへ。公開monitor四oracle・live集合更新/ネイティブ呼出し/例外伝播/return位置は保持。lock取得後必ずfinally unlockし、monitor同様にnativeとbookkeepingを一つの排他範囲にする。
+
+BUG2456/YKT2194のChildDirectoryPublication Future.getとLinuxStartupAdmission invokeAllだけ10SECONDSへ。同じ入力/fixture/expected/assertを保ち、cancel/exceptionを成功扱いしない。invokeAll(timeout)正常return後のFutureはdone又はcancelledなので既future.getは別の未完待機ではない。Java25公式ExecutorService APIを独立根拠に記録する。Executor.closeや取消不能nativeの真正終了は未証明、元Test runtimeHOLDを維持。
+
+元三source・current29/89・既分類24の全hashを凍結。formatとown parse-only tool、当三sourceのPMD/Checkstyleのみ実行し、元Test compile/run/fixture生成/native/Root/実FS/VM/DB0。別postで逆token全復元、lock finally範囲/期限値mutation、保持診断と既review位置hashを新sourceへ対応。source固定後の静的だけで全PT PASS/cov/実経路/451へ加算しない。想定raw89→88、分類24中修正1を除いた23、未分類65。数は真正XMLと独立postで確認するまで目標扱い。

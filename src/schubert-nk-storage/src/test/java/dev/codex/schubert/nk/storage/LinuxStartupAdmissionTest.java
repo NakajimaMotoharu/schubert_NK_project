@@ -22,6 +22,7 @@ import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
@@ -488,7 +489,7 @@ final class LinuxStartupAdmissionTest {
                         return null;
                       });
                 try {
-                  for (var future : executor.invokeAll(jobs)) future.get();
+                  for (var future : executor.invokeAll(jobs, 10, TimeUnit.SECONDS)) future.get();
                 } catch (InterruptedException e) {
                   Thread.currentThread().interrupt();
                   throw new IOException();

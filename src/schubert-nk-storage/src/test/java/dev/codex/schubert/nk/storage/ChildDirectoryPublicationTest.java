@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -293,7 +294,7 @@ final class ChildDirectoryPublicationTest {
                 }));
       }
       int successes = 0;
-      for (var result : results) if (result.get()) successes++;
+      for (var result : results) if (result.get(10, TimeUnit.SECONDS)) successes++;
       assertEquals(1, successes);
       int winner = Files.readAllBytes(f.path.resolve(FIXTURE_READY_CONTENT_F3A9BB35))[0];
       for (int i = 0; i < 8; i++) {

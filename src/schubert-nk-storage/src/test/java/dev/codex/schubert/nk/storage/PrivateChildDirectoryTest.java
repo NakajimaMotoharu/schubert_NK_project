@@ -24,6 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.io.TempDir;
@@ -314,6 +315,7 @@ final class PrivateChildDirectoryTest {
     final Path path;
     final OwnedTransferDirectory root;
     final Set<Integer> live = ConcurrentHashMap.newKeySet();
+    private final ReentrantLock liveLock = new ReentrantLock();
     final List<String> events = Collections.synchronizedList(new ArrayList<>());
     final Map<String, Throwable> faults = new ConcurrentHashMap<>();
     int rootFd = -1;
@@ -347,7 +349,8 @@ final class PrivateChildDirectoryTest {
                             : name;
                     if (!name.equals(FIXTURE_CLOSE_97959247)) point(point);
                     // Bookkeeping is atomic with native close/open to avoid numeric FD reuse races.
-                    synchronized (live) {
+                    liveLock.lock();
+                    try {
                       Object result;
                       try {
                         result =
@@ -362,6 +365,8 @@ final class PrivateChildDirectoryTest {
                         point(point);
                       } else if (name.startsWith("open")) assertTrue(live.add((Integer) result));
                       return result;
+                    } finally {
+                      liveLock.unlock();
                     }
                   });
       root = OwnedTransferDirectory.open(calls, path);
