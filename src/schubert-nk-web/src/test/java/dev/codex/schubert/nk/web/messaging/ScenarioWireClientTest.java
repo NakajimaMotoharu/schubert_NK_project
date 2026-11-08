@@ -497,7 +497,8 @@ class ScenarioWireClientTest {
             CLOCK,
             () -> new UUID(0, ids.incrementAndGet()),
             WAIT);
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var tasks = new ArrayList<Future<?>>();
       for (int n = 0; n < 100; n++) {
         int index = n;
@@ -520,6 +521,9 @@ class ScenarioWireClientTest {
                 }));
       }
       for (var task : tasks) task.get(10, TimeUnit.SECONDS);
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(100, seen.size());
     assertEquals(100, sent.size());

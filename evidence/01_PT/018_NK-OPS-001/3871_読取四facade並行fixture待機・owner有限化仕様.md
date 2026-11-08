@@ -1,0 +1,9 @@
+# 3871 読取四facadeの並行fixture owner有限化
+
+G03.05主/P01607・P01610・P01614関連0、REWORK原1/4/8pp cap10。既2969/2970三facade24と2973/2974Log8+Reply6、2480/2481の後続を照合済み。Mainは既実装でold6b53の成功を現7aedへ再実行したとせず、変更Testに必要な現source選択32だけ行う。元成功の確認再演ではない。
+
+BUG2526/YKT2177を修正前起票し、Animation/Music/LogSearchのArrayList<Future<?>>submit→無期限get三siteを10秒へ、Scenarioの既get10秒を維持。四fixedthreadpoolのTWR closeは途中失敗時に無期限joinし得るため、明示try/finally shutdownNow＋awaitTermination10秒/assertへ変更する。型を根拠に限定しAtomicReference等getは不変更。Scenarioの別singleexecutor/有限release5秒経路は変更対象外として残す。全他byte/token/元expectedwire/64・64・100・64並行/消去・immutable・null・例外・元Throwable・MessageID/context照合を保持し、timeoutを成功に変換しない。
+
+対象原whole Animation8/Music8/Scenario8/LogSearch8計32、製品source/仕様を変えない。全wholeTest/helperを通読し、memory callbackのsyntheticwire/enum/codec/JDKだけで実JMScontext/DB/key/Root/VM/nativeを呼ばないことと、元共通helper/Protocol正規byteの適用性をcurrentnormal22084/22086・24238で先行確認。MessageDigest.isEqualの公開合成context比較のみを開示、実暗号鍵0。不明依存があれば動的HOLD、原fixture抽出・別fixture代替禁止。
+
+format/compile/static/preflight0→source固定通常push→fresh32単exec・独立XML/現CRC/held四初期化/元全oracle逆変換/counterへ。対象四Main五physicalは元証拠で自然branch0、LMC全100/B0はN-A/nullとし非空BRANCH100のstrictgate1を保全。人工branch・manual除外・全451/正式受入0。必要ならcalleeの実counterは別に測定して主対象と混在しない。新unique0、518/Java414維持。owner後条件は正常shutdown完了をassertし、不応答/timeoutは失敗/保全、外側ownedUnit上限180秒を維持。全YKT2177は一群だけで閉鎖しない。

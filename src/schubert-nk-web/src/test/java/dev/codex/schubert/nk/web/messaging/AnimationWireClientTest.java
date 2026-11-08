@@ -39,6 +39,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -319,7 +320,8 @@ class AnimationWireClientTest {
             CLOCK,
             () -> new UUID(0, ids.incrementAndGet()),
             WAIT);
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var futures = new ArrayList<Future<?>>();
       for (int i = 0; i < 64; i++) {
         final int index = i;
@@ -338,7 +340,10 @@ class AnimationWireClientTest {
                       result.payload().orElseThrow().layoutId().value());
                 }));
       }
-      for (var future : futures) future.get();
+      for (var future : futures) future.get(10, TimeUnit.SECONDS);
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(64, observed.size());
     assertEquals(0, wire.pendingCount());
