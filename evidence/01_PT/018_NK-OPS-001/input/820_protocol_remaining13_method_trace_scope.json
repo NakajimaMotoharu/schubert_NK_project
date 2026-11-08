@@ -1,0 +1,1576 @@
+{
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "testSource": "64f3a72753434347889f0eabd5d9f9dca67c6bfb",
+  "normalProof": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG24642-protocol-whole120-independent-v1/manifest.json",
+    "sha256": "8ebe6365bc701ba6432b1b55275004024dc71bc452d31b66d31c53894e3ae128"
+  },
+  "metadataInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json",
+    "sha256": "e65782d893a5ae45309cf269d165dec33d1dc396f06b7968b62d95b276455d31"
+  },
+  "descriptorInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/artifacts.json",
+    "sha256": "fb24a1a209849d42894925002baae668bc55a4bd858b1b7c1d38ab838319bb0b"
+  },
+  "physicalIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json",
+    "sha256": "db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723"
+  },
+  "oracleDocuments": [
+    {
+      "path": "evidence/01_PT/003_NK-PRO-003/001_NK-PRO-003_単体テスト仕様書.md",
+      "sha256": "efcf77158ce01cf3c2b05f173d1a9c0c7559433ed1ccd957f63b93f9df466463"
+    }
+  ],
+  "sourcePaths": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/ContentDisposition.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultContent.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultDescriptor.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultIoException.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptor.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaType.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/package-info.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java"
+  ],
+  "cases": {
+    "LH": {
+      "caseKey": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#verificationRejectsAllThirtyTwoDigestBytePositions()",
+      "testIds": [
+        "PT-PRO-003-H01"
+      ],
+      "independentOracle": "Independent JCA SHA-256 over literal record bytes, reject each of32 independently mutated digest positions; no timing claim."
+    },
+    "LD": {
+      "caseKey": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation()",
+      "testIds": [
+        "PT-PRO-003-D01",
+        "PT-PRO-003-D02"
+      ],
+      "independentOracle": "Literal UUID/date/path/4800/count1; invalid date/path/nonASCII/length/hash/count/null and redacted diagnostic."
+    },
+    "LW": {
+      "caseKey": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#writesAndReadsHeaderlessExactRecordsWithIndependentHash()",
+      "testIds": [
+        "PT-PRO-003-L01",
+        "PT-PRO-003-L03"
+      ],
+      "independentOracle": "Independent two4800-byte records/concatenation/JCA hash, chunk37/53/zero-read fallback, immutable list."
+    },
+    "LM": {
+      "caseKey": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum()",
+      "testIds": [
+        "PT-PRO-003-L01"
+      ],
+      "independentOracle": "Literal4800*10000=48000000 and independently repeated JCA zero-record digest, count/first/last bytes; no Production constants as expected."
+    },
+    "LE": {
+      "caseKey": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#writeRejectsNullCountLengthAndIoFailure()",
+      "testIds": [
+        "PT-PRO-003-L02",
+        "PT-PRO-003-L03"
+      ],
+      "independentOracle": "Literal null/empty/10001/null element/4799 and IOException stream require fixed exception classes."
+    },
+    "LR": {
+      "caseKey": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#decodeRejectsTruncationExtraHashAndIoFailure()",
+      "testIds": [
+        "PT-PRO-003-L02",
+        "PT-PRO-003-L03"
+      ],
+      "independentOracle": "Literal4799/4801 lengths, mismatched digest/null, I/O and zeroThenEOF faults, unavailable algorithm require exact failure types."
+    },
+    "LC": {
+      "caseKey": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#contentMetadataRejectsInvalidValues()",
+      "testIds": [
+        "PT-PRO-003-D01",
+        "PT-PRO-003-D02"
+      ],
+      "independentOracle": "Literal content metadata1/4800/lowercase64, null/count0/10001/4799/nonhex invalid."
+    },
+    "MP": {
+      "caseKey": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#acceptsExactlySevenSsc004ExtensionMimePairs()",
+      "testIds": [
+        "PT-PRO-003-M01",
+        "PT-PRO-003-M02"
+      ],
+      "independentOracle": "Seven literal SSC004 extension/MIME/type/disposition pairs and descriptor accessor values/redacted path; null validate denied."
+    },
+    "MD": {
+      "caseKey": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#dispositionMapsOnlyIAndA()",
+      "testIds": [
+        "PT-PRO-003-M01"
+      ],
+      "independentOracle": "Literal I/A maps, charI, 2values/ATTACHMENT, null/inline denied."
+    },
+    "MB": {
+      "caseKey": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#utf8MaximumFieldsAndN12UseIndependentCanonicalBoundaries()",
+      "testIds": [
+        "PT-PRO-003-M04"
+      ],
+      "independentOracle": "Independent64/512/256 UTF8 byte limits and999999999999; each plus1 rejected for all7 pairs."
+    },
+    "MX": {
+      "caseKey": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#bug040StorageExtensionCannotBeHiddenByDisplayMetadata()",
+      "testIds": [
+        "PT-PRO-003-M03"
+      ],
+      "independentOracle": "Seven literal allowed pairs; missing/bin/uppercase/other allowed format/double suffix storage rejected with display extension heldvalid, diagnostic cause/suppressed/path checked."
+    },
+    "MT": {
+      "caseKey": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#rejectsNonCanonicalTextPathsNamesSizesAndHashes()",
+      "testIds": [
+        "PT-PRO-003-M01"
+      ],
+      "independentOracle": "Independent empty/nonNFC/controls/dotsegments/slashes/prefix/UTF8/quotes/0/N12overflow/uppercasehash invalid inputs."
+    },
+    "MM": {
+      "caseKey": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#rejectsEveryMimeCrossProductAndVideoAttachment()",
+      "testIds": [
+        "PT-PRO-003-M02"
+      ],
+      "independentOracle": "Wrong audio/video/music extension/MIME literal pairs, uppercase/noextension and video attachment denied."
+    },
+    "MN": {
+      "caseKey": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#constructorRejectsNullComponents()",
+      "testIds": [
+        "PT-PRO-003-M01"
+      ],
+      "independentOracle": "Each nonnull descriptor component individually null; no actual file IO."
+    },
+    "TF": {
+      "caseKey": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest#formatsAndParsesStrictJstMilliseconds()",
+      "testIds": [
+        "PT-PRO-003-T01",
+        "PT-PRO-003-T02"
+      ],
+      "independentOracle": "Literal Instant2026-09-02T03:34:56.789Z <->20260902123456789, leapday literal; null/nonmillis/16/18/nondigit/invaliddate rejected."
+    },
+    "TY": {
+      "caseKey": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest#bug037ExpandedYearsAndUnrepresentableInstantsAreRejected()",
+      "testIds": [
+        "PT-PRO-003-T03"
+      ],
+      "independentOracle": "Independent IANA LMT15821005000859000 plus0000/9999 boundary; expanded/signed years and InstantMIN/MAX rejected without cause."
+    },
+    "TH": {
+      "caseKey": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest#bug037HeaderSenderRejectsBadTimeAndPreservesAdjacentContext()",
+      "testIds": [
+        "PT-PRO-003-T04"
+      ],
+      "independentOracle": "Independent header offset96/17timestamp and113/64context remain correct; invalid instants fail before output with fixed cause."
+    },
+    "TD": {
+      "caseKey": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest#bug037RequiredAndOptionalDataSendersRejectBadTime()",
+      "testIds": [
+        "PT-PRO-003-T05"
+      ],
+      "independentOracle": "Independent numeric99991231235959999/text/Unset expectations, required/optional badTime paths denied."
+    },
+    "BP": {
+      "caseKey": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest#sixDestinationsMatchTheIndependentPhysicalAndLimitOracle()",
+      "testIds": [
+        "PT-JMS-002",
+        "PT-JMS-005"
+      ],
+      "independentOracle": "Six independent literal destinations/queue/FQQN/bodylimits1000000,1000,10000 andTTL5000,10000,0, exact order and lookup."
+    },
+    "BN": {
+      "caseKey": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest#nullUnknownAndNearMatchAddressesAreDenied()",
+      "testIds": [
+        "PT-JMS-002",
+        "PT-JMS-005"
+      ],
+      "independentOracle": "null/queue-name/trailing-space are rejected as addresses without broker connection."
+    },
+    "I9": {
+      "caseKey": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest#iso009PrimaryAndProtocolAreRequired()",
+      "testIds": [
+        "PT-JMS-ISO009"
+      ],
+      "independentOracle": "Individually null primary/protocol denied."
+    },
+    "I10": {
+      "caseKey": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest#iso010SameNodeIsRetainedWithoutSelfSuppression()",
+      "testIds": [
+        "PT-JMS-ISO010"
+      ],
+      "independentOracle": "Same throwable identity cause and zero suppressed; literal sanitized message."
+    },
+    "I11": {
+      "caseKey": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest#iso011EqualsTrueDoesNotHideDistinctProtocolIdentity()",
+      "testIds": [
+        "PT-JMS-ISO011"
+      ],
+      "independentOracle": "equals true but distinct identities retained as cause and exact suppressed array."
+    },
+    "I12": {
+      "caseKey": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest#iso012DisabledPrimarySuppressionCannotHideProtocol()",
+      "testIds": [
+        "PT-JMS-ISO012"
+      ],
+      "independentOracle": "Disabled primary suppression cannot hide protocol retained on wrapper; exact array."
+    },
+    "U5": {
+      "caseKey": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest#primaryAndRollbackMustBothBePresent()",
+      "testIds": [
+        "PT-JMS-UNC005"
+      ],
+      "independentOracle": "Each null primary/rollback denied."
+    },
+    "U6": {
+      "caseKey": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest#sameNodeIsRetainedOnceWithoutSelfSuppression()",
+      "testIds": [
+        "PT-JMS-UNC006"
+      ],
+      "independentOracle": "Same-node identity/no selfsuppression/literal sanitized message."
+    },
+    "U7": {
+      "caseKey": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest#distinctEqualValuedNodesAreBothRetained()",
+      "testIds": [
+        "PT-JMS-UNC007"
+      ],
+      "independentOracle": "Equal-valued distinct identities remain cause/exact suppressed identity."
+    },
+    "U8": {
+      "caseKey": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest#disabledPrimarySuppressionDoesNotHideRollbackFailure()",
+      "testIds": [
+        "PT-JMS-UNC008"
+      ],
+      "independentOracle": "Suppression-disabled primary still retained with rollback exact array on wrapper."
+    }
+  },
+  "methodRules": {
+    "ContentDisposition": {
+      "<init>": {
+        "cases": [
+          "MD"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8",
+          "323"
+        ],
+        "contract": "Closed I/A disposition and exact invalid/null rejection.",
+        "staticPath": "ContentDisposition.<init> source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "wireValue": {
+        "cases": [
+          "MD"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8",
+          "323"
+        ],
+        "contract": "Closed I/A disposition and exact invalid/null rejection.",
+        "staticPath": "ContentDisposition.wireValue source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "fromWire": {
+        "cases": [
+          "MD"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8",
+          "323"
+        ],
+        "contract": "Closed I/A disposition and exact invalid/null rejection.",
+        "staticPath": "ContentDisposition.fromWire source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "<clinit>": {
+        "cases": [
+          "MD"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8",
+          "323"
+        ],
+        "contract": "Closed I/A disposition and exact invalid/null rejection.",
+        "staticPath": "ContentDisposition.<clinit> source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      }
+    },
+    "LargeResultContent": {
+      "<init>": {
+        "cases": [
+          "LC",
+          "LW",
+          "LM"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6",
+          "237 §4～6"
+        ],
+        "contract": "Count/size/hash metadata invariant with literal boundary and JCA expected hash.",
+        "staticPath": "LargeResultContent.<init> source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "<clinit>": {
+        "cases": [
+          "LC",
+          "LW",
+          "LM"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6",
+          "237 §4～6"
+        ],
+        "contract": "Count/size/hash metadata invariant with literal boundary and JCA expected hash.",
+        "staticPath": "LargeResultContent.<clinit> source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      }
+    },
+    "LargeResultDescriptor": {
+      "<init>": {
+        "cases": [
+          "LD",
+          "LM"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6",
+          "237 §5"
+        ],
+        "contract": "Canonical dated UUID.ready path,4800*count,length/hash limits/accessors/redacted diagnostics.",
+        "staticPath": "LargeResultDescriptor.<init> source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "fileId": {
+        "cases": [
+          "LD",
+          "LM"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6",
+          "237 §5"
+        ],
+        "contract": "Canonical dated UUID.ready path,4800*count,length/hash limits/accessors/redacted diagnostics.",
+        "staticPath": "LargeResultDescriptor.fileId source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "relativePath": {
+        "cases": [
+          "LD",
+          "LM"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6",
+          "237 §5"
+        ],
+        "contract": "Canonical dated UUID.ready path,4800*count,length/hash limits/accessors/redacted diagnostics.",
+        "staticPath": "LargeResultDescriptor.relativePath source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "byteLength": {
+        "cases": [
+          "LD",
+          "LM"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6",
+          "237 §5"
+        ],
+        "contract": "Canonical dated UUID.ready path,4800*count,length/hash limits/accessors/redacted diagnostics.",
+        "staticPath": "LargeResultDescriptor.byteLength source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "sha256": {
+        "cases": [
+          "LD",
+          "LM"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6",
+          "237 §5"
+        ],
+        "contract": "Canonical dated UUID.ready path,4800*count,length/hash limits/accessors/redacted diagnostics.",
+        "staticPath": "LargeResultDescriptor.sha256 source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "recordLength": {
+        "cases": [
+          "LD",
+          "LM"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6",
+          "237 §5"
+        ],
+        "contract": "Canonical dated UUID.ready path,4800*count,length/hash limits/accessors/redacted diagnostics.",
+        "staticPath": "LargeResultDescriptor.recordLength source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "recordCount": {
+        "cases": [
+          "LD",
+          "LM"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6",
+          "237 §5"
+        ],
+        "contract": "Canonical dated UUID.ready path,4800*count,length/hash limits/accessors/redacted diagnostics.",
+        "staticPath": "LargeResultDescriptor.recordCount source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "toString": {
+        "cases": [
+          "LD",
+          "LM"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6",
+          "237 §5"
+        ],
+        "contract": "Canonical dated UUID.ready path,4800*count,length/hash limits/accessors/redacted diagnostics.",
+        "staticPath": "LargeResultDescriptor.toString source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "validatePath": {
+        "cases": [
+          "LD",
+          "LM"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6",
+          "237 §5"
+        ],
+        "contract": "Canonical dated UUID.ready path,4800*count,length/hash limits/accessors/redacted diagnostics.",
+        "staticPath": "LargeResultDescriptor.validatePath source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "lambda$validatePath$0": {
+        "cases": [
+          "LD",
+          "LM"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6",
+          "237 §5"
+        ],
+        "contract": "Canonical dated UUID.ready path,4800*count,length/hash limits/accessors/redacted diagnostics.",
+        "staticPath": "LargeResultDescriptor.lambda$validatePath$0 source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "<clinit>": {
+        "cases": [
+          "LD",
+          "LM"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6",
+          "237 §5"
+        ],
+        "contract": "Canonical dated UUID.ready path,4800*count,length/hash limits/accessors/redacted diagnostics.",
+        "staticPath": "LargeResultDescriptor.<clinit> source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      }
+    },
+    "LargeResultIoException": {
+      "<init>": {
+        "cases": [
+          "LE",
+          "LR"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6"
+        ],
+        "contract": "Write/read IOException translated to the dedicated unchecked IO exception; cause retained by source constructor.",
+        "staticPath": "LargeResultIoException.<init> source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      }
+    },
+    "LargeResultRecordCodec": {
+      "write": {
+        "cases": [
+          "LW",
+          "LM",
+          "LE"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6",
+          "237 §4～6"
+        ],
+        "contract": "Exact record write,count/length/null constraints,JCA SHA256 and IO mapping.",
+        "staticPath": "LargeResultRecordCodec.write source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "decode": {
+        "cases": [
+          "LW",
+          "LM",
+          "LR",
+          "LH"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6",
+          "237 §4～6"
+        ],
+        "contract": "Exact short/zero-read loop, EOF/extra/hash failure and immutable results with independent byte oracle.",
+        "staticPath": "LargeResultRecordCodec.decode source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "readExact": {
+        "cases": [
+          "LW",
+          "LM",
+          "LR",
+          "LH"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6",
+          "237 §4～6"
+        ],
+        "contract": "Exact short/zero-read loop, EOF/extra/hash failure and immutable results with independent byte oracle.",
+        "staticPath": "LargeResultRecordCodec.readExact source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "sha256Digest": {
+        "cases": [
+          "LW",
+          "LM",
+          "LR",
+          "LH"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6"
+        ],
+        "contract": "Caller write/decode uses SHA-256; expected hash calculated independently by test JCA.",
+        "staticPath": "LargeResultRecordCodec.sha256Digest source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "digestFor": {
+        "cases": [
+          "LR",
+          "LW"
+        ],
+        "relatedRd": [
+          "FIL-001",
+          "FIL-002",
+          "FIL-003",
+          "FIL-004",
+          "FIL-005",
+          "FIL-006",
+          "FIL-007",
+          "FIL-008",
+          "FIL-009"
+        ],
+        "ssSections": [
+          "333 §6"
+        ],
+        "contract": "JCA digest provider lookup and explicitly invalid algorithm failure.",
+        "staticPath": "LargeResultRecordCodec.digestFor source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      }
+    },
+    "MediaDescriptor": {
+      "<init>": {
+        "cases": [
+          "MP",
+          "MB",
+          "MN",
+          "MT",
+          "MM",
+          "MX"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8",
+          "323"
+        ],
+        "contract": "Nonnull fields then canonical/MIME validation, independent literal boundaries and cross-product failures.",
+        "staticPath": "MediaDescriptor.<init> source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "mediaType": {
+        "cases": [
+          "MP",
+          "MB"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8",
+          "323"
+        ],
+        "contract": "Literal descriptor component accessors and path/name/hash redacted diagnostics.",
+        "staticPath": "MediaDescriptor.mediaType source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "logicalId": {
+        "cases": [
+          "MP",
+          "MB"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8",
+          "323"
+        ],
+        "contract": "Literal descriptor component accessors and path/name/hash redacted diagnostics.",
+        "staticPath": "MediaDescriptor.logicalId source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "storageRelativePath": {
+        "cases": [
+          "MP",
+          "MB"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8",
+          "323"
+        ],
+        "contract": "Literal descriptor component accessors and path/name/hash redacted diagnostics.",
+        "staticPath": "MediaDescriptor.storageRelativePath source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "fileName": {
+        "cases": [
+          "MP",
+          "MB"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8",
+          "323"
+        ],
+        "contract": "Literal descriptor component accessors and path/name/hash redacted diagnostics.",
+        "staticPath": "MediaDescriptor.fileName source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "byteLength": {
+        "cases": [
+          "MP",
+          "MB"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8",
+          "323"
+        ],
+        "contract": "Literal descriptor component accessors and path/name/hash redacted diagnostics.",
+        "staticPath": "MediaDescriptor.byteLength source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "sha256": {
+        "cases": [
+          "MP",
+          "MB"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8",
+          "323"
+        ],
+        "contract": "Literal descriptor component accessors and path/name/hash redacted diagnostics.",
+        "staticPath": "MediaDescriptor.sha256 source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "mimeType": {
+        "cases": [
+          "MP",
+          "MB"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8",
+          "323"
+        ],
+        "contract": "Literal descriptor component accessors and path/name/hash redacted diagnostics.",
+        "staticPath": "MediaDescriptor.mimeType source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "disposition": {
+        "cases": [
+          "MP",
+          "MB"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8",
+          "323"
+        ],
+        "contract": "Literal descriptor component accessors and path/name/hash redacted diagnostics.",
+        "staticPath": "MediaDescriptor.disposition source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "toString": {
+        "cases": [
+          "MP",
+          "MB"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8",
+          "323"
+        ],
+        "contract": "Literal descriptor component accessors and path/name/hash redacted diagnostics.",
+        "staticPath": "MediaDescriptor.toString source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      }
+    },
+    "MediaDescriptorValidator": {
+      "validate": {
+        "cases": [
+          "MP",
+          "MB",
+          "MT",
+          "MM",
+          "MX"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8",
+          "323"
+        ],
+        "contract": "Canonical text,path,size,N12,lowercaseSHA and MIME allowlist checks.",
+        "staticPath": "MediaDescriptorValidator.validate source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "validateStoragePath": {
+        "cases": [
+          "MP",
+          "MB",
+          "MT"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8"
+        ],
+        "contract": "Relative canonical storage path/prefix, dot-segment and byte bounds.",
+        "staticPath": "MediaDescriptorValidator.validateStoragePath source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "hasDotSegment": {
+        "cases": [
+          "MP",
+          "MB",
+          "MT"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8"
+        ],
+        "contract": "Relative canonical storage path/prefix, dot-segment and byte bounds.",
+        "staticPath": "MediaDescriptorValidator.hasDotSegment source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "validateFileName": {
+        "cases": [
+          "MP",
+          "MB",
+          "MT"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8"
+        ],
+        "contract": "NFC/control/UTF8/trailing-space and quote/slash filename boundaries.",
+        "staticPath": "MediaDescriptorValidator.validateFileName source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "validateCanonicalText": {
+        "cases": [
+          "MP",
+          "MB",
+          "MT"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8"
+        ],
+        "contract": "NFC/control/UTF8/trailing-space and quote/slash filename boundaries.",
+        "staticPath": "MediaDescriptorValidator.validateCanonicalText source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "validateMime": {
+        "cases": [
+          "MP",
+          "MM",
+          "MX"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8"
+        ],
+        "contract": "Seven exact MIME/extension pairs, storage/display extension consistency/video inline.",
+        "staticPath": "MediaDescriptorValidator.validateMime source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "extension": {
+        "cases": [
+          "MP",
+          "MM",
+          "MX"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8"
+        ],
+        "contract": "Seven exact MIME/extension pairs, storage/display extension consistency/video inline.",
+        "staticPath": "MediaDescriptorValidator.extension source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "<clinit>": {
+        "cases": [
+          "MP",
+          "MB",
+          "MT"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8"
+        ],
+        "contract": "Literal hash pattern and5 music MIME pairs initialized through validation.",
+        "staticPath": "MediaDescriptorValidator.<clinit> source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      }
+    },
+    "MediaType": {
+      "<clinit>": {
+        "cases": [
+          "MP"
+        ],
+        "relatedRd": [
+          "MSG-F01",
+          "MSG-F02",
+          "MSG-F03",
+          "MSG-F04",
+          "MSG-F05",
+          "MSG-F06",
+          "MSG-F07",
+          "MSG-F08",
+          "MSG-F09"
+        ],
+        "ssSections": [
+          "333 §8"
+        ],
+        "contract": "Closed AUDIO/VIDEO/MUSIC types checked by literal3size andmusic value lookup.",
+        "staticPath": "MediaType.<clinit> source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      }
+    },
+    "JstWireTimestamp": {
+      "format": {
+        "cases": [
+          "TF",
+          "TY",
+          "TH",
+          "TD"
+        ],
+        "relatedRd": [
+          "MQ-035"
+        ],
+        "ssSections": [
+          "322 §4.2",
+          "232 §3"
+        ],
+        "contract": "Strict17ASCII JST milliseconds including LMT/year bounds, fixed timestamps and invalid-format contracts.",
+        "staticPath": "JstWireTimestamp.format source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "parse": {
+        "cases": [
+          "TF",
+          "TY",
+          "TH",
+          "TD"
+        ],
+        "relatedRd": [
+          "MQ-035"
+        ],
+        "ssSections": [
+          "322 §4.2",
+          "232 §3"
+        ],
+        "contract": "Strict17ASCII JST milliseconds including LMT/year bounds, fixed timestamps and invalid-format contracts.",
+        "staticPath": "JstWireTimestamp.parse source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "<clinit>": {
+        "cases": [
+          "TF",
+          "TY",
+          "TH",
+          "TD"
+        ],
+        "relatedRd": [
+          "MQ-035"
+        ],
+        "ssSections": [
+          "322 §4.2",
+          "232 §3"
+        ],
+        "contract": "Strict17ASCII JST milliseconds including LMT/year bounds, fixed timestamps and invalid-format contracts.",
+        "staticPath": "JstWireTimestamp.<clinit> source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      }
+    },
+    "BrokerTopology": {
+      "<init>": {
+        "cases": [
+          "BP"
+        ],
+        "relatedRd": [
+          "MQ-008",
+          "MQ-010"
+        ],
+        "ssSections": [
+          "321"
+        ],
+        "contract": "Six approved literal destinations/limits/TTL/catalog order, no broker or dynamic destination.",
+        "staticPath": "BrokerTopology.<init> source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "address": {
+        "cases": [
+          "BP"
+        ],
+        "relatedRd": [
+          "MQ-008",
+          "MQ-010"
+        ],
+        "ssSections": [
+          "321"
+        ],
+        "contract": "Six approved literal destinations/limits/TTL/catalog order, no broker or dynamic destination.",
+        "staticPath": "BrokerTopology.address source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "queue": {
+        "cases": [
+          "BP"
+        ],
+        "relatedRd": [
+          "MQ-008",
+          "MQ-010"
+        ],
+        "ssSections": [
+          "321"
+        ],
+        "contract": "Six approved literal destinations/limits/TTL/catalog order, no broker or dynamic destination.",
+        "staticPath": "BrokerTopology.queue source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "fullyQualifiedQueue": {
+        "cases": [
+          "BP"
+        ],
+        "relatedRd": [
+          "MQ-008",
+          "MQ-010"
+        ],
+        "ssSections": [
+          "321"
+        ],
+        "contract": "Six approved literal destinations/limits/TTL/catalog order, no broker or dynamic destination.",
+        "staticPath": "BrokerTopology.fullyQualifiedQueue source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "maximumBodyLength": {
+        "cases": [
+          "BP"
+        ],
+        "relatedRd": [
+          "MQ-008",
+          "MQ-010"
+        ],
+        "ssSections": [
+          "321"
+        ],
+        "contract": "Six approved literal destinations/limits/TTL/catalog order, no broker or dynamic destination.",
+        "staticPath": "BrokerTopology.maximumBodyLength source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "timeToLiveMillis": {
+        "cases": [
+          "BP"
+        ],
+        "relatedRd": [
+          "MQ-008",
+          "MQ-010"
+        ],
+        "ssSections": [
+          "321"
+        ],
+        "contract": "Six approved literal destinations/limits/TTL/catalog order, no broker or dynamic destination.",
+        "staticPath": "BrokerTopology.timeToLiveMillis source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "expirationRequired": {
+        "cases": [
+          "BP"
+        ],
+        "relatedRd": [
+          "MQ-008",
+          "MQ-010"
+        ],
+        "ssSections": [
+          "321"
+        ],
+        "contract": "Six approved literal destinations/limits/TTL/catalog order, no broker or dynamic destination.",
+        "staticPath": "BrokerTopology.expirationRequired source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "<clinit>": {
+        "cases": [
+          "BP"
+        ],
+        "relatedRd": [
+          "MQ-008",
+          "MQ-010"
+        ],
+        "ssSections": [
+          "321"
+        ],
+        "contract": "Six approved literal destinations/limits/TTL/catalog order, no broker or dynamic destination.",
+        "staticPath": "BrokerTopology.<clinit> source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      },
+      "requireAddress": {
+        "cases": [
+          "BP",
+          "BN"
+        ],
+        "relatedRd": [
+          "MQ-008",
+          "MQ-010"
+        ],
+        "ssSections": [
+          "321"
+        ],
+        "contract": "Exact approved address lookup; null/unknown/queue-name/trailing-space denied.",
+        "staticPath": "BrokerTopology.requireAddress source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      }
+    },
+    "FailedJmsIsolationException": {
+      "<init>": {
+        "cases": [
+          "I9",
+          "I10",
+          "I11",
+          "I12"
+        ],
+        "relatedRd": [
+          "MQ-008",
+          "MQ-010"
+        ],
+        "ssSections": [
+          "321 §7",
+          "322 §11",
+          "352"
+        ],
+        "contract": "Nonnull failures, identity rather than equals, no selfsuppression, sanitized wrapper diagnostics.",
+        "staticPath": "FailedJmsIsolationException.<init> source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      }
+    },
+    "UnconfirmedJmsRollbackException": {
+      "<init>": {
+        "cases": [
+          "U5",
+          "U6",
+          "U7",
+          "U8"
+        ],
+        "relatedRd": [
+          "MQ-008",
+          "MQ-010"
+        ],
+        "ssSections": [
+          "321 §7",
+          "352"
+        ],
+        "contract": "Nonnull failures, identity retained including equals-true/distinct and suppression-disabled primary.",
+        "staticPath": "UnconfirmedJmsRollbackException.<init> source body and explicit helper/caller chain reviewed; case association is reference only, not per-case probe attribution."
+      }
+    }
+  },
+  "privateUtilitySources": [
+    "LargeResultRecordCodec",
+    "MediaDescriptorValidator",
+    "JstWireTimestamp"
+  ],
+  "standardSwitchClasses": [
+    "dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator$1"
+  ],
+  "standardFilterProof": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG24594-protocol-whole-denominator-v1/manifest.json",
+    "sha256": "9448c8cf89988f4d9a579ea10c433e8bad3e417c1df7709472648d1b29638dfe"
+  },
+  "ownersBySource": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/ContentDisposition.java": "WBS-P003-02",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultContent.java": "WBS-P003-01",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultDescriptor.java": "WBS-P003-01",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultIoException.java": "WBS-P003-01",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java": "WBS-P003-01",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptor.java": "WBS-P003-02",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java": "WBS-P003-02",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaType.java": "WBS-P003-02",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/package-info.java": "WBS-P003-01",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java": "WBS-P003-03",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java": "WBS-P005-01",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java": "WBS-P005-03",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java": "WBS-P005-03"
+  },
+  "standardEnumSources": [
+    "ContentDisposition",
+    "MediaType",
+    "BrokerTopology"
+  ],
+  "generatedMethods": {
+    "LargeResultContent": [
+      "toString",
+      "hashCode",
+      "equals",
+      "recordCount",
+      "byteLength",
+      "sha256"
+    ]
+  },
+  "referencesByOwner": {
+    "WBS-P003-01": {
+      "ui": [
+        "237"
+      ],
+      "ss": [
+        "333"
+      ]
+    },
+    "WBS-P003-02": {
+      "ui": [
+        "235",
+        "237"
+      ],
+      "ss": [
+        "323",
+        "333"
+      ]
+    },
+    "WBS-P003-03": {
+      "ui": [
+        "232"
+      ],
+      "ss": [
+        "322"
+      ]
+    },
+    "WBS-P005-01": {
+      "ui": [
+        "231"
+      ],
+      "ss": [
+        "321"
+      ]
+    },
+    "WBS-P005-03": {
+      "ui": [
+        "231"
+      ],
+      "ss": [
+        "321",
+        "322",
+        "352"
+      ]
+    }
+  },
+  "postBaselineExplicitOwners": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java": {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java",
+      "kind": "JAVA",
+      "module": "protocol",
+      "class": "dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException",
+      "owner": "WBS-P005-03",
+      "costOwner": "WBS-P005-03",
+      "basis": "PG23850 explicit per-source responsibility decision552 and pinned full public Main identity; no coverage/requirement acceptance.",
+      "sha256": "8b22ea28c7a14624bb86b6a8b80661460d446418b61b76c42cdbba7f7f74dfbb",
+      "acceptance": "UNASSESSED",
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java": {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java",
+      "kind": "JAVA",
+      "module": "protocol",
+      "class": "dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException",
+      "owner": "WBS-P005-03",
+      "costOwner": "WBS-P005-03",
+      "basis": "PG23850 explicit per-source responsibility decision552 and pinned full public Main identity; no coverage/requirement acceptance.",
+      "sha256": "4ca8f9a3d350557e66b026eb96753c6cac7fe14c3204fc302af86f0dd2795938",
+      "acceptance": "UNASSESSED",
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
+    }
+  }
+}
