@@ -344,7 +344,8 @@ final class NotificationListProjectionPortTest {
 
   @Test
   void parallelViewsKeepActorsSeparate() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var pending = new ArrayList<Future<NotificationListViewModel>>();
       for (int i = 0; i < 8; i++) {
         String name = READER + i;
@@ -360,6 +361,9 @@ final class NotificationListProjectionPortTest {
         assertEquals(12L, page.getRows().getFirst().get(K_ID));
         assertTrue(page.getNextHref().isEmpty());
       }
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

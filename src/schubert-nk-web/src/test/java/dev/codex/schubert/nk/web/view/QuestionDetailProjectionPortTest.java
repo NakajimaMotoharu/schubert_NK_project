@@ -191,7 +191,8 @@ final class QuestionDetailProjectionPortTest {
 
   @Test
   void parallelProjectionDoesNotLeakOwners() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var pending = new ArrayList<Future<QuestionDetailViewModel>>();
       for (int i = 0; i < 8; i++) {
         String owner = READER + i;
@@ -211,6 +212,9 @@ final class QuestionDetailProjectionPortTest {
         assertEquals("1970-01-01 09:00:00", page.getValues().get("submittedAt"));
         assertTrue(page.getValues().get(ANSWER_AVAILABLE).equals(false));
       }
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

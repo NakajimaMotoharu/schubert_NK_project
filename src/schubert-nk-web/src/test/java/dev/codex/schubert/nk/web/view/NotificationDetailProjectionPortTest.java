@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.web.view;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.layout.LayoutValidationException;
@@ -255,7 +256,8 @@ final class NotificationDetailProjectionPortTest {
 
   @Test
   void parallelProjectionKeepsActorsSeparate() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var pending = new ArrayList<Future<NotificationDetailViewModel>>();
       for (int i = 0; i < 8; i++) {
         String name = READER + i;
@@ -271,6 +273,9 @@ final class NotificationDetailProjectionPortTest {
         assertEquals(READER + i, page.getTopBar().getUsername());
         assertEquals(VECTORS.get(i % VECTORS.size()).label(), page.getValues().get(K_LABEL));
       }
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
