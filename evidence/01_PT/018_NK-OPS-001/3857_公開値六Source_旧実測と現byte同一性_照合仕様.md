@@ -1,0 +1,9 @@
+# NK-OPS-001 公開値六Source・旧実測と現byte同一性照合仕様
+
+G13.07主/G03.05関連追加費0、SOURCE_REQUALIFICATION原0.5/2/5pp cap7。先行Registry324の135宣言は元post未読の宣言だけで現在run資格ではない。今回固定PG15460元18/4suite公開postの六Main（AnswerResult、QuestionReceiptId、QuestionReceiptIdGenerator、StubAnswerProvider、RequestLogDetails、InspectorSettings）だけ、現23972の既classSHA/全physical名/Source対応との明示bridgeを作る。正対象六のclassbyte一致は着手前に既metadataで観測済み。bytecode/Source識別を再生成しない。
+
+原source6b53の18成功とcounterは元実測として保持し、現7aedの新PT・coverage・実環境資格へ移植しない。全六Source/六physical/30method metadataと元measured18/残12のcounter差を隠さず、JaCoCo個別method/filterは元XML未読のため未検証と明記する。自然branch0二SourceはN-A/nullで100にしない。元四TestファイルについてGit object IDの旧/現在同一性を読取だけで判定し、別sourceTestならその事実を残す。Test本文抽出/fixture生成/compile/JVM/JCA/DB/key/実port/runtime/exec再生は行わない。
+
+元postのsource/session/exec/物理SHA/元18case/result/全六counterの実型を固定し、current967Main全physicalから対象集合が完全か照合、owner/cost ownerは現正本を保持。独立metadata検証は元post→六targetと現在inventory→六pathの別向き比較、counter・case・同byte偽装・型/集合変更の否定を行う。元postが証明した過去成功以外を補完しない。旧未読宣言と本有限参照照合を分離し、全135/78参照/旧whole93の認定とはしない。
+
+既正式1964/53・unique517/候補114/pending12/whole93暫定/新leaf0/工数null、G07未分類3313+22actualSecretCountnull/QA051final/全HOLD保持。旧Root/VM/cohort/native/DB/Backup/鍵と原本へアクセス0。新出力24190/独立24192と結果3858へ具体path/hash/command/終了、未測定と次commandを保存。通常区切りで停止しない。
