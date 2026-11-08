@@ -1,0 +1,11 @@
+# 099 Web6form原56：有限invokeAll・owner結果
+
+source2dd95b08fd3d03307a4a3d26ba7eeef824b640c3/Production7aedをpush後、PG24394全6whole56を一回実行しOS0/FESaborted0。PG24396独立0 SHA256 ea97726181dbdf1c210d2316c70467ad0765b7b8ef011ee10d01c5758b013d96。対象12CodeSource/16Codephysical集計LINE544/METHOD122/CLASS16/BRANCH278/INSTRUCTION2779全miss0、実Main62全現CRC/held四初期化0。
+
+UserChangeFormは5abstract/Code0のsealed ABIとして現byte/SHAを別に照合、CLASS100へ加算0。Cancel/Delete/Role/Status/Unlock/PasswordResetの6thinwrapperは自然B0で、現classinfo/CRC/実BRAN0をSource単位で結合しN-A/null、全12Source非空四100とせずstrictgate1を維持。人工条件/手動除外/旧exec合算なし。
+
+UserMutation untimedinvokeAllを30SECONDS、6fixedpoolをfinallyshutdownNow/await10assertへ。元Future5/10/30・全wire/入力validation/NFC/byte/null/順序/所有/close/並行期待は原Gitobjectへrawbyte逆変換で一致。DTOはsynthetic値だけで実account/role/status/password更新/auth/session/DB/JMS/HTTP/Root/VM/native/keyは実行しない。Source以外へpassword/token/本文を複写0。
+
+format24386/compile24388=0/警告0、static24390raw34は位置別非適用（ownedpool6/所有移譲Form4/Threads24）・適用0/CS0/処理0、preflight24392=0。postsource89eec729を通常push後BUG2532当範囲閉鎖、全YKT2177OPEN。新unique/Source登録/leaf/正式受入加算0、518(Java414+HTML97+CSS7)/正式1964PT53scope/工数null/全actualHOLDを維持。
+
+実command/時刻/OS/JDK/tool/branch/source/inputSHA・全56case/XML時間・coverage/exec/hash・NoCodeABIは公開PG24396 manifestと参照に保存した。
