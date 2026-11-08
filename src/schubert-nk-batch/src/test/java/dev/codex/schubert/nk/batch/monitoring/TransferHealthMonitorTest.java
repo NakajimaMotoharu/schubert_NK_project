@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.ToDoubleFunction;
 import org.junit.jupiter.api.Test;
@@ -284,32 +285,38 @@ class TransferHealthMonitorTest {
 
   @Test
   void transferConn008ConcurrentOneOwnerHasExactCountAndImmutableOldSnapshot() throws Exception {
-    try (var registry = new Registry();
-        var pool = Executors.newFixedThreadPool(8)) {
-      var monitor = new TransferHealthMonitor(registry, DEBUG_MODE_FIXTURE, Service.BATCH);
-      var input = usage(9000, 1024);
-      var first =
-          monitor
-              .observe(Optional.of(input), true, at(0, CauseClearance.CONFIRMED))
-              .event()
-              .orElseThrow();
-      var jobs =
-          java.util.stream.IntStream.range(0, 64)
-              .<Callable<Severity>>mapToObj(
-                  i ->
-                      () ->
-                          monitor
-                              .observe(Optional.of(input), true, at(1, CauseClearance.CONFIRMED))
-                              .event()
-                              .orElseThrow()
-                              .severity())
-              .toList();
-      for (var result : pool.invokeAll(jobs)) assertEquals(Severity.CRITICAL, result.get());
-      assertEquals(BigInteger.ONE, first.count());
-      assertEquals(OBSERVED_AT, first.lastSeen());
-      assertEquals(BigInteger.valueOf(65), monitor.snapshot().orElseThrow().count());
-      assertSame(input, monitor.observedUsage().orElseThrow());
-      assertEquals(4, registry.getMeters().size());
+    try (var registry = new Registry()) {
+      var pool = Executors.newFixedThreadPool(8);
+      try {
+        var monitor = new TransferHealthMonitor(registry, DEBUG_MODE_FIXTURE, Service.BATCH);
+        var input = usage(9000, 1024);
+        var first =
+            monitor
+                .observe(Optional.of(input), true, at(0, CauseClearance.CONFIRMED))
+                .event()
+                .orElseThrow();
+        var jobs =
+            java.util.stream.IntStream.range(0, 64)
+                .<Callable<Severity>>mapToObj(
+                    i ->
+                        () ->
+                            monitor
+                                .observe(Optional.of(input), true, at(1, CauseClearance.CONFIRMED))
+                                .event()
+                                .orElseThrow()
+                                .severity())
+                .toList();
+        for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS))
+          assertEquals(Severity.CRITICAL, result.get());
+        assertEquals(BigInteger.ONE, first.count());
+        assertEquals(OBSERVED_AT, first.lastSeen());
+        assertEquals(BigInteger.valueOf(65), monitor.snapshot().orElseThrow().count());
+        assertSame(input, monitor.observedUsage().orElseThrow());
+        assertEquals(4, registry.getMeters().size());
+      } finally {
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
+      }
     }
   }
 }

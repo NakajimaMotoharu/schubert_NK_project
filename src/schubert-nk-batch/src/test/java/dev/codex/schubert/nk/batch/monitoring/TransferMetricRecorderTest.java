@@ -20,6 +20,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
@@ -198,30 +199,35 @@ class TransferMetricRecorderTest {
   @Test
   void transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues()
       throws Exception {
-    try (var registry = new OwnedRegistry();
-        var pool = Executors.newFixedThreadPool(8)) {
-      var recorder = new TransferMetricRecorder(registry, DEBUG_MONITORING_MODE);
-      var first = usage(1, 10, 2, 20);
-      var second = usage(3, 30, 4, 40);
-      recorder.record(first);
-      var jobs =
-          java.util.stream.IntStream.range(0, 64)
-              .<Callable<Boolean>>mapToObj(
-                  i ->
-                      () -> {
-                        recorder.record(i % 2 == 0 ? first : second);
-                        var snapshot = recorder.snapshot().orElseThrow();
-                        return snapshot == first || snapshot == second;
-                      })
-              .toList();
-      for (var result : pool.invokeAll(jobs)) assertTrue(result.get());
-      assertEquals(3, first.totalFiles());
-      assertEquals(30, first.totalBytes());
-      recorder.record(second);
-      assertSame(second, recorder.snapshot().orElseThrow());
-      assertEquals(3.0, value(registry, FILES, PART_SUFFIX_LABEL));
-      assertEquals(40.0, value(registry, BYTES, READY_SUFFIX_LABEL));
-      shape(registry);
+    try (var registry = new OwnedRegistry()) {
+      var pool = Executors.newFixedThreadPool(8);
+      try {
+        var recorder = new TransferMetricRecorder(registry, DEBUG_MONITORING_MODE);
+        var first = usage(1, 10, 2, 20);
+        var second = usage(3, 30, 4, 40);
+        recorder.record(first);
+        var jobs =
+            java.util.stream.IntStream.range(0, 64)
+                .<Callable<Boolean>>mapToObj(
+                    i ->
+                        () -> {
+                          recorder.record(i % 2 == 0 ? first : second);
+                          var snapshot = recorder.snapshot().orElseThrow();
+                          return snapshot == first || snapshot == second;
+                        })
+                .toList();
+        for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS)) assertTrue(result.get());
+        assertEquals(3, first.totalFiles());
+        assertEquals(30, first.totalBytes());
+        recorder.record(second);
+        assertSame(second, recorder.snapshot().orElseThrow());
+        assertEquals(3.0, value(registry, FILES, PART_SUFFIX_LABEL));
+        assertEquals(40.0, value(registry, BYTES, READY_SUFFIX_LABEL));
+        shape(registry);
+      } finally {
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
+      }
     }
   }
 

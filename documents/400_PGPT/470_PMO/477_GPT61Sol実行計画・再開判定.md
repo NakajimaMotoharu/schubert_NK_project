@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-09 工具依存名の実在を先行確認（BUG2578/YKT2288）
+
+helper class/source名を記憶から推測せず、対象Mainの実宣言・importと既physical inventoryのsourcePathから選び、全path存在・normal input SHA照合後に出力を公開する。部分出力後に失敗した場合、元失敗toolと部分manifest/未実行entryを保全し、成功phaseを再演せず不足phaseだけ補完する。当902のMonitoringClock誤名は25176へ保存、正名MonitoringObservationClockを903/25178のmissing/hash反例2で照合。製品未起動の失敗を隠さず工具費として保持、品質/モデル/利用枠/HOLD/continuous-v2不変更。
+
+
 ## 2026-11-09 工具lintを起動条件として実施（BUG2560/2564）
 
 新しい工具のimportをコピーせず使用分だけに限定する。lintとbodyを別shell行で無条件に並べない。tools/qualityの正規no-arg entryは既pg11123_checked_python_entryでlint先行・実sys.argv/orig_argvを保ち、input内の準備工具はlintの戻り値が厳密int0と確認できた後だけ別のtool callでbodyを起動する。非0/False/未知を成功へ正規化しない。現準備24912のlint1とbody0は両方保持し、unused importだけを除去・旧AST/出力を独立照合して成功prepareを再演しない。以後は現在のConsole/Jar/SDKプロフィールを先に実物確認し、旧Maven cpfile契約をMain専用normalへ転用しない。今回24920原9終了0/24922独立・三owner有限化は限定再試験であり、全2177/451受入・仕様/モデル/枠条件を変更しない。
