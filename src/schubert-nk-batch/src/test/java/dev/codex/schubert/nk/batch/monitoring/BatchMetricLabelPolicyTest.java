@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.batch.monitoring;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.micrometer.core.instrument.Tag;
 import java.util.AbstractList;
@@ -301,7 +302,8 @@ class BatchMetricLabelPolicyTest {
 
   @Test
   void batchlabel013FiniteConcurrentCallsHaveNoSharedMutableState() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(4)) {
+    var workers = Executors.newFixedThreadPool(4);
+    try {
       var other = new BatchMetricLabelPolicy();
       var jobs = new ArrayList<Future<?>>();
       for (int i = 0; i < 64; i++)
@@ -315,6 +317,9 @@ class BatchMetricLabelPolicyTest {
                       });
                 }));
       for (var job : jobs) job.get(10, TimeUnit.SECONDS);
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
