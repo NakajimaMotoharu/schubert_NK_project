@@ -191,7 +191,8 @@ final class QuestionFormReturnResourcePortTest {
 
   @Test
   void concurrentInputAndAcceptedPagesKeepValuesSeparate() throws Exception {
-    try (var pool = Executors.newFixedThreadPool(2)) {
+    var pool = Executors.newFixedThreadPool(2);
+    try {
       var jobs = new ArrayList<Future<String>>();
       for (int i = 0; i < 8; i++) {
         int index = i;
@@ -210,6 +211,9 @@ final class QuestionFormReturnResourcePortTest {
       }
       for (int i = 0; i < 8; i++)
         assertEquals("question-" + i, jobs.get(i).get(10, TimeUnit.SECONDS));
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

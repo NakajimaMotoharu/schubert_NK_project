@@ -318,7 +318,8 @@ final class SearchTemplateResourcePortTest {
 
   @Test
   void ownedConcurrentRenderersNeverShareFiltersOrRows() throws Exception {
-    try (var executor = Executors.newFixedThreadPool(2)) {
+    var executor = Executors.newFixedThreadPool(2);
+    try {
       List<Future<?>> futures = new ArrayList<>();
       for (int i = 0; i < 8; i++) {
         final int number = i;
@@ -338,6 +339,9 @@ final class SearchTemplateResourcePortTest {
                 }));
       }
       for (var future : futures) future.get(10, TimeUnit.SECONDS);
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
