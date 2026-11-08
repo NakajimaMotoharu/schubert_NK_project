@@ -20,6 +20,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
@@ -303,8 +304,13 @@ class MqPressureMetricRecorderTest {
               return "published";
             });
       }
-      try (var pool = Executors.newFixedThreadPool(8)) {
-        for (var result : pool.invokeAll(tasks)) assertEquals("published", result.get());
+      var pool = Executors.newFixedThreadPool(8);
+      try {
+        for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS))
+          assertEquals("published", result.get());
+      } finally {
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
       assertTrue(supplied.contains(recorder.snapshot(BrokerTopology.ASYNC_WORK).orElseThrow()));
       assertSame(separate, second.snapshot(BrokerTopology.ASYNC_WORK).orElseThrow());

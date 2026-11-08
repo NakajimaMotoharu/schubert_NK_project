@@ -19,6 +19,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
@@ -348,8 +349,13 @@ class InboxReplayMetricRecorderTest {
               recorder.record(new LayoutId(SUBMIT_REQUEST_LAYOUT), ResultCode.IDEMPOTENT_SUCCESS);
               return "recorded";
             });
-      try (var pool = Executors.newFixedThreadPool(8)) {
-        for (var result : pool.invokeAll(tasks)) assertEquals("recorded", result.get());
+      var pool = Executors.newFixedThreadPool(8);
+      try {
+        for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS))
+          assertEquals("recorded", result.get());
+      } finally {
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
       assertEquals(64, count(registry, SUBMIT_REQUEST_LAYOUT, IDEMPOTENT_CODE));
       assertEquals(0, count(registry, LOGIN_REQUEST_LAYOUT, SUCCESS_CODE));

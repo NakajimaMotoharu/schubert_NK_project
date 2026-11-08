@@ -1,0 +1,138 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T08:35:08.947790+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorderTest.java",
+      "originalSha256": "c24ce4a60d7c3b76a202d9676a379728b9964e894a1a1836de1c89b4e6adce70",
+      "currentSha256": "5ff3df8170bb683c8248efb1d3d83927faeb5567aadfd53b5bb7974824c2bfdd",
+      "originalWholeBodiesExactlyRestored": true,
+      "ownerShape": "standalone"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java",
+      "originalSha256": "57603987ebe17531c44477797de3f021179ec27ccf9428ded76256fd571e8f99",
+      "currentSha256": "0c784c09a2798a48c87bd7e7bd7353df80d1f2c388442a831bea0e0af6427b22",
+      "originalWholeBodiesExactlyRestored": true,
+      "ownerShape": "standalone"
+    }
+  ],
+  "originalWholeCases": 16,
+  "rawFindings": 11,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 2,
+  "finiteOwnerSitesCorrected": 2,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25304-inbox-mq-owner-prepare-v1/manifest.json",
+    "sha256": "a6858f8ef9a8343fdc31bf66e9922af992b18ea30af6b961fdf02be32fe99426"
+  },
+  "classifications": [
+    {
+      "className": "InboxReplayMetricRecorderTest",
+      "method": "inboxMet007ConcurrentSuppliedEventsKeepExactCountsAndSeparateOwners",
+      "variable": "pool",
+      "line": 352,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit owned8workers/64tasks invokeAll10 andsinglefinally shutdownNow/await10 insideborrowedregistry TWR; no applicationcontainer worker."
+    },
+    {
+      "className": "InboxReplayMetricRecorderTest",
+      "method": "inboxMet007ConcurrentSuppliedEventsKeepExactCountsAndSeparateOwners",
+      "variable": "pool",
+      "line": 352,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned8workers/64tasks invokeAll10 andsinglefinally shutdownNow/await10 insideborrowedregistry TWR; no applicationcontainer worker."
+    },
+    {
+      "className": "InboxReplayMetricRecorderTest",
+      "method": "inboxMet007ConcurrentSuppliedEventsKeepExactCountsAndSeparateOwners",
+      "variable": null,
+      "line": 354,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned8workers/64tasks invokeAll10 andsinglefinally shutdownNow/await10 insideborrowedregistry TWR; no applicationcontainer worker."
+    },
+    {
+      "className": "InboxReplayMetricRecorderTest",
+      "method": "inboxMet007ConcurrentSuppliedEventsKeepExactCountsAndSeparateOwners",
+      "variable": null,
+      "line": 357,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned8workers/64tasks invokeAll10 andsinglefinally shutdownNow/await10 insideborrowedregistry TWR; no applicationcontainer worker."
+    },
+    {
+      "className": "InboxReplayMetricRecorderTest",
+      "method": "inboxMet007ConcurrentSuppliedEventsKeepExactCountsAndSeparateOwners",
+      "variable": null,
+      "line": 358,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned8workers/64tasks invokeAll10 andsinglefinally shutdownNow/await10 insideborrowedregistry TWR; no applicationcontainer worker."
+    },
+    {
+      "className": "MqPressureMetricRecorderTest",
+      "method": "mqPress006ConcurrentPublicationAndDifferentOwnersDoNotGrowOrShareState",
+      "variable": "pool",
+      "line": 307,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit owned8workers/64tasks invokeAll10 andsinglefinally shutdownNow/await10 insideborrowedregistry TWR; no applicationcontainer worker."
+    },
+    {
+      "className": "MqPressureMetricRecorderTest",
+      "method": "mqPress006ConcurrentPublicationAndDifferentOwnersDoNotGrowOrShareState",
+      "variable": "pool",
+      "line": 307,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned8workers/64tasks invokeAll10 andsinglefinally shutdownNow/await10 insideborrowedregistry TWR; no applicationcontainer worker."
+    },
+    {
+      "className": "MqPressureMetricRecorderTest",
+      "method": "mqPress006ConcurrentPublicationAndDifferentOwnersDoNotGrowOrShareState",
+      "variable": null,
+      "line": 309,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned8workers/64tasks invokeAll10 andsinglefinally shutdownNow/await10 insideborrowedregistry TWR; no applicationcontainer worker."
+    },
+    {
+      "className": "MqPressureMetricRecorderTest",
+      "method": "mqPress006ConcurrentPublicationAndDifferentOwnersDoNotGrowOrShareState",
+      "variable": null,
+      "line": 312,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned8workers/64tasks invokeAll10 andsinglefinally shutdownNow/await10 insideborrowedregistry TWR; no applicationcontainer worker."
+    },
+    {
+      "className": "MqPressureMetricRecorderTest",
+      "method": "mqPress006ConcurrentPublicationAndDifferentOwnersDoNotGrowOrShareState",
+      "variable": null,
+      "line": 313,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned8workers/64tasks invokeAll10 andsinglefinally shutdownNow/await10 insideborrowedregistry TWR; no applicationcontainer worker."
+    },
+    {
+      "className": "MqPressureMetricRecorderTest",
+      "method": "mqPress008GeneratedSnapshotContractsUseIndependentLongBooleanFoldAndFixedText",
+      "variable": null,
+      "line": 351,
+      "rule": "EqualsNull",
+      "applicable": false,
+      "basis": "Original negative record contract must execute value.equals(null) and assertFalse; Objects.equals would not exercise generated equals null branch."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}
