@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-09 whole補助Testはcompile参照も閉鎖（BUG2580/YKT2289）
+
+fixture fieldのruntime graph確認だけでは、whole補助Testをjavacへ与えた際の全method参照closureは成立しない。既full support SourceのTest型参照を宣言/import/全bodyから照合し、必要な既承認pure補助Sourceを全文のままSHA固定してcompile-onlyへ含める。fixture抜粋・未承認代替や既成功method再試験はしない。Heap接続25192 compile1/0Testは25200保全、909/25202でFileStore補助一Sourceを追加、元input/選択/品質/HOLD不変更、原27補助method非選択。元compile失敗とtool費を保持し後続真正結果だけで判定する。
+
+
 ## 2026-11-09 工具依存名の実在を先行確認（BUG2578/YKT2288）
 
 helper class/source名を記憶から推測せず、対象Mainの実宣言・importと既physical inventoryのsourcePathから選び、全path存在・normal input SHA照合後に出力を公開する。部分出力後に失敗した場合、元失敗toolと部分manifest/未実行entryを保全し、成功phaseを再演せず不足phaseだけ補完する。当902のMonitoringClock誤名は25176へ保存、正名MonitoringObservationClockを903/25178のmissing/hash反例2で照合。製品未起動の失敗を隠さず工具費として保持、品質/モデル/利用枠/HOLD/continuous-v2不変更。
