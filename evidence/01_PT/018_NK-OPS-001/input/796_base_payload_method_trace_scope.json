@@ -1,0 +1,1877 @@
+{
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "testSource": "64f3a72753434347889f0eabd5d9f9dca67c6bfb",
+  "normalProof": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG24642-protocol-whole120-independent-v1/manifest.json",
+    "sha256": "8ebe6365bc701ba6432b1b55275004024dc71bc452d31b66d31c53894e3ae128"
+  },
+  "metadataInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json",
+    "sha256": "e65782d893a5ae45309cf269d165dec33d1dc396f06b7968b62d95b276455d31"
+  },
+  "descriptorInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/artifacts.json",
+    "sha256": "fb24a1a209849d42894925002baae668bc55a4bd858b1b7c1d38ab838319bb0b"
+  },
+  "physicalIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json",
+    "sha256": "db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723"
+  },
+  "owner": "WBS-P001-03",
+  "oracleDocuments": [
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/001_NK-PRO-001_単体テスト仕様書.md",
+      "sha256": "503c5f6be3caaa341dcec35cb1bd1b8a3892d270bf6a7fa91cdad580b43abdbe"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/107_現source正本fixture照合・layout個別受入.md",
+      "sha256": "6354a848537937df156f5380941531d71bdf749f68ff1290943a58450ba64ddc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1956_G13LayoutCatalog7_独立期待値意味対応表.md",
+      "sha256": "6ede52efc7cb04c471c6a55e2a17d4b8c4859c9186f24977bc9758b1dcd3d711"
+    },
+    {
+      "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+      "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/1187_Semantic独立期待値七・診断保護・定数九PGPT仕様.md",
+      "sha256": "123884b368c27be54dcd8533a0eaa3df002caa3d4c731ec151028b40027ce769"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/1188_Semantic独立期待値七・診断保護・定数九PGPT結果.md",
+      "sha256": "96f9f7a940c00fb67a9a12c1fe1ecba1d05e0d63190402bf2d6387678d05906c"
+    }
+  ],
+  "delegatedAssertionHelper": {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+    "sha256": "e6bd994d7498b8d25bd8e9c862837a2e5f78752b2c462309c24ccbff21e3c710"
+  },
+  "canonicalShapeProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG24744-current-component296-correction-v1/manifest.json",
+    "sha256": "7ba7a65d0e63dc8157f35a0fb6803d8ecf196d7c006dbfe8929cb0e6ac0fbf0b"
+  },
+  "independentShapeProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG24752-component296-correction-independent-v1/manifest.json",
+    "sha256": "880fd317272f3712321d7017cbc38b53e7f6dd6aa30d2947f48f70a08348f811"
+  },
+  "sourcePaths": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FixedPayload.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadData.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadRecord.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadValues.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedPayloadValues.java"
+  ],
+  "cases": {
+    "F1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#fixedPayloadIsDefensiveAndWireMessageChecksLengths()",
+      "testIds": [
+        "PT-PRO-002-M01",
+        "PT-PRO-002-M02"
+      ],
+      "independentOracle": "Independentinput1,2 andrecord3,4,5 bytes preservedafterinput/outputmutation; literaldata2/recordlength3/count1; WireMessage mismatcheddata8vs9/record271vs272/count0vs1 andnullheader/payload rejected."
+    },
+    "V1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#valuesAreImmutableNullSafeAndRedacted()",
+      "testIds": [
+        "PT-PRO-002-P03"
+      ],
+      "independentOracle": "Synthetic literal value isnotprinted; Numeric1/Flagtrue/Unset INSTANCE; nulltext/map/key/value/blankname/getnull rejected, namesimmutable,size1,getidentity/missingUnset,self/equal/different/wrongtype, equalhash contract. Absolutehashnumeric oracle notclaimed bythiscase."
+    },
+    "T6": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#typedModelsAndHelpersRejectNullMissingAndWrongKinds()",
+      "testIds": [
+        "PT-PRO-001-T03",
+        "PT-PRO-002-P05"
+      ],
+      "independentOracle": "Explicitrequiredtext safe/numeric7/flagtrue/unset/optional contracts, nullvalues/catalog refs/typedmodel invariants rejected; sharedTypedFieldValues methods haveotherowner andnoacceptancecredit."
+    },
+    "T3": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()",
+      "testIds": [
+        "PT-PRO-001-T02",
+        "PT-PRO-002-P04"
+      ],
+      "independentOracle": "Generic minimuminput supplies64layouts,69distinctnamedtypes/14repeat; returneddata/record class andredaction; roundtrip consistency supplementedbyC1/C2 independentdirectional/table oracle."
+    },
+    "D1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning()",
+      "testIds": [
+        "PT-PRO-001-T02",
+        "PT-PRO-002-P04"
+      ],
+      "independentOracle": "Existing IndependentNamedFieldOracle.verifyAll ownsassertions: independentexplicitgetter-field bindings andfixedscalar values/SS/UI296component table; decode/getter andencode/fields checked separately, notProduction-generated expected."
+    },
+    "SD": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest#semanticHelpersDecodeAndEncodeEverySupportedShape()",
+      "testIds": [
+        "PT-PRO-SEM-D"
+      ],
+      "independentOracle": "Fixedstring42/true/JST20260902123456789 andInstant,canonicalUUID,synthetichex,path/display literals; required/optional present/unset decode andencode expectedFieldValue separate."
+    },
+    "SN": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest#semanticHelpersRejectInvalidWireValuesWithoutReturningPartialObjects()",
+      "testIds": [
+        "PT-PRO-SEM-N"
+      ],
+      "independentOracle": "Feb30/invalidtext/uppercaseUUID/absolute-or-empty path rejected withLayoutValidationException/IAEcause andfixedsafe diagnostic, noUUIDecho."
+    },
+    "SZ": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest#semanticEncodingHelpersRejectNullReferences()",
+      "testIds": [
+        "PT-PRO-SEM-Z"
+      ],
+      "independentOracle": "Explicitnullreference forstring/Optional/instant/uuid/syntheticauth/sha/path encodehelpers -> Java boundaryNPE, notcaughtnormalProductreturn."
+    },
+    "I1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest#typedHelpersConvertIntAndIdentifiersWithoutLosingWireKinds()",
+      "testIds": [
+        "PT-PRO-001-T04"
+      ],
+      "independentOracle": "Literalint123/id42/000000000042/Unset andwire42; longMAXintoverflow/zeroID/ABC/allzero/13digit/nullfactory/nullid rejected."
+    },
+    "I2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest#allAllowlistedEnumsExposeExplicitWireValuesAndGenericConversion()",
+      "testIds": [
+        "PT-PRO-001-T04"
+      ],
+      "independentOracle": "Approvedenumtable andgenericrequired/optionalconversion/present/absent/unknown/null; valuesindependenttable-backed alreadypriorreview."
+    },
+    "I3": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest#xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues()",
+      "testIds": [
+        "PT-PRO-001-T04"
+      ],
+      "independentOracle": "Literalstatus200/elapsed999999999,zero wire; numericrange0/12nines accepted,-1/1000in3digits/0or19digits rejected, nullnames/wrappers/optionals rejected."
+    }
+  },
+  "delegatedCaseLabel": "D1",
+  "methodRules": {
+    "FixedPayload": {
+      "<init>": {
+        "cases": [
+          "F1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Defensivecopies/non-null data,list,elements andnonnegdeclaredrecordwidth/exactrecordbytes.",
+        "staticPath": "F1 direct FixedPayload constructors/mutation"
+      },
+      "dataLength": {
+        "cases": [
+          "F1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Exactdata length.",
+        "staticPath": "F1 literal2 -> dataLength"
+      },
+      "recordLength": {
+        "cases": [
+          "F1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Exactretainedwidth.",
+        "staticPath": "F1 literal3 -> recordLength"
+      },
+      "recordCount": {
+        "cases": [
+          "F1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Exactrecordcount.",
+        "staticPath": "F1 literal1 -> recordCount"
+      },
+      "copyData": {
+        "cases": [
+          "F1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Freshdefensivebytecopy.",
+        "staticPath": "F1 input/outputmutation andliteral1,2 expected"
+      },
+      "copyRecords": {
+        "cases": [
+          "F1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Freshdefensivecopyforeachrecord/immutablelist.",
+        "staticPath": "F1 mutations -> literal3,4,5 andclear rejection"
+      },
+      "toString": {
+        "cases": [
+          "F1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Length-onlydiagnostic no bytecontent.",
+        "staticPath": "F1 containsdataLength2/omits[1,2]"
+      }
+    },
+    "PayloadValues": {
+      "<init>": {
+        "cases": [
+          "V1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Non-null layout/data andcopiednonnullrecordlist/elements.",
+        "staticPath": "V1 direct PayloadValues null/element/immutable cases"
+      },
+      "toString": {
+        "cases": [
+          "V1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Safeidentity/count only, nofieldvalues.",
+        "staticPath": "V1 explicitinputnoncontainment"
+      }
+    },
+    "TypedPayloadValues": {
+      "<init>": {
+        "cases": [
+          "T6"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Non-null layout/data/list/elements andimmutablecopy.",
+        "staticPath": "T6 direct TypedPayloadValues null andclear rejection"
+      },
+      "toString": {
+        "cases": [
+          "T3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Identity/count only,nofieldvalues.",
+        "staticPath": "T3 typeddisplay omits FieldValue"
+      }
+    },
+    "TypedFieldValues": {
+      "requiredText": {
+        "cases": [
+          "T6",
+          "SD"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Exactkind/required-vsoptionalUnset/internalnonnull boundary; wrongkind typedrejection; nofallbackcoercion.",
+        "staticPath": "T6/SD directtypedhelper orfrom required/optionalpublichelper -> requiredText"
+      },
+      "requiredNumeric": {
+        "cases": [
+          "T6",
+          "SD"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Exactkind/required-vsoptionalUnset/internalnonnull boundary; wrongkind typedrejection; nofallbackcoercion.",
+        "staticPath": "T6/SD directtypedhelper orfrom required/optionalpublichelper -> requiredNumeric"
+      },
+      "requiredFlag": {
+        "cases": [
+          "T6",
+          "SD"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Exactkind/required-vsoptionalUnset/internalnonnull boundary; wrongkind typedrejection; nofallbackcoercion.",
+        "staticPath": "T6/SD directtypedhelper orfrom required/optionalpublichelper -> requiredFlag"
+      },
+      "optionalText": {
+        "cases": [
+          "T6",
+          "SD"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Exactkind/required-vsoptionalUnset/internalnonnull boundary; wrongkind typedrejection; nofallbackcoercion.",
+        "staticPath": "T6/SD directtypedhelper orfrom required/optionalpublichelper -> optionalText"
+      },
+      "requiredString": {
+        "cases": [
+          "T6",
+          "SD"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Exactkind/required-vsoptionalUnset/internalnonnull boundary; wrongkind typedrejection; nofallbackcoercion.",
+        "staticPath": "T6/SD directtypedhelper orfrom required/optionalpublichelper -> requiredString"
+      },
+      "requiredLong": {
+        "cases": [
+          "T6",
+          "SD"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Exactkind/required-vsoptionalUnset/internalnonnull boundary; wrongkind typedrejection; nofallbackcoercion.",
+        "staticPath": "T6/SD directtypedhelper orfrom required/optionalpublichelper -> requiredLong"
+      },
+      "requiredBoolean": {
+        "cases": [
+          "T6",
+          "SD"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Exactkind/required-vsoptionalUnset/internalnonnull boundary; wrongkind typedrejection; nofallbackcoercion.",
+        "staticPath": "T6/SD directtypedhelper orfrom required/optionalpublichelper -> requiredBoolean"
+      },
+      "optionalString": {
+        "cases": [
+          "T6",
+          "SD"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Exactkind/required-vsoptionalUnset/internalnonnull boundary; wrongkind typedrejection; nofallbackcoercion.",
+        "staticPath": "T6/SD directtypedhelper orfrom required/optionalpublichelper -> optionalString"
+      },
+      "orUnset": {
+        "cases": [
+          "T6"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Exactkind/required-vsoptionalUnset/internalnonnull boundary; wrongkind typedrejection; nofallbackcoercion.",
+        "staticPath": "T6/SD directtypedhelper orfrom required/optionalpublichelper -> orUnset"
+      },
+      "requireEmpty": {
+        "cases": [
+          "T6"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Exactkind/required-vsoptionalUnset/internalnonnull boundary; wrongkind typedrejection; nofallbackcoercion.",
+        "staticPath": "T6/SD directtypedhelper orfrom required/optionalpublichelper -> requireEmpty"
+      },
+      "require": {
+        "cases": [
+          "T6",
+          "SD"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Exactkind/required-vsoptionalUnset/internalnonnull boundary; wrongkind typedrejection; nofallbackcoercion.",
+        "staticPath": "T6/SD directtypedhelper orfrom required/optionalpublichelper -> require"
+      },
+      "wrongType": {
+        "cases": [
+          "T6"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Exactkind/required-vsoptionalUnset/internalnonnull boundary; wrongkind typedrejection; nofallbackcoercion.",
+        "staticPath": "T6/SD directtypedhelper orfrom required/optionalpublichelper -> wrongType"
+      },
+      "text": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "String -> FieldValue.Text; null rejected.",
+        "staticPath": "SD/SZ direct text"
+      },
+      "numeric": {
+        "cases": [
+          "SD"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Primitive -> correctFieldValue kind/literalvalue.",
+        "staticPath": "SD direct numeric"
+      },
+      "flag": {
+        "cases": [
+          "SD"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Primitive -> correctFieldValue kind/literalvalue.",
+        "staticPath": "SD direct flag"
+      },
+      "requiredId": {
+        "cases": [
+          "I1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "N12positiveID/optionalASCII1..12digits/nullfactory/immutablewirekind; IAE wrappedwithcause.",
+        "staticPath": "I1 direct requiredId"
+      },
+      "optionalId": {
+        "cases": [
+          "I1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "N12positiveID/optionalASCII1..12digits/nullfactory/immutablewirekind; IAE wrappedwithcause.",
+        "staticPath": "I1 direct optionalId"
+      },
+      "id": {
+        "cases": [
+          "I1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "N12positiveID/optionalASCII1..12digits/nullfactory/immutablewirekind; IAE wrappedwithcause.",
+        "staticPath": "I1 direct id"
+      },
+      "optionalIdValue": {
+        "cases": [
+          "I1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "N12positiveID/optionalASCII1..12digits/nullfactory/immutablewirekind; IAE wrappedwithcause.",
+        "staticPath": "I1 direct optionalIdValue"
+      },
+      "parseOptionalId": {
+        "cases": [
+          "I1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "N12positiveID/optionalASCII1..12digits/nullfactory/immutablewirekind; IAE wrappedwithcause.",
+        "staticPath": "I1 publicIDhelpers -> parseOptionalId"
+      },
+      "semanticId": {
+        "cases": [
+          "I1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "N12positiveID/optionalASCII1..12digits/nullfactory/immutablewirekind; IAE wrappedwithcause.",
+        "staticPath": "I1 publicIDhelpers -> semanticId"
+      },
+      "requiredEnum": {
+        "cases": [
+          "I2"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Closedwireenumallowlist withknown/wrong/unset/null distinctions.",
+        "staticPath": "I2 direct requiredEnum"
+      },
+      "optionalEnum": {
+        "cases": [
+          "I2"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Closedwireenumallowlist withknown/wrong/unset/null distinctions.",
+        "staticPath": "I2 direct optionalEnum"
+      },
+      "enumValue": {
+        "cases": [
+          "I2"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Closedwireenumallowlist withknown/wrong/unset/null distinctions.",
+        "staticPath": "I2 direct enumValue"
+      },
+      "optionalEnumValue": {
+        "cases": [
+          "I2"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Closedwireenumallowlist withknown/wrong/unset/null distinctions.",
+        "staticPath": "I2 direct optionalEnumValue"
+      },
+      "enumConstant": {
+        "cases": [
+          "I2"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Closedwireenumallowlist withknown/wrong/unset/null distinctions.",
+        "staticPath": "I2 publicenumhelpers -> enumConstant"
+      },
+      "requiredHttpStatusCode": {
+        "cases": [
+          "I3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "HTTPstatus/elapsedcanonicaldecimal andunsigneddigit range; required/optional/unset/null contracts.",
+        "staticPath": "I3 direct requiredHttpStatusCode"
+      },
+      "optionalHttpStatusCode": {
+        "cases": [
+          "I3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "HTTPstatus/elapsedcanonicaldecimal andunsigneddigit range; required/optional/unset/null contracts.",
+        "staticPath": "I3 direct optionalHttpStatusCode"
+      },
+      "httpStatusCode": {
+        "cases": [
+          "I3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "HTTPstatus/elapsedcanonicaldecimal andunsigneddigit range; required/optional/unset/null contracts.",
+        "staticPath": "I3 direct httpStatusCode"
+      },
+      "optionalHttpStatusCodeValue": {
+        "cases": [
+          "I3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "HTTPstatus/elapsedcanonicaldecimal andunsigneddigit range; required/optional/unset/null contracts.",
+        "staticPath": "I3 direct optionalHttpStatusCodeValue"
+      },
+      "requiredElapsedMilliseconds": {
+        "cases": [
+          "I3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "HTTPstatus/elapsedcanonicaldecimal andunsigneddigit range; required/optional/unset/null contracts.",
+        "staticPath": "I3 direct requiredElapsedMilliseconds"
+      },
+      "optionalElapsedMilliseconds": {
+        "cases": [
+          "I3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "HTTPstatus/elapsedcanonicaldecimal andunsigneddigit range; required/optional/unset/null contracts.",
+        "staticPath": "I3 direct optionalElapsedMilliseconds"
+      },
+      "elapsedMilliseconds": {
+        "cases": [
+          "I3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "HTTPstatus/elapsedcanonicaldecimal andunsigneddigit range; required/optional/unset/null contracts.",
+        "staticPath": "I3 direct elapsedMilliseconds"
+      },
+      "optionalElapsedMillisecondsValue": {
+        "cases": [
+          "I3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "HTTPstatus/elapsedcanonicaldecimal andunsigneddigit range; required/optional/unset/null contracts.",
+        "staticPath": "I3 direct optionalElapsedMillisecondsValue"
+      },
+      "requireUnsignedRange": {
+        "cases": [
+          "I3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "HTTPstatus/elapsedcanonicaldecimal andunsigneddigit range; required/optional/unset/null contracts.",
+        "staticPath": "I3 direct requireUnsignedRange"
+      },
+      "requiredInt": {
+        "cases": [
+          "I1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Checkedintconversion retainsArithmeticException cause onlongoverflow.",
+        "staticPath": "I1 direct requiredInt -> Math.toIntExact"
+      },
+      "requiredInstant": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonical Instant decode,optionalUnset, typedsemanticIAEcause/nofieldvalueecho.",
+        "staticPath": "SD/SN direct requiredInstant -> semantic factory"
+      },
+      "optionalInstant": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonical Instant decode,optionalUnset, typedsemanticIAEcause/nofieldvalueecho.",
+        "staticPath": "SD/SN direct optionalInstant -> semantic factory"
+      },
+      "requiredUuid": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonical Uuid decode,optionalUnset, typedsemanticIAEcause/nofieldvalueecho.",
+        "staticPath": "SD/SN direct requiredUuid -> semantic factory"
+      },
+      "optionalUuid": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonical Uuid decode,optionalUnset, typedsemanticIAEcause/nofieldvalueecho.",
+        "staticPath": "SD/SN direct optionalUuid -> semantic factory"
+      },
+      "requiredSha256": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonical Sha256 decode,optionalUnset, typedsemanticIAEcause/nofieldvalueecho.",
+        "staticPath": "SD/SN direct requiredSha256 -> semantic factory"
+      },
+      "optionalSha256": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonical Sha256 decode,optionalUnset, typedsemanticIAEcause/nofieldvalueecho.",
+        "staticPath": "SD/SN direct optionalSha256 -> semantic factory"
+      },
+      "requiredRelativePath": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonical RelativePath decode,optionalUnset, typedsemanticIAEcause/nofieldvalueecho.",
+        "staticPath": "SD/SN direct requiredRelativePath -> semantic factory"
+      },
+      "optionalRelativePath": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonical RelativePath decode,optionalUnset, typedsemanticIAEcause/nofieldvalueecho.",
+        "staticPath": "SD/SN direct optionalRelativePath -> semantic factory"
+      },
+      "requiredDisplayPath": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonical DisplayPath decode,optionalUnset, typedsemanticIAEcause/nofieldvalueecho.",
+        "staticPath": "SD/SN direct requiredDisplayPath -> semantic factory"
+      },
+      "optionalDisplayPath": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonical DisplayPath decode,optionalUnset, typedsemanticIAEcause/nofieldvalueecho.",
+        "staticPath": "SD/SN direct optionalDisplayPath -> semantic factory"
+      },
+      "optionalAuthenticationContext": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Synthetic64hexonly/contextOptional/Unset; malformedshape typedsemanticcause.",
+        "staticPath": "SD/SN direct optionalAuthenticationContext"
+      },
+      "optionalStringValue": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire optionalStringValue conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "SD/SZ direct optionalStringValue"
+      },
+      "instant": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire instant conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "SD/SZ direct instant"
+      },
+      "optionalInstantValue": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire optionalInstantValue conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "SD/SZ direct optionalInstantValue"
+      },
+      "uuid": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire uuid conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "SD/SZ direct uuid"
+      },
+      "optionalUuidValue": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire optionalUuidValue conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "SD/SZ direct optionalUuidValue"
+      },
+      "optionalAuthenticationContextValue": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire optionalAuthenticationContextValue conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "SD/SZ direct optionalAuthenticationContextValue"
+      },
+      "sha256": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire sha256 conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "SD/SZ direct sha256"
+      },
+      "optionalSha256Value": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire optionalSha256Value conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "SD/SZ direct optionalSha256Value"
+      },
+      "relativePath": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire relativePath conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "SD/SZ direct relativePath"
+      },
+      "optionalRelativePathValue": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire optionalRelativePathValue conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "SD/SZ direct optionalRelativePathValue"
+      },
+      "displayPath": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire displayPath conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "SD/SZ direct displayPath"
+      },
+      "optionalDisplayPathValue": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire optionalDisplayPathValue conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "SD/SZ direct optionalDisplayPathValue"
+      },
+      "canonicalUuid": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Requirecanonical lowercaseUUID roundtrip; uppercase/invalid rejected.",
+        "staticPath": "requiredUuid/optionalUuid -> canonicalUuid"
+      },
+      "semantic": {
+        "cases": [
+          "SD",
+          "SN",
+          "I1",
+          "I2",
+          "I3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Factory IAE becomesLayoutValidationException withcause andsafe fieldname only; noinputecho.",
+        "staticPath": "Required/optional semanticpublichelpers -> semantic"
+      },
+      "<clinit>": {
+        "cases": [
+          "I1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "OptionalID ASCII1..12digits regexconstant.",
+        "staticPath": "I1 optionalId initializes OPTIONAL_ID Pattern"
+      },
+      "lambda$optionalAuthenticationContext$0": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Synthetic64hexonly/contextOptional/Unset; malformedshape typedsemanticcause.",
+        "staticPath": "optionalAuthenticationContext -> optional/lambda lambda$optionalAuthenticationContext$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalAuthenticationContextValue$0": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire optionalAuthenticationContextValue conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "optionalAuthenticationContextValue -> optional/lambda lambda$optionalAuthenticationContextValue$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalDisplayPath$0": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonical DisplayPath decode,optionalUnset, typedsemanticIAEcause/nofieldvalueecho.",
+        "staticPath": "optionalDisplayPath -> optional/lambda lambda$optionalDisplayPath$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalDisplayPathValue$0": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire optionalDisplayPathValue conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "optionalDisplayPathValue -> optional/lambda lambda$optionalDisplayPathValue$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalElapsedMilliseconds$0": {
+        "cases": [
+          "I3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "HTTPstatus/elapsedcanonicaldecimal andunsigneddigit range; required/optional/unset/null contracts.",
+        "staticPath": "optionalElapsedMilliseconds -> optional/lambda lambda$optionalElapsedMilliseconds$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalElapsedMillisecondsValue$0": {
+        "cases": [
+          "I3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "HTTPstatus/elapsedcanonicaldecimal andunsigneddigit range; required/optional/unset/null contracts.",
+        "staticPath": "optionalElapsedMillisecondsValue -> optional/lambda lambda$optionalElapsedMillisecondsValue$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalEnum$0": {
+        "cases": [
+          "I2"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Closedwireenumallowlist withknown/wrong/unset/null distinctions.",
+        "staticPath": "optionalEnum -> optional/lambda lambda$optionalEnum$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalEnum$1": {
+        "cases": [
+          "I2"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Closedwireenumallowlist withknown/wrong/unset/null distinctions.",
+        "staticPath": "optionalEnum -> optional/lambda lambda$optionalEnum$1; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalEnumValue$0": {
+        "cases": [
+          "I2"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Closedwireenumallowlist withknown/wrong/unset/null distinctions.",
+        "staticPath": "optionalEnumValue -> optional/lambda lambda$optionalEnumValue$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalHttpStatusCode$0": {
+        "cases": [
+          "I3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "HTTPstatus/elapsedcanonicaldecimal andunsigneddigit range; required/optional/unset/null contracts.",
+        "staticPath": "optionalHttpStatusCode -> optional/lambda lambda$optionalHttpStatusCode$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalHttpStatusCodeValue$0": {
+        "cases": [
+          "I3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "HTTPstatus/elapsedcanonicaldecimal andunsigneddigit range; required/optional/unset/null contracts.",
+        "staticPath": "optionalHttpStatusCodeValue -> optional/lambda lambda$optionalHttpStatusCodeValue$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalId$0": {
+        "cases": [
+          "I1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "N12positiveID/optionalASCII1..12digits/nullfactory/immutablewirekind; IAE wrappedwithcause.",
+        "staticPath": "optionalId -> optional/lambda lambda$optionalId$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalId$1": {
+        "cases": [
+          "I1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "N12positiveID/optionalASCII1..12digits/nullfactory/immutablewirekind; IAE wrappedwithcause.",
+        "staticPath": "optionalId -> optional/lambda lambda$optionalId$1; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalIdValue$0": {
+        "cases": [
+          "I1"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "N12positiveID/optionalASCII1..12digits/nullfactory/immutablewirekind; IAE wrappedwithcause.",
+        "staticPath": "optionalIdValue -> optional/lambda lambda$optionalIdValue$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalInstant$0": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonical Instant decode,optionalUnset, typedsemanticIAEcause/nofieldvalueecho.",
+        "staticPath": "optionalInstant -> optional/lambda lambda$optionalInstant$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalInstantValue$0": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire optionalInstantValue conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "optionalInstantValue -> optional/lambda lambda$optionalInstantValue$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalRelativePath$0": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonical RelativePath decode,optionalUnset, typedsemanticIAEcause/nofieldvalueecho.",
+        "staticPath": "optionalRelativePath -> optional/lambda lambda$optionalRelativePath$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalRelativePathValue$0": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire optionalRelativePathValue conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "optionalRelativePathValue -> optional/lambda lambda$optionalRelativePathValue$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalSha256$0": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonical Sha256 decode,optionalUnset, typedsemanticIAEcause/nofieldvalueecho.",
+        "staticPath": "optionalSha256 -> optional/lambda lambda$optionalSha256$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalSha256Value$0": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire optionalSha256Value conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "optionalSha256Value -> optional/lambda lambda$optionalSha256Value$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalUuid$0": {
+        "cases": [
+          "SD",
+          "SN"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonical Uuid decode,optionalUnset, typedsemanticIAEcause/nofieldvalueecho.",
+        "staticPath": "optionalUuid -> optional/lambda lambda$optionalUuid$0; sourcecapture/functionconversion only"
+      },
+      "lambda$optionalUuidValue$0": {
+        "cases": [
+          "SD",
+          "SZ"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Canonicalwire optionalUuidValue conversion; Optionalempty -> Unset/nullreference rejected.",
+        "staticPath": "optionalUuidValue -> optional/lambda lambda$optionalUuidValue$0; sourcecapture/functionconversion only"
+      },
+      "lambda$orUnset$0": {
+        "cases": [
+          "T6"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Exactkind/required-vsoptionalUnset/internalnonnull boundary; wrongkind typedrejection; nofallbackcoercion.",
+        "staticPath": "orUnset -> optional/lambda lambda$orUnset$0; sourcecapture/functionconversion only"
+      },
+      "lambda$requiredEnum$0": {
+        "cases": [
+          "I2"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "3",
+          "9",
+          "11"
+        ],
+        "contract": "Closedwireenumallowlist withknown/wrong/unset/null distinctions.",
+        "staticPath": "requiredEnum -> optional/lambda lambda$requiredEnum$0; sourcecapture/functionconversion only"
+      }
+    }
+  },
+  "generatedMethods": {
+    "PayloadValues": [
+      "equals",
+      "hashCode",
+      "layoutId",
+      "data",
+      "records"
+    ],
+    "TypedPayloadValues": [
+      "equals",
+      "hashCode",
+      "layoutId",
+      "data",
+      "records"
+    ]
+  },
+  "standardEnumSymbols": []
+}

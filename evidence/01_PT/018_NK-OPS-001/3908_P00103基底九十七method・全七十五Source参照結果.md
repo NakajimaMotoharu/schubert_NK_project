@@ -1,0 +1,9 @@
+# P00103基底97method・全75Source参照結果
+
+3907/796/797/798、PG24774順0/138d66c1→24776独立逆0/33c2166b9c54d75ae97144113934e6ab1ed49ae6efd96669c1c58b03d785ddf6、7型保持metadata否定。基底六Source/六physical・4測定/2抽象、raw110=97測定+標準filter11+抽象2、現11actualCase/独立literal/Source行bodyhash/TestID/関連MQ016017/UI232233SS322をmethodへ明示対応。TypedFieldValues86のprivate/lambda親参照をSource本文と照合。L186M97C4B38/I976全miss0は元XML再参照、新測定0。
+
+既named69参照24762と非重複結合しP00103全75/75Source・75physical・73測定class・374/374公式methodを同normal120 XMLへ一致。raw821=374測定445標準filter2抽象、実Case参照16、L1450M374C73B38/I7608全miss0は元単一exec部分集合。71自然B0=N-A/null/strictSource非空四gate1、個別Case probe null/全branchoracle未主張。全対応Program0011199/当post summary。
+
+G13 ORIGINAL_PLAN原0.5/3/7cap9・元P00103責任/費用/専有RD空を保持。新Java/製品PT/coverage/Source登録/leaf/正式受入0、unique520/正式1964-53/工数null・全HOLD保持。工具失敗0/既成功再演0。
+
+PG24778でWBS485/486へcurrentP00103AllMethodReferenceTrace20261109を同一観測として追記。75/75Source/374methodの参照結合完成だけで元acceptance/costは不変更、旧全値・既580guard/4誤参照否定を保持しroot486を現4857e19f3d0へ整合。前のnamed69/277部分観測も歴史値として保持。
