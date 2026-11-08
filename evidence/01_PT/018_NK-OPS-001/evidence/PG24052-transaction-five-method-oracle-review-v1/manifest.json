@@ -1,0 +1,100 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T15:52:12.114862+09:00",
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/625_transaction_five_method_oracle_scope.json",
+    "sha256": "cea14cde6cc688b8aa7629c3791b3db904e4929c8e8b2b55db4114119103dc02"
+  },
+  "sourcePrograms": 1,
+  "explicitlyRelatedMethods": 5,
+  "originalSuccessfulTestCases": 9,
+  "assertionSnippetChecks": 25,
+  "assertionReviews": [
+    {
+      "testId": "PT-JMS-TXP-001",
+      "caseRef": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp001BothRoutesDecodeLiteralGoldenAndCommitOnlyAfterProcessor()",
+      "declarationLine": 57,
+      "snippets": 2,
+      "independentExpected": "Both closed routes literal event and mode→process→commit/bodyRead1"
+    },
+    {
+      "testId": "PT-JMS-TXP-002",
+      "caseRef": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp002ConstructorRejectsNullDependenciesAndEveryNonEventDestination()",
+      "declarationLine": 80,
+      "snippets": 3,
+      "independentExpected": "Null four constructor dependencies/every non-event enum rejected without processing"
+    },
+    {
+      "testId": "PT-JMS-TXP-003",
+      "caseRef": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp003NullAndNonTransactedInputsHaveNoBodyBusinessOrRollbackEffects()",
+      "declarationLine": 116,
+      "snippets": 2,
+      "independentExpected": "Null context/message/callback and nontransacted mode reject with bodyRead0"
+    },
+    {
+      "testId": "PT-JMS-TXP-004",
+      "caseRef": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp004TransportFailureRollsBackOnceWithLegacyOrConfirmedCallbackPorts()",
+      "declarationLine": 144,
+      "snippets": 3,
+      "independentExpected": "Same checked JMSException/one rollback/legacy no-op or attempted→rollback→confirmed"
+    },
+    {
+      "testId": "PT-JMS-TXP-005",
+      "caseRef": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp005ClockProcessorAndCommitFailuresPreserveIdentityAndRollbackPhase()",
+      "declarationLine": 181,
+      "snippets": 3,
+      "independentExpected": "Clock/processor/commit same RuntimeException and exact preceding stages/one rollback"
+    },
+    {
+      "testId": "PT-JMS-TXP-006",
+      "caseRef": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp006PermanentProtocolFailureCommitsBodyPreservingIsolationAndSignalsTerminal()",
+      "declarationLine": 215,
+      "snippets": 3,
+      "independentExpected": "Both routes bad magic preserve original body/message, provided DLQ callback and terminal after commit"
+    },
+    {
+      "testId": "PT-JMS-TXP-007",
+      "caseRef": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp007InvalidDeliveryMetadataIsIsolatedBeforeProcessorWithBoundedDiagnostic()",
+      "declarationLine": 242,
+      "snippets": 2,
+      "independentExpected": "Transport ID129 is isolated before processor, bounded UNAVAILABLE metadata"
+    },
+    {
+      "testId": "PT-JMS-TXP-008",
+      "caseRef": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp008FailedIsolationPreservesPrimaryAndConfirmedRollbackWithoutCommitSuccess()",
+      "declarationLine": 264,
+      "snippets": 3,
+      "independentExpected": "Failed isolation retains same primary/protocol suppression, confirmed rollback no successful commit"
+    },
+    {
+      "testId": "PT-JMS-TXP-009",
+      "caseRef": "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp009UnconfirmedRollbackRetainsUnknownPhaseAndNeverRetriesOrConfirms()",
+      "declarationLine": 291,
+      "snippets": 4,
+      "independentExpected": "Rollback failure stays unconfirmed: exact primary/rollback objects, one attempt/confirmed absent, no retry"
+    }
+  ],
+  "rollbackUnknownNotPromoted": true,
+  "realBrokerIsolationQualified": false,
+  "exactClassInitInitiatingCaseKnown": false,
+  "exactAllMethodCasesOrOracleComplete": false,
+  "originalRunRepeated": false,
+  "productTestsExecuted": 0,
+  "newUniqueTests": 0,
+  "compilerOrJvmExecuted": false,
+  "actualBackendActions": 0,
+  "wholeDependencyAccepted": false,
+  "wholeG13Accepted": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "files": {
+    "method-oracle-relations.json": "da7c5c74d1f77d079b916ff7ec3fb238c6295f58641b7bfdb30775c727f50746"
+  },
+  "tool": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/627_transaction_method_oracle_review.py",
+    "sha256": "93773429d991ea64dd937ce053142ae5cee14d5c054e3cc89ce066b9edff5811"
+  }
+}

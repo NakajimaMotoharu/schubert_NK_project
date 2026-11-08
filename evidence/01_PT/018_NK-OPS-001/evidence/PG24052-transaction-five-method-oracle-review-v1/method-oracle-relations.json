@@ -1,0 +1,315 @@
+[
+  {
+    "method": "<init>",
+    "descriptor": "(Ldev/codex/schubert/nk/protocol/transport/BrokerTopology;Ldev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata$DetectedBy;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;)V",
+    "testIds": [
+      "PT-JMS-TXP-001",
+      "PT-JMS-TXP-002",
+      "PT-JMS-TXP-003",
+      "PT-JMS-TXP-004",
+      "PT-JMS-TXP-005",
+      "PT-JMS-TXP-006",
+      "PT-JMS-TXP-007",
+      "PT-JMS-TXP-008",
+      "PT-JMS-TXP-009"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp001BothRoutesDecodeLiteralGoldenAndCommitOnlyAfterProcessor()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp002ConstructorRejectsNullDependenciesAndEveryNonEventDestination()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp003NullAndNonTransactedInputsHaveNoBodyBusinessOrRollbackEffects()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp004TransportFailureRollsBackOnceWithLegacyOrConfirmedCallbackPorts()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp005ClockProcessorAndCommitFailuresPreserveIdentityAndRollbackPhase()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp006PermanentProtocolFailureCommitsBodyPreservingIsolationAndSignalsTerminal()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp007InvalidDeliveryMetadataIsIsolatedBeforeProcessorWithBoundedDiagnostic()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp008FailedIsolationPreservesPrimaryAndConfirmedRollbackWithoutCommitSuccess()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp009UnconfirmedRollbackRetainsUnknownPhaseAndNeverRetriesOrConfirms()"
+    ],
+    "oracleScope": "closed two routes/null constructor and provided dependency state",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener.java",
+    "sourceSha256": "0194df119dfda86475466c13a25cc2dc79af63d423b72e2a55101022d5b53177",
+    "classSha256": "bf6e525d8c73063017c10da809f7084bf23d9a1523f4e8d50d82d197a542476c",
+    "requirementIds": [
+      "MQ-006",
+      "MQ-007",
+      "MQ-008",
+      "MQ-009",
+      "MQ-010",
+      "ASY-002",
+      "MON-003"
+    ],
+    "uiRefs": [
+      "213",
+      "231",
+      "251"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "f6dcecf979d9dbac0338aae079d5730f97ba53afaa3dd46db3e20ef49b21618d"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+      }
+    ],
+    "remaining": [
+      "actual broker/DLQ/DB delivery and business recovery not measured",
+      "all callee/producer and directError paths not qualified by target counters",
+      "case-to-method execution coverage is run-level only; exact class-init initiating case unknown"
+    ],
+    "reviewStatus": "EXPLICIT_TRANSACTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "exactAllMethodCasesOrOracleComplete": false,
+    "wholeDependencyAccepted": false
+  },
+  {
+    "method": "onMessage",
+    "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;)V",
+    "testIds": [
+      "PT-JMS-TXP-001",
+      "PT-JMS-TXP-003",
+      "PT-JMS-TXP-004",
+      "PT-JMS-TXP-006",
+      "PT-JMS-TXP-007"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp001BothRoutesDecodeLiteralGoldenAndCommitOnlyAfterProcessor()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp003NullAndNonTransactedInputsHaveNoBodyBusinessOrRollbackEffects()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp004TransportFailureRollsBackOnceWithLegacyOrConfirmedCallbackPorts()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp006PermanentProtocolFailureCommitsBodyPreservingIsolationAndSignalsTerminal()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp007InvalidDeliveryMetadataIsIsolatedBeforeProcessorWithBoundedDiagnostic()"
+    ],
+    "oracleScope": "legacy overload forwards private no-op observers preserving checked signature",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener.java",
+    "sourceSha256": "0194df119dfda86475466c13a25cc2dc79af63d423b72e2a55101022d5b53177",
+    "classSha256": "bf6e525d8c73063017c10da809f7084bf23d9a1523f4e8d50d82d197a542476c",
+    "requirementIds": [
+      "MQ-006",
+      "MQ-007",
+      "MQ-008",
+      "MQ-009",
+      "MQ-010",
+      "ASY-002",
+      "MON-003"
+    ],
+    "uiRefs": [
+      "213",
+      "231",
+      "251"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "f6dcecf979d9dbac0338aae079d5730f97ba53afaa3dd46db3e20ef49b21618d"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+      }
+    ],
+    "remaining": [
+      "actual broker/DLQ/DB delivery and business recovery not measured",
+      "all callee/producer and directError paths not qualified by target counters",
+      "case-to-method execution coverage is run-level only; exact class-init initiating case unknown"
+    ],
+    "reviewStatus": "EXPLICIT_TRANSACTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "exactAllMethodCasesOrOracleComplete": false,
+    "wholeDependencyAccepted": false
+  },
+  {
+    "method": "onMessage",
+    "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;Ljava/lang/Runnable;Ljava/lang/Runnable;)V",
+    "testIds": [
+      "PT-JMS-TXP-003",
+      "PT-JMS-TXP-004",
+      "PT-JMS-TXP-005",
+      "PT-JMS-TXP-008",
+      "PT-JMS-TXP-009"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp003NullAndNonTransactedInputsHaveNoBodyBusinessOrRollbackEffects()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp004TransportFailureRollsBackOnceWithLegacyOrConfirmedCallbackPorts()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp005ClockProcessorAndCommitFailuresPreserveIdentityAndRollbackPhase()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp008FailedIsolationPreservesPrimaryAndConfirmedRollbackWithoutCommitSuccess()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp009UnconfirmedRollbackRetainsUnknownPhaseAndNeverRetriesOrConfirms()"
+    ],
+    "oracleScope": "null/session and callback-confirmed versus unknown rollback ordering",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener.java",
+    "sourceSha256": "0194df119dfda86475466c13a25cc2dc79af63d423b72e2a55101022d5b53177",
+    "classSha256": "bf6e525d8c73063017c10da809f7084bf23d9a1523f4e8d50d82d197a542476c",
+    "requirementIds": [
+      "MQ-006",
+      "MQ-007",
+      "MQ-008",
+      "MQ-009",
+      "MQ-010",
+      "ASY-002",
+      "MON-003"
+    ],
+    "uiRefs": [
+      "213",
+      "231",
+      "251"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "f6dcecf979d9dbac0338aae079d5730f97ba53afaa3dd46db3e20ef49b21618d"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+      }
+    ],
+    "remaining": [
+      "actual broker/DLQ/DB delivery and business recovery not measured",
+      "all callee/producer and directError paths not qualified by target counters",
+      "case-to-method execution coverage is run-level only; exact class-init initiating case unknown"
+    ],
+    "reviewStatus": "EXPLICIT_TRANSACTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "exactAllMethodCasesOrOracleComplete": false,
+    "wholeDependencyAccepted": false
+  },
+  {
+    "method": "lambda$static$0",
+    "descriptor": "()V",
+    "testIds": [
+      "PT-JMS-TXP-004"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp004TransportFailureRollsBackOnceWithLegacyOrConfirmedCallbackPorts()"
+    ],
+    "oracleScope": "legacy failure path invokes no-op observers; run-level original method coverage",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener.java",
+    "sourceSha256": "0194df119dfda86475466c13a25cc2dc79af63d423b72e2a55101022d5b53177",
+    "classSha256": "bf6e525d8c73063017c10da809f7084bf23d9a1523f4e8d50d82d197a542476c",
+    "requirementIds": [
+      "MQ-006",
+      "MQ-007",
+      "MQ-008",
+      "MQ-009",
+      "MQ-010",
+      "ASY-002",
+      "MON-003"
+    ],
+    "uiRefs": [
+      "213",
+      "231",
+      "251"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "f6dcecf979d9dbac0338aae079d5730f97ba53afaa3dd46db3e20ef49b21618d"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+      }
+    ],
+    "remaining": [
+      "actual broker/DLQ/DB delivery and business recovery not measured",
+      "all callee/producer and directError paths not qualified by target counters",
+      "case-to-method execution coverage is run-level only; exact class-init initiating case unknown"
+    ],
+    "reviewStatus": "EXPLICIT_TRANSACTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "exactAllMethodCasesOrOracleComplete": false,
+    "wholeDependencyAccepted": false
+  },
+  {
+    "method": "<clinit>",
+    "descriptor": "()V",
+    "testIds": [
+      "PT-JMS-TXP-001",
+      "PT-JMS-TXP-002",
+      "PT-JMS-TXP-003",
+      "PT-JMS-TXP-004",
+      "PT-JMS-TXP-005",
+      "PT-JMS-TXP-006",
+      "PT-JMS-TXP-007",
+      "PT-JMS-TXP-008",
+      "PT-JMS-TXP-009"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp001BothRoutesDecodeLiteralGoldenAndCommitOnlyAfterProcessor()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp002ConstructorRejectsNullDependenciesAndEveryNonEventDestination()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp003NullAndNonTransactedInputsHaveNoBodyBusinessOrRollbackEffects()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp004TransportFailureRollsBackOnceWithLegacyOrConfirmedCallbackPorts()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp005ClockProcessorAndCommitFailuresPreserveIdentityAndRollbackPhase()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp006PermanentProtocolFailureCommitsBodyPreservingIsolationAndSignalsTerminal()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp007InvalidDeliveryMetadataIsIsolatedBeforeProcessorWithBoundedDiagnostic()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp008FailedIsolationPreservesPrimaryAndConfirmedRollbackWithoutCommitSuccess()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp009UnconfirmedRollbackRetainsUnknownPhaseAndNeverRetriesOrConfirms()"
+    ],
+    "oracleScope": "static no-op setup observed at run-level, exact initiating testcase unavailable",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener.java",
+    "sourceSha256": "0194df119dfda86475466c13a25cc2dc79af63d423b72e2a55101022d5b53177",
+    "classSha256": "bf6e525d8c73063017c10da809f7084bf23d9a1523f4e8d50d82d197a542476c",
+    "requirementIds": [
+      "MQ-006",
+      "MQ-007",
+      "MQ-008",
+      "MQ-009",
+      "MQ-010",
+      "ASY-002",
+      "MON-003"
+    ],
+    "uiRefs": [
+      "213",
+      "231",
+      "251"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "f6dcecf979d9dbac0338aae079d5730f97ba53afaa3dd46db3e20ef49b21618d"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+      }
+    ],
+    "remaining": [
+      "actual broker/DLQ/DB delivery and business recovery not measured",
+      "all callee/producer and directError paths not qualified by target counters",
+      "case-to-method execution coverage is run-level only; exact class-init initiating case unknown"
+    ],
+    "reviewStatus": "EXPLICIT_TRANSACTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "exactAllMethodCasesOrOracleComplete": false,
+    "wholeDependencyAccepted": false
+  }
+]
