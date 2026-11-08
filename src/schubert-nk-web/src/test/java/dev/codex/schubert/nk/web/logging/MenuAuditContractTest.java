@@ -18,6 +18,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.ui.ConcurrentModel;
@@ -141,8 +142,12 @@ final class MenuAuditContractTest {
       }
       assertTrue(second.menuViewCandidate());
       assertFalse(first.menuViewCandidate());
-      try (var workers = Executors.newFixedThreadPool(1)) {
-        workers.submit(WebRequestTrace::markMenuViewed).get();
+      var workers = Executors.newFixedThreadPool(1);
+      try {
+        workers.submit(WebRequestTrace::markMenuViewed).get(10, TimeUnit.SECONDS);
+      } finally {
+        workers.shutdownNow();
+        assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
       }
       assertFalse(first.menuViewCandidate());
       WebRequestTrace.markMenuViewed();

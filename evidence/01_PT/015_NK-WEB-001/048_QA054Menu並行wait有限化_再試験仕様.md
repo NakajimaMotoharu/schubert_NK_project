@@ -1,0 +1,11 @@
+# QA054 Menu並行wait有限化・変更後元十五再試験仕様
+
+主G03.05、関連P006/画面owner追加費0、REWORK開始1/3/7pp cap9。BUG2521/YKT2177。元044/045のPT-WEB-MENU001..005全五とWebRequestTraceTest全十を同一新exec/sessionで必要再試験する。製品Mainは7aed/normal22084、六Main静的22086/lineage22126同byte資格を再利用しMain再build0。現Menu/Trace/Kind全三Source四Codeは元19558と全classbyte同一、元caseを成功確認目的で再演せず、Test fixture是正後の必要回帰として一度実行する。
+
+menu005の一Future.getを10SECONDSへ、ownerはexplicit shutdownNow/awaitTermination10SECONDS+assertTrueとし、outer traceのfinally closeを保持。全元matrix/独立期待/公開合成principal/nullable異常/並行callbackを変更しない。全Test source/全helperと呼出Main/callee/SDKの既044安全契約を再確認し、主にTest変更後制御と現正常JAR・依存pin/SourceFileを固定する。元MVC実DB/Test抜粋/fixture抽出や保留graphの迂回をしない。
+
+runtimeは自己所有一JVM・memorySpringServlet/表示Principalとrepo公開controller/config source inventory読取だけ。SessionStoreExceptionは固定constructorのみでgraph0。held四は初期化/呼出probe0、実HTTP/DB/JMS/JCA鍵/VM/Root/cohort/native/原本操作0。SDK内部classpath/属性読取はあり、全syscall0は主張しない。所有するworkerはTest内開始/有限Future/有限shutdown確認、JUnit全体180秒は最終外枠で原Root等jobを停止しない。
+
+Test-only format/compile(-proc:none/implicit:none/Java25/-Werror)/PMD・Checkstyleを実行。指摘は元source別同種根拠と新spanを個別照合し抑制しない。実fixture同一性をbyte/token逆変換と独立期待箇所で確認、正常artifact/SDKにJDBCdriver/processor/外部Class-Pathがないことを対象範囲で検査。source commit固定後だけrunし、全15/FESabortednotrun0、三Source四physical L103/M30/C4/B38全未達0を単execで確認。未達はそのまま残し公式filter/分母を変えない。他依存のpartialを全体100へ合算0。
+
+独立postはsource/元15case集合/XML/console真正終了/全target physical+CRC/現正常Jar/同session/実hitMainCRC・held四0・全source/Main不変・Coverage全method/branchとstaticを検証。raw/canonical・失敗/例外・環境/command/終了とmanifesthashは049へ保存し、BUGは再資格後だけ限定閉鎖。原UserCommandService/Question動的HOLDと全YKT/451/正式1964-53/unique517/候補114/pending12/whole93暫定/新leaf0/工数nullを維持。原15は新規試験へ再加算しない。sourceOnly23952構文一覧のMenu当一entryは歴史化（Adminと計二source差分）し全解析再演0。通常小区切り停止0。

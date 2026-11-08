@@ -1,0 +1,12 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T17:39:49.579901+09:00",
+  "target": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MenuAuditContractTest.java",
+  "beforeSha256": "a3425c180d5e1289e8d1aa5d3dfbf22fc2e168a43ad8f4bae98b636b020374bb",
+  "method": "menu005NestedMarkersDoNotInheritAndEachNoMqEventSelfCorrelates",
+  "typedReceiver": "ExecutorService.submit(Runnable) returns Future<?>; local workers=Executors.newFixedThreadPool(1)",
+  "unboundedWait": "workers.submit(WebRequestTrace::markMenuViewed).get()",
+  "originalProof": "evidence/01_PT/015_NK-WEB-001/evidence/PG19558-qa054-web-menu-fifteen-v1/manifest.json",
+  "reason": "Future.get has no deadline and try-with-resources ExecutorService.close may wait indefinitely on a regressed callback; replace with explicit finite wait and finite owner cleanup.",
+  "productTestsExecuted": 0
+}
