@@ -1,0 +1,16 @@
+# 3956 API pool/outbox供給 原24 有限owner結果
+
+G03.05主/P01809関連0 REWORK原1/4/8cap10。BUG2589三複合registry+workerを単一finally10/三invokeAll10、元Pool8/OutboxAge8/OutboxRows8 whole24全body/literal/recordhash/textを逆復元。PMDraw21(thread12/resource3/意図的参照同一性6)各適用0/CS処理0。Source28e480通常push後25328原24初一回真正0/ccc3936b→25332独立0/b5fc2ea3・10metadata、Target3Source8Code L120M34C8B69I645全miss0/全Source四100/strict0・自然B0 enum二=N-A・8Main実CRC/SDK43identity既52の同Jar同CRC部分集合新metadata0/held四init0。SS351三family/API/四state三status/3,5,2,8/NaN≠0/MAX2^63/Duration1.5・1ns・300・hash3045・64同一性/反復999と別7の独立oracle一致。工具/製品失敗0、旧56/46成功再演0/実DBHikariSQLdispatchclock0。限定BUG2589閉鎖/global2177と2565PT_HOLD OPEN。unique520Java416/候補114pending12whole93暫定/新leaf0/正式1964-53工数null全HOLD不変。usage08:40:35 75a9b105 N/Tnull次09:40:35。
+
+対象source `28e48089eea6447378490c43d930c9b659908744`/Main `7aed8eace7c844c2f79f2e39db766faf914890d5`。実command `PYTHONPATH=tools/quality:tools/quality/vm/050_s1 python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg25328_api_pool_outbox_original_twenty_four_pt.py`。JDK25.0.4/Console1.13.4/JaCoCo0.8.15/Core SDK1.17.1。実日時/OS/branch/環境/各command/終了codeはrawmanifestと独立reportedEnvironment、全Test IDはtestcases.safe.xml。
+
+|証跡|SHA256|
+|---|---|
+|evidence/01_PT/018_NK-OPS-001/evidence/PG25322-api-pool-outbox-owner-before-v1/manifest.json|a100d028b728ef43b31a5eb3cf872e8412b3b94be4c4b319fa2597ec48965cb5|
+|evidence/01_PT/018_NK-OPS-001/evidence/PG25324-api-pool-outbox-owner-prepare-v1/manifest.json|ba1d8474be406cb1359967719a7690efa22842ef63dc2e8dc2f1de2d1732ed1b|
+|evidence/01_PT/018_NK-OPS-001/evidence/PG25326-api-pool-outbox-source-static-v1/manifest.json|0de4e0d8944e0e109b0e48aff62a3f57fcbc1b3e0411bc59d4e0aba74b76df9e|
+|evidence/01_PT/018_NK-OPS-001/evidence/PG25328-api-pool-outbox-original-whole24-v1/manifest.json|ccc3936b7d67d14b0331b2d5e7aafdd0062318304eee11861fcc109034bf4f7b|
+|evidence/01_PT/018_NK-OPS-001/evidence/PG25330-api-pool-outbox-sdk-identity-v1/manifest.json|d91fc34792b15b3aa4c6d274466806c93a666ba09ef5bb53c84fed0d903f93b9|
+|evidence/01_PT/018_NK-OPS-001/evidence/PG25332-api-pool-outbox-whole24-independent-v1/manifest.json|b5fc2ea3f10eb2d78511bf458271c7960208eb743cdf3789000b2f84461df457|
+
+SDKはidentity限定、分岐なしState/StatusはN-A、元生成filter以外除外0。全体451/正式認定・工数率未更新。次：Continue477 after API Pool8/OutboxAge8/OutboxRows8 originalwhole24 PG25328 source28e480 Main7aed genuine0 ccc3936b; independent25332 b5fc2ea3 all3Source8Code L120M34C8B69I645miss0/sourcefourgate0/classnaturalB0twoNA/8MainCRC/nohelper/SDK43identityexactprior52subset/held4init0. BUG2589 threeinvokeAll10/threeCOMPOSITEowners whole24body/literal inverseexact, sourceoracles duration1.5/1ns/300/MAX2^63/hash3045/999vs7/64cohort preserved. LimitedBUGclosed/global2177+2565PT_HOLDopen. Next actual23952 remaining Future/worker candidates pureAPI Collector/Observation orWeb memory ownSDK whole, fullsource/dependency/originalfollowup review beforegroup; no alreadyfinite orsuccessreplay, no protectedRoot2/fourIO/runtimeinit/actualFFM/externalRootVMDBMQ/Hikari/keys/permit/cohort. CurrentMain7aed/unique520Java416/114pending12whole93/formal1964-53effortnull/G07class1213remain3280+22actualSecretnull unchanged. Usage08:40:35 75a9b105 N/Tnull next09:40:35 ifdue; quota<=10preserve continuous-v2.
