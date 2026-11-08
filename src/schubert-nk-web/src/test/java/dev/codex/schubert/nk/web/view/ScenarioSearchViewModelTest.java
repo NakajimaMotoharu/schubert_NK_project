@@ -438,7 +438,8 @@ class ScenarioSearchViewModelTest {
 
   @Test
   void web229ConcurrentSnapshots() throws Exception {
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var tasks = new ArrayList<Future<?>>();
       for (int i = 1; i <= 64; i++) {
         int n = i;
@@ -460,6 +461,9 @@ class ScenarioSearchViewModelTest {
                 }));
       }
       for (var task : tasks) task.get(10, TimeUnit.SECONDS);
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

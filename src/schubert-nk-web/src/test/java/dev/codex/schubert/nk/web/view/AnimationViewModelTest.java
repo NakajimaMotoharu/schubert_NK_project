@@ -326,7 +326,8 @@ class AnimationViewModelTest {
 
   @Test
   void web237ConcurrentProjection() throws Exception {
-    try (var executor = Executors.newFixedThreadPool(8)) {
+    var executor = Executors.newFixedThreadPool(8);
+    try {
       var tasks = new ArrayList<Future<?>>();
       for (int i = 0; i < 64; i++) {
         final int n = i;
@@ -358,6 +359,9 @@ class AnimationViewModelTest {
                 }));
       }
       for (var task : tasks) task.get(10, TimeUnit.SECONDS);
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
