@@ -1,0 +1,456 @@
+{
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "testSource": "64f3a72753434347889f0eabd5d9f9dca67c6bfb",
+  "normalProof": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG24642-protocol-whole120-independent-v1/manifest.json",
+    "sha256": "8ebe6365bc701ba6432b1b55275004024dc71bc452d31b66d31c53894e3ae128"
+  },
+  "metadataInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json",
+    "sha256": "e65782d893a5ae45309cf269d165dec33d1dc396f06b7968b62d95b276455d31"
+  },
+  "descriptorInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/artifacts.json",
+    "sha256": "fb24a1a209849d42894925002baae668bc55a4bd858b1b7c1d38ab838319bb0b"
+  },
+  "physicalIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json",
+    "sha256": "db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723"
+  },
+  "sourcePaths": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException.java"
+  ],
+  "owner": "WBS-P001-02",
+  "expectedRawMethods": 40,
+  "expectedOfficialMethods": 25,
+  "expectedStandardFiltered": 15,
+  "cases": {
+    "L1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest#registryMatchesIndependentUi233Catalog()",
+      "testIds": [
+        "PT-PRO-001-L01",
+        "PT-PRO-001-L03"
+      ],
+      "independentOracle": "IndependentUI233 TSV all64 orderedtuples: kind,interaction,data/record/maxCount/total,version1/unknown2,immutablecollection; registry actuals neverexpected."
+    },
+    "L2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest#registryRejectsEmptyNullDuplicateAndKindMismatches()",
+      "testIds": [
+        "PT-PRO-001-L02"
+      ],
+      "independentOracle": "Fixedempty/nullcontainer/nullmember/duplicate andREQ/RSP/unknown/QWK/QSB typeinteractionmismatches rejected; validcustomrequest accepted."
+    },
+    "L3": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest#layoutDefinitionChecksEveryLengthAndKindInvariant()",
+      "testIds": [
+        "PT-PRO-001-L02"
+      ],
+      "independentOracle": "Literal264/274/284 =256+8+10*0/1/2; count-1/3,version2/negative/1000000,recordpair0/non0,total257,eventprofile/overflow/null rejected."
+    },
+    "L4": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest#layoutIdAndFieldDefinitionAreStrictAndOneBased()",
+      "testIds": [
+        "PT-PRO-001-L02",
+        "PT-PRO-001-F01"
+      ],
+      "independentOracle": "LiteraluppercaseASCII8, short/lowercase/null reject, ABCREQ01<ABCRSP01, literaltoString; FieldDefinition assertions aredifferentSource references andnotnewcredit."
+    },
+    "H7": {
+      "caseKey": "dev.codex.schubert.nk.protocol.header.HeaderModelTest#headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow()",
+      "testIds": [
+        "PT-PRO-HDR3266-002"
+      ],
+      "independentOracle": "Literal999744+256=1000000 accepted,999745+256=1000001 rejected;999999*999999 overflow wraps ArithmeticException withfixeddiagnostic."
+    }
+  },
+  "methodRules": {
+    "LayoutId": {
+      "<init>": {
+        "cases": [
+          "L4"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Require non-null uppercaseASCII8 identifier.",
+        "staticPath": "LayoutMetadataTest direct new LayoutId"
+      },
+      "compareTo": {
+        "cases": [
+          "L4"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Typed lexicographic compare/nullprecondition, no locale ordering.",
+        "staticPath": "L4 first.compareTo(second/null)"
+      },
+      "toString": {
+        "cases": [
+          "L4"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Identifier literal renderedexactly.",
+        "staticPath": "L4 explicit fixedliteral vs first.toString"
+      },
+      "<clinit>": {
+        "cases": [
+          "L4"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Fixed [A-Z0-9]{8} Pattern source.",
+        "staticPath": "Initialization prerequisite of LayoutId constructor"
+      }
+    },
+    "LayoutDefinition": {
+      "<init>": {
+        "cases": [
+          "L3"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Both delegatingandcanonical constructors establish checkedversion/length/count/pair/kind/internal/null invariants.",
+        "staticPath": "LayoutMetadataTest d -> sevenargument -> canonical eightargumentconstructor; directeightargumentwrongtotal rejected"
+      },
+      "totalLengthFor": {
+        "cases": [
+          "L3"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Count0..maximum only andcheckedbodyformula.",
+        "staticPath": "L3 fixed264/274/284 literal calls totalLengthFor"
+      },
+      "validateDeclaredLength": {
+        "cases": [
+          "L3"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Lengths/count are sixdigits0..999999.",
+        "staticPath": "Canonicalconstructor andcalculateMaximumTotal -> validateDeclaredLength"
+      },
+      "calculateMaximumTotal": {
+        "cases": [
+          "L3"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Checked256+data+record*count, integeroverflow andmillionlimit rejected.",
+        "staticPath": "Delegating/canonicalconstructor andtotalLengthFor -> calculateMaximumTotal"
+      }
+    },
+    "LayoutRegistry": {
+      "<init>": {
+        "cases": [
+          "L1",
+          "L2"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Build immutable orderedindex/list from validateddefinitions.",
+        "staticPath": "Class<clinit> -> new LayoutRegistry(standardDefinitions()); L1 all andrequire observations"
+      },
+      "validateDefinitions": {
+        "cases": [
+          "L2"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Shared validation ofexplicitprovideddefinitions withoutmutation.",
+        "staticPath": "L2 direct package-level validateDefinitions"
+      },
+      "validatedIndex": {
+        "cases": [
+          "L1",
+          "L2"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Non-null collection/items, kindmetadata agrees, uniqueid/version, nonempty orderedindex.",
+        "staticPath": "Constructor andvalidateDefinitions -> validatedIndex"
+      },
+      "standard": {
+        "cases": [
+          "L1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Retained immutable standardcatalog.",
+        "staticPath": "L1 direct LayoutRegistry.standard()"
+      },
+      "all": {
+        "cases": [
+          "L1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Expose immutabledefinitions inUI233approvedorder.",
+        "staticPath": "L1 standard().all() expectedTSV andclear rejection"
+      },
+      "require": {
+        "cases": [
+          "L1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "BothString/LayoutId overload lookup exactid/version; null andunknownversion rejected.",
+        "staticPath": "L1 directString andtypedrequire; String delegates typed"
+      },
+      "key": {
+        "cases": [
+          "L1",
+          "L2"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Exact id:version lookup andduplicateidentity.",
+        "staticPath": "validatedIndex andtypedrequire -> key"
+      },
+      "validateIdentifierKind": {
+        "cases": [
+          "L1",
+          "L2"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "ID impliesREQ/RSP/event andQSB async profiles.",
+        "staticPath": "validatedIndex -> validateIdentifierKind"
+      },
+      "ifEvent": {
+        "cases": [
+          "L1",
+          "L2"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "OnlyQWKREQ01/WLGEVT01 areevents inapprovedcatalog.",
+        "staticPath": "validateIdentifierKind -> ifEvent, literal64tuple andQWKmismatch fixture"
+      },
+      "standardDefinitions": {
+        "cases": [
+          "L1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "64 independentlyspecified registrytuple declarations, orderedandcomplete.",
+        "staticPath": "<clinit> -> standardDefinitions; L1 entireUI233 fixtureequal"
+      },
+      "d": {
+        "cases": [
+          "L1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Constructeachliteralstandardtuple includingexplicitmaximumtotal.",
+        "staticPath": "standardDefinitions -> d -> LayoutDefinitioneightarg"
+      },
+      "<clinit>": {
+        "cases": [
+          "L1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Build retainedstandard once; all64 observed viaL1.",
+        "staticPath": "RETAINED_STANDARD initializer -> standardDefinitions -> constructor"
+      }
+    },
+    "LayoutValidationException": {
+      "<init>": {
+        "cases": [
+          "L2",
+          "L3",
+          "L4",
+          "H7"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7",
+          "11"
+        ],
+        "contract": "Typedmetadata rejection, cause retainedforArithmeticException overload; fixedheaderoverflowdiagnostic checked H7, not allmessageformats.",
+        "staticPath": "LayoutId/LayoutDefinition/LayoutRegistry/CommonHeader constructors throw new LayoutValidationException"
+      }
+    },
+    "UnsupportedLayoutException": {
+      "<init>": {
+        "cases": [
+          "L1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "11",
+          "12"
+        ],
+        "contract": "Unknown layout/version throwsdistinct unsupported exception.",
+        "staticPath": "LayoutRegistry.require -> new UnsupportedLayoutException"
+      }
+    }
+  },
+  "generatedMethods": {
+    "LayoutDefinition": [
+      "toString",
+      "hashCode",
+      "equals",
+      "id",
+      "version",
+      "messageKind",
+      "interactionKind",
+      "dataLength",
+      "recordLength",
+      "maximumRecordCount",
+      "maximumTotalLength"
+    ],
+    "LayoutId": [
+      "hashCode",
+      "equals",
+      "value",
+      "compareTo"
+    ]
+  },
+  "oracleDocuments": [
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/001_NK-PRO-001_単体テスト仕様書.md",
+      "sha256": "503c5f6be3caaa341dcec35cb1bd1b8a3892d270bf6a7fa91cdad580b43abdbe"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/107_現source正本fixture照合・layout個別受入.md",
+      "sha256": "6354a848537937df156f5380941531d71bdf749f68ff1290943a58450ba64ddc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1956_G13LayoutCatalog7_独立期待値意味対応表.md",
+      "sha256": "6ede52efc7cb04c471c6a55e2a17d4b8c4859c9186f24977bc9758b1dcd3d711"
+    }
+  ]
+}
