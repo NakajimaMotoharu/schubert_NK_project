@@ -1,0 +1,14 @@
+{
+  "status": "PRE_EXECUTION_METADATA_CLOSURE_GAP_DETECTED",
+  "actualExit": null,
+  "productTestsExecuted": 0,
+  "preflightSha256": "61a8920c900734b7449fa7a4356d9907b8e87359bebf32d4e80448578766bcd8",
+  "missingInitializerSymbols": [
+    "dev/codex/schubert/nk/batch/monitoring/BatchMetricContract$Step",
+    "dev/codex/schubert/nk/batch/repository/BatchStep"
+  ],
+  "cause": "LabelPolicy static initializer uses Step.values/BatchStep.values already pinned by PG25130; whole batch Jar was pinned but preflight omitted two helper Source inputs and positive-Main whitelist names. Found by source review before product execution.",
+  "files": {
+    "preflight-before.json": "61a8920c900734b7449fa7a4356d9907b8e87359bebf32d4e80448578766bcd8"
+  }
+}
