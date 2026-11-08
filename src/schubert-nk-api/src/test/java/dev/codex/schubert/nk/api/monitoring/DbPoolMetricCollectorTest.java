@@ -179,68 +179,78 @@ class DbPoolMetricCollectorTest {
 
   @Test
   void poolConn006OneOwnerSerializesGettersThroughPublication() throws Exception {
-    try (var registry = new Registry();
-        var executor = Executors.newFixedThreadPool(2)) {
-      var collector = collector(registry, DEBUG_MONITORING_MODE);
-      var first = new Fixture();
-      first.active = 1;
-      var second = new Fixture();
-      second.active = 2;
-      var entered = new CountDownLatch(1);
-      var release = new CountDownLatch(1);
-      var calledSecond = new CountDownLatch(1);
-      var enteredSecond = new CountDownLatch(1);
-      first.beforeActive =
-          () -> {
-            entered.countDown();
-            assertTrue(release.await(5, TimeUnit.SECONDS));
-          };
-      second.beforeActive = enteredSecond::countDown;
-      var one = executor.submit(() -> collector.collect(first.pool(), first.config()));
+    try (var registry = new Registry()) {
+      var executor = Executors.newFixedThreadPool(2);
       try {
-        assertTrue(entered.await(5, TimeUnit.SECONDS));
-        var two =
-            executor.submit(
-                () -> {
-                  calledSecond.countDown();
-                  return collector.collect(second.pool(), second.config());
-                });
-        assertTrue(calledSecond.await(5, TimeUnit.SECONDS));
-        assertFalse(enteredSecond.await(100, TimeUnit.MILLISECONDS));
-        assertTrue(collector.snapshot().isEmpty());
-        release.countDown();
-        assertEquals(1, one.get(5, TimeUnit.SECONDS).orElseThrow().active());
-        assertEquals(2, two.get(5, TimeUnit.SECONDS).orElseThrow().active());
-        assertEquals(2, collector.snapshot().orElseThrow().active());
-        first.complete();
-        second.complete();
+        var collector = collector(registry, DEBUG_MONITORING_MODE);
+        var first = new Fixture();
+        first.active = 1;
+        var second = new Fixture();
+        second.active = 2;
+        var entered = new CountDownLatch(1);
+        var release = new CountDownLatch(1);
+        var calledSecond = new CountDownLatch(1);
+        var enteredSecond = new CountDownLatch(1);
+        first.beforeActive =
+            () -> {
+              entered.countDown();
+              assertTrue(release.await(5, TimeUnit.SECONDS));
+            };
+        second.beforeActive = enteredSecond::countDown;
+        var one = executor.submit(() -> collector.collect(first.pool(), first.config()));
+        try {
+          assertTrue(entered.await(5, TimeUnit.SECONDS));
+          var two =
+              executor.submit(
+                  () -> {
+                    calledSecond.countDown();
+                    return collector.collect(second.pool(), second.config());
+                  });
+          assertTrue(calledSecond.await(5, TimeUnit.SECONDS));
+          assertFalse(enteredSecond.await(100, TimeUnit.MILLISECONDS));
+          assertTrue(collector.snapshot().isEmpty());
+          release.countDown();
+          assertEquals(1, one.get(5, TimeUnit.SECONDS).orElseThrow().active());
+          assertEquals(2, two.get(5, TimeUnit.SECONDS).orElseThrow().active());
+          assertEquals(2, collector.snapshot().orElseThrow().active());
+          first.complete();
+          second.complete();
+        } finally {
+          release.countDown();
+        }
       } finally {
-        release.countDown();
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }
 
   @Test
   void poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts() throws Exception {
-    try (var registry = new Registry();
-        var executor = Executors.newFixedThreadPool(8)) {
-      var collector = collector(registry, DEBUG_MONITORING_MODE);
-      var tasks = new ArrayList<Callable<Long>>();
-      for (int i = 0; i < 64; i++) {
-        int active = i;
-        tasks.add(
-            () -> {
-              var f = new Fixture();
-              f.active = active;
-              var actual = collector.collect(f.pool(), f.config()).orElseThrow();
-              DbPoolMetricObservationTest.values(actual, active, 5, 2, 8);
-              f.complete();
-              return actual.active();
-            });
+    try (var registry = new Registry()) {
+      var executor = Executors.newFixedThreadPool(8);
+      try {
+        var collector = collector(registry, DEBUG_MONITORING_MODE);
+        var tasks = new ArrayList<Callable<Long>>();
+        for (int i = 0; i < 64; i++) {
+          int active = i;
+          tasks.add(
+              () -> {
+                var f = new Fixture();
+                f.active = active;
+                var actual = collector.collect(f.pool(), f.config()).orElseThrow();
+                DbPoolMetricObservationTest.values(actual, active, 5, 2, 8);
+                f.complete();
+                return actual.active();
+              });
+        }
+        var actual = executor.invokeAll(tasks, 10, TimeUnit.SECONDS);
+        for (int i = 0; i < actual.size(); i++) assertEquals((long) i, actual.get(i).get());
+        assertEquals(4, registry.getMeters().size());
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
-      var actual = executor.invokeAll(tasks);
-      for (int i = 0; i < actual.size(); i++) assertEquals((long) i, actual.get(i).get());
-      assertEquals(4, registry.getMeters().size());
     }
   }
 

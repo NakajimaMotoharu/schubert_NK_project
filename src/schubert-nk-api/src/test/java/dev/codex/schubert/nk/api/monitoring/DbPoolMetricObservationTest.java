@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -174,9 +175,13 @@ class DbPoolMetricObservationTest {
             return actual.active();
           });
     }
-    try (var pool = Executors.newFixedThreadPool(8)) {
-      var actual = pool.invokeAll(tasks);
+    var pool = Executors.newFixedThreadPool(8);
+    try {
+      var actual = pool.invokeAll(tasks, 10, TimeUnit.SECONDS);
       for (int i = 0; i < actual.size(); i++) assertEquals((long) i, actual.get(i).get());
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

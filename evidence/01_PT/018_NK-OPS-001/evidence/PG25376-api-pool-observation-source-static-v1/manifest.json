@@ -1,0 +1,212 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T08:57:56.632303+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservationTest.java",
+      "originalSha256": "13a68e4303e1870494f463ba6ef89e32d8807082594ccc11709f497668d5e14f",
+      "currentSha256": "238a440449f9b0cb5302514261a290adf21749073dccfdde7eddf2ed0c5025df",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 1,
+      "existingFutureGet5SitesRetained": 0
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+      "originalSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd",
+      "currentSha256": "a37cd62312e68185d7f22131ae29839af7a25e329ad5538c1eb394e231ea4d6d",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 2,
+      "existingFutureGet5SitesRetained": 2
+    }
+  ],
+  "originalWholeCases": 16,
+  "rawFindings": 19,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 2,
+  "finiteOwnerSitesCorrected": 3,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25374-api-pool-observation-owner-prepare-v1/manifest.json",
+    "sha256": "11b9fd17fadc0a6bcc5006e76718dc1b2b2ab8d0e976a6ae5810052df5595ced"
+  },
+  "classifications": [
+    {
+      "className": "DbPoolMetricCollectorTest",
+      "method": "poolConn006OneOwnerSerializesGettersThroughPublication",
+      "variable": "executor",
+      "line": 183,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeinterface observations, existing5secondlatch/get and100ms nonentry unchanged; twoinvokeAll10/three singlefinallyshutdownNow-await10."
+    },
+    {
+      "className": "DbPoolMetricCollectorTest",
+      "method": "poolConn006OneOwnerSerializesGettersThroughPublication",
+      "variable": "executor",
+      "line": 183,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeinterface observations, existing5secondlatch/get and100ms nonentry unchanged; twoinvokeAll10/three singlefinallyshutdownNow-await10."
+    },
+    {
+      "className": "DbPoolMetricCollectorTest",
+      "method": "poolConn006OneOwnerSerializesGettersThroughPublication",
+      "variable": "one",
+      "line": 200,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeinterface observations, existing5secondlatch/get and100ms nonentry unchanged; twoinvokeAll10/three singlefinallyshutdownNow-await10."
+    },
+    {
+      "className": "DbPoolMetricCollectorTest",
+      "method": "poolConn006OneOwnerSerializesGettersThroughPublication",
+      "variable": "two",
+      "line": 204,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeinterface observations, existing5secondlatch/get and100ms nonentry unchanged; twoinvokeAll10/three singlefinallyshutdownNow-await10."
+    },
+    {
+      "className": "DbPoolMetricCollectorTest",
+      "method": "poolConn006OneOwnerSerializesGettersThroughPublication",
+      "variable": null,
+      "line": 222,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeinterface observations, existing5secondlatch/get and100ms nonentry unchanged; twoinvokeAll10/three singlefinallyshutdownNow-await10."
+    },
+    {
+      "className": "DbPoolMetricCollectorTest",
+      "method": "poolConn006OneOwnerSerializesGettersThroughPublication",
+      "variable": null,
+      "line": 223,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeinterface observations, existing5secondlatch/get and100ms nonentry unchanged; twoinvokeAll10/three singlefinallyshutdownNow-await10."
+    },
+    {
+      "className": "DbPoolMetricCollectorTest",
+      "method": "poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+      "variable": "executor",
+      "line": 231,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeinterface observations, existing5secondlatch/get and100ms nonentry unchanged; twoinvokeAll10/three singlefinallyshutdownNow-await10."
+    },
+    {
+      "className": "DbPoolMetricCollectorTest",
+      "method": "poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+      "variable": "executor",
+      "line": 231,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeinterface observations, existing5secondlatch/get and100ms nonentry unchanged; twoinvokeAll10/three singlefinallyshutdownNow-await10."
+    },
+    {
+      "className": "DbPoolMetricCollectorTest",
+      "method": "poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+      "variable": "actual",
+      "line": 247,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeinterface observations, existing5secondlatch/get and100ms nonentry unchanged; twoinvokeAll10/three singlefinallyshutdownNow-await10."
+    },
+    {
+      "className": "DbPoolMetricCollectorTest",
+      "method": "poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+      "variable": null,
+      "line": 251,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeinterface observations, existing5secondlatch/get and100ms nonentry unchanged; twoinvokeAll10/three singlefinallyshutdownNow-await10."
+    },
+    {
+      "className": "DbPoolMetricCollectorTest",
+      "method": "poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+      "variable": null,
+      "line": 252,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeinterface observations, existing5secondlatch/get and100ms nonentry unchanged; twoinvokeAll10/three singlefinallyshutdownNow-await10."
+    },
+    {
+      "className": "DbPoolMetricObservationTest.Fixture",
+      "method": null,
+      "variable": "faults",
+      "line": 36,
+      "rule": "UseConcurrentHashMap",
+      "applicable": false,
+      "basis": "Each parallel task owns a separate Fixture/faults HashMap; failures populated synchronously before calls, no map shared between tasks/getters."
+    },
+    {
+      "className": "DbPoolMetricObservationTest.Fixture",
+      "method": "pool",
+      "variable": null,
+      "line": 50,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "basis": "Own JDKProxy must use declaring Hikari interface ClassLoader for visibility/type identity. No context-loader replacement, external lookup or pool/config initialization."
+    },
+    {
+      "className": "DbPoolMetricObservationTest.Fixture",
+      "method": "config",
+      "variable": null,
+      "line": 64,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "basis": "Own JDKProxy must use declaring Hikari interface ClassLoader for visibility/type identity. No context-loader replacement, external lookup or pool/config initialization."
+    },
+    {
+      "className": "DbPoolMetricObservationTest",
+      "method": "poolRead007ParallelOwnedInterfacesCannotShareMutableObservationState",
+      "variable": "pool",
+      "line": 178,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeinterface observations, existing5secondlatch/get and100ms nonentry unchanged; twoinvokeAll10/three singlefinallyshutdownNow-await10."
+    },
+    {
+      "className": "DbPoolMetricObservationTest",
+      "method": "poolRead007ParallelOwnedInterfacesCannotShareMutableObservationState",
+      "variable": "pool",
+      "line": 178,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeinterface observations, existing5secondlatch/get and100ms nonentry unchanged; twoinvokeAll10/three singlefinallyshutdownNow-await10."
+    },
+    {
+      "className": "DbPoolMetricObservationTest",
+      "method": "poolRead007ParallelOwnedInterfacesCannotShareMutableObservationState",
+      "variable": "actual",
+      "line": 180,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeinterface observations, existing5secondlatch/get and100ms nonentry unchanged; twoinvokeAll10/three singlefinallyshutdownNow-await10."
+    },
+    {
+      "className": "DbPoolMetricObservationTest",
+      "method": "poolRead007ParallelOwnedInterfacesCannotShareMutableObservationState",
+      "variable": null,
+      "line": 183,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeinterface observations, existing5secondlatch/get and100ms nonentry unchanged; twoinvokeAll10/three singlefinallyshutdownNow-await10."
+    },
+    {
+      "className": "DbPoolMetricObservationTest",
+      "method": "poolRead007ParallelOwnedInterfacesCannotShareMutableObservationState",
+      "variable": null,
+      "line": 184,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeinterface observations, existing5secondlatch/get and100ms nonentry unchanged; twoinvokeAll10/three singlefinallyshutdownNow-await10."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}
