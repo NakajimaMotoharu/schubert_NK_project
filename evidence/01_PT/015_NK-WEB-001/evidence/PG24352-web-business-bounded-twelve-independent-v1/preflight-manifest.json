@@ -1,0 +1,166 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T19:49:23.008800+09:00",
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest.java": "76cb1f7dd520eecf763f60a7320d4d3b946a3e7ea947e1f7e5f3fd188abea9c7",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/QuestionWireClient.java": "7f6299cc4d6acd5fa944a02eade9c826f0f1268951c8c17a63b4b641bebde1a0",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/NotificationWireClient.java": "f945859ec735eb33390de809b3f65177dda579536c8f2749a9c433aa52df12cf",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/UserAdministrationWireClient.java": "fefe8a3a47ac916e0b869b82753701f8204f0a175870c81bb3638d7871cec006",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/LogoutWireClient.java": "8411aaeee9f580c1cc3fe16afdcaabdc9893b3f0c4cebb996a168f6b0909d578",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/MediaDescriptorWireClient.java": "eb1a8d9cbc013cd171ea658cad67511a6adceee78c34db39f0ebdb1f3bd8a02a",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient.java": "6e4a8c190ccb5bceb4d8412ad8b8139c156e0fbe5ae55ee6b17e1989c8ac1e60",
+    "evidence/01_PT/015_NK-WEB-001/input/059_web_business_bounded_qualifier.py": "1847197696d929843950da0d1f5720fd16e1d73a1c2b964888f21158bd123fe6",
+    "evidence/01_PT/015_NK-WEB-001/input/058_web_business_bounded_scope.json": "65ef0b57690eb89ddd026d74aa473fcdfe13ce1d7c4befc0defa59fbfbec253f"
+  },
+  "compileManifestSha256": "76b397e734af3c77e8671a851352da3089c3a3486071db14d9ae299a2695743d",
+  "staticManifestSha256": "c553803f675d79d373ef00d4676c5ad11e79d51b3f76e6af3bb259049130f41a",
+  "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+  "normalPositiveMainIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json",
+    "sha256": "db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723"
+  },
+  "priorPureGraphReview": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24322-read-four-bounded-preflight-v1/manifest.json",
+    "sha256": "a0789f943db85b27db900845c577940756d6ba57eeb3bffa182a69d9a38ad89a"
+  },
+  "originalWholeProofContext": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14314-web-business-wire-whole-twelve-post-v1/manifest.json",
+    "sha256": "06f8b8d26d79ec31f64c588144f6c7d54b74a35bfa72ef44fe72ca2e53e0719e",
+    "oldExecutionOrCountersTransferred": false,
+    "missingHistoricalAuthAndKeyCounters": null,
+    "exactOldSchemaNegativeChecks": [
+      "missing-network",
+      "wrong-counter-type",
+      "nonzero-network",
+      "root-main",
+      "not-only-own-threads",
+      "unexpected-new-auth-field"
+    ]
+  },
+  "beforeGitCommit": "1c6eccb4f29d55693453fefe4e5980e6dc7c9cbb",
+  "beforeTestSha256": "5e8ddf531e8ab4145bb25dfc215e1a78ec590e7a52214a77b455dd55167ed8a3",
+  "originalWholeMethods": 12,
+  "allOriginalOtherTokensAndOraclesPreserved": true,
+  "singleFixedPoolOwnerBounded": true,
+  "futureGet10SecondsUnchanged": true,
+  "original180ConcurrentFacadeRequestsPreserved": true,
+  "noFixtureOrMethodExtraction": true,
+  "noSourceDuplicateOrSyntheticPasswordEvidenceOutput": true,
+  "cryptoApi": "MessageDigest.isEqual/independent public fixture SHA vectors only; no actual key or credential operations",
+  "actualBackendOrAccountOrRootVmNativeActions": false,
+  "pmdRawFindings": 5,
+  "applicableStaticViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "staticClassifications": [
+    {
+      "finding": {
+        "beginline": "361",
+        "endline": "361",
+        "begincolumn": "9",
+        "endcolumn": "13",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "WebBusinessWireClientsTest",
+        "method": "wire008ConcurrentFacadesKeepRepliesAndContextsSeparate",
+        "variable": "pool",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this ExecutorService object are closed after use"
+      },
+      "applicableViolation": false,
+      "reason": "Explicit pool finally shutdownNow plus actual awaitTermination10s asserted; TWR AutoCloseable.close would reintroduce indefinite join after failure. No borrowed pool closed."
+    },
+    {
+      "finding": {
+        "beginline": "361",
+        "endline": "361",
+        "begincolumn": "16",
+        "endcolumn": "47",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "WebBusinessWireClientsTest",
+        "method": "wire008ConcurrentFacadesKeepRepliesAndContextsSeparate",
+        "variable": "pool",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only own fixed executor/tasks and explicit finite termination, outside J2EE; business wire calls all use the existing in-memory reply callback and 2s bounded coordinator."
+    },
+    {
+      "finding": {
+        "beginline": "367",
+        "endline": "384",
+        "begincolumn": "13",
+        "endcolumn": "19",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "WebBusinessWireClientsTest",
+        "method": "wire008ConcurrentFacadesKeepRepliesAndContextsSeparate",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only own fixed executor/tasks and explicit finite termination, outside J2EE; business wire calls all use the existing in-memory reply callback and 2s bounded coordinator."
+    },
+    {
+      "finding": {
+        "beginline": "388",
+        "endline": "388",
+        "begincolumn": "7",
+        "endcolumn": "25",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "WebBusinessWireClientsTest",
+        "method": "wire008ConcurrentFacadesKeepRepliesAndContextsSeparate",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only own fixed executor/tasks and explicit finite termination, outside J2EE; business wire calls all use the existing in-memory reply callback and 2s bounded coordinator."
+    },
+    {
+      "finding": {
+        "beginline": "389",
+        "endline": "389",
+        "begincolumn": "18",
+        "endcolumn": "61",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "WebBusinessWireClientsTest",
+        "method": "wire008ConcurrentFacadesKeepRepliesAndContextsSeparate",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only own fixed executor/tasks and explicit finite termination, outside J2EE; business wire calls all use the existing in-memory reply callback and 2s bounded coordinator."
+    }
+  ],
+  "suppressionAdded": false,
+  "physical": {
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient": "4ee7d1588e11822a94b0016fab6920acc37313c97c3773e56035e5878d550e08",
+    "dev/codex/schubert/nk/web/messaging/NotificationWireClient": "f0eec80f63a4c85a6c362634b0d6d6c0b0a83d77a2424b86f8cdc46dda50591b",
+    "dev/codex/schubert/nk/web/messaging/QuestionWireClient": "54007c59b677c6d9751c2699ad0b34389e34f08b46e3c3b24ffe73f660bba483",
+    "dev/codex/schubert/nk/web/messaging/MediaDescriptorWireClient": "e472fa30a7883914bf35ad320c9a9a0654e4cfd4534ccfa2653f6d7919e7c42a",
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$Result": "711ff5522d807edb748bc8dcc5c6eecc3a1d516ae2baef0268399603add88cd9",
+    "dev/codex/schubert/nk/web/messaging/LogoutWireClient": "aeb96b56e6114e1476be2ca317eb965c78498001413feea740ed56b89678c52f",
+    "dev/codex/schubert/nk/web/messaging/UserAdministrationWireClient": "9f964ac6fb25dc5be027bcfdd7775888ff8668b14e10e92ab6736ec8246ff711"
+  },
+  "sourcePrograms": 6,
+  "physicalClasses": 7,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "toolSha256": "fc1f5d313bb16c9adb6e2605af331e819d2933aa78ade0475eea4bf3023872c4"
+}

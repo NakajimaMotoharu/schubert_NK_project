@@ -1,0 +1,222 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "4aae7d1298fcb01e573b3fcc12655da45d7609ee",
+    "normalSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+    "inputHashes": {
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest.java": "76cb1f7dd520eecf763f60a7320d4d3b946a3e7ea947e1f7e5f3fd188abea9c7",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/QuestionWireClient.java": "7f6299cc4d6acd5fa944a02eade9c826f0f1268951c8c17a63b4b641bebde1a0",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/NotificationWireClient.java": "f945859ec735eb33390de809b3f65177dda579536c8f2749a9c433aa52df12cf",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/UserAdministrationWireClient.java": "fefe8a3a47ac916e0b869b82753701f8204f0a175870c81bb3638d7871cec006",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/LogoutWireClient.java": "8411aaeee9f580c1cc3fe16afdcaabdc9893b3f0c4cebb996a168f6b0909d578",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/MediaDescriptorWireClient.java": "eb1a8d9cbc013cd171ea658cad67511a6adceee78c34db39f0ebdb1f3bd8a02a",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient.java": "6e4a8c190ccb5bceb4d8412ad8b8139c156e0fbe5ae55ee6b17e1989c8ac1e60",
+      "evidence/01_PT/015_NK-WEB-001/input/059_web_business_bounded_qualifier.py": "1847197696d929843950da0d1f5720fd16e1d73a1c2b964888f21158bd123fe6",
+      "evidence/01_PT/015_NK-WEB-001/input/058_web_business_bounded_scope.json": "65ef0b57690eb89ddd026d74aa473fcdfe13ce1d7c4befc0defa59fbfbec253f"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": "622ae1b70d2627b7b162a2cd1b07bc5201092e0628d9a50986892f2cbe7e98f9",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "bc6acaa867859b0f1d2f2e24dc27ba5627e7bf7c332448ae88bb077ea1b36fa7",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar": "6605e08075ab389c359451c7854808cf4b1575e1ea6317e534e9d4df088096df"
+    },
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "compileManifestSha256": "76b397e734af3c77e8671a851352da3089c3a3486071db14d9ae299a2695743d",
+    "selected": [
+      "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest"
+    ],
+    "expectedTests": 12,
+    "newMethods": 0,
+    "requalifiedExistingMethods": 12,
+    "session": "PG24350-WEB-BUSINESS-BOUNDED-TWELVE",
+    "startUTC": "2026-11-08T10:50:39.765845+00:00"
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T10:50:39.765959+00:00",
+      "endUTC": "2026-11-08T10:50:41.084538+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24350-web-business-bounded-twelve-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Dnk.pt.repository=/home/mini/codex/project1/work/pgpt-foundation",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24350-web-business-bounded-twelve-unit-v1/jacoco.exec,sessionid=PG24350-WEB-BUSINESS-BOUNDED-TWELVE,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24350-web-business-bounded-twelve-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24344-web-business-bounded-compile-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24350-web-business-bounded-twelve-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "3bfb9dad333b326a177601037ad83a918f1f279a72566f1006f32e5a385e8126",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T10:50:41.091394+00:00",
+      "endUTC": "2026-11-08T10:50:41.256332+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24350-web-business-bounded-twelve-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24350-web-business-bounded-twelve-unit-v1/component",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24350-web-business-bounded-twelve-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "d4100c50d370a2d290c330803ed9920e8f4ae8b3bd457cfc814fc791d9404b9e",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T10:50:41.256627+00:00",
+      "endUTC": "2026-11-08T10:50:41.371372+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24350-web-business-bounded-twelve-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "8963431231fe582ecf561380ea3ee79399d54260aee5d67ca7440be7baae9d00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T10:50:41.371807+00:00",
+      "endUTC": "2026-11-08T10:50:41.486689+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24350-web-business-bounded-twelve-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "8c26dc2e1204d8311886b971558526ebdac201d8ee39a7c308bb6122d52e8153",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire010RequestRecordsAreRejectedBeforeEncodingOrSending()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire006ErrorsTimeoutAndUnknownFailuresNeverRetry()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire005AcceptanceRejectsWrongKindContextGenerationAndFiller()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire002AcceptanceAndIdempotentResultsRemainTyped()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire004NullConfigurationAndInputNeverBecomeValidWork()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire009QuestionPageRecordsUseIndependentUiVectorsAndPreserveOrder()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire001EighteenRequestsMatchIndependentUiByteOffsets()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire011ResponseShapeMismatchNeverBecomesAQuestionPage()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire003CapabilitiesAreClosedBeforeTransport()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire007RetriesUseNewMessageIdsAndRetainOperationTokenOnly()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire008ConcurrentFacadesKeepRepliesAndContextsSeparate()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire012MalformedQuestionRecordsAreRejectedWithoutRetry()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 12,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/web/messaging/LogoutWireClient": "aeb96b56e6114e1476be2ca317eb965c78498001413feea740ed56b89678c52f",
+    "dev/codex/schubert/nk/web/messaging/MediaDescriptorWireClient": "e472fa30a7883914bf35ad320c9a9a0654e4cfd4534ccfa2653f6d7919e7c42a",
+    "dev/codex/schubert/nk/web/messaging/NotificationWireClient": "f0eec80f63a4c85a6c362634b0d6d6c0b0a83d77a2424b86f8cdc46dda50591b",
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient": "4ee7d1588e11822a94b0016fab6920acc37313c97c3773e56035e5878d550e08",
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$Result": "711ff5522d807edb748bc8dcc5c6eecc3a1d516ae2baef0268399603add88cd9",
+    "dev/codex/schubert/nk/web/messaging/QuestionWireClient": "54007c59b677c6d9751c2699ad0b34389e34f08b46e3c3b24ffe73f660bba483",
+    "dev/codex/schubert/nk/web/messaging/UserAdministrationWireClient": "9f964ac6fb25dc5be027bcfdd7775888ff8668b14e10e92ab6736ec8246ff711"
+  },
+  "formalUpdated": false
+}
