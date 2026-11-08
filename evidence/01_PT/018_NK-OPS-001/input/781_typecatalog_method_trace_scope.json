@@ -1,0 +1,333 @@
+{
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "testSource": "64f3a72753434347889f0eabd5d9f9dca67c6bfb",
+  "normalProof": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG24642-protocol-whole120-independent-v1/manifest.json",
+    "sha256": "8ebe6365bc701ba6432b1b55275004024dc71bc452d31b66d31c53894e3ae128"
+  },
+  "metadataInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json",
+    "sha256": "e65782d893a5ae45309cf269d165dec33d1dc396f06b7968b62d95b276455d31"
+  },
+  "descriptorInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/artifacts.json",
+    "sha256": "fb24a1a209849d42894925002baae668bc55a4bd858b1b7c1d38ab838319bb0b"
+  },
+  "physicalIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json",
+    "sha256": "db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723"
+  },
+  "owner": "WBS-P001-02",
+  "oracleDocuments": [
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/001_NK-PRO-001_単体テスト仕様書.md",
+      "sha256": "503c5f6be3caaa341dcec35cb1bd1b8a3892d270bf6a7fa91cdad580b43abdbe"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/107_現source正本fixture照合・layout個別受入.md",
+      "sha256": "6354a848537937df156f5380941531d71bdf749f68ff1290943a58450ba64ddc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1956_G13LayoutCatalog7_独立期待値意味対応表.md",
+      "sha256": "6ede52efc7cb04c471c6a55e2a17d4b8c4859c9186f24977bc9758b1dcd3d711"
+    },
+    {
+      "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+      "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/1187_Semantic独立期待値七・診断保護・定数九PGPT仕様.md",
+      "sha256": "123884b368c27be54dcd8533a0eaa3df002caa3d4c731ec151028b40027ce769"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/1188_Semantic独立期待値七・診断保護・定数九PGPT結果.md",
+      "sha256": "96f9f7a940c00fb67a9a12c1fe1ecba1d05e0d63190402bf2d6387678d05906c"
+    }
+  ],
+  "sourcePaths": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java"
+  ],
+  "cases": {
+    "C1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning()",
+      "testIds": [
+        "PT-PRO-001-T02",
+        "PT-PRO-002-P04"
+      ],
+      "independentOracle": "Existing IndependentNamedFieldOracle.verifyAll ownsassertions: independentexplicitgetter-field bindings andfixedscalar values/SS/UI295component table; decode/getter andencode/fields checked separately, notProduction-generated expected."
+    },
+    "C2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#explicitCatalogMatchesIndependentSs323NamedTypeFixture()",
+      "testIds": [
+        "PT-PRO-001-T01"
+      ],
+      "independentOracle": "SS323 independent64row named-types TSV expecteddata/record classnames; missingrecord indicatedliteral -, total64."
+    },
+    "C3": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()",
+      "testIds": [
+        "PT-PRO-001-T02",
+        "PT-PRO-002-P04"
+      ],
+      "independentOracle": "Generic minimuminput supplies64layouts,69distinctnamedtypes/14repeat; returneddata/record class andredaction; roundtrip consistency supplementedbyC1/C2 independentdirectional/table oracle."
+    },
+    "C4": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames()",
+      "testIds": [
+        "PT-PRO-001-T02",
+        "PT-PRO-002-P05"
+      ],
+      "independentOracle": "ExplicitGame code unset vsNUKITASHI1 preserved, typeddiagnostic excludesinput; separateC1 preventssole roundtrip oracle."
+    },
+    "C5": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes()",
+      "testIds": [
+        "PT-PRO-001-T02",
+        "PT-PRO-002-P05"
+      ],
+      "independentOracle": "UnknownZZZREQ01 andwrongdata/recordtype, unexpectedrecordsinrecordlesslayout rejected bytypedexception."
+    },
+    "C6": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#typedModelsAndHelpersRejectNullMissingAndWrongKinds()",
+      "testIds": [
+        "PT-PRO-001-T03",
+        "PT-PRO-002-P05"
+      ],
+      "independentOracle": "Explicitrequiredtext safe/numeric7/flagtrue/unset/optional contracts, nullvalues/catalog refs/typedmodel invariants rejected; sharedTypedFieldValues methods haveotherowner andnoacceptancecredit."
+    }
+  },
+  "methodRules": {
+    "PayloadTypeCatalog": {
+      "decode": {
+        "cases": [
+          "C1",
+          "C3",
+          "C4",
+          "C5",
+          "C6"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "9",
+          "12"
+        ],
+        "contract": "Knownlayout->explicitnameddecoder, recordprofile andsemanticvalidation.",
+        "staticPath": "Tests directdecode -> require/mapping dataDecoder/decodeRecords/PayloadSemanticValidator"
+      },
+      "encode": {
+        "cases": [
+          "C1",
+          "C3",
+          "C4",
+          "C5",
+          "C6"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "9",
+          "12"
+        ],
+        "contract": "Knownlayout/dataType/recordType/semanticvalidation beforeexplicitfields extraction.",
+        "staticPath": "Tests directencode -> require/validateRecordTypes/PayloadSemanticValidator"
+      },
+      "dataType": {
+        "cases": [
+          "C2",
+          "C5",
+          "C6"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "9",
+          "12"
+        ],
+        "contract": "ExactSS323 dataClass perlayout/null/unknownrejection.",
+        "staticPath": "C2 originalTSV expected -> dataType"
+      },
+      "recordType": {
+        "cases": [
+          "C2",
+          "C3",
+          "C5",
+          "C6"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "9",
+          "12"
+        ],
+        "contract": "ExactoptionalrecordClass perlayout.",
+        "staticPath": "C2 originalTSV - orclassname -> recordType"
+      },
+      "decodeRecords": {
+        "cases": [
+          "C1",
+          "C3",
+          "C5"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "9",
+          "12"
+        ],
+        "contract": "No recordsforrecordlesslayouts; exactrecorddecoder forrepeatinglayout.",
+        "staticPath": "decode -> decodeRecords"
+      },
+      "validateRecordTypes": {
+        "cases": [
+          "C1",
+          "C3",
+          "C5"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "9",
+          "12"
+        ],
+        "contract": "Recordless rejectsnonempty, repeating rejectswrongrecordClass.",
+        "staticPath": "encode -> validateRecordTypes"
+      },
+      "require": {
+        "cases": [
+          "C2",
+          "C5",
+          "C6"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "9",
+          "12"
+        ],
+        "contract": "KnownnonnullLayoutId mapsSTANDARD; unknownrejects.",
+        "staticPath": "decode/encode/dataType/recordType -> require"
+      },
+      "mapping": {
+        "cases": [
+          "C1",
+          "C2",
+          "C3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "9",
+          "12"
+        ],
+        "contract": "Bothrecordless/repeating explicitmapping factories bindclass anddecoder.",
+        "staticPath": "STANDARD staticinitializer -> overloadedmapping -> Mapping/RecordMapping constructors"
+      },
+      "<clinit>": {
+        "cases": [
+          "C1",
+          "C2",
+          "C3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "9",
+          "12"
+        ],
+        "contract": "Approved64explicit mapentries/data-andrecordtypes initialized once.",
+        "staticPath": "STANDARD Map.ofEntries calls mapping factories; C2 independentlycompares64"
+      }
+    },
+    "PayloadTypeCatalog$Mapping": {
+      "<init>": {
+        "cases": [
+          "C1",
+          "C2",
+          "C3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "9",
+          "12"
+        ],
+        "contract": "Record retains explicitlayoutId/dataType/dataDecoder/optionalrecordMapping; sourcefactoryconstants only, arbitraryreflectiveconstruction notclaimed.",
+        "staticPath": "mapping factories -> new Mapping"
+      }
+    },
+    "PayloadTypeCatalog$RecordMapping": {
+      "<init>": {
+        "cases": [
+          "C1",
+          "C2",
+          "C3"
+        ],
+        "relatedRd": [
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "9",
+          "12"
+        ],
+        "contract": "Record retains explicitrecordType/decoder for14repeatinglayouts.",
+        "staticPath": "repeatingmapping factory -> new RecordMapping"
+      }
+    }
+  },
+  "generatedMethods": {
+    "PayloadTypeCatalog$Mapping": [
+      "toString",
+      "hashCode",
+      "equals",
+      "layoutId",
+      "dataType",
+      "dataDecoder",
+      "recordMapping"
+    ],
+    "PayloadTypeCatalog$RecordMapping": [
+      "toString",
+      "hashCode",
+      "equals",
+      "recordType",
+      "recordDecoder"
+    ]
+  },
+  "delegatedAssertionHelper": {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+    "sha256": "e6bd994d7498b8d25bd8e9c862837a2e5f78752b2c462309c24ccbff21e3c710"
+  },
+  "delegatedCaseLabel": "C1"
+}

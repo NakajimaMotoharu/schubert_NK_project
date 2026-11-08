@@ -1,0 +1,802 @@
+[
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping#<init>(Ljava/lang/String;Ljava/lang/Class;Ljava/util/function/Function;Ljava/util/Optional;)V",
+    "className": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping",
+    "method": "<init>",
+    "descriptor": "(Ljava/lang/String;Ljava/lang/Class;Ljava/util/function/Function;Ljava/util/Optional;)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+    "sourceSha256": "39c381766f47ebf2e71ccac4709ebb13272ee2c1dde8720ab888774456b62440",
+    "firstExecutableLine": 463,
+    "owner": "WBS-P001-02",
+    "costOwner": "WBS-P001-02",
+    "relatedRd": [
+      "MQ-016",
+      "MQ-017"
+    ],
+    "ui": [
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "9",
+      "12"
+    ],
+    "contract": "Record retains explicitlayoutId/dataType/dataDecoder/optionalrecordMapping; sourcefactoryconstants only, arbitraryreflectiveconstruction notclaimed.",
+    "staticPath": "mapping factories -> new Mapping",
+    "caseLabels": [
+      "C1",
+      "C2",
+      "C3"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#explicitCatalogMatchesIndependentSs323NamedTypeFixture()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-001-T01",
+      "PT-PRO-001-T02",
+      "PT-PRO-002-P04"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 15,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$RecordMapping#<init>(Ljava/lang/Class;Ljava/util/function/Function;)V",
+    "className": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$RecordMapping",
+    "method": "<init>",
+    "descriptor": "(Ljava/lang/Class;Ljava/util/function/Function;)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+    "sourceSha256": "39c381766f47ebf2e71ccac4709ebb13272ee2c1dde8720ab888774456b62440",
+    "firstExecutableLine": 469,
+    "owner": "WBS-P001-02",
+    "costOwner": "WBS-P001-02",
+    "relatedRd": [
+      "MQ-016",
+      "MQ-017"
+    ],
+    "ui": [
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "9",
+      "12"
+    ],
+    "contract": "Record retains explicitrecordType/decoder for14repeatinglayouts.",
+    "staticPath": "repeatingmapping factory -> new RecordMapping",
+    "caseLabels": [
+      "C1",
+      "C2",
+      "C3"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#explicitCatalogMatchesIndependentSs323NamedTypeFixture()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-001-T01",
+      "PT-PRO-001-T02",
+      "PT-PRO-002-P04"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 9,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog#decode(Ldev/codex/schubert/nk/protocol/layout/PayloadValues;)Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;",
+    "className": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog",
+    "method": "decode",
+    "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/PayloadValues;)Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+    "sourceSha256": "39c381766f47ebf2e71ccac4709ebb13272ee2c1dde8720ab888774456b62440",
+    "firstExecutableLine": 376,
+    "owner": "WBS-P001-02",
+    "costOwner": "WBS-P001-02",
+    "relatedRd": [
+      "MQ-016",
+      "MQ-017"
+    ],
+    "ui": [
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "9",
+      "12"
+    ],
+    "contract": "Knownlayout->explicitnameddecoder, recordprofile andsemanticvalidation.",
+    "staticPath": "Tests directdecode -> require/mapping dataDecoder/decodeRecords/PayloadSemanticValidator",
+    "caseLabels": [
+      "C1",
+      "C3",
+      "C4",
+      "C5",
+      "C6"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#typedModelsAndHelpersRejectNullMissingAndWrongKinds()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-001-T02",
+      "PT-PRO-001-T03",
+      "PT-PRO-002-P04",
+      "PT-PRO-002-P05"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 32,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 7,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog#encode(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;)Ldev/codex/schubert/nk/protocol/layout/PayloadValues;",
+    "className": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog",
+    "method": "encode",
+    "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;)Ldev/codex/schubert/nk/protocol/layout/PayloadValues;",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+    "sourceSha256": "39c381766f47ebf2e71ccac4709ebb13272ee2c1dde8720ab888774456b62440",
+    "firstExecutableLine": 386,
+    "owner": "WBS-P001-02",
+    "costOwner": "WBS-P001-02",
+    "relatedRd": [
+      "MQ-016",
+      "MQ-017"
+    ],
+    "ui": [
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "9",
+      "12"
+    ],
+    "contract": "Knownlayout/dataType/recordType/semanticvalidation beforeexplicitfields extraction.",
+    "staticPath": "Tests directencode -> require/validateRecordTypes/PayloadSemanticValidator",
+    "caseLabels": [
+      "C1",
+      "C3",
+      "C4",
+      "C5",
+      "C6"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#typedModelsAndHelpersRejectNullMissingAndWrongKinds()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-001-T02",
+      "PT-PRO-001-T03",
+      "PT-PRO-002-P04",
+      "PT-PRO-002-P05"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 43,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 2,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 8,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog#dataType(Ldev/codex/schubert/nk/protocol/layout/LayoutId;)Ljava/lang/Class;",
+    "className": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog",
+    "method": "dataType",
+    "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;)Ljava/lang/Class;",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+    "sourceSha256": "39c381766f47ebf2e71ccac4709ebb13272ee2c1dde8720ab888774456b62440",
+    "firstExecutableLine": 398,
+    "owner": "WBS-P001-02",
+    "costOwner": "WBS-P001-02",
+    "relatedRd": [
+      "MQ-016",
+      "MQ-017"
+    ],
+    "ui": [
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "9",
+      "12"
+    ],
+    "contract": "ExactSS323 dataClass perlayout/null/unknownrejection.",
+    "staticPath": "C2 originalTSV expected -> dataType",
+    "caseLabels": [
+      "C2",
+      "C5",
+      "C6"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#explicitCatalogMatchesIndependentSs323NamedTypeFixture()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#typedModelsAndHelpersRejectNullMissingAndWrongKinds()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-001-T01",
+      "PT-PRO-001-T02",
+      "PT-PRO-001-T03",
+      "PT-PRO-002-P05"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 4,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog#recordType(Ldev/codex/schubert/nk/protocol/layout/LayoutId;)Ljava/util/Optional;",
+    "className": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog",
+    "method": "recordType",
+    "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;)Ljava/util/Optional;",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+    "sourceSha256": "39c381766f47ebf2e71ccac4709ebb13272ee2c1dde8720ab888774456b62440",
+    "firstExecutableLine": 402,
+    "owner": "WBS-P001-02",
+    "costOwner": "WBS-P001-02",
+    "relatedRd": [
+      "MQ-016",
+      "MQ-017"
+    ],
+    "ui": [
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "9",
+      "12"
+    ],
+    "contract": "ExactoptionalrecordClass perlayout.",
+    "staticPath": "C2 originalTSV - orclassname -> recordType",
+    "caseLabels": [
+      "C2",
+      "C3",
+      "C5",
+      "C6"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#explicitCatalogMatchesIndependentSs323NamedTypeFixture()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#typedModelsAndHelpersRejectNullMissingAndWrongKinds()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-001-T01",
+      "PT-PRO-001-T02",
+      "PT-PRO-001-T03",
+      "PT-PRO-002-P04",
+      "PT-PRO-002-P05"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 6,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog#decodeRecords(Ldev/codex/schubert/nk/protocol/layout/PayloadValues;Ljava/util/Optional;)Ljava/util/List;",
+    "className": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog",
+    "method": "decodeRecords",
+    "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/PayloadValues;Ljava/util/Optional;)Ljava/util/List;",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+    "sourceSha256": "39c381766f47ebf2e71ccac4709ebb13272ee2c1dde8720ab888774456b62440",
+    "firstExecutableLine": 407,
+    "owner": "WBS-P001-02",
+    "costOwner": "WBS-P001-02",
+    "relatedRd": [
+      "MQ-016",
+      "MQ-017"
+    ],
+    "ui": [
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "9",
+      "12"
+    ],
+    "contract": "No recordsforrecordlesslayouts; exactrecorddecoder forrepeatinglayout.",
+    "staticPath": "decode -> decodeRecords",
+    "caseLabels": [
+      "C1",
+      "C3",
+      "C5"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-001-T02",
+      "PT-PRO-002-P04",
+      "PT-PRO-002-P05"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 48,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 6,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 10,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 4,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog#validateRecordTypes(Ljava/util/List;Ljava/util/Optional;)V",
+    "className": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog",
+    "method": "validateRecordTypes",
+    "descriptor": "(Ljava/util/List;Ljava/util/Optional;)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+    "sourceSha256": "39c381766f47ebf2e71ccac4709ebb13272ee2c1dde8720ab888774456b62440",
+    "firstExecutableLine": 423,
+    "owner": "WBS-P001-02",
+    "costOwner": "WBS-P001-02",
+    "relatedRd": [
+      "MQ-016",
+      "MQ-017"
+    ],
+    "ui": [
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "9",
+      "12"
+    ],
+    "contract": "Recordless rejectsnonempty, repeating rejectswrongrecordClass.",
+    "staticPath": "encode -> validateRecordTypes",
+    "caseLabels": [
+      "C1",
+      "C3",
+      "C5"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-001-T02",
+      "PT-PRO-002-P04",
+      "PT-PRO-002-P05"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 38,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 8,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 10,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 5,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog#require(Ldev/codex/schubert/nk/protocol/layout/LayoutId;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;",
+    "className": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog",
+    "method": "require",
+    "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+    "sourceSha256": "39c381766f47ebf2e71ccac4709ebb13272ee2c1dde8720ab888774456b62440",
+    "firstExecutableLine": 438,
+    "owner": "WBS-P001-02",
+    "costOwner": "WBS-P001-02",
+    "relatedRd": [
+      "MQ-016",
+      "MQ-017"
+    ],
+    "ui": [
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "9",
+      "12"
+    ],
+    "contract": "KnownnonnullLayoutId mapsSTANDARD; unknownrejects.",
+    "staticPath": "decode/encode/dataType/recordType -> require",
+    "caseLabels": [
+      "C2",
+      "C5",
+      "C6"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#explicitCatalogMatchesIndependentSs323NamedTypeFixture()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#typedModelsAndHelpersRejectNullMissingAndWrongKinds()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-001-T01",
+      "PT-PRO-001-T02",
+      "PT-PRO-001-T03",
+      "PT-PRO-002-P05"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 19,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 2,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 5,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog#mapping(Ljava/lang/String;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;",
+    "className": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog",
+    "method": "mapping",
+    "descriptor": "(Ljava/lang/String;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+    "sourceSha256": "39c381766f47ebf2e71ccac4709ebb13272ee2c1dde8720ab888774456b62440",
+    "firstExecutableLine": 450,
+    "owner": "WBS-P001-02",
+    "costOwner": "WBS-P001-02",
+    "relatedRd": [
+      "MQ-016",
+      "MQ-017"
+    ],
+    "ui": [
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "9",
+      "12"
+    ],
+    "contract": "Bothrecordless/repeating explicitmapping factories bindclass anddecoder.",
+    "staticPath": "STANDARD staticinitializer -> overloadedmapping -> Mapping/RecordMapping constructors",
+    "caseLabels": [
+      "C1",
+      "C2",
+      "C3"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#explicitCatalogMatchesIndependentSs323NamedTypeFixture()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-001-T01",
+      "PT-PRO-001-T02",
+      "PT-PRO-002-P04"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 8,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog#mapping(Ljava/lang/String;Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;",
+    "className": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog",
+    "method": "mapping",
+    "descriptor": "(Ljava/lang/String;Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+    "sourceSha256": "39c381766f47ebf2e71ccac4709ebb13272ee2c1dde8720ab888774456b62440",
+    "firstExecutableLine": 459,
+    "owner": "WBS-P001-02",
+    "costOwner": "WBS-P001-02",
+    "relatedRd": [
+      "MQ-016",
+      "MQ-017"
+    ],
+    "ui": [
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "9",
+      "12"
+    ],
+    "contract": "Bothrecordless/repeating explicitmapping factories bindclass anddecoder.",
+    "staticPath": "STANDARD staticinitializer -> overloadedmapping -> Mapping/RecordMapping constructors",
+    "caseLabels": [
+      "C1",
+      "C2",
+      "C3"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#explicitCatalogMatchesIndependentSs323NamedTypeFixture()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-001-T01",
+      "PT-PRO-001-T02",
+      "PT-PRO-002-P04"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 13,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog#<clinit>()V",
+    "className": "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog",
+    "method": "<clinit>",
+    "descriptor": "()V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+    "sourceSha256": "39c381766f47ebf2e71ccac4709ebb13272ee2c1dde8720ab888774456b62440",
+    "firstExecutableLine": 81,
+    "owner": "WBS-P001-02",
+    "costOwner": "WBS-P001-02",
+    "relatedRd": [
+      "MQ-016",
+      "MQ-017"
+    ],
+    "ui": [
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "9",
+      "12"
+    ],
+    "contract": "Approved64explicit mapentries/data-andrecordtypes initialized once.",
+    "staticPath": "STANDARD Map.ofEntries calls mapping factories; C2 independentlycompares64",
+    "caseLabels": [
+      "C1",
+      "C2",
+      "C3"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#explicitCatalogMatchesIndependentSs323NamedTypeFixture()",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-001-T01",
+      "PT-PRO-001-T02",
+      "PT-PRO-002-P04"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 609,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 129,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  }
+]
