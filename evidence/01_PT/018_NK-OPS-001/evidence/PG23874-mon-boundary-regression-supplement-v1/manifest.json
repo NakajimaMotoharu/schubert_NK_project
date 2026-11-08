@@ -1,0 +1,140 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T12:25:59.843330+09:00",
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "independentPost": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23864-monitoring112-declared-rd-independent-v1/manifest.json",
+    "sha256": "eab33cab9bf366f45bdc738e6e080f391678b90baf5a81cef9b8b5f520ff899b"
+  },
+  "correctedParser": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/557_monitoring112_declared_rd_join.py",
+    "sha256": "e11ae94cdfe20ff81b75c70faed890020feb11f53199aa710ab7fdb427828c4c"
+  },
+  "bugs": [
+    "BUG-2505",
+    "BUG-2506"
+  ],
+  "ykts": [
+    "YKT-2243",
+    "YKT-2244"
+  ],
+  "originalProducerRerun": false,
+  "originalDataRewritten": false,
+  "additionalToolOnlyVectors": [
+    {
+      "input": "MON005/006/MON007/008",
+      "expectedIds": [
+        "MON-005",
+        "MON-006",
+        "MON-007",
+        "MON-008"
+      ],
+      "actual": {
+        "ids": [
+          "MON-005",
+          "MON-006",
+          "MON-007",
+          "MON-008"
+        ],
+        "tokens": [
+          {
+            "start": 0,
+            "end": 10,
+            "token": "MON005/006",
+            "ids": [
+              "MON-005",
+              "MON-006"
+            ],
+            "problem": null
+          },
+          {
+            "start": 11,
+            "end": 21,
+            "token": "MON007/008",
+            "ids": [
+              "MON-007",
+              "MON-008"
+            ],
+            "problem": null
+          }
+        ],
+        "unparsedNumericTokens": []
+      }
+    },
+    {
+      "input": "MON-005.",
+      "expectedIds": [
+        "MON-005"
+      ],
+      "actual": {
+        "ids": [
+          "MON-005"
+        ],
+        "tokens": [
+          {
+            "start": 0,
+            "end": 7,
+            "token": "MON-005",
+            "ids": [
+              "MON-005"
+            ],
+            "problem": null
+          }
+        ],
+        "unparsedNumericTokens": []
+      }
+    },
+    {
+      "input": "MON005/MONMODE-001",
+      "expectedIds": [],
+      "actual": {
+        "ids": [],
+        "tokens": [],
+        "unparsedNumericTokens": [
+          {
+            "start": 0,
+            "token": "MON005/MONMODE-001",
+            "problem": "UNPARSED_OR_PARTIAL_NUMERIC_MON_TOKEN"
+          }
+        ]
+      }
+    },
+    {
+      "input": "MON005/ABC",
+      "expectedIds": [],
+      "actual": {
+        "ids": [],
+        "tokens": [],
+        "unparsedNumericTokens": [
+          {
+            "start": 0,
+            "token": "MON005/ABC",
+            "problem": "UNPARSED_OR_PARTIAL_NUMERIC_MON_TOKEN"
+          }
+        ]
+      }
+    },
+    {
+      "input": "MON005/",
+      "expectedIds": [],
+      "actual": {
+        "ids": [],
+        "tokens": [],
+        "unparsedNumericTokens": [
+          {
+            "start": 0,
+            "token": "MON005/",
+            "problem": "UNPARSED_OR_PARTIAL_NUMERIC_MON_TOKEN"
+          }
+        ]
+      }
+    }
+  ],
+  "additionalMetadataChecks": 5,
+  "productTestsExecuted": 0,
+  "actualBackendActions": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "whole451Accepted": false
+}
