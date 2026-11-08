@@ -385,38 +385,43 @@ class ScenarioDetailTemplateTest {
 
   @Test
   void detail024ConcurrentRendering() throws Exception {
-    try (var context = context();
-        var executor = Executors.newFixedThreadPool(8)) {
-      var tasks = new ArrayList<Future<Document>>();
-      for (int i = 0; i < 64; i++) {
-        final int n = i;
-        tasks.add(
-            executor.submit(
-                () ->
-                    Jsoup.parse(
-                        render(
-                            context,
-                            page(
-                                READER_USERNAME + n,
-                                UserRole.USER,
-                                GameCode.NUKITASHI_1,
-                                false,
-                                false,
-                                List.of(entry(n + 1, 1, 0, "本文" + n))),
-                            SYNTHETIC_CSRF_TEXT + n))));
+    try (var context = context()) {
+      var executor = Executors.newFixedThreadPool(8);
+      try {
+        var tasks = new ArrayList<Future<Document>>();
+        for (int i = 0; i < 64; i++) {
+          final int n = i;
+          tasks.add(
+              executor.submit(
+                  () ->
+                      Jsoup.parse(
+                          render(
+                              context,
+                              page(
+                                  READER_USERNAME + n,
+                                  UserRole.USER,
+                                  GameCode.NUKITASHI_1,
+                                  false,
+                                  false,
+                                  List.of(entry(n + 1, 1, 0, "本文" + n))),
+                              SYNTHETIC_CSRF_TEXT + n))));
+        }
+        for (int i = 0; i < 64; i++) {
+          var dom = tasks.get(i).get(10, TimeUnit.SECONDS);
+          assertEquals(READER_USERNAME + i, dom.select(".login-user").text());
+          assertEquals("本文" + i, dom.select(SCRIPT_BODY_SELECTOR).text());
+          assertEquals(SYNTHETIC_CSRF_TEXT + i, dom.select("input[name=_csrf]").attr("value"));
+        }
+        Path root = Path.of("target/scenario-screen-traces");
+        Files.createDirectories(root);
+        Files.writeString(
+            root.resolve("PT-SCR-024.txt"),
+            "template=scenario\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumEntries=10000\nmaximumVoices=999\nactualNkGate=false\n",
+            StandardCharsets.US_ASCII);
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
-      for (int i = 0; i < 64; i++) {
-        var dom = tasks.get(i).get(10, TimeUnit.SECONDS);
-        assertEquals(READER_USERNAME + i, dom.select(".login-user").text());
-        assertEquals("本文" + i, dom.select(SCRIPT_BODY_SELECTOR).text());
-        assertEquals(SYNTHETIC_CSRF_TEXT + i, dom.select("input[name=_csrf]").attr("value"));
-      }
-      Path root = Path.of("target/scenario-screen-traces");
-      Files.createDirectories(root);
-      Files.writeString(
-          root.resolve("PT-SCR-024.txt"),
-          "template=scenario\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumEntries=10000\nmaximumVoices=999\nactualNkGate=false\n",
-          StandardCharsets.US_ASCII);
     }
   }
 }

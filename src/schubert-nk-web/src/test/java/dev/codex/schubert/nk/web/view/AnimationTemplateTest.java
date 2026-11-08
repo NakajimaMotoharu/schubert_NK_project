@@ -386,49 +386,54 @@ class AnimationTemplateTest {
 
   @Test
   void animation053ConcurrentRendering() throws Exception {
-    try (var c = context();
-        var executor = Executors.newFixedThreadPool(8)) {
-      var tasks = new ArrayList<Future<?>>();
-      for (int i = 0; i < 64; i++) {
-        final int n = i;
-        tasks.add(
-            executor.submit(
-                () -> {
-                  String username = FIXTURE_READER + n;
-                  String token = "public-csrf-" + n;
-                  if (n % 2 == 0) {
-                    var menu =
-                        AnimationMenuViewModel.from(
-                            actor(username, UserRole.USER),
-                            new AnimationMenuResponseData(n, 0, false, n));
-                    var dom = render(c, EXPECTED_MENU_VIEW, menu, token);
-                    common(dom, username, token);
-                    assertEquals(n + "本の映像", dom.select(".menu-item span").getFirst().text());
-                  } else {
-                    var dom =
-                        render(
-                            c,
-                            EXPECTED_LIST_VIEW,
-                            list(username, AnimationListCategory.MAIN, main()),
-                            token);
-                    common(dom, username, token);
-                    assertEquals("5本", dom.select(EXPECTED_SUBTITLE_SELECTOR).text());
-                    assertEquals(3, dom.select(EXPECTED_ANIMATION_ROW_SELECTOR).size());
-                  }
-                  return null;
-                }));
+    try (var c = context()) {
+      var executor = Executors.newFixedThreadPool(8);
+      try {
+        var tasks = new ArrayList<Future<?>>();
+        for (int i = 0; i < 64; i++) {
+          final int n = i;
+          tasks.add(
+              executor.submit(
+                  () -> {
+                    String username = FIXTURE_READER + n;
+                    String token = "public-csrf-" + n;
+                    if (n % 2 == 0) {
+                      var menu =
+                          AnimationMenuViewModel.from(
+                              actor(username, UserRole.USER),
+                              new AnimationMenuResponseData(n, 0, false, n));
+                      var dom = render(c, EXPECTED_MENU_VIEW, menu, token);
+                      common(dom, username, token);
+                      assertEquals(n + "本の映像", dom.select(".menu-item span").getFirst().text());
+                    } else {
+                      var dom =
+                          render(
+                              c,
+                              EXPECTED_LIST_VIEW,
+                              list(username, AnimationListCategory.MAIN, main()),
+                              token);
+                      common(dom, username, token);
+                      assertEquals("5本", dom.select(EXPECTED_SUBTITLE_SELECTOR).text());
+                      assertEquals(3, dom.select(EXPECTED_ANIMATION_ROW_SELECTOR).size());
+                    }
+                    return null;
+                  }));
+        }
+        for (var task : tasks) task.get(10, TimeUnit.SECONDS);
+        Path directory = Path.of("target/scenario-screen-traces");
+        Files.createDirectories(directory);
+        Files.writeString(
+            directory.resolve("PT-SCR-053.txt"),
+            "templates=animation|animation-list\n"
+                + "fixture=public-synthetic\n"
+                + "concurrentRenders=64\n"
+                + "maximumRecords=50\n"
+                + "actualNkGate=false\n",
+            StandardCharsets.US_ASCII);
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
-      for (var task : tasks) task.get(10, TimeUnit.SECONDS);
-      Path directory = Path.of("target/scenario-screen-traces");
-      Files.createDirectories(directory);
-      Files.writeString(
-          directory.resolve("PT-SCR-053.txt"),
-          "templates=animation|animation-list\n"
-              + "fixture=public-synthetic\n"
-              + "concurrentRenders=64\n"
-              + "maximumRecords=50\n"
-              + "actualNkGate=false\n",
-          StandardCharsets.US_ASCII);
     }
   }
 

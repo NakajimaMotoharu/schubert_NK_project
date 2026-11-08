@@ -615,40 +615,45 @@ class ScenarioSearchTemplateTest {
 
   @Test
   void search033ConcurrentRendering() throws Exception {
-    try (var context = context();
-        var pool = Executors.newFixedThreadPool(8)) {
-      var tasks = new ArrayList<Future<?>>();
-      for (int i = 1; i <= 64; i++) {
-        int n = i;
-        tasks.add(
-            pool.submit(
-                () -> {
-                  var dom =
-                      render(
-                          context,
-                          page(
-                              "user-" + n,
-                              n % 2 == 0 ? UserRole.ADMIN : UserRole.USER,
-                              Map.of("q", "q-" + n),
-                              1,
-                              1,
-                              List.of(row(n, false, "body-" + n))),
-                          "csrf-" + n,
-                          200);
-                  assertEquals("user-" + n, dom.select(".login-user").text());
-                  assertEquals(n % 2 == 0 ? "ADMIN" : "USER", dom.select(".login-role").text());
-                  assertEquals("q-" + n, dom.select(QUERY_INPUT_SELECTOR).attr(VALUE_ATTRIBUTE));
-                  assertEquals("body-" + n, dom.select(RESULT_BODY_SELECTOR).text());
-                  assertEquals(
-                      "csrf-" + n,
-                      dom.select("form.logout-form input[name=_csrf]").attr(VALUE_ATTRIBUTE));
-                  assertEquals(
-                      "/scenarios/23#entry-" + n,
-                      dom.select(".scenario-open").attr(HREF_ATTRIBUTE));
-                  return null;
-                }));
+    try (var context = context()) {
+      var pool = Executors.newFixedThreadPool(8);
+      try {
+        var tasks = new ArrayList<Future<?>>();
+        for (int i = 1; i <= 64; i++) {
+          int n = i;
+          tasks.add(
+              pool.submit(
+                  () -> {
+                    var dom =
+                        render(
+                            context,
+                            page(
+                                "user-" + n,
+                                n % 2 == 0 ? UserRole.ADMIN : UserRole.USER,
+                                Map.of("q", "q-" + n),
+                                1,
+                                1,
+                                List.of(row(n, false, "body-" + n))),
+                            "csrf-" + n,
+                            200);
+                    assertEquals("user-" + n, dom.select(".login-user").text());
+                    assertEquals(n % 2 == 0 ? "ADMIN" : "USER", dom.select(".login-role").text());
+                    assertEquals("q-" + n, dom.select(QUERY_INPUT_SELECTOR).attr(VALUE_ATTRIBUTE));
+                    assertEquals("body-" + n, dom.select(RESULT_BODY_SELECTOR).text());
+                    assertEquals(
+                        "csrf-" + n,
+                        dom.select("form.logout-form input[name=_csrf]").attr(VALUE_ATTRIBUTE));
+                    assertEquals(
+                        "/scenarios/23#entry-" + n,
+                        dom.select(".scenario-open").attr(HREF_ATTRIBUTE));
+                    return null;
+                  }));
+        }
+        for (var task : tasks) task.get(20, TimeUnit.SECONDS);
+      } finally {
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
-      for (var task : tasks) task.get(20, TimeUnit.SECONDS);
     }
     Path directory = Path.of("target/scenario-screen-traces");
     Files.createDirectories(directory);

@@ -291,66 +291,71 @@ class MusicHierarchyTemplateTest {
 
   @Test
   void music071ConcurrentRendering() throws Exception {
-    try (var c = context();
-        var pool = Executors.newFixedThreadPool(8)) {
-      var tasks = new ArrayList<Future<?>>();
-      for (int i = 0; i < 64; i++) {
-        final int n = i;
-        tasks.add(
-            pool.submit(
-                () -> {
-                  String username = FIXTURE_READER + n;
-                  String token = "public-csrf-" + n;
-                  Document dom;
-                  if (n % 2 == 0) {
-                    dom =
-                        render(
-                            c,
-                            EXPECTED_MENU_VIEW,
-                            categories(
-                                username,
-                                UserRole.USER,
-                                List.of(new MusicCategoryRecord(FIXTURE_CATEGORY_PREFIX + n, n))),
-                            token);
-                    assertEquals(
-                        FIXTURE_CATEGORY_PREFIX + n,
-                        dom.select(EXPECTED_MENU_TITLE_SELECTOR).text());
-                    assertEquals(
-                        "/music/cat" + n,
-                        dom.select(EXPECTED_MENU_ITEM_SELECTOR).attr(EXPECTED_HREF_ATTRIBUTE));
-                  } else {
-                    dom =
-                        render(
-                            c,
-                            EXPECTED_SECTIONS_VIEW,
-                            sections(
-                                username,
-                                UserRole.ADMIN,
-                                FIXTURE_CATEGORY_PREFIX + n,
-                                List.of(new MusicSectionRecord("sec" + n, n))),
-                            token);
-                    assertEquals("sec" + n, dom.select(EXPECTED_MENU_TITLE_SELECTOR).text());
-                    assertEquals(
-                        "/music/cat" + n + "/sec" + n,
-                        dom.select(EXPECTED_MENU_ITEM_SELECTOR).attr(EXPECTED_HREF_ATTRIBUTE));
-                  }
-                  assertEquals(n + "曲", dom.select(EXPECTED_SUBTITLE_SELECTOR).text());
-                  common(dom, username, token);
-                  return null;
-                }));
+    try (var c = context()) {
+      var pool = Executors.newFixedThreadPool(8);
+      try {
+        var tasks = new ArrayList<Future<?>>();
+        for (int i = 0; i < 64; i++) {
+          final int n = i;
+          tasks.add(
+              pool.submit(
+                  () -> {
+                    String username = FIXTURE_READER + n;
+                    String token = "public-csrf-" + n;
+                    Document dom;
+                    if (n % 2 == 0) {
+                      dom =
+                          render(
+                              c,
+                              EXPECTED_MENU_VIEW,
+                              categories(
+                                  username,
+                                  UserRole.USER,
+                                  List.of(new MusicCategoryRecord(FIXTURE_CATEGORY_PREFIX + n, n))),
+                              token);
+                      assertEquals(
+                          FIXTURE_CATEGORY_PREFIX + n,
+                          dom.select(EXPECTED_MENU_TITLE_SELECTOR).text());
+                      assertEquals(
+                          "/music/cat" + n,
+                          dom.select(EXPECTED_MENU_ITEM_SELECTOR).attr(EXPECTED_HREF_ATTRIBUTE));
+                    } else {
+                      dom =
+                          render(
+                              c,
+                              EXPECTED_SECTIONS_VIEW,
+                              sections(
+                                  username,
+                                  UserRole.ADMIN,
+                                  FIXTURE_CATEGORY_PREFIX + n,
+                                  List.of(new MusicSectionRecord("sec" + n, n))),
+                              token);
+                      assertEquals("sec" + n, dom.select(EXPECTED_MENU_TITLE_SELECTOR).text());
+                      assertEquals(
+                          "/music/cat" + n + "/sec" + n,
+                          dom.select(EXPECTED_MENU_ITEM_SELECTOR).attr(EXPECTED_HREF_ATTRIBUTE));
+                    }
+                    assertEquals(n + "曲", dom.select(EXPECTED_SUBTITLE_SELECTOR).text());
+                    common(dom, username, token);
+                    return null;
+                  }));
+        }
+        for (var task : tasks) task.get(10, TimeUnit.SECONDS);
+        var directory = Path.of("target/scenario-screen-traces");
+        Files.createDirectories(directory);
+        Files.writeString(
+            directory.resolve("PT-SCR-071.txt"),
+            "templates=music|music-sections\n"
+                + "fixture=public-synthetic\n"
+                + "concurrentRenders=64\n"
+                + "maximumCategories=20\n"
+                + "maximumSections=100\n"
+                + "actualNkGate=false\n",
+            StandardCharsets.US_ASCII);
+      } finally {
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
-      for (var task : tasks) task.get(10, TimeUnit.SECONDS);
-      var directory = Path.of("target/scenario-screen-traces");
-      Files.createDirectories(directory);
-      Files.writeString(
-          directory.resolve("PT-SCR-071.txt"),
-          "templates=music|music-sections\n"
-              + "fixture=public-synthetic\n"
-              + "concurrentRenders=64\n"
-              + "maximumCategories=20\n"
-              + "maximumSections=100\n"
-              + "actualNkGate=false\n",
-          StandardCharsets.US_ASCII);
     }
   }
 

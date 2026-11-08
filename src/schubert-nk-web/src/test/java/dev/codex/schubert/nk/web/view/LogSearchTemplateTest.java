@@ -441,32 +441,38 @@ class LogSearchTemplateTest {
 
   @Test
   void log091ConcurrentRendering() throws Exception {
-    try (var c = context();
-        var pool = Executors.newFixedThreadPool(8)) {
-      var futures = new ArrayList<Future<Document>>();
-      for (int i = 0; i < 64; i++) {
-        final int index = i;
-        futures.add(
-            pool.submit(
-                () ->
-                    render(
-                        c,
-                        LogSearchViewModel.success(
-                            actor(READER_USERNAME + index),
-                            form(Map.of("q", "q" + index)),
-                            data(1, 1),
-                            List.of(row(index + 1, false, "body" + index))),
-                        "public-csrf-" + index,
-                        200)));
-      }
-      for (int i = 0; i < 64; i++) {
-        var d = futures.get(i).get(10, TimeUnit.SECONDS);
-        assertEquals(READER_USERNAME + i, d.selectFirst(".login-user").text());
-        assertEquals("q" + i, d.selectFirst(QUERY_FIELD_SELECTOR).attr(VALUE_ATTRIBUTE));
-        assertEquals("body" + i, d.selectFirst(".log-row > p").text());
-        assertEquals(Integer.toString(i + 1), d.selectFirst(".log-fields dd").text());
-        assertEquals("public-csrf-" + i, d.selectFirst("input[name=_csrf]").attr(VALUE_ATTRIBUTE));
-        assertTrue(d.select(".pagination a").isEmpty());
+    try (var c = context()) {
+      var pool = Executors.newFixedThreadPool(8);
+      try {
+        var futures = new ArrayList<Future<Document>>();
+        for (int i = 0; i < 64; i++) {
+          final int index = i;
+          futures.add(
+              pool.submit(
+                  () ->
+                      render(
+                          c,
+                          LogSearchViewModel.success(
+                              actor(READER_USERNAME + index),
+                              form(Map.of("q", "q" + index)),
+                              data(1, 1),
+                              List.of(row(index + 1, false, "body" + index))),
+                          "public-csrf-" + index,
+                          200)));
+        }
+        for (int i = 0; i < 64; i++) {
+          var d = futures.get(i).get(10, TimeUnit.SECONDS);
+          assertEquals(READER_USERNAME + i, d.selectFirst(".login-user").text());
+          assertEquals("q" + i, d.selectFirst(QUERY_FIELD_SELECTOR).attr(VALUE_ATTRIBUTE));
+          assertEquals("body" + i, d.selectFirst(".log-row > p").text());
+          assertEquals(Integer.toString(i + 1), d.selectFirst(".log-fields dd").text());
+          assertEquals(
+              "public-csrf-" + i, d.selectFirst("input[name=_csrf]").attr(VALUE_ATTRIBUTE));
+          assertTrue(d.select(".pagination a").isEmpty());
+        }
+      } finally {
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }
