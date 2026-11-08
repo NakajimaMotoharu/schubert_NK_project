@@ -1,0 +1,660 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T11:26:04.789135+09:00",
+  "inputHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationServiceMemoryPortTest.java": "84c3540cf9417f9d86cc618407da1437e7538a6929b987f129b57661bb0b9eb0",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java": "1a2121d84e092a0fae4a973452370cf9ea0aa5d9fb56d023ae7015b0061fae7d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/Role.java": "e60e607a3f09e860ad7c28c62555672ebdca3e8590d98fcffa45f82b5c2f5fe8",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java": "6cbdc8b0bc006e036ac3e127685d06c19bbb3c1e05d854cb52c8620d6a6065d6",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCryptoException.java": "a54b29289de7d08e01d6cbc814e9a815ae2162de559e02eebdb6e677a850066f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextIdentity.java": "b9dbed4233756c481cdb747d96f6de8843e9d910a4c18f51c30454d16130d7dd",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java": "1ec3c856c555f77de597745defbbd6ea6f60292013117a44daf81e78a5f5eda8",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java": "830a87635d2782354fe9c03e5d7612a2ab88364cdc31157b501fbf7baf361469",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextException.java": "5a0e03c3b5aa5c14f41b8273bca454409288b88b50190f23d1d59982be8552ce",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.java": "4b64f5d458370b67b3f5f156ffb879151eb69c30fbe9819660e70cc81e55a402",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java": "453a743084bbbe3d8cd859db1246faee5c27af1cc3f46484cb1ea07e98baee51",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java": "9b0714ec9dc88f3f15e11341d71d873250fee8436ebad03b3fb1079060392581",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/EncryptedAuthContext.java": "d503847e6b1b1a3853033cbe82eb53678b529d616f36d1dfc0a354b3635954b7",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/IssuedContext.java": "e63b4f5bc96fef9df4b42ca1bff2de29098ab1139d96d49d4aedb1dbbc991ec1",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LockedLoginAttempt.java": "71655d2fa7fa5fe730d9d1ca20e7f713e669760f32af4437fed064873066e7a4",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAccount.java": "f78519bcbdcb4d906fa63010239a8f31398f1564d5fdb1ffcd9602e3dac4b2a0",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptKind.java": "493c8b03e7791a044be87f4fadeb1c7c7c95588aba1174cb38baa0b5a3b56f7b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java": "ed47df13b0b33a93bdfea58f0998bf299361c22b463c6e49a679df13a026bc02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptState.java": "393f52726e83c3ea52fe34c7385c0da413d49306a476894255602fe82880c352",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditReason.java": "4710a12a0c95eb7dfa45dd67d53a69b8a08dd25b70d94d7ddf172da9a9e308f6",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditWriter.java": "e78c47b80b4037897a2ec8e3455759ebe183af845c28ce37e7f10833a7faee8b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginResult.java": "d5efa4df9df7e10fd959c1f515e624fee369b0ce290583ffdb84f459c904f832",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java": "970b0b15993f72f0881cdf64b00839cb1fdf4f601a6c4b0827e2adc0bb4e0359",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordHasher.java": "af26da6781015b67cf36a6e35497c334dd1eadf05e00da38f1e2c43460d91baf",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordPolicy.java": "6d8ffe5b35fc04f4056999d5a4a4a73ce6c3103a62b4b2cd87fbcfbeb1c8e608",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionAuditWriter.java": "173393177007aeb17a945ae37894e4d4a4c8b9b7f386765628bdbede6d7ebb6d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionRevocationReason.java": "213a5fb2c04bf79b447f0a981f4f8b0eb3834b948476f8b2ddadb56b472cdd74",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java": "aaa18a4c954a425c943e8c30ea1752b665b249e86d8f1767e9e37f4aa61a6b66",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4",
+    "evidence/01_PT/007_NK-AUT-001/input/018_authentication_memory_port_qualifier.py": "5e30af6d5ae4f5603276ca65fdaafebf0b662cf3676bd7c9253853d81a2b5d9c",
+    "evidence/01_PT/007_NK-AUT-001/input/017_authentication_memory_port_scope.json": "4a367f57e835674084434f2c467e9e30e4be92059d7b8869a293d53fb47a6c02"
+  },
+  "compileManifestSha256": "7ac65587bf98a7298dc04c7df6ec90515fa99195cd1de444443fe80a037a3ef0",
+  "staticManifestSha256": "291a762827d5b422c7ad21dfbb3cce22d602af5b930fbc9e0fce993bd5294954",
+  "normalMainStaticUnchanged": "0580a14592d3fc00820183034c584208e45b002802d2e3e173b5f752c7cf19f2",
+  "sdkClasspathGuard": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar",
+      "sha256": "1d816c9e5510723a10dfde2b19a8ddc9c5423d425039b891eb497d3b6e963fdb",
+      "jdbcDriverDescriptors": 0,
+      "compilerPluginDescriptors": 0,
+      "manifestClasspath": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "sha256": "bc6acaa867859b0f1d2f2e24dc27ba5627e7bf7c332448ae88bb077ea1b36fa7",
+      "jdbcDriverDescriptors": 0,
+      "compilerPluginDescriptors": 0,
+      "manifestClasspath": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar",
+      "sha256": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+      "jdbcDriverDescriptors": 0,
+      "compilerPluginDescriptors": 0,
+      "manifestClasspath": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar",
+      "sha256": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc",
+      "jdbcDriverDescriptors": 0,
+      "compilerPluginDescriptors": 0,
+      "manifestClasspath": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "jdbcDriverDescriptors": 0,
+      "compilerPluginDescriptors": 0,
+      "manifestClasspath": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-crypto/7.1.1/spring-security-crypto-7.1.1.jar",
+      "sha256": "6e8bb2337faccabd30626f917ed1d2bfa9dde982229b6b373b644d1a01635403",
+      "jdbcDriverDescriptors": 0,
+      "compilerPluginDescriptors": 0,
+      "manifestClasspath": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar",
+      "sha256": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36",
+      "jdbcDriverDescriptors": 0,
+      "compilerPluginDescriptors": 0,
+      "manifestClasspath": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar",
+      "sha256": "4667724877f1d37a689202da191e23efa7657c62eef93ccdac406eccfe5cdd0a",
+      "jdbcDriverDescriptors": 0,
+      "compilerPluginDescriptors": 0,
+      "manifestClasspath": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+      "jdbcDriverDescriptors": 0,
+      "compilerPluginDescriptors": 0,
+      "manifestClasspath": false
+    }
+  ],
+  "sourceGraph": [
+    {
+      "className": "dev/codex/schubert/nk/protocol/header/ResultCode",
+      "source": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java",
+      "sourceSha256": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4",
+      "productReferences": [
+        "dev/codex/schubert/nk/protocol/header/ResultCode"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "source": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java",
+      "sourceSha256": "aaa18a4c954a425c943e8c30ea1752b665b249e86d8f1767e9e37f4aa61a6b66",
+      "productReferences": [
+        "dev/codex/schubert/nk/protocol/header/AuthenticationContext"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/AuthenticatedActor",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java",
+      "sourceSha256": "830a87635d2782354fe9c03e5d7612a2ab88364cdc31157b501fbf7baf361469",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/domain/Role",
+        "dev/codex/schubert/nk/api/security/AuthenticatedActor"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.java",
+      "sourceSha256": "4b64f5d458370b67b3f5f156ffb879151eb69c30fbe9819660e70cc81e55a402",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCryptoException.java",
+      "sourceSha256": "a54b29289de7d08e01d6cbc814e9a815ae2162de559e02eebdb6e677a850066f",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/AuthContextCryptoException",
+        "dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/AuthContextIdentity",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextIdentity.java",
+      "sourceSha256": "b9dbed4233756c481cdb747d96f6de8843e9d910a4c18f51c30454d16130d7dd",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/AuthContextIdentity"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/LoginResult",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginResult.java",
+      "sourceSha256": "d5efa4df9df7e10fd959c1f515e624fee369b0ce290583ffdb84f459c904f832",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/LoginResult",
+        "dev/codex/schubert/nk/api/security/LoginResult$Failure",
+        "dev/codex/schubert/nk/api/security/LoginResult$Success"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/LoginResult$Success",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginResult.java",
+      "sourceSha256": "d5efa4df9df7e10fd959c1f515e624fee369b0ce290583ffdb84f459c904f832",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/AuthContextIdentity",
+        "dev/codex/schubert/nk/api/security/AuthenticatedActor",
+        "dev/codex/schubert/nk/api/security/IssuedContext",
+        "dev/codex/schubert/nk/api/security/LoginResult",
+        "dev/codex/schubert/nk/api/security/LoginResult$Success",
+        "dev/codex/schubert/nk/protocol/header/ResultCode"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/AuthenticationService",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java",
+      "sourceSha256": "453a743084bbbe3d8cd859db1246faee5c27af1cc3f46484cb1ea07e98baee51",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/AuthContextCryptoException",
+        "dev/codex/schubert/nk/api/security/AuthSessionService",
+        "dev/codex/schubert/nk/api/security/AuthenticatedActor",
+        "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+        "dev/codex/schubert/nk/api/security/AuthenticationService",
+        "dev/codex/schubert/nk/api/security/LockedLoginAttempt",
+        "dev/codex/schubert/nk/api/security/LoginAccount",
+        "dev/codex/schubert/nk/api/security/LoginAttemptRepository",
+        "dev/codex/schubert/nk/api/security/LoginAttemptState",
+        "dev/codex/schubert/nk/api/security/LoginAuditReason",
+        "dev/codex/schubert/nk/api/security/LoginAuditWriter",
+        "dev/codex/schubert/nk/api/security/LoginResult",
+        "dev/codex/schubert/nk/api/security/LoginResult$Failure",
+        "dev/codex/schubert/nk/api/security/LoginResult$Success",
+        "dev/codex/schubert/nk/api/security/LoginUsername",
+        "dev/codex/schubert/nk/api/security/PasswordHasher",
+        "dev/codex/schubert/nk/protocol/header/ResultCode"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/PasswordHasher",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordHasher.java",
+      "sourceSha256": "af26da6781015b67cf36a6e35497c334dd1eadf05e00da38f1e2c43460d91baf",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/PasswordHasher",
+        "dev/codex/schubert/nk/api/security/PasswordPolicy"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/LoginResult$Failure",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginResult.java",
+      "sourceSha256": "d5efa4df9df7e10fd959c1f515e624fee369b0ce290583ffdb84f459c904f832",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/LoginResult",
+        "dev/codex/schubert/nk/api/security/LoginResult$Failure",
+        "dev/codex/schubert/nk/protocol/header/ResultCode"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/ContextHash",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java",
+      "sourceSha256": "9b0714ec9dc88f3f15e11341d71d873250fee8436ebad03b3fb1079060392581",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/ContextHash",
+        "dev/codex/schubert/nk/protocol/header/AuthenticationContext"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/LoginAttemptState",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptState.java",
+      "sourceSha256": "393f52726e83c3ea52fe34c7385c0da413d49306a476894255602fe82880c352",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/LoginAttemptKind",
+        "dev/codex/schubert/nk/api/security/LoginAttemptState"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/AuthContextCodec",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java",
+      "sourceSha256": "6cbdc8b0bc006e036ac3e127685d06c19bbb3c1e05d854cb52c8620d6a6065d6",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/AuthContextCodec",
+        "dev/codex/schubert/nk/api/security/AuthContextCryptoException",
+        "dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason",
+        "dev/codex/schubert/nk/api/security/AuthContextIdentity",
+        "dev/codex/schubert/nk/api/security/EncryptedAuthContext",
+        "dev/codex/schubert/nk/protocol/header/AuthenticationContext"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/SessionAuditWriter",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionAuditWriter.java",
+      "sourceSha256": "173393177007aeb17a945ae37894e4d4a4c8b9b7f386765628bdbede6d7ebb6d",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/SessionAuditWriter",
+        "dev/codex/schubert/nk/api/security/SessionRevocationReason",
+        "dev/codex/schubert/nk/protocol/header/ResultCode"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/LoginAuditWriter",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditWriter.java",
+      "sourceSha256": "e78c47b80b4037897a2ec8e3455759ebe183af845c28ce37e7f10833a7faee8b",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/AuthenticatedActor",
+        "dev/codex/schubert/nk/api/security/LoginAuditReason",
+        "dev/codex/schubert/nk/api/security/LoginAuditWriter",
+        "dev/codex/schubert/nk/api/security/LoginResult",
+        "dev/codex/schubert/nk/api/security/LoginResult$Success",
+        "dev/codex/schubert/nk/protocol/header/ResultCode"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/EncryptedAuthContext",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/EncryptedAuthContext.java",
+      "sourceSha256": "d503847e6b1b1a3853033cbe82eb53678b529d616f36d1dfc0a354b3635954b7",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/EncryptedAuthContext"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/AuthContextCryptoException",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCryptoException.java",
+      "sourceSha256": "a54b29289de7d08e01d6cbc814e9a815ae2162de559e02eebdb6e677a850066f",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/AuthContextCryptoException",
+        "dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/SessionRevocationReason",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionRevocationReason.java",
+      "sourceSha256": "213a5fb2c04bf79b447f0a981f4f8b0eb3834b948476f8b2ddadb56b472cdd74",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/SessionRevocationReason"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/LoginUsername",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java",
+      "sourceSha256": "970b0b15993f72f0881cdf64b00839cb1fdf4f601a6c4b0827e2adc0bb4e0359",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/LoginUsername"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/LoginAccount",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAccount.java",
+      "sourceSha256": "f78519bcbdcb4d906fa63010239a8f31398f1564d5fdb1ffcd9602e3dac4b2a0",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/AuthenticatedActor",
+        "dev/codex/schubert/nk/api/security/LoginAccount",
+        "dev/codex/schubert/nk/api/security/LoginAttemptKind",
+        "dev/codex/schubert/nk/api/security/LoginAttemptState"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/IssuedContext",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/IssuedContext.java",
+      "sourceSha256": "e63b4f5bc96fef9df4b42ca1bff2de29098ab1139d96d49d4aedb1dbbc991ec1",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/AuthContextIdentity",
+        "dev/codex/schubert/nk/api/security/IssuedContext",
+        "dev/codex/schubert/nk/protocol/header/AuthenticationContext"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/LoginAuditReason",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditReason.java",
+      "sourceSha256": "4710a12a0c95eb7dfa45dd67d53a69b8a08dd25b70d94d7ddf172da9a9e308f6",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/LoginAuditReason"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/AuthSessionService",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java",
+      "sourceSha256": "1ec3c856c555f77de597745defbbd6ea6f60292013117a44daf81e78a5f5eda8",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/database/RequiredColumn",
+        "dev/codex/schubert/nk/api/security/AuthContextCodec",
+        "dev/codex/schubert/nk/api/security/AuthContextIdentity",
+        "dev/codex/schubert/nk/api/security/AuthSessionService",
+        "dev/codex/schubert/nk/api/security/AuthenticationContextException",
+        "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+        "dev/codex/schubert/nk/api/security/ContextHash",
+        "dev/codex/schubert/nk/api/security/EncryptedAuthContext",
+        "dev/codex/schubert/nk/api/security/IssuedContext",
+        "dev/codex/schubert/nk/api/security/SessionAuditWriter",
+        "dev/codex/schubert/nk/api/security/SessionRevocationReason",
+        "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+        "dev/codex/schubert/nk/protocol/header/ResultCode"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/LoginAttemptRepository",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java",
+      "sourceSha256": "ed47df13b0b33a93bdfea58f0998bf299361c22b463c6e49a679df13a026bc02",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/database/RequiredColumn",
+        "dev/codex/schubert/nk/api/domain/Role",
+        "dev/codex/schubert/nk/api/security/AuthenticatedActor",
+        "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+        "dev/codex/schubert/nk/api/security/LockedLoginAttempt",
+        "dev/codex/schubert/nk/api/security/LoginAccount",
+        "dev/codex/schubert/nk/api/security/LoginAttemptKind",
+        "dev/codex/schubert/nk/api/security/LoginAttemptRepository",
+        "dev/codex/schubert/nk/api/security/LoginAttemptState"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/AuthenticationContextException",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextException.java",
+      "sourceSha256": "5a0e03c3b5aa5c14f41b8273bca454409288b88b50190f23d1d59982be8552ce",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/AuthenticationContextException"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/LockedLoginAttempt",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LockedLoginAttempt.java",
+      "sourceSha256": "71655d2fa7fa5fe730d9d1ca20e7f713e669760f32af4437fed064873066e7a4",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/LockedLoginAttempt",
+        "dev/codex/schubert/nk/api/security/LoginAttemptKind",
+        "dev/codex/schubert/nk/api/security/LoginAttemptState"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/PasswordPolicy",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordPolicy.java",
+      "sourceSha256": "6d8ffe5b35fc04f4056999d5a4a4a73ce6c3103a62b4b2cd87fbcfbeb1c8e608",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/PasswordPolicy"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/LoginAttemptKind",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptKind.java",
+      "sourceSha256": "493c8b03e7791a044be87f4fadeb1c7c7c95588aba1174cb38baa0b5a3b56f7b",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/security/LoginAttemptKind"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/domain/Role",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/Role.java",
+      "sourceSha256": "e60e607a3f09e860ad7c28c62555672ebdca3e8590d98fcffa45f82b5c2f5fe8",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/domain/Role"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/database/RequiredColumn",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java",
+      "sourceSha256": "1a2121d84e092a0fae4a973452370cf9ea0aa5d9fb56d023ae7015b0061fae7d",
+      "productReferences": [
+        "dev/codex/schubert/nk/api/database/RequiredColumn"
+      ]
+    }
+  ],
+  "graphLimit": "Pinned ClassFile symbols plus full manual Main bodies and intended operation review; metadata alone never grants execution",
+  "sourceAssertionRecipes": [
+    "private static final Instant AT = Instant.parse(\"2026-09-08T00:00:00.123456Z\");",
+    "private static final Instant EXPIRES = Instant.parse(\"2026-09-08T08:00:00.123456Z\");",
+    "assertEquals(7, result.actor().userId());",
+    "assertEquals(\"Ålice\", result.actor().username());",
+    "assertEquals(Role.USER, result.actor().role());",
+    "assertEquals(Role.ADMIN, result.actor().role());",
+    "assertEquals(0, f.param(Stage.UPDATE_USER, 1));",
+    "assertNull(f.param(Stage.UPDATE_USER, 2));",
+    "assertNull(f.param(Stage.UPDATE_USER, 3));",
+    "assertEquals(true, f.param(Stage.UPDATE_USER, 4));",
+    "assertEquals(3, f.param(Stage.UPDATE_USER, 1));",
+    "assertEquals(4, f.param(Stage.UPDATE_IP, 1));",
+    "assertEquals(900, result.retryAfterSeconds());",
+    "assertEquals(240, result.retryAfterSeconds());",
+    "new int[] {4, 0}",
+    "new int[] {0, 9}",
+    "new int[] {4, 9}",
+    "new long[] {1_000, 1}",
+    "new long[] {1_000_001_000L, 2}",
+    "new long[] {899_999_999_000L, 900}",
+    "new long[] {900_000_001_000L, 900}",
+    "f.userWindow = AT.minusSeconds(900);",
+    "f.userLock = Optional.of(AT);",
+    "f.userWindow = AT.minusSeconds(900).minusNanos(1_000);",
+    "assertEquals(1, f.param(Stage.UPDATE_USER, 1));",
+    "assertArrayEquals(new char[16], password);",
+    "assertEquals(1, statement.closed);",
+    "assertEquals(1, cursor.closed);",
+    "assertEquals(STORAGE_ERROR, failure.getMessage());",
+    "assertNull(failure.getCause());",
+    "assertEquals(0, failure.getSuppressed().length);",
+    "assertSame(fatal, assertThrows(AssertionError.class, f::call));",
+    "assertEquals(1, f.count(Stage.SESSION_REPLACE));",
+    "assertTrue(oldest.equals(f.param(Stage.SESSION_REPLACE, 2)));",
+    "assertEquals(Set.of(\"targetUserId\", REASON_KEY, RESULT_CODE_KEY), audit.keySet());",
+    "assertEquals(code, details.get(RESULT_CODE_KEY).getAsString());",
+    "assertEquals(reason, details.get(REASON_KEY).getAsString());",
+    "assertEquals(expectedClient, param(Stage.LOGIN_AUDIT, 9));",
+    "assertEquals(expectedDisplay, param(Stage.LOGIN_AUDIT, 8));",
+    "assertEquals(messageId, param(Stage.LOGIN_AUDIT, 5));",
+    "assertEquals(correlationId, param(Stage.LOGIN_AUDIT, 6));",
+    "case \"getAutoCommit\" -> false;",
+    "throw new AssertionError(\"borrowed connection operation is forbidden: \" + method);",
+    "assertTrue(statement.parameters.containsKey(index), \"required bound index is missing\");",
+    "assertNotSame(first.connection, second.connection);",
+    "assertEquals(8, secondResult.actor().userId());",
+    "assertEquals(\"Bob\", secondResult.actor().username());",
+    "one.get(5, TimeUnit.SECONDS)",
+    "two.get(5, TimeUnit.SECONDS)",
+    "client = InetAddress.ofLiteral(\"192.0.2.11\");",
+    "messageId = new UUID(0, 21);",
+    "correlationId = new UUID(0, 22);"
+  ],
+  "expectedTests": 16,
+  "newUniqueTests": 16,
+  "fullSourceFilePhysicalClasses": [
+    "dev/codex/schubert/nk/api/security/AuthenticationService"
+  ],
+  "manualCoverageExclusions": [],
+  "styleInverse": true,
+  "pmdRaw": 8,
+  "pmdApplicable": 0,
+  "checkstyle": 0,
+  "unclassified": 0,
+  "staticClassifications": [
+    {
+      "raw": {
+        "beginline": "445",
+        "endline": "445",
+        "begincolumn": "24",
+        "endcolumn": "55",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AuthenticationServiceMemoryPortTest",
+        "method": "memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray",
+        "variable": "executor",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Standalone JUnit owns exactly two tasks and its executor; two Future waits5s, outer Unit180s. Not a J2EE/container thread or live process."
+    },
+    {
+      "raw": {
+        "beginline": "449",
+        "endline": "452",
+        "begincolumn": "11",
+        "endcolumn": "17",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AuthenticationServiceMemoryPortTest",
+        "method": "memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray",
+        "variable": "one",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Standalone JUnit owns exactly two tasks and its executor; two Future waits5s, outer Unit180s. Not a J2EE/container thread or live process."
+    },
+    {
+      "raw": {
+        "beginline": "454",
+        "endline": "457",
+        "begincolumn": "11",
+        "endcolumn": "17",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AuthenticationServiceMemoryPortTest",
+        "method": "memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray",
+        "variable": "two",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Standalone JUnit owns exactly two tasks and its executor; two Future waits5s, outer Unit180s. Not a J2EE/container thread or live process."
+    },
+    {
+      "raw": {
+        "beginline": "541",
+        "endline": "541",
+        "begincolumn": "21",
+        "endcolumn": "39",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AuthenticationServiceMemoryPortTest.Fixture",
+        "variable": "observedStoredHash",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "priority": "2",
+        "message": "Use of modifier volatile is not recommended."
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "One synthetic checker-observation scalar explicitly published across two owned tasks. AtomicInteger handles counters; no transaction invariants or multi-field protocol use volatile. Future joins precede observation."
+    },
+    {
+      "raw": {
+        "beginline": "727",
+        "endline": "727",
+        "begincolumn": "34",
+        "endcolumn": "62",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AuthenticationServiceMemoryPortTest.Fixture.Statement",
+        "variable": "parameters",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3",
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Each parameters/user/IP map belongs only to its distinct caller Fixture/Connection; no map shared between tasks. JDBC NULL cells are intentional and disallow ConcurrentHashMap substitution; Future completion publishes results."
+    },
+    {
+      "raw": {
+        "beginline": "771",
+        "endline": "771",
+        "begincolumn": "31",
+        "endcolumn": "52",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AuthenticationServiceMemoryPortTest.Fixture.Statement",
+        "method": "rows",
+        "variable": "row",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3",
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Each parameters/user/IP map belongs only to its distinct caller Fixture/Connection; no map shared between tasks. JDBC NULL cells are intentional and disallow ConcurrentHashMap substitution; Future completion publishes results."
+    },
+    {
+      "raw": {
+        "beginline": "785",
+        "endline": "785",
+        "begincolumn": "31",
+        "endcolumn": "52",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AuthenticationServiceMemoryPortTest.Fixture.Statement",
+        "method": "rows",
+        "variable": "row",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3",
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Each parameters/user/IP map belongs only to its distinct caller Fixture/Connection; no map shared between tasks. JDBC NULL cells are intentional and disallow ConcurrentHashMap substitution; Future completion publishes results."
+    },
+    {
+      "raw": {
+        "beginline": "852",
+        "endline": "852",
+        "begincolumn": "13",
+        "endcolumn": "34",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.security",
+        "class": "AuthenticationServiceMemoryPortTest",
+        "method": "proxy",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3",
+        "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Exactly the defining loader of supplied standard JDK Connection/PreparedStatement/ResultSet interface for own Proxy. Standalone JUnit, no container or context loader contract."
+    }
+  ],
+  "actualBackendActions": 0,
+  "actualJdbcDriverOrDatabaseActions": 0,
+  "actualLoginOrSessionAgainstServer": false,
+  "ownLocalSyntheticJca": true,
+  "ownFixedJvmTasks": 2,
+  "defaultMatcherInvoked": false,
+  "heldFourInitializations": 0,
+  "originalRealDatabaseTestOrFixtureCompiledOrRun": false,
+  "productTestsExecuted": 0,
+  "productClassesInitialized": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "bugs": [
+    "BUG-2499"
+  ],
+  "ykts": [
+    "YKT-2237"
+  ]
+}
