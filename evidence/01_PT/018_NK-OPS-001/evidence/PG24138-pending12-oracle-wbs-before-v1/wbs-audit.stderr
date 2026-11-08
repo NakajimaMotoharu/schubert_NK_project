@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/wbs_progress_audit.py", line 431, in <module>
+    result = verify_baseline() if args.baseline_v1 else verify(args.master, args.snapshot, args.budget, args.inventory)
+                                                        ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/wbs_progress_audit.py", line 358, in verify
+    historical = candidate_trace.git_artifacts(inventory['source'],[x['path']for x in artifacts]) if 'currentPhysicalCandidate' in inventory else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/wbs_candidate_trace.py", line 54, in git_artifacts
+    require(len(header)==3 and header[1]=='blob'and header[2].isdigit(),'Git artifact missing/non-blob: '+path)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/wbs_candidate_trace.py", line 26, in require
+    if not value:raise ValueError(message)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Git artifact missing/non-blob: src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java
