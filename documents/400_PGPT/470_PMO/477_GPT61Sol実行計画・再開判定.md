@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-08 G07はcaptureの実schema roleを先に数える
+
+Source hash68範囲の残73はsourceHashes/testSourceHashes内0（dependencyHashes66/dependencyJarHashes2/xmlHashes4/unsupported1）であり、23962/23964は新分類0。新Source witness作成前に、固定残候補の実field roleと対象数を既metadataから先に観測する。対象0のfamilyへ別witnessを追加する新群を選ばず、元見積・共有費不明/0分類・選定手戻りを保持する。新しいartifact IOは観測された候補と具体的な安全契約がある時だけに限定する。全当初4493/現在未分類3315/限界22/actualSecretCountnull/451/HOLD/モデル/枠/自走停止条件は変更しない。
+
+
 ## 2026-11-08 source/class role・固定構文の観測を優先（BUG2510～2512）
 
 当14静的群では新しい汎用Java解析を先に作り、hash意味混同・終端indent・trivia比較の工具手戻り3件を生じた。以後は既結果の再計算や新parser拡張を避け、必要な固定fieldの意味（source/class/CRC）、元入力の型、対象methodの構文形を先に小さく観測して独立期待表とレビュー記録を作る。必要な新工具だけに限定し、工具の否定検査を製品PTや実績へ換算しない。元失敗/費用・開始見積を保持し、元計画の進捗とtool是正を分離する。既477/451・通常PT優先・全HOLD・モデル/枠/自走停止条件は不変更。
