@@ -1,0 +1,11 @@
+# 独立64上限・匿名Log 原15＋新1 結果
+
+仕様090/0183882。source8a027340/Main7aed、PG24544全16一回OS0、F/E/S/aborted0、PG24546独立0 manifestb8f150d8368f7d43413142c06a424684c34549e5c43929f5e14f0b8a1a97cb79。元15は再資格、新1はPT-PRO-QA054-013だけ、技術新unique519(Java415+HTML97CSS7)。
+
+64独立tableは24548でUI233/SS323と一致、14repeat/31response/256+data+record*count、元2fixture hash不変更。Golden最大期待と数字境界入力をSUTから独立化し、他9max accessor使用はactual側/例外刺激で非該当。元Log12の全文byteはownerと新methodを逆変換して一致、旧golden corpus/reader/digest/recordは不変更。
+
+対象WebLogEventData L50/M5/C1/I290未達0、BRANCH自然0は現classinfo・CRCでN-A/null、strict非空四100gate1保持。42実Main CRC現normal一致/held四init0、oldexec結合0。PayloadCodec/FieldCodec全ProgramやNative/Header/HMAC/CHR/Rootを当限定record測定で閉鎖しない。
+
+compile24538=0/static24540 raw12はClose2/Threads9/意図的nullnegative1を個別適用0/CS0、preflight24542=0。公開工具space検知2543は2080byteを削らずexact2path/hash例外4否定、元24552/24560/24564失敗とstaging18は24562で保全後indexのみ整理・HEAD/worktree不変更。24566 source8a通常push。独立postのmissingfields2544は24568で現schema＋固定indexに局所修正、他pair非該当/8missing否定・元16再演0、24570工具source12a通常push。
+
+各caseと実行日時/環境/command/source/input/独立期待/actualassert/coverage/終了/BUG/hashはPG24546 manifest・元XML/hash・24542期待wire/24548既fixture証明へ対応。匿名actualはassertArrayEqualsの実PASSでありraw出力hashを推定生成しない。新source登録/leaf0・正式1964PT53scope・工数null・候補114/pending12/whole93/全HOLD・QA051final保持、globalYKT2177OPEN。原予算3/6/9cap10とREWORK/新規/工具手戻りを分け、実費按分不明null。
