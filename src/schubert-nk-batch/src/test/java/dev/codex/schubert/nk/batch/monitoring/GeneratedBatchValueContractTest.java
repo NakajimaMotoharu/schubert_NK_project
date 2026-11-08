@@ -245,7 +245,8 @@ class GeneratedBatchValueContractTest {
     assertEquals(31 * 1231 + System.identityHashCode(first), populated.hashCode());
     assertEquals("Evaluation[suppliedValuePresent=true, event=Optional.empty]", actual.toString());
     assertEquals(
-        "Evaluation[suppliedValuePresent=true, event=Optional[dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event@"
+        "Evaluation[suppliedValuePresent=true,"
+            + " event=Optional[dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event@"
             + Integer.toHexString(System.identityHashCode(first))
             + "]]",
         populated.toString());

@@ -1,0 +1,188 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T05:23:44.337819+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+      "originalSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71",
+      "currentSha256": "a07de65f75dc2f617e1250f6db15ac4c213bbf25ba0079bf55e975d46e615ccf",
+      "originalWholeBodiesExactlyRestored": true,
+      "originalCases": 12
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+      "originalSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84",
+      "currentSha256": "8b93b3bb249e1ff35738c90afdf3b0b170187d8d8f01b74ee73c143dab503e42",
+      "originalWholeBodiesExactlyRestored": true,
+      "originalCases": 6
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricContractTest.java",
+      "originalSha256": "f8226e2f192c011942bab5a024bc23d3e0f9cd0210cbb177edf864543bb4bc67",
+      "currentSha256": "f8226e2f192c011942bab5a024bc23d3e0f9cd0210cbb177edf864543bb4bc67",
+      "originalWholeBodiesExactlyRestored": true,
+      "originalCases": 5
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/GeneratedBatchValueContractTest.java",
+      "originalSha256": "f0b39e57c0a7cf7982ffb87442ef4bad5ea6e16faead94e17af90e7d22c036af",
+      "currentSha256": "3dd71d87a53a2764c6c26a672d718fc345adf0045e0a9eb649d546ede9924e6e",
+      "originalWholeBodiesExactlyRestored": true,
+      "originalCases": 7
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertContinuityTest.java",
+      "originalSha256": "07b790376ed5c47504e3a6be9e6fbd011c0575f827456f804b91fbbca4ec2811",
+      "currentSha256": "07b790376ed5c47504e3a6be9e6fbd011c0575f827456f804b91fbbca4ec2811",
+      "originalWholeBodiesExactlyRestored": true,
+      "originalCases": 2
+    }
+  ],
+  "originalWholeCases": 32,
+  "rawFindings": 16,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 1,
+  "finiteOwnerSitesCorrected": 2,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG24980-monitor-alert-metric-owner-prepare-v1/manifest.json",
+    "sha256": "9587c4923d5ebde7072ef51cb9fe48cd67d02632870caf261aad75a6c8b85fb5"
+  },
+  "classifications": [
+    {
+      "test": "AlertLifecycleTest",
+      "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+      "line": 213,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Executor lifetime is one explicit finite finally, avoiding unbounded ExecutorService.close; shutdownNow plus await10 assertion. Failure remains test failure."
+    },
+    {
+      "test": "AlertLifecycleTest",
+      "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+      "line": 213,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit own finite worker; not a web runtime thread. Timed invokeAll, terminal Future and finally shutdownNow/await10 reviewed."
+    },
+    {
+      "test": "AlertLifecycleTest",
+      "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+      "line": 219,
+      "rule": "AvoidSynchronizedStatement",
+      "applicable": false,
+      "basis": "Intentional negative monitor coupling test holds public owner monitor while private internal lock allows all64 workers to finish; removing it would lose the oracle."
+    },
+    {
+      "test": "AlertLifecycleTest",
+      "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+      "line": 220,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit own finite worker; not a web runtime thread. Timed invokeAll, terminal Future and finally shutdownNow/await10 reviewed."
+    },
+    {
+      "test": "AlertLifecycleTest",
+      "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+      "line": 228,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit own finite worker; not a web runtime thread. Timed invokeAll, terminal Future and finally shutdownNow/await10 reviewed."
+    },
+    {
+      "test": "AlertLifecycleTest",
+      "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+      "line": 229,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit own finite worker; not a web runtime thread. Timed invokeAll, terminal Future and finally shutdownNow/await10 reviewed."
+    },
+    {
+      "test": "AlertLifecycleTest",
+      "method": "protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent",
+      "line": 287,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Executor lifetime is one explicit finite finally, avoiding unbounded ExecutorService.close; shutdownNow plus await10 assertion. Failure remains test failure."
+    },
+    {
+      "test": "AlertLifecycleTest",
+      "method": "protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent",
+      "line": 287,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit own finite worker; not a web runtime thread. Timed invokeAll, terminal Future and finally shutdownNow/await10 reviewed."
+    },
+    {
+      "test": "AlertLifecycleTest",
+      "method": "protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent",
+      "line": 289,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit own finite worker; not a web runtime thread. Timed invokeAll, terminal Future and finally shutdownNow/await10 reviewed."
+    },
+    {
+      "test": "AlertLifecycleTest",
+      "method": "protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent",
+      "line": 292,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit own finite worker; not a web runtime thread. Timed invokeAll, terminal Future and finally shutdownNow/await10 reviewed."
+    },
+    {
+      "test": "AlertLifecycleTest",
+      "method": "protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent",
+      "line": 293,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit own finite worker; not a web runtime thread. Timed invokeAll, terminal Future and finally shutdownNow/await10 reviewed."
+    },
+    {
+      "test": "MetricContractTest",
+      "method": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+      "line": 138,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Executor lifetime is one explicit finite finally, avoiding unbounded ExecutorService.close; shutdownNow plus await10 assertion. Failure remains test failure."
+    },
+    {
+      "test": "MetricContractTest",
+      "method": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+      "line": 138,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit own finite worker; not a web runtime thread. Timed invokeAll, terminal Future and finally shutdownNow/await10 reviewed."
+    },
+    {
+      "test": "MetricContractTest",
+      "method": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+      "line": 153,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit own finite worker; not a web runtime thread. Timed invokeAll, terminal Future and finally shutdownNow/await10 reviewed."
+    },
+    {
+      "test": "MetricContractTest",
+      "method": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+      "line": 156,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit own finite worker; not a web runtime thread. Timed invokeAll, terminal Future and finally shutdownNow/await10 reviewed."
+    },
+    {
+      "test": "MetricContractTest",
+      "method": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+      "line": 157,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit own finite worker; not a web runtime thread. Timed invokeAll, terminal Future and finally shutdownNow/await10 reviewed."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}
