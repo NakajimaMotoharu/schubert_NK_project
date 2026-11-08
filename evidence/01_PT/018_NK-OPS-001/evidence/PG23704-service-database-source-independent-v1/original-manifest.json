@@ -1,0 +1,227 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "bb416a756f035023ddad45f67003afe23effe657",
+    "normalSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+    "inputHashes": {
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java": "a9476785417f115af1c33fd55085df696cc5d4cd51493e7c1bff498a7ab03e2f",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": "bf179887c2496723d5ddb4ee0be02c5e599ecba781f5b8338367bb21648627a5",
+      "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java": "11b33bed1889750459c6e27c65a7cacd69c51c79f78cd85da252093c504912d6",
+      "evidence/01_PT/018_NK-OPS-001/input/507_service_database_source_qualifier.py": "0e9b5153dde17a2b513822d921d83a34004dea72d9f97314ffa1eed08475e11b",
+      "evidence/01_PT/018_NK-OPS-001/input/506_service_database_source_scope.json": "f4e0efcf325d4b24d1aab37306b894120165f25a2cb5fbfbbee12dfa896c7be3"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar": "cd07d7031d042a9224995445e1974f24cceedece141fff69cac28cf392db496d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar": "9b5bf5bf449e93f571524b26496e3e8215b9015dc97dd3a0b2c75a7073401ef6",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "compileManifestSha256": "1f09282c418479048486e1375316f1bfe18dc2606a871e1c788a197220d90c44",
+    "selected": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest"
+    ],
+    "expectedTests": 14,
+    "newMethods": 14,
+    "requalifiedExistingMethods": 0,
+    "session": "PG23702-SERVICE-DATABASE-SOURCE-PORT14",
+    "startUTC": "2026-11-08T00:36:16.260819+00:00"
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T00:36:16.260991+00:00",
+      "endUTC": "2026-11-08T00:36:17.328540+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg23702-service-database-source-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg23702-service-database-source-unit-v1/jacoco.exec,sessionid=PG23702-SERVICE-DATABASE-SOURCE-PORT14,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg23702-service-database-source-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23728-service-database-source-compile-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23702-service-database-source-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "cd83a8a08dcc1a830fa6c514b5791609d9d9fddb417ece61cb7cd5cd7edf0457",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T00:36:17.330236+00:00",
+      "endUTC": "2026-11-08T00:36:17.495258+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23702-service-database-source-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23702-service-database-source-unit-v1/component",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23702-service-database-source-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "65ad48900442152858b3f73a74e954e69f9f9e6a5852e8e3f47afa30ffad4ced",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T00:36:17.495508+00:00",
+      "endUTC": "2026-11-08T00:36:17.610030+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23702-service-database-source-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e791cb886fb08b42f318ed18d01420ab9880648463df47c1306710bfbf74747b",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T00:36:17.610257+00:00",
+      "endUTC": "2026-11-08T00:36:17.724873+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23702-service-database-source-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "77ee177147379fa6806804a8891a505f09e37008a78e24dc634719edf1462760",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource011WrapperTypeContractAndNullBoundary()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource013ParallelIndependentConnectionsAndPropertiesClear()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource010UnsupportedOptionsAndMemoryWriterOnly()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource009DiscardSqlRuntimeErrorMatrixAndSameThrowable()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource004MaterialBoundsAndConstructorCloneAreIndependent()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource001PublicConstructionErasesInputWithoutConnecting()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource006NullConnectionCannotEscapeAsSuccess()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource007FailedIdentityAdmissionDiscardsExactlyOnce()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource002BothRolesFixedPropertiesAndEachPhysicalAdmission()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource008AdmissionRuntimeAndErrorRetainOriginalIdentity()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource003InvalidConstructionStillConsumesOwnedInput()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource005ConnectorFaultsClearPropertiesAndKeepUnknownIdentity()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource012CloseIsIdempotentAndPreservesCallerOwnedConnection()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 14,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector": "31add0ef102e2b6cb48fa94052688b7d6f8c67fdb21fb2de132d29c82e1e24a6"
+  },
+  "formalUpdated": false
+}

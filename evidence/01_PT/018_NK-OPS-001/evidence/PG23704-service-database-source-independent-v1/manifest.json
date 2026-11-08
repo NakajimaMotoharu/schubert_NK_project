@@ -1,0 +1,386 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T09:39:12.159265+09:00",
+  "source": "bb416a756f035023ddad45f67003afe23effe657",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "tests": 14,
+  "newUniqueTests": 14,
+  "requalifiedSemanticContracts": 0,
+  "newDirectWholeSourceProof": 1,
+  "registeredWholeComponentDelta": null,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 247,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 24,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 66,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 28,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 16,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "wholeWrittenTargetCodeCoverage100": true,
+  "branchStatus": "FOUR_COUNTERS_100",
+  "sourceFilePhysicalClosure": {
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource": {
+      "name": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+      "access": 49,
+      "sourceFile": "ServiceDatabaseSource.java",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;Ljava/lang/String;[C)V",
+          "code": true,
+          "access": 1
+        },
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;Ljava/lang/String;[CLdev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector;)V",
+          "code": true,
+          "access": 0
+        },
+        {
+          "name": "getConnection",
+          "descriptor": "()Ljava/sql/Connection;",
+          "code": true,
+          "access": 1
+        },
+        {
+          "name": "discard",
+          "descriptor": "(Ljava/sql/Connection;Ljava/lang/Throwable;)V",
+          "code": true,
+          "access": 10
+        },
+        {
+          "name": "getConnection",
+          "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/sql/Connection;",
+          "code": true,
+          "access": 1
+        },
+        {
+          "name": "getLogWriter",
+          "descriptor": "()Ljava/io/PrintWriter;",
+          "code": true,
+          "access": 1
+        },
+        {
+          "name": "setLogWriter",
+          "descriptor": "(Ljava/io/PrintWriter;)V",
+          "code": true,
+          "access": 1
+        },
+        {
+          "name": "setLoginTimeout",
+          "descriptor": "(I)V",
+          "code": true,
+          "access": 1
+        },
+        {
+          "name": "getLoginTimeout",
+          "descriptor": "()I",
+          "code": true,
+          "access": 1
+        },
+        {
+          "name": "getParentLogger",
+          "descriptor": "()Ljava/util/logging/Logger;",
+          "code": true,
+          "access": 1
+        },
+        {
+          "name": "unwrap",
+          "descriptor": "(Ljava/lang/Class;)Ljava/lang/Object;",
+          "code": true,
+          "access": 1
+        },
+        {
+          "name": "isWrapperFor",
+          "descriptor": "(Ljava/lang/Class;)Z",
+          "code": true,
+          "access": 1
+        },
+        {
+          "name": "close",
+          "descriptor": "()V",
+          "code": true,
+          "access": 1
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "code": true,
+          "access": 1
+        },
+        {
+          "name": "unavailable",
+          "descriptor": "()Ljava/sql/SQLException;",
+          "code": true,
+          "access": 10
+        },
+        {
+          "name": "unsupported",
+          "descriptor": "()Ljava/sql/SQLFeatureNotSupportedException;",
+          "code": true,
+          "access": 10
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector": {
+      "name": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector",
+      "access": 1536,
+      "sourceFile": "ServiceDatabaseSource.java",
+      "methods": [
+        {
+          "name": "connect",
+          "descriptor": "(Ljava/lang/String;Ljava/util/Properties;)Ljava/sql/Connection;",
+          "code": false,
+          "access": 1025
+        }
+      ]
+    }
+  },
+  "physical": {
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector": "31add0ef102e2b6cb48fa94052688b7d6f8c67fdb21fb2de132d29c82e1e24a6"
+  },
+  "classIds": {
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource": "34266b716ae9aaf2",
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector": "e205dee73edbf935"
+  },
+  "normalObservedCrc": {
+    "dev/codex/schubert/nk/storage/ServiceConfigFiles$Service": "b6da8fae75d6f6c6",
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission": "22356225c9480ae6",
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource": "34266b716ae9aaf2",
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission$1": "605cf4684fad9433"
+  },
+  "normalProductInitializations": [
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission",
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission$1",
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$$Lambda+0x000000004918dc00",
+    "dev/codex/schubert/nk/storage/ServiceConfigFiles$Service"
+  ],
+  "normalDependencyInitCount": 5,
+  "methodClosure": [
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+      "normalCodeMethods": 16,
+      "reportMethods": 16,
+      "rawProbeCovered": 67,
+      "rawProbeTotal": 68,
+      "rawProbesNotClaimedAllExecuted": true
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector",
+      "normalCodeMethods": 0,
+      "reportMethods": 0,
+      "rawProbeCovered": null,
+      "rawProbeTotal": null,
+      "rawProbesNotClaimedAllExecuted": true
+    }
+  ],
+  "abstractNoCodeInterfaces": [
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector",
+      "sourceFile": "ServiceDatabaseSource.java",
+      "classAccess": 1536,
+      "abstractMethodsWithoutCode": 1,
+      "eligibleCounterDenominator": 0,
+      "ratio": null,
+      "physicalClassRetained": true,
+      "normalClassId": "e205dee73edbf935"
+    }
+  ],
+  "wholeDependencyQualified": false,
+  "manualCoverageExclusions": [],
+  "oldExecCombined": false,
+  "sourceAssertionNegativeChecks": 8,
+  "staticRaw": 10,
+  "staticApplicable": 0,
+  "checkstyle": 0,
+  "staticPreflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23700-service-database-source-preflight-v1/manifest.json",
+    "sha256": "3638c2bb81209c86c19ed4dead4e1deb74098efc013ce5ecab8ac81ffbdd1659"
+  },
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java": "a9476785417f115af1c33fd55085df696cc5d4cd51493e7c1bff498a7ab03e2f",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": "bf179887c2496723d5ddb4ee0be02c5e599ecba781f5b8338367bb21648627a5",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java": "11b33bed1889750459c6e27c65a7cacd69c51c79f78cd85da252093c504912d6",
+    "evidence/01_PT/018_NK-OPS-001/input/507_service_database_source_qualifier.py": "0e9b5153dde17a2b513822d921d83a34004dea72d9f97314ffa1eed08475e11b",
+    "evidence/01_PT/018_NK-OPS-001/input/506_service_database_source_scope.json": "f4e0efcf325d4b24d1aab37306b894120165f25a2cb5fbfbbee12dfa896c7be3"
+  },
+  "environment": {
+    "file.encoding": "UTF-8",
+    "java.version": "25.0.4",
+    "os.arch": "amd64",
+    "os.name": "Linux",
+    "user.timezone": "Asia/Tokyo"
+  },
+  "caseTimings": [
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource011WrapperTypeContractAndNullBoundary()",
+      "seconds": "0.002"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource013ParallelIndependentConnectionsAndPropertiesClear()",
+      "seconds": "0.073"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource010UnsupportedOptionsAndMemoryWriterOnly()",
+      "seconds": "0.002"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource009DiscardSqlRuntimeErrorMatrixAndSameThrowable()",
+      "seconds": "0.001"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource004MaterialBoundsAndConstructorCloneAreIndependent()",
+      "seconds": "0.006"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource001PublicConstructionErasesInputWithoutConnecting()",
+      "seconds": "0.002"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource006NullConnectionCannotEscapeAsSuccess()",
+      "seconds": "0.001"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource007FailedIdentityAdmissionDiscardsExactlyOnce()",
+      "seconds": "0.001"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource002BothRolesFixedPropertiesAndEachPhysicalAdmission()",
+      "seconds": "0.001"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource008AdmissionRuntimeAndErrorRetainOriginalIdentity()",
+      "seconds": "0.002"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource003InvalidConstructionStillConsumesOwnedInput()",
+      "seconds": "0.002"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource005ConnectorFaultsClearPropertiesAndKeepUnknownIdentity()",
+      "seconds": "0.001"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition()",
+      "seconds": "0.002"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "name": "dbSource012CloseIsIdempotentAndPreservesCallerOwnedConnection()",
+      "seconds": "0.002"
+    }
+  ],
+  "files": {
+    "original-classinfo-begin.safe.json": "8aad9d2b09f57172e0e121eb0b53f317e1f4baeeaaac3cfb6378dd50dff4862e",
+    "original-coverage.stdout": "65ad48900442152858b3f73a74e954e69f9f9e6a5852e8e3f47afa30ffad4ced",
+    "original-execinfo-begin.safe.json": "0077b02d5cc5bda00ea5d80a64fff24c2929ea255861b7f22a8f1ae590c24586",
+    "original-coverage-exit.safe.json": "a283bd6d9ce0c402286b5fdc40f48e093122ceb0e4577e780e4545dc714c25c2",
+    "original-classinfo-exit.safe.json": "3aadf8cb51083deb4f84d597737cbbe548ffa13ccd5ef902dfec0e2c4cd0bb2e",
+    "original-unit-begin.safe.json": "ab4217a5c20be97dcf7001b0b0c271a381f86cc1235c1ebee52f127ec47bef2c",
+    "original-unit-process.safe.json": "cf37edbff6d8b97e87db1c3cd52aec95c729a4ae3ce9176a3d962d33f94142b5",
+    "original-coverage-begin.safe.json": "7f6087cf244263195690d02efd4c8bae5a2e8d9617353d775ae127e2c5a934ba",
+    "original-classinfo.stdout": "e791cb886fb08b42f318ed18d01420ab9880648463df47c1306710bfbf74747b",
+    "original-execinfo-process.safe.json": "4742f6459a7ab8e3324b8073ca275f6b7ecc56bb13de2b96d544696566bd886a",
+    "original-coverage.xml": "253311ce739f1c5bb8fad4aa7e56025ddc89008f2fc9e8ed7b7b9e6886a1145c",
+    "original-coverage-process.safe.json": "f47592e8e6f3a3a628433fed29a9e8d9b3e2bb9cd534907dd2aa31d5b73622be",
+    "original-execinfo-exit.safe.json": "07a2dd00fd9f5a5ebb07d8655aee78f5f825545bee502fd201eaddeb75e1bf4a",
+    "original-execinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "jacoco.exec": "005ec078de3adb6fb9ff5e11d478220f2c14e1813eff025738e5c39111ac59b4",
+    "original-execinfo.stdout": "77ee177147379fa6806804a8891a505f09e37008a78e24dc634719edf1462760",
+    "original-begin.json": "d0a66a9c49f2890352c5df7abb44586682c5b1dda6af950a2007342f42cebaa8",
+    "original-unit-exit.safe.json": "37346964ea3e00cfc0df8b2371ec1e4a710da2643fda47ad66f093d960e878b8",
+    "original-classinfo-process.safe.json": "376988aa3df0378be925063fc39c5be3fac5bb71a622fc820b1a68956522d322",
+    "original-unit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-manifest.json": "0e0a182f9145477ca12d85ab7158b78f64769123b12f361c0f56a09fbead457f",
+    "original-classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-coverage.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original-class-init.stdout": "6a2841c58b6b2fd527146b8258df02e4f666477d9569e5c0b03d0476d349cc50",
+    "original-unit.stdout": "cd83a8a08dcc1a830fa6c514b5791609d9d9fddb417ece61cb7cd5cd7edf0457",
+    "original-TEST-junit-jupiter.xml": "756bf7bfcb82bacd8cff659943359a10af855b50a2ca76ed187534ba0a8176b7",
+    "original-TEST-junit-platform-suite.xml": "b16e8c1b10125be898c859a6c147baf077114c68607cdf1f0ada711ab4184fef",
+    "original-TEST-junit-vintage.xml": "e455f827ba9639b0e851a9b7087e031a767cc56eeffb80ae2a458e30294d419b",
+    "static-pmd.stdout": "f9d5c05c664a59c89218ae93fca73e5c29b5acdbfba30e7f39e7d7bd649a8fbd",
+    "static-checkstyle-exit.safe.json": "b293f876e32f9d44e609eb83986702008bc27a2059da5a11f72d01ca3df2a4e7",
+    "static-pmd.stderr": "56c2f84bce5e968d452419d7056430224958eb95049579787378c5465fe5390f",
+    "static-pmd-exit.safe.json": "59e4c2275c9b3defabdaebd688911d91b56b1c351480b9778b216f93d4414155",
+    "static-checkstyle-process.safe.json": "b4bf804d1a8f881b7b0d77c2fb3859119f68a54c32875452a5fbefbc630d9f62",
+    "static-pmd-begin.safe.json": "3de440ad79243a18a5fde481455fd23ca54ceed7eebc5fcc6570a57d0c253c85",
+    "static-sources.txt": "829a9872ec1555e922fbaa5391034a7fde8ea46e1267092bf028bcb575e08c49",
+    "static-pmd-process.safe.json": "333a41eedeceab53824ef51a75fb79e6b8e7d5410aca2bb411122f492d2c2dc8",
+    "static-checkstyle.xml": "dbe3ed8a84b4e410f5a9bc89dd77b2b6168578d0cb5776cd88a900fafad677b5",
+    "static-checkstyle-begin.safe.json": "9b664233bb15fcd8acaf31e2c957acf9b7f68ad48ce06bbf1626f12dbca6c573",
+    "static-checkstyle.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "static-manifest.json": "79bdd390dc12af25ac3f0fdbcafdc1b12d611bdcfad5fca40ec02af70eceb0e7",
+    "static-pmd.xml": "eee931be73dce1d9a6b5bd83a5d1f20d6a46a8344bac50320f98438fed7ec7e0",
+    "static-checkstyle.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "originalRealDatabaseTestsCompiled": 0,
+  "actualJdbcDriverOrDatabaseActions": 0,
+  "actualFilesystemOrDescriptorActions": 0,
+  "actualBackendActions": 0,
+  "heldFourInitializations": 0,
+  "ownVirtualThreadTasks": 10,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "bugs": [
+    "BUG-2492",
+    "BUG-2493",
+    "BUG-2494",
+    "BUG-2495"
+  ],
+  "ykts": [
+    "YKT-2230",
+    "YKT-2231",
+    "YKT-2232",
+    "YKT-2233"
+  ],
+  "driverManagerDefaultConnectorInvoked": false,
+  "defaultNonInvocationEvidence": "PINNED_MAIN_CLOSED_GATE_AND_SAME_THREAD_CLOSE_FIRST_DEFAULT_CONSTRUCTOR_CASE_NO_REAL_DRIVER_CLASSPATH",
+  "ownDriverRegistration": false,
+  "existingSchemaProofReused": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22670-schema-nine-independent-v1/manifest.json",
+    "sha256": "fcc03f7813d28be2ba5ca1ff3f0af06b46005b07eb59501efe5fd04926e1b42d"
+  },
+  "newSchemaTests": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/509_service_database_source_independent_post.py",
+    "sha256": "310290ad155e364e5b417f6bebd9093ac7d8d92c7218b661a1c2d9046ef05f1c"
+  }
+}
