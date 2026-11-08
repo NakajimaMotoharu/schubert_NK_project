@@ -1,0 +1,243 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "8a027340a317584d5c80fb071e92da368439d07f",
+    "normalSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+    "inputHashes": {
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java": "2df42867a30590944b8ec0b0158d318256812ba66593125f7b1d07719bf89689",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java": "ad7fc345ed8f7410258b3c20ec906eb6f4ebb391ad1fcee5f37ea8cbd1abc9d8",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java": "4d0dfd1f30653be3c16f16f4f273e2d2e089c546da7aa98b48c6e8f900de5adb",
+      "src/schubert-nk-protocol/src/test/resources/protocol/payload-golden-ui234-236.tsv": "49bb76ec610216042f8e53ed548f4d5e52707a8bbf930a9fc6c93300dfa24839",
+      "src/schubert-nk-protocol/src/test/resources/protocol/layouts-ui233.tsv": "c4f290595f5cabf19c11877e2dea95627b4d42490116431bac3bfde58950d711",
+      "evidence/01_PT/002_NK-PRO-002/input/009_protocol_independent_limits_qualifier.py": "f75d0441630c065cef68b5de2894af7785ad5fb7e8d421db2c774e32ab43e4c7",
+      "evidence/01_PT/002_NK-PRO-002/input/008_protocol_independent_limits_scope.json": "42fa1ff0b0b7084cb495fd1b4b71eb83cddd9888ad0f93b2aaa911b93dd69920"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "bc6acaa867859b0f1d2f2e24dc27ba5627e7bf7c332448ae88bb077ea1b36fa7",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "compileManifestSha256": "d7b1adc875354ba0ed69a3e95766558e2539b6dfc6d0c0584fc31b03e4ab69d1",
+    "selected": [
+      "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest"
+    ],
+    "expectedTests": 16,
+    "newMethods": 1,
+    "requalifiedExistingMethods": 15,
+    "session": "PG24544-PROTOCOL-LIMITS64-ORIGINAL15-NEW1",
+    "startUTC": "2026-11-08T13:42:54.591972+00:00"
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T13:42:54.592076+00:00",
+      "endUTC": "2026-11-08T13:42:55.859429+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24544-protocol-independent-limits-original15-new1-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Dnk.pt.repository=/home/mini/codex/project1/work/pgpt-foundation",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24544-protocol-independent-limits-original15-new1-unit-v1/jacoco.exec,sessionid=PG24544-PROTOCOL-LIMITS64-ORIGINAL15-NEW1,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24544-protocol-independent-limits-original15-new1-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24538-protocol-independent-limits-compile-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg24538-protocol-independent-limits-compile-v1/resources:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24544-protocol-independent-limits-original15-new1-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "08c25165f26c145e36f751b890c06bfaf2c6ead0e231dd69647e0fcb3d24073c",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T13:42:55.860970+00:00",
+      "endUTC": "2026-11-08T13:42:56.026132+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24544-protocol-independent-limits-original15-new1-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24544-protocol-independent-limits-original15-new1-unit-v1/component",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24544-protocol-independent-limits-original15-new1-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3f31b66392fbf8e122659015abc569c64bb033782cf7824545c23e6eb892f09",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T13:42:56.026629+00:00",
+      "endUTC": "2026-11-08T13:42:56.141231+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24544-protocol-independent-limits-original15-new1-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "7e984dcd0a9cef28737104870094837f93ef29241d075f71418a80681024b63e",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T13:42:56.141683+00:00",
+      "endUTC": "2026-11-08T13:42:56.256253+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24544-protocol-independent-limits-original15-new1-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "f661d7ab213673e3f4680a719c2be7fc04298d1e42c3acc5cfffb029d07f7ef0",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "crossedAndUnknownActionsAreNeverNormalizedToSuccess()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "name": "allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "everyCanonicalConstructorReferenceRejectsNull()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "name": "sharedCodecProducesIdenticalBytesUnderConcurrentUse()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "explicitRequestActionKeepsItsOwnClosedPair()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "everyOtherCategoryIsRejectedByNamedBoundary()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "nfcAndExactUtf8ByteBoundaryHaveIndependentExpectedBytes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "missingBlankUnknownAndWrongCaseCategoryFail()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "menuActionMatchesIndependentOffsetsAndRoundTrips()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "existingHttpMetadataAndReservedRulesRemainEnforced()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "independentConcurrentCallersDoNotMixCategories()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "legacyRequestMatchesIndependentOriginalBytes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "omittedActionIsAllowedForRequestOnly()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "name": "everyRepeatingLayoutAcceptsItsMaximumRecordBoundary()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "recordFieldsAreCompleteImmutableAndRedacted()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 16,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/protocol/layout/log/WebLogEventData": "fc1e336e010e604bf27ed6522cd06335eb84fee1b8022a2cb7f5d3e8303ac04c"
+  },
+  "formalUpdated": false
+}

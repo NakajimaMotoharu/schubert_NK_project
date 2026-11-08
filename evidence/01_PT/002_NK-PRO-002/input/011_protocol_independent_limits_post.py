@@ -45,7 +45,7 @@ anon=R/pf['anonymousExpectedVector']['path'];assert sha(anon)==pf['anonymousExpe
 assert 'PayloadCodec.maximumForDigits(' not in (R/next(p for p in cfg['testClasses'] if p.endswith('/PayloadGoldenVectorTest.java'))).read_text()
 inverse_rows=[dict(path=logPath,rawOriginalTwelveRestored=True),dict(path=next(p for p in cfg['testClasses'] if p.endswith('/PayloadGoldenVectorTest.java')),declaredOracleStrengthening=True,existingHashCorpusUnchanged=True)]
 
-index=load(R/pf['normalPositiveMainIndex']['path']);assert sha(R/pf['normalPositiveMainIndex']['path'])==pf['normalPositiveMainIndex']['sha256'];physical=cfg['currentMainPhysical'];assert len(physical)==1 and physical==m['physical']==pf['physical']
+indexPath=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json';assert sha(indexPath)=='db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723';index=load(indexPath);physical=cfg['currentMainPhysical'];assert len(physical)==1 and physical==m['physical'];assert set(physical)==set(cfg['targetPhysical'])
 normal=load(RUNS/'pg22084-api-stop-state-six-main-compile-v1/manifest.safe.json')
 with zipfile.ZipFile(normal['jars']['protocol']['path']) as z:
  for n,h in physical.items():assert hashlib.sha256(z.read(n+'.class')).hexdigest()==sha(U/'component'/(n+'.class'))==h==index[n]['sha256']
