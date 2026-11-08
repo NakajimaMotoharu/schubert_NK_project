@@ -18,6 +18,7 @@ import java.util.OptionalLong;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
@@ -232,48 +233,54 @@ class MediaStreamsMetricRecorderTest {
   void mediaStream007ParallelTypePublicationAndSeparateOwnersCannotCrossStateOrGrowLabels()
       throws Exception {
     try (var registry = new Registry();
-        var other = new Registry();
-        var executor = Executors.newFixedThreadPool(8)) {
-      var recorder = new MediaStreamsMetricRecorder(registry, DEBUG_MODE);
-      var second = new MediaStreamsMetricRecorder(other, DEBUG_MODE);
-      second.record(MediaType.MUSIC, 99);
-      var expected =
-          List.of(
-              new java.util.HashSet<Long>(),
-              new java.util.HashSet<Long>(),
-              new java.util.HashSet<Long>());
-      var tasks = new ArrayList<Callable<String>>();
-      for (int i = 0; i < 64; i++) {
-        int slot = i % 3;
-        long count = i;
-        var type = MediaType.valueOf(TYPES.get(slot));
-        expected.get(slot).add(count);
-        tasks.add(
-            () -> {
-              recorder.record(type, count);
-              return "published";
-            });
+        var other = new Registry()) {
+      var executor = Executors.newFixedThreadPool(8);
+      try {
+        var recorder = new MediaStreamsMetricRecorder(registry, DEBUG_MODE);
+        var second = new MediaStreamsMetricRecorder(other, DEBUG_MODE);
+        second.record(MediaType.MUSIC, 99);
+        var expected =
+            List.of(
+                new java.util.HashSet<Long>(),
+                new java.util.HashSet<Long>(),
+                new java.util.HashSet<Long>());
+        var tasks = new ArrayList<Callable<String>>();
+        for (int i = 0; i < 64; i++) {
+          int slot = i % 3;
+          long count = i;
+          var type = MediaType.valueOf(TYPES.get(slot));
+          expected.get(slot).add(count);
+          tasks.add(
+              () -> {
+                recorder.record(type, count);
+                return "published";
+              });
+        }
+        for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+          assertEquals("published", result.get());
+        for (int i = 0; i < 3; i++) {
+          var type = MediaType.valueOf(TYPES.get(i));
+          assertTrue(expected.get(i).contains(recorder.snapshot(type).orElseThrow()));
+          var allowedGauge =
+              expected.get(i).stream().map(Long::doubleValue).collect(Collectors.toSet());
+          assertTrue(allowedGauge.contains(gauge(registry, TYPES.get(i))));
+          long finalInput = 100L + i;
+          recorder.record(type, finalInput);
+          assertEquals(OptionalLong.of(finalInput), recorder.snapshot(type));
+          assertEquals((double) finalInput, gauge(registry, TYPES.get(i)));
+        }
+        assertEquals(OptionalLong.of(99), second.snapshot(MediaType.MUSIC));
+        assertEquals(99, gauge(other, MUSIC_TYPE_NAME));
+        assertTrue(Double.isNaN(gauge(other, AUDIO_TYPE_NAME)));
+        assertTrue(Double.isNaN(gauge(other, VIDEO_TYPE_NAME)));
+        shape(registry);
+        shape(other);
+        assertEquals(3, registry.registrations.get());
+        assertEquals(3, other.registrations.get());
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
-      for (var result : executor.invokeAll(tasks)) assertEquals("published", result.get());
-      for (int i = 0; i < 3; i++) {
-        var type = MediaType.valueOf(TYPES.get(i));
-        assertTrue(expected.get(i).contains(recorder.snapshot(type).orElseThrow()));
-        var allowedGauge =
-            expected.get(i).stream().map(Long::doubleValue).collect(Collectors.toSet());
-        assertTrue(allowedGauge.contains(gauge(registry, TYPES.get(i))));
-        long finalInput = 100L + i;
-        recorder.record(type, finalInput);
-        assertEquals(OptionalLong.of(finalInput), recorder.snapshot(type));
-        assertEquals((double) finalInput, gauge(registry, TYPES.get(i)));
-      }
-      assertEquals(OptionalLong.of(99), second.snapshot(MediaType.MUSIC));
-      assertEquals(99, gauge(other, MUSIC_TYPE_NAME));
-      assertTrue(Double.isNaN(gauge(other, AUDIO_TYPE_NAME)));
-      assertTrue(Double.isNaN(gauge(other, VIDEO_TYPE_NAME)));
-      shape(registry);
-      shape(other);
-      assertEquals(3, registry.registrations.get());
-      assertEquals(3, other.registrations.get());
     }
   }
 

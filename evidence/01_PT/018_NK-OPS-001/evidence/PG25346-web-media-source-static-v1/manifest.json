@@ -1,0 +1,230 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T08:47:56.773874+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricRecorderTest.java",
+      "originalSha256": "854f47b9789652a6fecd20071010c46a07ef8674423094294d85f615ddec428e",
+      "currentSha256": "9061ef7b13c70920c8c757a40758f684bed50cdb409ad33e4e82a149600c8126",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 1,
+      "existingFutureGet5SitesRetained": 0
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java",
+      "originalSha256": "a23aaa99c1586824701ebbb7335168a4d6d07a3edfbdde2fb1ec3bae53d5e93a",
+      "currentSha256": "16ddfa291b01adea566eca4b0f0d4d0d67f371d8bc242a383423b02b0ce8429a",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 2,
+      "existingFutureGet5SitesRetained": 3
+    }
+  ],
+  "originalWholeCases": 16,
+  "rawFindings": 21,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 2,
+  "finiteOwnerSitesCorrected": 3,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25344-web-media-owner-prepare-v1/manifest.json",
+    "sha256": "e59d1e119edcba9f17ff6ad1208c69d825c81441f186660f9c5f00c8034c7ae9"
+  },
+  "classifications": [
+    {
+      "className": "MediaStreamsMetricCollectorTest",
+      "method": "await",
+      "variable": null,
+      "line": 249,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Restore current owned test-worker interrupt flag after bounded latch InterruptedException, not new/external thread creation."
+    },
+    {
+      "className": "MediaStreamsMetricCollectorTest",
+      "method": "mediaConn006SecondCallerActuallyBlocksUntilFirstReadAndPublicationComplete",
+      "variable": "executor",
+      "line": 258,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricCollectorTest",
+      "method": "mediaConn006SecondCallerActuallyBlocksUntilFirstReadAndPublicationComplete",
+      "variable": "executor",
+      "line": 258,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricCollectorTest",
+      "method": "mediaConn006SecondCallerActuallyBlocksUntilFirstReadAndPublicationComplete",
+      "variable": "first",
+      "line": 276,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricCollectorTest",
+      "method": "mediaConn006SecondCallerActuallyBlocksUntilFirstReadAndPublicationComplete",
+      "variable": null,
+      "line": 278,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricCollectorTest",
+      "method": "mediaConn006SecondCallerActuallyBlocksUntilFirstReadAndPublicationComplete",
+      "variable": "second",
+      "line": 280,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricCollectorTest",
+      "method": "mediaConn006SecondCallerActuallyBlocksUntilFirstReadAndPublicationComplete",
+      "variable": null,
+      "line": 282,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricCollectorTest",
+      "method": "mediaConn006SecondCallerActuallyBlocksUntilFirstReadAndPublicationComplete",
+      "variable": null,
+      "line": 287,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricCollectorTest",
+      "method": "mediaConn006SecondCallerActuallyBlocksUntilFirstReadAndPublicationComplete",
+      "variable": null,
+      "line": 290,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricCollectorTest",
+      "method": "mediaConn006SecondCallerActuallyBlocksUntilFirstReadAndPublicationComplete",
+      "variable": null,
+      "line": 305,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricCollectorTest",
+      "method": "mediaConn006SecondCallerActuallyBlocksUntilFirstReadAndPublicationComplete",
+      "variable": null,
+      "line": 306,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricCollectorTest",
+      "method": "mediaConn007ConcurrentResultsAreExactlyFixtureInputsAndOwnersAreSeparate",
+      "variable": "executor",
+      "line": 315,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricCollectorTest",
+      "method": "mediaConn007ConcurrentResultsAreExactlyFixtureInputsAndOwnersAreSeparate",
+      "variable": "executor",
+      "line": 315,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricCollectorTest",
+      "method": "mediaConn007ConcurrentResultsAreExactlyFixtureInputsAndOwnersAreSeparate",
+      "variable": null,
+      "line": 338,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricCollectorTest",
+      "method": "mediaConn007ConcurrentResultsAreExactlyFixtureInputsAndOwnersAreSeparate",
+      "variable": null,
+      "line": 361,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricCollectorTest",
+      "method": "mediaConn007ConcurrentResultsAreExactlyFixtureInputsAndOwnersAreSeparate",
+      "variable": null,
+      "line": 362,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricRecorderTest",
+      "method": "mediaStream007ParallelTypePublicationAndSeparateOwnersCannotCrossStateOrGrowLabels",
+      "variable": "executor",
+      "line": 237,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricRecorderTest",
+      "method": "mediaStream007ParallelTypePublicationAndSeparateOwnersCannotCrossStateOrGrowLabels",
+      "variable": "executor",
+      "line": 237,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricRecorderTest",
+      "method": "mediaStream007ParallelTypePublicationAndSeparateOwnersCannotCrossStateOrGrowLabels",
+      "variable": null,
+      "line": 259,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricRecorderTest",
+      "method": "mediaStream007ParallelTypePublicationAndSeparateOwnersCannotCrossStateOrGrowLabels",
+      "variable": null,
+      "line": 281,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MediaStreamsMetricRecorderTest",
+      "method": "mediaStream007ParallelTypePublicationAndSeparateOwnersCannotCrossStateOrGrowLabels",
+      "variable": null,
+      "line": 282,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

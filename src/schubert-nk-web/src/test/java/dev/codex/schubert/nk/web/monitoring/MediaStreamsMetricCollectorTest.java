@@ -254,102 +254,113 @@ class MediaStreamsMetricCollectorTest {
   @Test
   void mediaConn006SecondCallerActuallyBlocksUntilFirstReadAndPublicationComplete()
       throws Exception {
-    try (var registry = new Registry();
-        var executor = Executors.newFixedThreadPool(2)) {
-      var entered = new CountDownLatch(1);
-      var release = new CountDownLatch(1);
-      var calls = new AtomicInteger();
-      var collector =
-          new MediaStreamsMetricCollector(
-              type -> {
-                int call = calls.incrementAndGet();
-                if (call == BLOCKED_READ_ORDINAL) {
-                  entered.countDown();
-                  await(release);
-                }
-                return OptionalLong.of(call == 1 ? 7 : call == 2 ? 11 : 13);
-              },
-              registry,
-              DEBUG_MODE);
-      collector.collect(MediaType.AUDIO);
-      var first = executor.submit(() -> collector.collect(MediaType.AUDIO));
-      await(entered);
-      var contender = new AtomicReference<Thread>();
-      var second =
-          executor.submit(
-              () -> {
-                contender.set(Thread.currentThread());
-                return collector.collect(MediaType.VIDEO);
-              });
+    try (var registry = new Registry()) {
+      var executor = Executors.newFixedThreadPool(2);
       try {
-        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
-        while ((contender.get() == null || contender.get().getState() != Thread.State.BLOCKED)
-            && System.nanoTime() < deadline) Thread.onSpinWait();
-        assertNotNull(contender.get());
-        assertEquals(Thread.State.BLOCKED, contender.get().getState());
-        assertEquals(2, calls.get());
-        assertFalse(first.isDone());
-        assertFalse(second.isDone());
-        assertEquals(7, gauge(registry, AUDIO_TYPE));
-        assertTrue(Double.isNaN(gauge(registry, VIDEO_TYPE)));
+        var entered = new CountDownLatch(1);
+        var release = new CountDownLatch(1);
+        var calls = new AtomicInteger();
+        var collector =
+            new MediaStreamsMetricCollector(
+                type -> {
+                  int call = calls.incrementAndGet();
+                  if (call == BLOCKED_READ_ORDINAL) {
+                    entered.countDown();
+                    await(release);
+                  }
+                  return OptionalLong.of(call == 1 ? 7 : call == 2 ? 11 : 13);
+                },
+                registry,
+                DEBUG_MODE);
+        collector.collect(MediaType.AUDIO);
+        var first = executor.submit(() -> collector.collect(MediaType.AUDIO));
+        await(entered);
+        var contender = new AtomicReference<Thread>();
+        var second =
+            executor.submit(
+                () -> {
+                  contender.set(Thread.currentThread());
+                  return collector.collect(MediaType.VIDEO);
+                });
+        try {
+          long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
+          while ((contender.get() == null || contender.get().getState() != Thread.State.BLOCKED)
+              && System.nanoTime() < deadline) Thread.onSpinWait();
+          assertNotNull(contender.get());
+          assertEquals(Thread.State.BLOCKED, contender.get().getState());
+          assertEquals(2, calls.get());
+          assertFalse(first.isDone());
+          assertFalse(second.isDone());
+          assertEquals(7, gauge(registry, AUDIO_TYPE));
+          assertTrue(Double.isNaN(gauge(registry, VIDEO_TYPE)));
+        } finally {
+          release.countDown();
+        }
+        assertEquals(OptionalLong.of(11), first.get(5, TimeUnit.SECONDS));
+        assertEquals(OptionalLong.of(13), second.get(5, TimeUnit.SECONDS));
+        assertEquals(11, gauge(registry, AUDIO_TYPE));
+        assertEquals(13, gauge(registry, VIDEO_TYPE));
+        assertEquals(3, calls.get());
       } finally {
-        release.countDown();
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
-      assertEquals(OptionalLong.of(11), first.get(5, TimeUnit.SECONDS));
-      assertEquals(OptionalLong.of(13), second.get(5, TimeUnit.SECONDS));
-      assertEquals(11, gauge(registry, AUDIO_TYPE));
-      assertEquals(13, gauge(registry, VIDEO_TYPE));
-      assertEquals(3, calls.get());
     }
   }
 
   @Test
   void mediaConn007ConcurrentResultsAreExactlyFixtureInputsAndOwnersAreSeparate() throws Exception {
     try (var registry = new Registry();
-        var otherRegistry = new Registry();
-        var executor = Executors.newFixedThreadPool(8)) {
-      var expected = Collections.synchronizedMap(new IdentityHashMap<OptionalLong, Long>());
-      var perType = new java.util.EnumMap<MediaType, Set<Long>>(MediaType.class);
-      for (var type : TYPES) perType.put(type, java.util.concurrent.ConcurrentHashMap.newKeySet());
-      var serial = new AtomicInteger();
-      var collector =
-          new MediaStreamsMetricCollector(
-              type -> {
-                long scalar = 321L + serial.incrementAndGet();
-                var observation = OptionalLong.of(scalar);
-                expected.put(observation, scalar);
-                perType.get(type).add(scalar);
-                return observation;
-              },
-              registry,
-              DEBUG_MODE);
-      var tasks = new ArrayList<Callable<OptionalLong>>();
-      for (int index = 0; index < 64; index++) {
-        var type = TYPES.get(index % 3);
-        tasks.add(() -> collector.collect(type));
+        var otherRegistry = new Registry()) {
+      var executor = Executors.newFixedThreadPool(8);
+      try {
+        var expected = Collections.synchronizedMap(new IdentityHashMap<OptionalLong, Long>());
+        var perType = new java.util.EnumMap<MediaType, Set<Long>>(MediaType.class);
+        for (var type : TYPES)
+          perType.put(type, java.util.concurrent.ConcurrentHashMap.newKeySet());
+        var serial = new AtomicInteger();
+        var collector =
+            new MediaStreamsMetricCollector(
+                type -> {
+                  long scalar = 321L + serial.incrementAndGet();
+                  var observation = OptionalLong.of(scalar);
+                  expected.put(observation, scalar);
+                  perType.get(type).add(scalar);
+                  return observation;
+                },
+                registry,
+                DEBUG_MODE);
+        var tasks = new ArrayList<Callable<OptionalLong>>();
+        for (int index = 0; index < 64; index++) {
+          var type = TYPES.get(index % 3);
+          tasks.add(() -> collector.collect(type));
+        }
+        for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) {
+          var observation = result.get(5, TimeUnit.SECONDS);
+          assertTrue(expected.containsKey(observation));
+          assertEquals(expected.get(observation).longValue(), observation.orElseThrow());
+        }
+        assertEquals(64, serial.get());
+        assertEquals(64, expected.size());
+        var observed = new AtomicInteger(99);
+        var other =
+            new MediaStreamsMetricCollector(
+                type -> OptionalLong.of(observed.incrementAndGet()), otherRegistry, DEBUG_MODE);
+        for (var type : TYPES) other.collect(type);
+        assertEquals(100, gauge(otherRegistry, AUDIO_TYPE));
+        assertEquals(101, gauge(otherRegistry, VIDEO_TYPE));
+        assertEquals(102, gauge(otherRegistry, "MUSIC"));
+        for (var type : TYPES) {
+          assertTrue(perType.get(type).contains((long) gauge(registry, type.name())));
+          assertTrue(gauge(registry, type.name()) >= 322);
+          assertTrue(gauge(registry, type.name()) <= 385);
+        }
+        shape(registry);
+        shape(otherRegistry);
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
-      for (var result : executor.invokeAll(tasks)) {
-        var observation = result.get(5, TimeUnit.SECONDS);
-        assertTrue(expected.containsKey(observation));
-        assertEquals(expected.get(observation).longValue(), observation.orElseThrow());
-      }
-      assertEquals(64, serial.get());
-      assertEquals(64, expected.size());
-      var observed = new AtomicInteger(99);
-      var other =
-          new MediaStreamsMetricCollector(
-              type -> OptionalLong.of(observed.incrementAndGet()), otherRegistry, DEBUG_MODE);
-      for (var type : TYPES) other.collect(type);
-      assertEquals(100, gauge(otherRegistry, AUDIO_TYPE));
-      assertEquals(101, gauge(otherRegistry, VIDEO_TYPE));
-      assertEquals(102, gauge(otherRegistry, "MUSIC"));
-      for (var type : TYPES) {
-        assertTrue(perType.get(type).contains((long) gauge(registry, type.name())));
-        assertTrue(gauge(registry, type.name()) >= 322);
-        assertTrue(gauge(registry, type.name()) <= 385);
-      }
-      shape(registry);
-      shape(otherRegistry);
     }
   }
 
