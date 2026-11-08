@@ -1,0 +1,21 @@
+"""YKT2258 exact fixture-distribution cause; source-only nonapplicability, no runtime qualification."""
+from pathlib import Path
+import datetime,hashlib,json
+R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';O=B/'evidence/PG24288-ykt2258-sibling-normal-fixture-v1';assert not O.exists();load=lambda p:json.loads(p.read_bytes());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+normal=load(R.parent/'pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/manifest.safe.json');assert normal['source']=='7aed8eace7c844c2f79f2e39db766faf914890d5'
+rows=[]
+for package,name,method,test_atoms,main_atoms in [
+ ('logging','WebLogReplayWorker','temporarySqlAndRuntimeFailuresRecoverWithoutLeakingDetails',['int call = calls.incrementAndGet();','if (call == 1) throw new SQLException','if (call == 2) throw new IllegalStateException','return EMPTY;','completedCycles() >= 1','assertEquals(2, snapshot.failedCycles());','assertEquals(EMPTY, snapshot.last());'],['lastReport = Objects.requireNonNull(action.dispatch(), "web log report");','completedCycles.incrementAndGet();','thread.join(remaining)']),
+ ('revocation','RevocationRetryWorker','rerun008bTransientFailureRecoveryAndFatalTerminalNeverExposeProvider',['if (calls.incrementAndGet() == 1) throw new IllegalStateException','completedCycles() > 0','assertEquals(1, worker.snapshot().failedCycles());','assertFalse(worker.terminalFailureObserved());'],['action.dispatch();','completed.incrementAndGet();','thread.join(remaining)'])]:
+  base='src/schubert-nk-web/src/';test=base+'test/java/dev/codex/schubert/nk/web/'+package+'/'+name+'Test.java';main=base+'main/java/dev/codex/schubert/nk/web/'+package+'/'+name+'.java';t=(R/test).read_text();body=t.split('void '+method+'(',1)[1].split('\n  @Test',1)[0];m=(R/main).read_text()
+  assert sha(R/main)==normal['begin']['inputHashes'][main]
+  assert all(a in body for a in test_atoms) and all(a in m for a in main_atoms)
+  negative=[]
+  for atom in test_atoms:
+   altered=body.replace(atom,'REMOVED_REQUIRED_ORACLE',1);assert not all(a in altered for a in test_atoms);negative.append(dict(kind='missing-normal-fixture-oracle',requiredAtom=atom))
+  for atom in main_atoms:
+   altered=m.replace(atom,'REMOVED_REQUIRED_MAIN_PATH',1);assert not all(a in altered for a in main_atoms);negative.append(dict(kind='missing-main-normal-or-owned-join-path',requiredAtom=atom))
+  rows.append(dict(main=main,mainSha256=sha(R/main),test=test,testSha256=sha(R/test),method=method,methodReviewedSha256=hashlib.sha256(body.encode()).hexdigest(),testRequiredAtoms=test_atoms,mainRequiredAtoms=main_atoms,sourceOnlyNonApplicableReason='Original fixture already returns normally after explicit transient failures, and independently asserts completedCycles plus failedCycles (and last report for Web). Thus not an exception-only fixture. Full original class includes DB/key/backend and remains dynamicHOLD.',normalReturnContractPresent=True,currentMainMatchesNormal=True,currentRuntimeQualified=False,coverage=None,negativeChecks=negative))
+owned=R/'evidence/01_PT/005_NK-MSG-001/evidence/PG24282-owned-outbox-normal-seven-independent-v1/manifest.json';o=load(owned);assert o['actualExit']==0 and o['wholeTargetApplicableCoverage100'] and o['newUniqueTests']==1
+value=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),sourceProductionMain=normal['source'],rows=rows,registeredTargets=3,ownedTargetDisposition='FIXED_AND_CURRENT_7_CASES_TARGET_COUNTER_QUALIFIED',siblingsSourceNonApplicable=2,newRegressionTestRef=dict(path=str(owned.relative_to(R)),sha256=sha(owned)),limitedCause='exception-only worker fixture lacks any normal return/completed oracle',allOriginalSiblingClassesDynamicHold=True,noHeldMethodExtractionOrSubstitute=True,noProductJvmOrTestsRun=True,productTestsExecuted=0,newAcceptance=0,formalUpdated=False,effortRate=None,sourceRuntimeQualificationInferred=False,scope='Limited YKT2258 cause distribution only, not actual DB/JMS, sibling full coverage or allYKT2177/451 acceptance',toolSha256=sha(Path(__file__)))
+O.mkdir();(O/'manifest.json').write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,sourceNonApplicable=2,negativeChecks=sum(len(r['negativeChecks']) for r in rows),manifestSha256=sha(O/'manifest.json'))))

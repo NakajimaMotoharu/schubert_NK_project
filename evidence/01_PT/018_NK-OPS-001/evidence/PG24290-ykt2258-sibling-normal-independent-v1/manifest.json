@@ -1,0 +1,45 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T19:10:19.909078+09:00",
+  "sourceOnlySiblingNonApplicable": 2,
+  "ownedFixedTarget": 1,
+  "registeredTargetsDispositionComplete": true,
+  "limitedYktCauseClosed": true,
+  "sourceRuntimeQualificationInferred": false,
+  "allSiblingDynamicHoldsPreserved": true,
+  "originalTestBodiesRetained": true,
+  "newRegressionActualRef": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG24282-owned-outbox-normal-seven-independent-v1/manifest.json",
+    "sha256": "74ea898a93348410302cae7b6e5fa6b722bb51d3571103b0953658075b19c543"
+  },
+  "originalReviewManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG24288-ykt2258-sibling-normal-fixture-v1/manifest.json",
+    "sha256": "232413e4b90200928bc7a66a362e4f434cf0c0b7bc0ceee9eb726e657f473040"
+  },
+  "individualCases": [
+    {
+      "className": "WebLogReplayWorker",
+      "method": "temporarySqlAndRuntimeFailuresRecoverWithoutLeakingDetails",
+      "normalAfterTransientFailures": true,
+      "expectedFailureCycles": 2
+    },
+    {
+      "className": "RevocationRetryWorker",
+      "method": "rerun008bTransientFailureRecoveryAndFatalTerminalNeverExposeProvider",
+      "normalAfterTransientFailures": true,
+      "expectedFailureCycles": 1
+    }
+  ],
+  "counterOrFormalOrLeafIncrease": 0,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "bugs": [
+    "BUG-2524"
+  ],
+  "ykts": [
+    "YKT-2258"
+  ],
+  "toolSha256": "c9c5caa4b7c24d8cccca45ecf033ee738e2e01e844ad0d2f5b976d1cac877fa5"
+}

@@ -1,0 +1,7 @@
+# 3865 YKT2258：同種二workerの正常fixture配分
+
+G03.05主/P00602関連0、ADDITIONAL_FINDING原0.5/2/5pp cap7。元BUG2524の例外のみfixture共通原因について、登録全対象OwnedOutboxDispatcher/WebLogReplayWorker/RevocationRetryWorkerを確認する。Ownedは24282同source単exec七成功・全四100、残二は元Test本体が通常復帰を既に持つかを独立に読む。元全Testの実DB/鍵/held依存を理由に実行・部分抽出/代替fixtureは禁止。原成功の再演0、公開旧proofをcurrent動的資格へ移植0。
+
+期待=WebはSQLException/Runtimeの後EMPTYを返しcompletedCyclesとlastReportを確認、Revocationは最初一回RTE後通常void returnしcompleted/failed=1を確認するTestが現sourceに実在。親Mainの正常dispatch直後counterとjoin/wakeup設計を対応付け、現normal22084 source同一確認。これが揃えば『元fixtureが例外のみ』という共通原因の当二Sourceへの非該当根拠を記録する。PG24282の実新正常回帰を再発防止testに参照し、当二workerの全runtime/counter/SDK/DBは未再認証HOLDのまま。YKTの限定原因の非該当判定は両worker全PT合格・全YKT2177・正式/leaf受入ではない。
+
+producerとは別の反証点検で、正常return/counter assertion欠落、Main counter欠落、他source型混入、旧worker別source転用を拒否。新JVM/compile/製品Test/外部process0。結果/根拠hash/当適用範囲と残リスクを保存し、次の本来残PGPTへ継続する。
