@@ -152,7 +152,8 @@ final class LoginDisplayResourcePortTest {
 
   @Test
   void eightConcurrentRenderingsKeepParameterMessagesSeparate() throws Exception {
-    try (var pool = Executors.newFixedThreadPool(2)) {
+    var pool = Executors.newFixedThreadPool(2);
+    try {
       var jobs = new ArrayList<Future<List<String>>>();
       for (int i = 0; i < 8; i++) {
         int index = i;
@@ -177,6 +178,9 @@ final class LoginDisplayResourcePortTest {
             };
         assertEquals(expected, jobs.get(i).get(10, TimeUnit.SECONDS));
       }
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
