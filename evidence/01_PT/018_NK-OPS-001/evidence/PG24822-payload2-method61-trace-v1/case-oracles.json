@@ -1,0 +1,534 @@
+{
+  "P1": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#allSixtyFourLayoutsRoundTripMinimumSuccessValues()",
+    "testIds": [
+      "PT-PRO-002-P01"
+    ],
+    "independentOracle": "All64genericminima shapes, input-vsdecode consistency; independentgoldenG1 separatelyconfirmsmeaning/offset hashes.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+    "sourceSha256": "01f12650ecff0e5dafa486d4eac507051b50789ea5cc914598e756e5bd0d6cf9",
+    "declarationLine": 42,
+    "bodyEndLine": 62,
+    "assertionBodySha256": "f080c109430dbf5dbf87420bafc520731c8c637429757db68478a1e6c783cacb",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "P2": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#everyResponseLayoutUsesExactErrorFillersAndNoRecords()",
+    "testIds": [
+      "PT-PRO-002-P02"
+    ],
+    "independentOracle": "All31response errorprofiles withzero records/Xspace/Nzero/Bspace; expectedprofile explicitlyfixed.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+    "sourceSha256": "01f12650ecff0e5dafa486d4eac507051b50789ea5cc914598e756e5bd0d6cf9",
+    "declarationLine": 65,
+    "bodyEndLine": 85,
+    "assertionBodySha256": "bcd0bbe6f123a9522eaf7db27d61cc79108069a2c7a507653e7de97e37e23a03",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "P3": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#resultCodeProfilePreservesOnlyTheApprovedCancellationConflictState()",
+    "testIds": [
+      "PT-PRO-002-E02"
+    ],
+    "independentOracle": "NTC0107 onlyPROCESSING/COMPLETED/ERROR status retained; fixed32byte state+17space timestamp+3space reserved, invalidstates/fields rejected.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+    "sourceSha256": "01f12650ecff0e5dafa486d4eac507051b50789ea5cc914598e756e5bd0d6cf9",
+    "declarationLine": 88,
+    "bodyEndLine": 214,
+    "assertionBodySha256": "d8f4af5ebda958ed02cb19e72ea5b44ac1b9ff8e0a1e7b9945d11685dc1ac62a",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "P4": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#fixedAndIndependentGoldenFieldsEncodeAtExactOffsets()",
+    "testIds": [
+      "PT-PRO-002-P07"
+    ],
+    "independentOracle": "Independentfield/offset literalgolden forreserved/typedfields, bytes exact, notencoder-produced expected.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+    "sourceSha256": "01f12650ecff0e5dafa486d4eac507051b50789ea5cc914598e756e5bd0d6cf9",
+    "declarationLine": 217,
+    "bodyEndLine": 250,
+    "assertionBodySha256": "397dcfcd4fa46c4b595b08566baec3fc023f5250302c775a5531cf348ac911e0",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "P5": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#encodeRejectsUnknownMissingWrongTypeAndRecordViolations()",
+    "testIds": [
+      "PT-PRO-002-P03"
+    ],
+    "independentOracle": "Explicitunknown/fixed/missing/wrongkind/recordlimit/errorrecords/null senderreject.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+    "sourceSha256": "01f12650ecff0e5dafa486d4eac507051b50789ea5cc914598e756e5bd0d6cf9",
+    "declarationLine": 253,
+    "bodyEndLine": 334,
+    "assertionBodySha256": "ae4c7df75e0b69566c3601098c09f6ee3d46131cf1e343cb37d4b4edd2703ff3",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "P6": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers()",
+    "testIds": [
+      "PT-PRO-002-P03"
+    ],
+    "independentOracle": "Explicitdata/recordlength/null/unknown/fixed/error-filler receiverreject; callerarrays notexpectedfromdecode.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+    "sourceSha256": "01f12650ecff0e5dafa486d4eac507051b50789ea5cc914598e756e5bd0d6cf9",
+    "declarationLine": 337,
+    "bodyEndLine": 414,
+    "assertionBodySha256": "d2c04f6998a652973ed3aae485068bddcadb8ac1f27932eccec673af6e854d66",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "P8": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#numericDigitLimitIsCheckedWithoutOverflow()",
+    "testIds": [
+      "PT-PRO-002-P03"
+    ],
+    "independentOracle": "Literal9 and18nines acceptedfor1/18digits;0/19 length rejected; noProductionmaxforexpected.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+    "sourceSha256": "01f12650ecff0e5dafa486d4eac507051b50789ea5cc914598e756e5bd0d6cf9",
+    "declarationLine": 466,
+    "bodyEndLine": 471,
+    "assertionBodySha256": "301ec1cd6d27ad891b90a0a4a1684540c80a143f9b79781a9db6cc2e8bca9b82",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "G1": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest#allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes()",
+    "testIds": [
+      "PT-PRO-002-P07"
+    ],
+    "independentOracle": "IndependentUI-derived fixedTSV64min/max and31error hashes/fieldoffset vectors;24548canonicaltable proofreused.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+    "sourceSha256": "2df42867a30590944b8ec0b0158d318256812ba66593125f7b1d07719bf89689",
+    "declarationLine": 36,
+    "bodyEndLine": 109,
+    "assertionBodySha256": "e4646e482468888a804abe5c8239e34d9d2bbe731b1fce5288b01b0a36b44c65",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "G2": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest#everyRepeatingLayoutAcceptsItsMaximumRecordBoundary()",
+    "testIds": [
+      "PT-PRO-002-P08"
+    ],
+    "independentOracle": "14repeatlayout maximalrecords/total bytes fromindependentUI233 table; decodecount consistency.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+    "sourceSha256": "2df42867a30590944b8ec0b0158d318256812ba66593125f7b1d07719bf89689",
+    "declarationLine": 112,
+    "bodyEndLine": 144,
+    "assertionBodySha256": "63a865132070f9f4e44df1574112701c31f8763c62f1414a0cd4f316aff96499",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "G3": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest#sharedCodecProducesIdenticalBytesUnderConcurrentUse()",
+    "testIds": [
+      "PT-PRO-002-P09"
+    ],
+    "independentOracle": "8ownedworkers/barrier allresults comparedtoindependent384byte literalinput fixture; currentfinitecleanup alreadyqualified.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+    "sourceSha256": "2df42867a30590944b8ec0b0158d318256812ba66593125f7b1d07719bf89689",
+    "declarationLine": 147,
+    "bodyEndLine": 185,
+    "assertionBodySha256": "6d4ab160055e35336b2e734851cb660f2fc5cfe669e53a5ccf3a82ec9ef2d993",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "A1": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest#loginLockAndFailurePreserveOnlyApprovedErrorFields()",
+    "testIds": [
+      "PT-CODEC-AUTHERR-001"
+    ],
+    "independentOracle": "Independent432byte logintemplate/retry0..900/normalnonlock0/messageoffset176/filler andall31response exceptions; noactualauth/session.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/AuthenticationErrorProfileTest.java",
+    "sourceSha256": "41ebd3cd62dc2c154a9a6aa89bb7152f5a6e52e6f62a2fcaf673a60be27bd93a",
+    "declarationLine": 29,
+    "bodyEndLine": 84,
+    "assertionBodySha256": "3dd438492e7232b31901091ca73b38e46631367b9cd029e4b2e6cc235acdb79d",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "A2": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest#malformedLoginErrorBoundariesAndTypesAreRejected()",
+    "testIds": [
+      "PT-CODEC-AUTHERR-002"
+    ],
+    "independentOracle": "Independent432byte logintemplate/retry0..900/normalnonlock0/messageoffset176/filler andall31response exceptions; noactualauth/session.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/AuthenticationErrorProfileTest.java",
+    "sourceSha256": "41ebd3cd62dc2c154a9a6aa89bb7152f5a6e52e6f62a2fcaf673a60be27bd93a",
+    "declarationLine": 87,
+    "bodyEndLine": 165,
+    "assertionBodySha256": "7c3c0ff82b702b22e39dc6295471c5d474520c34069c492ec6f89046424209c7",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "A3": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest#allOtherResponseErrorProfilesRetainTheirIndividualContracts()",
+    "testIds": [
+      "PT-CODEC-AUTHERR-003"
+    ],
+    "independentOracle": "Independent432byte logintemplate/retry0..900/normalnonlock0/messageoffset176/filler andall31response exceptions; noactualauth/session.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/AuthenticationErrorProfileTest.java",
+    "sourceSha256": "41ebd3cd62dc2c154a9a6aa89bb7152f5a6e52e6f62a2fcaf673a60be27bd93a",
+    "declarationLine": 168,
+    "bodyEndLine": 213,
+    "assertionBodySha256": "284352af10d98452fa1f89d47b5a2eb7f678e6a11284f00320523b5f64c17f60",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "R1": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest#w03SingleRecordGoldenHasNoInventedDataAndRejectsNullUnknownAndNonRecordLayouts()",
+    "testIds": [
+      "PT-SCN-008-W03"
+    ],
+    "independentOracle": "Independent4800byte singlerecord vector, nofabricatedDATA/header; null/unknown/nonrecord/wronglength/malformedbytes rejected; valueownership preserved.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/ScenarioRecordEncodingTest.java",
+    "sourceSha256": "53352d9758286a925435d60aba66ad2637610d1cd4cfd01d286d7a4bef764a15",
+    "declarationLine": 19,
+    "bodyEndLine": 45,
+    "assertionBodySha256": "4e7a01c9f332c14bd0b5d4f68d969d3f00cf1d1986d5642816f1b76937e8e604",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "R2": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest#rd02SingleRecordDecodeUsesLiteralGoldenAndOwnsItsValues()",
+    "testIds": [
+      "PT-SCN-008-RD02"
+    ],
+    "independentOracle": "Independent4800byte singlerecord vector, nofabricatedDATA/header; null/unknown/nonrecord/wronglength/malformedbytes rejected; valueownership preserved.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/ScenarioRecordEncodingTest.java",
+    "sourceSha256": "53352d9758286a925435d60aba66ad2637610d1cd4cfd01d286d7a4bef764a15",
+    "declarationLine": 48,
+    "bodyEndLine": 63,
+    "assertionBodySha256": "b7b5a20dcd60a99fdc6e4304092f28759306db4a98cd23de5a84e4c4e91b27e6",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "R3": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest#rd02RejectsNullUnknownNonRecordLengthAndMalformedFieldBytes()",
+    "testIds": [
+      "PT-SCN-008-RD02"
+    ],
+    "independentOracle": "Independent4800byte singlerecord vector, nofabricatedDATA/header; null/unknown/nonrecord/wronglength/malformedbytes rejected; valueownership preserved.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/ScenarioRecordEncodingTest.java",
+    "sourceSha256": "53352d9758286a925435d60aba66ad2637610d1cd4cfd01d286d7a4bef764a15",
+    "declarationLine": 66,
+    "bodyEndLine": 94,
+    "assertionBodySha256": "cf8f0bb9a401820d8df5cf4ce9e2b5841ded4a154c42ebf5e53bd0ffda0b6080",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "S1": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#pageConstantsCountsAndArithmeticAreEnforced()",
+    "testIds": [
+      "PT-PRO-002-P06"
+    ],
+    "independentOracle": "Fixedpage100/50/count/first-last/empty arithmetic; directPAGEcases separatelyboundexactextremes.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorTest.java",
+    "sourceSha256": "fe63057e3a11162c11ef99ed376885da8c8b8202f41fbe0c4a10977f691d425c",
+    "declarationLine": 43,
+    "bodyEndLine": 70,
+    "assertionBodySha256": "6238166ed31ccc99b03b9fcf76645c2084da77aac95916dba81d3970b0d67fe3",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "S2": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#listRecordConditionsAndOrderingAreEnforced()",
+    "testIds": [
+      "PT-PRO-002-P06"
+    ],
+    "independentOracle": "Literalnondecreasing/strictordering, positivecounts/audioflagpairedfields, nohiddenDBsortinvented.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorTest.java",
+    "sourceSha256": "fe63057e3a11162c11ef99ed376885da8c8b8202f41fbe0c4a10977f691d425c",
+    "declarationLine": 73,
+    "bodyEndLine": 113,
+    "assertionBodySha256": "3ed2010d795a97d0f66ad6888a482bf45b3676c66a40538ca1c8959f389ada05",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "S3": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#scenarioInlineAndLargeFileConditionsAreEnforced()",
+    "testIds": [
+      "PT-PRO-002-P06"
+    ],
+    "independentOracle": "Explicitinline<=200/file4800*1..10000/descriptorpresence/entry-audio consecutivity andsameentrybody, noactualfileIO.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorTest.java",
+    "sourceSha256": "fe63057e3a11162c11ef99ed376885da8c8b8202f41fbe0c4a10977f691d425c",
+    "declarationLine": 116,
+    "bodyEndLine": 230,
+    "assertionBodySha256": "e22bbc9acbd14bb100d0899a9df528ae73341ff894363ff87c8d23e3b21ab090",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "S4": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#mediaAnimationAndMusicConditionsAreEnforced()",
+    "testIds": [
+      "PT-PRO-002-P06"
+    ],
+    "independentOracle": "Explicitpositivebytes/animation1+2+opening1=4/subtrackparent/musicpairkey/ascendingdisplayorder.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorTest.java",
+    "sourceSha256": "fe63057e3a11162c11ef99ed376885da8c8b8202f41fbe0c4a10977f691d425c",
+    "declarationLine": 233,
+    "bodyEndLine": 257,
+    "assertionBodySha256": "17d55bfc6ceff8da2d32eab6fbb7268a2238a14b3c00e25b1ff4305307406cd0",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "S5": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#loginUserPasswordDateAndSessionRulesAreEnforced()",
+    "testIds": [
+      "PT-PRO-002-P06"
+    ],
+    "independentOracle": "Username/passwordcodepoint-byte/null/profile/sessioncount0..2/issue-expiry anddate invariants; noactualauthentication/sessioncontrol.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorTest.java",
+    "sourceSha256": "fe63057e3a11162c11ef99ed376885da8c8b8202f41fbe0c4a10977f691d425c",
+    "declarationLine": 260,
+    "bodyEndLine": 317,
+    "assertionBodySha256": "0579b4b5a7fd1f00428347a3e4f24bad3e3b51949863671ae6436446dc69fe64",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "S6": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#notificationCancellationAndQuestionStateConditionsAreEnforced()",
+    "testIds": [
+      "PT-PRO-002-P06"
+    ],
+    "independentOracle": "Notificationstate/timestampmask/errorfieldpair/deletedquestion presence/cancellation/answered-question state conditionalvectors.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorTest.java",
+    "sourceSha256": "fe63057e3a11162c11ef99ed376885da8c8b8202f41fbe0c4a10977f691d425c",
+    "declarationLine": 320,
+    "bodyEndLine": 401,
+    "assertionBodySha256": "4a850cf677e4791cba3d749b3a59f3afb38ea7a145fd39f8f559e6cad1444276",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "S7": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#receiptWebAndDefensiveContractsAreEnforced()",
+    "testIds": [
+      "PT-PRO-002-P06"
+    ],
+    "independentOracle": "Literal26receiptallowlist/questiontext/HTTPuppercase3..8/queryfreepath, directwrongkindnumeric/text/flag/date/null/unknownstate fixtures.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorTest.java",
+    "sourceSha256": "fe63057e3a11162c11ef99ed376885da8c8b8202f41fbe0c4a10977f691d425c",
+    "declarationLine": 404,
+    "bodyEndLine": 481,
+    "assertionBodySha256": "8de55d3014699e571c74ed851e959f8a0d82c264998ce04f9e62d74b2f26ac01",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "S8": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#deletedNotificationNeverContainsAnswer()",
+    "testIds": [
+      "PT-PRO-002-P06"
+    ],
+    "independentOracle": "Deletedcompletedquestion retiresanswer; undeletedcompleted canretainanswer. DBdeletionpropagation notclaimed.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorTest.java",
+    "sourceSha256": "fe63057e3a11162c11ef99ed376885da8c8b8202f41fbe0c4a10977f691d425c",
+    "declarationLine": 537,
+    "bodyEndLine": 562,
+    "assertionBodySha256": "a49541bff969076d71ca7376bffa9be30c4fcc2e2d90e0f60febc84d6220009d",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "D1": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest#sem001PasswordCharacterByteAndUsernameLimits()",
+    "testIds": [
+      "SEM001"
+    ],
+    "independentOracle": "IndependentASCII12/128 andemoji64accepted;11/129/65emoji/space/usernamecaseinsensitive rejected.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/SemanticDirectBoundaryTest.java",
+    "sourceSha256": "1046e924ccb83eb256c0d87d77d5dcb7581544ada44eb42ed2942b539d2ff1ef",
+    "declarationLine": 22,
+    "bodyEndLine": 42,
+    "assertionBodySha256": "da0364530964670b758e583539e8fe963bbecfce0c07cd5f27bbede6245d149c",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "D2": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest#sem002InclusiveDateLimitsAndOneSidedFilters()",
+    "testIds": [
+      "SEM002"
+    ],
+    "independentOracle": "Independent31/366day exactlimit accepted,+1millis/reversed rejected; both/one-sided optional dates.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/SemanticDirectBoundaryTest.java",
+    "sourceSha256": "1046e924ccb83eb256c0d87d77d5dcb7581544ada44eb42ed2942b539d2ff1ef",
+    "declarationLine": 45,
+    "bodyEndLine": 61,
+    "assertionBodySha256": "5fe66e254af00165033cdac4533bc16685a6dccedda8c598361a86ddc3713f95",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "D3": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest#sem003QuestionAndWebLogTextContracts()",
+    "testIds": [
+      "SEM003"
+    ],
+    "independentOracle": "Explicitnonempty/no trailingASCIIspace question; uppercaseHTTP3/8 andqueryfreeabsoluteURIpath, lowercase2/9/relative/query rejected.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/SemanticDirectBoundaryTest.java",
+    "sourceSha256": "1046e924ccb83eb256c0d87d77d5dcb7581544ada44eb42ed2942b539d2ff1ef",
+    "declarationLine": 64,
+    "bodyEndLine": 81,
+    "assertionBodySha256": "e9aa8831aaf345cd4bf9606b66bad9ce1dfecd7101cf19275c71ec5510f94994",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "PG1": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest#page001SecondPageHasIndependentExpectedBounds()",
+    "testIds": [
+      "PAGE001"
+    ],
+    "independentOracle": "Fixedpage2/count101/size100 =>2pages,first101,last101,record1.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadPaginationBoundaryTest.java",
+    "sourceSha256": "6f8038c90b3854656b38c6b641a0c6ae4f5d0db66a12c562edf594e52c9c739d",
+    "declarationLine": 17,
+    "bodyEndLine": 20,
+    "assertionBodySha256": "968469e8cb1704f35022a2f45c26dfbc312613f458420af33659b887cac32b4d",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "PG2": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest#page002MaximumEffectivePageKeepsExactNineDigitArithmetic()",
+    "testIds": [
+      "PAGE002"
+    ],
+    "independentOracle": "Fixed999999/99999900/first99999801/last99999900/100records.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadPaginationBoundaryTest.java",
+    "sourceSha256": "6f8038c90b3854656b38c6b641a0c6ae4f5d0db66a12c562edf594e52c9c739d",
+    "declarationLine": 23,
+    "bodyEndLine": 29,
+    "assertionBodySha256": "1eaafcf034f6bab95dfefa65bdcdfbb1ed42b2579cd0b7651f85394d2f6b509a",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "PG3": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest#page003RejectsIndependentRangeAndOneFieldArithmeticChanges()",
+    "testIds": [
+      "PAGE003"
+    ],
+    "independentOracle": "Explicitzero/1000000/outofrange andone-fieldfirst/last/count/pages changes rejected.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadPaginationBoundaryTest.java",
+    "sourceSha256": "6f8038c90b3854656b38c6b641a0c6ae4f5d0db66a12c562edf594e52c9c739d",
+    "declarationLine": 32,
+    "bodyEndLine": 44,
+    "assertionBodySha256": "b6f5b4e1b2e4e52aeb22f3cd9b0478da1acacccf67af97ed3be85e88ca255d90",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "W1": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest#legacyRequestMatchesIndependentOriginalBytes()",
+    "testIds": [
+      "PT-PRO-QA054-001"
+    ],
+    "independentOracle": "QA054 independent2080byte REQUEST/ACTION-MENU_VIEWED exactpair/unknown-crossed-missing/HTTPpath/reserved/anonymousoptional vectors; noWeb-issuedLOG_SEARCHED/actualHTTP/backend.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+    "sourceSha256": "ad7fc345ed8f7410258b3c20ec906eb6f4ebb391ad1fcee5f37ea8cbd1abc9d8",
+    "declarationLine": 45,
+    "bodyEndLine": 53,
+    "assertionBodySha256": "5843fb7608d42331a2b9e73a88d8cb6b9a8eeb91df7b54bef2f971fdd9cf9fca",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "W2": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest#menuActionMatchesIndependentOffsetsAndRoundTrips()",
+    "testIds": [
+      "PT-PRO-QA054-002"
+    ],
+    "independentOracle": "QA054 independent2080byte REQUEST/ACTION-MENU_VIEWED exactpair/unknown-crossed-missing/HTTPpath/reserved/anonymousoptional vectors; noWeb-issuedLOG_SEARCHED/actualHTTP/backend.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+    "sourceSha256": "ad7fc345ed8f7410258b3c20ec906eb6f4ebb391ad1fcee5f37ea8cbd1abc9d8",
+    "declarationLine": 56,
+    "bodyEndLine": 63,
+    "assertionBodySha256": "112303dc1a8572798d214585f2199ebf3f979d28461b528aef6733690ad7fd6b",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "W4": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest#everyOtherCategoryIsRejectedByNamedBoundary()",
+    "testIds": [
+      "PT-PRO-QA054-004"
+    ],
+    "independentOracle": "QA054 independent2080byte REQUEST/ACTION-MENU_VIEWED exactpair/unknown-crossed-missing/HTTPpath/reserved/anonymousoptional vectors; noWeb-issuedLOG_SEARCHED/actualHTTP/backend.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+    "sourceSha256": "ad7fc345ed8f7410258b3c20ec906eb6f4ebb391ad1fcee5f37ea8cbd1abc9d8",
+    "declarationLine": 75,
+    "bodyEndLine": 81,
+    "assertionBodySha256": "751cb252ff54a99d3e40f2c3df99f36e620c425bdbebf72ff1a966d8e1f66584",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "W5": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest#crossedAndUnknownActionsAreNeverNormalizedToSuccess()",
+    "testIds": [
+      "PT-PRO-QA054-005"
+    ],
+    "independentOracle": "QA054 independent2080byte REQUEST/ACTION-MENU_VIEWED exactpair/unknown-crossed-missing/HTTPpath/reserved/anonymousoptional vectors; noWeb-issuedLOG_SEARCHED/actualHTTP/backend.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+    "sourceSha256": "ad7fc345ed8f7410258b3c20ec906eb6f4ebb391ad1fcee5f37ea8cbd1abc9d8",
+    "declarationLine": 84,
+    "bodyEndLine": 91,
+    "assertionBodySha256": "4ec786ff7d9c4ac62a95ee594eaba33f582466a94d11b7614808b841197f04d3",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "W6": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest#omittedActionIsAllowedForRequestOnly()",
+    "testIds": [
+      "PT-PRO-QA054-006"
+    ],
+    "independentOracle": "QA054 independent2080byte REQUEST/ACTION-MENU_VIEWED exactpair/unknown-crossed-missing/HTTPpath/reserved/anonymousoptional vectors; noWeb-issuedLOG_SEARCHED/actualHTTP/backend.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+    "sourceSha256": "ad7fc345ed8f7410258b3c20ec906eb6f4ebb391ad1fcee5f37ea8cbd1abc9d8",
+    "declarationLine": 94,
+    "bodyEndLine": 99,
+    "assertionBodySha256": "accfb73bf0321713450338622942d4d593f4200d2f27e731469ffe8978ad1c30",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "W7": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest#missingBlankUnknownAndWrongCaseCategoryFail()",
+    "testIds": [
+      "PT-PRO-QA054-007"
+    ],
+    "independentOracle": "QA054 independent2080byte REQUEST/ACTION-MENU_VIEWED exactpair/unknown-crossed-missing/HTTPpath/reserved/anonymousoptional vectors; noWeb-issuedLOG_SEARCHED/actualHTTP/backend.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+    "sourceSha256": "ad7fc345ed8f7410258b3c20ec906eb6f4ebb391ad1fcee5f37ea8cbd1abc9d8",
+    "declarationLine": 102,
+    "bodyEndLine": 113,
+    "assertionBodySha256": "2fc390bc84b910c5eee1e9d74ea5243802bdfbd4cddb01b691731d12677d365a",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "W10": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest#existingHttpMetadataAndReservedRulesRemainEnforced()",
+    "testIds": [
+      "PT-PRO-QA054-010"
+    ],
+    "independentOracle": "QA054 independent2080byte REQUEST/ACTION-MENU_VIEWED exactpair/unknown-crossed-missing/HTTPpath/reserved/anonymousoptional vectors; noWeb-issuedLOG_SEARCHED/actualHTTP/backend.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+    "sourceSha256": "ad7fc345ed8f7410258b3c20ec906eb6f4ebb391ad1fcee5f37ea8cbd1abc9d8",
+    "declarationLine": 189,
+    "bodyEndLine": 205,
+    "assertionBodySha256": "c23bc1b86e4303a77e2e9eae5d3a956e3b98c5d6e1721a8771f3b92b39955a89",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "W13": {
+    "caseKey": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest#anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire()",
+    "testIds": [
+      "PT-PRO-QA054-013"
+    ],
+    "independentOracle": "QA054 independent2080byte REQUEST/ACTION-MENU_VIEWED exactpair/unknown-crossed-missing/HTTPpath/reserved/anonymousoptional vectors; noWeb-issuedLOG_SEARCHED/actualHTTP/backend.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+    "sourceSha256": "ad7fc345ed8f7410258b3c20ec906eb6f4ebb391ad1fcee5f37ea8cbd1abc9d8",
+    "declarationLine": 245,
+    "bodyEndLine": 272,
+    "assertionBodySha256": "b0574bcd52521d4fcebe936e430ed35c62fc5f7e66e79d35f4387e3650a7611e",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  }
+}

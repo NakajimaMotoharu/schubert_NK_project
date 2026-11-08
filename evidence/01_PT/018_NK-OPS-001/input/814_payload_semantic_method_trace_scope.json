@@ -1,0 +1,2192 @@
+{
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "testSource": "64f3a72753434347889f0eabd5d9f9dca67c6bfb",
+  "normalProof": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG24642-protocol-whole120-independent-v1/manifest.json",
+    "sha256": "8ebe6365bc701ba6432b1b55275004024dc71bc452d31b66d31c53894e3ae128"
+  },
+  "metadataInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json",
+    "sha256": "e65782d893a5ae45309cf269d165dec33d1dc396f06b7968b62d95b276455d31"
+  },
+  "descriptorInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/artifacts.json",
+    "sha256": "fb24a1a209849d42894925002baae668bc55a4bd858b1b7c1d38ab838319bb0b"
+  },
+  "physicalIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json",
+    "sha256": "db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723"
+  },
+  "oracleDocuments": [
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/001_NK-PRO-001_単体テスト仕様書.md",
+      "sha256": "503c5f6be3caaa341dcec35cb1bd1b8a3892d270bf6a7fa91cdad580b43abdbe"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/107_現source正本fixture照合・layout個別受入.md",
+      "sha256": "6354a848537937df156f5380941531d71bdf749f68ff1290943a58450ba64ddc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1956_G13LayoutCatalog7_独立期待値意味対応表.md",
+      "sha256": "6ede52efc7cb04c471c6a55e2a17d4b8c4859c9186f24977bc9758b1dcd3d711"
+    },
+    {
+      "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+      "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/1187_Semantic独立期待値七・診断保護・定数九PGPT仕様.md",
+      "sha256": "123884b368c27be54dcd8533a0eaa3df002caa3d4c731ec151028b40027ce769"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/1188_Semantic独立期待値七・診断保護・定数九PGPT結果.md",
+      "sha256": "96f9f7a940c00fb67a9a12c1fe1ecba1d05e0d63190402bf2d6387678d05906c"
+    }
+  ],
+  "owner": "WBS-P002-02",
+  "sourcePaths": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java"
+  ],
+  "cases": {
+    "P1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#allSixtyFourLayoutsRoundTripMinimumSuccessValues()",
+      "testIds": [
+        "PT-PRO-002-P01"
+      ],
+      "independentOracle": "All64genericminima shapes, input-vsdecode consistency; independentgoldenG1 separatelyconfirmsmeaning/offset hashes."
+    },
+    "P2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#everyResponseLayoutUsesExactErrorFillersAndNoRecords()",
+      "testIds": [
+        "PT-PRO-002-P02"
+      ],
+      "independentOracle": "All31response errorprofiles withzero records/Xspace/Nzero/Bspace; expectedprofile explicitlyfixed."
+    },
+    "P3": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#resultCodeProfilePreservesOnlyTheApprovedCancellationConflictState()",
+      "testIds": [
+        "PT-PRO-002-E02"
+      ],
+      "independentOracle": "NTC0107 onlyPROCESSING/COMPLETED/ERROR status retained; fixed32byte state+17space timestamp+3space reserved, invalidstates/fields rejected."
+    },
+    "P4": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#fixedAndIndependentGoldenFieldsEncodeAtExactOffsets()",
+      "testIds": [
+        "PT-PRO-002-P07"
+      ],
+      "independentOracle": "Independentfield/offset literalgolden forreserved/typedfields, bytes exact, notencoder-produced expected."
+    },
+    "P5": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#encodeRejectsUnknownMissingWrongTypeAndRecordViolations()",
+      "testIds": [
+        "PT-PRO-002-P03"
+      ],
+      "independentOracle": "Explicitunknown/fixed/missing/wrongkind/recordlimit/errorrecords/null senderreject."
+    },
+    "P6": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers()",
+      "testIds": [
+        "PT-PRO-002-P03"
+      ],
+      "independentOracle": "Explicitdata/recordlength/null/unknown/fixed/error-filler receiverreject; callerarrays notexpectedfromdecode."
+    },
+    "P8": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#numericDigitLimitIsCheckedWithoutOverflow()",
+      "testIds": [
+        "PT-PRO-002-P03"
+      ],
+      "independentOracle": "Literal9 and18nines acceptedfor1/18digits;0/19 length rejected; noProductionmaxforexpected."
+    },
+    "G1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest#allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes()",
+      "testIds": [
+        "PT-PRO-002-P07"
+      ],
+      "independentOracle": "IndependentUI-derived fixedTSV64min/max and31error hashes/fieldoffset vectors;24548canonicaltable proofreused."
+    },
+    "G2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest#everyRepeatingLayoutAcceptsItsMaximumRecordBoundary()",
+      "testIds": [
+        "PT-PRO-002-P08"
+      ],
+      "independentOracle": "14repeatlayout maximalrecords/total bytes fromindependentUI233 table; decodecount consistency."
+    },
+    "G3": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest#sharedCodecProducesIdenticalBytesUnderConcurrentUse()",
+      "testIds": [
+        "PT-PRO-002-P09"
+      ],
+      "independentOracle": "8ownedworkers/barrier allresults comparedtoindependent384byte literalinput fixture; currentfinitecleanup alreadyqualified."
+    },
+    "A1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest#loginLockAndFailurePreserveOnlyApprovedErrorFields()",
+      "testIds": [
+        "PT-CODEC-AUTHERR-001"
+      ],
+      "independentOracle": "Independent432byte logintemplate/retry0..900/normalnonlock0/messageoffset176/filler andall31response exceptions; noactualauth/session."
+    },
+    "A2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest#malformedLoginErrorBoundariesAndTypesAreRejected()",
+      "testIds": [
+        "PT-CODEC-AUTHERR-002"
+      ],
+      "independentOracle": "Independent432byte logintemplate/retry0..900/normalnonlock0/messageoffset176/filler andall31response exceptions; noactualauth/session."
+    },
+    "A3": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest#allOtherResponseErrorProfilesRetainTheirIndividualContracts()",
+      "testIds": [
+        "PT-CODEC-AUTHERR-003"
+      ],
+      "independentOracle": "Independent432byte logintemplate/retry0..900/normalnonlock0/messageoffset176/filler andall31response exceptions; noactualauth/session."
+    },
+    "R1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest#w03SingleRecordGoldenHasNoInventedDataAndRejectsNullUnknownAndNonRecordLayouts()",
+      "testIds": [
+        "PT-SCN-008-W03"
+      ],
+      "independentOracle": "Independent4800byte singlerecord vector, nofabricatedDATA/header; null/unknown/nonrecord/wronglength/malformedbytes rejected; valueownership preserved."
+    },
+    "R2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest#rd02SingleRecordDecodeUsesLiteralGoldenAndOwnsItsValues()",
+      "testIds": [
+        "PT-SCN-008-RD02"
+      ],
+      "independentOracle": "Independent4800byte singlerecord vector, nofabricatedDATA/header; null/unknown/nonrecord/wronglength/malformedbytes rejected; valueownership preserved."
+    },
+    "R3": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest#rd02RejectsNullUnknownNonRecordLengthAndMalformedFieldBytes()",
+      "testIds": [
+        "PT-SCN-008-RD02"
+      ],
+      "independentOracle": "Independent4800byte singlerecord vector, nofabricatedDATA/header; null/unknown/nonrecord/wronglength/malformedbytes rejected; valueownership preserved."
+    },
+    "S1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#pageConstantsCountsAndArithmeticAreEnforced()",
+      "testIds": [
+        "PT-PRO-002-P06"
+      ],
+      "independentOracle": "Fixedpage100/50/count/first-last/empty arithmetic; directPAGEcases separatelyboundexactextremes."
+    },
+    "S2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#listRecordConditionsAndOrderingAreEnforced()",
+      "testIds": [
+        "PT-PRO-002-P06"
+      ],
+      "independentOracle": "Literalnondecreasing/strictordering, positivecounts/audioflagpairedfields, nohiddenDBsortinvented."
+    },
+    "S3": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#scenarioInlineAndLargeFileConditionsAreEnforced()",
+      "testIds": [
+        "PT-PRO-002-P06"
+      ],
+      "independentOracle": "Explicitinline<=200/file4800*1..10000/descriptorpresence/entry-audio consecutivity andsameentrybody, noactualfileIO."
+    },
+    "S4": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#mediaAnimationAndMusicConditionsAreEnforced()",
+      "testIds": [
+        "PT-PRO-002-P06"
+      ],
+      "independentOracle": "Explicitpositivebytes/animation1+2+opening1=4/subtrackparent/musicpairkey/ascendingdisplayorder."
+    },
+    "S5": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#loginUserPasswordDateAndSessionRulesAreEnforced()",
+      "testIds": [
+        "PT-PRO-002-P06"
+      ],
+      "independentOracle": "Username/passwordcodepoint-byte/null/profile/sessioncount0..2/issue-expiry anddate invariants; noactualauthentication/sessioncontrol."
+    },
+    "S6": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#notificationCancellationAndQuestionStateConditionsAreEnforced()",
+      "testIds": [
+        "PT-PRO-002-P06"
+      ],
+      "independentOracle": "Notificationstate/timestampmask/errorfieldpair/deletedquestion presence/cancellation/answered-question state conditionalvectors."
+    },
+    "S7": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#receiptWebAndDefensiveContractsAreEnforced()",
+      "testIds": [
+        "PT-PRO-002-P06"
+      ],
+      "independentOracle": "Literal26receiptallowlist/questiontext/HTTPuppercase3..8/queryfreepath, directwrongkindnumeric/text/flag/date/null/unknownstate fixtures."
+    },
+    "S8": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#deletedNotificationNeverContainsAnswer()",
+      "testIds": [
+        "PT-PRO-002-P06"
+      ],
+      "independentOracle": "Deletedcompletedquestion retiresanswer; undeletedcompleted canretainanswer. DBdeletionpropagation notclaimed."
+    },
+    "D1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest#sem001PasswordCharacterByteAndUsernameLimits()",
+      "testIds": [
+        "SEM001"
+      ],
+      "independentOracle": "IndependentASCII12/128 andemoji64accepted;11/129/65emoji/space/usernamecaseinsensitive rejected."
+    },
+    "D2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest#sem002InclusiveDateLimitsAndOneSidedFilters()",
+      "testIds": [
+        "SEM002"
+      ],
+      "independentOracle": "Independent31/366day exactlimit accepted,+1millis/reversed rejected; both/one-sided optional dates."
+    },
+    "D3": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest#sem003QuestionAndWebLogTextContracts()",
+      "testIds": [
+        "SEM003"
+      ],
+      "independentOracle": "Explicitnonempty/no trailingASCIIspace question; uppercaseHTTP3/8 andqueryfreeabsoluteURIpath, lowercase2/9/relative/query rejected."
+    },
+    "PG1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest#page001SecondPageHasIndependentExpectedBounds()",
+      "testIds": [
+        "PAGE001"
+      ],
+      "independentOracle": "Fixedpage2/count101/size100 =>2pages,first101,last101,record1."
+    },
+    "PG2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest#page002MaximumEffectivePageKeepsExactNineDigitArithmetic()",
+      "testIds": [
+        "PAGE002"
+      ],
+      "independentOracle": "Fixed999999/99999900/first99999801/last99999900/100records."
+    },
+    "PG3": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest#page003RejectsIndependentRangeAndOneFieldArithmeticChanges()",
+      "testIds": [
+        "PAGE003"
+      ],
+      "independentOracle": "Explicitzero/1000000/outofrange andone-fieldfirst/last/count/pages changes rejected."
+    },
+    "W1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest#legacyRequestMatchesIndependentOriginalBytes()",
+      "testIds": [
+        "PT-PRO-QA054-001"
+      ],
+      "independentOracle": "QA054 independent2080byte REQUEST/ACTION-MENU_VIEWED exactpair/unknown-crossed-missing/HTTPpath/reserved/anonymousoptional vectors; noWeb-issuedLOG_SEARCHED/actualHTTP/backend."
+    },
+    "W2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest#menuActionMatchesIndependentOffsetsAndRoundTrips()",
+      "testIds": [
+        "PT-PRO-QA054-002"
+      ],
+      "independentOracle": "QA054 independent2080byte REQUEST/ACTION-MENU_VIEWED exactpair/unknown-crossed-missing/HTTPpath/reserved/anonymousoptional vectors; noWeb-issuedLOG_SEARCHED/actualHTTP/backend."
+    },
+    "W4": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest#everyOtherCategoryIsRejectedByNamedBoundary()",
+      "testIds": [
+        "PT-PRO-QA054-004"
+      ],
+      "independentOracle": "QA054 independent2080byte REQUEST/ACTION-MENU_VIEWED exactpair/unknown-crossed-missing/HTTPpath/reserved/anonymousoptional vectors; noWeb-issuedLOG_SEARCHED/actualHTTP/backend."
+    },
+    "W5": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest#crossedAndUnknownActionsAreNeverNormalizedToSuccess()",
+      "testIds": [
+        "PT-PRO-QA054-005"
+      ],
+      "independentOracle": "QA054 independent2080byte REQUEST/ACTION-MENU_VIEWED exactpair/unknown-crossed-missing/HTTPpath/reserved/anonymousoptional vectors; noWeb-issuedLOG_SEARCHED/actualHTTP/backend."
+    },
+    "W6": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest#omittedActionIsAllowedForRequestOnly()",
+      "testIds": [
+        "PT-PRO-QA054-006"
+      ],
+      "independentOracle": "QA054 independent2080byte REQUEST/ACTION-MENU_VIEWED exactpair/unknown-crossed-missing/HTTPpath/reserved/anonymousoptional vectors; noWeb-issuedLOG_SEARCHED/actualHTTP/backend."
+    },
+    "W7": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest#missingBlankUnknownAndWrongCaseCategoryFail()",
+      "testIds": [
+        "PT-PRO-QA054-007"
+      ],
+      "independentOracle": "QA054 independent2080byte REQUEST/ACTION-MENU_VIEWED exactpair/unknown-crossed-missing/HTTPpath/reserved/anonymousoptional vectors; noWeb-issuedLOG_SEARCHED/actualHTTP/backend."
+    },
+    "W10": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest#existingHttpMetadataAndReservedRulesRemainEnforced()",
+      "testIds": [
+        "PT-PRO-QA054-010"
+      ],
+      "independentOracle": "QA054 independent2080byte REQUEST/ACTION-MENU_VIEWED exactpair/unknown-crossed-missing/HTTPpath/reserved/anonymousoptional vectors; noWeb-issuedLOG_SEARCHED/actualHTTP/backend."
+    },
+    "W13": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest#anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire()",
+      "testIds": [
+        "PT-PRO-QA054-013"
+      ],
+      "independentOracle": "QA054 independent2080byte REQUEST/ACTION-MENU_VIEWED exactpair/unknown-crossed-missing/HTTPpath/reserved/anonymousoptional vectors; noWeb-issuedLOG_SEARCHED/actualHTTP/backend."
+    }
+  },
+  "methodRules": {
+    "PayloadCodec": {
+      "<init>": {
+        "cases": [
+          "P1"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Retainimmutablefieldcatalog dependency.",
+        "staticPath": "standard staticinitializer -> new PayloadCodec(catalog)"
+      },
+      "standard": {
+        "cases": [
+          "P1"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Singletonimmutablecodec.",
+        "staticPath": "P1 assertSame/standard"
+      },
+      "encode": {
+        "cases": [
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "P5",
+          "G1",
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Sharedprivateencoder validatesnames/profile/recordlimit andexactfieldareas, no semanticbusinessvalidation invented.",
+        "staticPath": "Publicbool/resultCode encode -> private encode"
+      },
+      "decode": {
+        "cases": [
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "P6",
+          "G2",
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Sharedprivatedecoder exactlength/filler/record/profile checks toimmutablevalues.",
+        "staticPath": "Publicbool/resultCode decode -> private decode"
+      },
+      "encodeRecord": {
+        "cases": [
+          "R1"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Encodeone4800normalrecord, unknown/nonrecord/null rejected; noDATA fabricated.",
+        "staticPath": "R1 direct encodeRecord -> encodeArea"
+      },
+      "decodeRecord": {
+        "cases": [
+          "R2",
+          "R3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Decodeonefixedrecord withindependentgolden/ownership/null/shape rejection.",
+        "staticPath": "R2/R3 direct decodeRecord -> decodeArea"
+      },
+      "encodeArea": {
+        "cases": [
+          "P1",
+          "P2",
+          "P4",
+          "P5",
+          "G1",
+          "A1"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "ExactUIoffset placement/fixedspaces/erroroverride.",
+        "staticPath": "encode/encodeRecord -> encodeArea -> encodeField"
+      },
+      "decodeArea": {
+        "cases": [
+          "P1",
+          "P2",
+          "P4",
+          "P6",
+          "G2",
+          "A1"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Exactfield slices/fixedspaces/profile andtypedvalues.",
+        "staticPath": "decode/decodeRecord -> decodeArea -> decodeField"
+      },
+      "validateNames": {
+        "cases": [
+          "P1",
+          "P5"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Onlyknownnonfixedfieldnames.",
+        "staticPath": "encodeArea -> validateNames"
+      },
+      "lambda$validateNames$0": {
+        "cases": [
+          "P1",
+          "P5"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Nameequality predicate forknown/fixed/unknownname rejection.",
+        "staticPath": "validateNames -> streamfilter field.name.equals(name)"
+      },
+      "encodeField": {
+        "cases": [
+          "P1",
+          "P2",
+          "P4",
+          "P5",
+          "G1",
+          "A1"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "X/N/B exactkind/presence/padding/recordfieldencode.",
+        "staticPath": "encodeArea -> encodeField"
+      },
+      "decodeField": {
+        "cases": [
+          "P1",
+          "P2",
+          "P4",
+          "P6",
+          "G2",
+          "A1"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "X/N/B exactdecode orvalidatederrorunset.",
+        "staticPath": "decodeArea -> decodeField"
+      },
+      "errorFiller": {
+        "cases": [
+          "P2",
+          "G1",
+          "A3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "FixedXspace/Nzero/Bspace.",
+        "staticPath": "encodeField -> errorFiller"
+      },
+      "validateErrorFiller": {
+        "cases": [
+          "P2",
+          "P6",
+          "A3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Onlyapprovederrorfiller accepted.",
+        "staticPath": "decodeField -> validateErrorFiller"
+      },
+      "isErrorOverride": {
+        "cases": [
+          "P3",
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "LGNmessage/retryLOCKED andNTC0107lateststate only.",
+        "staticPath": "encode/decodeArea orvalidateErrorOverride -> isErrorOverride"
+      },
+      "validateErrorOverride": {
+        "cases": [
+          "P3",
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Retry0..900/nonlock0 andNTC0107closedstate allowlist.",
+        "staticPath": "decode -> validateErrorOverride"
+      },
+      "validateErrorOverrideForEncode": {
+        "cases": [
+          "P3",
+          "A1",
+          "A2"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Receiverprofileguard translatedtosenderexception.",
+        "staticPath": "encode -> validateErrorOverrideForEncode -> validateErrorOverride"
+      },
+      "maximumForDigits": {
+        "cases": [
+          "P8"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Checked1..18digits, literal9/18nines expected.",
+        "staticPath": "P8 directmaximumForDigits, encode/decodefield"
+      },
+      "<clinit>": {
+        "cases": [
+          "P1"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Retainedstandardcatalog initializedonce.",
+        "staticPath": "P1 standard -> RETAINED_STANDARD"
+      },
+      "encode#(Ldev/codex/schubert/nk/protocol/layout/PayloadValues;Z)Ldev/codex/schubert/nk/protocol/layout/FixedPayload;": {
+        "cases": [
+          "P1",
+          "P2",
+          "P4",
+          "P5",
+          "G1",
+          "G2",
+          "G3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "BooleanerrorProfile overload delegateswithOptional.empty resultcode.",
+        "staticPath": "Boolean public encode -> sharedprivate encode"
+      },
+      "encode#(Ldev/codex/schubert/nk/protocol/layout/PayloadValues;Ldev/codex/schubert/nk/protocol/header/ResultCode;)Ldev/codex/schubert/nk/protocol/layout/FixedPayload;": {
+        "cases": [
+          "P3",
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "ResultCode overload selects success/error profile andlayout-specificerror overrides.",
+        "staticPath": "ResultCode public encode -> sharedprivate encode"
+      },
+      "encode#(Ldev/codex/schubert/nk/protocol/layout/PayloadValues;ZLjava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/FixedPayload;": {
+        "cases": [
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "P5",
+          "G1",
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Sharedprivateencoder validatesnames/profile/recordlimit andexactfieldareas, no semanticbusinessvalidation invented.",
+        "staticPath": "Publicbool/resultCode encode -> private encode"
+      },
+      "decode#(Ldev/codex/schubert/nk/protocol/layout/LayoutId;[BLjava/util/List;Z)Ldev/codex/schubert/nk/protocol/layout/PayloadValues;": {
+        "cases": [
+          "P1",
+          "P2",
+          "P4",
+          "P6",
+          "G2"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "BooleanerrorProfile overload delegateswithOptional.empty resultcode.",
+        "staticPath": "Boolean public decode -> sharedprivate decode"
+      },
+      "decode#(Ldev/codex/schubert/nk/protocol/layout/LayoutId;[BLjava/util/List;Ldev/codex/schubert/nk/protocol/header/ResultCode;)Ldev/codex/schubert/nk/protocol/layout/PayloadValues;": {
+        "cases": [
+          "P3",
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "ResultCode overload selects success/error profile andlayout-specificerror overrides.",
+        "staticPath": "ResultCode public decode -> sharedprivate decode"
+      },
+      "decode#(Ldev/codex/schubert/nk/protocol/layout/LayoutId;[BLjava/util/List;ZLjava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/PayloadValues;": {
+        "cases": [
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "P6",
+          "G2",
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Sharedprivatedecoder exactlength/filler/record/profile checks toimmutablevalues.",
+        "staticPath": "Publicbool/resultCode decode -> private decode"
+      }
+    },
+    "PayloadSemanticValidator": {
+      "validateLoginRequest": {
+        "cases": [
+          "S5"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateLoginRequest contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateLoginRequest"
+      },
+      "validateLoginSuccess": {
+        "cases": [
+          "S5"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateLoginSuccess contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateLoginSuccess"
+      },
+      "validatePaged": {
+        "cases": [
+          "S1",
+          "PG1",
+          "PG2",
+          "PG3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validatePaged contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validatePaged"
+      },
+      "validateScenarioSearchRecords": {
+        "cases": [
+          "S2"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateScenarioSearchRecords contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateScenarioSearchRecords"
+      },
+      "validateScenarioDetail": {
+        "cases": [
+          "S3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateScenarioDetail contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateScenarioDetail"
+      },
+      "validateScenarioSequence": {
+        "cases": [
+          "S3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateScenarioSequence contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateScenarioSequence"
+      },
+      "validateMediaDescriptor": {
+        "cases": [
+          "S4"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateMediaDescriptor contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateMediaDescriptor"
+      },
+      "validateAnimationMenu": {
+        "cases": [
+          "S4"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateAnimationMenu contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateAnimationMenu"
+      },
+      "validateAnimationRecords": {
+        "cases": [
+          "S4"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateAnimationRecords contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateAnimationRecords"
+      },
+      "validateMusicRecords": {
+        "cases": [
+          "S4"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateMusicRecords contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateMusicRecords"
+      },
+      "validateDateRange": {
+        "cases": [
+          "S5",
+          "D2"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateDateRange contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateDateRange"
+      },
+      "validateUserCreation": {
+        "cases": [
+          "S5",
+          "D1"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateUserCreation contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateUserCreation"
+      },
+      "validatePassword": {
+        "cases": [
+          "S5",
+          "D1"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validatePassword contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validatePassword"
+      },
+      "validateNotificationDetail": {
+        "cases": [
+          "S6",
+          "S8"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateNotificationDetail contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateNotificationDetail"
+      },
+      "validateCancellationSuccess": {
+        "cases": [
+          "S6"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateCancellationSuccess contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateCancellationSuccess"
+      },
+      "validateQuestionSummary": {
+        "cases": [
+          "S6"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateQuestionSummary contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateQuestionSummary"
+      },
+      "validateQuestionDetail": {
+        "cases": [
+          "S6"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateQuestionDetail contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateQuestionDetail"
+      },
+      "validateQuestionSubmission": {
+        "cases": [
+          "S7",
+          "D3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateQuestionSubmission contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateQuestionSubmission"
+      },
+      "validateReceipt": {
+        "cases": [
+          "S6",
+          "S7"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateReceipt contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateReceipt"
+      },
+      "validateWebLog": {
+        "cases": [
+          "S7",
+          "D3",
+          "W1",
+          "W2",
+          "W4",
+          "W5",
+          "W6",
+          "W7",
+          "W10",
+          "W13"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateWebLog contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateWebLog"
+      },
+      "validateAscending": {
+        "cases": [
+          "S2",
+          "S4"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validateAscending contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> validateAscending"
+      },
+      "requirePositive": {
+        "cases": [
+          "S2",
+          "S3",
+          "S4",
+          "S7"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field requirePositive contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> requirePositive"
+      },
+      "requirePaired": {
+        "cases": [
+          "S3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field requirePaired contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> requirePaired"
+      },
+      "requirePresent": {
+        "cases": [
+          "S3",
+          "S5",
+          "S6"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field requirePresent contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> requirePresent"
+      },
+      "requireAbsent": {
+        "cases": [
+          "S3",
+          "S6",
+          "S8"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field requireAbsent contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> requireAbsent"
+      },
+      "present": {
+        "cases": [
+          "S2",
+          "S3",
+          "S6",
+          "S7"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field present contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> present"
+      },
+      "numeric": {
+        "cases": [
+          "S1",
+          "S3",
+          "S4",
+          "S7"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field numeric contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> numeric"
+      },
+      "text": {
+        "cases": [
+          "S3",
+          "S5",
+          "S6",
+          "S7"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field text contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> text"
+      },
+      "flag": {
+        "cases": [
+          "S2",
+          "S4",
+          "S6",
+          "S7"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field flag contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> flag"
+      },
+      "optionalInstant": {
+        "cases": [
+          "S5",
+          "S7",
+          "D2"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field optionalInstant contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> optionalInstant"
+      },
+      "requireEqual": {
+        "cases": [
+          "S1",
+          "S3",
+          "S4",
+          "S7"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field requireEqual contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> requireEqual"
+      },
+      "requireRange": {
+        "cases": [
+          "S1",
+          "S3",
+          "S5",
+          "PG3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field requireRange contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> requireRange"
+      },
+      "require": {
+        "cases": [
+          "S1",
+          "S2",
+          "S3",
+          "S4",
+          "S5",
+          "S6",
+          "S7",
+          "S8"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field require contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "PayloadSemanticValidator.validate dispatch/helpers -> require"
+      },
+      "validate": {
+        "cases": [
+          "S1",
+          "S2",
+          "S3",
+          "S4",
+          "S5",
+          "S6",
+          "S7",
+          "S8",
+          "D1",
+          "D2",
+          "D3",
+          "PG1",
+          "PG2",
+          "PG3",
+          "W2",
+          "W4",
+          "W5",
+          "W6",
+          "W7"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field validate contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "Directtypedcomponent orclosedWebCodec pipeline -> validate"
+      },
+      "<clinit>": {
+        "cases": [
+          "S1",
+          "S5",
+          "S7"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "IntrinsicUI/SScross-field <clinit> contract withindependentcondition/literal vectors; pipelineconstructor rejection notattributedasindividualmethod probe.",
+        "staticPath": "Directtypedcomponent orclosedWebCodec pipeline -> <clinit>"
+      },
+      "lambda$validate$2": {
+        "cases": [
+          "S7"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Dispatcherrecordlambda callspositivecount/receipt guard.",
+        "staticPath": "validate -> lambda$validate$2 atSourceLine 111"
+      },
+      "lambda$validate$1": {
+        "cases": [
+          "S2"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Dispatcherrecordlambda callspositivecount/receipt guard.",
+        "staticPath": "validate -> lambda$validate$1 atSourceLine 84"
+      },
+      "lambda$validate$0": {
+        "cases": [
+          "S2"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-003",
+          "MSG-004",
+          "MSG-006",
+          "MSG-007",
+          "MSG-008",
+          "MSG-010",
+          "MQ-016",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "11"
+        ],
+        "contract": "Dispatcherrecordlambda callspositivecount/receipt guard.",
+        "staticPath": "validate -> lambda$validate$0 atSourceLine 80"
+      }
+    }
+  },
+  "privateUtilitySources": [
+    "PayloadSemanticValidator"
+  ],
+  "standardSwitchClasses": [
+    "dev/codex/schubert/nk/protocol/codec/PayloadCodec$1"
+  ],
+  "standardFilterProof": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG24594-protocol-whole-denominator-v1/manifest.json",
+    "sha256": "9448c8cf89988f4d9a579ea10c433e8bad3e417c1df7709472648d1b29638dfe"
+  }
+}
