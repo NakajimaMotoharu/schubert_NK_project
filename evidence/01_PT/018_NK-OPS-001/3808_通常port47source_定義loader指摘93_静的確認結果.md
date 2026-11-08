@@ -1,0 +1,11 @@
+# 通常port47source 定義loader指摘93 静的確認結果
+
+PG23822 source-only真0、別文字masker/正規構文のPG23824独立0。元eed75のPG22382 raw347中UseProperClassLoader93と47sourceのold/current SHAを結合。変更九sourceも全93の順序・loader/interface宣言は一致、旧PMD全93位置を現sourceへ一意bind。type定義loader73、ownTest定義loader20。理由はreview.json各siteへ記録。
+
+このruleのJ2EE条件に対し、当standalone Test側のProxy定義loaderは文脈非該当。実runtimeでの全interface可視性や他rule/型/品質はこのレビューで資格しない。93を消去・抑制せず、原347指摘も保存。原20helper等の共通source世代unionを未実施なので現全体未分類件数・重複差引はnull、347-93を現未分類件数としない。
+
+独立manifest `evidence/01_PT/018_NK-OPS-001/evidence/PG23824-ordinary47-loader-source-independent-v1/manifest.json` SHA256 `ce5c5a9bf9fe9dca61ae60454f25d7586e80f4afc6053951fd7e033b55e44c23`。config537の固定47sourceと元manifest/XML、review及び別source-bindingsのhashをmanifestへ保存。commandは538と539をPYTHONPATH=tools/qualityで実行。compiler/PMD/TargetJVM/Unit/元producer再実行0、実DB/VM/Root/native/cohort/鍵/backend/held4初期化0。
+
+context/null/別factory/別array/余分expression/欠落interfaceと文字列・line/blockcommentのtool-only九反例。これを実行済みPT PASS/実測coverageへ混ぜない。Test/Main変更0、新規試験0/新leaf0、517uniqueと正式1964/53・工数nullは不変。
+
+4374→4375、原1/3/7cap9、共有観測0ppは百分率の丸め観測であって実消費0の証明ではない。実費配賦/実token数N/Tnull。初startの不正revision拒否はevent前の入力errorとして開始記録に保存、正規revisionで一回だけevent発行。独立post0を受け、未完の別品質箇所へ通常自走を継続する。
