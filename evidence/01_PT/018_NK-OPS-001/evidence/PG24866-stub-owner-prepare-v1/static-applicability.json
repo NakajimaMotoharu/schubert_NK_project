@@ -1,0 +1,46 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T04:01:33.837012+09:00",
+  "prepareManifestSha256": "247ca39b147d5560b6d05b03044d880b1ddfd71720af1a0a6f4da60524c47f8f",
+  "unitToolPath": "evidence/01_PT/018_NK-OPS-001/input/829_stub_owner_whole5_stages.py",
+  "unitToolSha256": "91fbd5e0a43d2073c480be0351f274394775ebbb21f87601ed2740f0c225c017",
+  "prepareToolSha256": "205acb311106e305bd7d9fe5508b5771b0e836a7a53875556452bd400d3f5c84",
+  "unitToolReview": "Explicit ja-JP JVM argv added, prepare-vs-unit tool binding separated through this pinned preflight supplement; original successful prepare not replayed or rewritten.",
+  "rawPmdFindings": 5,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "findings": [
+    {
+      "rule": "CloseResource",
+      "beginline": "116",
+      "reason": "Exact executor ownership is finally shutdownNow then assert awaitTermination10; TWR unbounded close deliberately replaced, resource contract explicit and no suppression."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "beginline": "116",
+      "reason": "Test owns its explicitly required concurrent clock workers; not a JavaEE webapp managed-thread restriction."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "beginline": "120",
+      "reason": "Test owns its explicitly required concurrent clock workers; not a JavaEE webapp managed-thread restriction."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "beginline": "126",
+      "reason": "Test owns its explicitly required concurrent clock workers; not a JavaEE webapp managed-thread restriction."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "beginline": "127",
+      "reason": "Test owns its explicitly required concurrent clock workers; not a JavaEE webapp managed-thread restriction."
+    }
+  ],
+  "suppressionAdded": false,
+  "mainStaticEvidence": "PG22086 unchanged normal Main six modules0; no repeated product compilation/static analysis.",
+  "newProductTests": 0,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

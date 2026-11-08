@@ -113,7 +113,8 @@ class StubAnswerProviderTest {
     Set<Instant> expected = new HashSet<>();
     for (int i = 0; i < 64; i++) expected.add(NOW.plusSeconds(i));
     Set<Instant> actual = new HashSet<>();
-    try (var executor = Executors.newFixedThreadPool(8)) {
+    var executor = Executors.newFixedThreadPool(8);
+    try {
       java.util.List<Callable<AnswerResult>> tasks = new java.util.ArrayList<>();
       for (int i = 0; i < 64; i++) tasks.add(() -> provider.answer(PUBLIC_QUESTION));
       for (var future : executor.invokeAll(tasks, 5, TimeUnit.SECONDS)) {
@@ -121,6 +122,9 @@ class StubAnswerProviderTest {
         assertEquals("", answer.body());
         assertTrue(actual.add(answer.answeredAt()));
       }
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), "stub test executor terminated");
     }
     assertEquals(expected, actual);
     assertEquals(64, calls.get());
@@ -128,7 +132,13 @@ class StubAnswerProviderTest {
     Files.createDirectories(directory);
     Files.writeString(
         directory.resolve("PT-ASY-STB005.txt"),
-        "provider=STUB\nanswerLength=0\nclockReadsPerCall=1\nconcurrentCalls=64\nuniqueClockValues=64\nexternalCalls=0\nrawBodySaved=false\n");
+        "provider=STUB\n"
+            + "answerLength=0\n"
+            + "clockReadsPerCall=1\n"
+            + "concurrentCalls=64\n"
+            + "uniqueClockValues=64\n"
+            + "externalCalls=0\n"
+            + "rawBodySaved=false\n");
   }
 
   private static Clock clock(Supplier<Instant> source) {
