@@ -1,0 +1,57 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T04:15:42.183212+09:00",
+  "independentPost": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG24874-stub-owner-whole5-independent-v1/manifest.json",
+    "sha256": "0e0156450a4af1b672e09b68584522f2d779d3e93abf6de28eb2a47168849d78"
+  },
+  "rows": [
+    {
+      "bug": "BUG-2560",
+      "disposition": "Fixed runtime in checked-entry and both entry lint0, no download; legacy import chain removed from prepare.",
+      "scope": [
+        "829 prepare",
+        "pg24886 canonical entry",
+        "pg11123 checked-entry"
+      ]
+    },
+    {
+      "bug": "BUG-2561",
+      "disposition": "Phase unit removed; true no-arg tools/quality entry captured actual orig_argv without reconstruction. Invocation guard unchanged.",
+      "scope": [
+        "829 formerunit",
+        "pg24886 currentunit",
+        "host_tool_invocation unchanged",
+        "15458 priorcorrectnoarg notrerun"
+      ]
+    },
+    {
+      "bug": "BUG-2562",
+      "disposition": "Stop legacy compatibility patches. Current Console minimal APIJar/annotation/testclasses explicit CP; old normal remains unchanged/cpfileabsent. Five originalcases actually completed once.",
+      "scope": [
+        "current24886",
+        "normal22084 immutable",
+        "legacy scopedrunner unchanged",
+        "24394 command metadata pattern only/no replay"
+      ]
+    }
+  ],
+  "canonicalEntrypointSha256": "ba4e3c868e9b64f37557a81406d0e14df1f1465de1fdee847de7c4de4b3c8514",
+  "prepareOnlyToolSha256": "1ed0b578a6a7fe123fa22765f8f826de4faf068f149627154023a18f30ab4e52",
+  "checkedEntrypointSha256": "fcb76ff0ea14d091e5e2dc0eafd7a74e0a99ee36c42468ce295cbef44264a10c",
+  "unchangedInvocationGuardSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+  "existingPyflakesRuntimeSha256": "3070f542eb8fd36cd564b6f3a3d9409b63d327ff8fcb6835a9a1fd905171d6e7",
+  "originalNormalSnapshotUnchanged": true,
+  "rawStartupFailuresBeforeProduct": 3,
+  "lintFailureBeforeProduct": 1,
+  "successfulOriginalWholeRuns": 1,
+  "originalCasesRequalified": 5,
+  "oldSuccessRunsReplayed": 0,
+  "newProductTests": 0,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "globalYkt2177Closed": false,
+  "toolSha256": "ba3e9d41e821abca63211d36e604c0323ae7fb5f51abeba7ef1d729be9500f4b"
+}
