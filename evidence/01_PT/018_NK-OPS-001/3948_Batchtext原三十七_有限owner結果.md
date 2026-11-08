@@ -35,3 +35,5 @@ BUG2584/YKT2291：独立postが既decode済みgoldenをliteral_evalしSyntaxErro
 実行：`PYTHONPATH=tools/quality:tools/quality/vm/050_s1 python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg25226_batch_text_original_thirty_seven_pt.py` lint0→body0/一回のみ。独立 `python3 -B evidence/01_PT/018_NK-OPS-001/input/918_batch_text_whole37_independent.py` は初1/修正後lint0別call→0。正確なcommand/全入力/元ENV/終了/時間はraw.begin/stages、safe XML/coverage/execinfoはpost.files hash。
 
 新unique/leaf/正式受入0、520uniqueJava416/正式1964PT-53scope/工数null・QA051final不変。原見積1/4/8pp cap10は固定、整数共有割合の観測差を専有費/実tokenへ換算しない。失敗preflight1/post1・実行前metadata欠落・未実行draft修正と製品37成功は別計数。usage実07:40:04/627560ed/N-Tnull・次08:40:04。限定修正commitの結合と群末fresh共有枠はこの後の正式close記録に従う。
+
+4531→4532群末close：fresh2026-11-09T07:48:48.888+09:00 used84/rem16、83→84の共有観測1pp、N/T/専有費null。結果/918修正commit a93a8bef68b92f11b50d5df7e8c40eb437369238通常push確認済み、BUG2584/YKT2291 fixcommitを結合し限定CLOSED。元見積/失敗/各source/run保持、通常区切りでは停止せず残る2823五whole73の実source/ownerから次群を選ぶ。
