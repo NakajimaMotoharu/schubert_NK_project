@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -152,7 +153,8 @@ class AssetChecksumManifestTest {
       var manifest = AssetChecksumManifest.read(source, 1);
       Arrays.fill(bytes, (byte) '!');
       assertEquals("AssetChecksumManifest[entries=1]", manifest.toString());
-      try (var pool = Executors.newFixedThreadPool(10)) {
+      var pool = Executors.newFixedThreadPool(10);
+      try {
         List<Callable<Boolean>> tasks = new ArrayList<>();
         for (int i = 0; i < 100; i++)
           tasks.add(
@@ -161,7 +163,10 @@ class AssetChecksumManifestTest {
                 reject(() -> manifest.requireMatches(music(MUSIC_A_PATH, "0".repeat(64), 3)));
                 return manifest.entryCount() == 1;
               });
-        for (var future : pool.invokeAll(tasks)) assertTrue(future.get());
+        for (var future : pool.invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(future.get());
+      } finally {
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS), "checksum executor terminated");
       }
       assertTrue(source.isOpen());
     }

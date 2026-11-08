@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.api.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.error.CapacityExceededException;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
@@ -112,7 +113,8 @@ class TransferCapacityTest {
     for (var capacity :
         List.of(new TransferCapacity(0, 8999), new TransferCapacity(4_499_999_999L, 100))) {
       var before = capacity.snapshot();
-      try (var executor = Executors.newFixedThreadPool(16)) {
+      var executor = Executors.newFixedThreadPool(16);
+      try {
         List<Callable<Optional<TransferCapacity.Reservation>>> tasks = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
           tasks.add(
@@ -126,7 +128,7 @@ class TransferCapacityTest {
               });
         }
         int accepted = 0;
-        for (var future : executor.invokeAll(tasks)) {
+        for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) {
           var result = future.get(10, TimeUnit.SECONDS);
           if (result.isPresent()) {
             accepted++;
@@ -134,6 +136,9 @@ class TransferCapacityTest {
           }
         }
         assertEquals(1, accepted);
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), "capacity executor terminated");
       }
       assertEquals(before.bytes() + 4800, capacity.snapshot().bytes());
       assertEquals(before.files() + 1, capacity.snapshot().files());
@@ -144,7 +149,8 @@ class TransferCapacityTest {
   @Test
   void c03CallerMonitorsCannotBlockReservationMetricsRetainOrClose() throws Exception {
     var capacity = new TransferCapacity(0, 0);
-    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    var executor = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       TransferCapacity.Reservation reservation;
       synchronized (capacity) {
         reservation =
@@ -169,6 +175,10 @@ class TransferCapacityTest {
       }
       assertEquals(4800, capacity.snapshot().bytes());
       assertEquals(1, capacity.snapshot().files());
+    } finally {
+      executor.shutdownNow();
+      assertTrue(
+          executor.awaitTermination(10, TimeUnit.SECONDS), "capacity virtual executor terminated");
     }
   }
 
