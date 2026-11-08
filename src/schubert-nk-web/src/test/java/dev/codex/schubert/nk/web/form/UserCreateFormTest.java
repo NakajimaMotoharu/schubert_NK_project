@@ -276,7 +276,8 @@ class UserCreateFormTest {
 
   @Test
   void create007OneHundredConcurrentIndependentRequests() throws Exception {
-    try (var executor = Executors.newFixedThreadPool(8)) {
+    var executor = Executors.newFixedThreadPool(8);
+    try {
       var results = new ArrayList<Future<Void>>();
       for (int i = 1; i <= 100; i++) {
         int n = i;
@@ -302,6 +303,9 @@ class UserCreateFormTest {
                 }));
       }
       for (var result : results) assertNull(result.get(10, TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

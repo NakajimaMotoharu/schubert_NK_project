@@ -264,7 +264,8 @@ class ScenarioSearchFormTest {
 
   @Test
   void web221ConcurrentValidation() throws Exception {
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var futures = new ArrayList<Future<?>>();
       for (int i = 1; i <= 64; i++) {
         int n = i;
@@ -280,6 +281,9 @@ class ScenarioSearchFormTest {
                 }));
       }
       for (var future : futures) future.get(10, TimeUnit.SECONDS);
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

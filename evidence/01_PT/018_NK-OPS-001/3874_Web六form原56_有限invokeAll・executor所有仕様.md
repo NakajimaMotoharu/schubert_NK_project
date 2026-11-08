@@ -1,0 +1,9 @@
+# 3874 Web6form 原56：invokeAllとexecutor所有の期限
+
+G03.05主/P01603-14-16-17-18-19関連0、REWORK原1/4/8pp cap10。実在6wholeTest=ScenarioSearch8/LogSearch8/QuestionSubmit8/TargetOperation8/UserCreate8/UserMutation16、合計56。原2623/2624・2627/2628及び各元Program仕様/全source/独立byteoffset goldenを正本に、実装はformの純粋bind/DTO組立/validation/char ownershipに限る。UserMutationのUntimed invokeAll(tasks)は後続Futureget30では制限されず、同原因のTWR executorclose6箇所も期限がない。BUG2532/YKT2177を修正前登録。
+
+変更=UserMutation一invokeAll(tasks,30,SECONDS)へ、各六pool/executorのTWRを明示finally.shutdownNow/awaitTermination10assertへ。元Futureget5/10/30秒、全literal/独立wire/null/順序/防御copy/文字・NFC/byte境界・close/並行期待は保持。cancelled/timeoutは失敗で正常化しない。Source以外へ合成password/token/本文を複製せずbeforeは既Git61f193a7の6object/SHAだけ。全元wholeを使用しmethod抽出・代替fixture・新Test設計0。
+
+TargetOperationInput/CancelForm/QuestionDeleteForm・UserMutationInput/PasswordResetForm/UserStatusForm/UserRoleForm/UserUnlockFormと4基本formの12Sourceを対象、UserChangeFormは5抽象methodのみのsealed ABIとしてNoCodeを別記し成功class100へ加算しない。実create/delete/role/password変更・認証/session/CSRF/token発行消費・DB/JMS/HTTP/Root/VM/native/鍵は操作せず、DTOはsynthetic fixtureの値だけ。UserChange Inputのrole_context拒否は入力契約でAPI認可の代替ではない。全Main/helper/現normal22084/22086・Protocol純値経路/必要SDK事前レビューに不足があれば当動的部分HOLD、拒否再試行0。
+
+format24386/compile24388/static24390/preflight24392→source固定push→whole56単一exec24394/outer180秒→独立24396で元sourceとのrawbyte差の許可範囲、全case/終了/XML・OS/JDK/source/command/currentCRC/held4init/各counterを照合。元成功確認の再演/旧exec合算/新unique加算0、未知coverageを埋めず必要Code全counterを実測する。未達はBUG修正前登録、期待値の改変/安易な除外0。518Java414/候補114/pending12/whole93暫定/正式1964-53新leaf0/工数null/全HOLD保持、全YKT2177は一群で閉鎖しない。

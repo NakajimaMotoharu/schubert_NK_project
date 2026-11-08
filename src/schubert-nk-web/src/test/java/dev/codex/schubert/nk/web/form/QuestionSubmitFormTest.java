@@ -235,7 +235,8 @@ class QuestionSubmitFormTest {
 
   @Test
   void qstForm008ConcurrentIndependentBodiesAndTokens() throws Exception {
-    try (var executor = Executors.newFixedThreadPool(8)) {
+    var executor = Executors.newFixedThreadPool(8);
+    try {
       var results = new ArrayList<Future<byte[]>>();
       for (int i = 1; i <= 100; i++) {
         int index = i;
@@ -260,6 +261,9 @@ class QuestionSubmitFormTest {
         assertArrayEquals(
             golden("question-" + i, token), results.get(i - 1).get(30, TimeUnit.SECONDS));
       }
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

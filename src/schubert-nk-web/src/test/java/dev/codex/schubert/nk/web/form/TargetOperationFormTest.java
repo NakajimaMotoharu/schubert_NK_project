@@ -186,7 +186,8 @@ class TargetOperationFormTest {
   @Test
   void target008OneHundredParallelBindHasNoSharedMutableState() throws Exception {
     var futures = new ArrayList<Future<?>>();
-    try (var executor = Executors.newFixedThreadPool(8)) {
+    var executor = Executors.newFixedThreadPool(8);
+    try {
       for (int n = 0; n < 100; n++) {
         String operation = n % 2 == 0 ? CANCEL_OPERATION : DELETE_OPERATION;
         futures.add(
@@ -198,6 +199,9 @@ class TargetOperationFormTest {
                 }));
       }
       for (var future : futures) future.get(5, TimeUnit.SECONDS);
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

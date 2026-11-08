@@ -276,7 +276,8 @@ class LogSearchFormTest {
   @Test
   void web285ConcurrentBinding() throws Exception {
     var shared = Map.of(LEVEL_FIELD, List.of("WARN"));
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var futures = new ArrayList<Future<?>>();
       for (int i = 0; i < 64; i++) {
         final int n = i;
@@ -298,6 +299,9 @@ class LogSearchFormTest {
                 }));
       }
       for (var future : futures) future.get(10, TimeUnit.SECONDS);
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(Map.of(LEVEL_FIELD, List.of("WARN")), shared);
   }

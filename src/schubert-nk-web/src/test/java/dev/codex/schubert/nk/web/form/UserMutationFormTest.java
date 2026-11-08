@@ -486,7 +486,8 @@ class UserMutationFormTest {
 
   @Test
   void change015OneHundredIndependentParallelOperations() throws Exception {
-    try (var executor = Executors.newFixedThreadPool(8)) {
+    var executor = Executors.newFixedThreadPool(8);
+    try {
       var tasks = new ArrayList<Callable<Void>>();
       for (int i = 1; i <= 100; i++) {
         final int index = i;
@@ -512,7 +513,11 @@ class UserMutationFormTest {
               return null;
             });
       }
-      for (var future : executor.invokeAll(tasks)) future.get(30, TimeUnit.SECONDS);
+      for (var future : executor.invokeAll(tasks, 30, TimeUnit.SECONDS))
+        future.get(30, TimeUnit.SECONDS);
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
