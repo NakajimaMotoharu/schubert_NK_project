@@ -1,0 +1,370 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "99acc908a59b3a929814b42cc6777b9e51381d24",
+    "normalSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+    "inputHashes": {
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/AnimationWireClientTest.java": "f51412a13aba498e5d406f33835d045511bc4538e15e3865a05ff6af2342dc2e",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/LogSearchWireClientTest.java": "4da4b4d9f08b1540bfd7310da3fdfc630c66cad585d7ae9e8398630f96fe5429",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/MusicWireClientTest.java": "2e96312837fdca9e8d2b416c1f05411ff2cbaf46fd9d1dfb348fb15612555539",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClientTest.java": "dd9f38904e55bfbf51119d736393f968c0f4785cf10c72294c3770c421a7ce0e",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/AnimationWireClient.java": "b329258fb34ba289506b9026f3852565b84de3591a6479889cb83b11ac280348",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/MusicWireClient.java": "f72dc90a27ee19b3e9f575a70702f1bc08d48f3bfc23eb13ddae888129080137",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClient.java": "7e3709a36bc952b9c0f3cefdeddc51eb43df92a77021848456b87578dbf75315",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/LogSearchWireClient.java": "4606ebc5e433903fa46f1a356d38368bb7ae4871efb4c30892932a560908154b",
+      "evidence/01_PT/015_NK-WEB-001/input/055_read_four_bounded_qualifier.py": "aac0cb76bad28b0ceeca6e893a92dd212302f3907b5cb6317a5cc54c32ca12a0",
+      "evidence/01_PT/015_NK-WEB-001/input/054_read_four_bounded_scope.json": "52421166971234965a8845c2d83617472dd6b00f9496883ef42d684dec399c5f"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": "622ae1b70d2627b7b162a2cd1b07bc5201092e0628d9a50986892f2cbe7e98f9",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "bc6acaa867859b0f1d2f2e24dc27ba5627e7bf7c332448ae88bb077ea1b36fa7",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar": "6605e08075ab389c359451c7854808cf4b1575e1ea6317e534e9d4df088096df"
+    },
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "compileManifestSha256": "5a2d88ae1428980e0610e0e288978167c7fdf44e981900500a5f22f680c6771e",
+    "selected": [
+      "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+      "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+      "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+      "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest"
+    ],
+    "expectedTests": 32,
+    "newMethods": 0,
+    "requalifiedExistingMethods": 32,
+    "session": "PG24324-READ-FOUR-BOUNDED-THIRTYTWO",
+    "startUTC": "2026-11-08T10:37:35.911556+00:00"
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T10:37:35.911710+00:00",
+      "endUTC": "2026-11-08T10:37:37.680482+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24324-read-four-bounded-thirtytwo-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Dnk.pt.repository=/home/mini/codex/project1/work/pgpt-foundation",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24324-read-four-bounded-thirtytwo-unit-v1/jacoco.exec,sessionid=PG24324-READ-FOUR-BOUNDED-THIRTYTWO,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24324-read-four-bounded-thirtytwo-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24330-read-four-bounded-compile-v2/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24324-read-four-bounded-thirtytwo-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "a0ee23ea0b3dc0c36e08102c9bb4eb5c71ccdda1b93fffc4a90cff4b94e3c7ec",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T10:37:37.687357+00:00",
+      "endUTC": "2026-11-08T10:37:37.852291+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24324-read-four-bounded-thirtytwo-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24324-read-four-bounded-thirtytwo-unit-v1/component",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24324-read-four-bounded-thirtytwo-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "a0f6593c27d8c433beb785a0a37a03f6a1b6d43b83c952b81c72190ef04b8246",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T10:37:37.852618+00:00",
+      "endUTC": "2026-11-08T10:37:37.967427+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24324-read-four-bounded-thirtytwo-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "b189a41d3f7db68cb5163e01d8fcc618d27dd28f3c9bc0e29567166774bc4910",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T10:37:37.967740+00:00",
+      "endUTC": "2026-11-08T10:37:38.132640+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24324-read-four-bounded-thirtytwo-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "a13ea80035186f42aa371a1a97f370295d00e71acd30fa5eea16f5d2edde29cb",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+      "name": "web167SixSuccessResponsesDecodeWithoutRetainingSecrets()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+      "name": "web260ConcurrentRequests()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+      "name": "web277OwnershipAndDiagnostics()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+      "name": "web166SixRequestsMatchIndependentWire()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+      "name": "web170InputAndConfigurationFaultsNeverSend()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+      "name": "web171TransportFailuresDoNotRetryOrLeakPending()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+      "name": "web244ConcurrentRequests()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+      "name": "web239SuccessProfiles()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+      "name": "web257MalformedReplies()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+      "name": "web169MalformedUncorrelatedAndForeignResponsesReject()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+      "name": "web255SuccessProfiles()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+      "name": "web271SuccessProfiles()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+      "name": "web259TransportFailures()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+      "name": "web173ResponseBoundsAndCallerOwnershipRemainExact()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+      "name": "web256ErrorProfiles()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+      "name": "web261OwnershipAndDiagnostics()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+      "name": "web254Requests()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+      "name": "web243TransportFailures()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+      "name": "web172ConcurrentQueriesKeepContextsAndRepliesSeparate()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+      "name": "web238AnimationRequests()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+      "name": "web242CapabilitiesAndNull()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+      "name": "web168ApprovedErrorsNeverExposeSuccessPayload()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+      "name": "web272ErrorProfiles()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+      "name": "web241MalformedReplies()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+      "name": "web276ConcurrentRequests()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+      "name": "web273MalformedReplies()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+      "name": "web245OwnershipAndDiagnostics()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+      "name": "web258CapabilitiesAndNull()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+      "name": "web240ErrorProfiles()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+      "name": "web274CapabilitiesAndNull()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+      "name": "web270Requests()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+      "name": "web275TransportFailures()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 32,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/web/messaging/AnimationWireClient": "5605eeddfffef1511186e5611d750b97e0cfd9ae22cfbff9d91c056bea0ffd0e",
+    "dev/codex/schubert/nk/web/messaging/MusicWireClient": "f0a27f94111e162e19d29faffb5cee204e834709e5e0d9f844ed6cef48710e7f",
+    "dev/codex/schubert/nk/web/messaging/ScenarioWireClient": "7663716dc6e851b625c24a7f3730711ae38357adac235159a5cfcf0b6eb3e450",
+    "dev/codex/schubert/nk/web/messaging/LogSearchWireClient": "ba5157558697987b42dab71e9049f7f5d4297db2031e65d5018830a54b2f1e46",
+    "dev/codex/schubert/nk/web/messaging/ScenarioWireClient$Result": "7c622a4f6bfce349ce3b92b7d7f7345f1f30409001e8d71cc64c4b0aef73b703"
+  },
+  "formalUpdated": false
+}
