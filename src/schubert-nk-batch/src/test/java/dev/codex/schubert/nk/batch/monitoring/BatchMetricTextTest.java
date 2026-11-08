@@ -40,9 +40,11 @@ class BatchMetricTextTest {
   private static final String C = "nk_batch_runs_total";
   private static final String G = "nk_file_transfer_files";
   private static final String C_HEADER =
-      "# HELP nk_batch_runs_total Supplied Batch technical observation.\n# TYPE nk_batch_runs_total counter\n";
+      "# HELP nk_batch_runs_total Supplied Batch technical observation.\n"
+          + "# TYPE nk_batch_runs_total counter\n";
   private static final String G_HEADER =
-      "# HELP nk_file_transfer_files Supplied Batch technical observation.\n# TYPE nk_file_transfer_files gauge\n";
+      "# HELP nk_file_transfer_files Supplied Batch technical observation.\n"
+          + "# TYPE nk_file_transfer_files gauge\n";
   private static final String C_ROW = "nk_batch_runs_total{status=\"SUCCESS\",step=\"BACKUP_DB\"} ";
   private static final String G_ROW = "nk_file_transfer_files{suffix=\".part\"} ";
   private final BatchMetricText formatter = new BatchMetricText();
@@ -531,18 +533,23 @@ class BatchMetricTextTest {
 
   @Test
   void batchtext024FiniteConcurrentCallsKeepBorrowedOwner() throws Exception {
-    try (var source = new Registry(counter(2.5));
-        var workers = Executors.newFixedThreadPool(4)) {
-      var jobs = new ArrayList<Future<?>>();
-      for (int i = 0; i < 64; i++)
-        jobs.add(
-            workers.submit(
-                () ->
-                    assertEquals(
-                        C_HEADER + C_ROW + COUNTER_SAMPLE_LINE,
-                        formatter.scrape(source, DEBUG_MODE))));
-      for (var job : jobs) job.get(10, TimeUnit.SECONDS);
-      assertFalse(source.isClosed());
+    try (var source = new Registry(counter(2.5))) {
+      var workers = Executors.newFixedThreadPool(4);
+      try {
+        var jobs = new ArrayList<Future<?>>();
+        for (int i = 0; i < 64; i++)
+          jobs.add(
+              workers.submit(
+                  () ->
+                      assertEquals(
+                          C_HEADER + C_ROW + COUNTER_SAMPLE_LINE,
+                          formatter.scrape(source, DEBUG_MODE))));
+        for (var job : jobs) job.get(10, TimeUnit.SECONDS);
+        assertFalse(source.isClosed());
+      } finally {
+        workers.shutdownNow();
+        assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
+      }
     }
   }
 
@@ -768,32 +775,37 @@ class BatchMetricTextTest {
     try (var first = new Registry(counter(1.5));
         var second = new Registry(counter(2.5));
         var firstStandard = fullOwner(firstProbe);
-        var secondStandard = fullOwner(secondProbe);
-        var workers = Executors.newFixedThreadPool(2)) {
-      var firstJob =
-          workers.submit(
-              () -> {
-                for (int i = 0; i < 16; i++)
-                  assertEquals(
-                      C_HEADER + C_ROW + "1.5\n" + FULL_STANDARD,
-                      formatter.scrape(first, DEBUG_MODE, firstStandard));
-              });
-      var secondJob =
-          workers.submit(
-              () -> {
-                for (int i = 0; i < 16; i++)
-                  assertEquals(
-                      C_HEADER + C_ROW + COUNTER_SAMPLE_LINE + FULL_STANDARD,
-                      formatter.scrape(second, DEBUG_MODE, secondStandard));
-              });
-      firstJob.get(10, TimeUnit.SECONDS);
-      secondJob.get(10, TimeUnit.SECONDS);
-      assertEquals(16, firstProbe.scrapes.get());
-      assertEquals(16, secondProbe.scrapes.get());
-      assertFalse(first.isClosed());
-      assertFalse(second.isClosed());
-      assertFalse(firstProbe.isClosed());
-      assertFalse(secondProbe.isClosed());
+        var secondStandard = fullOwner(secondProbe)) {
+      var workers = Executors.newFixedThreadPool(2);
+      try {
+        var firstJob =
+            workers.submit(
+                () -> {
+                  for (int i = 0; i < 16; i++)
+                    assertEquals(
+                        C_HEADER + C_ROW + "1.5\n" + FULL_STANDARD,
+                        formatter.scrape(first, DEBUG_MODE, firstStandard));
+                });
+        var secondJob =
+            workers.submit(
+                () -> {
+                  for (int i = 0; i < 16; i++)
+                    assertEquals(
+                        C_HEADER + C_ROW + COUNTER_SAMPLE_LINE + FULL_STANDARD,
+                        formatter.scrape(second, DEBUG_MODE, secondStandard));
+                });
+        firstJob.get(10, TimeUnit.SECONDS);
+        secondJob.get(10, TimeUnit.SECONDS);
+        assertEquals(16, firstProbe.scrapes.get());
+        assertEquals(16, secondProbe.scrapes.get());
+        assertFalse(first.isClosed());
+        assertFalse(second.isClosed());
+        assertFalse(firstProbe.isClosed());
+        assertFalse(secondProbe.isClosed());
+      } finally {
+        workers.shutdownNow();
+        assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
+      }
     }
   }
 
