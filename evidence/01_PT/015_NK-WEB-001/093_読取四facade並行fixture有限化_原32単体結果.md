@@ -1,0 +1,9 @@
+# 093 読取四facade有限fixture 原32結果
+
+source99acc908a59b3a929814b42cc6777b9e51381d24（Production7aed）をpush後、PG24324原四whole32を一回実行し終了0、failure/error/skipped/aborted0。PG24326独立0 SHA256 f851f82027183619f5395d36b6f3bb4892c73cb2593309c599aa5ad5a799b258。全原method/TestID・他token/oracleを別forwardrecipeで確認。実Main116の現CRC一致、held四初期化0。三Future10秒と四pool finally.shutdownNow/awaitTermination10の正常終了をassertし、四画面の64/64/100/64並行・元例外/null/消去/immutable等を保持。
+
+対象四Source五physical LINE29/METHOD12/CLASS5/INSTRUCTION120全miss0。BRANCHは元から0でXML省略、現classinfoのexact五owner/CRC/BRAN0を照合しrate=null/N-A、strict非空四100gate1を保持。人工branch/除外/旧exec合算0。全Main116の全coverageを測ったものではない。
+
+BUG2527：初compile24318=1/17diagを24327に保存、既JMS_API3.1.0 SHAを明示しsameTestSHAのformat24316再利用→別compile24330=0、static24320raw26を24322で個別非適用/適用0CS0。BUG2528：post初1（自然B0のXMLcounter省略）を24334保存後、実classinfo0の根拠と欠落/重複/非0/別ownerの四否定を追加し同Unit結果から回収。元32再演0。是正postsource91772aをpush済み、当BUG2526/2527/2528と限定YKT2260/2261閉鎖、全YKT2177はOPEN。
+
+commands/時刻/OS/JDK/tool/source/入力SHA/元XMLpin/全case時間/coverage/hashは公開PG24326 manifestと各参照へ対応。新unique/source登録/leaf/正式受入加算0。518=Java414+HTML97+CSS7、正式1964PT/53scope・工数率null、QA051final・実Root/VM/DB/JMS/auth/key/native/CHR等HOLDは維持する。
