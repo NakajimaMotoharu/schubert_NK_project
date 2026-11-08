@@ -1,0 +1,7 @@
+# NK-MSG-001/002 listener二Source六method独立oracle対応
+
+G13.04主、P01201/P00605関連追加0。原0.5/2/5pp cap7。対象はQuestionWorkListener/WebLogListenerのconstructorと二onMessageの計六method。先行3834はcoverage対応のみでexactPerMethodOracle未確認だった。その不足について既六成功caseの要求・独立期待・明示assertion・method descriptorを手動レビューで結ぶ。既3759/3760の成功や実測値を繰り返さず、scope617へ六method/六TestIDと期待値/実case ID/現Source SHA/approved SS sourceを先に固定する。
+
+全既Test bodyと両Main、委譲先のnull/session/処理順を閲覧済み。正反対の用途、null、誤session、再配送呼出二回、例外identityとrollback callback順を明示する。005本文未読はsource順序確認だけで独立read counter未測定、003は業務Inbox dedup試験ではない。Error/fatal/DLQ/actual broker/native/DB/Root/VM等は全HOLD。完全callee検証や新動的成功にしない。
+
+同六methodが現23972 metadataに全一致し、原六Test caseが23438/JUnitで成功済みで、独立期待はSSの固定literalとSDK契約・固定sequenceに基づきProduction expected生成がないことを確認する。レビュー記録の各methodにcase・assert・要求・残存限界を付す。公開metadata確認だけでTest/JVM/compile0。正式1964PT/53scope、新leaf0/工数null/追加unique517、候補114/pending12/whole93と全HOLDを維持する。

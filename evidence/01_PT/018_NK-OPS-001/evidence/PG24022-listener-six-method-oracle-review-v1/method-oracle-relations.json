@@ -1,0 +1,382 @@
+[
+  {
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener.java",
+    "className": "dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener",
+    "method": "<init>",
+    "descriptor": "(Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;)V",
+    "testIds": [
+      "PT-JMS-PORT-001",
+      "PT-JMS-PORT-003",
+      "PT-JMS-PORT-004",
+      "PT-JMS-PORT-005",
+      "PT-JMS-PORT-006"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port001QuestionPublicEntryForwardsDeliveryAndExactGoldenData()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port003BothObserverEntriesCommitEachCallerDeliveryWithoutRollbackNotifications()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port004NullContractsRejectBeforeAnyMessageOrTransactionOperation()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port005NonTransactedContextsRejectBeforeBodyBusinessOrRollback()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port006BusinessFailurePreservesIdentityAndConfirmsRollbackInOrder()"
+    ],
+    "contract": "Routes supplied processor/clock to ASYNC_WORK/API_WORK or WEB_LOG/API_WEB_LOG; null rejects through delegate before transaction",
+    "exactOracleScope": "EXPLICIT_WRAPPER_CONTRACT_ONLY_NOT_ALL_CALLEE_BRANCHES",
+    "staticReviewStatus": "REVIEWED_WITH_STATED_LIMITS",
+    "coverageEvidence": "ORIGINAL_RUN23436_INDEPENDENT23438_NO_NEW_RUN",
+    "unverified": [
+      "actual broker/DB delivery/inbox dedup",
+      "all delegate/DLQ/fatal branches",
+      "005 message body read counter independently unmeasured",
+      "Error/rollback failure/observer failure not covered by these six cases"
+    ],
+    "sourceSha256": "a037c6586a68f6aa48424e2b9cc020aa37e2f357014299379b1ba01bdbed0cbc",
+    "classSha256": "e2e93b6c6a2029b3921d3c07aa6b2aace98559f367e2fdb48ca480152dc1ce4d",
+    "requirementIds": [
+      "MQ-006",
+      "MQ-007",
+      "MQ-008",
+      "MQ-009",
+      "MQ-010",
+      "ASY-002",
+      "MON-003"
+    ],
+    "uiRefs": [
+      "213",
+      "231",
+      "235 section12",
+      "236 section14"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "f6dcecf979d9dbac0338aae079d5730f97ba53afaa3dd46db3e20ef49b21618d"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+      }
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "methodLinkAcceptedAsFullPT": false
+  },
+  {
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener.java",
+    "className": "dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener",
+    "method": "onMessage",
+    "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;)V",
+    "testIds": [
+      "PT-JMS-PORT-001",
+      "PT-JMS-PORT-004",
+      "PT-JMS-PORT-005"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port001QuestionPublicEntryForwardsDeliveryAndExactGoldenData()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port004NullContractsRejectBeforeAnyMessageOrTransactionOperation()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port005NonTransactedContextsRejectBeforeBodyBusinessOrRollback()"
+    ],
+    "contract": "Preserves exact supplied context/message, event wire and delivery metadata, success commit; null/nontransacted reject",
+    "exactOracleScope": "EXPLICIT_WRAPPER_CONTRACT_ONLY_NOT_ALL_CALLEE_BRANCHES",
+    "staticReviewStatus": "REVIEWED_WITH_STATED_LIMITS",
+    "coverageEvidence": "ORIGINAL_RUN23436_INDEPENDENT23438_NO_NEW_RUN",
+    "unverified": [
+      "actual broker/DB delivery/inbox dedup",
+      "all delegate/DLQ/fatal branches",
+      "005 message body read counter independently unmeasured",
+      "Error/rollback failure/observer failure not covered by these six cases"
+    ],
+    "sourceSha256": "a037c6586a68f6aa48424e2b9cc020aa37e2f357014299379b1ba01bdbed0cbc",
+    "classSha256": "e2e93b6c6a2029b3921d3c07aa6b2aace98559f367e2fdb48ca480152dc1ce4d",
+    "requirementIds": [
+      "MQ-006",
+      "MQ-007",
+      "MQ-008",
+      "MQ-009",
+      "MQ-010",
+      "ASY-002",
+      "MON-003"
+    ],
+    "uiRefs": [
+      "213",
+      "231",
+      "235 section12",
+      "236 section14"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "f6dcecf979d9dbac0338aae079d5730f97ba53afaa3dd46db3e20ef49b21618d"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+      }
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "methodLinkAcceptedAsFullPT": false
+  },
+  {
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener.java",
+    "className": "dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener",
+    "method": "onMessage",
+    "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;Ljava/lang/Runnable;Ljava/lang/Runnable;)V",
+    "testIds": [
+      "PT-JMS-PORT-003",
+      "PT-JMS-PORT-004",
+      "PT-JMS-PORT-006"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port003BothObserverEntriesCommitEachCallerDeliveryWithoutRollbackNotifications()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port004NullContractsRejectBeforeAnyMessageOrTransactionOperation()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port006BusinessFailurePreservesIdentityAndConfirmsRollbackInOrder()"
+    ],
+    "contract": "Preserves supplied attempted/confirmed callback order, two explicit deliveries commit twice, failure identity retained",
+    "exactOracleScope": "EXPLICIT_WRAPPER_CONTRACT_ONLY_NOT_ALL_CALLEE_BRANCHES",
+    "staticReviewStatus": "REVIEWED_WITH_STATED_LIMITS",
+    "coverageEvidence": "ORIGINAL_RUN23436_INDEPENDENT23438_NO_NEW_RUN",
+    "unverified": [
+      "actual broker/DB delivery/inbox dedup",
+      "all delegate/DLQ/fatal branches",
+      "005 message body read counter independently unmeasured",
+      "Error/rollback failure/observer failure not covered by these six cases"
+    ],
+    "sourceSha256": "a037c6586a68f6aa48424e2b9cc020aa37e2f357014299379b1ba01bdbed0cbc",
+    "classSha256": "e2e93b6c6a2029b3921d3c07aa6b2aace98559f367e2fdb48ca480152dc1ce4d",
+    "requirementIds": [
+      "MQ-006",
+      "MQ-007",
+      "MQ-008",
+      "MQ-009",
+      "MQ-010",
+      "ASY-002",
+      "MON-003"
+    ],
+    "uiRefs": [
+      "213",
+      "231",
+      "235 section12",
+      "236 section14"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "f6dcecf979d9dbac0338aae079d5730f97ba53afaa3dd46db3e20ef49b21618d"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+      }
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "methodLinkAcceptedAsFullPT": false
+  },
+  {
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogListener.java",
+    "className": "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener",
+    "method": "<init>",
+    "descriptor": "(Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;)V",
+    "testIds": [
+      "PT-JMS-PORT-002",
+      "PT-JMS-PORT-003",
+      "PT-JMS-PORT-004",
+      "PT-JMS-PORT-005",
+      "PT-JMS-PORT-006"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port002WebLogPublicEntryForwardsLegacyProcessorAndExactGoldenData()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port003BothObserverEntriesCommitEachCallerDeliveryWithoutRollbackNotifications()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port004NullContractsRejectBeforeAnyMessageOrTransactionOperation()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port005NonTransactedContextsRejectBeforeBodyBusinessOrRollback()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port006BusinessFailurePreservesIdentityAndConfirmsRollbackInOrder()"
+    ],
+    "contract": "Routes supplied processor/clock to ASYNC_WORK/API_WORK or WEB_LOG/API_WEB_LOG; null rejects through delegate before transaction",
+    "exactOracleScope": "EXPLICIT_WRAPPER_CONTRACT_ONLY_NOT_ALL_CALLEE_BRANCHES",
+    "staticReviewStatus": "REVIEWED_WITH_STATED_LIMITS",
+    "coverageEvidence": "ORIGINAL_RUN23436_INDEPENDENT23438_NO_NEW_RUN",
+    "unverified": [
+      "actual broker/DB delivery/inbox dedup",
+      "all delegate/DLQ/fatal branches",
+      "005 message body read counter independently unmeasured",
+      "Error/rollback failure/observer failure not covered by these six cases"
+    ],
+    "sourceSha256": "7ed75f6a4a7a81a96ae5c95e9c6bba192d7f6fe2aa8437622cf5052ebea67df5",
+    "classSha256": "4bb579daefa2921c7e0763b2333a5a61219f32406976ac154ce8a3734b5d0ad6",
+    "requirementIds": [
+      "MQ-006",
+      "MQ-007",
+      "MQ-008",
+      "MQ-009",
+      "MQ-010",
+      "ASY-002",
+      "MON-003"
+    ],
+    "uiRefs": [
+      "213",
+      "231",
+      "235 section12",
+      "236 section14"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "f6dcecf979d9dbac0338aae079d5730f97ba53afaa3dd46db3e20ef49b21618d"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+      }
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "methodLinkAcceptedAsFullPT": false
+  },
+  {
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogListener.java",
+    "className": "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener",
+    "method": "onMessage",
+    "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;)V",
+    "testIds": [
+      "PT-JMS-PORT-002",
+      "PT-JMS-PORT-004",
+      "PT-JMS-PORT-005"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port002WebLogPublicEntryForwardsLegacyProcessorAndExactGoldenData()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port004NullContractsRejectBeforeAnyMessageOrTransactionOperation()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port005NonTransactedContextsRejectBeforeBodyBusinessOrRollback()"
+    ],
+    "contract": "Preserves exact supplied context/message, event wire and delivery metadata, success commit; null/nontransacted reject",
+    "exactOracleScope": "EXPLICIT_WRAPPER_CONTRACT_ONLY_NOT_ALL_CALLEE_BRANCHES",
+    "staticReviewStatus": "REVIEWED_WITH_STATED_LIMITS",
+    "coverageEvidence": "ORIGINAL_RUN23436_INDEPENDENT23438_NO_NEW_RUN",
+    "unverified": [
+      "actual broker/DB delivery/inbox dedup",
+      "all delegate/DLQ/fatal branches",
+      "005 message body read counter independently unmeasured",
+      "Error/rollback failure/observer failure not covered by these six cases"
+    ],
+    "sourceSha256": "7ed75f6a4a7a81a96ae5c95e9c6bba192d7f6fe2aa8437622cf5052ebea67df5",
+    "classSha256": "4bb579daefa2921c7e0763b2333a5a61219f32406976ac154ce8a3734b5d0ad6",
+    "requirementIds": [
+      "MQ-006",
+      "MQ-007",
+      "MQ-008",
+      "MQ-009",
+      "MQ-010",
+      "ASY-002",
+      "MON-003"
+    ],
+    "uiRefs": [
+      "213",
+      "231",
+      "235 section12",
+      "236 section14"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "f6dcecf979d9dbac0338aae079d5730f97ba53afaa3dd46db3e20ef49b21618d"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+      }
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "methodLinkAcceptedAsFullPT": false
+  },
+  {
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogListener.java",
+    "className": "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener",
+    "method": "onMessage",
+    "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;Ljava/lang/Runnable;Ljava/lang/Runnable;)V",
+    "testIds": [
+      "PT-JMS-PORT-003",
+      "PT-JMS-PORT-004",
+      "PT-JMS-PORT-006"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port003BothObserverEntriesCommitEachCallerDeliveryWithoutRollbackNotifications()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port004NullContractsRejectBeforeAnyMessageOrTransactionOperation()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port006BusinessFailurePreservesIdentityAndConfirmsRollbackInOrder()"
+    ],
+    "contract": "Preserves supplied attempted/confirmed callback order, two explicit deliveries commit twice, failure identity retained",
+    "exactOracleScope": "EXPLICIT_WRAPPER_CONTRACT_ONLY_NOT_ALL_CALLEE_BRANCHES",
+    "staticReviewStatus": "REVIEWED_WITH_STATED_LIMITS",
+    "coverageEvidence": "ORIGINAL_RUN23436_INDEPENDENT23438_NO_NEW_RUN",
+    "unverified": [
+      "actual broker/DB delivery/inbox dedup",
+      "all delegate/DLQ/fatal branches",
+      "005 message body read counter independently unmeasured",
+      "Error/rollback failure/observer failure not covered by these six cases"
+    ],
+    "sourceSha256": "7ed75f6a4a7a81a96ae5c95e9c6bba192d7f6fe2aa8437622cf5052ebea67df5",
+    "classSha256": "4bb579daefa2921c7e0763b2333a5a61219f32406976ac154ce8a3734b5d0ad6",
+    "requirementIds": [
+      "MQ-006",
+      "MQ-007",
+      "MQ-008",
+      "MQ-009",
+      "MQ-010",
+      "ASY-002",
+      "MON-003"
+    ],
+    "uiRefs": [
+      "213",
+      "231",
+      "235 section12",
+      "236 section14"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "f6dcecf979d9dbac0338aae079d5730f97ba53afaa3dd46db3e20ef49b21618d"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+      }
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "methodLinkAcceptedAsFullPT": false
+  }
+]

@@ -1,0 +1,78 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T15:39:27.104556+09:00",
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/617_listener_six_method_oracle_scope.json",
+    "sha256": "ba33caa1e9fa081548e45f13d09b39936183263bb839dad02911c217db78e25c"
+  },
+  "sourcePrograms": 2,
+  "explicitlyRelatedMethods": 6,
+  "originalSuccessfulTestCases": 6,
+  "assertionSnippetChecks": 24,
+  "assertionReviews": [
+    {
+      "testId": "PT-JMS-PORT-001",
+      "caseRef": "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port001QuestionPublicEntryForwardsDeliveryAndExactGoldenData()",
+      "declarationLine": 51,
+      "explicitlyCheckedAssertionSnippets": 5,
+      "independentExpected": "QWKREQ01/E/I total320 payload64; delivery3, exact synthetic transport ID and fixed received Instant; mode/process/commit once"
+    },
+    {
+      "testId": "PT-JMS-PORT-002",
+      "caseRef": "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port002WebLogPublicEntryForwardsLegacyProcessorAndExactGoldenData()",
+      "declarationLine": 77,
+      "explicitlyCheckedAssertionSnippets": 3,
+      "independentExpected": "WLGEVT01/E/I total2336 payload2080; legacy processor receives exact fixed message; mode/process/commit once"
+    },
+    {
+      "testId": "PT-JMS-PORT-003",
+      "caseRef": "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port003BothObserverEntriesCommitEachCallerDeliveryWithoutRollbackNotifications()",
+      "declarationLine": 90,
+      "explicitlyCheckedAssertionSnippets": 4,
+      "independentExpected": "Both listener observer overloads: two caller deliveries each process+commit once, no attempted/rollback/confirmed; context ownership retained"
+    },
+    {
+      "testId": "PT-JMS-PORT-004",
+      "caseRef": "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port004NullContractsRejectBeforeAnyMessageOrTransactionOperation()",
+      "declarationLine": 116,
+      "explicitlyCheckedAssertionSnippets": 5,
+      "independentExpected": "Processor/clock/context/message/observer null rejected as NPE contract failure, no normalisation; no transaction calls"
+    },
+    {
+      "testId": "PT-JMS-PORT-005",
+      "caseRef": "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port005NonTransactedContextsRejectBeforeBodyBusinessOrRollback()",
+      "declarationLine": 148,
+      "explicitlyCheckedAssertionSnippets": 3,
+      "independentExpected": "AUTO_ACKNOWLEDGE rejected with IllegalStateException after mode read; no business/commit/rollback; no body-read counter claim"
+    },
+    {
+      "testId": "PT-JMS-PORT-006",
+      "caseRef": "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port006BusinessFailurePreservesIdentityAndConfirmsRollbackInOrder()",
+      "declarationLine": 170,
+      "explicitlyCheckedAssertionSnippets": 4,
+      "independentExpected": "Same processor failure object; exact mode/process/attempted/rollback/confirmed, no commit or close, suppressed0"
+    }
+  ],
+  "methodOracleObservationScope": "WRAPPER_CONTRACT_ONLY_WITH_STATED_LIMITS",
+  "exactAllMethodCasesOrOracleComplete": false,
+  "originalBranchRatio": null,
+  "originalRunRepeated": false,
+  "productTestsExecuted": 0,
+  "newUniqueTests": 0,
+  "compilerOrJvmExecuted": false,
+  "actualBackendActions": 0,
+  "wholeDelegateAccepted": false,
+  "wholeG13Accepted": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "files": {
+    "method-oracle-relations.json": "6fad60e1e6aa302a9d5d18aaf74fbcccd1de30f98423b64cc9faa8180065bf94"
+  },
+  "tool": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/619_listener_method_oracle_review.py",
+    "sha256": "8956730454d64dbc47d3dd3981df0f17996b13cb7bdd640618381222a3ad3c8d"
+  }
+}
