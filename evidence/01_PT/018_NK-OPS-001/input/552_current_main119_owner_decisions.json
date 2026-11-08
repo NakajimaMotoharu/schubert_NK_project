@@ -1,0 +1,1887 @@
+{
+  "decisions": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudget.java",
+      "sourceSha256": "295ea9fd574937e40a600e5213077466774b712cc9a0425a9ec2c887880e6f55",
+      "owner": "WBS-P018-05",
+      "costOwner": "WBS-P018-05",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS342351/1870/PG-D637: API-local first-stop notification budget. This primitive clock owner creates no resource, worker, timeout override or permission. Caller integration must begin it at the first stop notification and preserve parent/Unit deadlines. It is not a measurement of systemd's earlier TERM delivery time or whole cleanup completion.",
+      "reason": "API first-stop budget integration belongs to ordinary API lifecycle, not a metric counter.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundConsumerGroup.java",
+      "sourceSha256": "a540f01769d36ddfcd0747c1c37097fd823757c8b95b7277e9b24d67a3bf2766",
+      "owner": "WBS-P005-03",
+      "costOwner": "WBS-P005-03",
+      "reviewedDeclaredResponsibility": "Parent-owned delivery admission, separate from blocking context cleanup. NK-MSG-001; MQ003/008; UI231; SS321/SSC314; BUG2407/YKT2152; PT-JMS-STOP-GROUP001. No new resource is acquired here.",
+      "reason": "Delivery admission, callback lifetime and cleanup interface preserves ACK/rollback contract SS321.",
+      "declaredProgramReferences": [
+        "NK-MSG-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS321",
+        "UI231"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayload.java",
+      "sourceSha256": "932b53486aa559e5c52a124c04a3a61b86c8fc01542e4deef69c559db849e996",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1800 APIPAY: pure legacy-ready plus approved custom text, no HTTP/health authority.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiDbPoolMetricBinding.java",
+      "sourceSha256": "31ee3b228bac039042dad7c2c458acb6ffe96ea42a475fff646dd1d667af7e3f",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS311342351/1825/PG-D621: non-resource borrowed pool metadata. No pool/config creation, connection, JMX lookup, controls, credential access or owner close. The caller retains the bean and registry owners throughout every refresh/snapshot use.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter.java",
+      "sourceSha256": "8c60f981ee23028f0566d61447fb2bffdad75008d3bb0e206c3e91d4cac1e6af",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1753/1757/BUG1697: app-owned atomic summary snapshots to standard histogram text. A borrowed source is never closed. No global exporter configuration, clock, file or network reads.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration.java",
+      "sourceSha256": "392d9c500076bb4898a859ee03f63990ca73b923508a2fc8a79f4454c8252e3b",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1785 APIGC: retain the fresh standard GC handle before activation. Caller owns the acknowledged handle and its close, including after partial bind failure.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics.java",
+      "sourceSha256": "3dcd35d8abdf8941f82d7d13b15072003d70598b64135928c0cf3efa156cd4bb",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1779 APIJVM: four standard non-closeable binders, no GC listener, registry lifetime, target process access or endpoint ownership.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog.java",
+      "sourceSha256": "c3d1fc99a2679fa8ef4e8ce19c4da32da376efba8cfb8c1dc8291ce8d0202979",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1773 APICAT: API-only closed sixteen-family label domains.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContext.java",
+      "sourceSha256": "613ffed97367b365ddbd84dddd5f8ed40df8a6a48fc018372331593b410534f5",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS311342351/1815/PG-D617: caller-held SDK context, not an endpoint, health authority or observation-completeness certificate. Setup retains borrowed non-resource bindings only; it must not acquire DB/JMS/workers or invoke this owner's lifecycle.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandler.java",
+      "sourceSha256": "16f24d090151ae319ddecb42af929e87e68ded3dbf655da055bc2a275b297654",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS342351/1817/PG-D618: borrowed metric HTTP boundary. No socket, lifecycle, health authority or implicit context initialization.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricScrape.java",
+      "sourceSha256": "5f37aad0fd0717c025cdda2a00b372c98e649bdfeb90f50917edc97b93dde1be",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1773 APIPOL: pure borrowed-source mode policy, no endpoint.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiObservationContext.java",
+      "sourceSha256": "dc1f0876ed10d03d1f60e23567ab6a541be0d61fd253006f83b6b17c55a132f0",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS311332342351/1868/PG-D636: caller-held observation and SDK assembly. Borrowed pool and original remaining stop budget never transfer ownership. Prepare acquires no connection, SDK or running thread; the caller retains this owner before initialize. Manager borrows metrics only. UNKNOWN retains this owner and forbids downstream pool/SDK release.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationPump.java",
+      "sourceSha256": "25eed3a03c68fd2f0bb7c68bf576239e238a2e2ecd4b4003ddc3d076348c2f41",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS311332342351/1862/PG-D634: caller-scheduled sampling/stop state. No thread, scheduler, pool or clock acquisition. Caller retains worker lifetime and original stop budget; factory only constructs resource-free one-shot owners before this pump holds them.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSource.java",
+      "sourceSha256": "1d2c0e44fab847e256b794a04bdabd3bf770db3deb59afe37c8e3a80faaccc3d",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS311332342351/1854/PG-D631: SDK-independent metadata source. Caller owns RO transaction, connection, clock and producer lifetime; no implicit worker or SQL from get/missing. A completed query is not an actual-source or freshness certificate.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java",
+      "sourceSha256": "fe7fbb7d9858f05579839ab7ce6b80ec58566d90dbfc0d13d69a73aa730319ea",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS311332342351/1858/PG-D632: a single readonly observation checkout. Borrowed pool/clock and a prebuilt UNKNOWN-retaining policy; no worker, SDK or publication. Actual callers must retain this owner before read, and retain the failed release frame on UNKNOWN.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter.java",
+      "sourceSha256": "08f9ab87b7cd994f70fbb47c352d1e22def6dd787ab73625e73e6779527999ff",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1771: API-owned scalar text, never a registry/resource owner.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiServiceMetricBinding.java",
+      "sourceSha256": "b5b1b2311eee1dee354a83a2b462925134cae033888c9775c69af84bf827659b",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS311332342351/1852/PG-D630: strongly retained non-resource metadata only. A snapshot source borrows immutable, already owned observations; it must not query, acquire connections/workers, reenter this context or operate on its SDK owner. Actual RO source/lifetime qualification is separate. Missing observations are NaN, never invented zero or readiness.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource.java",
+      "sourceSha256": "86c6210b1a321537cb63785678c6f0f0ef375548808bef5bd178be920773edb4",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1808/PG-D614: caller-held standard SDK text owner. No public registry access, endpoint, scheduler, health authority or implicit rollback/retry.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics.java",
+      "sourceSha256": "d43ac2b841fe471bfb4985d719e4a48a493a94bf11355b40b83b00ee0a2fec1f",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1793 APISTD: role-local standard SDK composition, not an endpoint.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics.java",
+      "sourceSha256": "869f450b660a3e711f2fe8246f32239fcef9a9ae8c30a07999063553374a7cf6",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1789 APISYS: two standard non-closeable binders, no GC listener, registry lifetime, target process access or endpoint ownership.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricCollector.java",
+      "sourceSha256": "e1acec700e97398c11aa2a690a87b84f0a4df5d00b01a12ad9da2660d257e138",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Owner-local collection/publication, not real connection admission, scheduler or outer deadline. RD171/UI252/SS331332351; PG-D541/ASYNCCONN001..008/spec1631.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder.java",
+      "sourceSha256": "bcbe814f37ba7a9cdba482369fa7ab70c5688713249ab780c35b6eeba3190cd6",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied full job counts, no DB/worker/control or real collector. RD171/UI252/SS324331351; PG-D539/ASYNCGAUGE001..008/spec1623.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector.java",
+      "sourceSha256": "e62f5a2eda99539f59e540ca4d54e9d70d99d7c4c25b0d30e75a98801a295515",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Owner-local borrowed getter publication only, not a real-pool collector startup. PG-D543/1639.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservation.java",
+      "sourceSha256": "9e3ef2251b559d4905787fe5ebf2154857e9190b03f54f0f26bb7363ddd78cfc",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Borrowed typed getters only; no pool/config creation, management lookup or controls. PG-D543/1639.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder.java",
+      "sourceSha256": "11a8f25926ef4727e019349b1965b97c456eb46f5f82d2697506610f12e4241c",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied API pool counts, not a pool getter/DB/management connection. PG-D542/POOLMET001..008/spec1635.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricCollector.java",
+      "sourceSha256": "ec89dd7ee618ea44a50067d99d0b26c9b1ee8ad247f3ec44adf4edc81927a4bb",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Complete supplied observations only; RD171/UI252/SS332351/1714, never query or clock authority.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorder.java",
+      "sourceSha256": "8e3719d6bb520ba2dde1acd9bdf37d0a1269c4cfcc83d6d34148c0ce76633e2a",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied durations for two monitoring-reader queries only, never SQL or clock authority. SS351;1712.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+      "sourceSha256": "20f47112dcc5776b4f18c190adbcd782c03355815adce2e380d23cf6d9551108",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "SS351/1723/BUG1678: exact cumulative finite SLO counts, without HDR range quantization.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationSupport.java",
+      "sourceSha256": "5750f04c6fd9b6453c3412323cbffdb60dfca37be224414ab94c24a9d3efde5b",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "SS351/1723/BUG1679: package-local exact-factory capability; no executable methods or initialization.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorder.java",
+      "sourceSha256": "e3a039040d777390abdb6e20e9157f50b0d638b695d34e89f87d26da5a4a9121",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied replay events only, never Inbox/DB/JMS/dedup authority. RD171/UI252/SS351;1691.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorder.java",
+      "sourceSha256": "80db82e8f57592a5b5cc1aded30fd72a3c8fe9d3ff813ac2c6fb45f832460b2f",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied MQ observation events only; RD171/UI252/SS321323351/1718, never delivery authority.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricCollector.java",
+      "sourceSha256": "51493fa1068d31c0652e30f4b899b82103eb74f7471ba14c97c2e2c391e064ae",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Owner-local supplied observation publication, no actual broker/management connection. SS351;1697.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorder.java",
+      "sourceSha256": "ff09f8d1258c04d3b6d59136310a8d9681fe7f6172258d08d079c36f972d204d",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied MQ pressure only; no Artemis management/JMS/control. RD171/UI252/SS321351;1693.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorder.java",
+      "sourceSha256": "6446a7eb3accec378ceeeb0f4c85bfd6f4f1a39af82bce866333794dacbd986b",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "One approved layout's supplied MQ durations; RD171/UI252/SS321323351/1716, no JMS or clock.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorder.java",
+      "sourceSha256": "0f83ae3cc38efc4f5b0b96dac3623023a96393a6da61365111d4d3c29fb6c05c",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied delivery-count observations only, no JMS/read/retry. RD171/UI252/SS321351;1695.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorder.java",
+      "sourceSha256": "74cef118229b3163b561702d8001e9cd0509bcc6ff6d6a56d2ccccf98de9de55",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied mismatch observation only, no token/HMAC/key/authentication access. PG-D544/1643.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder.java",
+      "sourceSha256": "dd027385f27bbe03bebbd5e7dd67a78626d8e27550eb1ed7428e876fc3ab9700",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "SS351 supplied API outbox ages only, not a clock/SQL/dispatcher. PG-D546/1660.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollector.java",
+      "sourceSha256": "db5801d5f2627d4dbbda16cdec6d75165e01a789101d77e732a6c7e3d35434ea",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Owner-local read/close/publication, not actual source or outer deadline. PG-D548/1668.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder.java",
+      "sourceSha256": "c0d709475517e31192afe8486be24f7a88232a87dd43d0db4e77ce34dd78a7d5",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied API outbox row counts only, no SQL/dispatch/oldest-age/Web-store access. PG-D545/1647.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorker.java",
+      "sourceSha256": "8bd8e156ff5038f7e5783865523913e2a0cf6188d674de05c9892ccecc6b0bbf",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS311332342351/1864/PG-D635: caller-held observation worker. No pool/credential acquisition. Retain before start; a failed stop must retain this exact owner and borrowed-pool frame through the existing UNKNOWN policy, not continue downstream cleanup.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java",
+      "sourceSha256": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "API metric data only, never database/runtime admission or public endpoint authority.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [],
+      "metadataOnly": true,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/AsyncJobCountRepository.java",
+      "sourceSha256": "e337ab556b1e6b7033626ab57740c11f4b13e35ae446a582f20f41f344f66b76",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Borrowed caller-owned readonly transaction only, not real DB/role/runtime admission. RD171/UI252/SS331332342351; PG-D540/ASYNCDB001..008/spec1627.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+      "sourceSha256": "90b0d76c02ba974dc22034fe8a13003fb93298105b5f3b3e53f1f90d99544f16",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Borrowed readonly observation only; no real DB/runtime admission. PG-D547/OUTBOXDB001..010/1664.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sourceSha256": "4a461128998ebb7debb2ba1b6f978d1eb4e6e92920f21d20d4e2b2d2dd1ccb61",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "One pure alert key, never a live observer/controller. NK-OPS-001/P018-09; MON005..009/013; UI252 §6; SS351 §7/SS-D044; PG-D519/PT-OPS-ALERT-001..010.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+      "sourceSha256": "fdf1f76469def079db2cb9298c3ff3f19cd264979f0b6b4a9deaa613ba34ca00",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Finite72-key owner, no dynamic labels/targets. NK-OPS-001/P018-09; MON005..009/013; UI252; SS351 §7; PG-D519/PT-OPS-ALERTREG-001..004.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+      "sourceSha256": "6d1de8fc1244404c393f0564aadca13604473e23cc2aa1435db98e04d55e60e0",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Pure evaluation of caller-owned observations, never a collector/controller. NK-OPS-001/P018-09; MON005..009/013; UI252 §6; SS351 §7; PG-D520/PT-OPS-THRESH-001..014.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS321",
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AsyncQueueMonitor.java",
+      "sourceSha256": "b49f2695a1c28aee4656572881ce7e5832fcefa741afa768dd74456c9a9bccce",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied backlog evidence only; no broker/DB/controller. RD171/UI252/SS321/351; 1679/BUG1665.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS321",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitor.java",
+      "sourceSha256": "6a6ccf4756364c7b18aa6c3b6aad95b6458a986ade1debc52e50065c2453e4fd",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied Backup health only, no backup invocation/status discovery. RD171/UI252/SS351; 1683.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchGcMetricRegistration.java",
+      "sourceSha256": "c568f95ff92ee209d87bd8146cdb0a783a01c17187f17a1f7dc3ce83b5f88c1a",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1787 BATCHGC: retain the fresh standard GC handle before activation. Caller owns the acknowledged handle and its close, including after partial bind failure.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchJvmMetrics.java",
+      "sourceSha256": "db67d6b34f746b3e118df49397d79cb9e7a9e22240e4f28967a4c931745739ec",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1781 BATCHJVM: four standard non-closeable binders, no GC listener, registry lifetime, target process access or endpoint ownership.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricContract.java",
+      "sourceSha256": "ee933bc6a1237c89ffb8e6f92dabf05d9ed8010991e4460f7f72161d304c261a",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Closed persisted-step terminal labels, not an admission or true terminal proof. RD171/UI252/SS341351; PG-D536/BATCHMET001..005/spec1611.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricLabelPolicy.java",
+      "sourceSha256": "b0f223272358c324da36d01bf6ba76bf788aef21e11990895053361b0081048e",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS341351/1775 BATCHLABEL: Batch-only values, no writer/resource owner.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricRecorder.java",
+      "sourceSha256": "248563d0e9454cb496734c8d6c5b167c0ba3a7cc7fc9bcf6aca0e808c539a12d",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Borrowed dedicated registry, no actual Batch/DB/persistent-source operations. RD171/UI252/SS351; PG-D536/BATCHREC001..008/spec1611.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricText.java",
+      "sourceSha256": "fb97c042be19ccf1d56f0204fe74cb261b476a21527f6bf5d6d529adcd9af483",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1777 BATCHTEXT: closed six-family scalar text, not a general-purpose exporter or resource owner. Labels are fixed ASCII enums/suffixes, never arbitrary text to escape.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchStandardMetricSource.java",
+      "sourceSha256": "cf99b34c95dec1f63c0d3a6366d93caaa1614e98b94f622b0fbedd6043129752",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1810/PG-D615: caller-held standard SDK text owner. No public registry access, endpoint, scheduler, health authority or implicit rollback/retry.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchStandardMetrics.java",
+      "sourceSha256": "ace9052e07b2c255d6911cd206bcdd50398b424e3031bf9754a45391e8fb5213",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1795 BATCHSTD: role-local standard SDK composition, not an endpoint.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchSystemMetrics.java",
+      "sourceSha256": "f45551f03bf07f528dbe8d8316459d843aac1393d4fe02ba3a82621d4ee19339",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1791 BATCHSYS: two standard non-closeable binders, no GC listener, registry lifetime, target process access or endpoint ownership.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+      "sourceSha256": "89b651524b151fc772903dfd4a29bfa8bc41eb6984c9ca646d555363bba614ca",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Caller-declared sample continuity only, never actual observation or clock authority. NK-OPS-001/P018-09; MON005..013; UI252; SS351 §7/10; PG-D523/MONWINDOW001..008.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor.java",
+      "sourceSha256": "7a7cf67fa4933164397ed40e4fe9ef058d41c61d747429c0fe4859bd389fb3aa",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Current-entry DLQ health only, no browse/replay/delete/incident authority. RD171/UI252/SS351;1689.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ExpiryBacklogMonitor.java",
+      "sourceSha256": "5ec570e2f061c1585202de1661c3635d5f0a50bf0e71243c0ade7a1ef41688b2",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied count health kernel only, never a queue read/purge/control. PG-D551/1676; SS351.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthMonitor.java",
+      "sourceSha256": "743174197f0e519877ef7580ca7dedffbe4235d47385425162def9b778b926a6",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "One health-input-to-alert path; no scheduler, path ownership, control action or resource close. NK-OPS-001/P018-09; RD171/UI252/SS351; PG-D529/FSINPUT008..010/spec1582.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservation.java",
+      "sourceSha256": "d490ac5e7946eaf67c1da504cb05a7e8e16ccd0aae0282f69f070e302574cb7d",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Borrowed filesystem health input, not a custom metric/exporter or path admission authority. NK-OPS-001/P018-09; RD171/UI252/SS351; PG-D529/FSINPUT001..007/spec1582.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/HealthUsageRatio.java",
+      "sourceSha256": "99972961fe20b5b4ce765ff650b8176e73e85395ef5d1e8b08f077f4debf2749",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Health input conversion only; PG-D531/HEAPINPUT001..009/spec1591, SS351 integer thresholds.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/IntegrityFailureMetricRecorder.java",
+      "sourceSha256": "5c69cafae687001f301214675d980e600b9c5bb095a0017f1f77508f84fb9fb0",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied Batch integrity events, never a probe, repair or alert-retirement authority. SS351;1708.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitor.java",
+      "sourceSha256": "d13bb97566a1c16b57e1ff6c89269dcd82d68337deefe2d16975441611c59680",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied failure count only, no integrity probe/repair/retirement. RD171/UI252/SS351; 1687.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitor.java",
+      "sourceSha256": "078e0bb6b18fc1c3e4d29771adaeec0c43688827357d65610091ebd36223810a",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Borrowed heap input/time to one alert owner, no actual JVM control or provider admission. NK-OPS-001/P018-09; RD171/UI252/SS351; PG-D533/HEAPCONN001..008/spec1599.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthObservation.java",
+      "sourceSha256": "607283fa1451eb126c74d98ab5e41cbb36c66913a7fe40f06a9d14bbbcdcf119",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Borrowed heap-read capability only, never GC/control/dump or an exporter replacement. NK-OPS-001/P018-09; RD171/UI252/SS351; PG-D531/HEAPINPUT001..009/spec1591.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MetricContract.java",
+      "sourceSha256": "056bb329bb251189434c73b8914141be9974b50686f7df227b8ef935e4bc93f8",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Closed metadata only, not a metric recorder/exporter or label-value policy. NK-OPS-001/P018-09; MON005/006/009/013; UI252; SS351 §6/10; PG-D518/PT-OPS-METRIC-001..006.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+      "sourceSha256": "9eb653ff3b80236306ed03e7621b3d6dc6d4d86764760ba625aa7f203118da73",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Non-I/O mode contract. NK-OPS-001/P018-09; MON010..013; UI252 §5; SS351 §8; PG-D517/PT-OPS-MONMODE-001..007. This policy never starts/stops services or changes log level.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.java",
+      "sourceSha256": "698e7630ddfbd10e195c4c1c31d767818494bb53d592595e23a8dc1eae7fd95f",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Borrowed UTC and monotonic tick ports, not actual clock/owner or consecutive-sample proof. NK-OPS-001/P018-09; RD171/UI252/SS351; PG-D530/OBSCLOCK001..008/spec1586.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+      "sourceSha256": "e0d60836a26f9b4f6d2df13085967fb7297bc280ee1ea7352bffd1b845ee2e93",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "One pure policy-to-alert connection, not runtime health or a service controller. NK-OPS-001/P018-09; MON005..013; UI252; SS351 §7..10; PG-D521/PT-OPS-MONPIPE-001..007.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+      "sourceSha256": "74da16e79b84ad392e13f7fdcd84b3fdc79f56c682ef859dd23eda5a0d671d6f",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Internal one-owner sequence/gap guard, not a scheduler or timeout/control authority. PG-D533.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.java",
+      "sourceSha256": "31b30e2b7ad7d3dcdb0dd9df1e0d4bd00c3c9f694443955ad600709d0485dc8a",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied values only: not a structured-log event, readiness, owner or actual observation proof. No I/O or arbitrary text input. NK-OPS-001/P018-09; MON005..013; UI252; SS351 §7; PG-D522/PT-OPS-MONSTATUS-001..006.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+      "sourceSha256": "5685db8a219acb224d463f9372c403ad9dfe36ac1d0c6a0fad308d377454cb26",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Immutable values, not proof of actual source/owner/cause clearance. NK-OPS-001/P018-09; MON005..013; UI252; SS351; PG-D521/PT-OPS-MONPIPE-001.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ProcessRestartMetricRecorder.java",
+      "sourceSha256": "9bcc34883a02ba53a9c1d8fcf4f9f5fad64d4f780fb27c4ae64e3ffc84dc7a2f",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied restart events only, never process observation or restart permission. SS351;1710.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitor.java",
+      "sourceSha256": "112fa27e786799f6650a2be23e81398a1ab83590b0925e89bbaf752031e1d9a8",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied restart health only, not systemd/history/control. RD171/UI252/SS351; 1685/BUG1668.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+      "sourceSha256": "bf02bb6b387398ce3a0f5f1229b1df747284eef521946984a7d37d834a4ac649",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied pool values only, no JDBC/provider sampling or control. RD171/UI252/SS351; PG-D534/DBTIME001..008/spec1603.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+      "sourceSha256": "f5419d0ad5c8403e7bc09911833f57f3f6f1ce4aebc88824c67bd95ec7e11729",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied filesystem samples only, never an actual collector, source or control authority. NK-OPS-001/P018-09; MON005..013; UI252; SS351 §7/10; PG-D524/TIMEDFS001..006.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+      "sourceSha256": "e17c6174e193584fcc681d26706390d165c7a29b7ea1c77a13ac3a7eb54566e4",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied heap observations/reports only, never catches real OOM or grants process control. NK-OPS-001/P018-09; RD171/UI252/SS351; PG-D532/HEAPTIME001..008/spec1595.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+      "sourceSha256": "fb6e3e4efc7d43f537bbe830537bfccd133f759640943be3f0204e83a92dd7a9",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied p95 only, not a percentile calculator or real endpoint. RD171/UI252/SS351; PG-D535/SYNCTIME001..008/spec1607.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor.java",
+      "sourceSha256": "3c247ca6424505d64b17c346023cc6f776d44c37dc675392c74f21f63b886746",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied-count alert/metric connection only, not real collection or admission control. RD171/UI252/SS341351; PG-D538/TRANSFERCONN001..008/spec1619.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder.java",
+      "sourceSha256": "69ed366f5ae4f60315bacff13e904285f860c4e58953e0827a4396bdb14b2c29",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied immutable transfer counts, not secure-walk/owner or cleanup authority. RD171/UI252/SS341351; PG-D537/TRANSFERMET001..008/spec1615.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/WebLogBacklogMonitor.java",
+      "sourceSha256": "cc4c53b4cf443a5ec862923ec56f1671a7e1094695ec7901f22652861ebcfafe",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied backlog evidence only; no broker/DB/controller. RD171/UI252/SS351; PG-D549/1672.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+      "sourceSha256": "009823dd0566a5c0e2a7f06af4b540c122629bec50003bc1585d5303c488d924",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Pure monitoring contracts; NK-OPS-001, MON010..013, UI252, SS351, PT-OPS-MONMODE.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": true,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+      "sourceSha256": "d459337184c187b8d37a97989b8b9791d6a41fe549b8361d1c22055ee37a9607",
+      "owner": "WBS-P018-03",
+      "costOwner": "WBS-P018-03",
+      "reviewedDeclaredResponsibility": "SSC239 Linux LP64 libsystemd public sd-bus ABI, fixed local socket and fixed read properties. NK-OPS-001/OPS009/SYS002/UI251/SS343354; PT-OPS-MANAGER817007..012. ABI: systemd v257 sd-bus.h, independently rechecked for the deployed Ubuntu library. No environment bus address, process/shell, fallback, mutable state cache or remote endpoint.",
+      "reason": "Shared fixed system-manager observation under SSC239/295; exact existing LinuxSystemdQuery responsibility owner.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI251"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java",
+      "sourceSha256": "6affd57005221db2b1d112da3449f8c26085edf21ed132d8abfc9fdb3a5afacb",
+      "owner": "WBS-P018-03",
+      "costOwner": "WBS-P018-03",
+      "reviewedDeclaredResponsibility": "SSC239/295 shared fresh fixed system-manager read, never a service action or cached authorization. NK-OPS-001/OPS009/SYS002/UI251/SS343354; PT-OPS-MANAGER817001..006. One owned connection per read; uncertain close retains the capability and refuses a next read.",
+      "reason": "Shared fresh system-manager owner/identity observation; not service actions, same existing fixed-query owner.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI251"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java",
+      "sourceSha256": "8b22ea28c7a14624bb86b6a8b80661460d446418b61b76c42cdbba7f7f74dfbb",
+      "owner": "WBS-P005-03",
+      "costOwner": "WBS-P005-03",
+      "reviewedDeclaredResponsibility": "Permanent wire isolation failed: do not ACK, retry business, or report committed isolation. The caller must stop its receiver even when rollback returned normally. No provider text or throwable graph search determines this phase; the isolation/rollback outcome and protocol remain available. <p>NK-MSG-001; RD MQ008/010; UI231; SS321§7/322§11/352; PG-D442; PT-JMS-ISO001..012.",
+      "reason": "MQ008/010 stop-receiver outcome after failed permanent isolation; SS321 ACK/rollback lifetime.",
+      "declaredProgramReferences": [
+        "NK-MSG-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS321",
+        "UI231"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java",
+      "sourceSha256": "4ca8f9a3d350557e66b026eb96753c6cac7fe14c3204fc302af86f0dd2795938",
+      "owner": "WBS-P005-03",
+      "costOwner": "WBS-P005-03",
+      "reviewedDeclaredResponsibility": "A receiver must stop rather than reuse a transaction whose rollback did not return normally. The original failure and rollback failure retain their identities; neither provider text nor a throwable-graph search is needed to classify this internal outcome. <p>NK-MSG-001; RD MQ008/010; UI231; SS321 section 7/352; PG-D441; PT-JMS-UNC005..008.",
+      "reason": "MQ008/010 unknown rollback outcome stops the receiver; SS321 consumer lifetime.",
+      "declaredProgramReferences": [
+        "NK-MSG-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS321",
+        "UI231"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+      "sourceSha256": "9ce1a469cbe242ba480fb6cc474bea4842b84466ef35d5ff4cf7cfca3f16e5e2",
+      "owner": "WBS-P006-03",
+      "costOwner": "WBS-P006-03",
+      "reviewedDeclaredResponsibility": "Closed QA054/UI235/SS312351 projection kinds; no actor authorization or backend operation.",
+      "reason": "QA054/UI235 closed HTTP-log projection kinds used by Web producer/outbox before send; same WebRequestLogProducer owner.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "UI235"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContract.java",
+      "sourceSha256": "019f126d38fdfbfd60baf8f38c254201db2427e7a0c2087e052712812a889c03",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Closed WEB labels before Micrometer binding, not a collector, exporter or readiness proof. NK-OPS-001/P018-09; RD171 MON005..013; UI252; SS313/351; PG-D526/HTTPMETRIC001..006.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS313",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorder.java",
+      "sourceSha256": "9ca3687779ab82d12966d3300d35d7acd8320e6020ad2d8acd0e829b55990483",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Borrowed dedicated registry; actual HTTP/source/owner and exposition are not proven here. NK-OPS-001/P018-09; RD171/UI252/SS351; PG-D527/HTTPREC001..009/spec1573.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricValve.java",
+      "sourceSha256": "f7dd88544d4d690d19a519488904e058a4ee8c2d8b7595c75b0494b872204a75",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Borrowed terminal metric observer, after the existing request trace valve; no HTTP/registry owner. NK-OPS-001/P018-09; RD171/UI252/SS312351; PG-D528/HTTPTERM001..008/spec1577.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/MediaBytesMetricRecorder.java",
+      "sourceSha256": "e15d13589cf2a7e4faf0583ff2b6343847eaa357f79a2e215252bcc0be4ae413",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied terminal media byte counts only, not delivery/HTTP success. SS333351;1706.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollector.java",
+      "sourceSha256": "8361006db20fb7346ad0faa6adc3521dd8877ccd9866c3684f57109f0a60d4f6",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Borrowed supplied stream observation, not a real stream/admission or HTTP adapter. RD171/UI252/SS333351;1704/MEDIACONN001..008.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricRecorder.java",
+      "sourceSha256": "e8caeff091b9ba3820cad256db365949bc277254651e01246193da4c534acd15",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied active-stream observations only, not media open/close/admission. RD171/UI252/SS333351;1702.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeDurationSupport.java",
+      "sourceSha256": "9e16eee7268e7d6f4d5821d1e61411eacf74568b8871424ba90f41edd2caaca2",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "SS351/1725/BUG1681: package-local exact factory capability, no executable members.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry.java",
+      "sourceSha256": "29df7d74914a7a854c8d9ea345056ede3ca4d60cc0100f7c51b23efb2851a5a5",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "SS351/1725/BUG16811683: public Timer composition, no optional protected SDK hierarchy.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "SS351"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporter.java",
+      "sourceSha256": "a2524762cdc76d3f430cc76a6caf884cef86f39e61d341f399251006dee551d2",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1759 COUNTENC: Web-owned finite Counter text.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayload.java",
+      "sourceSha256": "bec3ebee4b555ed96ae14813c7c0e48744dd20c35b294c55ce791a14af527d44",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1800 WEBPAY: pure legacy-ready plus approved custom text, no HTTP/health authority.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricBinding.java",
+      "sourceSha256": "2ea187f82ff17dea4e1597ac2802cc72bb83b6c9cec2bfb7cadfb079753b1946",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS311342351/1825/PG-D621: non-resource borrowed pool metadata. No pool/config creation, connection, JMX lookup, controls, credential access or owner close. The caller retains the bean and registry owners throughout every refresh/snapshot use.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollector.java",
+      "sourceSha256": "dc1b278e0d111128b2679b7943ae1cabe56ea55eb7cbdc0104503e2b99a46210",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Owner-local borrowed getter publication only, not a real-pool collector startup. PG-D579/1728.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservation.java",
+      "sourceSha256": "327d739bd9ca972fe535baf86dfbe3d1e01a32f921f98c1a1114ab3ad302f021",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Borrowed typed getters only; no pool/config creation, management lookup or controls. PG-D579/1728.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java",
+      "sourceSha256": "059f2723ecf118084c7b192d28f5d86a9e6e91e4769195efaec7300b54891a24",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Supplied Web pool counts, not a pool getter/DB/management connection. PG-D579/WEBPOOLMET001..008/spec1728.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporter.java",
+      "sourceSha256": "a57917dc639fc2b920a22e97abae60e48cb0ca590e917737acef1902dfa3f49c",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1757/BUG1697: app-owned atomic Timer/ns snapshots to standard histogram text. A borrowed source is never closed. No global exporter configuration, clock, file or network reads.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporter.java",
+      "sourceSha256": "63804a5937d78024748f2013e9f74fc5293e4174137599d5dfee4790dab00022",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1761 GAUGEENC: Web-owned standard Gauge text, including explicit unknown NaN.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistration.java",
+      "sourceSha256": "2f75b4bd051580a5a5420b481ffb8beb5f00ef5707bbfc9ec8102cfd78e76af8",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1787 WEBGC: retain the fresh standard GC handle before activation. Caller owns the acknowledged handle and its close, including after partial bind failure.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebJvmMetrics.java",
+      "sourceSha256": "5123139871a0b35ec106d067c6c8eab4b2b8a2e449c2ead53f54e1e797799b71",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1781 WEBJVM: four standard non-closeable binders, no GC listener, registry lifetime, target process access or endpoint ownership.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalog.java",
+      "sourceSha256": "dc32190fea57bb5e2082bc9bd52f3db51873c149cb4d23a524b0ca21dba6e17b",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1763 WEBCAT: Web-only seven-family closed value catalog.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricContext.java",
+      "sourceSha256": "75eb5457ae1a264b1606ef910fed53b148075456992c534a58f28455b1952b4f",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS311342351/1815/PG-D617: caller-held SDK context, not an endpoint, health authority or observation-completeness certificate. Setup retains borrowed non-resource bindings only; it must not acquire DB/JMS/workers or invoke this owner's lifecycle.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricHttpHandler.java",
+      "sourceSha256": "0d066f35414a1396f786a90ba97bc16479ed53a89daf42fc1c73224c19d209cc",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS342351/1817/PG-D618: borrowed metric HTTP boundary. No socket, lifecycle, health authority or implicit context initialization.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricScrape.java",
+      "sourceSha256": "8eede3e2f4e31276765a6b9eb13eac2da118102aad8fef73647d0c08e10031d0",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1769 SCRAPE001..014: pure borrowed-source mode policy.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricText.java",
+      "sourceSha256": "082d4e882e21f430d8ccac9e01b7796ea722103fc144465f4ccc64aebf23d375",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1759: stateless text support owned only by Web.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollector.java",
+      "sourceSha256": "110e730c16f77a5b87a6a2a31a49e4e82feb45da3eb6393c8336d7c0004b322a",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Private-owner readonly acquisition through complete publication; no real DB or scheduler admission.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder.java",
+      "sourceSha256": "08425aad41ff6a7d17b0a2307392e888a8bbebf21189515573a301439eeae8eb",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Complete supplied Web technical-outbox observation only; RD171/UI252/SS332351/1721.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepository.java",
+      "sourceSha256": "8eead2d8cdf54cec5ce702117a34074c7d55b5ea454cfc8f001f770eae09d5c5",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "Borrowed explicit readonly Web technical-schema observation, not connection/transaction authority.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [],
+      "declaredDocumentReferences": [],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource.java",
+      "sourceSha256": "79b6691a61e4fc6cb716d7fe84a6390b7272df3d0944e693003bcdb51798a12c",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1810/PG-D615: caller-held standard SDK text owner. No public registry access, endpoint, scheduler, health authority or implicit rollback/retry.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetrics.java",
+      "sourceSha256": "18d8487e76e869b11147bab3786d7e765148d624b1a85c18dce33324e1eeca37",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1795 WEBSTD: role-local standard SDK composition, not an endpoint.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebSystemMetrics.java",
+      "sourceSha256": "3109070e589ccf2b8773a8aa49f74316f2db3c48a2d27747d733379d4f45d6b9",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "NK-OPS-001/RD171/UI252/SS351/1791 WEBSYS: two standard non-closeable binders, no GC listener, registry lifetime, target process access or endpoint ownership.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351",
+        "UI252"
+      ],
+      "metadataOnly": false,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/package-info.java",
+      "sourceSha256": "d59b108c0d1da342135c1536f8151986cb87cc8b58a919acb9e095c9be295b9d",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "reviewedDeclaredResponsibility": "HTTP metric label metadata only; NK-OPS-001/SS351/HTTPMETRIC001..006.",
+      "reason": "Reviewed declared observation/metric/health-policy/export responsibility below: shared Log/metric/alert catalog WBS-P018-09 and SS351; not authority for the observed business object.",
+      "declaredProgramReferences": [
+        "NK-OPS-001"
+      ],
+      "declaredDocumentReferences": [
+        "SS351"
+      ],
+      "metadataOnly": true,
+      "scope": "SOURCE_PATH_RESPONSIBILITY_ONLY_NO_METHOD_OR_REQUIREMENT_ACCEPTANCE"
+    }
+  ],
+  "authorityReferences": [
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916",
+      "authority": "origin/main"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "7b7fa625dafafdf6e39248bd465375012af03bd165afb9fdb3514fb8d357bdd2",
+      "authority": "current approved WBS"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23848-main119-role-observations-v1/source-role-observations.json",
+      "sha256": "91e13d080a88e8c9f249901175d562de1c2371176e7db2189558dc49535d9702",
+      "authority": "current normal source declarations"
+    }
+  ],
+  "manualExceptions": {
+    "ApiStopBudget.java": [
+      "WBS-P018-05",
+      "API first-stop budget integration belongs to ordinary API lifecycle, not a metric counter."
+    ],
+    "InboundConsumerGroup.java": [
+      "WBS-P005-03",
+      "Delivery admission, callback lifetime and cleanup interface preserves ACK/rollback contract SS321."
+    ],
+    "LinuxSystemdSession.java": [
+      "WBS-P018-03",
+      "Shared fixed system-manager observation under SSC239/295; exact existing LinuxSystemdQuery responsibility owner."
+    ],
+    "SystemManagerObservation.java": [
+      "WBS-P018-03",
+      "Shared fresh system-manager owner/identity observation; not service actions, same existing fixed-query owner."
+    ],
+    "FailedJmsIsolationException.java": [
+      "WBS-P005-03",
+      "MQ008/010 stop-receiver outcome after failed permanent isolation; SS321 ACK/rollback lifetime."
+    ],
+    "UnconfirmedJmsRollbackException.java": [
+      "WBS-P005-03",
+      "MQ008/010 unknown rollback outcome stops the receiver; SS321 consumer lifetime."
+    ],
+    "WebHttpLogKind.java": [
+      "WBS-P006-03",
+      "QA054/UI235 closed HTTP-log projection kinds used by Web producer/outbox before send; same WebRequestLogProducer owner."
+    ]
+  },
+  "sourceBodiesAsDataOnly": true,
+  "oldModuleOrPackageNameAloneGrantsOwner": false
+}
