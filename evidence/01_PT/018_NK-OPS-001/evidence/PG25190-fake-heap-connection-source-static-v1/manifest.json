@@ -1,0 +1,61 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T07:16:57.480299+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitorTest.java",
+      "originalSha256": "25cdfa418c2332c29ead8b3f3f60f084ff0ad5d7a8aec0042c715c1d3b8730ce",
+      "currentSha256": "19a77f9de9f00ede6e32694ebb7bcdba06d22f0c7d63deeca53245f828586e6f",
+      "originalWholeBodiesExactlyRestored": true
+    }
+  ],
+  "originalWholeCases": 8,
+  "rawFindings": 5,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 1,
+  "finiteOwnerSitesCorrected": 1,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25188-fake-heap-connection-owner-prepare-v1/manifest.json",
+    "sha256": "d5f47d83e460c44dc7f42dd707a2788240048a2d3e770db1bbbc3a201d8996fa"
+  },
+  "classifications": [
+    {
+      "line": 225,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64fake callbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10. No webapp runtime worker or real MXBean/Clock."
+    },
+    {
+      "line": 225,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64fake callbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10. No webapp runtime worker or real MXBean/Clock."
+    },
+    {
+      "line": 234,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64fake callbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10. No webapp runtime worker or real MXBean/Clock."
+    },
+    {
+      "line": 237,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64fake callbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10. No webapp runtime worker or real MXBean/Clock."
+    },
+    {
+      "line": 238,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64fake callbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10. No webapp runtime worker or real MXBean/Clock."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

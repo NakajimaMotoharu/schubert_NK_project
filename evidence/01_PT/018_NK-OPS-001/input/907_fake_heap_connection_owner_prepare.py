@@ -1,0 +1,23 @@
+"""One original fake heap Test source; current static tools and explicit memory graph."""
+from pathlib import Path
+import datetime,hashlib,json,os,xml.etree.ElementTree as E
+import pg9666_pagination_static as stage
+R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';TC=R.parent/'toolchain';S=R.parent/'pgpt-runs/PG379/pg25188-fake-heap-connection-owner-prepare-v1';O=B/'evidence/PG25188-fake-heap-connection-owner-prepare-v1';assert not S.exists() and not O.exists();sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();load=lambda p:json.loads(p.read_bytes());before=load(B/'evidence/PG25186-fake-heap-connection-owner-before-v1/manifest.json');tests=[R/r['path'] for r in before['sources']];assert len(tests)==1 and tests[0].stem=='JvmHeapHealthMonitorTest'
+normal=R.parent/'pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/manifest.safe.json';assert sha(normal)=='b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27';nm=load(normal);S.mkdir();stage.SLOT=S
+steps={};steps['format']=stage.step('format',[str(TC/'jdk-25.0.4/bin/java'),'-jar',str(TC/'google-java-format-1.36.1-all-deps.jar'),'--replace',*map(str,tests)],R,timeout=60);assert steps['format']['actualExit']==0
+static=TC/'static-gates-20261015';rules=R/'tools/quality/static';pmd=[static/'record-fix-v1/pmd-record-1298.jar',*sorted((static/'pmd-bin-7.28.0/lib').glob('*.jar'))];console=TC/'junit-platform-console-standalone-1.13.4.jar';annotation=TC/'m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar';jars=[Path(nm['jars'][n]['path']) for n in ['batch']]
+for n,p in zip(['batch'],jars):assert sha(p)==nm['jars'][n]['sha256']
+aux=os.pathsep.join(map(str,[*jars,console,annotation]));filelist=S/'source-list.txt';filelist.write_text('\n'.join(map(str,tests))+'\n');jdk=TC/'jdk-25.0.4/bin'
+steps['pmd']=stage.step('pmd',[str(jdk/'java'),'-cp',os.pathsep.join(map(str,pmd)),'net.sourceforge.pmd.cli.PmdCli','check','--file-list',str(filelist),'--rulesets',str(rules/'pmd.xml'),'--use-version','java-25','--minimum-priority','5','--aux-classpath',aux,'--no-cache','--format','xml','--report-file',str(S/'pmd.xml')],S,timeout=120)
+steps['checkstyle']=stage.step('checkstyle',[str(jdk/'java'),'-jar',str(static/'checkstyle-14.3.0-all.jar'),'-c',str(rules/'checkstyle.xml'),'-f','xml','-o',str(S/'checkstyle.xml'),'@'+str(filelist)],S,timeout=90)
+reports={}
+for name,tag in [('pmd','violation'),('checkstyle','error')]:
+ root=E.parse(S/(name+'.xml')).getroot();ns=[n for n in root.iter() if n.tag.rpartition('}')[2]==tag];errors=[n for n in root.iter() if n.tag.rpartition('}')[2] in ['error','configerror']] if name=='pmd' else [];assert not errors
+ reports[name]=dict(rawFindings=len(ns),processingErrors=0,findings=[dict(n.attrib,message=' '.join(''.join(n.itertext()).split())) for n in ns])
+assert steps['pmd']['actualExit'] in [0,4] and steps['checkstyle']['actualExit']==0 and reports['checkstyle']['rawFindings']==0
+assert [p.read_text().count('@Test') for p in tests]==[8]
+assert sum(p.read_text().count('invokeAll(jobs, 10, TimeUnit.SECONDS)') for p in tests)==1 and sum(p.read_text().count('.shutdownNow();') for p in tests)==1 and sum(p.read_text().count('.awaitTermination(10, TimeUnit.SECONDS)') for p in tests)==1
+O.mkdir()
+for n in ['pmd.xml','checkstyle.xml','format.stdout','format.stderr','pmd.stdout','pmd.stderr','checkstyle.stdout','checkstyle.stderr']:(O/n).write_bytes((S/n).read_bytes())
+v=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),productionCoreMain=nm['source'],testSourceHashes={str(p.relative_to(R)):sha(p) for p in tests},stages=steps,reports=reports,toolHashes={str(p):sha(p) for p in [TC/'google-java-format-1.36.1-all-deps.jar',static/'checkstyle-14.3.0-all.jar',rules/'pmd.xml',rules/'checkstyle.xml',*pmd,console,annotation]},productTestsExecuted=0,newAcceptance=0,formalUpdated=False,effortRate=None,staticApplicabilityPending=True,files={p.name:sha(p) for p in O.iterdir()},toolSha256=sha(Path(__file__)))
+(O/'manifest.json').write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,pmdRaw=reports['pmd']['rawFindings'],rules=sorted({v['rule'] for v in reports['pmd']['findings']}),checkstyle=0,manifestSha256=sha(O/'manifest.json'))))

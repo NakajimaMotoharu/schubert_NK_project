@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.Test;
 
@@ -221,7 +222,8 @@ class JvmHeapHealthMonitorTest {
     usage(fixture, 900);
     var monitor = new JvmHeapHealthMonitor(fixture.bean, Service.BATCH);
     var first = monitor.observe(true, false, context(0)).event().orElseThrow();
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var jobs =
           java.util.stream.IntStream.range(0, 64)
               .<Callable<Severity>>mapToObj(
@@ -229,7 +231,11 @@ class JvmHeapHealthMonitorTest {
                       () ->
                           monitor.observe(true, false, context(1)).event().orElseThrow().severity())
               .toList();
-      for (var result : pool.invokeAll(jobs)) assertEquals(Severity.CRITICAL, result.get());
+      for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS))
+        assertEquals(Severity.CRITICAL, result.get());
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(65, fixture.reads.get());
     assertEquals(BigInteger.ONE, first.count());
