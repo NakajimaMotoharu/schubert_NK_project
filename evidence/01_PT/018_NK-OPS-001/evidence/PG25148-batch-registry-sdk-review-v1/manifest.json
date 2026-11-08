@@ -1,0 +1,22 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T07:01:10.490084+09:00",
+  "productTestsExecuted": 0,
+  "vendorJars": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar": "f2cee6ef046e72eec8128474c7f58c6217173b45ae373c30de0289f2a56ab0fd",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar": "eb34f0cd84a879393ae5c21160fc06385ccdc74f36a4d1e31b199f59acfdaf71"
+  },
+  "javapMetadata": {
+    "SimpleConfig.txt": "61133f230e8df18bf099f5d1df318cef145c8384f701ce3d9fa3841a7eec624b",
+    "MeterRegistry.txt": "52debd1ec04ae1068f79cb176c7aa6269055447810845eb2f7c54bfa9a2e9859",
+    "Clock.txt": "1d18e713aa2a4349f05b3813eb9170533b4bdcfff55c3010f4262874562e8084",
+    "MockClock.txt": "5edd2279bdab5861e3bb4aefb475b3cb4070ac449ff08824c950ceec006b9808",
+    "CumulativeCounter.txt": "0c45fd6edfca13ddde6290019bfad775622b00c4ae91c6e823e0ee9016248004",
+    "SimpleMeterRegistry.txt": "6b09d07a9bcb388472e86b9555ac6a91cb11449a5eb993278c196e89a508e8e7",
+    "DefaultGauge.txt": "36f7a71da7d0dea52bc7f1a90bd4b17653445ed0debef31bd8e51dac441ec49f"
+  },
+  "review": "SimpleConfig default null values/CUMULATIVE. SimpleMeterRegistry ctor only validates config and owns MeterRegistry in-memory maps/noPauseDetector/no detectors/listeners. Counter DoubleAdder; gauge own WeakReference/function; borrowed constructor errors propagate. Close closes owned meters only, detector absent. SDK Clock.SYSTEM internal ordinary clock distinct from actual health sampling; Batch explicitMockClock. No binder/exporter/service/management/process creation configured. Commons logger JUL fallback expected, observation compile SDK declared dependency only. Optional histogram/step paths not called.",
+  "sdkRuntimeInitializedByMetadata": false,
+  "newAcceptance": 0
+}

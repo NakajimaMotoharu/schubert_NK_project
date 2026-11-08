@@ -1,0 +1,146 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T07:01:10.490392+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricRecorderTest.java",
+      "originalSha256": "dfdba45c2ee1ddf1106c8cab898d3fb65f7b8a9c5cd81007dc3024612ab294b1",
+      "currentSha256": "1b0226a691e3f1e8cb6bf9b1265517ef7a6faf558dcb1651f0a2e2e9ef2902aa",
+      "originalWholeBodiesExactlyRestored": true
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/IntegrityFailureMetricRecorderTest.java",
+      "originalSha256": "2ae67a8f4d3d949d5420cb4e3c2b2868ff305b2bb09ee4a19871305f99e2aa6c",
+      "currentSha256": "d4f820533449237d2986d522fa71e3c80896dd9dba033066e546b48f66d160c1",
+      "originalWholeBodiesExactlyRestored": true
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ProcessRestartMetricRecorderTest.java",
+      "originalSha256": "0307b249231e497b0c91dd502cc64e6167b83eb019a68d9195ac72c16275f7bd",
+      "currentSha256": "8835dbbb6e8b38d6c3c1692c69ac8320620ad60402bc9302945ed5288d9581f0",
+      "originalWholeBodiesExactlyRestored": true
+    }
+  ],
+  "originalWholeCases": 24,
+  "rawFindings": 17,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 3,
+  "finiteOwnerSitesCorrected": 3,
+  "existingFutureGet5SitesRetained": 2,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25146-batch-recorders-owner-prepare-v1/manifest.json",
+    "sha256": "76a22186091453da27722d49f17678bf205d4b1bdd9c2ac3f0d89086b36a907d"
+  },
+  "classifications": [
+    {
+      "line": 262,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned8workers/64tasks; timedinvoke10 andsinglefinallyshutdownNow-await10 insideborrowedregistryTWR; no webcontainer/runtime workers."
+    },
+    {
+      "line": 262,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned8workers/64tasks; timedinvoke10 andsinglefinallyshutdownNow-await10 insideborrowedregistryTWR; no webcontainer/runtime workers."
+    },
+    {
+      "line": 275,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned8workers/64tasks; timedinvoke10 andsinglefinallyshutdownNow-await10 insideborrowedregistryTWR; no webcontainer/runtime workers."
+    },
+    {
+      "line": 280,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned8workers/64tasks; timedinvoke10 andsinglefinallyshutdownNow-await10 insideborrowedregistryTWR; no webcontainer/runtime workers."
+    },
+    {
+      "line": 281,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned8workers/64tasks; timedinvoke10 andsinglefinallyshutdownNow-await10 insideborrowedregistryTWR; no webcontainer/runtime workers."
+    },
+    {
+      "line": 313,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned8workers/64tasks; timedinvoke10 andsinglefinallyshutdownNow-await10 insideborrowedregistryTWR; no webcontainer/runtime workers."
+    },
+    {
+      "line": 313,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned8workers/64tasks; timedinvoke10 andsinglefinallyshutdownNow-await10 insideborrowedregistryTWR; no webcontainer/runtime workers."
+    },
+    {
+      "line": 316,
+      "rule": "UseConcurrentHashMap",
+      "applicable": false,
+      "basis": "Expected HashMap is built and read only by test thread. Task lambda captures recorder and fixedenum/name, never expected; workers modify SDK counters only. Keep independent precalculated expected, no shared map."
+    },
+    {
+      "line": 329,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned8workers/64tasks; timedinvoke10 andsinglefinallyshutdownNow-await10 insideborrowedregistryTWR; no webcontainer/runtime workers."
+    },
+    {
+      "line": 346,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned8workers/64tasks; timedinvoke10 andsinglefinallyshutdownNow-await10 insideborrowedregistryTWR; no webcontainer/runtime workers."
+    },
+    {
+      "line": 347,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned8workers/64tasks; timedinvoke10 andsinglefinallyshutdownNow-await10 insideborrowedregistryTWR; no webcontainer/runtime workers."
+    },
+    {
+      "line": 293,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned8workers/64tasks; timedinvoke10 andsinglefinallyshutdownNow-await10 insideborrowedregistryTWR; no webcontainer/runtime workers."
+    },
+    {
+      "line": 293,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned8workers/64tasks; timedinvoke10 andsinglefinallyshutdownNow-await10 insideborrowedregistryTWR; no webcontainer/runtime workers."
+    },
+    {
+      "line": 296,
+      "rule": "UseConcurrentHashMap",
+      "applicable": false,
+      "basis": "Expected HashMap is built and read only by test thread. Task lambda captures recorder and fixedenum/name, never expected; workers modify SDK counters only. Keep independent precalculated expected, no shared map."
+    },
+    {
+      "line": 309,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned8workers/64tasks; timedinvoke10 andsinglefinallyshutdownNow-await10 insideborrowedregistryTWR; no webcontainer/runtime workers."
+    },
+    {
+      "line": 327,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned8workers/64tasks; timedinvoke10 andsinglefinallyshutdownNow-await10 insideborrowedregistryTWR; no webcontainer/runtime workers."
+    },
+    {
+      "line": 328,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned8workers/64tasks; timedinvoke10 andsinglefinallyshutdownNow-await10 insideborrowedregistryTWR; no webcontainer/runtime workers."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

@@ -309,37 +309,43 @@ class IntegrityFailureMetricRecorderTest {
   void integrityMetric007ConcurrentTotalsComeFromPrecomputedInputsAndOwnersStaySeparate()
       throws Exception {
     try (var registry = new Registry();
-        var otherRegistry = new Registry();
-        var executor = Executors.newFixedThreadPool(8)) {
-      var recorder = new IntegrityFailureMetricRecorder(registry, DEBUG_MODE);
-      Map<String, Integer> expected = new HashMap<>();
-      var tasks = new ArrayList<Callable<Void>>();
-      for (int i = 0; i < 64; i++) {
-        var area = AREAS.get(i % 3);
-        String name = STEPS.get((i / 3) % 10);
-        var step = BatchStep.valueOf(name);
-        expected.merge(area.name() + "/" + name, 1, Integer::sum);
-        tasks.add(
-            () -> {
-              recorder.record(area, step);
-              return null;
-            });
+        var otherRegistry = new Registry()) {
+      var executor = Executors.newFixedThreadPool(8);
+      try {
+        var recorder = new IntegrityFailureMetricRecorder(registry, DEBUG_MODE);
+        Map<String, Integer> expected = new HashMap<>();
+        var tasks = new ArrayList<Callable<Void>>();
+        for (int i = 0; i < 64; i++) {
+          var area = AREAS.get(i % 3);
+          String name = STEPS.get((i / 3) % 10);
+          var step = BatchStep.valueOf(name);
+          expected.merge(area.name() + "/" + name, 1, Integer::sum);
+          tasks.add(
+              () -> {
+                recorder.record(area, step);
+                return null;
+              });
+        }
+        for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+          result.get(5, TimeUnit.SECONDS);
+        for (String area : List.of(HASH_AREA_NAME, PATH_AREA_NAME, CONFIG_AREA_NAME))
+          for (String step : STEPS)
+            assertEquals(
+                expected.getOrDefault(area + "/" + step, 0).doubleValue(),
+                count(registry, area, step));
+        assertEquals(64, registry.increments.get());
+        var other = new IntegrityFailureMetricRecorder(otherRegistry, DEBUG_MODE);
+        for (int i = 0; i < 7; i++) other.record(Area.HASH, BatchStep.BACKUP_DB);
+        assertEquals(7, count(otherRegistry, HASH_AREA_NAME, BACKUP_DB_STEP_NAME));
+        assertEquals(
+            expected.get("HASH/BACKUP_DB").doubleValue(),
+            count(registry, HASH_AREA_NAME, BACKUP_DB_STEP_NAME));
+        shape(registry);
+        shape(otherRegistry);
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
-      for (var result : executor.invokeAll(tasks)) result.get(5, TimeUnit.SECONDS);
-      for (String area : List.of(HASH_AREA_NAME, PATH_AREA_NAME, CONFIG_AREA_NAME))
-        for (String step : STEPS)
-          assertEquals(
-              expected.getOrDefault(area + "/" + step, 0).doubleValue(),
-              count(registry, area, step));
-      assertEquals(64, registry.increments.get());
-      var other = new IntegrityFailureMetricRecorder(otherRegistry, DEBUG_MODE);
-      for (int i = 0; i < 7; i++) other.record(Area.HASH, BatchStep.BACKUP_DB);
-      assertEquals(7, count(otherRegistry, HASH_AREA_NAME, BACKUP_DB_STEP_NAME));
-      assertEquals(
-          expected.get("HASH/BACKUP_DB").doubleValue(),
-          count(registry, HASH_AREA_NAME, BACKUP_DB_STEP_NAME));
-      shape(registry);
-      shape(otherRegistry);
     }
   }
 

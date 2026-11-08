@@ -289,38 +289,44 @@ class ProcessRestartMetricRecorderTest {
   void restartMetric007ConcurrentTotalsComeFromPrecomputedInputsAndOwnersStaySeparate()
       throws Exception {
     try (var registry = new Registry();
-        var otherRegistry = new Registry();
-        var executor = Executors.newFixedThreadPool(8)) {
-      var recorder = new ProcessRestartMetricRecorder(registry, DEBUG_MODE);
-      Map<String, Integer> expected = new HashMap<>();
-      var tasks = new ArrayList<Callable<Void>>();
-      for (int i = 0; i < 64; i++) {
-        var reason = REASONS.get(i % 4);
-        String name = SERVICES.get((i / 4) % 6);
-        var service = Service.valueOf(name);
-        expected.merge(reason.name() + "/" + name, 1, Integer::sum);
-        tasks.add(
-            () -> {
-              recorder.record(reason, service);
-              return null;
-            });
+        var otherRegistry = new Registry()) {
+      var executor = Executors.newFixedThreadPool(8);
+      try {
+        var recorder = new ProcessRestartMetricRecorder(registry, DEBUG_MODE);
+        Map<String, Integer> expected = new HashMap<>();
+        var tasks = new ArrayList<Callable<Void>>();
+        for (int i = 0; i < 64; i++) {
+          var reason = REASONS.get(i % 4);
+          String name = SERVICES.get((i / 4) % 6);
+          var service = Service.valueOf(name);
+          expected.merge(reason.name() + "/" + name, 1, Integer::sum);
+          tasks.add(
+              () -> {
+                recorder.record(reason, service);
+                return null;
+              });
+        }
+        for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+          result.get(5, TimeUnit.SECONDS);
+        for (String reason :
+            List.of(NONZERO_EXIT_REASON, SIGNAL_EXIT_REASON, OOM_REASON, UNKNOWN_REASON))
+          for (String service : SERVICES)
+            assertEquals(
+                expected.getOrDefault(reason + "/" + service, 0).doubleValue(),
+                count(registry, reason, service));
+        assertEquals(64, registry.increments.get());
+        var other = new ProcessRestartMetricRecorder(otherRegistry, DEBUG_MODE);
+        for (int i = 0; i < 7; i++) other.record(Reason.NONZERO_EXIT, Service.WEB);
+        assertEquals(7, count(otherRegistry, NONZERO_EXIT_REASON, WEB_SERVICE_NAME));
+        assertEquals(
+            expected.get("NONZERO_EXIT/WEB").doubleValue(),
+            count(registry, NONZERO_EXIT_REASON, WEB_SERVICE_NAME));
+        shape(registry);
+        shape(otherRegistry);
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
-      for (var result : executor.invokeAll(tasks)) result.get(5, TimeUnit.SECONDS);
-      for (String reason :
-          List.of(NONZERO_EXIT_REASON, SIGNAL_EXIT_REASON, OOM_REASON, UNKNOWN_REASON))
-        for (String service : SERVICES)
-          assertEquals(
-              expected.getOrDefault(reason + "/" + service, 0).doubleValue(),
-              count(registry, reason, service));
-      assertEquals(64, registry.increments.get());
-      var other = new ProcessRestartMetricRecorder(otherRegistry, DEBUG_MODE);
-      for (int i = 0; i < 7; i++) other.record(Reason.NONZERO_EXIT, Service.WEB);
-      assertEquals(7, count(otherRegistry, NONZERO_EXIT_REASON, WEB_SERVICE_NAME));
-      assertEquals(
-          expected.get("NONZERO_EXIT/WEB").doubleValue(),
-          count(registry, NONZERO_EXIT_REASON, WEB_SERVICE_NAME));
-      shape(registry);
-      shape(otherRegistry);
     }
   }
 

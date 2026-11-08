@@ -19,6 +19,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
@@ -257,23 +258,28 @@ class BatchMetricRecorderTest {
 
   @Test
   void batchRec007SixtyFourParallelSuccessesKeepExactCountAndMaximumTime() throws Exception {
-    try (var registry = new OwnedRegistry();
-        var pool = Executors.newFixedThreadPool(8)) {
-      var recorder = new BatchMetricRecorder(registry, DEBUG_MODE);
-      var jobs =
-          java.util.stream.IntStream.range(0, 64)
-              .<Callable<Boolean>>mapToObj(
-                  i ->
-                      () -> {
-                        recorder.record(
-                            Step.CLEAN_LOG, Status.SUCCESS, Instant.ofEpochSecond(64 - i));
-                        return true;
-                      })
-              .toList();
-      for (var result : pool.invokeAll(jobs)) assertTrue(result.get());
-      assertEquals(64.0, runs(registry, "CLEAN_LOG", SUCCESS_STATUS));
-      assertEquals(64.0, last(registry, "CLEAN_LOG"), 0.0);
-      shape(registry);
+    try (var registry = new OwnedRegistry()) {
+      var pool = Executors.newFixedThreadPool(8);
+      try {
+        var recorder = new BatchMetricRecorder(registry, DEBUG_MODE);
+        var jobs =
+            java.util.stream.IntStream.range(0, 64)
+                .<Callable<Boolean>>mapToObj(
+                    i ->
+                        () -> {
+                          recorder.record(
+                              Step.CLEAN_LOG, Status.SUCCESS, Instant.ofEpochSecond(64 - i));
+                          return true;
+                        })
+                .toList();
+        for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS)) assertTrue(result.get());
+        assertEquals(64.0, runs(registry, "CLEAN_LOG", SUCCESS_STATUS));
+        assertEquals(64.0, last(registry, "CLEAN_LOG"), 0.0);
+        shape(registry);
+      } finally {
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
+      }
     }
   }
 
