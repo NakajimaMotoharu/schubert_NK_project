@@ -1,0 +1,118 @@
+{
+  "actualExit": 0,
+  "source": "2af4eefe61ef9d7ed493f2a249f7ad7d871cf41b",
+  "approvedMain": "42450b515b0737b4f519945e161cae93195e1edf",
+  "originalWholeTestSources": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+      "sourceSha256": "45f7c9afdd8279145089483f2d7a725856cdc987873ca5a6d557b0e98408843b",
+      "gitCommit": "2af4eefe61ef9d7ed493f2a249f7ad7d871cf41b",
+      "gitBlob": "ef66e89ecdd08551e86513247a46c1539432553b",
+      "methods": 3,
+      "sourceCopied": false
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+      "sourceSha256": "28981daead398dd7be96094b7c8a653f058b7779b7433cf23e3bc3c478b08f26",
+      "gitCommit": "2af4eefe61ef9d7ed493f2a249f7ad7d871cf41b",
+      "gitBlob": "538f1aca262eb1af39c8895e874cb58aff4dcec9",
+      "methods": 12,
+      "sourceCopied": false
+    }
+  ],
+  "unchangedGoldenResourceHashes": {
+    "src/schubert-nk-protocol/src/test/resources/protocol/payload-golden-ui234-236.tsv": "49bb76ec610216042f8e53ed548f4d5e52707a8bbf930a9fc6c93300dfa24839",
+    "src/schubert-nk-protocol/src/test/resources/protocol/layouts-ui233.tsv": "c4f290595f5cabf19c11877e2dea95627b4d42490116431bac3bfde58950d711"
+  },
+  "approvedDesigns": {
+    "documents/200_UI/230_インターフェース/233_固定長電文インターフェース一覧.md": {
+      "gitCommit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d3ef40fd6d075ae27a88d4484032b9d727f43a8f053f1c36253465cbb0c641bb"
+    },
+    "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md": {
+      "gitCommit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md": {
+      "gitCommit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f"
+    }
+  },
+  "maxAccessorUses": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+      "line": 50,
+      "expression": "assertEquals(2336, LayoutRegistry.standard().require(LAYOUT, 1).maximumTotalLength());",
+      "disposition": "NOT_APPLICABLE_ACTUAL_SIDE_OR_EXCEPTION_STIMULUS_WITH_LITERAL_EXPECTED"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutMetadataTest.java",
+      "line": 45,
+      "expression": "Integer.toString(definition.maximumRecordCount()),",
+      "disposition": "NOT_APPLICABLE_ACTUAL_SIDE_OR_EXCEPTION_STIMULUS_WITH_LITERAL_EXPECTED"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutMetadataTest.java",
+      "line": 46,
+      "expression": "Integer.toString(definition.maximumTotalLength())))",
+      "disposition": "NOT_APPLICABLE_ACTUAL_SIDE_OR_EXCEPTION_STIMULUS_WITH_LITERAL_EXPECTED"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutMetadataTest.java",
+      "line": 142,
+      "expression": "assertEquals(284, definition.maximumTotalLength());",
+      "disposition": "NOT_APPLICABLE_ACTUAL_SIDE_OR_EXCEPTION_STIMULUS_WITH_LITERAL_EXPECTED"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutMetadataTest.java",
+      "line": 263,
+      "expression": ".maximumTotalLength());",
+      "disposition": "NOT_APPLICABLE_ACTUAL_SIDE_OR_EXCEPTION_STIMULUS_WITH_LITERAL_EXPECTED"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+      "line": 467,
+      "expression": "assertEquals(9, PayloadCodec.maximumForDigits(1));",
+      "disposition": "NOT_APPLICABLE_ACTUAL_SIDE_OR_EXCEPTION_STIMULUS_WITH_LITERAL_EXPECTED"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+      "line": 468,
+      "expression": "assertEquals(999_999_999_999_999_999L, PayloadCodec.maximumForDigits(18));",
+      "disposition": "NOT_APPLICABLE_ACTUAL_SIDE_OR_EXCEPTION_STIMULUS_WITH_LITERAL_EXPECTED"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+      "line": 469,
+      "expression": "assertThrows(LayoutValidationException.class, () -> PayloadCodec.maximumForDigits(0));",
+      "disposition": "NOT_APPLICABLE_ACTUAL_SIDE_OR_EXCEPTION_STIMULUS_WITH_LITERAL_EXPECTED"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+      "line": 470,
+      "expression": "assertThrows(LayoutValidationException.class, () -> PayloadCodec.maximumForDigits(19));",
+      "disposition": "NOT_APPLICABLE_ACTUAL_SIDE_OR_EXCEPTION_STIMULUS_WITH_LITERAL_EXPECTED"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+      "line": 98,
+      "expression": "int count = layout.layout().maximumRecordCount();",
+      "disposition": "FIX_EXPECTED_OR_BOUNDARY_INPUT_DEPENDENCE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+      "line": 112,
+      "expression": "layout.layout().maximumTotalLength(),",
+      "disposition": "FIX_EXPECTED_OR_BOUNDARY_INPUT_DEPENDENCE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+      "line": 177,
+      "expression": "maximum ? PayloadCodec.maximumForDigits(field.length()) : 0);",
+      "disposition": "FIX_EXPECTED_OR_BOUNDARY_INPUT_DEPENDENCE"
+    }
+  ],
+  "searchScope": "Protocol test sources only;348 raw executor candidates are not defect scope",
+  "productTestsExecuted": 0,
+  "atJST": "2026-11-08T22:12:51.821817+09:00"
+}

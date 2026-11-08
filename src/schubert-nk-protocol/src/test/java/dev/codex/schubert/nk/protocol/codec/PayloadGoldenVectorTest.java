@@ -35,10 +35,28 @@ class PayloadGoldenVectorTest {
   @Test
   void allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes() throws IOException {
     Map<String, GoldenHashes> golden = readGoldenHashes();
+    Map<String, LayoutLimits> limits = readIndependentLayoutLimits();
+    var layouts = LayoutFieldCatalog.standard().all();
+    assertEquals(64, layouts.size());
+    assertEquals(64, limits.size());
+    assertEquals(
+        limits.keySet(),
+        layouts.stream()
+            .map(layout -> layout.id().value())
+            .collect(java.util.stream.Collectors.toSet()));
     PayloadCodec codec = PayloadCodec.standard();
     int responseCount = 0;
 
-    for (LayoutFields layout : LayoutFieldCatalog.standard().all()) {
+    for (LayoutFields layout : layouts) {
+      var constraint = Objects.requireNonNull(limits.get(layout.id().value()));
+      // BUG2541/UI233: independently transcribed fixture, never SUT-derived expected bounds.
+      assertEquals(constraint.kind().charAt(0), layout.layout().messageKind().wireValue());
+      assertEquals(
+          constraint.interaction().charAt(0), layout.layout().interactionKind().wireValue());
+      assertEquals(constraint.dataLength(), layout.layout().dataLength());
+      assertEquals(constraint.recordLength(), layout.layout().recordLength());
+      assertEquals(constraint.maximumRecords(), layout.layout().maximumRecordCount());
+      assertEquals(constraint.maximumTotal(), layout.layout().maximumTotalLength());
       GoldenHashes expected = golden.get(layout.id().value());
       assertTrue(expected != null, layout.id().value());
 
@@ -91,12 +109,14 @@ class PayloadGoldenVectorTest {
   }
 
   @Test
-  void everyRepeatingLayoutAcceptsItsMaximumRecordBoundary() {
+  void everyRepeatingLayoutAcceptsItsMaximumRecordBoundary() throws IOException {
     PayloadCodec codec = PayloadCodec.standard();
     int repeatingLayouts = 0;
+    Map<String, LayoutLimits> limits = readIndependentLayoutLimits();
     for (LayoutFields layout : LayoutFieldCatalog.standard().all()) {
-      int count = layout.layout().maximumRecordCount();
-      if (layout.recordFields().isEmpty()) {
+      var constraint = Objects.requireNonNull(limits.get(layout.id().value()));
+      int count = constraint.maximumRecords();
+      if (constraint.recordLength() == 0) {
         assertEquals(0, count, layout.id().value());
         continue;
       }
@@ -109,7 +129,7 @@ class PayloadGoldenVectorTest {
               false);
       assertEquals(count, encoded.recordCount(), layout.id().value());
       assertEquals(
-          layout.layout().maximumTotalLength(),
+          constraint.maximumTotal(),
           256 + encoded.dataLength() + encoded.recordLength() * encoded.recordCount(),
           layout.id().value());
       assertEquals(
@@ -138,7 +158,8 @@ class PayloadGoldenVectorTest {
     expected[320] = 'A';
     CountDownLatch ready = new CountDownLatch(8);
     CountDownLatch start = new CountDownLatch(1);
-    try (var executor = Executors.newFixedThreadPool(8)) {
+    var executor = Executors.newFixedThreadPool(8);
+    try {
       List<Future<byte[]>> futures = new ArrayList<>();
       for (int index = 0; index < 8; index++) {
         futures.add(
@@ -155,6 +176,10 @@ class PayloadGoldenVectorTest {
         assertTrue(
             MessageDigest.isEqual(expected, future.get(10, java.util.concurrent.TimeUnit.SECONDS)));
       }
+    } finally {
+      start.countDown();
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
     }
     assertSame(codec, PayloadCodec.standard());
   }
@@ -173,8 +198,7 @@ class PayloadGoldenVectorTest {
             switch (field.wireType()) {
               case TEXT -> new FieldValue.Text(maximum ? "Z".repeat(field.length()) : "A");
               case NUMERIC ->
-                  new FieldValue.Numeric(
-                      maximum ? PayloadCodec.maximumForDigits(field.length()) : 0);
+                  new FieldValue.Numeric(maximum ? Long.parseLong("9".repeat(field.length())) : 0);
               case BOOLEAN -> new FieldValue.Flag(maximum);
             };
       }
@@ -210,6 +234,40 @@ class PayloadGoldenVectorTest {
     }
     return Map.copyOf(result);
   }
+
+  private static Map<String, LayoutLimits> readIndependentLayoutLimits() throws IOException {
+    var result = new LinkedHashMap<String, LayoutLimits>();
+    try (var input =
+            Objects.requireNonNull(
+                PayloadGoldenVectorTest.class.getResourceAsStream("/protocol/layouts-ui233.tsv"));
+        var reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
+      for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+        if (line.startsWith("#")) continue;
+        String[] columns = line.split("\\t", -1);
+        assertEquals(7, columns.length);
+        assertNull(
+            result.put(
+                columns[0],
+                new LayoutLimits(
+                    columns[1],
+                    columns[2],
+                    Integer.parseInt(columns[3]),
+                    Integer.parseInt(columns[4]),
+                    Integer.parseInt(columns[5]),
+                    Integer.parseInt(columns[6]))));
+      }
+    }
+    assertEquals(64, result.size());
+    return Map.copyOf(result);
+  }
+
+  private record LayoutLimits(
+      String kind,
+      String interaction,
+      int dataLength,
+      int recordLength,
+      int maximumRecords,
+      int maximumTotal) {}
 
   private static String sha256(byte[] value) {
     try {

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.codec.FieldEncodingException;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
@@ -205,7 +206,8 @@ class WebLogActionContractTest {
 
   @Test // PT-PRO-QA054-011
   void independentConcurrentCallersDoNotMixCategories() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var first = workers.submit(() -> encode(legacy(Optional.empty())));
       var second = workers.submit(() -> encode(value(LogType.ACTION, Optional.of(MENU_ACTION))));
       assertArrayEquals(
@@ -213,6 +215,9 @@ class WebLogActionContractTest {
       assertArrayEquals(
           golden(ACTION_CATEGORY, MENU_ACTION),
           second.get(10, java.util.concurrent.TimeUnit.SECONDS));
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
     }
   }
 
@@ -234,6 +239,36 @@ class WebLogActionContractTest {
     assertEquals(Optional.of(UserRole.USER), data.role());
     assertEquals(Optional.of("{}"), data.details());
     assertEquals("WebLogEventData[REDACTED]", data.toString());
+  }
+
+  @Test // PT-PRO-QA054-013
+  void anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire() {
+    var anonymous =
+        new WebLogEventData(
+            AT,
+            LogLevel.INFO,
+            Optional.empty(),
+            SAFE_MESSAGE,
+            ID,
+            GET_METHOD,
+            "/",
+            new HttpStatusCode(200),
+            new ElapsedMilliseconds(12),
+            ADDRESS,
+            Optional.empty(),
+            Optional.empty(),
+            Optional.empty());
+    byte[] expected = golden(REQUEST_CATEGORY, "");
+    // UI235 12.1: Username975/64, Role1039/5, Details1044/1024 (one-based offsets).
+    Arrays.fill(expected, 974, 2067, (byte) ' ');
+    assertArrayEquals(expected, encode(anonymous));
+    var decoded = decode(expected);
+    assertEquals(anonymous, decoded);
+    assertEquals(Optional.empty(), decoded.username());
+    assertEquals(Optional.empty(), decoded.role());
+    assertEquals(Optional.empty(), decoded.details());
+    assertEquals(14, decoded.fields().names().size());
+    assertEquals("WebLogEventData[REDACTED]", decoded.toString());
   }
 
   private static WebLogEventData legacy(Optional<String> action) {
