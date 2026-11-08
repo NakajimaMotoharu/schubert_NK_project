@@ -2,8 +2,11 @@ package dev.codex.schubert.nk.protocol.codec;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.nio.charset.MalformedInputException;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.OptionalLong;
@@ -152,5 +155,39 @@ class FieldCodecTest {
         PermanentProtocolException.class,
         () -> FieldCodec.decodeNumeric(longMaximum, 0, semanticMaximum));
     assertArrayEquals("9223372036854775807".getBytes(StandardCharsets.US_ASCII), longMaximum);
+  }
+
+  @Test // PT-CODEC-EXC-001; SS322§11 / 411§5-6
+  void malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput() {
+    var encoding =
+        assertThrows(FieldEncodingException.class, () -> FieldCodec.encodeText("\ud800", 4, true));
+    assertEquals("text field is not strict UTF-8", encoding.getMessage());
+    assertEquals(
+        1, assertInstanceOf(MalformedInputException.class, encoding.getCause()).getInputLength());
+
+    byte[] malformed = {(byte) 0xc3, 0x28};
+    var decoding =
+        assertThrows(
+            PermanentProtocolException.class, () -> FieldCodec.decodeText(malformed, true));
+    assertEquals("text field contains invalid UTF-8", decoding.getMessage());
+    assertEquals(
+        1, assertInstanceOf(MalformedInputException.class, decoding.getCause()).getInputLength());
+    assertArrayEquals(new byte[] {(byte) 0xc3, 0x28}, malformed);
+
+    byte[] aboveLong = "9999999999999999999".getBytes(StandardCharsets.US_ASCII);
+    var overflow =
+        assertThrows(
+            PermanentProtocolException.class,
+            () -> FieldCodec.decodeNumeric(aboveLong, 0, Long.MAX_VALUE));
+    assertEquals("numeric field overflows signed long", overflow.getMessage());
+    assertInstanceOf(ArithmeticException.class, overflow.getCause());
+    assertArrayEquals("9999999999999999999".getBytes(StandardCharsets.US_ASCII), aboveLong);
+
+    var range =
+        assertThrows(
+            PermanentProtocolException.class,
+            () -> FieldCodec.decodeNumeric(new byte[] {'0'}, 1, 9));
+    assertEquals("numeric field is outside its semantic range", range.getMessage());
+    assertNull(range.getCause());
   }
 }

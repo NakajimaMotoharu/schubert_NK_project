@@ -1,0 +1,13 @@
+# FieldCodec 診断cause・入力非漏洩新1と当module全120
+
+主G13.07/関連G03.05、ADDITIONAL_FINDING、原見積1/3/7pp cap9。SS322§11/13・411§5-6、Program002/X02/N02。最新2638/2904/24584を確認し、Login policy四Sourceは当Mainと全SHA/CRC一致で再実行不要、SecretBufferも2957既資格済み。FieldCodec旧6＋NFC3と全codecTestにはgetCause/assertInstanceOf/CharacterCodingException/ArithmeticExceptionの明示照合がなく、型付き拒否以外のcause/診断保護のoracleを追加する。製品不具合や原計画新規製造とは断定せず、元Sourceの成功/counter100を取り消さない。
+
+新PT-CODEC-EXC-001一methodを既FieldCodecTestへ追加。高surrogate一文字の送信拒否とc3 28受信拒否はJDK MalformedInputException/inputLength1を独立literal、19桁9のlong overflowはArithmeticException、意味範囲外はcause nullを要求する。外側の固定診断と入力byte不変更を確認し、入力値を診断へechoしない。期待値をProduction methodから生成せず、fixed byte/RFC UTF8長さ・Java long最大値より独立に定める。内部cause保持と固定診断は実装判断の固定契約であり上位外部文言/oracle/Current baseline変更0。
+
+Main7aedは不変更、旧全119をそのまま残し当24wholefixtures120を一JVMで一回のみ実行。旧119へ新1を算術加算して合格にしない。25TestSource/既5TSV/165Main176physical、全coverage/CRC/XML/Source/command/staticを照合。119の原Test本文はnewmethod/import除去のraw逆変換で保持、copy/extraction無し。新uniqueは新1が実PASS後だけ519→520/Java415→416、SourceRegistry/leaf/formal1964-53/工数null/全HOLD不変更。
+
+追加のoracle反例は通常codecのCharacterCodingException causeだけを落とす明示fault fixtureをevidence/inputへ置き、既全FieldCodecTest7＋NFC3をそのまま選択する。旧9は成功/新caseだけ失敗・JUnit exit1が拒否期待値、negative controlを製品PT PASS/実測coverage/合格件数へ加算しない。fixtureはProduction srcを改変せず、JDK/Protocolのみ・秘密/実DB/Root/VM/graph/held四/鍵/credential/HTTP/Native0。陰性だけから新case合格とせず、本体120真正0を先に閉じる。
+
+新scope017/qualifier018/preflight019/post020を既013/014/015から明示差分だけで派生し、package-info7/abstract6/compiler4/実CLASS159を最初から区別。標準filter四は既24594現byte証拠を参照し、javap/旧Module119確認再演をしない。formatterは変更FieldCodecTest一枚だけ、静的25Test source、正常Main六静的0は現byte再利用。変更に必要な当module全120は維持し、既完了全global回帰を確認目的で回さない。異常が実装違反なら修正前915/916、予測違いはoracle根拠を先に調査する。
+
+枠/計測: fresh残10%以下又は取得不能は新規停止、5%まで保全、モデル/券/課金変更なし。前collector00:26:24 JST/3a5f2caa N/Tnull・backlogfalse、次01:26:24。先行の次候補探索は再資格/計画選定の費用で新完成率へ加算せず、元全119/公開SDK33分類/五報告更新の実績と分離する。通常区切りで止まらず継続する。
