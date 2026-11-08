@@ -1,0 +1,11 @@
+# Protocol全119・当source単一run結果
+
+PG24582/試験sourcefa7ca8df24fbb4acea1b12b32f8f86aa07438b80、Main7aed8eace7c844c2f79f2e39db766faf914890d5。whole24fixture119case一回OS0/FES/aborted0、tool session10054真正終端回収済み。compile24576=0/static24578 raw17（Threads9/Close2/localMap4/nullnegative2）個別適用0CS0。24580 preflight0 ca83377c・全25Test/五TSV/165Main/176class/currentCPを固定。
+
+PG24584独立0 e154d86f・実XML119/全command/source/時刻/環境/hash/単一exec/current163positiveMainCRC/held四init0を照合。実L3478/M742/C159/B1014/I17460全miss0、module合計四100・手動除外0。Source自然branch0はN-Aを保持し、全Source非空四100/全451に換算しない。
+
+PG24594独立母数補足0 9448c8cf89988f4d9a579ea10c433e8bad3e417c1df7709472648d1b29638dfe：全176入力=公式XML/classinfo169＋package注釈7、XML169=測定159＋abstractinterface6＋公式filter compilerSwitchMap4。四compilerは現classfile ACC_SYNTHETIC/CRC/公式method0をjavap読取のみで確認し7型保持metadata否定。24584 rawfield officialReportedMeasuredClasses=169はXMLentry数を誤命名しているため原まま保全し、この補足のeffective measuredClasses159を使う。これはcounter値の改変ではなく、原CLASS159/159と一致する意味訂正である。
+
+BUG2545のrelative/absolute集合比較初1は24586before後是正・4path否定、BUG2546初post1は24590before/七annotationの厳密別枠・4反証、BUG2547は24592beforeと上記追記訂正で限定是正。119製品試験の失敗/再演0。原見積3/5/8cap10維持、計画再資格とtool手戻り費の専有配分N/T不明はnull。新unique/Source登録/leaf0・累計519(Java415+HTML97CSS7)/候補114/pending12/whole93暫定/正式1964PT53scope/工数null/QA051final/全HOLDを保持。
+
+原XMLhash/独立post/coverage/全入力とcase対応はevidence/PG24584-protocol-whole119-independent-v1/manifest.json、補足はevidence/PG24594-protocol-whole-denominator-v1/manifest.json。固定Main/当Testのmodule全体回帰であり、他module/currentglobal/fullsource/Browser/CHR/native/原終了依存の正式受入は未完。

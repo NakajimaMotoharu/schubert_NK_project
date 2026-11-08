@@ -1,0 +1,25 @@
+"""Supplement raw post with exact official XML vs byte vs measured-class denominators."""
+from pathlib import Path
+import hashlib,json,xml.etree.ElementTree as E,datetime,re
+import pg9666_pagination_static as c
+R=Path.cwd();B=R/'evidence/01_PT/002_NK-PRO-002';RUNS=R.parent/'pgpt-runs/PG379';load=lambda p:json.loads(p.read_bytes());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();P=B/'evidence/PG24584-protocol-whole119-independent-v1/manifest.json';m=load(P);assert sha(P)=='e154d86f98f935f9624d63e50e62c83d5cba1821c544bf563d841fac2800b077' and m['actualExit']==0 and m['tests']==119
+cfg=load(B/'input/012_protocol_whole119_scope.json');U=RUNS/cfg['unitSlot'];root=E.parse(U/'coverage.xml').getroot();classes={x.get('name'):x for x in root.findall('.//class')};allnames=set(cfg['targetPhysical']);ix=load(R/'evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json');annotation={n for n in allnames if n.endswith('/package-info')};interfaces={n for n in allnames if not ix[n]['hasCode']} - annotation;measured={n for n,t in classes.items() if any(x.get('type')=='CLASS' and int(x.get('covered'))+int(x.get('missed'))>0 for x in t.findall('counter'))};compiler=set(classes)-measured-interfaces
+expectedCompiler={'dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$1','dev/codex/schubert/nk/protocol/layout/FieldDefinition$1','dev/codex/schubert/nk/protocol/codec/PayloadCodec$1','dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator$1'};assert compiler==expectedCompiler
+assert (len(allnames),len(classes),len(measured),len(annotation),len(interfaces),len(compiler))==(176,169,159,7,6,4)
+assert measured|annotation|interfaces|compiler==allnames and sum(map(len,[measured,annotation,interfaces,compiler]))==176
+assert m['officialReportedMeasuredClasses']==169 # raw misnomer preserved, corrected below.
+for n in interfaces|compiler:assert not classes[n].findall('method') and not classes[n].findall('counter')
+D=RUNS/'pg24594-protocol-whole-denominator-javap-v1';O=B/'evidence/PG24594-protocol-whole-denominator-v1';assert not D.exists() and not O.exists();D.mkdir();c.SLOT=D
+stage=c.step('javap',[str(R.parent/'toolchain/jdk-25.0.4/bin/javap'),'-v','-p',*[str(U/'component'/(n+'.class')) for n in sorted(compiler)]],R);assert stage['actualExit']==0 and stage['timedOut'] is False
+text=(D/'javap.stdout').read_text();parts=[x for x in text.split('Classfile ') if x.strip()];assert len(parts)==4;rows=[]
+for n,part in zip(sorted(compiler),parts,strict=True):
+ assert str(U/'component'/(n+'.class')) in part.splitlines()[0] and re.search(r'^  flags: \(0x[0-9a-f]+\).*ACC_SYNTHETIC',part,re.M) and '$SwitchMap$' in part
+ assert sha(U/'component'/(n+'.class'))==ix[n]['sha256'];rows.append(dict(name=n,sha256=ix[n]['sha256'],crc64=ix[n]['crc64'],syntheticSwitchMap=True,officialMeasuredMethods=0,manualExclusion=False))
+counts=dict(inputBytes=176,xmlEntries=169,measuredClasses=159,annotations=7,abstractInterfaces=6,compilerSwitchMaps=4)
+def valid(v):
+ return all(type(x) is int for x in v.values()) and v['inputBytes']==v['xmlEntries']+v['annotations'] and v['xmlEntries']==v['measuredClasses']+v['abstractInterfaces']+v['compilerSwitchMaps'] and v['measuredClasses']==m['coverage']['CLASS']['covered']+m['coverage']['CLASS']['missed']
+assert valid(counts);negatives=0
+for key,value in [('inputBytes',175),('xmlEntries',168),('measuredClasses',169),('annotations',6),('abstractInterfaces',5),('compilerSwitchMaps',3),('compilerSwitchMaps',True)]:
+ v=dict(counts,**{key:value});assert json.dumps(v,sort_keys=True)!=json.dumps(counts,sort_keys=True) and not valid(v);negatives+=1
+O.mkdir();out=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),source=m['source'],productionCoreMain=m['productionCoreMain'],originalPost=dict(path=str(P.relative_to(R)),sha256=sha(P)),correction='Raw field officialReportedMeasuredClasses=169 means XML entries, not measured classes. Effective officialXmlClassEntries=169 / officialMeasuredClasses=159.',counts=counts,compilerRows=rows,annotationClasses=sorted(annotation),abstractInterfaces=sorted(interfaces),officialFilterApplied=True,manualCoverageExclusions=[],metadataNegativeVectors=negatives,coverage=m['coverage'],wholeProtocolMeasuredFour100=m['measuredFour100'],tests=119,wholeFixtures=24,sourcePrograms=165,all176NormalBytesAnd169ClassinfoCrcMatched=True,observedPositiveMainClasses=m['observedPositiveMainClasses'],heldFourInitializations=0,heldFourPositiveMainProbes=0,productTestsExecuted=0,productClassesLoadedOrInitialized=False,unitReplayed=False,global451Accepted=False,currentProgramAcceptance=False,newAcceptance=0,formalUpdated=False,effortRate=None,stage=stage,stageOutputHashes={s:sha(D/('javap.'+s)) for s in ['stdout','stderr']},toolSha256=sha(Path(__file__)))
+(O/'manifest.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,counts=counts,coverage=m['coverage'],metadataNegatives=negatives,manifestSha256=sha(O/'manifest.json'))))
