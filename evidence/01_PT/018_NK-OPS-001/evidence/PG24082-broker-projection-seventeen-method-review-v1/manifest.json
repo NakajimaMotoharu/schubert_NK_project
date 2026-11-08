@@ -1,0 +1,116 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T16:04:24.187652+09:00",
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/633_broker_projection_seventeen_method_scope.json",
+    "sha256": "212be36fcae24d8ff013cdaadbb77285db406c4d884d2bbfabc92ccdec3161fd"
+  },
+  "sourcePrograms": 2,
+  "explicitlyRelatedMethods": 17,
+  "originalSuccessfulTestCases": 9,
+  "assertionSnippetChecks": 25,
+  "originalCompilerFilteredMethodsNotIndependentlyMeasured": 7,
+  "abstractReaderMethodsWithoutCode": 2,
+  "subjectLimits": [
+    {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+      "measuredMethodLinks": 9,
+      "originalCompilerFilteredMethodsNotIndependentlyMeasured": 7,
+      "abstractReaderMethodsWithoutCode": 1,
+      "defaultManagementReaderInvocationQualified": false
+    },
+    {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+      "measuredMethodLinks": 8,
+      "originalCompilerFilteredMethodsNotIndependentlyMeasured": 0,
+      "abstractReaderMethodsWithoutCode": 1,
+      "defaultManagementReaderInvocationQualified": false
+    }
+  ],
+  "assertionReviews": [
+    {
+      "testId": "OPS-ASET-001",
+      "caseRef": "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()",
+      "declarationLine": 68,
+      "snippets": 4,
+      "independentExpected": "Six addresses/26 fields match independent literals, extra input field omitted"
+    },
+    {
+      "testId": "OPS-ASET-002",
+      "caseRef": "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset002ImmutableSnapshotsRemainIndependentAcrossLaterFailureAndSuccess()",
+      "declarationLine": 91,
+      "snippets": 3,
+      "independentExpected": "Two immutable snapshot layers retained across later failure and success"
+    },
+    {
+      "testId": "OPS-ASET-003",
+      "caseRef": "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset003RejectsQuotedNumbersAndBooleansAtThirdReadWithoutReturningPartialResult()",
+      "declarationLine": 110,
+      "snippets": 2,
+      "independentExpected": "Quoted numeric/boolean third read stops with no partial result"
+    },
+    {
+      "testId": "OPS-ASET-004",
+      "caseRef": "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset004RejectsMalformedOrMissingProjectionAndPreservesProviderFailureIdentity()",
+      "declarationLine": 131,
+      "snippets": 3,
+      "independentExpected": "Null/malformed/missing/nonString rejected; original reader runtime/Error identity"
+    },
+    {
+      "testId": "OPS-ASET-005",
+      "caseRef": "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset005VerifyUsesSameSixReadContractAndDefaultAssemblyDoesNotOpenSession()",
+      "declarationLine": 166,
+      "snippets": 2,
+      "independentExpected": "Default construction no session open; injected verify reads six"
+    },
+    {
+      "testId": "OPS-ROLE-MAP-001",
+      "caseRef": "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()",
+      "declarationLine": 69,
+      "snippets": 3,
+      "independentExpected": "12matches/27roles/324Boolean values exact from SS literal grants"
+    },
+    {
+      "testId": "OPS-ROLE-MAP-002",
+      "caseRef": "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap002AllThreeSnapshotLayersAreImmutableAndIndependent()",
+      "declarationLine": 97,
+      "snippets": 2,
+      "independentExpected": "All three snapshot layers immutable and separately owned"
+    },
+    {
+      "testId": "OPS-ROLE-MAP-003",
+      "caseRef": "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap003FifthReadFailureNeverPublishesPartialSnapshotOrContinuesReading()",
+      "declarationLine": 112,
+      "snippets": 3,
+      "independentExpected": "Ten malformed/drift variants and own reader faults stop at read5, prior snapshot retained"
+    },
+    {
+      "testId": "OPS-ROLE-MAP-004",
+      "caseRef": "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap004NullMalformedAndVerifyContractKeepBorrowedSessionUntouched()",
+      "declarationLine": 157,
+      "snippets": 3,
+      "independentExpected": "Null/malformed/nonString fail, default construction disconnected, supplied verify12"
+    }
+  ],
+  "originalRunRepeated": false,
+  "actualBrokerOrManagementReaderQualified": false,
+  "classInitFirstCaseKnown": false,
+  "exactAllMethodCasesOrOracleComplete": false,
+  "productTestsExecuted": 0,
+  "newUniqueTests": 0,
+  "compilerOrJvmExecuted": false,
+  "actualBackendActions": 0,
+  "wholeG13Accepted": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "files": {
+    "method-oracle-relations.json": "12f44ebd098333816b476ffd7420f3246d342d41c74a5b6ff697b4291373f30a"
+  },
+  "tool": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/635_broker_projection_method_oracle_review.py",
+    "sha256": "ffd9ffe765a42ef1d6154e4e656ef1b0a755b90d89dd8ccaa6ca7a172b0d54e5"
+  }
+}

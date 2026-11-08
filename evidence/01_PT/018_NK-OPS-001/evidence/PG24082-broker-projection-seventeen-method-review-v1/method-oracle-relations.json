@@ -1,0 +1,798 @@
+[
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+    "method": "<init>",
+    "descriptor": "()V",
+    "testIds": [
+      "OPS-ASET-005"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset005VerifyUsesSameSixReadContractAndDefaultAssemblyDoesNotOpenSession()"
+    ],
+    "oracleScope": "default construction only; management reader not invoked",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+    "sourceSha256": "3d2eb71dd8ef910acb5e18650c15d68cd5c438a9f4917fa970f0f5c91bcf50e4",
+    "classSha256": "c71fa03c8abdd3db3ae9b52ed8961b55f0bdc3c372b18c4728f6948c32c4b5b3",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+    "method": "<init>",
+    "descriptor": "(Ldev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Reader;)V",
+    "testIds": [
+      "OPS-ASET-001",
+      "OPS-ASET-002",
+      "OPS-ASET-003",
+      "OPS-ASET-004",
+      "OPS-ASET-005"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset002ImmutableSnapshotsRemainIndependentAcrossLaterFailureAndSuccess()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset003RejectsQuotedNumbersAndBooleansAtThirdReadWithoutReturningPartialResult()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset004RejectsMalformedOrMissingProjectionAndPreservesProviderFailureIdentity()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset005VerifyUsesSameSixReadContractAndDefaultAssemblyDoesNotOpenSession()"
+    ],
+    "oracleScope": "supplied reader/null invariant",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+    "sourceSha256": "3d2eb71dd8ef910acb5e18650c15d68cd5c438a9f4917fa970f0f5c91bcf50e4",
+    "classSha256": "c71fa03c8abdd3db3ae9b52ed8961b55f0bdc3c372b18c4728f6948c32c4b5b3",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+    "method": "verify",
+    "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;)V",
+    "testIds": [
+      "OPS-ASET-005"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset005VerifyUsesSameSixReadContractAndDefaultAssemblyDoesNotOpenSession()"
+    ],
+    "oracleScope": "same six-read inspect contract",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+    "sourceSha256": "3d2eb71dd8ef910acb5e18650c15d68cd5c438a9f4917fa970f0f5c91bcf50e4",
+    "classSha256": "c71fa03c8abdd3db3ae9b52ed8961b55f0bdc3c372b18c4728f6948c32c4b5b3",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+    "method": "inspect",
+    "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;)Ljava/util/Map;",
+    "testIds": [
+      "OPS-ASET-001",
+      "OPS-ASET-002",
+      "OPS-ASET-003",
+      "OPS-ASET-004",
+      "OPS-ASET-005"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset002ImmutableSnapshotsRemainIndependentAcrossLaterFailureAndSuccess()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset003RejectsQuotedNumbersAndBooleansAtThirdReadWithoutReturningPartialResult()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset004RejectsMalformedOrMissingProjectionAndPreservesProviderFailureIdentity()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset005VerifyUsesSameSixReadContractAndDefaultAssemblyDoesNotOpenSession()"
+    ],
+    "oracleScope": "six26-field actual snapshots/immutable/partial failure",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+    "sourceSha256": "3d2eb71dd8ef910acb5e18650c15d68cd5c438a9f4917fa970f0f5c91bcf50e4",
+    "classSha256": "c71fa03c8abdd3db3ae9b52ed8961b55f0bdc3c372b18c4728f6948c32c4b5b3",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+    "method": "verifyResponse",
+    "descriptor": "(Ljava/lang/String;Ldev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity;)Ljava/util/Map;",
+    "testIds": [
+      "OPS-ASET-001",
+      "OPS-ASET-002",
+      "OPS-ASET-003",
+      "OPS-ASET-004",
+      "OPS-ASET-005"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset002ImmutableSnapshotsRemainIndependentAcrossLaterFailureAndSuccess()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset003RejectsQuotedNumbersAndBooleansAtThirdReadWithoutReturningPartialResult()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset004RejectsMalformedOrMissingProjectionAndPreservesProviderFailureIdentity()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset005VerifyUsesSameSixReadContractAndDefaultAssemblyDoesNotOpenSession()"
+    ],
+    "oracleScope": "typed effective values and four capacity fields",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+    "sourceSha256": "3d2eb71dd8ef910acb5e18650c15d68cd5c438a9f4917fa970f0f5c91bcf50e4",
+    "classSha256": "c71fa03c8abdd3db3ae9b52ed8961b55f0bdc3c372b18c4728f6948c32c4b5b3",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+    "method": "expect",
+    "descriptor": "(Lorg/apache/activemq/artemis/json/JsonObject;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+    "testIds": [
+      "OPS-ASET-001",
+      "OPS-ASET-003",
+      "OPS-ASET-004"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset003RejectsQuotedNumbersAndBooleansAtThirdReadWithoutReturningPartialResult()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset004RejectsMalformedOrMissingProjectionAndPreservesProviderFailureIdentity()"
+    ],
+    "oracleScope": "missing/type/drift rejection, original actual literal returned",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+    "sourceSha256": "3d2eb71dd8ef910acb5e18650c15d68cd5c438a9f4917fa970f0f5c91bcf50e4",
+    "classSha256": "c71fa03c8abdd3db3ae9b52ed8961b55f0bdc3c372b18c4728f6948c32c4b5b3",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+    "method": "capacities",
+    "descriptor": "()Ljava/util/Map;",
+    "testIds": [
+      "OPS-ASET-001"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()"
+    ],
+    "oracleScope": "approved six policy capacities from independent integer literals",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+    "sourceSha256": "3d2eb71dd8ef910acb5e18650c15d68cd5c438a9f4917fa970f0f5c91bcf50e4",
+    "classSha256": "c71fa03c8abdd3db3ae9b52ed8961b55f0bdc3c372b18c4728f6948c32c4b5b3",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+    "method": "<clinit>",
+    "descriptor": "()V",
+    "testIds": [
+      "OPS-ASET-001"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()"
+    ],
+    "oracleScope": "policy/reader setup linkage; first executing case unknown",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+    "sourceSha256": "3d2eb71dd8ef910acb5e18650c15d68cd5c438a9f4917fa970f0f5c91bcf50e4",
+    "classSha256": "c71fa03c8abdd3db3ae9b52ed8961b55f0bdc3c372b18c4728f6948c32c4b5b3",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity",
+    "method": "<init>",
+    "descriptor": "(JJJJ)V",
+    "testIds": [
+      "OPS-ASET-001"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()"
+    ],
+    "oracleScope": "record constructor capacities indirectly constrained by six literal observations",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+    "sourceSha256": "3d2eb71dd8ef910acb5e18650c15d68cd5c438a9f4917fa970f0f5c91bcf50e4",
+    "classSha256": "9a3f72c76cf5d7ac7bcfa7ddbe8cf0c95b1a2889df2d50d144c6b5e39d08f144",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+    "method": "approved",
+    "descriptor": "()Ljava/util/Map;",
+    "testIds": [
+      "OPS-ROLE-MAP-001"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()"
+    ],
+    "oracleScope": "12match27role324 permission values from literal grants",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+    "sourceSha256": "0ffaf0718252a5853bde6b40fa7a604b42340898723eebb00ccf031e6b056647",
+    "classSha256": "e7b71dfa4517aae3ff6c140a7876aecabc3acd88315981455595f15f3e942389",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+    "method": "<init>",
+    "descriptor": "()V",
+    "testIds": [
+      "OPS-ROLE-MAP-004"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap004NullMalformedAndVerifyContractKeepBorrowedSessionUntouched()"
+    ],
+    "oracleScope": "default construction only; management reader not invoked",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+    "sourceSha256": "0ffaf0718252a5853bde6b40fa7a604b42340898723eebb00ccf031e6b056647",
+    "classSha256": "e7b71dfa4517aae3ff6c140a7876aecabc3acd88315981455595f15f3e942389",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+    "method": "<init>",
+    "descriptor": "(Ldev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient$Reader;)V",
+    "testIds": [
+      "OPS-ROLE-MAP-001",
+      "OPS-ROLE-MAP-002",
+      "OPS-ROLE-MAP-003",
+      "OPS-ROLE-MAP-004"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()",
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap002AllThreeSnapshotLayersAreImmutableAndIndependent()",
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap003FifthReadFailureNeverPublishesPartialSnapshotOrContinuesReading()",
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap004NullMalformedAndVerifyContractKeepBorrowedSessionUntouched()"
+    ],
+    "oracleScope": "supplied reader/null invariant",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+    "sourceSha256": "0ffaf0718252a5853bde6b40fa7a604b42340898723eebb00ccf031e6b056647",
+    "classSha256": "e7b71dfa4517aae3ff6c140a7876aecabc3acd88315981455595f15f3e942389",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+    "method": "verify",
+    "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;)V",
+    "testIds": [
+      "OPS-ROLE-MAP-004"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap004NullMalformedAndVerifyContractKeepBorrowedSessionUntouched()"
+    ],
+    "oracleScope": "same twelve-read inspect contract",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+    "sourceSha256": "0ffaf0718252a5853bde6b40fa7a604b42340898723eebb00ccf031e6b056647",
+    "classSha256": "e7b71dfa4517aae3ff6c140a7876aecabc3acd88315981455595f15f3e942389",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+    "method": "inspect",
+    "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;)Ljava/util/Map;",
+    "testIds": [
+      "OPS-ROLE-MAP-001",
+      "OPS-ROLE-MAP-002",
+      "OPS-ROLE-MAP-003",
+      "OPS-ROLE-MAP-004"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()",
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap002AllThreeSnapshotLayersAreImmutableAndIndependent()",
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap003FifthReadFailureNeverPublishesPartialSnapshotOrContinuesReading()",
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap004NullMalformedAndVerifyContractKeepBorrowedSessionUntouched()"
+    ],
+    "oracleScope": "three-layer immutable observed permission snapshots, partial read fail closed",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+    "sourceSha256": "0ffaf0718252a5853bde6b40fa7a604b42340898723eebb00ccf031e6b056647",
+    "classSha256": "e7b71dfa4517aae3ff6c140a7876aecabc3acd88315981455595f15f3e942389",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+    "method": "verifyResponse",
+    "descriptor": "(Ljava/lang/String;Ljava/util/Map;)Ljava/util/Map;",
+    "testIds": [
+      "OPS-ROLE-MAP-001",
+      "OPS-ROLE-MAP-002",
+      "OPS-ROLE-MAP-003",
+      "OPS-ROLE-MAP-004"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()",
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap002AllThreeSnapshotLayersAreImmutableAndIndependent()",
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap003FifthReadFailureNeverPublishesPartialSnapshotOrContinuesReading()",
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap004NullMalformedAndVerifyContractKeepBorrowedSessionUntouched()"
+    ],
+    "oracleScope": "closed role fields/Boolean permission sets/missing or excess rejection",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+    "sourceSha256": "0ffaf0718252a5853bde6b40fa7a604b42340898723eebb00ccf031e6b056647",
+    "classSha256": "e7b71dfa4517aae3ff6c140a7876aecabc3acd88315981455595f15f3e942389",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+    "method": "fields",
+    "descriptor": "()Ljava/util/Set;",
+    "testIds": [
+      "OPS-ROLE-MAP-001",
+      "OPS-ROLE-MAP-003"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()",
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap003FifthReadFailureNeverPublishesPartialSnapshotOrContinuesReading()"
+    ],
+    "oracleScope": "name plus twelve permission keys, missing and extra rejected",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+    "sourceSha256": "0ffaf0718252a5853bde6b40fa7a604b42340898723eebb00ccf031e6b056647",
+    "classSha256": "e7b71dfa4517aae3ff6c140a7876aecabc3acd88315981455595f15f3e942389",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+    "method": "<clinit>",
+    "descriptor": "()V",
+    "testIds": [
+      "OPS-ROLE-MAP-001"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()"
+    ],
+    "oracleScope": "closed role policy linkage; first executing case unknown",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+    "sourceSha256": "0ffaf0718252a5853bde6b40fa7a604b42340898723eebb00ccf031e6b056647",
+    "classSha256": "e7b71dfa4517aae3ff6c140a7876aecabc3acd88315981455595f15f3e942389",
+    "canonicalOwner": "WBS-P017-10",
+    "requirementIds": [
+      "MQ-001",
+      "MQ-002",
+      "MQ-009",
+      "MQ-010",
+      "SYS-004"
+    ],
+    "uiRefs": [
+      "231",
+      "251",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+      }
+    ],
+    "remaining": [
+      "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+      "default management reader invoked only in real runtime, not these cases",
+      "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+      "run-level method coverage, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_PROJECTION_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualBrokerOrManagementReaderQualified": false
+  }
+]

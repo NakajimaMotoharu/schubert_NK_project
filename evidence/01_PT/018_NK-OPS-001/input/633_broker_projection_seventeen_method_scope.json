@@ -1,0 +1,425 @@
+{
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "subjects": [
+    {
+      "mainPath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+      "testPath": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AddressSettingsProjectionPortTest.java",
+      "originalIndependentPost": "evidence/01_PT/018_NK-OPS-001/evidence/PG23238-address-settings-independent-v1/manifest.json",
+      "canonicalOwner": "WBS-P017-10",
+      "methods": [
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+          "method": "<init>",
+          "descriptor": "()V",
+          "testIds": [
+            "OPS-ASET-005"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset005VerifyUsesSameSixReadContractAndDefaultAssemblyDoesNotOpenSession()"
+          ],
+          "oracleScope": "default construction only; management reader not invoked"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+          "method": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Reader;)V",
+          "testIds": [
+            "OPS-ASET-001",
+            "OPS-ASET-002",
+            "OPS-ASET-003",
+            "OPS-ASET-004",
+            "OPS-ASET-005"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()",
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset002ImmutableSnapshotsRemainIndependentAcrossLaterFailureAndSuccess()",
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset003RejectsQuotedNumbersAndBooleansAtThirdReadWithoutReturningPartialResult()",
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset004RejectsMalformedOrMissingProjectionAndPreservesProviderFailureIdentity()",
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset005VerifyUsesSameSixReadContractAndDefaultAssemblyDoesNotOpenSession()"
+          ],
+          "oracleScope": "supplied reader/null invariant"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+          "method": "verify",
+          "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;)V",
+          "testIds": [
+            "OPS-ASET-005"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset005VerifyUsesSameSixReadContractAndDefaultAssemblyDoesNotOpenSession()"
+          ],
+          "oracleScope": "same six-read inspect contract"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+          "method": "inspect",
+          "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;)Ljava/util/Map;",
+          "testIds": [
+            "OPS-ASET-001",
+            "OPS-ASET-002",
+            "OPS-ASET-003",
+            "OPS-ASET-004",
+            "OPS-ASET-005"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()",
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset002ImmutableSnapshotsRemainIndependentAcrossLaterFailureAndSuccess()",
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset003RejectsQuotedNumbersAndBooleansAtThirdReadWithoutReturningPartialResult()",
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset004RejectsMalformedOrMissingProjectionAndPreservesProviderFailureIdentity()",
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset005VerifyUsesSameSixReadContractAndDefaultAssemblyDoesNotOpenSession()"
+          ],
+          "oracleScope": "six26-field actual snapshots/immutable/partial failure"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+          "method": "verifyResponse",
+          "descriptor": "(Ljava/lang/String;Ldev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity;)Ljava/util/Map;",
+          "testIds": [
+            "OPS-ASET-001",
+            "OPS-ASET-002",
+            "OPS-ASET-003",
+            "OPS-ASET-004",
+            "OPS-ASET-005"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()",
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset002ImmutableSnapshotsRemainIndependentAcrossLaterFailureAndSuccess()",
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset003RejectsQuotedNumbersAndBooleansAtThirdReadWithoutReturningPartialResult()",
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset004RejectsMalformedOrMissingProjectionAndPreservesProviderFailureIdentity()",
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset005VerifyUsesSameSixReadContractAndDefaultAssemblyDoesNotOpenSession()"
+          ],
+          "oracleScope": "typed effective values and four capacity fields"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+          "method": "expect",
+          "descriptor": "(Lorg/apache/activemq/artemis/json/JsonObject;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+          "testIds": [
+            "OPS-ASET-001",
+            "OPS-ASET-003",
+            "OPS-ASET-004"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()",
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset003RejectsQuotedNumbersAndBooleansAtThirdReadWithoutReturningPartialResult()",
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset004RejectsMalformedOrMissingProjectionAndPreservesProviderFailureIdentity()"
+          ],
+          "oracleScope": "missing/type/drift rejection, original actual literal returned"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+          "method": "capacities",
+          "descriptor": "()Ljava/util/Map;",
+          "testIds": [
+            "OPS-ASET-001"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()"
+          ],
+          "oracleScope": "approved six policy capacities from independent integer literals"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+          "method": "<clinit>",
+          "descriptor": "()V",
+          "testIds": [
+            "OPS-ASET-001"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()"
+          ],
+          "oracleScope": "policy/reader setup linkage; first executing case unknown"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity",
+          "method": "<init>",
+          "descriptor": "(JJJJ)V",
+          "testIds": [
+            "OPS-ASET-001"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()"
+          ],
+          "oracleScope": "record constructor capacities indirectly constrained by six literal observations"
+        }
+      ],
+      "oracles": [
+        {
+          "testId": "OPS-ASET-001",
+          "runCase": "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()",
+          "expected": "Six addresses/26 fields match independent literals, extra input field omitted",
+          "assertionTokens": [
+            "assertEquals(6, reads.size());",
+            "assertEquals(26, fields.size());",
+            "assertEquals(expected(address), fields);",
+            "assertEquals(false, fields.containsKey(EXTRA));"
+          ]
+        },
+        {
+          "testId": "OPS-ASET-002",
+          "runCase": "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset002ImmutableSnapshotsRemainIndependentAcrossLaterFailureAndSuccess()",
+          "expected": "Two immutable snapshot layers retained across later failure and success",
+          "assertionTokens": [
+            "assertNotSame(before, after);",
+            "assertNotSame(before.get(REQUEST), after.get(REQUEST));",
+            "assertEquals(expected(REQUEST), before.get(REQUEST));"
+          ]
+        },
+        {
+          "testId": "OPS-ASET-003",
+          "runCase": "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset003RejectsQuotedNumbersAndBooleansAtThirdReadWithoutReturningPartialResult()",
+          "expected": "Quoted numeric/boolean third read stops with no partial result",
+          "assertionTokens": [
+            "FAILURE_READ",
+            "assertEquals(3, reads.get());"
+          ]
+        },
+        {
+          "testId": "OPS-ASET-004",
+          "runCase": "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset004RejectsMalformedOrMissingProjectionAndPreservesProviderFailureIdentity()",
+          "expected": "Null/malformed/missing/nonString rejected; original reader runtime/Error identity",
+          "assertionTokens": [
+            "invalid.add(null);",
+            "assertSame(failure, assertThrows(failure.getClass(), () -> failing.inspect(unusedSession())));",
+            "assertEquals(1, reads.get());"
+          ]
+        },
+        {
+          "testId": "OPS-ASET-005",
+          "runCase": "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset005VerifyUsesSameSixReadContractAndDefaultAssemblyDoesNotOpenSession()",
+          "expected": "Default construction no session open; injected verify reads six",
+          "assertionTokens": [
+            "var unconnected = new ArtemisAddressSettingsReadinessClient();",
+            "assertEquals(6, reads.get());"
+          ]
+        }
+      ],
+      "measuredMethods": 9,
+      "filteredMethods": 7,
+      "abstractNoCodeMethods": 1,
+      "inputs": {
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java": "3d2eb71dd8ef910acb5e18650c15d68cd5c438a9f4917fa970f0f5c91bcf50e4",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AddressSettingsProjectionPortTest.java": "f3c8e0c57f9bfa54fa4307bccd30017c74a9c712bbc0208daab32097f7866308",
+        "evidence/01_PT/018_NK-OPS-001/evidence/PG23238-address-settings-independent-v1/manifest.json": "70dcf4f4c6389ed6a828cb01c921de3a31a729173c10de727ece7de14e69f5e6"
+      }
+    },
+    {
+      "mainPath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+      "testPath": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/RoleSettingsProjectionPortTest.java",
+      "originalIndependentPost": "evidence/01_PT/018_NK-OPS-001/evidence/PG23266-role-settings-independent-v1/manifest.json",
+      "canonicalOwner": "WBS-P017-10",
+      "methods": [
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+          "method": "approved",
+          "descriptor": "()Ljava/util/Map;",
+          "testIds": [
+            "OPS-ROLE-MAP-001"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()"
+          ],
+          "oracleScope": "12match27role324 permission values from literal grants"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+          "method": "<init>",
+          "descriptor": "()V",
+          "testIds": [
+            "OPS-ROLE-MAP-004"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap004NullMalformedAndVerifyContractKeepBorrowedSessionUntouched()"
+          ],
+          "oracleScope": "default construction only; management reader not invoked"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+          "method": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient$Reader;)V",
+          "testIds": [
+            "OPS-ROLE-MAP-001",
+            "OPS-ROLE-MAP-002",
+            "OPS-ROLE-MAP-003",
+            "OPS-ROLE-MAP-004"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()",
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap002AllThreeSnapshotLayersAreImmutableAndIndependent()",
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap003FifthReadFailureNeverPublishesPartialSnapshotOrContinuesReading()",
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap004NullMalformedAndVerifyContractKeepBorrowedSessionUntouched()"
+          ],
+          "oracleScope": "supplied reader/null invariant"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+          "method": "verify",
+          "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;)V",
+          "testIds": [
+            "OPS-ROLE-MAP-004"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap004NullMalformedAndVerifyContractKeepBorrowedSessionUntouched()"
+          ],
+          "oracleScope": "same twelve-read inspect contract"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+          "method": "inspect",
+          "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;)Ljava/util/Map;",
+          "testIds": [
+            "OPS-ROLE-MAP-001",
+            "OPS-ROLE-MAP-002",
+            "OPS-ROLE-MAP-003",
+            "OPS-ROLE-MAP-004"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()",
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap002AllThreeSnapshotLayersAreImmutableAndIndependent()",
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap003FifthReadFailureNeverPublishesPartialSnapshotOrContinuesReading()",
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap004NullMalformedAndVerifyContractKeepBorrowedSessionUntouched()"
+          ],
+          "oracleScope": "three-layer immutable observed permission snapshots, partial read fail closed"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+          "method": "verifyResponse",
+          "descriptor": "(Ljava/lang/String;Ljava/util/Map;)Ljava/util/Map;",
+          "testIds": [
+            "OPS-ROLE-MAP-001",
+            "OPS-ROLE-MAP-002",
+            "OPS-ROLE-MAP-003",
+            "OPS-ROLE-MAP-004"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()",
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap002AllThreeSnapshotLayersAreImmutableAndIndependent()",
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap003FifthReadFailureNeverPublishesPartialSnapshotOrContinuesReading()",
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap004NullMalformedAndVerifyContractKeepBorrowedSessionUntouched()"
+          ],
+          "oracleScope": "closed role fields/Boolean permission sets/missing or excess rejection"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+          "method": "fields",
+          "descriptor": "()Ljava/util/Set;",
+          "testIds": [
+            "OPS-ROLE-MAP-001",
+            "OPS-ROLE-MAP-003"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()",
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap003FifthReadFailureNeverPublishesPartialSnapshotOrContinuesReading()"
+          ],
+          "oracleScope": "name plus twelve permission keys, missing and extra rejected"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+          "method": "<clinit>",
+          "descriptor": "()V",
+          "testIds": [
+            "OPS-ROLE-MAP-001"
+          ],
+          "runCases": [
+            "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()"
+          ],
+          "oracleScope": "closed role policy linkage; first executing case unknown"
+        }
+      ],
+      "oracles": [
+        {
+          "testId": "OPS-ROLE-MAP-001",
+          "runCase": "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()",
+          "expected": "12matches/27roles/324Boolean values exact from SS literal grants",
+          "assertionTokens": [
+            "assertEquals(12, result.size());",
+            "assertEquals(27, roleCount);",
+            "assertEquals(324, permissionCount);"
+          ]
+        },
+        {
+          "testId": "OPS-ROLE-MAP-002",
+          "runCase": "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap002AllThreeSnapshotLayersAreImmutableAndIndependent()",
+          "expected": "All three snapshot layers immutable and separately owned",
+          "assertionTokens": [
+            "assertNotSame(first, second);",
+            "assertNotSame(first.get(REQUEST).get(\"nk_web\"), second.get(REQUEST).get(\"nk_web\"));"
+          ]
+        },
+        {
+          "testId": "OPS-ROLE-MAP-003",
+          "runCase": "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap003FifthReadFailureNeverPublishesPartialSnapshotOrContinuesReading()",
+          "expected": "Ten malformed/drift variants and own reader faults stop at read5, prior snapshot retained",
+          "assertionTokens": [
+            "for (int variant = 0; variant < 10; variant++)",
+            "assertEquals(FAILURE_READ, reads.get());",
+            "assertEquals(expected(REQUEST), retained.get(REQUEST));"
+          ]
+        },
+        {
+          "testId": "OPS-ROLE-MAP-004",
+          "runCase": "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap004NullMalformedAndVerifyContractKeepBorrowedSessionUntouched()",
+          "expected": "Null/malformed/nonString fail, default construction disconnected, supplied verify12",
+          "assertionTokens": [
+            "var unconnected = new ArtemisRoleReadinessClient();",
+            "invalid.add(null);",
+            "assertEquals(12, reads.get());"
+          ]
+        }
+      ],
+      "measuredMethods": 8,
+      "filteredMethods": 0,
+      "abstractNoCodeMethods": 1,
+      "inputs": {
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java": "0ffaf0718252a5853bde6b40fa7a604b42340898723eebb00ccf031e6b056647",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/RoleSettingsProjectionPortTest.java": "d51d6ccc84e05657d7f8678bf5733f945f51ebbe3aead20bf24fb8b4eea3582a",
+        "evidence/01_PT/018_NK-OPS-001/evidence/PG23266-role-settings-independent-v1/manifest.json": "08b26b36120ca1debca0a1ff5c5ab9e8e2cae611516369ac7a5e6244c68ff2bc"
+      }
+    }
+  ],
+  "inputs": {
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json": "e65782d893a5ae45309cf269d165dec33d1dc396f06b7968b62d95b276455d31",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG23982-pending12-method-coverage-v1/source-method-coverage.json": "6e8b9043e41f1d2bc08e70cd4e875630aabbf935ee2a5dde03cdc94dcc118282",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG23836-pending12-trace-registration-v1/source-trace.json": "5baabb8524d32d1ccf545abc561529d15d85d4ab294917786cdb153b8a41c30d",
+    "evidence/01_PT/018_NK-OPS-001/3735_Address設定観測Map_通常PT仕様書.md": "20c42fedd48d904c20ab03269d86b8564489889ca6f78bbeda77d4a6a077912e",
+    "evidence/01_PT/018_NK-OPS-001/3736_Address設定観測Map_通常PT実行結果.md": "bace2470cdcae081e48beb56dabc9ba7fb32f45320da1da9823f1690f988d86d",
+    "evidence/01_PT/018_NK-OPS-001/3737_Role設定観測Map_通常PT仕様書.md": "8a0bf1529e1d6ac699edd73031550b1611e0e7bc1d1f0736b0e4dde7df289ca0",
+    "evidence/01_PT/018_NK-OPS-001/3738_Role設定観測Map_通常PT実行結果.md": "5eb676adfbd6b378508c91213174dcc34bca3b85cc210df15af30cd9f2739b71",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java": "3d2eb71dd8ef910acb5e18650c15d68cd5c438a9f4917fa970f0f5c91bcf50e4",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AddressSettingsProjectionPortTest.java": "f3c8e0c57f9bfa54fa4307bccd30017c74a9c712bbc0208daab32097f7866308",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG23238-address-settings-independent-v1/manifest.json": "70dcf4f4c6389ed6a828cb01c921de3a31a729173c10de727ece7de14e69f5e6",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java": "0ffaf0718252a5853bde6b40fa7a604b42340898723eebb00ccf031e6b056647",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/RoleSettingsProjectionPortTest.java": "d51d6ccc84e05657d7f8678bf5733f945f51ebbe3aead20bf24fb8b4eea3582a",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG23266-role-settings-independent-v1/manifest.json": "08b26b36120ca1debca0a1ff5c5ab9e8e2cae611516369ac7a5e6244c68ff2bc"
+  },
+  "methodInventory": "evidence/01_PT/018_NK-OPS-001/evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json",
+  "perSourceCoverage": "evidence/01_PT/018_NK-OPS-001/evidence/PG23982-pending12-method-coverage-v1/source-method-coverage.json",
+  "sourceTrace": "evidence/01_PT/018_NK-OPS-001/evidence/PG23836-pending12-trace-registration-v1/source-trace.json",
+  "designRefs": [
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "source": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+    }
+  ],
+  "requirementIds": [
+    "MQ-001",
+    "MQ-002",
+    "MQ-009",
+    "MQ-010",
+    "SYS-004"
+  ],
+  "ui": [
+    "231",
+    "251",
+    "253"
+  ],
+  "remaining": [
+    "actual Ops-authenticated JMS/role provisioning/realbroker state unqualified",
+    "default management reader invoked only in real runtime, not these cases",
+    "seven record compiler-filtered methods not independently measured;two abstract Reader methods have no Code",
+    "run-level method coverage, first clinit case unknown"
+  ],
+  "productTestsExecuted": 0
+}
