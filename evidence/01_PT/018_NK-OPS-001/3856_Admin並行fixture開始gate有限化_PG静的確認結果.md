@@ -1,0 +1,9 @@
+# NK-OPS-001 Admin並行fixture開始gate有限化 PG・静的確認結果
+
+BUG2519/YKT2177、G03.05主/P01001関連追加0、REWORK開始0.5/2/5pp cap7不変。UserCommandServiceTest.adm022のfirstpoolでCountDownLatch startを生成し、全100submitの後だけcountDownしていた。submit途中例外ではtry-with-resourcesのexecutor.closeが未releaseタスクを待ち続け得る。元sourceをPG24176へ保存し、開始待ち一siteをassertTrue(start.await(5, TimeUnit.SECONDS))へ変更した。既barrier5秒/Future.get30秒の値は不変更。
+
+PG24180製造確認0、別PG24182逆変換/型宣言とsubmit-failure制御確認0、metadata否定六件（元無期限/50秒/timeout未検査/誤単位/競合期待改変/試行数改変）。原100試行・成功1/競合99・DB期待102・全他byte不変を独立に確認。動的再現は行わず、これらはPG source製造と静的レビューの結果である。対象には@Test十methodがあるが実行成功数へ換算0。
+
+実commandはinput660/661、Pythonによる自己所有source/公開before/manifestの読取書込のみ。Product/Test compile/JVM/JUnit/JDBC/DB・VM/サービス/native等の起動0。当Testの全DB fixtureを要するPTはNOT_RUN_HOLD_ACTUAL_DATABASE_FIXTURE、coverage未測定、新PT・免除・正式受入0。BUGはSOURCE_FIXED_REVIEWED_DYNAMIC_RETEST_HOLDでありCLOSEDにしない。YKT2177全体と既Questionの動的HOLDを維持する。Production Main source7aedは不変、Test source修正により旧23952構文一覧の当一entryのhash/arityは現物へ流用しない。全968件一覧の再解析を確認目的では行っていない。
+
+原SHA cc78b69029069f5720afa381c5c2a42622ea6e43ee245bccffa21026f7dac1ce → 修正SHA cdbe7ab2d7c9dd5db3d54f612d85d297f575f5e0881e00467fc997919fbdcf91。独立manifest `evidence/01_PT/018_NK-OPS-001/evidence/PG24182-admin-concurrency-wait-independent-v1/manifest.json` SHA256 edd0f5f51f7a34be95a5ab3fa8af0ab7c251ca2f5f28754ca7d4d7a45bd5928c。正式1964/53・unique517・候補114/pending12/旧whole暫定93/新leaf0/工数null/G07未分類3313+限界22actualSecretCountnull、全実操作HOLD、外部job現在UNKNOWNを維持する。次は許可済みの別残件へ進み、当originalclassの実行は安全・承認前提が別途成立するまで保留。

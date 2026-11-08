@@ -796,7 +796,7 @@ class UserCommandServiceTest {
         jobs.add(
             pool.submit(
                 () -> {
-                  start.await();
+                  assertTrue(start.await(5, TimeUnit.SECONDS));
                   return run(
                           Mutation.ENABLE,
                           OptionalLong.of(3),
