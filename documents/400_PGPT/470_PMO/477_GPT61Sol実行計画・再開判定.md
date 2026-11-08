@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-08 metadata入力型を先行観測する同因反復是正
+
+BUG2497/YKT2235の空list/bool同視に続き、BUG2498/YKT2236は実行count int0/boolFalseの同視で、新読取工具のguardがtarget処理前に停止した。以後新metadata helperは、固定input pin・size上限・必須fieldの実型/欠落/適用counterを先に一覧化してからpredicateを実装する。bool/int/listをtruthiness又は相互代用でnormaliseせず、未知/未対応shape/欠落を0・false・成功へ補完しない。原fieldのfalse/count0/emptylistは各schemaで厳密に保持し、相互代用と欠落の否定確認を行う。元失敗/開始見積/専有費不明を保持し、工具手戻りを元計画の完成率にしない。正規477停滞是正として内部手順だけを変更し、実行モデル・品質・scope・全HOLD・継続/残10%停止は不変更。根拠0183805/3806、PG23784before/23778metadata/23780独立。
+
+
 ## 2026-11-06 群末利用枠の終端後fresh結合（BUG2322/YKT2067）
 
 今後の開始は既pmo_quota_binding.start_fieldsでactual API観測を120秒以内・再利用なしで結合する。群末は同moduleのend_fieldsで、実run真正終端後に取得したfresh120秒以内の観測を結合する。cached stage値を群末に流用せず、古いAPI結果に新時刻を付けない。残10%以下/取得不能でも既成果の保全記録は許可し、新規実装を禁止する。同窓のみ差分、reset/欠測はnull、専有費/N/T不明を共有割合から生成しない。旧3984は元記録を保持して追加訂正で一度だけ差額を計上。仕様/451/群cap10/通常区切り継続・既HOLDは不変。詳細487・Program018 3584/3585、最新PG20222（旧PG20218は別sourceで保全）。終端結合のbeforeには開始eventのquotaReceipt.observationを渡し、flatの表示用quotaBeforeからwindow情報を推測しない。
