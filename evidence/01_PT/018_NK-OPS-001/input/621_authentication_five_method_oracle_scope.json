@@ -1,0 +1,331 @@
+{
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java",
+  "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationServiceMemoryPortTest.java",
+  "methodInventory": "evidence/01_PT/018_NK-OPS-001/evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json",
+  "originalIndependentPost": "evidence/01_PT/007_NK-AUT-001/evidence/PG23816-authentication-memory-port-independent-v1/manifest.json",
+  "sourceTrace": "evidence/01_PT/018_NK-OPS-001/evidence/PG23836-pending12-trace-registration-v1/source-trace.json",
+  "inputs": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java": "453a743084bbbe3d8cd859db1246faee5c27af1cc3f46484cb1ea07e98baee51",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationServiceMemoryPortTest.java": "84c3540cf9417f9d86cc618407da1437e7538a6929b987f129b57661bb0b9eb0",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json": "e65782d893a5ae45309cf269d165dec33d1dc396f06b7968b62d95b276455d31",
+    "evidence/01_PT/007_NK-AUT-001/evidence/PG23816-authentication-memory-port-independent-v1/manifest.json": "16d8ffd9c4e0be2e2afe54608b0a4a7b7c1844739982baea5643f952190fea1b",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG23836-pending12-trace-registration-v1/source-trace.json": "5baabb8524d32d1ccf545abc561529d15d85d4ab294917786cdb153b8a41c30d",
+    "evidence/01_PT/007_NK-AUT-001/049_AuthenticationService借用JDBC消費境界_単体仕様.md": "cb6798e92f8684dc07ebee7427afd3bf0f280259b1d303cb40c11773fd446385",
+    "evidence/01_PT/007_NK-AUT-001/050_AuthenticationService借用JDBC消費境界_実行結果.md": "a21414d507c790690ae5fb734880b189bacc0d5e40b996b71bcc242e72097d61"
+  },
+  "designRefs": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "source": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "source": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    }
+  ],
+  "methods": [
+    {
+      "method": "<init>",
+      "descriptor": "(Ldev/codex/schubert/nk/api/security/LoginAttemptRepository;Ldev/codex/schubert/nk/api/security/PasswordHasher;Ldev/codex/schubert/nk/api/security/AuthSessionService;Ldev/codex/schubert/nk/api/security/LoginAuditWriter;)V",
+      "testIds": [
+        "PT-AUT-MEMPORT001"
+      ],
+      "runCases": [
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory001ConstructorsRejectMissingDependenciesAndDefaultCheckerIsConstructionOnly()"
+      ],
+      "oracleScope": "defaultMatcher construction and locked gate only"
+    },
+    {
+      "method": "<init>",
+      "descriptor": "(Ldev/codex/schubert/nk/api/security/LoginAttemptRepository;Ljava/util/function/BiPredicate;Ldev/codex/schubert/nk/api/security/AuthSessionService;Ldev/codex/schubert/nk/api/security/LoginAuditWriter;)V",
+      "testIds": [
+        "PT-AUT-MEMPORT001",
+        "PT-AUT-MEMPORT002",
+        "PT-AUT-MEMPORT003",
+        "PT-AUT-MEMPORT004",
+        "PT-AUT-MEMPORT005",
+        "PT-AUT-MEMPORT006",
+        "PT-AUT-MEMPORT007",
+        "PT-AUT-MEMPORT008",
+        "PT-AUT-MEMPORT009",
+        "PT-AUT-MEMPORT010",
+        "PT-AUT-MEMPORT011",
+        "PT-AUT-MEMPORT012",
+        "PT-AUT-MEMPORT013",
+        "PT-AUT-MEMPORT014",
+        "PT-AUT-MEMPORT015",
+        "PT-AUT-MEMPORT016"
+      ],
+      "runCases": [
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory001ConstructorsRejectMissingDependenciesAndDefaultCheckerIsConstructionOnly()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory002UserSuccessPreservesNormalizedDisplayAndBorrowedTransaction()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory003AdminIdentityComesFromTheOwnedRow()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory004AbsentAndDisabledAccountsUseDummyWorkAndOneCommonFailure()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory005WrongActivePasswordUpdatesBothCountersWithoutIssuance()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory006UserFiveAndIpTenLockOnThisAttempt()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory007ExistingLocksUseMaximumWithoutCheckerOrMutation()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory008FractionalRetryCeilsAndCapsAtNineHundred()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory009ExpiryEqualityPermitsCheckWhileWindowEqualityStillAccumulates()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory010NullAndInvalidInputsNeverSkipPasswordConsumption()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory011CheckerFailuresMapOnlyDeclaredCatalogAndPreserveDirectFatalIdentity()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory012JdbcReadUpdateAndResourceFaultsFailClosedWithoutOwningTheConnection()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory013CriticalAuditFaultAndNestedFatalNeverReturnSuccess()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory014ThirdSessionDelegatesOldestRevocationWithSeparateSafeAudit()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory015RepeatedConsumerCallsKeepCallerRowsAndPasswordsIndependent()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray()"
+      ],
+      "oracleScope": "provided checker null invariant and all16 consumer fixtures"
+    },
+    {
+      "method": "authenticate",
+      "descriptor": "(Ljava/sql/Connection;Ljava/lang/String;[CLjava/net/InetAddress;Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;)Ldev/codex/schubert/nk/api/security/LoginResult;",
+      "testIds": [
+        "PT-AUT-MEMPORT001",
+        "PT-AUT-MEMPORT002",
+        "PT-AUT-MEMPORT003",
+        "PT-AUT-MEMPORT004",
+        "PT-AUT-MEMPORT005",
+        "PT-AUT-MEMPORT006",
+        "PT-AUT-MEMPORT007",
+        "PT-AUT-MEMPORT008",
+        "PT-AUT-MEMPORT009",
+        "PT-AUT-MEMPORT010",
+        "PT-AUT-MEMPORT011",
+        "PT-AUT-MEMPORT012",
+        "PT-AUT-MEMPORT013",
+        "PT-AUT-MEMPORT014",
+        "PT-AUT-MEMPORT015",
+        "PT-AUT-MEMPORT016"
+      ],
+      "runCases": [
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory001ConstructorsRejectMissingDependenciesAndDefaultCheckerIsConstructionOnly()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory002UserSuccessPreservesNormalizedDisplayAndBorrowedTransaction()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory003AdminIdentityComesFromTheOwnedRow()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory004AbsentAndDisabledAccountsUseDummyWorkAndOneCommonFailure()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory005WrongActivePasswordUpdatesBothCountersWithoutIssuance()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory006UserFiveAndIpTenLockOnThisAttempt()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory007ExistingLocksUseMaximumWithoutCheckerOrMutation()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory008FractionalRetryCeilsAndCapsAtNineHundred()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory009ExpiryEqualityPermitsCheckWhileWindowEqualityStillAccumulates()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory010NullAndInvalidInputsNeverSkipPasswordConsumption()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory011CheckerFailuresMapOnlyDeclaredCatalogAndPreserveDirectFatalIdentity()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory012JdbcReadUpdateAndResourceFaultsFailClosedWithoutOwningTheConnection()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory013CriticalAuditFaultAndNestedFatalNeverReturnSuccess()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory014ThirdSessionDelegatesOldestRevocationWithSeparateSafeAudit()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory015RepeatedConsumerCallsKeepCallerRowsAndPasswordsIndependent()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray()"
+      ],
+      "oracleScope": "consumer boundary and audit/password ownership"
+    },
+    {
+      "method": "retry",
+      "descriptor": "(Ldev/codex/schubert/nk/api/security/LockedLoginAttempt;Ljava/time/Instant;Z)I",
+      "testIds": [
+        "PT-AUT-MEMPORT002",
+        "PT-AUT-MEMPORT004",
+        "PT-AUT-MEMPORT005",
+        "PT-AUT-MEMPORT006",
+        "PT-AUT-MEMPORT007",
+        "PT-AUT-MEMPORT008",
+        "PT-AUT-MEMPORT009",
+        "PT-AUT-MEMPORT015",
+        "PT-AUT-MEMPORT016"
+      ],
+      "runCases": [
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory002UserSuccessPreservesNormalizedDisplayAndBorrowedTransaction()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory004AbsentAndDisabledAccountsUseDummyWorkAndOneCommonFailure()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory005WrongActivePasswordUpdatesBothCountersWithoutIssuance()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory006UserFiveAndIpTenLockOnThisAttempt()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory007ExistingLocksUseMaximumWithoutCheckerOrMutation()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory008FractionalRetryCeilsAndCapsAtNineHundred()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory009ExpiryEqualityPermitsCheckWhileWindowEqualityStillAccumulates()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory015RepeatedConsumerCallsKeepCallerRowsAndPasswordsIndependent()",
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray()"
+      ],
+      "oracleScope": "before/after failure and optional account maximum with independent literal boundaries"
+    },
+    {
+      "method": "<clinit>",
+      "descriptor": "()V",
+      "testIds": [
+        "PT-AUT-MEMPORT004"
+      ],
+      "runCases": [
+        "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory004AbsentAndDisabledAccountsUseDummyWorkAndOneCommonFailure()"
+      ],
+      "oracleScope": "fixed non-account dummy value observed by supplied checker"
+    }
+  ],
+  "oracles": [
+    {
+      "testId": "PT-AUT-MEMPORT001",
+      "runCase": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory001ConstructorsRejectMissingDependenciesAndDefaultCheckerIsConstructionOnly()",
+      "expected": "Constructor null/default locked gate only",
+      "assertionTokens": [
+        "assertTrue(f.statements.isEmpty());",
+        "assertEquals(0, f.checked.get());"
+      ]
+    },
+    {
+      "testId": "PT-AUT-MEMPORT002",
+      "runCase": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory002UserSuccessPreservesNormalizedDisplayAndBorrowedTransaction()",
+      "expected": "NFC USER success/reset/UTC microseconds/erase/borrowed lifecycle",
+      "assertionTokens": [
+        "assertEquals(7, result.actor().userId());",
+        "assertEquals(AT, result.issued().issuedAt());"
+      ]
+    },
+    {
+      "testId": "PT-AUT-MEMPORT003",
+      "runCase": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory003AdminIdentityComesFromTheOwnedRow()",
+      "expected": "ADMIN identity from supplied row",
+      "assertionTokens": [
+        "assertEquals(Role.ADMIN, result.actor().role());"
+      ]
+    },
+    {
+      "testId": "PT-AUT-MEMPORT004",
+      "runCase": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory004AbsentAndDisabledAccountsUseDummyWorkAndOneCommonFailure()",
+      "expected": "Absent or disabled common failure and fixed dummy work/no issue",
+      "assertionTokens": [
+        "assertEquals(DUMMY_HASH, f.observedStoredHash);",
+        "assertEquals(0, f.count(Stage.SESSION_INSERT));"
+      ]
+    },
+    {
+      "testId": "PT-AUT-MEMPORT005",
+      "runCase": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory005WrongActivePasswordUpdatesBothCountersWithoutIssuance()",
+      "expected": "Wrong password user2→3 IP3→4 no issue",
+      "assertionTokens": [
+        "assertEquals(3, f.param(Stage.UPDATE_USER, 1));",
+        "assertEquals(4, f.param(Stage.UPDATE_IP, 1));"
+      ]
+    },
+    {
+      "testId": "PT-AUT-MEMPORT006",
+      "runCase": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory006UserFiveAndIpTenLockOnThisAttempt()",
+      "expected": "User5/IP10 threshold locks900",
+      "assertionTokens": [
+        "new int[] {4, 0}",
+        "new int[] {0, 9}",
+        "new int[] {4, 9}",
+        "assertEquals(900, result.retryAfterSeconds());"
+      ]
+    },
+    {
+      "testId": "PT-AUT-MEMPORT007",
+      "runCase": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory007ExistingLocksUseMaximumWithoutCheckerOrMutation()",
+      "expected": "Existing user120/IP240 maximum240/no check or update",
+      "assertionTokens": [
+        "assertEquals(240, result.retryAfterSeconds());",
+        "assertEquals(0, f.checked.get());"
+      ]
+    },
+    {
+      "testId": "PT-AUT-MEMPORT008",
+      "runCase": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory008FractionalRetryCeilsAndCapsAtNineHundred()",
+      "expected": "Literal ceil vectors1us→1,1s+1us→2,near900→900,capped900",
+      "assertionTokens": [
+        "new long[] {1_000, 1}",
+        "new long[] {1_000_001_000L, 2}",
+        "new long[] {899_999_999_000L, 900}",
+        "new long[] {900_000_001_000L, 900}"
+      ]
+    },
+    {
+      "testId": "PT-AUT-MEMPORT009",
+      "runCase": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory009ExpiryEqualityPermitsCheckWhileWindowEqualityStillAccumulates()",
+      "expected": "Lock equality permits match; window equality accumulates; strict+1us reset",
+      "assertionTokens": [
+        "f.userWindow = AT.minusSeconds(900);",
+        "f.userWindow = AT.minusSeconds(900).minusNanos(1_000);",
+        "assertEquals(1, f.param(Stage.UPDATE_USER, 1));"
+      ]
+    },
+    {
+      "testId": "PT-AUT-MEMPORT010",
+      "runCase": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory010NullAndInvalidInputsNeverSkipPasswordConsumption()",
+      "expected": "Null/empty/overlength input before JDBC/password consumed when present",
+      "assertionTokens": [
+        "for (int missing = 0; missing < 6; missing++)",
+        "assertTrue(f.statements.isEmpty());"
+      ]
+    },
+    {
+      "testId": "PT-AUT-MEMPORT011",
+      "runCase": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory011CheckerFailuresMapOnlyDeclaredCatalogAndPreserveDirectFatalIdentity()",
+      "expected": "Declared checker failures fixed catalog; other runtime/directError same identity",
+      "assertionTokens": [
+        "expectStorageFailure(f::call);",
+        "assertSame(failure, assertThrows(failure.getClass(), f::call));"
+      ]
+    },
+    {
+      "testId": "PT-AUT-MEMPORT012",
+      "runCase": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory012JdbcReadUpdateAndResourceFaultsFailClosedWithoutOwningTheConnection()",
+      "expected": "JDBC read/update/close/null fields/unknown enum fail closed",
+      "assertionTokens": [
+        "Site.PREPARE, Site.EXECUTE, Site.CLOSE_STATEMENT",
+        "Site.NEXT, Site.CLOSE_RESULT"
+      ]
+    },
+    {
+      "testId": "PT-AUT-MEMPORT013",
+      "runCase": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory013CriticalAuditFaultAndNestedFatalNeverReturnSuccess()",
+      "expected": "Critical audit failure no success; nested fatal same identity",
+      "assertionTokens": [
+        "assertEquals(1, f.count(Stage.SESSION_INSERT));",
+        "assertSame(fatal, assertThrows(AssertionError.class, f::call));"
+      ]
+    },
+    {
+      "testId": "PT-AUT-MEMPORT014",
+      "runCase": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory014ThirdSessionDelegatesOldestRevocationWithSeparateSafeAudit()",
+      "expected": "DIF016 delegate oldest revoke1/separate safe audit; closed codec no issue",
+      "assertionTokens": [
+        "assertEquals(1, f.count(Stage.SESSION_REPLACE));",
+        "assertTrue(oldest.equals(f.param(Stage.SESSION_REPLACE, 2)));"
+      ]
+    },
+    {
+      "testId": "PT-AUT-MEMPORT015",
+      "runCase": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory015RepeatedConsumerCallsKeepCallerRowsAndPasswordsIndependent()",
+      "expected": "Same service distinct caller rows/results/passwords independent",
+      "assertionTokens": [
+        "assertEquals(ResultCode.SUCCESS, first.call(service).resultCode());",
+        "assertEquals(ResultCode.AUTHENTICATION_FAILED, second.call(service).resultCode());"
+      ]
+    },
+    {
+      "testId": "PT-AUT-MEMPORT016",
+      "runCase": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray()",
+      "expected": "Two owned finite tasks/distinct connections/actors and both consumed arrays, not same-row DB race",
+      "assertionTokens": [
+        "one.get(5, TimeUnit.SECONDS)",
+        "two.get(5, TimeUnit.SECONDS)",
+        "assertNotSame(first.connection, second.connection);"
+      ]
+    }
+  ],
+  "requirementIds": [
+    "FUN-001",
+    "AUT-001",
+    "MQ-021",
+    "MON-004"
+  ],
+  "ui": [
+    "226",
+    "234"
+  ],
+  "remaining": [
+    "real DB locking/commit/same-row competition",
+    "live Login/session and actual credential issue",
+    "default PasswordHasher.matches/PBKDF",
+    "wholecallee and451 finalacceptance"
+  ],
+  "qa055": "Fixed lock-screen message preserved, actual Retry-After seconds unchanged",
+  "productTestsExecuted": 0
+}

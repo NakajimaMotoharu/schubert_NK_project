@@ -1,0 +1,149 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T15:46:58.506618+09:00",
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/621_authentication_five_method_oracle_scope.json",
+    "sha256": "5a4eb7131c7b021455a6e4fb6c994ad5f18676e5045e4259637c5bf214ac7123"
+  },
+  "sourcePrograms": 1,
+  "explicitlyRelatedMethods": 5,
+  "originalSuccessfulTestCases": 16,
+  "assertionSnippetChecks": 37,
+  "assertionReviews": [
+    {
+      "testId": "PT-AUT-MEMPORT001",
+      "caseRef": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory001ConstructorsRejectMissingDependenciesAndDefaultCheckerIsConstructionOnly()",
+      "declarationLine": 63,
+      "snippets": 2,
+      "independentExpected": "Constructor null/default locked gate only"
+    },
+    {
+      "testId": "PT-AUT-MEMPORT002",
+      "caseRef": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory002UserSuccessPreservesNormalizedDisplayAndBorrowedTransaction()",
+      "declarationLine": 97,
+      "snippets": 2,
+      "independentExpected": "NFC USER success/reset/UTC microseconds/erase/borrowed lifecycle"
+    },
+    {
+      "testId": "PT-AUT-MEMPORT003",
+      "caseRef": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory003AdminIdentityComesFromTheOwnedRow()",
+      "declarationLine": 126,
+      "snippets": 1,
+      "independentExpected": "ADMIN identity from supplied row"
+    },
+    {
+      "testId": "PT-AUT-MEMPORT004",
+      "caseRef": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory004AbsentAndDisabledAccountsUseDummyWorkAndOneCommonFailure()",
+      "declarationLine": 138,
+      "snippets": 2,
+      "independentExpected": "Absent or disabled common failure and fixed dummy work/no issue"
+    },
+    {
+      "testId": "PT-AUT-MEMPORT005",
+      "caseRef": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory005WrongActivePasswordUpdatesBothCountersWithoutIssuance()",
+      "declarationLine": 161,
+      "snippets": 2,
+      "independentExpected": "Wrong password user2→3 IP3→4 no issue"
+    },
+    {
+      "testId": "PT-AUT-MEMPORT006",
+      "caseRef": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory006UserFiveAndIpTenLockOnThisAttempt()",
+      "declarationLine": 178,
+      "snippets": 4,
+      "independentExpected": "User5/IP10 threshold locks900"
+    },
+    {
+      "testId": "PT-AUT-MEMPORT007",
+      "caseRef": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory007ExistingLocksUseMaximumWithoutCheckerOrMutation()",
+      "declarationLine": 196,
+      "snippets": 2,
+      "independentExpected": "Existing user120/IP240 maximum240/no check or update"
+    },
+    {
+      "testId": "PT-AUT-MEMPORT008",
+      "caseRef": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory008FractionalRetryCeilsAndCapsAtNineHundred()",
+      "declarationLine": 218,
+      "snippets": 4,
+      "independentExpected": "Literal ceil vectors1us→1,1s+1us→2,near900→900,capped900"
+    },
+    {
+      "testId": "PT-AUT-MEMPORT009",
+      "caseRef": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory009ExpiryEqualityPermitsCheckWhileWindowEqualityStillAccumulates()",
+      "declarationLine": 238,
+      "snippets": 3,
+      "independentExpected": "Lock equality permits match; window equality accumulates; strict+1us reset"
+    },
+    {
+      "testId": "PT-AUT-MEMPORT010",
+      "caseRef": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory010NullAndInvalidInputsNeverSkipPasswordConsumption()",
+      "declarationLine": 265,
+      "snippets": 2,
+      "independentExpected": "Null/empty/overlength input before JDBC/password consumed when present"
+    },
+    {
+      "testId": "PT-AUT-MEMPORT011",
+      "caseRef": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory011CheckerFailuresMapOnlyDeclaredCatalogAndPreserveDirectFatalIdentity()",
+      "declarationLine": 307,
+      "snippets": 2,
+      "independentExpected": "Declared checker failures fixed catalog; other runtime/directError same identity"
+    },
+    {
+      "testId": "PT-AUT-MEMPORT012",
+      "caseRef": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory012JdbcReadUpdateAndResourceFaultsFailClosedWithoutOwningTheConnection()",
+      "declarationLine": 335,
+      "snippets": 2,
+      "independentExpected": "JDBC read/update/close/null fields/unknown enum fail closed"
+    },
+    {
+      "testId": "PT-AUT-MEMPORT013",
+      "caseRef": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory013CriticalAuditFaultAndNestedFatalNeverReturnSuccess()",
+      "declarationLine": 380,
+      "snippets": 2,
+      "independentExpected": "Critical audit failure no success; nested fatal same identity"
+    },
+    {
+      "testId": "PT-AUT-MEMPORT014",
+      "caseRef": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory014ThirdSessionDelegatesOldestRevocationWithSeparateSafeAudit()",
+      "declarationLine": 399,
+      "snippets": 2,
+      "independentExpected": "DIF016 delegate oldest revoke1/separate safe audit; closed codec no issue"
+    },
+    {
+      "testId": "PT-AUT-MEMPORT015",
+      "caseRef": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory015RepeatedConsumerCallsKeepCallerRowsAndPasswordsIndependent()",
+      "declarationLine": 425,
+      "snippets": 2,
+      "independentExpected": "Same service distinct caller rows/results/passwords independent"
+    },
+    {
+      "testId": "PT-AUT-MEMPORT016",
+      "caseRef": "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray()",
+      "declarationLine": 441,
+      "snippets": 3,
+      "independentExpected": "Two owned finite tasks/distinct connections/actors and both consumed arrays, not same-row DB race"
+    }
+  ],
+  "consumptionObservedBeforeFixtureCleanup": true,
+  "publicDefaultMatcherActualMatchingQualified": false,
+  "sameRowDatabaseConcurrencyQualified": false,
+  "exactAllMethodCasesOrOracleComplete": false,
+  "originalRunRepeated": false,
+  "productTestsExecuted": 0,
+  "newUniqueTests": 0,
+  "compilerOrJvmExecuted": false,
+  "actualBackendActions": 0,
+  "wholeDependencyAccepted": false,
+  "wholeG13Accepted": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "files": {
+    "method-oracle-relations.json": "57f3052267e02d2687e08c3dd2aba085592dd8dc10e406c7650c944e2a9555d9"
+  },
+  "tool": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/623_authentication_method_oracle_review.py",
+    "sha256": "144b520fee55e5b545bfc5e8bd0fd84fdc44e36d12206bb6ae3be02cb7b43451"
+  }
+}

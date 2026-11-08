@@ -1,0 +1,303 @@
+[
+  {
+    "method": "<init>",
+    "descriptor": "(Ldev/codex/schubert/nk/api/security/LoginAttemptRepository;Ldev/codex/schubert/nk/api/security/PasswordHasher;Ldev/codex/schubert/nk/api/security/AuthSessionService;Ldev/codex/schubert/nk/api/security/LoginAuditWriter;)V",
+    "testIds": [
+      "PT-AUT-MEMPORT001"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory001ConstructorsRejectMissingDependenciesAndDefaultCheckerIsConstructionOnly()"
+    ],
+    "oracleScope": "defaultMatcher construction and locked gate only",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java",
+    "sourceSha256": "453a743084bbbe3d8cd859db1246faee5c27af1cc3f46484cb1ea07e98baee51",
+    "classSha256": "4940f9d2870830f8c38a355c58c026dc2537070a61b0f6dee108acaea459414b",
+    "requirementIds": [
+      "FUN-001",
+      "AUT-001",
+      "MQ-021",
+      "MON-004"
+    ],
+    "uiRefs": [
+      "226",
+      "234"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+      }
+    ],
+    "remaining": [
+      "real DB locking/commit/same-row competition",
+      "live Login/session and actual credential issue",
+      "default PasswordHasher.matches/PBKDF",
+      "wholecallee and451 finalacceptance"
+    ],
+    "reviewStatus": "EXPLICIT_CONSUMER_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "exactAllMethodCasesOrOracleComplete": false,
+    "wholeDependencyAccepted": false
+  },
+  {
+    "method": "<init>",
+    "descriptor": "(Ldev/codex/schubert/nk/api/security/LoginAttemptRepository;Ljava/util/function/BiPredicate;Ldev/codex/schubert/nk/api/security/AuthSessionService;Ldev/codex/schubert/nk/api/security/LoginAuditWriter;)V",
+    "testIds": [
+      "PT-AUT-MEMPORT001",
+      "PT-AUT-MEMPORT002",
+      "PT-AUT-MEMPORT003",
+      "PT-AUT-MEMPORT004",
+      "PT-AUT-MEMPORT005",
+      "PT-AUT-MEMPORT006",
+      "PT-AUT-MEMPORT007",
+      "PT-AUT-MEMPORT008",
+      "PT-AUT-MEMPORT009",
+      "PT-AUT-MEMPORT010",
+      "PT-AUT-MEMPORT011",
+      "PT-AUT-MEMPORT012",
+      "PT-AUT-MEMPORT013",
+      "PT-AUT-MEMPORT014",
+      "PT-AUT-MEMPORT015",
+      "PT-AUT-MEMPORT016"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory001ConstructorsRejectMissingDependenciesAndDefaultCheckerIsConstructionOnly()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory002UserSuccessPreservesNormalizedDisplayAndBorrowedTransaction()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory003AdminIdentityComesFromTheOwnedRow()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory004AbsentAndDisabledAccountsUseDummyWorkAndOneCommonFailure()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory005WrongActivePasswordUpdatesBothCountersWithoutIssuance()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory006UserFiveAndIpTenLockOnThisAttempt()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory007ExistingLocksUseMaximumWithoutCheckerOrMutation()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory008FractionalRetryCeilsAndCapsAtNineHundred()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory009ExpiryEqualityPermitsCheckWhileWindowEqualityStillAccumulates()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory010NullAndInvalidInputsNeverSkipPasswordConsumption()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory011CheckerFailuresMapOnlyDeclaredCatalogAndPreserveDirectFatalIdentity()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory012JdbcReadUpdateAndResourceFaultsFailClosedWithoutOwningTheConnection()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory013CriticalAuditFaultAndNestedFatalNeverReturnSuccess()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory014ThirdSessionDelegatesOldestRevocationWithSeparateSafeAudit()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory015RepeatedConsumerCallsKeepCallerRowsAndPasswordsIndependent()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray()"
+    ],
+    "oracleScope": "provided checker null invariant and all16 consumer fixtures",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java",
+    "sourceSha256": "453a743084bbbe3d8cd859db1246faee5c27af1cc3f46484cb1ea07e98baee51",
+    "classSha256": "4940f9d2870830f8c38a355c58c026dc2537070a61b0f6dee108acaea459414b",
+    "requirementIds": [
+      "FUN-001",
+      "AUT-001",
+      "MQ-021",
+      "MON-004"
+    ],
+    "uiRefs": [
+      "226",
+      "234"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+      }
+    ],
+    "remaining": [
+      "real DB locking/commit/same-row competition",
+      "live Login/session and actual credential issue",
+      "default PasswordHasher.matches/PBKDF",
+      "wholecallee and451 finalacceptance"
+    ],
+    "reviewStatus": "EXPLICIT_CONSUMER_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "exactAllMethodCasesOrOracleComplete": false,
+    "wholeDependencyAccepted": false
+  },
+  {
+    "method": "authenticate",
+    "descriptor": "(Ljava/sql/Connection;Ljava/lang/String;[CLjava/net/InetAddress;Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;)Ldev/codex/schubert/nk/api/security/LoginResult;",
+    "testIds": [
+      "PT-AUT-MEMPORT001",
+      "PT-AUT-MEMPORT002",
+      "PT-AUT-MEMPORT003",
+      "PT-AUT-MEMPORT004",
+      "PT-AUT-MEMPORT005",
+      "PT-AUT-MEMPORT006",
+      "PT-AUT-MEMPORT007",
+      "PT-AUT-MEMPORT008",
+      "PT-AUT-MEMPORT009",
+      "PT-AUT-MEMPORT010",
+      "PT-AUT-MEMPORT011",
+      "PT-AUT-MEMPORT012",
+      "PT-AUT-MEMPORT013",
+      "PT-AUT-MEMPORT014",
+      "PT-AUT-MEMPORT015",
+      "PT-AUT-MEMPORT016"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory001ConstructorsRejectMissingDependenciesAndDefaultCheckerIsConstructionOnly()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory002UserSuccessPreservesNormalizedDisplayAndBorrowedTransaction()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory003AdminIdentityComesFromTheOwnedRow()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory004AbsentAndDisabledAccountsUseDummyWorkAndOneCommonFailure()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory005WrongActivePasswordUpdatesBothCountersWithoutIssuance()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory006UserFiveAndIpTenLockOnThisAttempt()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory007ExistingLocksUseMaximumWithoutCheckerOrMutation()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory008FractionalRetryCeilsAndCapsAtNineHundred()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory009ExpiryEqualityPermitsCheckWhileWindowEqualityStillAccumulates()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory010NullAndInvalidInputsNeverSkipPasswordConsumption()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory011CheckerFailuresMapOnlyDeclaredCatalogAndPreserveDirectFatalIdentity()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory012JdbcReadUpdateAndResourceFaultsFailClosedWithoutOwningTheConnection()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory013CriticalAuditFaultAndNestedFatalNeverReturnSuccess()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory014ThirdSessionDelegatesOldestRevocationWithSeparateSafeAudit()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory015RepeatedConsumerCallsKeepCallerRowsAndPasswordsIndependent()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray()"
+    ],
+    "oracleScope": "consumer boundary and audit/password ownership",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java",
+    "sourceSha256": "453a743084bbbe3d8cd859db1246faee5c27af1cc3f46484cb1ea07e98baee51",
+    "classSha256": "4940f9d2870830f8c38a355c58c026dc2537070a61b0f6dee108acaea459414b",
+    "requirementIds": [
+      "FUN-001",
+      "AUT-001",
+      "MQ-021",
+      "MON-004"
+    ],
+    "uiRefs": [
+      "226",
+      "234"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+      }
+    ],
+    "remaining": [
+      "real DB locking/commit/same-row competition",
+      "live Login/session and actual credential issue",
+      "default PasswordHasher.matches/PBKDF",
+      "wholecallee and451 finalacceptance"
+    ],
+    "reviewStatus": "EXPLICIT_CONSUMER_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "exactAllMethodCasesOrOracleComplete": false,
+    "wholeDependencyAccepted": false
+  },
+  {
+    "method": "retry",
+    "descriptor": "(Ldev/codex/schubert/nk/api/security/LockedLoginAttempt;Ljava/time/Instant;Z)I",
+    "testIds": [
+      "PT-AUT-MEMPORT002",
+      "PT-AUT-MEMPORT004",
+      "PT-AUT-MEMPORT005",
+      "PT-AUT-MEMPORT006",
+      "PT-AUT-MEMPORT007",
+      "PT-AUT-MEMPORT008",
+      "PT-AUT-MEMPORT009",
+      "PT-AUT-MEMPORT015",
+      "PT-AUT-MEMPORT016"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory002UserSuccessPreservesNormalizedDisplayAndBorrowedTransaction()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory004AbsentAndDisabledAccountsUseDummyWorkAndOneCommonFailure()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory005WrongActivePasswordUpdatesBothCountersWithoutIssuance()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory006UserFiveAndIpTenLockOnThisAttempt()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory007ExistingLocksUseMaximumWithoutCheckerOrMutation()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory008FractionalRetryCeilsAndCapsAtNineHundred()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory009ExpiryEqualityPermitsCheckWhileWindowEqualityStillAccumulates()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory015RepeatedConsumerCallsKeepCallerRowsAndPasswordsIndependent()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray()"
+    ],
+    "oracleScope": "before/after failure and optional account maximum with independent literal boundaries",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java",
+    "sourceSha256": "453a743084bbbe3d8cd859db1246faee5c27af1cc3f46484cb1ea07e98baee51",
+    "classSha256": "4940f9d2870830f8c38a355c58c026dc2537070a61b0f6dee108acaea459414b",
+    "requirementIds": [
+      "FUN-001",
+      "AUT-001",
+      "MQ-021",
+      "MON-004"
+    ],
+    "uiRefs": [
+      "226",
+      "234"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+      }
+    ],
+    "remaining": [
+      "real DB locking/commit/same-row competition",
+      "live Login/session and actual credential issue",
+      "default PasswordHasher.matches/PBKDF",
+      "wholecallee and451 finalacceptance"
+    ],
+    "reviewStatus": "EXPLICIT_CONSUMER_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "exactAllMethodCasesOrOracleComplete": false,
+    "wholeDependencyAccepted": false
+  },
+  {
+    "method": "<clinit>",
+    "descriptor": "()V",
+    "testIds": [
+      "PT-AUT-MEMPORT004"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory004AbsentAndDisabledAccountsUseDummyWorkAndOneCommonFailure()"
+    ],
+    "oracleScope": "fixed non-account dummy value observed by supplied checker",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java",
+    "sourceSha256": "453a743084bbbe3d8cd859db1246faee5c27af1cc3f46484cb1ea07e98baee51",
+    "classSha256": "4940f9d2870830f8c38a355c58c026dc2537070a61b0f6dee108acaea459414b",
+    "requirementIds": [
+      "FUN-001",
+      "AUT-001",
+      "MQ-021",
+      "MON-004"
+    ],
+    "uiRefs": [
+      "226",
+      "234"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+      }
+    ],
+    "remaining": [
+      "real DB locking/commit/same-row competition",
+      "live Login/session and actual credential issue",
+      "default PasswordHasher.matches/PBKDF",
+      "wholecallee and451 finalacceptance"
+    ],
+    "reviewStatus": "EXPLICIT_CONSUMER_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "exactAllMethodCasesOrOracleComplete": false,
+    "wholeDependencyAccepted": false
+  }
+]
