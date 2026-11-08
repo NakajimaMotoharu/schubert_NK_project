@@ -1,0 +1,187 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T00:38:49.016971+09:00",
+  "status": "INTENTIONAL_FAULT_REJECTED_BY_NEW_ORACLE_ONLY_NOT_PRODUCT_PASS",
+  "source": "64f3a72753434347889f0eabd5d9f9dca67c6bfb",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "begin": {
+    "atJST": "2026-11-09T00:38:48.446376+09:00",
+    "testSource": "64f3a72753434347889f0eabd5d9f9dca67c6bfb",
+    "normalProductionSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "normalModulePostSha256": "8ebe6365bc701ba6432b1b55275004024dc71bc452d31b66d31c53894e3ae128",
+    "fixture": {
+      "path": "evidence/01_PT/002_NK-PRO-002/input/fault/field-cause-drop/FieldEncodingException.java",
+      "sha256": "d5bfd3b6abe338b89c33bf234f31d8b8f67ded5b9ea6fa9fe75e8f0eab6cae64"
+    },
+    "expectedWholeTests": 10,
+    "expectedFailures": 1,
+    "onlyExpectedFailedMethod": "malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()",
+    "positiveProductEvidence": false
+  },
+  "stages": {
+    "javac": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T15:38:47.922111+00:00",
+      "endUTC": "2026-11-08T15:38:48.437771+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "-proc:none",
+        "-implicit:none",
+        "--release",
+        "25",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24644-field-cause-drop-negative-control-v1/classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/002_NK-PRO-002/input/fault/field-cause-drop/FieldEncodingException.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "negative": {
+      "actualExit": 1,
+      "timedOut": false,
+      "startUTC": "2026-11-08T15:38:48.446719+00:00",
+      "endUTC": "2026-11-08T15:38:49.012968+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24644-field-cause-drop-negative-control-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Xlog:class+load=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24644-field-cause-drop-negative-control-v1/class-load.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24644-field-cause-drop-negative-control-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg24634-protocol-whole120-compile-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg24634-protocol-whole120-compile-v1/resources:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24644-field-cause-drop-negative-control-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "1961c1467b34ecba0a656fccb0521b2bf107aba221ddc40597f3e01fe5326ddb",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "testsExecutedUnderFault": 10,
+  "oldNinePassed": true,
+  "newOneRejected": true,
+  "junitActualExit": 1,
+  "expectedJUnitExit": 1,
+  "expectedFailures": 1,
+  "unexpectedFailures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "aborted": 0,
+  "wholeFixtures": 2,
+  "noMethodExtraction": true,
+  "normalProductTestsAccepted": 0,
+  "newUniqueProductTests": 0,
+  "coverage": null,
+  "oldExecUnion": false,
+  "normalSourceModified": false,
+  "faultFixtureOnly": true,
+  "faultClassLoadedFromOwnClasses": true,
+  "fieldCodecLoadedFromNormalJar": true,
+  "heldFourInitializations": 0,
+  "actualRootVmDbNativeKeyOperations": false,
+  "originalXmlPins": {
+    "TEST-junit-jupiter.xml": "dbc4b9c498429ad261a03ec49147fcb13258d8975bbefd91dc3e6af7791c01b4",
+    "TEST-junit-platform-suite.xml": "a98c9a6c9cbd2b939898a65e1d3b6f635f9faaafc3412edfe20b374265f3462d",
+    "TEST-junit-vintage.xml": "716481456963c9a1e6a2cbab98ec33d811d5a05f72e1cd1ff43324e96be99be5"
+  },
+  "cases": [
+    {
+      "owner": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "booleanAndReservedFieldsRejectUnknownBytes()",
+      "failed": false,
+      "errors": false,
+      "skipped": false
+    },
+    {
+      "owner": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "name": "nfcGolden001HangulJamoFitsComposedByteWidth()",
+      "failed": false,
+      "errors": false,
+      "skipped": false
+    },
+    {
+      "owner": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()",
+      "failed": true,
+      "errors": false,
+      "skipped": false
+    },
+    {
+      "owner": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "name": "nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition()",
+      "failed": false,
+      "errors": false,
+      "skipped": false
+    },
+    {
+      "owner": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "name": "nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck()",
+      "failed": false,
+      "errors": false,
+      "skipped": false
+    },
+    {
+      "owner": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "textDecodeIsStrictCanonicalAndOptionalAware()",
+      "failed": false,
+      "errors": false,
+      "skipped": false
+    },
+    {
+      "owner": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "textEncodeNormalizesUtf8AndPadsWithAsciiSpace()",
+      "failed": false,
+      "errors": false,
+      "skipped": false
+    },
+    {
+      "owner": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "numericCodecChecksDigitsRangeAndOverflow()",
+      "failed": false,
+      "errors": false,
+      "skipped": false
+    },
+    {
+      "owner": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "numericErrorFillerDoesNotBecomeBusinessZero()",
+      "failed": false,
+      "errors": false,
+      "skipped": false
+    },
+    {
+      "owner": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "numericSemanticCeilingIsIndependentOfWireAndLongCapacity()",
+      "failed": false,
+      "errors": false,
+      "skipped": false
+    }
+  ],
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "toolSha256": "b8a78d9bdd8565ade25fceab2e4ba1f3b97736bc524e311243e2fa51fdd6bc08",
+  "files": {
+    "testcases.safe.xml": "66d221045c8ec8ae7d2cb19ea69d5267729cf05d4b98d89b623dfa20ffffd04f",
+    "negative.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "negative.stdout": "1961c1467b34ecba0a656fccb0521b2bf107aba221ddc40597f3e01fe5326ddb"
+  }
+}
