@@ -1,0 +1,7 @@
+# G07 静的vendor四JAR・16hash結果
+
+仕様3884/738 scope、元公開manifest四のtop-level toolHashes内16座標をPG24602 actual0/8673d145、PG24604独立stream照合0/c6dcdaeff82fabf27afea0152be0fd5cef819757c96a462353c653cba59a301bへ固定。四exact regular非symlink既承認PMDvendor libの全byte digest・PK署名と既generic-api-keyの全captureが一致、誤検知新16/既1180と元座標非重複で累計1196、原4493の未分類3313→3297。container限界22/actualSecretCountnull/G07正式未受入を保持。
+
+対象はfailureaccess1.0.3/jsr250-api1.0/kotlin-build-tools-api2.4.0/slf4j-api1.7.36。metadataの元path/line/inputhash/rule/roleとactualbyte導出を記録し、capture値やcapturehashを出力しない。producer全byteとindependentstreamの別位置検証、18metadata否定（型保持0/false含む）を確認。旧recovery operatorToolHashes18は対象外でartifact IO0、VM/DB/Root/key/privateRaw/oldProductJar/Java/load/Maven/download/scanner実行0。
+
+新製品PT/coverage/Source登録/leaf0、unique519Java415/候補114/pending12/whole93暫定/正式1964PT53scope/工数null/全HOLD不変更。原見積0.5/2/5cap7、初派生草稿の出現箇所数assert1は739ファイル生成前に停止・製品0/当producer成功再演0、次のexactcontext修正で成功。共有限度観測とPGPT専有費N/Tを混同しない。以後のchainは24602 manifestのpriorUpdateRefs＋当updates16を使い1180基点へ戻さない。
