@@ -1,0 +1,587 @@
+{
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "testSource": "64f3a72753434347889f0eabd5d9f9dca67c6bfb",
+  "normalProof": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG24642-protocol-whole120-independent-v1/manifest.json",
+    "sha256": "8ebe6365bc701ba6432b1b55275004024dc71bc452d31b66d31c53894e3ae128"
+  },
+  "metadataInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json",
+    "sha256": "e65782d893a5ae45309cf269d165dec33d1dc396f06b7968b62d95b276455d31"
+  },
+  "descriptorInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/artifacts.json",
+    "sha256": "fb24a1a209849d42894925002baae668bc55a4bd858b1b7c1d38ab838319bb0b"
+  },
+  "physicalIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json",
+    "sha256": "db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723"
+  },
+  "owner": "WBS-P001-02",
+  "oracleDocuments": [
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/001_NK-PRO-001_単体テスト仕様書.md",
+      "sha256": "503c5f6be3caaa341dcec35cb1bd1b8a3892d270bf6a7fa91cdad580b43abdbe"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/107_現source正本fixture照合・layout個別受入.md",
+      "sha256": "6354a848537937df156f5380941531d71bdf749f68ff1290943a58450ba64ddc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1956_G13LayoutCatalog7_独立期待値意味対応表.md",
+      "sha256": "6ede52efc7cb04c471c6a55e2a17d4b8c4859c9186f24977bc9758b1dcd3d711"
+    }
+  ],
+  "sourcePaths": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldArea.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFields.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/Padding.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/Presence.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/WireType.java"
+  ],
+  "cases": {
+    "F1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest#layoutIdAndFieldDefinitionAreStrictAndOneBased()",
+      "testIds": [
+        "PT-PRO-001-L02",
+        "PT-PRO-001-F01"
+      ],
+      "independentOracle": "LiteraluppercaseASCII8, short/lowercase/null reject, ABCREQ01<ABCRSP01, literaltoString; FieldDefinition assertions aredifferentSource references andnotnewcredit."
+    },
+    "C1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest#catalogMatchesIndependentUi234To236Fixture()",
+      "testIds": [
+        "PT-PRO-001-F02",
+        "PT-PRO-001-L03"
+      ],
+      "independentOracle": "Independent389row UI234-236 TSV expected,64layouts/fourempty, immutablelist; X/N/B classes literalString/Long/Boolean. standardcatalog andparsefixture both actual againstoriginalfixture, not selfroundtrip only."
+    },
+    "C2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest#parserRejectsMalformedUnknownAndDuplicateRows()",
+      "testIds": [
+        "PT-PRO-001-F03"
+      ],
+      "independentOracle": "Handwritten8column invalid rows,unknownlayout/area/type/presence, disallowedfixedfield, nonnumeric/zero/negative/blank/name/rule,duplicateandgap rejected bytypedexception; nullcontainerprecondition."
+    },
+    "C3": {
+      "caseKey": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest#layoutFieldsRejectWrongAreaGapLengthAndNull()",
+      "testIds": [
+        "PT-PRO-001-F01",
+        "PT-PRO-001-F03"
+      ],
+      "independentOracle": "Explicit1byte DATA field/layout; wrongarea/start2/length2/unusedrecord rejected; returnedlistimmutable/nullcontainer/elements rejected; IDliteral ABCREQ01."
+    }
+  },
+  "methodRules": {
+    "FieldDefinition": {
+      "<init>": {
+        "cases": [
+          "F1",
+          "C1",
+          "C2",
+          "C3"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Bothconstructorforms requiremandatorymetadata/onebasedpositiveextent/name/rule andwiretype-specificpadding.",
+        "staticPath": "Test field helper/directFieldDefinition -> delegating/canonical constructors"
+      },
+      "checkedEnd": {
+        "cases": [
+          "F1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Checkedstart+length-1; fixed8/11/12/overflow expectations.",
+        "staticPath": "Both FieldDefinition constructors -> checkedEnd"
+      }
+    },
+    "LayoutFields": {
+      "<init>": {
+        "cases": [
+          "C1",
+          "C3"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Copyimmutablelists; requirelayout andcontiguouscorrectareascoverdeclaredlength.",
+        "staticPath": "Catalogparse/directnew LayoutFields -> constructor"
+      },
+      "id": {
+        "cases": [
+          "C1",
+          "C3"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Identity mirrorsimmutablelayout id.",
+        "staticPath": "C1/C3 directid andcatalogindexconstruction"
+      },
+      "validateArea": {
+        "cases": [
+          "C1",
+          "C3"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Start1, correctarea/no gaporoverlap/endmatchesdeclaredlength.",
+        "staticPath": "LayoutFields canonicalconstructor -> validateArea forDATAandRECORD"
+      }
+    },
+    "LayoutFieldCatalog$MutableFields": {
+      "<init>": {
+        "cases": [
+          "C1",
+          "C2"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Freshparser-owned DATA/RECORD ArrayList buffers, not exposedbeforeimmutablecatalogconstruction.",
+        "staticPath": "parse -> computeIfAbsent lambda andgetOrDefault -> new MutableFields"
+      }
+    },
+    "LayoutFieldCatalog": {
+      "<init>": {
+        "cases": [
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Immutablelayoutlist andidindex preserveUI order.",
+        "staticPath": "parse -> new LayoutFieldCatalog(result)"
+      },
+      "standard": {
+        "cases": [
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Retained standardcatalog fromapproved source table.",
+        "staticPath": "C1 direct standard()"
+      },
+      "all": {
+        "cases": [
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Immutableall64layouts includingfourempty.",
+        "staticPath": "C1 all().size/filter/clear"
+      },
+      "require": {
+        "cases": [
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "BothString/LayoutId overloads returncorrectlayout; unknown/null rejected.",
+        "staticPath": "C1 directString/typed require; String delegates typed"
+      },
+      "fieldCount": {
+        "cases": [
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Total389 fields frombothareas.",
+        "staticPath": "C1 literal389 -> fieldCount"
+      },
+      "tsvRows": {
+        "cases": [
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Immutablecomplete8column rows equalindependentfixture.",
+        "staticPath": "C1 originalfixture expected -> tsvRows"
+      },
+      "parse": {
+        "cases": [
+          "C1",
+          "C2"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Validate8columns/knownlayout/type/presence/positiveoffsets/fixedname/no duplicates; allareascoverlayout.",
+        "staticPath": "C1 independentfixture andC2 explicitinvalidrows -> parse"
+      },
+      "appendRows": {
+        "cases": [
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Serializeactualmetadata inapprovedcolumnorder; independent389 expected.",
+        "staticPath": "tsvRows -> appendRows"
+      },
+      "parseArea": {
+        "cases": [
+          "C1",
+          "C2"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "DATA/RECORD only;HEADER invalid.",
+        "staticPath": "parse -> parseArea"
+      },
+      "parseWireType": {
+        "cases": [
+          "C1",
+          "C2"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "X/N/B exactallowlist;Z rejected.",
+        "staticPath": "parse -> parseWireType"
+      },
+      "parsePresence": {
+        "cases": [
+          "C1",
+          "C2"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "M/C/O/F exactallowlist;Z rejected.",
+        "staticPath": "parse -> parsePresence"
+      },
+      "paddingFor": {
+        "cases": [
+          "C1",
+          "F1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "TEXTspace-right/NUMERICzero-left/BOOLEANnone metadata invariant.",
+        "staticPath": "parse -> paddingFor -> FieldDefinition validation; F1 independentpadding checks"
+      },
+      "validateFixedField": {
+        "cases": [
+          "C1",
+          "C2"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "FIXED acceptsReserved only, regardlesslayout; othername rejected.",
+        "staticPath": "parse -> validateFixedField"
+      },
+      "javaTypeFor": {
+        "cases": [
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "X/N/B mapsString/Long/Boolean exactClass literals.",
+        "staticPath": "parse -> javaTypeFor; C1 assertSameclass"
+      },
+      "wireCode": {
+        "cases": [
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "TEXT/NUMERIC/BOOLEAN produceX/N/B fixedcolumns.",
+        "staticPath": "appendRows -> wireCode; independent389 fixture"
+      },
+      "presenceCode": {
+        "cases": [
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "MANDATORY/CONDITIONAL/OPTIONAL/FIXED produceM/C/O/F.",
+        "staticPath": "appendRows -> presenceCode; independent389 fixture"
+      },
+      "parsePositiveInt": {
+        "cases": [
+          "C1",
+          "C2"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "ASCII parsedinteger positive; invalidnumeric/nonpositive typedrejection.",
+        "staticPath": "parse -> parsePositiveInt"
+      },
+      "lambda$parse$1": {
+        "cases": [
+          "C1",
+          "C2"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Duplicatefieldname inonearea predicate.",
+        "staticPath": "parse -> areaFields.stream().anyMatch(existing -> existing.name().equals(name))"
+      },
+      "lambda$parse$0": {
+        "cases": [
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Allocatefreshperlayout buffers forfirstrow.",
+        "staticPath": "parse -> parsed.computeIfAbsent -> new MutableFields"
+      },
+      "lambda$fieldCount$0": {
+        "cases": [
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Sum both DATAandRECORD sizes.",
+        "staticPath": "fieldCount -> mapToInt(fields -> dataFields.size+recordFields.size)"
+      },
+      "<clinit>": {
+        "cases": [
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Staticcatalog source literal parsedonce againststandardregistry.",
+        "staticPath": "RETAINED_STANDARD initializer -> parse(CATALOG_TSV, LayoutRegistry.standard())"
+      }
+    },
+    "FieldArea": {
+      "<clinit>": {
+        "cases": [
+          "F1",
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "FieldArea declaredconstant counts andapplicablecatalog interpretation; no externalstate.",
+        "staticPath": "F1 enum.values().length; C1 fixed389field semantics"
+      }
+    },
+    "WireType": {
+      "<clinit>": {
+        "cases": [
+          "F1",
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "WireType declaredconstant counts andapplicablecatalog interpretation; no externalstate.",
+        "staticPath": "F1 enum.values().length; C1 fixed389field semantics"
+      }
+    },
+    "Presence": {
+      "<clinit>": {
+        "cases": [
+          "F1",
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Presence declaredconstant counts andapplicablecatalog interpretation; no externalstate.",
+        "staticPath": "F1 enum.values().length; C1 fixed389field semantics"
+      }
+    },
+    "Padding": {
+      "<clinit>": {
+        "cases": [
+          "F1",
+          "C1"
+        ],
+        "relatedRd": [
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "12"
+        ],
+        "contract": "Padding declaredconstant counts andapplicablecatalog interpretation; no externalstate.",
+        "staticPath": "F1 enum.values().length; C1 fixed389field semantics"
+      }
+    }
+  },
+  "generatedMethods": {
+    "FieldDefinition": [
+      "toString",
+      "hashCode",
+      "equals",
+      "area",
+      "name",
+      "start",
+      "end",
+      "length",
+      "wireType",
+      "presence",
+      "padding",
+      "javaType",
+      "semanticRule"
+    ],
+    "LayoutFields": [
+      "toString",
+      "hashCode",
+      "equals",
+      "layout",
+      "dataFields",
+      "recordFields"
+    ]
+  },
+  "standardEnumSources": [
+    "FieldArea",
+    "WireType",
+    "Presence",
+    "Padding"
+  ],
+  "standardSwitchClasses": [
+    "dev/codex/schubert/nk/protocol/layout/FieldDefinition$1",
+    "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$1"
+  ],
+  "standardFilterProof": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG24594-protocol-whole-denominator-v1/manifest.json",
+    "sha256": "9448c8cf89988f4d9a579ea10c433e8bad3e417c1df7709472648d1b29638dfe"
+  }
+}
