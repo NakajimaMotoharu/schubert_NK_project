@@ -1,0 +1,509 @@
+{
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "testSource": "64f3a72753434347889f0eabd5d9f9dca67c6bfb",
+  "normalProof": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG24642-protocol-whole120-independent-v1/manifest.json",
+    "sha256": "8ebe6365bc701ba6432b1b55275004024dc71bc452d31b66d31c53894e3ae128"
+  },
+  "oracleQualification": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG24654-field-cause-one-qualified-v1/manifest.json",
+    "sha256": "ed9c47f7e7929f6b2b658eeb51232a26844656d70238275394c4ac0128357733"
+  },
+  "metadataInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json",
+    "sha256": "e65782d893a5ae45309cf269d165dec33d1dc396f06b7968b62d95b276455d31"
+  },
+  "descriptorInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/artifacts.json",
+    "sha256": "fb24a1a209849d42894925002baae668bc55a4bd858b1b7c1d38ab838319bb0b"
+  },
+  "physicalIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json",
+    "sha256": "db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723"
+  },
+  "sourcePaths": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldEncodingException.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.java"
+  ],
+  "owner": "WBS-P002-01",
+  "expectedRawMethods": 20,
+  "expectedOfficialMethods": 19,
+  "standardPrivateCtorCount": 1,
+  "cases": {
+    "T1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textEncodeNormalizesUtf8AndPadsWithAsciiSpace()",
+      "testIds": [
+        "PT-PRO-002-X01",
+        "PT-PRO-002-X02",
+        "PT-PRO-002-X03"
+      ],
+      "independentOracle": "UI232/SS322: AB4=41 42 20 20; NFD e+0301 -> c3 a9 spaces; Japanese3/emoji4; mandatory/null/empty/trailing-space/control/invalidsurrogate/length0 rejection."
+    },
+    "T2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textDecodeIsStrictCanonicalAndOptionalAware()",
+      "testIds": [
+        "PT-PRO-002-X01",
+        "PT-PRO-002-X02",
+        "PT-PRO-002-X03"
+      ],
+      "independentOracle": "UI232/SS322: a b +ASCIIpadding -> a b; allspace optionalempty vsmandatoryreject; c3 28 malformed; NFD/control reject; null/zero-byte internal precondition."
+    },
+    "N1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericCodecChecksDigitsRangeAndOverflow()",
+      "testIds": [
+        "PT-PRO-002-N01",
+        "PT-PRO-002-N02"
+      ],
+      "independentOracle": "ASCII000/001/999 fixedvectors, negative/reversed semanticrange, length0/too-manydigits, non-digit +/:/dot,19nines longoverflow, min1/wire0 reject."
+    },
+    "N2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericErrorFillerDoesNotBecomeBusinessZero()",
+      "testIds": [
+        "PT-PRO-002-N02"
+      ],
+      "independentOracle": "errorProfile true+00 -> OptionalLong.empty evensemanticmin1; false+00 min0 -> business0; true+01 ->1, null/empty rejected."
+    },
+    "B1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#booleanAndReservedFieldsRejectUnknownBytes()",
+      "testIds": [
+        "PT-PRO-002-B01",
+        "PT-PRO-002-X03"
+      ],
+      "independentOracle": "B false0/true1/unsetspace exactbyte; requirednull/unset/unknown2/two bytes rejected; reservedspace-only/space+x/null/empty."
+    },
+    "N3": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericSemanticCeilingIsIndependentOfWireAndLongCapacity()",
+      "testIds": [
+        "PT-CODEC-NUMMAX001"
+      ],
+      "independentOracle": "000099 accepted/000100 over semantic99 rejected despitewirecapacity; Long.MAX-1 accepted andLong.MAX acceptedonlyfullrange; callerarrays unchanged."
+    },
+    "D1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()",
+      "testIds": [
+        "PT-CODEC-EXC-001"
+      ],
+      "independentOracle": "Lonehighsurrogate andc3 28 -> MalformedInputException/inputLength1; 19nines -> ArithmeticException; semanticrange -> nullcause; fixeddiagnostics/inputunchanged, independent3890/094."
+    },
+    "G1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden001HangulJamoFitsComposedByteWidth()",
+      "testIds": [
+        "PT-CODEC-NFCGOLD001"
+      ],
+      "independentOracle": "Independent HangulJamo/composed scalar/hex, NFC beforeUTF8length; fixed byteboundaries andreceiver canonicality;2422."
+    },
+    "G2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck()",
+      "testIds": [
+        "PT-CODEC-NFCGOLD002"
+      ],
+      "independentOracle": "Independent Angstrom -> canonical2byte scalar/hex thenboundary/rejection;2422."
+    },
+    "G3": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition()",
+      "testIds": [
+        "PT-CODEC-NFCGOLD003"
+      ],
+      "independentOracle": "Independent canonicalcombining order/scalar/hex evenwithoutcomposition; rejectnoncanonicalreceiver;2422."
+    }
+  },
+  "methodRules": {
+    "encodeText": {
+      "cases": [
+        "T1",
+        "G1",
+        "G2",
+        "G3",
+        "D1"
+      ],
+      "relatedRd": [
+        "MSG-002",
+        "MSG-003",
+        "MSG-007",
+        "MSG-008",
+        "MSG-010"
+      ],
+      "ssSections": [
+        "4.1",
+        "6.1",
+        "11"
+      ],
+      "contract": "Nullable optional only; NFC thenstrictUTF8/bytebound; ASCIIrightpadding; typedconversionfailure/no truncation.",
+      "callerMethods": []
+    },
+    "decodeText": {
+      "cases": [
+        "T2",
+        "G1",
+        "G2",
+        "G3",
+        "D1"
+      ],
+      "relatedRd": [
+        "MSG-002",
+        "MSG-003",
+        "MSG-008",
+        "MSG-010"
+      ],
+      "ssSections": [
+        "4.1",
+        "6.1",
+        "11"
+      ],
+      "contract": "Rightpadding removed only; optionalempty/mandatoryreject; strictUTF8+NFC; permanentfailure; internalnull/empty rejected.",
+      "callerMethods": []
+    },
+    "encodeNumeric": {
+      "cases": [
+        "N1"
+      ],
+      "relatedRd": [
+        "MSG-004",
+        "MSG-007"
+      ],
+      "ssSections": [
+        "4.2",
+        "11"
+      ],
+      "contract": "Semanticrange andwirewidth independent; leftASCIIzero/fixedlength; overflow/reversedrange rejected.",
+      "callerMethods": []
+    },
+    "decodeNumeric": {
+      "cases": [
+        "N1",
+        "N2",
+        "N3",
+        "D1"
+      ],
+      "relatedRd": [
+        "MSG-004"
+      ],
+      "ssSections": [
+        "4.2",
+        "11"
+      ],
+      "contract": "ASCII digits only; exact arithmetic overflow -> permanent cause; configuredsemantic bound; inputnotmutated.",
+      "callerMethods": []
+    },
+    "decodeNumericOrErrorFiller": {
+      "cases": [
+        "N2"
+      ],
+      "relatedRd": [
+        "MSG-004"
+      ],
+      "ssSections": [
+        "4.2",
+        "8",
+        "11"
+      ],
+      "contract": "Approvederror-profile allzero -> unset, normalzero isbusinessvalue,nonzero stillvalidated.",
+      "callerMethods": []
+    },
+    "encodeBoolean": {
+      "cases": [
+        "B1"
+      ],
+      "relatedRd": [
+        "MSG-006"
+      ],
+      "ssSections": [
+        "4.3",
+        "11"
+      ],
+      "contract": "SingleASCII0/1 oronlyallowedunsetspace; requirednull istyped senderfailure.",
+      "callerMethods": []
+    },
+    "decodeBoolean": {
+      "cases": [
+        "B1"
+      ],
+      "relatedRd": [
+        "MSG-006"
+      ],
+      "ssSections": [
+        "4.3",
+        "11"
+      ],
+      "contract": "Onebyteonly;0/1/allowedspace; unknown/length/null reject, nofalse fallback.",
+      "callerMethods": []
+    },
+    "requireSpaces": {
+      "cases": [
+        "B1"
+      ],
+      "relatedRd": [
+        "MSG-003",
+        "MQ-017"
+      ],
+      "ssSections": [
+        "4.1",
+        "6",
+        "11"
+      ],
+      "contract": "Reservedfield positive length/non-null/exactASCIIspace, rejectotherbytes.",
+      "callerMethods": []
+    },
+    "validateTextCharactersForEncode": {
+      "cases": [
+        "T1",
+        "G1",
+        "G2",
+        "G3"
+      ],
+      "relatedRd": [
+        "MSG-007",
+        "MSG-008"
+      ],
+      "ssSections": [
+        "4.1",
+        "11"
+      ],
+      "contract": "Rejectambiguous trailingASCIIspace andCR/LF/TAB/NUL beforefield output.",
+      "callerMethods": [
+        "encodeText"
+      ]
+    },
+    "validateTextCharactersForDecode": {
+      "cases": [
+        "T2",
+        "G1",
+        "G2",
+        "G3"
+      ],
+      "relatedRd": [
+        "MSG-008"
+      ],
+      "ssSections": [
+        "4.1",
+        "11"
+      ],
+      "contract": "RejectforbiddenCR/LF/TAB/NUL afterstrictdecode.",
+      "callerMethods": [
+        "decodeText"
+      ]
+    },
+    "containsForbiddenControl": {
+      "cases": [
+        "T1",
+        "T2"
+      ],
+      "relatedRd": [
+        "MSG-008"
+      ],
+      "ssSections": [
+        "4.1"
+      ],
+      "contract": "EachofCR/LF/TAB/NUL independentlyrejected, ordinarytext accepted.",
+      "callerMethods": [
+        "validateTextCharactersForEncode",
+        "validateTextCharactersForDecode"
+      ]
+    },
+    "allBytes": {
+      "cases": [
+        "N2",
+        "B1"
+      ],
+      "relatedRd": [
+        "MSG-003",
+        "MSG-004",
+        "MSG-006",
+        "MQ-017"
+      ],
+      "ssSections": [
+        "4.1",
+        "4.2",
+        "4.3",
+        "8"
+      ],
+      "contract": "All-zeroerrorfiller/allspacereserved vsonewrongbyte, noemptyscanacceptancebecausecallerprecondition.",
+      "callerMethods": [
+        "decodeNumericOrErrorFiller",
+        "requireSpaces"
+      ]
+    },
+    "filled": {
+      "cases": [
+        "T1",
+        "N1"
+      ],
+      "relatedRd": [
+        "MSG-003",
+        "MSG-004"
+      ],
+      "ssSections": [
+        "4.1",
+        "4.2"
+      ],
+      "contract": "Freshfixedlength arrayfilledASCIIspace/zero; outputliteralvalidatedthroughencode.",
+      "callerMethods": [
+        "encodeText",
+        "encodeNumeric"
+      ]
+    },
+    "requirePositiveLength": {
+      "cases": [
+        "T1",
+        "N1"
+      ],
+      "relatedRd": [
+        "MSG-002",
+        "MQ-017"
+      ],
+      "ssSections": [
+        "4.1",
+        "4.2"
+      ],
+      "contract": "Positivewidth constructor/functioninvariant;zero rejected beforeallocation.",
+      "callerMethods": [
+        "encodeText",
+        "encodeNumeric"
+      ]
+    },
+    "requireNonEmptyField": {
+      "cases": [
+        "T2",
+        "N1",
+        "N2",
+        "B1"
+      ],
+      "relatedRd": [
+        "MSG-002",
+        "MQ-017"
+      ],
+      "ssSections": [
+        "4",
+        "11"
+      ],
+      "contract": "Internal non-null/nonempty slice contract; empty rejected beforeconversion, notincomingwhole-message fallback.",
+      "callerMethods": [
+        "decodeText",
+        "decodeNumeric",
+        "decodeNumericOrErrorFiller",
+        "requireSpaces"
+      ]
+    },
+    "FieldEncodingException#(Ljava/lang/String;)V": {
+      "cases": [
+        "T1",
+        "N1",
+        "B1"
+      ],
+      "relatedRd": [
+        "MSG-007"
+      ],
+      "ssSections": [
+        "11"
+      ],
+      "contract": "Caller-observed senderexception type/fixeddiagnostic-only source; no field echo. Directarbitraryconstructor-null orarbitrarymessage-format not claimed.",
+      "callerMethods": [
+        "encodeText",
+        "encodeNumeric",
+        "encodeBoolean"
+      ]
+    },
+    "FieldEncodingException#(Ljava/lang/String;Ljava/nio/charset/CharacterCodingException;)V": {
+      "cases": [
+        "T1",
+        "D1"
+      ],
+      "relatedRd": [
+        "MSG-007"
+      ],
+      "ssSections": [
+        "11"
+      ],
+      "contract": "StrictUTF8 failurewrapped withCharacterCodingException; newD1assertsJDK malformedshape andfixedsafeoutermessage.",
+      "callerMethods": [
+        "encodeText"
+      ]
+    },
+    "PermanentProtocolException#(Ljava/lang/String;)V": {
+      "cases": [
+        "T2",
+        "N1",
+        "B1",
+        "D1"
+      ],
+      "relatedRd": [
+        "MSG-002",
+        "MSG-004",
+        "MSG-006",
+        "MSG-008",
+        "MSG-010",
+        "MQ-017"
+      ],
+      "ssSections": [
+        "11"
+      ],
+      "contract": "Caller-observed permanenttypedwire rejection, semanticfailurecause absent; bodyvalues notechoed.",
+      "callerMethods": [
+        "decodeText",
+        "decodeNumeric",
+        "decodeBoolean",
+        "requireSpaces"
+      ]
+    },
+    "PermanentProtocolException#(Ljava/lang/String;Ljava/lang/Throwable;)V": {
+      "cases": [
+        "T2",
+        "N1",
+        "D1"
+      ],
+      "relatedRd": [
+        "MSG-002",
+        "MSG-004"
+      ],
+      "ssSections": [
+        "11"
+      ],
+      "contract": "StrictUTF8/arithmetic cause retained; newD1checksbothcauseclasses/fixedouterdiagnostics withoutinput mutation.",
+      "callerMethods": [
+        "decodeText",
+        "decodeNumeric"
+      ]
+    }
+  },
+  "oracleDocuments": [
+    {
+      "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+      "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+    },
+    {
+      "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+      "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+    },
+    {
+      "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+      "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+    },
+    {
+      "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+      "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+      "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+      "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+    }
+  ],
+  "sourceMethodTraceMeaning": "Staticcontract/caller+actualcasePASS references, currentone-runmethodcoverage; noindividualcaseprobe attribution andnobranchoracle completion implied",
+  "productTestsPlanned": 0,
+  "sourceOwners": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java": "WBS-P002-01",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldEncodingException.java": "WBS-P002-01",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.java": "WBS-P002-04"
+  },
+  "ownerCorrection": {
+    "bug": "BUG-2548",
+    "originalGroupPrimary": "WBS-G13.07",
+    "scopeAndStartEstimateUnchanged": true,
+    "additionalResponsibilityReference": "WBS-P002-04",
+    "additionalFeePp": 0
+  }
+}

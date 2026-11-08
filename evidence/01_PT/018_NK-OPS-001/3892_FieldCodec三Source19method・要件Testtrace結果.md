@@ -1,0 +1,9 @@
+# FieldCodec三Source19method・要件/Test trace結果
+
+3891/756scope/757/758、PG24660順方向0/4f1c962b、24662独立0/a8bd6f0efaae5b85a2824e65563a8603d905844ddeb5334008c6b98d221601e2。現3Source/3physical・20rawmethods=公式測定19＋private空utilityctor1、実10Caseの宣言/Sourcehash/assertbodyhash/独立期待/TestIDaliasと関連RD/UI232/SS322を明示対応。個別Caseのprobe帰属はnull、全branch独立oracleや全G13合格は主張しない。Source.Method/JVMsignatureの対応はProgram002096/JSON四へ。
+
+参照counterは既source64f3の全120単一exec24642そのまま、三class合計L127M19C3B84/I490全未達0。新PT/exec/Javaコンパイル/Analyzer/javap/Root/VM/DB/key/privateRaw/元RootTest/held4/保護二file読取0、旧成功確認再演なし。主費G13.07・元0.5/2/5cap7維持、Source責任参照P00201/P00204への追加費0。
+
+BUG2548は全3をP00201としたproducer guard初1で、before24666保全後、現descriptor/inventory一致のField/FEX=P00201二Source17method/PPE=P00204一Source2methodへ是正。各class/method/declaredRDを実Source責任で継承し、元割当・scope・開始event/見積・Productは不変更。YKT2272全対象の対応と7誤owner/Case/型/Source/共有RD反証を独立postで確認。Source/requirementの関連参照の完成と、その要件の全意味的受入を区別する。
+
+新runtimeSource登録/leaf/unique増0、520(Java416+HTML97CSS7)/候補114/pending12/whole93暫定/正式1964PT53scope/工数null/全HOLD不変更。元18HOST_GAPS/17受入は各歴史Sourceの記録で現受入に転用しない。actualSecretCountnull/G07残3280+限界22を維持する。

@@ -1,0 +1,1783 @@
+[
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldCodec#encodeText(Ljava/lang/String;IZ)[B",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+    "sourceSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "firstExecutableLine": 27,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-002",
+      "MSG-003",
+      "MSG-007",
+      "MSG-008",
+      "MSG-010"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "4.1",
+      "6.1",
+      "11"
+    ],
+    "methodContract": "Nullable optional only; NFC thenstrictUTF8/bytebound; ASCIIrightpadding; typedconversionfailure/no truncation.",
+    "callerMethods": [],
+    "caseLabels": [
+      "T1",
+      "G1",
+      "G2",
+      "G3",
+      "D1"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textEncodeNormalizesUtf8AndPadsWithAsciiSpace()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden001HangulJamoFitsComposedByteWidth()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()"
+    ],
+    "testIdAliases": [
+      "PT-CODEC-EXC-001",
+      "PT-CODEC-NFCGOLD001",
+      "PT-CODEC-NFCGOLD002",
+      "PT-CODEC-NFCGOLD003",
+      "PT-PRO-002-X01",
+      "PT-PRO-002-X02",
+      "PT-PRO-002-X03"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 72,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 8,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 22,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 5,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldCodec#decodeText([BZ)Ljava/util/Optional;",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+    "sourceSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "firstExecutableLine": 58,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-002",
+      "MSG-003",
+      "MSG-008",
+      "MSG-010"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "4.1",
+      "6.1",
+      "11"
+    ],
+    "methodContract": "Rightpadding removed only; optionalempty/mandatoryreject; strictUTF8+NFC; permanentfailure; internalnull/empty rejected.",
+    "callerMethods": [],
+    "caseLabels": [
+      "T2",
+      "G1",
+      "G2",
+      "G3",
+      "D1"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textDecodeIsStrictCanonicalAndOptionalAware()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden001HangulJamoFitsComposedByteWidth()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()"
+    ],
+    "testIdAliases": [
+      "PT-CODEC-EXC-001",
+      "PT-CODEC-NFCGOLD001",
+      "PT-CODEC-NFCGOLD002",
+      "PT-CODEC-NFCGOLD003",
+      "PT-PRO-002-X01",
+      "PT-PRO-002-X02",
+      "PT-PRO-002-X03"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 66,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 10,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 22,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 6,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldCodec#encodeNumeric(JIJJ)[B",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+    "sourceSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "firstExecutableLine": 90,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-004",
+      "MSG-007"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "4.2",
+      "11"
+    ],
+    "methodContract": "Semanticrange andwirewidth independent; leftASCIIzero/fixedlength; overflow/reversedrange rejected.",
+    "callerMethods": [],
+    "caseLabels": [
+      "N1"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericCodecChecksDigitsRangeAndOverflow()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-N01",
+      "PT-PRO-002-N02"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 55,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 10,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 10,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 6,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldCodec#decodeNumeric([BJJ)J",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+    "sourceSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "firstExecutableLine": 105,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-004"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "4.2",
+      "11"
+    ],
+    "methodContract": "ASCII digits only; exact arithmetic overflow -> permanent cause; configuredsemantic bound; inputnotmutated.",
+    "callerMethods": [],
+    "caseLabels": [
+      "N1",
+      "N2",
+      "N3",
+      "D1"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericCodecChecksDigitsRangeAndOverflow()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericErrorFillerDoesNotBecomeBusinessZero()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericSemanticCeilingIsIndependentOfWireAndLongCapacity()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()"
+    ],
+    "testIdAliases": [
+      "PT-CODEC-EXC-001",
+      "PT-CODEC-NUMMAX001",
+      "PT-PRO-002-N01",
+      "PT-PRO-002-N02"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 80,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 14,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 15,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 8,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldCodec#decodeNumericOrErrorFiller([BJJZ)Ljava/util/OptionalLong;",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+    "sourceSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "firstExecutableLine": 129,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-004"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "4.2",
+      "8",
+      "11"
+    ],
+    "methodContract": "Approvederror-profile allzero -> unset, normalzero isbusinessvalue,nonzero stillvalidated.",
+    "callerMethods": [],
+    "caseLabels": [
+      "N2"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericErrorFillerDoesNotBecomeBusinessZero()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-N02"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 20,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 4,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 5,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 3,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldCodec#encodeBoolean(Ljava/lang/Boolean;Z)[B",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+    "sourceSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "firstExecutableLine": 138,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-006"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "4.3",
+      "11"
+    ],
+    "methodContract": "SingleASCII0/1 oronlyallowedunsetspace; requirednull istyped senderfailure.",
+    "callerMethods": [],
+    "caseLabels": [
+      "B1"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#booleanAndReservedFieldsRejectUnknownBytes()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-B01",
+      "PT-PRO-002-X03"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 29,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 6,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 5,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 4,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldCodec#decodeBoolean([BZ)Ljava/util/Optional;",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+    "sourceSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "firstExecutableLine": 148,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-006"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "4.3",
+      "11"
+    ],
+    "methodContract": "Onebyteonly;0/1/allowedspace; unknown/length/null reject, nofalse fallback.",
+    "callerMethods": [],
+    "caseLabels": [
+      "B1"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#booleanAndReservedFieldsRejectUnknownBytes()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-B01",
+      "PT-PRO-002-X03"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 38,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 8,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 10,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 6,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldCodec#requireSpaces([B)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+    "sourceSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "firstExecutableLine": 166,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-003",
+      "MQ-017"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [
+      "MQ-017"
+    ],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "4.1",
+      "6",
+      "11"
+    ],
+    "methodContract": "Reservedfield positive length/non-null/exactASCIIspace, rejectotherbytes.",
+    "callerMethods": [],
+    "caseLabels": [
+      "B1"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#booleanAndReservedFieldsRejectUnknownBytes()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-B01",
+      "PT-PRO-002-X03"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 16,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 2,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 5,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldCodec#validateTextCharactersForEncode(Ljava/lang/String;)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+    "sourceSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "firstExecutableLine": 174,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-007",
+      "MSG-008"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "4.1",
+      "11"
+    ],
+    "methodContract": "Rejectambiguous trailingASCIIspace andCR/LF/TAB/NUL beforefield output.",
+    "callerMethods": [
+      "encodeText"
+    ],
+    "caseLabels": [
+      "T1",
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textEncodeNormalizesUtf8AndPadsWithAsciiSpace()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden001HangulJamoFitsComposedByteWidth()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition()"
+    ],
+    "testIdAliases": [
+      "PT-CODEC-NFCGOLD001",
+      "PT-CODEC-NFCGOLD002",
+      "PT-CODEC-NFCGOLD003",
+      "PT-PRO-002-X01",
+      "PT-PRO-002-X02",
+      "PT-PRO-002-X03"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 18,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 4,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 5,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 3,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldCodec#validateTextCharactersForDecode(Ljava/lang/String;)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+    "sourceSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "firstExecutableLine": 183,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-008"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "4.1",
+      "11"
+    ],
+    "methodContract": "RejectforbiddenCR/LF/TAB/NUL afterstrictdecode.",
+    "callerMethods": [
+      "decodeText"
+    ],
+    "caseLabels": [
+      "T2",
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textDecodeIsStrictCanonicalAndOptionalAware()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden001HangulJamoFitsComposedByteWidth()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition()"
+    ],
+    "testIdAliases": [
+      "PT-CODEC-NFCGOLD001",
+      "PT-CODEC-NFCGOLD002",
+      "PT-CODEC-NFCGOLD003",
+      "PT-PRO-002-X01",
+      "PT-PRO-002-X02",
+      "PT-PRO-002-X03"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 9,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 2,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 3,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldCodec#containsForbiddenControl(Ljava/lang/String;)Z",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+    "sourceSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "firstExecutableLine": 189,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-008"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "4.1"
+    ],
+    "methodContract": "EachofCR/LF/TAB/NUL independentlyrejected, ordinarytext accepted.",
+    "callerMethods": [
+      "validateTextCharactersForEncode",
+      "validateTextCharactersForDecode"
+    ],
+    "caseLabels": [
+      "T1",
+      "T2"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textEncodeNormalizesUtf8AndPadsWithAsciiSpace()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textDecodeIsStrictCanonicalAndOptionalAware()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-X01",
+      "PT-PRO-002-X02",
+      "PT-PRO-002-X03"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 20,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 8,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 4,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 5,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldCodec#allBytes([BB)Z",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+    "sourceSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "firstExecutableLine": 196,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-003",
+      "MSG-004",
+      "MSG-006",
+      "MQ-017"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [
+      "MQ-017"
+    ],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "4.1",
+      "4.2",
+      "4.3",
+      "8"
+    ],
+    "methodContract": "All-zeroerrorfiller/allspacereserved vsonewrongbyte, noemptyscanacceptancebecausecallerprecondition.",
+    "callerMethods": [
+      "decodeNumericOrErrorFiller",
+      "requireSpaces"
+    ],
+    "caseLabels": [
+      "N2",
+      "B1"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericErrorFillerDoesNotBecomeBusinessZero()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#booleanAndReservedFieldsRejectUnknownBytes()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-B01",
+      "PT-PRO-002-N02",
+      "PT-PRO-002-X03"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 23,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 4,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 4,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 3,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldCodec#filled(IB)[B",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+    "sourceSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "firstExecutableLine": 205,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-003",
+      "MSG-004"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "4.1",
+      "4.2"
+    ],
+    "methodContract": "Freshfixedlength arrayfilledASCIIspace/zero; outputliteralvalidatedthroughencode.",
+    "callerMethods": [
+      "encodeText",
+      "encodeNumeric"
+    ],
+    "caseLabels": [
+      "T1",
+      "N1"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textEncodeNormalizesUtf8AndPadsWithAsciiSpace()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericCodecChecksDigitsRangeAndOverflow()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-N01",
+      "PT-PRO-002-N02",
+      "PT-PRO-002-X01",
+      "PT-PRO-002-X02",
+      "PT-PRO-002-X03"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 8,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 3,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldCodec#requirePositiveLength(I)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+    "sourceSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "firstExecutableLine": 211,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-002",
+      "MQ-017"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [
+      "MQ-017"
+    ],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "4.1",
+      "4.2"
+    ],
+    "methodContract": "Positivewidth constructor/functioninvariant;zero rejected beforeallocation.",
+    "callerMethods": [
+      "encodeText",
+      "encodeNumeric"
+    ],
+    "caseLabels": [
+      "T1",
+      "N1"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textEncodeNormalizesUtf8AndPadsWithAsciiSpace()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericCodecChecksDigitsRangeAndOverflow()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-N01",
+      "PT-PRO-002-N02",
+      "PT-PRO-002-X01",
+      "PT-PRO-002-X02",
+      "PT-PRO-002-X03"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 9,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 2,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 3,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldCodec#requireNonEmptyField([B)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+    "sourceSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "firstExecutableLine": 217,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-002",
+      "MQ-017"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [
+      "MQ-017"
+    ],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "4",
+      "11"
+    ],
+    "methodContract": "Internal non-null/nonempty slice contract; empty rejected beforeconversion, notincomingwhole-message fallback.",
+    "callerMethods": [
+      "decodeText",
+      "decodeNumeric",
+      "decodeNumericOrErrorFiller",
+      "requireSpaces"
+    ],
+    "caseLabels": [
+      "T2",
+      "N1",
+      "N2",
+      "B1"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textDecodeIsStrictCanonicalAndOptionalAware()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericCodecChecksDigitsRangeAndOverflow()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericErrorFillerDoesNotBecomeBusinessZero()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#booleanAndReservedFieldsRejectUnknownBytes()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-B01",
+      "PT-PRO-002-N01",
+      "PT-PRO-002-N02",
+      "PT-PRO-002-X01",
+      "PT-PRO-002-X02",
+      "PT-PRO-002-X03"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 9,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 2,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 3,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldEncodingException#<init>(Ljava/lang/String;)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldEncodingException.java",
+    "sourceSha256": "60f7a35b38a0a90dfc7caf0746de64668d4dd31c3d14f7ec81b6eb7bd671f669",
+    "firstExecutableLine": 10,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-007"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "11"
+    ],
+    "methodContract": "Caller-observed senderexception type/fixeddiagnostic-only source; no field echo. Directarbitraryconstructor-null orarbitrarymessage-format not claimed.",
+    "callerMethods": [
+      "encodeText",
+      "encodeNumeric",
+      "encodeBoolean"
+    ],
+    "caseLabels": [
+      "T1",
+      "N1",
+      "B1"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textEncodeNormalizesUtf8AndPadsWithAsciiSpace()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericCodecChecksDigitsRangeAndOverflow()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#booleanAndReservedFieldsRejectUnknownBytes()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-B01",
+      "PT-PRO-002-N01",
+      "PT-PRO-002-N02",
+      "PT-PRO-002-X01",
+      "PT-PRO-002-X02",
+      "PT-PRO-002-X03"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 4,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/FieldEncodingException#<init>(Ljava/lang/String;Ljava/nio/charset/CharacterCodingException;)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldEncodingException.java",
+    "sourceSha256": "60f7a35b38a0a90dfc7caf0746de64668d4dd31c3d14f7ec81b6eb7bd671f669",
+    "firstExecutableLine": 14,
+    "owner": "WBS-P002-01",
+    "costOwner": "WBS-P002-01",
+    "relatedRd": [
+      "MSG-007"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "11"
+    ],
+    "methodContract": "StrictUTF8 failurewrapped withCharacterCodingException; newD1assertsJDK malformedshape andfixedsafeoutermessage.",
+    "callerMethods": [
+      "encodeText"
+    ],
+    "caseLabels": [
+      "T1",
+      "D1"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textEncodeNormalizesUtf8AndPadsWithAsciiSpace()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()"
+    ],
+    "testIdAliases": [
+      "PT-CODEC-EXC-001",
+      "PT-PRO-002-X01",
+      "PT-PRO-002-X02",
+      "PT-PRO-002-X03"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 5,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException#<init>(Ljava/lang/String;)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.java",
+    "sourceSha256": "9193af24f93fcd0d45e536abbacbe4adf46029619de6d6f63e889b9af44ea2d3",
+    "firstExecutableLine": 8,
+    "owner": "WBS-P002-04",
+    "costOwner": "WBS-P002-04",
+    "relatedRd": [
+      "MSG-002",
+      "MSG-004",
+      "MSG-006",
+      "MSG-008",
+      "MSG-010",
+      "MQ-017"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [
+      "MSG-002",
+      "MSG-004",
+      "MSG-006",
+      "MSG-008",
+      "MSG-010",
+      "MQ-017"
+    ],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "11"
+    ],
+    "methodContract": "Caller-observed permanenttypedwire rejection, semanticfailurecause absent; bodyvalues notechoed.",
+    "callerMethods": [
+      "decodeText",
+      "decodeNumeric",
+      "decodeBoolean",
+      "requireSpaces"
+    ],
+    "caseLabels": [
+      "T2",
+      "N1",
+      "B1",
+      "D1"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textDecodeIsStrictCanonicalAndOptionalAware()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericCodecChecksDigitsRangeAndOverflow()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#booleanAndReservedFieldsRejectUnknownBytes()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()"
+    ],
+    "testIdAliases": [
+      "PT-CODEC-EXC-001",
+      "PT-PRO-002-B01",
+      "PT-PRO-002-N01",
+      "PT-PRO-002-N02",
+      "PT-PRO-002-X01",
+      "PT-PRO-002-X02",
+      "PT-PRO-002-X03"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 4,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException#<init>(Ljava/lang/String;Ljava/lang/Throwable;)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.java",
+    "sourceSha256": "9193af24f93fcd0d45e536abbacbe4adf46029619de6d6f63e889b9af44ea2d3",
+    "firstExecutableLine": 12,
+    "owner": "WBS-P002-04",
+    "costOwner": "WBS-P002-04",
+    "relatedRd": [
+      "MSG-002",
+      "MSG-004"
+    ],
+    "exclusiveRdOwnershipChanged": false,
+    "sharedRdReferences": [
+      "MSG-002",
+      "MSG-004"
+    ],
+    "ui": [
+      "232"
+    ],
+    "ssDocument": "322",
+    "ssSections": [
+      "11"
+    ],
+    "methodContract": "StrictUTF8/arithmetic cause retained; newD1checksbothcauseclasses/fixedouterdiagnostics withoutinput mutation.",
+    "callerMethods": [
+      "decodeText",
+      "decodeNumeric"
+    ],
+    "caseLabels": [
+      "T2",
+      "N1",
+      "D1"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textDecodeIsStrictCanonicalAndOptionalAware()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericCodecChecksDigitsRangeAndOverflow()",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()"
+    ],
+    "testIdAliases": [
+      "PT-CODEC-EXC-001",
+      "PT-PRO-002-N01",
+      "PT-PRO-002-N02",
+      "PT-PRO-002-X01",
+      "PT-PRO-002-X02",
+      "PT-PRO-002-X03"
+    ],
+    "oracleDocuments": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/004_共通codec全43成果物・MSG11要件個別監査.md",
+        "sha256": "a63389104d9a26acb517fc36268f38806688a64e52cd57d9a48ccfab083ca892"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/095_FieldCodec原因診断新1・全120結果.md",
+        "sha256": "11ea003ced2196b0ce0f1b97a1716eb5d8e4db9c7dd1ce4c5ff77e3839c84c2f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2422_FieldCodec_NFC固定scalar・wire_単体テスト仕様.md",
+        "sha256": "a0707414fda2b16e2a327c576fe43ccb8a75fac34b599c638820da63f70f9448"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2424_FieldCodec数値semantic上限_単体テスト仕様.md",
+        "sha256": "45ac01ad3ea748d9025c0e1c5025e59fe18bce5f371415134e6e85ddbf8d9b82"
+      }
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 5,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "traceKind": "STATIC_CONTRACT_CALLER_AND_ASSERTION_REFERENCE_WITH_ACTUAL_CASE_PASS",
+    "methodObservedInWhole120": true,
+    "branchOracleCompleteNotClaimed": true
+  }
+]

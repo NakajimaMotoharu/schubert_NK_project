@@ -1,0 +1,148 @@
+{
+  "T1": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textEncodeNormalizesUtf8AndPadsWithAsciiSpace()",
+    "testIds": [
+      "PT-PRO-002-X01",
+      "PT-PRO-002-X02",
+      "PT-PRO-002-X03"
+    ],
+    "independentOracle": "UI232/SS322: AB4=41 42 20 20; NFD e+0301 -> c3 a9 spaces; Japanese3/emoji4; mandatory/null/empty/trailing-space/control/invalidsurrogate/length0 rejection.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+    "sourceSha256": "4c05d90d26badf81b4173a01fcb1484bb20c8f05c7133fd3408857825c8c50e4",
+    "declarationLine": 17,
+    "bodyEndLine": 34,
+    "assertionBodySha256": "ec53441da2f4255fc07eb1f8d8805048d4d7b09c9085ebd3f6d56aea994cae54",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "T2": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textDecodeIsStrictCanonicalAndOptionalAware()",
+    "testIds": [
+      "PT-PRO-002-X01",
+      "PT-PRO-002-X02",
+      "PT-PRO-002-X03"
+    ],
+    "independentOracle": "UI232/SS322: a b +ASCIIpadding -> a b; allspace optionalempty vsmandatoryreject; c3 28 malformed; NFD/control reject; null/zero-byte internal precondition.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+    "sourceSha256": "4c05d90d26badf81b4173a01fcb1484bb20c8f05c7133fd3408857825c8c50e4",
+    "declarationLine": 37,
+    "bodyEndLine": 58,
+    "assertionBodySha256": "d51e59b6fd1875a5a3cd49ca852edf9792405c510421eefdb16cbbac7d7e259f",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "N1": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericCodecChecksDigitsRangeAndOverflow()",
+    "testIds": [
+      "PT-PRO-002-N01",
+      "PT-PRO-002-N02"
+    ],
+    "independentOracle": "ASCII000/001/999 fixedvectors, negative/reversed semanticrange, length0/too-manydigits, non-digit +/:/dot,19nines longoverflow, min1/wire0 reject.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+    "sourceSha256": "4c05d90d26badf81b4173a01fcb1484bb20c8f05c7133fd3408857825c8c50e4",
+    "declarationLine": 61,
+    "bodyEndLine": 93,
+    "assertionBodySha256": "9e87013803cf1bd16bc241a1bbeae68dcbb18ca65a65c588076fb5eefc6eefa8",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "N2": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericErrorFillerDoesNotBecomeBusinessZero()",
+    "testIds": [
+      "PT-PRO-002-N02"
+    ],
+    "independentOracle": "errorProfile true+00 -> OptionalLong.empty evensemanticmin1; false+00 min0 -> business0; true+01 ->1, null/empty rejected.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+    "sourceSha256": "4c05d90d26badf81b4173a01fcb1484bb20c8f05c7133fd3408857825c8c50e4",
+    "declarationLine": 96,
+    "bodyEndLine": 111,
+    "assertionBodySha256": "82bd3e3f2332361407cdcdef383475040e361d98bf61abd7f426cf73b11e2328",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "B1": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#booleanAndReservedFieldsRejectUnknownBytes()",
+    "testIds": [
+      "PT-PRO-002-B01",
+      "PT-PRO-002-X03"
+    ],
+    "independentOracle": "B false0/true1/unsetspace exactbyte; requirednull/unset/unknown2/two bytes rejected; reservedspace-only/space+x/null/empty.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+    "sourceSha256": "4c05d90d26badf81b4173a01fcb1484bb20c8f05c7133fd3408857825c8c50e4",
+    "declarationLine": 114,
+    "bodyEndLine": 135,
+    "assertionBodySha256": "a59f287adf7fb8bf9987a76f83c4defbf5c02c41b49bbe0209b17be4b12ea656",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "N3": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericSemanticCeilingIsIndependentOfWireAndLongCapacity()",
+    "testIds": [
+      "PT-CODEC-NUMMAX001"
+    ],
+    "independentOracle": "000099 accepted/000100 over semantic99 rejected despitewirecapacity; Long.MAX-1 accepted andLong.MAX acceptedonlyfullrange; callerarrays unchanged.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+    "sourceSha256": "4c05d90d26badf81b4173a01fcb1484bb20c8f05c7133fd3408857825c8c50e4",
+    "declarationLine": 139,
+    "bodyEndLine": 158,
+    "assertionBodySha256": "dbc55a9359e57706298013b7382acdef3e442d7a59e60f561fb06f889ae6e893",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "D1": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()",
+    "testIds": [
+      "PT-CODEC-EXC-001"
+    ],
+    "independentOracle": "Lonehighsurrogate andc3 28 -> MalformedInputException/inputLength1; 19nines -> ArithmeticException; semanticrange -> nullcause; fixeddiagnostics/inputunchanged, independent3890/094.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+    "sourceSha256": "4c05d90d26badf81b4173a01fcb1484bb20c8f05c7133fd3408857825c8c50e4",
+    "declarationLine": 161,
+    "bodyEndLine": 192,
+    "assertionBodySha256": "575176908236c35302e9d95e8a75a0593d8a9dd0cb3315d39b3e135c0f706f9d",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "G1": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden001HangulJamoFitsComposedByteWidth()",
+    "testIds": [
+      "PT-CODEC-NFCGOLD001"
+    ],
+    "independentOracle": "Independent HangulJamo/composed scalar/hex, NFC beforeUTF8length; fixed byteboundaries andreceiver canonicality;2422.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java",
+    "sourceSha256": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb",
+    "declarationLine": 14,
+    "bodyEndLine": 30,
+    "assertionBodySha256": "da003fa68fd7acbf8c01f72ddd7bdf8b0855256fa59d0f74adc4d5005cb7418f",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "G2": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck()",
+    "testIds": [
+      "PT-CODEC-NFCGOLD002"
+    ],
+    "independentOracle": "Independent Angstrom -> canonical2byte scalar/hex thenboundary/rejection;2422.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java",
+    "sourceSha256": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb",
+    "declarationLine": 33,
+    "bodyEndLine": 41,
+    "assertionBodySha256": "dccc3edd2b7e7ef423011754fada08f9192b9e229c3371e306594221b9dcb0f7",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "G3": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition()",
+    "testIds": [
+      "PT-CODEC-NFCGOLD003"
+    ],
+    "independentOracle": "Independent canonicalcombining order/scalar/hex evenwithoutcomposition; rejectnoncanonicalreceiver;2422.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java",
+    "sourceSha256": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb",
+    "declarationLine": 44,
+    "bodyEndLine": 53,
+    "assertionBodySha256": "4e67a68ec7da2a4fffcbaf7e870f0305e1cfa41611ca6b0baa9733acf0eda937",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  }
+}
