@@ -1,0 +1,638 @@
+{
+  "productionMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "oracles": [
+    {
+      "caseRef": "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#emptyAnswerAndClock()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/StubAnswerProviderTest.java",
+      "method": "emptyAnswerAndClock",
+      "testId": "PT-ASY-STB001",
+      "expected": "Empty answer body, exact injected NOW and 1582date, exactly2 reads for2 calls; literal empty and independent inputInstant.",
+      "assertionTokens": [
+        "assertEquals(\"\", answer.body());",
+        "assertEquals(value, answer.answeredAt());",
+        "assertEquals(2, calls.get());"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#nullContracts()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/StubAnswerProviderTest.java",
+      "method": "nullContracts",
+      "testId": "PT-ASY-STB002",
+      "expected": "Null constructor/question/resultfield rejected; missingquestion reads clock0.",
+      "assertionTokens": [
+        "new StubAnswerProvider(null)",
+        "provider.answer(null)",
+        "assertEquals(0, calls.get());",
+        "new AnswerResult(null, NOW)",
+        "new AnswerResult(\"\", null)"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#clockFailures()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/StubAnswerProviderTest.java",
+      "method": "clockFailures",
+      "testId": "PT-ASY-STB003",
+      "expected": "Exact supplied RTE/Error identity propagates; clock null cannot become result.",
+      "assertionTokens": [
+        "assertSame(",
+        "first.answer(PUBLIC_QUESTION)",
+        "second.answer(PUBLIC_QUESTION)",
+        "new StubAnswerProvider(clock(() -> null))",
+        "missing.answer(PUBLIC_QUESTION)"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#resultValueAndRedaction()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/StubAnswerProviderTest.java",
+      "method": "resultValueAndRedaction",
+      "testId": "PT-ASY-STB004",
+      "expected": "Independent body/NOW and fixed redacted string; equality/hashCode comparisons are supplementary record value checks, not generated business expected.",
+      "assertionTokens": [
+        "assertEquals(PUBLIC_ANSWER_BODY, first.body());",
+        "assertEquals(NOW, first.answeredAt());",
+        "assertNotEquals(first, new AnswerResult(\"\", NOW));",
+        "assertEquals(\"AnswerResult[REDACTED]\", first.toString());"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#concurrentCallsAndEvidence()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/StubAnswerProviderTest.java",
+      "method": "concurrentCallsAndEvidence",
+      "testId": "PT-ASY-STB005",
+      "expected": "64literal independent input instants and empty bodies, one read each; duplicate instants rejected.",
+      "assertionTokens": [
+        "for (int i = 0; i < 64; i++) expected.add(NOW.plusSeconds(i));",
+        "assertTrue(actual.add(answer.answeredAt()));",
+        "assertEquals(expected, actual);",
+        "assertEquals(64, calls.get());"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#exactAlphabet()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "method": "exactAlphabet",
+      "testId": "PT-QST-RID001",
+      "expected": "Independent 32ASCII alphabet, 26copies, forward/reverse literals; noULID leading restriction.",
+      "assertionTokens": [
+        "ALLOWED.toCharArray()",
+        "String.valueOf(character).repeat(26)",
+        "assertEquals(value, new QuestionReceiptId(value).value());",
+        "assertEquals(FORWARD, new QuestionReceiptId(FORWARD).value());",
+        "assertEquals(REVERSE, new QuestionReceiptId(REVERSE).value());"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#lengthBoundaries()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "method": "lengthBoundaries",
+      "testId": "PT-QST-RID002",
+      "expected": "Lengths0/1/25/27/4096 rejected,26accepted, fixed error.",
+      "assertionTokens": [
+        "new int[] {0, 1, 25, 27, 4096}",
+        "IllegalArgumentException.class",
+        "assertEquals(\"invalid receipt ID\", error.getMessage());",
+        "assertEquals(26, new QuestionReceiptId(\"A\".repeat(26)).value().length());"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#characterBoundaries()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "method": "characterBoundaries",
+      "testId": "PT-QST-RID003",
+      "expected": "ASCII complement plus Unicode/surrogates rejected at every26positions, independent ALLOWEDliteral.",
+      "assertionTokens": [
+        "for (char value = 0; value < 128; value++)",
+        "ALLOWED.indexOf(value) < 0",
+        "for (int position = 0; position < 26; position++)",
+        "IllegalArgumentException.class"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#independentRandomVector()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "method": "independentRandomVector",
+      "testId": "PT-QST-RID004",
+      "expected": "32bound, 26forward+26reverse draws using literal outputs,52calls.",
+      "assertionTokens": [
+        "assertEquals(32, bound);",
+        "return call < 26 ? call : 57 - call;",
+        "assertEquals(FORWARD, generator.generate().value());",
+        "assertEquals(REVERSE, generator.generate().value());",
+        "assertEquals(52, calls.get());"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#randomFailure()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "method": "randomFailure",
+      "testId": "PT-QST-RID005",
+      "expected": "Each0..25draw failure exactidentity/callcount; -1/32/min/max index rejected after1call, fixed error.",
+      "assertionTokens": [
+        "for (int position = 0; position < 26; position++)",
+        "assertSame(failure, assertThrows(IllegalStateException.class, generator::generate));",
+        "assertEquals(position + 1, calls.get());",
+        "new int[] {-1, 32, Integer.MIN_VALUE, Integer.MAX_VALUE}",
+        "\"receipt randomness is unavailable\"",
+        "assertEquals(1, calls.get());"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#nullAndFactory()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "method": "nullAndFactory",
+      "testId": "PT-QST-RID006",
+      "expected": "Null ctor inputs rejected; factory only output length/alphabet observed. Entropy/distribution/JCA provider qualification NOT established.",
+      "assertionTokens": [
+        "new QuestionReceiptId(null)",
+        "new QuestionReceiptIdGenerator(null)",
+        "QuestionReceiptIdGenerator.create().generate().value();",
+        "assertEquals(26, candidate.length());",
+        "assertTrue(ALLOWED.indexOf(character) >= 0)"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#concurrentCalls()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "method": "concurrentCalls",
+      "testId": "PT-QST-RID007",
+      "expected": "64calls of26 draws=1664, independent16 literal cycles each4, private lock not caller-visible monitor.",
+      "assertionTokens": [
+        "for (String value : literalCycles) expected.put(value, 4);",
+        "synchronized (generator)",
+        "result.get(5, TimeUnit.SECONDS)",
+        "assertEquals(expected, actual);",
+        "assertEquals(1664, calls.get());"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#equalityAndPublicEvidence()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "method": "equalityAndPublicEvidence",
+      "testId": "PT-QST-RID008",
+      "expected": "Fixed redactedstring; unequalvalue/null/type checked; hashCode equal comparison supplementary.",
+      "assertionTokens": [
+        "assertNotEquals(first, new QuestionReceiptId(REVERSE));",
+        "assertNotEquals(first, null);",
+        "assertNotEquals(first, FORWARD);",
+        "assertEquals(\"QuestionReceiptId[REDACTED]\", first.toString());"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#validSnapshot()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorSettingsTest.java",
+      "method": "validSnapshot",
+      "testId": "PT-DB-INBOX-209",
+      "expected": "Declared ROOT/URL and independent fp1/old-v.2 set survives inputclear; getter immutable and redactedstring.",
+      "assertionTokens": [
+        "input.clear();",
+        "assertEquals(ROOT, settings.credentialRoot());",
+        "assertEquals(URL, settings.databaseUrl());",
+        "assertEquals(Set.of(\"fp1\", \"old-v.2\"), settings.fingerprintVersions());",
+        "UnsupportedOperationException.class",
+        "assertEquals(\"InspectorSettings[REDACTED]\", settings.toString());"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#invalidSettings()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorSettingsTest.java",
+      "method": "invalidSettings",
+      "testId": "PT-DB-INBOX-210",
+      "expected": "Null/membernull and root/URL/port/version syntax boundaries reject without IO; no actual DB or key qualification.",
+      "assertionTokens": [
+        "nullElement.add(null);",
+        "List.of(\"\", \"/\", \"relative\", \"/run/../credentials\", \"/run/./credentials\")",
+        "new InspectorSettings(ROOT, URL, Set.of())",
+        "List.of(\"\", \"-v\", \"a b\", \"é\", \"a\".repeat(17))",
+        "IllegalArgumentException.class"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#sharedValidation()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorSettingsTest.java",
+      "method": "sharedValidation",
+      "testId": "PT-DB-INBOX-211",
+      "expected": "Version1..16/port1,65535 accepted, literal db name and unchanged set; unsafeURL fixed failure/cause absent/suppressed0.",
+      "assertionTokens": [
+        "List.of(\"v\", \"a\".repeat(16))",
+        "new int[] {1, 65535}",
+        "assertEquals(\"db\", InspectorDatabaseConnections.databaseName(settings.databaseUrl()));",
+        "Set.of(version), InspectorSettings.requireVersions(settings.fingerprintVersions())",
+        "assertEquals(\"inspector database URL is invalid\", failure.getMessage());",
+        "assertNull(failure.getCause());",
+        "assertEquals(0, failure.getSuppressed().length);"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.logging.RequestLogDetailsTest#allowedScalarsAndRolesMatchLiteralJson()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/RequestLogDetailsTest.java",
+      "method": "allowedScalarsAndRolesMatchLiteralJson",
+      "testId": "PT-IDEM-012/DETAIL-ALLOWED",
+      "expected": "Independent literal strictJSON empty/byte0..999999999999/userAgent1..32/truncated/statusPENDING-FAILED and trustedRoleUSERADMIN projections.",
+      "assertionTokens": [
+        "assertEquals(\"{}\", RequestLogDetails.normalize(Optional.empty(), Optional.empty()));",
+        "Optional.of(UserRole.USER)",
+        "Optional.of(UserRole.ADMIN)",
+        "assertEquals(all, normalize(all));"
+      ],
+      "expectationProductionGenerated": false
+    },
+    {
+      "caseRef": "dev.codex.schubert.nk.api.logging.RequestLogDetailsTest#unsafeMalformedDuplicateAndWrongTypesAreRejected()",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/RequestLogDetailsTest.java",
+      "method": "unsafeMalformedDuplicateAndWrongTypesAreRejected",
+      "testId": "PT-IDEM-012/DETAIL-REJECTED",
+      "expected": "Independent invalidJSON/duplicate/unknownrole/shape/type/range/UTF8-byte limit1024 literals; fixed safeerror/cause absent/nullrejected.",
+      "assertionTokens": [
+        "assertThrows(PermanentProtocolException.class, () -> normalize(invalid), invalid);",
+        "\"REQUEST log details violate the safe projection contract\", failure.getMessage()",
+        "assertNull(failure.getCause());",
+        "assertEquals(\"{}\", normalize(\" \".repeat(1022) + \"{}\"));",
+        "RequestLogDetails.normalize(null, Optional.empty())",
+        "RequestLogDetails.normalize(Optional.empty(), null)"
+      ],
+      "expectationProductionGenerated": false
+    }
+  ],
+  "methods": [
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/AnswerResult",
+      "method": "<init>",
+      "descriptor": "(Ljava/lang/String;Ljava/time/Instant;)V",
+      "testIds": [
+        "PT-ASY-STB002",
+        "PT-ASY-STB004"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#nullContracts()",
+        "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#resultValueAndRedaction()"
+      ],
+      "invocationRelation": "DIRECT_CONSTRUCTOR_OR_PUBLIC_CONSUMER",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/AnswerResult.java",
+      "sourceSha256": "bfa7c5a2827d5c97579a030df72997f928f5817b6d68ea9b0d918d88aef3fae6",
+      "classSha256": "e2a819a1a9d98c05ec22e60963884d9d3b56598768d69c8cde6df0caaed80427",
+      "owner": "WBS-P012-02",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/AnswerResult",
+      "method": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "testIds": [
+        "PT-ASY-STB004"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#resultValueAndRedaction()"
+      ],
+      "invocationRelation": "DIRECT_CONSTRUCTOR_OR_PUBLIC_CONSUMER",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/AnswerResult.java",
+      "sourceSha256": "bfa7c5a2827d5c97579a030df72997f928f5817b6d68ea9b0d918d88aef3fae6",
+      "classSha256": "e2a819a1a9d98c05ec22e60963884d9d3b56598768d69c8cde6df0caaed80427",
+      "owner": "WBS-P012-02",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionReceiptId",
+      "method": "<clinit>",
+      "descriptor": "()V",
+      "testIds": [
+        "PT-QST-RID001",
+        "PT-QST-RID002",
+        "PT-QST-RID003"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#exactAlphabet()",
+        "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#lengthBoundaries()",
+        "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#characterBoundaries()"
+      ],
+      "invocationRelation": "INDIRECT_CLASS_INITIALIZER_PATTERN",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptId.java",
+      "sourceSha256": "32e2d84c19a05c4655c6911e0b27374c13fb6b4d3ef09ead40e60877305d5d2f",
+      "classSha256": "8a2e163d656d23c45ed50f14974afeeb10e4e409212cbd215625ee0fd167b099",
+      "owner": "WBS-P011-01",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionReceiptId",
+      "method": "<init>",
+      "descriptor": "(Ljava/lang/String;)V",
+      "testIds": [
+        "PT-QST-RID001",
+        "PT-QST-RID002",
+        "PT-QST-RID003",
+        "PT-QST-RID006"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#exactAlphabet()",
+        "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#lengthBoundaries()",
+        "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#characterBoundaries()",
+        "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#nullAndFactory()"
+      ],
+      "invocationRelation": "DIRECT_CONSTRUCTOR_OR_PUBLIC_CONSUMER",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptId.java",
+      "sourceSha256": "32e2d84c19a05c4655c6911e0b27374c13fb6b4d3ef09ead40e60877305d5d2f",
+      "classSha256": "8a2e163d656d23c45ed50f14974afeeb10e4e409212cbd215625ee0fd167b099",
+      "owner": "WBS-P011-01",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionReceiptId",
+      "method": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "testIds": [
+        "PT-QST-RID008"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#equalityAndPublicEvidence()"
+      ],
+      "invocationRelation": "DIRECT_CONSTRUCTOR_OR_PUBLIC_CONSUMER",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptId.java",
+      "sourceSha256": "32e2d84c19a05c4655c6911e0b27374c13fb6b4d3ef09ead40e60877305d5d2f",
+      "classSha256": "8a2e163d656d23c45ed50f14974afeeb10e4e409212cbd215625ee0fd167b099",
+      "owner": "WBS-P011-01",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionReceiptIdGenerator",
+      "method": "<init>",
+      "descriptor": "(Ljava/util/function/IntUnaryOperator;)V",
+      "testIds": [
+        "PT-QST-RID004",
+        "PT-QST-RID006"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#independentRandomVector()",
+        "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#nullAndFactory()"
+      ],
+      "invocationRelation": "DIRECT_CONSTRUCTOR_OR_PUBLIC_CONSUMER",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdGenerator.java",
+      "sourceSha256": "a4cb4c03f5dbdb225632d6abf4c2465fbb414ce09b0894f0b6649c83c7bc145d",
+      "classSha256": "861058d7d158c83422772dcb3789773c5a3832f4d559e484eace694027cd1efd",
+      "owner": "WBS-P011-01",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionReceiptIdGenerator",
+      "method": "create",
+      "descriptor": "()Ldev/codex/schubert/nk/api/application/question/QuestionReceiptIdGenerator;",
+      "testIds": [
+        "PT-QST-RID006"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#nullAndFactory()"
+      ],
+      "invocationRelation": "DIRECT_CONSTRUCTOR_OR_PUBLIC_CONSUMER",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdGenerator.java",
+      "sourceSha256": "a4cb4c03f5dbdb225632d6abf4c2465fbb414ce09b0894f0b6649c83c7bc145d",
+      "classSha256": "861058d7d158c83422772dcb3789773c5a3832f4d559e484eace694027cd1efd",
+      "owner": "WBS-P011-01",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionReceiptIdGenerator",
+      "method": "generate",
+      "descriptor": "()Ldev/codex/schubert/nk/api/application/question/QuestionReceiptId;",
+      "testIds": [
+        "PT-QST-RID004",
+        "PT-QST-RID005",
+        "PT-QST-RID007"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#independentRandomVector()",
+        "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#randomFailure()",
+        "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#concurrentCalls()"
+      ],
+      "invocationRelation": "DIRECT_CONSTRUCTOR_OR_PUBLIC_CONSUMER",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdGenerator.java",
+      "sourceSha256": "a4cb4c03f5dbdb225632d6abf4c2465fbb414ce09b0894f0b6649c83c7bc145d",
+      "classSha256": "861058d7d158c83422772dcb3789773c5a3832f4d559e484eace694027cd1efd",
+      "owner": "WBS-P011-01",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/StubAnswerProvider",
+      "method": "<init>",
+      "descriptor": "(Ljava/time/Clock;)V",
+      "testIds": [
+        "PT-ASY-STB001",
+        "PT-ASY-STB002"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#emptyAnswerAndClock()",
+        "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#nullContracts()"
+      ],
+      "invocationRelation": "DIRECT_CONSTRUCTOR_OR_PUBLIC_CONSUMER",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/StubAnswerProvider.java",
+      "sourceSha256": "719addcd16754a2179b04a31ec7a17130c912fef362adbcbcc347ec523f4816f",
+      "classSha256": "fbd407e87df17e8edee5fb83c625d314eb6ef54ae64fd4cddde02d3039b2df00",
+      "owner": "WBS-P012-02",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/StubAnswerProvider",
+      "method": "answer",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/api/application/question/AnswerResult;",
+      "testIds": [
+        "PT-ASY-STB001",
+        "PT-ASY-STB002",
+        "PT-ASY-STB003",
+        "PT-ASY-STB005"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#emptyAnswerAndClock()",
+        "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#nullContracts()",
+        "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#clockFailures()",
+        "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#concurrentCallsAndEvidence()"
+      ],
+      "invocationRelation": "DIRECT_CONSTRUCTOR_OR_PUBLIC_CONSUMER",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/StubAnswerProvider.java",
+      "sourceSha256": "719addcd16754a2179b04a31ec7a17130c912fef362adbcbcc347ec523f4816f",
+      "classSha256": "fbd407e87df17e8edee5fb83c625d314eb6ef54ae64fd4cddde02d3039b2df00",
+      "owner": "WBS-P012-02",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/logging/RequestLogDetails",
+      "method": "invalid",
+      "descriptor": "()Ldev/codex/schubert/nk/protocol/codec/PermanentProtocolException;",
+      "testIds": [
+        "PT-IDEM-012/DETAIL-REJECTED"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.logging.RequestLogDetailsTest#unsafeMalformedDuplicateAndWrongTypesAreRejected()"
+      ],
+      "invocationRelation": "INDIRECT_CONSUMER_PRIVATE_OR_LAMBDA",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/RequestLogDetails.java",
+      "sourceSha256": "96467f5d3475d8e2fe5fe02124ce7d8571403f9141527a87ea880c9640117aa1",
+      "classSha256": "2bdf2ec0746d0723cd08cb2030854185c334ef557064c25f2de2e1ef21c9b0d7",
+      "owner": "WBS-P018-09",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/logging/RequestLogDetails",
+      "method": "lambda$normalize$0",
+      "descriptor": "(Lcom/google/gson/JsonObject;Ldev/codex/schubert/nk/protocol/layout/semantic/UserRole;)V",
+      "testIds": [
+        "PT-IDEM-012/DETAIL-ALLOWED"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.logging.RequestLogDetailsTest#allowedScalarsAndRolesMatchLiteralJson()"
+      ],
+      "invocationRelation": "INDIRECT_CONSUMER_PRIVATE_OR_LAMBDA",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/RequestLogDetails.java",
+      "sourceSha256": "96467f5d3475d8e2fe5fe02124ce7d8571403f9141527a87ea880c9640117aa1",
+      "classSha256": "2bdf2ec0746d0723cd08cb2030854185c334ef557064c25f2de2e1ef21c9b0d7",
+      "owner": "WBS-P018-09",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/logging/RequestLogDetails",
+      "method": "normalize",
+      "descriptor": "(Ljava/util/Optional;Ljava/util/Optional;)Ljava/lang/String;",
+      "testIds": [
+        "PT-IDEM-012/DETAIL-ALLOWED",
+        "PT-IDEM-012/DETAIL-REJECTED"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.logging.RequestLogDetailsTest#allowedScalarsAndRolesMatchLiteralJson()",
+        "dev.codex.schubert.nk.api.logging.RequestLogDetailsTest#unsafeMalformedDuplicateAndWrongTypesAreRejected()"
+      ],
+      "invocationRelation": "DIRECT_CONSTRUCTOR_OR_PUBLIC_CONSUMER",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/RequestLogDetails.java",
+      "sourceSha256": "96467f5d3475d8e2fe5fe02124ce7d8571403f9141527a87ea880c9640117aa1",
+      "classSha256": "2bdf2ec0746d0723cd08cb2030854185c334ef557064c25f2de2e1ef21c9b0d7",
+      "owner": "WBS-P018-09",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/logging/RequestLogDetails",
+      "method": "string",
+      "descriptor": "(Lcom/google/gson/stream/JsonReader;)Ljava/lang/String;",
+      "testIds": [
+        "PT-IDEM-012/DETAIL-ALLOWED",
+        "PT-IDEM-012/DETAIL-REJECTED"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.logging.RequestLogDetailsTest#allowedScalarsAndRolesMatchLiteralJson()",
+        "dev.codex.schubert.nk.api.logging.RequestLogDetailsTest#unsafeMalformedDuplicateAndWrongTypesAreRejected()"
+      ],
+      "invocationRelation": "INDIRECT_CONSUMER_PRIVATE_OR_LAMBDA",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/RequestLogDetails.java",
+      "sourceSha256": "96467f5d3475d8e2fe5fe02124ce7d8571403f9141527a87ea880c9640117aa1",
+      "classSha256": "2bdf2ec0746d0723cd08cb2030854185c334ef557064c25f2de2e1ef21c9b0d7",
+      "owner": "WBS-P018-09",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/maintenance/InspectorSettings",
+      "method": "<init>",
+      "descriptor": "(Ljava/nio/file/Path;Ljava/lang/String;Ljava/util/Set;)V",
+      "testIds": [
+        "PT-DB-INBOX-209",
+        "PT-DB-INBOX-210",
+        "PT-DB-INBOX-211"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#validSnapshot()",
+        "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#invalidSettings()",
+        "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#sharedValidation()"
+      ],
+      "invocationRelation": "DIRECT_CONSTRUCTOR_OR_PUBLIC_CONSUMER",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorSettings.java",
+      "sourceSha256": "5fe7308a07bd1647aea4981749e348c44913e1f5df73159865f502be98bc24ae",
+      "classSha256": "1289b032ab7c5d06fa275b3d5877f611771a1c193c2090f4d13ac2e1f89f7247",
+      "owner": "WBS-P004-04",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/maintenance/InspectorSettings",
+      "method": "fingerprintVersions",
+      "descriptor": "()Ljava/util/Set;",
+      "testIds": [
+        "PT-DB-INBOX-209",
+        "PT-DB-INBOX-211"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#validSnapshot()",
+        "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#sharedValidation()"
+      ],
+      "invocationRelation": "DIRECT_CONSTRUCTOR_OR_PUBLIC_CONSUMER",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorSettings.java",
+      "sourceSha256": "5fe7308a07bd1647aea4981749e348c44913e1f5df73159865f502be98bc24ae",
+      "classSha256": "1289b032ab7c5d06fa275b3d5877f611771a1c193c2090f4d13ac2e1f89f7247",
+      "owner": "WBS-P004-04",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/maintenance/InspectorSettings",
+      "method": "requireVersions",
+      "descriptor": "(Ljava/util/Set;)Ljava/util/Set;",
+      "testIds": [
+        "PT-DB-INBOX-210",
+        "PT-DB-INBOX-211"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#invalidSettings()",
+        "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#sharedValidation()"
+      ],
+      "invocationRelation": "INDIRECT_CONSUMER_PRIVATE_OR_LAMBDA",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorSettings.java",
+      "sourceSha256": "5fe7308a07bd1647aea4981749e348c44913e1f5df73159865f502be98bc24ae",
+      "classSha256": "1289b032ab7c5d06fa275b3d5877f611771a1c193c2090f4d13ac2e1f89f7247",
+      "owner": "WBS-P004-04",
+      "exactAllMethodCasesOrOracleComplete": false
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/maintenance/InspectorSettings",
+      "method": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "testIds": [
+        "PT-DB-INBOX-209"
+      ],
+      "caseRefs": [
+        "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#validSnapshot()"
+      ],
+      "invocationRelation": "DIRECT_CONSTRUCTOR_OR_PUBLIC_CONSUMER",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorSettings.java",
+      "sourceSha256": "5fe7308a07bd1647aea4981749e348c44913e1f5df73159865f502be98bc24ae",
+      "classSha256": "1289b032ab7c5d06fa275b3d5877f611771a1c193c2090f4d13ac2e1f89f7247",
+      "owner": "WBS-P004-04",
+      "exactAllMethodCasesOrOracleComplete": false
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/AnswerResult.java": "bfa7c5a2827d5c97579a030df72997f928f5817b6d68ea9b0d918d88aef3fae6",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptId.java": "32e2d84c19a05c4655c6911e0b27374c13fb6b4d3ef09ead40e60877305d5d2f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdGenerator.java": "a4cb4c03f5dbdb225632d6abf4c2465fbb414ce09b0894f0b6649c83c7bc145d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/StubAnswerProvider.java": "719addcd16754a2179b04a31ec7a17130c912fef362adbcbcc347ec523f4816f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/RequestLogDetails.java": "96467f5d3475d8e2fe5fe02124ce7d8571403f9141527a87ea880c9640117aa1",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorSettings.java": "5fe7308a07bd1647aea4981749e348c44913e1f5df73159865f502be98bc24ae",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java": "95ecae1fb73ba439d3150b37083f087fde857f49dfa7a1c0e67f5bf4ac69e1c3",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/StubAnswerProviderTest.java": "ac4d482aeaa66f017973eddcff1858990a7ef4d3f07ca03138c1a1ebf6f2dceb",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/RequestLogDetailsTest.java": "c266b46400912485549e57220b73e94cae7ef4304d13871afeee7f7f5248e184",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorSettingsTest.java": "0184124b8740a45322de685b4b9be4ff6705818dd259a5c15db78ef47de6faff"
+  },
+  "originalPost": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15460-public-value-eighteen-post-v1/manifest.json",
+  "filterProof": "evidence/01_PT/018_NK-OPS-001/evidence/PG24298-public-value-six-method-filter-independent-v1/manifest.json",
+  "limitations": [
+    "Historical18 case identity/source byte evidence only; currentrun/callee/JDK provider not requalified",
+    "Factory case proves format only, not entropy/distribution/secureprovider lifecycle",
+    "Full DB uniqueness/replay/Root/native/CHR not covered",
+    "Assertion snippets and method relations are not a complete perbranch oracle proof"
+  ]
+}

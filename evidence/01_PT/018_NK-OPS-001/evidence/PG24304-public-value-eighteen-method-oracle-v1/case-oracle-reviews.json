@@ -1,0 +1,128 @@
+[
+  {
+    "caseRef": "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#emptyAnswerAndClock()",
+    "testId": "PT-ASY-STB001",
+    "declarationLine": 33,
+    "assertionSnippetCount": 3,
+    "independentExpected": "Empty answer body, exact injected NOW and 1582date, exactly2 reads for2 calls; literal empty and independent inputInstant."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#nullContracts()",
+    "testId": "PT-ASY-STB002",
+    "declarationLine": 54,
+    "assertionSnippetCount": 5,
+    "independentExpected": "Null constructor/question/resultfield rejected; missingquestion reads clock0."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#clockFailures()",
+    "testId": "PT-ASY-STB003",
+    "declarationLine": 72,
+    "assertionSnippetCount": 5,
+    "independentExpected": "Exact supplied RTE/Error identity propagates; clock null cannot become result."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#resultValueAndRedaction()",
+    "testId": "PT-ASY-STB004",
+    "declarationLine": 96,
+    "assertionSnippetCount": 4,
+    "independentExpected": "Independent body/NOW and fixed redacted string; equality/hashCode comparisons are supplementary record value checks, not generated business expected."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest#concurrentCallsAndEvidence()",
+    "testId": "PT-ASY-STB005",
+    "declarationLine": 110,
+    "assertionSnippetCount": 4,
+    "independentExpected": "64literal independent input instants and empty bodies, one read each; duplicate instants rejected."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#exactAlphabet()",
+    "testId": "PT-QST-RID001",
+    "declarationLine": 30,
+    "assertionSnippetCount": 5,
+    "independentExpected": "Independent 32ASCII alphabet, 26copies, forward/reverse literals; noULID leading restriction."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#lengthBoundaries()",
+    "testId": "PT-QST-RID002",
+    "declarationLine": 41,
+    "assertionSnippetCount": 4,
+    "independentExpected": "Lengths0/1/25/27/4096 rejected,26accepted, fixed error."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#characterBoundaries()",
+    "testId": "PT-QST-RID003",
+    "declarationLine": 53,
+    "assertionSnippetCount": 4,
+    "independentExpected": "ASCII complement plus Unicode/surrogates rejected at every26positions, independent ALLOWEDliteral."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#independentRandomVector()",
+    "testId": "PT-QST-RID004",
+    "declarationLine": 69,
+    "assertionSnippetCount": 5,
+    "independentExpected": "32bound, 26forward+26reverse draws using literal outputs,52calls."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#randomFailure()",
+    "testId": "PT-QST-RID005",
+    "declarationLine": 85,
+    "assertionSnippetCount": 6,
+    "independentExpected": "Each0..25draw failure exactidentity/callcount; -1/32/min/max index rejected after1call, fixed error."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#nullAndFactory()",
+    "testId": "PT-QST-RID006",
+    "declarationLine": 117,
+    "assertionSnippetCount": 5,
+    "independentExpected": "Null ctor inputs rejected; factory only output length/alphabet observed. Entropy/distribution/JCA provider qualification NOT established."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#concurrentCalls()",
+    "testId": "PT-QST-RID007",
+    "declarationLine": 127,
+    "assertionSnippetCount": 5,
+    "independentExpected": "64calls of26 draws=1664, independent16 literal cycles each4, private lock not caller-visible monitor."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest#equalityAndPublicEvidence()",
+    "testId": "PT-QST-RID008",
+    "declarationLine": 164,
+    "assertionSnippetCount": 4,
+    "independentExpected": "Fixed redactedstring; unequalvalue/null/type checked; hashCode equal comparison supplementary."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#validSnapshot()",
+    "testId": "PT-DB-INBOX-209",
+    "declarationLine": 19,
+    "assertionSnippetCount": 6,
+    "independentExpected": "Declared ROOT/URL and independent fp1/old-v.2 set survives inputclear; getter immutable and redactedstring."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#invalidSettings()",
+    "testId": "PT-DB-INBOX-210",
+    "declarationLine": 31,
+    "assertionSnippetCount": 5,
+    "independentExpected": "Null/membernull and root/URL/port/version syntax boundaries reject without IO; no actual DB or key qualification."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest#sharedValidation()",
+    "testId": "PT-DB-INBOX-211",
+    "declarationLine": 58,
+    "assertionSnippetCount": 7,
+    "independentExpected": "Version1..16/port1,65535 accepted, literal db name and unchanged set; unsafeURL fixed failure/cause absent/suppressed0."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.logging.RequestLogDetailsTest#allowedScalarsAndRolesMatchLiteralJson()",
+    "testId": "PT-IDEM-012/DETAIL-ALLOWED",
+    "declarationLine": 16,
+    "assertionSnippetCount": 4,
+    "independentExpected": "Independent literal strictJSON empty/byte0..999999999999/userAgent1..32/truncated/statusPENDING-FAILED and trustedRoleUSERADMIN projections."
+  },
+  {
+    "caseRef": "dev.codex.schubert.nk.api.logging.RequestLogDetailsTest#unsafeMalformedDuplicateAndWrongTypesAreRejected()",
+    "testId": "PT-IDEM-012/DETAIL-REJECTED",
+    "declarationLine": 40,
+    "assertionSnippetCount": 6,
+    "independentExpected": "Independent invalidJSON/duplicate/unknownrole/shape/type/range/UTF8-byte limit1024 literals; fixed safeerror/cause absent/nullrejected."
+  }
+]

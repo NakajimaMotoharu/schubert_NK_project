@@ -1,0 +1,7 @@
+# 3869 公開値六Main18methodと元18caseの独立oracle
+
+G13.07主、G03.05関連0、SOURCE_REQUALIFICATION原1/3/7pp cap9。原24190/24298の六Main30raw=18測定方法+標準filter12を再利用し、元四Test全18caseを現sourceの明示assertと要求/期待値へ個別joinする。方法→TestID→元case→独立expected literal/算出根拠→source/classSHAを保存。原18の再実行、privateoldexec/raw読取、current実行資格や新unique加算は行わない。
+
+STB001..005は空文字・固定clock/古い日付/読取回数・null失敗前読取0・同一Throwable/fatal・redactedliteral・64独立Instant集合。RID001..008はSS331/UI224の32alphabet/26桁・ASCII全位置/境界、固定forward/reverse/32bound×26×2、各乱数位置障害と範囲外・null・publicfactory出力形式（乱数そのもののexpectedは未決め）、1664回/16literalcycle×4/呼出側monitorと独立lock、redaction。DB209..211はroot構文とURL/port/immutableSet/要素境界で、DB接続や鍵readの証明ではない。IDEM012の二caseはSS351のliteralJSON allowlist/型・長さ・duplicate・末尾value/安全固定error・cause無し・null。sourceの同production methodを使ってexpectedを生成しない。既value equality/hashCode比較はrecordの値契約の補助として区別する。
+
+clinitはconstructorから初期化されるPatternの全alphabet/boundary経路、private/lambda methodは公的consumerからのindirect oracleと明示し、直接invokeと偽らない。factory乱数分布/entropy実測・JCA現在provider・actualDB一意性/再送・CurrentCHR・callee全SDKは未検証のまま。個別assertsnippet照合は全分岐の期待値網羅を自動的に意味しない。残存根拠をfalse/unknownで保持。新JVM/Java製品/fixture実行0・held四/Root/VM等HOLD維持。metadata反証（method/case/TestID/assert/expectation/Sourcepin欠落）で誤結合を拒否し、結果を保存して次へ継続する。
