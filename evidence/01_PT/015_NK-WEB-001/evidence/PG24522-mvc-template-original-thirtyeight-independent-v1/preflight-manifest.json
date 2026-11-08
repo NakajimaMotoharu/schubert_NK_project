@@ -1,0 +1,701 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T21:42:47.685094+09:00",
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationTemplateTest.java": "2b91966a957dfa23e8dce18c2eb9d59c1841a4f1bbdb9702a5dc80085e8853a8",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchTemplateTest.java": "ec94acb49cd3815248462f80bf9e776a012421eea8e277799cf322657b1f52f2",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyTemplateTest.java": "3a9f4da883b93f74ddca6ddc323504ebc9f5c6a69e2a00549dac1fa47528e072",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailTemplateTest.java": "32f402f55491f2ca6a5068d17a8b8fec4f38d6611a147bd062202e50511d0269",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchTemplateTest.java": "8fbdf8fa3703e589cf74b077bd65bc4182dba71b967c9c182e6d943fae5cc591",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/WebMvcConfiguration.java": "72ac4fcc161a85182e17d6167640cb18c93faed174fdd142225eaf1d84912d30",
+    "src/schubert-nk-web/src/main/resources/static/css/schubert.css": "fbd384882662d4ae16d6b65e3576b5b135a5257241b919862a763f99b08c3456",
+    "src/schubert-nk-web/src/main/resources/static/js/search-speaker-submit.js": "dcf25a57a0e304391a0d3c880c263db246e296d6a7af0322283ddb72fa3e48fa",
+    "src/schubert-nk-web/src/main/resources/static/js/log-search-validation.js": "b5cfbc9a689c91d0f14461e3e46dadb88844b5d0c38358d762dd241a5458efad",
+    "src/schubert-nk-web/src/main/resources/templates/animation.html": "008fe35863ee9c48b82c674df78572573313b29c321686259a64e8191cbe5b4d",
+    "src/schubert-nk-web/src/main/resources/templates/animation-list.html": "cfec2c00935f2af53ee51eb1726cfc676e1040312a0632d172f7e9ff283ac702",
+    "src/schubert-nk-web/src/main/resources/templates/music.html": "fbbf5a79417693cff98acdc75eef97fd30561362ce95fff4ad2d8b703d68743f",
+    "src/schubert-nk-web/src/main/resources/templates/music-sections.html": "62b31b622da8c27fbfe8c238ea9a4579d12d22247bd2390b5dbfbbc88650d2e4",
+    "src/schubert-nk-web/src/main/resources/templates/scenario.html": "b9709c596a3f98653d854f637ae48e742704b80537460c6f3acc5d6bd342a245",
+    "src/schubert-nk-web/src/main/resources/templates/search.html": "e3db4ebdc9372eb396d2fe95cf56aced827d400503cca1317b3572e53a69c4a7",
+    "src/schubert-nk-web/src/main/resources/templates/logs.html": "7bbd176e40d8a9f5b67be8f57cd27d42ccafd5e3bcabc95a56d75c370ce62708",
+    "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd",
+    "src/schubert-nk-web/src/main/resources/templates/fragments/pagination.html": "ddf3ccc9a1f88adf5bd61c8c9aa8928022f97c6e8f314c48941aad267bd5cb80",
+    "evidence/01_PT/015_NK-WEB-001/input/080_mvc_template_qualifier.py": "de877a634e85286e4ef611c006b13ea8d0918005ca1c3fe4605987c593451c0d",
+    "evidence/01_PT/015_NK-WEB-001/input/079_mvc_template_scope.json": "32fc3bb0b0ba86a6e05d55ca69c07d4c389402be34a69d2ea13dca21d5659ee0"
+  },
+  "compileManifestSha256": "00d9e03cc3e16f1654a47f3c2061fe7ea6eebe896f72cea76b99c46729b6ec9d",
+  "staticManifestSha256": "49b646595e533b201324bee1293f94adcc178562b81d3322abccd6b657f6a81d",
+  "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+  "normalPositiveMainIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json",
+    "sha256": "db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723"
+  },
+  "beforeGitCommit": "e046d92749e5f00d450a46cfe0e836e3a4c2b65e",
+  "wholeOriginalTestSources": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationTemplateTest.java",
+      "beforeSha256": "44192f04a5d5d37df05e231be8fb60fcf6d1bb7b8eb43060dbc691e2e5926945",
+      "currentSha256": "2b91966a957dfa23e8dce18c2eb9d59c1841a4f1bbdb9702a5dc80085e8853a8",
+      "inversePreformatSha256": "44192f04a5d5d37df05e231be8fb60fcf6d1bb7b8eb43060dbc691e2e5926945",
+      "rawExactInverse": true,
+      "formatterCanonicalExactInverse": true,
+      "originalFutureGetBoundsSeconds": [
+        10
+      ],
+      "poolSize": 8,
+      "parallelRenders": 64,
+      "ownedAwaitSeconds": 10,
+      "poolTerminationBeforeContextClose": true
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyTemplateTest.java",
+      "beforeSha256": "6469d3a588ea7ae9ba6cd7a93524e16ef2cd293631c58f0a24013b86e8d5502c",
+      "currentSha256": "3a9f4da883b93f74ddca6ddc323504ebc9f5c6a69e2a00549dac1fa47528e072",
+      "inversePreformatSha256": "6469d3a588ea7ae9ba6cd7a93524e16ef2cd293631c58f0a24013b86e8d5502c",
+      "rawExactInverse": true,
+      "formatterCanonicalExactInverse": true,
+      "originalFutureGetBoundsSeconds": [
+        10
+      ],
+      "poolSize": 8,
+      "parallelRenders": 64,
+      "ownedAwaitSeconds": 10,
+      "poolTerminationBeforeContextClose": true
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailTemplateTest.java",
+      "beforeSha256": "3c82696d0420cc1fce18e59a39e6709c488e86d9ab8e9b4cf60993d76f40a630",
+      "currentSha256": "32f402f55491f2ca6a5068d17a8b8fec4f38d6611a147bd062202e50511d0269",
+      "inversePreformatSha256": "3c82696d0420cc1fce18e59a39e6709c488e86d9ab8e9b4cf60993d76f40a630",
+      "rawExactInverse": true,
+      "formatterCanonicalExactInverse": true,
+      "originalFutureGetBoundsSeconds": [
+        10
+      ],
+      "poolSize": 8,
+      "parallelRenders": 64,
+      "ownedAwaitSeconds": 10,
+      "poolTerminationBeforeContextClose": true
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchTemplateTest.java",
+      "beforeSha256": "d05eea8b4a2ba3c1656abcd0eb5b9521da251498e5b119360416c80927df7650",
+      "currentSha256": "8fbdf8fa3703e589cf74b077bd65bc4182dba71b967c9c182e6d943fae5cc591",
+      "inversePreformatSha256": "d05eea8b4a2ba3c1656abcd0eb5b9521da251498e5b119360416c80927df7650",
+      "rawExactInverse": true,
+      "formatterCanonicalExactInverse": true,
+      "originalFutureGetBoundsSeconds": [
+        20
+      ],
+      "poolSize": 8,
+      "parallelRenders": 64,
+      "ownedAwaitSeconds": 10,
+      "poolTerminationBeforeContextClose": true
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchTemplateTest.java",
+      "beforeSha256": "c9912665cba2dccc7d4273d07cda9ebd2344ccf6e9c76e9e7630575aeac64527",
+      "currentSha256": "ec94acb49cd3815248462f80bf9e776a012421eea8e277799cf322657b1f52f2",
+      "inversePreformatSha256": "3ff1299e9bc1059784a47fefd9fade9c0b51410f0dd7075e6df58466fa77d081",
+      "rawExactInverse": false,
+      "formatterCanonicalExactInverse": true,
+      "originalFutureGetBoundsSeconds": [
+        10
+      ],
+      "poolSize": 8,
+      "parallelRenders": 64,
+      "ownedAwaitSeconds": 10,
+      "poolTerminationBeforeContextClose": true,
+      "inverseFormatterInputPath": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24524-mvc-template-inverse-format-v1/LogSearchTemplateTest.java",
+      "inverseCanonicalSha256": "c9912665cba2dccc7d4273d07cda9ebd2344ccf6e9c76e9e7630575aeac64527"
+    }
+  ],
+  "originalWholeMethods": 38,
+  "wholeTestClasses": 5,
+  "sourcePrograms": 1,
+  "physicalClasses": 1,
+  "allOriginalOtherTokensAndOraclesPreserved": true,
+  "rawExactInverseCount": 4,
+  "canonicalFormatterExactInverseCount": 1,
+  "formatterInverseStage": {
+    "actualExit": 0,
+    "timedOut": false,
+    "startUTC": "2026-11-08T12:42:47.186620+00:00",
+    "endUTC": "2026-11-08T12:42:47.652176+00:00",
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+      "--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
+      "--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+      "--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+      "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+      "--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+      "-cp",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/googlejavaformat/google-java-format/1.36.1/google-java-format-1.36.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/guava/guava/33.5.0-jre/guava-33.5.0-jre.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/commonmark/commonmark/0.28.0/commonmark-0.28.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/commonmark/commonmark-ext-gfm-tables/0.28.0/commonmark-ext-gfm-tables-0.28.0.jar",
+      "com.google.googlejavaformat.java.Main",
+      "--skip-reflowing-long-strings",
+      "--replace",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24524-mvc-template-inverse-format-v1/LogSearchTemplateTest.java"
+    ],
+    "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "beanSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/WebMvcConfiguration.java": "72ac4fcc161a85182e17d6167640cb18c93faed174fdd142225eaf1d84912d30",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java": "f26a85c85d5ee4ed11e548d25a684956d2349a6ed1c43c0e021f6d4745c8acce",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/LoginController.java": "ef9bbc81c79799528840f70f65f55056d08fd1ea0f9fd1a93d8212b946f4e630",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ErrorController.java": "ccc4587c76195542436f708aa6f87ee93b2d32e14d3d81350417c3f4e7b07fd5",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/error/ProblemViewFactory.java": "d3ebd2358380c5a80078f0660bb9b178bb5e339ffdc4dfe52122ff8ba0336b4e"
+  },
+  "explicitBeanCompositionOnly": true,
+  "registeredProductBeanConstructors": [
+    "ProblemViewFactory",
+    "ErrorController",
+    "MenuController",
+    "LoginController"
+  ],
+  "mockDispatchPaths": [
+    "GET/HEAD /js/search-speaker-submit.js",
+    "GET /js/missing.js",
+    "GET /js/log-search-validation.js",
+    "GET /css/schubert.css"
+  ],
+  "controllerBusinessActionsInvoked": false,
+  "isolatedWorkingDirectoryRequired": true,
+  "existingRepositoryTargetWritten": false,
+  "publicResourceHashes": {
+    "static/css/schubert.css": "fbd384882662d4ae16d6b65e3576b5b135a5257241b919862a763f99b08c3456",
+    "static/js/search-speaker-submit.js": "dcf25a57a0e304391a0d3c880c263db246e296d6a7af0322283ddb72fa3e48fa",
+    "static/js/log-search-validation.js": "b5cfbc9a689c91d0f14461e3e46dadb88844b5d0c38358d762dd241a5458efad",
+    "templates/animation.html": "008fe35863ee9c48b82c674df78572573313b29c321686259a64e8191cbe5b4d",
+    "templates/animation-list.html": "cfec2c00935f2af53ee51eb1726cfc676e1040312a0632d172f7e9ff283ac702",
+    "templates/music.html": "fbbf5a79417693cff98acdc75eef97fd30561362ce95fff4ad2d8b703d68743f",
+    "templates/music-sections.html": "62b31b622da8c27fbfe8c238ea9a4579d12d22247bd2390b5dbfbbc88650d2e4",
+    "templates/scenario.html": "b9709c596a3f98653d854f637ae48e742704b80537460c6f3acc5d6bd342a245",
+    "templates/search.html": "e3db4ebdc9372eb396d2fe95cf56aced827d400503cca1317b3572e53a69c4a7",
+    "templates/logs.html": "7bbd176e40d8a9f5b67be8f57cd27d42ccafd5e3bcabc95a56d75c370ce62708",
+    "templates/fragments/layout.html": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd",
+    "templates/fragments/pagination.html": "ddf3ccc9a1f88adf5bd61c8c9aa8928022f97c6e8f314c48941aad267bd5cb80"
+  },
+  "noFixtureOrMethodExtraction": true,
+  "noSourceDataDuplicatedInGitEvidence": true,
+  "pmdRawFindings": 26,
+  "applicableStaticViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "staticClassifications": [
+    {
+      "finding": {
+        "beginline": "390",
+        "endline": "390",
+        "begincolumn": "11",
+        "endcolumn": "19",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "AnimationTemplateTest",
+        "method": "animation053ConcurrentRendering",
+        "variable": "executor",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this ExecutorService object are closed after use"
+      },
+      "applicableViolation": false,
+      "reason": "Explicit nested finally shutdownNow/awaitTermination10assert before contextTWR close"
+    },
+    {
+      "finding": {
+        "beginline": "390",
+        "endline": "390",
+        "begincolumn": "22",
+        "endcolumn": "53",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "AnimationTemplateTest",
+        "method": "animation053ConcurrentRendering",
+        "variable": "executor",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "396",
+        "endline": "420",
+        "begincolumn": "15",
+        "endcolumn": "21",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "AnimationTemplateTest",
+        "method": "animation053ConcurrentRendering",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "434",
+        "endline": "434",
+        "begincolumn": "9",
+        "endcolumn": "31",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "AnimationTemplateTest",
+        "method": "animation053ConcurrentRendering",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "435",
+        "endline": "435",
+        "begincolumn": "20",
+        "endcolumn": "67",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "AnimationTemplateTest",
+        "method": "animation053ConcurrentRendering",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "445",
+        "endline": "445",
+        "begincolumn": "11",
+        "endcolumn": "15",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "LogSearchTemplateTest",
+        "method": "log091ConcurrentRendering",
+        "variable": "pool",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this ExecutorService object are closed after use"
+      },
+      "applicableViolation": false,
+      "reason": "Explicit nested finally shutdownNow/awaitTermination10assert before contextTWR close"
+    },
+    {
+      "finding": {
+        "beginline": "445",
+        "endline": "445",
+        "begincolumn": "18",
+        "endcolumn": "49",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "LogSearchTemplateTest",
+        "method": "log091ConcurrentRendering",
+        "variable": "pool",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "451",
+        "endline": "461",
+        "begincolumn": "15",
+        "endcolumn": "32",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "LogSearchTemplateTest",
+        "method": "log091ConcurrentRendering",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "474",
+        "endline": "474",
+        "begincolumn": "9",
+        "endcolumn": "27",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "LogSearchTemplateTest",
+        "method": "log091ConcurrentRendering",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "475",
+        "endline": "475",
+        "begincolumn": "20",
+        "endcolumn": "63",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "LogSearchTemplateTest",
+        "method": "log091ConcurrentRendering",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "295",
+        "endline": "295",
+        "begincolumn": "11",
+        "endcolumn": "15",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "MusicHierarchyTemplateTest",
+        "method": "music071ConcurrentRendering",
+        "variable": "pool",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this ExecutorService object are closed after use"
+      },
+      "applicableViolation": false,
+      "reason": "Explicit nested finally shutdownNow/awaitTermination10assert before contextTWR close"
+    },
+    {
+      "finding": {
+        "beginline": "295",
+        "endline": "295",
+        "begincolumn": "18",
+        "endcolumn": "49",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "MusicHierarchyTemplateTest",
+        "method": "music071ConcurrentRendering",
+        "variable": "pool",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "301",
+        "endline": "341",
+        "begincolumn": "15",
+        "endcolumn": "21",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "MusicHierarchyTemplateTest",
+        "method": "music071ConcurrentRendering",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "356",
+        "endline": "356",
+        "begincolumn": "9",
+        "endcolumn": "27",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "MusicHierarchyTemplateTest",
+        "method": "music071ConcurrentRendering",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "357",
+        "endline": "357",
+        "begincolumn": "20",
+        "endcolumn": "63",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "MusicHierarchyTemplateTest",
+        "method": "music071ConcurrentRendering",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "339",
+        "endline": "339",
+        "begincolumn": "25",
+        "endcolumn": "61",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "ScenarioDetailTemplateTest",
+        "method": "detail023CssAndViewBoundary",
+        "variable": "declarations",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3",
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+      },
+      "applicableViolation": false,
+      "reason": "Method-local deterministic CSS expectation LinkedHashMap, neither shared with worker tasks nor stored in static fields; ordering is part of explicit independent oracle"
+    },
+    {
+      "finding": {
+        "beginline": "389",
+        "endline": "389",
+        "begincolumn": "11",
+        "endcolumn": "19",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "ScenarioDetailTemplateTest",
+        "method": "detail024ConcurrentRendering",
+        "variable": "executor",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this ExecutorService object are closed after use"
+      },
+      "applicableViolation": false,
+      "reason": "Explicit nested finally shutdownNow/awaitTermination10assert before contextTWR close"
+    },
+    {
+      "finding": {
+        "beginline": "389",
+        "endline": "389",
+        "begincolumn": "22",
+        "endcolumn": "53",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "ScenarioDetailTemplateTest",
+        "method": "detail024ConcurrentRendering",
+        "variable": "executor",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "395",
+        "endline": "407",
+        "begincolumn": "15",
+        "endcolumn": "57",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "ScenarioDetailTemplateTest",
+        "method": "detail024ConcurrentRendering",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "422",
+        "endline": "422",
+        "begincolumn": "9",
+        "endcolumn": "31",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "ScenarioDetailTemplateTest",
+        "method": "detail024ConcurrentRendering",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "423",
+        "endline": "423",
+        "begincolumn": "20",
+        "endcolumn": "67",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "ScenarioDetailTemplateTest",
+        "method": "detail024ConcurrentRendering",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "619",
+        "endline": "619",
+        "begincolumn": "11",
+        "endcolumn": "15",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "ScenarioSearchTemplateTest",
+        "method": "search033ConcurrentRendering",
+        "variable": "pool",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this ExecutorService object are closed after use"
+      },
+      "applicableViolation": false,
+      "reason": "Explicit nested finally shutdownNow/awaitTermination10assert before contextTWR close"
+    },
+    {
+      "finding": {
+        "beginline": "619",
+        "endline": "619",
+        "begincolumn": "18",
+        "endcolumn": "49",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "ScenarioSearchTemplateTest",
+        "method": "search033ConcurrentRendering",
+        "variable": "pool",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "625",
+        "endline": "650",
+        "begincolumn": "15",
+        "endcolumn": "21",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "ScenarioSearchTemplateTest",
+        "method": "search033ConcurrentRendering",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "654",
+        "endline": "654",
+        "begincolumn": "9",
+        "endcolumn": "27",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "ScenarioSearchTemplateTest",
+        "method": "search033ConcurrentRendering",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    },
+    {
+      "finding": {
+        "beginline": "655",
+        "endline": "655",
+        "begincolumn": "20",
+        "endcolumn": "63",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.view",
+        "class": "ScenarioSearchTemplateTest",
+        "method": "search033ConcurrentRendering",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "Standalone JUnit-owned finite executor, outside managed J2EE; direct mock view rendering only"
+    }
+  ],
+  "suppressionAdded": false,
+  "sdkDependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/attoparser/attoparser/2.0.7.RELEASE/attoparser-2.0.7.RELEASE.jar": "75dd1c045492bff8e1963aabb28bfe903c2064e11e27fe2f0f0aff1ad3d84476",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jsoup/jsoup/1.23.2/jsoup-1.23.2.jar": "e9d8c856856680427f096d156f02a414289985c930998fcb519ce5be39b42003",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-aop/7.0.9/spring-aop-7.0.9.jar": "b8c5d6bfcb1f4993f2cc124f7ab7fac40edf5256b9e43c2f7250a733cb5510e9",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar": "ff218b827a25c9e8929b0cd56dfb56916cea9d5b669ed97dc7cb262508ff548b",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar": "7552a2fcfa30cea53eb14d7a65a7a8e1b1dd82e832a7164fb7e6fb105f438858",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar": "046434c40f43819729b9b1db0e6c659dfa68184c1c2c2efa5f7b3a5b27c4e2e2",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf-spring6/3.1.5.RELEASE/thymeleaf-spring6-3.1.5.RELEASE.jar": "fd5d306052d7aa6769a8ec77778d328e6f7c83af5ac074df38035bbb1e9cd72b",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf/3.1.5.RELEASE/thymeleaf-3.1.5.RELEASE.jar": "4011795f8494dd69e764b7709443dd13d3068ba8ac37624f61d7084f4429cbe2",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar": "597cf87d5b1a4f385b9d1cec974b7b483abb3ee85fc5b3f8b62af8e4bec95c2c",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar": "941ced476427bde2533872f293da535fd0258de3f3a650a7f1bfe01ed2927302",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-webmvc/7.0.9/spring-webmvc-7.0.9.jar": "8f114c1461692c5e534e82b27de23b7fb23370db8dee7ce0c92d5106906c9555",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-test/7.0.9/spring-test-7.0.9.jar": "6ce8fc116f5d309b9ac50a6738bd1b15ea4012a4a5563c0ee89b795bfc9af0dc",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-web/7.1.1/spring-security-web-7.1.1.jar": "dece134a2332c976a2c94ecf13f816c64e8ea7f2139795485afe655fba0408f3",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar": "98a5011baa78df36fb184e6ce0e8e086ca9a64fcdd8f161c0a96475a3a0907bd",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar": "eb34f0cd84a879393ae5c21160fc06385ccdc74f36a4d1e31b199f59acfdaf71",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar": "f2cee6ef046e72eec8128474c7f58c6217173b45ae373c30de0289f2a56ab0fd",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar": "8a31f465f3593bf2351531a5c952014eb839da96a605b5825b93dd54714c48c4"
+  },
+  "physical": {
+    "dev/codex/schubert/nk/web/config/WebMvcConfiguration": "5d08aa0c887d6610afa82091fb52313fbf3d66491a43335cbf65ceeca90c050b"
+  },
+  "actualHttpServerDbJmsAuthKeyRootVmNativeActions": false,
+  "mockServletAndPublicClasspathResourcesOnly": true,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "toolSha256": "10f6152481322493d26b7977392e3d0d973903e59863c04b5af95ebe35978312"
+}
