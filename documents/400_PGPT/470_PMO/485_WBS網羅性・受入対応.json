@@ -541478,10 +541478,10 @@
       "kind": "JAVA",
       "module": "bootstrap",
       "class": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission",
-      "owner": "WBS-P019-01",
-      "basis": "起動/署名/DB受入の補助型",
+      "owner": "WBS-P018-05",
+      "basis": "PG23836: explicit current Program source responsibility and common bootstrap ownership; old row retained in PG23840 before snapshot.",
       "sha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
-      "costOwner": "WBS-P019-01",
+      "costOwner": "WBS-P018-05",
       "acceptance": "UNASSESSED",
       "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
     },
@@ -541490,10 +541490,10 @@
       "kind": "JAVA",
       "module": "bootstrap",
       "class": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
-      "owner": "WBS-P019-01",
-      "basis": "起動/署名/DB受入の補助型",
+      "owner": "WBS-P018-05",
+      "basis": "PG23836: explicit current Program source responsibility and common bootstrap ownership; old row retained in PG23840 before snapshot.",
       "sha256": "661d7372fa682ae575d1cc738a78f0790ce6cc3a64d1df6c702cc27855ebfe87",
-      "costOwner": "WBS-P019-01",
+      "costOwner": "WBS-P018-05",
       "acceptance": "UNASSESSED",
       "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
     },
@@ -548400,6 +548400,18 @@
       "sha256": "e3db4ebdc9372eb396d2fe95cf56aced827d400503cca1317b3572e53a69c4a7",
       "acceptance": "UNASSESSED",
       "screenId": "SCR-003"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java",
+      "kind": "JAVA",
+      "module": "web",
+      "class": "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding",
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "basis": "PG23836: missing Main added from explicit3752 WBS-P018-09; no acceptance inferred.",
+      "sha256": "ee7591d71269a4238cdda10c5fbae3c7a61b37b8230f893776329e9d1df7ef64",
+      "acceptance": "UNASSESSED",
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
     }
   ],
   "layouts": [
@@ -550559,596 +550571,603 @@
     "additionalBudgetPp": 0,
     "newAcceptance": 0,
     "whole451Accepted": false
-  }
-,
+  },
   "currentExceptionFilterFactoryQualification20261107": {
-  "source": "aa101fb7c3c8b53d5218ca6dd3bd8db2973eb493",
-  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-  "manifest": {
-    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22228-exception-factory-independent-post-v1/manifest.json",
-    "sha256": "bd80eee42cecff9ceeee2032b007e054378436ba1045694df017117564898844"
+    "source": "aa101fb7c3c8b53d5218ca6dd3bd8db2973eb493",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "manifest": {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22228-exception-factory-independent-post-v1/manifest.json",
+      "sha256": "bd80eee42cecff9ceeee2032b007e054378436ba1045694df017117564898844"
+    },
+    "record": "evidence/01_PT/015_NK-WEB-001/081_例外Filter生成・一回SavedGET単体結果.md",
+    "rows": [
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAccessExceptionFactoryPortTest.java",
+        "sha256": "667536f79154ac296e3821444e548dc17365765693c9bb4a868f7092254329bf",
+        "source": "aa101fb7c3c8b53d5218ca6dd3bd8db2973eb493",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET_OR_EXPLICIT_TEST_SUPPORT",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java",
+        "sha256": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
+        "source": "aa101fb7c3c8b53d5218ca6dd3bd8db2973eb493",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET_OR_EXPLICIT_TEST_SUPPORT",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebAccessExceptionFilterFactory.java",
+        "sha256": "715a348155606f4b507c0c61fb4b6d52d02132da5ea707a312c8b2917ef72e81",
+        "source": "aa101fb7c3c8b53d5218ca6dd3bd8db2973eb493",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET",
+        "newAcceptance": false
+      }
+    ],
+    "newTestPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAccessExceptionFactoryPortTest.java",
+    "newUniqueTests": 4,
+    "requalifiedExistingTests": 0,
+    "newSourceProofs": 1,
+    "sourceProofRetained": 0,
+    "branchStatus": "NATURAL_ZERO_BRANCH",
+    "parentAccepted": false,
+    "wholeG13Accepted": false
   },
-  "record": "evidence/01_PT/015_NK-WEB-001/081_例外Filter生成・一回SavedGET単体結果.md",
-  "rows": [
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAccessExceptionFactoryPortTest.java",
-      "sha256": "667536f79154ac296e3821444e548dc17365765693c9bb4a868f7092254329bf",
-      "source": "aa101fb7c3c8b53d5218ca6dd3bd8db2973eb493",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET_OR_EXPLICIT_TEST_SUPPORT",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java",
-      "sha256": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
-      "source": "aa101fb7c3c8b53d5218ca6dd3bd8db2973eb493",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET_OR_EXPLICIT_TEST_SUPPORT",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebAccessExceptionFilterFactory.java",
-      "sha256": "715a348155606f4b507c0c61fb4b6d52d02132da5ea707a312c8b2917ef72e81",
-      "source": "aa101fb7c3c8b53d5218ca6dd3bd8db2973eb493",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET",
-      "newAcceptance": false
-    }
-  ],
-  "newTestPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAccessExceptionFactoryPortTest.java",
-  "newUniqueTests": 4,
-  "requalifiedExistingTests": 0,
-  "newSourceProofs": 1,
-  "sourceProofRetained": 0,
-  "branchStatus": "NATURAL_ZERO_BRANCH",
-  "parentAccepted": false,
-  "wholeG13Accepted": false
-}
-,
   "currentSavedGetCacheQualification20261107": {
-  "source": "8cdccfcae254d6db70b37e2f2424be2958dd8155",
-  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-  "manifest": {
-    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22250-saved-get-cache-independent-post-v1/manifest.json",
-    "sha256": "f4325bcd738166846dd0e135370c3b455a6ff3a2a2465dd4fc3138a0b8dcd13e"
+    "source": "8cdccfcae254d6db70b37e2f2424be2958dd8155",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "manifest": {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22250-saved-get-cache-independent-post-v1/manifest.json",
+      "sha256": "f4325bcd738166846dd0e135370c3b455a6ff3a2a2465dd4fc3138a0b8dcd13e"
+    },
+    "record": "evidence/01_PT/015_NK-WEB-001/083_保存GET_cache全単体結果.md",
+    "rows": [
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SavedGetCachePortTest.java",
+        "sha256": "f448eba06f11adc0f1a8455c1ab6934f410b56bf6c6dd415c19d78d572f5ca8a",
+        "source": "8cdccfcae254d6db70b37e2f2424be2958dd8155",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET_OR_EXPLICIT_TEST_SUPPORT",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java",
+        "sha256": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
+        "source": "8cdccfcae254d6db70b37e2f2424be2958dd8155",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET_OR_EXPLICIT_TEST_SUPPORT",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache.java",
+        "sha256": "e4cff5e703bf4613c4f2e5097b1f26de5599fcdf465de75f96577e8d6afee972",
+        "source": "8cdccfcae254d6db70b37e2f2424be2958dd8155",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET",
+        "newAcceptance": false
+      }
+    ],
+    "newTestPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SavedGetCachePortTest.java",
+    "newUniqueTests": 9,
+    "requalifiedExistingTests": 0,
+    "newSourceProofs": 1,
+    "sourceProofRetained": 0,
+    "branchStatus": "MEASURED_22_BRANCHES_ALL_COVERED",
+    "parentAccepted": false,
+    "wholeG13Accepted": false
   },
-  "record": "evidence/01_PT/015_NK-WEB-001/083_保存GET_cache全単体結果.md",
-  "rows": [
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SavedGetCachePortTest.java",
-      "sha256": "f448eba06f11adc0f1a8455c1ab6934f410b56bf6c6dd415c19d78d572f5ca8a",
-      "source": "8cdccfcae254d6db70b37e2f2424be2958dd8155",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET_OR_EXPLICIT_TEST_SUPPORT",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java",
-      "sha256": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
-      "source": "8cdccfcae254d6db70b37e2f2424be2958dd8155",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET_OR_EXPLICIT_TEST_SUPPORT",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache.java",
-      "sha256": "e4cff5e703bf4613c4f2e5097b1f26de5599fcdf465de75f96577e8d6afee972",
-      "source": "8cdccfcae254d6db70b37e2f2424be2958dd8155",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET",
-      "newAcceptance": false
-    }
-  ],
-  "newTestPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SavedGetCachePortTest.java",
-  "newUniqueTests": 9,
-  "requalifiedExistingTests": 0,
-  "newSourceProofs": 1,
-  "sourceProofRetained": 0,
-  "branchStatus": "MEASURED_22_BRANCHES_ALL_COVERED",
-  "parentAccepted": false,
-  "wholeG13Accepted": false
-}
-,
   "currentWebAccessFailureHandlerQualification20261107": {
-  "source": "3d0abea5950b0a44cfcb7ea0a9448692d8698989",
-  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-  "manifest": {
-    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22284-access-failure-independent-post-v1/manifest.json",
-    "sha256": "5eef6350771957ff07b72f959c10cc77440bdf8ff5c3e5d7393e2c6e2b6676c5"
+    "source": "3d0abea5950b0a44cfcb7ea0a9448692d8698989",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "manifest": {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22284-access-failure-independent-post-v1/manifest.json",
+      "sha256": "5eef6350771957ff07b72f959c10cc77440bdf8ff5c3e5d7393e2c6e2b6676c5"
+    },
+    "record": "evidence/01_PT/015_NK-WEB-001/085_WebAccess失敗handler全単体結果.md",
+    "rows": [
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAccessFailurePortTest.java",
+        "sha256": "a9723c925269eae2e6a677c84b29a6f79055e9690e4c38f7a50b38a7e33c2243",
+        "source": "3d0abea5950b0a44cfcb7ea0a9448692d8698989",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET_OR_EXPLICIT_TEST_SUPPORT",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java",
+        "sha256": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
+        "source": "3d0abea5950b0a44cfcb7ea0a9448692d8698989",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET_OR_EXPLICIT_TEST_SUPPORT",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebAccessFailureHandler.java",
+        "sha256": "4e164255bc480266cb6bafc631f85217fcc215478ce3f3198c3925868180171a",
+        "source": "3d0abea5950b0a44cfcb7ea0a9448692d8698989",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET",
+        "newAcceptance": false
+      }
+    ],
+    "newTestPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAccessFailurePortTest.java",
+    "newUniqueTests": 6,
+    "requalifiedExistingTests": 0,
+    "newSourceProofs": 1,
+    "sourceProofRetained": 0,
+    "branchStatus": "MEASURED_10_BRANCHES_ALL_COVERED",
+    "parentAccepted": false,
+    "wholeG13Accepted": false
   },
-  "record": "evidence/01_PT/015_NK-WEB-001/085_WebAccess失敗handler全単体結果.md",
-  "rows": [
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAccessFailurePortTest.java",
-      "sha256": "a9723c925269eae2e6a677c84b29a6f79055e9690e4c38f7a50b38a7e33c2243",
-      "source": "3d0abea5950b0a44cfcb7ea0a9448692d8698989",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET_OR_EXPLICIT_TEST_SUPPORT",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java",
-      "sha256": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
-      "source": "3d0abea5950b0a44cfcb7ea0a9448692d8698989",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET_OR_EXPLICIT_TEST_SUPPORT",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebAccessFailureHandler.java",
-      "sha256": "4e164255bc480266cb6bafc631f85217fcc215478ce3f3198c3925868180171a",
-      "source": "3d0abea5950b0a44cfcb7ea0a9448692d8698989",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET",
-      "newAcceptance": false
-    }
-  ],
-  "newTestPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAccessFailurePortTest.java",
-  "newUniqueTests": 6,
-  "requalifiedExistingTests": 0,
-  "newSourceProofs": 1,
-  "sourceProofRetained": 0,
-  "branchStatus": "MEASURED_10_BRANCHES_ALL_COVERED",
-  "parentAccepted": false,
-  "wholeG13Accepted": false
-}
-,
   "currentWebSecurityFactoryConstructionGuardQualification20261107": {
-  "source": "6693e9593936b83bc4a0c07dc1a814213517adfb",
-  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-  "manifest": {
-    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22308-security-factory-independent-post-v1/manifest.json",
-    "sha256": "b3b24601a3a05626489ed51e98352b3047b442c06035b1dee7d0e7d341d25dc7"
+    "source": "6693e9593936b83bc4a0c07dc1a814213517adfb",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "manifest": {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22308-security-factory-independent-post-v1/manifest.json",
+      "sha256": "b3b24601a3a05626489ed51e98352b3047b442c06035b1dee7d0e7d341d25dc7"
+    },
+    "record": "evidence/01_PT/015_NK-WEB-001/087_WebSecurity生成・輸送拒否guard単体結果.md",
+    "rows": [
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebSecurityFactoryGuardPortTest.java",
+        "sha256": "342576c88a16da7b3d51292ad9045e6e03655c35fac71a88853ebfc7b5505668",
+        "source": "6693e9593936b83bc4a0c07dc1a814213517adfb",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET_OR_EXPLICIT_TEST_SUPPORT",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java",
+        "sha256": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
+        "source": "6693e9593936b83bc4a0c07dc1a814213517adfb",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET_OR_EXPLICIT_TEST_SUPPORT",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebSecurityFilterFactory.java",
+        "sha256": "6a12be19cd84bfe7800443cc104a65b615d9c26c116b12fac184d719c0305a7a",
+        "source": "6693e9593936b83bc4a0c07dc1a814213517adfb",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET",
+        "newAcceptance": false
+      }
+    ],
+    "newTestPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebSecurityFactoryGuardPortTest.java",
+    "newUniqueTests": 4,
+    "requalifiedExistingTests": 0,
+    "newSourceProofs": 1,
+    "sourceProofRetained": 0,
+    "branchStatus": "NATURAL_ZERO_BRANCH",
+    "scope": "CONSTRUCTION_AND_NEGATIVE_GUARD_ONLY_POSITIVE_BUSINESS_CHAIN_UNACCEPTED",
+    "parentAccepted": false,
+    "wholeG13Accepted": false
   },
-  "record": "evidence/01_PT/015_NK-WEB-001/087_WebSecurity生成・輸送拒否guard単体結果.md",
-  "rows": [
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebSecurityFactoryGuardPortTest.java",
-      "sha256": "342576c88a16da7b3d51292ad9045e6e03655c35fac71a88853ebfc7b5505668",
-      "source": "6693e9593936b83bc4a0c07dc1a814213517adfb",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET_OR_EXPLICIT_TEST_SUPPORT",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java",
-      "sha256": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
-      "source": "6693e9593936b83bc4a0c07dc1a814213517adfb",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET_OR_EXPLICIT_TEST_SUPPORT",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebSecurityFilterFactory.java",
-      "sha256": "6a12be19cd84bfe7800443cc104a65b615d9c26c116b12fac184d719c0305a7a",
-      "source": "6693e9593936b83bc4a0c07dc1a814213517adfb",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET",
-      "newAcceptance": false
-    }
-  ],
-  "newTestPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebSecurityFactoryGuardPortTest.java",
-  "newUniqueTests": 4,
-  "requalifiedExistingTests": 0,
-  "newSourceProofs": 1,
-  "sourceProofRetained": 0,
-  "branchStatus": "NATURAL_ZERO_BRANCH",
-  "scope": "CONSTRUCTION_AND_NEGATIVE_GUARD_ONLY_POSITIVE_BUSINESS_CHAIN_UNACCEPTED",
-  "parentAccepted": false,
-  "wholeG13Accepted": false
-}
-,
   "currentJdbcWebSessionStoreWholeSqlPortQualification20261107": {
-  "source": "d87efbe02857b397d6af100d61ede8a77dcf69ce",
-  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-  "manifest": {
-    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22368-jdbc-session-store-independent-post-v1/manifest.json",
-    "sha256": "9c7aa208176af48724db565d5f60cb123d69deb2d90b329bb8362bc455398591"
-  },
-  "record": "evidence/01_PT/015_NK-WEB-001/089_Session_SQL_store全port単体結果.md",
-  "rows": [
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/JdbcSessionStorePortTest.java",
-      "sha256": "8ce537e9d32a9fa49ac17554b47eccd924f652fda07e6a0c26a9efb59a85ef38",
-      "source": "d87efbe02857b397d6af100d61ede8a77dcf69ce",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET_TEST",
-      "newAcceptance": false
+    "source": "d87efbe02857b397d6af100d61ede8a77dcf69ce",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "manifest": {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22368-jdbc-session-store-independent-post-v1/manifest.json",
+      "sha256": "9c7aa208176af48724db565d5f60cb123d69deb2d90b329bb8362bc455398591"
     },
-    {
-      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/JdbcWebSessionStore.java",
-      "sha256": "4af4ff9c66f6ef611713f1329f14140bfeb526f35a94907e4274c187445ddd6c",
-      "source": "d87efbe02857b397d6af100d61ede8a77dcf69ce",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET",
-      "newAcceptance": false
-    }
-  ],
-  "newTestPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/JdbcSessionStorePortTest.java",
-  "newUniqueTests": 15,
-  "requalifiedExistingTests": 0,
-  "newSourceProofs": 1,
-  "sourceProofRetained": 0,
-  "branchStatus": "ALL_30_COVERED",
-  "scope": "BORROWED_JDBC_INTERFACE_SQL_BIND_GETTER_RESOURCE_ONLY_REAL_DB_UNACCEPTED",
-  "parentAccepted": false,
-  "wholeG13Accepted": false,
-  "physicalClassCount": 2,
-  "codeClassCount": 1
-}
-,
+    "record": "evidence/01_PT/015_NK-WEB-001/089_Session_SQL_store全port単体結果.md",
+    "rows": [
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/JdbcSessionStorePortTest.java",
+        "sha256": "8ce537e9d32a9fa49ac17554b47eccd924f652fda07e6a0c26a9efb59a85ef38",
+        "source": "d87efbe02857b397d6af100d61ede8a77dcf69ce",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET_TEST",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/JdbcWebSessionStore.java",
+        "sha256": "4af4ff9c66f6ef611713f1329f14140bfeb526f35a94907e4274c187445ddd6c",
+        "source": "d87efbe02857b397d6af100d61ede8a77dcf69ce",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET",
+        "newAcceptance": false
+      }
+    ],
+    "newTestPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/JdbcSessionStorePortTest.java",
+    "newUniqueTests": 15,
+    "requalifiedExistingTests": 0,
+    "newSourceProofs": 1,
+    "sourceProofRetained": 0,
+    "branchStatus": "ALL_30_COVERED",
+    "scope": "BORROWED_JDBC_INTERFACE_SQL_BIND_GETTER_RESOURCE_ONLY_REAL_DB_UNACCEPTED",
+    "parentAccepted": false,
+    "wholeG13Accepted": false,
+    "physicalClassCount": 2,
+    "codeClassCount": 1
+  },
   "currentUserAuditClosedRequestCleanupRequalification20261107": {
-  "source": "ac1919389902fd4d96ec771d9451c4ab224a8556",
-  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-  "manifest": {
-    "path": "evidence/01_PT/010_NK-ADM-001/evidence/PG22438-user-audit-cleanup-independent-v1/manifest.json",
-    "sha256": "48d5f83b00ebb47bc4adf700b198c6bb5246344b32a4552d139bbf165097ff12"
+    "source": "ac1919389902fd4d96ec771d9451c4ab224a8556",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "manifest": {
+      "path": "evidence/01_PT/010_NK-ADM-001/evidence/PG22438-user-audit-cleanup-independent-v1/manifest.json",
+      "sha256": "48d5f83b00ebb47bc4adf700b198c6bb5246344b32a4552d139bbf165097ff12"
+    },
+    "record": "evidence/01_PT/010_NK-ADM-001/092_User監査closed_request回収是正・全二十再資格結果.md",
+    "rows": [
+      {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCriticalAuditPortTest.java",
+        "sha256": "e7dfcb613716ae6af147137e9ceabda1cf25006a4d02651031d3c9813cbdb88f",
+        "source": "ac1919389902fd4d96ec771d9451c4ab224a8556",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "CHANGED_WHOLE_TEST",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserAuditWriter.java",
+        "sha256": "f0458e7874c4c5884e4f4dc79a0aedb803d730ab95469b43c610f3618d2eb474",
+        "source": "ac1919389902fd4d96ec771d9451c4ab224a8556",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET_MAIN_UNCHANGED",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter.java",
+        "sha256": "68568dfbd26fa58a01460ecee9911073b6e66cf2fdea88a69f6776c7892d65d1",
+        "source": "ac1919389902fd4d96ec771d9451c4ab224a8556",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET_MAIN_UNCHANGED",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter.java",
+        "sha256": "026ea309fb97c59d525ac8c668f324ce2275cea0dd8c59e26acbfd37f0492b7f",
+        "source": "ac1919389902fd4d96ec771d9451c4ab224a8556",
+        "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+        "role": "TARGET_MAIN_UNCHANGED",
+        "newAcceptance": false
+      }
+    ],
+    "testsExecuted": 20,
+    "newUniqueTests": 0,
+    "requalifiedExistingTests": 20,
+    "newSourceProofs": 0,
+    "retainedWholeSources": 3,
+    "staticRebinding": {
+      "path": "evidence/01_PT/010_NK-ADM-001/evidence/PG22444-user-audit-static-source-rebinding-v1/manifest.json",
+      "sha256": "ecfb571808328036ab9c60c3cb4bed5fc8882ed00736998c4431c9316ac76f74"
+    },
+    "rawOriginal347Preserved": true,
+    "reconstructedSubsetRaw": 346,
+    "subsetClassified": 265,
+    "subsetUnclassified": 81,
+    "bug": "BUG-2431",
+    "ykt": "YKT-2176",
+    "yktClosed": false,
+    "parentAccepted": false,
+    "wholeG13Accepted": false
   },
-  "record": "evidence/01_PT/010_NK-ADM-001/092_User監査closed_request回収是正・全二十再資格結果.md",
-  "rows": [
-    {
-      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCriticalAuditPortTest.java",
-      "sha256": "e7dfcb613716ae6af147137e9ceabda1cf25006a4d02651031d3c9813cbdb88f",
-      "source": "ac1919389902fd4d96ec771d9451c4ab224a8556",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "CHANGED_WHOLE_TEST",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserAuditWriter.java",
-      "sha256": "f0458e7874c4c5884e4f4dc79a0aedb803d730ab95469b43c610f3618d2eb474",
-      "source": "ac1919389902fd4d96ec771d9451c4ab224a8556",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET_MAIN_UNCHANGED",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter.java",
-      "sha256": "68568dfbd26fa58a01460ecee9911073b6e66cf2fdea88a69f6776c7892d65d1",
-      "source": "ac1919389902fd4d96ec771d9451c4ab224a8556",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET_MAIN_UNCHANGED",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter.java",
-      "sha256": "026ea309fb97c59d525ac8c668f324ce2275cea0dd8c59e26acbfd37f0492b7f",
-      "source": "ac1919389902fd4d96ec771d9451c4ab224a8556",
-      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-      "role": "TARGET_MAIN_UNCHANGED",
-      "newAcceptance": false
-    }
-  ],
-  "testsExecuted": 20,
-  "newUniqueTests": 0,
-  "requalifiedExistingTests": 20,
-  "newSourceProofs": 0,
-  "retainedWholeSources": 3,
-  "staticRebinding": {
-    "path": "evidence/01_PT/010_NK-ADM-001/evidence/PG22444-user-audit-static-source-rebinding-v1/manifest.json",
-    "sha256": "ecfb571808328036ab9c60c3cb4bed5fc8882ed00736998c4431c9316ac76f74"
-  },
-  "rawOriginal347Preserved": true,
-  "reconstructedSubsetRaw": 346,
-  "subsetClassified": 265,
-  "subsetUnclassified": 81,
-  "bug": "BUG-2431",
-  "ykt": "YKT-2176",
-  "yktClosed": false,
-  "parentAccepted": false,
-  "wholeG13Accepted": false
-}
-,
   "currentYkt2176FiniteResourceOwnershipClosure20261107": {
-  "source": "367dc439776bdfb9b36d5fc1bba0c10ad684c0a3",
-  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-  "manifest": {
-    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22458-close-resource-six-independent-v1/manifest.json",
-    "sha256": "b5d6505443b1452ca00b7a4457e5e2173c71424e15bb2bb9705ad0a7395d5e6b"
+    "source": "367dc439776bdfb9b36d5fc1bba0c10ad684c0a3",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "manifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22458-close-resource-six-independent-v1/manifest.json",
+      "sha256": "b5d6505443b1452ca00b7a4457e5e2173c71424e15bb2bb9705ad0a7395d5e6b"
+    },
+    "record": "evidence/01_PT/018_NK-OPS-001/3663_YKT2176_残六資源site個別所有確認結果.md",
+    "bug": "BUG-2431",
+    "ykt": "YKT-2176",
+    "originalLateralSites": 7,
+    "correctedSites": 1,
+    "individuallyNonApplicableSites": 6,
+    "currentSubsetRaw": 346,
+    "currentSubsetClassified": 271,
+    "currentSubsetUnclassified": 75,
+    "newProductTests": 0,
+    "newSourceProofs": 0,
+    "newAcceptance": 0,
+    "parentAccepted": false,
+    "wholeF03Accepted": false,
+    "wholeG13Accepted": false
   },
-  "record": "evidence/01_PT/018_NK-OPS-001/3663_YKT2176_残六資源site個別所有確認結果.md",
-  "bug": "BUG-2431",
-  "ykt": "YKT-2176",
-  "originalLateralSites": 7,
-  "correctedSites": 1,
-  "individuallyNonApplicableSites": 6,
-  "currentSubsetRaw": 346,
-  "currentSubsetClassified": 271,
-  "currentSubsetUnclassified": 75,
-  "newProductTests": 0,
-  "newSourceProofs": 0,
-  "newAcceptance": 0,
-  "parentAccepted": false,
-  "wholeF03Accepted": false,
-  "wholeG13Accepted": false
-}
-,
   "currentQuestionFixtureIndividualVolatilePublication20261107": {
-  "source": "a0e505937b602df4a7cfa00e8761b21bc48b703e",
-  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-  "manifest": {
-    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22474-question-volatile12-independent-v1/manifest.json",
-    "sha256": "5871872955bce57c6d9e48d0090df72ee56cf694f663f73e497853f6503d7125"
+    "source": "a0e505937b602df4a7cfa00e8761b21bc48b703e",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "manifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22474-question-volatile12-independent-v1/manifest.json",
+      "sha256": "5871872955bce57c6d9e48d0090df72ee56cf694f663f73e497853f6503d7125"
+    },
+    "record": "evidence/01_PT/018_NK-OPS-001/3665_F03Question_fixture_volatile十二field結果.md",
+    "testPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java",
+    "testSha256": "c3b09a3109fb0713735654dd314d32e129662f031ebcdd86261d13a7af3f00b3",
+    "individualFields": 12,
+    "externalWrites": 47,
+    "fixtureMethodMonotoneWrites": 2,
+    "concurrentPhases": 2,
+    "unboundedWaitDefect": "BUG-2432",
+    "unboundedWaitYkt": "YKT-2177",
+    "deadlineOrThreadOwnershipQualified": false,
+    "currentSubsetRaw": 346,
+    "currentSubsetClassified": 283,
+    "currentSubsetUnclassified": 63,
+    "newProductTests": 0,
+    "newSourceProofs": 0,
+    "newAcceptance": 0,
+    "parentAccepted": false,
+    "wholeF03Accepted": false,
+    "wholeG13Accepted": false
   },
-  "record": "evidence/01_PT/018_NK-OPS-001/3665_F03Question_fixture_volatile十二field結果.md",
-  "testPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java",
-  "testSha256": "c3b09a3109fb0713735654dd314d32e129662f031ebcdd86261d13a7af3f00b3",
-  "individualFields": 12,
-  "externalWrites": 47,
-  "fixtureMethodMonotoneWrites": 2,
-  "concurrentPhases": 2,
-  "unboundedWaitDefect": "BUG-2432",
-  "unboundedWaitYkt": "YKT-2177",
-  "deadlineOrThreadOwnershipQualified": false,
-  "currentSubsetRaw": 346,
-  "currentSubsetClassified": 283,
-  "currentSubsetUnclassified": 63,
-  "newProductTests": 0,
-  "newSourceProofs": 0,
-  "newAcceptance": 0,
-  "parentAccepted": false,
-  "wholeF03Accepted": false,
-  "wholeG13Accepted": false
-}
-,
   "currentQuestionBoundedFutureSourcePgPendingDynamic20261107": {
-  "source": "a9ac8f7890a210a3e2032b9d6a013d3a5a1dfe24",
-  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-  "manifest": {
-    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22492-question-bounded-wait-independent-v1/manifest.json",
-    "sha256": "ffad73f7bc65607fec32704ae359270ea84d6f4820dab2331e6b5218923067e6"
+    "source": "a9ac8f7890a210a3e2032b9d6a013d3a5a1dfe24",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "manifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22492-question-bounded-wait-independent-v1/manifest.json",
+      "sha256": "ffad73f7bc65607fec32704ae359270ea84d6f4820dab2331e6b5218923067e6"
+    },
+    "record": "evidence/01_PT/018_NK-OPS-001/3667_BUG2432_Question並行wait有限化PG・静的確認結果.md",
+    "testPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java",
+    "testSha256": "007a8bc2e809d5fa430986f5a9d3fe86cb9b2f48d87b11054a95e2e34359ed08",
+    "sourceOnlyPgFix": true,
+    "allOtherJavaTokensUnchanged": true,
+    "requalifiedStaticSites": 20,
+    "newIndividualClassifications": 0,
+    "currentSubsetRaw": 346,
+    "currentSubsetClassified": 283,
+    "currentSubsetUnclassified": 63,
+    "dynamicTestStatus": "NOT_RUN_HOLD",
+    "bug": "BUG-2432",
+    "bugClosed": false,
+    "ykt": "YKT-2177",
+    "yktClosed": false,
+    "newProductTests": 0,
+    "newSourceProofs": 0,
+    "newAcceptance": 0,
+    "parentAccepted": false,
+    "wholeF03Accepted": false,
+    "wholeG13Accepted": false
   },
-  "record": "evidence/01_PT/018_NK-OPS-001/3667_BUG2432_Question並行wait有限化PG・静的確認結果.md",
-  "testPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java",
-  "testSha256": "007a8bc2e809d5fa430986f5a9d3fe86cb9b2f48d87b11054a95e2e34359ed08",
-  "sourceOnlyPgFix": true,
-  "allOtherJavaTokensUnchanged": true,
-  "requalifiedStaticSites": 20,
-  "newIndividualClassifications": 0,
-  "currentSubsetRaw": 346,
-  "currentSubsetClassified": 283,
-  "currentSubsetUnclassified": 63,
-  "dynamicTestStatus": "NOT_RUN_HOLD",
-  "bug": "BUG-2432",
-  "bugClosed": false,
-  "ykt": "YKT-2177",
-  "yktClosed": false,
-  "newProductTests": 0,
-  "newSourceProofs": 0,
-  "newAcceptance": 0,
-  "parentAccepted": false,
-  "wholeF03Accepted": false,
-  "wholeG13Accepted": false
-}
-,
-"currentSevenSecurityPortFutureRequalification20261107":{
-  "source": "e876330336ff85c3c45b510445d3327e34da8149",
-  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-  "manifest": {
-    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22546-seven-future-independent-v1/manifest.json",
-    "sha256": "c83dc755afa467842001f033eb35c5e54fae55bdd42cacf85bbbadae5b093d72"
+  "currentSevenSecurityPortFutureRequalification20261107": {
+    "source": "e876330336ff85c3c45b510445d3327e34da8149",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "manifest": {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22546-seven-future-independent-v1/manifest.json",
+      "sha256": "c83dc755afa467842001f033eb35c5e54fae55bdd42cacf85bbbadae5b093d72"
+    },
+    "record": "evidence/01_PT/015_NK-WEB-001/091_七security_port待ち期限是正_全58再資格結果.md",
+    "testsExecuted": 58,
+    "newUniqueTests": 0,
+    "requalifiedExistingTests": 58,
+    "newSourceProofs": 0,
+    "retainedWholeSources": 7,
+    "rows": [
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
+        "sha256": "0327b5f0f28080e942ac08e0ad5de9f16360531714c0fd0a5e26a3e8cf14b54f",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java",
+        "sha256": "b3af1540089f2a9325938b1086ffdcd2d20281a63fc7f6a3bc023861e6bccbb2",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
+        "sha256": "0d499f54ee4720968b4732839f610dd43d162ffc5d00b4db5ec6990627b535c9",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest.java",
+        "sha256": "b0a47f249e24beef3e2186f048b31043aa5f99ba6a2961a865ba2eca111e7736",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRouterPortTest.java",
+        "sha256": "735fd06e311206d2d547e6eda0dfa042a7fc7ba78a565b88a47a32d3459d8ea0",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest.java",
+        "sha256": "c27bea45bac748b725a4da576406741b70f742bd9d8305eb7ef979ffcd1ac274",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SessionAuthenticationStrategyPortTest.java",
+        "sha256": "9549e2d2e7701295378db18391e252af69a668b1c783edec987c925b437f7fba",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java",
+        "sha256": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfDeniedHandler.java",
+        "sha256": "b4f450f2056ad1948b5474fdf1b3a3f8afd3a8440e4bba6dfeec97c3da653c67",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfFilterFactory.java",
+        "sha256": "59b90846fa612073e4c38e0e8bcce4c92db29360fff001817dd3ebae014b8730",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository.java",
+        "sha256": "d6ff8eec25554583f88ad34f79ced1bf34aec6303b286ceb65b6ddae15835da2",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository.java",
+        "sha256": "a6635c9d50282a5e9b7cbe318c51bddcea3334a5ec8f543768aa0e64106efcc9",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/InternalErrorDispatchRouter.java",
+        "sha256": "f10da434b1a7ec9ba2e96f8e5106e174ca8dfae5ba64f484ae6b282d15700660",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebInfrastructureFailureFilter.java",
+        "sha256": "2011dfa51a0bf7c7c696fc23cc2c7333ecc1885f1aea1cab462b8f51c4d9c195",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionAuthenticationStrategy.java",
+        "sha256": "ce68220123914829f5a3c91593760e4bb71db658693c0c378e98a0aa325ac30f",
+        "newAcceptance": false
+      }
+    ],
+    "parentAccepted": false,
+    "ykt2177Closed": false
   },
-  "record": "evidence/01_PT/015_NK-WEB-001/091_七security_port待ち期限是正_全58再資格結果.md",
-  "testsExecuted": 58,
-  "newUniqueTests": 0,
-  "requalifiedExistingTests": 58,
-  "newSourceProofs": 0,
-  "retainedWholeSources": 7,
-  "rows": [
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
-      "sha256": "0327b5f0f28080e942ac08e0ad5de9f16360531714c0fd0a5e26a3e8cf14b54f",
-      "newAcceptance": false
+  "currentStartupReleaseContentsValueQualification20261107": {
+    "source": "71e48481b1b79366a83e400409ecf28994a3ed29",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "manifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22630-release-contents-value-independent-v1/manifest.json",
+      "sha256": "c2d8c90e5e2218b28d5d6844dba075446a65d077820da0c481104685d3b535ea"
     },
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java",
-      "sha256": "b3af1540089f2a9325938b1086ffdcd2d20281a63fc7f6a3bc023861e6bccbb2",
-      "newAcceptance": false
+    "record": "evidence/01_PT/018_NK-OPS-001/3679_ReleaseContents公開データ型_単体テスト結果.md",
+    "owner": "WBS-P018-02",
+    "costOwner": "WBS-P018-02",
+    "targetPhysical": "dev/codex/schubert/nk/bootstrap/StartupReleaseManifest$Contents",
+    "physical": {
+      "dev/codex/schubert/nk/bootstrap/StartupReleaseManifest$Contents": "a9228a934fa66b2599a59a1aade4f3f232d3c67d19b51b468a3664401732236d"
     },
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
-      "sha256": "0d499f54ee4720968b4732839f610dd43d162ffc5d00b4db5ec6990627b535c9",
-      "newAcceptance": false
+    "testsExecuted": 8,
+    "newUniqueTests": 8,
+    "newSourceProofs": 0,
+    "newQualifiedNestedValueTypes": 1,
+    "parentSourceWholeAccepted": false,
+    "branchApplicable": false,
+    "branchRatio": null,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 77,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 16,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 7,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 7,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
     },
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest.java",
-      "sha256": "b0a47f249e24beef3e2186f048b31043aa5f99ba6a2961a865ba2eca111e7736",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRouterPortTest.java",
-      "sha256": "735fd06e311206d2d547e6eda0dfa042a7fc7ba78a565b88a47a32d3459d8ea0",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest.java",
-      "sha256": "c27bea45bac748b725a4da576406741b70f742bd9d8305eb7ef979ffcd1ac274",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SessionAuthenticationStrategyPortTest.java",
-      "sha256": "9549e2d2e7701295378db18391e252af69a668b1c783edec987c925b437f7fba",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SecurityContextOwnerPortFixture.java",
-      "sha256": "c8cad557e5834dc088852a602daf67c061a7e6c1e8580d807632c72b81ee9ad8",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfDeniedHandler.java",
-      "sha256": "b4f450f2056ad1948b5474fdf1b3a3f8afd3a8440e4bba6dfeec97c3da653c67",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfFilterFactory.java",
-      "sha256": "59b90846fa612073e4c38e0e8bcce4c92db29360fff001817dd3ebae014b8730",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository.java",
-      "sha256": "d6ff8eec25554583f88ad34f79ced1bf34aec6303b286ceb65b6ddae15835da2",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository.java",
-      "sha256": "a6635c9d50282a5e9b7cbe318c51bddcea3334a5ec8f543768aa0e64106efcc9",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/InternalErrorDispatchRouter.java",
-      "sha256": "f10da434b1a7ec9ba2e96f8e5106e174ca8dfae5ba64f484ae6b282d15700660",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebInfrastructureFailureFilter.java",
-      "sha256": "2011dfa51a0bf7c7c696fc23cc2c7333ecc1885f1aea1cab462b8f51c4d9c195",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionAuthenticationStrategy.java",
-      "sha256": "ce68220123914829f5a3c91593760e4bb71db658693c0c378e98a0aa325ac30f",
-      "newAcceptance": false
-    }
-  ],
-  "parentAccepted": false,
-  "ykt2177Closed": false
-}
-,
-"currentStartupReleaseContentsValueQualification20261107":{
-  "source": "71e48481b1b79366a83e400409ecf28994a3ed29",
-  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-  "manifest": {
-    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22630-release-contents-value-independent-v1/manifest.json",
-    "sha256": "c2d8c90e5e2218b28d5d6844dba075446a65d077820da0c481104685d3b535ea"
+    "rows": [
+      {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/StartupReleaseContentsValueTest.java",
+        "sha256": "30d2c82b6e73c3593534f3a4aca11548b576f0114f7d58950facac58b94efd8b",
+        "role": "NEW_WHOLE_VALUE_TEST",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java",
+        "sha256": "3f2ae514697c8bac938eb9e0202a4e25346774b8875ce08c63d8117538753937",
+        "role": "PARTIAL_PARENT_SOURCE_VALUE_CLASS_ONLY",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+        "sha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+        "role": "SUPPORT_SCHEMA_ROW_SOURCE_NOT_WHOLE_QUALIFIED",
+        "newAcceptance": false
+      }
+    ],
+    "parentAccepted": false,
+    "whole451Accepted": false
   },
-  "record": "evidence/01_PT/018_NK-OPS-001/3679_ReleaseContents公開データ型_単体テスト結果.md",
-  "owner": "WBS-P018-02",
-  "costOwner": "WBS-P018-02",
-  "targetPhysical": "dev/codex/schubert/nk/bootstrap/StartupReleaseManifest$Contents",
-  "physical": {
-    "dev/codex/schubert/nk/bootstrap/StartupReleaseManifest$Contents": "a9228a934fa66b2599a59a1aade4f3f232d3c67d19b51b468a3664401732236d"
+  "currentSchemaNineFiniteWaitRequalification20261107": {
+    "source": "d8935a18a98f1f3fb51fd1c6e54b7d5ac40d683a",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "manifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22670-schema-nine-independent-v1/manifest.json",
+      "sha256": "fcc03f7813d28be2ba5ca1ff3f0af06b46005b07eb59501efe5fd04926e1b42d"
+    },
+    "record": "evidence/01_PT/018_NK-OPS-001/3681_Schema履歴九既PT待ち期限是正_単体テスト結果.md",
+    "owner": "WBS-P019-01",
+    "costOwner": "WBS-F03",
+    "testsExecuted": 9,
+    "newUniqueTests": 0,
+    "requalifiedExistingTests": 9,
+    "newSourceProofs": 0,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 389,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 78,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 89,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 47,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 8,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 3,
+        "missed": 0
+      }
+    },
+    "physical": {
+      "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row": "8eff8dc4e76ec03bcbc9d7e6ef664c80be62646df10b388aa3723e1c8bdf3fa7",
+      "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures": "b50a7e880821b3b076c6f24d6e3a32a4af25e25e070171268a2416695bd1b41b",
+      "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission": "7b23f2059b4684ff4d9ac5f1338e05c2339e6dc426a8ee376e5fc4eb49771105"
+    },
+    "rows": [
+      {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+        "sha256": "f0385a09de9ad0c9045c90b70356eccd7e4ae0b47c1cd7862135f0331cc7b861",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+        "sha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+        "newAcceptance": false
+      },
+      {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+        "sha256": "bf179887c2496723d5ddb4ee0be02c5e599ecba781f5b8338367bb21648627a5",
+        "newAcceptance": false
+      }
+    ],
+    "sourceTransformGuard": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22680-schema-source-transform-guard-v1/manifest.json",
+      "sha256": "35612c5bebefc60e62796a3253d42a08d8d5f526fec30afd67b48733683c486b"
+    },
+    "parentAccepted": false,
+    "whole451Accepted": false
   },
-  "testsExecuted": 8,
-  "newUniqueTests": 8,
-  "newSourceProofs": 0,
-  "newQualifiedNestedValueTypes": 1,
-  "parentSourceWholeAccepted": false,
-  "branchApplicable": false,
-  "branchRatio": null,
-  "coverage": {
-    "INSTRUCTION": {
-      "covered": 77,
-      "missed": 0
+  "currentPending12NormalSourceTestTrace20261108": {
+    "sourcePrograms": 12,
+    "originalIndependentProofGroups": 10,
+    "testSourceFiles": 12,
+    "previouslyExecutedCaseIds": 96,
+    "newTests": 0,
+    "newAcceptance": 0,
+    "registeredComponentDelta": null,
+    "traceManifest": "evidence/01_PT/018_NK-OPS-001/evidence/PG23836-pending12-trace-registration-v1/manifest.json",
+    "sourceTrace": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23836-pending12-trace-registration-v1/source-trace.json",
+      "sha256": "5baabb8524d32d1ccf545abc561529d15d85d4ab294917786cdb153b8a41c30d"
     },
-    "LINE": {
-      "covered": 16,
-      "missed": 0
-    },
-    "COMPLEXITY": {
-      "covered": 7,
-      "missed": 0
-    },
-    "METHOD": {
-      "covered": 7,
-      "missed": 0
-    },
-    "CLASS": {
-      "covered": 1,
-      "missed": 0
-    }
-  },
-  "rows": [
-    {
-      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/StartupReleaseContentsValueTest.java",
-      "sha256": "30d2c82b6e73c3593534f3a4aca11548b576f0114f7d58950facac58b94efd8b",
-      "role": "NEW_WHOLE_VALUE_TEST",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java",
-      "sha256": "3f2ae514697c8bac938eb9e0202a4e25346774b8875ce08c63d8117538753937",
-      "role": "PARTIAL_PARENT_SOURCE_VALUE_CLASS_ONLY",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
-      "sha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
-      "role": "SUPPORT_SCHEMA_ROW_SOURCE_NOT_WHOLE_QUALIFIED",
-      "newAcceptance": false
-    }
-  ],
-  "parentAccepted": false,
-  "whole451Accepted": false
-}
-,
-"currentSchemaNineFiniteWaitRequalification20261107":{
-  "source": "d8935a18a98f1f3fb51fd1c6e54b7d5ac40d683a",
-  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
-  "manifest": {
-    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22670-schema-nine-independent-v1/manifest.json",
-    "sha256": "fcc03f7813d28be2ba5ca1ff3f0af06b46005b07eb59501efe5fd04926e1b42d"
-  },
-  "record": "evidence/01_PT/018_NK-OPS-001/3681_Schema履歴九既PT待ち期限是正_単体テスト結果.md",
-  "owner": "WBS-P019-01",
-  "costOwner": "WBS-F03",
-  "testsExecuted": 9,
-  "newUniqueTests": 0,
-  "requalifiedExistingTests": 9,
-  "newSourceProofs": 0,
-  "coverage": {
-    "INSTRUCTION": {
-      "covered": 389,
-      "missed": 0
-    },
-    "BRANCH": {
-      "covered": 78,
-      "missed": 0
-    },
-    "LINE": {
-      "covered": 89,
-      "missed": 0
-    },
-    "COMPLEXITY": {
-      "covered": 47,
-      "missed": 0
-    },
-    "METHOD": {
-      "covered": 8,
-      "missed": 0
-    },
-    "CLASS": {
-      "covered": 3,
-      "missed": 0
-    }
-  },
-  "physical": {
-    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row": "8eff8dc4e76ec03bcbc9d7e6ef664c80be62646df10b388aa3723e1c8bdf3fa7",
-    "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures": "b50a7e880821b3b076c6f24d6e3a32a4af25e25e070171268a2416695bd1b41b",
-    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission": "7b23f2059b4684ff4d9ac5f1338e05c2339e6dc426a8ee376e5fc4eb49771105"
-  },
-  "rows": [
-    {
-      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
-      "sha256": "f0385a09de9ad0c9045c90b70356eccd7e4ae0b47c1cd7862135f0331cc7b861",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
-      "sha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
-      "newAcceptance": false
-    },
-    {
-      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
-      "sha256": "bf179887c2496723d5ddb4ee0be02c5e599ecba781f5b8338367bb21648627a5",
-      "newAcceptance": false
-    }
-  ],
-  "sourceTransformGuard": {
-    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22680-schema-source-transform-guard-v1/manifest.json",
-    "sha256": "35612c5bebefc60e62796a3253d42a08d8d5f526fec30afd67b48733683c486b"
-  },
-  "parentAccepted": false,
-  "whole451Accepted": false
-}
+    "originalRunOrExecUnion": false,
+    "whole451Accepted": false,
+    "formalUpdated": false,
+    "canonicalOwnerFixes": 3,
+    "legacyCountsNotReinterpreted": true
+  }
 }

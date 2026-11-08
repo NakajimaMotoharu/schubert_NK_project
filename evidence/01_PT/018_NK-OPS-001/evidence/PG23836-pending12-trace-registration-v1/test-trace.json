@@ -1,0 +1,229 @@
+{
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AddressSettingsProjectionPortTest.java": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AddressSettingsProjectionPortTest.java",
+    "sha256": "f3c8e0c57f9bfa54fa4307bccd30017c74a9c712bbc0208daab32097f7866308",
+    "executedCases": [
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset003RejectsQuotedNumbersAndBooleansAtThirdReadWithoutReturningPartialResult()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset004RejectsMalformedOrMissingProjectionAndPreservesProviderFailureIdentity()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset002ImmutableSnapshotsRemainIndependentAcrossLaterFailureAndSuccess()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset005VerifyUsesSameSixReadContractAndDefaultAssemblyDoesNotOpenSession()"
+    ],
+    "proofs": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG23238-address-settings-independent-v1/manifest.json"
+    ],
+    "role": "SELECTED_TESTCASES_IN_ORIGINAL_RUN",
+    "entireTestClassAccepted": false
+  },
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/RoleSettingsProjectionPortTest.java": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/RoleSettingsProjectionPortTest.java",
+    "sha256": "d51d6ccc84e05657d7f8678bf5733f945f51ebbe3aead20bf24fb8b4eea3582a",
+    "executedCases": [
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()",
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap003FifthReadFailureNeverPublishesPartialSnapshotOrContinuesReading()",
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap002AllThreeSnapshotLayersAreImmutableAndIndependent()",
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap004NullMalformedAndVerifyContractKeepBorrowedSessionUntouched()"
+    ],
+    "proofs": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG23266-role-settings-independent-v1/manifest.json"
+    ],
+    "role": "SELECTED_TESTCASES_IN_ORIGINAL_RUN",
+    "entireTestClassAccepted": false
+  },
+  "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiPoolSourceOwnershipPortTest.java": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiPoolSourceOwnershipPortTest.java",
+    "sha256": "0d134cf2523403de25f77791bf0c1ffd72ce54e62792f53005cf4f990f9058e1",
+    "executedCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ApiPoolSourceOwnershipPortTest#poolOwn001FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen()"
+    ],
+    "proofs": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG23312-pool-ownership-independent-v1/manifest.json"
+    ],
+    "role": "SELECTED_TESTCASES_IN_ORIGINAL_RUN",
+    "entireTestClassAccepted": false
+  },
+  "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebPoolSourceOwnershipPortTest.java": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebPoolSourceOwnershipPortTest.java",
+    "sha256": "4c0265e9372f3d7cbc1360c02e018472651456a893eb762818a3c6fb1dc614eb",
+    "executedCases": [
+      "dev.codex.schubert.nk.web.bootstrap.WebPoolSourceOwnershipPortTest#poolOwn002FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen()"
+    ],
+    "proofs": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG23312-pool-ownership-independent-v1/manifest.json"
+    ],
+    "role": "SELECTED_TESTCASES_IN_ORIGINAL_RUN",
+    "entireTestClassAccepted": false
+  },
+  "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBindingTest.java": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBindingTest.java",
+    "sha256": "9e9270a8d3c585ed255689878918db623848d6821b0a34dd5e2e602395963b8b",
+    "executedCases": [
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice010PoolSupplierFailureOrNullNeverAcquiresConfigurationOrRetries()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice002FactoryRejectsNullReferencesAndModeBeforeAcquisition()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice007TerminalIsRecordedOnceInSameCustomPayloadAsDatabase()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice008RedispatchAndConcurrentTerminalRetainRequestOwnedClaim()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice017NullMapEntryTypeAndValueNeverBecomeObserverDependencies()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice021TwoDependencySnapshotsOwnDistinctObserversButShareOneRecorder()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice001ConstructorBoundariesRejectWithoutGetterOrInvalidModeSeries()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice005IndependentObserversBorrowOneRetainedRecorderAndDatabaseRefresh()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice012DatabaseFailureNeverReturnsPartialTextOrReplaysHttpSuccess()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice003StandardFactoryDoesNotReadAnyDetailedSupplierOrCreateObserver()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice004DebugCapturesOwnerBeforeSetupThenDefersStatisticsUntilRender()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice020DependencyProviderFailureIsOriginalAndNeverRetriedOrFormatted()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice011ConfigurationSupplierFailureOrNullRetainsOriginalPrimaryAndPartialOwner()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice019ExistingObserverIsNotReplacedOrRegisteredTwice()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice006StandaloneStandardObserverNeverCreatesDetailedSeries()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice015EmptyDependenciesReceiveOneFreshObserverInImmutableCopy()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice013TerminalSignalFailureIsOriginalAndDoesNotTransferOwnership()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice014QuiescentContextCloseReleasesOnlyOwnedSdkAndRejectsNewAccess()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice018TypeMismatchAndPrimitiveKeyAreRejectedWithoutInputChanges()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice016DependencySnapshotPreservesValueIdentityAndIgnoresLaterInputMutation()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice022MalformedMapDuplicateTypeNeverOverwritesDependencies()"
+    ],
+    "proofs": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG23396-web-service-metric21-independent-v1/manifest.json"
+    ],
+    "role": "SELECTED_TESTCASES_IN_ORIGINAL_RUN",
+    "entireTestClassAccepted": false
+  },
+  "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservationTest.java": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservationTest.java",
+    "sha256": "a23735273bf31a1c8b7c68737355364b19bc5d20e18ab3c422448de4016ed98b",
+    "executedCases": [],
+    "proofs": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG23396-web-service-metric21-independent-v1/manifest.json"
+    ],
+    "role": "SOURCE_INPUT_WITH_NO_SELECTED_TESTCASES_NOT_TEST_PASS",
+    "entireTestClassAccepted": false
+  },
+  "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventListenerForwardingPortTest.java": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventListenerForwardingPortTest.java",
+    "sha256": "aaa98911087ca34b32c3079c61807a04766caddfb9e95e06b0b2655f258692f7",
+    "executedCases": [
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port005NonTransactedContextsRejectBeforeBodyBusinessOrRollback()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port003BothObserverEntriesCommitEachCallerDeliveryWithoutRollbackNotifications()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port006BusinessFailurePreservesIdentityAndConfirmsRollbackInOrder()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port004NullContractsRejectBeforeAnyMessageOrTransactionOperation()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port002WebLogPublicEntryForwardsLegacyProcessorAndExactGoldenData()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port001QuestionPublicEntryForwardsDeliveryAndExactGoldenData()"
+    ],
+    "proofs": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG23438-event-listener-independent-v1/manifest.json"
+    ],
+    "role": "SELECTED_TESTCASES_IN_ORIGINAL_RUN",
+    "entireTestClassAccepted": false
+  },
+  "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java",
+    "sha256": "21761ba9106fbc9a7fbc9e2db1bdd0b960e8ab4168175be3855f712fd5f65d61",
+    "executedCases": [
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp005ClockProcessorAndCommitFailuresPreserveIdentityAndRollbackPhase()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp006PermanentProtocolFailureCommitsBodyPreservingIsolationAndSignalsTerminal()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp001BothRoutesDecodeLiteralGoldenAndCommitOnlyAfterProcessor()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp002ConstructorRejectsNullDependenciesAndEveryNonEventDestination()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp004TransportFailureRollsBackOnceWithLegacyOrConfirmedCallbackPorts()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp003NullAndNonTransactedInputsHaveNoBodyBusinessOrRollbackEffects()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp007InvalidDeliveryMetadataIsIsolatedBeforeProcessorWithBoundedDiagnostic()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp009UnconfirmedRollbackRetainsUnknownPhaseAndNeverRetriesOrConfirms()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp008FailedIsolationPreservesPrimaryAndConfirmedRollbackWithoutCommitSuccess()"
+    ],
+    "proofs": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG23478-event-transaction-independent-v1/manifest.json"
+    ],
+    "role": "SELECTED_TESTCASES_IN_ORIGINAL_RUN",
+    "entireTestClassAccepted": false
+  },
+  "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/UnsupportedDirectoryDefaultsPortTest.java": {
+    "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/UnsupportedDirectoryDefaultsPortTest.java",
+    "sha256": "9557f76bfb15ef536988b2bd25ccabd175f1eb5a9cd4133f2c3d9ef704ca2a17",
+    "executedCases": [
+      "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults001PrivateFileUnsupportedHasNoPublicFileFallback()",
+      "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults003EmptyDirectoryUnsupportedNeverDelegatesToUnlinkOrRootClose()",
+      "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults002PrivateDirectoryUnsupportedHasNoPublicDirectoryFallback()",
+      "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults004EveryDeclinedOperationHasFreshBoundedExceptionState()"
+    ],
+    "proofs": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG23504-directory-defaults-independent-v1/manifest.json"
+    ],
+    "role": "SELECTED_TESTCASES_IN_ORIGINAL_RUN",
+    "entireTestClassAccepted": false
+  },
+  "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java",
+    "sha256": "895f340ff7d9464b24de5f357c799a8d61b0a3d25479cd9ff57b80e48f19166c",
+    "executedCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission001UrlBoundsAndBothRoles()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission002InvalidUrlsAndNullConstructorInputs()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission014TwoCloseFaultsAlwaysAttemptReverseOrder()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission010ErrorFaultIdentityAndCleanup()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission015RepeatAndParallelUseIndependentBorrowedPorts()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission004ConnectionSettingsAndNullContract()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission007EachSqlFaultIsFixedAndSanitized()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission011KnownSqlBodyYieldsToUnknownClose()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission012UnknownPrimaryRetainsOnlyFixedSecondary()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission008SqlCloseFaultCannotReturnSuccess()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission003FixedProjectionAndBorrowedConnection()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission013ErrorPrimaryAndBothCloseFaultsRetainIdentity()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission006MissingStatementAndRowsCloseOnlyAcquiredPorts()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission005EachProjectionInvariantFailsClosed()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission009RuntimeFaultIdentityAndCleanup()"
+    ],
+    "proofs": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG23656-service-db-admission-independent-v1/manifest.json"
+    ],
+    "role": "SELECTED_TESTCASES_IN_ORIGINAL_RUN",
+    "entireTestClassAccepted": false
+  },
+  "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+    "sha256": "a9476785417f115af1c33fd55085df696cc5d4cd51493e7c1bff498a7ab03e2f",
+    "executedCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource011WrapperTypeContractAndNullBoundary()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource013ParallelIndependentConnectionsAndPropertiesClear()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource010UnsupportedOptionsAndMemoryWriterOnly()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource009DiscardSqlRuntimeErrorMatrixAndSameThrowable()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource004MaterialBoundsAndConstructorCloneAreIndependent()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource001PublicConstructionErasesInputWithoutConnecting()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource006NullConnectionCannotEscapeAsSuccess()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource007FailedIdentityAdmissionDiscardsExactlyOnce()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource002BothRolesFixedPropertiesAndEachPhysicalAdmission()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource008AdmissionRuntimeAndErrorRetainOriginalIdentity()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource003InvalidConstructionStillConsumesOwnedInput()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource005ConnectorFaultsClearPropertiesAndKeepUnknownIdentity()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource012CloseIsIdempotentAndPreservesCallerOwnedConnection()"
+    ],
+    "proofs": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG23704-service-database-source-independent-v1/manifest.json"
+    ],
+    "role": "SELECTED_TESTCASES_IN_ORIGINAL_RUN",
+    "entireTestClassAccepted": false
+  },
+  "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationServiceMemoryPortTest.java": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationServiceMemoryPortTest.java",
+    "sha256": "84c3540cf9417f9d86cc618407da1437e7538a6929b987f129b57661bb0b9eb0",
+    "executedCases": [
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory013CriticalAuditFaultAndNestedFatalNeverReturnSuccess()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory011CheckerFailuresMapOnlyDeclaredCatalogAndPreserveDirectFatalIdentity()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory008FractionalRetryCeilsAndCapsAtNineHundred()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory005WrongActivePasswordUpdatesBothCountersWithoutIssuance()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory007ExistingLocksUseMaximumWithoutCheckerOrMutation()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory006UserFiveAndIpTenLockOnThisAttempt()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory015RepeatedConsumerCallsKeepCallerRowsAndPasswordsIndependent()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory002UserSuccessPreservesNormalizedDisplayAndBorrowedTransaction()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory003AdminIdentityComesFromTheOwnedRow()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory014ThirdSessionDelegatesOldestRevocationWithSeparateSafeAudit()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory010NullAndInvalidInputsNeverSkipPasswordConsumption()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory001ConstructorsRejectMissingDependenciesAndDefaultCheckerIsConstructionOnly()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory004AbsentAndDisabledAccountsUseDummyWorkAndOneCommonFailure()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory012JdbcReadUpdateAndResourceFaultsFailClosedWithoutOwningTheConnection()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory009ExpiryEqualityPermitsCheckWhileWindowEqualityStillAccumulates()"
+    ],
+    "proofs": [
+      "evidence/01_PT/007_NK-AUT-001/evidence/PG23816-authentication-memory-port-independent-v1/manifest.json"
+    ],
+    "role": "SELECTED_TESTCASES_IN_ORIGINAL_RUN",
+    "entireTestClassAccepted": false
+  }
+}

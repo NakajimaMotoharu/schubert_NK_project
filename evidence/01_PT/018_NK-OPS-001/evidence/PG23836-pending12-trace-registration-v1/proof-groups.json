@@ -1,0 +1,1618 @@
+{
+  "evidence/01_PT/018_NK-OPS-001/evidence/PG23238-address-settings-independent-v1/manifest.json": {
+    "manifestSha256": "70dcf4f4c6389ed6a828cb01c921de3a31a729173c10de727ece7de14e69f5e6",
+    "runSource": "01dbe0a53a245ed43e17c2b81acc12d11c450d29",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "testsExecuted": 5,
+    "executedCaseIds": [
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset002ImmutableSnapshotsRemainIndependentAcrossLaterFailureAndSuccess()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset003RejectsQuotedNumbersAndBooleansAtThirdReadWithoutReturningPartialResult()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset004RejectsMalformedOrMissingProjectionAndPreservesProviderFailureIdentity()",
+      "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset005VerifyUsesSameSixReadContractAndDefaultAssemblyDoesNotOpenSession()"
+    ],
+    "testSourceHashes": {
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AddressSettingsProjectionPortTest.java": "f3c8e0c57f9bfa54fa4307bccd30017c74a9c712bbc0208daab32097f7866308"
+    },
+    "xmlReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23238-address-settings-independent-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "8ec57cd8ee01035a28192f61bdf2a73954fc0c5102b90e0ff3198935352e1cb3",
+        "cases": [
+          "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset003RejectsQuotedNumbersAndBooleansAtThirdReadWithoutReturningPartialResult()",
+          "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset004RejectsMalformedOrMissingProjectionAndPreservesProviderFailureIdentity()",
+          "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()",
+          "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset002ImmutableSnapshotsRemainIndependentAcrossLaterFailureAndSuccess()",
+          "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest#aset005VerifyUsesSameSixReadContractAndDefaultAssemblyDoesNotOpenSession()"
+        ]
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23238-address-settings-independent-v1/original-TEST-junit-platform-suite.xml",
+        "sha256": "0cd049605716113a2023a8b6b99a67c8bc4d4e907ead402d76903f8c4be638f4",
+        "cases": []
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23238-address-settings-independent-v1/original-TEST-junit-vintage.xml",
+        "sha256": "80dde6c971b4bebe310d68627c521941cc8fe0a1dab9ce68902737d82380e935",
+        "cases": []
+      }
+    ],
+    "programDocuments": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3735_Address設定観測Map_通常PT仕様書.md",
+        "sha256": "20c42fedd48d904c20ab03269d86b8564489889ca6f78bbeda77d4a6a077912e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3736_Address設定観測Map_通常PT実行結果.md",
+        "sha256": "bace2470cdcae081e48beb56dabc9ba7fb32f45320da1da9823f1690f988d86d"
+      }
+    ],
+    "coverageScope": "ORIGINAL_SINGLE_GROUP_UNSPLIT_DO_NOT_ADD_ACROSS_MAIN_ROWS_OR_RUNS",
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 404,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 10,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 68,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 14,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 9,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      }
+    },
+    "sourceFilePhysicalClosure": {
+      "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient": {
+        "name": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+        "sourceFile": "ArtemisAddressSettingsReadinessClient.java",
+        "methods": [
+          {
+            "name": "<init>",
+            "descriptor": "()V",
+            "code": true
+          },
+          {
+            "name": "<init>",
+            "descriptor": "(Ldev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Reader;)V",
+            "code": true
+          },
+          {
+            "name": "verify",
+            "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;)V",
+            "code": true
+          },
+          {
+            "name": "inspect",
+            "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;)Ljava/util/Map;",
+            "code": true
+          },
+          {
+            "name": "verifyResponse",
+            "descriptor": "(Ljava/lang/String;Ldev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity;)Ljava/util/Map;",
+            "code": true
+          },
+          {
+            "name": "expect",
+            "descriptor": "(Lorg/apache/activemq/artemis/json/JsonObject;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+            "code": true
+          },
+          {
+            "name": "capacities",
+            "descriptor": "()Ljava/util/Map;",
+            "code": true
+          },
+          {
+            "name": "<clinit>",
+            "descriptor": "()V",
+            "code": true
+          }
+        ]
+      },
+      "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Reader": {
+        "name": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Reader",
+        "sourceFile": "ArtemisAddressSettingsReadinessClient.java",
+        "methods": [
+          {
+            "name": "read",
+            "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;Ljava/lang/String;)Ljava/lang/Object;",
+            "code": false
+          }
+        ]
+      },
+      "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity": {
+        "name": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity",
+        "sourceFile": "ArtemisAddressSettingsReadinessClient.java",
+        "methods": [
+          {
+            "name": "<init>",
+            "descriptor": "(JJJJ)V",
+            "code": true
+          },
+          {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "code": true
+          },
+          {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "code": true
+          },
+          {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "code": true
+          },
+          {
+            "name": "memoryMib",
+            "descriptor": "()J",
+            "code": true
+          },
+          {
+            "name": "memoryMessages",
+            "descriptor": "()J",
+            "code": true
+          },
+          {
+            "name": "pageMib",
+            "descriptor": "()J",
+            "code": true
+          },
+          {
+            "name": "pageMessages",
+            "descriptor": "()J",
+            "code": true
+          }
+        ]
+      }
+    },
+    "physical": {
+      "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient": "c71fa03c8abdd3db3ae9b52ed8961b55f0bdc3c372b18c4728f6948c32c4b5b3",
+      "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Reader": "88260528f64947ac26d8bd1c442ccfc822e18d3862e9363be23a54da79ca38f6",
+      "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity": "9a3f72c76cf5d7ac7bcfa7ddbe8cf0c95b1a2889df2d50d144c6b5e39d08f144"
+    },
+    "classIds": {
+      "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient": "d05c33ca826f0137",
+      "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Reader": "d7fd60ebdabf21e0",
+      "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity": "76a14f535c49dfc0"
+    },
+    "staticPreflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23232-address-settings-static-preflight-v1/manifest.json",
+      "sha256": "a3a72df4799631ca5f31c75f647931c0bbc2b2c136d991fff131eda4fb55e738"
+    },
+    "wholeOriginalTestAccepted": null,
+    "notRunDeclaredMethods": null,
+    "manualCoverageExclusions": [],
+    "oldExecCombined": false,
+    "whole451Accepted": false,
+    "newAcceptance": 0
+  },
+  "evidence/01_PT/018_NK-OPS-001/evidence/PG23266-role-settings-independent-v1/manifest.json": {
+    "manifestSha256": "08b26b36120ca1debca0a1ff5c5ab9e8e2cae611516369ac7a5e6244c68ff2bc",
+    "runSource": "06d1efb5c7acd73557550dc94d2a84efba1ad996",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "testsExecuted": 4,
+    "executedCaseIds": [
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()",
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap002AllThreeSnapshotLayersAreImmutableAndIndependent()",
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap003FifthReadFailureNeverPublishesPartialSnapshotOrContinuesReading()",
+      "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap004NullMalformedAndVerifyContractKeepBorrowedSessionUntouched()"
+    ],
+    "testSourceHashes": {
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/RoleSettingsProjectionPortTest.java": "d51d6ccc84e05657d7f8678bf5733f945f51ebbe3aead20bf24fb8b4eea3582a"
+    },
+    "xmlReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23266-role-settings-independent-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "86bd2606d4e298f7be7190a15efca26b593d4f12feb91d615c673c0eee65e45a",
+        "cases": [
+          "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()",
+          "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap003FifthReadFailureNeverPublishesPartialSnapshotOrContinuesReading()",
+          "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap002AllThreeSnapshotLayersAreImmutableAndIndependent()",
+          "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest#rmap004NullMalformedAndVerifyContractKeepBorrowedSessionUntouched()"
+        ]
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23266-role-settings-independent-v1/original-TEST-junit-platform-suite.xml",
+        "sha256": "312aed6ef221cc4811a0f6ce5404dd30cc80e95523a8fc6b0745b3a87a765522",
+        "cases": []
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23266-role-settings-independent-v1/original-TEST-junit-vintage.xml",
+        "sha256": "27c5d0a2e96be5b37729710c0701170925b40f7c77cfc2d17d10538d92496e5d",
+        "cases": []
+      }
+    ],
+    "programDocuments": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3737_Role設定観測Map_通常PT仕様書.md",
+        "sha256": "8a0bf1529e1d6ac699edd73031550b1611e0e7bc1d1f0736b0e4dde7df289ca0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3738_Role設定観測Map_通常PT実行結果.md",
+        "sha256": "5eb676adfbd6b378508c91213174dcc34bca3b85cc210df15af30cd9f2739b71"
+      }
+    ],
+    "coverageScope": "ORIGINAL_SINGLE_GROUP_UNSPLIT_DO_NOT_ADD_ACROSS_MAIN_ROWS_OR_RUNS",
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 423,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 28,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 86,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 22,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 8,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "sourceFilePhysicalClosure": {
+      "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient": {
+        "name": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+        "sourceFile": "ArtemisRoleReadinessClient.java",
+        "methods": [
+          {
+            "name": "approved",
+            "descriptor": "()Ljava/util/Map;",
+            "code": true
+          },
+          {
+            "name": "<init>",
+            "descriptor": "()V",
+            "code": true
+          },
+          {
+            "name": "<init>",
+            "descriptor": "(Ldev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient$Reader;)V",
+            "code": true
+          },
+          {
+            "name": "verify",
+            "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;)V",
+            "code": true
+          },
+          {
+            "name": "inspect",
+            "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;)Ljava/util/Map;",
+            "code": true
+          },
+          {
+            "name": "verifyResponse",
+            "descriptor": "(Ljava/lang/String;Ljava/util/Map;)Ljava/util/Map;",
+            "code": true
+          },
+          {
+            "name": "fields",
+            "descriptor": "()Ljava/util/Set;",
+            "code": true
+          },
+          {
+            "name": "<clinit>",
+            "descriptor": "()V",
+            "code": true
+          }
+        ]
+      },
+      "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient$Reader": {
+        "name": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient$Reader",
+        "sourceFile": "ArtemisRoleReadinessClient.java",
+        "methods": [
+          {
+            "name": "read",
+            "descriptor": "(Lorg/apache/activemq/artemis/api/core/client/ClientSession;Ljava/lang/String;)Ljava/lang/Object;",
+            "code": false
+          }
+        ]
+      }
+    },
+    "physical": {
+      "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient": "e7b71dfa4517aae3ff6c140a7876aecabc3acd88315981455595f15f3e942389",
+      "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient$Reader": "882d2ff6c57e36efb8faf7aefb16c8950aa68f3e1165c8ce6569b3b82140d3c4"
+    },
+    "classIds": {
+      "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient": "72b167e7b7713396",
+      "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient$Reader": "77485e5f4b228619"
+    },
+    "staticPreflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23260-role-settings-static-preflight-v1/manifest.json",
+      "sha256": "abf5384fe44e46a1311ad4ea79ef6357ad364ba65c0e5d2d4a13cbb2780c7d80"
+    },
+    "wholeOriginalTestAccepted": null,
+    "notRunDeclaredMethods": null,
+    "manualCoverageExclusions": [],
+    "oldExecCombined": false,
+    "whole451Accepted": false,
+    "newAcceptance": 0
+  },
+  "evidence/01_PT/018_NK-OPS-001/evidence/PG23312-pool-ownership-independent-v1/manifest.json": {
+    "manifestSha256": "f013524b4a965847a4a6e7a8513fae2746f99829f567907d60755aeb20b50aae",
+    "runSource": "657a03f4317e51d899344122a5c2ebd8bdf9f736",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "testsExecuted": 2,
+    "executedCaseIds": [
+      "dev.codex.schubert.nk.api.bootstrap.ApiPoolSourceOwnershipPortTest#poolOwn001FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen()",
+      "dev.codex.schubert.nk.web.bootstrap.WebPoolSourceOwnershipPortTest#poolOwn002FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen()"
+    ],
+    "testSourceHashes": {
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiPoolSourceOwnershipPortTest.java": "0d134cf2523403de25f77791bf0c1ffd72ce54e62792f53005cf4f990f9058e1",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebPoolSourceOwnershipPortTest.java": "4c0265e9372f3d7cbc1360c02e018472651456a893eb762818a3c6fb1dc614eb"
+    },
+    "xmlReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23312-pool-ownership-independent-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "1ffd1bc0a12f94aa2473e64909531bc037e567fb7c2429b3b72ead99d93fa71a",
+        "cases": [
+          "dev.codex.schubert.nk.web.bootstrap.WebPoolSourceOwnershipPortTest#poolOwn002FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen()",
+          "dev.codex.schubert.nk.api.bootstrap.ApiPoolSourceOwnershipPortTest#poolOwn001FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen()"
+        ]
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23312-pool-ownership-independent-v1/original-TEST-junit-platform-suite.xml",
+        "sha256": "7b850e4b854579da24004d2c96f355246da2789dc3f647e309af68a7b0b348ec",
+        "cases": []
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23312-pool-ownership-independent-v1/original-TEST-junit-vintage.xml",
+        "sha256": "7cf914e50906adbddc47f65d5e5ed06cac91327d75d4de72305c6649405175c6",
+        "cases": []
+      }
+    ],
+    "programDocuments": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3743_API_Webプール借用source_通常PT仕様書.md",
+        "sha256": "dfcdd5c4d084c49fc1c9a3faaa4bef82c40119da6b1d720525762b90cb4ff08a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3744_API_Webプール借用source_通常PT実行結果.md",
+        "sha256": "4efc51f864274764ca83a9c36715a346a75f0a042d5598d930b5f4d35059d5c0"
+      }
+    ],
+    "coverageScope": "ORIGINAL_SINGLE_GROUP_UNSPLIT_DO_NOT_ADD_ACROSS_MAIN_ROWS_OR_RUNS",
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 92,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 28,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 4,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 4,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      }
+    },
+    "sourceFilePhysicalClosure": {
+      "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool": {
+        "name": "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool",
+        "sourceFile": "ApiJdbcPool.java",
+        "methods": [
+          {
+            "name": "<init>",
+            "descriptor": "()V",
+            "code": true
+          },
+          {
+            "name": "open",
+            "descriptor": "(Ljavax/sql/DataSource;)Lcom/zaxxer/hikari/HikariDataSource;",
+            "code": true
+          }
+        ]
+      },
+      "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool": {
+        "name": "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool",
+        "sourceFile": "WebJdbcPool.java",
+        "methods": [
+          {
+            "name": "<init>",
+            "descriptor": "()V",
+            "code": true
+          },
+          {
+            "name": "open",
+            "descriptor": "(Ljavax/sql/DataSource;)Lcom/zaxxer/hikari/HikariDataSource;",
+            "code": true
+          }
+        ]
+      }
+    },
+    "physical": {
+      "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool": "7a17f4f53c36252dd9a91905e71e1fa35300cceb2a0d8c2f0e46efa94d9bdc94",
+      "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool": "b2fd930a5feaf6398d7cf07575bb05e0c09fa0788f0fe72dd3e45c148b125c16"
+    },
+    "classIds": {
+      "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool": "32a519e800d2b1dd",
+      "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool": "f085745612765f2c"
+    },
+    "staticPreflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23310-pool-ownership-source-preflight-v1/manifest.json",
+      "sha256": "279ae441f47b86a98235fe3d65500e7d61d097004df29c0e7b52e35d97eb7f5c"
+    },
+    "wholeOriginalTestAccepted": null,
+    "notRunDeclaredMethods": null,
+    "manualCoverageExclusions": [],
+    "oldExecCombined": false,
+    "whole451Accepted": false,
+    "newAcceptance": 0
+  },
+  "evidence/01_PT/018_NK-OPS-001/evidence/PG23396-web-service-metric21-independent-v1/manifest.json": {
+    "manifestSha256": "a70810235d17c3fd1c03690c1b40b4450cef4922bea86ecc1845b4a3ffb0a95c",
+    "runSource": "5eebf3a86fbba3e6b74edda93ba20612d3eda4f5",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "testsExecuted": 21,
+    "executedCaseIds": [
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice001ConstructorBoundariesRejectWithoutGetterOrInvalidModeSeries()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice002FactoryRejectsNullReferencesAndModeBeforeAcquisition()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice003StandardFactoryDoesNotReadAnyDetailedSupplierOrCreateObserver()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice004DebugCapturesOwnerBeforeSetupThenDefersStatisticsUntilRender()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice005IndependentObserversBorrowOneRetainedRecorderAndDatabaseRefresh()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice006StandaloneStandardObserverNeverCreatesDetailedSeries()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice007TerminalIsRecordedOnceInSameCustomPayloadAsDatabase()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice008RedispatchAndConcurrentTerminalRetainRequestOwnedClaim()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice010PoolSupplierFailureOrNullNeverAcquiresConfigurationOrRetries()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice011ConfigurationSupplierFailureOrNullRetainsOriginalPrimaryAndPartialOwner()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice012DatabaseFailureNeverReturnsPartialTextOrReplaysHttpSuccess()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice013TerminalSignalFailureIsOriginalAndDoesNotTransferOwnership()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice014QuiescentContextCloseReleasesOnlyOwnedSdkAndRejectsNewAccess()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice015EmptyDependenciesReceiveOneFreshObserverInImmutableCopy()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice016DependencySnapshotPreservesValueIdentityAndIgnoresLaterInputMutation()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice017NullMapEntryTypeAndValueNeverBecomeObserverDependencies()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice018TypeMismatchAndPrimitiveKeyAreRejectedWithoutInputChanges()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice019ExistingObserverIsNotReplacedOrRegisteredTwice()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice020DependencyProviderFailureIsOriginalAndNeverRetriedOrFormatted()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice021TwoDependencySnapshotsOwnDistinctObserversButShareOneRecorder()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice022MalformedMapDuplicateTypeNeverOverwritesDependencies()"
+    ],
+    "testSourceHashes": {
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBindingTest.java": "9e9270a8d3c585ed255689878918db623848d6821b0a34dd5e2e602395963b8b",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservationTest.java": "a23735273bf31a1c8b7c68737355364b19bc5d20e18ab3c422448de4016ed98b"
+    },
+    "xmlReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23396-web-service-metric21-independent-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "4dc97cdab290da4ff8c592ab38a67c1eb9f40a75c6f69463cd3d3bdf5a29d152",
+        "cases": [
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice010PoolSupplierFailureOrNullNeverAcquiresConfigurationOrRetries()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice002FactoryRejectsNullReferencesAndModeBeforeAcquisition()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice007TerminalIsRecordedOnceInSameCustomPayloadAsDatabase()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice008RedispatchAndConcurrentTerminalRetainRequestOwnedClaim()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice017NullMapEntryTypeAndValueNeverBecomeObserverDependencies()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice021TwoDependencySnapshotsOwnDistinctObserversButShareOneRecorder()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice001ConstructorBoundariesRejectWithoutGetterOrInvalidModeSeries()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice005IndependentObserversBorrowOneRetainedRecorderAndDatabaseRefresh()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice012DatabaseFailureNeverReturnsPartialTextOrReplaysHttpSuccess()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice003StandardFactoryDoesNotReadAnyDetailedSupplierOrCreateObserver()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice004DebugCapturesOwnerBeforeSetupThenDefersStatisticsUntilRender()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice020DependencyProviderFailureIsOriginalAndNeverRetriedOrFormatted()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice011ConfigurationSupplierFailureOrNullRetainsOriginalPrimaryAndPartialOwner()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice019ExistingObserverIsNotReplacedOrRegisteredTwice()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice006StandaloneStandardObserverNeverCreatesDetailedSeries()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice015EmptyDependenciesReceiveOneFreshObserverInImmutableCopy()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice013TerminalSignalFailureIsOriginalAndDoesNotTransferOwnership()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice014QuiescentContextCloseReleasesOnlyOwnedSdkAndRejectsNewAccess()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice018TypeMismatchAndPrimitiveKeyAreRejectedWithoutInputChanges()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice016DependencySnapshotPreservesValueIdentityAndIgnoresLaterInputMutation()",
+          "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice022MalformedMapDuplicateTypeNeverOverwritesDependencies()"
+        ]
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23396-web-service-metric21-independent-v1/original-TEST-junit-platform-suite.xml",
+        "sha256": "d38e7ed44443ada741018fad4b1f0adafecc4edc665c3fe279fbc6bdf956cc28",
+        "cases": []
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23396-web-service-metric21-independent-v1/original-TEST-junit-vintage.xml",
+        "sha256": "d262a921592508e22b1cd81bd484fd8e7b9088cda68196634760895b4db13283",
+        "cases": []
+      }
+    ],
+    "programDocuments": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3752_Webサービスメトリクス現source資格事前審査_仕様.md",
+        "sha256": "77d3327f54e365de9a9f35ac41431b89bd95cdf778bbf1e73b65b77ee96fbef1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3754_Webサービスメトリクス選択21_通常PT仕様書.md",
+        "sha256": "e397dc70fde5d271c43d08affdd441fa7a2143a1fe57eacb5247ad2b1fb33932"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3755_Webサービスメトリクス選択21_通常PT実行結果.md",
+        "sha256": "97779e2ba2c2ff945e05529da2888f050f442bd2dad977ce64cc3f73f8fd1294"
+      }
+    ],
+    "coverageScope": "ORIGINAL_SINGLE_GROUP_UNSPLIT_DO_NOT_ADD_ACROSS_MAIN_ROWS_OR_RUNS",
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 153,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 8,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 30,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 10,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 6,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "sourceFilePhysicalClosure": {
+      "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding": {
+        "name": "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding",
+        "sourceFile": "WebServiceMetricBinding.java",
+        "methods": [
+          {
+            "name": "prepareContext",
+            "descriptor": "(Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/lang/Runnable;)Ldev/codex/schubert/nk/web/monitoring/WebMetricContext;",
+            "code": true
+          },
+          {
+            "name": "<init>",
+            "descriptor": "(Lcom/zaxxer/hikari/HikariPoolMXBean;Lcom/zaxxer/hikari/HikariConfigMXBean;Lio/micrometer/core/instrument/MeterRegistry;Ljava/lang/String;Ljava/lang/Runnable;)V",
+            "code": true
+          },
+          {
+            "name": "refresh",
+            "descriptor": "()V",
+            "code": true
+          },
+          {
+            "name": "createHttpObserver",
+            "descriptor": "()Ldev/codex/schubert/nk/web/monitoring/HttpMetricValve;",
+            "code": true
+          },
+          {
+            "name": "withHttpObserver",
+            "descriptor": "(Ljava/util/Map;)Ljava/util/Map;",
+            "code": true
+          },
+          {
+            "name": "lambda$prepareContext$0",
+            "descriptor": "(Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/lang/String;Ljava/lang/Runnable;Lio/micrometer/core/instrument/MeterRegistry;)Ldev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding;",
+            "code": true
+          }
+        ]
+      }
+    },
+    "physical": {
+      "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding": "632a4d99cbbc24242cf5f2ec31f187f37924b89cd1b5a222d617039e30b813e0"
+    },
+    "classIds": {
+      "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding": "865b65657f5efde2"
+    },
+    "staticPreflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23390-web-service-metric21-source-preflight-v1/manifest.json",
+      "sha256": "0c23806c4dd43b822c3db6a85ad8accaf4c0d511f4874a681eac8d9b5e1fca14"
+    },
+    "wholeOriginalTestAccepted": false,
+    "notRunDeclaredMethods": [
+      {
+        "name": "webservice009MissingTerminalMetadataSignalsOwnerWithoutSuccessSample",
+        "reason": "Calls HttpMetricValve.signalFailure -> WebStartupException.preserveFatal; explicit four-held initialization not permitted.",
+        "state": "NOT_EXECUTED_HOLD_NOT_PASS"
+      }
+    ],
+    "manualCoverageExclusions": [],
+    "oldExecCombined": false,
+    "whole451Accepted": false,
+    "newAcceptance": 0
+  },
+  "evidence/01_PT/018_NK-OPS-001/evidence/PG23438-event-listener-independent-v1/manifest.json": {
+    "manifestSha256": "d6e9cc5f7eebbc10c7db435e3b8a08f2eaec2159a56785b6a02e6cfba17d0f01",
+    "runSource": "57be3858e2dac6fce41bdb846d1d26a9a5671a80",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "testsExecuted": 6,
+    "executedCaseIds": [
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port001QuestionPublicEntryForwardsDeliveryAndExactGoldenData()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port002WebLogPublicEntryForwardsLegacyProcessorAndExactGoldenData()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port003BothObserverEntriesCommitEachCallerDeliveryWithoutRollbackNotifications()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port004NullContractsRejectBeforeAnyMessageOrTransactionOperation()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port005NonTransactedContextsRejectBeforeBodyBusinessOrRollback()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port006BusinessFailurePreservesIdentityAndConfirmsRollbackInOrder()"
+    ],
+    "testSourceHashes": {
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventListenerForwardingPortTest.java": "aaa98911087ca34b32c3079c61807a04766caddfb9e95e06b0b2655f258692f7"
+    },
+    "xmlReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23438-event-listener-independent-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "0900ff0060ebc9c4feac28c468d7bdaebcdf42b0209a2b98014893bed656f951",
+        "cases": [
+          "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port005NonTransactedContextsRejectBeforeBodyBusinessOrRollback()",
+          "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port003BothObserverEntriesCommitEachCallerDeliveryWithoutRollbackNotifications()",
+          "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port006BusinessFailurePreservesIdentityAndConfirmsRollbackInOrder()",
+          "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port004NullContractsRejectBeforeAnyMessageOrTransactionOperation()",
+          "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port002WebLogPublicEntryForwardsLegacyProcessorAndExactGoldenData()",
+          "dev.codex.schubert.nk.api.messaging.inbound.EventListenerForwardingPortTest#port001QuestionPublicEntryForwardsDeliveryAndExactGoldenData()"
+        ]
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23438-event-listener-independent-v1/original-TEST-junit-platform-suite.xml",
+        "sha256": "322feefdb3c17ffcfafd5b5c88899b8e7b6ecaaffcb714885c8bad7c93c65361",
+        "cases": []
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23438-event-listener-independent-v1/original-TEST-junit-vintage.xml",
+        "sha256": "8aefd56057d0075f8fab1e8e3d0344a8a404b3aa216ab4827d4421eda40d571f",
+        "cases": []
+      }
+    ],
+    "programDocuments": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3759_内部イベントlistener委譲六件_通常PT仕様.md",
+        "sha256": "fad561d748357b7b6ab4e8d977af4bbde8a81a7a6e52bbd5522e25d45c58f569"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3760_内部イベントlistener委譲六件_通常PT結果.md",
+        "sha256": "2c065a53c327afd862a44a290f286efe0df6bb0de3c91c587bd249c0c3f505ec"
+      }
+    ],
+    "coverageScope": "ORIGINAL_SINGLE_GROUP_UNSPLIT_DO_NOT_ADD_ACROSS_MAIN_ROWS_OR_RUNS",
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 52,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 14,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 6,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 6,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      }
+    },
+    "sourceFilePhysicalClosure": {
+      "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener": {
+        "name": "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener",
+        "sourceFile": "WebLogListener.java",
+        "methods": [
+          {
+            "name": "<init>",
+            "descriptor": "(Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;)V",
+            "code": true
+          },
+          {
+            "name": "onMessage",
+            "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;)V",
+            "code": true
+          },
+          {
+            "name": "onMessage",
+            "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;Ljava/lang/Runnable;Ljava/lang/Runnable;)V",
+            "code": true
+          }
+        ]
+      },
+      "dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener": {
+        "name": "dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener",
+        "sourceFile": "QuestionWorkListener.java",
+        "methods": [
+          {
+            "name": "<init>",
+            "descriptor": "(Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;)V",
+            "code": true
+          },
+          {
+            "name": "onMessage",
+            "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;)V",
+            "code": true
+          },
+          {
+            "name": "onMessage",
+            "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;Ljava/lang/Runnable;Ljava/lang/Runnable;)V",
+            "code": true
+          }
+        ]
+      }
+    },
+    "physical": {
+      "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener": "4bb579daefa2921c7e0763b2333a5a61219f32406976ac154ce8a3734b5d0ad6",
+      "dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener": "e2e93b6c6a2029b3921d3c07aa6b2aace98559f367e2fdb48ca480152dc1ce4d"
+    },
+    "classIds": {
+      "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener": "7aec3464c1c5761f",
+      "dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener": "2921b6c7a0659831"
+    },
+    "staticPreflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23432-event-listener-preflight-v1/manifest.json",
+      "sha256": "03ca35421d752ce327575c39924d3058f31259bbfa747a9e1e8594cd88502972"
+    },
+    "wholeOriginalTestAccepted": null,
+    "notRunDeclaredMethods": null,
+    "manualCoverageExclusions": [],
+    "oldExecCombined": false,
+    "whole451Accepted": false,
+    "newAcceptance": 0
+  },
+  "evidence/01_PT/018_NK-OPS-001/evidence/PG23478-event-transaction-independent-v1/manifest.json": {
+    "manifestSha256": "3d9b27a9d8bc04eea13b0cc81622df70070bb05089d0d712f0fd49f50041d455",
+    "runSource": "e81baca610f3d9b4337f8b1f477b42ee37cf1f4a",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "testsExecuted": 9,
+    "executedCaseIds": [
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp001BothRoutesDecodeLiteralGoldenAndCommitOnlyAfterProcessor()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp002ConstructorRejectsNullDependenciesAndEveryNonEventDestination()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp003NullAndNonTransactedInputsHaveNoBodyBusinessOrRollbackEffects()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp004TransportFailureRollsBackOnceWithLegacyOrConfirmedCallbackPorts()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp005ClockProcessorAndCommitFailuresPreserveIdentityAndRollbackPhase()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp006PermanentProtocolFailureCommitsBodyPreservingIsolationAndSignalsTerminal()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp007InvalidDeliveryMetadataIsIsolatedBeforeProcessorWithBoundedDiagnostic()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp008FailedIsolationPreservesPrimaryAndConfirmedRollbackWithoutCommitSuccess()",
+      "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp009UnconfirmedRollbackRetainsUnknownPhaseAndNeverRetriesOrConfirms()"
+    ],
+    "testSourceHashes": {
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java": "21761ba9106fbc9a7fbc9e2db1bdd0b960e8ab4168175be3855f712fd5f65d61"
+    },
+    "xmlReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23478-event-transaction-independent-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "d9d90277bd6ccf178f63b0a22bd3cfcd3d90fd5c24b59b800a3225d63ded9379",
+        "cases": [
+          "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp005ClockProcessorAndCommitFailuresPreserveIdentityAndRollbackPhase()",
+          "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp006PermanentProtocolFailureCommitsBodyPreservingIsolationAndSignalsTerminal()",
+          "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp001BothRoutesDecodeLiteralGoldenAndCommitOnlyAfterProcessor()",
+          "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp002ConstructorRejectsNullDependenciesAndEveryNonEventDestination()",
+          "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp004TransportFailureRollsBackOnceWithLegacyOrConfirmedCallbackPorts()",
+          "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp003NullAndNonTransactedInputsHaveNoBodyBusinessOrRollbackEffects()",
+          "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp007InvalidDeliveryMetadataIsIsolatedBeforeProcessorWithBoundedDiagnostic()",
+          "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp009UnconfirmedRollbackRetainsUnknownPhaseAndNeverRetriesOrConfirms()",
+          "dev.codex.schubert.nk.api.messaging.inbound.EventTransactionPortTest#txp008FailedIsolationPreservesPrimaryAndConfirmedRollbackWithoutCommitSuccess()"
+        ]
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23478-event-transaction-independent-v1/original-TEST-junit-platform-suite.xml",
+        "sha256": "6fe8f5dd42c70121c2a63ecfb2d736b7d9374eb5c9695297da6317ded241c42b",
+        "cases": []
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23478-event-transaction-independent-v1/original-TEST-junit-vintage.xml",
+        "sha256": "a4fbb4e84269d76f21a8ace0d6c61fa0aae0cc4711449708816be00c6bbb96ca",
+        "cases": []
+      }
+    ],
+    "programDocuments": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3761_内部イベントtransaction九件_通常PT仕様.md",
+        "sha256": "962fd09ecedadce4cae40cca774ad21ba297b2f5eec8e8f2d2333d2cd40fedfd"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3762_内部イベントtransaction九件_通常PT結果.md",
+        "sha256": "474489e883b6df648b269735d058d1f88af55da035cd46b94baeb0a6b10bf6d2"
+      }
+    ],
+    "coverageScope": "ORIGINAL_SINGLE_GROUP_UNSPLIT_DO_NOT_ADD_ACROSS_MAIN_ROWS_OR_RUNS",
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 167,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 6,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 41,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 8,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "sourceFilePhysicalClosure": {
+      "dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener": {
+        "name": "dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener",
+        "sourceFile": "TransactedEventListener.java",
+        "methods": [
+          {
+            "name": "<init>",
+            "descriptor": "(Ldev/codex/schubert/nk/protocol/transport/BrokerTopology;Ldev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata$DetectedBy;Ldev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor;Ljava/time/Clock;)V",
+            "code": true
+          },
+          {
+            "name": "onMessage",
+            "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;)V",
+            "code": true
+          },
+          {
+            "name": "onMessage",
+            "descriptor": "(Ljakarta/jms/JMSContext;Ljakarta/jms/Message;Ljava/lang/Runnable;Ljava/lang/Runnable;)V",
+            "code": true
+          },
+          {
+            "name": "lambda$static$0",
+            "descriptor": "()V",
+            "code": true
+          },
+          {
+            "name": "<clinit>",
+            "descriptor": "()V",
+            "code": true
+          }
+        ]
+      }
+    },
+    "physical": {
+      "dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener": "bf6e525d8c73063017c10da809f7084bf23d9a1523f4e8d50d82d197a542476c"
+    },
+    "classIds": {
+      "dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener": "020098a80b69541b"
+    },
+    "staticPreflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23472-event-transaction-preflight-v1/manifest.json",
+      "sha256": "3f7089f00341fa15bfa3a09a90f169e79ff940c2019fb356a06c3006ea1de8fb"
+    },
+    "wholeOriginalTestAccepted": null,
+    "notRunDeclaredMethods": null,
+    "manualCoverageExclusions": [],
+    "oldExecCombined": false,
+    "whole451Accepted": false,
+    "newAcceptance": 0
+  },
+  "evidence/01_PT/018_NK-OPS-001/evidence/PG23504-directory-defaults-independent-v1/manifest.json": {
+    "manifestSha256": "75c2a9aa1603b5a65a2a1ecf942856b0f8f67ba46d09f66b34d0beb5fda716f2",
+    "runSource": "e5c8567c3d8cc1179aefdfcb7d0ba06475415f40",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "testsExecuted": 4,
+    "executedCaseIds": [
+      "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults001PrivateFileUnsupportedHasNoPublicFileFallback()",
+      "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults002PrivateDirectoryUnsupportedHasNoPublicDirectoryFallback()",
+      "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults003EmptyDirectoryUnsupportedNeverDelegatesToUnlinkOrRootClose()",
+      "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults004EveryDeclinedOperationHasFreshBoundedExceptionState()"
+    ],
+    "testSourceHashes": {
+      "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/UnsupportedDirectoryDefaultsPortTest.java": "9557f76bfb15ef536988b2bd25ccabd175f1eb5a9cd4133f2c3d9ef704ca2a17"
+    },
+    "xmlReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23504-directory-defaults-independent-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "1092da505ef2e8bfdd84a947d17544ec3abb88ada4c5f4c96f90b98d6d1e0197",
+        "cases": [
+          "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults001PrivateFileUnsupportedHasNoPublicFileFallback()",
+          "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults003EmptyDirectoryUnsupportedNeverDelegatesToUnlinkOrRootClose()",
+          "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults002PrivateDirectoryUnsupportedHasNoPublicDirectoryFallback()",
+          "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults004EveryDeclinedOperationHasFreshBoundedExceptionState()"
+        ]
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23504-directory-defaults-independent-v1/original-TEST-junit-platform-suite.xml",
+        "sha256": "e80cbc6ada9ae44a49ca53e8a7810513f64f8ef46bcb2a74600790e959ec7b8d",
+        "cases": []
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23504-directory-defaults-independent-v1/original-TEST-junit-vintage.xml",
+        "sha256": "f76c8513aea00baf95db070d4e3dd29dda7c11df9588f4674fadbdd7b1fde53a",
+        "cases": []
+      }
+    ],
+    "programDocuments": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3763_未対応directory既定拒否四件_通常PT仕様.md",
+        "sha256": "284669796ee6efa0c7edae81232588f579d5ac841938edea388bb1b2e5ea8d2d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3764_未対応directory既定拒否四件_通常PT結果.md",
+        "sha256": "76f24a538b0d7f2f6ddc03651a9fddcf62b77075c4c6a02f04f99b0ccc2fb8e4"
+      }
+    ],
+    "coverageScope": "ORIGINAL_SINGLE_GROUP_UNSPLIT_DO_NOT_ADD_ACROSS_MAIN_ROWS_OR_RUNS",
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 15,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 3,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 3,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "sourceFilePhysicalClosure": {
+      "dev/codex/schubert/nk/storage/DirectoryCalls": {
+        "name": "dev/codex/schubert/nk/storage/DirectoryCalls",
+        "sourceFile": "DirectoryCalls.java",
+        "methods": [
+          {
+            "name": "openRoot",
+            "descriptor": "()I",
+            "code": false
+          },
+          {
+            "name": "openDirectory",
+            "descriptor": "(ILjava/lang/String;)I",
+            "code": false
+          },
+          {
+            "name": "openEntry",
+            "descriptor": "(ILjava/lang/String;)I",
+            "code": false
+          },
+          {
+            "name": "createFile",
+            "descriptor": "(ILjava/lang/String;)I",
+            "code": false
+          },
+          {
+            "name": "createPrivateFile",
+            "descriptor": "(ILjava/lang/String;)I",
+            "code": true
+          },
+          {
+            "name": "createDirectory",
+            "descriptor": "(ILjava/lang/String;)V",
+            "code": false
+          },
+          {
+            "name": "createPrivateDirectory",
+            "descriptor": "(ILjava/lang/String;)V",
+            "code": true
+          },
+          {
+            "name": "publish",
+            "descriptor": "(ILjava/lang/String;Ljava/lang/String;)V",
+            "code": false
+          },
+          {
+            "name": "unlink",
+            "descriptor": "(ILjava/lang/String;)V",
+            "code": false
+          },
+          {
+            "name": "removeEmptyDirectory",
+            "descriptor": "(ILjava/lang/String;)V",
+            "code": true
+          },
+          {
+            "name": "sync",
+            "descriptor": "(I)V",
+            "code": false
+          },
+          {
+            "name": "close",
+            "descriptor": "(I)V",
+            "code": false
+          }
+        ]
+      }
+    },
+    "physical": {
+      "dev/codex/schubert/nk/storage/DirectoryCalls": "a7a18b1d98070fb3fed529213827e46205c3c45e0bdefc280039d398c0bdd333"
+    },
+    "classIds": {
+      "dev/codex/schubert/nk/storage/DirectoryCalls": "77a31e10775468a7"
+    },
+    "staticPreflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23498-directory-defaults-preflight-v1/manifest.json",
+      "sha256": "d0a4110525ca032581a828b04bafd81249ed4300e05ac3491dae9fb0237d62f8"
+    },
+    "wholeOriginalTestAccepted": null,
+    "notRunDeclaredMethods": null,
+    "manualCoverageExclusions": [],
+    "oldExecCombined": false,
+    "whole451Accepted": false,
+    "newAcceptance": 0
+  },
+  "evidence/01_PT/018_NK-OPS-001/evidence/PG23656-service-db-admission-independent-v1/manifest.json": {
+    "manifestSha256": "9d40975e1b15b7737d4c9cc1d45336d5ed0aa14bb0c10a117f567e3d3b9ccd73",
+    "runSource": "bfb6cd69928a4ca1259ce81977cd64c2f6591ade",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "testsExecuted": 15,
+    "executedCaseIds": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission001UrlBoundsAndBothRoles()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission002InvalidUrlsAndNullConstructorInputs()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission003FixedProjectionAndBorrowedConnection()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission004ConnectionSettingsAndNullContract()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission005EachProjectionInvariantFailsClosed()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission006MissingStatementAndRowsCloseOnlyAcquiredPorts()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission007EachSqlFaultIsFixedAndSanitized()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission008SqlCloseFaultCannotReturnSuccess()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission009RuntimeFaultIdentityAndCleanup()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission010ErrorFaultIdentityAndCleanup()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission011KnownSqlBodyYieldsToUnknownClose()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission012UnknownPrimaryRetainsOnlyFixedSecondary()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission013ErrorPrimaryAndBothCloseFaultsRetainIdentity()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission014TwoCloseFaultsAlwaysAttemptReverseOrder()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission015RepeatAndParallelUseIndependentBorrowedPorts()"
+    ],
+    "testSourceHashes": {
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java": "895f340ff7d9464b24de5f357c799a8d61b0a3d25479cd9ff57b80e48f19166c"
+    },
+    "xmlReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23656-service-db-admission-independent-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "c3504eb5223ec570cd54023ebca178d94ed9750dd31f19b82e7f650c71651b0a",
+        "cases": [
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission001UrlBoundsAndBothRoles()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission002InvalidUrlsAndNullConstructorInputs()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission014TwoCloseFaultsAlwaysAttemptReverseOrder()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission010ErrorFaultIdentityAndCleanup()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission015RepeatAndParallelUseIndependentBorrowedPorts()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission004ConnectionSettingsAndNullContract()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission007EachSqlFaultIsFixedAndSanitized()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission011KnownSqlBodyYieldsToUnknownClose()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission012UnknownPrimaryRetainsOnlyFixedSecondary()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission008SqlCloseFaultCannotReturnSuccess()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission003FixedProjectionAndBorrowedConnection()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission013ErrorPrimaryAndBothCloseFaultsRetainIdentity()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission006MissingStatementAndRowsCloseOnlyAcquiredPorts()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission005EachProjectionInvariantFailsClosed()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission009RuntimeFaultIdentityAndCleanup()"
+        ]
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23656-service-db-admission-independent-v1/original-TEST-junit-platform-suite.xml",
+        "sha256": "3670bc6f301c7ce2d01b0c09b956d26ac8fd1fd091df1abf1dfebf992d0e95fc",
+        "cases": []
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23656-service-db-admission-independent-v1/original-TEST-junit-vintage.xml",
+        "sha256": "e268401ff34954c5440d147e487ca0b977d304c1cdad1e6c148edd837d947efd",
+        "cases": []
+      }
+    ],
+    "programDocuments": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3791_借用JDBC_DB接続属性検証Port15_単体テスト仕様書.md",
+        "sha256": "9b8ace93116b563eb67cd7d7c5587237318e932338f4717fa17469445855e3cb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3792_借用JDBC_DB接続属性検証Port15_実行結果.md",
+        "sha256": "258552e3e932a03492b98087c13edd93682fbfe7683a4145d8f012e436b66934"
+      }
+    ],
+    "coverageScope": "ORIGINAL_SINGLE_GROUP_UNSPLIT_DO_NOT_ADD_ACROSS_MAIN_ROWS_OR_RUNS",
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 171,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 32,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 48,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 21,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "sourceFilePhysicalClosure": {
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission$1": {
+        "name": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission$1",
+        "access": 4128,
+        "sourceFile": "ServiceDatabaseAdmission.java",
+        "methods": [
+          {
+            "name": "<clinit>",
+            "descriptor": "()V",
+            "code": true,
+            "access": 8
+          }
+        ]
+      },
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission": {
+        "name": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission",
+        "access": 49,
+        "sourceFile": "ServiceDatabaseAdmission.java",
+        "methods": [
+          {
+            "name": "<init>",
+            "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;Ljava/lang/String;)V",
+            "code": true,
+            "access": 1
+          },
+          {
+            "name": "verify",
+            "descriptor": "(Ljava/sql/Connection;)V",
+            "code": true,
+            "access": 1
+          },
+          {
+            "name": "unavailable",
+            "descriptor": "()Ljava/sql/SQLException;",
+            "code": true,
+            "access": 10
+          },
+          {
+            "name": "required",
+            "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+            "code": true,
+            "access": 10
+          },
+          {
+            "name": "<clinit>",
+            "descriptor": "()V",
+            "code": true,
+            "access": 8
+          }
+        ]
+      }
+    },
+    "physical": {
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission$1": "ec0686a32f8ca38c46b4af0d55df2347737a237a0bf97f3d3fe5c0e81776b4d0",
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission": "6e017834573dea6528e96e9d5d766d2220a376baeb4eaf29f67dd278b6c69c16"
+    },
+    "classIds": {
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission$1": "605cf4684fad9433",
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission": "22356225c9480ae6"
+    },
+    "staticPreflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23652-service-db-admission-preflight-v1/manifest.json",
+      "sha256": "3f18a00ff151a9fb14d9f92a04efb8ea3c71061cd80116cf62c293ee512ec873"
+    },
+    "wholeOriginalTestAccepted": null,
+    "notRunDeclaredMethods": null,
+    "manualCoverageExclusions": [],
+    "oldExecCombined": false,
+    "whole451Accepted": false,
+    "newAcceptance": 0
+  },
+  "evidence/01_PT/018_NK-OPS-001/evidence/PG23704-service-database-source-independent-v1/manifest.json": {
+    "manifestSha256": "77ac4912e39373967f603ea6c88ad89c9a369f2c82281d3f17af6ee588accc73",
+    "runSource": "bb416a756f035023ddad45f67003afe23effe657",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "testsExecuted": 14,
+    "executedCaseIds": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource001PublicConstructionErasesInputWithoutConnecting()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource002BothRolesFixedPropertiesAndEachPhysicalAdmission()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource003InvalidConstructionStillConsumesOwnedInput()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource004MaterialBoundsAndConstructorCloneAreIndependent()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource005ConnectorFaultsClearPropertiesAndKeepUnknownIdentity()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource006NullConnectionCannotEscapeAsSuccess()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource007FailedIdentityAdmissionDiscardsExactlyOnce()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource008AdmissionRuntimeAndErrorRetainOriginalIdentity()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource009DiscardSqlRuntimeErrorMatrixAndSameThrowable()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource010UnsupportedOptionsAndMemoryWriterOnly()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource011WrapperTypeContractAndNullBoundary()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource012CloseIsIdempotentAndPreservesCallerOwnedConnection()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource013ParallelIndependentConnectionsAndPropertiesClear()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition()"
+    ],
+    "testSourceHashes": {
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java": "a9476785417f115af1c33fd55085df696cc5d4cd51493e7c1bff498a7ab03e2f"
+    },
+    "xmlReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23704-service-database-source-independent-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "756bf7bfcb82bacd8cff659943359a10af855b50a2ca76ed187534ba0a8176b7",
+        "cases": [
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource011WrapperTypeContractAndNullBoundary()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource013ParallelIndependentConnectionsAndPropertiesClear()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource010UnsupportedOptionsAndMemoryWriterOnly()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource009DiscardSqlRuntimeErrorMatrixAndSameThrowable()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource004MaterialBoundsAndConstructorCloneAreIndependent()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource001PublicConstructionErasesInputWithoutConnecting()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource006NullConnectionCannotEscapeAsSuccess()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource007FailedIdentityAdmissionDiscardsExactlyOnce()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource002BothRolesFixedPropertiesAndEachPhysicalAdmission()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource008AdmissionRuntimeAndErrorRetainOriginalIdentity()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource003InvalidConstructionStillConsumesOwnedInput()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource005ConnectorFaultsClearPropertiesAndKeepUnknownIdentity()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition()",
+          "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource012CloseIsIdempotentAndPreservesCallerOwnedConnection()"
+        ]
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23704-service-database-source-independent-v1/original-TEST-junit-platform-suite.xml",
+        "sha256": "b16e8c1b10125be898c859a6c147baf077114c68607cdf1f0ada711ab4184fef",
+        "cases": []
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23704-service-database-source-independent-v1/original-TEST-junit-vintage.xml",
+        "sha256": "e455f827ba9639b0e851a9b7087e031a767cc56eeffb80ae2a458e30294d419b",
+        "cases": []
+      }
+    ],
+    "programDocuments": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3793_接続source所有memoryPort14_単体テスト仕様書.md",
+        "sha256": "e1484321941c4af34c0921d8f2b25a4aecfabf443c3be5ae4622a67c53866704"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3794_接続source所有memoryPort14_実行結果.md",
+        "sha256": "9da444af71828a9a9ed697d7dd82a3eb27d26e3d843618072e6a3b8eae70d043"
+      }
+    ],
+    "coverageScope": "ORIGINAL_SINGLE_GROUP_UNSPLIT_DO_NOT_ADD_ACROSS_MAIN_ROWS_OR_RUNS",
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 247,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 24,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 66,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 28,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 16,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "sourceFilePhysicalClosure": {
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource": {
+        "name": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+        "access": 49,
+        "sourceFile": "ServiceDatabaseSource.java",
+        "methods": [
+          {
+            "name": "<init>",
+            "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;Ljava/lang/String;[C)V",
+            "code": true,
+            "access": 1
+          },
+          {
+            "name": "<init>",
+            "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;Ljava/lang/String;[CLdev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector;)V",
+            "code": true,
+            "access": 0
+          },
+          {
+            "name": "getConnection",
+            "descriptor": "()Ljava/sql/Connection;",
+            "code": true,
+            "access": 1
+          },
+          {
+            "name": "discard",
+            "descriptor": "(Ljava/sql/Connection;Ljava/lang/Throwable;)V",
+            "code": true,
+            "access": 10
+          },
+          {
+            "name": "getConnection",
+            "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/sql/Connection;",
+            "code": true,
+            "access": 1
+          },
+          {
+            "name": "getLogWriter",
+            "descriptor": "()Ljava/io/PrintWriter;",
+            "code": true,
+            "access": 1
+          },
+          {
+            "name": "setLogWriter",
+            "descriptor": "(Ljava/io/PrintWriter;)V",
+            "code": true,
+            "access": 1
+          },
+          {
+            "name": "setLoginTimeout",
+            "descriptor": "(I)V",
+            "code": true,
+            "access": 1
+          },
+          {
+            "name": "getLoginTimeout",
+            "descriptor": "()I",
+            "code": true,
+            "access": 1
+          },
+          {
+            "name": "getParentLogger",
+            "descriptor": "()Ljava/util/logging/Logger;",
+            "code": true,
+            "access": 1
+          },
+          {
+            "name": "unwrap",
+            "descriptor": "(Ljava/lang/Class;)Ljava/lang/Object;",
+            "code": true,
+            "access": 1
+          },
+          {
+            "name": "isWrapperFor",
+            "descriptor": "(Ljava/lang/Class;)Z",
+            "code": true,
+            "access": 1
+          },
+          {
+            "name": "close",
+            "descriptor": "()V",
+            "code": true,
+            "access": 1
+          },
+          {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "code": true,
+            "access": 1
+          },
+          {
+            "name": "unavailable",
+            "descriptor": "()Ljava/sql/SQLException;",
+            "code": true,
+            "access": 10
+          },
+          {
+            "name": "unsupported",
+            "descriptor": "()Ljava/sql/SQLFeatureNotSupportedException;",
+            "code": true,
+            "access": 10
+          }
+        ]
+      },
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector": {
+        "name": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector",
+        "access": 1536,
+        "sourceFile": "ServiceDatabaseSource.java",
+        "methods": [
+          {
+            "name": "connect",
+            "descriptor": "(Ljava/lang/String;Ljava/util/Properties;)Ljava/sql/Connection;",
+            "code": false,
+            "access": 1025
+          }
+        ]
+      }
+    },
+    "physical": {
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector": "31add0ef102e2b6cb48fa94052688b7d6f8c67fdb21fb2de132d29c82e1e24a6"
+    },
+    "classIds": {
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource": "34266b716ae9aaf2",
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector": "e205dee73edbf935"
+    },
+    "staticPreflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23700-service-database-source-preflight-v1/manifest.json",
+      "sha256": "3638c2bb81209c86c19ed4dead4e1deb74098efc013ce5ecab8ac81ffbdd1659"
+    },
+    "wholeOriginalTestAccepted": null,
+    "notRunDeclaredMethods": null,
+    "manualCoverageExclusions": [],
+    "oldExecCombined": false,
+    "whole451Accepted": false,
+    "newAcceptance": 0
+  },
+  "evidence/01_PT/007_NK-AUT-001/evidence/PG23816-authentication-memory-port-independent-v1/manifest.json": {
+    "manifestSha256": "16d8ffd9c4e0be2e2afe54608b0a4a7b7c1844739982baea5643f952190fea1b",
+    "runSource": "1349b86209a707abde09ed7b32dbf3b8c462a9a2",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "testsExecuted": 16,
+    "executedCaseIds": [
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory001ConstructorsRejectMissingDependenciesAndDefaultCheckerIsConstructionOnly()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory002UserSuccessPreservesNormalizedDisplayAndBorrowedTransaction()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory003AdminIdentityComesFromTheOwnedRow()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory004AbsentAndDisabledAccountsUseDummyWorkAndOneCommonFailure()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory005WrongActivePasswordUpdatesBothCountersWithoutIssuance()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory006UserFiveAndIpTenLockOnThisAttempt()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory007ExistingLocksUseMaximumWithoutCheckerOrMutation()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory008FractionalRetryCeilsAndCapsAtNineHundred()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory009ExpiryEqualityPermitsCheckWhileWindowEqualityStillAccumulates()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory010NullAndInvalidInputsNeverSkipPasswordConsumption()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory011CheckerFailuresMapOnlyDeclaredCatalogAndPreserveDirectFatalIdentity()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory012JdbcReadUpdateAndResourceFaultsFailClosedWithoutOwningTheConnection()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory013CriticalAuditFaultAndNestedFatalNeverReturnSuccess()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory014ThirdSessionDelegatesOldestRevocationWithSeparateSafeAudit()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory015RepeatedConsumerCallsKeepCallerRowsAndPasswordsIndependent()",
+      "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray()"
+    ],
+    "testSourceHashes": {
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationServiceMemoryPortTest.java": "84c3540cf9417f9d86cc618407da1437e7538a6929b987f129b57661bb0b9eb0"
+    },
+    "xmlReferences": [
+      {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG23816-authentication-memory-port-independent-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "7d48ec87d0066a7a129cf8eceeb968aa05ac7d8c116a7f258ed9f480507c5109",
+        "cases": [
+          "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory013CriticalAuditFaultAndNestedFatalNeverReturnSuccess()",
+          "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory011CheckerFailuresMapOnlyDeclaredCatalogAndPreserveDirectFatalIdentity()",
+          "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory008FractionalRetryCeilsAndCapsAtNineHundred()",
+          "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory005WrongActivePasswordUpdatesBothCountersWithoutIssuance()",
+          "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory007ExistingLocksUseMaximumWithoutCheckerOrMutation()",
+          "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory006UserFiveAndIpTenLockOnThisAttempt()",
+          "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory015RepeatedConsumerCallsKeepCallerRowsAndPasswordsIndependent()",
+          "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory002UserSuccessPreservesNormalizedDisplayAndBorrowedTransaction()",
+          "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory003AdminIdentityComesFromTheOwnedRow()",
+          "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory014ThirdSessionDelegatesOldestRevocationWithSeparateSafeAudit()",
+          "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray()",
+          "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory010NullAndInvalidInputsNeverSkipPasswordConsumption()",
+          "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory001ConstructorsRejectMissingDependenciesAndDefaultCheckerIsConstructionOnly()",
+          "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory004AbsentAndDisabledAccountsUseDummyWorkAndOneCommonFailure()",
+          "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory012JdbcReadUpdateAndResourceFaultsFailClosedWithoutOwningTheConnection()",
+          "dev.codex.schubert.nk.api.security.AuthenticationServiceMemoryPortTest#memory009ExpiryEqualityPermitsCheckWhileWindowEqualityStillAccumulates()"
+        ]
+      },
+      {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG23816-authentication-memory-port-independent-v1/original-TEST-junit-platform-suite.xml",
+        "sha256": "607854d628168c29023e76606606ba8712733a3b36b8d7564c49079a1b306c7e",
+        "cases": []
+      },
+      {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG23816-authentication-memory-port-independent-v1/original-TEST-junit-vintage.xml",
+        "sha256": "8aa22c38030985c0abc77669de1edd562828feb8669476074ac310e5287e8928",
+        "cases": []
+      }
+    ],
+    "programDocuments": [
+      {
+        "path": "evidence/01_PT/007_NK-AUT-001/049_AuthenticationService借用JDBC消費境界_単体仕様.md",
+        "sha256": "cb6798e92f8684dc07ebee7427afd3bf0f280259b1d303cb40c11773fd446385"
+      },
+      {
+        "path": "evidence/01_PT/007_NK-AUT-001/050_AuthenticationService借用JDBC消費境界_実行結果.md",
+        "sha256": "a21414d507c790690ae5fb734880b189bacc0d5e40b996b71bcc242e72097d61"
+      }
+    ],
+    "coverageScope": "ORIGINAL_SINGLE_GROUP_UNSPLIT_DO_NOT_ADD_ACROSS_MAIN_ROWS_OR_RUNS",
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 271,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 24,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 54,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 17,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "sourceFilePhysicalClosure": {
+      "dev/codex/schubert/nk/api/security/AuthenticationService": {
+        "name": "dev/codex/schubert/nk/api/security/AuthenticationService",
+        "access": 49,
+        "sourceFile": "AuthenticationService.java",
+        "methods": [
+          {
+            "name": "<init>",
+            "descriptor": "(Ldev/codex/schubert/nk/api/security/LoginAttemptRepository;Ldev/codex/schubert/nk/api/security/PasswordHasher;Ldev/codex/schubert/nk/api/security/AuthSessionService;Ldev/codex/schubert/nk/api/security/LoginAuditWriter;)V",
+            "code": true,
+            "access": 1
+          },
+          {
+            "name": "<init>",
+            "descriptor": "(Ldev/codex/schubert/nk/api/security/LoginAttemptRepository;Ljava/util/function/BiPredicate;Ldev/codex/schubert/nk/api/security/AuthSessionService;Ldev/codex/schubert/nk/api/security/LoginAuditWriter;)V",
+            "code": true,
+            "access": 0
+          },
+          {
+            "name": "authenticate",
+            "descriptor": "(Ljava/sql/Connection;Ljava/lang/String;[CLjava/net/InetAddress;Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;)Ldev/codex/schubert/nk/api/security/LoginResult;",
+            "code": true,
+            "access": 1
+          },
+          {
+            "name": "retry",
+            "descriptor": "(Ldev/codex/schubert/nk/api/security/LockedLoginAttempt;Ljava/time/Instant;Z)I",
+            "code": true,
+            "access": 10
+          },
+          {
+            "name": "<clinit>",
+            "descriptor": "()V",
+            "code": true,
+            "access": 8
+          }
+        ]
+      }
+    },
+    "physical": {
+      "dev/codex/schubert/nk/api/security/AuthenticationService": "4940f9d2870830f8c38a355c58c026dc2537070a61b0f6dee108acaea459414b"
+    },
+    "classIds": {
+      "dev/codex/schubert/nk/api/security/AuthenticationService": "e6dc93da200c1686"
+    },
+    "staticPreflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23798-authentication-memory-port-preflight-v1/manifest.json",
+      "sha256": "c44fdb4abb1a6a131f8b6319afa212cfd47be3e4a690080e8d2a83ed72eec584"
+    },
+    "wholeOriginalTestAccepted": null,
+    "notRunDeclaredMethods": null,
+    "manualCoverageExclusions": [],
+    "oldExecCombined": false,
+    "whole451Accepted": false,
+    "newAcceptance": 0
+  }
+}
