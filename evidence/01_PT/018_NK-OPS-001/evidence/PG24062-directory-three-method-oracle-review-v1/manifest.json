@@ -1,0 +1,65 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T15:57:35.903742+09:00",
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/629_directory_three_method_oracle_scope.json",
+    "sha256": "ab38481f38818d3ce4ee63bc490ca6e35f3805de7654e2d1653e7080108f6be4"
+  },
+  "sourcePrograms": 1,
+  "explicitlyRelatedMethods": 3,
+  "originalSuccessfulTestCases": 4,
+  "assertionSnippetChecks": 14,
+  "assertionReviews": [
+    {
+      "testId": "PT-SCN-DDEFAULT-001",
+      "caseRef": "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults001PrivateFileUnsupportedHasNoPublicFileFallback()",
+      "declarationLine": 19,
+      "snippets": 3,
+      "independentExpected": "Private file default always UNAVAILABLE for zero,positive,MIN/MAX parent; no public fallback"
+    },
+    {
+      "testId": "PT-SCN-DDEFAULT-002",
+      "caseRef": "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults002PrivateDirectoryUnsupportedHasNoPublicDirectoryFallback()",
+      "declarationLine": 30,
+      "snippets": 2,
+      "independentExpected": "Private directory default always UNAVAILABLE for valid/empty/dot/dotdot/slash/NUL name; no public fallback"
+    },
+    {
+      "testId": "PT-SCN-DDEFAULT-003",
+      "caseRef": "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults003EmptyDirectoryUnsupportedNeverDelegatesToUnlinkOrRootClose()",
+      "declarationLine": 41,
+      "snippets": 2,
+      "independentExpected": "Removal default always UNAVAILABLE for names without unlink/close fallback"
+    },
+    {
+      "testId": "PT-SCN-DDEFAULT-004",
+      "caseRef": "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults004EveryDeclinedOperationHasFreshBoundedExceptionState()",
+      "declarationLine": 52,
+      "snippets": 7,
+      "independentExpected": "Each error fresh, fixed class/reason/message/cause/suppression; null names also fail without mutation"
+    }
+  ],
+  "unsupportedDefaultsDoNotFallback": true,
+  "actualNativeQualified": false,
+  "abstractNoCodeMethodsQualified": false,
+  "exactAllMethodCasesOrOracleComplete": false,
+  "originalRunRepeated": false,
+  "productTestsExecuted": 0,
+  "newUniqueTests": 0,
+  "compilerOrJvmExecuted": false,
+  "actualBackendActions": 0,
+  "wholeDependencyAccepted": false,
+  "wholeG13Accepted": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "files": {
+    "method-oracle-relations.json": "6d81338abf126d36490ee40db2507fc428f240218c8c9a7d3aea61791ed55d37"
+  },
+  "tool": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/631_directory_method_oracle_review.py",
+    "sha256": "662dad4a5ae39026f185e32338056c636bb4ce32ea64a8a61d93792eab805aa9"
+  }
+}

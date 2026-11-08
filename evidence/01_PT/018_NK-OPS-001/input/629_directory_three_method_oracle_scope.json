@@ -1,0 +1,129 @@
+{
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "mainPath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/DirectoryCalls.java",
+  "testPath": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/UnsupportedDirectoryDefaultsPortTest.java",
+  "methodInventory": "evidence/01_PT/018_NK-OPS-001/evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json",
+  "originalIndependentPost": "evidence/01_PT/018_NK-OPS-001/evidence/PG23504-directory-defaults-independent-v1/manifest.json",
+  "sourceTrace": "evidence/01_PT/018_NK-OPS-001/evidence/PG23836-pending12-trace-registration-v1/source-trace.json",
+  "inputs": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/DirectoryCalls.java": "4449a5a316c2e9e4da3e3bbd2068707974557fe032cd0708dcbe7306532cdaaf",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/UnsupportedDirectoryDefaultsPortTest.java": "9557f76bfb15ef536988b2bd25ccabd175f1eb5a9cd4133f2c3d9ef704ca2a17",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG23504-directory-defaults-independent-v1/manifest.json": "75c2a9aa1603b5a65a2a1ecf942856b0f8f67ba46d09f66b34d0beb5fda716f2",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json": "e65782d893a5ae45309cf269d165dec33d1dc396f06b7968b62d95b276455d31",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG23836-pending12-trace-registration-v1/source-trace.json": "5baabb8524d32d1ccf545abc561529d15d85d4ab294917786cdb153b8a41c30d",
+    "evidence/01_PT/018_NK-OPS-001/3763_未対応directory既定拒否四件_通常PT仕様.md": "284669796ee6efa0c7edae81232588f579d5ac841938edea388bb1b2e5ea8d2d",
+    "evidence/01_PT/018_NK-OPS-001/3764_未対応directory既定拒否四件_通常PT結果.md": "76f24a538b0d7f2f6ddc03651a9fddcf62b77075c4c6a02f04f99b0ccc2fb8e4"
+  },
+  "designRefs": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+      "source": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    }
+  ],
+  "methods": [
+    {
+      "method": "createPrivateFile",
+      "descriptor": "(ILjava/lang/String;)I",
+      "testIds": [
+        "PT-SCN-DDEFAULT-001",
+        "PT-SCN-DDEFAULT-004"
+      ],
+      "runCases": [
+        "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults001PrivateFileUnsupportedHasNoPublicFileFallback()",
+        "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults004EveryDeclinedOperationHasFreshBoundedExceptionState()"
+      ],
+      "oracleScope": "UNSUPPORTED_DEFAULT_ONLY_NO_NATIVE_OR_ABSTRACT_PORT_ACTION"
+    },
+    {
+      "method": "createPrivateDirectory",
+      "descriptor": "(ILjava/lang/String;)V",
+      "testIds": [
+        "PT-SCN-DDEFAULT-002",
+        "PT-SCN-DDEFAULT-004"
+      ],
+      "runCases": [
+        "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults002PrivateDirectoryUnsupportedHasNoPublicDirectoryFallback()",
+        "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults004EveryDeclinedOperationHasFreshBoundedExceptionState()"
+      ],
+      "oracleScope": "UNSUPPORTED_DEFAULT_ONLY_NO_NATIVE_OR_ABSTRACT_PORT_ACTION"
+    },
+    {
+      "method": "removeEmptyDirectory",
+      "descriptor": "(ILjava/lang/String;)V",
+      "testIds": [
+        "PT-SCN-DDEFAULT-003",
+        "PT-SCN-DDEFAULT-004"
+      ],
+      "runCases": [
+        "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults003EmptyDirectoryUnsupportedNeverDelegatesToUnlinkOrRootClose()",
+        "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults004EveryDeclinedOperationHasFreshBoundedExceptionState()"
+      ],
+      "oracleScope": "UNSUPPORTED_DEFAULT_ONLY_NO_NATIVE_OR_ABSTRACT_PORT_ACTION"
+    }
+  ],
+  "oracles": [
+    {
+      "testId": "PT-SCN-DDEFAULT-001",
+      "runCase": "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults001PrivateFileUnsupportedHasNoPublicFileFallback()",
+      "expected": "Private file default always UNAVAILABLE for zero,positive,MIN/MAX parent; no public fallback",
+      "assertionTokens": [
+        "List.of(0, 7, Integer.MIN_VALUE, Integer.MAX_VALUE)",
+        "calls.createPrivateFile(parent, \"part\")",
+        "assertEquals(0, calls.abstractCalls);"
+      ]
+    },
+    {
+      "testId": "PT-SCN-DDEFAULT-002",
+      "runCase": "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults002PrivateDirectoryUnsupportedHasNoPublicDirectoryFallback()",
+      "expected": "Private directory default always UNAVAILABLE for valid/empty/dot/dotdot/slash/NUL name; no public fallback",
+      "assertionTokens": [
+        "calls.createPrivateDirectory(7, name)",
+        "assertEquals(0, calls.abstractCalls);"
+      ]
+    },
+    {
+      "testId": "PT-SCN-DDEFAULT-003",
+      "runCase": "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults003EmptyDirectoryUnsupportedNeverDelegatesToUnlinkOrRootClose()",
+      "expected": "Removal default always UNAVAILABLE for names without unlink/close fallback",
+      "assertionTokens": [
+        "calls.removeEmptyDirectory(7, name)",
+        "assertEquals(0, calls.abstractCalls);"
+      ]
+    },
+    {
+      "testId": "PT-SCN-DDEFAULT-004",
+      "runCase": "dev.codex.schubert.nk.storage.UnsupportedDirectoryDefaultsPortTest#defaults004EveryDeclinedOperationHasFreshBoundedExceptionState()",
+      "expected": "Each error fresh, fixed class/reason/message/cause/suppression; null names also fail without mutation",
+      "assertionTokens": [
+        "assertNotSame(first, second);",
+        "assertNotSame(first, third);",
+        "assertNotSame(second, third);",
+        "calls.createPrivateFile(7, null)",
+        "calls.createPrivateDirectory(7, null)",
+        "calls.removeEmptyDirectory(7, null)",
+        "assertEquals(0, calls.abstractCalls);"
+      ]
+    }
+  ],
+  "requirementIds": [
+    "FIL-001",
+    "FIL-002",
+    "FIL-003",
+    "FIL-004",
+    "FIL-005",
+    "FIL-006",
+    "FIL-007",
+    "FIL-008",
+    "FIL-009"
+  ],
+  "ui": [
+    "241"
+  ],
+  "remaining": [
+    "nine abstract port contracts have no Code and no dynamic native qualification",
+    "actual file/FD/native implementation and all caller lifecycle remain HOLD",
+    "per-case method probes were not separately measured"
+  ],
+  "productTestsExecuted": 0
+}
