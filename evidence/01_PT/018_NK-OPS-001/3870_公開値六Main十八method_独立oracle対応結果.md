@@ -1,0 +1,7 @@
+# 3870 公開値六Main18method独立oracle結果
+
+PG24304=0、18method/原四whole18case/87assertion snippetを個別対応。32alphabetからforward/reverse二vectorと16周期×各4/1664drawを独立整数計算、固定clock/空answer・redacted文字列・immutableSet・root/URL構文・strictJSON各literalをTestID/case/方法/descriptor/source/classSHAへ結合。clinit/private/lambdaはconsumer経由の間接関係と明記、record値同士の比較は補助でありbusiness expected生成ではない。
+
+PG24306別点検0 SHA256 a282c2c87f2df2cd1db77586129eb3690b250140eb73a6510e263b0ea46e7970。元4TestのGit blob不変、rawcase schema10否定・元18casePASS metadataを照合。helper初1は元rawmethodに()が無い表記差でBUG2525/YKT2259を修正前起票し24305を保全、exactキー/単純Java識別子/PASS検証後に参照だけcanonical化。元行書換え0・既665666はraw保存目的のため非該当。是正source90f131a通常push後に当工具範囲を閉鎖した。
+
+これは明示したmethod/oracle関係の補完で全分岐期待値の完全性・callee/JDK/現在provider・entropy分布・DB一意性/再送/実NKの受入ではない。元18は再演せずnewunique/実coverage/currentsourcerun/正式/leaf加算0。元unknownfilter12は24298で標準規則へ独立分類済み、手動除外なし。unique518/正式1964PT53scope/工数null・全実操作HOLD保持。
