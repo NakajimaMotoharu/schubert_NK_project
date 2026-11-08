@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-08 工具派生のcountと構文literalを区別
+
+BUG2516/YKT2254でSDK数9→1の一律置換がhex文字rangeを変え、独立比較を失敗させた。新規汎用工具や全literal置換を増やさず、対象scope/出力先/countを明示contextで変更する。旧qualified工具は不変更、生成差分の文字列literalは許可したscope・出力・pinの変更だけかAST等で確認する。正規表現・期待値の品質を緩めず、元の失敗・before・工具費を保存する。新規正対象数を先行観測し、対象0 familyを別witnessで再演しない。現scopeのPG24012は文字列三変更ずつのみ・実before拒否を確認した。既品質/モデル/実操作HOLD/通常10%保全/continuous-v2は不変更。
+
+
 ## 2026-11-08 G07はcaptureの実schema roleを先に数える
 
 Source hash68範囲の残73はsourceHashes/testSourceHashes内0（dependencyHashes66/dependencyJarHashes2/xmlHashes4/unsupported1）であり、23962/23964は新分類0。新Source witness作成前に、固定残候補の実field roleと対象数を既metadataから先に観測する。対象0のfamilyへ別witnessを追加する新群を選ばず、元見積・共有費不明/0分類・選定手戻りを保持する。新しいartifact IOは観測された候補と具体的な安全契約がある時だけに限定する。全当初4493/現在未分類3315/限界22/actualSecretCountnull/451/HOLD/モデル/枠/自走停止条件は変更しない。
