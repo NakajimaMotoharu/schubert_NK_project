@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-09 固定文字列はraw tokenとdecoded値を区別（BUG2584/YKT2291）
+
+独立goldenのPython文字列は既decode済みなので直接比較する。literal_evalは固定ASCII Java文字列のraw tokenに一度だけ適用し、改行を含むdecoded値を再quote/reparseしない。当918初回SyntaxError1は25242へ保全、expected=value一式だけ是正・他AST/oracle不変を25244で確認（newline/backslash/quote3vector・不正raw2拒否）。同名expectedのcase集合代入とgolden代入をAST roleで区別し、広い置換/件数推測をしない。原37真正0を再演せず保存結果の独立照合だけを進める。formatter diffは最初に観測してexact固定定数だけ同値確認し、既Label等のstatic initializer依存は既qualified proofからSource/CRC/許可名をexact再利用する。モデル/品質/枠/HOLD/通常継続条件不変更。
+
+
 ## 2026-11-09 whole補助Testはcompile参照も閉鎖（BUG2580/YKT2289）
 
 fixture fieldのruntime graph確認だけでは、whole補助Testをjavacへ与えた際の全method参照closureは成立しない。既full support SourceのTest型参照を宣言/import/全bodyから照合し、必要な既承認pure補助Sourceを全文のままSHA固定してcompile-onlyへ含める。fixture抜粋・未承認代替や既成功method再試験はしない。Heap接続25192 compile1/0Testは25200保全、909/25202でFileStore補助一Sourceを追加、元input/選択/品質/HOLD不変更、原27補助method非選択。元compile失敗とtool費を保持し後続真正結果だけで判定する。
