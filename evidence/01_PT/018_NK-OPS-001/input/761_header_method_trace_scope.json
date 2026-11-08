@@ -1,0 +1,628 @@
+{
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "testSource": "64f3a72753434347889f0eabd5d9f9dca67c6bfb",
+  "normalProof": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG24642-protocol-whole120-independent-v1/manifest.json",
+    "sha256": "8ebe6365bc701ba6432b1b55275004024dc71bc452d31b66d31c53894e3ae128"
+  },
+  "metadataInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json",
+    "sha256": "e65782d893a5ae45309cf269d165dec33d1dc396f06b7968b62d95b276455d31"
+  },
+  "descriptorInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/artifacts.json",
+    "sha256": "fb24a1a209849d42894925002baae668bc55a4bd858b1b7c1d38ab838319bb0b"
+  },
+  "physicalIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json",
+    "sha256": "db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723"
+  },
+  "sourcePaths": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/CommonHeader.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/package-info.java"
+  ],
+  "owner": "WBS-P001-01",
+  "expectedRawMethods": 57,
+  "expectedOfficialMethods": 30,
+  "expectedStandardFiltered": 27,
+  "cases": {
+    "H1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.header.HeaderModelTest#enumsMapOnlyApprovedWireValues()",
+      "testIds": [
+        "PT-PRO-001-H01"
+      ],
+      "independentOracle": "UI232 fixed Q/S/E and S/A/I name/wire pairs plus12 fourbyte result literals; only0000 and0200 success. Unknown/empty/multichar/null rejected."
+    },
+    "H2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.header.HeaderModelTest#authenticationContextValidatesAndRedacts()",
+      "testIds": [
+        "PT-PRO-001-H01",
+        "PT-PRO-001-H03"
+      ],
+      "independentOracle": "Synthetic a repeated64 accepted,63 anduppercase64 rejected; distinct b64 not equal, literal redacted diagnostic; samevalue hash equality andwireValue. No actualcredential."
+    },
+    "H3": {
+      "caseKey": "dev.codex.schubert.nk.protocol.header.HeaderModelTest#validHeadersCoverRequestResponseErrorAndEventProfiles()",
+      "testIds": [
+        "PT-PRO-001-H02"
+      ],
+      "independentOracle": "Fixed independent537=256+9+272, loginwithoutcontext/eventinternal/nocontext andresponseprofile; redaction omits synthetic context."
+    },
+    "H4": {
+      "caseKey": "dev.codex.schubert.nk.protocol.header.HeaderModelTest#headerConstructorRejectsEveryStructuralViolation()",
+      "testIds": [
+        "PT-PRO-001-H03"
+      ],
+      "independentOracle": "Fixed unsupportedmagic/version,256header,sixdigitnegative/overflow,countwithoutrecord,wrongtotal/submillis/profile/correlation/context violations typed LayoutValidationException."
+    },
+    "H5": {
+      "caseKey": "dev.codex.schubert.nk.protocol.header.HeaderModelTest#headerValidateAgainstRejectsEachMetadataMismatch()",
+      "testIds": [
+        "PT-PRO-001-H03"
+      ],
+      "independentOracle": "Explicitdifferentid/kind/interaction/dataLength/recordLength/maxCount definitions rejected; nullprecondition."
+    },
+    "H6": {
+      "caseKey": "dev.codex.schubert.nk.protocol.header.HeaderModelTest#headerReferencesRejectNullAtTheNamedInvariantBoundary()",
+      "testIds": [
+        "PT-PRO-HDR3266-001"
+      ],
+      "independentOracle": "Explicitnine nullable Java references rejected at exact named constructor boundary; validheader256 andfixedcorrelation."
+    },
+    "H7": {
+      "caseKey": "dev.codex.schubert.nk.protocol.header.HeaderModelTest#headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow()",
+      "testIds": [
+        "PT-PRO-HDR3266-002"
+      ],
+      "independentOracle": "Literal999744+256=1000000 accepted,999745+256=1000001 rejected;999999*999999 overflow wraps ArithmeticException withfixeddiagnostic."
+    },
+    "H8": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerEncodingMatchesIndependentUi232GoldenVector()",
+      "testIds": [
+        "PT-PRO-002-H01"
+      ],
+      "independentOracle": "Independent256byte array ofASCIIspace; offsets0/8/11/19/22/24/60/96/177/181/187/193/199 filled literal UI232 fields; expected never from Production encoder."
+    }
+  },
+  "methodRules": {
+    "AuthenticationContext": {
+      "<init>": {
+        "cases": [
+          "H2"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Store validatedimmutable synthetic value only.",
+        "staticPath": "AuthenticationContext.of -> new AuthenticationContext"
+      },
+      "of": {
+        "cases": [
+          "H2"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Non-null lower64hex; rejectlength63 anduppercase.",
+        "staticPath": "HeaderModelTest -> AuthenticationContext.of"
+      },
+      "wireValue": {
+        "cases": [
+          "H2"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Explicit wire-only value access; logging forbidden.",
+        "staticPath": "H2 direct actualwirevalue assertion"
+      },
+      "equals": {
+        "cases": [
+          "H2"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Type-and-value equality, differentvalue andwrongtype rejected.",
+        "staticPath": "H2 assertEquals/assertNotEquals -> equals"
+      },
+      "hashCode": {
+        "cases": [
+          "H2"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Equal retainedvalues sharehash.",
+        "staticPath": "H2 explicitactual hashCode calls"
+      },
+      "toString": {
+        "cases": [
+          "H2"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "FixedAuthenticationContext[REDACTED] withnoinput.",
+        "staticPath": "H2 explicit literaltoString assertion"
+      },
+      "<clinit>": {
+        "cases": [
+          "H2"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Class regex `[0-9a-f]{64}` is sourceconstant; validated byfixedpositive/negativefactory cases.",
+        "staticPath": "Class initialization prerequisite of AuthenticationContext.of"
+      }
+    },
+    "CommonHeader": {
+      "<init>": {
+        "cases": [
+          "H3",
+          "H4",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Constructor establishes mandatoryreferences/magic/version/length/profile/correlation/auth invariants.",
+        "staticPath": "HeaderTest header/base/build/headerWithMissingReference andMessageTest requestHeader -> new CommonHeader"
+      },
+      "validateAgainst": {
+        "cases": [
+          "H3",
+          "H5"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Match declaredlayout id/kind/interaction/data/record/countcap andcheckdefinitiontotal; null rejected.",
+        "staticPath": "H3 direct/H5 assertMismatch -> validateAgainst"
+      },
+      "calculateTotal": {
+        "cases": [
+          "H3",
+          "H4",
+          "H7"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Checked256+data+record*count; exactmillionaccepted,overflow/nextbyte typed rejected.",
+        "staticPath": "CommonHeader compactconstructor -> calculateTotal"
+      },
+      "validateKinds": {
+        "cases": [
+          "H3",
+          "H4"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "EVENT iff INTERNAL.",
+        "staticPath": "CommonHeader compactconstructor -> validateKinds"
+      },
+      "validateCorrelation": {
+        "cases": [
+          "H3",
+          "H4"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "RootREQUEST correlationequalsmessageId.",
+        "staticPath": "CommonHeader compactconstructor -> validateCorrelation"
+      },
+      "validateResult": {
+        "cases": [
+          "H3",
+          "H4"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "7",
+          "8"
+        ],
+        "contract": "RESPONSE iffresultpresent; errors musthavezerorecords.",
+        "staticPath": "CommonHeader compactconstructor -> validateResult"
+      },
+      "validateAuthentication": {
+        "cases": [
+          "H3",
+          "H4"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Context absentforlogin request/response/events, requiredforordinary.",
+        "staticPath": "CommonHeader compactconstructor -> validateAuthentication"
+      },
+      "toString": {
+        "cases": [
+          "H3"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Diagnostic keepssafeheader fields andcontext REDACTED.",
+        "staticPath": "H3 directtoString containsfixedmarker andomitsinput"
+      }
+    },
+    "MessageKind": {
+      "<init>": {
+        "cases": [
+          "H1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Approved enumconstants retainfixedwire/profile; expectedliteral independent.",
+        "staticPath": "enum <clinit> -> constructor -> H1 directwire assertions"
+      },
+      "wireValue": {
+        "cases": [
+          "H1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "UI232 literal approved wiretable for everyenumconstant.",
+        "staticPath": "H1 forliteralrows -> valueOf(...).wireValue()"
+      },
+      "fromWire": {
+        "cases": [
+          "H1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Exactapprovedwire accepted; null/unknown and applicablelength violations rejected.",
+        "staticPath": "H1 direct fromWire calls"
+      },
+      "<clinit>": {
+        "cases": [
+          "H1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Approveddeclaration table hasexact3/3/12 enumconstants.",
+        "staticPath": "H1 values length andliteralconstant iteration afterclass init"
+      }
+    },
+    "InteractionKind": {
+      "<init>": {
+        "cases": [
+          "H1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Approved enumconstants retainfixedwire/profile; expectedliteral independent.",
+        "staticPath": "enum <clinit> -> constructor -> H1 directwire assertions"
+      },
+      "wireValue": {
+        "cases": [
+          "H1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "UI232 literal approved wiretable for everyenumconstant.",
+        "staticPath": "H1 forliteralrows -> valueOf(...).wireValue()"
+      },
+      "fromWire": {
+        "cases": [
+          "H1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Exactapprovedwire accepted; null/unknown and applicablelength violations rejected.",
+        "staticPath": "H1 direct fromWire calls"
+      },
+      "<clinit>": {
+        "cases": [
+          "H1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Approveddeclaration table hasexact3/3/12 enumconstants.",
+        "staticPath": "H1 values length andliteralconstant iteration afterclass init"
+      }
+    },
+    "ResultCode": {
+      "<init>": {
+        "cases": [
+          "H1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Approved enumconstants retainfixedwire/profile; expectedliteral independent.",
+        "staticPath": "enum <clinit> -> constructor -> H1 directwire assertions"
+      },
+      "wireValue": {
+        "cases": [
+          "H1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "UI232 literal approved wiretable for everyenumconstant.",
+        "staticPath": "H1 forliteralrows -> valueOf(...).wireValue()"
+      },
+      "fromWire": {
+        "cases": [
+          "H1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Exactapprovedwire accepted; null/unknown and applicablelength violations rejected.",
+        "staticPath": "H1 direct fromWire calls"
+      },
+      "<clinit>": {
+        "cases": [
+          "H1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "7"
+        ],
+        "contract": "Approveddeclaration table hasexact3/3/12 enumconstants.",
+        "staticPath": "H1 values length andliteralconstant iteration afterclass init"
+      },
+      "usesSuccessProfile": {
+        "cases": [
+          "H1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "8"
+        ],
+        "contract": "Only0000/0200 use successprofile,tenotherfixedcodes false.",
+        "staticPath": "H1 literal boolean table -> usesSuccessProfile"
+      },
+      "lambda$fromWire$0": {
+        "cases": [
+          "H1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "7",
+          "8"
+        ],
+        "contract": "Predicate compares retainedcode tofixedinput.",
+        "staticPath": "ResultCode.fromWire -> stream.filter candidate.encodedValue.equals(value)"
+      },
+      "lambda$fromWire$1": {
+        "cases": [
+          "H1"
+        ],
+        "relatedRd": [
+          "MQ-014",
+          "MQ-015",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "7",
+          "8"
+        ],
+        "contract": "Unknown code throws IllegalArgumentException, not fallback success.",
+        "staticPath": "ResultCode.fromWire -> orElseThrow supplier"
+      }
+    }
+  },
+  "recordGeneratedAccessors": [
+    "protocolIdentifier",
+    "headerVersion",
+    "layoutId",
+    "layoutVersion",
+    "messageKind",
+    "interactionKind",
+    "messageId",
+    "correlationId",
+    "sentAt",
+    "authenticationContext",
+    "headerLength",
+    "dataLength",
+    "recordLength",
+    "recordCount",
+    "totalLength",
+    "resultCode"
+  ],
+  "oracleDocuments": [
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/001_NK-PRO-001_単体テスト仕様書.md",
+      "sha256": "503c5f6be3caaa341dcec35cb1bd1b8a3892d270bf6a7fa91cdad580b43abdbe"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/108_Header共通契約・現source個別受入.md",
+      "sha256": "84afedf2d26539f0e26b2d4d2a9be2d8c7a84f501925db11dbde3728a2a9e4b7"
+    },
+    {
+      "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+      "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1952_G13Header8_非token名・既存oracle対応仕様.md",
+      "sha256": "ac4863b34625335ee2522ab8dc2403577026af96429d547718369cd9087ac733"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "H1": {
+    "caseKey": "dev.codex.schubert.nk.protocol.header.HeaderModelTest#enumsMapOnlyApprovedWireValues()",
+    "testIds": [
+      "PT-PRO-001-H01"
+    ],
+    "independentOracle": "UI232 fixed Q/S/E and S/A/I name/wire pairs plus12 fourbyte result literals; only0000 and0200 success. Unknown/empty/multichar/null rejected.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java",
+    "sourceSha256": "2f20adba3d3b4dfa8eef16e36ad571f91c7ffffa9b080a15a04f1bfddabd631f",
+    "declarationLine": 28,
+    "bodyEndLine": 94,
+    "assertionBodySha256": "c629c77cd78717ab3209ab504ff776429ce4ae810e83be503dac5dfce606be33",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "H2": {
+    "caseKey": "dev.codex.schubert.nk.protocol.header.HeaderModelTest#authenticationContextValidatesAndRedacts()",
+    "testIds": [
+      "PT-PRO-001-H01",
+      "PT-PRO-001-H03"
+    ],
+    "independentOracle": "Synthetic a repeated64 accepted,63 anduppercase64 rejected; distinct b64 not equal, literal redacted diagnostic; samevalue hash equality andwireValue. No actualcredential.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java",
+    "sourceSha256": "2f20adba3d3b4dfa8eef16e36ad571f91c7ffffa9b080a15a04f1bfddabd631f",
+    "declarationLine": 97,
+    "bodyEndLine": 109,
+    "assertionBodySha256": "22f77c263ccbdf0c0cc1904a01de6c6c2139cf8c3d3e68db54177447d3cef36a",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "H3": {
+    "caseKey": "dev.codex.schubert.nk.protocol.header.HeaderModelTest#validHeadersCoverRequestResponseErrorAndEventProfiles()",
+    "testIds": [
+      "PT-PRO-001-H02"
+    ],
+    "independentOracle": "Fixed independent537=256+9+272, loginwithoutcontext/eventinternal/nocontext andresponseprofile; redaction omits synthetic context.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java",
+    "sourceSha256": "2f20adba3d3b4dfa8eef16e36ad571f91c7ffffa9b080a15a04f1bfddabd631f",
+    "declarationLine": 112,
+    "bodyEndLine": 183,
+    "assertionBodySha256": "f419ce748b1f5e327dda63ddcb3a905a0eb9f8d30818747a0101262c1ec442b3",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "H4": {
+    "caseKey": "dev.codex.schubert.nk.protocol.header.HeaderModelTest#headerConstructorRejectsEveryStructuralViolation()",
+    "testIds": [
+      "PT-PRO-001-H03"
+    ],
+    "independentOracle": "Fixed unsupportedmagic/version,256header,sixdigitnegative/overflow,countwithoutrecord,wrongtotal/submillis/profile/correlation/context violations typed LayoutValidationException.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java",
+    "sourceSha256": "2f20adba3d3b4dfa8eef16e36ad571f91c7ffffa9b080a15a04f1bfddabd631f",
+    "declarationLine": 186,
+    "bodyEndLine": 231,
+    "assertionBodySha256": "bd20055d7f38783a7029be2e8cdfe71a8530c9f74ca540281073140d7d1736bc",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "H5": {
+    "caseKey": "dev.codex.schubert.nk.protocol.header.HeaderModelTest#headerValidateAgainstRejectsEachMetadataMismatch()",
+    "testIds": [
+      "PT-PRO-001-H03"
+    ],
+    "independentOracle": "Explicitdifferentid/kind/interaction/dataLength/recordLength/maxCount definitions rejected; nullprecondition.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java",
+    "sourceSha256": "2f20adba3d3b4dfa8eef16e36ad571f91c7ffffa9b080a15a04f1bfddabd631f",
+    "declarationLine": 234,
+    "bodyEndLine": 316,
+    "assertionBodySha256": "9df8bb4611bc52235ff835adbec1d89c474f9dcd8c0d9dddc17c52d139a17a85",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "H6": {
+    "caseKey": "dev.codex.schubert.nk.protocol.header.HeaderModelTest#headerReferencesRejectNullAtTheNamedInvariantBoundary()",
+    "testIds": [
+      "PT-PRO-HDR3266-001"
+    ],
+    "independentOracle": "Explicitnine nullable Java references rejected at exact named constructor boundary; validheader256 andfixedcorrelation.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java",
+    "sourceSha256": "2f20adba3d3b4dfa8eef16e36ad571f91c7ffffa9b080a15a04f1bfddabd631f",
+    "declarationLine": 324,
+    "bodyEndLine": 346,
+    "assertionBodySha256": "de568de15d21a6da2bd642bb7a12071b0583a14ecddce7123f6440e7d1b2ee7e",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "H7": {
+    "caseKey": "dev.codex.schubert.nk.protocol.header.HeaderModelTest#headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow()",
+    "testIds": [
+      "PT-PRO-HDR3266-002"
+    ],
+    "independentOracle": "Literal999744+256=1000000 accepted,999745+256=1000001 rejected;999999*999999 overflow wraps ArithmeticException withfixeddiagnostic.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java",
+    "sourceSha256": "2f20adba3d3b4dfa8eef16e36ad571f91c7ffffa9b080a15a04f1bfddabd631f",
+    "declarationLine": 350,
+    "bodyEndLine": 366,
+    "assertionBodySha256": "62ac5dbd322d143df6c01b3c920c3426281db911d7e91ac845e2e1a477e8ea85",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "H8": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerEncodingMatchesIndependentUi232GoldenVector()",
+    "testIds": [
+      "PT-PRO-002-H01"
+    ],
+    "independentOracle": "Independent256byte array ofASCIIspace; offsets0/8/11/19/22/24/60/96/177/181/187/193/199 filled literal UI232 fields; expected never from Production encoder.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+    "sourceSha256": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca",
+    "declarationLine": 45,
+    "bodyEndLine": 71,
+    "assertionBodySha256": "cf8f64bfc09c4bd67a380c1e18fa914d9fe4981147b2f0072e6486f064f78839",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  }
+}
