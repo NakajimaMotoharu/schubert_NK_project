@@ -1,0 +1,447 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T19:05:08.556081+09:00",
+  "inputHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcherTest.java": "928335e3107e3331d3c689608009b575ad0f1c9c7c38dc5bbb0305c6d2143f72",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxNormalCyclePortTest.java": "b8b87e92cd77957e453f82510ca4606492dfa7121943220f556cb49493271f4a",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "evidence/01_PT/005_NK-MSG-001/input/047_owned_outbox_normal_qualifier.py": "50c64f5b0099969f0e7ac9bb7024d2a0856f79e8c29fff77a76bd84c384a514d",
+    "evidence/01_PT/005_NK-MSG-001/input/046_owned_outbox_normal_scope.json": "dd04f241c66bdd3417a2fdb48310266e8e001e262e9e2bb2e4da8a7e8730edff"
+  },
+  "compileManifestSha256": "8c4a2cc136cf41aead0ba10d40eef2b15cfc71acc61a3d0f95af1c14db2faa76",
+  "staticManifestSha256": "cc65a1f680e8219e7b49c663dc905ef9b1eed64714307ec45eebd9a936ff1b6e",
+  "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+  "normalPositiveMainIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json",
+    "sha256": "db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723"
+  },
+  "oldSixEligibilityManifest": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG24258-owned-outbox-bounded-preflight-v1/manifest.json",
+    "sha256": "e47b3f5b00c6d769bde273688da5a3d321c1d637b9786508d6ae7dc7f95de372"
+  },
+  "originalSixSourceUnchanged": true,
+  "newWholeClassMethods": 1,
+  "originalWholeClassMethods": 6,
+  "reviewedNormalTestSha256": "b8b87e92cd77957e453f82510ca4606492dfa7121943220f556cb49493271f4a",
+  "helperSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java": "e256ea773aa38e4adaaeae4bc9851c06119a8e93264d0dc49c9c120a1626e30d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java": "d8603bd5929c107b2711f0d3483adb9299e613994703df7bbb7a57934153f1de",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java": "09bb3b7767c6c09c5c8685088a7ef0494898aedc478307cbd44a14cfa7dd0ef4",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender.java": "b658f0d221ad087390f22f8445abea835743b2223fa7598d32ccff14a39896d7",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.java": "c9ba13a64c580fea33b744134a5534d44142233f72a28c40d5cc0442e2fc472f"
+  },
+  "callPathReview": [
+    {
+      "callee": "transaction",
+      "path": "fixed Connection proxy open -> setAutoCommit(false) returns"
+    },
+    {
+      "callee": "repository.claim",
+      "path": "getAutoCommit false -> scalar validowner/now/limit -> SQL binds -> result.next false -> List.copyOf empty; no read/requireValue"
+    },
+    {
+      "callee": "claim cleanup",
+      "path": "result/statement close unconditional -> commit returns -> connection close unconditional; rollback also unconditional in any assertion error"
+    },
+    {
+      "callee": "dispatch",
+      "path": "empty list -> no sender/mark -> OutboxDispatchReport(0,0,0,0) -> normal run return"
+    },
+    {
+      "callee": "owned stop",
+      "path": "no callback wait; parent5s latch bounded; finallyclose wakes own monitor and joins only own worker; no external lifetime/resource"
+    }
+  ],
+  "independentDesignBlobHashes": {
+    "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+    "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+  },
+  "canonicalDesignBranch": "origin/main",
+  "normalEmptyResultOnly": true,
+  "cleanupCallbacksNonThrowing": true,
+  "heldAttachSecondaryUnreachable": true,
+  "noJmsContextAcquired": true,
+  "noDriverOrActualBackendOperations": true,
+  "noOldRootOrHeldFixtureExtraction": true,
+  "pmdRawFindings": 20,
+  "applicableStaticViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "staticClassifications": [
+    {
+      "finding": {
+        "beginline": "26",
+        "endline": "26",
+        "begincolumn": "9",
+        "endcolumn": "17",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "graph322001NestedFatalStopsOwnedWorkerBeforeAnotherDispatch",
+        "variable": "previous",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this PrintStream object are closed after use"
+      },
+      "applicableViolation": false,
+      "reason": "ByteArrayOutputStream is only a memory sink; owning PrintStream uses TWR and closes it even on assertion failure, System.err is restored in outer finally."
+    },
+    {
+      "finding": {
+        "beginline": "35",
+        "endline": "35",
+        "begincolumn": "42",
+        "endcolumn": "48",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "graph322001NestedFatalStopsOwnedWorkerBeforeAnotherDispatch",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only owned worker/thread/interrupt and finite latch/Future observations, outside J2EE. Original close stop/interrupt/self-join ownership is under test; all callback waits now finite, inner finally releases before joining executor, outer finally closes worker."
+    },
+    {
+      "finding": {
+        "beginline": "40",
+        "endline": "40",
+        "begincolumn": "34",
+        "endcolumn": "40",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "graph322001NestedFatalStopsOwnedWorkerBeforeAnotherDispatch",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only owned worker/thread/interrupt and finite latch/Future observations, outside J2EE. Original close stop/interrupt/self-join ownership is under test; all callback waits now finite, inner finally releases before joining executor, outer finally closes worker."
+    },
+    {
+      "finding": {
+        "beginline": "146",
+        "endline": "146",
+        "begincolumn": "9",
+        "endcolumn": "18",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "outbox005AssemblyStartsNoClaimsAndStartCloseAreSingleOwner",
+        "variable": "unstarted",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this OwnedOutboxDispatcher object are closed after use"
+      },
+      "applicableViolation": false,
+      "reason": "Unstarted OwnedOutboxDispatcher is closed immediately and twice, then restart rejection/health are the actual oracle. No worker starts before the first close; use-after-close is an intentional state assertion, not a reopened resource."
+    },
+    {
+      "finding": {
+        "beginline": "202",
+        "endline": "202",
+        "begincolumn": "21",
+        "endcolumn": "27",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "outbox002CloseJoinsInFlightDispatchBeforeOwnerCanReleaseDependencies",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only owned worker/thread/interrupt and finite latch/Future observations, outside J2EE. Original close stop/interrupt/self-join ownership is under test; all callback waits now finite, inner finally releases before joining executor, outer finally closes worker."
+    },
+    {
+      "finding": {
+        "beginline": "207",
+        "endline": "207",
+        "begincolumn": "25",
+        "endcolumn": "60",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "outbox002CloseJoinsInFlightDispatchBeforeOwnerCanReleaseDependencies",
+        "variable": "executor",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only owned worker/thread/interrupt and finite latch/Future observations, outside J2EE. Original close stop/interrupt/self-join ownership is under test; all callback waits now finite, inner finally releases before joining executor, outer finally closes worker."
+    },
+    {
+      "finding": {
+        "beginline": "211",
+        "endline": "218",
+        "begincolumn": "13",
+        "endcolumn": "19",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "outbox002CloseJoinsInFlightDispatchBeforeOwnerCanReleaseDependencies",
+        "variable": "closing",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only owned worker/thread/interrupt and finite latch/Future observations, outside J2EE. Original close stop/interrupt/self-join ownership is under test; all callback waits now finite, inner finally releases before joining executor, outer finally closes worker."
+    },
+    {
+      "finding": {
+        "beginline": "213",
+        "endline": "213",
+        "begincolumn": "19",
+        "endcolumn": "25",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "outbox002CloseJoinsInFlightDispatchBeforeOwnerCanReleaseDependencies",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only owned worker/thread/interrupt and finite latch/Future observations, outside J2EE. Original close stop/interrupt/self-join ownership is under test; all callback waits now finite, inner finally releases before joining executor, outer finally closes worker."
+    },
+    {
+      "finding": {
+        "beginline": "215",
+        "endline": "215",
+        "begincolumn": "39",
+        "endcolumn": "45",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "outbox002CloseJoinsInFlightDispatchBeforeOwnerCanReleaseDependencies",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only owned worker/thread/interrupt and finite latch/Future observations, outside J2EE. Original close stop/interrupt/self-join ownership is under test; all callback waits now finite, inner finally releases before joining executor, outer finally closes worker."
+    },
+    {
+      "finding": {
+        "beginline": "216",
+        "endline": "216",
+        "begincolumn": "19",
+        "endcolumn": "25",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "outbox002CloseJoinsInFlightDispatchBeforeOwnerCanReleaseDependencies",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only owned worker/thread/interrupt and finite latch/Future observations, outside J2EE. Original close stop/interrupt/self-join ownership is under test; all callback waits now finite, inner finally releases before joining executor, outer finally closes worker."
+    },
+    {
+      "finding": {
+        "beginline": "236",
+        "endline": "236",
+        "begincolumn": "9",
+        "endcolumn": "17",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "outbox003FatalIdentityIsNotNormalAndOnlyFixedRedactedStderrEscapes",
+        "variable": "previous",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this PrintStream object are closed after use"
+      },
+      "applicableViolation": false,
+      "reason": "ByteArrayOutputStream is only a memory sink; owning PrintStream uses TWR and closes it even on assertion failure, System.err is restored in outer finally."
+    },
+    {
+      "finding": {
+        "beginline": "265",
+        "endline": "265",
+        "begincolumn": "21",
+        "endcolumn": "27",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "outbox004InterruptAndSelfJoinNeverLoseLifetimeOrInterruptState",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only owned worker/thread/interrupt and finite latch/Future observations, outside J2EE. Original close stop/interrupt/self-join ownership is under test; all callback waits now finite, inner finally releases before joining executor, outer finally closes worker."
+    },
+    {
+      "finding": {
+        "beginline": "270",
+        "endline": "270",
+        "begincolumn": "30",
+        "endcolumn": "36",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "outbox004InterruptAndSelfJoinNeverLoseLifetimeOrInterruptState",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only owned worker/thread/interrupt and finite latch/Future observations, outside J2EE. Original close stop/interrupt/self-join ownership is under test; all callback waits now finite, inner finally releases before joining executor, outer finally closes worker."
+    },
+    {
+      "finding": {
+        "beginline": "272",
+        "endline": "272",
+        "begincolumn": "19",
+        "endcolumn": "25",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "outbox004InterruptAndSelfJoinNeverLoseLifetimeOrInterruptState",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only owned worker/thread/interrupt and finite latch/Future observations, outside J2EE. Original close stop/interrupt/self-join ownership is under test; all callback waits now finite, inner finally releases before joining executor, outer finally closes worker."
+    },
+    {
+      "finding": {
+        "beginline": "283",
+        "endline": "283",
+        "begincolumn": "7",
+        "endcolumn": "13",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "outbox004InterruptAndSelfJoinNeverLoseLifetimeOrInterruptState",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only owned worker/thread/interrupt and finite latch/Future observations, outside J2EE. Original close stop/interrupt/self-join ownership is under test; all callback waits now finite, inner finally releases before joining executor, outer finally closes worker."
+    },
+    {
+      "finding": {
+        "beginline": "285",
+        "endline": "285",
+        "begincolumn": "18",
+        "endcolumn": "24",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "outbox004InterruptAndSelfJoinNeverLoseLifetimeOrInterruptState",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only owned worker/thread/interrupt and finite latch/Future observations, outside J2EE. Original close stop/interrupt/self-join ownership is under test; all callback waits now finite, inner finally releases before joining executor, outer finally closes worker."
+    },
+    {
+      "finding": {
+        "beginline": "287",
+        "endline": "287",
+        "begincolumn": "7",
+        "endcolumn": "13",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "outbox004InterruptAndSelfJoinNeverLoseLifetimeOrInterruptState",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only owned worker/thread/interrupt and finite latch/Future observations, outside J2EE. Original close stop/interrupt/self-join ownership is under test; all callback waits now finite, inner finally releases before joining executor, outer finally closes worker."
+    },
+    {
+      "finding": {
+        "beginline": "301",
+        "endline": "301",
+        "begincolumn": "21",
+        "endcolumn": "27",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxDispatcherTest",
+        "method": "outbox004InterruptAndSelfJoinNeverLoseLifetimeOrInterruptState",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only owned worker/thread/interrupt and finite latch/Future observations, outside J2EE. Original close stop/interrupt/self-join ownership is under test; all callback waits now finite, inner finally releases before joining executor, outer finally closes worker."
+    },
+    {
+      "finding": {
+        "beginline": "32",
+        "endline": "32",
+        "begincolumn": "45",
+        "endcolumn": "66",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxNormalCyclePortTest",
+        "method": "port",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "priority": "3",
+        "message": "In J2EE, getClassLoader() might not work as expected. Use Thread.currentThread().getContextClassLoader() instead."
+      },
+      "applicableViolation": false,
+      "reason": "Proxy for fixed java.sql API interface only; its declaring module loader is required for visibility. No untrusted name, context-loader changes, downloaded classes, provider discovery or driver loading."
+    },
+    {
+      "finding": {
+        "beginline": "40",
+        "endline": "40",
+        "begincolumn": "40",
+        "endcolumn": "68",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.messaging.outbound",
+        "class": "OwnedOutboxNormalCyclePortTest.EmptyClaim",
+        "variable": "parameters",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "priority": "3",
+        "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+      },
+      "applicableViolation": false,
+      "reason": "Each EmptyClaim and parameter HashMap is confined to the one owned worker; parent reads only after owned.close joins it. ConcurrentLinkedQueue publishes claims, and latch plus final join publishes all writes. No concurrent map read or mutation."
+    }
+  ],
+  "suppressionAdded": false,
+  "physical": {
+    "dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+  },
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "toolSha256": "da95d3671cd2bf96408f2d571cf561ea26b0b6afe5ff8b81c14e9282b8323637"
+}
