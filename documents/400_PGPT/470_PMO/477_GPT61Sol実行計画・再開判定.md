@@ -1,5 +1,9 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-09 工具lintを起動条件として実施（BUG2560/2564）
+
+新しい工具のimportをコピーせず使用分だけに限定する。lintとbodyを別shell行で無条件に並べない。tools/qualityの正規no-arg entryは既pg11123_checked_python_entryでlint先行・実sys.argv/orig_argvを保ち、input内の準備工具はlintの戻り値が厳密int0と確認できた後だけ別のtool callでbodyを起動する。非0/False/未知を成功へ正規化しない。現準備24912のlint1とbody0は両方保持し、unused importだけを除去・旧AST/出力を独立照合して成功prepareを再演しない。以後は現在のConsole/Jar/SDKプロフィールを先に実物確認し、旧Maven cpfile契約をMain専用normalへ転用しない。今回24920原9終了0/24922独立・三owner有限化は限定再試験であり、全2177/451受入・仕様/モデル/枠条件を変更しない。
+
 ## 2026-11-08 metadata否定前後差も型を保持する
 
 BUG2520/YKT2257ではstrict verifier自体に型検証があっても、否定vectorの前後差をPython等値で確認して0/Falseを同視した。新しい否定vectorには必ず実変異があることを型を保持するcanonical JSON等で確認し、元型との同視を避ける。int0/boolFalse、int1/boolTrue、float0.0/int0、入子と同値dict順序を有限回帰に含める。新汎用parserを増やさず局所guardを用い、既成功producerの確認再演や品質/モデル/HOLD/停止条件変更をしない。元失敗24206と原見積/工具手戻りを保持する。
