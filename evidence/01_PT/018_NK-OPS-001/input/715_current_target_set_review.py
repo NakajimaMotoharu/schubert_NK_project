@@ -1,0 +1,24 @@
+"""Metadata-only inventory of disjoint limited target evidence; never merges execution data."""
+from pathlib import Path
+import datetime,hashlib,json,re,subprocess,xml.etree.ElementTree as E
+R=Path.cwd();sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();load=lambda p:json.loads(Path(p).read_bytes());write=lambda p,v:Path(p).write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
+cfg=load(R/'evidence/01_PT/018_NK-OPS-001/input/714_current_target_scope.json');assert sha(R/cfg['normalIndex'])==cfg['indexSha256'];idx=load(R/cfg['normalIndex']);normal=load(R.parent/'pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/manifest.safe.json');assert normal['source']=='7aed8eace7c844c2f79f2e39db766faf914890d5';allcases=set();allphysical=set();allsources=set();alltests=set();groups=[];counts={k:0 for k in ['LINE','METHOD','CLASS','BRANCH','INSTRUCTION']}
+for ref in cfg['posts']:
+ p=R/ref['path'];assert sha(p)==ref['sha256'];m=load(p);assert type(m['actualExit']) is int and m['actualExit']==0;assert m['productionCoreMain']==normal['source'] and m['formalUpdated'] is False and m['newAcceptance']==0 and m['effortRate'] is None
+ if ref['tag']=='24416':cases={(v['classname'],v['name']) for v in m['testCases']};inputs=m['inputHashes'];phys={};sources=set();cov=None
+ else:
+  assert m['heldFourInitializations']==m['heldFourPositiveMainProbes']==0 and m['allObservedMainCrcMatchCurrentNormal'] is True;cases={(v['classname'],v['name'].removesuffix('()')) for v in m['caseTimings']};original=load(p.parent/'original-manifest.json');inputs=original['begin']['inputHashes'];phys=original['physical'];xml=p.parent/'coverage.xml';assert sha(xml)==m['files']['coverage.xml'];root=E.parse(xml).getroot();names={x.get('name') for x in root.findall('.//class')};assert names==set(phys);sources={idx[n]['path'] for n in phys};cov={x.get('type'):dict(covered=int(x.get('covered')),missed=int(x.get('missed'))) for x in root.findall('counter')};assert all(cov.get(k,dict(covered=0,missed=0))==m['coverage'][k] for k in counts)
+  for name,h in phys.items():assert idx[name]['sha256']==h and idx[name]['hasCode'] is True
+  for sp in sources:assert sha(R/sp)==normal['begin']['inputHashes'][sp]
+  for k in counts:assert cov.get(k,dict(covered=0,missed=0))['missed']==0;counts[k]+=cov.get(k,dict(covered=0,missed=0))['covered']
+ assert len(cases)==m['tests'] and all(not m[k] for k in ['failures','errors','skipped','aborted']);assert not allcases.intersection(cases) and not allphysical.intersection(phys) and not allsources.intersection(sources)
+ tests={n:h for n,h in inputs.items() if '/src/test/java/' in n};assert len(tests)>0
+ for n,h in tests.items():assert sha(R/n)==h and hashlib.sha256(subprocess.check_output(['git','show',m['source']+':'+n])).hexdigest()==h
+ allcases.update(cases);allphysical.update(phys);allsources.update(sources);alltests.update(tests);groups.append(dict(reference=ref,source=m['source'],tests=m['tests'],cases=[dict(classname=a,name=b) for a,b in sorted(cases)],testSourceHashes=tests,sources=sorted(sources),physical=phys,coverage=cov,javaCoverageApplicable=cov is not None,productTestsExecutedNow=0))
+assert len(allcases)==199 and sum(x['tests'] for x in groups[:-1])==171 and len(allphysical)==53 and len(allsources)==34 and len(alltests)==24;assert counts==dict(LINE=1242,METHOD=367,CLASS=53,BRANCH=470,INSTRUCTION=5785)
+# The earlier six successful cases had a coverage gap, then repeat inside the seven-run.
+p=R/'evidence/01_PT/005_NK-MSG-001/evidence/PG24262-owned-outbox-bounded-six-independent-v1/manifest.json'
+if not p.exists():
+ matches=list((R/'evidence/01_PT/005_NK-MSG-001/evidence').glob('PG24262-*/manifest.json'));assert len(matches)==1;p=matches[0]
+old=load(p);oldcases={(x['classname'],x['name'].removesuffix('()')) for x in old['caseTimings']};assert len(oldcases)==6 and oldcases.issubset(allcases) and old['targetCoverageGateExit']==1
+out=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG24432-current-target-set-review-v1';assert not out.exists();out.mkdir();write(out/'manifest.json',dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),source=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),productionCoreMain=normal['source'],groups=groups,disjointTargetSources=34,disjointTargetPhysicalClasses=53,distinctJavaCases=171,distinctDomCases=28,distinctCases=199,distinctTestSources=24,perRunCounterArithmetic=counts,mergedCoverage=False,sameFullRun=False,sourceSameForWholeFormal=False,originalFirstSixCoverageHold=dict(path=str(p.relative_to(R)),sha256=sha(p),gate=1,duplicateCases=6),historicalExecutionsInThisSubset=205,newExecutions=0,newUniqueTests=0,productTestsExecuted=0,formalUpdated=False,newAcceptance=0,effortRate=None,toolSha256=sha(__file__)));print(dict(actualExit=0,disjointSources=34,classes=53,javaCases=171,domCases=28))

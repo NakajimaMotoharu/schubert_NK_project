@@ -1,0 +1,1184 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T21:00:44.577172+09:00",
+  "source": "f052d5cda60a616546cef0177eb94c13ad6a969f",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "groups": [
+    {
+      "reference": {
+        "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG24282-owned-outbox-normal-seven-independent-v1/manifest.json",
+        "sha256": "74ea898a93348410302cae7b6e5fa6b722bb51d3571103b0953658075b19c543",
+        "tag": "24282"
+      },
+      "source": "d5059dad90676d13b23549013b1728255b91bb87",
+      "tests": 7,
+      "cases": [
+        {
+          "classname": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+          "name": "graph322001NestedFatalStopsOwnedWorkerBeforeAnotherDispatch"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+          "name": "outbox001TemporaryDbAndRuntimeFailureRetryClosedAndNullBoundaries"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+          "name": "outbox002CloseJoinsInFlightDispatchBeforeOwnerCanReleaseDependencies"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+          "name": "outbox003FatalIdentityIsNotNormalAndOnlyFixedRedactedStderrEscapes"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+          "name": "outbox004InterruptAndSelfJoinNeverLoseLifetimeOrInterruptState"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+          "name": "outbox005AssemblyStartsNoClaimsAndStartCloseAreSingleOwner"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxNormalCyclePortTest",
+          "name": "ownEmpty001NormalEmptyClaimsCommitAndCloseBeforeOwnedStop"
+        }
+      ],
+      "testSourceHashes": {
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcherTest.java": "928335e3107e3331d3c689608009b575ad0f1c9c7c38dc5bbb0305c6d2143f72",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxNormalCyclePortTest.java": "b8b87e92cd77957e453f82510ca4606492dfa7121943220f556cb49493271f4a"
+      },
+      "sources": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java"
+      ],
+      "physical": {
+        "dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+      },
+      "coverage": {
+        "INSTRUCTION": {
+          "covered": 247,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 28,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 66,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 23,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 9,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "javaCoverageApplicable": true,
+      "productTestsExecutedNow": 0
+    },
+    {
+      "reference": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24326-read-four-bounded-thirtytwo-independent-v1/manifest.json",
+        "sha256": "f851f82027183619f5395d36b6f3bb4892c73cb2593309c599aa5ad5a799b258",
+        "tag": "24326"
+      },
+      "source": "99acc908a59b3a929814b42cc6777b9e51381d24",
+      "tests": 32,
+      "cases": [
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+          "name": "web238AnimationRequests"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+          "name": "web239SuccessProfiles"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+          "name": "web240ErrorProfiles"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+          "name": "web241MalformedReplies"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+          "name": "web242CapabilitiesAndNull"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+          "name": "web243TransportFailures"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+          "name": "web244ConcurrentRequests"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+          "name": "web245OwnershipAndDiagnostics"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+          "name": "web270Requests"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+          "name": "web271SuccessProfiles"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+          "name": "web272ErrorProfiles"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+          "name": "web273MalformedReplies"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+          "name": "web274CapabilitiesAndNull"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+          "name": "web275TransportFailures"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+          "name": "web276ConcurrentRequests"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+          "name": "web277OwnershipAndDiagnostics"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+          "name": "web254Requests"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+          "name": "web255SuccessProfiles"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+          "name": "web256ErrorProfiles"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+          "name": "web257MalformedReplies"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+          "name": "web258CapabilitiesAndNull"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+          "name": "web259TransportFailures"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+          "name": "web260ConcurrentRequests"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+          "name": "web261OwnershipAndDiagnostics"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+          "name": "web166SixRequestsMatchIndependentWire"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+          "name": "web167SixSuccessResponsesDecodeWithoutRetainingSecrets"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+          "name": "web168ApprovedErrorsNeverExposeSuccessPayload"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+          "name": "web169MalformedUncorrelatedAndForeignResponsesReject"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+          "name": "web170InputAndConfigurationFaultsNeverSend"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+          "name": "web171TransportFailuresDoNotRetryOrLeakPending"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+          "name": "web172ConcurrentQueriesKeepContextsAndRepliesSeparate"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+          "name": "web173ResponseBoundsAndCallerOwnershipRemainExact"
+        }
+      ],
+      "testSourceHashes": {
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/AnimationWireClientTest.java": "f51412a13aba498e5d406f33835d045511bc4538e15e3865a05ff6af2342dc2e",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/LogSearchWireClientTest.java": "4da4b4d9f08b1540bfd7310da3fdfc630c66cad585d7ae9e8398630f96fe5429",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/MusicWireClientTest.java": "2e96312837fdca9e8d2b416c1f05411ff2cbaf46fd9d1dfb348fb15612555539",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClientTest.java": "dd9f38904e55bfbf51119d736393f968c0f4785cf10c72294c3770c421a7ce0e"
+      },
+      "sources": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/AnimationWireClient.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/LogSearchWireClient.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/MusicWireClient.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClient.java"
+      ],
+      "physical": {
+        "dev/codex/schubert/nk/web/messaging/AnimationWireClient": "5605eeddfffef1511186e5611d750b97e0cfd9ae22cfbff9d91c056bea0ffd0e",
+        "dev/codex/schubert/nk/web/messaging/MusicWireClient": "f0a27f94111e162e19d29faffb5cee204e834709e5e0d9f844ed6cef48710e7f",
+        "dev/codex/schubert/nk/web/messaging/ScenarioWireClient": "7663716dc6e851b625c24a7f3730711ae38357adac235159a5cfcf0b6eb3e450",
+        "dev/codex/schubert/nk/web/messaging/LogSearchWireClient": "ba5157558697987b42dab71e9049f7f5d4297db2031e65d5018830a54b2f1e46",
+        "dev/codex/schubert/nk/web/messaging/ScenarioWireClient$Result": "7c622a4f6bfce349ce3b92b7d7f7345f1f30409001e8d71cc64c4b0aef73b703"
+      },
+      "coverage": {
+        "INSTRUCTION": {
+          "covered": 120,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 29,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 12,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 12,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 5,
+          "missed": 0
+        }
+      },
+      "javaCoverageApplicable": true,
+      "productTestsExecutedNow": 0
+    },
+    {
+      "reference": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24352-web-business-bounded-twelve-independent-v1/manifest.json",
+        "sha256": "feef511899ff6881662639d428d90755d5250e5316b28b1c6e0d7e6d14e37d73",
+        "tag": "24352"
+      },
+      "source": "4aae7d1298fcb01e573b3fcc12655da45d7609ee",
+      "tests": 12,
+      "cases": [
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+          "name": "wire001EighteenRequestsMatchIndependentUiByteOffsets"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+          "name": "wire002AcceptanceAndIdempotentResultsRemainTyped"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+          "name": "wire003CapabilitiesAreClosedBeforeTransport"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+          "name": "wire004NullConfigurationAndInputNeverBecomeValidWork"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+          "name": "wire005AcceptanceRejectsWrongKindContextGenerationAndFiller"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+          "name": "wire006ErrorsTimeoutAndUnknownFailuresNeverRetry"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+          "name": "wire007RetriesUseNewMessageIdsAndRetainOperationTokenOnly"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+          "name": "wire008ConcurrentFacadesKeepRepliesAndContextsSeparate"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+          "name": "wire009QuestionPageRecordsUseIndependentUiVectorsAndPreserveOrder"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+          "name": "wire010RequestRecordsAreRejectedBeforeEncodingOrSending"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+          "name": "wire011ResponseShapeMismatchNeverBecomesAQuestionPage"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+          "name": "wire012MalformedQuestionRecordsAreRejectedWithoutRetry"
+        }
+      ],
+      "testSourceHashes": {
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest.java": "76cb1f7dd520eecf763f60a7320d4d3b946a3e7ea947e1f7e5f3fd188abea9c7"
+      },
+      "sources": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/LogoutWireClient.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/MediaDescriptorWireClient.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/NotificationWireClient.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/QuestionWireClient.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/UserAdministrationWireClient.java"
+      ],
+      "physical": {
+        "dev/codex/schubert/nk/web/messaging/LogoutWireClient": "aeb96b56e6114e1476be2ca317eb965c78498001413feea740ed56b89678c52f",
+        "dev/codex/schubert/nk/web/messaging/MediaDescriptorWireClient": "e472fa30a7883914bf35ad320c9a9a0654e4cfd4534ccfa2653f6d7919e7c42a",
+        "dev/codex/schubert/nk/web/messaging/NotificationWireClient": "f0eec80f63a4c85a6c362634b0d6d6c0b0a83d77a2424b86f8cdc46dda50591b",
+        "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient": "4ee7d1588e11822a94b0016fab6920acc37313c97c3773e56035e5878d550e08",
+        "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$Result": "711ff5522d807edb748bc8dcc5c6eecc3a1d516ae2baef0268399603add88cd9",
+        "dev/codex/schubert/nk/web/messaging/QuestionWireClient": "54007c59b677c6d9751c2699ad0b34389e34f08b46e3c3b24ffe73f660bba483",
+        "dev/codex/schubert/nk/web/messaging/UserAdministrationWireClient": "9f964ac6fb25dc5be027bcfdd7775888ff8668b14e10e92ab6736ec8246ff711"
+      },
+      "coverage": {
+        "INSTRUCTION": {
+          "covered": 484,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 26,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 105,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 34,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 21,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 7,
+          "missed": 0
+        }
+      },
+      "javaCoverageApplicable": true,
+      "productTestsExecutedNow": 0
+    },
+    {
+      "reference": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24370-pure-view-seven-bounded-sixtyfour-independent-v1/manifest.json",
+        "sha256": "bb83280e8349a3049e2ce6956d01d6bbb2b59a3eae2945e73a8962a40b633ec5",
+        "tag": "24370"
+      },
+      "source": "ed2e968a8381c491ba8df6986e59d48afb0b9c0f",
+      "tests": 64,
+      "cases": [
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest",
+          "name": "web262CompleteRow"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest",
+          "name": "web263OptionalFields"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest",
+          "name": "web264PageBounds"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest",
+          "name": "web265OrderingAndIdentity"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest",
+          "name": "web266NullRoleAndOwnership"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest",
+          "name": "web267ClosedBeansAndRedaction"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest",
+          "name": "web268SyntheticHtmlEscaping"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest",
+          "name": "web269ConcurrentProjection"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LogSearchViewModelTest",
+          "name": "web286SuccessfulSnapshot"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LogSearchViewModelTest",
+          "name": "web287Pagination"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LogSearchViewModelTest",
+          "name": "web288QueryEncoding"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LogSearchViewModelTest",
+          "name": "web289ResponseBinding"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LogSearchViewModelTest",
+          "name": "web290InvalidFields"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LogSearchViewModelTest",
+          "name": "web291NullRoleOwnership"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LogSearchViewModelTest",
+          "name": "web292ClosedBeanAndEscaping"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LogSearchViewModelTest",
+          "name": "web293ConcurrentViews"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest",
+          "name": "web246CategorySnapshot"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest",
+          "name": "web247SectionSnapshot"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest",
+          "name": "web248SizeAndCountBounds"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest",
+          "name": "web249DuplicateAndSegment"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest",
+          "name": "web250NullAndOwnership"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest",
+          "name": "web251ClosedBeansAndRedaction"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest",
+          "name": "web252SyntheticHtmlEscaping"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest",
+          "name": "web253ConcurrentProjection"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.PageViewModelTest",
+          "name": "web174EmptyAndSinglePage"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.PageViewModelTest",
+          "name": "web175FirstMiddleAndLastPages"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.PageViewModelTest",
+          "name": "web176MaximumWireBounds"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.PageViewModelTest",
+          "name": "web177InvalidProjectionCombinations"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.PageViewModelTest",
+          "name": "web178NullConfigurationAndRedaction"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.PageViewModelTest",
+          "name": "web179IndependentParallelProjection"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.PageViewModelTest",
+          "name": "web180JavaBeanDisplayContract"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.PageViewModelTest",
+          "name": "web181ThymeleafSyntheticDom"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+          "name": "web194HeaderAndNavigation"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+          "name": "web195GroupingAndAudio"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+          "name": "web196EmptyAndBounds"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+          "name": "web197NullContracts"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+          "name": "web198NavigationPairs"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+          "name": "web199SequenceRejection"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+          "name": "web200EntryMetadataConsistency"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+          "name": "web201ImmutableSnapshot"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+          "name": "web202ClosedBeanContract"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+          "name": "web203SyntheticHtmlEscaping"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+          "name": "web204ConcurrentProjection"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+          "name": "web205RedactedDiagnostics"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest",
+          "name": "web182GameDisplay"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest",
+          "name": "web183RouteDisplay"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest",
+          "name": "web184FileDisplay"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest",
+          "name": "web185NullBoundaries"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest",
+          "name": "web186PrefixBoundaries"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest",
+          "name": "web187SnapshotOwnership"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest",
+          "name": "web188ClosedBeanContract"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest",
+          "name": "web189SyntheticEscaping"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest",
+          "name": "web190ConcurrentProjection"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest",
+          "name": "web191ListSizeBoundaries"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest",
+          "name": "web192PreserveSourceOrder"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest",
+          "name": "web193RedactedDiagnostics"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest",
+          "name": "web206LiteralRowsAndAudio"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest",
+          "name": "web207PageBounds"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest",
+          "name": "web208PageRecordMismatch"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest",
+          "name": "web209AudioAndLineInvariants"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest",
+          "name": "web210NullAndOwnership"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest",
+          "name": "web211ClosedBeansAndRedaction"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest",
+          "name": "web212SyntheticEscaping"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest",
+          "name": "web213ConcurrentProjection"
+        }
+      ],
+      "testSourceHashes": {
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchResultsViewModelTest.java": "09a9aead7e61cd9112d24058fccf4840ce7944f3df96433786092a3d571362f3",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchViewModelTest.java": "d6fd5dd2128ff0990e687d6caec8eb10d5e08f50203334943fbfb0b162035d44",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyViewModelTest.java": "c213d7be28e0d5a1eb45f77481f7bc739e6baab5159fade863e3bb9adea84a10",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/PageViewModelTest.java": "425e4c1aceaf3b53e80df9550eba7b275ada1e42b89328eaec7035b6b7fdcea1",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailViewModelTest.java": "2f36c481df8f9461b53f77e344342450392f3de05df7359cfcf7923910cb6820",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioHierarchyViewModelTest.java": "90988ece7c893f667a33a1dba475bbf188b85a30ccbd5cf137c0f128ecc87293",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchResultsViewModelTest.java": "cbea43c163c40254cf55d8154f386da256fa4cd3093b47e1469fbee43f4ea9ee"
+      },
+      "sources": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/GameListViewModel.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/LogSearchResultsViewModel.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/LogSearchViewModel.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MusicCategoryViewModel.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MusicSectionViewModel.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/PageViewModel.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/RouteListViewModel.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ScenarioDetailViewModel.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ScenarioFileListViewModel.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ScenarioSearchResultsViewModel.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java"
+      ],
+      "physical": {
+        "dev/codex/schubert/nk/web/view/GameListViewModel": "2ded5752141049102ef5fcb18099c9554698b0e97f422ad8f55bb1a3f28ed2a6",
+        "dev/codex/schubert/nk/web/view/GameListViewModel$Card": "6bca0d588fb4422e13ca15bf12393da7ef25d62685e67ca71540c79f50e029d7",
+        "dev/codex/schubert/nk/web/view/LogSearchResultsViewModel": "4dc8e6879ad30414f9571af06087be1237e003692dc05d6df7a069ae64dc387e",
+        "dev/codex/schubert/nk/web/view/LogSearchResultsViewModel$Row": "610d692f808e81679c92a6a1c65943ac82fe5c7fb45228f25f3095b2818ed52e",
+        "dev/codex/schubert/nk/web/view/LogSearchViewModel": "5c2199002e3227a0862a2a26f522d3cac76ce1a546111c7e4584770557c31483",
+        "dev/codex/schubert/nk/web/view/LogSearchViewModel$FieldError": "5d56ecaa542ebd3ec0341651ab59c4b74f596b4d3fcce19ceb83f4d3af47e244",
+        "dev/codex/schubert/nk/web/view/LogSearchViewModel$Filters": "e7bc751781a018a674bf683813193254330f30bd939af1a0e2de18d15dc4a24c",
+        "dev/codex/schubert/nk/web/view/MusicCategoryViewModel": "b1596f90b47cf88ec7127f67bfc6adca89d1d64e40a8038b45b9f9a7779867f0",
+        "dev/codex/schubert/nk/web/view/MusicCategoryViewModel$Card": "ee2afd3ef66b6b9030adae035f901ae1b3029e96c5ac0fb2ee49c1ead75580e6",
+        "dev/codex/schubert/nk/web/view/MusicSectionViewModel": "bb16af097dcbc22f7007ca8e4746ae5fb413a4d9d460ee9c1cdec21083633c49",
+        "dev/codex/schubert/nk/web/view/MusicSectionViewModel$Card": "272028ef847cbd83adf3b5d5cd9fa9d8409549eaff09bc629f9692c520a8ddc0",
+        "dev/codex/schubert/nk/web/view/PageViewModel": "79f1a49b217008d873518ba2da6f5e871ed0a2e5f13f74ca9336675a65fd6a21",
+        "dev/codex/schubert/nk/web/view/RouteListViewModel": "65d3a96f33d7c948a0da4dfecaf0b6109ff7050d07fcf5d35d923f54f24b5381",
+        "dev/codex/schubert/nk/web/view/RouteListViewModel$Card": "01ea7632f2ae88591c03de565c5610a2d7066131a4d27ef16b12544db6b1dda6",
+        "dev/codex/schubert/nk/web/view/ScenarioDetailViewModel": "fb9c4c295b1ec61980cd67f995602f97cb280f5136ca7211366f8e702a43cea7",
+        "dev/codex/schubert/nk/web/view/ScenarioDetailViewModel$Audio": "4b4a87de393d3354969a19b776897d6ddb9fa04d8ac9acd0404fd282fdb2b198",
+        "dev/codex/schubert/nk/web/view/ScenarioDetailViewModel$Entry": "9c3f5ff9b457ed138861d937c77d4d2fba285c9faef1fc5890026b396c5ec4c7",
+        "dev/codex/schubert/nk/web/view/ScenarioDetailViewModel$Navigation": "704cfe476ed3db3502f5f244eab4f34cb43d43a53b2cfa816dafe2c9550607f1",
+        "dev/codex/schubert/nk/web/view/ScenarioFileListViewModel": "7298a8b13de1e9c1157d2c598c50099e9845bb7985c2818a55de5bcd5f3d7a07",
+        "dev/codex/schubert/nk/web/view/ScenarioFileListViewModel$Card": "649417607365df1f5035b9fb849b2035e2445a4e689e3fc90e73c005d47fb46d",
+        "dev/codex/schubert/nk/web/view/ScenarioSearchResultsViewModel": "4679ad4e9021ac1226d5db38d562309ecc5fc66b16ba5bb4d59ca7935f6c2cf1",
+        "dev/codex/schubert/nk/web/view/ScenarioSearchResultsViewModel$Audio": "1d8164d74f0c788c9ba62bed077c807af6861895587cc536deb78f92e479d3ef",
+        "dev/codex/schubert/nk/web/view/ScenarioSearchResultsViewModel$Row": "add020ce4cc2c1379f9739896192450995f81422756f1f5b79999b26e9b38757",
+        "dev/codex/schubert/nk/web/view/TopBarViewModel": "ccd4215b0fc53248d9c7ae6f930ad59fa3e108af86993e91cfd792c2761579a8"
+      },
+      "coverage": {
+        "INSTRUCTION": {
+          "covered": 2155,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 138,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 498,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 272,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 203,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 24,
+          "missed": 0
+        }
+      },
+      "javaCoverageApplicable": true,
+      "productTestsExecutedNow": 0
+    },
+    {
+      "reference": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24396-web-six-form-bounded-fiftysix-independent-v1/manifest.json",
+        "sha256": "ea97726181dbdf1c210d2316c70467ad0765b7b8ef011ee10d01c5758b013d96",
+        "tag": "24396"
+      },
+      "source": "2dd95b08fd3d03307a4a3d26ba7eeef824b640c3",
+      "tests": 56,
+      "cases": [
+        {
+          "classname": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+          "name": "web278DefaultsAndFilters"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+          "name": "web279TextAndBinding"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+          "name": "web280Characters"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+          "name": "web281PageAndEnums"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+          "name": "web282Dates"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+          "name": "web283DateRange"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+          "name": "web284NullOwnershipAndRedaction"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+          "name": "web285ConcurrentBinding"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+          "name": "qstForm001IndependentGoldenAndNoQuestionTrimming"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+          "name": "qstForm002ByteBoundariesAfterNfcWithoutTruncation"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+          "name": "qstForm003ControlsUnicodeAndTrailingSpaceAreNotTrimmed"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+          "name": "qstForm004CanonicalUuidSyntaxWithoutIssuingAuthorization"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+          "name": "qstForm005ClosedBindingMissingDuplicateAndNullContracts"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+          "name": "qstForm006ImmutableSnapshotsAndRedaction"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+          "name": "qstForm007TerminalClosePreservesOtherOwners"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+          "name": "qstForm008ConcurrentIndependentBodiesAndTokens"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+          "name": "web214CanonicalRequest"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+          "name": "web215ByteBoundaries"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+          "name": "web216UnicodeAndEnums"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+          "name": "web217BindingAllowlist"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+          "name": "web218PageBoundaries"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+          "name": "web219InvalidCannotRequest"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+          "name": "web220NullOwnershipRedaction"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+          "name": "web221ConcurrentValidation"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+          "name": "target001BothIndependentFortyEightByteGolden"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+          "name": "target002PositiveN12BoundariesAndCanonicalTargetEquality"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+          "name": "target003EachRequiredFieldMissingNullEmptyMultipleAndNullElement"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+          "name": "target004ClosedOperationConfirmationAndCanonicalUuid"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+          "name": "target005ClosedFieldsAndOnlyCsrfTransportAllowance"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+          "name": "target006TopLevelNullAndUnsupportedInternalSelector"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+          "name": "target007ClosedImmutableSnapshotsDoNotRetainMutableInput"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+          "name": "target008OneHundredParallelBindHasNoSharedMutableState"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+          "name": "create001IndependentWireAndClosedRoleEnabledValues"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+          "name": "create002NfcCodePointAndByteBoundariesWithoutPasswordTrimming"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+          "name": "create003RequiredClosedBindingAndNullContracts"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+          "name": "create004UsernamePasswordAndUnicodeRejections"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+          "name": "create005ConfirmationEnumFlagAndCanonicalToken"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+          "name": "create006ImmutableProjectionAndSecretLifetime"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+          "name": "create007OneHundredConcurrentIndependentRequests"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+          "name": "create008InvalidSecretsRemainAbsentAndClosedInvalidCannotSend"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "name": "change001StatusGolden"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "name": "change002RoleGolden"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "name": "change003UnlockGolden"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "name": "change004PasswordGoldenAndNoSecretProjection"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "name": "change005OperationAndUnknownFieldRejection"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "name": "change006PathAndHiddenIdentifier"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "name": "change007VersionSyntax"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "name": "change008ConfirmAndTokenSyntax"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "name": "change009ClosedRoleAndBoolean"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "name": "change010PasswordNfcCodepointByteBoundaries"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "name": "change011PasswordInvalidAndTrustedUsername"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "name": "change012NullMissingAndDuplicates"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "name": "change013ImmutableSnapshotAndRedaction"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "name": "change014TerminalCloseAndSeparateDto"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "name": "change015OneHundredIndependentParallelOperations"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "name": "change016InputCannotGrantApiAuthority"
+        }
+      ],
+      "testSourceHashes": {
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java": "631f6ed36f7bd9445df72efdab0635fd8f67b851ed054213ae69cf434d6986be",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java": "3470a69bb98ee7825309ec48cb30185614c90acbb4e3af35765b079c2563fdff",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/ScenarioSearchFormTest.java": "3665616b51d865a781784277df0a842e0d34108f45244be6f4f5db5df34afa29",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/TargetOperationFormTest.java": "da3bfb044a78d2f40dfe262259acabe3619e99d02916adfb8a21c0822feaefd2",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserCreateFormTest.java": "0eb7b3e9f537636c45b00f21bed44d8875489cd0cb7cdc885ca5516d0dbff323",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java": "a98aec86a57e21885a80cf8443faba5130fa9e16c481c45b916df987585af304"
+      },
+      "sources": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/CancelForm.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/LogSearchForm.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/PasswordResetForm.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionDeleteForm.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSubmitForm.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/ScenarioSearchForm.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/TargetOperationInput.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserCreateForm.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserMutationInput.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserRoleForm.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserStatusForm.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserUnlockForm.java"
+      ],
+      "physical": {
+        "dev/codex/schubert/nk/web/form/CancelForm": "2fde54a433126fa8d25898d1aca5ee2869b86e85bc8d4bb67bc4e9c126d73066",
+        "dev/codex/schubert/nk/web/form/LogSearchForm": "3edbc8bd57a03f394e97c010cdc8ac35c1115341538cf396b4c63b41e12219a0",
+        "dev/codex/schubert/nk/web/form/LogSearchForm$Code": "abf0963cd9058d705b1345f9e68f36a02ba20a5950ebb22626fa405fdad21ee7",
+        "dev/codex/schubert/nk/web/form/LogSearchForm$Field": "6eacef774bb6256ecafda32a518b46891232fa747c7100ab98f1ef51b42d3c68",
+        "dev/codex/schubert/nk/web/form/PasswordResetForm": "7eb915fc0ca762c312ed3e7ef1ab250af755b210a0cf517cc5bd183f3a9715b4",
+        "dev/codex/schubert/nk/web/form/QuestionDeleteForm": "c9a247ad112464e0441315ba94689190700936c883f704a0f81bc8b114179f65",
+        "dev/codex/schubert/nk/web/form/QuestionSubmitForm": "afab0d359b9991923825ef57b4af07af94419a5aabb082878bc81bd40aeea47b",
+        "dev/codex/schubert/nk/web/form/ScenarioSearchForm": "be4f91d6dcd8eae8397960fe0811c7f8132802b64eee3395cc0fb89efbd23967",
+        "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Code": "c8461f4876f798d3c404744e0cd62359629179bb839e5ddbd739e372fb91f91e",
+        "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Field": "b112182a1f1e00bff62cd9443c31492a78563ebf16cff9add527e5ec62292f10",
+        "dev/codex/schubert/nk/web/form/TargetOperationInput": "aa31f67b1a2656ae5c028ee14fe898e091e823e79b47603f00c4b7df75af6cdf",
+        "dev/codex/schubert/nk/web/form/UserCreateForm": "db124951cc970661c5f8648fb7f2ae80c1e001cfa481e87100bc16ff93ad2517",
+        "dev/codex/schubert/nk/web/form/UserMutationInput": "10dd366dae9825832e35509e917151efa7852e04cb302a2dc7e1bec5c566bcf3",
+        "dev/codex/schubert/nk/web/form/UserRoleForm": "af19dc6cc4b74f562d4a4c4f5fe91f4f706f7cdf41ffd519f01b3b4436130402",
+        "dev/codex/schubert/nk/web/form/UserStatusForm": "24a6b15f2e4ed5e8cdacc0d41096bd9beeaff62caeb39e26452213ad01893d3a",
+        "dev/codex/schubert/nk/web/form/UserUnlockForm": "f26dbf8d50312316461aedd6002436fe1c731db2139d07816970bb30a0c83cfe"
+      },
+      "coverage": {
+        "INSTRUCTION": {
+          "covered": 2779,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 278,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 544,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 261,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 122,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 16,
+          "missed": 0
+        }
+      },
+      "javaCoverageApplicable": true,
+      "productTestsExecutedNow": 0
+    },
+    {
+      "reference": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG24416-login-user-dom-independent-v1/manifest.json",
+        "sha256": "e4a6de90f35c72ae6fb6d239666096ff6142bedf9e512053896df797162a699c",
+        "tag": "24416"
+      },
+      "source": "3814a5d0adcd3ac35b28397d791a42910e736356",
+      "tests": 28,
+      "cases": [
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LockedLoginDisplayResourcePortTest",
+          "name": "allegedRemainingSecondsAndCredentialsNeverBecomeDynamicDisplay"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LockedLoginDisplayResourcePortTest",
+          "name": "approvedLockedMessageDependsOnFlagPresenceNotItsValues"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LockedLoginDisplayResourcePortTest",
+          "name": "independentErrorLockedLogoutFlagsKeepCurrentOrderAndFixedText"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LockedLoginDisplayResourcePortTest",
+          "name": "parallelLockedAndUnlockedRenderingsKeepTheirOwnFlags"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LoginDisplayResourcePortTest",
+          "name": "eightConcurrentRenderingsKeepParameterMessagesSeparate"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LoginDisplayResourcePortTest",
+          "name": "errorAndLogoutUseFixedMessagesNotParameterValues"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LoginDisplayResourcePortTest",
+          "name": "errorFlagPresenceWorksWithEmptyFalseAndMultipleValues"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LoginDisplayResourcePortTest",
+          "name": "formLabelsInputMetadataAndStaticAssetsAreExplicit"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LoginDisplayResourcePortTest",
+          "name": "independentErrorAndLogoutConditionsDoNotConsumeEachOther"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LoginDisplayResourcePortTest",
+          "name": "initialPageKeepsApprovedBrandAndNoMessages"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LoginDisplayResourcePortTest",
+          "name": "submittedLookingQueryValuesNeverRefillUsernameOrPassword"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.LoginDisplayResourcePortTest",
+          "name": "unrecognizedParametersNeverBecomeMarkupOrMessages"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+          "name": "alertFieldAndUsernameEscapeLiteralMarkupWithoutNodes"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+          "name": "displayOnlyHiddenFieldPostActionAndStaticNavigationMatchContract"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+          "name": "emptyUsernameAndOtherIssuesHaveIndependentSummaryAndFieldScope"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+          "name": "everyRoleAndEnabledCombinationRetainsExactlyOneSelection"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+          "name": "initialFormHasApprovedEmptyValuesAndDefaults"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+          "name": "ownedConcurrentFormsDoNotShareUsernamesOrSelections"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+          "name": "unmappedPasswordPropertiesAreNeverRedisplayed"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+          "name": "usernameDisplayKeepsExactByteBoundaryWithoutClaimingValidation"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+          "name": "absentEmptyAndMarkupMessagesHaveExplicitNullAndEscapeBranches"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+          "name": "allOperationKindsAndRoleEnabledVariantsKeepSeparateControlShapes"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+          "name": "emptyFormsCreateNoMutationControlsAndRetainStaticNavigation"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+          "name": "metadataEscapesMarkupAndEmptyDateValuesRemainEmpty"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+          "name": "missingFormsAndMessageKeepDisplayMetadataWithoutInventedOperations"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+          "name": "ownedConcurrentDetailPagesKeepTargetNamesAndFormsIsolated"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+          "name": "passwordControlsNeverRetainUnmappedFieldValues"
+        },
+        {
+          "classname": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+          "name": "validationAndHiddenIdentityStayScopedToEachSuppliedForm"
+        }
+      ],
+      "testSourceHashes": {
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LoginDisplayResourcePortTest.java": "995b3ca7724cf6c6d9d7bf9657982247cf228c88c100843a2cbd577524992392",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LockedLoginDisplayResourcePortTest.java": "afbb0a88fa62706fd624c1ba59736fee6461aac2a165ad43563d3603b787a834",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserCreateTemplateResourcePortTest.java": "93adc92c88153de3bdb593c56ec3a21e40ffc9d3e8cf33909a841c4dcea14ce6",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserDetailTemplateResourcePortTest.java": "b70d88640f3aadd0dc689b09b244a82ae3dda3812da66fad69dd9e56d242541d"
+      },
+      "sources": [],
+      "physical": {},
+      "coverage": null,
+      "javaCoverageApplicable": false,
+      "productTestsExecutedNow": 0
+    }
+  ],
+  "disjointTargetSources": 34,
+  "disjointTargetPhysicalClasses": 53,
+  "distinctJavaCases": 171,
+  "distinctDomCases": 28,
+  "distinctCases": 199,
+  "distinctTestSources": 24,
+  "perRunCounterArithmetic": {
+    "LINE": 1242,
+    "METHOD": 367,
+    "CLASS": 53,
+    "BRANCH": 470,
+    "INSTRUCTION": 5785
+  },
+  "mergedCoverage": false,
+  "sameFullRun": false,
+  "sourceSameForWholeFormal": false,
+  "originalFirstSixCoverageHold": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG24262-owned-outbox-six-independent-partial-v1/manifest.json",
+    "sha256": "457cca3e3ce7e9bafbbe19e2b82029b1962eba73852b202aa6f1eebbfa4be9c6",
+    "gate": 1,
+    "duplicateCases": 6
+  },
+  "historicalExecutionsInThisSubset": 205,
+  "newExecutions": 0,
+  "newUniqueTests": 0,
+  "productTestsExecuted": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "effortRate": null,
+  "toolSha256": "85b0aa93f08ecc9812885a573deff0a46a0036b0fe1946a0feb0ccff9762be3d"
+}
