@@ -1,0 +1,213 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T05:46:10.684400+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+      "originalSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387",
+      "currentSha256": "a0bd8efc24fd8062d77966e82251af46c2511245ec62f469df6dc1c31c546936",
+      "originalWholeBodiesExactlyRestored": true,
+      "workerOwners": 1
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitorTest.java",
+      "originalSha256": "6c654c0265ccf82895fd97e0dbabe675a712f3df890ef4eedda810d82e6384e8",
+      "currentSha256": "4c4bda479a43021bd08338dd1ef7896ed4b6eba7d4eb10217169fe04c522ea93",
+      "originalWholeBodiesExactlyRestored": true,
+      "workerOwners": 1
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitorTest.java",
+      "originalSha256": "65990100bc09653891f48b72ff72381cb107e5710d318318fdc6eaf1bec9dfbe",
+      "currentSha256": "aaac0144d732ba723350fb7034e9ba42e05f7b7fb38bc045d693da15a0c5a2c9",
+      "originalWholeBodiesExactlyRestored": true,
+      "workerOwners": 1
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitorTest.java",
+      "originalSha256": "e66960b94d962ed57ae90283d72c7b68cbda003cb4be4c18496fbe597396005d",
+      "currentSha256": "f66f5eefe7409adf245a148a7f7fda9428ee15a83adad610d0fde54a34bd006f",
+      "originalWholeBodiesExactlyRestored": true,
+      "workerOwners": 1
+    }
+  ],
+  "originalWholeCases": 30,
+  "rawFindings": 20,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 3,
+  "finiteOwnerSitesCorrected": 4,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25046-timed-monitors-owner-prepare-v1/manifest.json",
+    "sha256": "2efd6db03b98a251b01af2f0634a93a78fe0f4fbd76805874988510f21eb80a3"
+  },
+  "classifications": [
+    {
+      "test": "TimedDbPoolMonitorTest",
+      "method": "dbTime007ConcurrentSameEpochKeepsImmutableExactEventCount",
+      "line": 226,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedDbPoolMonitorTest",
+      "method": "dbTime007ConcurrentSameEpochKeepsImmutableExactEventCount",
+      "line": 226,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedDbPoolMonitorTest",
+      "method": "dbTime007ConcurrentSameEpochKeepsImmutableExactEventCount",
+      "line": 240,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedDbPoolMonitorTest",
+      "method": "dbTime007ConcurrentSameEpochKeepsImmutableExactEventCount",
+      "line": 243,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedDbPoolMonitorTest",
+      "method": "dbTime007ConcurrentSameEpochKeepsImmutableExactEventCount",
+      "line": 244,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedFilesystemMonitorTest",
+      "method": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+      "line": 203,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedFilesystemMonitorTest",
+      "method": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+      "line": 203,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedFilesystemMonitorTest",
+      "method": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+      "line": 207,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedFilesystemMonitorTest",
+      "method": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+      "line": 212,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedFilesystemMonitorTest",
+      "method": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+      "line": 213,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedJvmHeapMonitorTest",
+      "method": "heapTime007ConcurrentSameEpochKeepsOneEventAndImmutableSnapshot",
+      "line": 186,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedJvmHeapMonitorTest",
+      "method": "heapTime007ConcurrentSameEpochKeepsOneEventAndImmutableSnapshot",
+      "line": 186,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedJvmHeapMonitorTest",
+      "method": "heapTime007ConcurrentSameEpochKeepsOneEventAndImmutableSnapshot",
+      "line": 193,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedJvmHeapMonitorTest",
+      "method": "heapTime007ConcurrentSameEpochKeepsOneEventAndImmutableSnapshot",
+      "line": 196,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedJvmHeapMonitorTest",
+      "method": "heapTime007ConcurrentSameEpochKeepsOneEventAndImmutableSnapshot",
+      "line": 197,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedSyncLatencyMonitorTest",
+      "method": "syncTime007ConcurrentSameEpochMaintainsExactImmutableEventCounts",
+      "line": 174,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedSyncLatencyMonitorTest",
+      "method": "syncTime007ConcurrentSameEpochMaintainsExactImmutableEventCounts",
+      "line": 174,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedSyncLatencyMonitorTest",
+      "method": "syncTime007ConcurrentSameEpochMaintainsExactImmutableEventCounts",
+      "line": 181,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedSyncLatencyMonitorTest",
+      "method": "syncTime007ConcurrentSameEpochMaintainsExactImmutableEventCounts",
+      "line": 184,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    },
+    {
+      "test": "TimedSyncLatencyMonitorTest",
+      "method": "syncTime007ConcurrentSameEpochMaintainsExactImmutableEventCounts",
+      "line": 185,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own4or8workers/64suppliedvaluecallbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR, no webapp runtime thread."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

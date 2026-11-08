@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.OptionalDouble;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** Pure supplied values/reports, independent fixed SS351 boundaries, no real heap/OOM operation. */
@@ -182,13 +183,18 @@ class TimedJvmHeapMonitorTest {
   void heapTime007ConcurrentSameEpochKeepsOneEventAndImmutableSnapshot() throws Exception {
     var monitor = new TimedJvmHeapMonitor(Service.BATCH);
     var first = sample(monitor, 90, 0).event().orElseThrow();
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var jobs =
           java.util.stream.IntStream.range(0, 64)
               .<Callable<Severity>>mapToObj(
                   i -> () -> sample(monitor, 90, 1).event().orElseThrow().severity())
               .toList();
-      for (var result : pool.invokeAll(jobs)) assertEquals(Severity.CRITICAL, result.get());
+      for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS))
+        assertEquals(Severity.CRITICAL, result.get());
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(BigInteger.ONE, first.count());
     assertEquals(AT, first.lastSeen());

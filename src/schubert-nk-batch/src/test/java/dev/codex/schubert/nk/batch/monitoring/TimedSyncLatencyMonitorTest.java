@@ -15,6 +15,7 @@ import java.time.Instant;
 import java.util.OptionalDouble;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -170,13 +171,18 @@ class TimedSyncLatencyMonitorTest {
     var monitor = new TimedSyncLatencyMonitor(Service.API);
     sample(monitor, 3.0, 0);
     var first = sample(monitor, 3.0, 300).event().orElseThrow();
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var jobs =
           java.util.stream.IntStream.range(0, 64)
               .<Callable<Severity>>mapToObj(
                   i -> () -> sample(monitor, 3.0, 301).event().orElseThrow().severity())
               .toList();
-      for (var result : pool.invokeAll(jobs)) assertEquals(Severity.CRITICAL, result.get());
+      for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS))
+        assertEquals(Severity.CRITICAL, result.get());
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(BigInteger.ONE, first.count());
     assertEquals(OBSERVED_AT.plusSeconds(300), first.lastSeen());

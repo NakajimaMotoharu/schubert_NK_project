@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.OptionalDouble;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -222,7 +223,8 @@ class TimedDbPoolMonitorTest {
             .observe(OptionalDouble.of(0), 1, 0, true, at(0, CauseClearance.CONFIRMED))
             .event()
             .orElseThrow();
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var jobs =
           java.util.stream.IntStream.range(0, 64)
               .<Callable<Severity>>mapToObj(
@@ -235,7 +237,11 @@ class TimedDbPoolMonitorTest {
                               .orElseThrow()
                               .severity())
               .toList();
-      for (var result : pool.invokeAll(jobs)) assertEquals(Severity.CRITICAL, result.get());
+      for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS))
+        assertEquals(Severity.CRITICAL, result.get());
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(BigInteger.ONE, first.count());
     assertEquals(OBSERVED_AT, first.lastSeen());
