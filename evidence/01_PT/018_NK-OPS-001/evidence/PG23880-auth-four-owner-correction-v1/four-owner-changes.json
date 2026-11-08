@@ -1,0 +1,140 @@
+[
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginApplicationAssembly.java",
+    "before": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginApplicationAssembly.java",
+      "kind": "JAVA",
+      "module": "api",
+      "class": "dev/codex/schubert/nk/api/security/LoginApplicationAssembly",
+      "owner": "WBS-P018-09",
+      "basis": "v1対象の責務分離/共通費主担当",
+      "sha256": "03c3244c0be52031e75ca4a188ddf4ee97ff6cc0f541791ab3de5d5b51d45d88",
+      "costOwner": "WBS-P018-09",
+      "acceptance": "UNASSESSED",
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
+    },
+    "after": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginApplicationAssembly.java",
+      "kind": "JAVA",
+      "module": "api",
+      "class": "dev/codex/schubert/nk/api/security/LoginApplicationAssembly",
+      "owner": "WBS-P007-04",
+      "basis": "PG23880: explicit SS314 authentication/inbox/logout responsibility; broad Log substring selector is not authoritative. Previous row retained in PG23884.",
+      "sha256": "03c3244c0be52031e75ca4a188ddf4ee97ff6cc0f541791ab3de5d5b51d45d88",
+      "costOwner": "WBS-P007-04",
+      "acceptance": "UNASSESSED",
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
+    },
+    "sourceSha256": "03c3244c0be52031e75ca4a188ddf4ee97ff6cc0f541791ab3de5d5b51d45d88",
+    "responsibilityEvidence": [
+      "Production Login transaction graph",
+      "return new LoginInboxService(",
+      "new LoginReplayService("
+    ],
+    "ownerTitle": "Login Inbox・暗号replay・応答再構成"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginResult.java",
+    "before": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginResult.java",
+      "kind": "JAVA",
+      "module": "api",
+      "class": "dev/codex/schubert/nk/api/security/LoginResult",
+      "owner": "WBS-P018-09",
+      "basis": "v1対象の責務分離/共通費主担当",
+      "sha256": "d5efa4df9df7e10fd959c1f515e624fee369b0ce290583ffdb84f459c904f832",
+      "costOwner": "WBS-P018-09",
+      "acceptance": "UNASSESSED",
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
+    },
+    "after": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginResult.java",
+      "kind": "JAVA",
+      "module": "api",
+      "class": "dev/codex/schubert/nk/api/security/LoginResult",
+      "owner": "WBS-P007-01",
+      "basis": "PG23880: explicit SS314 authentication/inbox/logout responsibility; broad Log substring selector is not authoritative. Previous row retained in PG23884.",
+      "sha256": "d5efa4df9df7e10fd959c1f515e624fee369b0ce290583ffdb84f459c904f832",
+      "costOwner": "WBS-P007-01",
+      "acceptance": "UNASSESSED",
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
+    },
+    "sourceSha256": "d5efa4df9df7e10fd959c1f515e624fee369b0ce290583ffdb84f459c904f832",
+    "responsibilityEvidence": [
+      "Disjoint success/failure shape",
+      "sealed interface LoginResult",
+      "record Success(",
+      "record Failure("
+    ],
+    "ownerTitle": "Login・5/10回制限・15分lock"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java",
+    "before": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java",
+      "kind": "JAVA",
+      "module": "api",
+      "class": "dev/codex/schubert/nk/api/security/LoginUsername",
+      "owner": "WBS-P018-09",
+      "basis": "v1対象の責務分離/共通費主担当",
+      "sha256": "970b0b15993f72f0881cdf64b00839cb1fdf4f601a6c4b0827e2adc0bb4e0359",
+      "costOwner": "WBS-P018-09",
+      "acceptance": "UNASSESSED",
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
+    },
+    "after": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java",
+      "kind": "JAVA",
+      "module": "api",
+      "class": "dev/codex/schubert/nk/api/security/LoginUsername",
+      "owner": "WBS-P007-01",
+      "basis": "PG23880: explicit SS314 authentication/inbox/logout responsibility; broad Log substring selector is not authoritative. Previous row retained in PG23884.",
+      "sha256": "970b0b15993f72f0881cdf64b00839cb1fdf4f601a6c4b0827e2adc0bb4e0359",
+      "costOwner": "WBS-P007-01",
+      "acceptance": "UNASSESSED",
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
+    },
+    "sourceSha256": "970b0b15993f72f0881cdf64b00839cb1fdf4f601a6c4b0827e2adc0bb4e0359",
+    "responsibilityEvidence": [
+      "Display/input is 64 UTF-8 bytes",
+      "record LoginUsername(",
+      "Normalizer.normalize",
+      "value.toLowerCase(Locale.ROOT)"
+    ],
+    "ownerTitle": "Login・5/10回制限・15分lock"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutApplicationAssembly.java",
+    "before": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutApplicationAssembly.java",
+      "kind": "JAVA",
+      "module": "api",
+      "class": "dev/codex/schubert/nk/api/security/LogoutApplicationAssembly",
+      "owner": "WBS-P018-09",
+      "basis": "v1対象の責務分離/共通費主担当",
+      "sha256": "638db2cccb40d2607e7a81b015266cc42bada424ab3110e815664b526713be03",
+      "costOwner": "WBS-P018-09",
+      "acceptance": "UNASSESSED",
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
+    },
+    "after": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutApplicationAssembly.java",
+      "kind": "JAVA",
+      "module": "api",
+      "class": "dev/codex/schubert/nk/api/security/LogoutApplicationAssembly",
+      "owner": "WBS-P007-05",
+      "basis": "PG23880: explicit SS314 authentication/inbox/logout responsibility; broad Log substring selector is not authoritative. Previous row retained in PG23884.",
+      "sha256": "638db2cccb40d2607e7a81b015266cc42bada424ab3110e815664b526713be03",
+      "costOwner": "WBS-P007-05",
+      "acceptance": "UNASSESSED",
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
+    },
+    "sourceSha256": "638db2cccb40d2607e7a81b015266cc42bada424ab3110e815664b526713be03",
+    "responsibilityEvidence": [
+      "Existing Logout transaction participants",
+      "return new LogoutInboxService(",
+      "new LogoutReplayService("
+    ],
+    "ownerTitle": "Logout期限fence・replay・管理失効"
+  }
+]
