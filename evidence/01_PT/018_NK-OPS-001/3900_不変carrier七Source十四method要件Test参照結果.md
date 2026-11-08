@@ -1,0 +1,5 @@
+# 不変carrier七Source・14methodの要件/Test参照結果
+
+3899/776/777/778、PG24716順0/600d2262→24718独立逆0/e272cdbeb727ed25ef38528fb683257f3ecd5be8bfd53dccc50ceab0795e031a。七Source/十一物理/六測定class、raw39=公式14+生成filter20+抽象5、marker/三注釈method0も元scopeへ保持。元通常120内の実2Case/独立literal/型とcollection契約/Source行hash/TestID/共有MQ017018/UI232233SS322を14methodへ明示結合。元P00102責任/費用/専有RD空を保持、別Carrier6の旧実結果はactualCaseKeysへ混入0。詳細Program0011196/JSON五。
+
+L36M14C6B16/I180全miss0は元XML参照・新測定0。抽象5は実測methodへ加算0、自然Source B0=N-A/null、個別probe帰属null/全branchoracle完成未主張。BUG2551工具のgeneric宣言誤認初1はbefore24720、観測済み四recordの固定表記だけへ是正・24718で四宣言/7誤metadata確認。新compiler/parser/Java/製品実行/Source登録/leaf0。原0.5/2/5cap7・unique520/正式1964-53工数null・全HOLD保持。

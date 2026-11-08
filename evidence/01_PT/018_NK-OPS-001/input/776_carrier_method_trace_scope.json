@@ -1,0 +1,326 @@
+{
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "testSource": "64f3a72753434347889f0eabd5d9f9dca67c6bfb",
+  "normalProof": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG24642-protocol-whole120-independent-v1/manifest.json",
+    "sha256": "8ebe6365bc701ba6432b1b55275004024dc71bc452d31b66d31c53894e3ae128"
+  },
+  "metadataInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json",
+    "sha256": "e65782d893a5ae45309cf269d165dec33d1dc396f06b7968b62d95b276455d31"
+  },
+  "descriptorInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/artifacts.json",
+    "sha256": "fb24a1a209849d42894925002baae668bc55a4bd858b1b7c1d38ab838319bb0b"
+  },
+  "physicalIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json",
+    "sha256": "db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723"
+  },
+  "owner": "WBS-P001-02",
+  "oracleDocuments": [
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/001_NK-PRO-001_単体テスト仕様書.md",
+      "sha256": "503c5f6be3caaa341dcec35cb1bd1b8a3892d270bf6a7fa91cdad580b43abdbe"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/107_現source正本fixture照合・layout個別受入.md",
+      "sha256": "6354a848537937df156f5380941531d71bdf749f68ff1290943a58450ba64ddc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1956_G13LayoutCatalog7_独立期待値意味対応表.md",
+      "sha256": "6ede52efc7cb04c471c6a55e2a17d4b8c4859c9186f24977bc9758b1dcd3d711"
+    },
+    {
+      "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+      "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/2789_ProtocolCarrier不足境界六件_単体テスト仕様.md",
+      "sha256": "7292a2242d6670eedc382c217c6b80c8f8bd5b58439bd719aa3349807613fcbd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1964_G13Payload14_独立期待値意味対応表.md",
+      "sha256": "a4f561a4ae449c19b1ba23d9fed7d790f7f286542061b39bbb761f4258b955d6"
+    }
+  ],
+  "sourcePaths": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValue.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValueSet.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutPayload.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/WireMessage.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/package-info.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/package-info.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/package-info.java"
+  ],
+  "cases": {
+    "V1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#valuesAreImmutableNullSafeAndRedacted()",
+      "testIds": [
+        "PT-PRO-002-P03"
+      ],
+      "independentOracle": "Synthetic literal value isnotprinted; Numeric1/Flagtrue/Unset INSTANCE; nulltext/map/key/value/blankname/getnull rejected, namesimmutable,size1,getidentity/missingUnset,self/equal/different/wrongtype, equalhash contract. Absolutehashnumeric oracle notclaimed bythiscase."
+    },
+    "W1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#fixedPayloadIsDefensiveAndWireMessageChecksLengths()",
+      "testIds": [
+        "PT-PRO-002-M01",
+        "PT-PRO-002-M02"
+      ],
+      "independentOracle": "Independentinput1,2 andrecord3,4,5 bytes preservedafterinput/outputmutation; literaldata2/recordlength3/count1; WireMessage mismatcheddata8vs9/record271vs272/count0vs1 andnullheader/payload rejected."
+    }
+  },
+  "methodRules": {
+    "FieldValue$Text": {
+      "<init>": {
+        "cases": [
+          "V1"
+        ],
+        "relatedRd": [
+          "MQ-017",
+          "MQ-018"
+        ],
+        "ssSections": [
+          "2",
+          "11"
+        ],
+        "contract": "Immutable Text typedvalue; Text rejectsnull, primitivescannotbenull.",
+        "staticPath": "V1 direct new FieldValue.Text"
+      },
+      "toString": {
+        "cases": [
+          "V1"
+        ],
+        "relatedRd": [
+          "MQ-017",
+          "MQ-018"
+        ],
+        "ssSections": [
+          "2",
+          "11"
+        ],
+        "contract": "Renderredaction andUTF16length withoutretainedinput; exactfulltext notclaimed bythiscase.",
+        "staticPath": "V1 callssecret.toString thenassertFalsecontainssecret.value"
+      }
+    },
+    "FieldValue$Numeric": {
+      "<init>": {
+        "cases": [
+          "V1"
+        ],
+        "relatedRd": [
+          "MQ-017",
+          "MQ-018"
+        ],
+        "ssSections": [
+          "2",
+          "11"
+        ],
+        "contract": "Immutable Numeric typedvalue; Text rejectsnull, primitivescannotbenull.",
+        "staticPath": "V1 direct new FieldValue.Numeric"
+      }
+    },
+    "FieldValue$Flag": {
+      "<init>": {
+        "cases": [
+          "V1"
+        ],
+        "relatedRd": [
+          "MQ-017",
+          "MQ-018"
+        ],
+        "ssSections": [
+          "2",
+          "11"
+        ],
+        "contract": "Immutable Flag typedvalue; Text rejectsnull, primitivescannotbenull.",
+        "staticPath": "V1 direct new FieldValue.Flag"
+      }
+    },
+    "FieldValue$Unset": {
+      "<clinit>": {
+        "cases": [
+          "V1"
+        ],
+        "relatedRd": [
+          "MQ-017",
+          "MQ-018"
+        ],
+        "ssSections": [
+          "2",
+          "11"
+        ],
+        "contract": "OnlyINSTANCE emptyvalue marker.",
+        "staticPath": "V1 explicit INSTANCE.toString literal andmissingname defaults"
+      }
+    },
+    "FieldValueSet": {
+      "<init>": {
+        "cases": [
+          "V1"
+        ],
+        "relatedRd": [
+          "MQ-017",
+          "MQ-018"
+        ],
+        "ssSections": [
+          "2",
+          "11"
+        ],
+        "contract": "Non-nullmap/key/value/nonblanknames; copyintoimmutableorderedmap. Input-mapmutation oracle ispriorCarrier supplemental notthiscase.",
+        "staticPath": "V1 directconstructors"
+      },
+      "empty": {
+        "cases": [
+          "V1"
+        ],
+        "relatedRd": [
+          "MQ-017",
+          "MQ-018"
+        ],
+        "ssSections": [
+          "2",
+          "11"
+        ],
+        "contract": "Returnemptyimmutablecontainer.",
+        "staticPath": "V1 equalityagainstFieldValueSet.empty"
+      },
+      "names": {
+        "cases": [
+          "V1"
+        ],
+        "relatedRd": [
+          "MQ-017",
+          "MQ-018"
+        ],
+        "ssSections": [
+          "2",
+          "11"
+        ],
+        "contract": "Exposeimmutablekeyset.",
+        "staticPath": "V1 names().clear rejects"
+      },
+      "getOrUnset": {
+        "cases": [
+          "V1"
+        ],
+        "relatedRd": [
+          "MQ-017",
+          "MQ-018"
+        ],
+        "ssSections": [
+          "2",
+          "11"
+        ],
+        "contract": "Knownname retainsvalueidentity, unknownUnset; nullname rejected.",
+        "staticPath": "V1 direct getOrUnset"
+      },
+      "size": {
+        "cases": [
+          "V1"
+        ],
+        "relatedRd": [
+          "MQ-017",
+          "MQ-018"
+        ],
+        "ssSections": [
+          "2",
+          "11"
+        ],
+        "contract": "Returnmapentrycount.",
+        "staticPath": "V1 literalsize1"
+      },
+      "equals": {
+        "cases": [
+          "V1"
+        ],
+        "relatedRd": [
+          "MQ-017",
+          "MQ-018"
+        ],
+        "ssSections": [
+          "2",
+          "11"
+        ],
+        "contract": "Self/equalmap/different/wrongtype contract. Null case notclaimed byV1 alone.",
+        "staticPath": "V1 assertEquals/assertNotEquals -> equals"
+      },
+      "hashCode": {
+        "cases": [
+          "V1"
+        ],
+        "relatedRd": [
+          "MQ-017",
+          "MQ-018"
+        ],
+        "ssSections": [
+          "2",
+          "11"
+        ],
+        "contract": "Equalmap has equalhash; absolutearbitraryhash notassertedhere.",
+        "staticPath": "V1 explicit equalvalues hashCode calls"
+      },
+      "toString": {
+        "cases": [
+          "V1"
+        ],
+        "relatedRd": [
+          "MQ-017",
+          "MQ-018"
+        ],
+        "ssSections": [
+          "2",
+          "11"
+        ],
+        "contract": "Displaynamesonly, no retainedvalue content.",
+        "staticPath": "V1 safeNamecontains andvalueomit assertions"
+      }
+    },
+    "WireMessage": {
+      "<init>": {
+        "cases": [
+          "W1"
+        ],
+        "relatedRd": [
+          "MQ-017",
+          "MQ-018"
+        ],
+        "ssSections": [
+          "2",
+          "11"
+        ],
+        "contract": "Requireheader/payload non-null andequaldataLength/recordLength/recordCount.",
+        "staticPath": "W1 direct new WireMessage andfixedlength mismatchinputs"
+      }
+    }
+  },
+  "generatedMethods": {
+    "FieldValue$Flag": [
+      "toString",
+      "hashCode",
+      "equals",
+      "value"
+    ],
+    "FieldValue$Numeric": [
+      "toString",
+      "hashCode",
+      "equals",
+      "value"
+    ],
+    "FieldValue$Text": [
+      "hashCode",
+      "equals",
+      "value"
+    ],
+    "WireMessage": [
+      "toString",
+      "hashCode",
+      "equals",
+      "header",
+      "payload"
+    ]
+  },
+  "standardEnumSymbols": [
+    "FieldValue$Unset"
+  ]
+}

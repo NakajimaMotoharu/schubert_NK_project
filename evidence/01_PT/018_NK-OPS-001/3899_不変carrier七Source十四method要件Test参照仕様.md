@@ -1,0 +1,7 @@
+# 不変carrier七Source・14methodの要件/Test参照仕様
+
+G13.07 ORIGINAL_PLAN原0.5/2/5pp cap7、P00102責任参照追加費0。107/1964/2787～2790を先に確認。FieldValue/FieldValueSet/WireMessage/LayoutPayload及びlayout/time/transportのpackage-info三枚、七Source/十一物理/六測定class。raw39=測定14+標準生成filter20+抽象method5、FieldValueはmarker interfaceでmethod0/注釈三class method0。空class/抽象methodをcoverage100やfilter不足へ換算しない。
+
+現normal24642全120の実PayloadCodecTest.valuesAreImmutableNullSafeAndRedactedとMessageCodecTest.fixedPayloadIsDefensiveAndWireMessageChecksLengths二Caseを関連RD/UI232～236/SS322、独立literal/collection契約/型・null/不変性と結合する。別architecture Carrier六caseは原独立期待文書として参照するが、normal120のactualCaseKeysへ混入・旧成功source転用をしない。固定payload実装自体の元owner受入/費用は変更しない。
+
+775開始/776scope/777producer/778post/779close。既metadata23972/descriptor/physicalIndex/現XML/当七Java/元二Testのテキストだけを読む。L36M14C6B16/I180全miss0はsubset参照のみで新測定0。raw全signatureと抽象5/生成20、個別case/source行bodyhash/独立期待を逆照合・誤metadata否定。製品実行/Java/compiler/Analyzer/Source登録/leaf0・unique520/正式1964-53/工数null保持。個別probe null/全分岐独立oracle完成未主張、全HOLD/fresh残10%/continuous-v2維持。
