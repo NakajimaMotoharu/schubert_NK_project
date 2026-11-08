@@ -1,0 +1,964 @@
+[
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/ExpectedRoute#<init>(Ldev/codex/schubert/nk/protocol/header/MessageKind;Ldev/codex/schubert/nk/protocol/header/InteractionKind;Ljava/lang/String;Ljava/util/Optional;Z)V",
+    "className": "dev/codex/schubert/nk/protocol/codec/ExpectedRoute",
+    "method": "<init>",
+    "descriptor": "(Ldev/codex/schubert/nk/protocol/header/MessageKind;Ldev/codex/schubert/nk/protocol/header/InteractionKind;Ljava/lang/String;Ljava/util/Optional;Z)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ExpectedRoute.java",
+    "sourceSha256": "e512bf8bb9a289e5ef3d12ecc4c11f4e01feec3a1e0b8716e2db64ffd416baf2",
+    "firstExecutableLine": 16,
+    "owner": "WBS-P002-03",
+    "costOwner": "WBS-P002-03",
+    "relatedRd": [
+      "MSG-001",
+      "MSG-002",
+      "MSG-007",
+      "MSG-010",
+      "MQ-014",
+      "MQ-017"
+    ],
+    "ui": [
+      "231",
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "4",
+      "5",
+      "7",
+      "11"
+    ],
+    "contract": "Non-null/kind/interaction/reply/address/expiry allowlisted route invariants.",
+    "staticPath": "M7 directExpectedRoute constructors andMT routefixtures",
+    "caseLabels": [
+      "M7",
+      "MT"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#metadataAndExpectedRouteEstablishNullAndRangeContracts()",
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#transportAndRouteContractsRejectEveryMismatch()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-T01"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 92,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 18,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 14,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 10,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/HeaderCodec#<init>(Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;)V",
+    "className": "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+    "method": "<init>",
+    "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/LayoutRegistry;)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+    "sourceSha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+    "firstExecutableLine": 28,
+    "owner": "WBS-P002-03",
+    "costOwner": "WBS-P002-03",
+    "relatedRd": [
+      "MSG-001",
+      "MSG-002",
+      "MSG-007",
+      "MSG-010",
+      "MQ-014",
+      "MQ-017"
+    ],
+    "ui": [
+      "231",
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "4",
+      "5",
+      "7",
+      "11"
+    ],
+    "contract": "RequireLayoutRegistry non-null.",
+    "staticPath": "H1 HeaderCodec constructor/standard factory",
+    "caseLabels": [
+      "H1"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerEncodingMatchesIndependentUi232GoldenVector()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-H01"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 9,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 3,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/HeaderCodec#standard()Ldev/codex/schubert/nk/protocol/codec/HeaderCodec;",
+    "className": "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+    "method": "standard",
+    "descriptor": "()Ldev/codex/schubert/nk/protocol/codec/HeaderCodec;",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+    "sourceSha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+    "firstExecutableLine": 33,
+    "owner": "WBS-P002-03",
+    "costOwner": "WBS-P002-03",
+    "relatedRd": [
+      "MSG-001",
+      "MSG-002",
+      "MSG-007",
+      "MSG-010",
+      "MQ-014",
+      "MQ-017"
+    ],
+    "ui": [
+      "231",
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "4",
+      "5",
+      "7",
+      "11"
+    ],
+    "contract": "Standard64layout registryfactory.",
+    "staticPath": "H1/H2 direct HeaderCodec.standard",
+    "caseLabels": [
+      "H1",
+      "H2"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerEncodingMatchesIndependentUi232GoldenVector()",
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#responseAndEventHeadersRoundTripWithoutLeakingContext()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-H01"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 5,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/HeaderCodec#encode(Ldev/codex/schubert/nk/protocol/header/CommonHeader;)[B",
+    "className": "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+    "method": "encode",
+    "descriptor": "(Ldev/codex/schubert/nk/protocol/header/CommonHeader;)[B",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+    "sourceSha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+    "firstExecutableLine": 37,
+    "owner": "WBS-P002-03",
+    "costOwner": "WBS-P002-03",
+    "relatedRd": [
+      "MSG-001",
+      "MSG-002",
+      "MSG-007",
+      "MSG-010",
+      "MQ-014",
+      "MQ-017"
+    ],
+    "ui": [
+      "231",
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "4",
+      "5",
+      "7",
+      "11"
+    ],
+    "contract": "Exact256headerfields/padding/profile; IAE -> senderwholeMessageEncodingException.",
+    "staticPath": "H1 independentgolden/H2 profiles/H3 unknownheaders -> encode",
+    "caseLabels": [
+      "H1",
+      "H2",
+      "H3"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerEncodingMatchesIndependentUi232GoldenVector()",
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#responseAndEventHeadersRoundTripWithoutLeakingContext()",
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerDecoderRejectsEveryFixedFieldAndProfileCorruption()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-H01",
+      "PT-PRO-002-H02"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 185,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 29,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/HeaderCodec#peek([B)Ldev/codex/schubert/nk/protocol/header/CommonHeader;",
+    "className": "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+    "method": "peek",
+    "descriptor": "([B)Ldev/codex/schubert/nk/protocol/header/CommonHeader;",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+    "sourceSha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+    "firstExecutableLine": 79,
+    "owner": "WBS-P002-03",
+    "costOwner": "WBS-P002-03",
+    "relatedRd": [
+      "MSG-001",
+      "MSG-002",
+      "MSG-007",
+      "MSG-010",
+      "MQ-014",
+      "MQ-017"
+    ],
+    "ui": [
+      "231",
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "4",
+      "5",
+      "7",
+      "11"
+    ],
+    "contract": "Nullablebody/minimum256/perfieldcanonicality/wholeheader invariants/layout validation typedpermanent failure.",
+    "staticPath": "H1/H2/H3 direct peek",
+    "caseLabels": [
+      "H1",
+      "H2",
+      "H3"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerEncodingMatchesIndependentUi232GoldenVector()",
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#responseAndEventHeadersRoundTripWithoutLeakingContext()",
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerDecoderRejectsEveryFixedFieldAndProfileCorruption()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-H01",
+      "PT-PRO-002-H02"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 170,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 4,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 31,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 3,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/HeaderCodec#canonicalUuid(Ljava/lang/String;)Ljava/util/UUID;",
+    "className": "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+    "method": "canonicalUuid",
+    "descriptor": "(Ljava/lang/String;)Ljava/util/UUID;",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+    "sourceSha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+    "firstExecutableLine": 134,
+    "owner": "WBS-P002-03",
+    "costOwner": "WBS-P002-03",
+    "relatedRd": [
+      "MSG-001",
+      "MSG-002",
+      "MSG-007",
+      "MSG-010",
+      "MQ-014",
+      "MQ-017"
+    ],
+    "ui": [
+      "231",
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "4",
+      "5",
+      "7",
+      "11"
+    ],
+    "contract": "LowercasecanonicalUUID only.",
+    "staticPath": "peek -> canonicalUuid",
+    "caseLabels": [
+      "H1",
+      "H3"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerEncodingMatchesIndependentUi232GoldenVector()",
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerDecoderRejectsEveryFixedFieldAndProfileCorruption()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-H01",
+      "PT-PRO-002-H02"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 15,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 2,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 4,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/HeaderCodec#requiredText([BII)Ljava/lang/String;",
+    "className": "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+    "method": "requiredText",
+    "descriptor": "([BII)Ljava/lang/String;",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+    "sourceSha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+    "firstExecutableLine": 142,
+    "owner": "WBS-P002-03",
+    "costOwner": "WBS-P002-03",
+    "relatedRd": [
+      "MSG-001",
+      "MSG-002",
+      "MSG-007",
+      "MSG-010",
+      "MQ-014",
+      "MQ-017"
+    ],
+    "ui": [
+      "231",
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "4",
+      "5",
+      "7",
+      "11"
+    ],
+    "contract": "Requiredcanonicalfieldtext viaFieldCodec; missing/invalid typedreject.",
+    "staticPath": "peek -> requiredText -> slice",
+    "caseLabels": [
+      "H1",
+      "H3"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerEncodingMatchesIndependentUi232GoldenVector()",
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerDecoderRejectsEveryFixedFieldAndProfileCorruption()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-H01",
+      "PT-PRO-002-H02"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 9,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/HeaderCodec#numericInt([BIIII)I",
+    "className": "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+    "method": "numericInt",
+    "descriptor": "([BIIII)I",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+    "sourceSha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+    "firstExecutableLine": 146,
+    "owner": "WBS-P002-03",
+    "costOwner": "WBS-P002-03",
+    "relatedRd": [
+      "MSG-001",
+      "MSG-002",
+      "MSG-007",
+      "MSG-010",
+      "MQ-014",
+      "MQ-017"
+    ],
+    "ui": [
+      "231",
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "4",
+      "5",
+      "7",
+      "11"
+    ],
+    "contract": "FixedASCIIdecimal slice/range andcheckedintconversion.",
+    "staticPath": "peek -> numericInt -> FieldCodec.decodeNumeric",
+    "caseLabels": [
+      "H1",
+      "H3"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerEncodingMatchesIndependentUi232GoldenVector()",
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerDecoderRejectsEveryFixedFieldAndProfileCorruption()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-H01",
+      "PT-PRO-002-H02"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 11,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/HeaderCodec#slice([BII)[B",
+    "className": "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+    "method": "slice",
+    "descriptor": "([BII)[B",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+    "sourceSha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+    "firstExecutableLine": 150,
+    "owner": "WBS-P002-03",
+    "costOwner": "WBS-P002-03",
+    "relatedRd": [
+      "MSG-001",
+      "MSG-002",
+      "MSG-007",
+      "MSG-010",
+      "MQ-014",
+      "MQ-017"
+    ],
+    "ui": [
+      "231",
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "4",
+      "5",
+      "7",
+      "11"
+    ],
+    "contract": "Exact0basedhalfopen field slices fromdeclaredheader.",
+    "staticPath": "peek/requiredText/numericInt -> slice",
+    "caseLabels": [
+      "H1",
+      "H3"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerEncodingMatchesIndependentUi232GoldenVector()",
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerDecoderRejectsEveryFixedFieldAndProfileCorruption()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-H01",
+      "PT-PRO-002-H02"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 5,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/HeaderCodec#put([BI[B)V",
+    "className": "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+    "method": "put",
+    "descriptor": "([BI[B)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+    "sourceSha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+    "firstExecutableLine": 154,
+    "owner": "WBS-P002-03",
+    "costOwner": "WBS-P002-03",
+    "relatedRd": [
+      "MSG-001",
+      "MSG-002",
+      "MSG-007",
+      "MSG-010",
+      "MQ-014",
+      "MQ-017"
+    ],
+    "ui": [
+      "231",
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "4",
+      "5",
+      "7",
+      "11"
+    ],
+    "contract": "Exactfieldplacement withoutProduction-derived expected.",
+    "staticPath": "encode -> put; H1 independentlyplacedexpectedbytes",
+    "caseLabels": [
+      "H1",
+      "H2"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerEncodingMatchesIndependentUi232GoldenVector()",
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#responseAndEventHeadersRoundTripWithoutLeakingContext()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-H01"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 8,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/MessageEncodingException#<init>(Ljava/lang/String;)V",
+    "className": "dev/codex/schubert/nk/protocol/codec/MessageEncodingException",
+    "method": "<init>",
+    "descriptor": "(Ljava/lang/String;)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/MessageEncodingException.java",
+    "sourceSha256": "7728bc86a1258f37488c72d0c7eb392cbc9891da33906d6965962526e4f64ab3",
+    "firstExecutableLine": 8,
+    "owner": "WBS-P002-03",
+    "costOwner": "WBS-P002-03",
+    "relatedRd": [
+      "MSG-001",
+      "MSG-002",
+      "MSG-007",
+      "MSG-010",
+      "MQ-014",
+      "MQ-017"
+    ],
+    "ui": [
+      "231",
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "4",
+      "5",
+      "7",
+      "11"
+    ],
+    "contract": "Caller-observed senderwhole-message structural exception; nofieldvalueecho.",
+    "staticPath": "PayloadCodec.encode checks -> new MessageEncodingException(message)",
+    "caseLabels": [
+      "PE"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#encodeRejectsUnknownMissingWrongTypeAndRecordViolations()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-P03"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 4,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/MessageEncodingException#<init>(Ljava/lang/String;Ljava/lang/Throwable;)V",
+    "className": "dev/codex/schubert/nk/protocol/codec/MessageEncodingException",
+    "method": "<init>",
+    "descriptor": "(Ljava/lang/String;Ljava/lang/Throwable;)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/MessageEncodingException.java",
+    "sourceSha256": "7728bc86a1258f37488c72d0c7eb392cbc9891da33906d6965962526e4f64ab3",
+    "firstExecutableLine": 12,
+    "owner": "WBS-P002-03",
+    "costOwner": "WBS-P002-03",
+    "relatedRd": [
+      "MSG-001",
+      "MSG-002",
+      "MSG-007",
+      "MSG-010",
+      "MQ-014",
+      "MQ-017"
+    ],
+    "ui": [
+      "231",
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "4",
+      "5",
+      "7",
+      "11"
+    ],
+    "contract": "Caller-observed senderexception type viaIAEwrapping; arbitrarycause/nullmessage API behavior notclaimed.",
+    "staticPath": "HeaderCodec.encode/FixedWidthEncoder.encode -> new MessageEncodingException(message,cause)",
+    "caseLabels": [
+      "H3",
+      "MF"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerDecoderRejectsEveryFixedFieldAndProfileCorruption()",
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-H02",
+      "PT-PRO-002-M01",
+      "PT-PRO-002-M02"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 5,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/TransportBodyType#<clinit>()V",
+    "className": "dev/codex/schubert/nk/protocol/codec/TransportBodyType",
+    "method": "<clinit>",
+    "descriptor": "()V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportBodyType.java",
+    "sourceSha256": "e0fdf54397d7d935407d498fcb0679fd957b7af091727fd978c9d67df74f81b8",
+    "firstExecutableLine": 4,
+    "owner": "WBS-P002-03",
+    "costOwner": "WBS-P002-03",
+    "relatedRd": [
+      "MSG-001",
+      "MSG-002",
+      "MSG-007",
+      "MSG-010",
+      "MQ-014",
+      "MQ-017"
+    ],
+    "ui": [
+      "231",
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "4",
+      "5",
+      "7",
+      "11"
+    ],
+    "contract": "Plainenum BYTES/TEXT/OBJECT usedassynthetictransport snapshots, noJMSclass connection.",
+    "staticPath": "MT mismatchedbodytype/validBYTESmetadata -> enum initialization",
+    "caseLabels": [
+      "MT",
+      "M7"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#transportAndRouteContractsRejectEveryMismatch()",
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#metadataAndExpectedRouteEstablishNullAndRangeContracts()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-T01"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 27,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 5,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  },
+  {
+    "symbol": "dev/codex/schubert/nk/protocol/codec/TransportMetadata#<init>(Ldev/codex/schubert/nk/protocol/codec/TransportBodyType;Ljava/lang/String;Ljava/util/UUID;Ljava/util/Optional;JIILjava/util/UUID;Ldev/codex/schubert/nk/protocol/layout/LayoutId;Ljava/lang/String;Ljava/lang/String;)V",
+    "className": "dev/codex/schubert/nk/protocol/codec/TransportMetadata",
+    "method": "<init>",
+    "descriptor": "(Ldev/codex/schubert/nk/protocol/codec/TransportBodyType;Ljava/lang/String;Ljava/util/UUID;Ljava/util/Optional;JIILjava/util/UUID;Ldev/codex/schubert/nk/protocol/layout/LayoutId;Ljava/lang/String;Ljava/lang/String;)V",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportMetadata.java",
+    "sourceSha256": "198dac5e9cad2046e8e78a4323bfe2e0e2a4a3842044015e8088c1149fcdf646",
+    "firstExecutableLine": 22,
+    "owner": "WBS-P002-03",
+    "costOwner": "WBS-P002-03",
+    "relatedRd": [
+      "MSG-001",
+      "MSG-002",
+      "MSG-007",
+      "MSG-010",
+      "MQ-014",
+      "MQ-017"
+    ],
+    "ui": [
+      "231",
+      "232",
+      "233"
+    ],
+    "ss": [
+      "322"
+    ],
+    "ssSections": [
+      "2",
+      "4",
+      "5",
+      "7",
+      "11"
+    ],
+    "contract": "Non-null eightreference fields/nonnullOptional, nonblankmetadata/reply andnonnegativeexpiry/deliverycountpositive.",
+    "staticPath": "M7 directTransportMetadata constructors andMT metadatafixtures",
+    "caseLabels": [
+      "M7",
+      "MT"
+    ],
+    "actualCaseKeys": [
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#metadataAndExpectedRouteEstablishNullAndRangeContracts()",
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#transportAndRouteContractsRejectEveryMismatch()"
+    ],
+    "testIdAliases": [
+      "PT-PRO-002-T01"
+    ],
+    "methodCountersFromSame120Run": {
+      "INSTRUCTION": {
+        "covered": 99,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 12,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 17,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 7,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "perCaseProbeAttribution": null,
+    "allBranchOraclesIndividuallyVerified": false
+  }
+]

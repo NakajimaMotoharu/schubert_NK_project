@@ -1,0 +1,472 @@
+{
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "testSource": "64f3a72753434347889f0eabd5d9f9dca67c6bfb",
+  "normalProof": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG24642-protocol-whole120-independent-v1/manifest.json",
+    "sha256": "8ebe6365bc701ba6432b1b55275004024dc71bc452d31b66d31c53894e3ae128"
+  },
+  "metadataInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json",
+    "sha256": "e65782d893a5ae45309cf269d165dec33d1dc396f06b7968b62d95b276455d31"
+  },
+  "descriptorInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/artifacts.json",
+    "sha256": "fb24a1a209849d42894925002baae668bc55a4bd858b1b7c1d38ab838319bb0b"
+  },
+  "physicalIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json",
+    "sha256": "db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723"
+  },
+  "oracleDocuments": [
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/001_NK-PRO-001_単体テスト仕様書.md",
+      "sha256": "503c5f6be3caaa341dcec35cb1bd1b8a3892d270bf6a7fa91cdad580b43abdbe"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/107_現source正本fixture照合・layout個別受入.md",
+      "sha256": "6354a848537937df156f5380941531d71bdf749f68ff1290943a58450ba64ddc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1956_G13LayoutCatalog7_独立期待値意味対応表.md",
+      "sha256": "6ede52efc7cb04c471c6a55e2a17d4b8c4859c9186f24977bc9758b1dcd3d711"
+    },
+    {
+      "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+      "sha256": "59d6774d524d504ed4c8df39f501fda68822cccc12747222b03648fc5209f334"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/1187_Semantic独立期待値七・診断保護・定数九PGPT仕様.md",
+      "sha256": "123884b368c27be54dcd8533a0eaa3df002caa3d4c731ec151028b40027ce769"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/1188_Semantic独立期待値七・診断保護・定数九PGPT結果.md",
+      "sha256": "96f9f7a940c00fb67a9a12c1fe1ecba1d05e0d63190402bf2d6387678d05906c"
+    }
+  ],
+  "owner": "WBS-P002-03",
+  "sourcePaths": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ExpectedRoute.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/MessageEncodingException.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportBodyType.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportMetadata.java"
+  ],
+  "cases": {
+    "MF": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes()",
+      "testIds": [
+        "PT-PRO-002-M01",
+        "PT-PRO-002-M02"
+      ],
+      "independentOracle": "Explicit537byte header+data+record structure,lengthbounds/null/actualdeclared mismatch/unknownlayout anddefensivebytecarrier; headerindependentgolden sharedproof1961/2639 notselfroundtrip-onlyclaim."
+    },
+    "MT": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#transportAndRouteContractsRejectEveryMismatch()",
+      "testIds": [
+        "PT-PRO-002-T01"
+      ],
+      "independentOracle": "Explicitbodytype/PERSISTENT2/version001/IDs/layout/correlation/route/replyTo/expiry mismatch typedpermanent rejection; syntheticmetadataonly, noactualJMS."
+    },
+    "H1": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerEncodingMatchesIndependentUi232GoldenVector()",
+      "testIds": [
+        "PT-PRO-002-H01"
+      ],
+      "independentOracle": "IndependentASCII-space256byte expectedarray withfixedUI232 offsets/literals,exactbytecomparison; noexpectedProductionmethod."
+    },
+    "H2": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#responseAndEventHeadersRoundTripWithoutLeakingContext()",
+      "testIds": [
+        "PT-PRO-002-H01"
+      ],
+      "independentOracle": "Explicitresponse/event profiles andcontextabsence/redaction; QSE headerprofile compatibility."
+    },
+    "H3": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerDecoderRejectsEveryFixedFieldAndProfileCorruption()",
+      "testIds": [
+        "PT-PRO-002-H02"
+      ],
+      "independentOracle": "Fixedoffset onefieldcorruptions/protocol/version/UUIDcase/context/result/reserved/unknownlayout/declaredlimits typedpermanent rejection; senderunknownlayout MessageEncodingException."
+    },
+    "M7": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#metadataAndExpectedRouteEstablishNullAndRangeContracts()",
+      "testIds": [
+        "PT-PRO-002-T01"
+      ],
+      "independentOracle": "Namedconstructor null/blankaddress/negativeexpiry/zeroDeliveryCount/requiredreply/event-expiry pair violations explicitly rejected."
+    },
+    "PE": {
+      "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#encodeRejectsUnknownMissingWrongTypeAndRecordViolations()",
+      "testIds": [
+        "PT-PRO-002-P03"
+      ],
+      "independentOracle": "Explicitunknown/fixed/missing/wrongkind/recordprofile invalidinputs -> MessageEncodingException throughoneStringctor; inputconstructed independentliteralfields."
+    }
+  },
+  "methodRules": {
+    "ExpectedRoute": {
+      "<init>": {
+        "cases": [
+          "M7",
+          "MT"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-007",
+          "MSG-010",
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "4",
+          "5",
+          "7",
+          "11"
+        ],
+        "contract": "Non-null/kind/interaction/reply/address/expiry allowlisted route invariants.",
+        "staticPath": "M7 directExpectedRoute constructors andMT routefixtures"
+      }
+    },
+    "TransportMetadata": {
+      "<init>": {
+        "cases": [
+          "M7",
+          "MT"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-007",
+          "MSG-010",
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "4",
+          "5",
+          "7",
+          "11"
+        ],
+        "contract": "Non-null eightreference fields/nonnullOptional, nonblankmetadata/reply andnonnegativeexpiry/deliverycountpositive.",
+        "staticPath": "M7 directTransportMetadata constructors andMT metadatafixtures"
+      }
+    },
+    "TransportBodyType": {
+      "<clinit>": {
+        "cases": [
+          "MT",
+          "M7"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-007",
+          "MSG-010",
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "4",
+          "5",
+          "7",
+          "11"
+        ],
+        "contract": "Plainenum BYTES/TEXT/OBJECT usedassynthetictransport snapshots, noJMSclass connection.",
+        "staticPath": "MT mismatchedbodytype/validBYTESmetadata -> enum initialization"
+      }
+    },
+    "HeaderCodec": {
+      "<init>": {
+        "cases": [
+          "H1"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-007",
+          "MSG-010",
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "4",
+          "5",
+          "7",
+          "11"
+        ],
+        "contract": "RequireLayoutRegistry non-null.",
+        "staticPath": "H1 HeaderCodec constructor/standard factory"
+      },
+      "standard": {
+        "cases": [
+          "H1",
+          "H2"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-007",
+          "MSG-010",
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "4",
+          "5",
+          "7",
+          "11"
+        ],
+        "contract": "Standard64layout registryfactory.",
+        "staticPath": "H1/H2 direct HeaderCodec.standard"
+      },
+      "encode": {
+        "cases": [
+          "H1",
+          "H2",
+          "H3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-007",
+          "MSG-010",
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "4",
+          "5",
+          "7",
+          "11"
+        ],
+        "contract": "Exact256headerfields/padding/profile; IAE -> senderwholeMessageEncodingException.",
+        "staticPath": "H1 independentgolden/H2 profiles/H3 unknownheaders -> encode"
+      },
+      "peek": {
+        "cases": [
+          "H1",
+          "H2",
+          "H3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-007",
+          "MSG-010",
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "4",
+          "5",
+          "7",
+          "11"
+        ],
+        "contract": "Nullablebody/minimum256/perfieldcanonicality/wholeheader invariants/layout validation typedpermanent failure.",
+        "staticPath": "H1/H2/H3 direct peek"
+      },
+      "canonicalUuid": {
+        "cases": [
+          "H1",
+          "H3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-007",
+          "MSG-010",
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "4",
+          "5",
+          "7",
+          "11"
+        ],
+        "contract": "LowercasecanonicalUUID only.",
+        "staticPath": "peek -> canonicalUuid"
+      },
+      "requiredText": {
+        "cases": [
+          "H1",
+          "H3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-007",
+          "MSG-010",
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "4",
+          "5",
+          "7",
+          "11"
+        ],
+        "contract": "Requiredcanonicalfieldtext viaFieldCodec; missing/invalid typedreject.",
+        "staticPath": "peek -> requiredText -> slice"
+      },
+      "numericInt": {
+        "cases": [
+          "H1",
+          "H3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-007",
+          "MSG-010",
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "4",
+          "5",
+          "7",
+          "11"
+        ],
+        "contract": "FixedASCIIdecimal slice/range andcheckedintconversion.",
+        "staticPath": "peek -> numericInt -> FieldCodec.decodeNumeric"
+      },
+      "slice": {
+        "cases": [
+          "H1",
+          "H3"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-007",
+          "MSG-010",
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "4",
+          "5",
+          "7",
+          "11"
+        ],
+        "contract": "Exact0basedhalfopen field slices fromdeclaredheader.",
+        "staticPath": "peek/requiredText/numericInt -> slice"
+      },
+      "put": {
+        "cases": [
+          "H1",
+          "H2"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-007",
+          "MSG-010",
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "4",
+          "5",
+          "7",
+          "11"
+        ],
+        "contract": "Exactfieldplacement withoutProduction-derived expected.",
+        "staticPath": "encode -> put; H1 independentlyplacedexpectedbytes"
+      }
+    },
+    "MessageEncodingException": {
+      "<init>": {
+        "cases": [
+          "H3",
+          "MF"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-007",
+          "MSG-010",
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "4",
+          "5",
+          "7",
+          "11"
+        ],
+        "contract": "Caller-observed senderexception type viaIAEwrapping; arbitrarycause/nullmessage API behavior notclaimed.",
+        "staticPath": "HeaderCodec.encode/FixedWidthEncoder.encode -> new MessageEncodingException(message,cause)"
+      },
+      "<init>#(Ljava/lang/String;)V": {
+        "cases": [
+          "PE"
+        ],
+        "relatedRd": [
+          "MSG-001",
+          "MSG-002",
+          "MSG-007",
+          "MSG-010",
+          "MQ-014",
+          "MQ-017"
+        ],
+        "ssSections": [
+          "2",
+          "4",
+          "5",
+          "7",
+          "11"
+        ],
+        "contract": "Caller-observed senderwhole-message structural exception; nofieldvalueecho.",
+        "staticPath": "PayloadCodec.encode checks -> new MessageEncodingException(message)"
+      }
+    }
+  },
+  "generatedMethods": {
+    "ExpectedRoute": [
+      "toString",
+      "hashCode",
+      "equals",
+      "messageKind",
+      "interactionKind",
+      "destinationAddress",
+      "requiredReplyToAddress",
+      "expirationRequired"
+    ],
+    "TransportMetadata": [
+      "toString",
+      "hashCode",
+      "equals",
+      "bodyType",
+      "transportMessageId",
+      "correlationId",
+      "replyToAddress",
+      "expirationEpochMillis",
+      "deliveryMode",
+      "deliveryCount",
+      "nkMessageId",
+      "nkLayoutId",
+      "nkProtocolVersion",
+      "destinationAddress"
+    ]
+  },
+  "standardEnumSources": [
+    "TransportBodyType"
+  ],
+  "privateUtilitySources": []
+}

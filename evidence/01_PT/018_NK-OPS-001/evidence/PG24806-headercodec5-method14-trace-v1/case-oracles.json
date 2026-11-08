@@ -1,0 +1,101 @@
+{
+  "MF": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes()",
+    "testIds": [
+      "PT-PRO-002-M01",
+      "PT-PRO-002-M02"
+    ],
+    "independentOracle": "Explicit537byte header+data+record structure,lengthbounds/null/actualdeclared mismatch/unknownlayout anddefensivebytecarrier; headerindependentgolden sharedproof1961/2639 notselfroundtrip-onlyclaim.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+    "sourceSha256": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca",
+    "declarationLine": 216,
+    "bodyEndLine": 299,
+    "assertionBodySha256": "e7bc25a21304b8cbba21b2b7ddf1359282c8e80c3b0f426fc4e5549adc017c2f",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "MT": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#transportAndRouteContractsRejectEveryMismatch()",
+    "testIds": [
+      "PT-PRO-002-T01"
+    ],
+    "independentOracle": "Explicitbodytype/PERSISTENT2/version001/IDs/layout/correlation/route/replyTo/expiry mismatch typedpermanent rejection; syntheticmetadataonly, noactualJMS.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+    "sourceSha256": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca",
+    "declarationLine": 302,
+    "bodyEndLine": 447,
+    "assertionBodySha256": "7a09531ed9c711767b727e3d40aa9c399060f635ee1642eddf3cedd38c34391b",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "H1": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerEncodingMatchesIndependentUi232GoldenVector()",
+    "testIds": [
+      "PT-PRO-002-H01"
+    ],
+    "independentOracle": "IndependentASCII-space256byte expectedarray withfixedUI232 offsets/literals,exactbytecomparison; noexpectedProductionmethod.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+    "sourceSha256": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca",
+    "declarationLine": 45,
+    "bodyEndLine": 71,
+    "assertionBodySha256": "cf8f64bfc09c4bd67a380c1e18fa914d9fe4981147b2f0072e6486f064f78839",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "H2": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#responseAndEventHeadersRoundTripWithoutLeakingContext()",
+    "testIds": [
+      "PT-PRO-002-H01"
+    ],
+    "independentOracle": "Explicitresponse/event profiles andcontextabsence/redaction; QSE headerprofile compatibility.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+    "sourceSha256": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca",
+    "declarationLine": 74,
+    "bodyEndLine": 108,
+    "assertionBodySha256": "55e5311cc3bb9033af9b08390f58c65e0773bbcca503f17c9a92310883350b97",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "H3": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerDecoderRejectsEveryFixedFieldAndProfileCorruption()",
+    "testIds": [
+      "PT-PRO-002-H02"
+    ],
+    "independentOracle": "Fixedoffset onefieldcorruptions/protocol/version/UUIDcase/context/result/reserved/unknownlayout/declaredlimits typedpermanent rejection; senderunknownlayout MessageEncodingException.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+    "sourceSha256": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca",
+    "declarationLine": 111,
+    "bodyEndLine": 161,
+    "assertionBodySha256": "ea27a1819e6763e794d0e80ef79dc132f12d8719629ab875991a1b07a5ba31ef",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "M7": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#metadataAndExpectedRouteEstablishNullAndRangeContracts()",
+    "testIds": [
+      "PT-PRO-002-T01"
+    ],
+    "independentOracle": "Namedconstructor null/blankaddress/negativeexpiry/zeroDeliveryCount/requiredreply/event-expiry pair violations explicitly rejected.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+    "sourceSha256": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca",
+    "declarationLine": 450,
+    "bodyEndLine": 623,
+    "assertionBodySha256": "ee46897758d7ec9ae538c96d3f4a37e9a4818964d3e208cb3ca3178bc414076b",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  },
+  "PE": {
+    "caseKey": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#encodeRejectsUnknownMissingWrongTypeAndRecordViolations()",
+    "testIds": [
+      "PT-PRO-002-P03"
+    ],
+    "independentOracle": "Explicitunknown/fixed/missing/wrongkind/recordprofile invalidinputs -> MessageEncodingException throughoneStringctor; inputconstructed independentliteralfields.",
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+    "sourceSha256": "01f12650ecff0e5dafa486d4eac507051b50789ea5cc914598e756e5bd0d6cf9",
+    "declarationLine": 253,
+    "bodyEndLine": 334,
+    "assertionBodySha256": "ae4c7df75e0b69566c3601098c09f6ee3d46131cf1e343cb37d4b4edd2703ff3",
+    "actual120PassCase": true,
+    "individualProbeAttribution": null
+  }
+}
