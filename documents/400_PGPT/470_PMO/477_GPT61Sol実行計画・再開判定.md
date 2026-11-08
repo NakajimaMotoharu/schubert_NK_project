@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 現行追補：2026-11-08 完了合成証跡を先に照合（BUG2501/YKT2239）
+
+新群を選ぶ前に、該当Programの仕様・結果ファイル名から最新の完了合成証跡を確認する。歴史raw aliasやMain専用lookupの空結果を現残件とみなさない。通常85Testは3677/PG22608で346site全分類済み、現85source SHAも全一致。Close7はYKT2176/22458で既閉、当93loaderは同seal既分類で追加新規0。群4374/75の再確認を新規進捗にせず原記録を残す追記訂正を行う。既成功の確認再演をせず、既証拠の不足した依存だけを扱う。モデル/451/原見積/利用枠/HOLD/継続・停止条件は変更しない。
+
+
 ## 2026-11-08 metadata入力型を先行観測する同因反復是正
 
 BUG2497/YKT2235の空list/bool同視に続き、BUG2498/YKT2236は実行count int0/boolFalseの同視で、新読取工具のguardがtarget処理前に停止した。以後新metadata helperは、固定input pin・size上限・必須fieldの実型/欠落/適用counterを先に一覧化してからpredicateを実装する。bool/int/listをtruthiness又は相互代用でnormaliseせず、未知/未対応shape/欠落を0・false・成功へ補完しない。原fieldのfalse/count0/emptylistは各schemaで厳密に保持し、相互代用と欠落の否定確認を行う。元失敗/開始見積/専有費不明を保持し、工具手戻りを元計画の完成率にしない。正規477停滞是正として内部手順だけを変更し、実行モデル・品質・scope・全HOLD・継続/残10%停止は不変更。根拠0183805/3806、PG23784before/23778metadata/23780独立。
