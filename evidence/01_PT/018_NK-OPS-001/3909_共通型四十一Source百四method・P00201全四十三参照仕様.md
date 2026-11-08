@@ -1,0 +1,9 @@
+# 共通型41Source・104methodとP00201全43Source参照仕様
+
+G13.07 ORIGINAL_PLAN原0.5/3/7pp cap9、P00201責任参照追加費0。先行002004/1961/2087/2650/現normal24642と現metadata23972を先に照合。残41Source/41physical・37測定class/2interface/2annotation、raw207=測定104+標準filter101+抽象2。内訳はenum18・N12 ID九・HTTP/elapsed二・Sha/path値と補助、FixedWidthEncoder/Decoder/ProtocolValidator、宣言のみ四。FixedWidth二型は実装classでありinterfaceと誤分類しない。
+
+801開始/802scope/803producer/804post/805close、必要WBS観測は806。元normal120/Main7aed/Test64f3を使用し、新Java/compiler/Analyzer/製品試験0。実MessageCodecのframe/transport二case、固定enum表とgeneric enum/N12/数値三case及びsemantic値のNFC/境界/null/redaction一caseの計7Caseを各責務へ限定する。ID生成toStringや全record自動methodをredaction期待へ一律拡大せず、Sha/RelativePath/DisplayPathの指定toStringだけを固定redacted期待と対応する。
+
+Source/owner/cost/関連MSG/MQ/FIL/UI/SS/各Test ID/独立literal/行bodyhashを明示対応。callerが異なるownerに属すHeaderCodec/field/transport値は関連参照だけで受入/費用を重複計上しない。L334M104C37B104/I1467全miss0は元同normal120 subset、自然B0/宣言のみを実測100へ換算しない。個別probe null/全branch独立oracle完了未主張。
+
+独立postが元Field三Sourceのうち実ownerP00201のFieldCodec/FieldEncodingException二Source17methodだけを参照し、PPE一Source2methodのP00204を混入せず、P00201全43Source/121methodへ非重複結合する。元raw/scope/MSG11/費用/正本を変更しない。新PT/PASS/coverage/Source登録/leaf0・unique520/正式1964-53/工数null/全HOLD/fresh残10%保全/continuous-v2保持。

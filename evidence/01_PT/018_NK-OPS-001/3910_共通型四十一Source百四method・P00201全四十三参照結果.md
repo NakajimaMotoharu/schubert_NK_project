@@ -1,0 +1,9 @@
+# 共通型41Source・104methodとP00201全43参照結果
+
+3909/802/803/804、PG24788順0/0796a832→24790独立逆0/344b9391c1a6c390f29a238ba79aa6e85300e57ff5c1d8feacc7ea0d3a0bd24f・7型保持metadata否定。41Source/41physical/37測定class・2interface2annotation、raw207=104測定101標準filter2抽象を現metadata/XML/Source責任/元実7Caseと独立literalへ結合。L334M104C37B104/I1467全miss0は同normal120 subsetで新測定0。全対応Program002097/公開JSON五。
+
+元Field24662のうちP00201の二Source17methodだけを結合し、他P00204のPPE一Source2methodを除外、P00201全43/43Source・43physical39測定class・121/121公式methodを現XMLへ非重複一致。raw225=121測定102標準filter2抽象/元17Case、L457M121C39B188/I1948全miss0参照。28自然B0=N-A/null/strictSource四gate1、個別probe null・全branchoracle未主張。
+
+BUG2554/YKT2278否定owner同値の初post1をbefore24792保全し別ownerP00203＋変異実在guardで是正、24794同系九postのowner適用性を確認し旧八は非該当/無変更、旧成功再演0。原0.5/3/7cap9・元MSG11責任/費用/受入・unique520/正式1964-53/工数null/全HOLD不変更。新Java/製品PT/coverage/Source登録/leaf0。
+
+PG24796でWBS485/486へcurrentP00201AllMethodReferenceTrace20261109を同一観測として追記し、全43/121の参照だけを記録。元全値/acceptance/costを保持、root486は現485a4f53e33へ同時整合・既580guardと4誤参照否定を通過。
