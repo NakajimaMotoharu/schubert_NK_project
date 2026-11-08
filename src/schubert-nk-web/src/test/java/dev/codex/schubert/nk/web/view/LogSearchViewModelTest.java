@@ -354,7 +354,8 @@ class LogSearchViewModelTest {
   @Test
   void web293ConcurrentViews() throws Exception {
     var shared = List.of(row(2, "shared"), row(1, "second"));
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var futures = new ArrayList<Future<LogSearchViewModel>>();
       for (int i = 0; i < 64; i++) {
         final int index = i;
@@ -380,6 +381,9 @@ class LogSearchViewModelTest {
         assertTrue(v.getPreviousHref().isEmpty());
         assertTrue(v.getNextHref().isEmpty());
       }
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(List.of(2L, 1L), shared.stream().map(r -> r.logId().value()).toList());
   }

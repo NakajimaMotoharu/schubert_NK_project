@@ -119,13 +119,17 @@ class PageViewModelTest {
   void web179IndependentParallelProjection() throws Exception {
     var fixtures =
         List.of(fixture(1, 50, 0, 1, 0, 0, 0, 0), pages().get(1), pages().get(3), pages().get(5));
-    try (var executor = Executors.newFixedThreadPool(8)) {
+    var executor = Executors.newFixedThreadPool(8);
+    try {
       var tasks = new ArrayList<java.util.concurrent.Future<?>>();
       for (int i = 0; i < 100; i++) {
         Fixture value = fixtures.get(i % 4);
         tasks.add(executor.submit(() -> check(value)));
       }
       for (var task : tasks) task.get(10, TimeUnit.SECONDS);
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

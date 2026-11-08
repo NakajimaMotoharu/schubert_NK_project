@@ -1,0 +1,9 @@
+# 3873 純粋表示7fixture/64caseのexecutor所有
+
+G03.05主/P01603-04-07-11-12-14関連0、REWORK原1/4/8pp cap10。前後の共通費重複0。原2709/2710 Page8+Scenario階層12、2711/2712 Scenario検索Results8（ViewModel8は今回含まない）、2717/2718 Detail12+Music8、2721/2722 LogView8+Results8の既whole仕様/全body・SDK依存を確認。Main11Source/24physicalの元Codecounter L498/M203/C24/B138は予定値であり、新実測前は成功にしない。
+
+対象7Test=PageViewModelTest/ScenarioHierarchyViewModelTest/ScenarioSearchResultsViewModelTest/ScenarioDetailViewModelTest/MusicHierarchyViewModelTest/LogSearchViewModelTest/LogSearchResultsViewModelTest。各自己8thread/64又は100taskのFutureget10秒は保持し、一fixedpoolずつ計7のTWRcloseを明示finally.shutdownNow/awaitTermination10assertへ。class名と変数executor/pool・元case範囲で限定する。Pageの@Test→@DisplayNameを原まま保持し、元8methodをannotation-aware宣言とXMLで二重確認。Annotation除去・表示名推測でTest countを作らない。
+
+BUG2531/YKT2177を修正前登録、beforeはGit5d69b7e9の元7object/SHAのみ保存し本文/文脈/合成password等をSource以外へ重複しない。全元literal/enum/DTO/getter集合/順序・inputlist消去/immutable/null/境界・文字escape/独立DOM/parallel期待は不変更。StringTemplateResolver/Jsoupは手書きmemoryHTMLだけ、SessionPrincipalは偽表示入力、Pathは文字列検査だけ。実template/Browser/HTTP/DB/JMS/account/auth/key/Root/VM/native/Graph/cohortは行わない。必要SDKのcurrentm2/旧公開dependencyHashesを型役割とbyteで固定しserver/driver/provider接続jarは含めない。全source/SDK/現Main22084/22086の事前根拠が欠けるなら動的部分HOLD、元Test抽出/代替fixture禁止。
+
+format24360/compile24362/static24364/preflight24366→source固定push→whole64単一exec24368/外側180秒→独立24370。元成功原64再演の目的ではなく、変更fixtureの必要選択回帰。原exec合算/新unique0、他Main/SDKの全coverage受入0。自然branch0 SourceはN-A/nullで非空four100と区別、全条件の実targetbranch138を実測。初1/未達/中断は保持する。518Java414/候補114/pending12/whole93暫定/正式1964-53/工数null/全HOLD不変、全YKT2177は一群だけで閉鎖しない。fresh10%/不明は保全、通常commit/単位終了で停止しない。

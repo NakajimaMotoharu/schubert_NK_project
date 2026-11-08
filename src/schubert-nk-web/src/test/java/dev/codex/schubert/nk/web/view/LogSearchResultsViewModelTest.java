@@ -329,7 +329,8 @@ class LogSearchResultsViewModelTest {
   @Test
   void web269ConcurrentProjection() throws Exception {
     var input = List.of(record(1, TIME, 1023, "shared"));
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var futures = new ArrayList<Future<?>>();
       for (int i = 0; i < 64; i++) {
         final int n = i;
@@ -347,6 +348,9 @@ class LogSearchResultsViewModelTest {
                 }));
       }
       for (var future : futures) future.get(10, TimeUnit.SECONDS);
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals("shared", input.getFirst().message());
     assertEquals(1, input.size());

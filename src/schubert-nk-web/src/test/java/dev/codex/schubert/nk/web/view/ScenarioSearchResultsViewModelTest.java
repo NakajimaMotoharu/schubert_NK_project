@@ -322,7 +322,8 @@ class ScenarioSearchResultsViewModelTest {
 
   @Test
   void web213ConcurrentProjection() throws Exception {
-    try (var executor = Executors.newFixedThreadPool(8)) {
+    var executor = Executors.newFixedThreadPool(8);
+    try {
       var tasks = new ArrayList<Future<ScenarioSearchResultsViewModel>>();
       for (int i = 0; i < 64; i++) {
         final int n = i;
@@ -353,6 +354,9 @@ class ScenarioSearchResultsViewModelTest {
         assertEquals("本文" + i, result.getRows().getFirst().getBody());
         assertEquals(i + 1, result.getRows().getFirst().getEntryId());
       }
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

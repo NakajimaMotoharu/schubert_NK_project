@@ -313,7 +313,8 @@ class MusicHierarchyViewModelTest {
   void web253ConcurrentProjection() throws Exception {
     var records = categories();
     var sections = sections();
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var tasks = new ArrayList<Future<?>>();
       for (int i = 0; i < 64; i++) {
         final int n = i;
@@ -340,6 +341,9 @@ class MusicHierarchyViewModelTest {
                 }));
       }
       for (var task : tasks) task.get(10, TimeUnit.SECONDS);
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(categories(), records);
     assertEquals(sections(), sections);
