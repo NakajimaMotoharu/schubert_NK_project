@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
@@ -11,6 +12,7 @@ import dev.codex.schubert.nk.storage.StorageIoException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
@@ -80,13 +82,17 @@ final class ApiConfigurationLoaderTest {
                   "nk.monitoring.mode: STANDARD\n", "nk.db.pool.api.max: '8'\n");
             },
             ENV);
-    try (var executor = Executors.newFixedThreadPool(8)) {
+    var executor = Executors.newFixedThreadPool(8);
+    try {
       var results = new ArrayList<java.util.concurrent.Future<ApiNonSecretConfig>>();
       for (int i = 0; i < 32; i++) results.add(executor.submit(loader::load));
       for (var result : results) {
-        assertEquals("STANDARD", result.get().value("nk.monitoring.mode"));
-        assertEquals("8", result.get().value("nk.db.pool.api.max"));
+        assertEquals("STANDARD", result.get(10, TimeUnit.SECONDS).value("nk.monitoring.mode"));
+        assertEquals("8", result.get(10, TimeUnit.SECONDS).value("nk.db.pool.api.max"));
       }
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), "API loader executor terminated");
     }
     assertEquals(32, calls.get());
   }
