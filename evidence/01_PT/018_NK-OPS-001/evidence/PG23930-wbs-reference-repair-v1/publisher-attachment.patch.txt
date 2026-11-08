@@ -1,0 +1,7 @@
+
+# BUG2513/YKT2251: changed WBS references must be coherent before file scan/stage.
+if any(n in names for n in ('documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json', 'documents/400_PGPT/470_PMO/486_WBS現行実績.json')):
+ from runpy import run_path
+ reference_guard = run_path(str(root/'evidence/01_PT/018_NK-OPS-001/input/580_wbs_inventory_reference_guard.py'))
+ reference_guard['verify_files'](root)
+
