@@ -1,0 +1,7 @@
+# 3872 WebBusiness原12のexecutor所有を有限化
+
+G03.05主/P01617-18-21/P01505/P00502関連0、REWORK原0.5/3/7pp cap9。前の次commandに挙げたGame/Menu等の単独Test pathは実在せず未実装と判定しない。実物はWebBusinessWireClientsTest（原2633/2634）等に複合される。元whole782行/12caseと五facade/ProtectedReadの実経路/codec/Fixtureを確認し、原成功14312/14314は再演の目的で使わない。BUG2529/YKT2177を先に登録、修正はwire008の一fixedpool TWRを明示try/finally.shutdownNow+awaitTermination10/assertへ。元task.get10/180並行と18request/全literalwire・error/null/cause/消去等全他tokenは不変更。
+
+beforeは現在Git HEAD1c6eccb4f29d55693453fefe4e5980e6dc7c9cbbの当source object/hashを固定し、合成password等をSource以外の新証跡へ重複出力しない。新fixture/メソッド抽出/実session/account/auth/token/DB/JMScontext/Root/VM/native/鍵操作なし。元fake sender→wire.onReplyだけ、MessageDigestは公開合成context比較のみ。Main6Source7physicalと共通JMS request/core・Protocolのcurrentnormal22084/22086・既24322/24238Source契約を確認する。未知依存があれば当動的HOLD、拒否境界の試行禁止。
+
+format24342/compile24344/static24346/preflight24348→固定Source通常push→whole12単exec24350→独立24352（終了・XML・byte/CRC/held初期化・全他oracle逆変換）。対象Logout/MediaDescriptor/Notification/Question/UserAdministration/ProtectedRead(+Result)の計L105/M21/C7/B26は元値であり新runを実測する。五facade自然B0はN-A/null、全六source四100と偽らない。ProtectedReadは実条件26全網羅を要求。新unique0、全YKT2177OPEN、518Java414/正式1964-53/工数null維持。原前群32再演/全Mainbuild/旧exec合算0、通常区切りでは停止しない。

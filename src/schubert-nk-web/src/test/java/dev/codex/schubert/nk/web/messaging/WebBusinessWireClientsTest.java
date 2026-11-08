@@ -358,7 +358,8 @@ class WebBusinessWireClientsTest {
           sent.add(body);
           assertTrue(wire.onReply(id, response(type, ERROR_RESULT_CODE, id, context)));
         };
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var tasks = new ArrayList<Future<?>>();
       for (int n = 0; n < 180; n++) {
         int item = n;
@@ -383,6 +384,9 @@ class WebBusinessWireClientsTest {
                 }));
       }
       for (var task : tasks) task.get(10, TimeUnit.SECONDS);
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(180, seen.size());
     assertEquals(0, wire.pendingCount());
