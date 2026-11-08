@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-08T11:19:45.237">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationServiceMemoryPortTest.java">
+<violation beginline="445" endline="445" begincolumn="24" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AuthenticationServiceMemoryPortTest" method="memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="449" endline="452" begincolumn="11" endcolumn="17" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AuthenticationServiceMemoryPortTest" method="memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray" variable="one" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="454" endline="457" begincolumn="11" endcolumn="17" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AuthenticationServiceMemoryPortTest" method="memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray" variable="two" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="541" endline="541" begincolumn="21" endcolumn="39" rule="AvoidUsingVolatile" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AuthenticationServiceMemoryPortTest.Fixture" variable="observedStoredHash" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile" priority="2">
+Use of modifier volatile is not recommended.
+</violation>
+<violation beginline="727" endline="727" begincolumn="34" endcolumn="62" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AuthenticationServiceMemoryPortTest.Fixture.Statement" variable="parameters" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="771" endline="771" begincolumn="31" endcolumn="52" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AuthenticationServiceMemoryPortTest.Fixture.Statement" method="rows" variable="row" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="785" endline="785" begincolumn="31" endcolumn="52" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AuthenticationServiceMemoryPortTest.Fixture.Statement" method="rows" variable="row" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="852" endline="852" begincolumn="13" endcolumn="34" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthenticationServiceMemoryPortTest" method="proxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+</pmd>
