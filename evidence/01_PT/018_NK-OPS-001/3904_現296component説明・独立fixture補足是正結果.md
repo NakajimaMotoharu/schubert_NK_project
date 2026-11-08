@@ -1,0 +1,9 @@
+# 現296component説明・独立fixture補足是正結果
+
+3903/786/787、PG24744順0/7ba7a65d→24752独立逆0/880fd317272f3712321d7017cbc38b53e7f6dd6aa30d2947f48f70a08348f811。現独立三TSVからSS323型69・64layout/78DATA-RECORD組/296非fixed component/optional79/empty4/独立getter binding135を照合。共有型のshape同一・全名対応を確認し、現helper assert296とsource64f3同byte・元normal120の実directional wrapperに結合。6誤数/型metadata否定、製品Java/Reflection/mapper呼出/試験実行0。今後は公開named-shapes.jsonが現296の根拠であり、歴史295を現component数として使わない。
+
+BUG2552/YKT2276は型catalog説明の旧295混入。実12method/全P00102の20Source84method/実120/Source資格は不変更。1197旧数2箇所を296へ訂正し、3902は旧数0のため補足だけ追記。開始3901/immutable781/24730 case説明は元byteのまま、24744を必須補足として誤期待数を訂正。全repo歴史値や元event/見積/費用/正本/coverage/acceptanceの変更0。
+
+BUG2553/YKT2277は是正工具が両active文書へ旧295を要求した初guard1（書込0）。before24750を保全し、beforeの各実literal件数に従って1197置換2/3902非該当0と補足を区別、frozen三参照を原byte再照合。二工具不備の是正であり製品障害や新PTではない。
+
+G13 REWORK原0.25/0.5/2cap3。新PASS/coverage/Source登録/leaf0・unique520/正式1964-53/工数null/全HOLD保持。次のnamed DTO参照では296と79/4/135の当証拠を再利用し、元試験の確認再演をしない。

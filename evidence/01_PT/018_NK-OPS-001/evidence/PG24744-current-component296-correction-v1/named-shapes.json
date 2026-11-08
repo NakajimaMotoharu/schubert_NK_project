@@ -1,0 +1,2865 @@
+[
+  {
+    "type": "AnimationListRequestData",
+    "layouts": [
+      {
+        "layout": "ANLREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Category",
+        "length": 16,
+        "wire": "X",
+        "presence": "M",
+        "getter": "category"
+      }
+    ]
+  },
+  {
+    "type": "AnimationListResponseData",
+    "layouts": [
+      {
+        "layout": "ANLRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Total count",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "totalCount"
+      }
+    ]
+  },
+  {
+    "type": "AnimationMenuRequestData",
+    "layouts": [
+      {
+        "layout": "ANMREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": []
+  },
+  {
+    "type": "AnimationMenuResponseData",
+    "layouts": [
+      {
+        "layout": "ANMRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Main/SUBTRACK件数",
+        "length": 3,
+        "wire": "N",
+        "presence": "M",
+        "getter": "mainSubtrackCount"
+      },
+      {
+        "name": "OVA件数",
+        "length": 3,
+        "wire": "N",
+        "presence": "M",
+        "getter": "ovaCount"
+      },
+      {
+        "name": "Opening有無",
+        "length": 1,
+        "wire": "B",
+        "presence": "M",
+        "getter": "openingPresent"
+      },
+      {
+        "name": "総file件数",
+        "length": 3,
+        "wire": "N",
+        "presence": "M",
+        "getter": "totalFileCount"
+      }
+    ]
+  },
+  {
+    "type": "AnimationRecord",
+    "layouts": [
+      {
+        "layout": "ANLRSP01",
+        "area": "RECORD"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Video ID",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "videoId"
+      },
+      {
+        "name": "Title",
+        "length": 256,
+        "wire": "X",
+        "presence": "M",
+        "getter": "title"
+      },
+      {
+        "name": "Category",
+        "length": 16,
+        "wire": "X",
+        "presence": "M",
+        "getter": "category"
+      },
+      {
+        "name": "Display path",
+        "length": 512,
+        "wire": "X",
+        "presence": "M",
+        "getter": "displayPath"
+      },
+      {
+        "name": "File byte長",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "fileByteLength"
+      },
+      {
+        "name": "Parent main ID",
+        "length": 64,
+        "wire": "X",
+        "presence": "C",
+        "getter": "parentMainId"
+      },
+      {
+        "name": "Display order",
+        "length": 4,
+        "wire": "N",
+        "presence": "M",
+        "getter": "displayOrder"
+      }
+    ]
+  },
+  {
+    "type": "AudioDescriptorRequestData",
+    "layouts": [
+      {
+        "layout": "AUDREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Audio ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "audioId"
+      },
+      {
+        "name": "Disposition",
+        "length": 1,
+        "wire": "X",
+        "presence": "M",
+        "getter": "disposition"
+      }
+    ]
+  },
+  {
+    "type": "GameListRequestData",
+    "layouts": [
+      {
+        "layout": "GAMREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": []
+  },
+  {
+    "type": "GameListResponseData",
+    "layouts": [
+      {
+        "layout": "GAMRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Total count",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "totalCount"
+      }
+    ]
+  },
+  {
+    "type": "GameRecord",
+    "layouts": [
+      {
+        "layout": "GAMRSP01",
+        "area": "RECORD"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Game code",
+        "length": 12,
+        "wire": "X",
+        "presence": "M",
+        "getter": "gameCode"
+      },
+      {
+        "name": "Title",
+        "length": 256,
+        "wire": "X",
+        "presence": "M",
+        "getter": "title"
+      },
+      {
+        "name": "Display order",
+        "length": 3,
+        "wire": "N",
+        "presence": "M",
+        "getter": "displayOrder"
+      }
+    ]
+  },
+  {
+    "type": "LogRecord",
+    "layouts": [
+      {
+        "layout": "LGSRSP01",
+        "area": "RECORD"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Log ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "logId"
+      },
+      {
+        "name": "発生日時",
+        "length": 17,
+        "wire": "N",
+        "presence": "M",
+        "getter": "occurredAt"
+      },
+      {
+        "name": "Log type",
+        "length": 16,
+        "wire": "X",
+        "presence": "M",
+        "getter": "logType"
+      },
+      {
+        "name": "Level",
+        "length": 8,
+        "wire": "X",
+        "presence": "M",
+        "getter": "level"
+      },
+      {
+        "name": "Action",
+        "length": 64,
+        "wire": "X",
+        "presence": "O",
+        "getter": "action"
+      },
+      {
+        "name": "Message",
+        "length": 512,
+        "wire": "X",
+        "presence": "M",
+        "getter": "message"
+      },
+      {
+        "name": "HTTP request ID",
+        "length": 36,
+        "wire": "X",
+        "presence": "O",
+        "getter": "httpRequestId"
+      },
+      {
+        "name": "業務Message ID",
+        "length": 36,
+        "wire": "X",
+        "presence": "O",
+        "getter": "businessMessageId"
+      },
+      {
+        "name": "Correlation ID",
+        "length": 36,
+        "wire": "X",
+        "presence": "O",
+        "getter": "correlationId"
+      },
+      {
+        "name": "HTTP method",
+        "length": 8,
+        "wire": "X",
+        "presence": "O",
+        "getter": "httpMethod"
+      },
+      {
+        "name": "Path",
+        "length": 256,
+        "wire": "X",
+        "presence": "O",
+        "getter": "path"
+      },
+      {
+        "name": "HTTP status",
+        "length": 3,
+        "wire": "X",
+        "presence": "O",
+        "getter": "httpStatus"
+      },
+      {
+        "name": "Elapsed ms",
+        "length": 9,
+        "wire": "X",
+        "presence": "O",
+        "getter": "elapsedMs"
+      },
+      {
+        "name": "Remote address",
+        "length": 45,
+        "wire": "X",
+        "presence": "O",
+        "getter": "remoteAddress"
+      },
+      {
+        "name": "Details",
+        "length": 1024,
+        "wire": "X",
+        "presence": "O",
+        "getter": "details"
+      }
+    ]
+  },
+  {
+    "type": "LogSearchRequestData",
+    "layouts": [
+      {
+        "layout": "LGSREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Keyword",
+        "length": 256,
+        "wire": "X",
+        "presence": "O",
+        "getter": "keyword"
+      },
+      {
+        "name": "Log type",
+        "length": 16,
+        "wire": "X",
+        "presence": "O",
+        "getter": "logType"
+      },
+      {
+        "name": "Action",
+        "length": 64,
+        "wire": "X",
+        "presence": "O",
+        "getter": "action"
+      },
+      {
+        "name": "Path",
+        "length": 256,
+        "wire": "X",
+        "presence": "O",
+        "getter": "path"
+      },
+      {
+        "name": "Level",
+        "length": 8,
+        "wire": "X",
+        "presence": "O",
+        "getter": "level"
+      },
+      {
+        "name": "From日時",
+        "length": 17,
+        "wire": "X",
+        "presence": "O",
+        "getter": "fromAt"
+      },
+      {
+        "name": "To日時",
+        "length": 17,
+        "wire": "X",
+        "presence": "O",
+        "getter": "toAt"
+      },
+      {
+        "name": "Page",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "page"
+      },
+      {
+        "name": "Page size",
+        "length": 3,
+        "wire": "N",
+        "presence": "M",
+        "getter": "pageSize"
+      }
+    ]
+  },
+  {
+    "type": "LoginRequestData",
+    "layouts": [
+      {
+        "layout": "LGNREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Username",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "username"
+      },
+      {
+        "name": "Password",
+        "length": 256,
+        "wire": "X",
+        "presence": "M",
+        "getter": "password"
+      },
+      {
+        "name": "Client address",
+        "length": 45,
+        "wire": "X",
+        "presence": "M",
+        "getter": "clientAddress"
+      }
+    ]
+  },
+  {
+    "type": "LoginResponseData",
+    "layouts": [
+      {
+        "layout": "LGNRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Username",
+        "length": 64,
+        "wire": "X",
+        "presence": "C",
+        "getter": "username"
+      },
+      {
+        "name": "Role",
+        "length": 5,
+        "wire": "X",
+        "presence": "C",
+        "getter": "role"
+      },
+      {
+        "name": "認証context ID",
+        "length": 64,
+        "wire": "X",
+        "presence": "C",
+        "getter": "authenticationContextId"
+      },
+      {
+        "name": "発行日時",
+        "length": 17,
+        "wire": "X",
+        "presence": "C",
+        "getter": "issuedAt"
+      },
+      {
+        "name": "期限日時",
+        "length": 17,
+        "wire": "X",
+        "presence": "C",
+        "getter": "expiresAt"
+      },
+      {
+        "name": "Retry after秒",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "retryAfterSeconds"
+      },
+      {
+        "name": "残り試行回数",
+        "length": 3,
+        "wire": "N",
+        "presence": "M",
+        "getter": "remainingAttempts"
+      },
+      {
+        "name": "利用者message",
+        "length": 256,
+        "wire": "X",
+        "presence": "O",
+        "getter": "userMessage"
+      }
+    ]
+  },
+  {
+    "type": "LogoutRequestData",
+    "layouts": [
+      {
+        "layout": "LOGREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": []
+  },
+  {
+    "type": "LogoutResponseData",
+    "layouts": [
+      {
+        "layout": "LOGRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Session失効日時",
+        "length": 17,
+        "wire": "N",
+        "presence": "M",
+        "getter": "sessionRevokedAt"
+      }
+    ]
+  },
+  {
+    "type": "MediaDescriptorData",
+    "layouts": [
+      {
+        "layout": "AUDRSP01",
+        "area": "DATA"
+      },
+      {
+        "layout": "MEDRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Media logical ID",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "mediaLogicalId"
+      },
+      {
+        "name": "Storage relative path",
+        "length": 512,
+        "wire": "X",
+        "presence": "M",
+        "getter": "storageRelativePath"
+      },
+      {
+        "name": "File name",
+        "length": 256,
+        "wire": "X",
+        "presence": "M",
+        "getter": "fileName"
+      },
+      {
+        "name": "File byte長",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "fileByteLength"
+      },
+      {
+        "name": "SHA-256",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "sha256"
+      },
+      {
+        "name": "MIME type",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "mimeType"
+      },
+      {
+        "name": "Content disposition",
+        "length": 1,
+        "wire": "X",
+        "presence": "M",
+        "getter": "contentDisposition"
+      }
+    ]
+  },
+  {
+    "type": "MusicCategoryRecord",
+    "layouts": [
+      {
+        "layout": "MCTRSP01",
+        "area": "RECORD"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Category",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "category"
+      },
+      {
+        "name": "Track件数",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "trackCount"
+      }
+    ]
+  },
+  {
+    "type": "MusicCategoryRequestData",
+    "layouts": [
+      {
+        "layout": "MCTREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": []
+  },
+  {
+    "type": "MusicCategoryResponseData",
+    "layouts": [
+      {
+        "layout": "MCTRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Total count",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "totalCount"
+      }
+    ]
+  },
+  {
+    "type": "MusicDescriptorRequestData",
+    "layouts": [
+      {
+        "layout": "MEDREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Track ID",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "trackId"
+      },
+      {
+        "name": "Disposition",
+        "length": 1,
+        "wire": "X",
+        "presence": "M",
+        "getter": "disposition"
+      }
+    ]
+  },
+  {
+    "type": "MusicSectionRecord",
+    "layouts": [
+      {
+        "layout": "MCSRSP01",
+        "area": "RECORD"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Section",
+        "length": 128,
+        "wire": "X",
+        "presence": "M",
+        "getter": "section"
+      },
+      {
+        "name": "Track件数",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "trackCount"
+      }
+    ]
+  },
+  {
+    "type": "MusicSectionRequestData",
+    "layouts": [
+      {
+        "layout": "MCSREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Category",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "category"
+      }
+    ]
+  },
+  {
+    "type": "MusicSectionResponseData",
+    "layouts": [
+      {
+        "layout": "MCSRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Total count",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "totalCount"
+      }
+    ]
+  },
+  {
+    "type": "MusicTrackRecord",
+    "layouts": [
+      {
+        "layout": "MTRRSP01",
+        "area": "RECORD"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Track ID",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "trackId"
+      },
+      {
+        "name": "Title",
+        "length": 256,
+        "wire": "X",
+        "presence": "M",
+        "getter": "title"
+      },
+      {
+        "name": "Category",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "category"
+      },
+      {
+        "name": "Section",
+        "length": 128,
+        "wire": "X",
+        "presence": "M",
+        "getter": "section"
+      },
+      {
+        "name": "Display path",
+        "length": 512,
+        "wire": "X",
+        "presence": "M",
+        "getter": "displayPath"
+      },
+      {
+        "name": "File byte長",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "fileByteLength"
+      },
+      {
+        "name": "Pair key",
+        "length": 256,
+        "wire": "X",
+        "presence": "O",
+        "getter": "pairKey"
+      },
+      {
+        "name": "Pair role",
+        "length": 1,
+        "wire": "X",
+        "presence": "M",
+        "getter": "pairRole"
+      },
+      {
+        "name": "Display order",
+        "length": 4,
+        "wire": "N",
+        "presence": "M",
+        "getter": "displayOrder"
+      }
+    ]
+  },
+  {
+    "type": "MusicTrackRequestData",
+    "layouts": [
+      {
+        "layout": "MTRREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Category",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "category"
+      },
+      {
+        "name": "Section",
+        "length": 128,
+        "wire": "X",
+        "presence": "M",
+        "getter": "section"
+      }
+    ]
+  },
+  {
+    "type": "MusicTrackResponseData",
+    "layouts": [
+      {
+        "layout": "MTRRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Total count",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "totalCount"
+      }
+    ]
+  },
+  {
+    "type": "NotificationCancelRequestData",
+    "layouts": [
+      {
+        "layout": "NTCREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Notification ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "notificationId"
+      },
+      {
+        "name": "Operation token",
+        "length": 36,
+        "wire": "X",
+        "presence": "M",
+        "getter": "operationToken"
+      }
+    ]
+  },
+  {
+    "type": "NotificationCancelResponseData",
+    "layouts": [
+      {
+        "layout": "NTCRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "更新後状態",
+        "length": 12,
+        "wire": "X",
+        "presence": "C",
+        "getter": "updatedState"
+      },
+      {
+        "name": "取消日時",
+        "length": 17,
+        "wire": "X",
+        "presence": "C",
+        "getter": "cancelledAt"
+      }
+    ]
+  },
+  {
+    "type": "NotificationDetailRequestData",
+    "layouts": [
+      {
+        "layout": "NTDREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Notification ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "notificationId"
+      }
+    ]
+  },
+  {
+    "type": "NotificationDetailResponseData",
+    "layouts": [
+      {
+        "layout": "NTDRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Notification ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "notificationId"
+      },
+      {
+        "name": "受付ID",
+        "length": 26,
+        "wire": "X",
+        "presence": "M",
+        "getter": "receiptId"
+      },
+      {
+        "name": "通知区分",
+        "length": 12,
+        "wire": "X",
+        "presence": "M",
+        "getter": "notificationType"
+      },
+      {
+        "name": "内部状態",
+        "length": 12,
+        "wire": "X",
+        "presence": "M",
+        "getter": "internalState"
+      },
+      {
+        "name": "受付日時",
+        "length": 17,
+        "wire": "N",
+        "presence": "M",
+        "getter": "submittedAt"
+      },
+      {
+        "name": "処理開始日時",
+        "length": 17,
+        "wire": "X",
+        "presence": "C",
+        "getter": "processingStartedAt"
+      },
+      {
+        "name": "処理完了日時",
+        "length": 17,
+        "wire": "X",
+        "presence": "C",
+        "getter": "processingCompletedAt"
+      },
+      {
+        "name": "Error日時",
+        "length": 17,
+        "wire": "X",
+        "presence": "C",
+        "getter": "errorAt"
+      },
+      {
+        "name": "取消日時",
+        "length": 17,
+        "wire": "X",
+        "presence": "C",
+        "getter": "cancelledAt"
+      },
+      {
+        "name": "質問削除済み",
+        "length": 1,
+        "wire": "B",
+        "presence": "M",
+        "getter": "questionDeleted"
+      },
+      {
+        "name": "質問本文",
+        "length": 4096,
+        "wire": "X",
+        "presence": "C",
+        "getter": "questionText"
+      },
+      {
+        "name": "回答本文",
+        "length": 4096,
+        "wire": "X",
+        "presence": "O",
+        "getter": "answerText"
+      },
+      {
+        "name": "Error code",
+        "length": 16,
+        "wire": "X",
+        "presence": "C",
+        "getter": "errorCode"
+      },
+      {
+        "name": "利用者向けerror",
+        "length": 512,
+        "wire": "X",
+        "presence": "C",
+        "getter": "userFacingError"
+      },
+      {
+        "name": "Question ID",
+        "length": 12,
+        "wire": "X",
+        "presence": "C",
+        "getter": "questionId"
+      }
+    ]
+  },
+  {
+    "type": "NotificationRecord",
+    "layouts": [
+      {
+        "layout": "NTSRSP01",
+        "area": "RECORD"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Notification ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "notificationId"
+      },
+      {
+        "name": "受付ID",
+        "length": 26,
+        "wire": "X",
+        "presence": "M",
+        "getter": "receiptId"
+      },
+      {
+        "name": "通知区分",
+        "length": 12,
+        "wire": "X",
+        "presence": "M",
+        "getter": "notificationType"
+      },
+      {
+        "name": "内部状態",
+        "length": 12,
+        "wire": "X",
+        "presence": "M",
+        "getter": "internalState"
+      },
+      {
+        "name": "受付日時",
+        "length": 17,
+        "wire": "N",
+        "presence": "M",
+        "getter": "submittedAt"
+      },
+      {
+        "name": "最終更新日時",
+        "length": 17,
+        "wire": "N",
+        "presence": "M",
+        "getter": "lastUpdatedAt"
+      },
+      {
+        "name": "質問概要",
+        "length": 512,
+        "wire": "X",
+        "presence": "M",
+        "getter": "questionSummary"
+      },
+      {
+        "name": "質問削除済み",
+        "length": 1,
+        "wire": "B",
+        "presence": "M",
+        "getter": "questionDeleted"
+      }
+    ]
+  },
+  {
+    "type": "NotificationSearchRequestData",
+    "layouts": [
+      {
+        "layout": "NTSREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "通知区分",
+        "length": 12,
+        "wire": "X",
+        "presence": "O",
+        "getter": "notificationType"
+      },
+      {
+        "name": "受付日時From",
+        "length": 17,
+        "wire": "X",
+        "presence": "O",
+        "getter": "submittedFrom"
+      },
+      {
+        "name": "受付日時To",
+        "length": 17,
+        "wire": "X",
+        "presence": "O",
+        "getter": "submittedTo"
+      },
+      {
+        "name": "Page",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "page"
+      },
+      {
+        "name": "Page size",
+        "length": 3,
+        "wire": "N",
+        "presence": "M",
+        "getter": "pageSize"
+      }
+    ]
+  },
+  {
+    "type": "PagedResponseData",
+    "layouts": [
+      {
+        "layout": "SRCRSP01",
+        "area": "DATA"
+      },
+      {
+        "layout": "LGSRSP01",
+        "area": "DATA"
+      },
+      {
+        "layout": "USRRSP01",
+        "area": "DATA"
+      },
+      {
+        "layout": "NTSRSP01",
+        "area": "DATA"
+      },
+      {
+        "layout": "QSSRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Effective page",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "effectivePage"
+      },
+      {
+        "name": "Page size",
+        "length": 3,
+        "wire": "N",
+        "presence": "M",
+        "getter": "pageSize"
+      },
+      {
+        "name": "Total count",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "totalCount"
+      },
+      {
+        "name": "Total pages",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "totalPages"
+      },
+      {
+        "name": "First result",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "firstResult"
+      },
+      {
+        "name": "Last result",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "lastResult"
+      }
+    ]
+  },
+  {
+    "type": "PasswordResetRequestData",
+    "layouts": [
+      {
+        "layout": "UPWREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "User ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "userId"
+      },
+      {
+        "name": "New Password",
+        "length": 256,
+        "wire": "X",
+        "presence": "M",
+        "getter": "newPassword"
+      },
+      {
+        "name": "Expected version",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "expectedVersion"
+      },
+      {
+        "name": "Operation token",
+        "length": 36,
+        "wire": "X",
+        "presence": "M",
+        "getter": "operationToken"
+      }
+    ]
+  },
+  {
+    "type": "QuestionDeleteRequestData",
+    "layouts": [
+      {
+        "layout": "QDLREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Question ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "questionId"
+      },
+      {
+        "name": "Operation token",
+        "length": 36,
+        "wire": "X",
+        "presence": "M",
+        "getter": "operationToken"
+      }
+    ]
+  },
+  {
+    "type": "QuestionDeleteResponseData",
+    "layouts": [
+      {
+        "layout": "QDLRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "削除日時",
+        "length": 17,
+        "wire": "N",
+        "presence": "M",
+        "getter": "deletedAt"
+      }
+    ]
+  },
+  {
+    "type": "QuestionDetailRequestData",
+    "layouts": [
+      {
+        "layout": "QSDREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Question ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "questionId"
+      }
+    ]
+  },
+  {
+    "type": "QuestionDetailResponseData",
+    "layouts": [
+      {
+        "layout": "QSDRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Question ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "questionId"
+      },
+      {
+        "name": "受付ID",
+        "length": 26,
+        "wire": "X",
+        "presence": "M",
+        "getter": "receiptId"
+      },
+      {
+        "name": "Username",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "username"
+      },
+      {
+        "name": "回答状態",
+        "length": 12,
+        "wire": "X",
+        "presence": "M",
+        "getter": "answerState"
+      },
+      {
+        "name": "質問本文",
+        "length": 4096,
+        "wire": "X",
+        "presence": "M",
+        "getter": "questionText"
+      },
+      {
+        "name": "回答本文",
+        "length": 4096,
+        "wire": "X",
+        "presence": "O",
+        "getter": "answerText"
+      },
+      {
+        "name": "受付日時",
+        "length": 17,
+        "wire": "N",
+        "presence": "M",
+        "getter": "submittedAt"
+      },
+      {
+        "name": "回答日時",
+        "length": 17,
+        "wire": "X",
+        "presence": "C",
+        "getter": "answeredAt"
+      }
+    ]
+  },
+  {
+    "type": "QuestionSearchRequestData",
+    "layouts": [
+      {
+        "layout": "QSSREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Keyword",
+        "length": 256,
+        "wire": "X",
+        "presence": "O",
+        "getter": "keyword"
+      },
+      {
+        "name": "Username",
+        "length": 64,
+        "wire": "X",
+        "presence": "O",
+        "getter": "username"
+      },
+      {
+        "name": "回答状態",
+        "length": 12,
+        "wire": "X",
+        "presence": "O",
+        "getter": "answerState"
+      },
+      {
+        "name": "受付日時From",
+        "length": 17,
+        "wire": "X",
+        "presence": "O",
+        "getter": "submittedFrom"
+      },
+      {
+        "name": "受付日時To",
+        "length": 17,
+        "wire": "X",
+        "presence": "O",
+        "getter": "submittedTo"
+      },
+      {
+        "name": "Page",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "page"
+      },
+      {
+        "name": "Page size",
+        "length": 3,
+        "wire": "N",
+        "presence": "M",
+        "getter": "pageSize"
+      }
+    ]
+  },
+  {
+    "type": "QuestionSubmitRequestData",
+    "layouts": [
+      {
+        "layout": "QSBREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "質問本文",
+        "length": 4096,
+        "wire": "X",
+        "presence": "M",
+        "getter": "questionText"
+      },
+      {
+        "name": "Operation token",
+        "length": 36,
+        "wire": "X",
+        "presence": "M",
+        "getter": "operationToken"
+      }
+    ]
+  },
+  {
+    "type": "QuestionSubmitResponseData",
+    "layouts": [
+      {
+        "layout": "QSBRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "受付ID",
+        "length": 26,
+        "wire": "X",
+        "presence": "M",
+        "getter": "receiptId"
+      },
+      {
+        "name": "Question ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "questionId"
+      },
+      {
+        "name": "受付日時",
+        "length": 17,
+        "wire": "N",
+        "presence": "M",
+        "getter": "submittedAt"
+      }
+    ]
+  },
+  {
+    "type": "QuestionSummaryRecord",
+    "layouts": [
+      {
+        "layout": "QSSRSP01",
+        "area": "RECORD"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Question ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "questionId"
+      },
+      {
+        "name": "受付ID",
+        "length": 26,
+        "wire": "X",
+        "presence": "M",
+        "getter": "receiptId"
+      },
+      {
+        "name": "Username",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "username"
+      },
+      {
+        "name": "質問概要",
+        "length": 512,
+        "wire": "X",
+        "presence": "M",
+        "getter": "questionSummary"
+      },
+      {
+        "name": "回答状態",
+        "length": 12,
+        "wire": "X",
+        "presence": "M",
+        "getter": "answerState"
+      },
+      {
+        "name": "受付日時",
+        "length": 17,
+        "wire": "N",
+        "presence": "M",
+        "getter": "submittedAt"
+      },
+      {
+        "name": "回答日時",
+        "length": 17,
+        "wire": "X",
+        "presence": "C",
+        "getter": "answeredAt"
+      }
+    ]
+  },
+  {
+    "type": "QuestionWorkData",
+    "layouts": [
+      {
+        "layout": "QWKREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "受付ID",
+        "length": 26,
+        "wire": "X",
+        "presence": "M",
+        "getter": "receiptId"
+      },
+      {
+        "name": "Question ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "questionId"
+      },
+      {
+        "name": "Async job ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "asyncJobId"
+      }
+    ]
+  },
+  {
+    "type": "RouteListRequestData",
+    "layouts": [
+      {
+        "layout": "RTEREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Game code",
+        "length": 12,
+        "wire": "X",
+        "presence": "M",
+        "getter": "gameCode"
+      }
+    ]
+  },
+  {
+    "type": "RouteListResponseData",
+    "layouts": [
+      {
+        "layout": "RTERSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Total count",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "totalCount"
+      }
+    ]
+  },
+  {
+    "type": "RouteRecord",
+    "layouts": [
+      {
+        "layout": "RTERSP01",
+        "area": "RECORD"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Prefix",
+        "length": 2,
+        "wire": "N",
+        "presence": "M",
+        "getter": "prefix"
+      },
+      {
+        "name": "Route名",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "routeName"
+      },
+      {
+        "name": "File件数",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "fileCount"
+      }
+    ]
+  },
+  {
+    "type": "ScenarioDetailRequestData",
+    "layouts": [
+      {
+        "layout": "SCNREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Script file ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "scriptFileId"
+      }
+    ]
+  },
+  {
+    "type": "ScenarioDetailResponseData",
+    "layouts": [
+      {
+        "layout": "SCNRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Script file ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "scriptFileId"
+      },
+      {
+        "name": "Game code",
+        "length": 12,
+        "wire": "X",
+        "presence": "M",
+        "getter": "gameCode"
+      },
+      {
+        "name": "Display title",
+        "length": 256,
+        "wire": "X",
+        "presence": "M",
+        "getter": "displayTitle"
+      },
+      {
+        "name": "Display path",
+        "length": 512,
+        "wire": "X",
+        "presence": "M",
+        "getter": "displayPath"
+      },
+      {
+        "name": "Previous file ID",
+        "length": 12,
+        "wire": "X",
+        "presence": "O",
+        "getter": "previousFileId"
+      },
+      {
+        "name": "Previous title",
+        "length": 256,
+        "wire": "X",
+        "presence": "C",
+        "getter": "previousTitle"
+      },
+      {
+        "name": "Next file ID",
+        "length": 12,
+        "wire": "X",
+        "presence": "O",
+        "getter": "nextFileId"
+      },
+      {
+        "name": "Next title",
+        "length": 256,
+        "wire": "X",
+        "presence": "C",
+        "getter": "nextTitle"
+      },
+      {
+        "name": "Delivery mode",
+        "length": 1,
+        "wire": "X",
+        "presence": "M",
+        "getter": "deliveryMode"
+      },
+      {
+        "name": "File ID",
+        "length": 36,
+        "wire": "X",
+        "presence": "C",
+        "getter": "fileId"
+      },
+      {
+        "name": "File relative path",
+        "length": 256,
+        "wire": "X",
+        "presence": "C",
+        "getter": "fileRelativePath"
+      },
+      {
+        "name": "File byte長",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "fileByteLength"
+      },
+      {
+        "name": "File SHA-256",
+        "length": 64,
+        "wire": "X",
+        "presence": "C",
+        "getter": "fileSha256"
+      },
+      {
+        "name": "File record長",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "fileRecordLength"
+      },
+      {
+        "name": "File record件数",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "fileRecordCount"
+      }
+    ]
+  },
+  {
+    "type": "ScenarioEntryRecord",
+    "layouts": [
+      {
+        "layout": "SCNRSP01",
+        "area": "RECORD"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Entry ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "entryId"
+      },
+      {
+        "name": "Entry sequence",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "entrySequence"
+      },
+      {
+        "name": "Line番号",
+        "length": 8,
+        "wire": "N",
+        "presence": "M",
+        "getter": "lineNumber"
+      },
+      {
+        "name": "Entry type",
+        "length": 10,
+        "wire": "X",
+        "presence": "M",
+        "getter": "entryType"
+      },
+      {
+        "name": "Speaker名",
+        "length": 128,
+        "wire": "X",
+        "presence": "O",
+        "getter": "speakerName"
+      },
+      {
+        "name": "本文",
+        "length": 4096,
+        "wire": "X",
+        "presence": "M",
+        "getter": "bodyText"
+      },
+      {
+        "name": "Audio sequence",
+        "length": 3,
+        "wire": "N",
+        "presence": "M",
+        "getter": "audioSequence"
+      },
+      {
+        "name": "Audio ID",
+        "length": 12,
+        "wire": "X",
+        "presence": "C",
+        "getter": "audioId"
+      },
+      {
+        "name": "Audio display path",
+        "length": 512,
+        "wire": "X",
+        "presence": "C",
+        "getter": "audioDisplayPath"
+      }
+    ]
+  },
+  {
+    "type": "ScenarioFileListRequestData",
+    "layouts": [
+      {
+        "layout": "SCFREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Game code",
+        "length": 12,
+        "wire": "X",
+        "presence": "M",
+        "getter": "gameCode"
+      },
+      {
+        "name": "Prefix",
+        "length": 2,
+        "wire": "N",
+        "presence": "M",
+        "getter": "prefix"
+      }
+    ]
+  },
+  {
+    "type": "ScenarioFileListResponseData",
+    "layouts": [
+      {
+        "layout": "SCFRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Game code",
+        "length": 12,
+        "wire": "X",
+        "presence": "M",
+        "getter": "gameCode"
+      },
+      {
+        "name": "Prefix",
+        "length": 2,
+        "wire": "N",
+        "presence": "M",
+        "getter": "prefix"
+      },
+      {
+        "name": "Route名",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "routeName"
+      },
+      {
+        "name": "Total count",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "totalCount"
+      }
+    ]
+  },
+  {
+    "type": "ScenarioFileRecord",
+    "layouts": [
+      {
+        "layout": "SCFRSP01",
+        "area": "RECORD"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Script file ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "scriptFileId"
+      },
+      {
+        "name": "Display title",
+        "length": 256,
+        "wire": "X",
+        "presence": "M",
+        "getter": "displayTitle"
+      },
+      {
+        "name": "Display path",
+        "length": 512,
+        "wire": "X",
+        "presence": "M",
+        "getter": "displayPath"
+      },
+      {
+        "name": "Entry件数",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "entryCount"
+      }
+    ]
+  },
+  {
+    "type": "ScenarioSearchRecord",
+    "layouts": [
+      {
+        "layout": "SRCRSP01",
+        "area": "RECORD"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Entry ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "entryId"
+      },
+      {
+        "name": "Script file ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "scriptFileId"
+      },
+      {
+        "name": "Game code",
+        "length": 12,
+        "wire": "X",
+        "presence": "M",
+        "getter": "gameCode"
+      },
+      {
+        "name": "章title",
+        "length": 256,
+        "wire": "X",
+        "presence": "O",
+        "getter": "chapterTitle"
+      },
+      {
+        "name": "Line番号",
+        "length": 8,
+        "wire": "N",
+        "presence": "M",
+        "getter": "lineNumber"
+      },
+      {
+        "name": "Entry type",
+        "length": 10,
+        "wire": "X",
+        "presence": "M",
+        "getter": "entryType"
+      },
+      {
+        "name": "Speaker名",
+        "length": 128,
+        "wire": "X",
+        "presence": "O",
+        "getter": "speakerName"
+      },
+      {
+        "name": "本文",
+        "length": 4096,
+        "wire": "X",
+        "presence": "M",
+        "getter": "bodyText"
+      },
+      {
+        "name": "Audio有無",
+        "length": 1,
+        "wire": "B",
+        "presence": "M",
+        "getter": "audioPresent"
+      },
+      {
+        "name": "Audio ID",
+        "length": 12,
+        "wire": "X",
+        "presence": "C",
+        "getter": "audioId"
+      },
+      {
+        "name": "Script display path",
+        "length": 512,
+        "wire": "X",
+        "presence": "M",
+        "getter": "scriptDisplayPath"
+      },
+      {
+        "name": "Audio display path",
+        "length": 512,
+        "wire": "X",
+        "presence": "C",
+        "getter": "audioDisplayPath"
+      }
+    ]
+  },
+  {
+    "type": "ScenarioSearchRequestData",
+    "layouts": [
+      {
+        "layout": "SRCREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "本文keyword",
+        "length": 256,
+        "wire": "X",
+        "presence": "O",
+        "getter": "bodyKeyword"
+      },
+      {
+        "name": "Game code",
+        "length": 12,
+        "wire": "X",
+        "presence": "O",
+        "getter": "gameCode"
+      },
+      {
+        "name": "Speaker名",
+        "length": 128,
+        "wire": "X",
+        "presence": "O",
+        "getter": "speakerName"
+      },
+      {
+        "name": "章title",
+        "length": 256,
+        "wire": "X",
+        "presence": "O",
+        "getter": "chapterTitle"
+      },
+      {
+        "name": "Entry type",
+        "length": 10,
+        "wire": "X",
+        "presence": "O",
+        "getter": "entryType"
+      },
+      {
+        "name": "Voice条件",
+        "length": 1,
+        "wire": "X",
+        "presence": "O",
+        "getter": "voiceCondition"
+      },
+      {
+        "name": "Page",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "page"
+      },
+      {
+        "name": "Page size",
+        "length": 3,
+        "wire": "N",
+        "presence": "M",
+        "getter": "pageSize"
+      }
+    ]
+  },
+  {
+    "type": "SpeakerListRequestData",
+    "layouts": [
+      {
+        "layout": "SPKREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Game code",
+        "length": 12,
+        "wire": "X",
+        "presence": "O",
+        "getter": "gameCode"
+      }
+    ]
+  },
+  {
+    "type": "SpeakerListResponseData",
+    "layouts": [
+      {
+        "layout": "SPKRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Total count",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "totalCount"
+      }
+    ]
+  },
+  {
+    "type": "SpeakerRecord",
+    "layouts": [
+      {
+        "layout": "SPKRSP01",
+        "area": "RECORD"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Speaker ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "speakerId"
+      },
+      {
+        "name": "Speaker名",
+        "length": 128,
+        "wire": "X",
+        "presence": "M",
+        "getter": "speakerName"
+      },
+      {
+        "name": "出現件数",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "occurrenceCount"
+      }
+    ]
+  },
+  {
+    "type": "UserCreateRequestData",
+    "layouts": [
+      {
+        "layout": "UCRREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Username",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "username"
+      },
+      {
+        "name": "Initial Password",
+        "length": 256,
+        "wire": "X",
+        "presence": "M",
+        "getter": "initialPassword"
+      },
+      {
+        "name": "Role",
+        "length": 5,
+        "wire": "X",
+        "presence": "M",
+        "getter": "role"
+      },
+      {
+        "name": "Enabled",
+        "length": 1,
+        "wire": "B",
+        "presence": "M",
+        "getter": "enabled"
+      },
+      {
+        "name": "Operation token",
+        "length": 36,
+        "wire": "X",
+        "presence": "M",
+        "getter": "operationToken"
+      }
+    ]
+  },
+  {
+    "type": "UserDetailRequestData",
+    "layouts": [
+      {
+        "layout": "UDTREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "User ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "userId"
+      }
+    ]
+  },
+  {
+    "type": "UserDetailResponseData",
+    "layouts": [
+      {
+        "layout": "UDTRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "User ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "userId"
+      },
+      {
+        "name": "Username",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "username"
+      },
+      {
+        "name": "Role",
+        "length": 5,
+        "wire": "X",
+        "presence": "M",
+        "getter": "role"
+      },
+      {
+        "name": "State",
+        "length": 8,
+        "wire": "X",
+        "presence": "M",
+        "getter": "state"
+      },
+      {
+        "name": "Locked until",
+        "length": 17,
+        "wire": "X",
+        "presence": "O",
+        "getter": "lockedUntil"
+      },
+      {
+        "name": "Last Login",
+        "length": 17,
+        "wire": "X",
+        "presence": "O",
+        "getter": "lastLogin"
+      },
+      {
+        "name": "Password changed at",
+        "length": 17,
+        "wire": "N",
+        "presence": "M",
+        "getter": "passwordChangedAt"
+      },
+      {
+        "name": "Created at",
+        "length": 17,
+        "wire": "N",
+        "presence": "M",
+        "getter": "createdAt"
+      },
+      {
+        "name": "Updated at",
+        "length": 17,
+        "wire": "N",
+        "presence": "M",
+        "getter": "updatedAt"
+      },
+      {
+        "name": "Active session数",
+        "length": 3,
+        "wire": "N",
+        "presence": "M",
+        "getter": "activeSessionCount"
+      },
+      {
+        "name": "Version",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "version"
+      },
+      {
+        "name": "Created by",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "createdBy"
+      },
+      {
+        "name": "Updated by",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "updatedBy"
+      }
+    ]
+  },
+  {
+    "type": "UserMutationResponseData",
+    "layouts": [
+      {
+        "layout": "UCRRSP01",
+        "area": "DATA"
+      },
+      {
+        "layout": "USTRSP01",
+        "area": "DATA"
+      },
+      {
+        "layout": "URLRSP01",
+        "area": "DATA"
+      },
+      {
+        "layout": "UPWRSP01",
+        "area": "DATA"
+      },
+      {
+        "layout": "ULKRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "User ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "userId"
+      },
+      {
+        "name": "更新後version",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "updatedVersion"
+      }
+    ]
+  },
+  {
+    "type": "UserRecord",
+    "layouts": [
+      {
+        "layout": "USRRSP01",
+        "area": "RECORD"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "User ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "userId"
+      },
+      {
+        "name": "Username",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "username"
+      },
+      {
+        "name": "Role",
+        "length": 5,
+        "wire": "X",
+        "presence": "M",
+        "getter": "role"
+      },
+      {
+        "name": "State",
+        "length": 8,
+        "wire": "X",
+        "presence": "M",
+        "getter": "state"
+      },
+      {
+        "name": "Locked until",
+        "length": 17,
+        "wire": "X",
+        "presence": "O",
+        "getter": "lockedUntil"
+      },
+      {
+        "name": "Last Login",
+        "length": 17,
+        "wire": "X",
+        "presence": "O",
+        "getter": "lastLogin"
+      },
+      {
+        "name": "Created at",
+        "length": 17,
+        "wire": "N",
+        "presence": "M",
+        "getter": "createdAt"
+      },
+      {
+        "name": "Updated at",
+        "length": 17,
+        "wire": "N",
+        "presence": "M",
+        "getter": "updatedAt"
+      },
+      {
+        "name": "Version",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "version"
+      }
+    ]
+  },
+  {
+    "type": "UserRoleRequestData",
+    "layouts": [
+      {
+        "layout": "URLREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "User ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "userId"
+      },
+      {
+        "name": "New role",
+        "length": 5,
+        "wire": "X",
+        "presence": "M",
+        "getter": "newRole"
+      },
+      {
+        "name": "Expected version",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "expectedVersion"
+      },
+      {
+        "name": "Operation token",
+        "length": 36,
+        "wire": "X",
+        "presence": "M",
+        "getter": "operationToken"
+      }
+    ]
+  },
+  {
+    "type": "UserSearchRequestData",
+    "layouts": [
+      {
+        "layout": "USRREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Username prefix",
+        "length": 64,
+        "wire": "X",
+        "presence": "O",
+        "getter": "usernamePrefix"
+      },
+      {
+        "name": "Role",
+        "length": 5,
+        "wire": "X",
+        "presence": "O",
+        "getter": "role"
+      },
+      {
+        "name": "State",
+        "length": 8,
+        "wire": "X",
+        "presence": "O",
+        "getter": "state"
+      },
+      {
+        "name": "Page",
+        "length": 6,
+        "wire": "N",
+        "presence": "M",
+        "getter": "page"
+      },
+      {
+        "name": "Page size",
+        "length": 3,
+        "wire": "N",
+        "presence": "M",
+        "getter": "pageSize"
+      }
+    ]
+  },
+  {
+    "type": "UserStatusRequestData",
+    "layouts": [
+      {
+        "layout": "USTREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "User ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "userId"
+      },
+      {
+        "name": "Enabled",
+        "length": 1,
+        "wire": "B",
+        "presence": "M",
+        "getter": "enabled"
+      },
+      {
+        "name": "Expected version",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "expectedVersion"
+      },
+      {
+        "name": "Operation token",
+        "length": 36,
+        "wire": "X",
+        "presence": "M",
+        "getter": "operationToken"
+      }
+    ]
+  },
+  {
+    "type": "UserUnlockRequestData",
+    "layouts": [
+      {
+        "layout": "ULKREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "User ID",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "userId"
+      },
+      {
+        "name": "Expected version",
+        "length": 9,
+        "wire": "N",
+        "presence": "M",
+        "getter": "expectedVersion"
+      },
+      {
+        "name": "Operation token",
+        "length": 36,
+        "wire": "X",
+        "presence": "M",
+        "getter": "operationToken"
+      }
+    ]
+  },
+  {
+    "type": "VideoDescriptorRequestData",
+    "layouts": [
+      {
+        "layout": "VIDREQ01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Video ID",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "videoId"
+      }
+    ]
+  },
+  {
+    "type": "VideoDescriptorResponseData",
+    "layouts": [
+      {
+        "layout": "VIDRSP01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "Media logical ID",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "mediaLogicalId"
+      },
+      {
+        "name": "Storage relative path",
+        "length": 512,
+        "wire": "X",
+        "presence": "M",
+        "getter": "storageRelativePath"
+      },
+      {
+        "name": "File name",
+        "length": 256,
+        "wire": "X",
+        "presence": "M",
+        "getter": "fileName"
+      },
+      {
+        "name": "File byte長",
+        "length": 12,
+        "wire": "N",
+        "presence": "M",
+        "getter": "fileByteLength"
+      },
+      {
+        "name": "SHA-256",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "sha256"
+      },
+      {
+        "name": "MIME type",
+        "length": 64,
+        "wire": "X",
+        "presence": "M",
+        "getter": "mimeType"
+      },
+      {
+        "name": "Content disposition",
+        "length": 1,
+        "wire": "X",
+        "presence": "M",
+        "getter": "contentDisposition"
+      },
+      {
+        "name": "Title",
+        "length": 256,
+        "wire": "X",
+        "presence": "M",
+        "getter": "title"
+      },
+      {
+        "name": "Category",
+        "length": 16,
+        "wire": "X",
+        "presence": "M",
+        "getter": "category"
+      },
+      {
+        "name": "Display path",
+        "length": 512,
+        "wire": "X",
+        "presence": "M",
+        "getter": "displayPath"
+      }
+    ]
+  },
+  {
+    "type": "WebLogEventData",
+    "layouts": [
+      {
+        "layout": "WLGEVT01",
+        "area": "DATA"
+      }
+    ],
+    "independentFields": [
+      {
+        "name": "発生日時",
+        "length": 17,
+        "wire": "N",
+        "presence": "M",
+        "getter": "occurredAt"
+      },
+      {
+        "name": "Log type",
+        "length": 16,
+        "wire": "X",
+        "presence": "M",
+        "getter": "logType"
+      },
+      {
+        "name": "Level",
+        "length": 8,
+        "wire": "X",
+        "presence": "M",
+        "getter": "level"
+      },
+      {
+        "name": "Action",
+        "length": 64,
+        "wire": "X",
+        "presence": "O",
+        "getter": "action"
+      },
+      {
+        "name": "Message",
+        "length": 512,
+        "wire": "X",
+        "presence": "M",
+        "getter": "message"
+      },
+      {
+        "name": "HTTP request ID",
+        "length": 36,
+        "wire": "X",
+        "presence": "M",
+        "getter": "httpRequestId"
+      },
+      {
+        "name": "HTTP method",
+        "length": 8,
+        "wire": "X",
+        "presence": "M",
+        "getter": "httpMethod"
+      },
+      {
+        "name": "Path",
+        "length": 256,
+        "wire": "X",
+        "presence": "M",
+        "getter": "path"
+      },
+      {
+        "name": "HTTP status",
+        "length": 3,
+        "wire": "X",
+        "presence": "M",
+        "getter": "httpStatus"
+      },
+      {
+        "name": "Elapsed ms",
+        "length": 9,
+        "wire": "X",
+        "presence": "M",
+        "getter": "elapsedMs"
+      },
+      {
+        "name": "Remote address",
+        "length": 45,
+        "wire": "X",
+        "presence": "M",
+        "getter": "remoteAddress"
+      },
+      {
+        "name": "Username",
+        "length": 64,
+        "wire": "X",
+        "presence": "O",
+        "getter": "username"
+      },
+      {
+        "name": "Role",
+        "length": 5,
+        "wire": "X",
+        "presence": "O",
+        "getter": "role"
+      },
+      {
+        "name": "Details",
+        "length": 1024,
+        "wire": "X",
+        "presence": "O",
+        "getter": "details"
+      }
+    ]
+  }
+]

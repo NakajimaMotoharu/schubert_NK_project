@@ -1,6 +1,6 @@
 # 型catalog十二method・P00102全20Sourceの参照結合
 
-G13.07 ORIGINAL_PLAN原0.5/1.5/4cap5、P00102追加費0。Main7aed/Test64f3/normal24642元120実結果を保持。PG24730順0/3834c90f→24732独立逆0/92e415a1fc5c04e21a5c97ba636c399ee39acff1a0fdbf037c4de2a007e82ec4、7誤metadata反証。PayloadTypeCatalog一Source/三class、25raw=12公式測定+record生成12/空privatector1の標準filter13。実Test六case（独立directional wrapperを含む）/元helper Sourcehash/固定SS323 class表・295component独立期待・不正型/null/optionalをmethodへ結合。wrapperのassertはhelper内であり、当methodに直接assertがあると偽らない。
+G13.07 ORIGINAL_PLAN原0.5/1.5/4cap5、P00102追加費0。Main7aed/Test64f3/normal24642元120実結果を保持。PG24730順0/3834c90f→24732独立逆0/92e415a1fc5c04e21a5c97ba636c399ee39acff1a0fdbf037c4de2a007e82ec4、7誤metadata反証。PayloadTypeCatalog一Source/三class、25raw=12公式測定+record生成12/空privatector1の標準filter13。実Test六case（独立directional wrapperを含む）/元helper Sourcehash/固定SS323 class表・296component独立期待・不正型/null/optionalをmethodへ結合。wrapperのassertはhelper内であり、当methodに直接assertがあると偽らない。
 
 |class.method|descriptor|実Case参照|静的責務経路|
 |---|---|---|---|
@@ -19,7 +19,7 @@ G13.07 ORIGINAL_PLAN原0.5/1.5/4cap5、P00102追加費0。Main7aed/Test64f3/norm
 
 実Caseと独立期待：
 
-- C1：dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning() / PT-PRO-001-T02,PT-PRO-002-P04。Existing IndependentNamedFieldOracle.verifyAll ownsassertions: independentexplicitgetter-field bindings andfixedscalar values/SS/UI295component table; decode/getter andencode/fields checked separately, notProduction-generated expected.
+- C1：dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning() / PT-PRO-001-T02,PT-PRO-002-P04。Existing IndependentNamedFieldOracle.verifyAll ownsassertions: independentexplicitgetter-field bindings andfixedscalar values/SS/UI296component table; decode/getter andencode/fields checked separately, notProduction-generated expected.
 - C2：dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#explicitCatalogMatchesIndependentSs323NamedTypeFixture() / PT-PRO-001-T01。SS323 independent64row named-types TSV expecteddata/record classnames; missingrecord indicatedliteral -, total64.
 - C3：dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes() / PT-PRO-001-T02,PT-PRO-002-P04。Generic minimuminput supplies64layouts,69distinctnamedtypes/14repeat; returneddata/record class andredaction; roundtrip consistency supplementedbyC1/C2 independentdirectional/table oracle.
 - C4：dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames() / PT-PRO-001-T02,PT-PRO-002-P05。ExplicitGame code unset vsNUKITASHI1 preserved, typeddiagnostic excludesinput; separateC1 preventssole roundtrip oracle.
@@ -35,3 +35,5 @@ G13.07 ORIGINAL_PLAN原0.5/1.5/4cap5、P00102追加費0。Main7aed/Test64f3/norm
 WBS485/486へcurrentP00102MethodReferenceTrace20261109を同一観測として追記し、PG24734で旧全値不変更（486rootinventoryhashだけ現485へ整合）/既guard580/誤hash・型・重複4反証を確認。参照結合完成をSource登録/ownerの品質受入/全G13/451へ変換しない。個別case probe帰属null・全分岐独立oracleの個別完了は未主張。
 
 新製品PT/PASS/Java/compile/Analyzer/coverage/leaf0・unique520/正式1964-53/工数null/全HOLD不変更。工具失敗0、元成功確認再演0。
+
+BUG2552/YKT2276補足：現component期待数は296。旧295を含む1197だけ文字置換し、3902（旧数記載0）は必須補足のみ。元3901/781/24730 case説明は歴史byteのまま保持し、PG24744-current-component296-correction-v1/manifest.jsonとnamed-shapes.jsonを必須補足とする。製品・実120・84method/20Source参照・WBS受入/coverage/費用に変更なし。
