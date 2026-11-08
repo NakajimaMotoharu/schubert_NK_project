@@ -1,0 +1,1154 @@
+[
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission",
+    "method": "<init>",
+    "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;Ljava/lang/String;)V",
+    "testIds": [
+      "PT-OPS-DBPORT-001",
+      "PT-OPS-DBPORT-002",
+      "PT-OPS-DBPORT-003",
+      "PT-OPS-DBPORT-004",
+      "PT-OPS-DBPORT-005",
+      "PT-OPS-DBPORT-006",
+      "PT-OPS-DBPORT-007",
+      "PT-OPS-DBPORT-008",
+      "PT-OPS-DBPORT-009",
+      "PT-OPS-DBPORT-010",
+      "PT-OPS-DBPORT-011",
+      "PT-OPS-DBPORT-012",
+      "PT-OPS-DBPORT-013",
+      "PT-OPS-DBPORT-014",
+      "PT-OPS-DBPORT-015"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission001UrlBoundsAndBothRoles()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission002InvalidUrlsAndNullConstructorInputs()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission003FixedProjectionAndBorrowedConnection()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission004ConnectionSettingsAndNullContract()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission005EachProjectionInvariantFailsClosed()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission006MissingStatementAndRowsCloseOnlyAcquiredPorts()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission007EachSqlFaultIsFixedAndSanitized()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission008SqlCloseFaultCannotReturnSuccess()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission009RuntimeFaultIdentityAndCleanup()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission010ErrorFaultIdentityAndCleanup()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission011KnownSqlBodyYieldsToUnknownClose()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission012UnknownPrimaryRetainsOnlyFixedSecondary()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission013ErrorPrimaryAndBothCloseFaultsRetainIdentity()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission014TwoCloseFaultsAlwaysAttemptReverseOrder()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission015RepeatAndParallelUseIndependentBorrowedPorts()"
+    ],
+    "oracleScope": "closed API/Web roles/canonical loopback URL and input invariants",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+    "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+    "classSha256": "6e017834573dea6528e96e9d5d766d2220a376baeb4eaf29f67dd278b6c69c16",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission",
+    "method": "verify",
+    "descriptor": "(Ljava/sql/Connection;)V",
+    "testIds": [
+      "PT-OPS-DBPORT-001",
+      "PT-OPS-DBPORT-003",
+      "PT-OPS-DBPORT-004",
+      "PT-OPS-DBPORT-005",
+      "PT-OPS-DBPORT-006",
+      "PT-OPS-DBPORT-007",
+      "PT-OPS-DBPORT-008",
+      "PT-OPS-DBPORT-009",
+      "PT-OPS-DBPORT-010",
+      "PT-OPS-DBPORT-011",
+      "PT-OPS-DBPORT-012",
+      "PT-OPS-DBPORT-013",
+      "PT-OPS-DBPORT-014",
+      "PT-OPS-DBPORT-015"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission001UrlBoundsAndBothRoles()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission003FixedProjectionAndBorrowedConnection()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission004ConnectionSettingsAndNullContract()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission005EachProjectionInvariantFailsClosed()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission006MissingStatementAndRowsCloseOnlyAcquiredPorts()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission007EachSqlFaultIsFixedAndSanitized()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission008SqlCloseFaultCannotReturnSuccess()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission009RuntimeFaultIdentityAndCleanup()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission010ErrorFaultIdentityAndCleanup()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission011KnownSqlBodyYieldsToUnknownClose()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission012UnknownPrimaryRetainsOnlyFixedSecondary()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission013ErrorPrimaryAndBothCloseFaultsRetainIdentity()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission014TwoCloseFaultsAlwaysAttemptReverseOrder()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission015RepeatAndParallelUseIndependentBorrowedPorts()"
+    ],
+    "oracleScope": "borrowed connection state/one exact row/roles/db/recovery/owned reverse cleanup",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+    "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+    "classSha256": "6e017834573dea6528e96e9d5d766d2220a376baeb4eaf29f67dd278b6c69c16",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission",
+    "method": "unavailable",
+    "descriptor": "()Ljava/sql/SQLException;",
+    "testIds": [
+      "PT-OPS-DBPORT-004",
+      "PT-OPS-DBPORT-005",
+      "PT-OPS-DBPORT-006",
+      "PT-OPS-DBPORT-007",
+      "PT-OPS-DBPORT-008"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission004ConnectionSettingsAndNullContract()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission005EachProjectionInvariantFailsClosed()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission006MissingStatementAndRowsCloseOnlyAcquiredPorts()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission007EachSqlFaultIsFixedAndSanitized()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission008SqlCloseFaultCannotReturnSuccess()"
+    ],
+    "oracleScope": "fixed08001 sanitized failures",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+    "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+    "classSha256": "6e017834573dea6528e96e9d5d766d2220a376baeb4eaf29f67dd278b6c69c16",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission",
+    "method": "required",
+    "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+    "testIds": [
+      "PT-OPS-DBPORT-003",
+      "PT-OPS-DBPORT-005",
+      "PT-OPS-DBPORT-006",
+      "PT-OPS-DBPORT-007"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission003FixedProjectionAndBorrowedConnection()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission005EachProjectionInvariantFailsClosed()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission006MissingStatementAndRowsCloseOnlyAcquiredPorts()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission007EachSqlFaultIsFixedAndSanitized()"
+    ],
+    "oracleScope": "nullable JDBC result/column contract fail closed",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+    "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+    "classSha256": "6e017834573dea6528e96e9d5d766d2220a376baeb4eaf29f67dd278b6c69c16",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission",
+    "method": "<clinit>",
+    "descriptor": "()V",
+    "testIds": [
+      "PT-OPS-DBPORT-001",
+      "PT-OPS-DBPORT-002",
+      "PT-OPS-DBPORT-003"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission001UrlBoundsAndBothRoles()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission002InvalidUrlsAndNullConstructorInputs()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission003FixedProjectionAndBorrowedConnection()"
+    ],
+    "oracleScope": "fixed URL/SQL policy linkage; first initialized testcase unknown",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+    "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+    "classSha256": "6e017834573dea6528e96e9d5d766d2220a376baeb4eaf29f67dd278b6c69c16",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "method": "<init>",
+    "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;Ljava/lang/String;[C)V",
+    "testIds": [
+      "PT-OPS-DBSRCPORT-001"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource001PublicConstructionErasesInputWithoutConnecting()"
+    ],
+    "oracleScope": "public construction/close/closed gate only; default DriverManager not invoked",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sourceSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "classSha256": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "method": "<init>",
+    "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;Ljava/lang/String;[CLdev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector;)V",
+    "testIds": [
+      "PT-OPS-DBSRCPORT-002",
+      "PT-OPS-DBSRCPORT-003",
+      "PT-OPS-DBSRCPORT-004",
+      "PT-OPS-DBSRCPORT-005",
+      "PT-OPS-DBSRCPORT-006",
+      "PT-OPS-DBSRCPORT-007",
+      "PT-OPS-DBSRCPORT-008",
+      "PT-OPS-DBSRCPORT-009",
+      "PT-OPS-DBSRCPORT-010",
+      "PT-OPS-DBSRCPORT-011",
+      "PT-OPS-DBSRCPORT-012",
+      "PT-OPS-DBSRCPORT-013",
+      "PT-OPS-DBSRCPORT-014"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource002BothRolesFixedPropertiesAndEachPhysicalAdmission()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource003InvalidConstructionStillConsumesOwnedInput()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource004MaterialBoundsAndConstructorCloneAreIndependent()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource005ConnectorFaultsClearPropertiesAndKeepUnknownIdentity()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource006NullConnectionCannotEscapeAsSuccess()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource007FailedIdentityAdmissionDiscardsExactlyOnce()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource008AdmissionRuntimeAndErrorRetainOriginalIdentity()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource009DiscardSqlRuntimeErrorMatrixAndSameThrowable()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource010UnsupportedOptionsAndMemoryWriterOnly()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource011WrapperTypeContractAndNullBoundary()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource012CloseIsIdempotentAndPreservesCallerOwnedConnection()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource013ParallelIndependentConnectionsAndPropertiesClear()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition()"
+    ],
+    "oracleScope": "owned password bounds/clone/consumption and supplied connector",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sourceSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "classSha256": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "method": "getConnection",
+    "descriptor": "()Ljava/sql/Connection;",
+    "testIds": [
+      "PT-OPS-DBSRCPORT-001",
+      "PT-OPS-DBSRCPORT-002",
+      "PT-OPS-DBSRCPORT-004",
+      "PT-OPS-DBSRCPORT-005",
+      "PT-OPS-DBSRCPORT-006",
+      "PT-OPS-DBSRCPORT-007",
+      "PT-OPS-DBSRCPORT-008",
+      "PT-OPS-DBSRCPORT-009",
+      "PT-OPS-DBSRCPORT-012",
+      "PT-OPS-DBSRCPORT-013",
+      "PT-OPS-DBSRCPORT-014"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource001PublicConstructionErasesInputWithoutConnecting()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource002BothRolesFixedPropertiesAndEachPhysicalAdmission()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource004MaterialBoundsAndConstructorCloneAreIndependent()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource005ConnectorFaultsClearPropertiesAndKeepUnknownIdentity()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource006NullConnectionCannotEscapeAsSuccess()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource007FailedIdentityAdmissionDiscardsExactlyOnce()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource008AdmissionRuntimeAndErrorRetainOriginalIdentity()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource009DiscardSqlRuntimeErrorMatrixAndSameThrowable()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource012CloseIsIdempotentAndPreservesCallerOwnedConnection()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource013ParallelIndependentConnectionsAndPropertiesClear()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition()"
+    ],
+    "oracleScope": "serialized physical source boundary/identity admission/Properties clear/caller ownership",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sourceSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "classSha256": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "method": "discard",
+    "descriptor": "(Ljava/sql/Connection;Ljava/lang/Throwable;)V",
+    "testIds": [
+      "PT-OPS-DBSRCPORT-007",
+      "PT-OPS-DBSRCPORT-008",
+      "PT-OPS-DBSRCPORT-009"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource007FailedIdentityAdmissionDiscardsExactlyOnce()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource008AdmissionRuntimeAndErrorRetainOriginalIdentity()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource009DiscardSqlRuntimeErrorMatrixAndSameThrowable()"
+    ],
+    "oracleScope": "exactly one rejected connection close and local primary/fixed-secondary matrix",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sourceSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "classSha256": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "method": "getConnection",
+    "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/sql/Connection;",
+    "testIds": [
+      "PT-OPS-DBSRCPORT-010"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource010UnsupportedOptionsAndMemoryWriterOnly()"
+    ],
+    "oracleScope": "credential override unsupported",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sourceSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "classSha256": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "method": "getLogWriter",
+    "descriptor": "()Ljava/io/PrintWriter;",
+    "testIds": [
+      "PT-OPS-DBSRCPORT-010"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource010UnsupportedOptionsAndMemoryWriterOnly()"
+    ],
+    "oracleScope": "returns null, no writer acquisition",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sourceSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "classSha256": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "method": "setLogWriter",
+    "descriptor": "(Ljava/io/PrintWriter;)V",
+    "testIds": [
+      "PT-OPS-DBSRCPORT-010"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource010UnsupportedOptionsAndMemoryWriterOnly()"
+    ],
+    "oracleScope": "only null writer allowed",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sourceSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "classSha256": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "method": "setLoginTimeout",
+    "descriptor": "(I)V",
+    "testIds": [
+      "PT-OPS-DBSRCPORT-010"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource010UnsupportedOptionsAndMemoryWriterOnly()"
+    ],
+    "oracleScope": "fixed3 only, other signed boundaries unsupported",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sourceSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "classSha256": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "method": "getLoginTimeout",
+    "descriptor": "()I",
+    "testIds": [
+      "PT-OPS-DBSRCPORT-010"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource010UnsupportedOptionsAndMemoryWriterOnly()"
+    ],
+    "oracleScope": "returns literal3",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sourceSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "classSha256": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "method": "getParentLogger",
+    "descriptor": "()Ljava/util/logging/Logger;",
+    "testIds": [
+      "PT-OPS-DBSRCPORT-010"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource010UnsupportedOptionsAndMemoryWriterOnly()"
+    ],
+    "oracleScope": "fixed unsupported catalog",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sourceSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "classSha256": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "method": "unwrap",
+    "descriptor": "(Ljava/lang/Class;)Ljava/lang/Object;",
+    "testIds": [
+      "PT-OPS-DBSRCPORT-011"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource011WrapperTypeContractAndNullBoundary()"
+    ],
+    "oracleScope": "self/interfaces exact identity, unrelated/null reject",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sourceSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "classSha256": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "method": "isWrapperFor",
+    "descriptor": "(Ljava/lang/Class;)Z",
+    "testIds": [
+      "PT-OPS-DBSRCPORT-011"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource011WrapperTypeContractAndNullBoundary()"
+    ],
+    "oracleScope": "same type contract/null boundary",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sourceSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "classSha256": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "method": "close",
+    "descriptor": "()V",
+    "testIds": [
+      "PT-OPS-DBSRCPORT-001",
+      "PT-OPS-DBSRCPORT-002",
+      "PT-OPS-DBSRCPORT-012",
+      "PT-OPS-DBSRCPORT-013",
+      "PT-OPS-DBSRCPORT-014"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource001PublicConstructionErasesInputWithoutConnecting()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource002BothRolesFixedPropertiesAndEachPhysicalAdmission()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource012CloseIsIdempotentAndPreservesCallerOwnedConnection()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource013ParallelIndependentConnectionsAndPropertiesClear()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition()"
+    ],
+    "oracleScope": "idempotent own material cleanup, retained caller connections untouched",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sourceSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "classSha256": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "method": "toString",
+    "descriptor": "()Ljava/lang/String;",
+    "testIds": [
+      "PT-OPS-DBSRCPORT-001",
+      "PT-OPS-DBSRCPORT-010"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource001PublicConstructionErasesInputWithoutConnecting()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource010UnsupportedOptionsAndMemoryWriterOnly()"
+    ],
+    "oracleScope": "fixed REDACTED output",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sourceSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "classSha256": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "method": "unavailable",
+    "descriptor": "()Ljava/sql/SQLException;",
+    "testIds": [
+      "PT-OPS-DBSRCPORT-001",
+      "PT-OPS-DBSRCPORT-005",
+      "PT-OPS-DBSRCPORT-006",
+      "PT-OPS-DBSRCPORT-007",
+      "PT-OPS-DBSRCPORT-009",
+      "PT-OPS-DBSRCPORT-012",
+      "PT-OPS-DBSRCPORT-014"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource001PublicConstructionErasesInputWithoutConnecting()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource005ConnectorFaultsClearPropertiesAndKeepUnknownIdentity()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource006NullConnectionCannotEscapeAsSuccess()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource007FailedIdentityAdmissionDiscardsExactlyOnce()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource009DiscardSqlRuntimeErrorMatrixAndSameThrowable()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource012CloseIsIdempotentAndPreservesCallerOwnedConnection()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition()"
+    ],
+    "oracleScope": "fixed08001/no provider cause",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sourceSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "classSha256": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "method": "unsupported",
+    "descriptor": "()Ljava/sql/SQLFeatureNotSupportedException;",
+    "testIds": [
+      "PT-OPS-DBSRCPORT-010",
+      "PT-OPS-DBSRCPORT-011"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource010UnsupportedOptionsAndMemoryWriterOnly()",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource011WrapperTypeContractAndNullBoundary()"
+    ],
+    "oracleScope": "fixed0A000/no provider cause",
+    "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sourceSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "classSha256": "7b8fd0e03354b307d11080312389818cc48b84a53210de0381fffe8aaa85a757",
+    "canonicalOwner": "WBS-P018-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001"
+    ],
+    "uiRefs": [
+      "212",
+      "243",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      }
+    ],
+    "remaining": [
+      "real PostgreSQL/driver/default DriverManager connector/role readiness unqualified",
+      "bootstrap scope-specific primary/fixed-secondary policy; ordinary API SSC329 is not imposed",
+      "private heap/JDBC immutable String physical erasure not proven",
+      "one compiler synthetic filter and one abstract Connector method not qualified as executed",
+      "percase method probes not separately measured, first clinit case unknown"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_BOOTSTRAP_DB_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  }
+]

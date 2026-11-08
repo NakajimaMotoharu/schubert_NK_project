@@ -1,0 +1,256 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T16:22:26.947447+09:00",
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/641_database_twentyone_method_scope.json",
+    "sha256": "a0f4a8cdc8beeea37cbfdb7c13f0f3a6d84f5db7f1f083fa3cc5719a5d6505d6"
+  },
+  "sourcePrograms": 2,
+  "explicitlyRelatedMethods": 21,
+  "originalSuccessfulTestCases": 29,
+  "assertionSnippetChecks": 70,
+  "originalCompilerFilteredMethodsNotIndependentlyMeasured": 1,
+  "abstractConnectorMethodsWithoutCode": 1,
+  "subjectLimits": [
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "measuredMethodLinks": 5,
+      "originalCompilerFilteredMethodsNotIndependentlyMeasured": 1,
+      "abstractConnectorMethodsWithoutCode": 0,
+      "actualDatabaseOrLiveHttpQualified": false
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "measuredMethodLinks": 16,
+      "originalCompilerFilteredMethodsNotIndependentlyMeasured": 0,
+      "abstractConnectorMethodsWithoutCode": 1,
+      "actualDatabaseOrLiveHttpQualified": false
+    }
+  ],
+  "assertionReviews": [
+    {
+      "testId": "PT-OPS-DBPORT-001",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission001UrlBoundsAndBothRoles()",
+      "declarationLine": 198,
+      "snippets": 2,
+      "independentExpected": "Port1/65535/name1/63 and both exact roles"
+    },
+    {
+      "testId": "PT-OPS-DBPORT-002",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission002InvalidUrlsAndNullConstructorInputs()",
+      "declarationLine": 215,
+      "snippets": 2,
+      "independentExpected": "Bad/null URLs and service rejected without provider contents"
+    },
+    {
+      "testId": "PT-OPS-DBPORT-003",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission003FixedProjectionAndBorrowedConnection()",
+      "declarationLine": 250,
+      "snippets": 2,
+      "independentExpected": "Fixed SQL projection, borrowed connection and reverse acquired closes"
+    },
+    {
+      "testId": "PT-OPS-DBPORT-004",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission004ConnectionSettingsAndNullContract()",
+      "declarationLine": 258,
+      "snippets": 2,
+      "independentExpected": "AutoCommit/readOnly/null connection gate before query"
+    },
+    {
+      "testId": "PT-OPS-DBPORT-005",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission005EachProjectionInvariantFailsClosed()",
+      "declarationLine": 274,
+      "snippets": 4,
+      "independentExpected": "Missing/duplicate row, null or mismatched roles/db/recovery all fail closed"
+    },
+    {
+      "testId": "PT-OPS-DBPORT-006",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission006MissingStatementAndRowsCloseOnlyAcquiredPorts()",
+      "declarationLine": 296,
+      "snippets": 2,
+      "independentExpected": "Null statement/rows closes only acquired resources"
+    },
+    {
+      "testId": "PT-OPS-DBPORT-007",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission007EachSqlFaultIsFixedAndSanitized()",
+      "declarationLine": 308,
+      "snippets": 2,
+      "independentExpected": "Each SQL fault becomes fixed catalog and acquired resources close"
+    },
+    {
+      "testId": "PT-OPS-DBPORT-008",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission008SqlCloseFaultCannotReturnSuccess()",
+      "declarationLine": 322,
+      "snippets": 2,
+      "independentExpected": "SQL close failures cannot return success"
+    },
+    {
+      "testId": "PT-OPS-DBPORT-009",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission009RuntimeFaultIdentityAndCleanup()",
+      "declarationLine": 334,
+      "snippets": 2,
+      "independentExpected": "Unknown Runtime identity preserved and acquired cleanup"
+    },
+    {
+      "testId": "PT-OPS-DBPORT-010",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission010ErrorFaultIdentityAndCleanup()",
+      "declarationLine": 351,
+      "snippets": 2,
+      "independentExpected": "Direct Error identity preserved and acquired cleanup"
+    },
+    {
+      "testId": "PT-OPS-DBPORT-011",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission011KnownSqlBodyYieldsToUnknownClose()",
+      "declarationLine": 367,
+      "snippets": 2,
+      "independentExpected": "Known SQL primary yields to unknown close; self-known does not suppress"
+    },
+    {
+      "testId": "PT-OPS-DBPORT-012",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission012UnknownPrimaryRetainsOnlyFixedSecondary()",
+      "declarationLine": 391,
+      "snippets": 2,
+      "independentExpected": "Unknown primary keeps only two fixed redacted secondaries, no self-suppression"
+    },
+    {
+      "testId": "PT-OPS-DBPORT-013",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission013ErrorPrimaryAndBothCloseFaultsRetainIdentity()",
+      "declarationLine": 407,
+      "snippets": 2,
+      "independentExpected": "Error primary identity and reverse cleanup fixed secondaries"
+    },
+    {
+      "testId": "PT-OPS-DBPORT-014",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission014TwoCloseFaultsAlwaysAttemptReverseOrder()",
+      "declarationLine": 420,
+      "snippets": 3,
+      "independentExpected": "Both closes always attempted in reverse order, scope-specific priority"
+    },
+    {
+      "testId": "PT-OPS-DBPORT-015",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest#dbAdmission015RepeatAndParallelUseIndependentBorrowedPorts()",
+      "declarationLine": 440,
+      "snippets": 3,
+      "independentExpected": "Eight independent finite JVM tasks/repeat with borrowed ports"
+    },
+    {
+      "testId": "PT-OPS-DBSRCPORT-001",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource001PublicConstructionErasesInputWithoutConnecting()",
+      "declarationLine": 204,
+      "snippets": 2,
+      "independentExpected": "Public construction consumes input and closed gate prevents default connect"
+    },
+    {
+      "testId": "PT-OPS-DBSRCPORT-002",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource002BothRolesFixedPropertiesAndEachPhysicalAdmission()",
+      "declarationLine": 222,
+      "snippets": 3,
+      "independentExpected": "Both roles/four fixed Properties and per-connection admission/caller ownership"
+    },
+    {
+      "testId": "PT-OPS-DBSRCPORT-003",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource003InvalidConstructionStillConsumesOwnedInput()",
+      "declarationLine": 268,
+      "snippets": 2,
+      "independentExpected": "Invalid constructor still consumes owned input; null material contract"
+    },
+    {
+      "testId": "PT-OPS-DBSRCPORT-004",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource004MaterialBoundsAndConstructorCloneAreIndependent()",
+      "declarationLine": 311,
+      "snippets": 3,
+      "independentExpected": "Length1/65536 clone independent from later original-array mutation"
+    },
+    {
+      "testId": "PT-OPS-DBSRCPORT-005",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource005ConnectorFaultsClearPropertiesAndKeepUnknownIdentity()",
+      "declarationLine": 336,
+      "snippets": 2,
+      "independentExpected": "Connector SQL fixed or unknown same identity and Properties clear"
+    },
+    {
+      "testId": "PT-OPS-DBSRCPORT-006",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource006NullConnectionCannotEscapeAsSuccess()",
+      "declarationLine": 356,
+      "snippets": 2,
+      "independentExpected": "Null connection never returned as success/Properties clear"
+    },
+    {
+      "testId": "PT-OPS-DBSRCPORT-007",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource007FailedIdentityAdmissionDiscardsExactlyOnce()",
+      "declarationLine": 370,
+      "snippets": 3,
+      "independentExpected": "Failed admission discards exactly one acquired connection"
+    },
+    {
+      "testId": "PT-OPS-DBSRCPORT-008",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource008AdmissionRuntimeAndErrorRetainOriginalIdentity()",
+      "declarationLine": 390,
+      "snippets": 2,
+      "independentExpected": "Admission runtime/Error original identity/discard once"
+    },
+    {
+      "testId": "PT-OPS-DBSRCPORT-009",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource009DiscardSqlRuntimeErrorMatrixAndSameThrowable()",
+      "declarationLine": 412,
+      "snippets": 3,
+      "independentExpected": "SQL/Runtime/Error/self-throwable cleanup matrix uses bootstrap fixed-secondary contract"
+    },
+    {
+      "testId": "PT-OPS-DBSRCPORT-010",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource010UnsupportedOptionsAndMemoryWriterOnly()",
+      "declarationLine": 444,
+      "snippets": 3,
+      "independentExpected": "Options unsupported, timeout3, memory writer only, redacted text"
+    },
+    {
+      "testId": "PT-OPS-DBSRCPORT-011",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource011WrapperTypeContractAndNullBoundary()",
+      "declarationLine": 465,
+      "snippets": 3,
+      "independentExpected": "Wrapper self/interfaces identity, unrelated/null fail"
+    },
+    {
+      "testId": "PT-OPS-DBSRCPORT-012",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource012CloseIsIdempotentAndPreservesCallerOwnedConnection()",
+      "declarationLine": 488,
+      "snippets": 2,
+      "independentExpected": "Idempotent close does not close returned caller connection"
+    },
+    {
+      "testId": "PT-OPS-DBSRCPORT-013",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource013ParallelIndependentConnectionsAndPropertiesClear()",
+      "declarationLine": 512,
+      "snippets": 2,
+      "independentExpected": "Eight independent owned tasks and Properties always cleared"
+    },
+    {
+      "testId": "PT-OPS-DBSRCPORT-014",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest#dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition()",
+      "declarationLine": 541,
+      "snippets": 4,
+      "independentExpected": "Get/close race finite caller ownership and closed gate"
+    }
+  ],
+  "originalRunRepeated": false,
+  "actualDatabaseOrLiveHttpQualified": false,
+  "caseSpecificCoverageMeasured": false,
+  "exactAllMethodCasesOrOracleComplete": false,
+  "productTestsExecuted": 0,
+  "newUniqueTests": 0,
+  "compilerOrJvmExecuted": false,
+  "actualBackendActions": 0,
+  "wholeG13Accepted": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "files": {
+    "method-oracle-relations.json": "9da0904d8835504e195a3f45548db5b299ed7343e4b30e7c2f752c42ca6523b2"
+  },
+  "tool": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/643_database_method_oracle_review.py",
+    "sha256": "651ae3492a62f1155f542d6f8a648915a13d597565c31c12d44556fcfdc05356"
+  }
+}
