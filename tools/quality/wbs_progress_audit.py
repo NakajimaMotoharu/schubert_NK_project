@@ -14,6 +14,7 @@ import xml.etree.ElementTree as ET
 import zipfile
 from decimal import Decimal
 import wbs_candidate_trace as candidate_trace
+import wbs_current_source_structure as current_source_structure
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 PMO = ROOT / 'documents/400_PGPT/470_PMO'
@@ -425,8 +426,24 @@ def verify(master_path=None, snapshot_path=None, budget_path=None, inventory_pat
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--baseline-v1', action='store_true')
+    parser.add_argument('--current-source-structure-only', action='store_true',
+                        help='Validate the pinned current static artifact view only; never accepts runtime or the full WBS')
     for key in ['master', 'snapshot', 'budget', 'inventory']:
         parser.add_argument('--' + key, type=pathlib.Path)
     args = parser.parse_args()
+    if args.baseline_v1 and args.current_source_structure_only:
+        parser.error('historical baseline and current static structure are separate domains')
+    if not args.baseline_v1:
+        current_master = read_json(args.master or PMO / '481_PGPT詳細WBS.json')
+        current_snapshot = read_json(args.snapshot or PMO / current_master['currentSnapshotRef'])
+        current_inventory_path = args.inventory or PMO / current_master['inventoryRef']
+        current_inventory = read_json(current_inventory_path)
+        if args.current_source_structure_only or current_source_structure.VIEW_KEY in current_inventory:
+            structure = current_source_structure.verify(ROOT, current_master, current_snapshot,
+                                                        current_inventory, inventory_path=current_inventory_path)
+            result = (structure if args.current_source_structure_only
+                      else current_source_structure.full_audit_hold(structure, current_inventory))
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            raise SystemExit(0 if args.current_source_structure_only else 1)
     result = verify_baseline() if args.baseline_v1 else verify(args.master, args.snapshot, args.budget, args.inventory)
     print(json.dumps(result, ensure_ascii=False, indent=2))

@@ -1,0 +1,701 @@
+{
+  "version": 1,
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "artifactCount": 1068,
+  "productionArtifacts": 1063,
+  "characterizationArtifacts": 5,
+  "descriptorBase": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/artifacts.json",
+    "sha256": "fb24a1a209849d42894925002baae668bc55a4bd858b1b7c1d38ab838319bb0b"
+  },
+  "identityProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22126-current7aed-lineage-quality-independent-v1/manifest.json",
+    "sha256": "b8afadf6f5069ecdeaabd28cc7ea1cfa9a8ede51ebd904c7f013a70bc562062a"
+  },
+  "lineageManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/manifest.json",
+    "sha256": "2d200777b5983362f972cd00e83b64dbf265851bd9688eb6684a6442e4549298"
+  },
+  "ownerKindOverrides": {
+    "src/deployment/artemis/etc/broker.xml": {
+      "owner": "WBS-C04",
+      "costOwner": "WBS-C04",
+      "kind": "CONFIG"
+    },
+    "src/deployment/caddy/Caddyfile.template": {
+      "owner": "WBS-C01",
+      "costOwner": "WBS-C01",
+      "kind": "CONFIG"
+    },
+    "src/deployment/config/api.env.template": {
+      "owner": "WBS-C06",
+      "costOwner": "WBS-C06",
+      "kind": "CONFIG"
+    },
+    "src/deployment/config/api.yml.template": {
+      "owner": "WBS-C06",
+      "costOwner": "WBS-C06",
+      "kind": "CONFIG"
+    },
+    "src/deployment/config/batch.yml.template": {
+      "owner": "WBS-C06",
+      "costOwner": "WBS-C06",
+      "kind": "CONFIG"
+    },
+    "src/deployment/config/common.yml.template": {
+      "owner": "WBS-C06",
+      "costOwner": "WBS-C06",
+      "kind": "CONFIG"
+    },
+    "src/deployment/config/inbox-inspector.env.template": {
+      "owner": "WBS-C06",
+      "costOwner": "WBS-C06",
+      "kind": "CONFIG"
+    },
+    "src/deployment/config/web.env.template": {
+      "owner": "WBS-C06",
+      "costOwner": "WBS-C06",
+      "kind": "CONFIG"
+    },
+    "src/deployment/config/web.yml.template": {
+      "owner": "WBS-C06",
+      "costOwner": "WBS-C06",
+      "kind": "CONFIG"
+    },
+    "src/deployment/operations/inbox-inspector.sh.template": {
+      "owner": "WBS-C08",
+      "costOwner": "WBS-C08",
+      "kind": "CONFIG"
+    },
+    "src/deployment/postgresql/pg_hba.conf.template": {
+      "owner": "WBS-C03",
+      "costOwner": "WBS-C03",
+      "kind": "CONFIG"
+    },
+    "src/deployment/postgresql/postgresql.conf.template": {
+      "owner": "WBS-C03",
+      "costOwner": "WBS-C03",
+      "kind": "CONFIG"
+    },
+    "src/deployment/systemd/artemis.service": {
+      "owner": "WBS-C02",
+      "costOwner": "WBS-C02",
+      "kind": "CONFIG"
+    },
+    "src/deployment/systemd/caddy.service.d/schubert-nk-startup-policy.conf": {
+      "owner": "WBS-C02",
+      "costOwner": "WBS-C02",
+      "kind": "CONFIG"
+    },
+    "src/deployment/systemd/caddy.service.d/schubert-nk-stop-policy.conf": {
+      "owner": "WBS-C02",
+      "costOwner": "WBS-C02",
+      "kind": "CONFIG"
+    },
+    "src/deployment/systemd/optional/inbox-inspector-context-previous.conf": {
+      "owner": "WBS-C02",
+      "costOwner": "WBS-C02",
+      "kind": "CONFIG"
+    },
+    "src/deployment/systemd/optional/inbox-inspector-response-previous.conf": {
+      "owner": "WBS-C02",
+      "costOwner": "WBS-C02",
+      "kind": "CONFIG"
+    },
+    "src/deployment/systemd/schubert-nk-api.service.template": {
+      "owner": "WBS-C02",
+      "costOwner": "WBS-C02",
+      "kind": "CONFIG"
+    },
+    "src/deployment/systemd/schubert-nk-backup.service.template": {
+      "owner": "WBS-C02",
+      "costOwner": "WBS-C02",
+      "kind": "CONFIG"
+    },
+    "src/deployment/systemd/schubert-nk-bootstrap-admin.service.template": {
+      "owner": "WBS-C02",
+      "costOwner": "WBS-C02",
+      "kind": "CONFIG"
+    },
+    "src/deployment/systemd/schubert-nk-cleanup.service.template": {
+      "owner": "WBS-C02",
+      "costOwner": "WBS-C02",
+      "kind": "CONFIG"
+    },
+    "src/deployment/systemd/schubert-nk-expiry-cleanup.service.template": {
+      "owner": "WBS-C02",
+      "costOwner": "WBS-C02",
+      "kind": "CONFIG"
+    },
+    "src/deployment/systemd/schubert-nk-inbox-inspector.service": {
+      "owner": "WBS-C02",
+      "costOwner": "WBS-C02",
+      "kind": "CONFIG"
+    },
+    "src/deployment/systemd/schubert-nk-morning-controller.service.template": {
+      "owner": "WBS-C02",
+      "costOwner": "WBS-C02",
+      "kind": "CONFIG"
+    },
+    "src/deployment/systemd/schubert-nk-morning.target.template": {
+      "owner": "WBS-C02",
+      "costOwner": "WBS-C02",
+      "kind": "CONFIG"
+    },
+    "src/deployment/systemd/schubert-nk-web.service.template": {
+      "owner": "WBS-C02",
+      "costOwner": "WBS-C02",
+      "kind": "CONFIG"
+    },
+    "src/deployment/tmpfiles/schubert-nk-maintenance.conf": {
+      "owner": "WBS-C05",
+      "costOwner": "WBS-C05",
+      "kind": "CONFIG"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/package-info.java": {
+      "owner": "WBS-P018-05",
+      "costOwner": "WBS-P018-05",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/package-info.java": {
+      "owner": "WBS-P018-05",
+      "costOwner": "WBS-P018-05",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/package-info.java": {
+      "owner": "WBS-P018-05",
+      "costOwner": "WBS-P018-05",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/package-info.java": {
+      "owner": "WBS-P018-05",
+      "costOwner": "WBS-P018-05",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/package-info.java": {
+      "owner": "WBS-P018-05",
+      "costOwner": "WBS-P018-05",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java": {
+      "owner": "WBS-P018-05",
+      "costOwner": "WBS-P018-05",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/package-info.java": {
+      "owner": "WBS-P018-05",
+      "costOwner": "WBS-P018-05",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/package-info.java": {
+      "owner": "WBS-P018-05",
+      "costOwner": "WBS-P018-05",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/package-info.java": {
+      "owner": "WBS-P018-05",
+      "costOwner": "WBS-P018-05",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/package-info.java": {
+      "owner": "WBS-P018-05",
+      "costOwner": "WBS-P018-05",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/package-info.java": {
+      "owner": "WBS-P006-01",
+      "costOwner": "WBS-P006-01",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/package-info.java": {
+      "owner": "WBS-P018-05",
+      "costOwner": "WBS-P018-05",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/package-info.java": {
+      "owner": "WBS-P005-03",
+      "costOwner": "WBS-P005-03",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/package-info.java": {
+      "owner": "WBS-P005-03",
+      "costOwner": "WBS-P005-03",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/package-info.java": {
+      "owner": "WBS-P005-03",
+      "costOwner": "WBS-P005-03",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/package-info.java": {
+      "owner": "WBS-P005-03",
+      "costOwner": "WBS-P005-03",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java": {
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/package-info.java": {
+      "owner": "WBS-P018-05",
+      "costOwner": "WBS-P018-05",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginApplicationAssembly.java": {
+      "owner": "WBS-P007-04",
+      "costOwner": "WBS-P007-04",
+      "kind": "JAVA"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginResult.java": {
+      "owner": "WBS-P007-01",
+      "costOwner": "WBS-P007-01",
+      "kind": "JAVA"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java": {
+      "owner": "WBS-P007-01",
+      "costOwner": "WBS-P007-01",
+      "kind": "JAVA"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutApplicationAssembly.java": {
+      "owner": "WBS-P007-05",
+      "costOwner": "WBS-P007-05",
+      "kind": "JAVA"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/package-info.java": {
+      "owner": "WBS-P007-03",
+      "costOwner": "WBS-P007-03",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/package-info.java": {
+      "owner": "WBS-P018-05",
+      "costOwner": "WBS-P018-05",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V001__schemas_and_extension.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V002__account_session_and_master_tables.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V003__business_message_log_and_web_tables.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V004__indexes_and_initial_data.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V005__gin_functions_views_and_grants.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V006__cleanup_null_bounds_and_outbox_retention.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V007__username_comparison_key_expansion.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V008__auth_inbox_inspection_boundary.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V009__conditional_auth_inbox_deletion.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V010__full_inbox_scan_and_restricted_deletion.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V011__batch_outbox_only_cleanup.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V012__durable_inbox_inspection_progress.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V013__cleanup_backup_and_retention_guards.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V014__durable_log_cleanup_progress.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V015__question_query_inbox_deletion.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V016__question_mutation_inbox_references.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V017__backup_rerun_success_history.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V018__maintenance_run_references.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V019__parent_inbox_inspection_summary.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V020__atomic_cleanup_step_counts.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V021__expiry_batch_run_audit.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V022__staged_expiry_batch_run_audit.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V023__startup_schema_history_projection.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V024__notification_received_state.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V025__question_dlq_outbox_identity.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V026__web_receipt_references.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V027__pending_revocation_unknown_expiry.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/migration/V028__retained_success_progress_seals.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "DDL"
+    },
+    "src/schubert-nk-api/src/main/resources/db/provisioning/001_roles.sql": {
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "kind": "ROLE_SQL"
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java": {
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java": {
+      "owner": "WBS-P018-05",
+      "costOwner": "WBS-P018-05",
+      "kind": "JAVA"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java": {
+      "owner": "WBS-P018-05",
+      "costOwner": "WBS-P018-05",
+      "kind": "JAVA"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/package-info.java": {
+      "owner": "WBS-P002-01",
+      "costOwner": "WBS-P002-01",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/package-info.java": {
+      "owner": "WBS-P003-01",
+      "costOwner": "WBS-P003-01",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/package-info.java": {
+      "owner": "WBS-P001-01",
+      "costOwner": "WBS-P001-01",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/package-info.java": {
+      "owner": "WBS-P001-02",
+      "costOwner": "WBS-P001-02",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/package-info.java": {
+      "owner": "WBS-P002-01",
+      "costOwner": "WBS-P002-01",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/package-info.java": {
+      "owner": "WBS-P001-02",
+      "costOwner": "WBS-P001-02",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/package-info.java": {
+      "owner": "WBS-P001-02",
+      "costOwner": "WBS-P001-02",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": {
+      "owner": "WBS-P003-04",
+      "costOwner": "WBS-P003-04",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/package-info.java": {
+      "owner": "WBS-P006-04",
+      "costOwner": "WBS-P006-04",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/package-info.java": {
+      "owner": "WBS-P009-04",
+      "costOwner": "WBS-P009-04",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/package-info.java": {
+      "owner": "WBS-P005-02",
+      "costOwner": "WBS-P005-02",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/package-info.java": {
+      "owner": "WBS-P018-09",
+      "costOwner": "WBS-P018-09",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/package-info.java": {
+      "owner": "WBS-P018-06",
+      "costOwner": "WBS-P018-06",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/package-info.java": {
+      "owner": "WBS-P015-02",
+      "costOwner": "WBS-P015-02",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/package-info.java": {
+      "owner": "WBS-P015-01",
+      "costOwner": "WBS-P015-01",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/storage/package-info.java": {
+      "owner": "WBS-P009-04",
+      "costOwner": "WBS-P009-04",
+      "kind": "JAVA_PACKAGE"
+    },
+    "src/schubert-nk-web/src/main/resources/static/css/schubert.css": {
+      "owner": "WBS-P016-25",
+      "costOwner": "WBS-P016-25",
+      "kind": "CSS"
+    },
+    "src/schubert-nk-web/src/main/resources/static/js/log-search-validation.js": {
+      "owner": "WBS-P016-25",
+      "costOwner": "WBS-P016-25",
+      "kind": "JS"
+    },
+    "src/schubert-nk-web/src/main/resources/static/js/operation-post-submit.js": {
+      "owner": "WBS-P016-25",
+      "costOwner": "WBS-P016-25",
+      "kind": "JS"
+    },
+    "src/schubert-nk-web/src/main/resources/static/js/question-input-validation.js": {
+      "owner": "WBS-P016-25",
+      "costOwner": "WBS-P016-25",
+      "kind": "JS"
+    },
+    "src/schubert-nk-web/src/main/resources/static/js/search-speaker-submit.js": {
+      "owner": "WBS-P016-25",
+      "costOwner": "WBS-P016-25",
+      "kind": "JS"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/admin/user-detail.html": {
+      "owner": "WBS-P016-17",
+      "costOwner": "WBS-P016-17",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/admin/user-list.html": {
+      "owner": "WBS-P016-15",
+      "costOwner": "WBS-P016-15",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/admin/user-new.html": {
+      "owner": "WBS-P016-16",
+      "costOwner": "WBS-P016-16",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/animation-list.html": {
+      "owner": "WBS-P016-09",
+      "costOwner": "WBS-P016-09",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/animation-watch.html": {
+      "owner": "WBS-P016-10",
+      "costOwner": "WBS-P016-10",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/animation.html": {
+      "owner": "WBS-P016-08",
+      "costOwner": "WBS-P016-08",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/error/error.html": {
+      "owner": "WBS-P016-24",
+      "costOwner": "WBS-P016-24",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html": {
+      "owner": "WBS-P015-07",
+      "costOwner": "WBS-P015-07",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/fragments/log-pagination.html": {
+      "owner": "WBS-P015-07",
+      "costOwner": "WBS-P015-07",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/fragments/pagination.html": {
+      "owner": "WBS-P015-07",
+      "costOwner": "WBS-P015-07",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/login.html": {
+      "owner": "WBS-P016-01",
+      "costOwner": "WBS-P016-01",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/logs.html": {
+      "owner": "WBS-P016-14",
+      "costOwner": "WBS-P016-14",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/menu.html": {
+      "owner": "WBS-P016-02",
+      "costOwner": "WBS-P016-02",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/music-list.html": {
+      "owner": "WBS-P016-13",
+      "costOwner": "WBS-P016-13",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/music-sections.html": {
+      "owner": "WBS-P016-12",
+      "costOwner": "WBS-P016-12",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/music.html": {
+      "owner": "WBS-P016-11",
+      "costOwner": "WBS-P016-11",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/notifications/detail.html": {
+      "owner": "WBS-P016-21",
+      "costOwner": "WBS-P016-21",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/notifications/list.html": {
+      "owner": "WBS-P016-20",
+      "costOwner": "WBS-P016-20",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/questions/accepted.html": {
+      "owner": "WBS-P016-19",
+      "costOwner": "WBS-P016-19",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/questions/detail.html": {
+      "owner": "WBS-P016-23",
+      "costOwner": "WBS-P016-23",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/questions/list.html": {
+      "owner": "WBS-P016-22",
+      "costOwner": "WBS-P016-22",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/questions/new.html": {
+      "owner": "WBS-P016-18",
+      "costOwner": "WBS-P016-18",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/scenario-files.html": {
+      "owner": "WBS-P016-06",
+      "costOwner": "WBS-P016-06",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/scenario-routes.html": {
+      "owner": "WBS-P016-05",
+      "costOwner": "WBS-P016-05",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/scenario.html": {
+      "owner": "WBS-P016-07",
+      "costOwner": "WBS-P016-07",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/scenarios.html": {
+      "owner": "WBS-P016-04",
+      "costOwner": "WBS-P016-04",
+      "kind": "TEMPLATE"
+    },
+    "src/schubert-nk-web/src/main/resources/templates/search.html": {
+      "owner": "WBS-P016-03",
+      "costOwner": "WBS-P016-03",
+      "kind": "TEMPLATE"
+    }
+  },
+  "addedComparedToLegacy": [
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+    "src/deployment/monitoring/grafana/README.md",
+    "src/deployment/monitoring/grafana/datasources-debug.yml.template",
+    "src/deployment/monitoring/grafana/datasources-standard.yml.template",
+    "src/deployment/monitoring/grafana/grafana.ini.template",
+    "src/deployment/monitoring/prometheus/README.md",
+    "src/deployment/monitoring/prometheus/debug-arguments.json.template",
+    "src/deployment/monitoring/prometheus/debug.yml.template",
+    "src/deployment/monitoring/prometheus/standard.yml.template"
+  ],
+  "retiredHistoricalPaths": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/LinuxSystemdQuery.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/LinuxSystemdSession.java"
+  ],
+  "preservedLegacyInventorySource": "7fffab57a567914956b66452e5e54388642efdec",
+  "preservedLegacyCandidateSource": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa",
+  "preservedLegacyArtifactRowsDigest": "1f95044ce47eb182f0a03bcb0f356fb858412bdf5e4289cdd6aa2719702cf178",
+  "preservedLegacyCandidateDigest": "38247ee2b8850d5ab64f37f8d5536c8b14d7aa1962fab7be9c7ec190a930a01a",
+  "qualification": "CURRENT_STATIC_STRUCTURE_AND_RESPONSIBILITY_ONLY",
+  "runtimeQualified": false,
+  "wholeAcceptance": false,
+  "oldRuntimeQualificationTransferred": false,
+  "newAcceptance": 0,
+  "effortRate": null
+}

@@ -1,0 +1,70 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T17:06:57.575260+09:00",
+  "reason": "Changed metadata projection guards and non-mutating independent negative vector; original24162 preserved, not replayed.",
+  "stages": {
+    "metadata-regression": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "wbs_current_source_structure_test",
+        "-v"
+      ],
+      "actualExit": 0,
+      "expectedExit": 0,
+      "startedAtJST": "2026-11-08T17:06:56.738123+09:00",
+      "endedAtJST": "2026-11-08T17:06:56.809077+09:00"
+    },
+    "current-structure": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "tools/quality/wbs_progress_audit.py",
+        "--current-source-structure-only"
+      ],
+      "actualExit": 0,
+      "expectedExit": 0,
+      "startedAtJST": "2026-11-08T17:06:56.809107+09:00",
+      "endedAtJST": "2026-11-08T17:06:57.200886+09:00"
+    },
+    "full-audit": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "tools/quality/wbs_progress_audit.py"
+      ],
+      "actualExit": 1,
+      "expectedExit": 1,
+      "startedAtJST": "2026-11-08T17:06:57.200920+09:00",
+      "endedAtJST": "2026-11-08T17:06:57.575103+09:00"
+    }
+  },
+  "metadataRegressionTests": 8,
+  "projectionNegatives": 5,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "tools": {
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/658_current_source_wbs_guard_retest.py": "c86292552199048385e3cac29211aea50b9026a0a9f69cad9cdb366d258f0dc3",
+    "tools/quality/wbs_current_source_structure.py": "1af98033394fe7d54287eef5647c10d5d695af6acc80670f388cc430603a8390",
+    "tools/quality/wbs_current_source_structure_test.py": "dad781d8b6be5157428870c2a6d779dfde5bff559bad67ca5a725e26d64da45d",
+    "tools/quality/wbs_progress_audit.py": "9311700dfa2210cf5eacac0a58dbeabb8178015f185ceff99e3f6718edcc1092"
+  },
+  "files": {
+    "current-structure.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "full-audit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "metadata-regression.stderr": "a2daa675f838949bbf6eec687ea39a1bc080bcc4cfe1812a339ab320028d57a9",
+    "full-audit.stdout": "7e34ccd9ed058ce8d24bdca33766e1f7cd2b538b74f9e6a774ea876e840c4cb5",
+    "current-structure.stdout": "3469f4a35b8a11b28d850d7692063be11035e2aea6f41fa74ac26f3b907b0a81",
+    "metadata-regression.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "bugs": [
+    "BUG-2518"
+  ],
+  "ykts": [
+    "YKT-2256"
+  ]
+}

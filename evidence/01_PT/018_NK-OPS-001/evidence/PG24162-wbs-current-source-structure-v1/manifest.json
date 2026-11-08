@@ -1,0 +1,103 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T16:59:40.738620+09:00",
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/653_current_source_wbs_structure_scope.json",
+    "sha256": "1984d72da73ab31929f8d8b4a844ed8c3ebe5e7bd2d3622205fda7f08254919c"
+  },
+  "identityRecomputed": false,
+  "artifactCount": 1068,
+  "productionArtifacts": 1063,
+  "characterizationArtifacts": 5,
+  "canonicalOwnerKindOverrides": 131,
+  "sharedLegacyPaths": 1059,
+  "addedPaths": 9,
+  "retiredPaths": 2,
+  "legacyArtifactRowsUnchanged": true,
+  "legacyCandidateUnchanged": true,
+  "originalTasksBudgetAcceptanceUnchanged": true,
+  "currentStructureExit": 0,
+  "fullAuditExit": 1,
+  "fullAuditStatus": "HOLD",
+  "fullAuditUnverifiedChecks": [
+    "current source runtime/candidate source/run qualification",
+    "current source final requirement/layout/method-oracle completeness",
+    "current source full PT/coverage/static/CHR/secrets gates",
+    "remaining full-audit graph/cost/individual acceptance/history checks"
+  ],
+  "metadataRegressionTests": 8,
+  "productTestsExecuted": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "effortRate": null,
+  "runtimeQualificationTransferred": false,
+  "privateRuntimeEvidenceRead": false,
+  "pythonVersion": "3.14.4",
+  "os": "Linux",
+  "stages": {
+    "metadataRegression": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "wbs_current_source_structure_test",
+        "-v"
+      ],
+      "actualExit": 0,
+      "startedAtJST": "2026-11-08T16:59:39.874412+09:00",
+      "endedAtJST": "2026-11-08T16:59:39.943596+09:00",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "9dd4136d204dd60c5d604a2b997b0fdef07c144516b417c89c08e3ac1739262d"
+    },
+    "currentStructure": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "tools/quality/wbs_progress_audit.py",
+        "--current-source-structure-only"
+      ],
+      "actualExit": 0,
+      "startedAtJST": "2026-11-08T16:59:39.987248+09:00",
+      "endedAtJST": "2026-11-08T16:59:40.356795+09:00",
+      "stdoutSha256": "3469f4a35b8a11b28d850d7692063be11035e2aea6f41fa74ac26f3b907b0a81",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "fullAudit": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "tools/quality/wbs_progress_audit.py"
+      ],
+      "actualExit": 1,
+      "startedAtJST": "2026-11-08T16:59:40.357010+09:00",
+      "endedAtJST": "2026-11-08T16:59:40.738503+09:00",
+      "stdoutSha256": "7e34ccd9ed058ce8d24bdca33766e1f7cd2b538b74f9e6a774ea876e840c4cb5",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "modifiedDocuments": {
+    "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json": "7df057138555a19dec5e04055cc25b7980d7ddb871cf0f16ba035694f09220d5",
+    "documents/400_PGPT/470_PMO/486_WBS現行実績.json": "672486b9437f4b923cc1c29a901eecf997fe8634c05c859f653f6c5e2bb8d86e",
+    "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json": "7abe121000fc07f78d59f42c32dee8b2e378abf80ea2def15b712a797f5ac44e"
+  },
+  "files": {
+    "current-structure.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "full-audit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "before-485_WBS網羅性・受入対応.json": "00e7e2ba3ef1acdea9379d1dee35a7a98f71954b8984fe5cb2fe832ced41ced9",
+    "current-source-structure-view.json": "9e127f3d8b17db210b901a2583e92bf5d954ba4f5039b8bb3e869e9f5e12fe7f",
+    "metadata-regression.stderr": "9dd4136d204dd60c5d604a2b997b0fdef07c144516b417c89c08e3ac1739262d",
+    "full-audit.stdout": "7e34ccd9ed058ce8d24bdca33766e1f7cd2b538b74f9e6a774ea876e840c4cb5",
+    "before-486_WBS現行実績.json": "33d5d29a5cfc9b0906a6ddd5485514e285b5ebe0817ea06281f1a3b263adff8e",
+    "current-structure.stdout": "3469f4a35b8a11b28d850d7692063be11035e2aea6f41fa74ac26f3b907b0a81",
+    "metadata-regression.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "before-481_PGPT詳細WBS.json": "71758502d664fe90664f6018b44201b5469159c8eafa72faebd8b955a239d80a"
+  },
+  "tools": {
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/655_current_source_wbs_structure_apply.py": "2517a352b38fe35a8e897a0a12ad720e17eeccbdf4293e5b415da4ac8ab54585",
+    "tools/quality/wbs_current_source_structure.py": "ca77213d615150d02084cb342746b93981be9570c50db68b9742f1e264ab7b0c",
+    "tools/quality/wbs_current_source_structure_test.py": "6fcdb30c2e29dd76e8d40044b1dee6fb03c7158012c1d68092e99a275de06809",
+    "tools/quality/wbs_progress_audit.py": "9311700dfa2210cf5eacac0a58dbeabb8178015f185ceff99e3f6718edcc1092"
+  }
+}
