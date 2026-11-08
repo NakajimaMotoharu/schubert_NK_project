@@ -1,0 +1,474 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T08:00:12.359079+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchStandardMetricSourceTest.java",
+      "originalSha256": "4b9330ecc92623e0a076424ae23ac6b6290a0d2a39b4e9c7aa91e8ff800b0326",
+      "currentSha256": "d65f52261e15e456dc472caeb1cf65e8ecac9eeabad9be3387b92f92d7fc9cd9",
+      "originalWholeBodiesExactlyRestored": true,
+      "originalCases": 16,
+      "failedBeforeInverseRejected": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchJvmMetricsTest.java",
+      "originalSha256": "35d80a7aeec82cd14328b687fc9310417d716868215c332a7d6e90456df29f11",
+      "currentSha256": "f8491d27dff6e0c61db0d7dfc2fe0812433afdafad391b48adaaf6fcda79e5a5",
+      "originalWholeBodiesExactlyRestored": true,
+      "originalCases": 14,
+      "failedBeforeInverseRejected": true
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchSystemMetricsTest.java",
+      "originalSha256": "5f8ac6fd1110c61069702fba98985c37b4a4676fa0c096617a393e6ebd8bf000",
+      "currentSha256": "8663699c12868ba3634569f23adbb1f9d83674afa13b4c0093f78bb46fd9adb9",
+      "originalWholeBodiesExactlyRestored": true,
+      "originalCases": 14,
+      "failedBeforeInverseRejected": true
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchGcMetricRegistrationTest.java",
+      "originalSha256": "fa6654fc3a8a6a2da39fe23f0c92e0067f0e06af025bc561d9a6ecd8c4b6108c",
+      "currentSha256": "01b0de550a7448fb7cf573b2ecc5571b8053b997da966ff67549359a199f1e30",
+      "originalWholeBodiesExactlyRestored": true,
+      "originalCases": 16,
+      "failedBeforeInverseRejected": true
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchStandardMetricsTest.java",
+      "originalSha256": "4ba0ab0918cf1ea8d14fe5fb3daec5be31b49decaa74a3f77ae78764ddf1ebad",
+      "currentSha256": "28948cd885471a48ff86734c87578246bafc4abda53d64eb180ab3f6b063bdf7",
+      "originalWholeBodiesExactlyRestored": true,
+      "originalCases": 13,
+      "failedBeforeInverseRejected": true
+    }
+  ],
+  "originalWholeCases": 73,
+  "rawFindings": 45,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 0,
+  "finiteOwnerSitesCorrected": 5,
+  "existingHostFinallyPreserved": true,
+  "existingFutureGet10SitesRetained": 6,
+  "formatterLiteralChanges": 0,
+  "actualBeforeFailureVectorsRejected": 4,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25256-batch-standard-owner-prepare-v1/manifest.json",
+    "sha256": "1d930084275f3b8e79d4011340ee1695237365665ece0ef6be627bdf0080082b"
+  },
+  "classifications": [
+    {
+      "test": "BatchGcMetricRegistrationTest",
+      "method": "batchgc001DefaultSdkIsOwnedAndClosedBeforeBorrowedRegistry",
+      "variable": "resource",
+      "line": 102,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Each acknowledged actual own-JVM GC handle remains in local owned list and is closed in finally before outer registry TWR; no forcedGC/target attach."
+    },
+    {
+      "test": "BatchGcMetricRegistrationTest",
+      "method": "batchgc006ClosedDebugFailsBeforeFactoryAndOwner",
+      "variable": "source",
+      "line": 227,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Registry explicitly closed before exercising closed-owner rejection or STANDARD no-read/no-reclose; original checks assert closed/closecount and zero provider actions. No resource remains open."
+    },
+    {
+      "test": "BatchGcMetricRegistrationTest",
+      "method": "batchgc009OwnerRejectMeansNoBindOrImplicitClose",
+      "variable": "resource",
+      "line": 307,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Fresh owned Fake GC handle overrides activation/close, finally checks closeConfirmed and closes unconfirmed handle. All success/error/explicitretry branches are original independent fixtures; fake bind never activates actual listener."
+    },
+    {
+      "test": "BatchGcMetricRegistrationTest",
+      "method": "batchgc010OwnerRuntimeAndErrorNeverActivateOrAutoClose",
+      "variable": "resource",
+      "line": 343,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Fresh owned Fake GC handle overrides activation/close, finally checks closeConfirmed and closes unconfirmed handle. All success/error/explicitretry branches are original independent fixtures; fake bind never activates actual listener."
+    },
+    {
+      "test": "BatchGcMetricRegistrationTest",
+      "method": "batchgc011BindFailureLeavesExactHandleInAcknowledgedOwner",
+      "variable": "resource",
+      "line": 370,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Fresh owned Fake GC handle overrides activation/close, finally checks closeConfirmed and closes unconfirmed handle. All success/error/explicitretry branches are original independent fixtures; fake bind never activates actual listener."
+    },
+    {
+      "test": "BatchGcMetricRegistrationTest",
+      "method": "batchgc012SameInstallerDoesNotMixTwoOwnerScopes",
+      "variable": "one",
+      "line": 406,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Fresh owned Fake GC handle overrides activation/close, finally checks closeConfirmed and closes unconfirmed handle. All success/error/explicitretry branches are original independent fixtures; fake bind never activates actual listener."
+    },
+    {
+      "test": "BatchGcMetricRegistrationTest",
+      "method": "batchgc012SameInstallerDoesNotMixTwoOwnerScopes",
+      "variable": "two",
+      "line": 409,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Fresh owned Fake GC handle overrides activation/close, finally checks closeConfirmed and closes unconfirmed handle. All success/error/explicitretry branches are original independent fixtures; fake bind never activates actual listener."
+    },
+    {
+      "test": "BatchGcMetricRegistrationTest",
+      "method": "batchgc013FiniteIndependentConcurrentOwnerScopes",
+      "variable": "workers",
+      "line": 440,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Exactly one test worker owner, singlefinitefinallyshutdownNowawait10; Host originalfinitefinally unchanged after outerTWR removed."
+    },
+    {
+      "test": "BatchGcMetricRegistrationTest",
+      "method": "batchgc013FiniteIndependentConcurrentOwnerScopes",
+      "variable": "workers",
+      "line": 440,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchGcMetricRegistrationTest",
+      "method": "batchgc013FiniteIndependentConcurrentOwnerScopes",
+      "variable": null,
+      "line": 446,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchGcMetricRegistrationTest",
+      "method": "batchgc013FiniteIndependentConcurrentOwnerScopes",
+      "variable": null,
+      "line": 475,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchGcMetricRegistrationTest",
+      "method": "batchgc013FiniteIndependentConcurrentOwnerScopes",
+      "variable": null,
+      "line": 476,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchGcMetricRegistrationTest",
+      "method": "batchgc014RetainThenRejectOrThrowKeepsCallerCleanupWithoutActivation",
+      "variable": "resource",
+      "line": 484,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Fresh owned Fake GC handle overrides activation/close, finally checks closeConfirmed and closes unconfirmed handle. All success/error/explicitretry branches are original independent fixtures; fake bind never activates actual listener."
+    },
+    {
+      "test": "BatchGcMetricRegistrationTest",
+      "method": "batchgc015ConfirmedFixtureCloseIsNotRepeatedByCleanupGuard",
+      "variable": "resource",
+      "line": 520,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Fresh owned Fake GC handle overrides activation/close, finally checks closeConfirmed and closes unconfirmed handle. All success/error/explicitretry branches are original independent fixtures; fake bind never activates actual listener."
+    },
+    {
+      "test": "BatchGcMetricRegistrationTest",
+      "method": "batchgc016FailedFixtureCloseRemainsUnconfirmedUntilExplicitRetry",
+      "variable": "resource",
+      "line": 539,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Fresh owned Fake GC handle overrides activation/close, finally checks closeConfirmed and closes unconfirmed handle. All success/error/explicitretry branches are original independent fixtures; fake bind never activates actual listener."
+    },
+    {
+      "test": "BatchJvmMetricsTest",
+      "method": "batchjvm006ClosedDebugFailsBeforeFactoryAndDoesNotReopen",
+      "variable": "source",
+      "line": 193,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Registry explicitly closed before exercising closed-owner rejection or STANDARD no-read/no-reclose; original checks assert closed/closecount and zero provider actions. No resource remains open."
+    },
+    {
+      "test": "BatchJvmMetricsTest",
+      "method": "batchjvm012StandardOnClosedOwnerDoesNotInspectOrCloseAgain",
+      "variable": "source",
+      "line": 342,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Registry explicitly closed before exercising closed-owner rejection or STANDARD no-read/no-reclose; original checks assert closed/closecount and zero provider actions. No resource remains open."
+    },
+    {
+      "test": "BatchJvmMetricsTest",
+      "method": "batchjvm014FiniteConcurrentPortsDoNotShareSourceState",
+      "variable": "workers",
+      "line": 384,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Exactly one test worker owner, singlefinitefinallyshutdownNowawait10; Host originalfinitefinally unchanged after outerTWR removed."
+    },
+    {
+      "test": "BatchJvmMetricsTest",
+      "method": "batchjvm014FiniteConcurrentPortsDoNotShareSourceState",
+      "variable": "workers",
+      "line": 384,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchJvmMetricsTest",
+      "method": "batchjvm014FiniteConcurrentPortsDoNotShareSourceState",
+      "variable": null,
+      "line": 390,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchJvmMetricsTest",
+      "method": "batchjvm014FiniteConcurrentPortsDoNotShareSourceState",
+      "variable": null,
+      "line": 412,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchJvmMetricsTest",
+      "method": "batchjvm014FiniteConcurrentPortsDoNotShareSourceState",
+      "variable": null,
+      "line": 413,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchStandardMetricSourceTest",
+      "method": "batchhost011GcRetainedBeforeFatalAndClosedInReverseOrder",
+      "variable": "gc",
+      "line": 240,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "ProbeGc is acknowledged into owner before injected failure; owner.close finally releases GC before registry, explicitretry after syntheticclosefailure retained. Fixed valid factory/DEBUG path before ack."
+    },
+    {
+      "test": "BatchStandardMetricSourceTest",
+      "method": "batchhost012FailedGcCloseKeepsRegistryAndExplicitRetryOwnership",
+      "variable": "gc",
+      "line": 265,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "ProbeGc is acknowledged into owner before injected failure; owner.close finally releases GC before registry, explicitretry after syntheticclosefailure retained. Fixed valid factory/DEBUG path before ack."
+    },
+    {
+      "test": "BatchStandardMetricSourceTest",
+      "method": "batchhost016CloseWaitsForOwnedScrapeAndThenRejectsNewScrapes",
+      "variable": "executor",
+      "line": 356,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Exactly one test worker owner, singlefinitefinallyshutdownNowawait10; Host originalfinitefinally unchanged after outerTWR removed."
+    },
+    {
+      "test": "BatchStandardMetricSourceTest",
+      "method": "batchhost016CloseWaitsForOwnedScrapeAndThenRejectsNewScrapes",
+      "variable": "executor",
+      "line": 356,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchStandardMetricSourceTest",
+      "method": "batchhost016CloseWaitsForOwnedScrapeAndThenRejectsNewScrapes",
+      "variable": "scrape",
+      "line": 358,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchStandardMetricSourceTest",
+      "method": "batchhost016CloseWaitsForOwnedScrapeAndThenRejectsNewScrapes",
+      "variable": "close",
+      "line": 362,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchStandardMetricSourceTest",
+      "method": "batchhost016CloseWaitsForOwnedScrapeAndThenRejectsNewScrapes",
+      "variable": null,
+      "line": 376,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchStandardMetricSourceTest",
+      "method": "batchhost016CloseWaitsForOwnedScrapeAndThenRejectsNewScrapes",
+      "variable": null,
+      "line": 377,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchStandardMetricSourceTest.ProbeRegistry",
+      "method": "scrape",
+      "variable": null,
+      "line": 404,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned deterministic fixture catches InterruptedException, restores current-thread interrupt then propagates failure; no thread creation/service action."
+    },
+    {
+      "test": "BatchStandardMetricsTest",
+      "method": "batchstd006ClosedDebugFailsBeforeAnyPhase",
+      "variable": "source",
+      "line": 213,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Registry explicitly closed before exercising closed-owner rejection or STANDARD no-read/no-reclose; original checks assert closed/closecount and zero provider actions. No resource remains open."
+    },
+    {
+      "test": "BatchStandardMetricsTest",
+      "method": "batchstd011ClosedStandardDoesNotReadOrReclose",
+      "variable": "source",
+      "line": 330,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Registry explicitly closed before exercising closed-owner rejection or STANDARD no-read/no-reclose; original checks assert closed/closecount and zero provider actions. No resource remains open."
+    },
+    {
+      "test": "BatchStandardMetricsTest",
+      "method": "batchstd013FiniteIndependentConcurrentCompositions",
+      "variable": "workers",
+      "line": 365,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Exactly one test worker owner, singlefinitefinallyshutdownNowawait10; Host originalfinitefinally unchanged after outerTWR removed."
+    },
+    {
+      "test": "BatchStandardMetricsTest",
+      "method": "batchstd013FiniteIndependentConcurrentCompositions",
+      "variable": "workers",
+      "line": 365,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchStandardMetricsTest",
+      "method": "batchstd013FiniteIndependentConcurrentCompositions",
+      "variable": null,
+      "line": 371,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchStandardMetricsTest",
+      "method": "batchstd013FiniteIndependentConcurrentCompositions",
+      "variable": null,
+      "line": 390,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchStandardMetricsTest",
+      "method": "batchstd013FiniteIndependentConcurrentCompositions",
+      "variable": null,
+      "line": 391,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchSystemMetricsTest",
+      "method": "batchsys006ClosedDebugFailsBeforeFactoryAndDoesNotReopen",
+      "variable": "source",
+      "line": 200,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Registry explicitly closed before exercising closed-owner rejection or STANDARD no-read/no-reclose; original checks assert closed/closecount and zero provider actions. No resource remains open."
+    },
+    {
+      "test": "BatchSystemMetricsTest",
+      "method": "batchsys012StandardOnClosedOwnerDoesNotInspectOrCloseAgain",
+      "variable": "source",
+      "line": 349,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Registry explicitly closed before exercising closed-owner rejection or STANDARD no-read/no-reclose; original checks assert closed/closecount and zero provider actions. No resource remains open."
+    },
+    {
+      "test": "BatchSystemMetricsTest",
+      "method": "batchsys014FiniteConcurrentPortsDoNotShareSourceState",
+      "variable": "workers",
+      "line": 391,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Exactly one test worker owner, singlefinitefinallyshutdownNowawait10; Host originalfinitefinally unchanged after outerTWR removed."
+    },
+    {
+      "test": "BatchSystemMetricsTest",
+      "method": "batchsys014FiniteConcurrentPortsDoNotShareSourceState",
+      "variable": "workers",
+      "line": 391,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchSystemMetricsTest",
+      "method": "batchsys014FiniteConcurrentPortsDoNotShareSourceState",
+      "variable": null,
+      "line": 397,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchSystemMetricsTest",
+      "method": "batchsys014FiniteConcurrentPortsDoNotShareSourceState",
+      "variable": null,
+      "line": 419,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    },
+    {
+      "test": "BatchSystemMetricsTest",
+      "method": "batchsys014FiniteConcurrentPortsDoNotShareSourceState",
+      "variable": null,
+      "line": 420,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Original standalone JUnit owned2/4worker only, existingget/latch10 unchanged; singlefinitefinallyshutdownNowawait10, Host releases latch before cleanup and no outerTWR reclose."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

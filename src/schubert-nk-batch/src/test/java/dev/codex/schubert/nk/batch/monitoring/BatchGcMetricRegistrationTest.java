@@ -437,7 +437,8 @@ class BatchGcMetricRegistrationTest {
 
   @Test
   void batchgc013FiniteIndependentConcurrentOwnerScopes() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(4)) {
+    var workers = Executors.newFixedThreadPool(4);
+    try {
       var jobs = new ArrayList<Future<?>>();
       var total = new AtomicInteger();
       for (int i = 0; i < 64; i++)
@@ -470,6 +471,9 @@ class BatchGcMetricRegistrationTest {
                 }));
       for (var job : jobs) job.get(10, TimeUnit.SECONDS);
       assertEquals(64, total.get());
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

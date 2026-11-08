@@ -353,30 +353,29 @@ class BatchStandardMetricSourceTest {
     try {
 
       owner.bind(DEBUG_MODE);
-      try (var executor = Executors.newFixedThreadPool(2)) {
-        try {
-          var scrape = executor.submit(() -> owner.scrape(DEBUG_MODE));
-          assertTrue(entered.await(10, TimeUnit.SECONDS));
-          var attemptedClose = new CountDownLatch(1);
-          var close =
-              executor.submit(
-                  () -> {
-                    attemptedClose.countDown();
-                    owner.close();
-                  });
-          assertTrue(attemptedClose.await(10, TimeUnit.SECONDS));
-          assertFalse(source.isClosed());
-          release.countDown();
-          assertEquals("standard", scrape.get(10, TimeUnit.SECONDS));
-          close.get(10, TimeUnit.SECONDS);
-          assertTrue(source.isClosed());
-          assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
-        } finally {
-          release.countDown();
-          executor.shutdownNow();
-          assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
-          owner.close();
-        }
+      var executor = Executors.newFixedThreadPool(2);
+      try {
+        var scrape = executor.submit(() -> owner.scrape(DEBUG_MODE));
+        assertTrue(entered.await(10, TimeUnit.SECONDS));
+        var attemptedClose = new CountDownLatch(1);
+        var close =
+            executor.submit(
+                () -> {
+                  attemptedClose.countDown();
+                  owner.close();
+                });
+        assertTrue(attemptedClose.await(10, TimeUnit.SECONDS));
+        assertFalse(source.isClosed());
+        release.countDown();
+        assertEquals("standard", scrape.get(10, TimeUnit.SECONDS));
+        close.get(10, TimeUnit.SECONDS);
+        assertTrue(source.isClosed());
+        assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
+      } finally {
+        release.countDown();
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+        owner.close();
       }
     } finally {
       owner.close();
