@@ -1,0 +1,9 @@
+# NK-OPS-001 Registry残157宣言・公開77post参照実体照合仕様
+
+G13.07主/G03.05関連追加0、SOURCE_REQUALIFICATION原1/3/7pp cap9。既23778の324source宣言160unit/78元postのうち、15460（同critical三source/六source実bytebridge24190/92）は再照合しない。残157宣言/77個を固定し、Git追跡公開manifestへ一意に解決済み。元run/source/session/exec/physical/counter/case宣言が参照先実JSONと一致するか、現23972既全Main metadataとclassbyteが同じかを一括metadata照合する。元fixture/JAR/classbyte/exec/XML/private archive/rawへの取得・再実行は含めない。
+
+事前shape三postはfullSourceUnits dict/physicalClasses dict/cases list。異なるschemaや欠落/複数一致を推測して補完しない。期待counterは元宣言値とpostのphysical集合が完全一致する一unitのtotalsを比較、現source physicalは実module付き23972から参照。classSHA null/held二/別byteは不明または差分として保持し再hashしない。reference pin不一致/異schema/差分も対象別に記録、UNKNOWNをPASSへ変換しない。全対象がhistorical reference metadataであることを明示し、callee/SDK/現run・全WBS/G13/451は一切認定しない。
+
+正対象157/77は着手前固定。役割を先に読んだ有限schemaのみ実装し、新汎用parserや数値global置換を作らない。公開pin済JSON77だけの読取で未読宣言を実参照照合へ進め、未支持schemaを別の汎用heuristicで埋めない。集計は実対象別状態から算出し、原135 full宣言・21partial・4source差分等を上書きしない。独立はdeclaredpost→targetの逆向き照合/元pin/集合とstatus算出を別確認、偽byte・missed・case/source/run/自然0等metadata否定。既成功の確認再演0。
+
+元計画費・再認証費と専有不明nullを分離。正式1964/53・unique517/候補114/pending12/whole93暫定・新leaf0/工数null、QA051final/G07未分類3313+22actualSecretCountnull/全HOLD/原本等保全。時刻/実command/exit/pins/対象別状態/残課題を24198/24200と3860へ保存。通常小区切りでは停止しない。

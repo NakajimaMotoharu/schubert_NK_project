@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-08 metadata否定前後差も型を保持する
+
+BUG2520/YKT2257ではstrict verifier自体に型検証があっても、否定vectorの前後差をPython等値で確認して0/Falseを同視した。新しい否定vectorには必ず実変異があることを型を保持するcanonical JSON等で確認し、元型との同視を避ける。int0/boolFalse、int1/boolTrue、float0.0/int0、入子と同値dict順序を有限回帰に含める。新汎用parserを増やさず局所guardを用い、既成功producerの確認再演や品質/モデル/HOLD/停止条件変更をしない。元失敗24206と原見積/工具手戻りを保持する。
+
+
 ## 2026-11-08 工具派生のcountと構文literalを区別
 
 BUG2516/YKT2254でSDK数9→1の一律置換がhex文字rangeを変え、独立比較を失敗させた。新規汎用工具や全literal置換を増やさず、対象scope/出力先/countを明示contextで変更する。旧qualified工具は不変更、生成差分の文字列literalは許可したscope・出力・pinの変更だけかAST等で確認する。正規表現・期待値の品質を緩めず、元の失敗・before・工具費を保存する。新規正対象数を先行観測し、対象0 familyを別witnessで再演しない。現scopeのPG24012は文字列三変更ずつのみ・実before拒否を確認した。既品質/モデル/実操作HOLD/通常10%保全/continuous-v2は不変更。
