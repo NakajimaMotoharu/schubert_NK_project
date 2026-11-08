@@ -1,0 +1,235 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T08:41:28.182804+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorderTest.java",
+      "originalSha256": "eea764f29fae52c262df68bb876f0b0e7db0dbe255e75c7cd2ed30f0eb5ca384",
+      "currentSha256": "721128da01cfc7fd165159aa8249c513c23c6a380632791e605ac3e81567d7ea",
+      "originalWholeBodiesExactlyRestored": true,
+      "ownerShape": "combined"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorderTest.java",
+      "originalSha256": "f782006859ef273e9cb498a97ec8c20fc050de47c0ab1e53ca46d9ea8f9de2cf",
+      "currentSha256": "19f94f1fef7ab412bd13563eda6586dc16ab46ac8015ac55ced517de10848bd8",
+      "originalWholeBodiesExactlyRestored": true,
+      "ownerShape": "combined"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorderTest.java",
+      "originalSha256": "193ecfb3b0fd738452560f52fbe0a069aa097162fc75b74d53dfc804d160eb36",
+      "currentSha256": "fdadc57f8c391e345ebf0e4938cf83157bc6cf0a646d751b26ef674d54107c63",
+      "originalWholeBodiesExactlyRestored": true,
+      "ownerShape": "combined"
+    }
+  ],
+  "originalWholeCases": 24,
+  "rawFindings": 21,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 3,
+  "finiteOwnerSitesCorrected": 3,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25324-api-pool-outbox-owner-prepare-v1/manifest.json",
+    "sha256": "ba1d8474be406cb1359967719a7690efa22842ef63dc2e8dc2f1de2d1732ed1b"
+  },
+  "classifications": [
+    {
+      "className": "DbPoolMetricRecorderTest",
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "variable": "pool",
+      "line": 199,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "DbPoolMetricRecorderTest",
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "variable": "pool",
+      "line": 199,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "DbPoolMetricRecorderTest",
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "variable": null,
+      "line": 212,
+      "rule": "CompareObjectsWithEquals",
+      "applicable": false,
+      "basis": "Identity is the independent atomic snapshot cohort oracle: actual == first || actual == second (pool); actual == one || actual == two (outbox). Value equals would weaken the required whole-object publication test."
+    },
+    {
+      "className": "DbPoolMetricRecorderTest",
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "variable": null,
+      "line": 212,
+      "rule": "CompareObjectsWithEquals",
+      "applicable": false,
+      "basis": "Identity is the independent atomic snapshot cohort oracle: actual == first || actual == second (pool); actual == one || actual == two (outbox). Value equals would weaken the required whole-object publication test."
+    },
+    {
+      "className": "DbPoolMetricRecorderTest",
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "variable": null,
+      "line": 215,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "DbPoolMetricRecorderTest",
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "variable": null,
+      "line": 220,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "DbPoolMetricRecorderTest",
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "variable": null,
+      "line": 221,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "OutboxAgeMetricRecorderTest",
+      "method": "outboxAge006OneOwnerPublishesWholeImmutableSnapshotsConcurrently",
+      "variable": "executor",
+      "line": 190,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "OutboxAgeMetricRecorderTest",
+      "method": "outboxAge006OneOwnerPublishesWholeImmutableSnapshotsConcurrently",
+      "variable": "executor",
+      "line": 190,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "OutboxAgeMetricRecorderTest",
+      "method": "outboxAge006OneOwnerPublishesWholeImmutableSnapshotsConcurrently",
+      "variable": null,
+      "line": 203,
+      "rule": "CompareObjectsWithEquals",
+      "applicable": false,
+      "basis": "Identity is the independent atomic snapshot cohort oracle: actual == first || actual == second (pool); actual == one || actual == two (outbox). Value equals would weaken the required whole-object publication test."
+    },
+    {
+      "className": "OutboxAgeMetricRecorderTest",
+      "method": "outboxAge006OneOwnerPublishesWholeImmutableSnapshotsConcurrently",
+      "variable": null,
+      "line": 203,
+      "rule": "CompareObjectsWithEquals",
+      "applicable": false,
+      "basis": "Identity is the independent atomic snapshot cohort oracle: actual == first || actual == second (pool); actual == one || actual == two (outbox). Value equals would weaken the required whole-object publication test."
+    },
+    {
+      "className": "OutboxAgeMetricRecorderTest",
+      "method": "outboxAge006OneOwnerPublishesWholeImmutableSnapshotsConcurrently",
+      "variable": null,
+      "line": 206,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "OutboxAgeMetricRecorderTest",
+      "method": "outboxAge006OneOwnerPublishesWholeImmutableSnapshotsConcurrently",
+      "variable": null,
+      "line": 211,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "OutboxAgeMetricRecorderTest",
+      "method": "outboxAge006OneOwnerPublishesWholeImmutableSnapshotsConcurrently",
+      "variable": null,
+      "line": 212,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "OutboxRowsMetricRecorderTest",
+      "method": "outboxMetric006ParallelSnapshotsRemainCompleteAndImmutable",
+      "variable": "executor",
+      "line": 190,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "OutboxRowsMetricRecorderTest",
+      "method": "outboxMetric006ParallelSnapshotsRemainCompleteAndImmutable",
+      "variable": "executor",
+      "line": 190,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "OutboxRowsMetricRecorderTest",
+      "method": "outboxMetric006ParallelSnapshotsRemainCompleteAndImmutable",
+      "variable": null,
+      "line": 203,
+      "rule": "CompareObjectsWithEquals",
+      "applicable": false,
+      "basis": "Identity is the independent atomic snapshot cohort oracle: actual == first || actual == second (pool); actual == one || actual == two (outbox). Value equals would weaken the required whole-object publication test."
+    },
+    {
+      "className": "OutboxRowsMetricRecorderTest",
+      "method": "outboxMetric006ParallelSnapshotsRemainCompleteAndImmutable",
+      "variable": null,
+      "line": 203,
+      "rule": "CompareObjectsWithEquals",
+      "applicable": false,
+      "basis": "Identity is the independent atomic snapshot cohort oracle: actual == first || actual == second (pool); actual == one || actual == two (outbox). Value equals would weaken the required whole-object publication test."
+    },
+    {
+      "className": "OutboxRowsMetricRecorderTest",
+      "method": "outboxMetric006ParallelSnapshotsRemainCompleteAndImmutable",
+      "variable": null,
+      "line": 206,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "OutboxRowsMetricRecorderTest",
+      "method": "outboxMetric006ParallelSnapshotsRemainCompleteAndImmutable",
+      "variable": null,
+      "line": 211,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "OutboxRowsMetricRecorderTest",
+      "method": "outboxMetric006ParallelSnapshotsRemainCompleteAndImmutable",
+      "variable": null,
+      "line": 212,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}
