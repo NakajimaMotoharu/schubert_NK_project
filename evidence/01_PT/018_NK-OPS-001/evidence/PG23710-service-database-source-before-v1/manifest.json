@@ -1,0 +1,84 @@
+{
+  "atJST": "2026-11-08T09:20:33.181068+09:00",
+  "bugs": [
+    "BUG-2492",
+    "BUG-2493"
+  ],
+  "ykts": [
+    "YKT-2230",
+    "YKT-2231"
+  ],
+  "beforeSourceSha256": "5586a4d6a9cf8bb57bb87536cda38021fbd7acd296ab67dac5390ceb1ccda1f0",
+  "initialCompile": {
+    "actualExit": 1,
+    "stage": {
+      "actualExit": 1,
+      "timedOut": false,
+      "startUTC": "2026-11-08T00:16:37.271581+00:00",
+      "endUTC": "2026-11-08T00:16:38.038171+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "-proc:none",
+        "-implicit:none",
+        "--release",
+        "25",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg23696-service-database-source-compile-v1/classes",
+        "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "f32bec79d0a1a238a370cecd3b4614832c65137a8413022293ccec2679d6757d"
+    },
+    "inputHashes": {
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java": "5586a4d6a9cf8bb57bb87536cda38021fbd7acd296ab67dac5390ceb1ccda1f0",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": "bf179887c2496723d5ddb4ee0be02c5e599ecba781f5b8338367bb21648627a5",
+      "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java": "11b33bed1889750459c6e27c65a7cacd69c51c79f78cd85da252093c504912d6",
+      "evidence/01_PT/018_NK-OPS-001/input/507_service_database_source_qualifier.py": "211a8c0a5a5ca64cad428e9079871e4364565b6562c3a5e79e5485341df8ccde",
+      "evidence/01_PT/018_NK-OPS-001/input/506_service_database_source_scope.json": "f4e0efcf325d4b24d1aab37306b894120165f25a2cb5fbfbbee12dfa896c7be3"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar": "cd07d7031d042a9224995445e1974f24cceedece141fff69cac28cf392db496d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar": "9b5bf5bf449e93f571524b26496e3e8215b9015dc97dd3a0b2c75a7073401ef6",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    "classHashes": {},
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "productTestsExecuted": 0
+  },
+  "initialCompileManifestSha256": "dc55e70ba20265381ea0a095d4ea6badb639b745d7a398f5e815c832a8201a4b",
+  "patches": [
+    {
+      "method": "dbSource001PublicConstructionErasesInputWithoutConnecting",
+      "before": "try (var source = new ServiceDatabaseSource(service, URL, owned)) {\n        assertArrayEquals(new char[1], owned);\n        assertEquals(REDACTED, source.toString());\n        source.close();\n        source.close();\n        // The pinned closed gate returns before the default connector is ever invoked.\n        fixedUnavailable(source);\n      }",
+      "after": "var source = new ServiceDatabaseSource(service, URL, owned);\ntry {\n        assertArrayEquals(new char[1], owned);\n        assertEquals(REDACTED, source.toString());\n        source.close();\n        source.close();\n        // The pinned closed gate returns before the default connector is ever invoked.\n        fixedUnavailable(source);\n      } finally { source.close(); }"
+    },
+    {
+      "method": "dbSource002BothRolesFixedPropertiesAndEachPhysicalAdmission",
+      "before": "try (var source =\n          new ServiceDatabaseSource(\n              service,\n              URL,\n              material(1),\n              (url, properties) -> {\n                assertEquals(URL, url);\n                assertEquals(4, properties.size());\n                assertEquals(role, properties.getProperty(USER));\n                assertEquals(\"x\", properties.getProperty(PASSWORD));\n                assertEquals(\"3\", properties.getProperty(TIMEOUT));\n                assertEquals(app, properties.getProperty(APPLICATION));\n                captured.add(properties);\n                var fixture = new Fixture(role);\n                fixtures.add(fixture);\n                return fixture.connection;\n              })) {\n        var first = source.getConnection();\n        var second = source.getConnection();\n        assertNotSame(first, second);\n        assertEquals(2, fixtures.size());\n        source.close();\n        for (var fixture : fixtures) {\n          assertEquals(1, fixture.prepares);\n          assertEquals(1, fixture.rowCloses);\n          assertEquals(1, fixture.statementCloses);\n          assertEquals(0, fixture.connectionCloses);\n          fixture.connection.close();\n          assertEquals(1, fixture.connectionCloses);\n        }\n        for (var properties : captured) assertTrue(properties.isEmpty());\n      }",
+      "after": "var source =\n          new ServiceDatabaseSource(\n              service,\n              URL,\n              material(1),\n              (url, properties) -> {\n                assertEquals(URL, url);\n                assertEquals(4, properties.size());\n                assertEquals(role, properties.getProperty(USER));\n                assertEquals(\"x\", properties.getProperty(PASSWORD));\n                assertEquals(\"3\", properties.getProperty(TIMEOUT));\n                assertEquals(app, properties.getProperty(APPLICATION));\n                captured.add(properties);\n                var fixture = new Fixture(role);\n                fixtures.add(fixture);\n                return fixture.connection;\n              });\ntry {\n        var first = source.getConnection();\n        var second = source.getConnection();\n        assertNotSame(first, second);\n        assertEquals(2, fixtures.size());\n        source.close();\n        for (var fixture : fixtures) {\n          assertEquals(1, fixture.prepares);\n          assertEquals(1, fixture.rowCloses);\n          assertEquals(1, fixture.statementCloses);\n          assertEquals(0, fixture.connectionCloses);\n          fixture.connection.close();\n          assertEquals(1, fixture.connectionCloses);\n        }\n        for (var properties : captured) assertTrue(properties.isEmpty());\n      } finally { source.close(); }"
+    },
+    {
+      "method": "dbSource012CloseIsIdempotentAndPreservesCallerOwnedConnection",
+      "before": "try (var source =\n        source(\n            (u, p) -> {\n              connections.incrementAndGet();\n              return fixture.connection;\n            })) {\n      assertSame(fixture.connection, source.getConnection());\n      source.close();\n      source.close();\n      assertEquals(0, fixture.connectionCloses);\n      fixedUnavailable(source);\n      assertEquals(1, connections.get());\n      fixture.connection.close();\n      assertEquals(1, fixture.connectionCloses);\n    }",
+      "after": "var source =\n        source(\n            (u, p) -> {\n              connections.incrementAndGet();\n              return fixture.connection;\n            });\ntry {\n      assertSame(fixture.connection, source.getConnection());\n      source.close();\n      source.close();\n      assertEquals(0, fixture.connectionCloses);\n      fixedUnavailable(source);\n      assertEquals(1, connections.get());\n      fixture.connection.close();\n      assertEquals(1, fixture.connectionCloses);\n    } finally { source.close(); }"
+    },
+    {
+      "kind": "TYPED_RETURN_BLOCK_LAMBDA",
+      "before": "executor.submit(source::getConnection)",
+      "after": "executor.submit(() -> { return source.getConnection(); })",
+      "occurrences": 2
+    }
+  ],
+  "productTestsExecuted": 0,
+  "productionSourceChanged": false,
+  "staticNotStartedBecauseCompileGuardFailed": true
+}

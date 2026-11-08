@@ -1,0 +1,335 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T09:34:36.051723+09:00",
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java": "a9476785417f115af1c33fd55085df696cc5d4cd51493e7c1bff498a7ab03e2f",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": "bf179887c2496723d5ddb4ee0be02c5e599ecba781f5b8338367bb21648627a5",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java": "11b33bed1889750459c6e27c65a7cacd69c51c79f78cd85da252093c504912d6",
+    "evidence/01_PT/018_NK-OPS-001/input/507_service_database_source_qualifier.py": "0e9b5153dde17a2b513822d921d83a34004dea72d9f97314ffa1eed08475e11b",
+    "evidence/01_PT/018_NK-OPS-001/input/506_service_database_source_scope.json": "f4e0efcf325d4b24d1aab37306b894120165f25a2cb5fbfbbee12dfa896c7be3"
+  },
+  "dependencySourceHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": "bf179887c2496723d5ddb4ee0be02c5e599ecba781f5b8338367bb21648627a5",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java": "11b33bed1889750459c6e27c65a7cacd69c51c79f78cd85da252093c504912d6"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar": "cd07d7031d042a9224995445e1974f24cceedece141fff69cac28cf392db496d",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar": "9b5bf5bf449e93f571524b26496e3e8215b9015dc97dd3a0b2c75a7073401ef6",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+  },
+  "compileManifestSha256": "1f09282c418479048486e1375316f1bfe18dc2606a871e1c788a197220d90c44",
+  "staticManifestSha256": "79bdd390dc12af25ac3f0fdbcafdc1b12d611bdcfad5fca40ec02af70eceb0e7",
+  "normalMainStaticUnchanged": "0580a14592d3fc00820183034c584208e45b002802d2e3e173b5f752c7cf19f2",
+  "sdkClasspathGuard": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+      "sha256": "cd07d7031d042a9224995445e1974f24cceedece141fff69cac28cf392db496d",
+      "jdbcDriverDescriptors": 0,
+      "compilerPluginDescriptors": 0,
+      "manifestClasspath": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "sha256": "9b5bf5bf449e93f571524b26496e3e8215b9015dc97dd3a0b2c75a7073401ef6",
+      "jdbcDriverDescriptors": 0,
+      "compilerPluginDescriptors": 0,
+      "manifestClasspath": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "jdbcDriverDescriptors": 0,
+      "compilerPluginDescriptors": 0,
+      "manifestClasspath": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+      "jdbcDriverDescriptors": 0,
+      "compilerPluginDescriptors": 0,
+      "manifestClasspath": false
+    }
+  ],
+  "sourceAssertionRecipes": [
+    "assertEquals(SQL, args[0]);",
+    "assertEquals(4, properties.size());",
+    "assertEquals(role, properties.getProperty(USER));",
+    "assertEquals(\"x\", properties.getProperty(PASSWORD));",
+    "assertEquals(\"3\", properties.getProperty(TIMEOUT));",
+    "assertEquals(app, properties.getProperty(APPLICATION));",
+    "assertTrue(properties.isEmpty());",
+    "assertTrue(captured.get().isEmpty());",
+    "assertArrayEquals(new char[owned.length], owned);",
+    "assertArrayEquals(new char[length], owned);",
+    "owned[0] = 'z';",
+    "assertEquals(\"x\".repeat(length), p.getProperty(PASSWORD));",
+    "assertNotSame(first, second);",
+    "assertEquals(1, fixture.prepares);",
+    "assertEquals(1, fixture.rowCloses);",
+    "assertEquals(1, fixture.statementCloses);",
+    "assertEquals(0, fixture.connectionCloses);",
+    "assertEquals(1, fixture.connectionCloses);",
+    "assertEquals(UNAVAILABLE, failure.getMessage());",
+    "assertEquals(STATE, failure.getSQLState());",
+    "assertNull(failure.getCause());",
+    "assertNull(failure.getNextException());",
+    "assertEquals(0, failure.getSuppressed().length);",
+    "assertSame(expected, assertThrows(expected.getClass(), source::getConnection));",
+    "assertEquals(1, failure.getSuppressed().length);",
+    "same.closeFault = expected;",
+    "fixedSecondary(expected);",
+    "assertEquals(1, connections.get());",
+    "assertEquals(8, created.get());",
+    "task.get(5, TimeUnit.SECONDS)",
+    "entered.await(5, TimeUnit.SECONDS)",
+    "release.await(5, TimeUnit.SECONDS)",
+    "closing.get(5, TimeUnit.SECONDS)",
+    "finally { release.countDown(); }",
+    "source.setLogWriter(null);",
+    "source.setLoginTimeout(3);",
+    "source.unwrap(null)",
+    "source.isWrapperFor(null)",
+    "private static final String STATE = \"08001\";",
+    "private static final String UNSUPPORTED_STATE = \"0A000\";",
+    "private static final String REDACTED = \"ServiceDatabaseSource[REDACTED]\";"
+  ],
+  "expectedTests": 14,
+  "newUniqueTests": 14,
+  "fullSourceFilePhysicalClasses": [
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector"
+  ],
+  "abstractNoCodeInterfaces": 1,
+  "manualCoverageExclusions": [],
+  "styleInverse": true,
+  "compileAndLifetimePatchesInverse": true,
+  "beforeManifestPreserved": true,
+  "pmdRaw": 10,
+  "pmdApplicable": 0,
+  "checkstyle": 0,
+  "unclassified": 0,
+  "staticClassifications": [
+    {
+      "raw": {
+        "beginline": "247",
+        "endline": "247",
+        "begincolumn": "13",
+        "endcolumn": "18",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "class": "ServiceDatabaseSourcePortTest",
+        "method": "dbSource002BothRolesFixedPropertiesAndEachPhysicalAdmission",
+        "variable": "first",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this Connection object are closed after use"
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Only caller-owned memory Connection proxies from explicit package Connector; alias fixtures/returned list close each once, callback never owns a driver/backend/FD. Actual ownership assertions and all exception paths remain checked."
+    },
+    {
+      "raw": {
+        "beginline": "248",
+        "endline": "248",
+        "begincolumn": "13",
+        "endcolumn": "19",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "class": "ServiceDatabaseSourcePortTest",
+        "method": "dbSource002BothRolesFixedPropertiesAndEachPhysicalAdmission",
+        "variable": "second",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this Connection object are closed after use"
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Only caller-owned memory Connection proxies from explicit package Connector; alias fixtures/returned list close each once, callback never owns a driver/backend/FD. Actual ownership assertions and all exception paths remain checked."
+    },
+    {
+      "raw": {
+        "beginline": "521",
+        "endline": "521",
+        "begincolumn": "24",
+        "endcolumn": "67",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "class": "ServiceDatabaseSourcePortTest",
+        "method": "dbSource013ParallelIndependentConnectionsAndPropertiesClear",
+        "variable": "executor",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Standalone isolated JUnit own JVM, eight success tasks plus two coordinated close-race tasks, bounded5s waits/owned executor close/interruption restored; no J2EE/container or target process threads."
+    },
+    {
+      "raw": {
+        "beginline": "525",
+        "endline": "528",
+        "begincolumn": "13",
+        "endcolumn": "19",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "class": "ServiceDatabaseSourcePortTest",
+        "method": "dbSource013ParallelIndependentConnectionsAndPropertiesClear",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Standalone isolated JUnit own JVM, eight success tasks plus two coordinated close-race tasks, bounded5s waits/owned executor close/interruption restored; no J2EE/container or target process threads."
+    },
+    {
+      "raw": {
+        "beginline": "531",
+        "endline": "531",
+        "begincolumn": "13",
+        "endcolumn": "23",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "class": "ServiceDatabaseSourcePortTest",
+        "method": "dbSource013ParallelIndependentConnectionsAndPropertiesClear",
+        "variable": "connection",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this Connection object are closed after use"
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Only caller-owned memory Connection proxies from explicit package Connector; alias fixtures/returned list close each once, callback never owns a driver/backend/FD. Actual ownership assertions and all exception paths remain checked."
+    },
+    {
+      "raw": {
+        "beginline": "532",
+        "endline": "532",
+        "begincolumn": "18",
+        "endcolumn": "26",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "class": "ServiceDatabaseSourcePortTest",
+        "method": "dbSource013ParallelIndependentConnectionsAndPropertiesClear",
+        "variable": "previous",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this Connection object are closed after use"
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Only caller-owned memory Connection proxies from explicit package Connector; alias fixtures/returned list close each once, callback never owns a driver/backend/FD. Actual ownership assertions and all exception paths remain checked."
+    },
+    {
+      "raw": {
+        "beginline": "556",
+        "endline": "556",
+        "begincolumn": "21",
+        "endcolumn": "27",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "class": "ServiceDatabaseSourcePortTest",
+        "method": "dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Standalone isolated JUnit own JVM, eight success tasks plus two coordinated close-race tasks, bounded5s waits/owned executor close/interruption restored; no J2EE/container or target process threads."
+    },
+    {
+      "raw": {
+        "beginline": "561",
+        "endline": "561",
+        "begincolumn": "24",
+        "endcolumn": "67",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "class": "ServiceDatabaseSourcePortTest",
+        "method": "dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition",
+        "variable": "executor",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Standalone isolated JUnit own JVM, eight success tasks plus two coordinated close-race tasks, bounded5s waits/owned executor close/interruption restored; no J2EE/container or target process threads."
+    },
+    {
+      "raw": {
+        "beginline": "563",
+        "endline": "566",
+        "begincolumn": "11",
+        "endcolumn": "17",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "class": "ServiceDatabaseSourcePortTest",
+        "method": "dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition",
+        "variable": "acquiring",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Standalone isolated JUnit own JVM, eight success tasks plus two coordinated close-race tasks, bounded5s waits/owned executor close/interruption restored; no J2EE/container or target process threads."
+    },
+    {
+      "raw": {
+        "beginline": "569",
+        "endline": "569",
+        "begincolumn": "23",
+        "endcolumn": "53",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "class": "ServiceDatabaseSourcePortTest",
+        "method": "dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition",
+        "variable": "closing",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "disposition": "NOT_APPLICABLE_TO_THIS_EXPLICIT_TEST_CONTEXT",
+      "reason": "Standalone isolated JUnit own JVM, eight success tasks plus two coordinated close-race tasks, bounded5s waits/owned executor close/interruption restored; no J2EE/container or target process threads."
+    }
+  ],
+  "actualBackendActions": 0,
+  "actualJdbcDriverOrDatabaseActions": 0,
+  "driverManagerDefaultConnectorInvoked": false,
+  "defaultNonInvocationEvidence": "PINNED_MAIN_CLOSED_GATE_AND_SAME_THREAD_CLOSE_FIRST_DEFAULT_CONSTRUCTOR_CASE_NO_REAL_DRIVER_CLASSPATH",
+  "ownDriverRegistration": false,
+  "actualFilesystemOrDescriptorActions": 0,
+  "heldFourInitializations": 0,
+  "originalRealDatabaseTestOrFixtureCompiledOrRun": false,
+  "ownVirtualThreadTasks": 10,
+  "productTestsExecuted": 0,
+  "productClassesInitialized": 0,
+  "existingSchemaProofReused": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22670-schema-nine-independent-v1/manifest.json",
+    "sha256": "fcc03f7813d28be2ba5ca1ff3f0af06b46005b07eb59501efe5fd04926e1b42d"
+  },
+  "newSchemaTests": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "bugs": [
+    "BUG-2492",
+    "BUG-2493",
+    "BUG-2494",
+    "BUG-2495"
+  ],
+  "ykts": [
+    "YKT-2230",
+    "YKT-2231",
+    "YKT-2232",
+    "YKT-2233"
+  ]
+}

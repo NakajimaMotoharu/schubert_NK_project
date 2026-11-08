@@ -42,3 +42,7 @@ ServiceDatabaseAdmissionPortTest/PT-OPS-DBPORT-001～015、SourceFile二physical
 ### 借用JDBC Port十五の限定実行完了
 
 初23654全15成功/FESabort0、23656独立post0（9d40975e1b15b7737d4c9cc1d45336d5ed0aa14bb0c10a117f567e3d3b9ccd73）。通常Main L48/M5/C1/B32miss0、compiler生成$1は物理/CRCに含め標準filterによる分母0を3792へ明記、手動除外0。Main不変、実DB元Test/fixtureはHOLD、正式1964-53/工数null不変。仕様3791・sourcebfb6・BUG2491/YKT2229の限定是正/五対象非該当と初15実行を結合済。
+
+## 接続source所有の独立memory Port（2026-11-08、実行前）
+
+ServiceDatabaseSourcePortTest/PT-OPS-DBSRCPORT-001～014、3793/input506・23700preflight3638c2bb81209c86c19ed4dead4e1deb74098efc013ce5ecab8ac81ffbdd1659。existing package Connectorへ標準JDK proxyを提供、synthetic charだけで実Driver/DB接続/登録0。public defaultはconstructor/close/closed gateだけ、実接続はHOLD。Main7aed不変/normal22084/static22086再利用。SourceのCode一/abstract Connector NoCode一を物理scopeへ含める。compile23728/static23730は完了、Unit14はこのsource保存時点で未実行。初compile1/全原証拠とBUG2492～2495/YKT2230～2233の修正前起票を保持、結果3794/23704と分離。SchemaHistoryAdmission/Row/JdbcAdmissionFailuresは既同Main22670の全九証拠を参照し再演0・unique加算0。
