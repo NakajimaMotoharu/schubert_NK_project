@@ -7,3 +7,5 @@
 BUG2548は全3をP00201としたproducer guard初1で、before24666保全後、現descriptor/inventory一致のField/FEX=P00201二Source17method/PPE=P00204一Source2methodへ是正。各class/method/declaredRDを実Source責任で継承し、元割当・scope・開始event/見積・Productは不変更。YKT2272全対象の対応と7誤owner/Case/型/Source/共有RD反証を独立postで確認。Source/requirementの関連参照の完成と、その要件の全意味的受入を区別する。
 
 新runtimeSource登録/leaf/unique増0、520(Java416+HTML97CSS7)/候補114/pending12/whole93暫定/正式1964PT53scope/工数null/全HOLD不変更。元18HOST_GAPS/17受入は各歴史Sourceの記録で現受入に転用しない。actualSecretCountnull/G07残3280+限界22を維持する。
+
+公開直前のWBS485/486観測追記でroot inventorySha256追随を落とし、既580guardがPG24664をstaging/commit前に正しく拒否（BUG2549/YKT2273）。before24668を保全し現485 byte c5146bd3へroot参照一件のみ整合・4metadata反証/guard0後、24670 publication0/sourceccf916を通常push。guard・原歴史hash/要件/scope/acceptance/costは不変更、失敗を合格へ転記せず正常Module120の再演0。
