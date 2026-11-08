@@ -1,0 +1,7 @@
+# 3867 公開値六Mainの公式filter差12
+
+WBS-G13.07主/G03.05関連0、SOURCE_REQUALIFICATION原1/3/7pp cap9。旧PG24190/24192の六Source30Code methodと原15460測定18methodの差12は未分類のまま保存済み。元18再演0、旧exec/coverage転用0。今回JaCoCo0.8.15公式Analyzerを空ExecutionDataStoreで同current six classbyteに対し工具として一回呼び、公式標準filter後の方法名/descriptor集合を取得し、既23972純classmetadata30と比較する。これは製品classのClassLoader/load/init/invokeではなくbyte解析、coverage実行でもない。空execは未測定/全missであり偽coverage100へ使用しない。
+
+対象AnswerResult/QuestionReceiptId/Generator/StubAnswerProvider/RequestLogDetails/InspectorSettingsのexact六classのみcurrentnormal22084apiJARから抽出、held四・Root・同JAR他memberは読取0。工具依存=既localSDK org.jacoco.core0.8.15/ASM9.10.1三jar、javac-proc:none/tooljava各一回・actualProductJvm0。新規DL/Maven/PT/JCAregistry/鍵/DB/native/backend/oldprivateartifactは使わない。
+
+独立postは出力/現rawmetadata/原30・原18・六classhashを別joinして、残差をsource上record generated getter/ObjectMethods又はprivateemptyconstructorの公式filter規則へ個別分類する。未知はUNKNOWN維持、手動coverage除外0、明示したuser-code toString/getter等が残ることも確認する。実Test/oracle/callee/JDK-currentrunの再資格はこのmethod集合で成立せず、既『historicalOnly/currentRunfalse』を維持。metadata否定は製品PTへ加算0。差12が解消してもnewunique/全WBS/正式受入0、工数null。次は実契約の要求・TestID・oracle不足へ継続する。

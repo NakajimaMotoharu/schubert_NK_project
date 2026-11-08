@@ -1,0 +1,7 @@
+# 3868 公開値六Mainの公式filter差12結果
+
+24296工具compile/Analyzer解析終了0。JaCoCo0.8.15/ASM9.10.1、空ExecutionDataStoreで現normal22084のexact六classをdataとして解析、製品CP0・load/init/invoke0。全methodは未測定miss、coverage実行ではない。原30rawCode中、標準filter後18。24298別signature集合点検0/10否定、SHA256 3d4ad3155592e2c91e90bbd5f93cfb66ebcd4132f2327bb4d4bd8b1d17388652。
+
+差12はrecord生成ObjectMethods6（AnswerResult/QuestionReceiptId/InspectorSettingsのhashCode/equals）、生成getter5（AnswerResult.body/answeredAt、QuestionReceiptId.value、InspectorSettings.credentialRoot/databaseUrl）、RequestLogDetailsのprivate空ctor1。明示したredactedtoString・immutablecopy getter・全business methodを残し、手動除外/人工coverage追加0。各name/descriptor/flags/Code長/source/classSHAと理由をindividual-standard-filter-methods.jsonへ保存した。
+
+旧24190のunknownmethod差12は当範囲0へ補完し、旧ファイルの未分類履歴は変更しない。元15460原18は再演せずcurrentRun/callee/oracleの資格はfalse、自然branch0二classはN-A/null維持。新製品PT/unique/counter/leaf/正式認定増加0。全体451/工数null/実RootVMDBbackendnative/held四HOLD保持。次は残18methodと原四Testの独立oracle個別joinであり、filter分類だけで期待値を正常と認定しない。

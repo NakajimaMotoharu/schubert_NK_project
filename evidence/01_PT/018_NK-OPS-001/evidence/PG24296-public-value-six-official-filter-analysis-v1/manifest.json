@@ -1,0 +1,94 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T19:19:12.040611+09:00",
+  "sourceProductionMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "historicalBridgeManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG24190-public-value-six-source-byte-bridge-v1/manifest.json",
+    "sha256": "c1d19b29676c37c28e8c299a27c6c6a17c12ae0fa289dca4e7aa2ad461351bc5"
+  },
+  "exactPhysicalMembers": {
+    "dev/codex/schubert/nk/api/application/question/AnswerResult.class": "e2a819a1a9d98c05ec22e60963884d9d3b56598768d69c8cde6df0caaed80427",
+    "dev/codex/schubert/nk/api/application/question/QuestionReceiptId.class": "8a2e163d656d23c45ed50f14974afeeb10e4e409212cbd215625ee0fd167b099",
+    "dev/codex/schubert/nk/api/application/question/QuestionReceiptIdGenerator.class": "861058d7d158c83422772dcb3789773c5a3832f4d559e484eace694027cd1efd",
+    "dev/codex/schubert/nk/api/application/question/StubAnswerProvider.class": "fbd407e87df17e8edee5fb83c625d314eb6ef54ae64fd4cddde02d3039b2df00",
+    "dev/codex/schubert/nk/api/logging/RequestLogDetails.class": "2bdf2ec0746d0723cd08cb2030854185c334ef557064c25f2de2e1ef21c9b0d7",
+    "dev/codex/schubert/nk/api/maintenance/InspectorSettings.class": "1289b032ab7c5d06fa275b3d5877f611771a1c193c2090f4d13ac2e1f89f7247"
+  },
+  "toolDependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar": "ade1e0fdb4cd80d8537b57c6edb70a1360c47fdc518c20c65314517479bc4d0d",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895"
+  },
+  "toolSourceSha256": "9fe9e46a273006c80c9f1af61fac393ffb93eb9eac9bcd120b05e3b8ade85629",
+  "stages": {
+    "compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T10:19:11.408950+00:00",
+      "endUTC": "2026-11-08T10:19:11.924524+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "-proc:none",
+        "-implicit:none",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24296-public-value-six-official-filter-analysis-v1/classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/690_public_value_filter/OfficialMeasuredMethods.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "analysis": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T10:19:11.924843+00:00",
+      "endUTC": "2026-11-08T10:19:12.039841+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Dfile.encoding=UTF-8",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24296-public-value-six-official-filter-analysis-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+        "OfficialMeasuredMethods",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24296-public-value-six-official-filter-analysis-v1/input/AnswerResult.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24296-public-value-six-official-filter-analysis-v1/input/QuestionReceiptId.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24296-public-value-six-official-filter-analysis-v1/input/QuestionReceiptIdGenerator.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24296-public-value-six-official-filter-analysis-v1/input/StubAnswerProvider.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24296-public-value-six-official-filter-analysis-v1/input/RequestLogDetails.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24296-public-value-six-official-filter-analysis-v1/input/InspectorSettings.class"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "becf9fc7a0ff40478772e072510f415e5a29e7c96572e71af7868c6446425d74",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "toolClassHashes": {
+    "OfficialMeasuredMethods.class": "80bfd5e03bbcf68f31b4c7f07de7c96c048f9f2c57bc65bac1864638e47f43cc"
+  },
+  "rawMethods": 30,
+  "officialRetainedMethods": 18,
+  "emptyExecutionData": true,
+  "allAnalyzedMethodsUncovered": true,
+  "productClassPathEntries": 0,
+  "productClassInitializationOrInvocation": false,
+  "oldPrivateArtifactsRead": false,
+  "productTestsExecuted": 0,
+  "coverageMeasured": false,
+  "manualFilterOrCounterExclusions": [],
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "files": {
+    "tool-analyze.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "official-retained-methods.json": "aaf10939cb16ef14f4b2ba5f48cd863d59d721c58f1b68a13cda45c6aa81258f",
+    "tool-compile.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tool-analyze.stdout": "becf9fc7a0ff40478772e072510f415e5a29e7c96572e71af7868c6446425d74",
+    "tool-compile.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
