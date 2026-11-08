@@ -67,14 +67,12 @@ final class ReplyCorrelationTerminalRaceTest {
         assertEquals(1, (completed ? 1 : 0) + (cancelled ? 1 : 0) + (expired ? 1 : 0));
         assertEquals(0, registry.pendingCount());
         assertEquals(completed ? 0L : 1L, registry.lateResponseCount());
+        var completion = pending.completion().toCompletableFuture();
+        assertTrue(completion.isDone());
         if (completed) {
-          assertArrayEquals(
-              new byte[] {7, 8, 9}, pending.completion().toCompletableFuture().join());
+          assertArrayEquals(new byte[] {7, 8, 9}, completion.join());
         } else {
-          CompletionException failure =
-              assertThrows(
-                  CompletionException.class,
-                  () -> pending.completion().toCompletableFuture().join());
+          CompletionException failure = assertThrows(CompletionException.class, completion::join);
           if (cancelled) {
             assertInstanceOf(CancellationException.class, failure.getCause());
           } else {
@@ -141,15 +139,19 @@ final class ReplyCorrelationTerminalRaceTest {
     byte[] supplied = {7, 8, 9};
     assertTrue(registry.complete(FIRST, supplied, DEADLINE.minusNanos(1)));
     supplied[0] = 42;
-    byte[] received = timely.completion().toCompletableFuture().join();
+    var firstCompletion = timely.completion().toCompletableFuture();
+    assertTrue(firstCompletion.isDone());
+    byte[] received = firstCompletion.join();
     received[1] = 42;
-    assertArrayEquals(new byte[] {7, 8, 9}, timely.completion().toCompletableFuture().join());
+    var secondCompletion = timely.completion().toCompletableFuture();
+    assertTrue(secondCompletion.isDone());
+    assertArrayEquals(new byte[] {7, 8, 9}, secondCompletion.join());
     for (Instant arrival : List.of(DEADLINE, DEADLINE.plusNanos(1))) {
       PendingReply late = registry.register(SECOND, DEADLINE, NOW).orElseThrow();
       assertFalse(registry.complete(SECOND, new byte[] {7, 8, 9}, arrival));
-      CompletionException failure =
-          assertThrows(
-              CompletionException.class, () -> late.completion().toCompletableFuture().join());
+      var lateCompletion = late.completion().toCompletableFuture();
+      assertTrue(lateCompletion.isDone());
+      CompletionException failure = assertThrows(CompletionException.class, lateCompletion::join);
       assertInstanceOf(TimeoutException.class, failure.getCause());
     }
     assertEquals(2L, registry.lateResponseCount());
@@ -171,8 +173,11 @@ final class ReplyCorrelationTerminalRaceTest {
       assertFalse(independent.isDone());
       assertEquals(1, registry.pendingCount());
       assertTrue(registry.complete(FIRST, new byte[] {7, 8, 9}, NOW));
+      assertTrue(independent.isDone());
       assertArrayEquals(new byte[] {7, 8, 9}, independent.join());
-      assertArrayEquals(new byte[] {7, 8, 9}, pending.completion().toCompletableFuture().join());
+      var finalCompletion = pending.completion().toCompletableFuture();
+      assertTrue(finalCompletion.isDone());
+      assertArrayEquals(new byte[] {7, 8, 9}, finalCompletion.join());
       assertEquals(0, registry.pendingCount());
     }
     assertEquals(0L, registry.lateResponseCount());

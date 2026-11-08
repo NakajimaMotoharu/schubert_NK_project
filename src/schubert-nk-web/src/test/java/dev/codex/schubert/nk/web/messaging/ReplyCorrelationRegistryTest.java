@@ -52,12 +52,16 @@ final class ReplyCorrelationRegistryTest {
     byte[] body = {1, 2, 3};
     assertTrue(registry.complete(ID_1, body, NOW.plusSeconds(1)));
     body[0] = 9;
-    byte[] received = pending.completion().toCompletableFuture().join();
+    var firstCompletion = pending.completion().toCompletableFuture();
+    assertTrue(firstCompletion.isDone());
+    byte[] received = firstCompletion.join();
     received[1] = 9;
 
     assertEquals(ID_1, pending.correlationId());
     assertEquals(DEADLINE, pending.deadline());
-    assertArrayEquals(new byte[] {1, 2, 3}, pending.completion().toCompletableFuture().join());
+    var secondCompletion = pending.completion().toCompletableFuture();
+    assertTrue(secondCompletion.isDone());
+    assertArrayEquals(new byte[] {1, 2, 3}, secondCompletion.join());
     assertEquals(0, registry.pendingCount());
     assertFalse(registry.complete(ID_1, new byte[0], NOW));
     assertEquals(1L, registry.lateResponseCount());
@@ -124,13 +128,15 @@ final class ReplyCorrelationRegistryTest {
     }
     assertEquals(1, winners.get());
     assertEquals(99L, registry.lateResponseCount());
-    assertEquals(1, pending.completion().toCompletableFuture().join().length);
+    var completion = pending.completion().toCompletableFuture();
+    assertTrue(completion.isDone());
+    assertEquals(1, completion.join().length);
   }
 
   private static void assertExceptional(PendingReply pending, Class<? extends Throwable> cause) {
-    RuntimeException exception =
-        assertThrows(
-            RuntimeException.class, () -> pending.completion().toCompletableFuture().join());
+    var completion = pending.completion().toCompletableFuture();
+    assertTrue(completion.isDone());
+    RuntimeException exception = assertThrows(RuntimeException.class, completion::join);
     Throwable actual = exception instanceof CompletionException ? exception.getCause() : exception;
     assertTrue(cause.isInstance(actual));
   }

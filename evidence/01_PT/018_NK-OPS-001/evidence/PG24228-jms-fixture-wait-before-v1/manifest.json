@@ -1,0 +1,16 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T17:58:55.001351+09:00",
+  "sources": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java": "3a115c2a3508f914b58a9b4702ae718abd6234b185a6df1996d32bec98da9c3d",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java": "d550340e90a7abef4ee03bd2099a87c5295e15029e13c2bffe8377e3dc171011",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java": "02b7320233f9bd86ad1eaf936718d16c5a2a6e15cd41cbca9b070868a9b9353e"
+  },
+  "unboundedLatchHelperSites": 1,
+  "terminalJoinSites": 11,
+  "originalEvidence": "0182394/PG12922/12926 whole17 andPG22748/22750 registry-terminalrace whole9, no confirmation replay",
+  "actualReproduction": "SOURCE_CONTROL_REVIEW_ONLY_BEFORE_FIX",
+  "cause": "Capacity failure can leave sender fixture waiting indefinitely; terminal-return regression can leave unguarded join waiting. Guard exact received completion view isDone before join, preserve exception/payload oracle; never manufacture TimeoutException with orTimeout.",
+  "productTestsExecuted": 0,
+  "newAcceptance": 0
+}

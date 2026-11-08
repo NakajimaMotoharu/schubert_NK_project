@@ -1,0 +1,59 @@
+{
+  "testClasses": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyCleanupTest.java": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyCleanupTest",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest"
+  },
+  "mainPaths": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/PendingReply.java"
+  ],
+  "modules": [
+    "web",
+    "protocol"
+  ],
+  "targetModule": "web",
+  "targetPhysical": [
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException",
+    "dev/codex/schubert/nk/web/messaging/PendingReply",
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry"
+  ],
+  "sdkDependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar": "6605e08075ab389c359451c7854808cf4b1575e1ea6317e534e9d4df088096df"
+  },
+  "currentMainPhysical": {
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient": "54a1aeff1136917d88193d462e572e6538fe372080ee3356d32145d66009d5e8",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason": "49de906b40d2e0da3c50dded1c72727a03d93faf97f087d381c7e0dc3688ac54",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException": "e6539f484082a7b470e8de3743c6393c0747a752ad7bf4bed17cb5c27b44c59d",
+    "dev/codex/schubert/nk/web/messaging/PendingReply": "c19ff358f56c4496c14c37bc498789d44c9efacdbda8b79c6d38261908e51c2d",
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry": "e0f96e0e6e9cf85633d8ca1c0c772421559ce169d3aad9bf050d56338d07c84d"
+  },
+  "expectedTests": 21,
+  "expectedCoverage": {
+    "LINE": 136,
+    "METHOD": 31,
+    "CLASS": 5,
+    "BRANCH": 40
+  },
+  "compileSlot": "pg24234-jms-memory-bounded-twentyone-compile-v1",
+  "formatSlot": "pg24232-jms-memory-bounded-twentyone-format-v1",
+  "staticSlot": "pg24236-jms-memory-bounded-twentyone-static-v1",
+  "unitSlot": "pg24240-jms-memory-bounded-twentyone-unit-v1",
+  "preflightManifest": "evidence/01_PT/005_NK-MSG-001/evidence/PG24238-jms-memory-bounded-preflight-v1/manifest.json",
+  "session": "PG24240-JMS-MEMORY-BOUNDED-TWENTYONE",
+  "beforeDirectory": "evidence/01_PT/018_NK-OPS-001/evidence/PG24228-jms-fixture-wait-before-v1",
+  "baselineHead": "7263fd0fc221af0c0d57c874d61bfbdbe3fdf764",
+  "changedTestSources": [
+    "JmsRequestReplyClientTest.java",
+    "ReplyCorrelationRegistryTest.java",
+    "ReplyCorrelationTerminalRaceTest.java"
+  ],
+  "uniqueTestsAdded": 0,
+  "terminalJoinSites": 11,
+  "terminalGuardCount": 10
+}

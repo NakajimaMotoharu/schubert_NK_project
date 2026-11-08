@@ -1,0 +1,327 @@
+package dev.codex.schubert.nk.web.messaging;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import jakarta.jms.JMSException;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
+import org.junit.jupiter.api.Test;
+
+/** PT-JMS-008 client concurrency, timeout and mandatory cleanup matrix. */
+final class JmsRequestReplyClientTest {
+  private static final Instant NOW = Instant.parse("2026-09-03T00:00:00Z");
+  private static final UUID ID_1 = UUID.fromString("00000000-0000-0000-0000-000000000001");
+
+  @Test
+  void exchangeRegistersBeforeOneSendAndReturnsDefensiveReply() throws Exception {
+    JmsRequestReplyClient client = client(new MutableClock(NOW), 12);
+    byte[] request = request();
+    byte[] reply = {4, 5, 6};
+    byte[] actual =
+        client.exchange(
+            ID_1,
+            request,
+            Duration.ofSeconds(2),
+            (correlationId, sent) -> {
+              assertEquals(ID_1, correlationId);
+              assertEquals(1, client.pendingCount());
+              sent[0] = 9;
+              assertTrue(client.onReply(correlationId, reply));
+            });
+    request[0] = 8;
+    reply[0] = 8;
+
+    assertArrayEquals(new byte[] {4, 5, 6}, actual);
+    assertEquals(0, client.pendingCount());
+    assertEquals(0L, client.lateReplyCount());
+  }
+
+  @Test
+  void sendFailureCancelsRegistrationAndPropagatesJmsException() {
+    JmsRequestReplyClient client = client(new MutableClock(NOW), 12);
+    JMSException failure =
+        assertThrows(
+            JMSException.class,
+            () ->
+                client.exchange(
+                    ID_1,
+                    request(),
+                    Duration.ofSeconds(2),
+                    (ignoredId, ignoredBody) -> {
+                      throw new JMSException("synthetic-send-failure");
+                    }));
+    assertEquals("synthetic-send-failure", failure.getMessage());
+    assertEquals(0, client.pendingCount());
+
+    IllegalStateException unchecked =
+        assertThrows(
+            IllegalStateException.class,
+            () ->
+                client.exchange(
+                    ID_1,
+                    request(),
+                    Duration.ofSeconds(2),
+                    (ignoredId, ignoredBody) -> {
+                      throw new IllegalStateException("synthetic-unchecked-failure");
+                    }));
+    assertEquals("synthetic-unchecked-failure", unchecked.getMessage());
+    assertEquals(0, client.pendingCount());
+  }
+
+  @Test
+  void elapsedWaitExpiresAndSubsequentReplyIsLate() throws Exception {
+    MutableClock clock = new MutableClock(NOW);
+    JmsRequestReplyClient client = client(clock, 12);
+    JmsRequestReplyException timeout =
+        assertThrows(
+            JmsRequestReplyException.class,
+            () -> client.exchange(ID_1, request(), Duration.ofMillis(10), (id, body) -> {}));
+    assertEquals(JmsRequestReplyException.Reason.TIMEOUT, timeout.reason());
+    assertNotNull(timeout.getCause());
+    assertEquals(0, client.pendingCount());
+    assertFalse(client.onReply(ID_1, new byte[] {1}));
+    assertEquals(1L, client.lateReplyCount());
+  }
+
+  @Test
+  void replyAtDeadlineFailsTheWaitingFutureAsLate() throws Exception {
+    MutableClock clock = new MutableClock(NOW);
+    JmsRequestReplyClient client = client(clock, 12);
+    JmsRequestReplyException timeout =
+        assertThrows(
+            JmsRequestReplyException.class,
+            () ->
+                client.exchange(
+                    ID_1,
+                    request(),
+                    Duration.ofSeconds(2),
+                    (id, body) -> {
+                      clock.set(NOW.plusSeconds(2));
+                      assertFalse(client.onReply(id, new byte[] {1}));
+                    }));
+    assertEquals(JmsRequestReplyException.Reason.TIMEOUT, timeout.reason());
+    assertTrue(timeout.getCause() instanceof java.util.concurrent.TimeoutException);
+    assertEquals(1L, client.lateReplyCount());
+  }
+
+  @Test
+  void interruptedWaitRemovesRegistrationAndRestoresInterruptFlag() throws Exception {
+    JmsRequestReplyClient client = client(new MutableClock(NOW), 12);
+    CountDownLatch sent = new CountDownLatch(1);
+    AtomicReference<JmsRequestReplyException> observed = new AtomicReference<>();
+    AtomicBoolean interrupted = new AtomicBoolean();
+    Thread waiting =
+        new Thread(
+            () -> {
+              try {
+                client.exchange(
+                    ID_1, request(), Duration.ofSeconds(2), (id, body) -> sent.countDown());
+              } catch (JMSException impossible) {
+                throw new AssertionError(impossible);
+              } catch (JmsRequestReplyException exception) {
+                observed.set(exception);
+                interrupted.set(Thread.currentThread().isInterrupted());
+              }
+            });
+    waiting.start();
+    try {
+      assertTrue(sent.await(2, TimeUnit.SECONDS));
+      waiting.interrupt();
+      waiting.join(2_000);
+
+      assertFalse(waiting.isAlive());
+      assertEquals(JmsRequestReplyException.Reason.INTERRUPTED, observed.get().reason());
+      assertTrue(interrupted.get());
+      assertEquals(0, client.pendingCount());
+    } finally {
+      waiting.interrupt();
+      waiting.join(2_000);
+    }
+  }
+
+  @Test
+  void approvedConfiguredWaitsAccept1To20AndRejectTheNextWithoutSending() throws Exception {
+    for (int maximum : new int[] {1, 12, 20}) {
+      JmsRequestReplyClient client = client(new MutableClock(NOW), maximum);
+      CountDownLatch entered = new CountDownLatch(maximum);
+      CountDownLatch release = new CountDownLatch(1);
+      AtomicInteger sends = new AtomicInteger();
+      List<Future<byte[]>> waits = new ArrayList<>();
+      try (ExecutorService executor = Executors.newFixedThreadPool(maximum)) {
+        try {
+          for (int index = 1; index <= maximum; index++) {
+            UUID id = new UUID(0, index);
+            waits.add(
+                executor.submit(
+                    () ->
+                        client.exchange(
+                            id,
+                            request(),
+                            Duration.ofSeconds(2),
+                            (correlationId, body) -> {
+                              sends.incrementAndGet();
+                              entered.countDown();
+                              await(release);
+                              client.onReply(correlationId, new byte[] {7});
+                            })));
+          }
+          assertTrue(entered.await(2, TimeUnit.SECONDS));
+          JmsRequestReplyException capacity =
+              assertThrows(
+                  JmsRequestReplyException.class,
+                  () ->
+                      client.exchange(
+                          new UUID(0, maximum + 1),
+                          request(),
+                          Duration.ofSeconds(2),
+                          (id, body) -> sends.incrementAndGet()));
+          assertEquals(JmsRequestReplyException.Reason.CAPACITY, capacity.reason());
+          release.countDown();
+          for (Future<byte[]> wait : waits) {
+            assertArrayEquals(new byte[] {7}, wait.get(2, TimeUnit.SECONDS));
+          }
+        } finally {
+          release.countDown();
+        }
+      }
+      assertEquals(maximum, sends.get());
+      assertEquals(0, client.pendingCount());
+    }
+  }
+
+  @Test
+  void constructorRegistryAndRequestBoundsDenyInvalidInputBeforeSend() throws Exception {
+    assertEquals(12, JmsRequestReplyClient.STANDARD_CONCURRENCY);
+    assertEquals(Duration.ofSeconds(2), JmsRequestReplyClient.MAXIMUM_WAIT);
+    JmsRequestReplyClient defaults = new JmsRequestReplyClient();
+    assertEquals(0, defaults.pendingCount());
+    assertThrows(
+        NullPointerException.class, () -> new JmsRequestReplyClient(null, Clock.systemUTC(), 1));
+    assertThrows(
+        NullPointerException.class,
+        () -> new JmsRequestReplyClient(new ReplyCorrelationRegistry(), null, 1));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new JmsRequestReplyClient(new ReplyCorrelationRegistry(), Clock.systemUTC(), 0));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new JmsRequestReplyClient(new ReplyCorrelationRegistry(), Clock.systemUTC(), 21));
+
+    JmsRequestReplyClient client = client(new MutableClock(NOW), 1);
+    JmsRequestSender sender = (id, body) -> client.onReply(id, new byte[] {1});
+    assertThrows(
+        NullPointerException.class,
+        () -> client.exchange(null, request(), Duration.ofSeconds(1), sender));
+    assertThrows(
+        NullPointerException.class,
+        () -> client.exchange(ID_1, null, Duration.ofSeconds(1), sender));
+    assertThrows(NullPointerException.class, () -> client.exchange(ID_1, request(), null, sender));
+    assertThrows(
+        NullPointerException.class,
+        () -> client.exchange(ID_1, request(), Duration.ofSeconds(1), null));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> client.exchange(ID_1, new byte[255], Duration.ofSeconds(1), sender));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> client.exchange(ID_1, new byte[1_000_001], Duration.ofSeconds(1), sender));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> client.exchange(ID_1, request(), Duration.ZERO, sender));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> client.exchange(ID_1, request(), Duration.ofNanos(-1), sender));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> client.exchange(ID_1, request(), Duration.ofSeconds(2).plusNanos(1), sender));
+    assertArrayEquals(
+        new byte[] {1}, client.exchange(ID_1, request(), Duration.ofNanos(1), sender));
+    assertArrayEquals(
+        new byte[] {1}, client.exchange(ID_1, request(), Duration.ofSeconds(2), sender));
+    assertThrows(NullPointerException.class, () -> client.onReply(null, new byte[0]));
+    assertThrows(NullPointerException.class, () -> client.onReply(ID_1, null));
+
+    ReplyCorrelationRegistry occupied = new ReplyCorrelationRegistry(1);
+    occupied.register(new UUID(0, 2), NOW.plusSeconds(2), NOW).orElseThrow();
+    JmsRequestReplyClient registryFull =
+        new JmsRequestReplyClient(occupied, new MutableClock(NOW), 1);
+    JmsRequestReplyException capacity =
+        assertThrows(
+            JmsRequestReplyException.class,
+            () -> registryFull.exchange(ID_1, request(), Duration.ofSeconds(1), sender));
+    assertEquals(JmsRequestReplyException.Reason.CAPACITY, capacity.reason());
+  }
+
+  @Test
+  void exceptionReasonIsAClosedNonSecretClassification() {
+    assertEquals(3, JmsRequestReplyException.Reason.values().length);
+    assertEquals(
+        JmsRequestReplyException.Reason.CAPACITY,
+        JmsRequestReplyException.Reason.valueOf("CAPACITY"));
+  }
+
+  private static JmsRequestReplyClient client(Clock clock, int maximumConcurrent) {
+    return new JmsRequestReplyClient(new ReplyCorrelationRegistry(), clock, maximumConcurrent);
+  }
+
+  private static byte[] request() {
+    return new byte[256];
+  }
+
+  private static void await(CountDownLatch latch) throws JMSException {
+    try {
+      latch.await();
+    } catch (InterruptedException exception) {
+      Thread.currentThread().interrupt();
+      JMSException failure = new JMSException("synthetic sender interrupted");
+      failure.setLinkedException(exception);
+      throw failure;
+    }
+  }
+
+  private static final class MutableClock extends Clock {
+    private final AtomicReference<Instant> currentInstant;
+
+    private MutableClock(Instant initial) {
+      currentInstant = new AtomicReference<>(initial);
+    }
+
+    private void set(Instant value) {
+      currentInstant.set(value);
+    }
+
+    @Override
+    public ZoneId getZone() {
+      return ZoneOffset.UTC;
+    }
+
+    @Override
+    public Clock withZone(ZoneId zone) {
+      return this;
+    }
+
+    @Override
+    public Instant instant() {
+      return currentInstant.get();
+    }
+  }
+}

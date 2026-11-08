@@ -289,7 +289,7 @@ final class JmsRequestReplyClientTest {
 
   private static void await(CountDownLatch latch) throws JMSException {
     try {
-      latch.await();
+      assertTrue(latch.await(5, TimeUnit.SECONDS));
     } catch (InterruptedException exception) {
       Thread.currentThread().interrupt();
       JMSException failure = new JMSException("synthetic sender interrupted");

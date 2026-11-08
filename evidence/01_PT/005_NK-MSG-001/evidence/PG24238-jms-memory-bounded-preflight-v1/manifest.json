@@ -1,0 +1,453 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T18:10:47.369896+09:00",
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyCleanupTest.java": "78bea95c08ff0177fc8641418d9dea377731eb4841d16ebc2c564139b4a3da35",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java": "7bc124d5f9f86aada3770344acc8bf09e74df159ca0f4d262339db8f995a62b2",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java": "60935ef809e3ff066008fd6d560d4cf2476e743e0ebaac39742bd64806b6afe4",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java": "a3235bcea01836b91cef5f1eee784a877d1291d7b7de4a3d805209317bbeab1a",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java": "cc0689a25334f9b2eb12983e5e952a0a19af703c28ff4898ff8b57f2a6aa7b39",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.java": "11ffd0f90e7064a7f42bef1029c65fc37e5cadbfe2b49a4b7bd3d775d9dd164b",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java": "1a28f9d8ec9438f13621358c02181557fdc3a19f4afd55303ad727ce6fc9ed75",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/PendingReply.java": "346a3d7ddf65889875a3f1907eda05fd061a4788aabf5d7361b461790185c42b",
+    "evidence/01_PT/005_NK-MSG-001/input/039_jms_memory_bounded_qualifier.py": "362e46cc61830eaf401e0a1fc62d67689098c4b6a4029ab50d4d547c87813b50",
+    "evidence/01_PT/005_NK-MSG-001/input/038_jms_memory_bounded_scope.json": "ac8f287b9e723504b42b42ace7c3116b948ae9c4878d06ba1f9aeeb4e23aeef3"
+  },
+  "compileManifestSha256": "6b493725ed88b1d99980b6c7629d045d872548ab7a56a67323865de7bb9099ae",
+  "staticManifestSha256": "453ea36e68205a292a82d024f9f77151ed992891c2846788ac81a52936e8e0dd",
+  "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+  "originalCurrentMainCodeByteSetComplete": true,
+  "physical": {
+    "dev/codex/schubert/nk/web/messaging/PendingReply": "c19ff358f56c4496c14c37bc498789d44c9efacdbda8b79c6d38261908e51c2d",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason": "49de906b40d2e0da3c50dded1c72727a03d93faf97f087d381c7e0dc3688ac54",
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry": "e0f96e0e6e9cf85633d8ca1c0c772421559ce169d3aad9bf050d56338d07c84d",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException": "e6539f484082a7b470e8de3743c6393c0747a752ad7bf4bed17cb5c27b44c59d",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient": "54a1aeff1136917d88193d462e572e6538fe372080ee3356d32145d66009d5e8"
+  },
+  "expectedTests": 21,
+  "changedTestSources": 3,
+  "changedLatchSites": 1,
+  "terminalJoinSites": 11,
+  "exactViewCompletionGuards": 10,
+  "sourceInverses": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+      "beforeSha256": "3a115c2a3508f914b58a9b4702ae718abd6234b185a6df1996d32bec98da9c3d",
+      "afterSha256": "7bc124d5f9f86aada3770344acc8bf09e74df159ca0f4d262339db8f995a62b2",
+      "allOriginalTokensAndOracleLiteralsPreserved": true,
+      "terminalJoinSites": 0,
+      "completionGuardsAdded": 0
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+      "beforeSha256": "d550340e90a7abef4ee03bd2099a87c5295e15029e13c2bffe8377e3dc171011",
+      "afterSha256": "60935ef809e3ff066008fd6d560d4cf2476e743e0ebaac39742bd64806b6afe4",
+      "allOriginalTokensAndOracleLiteralsPreserved": true,
+      "terminalJoinSites": 4,
+      "completionGuardsAdded": 4
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java",
+      "beforeSha256": "02b7320233f9bd86ad1eaf936718d16c5a2a6e15cd41cbca9b070868a9b9353e",
+      "afterSha256": "a3235bcea01836b91cef5f1eee784a877d1291d7b7de4a3d805209317bbeab1a",
+      "allOriginalTokensAndOracleLiteralsPreserved": true,
+      "terminalJoinSites": 7,
+      "completionGuardsAdded": 6
+    }
+  ],
+  "sourceInverseNegativeChecks": [
+    {
+      "source": "JmsRequestReplyClientTest.java",
+      "mutation": "assertTrue(latch.await(5, TimeUnit.SECONDS));"
+    },
+    {
+      "source": "ReplyCorrelationRegistryTest.java",
+      "mutation": "assertTrue(firstCompletion.isDone());"
+    },
+    {
+      "source": "ReplyCorrelationRegistryTest.java",
+      "mutation": "firstCompletion.join()"
+    },
+    {
+      "source": "ReplyCorrelationTerminalRaceTest.java",
+      "mutation": "assertTrue(independent.isDone());"
+    },
+    {
+      "source": "ReplyCorrelationTerminalRaceTest.java",
+      "mutation": "lateCompletion::join"
+    },
+    {
+      "source": "ReplyCorrelationTerminalRaceTest.java",
+      "mutation": "new byte[] {7, 8, 9}"
+    }
+  ],
+  "allOriginalTestOtherTokensAndOraclesPreserved": true,
+  "noTimeoutPromiseMutation": true,
+  "noNewFixtureOrMethodExtraction": true,
+  "staticClassifications": [
+    {
+      "finding": {
+        "beginline": "132",
+        "endline": "132",
+        "begincolumn": "5",
+        "endcolumn": "11",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "JmsRequestReplyClientTest",
+        "method": "interruptedWaitRemovesRegistrationAndRestoresInterruptFlag",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only ownership test outside J2EE runtime. Own waiting thread; sent.await2, interrupt/join2 with finally repeated interrupt/join; original interrupt-flag restoration oracle unchanged."
+    },
+    {
+      "finding": {
+        "beginline": "133",
+        "endline": "133",
+        "begincolumn": "13",
+        "endcolumn": "19",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "JmsRequestReplyClientTest",
+        "method": "interruptedWaitRemovesRegistrationAndRestoresInterruptFlag",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only ownership test outside J2EE runtime. Own waiting thread; sent.await2, interrupt/join2 with finally repeated interrupt/join; original interrupt-flag restoration oracle unchanged."
+    },
+    {
+      "finding": {
+        "beginline": "142",
+        "endline": "142",
+        "begincolumn": "33",
+        "endcolumn": "39",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "JmsRequestReplyClientTest",
+        "method": "interruptedWaitRemovesRegistrationAndRestoresInterruptFlag",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only ownership test outside J2EE runtime. Own waiting thread; sent.await2, interrupt/join2 with finally repeated interrupt/join; original interrupt-flag restoration oracle unchanged."
+    },
+    {
+      "finding": {
+        "beginline": "169",
+        "endline": "169",
+        "begincolumn": "39",
+        "endcolumn": "76",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "JmsRequestReplyClientTest",
+        "method": "approvedConfiguredWaitsAccept1To20AndRejectTheNextWithoutSending",
+        "variable": "executor",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only ownership test outside J2EE runtime. Own 1/12/20 executor tasks; entered2 and results2 seconds, sender latch newly5SECONDS/assert and finally countDown before TWR; capacity literal oracle unchanged."
+    },
+    {
+      "finding": {
+        "beginline": "174",
+        "endline": "185",
+        "begincolumn": "17",
+        "endcolumn": "32",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "JmsRequestReplyClientTest",
+        "method": "approvedConfiguredWaitsAccept1To20AndRejectTheNextWithoutSending",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only ownership test outside J2EE runtime. Own 1/12/20 executor tasks; entered2 and results2 seconds, sender latch newly5SECONDS/assert and finally countDown before TWR; capacity literal oracle unchanged."
+    },
+    {
+      "finding": {
+        "beginline": "294",
+        "endline": "294",
+        "begincolumn": "7",
+        "endcolumn": "13",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "JmsRequestReplyClientTest",
+        "method": "await",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only ownership test outside J2EE runtime. InterruptedException catch restores own caller flag and wraps same synthetic JMS failure; new CountDownLatch await5 is asserted, never a normal pass on timeout."
+    },
+    {
+      "finding": {
+        "beginline": "111",
+        "endline": "111",
+        "begincolumn": "37",
+        "endcolumn": "69",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "ReplyCorrelationRegistryTest",
+        "method": "oneOfOneHundredSimultaneousResponsesWins",
+        "variable": "executor",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only ownership test outside J2EE runtime. Own100 tasks/16threads; start5/results5, owned TWR. Exact captured completion now isDone before original join; winner/late/clone oracle unchanged."
+    },
+    {
+      "finding": {
+        "beginline": "115",
+        "endline": "122",
+        "begincolumn": "13",
+        "endcolumn": "19",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "ReplyCorrelationRegistryTest",
+        "method": "oneOfOneHundredSimultaneousResponsesWins",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only ownership test outside J2EE runtime. Own100 tasks/16threads; start5/results5, owned TWR. Exact captured completion now isDone before original join; winner/late/clone oracle unchanged."
+    },
+    {
+      "finding": {
+        "beginline": "36",
+        "endline": "36",
+        "begincolumn": "36",
+        "endcolumn": "67",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "ReplyCorrelationTerminalRaceTest",
+        "method": "terminalRaceHasOneWinnerAndReturnsThePermit",
+        "variable": "workers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only ownership test outside J2EE runtime. Own3 tasks with finally release/start5 and exact terminal get10; same captured completion isDone before original success/exception join. No injected timeout or exception-type replacement."
+    },
+    {
+      "finding": {
+        "beginline": "44",
+        "endline": "48",
+        "begincolumn": "15",
+        "endcolumn": "21",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "ReplyCorrelationTerminalRaceTest",
+        "method": "terminalRaceHasOneWinnerAndReturnsThePermit",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only ownership test outside J2EE runtime. Own3 tasks with finally release/start5 and exact terminal get10; same captured completion isDone before original success/exception join. No injected timeout or exception-type replacement."
+    },
+    {
+      "finding": {
+        "beginline": "50",
+        "endline": "54",
+        "begincolumn": "15",
+        "endcolumn": "21",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "ReplyCorrelationTerminalRaceTest",
+        "method": "terminalRaceHasOneWinnerAndReturnsThePermit",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only ownership test outside J2EE runtime. Own3 tasks with finally release/start5 and exact terminal get10; same captured completion isDone before original success/exception join. No injected timeout or exception-type replacement."
+    },
+    {
+      "finding": {
+        "beginline": "56",
+        "endline": "60",
+        "begincolumn": "15",
+        "endcolumn": "21",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "ReplyCorrelationTerminalRaceTest",
+        "method": "terminalRaceHasOneWinnerAndReturnsThePermit",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only ownership test outside J2EE runtime. Own3 tasks with finally release/start5 and exact terminal get10; same captured completion isDone before original success/exception join. No injected timeout or exception-type replacement."
+    },
+    {
+      "finding": {
+        "beginline": "96",
+        "endline": "96",
+        "begincolumn": "36",
+        "endcolumn": "68",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "ReplyCorrelationTerminalRaceTest",
+        "method": "concurrentRegistrationsRespectCapacityAndReuseAllSlots",
+        "variable": "workers",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only ownership test outside J2EE runtime. Own20 registration tasks; release finally/start5/get10/TWR, original2accepted18rejected/full capacity reuse preserved."
+    },
+    {
+      "finding": {
+        "beginline": "101",
+        "endline": "105",
+        "begincolumn": "15",
+        "endcolumn": "21",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "class": "ReplyCorrelationTerminalRaceTest",
+        "method": "concurrentRegistrationsRespectCapacityAndReuseAllSlots",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicableViolation": false,
+      "reason": "JUnit-only ownership test outside J2EE runtime. Own20 registration tasks; release finally/start5/get10/TWR, original2accepted18rejected/full capacity reuse preserved."
+    }
+  ],
+  "pmdRawFindings": 14,
+  "applicableStaticViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "sdkReview": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar",
+      "sha256": "6605e08075ab389c359451c7854808cf4b1575e1ea6317e534e9d4df088096df",
+      "jdbcDriverDescriptor": false,
+      "compilerPluginDescriptor": false,
+      "manifestClasspath": false
+    }
+  ],
+  "originalEligibilitySourcesSame": 6,
+  "sourceGraph": [
+    {
+      "className": "dev/codex/schubert/nk/protocol/transport/BrokerTopology",
+      "source": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java",
+      "sourceSha256": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5",
+      "productReferences": [
+        "dev/codex/schubert/nk/protocol/transport/BrokerTopology"
+      ],
+      "nonRuntimeCompileTimeConstantOwners": []
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/messaging/PendingReply",
+      "source": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/PendingReply.java",
+      "sourceSha256": "346a3d7ddf65889875a3f1907eda05fd061a4788aabf5d7361b461790185c42b",
+      "productReferences": [
+        "dev/codex/schubert/nk/web/messaging/PendingReply"
+      ],
+      "nonRuntimeCompileTimeConstantOwners": []
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason",
+      "source": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.java",
+      "sourceSha256": "11ffd0f90e7064a7f42bef1029c65fc37e5cadbfe2b49a4b7bd3d775d9dd164b",
+      "productReferences": [
+        "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException",
+        "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason"
+      ],
+      "nonRuntimeCompileTimeConstantOwners": []
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry",
+      "source": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java",
+      "sourceSha256": "1a28f9d8ec9438f13621358c02181557fdc3a19f4afd55303ad727ce6fc9ed75",
+      "productReferences": [
+        "dev/codex/schubert/nk/web/messaging/PendingReply",
+        "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry"
+      ],
+      "nonRuntimeCompileTimeConstantOwners": []
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException",
+      "source": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.java",
+      "sourceSha256": "11ffd0f90e7064a7f42bef1029c65fc37e5cadbfe2b49a4b7bd3d775d9dd164b",
+      "productReferences": [
+        "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException",
+        "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason"
+      ],
+      "nonRuntimeCompileTimeConstantOwners": []
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient",
+      "source": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java",
+      "sourceSha256": "cc0689a25334f9b2eb12983e5e952a0a19af703c28ff4898ff8b57f2a6aa7b39",
+      "productReferences": [
+        "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+        "dev/codex/schubert/nk/protocol/transport/BrokerTopology",
+        "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient",
+        "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException",
+        "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason",
+        "dev/codex/schubert/nk/web/messaging/JmsRequestSender",
+        "dev/codex/schubert/nk/web/messaging/PendingReply",
+        "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry"
+      ],
+      "nonRuntimeCompileTimeConstantOwners": [
+        "dev/codex/schubert/nk/protocol/layout/LayoutDefinition"
+      ]
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/messaging/JmsRequestSender",
+      "source": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestSender.java",
+      "sourceSha256": "055dfa7bb41118b3a1d412af02dec07c0c43f071783c6c6cb93d29ee1e1fd8f8",
+      "productReferences": [
+        "dev/codex/schubert/nk/web/messaging/JmsRequestSender"
+      ],
+      "nonRuntimeCompileTimeConstantOwners": []
+    }
+  ],
+  "normalPositiveMainIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json",
+    "sha256": "db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723"
+  },
+  "currentProductionMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "originalWholeTestClassSelection": true,
+  "actualBackendOperationsAuthorized": false,
+  "heldFourRuntimeOperationsAuthorized": false,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "tool": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/005_NK-MSG-001/input/040_jms_memory_bounded_preflight.py",
+    "sha256": "ae3e42854f6e7b045d2b16c27a35afeddce2ebc4c621fe078d156e5888d3b792"
+  }
+}
