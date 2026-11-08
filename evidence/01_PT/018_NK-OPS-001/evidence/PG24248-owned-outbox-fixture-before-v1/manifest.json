@@ -1,0 +1,12 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T18:31:21.245842+09:00",
+  "target": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcherTest.java",
+  "beforeSha256": "93b9982fe5ea8b106cad816cb36f6b854e10345ddc4c2a3cf7fd29fd3d3bae5f",
+  "unboundedLatchSites": 2,
+  "cleanupOrderDefect": "outbox002 executor TWR closes before outer finally releases provider latch on assertion/interruption failure",
+  "wholeTestMethods": 6,
+  "eligibility": "Original six Test methods all use SqlConnectionProvider callbacks that throw before a Connection is returned; repository methods/JMS send/cleanup attachSecondary path unreachable. Original factory constructors and fullcallbacks require independent source/SDK preflight before any run.",
+  "productTestsExecuted": 0,
+  "newAcceptance": 0
+}

@@ -1,0 +1,11 @@
+# OwnedOutbox fixture有限化・元六再試験仕様
+
+G03.05主/P00602関連追加0、REWORK原1/4/8pp cap10、BUG2523/YKT2177。対象はOwnedOutboxDispatcherTest全六とOwnedOutboxDispatcher全Source（現Main7aed/normal22084/静的22086同byte再利用）、新fixture/元method抽出・Main変更0。release.await/gate.await二siteを5SECONDS/assertへ、outbox002のexecutor TWR内部finallyでreleaseを先行する。元release/owned.closeの外finallyも保持する。先に閉じるtaskがprovider待ちを解除する順序を直し、未取得pool/factoryなど実資源の権限を作らない。
+
+全sourceと全callbackを確認する。各SqlConnectionProviderはSQL/Runtime/ErrorをthrowしConnectionを一度も返さない。dispatchのtransaction初期化前に失敗し、Connection cleanup/retainFailure/TIE.attachSecondaryは未到達。JdbcOutboxRepositoryは固定()->0 constructorでsampling/SQLなし、OutboxJmsSenderは空constructorでsend/Artemis接続なし、JMScontext callbackは呼ばれたら即AssertionError。graph322の独立JDK Throwable fixture/preserveFatalはown memory graphだけで、held四の静的method/constructor/初期化・Root/cohort操作を呼ばない。例外型の単なるimportを安全証明とせず、constructor/全fixture/control path・現在byte/SDKの個別根拠をpreflightする。原WHOLE六を選び、保留Testの一部を別fixtureへ移さない。
+
+予期した間接呼出/型初期化の独立性を確認できなければrunせず動的HOLDでPG/static保存。拒否操作の再試行/言換えは行わない。資格が成立したらTest-only Java25/-proc:none/-implicit:none/-Werror/format・PMD/CSの個別適用を満たし、意味あるcommit/push後に元whole六を一回・一JVM/exec/sessionで必要再資格する。全FESskippedaborted0/真正OS0、Owned全normal SourceFile physical一つ/全code methods/line-method-class-branch未達0を要求し、coverage未達をそのまま残す。他calleeの未実行branchを削らず親/全module100へ転用しない。
+
+元owner/start/health/one fatal dispatch/redacted stderr/selfjoin拒否/interrupt復元/close50ms未完→解放3秒完了の独立oracleと全他tokenは保持。二5秒awaitと一finally以外の値/配列/例外/cause/順序を変えない。新assertによるfalse/fatalを正常化せずTest failureとして保持。own worker/threadは原finallyの停止・終了確認へ、外JUnit180秒は最終自己所有JVM境界でRoot/VMサービスを停止しない。SDK内部classload等はあり全syscall0を主張しない。
+
+原Source before24248、format24252/compile24254/static24256/preflight24258/unit24260/独立24262と041結果へsource/hash/環境/command/終了/全六case/XML/coverage/CRC/全実hitMain・held四0/BUG/YKTを保存。新unique/成分/leaf/正式0、1964-53/unique517/候補114/pending12/暫定93/工数null/QA051final/G07未分類3313+22actualSecretCountnullと全実操作HOLD維持。Source23952当entryは修正後歴史化（既五と計六source）し全解析再演0。通常区切りで停止しない。

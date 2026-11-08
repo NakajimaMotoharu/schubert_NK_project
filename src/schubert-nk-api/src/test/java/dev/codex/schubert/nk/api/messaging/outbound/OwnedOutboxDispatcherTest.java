@@ -197,7 +197,7 @@ class OwnedOutboxDispatcherTest {
                 () -> {
                   entered.countDown();
                   try {
-                    release.await();
+                    assertTrue(release.await(5, TimeUnit.SECONDS));
                   } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                   }
@@ -205,20 +205,24 @@ class OwnedOutboxDispatcherTest {
                 }),
             "pt");
     try (var executor = Executors.newSingleThreadExecutor()) {
-      assertTrue(entered.await(3, TimeUnit.SECONDS));
-      var closing =
-          executor.submit(
-              () -> {
-                Thread.currentThread().interrupt();
-                owned.close();
-                boolean preserved = Thread.currentThread().isInterrupted();
-                Thread.interrupted();
-                return preserved;
-              });
-      assertThrows(TimeoutException.class, () -> closing.get(50, TimeUnit.MILLISECONDS));
-      release.countDown();
-      assertTrue(closing.get(3, TimeUnit.SECONDS));
-      assertFalse(owned.healthy());
+      try {
+        assertTrue(entered.await(3, TimeUnit.SECONDS));
+        var closing =
+            executor.submit(
+                () -> {
+                  Thread.currentThread().interrupt();
+                  owned.close();
+                  boolean preserved = Thread.currentThread().isInterrupted();
+                  Thread.interrupted();
+                  return preserved;
+                });
+        assertThrows(TimeoutException.class, () -> closing.get(50, TimeUnit.MILLISECONDS));
+        release.countDown();
+        assertTrue(closing.get(3, TimeUnit.SECONDS));
+        assertFalse(owned.healthy());
+      } finally {
+        release.countDown();
+      }
     } finally {
       release.countDown();
       owned.close();
@@ -292,7 +296,7 @@ class OwnedOutboxDispatcherTest {
             dispatcher(
                 () -> {
                   try {
-                    gate.await();
+                    assertTrue(gate.await(5, TimeUnit.SECONDS));
                   } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                   }
