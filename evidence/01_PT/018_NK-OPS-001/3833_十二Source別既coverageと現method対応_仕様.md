@@ -1,0 +1,11 @@
+# NK-OPS-001 十二Source別既coverageと現method対応
+
+Test ID NK-OPS-METHOD-COVERAGE-12。WBS G13.07主、G03.05関連追加0。元計画1/3/7pp cap9。Production7aed、旧source-trace23836の12Main/10独立post/既96caseを使用する。新試験/JVM/compile/backend0、原本execを合成せずXML既測定値をSource別に展開する。
+
+967Source/1845physicalの現method一覧23972を分母とし、12Source全17physicalのSource SHA/class SHAが元postと一致するもののみ既XMLへjoinする。methodはname+descriptorで一意、Code/NoCode、既測定/元標準compiler filter/不明を分離。record生成7method、synthetic switch table1methodは元postに記録された標準filterの理由を保持し、新たな除外を追加しない。branch分母0の率はnull、実測100へ変換しない。
+
+二pool/二listenerは元runの集計counterを個別Sourceのcounterへ分解して明示する。クラス集合はSourceFile一致の全physicalを対象にし、依存classを混ぜない。既96caseはrun単位の成功集合であり、methodごとの独立oracleが証明されたと推定しない。各methodはrunCaseRefsのみ、exactPerMethodOracle未検証。元の全Code資格と全依存/業務/正式451受入は区別する。
+
+独立検証は別のXML SAX読取でclass/method/counterを再導出し、Source/physical分割・NoCodeと既filterを確認。対照例は異なるdescriptor、欠落/重複class、missed追加、NoCode→Code、groupcounter誤流用、branchゼロ率偽100、methodOracle偽完了等。メタデータ否定はProduct PTに算入しない。元成功の再実行、保留Root/VM/backend/native/鍵/四held・保護二file読取は含まない。
+
+結果のpath/hash/command/exit/日時はmanifestへ。正式1964PT/53scope、追加unique517、pending12/whole暫定93/候補114、新leaf0/工数nullを保持する。分類台帳の名寄せ閉鎖はこの群の対象外である。
