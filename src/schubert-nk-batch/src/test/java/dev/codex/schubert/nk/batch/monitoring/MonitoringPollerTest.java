@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiFunction;
@@ -200,13 +201,18 @@ class MonitoringPollerTest {
     var poll = new MonitoringPoller<Integer>();
     int[] count = {0};
     var actual = new HashSet<Integer>();
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var jobs =
           java.util.stream.IntStream.range(0, 64)
               .<Callable<Integer>>mapToObj(
                   i -> () -> poll.observe(true, at(1), (continuous, context) -> ++count[0]))
               .toList();
-      for (var result : pool.invokeAll(jobs)) assertTrue(actual.add(result.get()));
+      for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS))
+        assertTrue(actual.add(result.get()));
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     var expected = new HashSet<Integer>();
     for (int i = 1; i <= 64; i++) expected.add(i);

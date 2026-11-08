@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.LongSupplier;
@@ -209,17 +210,21 @@ class MonitoringObservationClockTest {
     var ticks = new AtomicLong();
     var clock = new MonitoringObservationClock(wall, ticks::getAndIncrement);
     var actual = new HashSet<Duration>();
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var jobs =
           java.util.stream.IntStream.range(0, 64)
               .<Callable<ObservationContext>>mapToObj(
                   i -> () -> clock.context(CauseClearance.UNCONFIRMED))
               .toList();
-      for (var result : pool.invokeAll(jobs)) {
+      for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS)) {
         var context = result.get();
         assertEquals(AT, context.at());
         assertTrue(actual.add(context.elapsed()));
       }
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     var expected = new HashSet<Duration>();
     for (int i = 1; i <= 64; i++) expected.add(Duration.ofNanos(i));

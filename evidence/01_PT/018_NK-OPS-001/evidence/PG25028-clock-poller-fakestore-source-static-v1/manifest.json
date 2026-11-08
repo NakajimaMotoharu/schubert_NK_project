@@ -1,0 +1,206 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T05:38:29.442675+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+      "originalSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01",
+      "currentSha256": "789d7406dd8928b7a29c564fc033f9e1c084772e0433bb7b642627b5d7a48716",
+      "originalWholeBodiesExactlyRestored": true,
+      "workerOwners": 1
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+      "originalSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d",
+      "currentSha256": "c9aabd0fa6dabb9a5c64cf27739a8e41927815e94b15c97946025e01d4186544",
+      "originalWholeBodiesExactlyRestored": true,
+      "workerOwners": 1
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java",
+      "originalSha256": "a1925aaa21a6bfe9db25d6dc8c83156f190ac980d1af0c2dadca624929f81dca",
+      "currentSha256": "a71002b88a7bfd3f19173ac7c95f78766ab5774d3fa20cc5c2163a2f162e08e8",
+      "originalWholeBodiesExactlyRestored": true,
+      "workerOwners": 2
+    }
+  ],
+  "originalWholeCases": 26,
+  "rawFindings": 20,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 4,
+  "finiteOwnerSitesCorrected": 4,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25026-clock-poller-fakestore-owner-prepare-v1/manifest.json",
+    "sha256": "e5501e78166aa88c0735987ee4e32d2302d3851a9ccef2460686af3e926dcba2"
+  },
+  "classifications": [
+    {
+      "test": "FilesystemHealthObservationTest",
+      "method": "fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership",
+      "line": 225,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "FilesystemHealthObservationTest",
+      "method": "fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership",
+      "line": 225,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "FilesystemHealthObservationTest",
+      "method": "fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership",
+      "line": 231,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "FilesystemHealthObservationTest",
+      "method": "fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership",
+      "line": 233,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "FilesystemHealthObservationTest",
+      "method": "fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership",
+      "line": 234,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "FilesystemHealthObservationTest",
+      "method": "fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner",
+      "line": 330,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "FilesystemHealthObservationTest",
+      "method": "fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner",
+      "line": 330,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "FilesystemHealthObservationTest",
+      "method": "fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner",
+      "line": 343,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "FilesystemHealthObservationTest",
+      "method": "fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner",
+      "line": 346,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "FilesystemHealthObservationTest",
+      "method": "fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner",
+      "line": 347,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "MonitoringObservationClockTest",
+      "method": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+      "line": 213,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "MonitoringObservationClockTest",
+      "method": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+      "line": 213,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "MonitoringObservationClockTest",
+      "method": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+      "line": 220,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "MonitoringObservationClockTest",
+      "method": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+      "line": 226,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "MonitoringObservationClockTest",
+      "method": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+      "line": 227,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "MonitoringPollerTest",
+      "method": "poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour",
+      "line": 204,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "MonitoringPollerTest",
+      "method": "poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour",
+      "line": 204,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "MonitoringPollerTest",
+      "method": "poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour",
+      "line": 211,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "MonitoringPollerTest",
+      "method": "poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour",
+      "line": 214,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    },
+    {
+      "test": "MonitoringPollerTest",
+      "method": "poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour",
+      "line": 215,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit owns8workers/64fakecallbacks; timedinvokeAll10/terminalFuture/explicitfinallyshutdownNowawait10, no unboundedTWR or webapp runtime worker."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}
