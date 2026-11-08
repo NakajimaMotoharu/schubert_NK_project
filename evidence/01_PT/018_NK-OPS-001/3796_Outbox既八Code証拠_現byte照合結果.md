@@ -1,0 +1,13 @@
+# Outbox既八Code証拠の現byte照合結果
+
+群4360、着手前0.5/2/5pp cap7、WBS-P006-02のsource再認証。旧source e598a81bb4200b4e4930278b31479ff927aa025f／PG9754-API-OUTBOX-VALUEの真正13件4suite・F/E/S/abort0と、PG9756元単一session/counterを再利用する。新製品試験0、新受入0、元計画の新規消化0。
+
+PG23736読取照合actual0 manifest eaf06cdf65a23f3724c480eda535b06d223b651db770b541db8c04f1537243c1、PG23738独立post actual0 manifest 3937d1eb96dd2b5454a5bfb6e675fc496ab04aac79781ca5db872d6f0fedff80。公開pathは本Programのevidence/PG23736-outbox-eight-byte-reuse-v1/manifest.jsonとevidence/PG23738-outbox-eight-byte-independent-v1/manifest.json。input512/513/514の固定11公開artifact、8Main/4Test source、通常22084のAPI Jar明示8memberだけを照合。新JUnit/compiler/元report生成・旧snapshot実行・実DB/JMS/VM/Root/native/鍵/HOLD操作0。
+
+OutboxDestination、OutboxDispatchReport、OutboxDlqMetadata、OutboxEntry、OutboxIntegrityException、OutboxRequest、OutboxRetrySchedule、OutboxSendExceptionの8SourceFileは全physical各1／Codeあり。元Main source byte、通常build全class SHA、8CRCを別bit演算でも照合、全physical closure欠落0。元L148/M50/C8/B79は全miss0。Exception二classの自然B0は率null、他六の計79branchが元runで実測100、手動除外・coverage union0。元4XMLのhash・13unique testcase・FES0と元session開始終了を照合、元1971/1972の独立境界vectorを保持する。
+
+Main8は現Core7aed/normal22084のbyteと全一致するため、同じCodeに対する歴史試験証拠として現候補へ参照可能。TestはPolicyとBoundaryの2sourceのみ同byte、ModelとDlqMetadataの2sourceは異なるため、現4Test sourceの実行資格や同source全体受入には転用しない。旧sourceのexec/native/全source結果を現sourceへ加算しない。今回の独立metadata否定7件は欠落/重複class、SHA/CRC不一致、missbranch、現Test実行の誤宣言、newTests加算を拒否し、製品Test件数へ加点0。
+
+501unique、whole暫定93、候補113/pending11、原282交差73/残209とpartial18/残62、正式1964PT/53scope、新leaf0、工数率null、G07未分類3600+22/actualSecretCountnullはこの再認証では更新しない。新8は既存証拠の個別class参照であり、対象集合の重複監査前に8component・13newTestsとして足さない。QA051final/actualHOLD/保護2tool2RootTest I-O禁止/七stash/原本/Currentbaseline保全。
+
+次は同じ通常既証拠の不足照合から、実backendやheld4に依存しない未資格契約を選ぶ。源泉未確認の対象を未実装扱いにせず、再実行禁止とsource/run分離を維持する。
