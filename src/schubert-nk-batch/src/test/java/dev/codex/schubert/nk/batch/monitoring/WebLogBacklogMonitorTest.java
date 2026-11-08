@@ -20,6 +20,7 @@ import java.util.Optional;
 import java.util.OptionalLong;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** WEBLOG001..008/1672: supplied scalar/elapsed fixtures only, no sampling/control operations. */
@@ -231,8 +232,12 @@ class WebLogBacklogMonitorTest {
                 && result.event().orElseThrow().isOpen();
           });
     }
-    try (var pool = Executors.newFixedThreadPool(8)) {
-      for (var result : pool.invokeAll(tasks)) assertTrue(result.get());
+    var pool = Executors.newFixedThreadPool(8);
+    try {
+      for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(result.get());
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     var finalEvent = monitor.snapshot().orElseThrow();
     assertEquals(BigInteger.valueOf(64), finalEvent.count());
@@ -272,7 +277,8 @@ class WebLogBacklogMonitorTest {
     assertTrue(populated.equals(new Evaluation(true, true, Optional.of(event))));
     assertEquals(1221152 + System.identityHashCode(event), populated.hashCode());
     assertEquals(
-        "Evaluation[queuedPresent=true, oldestPresent=true, event=Optional[dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event@"
+        "Evaluation[queuedPresent=true, oldestPresent=true,"
+            + " event=Optional[dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event@"
             + Integer.toHexString(System.identityHashCode(event))
             + "]]",
         populated.toString());

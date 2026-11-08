@@ -1,0 +1,187 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T06:01:22.107077+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AsyncQueueMonitorTest.java",
+      "originalSha256": "7128ed500fce38c80558829fe62e7f7bf5309e9f5f933642b6f252c9796e8407",
+      "currentSha256": "3022f2f15d89860c9fc174b409be0bcea9413e6ea8bdb1ad57ced64ccd14e4b4",
+      "originalWholeBodiesExactlyRestored": true,
+      "workerOwners": 1
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/WebLogBacklogMonitorTest.java",
+      "originalSha256": "ba5578f1227f7349a0dc2cc6feba66e9c05d786acd6046329570e556050ffb26",
+      "currentSha256": "116f726c20c3edb8a86fb66ef117c7b37ccaac8da4c193058e61c9255346ae31",
+      "originalWholeBodiesExactlyRestored": true,
+      "workerOwners": 1
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ExpiryBacklogMonitorTest.java",
+      "originalSha256": "38761025731fef2a215b5f5d87db3bcfb51e2ed0b12f7faf421dc5218ce097a5",
+      "currentSha256": "86698293f2c2c45a6c0fb77a470616778ebbfb110e3a07527e2b0115430a0b08",
+      "originalWholeBodiesExactlyRestored": true,
+      "workerOwners": 1
+    }
+  ],
+  "originalWholeCases": 25,
+  "rawFindings": 15,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 3,
+  "finiteOwnerSitesCorrected": 3,
+  "formatterConstantProofs": [
+    {
+      "test": "AsyncQueueMonitorTest",
+      "originalLiteralSha256": "3e5096afb1a36fb5d69c9209a0526040cdfeff559d05f1f2e573384e2de9ce07",
+      "splitConstantExactlySameValue": true,
+      "negativeChecks": 3
+    },
+    {
+      "test": "WebLogBacklogMonitorTest",
+      "originalLiteralSha256": "764f4dd6e6e39cd6561f6f102fe79719f3dc673e852da9e7b146d6fef053a331",
+      "splitConstantExactlySameValue": true,
+      "negativeChecks": 3
+    },
+    {
+      "test": "ExpiryBacklogMonitorTest",
+      "originalLiteralSha256": "62f13e5cb4f0f68580cdc8f5a89aa57c9caf0be1ac4aa1a5970f7d0a35f8d0f0",
+      "splitConstantExactlySameValue": true,
+      "negativeChecks": 3
+    }
+  ],
+  "formatterConstantNegativeChecks": 9,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25086-supplied-backlog-owner-prepare-v1/manifest.json",
+    "sha256": "b2afa7bc2cda09b6235fcc39ba822860cc14781eea01d643927a16d1e69a2c50"
+  },
+  "classifications": [
+    {
+      "test": "AsyncQueueMonitorTest",
+      "method": "asyncQueue007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+      "line": 308,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "AsyncQueueMonitorTest",
+      "method": "asyncQueue007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+      "line": 308,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "AsyncQueueMonitorTest",
+      "method": "asyncQueue007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+      "line": 310,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "AsyncQueueMonitorTest",
+      "method": "asyncQueue007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+      "line": 312,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "AsyncQueueMonitorTest",
+      "method": "asyncQueue007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+      "line": 313,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "ExpiryBacklogMonitorTest",
+      "method": "expiryMon007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+      "line": 159,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "ExpiryBacklogMonitorTest",
+      "method": "expiryMon007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+      "line": 159,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "ExpiryBacklogMonitorTest",
+      "method": "expiryMon007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+      "line": 161,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "ExpiryBacklogMonitorTest",
+      "method": "expiryMon007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+      "line": 163,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "ExpiryBacklogMonitorTest",
+      "method": "expiryMon007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+      "line": 164,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "WebLogBacklogMonitorTest",
+      "method": "webLog007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+      "line": 235,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "WebLogBacklogMonitorTest",
+      "method": "webLog007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+      "line": 235,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "WebLogBacklogMonitorTest",
+      "method": "webLog007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+      "line": 237,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "WebLogBacklogMonitorTest",
+      "method": "webLog007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+      "line": 239,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "WebLogBacklogMonitorTest",
+      "method": "webLog007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+      "line": 240,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

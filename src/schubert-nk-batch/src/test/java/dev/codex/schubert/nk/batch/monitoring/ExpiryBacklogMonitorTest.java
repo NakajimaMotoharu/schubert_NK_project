@@ -19,6 +19,7 @@ import java.util.Optional;
 import java.util.OptionalLong;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -155,8 +156,12 @@ class ExpiryBacklogMonitorTest {
             return actual.suppliedValuePresent() && actual.event().orElseThrow().isOpen();
           });
     }
-    try (var pool = Executors.newFixedThreadPool(8)) {
-      for (var result : pool.invokeAll(tasks)) assertTrue(result.get());
+    var pool = Executors.newFixedThreadPool(8);
+    try {
+      for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(result.get());
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     var actual = monitor.snapshot().orElseThrow();
     assertEquals(BigInteger.valueOf(64), actual.count());
@@ -195,7 +200,8 @@ class ExpiryBacklogMonitorTest {
     assertEquals(38161 + System.identityHashCode(event), populated.hashCode());
     assertEquals("Evaluation[suppliedValuePresent=true, event=Optional.empty]", actual.toString());
     assertEquals(
-        "Evaluation[suppliedValuePresent=true, event=Optional[dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event@"
+        "Evaluation[suppliedValuePresent=true,"
+            + " event=Optional[dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event@"
             + Integer.toHexString(System.identityHashCode(event))
             + "]]",
         populated.toString());
