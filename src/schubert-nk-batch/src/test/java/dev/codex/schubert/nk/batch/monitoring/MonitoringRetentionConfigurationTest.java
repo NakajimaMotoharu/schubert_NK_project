@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -174,8 +175,13 @@ class MonitoringRetentionConfigurationTest {
             return "verified";
           });
     }
-    try (var executor = Executors.newFixedThreadPool(8)) {
-      for (var result : executor.invokeAll(tasks)) assertEquals("verified", result.get());
+    var executor = Executors.newFixedThreadPool(8);
+    try {
+      for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+        assertEquals("verified", result.get());
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), "retention executor terminated");
     }
     assertEquals(15, debug.days());
     assertEquals(5_000_000_000L, debug.bytes());

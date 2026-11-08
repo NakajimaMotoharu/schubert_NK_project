@@ -159,7 +159,8 @@ class MonitoringModePolicyTest {
               return "verified";
             });
       }
-      for (var future : executor.invokeAll(tasks)) assertEquals("verified", future.get());
+      for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+        assertEquals("verified", future.get());
     } finally {
       executor.shutdownNow();
       assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
