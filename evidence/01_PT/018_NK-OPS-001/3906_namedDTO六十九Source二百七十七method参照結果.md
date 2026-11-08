@@ -1,0 +1,7 @@
+# named DTO69Source・277method参照結果
+
+3905/790/791/792、PG24760順0/580a3ea4→24762独立逆0/44ee25e75715c66e61557255771287da10bb2d0dbb59d36fc5536bc8bed490ac、7型保持metadata否定。全named69Source/69class/711raw=277測定（ctor70/from69/fields69/toString69）+標準生成434（296getter+equals/hash138）を公式XML/現Source/元責任へ一致。24744/24752現296shapeを再利用して独立getter296を全対応、元7actualCaseとindependent helper/Source行hash/TestID/関連MQ016017/UI232～236SS322323へ結合。Web互換constructor一を独立W1 signatureへ、canonical14参照nullはW9へ区別。全対応Program0011198/JSON五。
+
+L1264M277C69/I6632全miss0は既normal120 subsetで新測定0、全69自然B0=N-A/null/strictSource非空四gate1を維持。個別probe帰属null・全branchoracle完了は未主張。元P00103全75Sourceのうち69Sourceの参照結合のみ、残base/helper六は別対象。原0.5/3/7cap9・新Java/PT/coverage/Source登録/leaf0・unique520/正式1964-53/工数null/全HOLD不変更。工具失敗0/既成功再演0。
+
+PG24764でWBS485/486へcurrentP00103NamedMethodReferenceTrace20261109を同一観測として追記。69/75Source/277methodの参照だけでacceptance/costは不変更、旧全値保持・既580guard/4誤参照否定後に486root inventorySha256を現485078bbceaへ整合。元P00102の20/84参照観測も値不変更。
