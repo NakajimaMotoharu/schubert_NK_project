@@ -1,5 +1,10 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-09T00:49:36.269815+09:00 FieldCodec診断oracle新1・protocol当source全120
+
+0183890/Program002094-095・PMO600444。source64f3/Main7aedで24640全120一回OS0/FESaborted0、24642独立0 8ebe6365/測定3478L742M159C1014B全未達0。別cause-drop fixtureのFieldwhole10は旧9成功/新1だけ期待拒否、24650独立0 f63d1214（陰性10のPT PASS/coverage加算0）。新unique当1のみ累計520＝Java416＋HTML97＋CSS7、旧119再加算0・Production変更/障害0。新leaf/正式更新0、正式1964PT53scope・歴史17/190・工数null・全HOLD不変更。元部品の既成功確認ではなく原因と入力保護の追加oracle、原1/3/7cap9・観測共有1pp/残22%、専有N/Tnull。最新456/460参照、下段の119/519は各時点の履歴。
+
+
 <!-- PGPT-CURRENT-20261108-HANDOFF-BEGIN -->
 ## 2026-11-08T23:51:30.065774+09:00 最新技術成果（PG/PT継続中・工程未完了）
 
