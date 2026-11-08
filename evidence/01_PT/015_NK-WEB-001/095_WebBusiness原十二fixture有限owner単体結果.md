@@ -1,0 +1,9 @@
+# 095 WebBusiness原十二 有限owner実行結果
+
+source4aae7d1298fcb01e573b3fcc12655da45d7609ee/Production7aedをpush後、PG24350元whole12を一回実行し終了0/FESaborted0。PG24352独立0 SHA256 feef511899ff6881662639d428d90755d5250e5316b28b1c6e0d7e6d14e37d73。六Source七physical集計L105/M21/C7/B26・INSTRUCTION484全miss0。ProtectedRead二physicalの実条件26が全網羅、五facadeの自然branch0はN-A/nullで全六Source非空四100にしない（strictgate1保持）。実Main89全現CRC一致/held四初期化0、他Mainの全coverage認定0。
+
+wire008一executorをfinally.shutdownNow/awaitTermination10assertへ、元Future10秒/180並行/18request/allwire/error/null/cause/bytewipeを全token逆変換で維持。before24341は既Git1c6のsource blob/hashのみ、合成passwordやcontextをSource以外へ再出力しない。実account/auth/session/DB/JMScontext/keys/Root/VM/nativeなし。公開合成contextのMessageDigest比較等のみ。
+
+compile24344/format24342=0、static24346raw5は個別非適用・適用0CS0。旧postfield世代差のpreflight初1はBUG2530/YKT2262/24347を修正前保全、実在counter型4とownthread/Rootを確認、auth/key欠落はunknown維持・今回安全条件をSource/currentgraphで独立確認、六schema反証で24348=0。元12再演無し。postsource044d6d40を通常push後、BUG2529/2530と限定YKT2262を閉鎖、全YKT2177はOPEN。
+
+実command/時刻/OS/JDK/tool/branch/source/終了/入力pin/元XML/全12case時間/coverage/exec/hashは公開PG24352 manifestと参照へ保存。新unique/Source登録/leaf/正式受入加算0、518(Java414+HTML97+CSS7)/正式1964PT53scope/工数null・全actualHOLDを維持する。
