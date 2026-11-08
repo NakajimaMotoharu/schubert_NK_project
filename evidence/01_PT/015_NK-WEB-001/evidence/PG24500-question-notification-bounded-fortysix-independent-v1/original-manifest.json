@@ -1,0 +1,471 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "c1def8198e8bbc37c7eddf0f420da366fc72d55e",
+    "normalSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+    "inputHashes": {
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NotificationDetailProjectionPortTest.java": "6f4faa32c912737d9777ad1e6e9f11cd8195b38fcc2d9bcf2f80924c9c2bf990",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NotificationListProjectionPortTest.java": "dd588ba04f7f91ec278662273eb3e5f08acaafc63147d0c2db859b2d8d6cac43",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionDetailProjectionPortTest.java": "e74ec27aee2d0cefd0d32575c4e8108ceb1c81e5250228934cb5e8b07f501d34",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionListProjectionPortTest.java": "c0242ae7c2cb9592a5f56da86712721b513ff086d669c7023f85ca212e31e592",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionListViewModel.java": "eef4e7d0a88a56f5209e5ece2ceec9cb5abd57dc292cd8b380816419b583f497",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionDetailViewModel.java": "6a10ebbadbc52df317de2fec18b68aab3275d832b5f73e0c4edfe24935b1903c",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/NotificationListViewModel.java": "0d9826eecee7a3e0e63e779dac32949bced1748bff8d927b58e10c23160b5ed7",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/NotificationDetailViewModel.java": "4221d0482e8b5f84224a2ec7d91cba648046d5e23bcef3112c5bf6f48353a7cd",
+      "evidence/01_PT/015_NK-WEB-001/input/076_question_notification_projection_qualifier.py": "0492dc389bcae614f06cbdaa40f84a1a7b59e914c0a847c835a09872d2a16ee7",
+      "evidence/01_PT/015_NK-WEB-001/input/075_question_notification_projection_scope.json": "67f4106da5c7c42d43f3c3716ea665ba8c711df47571c46ce48d9527ec13caf5"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": "622ae1b70d2627b7b162a2cd1b07bc5201092e0628d9a50986892f2cbe7e98f9",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "bc6acaa867859b0f1d2f2e24dc27ba5627e7bf7c332448ae88bb077ea1b36fa7",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar": "941ced476427bde2533872f293da535fd0258de3f3a650a7f1bfe01ed2927302"
+    },
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "compileManifestSha256": "41ca34ce13dd296121bd495dd364c65560314a983537bdfca5013d22fc0f8dc1",
+    "selected": [
+      "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "dev.codex.schubert.nk.web.view.QuestionDetailProjectionPortTest",
+      "dev.codex.schubert.nk.web.view.NotificationListProjectionPortTest",
+      "dev.codex.schubert.nk.web.view.NotificationDetailProjectionPortTest"
+    ],
+    "expectedTests": 46,
+    "newMethods": 0,
+    "requalifiedExistingMethods": 46,
+    "session": "PG24498-QUESTION-NOTIFICATION-ORIGINAL-FORTYSIX",
+    "startUTC": "2026-11-08T12:23:20.882342+00:00"
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T12:23:20.882582+00:00",
+      "endUTC": "2026-11-08T12:23:22.150101+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24498-question-notification-original-fortysix-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Dnk.pt.repository=/home/mini/codex/project1/work/pgpt-foundation",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24498-question-notification-original-fortysix-unit-v1/jacoco.exec,sessionid=PG24498-QUESTION-NOTIFICATION-ORIGINAL-FORTYSIX,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24498-question-notification-original-fortysix-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24490-question-notification-projection-compile-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24498-question-notification-original-fortysix-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.view.QuestionDetailProjectionPortTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.view.NotificationListProjectionPortTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.view.NotificationDetailProjectionPortTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "5e272f67b5b7766ef120313374854b25fea4bed707e633d81989cfd2df731e78",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T12:23:22.160178+00:00",
+      "endUTC": "2026-11-08T12:23:22.325169+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24498-question-notification-original-fortysix-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24498-question-notification-original-fortysix-unit-v1/component",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24498-question-notification-original-fortysix-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "01f46851fcd24f62fed6524c239f0d1b30409315a5441a0bb672db005e3a0fc0",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T12:23:22.325493+00:00",
+      "endUTC": "2026-11-08T12:23:22.440205+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24498-question-notification-original-fortysix-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "402cd9b158d0554a866cffc86ff0f701679d5bb9c0366b930a11d0a2dd11fbb1",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T12:23:22.440515+00:00",
+      "endUTC": "2026-11-08T12:23:22.555011+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24498-question-notification-original-fortysix-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "1cc4c70e21618854bf94f53e354c47d913fbbe93f83fa33b7676b6cc303fb5f3",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "name": "userPagingLinksAndClamp()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationListProjectionPortTest",
+      "name": "invalidFormsStayUnpaginated()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "name": "nullBoundariesReject()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionDetailProjectionPortTest",
+      "name": "targetOwnerAndBodyReject()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationListProjectionPortTest",
+      "name": "copiedInputDoesNotChangeRows()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationListProjectionPortTest",
+      "name": "allStatesProduceApprovedLabels()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "name": "duplicateIdsReject()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionDetailProjectionPortTest",
+      "name": "nullBoundaryRejects()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationDetailProjectionPortTest",
+      "name": "completedHasExactFields()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "name": "rowCountMismatchRejects()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationDetailProjectionPortTest",
+      "name": "unicodeAndMarkupStayText()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "name": "outputSnapshotIsImmutable()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationListProjectionPortTest",
+      "name": "rowCountMismatchRejects()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "name": "invalidFormsStayUnpaginated()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationListProjectionPortTest",
+      "name": "wrongEffectivePageRejects()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "name": "parallelViewsKeepActorsSeparate()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationListProjectionPortTest",
+      "name": "orderRulesAreIndependent()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationListProjectionPortTest",
+      "name": "unicodeSummaryBoundaryAndDeletedLiteral()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationDetailProjectionPortTest",
+      "name": "targetNullAndSemanticMismatchReject()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationDetailProjectionPortTest",
+      "name": "completedMayHaveEmptyAnswer()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationDetailProjectionPortTest",
+      "name": "immutableRedactedProjection()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "name": "orderRulesAreIndependent()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "name": "wrongEffectivePageRejects()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionDetailProjectionPortTest",
+      "name": "summaryUsesOneHundredCodePoints()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationListProjectionPortTest",
+      "name": "outputCollectionsAreImmutable()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationDetailProjectionPortTest",
+      "name": "deletedQuestionsRetireAnswerAndLink()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "name": "emptyReturnsPlainView()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationListProjectionPortTest",
+      "name": "parallelViewsKeepActorsSeparate()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionDetailProjectionPortTest",
+      "name": "adminMayViewAnotherOwner()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionDetailProjectionPortTest",
+      "name": "answeredProjectionHasExactFields()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "name": "ownerScopeAndSummaryLimitReject()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationListProjectionPortTest",
+      "name": "pagingLinksKeepFiltersAndClamp()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionDetailProjectionPortTest",
+      "name": "immutableRedactedProjection()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationListProjectionPortTest",
+      "name": "nullBoundariesReject()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationListProjectionPortTest",
+      "name": "inconsistentStateAndDeletedSummaryReject()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "name": "roleMismatchRejectsBothDirections()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "name": "allStatesHaveIndependentRows()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationDetailProjectionPortTest",
+      "name": "parallelProjectionKeepsActorsSeparate()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "name": "unicodeBoundaryAndAdminCrossOwnerAreValid()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionDetailProjectionPortTest",
+      "name": "parallelProjectionDoesNotLeakOwners()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionDetailProjectionPortTest",
+      "name": "unansweredAndErrorHaveNoAnswer()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationDetailProjectionPortTest",
+      "name": "allStatesHaveLiteralLabelsAndTimes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "name": "adminAndUserFilteredLinksAreLiteral()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationListProjectionPortTest",
+      "name": "emptyReturnsPlainView()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.QuestionListProjectionPortTest",
+      "name": "inconsistentAnswerTimestampRejects()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.view.NotificationListProjectionPortTest",
+      "name": "duplicateIdsReject()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 46,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/web/view/NotificationDetailViewModel": "d7dca86ae3f71732b253edba753aab07904505180045a37d5ca3e8f11e42007c",
+    "dev/codex/schubert/nk/web/view/NotificationDetailViewModel$1": "5b03b51eb8ae8a6dcb17222d41c9688ade97742c9c374471308bfc705b35217d",
+    "dev/codex/schubert/nk/web/view/NotificationListViewModel": "e01956991b7f7d9c3fa7f66374c6e7c7c7f7b1bc24561ca2b899bbc2d80371c2",
+    "dev/codex/schubert/nk/web/view/NotificationListViewModel$1": "34f8ab02cb15e6ed4d7628c7f0ef1dc466cf8986b33e00204eb6a8270d73c14c",
+    "dev/codex/schubert/nk/web/view/QuestionDetailViewModel": "ecf6d43fc2225147cb6926a8b5b559f0593b88be47f5617935adb2ea1b679554",
+    "dev/codex/schubert/nk/web/view/QuestionDetailViewModel$1": "2d9a35187017618e039cc2217c890a6e377f058b6270594ee9fff2c8a8d928c7",
+    "dev/codex/schubert/nk/web/view/QuestionListViewModel": "39b4c987c2a9e1100b977aefaf4ec81322715de7432aba4392a82ae4f490672d"
+  },
+  "formalUpdated": false
+}
