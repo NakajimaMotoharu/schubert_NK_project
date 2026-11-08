@@ -1,0 +1,38 @@
+"""Independent terminal/source/XML/HTML provenance audit of the four original whole fixtures."""
+from pathlib import Path
+import datetime,hashlib,json,re,shutil,subprocess,sys,xml.etree.ElementTree as E,zipfile
+R=Path.cwd();W=R.parent/'pgpt-runs/PG379';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();load=lambda p:json.loads(Path(p).read_bytes());write=lambda p,v:Path(p).write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
+cfgPath=R/'evidence/01_PT/016_NK-WEB-002/input/042_login_user_dom_bounded_scope.json';cfg=load(cfgPath);source=sys.argv[1];assert re.fullmatch('[0-9a-f]{40}',source);unit=W/cfg['unitSlot'];um=load(unit/'manifest.json');pm=load(W/cfg['compileSlot']/'manifest.json');pf=load(R/cfg['preflightPath']);st=um['stage'];assert type(um['actualExit']) is int and um['actualExit']==0 and st['actualExit']==0 and st['timedOut'] is False;assert st['stdoutSha256']==sha(unit/'unit.stdout') and st['stderrSha256']==sha(unit/'unit.stderr');assert um['begin']['source']==source and um['begin']['productionCoreMain']=='7aed8eace7c844c2f79f2e39db766faf914890d5';assert um['begin']['productionJavaClasspath'] is False and type(um['begin']['actualBackendOperations']) is int and um['begin']['actualBackendOperations']==0;assert um['begin']['inputHashes']==pm['inputHashes']==pf['inputHashes'];assert um['begin']['preflightSha256']==sha(R/cfg['preflightPath']);assert sha(pf['preflightDriver']['path'])==pf['preflightDriver']['sha256'];assert pf['namespaceNegativeCases']==4 and pf['pmdRaw']==20 and pf['pmdApplicable']==0
+expected=set();inverse=[]
+for path,cls in cfg['testClasses'].items():
+ b=(R/path).read_bytes();assert hashlib.sha256(b).hexdigest()==pm['inputHashes'][path];assert hashlib.sha256(subprocess.check_output(['git','show',source+':'+path])).hexdigest()==pm['inputHashes'][path];old=subprocess.check_output(['git','show',cfg['beforeGit']+':'+path]);lines=b.splitlines(keepends=True);new=[];i=0;owners=0
+ while i<len(lines):
+  line=lines[i];m=re.fullmatch(rb'    var (pool|executor) = Executors.newFixedThreadPool\(2\);\n',line)
+  if m:
+   assert lines[i+1]==b'    try {\n';new.append(b'    try (var '+m[1]+b' = Executors.newFixedThreadPool(2)) {\n');i+=2;owners+=1;continue
+  if line==b'    } finally {\n':
+   assert lines[i+1].strip().endswith(b'.shutdownNow();') and re.fullmatch(rb'      assertTrue\((pool|executor)\.awaitTermination\(10, TimeUnit.SECONDS\)\);\n',lines[i+2]);i+=3;continue
+  new.append(line);i+=1
+ assert owners==1 and b''.join(new)==old;assert len(re.findall(rb'@Test\s+void\s+(\w+)\(',old))==len(re.findall(rb'@Test\s+void\s+(\w+)\(',b));expected.update((cls,x.decode()) for x in re.findall(rb'@Test\s+void\s+(\w+)\(',b));inverse.append(dict(path=path,currentSha256=sha(R/path),beforeSha256=hashlib.sha256(old).hexdigest(),rawExactInverse=True,ownerTerminationSeconds=10))
+assert len(expected)==28
+cases=[];xmlpins=[];environments=[]
+for f in sorted((unit/'xml').glob('TEST-*.xml')):
+ root=E.parse(f).getroot();xmlpins.append(dict(path=str(f),sha256=sha(f)));props={x.get('name'):x.get('value') for x in root.findall('properties/property')};environments.append({k:props[k] for k in ['os.name','os.arch','os.version','java.version','java.vendor'] if k in props})
+ for t in root.findall('testcase'):
+  assert not any(t.findall(k) for k in ['failure','error','skipped']);cases.append((t.get('classname'),t.get('name').removesuffix('()')))
+assert len(cases)==28 and len(set(cases))==28 and set(cases)==expected
+inits=set(re.findall(r"Initializing '([^']+)",(unit/'class-init.log').read_text()));app=sorted(n for n in inits if n.startswith('dev/codex/schubert/nk/'));allowed={v.replace('.','/') for v in cfg['testClasses'].values()};assert allowed.issubset(app);testLambdas=[n for n in app if n not in allowed];assert all(any(re.fullmatch(re.escape(owner)+r'\$\$Lambda\+0x[0-9a-f]+',n) for owner in allowed) for n in testLambdas);assert len(testLambdas)==8
+for bad in [next(iter(allowed))+'Evil',next(iter(allowed))+'$$Lambda+invalid','dev/codex/schubert/nk/web/WebStartupException','dev/codex/schubert/nk/web/view/UnselectedTest$$Lambda+0x123']:
+ assert bad not in allowed and not any(re.fullmatch(re.escape(owner)+r'\$\$Lambda\+0x[0-9a-f]+',bad) for owner in allowed)
+forbidden=('org/springframework/context/annotation/AnnotationConfig','org/springframework/context/support/GenericApplicationContext','org/springframework/beans/factory/support/DefaultListableBeanFactory','org/apache/activemq/','org/apache/catalina/','io/netty/','com/zaxxer/','org/postgresql/','io/micrometer/');assert not any(n.startswith(forbidden) for n in inits)
+for p,h in cfg['dependencies'].items():
+ assert sha(p)==h
+ with zipfile.ZipFile(p) as z:assert not any(n.startswith('dev/codex/schubert/nk/') for n in z.namelist())
+html=sorted((unit/'output').glob('*.html'));assert len(html)==82;counts={k:sum(p.name.startswith(k) for p in html) for k in cfg['snapshots']};assert counts==cfg['snapshots'];pins={}
+for f in html:
+ s=f.read_text();assert not any(x in s for x in ['synthetic-noncredential-csrf','00000000-0000-0000-0000-00000000004d','public-unissued-fixture-marker','synthetic-unmapped-display-marker']);pins[f.name]=sha(f)
+for p,h in pm['resourceHashes'].items():assert sha(W/cfg['compileSlot']/'resources'/p)==h and sha(R/'src/schubert-nk-web/src/main/resources'/p)==h
+assert all(sha(R/p)==h for p,h in pm['inputHashes'].items());out=R/cfg['postPath'];assert not out.exists();out.mkdir();files={}
+for p in [unit/'begin.json',unit/'manifest.json',unit/'unit.stdout',unit/'unit.stderr',unit/'unit-begin.safe.json',unit/'unit-process.safe.json',unit/'unit-exit.safe.json',*html]:
+ name='output/'+p.name if p.parent.name=='output' else ('original-manifest.json' if p.name=='manifest.json' else p.name);dest=out/name;dest.parent.mkdir(exist_ok=True);shutil.copyfile(p,dest);files[name]=sha(dest)
+value=dict(actualExit=0,source=source,productionCoreMain=um['begin']['productionCoreMain'],tests=28,requalifiedExistingTests=28,newUniqueTests=0,failures=0,errors=0,skipped=0,aborted=0,productTestsExecuted=28,testCases=[dict(classname=a,name=b) for a,b in sorted(cases)],xmlPins=xmlpins,environment=environments,originalManifest=dict(path=str(unit/'manifest.json'),sha256=sha(unit/'manifest.json')),inputHashes=pm['inputHashes'],resourceHashes=pm['resourceHashes'],dependencies=cfg['dependencies'],sourceInverse=inverse,rawExactInverseCount=4,normalOwnerTerminationAsserted=True,productionJavaClasspath=False,applicationInitializations=[],testInitializations=sorted(allowed),testHiddenLambdaInitializations=len(testLambdas),hiddenLambdaNegativeCases=4,forbiddenBusinessInitializations=[],actualBackendOperations=0,heldFourInitializations=0,javaCoverage=None,javaCoverageReason='Three HTML templates plus one fragment; no product Java classes on CP. No Java measured counter or artificial100, old exec union0.',snapshotCount=82,snapshotCounts=counts,snapshotHashes=pins,files=files,pmdRaw=20,pmdApplicableViolations=0,checkstyleViolations=0,namespaceFalsePositivePreserved='PG24418',namespaceNegativeCases=4,independentPostSha256=sha(__file__),fullMvcOrBrowserAccepted=False,formalUpdated=False,newAcceptance=0,effortRate=None,atJST=datetime.datetime.now().astimezone().isoformat());write(out/'manifest.json',value);print(json.dumps(dict(actualExit=0,tests=28,snapshots=82,productionJavaClasspath=False,manifestSha256=sha(out/'manifest.json'))))

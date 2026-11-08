@@ -1,0 +1,61 @@
+<!doctype html>
+<!-- NK-WEB-002/SCR017/UI225236/SS313314/SSC177/PG-D366/PT-USER-BIZ001..012. -->
+<html lang="ja">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User詳細</title>
+  <link rel="stylesheet" href="/css/schubert.css">
+ </head>
+ <body>
+  <main class="page user-detail">
+   <header class="topbar">
+    <h1>User詳細</h1>
+    <div class="topbar-actions">
+     <nav class="nav-links" aria-label="共通ナビゲーション">
+      <a href="/">メニュー</a> <a href="/notifications">通知</a>
+     </nav>
+     <span class="login-user">public-admin</span> <span class="login-role">ADMIN</span>
+     <form class="logout-form" action="/logout" method="post">
+      <button type="submit">ログアウト</button>
+     </form>
+    </div>
+   </header>
+   <nav>
+    <a href="/admin/users">User一覧</a>
+   </nav>
+   <dl>
+    <dt>Username</dt>
+    <dd class="username">public-4</dd>
+    <dt>Role</dt>
+    <dd class="role">USER</dd>
+    <dt>状態</dt>
+    <dd class="state">有効</dd>
+    <dt>Lock理由</dt>
+    <dd class="lock-reason">手動確認</dd>
+    <dt>Lock終了日時</dt>
+    <dd class="locked-until">2026-11-06 09:30:00</dd>
+    <dt>最終Login日時</dt>
+    <dd class="last-login">2026-11-05 08:01:02</dd>
+    <dt>Active session数</dt>
+    <dd class="active-sessions">2</dd>
+    <dt>最終Password変更日時</dt>
+    <dd class="password-changed-at">2026-10-01 01:02:03</dd>
+    <dt>作成日時</dt>
+    <dd class="created-at">2026-09-01 04:05:06</dd>
+    <dt>更新日時</dt>
+    <dd class="updated-at">2026-11-06 07:08:09</dd>
+    <dt>作成actor</dt>
+    <dd class="created-by">creator</dd>
+    <dt>更新actor</dt>
+    <dd class="updated-by">updater</dd>
+   </dl>
+   <section class="user-operations">
+    <form method="post" data-operation-submit action="/admin/users/17" data-operation="UNLOCK">
+     <input type="hidden" name="operation" value="UNLOCK"> <input type="hidden" name="id" value="17"> <input type="hidden" name="expected_version" value="3"> <input type="hidden" name="operation_token" value="[REDACTED-SYNTHETIC]"> <span>Lock解除</span> <label><input type="checkbox" name="confirm" value="true" required>確認</label> <button type="submit">実行</button>
+    </form>
+   </section>
+  </main>
+  <script src="/js/operation-post-submit.js" defer></script>
+ </body>
+</html>

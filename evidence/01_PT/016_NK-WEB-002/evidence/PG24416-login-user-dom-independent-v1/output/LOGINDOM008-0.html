@@ -1,0 +1,21 @@
+<!doctype html>
+<!-- NK-WEB-002/SCR-001; QA-045/UIC-005/SSC-074; UI222/226/264; SS313/355; PG219/PT-SCR105..108. -->
+<html lang="ja">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>schubert NK - ログイン</title>
+  <link rel="stylesheet" href="/css/schubert.css">
+ </head>
+ <body class="login-page">
+  <main class="login-shell">
+   <section class="login-card" aria-labelledby="login-title">
+    <h1 id="login-title">schubert NK</h1>
+    <p class="login-description">ユーザー名とパスワードを入力してください。</p>
+    <form class="login-form" action="/login" method="post">
+     <label for="login-username">ユーザー名</label> <input id="login-username" type="text" name="username" autocomplete="username" required autofocus> <label for="login-password">パスワード</label> <input id="login-password" type="password" name="password" autocomplete="current-password" required> <button type="submit">ログイン</button>
+    </form>
+   </section>
+  </main>
+ </body>
+</html>
