@@ -19,6 +19,7 @@ import java.util.Optional;
 import java.util.OptionalLong;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -208,8 +209,12 @@ class RestartHealthMonitorTest {
       boolean limited = i % 2 == 0;
       tasks.add(() -> sample(owner, 1, limited, 0).event().orElseThrow().isOpen());
     }
-    try (var pool = Executors.newFixedThreadPool(8)) {
-      for (var result : pool.invokeAll(tasks)) assertTrue(result.get());
+    var pool = Executors.newFixedThreadPool(8);
+    try {
+      for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(result.get());
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     var last = owner.snapshot().orElseThrow();
     assertEquals(BigInteger.valueOf(64), last.count());
@@ -269,7 +274,8 @@ class RestartHealthMonitorTest {
     assertEquals(new Evaluation(true, true, Optional.of(event)), populated);
     assertEquals(1221152 + System.identityHashCode(event), populated.hashCode());
     assertEquals(
-        "Evaluation[restartCountPresent=true, rateLimitPresent=true, event=Optional[dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event@"
+        "Evaluation[restartCountPresent=true, rateLimitPresent=true,"
+            + " event=Optional[dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event@"
             + Integer.toHexString(System.identityHashCode(event))
             + "]]",
         populated.toString());

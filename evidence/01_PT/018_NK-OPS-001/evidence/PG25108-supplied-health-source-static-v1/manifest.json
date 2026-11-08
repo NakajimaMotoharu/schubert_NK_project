@@ -1,0 +1,240 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T06:09:58.997594+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitorTest.java",
+      "originalSha256": "fa96ad8b693632dcf0040e5f0676d596f913822197ea22afaf85289251e09c33",
+      "currentSha256": "de51008518c99ed136f5f73c38378ddfded4cff118d965c1d2cad44395050c3c",
+      "originalWholeBodiesExactlyRestored": true,
+      "workerOwners": 1
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitorTest.java",
+      "originalSha256": "622d59e35f7798b155136d96a06d45c61561f6149df9e5bb2c2d724cc1e9e2fa",
+      "currentSha256": "0944cf9e5c9be4a5e22c3adea792f35fdfe53c7af77827138d0c17ab6e46e0ae",
+      "originalWholeBodiesExactlyRestored": true,
+      "workerOwners": 1
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitorTest.java",
+      "originalSha256": "6c300a98e70cf25296285e8b3685a530725d43f8be3afb9aacd6f4789ec40154",
+      "currentSha256": "3ff7dc0dad30e7dc1ba6b7e640fad3c6cb1ebc640e3320f0899feb0b144b3810",
+      "originalWholeBodiesExactlyRestored": true,
+      "workerOwners": 1
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitorTest.java",
+      "originalSha256": "b7b530c0a01f5229cc69d534d8bb824a417eaf1f25fbddb5017ef9dc96c81b75",
+      "currentSha256": "4a0ab80de9f2b87320a295f5f054e0e0abbb06e241e8f7c1d76200dd7321eaab",
+      "originalWholeBodiesExactlyRestored": true,
+      "workerOwners": 1
+    }
+  ],
+  "originalWholeCases": 32,
+  "rawFindings": 20,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 4,
+  "finiteOwnerSitesCorrected": 4,
+  "formatterConstantProofs": [
+    {
+      "test": "BackupHealthMonitorTest",
+      "originalLiteralSha256": "cbb3ab4cb9e4cd43d92be1653fbff6bbb076c1f19b5ca577104e3e359d035e3c",
+      "splitConstantExactlySameValue": true,
+      "negativeChecks": 3
+    },
+    {
+      "test": "RestartHealthMonitorTest",
+      "originalLiteralSha256": "1d99d37f11020eeb2c9bcb7676707110cd185f4a8381d48a3e3d5fa65d3f112d",
+      "splitConstantExactlySameValue": true,
+      "negativeChecks": 3
+    },
+    {
+      "test": "IntegrityHealthMonitorTest",
+      "originalLiteralSha256": "d3c236775b187665c0906b5ba6d326949f25f852a65337339c571b154ba05494",
+      "splitConstantExactlySameValue": true,
+      "negativeChecks": 3
+    },
+    {
+      "test": "DlqHealthMonitorTest",
+      "originalLiteralSha256": "5f6acf7de895b69fbfa376c0bfa8834660bbf809a7458909ced4573ff0984f31",
+      "splitConstantExactlySameValue": true,
+      "negativeChecks": 3
+    }
+  ],
+  "formatterConstantNegativeChecks": 12,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25106-supplied-health-owner-prepare-v1/manifest.json",
+    "sha256": "1b4c8f7445b6358935b300553399c45635e651d910cc6ba61ab90618a07286ef"
+  },
+  "classifications": [
+    {
+      "test": "BackupHealthMonitorTest",
+      "method": "backupMon006ConcurrentSameOwnerKeepsExactCountAndOtherOwnerIndependent",
+      "line": 210,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "BackupHealthMonitorTest",
+      "method": "backupMon006ConcurrentSameOwnerKeepsExactCountAndOtherOwnerIndependent",
+      "line": 210,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "BackupHealthMonitorTest",
+      "method": "backupMon006ConcurrentSameOwnerKeepsExactCountAndOtherOwnerIndependent",
+      "line": 212,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "BackupHealthMonitorTest",
+      "method": "backupMon006ConcurrentSameOwnerKeepsExactCountAndOtherOwnerIndependent",
+      "line": 214,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "BackupHealthMonitorTest",
+      "method": "backupMon006ConcurrentSameOwnerKeepsExactCountAndOtherOwnerIndependent",
+      "line": 215,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "DlqHealthMonitorTest",
+      "method": "dlqMon006ConcurrentSameOwnerAndSeparateOwnerKeepExactCounts",
+      "line": 177,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "DlqHealthMonitorTest",
+      "method": "dlqMon006ConcurrentSameOwnerAndSeparateOwnerKeepExactCounts",
+      "line": 177,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "DlqHealthMonitorTest",
+      "method": "dlqMon006ConcurrentSameOwnerAndSeparateOwnerKeepExactCounts",
+      "line": 179,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "DlqHealthMonitorTest",
+      "method": "dlqMon006ConcurrentSameOwnerAndSeparateOwnerKeepExactCounts",
+      "line": 181,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "DlqHealthMonitorTest",
+      "method": "dlqMon006ConcurrentSameOwnerAndSeparateOwnerKeepExactCounts",
+      "line": 182,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "IntegrityHealthMonitorTest",
+      "method": "integrityMon007ConcurrentCallersKeepExactCountAndIndependentOwner",
+      "line": 153,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "IntegrityHealthMonitorTest",
+      "method": "integrityMon007ConcurrentCallersKeepExactCountAndIndependentOwner",
+      "line": 153,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "IntegrityHealthMonitorTest",
+      "method": "integrityMon007ConcurrentCallersKeepExactCountAndIndependentOwner",
+      "line": 155,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "IntegrityHealthMonitorTest",
+      "method": "integrityMon007ConcurrentCallersKeepExactCountAndIndependentOwner",
+      "line": 157,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "IntegrityHealthMonitorTest",
+      "method": "integrityMon007ConcurrentCallersKeepExactCountAndIndependentOwner",
+      "line": 158,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "RestartHealthMonitorTest",
+      "method": "restartMon006ConcurrentSameOwnerAndDifferentOwnerKeepExactEvents",
+      "line": 212,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "RestartHealthMonitorTest",
+      "method": "restartMon006ConcurrentSameOwnerAndDifferentOwnerKeepExactEvents",
+      "line": 212,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "RestartHealthMonitorTest",
+      "method": "restartMon006ConcurrentSameOwnerAndDifferentOwnerKeepExactEvents",
+      "line": 214,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "RestartHealthMonitorTest",
+      "method": "restartMon006ConcurrentSameOwnerAndDifferentOwnerKeepExactEvents",
+      "line": 216,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    },
+    {
+      "test": "RestartHealthMonitorTest",
+      "method": "restartMon006ConcurrentSameOwnerAndDifferentOwnerKeepExactEvents",
+      "line": 217,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone original JUnit own8workers/64suppliedvalue callbacks, timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10; no outerTWR/webapp runtime worker."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

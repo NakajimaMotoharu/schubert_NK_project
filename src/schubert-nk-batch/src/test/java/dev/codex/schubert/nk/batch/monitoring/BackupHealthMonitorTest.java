@@ -20,6 +20,7 @@ import java.util.Optional;
 import java.util.OptionalLong;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** BACKUPMON001..008/1683 independent fixed health/time fixtures, no actual Backup/DB/Root. */
@@ -206,8 +207,12 @@ class BackupHealthMonitorTest {
       long failures = i % 2 == 0 ? 0 : 2;
       tasks.add(() -> sample(owner, true, false, failures, 0).event().orElseThrow().isOpen());
     }
-    try (var pool = Executors.newFixedThreadPool(8)) {
-      for (var result : pool.invokeAll(tasks)) assertTrue(result.get());
+    var pool = Executors.newFixedThreadPool(8);
+    try {
+      for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(result.get());
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     var last = owner.snapshot().orElseThrow();
     assertEquals(BigInteger.valueOf(64), last.count());
@@ -268,7 +273,8 @@ class BackupHealthMonitorTest {
     assertEquals(new Evaluation(true, true, Optional.of(event)), populated);
     assertEquals(1221152 + System.identityHashCode(event), populated.hashCode());
     assertEquals(
-        "Evaluation[completionPresent=true, failureCountPresent=true, event=Optional[dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event@"
+        "Evaluation[completionPresent=true, failureCountPresent=true,"
+            + " event=Optional[dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event@"
             + Integer.toHexString(System.identityHashCode(event))
             + "]]",
         populated.toString());
