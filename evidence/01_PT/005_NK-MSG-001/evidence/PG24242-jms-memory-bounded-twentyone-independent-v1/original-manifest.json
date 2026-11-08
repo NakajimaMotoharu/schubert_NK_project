@@ -1,0 +1,293 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "e8552cd21bd8aa6d129f61b2711c854744bd684c",
+    "normalSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "normalManifestSha256": "b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27",
+    "inputHashes": {
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyCleanupTest.java": "78bea95c08ff0177fc8641418d9dea377731eb4841d16ebc2c564139b4a3da35",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java": "7bc124d5f9f86aada3770344acc8bf09e74df159ca0f4d262339db8f995a62b2",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java": "60935ef809e3ff066008fd6d560d4cf2476e743e0ebaac39742bd64806b6afe4",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java": "a3235bcea01836b91cef5f1eee784a877d1291d7b7de4a3d805209317bbeab1a",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java": "cc0689a25334f9b2eb12983e5e952a0a19af703c28ff4898ff8b57f2a6aa7b39",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.java": "11ffd0f90e7064a7f42bef1029c65fc37e5cadbfe2b49a4b7bd3d775d9dd164b",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java": "1a28f9d8ec9438f13621358c02181557fdc3a19f4afd55303ad727ce6fc9ed75",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/PendingReply.java": "346a3d7ddf65889875a3f1907eda05fd061a4788aabf5d7361b461790185c42b",
+      "evidence/01_PT/005_NK-MSG-001/input/039_jms_memory_bounded_qualifier.py": "362e46cc61830eaf401e0a1fc62d67689098c4b6a4029ab50d4d547c87813b50",
+      "evidence/01_PT/005_NK-MSG-001/input/038_jms_memory_bounded_scope.json": "ac8f287b9e723504b42b42ace7c3116b948ae9c4878d06ba1f9aeeb4e23aeef3"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": "622ae1b70d2627b7b162a2cd1b07bc5201092e0628d9a50986892f2cbe7e98f9",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "bc6acaa867859b0f1d2f2e24dc27ba5627e7bf7c332448ae88bb077ea1b36fa7",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar": "6605e08075ab389c359451c7854808cf4b1575e1ea6317e534e9d4df088096df"
+    },
+    "consoleSha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "compileManifestSha256": "6b493725ed88b1d99980b6c7629d045d872548ab7a56a67323865de7bb9099ae",
+    "selected": [
+      "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "dev.codex.schubert.nk.web.messaging.JmsRequestReplyCleanupTest",
+      "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest"
+    ],
+    "expectedTests": 21,
+    "newMethods": 0,
+    "requalifiedExistingMethods": 21,
+    "session": "PG24240-JMS-MEMORY-BOUNDED-TWENTYONE",
+    "startUTC": "2026-11-08T09:12:18.362844+00:00"
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T09:12:18.362983+00:00",
+      "endUTC": "2026-11-08T09:12:19.630561+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24240-jms-memory-bounded-twentyone-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Dnk.pt.repository=/home/mini/codex/project1/work/pgpt-foundation",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24240-jms-memory-bounded-twentyone-unit-v1/jacoco.exec,sessionid=PG24240-JMS-MEMORY-BOUNDED-TWENTYONE,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg24240-jms-memory-bounded-twentyone-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24234-jms-memory-bounded-twentyone-compile-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24240-jms-memory-bounded-twentyone-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.messaging.JmsRequestReplyCleanupTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "c504bfee3a4f5b10fa4177d42b67c98e4dbb2859621e25638c8139336d2698df",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T09:12:19.636412+00:00",
+      "endUTC": "2026-11-08T09:12:19.801426+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24240-jms-memory-bounded-twentyone-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24240-jms-memory-bounded-twentyone-unit-v1/component",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24240-jms-memory-bounded-twentyone-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "cf4c49dc96e1d7f7b7f590316a57664717746f9450512287b21e5481ea12d521",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T09:12:19.801720+00:00",
+      "endUTC": "2026-11-08T09:12:19.916417+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24240-jms-memory-bounded-twentyone-unit-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "198c4e781ca6e73907ce637e0d191817d1407effdc37f737b6bf221a4b27c666",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-08T09:12:19.916727+00:00",
+      "endUTC": "2026-11-08T09:12:20.031437+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24240-jms-memory-bounded-twentyone-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e25c89fa2886622a3a4966e1f5b3191358b51888a5a9b8c39ac27430cb262634",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "replyAtDeadlineFailsTheWaitingFutureAsLate()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "registrationIsBoundedDuplicateSafeAndReleasesCapacityOnCancel()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "successfulCompletionIsAtomicAndDefensivelyCopiesBody()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+      "name": "concurrentRegistrationsRespectCapacityAndReuseAllSlots()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyCleanupTest",
+      "name": "suppliedRequestAndReplyBuffersRemainBorrowed()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "approvedConfiguredWaitsAccept1To20AndRejectTheNextWithoutSending()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "sendFailureCancelsRegistrationAndPropagatesJmsException()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "oneOfOneHundredSimultaneousResponsesWins()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+      "name": "callerCompletionViewCannotSetOrCancelTheRegistryPromise()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "exceptionReasonIsAClosedNonSecretClassification()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+      "name": "terminalRaceHasOneWinnerAndReturnsThePermit()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "interruptedWaitRemovesRegistrationAndRestoresInterruptFlag()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "exchangeRegistersBeforeOneSendAndReturnsDefensiveReply()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyCleanupTest",
+      "name": "everySendFailureKeepsIdentityAndReturnsBothCapacities()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyCleanupTest",
+      "name": "registryFullDoesNotCancelAnotherWaiterAndRecovers()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+      "name": "nanosecondDeadlineAndCopiesStayIndependent()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyCleanupTest",
+      "name": "clockFailureAndDeadlineOverflowReturnTheWaitPermit()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "lateCompletionAndExplicitExpiryFailTheWaiterWithoutDelivery()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "constructorRegistryAndRequestBoundsDenyInvalidInputBeforeSend()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "nullDeadlineAndCapacityContractsFailBeforeMutation()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "elapsedWaitExpiresAndSubsequentReplyIsLate()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 21,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physical": {
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient": "54a1aeff1136917d88193d462e572e6538fe372080ee3356d32145d66009d5e8",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason": "49de906b40d2e0da3c50dded1c72727a03d93faf97f087d381c7e0dc3688ac54",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException": "e6539f484082a7b470e8de3743c6393c0747a752ad7bf4bed17cb5c27b44c59d",
+    "dev/codex/schubert/nk/web/messaging/PendingReply": "c19ff358f56c4496c14c37bc498789d44c9efacdbda8b79c6d38261908e51c2d",
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry": "e0f96e0e6e9cf85633d8ca1c0c772421559ce169d3aad9bf050d56338d07c84d"
+  },
+  "formalUpdated": false
+}
