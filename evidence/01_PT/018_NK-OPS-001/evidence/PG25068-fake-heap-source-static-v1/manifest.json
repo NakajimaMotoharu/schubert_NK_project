@@ -1,0 +1,67 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T05:53:18.197761+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthObservationTest.java",
+      "originalSha256": "9a160707461f978bc9cb972aa8fb9b886b5b02264614b98819c1d4f0673bd69e",
+      "currentSha256": "d4d707c358be0170cf1699c5111fe27eb036b475d21e0e1a1d25508d9902bec7",
+      "originalWholeBodiesExactlyRestored": true
+    }
+  ],
+  "originalWholeCases": 9,
+  "rawFindings": 6,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 1,
+  "finiteOwnerSitesCorrected": 1,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25066-fake-heap-owner-prepare-v1/manifest.json",
+    "sha256": "aae5cbc1f5dd3ed83deb80aa014ee198c4dc0a1f4cc03f57df9a5ff49983d3f0"
+  },
+  "classifications": [
+    {
+      "line": 28,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "basis": "Existing standalone JDK-only Proxy implements MemoryMXBean using the defining interface class loader; mutable thread-context J2EE loader is not used. No real bean lookup or management connection."
+    },
+    {
+      "line": 169,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit own8worker/64fakegetter callbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR or webapp runtime thread."
+    },
+    {
+      "line": 169,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit own8worker/64fakegetter callbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR or webapp runtime thread."
+    },
+    {
+      "line": 175,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit own8worker/64fakegetter callbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR or webapp runtime thread."
+    },
+    {
+      "line": 178,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit own8worker/64fakegetter callbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR or webapp runtime thread."
+    },
+    {
+      "line": 179,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit own8worker/64fakegetter callbacks; timedinvokeAll10/terminalFuture/onefinallyshutdownNowawait10, no outerTWR or webapp runtime thread."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

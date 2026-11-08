@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
@@ -165,12 +166,17 @@ class JvmHeapHealthObservationTest {
     assertEquals(50, otherSource.read().orElseThrow());
     assertEquals(0, fixture.reads.get());
     assertEquals(1, other.reads.get());
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var jobs =
           java.util.stream.IntStream.range(0, 64)
               .<Callable<Double>>mapToObj(i -> () -> source.read().orElseThrow())
               .toList();
-      for (var result : pool.invokeAll(jobs)) assertEquals(75, result.get().doubleValue());
+      for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS))
+        assertEquals(75, result.get().doubleValue());
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(64, fixture.reads.get());
     assertEquals(1, other.reads.get());
