@@ -1,0 +1,221 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-08T16:13:49.293548+09:00",
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/637_pool_webmetric_ten_method_scope.json",
+    "sha256": "a949c4cdb7e5cb1437b71368dbc42f50a11fb9cf29055f3879faf065cbc389d3"
+  },
+  "sourcePrograms": 3,
+  "explicitlyRelatedMethods": 10,
+  "originalSuccessfulTestCases": 23,
+  "assertionSnippetChecks": 59,
+  "originalCompilerFilteredMethodsNotIndependentlyMeasured": 0,
+  "abstractReaderMethodsWithoutCode": 0,
+  "subjectLimits": [
+    {
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool.java",
+      "measuredMethodLinks": 2,
+      "originalCompilerFilteredMethodsNotIndependentlyMeasured": 0,
+      "abstractReaderMethodsWithoutCode": 0,
+      "actualDatabaseOrLiveHttpQualified": false
+    },
+    {
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebJdbcPool.java",
+      "measuredMethodLinks": 2,
+      "originalCompilerFilteredMethodsNotIndependentlyMeasured": 0,
+      "abstractReaderMethodsWithoutCode": 0,
+      "actualDatabaseOrLiveHttpQualified": false
+    },
+    {
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java",
+      "measuredMethodLinks": 6,
+      "originalCompilerFilteredMethodsNotIndependentlyMeasured": 0,
+      "abstractReaderMethodsWithoutCode": 0,
+      "actualDatabaseOrLiveHttpQualified": false
+    }
+  ],
+  "assertionReviews": [
+    {
+      "testId": "OPS-POOL-OWN-001",
+      "caseRef": "dev.codex.schubert.nk.api.bootstrap.ApiPoolSourceOwnershipPortTest#poolOwn001FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen()",
+      "declarationLine": 34,
+      "snippets": 5,
+      "independentExpected": "Limits8/2,3000/2000ms and fail-fast1ms; two generations close issued connections/SDK workers, borrowed source only fixture closes; malformed null result fails before ownership transfer"
+    },
+    {
+      "testId": "OPS-POOL-OWN-002",
+      "caseRef": "dev.codex.schubert.nk.web.bootstrap.WebPoolSourceOwnershipPortTest#poolOwn002FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen()",
+      "declarationLine": 34,
+      "snippets": 5,
+      "independentExpected": "Limits2/1,3000/2000ms and fail-fast1ms; two generations close issued connections/SDK workers, borrowed source only fixture closes; malformed null result fails before ownership transfer"
+    },
+    {
+      "testId": "WEBSERVICE001",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice001ConstructorBoundariesRejectWithoutGetterOrInvalidModeSeries()",
+      "declarationLine": 90,
+      "snippets": 2,
+      "independentExpected": "Constructor null/invalid mode rejects before reads/series"
+    },
+    {
+      "testId": "WEBSERVICE002",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice002FactoryRejectsNullReferencesAndModeBeforeAcquisition()",
+      "declarationLine": 125,
+      "snippets": 2,
+      "independentExpected": "Factory null/invalid mode rejects before suppliers"
+    },
+    {
+      "testId": "WEBSERVICE003",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice003StandardFactoryDoesNotReadAnyDetailedSupplierOrCreateObserver()",
+      "declarationLine": 156,
+      "snippets": 1,
+      "independentExpected": "STANDARD no detailed suppliers or binding"
+    },
+    {
+      "testId": "WEBSERVICE004",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice004DebugCapturesOwnerBeforeSetupThenDefersStatisticsUntilRender()",
+      "declarationLine": 177,
+      "snippets": 3,
+      "independentExpected": "Capture owner before initialization, defer getters until render"
+    },
+    {
+      "testId": "WEBSERVICE005",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice005IndependentObserversBorrowOneRetainedRecorderAndDatabaseRefresh()",
+      "declarationLine": 212,
+      "snippets": 3,
+      "independentExpected": "Distinct observers share recorder and refresh DB without owning registry"
+    },
+    {
+      "testId": "WEBSERVICE006",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice006StandaloneStandardObserverNeverCreatesDetailedSeries()",
+      "declarationLine": 251,
+      "snippets": 2,
+      "independentExpected": "STANDARD standalone observer no detailed samples or terminal"
+    },
+    {
+      "testId": "WEBSERVICE007",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice007TerminalIsRecordedOnceInSameCustomPayloadAsDatabase()",
+      "declarationLine": 267,
+      "snippets": 2,
+      "independentExpected": "Terminal exactly once in same payload; 250ms→0.25 sec literal"
+    },
+    {
+      "testId": "WEBSERVICE008",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice008RedispatchAndConcurrentTerminalRetainRequestOwnedClaim()",
+      "declarationLine": 288,
+      "snippets": 3,
+      "independentExpected": "Redispatch/16 finite tasks retains per-request claim; next request increments once"
+    },
+    {
+      "testId": "WEBSERVICE010",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice010PoolSupplierFailureOrNullNeverAcquiresConfigurationOrRetries()",
+      "declarationLine": 326,
+      "snippets": 2,
+      "independentExpected": "Pool supplier RTE/Error/null same identity, no config acquisition/retry"
+    },
+    {
+      "testId": "WEBSERVICE011",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice011ConfigurationSupplierFailureOrNullRetainsOriginalPrimaryAndPartialOwner()",
+      "declarationLine": 358,
+      "snippets": 2,
+      "independentExpected": "Config supplier failure preserves original and partial owner"
+    },
+    {
+      "testId": "WEBSERVICE012",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice012DatabaseFailureNeverReturnsPartialTextOrReplaysHttpSuccess()",
+      "declarationLine": 392,
+      "snippets": 3,
+      "independentExpected": "Getter failure no partial text or HTTP sample replay"
+    },
+    {
+      "testId": "WEBSERVICE013",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice013TerminalSignalFailureIsOriginalAndDoesNotTransferOwnership()",
+      "declarationLine": 409,
+      "snippets": 2,
+      "independentExpected": "Direct terminal callback Error identity preserved, not signalFailure path"
+    },
+    {
+      "testId": "WEBSERVICE014",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice014QuiescentContextCloseReleasesOnlyOwnedSdkAndRejectsNewAccess()",
+      "declarationLine": 426,
+      "snippets": 3,
+      "independentExpected": "Quiescent close only owns registry and rejects new reads"
+    },
+    {
+      "testId": "WEBSERVICE015",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice015EmptyDependenciesReceiveOneFreshObserverInImmutableCopy()",
+      "declarationLine": 455,
+      "snippets": 2,
+      "independentExpected": "Empty dependencies immutable copy plus fresh observer"
+    },
+    {
+      "testId": "WEBSERVICE016",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice016DependencySnapshotPreservesValueIdentityAndIgnoresLaterInputMutation()",
+      "declarationLine": 473,
+      "snippets": 3,
+      "independentExpected": "Dependency identity preserved despite input mutation"
+    },
+    {
+      "testId": "WEBSERVICE017",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice017NullMapEntryTypeAndValueNeverBecomeObserverDependencies()",
+      "declarationLine": 507,
+      "snippets": 2,
+      "independentExpected": "Null map/entry/type/value rejected without observer/terminal"
+    },
+    {
+      "testId": "WEBSERVICE018",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice018TypeMismatchAndPrimitiveKeyAreRejectedWithoutInputChanges()",
+      "declarationLine": 530,
+      "snippets": 3,
+      "independentExpected": "Type mismatch/primitive key rejected without mutation"
+    },
+    {
+      "testId": "WEBSERVICE019",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice019ExistingObserverIsNotReplacedOrRegisteredTwice()",
+      "declarationLine": 547,
+      "snippets": 2,
+      "independentExpected": "Existing observer not replaced or registered twice"
+    },
+    {
+      "testId": "WEBSERVICE020",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice020DependencyProviderFailureIsOriginalAndNeverRetriedOrFormatted()",
+      "declarationLine": 564,
+      "snippets": 3,
+      "independentExpected": "Map provider runtime/Error same identity and one attempt each"
+    },
+    {
+      "testId": "WEBSERVICE021",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice021TwoDependencySnapshotsOwnDistinctObserversButShareOneRecorder()",
+      "declarationLine": 600,
+      "snippets": 2,
+      "independentExpected": "Two dependency snapshots have distinct observers/one recorder with request-owned claim"
+    },
+    {
+      "testId": "WEBSERVICE022",
+      "caseRef": "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice022MalformedMapDuplicateTypeNeverOverwritesDependencies()",
+      "declarationLine": 639,
+      "snippets": 2,
+      "independentExpected": "Malformed duplicate-key entries rejected without overwrite"
+    }
+  ],
+  "originalRunRepeated": false,
+  "actualDatabaseOrLiveHttpQualified": false,
+  "caseSpecificCoverageMeasured": false,
+  "exactAllMethodCasesOrOracleComplete": false,
+  "productTestsExecuted": 0,
+  "newUniqueTests": 0,
+  "compilerOrJvmExecuted": false,
+  "actualBackendActions": 0,
+  "wholeG13Accepted": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "files": {
+    "method-oracle-relations.json": "e635fe28464b0867f067debc71a0bf1787e6ef7c84d0bd6309c42c84aa6c652b"
+  },
+  "tool": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/639_pool_webmetric_method_oracle_review.py",
+    "sha256": "f31bfd17939e32dccb1e87a8b0ce0f3f664d6e0eda5a4a89aab8a52f110c0efe"
+  }
+}

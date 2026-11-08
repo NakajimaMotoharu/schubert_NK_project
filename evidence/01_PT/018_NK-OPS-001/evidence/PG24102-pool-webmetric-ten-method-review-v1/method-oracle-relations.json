@@ -1,0 +1,662 @@
+[
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool",
+    "method": "<init>",
+    "descriptor": "()V",
+    "testIds": [
+      "OPS-POOL-OWN-001"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ApiPoolSourceOwnershipPortTest#poolOwn001FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen()"
+    ],
+    "oracleScope": "public stateless factory construction",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool.java",
+    "sourceSha256": "81d1ef1dcdd511e2bb7eae1bfdee58e50432edd2bca81ce6085aa344e57ce312",
+    "classSha256": "7a17f4f53c36252dd9a91905e71e1fa35300cceb2a0d8c2f0e46efa94d9bdc94",
+    "canonicalOwner": "WBS-P004-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001",
+      "AUT-002",
+      "MON-006"
+    ],
+    "uiRefs": [
+      "212",
+      "226",
+      "252",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+      }
+    ],
+    "remaining": [
+      "actual DB/driver admission/SQL/real HTTP/startup/native unqualified",
+      "WebMetric009 NOT_EXECUTED_HOLD and all22 not accepted; compile-only observation helper contributes0cases",
+      "owned SDK/memory tests are not server performance or same-source451 acceptance",
+      "percase method probe coverage not separately measured"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_POOL_OR_METRIC_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool",
+    "method": "open",
+    "descriptor": "(Ljavax/sql/DataSource;)Lcom/zaxxer/hikari/HikariDataSource;",
+    "testIds": [
+      "OPS-POOL-OWN-001"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.api.bootstrap.ApiPoolSourceOwnershipPortTest#poolOwn001FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen()"
+    ],
+    "oracleScope": "null/explicit limits/fail-fast, pool-owned connections close while caller DataSource retained",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool.java",
+    "sourceSha256": "81d1ef1dcdd511e2bb7eae1bfdee58e50432edd2bca81ce6085aa344e57ce312",
+    "classSha256": "7a17f4f53c36252dd9a91905e71e1fa35300cceb2a0d8c2f0e46efa94d9bdc94",
+    "canonicalOwner": "WBS-P004-05",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001",
+      "AUT-002",
+      "MON-006"
+    ],
+    "uiRefs": [
+      "212",
+      "226",
+      "252",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+      }
+    ],
+    "remaining": [
+      "actual DB/driver admission/SQL/real HTTP/startup/native unqualified",
+      "WebMetric009 NOT_EXECUTED_HOLD and all22 not accepted; compile-only observation helper contributes0cases",
+      "owned SDK/memory tests are not server performance or same-source451 acceptance",
+      "percase method probe coverage not separately measured"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_POOL_OR_METRIC_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool",
+    "method": "<init>",
+    "descriptor": "()V",
+    "testIds": [
+      "OPS-POOL-OWN-002"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.web.bootstrap.WebPoolSourceOwnershipPortTest#poolOwn002FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen()"
+    ],
+    "oracleScope": "public stateless factory construction",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebJdbcPool.java",
+    "sourceSha256": "a322547b005ea0a71e1beeaab971c2d4195e36657b440e0b449c6292bc316526",
+    "classSha256": "b2fd930a5feaf6398d7cf07575bb05e0c09fa0788f0fe72dd3e45c148b125c16",
+    "canonicalOwner": "WBS-P018-06",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001",
+      "AUT-002",
+      "MON-006"
+    ],
+    "uiRefs": [
+      "212",
+      "226",
+      "252",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+      }
+    ],
+    "remaining": [
+      "actual DB/driver admission/SQL/real HTTP/startup/native unqualified",
+      "WebMetric009 NOT_EXECUTED_HOLD and all22 not accepted; compile-only observation helper contributes0cases",
+      "owned SDK/memory tests are not server performance or same-source451 acceptance",
+      "percase method probe coverage not separately measured"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_POOL_OR_METRIC_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool",
+    "method": "open",
+    "descriptor": "(Ljavax/sql/DataSource;)Lcom/zaxxer/hikari/HikariDataSource;",
+    "testIds": [
+      "OPS-POOL-OWN-002"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.web.bootstrap.WebPoolSourceOwnershipPortTest#poolOwn002FailFastPoolsCloseOwnResourcesAndLeaveCallerSourceOpen()"
+    ],
+    "oracleScope": "null/explicit limits/fail-fast, pool-owned connections close while caller DataSource retained",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebJdbcPool.java",
+    "sourceSha256": "a322547b005ea0a71e1beeaab971c2d4195e36657b440e0b449c6292bc316526",
+    "classSha256": "b2fd930a5feaf6398d7cf07575bb05e0c09fa0788f0fe72dd3e45c148b125c16",
+    "canonicalOwner": "WBS-P018-06",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001",
+      "AUT-002",
+      "MON-006"
+    ],
+    "uiRefs": [
+      "212",
+      "226",
+      "252",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+      }
+    ],
+    "remaining": [
+      "actual DB/driver admission/SQL/real HTTP/startup/native unqualified",
+      "WebMetric009 NOT_EXECUTED_HOLD and all22 not accepted; compile-only observation helper contributes0cases",
+      "owned SDK/memory tests are not server performance or same-source451 acceptance",
+      "percase method probe coverage not separately measured"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_POOL_OR_METRIC_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding",
+    "method": "prepareContext",
+    "descriptor": "(Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/lang/Runnable;)Ldev/codex/schubert/nk/web/monitoring/WebMetricContext;",
+    "testIds": [
+      "WEBSERVICE002",
+      "WEBSERVICE003",
+      "WEBSERVICE004",
+      "WEBSERVICE007",
+      "WEBSERVICE008",
+      "WEBSERVICE010",
+      "WEBSERVICE011",
+      "WEBSERVICE012",
+      "WEBSERVICE013",
+      "WEBSERVICE021"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice002FactoryRejectsNullReferencesAndModeBeforeAcquisition()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice003StandardFactoryDoesNotReadAnyDetailedSupplierOrCreateObserver()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice004DebugCapturesOwnerBeforeSetupThenDefersStatisticsUntilRender()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice007TerminalIsRecordedOnceInSameCustomPayloadAsDatabase()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice008RedispatchAndConcurrentTerminalRetainRequestOwnedClaim()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice010PoolSupplierFailureOrNullNeverAcquiresConfigurationOrRetries()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice011ConfigurationSupplierFailureOrNullRetainsOriginalPrimaryAndPartialOwner()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice012DatabaseFailureNeverReturnsPartialTextOrReplaysHttpSuccess()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice013TerminalSignalFailureIsOriginalAndDoesNotTransferOwnership()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice021TwoDependencySnapshotsOwnDistinctObserversButShareOneRecorder()"
+    ],
+    "oracleScope": "resource-free ownership capture and lazy suppliers",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java",
+    "sourceSha256": "ee7591d71269a4238cdda10c5fbae3c7a61b37b8230f893776329e9d1df7ef64",
+    "classSha256": "632a4d99cbbc24242cf5f2ec31f187f37924b89cd1b5a222d617039e30b813e0",
+    "canonicalOwner": "WBS-P018-09",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001",
+      "AUT-002",
+      "MON-006"
+    ],
+    "uiRefs": [
+      "212",
+      "226",
+      "252",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+      }
+    ],
+    "remaining": [
+      "actual DB/driver admission/SQL/real HTTP/startup/native unqualified",
+      "WebMetric009 NOT_EXECUTED_HOLD and all22 not accepted; compile-only observation helper contributes0cases",
+      "owned SDK/memory tests are not server performance or same-source451 acceptance",
+      "percase method probe coverage not separately measured"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_POOL_OR_METRIC_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding",
+    "method": "<init>",
+    "descriptor": "(Lcom/zaxxer/hikari/HikariPoolMXBean;Lcom/zaxxer/hikari/HikariConfigMXBean;Lio/micrometer/core/instrument/MeterRegistry;Ljava/lang/String;Ljava/lang/Runnable;)V",
+    "testIds": [
+      "WEBSERVICE001",
+      "WEBSERVICE004",
+      "WEBSERVICE005",
+      "WEBSERVICE006",
+      "WEBSERVICE007",
+      "WEBSERVICE008",
+      "WEBSERVICE012",
+      "WEBSERVICE013",
+      "WEBSERVICE014",
+      "WEBSERVICE015",
+      "WEBSERVICE016",
+      "WEBSERVICE017",
+      "WEBSERVICE018",
+      "WEBSERVICE019",
+      "WEBSERVICE020",
+      "WEBSERVICE021",
+      "WEBSERVICE022"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice001ConstructorBoundariesRejectWithoutGetterOrInvalidModeSeries()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice004DebugCapturesOwnerBeforeSetupThenDefersStatisticsUntilRender()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice005IndependentObserversBorrowOneRetainedRecorderAndDatabaseRefresh()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice006StandaloneStandardObserverNeverCreatesDetailedSeries()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice007TerminalIsRecordedOnceInSameCustomPayloadAsDatabase()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice008RedispatchAndConcurrentTerminalRetainRequestOwnedClaim()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice012DatabaseFailureNeverReturnsPartialTextOrReplaysHttpSuccess()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice013TerminalSignalFailureIsOriginalAndDoesNotTransferOwnership()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice014QuiescentContextCloseReleasesOnlyOwnedSdkAndRejectsNewAccess()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice015EmptyDependenciesReceiveOneFreshObserverInImmutableCopy()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice016DependencySnapshotPreservesValueIdentityAndIgnoresLaterInputMutation()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice017NullMapEntryTypeAndValueNeverBecomeObserverDependencies()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice018TypeMismatchAndPrimitiveKeyAreRejectedWithoutInputChanges()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice019ExistingObserverIsNotReplacedOrRegisteredTwice()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice020DependencyProviderFailureIsOriginalAndNeverRetriedOrFormatted()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice021TwoDependencySnapshotsOwnDistinctObserversButShareOneRecorder()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice022MalformedMapDuplicateTypeNeverOverwritesDependencies()"
+    ],
+    "oracleScope": "borrowed DB metadata/retained recorder and terminal invariants",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java",
+    "sourceSha256": "ee7591d71269a4238cdda10c5fbae3c7a61b37b8230f893776329e9d1df7ef64",
+    "classSha256": "632a4d99cbbc24242cf5f2ec31f187f37924b89cd1b5a222d617039e30b813e0",
+    "canonicalOwner": "WBS-P018-09",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001",
+      "AUT-002",
+      "MON-006"
+    ],
+    "uiRefs": [
+      "212",
+      "226",
+      "252",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+      }
+    ],
+    "remaining": [
+      "actual DB/driver admission/SQL/real HTTP/startup/native unqualified",
+      "WebMetric009 NOT_EXECUTED_HOLD and all22 not accepted; compile-only observation helper contributes0cases",
+      "owned SDK/memory tests are not server performance or same-source451 acceptance",
+      "percase method probe coverage not separately measured"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_POOL_OR_METRIC_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding",
+    "method": "refresh",
+    "descriptor": "()V",
+    "testIds": [
+      "WEBSERVICE004",
+      "WEBSERVICE005",
+      "WEBSERVICE006",
+      "WEBSERVICE007",
+      "WEBSERVICE008",
+      "WEBSERVICE012",
+      "WEBSERVICE014",
+      "WEBSERVICE021"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice004DebugCapturesOwnerBeforeSetupThenDefersStatisticsUntilRender()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice005IndependentObserversBorrowOneRetainedRecorderAndDatabaseRefresh()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice006StandaloneStandardObserverNeverCreatesDetailedSeries()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice007TerminalIsRecordedOnceInSameCustomPayloadAsDatabase()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice008RedispatchAndConcurrentTerminalRetainRequestOwnedClaim()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice012DatabaseFailureNeverReturnsPartialTextOrReplaysHttpSuccess()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice014QuiescentContextCloseReleasesOnlyOwnedSdkAndRejectsNewAccess()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice021TwoDependencySnapshotsOwnDistinctObserversButShareOneRecorder()"
+    ],
+    "oracleScope": "read-only DB observation only; no HTTP success replay",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java",
+    "sourceSha256": "ee7591d71269a4238cdda10c5fbae3c7a61b37b8230f893776329e9d1df7ef64",
+    "classSha256": "632a4d99cbbc24242cf5f2ec31f187f37924b89cd1b5a222d617039e30b813e0",
+    "canonicalOwner": "WBS-P018-09",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001",
+      "AUT-002",
+      "MON-006"
+    ],
+    "uiRefs": [
+      "212",
+      "226",
+      "252",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+      }
+    ],
+    "remaining": [
+      "actual DB/driver admission/SQL/real HTTP/startup/native unqualified",
+      "WebMetric009 NOT_EXECUTED_HOLD and all22 not accepted; compile-only observation helper contributes0cases",
+      "owned SDK/memory tests are not server performance or same-source451 acceptance",
+      "percase method probe coverage not separately measured"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_POOL_OR_METRIC_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding",
+    "method": "createHttpObserver",
+    "descriptor": "()Ldev/codex/schubert/nk/web/monitoring/HttpMetricValve;",
+    "testIds": [
+      "WEBSERVICE005",
+      "WEBSERVICE006",
+      "WEBSERVICE007",
+      "WEBSERVICE008",
+      "WEBSERVICE012",
+      "WEBSERVICE013",
+      "WEBSERVICE015",
+      "WEBSERVICE016",
+      "WEBSERVICE019",
+      "WEBSERVICE021"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice005IndependentObserversBorrowOneRetainedRecorderAndDatabaseRefresh()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice006StandaloneStandardObserverNeverCreatesDetailedSeries()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice007TerminalIsRecordedOnceInSameCustomPayloadAsDatabase()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice008RedispatchAndConcurrentTerminalRetainRequestOwnedClaim()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice012DatabaseFailureNeverReturnsPartialTextOrReplaysHttpSuccess()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice013TerminalSignalFailureIsOriginalAndDoesNotTransferOwnership()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice015EmptyDependenciesReceiveOneFreshObserverInImmutableCopy()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice016DependencySnapshotPreservesValueIdentityAndIgnoresLaterInputMutation()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice019ExistingObserverIsNotReplacedOrRegisteredTwice()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice021TwoDependencySnapshotsOwnDistinctObserversButShareOneRecorder()"
+    ],
+    "oracleScope": "fresh pipeline-owned observer sharing recorder",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java",
+    "sourceSha256": "ee7591d71269a4238cdda10c5fbae3c7a61b37b8230f893776329e9d1df7ef64",
+    "classSha256": "632a4d99cbbc24242cf5f2ec31f187f37924b89cd1b5a222d617039e30b813e0",
+    "canonicalOwner": "WBS-P018-09",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001",
+      "AUT-002",
+      "MON-006"
+    ],
+    "uiRefs": [
+      "212",
+      "226",
+      "252",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+      }
+    ],
+    "remaining": [
+      "actual DB/driver admission/SQL/real HTTP/startup/native unqualified",
+      "WebMetric009 NOT_EXECUTED_HOLD and all22 not accepted; compile-only observation helper contributes0cases",
+      "owned SDK/memory tests are not server performance or same-source451 acceptance",
+      "percase method probe coverage not separately measured"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_POOL_OR_METRIC_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding",
+    "method": "withHttpObserver",
+    "descriptor": "(Ljava/util/Map;)Ljava/util/Map;",
+    "testIds": [
+      "WEBSERVICE015",
+      "WEBSERVICE016",
+      "WEBSERVICE017",
+      "WEBSERVICE018",
+      "WEBSERVICE019",
+      "WEBSERVICE020",
+      "WEBSERVICE021",
+      "WEBSERVICE022"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice015EmptyDependenciesReceiveOneFreshObserverInImmutableCopy()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice016DependencySnapshotPreservesValueIdentityAndIgnoresLaterInputMutation()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice017NullMapEntryTypeAndValueNeverBecomeObserverDependencies()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice018TypeMismatchAndPrimitiveKeyAreRejectedWithoutInputChanges()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice019ExistingObserverIsNotReplacedOrRegisteredTwice()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice020DependencyProviderFailureIsOriginalAndNeverRetriedOrFormatted()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice021TwoDependencySnapshotsOwnDistinctObserversButShareOneRecorder()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice022MalformedMapDuplicateTypeNeverOverwritesDependencies()"
+    ],
+    "oracleScope": "structural immutable typed copy; reject null/type/duplicate/existing observer/provider failures",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java",
+    "sourceSha256": "ee7591d71269a4238cdda10c5fbae3c7a61b37b8230f893776329e9d1df7ef64",
+    "classSha256": "632a4d99cbbc24242cf5f2ec31f187f37924b89cd1b5a222d617039e30b813e0",
+    "canonicalOwner": "WBS-P018-09",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001",
+      "AUT-002",
+      "MON-006"
+    ],
+    "uiRefs": [
+      "212",
+      "226",
+      "252",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+      }
+    ],
+    "remaining": [
+      "actual DB/driver admission/SQL/real HTTP/startup/native unqualified",
+      "WebMetric009 NOT_EXECUTED_HOLD and all22 not accepted; compile-only observation helper contributes0cases",
+      "owned SDK/memory tests are not server performance or same-source451 acceptance",
+      "percase method probe coverage not separately measured"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_POOL_OR_METRIC_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  },
+  {
+    "className": "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding",
+    "method": "lambda$prepareContext$0",
+    "descriptor": "(Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/lang/String;Ljava/lang/Runnable;Lio/micrometer/core/instrument/MeterRegistry;)Ldev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding;",
+    "testIds": [
+      "WEBSERVICE004",
+      "WEBSERVICE007",
+      "WEBSERVICE008",
+      "WEBSERVICE010",
+      "WEBSERVICE011",
+      "WEBSERVICE012",
+      "WEBSERVICE013",
+      "WEBSERVICE021"
+    ],
+    "runCases": [
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice004DebugCapturesOwnerBeforeSetupThenDefersStatisticsUntilRender()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice007TerminalIsRecordedOnceInSameCustomPayloadAsDatabase()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice008RedispatchAndConcurrentTerminalRetainRequestOwnedClaim()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice010PoolSupplierFailureOrNullNeverAcquiresConfigurationOrRetries()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice011ConfigurationSupplierFailureOrNullRetainsOriginalPrimaryAndPartialOwner()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice012DatabaseFailureNeverReturnsPartialTextOrReplaysHttpSuccess()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice013TerminalSignalFailureIsOriginalAndDoesNotTransferOwnership()",
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBindingTest#webservice021TwoDependencySnapshotsOwnDistinctObserversButShareOneRecorder()"
+    ],
+    "oracleScope": "ordered lazy pool/config acquisition and original failures",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java",
+    "sourceSha256": "ee7591d71269a4238cdda10c5fbae3c7a61b37b8230f893776329e9d1df7ef64",
+    "classSha256": "632a4d99cbbc24242cf5f2ec31f187f37924b89cd1b5a222d617039e30b813e0",
+    "canonicalOwner": "WBS-P018-09",
+    "requirementIds": [
+      "SYS-002",
+      "SYS-004",
+      "DAT-001",
+      "AUT-002",
+      "MON-006"
+    ],
+    "uiRefs": [
+      "212",
+      "226",
+      "252",
+      "253"
+    ],
+    "ssRefs": [
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "source": "42450b515b0737b4f519945e161cae93195e1edf",
+        "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+      }
+    ],
+    "remaining": [
+      "actual DB/driver admission/SQL/real HTTP/startup/native unqualified",
+      "WebMetric009 NOT_EXECUTED_HOLD and all22 not accepted; compile-only observation helper contributes0cases",
+      "owned SDK/memory tests are not server performance or same-source451 acceptance",
+      "percase method probe coverage not separately measured"
+    ],
+    "exactAllMethodCasesOrOracleComplete": false,
+    "reviewStatus": "EXPLICIT_POOL_OR_METRIC_METHOD_ORACLE_LINK_WITH_STATED_LIMITS",
+    "actualDatabaseOrLiveHttpQualified": false
+  }
+]
