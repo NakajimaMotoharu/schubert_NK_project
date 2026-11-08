@@ -1,0 +1,7 @@
+# 041 OwnedOutbox fixture有限化：原六成功・Source品質未達
+
+原whole六件をsource0dde9bec、Production7aed8eacで一回実行し終了0、failure/error/skipped/aborted0。24262の独立照合はaudit0だがcoverage gateは1。LINE65 covered/1 missed、METHOD9/0、CLASS1/0、BRANCH28/0、INSTRUCTION239/8。未達line76の正常dispatch復帰を追加課題BUG2524/YKT2258に記録し、全Source受入・正式認定は更新しない。
+
+BUG2523二latch5秒とexecutor close前releaseは元全token/oracleの独立逆変換で照合。PG24258で全九callbackがConnection返却前throwする制御を確認。PG24266は同execの補助counterでRepo/Sender constructorのみ、retainFailure未測定。これはzero-probeだけの無呼出証明ではない。held四初期化0/実backend操作0。静的rawPMD18は個別非適用、適用違反0・Checkstyle0。
+
+command・OS/JDK・source/input/hash・caseと時間・原終了・一exec・全counterはPG24262の公開manifest/testcases.safe.xml/coverage.xmlに固定。manifest SHA256: 457cca3e3ce7e9bafbbe19e2b82029b1962eba73852b202aa6f1eebbfa4be9c6。PG24264は修正前不足、PG24266は補助範囲。原六を再演せず正常系の既証拠を先に照合する。新unique・正式・工数率の加算0。

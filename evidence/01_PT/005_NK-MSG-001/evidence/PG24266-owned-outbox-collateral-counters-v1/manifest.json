@@ -1,0 +1,198 @@
+{
+  "actualExit": 0,
+  "stage": {
+    "actualExit": 0,
+    "timedOut": false,
+    "startUTC": "2026-11-08T09:55:24.418465+00:00",
+    "endUTC": "2026-11-08T09:55:24.583384+00:00",
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "report",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24260-owned-outbox-bounded-six-unit-v1/jacoco.exec",
+      "--classfiles",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24266-owned-outbox-collateral-counters-v1/component",
+      "--xml",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg24266-owned-outbox-collateral-counters-v1/coverage.xml"
+    ],
+    "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+    "stdoutSha256": "f677696cc97ef372b5ecc72e18e37ad6330a8c05b484b3844c69eea435cf5952",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "sourceProductionMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "unitExecSha256": "5c7d52533ac5cf885f73d96b071d44698c371e37d632c149e414a98c38716126",
+  "physical": {
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher": "f560db2965e10e913f5d68bceb094f09f573faa5938e4505fd7ddf75e58a4305",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository": "d49dcec8e24914880a8ac9e6ec40057f6fe5ce6fdd18f91541a4468f9a871937",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender": "9b98ae5254f5c137fe5122ac398c4a979616f1f848122a2d4ed33effb999aea1",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender$1": "0e0741ee9a82cb23c8f02d8d6842d8cb8b342e405306c845401b97a688f698c9",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry": "77bd77847b2982a31891137646c7aeebdd677b57f2d1d6193d1e4315cb6f072f"
+  },
+  "methodsWithMeasuredCoverage": {
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry": [
+      {
+        "name": "requireLeaseOwner",
+        "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+        "counters": {
+          "INSTRUCTION": {
+            "covered": 18,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 4,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 4,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 3,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 1,
+            "missed": 0
+          }
+        }
+      }
+    ],
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender": [
+      {
+        "name": "<init>",
+        "descriptor": "()V",
+        "counters": {
+          "INSTRUCTION": {
+            "covered": 3,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 1,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 1,
+            "missed": 0
+          }
+        }
+      }
+    ],
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ljava/util/function/IntSupplier;)V",
+        "counters": {
+          "INSTRUCTION": {
+            "covered": 9,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 3,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 1,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 1,
+            "missed": 0
+          }
+        }
+      }
+    ],
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender$1": [],
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/api/messaging/outbound/SqlConnectionProvider;Ldev/codex/schubert/nk/api/messaging/outbound/TransactedJmsContextProvider;Ldev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository;Ldev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender;Ljava/time/Clock;)V",
+        "counters": {
+          "INSTRUCTION": {
+            "covered": 33,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 7,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 1,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 1,
+            "missed": 0
+          }
+        }
+      },
+      {
+        "name": "dispatch",
+        "descriptor": "(Ljava/lang/String;I)Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport;",
+        "counters": {
+          "INSTRUCTION": {
+            "covered": 3,
+            "missed": 67
+          },
+          "BRANCH": {
+            "covered": 0,
+            "missed": 6
+          },
+          "LINE": {
+            "covered": 1,
+            "missed": 18
+          },
+          "COMPLEXITY": {
+            "covered": 1,
+            "missed": 3
+          },
+          "METHOD": {
+            "covered": 1,
+            "missed": 0
+          }
+        }
+      },
+      {
+        "name": "preserveFatal",
+        "descriptor": "(Ljava/lang/Throwable;)V",
+        "counters": {
+          "INSTRUCTION": {
+            "covered": 80,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 15,
+            "missed": 1
+          },
+          "LINE": {
+            "covered": 18,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 8,
+            "missed": 1
+          },
+          "METHOD": {
+            "covered": 1,
+            "missed": 0
+          }
+        }
+      }
+    ]
+  },
+  "repositoryAndSenderMeasuredConstructorOnly": true,
+  "senderSwitchUnexecuted": true,
+  "entryOnlyScalarLeaseOwnerMeasured": true,
+  "retainFailureNotMeasured": true,
+  "scope": "Collateral counters only, not full Source qualification or proof that a zero probe implies no call. Source control and class initialization/probe checks are independent.",
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "files": {
+    "coverage.xml": "9855e9b0e7acaed8e87d0483858b5d185636126f72d11d1a00c6c5179293a421"
+  }
+}
