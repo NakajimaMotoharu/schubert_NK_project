@@ -22,6 +22,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
@@ -246,30 +247,35 @@ class AsyncJobMetricRecorderTest {
   @Test
   void asyncGauge007ParallelSnapshotsRemainCompleteWithoutCrossOwnerOrSeriesGrowth()
       throws Exception {
-    try (var registry = new Registry();
-        var pool = Executors.newFixedThreadPool(8)) {
-      var recorder = new AsyncJobMetricRecorder(registry, DEBUG_MODE);
-      var first = new Snapshot(values(1, 2, 3, 4, 5));
-      var second = new Snapshot(values(10, 20, 30, 40, 50));
-      recorder.record(first);
-      var jobs =
-          java.util.stream.IntStream.range(0, 64)
-              .<Callable<Boolean>>mapToObj(
-                  i ->
-                      () -> {
-                        recorder.record(i % 2 == 0 ? first : second);
-                        var read = recorder.snapshot().orElseThrow();
-                        return read == first || read == second;
-                      })
-              .toList();
-      for (var result : pool.invokeAll(jobs)) assertTrue(result.get());
-      assertEquals(15, first.totalJobs());
-      recorder.record(second);
-      assertSame(second, recorder.snapshot().orElseThrow());
-      double[] expected = {10, 20, 30, 40, 50};
-      for (int i = 0; i < STATES.length; i++)
-        assertEquals(expected[i], gauge(registry, STATES[i]), 0.0);
-      shape(registry);
+    try (var registry = new Registry()) {
+      var pool = Executors.newFixedThreadPool(8);
+      try {
+        var recorder = new AsyncJobMetricRecorder(registry, DEBUG_MODE);
+        var first = new Snapshot(values(1, 2, 3, 4, 5));
+        var second = new Snapshot(values(10, 20, 30, 40, 50));
+        recorder.record(first);
+        var jobs =
+            java.util.stream.IntStream.range(0, 64)
+                .<Callable<Boolean>>mapToObj(
+                    i ->
+                        () -> {
+                          recorder.record(i % 2 == 0 ? first : second);
+                          var read = recorder.snapshot().orElseThrow();
+                          return read == first || read == second;
+                        })
+                .toList();
+        for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS)) assertTrue(result.get());
+        assertEquals(15, first.totalJobs());
+        recorder.record(second);
+        assertSame(second, recorder.snapshot().orElseThrow());
+        double[] expected = {10, 20, 30, 40, 50};
+        for (int i = 0; i < STATES.length; i++)
+          assertEquals(expected[i], gauge(registry, STATES[i]), 0.0);
+        shape(registry);
+      } finally {
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
+      }
     }
   }
 

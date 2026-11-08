@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
@@ -276,8 +277,13 @@ class MqRedeliveryMetricRecorderTest {
               recorder.recordDelivery(BrokerTopology.ASYNC_WORK, 3);
               return "counted";
             });
-      try (var pool = Executors.newFixedThreadPool(8)) {
-        for (var result : pool.invokeAll(tasks)) assertEquals("counted", result.get());
+      var pool = Executors.newFixedThreadPool(8);
+      try {
+        for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS))
+          assertEquals("counted", result.get());
+      } finally {
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
       assertEquals(64, count(registry, ASYNC_WORK_ADDRESS, "3"));
       assertEquals(0, count(other, ASYNC_WORK_ADDRESS, "3"));

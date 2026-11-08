@@ -1,0 +1,199 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T08:28:54.832634+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorderTest.java",
+      "originalSha256": "714b91b3dd34aed6cc3379bf02d161f6f12f0216bffbb9859822efb4ee5aa3d6",
+      "currentSha256": "cf19ee6c2da449b328b1d30c397e66b4b84067229d3b059f09ae14597657ef03",
+      "originalWholeBodiesExactlyRestored": true,
+      "ownerShape": "combined"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java",
+      "originalSha256": "2df45629cb9f8af472a66723a168992afd7c2ad4854c2da8ba0df53ae3da28a0",
+      "currentSha256": "cb25bb1e985ab725d5d9a0c143b73dfd4ca116cc0ce5878ba70a8eacf9deea19",
+      "originalWholeBodiesExactlyRestored": true,
+      "ownerShape": "standalone"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorderTest.java",
+      "originalSha256": "9178a2a5c5f03d93bfc39d81e986f411ec9c188d385ebfbf2f62545134688cfd",
+      "currentSha256": "13992da2668f5b6d388cad7cc0d072d3c7ed1c7d1f507e0fe0cded6d8a5092af",
+      "originalWholeBodiesExactlyRestored": true,
+      "ownerShape": "combined"
+    }
+  ],
+  "originalWholeCases": 24,
+  "rawFindings": 17,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 3,
+  "finiteOwnerSitesCorrected": 3,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25282-api-supplied-owner-prepare-v1/manifest.json",
+    "sha256": "5330f0c5053019aef4dfb0c26ff04ae941e9bfeec080d7386a50a519f7237389"
+  },
+  "classifications": [
+    {
+      "className": "AsyncJobMetricRecorderTest",
+      "method": "asyncGauge007ParallelSnapshotsRemainCompleteWithoutCrossOwnerOrSeriesGrowth",
+      "variable": "pool",
+      "line": 251,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "AsyncJobMetricRecorderTest",
+      "method": "asyncGauge007ParallelSnapshotsRemainCompleteWithoutCrossOwnerOrSeriesGrowth",
+      "variable": "pool",
+      "line": 251,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "AsyncJobMetricRecorderTest",
+      "method": "asyncGauge007ParallelSnapshotsRemainCompleteWithoutCrossOwnerOrSeriesGrowth",
+      "variable": null,
+      "line": 264,
+      "rule": "CompareObjectsWithEquals",
+      "applicable": false,
+      "basis": "Identity is the independent atomic snapshot cohort oracle: read == first || read == second. Value equals would weaken the required whole-object publication test."
+    },
+    {
+      "className": "AsyncJobMetricRecorderTest",
+      "method": "asyncGauge007ParallelSnapshotsRemainCompleteWithoutCrossOwnerOrSeriesGrowth",
+      "variable": null,
+      "line": 264,
+      "rule": "CompareObjectsWithEquals",
+      "applicable": false,
+      "basis": "Identity is the independent atomic snapshot cohort oracle: read == first || read == second. Value equals would weaken the required whole-object publication test."
+    },
+    {
+      "className": "AsyncJobMetricRecorderTest",
+      "method": "asyncGauge007ParallelSnapshotsRemainCompleteWithoutCrossOwnerOrSeriesGrowth",
+      "variable": null,
+      "line": 267,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "AsyncJobMetricRecorderTest",
+      "method": "asyncGauge007ParallelSnapshotsRemainCompleteWithoutCrossOwnerOrSeriesGrowth",
+      "variable": null,
+      "line": 276,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "AsyncJobMetricRecorderTest",
+      "method": "asyncGauge007ParallelSnapshotsRemainCompleteWithoutCrossOwnerOrSeriesGrowth",
+      "variable": null,
+      "line": 277,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "MqRedeliveryMetricRecorderTest",
+      "method": "mqRedel007ConcurrentSamePairAndSeparateOwnerHaveExactIndependentCounts",
+      "variable": "pool",
+      "line": 280,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "MqRedeliveryMetricRecorderTest",
+      "method": "mqRedel007ConcurrentSamePairAndSeparateOwnerHaveExactIndependentCounts",
+      "variable": "pool",
+      "line": 280,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "MqRedeliveryMetricRecorderTest",
+      "method": "mqRedel007ConcurrentSamePairAndSeparateOwnerHaveExactIndependentCounts",
+      "variable": null,
+      "line": 282,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "MqRedeliveryMetricRecorderTest",
+      "method": "mqRedel007ConcurrentSamePairAndSeparateOwnerHaveExactIndependentCounts",
+      "variable": null,
+      "line": 285,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "MqRedeliveryMetricRecorderTest",
+      "method": "mqRedel007ConcurrentSamePairAndSeparateOwnerHaveExactIndependentCounts",
+      "variable": null,
+      "line": 286,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "OperationMismatchMetricRecorderTest",
+      "method": "opMis007ParallelObservationsHaveExactCountsWithoutCardinalityGrowth",
+      "variable": "executor",
+      "line": 254,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "OperationMismatchMetricRecorderTest",
+      "method": "opMis007ParallelObservationsHaveExactCountsWithoutCardinalityGrowth",
+      "variable": "executor",
+      "line": 254,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "OperationMismatchMetricRecorderTest",
+      "method": "opMis007ParallelObservationsHaveExactCountsWithoutCardinalityGrowth",
+      "variable": null,
+      "line": 266,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "OperationMismatchMetricRecorderTest",
+      "method": "opMis007ParallelObservationsHaveExactCountsWithoutCardinalityGrowth",
+      "variable": null,
+      "line": 271,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    },
+    {
+      "className": "OperationMismatchMetricRecorderTest",
+      "method": "opMis007ParallelObservationsHaveExactCountsWithoutCardinalityGrowth",
+      "variable": null,
+      "line": 272,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit-owned8workers/64tasks; invokeAll10 andsinglefinally shutdownNow/await10 before borrowedregistryTWR ends. No container-managed worker."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}
