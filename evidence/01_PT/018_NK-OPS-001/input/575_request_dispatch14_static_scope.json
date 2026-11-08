@@ -1,0 +1,301 @@
+{
+  "groupId": "PGPT-SCENARIO-MEDIA14-DISPATCH-STATIC-PT-DESIGN-20261108",
+  "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "observerHead": "04bddaf1faabca5a2a322d713a18f68f29530e6c",
+  "sources": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+      "sha256": "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a",
+      "domain": "SCN"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+      "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a",
+      "domain": "MED"
+    }
+  ],
+  "authority": [
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d",
+      "authority": "origin/main"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c",
+      "authority": "origin/main"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "authority": "origin/main"
+    }
+  ],
+  "cases": [
+    {
+      "id": "STATIC-SCN-DISPATCH-01",
+      "domain": "SCN",
+      "layout": "GAMREQ01",
+      "kind": "GAMES",
+      "repositoryMethod": "games",
+      "requestDto": null,
+      "projection": "Inline",
+      "canonicalOrderedFields": [],
+      "dynamicStatus": "NOT_EXECUTED_HOLD",
+      "staticReviewStatus": "PENDING",
+      "queryConnection": "BORROWED_CALLER_OWNED",
+      "transactionOwner": "OUTER_APPLICATION_SERVICE",
+      "actualDbProven": false,
+      "ptPass": false
+    },
+    {
+      "id": "STATIC-SCN-DISPATCH-02",
+      "domain": "SCN",
+      "layout": "SPKREQ01",
+      "kind": "SPEAKERS",
+      "repositoryMethod": "speakers",
+      "requestDto": "SpeakerListRequestData",
+      "projection": "Inline",
+      "canonicalOrderedFields": [
+        "gameCode/X1?"
+      ],
+      "dynamicStatus": "NOT_EXECUTED_HOLD",
+      "staticReviewStatus": "PENDING",
+      "queryConnection": "BORROWED_CALLER_OWNED",
+      "transactionOwner": "OUTER_APPLICATION_SERVICE",
+      "actualDbProven": false,
+      "ptPass": false
+    },
+    {
+      "id": "STATIC-SCN-DISPATCH-03",
+      "domain": "SCN",
+      "layout": "RTEREQ01",
+      "kind": "ROUTES",
+      "repositoryMethod": "routes",
+      "requestDto": "RouteListRequestData",
+      "projection": "Inline",
+      "canonicalOrderedFields": [
+        "gameCode/X1"
+      ],
+      "dynamicStatus": "NOT_EXECUTED_HOLD",
+      "staticReviewStatus": "PENDING",
+      "queryConnection": "BORROWED_CALLER_OWNED",
+      "transactionOwner": "OUTER_APPLICATION_SERVICE",
+      "actualDbProven": false,
+      "ptPass": false
+    },
+    {
+      "id": "STATIC-SCN-DISPATCH-04",
+      "domain": "SCN",
+      "layout": "SCFREQ01",
+      "kind": "FILES",
+      "repositoryMethod": "files",
+      "requestDto": "ScenarioFileListRequestData",
+      "projection": "Inline",
+      "canonicalOrderedFields": [
+        "gameCode/X1",
+        "prefix/N1"
+      ],
+      "dynamicStatus": "NOT_EXECUTED_HOLD",
+      "staticReviewStatus": "PENDING",
+      "queryConnection": "BORROWED_CALLER_OWNED",
+      "transactionOwner": "OUTER_APPLICATION_SERVICE",
+      "actualDbProven": false,
+      "ptPass": false
+    },
+    {
+      "id": "STATIC-SCN-DISPATCH-05",
+      "domain": "SCN",
+      "layout": "SRCREQ01",
+      "kind": "SEARCH",
+      "repositoryMethod": "search",
+      "requestDto": "ScenarioSearchRequestData",
+      "projection": "Inline",
+      "canonicalOrderedFields": [
+        "bodyKeyword/X1?",
+        "gameCode/X1?",
+        "speakerName/X1?",
+        "chapterTitle/X1?",
+        "entryType/X1?",
+        "voiceCondition/X1?",
+        "page/N1",
+        "pageSize/N1"
+      ],
+      "dynamicStatus": "NOT_EXECUTED_HOLD",
+      "staticReviewStatus": "PENDING",
+      "queryConnection": "BORROWED_CALLER_OWNED",
+      "transactionOwner": "OUTER_APPLICATION_SERVICE",
+      "actualDbProven": false,
+      "ptPass": false
+    },
+    {
+      "id": "STATIC-SCN-DISPATCH-06",
+      "domain": "SCN",
+      "layout": "SCNREQ01",
+      "kind": "DETAIL",
+      "repositoryMethod": "detail",
+      "requestDto": "ScenarioDetailRequestData",
+      "projection": "Detail",
+      "canonicalOrderedFields": [
+        "scriptFileId/N1"
+      ],
+      "dynamicStatus": "NOT_EXECUTED_HOLD",
+      "staticReviewStatus": "PENDING",
+      "queryConnection": "BORROWED_CALLER_OWNED",
+      "transactionOwner": "OUTER_APPLICATION_SERVICE",
+      "actualDbProven": false,
+      "ptPass": false
+    },
+    {
+      "id": "STATIC-MED-DISPATCH-07",
+      "domain": "MED",
+      "layout": "AUDREQ01",
+      "kind": "AUDIO",
+      "repositoryMethod": "audioMetadata",
+      "requestDto": "AudioDescriptorRequestData",
+      "projection": "DIRECT_OPTIONAL",
+      "canonicalOrderedFields": [
+        "audioId/N1",
+        "disposition/X1"
+      ],
+      "dynamicStatus": "NOT_EXECUTED_HOLD",
+      "staticReviewStatus": "PENDING",
+      "queryConnection": "BORROWED_CALLER_OWNED",
+      "transactionOwner": "OUTER_APPLICATION_SERVICE",
+      "actualDbProven": false,
+      "ptPass": false
+    },
+    {
+      "id": "STATIC-MED-DISPATCH-08",
+      "domain": "MED",
+      "layout": "ANMREQ01",
+      "kind": "MENU",
+      "repositoryMethod": "animationMenu",
+      "requestDto": null,
+      "projection": "PRESENT_OPTIONAL",
+      "canonicalOrderedFields": [],
+      "dynamicStatus": "NOT_EXECUTED_HOLD",
+      "staticReviewStatus": "PENDING",
+      "queryConnection": "BORROWED_CALLER_OWNED",
+      "transactionOwner": "OUTER_APPLICATION_SERVICE",
+      "actualDbProven": false,
+      "ptPass": false
+    },
+    {
+      "id": "STATIC-MED-DISPATCH-09",
+      "domain": "MED",
+      "layout": "ANLREQ01",
+      "kind": "ANIMATION",
+      "repositoryMethod": "animationList",
+      "requestDto": "AnimationListRequestData",
+      "projection": "PRESENT_OPTIONAL",
+      "canonicalOrderedFields": [
+        "category/X1"
+      ],
+      "dynamicStatus": "NOT_EXECUTED_HOLD",
+      "staticReviewStatus": "PENDING",
+      "queryConnection": "BORROWED_CALLER_OWNED",
+      "transactionOwner": "OUTER_APPLICATION_SERVICE",
+      "actualDbProven": false,
+      "ptPass": false
+    },
+    {
+      "id": "STATIC-MED-DISPATCH-10",
+      "domain": "MED",
+      "layout": "VIDREQ01",
+      "kind": "VIDEO",
+      "repositoryMethod": "videoMetadata",
+      "requestDto": "VideoDescriptorRequestData",
+      "projection": "DIRECT_OPTIONAL",
+      "canonicalOrderedFields": [
+        "videoId/X1"
+      ],
+      "dynamicStatus": "NOT_EXECUTED_HOLD",
+      "staticReviewStatus": "PENDING",
+      "queryConnection": "BORROWED_CALLER_OWNED",
+      "transactionOwner": "OUTER_APPLICATION_SERVICE",
+      "actualDbProven": false,
+      "ptPass": false
+    },
+    {
+      "id": "STATIC-MED-DISPATCH-11",
+      "domain": "MED",
+      "layout": "MCTREQ01",
+      "kind": "CATEGORIES",
+      "repositoryMethod": "musicCategories",
+      "requestDto": null,
+      "projection": "PRESENT_OPTIONAL",
+      "canonicalOrderedFields": [],
+      "dynamicStatus": "NOT_EXECUTED_HOLD",
+      "staticReviewStatus": "PENDING",
+      "queryConnection": "BORROWED_CALLER_OWNED",
+      "transactionOwner": "OUTER_APPLICATION_SERVICE",
+      "actualDbProven": false,
+      "ptPass": false
+    },
+    {
+      "id": "STATIC-MED-DISPATCH-12",
+      "domain": "MED",
+      "layout": "MCSREQ01",
+      "kind": "SECTIONS",
+      "repositoryMethod": "musicSections",
+      "requestDto": "MusicSectionRequestData",
+      "projection": "PRESENT_OPTIONAL",
+      "canonicalOrderedFields": [
+        "category/X1"
+      ],
+      "dynamicStatus": "NOT_EXECUTED_HOLD",
+      "staticReviewStatus": "PENDING",
+      "queryConnection": "BORROWED_CALLER_OWNED",
+      "transactionOwner": "OUTER_APPLICATION_SERVICE",
+      "actualDbProven": false,
+      "ptPass": false
+    },
+    {
+      "id": "STATIC-MED-DISPATCH-13",
+      "domain": "MED",
+      "layout": "MTRREQ01",
+      "kind": "TRACKS",
+      "repositoryMethod": "musicTracks",
+      "requestDto": "MusicTrackRequestData",
+      "projection": "PRESENT_OPTIONAL",
+      "canonicalOrderedFields": [
+        "category/X1",
+        "section/X1"
+      ],
+      "dynamicStatus": "NOT_EXECUTED_HOLD",
+      "staticReviewStatus": "PENDING",
+      "queryConnection": "BORROWED_CALLER_OWNED",
+      "transactionOwner": "OUTER_APPLICATION_SERVICE",
+      "actualDbProven": false,
+      "ptPass": false
+    },
+    {
+      "id": "STATIC-MED-DISPATCH-14",
+      "domain": "MED",
+      "layout": "MEDREQ01",
+      "kind": "MUSIC",
+      "repositoryMethod": "musicMetadata",
+      "requestDto": "MusicDescriptorRequestData",
+      "projection": "DIRECT_OPTIONAL",
+      "canonicalOrderedFields": [
+        "trackId/X1",
+        "disposition/X1"
+      ],
+      "dynamicStatus": "NOT_EXECUTED_HOLD",
+      "staticReviewStatus": "PENDING",
+      "queryConnection": "BORROWED_CALLER_OWNED",
+      "transactionOwner": "OUTER_APPLICATION_SERVICE",
+      "actualDbProven": false,
+      "ptPass": false
+    }
+  ],
+  "actualOperationsAuthorized": false,
+  "sourceReadAsDataOnly": true,
+  "expectedStaticCases": 14,
+  "expectedDynamicTests": 0,
+  "normalIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json",
+    "sha256": "db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723"
+  }
+}

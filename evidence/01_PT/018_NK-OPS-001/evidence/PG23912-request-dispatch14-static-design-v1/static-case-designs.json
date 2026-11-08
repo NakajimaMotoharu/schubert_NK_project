@@ -1,0 +1,497 @@
+[
+  {
+    "id": "STATIC-SCN-DISPATCH-01",
+    "domain": "SCN",
+    "layout": "GAMREQ01",
+    "kind": "GAMES",
+    "repositoryMethod": "games",
+    "requestDto": null,
+    "projection": "Inline",
+    "canonicalOrderedFields": [],
+    "dynamicStatus": "NOT_EXECUTED_HOLD",
+    "staticReviewStatus": "STATIC_PT_DESIGN_REVIEW_COMPLETE",
+    "queryConnection": "BORROWED_CALLER_OWNED",
+    "transactionOwner": "OUTER_APPLICATION_SERVICE",
+    "actualDbProven": false,
+    "ptPass": false,
+    "sourceReference": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+      "sha256": "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a",
+      "domain": "SCN"
+    },
+    "querySnippetSha256": "a750d638de49e7441189ae3118ae9f4cf3440b98d7f2fded7295e0b314883482",
+    "canonicalSnippetSha256": "7de63943f816150539a38e8b38f2d053ceeb474fbecdfa40f4005f20f2060fbe",
+    "responseLayout": "GAMRSP01",
+    "plannedNegativeCases": [
+      "null repository",
+      "null connection",
+      "null actor",
+      "repository SQL/Runtime/Error propagation",
+      "no borrowed connection lifecycle transfer"
+    ],
+    "dynamicExceptionBehaviorProven": false,
+    "residualRisk": "Actual SQL/driver rows/transaction/null/failure graph/concurrency/resend and response publication remain NOT_EXECUTED_HOLD; static dispatch matching is not dynamic acceptance."
+  },
+  {
+    "id": "STATIC-SCN-DISPATCH-02",
+    "domain": "SCN",
+    "layout": "SPKREQ01",
+    "kind": "SPEAKERS",
+    "repositoryMethod": "speakers",
+    "requestDto": "SpeakerListRequestData",
+    "projection": "Inline",
+    "canonicalOrderedFields": [
+      "gameCode/X1?"
+    ],
+    "dynamicStatus": "NOT_EXECUTED_HOLD",
+    "staticReviewStatus": "STATIC_PT_DESIGN_REVIEW_COMPLETE",
+    "queryConnection": "BORROWED_CALLER_OWNED",
+    "transactionOwner": "OUTER_APPLICATION_SERVICE",
+    "actualDbProven": false,
+    "ptPass": false,
+    "sourceReference": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+      "sha256": "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a",
+      "domain": "SCN"
+    },
+    "querySnippetSha256": "77bcfec5783aa9f48423a10bddceabd3695a45ed7cbf702f1c6756495135614b",
+    "canonicalSnippetSha256": "9198ffcf85356fccc3b3a687d4dc2a5d2e62a35382ba0b2885b034f1472d3fe5",
+    "responseLayout": "SPKRSP01",
+    "plannedNegativeCases": [
+      "null repository",
+      "null connection",
+      "null actor",
+      "repository SQL/Runtime/Error propagation",
+      "no borrowed connection lifecycle transfer"
+    ],
+    "dynamicExceptionBehaviorProven": false,
+    "residualRisk": "Actual SQL/driver rows/transaction/null/failure graph/concurrency/resend and response publication remain NOT_EXECUTED_HOLD; static dispatch matching is not dynamic acceptance."
+  },
+  {
+    "id": "STATIC-SCN-DISPATCH-03",
+    "domain": "SCN",
+    "layout": "RTEREQ01",
+    "kind": "ROUTES",
+    "repositoryMethod": "routes",
+    "requestDto": "RouteListRequestData",
+    "projection": "Inline",
+    "canonicalOrderedFields": [
+      "gameCode/X1"
+    ],
+    "dynamicStatus": "NOT_EXECUTED_HOLD",
+    "staticReviewStatus": "STATIC_PT_DESIGN_REVIEW_COMPLETE",
+    "queryConnection": "BORROWED_CALLER_OWNED",
+    "transactionOwner": "OUTER_APPLICATION_SERVICE",
+    "actualDbProven": false,
+    "ptPass": false,
+    "sourceReference": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+      "sha256": "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a",
+      "domain": "SCN"
+    },
+    "querySnippetSha256": "e0c2b25aa709b261fe472e0893e77cb1ec1d83d5fb7ead0b0683ff4c61e9ff28",
+    "canonicalSnippetSha256": "0d53da0787a988fce0410a515700336b4e27b73f6cb62f12d466f5d06030b5ec",
+    "responseLayout": "RTERSP01",
+    "plannedNegativeCases": [
+      "null repository",
+      "null connection",
+      "null actor",
+      "repository SQL/Runtime/Error propagation",
+      "no borrowed connection lifecycle transfer"
+    ],
+    "dynamicExceptionBehaviorProven": false,
+    "residualRisk": "Actual SQL/driver rows/transaction/null/failure graph/concurrency/resend and response publication remain NOT_EXECUTED_HOLD; static dispatch matching is not dynamic acceptance."
+  },
+  {
+    "id": "STATIC-SCN-DISPATCH-04",
+    "domain": "SCN",
+    "layout": "SCFREQ01",
+    "kind": "FILES",
+    "repositoryMethod": "files",
+    "requestDto": "ScenarioFileListRequestData",
+    "projection": "Inline",
+    "canonicalOrderedFields": [
+      "gameCode/X1",
+      "prefix/N1"
+    ],
+    "dynamicStatus": "NOT_EXECUTED_HOLD",
+    "staticReviewStatus": "STATIC_PT_DESIGN_REVIEW_COMPLETE",
+    "queryConnection": "BORROWED_CALLER_OWNED",
+    "transactionOwner": "OUTER_APPLICATION_SERVICE",
+    "actualDbProven": false,
+    "ptPass": false,
+    "sourceReference": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+      "sha256": "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a",
+      "domain": "SCN"
+    },
+    "querySnippetSha256": "e4219c35784f6231b21e2215aadd1a42a7ab69a2f0d6a730005f83794691f484",
+    "canonicalSnippetSha256": "5365c1e5f73510617055614d921de1454d3ddc29ebf204d904b8c1a64a9233b0",
+    "responseLayout": "SCFRSP01",
+    "plannedNegativeCases": [
+      "null repository",
+      "null connection",
+      "null actor",
+      "repository SQL/Runtime/Error propagation",
+      "no borrowed connection lifecycle transfer"
+    ],
+    "dynamicExceptionBehaviorProven": false,
+    "residualRisk": "Actual SQL/driver rows/transaction/null/failure graph/concurrency/resend and response publication remain NOT_EXECUTED_HOLD; static dispatch matching is not dynamic acceptance."
+  },
+  {
+    "id": "STATIC-SCN-DISPATCH-05",
+    "domain": "SCN",
+    "layout": "SRCREQ01",
+    "kind": "SEARCH",
+    "repositoryMethod": "search",
+    "requestDto": "ScenarioSearchRequestData",
+    "projection": "Inline",
+    "canonicalOrderedFields": [
+      "bodyKeyword/X1?",
+      "gameCode/X1?",
+      "speakerName/X1?",
+      "chapterTitle/X1?",
+      "entryType/X1?",
+      "voiceCondition/X1?",
+      "page/N1",
+      "pageSize/N1"
+    ],
+    "dynamicStatus": "NOT_EXECUTED_HOLD",
+    "staticReviewStatus": "STATIC_PT_DESIGN_REVIEW_COMPLETE",
+    "queryConnection": "BORROWED_CALLER_OWNED",
+    "transactionOwner": "OUTER_APPLICATION_SERVICE",
+    "actualDbProven": false,
+    "ptPass": false,
+    "sourceReference": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+      "sha256": "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a",
+      "domain": "SCN"
+    },
+    "querySnippetSha256": "8fe331cb57c6c3349b9e44cbf3d37bb65e483f2119a01ea37f84a801e70a9bbe",
+    "canonicalSnippetSha256": "22633fee7cc26695df4781f6385850e1fe1468481f00cca03d84059d333c6f23",
+    "responseLayout": "SRCRSP01",
+    "plannedNegativeCases": [
+      "null repository",
+      "null connection",
+      "null actor",
+      "repository SQL/Runtime/Error propagation",
+      "no borrowed connection lifecycle transfer"
+    ],
+    "dynamicExceptionBehaviorProven": false,
+    "residualRisk": "Actual SQL/driver rows/transaction/null/failure graph/concurrency/resend and response publication remain NOT_EXECUTED_HOLD; static dispatch matching is not dynamic acceptance."
+  },
+  {
+    "id": "STATIC-SCN-DISPATCH-06",
+    "domain": "SCN",
+    "layout": "SCNREQ01",
+    "kind": "DETAIL",
+    "repositoryMethod": "detail",
+    "requestDto": "ScenarioDetailRequestData",
+    "projection": "Detail",
+    "canonicalOrderedFields": [
+      "scriptFileId/N1"
+    ],
+    "dynamicStatus": "NOT_EXECUTED_HOLD",
+    "staticReviewStatus": "STATIC_PT_DESIGN_REVIEW_COMPLETE",
+    "queryConnection": "BORROWED_CALLER_OWNED",
+    "transactionOwner": "OUTER_APPLICATION_SERVICE",
+    "actualDbProven": false,
+    "ptPass": false,
+    "sourceReference": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+      "sha256": "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a",
+      "domain": "SCN"
+    },
+    "querySnippetSha256": "11a8d9340d298054fe9fae8cc6b237ca515ab5e95ca4bf4eda31c1ba039abc85",
+    "canonicalSnippetSha256": "264d6512a9af8feeca315ba5ef82ac25a5e7d0b96e9e3f251be20a0767b88848",
+    "responseLayout": "SCNRSP01",
+    "plannedNegativeCases": [
+      "null repository",
+      "null connection",
+      "null actor",
+      "repository SQL/Runtime/Error propagation",
+      "no borrowed connection lifecycle transfer"
+    ],
+    "dynamicExceptionBehaviorProven": false,
+    "residualRisk": "Actual SQL/driver rows/transaction/null/failure graph/concurrency/resend and response publication remain NOT_EXECUTED_HOLD; static dispatch matching is not dynamic acceptance."
+  },
+  {
+    "id": "STATIC-MED-DISPATCH-07",
+    "domain": "MED",
+    "layout": "AUDREQ01",
+    "kind": "AUDIO",
+    "repositoryMethod": "audioMetadata",
+    "requestDto": "AudioDescriptorRequestData",
+    "projection": "DIRECT_OPTIONAL",
+    "canonicalOrderedFields": [
+      "audioId/N1",
+      "disposition/X1"
+    ],
+    "dynamicStatus": "NOT_EXECUTED_HOLD",
+    "staticReviewStatus": "STATIC_PT_DESIGN_REVIEW_COMPLETE",
+    "queryConnection": "BORROWED_CALLER_OWNED",
+    "transactionOwner": "OUTER_APPLICATION_SERVICE",
+    "actualDbProven": false,
+    "ptPass": false,
+    "sourceReference": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+      "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a",
+      "domain": "MED"
+    },
+    "querySnippetSha256": "2d337815bde3c2ae8c03c87f1a0b5a2c159e1f3967534b8a98d0f2d2b0e9256c",
+    "canonicalSnippetSha256": "a56ce67c651b024949bcc9dd00086e8f403106b4d1c8b1e8328461d33174c482",
+    "responseLayout": "AUDRSP01",
+    "plannedNegativeCases": [
+      "null repository",
+      "null connection",
+      "null actor",
+      "repository SQL/Runtime/Error propagation",
+      "no borrowed connection lifecycle transfer"
+    ],
+    "dynamicExceptionBehaviorProven": false,
+    "residualRisk": "Actual SQL/driver rows/transaction/null/failure graph/concurrency/resend and response publication remain NOT_EXECUTED_HOLD; static dispatch matching is not dynamic acceptance."
+  },
+  {
+    "id": "STATIC-MED-DISPATCH-08",
+    "domain": "MED",
+    "layout": "ANMREQ01",
+    "kind": "MENU",
+    "repositoryMethod": "animationMenu",
+    "requestDto": null,
+    "projection": "PRESENT_OPTIONAL",
+    "canonicalOrderedFields": [],
+    "dynamicStatus": "NOT_EXECUTED_HOLD",
+    "staticReviewStatus": "STATIC_PT_DESIGN_REVIEW_COMPLETE",
+    "queryConnection": "BORROWED_CALLER_OWNED",
+    "transactionOwner": "OUTER_APPLICATION_SERVICE",
+    "actualDbProven": false,
+    "ptPass": false,
+    "sourceReference": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+      "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a",
+      "domain": "MED"
+    },
+    "querySnippetSha256": "8ce1a4f0fa32918ec5a5f3a74f95225e817e89e667e4f509c3a320713f779d29",
+    "canonicalSnippetSha256": "7de63943f816150539a38e8b38f2d053ceeb474fbecdfa40f4005f20f2060fbe",
+    "responseLayout": "ANMRSP01",
+    "plannedNegativeCases": [
+      "null repository",
+      "null connection",
+      "null actor",
+      "repository SQL/Runtime/Error propagation",
+      "no borrowed connection lifecycle transfer"
+    ],
+    "dynamicExceptionBehaviorProven": false,
+    "residualRisk": "Actual SQL/driver rows/transaction/null/failure graph/concurrency/resend and response publication remain NOT_EXECUTED_HOLD; static dispatch matching is not dynamic acceptance."
+  },
+  {
+    "id": "STATIC-MED-DISPATCH-09",
+    "domain": "MED",
+    "layout": "ANLREQ01",
+    "kind": "ANIMATION",
+    "repositoryMethod": "animationList",
+    "requestDto": "AnimationListRequestData",
+    "projection": "PRESENT_OPTIONAL",
+    "canonicalOrderedFields": [
+      "category/X1"
+    ],
+    "dynamicStatus": "NOT_EXECUTED_HOLD",
+    "staticReviewStatus": "STATIC_PT_DESIGN_REVIEW_COMPLETE",
+    "queryConnection": "BORROWED_CALLER_OWNED",
+    "transactionOwner": "OUTER_APPLICATION_SERVICE",
+    "actualDbProven": false,
+    "ptPass": false,
+    "sourceReference": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+      "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a",
+      "domain": "MED"
+    },
+    "querySnippetSha256": "d3b9729fdbb758e569f0b7832e3502d5e562077cd5109aaa0ca842f1f1d79d51",
+    "canonicalSnippetSha256": "a68f5676b300834b2da5ca700346fc7b0cc7e01d8bdf60929c67d3f453f9f00e",
+    "responseLayout": "ANLRSP01",
+    "plannedNegativeCases": [
+      "null repository",
+      "null connection",
+      "null actor",
+      "repository SQL/Runtime/Error propagation",
+      "no borrowed connection lifecycle transfer"
+    ],
+    "dynamicExceptionBehaviorProven": false,
+    "residualRisk": "Actual SQL/driver rows/transaction/null/failure graph/concurrency/resend and response publication remain NOT_EXECUTED_HOLD; static dispatch matching is not dynamic acceptance."
+  },
+  {
+    "id": "STATIC-MED-DISPATCH-10",
+    "domain": "MED",
+    "layout": "VIDREQ01",
+    "kind": "VIDEO",
+    "repositoryMethod": "videoMetadata",
+    "requestDto": "VideoDescriptorRequestData",
+    "projection": "DIRECT_OPTIONAL",
+    "canonicalOrderedFields": [
+      "videoId/X1"
+    ],
+    "dynamicStatus": "NOT_EXECUTED_HOLD",
+    "staticReviewStatus": "STATIC_PT_DESIGN_REVIEW_COMPLETE",
+    "queryConnection": "BORROWED_CALLER_OWNED",
+    "transactionOwner": "OUTER_APPLICATION_SERVICE",
+    "actualDbProven": false,
+    "ptPass": false,
+    "sourceReference": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+      "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a",
+      "domain": "MED"
+    },
+    "querySnippetSha256": "cc8d7fea2d0d0537beb93c3b285e700c0e376d3f1e7601988952b6eba8da7f3e",
+    "canonicalSnippetSha256": "5b83fb462b903c30f0bdf275f0cab6750cade43d712413dc81b721878d0488d7",
+    "responseLayout": "VIDRSP01",
+    "plannedNegativeCases": [
+      "null repository",
+      "null connection",
+      "null actor",
+      "repository SQL/Runtime/Error propagation",
+      "no borrowed connection lifecycle transfer"
+    ],
+    "dynamicExceptionBehaviorProven": false,
+    "residualRisk": "Actual SQL/driver rows/transaction/null/failure graph/concurrency/resend and response publication remain NOT_EXECUTED_HOLD; static dispatch matching is not dynamic acceptance."
+  },
+  {
+    "id": "STATIC-MED-DISPATCH-11",
+    "domain": "MED",
+    "layout": "MCTREQ01",
+    "kind": "CATEGORIES",
+    "repositoryMethod": "musicCategories",
+    "requestDto": null,
+    "projection": "PRESENT_OPTIONAL",
+    "canonicalOrderedFields": [],
+    "dynamicStatus": "NOT_EXECUTED_HOLD",
+    "staticReviewStatus": "STATIC_PT_DESIGN_REVIEW_COMPLETE",
+    "queryConnection": "BORROWED_CALLER_OWNED",
+    "transactionOwner": "OUTER_APPLICATION_SERVICE",
+    "actualDbProven": false,
+    "ptPass": false,
+    "sourceReference": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+      "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a",
+      "domain": "MED"
+    },
+    "querySnippetSha256": "ffa4e86423e2f4da15aac5738cbb1050f9d8e418d83dde68e068f12b1afbc106",
+    "canonicalSnippetSha256": "7de63943f816150539a38e8b38f2d053ceeb474fbecdfa40f4005f20f2060fbe",
+    "responseLayout": "MCTRSP01",
+    "plannedNegativeCases": [
+      "null repository",
+      "null connection",
+      "null actor",
+      "repository SQL/Runtime/Error propagation",
+      "no borrowed connection lifecycle transfer"
+    ],
+    "dynamicExceptionBehaviorProven": false,
+    "residualRisk": "Actual SQL/driver rows/transaction/null/failure graph/concurrency/resend and response publication remain NOT_EXECUTED_HOLD; static dispatch matching is not dynamic acceptance."
+  },
+  {
+    "id": "STATIC-MED-DISPATCH-12",
+    "domain": "MED",
+    "layout": "MCSREQ01",
+    "kind": "SECTIONS",
+    "repositoryMethod": "musicSections",
+    "requestDto": "MusicSectionRequestData",
+    "projection": "PRESENT_OPTIONAL",
+    "canonicalOrderedFields": [
+      "category/X1"
+    ],
+    "dynamicStatus": "NOT_EXECUTED_HOLD",
+    "staticReviewStatus": "STATIC_PT_DESIGN_REVIEW_COMPLETE",
+    "queryConnection": "BORROWED_CALLER_OWNED",
+    "transactionOwner": "OUTER_APPLICATION_SERVICE",
+    "actualDbProven": false,
+    "ptPass": false,
+    "sourceReference": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+      "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a",
+      "domain": "MED"
+    },
+    "querySnippetSha256": "4660217f41b10c582a7c6085a9113705b3ccc8fbb3cadf238f20c754197829bc",
+    "canonicalSnippetSha256": "c0f3c871df8efb5acce36914910ba32f8083795f3c97fc9c862eb2fb9f671c7f",
+    "responseLayout": "MCSRSP01",
+    "plannedNegativeCases": [
+      "null repository",
+      "null connection",
+      "null actor",
+      "repository SQL/Runtime/Error propagation",
+      "no borrowed connection lifecycle transfer"
+    ],
+    "dynamicExceptionBehaviorProven": false,
+    "residualRisk": "Actual SQL/driver rows/transaction/null/failure graph/concurrency/resend and response publication remain NOT_EXECUTED_HOLD; static dispatch matching is not dynamic acceptance."
+  },
+  {
+    "id": "STATIC-MED-DISPATCH-13",
+    "domain": "MED",
+    "layout": "MTRREQ01",
+    "kind": "TRACKS",
+    "repositoryMethod": "musicTracks",
+    "requestDto": "MusicTrackRequestData",
+    "projection": "PRESENT_OPTIONAL",
+    "canonicalOrderedFields": [
+      "category/X1",
+      "section/X1"
+    ],
+    "dynamicStatus": "NOT_EXECUTED_HOLD",
+    "staticReviewStatus": "STATIC_PT_DESIGN_REVIEW_COMPLETE",
+    "queryConnection": "BORROWED_CALLER_OWNED",
+    "transactionOwner": "OUTER_APPLICATION_SERVICE",
+    "actualDbProven": false,
+    "ptPass": false,
+    "sourceReference": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+      "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a",
+      "domain": "MED"
+    },
+    "querySnippetSha256": "cab434babfaad4814e32d510dacfd7ba8e46ba70c1e792a871f525edc0e2d9a6",
+    "canonicalSnippetSha256": "711b15e956b027e0acf6173da1e18217add756c780c46b173e55411dfe1e313c",
+    "responseLayout": "MTRRSP01",
+    "plannedNegativeCases": [
+      "null repository",
+      "null connection",
+      "null actor",
+      "repository SQL/Runtime/Error propagation",
+      "no borrowed connection lifecycle transfer"
+    ],
+    "dynamicExceptionBehaviorProven": false,
+    "residualRisk": "Actual SQL/driver rows/transaction/null/failure graph/concurrency/resend and response publication remain NOT_EXECUTED_HOLD; static dispatch matching is not dynamic acceptance."
+  },
+  {
+    "id": "STATIC-MED-DISPATCH-14",
+    "domain": "MED",
+    "layout": "MEDREQ01",
+    "kind": "MUSIC",
+    "repositoryMethod": "musicMetadata",
+    "requestDto": "MusicDescriptorRequestData",
+    "projection": "DIRECT_OPTIONAL",
+    "canonicalOrderedFields": [
+      "trackId/X1",
+      "disposition/X1"
+    ],
+    "dynamicStatus": "NOT_EXECUTED_HOLD",
+    "staticReviewStatus": "STATIC_PT_DESIGN_REVIEW_COMPLETE",
+    "queryConnection": "BORROWED_CALLER_OWNED",
+    "transactionOwner": "OUTER_APPLICATION_SERVICE",
+    "actualDbProven": false,
+    "ptPass": false,
+    "sourceReference": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+      "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a",
+      "domain": "MED"
+    },
+    "querySnippetSha256": "7c5098f207df52613416068b2ba44395a9b6be6405d6c5f9032ba205beec1c0a",
+    "canonicalSnippetSha256": "f26b235a0bbda9ab0f622d004f185f8a95e15ccd82f01d6a3a666a3c2dd95226",
+    "responseLayout": "MEDRSP01",
+    "plannedNegativeCases": [
+      "null repository",
+      "null connection",
+      "null actor",
+      "repository SQL/Runtime/Error propagation",
+      "no borrowed connection lifecycle transfer"
+    ],
+    "dynamicExceptionBehaviorProven": false,
+    "residualRisk": "Actual SQL/driver rows/transaction/null/failure graph/concurrency/resend and response publication remain NOT_EXECUTED_HOLD; static dispatch matching is not dynamic acceptance."
+  }
+]
