@@ -1,6 +1,8 @@
 package dev.codex.schubert.nk.web.media;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -110,6 +112,51 @@ class HttpByteRangeParserTest {
     assertEquals(1, new HttpByteRangeParser.Partial(Long.MAX_VALUE, Long.MAX_VALUE).length());
     assertEquals(1_048_576, new HttpByteRangeParser.Partial(0, 1_048_575).length());
     assertEquals(Long.MAX_VALUE, new HttpByteRangeParser.Full(Long.MAX_VALUE).length());
+
+    // RANGE_GENERATED_DIRECT_BEGIN: PT-MED-003-GEN-FULL/PARTIAL/UNSAT, literal value contracts.
+    var full = new HttpByteRangeParser.Full(2_097_155);
+    assertEquals(2_097_155, full.length());
+    assertEquals(new HttpByteRangeParser.Full(2_097_155), full);
+    assertTrue(full.equals(full));
+    assertFalse(full.equals(new HttpByteRangeParser.Full(1)));
+    assertFalse(full.equals(null));
+    assertFalse(full.equals("Full[length=2097155]"));
+    assertEquals(2_097_155, full.hashCode());
+    assertEquals("Full[length=2097155]", full.toString());
+
+    var partial = new HttpByteRangeParser.Partial(1_048_576, 2_097_151);
+    assertEquals(1_048_576, partial.start());
+    assertEquals(2_097_151, partial.end());
+    assertEquals(1_048_576, partial.length());
+    assertEquals(new HttpByteRangeParser.Partial(1_048_576, 2_097_151), partial);
+    assertTrue(partial.equals(partial));
+    assertFalse(partial.equals(new HttpByteRangeParser.Partial(1_048_577, 2_097_151)));
+    assertFalse(partial.equals(new HttpByteRangeParser.Partial(1_048_576, 2_097_150)));
+    assertFalse(partial.equals(null));
+    assertFalse(partial.equals(full));
+    assertEquals(34_603_007, partial.hashCode());
+    assertEquals("Partial[start=1048576, end=2097151]", partial.toString());
+
+    assertArrayEquals(
+        new HttpByteRangeParser.Unsatisfiable[] {HttpByteRangeParser.Unsatisfiable.INSTANCE},
+        HttpByteRangeParser.Unsatisfiable.values());
+    var copy = HttpByteRangeParser.Unsatisfiable.values();
+    copy[0] = null;
+    assertArrayEquals(
+        new HttpByteRangeParser.Unsatisfiable[] {HttpByteRangeParser.Unsatisfiable.INSTANCE},
+        HttpByteRangeParser.Unsatisfiable.values());
+    assertSame(
+        HttpByteRangeParser.Unsatisfiable.INSTANCE,
+        HttpByteRangeParser.Unsatisfiable.valueOf("INSTANCE"));
+    assertEquals(0, HttpByteRangeParser.Unsatisfiable.INSTANCE.ordinal());
+    assertEquals("INSTANCE", HttpByteRangeParser.Unsatisfiable.INSTANCE.name());
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> HttpByteRangeParser.Unsatisfiable.valueOf("instance"));
+    assertThrows(
+        IllegalArgumentException.class, () -> HttpByteRangeParser.Unsatisfiable.valueOf("UNKNOWN"));
+    assertThrows(NullPointerException.class, () -> HttpByteRangeParser.Unsatisfiable.valueOf(null));
+    // RANGE_GENERATED_DIRECT_END
   }
 
   @Test
