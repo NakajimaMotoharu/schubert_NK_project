@@ -1,0 +1,11 @@
+# 閉鎖identity投影・URL認可 原8件 有限owner仕様
+
+主G03.05/関連P01502費用0、REWORK 原0.5/2/5 cap6。ClosedServletSecurityFilter/匿名ClosedServletRequestとWebAuthorizationFilterFactory二Source三Code、元ClosedServletSecurityFilterTest4＋WebAuthorizationFilterTest4全body/AfterEach/helper、ClosedWebAuthentication/SessionPrincipal/SessionStoreException/InvalidSessionRowException/WebRequestTrace/WebRequestContext/TopBarViewModel/LoginClientAddress/AuthenticationContext/UserRole/WireEnum全graphを読取確認。old14540/14542のpure Mock範囲を参照し当normal/current source/hashへ再結合。
+
+合成MockHttpSession・内部Authentication object/ThreadLocalだけ、実利用者のLogin/Session/token/password/credential/HTTP/server/権限アクセス経路・VMDBJMS/held四を操作しない。LoginClientAddressはofLiteralのみでDNS0、原8でconstructor呼出なし。元Testのpublic合成canary・自己UUIDは通常証跡へ出さない。
+
+修正前BUG起票。ClosedServlet二executorを宣言→単一finallyでreaders/workers逆順shutdownNow/await10、先行失敗時も後続finally実行。Auth一poolfinally10/一invokeAll30、既get30/読取get10/全元8body/literal/ThreadLocal clear/AfterEach維持。原全8を同sourceで初一回、選択抜粋/fixture置換/原成功の確認再演0。
+
+独立期待はUI221226/SS313314352の閉鎖principal投影、USER/ADMIN/anonymous role-matrix/明示read-only public resources、dispatcher/fault/null、100並行各suiteのactor保全。target二Source三Code全LMC、ClosedServletの12 branch条件を網羅。Factory自然BRANCH0はN-A/nullとしてstrict全Source非空四gate未受入を保持、0/0を100へ変換しない。helper coverage受入追加0。
+
+Source/Test/input/POM/SDK/normal物理CRCを結合。configured GJFskipreflow/PMD7.28/CS14.3適用性個別判断、JDK25.0.4/JUnit1.13.4/JaCoCo0.8.15。fullbefore1024/run-count1011/lint成功をsourcepublishとJVMの前提とする。SDKclassinfoは非初期化metadataでSDK PTへ加算0。正式1964PT/53scope/unique520Java416/工数nullは維持する。予定25852before/54prepare/56PF/58原8/62SDKidentity/60post。

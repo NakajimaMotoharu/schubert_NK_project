@@ -189,8 +189,9 @@ class ClosedServletSecurityFilterTest {
   @Test
   void web141ConcurrentAndCrossThreadSnapshotsKeepOriginalActor() throws Exception {
     var filter = new ClosedServletSecurityFilter();
-    try (var workers = Executors.newFixedThreadPool(8);
-        var readers = Executors.newFixedThreadPool(4)) {
+    var workers = Executors.newFixedThreadPool(8);
+    var readers = Executors.newFixedThreadPool(4);
+    try {
       var futures = new ArrayList<Future<Void>>();
       // No externally accessible filter monitor may serialize or deadlock independent requests.
       synchronized (filter) {
@@ -240,6 +241,14 @@ class ClosedServletSecurityFilterTest {
                   }));
         }
         for (var future : futures) future.get(30, TimeUnit.SECONDS);
+      }
+    } finally {
+      try {
+        readers.shutdownNow();
+        assertTrue(readers.awaitTermination(10, TimeUnit.SECONDS));
+      } finally {
+        workers.shutdownNow();
+        assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
     assertNull(SecurityContextHolder.getContext().getAuthentication());

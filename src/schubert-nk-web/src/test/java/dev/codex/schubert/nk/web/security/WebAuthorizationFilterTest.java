@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
@@ -229,7 +230,8 @@ class WebAuthorizationFilterTest {
     var filter = factory.create();
     assertNotSame(filter, factory.create());
     assertNotSame(filter.getAuthorizationManager(), factory.create().getAuthorizationManager());
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var jobs = new ArrayList<Callable<Void>>();
       for (int i = 0; i < 100; i++) {
         int n = i;
@@ -255,8 +257,12 @@ class WebAuthorizationFilterTest {
             });
       }
       synchronized (filter) {
-        for (var future : pool.invokeAll(jobs)) future.get(30, TimeUnit.SECONDS);
+        for (var future : pool.invokeAll(jobs, 30, TimeUnit.SECONDS))
+          future.get(30, TimeUnit.SECONDS);
       }
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertNull(SecurityContextHolder.getContext().getAuthentication());
   }

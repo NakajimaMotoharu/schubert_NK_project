@@ -1,0 +1,211 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T12:54:56.890514+09:00",
+  "programId": "NK-WEB-001",
+  "canonicalOwner": "WBS-P015-02",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ClosedServletSecurityFilterTest.java",
+      "originalSha256": "9c9e9bc5f6ccd6b4f9cc1a5abe3229caf911d4aaf49c6db670b89d8482c5554a",
+      "currentSha256": "ab612668e0d67339a5d50f6b5ef1982dceac3eca4246fc42792258ba45925316",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 2,
+      "finiteInvokeAllSites": 0,
+      "existingFutureGet30SitesRetained": 1,
+      "existingReaderGet10SitesRetained": 1
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAuthorizationFilterTest.java",
+      "originalSha256": "91341b7990bed75c6b6ae01960260f37d05df97e334d16b6432abbe7f30eb454",
+      "currentSha256": "6f215cca94e8f2d0a66e5698a6728440d144b4486f55f5181b4248d29ceff11e",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 1,
+      "finiteInvokeAllSites": 1,
+      "existingFutureGet30SitesRetained": 1,
+      "existingReaderGet10SitesRetained": 0
+    }
+  ],
+  "originalWholeCases": 8,
+  "rawFindings": 17,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 1,
+  "finiteOwnerSitesCorrected": 3,
+  "existingFutureGet30SitesRetained": 2,
+  "existingReaderGet10SitesRetained": 1,
+  "aggregateTimeoutSeconds": 30,
+  "ownerTimeoutSeconds": 10,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25854-closed-mock-auth-configured-prepare-v1/manifest.json",
+    "sha256": "647c37d7fef8c7b04e7c205c02946907e04f32e44b89f287f3adb91434a534cd"
+  },
+  "classifications": [
+    {
+      "className": "ClosedServletSecurityFilterTest",
+      "method": "web141ConcurrentAndCrossThreadSnapshotsKeepOriginalActor",
+      "variable": "workers",
+      "line": 192,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    },
+    {
+      "className": "ClosedServletSecurityFilterTest",
+      "method": "web141ConcurrentAndCrossThreadSnapshotsKeepOriginalActor",
+      "variable": "workers",
+      "line": 192,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    },
+    {
+      "className": "ClosedServletSecurityFilterTest",
+      "method": "web141ConcurrentAndCrossThreadSnapshotsKeepOriginalActor",
+      "variable": "readers",
+      "line": 193,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    },
+    {
+      "className": "ClosedServletSecurityFilterTest",
+      "method": "web141ConcurrentAndCrossThreadSnapshotsKeepOriginalActor",
+      "variable": "readers",
+      "line": 193,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    },
+    {
+      "className": "ClosedServletSecurityFilterTest",
+      "method": "web141ConcurrentAndCrossThreadSnapshotsKeepOriginalActor",
+      "variable": null,
+      "line": 197,
+      "rule": "AvoidSynchronizedStatement",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    },
+    {
+      "className": "ClosedServletSecurityFilterTest",
+      "method": "web141ConcurrentAndCrossThreadSnapshotsKeepOriginalActor",
+      "variable": null,
+      "line": 201,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    },
+    {
+      "className": "ClosedServletSecurityFilterTest",
+      "method": "web141ConcurrentAndCrossThreadSnapshotsKeepOriginalActor",
+      "variable": null,
+      "line": 214,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    },
+    {
+      "className": "ClosedServletSecurityFilterTest",
+      "method": "web141ConcurrentAndCrossThreadSnapshotsKeepOriginalActor",
+      "variable": null,
+      "line": 247,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    },
+    {
+      "className": "ClosedServletSecurityFilterTest",
+      "method": "web141ConcurrentAndCrossThreadSnapshotsKeepOriginalActor",
+      "variable": null,
+      "line": 248,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    },
+    {
+      "className": "ClosedServletSecurityFilterTest",
+      "method": "web141ConcurrentAndCrossThreadSnapshotsKeepOriginalActor",
+      "variable": null,
+      "line": 250,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    },
+    {
+      "className": "ClosedServletSecurityFilterTest",
+      "method": "web141ConcurrentAndCrossThreadSnapshotsKeepOriginalActor",
+      "variable": null,
+      "line": 251,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    },
+    {
+      "className": "WebAuthorizationFilterTest",
+      "method": "web124ConcurrentPoliciesHaveNoCrossRequestIdentity",
+      "variable": "pool",
+      "line": 233,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    },
+    {
+      "className": "WebAuthorizationFilterTest",
+      "method": "web124ConcurrentPoliciesHaveNoCrossRequestIdentity",
+      "variable": "pool",
+      "line": 233,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    },
+    {
+      "className": "WebAuthorizationFilterTest",
+      "method": "web124ConcurrentPoliciesHaveNoCrossRequestIdentity",
+      "variable": null,
+      "line": 259,
+      "rule": "AvoidSynchronizedStatement",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    },
+    {
+      "className": "WebAuthorizationFilterTest",
+      "method": "web124ConcurrentPoliciesHaveNoCrossRequestIdentity",
+      "variable": null,
+      "line": 260,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    },
+    {
+      "className": "WebAuthorizationFilterTest",
+      "method": "web124ConcurrentPoliciesHaveNoCrossRequestIdentity",
+      "variable": null,
+      "line": 264,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    },
+    {
+      "className": "WebAuthorizationFilterTest",
+      "method": "web124ConcurrentPoliciesHaveNoCrossRequestIdentity",
+      "variable": null,
+      "line": 265,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone pools8/4/8, reverse try-finally termination10 inclfirst-failure, originalget30/read10/ThreadLocalclear kept, intentional caller-monitor only. Puremock with noactualdeployedAuthentication/server/credential."
+    }
+  ],
+  "actualSessionOrAuthOrKeyOperations": false,
+  "deployedSecretsRead": false,
+  "jdkSecurityConfig": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/conf/security/java.security",
+    "sha256": "7c43432bc33b890d4e750f6886f383785a35a9b6021c34c84fcde11bb15c152d",
+    "firstProvider": "SUN"
+  },
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}
