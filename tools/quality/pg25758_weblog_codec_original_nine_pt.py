@@ -3,9 +3,9 @@ from pathlib import Path
 import datetime,hashlib,json,os,subprocess,sys,xml.etree.ElementTree as E,zipfile
 import pg9666_pagination_static as stage
 from host_tool_invocation import capture,verify
-R=Path(__file__).resolve().parents[2];B=R/'evidence/01_PT/018_NK-OPS-001';RUNS=R.parent/'pgpt-runs/PG379';TC=R.parent/'toolchain';S=RUNS/'pg25758-weblog-codec-original-whole4-v1';O=B/'evidence/PG25758-weblog-codec-original-whole4-v1';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();load=lambda p:json.loads(p.read_bytes());write=lambda p,v:p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
+R=Path(__file__).resolve().parents[2];B=R/'evidence/01_PT/018_NK-OPS-001';RUNS=R.parent/'pgpt-runs/PG379';TC=R.parent/'toolchain';S=RUNS/'pg25758-weblog-codec-original-whole9-v1';O=B/'evidence/PG25758-weblog-codec-original-whole9-v1';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();load=lambda p:json.loads(p.read_bytes());write=lambda p,v:p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
 assert len(sys.argv)==1 and Path.cwd()==R
-invocation=capture(__file__);P=B/'evidence/PG25778-weblog-codec-current-console-preflight-v1/manifest.json';pf=load(P);assert pf['actualExit']==0 and pf['entrypointSha256']==sha(Path(__file__))
+invocation=capture(__file__);P=B/'evidence/PG25778-weblog-codec-current-console-preflight-v2/manifest.json';pf=load(P);assert pf['actualExit']==0 and pf['entrypointSha256']==sha(Path(__file__))
 assert not S.exists() and not O.exists();assert all(n not in os.environ for n in ['JAVA_TOOL_OPTIONS','JDK_JAVA_OPTIONS','_JAVA_OPTIONS','CLASSPATH'])
 normal=RUNS/'pg22084-api-stop-state-six-main-compile-v1/manifest.safe.json';assert sha(normal)==pf['normalManifestSha256'];nm=load(normal);assert nm['source']==pf['productionCoreMain'] and type(nm['actualExit']) is int and nm['actualExit']==0 and nm['testsExecuted'] is False and nm['testStatus']=='NOT_RUN_COMPILE_ONLY_NOT_PASS'
 for path,digest in pf['inputHashes'].items():assert sha(R/path)==digest
