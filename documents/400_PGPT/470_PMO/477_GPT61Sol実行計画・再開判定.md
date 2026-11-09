@@ -2,7 +2,7 @@
 
 ## 2026-11-09 最小SDKでもclassfile annotation依存を閉じる（BUG2622/YKT2305）
 
-Gson2.14のpublic APIはErrorProne InlineMe注釈を持ち、strict javacは注釈jar欠落も警告として拒否する。runtime codeだけをSDK closureとせず、公開POM/既qualified exactSHAのannotation依存を含める。初25958 compile1/0Test/6warningsを保全し、-Xlint:all/Werrorを維持した新source9f/別25982で警告0と未実行原6を初検証した。SDK code2jarとSDK26class identity、元三target/五metadata反例を別記し、旧成功の確認再演・抑制・品質/モデル/枠/HOLD変更なし。
+Gson2.14のpublic APIはErrorProne InlineMe注釈を持ち、strict javacは注釈jar欠落も警告として拒否する。runtime codeだけをSDK closureとせず、公開POM/既qualified exactSHAのannotation依存を含める。初25958 compile1/0Test/6warningsを保全し、-Xlint:all/Werrorを維持した新source9f/別25982で警告0と未実行原6を初検証した。SDK2jar（code1/annotation1）とSDK26class identity、元三target/五metadata反例を別記し、旧成功の確認再演・抑制・品質/モデル/枠/HOLD変更なし。
 
 
 ## 2026-11-09 Applicationと静的工具のdependency role分離（BUG2620/YKT2304）
