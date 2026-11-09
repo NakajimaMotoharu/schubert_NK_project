@@ -1,0 +1,154 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T13:18:53.171948+09:00",
+  "programId": "NK-WEB-001",
+  "canonicalOwner": "MULTIPLE_EXPLICIT_SOURCE_OWNERS",
+  "sourceOwners": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/RequestLogMvcConfiguration.java": "WBS-P006-04",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestRouteInterceptor.java": "WBS-P006-04",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java": "WBS-P006-03",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java": "WBS-P015-02"
+  },
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+      "originalSha256": "77a76f532dca84015b825dcb6e280a13e3b435a3dc07380efe81cd572ae44e19",
+      "currentSha256": "0845288c5c80ba7136a7b2c8072a4814a6f119f2e1cb47afcaa7eb102f76fc25",
+      "originalWholeBodiesExactlyRestoredAfterQa054BlockRemoval": true,
+      "finiteOwnerSites": 2,
+      "finiteInvokeAllSites": 0,
+      "existingFutureGet5SitesRetained": 3,
+      "additionalApprovedQa054Subcases": 3,
+      "newTestMethods": 0
+    }
+  ],
+  "originalWholeCases": 10,
+  "rawFindings": 11,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 0,
+  "finiteOwnerSitesCorrected": 2,
+  "existingFutureGet5SitesRetained": 3,
+  "additionalApprovedQa054Subcases": 3,
+  "newTestMethods": 0,
+  "ownerTimeoutSeconds": 10,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25914-request-trace-configured-prepare-v1/manifest.json",
+    "sha256": "9ec10f55e3a77f0e6b6be93441446d0293f3aa085ee98c288ad69e7fb44010e3"
+  },
+  "classifications": [
+    {
+      "className": "WebRequestTraceTest",
+      "method": "req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit",
+      "variable": "pool",
+      "line": 280,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Own child-JVM virtualpools, finallyshutdown-await10 and originalget5 preserved; thread-local-only Scope ownership/100memory requests. No actualservice/secret access."
+    },
+    {
+      "className": "WebRequestTraceTest",
+      "method": "req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit",
+      "variable": "pool",
+      "line": 280,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Own child-JVM virtualpools, finallyshutdown-await10 and originalget5 preserved; thread-local-only Scope ownership/100memory requests. No actualservice/secret access."
+    },
+    {
+      "className": "WebRequestTraceTest",
+      "method": "req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit",
+      "variable": null,
+      "line": 282,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Own child-JVM virtualpools, finallyshutdown-await10 and originalget5 preserved; thread-local-only Scope ownership/100memory requests. No actualservice/secret access."
+    },
+    {
+      "className": "WebRequestTraceTest",
+      "method": "req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit",
+      "variable": null,
+      "line": 286,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Own child-JVM virtualpools, finallyshutdown-await10 and originalget5 preserved; thread-local-only Scope ownership/100memory requests. No actualservice/secret access."
+    },
+    {
+      "className": "WebRequestTraceTest",
+      "method": "req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit",
+      "variable": null,
+      "line": 293,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Own child-JVM virtualpools, finallyshutdown-await10 and originalget5 preserved; thread-local-only Scope ownership/100memory requests. No actualservice/secret access."
+    },
+    {
+      "className": "WebRequestTraceTest",
+      "method": "req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit",
+      "variable": null,
+      "line": 294,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Own child-JVM virtualpools, finallyshutdown-await10 and originalget5 preserved; thread-local-only Scope ownership/100memory requests. No actualservice/secret access."
+    },
+    {
+      "className": "WebRequestTraceTest",
+      "method": "req008HundredConcurrentRequestsDoNotCrossContaminate",
+      "variable": "pool",
+      "line": 309,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Own child-JVM virtualpools, finallyshutdown-await10 and originalget5 preserved; thread-local-only Scope ownership/100memory requests. No actualservice/secret access."
+    },
+    {
+      "className": "WebRequestTraceTest",
+      "method": "req008HundredConcurrentRequestsDoNotCrossContaminate",
+      "variable": "pool",
+      "line": 309,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Own child-JVM virtualpools, finallyshutdown-await10 and originalget5 preserved; thread-local-only Scope ownership/100memory requests. No actualservice/secret access."
+    },
+    {
+      "className": "WebRequestTraceTest",
+      "method": "req008HundredConcurrentRequestsDoNotCrossContaminate",
+      "variable": null,
+      "line": 315,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Own child-JVM virtualpools, finallyshutdown-await10 and originalget5 preserved; thread-local-only Scope ownership/100memory requests. No actualservice/secret access."
+    },
+    {
+      "className": "WebRequestTraceTest",
+      "method": "req008HundredConcurrentRequestsDoNotCrossContaminate",
+      "variable": null,
+      "line": 334,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Own child-JVM virtualpools, finallyshutdown-await10 and originalget5 preserved; thread-local-only Scope ownership/100memory requests. No actualservice/secret access."
+    },
+    {
+      "className": "WebRequestTraceTest",
+      "method": "req008HundredConcurrentRequestsDoNotCrossContaminate",
+      "variable": null,
+      "line": 335,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Own child-JVM virtualpools, finallyshutdown-await10 and originalget5 preserved; thread-local-only Scope ownership/100memory requests. No actualservice/secret access."
+    }
+  ],
+  "actualSessionOrAuthOrKeyOperations": false,
+  "deployedSecretsRead": false,
+  "jdkSecurityConfig": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/conf/security/java.security",
+    "sha256": "7c43432bc33b890d4e750f6886f383785a35a9b6021c34c84fcde11bb15c152d",
+    "firstProvider": "SUN"
+  },
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

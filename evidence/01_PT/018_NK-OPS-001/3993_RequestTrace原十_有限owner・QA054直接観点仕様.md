@@ -1,0 +1,11 @@
+# RequestTrace原10 有限owner・QA054内部直接観点 PT仕様
+
+G03.05主/P01502関連0 REWORK 原0.5/2/5 cap6。Main WebRequestTrace/Scope、WebRequestContext、WebRequestRouteInterceptor、RequestLogMvcConfiguration四Source五Codeと原WebRequestTraceTest全10method/helperを確認。Caddy resolver/filter/rejected、WebSecurityAudit/Event/Route、LoginClientAddress、SessionPrincipal、TopBar、Protocol AuthenticationContext/UserRole/WireEnumの全許可graphを読取済。実serviceの認証/session/鍵/接続/設定変更をしない。originalpureMock CaddyForwarded値/数値IP/内部UUID/ThreadLocalだけ、InetAddress.ofLiteralはDNSしない。
+
+原req004はrepositoryの公開Controller Source全JavaとWebMvcConfiguration SourceをFilesで読む。全入力はtracked現normal SHAへ結合し、nk.pt.repositoryを明示する。対象外原本/鍵/Root二/held四/私有保全物を読まない。原全10methodを抜粋・代替せず同source初回一回だけ実行。
+
+BUGを修正前起票しvirtual executor二ownerをfinally shutdownNow/await10へ修正、既get5三/原Future submit100/全旧body/assert/literalを保持。QA054既承認内部marker/correlationIdForを、既req007 method内の明示追加block三観点として補う（SOURCE追加0/新Testmethod0、独立追加観点として記録し旧期待書換え0）。MARK-NOSCOPE: scopeなしでfalse/markはnoop、MARK-SCOPE: 自己scope内でtrue・繰返し維持・scope外で新Traceへ漏れない、CORRELATION: businessなし各event自身/最初business ID保持/null明示拒否。期待UUIDは独立固定literal、productionexpected算出0。
+
+UI235QA054/SS312351のメニューeventと対応する内部契約、UI222/226/SS314352のidentity・redaction・閉鎖routeに基づく。34route集合と実mapping37（static2含む）、100並行、nested/foreign-thread/order/idempotent close、NFCactor/各attribute get-set失敗2x2x2、null/type欠落を元assertで確認。Scope副作用はfinallyで自己ThreadLocalへ閉じる。
+
+JDK25/GJFskipreflow/PMD7.28/CS14.3各指摘適用性、current normalMain7aed、pinnedSDKとMainCRC、same-runXML/FES0・独立oracleを維持。全targetLMCと分岐の実測、自然branch0はN-A/nullで全Source非空四100へ換算しない。SDK metadataは非初期化identityだけ。正式1964PT/53scope/unique520Java416/工数null/全HOLD不変。PG25912before/14prepare/16PF/18原10+三subcase/22SDK/20post予定。

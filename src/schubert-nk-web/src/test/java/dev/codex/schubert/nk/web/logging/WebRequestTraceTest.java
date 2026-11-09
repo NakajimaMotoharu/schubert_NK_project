@@ -224,6 +224,39 @@ final class WebRequestTraceTest {
     assertEquals("WebRequestTrace[REDACTED]", trace.toString());
     assertTrue(trace.claimCompletion());
     assertFalse(trace.claimCompletion());
+
+    // QA054_TRACE_DIRECT_BEGIN: approved UI235 event correlation and lexical menu marker.
+    var menuTrace = trace(new MockHttpServletRequest(), 75);
+    var otherTrace = trace(new MockHttpServletRequest(), 76);
+    assertFalse(menuTrace.menuViewCandidate());
+    WebRequestTrace.markMenuViewed();
+    assertFalse(menuTrace.menuViewCandidate());
+    UUID firstEvent = new UUID(3, 75);
+    UUID secondEvent = new UUID(4, 75);
+    assertEquals(firstEvent, menuTrace.correlationIdFor(firstEvent));
+    assertEquals(secondEvent, menuTrace.correlationIdFor(secondEvent));
+    assertThrows(NullPointerException.class, () -> menuTrace.correlationIdFor(null));
+    var marker = menuTrace.enter();
+    try {
+      WebRequestTrace.markMenuViewed();
+      assertTrue(menuTrace.menuViewCandidate());
+      WebRequestTrace.markMenuViewed();
+      assertTrue(menuTrace.menuViewCandidate());
+      var business = WebRequestTrace.businessIdentifiers(() -> new UUID(2, 75));
+      assertEquals(new UUID(2, 75), business.get());
+      assertEquals(new UUID(2, 75), menuTrace.correlationIdFor(firstEvent));
+      assertEquals(
+          new UUID(9, 75), WebRequestTrace.businessIdentifiers(() -> new UUID(9, 75)).get());
+      assertEquals(new UUID(2, 75), menuTrace.correlationIdFor(secondEvent));
+    } finally {
+      marker.close();
+    }
+    WebRequestTrace.markMenuViewed();
+    assertTrue(menuTrace.menuViewCandidate());
+    assertFalse(otherTrace.menuViewCandidate());
+    assertEquals(new UUID(2, 75), menuTrace.correlationIdFor(secondEvent));
+    // QA054_TRACE_DIRECT_END
+
   }
 
   @Test
@@ -244,7 +277,8 @@ final class WebRequestTraceTest {
         inner.close();
       }
       ids.get();
-      try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
+      var pool = Executors.newVirtualThreadPerTaskExecutor();
+      try {
         assertEquals(new UUID(2, 14), pool.submit(ids::get).get(5, TimeUnit.SECONDS));
         assertThrows(
             ExecutionException.class,
@@ -255,6 +289,9 @@ final class WebRequestTraceTest {
                           return 0;
                         })
                     .get(5, TimeUnit.SECONDS));
+      } finally {
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
     } finally {
       outer.close();
@@ -269,7 +306,8 @@ final class WebRequestTraceTest {
 
   @Test
   void req008HundredConcurrentRequestsDoNotCrossContaminate() throws Exception {
-    try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
+    var pool = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       var jobs = new ArrayList<Future<Integer>>();
       for (int i = 1; i <= 100; i++) {
         final int owner = i;
@@ -292,6 +330,9 @@ final class WebRequestTraceTest {
       }
       for (int i = 0; i < jobs.size(); i++)
         assertEquals(i + 1, jobs.get(i).get(5, TimeUnit.SECONDS));
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
