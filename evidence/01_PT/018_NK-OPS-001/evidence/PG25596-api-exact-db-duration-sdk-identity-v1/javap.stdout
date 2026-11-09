@@ -1,0 +1,708 @@
+Compiled from "AbstractDistributionSummary.java"
+public abstract class io.micrometer.core.instrument.AbstractDistributionSummary extends io.micrometer.core.instrument.AbstractMeter implements io.micrometer.core.instrument.DistributionSummary {
+  protected final io.micrometer.core.instrument.distribution.Histogram histogram;
+    descriptor: Lio/micrometer/core/instrument/distribution/Histogram;
+
+  private final double scale;
+    descriptor: D
+
+  protected io.micrometer.core.instrument.AbstractDistributionSummary(io.micrometer.core.instrument.Meter$Id, io.micrometer.core.instrument.Clock, io.micrometer.core.instrument.distribution.DistributionStatisticConfig, double, boolean);
+    descriptor: (Lio/micrometer/core/instrument/Meter$Id;Lio/micrometer/core/instrument/Clock;Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig;DZ)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: dload         4
+         4: aload_2
+         5: aload_3
+         6: iload         6
+         8: invokestatic  #1                  // Method defaultHistogram:(Lio/micrometer/core/instrument/Clock;Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig;Z)Lio/micrometer/core/instrument/distribution/Histogram;
+        11: invokespecial #7                  // Method "<init>":(Lio/micrometer/core/instrument/Meter$Id;DLio/micrometer/core/instrument/distribution/Histogram;)V
+        14: return
+
+  protected io.micrometer.core.instrument.AbstractDistributionSummary(io.micrometer.core.instrument.Meter$Id, double, io.micrometer.core.instrument.distribution.Histogram);
+    descriptor: (Lio/micrometer/core/instrument/Meter$Id;DLio/micrometer/core/instrument/distribution/Histogram;)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokespecial #11                 // Method io/micrometer/core/instrument/AbstractMeter."<init>":(Lio/micrometer/core/instrument/Meter$Id;)V
+         5: aload_0
+         6: dload_2
+         7: putfield      #16                 // Field scale:D
+        10: aload_0
+        11: aload         4
+        13: ifnonnull     22
+        16: getstatic     #20                 // Field io/micrometer/core/instrument/distribution/NoopHistogram.INSTANCE:Lio/micrometer/core/instrument/distribution/NoopHistogram;
+        19: goto          24
+        22: aload         4
+        24: putfield      #26                 // Field histogram:Lio/micrometer/core/instrument/distribution/Histogram;
+        27: return
+
+  protected static io.micrometer.core.instrument.distribution.Histogram defaultHistogram(io.micrometer.core.instrument.Clock, io.micrometer.core.instrument.distribution.DistributionStatisticConfig, boolean);
+    descriptor: (Lio/micrometer/core/instrument/Clock;Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig;Z)Lio/micrometer/core/instrument/distribution/Histogram;
+    Code:
+         0: aload_1
+         1: invokevirtual #30                 // Method io/micrometer/core/instrument/distribution/DistributionStatisticConfig.isPublishingPercentiles:()Z
+         4: ifeq          18
+         7: new           #36                 // class io/micrometer/core/instrument/distribution/TimeWindowPercentileHistogram
+        10: dup
+        11: aload_0
+        12: aload_1
+        13: iload_2
+        14: invokespecial #38                 // Method io/micrometer/core/instrument/distribution/TimeWindowPercentileHistogram."<init>":(Lio/micrometer/core/instrument/Clock;Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig;Z)V
+        17: areturn
+        18: aload_1
+        19: invokevirtual #41                 // Method io/micrometer/core/instrument/distribution/DistributionStatisticConfig.isPublishingHistogram:()Z
+        22: ifeq          36
+        25: new           #44                 // class io/micrometer/core/instrument/distribution/TimeWindowFixedBoundaryHistogram
+        28: dup
+        29: aload_0
+        30: aload_1
+        31: iload_2
+        32: invokespecial #46                 // Method io/micrometer/core/instrument/distribution/TimeWindowFixedBoundaryHistogram."<init>":(Lio/micrometer/core/instrument/Clock;Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig;Z)V
+        35: areturn
+        36: getstatic     #20                 // Field io/micrometer/core/instrument/distribution/NoopHistogram.INSTANCE:Lio/micrometer/core/instrument/distribution/NoopHistogram;
+        39: areturn
+
+  public final void record(double);
+    descriptor: (D)V
+    Code:
+         0: dload_1
+         1: dconst_0
+         2: dcmpl
+         3: iflt          28
+         6: aload_0
+         7: getfield      #16                 // Field scale:D
+        10: dload_1
+        11: dmul
+        12: dstore_3
+        13: aload_0
+        14: getfield      #26                 // Field histogram:Lio/micrometer/core/instrument/distribution/Histogram;
+        17: dload_3
+        18: invokeinterface #47,  3           // InterfaceMethod io/micrometer/core/instrument/distribution/Histogram.recordDouble:(D)V
+        23: aload_0
+        24: dload_3
+        25: invokevirtual #53                 // Method recordNonNegative:(D)V
+        28: return
+
+  protected abstract void recordNonNegative(double);
+    descriptor: (D)V
+
+  public io.micrometer.core.instrument.distribution.HistogramSnapshot takeSnapshot();
+    descriptor: ()Lio/micrometer/core/instrument/distribution/HistogramSnapshot;
+    Code:
+         0: aload_0
+         1: getfield      #26                 // Field histogram:Lio/micrometer/core/instrument/distribution/Histogram;
+         4: aload_0
+         5: invokevirtual #56                 // Method count:()J
+         8: aload_0
+         9: invokevirtual #60                 // Method totalAmount:()D
+        12: aload_0
+        13: invokevirtual #64                 // Method max:()D
+        16: invokeinterface #67,  7           // InterfaceMethod io/micrometer/core/instrument/distribution/Histogram.takeSnapshot:(JDD)Lio/micrometer/core/instrument/distribution/HistogramSnapshot;
+        21: areturn
+}
+Compiled from "DistributionSummary.java"
+public interface io.micrometer.core.instrument.DistributionSummary extends io.micrometer.core.instrument.Meter,io.micrometer.core.instrument.distribution.HistogramSupport {
+  public static io.micrometer.core.instrument.DistributionSummary$Builder builder(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: new           #1                  // class io/micrometer/core/instrument/DistributionSummary$Builder
+         3: dup
+         4: aload_0
+         5: aconst_null
+         6: invokespecial #3                  // Method io/micrometer/core/instrument/DistributionSummary$Builder."<init>":(Ljava/lang/String;Lio/micrometer/core/instrument/DistributionSummary$1;)V
+         9: areturn
+
+  public abstract void record(double);
+    descriptor: (D)V
+
+  public abstract long count();
+    descriptor: ()J
+
+  public abstract double totalAmount();
+    descriptor: ()D
+
+  public default double mean();
+    descriptor: ()D
+    Code:
+         0: aload_0
+         1: invokeinterface #7,  1            // InterfaceMethod count:()J
+         6: lstore_1
+         7: lload_1
+         8: lconst_0
+         9: lcmp
+        10: ifne          17
+        13: dconst_0
+        14: goto          26
+        17: aload_0
+        18: invokeinterface #13,  1           // InterfaceMethod totalAmount:()D
+        23: lload_1
+        24: l2d
+        25: ddiv
+        26: dreturn
+
+  public abstract double max();
+    descriptor: ()D
+
+  public default double histogramCountAtValue(long);
+    descriptor: (J)D
+    Code:
+         0: aload_0
+         1: invokeinterface #17,  1           // InterfaceMethod takeSnapshot:()Lio/micrometer/core/instrument/distribution/HistogramSnapshot;
+         6: invokevirtual #21                 // Method io/micrometer/core/instrument/distribution/HistogramSnapshot.histogramCounts:()[Lio/micrometer/core/instrument/distribution/CountAtBucket;
+         9: astore_3
+        10: aload_3
+        11: arraylength
+        12: istore        4
+        14: iconst_0
+        15: istore        5
+        17: iload         5
+        19: iload         4
+        21: if_icmpge     56
+        24: aload_3
+        25: iload         5
+        27: aaload
+        28: astore        6
+        30: aload         6
+        32: getstatic     #27                 // Field java/util/concurrent/TimeUnit.NANOSECONDS:Ljava/util/concurrent/TimeUnit;
+        35: invokevirtual #33                 // Method io/micrometer/core/instrument/distribution/CountAtBucket.bucket:(Ljava/util/concurrent/TimeUnit;)D
+        38: d2l
+        39: lload_1
+        40: lcmp
+        41: ifne          50
+        44: aload         6
+        46: invokevirtual #39                 // Method io/micrometer/core/instrument/distribution/CountAtBucket.count:()D
+        49: dreturn
+        50: iinc          5, 1
+        53: goto          17
+        56: ldc2_w        #43                 // double NaNd
+        59: dreturn
+
+  public default double percentile(double);
+    descriptor: (D)D
+    Code:
+         0: aload_0
+         1: invokeinterface #17,  1           // InterfaceMethod takeSnapshot:()Lio/micrometer/core/instrument/distribution/HistogramSnapshot;
+         6: invokevirtual #45                 // Method io/micrometer/core/instrument/distribution/HistogramSnapshot.percentileValues:()[Lio/micrometer/core/instrument/distribution/ValueAtPercentile;
+         9: astore_3
+        10: aload_3
+        11: arraylength
+        12: istore        4
+        14: iconst_0
+        15: istore        5
+        17: iload         5
+        19: iload         4
+        21: if_icmpge     52
+        24: aload_3
+        25: iload         5
+        27: aaload
+        28: astore        6
+        30: aload         6
+        32: invokevirtual #49                 // Method io/micrometer/core/instrument/distribution/ValueAtPercentile.percentile:()D
+        35: dload_1
+        36: dcmpl
+        37: ifne          46
+        40: aload         6
+        42: invokevirtual #54                 // Method io/micrometer/core/instrument/distribution/ValueAtPercentile.value:()D
+        45: dreturn
+        46: iinc          5, 1
+        49: goto          17
+        52: ldc2_w        #43                 // double NaNd
+        55: dreturn
+
+  public default java.lang.Iterable<io.micrometer.core.instrument.Measurement> measure();
+    descriptor: ()Ljava/lang/Iterable;
+    Code:
+         0: iconst_2
+         1: anewarray     #57                 // class io/micrometer/core/instrument/Measurement
+         4: dup
+         5: iconst_0
+         6: new           #57                 // class io/micrometer/core/instrument/Measurement
+         9: dup
+        10: aload_0
+        11: invokedynamic #59,  0             // InvokeDynamic #0:getAsDouble:(Lio/micrometer/core/instrument/DistributionSummary;)Ljava/util/function/DoubleSupplier;
+        16: getstatic     #63                 // Field io/micrometer/core/instrument/Statistic.COUNT:Lio/micrometer/core/instrument/Statistic;
+        19: invokespecial #69                 // Method io/micrometer/core/instrument/Measurement."<init>":(Ljava/util/function/DoubleSupplier;Lio/micrometer/core/instrument/Statistic;)V
+        22: aastore
+        23: dup
+        24: iconst_1
+        25: new           #57                 // class io/micrometer/core/instrument/Measurement
+        28: dup
+        29: aload_0
+        30: invokedynamic #72,  0             // InvokeDynamic #1:getAsDouble:(Lio/micrometer/core/instrument/DistributionSummary;)Ljava/util/function/DoubleSupplier;
+        35: getstatic     #73                 // Field io/micrometer/core/instrument/Statistic.TOTAL:Lio/micrometer/core/instrument/Statistic;
+        38: invokespecial #69                 // Method io/micrometer/core/instrument/Measurement."<init>":(Ljava/util/function/DoubleSupplier;Lio/micrometer/core/instrument/Statistic;)V
+        41: aastore
+        42: invokestatic  #76                 // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+        45: areturn
+
+  private double lambda$measure$0();
+    descriptor: ()D
+    Code:
+         0: aload_0
+         1: invokeinterface #7,  1            // InterfaceMethod count:()J
+         6: l2d
+         7: dreturn
+}
+Compiled from "DistributionSummary.java"
+public class io.micrometer.core.instrument.DistributionSummary$Builder {
+  private final java.lang.String name;
+    descriptor: Ljava/lang/String;
+
+  private io.micrometer.core.instrument.Tags tags;
+    descriptor: Lio/micrometer/core/instrument/Tags;
+
+  private io.micrometer.core.instrument.distribution.DistributionStatisticConfig$Builder distributionConfigBuilder;
+    descriptor: Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+
+  private java.lang.String description;
+    descriptor: Ljava/lang/String;
+
+  private java.lang.String baseUnit;
+    descriptor: Ljava/lang/String;
+
+  private double scale;
+    descriptor: D
+
+  private io.micrometer.core.instrument.DistributionSummary$Builder(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    Code:
+         0: aload_0
+         1: invokespecial #7                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: invokestatic  #12                 // Method io/micrometer/core/instrument/Tags.empty:()Lio/micrometer/core/instrument/Tags;
+         8: putfield      #18                 // Field tags:Lio/micrometer/core/instrument/Tags;
+        11: aload_0
+        12: invokestatic  #22                 // Method io/micrometer/core/instrument/distribution/DistributionStatisticConfig.builder:()Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+        15: putfield      #28                 // Field distributionConfigBuilder:Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+        18: aload_0
+        19: dconst_1
+        20: putfield      #32                 // Field scale:D
+        23: aload_0
+        24: aload_1
+        25: putfield      #36                 // Field name:Ljava/lang/String;
+        28: return
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder tags(java.lang.String...);
+    descriptor: ([Ljava/lang/String;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokestatic  #40                 // Method io/micrometer/core/instrument/Tags.of:([Ljava/lang/String;)Lio/micrometer/core/instrument/Tags;
+         5: invokevirtual #44                 // Method tags:(Ljava/lang/Iterable;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+         8: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder tags(java.lang.Iterable<io.micrometer.core.instrument.Tag>);
+    descriptor: (Ljava/lang/Iterable;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_0
+         1: aload_0
+         2: getfield      #18                 // Field tags:Lio/micrometer/core/instrument/Tags;
+         5: aload_1
+         6: invokevirtual #47                 // Method io/micrometer/core/instrument/Tags.and:(Ljava/lang/Iterable;)Lio/micrometer/core/instrument/Tags;
+         9: putfield      #18                 // Field tags:Lio/micrometer/core/instrument/Tags;
+        12: aload_0
+        13: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder tag(java.lang.String, java.lang.String);
+    descriptor: (Ljava/lang/String;Ljava/lang/String;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_0
+         1: aload_0
+         2: getfield      #18                 // Field tags:Lio/micrometer/core/instrument/Tags;
+         5: aload_1
+         6: aload_2
+         7: invokevirtual #51                 // Method io/micrometer/core/instrument/Tags.and:(Ljava/lang/String;Ljava/lang/String;)Lio/micrometer/core/instrument/Tags;
+        10: putfield      #18                 // Field tags:Lio/micrometer/core/instrument/Tags;
+        13: aload_0
+        14: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder description(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #54                 // Field description:Ljava/lang/String;
+         5: aload_0
+         6: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder baseUnit(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #57                 // Field baseUnit:Ljava/lang/String;
+         5: aload_0
+         6: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder publishPercentiles(double...);
+    descriptor: ([D)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_0
+         1: getfield      #28                 // Field distributionConfigBuilder:Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         4: aload_1
+         5: invokevirtual #60                 // Method io/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder.percentiles:([D)Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         8: pop
+         9: aload_0
+        10: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder percentilePrecision(java.lang.Integer);
+    descriptor: (Ljava/lang/Integer;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_0
+         1: getfield      #28                 // Field distributionConfigBuilder:Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         4: aload_1
+         5: invokevirtual #66                 // Method io/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder.percentilePrecision:(Ljava/lang/Integer;)Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         8: pop
+         9: aload_0
+        10: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder publishPercentileHistogram();
+    descriptor: ()Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_0
+         1: iconst_1
+         2: invokestatic  #70                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+         5: invokevirtual #76                 // Method publishPercentileHistogram:(Ljava/lang/Boolean;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+         8: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder publishPercentileHistogram(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_0
+         1: getfield      #28                 // Field distributionConfigBuilder:Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         4: aload_1
+         5: invokevirtual #80                 // Method io/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder.percentilesHistogram:(Ljava/lang/Boolean;)Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         8: pop
+         9: aload_0
+        10: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder sla(long...);
+    descriptor: ([J)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_1
+         1: ifnonnull     8
+         4: aload_0
+         5: goto          26
+         8: aload_0
+         9: aload_1
+        10: invokestatic  #84                 // Method java/util/Arrays.stream:([J)Ljava/util/stream/LongStream;
+        13: invokeinterface #90,  1           // InterfaceMethod java/util/stream/LongStream.asDoubleStream:()Ljava/util/stream/DoubleStream;
+        18: invokeinterface #96,  1           // InterfaceMethod java/util/stream/DoubleStream.toArray:()[D
+        23: invokevirtual #102                // Method serviceLevelObjectives:([D)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+        26: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder sla(double...);
+    descriptor: ([D)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_0
+         1: getfield      #28                 // Field distributionConfigBuilder:Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         4: aload_1
+         5: invokevirtual #106                // Method io/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder.serviceLevelObjectives:([D)Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         8: pop
+         9: aload_0
+        10: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder serviceLevelObjectives(double...);
+    descriptor: ([D)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_0
+         1: getfield      #28                 // Field distributionConfigBuilder:Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         4: aload_1
+         5: invokevirtual #106                // Method io/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder.serviceLevelObjectives:([D)Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         8: pop
+         9: aload_0
+        10: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder minimumExpectedValue(java.lang.Long);
+    descriptor: (Ljava/lang/Long;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_1
+         1: ifnonnull     8
+         4: aload_0
+         5: goto          20
+         8: aload_0
+         9: aload_1
+        10: invokevirtual #108                // Method java/lang/Long.longValue:()J
+        13: l2d
+        14: invokestatic  #114                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+        17: invokevirtual #119                // Method minimumExpectedValue:(Ljava/lang/Double;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+        20: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder minimumExpectedValue(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_0
+         1: getfield      #28                 // Field distributionConfigBuilder:Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         4: aload_1
+         5: invokevirtual #123                // Method io/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder.minimumExpectedValue:(Ljava/lang/Double;)Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         8: pop
+         9: aload_0
+        10: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder maximumExpectedValue(java.lang.Long);
+    descriptor: (Ljava/lang/Long;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_1
+         1: ifnonnull     8
+         4: aload_0
+         5: goto          20
+         8: aload_0
+         9: aload_1
+        10: invokevirtual #108                // Method java/lang/Long.longValue:()J
+        13: l2d
+        14: invokestatic  #114                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+        17: invokevirtual #126                // Method maximumExpectedValue:(Ljava/lang/Double;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+        20: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder maximumExpectedValue(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_0
+         1: getfield      #28                 // Field distributionConfigBuilder:Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         4: aload_1
+         5: invokevirtual #129                // Method io/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder.maximumExpectedValue:(Ljava/lang/Double;)Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         8: pop
+         9: aload_0
+        10: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder distributionStatisticExpiry(java.time.Duration);
+    descriptor: (Ljava/time/Duration;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_0
+         1: getfield      #28                 // Field distributionConfigBuilder:Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         4: aload_1
+         5: invokevirtual #131                // Method io/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder.expiry:(Ljava/time/Duration;)Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         8: pop
+         9: aload_0
+        10: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder distributionStatisticBufferLength(java.lang.Integer);
+    descriptor: (Ljava/lang/Integer;)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_0
+         1: getfield      #28                 // Field distributionConfigBuilder:Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         4: aload_1
+         5: invokevirtual #135                // Method io/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder.bufferLength:(Ljava/lang/Integer;)Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+         8: pop
+         9: aload_0
+        10: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary$Builder scale(double);
+    descriptor: (D)Lio/micrometer/core/instrument/DistributionSummary$Builder;
+    Code:
+         0: aload_0
+         1: dload_1
+         2: putfield      #32                 // Field scale:D
+         5: aload_0
+         6: areturn
+
+  public io.micrometer.core.instrument.Meter$MeterProvider<io.micrometer.core.instrument.DistributionSummary> withRegistry(io.micrometer.core.instrument.MeterRegistry);
+    descriptor: (Lio/micrometer/core/instrument/MeterRegistry;)Lio/micrometer/core/instrument/Meter$MeterProvider;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #138,  0            // InvokeDynamic #0:withTags:(Lio/micrometer/core/instrument/DistributionSummary$Builder;Lio/micrometer/core/instrument/MeterRegistry;)Lio/micrometer/core/instrument/Meter$MeterProvider;
+         7: areturn
+
+  public io.micrometer.core.instrument.DistributionSummary register(io.micrometer.core.instrument.MeterRegistry);
+    descriptor: (Lio/micrometer/core/instrument/MeterRegistry;)Lio/micrometer/core/instrument/DistributionSummary;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_0
+         3: getfield      #18                 // Field tags:Lio/micrometer/core/instrument/Tags;
+         6: invokespecial #142                // Method register:(Lio/micrometer/core/instrument/MeterRegistry;Lio/micrometer/core/instrument/Tags;)Lio/micrometer/core/instrument/DistributionSummary;
+         9: areturn
+
+  private io.micrometer.core.instrument.DistributionSummary register(io.micrometer.core.instrument.MeterRegistry, io.micrometer.core.instrument.Tags);
+    descriptor: (Lio/micrometer/core/instrument/MeterRegistry;Lio/micrometer/core/instrument/Tags;)Lio/micrometer/core/instrument/DistributionSummary;
+    Code:
+         0: aload_1
+         1: new           #146                // class io/micrometer/core/instrument/Meter$Id
+         4: dup
+         5: aload_0
+         6: getfield      #36                 // Field name:Ljava/lang/String;
+         9: aload_2
+        10: aload_0
+        11: getfield      #57                 // Field baseUnit:Ljava/lang/String;
+        14: aload_0
+        15: getfield      #54                 // Field description:Ljava/lang/String;
+        18: getstatic     #148                // Field io/micrometer/core/instrument/Meter$Type.DISTRIBUTION_SUMMARY:Lio/micrometer/core/instrument/Meter$Type;
+        21: invokespecial #154                // Method io/micrometer/core/instrument/Meter$Id."<init>":(Ljava/lang/String;Lio/micrometer/core/instrument/Tags;Ljava/lang/String;Ljava/lang/String;Lio/micrometer/core/instrument/Meter$Type;)V
+        24: aload_0
+        25: getfield      #28                 // Field distributionConfigBuilder:Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder;
+        28: invokevirtual #157                // Method io/micrometer/core/instrument/distribution/DistributionStatisticConfig$Builder.build:()Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig;
+        31: aload_0
+        32: getfield      #32                 // Field scale:D
+        35: invokevirtual #161                // Method io/micrometer/core/instrument/MeterRegistry.summary:(Lio/micrometer/core/instrument/Meter$Id;Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig;D)Lio/micrometer/core/instrument/DistributionSummary;
+        38: areturn
+
+  io.micrometer.core.instrument.DistributionSummary$Builder(java.lang.String, io.micrometer.core.instrument.DistributionSummary$1);
+    descriptor: (Ljava/lang/String;Lio/micrometer/core/instrument/DistributionSummary$1;)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokespecial #1                  // Method "<init>":(Ljava/lang/String;)V
+         5: return
+
+  private io.micrometer.core.instrument.DistributionSummary lambda$withRegistry$0(io.micrometer.core.instrument.MeterRegistry, java.lang.Iterable);
+    descriptor: (Lio/micrometer/core/instrument/MeterRegistry;Ljava/lang/Iterable;)Lio/micrometer/core/instrument/DistributionSummary;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_0
+         3: getfield      #18                 // Field tags:Lio/micrometer/core/instrument/Tags;
+         6: aload_2
+         7: invokevirtual #47                 // Method io/micrometer/core/instrument/Tags.and:(Ljava/lang/Iterable;)Lio/micrometer/core/instrument/Tags;
+        10: invokespecial #142                // Method register:(Lio/micrometer/core/instrument/MeterRegistry;Lio/micrometer/core/instrument/Tags;)Lio/micrometer/core/instrument/DistributionSummary;
+        13: areturn
+}
+Compiled from "CumulativeDistributionSummary.java"
+public class io.micrometer.core.instrument.cumulative.CumulativeDistributionSummary extends io.micrometer.core.instrument.AbstractDistributionSummary {
+  private final java.util.concurrent.atomic.LongAdder count;
+    descriptor: Ljava/util/concurrent/atomic/LongAdder;
+
+  private final java.util.concurrent.atomic.DoubleAdder total;
+    descriptor: Ljava/util/concurrent/atomic/DoubleAdder;
+
+  private final io.micrometer.core.instrument.distribution.TimeWindowMax max;
+    descriptor: Lio/micrometer/core/instrument/distribution/TimeWindowMax;
+
+  public io.micrometer.core.instrument.cumulative.CumulativeDistributionSummary(io.micrometer.core.instrument.Meter$Id, io.micrometer.core.instrument.Clock, io.micrometer.core.instrument.distribution.DistributionStatisticConfig, double);
+    descriptor: (Lio/micrometer/core/instrument/Meter$Id;Lio/micrometer/core/instrument/Clock;Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig;D)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: aload_3
+         4: dload         4
+         6: iconst_0
+         7: invokespecial #1                  // Method "<init>":(Lio/micrometer/core/instrument/Meter$Id;Lio/micrometer/core/instrument/Clock;Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig;DZ)V
+        10: return
+
+  public io.micrometer.core.instrument.cumulative.CumulativeDistributionSummary(io.micrometer.core.instrument.Meter$Id, io.micrometer.core.instrument.Clock, io.micrometer.core.instrument.distribution.DistributionStatisticConfig, double, boolean);
+    descriptor: (Lio/micrometer/core/instrument/Meter$Id;Lio/micrometer/core/instrument/Clock;Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig;DZ)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: aload_3
+         4: dload         4
+         6: aload_2
+         7: aload_3
+         8: iload         6
+        10: invokestatic  #7                  // Method io/micrometer/core/instrument/AbstractDistributionSummary.defaultHistogram:(Lio/micrometer/core/instrument/Clock;Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig;Z)Lio/micrometer/core/instrument/distribution/Histogram;
+        13: invokespecial #13                 // Method "<init>":(Lio/micrometer/core/instrument/Meter$Id;Lio/micrometer/core/instrument/Clock;Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig;DLio/micrometer/core/instrument/distribution/Histogram;)V
+        16: return
+
+  protected io.micrometer.core.instrument.cumulative.CumulativeDistributionSummary(io.micrometer.core.instrument.Meter$Id, io.micrometer.core.instrument.Clock, io.micrometer.core.instrument.distribution.DistributionStatisticConfig, double, io.micrometer.core.instrument.distribution.Histogram);
+    descriptor: (Lio/micrometer/core/instrument/Meter$Id;Lio/micrometer/core/instrument/Clock;Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig;DLio/micrometer/core/instrument/distribution/Histogram;)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: dload         4
+         4: aload         6
+         6: invokespecial #16                 // Method io/micrometer/core/instrument/AbstractDistributionSummary."<init>":(Lio/micrometer/core/instrument/Meter$Id;DLio/micrometer/core/instrument/distribution/Histogram;)V
+         9: aload_0
+        10: new           #19                 // class java/util/concurrent/atomic/LongAdder
+        13: dup
+        14: invokespecial #21                 // Method java/util/concurrent/atomic/LongAdder."<init>":()V
+        17: putfield      #24                 // Field count:Ljava/util/concurrent/atomic/LongAdder;
+        20: aload_0
+        21: new           #28                 // class java/util/concurrent/atomic/DoubleAdder
+        24: dup
+        25: invokespecial #30                 // Method java/util/concurrent/atomic/DoubleAdder."<init>":()V
+        28: putfield      #31                 // Field total:Ljava/util/concurrent/atomic/DoubleAdder;
+        31: aload_0
+        32: new           #35                 // class io/micrometer/core/instrument/distribution/TimeWindowMax
+        35: dup
+        36: aload_2
+        37: aload_3
+        38: invokespecial #37                 // Method io/micrometer/core/instrument/distribution/TimeWindowMax."<init>":(Lio/micrometer/core/instrument/Clock;Lio/micrometer/core/instrument/distribution/DistributionStatisticConfig;)V
+        41: putfield      #40                 // Field max:Lio/micrometer/core/instrument/distribution/TimeWindowMax;
+        44: return
+
+  protected void recordNonNegative(double);
+    descriptor: (D)V
+    Code:
+         0: aload_0
+         1: getfield      #24                 // Field count:Ljava/util/concurrent/atomic/LongAdder;
+         4: invokevirtual #44                 // Method java/util/concurrent/atomic/LongAdder.increment:()V
+         7: aload_0
+         8: getfield      #31                 // Field total:Ljava/util/concurrent/atomic/DoubleAdder;
+        11: dload_1
+        12: invokevirtual #47                 // Method java/util/concurrent/atomic/DoubleAdder.add:(D)V
+        15: aload_0
+        16: getfield      #40                 // Field max:Lio/micrometer/core/instrument/distribution/TimeWindowMax;
+        19: dload_1
+        20: invokevirtual #51                 // Method io/micrometer/core/instrument/distribution/TimeWindowMax.record:(D)V
+        23: return
+
+  public long count();
+    descriptor: ()J
+    Code:
+         0: aload_0
+         1: getfield      #24                 // Field count:Ljava/util/concurrent/atomic/LongAdder;
+         4: invokevirtual #54                 // Method java/util/concurrent/atomic/LongAdder.longValue:()J
+         7: lreturn
+
+  public double totalAmount();
+    descriptor: ()D
+    Code:
+         0: aload_0
+         1: getfield      #31                 // Field total:Ljava/util/concurrent/atomic/DoubleAdder;
+         4: invokevirtual #58                 // Method java/util/concurrent/atomic/DoubleAdder.sum:()D
+         7: dreturn
+
+  public double max();
+    descriptor: ()D
+    Code:
+         0: aload_0
+         1: getfield      #40                 // Field max:Lio/micrometer/core/instrument/distribution/TimeWindowMax;
+         4: invokevirtual #62                 // Method io/micrometer/core/instrument/distribution/TimeWindowMax.poll:()D
+         7: dreturn
+
+  public java.lang.Iterable<io.micrometer.core.instrument.Measurement> measure();
+    descriptor: ()Ljava/lang/Iterable;
+    Code:
+         0: iconst_3
+         1: anewarray     #65                 // class io/micrometer/core/instrument/Measurement
+         4: dup
+         5: iconst_0
+         6: new           #65                 // class io/micrometer/core/instrument/Measurement
+         9: dup
+        10: aload_0
+        11: invokedynamic #67,  0             // InvokeDynamic #0:getAsDouble:(Lio/micrometer/core/instrument/cumulative/CumulativeDistributionSummary;)Ljava/util/function/DoubleSupplier;
+        16: getstatic     #71                 // Field io/micrometer/core/instrument/Statistic.COUNT:Lio/micrometer/core/instrument/Statistic;
+        19: invokespecial #77                 // Method io/micrometer/core/instrument/Measurement."<init>":(Ljava/util/function/DoubleSupplier;Lio/micrometer/core/instrument/Statistic;)V
+        22: aastore
+        23: dup
+        24: iconst_1
+        25: new           #65                 // class io/micrometer/core/instrument/Measurement
+        28: dup
+        29: aload_0
+        30: invokedynamic #80,  0             // InvokeDynamic #1:getAsDouble:(Lio/micrometer/core/instrument/cumulative/CumulativeDistributionSummary;)Ljava/util/function/DoubleSupplier;
+        35: getstatic     #81                 // Field io/micrometer/core/instrument/Statistic.TOTAL:Lio/micrometer/core/instrument/Statistic;
+        38: invokespecial #77                 // Method io/micrometer/core/instrument/Measurement."<init>":(Ljava/util/function/DoubleSupplier;Lio/micrometer/core/instrument/Statistic;)V
+        41: aastore
+        42: dup
+        43: iconst_2
+        44: new           #65                 // class io/micrometer/core/instrument/Measurement
+        47: dup
+        48: aload_0
+        49: invokedynamic #84,  0             // InvokeDynamic #2:getAsDouble:(Lio/micrometer/core/instrument/cumulative/CumulativeDistributionSummary;)Ljava/util/function/DoubleSupplier;
+        54: getstatic     #85                 // Field io/micrometer/core/instrument/Statistic.MAX:Lio/micrometer/core/instrument/Statistic;
+        57: invokespecial #77                 // Method io/micrometer/core/instrument/Measurement."<init>":(Ljava/util/function/DoubleSupplier;Lio/micrometer/core/instrument/Statistic;)V
+        60: aastore
+        61: invokestatic  #88                 // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+        64: areturn
+
+  private double lambda$measure$0();
+    descriptor: ()D
+    Code:
+         0: aload_0
+         1: invokevirtual #94                 // Method count:()J
+         4: l2d
+         5: dreturn
+}
