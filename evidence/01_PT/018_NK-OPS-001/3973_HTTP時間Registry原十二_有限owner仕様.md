@@ -1,0 +1,7 @@
+# 3973 HTTP時間Registry 原12 有限owner仕様
+
+G03.05主/P01809関連0 REWORK開始前1/4/8pp cap10。元1725/1755と現行tracked OverflowSafeHttpMeterRegistryTest全HTTPDUR001..012、Main Registry/innerTimer/emptyinterface、HttpMetricRecorder/HttpMetricContract全bodyを確認。自己MockClock/所有SDK/publicTimer composition/4workerだけ。markerは実行codeなしmetadata分類、target1Source2Code、helper Source3は部分資格0。Mainのoptional SDK継承/stub/held四/実HTTP/DB/VM/Root/鍵操作なし。1755別4caseの履歴は本12の実行実績へ合算しない。
+
+BUG2604修正前起票。httpDur008のregistry二+executor4複合TWRを単一worker finally shutdownNow/await10へ、一invokeAllを10秒へ。元Future.get10/原12全body/literal/fixture/例外/値を厳密逆復元。独立oracleはSS351九ns境界[50/100/250/500/1000/1500/2000/2500/5000]ms、各±1/equal27入力→CDF2,5,..26/count27/sum38.7/max5.000000001、七TimeUnit各1→90061001001001ns、MAX二順序double正有限/小bucket3、snapshot単位2.5/1.5/mean1.25、MockClock3秒後max0/count2/total2.5、4×64×1秒=256/九CDF0四・256五/別owner0。callback1..6秒→count6/21/max6、nullable戻り二→count8/21、checked/Runtime/Error同一、未知pause/config/factoryは先行拒否、他Timer3/Counter7、負非観測・0は一観測全bucket1。productionからexpected生成しない。
+
+959由来skipreflow構成/static全指摘個別分類/正常Main7aed・WebJar・CoreSDK3に限定。source固定push後元12wholeを一JVM/exec初一回、SDK観測分は同Jar/CRC/実memberhashへ独立結合し新規SDKruntime資格にしない。counter全Source/Class/aggregate区分、分母0はN-A/null実XML導出、FES/未実行をPASSへしない。PG25546/48/50/52/54/56と3974へTestID/source/環境/command/exit/input/output/hash/BUGを記録。JDK25.0.4/Console1.13.4/JaCoCo0.8.15。wholeMavenHOLD/全HOLD/正式1964-53/unique520/新leaf0/工数null維持。

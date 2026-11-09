@@ -292,24 +292,30 @@ class OverflowSafeHttpMeterRegistryTest {
   @Test
   void httpDur008ConcurrentWorkersAndIndependentOwnersKeepExactIntegerVector() throws Exception {
     try (var registry = new OverflowSafeHttpMeterRegistry(new MockClock());
-        var other = new OverflowSafeHttpMeterRegistry(new MockClock());
-        var executor = Executors.newFixedThreadPool(4)) {
-      var timer = timer(registry);
-      var unrelated = timer(other);
-      List<Callable<Void>> tasks = new ArrayList<>();
-      for (int worker = 0; worker < 4; worker++)
-        tasks.add(
-            () -> {
-              for (int i = 0; i < 64; i++) timer.record(1, TimeUnit.SECONDS);
-              return null;
-            });
-      for (var future : executor.invokeAll(tasks)) future.get(10, TimeUnit.SECONDS);
-      assertEquals(256, timer.count());
-      assertEquals(256, timer.totalTime(TimeUnit.SECONDS));
-      assertEquals(1, timer.max(TimeUnit.SECONDS));
-      cdf(timer, 0, 0, 0, 0, 256, 256, 256, 256, 256);
-      assertEquals(0, unrelated.count());
-      assertEquals(0, unrelated.totalTime(TimeUnit.SECONDS));
+        var other = new OverflowSafeHttpMeterRegistry(new MockClock())) {
+      var executor = Executors.newFixedThreadPool(4);
+      try {
+        var timer = timer(registry);
+        var unrelated = timer(other);
+        List<Callable<Void>> tasks = new ArrayList<>();
+        for (int worker = 0; worker < 4; worker++)
+          tasks.add(
+              () -> {
+                for (int i = 0; i < 64; i++) timer.record(1, TimeUnit.SECONDS);
+                return null;
+              });
+        for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+          future.get(10, TimeUnit.SECONDS);
+        assertEquals(256, timer.count());
+        assertEquals(256, timer.totalTime(TimeUnit.SECONDS));
+        assertEquals(1, timer.max(TimeUnit.SECONDS));
+        cdf(timer, 0, 0, 0, 0, 256, 256, 256, 256, 256);
+        assertEquals(0, unrelated.count());
+        assertEquals(0, unrelated.totalTime(TimeUnit.SECONDS));
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+      }
     }
   }
 

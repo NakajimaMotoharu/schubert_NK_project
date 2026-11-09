@@ -1,0 +1,78 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T10:19:53.120584+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistryTest.java",
+      "originalSha256": "15d35baf096728d03523e10b20b862822dbb3b51ea20f8b075344c86d2ce2858",
+      "currentSha256": "6e007a7e6f2893d42d6e6d1344684da2c40ec61173df418dcac2b131f9ec01ac",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 1,
+      "existingFutureGet10SitesRetained": 1
+    }
+  ],
+  "originalWholeCases": 12,
+  "rawFindings": 5,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 1,
+  "finiteOwnerSitesCorrected": 1,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25548-http-duration-configured-prepare-v1/manifest.json",
+    "sha256": "05f0d45d0bdbacd43efecd940ff611c83140cc03e79f0f0ddb9c6ea90190dae5"
+  },
+  "classifications": [
+    {
+      "className": "OverflowSafeHttpMeterRegistryTest",
+      "method": "httpDur008ConcurrentWorkersAndIndependentOwnersKeepExactIntegerVector",
+      "variable": "executor",
+      "line": 296,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Owned JUnit4workers, timed invokeAll10/originalFutureget10/single finallyshutdownNow-await10 before registry close; no container or external worker."
+    },
+    {
+      "className": "OverflowSafeHttpMeterRegistryTest",
+      "method": "httpDur008ConcurrentWorkersAndIndependentOwnersKeepExactIntegerVector",
+      "variable": "executor",
+      "line": 296,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit4workers, timed invokeAll10/originalFutureget10/single finallyshutdownNow-await10 before registry close; no container or external worker."
+    },
+    {
+      "className": "OverflowSafeHttpMeterRegistryTest",
+      "method": "httpDur008ConcurrentWorkersAndIndependentOwnersKeepExactIntegerVector",
+      "variable": null,
+      "line": 307,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit4workers, timed invokeAll10/originalFutureget10/single finallyshutdownNow-await10 before registry close; no container or external worker."
+    },
+    {
+      "className": "OverflowSafeHttpMeterRegistryTest",
+      "method": "httpDur008ConcurrentWorkersAndIndependentOwnersKeepExactIntegerVector",
+      "variable": null,
+      "line": 316,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit4workers, timed invokeAll10/originalFutureget10/single finallyshutdownNow-await10 before registry close; no container or external worker."
+    },
+    {
+      "className": "OverflowSafeHttpMeterRegistryTest",
+      "method": "httpDur008ConcurrentWorkersAndIndependentOwnersKeepExactIntegerVector",
+      "variable": null,
+      "line": 317,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit4workers, timed invokeAll10/originalFutureget10/single finallyshutdownNow-await10 before registry close; no container or external worker."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}
