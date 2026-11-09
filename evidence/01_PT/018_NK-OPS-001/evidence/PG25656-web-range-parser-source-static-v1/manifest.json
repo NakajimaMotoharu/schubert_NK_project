@@ -1,0 +1,106 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T11:06:16.932037+09:00",
+  "programId": "NK-MED-001",
+  "canonicalOwner": "WBS-P009-04",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeParserTest.java",
+      "originalSha256": "c55fe17f13409ae12e0181f1bb4e51661fc050d9c1242e999378fab630491736",
+      "currentSha256": "b33a483606a4bdedac5527aa225df0d51cfde00dbf04ac78386357a2059f1518",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 1,
+      "finiteInvokeAllSites": 1,
+      "finiteFutureGetSites": 1,
+      "listGetIndexNotRetimed": true
+    }
+  ],
+  "originalWholeCases": 4,
+  "rawFindings": 5,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 1,
+  "finiteOwnerSitesCorrected": 1,
+  "finiteFutureGetSitesCorrected": 1,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25654-web-range-parser-configured-prepare-v1/manifest.json",
+    "sha256": "d32ae20359872c0fa1c5f575550fcff364f3daa7d6ee63e2d6cafc3466b6b9fd"
+  },
+  "classifications": [
+    {
+      "className": "HttpByteRangeParserTest",
+      "method": "oneHundredConcurrentParsesHaveNoSharedState",
+      "variable": "workers",
+      "line": 117,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Owned JUnit8workers/100pureinput tasks, aggregate10/Futureget10 and single finallyshutdownNow-await10. results variable is ownedFuture list, not external/container worker."
+    },
+    {
+      "className": "HttpByteRangeParserTest",
+      "method": "oneHundredConcurrentParsesHaveNoSharedState",
+      "variable": "workers",
+      "line": 117,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit8workers/100pureinput tasks, aggregate10/Futureget10 and single finallyshutdownNow-await10. results variable is ownedFuture list, not external/container worker."
+    },
+    {
+      "className": "HttpByteRangeParserTest",
+      "method": "oneHundredConcurrentParsesHaveNoSharedState",
+      "variable": "results",
+      "line": 128,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit8workers/100pureinput tasks, aggregate10/Futureget10 and single finallyshutdownNow-await10. results variable is ownedFuture list, not external/container worker."
+    },
+    {
+      "className": "HttpByteRangeParserTest",
+      "method": "oneHundredConcurrentParsesHaveNoSharedState",
+      "variable": null,
+      "line": 136,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit8workers/100pureinput tasks, aggregate10/Futureget10 and single finallyshutdownNow-await10. results variable is ownedFuture list, not external/container worker."
+    },
+    {
+      "className": "HttpByteRangeParserTest",
+      "method": "oneHundredConcurrentParsesHaveNoSharedState",
+      "variable": null,
+      "line": 137,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit8workers/100pureinput tasks, aggregate10/Futureget10 and single finallyshutdownNow-await10. results variable is ownedFuture list, not external/container worker."
+    }
+  ],
+  "emptyInterfaceMetadataOnly": [
+    {
+      "physicalKey": "web:dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection.class",
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java",
+      "sourceSha256": "cd0d4e341a08ae32a6110e4bfa33e5ef8b5ab19eaea8b570decafb1682862f8d",
+      "owner": "WBS-P009-04",
+      "costOwner": "WBS-P009-04",
+      "ownershipMeaning": "SOURCE_RESPONSIBILITY_NOT_METHOD_ORACLE_TRACE",
+      "classSha256": "44bbe8f708ab5b50ffb0c0bc64776e7e31361eb7ba88efb22873d40fb0f23bbe",
+      "metadataStatus": "STATIC_METADATA_NOT_RUNTIME_OR_COVERAGE",
+      "metadataProvenance": "REUSED_EXACT_CLASS_BYTE_METADATA_NOT_RUNTIME",
+      "structure": {
+        "fields": 0,
+        "flags": 1537,
+        "methods": [],
+        "sourceFile": "HttpByteRangeParser.java"
+      },
+      "methodTestRequirementTrace": "NOT_VERIFIED",
+      "coverage": null,
+      "accepted": false
+    }
+  ],
+  "generatedDirectContractQualifiedByThisRun": false,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

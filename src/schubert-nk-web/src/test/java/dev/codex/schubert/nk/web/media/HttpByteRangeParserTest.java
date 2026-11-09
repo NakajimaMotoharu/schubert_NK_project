@@ -4,12 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** PT-MED-001..004; independent SS333 §10 literal intervals. */
@@ -112,7 +114,8 @@ class HttpByteRangeParserTest {
 
   @Test
   void oneHundredConcurrentParsesHaveNoSharedState() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(8)) {
+    var workers = Executors.newFixedThreadPool(8);
+    try {
       List<Callable<HttpByteRangeParser.Selection>> tasks = new ArrayList<>();
       for (int index = 0; index < 100; index++) {
         int value = index;
@@ -122,13 +125,16 @@ class HttpByteRangeParserTest {
                     Optional.of(value % 2 == 0 ? "bytes=" + value + "-" + value : "bytes=-0"),
                     TOTAL));
       }
-      var results = workers.invokeAll(tasks);
+      var results = workers.invokeAll(tasks, 10, TimeUnit.SECONDS);
       for (int index = 0; index < 100; index++)
         assertEquals(
             index % 2 == 0
                 ? new HttpByteRangeParser.Partial(index, index)
                 : HttpByteRangeParser.Unsatisfiable.INSTANCE,
-            results.get(index).get());
+            results.get(index).get(10, TimeUnit.SECONDS));
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
