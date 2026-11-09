@@ -232,7 +232,8 @@ class WebSecurityHeaderTest {
   void web094ConcurrentResponsesHaveNoSharedMutableState() throws Exception {
     var writer = new WebSecurityHeaderWriter();
     var filter = new WebSecurityHeaderFilterFactory().create();
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var jobs = new ArrayList<Callable<Void>>();
       for (int i = 0; i < 100; i++) {
         String body = "response-" + i;
@@ -250,8 +251,12 @@ class WebSecurityHeaderTest {
             });
       }
       synchronized (writer) {
-        for (var future : pool.invokeAll(jobs)) future.get(10, TimeUnit.SECONDS);
+        for (var future : pool.invokeAll(jobs, 10, TimeUnit.SECONDS))
+          future.get(10, TimeUnit.SECONDS);
       }
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

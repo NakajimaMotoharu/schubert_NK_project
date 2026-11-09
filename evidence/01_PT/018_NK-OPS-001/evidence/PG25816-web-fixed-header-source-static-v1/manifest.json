@@ -1,0 +1,100 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T12:42:24.978519+09:00",
+  "programId": "NK-WEB-001",
+  "canonicalOwner": "WBS-P015-02",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebSecurityHeaderTest.java",
+      "originalSha256": "bbf59e0422e5bb87be5a24cd59e3da555a9636658ace6126c45c87d667011d8c",
+      "currentSha256": "bafa343f192820df91f74e6c751ae1b1ffb6598fad448713ed94befd16b223bd",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 1,
+      "finiteInvokeAllSites": 1,
+      "existingFutureGet10SitesRetained": 1
+    }
+  ],
+  "originalWholeCases": 4,
+  "rawFindings": 6,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 1,
+  "finiteOwnerSitesCorrected": 1,
+  "existingFutureGet10SitesRetained": 1,
+  "aggregateTimeoutSeconds": 10,
+  "ownerTimeoutSeconds": 10,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25814-web-fixed-header-configured-prepare-v1/manifest.json",
+    "sha256": "d30da7966d8e283fd94da3ecc1fb16fdbe59429da0ce7aa94517c048436c5411"
+  },
+  "classifications": [
+    {
+      "className": "WebSecurityHeaderTest",
+      "method": "web094ConcurrentResponsesHaveNoSharedMutableState",
+      "variable": "pool",
+      "line": 235,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone ownedpool8/finally10/aggregate10/retainedget10; intended caller-monitor regression only. Mock Servlet memory, no server/session/deployed resource."
+    },
+    {
+      "className": "WebSecurityHeaderTest",
+      "method": "web094ConcurrentResponsesHaveNoSharedMutableState",
+      "variable": "pool",
+      "line": 235,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone ownedpool8/finally10/aggregate10/retainedget10; intended caller-monitor regression only. Mock Servlet memory, no server/session/deployed resource."
+    },
+    {
+      "className": "WebSecurityHeaderTest",
+      "method": "web094ConcurrentResponsesHaveNoSharedMutableState",
+      "variable": null,
+      "line": 253,
+      "rule": "AvoidSynchronizedStatement",
+      "applicable": false,
+      "basis": "Standalone ownedpool8/finally10/aggregate10/retainedget10; intended caller-monitor regression only. Mock Servlet memory, no server/session/deployed resource."
+    },
+    {
+      "className": "WebSecurityHeaderTest",
+      "method": "web094ConcurrentResponsesHaveNoSharedMutableState",
+      "variable": null,
+      "line": 254,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone ownedpool8/finally10/aggregate10/retainedget10; intended caller-monitor regression only. Mock Servlet memory, no server/session/deployed resource."
+    },
+    {
+      "className": "WebSecurityHeaderTest",
+      "method": "web094ConcurrentResponsesHaveNoSharedMutableState",
+      "variable": null,
+      "line": 258,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone ownedpool8/finally10/aggregate10/retainedget10; intended caller-monitor regression only. Mock Servlet memory, no server/session/deployed resource."
+    },
+    {
+      "className": "WebSecurityHeaderTest",
+      "method": "web094ConcurrentResponsesHaveNoSharedMutableState",
+      "variable": null,
+      "line": 259,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone ownedpool8/finally10/aggregate10/retainedget10; intended caller-monitor regression only. Mock Servlet memory, no server/session/deployed resource."
+    }
+  ],
+  "actualSessionOrAuthOrKeyOperations": false,
+  "deployedSecretsRead": false,
+  "jdkSecurityConfig": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/conf/security/java.security",
+    "sha256": "7c43432bc33b890d4e750f6886f383785a35a9b6021c34c84fcde11bb15c152d",
+    "firstProvider": "SUN"
+  },
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}
