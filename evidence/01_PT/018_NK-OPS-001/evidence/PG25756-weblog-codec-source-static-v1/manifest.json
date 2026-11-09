@@ -1,0 +1,159 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T12:25:13.517336+09:00",
+  "programId": "NK-WEB-001",
+  "canonicalOwner": "WBS-P006-04",
+  "relatedProgramOwner": "WBS-P015-02",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "originalSha256": "755a5427c673ed631987d769ab880fd5aaed18b596b9fa98115d623d40fbdc42",
+      "currentSha256": "743b797746985ec584073644cdec74871ed7942c6313556d1f7664e47835e0cd",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 2,
+      "finiteInvokeAllSites": 1,
+      "finiteFutureGetSites": 1,
+      "existingFutureGet5SitesRetained": 1
+    }
+  ],
+  "originalWholeCases": 9,
+  "rawFindings": 12,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 1,
+  "finiteFutureGetSitesCorrected": 1,
+  "finiteOwnerSitesCorrected": 2,
+  "existingFutureGet5SitesRetained": 1,
+  "aggregateTimeoutSeconds": 10,
+  "ownerTimeoutSeconds": 10,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25754-weblog-codec-configured-prepare-v1/manifest.json",
+    "sha256": "0e3e72ad6b7cf727a1067ee5923f2744151ec98beb46ff60906d63fefc6ea25f"
+  },
+  "classifications": [
+    {
+      "className": "WebLogPayloadCodecTest",
+      "method": "bug036CallerMonitorCannotBlockEncryptionDecryptionOrClose",
+      "variable": "executor",
+      "line": 50,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Owned standalone child-JVM executor finite finally10/aggregate10/get10; originalget5 retained."
+    },
+    {
+      "className": "WebLogPayloadCodecTest",
+      "method": "bug036CallerMonitorCannotBlockEncryptionDecryptionOrClose",
+      "variable": "executor",
+      "line": 50,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone child-JVM executor finite finally10/aggregate10/get10; originalget5 retained."
+    },
+    {
+      "className": "WebLogPayloadCodecTest",
+      "method": "bug036CallerMonitorCannotBlockEncryptionDecryptionOrClose",
+      "variable": null,
+      "line": 52,
+      "rule": "AvoidSynchronizedStatement",
+      "applicable": false,
+      "basis": "Intentional original regression: caller monitor cannot block internal private ReentrantLock; get5 inside monitor, no host/server owner."
+    },
+    {
+      "className": "WebLogPayloadCodecTest",
+      "method": "bug036CallerMonitorCannotBlockEncryptionDecryptionOrClose",
+      "variable": null,
+      "line": 53,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone child-JVM executor finite finally10/aggregate10/get10; originalget5 retained."
+    },
+    {
+      "className": "WebLogPayloadCodecTest",
+      "method": "bug036CallerMonitorCannotBlockEncryptionDecryptionOrClose",
+      "variable": null,
+      "line": 69,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone child-JVM executor finite finally10/aggregate10/get10; originalget5 retained."
+    },
+    {
+      "className": "WebLogPayloadCodecTest",
+      "method": "bug036CallerMonitorCannotBlockEncryptionDecryptionOrClose",
+      "variable": null,
+      "line": 70,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone child-JVM executor finite finally10/aggregate10/get10; originalget5 retained."
+    },
+    {
+      "className": "WebLogPayloadCodecTest",
+      "method": "modelBoundsConfigurationNullAndClosedLifecycleFailExplicitly",
+      "variable": "codec",
+      "line": 305,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Original explicit close twice then fail-closed assertions; notTWR deliberately exercises closed lifecycle, purepublic synthetic key, noexternalresources."
+    },
+    {
+      "className": "WebLogPayloadCodecTest",
+      "method": "concurrentProductionNonceGenerationKeepsEveryMessageAuthenticAndDistinct",
+      "variable": "executor",
+      "line": 320,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Owned standalone child-JVM executor finite finally10/aggregate10/get10; originalget5 retained."
+    },
+    {
+      "className": "WebLogPayloadCodecTest",
+      "method": "concurrentProductionNonceGenerationKeepsEveryMessageAuthenticAndDistinct",
+      "variable": "executor",
+      "line": 320,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone child-JVM executor finite finally10/aggregate10/get10; originalget5 retained."
+    },
+    {
+      "className": "WebLogPayloadCodecTest",
+      "method": "concurrentProductionNonceGenerationKeepsEveryMessageAuthenticAndDistinct",
+      "variable": null,
+      "line": 327,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone child-JVM executor finite finally10/aggregate10/get10; originalget5 retained."
+    },
+    {
+      "className": "WebLogPayloadCodecTest",
+      "method": "concurrentProductionNonceGenerationKeepsEveryMessageAuthenticAndDistinct",
+      "variable": null,
+      "line": 336,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone child-JVM executor finite finally10/aggregate10/get10; originalget5 retained."
+    },
+    {
+      "className": "WebLogPayloadCodecTest",
+      "method": "concurrentProductionNonceGenerationKeepsEveryMessageAuthenticAndDistinct",
+      "variable": null,
+      "line": 337,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standalone child-JVM executor finite finally10/aggregate10/get10; originalget5 retained."
+    }
+  ],
+  "publicSyntheticKeysOnly": true,
+  "deployedSecretsRead": false,
+  "childLocalJcaRegistryRestoration": true,
+  "originalGraphReference": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15555-public-weblog-codec-nine-independent-v2/manifest.json",
+    "sha256": "6255049e036e21893ddc219c49f1dd415dd88522d29fe471d9518e306c48e81f",
+    "allGraphSourceSameAsOriginal": true,
+    "oldCoverageTransferred": false
+  },
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

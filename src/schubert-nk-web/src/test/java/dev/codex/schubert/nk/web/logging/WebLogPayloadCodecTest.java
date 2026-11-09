@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import javax.crypto.Cipher;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -46,7 +47,8 @@ final class WebLogPayloadCodecTest {
     byte[] plaintext = goldenWire();
     byte[] expected = independentEnvelope("v2", CURRENT, independentAad(IDENTITY, "v2"), plaintext);
     WebLogPayloadCodec codec = fixedCodec("v2", CURRENT, null, null);
-    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    var executor = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       synchronized (codec) {
         executor
             .submit(
@@ -63,7 +65,12 @@ final class WebLogPayloadCodecTest {
             .get(5, java.util.concurrent.TimeUnit.SECONDS);
       }
     } finally {
-      codec.close();
+      try {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+      } finally {
+        codec.close();
+      }
     }
   }
 
@@ -309,21 +316,26 @@ final class WebLogPayloadCodecTest {
 
   @Test
   void concurrentProductionNonceGenerationKeepsEveryMessageAuthenticAndDistinct() throws Exception {
-    try (WebLogPayloadCodec codec = new WebLogPayloadCodec("v2", CURRENT, "v1", PREVIOUS);
-        var executor = Executors.newFixedThreadPool(4)) {
-      List<Callable<EncryptedWebLogPayload>> jobs = new ArrayList<>();
-      for (int index = 0; index < 100; index++) {
-        jobs.add(() -> codec.encrypt(IDENTITY, goldenWire()));
+    try (WebLogPayloadCodec codec = new WebLogPayloadCodec("v2", CURRENT, "v1", PREVIOUS)) {
+      var executor = Executors.newFixedThreadPool(4);
+      try {
+        List<Callable<EncryptedWebLogPayload>> jobs = new ArrayList<>();
+        for (int index = 0; index < 100; index++) {
+          jobs.add(() -> codec.encrypt(IDENTITY, goldenWire()));
+        }
+        HashSet<String> nonces = new HashSet<>();
+        for (var future : executor.invokeAll(jobs, 10, TimeUnit.SECONDS)) {
+          EncryptedWebLogPayload encrypted = future.get(10, TimeUnit.SECONDS);
+          assertTrue(
+              nonces.add(
+                  HexFormat.of().formatHex(Arrays.copyOfRange(encrypted.ciphertext(), 10, 22))));
+          assertArrayEquals(goldenWire(), codec.decrypt(IDENTITY, encrypted));
+        }
+        assertEquals(100, nonces.size());
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
-      HashSet<String> nonces = new HashSet<>();
-      for (var future : executor.invokeAll(jobs)) {
-        EncryptedWebLogPayload encrypted = future.get();
-        assertTrue(
-            nonces.add(
-                HexFormat.of().formatHex(Arrays.copyOfRange(encrypted.ciphertext(), 10, 22))));
-        assertArrayEquals(goldenWire(), codec.decrypt(IDENTITY, encrypted));
-      }
-      assertEquals(100, nonces.size());
     }
   }
 
@@ -421,7 +433,7 @@ final class WebLogPayloadCodecTest {
     ascii(wire, 256, "20260905060000000");
     ascii(wire, 256 + 17, "REQUEST");
     ascii(wire, 256 + 33, "INFO");
-    ascii(wire, 256 + 41, "HTTP_COMPLETED");
+    ascii(wire, 256 + 41, "HTTP_REQUEST_COMPLETED");
     ascii(wire, 256 + 105, "Synthetic HTTP request completed");
     ascii(wire, 256 + 617, "00000000-0000-0000-0000-000000000099");
     ascii(wire, 256 + 653, "GET");
