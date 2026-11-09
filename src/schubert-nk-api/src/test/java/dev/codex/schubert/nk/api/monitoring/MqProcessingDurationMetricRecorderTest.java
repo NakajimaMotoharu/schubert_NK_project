@@ -452,47 +452,53 @@ class MqProcessingDurationMetricRecorderTest {
   void mqTime007ConcurrentCountsSumsAndMaxUseIndependentIntegerVectorsAndSeparateLayoutOwners()
       throws Exception {
     try (var registry = new Registry();
-        var other = new Registry();
-        var executor = Executors.newFixedThreadPool(8)) {
-      var a =
-          new MqProcessingDurationMetricRecorder(
-              registry, DEBUG_MODE, new LayoutId(SUBMIT_REQUEST_LAYOUT));
-      var b =
-          new MqProcessingDurationMetricRecorder(
-              registry, DEBUG_MODE, new LayoutId(QUESTION_WORK_LAYOUT));
-      var jobs = new ArrayList<Callable<Void>>();
-      var sums = new HashMap<String, Long>();
-      var counts = new HashMap<String, Long>();
-      var max = new HashMap<String, Long>();
-      for (int i = 0; i < 64; i++) {
-        String layout = i % 2 == 0 ? SUBMIT_REQUEST_LAYOUT : QUESTION_WORK_LAYOUT;
-        var target = i % 2 == 0 ? a : b;
-        var outcome = (i / 2) % 2 == 0 ? Outcome.SUCCESS : Outcome.FAILURE;
-        long ns = i * 1000000L;
-        String key = layout + "/" + outcome.name();
-        sums.merge(key, ns, Long::sum);
-        counts.merge(key, 1L, Long::sum);
-        max.merge(key, ns, Long::max);
-        jobs.add(
-            () -> {
-              target.record(outcome, ns);
-              return null;
-            });
-      }
-      for (var f : executor.invokeAll(jobs, 5, TimeUnit.SECONDS)) f.get(5, TimeUnit.SECONDS);
-      for (String layout : List.of(SUBMIT_REQUEST_LAYOUT, QUESTION_WORK_LAYOUT))
-        for (String outcome : List.of(SUCCESS_OUTCOME, FAILURE_OUTCOME)) {
-          var value = summary(registry, layout, outcome);
-          String key = layout + "/" + outcome;
-          assertEquals(counts.get(key).longValue(), value.count());
-          assertEquals(sums.get(key) / 1e9, value.totalAmount(), 1e-12);
-          assertEquals(max.get(key) / 1e9, value.max());
+        var other = new Registry()) {
+      var executor = Executors.newFixedThreadPool(8);
+      try {
+        var a =
+            new MqProcessingDurationMetricRecorder(
+                registry, DEBUG_MODE, new LayoutId(SUBMIT_REQUEST_LAYOUT));
+        var b =
+            new MqProcessingDurationMetricRecorder(
+                registry, DEBUG_MODE, new LayoutId(QUESTION_WORK_LAYOUT));
+        var jobs = new ArrayList<Callable<Void>>();
+        var sums = new HashMap<String, Long>();
+        var counts = new HashMap<String, Long>();
+        var max = new HashMap<String, Long>();
+        for (int i = 0; i < 64; i++) {
+          String layout = i % 2 == 0 ? SUBMIT_REQUEST_LAYOUT : QUESTION_WORK_LAYOUT;
+          var target = i % 2 == 0 ? a : b;
+          var outcome = (i / 2) % 2 == 0 ? Outcome.SUCCESS : Outcome.FAILURE;
+          long ns = i * 1000000L;
+          String key = layout + "/" + outcome.name();
+          sums.merge(key, ns, Long::sum);
+          counts.merge(key, 1L, Long::sum);
+          max.merge(key, ns, Long::max);
+          jobs.add(
+              () -> {
+                target.record(outcome, ns);
+                return null;
+              });
         }
-      new MqProcessingDurationMetricRecorder(other, DEBUG_MODE, new LayoutId(QUESTION_WORK_LAYOUT))
-          .record(Outcome.SUCCESS, 250000000);
-      assertEquals(1, summary(other, QUESTION_WORK_LAYOUT, SUCCESS_OUTCOME).count());
-      assertEquals(.25, summary(other, QUESTION_WORK_LAYOUT, SUCCESS_OUTCOME).totalAmount());
-      assertEquals(64, registry.records.get());
+        for (var f : executor.invokeAll(jobs, 5, TimeUnit.SECONDS)) f.get(5, TimeUnit.SECONDS);
+        for (String layout : List.of(SUBMIT_REQUEST_LAYOUT, QUESTION_WORK_LAYOUT))
+          for (String outcome : List.of(SUCCESS_OUTCOME, FAILURE_OUTCOME)) {
+            var value = summary(registry, layout, outcome);
+            String key = layout + "/" + outcome;
+            assertEquals(counts.get(key).longValue(), value.count());
+            assertEquals(sums.get(key) / 1e9, value.totalAmount(), 1e-12);
+            assertEquals(max.get(key) / 1e9, value.max());
+          }
+        new MqProcessingDurationMetricRecorder(
+                other, DEBUG_MODE, new LayoutId(QUESTION_WORK_LAYOUT))
+            .record(Outcome.SUCCESS, 250000000);
+        assertEquals(1, summary(other, QUESTION_WORK_LAYOUT, SUCCESS_OUTCOME).count());
+        assertEquals(.25, summary(other, QUESTION_WORK_LAYOUT, SUCCESS_OUTCOME).totalAmount());
+        assertEquals(64, registry.records.get());
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+      }
     }
   }
 

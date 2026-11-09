@@ -1,0 +1,81 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T10:42:17.546268+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorderTest.java",
+      "originalSha256": "848417abf54e4e86fce28e4865573061a79ac0dd4ebe2fc3de6d1e95dfc7991e",
+      "currentSha256": "911375213b4456e0c46bf79e60df211091fc4aa2dee947a745cc0bf699980d40",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 1,
+      "existingTimedInvokeAll5SitesRetained": 1,
+      "existingFutureGet5SitesRetained": 1
+    }
+  ],
+  "originalWholeCases": 9,
+  "rawFindings": 5,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 0,
+  "finiteOwnerSitesCorrected": 1,
+  "existingTimedInvokeAll5SitesRetained": 1,
+  "existingFutureGet5SitesRetained": 1,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25614-api-mq-duration-configured-prepare-v1/manifest.json",
+    "sha256": "4877fa99603a83a0752102dec7be0853ae8609a2d018e3e8e293da140e830f7e"
+  },
+  "classifications": [
+    {
+      "className": "MqProcessingDurationMetricRecorderTest",
+      "method": "mqTime007ConcurrentCountsSumsAndMaxUseIndependentIntegerVectorsAndSeparateLayoutOwners",
+      "variable": "executor",
+      "line": 456,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Owned JUnit8workers; existing aggregate5/get5 unchanged and single finallyshutdownNow/await10 before two registry close. No container/external worker."
+    },
+    {
+      "className": "MqProcessingDurationMetricRecorderTest",
+      "method": "mqTime007ConcurrentCountsSumsAndMaxUseIndependentIntegerVectorsAndSeparateLayoutOwners",
+      "variable": "executor",
+      "line": 456,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit8workers; existing aggregate5/get5 unchanged and single finallyshutdownNow/await10 before two registry close. No container/external worker."
+    },
+    {
+      "className": "MqProcessingDurationMetricRecorderTest",
+      "method": "mqTime007ConcurrentCountsSumsAndMaxUseIndependentIntegerVectorsAndSeparateLayoutOwners",
+      "variable": null,
+      "line": 483,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit8workers; existing aggregate5/get5 unchanged and single finallyshutdownNow/await10 before two registry close. No container/external worker."
+    },
+    {
+      "className": "MqProcessingDurationMetricRecorderTest",
+      "method": "mqTime007ConcurrentCountsSumsAndMaxUseIndependentIntegerVectorsAndSeparateLayoutOwners",
+      "variable": null,
+      "line": 499,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit8workers; existing aggregate5/get5 unchanged and single finallyshutdownNow/await10 before two registry close. No container/external worker."
+    },
+    {
+      "className": "MqProcessingDurationMetricRecorderTest",
+      "method": "mqTime007ConcurrentCountsSumsAndMaxUseIndependentIntegerVectorsAndSeparateLayoutOwners",
+      "variable": null,
+      "line": 500,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit8workers; existing aggregate5/get5 unchanged and single finallyshutdownNow/await10 before two registry close. No container/external worker."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}
