@@ -310,58 +310,63 @@ class MqPressureMetricCollectorTest {
 
   @Test
   void mqConn006OwnedContenderIsBlockedUntilReadAndPublicationComplete() throws Exception {
-    try (var registry = new Registry();
-        var executor = Executors.newFixedThreadPool(2)) {
-      var calls = new AtomicInteger();
-      var entered = new CountDownLatch(1);
-      var release = new CountDownLatch(1);
-      var attempted = new CountDownLatch(1);
-      var contender = new AtomicReference<Thread>();
-      var owner = new AtomicReference<MqPressureMetricCollector>();
-      var firstSample = new Snapshot(1, 2, 3, 4, true, 5);
-      var secondSample = new Snapshot(7, 8, 9, 10, false, 11);
-      var collector =
-          new MqPressureMetricCollector(
-              destination -> {
-                int call = calls.incrementAndGet();
-                if (call == FIRST_READ_ORDINAL) {
-                  entered.countDown();
-                  await(release);
-                  return Optional.of(firstSample);
-                }
-                assertSame(firstSample, owner.get().snapshot(destination).orElseThrow());
-                return Optional.of(secondSample);
-              },
-              registry,
-              DEBUG_MODE);
-      owner.set(collector);
-      var first = executor.submit(() -> collector.collect(BrokerTopology.ASYNC_WORK));
+    try (var registry = new Registry()) {
+      var executor = Executors.newFixedThreadPool(2);
       try {
-        await(entered);
-        var second =
-            executor.submit(
-                () -> {
-                  contender.set(Thread.currentThread());
-                  attempted.countDown();
-                  return collector.collect(BrokerTopology.ASYNC_WORK);
-                });
-        await(attempted);
-        long until = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
-        while (contender.get().getState() != Thread.State.BLOCKED
-            && !second.isDone()
-            && System.nanoTime() < until) Thread.onSpinWait();
-        assertEquals(Thread.State.BLOCKED, contender.get().getState());
-        assertEquals(1, calls.get());
-        assertTrue(collector.snapshot(BrokerTopology.ASYNC_WORK).isEmpty());
-        unknown(registry, ASYNC_ADDRESS);
-        release.countDown();
-        assertSame(firstSample, first.get(5, TimeUnit.SECONDS).orElseThrow());
-        assertSame(secondSample, second.get(5, TimeUnit.SECONDS).orElseThrow());
-        assertSame(secondSample, collector.snapshot(BrokerTopology.ASYNC_WORK).orElseThrow());
-        values(registry, ASYNC_ADDRESS, 7, 8, 9, 10, 0, 11);
-        assertEquals(2, calls.get());
+        var calls = new AtomicInteger();
+        var entered = new CountDownLatch(1);
+        var release = new CountDownLatch(1);
+        var attempted = new CountDownLatch(1);
+        var contender = new AtomicReference<Thread>();
+        var owner = new AtomicReference<MqPressureMetricCollector>();
+        var firstSample = new Snapshot(1, 2, 3, 4, true, 5);
+        var secondSample = new Snapshot(7, 8, 9, 10, false, 11);
+        var collector =
+            new MqPressureMetricCollector(
+                destination -> {
+                  int call = calls.incrementAndGet();
+                  if (call == FIRST_READ_ORDINAL) {
+                    entered.countDown();
+                    await(release);
+                    return Optional.of(firstSample);
+                  }
+                  assertSame(firstSample, owner.get().snapshot(destination).orElseThrow());
+                  return Optional.of(secondSample);
+                },
+                registry,
+                DEBUG_MODE);
+        owner.set(collector);
+        var first = executor.submit(() -> collector.collect(BrokerTopology.ASYNC_WORK));
+        try {
+          await(entered);
+          var second =
+              executor.submit(
+                  () -> {
+                    contender.set(Thread.currentThread());
+                    attempted.countDown();
+                    return collector.collect(BrokerTopology.ASYNC_WORK);
+                  });
+          await(attempted);
+          long until = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
+          while (contender.get().getState() != Thread.State.BLOCKED
+              && !second.isDone()
+              && System.nanoTime() < until) Thread.onSpinWait();
+          assertEquals(Thread.State.BLOCKED, contender.get().getState());
+          assertEquals(1, calls.get());
+          assertTrue(collector.snapshot(BrokerTopology.ASYNC_WORK).isEmpty());
+          unknown(registry, ASYNC_ADDRESS);
+          release.countDown();
+          assertSame(firstSample, first.get(5, TimeUnit.SECONDS).orElseThrow());
+          assertSame(secondSample, second.get(5, TimeUnit.SECONDS).orElseThrow());
+          assertSame(secondSample, collector.snapshot(BrokerTopology.ASYNC_WORK).orElseThrow());
+          values(registry, ASYNC_ADDRESS, 7, 8, 9, 10, 0, 11);
+          assertEquals(2, calls.get());
+        } finally {
+          release.countDown();
+        }
       } finally {
-        release.countDown();
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }
@@ -369,53 +374,61 @@ class MqPressureMetricCollectorTest {
   @Test
   void mqConn007ParallelCallsAndSeparateOwnersKeepExactReturnedObservations() throws Exception {
     try (var registry = new Registry();
-        var other = new Registry();
-        var executor = Executors.newFixedThreadPool(8)) {
-      var calls = new AtomicInteger();
-      var expectedByIdentity =
-          java.util.Collections.synchronizedMap(new java.util.IdentityHashMap<Snapshot, long[]>());
-      var collector =
-          new MqPressureMetricCollector(
-              destination -> {
-                int n = calls.incrementAndGet();
-                long[] fixture = {n, n * 10L, n * 100L, n * 1000L, n * 10000L};
-                var sample =
-                    new Snapshot(fixture[0], fixture[1], fixture[2], fixture[3], true, fixture[4]);
-                expectedByIdentity.put(sample, fixture);
-                return Optional.of(sample);
-              },
-              registry,
-              DEBUG_MODE);
-      var separate = new Snapshot(7, 8, 9, 10, false, 11);
-      var second =
-          new MqPressureMetricCollector(destination -> Optional.of(separate), other, DEBUG_MODE);
-      second.collect(BrokerTopology.ASYNC_WORK);
-      var tasks = new ArrayList<Callable<Long>>();
-      for (int i = 0; i < 64; i++)
-        tasks.add(
-            () -> {
-              var actual = collector.collect(BrokerTopology.ASYNC_WORK).orElseThrow();
-              var fixture = java.util.Objects.requireNonNull(expectedByIdentity.get(actual));
-              assertEquals(fixture[0], actual.messages());
-              assertEquals(fixture[1], actual.queueBytes());
-              assertEquals(fixture[2], actual.addressMemoryBytes());
-              assertEquals(fixture[3], actual.addressPagedBytes());
-              assertTrue(actual.pagingActive());
-              assertEquals(fixture[4], actual.pageFiles());
-              return actual.messages();
-            });
-      var observed = new java.util.HashSet<Long>();
-      for (var result : executor.invokeAll(tasks)) observed.add(result.get(5, TimeUnit.SECONDS));
-      assertEquals(
-          IntStream.rangeClosed(1, 64).mapToObj(i -> (long) i).collect(Collectors.toSet()),
-          observed);
-      assertEquals(64, calls.get());
-      assertEquals(64, collector.snapshot(BrokerTopology.ASYNC_WORK).orElseThrow().messages());
-      assertSame(separate, second.snapshot(BrokerTopology.ASYNC_WORK).orElseThrow());
-      values(other, ASYNC_ADDRESS, 7, 8, 9, 10, 0, 11);
-      assertEquals(36, registry.getMeters().size());
-      assertEquals(36, other.getMeters().size());
-      assertTrue(collector.snapshot(BrokerTopology.WEB_LOG).isEmpty());
+        var other = new Registry()) {
+      var executor = Executors.newFixedThreadPool(8);
+      try {
+        var calls = new AtomicInteger();
+        var expectedByIdentity =
+            java.util.Collections.synchronizedMap(
+                new java.util.IdentityHashMap<Snapshot, long[]>());
+        var collector =
+            new MqPressureMetricCollector(
+                destination -> {
+                  int n = calls.incrementAndGet();
+                  long[] fixture = {n, n * 10L, n * 100L, n * 1000L, n * 10000L};
+                  var sample =
+                      new Snapshot(
+                          fixture[0], fixture[1], fixture[2], fixture[3], true, fixture[4]);
+                  expectedByIdentity.put(sample, fixture);
+                  return Optional.of(sample);
+                },
+                registry,
+                DEBUG_MODE);
+        var separate = new Snapshot(7, 8, 9, 10, false, 11);
+        var second =
+            new MqPressureMetricCollector(destination -> Optional.of(separate), other, DEBUG_MODE);
+        second.collect(BrokerTopology.ASYNC_WORK);
+        var tasks = new ArrayList<Callable<Long>>();
+        for (int i = 0; i < 64; i++)
+          tasks.add(
+              () -> {
+                var actual = collector.collect(BrokerTopology.ASYNC_WORK).orElseThrow();
+                var fixture = java.util.Objects.requireNonNull(expectedByIdentity.get(actual));
+                assertEquals(fixture[0], actual.messages());
+                assertEquals(fixture[1], actual.queueBytes());
+                assertEquals(fixture[2], actual.addressMemoryBytes());
+                assertEquals(fixture[3], actual.addressPagedBytes());
+                assertTrue(actual.pagingActive());
+                assertEquals(fixture[4], actual.pageFiles());
+                return actual.messages();
+              });
+        var observed = new java.util.HashSet<Long>();
+        for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+          observed.add(result.get(5, TimeUnit.SECONDS));
+        assertEquals(
+            IntStream.rangeClosed(1, 64).mapToObj(i -> (long) i).collect(Collectors.toSet()),
+            observed);
+        assertEquals(64, calls.get());
+        assertEquals(64, collector.snapshot(BrokerTopology.ASYNC_WORK).orElseThrow().messages());
+        assertSame(separate, second.snapshot(BrokerTopology.ASYNC_WORK).orElseThrow());
+        values(other, ASYNC_ADDRESS, 7, 8, 9, 10, 0, 11);
+        assertEquals(36, registry.getMeters().size());
+        assertEquals(36, other.getMeters().size());
+        assertTrue(collector.snapshot(BrokerTopology.WEB_LOG).isEmpty());
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+      }
     }
   }
 

@@ -1,0 +1,177 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T09:45:04.515349+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricCollectorTest.java",
+      "originalSha256": "e427125e32b6b65234d2999587fd989f5a385fcb04c46be0948b0d01fd46ea5a",
+      "currentSha256": "08d275fd3b9ffd453cd435a664d15b804fa845692f3df48bfecbd0c634d498b2",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 2,
+      "existingFutureGet5SitesRetained": 3
+    }
+  ],
+  "originalWholeCases": 8,
+  "rawFindings": 16,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 1,
+  "finiteOwnerSitesCorrected": 2,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25494-mq-pressure-collector-configured-prepare-v1/manifest.json",
+    "sha256": "ee1fb5e00c0a00403ba78bda2fdaa1ce54c6e1bc72cf0e50039d6b5268d834a0"
+  },
+  "classifications": [
+    {
+      "className": "MqPressureMetricCollectorTest",
+      "method": "await",
+      "variable": null,
+      "line": 120,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Restore current owned test-worker interrupt flag after bounded latch InterruptedException, not new/external thread creation."
+    },
+    {
+      "className": "MqPressureMetricCollectorTest",
+      "method": "mqConn006OwnedContenderIsBlockedUntilReadAndPublicationComplete",
+      "variable": "executor",
+      "line": 314,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MqPressureMetricCollectorTest",
+      "method": "mqConn006OwnedContenderIsBlockedUntilReadAndPublicationComplete",
+      "variable": "executor",
+      "line": 314,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MqPressureMetricCollectorTest",
+      "method": "mqConn006OwnedContenderIsBlockedUntilReadAndPublicationComplete",
+      "variable": null,
+      "line": 320,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MqPressureMetricCollectorTest",
+      "method": "mqConn006OwnedContenderIsBlockedUntilReadAndPublicationComplete",
+      "variable": "first",
+      "line": 339,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MqPressureMetricCollectorTest",
+      "method": "mqConn006OwnedContenderIsBlockedUntilReadAndPublicationComplete",
+      "variable": "second",
+      "line": 343,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MqPressureMetricCollectorTest",
+      "method": "mqConn006OwnedContenderIsBlockedUntilReadAndPublicationComplete",
+      "variable": null,
+      "line": 345,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MqPressureMetricCollectorTest",
+      "method": "mqConn006OwnedContenderIsBlockedUntilReadAndPublicationComplete",
+      "variable": null,
+      "line": 351,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MqPressureMetricCollectorTest",
+      "method": "mqConn006OwnedContenderIsBlockedUntilReadAndPublicationComplete",
+      "variable": null,
+      "line": 354,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MqPressureMetricCollectorTest",
+      "method": "mqConn006OwnedContenderIsBlockedUntilReadAndPublicationComplete",
+      "variable": null,
+      "line": 368,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MqPressureMetricCollectorTest",
+      "method": "mqConn006OwnedContenderIsBlockedUntilReadAndPublicationComplete",
+      "variable": null,
+      "line": 369,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MqPressureMetricCollectorTest",
+      "method": "mqConn007ParallelCallsAndSeparateOwnersKeepExactReturnedObservations",
+      "variable": "executor",
+      "line": 378,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MqPressureMetricCollectorTest",
+      "method": "mqConn007ParallelCallsAndSeparateOwnersKeepExactReturnedObservations",
+      "variable": "executor",
+      "line": 378,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MqPressureMetricCollectorTest",
+      "method": "mqConn007ParallelCallsAndSeparateOwnersKeepExactReturnedObservations",
+      "variable": null,
+      "line": 416,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MqPressureMetricCollectorTest",
+      "method": "mqConn007ParallelCallsAndSeparateOwnersKeepExactReturnedObservations",
+      "variable": null,
+      "line": 429,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    },
+    {
+      "className": "MqPressureMetricCollectorTest",
+      "method": "mqConn007ParallelCallsAndSeparateOwnersKeepExactReturnedObservations",
+      "variable": null,
+      "line": 430,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owned2/8workers; existing5second BLOCKED/latch/get retained, twoinvokeAll10 andthree singlefinallyshutdownNow/await10 before registry closure. No container/external worker."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}
