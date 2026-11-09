@@ -1,0 +1,18 @@
+# 3972 Web Media供給byte 原8 有限owner結果
+
+G03.05主/P01809関連0 REWORK原1/3/6cap8保持。BUG2602複合二registry+worker8単一finally10/一invokeAll10、元8body/literal/全36series/64precomputedfixture/get5一site保持。configured986skipreflow/raw6(thread4/resource1/owner-onlyprecomputedMap1)全個別app0/CS0。工具BUG2603/YKT2298 Git表示quoteをpath扱いpreflight1 before25536→NUL/UTF8境界のみ/全逆AST・固定4vector/旧三非該当25538→25526 PF0。Source5dbdc通常push後25528原8初一回真正0/c8b17962→25532独立0/0ec32942・10反例、target1Source2Code L42M7C2B18I240全miss0/全Source四100/naturalclassB0実導出0/4MainCRC/SDK50identity既52部分集合新metadata0/held四init0/実HTTPmedia0。SS351/333固定row三×mode三×status四36/109inc/MAXbinary64/全64bytes2080・AUDIOINLINE200=38/partial前後identity・別owner7独立一致。BUG2602/2603/YKT2298限定閉鎖、global2177/2565/2599PT_HOLD/2596-YKT2296wholeMavenHOLD保持。unique520Java416/114pending12whole93暫定/新leaf0/正式1964-53工数null。usage09:40:58 854e4ca2 N/Tnull次10:40:58。
+
+Source `5dbdc47b9d9f2dcc44e9df3acb686bd36a6dbf73`/Main `7aed8eace7c844c2f79f2e39db766faf914890d5`。実command `PYTHONPATH=tools/quality:tools/quality/vm/050_s1 python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg25528_web_media_bytes_original_eight_pt.py`。JDK25.0.4/Console1.13.4/JaCoCo0.8.15/CoreSDK1.17.1。OS/branch/日時/command/環境/input/outputは原manifestと独立reportedEnvironment、Test IDはtestcases.safe.xml全8。SDKはidentityのみ、Main helper部分資格0。旧51成功確認再演0、当8真正0のみ同source/run資格、全体451/CHR/正式化へ加算0。
+
+|証跡|SHA256|
+|---|---|
+|evidence/01_PT/018_NK-OPS-001/evidence/PG25522-web-media-bytes-owner-before-v1/manifest.json|39aedf51ae9dbfaadf8810c3b409a063c8143a20b0e59949f7609dc235243b84|
+|evidence/01_PT/018_NK-OPS-001/evidence/PG25524-web-media-bytes-configured-prepare-v1/manifest.json|b23042d61be6a1c410d48cc64cb740ad013ce1b746a1a68e2e44aa22e79cd9cb|
+|evidence/01_PT/018_NK-OPS-001/evidence/PG25526-web-media-bytes-source-static-v1/manifest.json|91deab49b2505b520fc06470f381d4cae2306b87e01a1921e3f2fbd3a308a741|
+|evidence/01_PT/018_NK-OPS-001/evidence/PG25536-design-path-cquote-before-v1/manifest.json|8b1d51a6d04ae0e69855da81ab1da49c7109efc62fdb761286bfe74eb9be8086|
+|evidence/01_PT/018_NK-OPS-001/evidence/PG25538-design-path-cquote-independent-v1/manifest.json|6ceb2e75c0bc5404647b269634db1d33b18cf5b521ac65e0ec40cfb5ec64e659|
+|evidence/01_PT/018_NK-OPS-001/evidence/PG25528-web-media-bytes-original-whole8-v1/manifest.json|c8b17962e77c7fc9aaf0d5c0e908634eff32963a418b9993a791545e833aa9f8|
+|evidence/01_PT/018_NK-OPS-001/evidence/PG25530-web-media-bytes-sdk-identity-v1/manifest.json|005fc0185af226120e230b8889a1feb0f8d6edc4437314bf76d773d56ae4a521|
+|evidence/01_PT/018_NK-OPS-001/evidence/PG25532-web-media-bytes-whole8-independent-v1/manifest.json|0ec32942ab3e0127eaf2ae14e3d86f98e91e7386a22cd5fb5382103938ea1a59|
+
+未確認source/HOLDを閉鎖せず、分岐なし補助欄は実XML由来。元期待値/上位設計/Currentbaseline/DB鍵等不変更。次：Continue477 after originalWebMediaBytes whole8 PG25528 source5dbdc/Main7aed genuine0 c8b17962,25532 independent0 0ec32942 1Source2Codefour100/4MainCRC/SDK50identity/held4init0; no success replay. Originalbody/get5/precomputed64/36series preserved andN-Aderived. BUG2603 pathCquote preflight1 saved25536 fixedNUL4vectors+3nonapp25538 thenPF0, no Productretry. Next fullMain/Test/helper/followup review DbQueryDurationMetricRecorderTest orOverflowSafeHttpMeterRegistryTest pure ownSDK candidates from25482; actualFuturetypeandinvokeAllseparatefromsame-lineget5. No protectedRoot2 read/stat/hash/compile, no fourheldcompile/runtime oractualexternalRootVMDBJMSFFMkeyscohortpermit. Configured959skipreflow only; wholeMaven2596/BUG2565/2599HOLD remainOPEN. Main7aed/unique520Java416/114pending12whole93/formal1964-53effortnull/G07class1213remain3280+22actualSecretnull unchanged. Usage09:40:58 854e4ca2 N/Tnull next10:40:58 actuallydue. Fresh<=10 preservation/continuous-v2.
