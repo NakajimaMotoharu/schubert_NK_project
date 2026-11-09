@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-09 固定formatter設定と既entry保全（BUG2596/YKT2296）
+
+当続行六prepare 928/934/940/946/952/958は歴史entryとしてhash保全し新規再利用しない。以後は959の固定GJF1.36.1 `--skip-reflowing-long-strings`明示profileを使い、初回commandを実schemaから照合する。PG25422で選択十四wholeのconfigured CLI照合0/source変更0を確認、既成功96は再演せず保持する。CLI一致は全六Maven Spotless合格でない。全六読取は現在HOLDのRoot二Testへ到達するため実施せず、BUG2596/YKT2296の全体format確認をHOLD/PENDINGとして維持する。既Source/Class/counter実測は保持し、全体451・正式認定を進めない。規約/承認oracle/品質/モデル/枠/禁止範囲を変更しない。
+
+
 ## 2026-11-09 設計表の実表現を固定oracleへ対応（BUG2591/YKT2293）
 
 設計書の媒体名は333のAudio/Video/Music（IF009/012/016）表行であり、enumの大文字名が文中に直接存在すると推測しない。仕様表の正確rowと原Test固定enum三組を明示対応し、資料hash・元全body/literal・他全AST/oracleを保持する。欠落/alias/未知を9反例で拒否、既成功原16は再演せず独立postだけ是正する。上位期待・451・モデル・枠・HOLD不変更。

@@ -1,0 +1,236 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T09:10:17.797012+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobCountRepositoryTest.java",
+      "originalSha256": "3f6c16ee0a85788b96746a87d870d2874d4ee753e639abb89796f0fcba632042",
+      "currentSha256": "5e97b19bfad8df6c7d324c3dc0c43e6f1c5b712e59dbd53e37497adc8824f51b",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 1,
+      "fixtureStyleSitesCorrected": 3,
+      "existingFutureGet5SitesRetained": 0
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricCollectorTest.java",
+      "originalSha256": "e91c368880999ba74d2157210ecaa3c80f4388ee80a4d94f1862a0efc1c973ed",
+      "currentSha256": "6377ab4703425dd9015760e369c4deb839e1c1c5a5ddf8a4d76c1a10f68c15d9",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 2,
+      "fixtureStyleSitesCorrected": 0,
+      "existingFutureGet5SitesRetained": 2
+    }
+  ],
+  "originalWholeCases": 16,
+  "rawFindings": 21,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 2,
+  "finiteOwnerSitesCorrected": 3,
+  "fixtureStyleSitesCorrected": 3,
+  "oldStyleRawFindings": 24,
+  "newStyleRawFindings": 21,
+  "styleFindingsRemoved": 3,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25424-api-async-jdbc-configured-prepare-v1/manifest.json",
+    "sha256": "0479c104bc3ff66de9f65e600e82c60479237d1c395c090c16d4f7887bedaed5"
+  },
+  "classifications": [
+    {
+      "className": "AsyncJobCountRepositoryTest.Fixture",
+      "method": null,
+      "variable": "faults",
+      "line": 45,
+      "rule": "UseConcurrentHashMap",
+      "applicable": false,
+      "basis": "Each parallel task owns separate Fixture/faults HashMap. Failure maps populated synchronously before calls; no shared mutation across tasks/connection getters."
+    },
+    {
+      "className": "AsyncJobCountRepositoryTest.Fixture",
+      "method": "connection",
+      "variable": null,
+      "line": 69,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "basis": "Own JDKProxy uses declaring JDBC interface loader for exact visibility/type identity; no context-loader override, driver lookup or actualconnection."
+    },
+    {
+      "className": "AsyncJobCountRepositoryTest.Fixture",
+      "method": "statement",
+      "variable": null,
+      "line": 96,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "basis": "Own JDKProxy uses declaring JDBC interface loader for exact visibility/type identity; no context-loader override, driver lookup or actualconnection."
+    },
+    {
+      "className": "AsyncJobCountRepositoryTest.Fixture",
+      "method": "result",
+      "variable": null,
+      "line": 123,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "basis": "Own JDKProxy uses declaring JDBC interface loader for exact visibility/type identity; no context-loader override, driver lookup or actualconnection."
+    },
+    {
+      "className": "AsyncJobCountRepositoryTest",
+      "method": "asyncDb008ParallelBorrowedConnectionsHaveNoCrossOwnerState",
+      "variable": "pool",
+      "line": 340,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "AsyncJobCountRepositoryTest",
+      "method": "asyncDb008ParallelBorrowedConnectionsHaveNoCrossOwnerState",
+      "variable": "pool",
+      "line": 340,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "AsyncJobCountRepositoryTest",
+      "method": "asyncDb008ParallelBorrowedConnectionsHaveNoCrossOwnerState",
+      "variable": "results",
+      "line": 342,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "AsyncJobCountRepositoryTest",
+      "method": "asyncDb008ParallelBorrowedConnectionsHaveNoCrossOwnerState",
+      "variable": null,
+      "line": 346,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "AsyncJobCountRepositoryTest",
+      "method": "asyncDb008ParallelBorrowedConnectionsHaveNoCrossOwnerState",
+      "variable": null,
+      "line": 347,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "AsyncJobMetricCollectorTest",
+      "method": "gate",
+      "variable": null,
+      "line": 186,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "basis": "Own JDKProxy uses declaring JDBC interface loader for exact visibility/type identity; no context-loader override, driver lookup or actualconnection."
+    },
+    {
+      "className": "AsyncJobMetricCollectorTest",
+      "method": "asyncConn006OwnerSerializesReadCloseAndPublication",
+      "variable": "pool",
+      "line": 210,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "AsyncJobMetricCollectorTest",
+      "method": "asyncConn006OwnerSerializesReadCloseAndPublication",
+      "variable": "pool",
+      "line": 210,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "AsyncJobMetricCollectorTest",
+      "method": "asyncConn006OwnerSerializesReadCloseAndPublication",
+      "variable": "one",
+      "line": 220,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "AsyncJobMetricCollectorTest",
+      "method": "asyncConn006OwnerSerializesReadCloseAndPublication",
+      "variable": "two",
+      "line": 224,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "AsyncJobMetricCollectorTest",
+      "method": "asyncConn006OwnerSerializesReadCloseAndPublication",
+      "variable": null,
+      "line": 243,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "AsyncJobMetricCollectorTest",
+      "method": "asyncConn006OwnerSerializesReadCloseAndPublication",
+      "variable": null,
+      "line": 244,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "AsyncJobMetricCollectorTest",
+      "method": "asyncConn007ParallelCallersAndIndependentOwnersHaveNoCrossState",
+      "variable": "pool",
+      "line": 253,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "AsyncJobMetricCollectorTest",
+      "method": "asyncConn007ParallelCallersAndIndependentOwnersHaveNoCrossState",
+      "variable": "pool",
+      "line": 253,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "AsyncJobMetricCollectorTest",
+      "method": "asyncConn007ParallelCallersAndIndependentOwnersHaveNoCrossState",
+      "variable": "actual",
+      "line": 272,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "AsyncJobMetricCollectorTest",
+      "method": "asyncConn007ParallelCallersAndIndependentOwnersHaveNoCrossState",
+      "variable": null,
+      "line": 278,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "AsyncJobMetricCollectorTest",
+      "method": "asyncConn007ParallelCallersAndIndependentOwnersHaveNoCrossState",
+      "variable": null,
+      "line": 279,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

@@ -206,36 +206,42 @@ class AsyncJobMetricCollectorTest {
 
   @Test
   void asyncConn006OwnerSerializesReadCloseAndPublication() throws Exception {
-    try (var registry = new Registry();
-        var pool = Executors.newFixedThreadPool(2)) {
-      var collector = collector(registry, DEBUG_MODE);
-      var first = new Fixture(Row.row(RECEIVED_STATE, 1));
-      var second = new Fixture(Row.row(RECEIVED_STATE, 2));
-      var entered = new CountDownLatch(1);
-      var release = new CountDownLatch(1);
-      var secondCalled = new CountDownLatch(1);
-      var secondEntered = new CountDownLatch(1);
-      var secondRelease = new CountDownLatch(0);
-      var one = pool.submit(() -> collector.collect(gate(first.connection(), entered, release)));
+    try (var registry = new Registry()) {
+      var pool = Executors.newFixedThreadPool(2);
       try {
-        assertTrue(entered.await(5, TimeUnit.SECONDS));
-        var two =
-            pool.submit(
-                () -> {
-                  secondCalled.countDown();
-                  return collector.collect(gate(second.connection(), secondEntered, secondRelease));
-                });
-        assertTrue(secondCalled.await(5, TimeUnit.SECONDS));
-        assertFalse(secondEntered.await(100, TimeUnit.MILLISECONDS));
-        assertTrue(collector.snapshot().isEmpty());
-        release.countDown();
-        assertEquals(1, one.get(5, TimeUnit.SECONDS).orElseThrow().totalJobs());
-        assertEquals(2, two.get(5, TimeUnit.SECONDS).orElseThrow().totalJobs());
-        assertEquals(2, collector.snapshot().orElseThrow().value(State.RECEIVED));
-        first.complete();
-        second.complete();
+        var collector = collector(registry, DEBUG_MODE);
+        var first = new Fixture(Row.row(RECEIVED_STATE, 1));
+        var second = new Fixture(Row.row(RECEIVED_STATE, 2));
+        var entered = new CountDownLatch(1);
+        var release = new CountDownLatch(1);
+        var secondCalled = new CountDownLatch(1);
+        var secondEntered = new CountDownLatch(1);
+        var secondRelease = new CountDownLatch(0);
+        var one = pool.submit(() -> collector.collect(gate(first.connection(), entered, release)));
+        try {
+          assertTrue(entered.await(5, TimeUnit.SECONDS));
+          var two =
+              pool.submit(
+                  () -> {
+                    secondCalled.countDown();
+                    return collector.collect(
+                        gate(second.connection(), secondEntered, secondRelease));
+                  });
+          assertTrue(secondCalled.await(5, TimeUnit.SECONDS));
+          assertFalse(secondEntered.await(100, TimeUnit.MILLISECONDS));
+          assertTrue(collector.snapshot().isEmpty());
+          release.countDown();
+          assertEquals(1, one.get(5, TimeUnit.SECONDS).orElseThrow().totalJobs());
+          assertEquals(2, two.get(5, TimeUnit.SECONDS).orElseThrow().totalJobs());
+          assertEquals(2, collector.snapshot().orElseThrow().value(State.RECEIVED));
+          first.complete();
+          second.complete();
+        } finally {
+          release.countDown();
+        }
       } finally {
-        release.countDown();
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }
@@ -243,30 +249,35 @@ class AsyncJobMetricCollectorTest {
   @Test
   void asyncConn007ParallelCallersAndIndependentOwnersHaveNoCrossState() throws Exception {
     try (var registry = new Registry();
-        var otherRegistry = new Registry();
-        var pool = Executors.newFixedThreadPool(8)) {
-      var collector = collector(registry, DEBUG_MODE);
-      var other = collector(otherRegistry, DEBUG_MODE);
-      other.collect(new Fixture(Row.row(CANCELLED_STATE, 222)).connection());
-      var tasks = new ArrayList<Callable<Long>>();
-      for (int owner = 0; owner < 64; owner++) {
-        long count = owner;
-        tasks.add(
-            () -> {
-              var f = new Fixture(Row.row(RECEIVED_STATE, count), Row.row(ERROR_VALUE, 2));
-              var result = collector.collect(f.connection()).orElseThrow();
-              assertEquals(count, result.value(State.RECEIVED));
-              assertEquals(2, result.value(State.ERROR));
-              assertEquals(0, result.value(State.CANCELLED));
-              f.complete();
-              return result.totalJobs();
-            });
+        var otherRegistry = new Registry()) {
+      var pool = Executors.newFixedThreadPool(8);
+      try {
+        var collector = collector(registry, DEBUG_MODE);
+        var other = collector(otherRegistry, DEBUG_MODE);
+        other.collect(new Fixture(Row.row(CANCELLED_STATE, 222)).connection());
+        var tasks = new ArrayList<Callable<Long>>();
+        for (int owner = 0; owner < 64; owner++) {
+          long count = owner;
+          tasks.add(
+              () -> {
+                var f = new Fixture(Row.row(RECEIVED_STATE, count), Row.row(ERROR_VALUE, 2));
+                var result = collector.collect(f.connection()).orElseThrow();
+                assertEquals(count, result.value(State.RECEIVED));
+                assertEquals(2, result.value(State.ERROR));
+                assertEquals(0, result.value(State.CANCELLED));
+                f.complete();
+                return result.totalJobs();
+              });
+        }
+        var actual = pool.invokeAll(tasks, 10, TimeUnit.SECONDS);
+        for (int i = 0; i < actual.size(); i++) assertEquals(i + 2L, actual.get(i).get());
+        assertEquals(222, other.snapshot().orElseThrow().totalJobs());
+        assertEquals(5, registry.getMeters().size());
+        assertEquals(5, otherRegistry.getMeters().size());
+      } finally {
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
-      var actual = pool.invokeAll(tasks);
-      for (int i = 0; i < actual.size(); i++) assertEquals(i + 2L, actual.get(i).get());
-      assertEquals(222, other.snapshot().orElseThrow().totalJobs());
-      assertEquals(5, registry.getMeters().size());
-      assertEquals(5, otherRegistry.getMeters().size());
     }
   }
 

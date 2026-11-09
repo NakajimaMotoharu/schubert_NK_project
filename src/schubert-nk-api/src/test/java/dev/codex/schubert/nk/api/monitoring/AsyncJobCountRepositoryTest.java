@@ -19,12 +19,15 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /**
  * ASYNCDB001..008: owned JDBC doubles only; SQL/count/ownership oracles independent of production.
  */
 class AsyncJobCountRepositoryTest {
+  private static final int READ_ONLY_TRANSACTION_VARIANT = 1;
+  private static final int ISOLATION_TRANSACTION_VARIANT = 2;
   private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
   private static final String FIXTURE_RECEIVED_35302D54 = "RECEIVED";
   private static final String SQL =
@@ -123,7 +126,8 @@ class AsyncJobCountRepositoryTest {
                 switch (method.getName()) {
                   case "next":
                     fault("next");
-                    return ++cursor < rows.size();
+                    cursor++;
+                    return cursor < rows.size();
                   case "getString":
                     assertEquals("state", arguments[0]);
                     fault("state");
@@ -198,8 +202,9 @@ class AsyncJobCountRepositoryTest {
     for (int variant = 0; variant < 3; variant++) {
       var f = new Fixture();
       if (variant == 0) f.autoCommit = true;
-      if (variant == 1) f.readOnly = false;
-      if (variant == 2) f.isolation = Connection.TRANSACTION_SERIALIZABLE;
+      if (variant == READ_ONLY_TRANSACTION_VARIANT) f.readOnly = false;
+      if (variant == ISOLATION_TRANSACTION_VARIANT)
+        f.isolation = Connection.TRANSACTION_SERIALIZABLE;
       assertEquals(
           "async metric source rejected",
           assertThrows(SQLException.class, () -> repository.read(f.connection())).getMessage());
@@ -332,10 +337,14 @@ class AsyncJobCountRepositoryTest {
             return actual.totalJobs();
           });
     }
-    try (var pool = Executors.newFixedThreadPool(8)) {
-      var results = pool.invokeAll(tasks);
+    var pool = Executors.newFixedThreadPool(8);
+    try {
+      var results = pool.invokeAll(tasks, 10, TimeUnit.SECONDS);
       for (int owner = 0; owner < results.size(); owner++)
         assertEquals(owner + 2L, results.get(owner).get());
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
