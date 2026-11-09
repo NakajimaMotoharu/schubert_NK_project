@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-09 分岐なし補助metadataの実XML導出（BUG2601/YKT2297）
+
+凍結postのnaturalZeroBranchClasses=0定数を将来templateへ転用しない。input983同様class/source別XMLcounterから導出し、BRANCH分母0はN/A/null、任意欄欠落は未記載として区別。全Source非空四counter gateとaggregateを混同せず、984の独立境界/型/未網羅反例を適用する。PG25512/25514は明示24既報告のimmutable追補1件と欠落任意欄2件の導出、製品再演0/正式受入0。全品質/HOLD条件は維持。
+
+
 ## 2026-11-09 固定formatter設定と既entry保全（BUG2596/YKT2296）
 
 当続行六prepare 928/934/940/946/952/958は歴史entryとしてhash保全し新規再利用しない。以後は959の固定GJF1.36.1 `--skip-reflowing-long-strings`明示profileを使い、初回commandを実schemaから照合する。PG25422で選択十四wholeのconfigured CLI照合0/source変更0を確認、既成功96は再演せず保持する。CLI一致は全六Maven Spotless合格でない。全六読取は現在HOLDのRoot二Testへ到達するため実施せず、BUG2596/YKT2296の全体format確認をHOLD/PENDINGとして維持する。既Source/Class/counter実測は保持し、全体451・正式認定を進めない。規約/承認oracle/品質/モデル/枠/禁止範囲を変更しない。
