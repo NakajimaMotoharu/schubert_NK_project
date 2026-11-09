@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-09 依存commandは各exitで進める（25738/25740）
+
+一つのshell command内へ独立した生成・lint・本体を無条件に並べない。原則一操作一commandとし、functions側でexit0を確認してから依存操作を発行する。shell最終exit0だけで先行assertionを成功扱いしない。生成候補がない場合はlint/bodyへ進めず、原失敗と補正を保存する。上位oracle/品質/モデル/枠/全HOLDを変更しない。
+
+
 ## 2026-11-09 before参照は番号だけでなく完全名/hashへ結合（BUG2611/YKT2301）
 
 複写したprepare/PF/postのbefore入力は保存済みmanifestの完全dirnameとhashへ明示結合し、run番号だけの置換でsuffixを推測しない。1024のAST-only before検査（八反例）と実manifest path/hashを本体前に保存する。25692/25694/25700で四targetを確認し、元正常試験を確認目的で再演しない。1011のraw run/count検査と併用し、全品質/上位/モデル/枠/HOLDを維持する。
