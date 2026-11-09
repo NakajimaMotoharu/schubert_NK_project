@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-09 最小SDKでもclassfile annotation依存を閉じる（BUG2622/YKT2305）
+
+Gson2.14のpublic APIはErrorProne InlineMe注釈を持ち、strict javacは注釈jar欠落も警告として拒否する。runtime codeだけをSDK closureとせず、公開POM/既qualified exactSHAのannotation依存を含める。初25958 compile1/0Test/6warningsを保全し、-Xlint:all/Werrorを維持した新source9f/別25982で警告0と未実行原6を初検証した。SDK code2jarとSDK26class identity、元三target/五metadata反例を別記し、旧成功の確認再演・抑制・品質/モデル/枠/HOLD変更なし。
+
+
 ## 2026-11-09 Applicationと静的工具のdependency role分離（BUG2620/YKT2304）
 
 全toolHashesにはPMD同梱Gson/Gson-extrasとApplication jarが共存する。basename prefixだけでappclasspathを選ばず、既qualified appdependency exactpath/sha集合へjoinし、宣言App16とtool-only2を明示する。元failclosed1/誤診断assert1/工具費を保持し、五metadata反例と全四targetを実pinで確認。原10成功の確認再演0/品質・モデル・枠・HOLD不変更。
