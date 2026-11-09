@@ -1,0 +1,87 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T10:12:42.124237+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaBytesMetricRecorderTest.java",
+      "originalSha256": "62719b147ea98286446e4da84208979aa7903f7a6682714a0335534a7ce3aa7a",
+      "currentSha256": "4843d040bce5fea930a485492d0f6e4d60de9644c949281f64570a82bab607ca",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 1,
+      "existingFutureGet5SitesRetained": 1
+    }
+  ],
+  "originalWholeCases": 8,
+  "rawFindings": 6,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 1,
+  "finiteOwnerSitesCorrected": 1,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25524-web-media-bytes-configured-prepare-v1/manifest.json",
+    "sha256": "b23042d61be6a1c410d48cc64cb740ad013ce1b746a1a68e2e44aa22e79cd9cb"
+  },
+  "classifications": [
+    {
+      "className": "MediaBytesMetricRecorderTest",
+      "method": "mediaByte007ConcurrentByteTotalsComeFromPrecomputedInputsAndOwnersAreIndependent",
+      "variable": "executor",
+      "line": 321,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Owned JUnit executor8 with one timed invokeAll10 and single finallyshutdownNow/await10 before two registry closure; no container/external worker."
+    },
+    {
+      "className": "MediaBytesMetricRecorderTest",
+      "method": "mediaByte007ConcurrentByteTotalsComeFromPrecomputedInputsAndOwnersAreIndependent",
+      "variable": "executor",
+      "line": 321,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit executor8 with one timed invokeAll10 and single finallyshutdownNow/await10 before two registry closure; no container/external worker."
+    },
+    {
+      "className": "MediaBytesMetricRecorderTest",
+      "method": "mediaByte007ConcurrentByteTotalsComeFromPrecomputedInputsAndOwnersAreIndependent",
+      "variable": "expected",
+      "line": 324,
+      "rule": "UseConcurrentHashMap",
+      "applicable": false,
+      "basis": "Only owner precomputes expected map before submit, workers capture scalar type/mode/status/bytes and never access map; reads only by owner after timed join. Concurrent map would hide independent oracle ownership."
+    },
+    {
+      "className": "MediaBytesMetricRecorderTest",
+      "method": "mediaByte007ConcurrentByteTotalsComeFromPrecomputedInputsAndOwnersAreIndependent",
+      "variable": null,
+      "line": 338,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit executor8 with one timed invokeAll10 and single finallyshutdownNow/await10 before two registry closure; no container/external worker."
+    },
+    {
+      "className": "MediaBytesMetricRecorderTest",
+      "method": "mediaByte007ConcurrentByteTotalsComeFromPrecomputedInputsAndOwnersAreIndependent",
+      "variable": null,
+      "line": 358,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit executor8 with one timed invokeAll10 and single finallyshutdownNow/await10 before two registry closure; no container/external worker."
+    },
+    {
+      "className": "MediaBytesMetricRecorderTest",
+      "method": "mediaByte007ConcurrentByteTotalsComeFromPrecomputedInputsAndOwnersAreIndependent",
+      "variable": null,
+      "line": 359,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit executor8 with one timed invokeAll10 and single finallyshutdownNow/await10 before two registry closure; no container/external worker."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

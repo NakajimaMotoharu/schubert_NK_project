@@ -317,41 +317,47 @@ class MediaBytesMetricRecorderTest {
   void mediaByte007ConcurrentByteTotalsComeFromPrecomputedInputsAndOwnersAreIndependent()
       throws Exception {
     try (var registry = new Registry();
-        var otherRegistry = new Registry();
-        var executor = Executors.newFixedThreadPool(8)) {
-      var recorder = new MediaBytesMetricRecorder(registry, DEBUG_MODE);
-      Map<String, Long> expected = new HashMap<>();
-      var tasks = new ArrayList<Callable<Void>>();
-      for (int index = 0; index < 64; index++) {
-        var type = TYPES.get(index % 3);
-        var mode = MODES.get((index / 3) % 3);
-        int status = STATUSES.get((index / 9) % 4);
-        long bytes = 1L + index;
-        expected.merge(type.name() + "/" + mode.name() + "/" + status, bytes, Long::sum);
-        tasks.add(
-            () -> {
-              recorder.record(type, mode, status, bytes);
-              return null;
-            });
+        var otherRegistry = new Registry()) {
+      var executor = Executors.newFixedThreadPool(8);
+      try {
+        var recorder = new MediaBytesMetricRecorder(registry, DEBUG_MODE);
+        Map<String, Long> expected = new HashMap<>();
+        var tasks = new ArrayList<Callable<Void>>();
+        for (int index = 0; index < 64; index++) {
+          var type = TYPES.get(index % 3);
+          var mode = MODES.get((index / 3) % 3);
+          int status = STATUSES.get((index / 9) % 4);
+          long bytes = 1L + index;
+          expected.merge(type.name() + "/" + mode.name() + "/" + status, bytes, Long::sum);
+          tasks.add(
+              () -> {
+                recorder.record(type, mode, status, bytes);
+                return null;
+              });
+        }
+        for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+          result.get(5, TimeUnit.SECONDS);
+        for (var type : TYPES)
+          for (var mode : MODES)
+            for (int status : STATUSES)
+              assertEquals(
+                  expected
+                      .getOrDefault(type.name() + "/" + mode.name() + "/" + status, 0L)
+                      .doubleValue(),
+                  count(registry, type.name(), mode.name(), status));
+        assertEquals(64, registry.increments.get());
+        var other = new MediaBytesMetricRecorder(otherRegistry, DEBUG_MODE);
+        other.record(MediaType.AUDIO, Mode.INLINE, 200, 7);
+        assertEquals(7, count(otherRegistry, AUDIO_TYPE_NAME, INLINE_MODE_NAME, 200));
+        assertEquals(
+            expected.get("AUDIO/INLINE/200").doubleValue(),
+            count(registry, AUDIO_TYPE_NAME, INLINE_MODE_NAME, 200));
+        shape(registry);
+        shape(otherRegistry);
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
-      for (var result : executor.invokeAll(tasks)) result.get(5, TimeUnit.SECONDS);
-      for (var type : TYPES)
-        for (var mode : MODES)
-          for (int status : STATUSES)
-            assertEquals(
-                expected
-                    .getOrDefault(type.name() + "/" + mode.name() + "/" + status, 0L)
-                    .doubleValue(),
-                count(registry, type.name(), mode.name(), status));
-      assertEquals(64, registry.increments.get());
-      var other = new MediaBytesMetricRecorder(otherRegistry, DEBUG_MODE);
-      other.record(MediaType.AUDIO, Mode.INLINE, 200, 7);
-      assertEquals(7, count(otherRegistry, AUDIO_TYPE_NAME, INLINE_MODE_NAME, 200));
-      assertEquals(
-          expected.get("AUDIO/INLINE/200").doubleValue(),
-          count(registry, AUDIO_TYPE_NAME, INLINE_MODE_NAME, 200));
-      shape(registry);
-      shape(otherRegistry);
     }
   }
 
