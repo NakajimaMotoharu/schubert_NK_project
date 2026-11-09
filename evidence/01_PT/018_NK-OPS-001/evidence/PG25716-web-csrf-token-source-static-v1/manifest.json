@@ -1,0 +1,91 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T11:59:49.180380+09:00",
+  "programId": "NK-WEB-001",
+  "canonicalOwner": "WBS-P015-02",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebCsrfTokenTest.java",
+      "originalSha256": "19e10719730067440dd2376f3c612e2a3cfaba9d890c4cb690b3cff65b134c5c",
+      "currentSha256": "190c32dc5d249e1323a3eb5075c9eead35f1cce5bf2f0956972220024d22b380",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 1,
+      "finiteInvokeAllSites": 1,
+      "existingFutureGet20SitesRetained": 1
+    }
+  ],
+  "originalWholeCases": 4,
+  "rawFindings": 5,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 1,
+  "finiteOwnerSitesCorrected": 1,
+  "existingFutureGet20SitesRetained": 1,
+  "aggregateTimeoutSeconds": 20,
+  "ownerTimeoutSeconds": 10,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25714-web-csrf-token-configured-prepare-v1/manifest.json",
+    "sha256": "3e537d70aed3e02c208cc9a56173e299f62e62e668da522aa65264d83378d969"
+  },
+  "classifications": [
+    {
+      "className": "WebCsrfTokenTest",
+      "method": "web035ConcurrentGenerationAndMatchingStayIndependent",
+      "variable": "pool",
+      "line": 98,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Owned standaloneJUnit10workers/100ephemeral values; boundedaggregate20/originalget20/single finallyshutdownNow-await10. No container/deployed session/token/key access."
+    },
+    {
+      "className": "WebCsrfTokenTest",
+      "method": "web035ConcurrentGenerationAndMatchingStayIndependent",
+      "variable": "pool",
+      "line": 98,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standaloneJUnit10workers/100ephemeral values; boundedaggregate20/originalget20/single finallyshutdownNow-await10. No container/deployed session/token/key access."
+    },
+    {
+      "className": "WebCsrfTokenTest",
+      "method": "web035ConcurrentGenerationAndMatchingStayIndependent",
+      "variable": null,
+      "line": 113,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standaloneJUnit10workers/100ephemeral values; boundedaggregate20/originalget20/single finallyshutdownNow-await10. No container/deployed session/token/key access."
+    },
+    {
+      "className": "WebCsrfTokenTest",
+      "method": "web035ConcurrentGenerationAndMatchingStayIndependent",
+      "variable": null,
+      "line": 117,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standaloneJUnit10workers/100ephemeral values; boundedaggregate20/originalget20/single finallyshutdownNow-await10. No container/deployed session/token/key access."
+    },
+    {
+      "className": "WebCsrfTokenTest",
+      "method": "web035ConcurrentGenerationAndMatchingStayIndependent",
+      "variable": null,
+      "line": 118,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standaloneJUnit10workers/100ephemeral values; boundedaggregate20/originalget20/single finallyshutdownNow-await10. No container/deployed session/token/key access."
+    }
+  ],
+  "ephemeralGeneratedValuesExported": false,
+  "deployedSecretsRead": false,
+  "jdkSecurityConfig": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/conf/security/java.security",
+    "sha256": "7c43432bc33b890d4e750f6886f383785a35a9b6021c34c84fcde11bb15c152d",
+    "firstProvider": "SUN"
+  },
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

@@ -95,7 +95,8 @@ class WebCsrfTokenTest {
   void web035ConcurrentGenerationAndMatchingStayIndependent() throws Exception {
     var shared = WebCsrfToken.parse(HEX);
     var random = new SecureRandom();
-    try (var pool = Executors.newFixedThreadPool(10)) {
+    var pool = Executors.newFixedThreadPool(10);
+    try {
       var jobs = new ArrayList<Callable<String>>();
       for (int i = 0; i < 100; i++)
         jobs.add(
@@ -109,9 +110,12 @@ class WebCsrfTokenTest {
               return token.formValue();
             });
       var values = new HashSet<String>();
-      for (var future : pool.invokeAll(jobs))
+      for (var future : pool.invokeAll(jobs, 20, TimeUnit.SECONDS))
         assertTrue(values.add(future.get(20, TimeUnit.SECONDS)));
       assertEquals(100, values.size());
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
