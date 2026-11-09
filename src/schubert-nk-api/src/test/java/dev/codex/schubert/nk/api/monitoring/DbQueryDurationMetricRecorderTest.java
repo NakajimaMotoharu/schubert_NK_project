@@ -394,46 +394,52 @@ class DbQueryDurationMetricRecorderTest {
   @Test
   void dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs() throws Exception {
     try (var registry = new Registry();
-        var otherRegistry = new Registry();
-        var executor = Executors.newFixedThreadPool(8)) {
-      var recorder = new DbQueryDurationMetricRecorder(registry, DEBUG_MODE);
-      Map<String, Long> counts = new HashMap<>();
-      Map<String, Long> sums = new HashMap<>();
-      Map<String, Long> maxima = new HashMap<>();
-      var tasks = new ArrayList<Callable<Void>>();
-      for (int index = 0; index < 64; index++) {
-        var query = QUERIES.get(index % 2);
-        var outcome = OUTCOMES.get((index / 2) % 2);
-        long ns = (index + 1L) * 1000000;
-        String key = query.name() + "/" + outcome.name();
-        counts.merge(key, 1L, Long::sum);
-        sums.merge(key, ns, Long::sum);
-        maxima.merge(key, ns, Long::max);
-        tasks.add(
-            () -> {
-              recorder.record(query, outcome, ns);
-              return null;
-            });
-      }
-      for (var result : executor.invokeAll(tasks)) result.get(5, TimeUnit.SECONDS);
-      for (String query : List.of(ASYNC_COUNT_QUERY, OUTBOX_COUNT_QUERY))
-        for (String outcome : List.of(SUCCESS_OUTCOME, FAILURE_OUTCOME)) {
-          String key = query + "/" + outcome;
-          var value = summary(registry, query, outcome);
-          assertEquals(counts.get(key).longValue(), value.count());
-          assertEquals(sums.get(key) / 1000000000.0, value.totalAmount(), 1e-12);
-          assertEquals(maxima.get(key) / 1000000000.0, value.max());
+        var otherRegistry = new Registry()) {
+      var executor = Executors.newFixedThreadPool(8);
+      try {
+        var recorder = new DbQueryDurationMetricRecorder(registry, DEBUG_MODE);
+        Map<String, Long> counts = new HashMap<>();
+        Map<String, Long> sums = new HashMap<>();
+        Map<String, Long> maxima = new HashMap<>();
+        var tasks = new ArrayList<Callable<Void>>();
+        for (int index = 0; index < 64; index++) {
+          var query = QUERIES.get(index % 2);
+          var outcome = OUTCOMES.get((index / 2) % 2);
+          long ns = (index + 1L) * 1000000;
+          String key = query.name() + "/" + outcome.name();
+          counts.merge(key, 1L, Long::sum);
+          sums.merge(key, ns, Long::sum);
+          maxima.merge(key, ns, Long::max);
+          tasks.add(
+              () -> {
+                recorder.record(query, outcome, ns);
+                return null;
+              });
         }
-      assertEquals(64, registry.records.get());
-      var other = new DbQueryDurationMetricRecorder(otherRegistry, DEBUG_MODE);
-      other.record(Query.ASYNC_JOB_STATE_COUNTS, Outcome.SUCCESS, 250000000);
-      assertEquals(.25, summary(otherRegistry, ASYNC_COUNT_QUERY, SUCCESS_OUTCOME).totalAmount());
-      assertEquals(
-          sums.get("ASYNC_JOB_STATE_COUNTS/SUCCESS") / 1000000000.0,
-          summary(registry, ASYNC_COUNT_QUERY, SUCCESS_OUTCOME).totalAmount(),
-          1e-12);
-      shape(registry);
-      shape(otherRegistry);
+        for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+          result.get(5, TimeUnit.SECONDS);
+        for (String query : List.of(ASYNC_COUNT_QUERY, OUTBOX_COUNT_QUERY))
+          for (String outcome : List.of(SUCCESS_OUTCOME, FAILURE_OUTCOME)) {
+            String key = query + "/" + outcome;
+            var value = summary(registry, query, outcome);
+            assertEquals(counts.get(key).longValue(), value.count());
+            assertEquals(sums.get(key) / 1000000000.0, value.totalAmount(), 1e-12);
+            assertEquals(maxima.get(key) / 1000000000.0, value.max());
+          }
+        assertEquals(64, registry.records.get());
+        var other = new DbQueryDurationMetricRecorder(otherRegistry, DEBUG_MODE);
+        other.record(Query.ASYNC_JOB_STATE_COUNTS, Outcome.SUCCESS, 250000000);
+        assertEquals(.25, summary(otherRegistry, ASYNC_COUNT_QUERY, SUCCESS_OUTCOME).totalAmount());
+        assertEquals(
+            sums.get("ASYNC_JOB_STATE_COUNTS/SUCCESS") / 1000000000.0,
+            summary(registry, ASYNC_COUNT_QUERY, SUCCESS_OUTCOME).totalAmount(),
+            1e-12);
+        shape(registry);
+        shape(otherRegistry);
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+      }
     }
   }
 

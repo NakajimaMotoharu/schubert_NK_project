@@ -1,0 +1,165 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T10:33:21.214172+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "originalSha256": "ba5366f062bf5e07b646aed6fb71105ecff8466916c1b61ba0d3b66837ff2095",
+      "currentSha256": "c50259dcb26ceb09c35fba8e12547ecf021c9e4bf003bf0f5b19aa69624d39b2",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 1,
+      "originalCaseCount": 9,
+      "existingFutureGet5SitesRetained": 1,
+      "existingFutureGet10SitesRetained": 0
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+      "originalSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4",
+      "currentSha256": "bad721d7ce917f8c63b520144eaaed1e66dbcc443ee5f0779ac1a3619e2f6b57",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 1,
+      "originalCaseCount": 10,
+      "existingFutureGet5SitesRetained": 0,
+      "existingFutureGet10SitesRetained": 1
+    }
+  ],
+  "originalWholeCases": 19,
+  "rawFindings": 13,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 1,
+  "finiteOwnerSitesCorrected": 2,
+  "existingFutureGet5SitesRetained": 1,
+  "existingFutureGet10SitesRetained": 1,
+  "originalSnapshotLatchesAndSubmissionPreserved": true,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25590-api-exact-db-duration-configured-prepare-v1/manifest.json",
+    "sha256": "fdc462eaef220920a6dfa9d89f23514205c0ced33b66322934187b5fdae5cc8a"
+  },
+  "classifications": [
+    {
+      "className": "DbQueryDurationMetricRecorderTest",
+      "method": "dbTime002IndependentSecondsHistogramCdfAndTwoMaximumSamplesNeverLongWrap",
+      "variable": "counts",
+      "line": 235,
+      "rule": "UseConcurrentHashMap",
+      "applicable": false,
+      "basis": "Owner-only independentCDF map or three precomputed expected maps: workers capture immutable scalars only, all map writes before submit and reads after join. No concurrent access."
+    },
+    {
+      "className": "DbQueryDurationMetricRecorderTest",
+      "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+      "variable": "executor",
+      "line": 398,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Owned JUnit8/5workers; Db aggregate10/oldget5 and Exact submit/get10/latch5 retained, single finallyshutdownNow/await10 each before registry close. No container/external worker."
+    },
+    {
+      "className": "DbQueryDurationMetricRecorderTest",
+      "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+      "variable": "executor",
+      "line": 398,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit8/5workers; Db aggregate10/oldget5 and Exact submit/get10/latch5 retained, single finallyshutdownNow/await10 each before registry close. No container/external worker."
+    },
+    {
+      "className": "DbQueryDurationMetricRecorderTest",
+      "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+      "variable": "counts",
+      "line": 401,
+      "rule": "UseConcurrentHashMap",
+      "applicable": false,
+      "basis": "Owner-only independentCDF map or three precomputed expected maps: workers capture immutable scalars only, all map writes before submit and reads after join. No concurrent access."
+    },
+    {
+      "className": "DbQueryDurationMetricRecorderTest",
+      "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+      "variable": "sums",
+      "line": 402,
+      "rule": "UseConcurrentHashMap",
+      "applicable": false,
+      "basis": "Owner-only independentCDF map or three precomputed expected maps: workers capture immutable scalars only, all map writes before submit and reads after join. No concurrent access."
+    },
+    {
+      "className": "DbQueryDurationMetricRecorderTest",
+      "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+      "variable": "maxima",
+      "line": 403,
+      "rule": "UseConcurrentHashMap",
+      "applicable": false,
+      "basis": "Owner-only independentCDF map or three precomputed expected maps: workers capture immutable scalars only, all map writes before submit and reads after join. No concurrent access."
+    },
+    {
+      "className": "DbQueryDurationMetricRecorderTest",
+      "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+      "variable": null,
+      "line": 419,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit8/5workers; Db aggregate10/oldget5 and Exact submit/get10/latch5 retained, single finallyshutdownNow/await10 each before registry close. No container/external worker."
+    },
+    {
+      "className": "DbQueryDurationMetricRecorderTest",
+      "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+      "variable": null,
+      "line": 440,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit8/5workers; Db aggregate10/oldget5 and Exact submit/get10/latch5 retained, single finallyshutdownNow/await10 each before registry close. No container/external worker."
+    },
+    {
+      "className": "DbQueryDurationMetricRecorderTest",
+      "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+      "variable": null,
+      "line": 441,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit8/5workers; Db aggregate10/oldget5 and Exact submit/get10/latch5 retained, single finallyshutdownNow/await10 each before registry close. No container/external worker."
+    },
+    {
+      "className": "ExactDurationMeterRegistryTest",
+      "method": "exDur009ConcurrentUpdatesAndSnapshotsHaveConsistentIndependentIdentity",
+      "variable": "executor",
+      "line": 295,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Owned JUnit8/5workers; Db aggregate10/oldget5 and Exact submit/get10/latch5 retained, single finallyshutdownNow/await10 each before registry close. No container/external worker."
+    },
+    {
+      "className": "ExactDurationMeterRegistryTest",
+      "method": "exDur009ConcurrentUpdatesAndSnapshotsHaveConsistentIndependentIdentity",
+      "variable": "executor",
+      "line": 295,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit8/5workers; Db aggregate10/oldget5 and Exact submit/get10/latch5 retained, single finallyshutdownNow/await10 each before registry close. No container/external worker."
+    },
+    {
+      "className": "ExactDurationMeterRegistryTest",
+      "method": "exDur009ConcurrentUpdatesAndSnapshotsHaveConsistentIndependentIdentity",
+      "variable": null,
+      "line": 327,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit8/5workers; Db aggregate10/oldget5 and Exact submit/get10/latch5 retained, single finallyshutdownNow/await10 each before registry close. No container/external worker."
+    },
+    {
+      "className": "ExactDurationMeterRegistryTest",
+      "method": "exDur009ConcurrentUpdatesAndSnapshotsHaveConsistentIndependentIdentity",
+      "variable": null,
+      "line": 328,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned JUnit8/5workers; Db aggregate10/oldget5 and Exact submit/get10/latch5 retained, single finallyshutdownNow/await10 each before registry close. No container/external worker."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

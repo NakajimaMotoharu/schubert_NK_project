@@ -291,37 +291,42 @@ class ExactDurationMeterRegistryTest {
 
   @Test
   void exDur009ConcurrentUpdatesAndSnapshotsHaveConsistentIndependentIdentity() throws Exception {
-    try (var registry = registry();
-        var executor = Executors.newFixedThreadPool(5)) {
-      var summary = summary(registry);
-      var start = new CountDownLatch(1);
-      List<Callable<Void>> tasks = new ArrayList<>();
-      for (int thread = 0; thread < 4; thread++)
+    try (var registry = registry()) {
+      var executor = Executors.newFixedThreadPool(5);
+      try {
+        var summary = summary(registry);
+        var start = new CountDownLatch(1);
+        List<Callable<Void>> tasks = new ArrayList<>();
+        for (int thread = 0; thread < 4; thread++)
+          tasks.add(
+              () -> {
+                assertTrue(start.await(5, TimeUnit.SECONDS));
+                for (int i = 0; i < 64; i++) summary.record(1);
+                return null;
+              });
         tasks.add(
             () -> {
               assertTrue(start.await(5, TimeUnit.SECONDS));
-              for (int i = 0; i < 64; i++) summary.record(1);
+              for (int i = 0; i < 128; i++) {
+                var snapshot = summary.takeSnapshot();
+                assertEquals(snapshot.count(), snapshot.total());
+                assertEquals(0, snapshot.histogramCounts()[2].count());
+                assertEquals(snapshot.count(), snapshot.histogramCounts()[3].count());
+                assertEquals(snapshot.count(), snapshot.histogramCounts()[4].count());
+              }
               return null;
             });
-      tasks.add(
-          () -> {
-            assertTrue(start.await(5, TimeUnit.SECONDS));
-            for (int i = 0; i < 128; i++) {
-              var snapshot = summary.takeSnapshot();
-              assertEquals(snapshot.count(), snapshot.total());
-              assertEquals(0, snapshot.histogramCounts()[2].count());
-              assertEquals(snapshot.count(), snapshot.histogramCounts()[3].count());
-              assertEquals(snapshot.count(), snapshot.histogramCounts()[4].count());
-            }
-            return null;
-          });
-      var futures = tasks.stream().map(executor::submit).toList();
-      start.countDown();
-      for (var future : futures) future.get(10, TimeUnit.SECONDS);
-      assertEquals(256, summary.count());
-      assertEquals(256, summary.totalAmount());
-      assertEquals(1, summary.max());
-      cdf(summary, 0, 0, 0, 256, 256);
+        var futures = tasks.stream().map(executor::submit).toList();
+        start.countDown();
+        for (var future : futures) future.get(10, TimeUnit.SECONDS);
+        assertEquals(256, summary.count());
+        assertEquals(256, summary.totalAmount());
+        assertEquals(1, summary.max());
+        cdf(summary, 0, 0, 0, 256, 256);
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+      }
     }
   }
 
