@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-09T13:32:22.609">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java">
+<violation beginline="374" endline="374" begincolumn="9" endcolumn="13" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.logging" class="WebSecurityAuditTest" method="web100ConcurrentAuditEventsStayIndependent" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="374" endline="374" begincolumn="16" endcolumn="47" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebSecurityAuditTest" method="web100ConcurrentAuditEventsStayIndependent" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="394" endline="394" begincolumn="7" endcolumn="19" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebSecurityAuditTest" method="web100ConcurrentAuditEventsStayIndependent" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="395" endline="395" begincolumn="24" endcolumn="66" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebSecurityAuditTest" method="web100ConcurrentAuditEventsStayIndependent" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="398" endline="398" begincolumn="7" endcolumn="25" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebSecurityAuditTest" method="web100ConcurrentAuditEventsStayIndependent" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="399" endline="399" begincolumn="18" endcolumn="61" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebSecurityAuditTest" method="web100ConcurrentAuditEventsStayIndependent" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+</pmd>

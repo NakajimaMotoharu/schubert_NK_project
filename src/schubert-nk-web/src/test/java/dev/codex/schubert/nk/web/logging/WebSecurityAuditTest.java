@@ -371,7 +371,8 @@ class WebSecurityAuditTest {
   void web100ConcurrentAuditEventsStayIndependent() throws Exception {
     var logger = new CapturingLogger();
     var audit = new WebSecurityAudit(logger, CLOCK, "a", "b");
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var jobs = new ArrayList<Callable<Void>>();
       for (int i = 0; i < 100; i++) {
         int number = i;
@@ -391,8 +392,11 @@ class WebSecurityAuditTest {
             });
       }
       synchronized (audit) {
-        for (var job : pool.invokeAll(jobs)) job.get(10, TimeUnit.SECONDS);
+        for (var job : pool.invokeAll(jobs, 10, TimeUnit.SECONDS)) job.get(10, TimeUnit.SECONDS);
       }
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(100, logger.entries.size());
     var seen = new HashSet<UUID>();

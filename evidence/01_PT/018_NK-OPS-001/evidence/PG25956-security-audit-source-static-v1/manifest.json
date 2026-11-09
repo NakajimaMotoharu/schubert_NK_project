@@ -1,0 +1,100 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T13:34:41.996358+09:00",
+  "programId": "NK-WEB-001",
+  "canonicalOwner": "WBS-P006-04",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java",
+      "originalSha256": "4c73d76e9cc7067380497a8bf63c47b1678f59b20b6644350dc0fe83ab6d3819",
+      "currentSha256": "e77824a9326be0b7c56dbd07558b2fc3f6fdf974a1c684e2020ee8fed082a50b",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 1,
+      "finiteInvokeAllSites": 1,
+      "existingFutureGet10SitesRetained": 1
+    }
+  ],
+  "originalWholeCases": 6,
+  "rawFindings": 6,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 1,
+  "finiteOwnerSitesCorrected": 1,
+  "existingFutureGet10SitesRetained": 1,
+  "aggregateTimeoutSeconds": 10,
+  "ownerTimeoutSeconds": 10,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25954-security-audit-configured-prepare-v1/manifest.json",
+    "sha256": "fb60c0de09f9cb96bb7b22b20136e7b6c7fab8d8b59e7f603bc7022e2d5122d5"
+  },
+  "classifications": [
+    {
+      "className": "WebSecurityAuditTest",
+      "method": "web100ConcurrentAuditEventsStayIndependent",
+      "variable": "pool",
+      "line": 374,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Owned standaloneJUnit8workers/100inmemory auditrecords, boundedaggregate10/originalget10/single finallyshutdownNow-await10; intentional caller monitor, no actual audit sink/session/key access."
+    },
+    {
+      "className": "WebSecurityAuditTest",
+      "method": "web100ConcurrentAuditEventsStayIndependent",
+      "variable": "pool",
+      "line": 374,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standaloneJUnit8workers/100inmemory auditrecords, boundedaggregate10/originalget10/single finallyshutdownNow-await10; intentional caller monitor, no actual audit sink/session/key access."
+    },
+    {
+      "className": "WebSecurityAuditTest",
+      "method": "web100ConcurrentAuditEventsStayIndependent",
+      "variable": null,
+      "line": 394,
+      "rule": "AvoidSynchronizedStatement",
+      "applicable": false,
+      "basis": "Owned standaloneJUnit8workers/100inmemory auditrecords, boundedaggregate10/originalget10/single finallyshutdownNow-await10; intentional caller monitor, no actual audit sink/session/key access."
+    },
+    {
+      "className": "WebSecurityAuditTest",
+      "method": "web100ConcurrentAuditEventsStayIndependent",
+      "variable": null,
+      "line": 395,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standaloneJUnit8workers/100inmemory auditrecords, boundedaggregate10/originalget10/single finallyshutdownNow-await10; intentional caller monitor, no actual audit sink/session/key access."
+    },
+    {
+      "className": "WebSecurityAuditTest",
+      "method": "web100ConcurrentAuditEventsStayIndependent",
+      "variable": null,
+      "line": 398,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standaloneJUnit8workers/100inmemory auditrecords, boundedaggregate10/originalget10/single finallyshutdownNow-await10; intentional caller monitor, no actual audit sink/session/key access."
+    },
+    {
+      "className": "WebSecurityAuditTest",
+      "method": "web100ConcurrentAuditEventsStayIndependent",
+      "variable": null,
+      "line": 399,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Owned standaloneJUnit8workers/100inmemory auditrecords, boundedaggregate10/originalget10/single finallyshutdownNow-await10; intentional caller monitor, no actual audit sink/session/key access."
+    }
+  ],
+  "actualLiveAuditOutputs": false,
+  "deployedSecretsRead": false,
+  "jdkSecurityConfig": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/conf/security/java.security",
+    "sha256": "7c43432bc33b890d4e750f6886f383785a35a9b6021c34c84fcde11bb15c152d",
+    "firstProvider": "SUN"
+  },
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}
