@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-09 再資格の依存差分と共有fixture（BUG2614～2616）
+
+module keyは実metadataのphysicalKeyから選び、空集合を拒否する。旧graph全hash一致を仮定せず、変更Sourceを列挙して承認済み現pure証拠/current normalへ結合する。旧WebLogの165Protocolでは161同byte/QA054四変更、shared goldenのAction反映漏れを製品実行前発見した。UI235正本から一literal是正し、原9と六callerの資格を分離する。before/count prebind非0の後はpublisherを含む依存操作をJSのexit条件で止める。管理pubだけが進んだe404は未資格の履歴であり、修正6f/guard0/sourcepush後の原9初回だけを受入証拠にする。旧成功の確認再演・品質/モデル/枠/HOLD変更なし。
+
+
 ## 2026-11-09 依存commandは各exitで進める（25738/25740）
 
 一つのshell command内へ独立した生成・lint・本体を無条件に並べない。原則一操作一commandとし、functions側でexit0を確認してから依存操作を発行する。shell最終exit0だけで先行assertionを成功扱いしない。生成候補がない場合はlint/bodyへ進めず、原失敗と補正を保存する。上位oracle/品質/モデル/枠/全HOLDを変更しない。

@@ -1,0 +1,42 @@
+{
+  "actualExit": 0,
+  "independentOracle": "Node24.19.0/OpenSSL3.5.7 publicsyntheticAES256GCM plus Python byte offsets/AAD",
+  "nodeBinarySha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12",
+  "nodeCommandJsSha256": "e9670685c13546ce146e0541529facf564438bc0f136b07f0a8f6fe5fc8087a4",
+  "originalOracleEntrySha256": "aae06c7e5adee6d0ab044ec40b1110ac4518b14bc16e0ae0f3e3730834a3f2ad",
+  "approvedAction": "HTTP_REQUEST_COMPLETED",
+  "approvedDesign": {
+    "approvedMain": "42450b515b0737b4f519945e161cae93195e1edf",
+    "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f"
+  },
+  "wireSha256": "2f1a567b2de4217dbb6a050f01b14d0e537c2b9b887b6c5895a9aa8a95abb74c",
+  "aadSha256": "e51f74a55e81143769ed182e4744e5706f752f04f59c8996da58350268ff509b",
+  "envelopeSha256": "f00a0ca386065b84510e7126ae0b9f348eb903173d80f4a0058e95eb98f687d9",
+  "plaintextBytes": 2336,
+  "envelopeBytes": 2374,
+  "aadBytes": 127,
+  "nonceBytes": 12,
+  "tagBytes": 16,
+  "keyBytes": 32,
+  "publicFixedKeyVector": true,
+  "actualSecretsRead": false,
+  "productionInvocations": 0,
+  "productTestsExecuted": 0,
+  "oldWireResultReused": false,
+  "rawCryptographicBytesExported": false,
+  "stage": {
+    "actualExit": 0,
+    "timedOut": false,
+    "startUTC": "2026-11-09T03:32:53.955717+00:00",
+    "endUTC": "2026-11-09T03:32:54.020737+00:00",
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node",
+      "-e",
+      "const c=require('node:crypto');\nconst mid='00000000-0000-0000-0000-000000000012',cid='00000000-0000-0000-0000-000000000015';\nconst fields=[Buffer.from('web-log-outbox'),Buffer.from('schubert_web_session.web_log_outbox'),Buffer.from(mid.replaceAll('-',''),'hex'),Buffer.from(cid.replaceAll('-',''),'hex'),Buffer.from([1]),Buffer.from('v2'),Buffer.from('WLGEVT01'),Buffer.from('001')];\nconst aad=Buffer.concat(fields.flatMap(b=>{const n=Buffer.alloc(4);n.writeUInt32BE(b.length);return [n,b]}));\nconst wire=Buffer.alloc(2336,32),put=(offset,value)=>Buffer.from(value,'ascii').copy(wire,offset);\n[[0,'SCHBNK01001WLGEVT01001EI'],[24,mid],[60,cid],[96,'20260905060000000'],[177,'0256002080000000000000000002336'],[256,'20260905060000000'],[273,'REQUEST'],[289,'INFO'],[297,'HTTP_REQUEST_COMPLETED'],[361,'Synthetic HTTP request completed'],[873,'00000000-0000-0000-0000-000000000099'],[909,'GET'],[917,'/login'],[1173,'200'],[1176,'12'],[1185,'127.0.0.1'],[1299,'{\"projection\":\"PENDING\"}']].forEach(([o,v])=>put(o,v));\nconst key=Buffer.from(Array.from({length:32},(_,i)=>i)),nonce=Buffer.from(Array.from({length:12},(_,i)=>64+i));\nconst cipher=c.createCipheriv('aes-256-gcm',key,nonce);cipher.setAAD(aad);\nconst ciphertext=Buffer.concat([cipher.update(wire),cipher.final()]),tag=cipher.getAuthTag();\nconst envelope=Buffer.concat([Buffer.from('NKENC1'),Buffer.from([1,2]),Buffer.from('v2'),nonce,ciphertext,tag]);\nconst sha=b=>c.createHash('sha256').update(b).digest('hex');\nconsole.log(JSON.stringify({node:process.version,openssl:process.versions.openssl,publicSyntheticFixture:true,aadHex:aad.toString('hex'),envelopeHex:envelope.toString('hex'),aadSha256:sha(aad),wireSha256:sha(wire),envelopeSha256:sha(envelope),plaintextLength:wire.length,tagLength:tag.length,envelopeLength:envelope.length}));"
+    ],
+    "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg25794-weblog-current-public-vector-v1",
+    "stdoutSha256": "14b84e357e8123af34008151fdeeaa90fd603d87c026003c6acd055983dde9de",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "toolSha256": "e98d23e0e26d48256574a4ffaddec147731948af2baa1cfd5562fdf9273bc7b5"
+}
