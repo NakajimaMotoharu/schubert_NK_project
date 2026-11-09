@@ -1,0 +1,17 @@
+# 固定Header原4・有限owner結果
+
+source `2d1f2bc5f07acf27f4ce62a9878651104d8fedc3`、Production Main7aed不変。G03.05主/P01502関連0 REWORK原0.5/2/5cap6保持。
+
+BUG2617 pool8を単一finally shutdownNow/await10、一invokeAll10へ修正。既Futureget10、全原4body/assert/literal/七Header/100job/caller-monitorは逆変換で厳密保持。PG25812 before→configured25814/1043（GJFskipreflow・PMDraw6個別非該当/thread4resource1/意図的monitor1・CS0）→25816PF（normal2Mainと旧pure14540同byte、Spring等12jar exactSHA）→prebind25822/24/28成功→通常source push後25818元4初一回真正0。
+
+独立25820終了0、元4XML/実OS-JDK/Source/各command終了/CRCを同source/run照合、10metadata反例。対象Writer/FilterFactory二Source二CodeはLINE13 METHOD4 CLASS2 INSTRUCTION51全miss0。BRANCHは両Source/両Classとも自然0のためN-A・率null、strict非空四counter predicate1未受入。0/0を100へ換算せず、manual除外0/旧coverage合算0。
+
+SS352§7.2の固定七Headerの明示期待値を確認し、GET/HEAD/POST×9path×11status=297組合せ、9commit/reset/failure経路、null/七responsefault、100並行bodyの元oracleを保持。実HTTP/server/認証/session/key/DBJMSVMは0、MockServletのメモリresponseだけ。製品expected算出0。
+
+正Main2個のCRCがcurrent normal一致/held四初期化・probes0。SDK25832は当runに実観測したSpring/mock/Servlet等42classのbytesとCRCを12pinjarへ結合し、classinfoだけで非初期化照合（0 SDK PT）。SDKrawcountとcoverageへ混ぜない。SDK prebind25834/post count-before25836とも成功。
+
+元4合格と待機限定BUG2617閉鎖はProgram015全完了/全451/全Mavenformat/実CHRとは別。正式1964PT/53scope、新leaf0、unique520Java416/whole93候補114pending12暫定・工数nullは不変。
+
+直前WebLog sharedfixture六callerのうちWebLogMessageSender MainはWebStartupException direct、原全TestにEmbeddedBroker実起動があり、動的HOLD。原classからmethod抜粋やmock置換はしない。他五callerは個別完全graph確認待ち、BUG2615/YKT2303はOPEN維持。
+
+manifest PG25818 SHA58d0497321823696d7a0edb70e15920e9e7a0100569388008ef7526b5a1a61be、PG25832 SHA42626eb5b37d1b52450c49f70bbce73651b4d40c96755369661129b58ee2798b、PG25820 SHA2d053795e21f9d558a2f31a524ca7a4e9abf27997fcc84fa5c0bb4d66e43a33a。Test ID/web091..094/command/environmentは後二manifest/testcases.safe.xmlへ追跡。
