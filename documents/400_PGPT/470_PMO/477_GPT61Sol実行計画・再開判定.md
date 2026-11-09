@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-09 派生metadata工具は実行前にrun/count literalを照合（BUG2609/YKT2300）
+
+新SDK/postは原preflightのexpectedTests・run ID・原manifestの実path/hashへ結合し、pyflakesだけで件数依存dirnameの整合を済ませない。input1011のAST-only prebindを候補本体より先に適用し、bare/full-relative-pathのinput run/count、post出力countを確認してreceiptを保存する。候補import/実行/製品再演はしない。25632で固定2正常/14異常と明示七tool、25640で次postを確認。tool2609既失敗1と新guard初回TDD赤1は分離し、原試験成功を再演せず必要metadataだけ是正。品質/上位oracle/モデル/枠/全HOLD不変更。
+
+
 ## 2026-11-09 分岐なし補助metadataの実XML導出（BUG2601/YKT2297）
 
 凍結postのnaturalZeroBranchClasses=0定数を将来templateへ転用しない。input983同様class/source別XMLcounterから導出し、BRANCH分母0はN/A/null、任意欄欠落は未記載として区別。全Source非空四counter gateとaggregateを混同せず、984の独立境界/型/未網羅反例を適用する。PG25512/25514は明示24既報告のimmutable追補1件と欠落任意欄2件の導出、製品再演0/正式受入0。全品質/HOLD条件は維持。

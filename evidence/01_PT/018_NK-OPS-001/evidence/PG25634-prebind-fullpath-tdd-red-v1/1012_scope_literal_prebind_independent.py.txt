@@ -1,0 +1,26 @@
+"""Independent fixed metadata vectors and exact seven-tool static checks, no candidate execution."""
+from pathlib import Path
+import ast,datetime,hashlib,json,runpy
+R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';T=B/'input/1011_scope_literal_prebind_contract.py';check=runpy.run_path(str(T))['check_source_literals'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();good="a=R/'pg25618-mq-original-whole9-v1'\nb=R/'PG25618-mq-original-whole9-v1'\nc=R/'PG25622-mq-whole9-independent-v1'\n";assert check(good,25618,9,25622)==dict(inputBindings=2,outputBindings=1,run=25618,expectedTests=9,candidateExecuted=False);negative=[]
+def reject(label,text,run=25618,count=9,post=25622):
+ try:check(text,run,count,post)
+ except (AssertionError,SyntaxError):negative.append(label);return
+ raise AssertionError(label)
+reject('wrong input count',good.replace('original-whole9','original-whole8'))
+reject('wrong input run',good.replace('25618','25617'))
+reject('no input',"a='no matching run'")
+reject('interpolated unknown input',"a=f'PG{run}-mq-original-whole9-v1'")
+reject('boolean run',good,True)
+reject('boolean count',good,count=True)
+reject('zero count',good,count=0)
+reject('boolean post',good,post=True)
+reject('wrong output count',good.replace('-whole9-independent','-whole8-independent'))
+reject('missing output',good.split('c=')[0])
+reject('malformed AST','a=(broken')
+reject('wrong suffix',good.replace('original-whole9-v1','original-whole9-v2'))
+for prefix in ['PG25578-whole12-post-path-before-v1/post.failed.py.txt','PG25630-sdk-whole9-path-before-v1/sdk.failed.py.txt']:
+ p=B/'evidence'/prefix;run,count,post=(25568,12,25574) if '25578' in prefix else (25618,9,None);reject('actual failed metadata '+p.name,p.read_text(),run,count,post)
+old=(B/'evidence/PG25630-sdk-whole9-path-before-v1/sdk.failed.py.txt').read_text();current=(B/'input/1008_api_mq_duration_sdk_identity.py').read_text();assert current.replace('original-whole9-v1','original-whole8-v1')==old and ast.dump(ast.parse(current.replace('original-whole9-v1','original-whole8-v1')))==ast.dump(ast.parse(old));rows=[]
+for prefix,run,count,post in [('981_',25498,8,25502),('989_',25528,8,25532),('997_',25568,12,25574),('1003_',25594,19,25598),('996_',25568,12,None),('1002_',25594,19,None),('1008_',25618,9,None)]:
+ p=next((B/'input').glob(prefix+'*'));v=check(p.read_text(),run,count,post);rows.append(dict(path=str(p.relative_to(R)),sha256=sha(p),result=v,applicableCorrection=prefix=='1008_'))
+O=B/'evidence/PG25632-scope-count-prebind-independent-v1';assert not O.exists();O.mkdir();v=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),toolSha256=sha(T),independentToolSha256=sha(Path(__file__)),fixedPositiveCheck=1,negativeChecks=len(negative),negativeLabels=negative,currentToolsChecked=7,currentToolRows=rows,onlyTwoSdkDirectoryLiteralsCorrected=True,otherAstAndOraclesUnchanged=True,candidatesExecuted=0,productTestsExecuted=0,newAcceptance=0,formalUpdated=False,effortRate=None,bug='BUG-2609',ykt='YKT-2300');(O/'manifest.json').write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,negativeChecks=len(negative),staticTools=7,manifestSha256=sha(O/'manifest.json'))))

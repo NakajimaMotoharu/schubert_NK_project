@@ -1,0 +1,15 @@
+"""Static candidate text contract; no import/execution of candidate, target source, or classfile."""
+import ast,re
+
+def check_source_literals(source,run,expected,post=None):
+ assert type(run) is int and run>0 and type(expected) is int and expected>0
+ assert post is None or (type(post) is int and post>0)
+ tree=ast.parse(source);strings=[part for n in ast.walk(tree) if isinstance(n,ast.Constant) and isinstance(n.value,str) for part in n.value.split('/')];bindings=[]
+ for value in strings:
+  hit=re.fullmatch(r'(?i)pg'+str(run)+r'-[a-z0-9-]+-original-whole([0-9]+)-v1(?:/manifest\.json)?',value)
+  if hit:assert int(hit[1])==expected;bindings.append(value)
+ assert bindings,'No exact input run/count literal bindings'
+ if post is not None:
+  outputs=[v for v in strings if re.fullmatch(r'(?i)pg'+str(post)+r'-[a-z0-9-]+-whole([0-9]+)-independent-v1',v)]
+  assert outputs and all(int(re.search(r'-whole([0-9]+)-independent-v1$',v)[1])==expected for v in outputs)
+ return dict(inputBindings=len(bindings),outputBindings=0 if post is None else len(outputs),run=run,expectedTests=expected,candidateExecuted=False)
