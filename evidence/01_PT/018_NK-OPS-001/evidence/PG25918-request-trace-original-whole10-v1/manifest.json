@@ -1,0 +1,291 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T13:20:11.736121+09:00",
+  "source": "cbe58516aeb265d19bc2bd33c6f134a61d11763f",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "begin": {
+    "source": "cbe58516aeb265d19bc2bd33c6f134a61d11763f",
+    "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "startUTC": "2026-11-09T04:20:09.289331+00:00",
+    "invocation": {
+      "actualPythonCommand": [
+        "/usr/bin/python3",
+        "-B",
+        "tools/quality/pg25918_web_request_trace_original_ten_pt.py"
+      ],
+      "entrypointPath": "tools/quality/pg25918_web_request_trace_original_ten_pt.py",
+      "entrypointSha256": "be81a3dd0f15518035246e3ab683938e9a93ef95c1e15ae488d10bc2399059b5",
+      "libraryPath": "tools/quality/pg25918_web_request_trace_original_ten_pt.py",
+      "librarySha256": "be81a3dd0f15518035246e3ab683938e9a93ef95c1e15ae488d10bc2399059b5",
+      "helperPath": "tools/quality/host_tool_invocation.py",
+      "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "loadedProjectPythonSources": {
+        "tools/quality/pg25918_web_request_trace_original_ten_pt.py": "be81a3dd0f15518035246e3ab683938e9a93ef95c1e15ae488d10bc2399059b5",
+        "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+        "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+        "tools/quality/pg9666_pagination_static.py": "75347ce8aef713e43a3d2fd39e0e0b6244da9427caa8dc51d36e539d629e0ef5"
+      },
+      "arbitraryArgumentsRecorded": false,
+      "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+    },
+    "preflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25916-request-trace-current-console-preflight-v1/manifest.json",
+      "sha256": "ca3602eab4e3190cdf29dfc4f5f8659356983d5f99e6345123a30efbecf263b9"
+    },
+    "inputHashes": {
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java": "0845288c5c80ba7136a7b2c8072a4814a6f119f2e1cb47afcaa7eb102f76fc25",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java": "f6f2729a533843f568d254ebbae1a17cf575c4570b2ab307023ff54154b9475c",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java": "b14439675537e10360d052246415ed3addcb68a757a78452d3127af767f6c9eb",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestRouteInterceptor.java": "cca61d521d8e4bf246f63e0821aa5a134d853f2240161707d947cf9f4071878f",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/RequestLogMvcConfiguration.java": "a07d0f37eaca52eb2037816617c9a9d4fab82386ddb67af1310f9208291c3238",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyClientAddressResolver.java": "f5b117c9d9a9473a45b602c3ce97a6e92198b27490ac284e7281956cd7b42f37",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyTransportContextFilter.java": "3fa8bd5ce5e2af1341085c78fb909041951bd82c17c094377da6dcb66765c1b1",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyRequestRejectedException.java": "d6c50441cde4887be9a0d9585bb41512ee5228042419b78d48437a1f88620967",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebSecurityAudit.java": "ce6fc0f8c9031c15077b7fd929837641e38fd9ac5b33683468e63224d53cd1f3",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LoginClientAddress.java": "4e6cfb538744d81daf4c5e132b729b6800b1ee3f3aa6682ad06e46c9aabb56c5",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java": "aaa18a4c954a425c943e8c30ea1752b665b249e86d8f1767e9e37f4aa61a6b66",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/UserRole.java": "b68402e5705ca2ac5093a1b98a44de5a9f45ed69cb9b231658b4903c51e0bf69",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/WireEnum.java": "a14544397a3ce1c45ff3026c0463c2829ea35a39a8990056a368fc52cf7b6d4b",
+      "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+      "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+      "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/AnimationController.java": "e300e90c29d74117905de30f3e64dc99b5044a6bc5100648cdc1d5c2dc987e12",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ContentDetailController.java": "2105ba833b33c91ac13129f4bae373a390f2e691115c7b08dc4ac64a5a543fc3",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ErrorController.java": "ccc4587c76195542436f708aa6f87ee93b2d32e14d3d81350417c3f4e7b07fd5",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/LogController.java": "918e32335e79eb0f7d093e4fdb3c08f093d92ecfcfcaa8d853caf3ee53d41eb7",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/LoginController.java": "ef9bbc81c79799528840f70f65f55056d08fd1ea0f9fd1a93d8212b946f4e630",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/LogoutController.java": "93f164a1a35e675de653bf1d2638647482cc21332a8dca7bf2b72d8cf321e0f3",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MediaController.java": "e3d5ab3db698c38d1b825a09b5197dea8e490ef6bef1cc1f8a394b658b081d34",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java": "f26a85c85d5ee4ed11e548d25a684956d2349a6ed1c43c0e021f6d4745c8acce",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MusicController.java": "43714d9f59017f118ec095eacedc852b8b850a7282ce5df0847db70405a973f9",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/NotificationController.java": "24483e135ee03f1a9c6bb3bfe8736c60f646d6fa3e1a418d0d932cb072c90ac9",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/QuestionController.java": "b638c01e7c6a4992be893928ffc191cdc1f92220a7918bb4bd1c9552e18bdd33",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ScenarioController.java": "f0ad9e4805f46f1ac0dca0d3fee940eda4a060bb540ba16d71748406b40335b2",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java": "3cca5368ead598ac9ae648891702ff818aac1d77b464b3cb9a92299c24648cb3",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/WebMvcConfiguration.java": "72ac4fcc161a85182e17d6167640cb18c93faed174fdd142225eaf1d84912d30"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1",
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1",
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac": "2136da000c36cd6ea5e714ecf8ea7fb4e41f29c75849b6b7e62531373b91a3b1",
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/release": "fc1b6c466fbf603872858a3a18c1afe444d68d97c560237dcfde52cfa25f10a1",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": "622ae1b70d2627b7b162a2cd1b07bc5201092e0628d9a50986892f2cbe7e98f9",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar": "f2cee6ef046e72eec8128474c7f58c6217173b45ae373c30de0289f2a56ab0fd",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar": "eb34f0cd84a879393ae5c21160fc06385ccdc74f36a4d1e31b199f59acfdaf71",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/tomcat/embed/tomcat-embed-core/11.0.25/tomcat-embed-core-11.0.25.jar": "282b65b9fe43647b1459c0df11101f8599a58de5832075acff485c3705ba4894",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar": "98a5011baa78df36fb184e6ce0e8e086ca9a64fcdd8f161c0a96475a3a0907bd",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-crypto/7.1.1/spring-security-crypto-7.1.1.jar": "6e8bb2337faccabd30626f917ed1d2bfa9dde982229b6b373b644d1a01635403",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-web/7.1.1/spring-security-web-7.1.1.jar": "dece134a2332c976a2c94ecf13f816c64e8ea7f2139795485afe655fba0408f3",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-aop/7.0.9/spring-aop-7.0.9.jar": "b8c5d6bfcb1f4993f2cc124f7ab7fac40edf5256b9e43c2f7250a733cb5510e9",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar": "ff218b827a25c9e8929b0cd56dfb56916cea9d5b669ed97dc7cb262508ff548b",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar": "7552a2fcfa30cea53eb14d7a65a7a8e1b1dd82e832a7164fb7e6fb105f438858",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar": "046434c40f43819729b9b1db0e6c659dfa68184c1c2c2efa5f7b3a5b27c4e2e2",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-test/7.0.9/spring-test-7.0.9.jar": "6ce8fc116f5d309b9ac50a6738bd1b15ea4012a4a5563c0ee89b795bfc9af0dc",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar": "941ced476427bde2533872f293da535fd0258de3f3a650a7f1bfe01ed2927302",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-webmvc/7.0.9/spring-webmvc-7.0.9.jar": "8f114c1461692c5e534e82b27de23b7fb23370db8dee7ce0c92d5106906c9555",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "bc6acaa867859b0f1d2f2e24dc27ba5627e7bf7c332448ae88bb077ea1b36fa7",
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/conf/security/java.security": "7c43432bc33b890d4e750f6886f383785a35a9b6021c34c84fcde11bb15c152d"
+    },
+    "targetClassHashes": {
+      "dev/codex/schubert/nk/web/config/RequestLogMvcConfiguration.class": "ce2fea6d03a9f75d4882de7240a3fc94e7cce410c2527c1a5ad211a486b25597",
+      "dev/codex/schubert/nk/web/logging/WebRequestRouteInterceptor.class": "62745c0ef9aebeffc34c272f8b408f9de584fb89ba242dd7d06df8f1e20eea93",
+      "dev/codex/schubert/nk/web/logging/WebRequestTrace$Scope.class": "6bc3c4c8bbd4b2772b6f20280852a657ee34b84365403317e4745b44d724e6eb",
+      "dev/codex/schubert/nk/web/logging/WebRequestTrace.class": "ef78764050885541e98d03544e0fcfdfe7e2c324d3cdcdbee8ec7cac01280894",
+      "dev/codex/schubert/nk/web/security/WebRequestContext.class": "a342d032fff9391ae8d51232fd51ef16de53fa401d1189acacdbb19e462e6a71"
+    },
+    "selected": [
+      "dev.codex.schubert.nk.web.logging.WebRequestTraceTest"
+    ],
+    "expectedTests": 10,
+    "session": "PG25918-WEB-REQUEST-TRACE-ORIGINAL-WHOLE10",
+    "newMethods": 0,
+    "originalTenWhole": true,
+    "oldExecUnion": false,
+    "actualBackendActions": 0,
+    "actualRootVmNativeActions": 0
+  },
+  "stages": {
+    "compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-09T04:20:09.289719+00:00",
+      "endUTC": "2026-11-09T04:20:10.156317+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-implicit:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/tomcat/embed/tomcat-embed-core/11.0.25/tomcat-embed-core-11.0.25.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-crypto/7.1.1/spring-security-crypto-7.1.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-web/7.1.1/spring-security-web-7.1.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-aop/7.0.9/spring-aop-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-test/7.0.9/spring-test-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-webmvc/7.0.9/spring-webmvc-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg25918-request-trace-original-whole10-v1/classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg25918-request-trace-original-whole10-v1",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-09T04:20:10.156847+00:00",
+      "endUTC": "2026-11-09T04:20:11.325154+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg25918-request-trace-original-whole10-v1/tmp",
+        "-Dnk.pt.repository=/home/mini/codex/project1/work/pgpt-foundation",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.language=ja",
+        "-Duser.country=JP",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg25918-request-trace-original-whole10-v1/jacoco.exec,sessionid=PG25918-WEB-REQUEST-TRACE-ORIGINAL-WHOLE10,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg25918-request-trace-original-whole10-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg25918-request-trace-original-whole10-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg22084-api-stop-state-six-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/tomcat/embed/tomcat-embed-core/11.0.25/tomcat-embed-core-11.0.25.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-crypto/7.1.1/spring-security-crypto-7.1.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-web/7.1.1/spring-security-web-7.1.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-aop/7.0.9/spring-aop-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-test/7.0.9/spring-test-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-webmvc/7.0.9/spring-webmvc-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg25918-request-trace-original-whole10-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary",
+        "--select-class",
+        "dev.codex.schubert.nk.web.logging.WebRequestTraceTest"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg25918-request-trace-original-whole10-v1",
+      "stdoutSha256": "67a294d6a824f7d7824ce5484dfd0beefa6892fdc60d9f8b7696aca299c7e395",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-09T04:20:11.325552+00:00",
+      "endUTC": "2026-11-09T04:20:11.490270+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg25918-request-trace-original-whole10-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg25918-request-trace-original-whole10-v1/component",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg25918-request-trace-original-whole10-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg25918-request-trace-original-whole10-v1",
+      "stdoutSha256": "8b52f8e394dce4ca71091c0836f0a70b3ed57530a0aabd058f0d66579cb400db",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-09T04:20:11.490595+00:00",
+      "endUTC": "2026-11-09T04:20:11.605484+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg25918-request-trace-original-whole10-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg25918-request-trace-original-whole10-v1",
+      "stdoutSha256": "9eec1b7a65bd1c18768798074d89adc804f0c9a1e96ff62d2bd1990cc4af8814",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-09T04:20:11.605849+00:00",
+      "endUTC": "2026-11-09T04:20:11.720429+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg25918-request-trace-original-whole10-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg25918-request-trace-original-whole10-v1",
+      "stdoutSha256": "819e717a77b90cf4f303056cfa02958bf3c40f9d33eb113c5a2788f69c17a254",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req004InterceptorAcceptsOnlyRegisteredStringAndNeverErrorOverwrite()",
+      "nonPass": []
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit()",
+      "nonPass": []
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req007ActorIsSafeDisplaySnapshotNotPrincipalAndMissingTraceIsNoOp()",
+      "nonPass": []
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req006AllNullAndMistypedMetadataAreRejected()",
+      "nonPass": []
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req004ActualInventoryAndEveryClosedRouteRejectUnknown()",
+      "nonPass": []
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req008HundredConcurrentRequestsDoNotCrossContaminate()",
+      "nonPass": []
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req008OutOfOrderNestedCloseCannotPublishAClosedTrace()",
+      "nonPass": []
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req006AllFourAttributeBoundariesRedactFrameworkFaults()",
+      "nonPass": []
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req006ServerIdentityIsStableAndDoesNotGrantTransport()",
+      "nonPass": []
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req004ReceiptProjectionUsesRegisteredPatternAndNeverRawLocator()",
+      "nonPass": []
+    }
+  ],
+  "xmlHashes": {
+    "TEST-junit-jupiter.xml": "152c4c8d68c75c05acc73cfa9531b5b44b833312313abf1cbd7f17ef86528a1e",
+    "TEST-junit-platform-suite.xml": "8ac15c1448ac0cab6ea06710b685b3a419c4d1b8b84ee9a8ba1a2ed2fd4c686c",
+    "TEST-junit-vintage.xml": "7f9aee8824327fea42da80be53f6edc8d376f857f63693ca1677d9629dac1bf5"
+  },
+  "qualification": "RAW_TERMINAL_ONLY_INDEPENDENT_POST_PENDING",
+  "productTestsExecuted": 10,
+  "newProductTests": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "whole451Accepted": false
+}

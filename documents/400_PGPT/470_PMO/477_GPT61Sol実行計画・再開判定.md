@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-09 Applicationと静的工具のdependency role分離（BUG2620/YKT2304）
+
+全toolHashesにはPMD同梱Gson/Gson-extrasとApplication jarが共存する。basename prefixだけでappclasspathを選ばず、既qualified appdependency exactpath/sha集合へjoinし、宣言App16とtool-only2を明示する。元failclosed1/誤診断assert1/工具費を保持し、五metadata反例と全四targetを実pinで確認。原10成功の確認再演0/品質・モデル・枠・HOLD不変更。
+
+
 ## 2026-11-09 再資格の依存差分と共有fixture（BUG2614～2616）
 
 module keyは実metadataのphysicalKeyから選び、空集合を拒否する。旧graph全hash一致を仮定せず、変更Sourceを列挙して承認済み現pure証拠/current normalへ結合する。旧WebLogの165Protocolでは161同byte/QA054四変更、shared goldenのAction反映漏れを製品実行前発見した。UI235正本から一literal是正し、原9と六callerの資格を分離する。before/count prebind非0の後はpublisherを含む依存操作をJSのexit条件で止める。管理pubだけが進んだe404は未資格の履歴であり、修正6f/guard0/sourcepush後の原9初回だけを受入証拠にする。旧成功の確認再演・品質/モデル/枠/HOLD変更なし。
