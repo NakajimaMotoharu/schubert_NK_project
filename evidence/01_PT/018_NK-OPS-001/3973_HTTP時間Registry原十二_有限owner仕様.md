@@ -5,3 +5,7 @@ G03.05主/P01809関連0 REWORK開始前1/4/8pp cap10。元1725/1755と現行trac
 BUG2604修正前起票。httpDur008のregistry二+executor4複合TWRを単一worker finally shutdownNow/await10へ、一invokeAllを10秒へ。元Future.get10/原12全body/literal/fixture/例外/値を厳密逆復元。独立oracleはSS351九ns境界[50/100/250/500/1000/1500/2000/2500/5000]ms、各±1/equal27入力→CDF2,5,..26/count27/sum38.7/max5.000000001、七TimeUnit各1→90061001001001ns、MAX二順序double正有限/小bucket3、snapshot単位2.5/1.5/mean1.25、MockClock3秒後max0/count2/total2.5、4×64×1秒=256/九CDF0四・256五/別owner0。callback1..6秒→count6/21/max6、nullable戻り二→count8/21、checked/Runtime/Error同一、未知pause/config/factoryは先行拒否、他Timer3/Counter7、負非観測・0は一観測全bucket1。productionからexpected生成しない。
 
 959由来skipreflow構成/static全指摘個別分類/正常Main7aed・WebJar・CoreSDK3に限定。source固定push後元12wholeを一JVM/exec初一回、SDK観測分は同Jar/CRC/実memberhashへ独立結合し新規SDKruntime資格にしない。counter全Source/Class/aggregate区分、分母0はN-A/null実XML導出、FES/未実行をPASSへしない。PG25546/48/50/52/54/56と3974へTestID/source/環境/command/exit/input/output/hash/BUGを記録。JDK25.0.4/Console1.13.4/JaCoCo0.8.15。wholeMavenHOLD/全HOLD/正式1964-53/unique520/新leaf0/工数null維持。
+
+## BUG2605追加観点（原開始見積り不変更）
+
+原12初回25552は真正0/FES0だがrequireCompatible正常return一branch/一line未到達。PG25562で元coverage/hashを保全し、HTTPDUR006-POSITIVEとして専用registryを受け入れるassertDoesNotThrowを一つ追加する。期待は専用capabilityの型契約/1725/351でありProductionの出力に追随して算出しない。元12 ID/全元assert/oracle保持、新unique method0。006の追加assert/importだけ除去して全元body/literalへ復元できることを独立確認し、是正後sourceの全12を必要再資格する。25552の成功を新sourceへ転用せず、未網羅counterを合算しない。YKT2299 API同形guardは直接正常PTなし・caller証拠未確認でPENDING、横展開全体は閉鎖しない。

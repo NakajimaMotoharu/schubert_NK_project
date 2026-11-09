@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.web.monitoring;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -213,6 +214,7 @@ class OverflowSafeHttpMeterRegistryTest {
     }
     assertThrows(NullPointerException.class, () -> new OverflowSafeHttpMeterRegistry(null));
     try (var registry = new OverflowSafeHttpMeterRegistry()) {
+      assertDoesNotThrow(() -> OverflowSafeHttpMeterRegistry.requireCompatible(registry));
       assertTrue(registry.getMeters().isEmpty());
     }
   }
