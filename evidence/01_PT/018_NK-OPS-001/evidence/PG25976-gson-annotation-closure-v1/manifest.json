@@ -1,0 +1,53 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T13:41:17.169459+09:00",
+  "bug": "BUG-2622",
+  "ykt": "YKT-2305",
+  "oldPreflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25956-security-audit-current-console-preflight-v1/manifest.json",
+    "sha256": "80dbbb01b34e09446a954d231ea12289f58bfcc638fb749888fd624a0c1f2e52"
+  },
+  "annotation": {
+    "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar",
+    "sha256": "b49c5c958316ed67a09c699dda9aa749caf434d51d863dea599ef36a49b9c855",
+    "artifactId": "error_prone_annotations",
+    "version": "2.48.0",
+    "role": "SDK_CLASSFILE_ANNOTATION_REQUIRED_BY_GSON_POM"
+  },
+  "gsonPom": {
+    "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.pom",
+    "sha256": "1fa0122c0e3733192642861c36be4c6f799a795327a23bdd2922691b6e9ba480"
+  },
+  "negativeLabels": [
+    "path",
+    "sha256",
+    "artifactId",
+    "version",
+    "role"
+  ],
+  "explicitTargets": [
+    {
+      "scope": "CURRENT_AUDIT_SLIM",
+      "action": "ADD_GSON_DECLARED_ANNOTATION",
+      "pending": "STRICT_COMPILE_AND_ORIGINAL6"
+    },
+    {
+      "scope": "PREVIOUS_TRACE16",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25916-request-trace-current-console-preflight-v1/manifest.json",
+      "sha256": "ca3602eab4e3190cdf29dfc4f5f8659356983d5f99e6345123a30efbecf263b9",
+      "action": "NOT_APPLICABLE_NO_DIRECT_GSON_API_REFERENCE_OR_COMPILE_WARNING",
+      "originalCompileExit": 0
+    },
+    {
+      "scope": "ORIGINAL_FULL_CLASSPATH14540",
+      "action": "NOT_APPLICABLE_ANNOTATION_ALREADY_PINNED_AND_ON_COMMAND",
+      "annotationSha256": "b49c5c958316ed67a09c699dda9aa749caf434d51d863dea599ef36a49b9c855"
+    }
+  ],
+  "targetCount": 3,
+  "sdkLibraryVersionChanged": false,
+  "warningsSuppressed": false,
+  "productTestsExecuted": 0,
+  "oldProductReplay": false,
+  "toolSha256": "d78edd01749f688bd5eab9fa4b7b0c895cdf064a6007d52170f6e8e1af64a1c4"
+}
