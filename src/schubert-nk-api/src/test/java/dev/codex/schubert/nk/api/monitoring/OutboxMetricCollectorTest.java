@@ -244,39 +244,44 @@ class OutboxMetricCollectorTest {
 
   @Test
   void outboxConn006OneOwnerSerializesReadCloseAndBothPublications() throws Exception {
-    try (var registry = new Registry();
-        var pool = Executors.newFixedThreadPool(2)) {
-      var collector = collector(registry, DEBUG_MODE);
-      var first = new Fixture(Row.row(PENDING_STATUS, 1, 3));
-      var second = new Fixture(Row.row(PENDING_STATUS, 2, 4));
-      var entered = new CountDownLatch(1);
-      var release = new CountDownLatch(1);
-      var secondCalled = new CountDownLatch(1);
-      var secondEntered = new CountDownLatch(1);
-      var secondRelease = new CountDownLatch(0);
-      var one =
-          pool.submit(() -> collector.collect(gate(first.connection(), entered, release), AS_OF));
+    try (var registry = new Registry()) {
+      var pool = Executors.newFixedThreadPool(2);
       try {
-        assertTrue(entered.await(5, TimeUnit.SECONDS));
-        var two =
-            pool.submit(
-                () -> {
-                  secondCalled.countDown();
-                  return collector.collect(
-                      gate(second.connection(), secondEntered, secondRelease), AS_OF);
-                });
-        assertTrue(secondCalled.await(5, TimeUnit.SECONDS));
-        assertFalse(secondEntered.await(100, TimeUnit.MILLISECONDS));
-        missing(registry, collector);
-        release.countDown();
-        assertEquals(1, one.get(5, TimeUnit.SECONDS).orElseThrow().counts().pending());
-        assertEquals(2, two.get(5, TimeUnit.SECONDS).orElseThrow().counts().pending());
-        assertEquals(2, collector.snapshot().orElseThrow().counts().pending());
-        assertEquals(4, gauge(registry, OUTBOX_AGES_METRIC, PENDING_STATUS));
-        first.complete();
-        second.complete();
+        var collector = collector(registry, DEBUG_MODE);
+        var first = new Fixture(Row.row(PENDING_STATUS, 1, 3));
+        var second = new Fixture(Row.row(PENDING_STATUS, 2, 4));
+        var entered = new CountDownLatch(1);
+        var release = new CountDownLatch(1);
+        var secondCalled = new CountDownLatch(1);
+        var secondEntered = new CountDownLatch(1);
+        var secondRelease = new CountDownLatch(0);
+        var one =
+            pool.submit(() -> collector.collect(gate(first.connection(), entered, release), AS_OF));
+        try {
+          assertTrue(entered.await(5, TimeUnit.SECONDS));
+          var two =
+              pool.submit(
+                  () -> {
+                    secondCalled.countDown();
+                    return collector.collect(
+                        gate(second.connection(), secondEntered, secondRelease), AS_OF);
+                  });
+          assertTrue(secondCalled.await(5, TimeUnit.SECONDS));
+          assertFalse(secondEntered.await(100, TimeUnit.MILLISECONDS));
+          missing(registry, collector);
+          release.countDown();
+          assertEquals(1, one.get(5, TimeUnit.SECONDS).orElseThrow().counts().pending());
+          assertEquals(2, two.get(5, TimeUnit.SECONDS).orElseThrow().counts().pending());
+          assertEquals(2, collector.snapshot().orElseThrow().counts().pending());
+          assertEquals(4, gauge(registry, OUTBOX_AGES_METRIC, PENDING_STATUS));
+          first.complete();
+          second.complete();
+        } finally {
+          release.countDown();
+        }
       } finally {
-        release.countDown();
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }
@@ -284,30 +289,35 @@ class OutboxMetricCollectorTest {
   @Test
   void outboxConn007ParallelCallersAndSeparateOwnersCannotCrossState() throws Exception {
     try (var registry = new Registry();
-        var otherRegistry = new Registry();
-        var pool = Executors.newFixedThreadPool(8)) {
-      var collector = collector(registry, DEBUG_MODE);
-      var other = collector(otherRegistry, DEBUG_MODE);
-      other.collect(new Fixture(Row.row(ERROR_VALUE, 222, 333)).connection(), AS_OF);
-      var tasks = new ArrayList<Callable<Long>>();
-      for (int owner = 1; owner <= 64; owner++) {
-        long count = owner;
-        tasks.add(
-            () -> {
-              var f = new Fixture(Row.row(PENDING_STATUS, count, count));
-              var actual = collector.collect(f.connection(), AS_OF).orElseThrow();
-              assertEquals(count, actual.counts().pending());
-              assertEquals(Duration.ofSeconds(count), actual.ages().pending());
-              f.complete();
-              return actual.counts().pending();
-            });
+        var otherRegistry = new Registry()) {
+      var pool = Executors.newFixedThreadPool(8);
+      try {
+        var collector = collector(registry, DEBUG_MODE);
+        var other = collector(otherRegistry, DEBUG_MODE);
+        other.collect(new Fixture(Row.row(ERROR_VALUE, 222, 333)).connection(), AS_OF);
+        var tasks = new ArrayList<Callable<Long>>();
+        for (int owner = 1; owner <= 64; owner++) {
+          long count = owner;
+          tasks.add(
+              () -> {
+                var f = new Fixture(Row.row(PENDING_STATUS, count, count));
+                var actual = collector.collect(f.connection(), AS_OF).orElseThrow();
+                assertEquals(count, actual.counts().pending());
+                assertEquals(Duration.ofSeconds(count), actual.ages().pending());
+                f.complete();
+                return actual.counts().pending();
+              });
+        }
+        var results = pool.invokeAll(tasks, 10, TimeUnit.SECONDS);
+        for (int i = 0; i < results.size(); i++) assertEquals(i + 1L, results.get(i).get());
+        assertEquals(222, other.snapshot().orElseThrow().counts().error());
+        assertEquals(333, gauge(otherRegistry, OUTBOX_AGES_METRIC, ERROR_VALUE));
+        assertEquals(6, registry.getMeters().size());
+        assertEquals(6, otherRegistry.getMeters().size());
+      } finally {
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
-      var results = pool.invokeAll(tasks);
-      for (int i = 0; i < results.size(); i++) assertEquals(i + 1L, results.get(i).get());
-      assertEquals(222, other.snapshot().orElseThrow().counts().error());
-      assertEquals(333, gauge(otherRegistry, OUTBOX_AGES_METRIC, ERROR_VALUE));
-      assertEquals(6, registry.getMeters().size());
-      assertEquals(6, otherRegistry.getMeters().size());
     }
   }
 

@@ -1,0 +1,236 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T09:21:47.780957+09:00",
+  "sourceContinuity": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxObservationRepositoryTest.java",
+      "originalSha256": "60de5831df6c273130930756bef2d5551c265d17eda8e2b7d80a0eb27bd2b9e8",
+      "currentSha256": "3ec736226dbb54eddd22c97626cddf3cc9ca83bb568da786c5c52f6d8b2ef068",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 1,
+      "fixtureStyleSitesCorrected": 3,
+      "existingFutureGet5SitesRetained": 0
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+      "originalSha256": "2c7b20b6944018b912d5f6ad0419e069b93c4a1d704d3958609043464f9d0bb4",
+      "currentSha256": "6da731e49ec76e444e8f4c71a7c2a82982c4ff40e9a2a264996a42e78d089c98",
+      "originalWholeBodiesExactlyRestored": true,
+      "finiteOwnerSites": 2,
+      "fixtureStyleSitesCorrected": 0,
+      "existingFutureGet5SitesRetained": 2
+    }
+  ],
+  "originalWholeCases": 18,
+  "rawFindings": 21,
+  "applicableViolations": 0,
+  "checkstyleFindings": 0,
+  "processingErrors": 0,
+  "suppressionAdded": false,
+  "outerExecutorTwrCountAfterFix": 0,
+  "finiteInvokeAllSitesCorrected": 2,
+  "finiteOwnerSitesCorrected": 3,
+  "fixtureStyleSitesCorrected": 3,
+  "oldStyleRawFindings": 15,
+  "newStyleRawFindings": 21,
+  "styleFindingsRemoved": 3,
+  "staticManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25446-api-outbox-jdbc-configured-prepare-v1/manifest.json",
+    "sha256": "7af872052636d7738d566cb80ae622fea04a3b5335d56cc40b8a380c33da3516"
+  },
+  "classifications": [
+    {
+      "className": "OutboxMetricCollectorTest",
+      "method": "gate",
+      "variable": null,
+      "line": 224,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "basis": "Own JDKProxy uses declaring JDBC interface loader for exact visibility/type identity; no context-loader override, driver lookup or actualconnection."
+    },
+    {
+      "className": "OutboxMetricCollectorTest",
+      "method": "outboxConn006OneOwnerSerializesReadCloseAndBothPublications",
+      "variable": "pool",
+      "line": 248,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "OutboxMetricCollectorTest",
+      "method": "outboxConn006OneOwnerSerializesReadCloseAndBothPublications",
+      "variable": "pool",
+      "line": 248,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "OutboxMetricCollectorTest",
+      "method": "outboxConn006OneOwnerSerializesReadCloseAndBothPublications",
+      "variable": "one",
+      "line": 259,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "OutboxMetricCollectorTest",
+      "method": "outboxConn006OneOwnerSerializesReadCloseAndBothPublications",
+      "variable": "two",
+      "line": 263,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "OutboxMetricCollectorTest",
+      "method": "outboxConn006OneOwnerSerializesReadCloseAndBothPublications",
+      "variable": null,
+      "line": 283,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "OutboxMetricCollectorTest",
+      "method": "outboxConn006OneOwnerSerializesReadCloseAndBothPublications",
+      "variable": null,
+      "line": 284,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "OutboxMetricCollectorTest",
+      "method": "outboxConn007ParallelCallersAndSeparateOwnersCannotCrossState",
+      "variable": "pool",
+      "line": 293,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "OutboxMetricCollectorTest",
+      "method": "outboxConn007ParallelCallersAndSeparateOwnersCannotCrossState",
+      "variable": "pool",
+      "line": 293,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "OutboxMetricCollectorTest",
+      "method": "outboxConn007ParallelCallersAndSeparateOwnersCannotCrossState",
+      "variable": "results",
+      "line": 311,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "OutboxMetricCollectorTest",
+      "method": "outboxConn007ParallelCallersAndSeparateOwnersCannotCrossState",
+      "variable": null,
+      "line": 318,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "OutboxMetricCollectorTest",
+      "method": "outboxConn007ParallelCallersAndSeparateOwnersCannotCrossState",
+      "variable": null,
+      "line": 319,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "OutboxObservationRepositoryTest.Fixture",
+      "method": null,
+      "variable": "faults",
+      "line": 59,
+      "rule": "UseConcurrentHashMap",
+      "applicable": false,
+      "basis": "Each parallel task owns separate Fixture/faults HashMap. Failure maps populated synchronously before calls; no shared mutation across tasks/connection getters."
+    },
+    {
+      "className": "OutboxObservationRepositoryTest.Fixture",
+      "method": "connection",
+      "variable": null,
+      "line": 83,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "basis": "Own JDKProxy uses declaring JDBC interface loader for exact visibility/type identity; no context-loader override, driver lookup or actualconnection."
+    },
+    {
+      "className": "OutboxObservationRepositoryTest.Fixture",
+      "method": "statement",
+      "variable": null,
+      "line": 110,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "basis": "Own JDKProxy uses declaring JDBC interface loader for exact visibility/type identity; no context-loader override, driver lookup or actualconnection."
+    },
+    {
+      "className": "OutboxObservationRepositoryTest.Fixture",
+      "method": "result",
+      "variable": null,
+      "line": 137,
+      "rule": "UseProperClassLoader",
+      "applicable": false,
+      "basis": "Own JDKProxy uses declaring JDBC interface loader for exact visibility/type identity; no context-loader override, driver lookup or actualconnection."
+    },
+    {
+      "className": "OutboxObservationRepositoryTest",
+      "method": "outboxDb009ParallelBorrowedConnectionsHaveNoCrossOwnerState",
+      "variable": "pool",
+      "line": 413,
+      "rule": "CloseResource",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "OutboxObservationRepositoryTest",
+      "method": "outboxDb009ParallelBorrowedConnectionsHaveNoCrossOwnerState",
+      "variable": "pool",
+      "line": 413,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "OutboxObservationRepositoryTest",
+      "method": "outboxDb009ParallelBorrowedConnectionsHaveNoCrossOwnerState",
+      "variable": "results",
+      "line": 415,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "OutboxObservationRepositoryTest",
+      "method": "outboxDb009ParallelBorrowedConnectionsHaveNoCrossOwnerState",
+      "variable": null,
+      "line": 419,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    },
+    {
+      "className": "OutboxObservationRepositoryTest",
+      "method": "outboxDb009ParallelBorrowedConnectionsHaveNoCrossOwnerState",
+      "variable": null,
+      "line": 420,
+      "rule": "DoNotUseThreads",
+      "applicable": false,
+      "basis": "Standalone JUnit owns2/8workers andfakeJDBC observations; existinglatch5/get5/100ms nonentry preserved, twoinvokeAll10/three finallyshutdownNow-await10."
+    }
+  ],
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

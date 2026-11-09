@@ -27,10 +27,13 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** OUTBOXDB001..010/1664: own JDBC doubles only, not actual DB/driver/source admission. */
 class OutboxObservationRepositoryTest {
+  private static final int READ_ONLY_TRANSACTION_VARIANT = 1;
+  private static final int ISOLATION_TRANSACTION_VARIANT = 2;
   private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
   private static final String FIXTURE_PENDING_B11DB31F = "PENDING";
   private static final String FIXTURE_OWNED_FIXTURE_FAILURE_CCD2F9F2 = "owned fixture failure";
@@ -137,7 +140,8 @@ class OutboxObservationRepositoryTest {
                 switch (method.getName()) {
                   case "next":
                     fault("next");
-                    return ++cursor < rows.size();
+                    cursor++;
+                    return cursor < rows.size();
                   case "getString":
                     assertEquals("status", arguments[0]);
                     fault("status");
@@ -217,8 +221,9 @@ class OutboxObservationRepositoryTest {
     for (int variant = 0; variant < 3; variant++) {
       var f = new Fixture();
       if (variant == 0) f.autoCommit = true;
-      if (variant == 1) f.readOnly = false;
-      if (variant == 2) f.isolation = Connection.TRANSACTION_SERIALIZABLE;
+      if (variant == READ_ONLY_TRANSACTION_VARIANT) f.readOnly = false;
+      if (variant == ISOLATION_TRANSACTION_VARIANT)
+        f.isolation = Connection.TRANSACTION_SERIALIZABLE;
       assertEquals(
           "outbox metric source rejected",
           assertThrows(SQLException.class, () -> repository.read(f.connection(), AS_OF))
@@ -405,10 +410,14 @@ class OutboxObservationRepositoryTest {
             return actual.counts().pending();
           });
     }
-    try (var pool = Executors.newFixedThreadPool(8)) {
-      var results = pool.invokeAll(tasks);
+    var pool = Executors.newFixedThreadPool(8);
+    try {
+      var results = pool.invokeAll(tasks, 10, TimeUnit.SECONDS);
       for (int index = 0; index < results.size(); index++)
         assertEquals(index + 1L, results.get(index).get());
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
