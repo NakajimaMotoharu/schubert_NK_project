@@ -1,0 +1,901 @@
+Compiled from "HttpByteRangeParserTest.java"
+class dev.codex.schubert.nk.web.media.HttpByteRangeParserTest {
+  private static final long TOTAL;
+    descriptor: J
+
+  dev.codex.schubert.nk.web.media.HttpByteRangeParserTest();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  void literalRangesPreserveFirstSpecAndOneMebibyteCap();
+    descriptor: ()V
+    Code:
+         0: new           #7                  // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full
+         3: dup
+         4: ldc2_w        #11                 // long 2097155l
+         7: invokespecial #13                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full."<init>":(J)V
+        10: invokestatic  #16                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+        13: ldc2_w        #11                 // long 2097155l
+        16: invokestatic  #22                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser.parseFirst:(Ljava/util/Optional;J)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+        19: invokestatic  #28                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+        22: bipush        13
+        24: anewarray     #34                 // class "[Ljava/lang/Object;"
+        27: dup
+        28: iconst_0
+        29: iconst_3
+        30: anewarray     #2                  // class java/lang/Object
+        33: dup
+        34: iconst_0
+        35: ldc           #36                 // String bytes=0-0
+        37: aastore
+        38: dup
+        39: iconst_1
+        40: lconst_0
+        41: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        44: aastore
+        45: dup
+        46: iconst_2
+        47: lconst_0
+        48: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        51: aastore
+        52: aastore
+        53: dup
+        54: iconst_1
+        55: iconst_3
+        56: anewarray     #2                  // class java/lang/Object
+        59: dup
+        60: iconst_0
+        61: ldc           #44                 // String bytes=0-1048575
+        63: aastore
+        64: dup
+        65: iconst_1
+        66: lconst_0
+        67: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        70: aastore
+        71: dup
+        72: iconst_2
+        73: ldc2_w        #46                 // long 1048575l
+        76: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        79: aastore
+        80: aastore
+        81: dup
+        82: iconst_2
+        83: iconst_3
+        84: anewarray     #2                  // class java/lang/Object
+        87: dup
+        88: iconst_0
+        89: ldc           #48                 // String bytes=0-1048576
+        91: aastore
+        92: dup
+        93: iconst_1
+        94: lconst_0
+        95: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        98: aastore
+        99: dup
+       100: iconst_2
+       101: ldc2_w        #46                 // long 1048575l
+       104: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       107: aastore
+       108: aastore
+       109: dup
+       110: iconst_3
+       111: iconst_3
+       112: anewarray     #2                  // class java/lang/Object
+       115: dup
+       116: iconst_0
+       117: ldc           #50                 // String bytes=1048576-
+       119: aastore
+       120: dup
+       121: iconst_1
+       122: ldc2_w        #52                 // long 1048576l
+       125: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       128: aastore
+       129: dup
+       130: iconst_2
+       131: ldc2_w        #54                 // long 2097151l
+       134: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       137: aastore
+       138: aastore
+       139: dup
+       140: iconst_4
+       141: iconst_3
+       142: anewarray     #2                  // class java/lang/Object
+       145: dup
+       146: iconst_0
+       147: ldc           #56                 // String bytes=-1
+       149: aastore
+       150: dup
+       151: iconst_1
+       152: ldc2_w        #58                 // long 2097154l
+       155: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       158: aastore
+       159: dup
+       160: iconst_2
+       161: ldc2_w        #58                 // long 2097154l
+       164: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       167: aastore
+       168: aastore
+       169: dup
+       170: iconst_5
+       171: iconst_3
+       172: anewarray     #2                  // class java/lang/Object
+       175: dup
+       176: iconst_0
+       177: ldc           #60                 // String bytes=-1048576
+       179: aastore
+       180: dup
+       181: iconst_1
+       182: ldc2_w        #62                 // long 1048579l
+       185: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       188: aastore
+       189: dup
+       190: iconst_2
+       191: ldc2_w        #58                 // long 2097154l
+       194: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       197: aastore
+       198: aastore
+       199: dup
+       200: bipush        6
+       202: iconst_3
+       203: anewarray     #2                  // class java/lang/Object
+       206: dup
+       207: iconst_0
+       208: ldc           #64                 // String bytes=-2097155
+       210: aastore
+       211: dup
+       212: iconst_1
+       213: lconst_0
+       214: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       217: aastore
+       218: dup
+       219: iconst_2
+       220: ldc2_w        #46                 // long 1048575l
+       223: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       226: aastore
+       227: aastore
+       228: dup
+       229: bipush        7
+       231: iconst_3
+       232: anewarray     #2                  // class java/lang/Object
+       235: dup
+       236: iconst_0
+       237: ldc           #66                 // String bytes=-2097156
+       239: aastore
+       240: dup
+       241: iconst_1
+       242: lconst_0
+       243: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       246: aastore
+       247: dup
+       248: iconst_2
+       249: ldc2_w        #46                 // long 1048575l
+       252: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       255: aastore
+       256: aastore
+       257: dup
+       258: bipush        8
+       260: iconst_3
+       261: anewarray     #2                  // class java/lang/Object
+       264: dup
+       265: iconst_0
+       266: ldc           #68                 // String bytes=2097154-999999999999
+       268: aastore
+       269: dup
+       270: iconst_1
+       271: ldc2_w        #58                 // long 2097154l
+       274: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       277: aastore
+       278: dup
+       279: iconst_2
+       280: ldc2_w        #58                 // long 2097154l
+       283: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       286: aastore
+       287: aastore
+       288: dup
+       289: bipush        9
+       291: iconst_3
+       292: anewarray     #2                  // class java/lang/Object
+       295: dup
+       296: iconst_0
+       297: ldc           #70                 // String bytes=0002-0004
+       299: aastore
+       300: dup
+       301: iconst_1
+       302: ldc2_w        #72                 // long 2l
+       305: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       308: aastore
+       309: dup
+       310: iconst_2
+       311: ldc2_w        #74                 // long 4l
+       314: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       317: aastore
+       318: aastore
+       319: dup
+       320: bipush        10
+       322: iconst_3
+       323: anewarray     #2                  // class java/lang/Object
+       326: dup
+       327: iconst_0
+       328: ldc           #76                 // String bYtEs= \t2-4 \t,not-a-range
+       330: aastore
+       331: dup
+       332: iconst_1
+       333: ldc2_w        #72                 // long 2l
+       336: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       339: aastore
+       340: dup
+       341: iconst_2
+       342: ldc2_w        #74                 // long 4l
+       345: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       348: aastore
+       349: aastore
+       350: dup
+       351: bipush        11
+       353: iconst_3
+       354: anewarray     #2                  // class java/lang/Object
+       357: dup
+       358: iconst_0
+       359: ldc           #78                 // String bytes=0-0,
+       361: aastore
+       362: dup
+       363: iconst_1
+       364: lconst_0
+       365: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       368: aastore
+       369: dup
+       370: iconst_2
+       371: lconst_0
+       372: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       375: aastore
+       376: aastore
+       377: dup
+       378: bipush        12
+       380: iconst_3
+       381: anewarray     #2                  // class java/lang/Object
+       384: dup
+       385: iconst_0
+       386: ldc           #80                 // String bytes=2-4,99999999999999999999999999-
+       388: aastore
+       389: dup
+       390: iconst_1
+       391: ldc2_w        #72                 // long 2l
+       394: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       397: aastore
+       398: dup
+       399: iconst_2
+       400: ldc2_w        #74                 // long 4l
+       403: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       406: aastore
+       407: aastore
+       408: astore_1
+       409: aload_1
+       410: astore_2
+       411: aload_2
+       412: arraylength
+       413: istore_3
+       414: iconst_0
+       415: istore        4
+       417: iload         4
+       419: iload_3
+       420: if_icmpge     529
+       423: aload_2
+       424: iload         4
+       426: aaload
+       427: astore        5
+       429: ldc           #82                 // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+       431: aload         5
+       433: iconst_0
+       434: aaload
+       435: checkcast     #84                 // class java/lang/String
+       438: invokestatic  #86                 // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       441: ldc2_w        #11                 // long 2097155l
+       444: invokestatic  #22                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser.parseFirst:(Ljava/util/Optional;J)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+       447: invokestatic  #90                 // Method org/junit/jupiter/api/Assertions.assertInstanceOf:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+       450: checkcast     #82                 // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+       453: astore        6
+       455: aload         5
+       457: iconst_1
+       458: aaload
+       459: aload         6
+       461: invokevirtual #94                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.start:()J
+       464: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       467: aload         5
+       469: iconst_0
+       470: aaload
+       471: checkcast     #84                 // class java/lang/String
+       474: invokestatic  #98                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+       477: aload         5
+       479: iconst_2
+       480: aaload
+       481: aload         6
+       483: invokevirtual #101                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.end:()J
+       486: invokestatic  #38                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       489: invokestatic  #28                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       492: aload         5
+       494: iconst_2
+       495: aaload
+       496: checkcast     #39                 // class java/lang/Long
+       499: invokevirtual #104                // Method java/lang/Long.longValue:()J
+       502: aload         5
+       504: iconst_1
+       505: aaload
+       506: checkcast     #39                 // class java/lang/Long
+       509: invokevirtual #104                // Method java/lang/Long.longValue:()J
+       512: lsub
+       513: lconst_1
+       514: ladd
+       515: aload         6
+       517: invokevirtual #107                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.length:()J
+       520: invokestatic  #110                // Method org/junit/jupiter/api/Assertions.assertEquals:(JJ)V
+       523: iinc          4, 1
+       526: goto          417
+       529: new           #82                 // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+       532: dup
+       533: lconst_0
+       534: lconst_0
+       535: invokespecial #113                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial."<init>":(JJ)V
+       538: ldc           #115                // String bytes=-99
+       540: invokestatic  #86                 // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       543: lconst_1
+       544: invokestatic  #22                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser.parseFirst:(Ljava/util/Optional;J)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+       547: invokestatic  #28                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       550: return
+
+  void invalidGrammarBoundsAndArithmeticNeverSelectBytes();
+    descriptor: ()V
+    Code:
+         0: bipush        24
+         2: anewarray     #84                 // class java/lang/String
+         5: dup
+         6: iconst_0
+         7: ldc           #117                // String
+         9: aastore
+        10: dup
+        11: iconst_1
+        12: ldc           #119                // String bytes
+        14: aastore
+        15: dup
+        16: iconst_2
+        17: ldc           #121                // String items=0-1
+        19: aastore
+        20: dup
+        21: iconst_3
+        22: ldc           #123                // String  bytes=0-1
+        24: aastore
+        25: dup
+        26: iconst_4
+        27: ldc           #125                // String bytes=
+        29: aastore
+        30: dup
+        31: iconst_5
+        32: ldc           #127                // String bytes=-
+        34: aastore
+        35: dup
+        36: bipush        6
+        38: ldc           #129                // String bytes=1
+        40: aastore
+        41: dup
+        42: bipush        7
+        44: ldc           #131                // String bytes=0--1
+        46: aastore
+        47: dup
+        48: bipush        8
+        50: ldc           #133                // String bytes=--1
+        52: aastore
+        53: dup
+        54: bipush        9
+        56: ldc           #135                // String bytes=+1-2
+        58: aastore
+        59: dup
+        60: bipush        10
+        62: ldc           #137                // String bytes=1-+2
+        64: aastore
+        65: dup
+        66: bipush        11
+        68: ldc           #139                // String bytes=0-1.5
+        70: aastore
+        71: dup
+        72: bipush        12
+        74: ldc           #141                // String bytes=０-１
+        76: aastore
+        77: dup
+        78: bipush        13
+        80: ldc           #143                // String bytes=1 -2
+        82: aastore
+        83: dup
+        84: bipush        14
+        86: ldc           #145                // String bytes=1- 2
+        88: aastore
+        89: dup
+        90: bipush        15
+        92: ldc           #147                // String bytes=2097155-
+        94: aastore
+        95: dup
+        96: bipush        16
+        98: ldc           #149                // String bytes=3-2
+       100: aastore
+       101: dup
+       102: bipush        17
+       104: ldc           #151                // String bytes=-0
+       106: aastore
+       107: dup
+       108: bipush        18
+       110: ldc           #153                // String bytes=9223372036854775808-
+       112: aastore
+       113: dup
+       114: bipush        19
+       116: ldc           #155                // String bytes=0-18446744073709551616
+       118: aastore
+       119: dup
+       120: bipush        20
+       122: ldc           #157                // String bytes=-9223372036854775808
+       124: aastore
+       125: dup
+       126: bipush        21
+       128: ldc           #159                // String bytes=invalid,0-1
+       130: aastore
+       131: dup
+       132: bipush        22
+       134: ldc           #161                // String bytes=,0-1
+       136: aastore
+       137: dup
+       138: bipush        23
+       140: ldc           #163                // String bytes=1-2-3
+       142: aastore
+       143: invokestatic  #165                // InterfaceMethod java/util/List.of:([Ljava/lang/Object;)Ljava/util/List;
+       146: invokeinterface #170,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       151: astore_1
+       152: aload_1
+       153: invokeinterface #174,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+       158: ifeq          191
+       161: aload_1
+       162: invokeinterface #180,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       167: checkcast     #84                 // class java/lang/String
+       170: astore_2
+       171: getstatic     #184                // Field dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.INSTANCE:Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       174: aload_2
+       175: invokestatic  #86                 // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       178: ldc2_w        #11                 // long 2097155l
+       181: invokestatic  #22                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser.parseFirst:(Ljava/util/Optional;J)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+       184: aload_2
+       185: invokestatic  #190                // Method org/junit/jupiter/api/Assertions.assertSame:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+       188: goto          152
+       191: iconst_3
+       192: newarray       long
+       194: dup
+       195: iconst_0
+       196: lconst_0
+       197: lastore
+       198: dup
+       199: iconst_1
+       200: ldc2_w        #193                // long -1l
+       203: lastore
+       204: dup
+       205: iconst_2
+       206: ldc2_w        #195                // long -9223372036854775808l
+       209: lastore
+       210: astore_1
+       211: aload_1
+       212: arraylength
+       213: istore_2
+       214: iconst_0
+       215: istore_3
+       216: iload_3
+       217: iload_2
+       218: if_icmpge     262
+       221: aload_1
+       222: iload_3
+       223: laload
+       224: lstore        4
+       226: getstatic     #184                // Field dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.INSTANCE:Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       229: invokestatic  #16                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+       232: lload         4
+       234: invokestatic  #22                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser.parseFirst:(Ljava/util/Optional;J)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+       237: invokestatic  #197                // Method org/junit/jupiter/api/Assertions.assertSame:(Ljava/lang/Object;Ljava/lang/Object;)V
+       240: getstatic     #184                // Field dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.INSTANCE:Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       243: ldc           #36                 // String bytes=0-0
+       245: invokestatic  #86                 // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       248: lload         4
+       250: invokestatic  #22                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser.parseFirst:(Ljava/util/Optional;J)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+       253: invokestatic  #197                // Method org/junit/jupiter/api/Assertions.assertSame:(Ljava/lang/Object;Ljava/lang/Object;)V
+       256: iinc          3, 1
+       259: goto          216
+       262: getstatic     #184                // Field dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.INSTANCE:Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       265: ldc           #199                // String bytes=9223372036854775806-
+       267: invokestatic  #86                 // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       270: ldc2_w        #201                // long 9223372036854775807l
+       273: invokestatic  #22                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser.parseFirst:(Ljava/util/Optional;J)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+       276: invokestatic  #197                // Method org/junit/jupiter/api/Assertions.assertSame:(Ljava/lang/Object;Ljava/lang/Object;)V
+       279: return
+
+  void nullAndConstructedSelectionsKeepInvariants();
+    descriptor: ()V
+    Code:
+         0: ldc           #203                // class java/lang/NullPointerException
+         2: invokedynamic #205,  0            // InvokeDynamic #0:execute:()Lorg/junit/jupiter/api/function/Executable;
+         7: invokestatic  #209                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        10: pop
+        11: ldc           #213                // class java/lang/IllegalArgumentException
+        13: invokedynamic #215,  0            // InvokeDynamic #1:execute:()Lorg/junit/jupiter/api/function/Executable;
+        18: invokestatic  #209                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        21: pop
+        22: ldc           #213                // class java/lang/IllegalArgumentException
+        24: invokedynamic #216,  0            // InvokeDynamic #2:execute:()Lorg/junit/jupiter/api/function/Executable;
+        29: invokestatic  #209                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        32: pop
+        33: ldc           #213                // class java/lang/IllegalArgumentException
+        35: invokedynamic #217,  0            // InvokeDynamic #3:execute:()Lorg/junit/jupiter/api/function/Executable;
+        40: invokestatic  #209                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        43: pop
+        44: ldc           #213                // class java/lang/IllegalArgumentException
+        46: invokedynamic #218,  0            // InvokeDynamic #4:execute:()Lorg/junit/jupiter/api/function/Executable;
+        51: invokestatic  #209                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        54: pop
+        55: ldc           #213                // class java/lang/IllegalArgumentException
+        57: invokedynamic #219,  0            // InvokeDynamic #5:execute:()Lorg/junit/jupiter/api/function/Executable;
+        62: invokestatic  #209                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        65: pop
+        66: lconst_1
+        67: new           #82                 // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+        70: dup
+        71: ldc2_w        #201                // long 9223372036854775807l
+        74: ldc2_w        #201                // long 9223372036854775807l
+        77: invokespecial #113                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial."<init>":(JJ)V
+        80: invokevirtual #107                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.length:()J
+        83: invokestatic  #110                // Method org/junit/jupiter/api/Assertions.assertEquals:(JJ)V
+        86: ldc2_w        #52                 // long 1048576l
+        89: new           #82                 // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+        92: dup
+        93: lconst_0
+        94: ldc2_w        #46                 // long 1048575l
+        97: invokespecial #113                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial."<init>":(JJ)V
+       100: invokevirtual #107                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.length:()J
+       103: invokestatic  #110                // Method org/junit/jupiter/api/Assertions.assertEquals:(JJ)V
+       106: ldc2_w        #201                // long 9223372036854775807l
+       109: new           #7                  // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full
+       112: dup
+       113: ldc2_w        #201                // long 9223372036854775807l
+       116: invokespecial #13                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full."<init>":(J)V
+       119: invokevirtual #220                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.length:()J
+       122: invokestatic  #110                // Method org/junit/jupiter/api/Assertions.assertEquals:(JJ)V
+       125: new           #7                  // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full
+       128: dup
+       129: ldc2_w        #11                 // long 2097155l
+       132: invokespecial #13                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full."<init>":(J)V
+       135: astore_1
+       136: ldc2_w        #11                 // long 2097155l
+       139: aload_1
+       140: invokevirtual #220                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.length:()J
+       143: invokestatic  #110                // Method org/junit/jupiter/api/Assertions.assertEquals:(JJ)V
+       146: new           #7                  // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full
+       149: dup
+       150: ldc2_w        #11                 // long 2097155l
+       153: invokespecial #13                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full."<init>":(J)V
+       156: aload_1
+       157: invokestatic  #28                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       160: aload_1
+       161: aload_1
+       162: invokevirtual #221                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.equals:(Ljava/lang/Object;)Z
+       165: invokestatic  #225                // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+       168: aload_1
+       169: new           #7                  // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full
+       172: dup
+       173: lconst_1
+       174: invokespecial #13                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full."<init>":(J)V
+       177: invokevirtual #221                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.equals:(Ljava/lang/Object;)Z
+       180: invokestatic  #229                // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+       183: aload_1
+       184: aconst_null
+       185: invokevirtual #221                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.equals:(Ljava/lang/Object;)Z
+       188: invokestatic  #229                // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+       191: aload_1
+       192: ldc           #232                // String Full[length=2097155]
+       194: invokevirtual #221                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.equals:(Ljava/lang/Object;)Z
+       197: invokestatic  #229                // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+       200: ldc           #234                // int 2097155
+       202: aload_1
+       203: invokevirtual #235                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.hashCode:()I
+       206: invokestatic  #239                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+       209: ldc           #232                // String Full[length=2097155]
+       211: aload_1
+       212: invokevirtual #242                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.toString:()Ljava/lang/String;
+       215: invokestatic  #28                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       218: new           #82                 // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+       221: dup
+       222: ldc2_w        #52                 // long 1048576l
+       225: ldc2_w        #54                 // long 2097151l
+       228: invokespecial #113                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial."<init>":(JJ)V
+       231: astore_2
+       232: ldc2_w        #52                 // long 1048576l
+       235: aload_2
+       236: invokevirtual #94                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.start:()J
+       239: invokestatic  #110                // Method org/junit/jupiter/api/Assertions.assertEquals:(JJ)V
+       242: ldc2_w        #54                 // long 2097151l
+       245: aload_2
+       246: invokevirtual #101                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.end:()J
+       249: invokestatic  #110                // Method org/junit/jupiter/api/Assertions.assertEquals:(JJ)V
+       252: ldc2_w        #52                 // long 1048576l
+       255: aload_2
+       256: invokevirtual #107                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.length:()J
+       259: invokestatic  #110                // Method org/junit/jupiter/api/Assertions.assertEquals:(JJ)V
+       262: new           #82                 // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+       265: dup
+       266: ldc2_w        #52                 // long 1048576l
+       269: ldc2_w        #54                 // long 2097151l
+       272: invokespecial #113                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial."<init>":(JJ)V
+       275: aload_2
+       276: invokestatic  #28                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       279: aload_2
+       280: aload_2
+       281: invokevirtual #246                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.equals:(Ljava/lang/Object;)Z
+       284: invokestatic  #225                // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+       287: aload_2
+       288: new           #82                 // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+       291: dup
+       292: ldc2_w        #247                // long 1048577l
+       295: ldc2_w        #54                 // long 2097151l
+       298: invokespecial #113                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial."<init>":(JJ)V
+       301: invokevirtual #246                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.equals:(Ljava/lang/Object;)Z
+       304: invokestatic  #229                // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+       307: aload_2
+       308: new           #82                 // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+       311: dup
+       312: ldc2_w        #52                 // long 1048576l
+       315: ldc2_w        #249                // long 2097150l
+       318: invokespecial #113                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial."<init>":(JJ)V
+       321: invokevirtual #246                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.equals:(Ljava/lang/Object;)Z
+       324: invokestatic  #229                // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+       327: aload_2
+       328: aconst_null
+       329: invokevirtual #246                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.equals:(Ljava/lang/Object;)Z
+       332: invokestatic  #229                // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+       335: aload_2
+       336: aload_1
+       337: invokevirtual #246                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.equals:(Ljava/lang/Object;)Z
+       340: invokestatic  #229                // Method org/junit/jupiter/api/Assertions.assertFalse:(Z)V
+       343: ldc           #251                // int 34603007
+       345: aload_2
+       346: invokevirtual #252                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.hashCode:()I
+       349: invokestatic  #239                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+       352: ldc           #253                // String Partial[start=1048576, end=2097151]
+       354: aload_2
+       355: invokevirtual #255                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.toString:()Ljava/lang/String;
+       358: invokestatic  #28                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       361: iconst_1
+       362: anewarray     #185                // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable
+       365: dup
+       366: iconst_0
+       367: getstatic     #184                // Field dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.INSTANCE:Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       370: aastore
+       371: invokestatic  #256                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.values:()[Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       374: invokestatic  #260                // Method org/junit/jupiter/api/Assertions.assertArrayEquals:([Ljava/lang/Object;[Ljava/lang/Object;)V
+       377: invokestatic  #256                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.values:()[Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       380: astore_3
+       381: aload_3
+       382: iconst_0
+       383: aconst_null
+       384: aastore
+       385: iconst_1
+       386: anewarray     #185                // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable
+       389: dup
+       390: iconst_0
+       391: getstatic     #184                // Field dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.INSTANCE:Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       394: aastore
+       395: invokestatic  #256                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.values:()[Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       398: invokestatic  #260                // Method org/junit/jupiter/api/Assertions.assertArrayEquals:([Ljava/lang/Object;[Ljava/lang/Object;)V
+       401: getstatic     #184                // Field dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.INSTANCE:Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       404: ldc_w         #264                // String INSTANCE
+       407: invokestatic  #265                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.valueOf:(Ljava/lang/String;)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       410: invokestatic  #197                // Method org/junit/jupiter/api/Assertions.assertSame:(Ljava/lang/Object;Ljava/lang/Object;)V
+       413: iconst_0
+       414: getstatic     #184                // Field dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.INSTANCE:Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       417: invokevirtual #268                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.ordinal:()I
+       420: invokestatic  #239                // Method org/junit/jupiter/api/Assertions.assertEquals:(II)V
+       423: ldc_w         #264                // String INSTANCE
+       426: getstatic     #184                // Field dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.INSTANCE:Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       429: invokevirtual #271                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.name:()Ljava/lang/String;
+       432: invokestatic  #28                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       435: ldc           #213                // class java/lang/IllegalArgumentException
+       437: invokedynamic #274,  0            // InvokeDynamic #6:execute:()Lorg/junit/jupiter/api/function/Executable;
+       442: invokestatic  #209                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       445: pop
+       446: ldc           #213                // class java/lang/IllegalArgumentException
+       448: invokedynamic #275,  0            // InvokeDynamic #7:execute:()Lorg/junit/jupiter/api/function/Executable;
+       453: invokestatic  #209                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       456: pop
+       457: ldc           #203                // class java/lang/NullPointerException
+       459: invokedynamic #276,  0            // InvokeDynamic #8:execute:()Lorg/junit/jupiter/api/function/Executable;
+       464: invokestatic  #209                // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       467: pop
+       468: return
+
+  void oneHundredConcurrentParsesHaveNoSharedState() throws java.lang.Exception;
+    descriptor: ()V
+    Code:
+         0: bipush        8
+         2: invokestatic  #277                // Method java/util/concurrent/Executors.newFixedThreadPool:(I)Ljava/util/concurrent/ExecutorService;
+         5: astore_1
+         6: new           #283                // class java/util/ArrayList
+         9: dup
+        10: invokespecial #285                // Method java/util/ArrayList."<init>":()V
+        13: astore_2
+        14: iconst_0
+        15: istore_3
+        16: iload_3
+        17: bipush        100
+        19: if_icmpge     45
+        22: iload_3
+        23: istore        4
+        25: aload_2
+        26: iload         4
+        28: invokedynamic #286,  0            // InvokeDynamic #9:call:(I)Ljava/util/concurrent/Callable;
+        33: invokeinterface #290,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        38: pop
+        39: iinc          3, 1
+        42: goto          16
+        45: aload_1
+        46: aload_2
+        47: ldc2_w        #293                // long 10l
+        50: getstatic     #295                // Field java/util/concurrent/TimeUnit.SECONDS:Ljava/util/concurrent/TimeUnit;
+        53: invokeinterface #301,  5          // InterfaceMethod java/util/concurrent/ExecutorService.invokeAll:(Ljava/util/Collection;JLjava/util/concurrent/TimeUnit;)Ljava/util/List;
+        58: astore_3
+        59: iconst_0
+        60: istore        4
+        62: iload         4
+        64: bipush        100
+        66: if_icmpge     126
+        69: iload         4
+        71: iconst_2
+        72: irem
+        73: ifne          92
+        76: new           #82                 // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+        79: dup
+        80: iload         4
+        82: i2l
+        83: iload         4
+        85: i2l
+        86: invokespecial #113                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial."<init>":(JJ)V
+        89: goto          95
+        92: getstatic     #184                // Field dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.INSTANCE:Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+        95: aload_3
+        96: iload         4
+        98: invokeinterface #307,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       103: checkcast     #311                // class java/util/concurrent/Future
+       106: ldc2_w        #293                // long 10l
+       109: getstatic     #295                // Field java/util/concurrent/TimeUnit.SECONDS:Ljava/util/concurrent/TimeUnit;
+       112: invokeinterface #313,  4          // InterfaceMethod java/util/concurrent/Future.get:(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;
+       117: invokestatic  #28                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       120: iinc          4, 1
+       123: goto          62
+       126: aload_1
+       127: invokeinterface #316,  1          // InterfaceMethod java/util/concurrent/ExecutorService.shutdownNow:()Ljava/util/List;
+       132: pop
+       133: aload_1
+       134: ldc2_w        #293                // long 10l
+       137: getstatic     #295                // Field java/util/concurrent/TimeUnit.SECONDS:Ljava/util/concurrent/TimeUnit;
+       140: invokeinterface #320,  4          // InterfaceMethod java/util/concurrent/ExecutorService.awaitTermination:(JLjava/util/concurrent/TimeUnit;)Z
+       145: invokestatic  #225                // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+       148: goto          178
+       151: astore        5
+       153: aload_1
+       154: invokeinterface #316,  1          // InterfaceMethod java/util/concurrent/ExecutorService.shutdownNow:()Ljava/util/List;
+       159: pop
+       160: aload_1
+       161: ldc2_w        #293                // long 10l
+       164: getstatic     #295                // Field java/util/concurrent/TimeUnit.SECONDS:Ljava/util/concurrent/TimeUnit;
+       167: invokeinterface #320,  4          // InterfaceMethod java/util/concurrent/ExecutorService.awaitTermination:(JLjava/util/concurrent/TimeUnit;)Z
+       172: invokestatic  #225                // Method org/junit/jupiter/api/Assertions.assertTrue:(Z)V
+       175: aload         5
+       177: athrow
+       178: return
+      Exception table:
+         from    to  target type
+             6   126   151   any
+           151   153   151   any
+
+  private static dev.codex.schubert.nk.web.media.HttpByteRangeParser$Selection lambda$oneHundredConcurrentParsesHaveNoSharedState$0(int) throws java.lang.Exception;
+    descriptor: (I)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+    Code:
+         0: iload_0
+         1: iconst_2
+         2: irem
+         3: ifne          16
+         6: iload_0
+         7: iload_0
+         8: invokedynamic #324,  0            // InvokeDynamic #10:makeConcatWithConstants:(II)Ljava/lang/String;
+        13: goto          18
+        16: ldc           #151                // String bytes=-0
+        18: invokestatic  #86                 // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+        21: ldc2_w        #11                 // long 2097155l
+        24: invokestatic  #22                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser.parseFirst:(Ljava/util/Optional;J)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+        27: areturn
+
+  private static void lambda$nullAndConstructedSelectionsKeepInvariants$8() throws java.lang.Throwable;
+    descriptor: ()V
+    Code:
+         0: aconst_null
+         1: invokestatic  #265                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.valueOf:(Ljava/lang/String;)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+         4: pop
+         5: return
+
+  private static void lambda$nullAndConstructedSelectionsKeepInvariants$7() throws java.lang.Throwable;
+    descriptor: ()V
+    Code:
+         0: ldc_w         #328                // String UNKNOWN
+         3: invokestatic  #265                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.valueOf:(Ljava/lang/String;)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+         6: pop
+         7: return
+
+  private static void lambda$nullAndConstructedSelectionsKeepInvariants$6() throws java.lang.Throwable;
+    descriptor: ()V
+    Code:
+         0: ldc_w         #330                // String instance
+         3: invokestatic  #265                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.valueOf:(Ljava/lang/String;)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+         6: pop
+         7: return
+
+  private static void lambda$nullAndConstructedSelectionsKeepInvariants$5() throws java.lang.Throwable;
+    descriptor: ()V
+    Code:
+         0: new           #82                 // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+         3: dup
+         4: lconst_0
+         5: ldc2_w        #52                 // long 1048576l
+         8: invokespecial #113                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial."<init>":(JJ)V
+        11: pop
+        12: return
+
+  private static void lambda$nullAndConstructedSelectionsKeepInvariants$4() throws java.lang.Throwable;
+    descriptor: ()V
+    Code:
+         0: new           #82                 // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+         3: dup
+         4: lconst_1
+         5: lconst_0
+         6: invokespecial #113                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial."<init>":(JJ)V
+         9: pop
+        10: return
+
+  private static void lambda$nullAndConstructedSelectionsKeepInvariants$3() throws java.lang.Throwable;
+    descriptor: ()V
+    Code:
+         0: new           #82                 // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+         3: dup
+         4: ldc2_w        #193                // long -1l
+         7: lconst_0
+         8: invokespecial #113                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial."<init>":(JJ)V
+        11: pop
+        12: return
+
+  private static void lambda$nullAndConstructedSelectionsKeepInvariants$2() throws java.lang.Throwable;
+    descriptor: ()V
+    Code:
+         0: new           #7                  // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full
+         3: dup
+         4: ldc2_w        #193                // long -1l
+         7: invokespecial #13                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full."<init>":(J)V
+        10: pop
+        11: return
+
+  private static void lambda$nullAndConstructedSelectionsKeepInvariants$1() throws java.lang.Throwable;
+    descriptor: ()V
+    Code:
+         0: new           #7                  // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full
+         3: dup
+         4: lconst_0
+         5: invokespecial #13                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full."<init>":(J)V
+         8: pop
+         9: return
+
+  private static void lambda$nullAndConstructedSelectionsKeepInvariants$0() throws java.lang.Throwable;
+    descriptor: ()V
+    Code:
+         0: aconst_null
+         1: lconst_1
+         2: invokestatic  #22                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser.parseFirst:(Ljava/util/Optional;J)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+         5: pop
+         6: return
+}

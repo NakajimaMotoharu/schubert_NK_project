@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-09 before参照は番号だけでなく完全名/hashへ結合（BUG2611/YKT2301）
+
+複写したprepare/PF/postのbefore入力は保存済みmanifestの完全dirnameとhashへ明示結合し、run番号だけの置換でsuffixを推測しない。1024のAST-only before検査（八反例）と実manifest path/hashを本体前に保存する。25692/25694/25700で四targetを確認し、元正常試験を確認目的で再演しない。1011のraw run/count検査と併用し、全品質/上位/モデル/枠/HOLDを維持する。
+
+
 ## 2026-11-09 派生metadata工具は実行前にrun/count literalを照合（BUG2609/YKT2300）
 
 新SDK/postは原preflightのexpectedTests・run ID・原manifestの実path/hashへ結合し、pyflakesだけで件数依存dirnameの整合を済ませない。input1011のAST-only prebindを候補本体より先に適用し、bare/full-relative-pathのinput run/count、post出力countを確認してreceiptを保存する。候補import/実行/製品再演はしない。25632で固定2正常/14異常と明示七tool、25640で次postを確認。tool2609既失敗1と新guard初回TDD赤1は分離し、原試験成功を再演せず必要metadataだけ是正。品質/上位oracle/モデル/枠/全HOLD不変更。
