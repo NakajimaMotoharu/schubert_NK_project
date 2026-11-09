@@ -1,0 +1,135 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-09T14:02:28.869118+09:00",
+  "observedHead": "28ef312d0a2e4fa34ad98e2677e07791585ce060",
+  "measurementInterval": "PGPT-20261008-4567..4576; after4bc1ce4194; fiveordinarygroups",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "fiveRunsReferenced": 5,
+  "distinctOriginalCasePairs": 37,
+  "originalTestClasses": 6,
+  "distinctTargetSources": 12,
+  "distinctTargetCodeClasses": 16,
+  "sourceLmc100": 12,
+  "sourceNonemptyFour100": 8,
+  "sourceBranchNaturallyZeroNa": 4,
+  "executorOwnersBounded": 9,
+  "aggregateWaitSitesBounded": 4,
+  "futureGetSitesNewlyBounded": 1,
+  "additionalQa054ObservationsInsideExistingMethod": 3,
+  "allCurrentInputHashesMatch": true,
+  "newUniqueTests": 0,
+  "newAcceptance": 0,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "formalUpdated": false,
+  "effortRate": null,
+  "productExecutionsByReference": 0,
+  "coverageExecutionsByReference": 0,
+  "oldExecUnion": false,
+  "wholeApplicationCoverageComputed": false,
+  "allScopeSameRun": false,
+  "actualAllocatedPp": null,
+  "N": null,
+  "T": null,
+  "records": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25760-weblog-codec-whole9-independent-v1/manifest.json",
+      "sha256": "2a9228374b8ed2b84f4976c8eee4575c650cf2ed62e603e8da242548f1d89596",
+      "testSource": "6f0457c3f2af56c1eebaaf49631bf7eb38d5189a",
+      "originalCases": 9,
+      "targetSources": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodec.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java"
+      ],
+      "physicalTargets": [
+        "dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload",
+        "dev/codex/schubert/nk/web/logging/WebLogPayloadCodec",
+        "dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity"
+      ],
+      "sourceFour100": true,
+      "naturalZeroBranchSources": 0,
+      "originalRunAndIndependentTerminalConfirmed": true,
+      "currentAllInputHashesMatch": true
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25820-web-fixed-header-whole4-independent-v1/manifest.json",
+      "sha256": "2d053795e21f9d558a2f31a524ca7a4e9abf27997fcc84fa5c0bb4d66e43a33a",
+      "testSource": "2d1f2bc5f07acf27f4ce62a9878651104d8fedc3",
+      "originalCases": 4,
+      "targetSources": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebSecurityHeaderFilterFactory.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebSecurityHeaderWriter.java"
+      ],
+      "physicalTargets": [
+        "dev/codex/schubert/nk/web/security/WebSecurityHeaderFilterFactory",
+        "dev/codex/schubert/nk/web/security/WebSecurityHeaderWriter"
+      ],
+      "sourceFour100": false,
+      "naturalZeroBranchSources": 2,
+      "originalRunAndIndependentTerminalConfirmed": true,
+      "currentAllInputHashesMatch": true
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25860-closed-mock-auth-whole8-independent-v1/manifest.json",
+      "sha256": "827d490cc52db8c0cdb0eb0559a868e7169eb9d0c5ce14eb4c7d650a143030a0",
+      "testSource": "6c5a54861c50c7a7cb5dae00b5563d2f25660051",
+      "originalCases": 8,
+      "targetSources": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ClosedServletSecurityFilter.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebAuthorizationFilterFactory.java"
+      ],
+      "physicalTargets": [
+        "dev/codex/schubert/nk/web/security/ClosedServletSecurityFilter",
+        "dev/codex/schubert/nk/web/security/ClosedServletSecurityFilter$ClosedServletRequest",
+        "dev/codex/schubert/nk/web/security/WebAuthorizationFilterFactory"
+      ],
+      "sourceFour100": false,
+      "naturalZeroBranchSources": 1,
+      "originalRunAndIndependentTerminalConfirmed": true,
+      "currentAllInputHashesMatch": true
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25920-request-trace-whole10-independent-v1/manifest.json",
+      "sha256": "71dd6d9e7930968d5fa7c34f935d2cf8695f51fdc149f4faf155233f1e8983ca",
+      "testSource": "cbe58516aeb265d19bc2bd33c6f134a61d11763f",
+      "originalCases": 10,
+      "targetSources": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/RequestLogMvcConfiguration.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestRouteInterceptor.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java"
+      ],
+      "physicalTargets": [
+        "dev/codex/schubert/nk/web/config/RequestLogMvcConfiguration",
+        "dev/codex/schubert/nk/web/logging/WebRequestRouteInterceptor",
+        "dev/codex/schubert/nk/web/logging/WebRequestTrace",
+        "dev/codex/schubert/nk/web/logging/WebRequestTrace$Scope",
+        "dev/codex/schubert/nk/web/security/WebRequestContext"
+      ],
+      "sourceFour100": false,
+      "naturalZeroBranchSources": 1,
+      "originalRunAndIndependentTerminalConfirmed": true,
+      "currentAllInputHashesMatch": true
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25984-security-audit-whole6-independent-v1/manifest.json",
+      "sha256": "998da6529d4a5ad4e003fcc19f63ee9bcb436d4888fa1700d814aa86d70dcb27",
+      "testSource": "9f4ac22bc466d64babe62828b78e35b2414f6e82",
+      "originalCases": 6,
+      "targetSources": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebSecurityAudit.java"
+      ],
+      "physicalTargets": [
+        "dev/codex/schubert/nk/web/logging/WebSecurityAudit",
+        "dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event",
+        "dev/codex/schubert/nk/web/logging/WebSecurityAudit$Route"
+      ],
+      "sourceFour100": true,
+      "naturalZeroBranchSources": 0,
+      "originalRunAndIndependentTerminalConfirmed": true,
+      "currentAllInputHashesMatch": true
+    }
+  ],
+  "toolSha256": "923742a63a6f3e3c0ecf20be354a3815f7087276caa494a509d988e9aa7b2eba"
+}
