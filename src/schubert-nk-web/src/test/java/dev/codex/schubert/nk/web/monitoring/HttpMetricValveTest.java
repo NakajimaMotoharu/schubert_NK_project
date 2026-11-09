@@ -207,30 +207,35 @@ class HttpMetricValveTest {
 
   @Test
   void httpTerm002RedispatchAndConcurrentTerminalAreRequestOwned() throws Exception {
-    try (var registry = new OwnedRegistry();
-        var pool = Executors.newFixedThreadPool(8)) {
-      var signal = new AtomicInteger();
-      var valve = valve(registry, signal::incrementAndGet);
-      var request = request("POST", FIXTURE_LOGIN_F843C044);
-      var response = response(202);
-      valve.invoke(request, response);
-      valve.invoke(request, response);
-      var jobs =
-          java.util.stream.IntStream.range(0, 64)
-              .<Callable<Void>>mapToObj(
-                  i ->
-                      () -> {
-                        valve.log(request, response, 1);
-                        return null;
-                      })
-              .toList();
-      for (var result : pool.invokeAll(jobs)) result.get();
-      assertEquals(1, total(registry));
-      var other = request("POST", FIXTURE_LOGIN_F843C044);
-      valve.invoke(other, response);
-      valve.log(other, response, 0);
-      assertEquals(2, total(registry));
-      assertEquals(0, signal.get());
+    try (var registry = new OwnedRegistry()) {
+      var pool = Executors.newFixedThreadPool(8);
+      try {
+        var signal = new AtomicInteger();
+        var valve = valve(registry, signal::incrementAndGet);
+        var request = request("POST", FIXTURE_LOGIN_F843C044);
+        var response = response(202);
+        valve.invoke(request, response);
+        valve.invoke(request, response);
+        var jobs =
+            java.util.stream.IntStream.range(0, 64)
+                .<Callable<Void>>mapToObj(
+                    i ->
+                        () -> {
+                          valve.log(request, response, 1);
+                          return null;
+                        })
+                .toList();
+        for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS)) result.get();
+        assertEquals(1, total(registry));
+        var other = request("POST", FIXTURE_LOGIN_F843C044);
+        valve.invoke(other, response);
+        valve.log(other, response, 0);
+        assertEquals(2, total(registry));
+        assertEquals(0, signal.get());
+      } finally {
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
+      }
     }
   }
 
