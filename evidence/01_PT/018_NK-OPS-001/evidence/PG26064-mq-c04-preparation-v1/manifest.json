@@ -1,0 +1,324 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T00:40:02.780657+09:00",
+  "source": "522dc5a6710976721f1464db8ab61cd3166e4be8",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "sourcePins": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/BrokerTopologyTest.java": "96e98d5d674681c90c863b7150c9fcfdb17c69e89d63f9462569daa004ab2630"
+  },
+  "design": {
+    "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+  },
+  "brokerTemplate": {
+    "path": "src/deployment/artemis/etc/broker.xml",
+    "sha256": "161cbc5fc57ae38e4d75f45e8c752a781732aa3bf6c93c6d7ce8eb1cdaae1820"
+  },
+  "vectors": [
+    {
+      "enum": "SYNC_REQUEST",
+      "address": "nk.sync.request",
+      "queue": "nk.sync.request.q",
+      "maximumBytes": 1000000,
+      "ttlMillis": 5000
+    },
+    {
+      "enum": "SYNC_REPLY_WEB",
+      "address": "nk.sync.reply.web",
+      "queue": "nk.sync.reply.web.q",
+      "maximumBytes": 1000000,
+      "ttlMillis": 10000
+    },
+    {
+      "enum": "ASYNC_WORK",
+      "address": "nk.async.work",
+      "queue": "nk.async.work.q",
+      "maximumBytes": 1000,
+      "ttlMillis": 0
+    },
+    {
+      "enum": "WEB_LOG",
+      "address": "nk.web.log",
+      "queue": "nk.web.log.q",
+      "maximumBytes": 10000,
+      "ttlMillis": 0
+    },
+    {
+      "enum": "DEAD_LETTER",
+      "address": "nk.dead.letter",
+      "queue": "nk.dead.letter.q",
+      "maximumBytes": 1000000,
+      "ttlMillis": 0
+    },
+    {
+      "enum": "EXPIRY",
+      "address": "nk.expiry",
+      "queue": "nk.expiry.q",
+      "maximumBytes": 1000000,
+      "ttlMillis": 0
+    }
+  ],
+  "globalSettings": {
+    "persistence-enabled": "true",
+    "journal-type": "NIO",
+    "journal-file-size": "10MiB",
+    "journal-min-files": "4",
+    "journal-pool-files": "20",
+    "journal-compact-min-files": "10",
+    "journal-compact-percentage": "30",
+    "global-max-size": "512MiB",
+    "global-max-messages": "50000",
+    "max-disk-usage": "90",
+    "disk-scan-period": "5000",
+    "id-cache-size": "20000",
+    "persist-id-cache": "true",
+    "graceful-shutdown-enabled": "true",
+    "graceful-shutdown-timeout": "60000"
+  },
+  "addressSharedSettings": {
+    "dead-letter-address": "nk.dead.letter",
+    "expiry-address": "nk.expiry",
+    "auto-create-dead-letter-resources": "false",
+    "auto-create-expiry-resources": "false",
+    "auto-create-addresses": "false",
+    "auto-create-queues": "false",
+    "auto-delete-addresses": "false",
+    "auto-delete-queues": "false",
+    "address-full-policy": "PAGE",
+    "page-full-policy": "FAIL",
+    "disk-full-policy": "BLOCK",
+    "page-size-bytes": "8MiB",
+    "redelivery-collision-avoidance-factor": "0.0",
+    "enable-metrics": "true",
+    "enable-ingress-timestamp": "true",
+    "max-read-page-bytes": "16MiB",
+    "max-read-page-messages": "100"
+  },
+  "capacitySettings": {
+    "nk.sync.request": [
+      "32MiB",
+      "50",
+      "224MiB",
+      "450"
+    ],
+    "nk.sync.reply.web": [
+      "32MiB",
+      "50",
+      "224MiB",
+      "450"
+    ],
+    "nk.async.work": [
+      "128MiB",
+      "1000",
+      "896MiB",
+      "9000"
+    ],
+    "nk.web.log": [
+      "64MiB",
+      "1000",
+      "192MiB",
+      "9000"
+    ],
+    "nk.dead.letter": [
+      "128MiB",
+      "1000",
+      "1920MiB",
+      "9000"
+    ],
+    "nk.expiry": [
+      "64MiB",
+      "1000",
+      "960MiB",
+      "9000"
+    ]
+  },
+  "staticRoleAcl": {
+    "nk.sync.request": {
+      "send": [
+        "nk_web"
+      ],
+      "consume": [
+        "nk_api"
+      ],
+      "browse": [
+        "nk_ops"
+      ]
+    },
+    "nk.sync.reply.web": {
+      "consume": [
+        "nk_web"
+      ],
+      "send": [
+        "nk_api"
+      ],
+      "browse": [
+        "nk_ops"
+      ]
+    },
+    "nk.async.work": {
+      "send": [
+        "nk_api",
+        "nk_ops"
+      ],
+      "consume": [
+        "nk_api"
+      ],
+      "browse": [
+        "nk_ops"
+      ]
+    },
+    "nk.web.log": {
+      "send": [
+        "nk_web"
+      ],
+      "consume": [
+        "nk_api"
+      ],
+      "browse": [
+        "nk_ops"
+      ]
+    },
+    "nk.dead.letter": {
+      "send": [
+        "nk_web",
+        "nk_api"
+      ],
+      "consume": [
+        "nk_ops"
+      ],
+      "browse": [
+        "nk_ops"
+      ],
+      "manage": [
+        "nk_ops"
+      ]
+    },
+    "nk.expiry": {
+      "consume": [
+        "nk_mq_maintenance",
+        "nk_ops"
+      ],
+      "browse": [
+        "nk_mq_maintenance",
+        "nk_ops"
+      ],
+      "manage": [
+        "nk_ops"
+      ]
+    }
+  },
+  "requirementMappings": [
+    {
+      "id": "MQ-001",
+      "expected": "Web JavaとAPI Javaの要求・応答通信はApache ActiveMQ Artemisを使用する。",
+      "owner": "WBS-P005-01",
+      "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "line": 7,
+      "coveredHere": "STATIC_CATALOG_AND_CONFIGURATION_PREPARATION_ONLY",
+      "remainingOwner": "P005 request/reply implementation + N04 actual connection",
+      "accepted": false
+    },
+    {
+      "id": "MQ-002",
+      "expected": "同期画面処理はRequest/Reply方式とし、要求と応答を相関IDで対応付ける。",
+      "owner": "WBS-P005-01",
+      "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "line": 8,
+      "coveredHere": "STATIC_CATALOG_AND_CONFIGURATION_PREPARATION_ONLY",
+      "remainingOwner": "P005-02 correlation registry/reply races, not a topology enum behavior",
+      "accepted": false
+    },
+    {
+      "id": "MQ-003",
+      "expected": "非同期画面処理は受付結果を同期応答し、実処理は永続Queueで継続する。",
+      "owner": "WBS-P005-01",
+      "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "line": 9,
+      "coveredHere": "STATIC_CATALOG_AND_CONFIGURATION_PREPARATION_ONLY",
+      "remainingOwner": "P004 Inbox/Outbox + P005/P006 actual async dispatch",
+      "accepted": false
+    },
+    {
+      "id": "MQ-004",
+      "expected": "Web Javaは業務DBへ直接アクセスせず、業務処理をAPI Javaへ要求する。利用者起点要求には認証context IDを設定し、API Javaがsessionとroleを検証する。",
+      "owner": "WBS-P005-01",
+      "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "line": 10,
+      "coveredHere": "STATIC_CATALOG_AND_CONFIGURATION_PREPARATION_ONLY",
+      "remainingOwner": "P007 API session/role and P004 transaction owners; N03/N04 real path",
+      "accepted": false
+    },
+    {
+      "id": "MQ-005",
+      "expected": "API Javaは要求種別から該当Application Serviceへ処理を振り分ける。",
+      "owner": "WBS-P005-01",
+      "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "line": 11,
+      "coveredHere": "STATIC_CATALOG_AND_CONFIGURATION_PREPARATION_ONLY",
+      "remainingOwner": "P004 application router and domain facade owners",
+      "accepted": false
+    },
+    {
+      "id": "MQ-011",
+      "expected": "Web/API間でJavaクラスを直接serializeした形式を使用しない。言語・版に依存しない電文形式を使用する。",
+      "owner": "WBS-C04",
+      "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "line": 17,
+      "coveredHere": "STATIC_CATALOG_AND_CONFIGURATION_PREPARATION_ONLY",
+      "remainingOwner": "P001/P002 fixed byte codec and P005 BytesMessage; topology checks do not prove no ObjectMessage at runtime",
+      "accepted": false
+    },
+    {
+      "id": "MQ-012",
+      "expected": "MQ接続先、認証情報、Queue名およびタイムアウトを外部設定可能にする。",
+      "owner": "WBS-C04",
+      "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "line": 18,
+      "coveredHere": "STATIC_CATALOG_AND_CONFIGURATION_PREPARATION_ONLY",
+      "remainingOwner": "C03/C04 endpoint/credential-reference/timeouts; do not read actual credential values",
+      "accepted": false
+    },
+    {
+      "id": "MQ-013",
+      "expected": "Artemisの管理ポートおよびMQ acceptorをインターネットへ直接公開しない。",
+      "owner": "WBS-C04",
+      "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "line": 19,
+      "coveredHere": "STATIC_CATALOG_AND_CONFIGURATION_PREPARATION_ONLY",
+      "remainingOwner": "N04 effective acceptor/console/JMX + N05 firewall; XML loopback CORE only is not full management exposure proof",
+      "accepted": false
+    }
+  ],
+  "specReferences": {
+    "PT-JMS-001": 49,
+    "PT-JMS-002": 50
+  },
+  "existingBrokerTopologyTestsReferenced": 2,
+  "existingProtocolProof": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG24642-protocol-whole120-independent-v1/manifest.json",
+    "sha256": "8ebe6365bc701ba6432b1b55275004024dc71bc452d31b66d31c53894e3ae128"
+  },
+  "configuredAddressCount": 6,
+  "PTJMS001Executed": false,
+  "PTJMS002Executed": false,
+  "xmlWellformedAndLiteralChecks": true,
+  "vendorSchemaValidated": false,
+  "brokerManagementQueried": false,
+  "liveDurableRoutingOrAclVerified": false,
+  "managementConsoleJmxBindingVerified": false,
+  "actualUnitServiceDbOrBrokerOperations": 0,
+  "productTestsExecuted": 0,
+  "newCoverageMeasurements": 0,
+  "newAcceptance": 0,
+  "C04WholeAccepted": false,
+  "P00501Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "unclosedConditions": [
+    "N04 authentic broker/schema/effective address queue durable/ACL/routing/duplicate/retry management postconditions.",
+    "Management console and JMX binding plus external firewall not inferred from CORE XML.",
+    "MQ001..005 application correlation/session/route/async contracts remain with their canonical owners."
+  ],
+  "toolSha256": "1959f7d0f057eca344ab0224449d062d78f97d6c10747090af764a1b9de91d7f"
+}
