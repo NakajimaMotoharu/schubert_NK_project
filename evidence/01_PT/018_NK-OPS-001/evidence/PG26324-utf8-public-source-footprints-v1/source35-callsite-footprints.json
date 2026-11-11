@@ -1,0 +1,3994 @@
+[
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserAuditWriter.java",
+    "sourceSha256": "f0458e7874c4c5884e4f4dc79a0aedb803d730ab95469b43c610f3618d2eb474",
+    "sites": [
+      {
+        "line": 36,
+        "context": [
+          {
+            "line": 31,
+            "text": "    change.before().ifPresent(state -> details.add(\"before\", state(state, metadata)));"
+          },
+          {
+            "line": 32,
+            "text": "    change.after().ifPresent(state -> details.add(\"after\", state(state, metadata)));"
+          },
+          {
+            "line": 33,
+            "text": "    var known = change.after().or(change::before);"
+          },
+          {
+            "line": 34,
+            "text": "    known.ifPresent(state -> details.addProperty(\"targetUsername\", safe(state.username())));"
+          },
+          {
+            "line": 35,
+            "text": "    String json = details.toString();"
+          },
+          {
+            "line": 36,
+            "text": "    if (json.getBytes(StandardCharsets.UTF_8).length > MAXIMUM_DETAILS_UTF8_BYTES)"
+          },
+          {
+            "line": 37,
+            "text": "      throw new SQLException(\"user audit exceeds limit\");"
+          },
+          {
+            "line": 38,
+            "text": "    if (success && kind != Mutation.RESET_PASSWORD && kind != Mutation.UNLOCK)"
+          },
+          {
+            "line": 39,
+            "text": "      insert(c, actor, metadata, action, \"ACTION\", json, success);"
+          },
+          {
+            "line": 40,
+            "text": "    insert(c, actor, metadata, action, \"SECURITY\", json, success);"
+          },
+          {
+            "line": 41,
+            "text": "  }"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 36,
+        "text": "if (json.getBytes(StandardCharsets.UTF_8).length > MAXIMUM_DETAILS_UTF8_BYTES)"
+      },
+      {
+        "line": 97,
+        "text": "return Normalizer.normalize(name, Normalizer.Form.NFC)"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogRequest.java",
+    "sourceSha256": "df7ec576fc91533d2cc84e6d1217420c42ea6f589d38f73acb96a37dd5fbba30",
+    "sites": [
+      {
+        "line": 108,
+        "context": [
+          {
+            "line": 103,
+            "text": "    PayloadCodec.standard().encode(PayloadTypeCatalog.encode(response), ResultCode.SUCCESS);"
+          },
+          {
+            "line": 104,
+            "text": "  }"
+          },
+          {
+            "line": 105,
+            "text": ""
+          },
+          {
+            "line": 106,
+            "text": "  private static CanonicalField optional(String name, String type, Optional<String> value) {"
+          },
+          {
+            "line": 107,
+            "text": "    return new CanonicalField("
+          },
+          {
+            "line": 108,
+            "text": "        name, type, value.isPresent() ? value.get().getBytes(StandardCharsets.UTF_8) : null);"
+          },
+          {
+            "line": 109,
+            "text": "  }"
+          },
+          {
+            "line": 110,
+            "text": ""
+          },
+          {
+            "line": 111,
+            "text": "  private static void require(boolean valid) {"
+          },
+          {
+            "line": 112,
+            "text": "    if (!valid) throw new IllegalArgumentException(\"log query identity is inconsistent\");"
+          },
+          {
+            "line": 113,
+            "text": "  }"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 44,
+        "text": "Objects.requireNonNull(request, \"request\");"
+      },
+      {
+        "line": 70,
+        "text": "Objects.requireNonNull(actor, \"actor\");"
+      },
+      {
+        "line": 90,
+        "text": "Objects.requireNonNull(repository, \"repository\");"
+      },
+      {
+        "line": 91,
+        "text": "Objects.requireNonNull(connection, \"connection\");"
+      },
+      {
+        "line": 92,
+        "text": "Objects.requireNonNull(actor, \"actor\");"
+      },
+      {
+        "line": 98,
+        "text": "Objects.requireNonNull(response, \"response\");"
+      },
+      {
+        "line": 108,
+        "text": "name, type, value.isPresent() ? value.get().getBytes(StandardCharsets.UTF_8) : null);"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequest.java",
+    "sourceSha256": "7e8ed5ca4175bb673a3396612d7cb3e0f7c9aca239bd1ae8f6337155e5201181",
+    "sites": [
+      {
+        "line": 188,
+        "context": [
+          {
+            "line": 183,
+            "text": "    require(page.effectivePage() == Math.min(requested, page.totalPages()));"
+          },
+          {
+            "line": 184,
+            "text": "  }"
+          },
+          {
+            "line": 185,
+            "text": ""
+          },
+          {
+            "line": 186,
+            "text": "  private static CanonicalField optional(String name, String type, Optional<String> value) {"
+          },
+          {
+            "line": 187,
+            "text": "    if (value.isEmpty()) return new CanonicalField(name, type, null);"
+          },
+          {
+            "line": 188,
+            "text": "    byte[] owned = value.orElseThrow().getBytes(StandardCharsets.UTF_8);"
+          },
+          {
+            "line": 189,
+            "text": "    try {"
+          },
+          {
+            "line": 190,
+            "text": "      return new CanonicalField(name, type, owned);"
+          },
+          {
+            "line": 191,
+            "text": "    } finally {"
+          },
+          {
+            "line": 192,
+            "text": "      Arrays.fill(owned, (byte) 0);"
+          },
+          {
+            "line": 193,
+            "text": "    }"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 50,
+        "text": "Objects.requireNonNull(request, \"request\");"
+      },
+      {
+        "line": 91,
+        "text": "Objects.requireNonNull(actor, \"actor\");"
+      },
+      {
+        "line": 135,
+        "text": "Objects.requireNonNull(repository, \"repository\");"
+      },
+      {
+        "line": 136,
+        "text": "Objects.requireNonNull(connection, \"connection\");"
+      },
+      {
+        "line": 137,
+        "text": "Objects.requireNonNull(actor, \"actor\");"
+      },
+      {
+        "line": 154,
+        "text": "Objects.requireNonNull(response, \"response\");"
+      },
+      {
+        "line": 188,
+        "text": "byte[] owned = value.orElseThrow().getBytes(StandardCharsets.UTF_8);"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+    "sites": [
+      {
+        "line": 232,
+        "context": [
+          {
+            "line": 227,
+            "text": "                + (ready() ? \"1\\n\" : \"0\\n\");"
+          },
+          {
+            "line": 228,
+            "text": "      } else {"
+          },
+          {
+            "line": 229,
+            "text": "        status = 404;"
+          },
+          {
+            "line": 230,
+            "text": "        body = \"{}\";"
+          },
+          {
+            "line": 231,
+            "text": "      }"
+          },
+          {
+            "line": 232,
+            "text": "      byte[] bytes = body.getBytes(StandardCharsets.UTF_8);"
+          },
+          {
+            "line": 233,
+            "text": "      exchange.getResponseHeaders().set(\"Content-Type\", contentType);"
+          },
+          {
+            "line": 234,
+            "text": "      exchange.getResponseHeaders().set(\"Cache-Control\", \"no-store\");"
+          },
+          {
+            "line": 235,
+            "text": "      exchange.sendResponseHeaders(status, bytes.length);"
+          },
+          {
+            "line": 236,
+            "text": "      exchange.getResponseBody().write(bytes);"
+          },
+          {
+            "line": 237,
+            "text": "    }"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 91,
+        "text": "Objects.requireNonNull(information, \"public information\");"
+      },
+      {
+        "line": 92,
+        "text": "Objects.requireNonNull(healthy, \"runtime health\");"
+      },
+      {
+        "line": 93,
+        "text": "Objects.requireNonNull(factory, \"management factory\");"
+      },
+      {
+        "line": 112,
+        "text": "Objects.requireNonNull(information, \"public information\");"
+      },
+      {
+        "line": 113,
+        "text": "Objects.requireNonNull(healthy, \"runtime health\");"
+      },
+      {
+        "line": 114,
+        "text": "Objects.requireNonNull(factory, \"management factory\");"
+      },
+      {
+        "line": 117,
+        "text": "Objects.requireNonNull(context, \"borrowed metric context\"));"
+      },
+      {
+        "line": 162,
+        "text": "this.server = Objects.requireNonNull(factory.create(address, 32), \"management server\");"
+      },
+      {
+        "line": 169,
+        "text": "if (!Objects.requireNonNull(information.get(\"commit\"), \"release commit\")"
+      },
+      {
+        "line": 170,
+        "text": ".matches(\"[0-9a-f]{40}\")) throw new IllegalArgumentException(\"invalid public commit\");"
+      },
+      {
+        "line": 172,
+        "text": "for (String key : keys) {"
+      },
+      {
+        "line": 173,
+        "text": "String value = Objects.requireNonNull(information.get(key), \"public version\");"
+      },
+      {
+        "line": 174,
+        "text": "if (!value.matches(\"[A-Za-z0-9][A-Za-z0-9._+\\\\-]{0,127}\"))"
+      },
+      {
+        "line": 183,
+        "text": "Objects.requireNonNull(ready, \"admission ready\");"
+      },
+      {
+        "line": 232,
+        "text": "byte[] bytes = body.getBytes(StandardCharsets.UTF_8);"
+      },
+      {
+        "line": 253,
+        "text": "Objects.requireNonNull(remaining, \"API management stop budget\");"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+    "sourceSha256": "427b37bf360f201bd1509e336aa435f2a1db77c9f782b842aa2bf16fdcc28e3a",
+    "sites": [
+      {
+        "line": 42,
+        "context": [
+          {
+            "line": 37,
+            "text": "  public static CanonicalField number(String name, long value) {"
+          },
+          {
+            "line": 38,
+            "text": "    return encoded(name, \"N1\", Long.toString(value));"
+          },
+          {
+            "line": 39,
+            "text": "  }"
+          },
+          {
+            "line": 40,
+            "text": ""
+          },
+          {
+            "line": 41,
+            "text": "  private static CanonicalField encoded(String name, String type, String value) {"
+          },
+          {
+            "line": 42,
+            "text": "    byte[] bytes = value.getBytes(StandardCharsets.UTF_8);"
+          },
+          {
+            "line": 43,
+            "text": "    try {"
+          },
+          {
+            "line": 44,
+            "text": "      return new CanonicalField(name, type, bytes);"
+          },
+          {
+            "line": 45,
+            "text": "    } finally {"
+          },
+          {
+            "line": 46,
+            "text": "      Arrays.fill(bytes, (byte) 0);"
+          },
+          {
+            "line": 47,
+            "text": "    }"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 17,
+        "text": "Objects.requireNonNull(name, \"name\");"
+      },
+      {
+        "line": 18,
+        "text": "Objects.requireNonNull(typeVersion, \"typeVersion\");"
+      },
+      {
+        "line": 19,
+        "text": "if (!name.matches(\"[A-Za-z0-9._-]{1,64}\") || !typeVersion.matches(\"[A-Za-z0-9._-]{1,32}\")) {"
+      },
+      {
+        "line": 32,
+        "text": "Objects.requireNonNull(value, \"value\");"
+      },
+      {
+        "line": 33,
+        "text": "return encoded(name, \"X1\", Normalizer.normalize(value, Normalizer.Form.NFC));"
+      },
+      {
+        "line": 42,
+        "text": "byte[] bytes = value.getBytes(StandardCharsets.UTF_8);"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprint.java",
+    "sourceSha256": "25f0c77746cdb01ce938f83fe0b019929f0aeb2e073db4f043abb3a41ba0995b",
+    "sites": [
+      {
+        "line": 60,
+        "context": [
+          {
+            "line": 55,
+            "text": "    }"
+          },
+          {
+            "line": 56,
+            "text": "  }"
+          },
+          {
+            "line": 57,
+            "text": ""
+          },
+          {
+            "line": 58,
+            "text": "  private static void writeText(ByteArrayOutputStream output, String value) {"
+          },
+          {
+            "line": 59,
+            "text": "    byte[] encoded ="
+          },
+          {
+            "line": 60,
+            "text": "        Normalizer.normalize(value, Normalizer.Form.NFC).getBytes(StandardCharsets.UTF_8);"
+          },
+          {
+            "line": 61,
+            "text": "    try {"
+          },
+          {
+            "line": 62,
+            "text": "      writeLength(output, encoded.length);"
+          },
+          {
+            "line": 63,
+            "text": "      output.writeBytes(encoded);"
+          },
+          {
+            "line": 64,
+            "text": "    } finally {"
+          },
+          {
+            "line": 65,
+            "text": "      Arrays.fill(encoded, (byte) 0);"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 17,
+        "text": "private static final byte[] MAGIC = \"SCHUBERT-NK-OP1\".getBytes(StandardCharsets.US_ASCII);"
+      },
+      {
+        "line": 23,
+        "text": "Objects.requireNonNull(request, \"request\");"
+      },
+      {
+        "line": 24,
+        "text": "Objects.requireNonNull(key, \"key\");"
+      },
+      {
+        "line": 41,
+        "text": "Objects.requireNonNull(request, \"request\");"
+      },
+      {
+        "line": 49,
+        "text": "for (CanonicalField field : request.fields()) {"
+      },
+      {
+        "line": 60,
+        "text": "Normalizer.normalize(value, Normalizer.Form.NFC).getBytes(StandardCharsets.UTF_8);"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/RequestLogDetails.java",
+    "sourceSha256": "96467f5d3475d8e2fe5fe02124ce7d8571403f9141527a87ea880c9640117aa1",
+    "sites": [
+      {
+        "line": 26,
+        "context": [
+          {
+            "line": 21,
+            "text": ""
+          },
+          {
+            "line": 22,
+            "text": "  static String normalize(Optional<String> input, Optional<UserRole> role) {"
+          },
+          {
+            "line": 23,
+            "text": "    Objects.requireNonNull(input, \"input\");"
+          },
+          {
+            "line": 24,
+            "text": "    Objects.requireNonNull(role, \"role\");"
+          },
+          {
+            "line": 25,
+            "text": "    String text = input.orElse(\"{}\");"
+          },
+          {
+            "line": 26,
+            "text": "    if (text.getBytes(StandardCharsets.UTF_8).length > MAXIMUM_REQUEST_DETAILS_UTF8_BYTES) {"
+          },
+          {
+            "line": 27,
+            "text": "      throw invalid();"
+          },
+          {
+            "line": 28,
+            "text": "    }"
+          },
+          {
+            "line": 29,
+            "text": "    JsonObject output = new JsonObject();"
+          },
+          {
+            "line": 30,
+            "text": "    try (JsonReader reader = new JsonReader(new StringReader(text))) {"
+          },
+          {
+            "line": 31,
+            "text": "      reader.setStrictness(Strictness.STRICT);"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 23,
+        "text": "Objects.requireNonNull(input, \"input\");"
+      },
+      {
+        "line": 24,
+        "text": "Objects.requireNonNull(role, \"role\");"
+      },
+      {
+        "line": 26,
+        "text": "if (text.getBytes(StandardCharsets.UTF_8).length > MAXIMUM_REQUEST_DETAILS_UTF8_BYTES) {"
+      },
+      {
+        "line": 46,
+        "text": "if (!digits.matches(\"0|[1-9][0-9]{0,11}\")) {"
+      },
+      {
+        "line": 53,
+        "text": "if (!family.matches(\"[A-Za-z0-9 ._-]{1,32}\")) {"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandler.java",
+    "sourceSha256": "16f24d090151ae319ddecb42af929e87e68ded3dbf655da055bc2a275b297654",
+    "sites": [
+      {
+        "line": 55,
+        "context": [
+          {
+            "line": 50,
+            "text": "      // Complete both views first: a source failure must never publish a partial success body."
+          },
+          {
+            "line": 51,
+            "text": "      body = context.render(ready.getAsBoolean());"
+          },
+          {
+            "line": 52,
+            "text": "      status = 200;"
+          },
+          {
+            "line": 53,
+            "text": "      type = METRIC_TYPE;"
+          },
+          {
+            "line": 54,
+            "text": "    }"
+          },
+          {
+            "line": 55,
+            "text": "    byte[] bytes = body.getBytes(StandardCharsets.UTF_8);"
+          },
+          {
+            "line": 56,
+            "text": "    exchange.getResponseHeaders().set(\"Content-Type\", type);"
+          },
+          {
+            "line": 57,
+            "text": "    exchange.getResponseHeaders().set(\"Cache-Control\", \"no-store\");"
+          },
+          {
+            "line": 58,
+            "text": "    exchange.sendResponseHeaders(status, bytes.length);"
+          },
+          {
+            "line": 59,
+            "text": "    exchange.getResponseBody().write(bytes);"
+          },
+          {
+            "line": 60,
+            "text": "  }"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 22,
+        "text": "this.context = Objects.requireNonNull(context, \"metric context\");"
+      },
+      {
+        "line": 23,
+        "text": "this.ready = Objects.requireNonNull(ready, \"runtime readiness\");"
+      },
+      {
+        "line": 31,
+        "text": "Objects.requireNonNull(exchange, \"metric exchange\");"
+      },
+      {
+        "line": 39,
+        "text": "Objects.requireNonNull(exchange, \"metric exchange\");"
+      },
+      {
+        "line": 55,
+        "text": "byte[] bytes = body.getBytes(StandardCharsets.UTF_8);"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java",
+    "sourceSha256": "830a87635d2782354fe9c03e5d7612a2ab88364cdc31157b501fbf7baf361469",
+    "sites": [
+      {
+        "line": 15,
+        "context": [
+          {
+            "line": 10,
+            "text": "    Objects.requireNonNull(username, \"username\");"
+          },
+          {
+            "line": 11,
+            "text": "    Objects.requireNonNull(role, \"role\");"
+          },
+          {
+            "line": 12,
+            "text": "    if (userId < 1 || userId > 999_999_999_999L) {"
+          },
+          {
+            "line": 13,
+            "text": "      throw new IllegalArgumentException(\"actor ID is outside N12\");"
+          },
+          {
+            "line": 14,
+            "text": "    }"
+          },
+          {
+            "line": 15,
+            "text": "    int bytes = username.getBytes(StandardCharsets.UTF_8).length;"
+          },
+          {
+            "line": 16,
+            "text": "    if (bytes < 1 || bytes > 64) {"
+          },
+          {
+            "line": 17,
+            "text": "      throw new IllegalArgumentException(\"actor username length is invalid\");"
+          },
+          {
+            "line": 18,
+            "text": "    }"
+          },
+          {
+            "line": 19,
+            "text": "  }"
+          },
+          {
+            "line": 20,
+            "text": ""
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 10,
+        "text": "Objects.requireNonNull(username, \"username\");"
+      },
+      {
+        "line": 11,
+        "text": "Objects.requireNonNull(role, \"role\");"
+      },
+      {
+        "line": 15,
+        "text": "int bytes = username.getBytes(StandardCharsets.UTF_8).length;"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAccount.java",
+    "sourceSha256": "f78519bcbdcb4d906fa63010239a8f31398f1564d5fdb1ffcd9602e3dac4b2a0",
+    "sites": [
+      {
+        "line": 13,
+        "context": [
+          {
+            "line": 8,
+            "text": "    AuthenticatedActor identity, boolean active, String passwordHash, LoginAttemptState attempts) {"
+          },
+          {
+            "line": 9,
+            "text": "  public LoginAccount {"
+          },
+          {
+            "line": 10,
+            "text": "    Objects.requireNonNull(identity, \"identity\");"
+          },
+          {
+            "line": 11,
+            "text": "    Objects.requireNonNull(passwordHash, \"passwordHash\");"
+          },
+          {
+            "line": 12,
+            "text": "    Objects.requireNonNull(attempts, \"attempts\");"
+          },
+          {
+            "line": 13,
+            "text": "    int length = passwordHash.getBytes(StandardCharsets.UTF_8).length;"
+          },
+          {
+            "line": 14,
+            "text": "    if (length < 1 || length > 255 || attempts.kind() != LoginAttemptKind.USER) {"
+          },
+          {
+            "line": 15,
+            "text": "      throw new IllegalArgumentException(\"login account storage invariant is invalid\");"
+          },
+          {
+            "line": 16,
+            "text": "    }"
+          },
+          {
+            "line": 17,
+            "text": "  }"
+          },
+          {
+            "line": 18,
+            "text": ""
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 10,
+        "text": "Objects.requireNonNull(identity, \"identity\");"
+      },
+      {
+        "line": 11,
+        "text": "Objects.requireNonNull(passwordHash, \"passwordHash\");"
+      },
+      {
+        "line": 12,
+        "text": "Objects.requireNonNull(attempts, \"attempts\");"
+      },
+      {
+        "line": 13,
+        "text": "int length = passwordHash.getBytes(StandardCharsets.UTF_8).length;"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java",
+    "sourceSha256": "ed47df13b0b33a93bdfea58f0998bf299361c22b463c6e49a679df13a026bc02",
+    "sites": [
+      {
+        "line": 52,
+        "context": [
+          {
+            "line": 47,
+            "text": "      Connection connection, String usernameKey, InetAddress client, Instant now) {"
+          },
+          {
+            "line": 48,
+            "text": "    Objects.requireNonNull(connection, \"connection\");"
+          },
+          {
+            "line": 49,
+            "text": "    Objects.requireNonNull(usernameKey, \"usernameKey\");"
+          },
+          {
+            "line": 50,
+            "text": "    Objects.requireNonNull(client, \"client\");"
+          },
+          {
+            "line": 51,
+            "text": "    Objects.requireNonNull(now, \"now\");"
+          },
+          {
+            "line": 52,
+            "text": "    int bytes = usernameKey.getBytes(StandardCharsets.UTF_8).length;"
+          },
+          {
+            "line": 53,
+            "text": "    if (bytes < 1 || bytes > 96)"
+          },
+          {
+            "line": 54,
+            "text": "      throw new IllegalArgumentException(\"username key length is invalid\");"
+          },
+          {
+            "line": 55,
+            "text": "    try {"
+          },
+          {
+            "line": 56,
+            "text": "      requireTransaction(connection);"
+          },
+          {
+            "line": 57,
+            "text": "      Optional<LoginAccount> account = Optional.empty();"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 48,
+        "text": "Objects.requireNonNull(connection, \"connection\");"
+      },
+      {
+        "line": 49,
+        "text": "Objects.requireNonNull(usernameKey, \"usernameKey\");"
+      },
+      {
+        "line": 50,
+        "text": "Objects.requireNonNull(client, \"client\");"
+      },
+      {
+        "line": 51,
+        "text": "Objects.requireNonNull(now, \"now\");"
+      },
+      {
+        "line": 52,
+        "text": "int bytes = usernameKey.getBytes(StandardCharsets.UTF_8).length;"
+      },
+      {
+        "line": 131,
+        "text": "Objects.requireNonNull(connection, \"connection\");"
+      },
+      {
+        "line": 132,
+        "text": "Objects.requireNonNull(locked, \"locked\");"
+      },
+      {
+        "line": 133,
+        "text": "Objects.requireNonNull(now, \"now\");"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginInboxService.java",
+    "sourceSha256": "e18a73cbe4851eac8404d2f24cee823964b89b8183f51a345c719cd61ed63090",
+    "sites": [
+      {
+        "line": 178,
+        "context": [
+          {
+            "line": 173,
+            "text": "            field(\"password\", new String(password)),"
+          },
+          {
+            "line": 174,
+            "text": "            field(\"clientAddress\", client.getHostAddress())));"
+          },
+          {
+            "line": 175,
+            "text": "  }"
+          },
+          {
+            "line": 176,
+            "text": ""
+          },
+          {
+            "line": 177,
+            "text": "  private static CanonicalField field(String name, String value) {"
+          },
+          {
+            "line": 178,
+            "text": "    byte[] bytes = value.getBytes(StandardCharsets.UTF_8);"
+          },
+          {
+            "line": 179,
+            "text": "    try {"
+          },
+          {
+            "line": 180,
+            "text": "      return new CanonicalField(name, \"X1\", bytes);"
+          },
+          {
+            "line": 181,
+            "text": "    } finally {"
+          },
+          {
+            "line": 182,
+            "text": "      Arrays.fill(bytes, (byte) 0);"
+          },
+          {
+            "line": 183,
+            "text": "    }"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 59,
+        "text": "this.inbox = Objects.requireNonNull(inbox, \"inbox\");"
+      },
+      {
+        "line": 60,
+        "text": "this.authentication = Objects.requireNonNull(authentication, \"authentication\");"
+      },
+      {
+        "line": 61,
+        "text": "this.responses = Objects.requireNonNull(responses, \"responses\");"
+      },
+      {
+        "line": 62,
+        "text": "this.clock = Objects.requireNonNull(clock, \"clock\");"
+      },
+      {
+        "line": 63,
+        "text": "this.responseIds = Objects.requireNonNull(responseIds, \"responseIds\");"
+      },
+      {
+        "line": 69,
+        "text": "Objects.requireNonNull(connection, \"connection\");"
+      },
+      {
+        "line": 70,
+        "text": "Objects.requireNonNull(request, \"request\");"
+      },
+      {
+        "line": 71,
+        "text": "Objects.requireNonNull(receivedAt, \"receivedAt\");"
+      },
+      {
+        "line": 89,
+        "text": "UUID response = Objects.requireNonNull(responseIds.get(), \"response ID\");"
+      },
+      {
+        "line": 178,
+        "text": "byte[] bytes = value.getBytes(StandardCharsets.UTF_8);"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java",
+    "sourceSha256": "970b0b15993f72f0881cdf64b00839cb1fdf4f601a6c4b0827e2adc0bb4e0359",
+    "sites": [
+      {
+        "line": 17,
+        "context": [
+          {
+            "line": 12,
+            "text": " */"
+          },
+          {
+            "line": 13,
+            "text": "public record LoginUsername(String value) {"
+          },
+          {
+            "line": 14,
+            "text": "  public LoginUsername {"
+          },
+          {
+            "line": 15,
+            "text": "    Objects.requireNonNull(value, \"value\");"
+          },
+          {
+            "line": 16,
+            "text": "    value = Normalizer.normalize(value, Normalizer.Form.NFC).trim();"
+          },
+          {
+            "line": 17,
+            "text": "    int bytes = value.getBytes(StandardCharsets.UTF_8).length;"
+          },
+          {
+            "line": 18,
+            "text": "    if (bytes < 1 || bytes > 64 || value.isBlank()) {"
+          },
+          {
+            "line": 19,
+            "text": "      throw new IllegalArgumentException(\"username display length is invalid\");"
+          },
+          {
+            "line": 20,
+            "text": "    }"
+          },
+          {
+            "line": 21,
+            "text": "    if (value.codePoints().anyMatch(LoginUsername::invalidCodePoint)) {"
+          },
+          {
+            "line": 22,
+            "text": "      throw new IllegalArgumentException(\"username contains an invalid character\");"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 15,
+        "text": "Objects.requireNonNull(value, \"value\");"
+      },
+      {
+        "line": 16,
+        "text": "value = Normalizer.normalize(value, Normalizer.Form.NFC).trim();"
+      },
+      {
+        "line": 17,
+        "text": "int bytes = value.getBytes(StandardCharsets.UTF_8).length;"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordPolicy.java",
+    "sourceSha256": "6d8ffe5b35fc04f4056999d5a4a4a73ce6c3103a62b4b2cd87fbcfbeb1c8e608",
+    "sites": [
+      {
+        "line": 51,
+        "context": [
+          {
+            "line": 46,
+            "text": "      Arrays.fill(normalized, '\\0');"
+          },
+          {
+            "line": 47,
+            "text": "    }"
+          },
+          {
+            "line": 48,
+            "text": "  }"
+          },
+          {
+            "line": 49,
+            "text": ""
+          },
+          {
+            "line": 50,
+            "text": "  private static void validateWire(String value) {"
+          },
+          {
+            "line": 51,
+            "text": "    byte[] bytes = value.getBytes(StandardCharsets.UTF_8);"
+          },
+          {
+            "line": 52,
+            "text": "    try {"
+          },
+          {
+            "line": 53,
+            "text": "      if (bytes.length < 1 || bytes.length > 256 || value.endsWith(\" \")) {"
+          },
+          {
+            "line": 54,
+            "text": "        throw new IllegalArgumentException(\"password wire length or trailing space is invalid\");"
+          },
+          {
+            "line": 55,
+            "text": "      }"
+          },
+          {
+            "line": 56,
+            "text": "      if (value.codePoints().anyMatch(PasswordPolicy::invalidCodePoint)) {"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 18,
+        "text": "Objects.requireNonNull(password, \"password\");"
+      },
+      {
+        "line": 20,
+        "text": "String normalized = Normalizer.normalize(CharBuffer.wrap(password), Normalizer.Form.NFC);"
+      },
+      {
+        "line": 34,
+        "text": "Objects.requireNonNull(username, \"username\");"
+      },
+      {
+        "line": 40,
+        "text": "String account = Normalizer.normalize(username.trim(), Normalizer.Form.NFC);"
+      },
+      {
+        "line": 51,
+        "text": "byte[] bytes = value.getBytes(StandardCharsets.UTF_8);"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence.java",
+    "sourceSha256": "18f067e88b43658b276d06a0ef889adde32d039a50e2b1ba8dd654488d2d70bb",
+    "sites": [
+      {
+        "line": 158,
+        "context": [
+          {
+            "line": 153,
+            "text": "    String lastLine = text.substring(0, text.length() - 1).split(\"\\n\", -1)[result.entries() - 1];"
+          },
+          {
+            "line": 154,
+            "text": "    var last = fields(lastLine);"
+          },
+          {
+            "line": 155,
+            "text": "    require("
+          },
+          {
+            "line": 156,
+            "text": "        latest.cursor().equals(last.get(LITERAL_CURSOR))"
+          },
+          {
+            "line": 157,
+            "text": "            && latest.monotonic().toString().equals(last.get(LITERAL_MONOTONIC_TIMESTAMP)));"
+          },
+          {
+            "line": 158,
+            "text": "    byte[] lastBytes = (lastLine + \"\\n\").getBytes(StandardCharsets.UTF_8);"
+          },
+          {
+            "line": 159,
+            "text": "    try {"
+          },
+          {
+            "line": 160,
+            "text": "      require(latest.contentSha256().equals(contentSha256(lastBytes)));"
+          },
+          {
+            "line": 161,
+            "text": "    } finally {"
+          },
+          {
+            "line": 162,
+            "text": "      Arrays.fill(lastBytes, (byte) 0);"
+          },
+          {
+            "line": 163,
+            "text": "    }"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 65,
+        "text": "Objects.requireNonNull(bytes);"
+      },
+      {
+        "line": 70,
+        "text": "for (String line : text.substring(0, text.length() - 1).split(\"\\n\", -1)) {"
+      },
+      {
+        "line": 71,
+        "text": "for (var entry : new TreeMap<>(fields(line)).entrySet()) {"
+      },
+      {
+        "line": 75,
+        "text": "StandardCharsets.UTF_8"
+      },
+      {
+        "line": 100,
+        "text": "byte[] actual = canonical.toString().getBytes(StandardCharsets.US_ASCII);"
+      },
+      {
+        "line": 119,
+        "text": "Objects.requireNonNull(bytes);"
+      },
+      {
+        "line": 120,
+        "text": "Objects.requireNonNull(boot);"
+      },
+      {
+        "line": 127,
+        "text": "String invocation = Objects.requireNonNull(fields.get(\"_SYSTEMD_INVOCATION_ID\"));"
+      },
+      {
+        "line": 128,
+        "text": "require(invocation.matches(\"[0-9a-f]{32}\") && !invocation.equals(\"0\".repeat(32)));"
+      },
+      {
+        "line": 129,
+        "text": "String mono = Objects.requireNonNull(fields.get(LITERAL_MONOTONIC_TIMESTAMP));"
+      },
+      {
+        "line": 130,
+        "text": "require(mono.matches(LITERAL_1_9_0_9_0_19));"
+      },
+      {
+        "line": 132,
+        "text": "Objects.requireNonNull(fields.get(\"__REALTIME_TIMESTAMP\")).matches(LITERAL_1_9_0_9_0_19));"
+      },
+      {
+        "line": 133,
+        "text": "String cursor = Objects.requireNonNull(fields.get(LITERAL_CURSOR));"
+      },
+      {
+        "line": 135,
+        "text": "String message = Objects.requireNonNull(fields.get(\"MESSAGE\"));"
+      },
+      {
+        "line": 136,
+        "text": "require(Objects.requireNonNull(fields.get(\"PRIORITY\")).matches(\"[4-7]\"));"
+      },
+      {
+        "line": 137,
+        "text": "require(!message.contains(\"AMQ224\") && !message.matches(\"(?s).*\\\\b(ERROR|FATAL)\\\\b.*\"));"
+      },
+      {
+        "line": 146,
+        "text": "Objects.requireNonNull(latest);"
+      },
+      {
+        "line": 158,
+        "text": "byte[] lastBytes = (lastLine + \"\\n\").getBytes(StandardCharsets.UTF_8);"
+      },
+      {
+        "line": 170,
+        "text": "Objects.requireNonNull(actual);"
+      },
+      {
+        "line": 171,
+        "text": "Objects.requireNonNull(boot);"
+      },
+      {
+        "line": 172,
+        "text": "Objects.requireNonNull(parent);"
+      },
+      {
+        "line": 210,
+        "text": "Objects.requireNonNull(actual);"
+      },
+      {
+        "line": 211,
+        "text": "Objects.requireNonNull(boot);"
+      },
+      {
+        "line": 212,
+        "text": "Objects.requireNonNull(parent);"
+      },
+      {
+        "line": 244,
+        "text": "Objects.requireNonNull(ended);"
+      },
+      {
+        "line": 252,
+        "text": "Objects.requireNonNull(bytes);"
+      },
+      {
+        "line": 253,
+        "text": "Objects.requireNonNull(boot);"
+      },
+      {
+        "line": 254,
+        "text": "Objects.requireNonNull(invocation);"
+      },
+      {
+        "line": 255,
+        "text": "Objects.requireNonNull(began);"
+      },
+      {
+        "line": 264,
+        "text": "for (String line : text.substring(0, text.length() - 1).split(\"\\n\", -1)) {"
+      },
+      {
+        "line": 270,
+        "text": "require(Objects.requireNonNull(fields.get(\"PRIORITY\")).matches(\"[4-7]\"));"
+      },
+      {
+        "line": 271,
+        "text": "String cursor = Objects.requireNonNull(fields.get(LITERAL_CURSOR));"
+      },
+      {
+        "line": 273,
+        "text": "String monotonic = Objects.requireNonNull(fields.get(LITERAL_MONOTONIC_TIMESTAMP));"
+      },
+      {
+        "line": 275,
+        "text": "monotonic.matches(LITERAL_1_9_0_9_0_19)"
+      },
+      {
+        "line": 280,
+        "text": "Objects.requireNonNull(fields.get(\"__REALTIME_TIMESTAMP\")).matches(LITERAL_1_9_0_9_0_19));"
+      },
+      {
+        "line": 281,
+        "text": "String message = Objects.requireNonNull(fields.get(\"MESSAGE\"));"
+      },
+      {
+        "line": 282,
+        "text": "require(!message.contains(\"AMQ224\") && !message.matches(\"(?s).*\\\\b(ERROR|FATAL)\\\\b.*\"));"
+      },
+      {
+        "line": 309,
+        "text": "return StandardCharsets.UTF_8"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java",
+    "sourceSha256": "44f593abd6204f9dbc9ebf672405e4adac7ff793f16c91c71f411d21d3b8ac45",
+    "sites": [
+      {
+        "line": 95,
+        "context": [
+          {
+            "line": 90,
+            "text": "    values.forEach((key, value) -> bytes.append(key).append('=').append(value).append('\\n'));"
+          },
+          {
+            "line": 91,
+            "text": "    String hash ="
+          },
+          {
+            "line": 92,
+            "text": "        HexFormat.of()"
+          },
+          {
+            "line": 93,
+            "text": "            .formatHex("
+          },
+          {
+            "line": 94,
+            "text": "                MessageDigest.getInstance(\"SHA-256\")"
+          },
+          {
+            "line": 95,
+            "text": "                    .digest(bytes.toString().getBytes(StandardCharsets.UTF_8)));"
+          },
+          {
+            "line": 96,
+            "text": "    return new ApiNonSecretConfig(values, hash);"
+          },
+          {
+            "line": 97,
+            "text": "  }"
+          },
+          {
+            "line": 98,
+            "text": ""
+          },
+          {
+            "line": 99,
+            "text": "  private static Map<String, String> parseSource(String yaml, Set<String> allowed) {"
+          },
+          {
+            "line": 100,
+            "text": "    if (yaml.getBytes(StandardCharsets.UTF_8).length > 16_384"
+          }
+        ]
+      },
+      {
+        "line": 100,
+        "context": [
+          {
+            "line": 95,
+            "text": "                    .digest(bytes.toString().getBytes(StandardCharsets.UTF_8)));"
+          },
+          {
+            "line": 96,
+            "text": "    return new ApiNonSecretConfig(values, hash);"
+          },
+          {
+            "line": 97,
+            "text": "  }"
+          },
+          {
+            "line": 98,
+            "text": ""
+          },
+          {
+            "line": 99,
+            "text": "  private static Map<String, String> parseSource(String yaml, Set<String> allowed) {"
+          },
+          {
+            "line": 100,
+            "text": "    if (yaml.getBytes(StandardCharsets.UTF_8).length > 16_384"
+          },
+          {
+            "line": 101,
+            "text": "        || yaml.indexOf('\\r') >= 0"
+          },
+          {
+            "line": 102,
+            "text": "        || yaml.indexOf('\\uFEFF') >= 0"
+          },
+          {
+            "line": 103,
+            "text": "        || yaml.indexOf('&') >= 0"
+          },
+          {
+            "line": 104,
+            "text": "        || yaml.indexOf('*') >= 0"
+          },
+          {
+            "line": 105,
+            "text": "        || yaml.contains(\"${\")) {"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 83,
+        "text": "Objects.requireNonNull(commonYaml, \"common YAML\");"
+      },
+      {
+        "line": 84,
+        "text": "Objects.requireNonNull(apiYaml, \"API YAML\");"
+      },
+      {
+        "line": 90,
+        "text": "values.forEach((key, value) -> bytes.append(key).append('=').append(value).append('\\n'));"
+      },
+      {
+        "line": 95,
+        "text": ".digest(bytes.toString().getBytes(StandardCharsets.UTF_8)));"
+      },
+      {
+        "line": 100,
+        "text": "if (yaml.getBytes(StandardCharsets.UTF_8).length > 16_384"
+      },
+      {
+        "line": 113,
+        "text": "for (var entry : mapping.entrySet()) {"
+      },
+      {
+        "line": 130,
+        "text": "for (String key :"
+      },
+      {
+        "line": 143,
+        "text": "if (!Objects.requireNonNull(DEFAULTS.get(key)).equals(values.get(key))) throw invalid();"
+      },
+      {
+        "line": 146,
+        "text": "for (String key :"
+      },
+      {
+        "line": 154,
+        "text": "if (!Objects.requireNonNull(DEFAULTS.get(key)).equals(values.get(key))) throw invalid();"
+      },
+      {
+        "line": 158,
+        "text": "String entries = Objects.requireNonNull(values.get(\"nk.api.storage.asset-manifest-entries\"));"
+      },
+      {
+        "line": 159,
+        "text": "if (!entries.matches(\"[1-9][0-9]{0,4}\") || Integer.parseInt(entries) > 59_627) throw invalid();"
+      },
+      {
+        "line": 160,
+        "text": "if (!validPort(DB_URL, Objects.requireNonNull(values.get(\"nk.db.url\")))"
+      },
+      {
+        "line": 161,
+        "text": "|| !validPort(MQ_URL, Objects.requireNonNull(values.get(\"nk.mq.url\")))) throw invalid();"
+      },
+      {
+        "line": 163,
+        "text": "Path asset = Path.of(Objects.requireNonNull(values.get(\"nk.api.storage.asset-root\")));"
+      },
+      {
+        "line": 164,
+        "text": "Path transfer = Path.of(Objects.requireNonNull(values.get(\"nk.api.storage.transfer-root\")));"
+      },
+      {
+        "line": 177,
+        "text": "return match.matches() && Integer.parseInt(Objects.requireNonNull(match.group(1))) <= 65_535;"
+      },
+      {
+        "line": 186,
+        "text": "String value = values.get(Objects.requireNonNull(key, \"config key\"));"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+    "sourceSha256": "01dfe01fe186a9fe8e65098bb2a020cb8f4855e9033043c89696998262dec348",
+    "sites": [
+      {
+        "line": 385,
+        "context": [
+          {
+            "line": 380,
+            "text": "          // PG-D804/2476: keep one read, then null termination, before the original body."
+          },
+          {
+            "line": 381,
+            "text": "          while (true) {"
+          },
+          {
+            "line": 382,
+            "text": "            String line = reader.readLine();"
+          },
+          {
+            "line": 383,
+            "text": "            if (line == null) break;"
+          },
+          {
+            "line": 384,
+            "text": "            if (first && line.startsWith(\"\\ufeff\")) line = line.substring(1);"
+          },
+          {
+            "line": 385,
+            "text": "            crc.update(line.getBytes(StandardCharsets.UTF_8));"
+          },
+          {
+            "line": 386,
+            "text": "            first = false;"
+          },
+          {
+            "line": 387,
+            "text": "          }"
+          },
+          {
+            "line": 388,
+            "text": "          return (int) crc.getValue();"
+          },
+          {
+            "line": 389,
+            "text": "        });"
+          },
+          {
+            "line": 390,
+            "text": "  }"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 61,
+        "text": "this.reader = Objects.requireNonNull(reader);"
+      },
+      {
+        "line": 63,
+        "text": "this.io = Objects.requireNonNull(io);"
+      },
+      {
+        "line": 64,
+        "text": "this.security = Objects.requireNonNull(security);"
+      },
+      {
+        "line": 82,
+        "text": "for (var artifact : inventory.artifacts()) {"
+      },
+      {
+        "line": 87,
+        "text": "for (String path : expected.keySet()) add(tree, path);"
+      },
+      {
+        "line": 91,
+        "text": "for (var a : expected.values()) sums.put(a.path(), a.sha256());"
+      },
+      {
+        "line": 94,
+        "text": "sums.forEach("
+      },
+      {
+        "line": 96,
+        "text": "byte[] sumBytes = canonical.toString().getBytes(StandardCharsets.US_ASCII);"
+      },
+      {
+        "line": 116,
+        "text": "|| path.matches(\"(?:api/api|web/web|operations/batch)\\\\.jar\")"
+      },
+      {
+        "line": 117,
+        "text": "|| path.matches(\"(?:api|web|operations)/lib/[^/]+\\\\.jar\")"
+      },
+      {
+        "line": 118,
+        "text": "|| path.matches(\"db/migration/V[0-9]{3}__[a-z0-9_]+\\\\.sql\")"
+      },
+      {
+        "line": 119,
+        "text": "|| path.matches(\"config/templates/[A-Za-z0-9._-]+\\\\.yml\")"
+      },
+      {
+        "line": 125,
+        "text": "|| path.matches(\"systemd/[A-Za-z0-9._-]+\\\\.(?:service|target|timer)\")"
+      },
+      {
+        "line": 128,
+        "text": "|| path.matches(\"operations/runbooks/[A-Za-z0-9._-]+\");"
+      },
+      {
+        "line": 138,
+        "text": "for (String segment : path.split(\"/\")) {"
+      },
+      {
+        "line": 157,
+        "text": "Set<String> children = Objects.requireNonNull(tree.get(path), \"declared directory children\");"
+      },
+      {
+        "line": 159,
+        "text": "for (String name : children) {"
+      },
+      {
+        "line": 194,
+        "text": "var a = Objects.requireNonNull(expected.get(child), \"declared payload\");"
+      },
+      {
+        "line": 199,
+        "text": "(inventory.release() + \"\\n\").getBytes(StandardCharsets.US_ASCII),"
+      },
+      {
+        "line": 241,
+        "text": "for (Path entry : names) {"
+      },
+      {
+        "line": 246,
+        "text": "Objects.requireNonNull(entry.getFileName(), \"directory child name\")"
+      },
+      {
+        "line": 300,
+        "text": "var entry = Objects.requireNonNull(iterator.nextElement(), \"archive entry\");"
+      },
+      {
+        "line": 301,
+        "text": "String name = Objects.requireNonNull(entry.getName(), \"archive entry name\");"
+      },
+      {
+        "line": 323,
+        "text": "for (String token : classpath.trim().split(\" +\")) {"
+      },
+      {
+        "line": 324,
+        "text": "require(token.matches(\"(?:lib/)?[A-Za-z0-9][A-Za-z0-9._-]*\\\\.jar\"));"
+      },
+      {
+        "line": 326,
+        "text": "Objects.requireNonNull(Path.of(path).getParent()).resolve(token).toString();"
+      },
+      {
+        "line": 346,
+        "text": "for (var dep : inventory.dependencies()) {"
+      },
+      {
+        "line": 348,
+        "text": ".matches(\"dev\\\\.codex\\\\.schubert:schubert-nk-(?:protocol|storage|bootstrap):.+\")) {"
+      },
+      {
+        "line": 350,
+        "text": "for (String path : dep.paths())"
+      },
+      {
+        "line": 352,
+        "text": "Objects.requireNonNull(jars.get(path), \"declared shared archive\").classes());"
+      },
+      {
+        "line": 355,
+        "text": "for (var entry : jars.entrySet())"
+      },
+      {
+        "line": 358,
+        "text": "var sql = Objects.requireNonNull(jars.get(\"api/api.jar\"), \"declared API archive\").sql();"
+      },
+      {
+        "line": 360,
+        "text": "for (int i = 1; i < inventory.migrations().size(); i++) {"
+      },
+      {
+        "line": 364,
+        "text": "Objects.requireNonNull(expected.get(path), \"declared SQL artifact\")"
+      },
+      {
+        "line": 373,
+        "text": "String text = StandardCharsets.UTF_8.newDecoder().decode(ByteBuffer.wrap(original)).toString();"
+      },
+      {
+        "line": 385,
+        "text": "crc.update(line.getBytes(StandardCharsets.UTF_8));"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+    "sourceSha256": "a0254c980bdbead9800395cc2ea98704708cda4d7d81763fcd4d67b64f1c7620",
+    "sites": [
+      {
+        "line": 91,
+        "context": [
+          {
+            "line": 86,
+            "text": "    values.forEach((key, value) -> canonical.append(key).append('=').append(value).append('\\n'));"
+          },
+          {
+            "line": 87,
+            "text": "    String hash ="
+          },
+          {
+            "line": 88,
+            "text": "        HexFormat.of()"
+          },
+          {
+            "line": 89,
+            "text": "            .formatHex("
+          },
+          {
+            "line": 90,
+            "text": "                MessageDigest.getInstance(\"SHA-256\")"
+          },
+          {
+            "line": 91,
+            "text": "                    .digest(canonical.toString().getBytes(StandardCharsets.UTF_8)));"
+          },
+          {
+            "line": 92,
+            "text": "    return new WebNonSecretConfig(values, hash);"
+          },
+          {
+            "line": 93,
+            "text": "  }"
+          },
+          {
+            "line": 94,
+            "text": ""
+          },
+          {
+            "line": 95,
+            "text": "  private static Map<String, String> parseSource(String yaml, Set<String> allowed) {"
+          },
+          {
+            "line": 96,
+            "text": "    if (yaml.getBytes(StandardCharsets.UTF_8).length > 16_384"
+          }
+        ]
+      },
+      {
+        "line": 96,
+        "context": [
+          {
+            "line": 91,
+            "text": "                    .digest(canonical.toString().getBytes(StandardCharsets.UTF_8)));"
+          },
+          {
+            "line": 92,
+            "text": "    return new WebNonSecretConfig(values, hash);"
+          },
+          {
+            "line": 93,
+            "text": "  }"
+          },
+          {
+            "line": 94,
+            "text": ""
+          },
+          {
+            "line": 95,
+            "text": "  private static Map<String, String> parseSource(String yaml, Set<String> allowed) {"
+          },
+          {
+            "line": 96,
+            "text": "    if (yaml.getBytes(StandardCharsets.UTF_8).length > 16_384"
+          },
+          {
+            "line": 97,
+            "text": "        || yaml.indexOf('\\r') >= 0"
+          },
+          {
+            "line": 98,
+            "text": "        || yaml.indexOf('\\uFEFF') >= 0"
+          },
+          {
+            "line": 99,
+            "text": "        || yaml.indexOf('&') >= 0"
+          },
+          {
+            "line": 100,
+            "text": "        || yaml.indexOf('*') >= 0"
+          },
+          {
+            "line": 101,
+            "text": "        || yaml.contains(\"${\")) throw invalid();"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 79,
+        "text": "Objects.requireNonNull(commonYaml, \"common YAML\");"
+      },
+      {
+        "line": 80,
+        "text": "Objects.requireNonNull(webYaml, \"Web YAML\");"
+      },
+      {
+        "line": 86,
+        "text": "values.forEach((key, value) -> canonical.append(key).append('=').append(value).append('\\n'));"
+      },
+      {
+        "line": 91,
+        "text": ".digest(canonical.toString().getBytes(StandardCharsets.UTF_8)));"
+      },
+      {
+        "line": 96,
+        "text": "if (yaml.getBytes(StandardCharsets.UTF_8).length > 16_384"
+      },
+      {
+        "line": 107,
+        "text": "for (var entry : mapping.entrySet()) {"
+      },
+      {
+        "line": 123,
+        "text": "for (String key :"
+      },
+      {
+        "line": 134,
+        "text": "if (!Objects.requireNonNull(DEFAULTS.get(key)).equals(values.get(key))) throw invalid();"
+      },
+      {
+        "line": 136,
+        "text": "if (!validPort(DB_URL, Objects.requireNonNull(values.get(\"nk.db.url\")))"
+      },
+      {
+        "line": 137,
+        "text": "|| !validPort(MQ_URL, Objects.requireNonNull(values.get(\"nk.mq.url\")))) throw invalid();"
+      },
+      {
+        "line": 138,
+        "text": "int http = decimal(Objects.requireNonNull(values.get(\"nk.web.http.port\")), 1, 65_535);"
+      },
+      {
+        "line": 140,
+        "text": "decimal(Objects.requireNonNull(values.get(\"nk.web.management.port\")), 1, 65_535);"
+      },
+      {
+        "line": 142,
+        "text": "String timeout = Objects.requireNonNull(values.get(\"nk.web.mq.reply-timeout\"));"
+      },
+      {
+        "line": 145,
+        "text": "if (ms.matches()) {"
+      },
+      {
+        "line": 146,
+        "text": "milliseconds = Integer.parseInt(Objects.requireNonNull(ms.group(1)));"
+      },
+      {
+        "line": 149,
+        "text": "if (!seconds.matches()) throw invalid();"
+      },
+      {
+        "line": 150,
+        "text": "milliseconds = 1000 * Integer.parseInt(Objects.requireNonNull(seconds.group(1)));"
+      },
+      {
+        "line": 153,
+        "text": "int initial = decimal(Objects.requireNonNull(values.get(\"nk.web.mq.wait.initial\")), 1, 20);"
+      },
+      {
+        "line": 154,
+        "text": "int max = decimal(Objects.requireNonNull(values.get(\"nk.web.mq.wait.max\")), 1, 20);"
+      },
+      {
+        "line": 156,
+        "text": "decimal(Objects.requireNonNull(values.get(\"nk.web.media.max-streams\")), 1, 20);"
+      },
+      {
+        "line": 158,
+        "text": "Path asset = Path.of(Objects.requireNonNull(values.get(\"nk.web.storage.asset-root\")));"
+      },
+      {
+        "line": 159,
+        "text": "Path transfer = Path.of(Objects.requireNonNull(values.get(\"nk.web.storage.transfer-root\")));"
+      },
+      {
+        "line": 171,
+        "text": "if (!RETAINED_DECIMAL.matcher(value).matches()) throw invalid();"
+      },
+      {
+        "line": 179,
+        "text": "return match.matches() && Integer.parseInt(Objects.requireNonNull(match.group(1))) <= 65_535;"
+      },
+      {
+        "line": 187,
+        "text": "String value = values.get(Objects.requireNonNull(key, \"config key\"));"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+    "sourceSha256": "5860289eecdf5fc5619f2f7a6f83974cc9a581073ecc067ada0e01d9919150cd",
+    "sites": [
+      {
+        "line": 107,
+        "context": [
+          {
+            "line": 102,
+            "text": "  private static void validateCanonicalText("
+          },
+          {
+            "line": 103,
+            "text": "      String fieldName, String value, int maximumBytes, boolean forbidAllControls) {"
+          },
+          {
+            "line": 104,
+            "text": "    if (value.isEmpty()"
+          },
+          {
+            "line": 105,
+            "text": "        || !StandardCharsets.UTF_8.newEncoder().canEncode(value)"
+          },
+          {
+            "line": 106,
+            "text": "        || !Normalizer.isNormalized(value, Normalizer.Form.NFC)"
+          },
+          {
+            "line": 107,
+            "text": "        || value.getBytes(StandardCharsets.UTF_8).length > maximumBytes"
+          },
+          {
+            "line": 108,
+            "text": "        || value.endsWith(\" \")) {"
+          },
+          {
+            "line": 109,
+            "text": "      throw new IllegalArgumentException("
+          },
+          {
+            "line": 110,
+            "text": "          fieldName + \" is empty, non-canonical, or over its byte limit\");"
+          },
+          {
+            "line": 111,
+            "text": "    }"
+          },
+          {
+            "line": 112,
+            "text": "    for (int index = 0; index < value.length(); index++) {"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 23,
+        "text": "Objects.requireNonNull(descriptor, \"descriptor\");"
+      },
+      {
+        "line": 30,
+        "text": "if (!HASH.matcher(descriptor.sha256()).matches()) {"
+      },
+      {
+        "line": 94,
+        "text": "for (String segment : path.split(\"/\", -1)) {"
+      },
+      {
+        "line": 105,
+        "text": "|| !StandardCharsets.UTF_8.newEncoder().canEncode(value)"
+      },
+      {
+        "line": 106,
+        "text": "|| !Normalizer.isNormalized(value, Normalizer.Form.NFC)"
+      },
+      {
+        "line": 107,
+        "text": "|| value.getBytes(StandardCharsets.UTF_8).length > maximumBytes"
+      },
+      {
+        "line": 112,
+        "text": "for (int index = 0; index < value.length(); index++) {"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+    "sourceSha256": "017a222b4b91b48c450336f21ea5efd46ac444dbbee7274c56f5c7559d63893f",
+    "sites": [
+      {
+        "line": 301,
+        "context": [
+          {
+            "line": 296,
+            "text": "    validatePassword(text(data, \"Initial Password\"), Optional.of(username));"
+          },
+          {
+            "line": 297,
+            "text": "  }"
+          },
+          {
+            "line": 298,
+            "text": ""
+          },
+          {
+            "line": 299,
+            "text": "  private static void validatePassword(String password, Optional<String> username) {"
+          },
+          {
+            "line": 300,
+            "text": "    int characters = password.codePointCount(0, password.length());"
+          },
+          {
+            "line": 301,
+            "text": "    int bytes = password.getBytes(StandardCharsets.UTF_8).length;"
+          },
+          {
+            "line": 302,
+            "text": "    require(characters >= 12 && characters <= 128, \"password character length is outside 12..128\");"
+          },
+          {
+            "line": 303,
+            "text": "    require(bytes <= 256, \"password byte length exceeds 256\");"
+          },
+          {
+            "line": 304,
+            "text": "    require(!password.endsWith(\" \"), \"password has a trailing ASCII space\");"
+          },
+          {
+            "line": 305,
+            "text": "    require("
+          },
+          {
+            "line": 306,
+            "text": "        username.isEmpty() || !password.equalsIgnoreCase(username.orElseThrow()),"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 59,
+        "text": "Objects.requireNonNull(values, \"values\");"
+      },
+      {
+        "line": 80,
+        "text": "case \"SPKRSP01\" -> records.forEach(record -> requirePositive(record, \"出現件数\"));"
+      },
+      {
+        "line": 84,
+        "text": "records.forEach(record -> requirePositive(record, \"File件数\"));"
+      },
+      {
+        "line": 107,
+        "text": "case \"QSSRSP01\" -> records.forEach(PayloadSemanticValidator::validateQuestionSummary);"
+      },
+      {
+        "line": 111,
+        "text": "case \"NTSRSP01\" -> records.forEach(record -> validateReceipt(text(record, LITERAL_ID)));"
+      },
+      {
+        "line": 125,
+        "text": "require(!password.endsWith(\" \"), \"login password has a trailing ASCII space\");"
+      },
+      {
+        "line": 169,
+        "text": "for (FieldValueSet record : records) {"
+      },
+      {
+        "line": 219,
+        "text": "for (FieldValueSet record : records) {"
+      },
+      {
+        "line": 263,
+        "text": "for (FieldValueSet record : records) {"
+      },
+      {
+        "line": 274,
+        "text": "for (FieldValueSet record : records) {"
+      },
+      {
+        "line": 295,
+        "text": "require(USERNAME.matcher(username).matches(), \"username contains a disallowed character\");"
+      },
+      {
+        "line": 301,
+        "text": "int bytes = password.getBytes(StandardCharsets.UTF_8).length;"
+      },
+      {
+        "line": 304,
+        "text": "require(!password.endsWith(\" \"), \"password has a trailing ASCII space\");"
+      },
+      {
+        "line": 386,
+        "text": "require(!question.endsWith(\" \"), \"question text has a trailing ASCII space\");"
+      },
+      {
+        "line": 390,
+        "text": "require(RECEIPT_ID.matcher(receiptId).matches(), \"receipt ID format is invalid\");"
+      },
+      {
+        "line": 402,
+        "text": "HTTP_METHOD.matcher(text(data, \"HTTP method\")).matches(), \"HTTP method format is invalid\");"
+      },
+      {
+        "line": 411,
+        "text": "for (FieldValueSet record : records) {"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath.java",
+    "sourceSha256": "e26f1483749b0426f67df22df854e513f61ecb08569d5616ccd5569ded441d02",
+    "sites": [
+      {
+        "line": 26,
+        "context": [
+          {
+            "line": 21,
+            "text": "    Objects.requireNonNull(input, \"input\");"
+          },
+          {
+            "line": 22,
+            "text": "    String value = Normalizer.normalize(input, Normalizer.Form.NFC);"
+          },
+          {
+            "line": 23,
+            "text": "    if (value.isEmpty()"
+          },
+          {
+            "line": 24,
+            "text": "        || !StandardCharsets.UTF_8.newEncoder().canEncode(value)"
+          },
+          {
+            "line": 25,
+            "text": "        || PathSyntax.isAbsoluteOrDriveQualified(value)"
+          },
+          {
+            "line": 26,
+            "text": "        || value.getBytes(StandardCharsets.UTF_8).length > MAXIMUM_WIRE_BYTES"
+          },
+          {
+            "line": 27,
+            "text": "        || PathSyntax.containsControl(value)"
+          },
+          {
+            "line": 28,
+            "text": "        || PathSyntax.containsParentSegment(value)) {"
+          },
+          {
+            "line": 29,
+            "text": "      throw new IllegalArgumentException("
+          },
+          {
+            "line": 30,
+            "text": "          \"display path is empty, absolute, traversing, too long, or contains control data\");"
+          },
+          {
+            "line": 31,
+            "text": "    }"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 21,
+        "text": "Objects.requireNonNull(input, \"input\");"
+      },
+      {
+        "line": 22,
+        "text": "String value = Normalizer.normalize(input, Normalizer.Form.NFC);"
+      },
+      {
+        "line": 24,
+        "text": "|| !StandardCharsets.UTF_8.newEncoder().canEncode(value)"
+      },
+      {
+        "line": 26,
+        "text": "|| value.getBytes(StandardCharsets.UTF_8).length > MAXIMUM_WIRE_BYTES"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/RelativePath.java",
+    "sourceSha256": "3a4c04729dd6c232f34157dc765180cf1643d7cb8011f51068907e5d5fd5ddf9",
+    "sites": [
+      {
+        "line": 34,
+        "context": [
+          {
+            "line": 29,
+            "text": "    if (value.isEmpty()"
+          },
+          {
+            "line": 30,
+            "text": "        || !StandardCharsets.UTF_8.newEncoder().canEncode(value)"
+          },
+          {
+            "line": 31,
+            "text": "        || PathSyntax.isAbsoluteOrDriveQualified(value)"
+          },
+          {
+            "line": 32,
+            "text": "        || value.endsWith(\"/\")"
+          },
+          {
+            "line": 33,
+            "text": "        || value.indexOf('\\\\') >= 0"
+          },
+          {
+            "line": 34,
+            "text": "        || value.getBytes(StandardCharsets.UTF_8).length > MAXIMUM_WIRE_BYTES) {"
+          },
+          {
+            "line": 35,
+            "text": "      throw new IllegalArgumentException(\"relative path has an invalid root, separator, or length\");"
+          },
+          {
+            "line": 36,
+            "text": "    }"
+          },
+          {
+            "line": 37,
+            "text": "    for (String segment : value.split(\"/\", -1)) {"
+          },
+          {
+            "line": 38,
+            "text": "      if (segment.isEmpty()"
+          },
+          {
+            "line": 39,
+            "text": "          || segment.equals(\".\")"
+          }
+        ]
+      },
+      {
+        "line": 41,
+        "context": [
+          {
+            "line": 36,
+            "text": "    }"
+          },
+          {
+            "line": 37,
+            "text": "    for (String segment : value.split(\"/\", -1)) {"
+          },
+          {
+            "line": 38,
+            "text": "      if (segment.isEmpty()"
+          },
+          {
+            "line": 39,
+            "text": "          || segment.equals(\".\")"
+          },
+          {
+            "line": 40,
+            "text": "          || segment.equals(\"..\")"
+          },
+          {
+            "line": 41,
+            "text": "          || segment.getBytes(StandardCharsets.UTF_8).length > MAXIMUM_SEGMENT_BYTES"
+          },
+          {
+            "line": 42,
+            "text": "          || PathSyntax.containsControl(segment)) {"
+          },
+          {
+            "line": 43,
+            "text": "        throw new IllegalArgumentException(\"relative path contains an invalid segment\");"
+          },
+          {
+            "line": 44,
+            "text": "      }"
+          },
+          {
+            "line": 45,
+            "text": "    }"
+          },
+          {
+            "line": 46,
+            "text": "  }"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 22,
+        "text": "Objects.requireNonNull(input, \"input\");"
+      },
+      {
+        "line": 23,
+        "text": "String value = Normalizer.normalize(input, Normalizer.Form.NFC);"
+      },
+      {
+        "line": 30,
+        "text": "|| !StandardCharsets.UTF_8.newEncoder().canEncode(value)"
+      },
+      {
+        "line": 34,
+        "text": "|| value.getBytes(StandardCharsets.UTF_8).length > MAXIMUM_WIRE_BYTES) {"
+      },
+      {
+        "line": 37,
+        "text": "for (String segment : value.split(\"/\", -1)) {"
+      },
+      {
+        "line": 41,
+        "text": "|| segment.getBytes(StandardCharsets.UTF_8).length > MAXIMUM_SEGMENT_BYTES"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+    "sites": [
+      {
+        "line": 234,
+        "context": [
+          {
+            "line": 229,
+            "text": "                + (ready() ? \"1\\n\" : \"0\\n\");"
+          },
+          {
+            "line": 230,
+            "text": "      } else {"
+          },
+          {
+            "line": 231,
+            "text": "        status = 404;"
+          },
+          {
+            "line": 232,
+            "text": "        body = \"{}\";"
+          },
+          {
+            "line": 233,
+            "text": "      }"
+          },
+          {
+            "line": 234,
+            "text": "      byte[] bytes = body.getBytes(StandardCharsets.UTF_8);"
+          },
+          {
+            "line": 235,
+            "text": "      exchange.getResponseHeaders().set(\"Content-Type\", contentType);"
+          },
+          {
+            "line": 236,
+            "text": "      exchange.getResponseHeaders().set(\"Cache-Control\", \"no-store\");"
+          },
+          {
+            "line": 237,
+            "text": "      exchange.sendResponseHeaders(status, bytes.length);"
+          },
+          {
+            "line": 238,
+            "text": "      exchange.getResponseBody().write(bytes);"
+          },
+          {
+            "line": 239,
+            "text": "    }"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 93,
+        "text": "Objects.requireNonNull(information, \"public information\");"
+      },
+      {
+        "line": 94,
+        "text": "Objects.requireNonNull(healthy, \"runtime health\");"
+      },
+      {
+        "line": 95,
+        "text": "Objects.requireNonNull(factory, \"management factory\");"
+      },
+      {
+        "line": 114,
+        "text": "Objects.requireNonNull(information, \"public information\");"
+      },
+      {
+        "line": 115,
+        "text": "Objects.requireNonNull(healthy, \"runtime health\");"
+      },
+      {
+        "line": 116,
+        "text": "Objects.requireNonNull(factory, \"management factory\");"
+      },
+      {
+        "line": 119,
+        "text": "Objects.requireNonNull(context, \"borrowed metric context\"));"
+      },
+      {
+        "line": 164,
+        "text": "this.server = Objects.requireNonNull(factory.create(address, 32), \"management server\");"
+      },
+      {
+        "line": 171,
+        "text": "if (!Objects.requireNonNull(information.get(\"commit\"), \"release commit\")"
+      },
+      {
+        "line": 172,
+        "text": ".matches(\"[0-9a-f]{40}\")) throw new IllegalArgumentException(\"invalid public commit\");"
+      },
+      {
+        "line": 174,
+        "text": "for (String key : keys) {"
+      },
+      {
+        "line": 175,
+        "text": "String value = Objects.requireNonNull(information.get(key), \"public version\");"
+      },
+      {
+        "line": 176,
+        "text": "if (!value.matches(\"[A-Za-z0-9][A-Za-z0-9._+\\\\-]{0,127}\"))"
+      },
+      {
+        "line": 185,
+        "text": "Objects.requireNonNull(ready, \"admission ready\");"
+      },
+      {
+        "line": 234,
+        "text": "byte[] bytes = body.getBytes(StandardCharsets.UTF_8);"
+      },
+      {
+        "line": 254,
+        "text": "Objects.requireNonNull(remaining, \"management stop budget\");"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/LogSearchForm.java",
+    "sourceSha256": "d3022a7ea6ac2e00f14d5719f9d9b00bce3b509f4dac7d66091444d818d8c642",
+    "sites": [
+      {
+        "line": 118,
+        "context": [
+          {
+            "line": 113,
+            "text": "              issues.put(field, Code.CHARACTERS);"
+          },
+          {
+            "line": 114,
+            "text": "            } else {"
+          },
+          {
+            "line": 115,
+            "text": "              String normalized = Normalizer.normalize(raw, Normalizer.Form.NFC).trim();"
+          },
+          {
+            "line": 116,
+            "text": "              values.put(field, normalized);"
+          },
+          {
+            "line": 117,
+            "text": "              int maximum = LIMITS.getOrDefault(field, Integer.MAX_VALUE);"
+          },
+          {
+            "line": 118,
+            "text": "              if (normalized.getBytes(StandardCharsets.UTF_8).length > maximum)"
+          },
+          {
+            "line": 119,
+            "text": "                issues.put(field, Code.LENGTH);"
+          },
+          {
+            "line": 120,
+            "text": "            }"
+          },
+          {
+            "line": 121,
+            "text": "          }"
+          },
+          {
+            "line": 122,
+            "text": "        });"
+          },
+          {
+            "line": 123,
+            "text": "    CHOICES.forEach("
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 96,
+        "text": "Objects.requireNonNull(parameters, \"parameters\");"
+      },
+      {
+        "line": 98,
+        "text": "parameters.forEach("
+      },
+      {
+        "line": 99,
+        "text": "(key, value) -> snapshot.put(Objects.requireNonNull(key, \"name\"), List.copyOf(value)));"
+      },
+      {
+        "line": 103,
+        "text": "FIELDS.forEach("
+      },
+      {
+        "line": 111,
+        "text": "if (invalidCharacters(raw)) {"
+      },
+      {
+        "line": 115,
+        "text": "String normalized = Normalizer.normalize(raw, Normalizer.Form.NFC).trim();"
+      },
+      {
+        "line": 118,
+        "text": "if (normalized.getBytes(StandardCharsets.UTF_8).length > maximum)"
+      },
+      {
+        "line": 123,
+        "text": "CHOICES.forEach("
+      },
+      {
+        "line": 125,
+        "text": "if (!allowed.contains(Objects.requireNonNull(values.get(field), \"field\")))"
+      },
+      {
+        "line": 129,
+        "text": "String text = Objects.requireNonNull(values.get(Field.PAGE), \"page\");"
+      },
+      {
+        "line": 131,
+        "text": "if (!text.matches(\"-?[0-9]+\")) issues.putIfAbsent(Field.PAGE, Code.VALUE);"
+      },
+      {
+        "line": 154,
+        "text": "String value = Objects.requireNonNull(values.get(field), \"date\");"
+      },
+      {
+        "line": 156,
+        "text": "if (!value.matches("
+      },
+      {
+        "line": 173,
+        "text": "private static boolean invalidCharacters(String value) {"
+      },
+      {
+        "line": 174,
+        "text": "for (int i = 0; i < value.length(); i++) {"
+      },
+      {
+        "line": 177,
+        "text": "if (Character.isHighSurrogate(c)) {"
+      },
+      {
+        "line": 178,
+        "text": "if (i + 1 == value.length() || !Character.isLowSurrogate(value.charAt(i + 1))) return true;"
+      },
+      {
+        "line": 180,
+        "text": "} else if (Character.isLowSurrogate(c)) return true;"
+      },
+      {
+        "line": 193,
+        "text": "public boolean isValid() {"
+      },
+      {
+        "line": 202,
+        "text": "if (!isValid()) throw new IllegalStateException(\"invalid log search form\");"
+      },
+      {
+        "line": 216,
+        "text": "String value = Objects.requireNonNull(values.get(field), \"field\");"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSearchForm.java",
+    "sourceSha256": "1308c621d4fb8673cae5440a7691ba1a17bf20b13f53251ab23dfb220f4351b4",
+    "sites": [
+      {
+        "line": 87,
+        "context": [
+          {
+            "line": 82,
+            "text": "        else value = Normalizer.normalize(raw, Normalizer.Form.NFC).trim();"
+          },
+          {
+            "line": 83,
+            "text": "      }"
+          },
+          {
+            "line": 84,
+            "text": "      values.put(name, value);"
+          },
+          {
+            "line": 85,
+            "text": "    }"
+          },
+          {
+            "line": 86,
+            "text": "    if (!admin) values.put(LITERAL_USERNAME, \"\");"
+          },
+          {
+            "line": 87,
+            "text": "    if (Objects.requireNonNull(values.get(LITERAL_KEYWORD)).getBytes(StandardCharsets.UTF_8).length"
+          },
+          {
+            "line": 88,
+            "text": "        > MAXIMUM_KEYWORD_UTF8_BYTES) issues.put(LITERAL_KEYWORD, INVALID);"
+          },
+          {
+            "line": 89,
+            "text": "    if (Objects.requireNonNull(values.get(LITERAL_USERNAME)).getBytes(StandardCharsets.UTF_8).length"
+          },
+          {
+            "line": 90,
+            "text": "        > MAXIMUM_USERNAME_UTF8_BYTES) issues.put(LITERAL_USERNAME, INVALID);"
+          },
+          {
+            "line": 91,
+            "text": "    if (!Set.of(\"\", \"ANSWERED\", \"UNANSWERED\", \"ERROR\").contains(values.get(LITERAL_STATE)))"
+          },
+          {
+            "line": 92,
+            "text": "      issues.put(LITERAL_STATE, INVALID);"
+          }
+        ]
+      },
+      {
+        "line": 89,
+        "context": [
+          {
+            "line": 84,
+            "text": "      values.put(name, value);"
+          },
+          {
+            "line": 85,
+            "text": "    }"
+          },
+          {
+            "line": 86,
+            "text": "    if (!admin) values.put(LITERAL_USERNAME, \"\");"
+          },
+          {
+            "line": 87,
+            "text": "    if (Objects.requireNonNull(values.get(LITERAL_KEYWORD)).getBytes(StandardCharsets.UTF_8).length"
+          },
+          {
+            "line": 88,
+            "text": "        > MAXIMUM_KEYWORD_UTF8_BYTES) issues.put(LITERAL_KEYWORD, INVALID);"
+          },
+          {
+            "line": 89,
+            "text": "    if (Objects.requireNonNull(values.get(LITERAL_USERNAME)).getBytes(StandardCharsets.UTF_8).length"
+          },
+          {
+            "line": 90,
+            "text": "        > MAXIMUM_USERNAME_UTF8_BYTES) issues.put(LITERAL_USERNAME, INVALID);"
+          },
+          {
+            "line": 91,
+            "text": "    if (!Set.of(\"\", \"ANSWERED\", \"UNANSWERED\", \"ERROR\").contains(values.get(LITERAL_STATE)))"
+          },
+          {
+            "line": 92,
+            "text": "      issues.put(LITERAL_STATE, INVALID);"
+          },
+          {
+            "line": 93,
+            "text": "    int page = 1;"
+          },
+          {
+            "line": 94,
+            "text": "    String text = Objects.requireNonNull(values.get(LITERAL_PAGE));"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 65,
+        "text": "Objects.requireNonNull(parameters, \"parameters\");"
+      },
+      {
+        "line": 66,
+        "text": "boolean admin = Objects.requireNonNull(role, \"role\") == UserRole.ADMIN;"
+      },
+      {
+        "line": 68,
+        "text": "parameters.forEach("
+      },
+      {
+        "line": 69,
+        "text": "(key, value) -> snapshot.put(Objects.requireNonNull(key, \"name\"), List.copyOf(value)));"
+      },
+      {
+        "line": 74,
+        "text": "for (String name : FIELDS) {"
+      },
+      {
+        "line": 80,
+        "text": "if (raw.codePoints().anyMatch(QuestionSearchForm::invalidCharacter))"
+      },
+      {
+        "line": 82,
+        "text": "else value = Normalizer.normalize(raw, Normalizer.Form.NFC).trim();"
+      },
+      {
+        "line": 87,
+        "text": "if (Objects.requireNonNull(values.get(LITERAL_KEYWORD)).getBytes(StandardCharsets.UTF_8).length"
+      },
+      {
+        "line": 89,
+        "text": "if (Objects.requireNonNull(values.get(LITERAL_USERNAME)).getBytes(StandardCharsets.UTF_8).length"
+      },
+      {
+        "line": 94,
+        "text": "String text = Objects.requireNonNull(values.get(LITERAL_PAGE));"
+      },
+      {
+        "line": 96,
+        "text": "if (!text.matches(\"-?[0-9]+\")) issues.put(LITERAL_PAGE, INVALID);"
+      },
+      {
+        "line": 118,
+        "text": "String text = Objects.requireNonNull(values.get(name));"
+      },
+      {
+        "line": 120,
+        "text": "if (!text.matches(\"[0-9]{4}-[0-9]{2}-[0-9]{2}\")) {"
+      },
+      {
+        "line": 137,
+        "text": "private static boolean invalidCharacter(int value) {"
+      },
+      {
+        "line": 142,
+        "text": "public boolean isValid() {"
+      },
+      {
+        "line": 163,
+        "text": "if (!isValid()) throw new IllegalArgumentException(\"invalid question search form\");"
+      },
+      {
+        "line": 164,
+        "text": "String keyword = Objects.requireNonNull(values.get(LITERAL_KEYWORD));"
+      },
+      {
+        "line": 165,
+        "text": "String username = Objects.requireNonNull(values.get(LITERAL_USERNAME));"
+      },
+      {
+        "line": 166,
+        "text": "String state = Objects.requireNonNull(values.get(LITERAL_STATE));"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSubmitForm.java",
+    "sourceSha256": "725f0fbe38aaec853e50da6eb5ea060eb0a8fe7e4a18faa5ddb9febce3f03b6f",
+    "sites": [
+      {
+        "line": 64,
+        "context": [
+          {
+            "line": 59,
+            "text": "    // Invalid Unicode/control is not redisplayed; do not trim it into an accepted question."
+          },
+          {
+            "line": 60,
+            "text": "    if (question.codePoints().anyMatch(QuestionSubmitForm::invalidCharacter)) {"
+          },
+          {
+            "line": 61,
+            "text": "      issues.put(LITERAL_QUESTION, INVALID);"
+          },
+          {
+            "line": 62,
+            "text": "      question = \"\";"
+          },
+          {
+            "line": 63,
+            "text": "    }"
+          },
+          {
+            "line": 64,
+            "text": "    byte[] encoded = question.getBytes(StandardCharsets.UTF_8);"
+          },
+          {
+            "line": 65,
+            "text": "    try {"
+          },
+          {
+            "line": 66,
+            "text": "      if (encoded.length < 1 || encoded.length > 4096 || question.endsWith(\" \"))"
+          },
+          {
+            "line": 67,
+            "text": "        issues.put(LITERAL_QUESTION, INVALID);"
+          },
+          {
+            "line": 68,
+            "text": "    } finally {"
+          },
+          {
+            "line": 69,
+            "text": "      Arrays.fill(encoded, (byte) 0);"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 37,
+        "text": "Objects.requireNonNull(parameters, \"parameters\");"
+      },
+      {
+        "line": 39,
+        "text": "parameters.forEach("
+      },
+      {
+        "line": 40,
+        "text": "(key, value) -> snapshot.put(Objects.requireNonNull(key, \"name\"), List.copyOf(value)));"
+      },
+      {
+        "line": 42,
+        "text": "for (var entry : snapshot.entrySet()) {"
+      },
+      {
+        "line": 48,
+        "text": "for (String name : FIELDS) {"
+      },
+      {
+        "line": 57,
+        "text": "Normalizer.normalize("
+      },
+      {
+        "line": 58,
+        "text": "Objects.requireNonNull(values.get(LITERAL_QUESTION)), Normalizer.Form.NFC);"
+      },
+      {
+        "line": 60,
+        "text": "if (question.codePoints().anyMatch(QuestionSubmitForm::invalidCharacter)) {"
+      },
+      {
+        "line": 64,
+        "text": "byte[] encoded = question.getBytes(StandardCharsets.UTF_8);"
+      },
+      {
+        "line": 72,
+        "text": "String text = Objects.requireNonNull(values.get(\"operation_token\"));"
+      },
+      {
+        "line": 73,
+        "text": "if (!text.matches(\"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\"))"
+      },
+      {
+        "line": 79,
+        "text": "private static boolean invalidCharacter(int value) {"
+      },
+      {
+        "line": 84,
+        "text": "public boolean isValid() {"
+      },
+      {
+        "line": 107,
+        "text": "if (!isValid()) throw new IllegalArgumentException(\"invalid question submit form\");"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/ScenarioSearchForm.java",
+    "sourceSha256": "ce70478c3c11c49ae841e849a6e9d81064cbda1f590c956d3cfe48f751c2ac78",
+    "sites": [
+      {
+        "line": 99,
+        "context": [
+          {
+            "line": 94,
+            "text": "              issues.put(field, Code.CHARACTERS);"
+          },
+          {
+            "line": 95,
+            "text": "            } else {"
+          },
+          {
+            "line": 96,
+            "text": "              String normalized = Normalizer.normalize(raw, Normalizer.Form.NFC).trim();"
+          },
+          {
+            "line": 97,
+            "text": "              values.put(field, normalized);"
+          },
+          {
+            "line": 98,
+            "text": "              int maximum = LIMITS.getOrDefault(field, Integer.MAX_VALUE);"
+          },
+          {
+            "line": 99,
+            "text": "              if (normalized.getBytes(StandardCharsets.UTF_8).length > maximum)"
+          },
+          {
+            "line": 100,
+            "text": "                issues.put(field, Code.LENGTH);"
+          },
+          {
+            "line": 101,
+            "text": "            }"
+          },
+          {
+            "line": 102,
+            "text": "          }"
+          },
+          {
+            "line": 103,
+            "text": "        });"
+          },
+          {
+            "line": 104,
+            "text": "    CHOICES.forEach("
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 77,
+        "text": "Objects.requireNonNull(parameters, \"parameters\");"
+      },
+      {
+        "line": 79,
+        "text": "parameters.forEach("
+      },
+      {
+        "line": 80,
+        "text": "(key, value) -> snapshot.put(Objects.requireNonNull(key, \"name\"), List.copyOf(value)));"
+      },
+      {
+        "line": 84,
+        "text": "FIELDS.forEach("
+      },
+      {
+        "line": 92,
+        "text": "if (invalidCharacters(raw)) {"
+      },
+      {
+        "line": 96,
+        "text": "String normalized = Normalizer.normalize(raw, Normalizer.Form.NFC).trim();"
+      },
+      {
+        "line": 99,
+        "text": "if (normalized.getBytes(StandardCharsets.UTF_8).length > maximum)"
+      },
+      {
+        "line": 104,
+        "text": "CHOICES.forEach("
+      },
+      {
+        "line": 106,
+        "text": "if (!allowed.contains(Objects.requireNonNull(values.get(field), \"field\")))"
+      },
+      {
+        "line": 110,
+        "text": "String text = Objects.requireNonNull(values.get(Field.PAGE), \"page\");"
+      },
+      {
+        "line": 112,
+        "text": "if (!text.matches(\"-?[0-9]+\")) issues.putIfAbsent(Field.PAGE, Code.VALUE);"
+      },
+      {
+        "line": 126,
+        "text": "private static boolean invalidCharacters(String value) {"
+      },
+      {
+        "line": 127,
+        "text": "for (int i = 0; i < value.length(); i++) {"
+      },
+      {
+        "line": 130,
+        "text": "if (Character.isHighSurrogate(c)) {"
+      },
+      {
+        "line": 131,
+        "text": "if (i + 1 == value.length() || !Character.isLowSurrogate(value.charAt(i + 1))) return true;"
+      },
+      {
+        "line": 133,
+        "text": "} else if (Character.isLowSurrogate(c)) return true;"
+      },
+      {
+        "line": 146,
+        "text": "public boolean isValid() {"
+      },
+      {
+        "line": 155,
+        "text": "if (!isValid()) throw new IllegalStateException(\"invalid search form\");"
+      },
+      {
+        "line": 170,
+        "text": "String value = Objects.requireNonNull(values.get(field), \"field\");"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserCreateForm.java",
+    "sourceSha256": "5b599ddb57dfd4ba0b8a89547567b1d48bedb5d6ac09439c5dc0abd6cda25b86",
+    "sites": [
+      {
+        "line": 85,
+        "context": [
+          {
+            "line": 80,
+            "text": "    String username ="
+          },
+          {
+            "line": 81,
+            "text": "        Normalizer.normalize("
+          },
+          {
+            "line": 82,
+            "text": "                Objects.requireNonNull(values.get(LITERAL_USERNAME)), Normalizer.Form.NFC)"
+          },
+          {
+            "line": 83,
+            "text": "            .trim();"
+          },
+          {
+            "line": 84,
+            "text": "    if (!username.matches(\"[A-Za-z0-9._-]+\")"
+          },
+          {
+            "line": 85,
+            "text": "        || username.getBytes(StandardCharsets.UTF_8).length > 64) {"
+          },
+          {
+            "line": 86,
+            "text": "      issues.put(LITERAL_USERNAME, INVALID);"
+          },
+          {
+            "line": 87,
+            "text": "      username = \"\";"
+          },
+          {
+            "line": 88,
+            "text": "    }"
+          },
+          {
+            "line": 89,
+            "text": "    String role = Objects.requireNonNull(values.get(LITERAL_ROLE));"
+          },
+          {
+            "line": 90,
+            "text": "    if (!Set.of(\"USER\", \"ADMIN\").contains(role)) {"
+          }
+        ]
+      },
+      {
+        "line": 107,
+        "context": [
+          {
+            "line": 102,
+            "text": "        Normalizer.normalize(Objects.requireNonNull(values.get(\"password\")), Normalizer.Form.NFC);"
+          },
+          {
+            "line": 103,
+            "text": "    String confirmation ="
+          },
+          {
+            "line": 104,
+            "text": "        Normalizer.normalize("
+          },
+          {
+            "line": 105,
+            "text": "            Objects.requireNonNull(values.get(\"password_confirmation\")), Normalizer.Form.NFC);"
+          },
+          {
+            "line": 106,
+            "text": "    char[] password = normalized.toCharArray();"
+          },
+          {
+            "line": 107,
+            "text": "    byte[] bytes = normalized.getBytes(StandardCharsets.UTF_8);"
+          },
+          {
+            "line": 108,
+            "text": "    try {"
+          },
+          {
+            "line": 109,
+            "text": "      int count = normalized.codePointCount(0, normalized.length());"
+          },
+          {
+            "line": 110,
+            "text": "      if (count < 12"
+          },
+          {
+            "line": 111,
+            "text": "          || count > 128"
+          },
+          {
+            "line": 112,
+            "text": "          || bytes.length > 256"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 61,
+        "text": "Objects.requireNonNull(parameters, \"parameters\");"
+      },
+      {
+        "line": 63,
+        "text": "parameters.forEach("
+      },
+      {
+        "line": 64,
+        "text": "(key, value) -> snapshot.put(Objects.requireNonNull(key, \"name\"), List.copyOf(value)));"
+      },
+      {
+        "line": 67,
+        "text": "for (var entry : snapshot.entrySet()) {"
+      },
+      {
+        "line": 72,
+        "text": "for (String name : FIELDS) {"
+      },
+      {
+        "line": 81,
+        "text": "Normalizer.normalize("
+      },
+      {
+        "line": 82,
+        "text": "Objects.requireNonNull(values.get(LITERAL_USERNAME)), Normalizer.Form.NFC)"
+      },
+      {
+        "line": 84,
+        "text": "if (!username.matches(\"[A-Za-z0-9._-]+\")"
+      },
+      {
+        "line": 85,
+        "text": "|| username.getBytes(StandardCharsets.UTF_8).length > 64) {"
+      },
+      {
+        "line": 89,
+        "text": "String role = Objects.requireNonNull(values.get(LITERAL_ROLE));"
+      },
+      {
+        "line": 94,
+        "text": "String flag = Objects.requireNonNull(values.get(LITERAL_ENABLED));"
+      },
+      {
+        "line": 97,
+        "text": "String text = Objects.requireNonNull(values.get(\"operation_token\"));"
+      },
+      {
+        "line": 98,
+        "text": "if (!text.matches(\"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\"))"
+      },
+      {
+        "line": 102,
+        "text": "Normalizer.normalize(Objects.requireNonNull(values.get(\"password\")), Normalizer.Form.NFC);"
+      },
+      {
+        "line": 104,
+        "text": "Normalizer.normalize("
+      },
+      {
+        "line": 105,
+        "text": "Objects.requireNonNull(values.get(\"password_confirmation\")), Normalizer.Form.NFC);"
+      },
+      {
+        "line": 107,
+        "text": "byte[] bytes = normalized.getBytes(StandardCharsets.UTF_8);"
+      },
+      {
+        "line": 114,
+        "text": "|| normalized.codePoints().anyMatch(UserCreateForm::invalidCharacter)"
+      },
+      {
+        "line": 125,
+        "text": "private static boolean invalidCharacter(int value) {"
+      },
+      {
+        "line": 130,
+        "text": "public boolean isValid() {"
+      },
+      {
+        "line": 146,
+        "text": "if (!isValid()) throw new IllegalArgumentException(\"invalid user create form\");"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserMutationInput.java",
+    "sourceSha256": "a5532415afe5314c6578ff9cbe6362fd9cb39ab6eb13d043c5153adeb4703d7c",
+    "sites": [
+      {
+        "line": 117,
+        "context": [
+          {
+            "line": 112,
+            "text": "      role = \"USER\";"
+          },
+          {
+            "line": 113,
+            "text": "    }"
+          },
+          {
+            "line": 114,
+            "text": "    String normalized ="
+          },
+          {
+            "line": 115,
+            "text": "        Normalizer.normalize(values.getOrDefault(\"password\", \"\"), Normalizer.Form.NFC);"
+          },
+          {
+            "line": 116,
+            "text": "    char[] password = normalized.toCharArray();"
+          },
+          {
+            "line": 117,
+            "text": "    byte[] bytes = normalized.getBytes(StandardCharsets.UTF_8);"
+          },
+          {
+            "line": 118,
+            "text": "    try {"
+          },
+          {
+            "line": 119,
+            "text": "      if (operation.equals(\"PASSWORD\")) {"
+          },
+          {
+            "line": 120,
+            "text": "        int count = normalized.codePointCount(0, normalized.length());"
+          },
+          {
+            "line": 121,
+            "text": "        String account = Normalizer.normalize(targetUsername.trim(), Normalizer.Form.NFC);"
+          },
+          {
+            "line": 122,
+            "text": "        if (count < 12"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 65,
+        "text": "Objects.requireNonNull(operation, LITERAL_OPERATION);"
+      },
+      {
+        "line": 66,
+        "text": "Objects.requireNonNull(targetUsername, \"targetUsername\");"
+      },
+      {
+        "line": 67,
+        "text": "Objects.requireNonNull(parameters, \"parameters\");"
+      },
+      {
+        "line": 78,
+        "text": "parameters.forEach("
+      },
+      {
+        "line": 80,
+        "text": "Objects.requireNonNull(key, \"name\");"
+      },
+      {
+        "line": 86,
+        "text": "for (String name : permitted) {"
+      },
+      {
+        "line": 93,
+        "text": "String identifier = Objects.requireNonNull(values.get(\"id\"));"
+      },
+      {
+        "line": 94,
+        "text": "if (!identifier.matches(\"[0-9]{1,12}\") || Long.parseLong(identifier) != pathId)"
+      },
+      {
+        "line": 96,
+        "text": "String expected = Objects.requireNonNull(values.get(LITERAL_EXPECTED_VERSION));"
+      },
+      {
+        "line": 98,
+        "text": "if (!expected.matches(\"[0-9]{1,9}\")) issues.put(LITERAL_EXPECTED_VERSION, INVALID);"
+      },
+      {
+        "line": 102,
+        "text": "String text = Objects.requireNonNull(values.get(\"operation_token\"));"
+      },
+      {
+        "line": 103,
+        "text": "if (!text.matches(\"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\"))"
+      },
+      {
+        "line": 115,
+        "text": "Normalizer.normalize(values.getOrDefault(\"password\", \"\"), Normalizer.Form.NFC);"
+      },
+      {
+        "line": 117,
+        "text": "byte[] bytes = normalized.getBytes(StandardCharsets.UTF_8);"
+      },
+      {
+        "line": 121,
+        "text": "String account = Normalizer.normalize(targetUsername.trim(), Normalizer.Form.NFC);"
+      },
+      {
+        "line": 126,
+        "text": "|| normalized.codePoints().anyMatch(UserMutationInput::invalidCharacter)"
+      },
+      {
+        "line": 129,
+        "text": "Normalizer.normalize("
+      },
+      {
+        "line": 130,
+        "text": "Objects.requireNonNull(values.get(\"password_confirmation\")), Normalizer.Form.NFC);"
+      },
+      {
+        "line": 142,
+        "text": "private static boolean invalidCharacter(int value) {"
+      },
+      {
+        "line": 147,
+        "text": "boolean isValid() {"
+      },
+      {
+        "line": 153,
+        "text": "if (!isValid()) throw new IllegalArgumentException(\"invalid user mutation form\");"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserSearchForm.java",
+    "sourceSha256": "d00242a9223aa067fc609945fc6e5bf382429c121b3c49600a3c3a056778c906",
+    "sites": [
+      {
+        "line": 64,
+        "context": [
+          {
+            "line": 59,
+            "text": "        else value = Normalizer.normalize(raw, Normalizer.Form.NFC).trim();"
+          },
+          {
+            "line": 60,
+            "text": "      }"
+          },
+          {
+            "line": 61,
+            "text": "      values.put(name, value);"
+          },
+          {
+            "line": 62,
+            "text": "    }"
+          },
+          {
+            "line": 63,
+            "text": "    String username = Objects.requireNonNull(values.get(LITERAL_USERNAME));"
+          },
+          {
+            "line": 64,
+            "text": "    if (username.getBytes(StandardCharsets.UTF_8).length > MAXIMUM_USERNAME_UTF8_BYTES)"
+          },
+          {
+            "line": 65,
+            "text": "      issues.put(LITERAL_USERNAME, \"UsernameはUTF-8で64 byte以内にしてください。\");"
+          },
+          {
+            "line": 66,
+            "text": "    if (!Set.of(\"\", \"USER\", \"ADMIN\").contains(values.get(LITERAL_ROLE)))"
+          },
+          {
+            "line": 67,
+            "text": "      issues.put(LITERAL_ROLE, INVALID);"
+          },
+          {
+            "line": 68,
+            "text": "    if (!Set.of(\"\", \"ACTIVE\", \"DISABLED\", \"LOCKED\").contains(values.get(LITERAL_STATE)))"
+          },
+          {
+            "line": 69,
+            "text": "      issues.put(LITERAL_STATE, INVALID);"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 45,
+        "text": "Objects.requireNonNull(parameters, \"parameters\");"
+      },
+      {
+        "line": 47,
+        "text": "parameters.forEach("
+      },
+      {
+        "line": 48,
+        "text": "(key, value) -> snapshot.put(Objects.requireNonNull(key, \"name\"), List.copyOf(value)));"
+      },
+      {
+        "line": 52,
+        "text": "for (String name : FIELDS) {"
+      },
+      {
+        "line": 58,
+        "text": "if (raw.codePoints().anyMatch(UserSearchForm::invalidCharacter)) issues.put(name, INVALID);"
+      },
+      {
+        "line": 59,
+        "text": "else value = Normalizer.normalize(raw, Normalizer.Form.NFC).trim();"
+      },
+      {
+        "line": 63,
+        "text": "String username = Objects.requireNonNull(values.get(LITERAL_USERNAME));"
+      },
+      {
+        "line": 64,
+        "text": "if (username.getBytes(StandardCharsets.UTF_8).length > MAXIMUM_USERNAME_UTF8_BYTES)"
+      },
+      {
+        "line": 70,
+        "text": "String text = Objects.requireNonNull(values.get(LITERAL_PAGE));"
+      },
+      {
+        "line": 73,
+        "text": "if (!text.matches(\"-?[0-9]+\")) issues.put(LITERAL_PAGE, INVALID);"
+      },
+      {
+        "line": 87,
+        "text": "private static boolean invalidCharacter(int value) {"
+      },
+      {
+        "line": 92,
+        "text": "public boolean isValid() {"
+      },
+      {
+        "line": 97,
+        "text": "return Objects.requireNonNull(values.get(LITERAL_USERNAME));"
+      },
+      {
+        "line": 101,
+        "text": "return Objects.requireNonNull(values.get(LITERAL_ROLE));"
+      },
+      {
+        "line": 105,
+        "text": "return Objects.requireNonNull(values.get(LITERAL_STATE));"
+      },
+      {
+        "line": 117,
+        "text": "if (!isValid()) throw new IllegalArgumentException(\"invalid user search form\");"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricHttpHandler.java",
+    "sourceSha256": "0d066f35414a1396f786a90ba97bc16479ed53a89daf42fc1c73224c19d209cc",
+    "sites": [
+      {
+        "line": 55,
+        "context": [
+          {
+            "line": 50,
+            "text": "      // Complete both views first: a source failure must never publish a partial success body."
+          },
+          {
+            "line": 51,
+            "text": "      body = context.render(ready.getAsBoolean());"
+          },
+          {
+            "line": 52,
+            "text": "      status = 200;"
+          },
+          {
+            "line": 53,
+            "text": "      type = METRIC_TYPE;"
+          },
+          {
+            "line": 54,
+            "text": "    }"
+          },
+          {
+            "line": 55,
+            "text": "    byte[] bytes = body.getBytes(StandardCharsets.UTF_8);"
+          },
+          {
+            "line": 56,
+            "text": "    exchange.getResponseHeaders().set(\"Content-Type\", type);"
+          },
+          {
+            "line": 57,
+            "text": "    exchange.getResponseHeaders().set(\"Cache-Control\", \"no-store\");"
+          },
+          {
+            "line": 58,
+            "text": "    exchange.sendResponseHeaders(status, bytes.length);"
+          },
+          {
+            "line": 59,
+            "text": "    exchange.getResponseBody().write(bytes);"
+          },
+          {
+            "line": 60,
+            "text": "  }"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 22,
+        "text": "this.context = Objects.requireNonNull(context, \"metric context\");"
+      },
+      {
+        "line": 23,
+        "text": "this.ready = Objects.requireNonNull(ready, \"runtime readiness\");"
+      },
+      {
+        "line": 31,
+        "text": "Objects.requireNonNull(exchange, \"metric exchange\");"
+      },
+      {
+        "line": 39,
+        "text": "Objects.requireNonNull(exchange, \"metric exchange\");"
+      },
+      {
+        "line": 55,
+        "text": "byte[] bytes = body.getBytes(StandardCharsets.UTF_8);"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/SavedRequestTarget.java",
+    "sourceSha256": "35e564f94749c3d005a7e4041f33a77921aac492676ea26305c65b66096ff2e3",
+    "sites": [
+      {
+        "line": 30,
+        "context": [
+          {
+            "line": 25,
+            "text": "  public static SavedRequestTarget fromGet(String method, String target) {"
+          },
+          {
+            "line": 26,
+            "text": "    Objects.requireNonNull(method, \"method\");"
+          },
+          {
+            "line": 27,
+            "text": "    Objects.requireNonNull(target, \"target\");"
+          },
+          {
+            "line": 28,
+            "text": "    require(method.equals(\"GET\"));"
+          },
+          {
+            "line": 29,
+            "text": "    require(StandardCharsets.UTF_8.newEncoder().canEncode(target));"
+          },
+          {
+            "line": 30,
+            "text": "    require(target.getBytes(StandardCharsets.UTF_8).length <= 2048);"
+          },
+          {
+            "line": 31,
+            "text": "    require(!target.contains(\"\\u2028\"));"
+          },
+          {
+            "line": 32,
+            "text": "    require(!target.contains(\"\\u2029\"));"
+          },
+          {
+            "line": 33,
+            "text": "    URI uri;"
+          },
+          {
+            "line": 34,
+            "text": "    try {"
+          },
+          {
+            "line": 35,
+            "text": "      uri = new URI(target);"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 26,
+        "text": "Objects.requireNonNull(method, \"method\");"
+      },
+      {
+        "line": 27,
+        "text": "Objects.requireNonNull(target, \"target\");"
+      },
+      {
+        "line": 29,
+        "text": "require(StandardCharsets.UTF_8.newEncoder().canEncode(target));"
+      },
+      {
+        "line": 30,
+        "text": "require(target.getBytes(StandardCharsets.UTF_8).length <= 2048);"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionAttributeCodec.java",
+    "sourceSha256": "241ede8923818ae7690ad9dd09a5ea55df972c106ce4ae4f39cd27fc458e7314",
+    "sites": [
+      {
+        "line": 82,
+        "context": [
+          {
+            "line": 77,
+            "text": "      item.addProperty(LITERAL_ISSUEDAT, token.issuedAt().toString());"
+          },
+          {
+            "line": 78,
+            "text": "      token.completedAt().ifPresent(value -> item.addProperty(\"completedAt\", value.toString()));"
+          },
+          {
+            "line": 79,
+            "text": "      tokens.add(item);"
+          },
+          {
+            "line": 80,
+            "text": "    }"
+          },
+          {
+            "line": 81,
+            "text": "    json.add(\"operationTokens\", tokens);"
+          },
+          {
+            "line": 82,
+            "text": "    return json.toString().getBytes(StandardCharsets.UTF_8);"
+          },
+          {
+            "line": 83,
+            "text": "  }"
+          },
+          {
+            "line": 84,
+            "text": ""
+          },
+          {
+            "line": 85,
+            "text": "  /** Rejects unknown/duplicate/null/type/version/UTF8/trailing data without parser diagnostics. */"
+          },
+          {
+            "line": 86,
+            "text": "  public SessionAttributes decode(byte[] plaintext) {"
+          },
+          {
+            "line": 87,
+            "text": "    Objects.requireNonNull(plaintext, \"plaintext\");"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 55,
+        "text": "Objects.requireNonNull(attributes, \"attributes\");"
+      },
+      {
+        "line": 73,
+        "text": "for (var token : attributes.operationTokens()) {"
+      },
+      {
+        "line": 82,
+        "text": "return json.toString().getBytes(StandardCharsets.UTF_8);"
+      },
+      {
+        "line": 87,
+        "text": "Objects.requireNonNull(plaintext, \"plaintext\");"
+      },
+      {
+        "line": 92,
+        "text": "StandardCharsets.UTF_8.newDecoder().decode(ByteBuffer.wrap(candidate)).toString();"
+      },
+      {
+        "line": 191,
+        "text": "return Objects.requireNonNull(fields.get(name), \"validated field\");"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java",
+    "sourceSha256": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232",
+    "sites": [
+      {
+        "line": 26,
+        "context": [
+          {
+            "line": 21,
+            "text": "    Objects.requireNonNull(authenticationContext, \"authenticationContext\");"
+          },
+          {
+            "line": 22,
+            "text": "    Objects.requireNonNull(loginAt, \"loginAt\");"
+          },
+          {
+            "line": 23,
+            "text": "    username = Normalizer.normalize(username, Normalizer.Form.NFC);"
+          },
+          {
+            "line": 24,
+            "text": "    if (!StandardCharsets.UTF_8.newEncoder().canEncode(username)"
+          },
+          {
+            "line": 25,
+            "text": "        || username.isEmpty()"
+          },
+          {
+            "line": 26,
+            "text": "        || username.getBytes(StandardCharsets.UTF_8).length > 64"
+          },
+          {
+            "line": 27,
+            "text": "        || username.endsWith(\" \")"
+          },
+          {
+            "line": 28,
+            "text": "        || username.codePoints().anyMatch(Character::isISOControl))"
+          },
+          {
+            "line": 29,
+            "text": "      throw new IllegalArgumentException(\"session principal is invalid\");"
+          },
+          {
+            "line": 30,
+            "text": "  }"
+          },
+          {
+            "line": 31,
+            "text": ""
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 19,
+        "text": "Objects.requireNonNull(username, \"username\");"
+      },
+      {
+        "line": 20,
+        "text": "Objects.requireNonNull(role, \"role\");"
+      },
+      {
+        "line": 21,
+        "text": "Objects.requireNonNull(authenticationContext, \"authenticationContext\");"
+      },
+      {
+        "line": 22,
+        "text": "Objects.requireNonNull(loginAt, \"loginAt\");"
+      },
+      {
+        "line": 23,
+        "text": "username = Normalizer.normalize(username, Normalizer.Form.NFC);"
+      },
+      {
+        "line": 24,
+        "text": "if (!StandardCharsets.UTF_8.newEncoder().canEncode(username)"
+      },
+      {
+        "line": 26,
+        "text": "|| username.getBytes(StandardCharsets.UTF_8).length > 64"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserListViewModel.java",
+    "sourceSha256": "3ab853dea7f6e95aa94c6553180ad7d355c1af6761636dc9828a9ada969f5eb6",
+    "sites": [
+      {
+        "line": 68,
+        "context": [
+          {
+            "line": 63,
+            "text": "        throw new IllegalArgumentException(\"duplicate user identity\");"
+          },
+          {
+            "line": 64,
+            "text": "      if (i > 0) {"
+          },
+          {
+            "line": 65,
+            "text": "        var previous = copy.get(i - 1);"
+          },
+          {
+            "line": 66,
+            "text": "        int order ="
+          },
+          {
+            "line": 67,
+            "text": "            Arrays.compareUnsigned("
+          },
+          {
+            "line": 68,
+            "text": "                previous.username().getBytes(StandardCharsets.UTF_8),"
+          },
+          {
+            "line": 69,
+            "text": "                current.username().getBytes(StandardCharsets.UTF_8));"
+          },
+          {
+            "line": 70,
+            "text": "        if (order > 0 || (order == 0 && previous.userId().value() >= current.userId().value()))"
+          },
+          {
+            "line": 71,
+            "text": "          throw new IllegalArgumentException(\"invalid user display order\");"
+          },
+          {
+            "line": 72,
+            "text": "      }"
+          },
+          {
+            "line": 73,
+            "text": "    }"
+          }
+        ]
+      },
+      {
+        "line": 69,
+        "context": [
+          {
+            "line": 64,
+            "text": "      if (i > 0) {"
+          },
+          {
+            "line": 65,
+            "text": "        var previous = copy.get(i - 1);"
+          },
+          {
+            "line": 66,
+            "text": "        int order ="
+          },
+          {
+            "line": 67,
+            "text": "            Arrays.compareUnsigned("
+          },
+          {
+            "line": 68,
+            "text": "                previous.username().getBytes(StandardCharsets.UTF_8),"
+          },
+          {
+            "line": 69,
+            "text": "                current.username().getBytes(StandardCharsets.UTF_8));"
+          },
+          {
+            "line": 70,
+            "text": "        if (order > 0 || (order == 0 && previous.userId().value() >= current.userId().value()))"
+          },
+          {
+            "line": 71,
+            "text": "          throw new IllegalArgumentException(\"invalid user display order\");"
+          },
+          {
+            "line": 72,
+            "text": "      }"
+          },
+          {
+            "line": 73,
+            "text": "    }"
+          },
+          {
+            "line": 74,
+            "text": "    return new UserListViewModel(actor, form, Optional.of(page), copy);"
+          }
+        ]
+      }
+    ],
+    "guardCandidateLines": [
+      {
+        "line": 37,
+        "text": "if (Objects.requireNonNull(actor, \"actor\").role() != UserRole.ADMIN)"
+      },
+      {
+        "line": 40,
+        "text": "filters = Objects.requireNonNull(form, \"form\");"
+      },
+      {
+        "line": 50,
+        "text": "Objects.requireNonNull(form, \"form\");"
+      },
+      {
+        "line": 51,
+        "text": "if (!form.isValid()) throw new IllegalArgumentException(\"invalid successful user form\");"
+      },
+      {
+        "line": 60,
+        "text": "for (int i = 0; i < copy.size(); i++) {"
+      },
+      {
+        "line": 68,
+        "text": "previous.username().getBytes(StandardCharsets.UTF_8),"
+      },
+      {
+        "line": 69,
+        "text": "current.username().getBytes(StandardCharsets.UTF_8));"
+      },
+      {
+        "line": 78,
+        "text": "Objects.requireNonNull(form, \"form\");"
+      },
+      {
+        "line": 79,
+        "text": "if (form.isValid()) throw new IllegalArgumentException(\"valid form used as invalid\");"
+      },
+      {
+        "line": 95,
+        "text": "return UriUtils.encode(value, StandardCharsets.UTF_8);"
+      }
+    ],
+    "status": "UNCLASSIFIED_SOURCE_FOOTPRINT_NOT_ACCEPTANCE"
+  }
+]
