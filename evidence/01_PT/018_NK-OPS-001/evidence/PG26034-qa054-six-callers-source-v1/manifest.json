@@ -1,0 +1,384 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-11T23:55:09.692738+09:00",
+  "source": "40daffb8a057240c95fa734e0476bd57892f2ba0",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "golden": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+    "sha256": "f54b35a27b058b7efba49a24240e8a64d9979d3af662e3de8613fec5b0131a2c",
+    "changedAction": "HTTP_COMPLETED -> HTTP_REQUEST_COMPLETED",
+    "absoluteFieldStart": 297,
+    "fieldLength": 64,
+    "actionBytes": 22,
+    "paddingBytes": 42,
+    "wireBytes": 2336
+  },
+  "vectorReference": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25794-weblog-current-public-vector-v1/manifest.json",
+    "sha256": "b1349ea77e6e45e2f75023745b57bed0ab233a9e44502464d376d3e8d80fd8e7",
+    "reexecuted": false
+  },
+  "planTable": {
+    "path": "/home/mini/codex/project1/work/PMO/hourly-monitor/execution-plan-20261110/65-前回の実績と初週の未達で予算を見直す条件/QA054六呼出元の作業票.tsv",
+    "sha256": "40db14c9ce854d7fb153c3c43ee16485a35cbd37c270f1a7e108d96acde5aa53"
+  },
+  "callers": [
+    {
+      "name": "HttpRequestLoggingValveTest",
+      "testSource": {
+        "sha256": "f87f8a8beacd2f30e09b77bc3515d43ee97a8dc80dab63fdb108759e652ee956",
+        "gitBlob": "a312cd4e604f02731ac5c29c823472dfab2a6536"
+      },
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/HttpRequestLoggingValveTest.java",
+      "owner": "WBS-P006-03",
+      "candidateSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "fixtureAction": "HTTP_REQUEST_COMPLETED",
+      "fixtureSha256": "f54b35a27b058b7efba49a24240e8a64d9979d3af662e3de8613fec5b0131a2c",
+      "compatibility": "SOURCE_EXPECTATION_CONSISTENT_DYNAMIC_UNVERIFIED",
+      "actionInterpretation": "Shared transport/ciphertext byte comparisons use the current golden dynamically; no stale hardcoded HTTP_COMPLETED literal.",
+      "testMethods": [
+        "req001002004006RealGetHeadRedirectErrorAndUntrustedPeer",
+        "req003AsyncCompletionAndTwoDispatchCyclesHaveOneTerminalObservation",
+        "req005NativeMalformedCallbacksDuplicateAndOverrideContract",
+        "req008InvocationFailureReleasesLexicalCorrelationAndPostRouteOnlyIsFixed",
+        "req003ActualAsyncTimeoutAndErrorCompleteWithFinal503OnlyOnce",
+        "req003ActualClientResetNeverClaimsTheUnwrittenStreamAsFullBody",
+        "req008HundredRealRequestsKeepCorrelationAndEventIdentitySeparated",
+        "req016HttpCloseLeavesCallerOwnedDatabaseAndCodecUsable",
+        "req014OwnerSignalFailureIsOnceFixedAndNeverMetadataRetried"
+      ],
+      "goldenCallSites": 2,
+      "sourceWitnesses": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/HttpRequestLoggingValveTest.java",
+          "line": 64,
+          "text": "db = new WebLogDatabaseFixture(root);"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/HttpRequestLoggingValveTest.java",
+          "line": 423,
+          "text": "var encrypted = fixture.codec.encrypt(identity, WebLogPayloadCodecTest.goldenWire());"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/HttpRequestLoggingValveTest.java",
+          "line": 426,
+          "text": "WebLogPayloadCodecTest.goldenWire(), fixture.codec.decrypt(identity, encrypted));"
+        }
+      ],
+      "operation": "COMPLETE_ORIGINAL_SUITE",
+      "decision": "NOT_RUN_HOLD",
+      "requiredConditions": [
+        "Whole-suite database setup invokes initdb/ProcessBuilder/JDBC via WebLogDatabaseFixture; DB HOLD. No extraction of the pure codec subcase."
+      ],
+      "executedTests": 0,
+      "coverage": null,
+      "independentStaticAnalysisPassClaimed": false,
+      "fullPgReviewClaimed": false,
+      "extraBudgetAddedPp": 0,
+      "nextWorkOwner": "Existing individual B contract; restrictions must be resolved independently. No automatic HOLD release."
+    },
+    {
+      "name": "JmsSecondary330Test",
+      "testSource": {
+        "sha256": "642ce17711a9b93822424c7f48d35cb9110c9dd83f7a7f9c377d3af874ba1af4",
+        "gitBlob": "c36b501ec12e72bb5e18e2d4e702f952c1f7d543"
+      },
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/JmsSecondary330Test.java",
+      "owner": "原leafの候補試験欄には未登録",
+      "candidateSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "fixtureAction": "HTTP_REQUEST_COMPLETED",
+      "fixtureSha256": "f54b35a27b058b7efba49a24240e8a64d9979d3af662e3de8613fec5b0131a2c",
+      "compatibility": "SOURCE_EXPECTATION_CONSISTENT_DYNAMIC_UNVERIFIED",
+      "actionInterpretation": "Shared transport/ciphertext byte comparisons use the current golden dynamically; no stale hardcoded HTTP_COMPLETED literal.",
+      "testMethods": [
+        "jms330004LogDisabledPrimaryCannotLoseRollbackOrCloseFatal",
+        "jms330005LogDuplicateCannotHideRollbackFatalAndDirectCloseStillWins",
+        "jms330006LogNonfatalDuplicateAndDirectPrimaryPriorityRetainWipe",
+        "jms330007RequestRetainsDisabledPrimaryRollbackFatalAfterOwnedClose",
+        "jms330008RequestClassifiesCloseGraphAfterModeFailureOrSuccessfulCommit",
+        "jms330009RequestNonfatalCyclesDirectPrioritiesAndCallerWireStayUnchanged"
+      ],
+      "goldenCallSites": 1,
+      "sourceWitnesses": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/JmsSecondary330Test.java",
+          "line": 240,
+          "text": "codec.encrypt(identity, WebLogPayloadCodecTest.goldenWire()),"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/JmsSecondary330Test.java",
+          "line": 247,
+          "text": "new WebLogMessageSender(codec, this::open).send(row);"
+        }
+      ],
+      "operation": "COMPLETE_ORIGINAL_SUITE",
+      "decision": "NOT_RUN_HOLD",
+      "requiredConditions": [
+        "Shared WebLogMessageSender calls held WebStartupException; original suite also tests ArtemisRequestSender. In-memory JMS proxies are not authorization to initialize held helpers."
+      ],
+      "executedTests": 0,
+      "coverage": null,
+      "independentStaticAnalysisPassClaimed": false,
+      "fullPgReviewClaimed": false,
+      "extraBudgetAddedPp": 0,
+      "nextWorkOwner": "Existing individual B contract; restrictions must be resolved independently. No automatic HOLD release."
+    },
+    {
+      "name": "WebApiLogReplayIntegrationTest",
+      "testSource": {
+        "sha256": "abe87ffb48751842a84a29a1a6239930f54375d8a7ebd7c1f8d2d6c14e2d02ff",
+        "gitBlob": "3ce3f48a5657b6f33032a2b43a73fd5ff56d235b"
+      },
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest.java",
+      "owner": "原leafの候補試験欄には未登録",
+      "candidateSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "fixtureAction": "HTTP_REQUEST_COMPLETED",
+      "fixtureSha256": "f54b35a27b058b7efba49a24240e8a64d9979d3af662e3de8613fec5b0131a2c",
+      "compatibility": "SOURCE_EXPECTATION_CONSISTENT_DYNAMIC_UNVERIFIED",
+      "actionInterpretation": "API SS312 fixture already rewrites Action to the same approved literal; no additional Action difference. Details projectionStatus override retained.",
+      "testMethods": [
+        "req015NewProducerUsesExistingWorkerRetryBrokerAndApiUk",
+        "idem016WebOutboxRetriesIntoApiProjectionExactlyOnce"
+      ],
+      "goldenCallSites": 1,
+      "sourceWitnesses": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest.java",
+          "line": 46,
+          "text": "var broker = WebLogMessageSenderTest.broker(Files.createDirectory(root.resolve(\"broker\")));"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest.java",
+          "line": 177,
+          "text": "var broker = WebLogMessageSenderTest.broker(Files.createDirectory(root.resolve(\"broker\")));"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest.java",
+          "line": 274,
+          "text": "byte[] wire = WebLogPayloadCodecTest.goldenWire();"
+        }
+      ],
+      "operation": "COMPLETE_ORIGINAL_SUITE",
+      "decision": "NOT_RUN_HOLD",
+      "requiredConditions": [
+        "Whole-suite embedded broker or DB actions and/or shared held WebStartupException; dynamic invocation/compile HOLD. No subset, helper substitution or alternative execution."
+      ],
+      "executedTests": 0,
+      "coverage": null,
+      "independentStaticAnalysisPassClaimed": false,
+      "fullPgReviewClaimed": false,
+      "extraBudgetAddedPp": 0,
+      "nextWorkOwner": "Existing individual B contract; restrictions must be resolved independently. No automatic HOLD release."
+    },
+    {
+      "name": "WebLogDispatcherTest",
+      "testSource": {
+        "sha256": "0baac6ee57464b86157d140f4dcb06b5d4eaad4f6bb430b38b7d2e1bd944e363",
+        "gitBlob": "0801b8e253596a7aed0f25b60c9b05e6fb947172"
+      },
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDispatcherTest.java",
+      "owner": "WBS-P006-04",
+      "candidateSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "fixtureAction": "HTTP_REQUEST_COMPLETED",
+      "fixtureSha256": "f54b35a27b058b7efba49a24240e8a64d9979d3af662e3de8613fec5b0131a2c",
+      "compatibility": "SOURCE_EXPECTATION_CONSISTENT_DYNAMIC_UNVERIFIED",
+      "actionInterpretation": "Shared transport/ciphertext byte comparisons use the current golden dynamically; no stale hardcoded HTTP_COMPLETED literal.",
+      "testMethods": [
+        "graph323002ProviderFatalNeverMarksOrdinaryFailureAndNullEdgesStillRetry",
+        "resultTimeRetryAndNoDatabaseLockDuringJms",
+        "confirmedSendThenMarkFailureRecoversAfterLeaseWithoutDuplicate",
+        "lostLeaseProtectsNewOwnerAndInvalidCipherNeverSends",
+        "databaseFailuresRollbackAndCloseWithoutInventingSuccessfulMarks",
+        "idem012r02SameJdbcFailureAtClaimRollbackAndClosePreservesPrimary",
+        "idem012r03DistinctRollbackAndCloseFailuresRemainSecondary",
+        "idem012r04RollbackFatalAndSameCloseFatalRemainFatal",
+        "idem012r05CloseFatalAfterClaimFailureDoesNotHidePrimary",
+        "nullContractsAndReportInvariantsRejectInvalidInput"
+      ],
+      "goldenCallSites": 1,
+      "sourceWitnesses": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDispatcherTest.java",
+          "line": 127,
+          "text": "var broker = WebLogMessageSenderTest.broker(Files.createDirectory(root.resolve(\"time-broker\")));"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDispatcherTest.java",
+          "line": 178,
+          "text": "WebLogMessageSenderTest.broker(Files.createDirectory(root.resolve(\"crash-broker\")));"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDispatcherTest.java",
+          "line": 561,
+          "text": "codec.encrypt(IDENTITY, WebLogPayloadCodecTest.goldenWire()),"
+        }
+      ],
+      "operation": "COMPLETE_ORIGINAL_SUITE",
+      "decision": "NOT_RUN_HOLD",
+      "requiredConditions": [
+        "Whole-suite embedded broker or DB actions and/or shared held WebStartupException; dynamic invocation/compile HOLD. No subset, helper substitution or alternative execution."
+      ],
+      "executedTests": 0,
+      "coverage": null,
+      "independentStaticAnalysisPassClaimed": false,
+      "fullPgReviewClaimed": false,
+      "extraBudgetAddedPp": 0,
+      "nextWorkOwner": "Existing individual B contract; restrictions must be resolved independently. No automatic HOLD release."
+    },
+    {
+      "name": "WebLogMessageSenderTest",
+      "testSource": {
+        "sha256": "1104e033c3a2d59d903ff5c9bb34445a631a04d17adfb818f397b2750f7e61c9",
+        "gitBlob": "eed7e616fcfe25245aab755b5494651dcf685ecf"
+      },
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest.java",
+      "owner": "WBS-P006-04",
+      "candidateSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "fixtureAction": "HTTP_REQUEST_COMPLETED",
+      "fixtureSha256": "f54b35a27b058b7efba49a24240e8a64d9979d3af662e3de8613fec5b0131a2c",
+      "compatibility": "SOURCE_EXPECTATION_CONSISTENT_DYNAMIC_UNVERIFIED",
+      "actionInterpretation": "Shared transport/ciphertext byte comparisons use the current golden dynamically; no stale hardcoded HTTP_COMPLETED literal.",
+      "testMethods": [
+        "cleanup321002FatalCleanupPriorityAndPlaintextWipe",
+        "cleanup321003SameThrowableNeverMasksOriginalFailure",
+        "sendsExactPlaintextWithPersistentPropertiesAndSuppressesConfirmedDuplicate",
+        "nullConfigurationAndInvalidAuthenticatedStorageNeverOpenJms",
+        "eachProviderFailureIsBoundedAndUnconfirmedSendRollsBackAndErasesPlaintext",
+        "idem012r01SameProviderFailureOnStageAndRollbackKeepsOriginalCauseAndErasesWire",
+        "duplicateDetectionUsesTypedCauseAndLinkedGraphNotTextAndTerminatesCycles"
+      ],
+      "goldenCallSites": 6,
+      "sourceWitnesses": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest.java",
+          "line": 31,
+          "text": "import org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ;"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest.java",
+          "line": 58,
+          "text": "byte[] golden = WebLogPayloadCodecTest.goldenWire();"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest.java",
+          "line": 137,
+          "text": "ClaimedWebLog row = row(codec.encrypt(IDENTITY, WebLogPayloadCodecTest.goldenWire()));"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest.java",
+          "line": 239,
+          "text": "EmbeddedActiveMQ broker = broker(root);"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest.java",
+          "line": 244,
+          "text": "byte[] expected = WebLogPayloadCodecTest.goldenWire();"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest.java",
+          "line": 288,
+          "text": "EncryptedWebLogPayload valid = codec.encrypt(IDENTITY, WebLogPayloadCodecTest.goldenWire());"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest.java",
+          "line": 307,
+          "text": "ClaimedWebLog row = row(codec.encrypt(IDENTITY, WebLogPayloadCodecTest.goldenWire()));"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest.java",
+          "line": 366,
+          "text": "ClaimedWebLog row = row(codec.encrypt(IDENTITY, WebLogPayloadCodecTest.goldenWire()));"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest.java",
+          "line": 513,
+          "text": "static EmbeddedActiveMQ broker(Path root) throws Exception {"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest.java",
+          "line": 526,
+          "text": "return new EmbeddedActiveMQ().setConfiguration(configuration).start();"
+        }
+      ],
+      "operation": "COMPLETE_ORIGINAL_SUITE",
+      "decision": "NOT_RUN_HOLD",
+      "requiredConditions": [
+        "Whole-suite embedded broker or DB actions and/or shared held WebStartupException; dynamic invocation/compile HOLD. No subset, helper substitution or alternative execution."
+      ],
+      "executedTests": 0,
+      "coverage": null,
+      "independentStaticAnalysisPassClaimed": false,
+      "fullPgReviewClaimed": false,
+      "extraBudgetAddedPp": 0,
+      "nextWorkOwner": "Existing individual B contract; restrictions must be resolved independently. No automatic HOLD release."
+    },
+    {
+      "name": "WebLogReplayWorkerTest",
+      "testSource": {
+        "sha256": "8cefebc7964540a8445b478a2fc8aba24b85199ea1ae0908a9bc88ed9462b310",
+        "gitBlob": "c957bcd744624853436c71fda5f52216444fff65"
+      },
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorkerTest.java",
+      "owner": "WBS-P006-04",
+      "candidateSource": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "fixtureAction": "HTTP_REQUEST_COMPLETED",
+      "fixtureSha256": "f54b35a27b058b7efba49a24240e8a64d9979d3af662e3de8613fec5b0131a2c",
+      "compatibility": "SOURCE_EXPECTATION_CONSISTENT_DYNAMIC_UNVERIFIED",
+      "actionInterpretation": "Shared transport/ciphertext byte comparisons use the current golden dynamically; no stale hardcoded HTTP_COMPLETED literal.",
+      "testMethods": [
+        "graph323001ProviderFatalEdgesStopWithoutOrdinaryFailedCycle",
+        "nativeBudget001ZeroIsBoundedAndRemainingActualJoinAllowsRetry",
+        "rerun008HiddenFatalStopsWithoutFailedCycleAndSelfJoinRejects",
+        "rerun008SecondCloseMustJoinStillAliveWorkerRatherThanSucceed",
+        "realOutboxRetriesInBackgroundAndSendsOnce",
+        "temporarySqlAndRuntimeFailuresRecoverWithoutLeakingDetails",
+        "fatalVmFailureMakesWorkerNotReadyWithoutExposingCause",
+        "closeIsIdempotentAndRejectsInvalidInputs",
+        "boundedStopReportsUnresponsiveWorkerThenReleases",
+        "interruptedStopRestoresCallerFlag"
+      ],
+      "goldenCallSites": 1,
+      "sourceWitnesses": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorkerTest.java",
+          "line": 237,
+          "text": "var broker = WebLogMessageSenderTest.broker(Files.createDirectory(root.resolve(\"broker\")));"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorkerTest.java",
+          "line": 250,
+          "text": "codec.encrypt(identity, WebLogPayloadCodecTest.goldenWire()),"
+        }
+      ],
+      "operation": "COMPLETE_ORIGINAL_SUITE",
+      "decision": "NOT_RUN_HOLD",
+      "requiredConditions": [
+        "Whole-suite embedded broker or DB actions and/or shared held WebStartupException; dynamic invocation/compile HOLD. No subset, helper substitution or alternative execution."
+      ],
+      "executedTests": 0,
+      "coverage": null,
+      "independentStaticAnalysisPassClaimed": false,
+      "fullPgReviewClaimed": false,
+      "extraBudgetAddedPp": 0,
+      "nextWorkOwner": "Existing individual B contract; restrictions must be resolved independently. No automatic HOLD release."
+    }
+  ],
+  "witnessDependencies": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java": "8299e7a3b9bef6f654b780dbd06d3831c3a137f806fafdc8e8e480c0473e3738",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java": "76b0c079bbc7704ccf64ee9a42acf88c0f9f4fc8fd461ff5d306d6ff48e11c66",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDatabaseFixture.java": "e8396fcb045d4cb2a00b8d465a28e3cc09aef0c3653f885aee2c430f5aabe552"
+  },
+  "callerConclusions": 6,
+  "sourceConsistentCallers": 6,
+  "dynamicHeldCallers": 6,
+  "productTestsExecuted": 0,
+  "normalCompilerOrJavaParsingExecuted": false,
+  "actualDbBrokerOrHeldCalls": 0,
+  "bug2615Closed": false,
+  "ykt2303Closed": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "fullPgReviewClaimed": false,
+  "toolSha256": "035f073bcd9259df20f9af7acc55d2c2056f90a2209fd5cd449759eecd69c2f1"
+}
