@@ -238,6 +238,7 @@ final class InspectorDeploymentTest {
           new HashSet<>(
               List.of(
                   "db-inbox-inspector",
+                  "maintenance-owner",
                   "api-context-aes-current",
                   "api-inbox-response-aes-current"));
       var paths = new ArrayList<Path>();
@@ -253,7 +254,7 @@ final class InspectorDeploymentTest {
         assertTrue(ids.add(id));
         paths.add(path);
       }
-      assertEquals(3 + selection.size(), ids.size());
+      assertEquals(4 + selection.size(), ids.size());
       verifyUnit(paths);
     }
   }

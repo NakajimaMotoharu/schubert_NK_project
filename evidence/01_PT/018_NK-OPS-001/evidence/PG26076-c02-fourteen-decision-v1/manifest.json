@@ -1,0 +1,1725 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T01:06:22.309376+09:00",
+  "source": "b877eccaca58d027dcae29e040fa73aa1decefc5",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "wbs": "WBS-C02",
+  "configurationCount": 14,
+  "checks": [
+    {
+      "path": "src/deployment/systemd/artemis.service",
+      "sha256": "1b8fe8eaab683ac658bfe8c23816e709725431a0a2b80816bba5449d129c5266",
+      "gitBlob": "38ff679067c13063363c95c0da9a8905bd8ff2b5",
+      "declaredDirectives": {
+        "Unit.Description": [
+          "Schubert NK Artemis broker"
+        ],
+        "Unit.After": [
+          "schubert-nk-cleanup.service"
+        ],
+        "Unit.Requires": [
+          "schubert-nk-cleanup.service"
+        ],
+        "Unit.StartLimitIntervalSec": [
+          "600"
+        ],
+        "Unit.StartLimitBurst": [
+          "5"
+        ],
+        "Service.Type": [
+          "simple"
+        ],
+        "Service.User": [
+          "schubert-artemis"
+        ],
+        "Service.Group": [
+          "schubert-artemis"
+        ],
+        "Service.WorkingDirectory": [
+          "/var/lib/schubert-nk/artemis"
+        ],
+        "Service.LoadCredential": [
+          "artemis-users:/etc/schubert-nk/credentials/artemis-users"
+        ],
+        "Service.BindReadOnlyPaths": [
+          "/run/credentials/artemis.service/artemis-users:/var/lib/schubert-nk/artemis/etc/artemis-users.properties"
+        ],
+        "Service.Environment": [
+          "\"JAVA_ARGS=-Xms768m -Xmx1024m -XX:MaxDirectMemorySize=256m -XX:MaxMetaspaceSize=192m -XX:+ExitOnOutOfMemoryError -Dfile.encoding=UTF-8 -Duser.timezone=UTC\""
+        ],
+        "Service.UnsetEnvironment": [
+          "JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH"
+        ],
+        "Service.ExecStart": [
+          "/var/lib/schubert-nk/artemis/bin/artemis run"
+        ],
+        "Service.Restart": [
+          "on-failure"
+        ],
+        "Service.SuccessExitStatus": [
+          "143"
+        ],
+        "Service.RestartSec": [
+          "5s"
+        ],
+        "Service.TimeoutStartSec": [
+          "120s"
+        ],
+        "Service.TimeoutStopSec": [
+          "60s"
+        ],
+        "Service.KillMode": [
+          "control-group"
+        ],
+        "Service.SendSIGKILL": [
+          "no"
+        ],
+        "Service.MemoryMax": [
+          "2048M"
+        ],
+        "Service.LimitNOFILE": [
+          "65536"
+        ],
+        "Service.ReadWritePaths": [
+          "/var/lib/schubert-nk/artemis/data /var/lib/schubert-nk/artemis/log /var/lib/schubert-nk/artemis/tmp /var/lib/schubert-nk/artemis/lock"
+        ],
+        "Service.UMask": [
+          "0077"
+        ],
+        "Service.NoNewPrivileges": [
+          "true"
+        ],
+        "Service.CapabilityBoundingSet": [
+          ""
+        ],
+        "Service.AmbientCapabilities": [
+          ""
+        ],
+        "Service.PrivateTmp": [
+          "true"
+        ],
+        "Service.PrivateDevices": [
+          "true"
+        ],
+        "Service.ProtectSystem": [
+          "strict"
+        ],
+        "Service.ProtectHome": [
+          "true"
+        ],
+        "Service.ProtectKernelTunables": [
+          "true"
+        ],
+        "Service.ProtectKernelModules": [
+          "true"
+        ],
+        "Service.ProtectControlGroups": [
+          "true"
+        ],
+        "Service.ProtectKernelLogs": [
+          "true"
+        ],
+        "Service.ProtectClock": [
+          "true"
+        ],
+        "Service.ProtectHostname": [
+          "true"
+        ],
+        "Service.RestrictSUIDSGID": [
+          "true"
+        ],
+        "Service.LockPersonality": [
+          "true"
+        ],
+        "Service.RestrictNamespaces": [
+          "true"
+        ],
+        "Service.RestrictRealtime": [
+          "true"
+        ],
+        "Service.RestrictAddressFamilies": [
+          "AF_UNIX AF_INET AF_INET6"
+        ],
+        "Service.StandardOutput": [
+          "journal"
+        ],
+        "Service.StandardError": [
+          "journal"
+        ]
+      },
+      "fixedDesignExpectations": {
+        "Type": "simple",
+        "User": "schubert-artemis",
+        "Group": "schubert-artemis",
+        "Restart": "on-failure",
+        "SuccessExitStatus": "143",
+        "TimeoutStartSec": "120s",
+        "TimeoutStopSec": "60s",
+        "KillMode": "control-group",
+        "SendSIGKILL": "no",
+        "UMask": "0077"
+      },
+      "reference": "PG16890 original14/seven configuration files, Main credit0",
+      "sourceLiteralsCorrespond": true,
+      "effectiveManagerSettingsVerified": false,
+      "currentTestReexecution": false,
+      "remaining": [
+        "Fresh effective merged Unit/default/NSS/dependency/timeout ownership and real release/credential/path conditions not proven by file literals.",
+        "Current source 451/native/parent endings remain separate HOLD."
+      ]
+    },
+    {
+      "path": "src/deployment/systemd/caddy.service.d/schubert-nk-startup-policy.conf",
+      "sha256": "6711ce8ddf9fcf54f733acfb30c10e4970a051d55dba340bc55f70970060440e",
+      "gitBlob": "b8ebe282643328eacaa95e0c1753ac47dd579bfb",
+      "declaredDirectives": {
+        "Service.User": [
+          "caddy"
+        ],
+        "Service.Group": [
+          "caddy"
+        ],
+        "Service.SupplementaryGroups": [
+          ""
+        ],
+        "Service.Type": [
+          "notify"
+        ],
+        "Service.Restart": [
+          "no"
+        ],
+        "Service.TimeoutStartSec": [
+          "30s"
+        ],
+        "Service.TimeoutStopSec": [
+          "30s"
+        ],
+        "Service.SendSIGKILL": [
+          "no"
+        ],
+        "Service.KillMode": [
+          "control-group"
+        ],
+        "Service.NoNewPrivileges": [
+          "yes"
+        ],
+        "Service.CapabilityBoundingSet": [
+          ""
+        ],
+        "Service.AmbientCapabilities": [
+          ""
+        ],
+        "Service.UMask": [
+          "0027"
+        ],
+        "Service.ProtectSystem": [
+          "strict"
+        ],
+        "Service.ProtectHome": [
+          "true"
+        ],
+        "Service.PrivateTmp": [
+          "true"
+        ],
+        "Service.ReadWritePaths": [
+          "/var/lib/caddy"
+        ],
+        "Service.ExecStartPre": [
+          "",
+          "/usr/bin/caddy validate --config /etc/caddy/Caddyfile"
+        ],
+        "Service.ExecStart": [
+          "",
+          "/usr/bin/caddy run --config /etc/caddy/Caddyfile"
+        ],
+        "Service.ExecReload": [
+          ""
+        ]
+      },
+      "fixedDesignExpectations": {
+        "Type": "notify",
+        "User": "caddy",
+        "Group": "caddy",
+        "Restart": "no",
+        "TimeoutStartSec": "30s",
+        "TimeoutStopSec": "30s",
+        "KillMode": "control-group",
+        "SendSIGKILL": "no",
+        "UMask": "0027"
+      },
+      "reference": "PG16714 original5/four configuration files, Main credit0",
+      "sourceLiteralsCorrespond": true,
+      "effectiveManagerSettingsVerified": false,
+      "currentTestReexecution": false,
+      "remaining": [
+        "Fresh effective merged Unit/default/NSS/dependency/timeout ownership and real release/credential/path conditions not proven by file literals.",
+        "Current source 451/native/parent endings remain separate HOLD."
+      ]
+    },
+    {
+      "path": "src/deployment/systemd/caddy.service.d/schubert-nk-stop-policy.conf",
+      "sha256": "3710be0c023a4bbbf3a8f095cd2d91c5b97b40ed76056ddd4ff433d4f4e066bc",
+      "gitBlob": "1a2084730da50b32a2058009fe374bf405096f22",
+      "declaredDirectives": {
+        "Service.TimeoutStopSec": [
+          "30s"
+        ],
+        "Service.SendSIGKILL": [
+          "no"
+        ]
+      },
+      "fixedDesignExpectations": {
+        "TimeoutStopSec": "30s",
+        "SendSIGKILL": "no"
+      },
+      "reference": "PG16714 original5/four configuration files, Main credit0",
+      "sourceLiteralsCorrespond": true,
+      "effectiveManagerSettingsVerified": false,
+      "currentTestReexecution": false,
+      "remaining": [
+        "Fresh effective merged Unit/default/NSS/dependency/timeout ownership and real release/credential/path conditions not proven by file literals.",
+        "Current source 451/native/parent endings remain separate HOLD."
+      ]
+    },
+    {
+      "path": "src/deployment/systemd/optional/inbox-inspector-context-previous.conf",
+      "sha256": "4e1de7eb4bee81acb1afb9fa34d41f01b26829030c225e74d92f1bce122dfd13",
+      "gitBlob": "216ce26560e344f58bab9ba883fa6096d879e3a6",
+      "declaredDirectives": {
+        "Service.LoadCredential": [
+          "api-context-aes-previous:/etc/schubert-nk/credentials/api-context-aes-previous"
+        ]
+      },
+      "fixedDesignExpectations": {},
+      "reference": "PG17500/17504 inspector original8/three Unit-profile files, current changedTest not yet rerun",
+      "sourceLiteralsCorrespond": true,
+      "effectiveManagerSettingsVerified": false,
+      "currentTestReexecution": false,
+      "remaining": [
+        "Fresh effective merged Unit/default/NSS/dependency/timeout ownership and real release/credential/path conditions not proven by file literals.",
+        "Current source 451/native/parent endings remain separate HOLD."
+      ]
+    },
+    {
+      "path": "src/deployment/systemd/optional/inbox-inspector-response-previous.conf",
+      "sha256": "8629e3e009a38a164b9954326f25cbfcc6faa590fc838fd52307da6c9120e9b4",
+      "gitBlob": "0f6696c37cec25438922dee384d5107a9a7d9778",
+      "declaredDirectives": {
+        "Service.LoadCredential": [
+          "api-inbox-response-aes-previous:/etc/schubert-nk/credentials/api-inbox-response-aes-previous"
+        ]
+      },
+      "fixedDesignExpectations": {},
+      "reference": "PG17500/17504 inspector original8/three Unit-profile files, current changedTest not yet rerun",
+      "sourceLiteralsCorrespond": true,
+      "effectiveManagerSettingsVerified": false,
+      "currentTestReexecution": false,
+      "remaining": [
+        "Fresh effective merged Unit/default/NSS/dependency/timeout ownership and real release/credential/path conditions not proven by file literals.",
+        "Current source 451/native/parent endings remain separate HOLD."
+      ]
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-api.service.template",
+      "sha256": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630",
+      "gitBlob": "1196be6e0eae0a914e5b4602cda14fbe58fdba55",
+      "declaredDirectives": {
+        "Unit.Description": [
+          "Schubert NK API"
+        ],
+        "Unit.After": [
+          "schubert-nk-expiry-cleanup.service artemis.service postgresql.service"
+        ],
+        "Unit.Requires": [
+          "artemis.service postgresql.service"
+        ],
+        "Unit.StartLimitIntervalSec": [
+          "600"
+        ],
+        "Unit.StartLimitBurst": [
+          "5"
+        ],
+        "Service.Type": [
+          "simple"
+        ],
+        "Service.User": [
+          "schubert-api"
+        ],
+        "Service.Group": [
+          "schubert-api"
+        ],
+        "Service.SupplementaryGroups": [
+          "schubert schubert-read schubert-web"
+        ],
+        "Service.WorkingDirectory": [
+          "/opt/schubert-nk/current/api"
+        ],
+        "Service.EnvironmentFile": [
+          "/etc/schubert-nk/api.env"
+        ],
+        "Service.UnsetEnvironment": [
+          "JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH"
+        ],
+        "Service.LoadCredential": [
+          "db-api:/etc/schubert-nk/credentials/db-api",
+          "mq-api:/etc/schubert-nk/credentials/mq-api",
+          "api-context-aes-current:/etc/schubert-nk/credentials/api-context-aes-current",
+          "api-inbox-response-aes-current:/etc/schubert-nk/credentials/api-inbox-response-aes-current",
+          "operation-hmac-current:/etc/schubert-nk/credentials/operation-hmac-current"
+        ],
+        "Service.ExecStart": [
+          "!/usr/bin/java --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError -XX:MaxDirectMemorySize=256m -XX:MaxMetaspaceSize=256m -XX:ReservedCodeCacheSize=128m -Xms512m -Xmx1024m -Xlog:gc*=info:stdout:time,uptime,level,tags -cp /opt/schubert-nk/current/operations/batch.jar:/opt/schubert-nk/current/operations/lib/* dev.codex.schubert.nk.batch.file.RootServiceLauncher API"
+        ],
+        "Service.CapabilityBoundingSet": [
+          "CAP_SETUID CAP_SETGID CAP_SETPCAP CAP_SYS_PTRACE CAP_DAC_READ_SEARCH"
+        ],
+        "Service.Restart": [
+          "on-failure"
+        ],
+        "Service.RestartSec": [
+          "5s"
+        ],
+        "Service.TimeoutStartSec": [
+          "120s"
+        ],
+        "Service.TimeoutStopSec": [
+          "60s"
+        ],
+        "Service.SendSIGKILL": [
+          "no"
+        ],
+        "Service.MemoryMax": [
+          "2048M"
+        ],
+        "Service.LimitNOFILE": [
+          "65536"
+        ],
+        "Service.RuntimeDirectory": [
+          "schubert-nk/api"
+        ],
+        "Service.RuntimeDirectoryMode": [
+          "0750"
+        ],
+        "Service.ReadWritePaths": [
+          "/srv/schubert-nk/data/transfer"
+        ],
+        "Service.UMask": [
+          "0027"
+        ],
+        "Service.NoNewPrivileges": [
+          "true"
+        ],
+        "Service.PrivateTmp": [
+          "true"
+        ],
+        "Service.PrivateDevices": [
+          "true"
+        ],
+        "Service.ProtectSystem": [
+          "strict"
+        ],
+        "Service.ProtectHome": [
+          "true"
+        ],
+        "Service.ProtectKernelTunables": [
+          "true"
+        ],
+        "Service.ProtectKernelModules": [
+          "true"
+        ],
+        "Service.ProtectControlGroups": [
+          "true"
+        ],
+        "Service.ProtectKernelLogs": [
+          "true"
+        ],
+        "Service.ProtectClock": [
+          "true"
+        ],
+        "Service.ProtectHostname": [
+          "true"
+        ],
+        "Service.RestrictSUIDSGID": [
+          "true"
+        ],
+        "Service.LockPersonality": [
+          "true"
+        ],
+        "Service.RestrictNamespaces": [
+          "true"
+        ],
+        "Service.RestrictRealtime": [
+          "true"
+        ],
+        "Service.RestrictAddressFamilies": [
+          "AF_UNIX AF_INET AF_INET6"
+        ],
+        "Service.StandardOutput": [
+          "journal"
+        ],
+        "Service.StandardError": [
+          "journal"
+        ]
+      },
+      "fixedDesignExpectations": {
+        "Type": "simple",
+        "User": "schubert-api",
+        "Group": "schubert-api",
+        "Restart": "on-failure",
+        "TimeoutStartSec": "120s",
+        "TimeoutStopSec": "60s",
+        "SendSIGKILL": "no",
+        "UMask": "0027"
+      },
+      "reference": "PG16890 original14/seven configuration files, Main credit0",
+      "sourceLiteralsCorrespond": true,
+      "effectiveManagerSettingsVerified": false,
+      "currentTestReexecution": false,
+      "remaining": [
+        "Fresh effective merged Unit/default/NSS/dependency/timeout ownership and real release/credential/path conditions not proven by file literals.",
+        "Current source 451/native/parent endings remain separate HOLD."
+      ]
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-backup.service.template",
+      "sha256": "2328437591829502f9318c39358b3c5f9ed06afb4d4116febcb3d1860d3b2b8a",
+      "gitBlob": "2375cb64c6422a3002a816c1eafccc645a7e296c",
+      "declaredDirectives": {
+        "Unit.Description": [
+          "Schubert NK dedicated database backup worker"
+        ],
+        "Unit.After": [
+          "postgresql.service"
+        ],
+        "Unit.Requires": [
+          "postgresql.service"
+        ],
+        "Unit.Before": [
+          "schubert-nk-api.service schubert-nk-web.service caddy.service"
+        ],
+        "Service.Type": [
+          "oneshot"
+        ],
+        "Service.User": [
+          "schubert-backup"
+        ],
+        "Service.Group": [
+          "schubert-backup"
+        ],
+        "Service.SupplementaryGroups": [
+          "schubert"
+        ],
+        "Service.WorkingDirectory": [
+          "/opt/schubert-nk/current/operations"
+        ],
+        "Service.UnsetEnvironment": [
+          "JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH"
+        ],
+        "Service.LoadCredential": [
+          "backup-request:/run/schubert-nk/backup-request/backup-request",
+          "backup-pgpass:/etc/schubert-nk/credentials/backup-pgpass"
+        ],
+        "Service.ExecStart": [
+          "/usr/bin/java --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError -Xms128m -Xmx512m -XX:MaxDirectMemorySize=64m -XX:MaxMetaspaceSize=192m -XX:ReservedCodeCacheSize=128m -cp /opt/schubert-nk/current/operations/batch.jar:/opt/schubert-nk/current/operations/lib/* dev.codex.schubert.nk.batch.file.BackupDatabaseWorker"
+        ],
+        "Service.Restart": [
+          "no"
+        ],
+        "Service.RemainAfterExit": [
+          "yes"
+        ],
+        "Service.TimeoutStartSec": [
+          "30min"
+        ],
+        "Service.TimeoutStopSec": [
+          "60s"
+        ],
+        "Service.KillMode": [
+          "control-group"
+        ],
+        "Service.SendSIGKILL": [
+          "no"
+        ],
+        "Service.RuntimeDirectory": [
+          "schubert-nk-backup"
+        ],
+        "Service.RuntimeDirectoryMode": [
+          "0700"
+        ],
+        "Service.RuntimeDirectoryPreserve": [
+          "yes"
+        ],
+        "Service.ReadWritePaths": [
+          "/srv/schubert-nk/backup"
+        ],
+        "Service.UMask": [
+          "0077"
+        ],
+        "Service.NoNewPrivileges": [
+          "true"
+        ],
+        "Service.CapabilityBoundingSet": [
+          ""
+        ],
+        "Service.AmbientCapabilities": [
+          ""
+        ],
+        "Service.MemoryMax": [
+          "1024M"
+        ],
+        "Service.LimitNOFILE": [
+          "65536"
+        ],
+        "Service.PrivateTmp": [
+          "true"
+        ],
+        "Service.PrivateDevices": [
+          "true"
+        ],
+        "Service.ProtectSystem": [
+          "strict"
+        ],
+        "Service.ProtectHome": [
+          "true"
+        ],
+        "Service.ProtectKernelTunables": [
+          "true"
+        ],
+        "Service.ProtectKernelModules": [
+          "true"
+        ],
+        "Service.ProtectControlGroups": [
+          "true"
+        ],
+        "Service.ProtectKernelLogs": [
+          "true"
+        ],
+        "Service.ProtectClock": [
+          "true"
+        ],
+        "Service.ProtectHostname": [
+          "true"
+        ],
+        "Service.RestrictSUIDSGID": [
+          "true"
+        ],
+        "Service.LockPersonality": [
+          "true"
+        ],
+        "Service.RestrictNamespaces": [
+          "true"
+        ],
+        "Service.RestrictRealtime": [
+          "true"
+        ],
+        "Service.RestrictAddressFamilies": [
+          "AF_UNIX AF_INET AF_INET6"
+        ],
+        "Service.StandardOutput": [
+          "journal"
+        ],
+        "Service.StandardError": [
+          "journal"
+        ]
+      },
+      "fixedDesignExpectations": {
+        "Type": "oneshot",
+        "User": "schubert-backup",
+        "Group": "schubert-backup",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "TimeoutStartSec": "30min",
+        "TimeoutStopSec": "60s",
+        "KillMode": "control-group",
+        "SendSIGKILL": "no",
+        "UMask": "0077"
+      },
+      "reference": "PG16714 original5/four configuration files, Main credit0",
+      "sourceLiteralsCorrespond": true,
+      "effectiveManagerSettingsVerified": false,
+      "currentTestReexecution": false,
+      "remaining": [
+        "Fresh effective merged Unit/default/NSS/dependency/timeout ownership and real release/credential/path conditions not proven by file literals.",
+        "Current source 451/native/parent endings remain separate HOLD."
+      ]
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-bootstrap-admin.service.template",
+      "sha256": "e38a6021b2881ec832a8ca7fa8961f8754619b110415ef35a6aa0992e556d392",
+      "gitBlob": "2e60e89b3aa30a8d6874e963fb762ad9a9327e18",
+      "declaredDirectives": {
+        "Unit.Description": [
+          "Schubert NK initial ADMIN (one-shot only)"
+        ],
+        "Unit.After": [
+          "postgresql.service"
+        ],
+        "Unit.Requires": [
+          "postgresql.service"
+        ],
+        "Service.Type": [
+          "oneshot"
+        ],
+        "Service.User": [
+          "schubert-api"
+        ],
+        "Service.Group": [
+          "schubert-api"
+        ],
+        "Service.SupplementaryGroups": [
+          "schubert schubert-read schubert-web"
+        ],
+        "Service.WorkingDirectory": [
+          "/opt/schubert-nk/current/api"
+        ],
+        "Service.EnvironmentFile": [
+          "/etc/schubert-nk/api.env"
+        ],
+        "Service.UnsetEnvironment": [
+          "JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH"
+        ],
+        "Service.LoadCredential": [
+          "db-api:/etc/schubert-nk/credentials/db-api",
+          "bootstrap-admin-username:/etc/schubert-nk/credentials/bootstrap-admin-username",
+          "bootstrap-admin-password:/etc/schubert-nk/credentials/bootstrap-admin-password"
+        ],
+        "Service.ExecStart": [
+          "/usr/bin/java --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError -Xmx256m -cp /opt/schubert-nk/current/api/api.jar:/opt/schubert-nk/current/api/lib/* dev.codex.schubert.nk.api.bootstrap.BootstrapAdminMain"
+        ],
+        "Service.SuccessExitStatus": [
+          "20"
+        ],
+        "Service.Restart": [
+          "no"
+        ],
+        "Service.TimeoutStartSec": [
+          "30s"
+        ],
+        "Service.TimeoutStopSec": [
+          "30s"
+        ],
+        "Service.SendSIGKILL": [
+          "no"
+        ],
+        "Service.MemoryMax": [
+          "512M"
+        ],
+        "Service.UMask": [
+          "0077"
+        ],
+        "Service.CapabilityBoundingSet": [
+          ""
+        ],
+        "Service.AmbientCapabilities": [
+          ""
+        ],
+        "Service.NoNewPrivileges": [
+          "true"
+        ],
+        "Service.PrivateTmp": [
+          "true"
+        ],
+        "Service.PrivateDevices": [
+          "true"
+        ],
+        "Service.ProtectSystem": [
+          "strict"
+        ],
+        "Service.ProtectHome": [
+          "true"
+        ],
+        "Service.ProtectKernelTunables": [
+          "true"
+        ],
+        "Service.ProtectKernelModules": [
+          "true"
+        ],
+        "Service.ProtectControlGroups": [
+          "true"
+        ],
+        "Service.ProtectKernelLogs": [
+          "true"
+        ],
+        "Service.ProtectClock": [
+          "true"
+        ],
+        "Service.ProtectHostname": [
+          "true"
+        ],
+        "Service.RestrictSUIDSGID": [
+          "true"
+        ],
+        "Service.LockPersonality": [
+          "true"
+        ],
+        "Service.RestrictNamespaces": [
+          "true"
+        ],
+        "Service.RestrictRealtime": [
+          "true"
+        ],
+        "Service.RestrictAddressFamilies": [
+          "AF_UNIX AF_INET AF_INET6"
+        ],
+        "Service.StandardOutput": [
+          "journal"
+        ],
+        "Service.StandardError": [
+          "journal"
+        ]
+      },
+      "fixedDesignExpectations": {
+        "Type": "oneshot",
+        "User": "schubert-api",
+        "Group": "schubert-api",
+        "Restart": "no",
+        "SuccessExitStatus": "20",
+        "TimeoutStartSec": "30s",
+        "TimeoutStopSec": "30s",
+        "SendSIGKILL": "no",
+        "UMask": "0077"
+      },
+      "reference": "PG16714 original5/four configuration files, Main credit0",
+      "sourceLiteralsCorrespond": true,
+      "effectiveManagerSettingsVerified": false,
+      "currentTestReexecution": false,
+      "remaining": [
+        "Fresh effective merged Unit/default/NSS/dependency/timeout ownership and real release/credential/path conditions not proven by file literals.",
+        "Current source 451/native/parent endings remain separate HOLD."
+      ]
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-cleanup.service.template",
+      "sha256": "a7446238928b4446a65fdd6088a7a5ad374b5a4507ade1adf9084190091c34a2",
+      "gitBlob": "c3b5cd9b46477c44fa7d5c5de2f0df70c65952cc",
+      "declaredDirectives": {
+        "Unit.Description": [
+          "Schubert NK root cleanup child (fail-closed PGPT candidate)"
+        ],
+        "Unit.After": [
+          "postgresql.service schubert-nk-backup.service"
+        ],
+        "Unit.Requires": [
+          "postgresql.service"
+        ],
+        "Unit.Before": [
+          "artemis.service schubert-nk-api.service schubert-nk-web.service caddy.service"
+        ],
+        "Service.Type": [
+          "oneshot"
+        ],
+        "Service.User": [
+          "root"
+        ],
+        "Service.Group": [
+          "root"
+        ],
+        "Service.WorkingDirectory": [
+          "/opt/schubert-nk/current/operations"
+        ],
+        "Service.UnsetEnvironment": [
+          "JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH"
+        ],
+        "Service.LoadCredential": [
+          "cleanup-request:/run/schubert-nk/cleanup-request/cleanup-request",
+          "maintenance-owner:/run/schubert-nk/cleanup-request/maintenance-owner",
+          "db-batch:/etc/schubert-nk/credentials/db-batch"
+        ],
+        "Service.ExecStart": [
+          "/usr/bin/java --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError -Xms128m -Xmx512m -XX:MaxDirectMemorySize=64m -XX:MaxMetaspaceSize=192m -XX:ReservedCodeCacheSize=128m -cp /opt/schubert-nk/current/operations/batch.jar:/opt/schubert-nk/current/operations/lib/* dev.codex.schubert.nk.batch.file.CleanupProcessMain"
+        ],
+        "Service.Restart": [
+          "no"
+        ],
+        "Service.RemainAfterExit": [
+          "yes"
+        ],
+        "Service.SuccessExitStatus": [
+          "10"
+        ],
+        "Service.TimeoutStartSec": [
+          "30min"
+        ],
+        "Service.TimeoutStopSec": [
+          "60s"
+        ],
+        "Service.KillMode": [
+          "control-group"
+        ],
+        "Service.SendSIGKILL": [
+          "no"
+        ],
+        "Service.UMask": [
+          "0077"
+        ],
+        "Service.NoNewPrivileges": [
+          "true"
+        ],
+        "Service.CapabilityBoundingSet": [
+          "CAP_SYS_PTRACE CAP_DAC_OVERRIDE"
+        ],
+        "Service.AmbientCapabilities": [
+          ""
+        ],
+        "Service.MemoryMax": [
+          "1024M"
+        ],
+        "Service.LimitNOFILE": [
+          "65536"
+        ],
+        "Service.PrivateTmp": [
+          "true"
+        ],
+        "Service.PrivateDevices": [
+          "true"
+        ],
+        "Service.ProtectSystem": [
+          "strict"
+        ],
+        "Service.ReadWritePaths": [
+          "/srv/schubert-nk/data/transfer /run/schubert-nk/maintenance /run/schubert-nk/cleanup-request"
+        ],
+        "Service.ProtectHome": [
+          "true"
+        ],
+        "Service.ProtectKernelTunables": [
+          "true"
+        ],
+        "Service.ProtectKernelModules": [
+          "true"
+        ],
+        "Service.ProtectControlGroups": [
+          "true"
+        ],
+        "Service.ProtectKernelLogs": [
+          "true"
+        ],
+        "Service.ProtectClock": [
+          "true"
+        ],
+        "Service.ProtectHostname": [
+          "true"
+        ],
+        "Service.RestrictSUIDSGID": [
+          "true"
+        ],
+        "Service.LockPersonality": [
+          "true"
+        ],
+        "Service.RestrictNamespaces": [
+          "true"
+        ],
+        "Service.RestrictRealtime": [
+          "true"
+        ],
+        "Service.RestrictAddressFamilies": [
+          "AF_UNIX AF_INET AF_INET6"
+        ],
+        "Service.StandardOutput": [
+          "journal"
+        ],
+        "Service.StandardError": [
+          "journal"
+        ]
+      },
+      "fixedDesignExpectations": {
+        "Type": "oneshot",
+        "User": "root",
+        "Group": "root",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "SuccessExitStatus": "10",
+        "TimeoutStartSec": "30min",
+        "TimeoutStopSec": "60s",
+        "KillMode": "control-group",
+        "SendSIGKILL": "no",
+        "UMask": "0077"
+      },
+      "reference": "PG16890 original14/seven configuration files, Main credit0",
+      "sourceLiteralsCorrespond": true,
+      "effectiveManagerSettingsVerified": false,
+      "currentTestReexecution": false,
+      "remaining": [
+        "Fresh effective merged Unit/default/NSS/dependency/timeout ownership and real release/credential/path conditions not proven by file literals.",
+        "Current source 451/native/parent endings remain separate HOLD."
+      ]
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-expiry-cleanup.service.template",
+      "sha256": "0e6c3453373e4eb9c20ff175408ff66db731acda376c0b343e89f3541cf30709",
+      "gitBlob": "b59bd3c6740eaa44359a3f78ab605b46e9debbb2",
+      "declaredDirectives": {
+        "Unit.Description": [
+          "Schubert NK fixed Expiry maintenance child"
+        ],
+        "Unit.After": [
+          "postgresql.service artemis.service"
+        ],
+        "Unit.Requires": [
+          "postgresql.service artemis.service"
+        ],
+        "Unit.Before": [
+          "schubert-nk-api.service schubert-nk-web.service caddy.service"
+        ],
+        "Service.Type": [
+          "oneshot"
+        ],
+        "Service.User": [
+          "root"
+        ],
+        "Service.Group": [
+          "root"
+        ],
+        "Service.WorkingDirectory": [
+          "/opt/schubert-nk/current/operations"
+        ],
+        "Service.UnsetEnvironment": [
+          "JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH"
+        ],
+        "Service.LoadCredential": [
+          "expiry-request:/run/schubert-nk/expiry-request/expiry-request",
+          "maintenance-owner:/run/schubert-nk/expiry-request/maintenance-owner",
+          "db-batch:/etc/schubert-nk/credentials/db-batch",
+          "mq-maintenance:/etc/schubert-nk/credentials/mq-maintenance",
+          "mq-ops:/etc/schubert-nk/credentials/mq-ops"
+        ],
+        "Service.ExecStart": [
+          "/usr/bin/java --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError -Xms128m -Xmx512m -XX:MaxDirectMemorySize=64m -XX:MaxMetaspaceSize=192m -XX:ReservedCodeCacheSize=128m -cp /opt/schubert-nk/current/operations/batch.jar:/opt/schubert-nk/current/operations/lib/* dev.codex.schubert.nk.batch.file.CleanupProcessMain --expiry"
+        ],
+        "Service.Restart": [
+          "no"
+        ],
+        "Service.RemainAfterExit": [
+          "yes"
+        ],
+        "Service.SuccessExitStatus": [
+          "10"
+        ],
+        "Service.TimeoutStartSec": [
+          "10min"
+        ],
+        "Service.TimeoutStopSec": [
+          "60s"
+        ],
+        "Service.KillMode": [
+          "control-group"
+        ],
+        "Service.SendSIGKILL": [
+          "no"
+        ],
+        "Service.Delegate": [
+          "no"
+        ],
+        "Service.UMask": [
+          "0077"
+        ],
+        "Service.NoNewPrivileges": [
+          "true"
+        ],
+        "Service.CapabilityBoundingSet": [
+          "CAP_SYS_PTRACE CAP_DAC_OVERRIDE"
+        ],
+        "Service.AmbientCapabilities": [
+          ""
+        ],
+        "Service.MemoryMax": [
+          "1024M"
+        ],
+        "Service.LimitNOFILE": [
+          "65536"
+        ],
+        "Service.PrivateTmp": [
+          "true"
+        ],
+        "Service.PrivateDevices": [
+          "true"
+        ],
+        "Service.ProtectSystem": [
+          "strict"
+        ],
+        "Service.ProtectHome": [
+          "true"
+        ],
+        "Service.ProtectKernelTunables": [
+          "true"
+        ],
+        "Service.ProtectKernelModules": [
+          "true"
+        ],
+        "Service.ProtectControlGroups": [
+          "true"
+        ],
+        "Service.ProtectKernelLogs": [
+          "true"
+        ],
+        "Service.ProtectClock": [
+          "true"
+        ],
+        "Service.ProtectHostname": [
+          "true"
+        ],
+        "Service.RestrictSUIDSGID": [
+          "true"
+        ],
+        "Service.LockPersonality": [
+          "true"
+        ],
+        "Service.RestrictNamespaces": [
+          "true"
+        ],
+        "Service.RestrictRealtime": [
+          "true"
+        ],
+        "Service.RestrictAddressFamilies": [
+          "AF_UNIX AF_INET AF_INET6"
+        ],
+        "Service.StandardOutput": [
+          "journal"
+        ],
+        "Service.StandardError": [
+          "journal"
+        ]
+      },
+      "fixedDesignExpectations": {
+        "Type": "oneshot",
+        "User": "root",
+        "Group": "root",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "SuccessExitStatus": "10",
+        "TimeoutStartSec": "10min",
+        "TimeoutStopSec": "60s",
+        "KillMode": "control-group",
+        "SendSIGKILL": "no",
+        "UMask": "0077"
+      },
+      "reference": "PG16890 original14/seven configuration files, Main credit0",
+      "sourceLiteralsCorrespond": true,
+      "effectiveManagerSettingsVerified": false,
+      "currentTestReexecution": false,
+      "remaining": [
+        "Fresh effective merged Unit/default/NSS/dependency/timeout ownership and real release/credential/path conditions not proven by file literals.",
+        "Current source 451/native/parent endings remain separate HOLD."
+      ]
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-inbox-inspector.service",
+      "sha256": "225adff0cee398c1ad7d25bd587e666018b9698a3d0256788c38cf029d8262d8",
+      "gitBlob": "5c65dcfba960d5e90518f3d2c2fc54ea24e8132e",
+      "declaredDirectives": {
+        "Unit.Description": [
+          "Schubert NK private Inbox maintenance inspector"
+        ],
+        "Unit.After": [
+          "postgresql.service"
+        ],
+        "Unit.Requires": [
+          "postgresql.service"
+        ],
+        "Unit.Before": [
+          "artemis.service schubert-nk-api.service schubert-nk-web.service caddy.service"
+        ],
+        "Service.Type": [
+          "oneshot"
+        ],
+        "Service.User": [
+          "schubert-inbox-inspector"
+        ],
+        "Service.Group": [
+          "schubert-inbox-inspector"
+        ],
+        "Service.SupplementaryGroups": [
+          "schubert schubert-read"
+        ],
+        "Service.CapabilityBoundingSet": [
+          ""
+        ],
+        "Service.AmbientCapabilities": [
+          ""
+        ],
+        "Service.RemainAfterExit": [
+          "yes"
+        ],
+        "Service.WorkingDirectory": [
+          "/opt/schubert-nk/current/api"
+        ],
+        "Service.ExecStart": [
+          "/opt/schubert-nk/current/operations/bin/schubert-nk-inbox-inspector"
+        ],
+        "Service.EnvironmentFile": [
+          "/etc/schubert-nk/inbox-inspector.env",
+          "/run/schubert-nk/maintenance/inbox-inspector.env"
+        ],
+        "Service.UnsetEnvironment": [
+          "JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH"
+        ],
+        "Service.LoadCredential": [
+          "db-inbox-inspector:/etc/schubert-nk/credentials/db-inbox-inspector",
+          "maintenance-owner:/run/schubert-nk/cleanup-request/inspector-owner",
+          "api-context-aes-current:/etc/schubert-nk/credentials/api-context-aes-current",
+          "api-inbox-response-aes-current:/etc/schubert-nk/credentials/api-inbox-response-aes-current"
+        ],
+        "Service.Restart": [
+          "no"
+        ],
+        "Service.SuccessExitStatus": [
+          "10"
+        ],
+        "Service.TimeoutStartSec": [
+          "30min"
+        ],
+        "Service.TimeoutStopSec": [
+          "60s"
+        ],
+        "Service.KillMode": [
+          "control-group"
+        ],
+        "Service.SendSIGKILL": [
+          "no"
+        ],
+        "Service.MemoryMax": [
+          "1024M"
+        ],
+        "Service.LimitNOFILE": [
+          "65536"
+        ],
+        "Service.UMask": [
+          "0077"
+        ],
+        "Service.NoNewPrivileges": [
+          "true"
+        ],
+        "Service.PrivateTmp": [
+          "true"
+        ],
+        "Service.PrivateDevices": [
+          "true"
+        ],
+        "Service.ProtectSystem": [
+          "strict"
+        ],
+        "Service.ProtectHome": [
+          "true"
+        ],
+        "Service.ProtectKernelTunables": [
+          "true"
+        ],
+        "Service.ProtectKernelModules": [
+          "true"
+        ],
+        "Service.ProtectControlGroups": [
+          "true"
+        ],
+        "Service.ProtectKernelLogs": [
+          "true"
+        ],
+        "Service.ProtectClock": [
+          "true"
+        ],
+        "Service.ProtectHostname": [
+          "true"
+        ],
+        "Service.RestrictSUIDSGID": [
+          "true"
+        ],
+        "Service.LockPersonality": [
+          "true"
+        ],
+        "Service.RestrictNamespaces": [
+          "true"
+        ],
+        "Service.RestrictRealtime": [
+          "true"
+        ],
+        "Service.RestrictAddressFamilies": [
+          "AF_UNIX AF_INET AF_INET6"
+        ],
+        "Service.StandardOutput": [
+          "journal"
+        ],
+        "Service.StandardError": [
+          "journal"
+        ]
+      },
+      "fixedDesignExpectations": {
+        "Type": "oneshot",
+        "User": "schubert-inbox-inspector",
+        "Group": "schubert-inbox-inspector",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "SuccessExitStatus": "10",
+        "TimeoutStartSec": "30min",
+        "TimeoutStopSec": "60s",
+        "KillMode": "control-group",
+        "SendSIGKILL": "no",
+        "UMask": "0077"
+      },
+      "reference": "PG17500/17504 inspector original8/three Unit-profile files, current changedTest not yet rerun",
+      "sourceLiteralsCorrespond": true,
+      "effectiveManagerSettingsVerified": false,
+      "currentTestReexecution": false,
+      "remaining": [
+        "Fresh effective merged Unit/default/NSS/dependency/timeout ownership and real release/credential/path conditions not proven by file literals.",
+        "Current source 451/native/parent endings remain separate HOLD."
+      ]
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-morning-controller.service.template",
+      "sha256": "e9ce87045404893edede09b86dfb55523698ed26eeef3c4cb2b386f16518613b",
+      "gitBlob": "b66909b840ab6e287bbdf22768ea2e97c8018d7e",
+      "declaredDirectives": {
+        "Unit.Description": [
+          "Schubert NK Morning root controller (fail-closed PGPT candidate)"
+        ],
+        "Unit.After": [
+          "postgresql.service"
+        ],
+        "Unit.Requires": [
+          "postgresql.service"
+        ],
+        "Service.Type": [
+          "oneshot"
+        ],
+        "Service.User": [
+          "root"
+        ],
+        "Service.Group": [
+          "root"
+        ],
+        "Service.WorkingDirectory": [
+          "/opt/schubert-nk/current/operations"
+        ],
+        "Service.UnsetEnvironment": [
+          "JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH"
+        ],
+        "Service.LoadCredential": [
+          "db-batch:/etc/schubert-nk/credentials/db-batch",
+          "mq-ops:/etc/schubert-nk/credentials/mq-ops"
+        ],
+        "Service.ExecStart": [
+          "/usr/bin/java --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError -Xms128m -Xmx512m -XX:MaxDirectMemorySize=64m -XX:MaxMetaspaceSize=192m -XX:ReservedCodeCacheSize=128m -cp /opt/schubert-nk/current/operations/batch.jar:/opt/schubert-nk/current/operations/lib/* dev.codex.schubert.nk.batch.file.MorningProcessMain"
+        ],
+        "Service.Restart": [
+          "no"
+        ],
+        "Service.SuccessExitStatus": [
+          "10"
+        ],
+        "Service.TimeoutStartSec": [
+          "30min"
+        ],
+        "Service.TimeoutStopSec": [
+          "60s"
+        ],
+        "Service.KillMode": [
+          "control-group"
+        ],
+        "Service.SendSIGKILL": [
+          "no"
+        ],
+        "Service.UMask": [
+          "0077"
+        ],
+        "Service.NoNewPrivileges": [
+          "true"
+        ],
+        "Service.CapabilityBoundingSet": [
+          "CAP_SYS_PTRACE CAP_DAC_OVERRIDE"
+        ],
+        "Service.AmbientCapabilities": [
+          ""
+        ],
+        "Service.MemoryMax": [
+          "1024M"
+        ],
+        "Service.LimitNOFILE": [
+          "65536"
+        ],
+        "Service.PrivateTmp": [
+          "true"
+        ],
+        "Service.PrivateDevices": [
+          "true"
+        ],
+        "Service.ProtectSystem": [
+          "strict"
+        ],
+        "Service.ReadWritePaths": [
+          "/run/schubert-nk /var/lib/schubert-nk/maintenance /srv/schubert-nk/backup"
+        ],
+        "Service.ProtectHome": [
+          "true"
+        ],
+        "Service.ProtectKernelTunables": [
+          "true"
+        ],
+        "Service.ProtectKernelModules": [
+          "true"
+        ],
+        "Service.ProtectControlGroups": [
+          "true"
+        ],
+        "Service.ProtectKernelLogs": [
+          "true"
+        ],
+        "Service.ProtectClock": [
+          "true"
+        ],
+        "Service.ProtectHostname": [
+          "true"
+        ],
+        "Service.RestrictSUIDSGID": [
+          "true"
+        ],
+        "Service.LockPersonality": [
+          "true"
+        ],
+        "Service.RestrictNamespaces": [
+          "true"
+        ],
+        "Service.RestrictRealtime": [
+          "true"
+        ],
+        "Service.RestrictAddressFamilies": [
+          "AF_UNIX AF_INET AF_INET6"
+        ],
+        "Service.StandardOutput": [
+          "journal"
+        ],
+        "Service.StandardError": [
+          "journal"
+        ]
+      },
+      "fixedDesignExpectations": {
+        "Type": "oneshot",
+        "User": "root",
+        "Group": "root",
+        "Restart": "no",
+        "SuccessExitStatus": "10",
+        "TimeoutStartSec": "30min",
+        "TimeoutStopSec": "60s",
+        "KillMode": "control-group",
+        "SendSIGKILL": "no",
+        "UMask": "0077"
+      },
+      "reference": "PG16890 original14/seven configuration files, Main credit0",
+      "sourceLiteralsCorrespond": true,
+      "effectiveManagerSettingsVerified": false,
+      "currentTestReexecution": false,
+      "remaining": [
+        "Fresh effective merged Unit/default/NSS/dependency/timeout ownership and real release/credential/path conditions not proven by file literals.",
+        "Current source 451/native/parent endings remain separate HOLD."
+      ]
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-morning.target.template",
+      "sha256": "befb463e738a7cec5379b98cbb9ca68026fe49bb5ab7c593038bae9df8ebfacb",
+      "gitBlob": "618558ce5b062f3d3c635cd6f57dbd9e7af62aa1",
+      "declaredDirectives": {
+        "Unit.Description": [
+          "Schubert NK Morning parent completion"
+        ],
+        "Unit.Requires": [
+          "schubert-nk-morning-controller.service"
+        ],
+        "Unit.After": [
+          "schubert-nk-morning-controller.service"
+        ],
+        "Install.WantedBy": [
+          "multi-user.target"
+        ]
+      },
+      "fixedDesignExpectations": {},
+      "reference": "PG16890 original14/seven configuration files, Main credit0",
+      "sourceLiteralsCorrespond": true,
+      "effectiveManagerSettingsVerified": false,
+      "currentTestReexecution": false,
+      "remaining": [
+        "Fresh effective merged Unit/default/NSS/dependency/timeout ownership and real release/credential/path conditions not proven by file literals.",
+        "Current source 451/native/parent endings remain separate HOLD."
+      ]
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-web.service.template",
+      "sha256": "eb3980ad64852645ffe2a07ac2ac4f453aeb8ce9cedd1d9147e1a1d3d863acbc",
+      "gitBlob": "1f47b17a724881074b39083db44f06eca6870e96",
+      "declaredDirectives": {
+        "Unit.Description": [
+          "Schubert NK Web"
+        ],
+        "Unit.After": [
+          "schubert-nk-api.service artemis.service postgresql.service"
+        ],
+        "Unit.Requires": [
+          "schubert-nk-api.service artemis.service postgresql.service"
+        ],
+        "Unit.StartLimitIntervalSec": [
+          "600"
+        ],
+        "Unit.StartLimitBurst": [
+          "5"
+        ],
+        "Service.Type": [
+          "simple"
+        ],
+        "Service.User": [
+          "schubert-web"
+        ],
+        "Service.Group": [
+          "schubert-web"
+        ],
+        "Service.SupplementaryGroups": [
+          "schubert schubert-read"
+        ],
+        "Service.WorkingDirectory": [
+          "/opt/schubert-nk/current/web"
+        ],
+        "Service.EnvironmentFile": [
+          "/etc/schubert-nk/web.env"
+        ],
+        "Service.UnsetEnvironment": [
+          "JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH"
+        ],
+        "Service.LoadCredential": [
+          "db-web:/etc/schubert-nk/credentials/db-web",
+          "mq-web:/etc/schubert-nk/credentials/mq-web",
+          "web-session-aes-current:/etc/schubert-nk/credentials/web-session-aes-current",
+          "web-revoke-aes-current:/etc/schubert-nk/credentials/web-revoke-aes-current",
+          "web-log-aes-current:/etc/schubert-nk/credentials/web-log-aes-current"
+        ],
+        "Service.ExecStart": [
+          "!/usr/bin/java --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError -XX:MaxDirectMemorySize=128m -XX:MaxMetaspaceSize=192m -XX:ReservedCodeCacheSize=128m -Xms384m -Xmx768m -Xlog:gc*=info:stdout:time,uptime,level,tags -cp /opt/schubert-nk/current/operations/batch.jar:/opt/schubert-nk/current/operations/lib/* dev.codex.schubert.nk.batch.file.RootServiceLauncher WEB"
+        ],
+        "Service.CapabilityBoundingSet": [
+          "CAP_SETUID CAP_SETGID CAP_SETPCAP CAP_SYS_PTRACE CAP_DAC_READ_SEARCH"
+        ],
+        "Service.Restart": [
+          "on-failure"
+        ],
+        "Service.RestartSec": [
+          "5s"
+        ],
+        "Service.TimeoutStartSec": [
+          "120s"
+        ],
+        "Service.TimeoutStopSec": [
+          "30s"
+        ],
+        "Service.SendSIGKILL": [
+          "no"
+        ],
+        "Service.MemoryMax": [
+          "1536M"
+        ],
+        "Service.LimitNOFILE": [
+          "65536"
+        ],
+        "Service.RuntimeDirectory": [
+          "schubert-nk/web"
+        ],
+        "Service.RuntimeDirectoryMode": [
+          "0750"
+        ],
+        "Service.UMask": [
+          "0027"
+        ],
+        "Service.NoNewPrivileges": [
+          "true"
+        ],
+        "Service.PrivateTmp": [
+          "true"
+        ],
+        "Service.PrivateDevices": [
+          "true"
+        ],
+        "Service.ProtectSystem": [
+          "strict"
+        ],
+        "Service.ProtectHome": [
+          "true"
+        ],
+        "Service.ProtectKernelTunables": [
+          "true"
+        ],
+        "Service.ProtectKernelModules": [
+          "true"
+        ],
+        "Service.ProtectControlGroups": [
+          "true"
+        ],
+        "Service.ProtectKernelLogs": [
+          "true"
+        ],
+        "Service.ProtectClock": [
+          "true"
+        ],
+        "Service.ProtectHostname": [
+          "true"
+        ],
+        "Service.RestrictSUIDSGID": [
+          "true"
+        ],
+        "Service.LockPersonality": [
+          "true"
+        ],
+        "Service.RestrictNamespaces": [
+          "true"
+        ],
+        "Service.RestrictRealtime": [
+          "true"
+        ],
+        "Service.RestrictAddressFamilies": [
+          "AF_UNIX AF_INET AF_INET6"
+        ],
+        "Service.StandardOutput": [
+          "journal"
+        ],
+        "Service.StandardError": [
+          "journal"
+        ]
+      },
+      "fixedDesignExpectations": {
+        "Type": "simple",
+        "User": "schubert-web",
+        "Group": "schubert-web",
+        "Restart": "on-failure",
+        "TimeoutStartSec": "120s",
+        "TimeoutStopSec": "30s",
+        "SendSIGKILL": "no",
+        "UMask": "0027"
+      },
+      "reference": "PG16890 original14/seven configuration files, Main credit0",
+      "sourceLiteralsCorrespond": true,
+      "effectiveManagerSettingsVerified": false,
+      "currentTestReexecution": false,
+      "remaining": [
+        "Fresh effective merged Unit/default/NSS/dependency/timeout ownership and real release/credential/path conditions not proven by file literals.",
+        "Current source 451/native/parent endings remain separate HOLD."
+      ]
+    }
+  ],
+  "referenceProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16890-public-unit-files-original-fourteen-pt-v1/manifest.json",
+      "sha256": "fc790c6a89f4ff1148f8f320a2908b27c14c5540b1d195a846dddba6e2b7b52f",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16893-public-unit-files-original-fourteen-post-v2/manifest.json",
+      "sha256": "47876c06dd3d76cfbd4a759e6da4eb1470c959d83facdde342aead8eba968a34",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16894-public-unit-files-original-fourteen-independent-v1/manifest.json",
+      "sha256": "274360f7060afaad6ed68c791f01d7c2823304b9da4badc6d96fa3a4cd724545",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16714-supplementary-unit-template-original-five-post-v1/manifest.json",
+      "sha256": "da1df35232073867a24c00569710cb3644fc45c9ea5b0035bd465d42cbc6b67b",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG17500-inspector-deployment-eight-pt-v1/manifest.json",
+      "sha256": "7fec86110b87d453a89b3ec57348754664d40248567d2ec6dc5eb7ef40336c57",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG17504-inspector-deployment-eight-post-v2/manifest.json",
+      "sha256": "01d2c806530da2f46995fac71d77f0e492d8b4e90ec3433ae50beb36c5df0d6f",
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+    }
+  ],
+  "originalPublic14Cases": [
+    [
+      "dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest",
+      "artunit003ExactStopAndResourceLimits"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest",
+      "artunit001RealFixedDependencyIdentityAndInstance"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest",
+      "artunit004HardeningAndNoHostSecretMutation"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest",
+      "artunit002PrivateHashedCredentialIsFixedReadOnlyMount"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.CleanupServiceUnitTest",
+      "cunit001FixedRootChildAndRealExecutable"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.CleanupServiceUnitTest",
+      "cunit004ExpiryHasFixedGenuineEntryAndSameLimitedRootObservation"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.CleanupServiceUnitTest",
+      "cunit003FailureBlocksBrokerAndNoForcedKill"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.CleanupServiceUnitTest",
+      "cunit002PrivateBatchRoleAndNoSecretEnvironment"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.MorningServiceUnitTest",
+      "munit004ParentOnlyTargetCannotParallelStartChildren"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.MorningServiceUnitTest",
+      "munit001FixedRootActorAndRealJavaEntrypoint"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.MorningServiceUnitTest",
+      "munit003DependencyAndNoForcedKill"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.MorningServiceUnitTest",
+      "munit002NoUnscopedInputsOrSuccessOverride"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.RootServiceUnitTest",
+      "bothClosedRootEntriesPreserveOwnFiveCredentialsAndOrdinaryIdentity"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.RootServiceUnitTest",
+      "apiCannotQueueAParentOwnedExpiryByRequires"
+    ]
+  ],
+  "inspectorOriginalTestsReferenced": 8,
+  "currentInspectorTestSha256": "fa3319f31a47ae02fb1714bbe08e6dfdb5fb6821cff410663e6284cd5fb72d65",
+  "inspectorOracleFix": {
+    "bug": "BUG-2631",
+    "ykt": "YKT-2312",
+    "baseCount": 4,
+    "profiles": [
+      4,
+      5,
+      5,
+      6
+    ],
+    "onlyTwoLiteralChanges": true,
+    "afterFixTestStatus": "NOT_RUN_NOT_PASS"
+  },
+  "inspectorOwnedCleanupGap": {
+    "bug": "BUG-2632",
+    "ykt": "YKT-2313",
+    "status": "OPEN_SOURCE_CONFIRMED_PT_PENDING"
+  },
+  "criteria": {
+    "reuse": "EXACT_PUBLIC_RESOURCE_BYTE_REFERENCE_ONLY",
+    "contract": "STATIC_DECLARATIONS_CORRESPOND_DYNAMIC_ENDINGS_MISSING",
+    "scope": "FOURTEEN_CONFIGURATIONS_MATCH_OWNER_AND_PLAN",
+    "quality": "NOT_ACCEPTED_CURRENT_TEST_FIX_NOT_RUN_EFFECTIVE_RUNTIME_AND_451_PENDING"
+  },
+  "decision": "NOT_ACCEPTED",
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "productTestsExecuted": 0,
+  "newCoverageMeasurements": 0,
+  "actualUnitServiceVmDbOperations": 0,
+  "effortRate": null,
+  "toolSha256": "d4a85ca1f6cff8ec79239f9f880f89494406f3b764a2a06327fc3702a43945dd"
+}
