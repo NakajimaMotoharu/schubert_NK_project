@@ -1,0 +1,380 @@
+[
+  {
+    "id": "SYS-011",
+    "owner": "WBS-G13",
+    "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+    "line": 22,
+    "canonicalOriginMainSha256": "63a265f5395f847a680f36c1e13271c69061c5fb4079167411ce94d20f3f8e6e",
+    "expected": "要件定義、基本設計、詳細設計、実装、単体試験、結合試験、総合試験、リリースの順に工程を進める。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "SCP-001",
+    "owner": "WBS-G13",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 7,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "現行のログイン、メニュー、シナリオ検索・閲覧、音声、アニメ、音楽および必要な運用機能をNKへ移行する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "SCP-002",
+    "owner": "WBS-G13",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 8,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "Java 25、Spring系アプリ基盤、PostgreSQL、Apache ActiveMQ Artemisおよび起動・監視基盤を新規構築する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "SCP-003",
+    "owner": "WBS-G13",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 9,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "現行マスタからNK用DBおよびファイル配置を再構築する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "SCP-006",
+    "owner": "WBS-G13",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 12,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "質問要求・受付完了、通知情報一覧・明細、質問回答一覧検索・閲覧・削除、通知・質問・回答DB表および空回答stub処理を実装する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-002",
+    "owner": "WBS-P016-02",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 8,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "メニュー / 現行機能への入口と画面構成を極力維持する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-004",
+    "owner": "WBS-P008-06",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 10,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "シナリオ閲覧 / ゲーム、ルート、ファイル、本文の階層閲覧を維持する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-005",
+    "owner": "WBS-P009-04",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 11,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "音声再生・保存 / OGG等の再生・保存を維持する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-006",
+    "owner": "WBS-P016-10",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 12,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "アニメ視聴 / MP4一覧・視聴およびRange応答相当の操作性を維持する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-007",
+    "owner": "WBS-P016-13",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 13,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "音楽再生・保存 / 分類、一覧、再生および保存を維持する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-008",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 14,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "運用・監査 / NKで必要な操作・障害・認証・MQ処理を記録し、確認できるようにする。現行ログの移行は行わない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "QST-001",
+    "owner": "WBS-P016-18",
+    "source": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+    "line": 7,
+    "canonicalOriginMainSha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+    "expected": "Login利用者が質問要求画面から質問を入力し、送信できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "QST-002",
+    "owner": "WBS-P016-19",
+    "source": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+    "line": 8,
+    "canonicalOriginMainSha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+    "expected": "質問送信後に受付IDを表示する質問受付完了画面へ遷移すること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-021",
+    "owner": "WBS-P005-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 27,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "Login要求もMQ経由でAPI Javaへ送り、API JavaがPostgreSQLのaccountとroleを検証する。Web Javaは認証成功後のsessionを管理する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-022",
+    "owner": "WBS-P005-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 28,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "MQ message headerと業務電文headerのmessage ID/correlation IDを対応付け、不一致をerrorとする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-023",
+    "owner": "WBS-P005-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 29,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "業務電文はJMS `BytesMessage`で送受信し、bodyは定義済みUTF-8 byte列だけを格納する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-024",
+    "owner": "WBS-P005-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 30,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "数値およびbooleanを含む全項目を文字列表現としてencodeし、Java primitive値のbinary表現を格納しない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-025",
+    "owner": "WBS-P005-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 31,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "文字項目は右側をASCII space（`0x20`）、数値項目は左側をASCII `0`（`0x30`）で規定byte長まで充填する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-026",
+    "owner": "WBS-P005-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 32,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "未設定項目は、その項目に定義された充填文字で全byteを充填する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-027",
+    "owner": "WBS-P005-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 33,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "Boolean項目は文字`0`をfalse、文字`1`をtrueとして格納し、それ以外を変換errorとする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-028",
+    "owner": "WBS-P005-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 34,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "規定byte数を超過した場合、共通変換部品が変換例外を発生させ、切捨ておよび不完全な電文送信を行わない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-029",
+    "owner": "WBS-P005-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 35,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "CR、TABおよびNULを業務項目内で原則禁止する。業務電文内の改行は初期要件では定義せず、将来必要になった場合はLFだけを許容する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-030",
+    "owner": "WBS-P005-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 36,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "共通headerに固定data長、反復record長、record件数および電文総長を持たせ、受信時に実body長との整合を検証する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-031",
+    "owner": "WBS-P005-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 37,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "UTF-8の複数byte文字を項目境界で分割しない。encode後のbyte数が規定値以下であることを確認してから充填する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-032",
+    "owner": "WBS-P005-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 38,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "固定長変換例外または未対応layout versionを検知したJavaアプリは、業務処理を実行せず非正常終了する。Systemdは非正常終了を検知して当該アプリを再起動する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-033",
+    "owner": "WBS-P005-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 39,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "電文化する文字列はNFC正規化後にUTF-8 byte長を検査し、規定長まで充填する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-034",
+    "owner": "WBS-P005-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 40,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "数値項目は原則必須とする。非必須の数値相当項目は文字項目として定義し、右space充填、全spaceを未設定とする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-035",
+    "owner": "WBS-P005-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 41,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "電文日時は日本標準時の`yyyyMMddHHmmssSSS`形式とする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-036",
+    "owner": "WBS-P005-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 42,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "利用者起点のMQ要求は固定長の認証context IDを持ち、API JavaがDB上のsession有効性とroleを要求ごとに検証する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-001",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 29,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "Web、API、DBおよびMQのliveness/readinessを個別確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-002",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 30,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "HTTP request IDとMQ correlation IDを対応付け、WebからAPIまで追跡できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-003",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 31,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "構造化アプリログ、認証・操作監査ログ、MQ処理ログを記録する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-004",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 32,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "password、MQ/DB資格情報およびsession tokenをログへ出力しない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-005",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 33,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "Queue滞留数、処理率、再配送数、DLQ件数、Consumer接続状態を確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-006",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 34,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "JVM、heap、GC、DB connection pool、ディスク残量およびHTTP応答時間を確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-007",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 35,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "ログおよびmetricに保存期間と容量上限を設定し、SSD枯渇を防ぐこと。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-008",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 36,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "固定長変換・protocol errorによるJava process終了、systemd再起動回数、再起動抑止および原因message IDを管理者が確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-009",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 37,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "大容量結果file専用directoryのfile件数と総byte数を監視し、設計上限超過を検知できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-010",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 38,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "PG、PTおよびIT工程では`DEBUG`監視modeを使用し、Prometheus、Grafana、必要なexporterおよび詳細Actuator metricを有効化する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-011",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 39,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "ST工程以降は`STANDARD`監視modeを使用し、Prometheus、Grafana、exporterおよび詳細metric収集を無効化する。Liveness/readiness、systemd、journald、Artemis管理、DB統計およびdisk監視は維持する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-012",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 40,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "監視modeは環境変数または外部設定fileで切替可能とし、Prometheus/Grafana等のservice起動・停止もmodeと整合させる。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-013",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 41,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "`DEBUG`監視modeとJava application log levelの`DEBUG`は別設定とし、password、質問本文等の機微情報を詳細metric・logへ出力しない。",
+    "currentOracleVerified": false
+  }
+]

@@ -1,0 +1,848 @@
+[
+  {
+    "id": "SYS-011",
+    "owner": "WBS-G13",
+    "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+    "line": 22,
+    "canonicalOriginMainSha256": "63a265f5395f847a680f36c1e13271c69061c5fb4079167411ce94d20f3f8e6e",
+    "expected": "要件定義、基本設計、詳細設計、実装、単体試験、結合試験、総合試験、リリースの順に工程を進める。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "SCP-001",
+    "owner": "WBS-G13",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 7,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "現行のログイン、メニュー、シナリオ検索・閲覧、音声、アニメ、音楽および必要な運用機能をNKへ移行する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "SCP-002",
+    "owner": "WBS-G13",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 8,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "Java 25、Spring系アプリ基盤、PostgreSQL、Apache ActiveMQ Artemisおよび起動・監視基盤を新規構築する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "SCP-003",
+    "owner": "WBS-G13",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 9,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "現行マスタからNK用DBおよびファイル配置を再構築する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "SCP-006",
+    "owner": "WBS-G13",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 12,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "質問要求・受付完了、通知情報一覧・明細、質問回答一覧検索・閲覧・削除、通知・質問・回答DB表および空回答stub処理を実装する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "EXT-001",
+    "owner": "WBS-P012-02",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 28,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "将来、初期releaseの質問・通知・回答機能へ外部AI server連携を追加できるアーキテクチャとする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "EXT-002",
+    "owner": "WBS-P012-02",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 29,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "初期releaseの空回答stubを外部AI server連携へ交換し、既存の質問受付画面と電文を破壊的変更せず利用できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "EXT-003",
+    "owner": "WBS-P012-02",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 30,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "AI質問を受付順に1件ずつ処理し、外部AI serverの正常終了通知またはエラー通知を受信後に次の要求へ進めること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "EXT-004",
+    "owner": "WBS-P012-02",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 31,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "外部AI serverの実回答を、初期releaseから存在する質問、回答、通知および過去検索へ関連付けられること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "EXT-005",
+    "owner": "WBS-P012-02",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 32,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "AI実装追加時に既存の同期処理用電文へ破壊的変更を要求しない構成とする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-001",
+    "owner": "WBS-P007-01",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 7,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "ログイン・ログアウト / PostgreSQL保存の新規アカウント方式で再構築する。現行アカウントは移行しない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-003",
+    "owner": "WBS-P008-01",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 9,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "シナリオ検索 / 本文、ゲーム、話者、章、種別、音声有無の検索挙動を維持する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-004",
+    "owner": "WBS-P008-06",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 10,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "シナリオ閲覧 / ゲーム、ルート、ファイル、本文の階層閲覧を維持する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-008",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 14,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "運用・監査 / NKで必要な操作・障害・認証・MQ処理を記録し、確認できるようにする。現行ログの移行は行わない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-009",
+    "owner": "WBS-P010-02",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 15,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "ユーザー管理 / ADMINがユーザー一覧、追加、無効化・有効化、role変更、password resetおよびlock状態確認・解除を実行できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-010",
+    "owner": "WBS-P011-02",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 16,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "質問要求 / 利用者が質問を入力・送信し、受付完了を確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-011",
+    "owner": "WBS-P013-01",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 17,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "通知情報 / 利用者が通知情報一覧・明細から受付、回答およびエラーを確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-012",
+    "owner": "WBS-P014-01",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 18,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "質問回答検索 / 利用者が過去の質問・回答を一覧検索し、明細閲覧できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-013",
+    "owner": "WBS-P014-02",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 19,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "質問回答削除 / 利用者が質問回答一覧または明細から対象の質問・回答を論理削除できること。削除後は即時に検索・閲覧対象外とし、物理削除はDB backup成功後の朝batchで行う。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "AUT-001",
+    "owner": "WBS-P007-03",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 25,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "USER / 検索、シナリオ閲覧、音声、動画、音楽等の通常閲覧機能を利用できる。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "AUT-002",
+    "owner": "WBS-P007-03",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 26,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "ADMIN / USERの権限に加え、ログ閲覧およびFUN-009のユーザー管理を実行できる。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "AUT-003",
+    "owner": "WBS-P007-03",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 27,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "共通 / 画面表示だけでなく、API Java側でも要求ごとに権限を検証する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "AUT-004",
+    "owner": "WBS-P007-02",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 28,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "認証session / Login成功時に固定長電文へ格納可能な不透明な認証context IDを発行し、利用者起点の各MQ要求でAPI Javaが有効性とroleを再検証する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-101",
+    "owner": "WBS-P011-01",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 34,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "非同期要求に受付IDを採番し、利用者へ受付完了を返せること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-102",
+    "owner": "WBS-P012-03",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 35,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "非同期要求の内部状態を少なくとも受付、処理中、処理済み、エラー、取消済みで管理できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-103",
+    "owner": "WBS-P006-01",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 36,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "再送された同一要求を重複処理しないこと。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-104",
+    "owner": "WBS-P006-02",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 37,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "失敗時に再試行回数と最終失敗理由を確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-105",
+    "owner": "WBS-P012-01",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 38,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "アプリ再起動後も受付済み要求を継続または再開できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-106",
+    "owner": "WBS-P012-01",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 39,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "非同期要求に個別の優先度を設けず、受付順に処理する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-107",
+    "owner": "WBS-P012-01",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 40,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "非同期要求に業務timeoutを設けず、取消またはエラーにならない限り処理対象として保持する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-108",
+    "owner": "WBS-P013-01",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 41,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "利用者は通知情報一覧で受付通知、処理済通知、エラー通知を検索し、通知情報明細で状態、回答またはエラー内容を確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "NTF-001",
+    "owner": "WBS-P013-01",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 19,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "通知情報一覧機能を設け、Login利用者本人の通知を検索できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "NTF-002",
+    "owner": "WBS-P013-01",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 20,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "一覧で閲覧可能な通知区分は受付通知、処理済通知、エラー通知とする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "NTF-003",
+    "owner": "WBS-P012-03",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 21,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "受付通知は要求受付後に作成し、処理済み、エラーまたは取消済みに状態遷移するまで保持する。処理中も利用者向けには受付通知として表示する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "NTF-004",
+    "owner": "WBS-P012-03",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 22,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "処理完了時に受付通知を処理済通知へ遷移させ、明細から回答を確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "NTF-005",
+    "owner": "WBS-P012-03",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 23,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "処理失敗時にエラー通知へ遷移させ、明細からエラー内容を確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "NTF-008",
+    "owner": "WBS-P013-01",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 26,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "一覧の検索条件、並び順、page size、表示項目および明細項目はUI工程で定義する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "NTF-009",
+    "owner": "WBS-P012-03",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 27,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "受付通知とエラー通知を利用者が手動削除できないこと。未処理および処理中の受付通知は朝batchでも削除せず、状態確認のため保持する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "NTF-010",
+    "owner": "WBS-P013-02",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 28,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "受付中の通知明細では処理取消を実行できること。処理中、処理済みおよびエラーでは処理取消を許可しない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "NTF-012",
+    "owner": "WBS-P013-01",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 30,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "通知情報画面に手動削除操作を設けない。質問・回答の削除は質問回答一覧・明細から行う。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "ASY-001",
+    "owner": "WBS-P012-01",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 36,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "非同期要求に受付ID、要求利用者、受付日時、状態、message IDおよびcorrelation IDを記録する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "ASY-002",
+    "owner": "WBS-P012-01",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 37,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "要求の取出し順は受付順（FIFO）、Consumer並列数は1とし、priorityによる追越しを行わない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "ASY-003",
+    "owner": "WBS-P012-01",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 38,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "NK側に業務timeoutを設けず、処理待ち時間または処理時間だけを理由にエラーへ遷移させない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "ASY-004",
+    "owner": "WBS-P012-01",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 39,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "Process再起動やMQ再配送後も、冪等性を維持して処理を再開できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "ASY-005",
+    "owner": "WBS-P013-02",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 40,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "受付中だけ処理取消を許可する。API Javaが所有利用者と状態を検証し、重複取消を冪等に扱う。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "ASY-006",
+    "owner": "WBS-P013-02",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 41,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "処理開始後は取消操作を許可しない。処理済みでは回答通知の閲覧だけを許可し、通知は日次自動削除に委ねる。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "ASY-007",
+    "owner": "WBS-P012-02",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 42,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "外部AI server連携後は、処理中要求に対する正常終了通知またはエラー通知を受信するまで次の要求を処理しない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "ASY-008",
+    "owner": "WBS-P012-02",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 43,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "外部AI serverから応答がない場合のtimeout、skipおよび強制error遷移は初期要件に含めず、将来の変更管理対象とする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "ASY-009",
+    "owner": "WBS-P012-03",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 44,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "通知レコードと質問・回答データを分離し、通知削除が質問・回答を連鎖削除しないこと。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "QST-003",
+    "owner": "WBS-P012-02",
+    "source": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+    "line": 9,
+    "canonicalOriginMainSha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+    "expected": "初期releaseでは外部AI serverを呼び出さず、質問受付と内部非同期処理Queue登録の後に受付完了を返す。直列Consumerが空文字列の回答を作成し、速やかに処理済みとする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "QST-004",
+    "owner": "WBS-P012-03",
+    "source": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+    "line": 10,
+    "canonicalOriginMainSha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+    "expected": "空回答作成後に処理済通知を作成し、通知明細から質問と空回答を閲覧できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "QST-005",
+    "owner": "WBS-P014-01",
+    "source": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+    "line": 11,
+    "canonicalOriginMainSha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+    "expected": "質問回答一覧検索画面を設け、過去の質問・回答を検索・一覧表示できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "QST-006",
+    "owner": "WBS-P014-01",
+    "source": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+    "line": 12,
+    "canonicalOriginMainSha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+    "expected": "質問回答明細画面を設け、質問内容、回答内容、受付日時および回答日時を閲覧できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "QST-007",
+    "owner": "WBS-P014-02",
+    "source": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+    "line": 13,
+    "canonicalOriginMainSha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+    "expected": "質問回答一覧または明細から質問・回答を削除できること。削除時は削除済みflagと削除日時を設定して即時に検索・閲覧対象外とする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "QST-008",
+    "owner": "WBS-P007-03",
+    "source": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+    "line": 14,
+    "canonicalOriginMainSha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+    "expected": "USERは本人の質問・回答だけを検索・閲覧・削除できる。ADMINは全利用者の質問・回答を検索・閲覧・削除できる。API Java側でも所有者とroleを検証する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "QST-010",
+    "owner": "WBS-P012-03",
+    "source": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+    "line": 16,
+    "canonicalOriginMainSha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+    "expected": "論理削除済み質問に対する処理済通知が自動削除まで残る場合、通知明細では質問・回答本文を表示せず削除済みであることを表示する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "QST-101",
+    "owner": "WBS-P012-02",
+    "source": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+    "line": 24,
+    "canonicalOriginMainSha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+    "expected": "空回答stubを外部AI server送受信adapterへ交換でき、Web画面とWeb/API間MQ interfaceへ破壊的変更を要求しないこと。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "QST-102",
+    "owner": "WBS-P012-02",
+    "source": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+    "line": 25,
+    "canonicalOriginMainSha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+    "expected": "質問を受付順に1件ずつAI serverへ送信すること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "QST-103",
+    "owner": "WBS-P012-02",
+    "source": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+    "line": 26,
+    "canonicalOriginMainSha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+    "expected": "AI serverから正常終了通知を受信した場合は回答を質問へ関連付け、処理済通知を作成してから次の質問へ進むこと。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "QST-104",
+    "owner": "WBS-P012-02",
+    "source": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+    "line": 27,
+    "canonicalOriginMainSha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+    "expected": "AI serverからエラー通知を受信した場合はエラー通知を作成してから次の質問へ進むこと。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "QST-105",
+    "owner": "WBS-P012-02",
+    "source": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+    "line": 28,
+    "canonicalOriginMainSha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+    "expected": "AI serverから応答がない場合は処理中のまま待機し、次の質問へ進まない。Timeout等は将来の変更管理対象とする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-006",
+    "owner": "WBS-P006-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 12,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "メッセージに一意なmessage ID、correlation ID、message type、schema version、送信日時を持たせる。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-007",
+    "owner": "WBS-P006-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 13,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "業務メッセージは永続化し、API側は手動ACKを使用する。ACKは必要な業務処理の確定後に行う。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-008",
+    "owner": "WBS-P006-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 14,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "API側Consumerはat-least-once配送および再配送を前提として冪等に処理する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-009",
+    "owner": "WBS-P006-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 15,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "再配送回数を超えたメッセージはDead Letter Queueへ移送し、運用者が確認・再処理できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-010",
+    "owner": "WBS-P006-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 16,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "同期要求には有効期限を設け、期限切れ要求および遅延応答を識別・廃棄できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-042",
+    "owner": "WBS-P011-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 48,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "質問要求、受付完了、通知一覧・明細、受付取消、質問回答検索・閲覧・削除のWeb/API間通信をMQ固定長電文として定義する。通知の手動削除電文は設けない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-043",
+    "owner": "WBS-P011-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 49,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "初期releaseのAPI Javaは質問要求を保存して内部非同期処理Queueへ登録し、受付完了応答を返す。直列Consumerは外部AI serverへ送信せず空回答を作成し、処理済通知へ遷移させる。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-044",
+    "owner": "WBS-P011-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 50,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "同期画面処理1回のWeb/API間業務電文は、原則として要求1通と応答1通の計2通とする。JMS ACK、broker内部制御および障害時再配送は業務電文数に含めない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MQ-045",
+    "owner": "WBS-P011-02",
+    "source": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+    "line": 51,
+    "canonicalOriginMainSha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+    "expected": "非同期受付1回のWeb/API間業務電文は要求1通と受付応答1通の計2通とし、API内部の非同期処理Queueへ1通を登録する。完了push電文は設けず、利用者の通知検索は通常の要求・応答とする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "DAT-001",
+    "owner": "WBS-P004-01",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 7,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "DBMSはPostgreSQLとする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "DAT-002",
+    "owner": "WBS-P004-01",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 8,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "DBスキーマはバージョン付きMigrationで管理する。初回DDLだけに依存しない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "DAT-003",
+    "owner": "WBS-P004-01",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 9,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "アプリ実行用、DB Migration用、運用参照用の権限を分離する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "DAT-004",
+    "owner": "WBS-P004-01",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 10,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "シナリオ、音声リンク、メディアメタデータおよびNKで新規作成する業務データの整合性をDB制約で保護する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "DAT-005",
+    "owner": "WBS-P004-01",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 11,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "MQメッセージの重複処理防止に必要な処理済みIDを永続管理する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "DAT-006",
+    "owner": "WBS-P004-01",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 12,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "初期releaseから質問、回答、処理状態および失敗情報を関連付けて永続化する。初期回答は空文字列を許容する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "DAT-007",
+    "owner": "WBS-P004-01",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 13,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "通知に受付ID、所有利用者、通知区分、内部処理状態、受付・処理・エラー・取消日時、correlation IDおよび回答等の業務データへの参照を保持できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "DAT-008",
+    "owner": "WBS-P004-01",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 14,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "処理済みまたはエラーへの遷移から24時間以上経過した通知と、取消済み受付通知を朝batchで削除できるindexおよび状態遷移日時を保持する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "DAT-009",
+    "owner": "WBS-P004-01",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 15,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "通知レコードと質問・回答データを分離し、通知の削除が質問・回答を連鎖削除しない構造とする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "DAT-010",
+    "owner": "WBS-P004-01",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 16,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "質問・回答に削除済みflagおよび削除日時を保持する。論理削除後は通常検索から除外し、関連通知削除後の朝batchで物理削除できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "DAT-011",
+    "owner": "WBS-P004-01",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 17,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "USERの質問・回答検索は本人所有データへ制限し、ADMINは全利用者データを対象にできるindexと所有者情報を保持する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-001",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 29,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "Web、API、DBおよびMQのliveness/readinessを個別確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-002",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 30,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "HTTP request IDとMQ correlation IDを対応付け、WebからAPIまで追跡できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-003",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 31,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "構造化アプリログ、認証・操作監査ログ、MQ処理ログを記録する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-004",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 32,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "password、MQ/DB資格情報およびsession tokenをログへ出力しない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-005",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 33,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "Queue滞留数、処理率、再配送数、DLQ件数、Consumer接続状態を確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-006",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 34,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "JVM、heap、GC、DB connection pool、ディスク残量およびHTTP応答時間を確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-007",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 35,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "ログおよびmetricに保存期間と容量上限を設定し、SSD枯渇を防ぐこと。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-008",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 36,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "固定長変換・protocol errorによるJava process終了、systemd再起動回数、再起動抑止および原因message IDを管理者が確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-009",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 37,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "大容量結果file専用directoryのfile件数と総byte数を監視し、設計上限超過を検知できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-010",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 38,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "PG、PTおよびIT工程では`DEBUG`監視modeを使用し、Prometheus、Grafana、必要なexporterおよび詳細Actuator metricを有効化する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-011",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 39,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "ST工程以降は`STANDARD`監視modeを使用し、Prometheus、Grafana、exporterおよび詳細metric収集を無効化する。Liveness/readiness、systemd、journald、Artemis管理、DB統計およびdisk監視は維持する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-012",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 40,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "監視modeは環境変数または外部設定fileで切替可能とし、Prometheus/Grafana等のservice起動・停止もmodeと整合させる。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-013",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 41,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "`DEBUG`監視modeとJava application log levelの`DEBUG`は別設定とし、password、質問本文等の機微情報を詳細metric・logへ出力しない。",
+    "currentOracleVerified": false
+  }
+]

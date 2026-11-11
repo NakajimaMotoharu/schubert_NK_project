@@ -1,0 +1,533 @@
+[
+  {
+    "id": "SYS-011",
+    "owner": "WBS-G13",
+    "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+    "line": 22,
+    "canonicalOriginMainSha256": "63a265f5395f847a680f36c1e13271c69061c5fb4079167411ce94d20f3f8e6e",
+    "expected": "要件定義、基本設計、詳細設計、実装、単体試験、結合試験、総合試験、リリースの順に工程を進める。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "SCP-001",
+    "owner": "WBS-G13",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 7,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "現行のログイン、メニュー、シナリオ検索・閲覧、音声、アニメ、音楽および必要な運用機能をNKへ移行する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "SCP-002",
+    "owner": "WBS-G13",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 8,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "Java 25、Spring系アプリ基盤、PostgreSQL、Apache ActiveMQ Artemisおよび起動・監視基盤を新規構築する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "SCP-003",
+    "owner": "WBS-G13",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 9,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "現行マスタからNK用DBおよびファイル配置を再構築する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "SCP-006",
+    "owner": "WBS-G13",
+    "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+    "line": 12,
+    "canonicalOriginMainSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "expected": "質問要求・受付完了、通知情報一覧・明細、質問回答一覧検索・閲覧・削除、通知・質問・回答DB表および空回答stub処理を実装する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "FUN-008",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+    "line": 14,
+    "canonicalOriginMainSha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "expected": "運用・監査 / NKで必要な操作・障害・認証・MQ処理を記録し、確認できるようにする。現行ログの移行は行わない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "NTF-006",
+    "owner": "WBS-P017-07",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 24,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "処理済通知は取消および手動削除不可とし、利用者が回答通知の明細を閲覧できること。処理済み遷移から24時間以上経過後の朝batchで自動削除する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "NTF-007",
+    "owner": "WBS-P017-07",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 25,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "エラー通知はエラー発生から24時間以上経過したものを、次回朝batchで削除する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "NTF-011",
+    "owner": "WBS-P017-07",
+    "source": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+    "line": 29,
+    "canonicalOriginMainSha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+    "expected": "取消済みとなった受付通知は、次回朝batchで自動削除する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "QST-009",
+    "owner": "WBS-P017-07",
+    "source": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+    "line": 15,
+    "canonicalOriginMainSha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+    "expected": "論理削除済みの質問・回答は、DB backup成功後の朝batchで、関連通知が削除済みであることを確認して物理削除する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MSG-F07",
+    "owner": "WBS-P017-09",
+    "source": "documents/100_RD/130_インターフェース要件/132_共通固定長電文方式要件.md",
+    "line": 92,
+    "canonicalOriginMainSha256": "62adc306da4a1c59bc17e935eb0452efd54bb9705770186c9edaff2c53518047",
+    "expected": "Web Javaは取得完了ACKを送信せず、生成されたfileは取得成否にかかわらず次回朝batchまで保持する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MSG-F08",
+    "owner": "WBS-P017-09",
+    "source": "documents/100_RD/130_インターフェース要件/132_共通固定長電文方式要件.md",
+    "line": 93,
+    "canonicalOriginMainSha256": "62adc306da4a1c59bc17e935eb0452efd54bb9705770186c9edaff2c53518047",
+    "expected": "File名または論理file IDを一意にし、同名fileを上書きしない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MSG-F09",
+    "owner": "WBS-P017-09",
+    "source": "documents/100_RD/130_インターフェース要件/132_共通固定長電文方式要件.md",
+    "line": 94,
+    "canonicalOriginMainSha256": "62adc306da4a1c59bc17e935eb0452efd54bb9705770186c9edaff2c53518047",
+    "expected": "朝batchは業務アプリ起動前に、処理開始時点で専用受渡しdirectoryに存在する一時fileと確定fileを一括削除し、削除件数、削除byte数および失敗を記録する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "BAK-001",
+    "owner": "WBS-P017-03",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 50,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "マスタ素材はNKの定常バックアップ対象外とする。別途保存済みの正本から復元する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "BAK-002",
+    "owner": "WBS-P017-03",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 51,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "アカウント、設定、通知、質問および回答等の可変データをバックアップ対象とする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "BAK-003",
+    "owner": "WBS-P017-03",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 52,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "初期バックアップ先は本番サーバ内の分離したlocal directoryとする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "BAK-004",
+    "owner": "WBS-P017-03",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 53,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "将来NASを導入した際に、backup destinationの設定変更だけで移行できる構成とする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "BAK-005",
+    "owner": "WBS-P017-03",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 54,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "同一SSD内backupはSSD故障から保護できないことを運用上の制約として明記する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "BAK-006",
+    "owner": "WBS-P017-03",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 55,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "可変データbackupは毎朝の業務アプリ起動前に取得し、日次7世代を保持する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "BAK-007",
+    "owner": "WBS-P017-03",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 56,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "BackupのRPOおよびRTOはともに24時間を目標とする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "BAK-008",
+    "owner": "WBS-P017-03",
+    "source": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+    "line": 57,
+    "canonicalOriginMainSha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+    "expected": "朝batchによる通知、質問、回答等の業務データ物理削除は、その日のDB backupが正常終了した後にだけ実行する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-001",
+    "owner": "WBS-P018-03",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 7,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "PostgreSQL、Artemis、API Java、Web JavaおよびCaddy等の入口をsystemdで管理する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-002",
+    "owner": "WBS-P018-03",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 8,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "起動、停止、再起動、状態確認およびログ確認手順をスクリプト化する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-003",
+    "owner": "WBS-P018-03",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 9,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "毎日05:00頃のSSH経由運用処理に対応する。停止順、起動順、timeoutおよび失敗時動作を定義する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-004",
+    "owner": "WBS-P018-03",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 10,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "OS、JDK、PostgreSQL、Artemisおよびアプリのversionを記録し、再現可能にする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-005",
+    "owner": "WBS-P018-03",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 11,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "秘密情報をGitへ登録しない。環境別設定と秘密情報を分離する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-006",
+    "owner": "WBS-P018-03",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 12,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "緊急度評価に基づくsecurity updateの選定と臨時適用は別projectの所管とし、本projectではsecurity専用の適用機能を開発しない。OPS-008の日次一般updateに、構成済みrepositoryから配布されるsecurity修正が含まれることは許容する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-007",
+    "owner": "WBS-P018-03",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 13,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "別projectによるsecurity update後に再起動が必要な場合は、本projectの計画停止・起動手順と連携できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-008",
+    "owner": "WBS-P018-03",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 14,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "一般package updateは毎日05:00頃の計画停止中に`apt update`および`apt upgrade`で適用する。実行結果と変更packageを記録する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-009",
+    "owner": "WBS-P017-12",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 15,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "再起動後は、PostgreSQL起動、DB backup、業務データ削除、受渡しfile清掃、Artemis、API Java、Web Java、Web入口の順に依存関係を制御して起動する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-010",
+    "owner": "WBS-P017-12",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 16,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "Backupその他の固定時刻業務処理を朝batchへ集約し、個別処理ごとの開始・終了・処理件数・成否を記録する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-011",
+    "owner": "WBS-P017-12",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 17,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "朝batchおよび業務アプリ起動処理は二重起動を防止し、途中失敗後に安全に再実行できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-012",
+    "owner": "WBS-P017-12",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 18,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "Web/API Javaの非正常終了をsystemdで検知し、終了codeと原因を記録した上で自動再起動する。短時間の無制限再起動を防ぐrate limitも設定する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-013",
+    "owner": "WBS-P017-12",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 19,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "朝batchは業務アプリ起動前に大容量結果file専用directoryを一括清掃し、削除件数、削除byte数および失敗fileを記録する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-014",
+    "owner": "WBS-P017-12",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 20,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "朝batchは、処理済みまたはエラーへの遷移から24時間以上経過した通知を削除し、対象件数、削除件数および失敗を記録する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-015",
+    "owner": "WBS-P017-12",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 21,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "朝batchは取消済み受付通知を削除する。未処理および処理中の受付通知は削除しない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-016",
+    "owner": "WBS-P017-12",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 22,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "朝batchは、論理削除済みかつ関連通知が存在しない質問・回答を物理削除する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "OPS-017",
+    "owner": "WBS-P017-12",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 23,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "DB backupが失敗した場合はOPS-014～OPS-016の業務データ削除を実行せず、失敗を記録した上で受渡しfile清掃と業務アプリ起動を継続する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-001",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 29,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "Web、API、DBおよびMQのliveness/readinessを個別確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-002",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 30,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "HTTP request IDとMQ correlation IDを対応付け、WebからAPIまで追跡できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-003",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 31,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "構造化アプリログ、認証・操作監査ログ、MQ処理ログを記録する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-004",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 32,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "password、MQ/DB資格情報およびsession tokenをログへ出力しない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-005",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 33,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "Queue滞留数、処理率、再配送数、DLQ件数、Consumer接続状態を確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-006",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 34,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "JVM、heap、GC、DB connection pool、ディスク残量およびHTTP応答時間を確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-007",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 35,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "ログおよびmetricに保存期間と容量上限を設定し、SSD枯渇を防ぐこと。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-008",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 36,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "固定長変換・protocol errorによるJava process終了、systemd再起動回数、再起動抑止および原因message IDを管理者が確認できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-009",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 37,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "大容量結果file専用directoryのfile件数と総byte数を監視し、設計上限超過を検知できること。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-010",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 38,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "PG、PTおよびIT工程では`DEBUG`監視modeを使用し、Prometheus、Grafana、必要なexporterおよび詳細Actuator metricを有効化する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-011",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 39,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "ST工程以降は`STANDARD`監視modeを使用し、Prometheus、Grafana、exporterおよび詳細metric収集を無効化する。Liveness/readiness、systemd、journald、Artemis管理、DB統計およびdisk監視は維持する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-012",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 40,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "監視modeは環境変数または外部設定fileで切替可能とし、Prometheus/Grafana等のservice起動・停止もmodeと整合させる。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "MON-013",
+    "owner": "WBS-P018-09",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 41,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "`DEBUG`監視modeとJava application log levelの`DEBUG`は別設定とし、password、質問本文等の機微情報を詳細metric・logへ出力しない。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "BKO-001",
+    "owner": "WBS-P017-03",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 61,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "可変DBデータおよび環境設定を自動バックアップする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "BKO-002",
+    "owner": "WBS-P017-03",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 62,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "Backup先directoryを外部設定し、将来localからNASへ変更可能にする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "BKO-003",
+    "owner": "WBS-P017-03",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 63,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "Backup成功・失敗、保存日時、対象DB versionおよびfile sizeを記録する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "BKO-004",
+    "owner": "WBS-P017-03",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 64,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "可変データbackupを毎朝の業務アプリ起動前に1回取得する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "BKO-005",
+    "owner": "WBS-P017-03",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 65,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "Backupは日次7世代を保持し、RPO 24時間、RTO 24時間を目標とする。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "BKO-006",
+    "owner": "WBS-P017-03",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 66,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "保持世代を超えたbackupは、新規backupの正常性を確認した後に世代管理処理で削除する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "BKO-007",
+    "owner": "WBS-P017-03",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 67,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "Backup失敗時は失敗内容を記録して管理者が確認できるようにし、業務アプリの起動は継続する。",
+    "currentOracleVerified": false
+  },
+  {
+    "id": "BKO-008",
+    "owner": "WBS-P017-03",
+    "source": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "line": 68,
+    "canonicalOriginMainSha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+    "expected": "当日backupの正常終了を、通知、質問および回答の物理削除を開始する前提条件とする。",
+    "currentOracleVerified": false
+  }
+]

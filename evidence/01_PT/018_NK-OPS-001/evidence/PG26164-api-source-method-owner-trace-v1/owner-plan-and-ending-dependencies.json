@@ -1,0 +1,1485 @@
+[
+  {
+    "id": "WBS-P004-01",
+    "title": "Flyway DDL・index・constraint・role/grant",
+    "rd": "DAT-001～011、BAK/MIG-DAT、OPS-009/MQ-008",
+    "ui": "212/232/234～237/241～242、251、254",
+    "ss": [
+      "331"
+    ],
+    "requirementIds": [
+      "DAT-001",
+      "DAT-002",
+      "DAT-003",
+      "DAT-004",
+      "DAT-005",
+      "DAT-006",
+      "DAT-007",
+      "DAT-008",
+      "DAT-009",
+      "DAT-010",
+      "DAT-011"
+    ],
+    "specDirectory": "evidence/01_PT/004_NK-DAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/NotificationStateMigrationTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/QuestionDlqMigrationTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/DatabaseMigrationTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/resources/db/migration/V001__schemas_and_extension.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V002__account_session_and_master_tables.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V003__business_message_log_and_web_tables.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V004__indexes_and_initial_data.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V005__gin_functions_views_and_grants.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V006__cleanup_null_bounds_and_outbox_retention.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V007__username_comparison_key_expansion.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V008__auth_inbox_inspection_boundary.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V009__conditional_auth_inbox_deletion.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V010__full_inbox_scan_and_restricted_deletion.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V011__batch_outbox_only_cleanup.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V012__durable_inbox_inspection_progress.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V013__cleanup_backup_and_retention_guards.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V014__durable_log_cleanup_progress.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V015__question_query_inbox_deletion.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V016__question_mutation_inbox_references.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V017__backup_rerun_success_history.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V018__maintenance_run_references.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V019__parent_inbox_inspection_summary.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V020__atomic_cleanup_step_counts.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V021__expiry_batch_run_audit.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V022__staged_expiry_batch_run_audit.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V023__startup_schema_history_projection.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V024__notification_received_state.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V025__question_dlq_outbox_identity.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V026__web_receipt_references.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V027__pending_revocation_unknown_expiry.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V028__retained_success_progress_seals.sql",
+      "src/schubert-nk-api/src/main/resources/db/provisioning/001_roles.sql"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P004-02",
+    "title": "Inbox参照保護・summaryのSQL契約",
+    "rd": "DAT-001～011、BAK/MIG-DAT、OPS-009/MQ-008",
+    "ui": "212/232/234～237/241～242、251、254",
+    "ss": [
+      "332"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/004_NK-DAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepositoryTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxCleanup.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P004-04",
+    "title": "Inspector実行・暗号・専用credential",
+    "rd": "DAT-001～011、BAK/MIG-DAT、OPS-009/MQ-008",
+    "ui": "212/232/234～237/241～242、251、254",
+    "ss": [
+      "352"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/004_NK-DAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/InspectorApplicationTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutorTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnectionsTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorLaunchConfigurationTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorLauncherTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorProcessTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorSettingsTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspectorTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoffTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentFilesTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisherTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentReaderTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbeTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshotTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/InspectorApplication.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspector.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxResponseInspector.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionExecution.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionProgress.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionRun.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutor.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionStep.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnections.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorLaunchConfiguration.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorLauncher.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorProcess.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorSettings.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspector.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspector.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P004-05",
+    "title": "JDBC UTC・SQL exception・transaction境界",
+    "rd": "DAT-001～011、BAK/MIG-DAT、OPS-009/MQ-008",
+    "ui": "212/232/234～237/241～242、251、254",
+    "ss": [
+      "332"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/004_NK-DAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPoolTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/RequiredColumnTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/LogProjectionDatabaseException.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P005-03",
+    "title": "同期consumer寿命・ACK/rollback/例外",
+    "rd": "MQ-001～013/040～045",
+    "ui": "212～213、231",
+    "ss": [
+      "312"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/005_NK-MSG-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/ApiSyncRequestDispatcherTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContextsTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntimeTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadataTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumersTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestListenerTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriterTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P002-03",
+      "WBS-C04"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiSyncRequestDispatcher.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/package-info.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/package-info.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/CommittedFatalInboundException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundConsumerGroup.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestListener.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestProcessor.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/package-info.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/DlqSender.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriter.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/ReplySender.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/SqlConnectionProvider.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/package-info.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P005-04",
+    "title": "JMS broker context・所有・正常close",
+    "rd": "MQ-001～013/040～045",
+    "ui": "212～213、231",
+    "ss": [
+      "321"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/005_NK-MSG-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProviderTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P002-03",
+      "WBS-C04"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/TransactedJmsContextProvider.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P006-01",
+    "title": "Inbox原子的処理・同一結果replay",
+    "rd": "ASY-001～009、MQ-006～010",
+    "ui": "213、231～236、241～242",
+    "ss": [
+      "324"
+    ],
+    "requirementIds": [
+      "FUN-103"
+    ],
+    "specDirectory": "evidence/01_PT/006_NK-MSG-002",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/BoundInboxExecutionTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/FingerprintKeyRingTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinatorTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprintTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodecTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/ResultBoundResponseSnapshotCodecTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P005-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/BoundInboxExecution.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/Fingerprint.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/FingerprintKeyRing.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/FingerprintVerification.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxCompletion.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxCompletionConsistency.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxCompletionState.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxExecution.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxExecutionStatus.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxHandler.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxRequest.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxResultReference.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinator.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/MessageStageGuard.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprint.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResultBoundResponseSnapshotCodec.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/package-info.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P006-02",
+    "title": "Outbox永続化・配信・再送・DLQ",
+    "rd": "ASY-001～009、MQ-006～010",
+    "ui": "213、231～236、241～242",
+    "ss": [
+      "324"
+    ],
+    "requirementIds": [
+      "FUN-104",
+      "MQ-006",
+      "MQ-007",
+      "MQ-008",
+      "MQ-009",
+      "MQ-010"
+    ],
+    "specDirectory": "evidence/01_PT/006_NK-MSG-002",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcherTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadataTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcherTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P005-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxSendException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P006-05",
+    "title": "WebLog ingest・Inbox・監査永続化",
+    "rd": "ASY-001～009、MQ-006～010",
+    "ui": "213、231～236、241～242",
+    "ss": [
+      "351"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/006_NK-MSG-002",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/WebLogIngestServiceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumersTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P005-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogListener.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P007-01",
+    "title": "Login・5/10回制限・15分lock",
+    "rd": "FUN-001/009、AUT-001～004",
+    "ui": "225～226、234、241",
+    "ss": [
+      "314"
+    ],
+    "requirementIds": [
+      "FUN-001"
+    ],
+    "specDirectory": "evidence/01_PT/007_NK-AUT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationServiceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptRepositoryTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptStateTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordHasherTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordPolicyTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P006-01"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LockedLoginAttempt.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAccount.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptKind.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptState.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditReason.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditWriter.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordHasher.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordPolicy.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P007-02",
+    "title": "最大2session・3件目最古revoke",
+    "rd": "FUN-001/009、AUT-001～004",
+    "ui": "225～226、234、241",
+    "ss": [
+      "314"
+    ],
+    "requirementIds": [
+      "AUT-004"
+    ],
+    "specDirectory": "evidence/01_PT/007_NK-AUT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthSessionServiceTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P006-01"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionAuditWriter.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionRevocationReason.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P007-03",
+    "title": "API context・USER/ADMIN・owner再検証",
+    "rd": "FUN-001/009、AUT-001～004",
+    "ui": "225～226、234、241",
+    "ss": [
+      "314"
+    ],
+    "requirementIds": [
+      "AUT-001",
+      "AUT-002",
+      "AUT-003",
+      "QST-008"
+    ],
+    "specDirectory": "evidence/01_PT/007_NK-AUT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticatorTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifierTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthorizationServiceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/ContextHashTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P006-01"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCryptoException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextIdentity.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthorizationException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthorizationService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/EncryptedAuthContext.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/IssuedContext.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/RevokedContext.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/package-info.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P007-04",
+    "title": "Login Inbox・暗号replay・応答再構成",
+    "rd": "FUN-001/009、AUT-001～004",
+    "ui": "225～226、234、241",
+    "ss": [
+      "324"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/007_NK-AUT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationResponseMapperTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginInboxServiceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginReplayServiceTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P006-01"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationResponseMapper.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginInboxService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginReplayService.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P007-05",
+    "title": "Logout期限fence・replay・管理失効",
+    "rd": "FUN-001/009、AUT-001～004",
+    "ui": "225～226、234、241",
+    "ss": [
+      "314"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/007_NK-AUT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationServiceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LogoutInboxServiceTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P006-01"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutInboxService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutReplayService.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P008-01",
+    "title": "ゲーム・話者・検索・route・file照会SQL",
+    "rd": "FUN-003～005、FIL-001～009",
+    "ui": "223～224、234、237",
+    "ss": [
+      "332"
+    ],
+    "requirementIds": [
+      "FUN-003"
+    ],
+    "specDirectory": "evidence/01_PT/008_NK-SCN-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequestTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioRepositoryTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P007-03",
+      "WBS-P003-01"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioQuerySnapshot.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioQueryException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioRepository.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P008-02",
+    "title": "Scenario認証・snapshot/replay・監査",
+    "rd": "FUN-003～005、FIL-001～009",
+    "ui": "223～224、234、237",
+    "ss": [
+      "324"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/008_NK-SCN-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationServiceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioAuditWriterTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioReplayServiceTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P007-03",
+      "WBS-P003-01"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationAssembly.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioAuditWriter.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioReplayService.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P008-03",
+    "title": "48MB/10000件・容量予約・writer・原子公開",
+    "rd": "FUN-003～005、FIL-001～009",
+    "ui": "223～224、234、237",
+    "ss": [
+      "333"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/008_NK-SCN-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioFileWriterTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferContentVerifierTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferStoragePreparationTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferUsageScannerTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P007-03",
+      "WBS-P003-01"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/CapacityExceededException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/ScenarioFilePublisher.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/HeldProbeFileIo.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/HeldTransferFileIo.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ProbeFileIo.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioFileWriter.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferCapacity.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferContentVerifier.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferFileIo.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferStoragePreparation.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferUsageScanner.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P008-04",
+    "title": "保持root・走査・起動probe・ready",
+    "rd": "FUN-003～005、FIL-001～009",
+    "ui": "223～224、234、237",
+    "ss": [
+      "333"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/008_NK-SCN-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioReadyFileInspectorTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferRootInspectionTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferStartupProbeTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P007-03",
+      "WBS-P003-01"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioReadyFileInspector.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferRootInspection.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferStartupProbe.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P008-05",
+    "title": "結果再生成・保持属性・hash",
+    "rd": "FUN-003～005、FIL-001～009",
+    "ui": "223～224、234、237",
+    "ss": [
+      "333"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/008_NK-SCN-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioFileRegeneratorTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P007-03",
+      "WBS-P003-01"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioFileRegenerator.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/ScenarioFileInspector.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshot.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P008-06",
+    "title": "保持reader・record整合・本文delivery",
+    "rd": "FUN-003～005、FIL-001～009",
+    "ui": "223～224、234、237",
+    "ss": [
+      "333"
+    ],
+    "requirementIds": [
+      "FUN-004"
+    ],
+    "specDirectory": "evidence/01_PT/008_NK-SCN-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioDetailDeliveryTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStreamTest.java",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/storage/LargeResultReaderTest.java",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/storage/ScenarioRecordReaderTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P007-03",
+      "WBS-P003-01"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioDetailDelivery.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStream.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P009-01",
+    "title": "audio/animation/music metadata照会・descriptor",
+    "rd": "FUN-005～007、FIL/PER",
+    "ui": "223、235、237",
+    "ss": [
+      "332"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/009_NK-MED-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaApplicationServiceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaRequestTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/MediaRepositoryTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P003-02",
+      "WBS-P007-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/MediaRepository.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P009-02",
+    "title": "Media認証・snapshot/replay・全8電文",
+    "rd": "FUN-005～007、FIL/PER",
+    "ui": "223、235、237",
+    "ss": [
+      "324"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/009_NK-MED-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaReplayServiceTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P003-02",
+      "WBS-P007-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationAssembly.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaReplayService.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P009-03",
+    "title": "保持media inode・manifest・hash",
+    "rd": "FUN-005～007、FIL/PER",
+    "ui": "223、235、237",
+    "ss": [
+      "333"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/009_NK-MED-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/AssetChecksumManifestTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/AssetManifestLoaderTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/HeldMediaFileInspectorTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P003-02",
+      "WBS-P007-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/AssetChecksumManifest.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/AssetManifestLoader.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/HeldMediaFileInspector.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/MediaFileInspector.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/MediaIntegrityException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/MediaQueryException.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P010-01",
+    "title": "User一覧・明細のSQL・owner/admin境界",
+    "rd": "FUN-008～009、AUT-001～003/MON",
+    "ui": "225、235～236、242",
+    "ss": [
+      "332"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/010_NK-ADM-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationServiceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryReplayServiceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryRequestTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/UserQueryRepositoryTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P007-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserApplicationAssembly.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryReplayService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryRequest.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryRepository.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P010-02",
+    "title": "User作成・状態・role・password・unlock",
+    "rd": "FUN-008～009、AUT-001～003/MON",
+    "ui": "225、235～236、242",
+    "ss": [
+      "312"
+    ],
+    "requirementIds": [
+      "FUN-009"
+    ],
+    "specDirectory": "evidence/01_PT/010_NK-ADM-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationServiceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P007-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequest.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationResult.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P010-03",
+    "title": "User更新のtoken/replay・監査",
+    "rd": "FUN-008～009、AUT-001～003/MON",
+    "ui": "225、235～236、242",
+    "ss": [
+      "324"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/010_NK-ADM-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P007-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserAuditWriter.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P010-04",
+    "title": "Log検索・snapshot/replay・24h参照",
+    "rd": "FUN-008～009、AUT-001～003/MON",
+    "ui": "225、235～236、242",
+    "ss": [
+      "332"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/010_NK-ADM-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationServiceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogReplayServiceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/LogQueryRepositoryTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P007-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationAssembly.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogReplayService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/LogQueryException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/LogQueryRepository.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P010-05",
+    "title": "初期ADMINの通常作成・監査",
+    "rd": "FUN-008～009、AUT-001～003/MON",
+    "ui": "225、235～236、242",
+    "ss": [
+      "343"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/010_NK-ADM-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMainTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P007-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P011-01",
+    "title": "受付ID・入力byte境界",
+    "rd": "FUN-010/101～107、QST-001～004",
+    "ui": "224、236",
+    "ss": [
+      "323"
+    ],
+    "requirementIds": [
+      "FUN-101"
+    ],
+    "specDirectory": "evidence/01_PT/011_NK-QST-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequestTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P006-01",
+      "WBS-P007-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptId.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdGenerator.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequest.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P011-02",
+    "title": "質問受付SQL・Inbox・transaction・質問専用Outbox原子登録",
+    "rd": "FUN-010/101～107、QST-001～004",
+    "ui": "224、236",
+    "ss": [
+      "332"
+    ],
+    "requirementIds": [
+      "FUN-010",
+      "MQ-042",
+      "MQ-043",
+      "MQ-044",
+      "MQ-045"
+    ],
+    "specDirectory": "evidence/01_PT/011_NK-QST-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P006-01",
+      "WBS-P007-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P011-03",
+    "title": "operation token/HMAC・同一payload再送",
+    "rd": "FUN-010/101～107、QST-001～004",
+    "ui": "224、236",
+    "ss": [
+      "324"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/011_NK-QST-001",
+    "candidateTestFiles": [],
+    "endingDependencies": [
+      "WBS-P006-01",
+      "WBS-P007-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P012-01",
+    "title": "FIFO consumer 1・質問worker本体・ACK/rollback/再配送/DLQ",
+    "rd": "ASY-001～009、QST-101～105",
+    "ui": "213、231、236",
+    "ss": [
+      "321"
+    ],
+    "requirementIds": [
+      "FUN-105",
+      "FUN-106",
+      "FUN-107",
+      "ASY-001",
+      "ASY-002",
+      "ASY-003",
+      "ASY-004"
+    ],
+    "specDirectory": "evidence/01_PT/012_NK-ASY-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumersTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P011-02",
+      "WBS-P005-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P012-02",
+    "title": "初期empty AnswerProvider・回答状態",
+    "rd": "ASY-001～009、QST-101～105",
+    "ui": "213、231、236",
+    "ss": [
+      "312"
+    ],
+    "requirementIds": [
+      "EXT-001",
+      "EXT-002",
+      "EXT-003",
+      "EXT-004",
+      "EXT-005",
+      "ASY-007",
+      "ASY-008",
+      "QST-003",
+      "QST-101",
+      "QST-102",
+      "QST-103",
+      "QST-104",
+      "QST-105"
+    ],
+    "specDirectory": "evidence/01_PT/012_NK-ASY-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/StubAnswerProviderTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P011-02",
+      "WBS-P005-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/AnswerBusinessException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/AnswerProvider.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/AnswerResult.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/StubAnswerProvider.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P012-03",
+    "title": "回答保存・job/state・論理削除継承・通常通知整合",
+    "rd": "ASY-001～009、QST-101～105",
+    "ui": "213、231、236",
+    "ss": [
+      "332"
+    ],
+    "requirementIds": [
+      "FUN-102",
+      "NTF-003",
+      "NTF-004",
+      "NTF-005",
+      "NTF-009",
+      "ASY-009",
+      "QST-004",
+      "QST-010"
+    ],
+    "specDirectory": "evidence/01_PT/012_NK-ASY-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerServiceTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P011-02",
+      "WBS-P005-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerService.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P013-01",
+    "title": "本人notification一覧・明細・並び順",
+    "rd": "FUN-011、NTF-001～012",
+    "ui": "224、236、242",
+    "ss": [
+      "332"
+    ],
+    "requirementIds": [
+      "FUN-011",
+      "FUN-108",
+      "NTF-001",
+      "NTF-002",
+      "NTF-008",
+      "NTF-012"
+    ],
+    "specDirectory": "evidence/01_PT/013_NK-NTF-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequestTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P012-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequest.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryException.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P013-02",
+    "title": "RECEIVEDのみ取消・競合・token/replay",
+    "rd": "FUN-011、NTF-001～012",
+    "ui": "224、236、242",
+    "ss": [
+      "324"
+    ],
+    "requirementIds": [
+      "NTF-010",
+      "ASY-005",
+      "ASY-006"
+    ],
+    "specDirectory": "evidence/01_PT/013_NK-NTF-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayServiceTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P012-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationRequest.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P014-01",
+    "title": "Question/Answer一覧・明細・USER/ADMIN scope",
+    "rd": "FUN-012～013、QST-005～010、DAT-009～011",
+    "ui": "224、236、242",
+    "ss": [
+      "332"
+    ],
+    "requirementIds": [
+      "FUN-012",
+      "QST-005",
+      "QST-006"
+    ],
+    "specDirectory": "evidence/01_PT/014_NK-QRY-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationServiceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRepositoryTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/QuestionQueryScopeFrameTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P006-01",
+      "WBS-P007-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/QuestionQueryScopeFrame.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P014-02",
+    "title": "Question/Answer論理削除・race",
+    "rd": "FUN-012～013、QST-005～010、DAT-009～011",
+    "ui": "224、236、242",
+    "ss": [
+      "332"
+    ],
+    "requirementIds": [
+      "FUN-013",
+      "QST-007"
+    ],
+    "specDirectory": "evidence/01_PT/014_NK-QRY-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCommandServiceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationServiceTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P006-01",
+      "WBS-P007-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandService.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P014-03",
+    "title": "query/mutation replay・監査",
+    "rd": "FUN-012～013、QST-005～010、DAT-009～011",
+    "ui": "224、236、242",
+    "ss": [
+      "324"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/014_NK-QRY-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryReplayServiceTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P006-01",
+      "WBS-P007-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationAuditWriter.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryAuditWriter.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryReplayService.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P018-05",
+    "title": "API普通起動・DB/JMS/consumer assembly・ready",
+    "rd": "SYS/ENV/PER/AVL/OPS/MON",
+    "ui": "211～212、231、243、251～253",
+    "ss": [
+      "342"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/018_NK-OPS-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiConfigurationLoaderTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServerTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNativeCodecsTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetimeTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessMainTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStartupInputsTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadinessTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ApiApplicationPreparationTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiTerminalCaptureTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiCommittedFatalBindingTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/package-info.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/package-info.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/package-info.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/package-info.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/package-info.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiConfigurationLoader.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNativeCodecs.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessMain.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiStartupInputs.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudget.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiTerminalCapture.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/TransactionalRequestHandler.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/package-info.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/Role.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/package-info.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/package-info.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/package-info.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/package-info.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxMaintenanceException.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/package-info.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ApiApplicationPreparation.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/package-info.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P018-09",
+    "title": "Log/ACTION/REQUEST・metric/error catalog",
+    "rd": "SYS/ENV/PER/AVL/OPS/MON",
+    "ui": "211～212、231、243、251～253",
+    "ss": [
+      "351"
+    ],
+    "requirementIds": [
+      "FUN-008",
+      "MON-001",
+      "MON-002",
+      "MON-003",
+      "MON-004",
+      "MON-005",
+      "MON-006",
+      "MON-007",
+      "MON-008",
+      "MON-009",
+      "MON-010",
+      "MON-011",
+      "MON-012",
+      "MON-013"
+    ],
+    "specDirectory": "evidence/01_PT/018_NK-OPS-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogRequestTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/ApiLogPathApplicationRuntimeTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/LogPathSyncRequestProcessorTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/RequestLogDetailsTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginUsernameTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogRequest.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiLogPathApplicationRuntime.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LogPathSyncRequestProcessor.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/RequestLogDetails.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayload.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiDbPoolMetricBinding.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContext.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandler.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricScrape.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiObservationContext.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationPump.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSource.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiServiceMetricBinding.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricCollector.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservation.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricCollector.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorder.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationSupport.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorder.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorder.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricCollector.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorder.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorder.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorder.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorder.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollector.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorker.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/AsyncJobCountRepository.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginApplicationAssembly.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginResult.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutApplicationAssembly.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  }
+]

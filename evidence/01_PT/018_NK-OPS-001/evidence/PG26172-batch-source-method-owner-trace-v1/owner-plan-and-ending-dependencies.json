@@ -1,0 +1,863 @@
+[
+  {
+    "id": "WBS-P004-02",
+    "title": "Inbox参照保護・summaryのSQL契約",
+    "rd": "DAT-001～011、BAK/MIG-DAT、OPS-009/MQ-008",
+    "ui": "212/232/234～237/241～242、251、254",
+    "ss": [
+      "332"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/004_NK-DAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepositoryTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P004-03",
+    "title": "参照原本DAO・保持・退役",
+    "rd": "DAT-001～011、BAK/MIG-DAT、OPS-009/MQ-008",
+    "ui": "212/232/234～237/241～242、251、254",
+    "ss": [
+      "332"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/004_NK-DAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/DurableRecordFilesTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFilesTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/DurableRecordFiles.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRecords.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceRetirement.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P004-04",
+    "title": "Inspector実行・暗号・専用credential",
+    "rd": "DAT-001～011、BAK/MIG-DAT、OPS-009/MQ-008",
+    "ui": "212/232/234～237/241～242、251、254",
+    "ss": [
+      "352"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/004_NK-DAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/InspectorApplicationTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutorTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnectionsTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorLaunchConfigurationTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorLauncherTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorProcessTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorSettingsTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspectorTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoffTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentFilesTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisherTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentReaderTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbeTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshotTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttempt.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P017-01",
+    "title": "run lock・DB一意性・原本・owner",
+    "rd": "OPS-009～017、DAT-009、BAK/BKO/AVL",
+    "ui": "251～252",
+    "ss": [
+      "341"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/017_NK-BAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningControlScopeTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningRootScopeTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSessionTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P004-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningControlScope.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningRootScope.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P017-02",
+    "title": "run/cutoff/new/resume/再実行原本",
+    "rd": "OPS-009～017、DAT-009、BAK/BKO/AVL",
+    "ui": "251～252",
+    "ss": [
+      "341"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/017_NK-BAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningNewRunAdmissionTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningResumeAdmissionTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunRepositoryTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P004-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningNewRunAdmission.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningResumeAdmission.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepResult.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceRunState.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P017-03",
+    "title": "DB Backup実artifact・検証・専用role",
+    "rd": "OPS-009～017、DAT-009、BAK/BKO/AVL",
+    "ui": "251～252",
+    "ss": [
+      "341"
+    ],
+    "requirementIds": [
+      "BAK-001",
+      "BAK-002",
+      "BAK-003",
+      "BAK-004",
+      "BAK-005",
+      "BAK-006",
+      "BAK-007",
+      "BAK-008",
+      "BKO-001",
+      "BKO-002",
+      "BKO-003",
+      "BKO-004",
+      "BKO-005",
+      "BKO-006",
+      "BKO-007",
+      "BKO-008"
+    ],
+    "specDirectory": "evidence/01_PT/017_NK-BAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupDatabaseCopyTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupDatabaseWorkerTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupWorkerRequestFilesTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcessTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequestTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P004-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupFileDigest.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupDatabaseCopy.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupDatabaseWorker.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequest.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P017-04",
+    "title": "Config Backup実artifact・秘密非混入",
+    "rd": "OPS-009～017、DAT-009、BAK/BKO/AVL",
+    "ui": "251～252",
+    "ss": [
+      "341"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/017_NK-BAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupBundleCompletionTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupBundlePublisherTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P004-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupBundleCompletion.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupBundlePublisher.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P017-05",
+    "title": "manifest/hash・commit・7世代prune",
+    "rd": "OPS-009～017、DAT-009、BAK/BKO/AVL",
+    "ui": "251～252",
+    "ss": [
+      "341"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/017_NK-BAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupCommitServiceTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifierTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestPublisherTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestReaderTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningBackupRetentionTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P004-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupManifest.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupVersions.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestCodec.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestPublisher.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestReader.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupRetention.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P017-06",
+    "title": "Backup成功/失敗/skip・原本再用",
+    "rd": "OPS-009～017、DAT-009、BAK/BKO/AVL",
+    "ui": "251～252",
+    "ss": [
+      "341"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/017_NK-BAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupProfileTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFilesTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CleanupBackupAdmissionTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningBackupCompletionTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningBackupPreparationTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningBackupRequestPublicationTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningBackupStageTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGateTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClientTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupUnitTerminationTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/CleanupFailedBackupRequestTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycleTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshotTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupStepRepositoryTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P004-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupProfile.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupCompletion.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupPreparation.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupRequestPublication.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupReuse.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupStage.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitTermination.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/CleanupFailedBackupRequest.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P017-07",
+    "title": "business/technical削除・FK・保持・計数",
+    "rd": "OPS-009～017、DAT-009、BAK/BKO/AVL",
+    "ui": "251～252",
+    "ss": [
+      "332"
+    ],
+    "requirementIds": [
+      "NTF-006",
+      "NTF-007",
+      "NTF-011",
+      "QST-009"
+    ],
+    "specDirectory": "evidence/01_PT/017_NK-BAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupServiceTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupServiceTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFilesTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/CleanupWorkerRequestTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSessionTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupRepositoryTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepositoryTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepositoryTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P004-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/CleanupStopReason.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/CleanupStoppedException.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupSummary.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCleanupExecution.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/CleanupProfile.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/CleanupWorkerRequest.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupChunk.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupKind.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupReason.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepChunk.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/LogCleanupProgress.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P017-08",
+    "title": "Cleanup実process・request・終了後条件",
+    "rd": "OPS-009～017、DAT-009、BAK/BKO/AVL",
+    "ui": "251～252",
+    "ss": [
+      "341"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/017_NK-BAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CleanupExpiryExecutionTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CleanupMaintenanceWorkTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CleanupNativePreflightTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CleanupPreflightTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CleanupProcessMainTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P004-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupExpiryExecution.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupMaintenanceWork.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupNativeExecution.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupNativePreflight.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupPreflight.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupProcessMain.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P017-09",
+    "title": "Transfer結果削除・symlink/root安全",
+    "rd": "OPS-009～017、DAT-009、BAK/BKO/AVL",
+    "ui": "251～252",
+    "ss": [
+      "333"
+    ],
+    "requirementIds": [
+      "MSG-F07",
+      "MSG-F08",
+      "MSG-F09"
+    ],
+    "specDirectory": "evidence/01_PT/017_NK-BAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/TransferCleanupTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P004-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/TransferCleanup.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P017-10",
+    "title": "Artemis開始・ACL・圧力・readiness",
+    "rd": "OPS-009～017、DAT-009、BAK/BKO/AVL",
+    "ui": "251～252",
+    "ss": [
+      "342"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/017_NK-BAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClientTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClientTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClientTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClientTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClientTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClientTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservationTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BrokerJournalEvidenceTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycleTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningPreviousBrokerTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P004-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBrokerExecution.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessException.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessException.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningPreviousBroker.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P017-11",
+    "title": "Expiry削除・7日・監査",
+    "rd": "OPS-009～017、DAT-009、BAK/BKO/AVL",
+    "ui": "251～252",
+    "ss": [
+      "341"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/017_NK-BAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClientTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepositoryTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P004-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningExpiryExecution.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeException.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P017-12",
+    "title": "完成判定・原本lookup・intent退役",
+    "rd": "OPS-009～017、DAT-009、BAK/BKO/AVL",
+    "ui": "251～252",
+    "ss": [
+      "341"
+    ],
+    "requirementIds": [
+      "OPS-009",
+      "OPS-010",
+      "OPS-011",
+      "OPS-012",
+      "OPS-013",
+      "OPS-014",
+      "OPS-015",
+      "OPS-016",
+      "OPS-017"
+    ],
+    "specDirectory": "evidence/01_PT/017_NK-BAT-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuardTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceFileLockTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningCompletionChecksTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningCompletionEvidenceTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningPrestartEvidenceTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningProcessMainTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwnerTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningStartupRootsTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootFailedStartRecoveryTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootReleaseApprovalReaderTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-P004-01",
+      "WBS-P004-03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceFileLock.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCompletionChecks.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCompletionEvidence.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPrestartEvidence.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningProcessMain.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupRoots.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootFailedStartRecovery.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootReleaseApprovalReader.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootStartupPending.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnit.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/SuccessRunLookup.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P018-01",
+    "title": "設定・credential loader・redaction境界",
+    "rd": "SYS/ENV/PER/AVL/OPS/MON",
+    "ui": "211～212、231、243、251～253",
+    "ss": [
+      "352"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/018_NK-OPS-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CaddyPublicConfigurationTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootBatchCredentialReaderTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootServiceCredentialSourceTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolverTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/ServiceCredentialReaderTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/ServiceCredentialSetTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorAesCredentialTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccessTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredentialTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CaddyPublicConfiguration.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootBatchCredentialReader.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceCredentialSource.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P018-03",
+    "title": "canonical epoch/permit/owner/launch・保持FD",
+    "rd": "SYS/ENV/PER/AVL/OPS/MON",
+    "ui": "211～212、231、243、251～253",
+    "ss": [
+      "342"
+    ],
+    "requirementIds": [
+      "OPS-001",
+      "OPS-002",
+      "OPS-003",
+      "OPS-004",
+      "OPS-005",
+      "OPS-006",
+      "OPS-007",
+      "OPS-008"
+    ],
+    "specDirectory": "evidence/01_PT/018_NK-OPS-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningCurrentInvalidationTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningGateEvidenceTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootCurrentPermitPreflightTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootServiceAdmissionScopeTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootServiceExecutableAdmissionTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootServiceLauncherTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFileTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupLaunchFilesTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupLaunchRecordTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupPermitFilesTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupPermitRecordsTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootReleaseAdmissionTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootStartupContextTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ChildStartupContextTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrameTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ServiceStartupAdmissionTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/StartupProofFrameTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCurrentInvalidation.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningGateEvidence.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPermitPublication.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootCurrentPermitPreflight.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceAdmissionScope.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceExecutableAdmission.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceFacts.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceLauncher.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupLaunchFiles.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupLaunchRecord.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupPermitFiles.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupPermitRecords.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/RootReleaseAdmission.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/RootStartupContext.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P018-04",
+    "title": "同PID権限移行/exec・socket/info同世代",
+    "rd": "SYS/ENV/PER/AVL/OPS/MON",
+    "ui": "211～212、231、243、251～253",
+    "ss": [
+      "342"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/018_NK-OPS-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGateTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshotTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClientTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicyTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitTerminationTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningStopPassTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningUnitTerminalsTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSourceTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/ServiceProcessResourcesTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedServiceExecArgumentsTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedServiceIdentityTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGate.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ApplicationUnit.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitTermination.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningStopPass.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningUnitTerminals.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateException.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateFailure.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/UnitStateParser.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P018-07",
+    "title": "Caddy同parent deadline・TLS/ready",
+    "rd": "SYS/ENV/PER/AVL/OPS/MON",
+    "ui": "211～212、231、243、251～253",
+    "ss": [
+      "342"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/018_NK-OPS-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadinessTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningParentBudgetTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadinessTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningParentBudget.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P018-09",
+    "title": "Log/ACTION/REQUEST・metric/error catalog",
+    "rd": "SYS/ENV/PER/AVL/OPS/MON",
+    "ui": "211～212、231、243、251～253",
+    "ss": [
+      "351"
+    ],
+    "requirementIds": [
+      "FUN-008",
+      "MON-001",
+      "MON-002",
+      "MON-003",
+      "MON-004",
+      "MON-005",
+      "MON-006",
+      "MON-007",
+      "MON-008",
+      "MON-009",
+      "MON-010",
+      "MON-011",
+      "MON-012",
+      "MON-013"
+    ],
+    "specDirectory": "evidence/01_PT/018_NK-OPS-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogRequestTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/ApiLogPathApplicationRuntimeTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/LogPathSyncRequestProcessorTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/RequestLogDetailsTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginUsernameTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AsyncQueueMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchGcMetricRegistration.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchJvmMetrics.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricContract.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricLabelPolicy.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricRecorder.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricText.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchStandardMetricSource.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchStandardMetrics.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchSystemMetrics.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ExpiryBacklogMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservation.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/HealthUsageRatio.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/IntegrityFailureMetricRecorder.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthObservation.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MetricContract.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ProcessRestartMetricRecorder.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/WebLogBacklogMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  }
+]
