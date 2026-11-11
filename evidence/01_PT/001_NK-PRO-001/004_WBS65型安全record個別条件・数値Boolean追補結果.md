@@ -1,0 +1,15 @@
+# 型安全record 個別条件・数値/Boolean追補結果
+
+2026-11-12。source2a5cdab45c6ef5e32994264cf1e93f5d70216040 / Main7aed8eace7c844c2f79f2e39db766faf914890d5 / dev-foundation / PG26240-PROTOCOL-NAMED59-FLAG6。
+
+P00103のhost record-model契約・scope・適用品質の三条件を、同一source/runへ対応した。SS323 origin/mainの64行と独立TSVのdata/record class名は全一致、69型296component/79optional/空四型を保持。全59 primitive数値項目の0/max/-1/overflow236観点と、全六Boolean項目のfalse/true12観点は同じwhole helper内で成功した。既存assert/literalは追加block/constant/importのinverseで完全一致、他25Test source/五TSVは不変。新JUnit定義0。二つの追補は旧field一般値だけでは証明不足だった方向性・境界を補い、coverage数値を増やす目的ではない。
+
+追加248観点のinput/独立expected/Test IDはPG26245 independent248-boundary-observations.json。成功時のper-vector raw値は記録せず、固定helperの全iteration/assertと親JUnit case成功を証拠とすることを明記した。疑似の実測値を埋めない。SSの業務handler/実session/DB/順序/実nativeの受入をrecord-modelから推定しない。
+
+compile0、PMD raw18（旧17＋一呼出し局所expected map一件）を全件文脈照合しapplicable0、Checkstyle0。BUG2646のmagic literal一件は事前起票→意味ある二正常vector定数化→static0→通常PTで確認。抑制/期待値変更なし。compile v1後のmetadata参照改訂とv2後のstyle是正は原記録を保全し、最終compileだけを現sourceへ使った。PG26228/source93のnumeric236成功を保全し、Boolean追加後は別fresh26240で全124を必要再資格した。旧exec合算/成功確認目的の再演なし。
+
+全25fixture/124件F/E/S/aborted0、Main正CRC163・held四初期化0。Module LINE3478/METHOD742/CLASS159/BRANCH1014全miss0。P00103の全75source/75物理（code73/interface二）は同runからLINE1450/METHOD374/CLASS73/BRANCH38全miss0、COMPLEXITY393/0。自然B0はN-Aのまま、owner集約の正の38branchと区別する。標準filter445は全名/理由を保存し、runtime測定に換算しない。旧policy/手動除外0を維持する。
+
+依存/shared classは当taskで空であることを確認した。P00103は旧source7fffの既受入17内の一つのため、今回を新規leaf受入に加算しない。三条件の現host限定証明を481/486補足へ保存し、元snapshot・formal1964PT/53scope・全scope451・native/CHR等の全体gateは更新しない。工数率null。次の固定長field契約へ依存順で継続する。
+
+証跡はmodule evidence/01_PT/002_NK-PRO-002/evidence/PG26242-protocol-named59-flag6-independent-v1/manifest.json SHA256 62e8f43d53371f2170b713e2cfb1a377d3b1d4e2237bae13aac82d9d4b3d9488、owner evidence/01_PT/001_NK-PRO-001/evidence/PG26244-p00103-final-same-run-scoped-coverage-v1/manifest.json SHA256 535162faa5d290af08ed7d97a5cf0462f3e3f2b9597b58178f5cd58dafe873b8、criteria evidence/01_PT/001_NK-PRO-001/evidence/PG26245-p00103-current-host-criteria-v1/manifest.json SHA256 3bd236c0b91d33dfc096cc6da0227042bcb5d57fb2eb20b177f0b300f2db5e0f。Command、実行日時、環境、XML、全counter、input hash、終了と再試験はこれらmanifestの参照から追跡する。IT/ST完了は宣言しない。

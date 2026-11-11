@@ -1,0 +1,834 @@
+[
+  {
+    "layout": "LGNREQ01",
+    "data": "LoginRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 38,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Context space、password redacted、UI 234 §3、FUN-001/MQ-021",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "LGNRSP01",
+    "data": "LoginResponseData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 39,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Code別presence、retry 0～900、header context space",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "LOGREQ01",
+    "data": "LogoutRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 40,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Header context必須、UI 234 §4、AUT-004",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "LOGRSP01",
+    "data": "LogoutResponseData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 41,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "0000/0200で日時必須",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "GAMREQ01",
+    "data": "GameListRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 42,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Context必須",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "GAMRSP01",
+    "data": "GameListResponseData",
+    "record": "GameRecord",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 43,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Count一致、code/title/order、UI 234 §5",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "SPKREQ01",
+    "data": "SpeakerListRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 44,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Game optional allowlist",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "SPKRSP01",
+    "data": "SpeakerListResponseData",
+    "record": "SpeakerRecord",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 45,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Count desc/name asc、UI 234 §6",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "SRCREQ01",
+    "data": "ScenarioSearchRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 46,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Page=1..999999、size=100、全条件allowlist",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "SRCRSP01",
+    "data": "PagedResponseData",
+    "record": "ScenarioSearchRecord",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 47,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "display_order、代表voice最小order、UI 234 §7/FUN-003",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "RTEREQ01",
+    "data": "RouteListRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 48,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Game必須",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "RTERSP01",
+    "data": "RouteListResponseData",
+    "record": "RouteRecord",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 49,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Prefix asc、固定route map、UI 234 §8",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "SCFREQ01",
+    "data": "ScenarioFileListRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 50,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Game/prefix必須",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "SCFRSP01",
+    "data": "ScenarioFileListResponseData",
+    "record": "ScenarioFileRecord",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 51,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Display title fallback、display_order、UI 234 §9",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "SCNREQ01",
+    "data": "ScenarioDetailRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 52,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "ID 1以上",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "SCNRSP01",
+    "data": "ScenarioDetailResponseData",
+    "record": "ScenarioEntryRecord",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 53,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "I/F排他、file mode最大10,000/48MB、UI 234 §10/FUN-004～005",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "AUDREQ01",
+    "data": "AudioDescriptorRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 59,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "disposition I/A",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "AUDRSP01",
+    "data": "MediaDescriptorData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 60,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Root/size/hash、`.ogg`=`audio/ogg`、UI 235 §2～3/FUN-005、SSC-004",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "ANMREQ01",
+    "data": "AnimationMenuRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 61,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Context必須",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "ANMRSP01",
+    "data": "AnimationMenuResponseData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 62,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "15/4/1/20 current baseline、UI 235 §4",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "ANLREQ01",
+    "data": "AnimationListRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 63,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "MAIN/OVA",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "ANLRSP01",
+    "data": "AnimationListResponseData",
+    "record": "AnimationRecord",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 64,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Parent/category整合、UI 235 §5",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "VIDREQ01",
+    "data": "VideoDescriptorRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 65,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "223の20 ID allowlist/DB存在",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "VIDRSP01",
+    "data": "VideoDescriptorResponseData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 66,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "MEDIA1024 `.mp4`=`video/mp4`＋title/category/display path、UI 235 §6/FUN-006、SSC-004",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "MCTREQ01",
+    "data": "MusicCategoryRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 67,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Context必須",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "MCTRSP01",
+    "data": "MusicCategoryResponseData",
+    "record": "MusicCategoryRecord",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 68,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "曲/BGM/名称順、UI 235 §7",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "MCSREQ01",
+    "data": "MusicSectionRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 69,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "返却master値と一致",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "MCSRSP01",
+    "data": "MusicSectionResponseData",
+    "record": "MusicSectionRecord",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 70,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Section順、UI 235 §8",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "MTRREQ01",
+    "data": "MusicTrackRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 71,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "DB存在・組合せ",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "MTRRSP01",
+    "data": "MusicTrackResponseData",
+    "record": "MusicTrackRecord",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 72,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Pair role M/I/N、順序、UI 235 §9/FUN-007",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "MEDREQ01",
+    "data": "MusicDescriptorRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 73,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "I/A",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "MEDRSP01",
+    "data": "MediaDescriptorData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 74,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "`.m4a/.mp3/.ogg/.wav/.flac`と`audio/mp4,mpeg,ogg,wav,flac`の完全一致、UI 235 §10、SSC-004",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "LGSREQ01",
+    "data": "LogSearchRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 75,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "ADMIN、31日、size100、UI 235 §11/FUN-008",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "LGSRSP01",
+    "data": "PagedResponseData",
+    "record": "LogRecord",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 76,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "日時/id desc、秘密値なし",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "USRREQ01",
+    "data": "UserSearchRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 82,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "ADMIN、page size50",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "USRRSP01",
+    "data": "PagedResponseData",
+    "record": "UserRecord",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 83,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "username asc、state導出、UI 236 §3",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "UCRREQ01",
+    "data": "UserCreateRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 84,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Password redacted/HMAC、token、ADMIN、UI 236 §4",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "UCRRSP01",
+    "data": "UserMutationResponseData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 85,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "0000/0200同profile",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "UDTREQ01",
+    "data": "UserDetailRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 86,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "ADMIN",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "UDTRSP01",
+    "data": "UserDetailResponseData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 87,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Nullable日時、SYSTEM fallback、UI 236 §5",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "USTREQ01",
+    "data": "UserStatusRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 88,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "target/version/token、自己/ADMIN保護",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "USTRSP01",
+    "data": "UserMutationResponseData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 89,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "0105はerror filler",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "URLREQ01",
+    "data": "UserRoleRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 90,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "role enum、active ADMIN lock",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "URLRSP01",
+    "data": "UserMutationResponseData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 91,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "0000/0200",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "UPWREQ01",
+    "data": "PasswordResetRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 92,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Password非保存、policy/token/version",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "UPWRSP01",
+    "data": "UserMutationResponseData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 93,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "0000/0200",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "ULKREQ01",
+    "data": "UserUnlockRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 94,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "token/version、非lockは0200",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "ULKRSP01",
+    "data": "UserMutationResponseData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 95,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "0000/0200",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "QSBREQ01",
+    "data": "QuestionSubmitRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 101,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "A区分、本文1～4096、token、UI 236 §7/QST-001～003",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "QSBRSP01",
+    "data": "QuestionSubmitResponseData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 102,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Outbox SENT後、0000/0200",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "NTSREQ01",
+    "data": "NotificationSearchRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 103,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "本人、366日、size50",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "NTSRSP01",
+    "data": "PagedResponseData",
+    "record": "NotificationRecord",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 104,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "State/type整合、deleted summary、UI 236 §8",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "NTDREQ01",
+    "data": "NotificationDetailRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 105,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Owner predicate",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "NTDRSP01",
+    "data": "NotificationDetailResponseData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 106,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "State日時/本文presence、deleted本文space、UI 236 §9",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "NTCREQ01",
+    "data": "NotificationCancelRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 107,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Owner、RECEIVED CAS、token",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "NTCRSP01",
+    "data": "NotificationCancelResponseData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 108,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "0000/0200/0107 profile、UI 236 §10",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "QSSREQ01",
+    "data": "QuestionSearchRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 109,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "USER username space、ADMIN optional、366日",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "QSSRSP01",
+    "data": "PagedResponseData",
+    "record": "QuestionSummaryRecord",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 110,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "deleted=false、submitted/id desc、UI 236 §11",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "QSDREQ01",
+    "data": "QuestionDetailRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 111,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "USER owner/ADMIN",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "QSDRSP01",
+    "data": "QuestionDetailResponseData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 112,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "deleted 0104、answer state/presence、UI 236 §12",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "QDLREQ01",
+    "data": "QuestionDeleteRequestData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 113,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "Owner/ADMIN、token、UI 236 §13",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "QDLRSP01",
+    "data": "QuestionDeleteResponseData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 114,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "0000/0200、notification不変",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "QWKREQ01",
+    "data": "QuestionWorkData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 120,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "E/I、context space、DB再取得、TTLなし、UI 236 §14/ASY-002",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  },
+  {
+    "layout": "WLGEVT01",
+    "data": "WebLogEventData",
+    "record": "-",
+    "canonicalSs": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "line": 121,
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    "businessHandlerValidationIsSeparate": "E/I、context space、producer role、本文/query/cookieなし、UI 235 §12/MON-003",
+    "testId": "PT-PRO-001-T01/T02",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+  }
+]
