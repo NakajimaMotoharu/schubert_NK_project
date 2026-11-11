@@ -1,6 +1,16 @@
 """Append WBS65 bounded group records using existing quota/487 guards; no product operations."""
 from pathlib import Path
-import datetime as dt,hashlib,json,sys
+import datetime as dt,hashlib,json,sys,re,subprocess
+def bind_current_identity(state,head,main):
+    assert isinstance(head,str) and re.fullmatch('[0-9a-f]{40}',head)
+    assert isinstance(main,str) and re.fullmatch('[0-9a-f]{40}',main)
+    result=dict(state)
+    previous={k:state.get(k) for k in ['head','productionCoreMain']}
+    current=dict(head=head,productionCoreMain=main)
+    if previous!=current:
+        result['identityBindingHistory']=list(state.get('identityBindingHistory',[]))+[dict(previous=previous,current=current,reason='CURRENT_GIT_AND_FIXED_PRODUCTION_MAIN_BINDING_NOT_SOURCE_ROLLBACK')]
+    result.update(current)
+    return result
 R=Path.cwd(); S=R.parent/'PMO/pgpt-completion-stage-20261102'
 sys.path[:0]=[str(R/'tools/quality'),str(R/'tools/quality/vm/050_s1')]
 import pg998_metrics as metrics
@@ -31,7 +41,7 @@ else:
  record=dict(actualExit=0,eventId=event,groupId=group,startEvent=first['eventId'],estimate=first['estimateAtGroupStartPp'],quota=q,observedSharedPp=bound['observedSharedPp'],actualAllocatedPp=None,N=None,T=None,manifest=dict(path=c['manifestPath'],sha256=c['manifestSha256']),outcome=c['outcome'],technical=c['technical'],newAcceptance=0,formalTests=1964,formalScopes=53,effortRate=None,nextCommand=c['nextCommand'])
 out.parent.mkdir(parents=True,exist_ok=True);write(out,record)
 for name in ['checkpoint.json','continuation-gate.json','cost-ledger.json']:
- d=load(S/name);d.update(lastEventId=event,currentQuota=q,mayFinishTurn=False,executionAllowed=True,newImplementationAllowed=True,pgptAllComplete=False,ordinaryActiveGroup=group if mode=='start' else None,ordinaryGroupNotYetClosed=mode=='start',phase='WBS65_'+mode.upper(),nextCommand=c['nextCommand'],latestWbs65Record=dict(path=str(out.relative_to(R)),sha256=sha(out)))
+ d=bind_current_identity(load(S/name),metrics.subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip(),first['source'] if mode=='end' else c['source']);d.update(lastEventId=event,currentQuota=q,mayFinishTurn=False,executionAllowed=True,newImplementationAllowed=True,pgptAllComplete=False,ordinaryActiveGroup=group if mode=='start' else None,ordinaryGroupNotYetClosed=mode=='start',phase='WBS65_'+mode.upper(),nextCommand=c['nextCommand'],latestWbs65Record=dict(path=str(out.relative_to(R)),sha256=sha(out)))
  if mode=='end':
   d.setdefault('wbs65Results',[]).append(record)
   d['newImplementationAllowed']=bound['newImplementationAllowedByQuota']

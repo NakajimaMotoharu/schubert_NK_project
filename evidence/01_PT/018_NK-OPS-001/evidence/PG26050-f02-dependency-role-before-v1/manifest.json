@@ -1,0 +1,87 @@
+{
+  "actualExit": 1,
+  "atJST": "2026-11-12T00:13:11.632378+09:00",
+  "bug": "BUG2627",
+  "ykt": "YKT2308",
+  "toolSha256": "f3551a9edb59dce6c5689451fbd490c3bf74798f6269e8f84e5d6c512f19178c",
+  "observedInternalDependencies": {
+    "protocol": [],
+    "storage": [],
+    "bootstrap": [
+      {
+        "artifact": "schubert-nk-storage",
+        "scope": "compile",
+        "type": "jar"
+      }
+    ],
+    "api": [
+      {
+        "artifact": "schubert-nk-bootstrap",
+        "scope": "compile",
+        "type": "jar"
+      },
+      {
+        "artifact": "schubert-nk-bootstrap",
+        "scope": "test",
+        "type": "test-jar"
+      },
+      {
+        "artifact": "schubert-nk-storage",
+        "scope": "compile",
+        "type": "jar"
+      },
+      {
+        "artifact": "schubert-nk-protocol",
+        "scope": "compile",
+        "type": "jar"
+      }
+    ],
+    "web": [
+      {
+        "artifact": "schubert-nk-bootstrap",
+        "scope": "compile",
+        "type": "jar"
+      },
+      {
+        "artifact": "schubert-nk-bootstrap",
+        "scope": "test",
+        "type": "test-jar"
+      },
+      {
+        "artifact": "schubert-nk-storage",
+        "scope": "compile",
+        "type": "jar"
+      },
+      {
+        "artifact": "schubert-nk-protocol",
+        "scope": "compile",
+        "type": "jar"
+      },
+      {
+        "artifact": "schubert-nk-api",
+        "scope": "test",
+        "type": "jar"
+      }
+    ],
+    "batch": [
+      {
+        "artifact": "schubert-nk-bootstrap",
+        "scope": "compile",
+        "type": "jar"
+      },
+      {
+        "artifact": "schubert-nk-bootstrap",
+        "scope": "test",
+        "type": "test-jar"
+      },
+      {
+        "artifact": "schubert-nk-storage",
+        "scope": "compile",
+        "type": "jar"
+      }
+    ]
+  },
+  "cause": "All dependency scopes merged; Web test-only API dependency wrongly treated as Production runtime edge.",
+  "sourcePomsChanged": false,
+  "productTestsExecuted": 0
+}
