@@ -1,0 +1,29 @@
+"""Independent boot-only tmpfiles tuples and wrapper receipt/runbook scope audit; no execution."""
+from pathlib import Path
+import datetime as dt,hashlib,json,re,subprocess
+R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';O=B/'evidence/PG26106-c05-c08-scope-decision-v1'
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();load=lambda p:json.loads(p.read_text())
+w=load(R/'documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json');owners={x['id']:x for x in w['tasks'] if x['id'] in ['WBS-C05','WBS-C08']};assert len(owners)==2
+paths={id:x['ownedArtifacts'][0] for id,x in owners.items()};assert all(len(x['ownedArtifacts'])==1 for x in owners.values())
+pins={}
+for id,n in paths.items():
+ blob=(R/n).read_bytes();assert blob==subprocess.check_output(['git','show','7aed8eace7c844c2f79f2e39db766faf914890d5:'+n]);pins[id]=dict(path=n,sha256=sha(R/n),gitBlob=subprocess.check_output(['git','hash-object',n],text=True).strip())
+expected=[['d!','/run/schubert-nk','0755','root','root','-'],*[[ 'd!','/run/schubert-nk/'+n,'0700','root','root','-'] for n in ['maintenance','startup','backup-request','cleanup-request','expiry-request']],*[[ 'f!','/run/schubert-nk/'+n,'0600','root','root','-'] for n in ['maintenance.lock','startup-admission.lock']]]
+tmp=(R/paths['WBS-C05']).read_text();rows=[x.split() for x in tmp.splitlines() if x.strip() and not x.startswith('#')];assert rows==expected and len(rows)==8 and all('*' not in x[1] and '+' not in x[0] for x in rows)
+wrapper=(R/paths['WBS-C08']).read_text();vectors=[]
+for code in [0,10,50,70]:
+ wire=('NKINSPECTOR1 '+str(code)+'\n.').encode('ascii');hex=' '+' '.join(format(b,'02x') for b in wire);assert "'"+hex+"') exit "+str(code)+' ;;' in wrapper;vectors.append(dict(receiptCode=code,jvmExit=0,exactBytesHex=wire.hex(),expectedWrapperExit=code))
+assert re.findall(r'@[A-Z_]+@',wrapper)==['@JAVA_BIN@','@API_JAR@','@LIB_DIR@','@JAVA_BIN@','@API_JAR@','@LIB_DIR@'] and 'set -eu' in wrapper and '/usr/bin/od -An -v -tx1 -w64' in wrapper
+normal=B/'evidence/PG26096-inspector-whole8-owner6-v1/manifest.json';post=B/'evidence/PG26100-inspector-eight-six-independent-v1/manifest.json';assert sha(normal)=='989fd36da0f361a49adb17f3a77decdd45d5565081fe2a7c88ab14a293702671' and sha(post)=='c567a0f673e45fbdc50baff9ecde2490cb8655fc9111674dcf54bfbd7824fbf1';raw=load(normal);ind=load(post);assert raw['actualExit']==ind['actualExit']==0 and sha(R/paths['WBS-C08'])==raw['begin']['publicInputs'][paths['WBS-C08']]
+assert ind['originalWholeTests']==8 and sum(ind['toolReceiptCounts'].values())==50 and ind['failures']==ind['errors']==ind['skipped']==ind['aborted']==0
+ss=R/'documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md';rb=R/'documents/300_SS/350_運用・品質/353_障害検知・復旧runbook.md';design={}
+canonical={}
+for p in [ss,rb]:
+ approved=subprocess.check_output(['git','show','origin/main:'+str(p.relative_to(R))]);local=p.read_bytes()
+ assert [l for l in approved.decode().splitlines() if l.strip()]==[l for l in local.decode().splitlines() if l.strip()]
+ canonical[p]=approved.decode();design[str(p.relative_to(R))]=dict(approvedOriginMainSha256=hashlib.sha256(approved).hexdigest(),localCopySha256=sha(p),localByteEqual=approved==local,nonemptyLinesEqual=True,canonicalUsed=True)
+s=canonical[ss];r=canonical[rb];assert 'SSC167' in s and 'config/tmpfiles/schubert-nk-maintenance.conf' in s and '稼働中の再作成・削除・権限修復を禁止' in s
+assert '## 18. 禁止事項' in r and '## 16. Runbook rehearsal・更新' in r and 'ITでRB-001～010' in r
+checks=[dict(id='WBS-C05',related=['OPS-009','SS343/SSC049/165/167','PT-OPS-LOCK-008/fixedProvisioningContract'],source=pins['WBS-C05'],staticTuples=expected,criteria=dict(contract='EIGHT_LITERAL_BOOT_ONLY_SOURCE_TUPLES_CORRESPOND',scope='ONE_OWNER_ARTIFACT_BOUND',quality='NOT_ACCEPTED_BOOT_PROVISIONING_EFFECTIVE_PERMISSIONS_FS_IDENTITY_NOT_RUN'),decision='NOT_ACCEPTED',missing=['Actual deployment and boot provisioning/new boot fixed owner/mode/ACL/link/device/RW tmpfs identity; no lock regeneration or operator action authorized.','Full MaintenanceFileLock original suite includes native filesystem/FFM path; not executed by static tuple audit.','Capacity minima and original root permissions/start/end ownership remain existing C/N owners; Java four counters not applicable to tmpfiles resource.']),dict(id='WBS-C08',related=['OPS-009','SS343§6.8','SS353§1/3/15/16/18','PT-OPS-INBOX-001..005/008'],source=pins['WBS-C08'],independentReceiptVectors=vectors,criteria=dict(contract='WRAPPER_MALFORMED_EXIT_ARGUMENT_AND_STATUS_NORMAL_PT_QUALIFIED_IN_DECLARED_LOCAL_SCOPE',scope='ONE_WRAPPER_ARTIFACT_BOUND_NOT_ALL_RECOVERY_PROGRAMS',quality='NOT_ACCEPTED_OPERATIONAL_REHEARSAL_AND_SYSTEM_DEPENDENCIES_NOT_THIS_LOCAL_WRAPPER_PT'),decision='NOT_ACCEPTED',missing=['SS353 full incident/recovery/public reopen evidence and actual source/config/release ownership not established by wrapper receipt alone.','RB001..010 real rehearsal/restore/RTO belong IT/ST handoff, not claimed as executed PG/PT.','Current C02/F02/451 and permitted deployment/admission proof remain pending; no operation executed from runbook.'])]
+assert not O.exists();O.mkdir();v=dict(actualExit=0,atJST=dt.datetime.now().astimezone().isoformat(),source=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),productionCoreMain='7aed8eace7c844c2f79f2e39db766faf914890d5',checks=checks,approvedDesignPins=design,sourcePins=pins,existingLocalWrapperProofs=[dict(path=str(p.relative_to(R)),sha256=sha(p)) for p in [normal,post]],productTestsExecuted=0,existingSuccessReplayed=False,newCoverageMeasurements=0,actualProvisioningOrUnitOrServiceOperations=0,newAcceptance=0,formalUpdated=False,effortRate=None,toolSha256=sha(Path(__file__)))
+(O/'manifest.json').write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,configurationTuples=8,wrapperVectors=4,decisionC05='NOT_ACCEPTED',decisionC08='NOT_ACCEPTED',sha256=sha(O/'manifest.json'))))
