@@ -11,6 +11,12 @@ def bind_current_identity(state,head,main):
         result['identityBindingHistory']=list(state.get('identityBindingHistory',[]))+[dict(previous=previous,current=current,reason='CURRENT_GIT_AND_FIXED_PRODUCTION_MAIN_BINDING_NOT_SOURCE_ROLLBACK')]
     result.update(current)
     return result
+def resolve_end_main_identity(start_source, config, manifest):
+    after = config.get('sourceAfter', start_source)
+    assert isinstance(after, str) and re.fullmatch('[0-9a-f]{40}', after)
+    if 'sourceAfter' in config:
+        assert manifest.get('source') == manifest.get('productionCoreMain') == after
+    return after
 R=Path.cwd(); S=R.parent/'PMO/pgpt-completion-stage-20261102'
 sys.path[:0]=[str(R/'tools/quality'),str(R/'tools/quality/vm/050_s1')]
 import pg998_metrics as metrics
@@ -38,16 +44,17 @@ else:
  assert not any(v['groupId']==group and v.get('groupBoundary')=='END' for v in rows)
  first=starts[0];p=R/c['manifestPath'];assert sha(p)==c['manifestSha256'];m=load(p)
  assert type(m['actualExit']) is int and m['actualExit']==0
+ endMain=resolve_end_main_identity(first['source'],c,m)
  bound=end_fields(first['quotaReceipt']['observation'],q,digest(q),now,c['terminalAtUTC'],first['groupCapPp'])
  bound['quotaAfter']=q['primary'];bound['quotaBefore']=first['quotaReceipt']['observation']['primary']
- values=dict(bound,wbsLeafIds=first['wbsLeafIds'],workCategory=first['workCategory'],workAttributionKind=first['workAttributionKind'],source=first['source'],run=c['run'],estimateAtGroupStartPp=first['estimateAtGroupStartPp'],groupCapPp=first['groupCapPp'],managementPlan='WBS65-20261110',managementWorkIds=c['workIds'],managementOutcome=c['outcome'],technicalMeasurementDelta=c['technical'],acceptedDelta=dict(closedIds=[],reopenedIds=[],criteriaSatisfied=[],evidenceRefs=[]),sourceEvidenceRefs=[dict(path=c['manifestPath'],sha256=c['manifestSha256'])],newAcceptance=0,effortCompletionRate=None,nextCommand=c['nextCommand'],groupBoundary='END')
+ values=dict(bound,wbsLeafIds=first['wbsLeafIds'],workCategory=first['workCategory'],workAttributionKind=first['workAttributionKind'],source=endMain,sourceAtGroupStart=first['source'],run=c['run'],estimateAtGroupStartPp=first['estimateAtGroupStartPp'],groupCapPp=first['groupCapPp'],managementPlan='WBS65-20261110',managementWorkIds=c['workIds'],managementOutcome=c['outcome'],technicalMeasurementDelta=c['technical'],acceptedDelta=dict(closedIds=[],reopenedIds=[],criteriaSatisfied=[],evidenceRefs=[]),sourceEvidenceRefs=[dict(path=c['manifestPath'],sha256=c['manifestSha256'])],newAcceptance=0,effortCompletionRate=None,nextCommand=c['nextCommand'],groupBoundary='END')
  if forecast is not None:values.update(remainingEstimatePp=forecast['revisedRemainingPp'],remainingForecastRef=forecastRef,forecastNotActualCost=True)
  event=metrics.append(group,'CHECKPOINT',values)
- record=dict(actualExit=0,eventId=event,groupId=group,startEvent=first['eventId'],estimate=first['estimateAtGroupStartPp'],quota=q,observedSharedPp=bound['observedSharedPp'],actualAllocatedPp=None,N=None,T=None,manifest=dict(path=c['manifestPath'],sha256=c['manifestSha256']),outcome=c['outcome'],technical=c['technical'],newAcceptance=0,formalTests=1964,formalScopes=53,effortRate=None,nextCommand=c['nextCommand'])
+ record=dict(actualExit=0,eventId=event,groupId=group,startEvent=first['eventId'],sourceAtGroupStart=first['source'],productionCoreMain=endMain,estimate=first['estimateAtGroupStartPp'],quota=q,observedSharedPp=bound['observedSharedPp'],actualAllocatedPp=None,N=None,T=None,manifest=dict(path=c['manifestPath'],sha256=c['manifestSha256']),outcome=c['outcome'],technical=c['technical'],newAcceptance=0,formalTests=1964,formalScopes=53,effortRate=None,nextCommand=c['nextCommand'])
 if forecast is not None:record.update(remainingEstimatePp=forecast['revisedRemainingPp'],remainingForecastRef=forecastRef,forecastNotActualCost=True)
 out.parent.mkdir(parents=True,exist_ok=True);write(out,record)
 for name in ['checkpoint.json','continuation-gate.json','cost-ledger.json']:
- d=bind_current_identity(load(S/name),metrics.subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip(),first['source'] if mode=='end' else c['source']);d.update(lastEventId=event,currentQuota=q,mayFinishTurn=False,executionAllowed=True,newImplementationAllowed=True,pgptAllComplete=False,ordinaryActiveGroup=group if mode=='start' else None,ordinaryGroupNotYetClosed=mode=='start',phase='WBS65_'+mode.upper(),nextCommand=c['nextCommand'],latestWbs65Record=dict(path=str(out.relative_to(R)),sha256=sha(out)))
+ d=bind_current_identity(load(S/name),metrics.subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip(),endMain if mode=='end' else c['source']);d.update(lastEventId=event,currentQuota=q,mayFinishTurn=False,executionAllowed=True,newImplementationAllowed=True,pgptAllComplete=False,ordinaryActiveGroup=group if mode=='start' else None,ordinaryGroupNotYetClosed=mode=='start',phase='WBS65_'+mode.upper(),nextCommand=c['nextCommand'],latestWbs65Record=dict(path=str(out.relative_to(R)),sha256=sha(out)))
  if mode=='end':
   d.setdefault('wbs65Results',[]).append(record)
   d['newImplementationAllowed']=bound['newImplementationAllowedByQuota']
