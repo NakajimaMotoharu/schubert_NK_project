@@ -1,0 +1,146 @@
+[
+  {
+    "requirementId": "MQ-014",
+    "testId": "PT-PRO-CURRENT-MQ-014",
+    "case": "HeaderModelTest#headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow",
+    "independentExpectedBasis": "256+data+record*count checked, 1,000,000 accepted/next byte rejected; wire encoder path in MessageCodecTest.",
+    "actualBasis": "Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_PORTION",
+    "globalRequirementAccepted": false
+  },
+  {
+    "requirementId": "MQ-015",
+    "testId": "PT-PRO-CURRENT-MQ-015",
+    "case": "HeaderModelTest#headerValidateAgainstRejectsEachMetadataMismatch",
+    "independentExpectedBasis": "Independent kind/interaction/layout/declared lengths reject each mismatch.",
+    "actualBasis": "Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_PORTION",
+    "globalRequirementAccepted": false
+  },
+  {
+    "requirementId": "MQ-016",
+    "testId": "PT-PRO-CURRENT-MQ-016",
+    "case": "LayoutMetadataTest#registryMatchesIndependentUi233Catalog",
+    "independentExpectedBasis": "Canonical64 rows and typed data/record independent SS323 table; service business behavior separate.",
+    "actualBasis": "Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_PORTION",
+    "globalRequirementAccepted": false
+  },
+  {
+    "requirementId": "MQ-017",
+    "testId": "PT-PRO-CURRENT-MQ-017",
+    "case": "LayoutFieldCatalogTest#catalogMatchesIndependentUi234To236Fixture",
+    "independentExpectedBasis": "Canonical389 physical field cells; immutable ordered metadata, no gap/overlap, independent byte and field expectations.",
+    "actualBasis": "Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_PORTION",
+    "globalRequirementAccepted": false
+  },
+  {
+    "requirementId": "MQ-018",
+    "testId": "PT-PRO-CURRENT-MQ-018",
+    "case": "FieldCodecTest#textEncodeNormalizesUtf8AndPadsWithAsciiSpace",
+    "independentExpectedBasis": "ASCII/Japanese3/emoji4/combining2 actual UTF8 length independent bytes.",
+    "actualBasis": "Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_PORTION",
+    "globalRequirementAccepted": false
+  },
+  {
+    "requirementId": "MSG-001",
+    "testId": "PT-PRO-CURRENT-MSG-001",
+    "case": "FieldCodecTest#textDecodeIsStrictCanonicalAndOptionalAware",
+    "independentExpectedBasis": "Strict UTF8 body field rejects malformed bytes; JMS BytesMessage metadata validator covered as pure value port; actual broker/adapter belongs P005/N and not accepted here.",
+    "actualBasis": "Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_PORTION",
+    "globalRequirementAccepted": false
+  },
+  {
+    "requirementId": "MSG-002",
+    "testId": "PT-PRO-CURRENT-MSG-002",
+    "case": "FieldCodecNfcGoldenTest#nfcGolden001HangulJamoFitsComposedByteWidth",
+    "independentExpectedBasis": "Literal Hangul UTF8/composed byte width/max vs below width.",
+    "actualBasis": "Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_PORTION",
+    "globalRequirementAccepted": false
+  },
+  {
+    "requirementId": "MSG-003",
+    "testId": "PT-PRO-CURRENT-MSG-003",
+    "case": "FieldCodecTest#textEncodeNormalizesUtf8AndPadsWithAsciiSpace",
+    "independentExpectedBasis": "Right ASCII0x20 padding, required/optional null and blank, trailing value-space reject.",
+    "actualBasis": "Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_PORTION",
+    "globalRequirementAccepted": false
+  },
+  {
+    "requirementId": "MSG-004",
+    "testId": "PT-PRO-CURRENT-MSG-004",
+    "case": "FieldCodecTest#numericCodecChecksDigitsRangeAndOverflow",
+    "independentExpectedBasis": "Literal zero/one/max zero-padded ASCII; semantic bounds, wire width and signedlong overflow failures.",
+    "actualBasis": "Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_PORTION",
+    "globalRequirementAccepted": false
+  },
+  {
+    "requirementId": "MSG-005",
+    "testId": "PT-PRO-CURRENT-MSG-005",
+    "case": "ProtocolSemanticTypeTest#xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues",
+    "independentExpectedBasis": "Typed X numeric wrappers, space optional and noncanonical rejects; actual payload X9 elapsed literal in QA054.",
+    "actualBasis": "Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_PORTION",
+    "globalRequirementAccepted": false
+  },
+  {
+    "requirementId": "MSG-006",
+    "testId": "PT-PRO-CURRENT-MSG-006",
+    "case": "FieldCodecTest#booleanAndReservedFieldsRejectUnknownBytes",
+    "independentExpectedBasis": "Literal0/1 and optionalspace; requiredspace/2/wronglength/null fail.",
+    "actualBasis": "Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_PORTION",
+    "globalRequirementAccepted": false
+  },
+  {
+    "requirementId": "MSG-007",
+    "testId": "PT-PRO-CURRENT-MSG-007",
+    "case": "FieldCodecTest#numericSemanticCeilingIsIndependentOfWireAndLongCapacity",
+    "independentExpectedBasis": "Max-1/max/+1 semantic boundaries independent literal19digits; overflow has no partial success/input mutation.",
+    "actualBasis": "Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_PORTION",
+    "globalRequirementAccepted": false
+  },
+  {
+    "requirementId": "MSG-008",
+    "testId": "PT-PRO-CURRENT-MSG-008",
+    "case": "FieldCodecTest#textEncodeNormalizesUtf8AndPadsWithAsciiSpace",
+    "independentExpectedBasis": "CR/LF/TAB/NUL encode reject and decode counterpart; malformed Unicode no silent truncation.",
+    "actualBasis": "Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_PORTION",
+    "globalRequirementAccepted": false
+  },
+  {
+    "requirementId": "MSG-009",
+    "testId": "PT-PRO-CURRENT-MSG-009",
+    "case": "FieldCodecTest#textDecodeIsStrictCanonicalAndOptionalAware",
+    "independentExpectedBasis": "Field LF rejection plus current owned69 production source LF-only. Whole docs/settings/generated-output LF under G/F remains separate and unaccepted here.",
+    "actualBasis": "Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_PORTION",
+    "globalRequirementAccepted": false
+  },
+  {
+    "requirementId": "MSG-010",
+    "testId": "PT-PRO-CURRENT-MSG-010",
+    "case": "FieldCodecNfcGoldenTest#nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition",
+    "independentExpectedBasis": "Independent UTF8 hex for NFD→NFC encode; noncanonical receive reject, input bytes unchanged.",
+    "actualBasis": "Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_PORTION",
+    "globalRequirementAccepted": false
+  },
+  {
+    "requirementId": "MSG-011",
+    "testId": "PT-PRO-CURRENT-MSG-011",
+    "case": "SemanticFieldValueTest#semanticHelpersDecodeAndEncodeEverySupportedShape",
+    "independentExpectedBasis": "Instant→JST literal17digits, invalid time/leap/zone cases in original Jst codec cases; runtimeclock not involved.",
+    "actualBasis": "Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_PORTION",
+    "globalRequirementAccepted": false
+  }
+]

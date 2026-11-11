@@ -1,0 +1,5436 @@
+[
+  {
+    "layout": "LGNREQ01",
+    "area": "DATA",
+    "expectedRows": 4,
+    "canonicalRows": 4,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Username",
+          "1",
+          "64",
+          "X",
+          "M",
+          "NFC・trim後1～64 byte"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 35
+      },
+      {
+        "tuple": [
+          "Password",
+          "65",
+          "256",
+          "X",
+          "M",
+          "NFC後1～256 byte。右spaceは値の一部と区別できないため末尾space passwordは禁止"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 36
+      },
+      {
+        "tuple": [
+          "Client address",
+          "321",
+          "45",
+          "X",
+          "M",
+          "IPv4/IPv6 text。Caddy検証済み"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 37
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "366",
+          "19",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 38
+      }
+    ]
+  },
+  {
+    "layout": "LGNRSP01",
+    "area": "DATA",
+    "expectedRows": 8,
+    "canonicalRows": 8,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Username",
+          "1",
+          "64",
+          "X",
+          "C",
+          "成功時必須"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 44
+      },
+      {
+        "tuple": [
+          "Role",
+          "65",
+          "5",
+          "X",
+          "C",
+          "`USER`/`ADMIN`、成功時必須"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 45
+      },
+      {
+        "tuple": [
+          "認証context ID",
+          "70",
+          "64",
+          "X",
+          "C",
+          "成功時lowercase hex 64文字。header側は全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 46
+      },
+      {
+        "tuple": [
+          "発行日時",
+          "134",
+          "17",
+          "X",
+          "C",
+          "成功時17桁JST日時、失敗時全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 47
+      },
+      {
+        "tuple": [
+          "期限日時",
+          "151",
+          "17",
+          "X",
+          "C",
+          "成功時17桁JST日時、失敗時全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 48
+      },
+      {
+        "tuple": [
+          "Retry after秒",
+          "168",
+          "6",
+          "N",
+          "M",
+          "Lock以外は0"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 49
+      },
+      {
+        "tuple": [
+          "残り試行回数",
+          "174",
+          "3",
+          "N",
+          "M",
+          "成功・非表示時0"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 50
+      },
+      {
+        "tuple": [
+          "利用者message",
+          "177",
+          "256",
+          "X",
+          "O",
+          "Error/lock時。成功時全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 51
+      }
+    ]
+  },
+  {
+    "layout": "LOGRSP01",
+    "area": "DATA",
+    "expectedRows": 2,
+    "canonicalRows": 2,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Session失効日時",
+          "1",
+          "17",
+          "N",
+          "M",
+          "JST日時"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 65
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "18",
+          "7",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 66
+      }
+    ]
+  },
+  {
+    "layout": "GAMRSP01",
+    "area": "DATA",
+    "expectedRows": 1,
+    "canonicalRows": 1,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Total count",
+          "1",
+          "9",
+          "N",
+          "M",
+          "Record件数と一致"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 80
+      }
+    ]
+  },
+  {
+    "layout": "GAMRSP01",
+    "area": "RECORD",
+    "expectedRows": 4,
+    "canonicalRows": 4,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Game code",
+          "1",
+          "12",
+          "X",
+          "M",
+          "`NUKITASHI1`/`NUKITASHI2`"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 86
+      },
+      {
+        "tuple": [
+          "Title",
+          "13",
+          "256",
+          "X",
+          "M",
+          "表示title"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 87
+      },
+      {
+        "tuple": [
+          "Display order",
+          "269",
+          "3",
+          "N",
+          "M",
+          "昇順"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 88
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "272",
+          "1",
+          "X",
+          "F",
+          "Space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 89
+      }
+    ]
+  },
+  {
+    "layout": "SPKREQ01",
+    "area": "DATA",
+    "expectedRows": 1,
+    "canonicalRows": 1,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Game code",
+          "1",
+          "12",
+          "X",
+          "O",
+          "全space/`NUKITASHI1`/`NUKITASHI2`"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 97
+      }
+    ]
+  },
+  {
+    "layout": "SPKRSP01",
+    "area": "DATA",
+    "expectedRows": 1,
+    "canonicalRows": 1,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Total count",
+          "1",
+          "9",
+          "N",
+          "M",
+          "Record件数と一致"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 103
+      }
+    ]
+  },
+  {
+    "layout": "SPKRSP01",
+    "area": "RECORD",
+    "expectedRows": 4,
+    "canonicalRows": 4,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Speaker ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "内部ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 109
+      },
+      {
+        "tuple": [
+          "Speaker名",
+          "13",
+          "128",
+          "X",
+          "M",
+          "表示・検索値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 110
+      },
+      {
+        "tuple": [
+          "出現件数",
+          "141",
+          "9",
+          "N",
+          "M",
+          "対象game内entry件数"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 111
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "150",
+          "3",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 112
+      }
+    ]
+  },
+  {
+    "layout": "SRCREQ01",
+    "area": "DATA",
+    "expectedRows": 8,
+    "canonicalRows": 8,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "本文keyword",
+          "1",
+          "256",
+          "X",
+          "O",
+          "部分一致"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 122
+      },
+      {
+        "tuple": [
+          "Game code",
+          "257",
+          "12",
+          "X",
+          "O",
+          "全space/定義game"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 123
+      },
+      {
+        "tuple": [
+          "Speaker名",
+          "269",
+          "128",
+          "X",
+          "O",
+          "完全一致"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 124
+      },
+      {
+        "tuple": [
+          "章title",
+          "397",
+          "256",
+          "X",
+          "O",
+          "部分一致"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 125
+      },
+      {
+        "tuple": [
+          "Entry type",
+          "653",
+          "10",
+          "X",
+          "O",
+          "全space/`dialogue`/`narration`"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 126
+      },
+      {
+        "tuple": [
+          "Voice条件",
+          "663",
+          "1",
+          "X",
+          "O",
+          "Space/`1`あり/`0`なし"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 127
+      },
+      {
+        "tuple": [
+          "Page",
+          "664",
+          "6",
+          "N",
+          "M",
+          "1～999999"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 128
+      },
+      {
+        "tuple": [
+          "Page size",
+          "670",
+          "3",
+          "N",
+          "M",
+          "固定100"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 129
+      }
+    ]
+  },
+  {
+    "layout": "SRCRSP01",
+    "area": "DATA",
+    "expectedRows": 7,
+    "canonicalRows": 7,
+    "matches": true,
+    "sharedAliases": [
+      "PAGED48"
+    ],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Effective page",
+          "1",
+          "6",
+          "N",
+          "M",
+          "1～999999"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 16
+      },
+      {
+        "tuple": [
+          "Page size",
+          "7",
+          "3",
+          "N",
+          "M",
+          "Interface固定値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 17
+      },
+      {
+        "tuple": [
+          "Total count",
+          "10",
+          "9",
+          "N",
+          "M",
+          "Page size 50は0～49,999,950、100は0～99,999,900"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 18
+      },
+      {
+        "tuple": [
+          "Total pages",
+          "19",
+          "6",
+          "N",
+          "M",
+          "0件でも1"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 19
+      },
+      {
+        "tuple": [
+          "First result",
+          "25",
+          "9",
+          "N",
+          "M",
+          "0件は0"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 20
+      },
+      {
+        "tuple": [
+          "Last result",
+          "34",
+          "9",
+          "N",
+          "M",
+          "0件は0"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 21
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "43",
+          "6",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 22
+      }
+    ]
+  },
+  {
+    "layout": "SRCRSP01",
+    "area": "RECORD",
+    "expectedRows": 13,
+    "canonicalRows": 13,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Entry ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "Scenario anchor ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 139
+      },
+      {
+        "tuple": [
+          "Script file ID",
+          "13",
+          "12",
+          "N",
+          "M",
+          "明細遷移ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 140
+      },
+      {
+        "tuple": [
+          "Game code",
+          "25",
+          "12",
+          "X",
+          "M",
+          "定義game"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 141
+      },
+      {
+        "tuple": [
+          "章title",
+          "37",
+          "256",
+          "X",
+          "O",
+          "未設定はspace"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 142
+      },
+      {
+        "tuple": [
+          "Line番号",
+          "293",
+          "8",
+          "N",
+          "M",
+          "1以上"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 143
+      },
+      {
+        "tuple": [
+          "Entry type",
+          "301",
+          "10",
+          "X",
+          "M",
+          "`dialogue`/`narration`"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 144
+      },
+      {
+        "tuple": [
+          "Speaker名",
+          "311",
+          "128",
+          "X",
+          "O",
+          "Narrationはspace可"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 145
+      },
+      {
+        "tuple": [
+          "本文",
+          "439",
+          "4096",
+          "X",
+          "M",
+          "CR/LF/TAB/NULなし"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 146
+      },
+      {
+        "tuple": [
+          "Audio有無",
+          "4535",
+          "1",
+          "B",
+          "M",
+          "`0`/`1`"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 147
+      },
+      {
+        "tuple": [
+          "Audio ID",
+          "4536",
+          "12",
+          "X",
+          "C",
+          "Audio有無1時ASCII数字、0時space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 148
+      },
+      {
+        "tuple": [
+          "Script display path",
+          "4548",
+          "512",
+          "X",
+          "M",
+          "Sanitized表示専用。File解決には使用しない"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 149
+      },
+      {
+        "tuple": [
+          "Audio display path",
+          "5060",
+          "512",
+          "X",
+          "C",
+          "Audio有無1時。Sanitized表示専用"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 150
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "5572",
+          "13",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 151
+      }
+    ]
+  },
+  {
+    "layout": "RTEREQ01",
+    "area": "DATA",
+    "expectedRows": 1,
+    "canonicalRows": 1,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Game code",
+          "1",
+          "12",
+          "X",
+          "M",
+          "定義game"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 163
+      }
+    ]
+  },
+  {
+    "layout": "RTERSP01",
+    "area": "DATA",
+    "expectedRows": 1,
+    "canonicalRows": 1,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Total count",
+          "1",
+          "9",
+          "N",
+          "M",
+          "Record件数と一致"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 169
+      }
+    ]
+  },
+  {
+    "layout": "RTERSP01",
+    "area": "RECORD",
+    "expectedRows": 3,
+    "canonicalRows": 3,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Prefix",
+          "1",
+          "2",
+          "N",
+          "M",
+          "2桁section prefix"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 175
+      },
+      {
+        "tuple": [
+          "Route名",
+          "3",
+          "64",
+          "X",
+          "M",
+          "固定mapまたは`未分類`"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 176
+      },
+      {
+        "tuple": [
+          "File件数",
+          "67",
+          "6",
+          "N",
+          "M",
+          "1以上"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 177
+      }
+    ]
+  },
+  {
+    "layout": "SCFREQ01",
+    "area": "DATA",
+    "expectedRows": 2,
+    "canonicalRows": 2,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Game code",
+          "1",
+          "12",
+          "X",
+          "M",
+          "定義game"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 187
+      },
+      {
+        "tuple": [
+          "Prefix",
+          "13",
+          "2",
+          "N",
+          "M",
+          "2桁"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 188
+      }
+    ]
+  },
+  {
+    "layout": "SCFRSP01",
+    "area": "DATA",
+    "expectedRows": 5,
+    "canonicalRows": 5,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Game code",
+          "1",
+          "12",
+          "X",
+          "M",
+          "要求値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 194
+      },
+      {
+        "tuple": [
+          "Prefix",
+          "13",
+          "2",
+          "N",
+          "M",
+          "要求値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 195
+      },
+      {
+        "tuple": [
+          "Route名",
+          "15",
+          "64",
+          "X",
+          "M",
+          "表示名"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 196
+      },
+      {
+        "tuple": [
+          "Total count",
+          "79",
+          "9",
+          "N",
+          "M",
+          "Record件数と一致"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 197
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "88",
+          "1",
+          "X",
+          "F",
+          "Space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 198
+      }
+    ]
+  },
+  {
+    "layout": "SCFRSP01",
+    "area": "RECORD",
+    "expectedRows": 5,
+    "canonicalRows": 5,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Script file ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "明細遷移ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 204
+      },
+      {
+        "tuple": [
+          "Display title",
+          "13",
+          "256",
+          "X",
+          "M",
+          "章title、section code、file名の最初の非空値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 205
+      },
+      {
+        "tuple": [
+          "Display path",
+          "269",
+          "512",
+          "X",
+          "M",
+          "Sanitized表示専用"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 206
+      },
+      {
+        "tuple": [
+          "Entry件数",
+          "781",
+          "6",
+          "N",
+          "M",
+          "0以上"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 207
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "787",
+          "14",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 208
+      }
+    ]
+  },
+  {
+    "layout": "SCNREQ01",
+    "area": "DATA",
+    "expectedRows": 1,
+    "canonicalRows": 1,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Script file ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "対象ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 218
+      }
+    ]
+  },
+  {
+    "layout": "SCNRSP01",
+    "area": "DATA",
+    "expectedRows": 16,
+    "canonicalRows": 16,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Script file ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "現在ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 224
+      },
+      {
+        "tuple": [
+          "Game code",
+          "13",
+          "12",
+          "X",
+          "M",
+          "定義game"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 225
+      },
+      {
+        "tuple": [
+          "Display title",
+          "25",
+          "256",
+          "X",
+          "M",
+          "現在title"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 226
+      },
+      {
+        "tuple": [
+          "Display path",
+          "281",
+          "512",
+          "X",
+          "M",
+          "Sanitized表示専用"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 227
+      },
+      {
+        "tuple": [
+          "Previous file ID",
+          "793",
+          "12",
+          "X",
+          "O",
+          "ASCII数字/space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 228
+      },
+      {
+        "tuple": [
+          "Previous title",
+          "805",
+          "256",
+          "X",
+          "C",
+          "Previous ID設定時"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 229
+      },
+      {
+        "tuple": [
+          "Next file ID",
+          "1061",
+          "12",
+          "X",
+          "O",
+          "ASCII数字/space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 230
+      },
+      {
+        "tuple": [
+          "Next title",
+          "1073",
+          "256",
+          "X",
+          "C",
+          "Next ID設定時"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 231
+      },
+      {
+        "tuple": [
+          "Delivery mode",
+          "1329",
+          "1",
+          "X",
+          "M",
+          "`I` inline/`F` large-result file"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 232
+      },
+      {
+        "tuple": [
+          "File ID",
+          "1330",
+          "36",
+          "X",
+          "C",
+          "F時UUID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 233
+      },
+      {
+        "tuple": [
+          "File relative path",
+          "1366",
+          "256",
+          "X",
+          "C",
+          "F時transfer root基準"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 234
+      },
+      {
+        "tuple": [
+          "File byte長",
+          "1622",
+          "12",
+          "N",
+          "M",
+          "I時0、F時実長"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 235
+      },
+      {
+        "tuple": [
+          "File SHA-256",
+          "1634",
+          "64",
+          "X",
+          "C",
+          "F時lowercase hex"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 236
+      },
+      {
+        "tuple": [
+          "File record長",
+          "1698",
+          "6",
+          "N",
+          "M",
+          "I時0、F時`004800`"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 237
+      },
+      {
+        "tuple": [
+          "File record件数",
+          "1704",
+          "9",
+          "N",
+          "M",
+          "I時0、F時1～10000"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 238
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "1713",
+          "16",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 239
+      }
+    ]
+  },
+  {
+    "layout": "SCNRSP01",
+    "area": "RECORD",
+    "expectedRows": 10,
+    "canonicalRows": 10,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Entry ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "同じentryの複数audio recordで同値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 250
+      },
+      {
+        "tuple": [
+          "Entry sequence",
+          "13",
+          "6",
+          "N",
+          "M",
+          "1開始表示順"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 251
+      },
+      {
+        "tuple": [
+          "Line番号",
+          "19",
+          "8",
+          "N",
+          "M",
+          "1以上"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 252
+      },
+      {
+        "tuple": [
+          "Entry type",
+          "27",
+          "10",
+          "X",
+          "M",
+          "`dialogue`/`narration`"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 253
+      },
+      {
+        "tuple": [
+          "Speaker名",
+          "37",
+          "128",
+          "X",
+          "O",
+          "Narrationはspace可"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 254
+      },
+      {
+        "tuple": [
+          "本文",
+          "165",
+          "4096",
+          "X",
+          "M",
+          "同じentryでは同値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 255
+      },
+      {
+        "tuple": [
+          "Audio sequence",
+          "4261",
+          "3",
+          "N",
+          "M",
+          "Audioなし0、あり1～999"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 256
+      },
+      {
+        "tuple": [
+          "Audio ID",
+          "4264",
+          "12",
+          "X",
+          "C",
+          "Audioあり時ASCII数字"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 257
+      },
+      {
+        "tuple": [
+          "Audio display path",
+          "4276",
+          "512",
+          "X",
+          "C",
+          "Audioあり時、sanitized表示専用"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 258
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "4788",
+          "13",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 259
+      }
+    ]
+  },
+  {
+    "layout": "AUDREQ01",
+    "area": "DATA",
+    "expectedRows": 3,
+    "canonicalRows": 3,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Audio ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "DB logical ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 35
+      },
+      {
+        "tuple": [
+          "Disposition",
+          "13",
+          "1",
+          "X",
+          "M",
+          "`I`再生/`A`download"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 36
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "14",
+          "3",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 37
+      }
+    ]
+  },
+  {
+    "layout": "AUDRSP01",
+    "area": "DATA",
+    "expectedRows": 8,
+    "canonicalRows": 8,
+    "matches": true,
+    "sharedAliases": [
+      "MEDIA1024"
+    ],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Media logical ID",
+          "1",
+          "64",
+          "X",
+          "M",
+          "要求IDのcanonical値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 17
+      },
+      {
+        "tuple": [
+          "Storage relative path",
+          "65",
+          "512",
+          "X",
+          "M",
+          "Business asset root基準。絶対path禁止、Browser非表示"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 18
+      },
+      {
+        "tuple": [
+          "File name",
+          "577",
+          "256",
+          "X",
+          "M",
+          "表示/download名"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 19
+      },
+      {
+        "tuple": [
+          "File byte長",
+          "833",
+          "12",
+          "N",
+          "M",
+          "1以上"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 20
+      },
+      {
+        "tuple": [
+          "SHA-256",
+          "845",
+          "64",
+          "X",
+          "M",
+          "Lowercase hex"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 21
+      },
+      {
+        "tuple": [
+          "MIME type",
+          "909",
+          "64",
+          "X",
+          "M",
+          "許可list内"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 22
+      },
+      {
+        "tuple": [
+          "Content disposition",
+          "973",
+          "1",
+          "X",
+          "M",
+          "`I` inline、`A` attachment"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 23
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "974",
+          "51",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 24
+      }
+    ]
+  },
+  {
+    "layout": "ANMRSP01",
+    "area": "DATA",
+    "expectedRows": 5,
+    "canonicalRows": 5,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Main/SUBTRACK件数",
+          "1",
+          "3",
+          "N",
+          "M",
+          "現行15"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 54
+      },
+      {
+        "tuple": [
+          "OVA件数",
+          "4",
+          "3",
+          "N",
+          "M",
+          "現行4"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 55
+      },
+      {
+        "tuple": [
+          "Opening有無",
+          "7",
+          "1",
+          "B",
+          "M",
+          "現行1"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 56
+      },
+      {
+        "tuple": [
+          "総file件数",
+          "8",
+          "3",
+          "N",
+          "M",
+          "現行20"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 57
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "11",
+          "6",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 58
+      }
+    ]
+  },
+  {
+    "layout": "ANLREQ01",
+    "area": "DATA",
+    "expectedRows": 1,
+    "canonicalRows": 1,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Category",
+          "1",
+          "16",
+          "X",
+          "M",
+          "`MAIN`/`OVA`"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 66
+      }
+    ]
+  },
+  {
+    "layout": "ANLRSP01",
+    "area": "DATA",
+    "expectedRows": 2,
+    "canonicalRows": 2,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Total count",
+          "1",
+          "6",
+          "N",
+          "M",
+          "Record件数"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 72
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "7",
+          "2",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 73
+      }
+    ]
+  },
+  {
+    "layout": "ANLRSP01",
+    "area": "RECORD",
+    "expectedRows": 7,
+    "canonicalRows": 7,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Video ID",
+          "1",
+          "64",
+          "X",
+          "M",
+          "Stable logical ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 79
+      },
+      {
+        "tuple": [
+          "Title",
+          "65",
+          "256",
+          "X",
+          "M",
+          "表示title"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 80
+      },
+      {
+        "tuple": [
+          "Category",
+          "321",
+          "16",
+          "X",
+          "M",
+          "`MAIN`/`SUBTRACK`/`OVA`"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 81
+      },
+      {
+        "tuple": [
+          "Display path",
+          "337",
+          "512",
+          "X",
+          "M",
+          "Sanitized表示専用。File解決には使用しない"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 82
+      },
+      {
+        "tuple": [
+          "File byte長",
+          "849",
+          "12",
+          "N",
+          "M",
+          "1以上"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 83
+      },
+      {
+        "tuple": [
+          "Parent main ID",
+          "861",
+          "64",
+          "X",
+          "C",
+          "SUBTRACK時対応main ID。他はspace"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 84
+      },
+      {
+        "tuple": [
+          "Display order",
+          "925",
+          "4",
+          "N",
+          "M",
+          "Category内順"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 85
+      }
+    ]
+  },
+  {
+    "layout": "VIDREQ01",
+    "area": "DATA",
+    "expectedRows": 1,
+    "canonicalRows": 1,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Video ID",
+          "1",
+          "64",
+          "X",
+          "M",
+          "Stable logical ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 95
+      }
+    ]
+  },
+  {
+    "layout": "VIDRSP01",
+    "area": "DATA",
+    "expectedRows": 11,
+    "canonicalRows": 11,
+    "matches": true,
+    "sharedAliases": [
+      "MEDIA1024"
+    ],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Media logical ID",
+          "1",
+          "64",
+          "X",
+          "M",
+          "要求IDのcanonical値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 17
+      },
+      {
+        "tuple": [
+          "Storage relative path",
+          "65",
+          "512",
+          "X",
+          "M",
+          "Business asset root基準。絶対path禁止、Browser非表示"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 18
+      },
+      {
+        "tuple": [
+          "File name",
+          "577",
+          "256",
+          "X",
+          "M",
+          "表示/download名"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 19
+      },
+      {
+        "tuple": [
+          "File byte長",
+          "833",
+          "12",
+          "N",
+          "M",
+          "1以上"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 20
+      },
+      {
+        "tuple": [
+          "SHA-256",
+          "845",
+          "64",
+          "X",
+          "M",
+          "Lowercase hex"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 21
+      },
+      {
+        "tuple": [
+          "MIME type",
+          "909",
+          "64",
+          "X",
+          "M",
+          "許可list内"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 22
+      },
+      {
+        "tuple": [
+          "Content disposition",
+          "973",
+          "1",
+          "X",
+          "M",
+          "`I` inline、`A` attachment"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 23
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "974",
+          "51",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 24
+      },
+      {
+        "tuple": [
+          "Title",
+          "1025",
+          "256",
+          "X",
+          "M",
+          "表示title"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 105
+      },
+      {
+        "tuple": [
+          "Category",
+          "1281",
+          "16",
+          "X",
+          "M",
+          "`MAIN`/`SUBTRACK`/`OVA`/`OPENING`"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 106
+      },
+      {
+        "tuple": [
+          "Display path",
+          "1297",
+          "512",
+          "X",
+          "M",
+          "Sanitized表示専用。File解決には使用しない"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 107
+      }
+    ]
+  },
+  {
+    "layout": "MCTRSP01",
+    "area": "DATA",
+    "expectedRows": 2,
+    "canonicalRows": 2,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Total count",
+          "1",
+          "6",
+          "N",
+          "M",
+          "Record件数"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 121
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "7",
+          "2",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 122
+      }
+    ]
+  },
+  {
+    "layout": "MCTRSP01",
+    "area": "RECORD",
+    "expectedRows": 3,
+    "canonicalRows": 3,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Category",
+          "1",
+          "64",
+          "X",
+          "M",
+          "表示/要求値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 128
+      },
+      {
+        "tuple": [
+          "Track件数",
+          "65",
+          "6",
+          "N",
+          "M",
+          "Category配下総数"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 129
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "71",
+          "2",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 130
+      }
+    ]
+  },
+  {
+    "layout": "MCSREQ01",
+    "area": "DATA",
+    "expectedRows": 1,
+    "canonicalRows": 1,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Category",
+          "1",
+          "64",
+          "X",
+          "M",
+          "IF-013返却値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 138
+      }
+    ]
+  },
+  {
+    "layout": "MCSRSP01",
+    "area": "DATA",
+    "expectedRows": 2,
+    "canonicalRows": 2,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Total count",
+          "1",
+          "6",
+          "N",
+          "M",
+          "Record件数"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 144
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "7",
+          "2",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 145
+      }
+    ]
+  },
+  {
+    "layout": "MCSRSP01",
+    "area": "RECORD",
+    "expectedRows": 3,
+    "canonicalRows": 3,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Section",
+          "1",
+          "128",
+          "X",
+          "M",
+          "表示/要求値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 151
+      },
+      {
+        "tuple": [
+          "Track件数",
+          "129",
+          "6",
+          "N",
+          "M",
+          "Section配下総数"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 152
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "135",
+          "2",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 153
+      }
+    ]
+  },
+  {
+    "layout": "MTRREQ01",
+    "area": "DATA",
+    "expectedRows": 2,
+    "canonicalRows": 2,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Category",
+          "1",
+          "64",
+          "X",
+          "M",
+          "IF-013返却値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 161
+      },
+      {
+        "tuple": [
+          "Section",
+          "65",
+          "128",
+          "X",
+          "M",
+          "IF-014返却値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 162
+      }
+    ]
+  },
+  {
+    "layout": "MTRRSP01",
+    "area": "DATA",
+    "expectedRows": 2,
+    "canonicalRows": 2,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Total count",
+          "1",
+          "9",
+          "N",
+          "M",
+          "Record件数"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 168
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "10",
+          "7",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 169
+      }
+    ]
+  },
+  {
+    "layout": "MTRRSP01",
+    "area": "RECORD",
+    "expectedRows": 10,
+    "canonicalRows": 10,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Track ID",
+          "1",
+          "64",
+          "X",
+          "M",
+          "Stable logical ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 175
+      },
+      {
+        "tuple": [
+          "Title",
+          "65",
+          "256",
+          "X",
+          "M",
+          "表示title"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 176
+      },
+      {
+        "tuple": [
+          "Category",
+          "321",
+          "64",
+          "X",
+          "M",
+          "Category"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 177
+      },
+      {
+        "tuple": [
+          "Section",
+          "385",
+          "128",
+          "X",
+          "M",
+          "Section"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 178
+      },
+      {
+        "tuple": [
+          "Display path",
+          "513",
+          "512",
+          "X",
+          "M",
+          "Sanitized表示専用"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 179
+      },
+      {
+        "tuple": [
+          "File byte長",
+          "1025",
+          "12",
+          "N",
+          "M",
+          "1以上"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 180
+      },
+      {
+        "tuple": [
+          "Pair key",
+          "1037",
+          "256",
+          "X",
+          "O",
+          "`曲`のmain/instrumental grouping key"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 181
+      },
+      {
+        "tuple": [
+          "Pair role",
+          "1293",
+          "1",
+          "X",
+          "M",
+          "`M` main、`I` instrumental、`N` pair対象外"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 182
+      },
+      {
+        "tuple": [
+          "Display order",
+          "1294",
+          "4",
+          "N",
+          "M",
+          "一覧順"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 183
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "1298",
+          "15",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 184
+      }
+    ]
+  },
+  {
+    "layout": "MEDREQ01",
+    "area": "DATA",
+    "expectedRows": 3,
+    "canonicalRows": 3,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Track ID",
+          "1",
+          "64",
+          "X",
+          "M",
+          "Stable logical ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 194
+      },
+      {
+        "tuple": [
+          "Disposition",
+          "65",
+          "1",
+          "X",
+          "M",
+          "`I`再生/`A`download"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 195
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "66",
+          "7",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 196
+      }
+    ]
+  },
+  {
+    "layout": "MEDRSP01",
+    "area": "DATA",
+    "expectedRows": 8,
+    "canonicalRows": 8,
+    "matches": true,
+    "sharedAliases": [
+      "MEDIA1024"
+    ],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Media logical ID",
+          "1",
+          "64",
+          "X",
+          "M",
+          "要求IDのcanonical値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 17
+      },
+      {
+        "tuple": [
+          "Storage relative path",
+          "65",
+          "512",
+          "X",
+          "M",
+          "Business asset root基準。絶対path禁止、Browser非表示"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 18
+      },
+      {
+        "tuple": [
+          "File name",
+          "577",
+          "256",
+          "X",
+          "M",
+          "表示/download名"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 19
+      },
+      {
+        "tuple": [
+          "File byte長",
+          "833",
+          "12",
+          "N",
+          "M",
+          "1以上"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 20
+      },
+      {
+        "tuple": [
+          "SHA-256",
+          "845",
+          "64",
+          "X",
+          "M",
+          "Lowercase hex"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 21
+      },
+      {
+        "tuple": [
+          "MIME type",
+          "909",
+          "64",
+          "X",
+          "M",
+          "許可list内"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 22
+      },
+      {
+        "tuple": [
+          "Content disposition",
+          "973",
+          "1",
+          "X",
+          "M",
+          "`I` inline、`A` attachment"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 23
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "974",
+          "51",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 24
+      }
+    ]
+  },
+  {
+    "layout": "LGSREQ01",
+    "area": "DATA",
+    "expectedRows": 10,
+    "canonicalRows": 10,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Keyword",
+          "1",
+          "256",
+          "X",
+          "O",
+          "Message/details部分一致"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 209
+      },
+      {
+        "tuple": [
+          "Log type",
+          "257",
+          "16",
+          "X",
+          "O",
+          "ACTION/REQUEST/SECURITY/MQ/SYSTEM/BATCH"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 210
+      },
+      {
+        "tuple": [
+          "Action",
+          "273",
+          "64",
+          "X",
+          "O",
+          "完全一致"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 211
+      },
+      {
+        "tuple": [
+          "Path",
+          "337",
+          "256",
+          "X",
+          "O",
+          "部分一致"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 212
+      },
+      {
+        "tuple": [
+          "Level",
+          "593",
+          "8",
+          "X",
+          "O",
+          "INFO/WARN/ERROR"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 213
+      },
+      {
+        "tuple": [
+          "From日時",
+          "601",
+          "17",
+          "X",
+          "O",
+          "JST日時、全space可"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 214
+      },
+      {
+        "tuple": [
+          "To日時",
+          "618",
+          "17",
+          "X",
+          "O",
+          "JST日時、From≦To、最大31日"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 215
+      },
+      {
+        "tuple": [
+          "Page",
+          "635",
+          "6",
+          "N",
+          "M",
+          "1以上"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 216
+      },
+      {
+        "tuple": [
+          "Page size",
+          "641",
+          "3",
+          "N",
+          "M",
+          "固定100"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 217
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "644",
+          "13",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 218
+      }
+    ]
+  },
+  {
+    "layout": "LGSRSP01",
+    "area": "DATA",
+    "expectedRows": 7,
+    "canonicalRows": 7,
+    "matches": true,
+    "sharedAliases": [
+      "PAGED48"
+    ],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Effective page",
+          "1",
+          "6",
+          "N",
+          "M",
+          "1～999999"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 16
+      },
+      {
+        "tuple": [
+          "Page size",
+          "7",
+          "3",
+          "N",
+          "M",
+          "Interface固定値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 17
+      },
+      {
+        "tuple": [
+          "Total count",
+          "10",
+          "9",
+          "N",
+          "M",
+          "Page size 50は0～49,999,950、100は0～99,999,900"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 18
+      },
+      {
+        "tuple": [
+          "Total pages",
+          "19",
+          "6",
+          "N",
+          "M",
+          "0件でも1"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 19
+      },
+      {
+        "tuple": [
+          "First result",
+          "25",
+          "9",
+          "N",
+          "M",
+          "0件は0"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 20
+      },
+      {
+        "tuple": [
+          "Last result",
+          "34",
+          "9",
+          "N",
+          "M",
+          "0件は0"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 21
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "43",
+          "6",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 22
+      }
+    ]
+  },
+  {
+    "layout": "LGSRSP01",
+    "area": "RECORD",
+    "expectedRows": 16,
+    "canonicalRows": 16,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Log ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 228
+      },
+      {
+        "tuple": [
+          "発生日時",
+          "13",
+          "17",
+          "N",
+          "M",
+          "JST"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 229
+      },
+      {
+        "tuple": [
+          "Log type",
+          "30",
+          "16",
+          "X",
+          "M",
+          "定義値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 230
+      },
+      {
+        "tuple": [
+          "Level",
+          "46",
+          "8",
+          "X",
+          "M",
+          "INFO/WARN/ERROR"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 231
+      },
+      {
+        "tuple": [
+          "Action",
+          "54",
+          "64",
+          "X",
+          "O",
+          "Action code"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 232
+      },
+      {
+        "tuple": [
+          "Message",
+          "118",
+          "512",
+          "X",
+          "M",
+          "機微情報除外済み"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 233
+      },
+      {
+        "tuple": [
+          "HTTP request ID",
+          "630",
+          "36",
+          "X",
+          "O",
+          "UUID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 234
+      },
+      {
+        "tuple": [
+          "業務Message ID",
+          "666",
+          "36",
+          "X",
+          "O",
+          "UUID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 235
+      },
+      {
+        "tuple": [
+          "Correlation ID",
+          "702",
+          "36",
+          "X",
+          "O",
+          "UUID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 236
+      },
+      {
+        "tuple": [
+          "HTTP method",
+          "738",
+          "8",
+          "X",
+          "O",
+          "GET/POST等"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 237
+      },
+      {
+        "tuple": [
+          "Path",
+          "746",
+          "256",
+          "X",
+          "O",
+          "URI path"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 238
+      },
+      {
+        "tuple": [
+          "HTTP status",
+          "1002",
+          "3",
+          "X",
+          "O",
+          "ASCII数字/space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 239
+      },
+      {
+        "tuple": [
+          "Elapsed ms",
+          "1005",
+          "9",
+          "X",
+          "O",
+          "ASCII数字/space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 240
+      },
+      {
+        "tuple": [
+          "Remote address",
+          "1014",
+          "45",
+          "X",
+          "O",
+          "IPv4/IPv6"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 241
+      },
+      {
+        "tuple": [
+          "Details",
+          "1059",
+          "1024",
+          "X",
+          "O",
+          "表示用JSON text、本文・秘密値なし"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 242
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "2083",
+          "6",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 243
+      }
+    ]
+  },
+  {
+    "layout": "USRREQ01",
+    "area": "DATA",
+    "expectedRows": 6,
+    "canonicalRows": 6,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Username prefix",
+          "1",
+          "64",
+          "X",
+          "O",
+          "前方一致"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 28
+      },
+      {
+        "tuple": [
+          "Role",
+          "65",
+          "5",
+          "X",
+          "O",
+          "Space/USER/ADMIN"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 29
+      },
+      {
+        "tuple": [
+          "State",
+          "70",
+          "8",
+          "X",
+          "O",
+          "Space/ACTIVE/DISABLED/LOCKED"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 30
+      },
+      {
+        "tuple": [
+          "Page",
+          "78",
+          "6",
+          "N",
+          "M",
+          "1以上"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 31
+      },
+      {
+        "tuple": [
+          "Page size",
+          "84",
+          "3",
+          "N",
+          "M",
+          "固定50"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 32
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "87",
+          "10",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 33
+      }
+    ]
+  },
+  {
+    "layout": "USRRSP01",
+    "area": "DATA",
+    "expectedRows": 7,
+    "canonicalRows": 7,
+    "matches": true,
+    "sharedAliases": [
+      "PAGED48"
+    ],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Effective page",
+          "1",
+          "6",
+          "N",
+          "M",
+          "1～999999"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 16
+      },
+      {
+        "tuple": [
+          "Page size",
+          "7",
+          "3",
+          "N",
+          "M",
+          "Interface固定値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 17
+      },
+      {
+        "tuple": [
+          "Total count",
+          "10",
+          "9",
+          "N",
+          "M",
+          "Page size 50は0～49,999,950、100は0～99,999,900"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 18
+      },
+      {
+        "tuple": [
+          "Total pages",
+          "19",
+          "6",
+          "N",
+          "M",
+          "0件でも1"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 19
+      },
+      {
+        "tuple": [
+          "First result",
+          "25",
+          "9",
+          "N",
+          "M",
+          "0件は0"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 20
+      },
+      {
+        "tuple": [
+          "Last result",
+          "34",
+          "9",
+          "N",
+          "M",
+          "0件は0"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 21
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "43",
+          "6",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 22
+      }
+    ]
+  },
+  {
+    "layout": "USRRSP01",
+    "area": "RECORD",
+    "expectedRows": 10,
+    "canonicalRows": 10,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "User ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 43
+      },
+      {
+        "tuple": [
+          "Username",
+          "13",
+          "64",
+          "X",
+          "M",
+          "表示名"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 44
+      },
+      {
+        "tuple": [
+          "Role",
+          "77",
+          "5",
+          "X",
+          "M",
+          "USER/ADMIN"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 45
+      },
+      {
+        "tuple": [
+          "State",
+          "82",
+          "8",
+          "X",
+          "M",
+          "ACTIVE/DISABLED/LOCKED"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 46
+      },
+      {
+        "tuple": [
+          "Locked until",
+          "90",
+          "17",
+          "X",
+          "O",
+          "JST日時/space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 47
+      },
+      {
+        "tuple": [
+          "Last Login",
+          "107",
+          "17",
+          "X",
+          "O",
+          "JST日時/space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 48
+      },
+      {
+        "tuple": [
+          "Created at",
+          "124",
+          "17",
+          "N",
+          "M",
+          "JST日時"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 49
+      },
+      {
+        "tuple": [
+          "Updated at",
+          "141",
+          "17",
+          "N",
+          "M",
+          "JST日時"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 50
+      },
+      {
+        "tuple": [
+          "Version",
+          "158",
+          "9",
+          "N",
+          "M",
+          "Optimistic lock"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 51
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "167",
+          "2",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 52
+      }
+    ]
+  },
+  {
+    "layout": "UCRREQ01",
+    "area": "DATA",
+    "expectedRows": 6,
+    "canonicalRows": 6,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Username",
+          "1",
+          "64",
+          "X",
+          "M",
+          "`A-Z a-z 0-9 . _ -`、比較はcase-insensitive"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 62
+      },
+      {
+        "tuple": [
+          "Initial Password",
+          "65",
+          "256",
+          "X",
+          "M",
+          "NFC、12～128文字、256 byte以下、末尾space禁止"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 63
+      },
+      {
+        "tuple": [
+          "Role",
+          "321",
+          "5",
+          "X",
+          "M",
+          "USER/ADMIN"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 64
+      },
+      {
+        "tuple": [
+          "Enabled",
+          "326",
+          "1",
+          "B",
+          "M",
+          "0/1"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 65
+      },
+      {
+        "tuple": [
+          "Operation token",
+          "327",
+          "36",
+          "X",
+          "M",
+          "Web採番UUID。二重更新防止"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 66
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "363",
+          "10",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 67
+      }
+    ]
+  },
+  {
+    "layout": "UCRRSP01",
+    "area": "DATA",
+    "expectedRows": 3,
+    "canonicalRows": 3,
+    "matches": true,
+    "sharedAliases": [
+      "USRMUT24"
+    ],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "User ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "成功時のTarget ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 18
+      },
+      {
+        "tuple": [
+          "更新後version",
+          "13",
+          "9",
+          "N",
+          "M",
+          "成功時のOptimistic lock version"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 19
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "22",
+          "3",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 20
+      }
+    ]
+  },
+  {
+    "layout": "UDTREQ01",
+    "area": "DATA",
+    "expectedRows": 1,
+    "canonicalRows": 1,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "User ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "Target ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 79
+      }
+    ]
+  },
+  {
+    "layout": "UDTRSP01",
+    "area": "DATA",
+    "expectedRows": 14,
+    "canonicalRows": 14,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "User ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 85
+      },
+      {
+        "tuple": [
+          "Username",
+          "13",
+          "64",
+          "X",
+          "M",
+          "表示名"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 86
+      },
+      {
+        "tuple": [
+          "Role",
+          "77",
+          "5",
+          "X",
+          "M",
+          "USER/ADMIN"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 87
+      },
+      {
+        "tuple": [
+          "State",
+          "82",
+          "8",
+          "X",
+          "M",
+          "ACTIVE/DISABLED/LOCKED"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 88
+      },
+      {
+        "tuple": [
+          "Locked until",
+          "90",
+          "17",
+          "X",
+          "O",
+          "JST/space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 89
+      },
+      {
+        "tuple": [
+          "Last Login",
+          "107",
+          "17",
+          "X",
+          "O",
+          "JST/space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 90
+      },
+      {
+        "tuple": [
+          "Password changed at",
+          "124",
+          "17",
+          "N",
+          "M",
+          "JST"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 91
+      },
+      {
+        "tuple": [
+          "Created at",
+          "141",
+          "17",
+          "N",
+          "M",
+          "JST"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 92
+      },
+      {
+        "tuple": [
+          "Updated at",
+          "158",
+          "17",
+          "N",
+          "M",
+          "JST"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 93
+      },
+      {
+        "tuple": [
+          "Active session数",
+          "175",
+          "3",
+          "N",
+          "M",
+          "0～2"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 94
+      },
+      {
+        "tuple": [
+          "Version",
+          "178",
+          "9",
+          "N",
+          "M",
+          "Optimistic lock"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 95
+      },
+      {
+        "tuple": [
+          "Created by",
+          "187",
+          "64",
+          "X",
+          "M",
+          "Actor username。BootstrapのDB NULLは`SYSTEM`"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 96
+      },
+      {
+        "tuple": [
+          "Updated by",
+          "251",
+          "64",
+          "X",
+          "M",
+          "Actor username。BootstrapのDB NULLは`SYSTEM`"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 97
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "315",
+          "6",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 98
+      }
+    ]
+  },
+  {
+    "layout": "USTREQ01",
+    "area": "DATA",
+    "expectedRows": 5,
+    "canonicalRows": 5,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "User ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "Target"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 106
+      },
+      {
+        "tuple": [
+          "Enabled",
+          "13",
+          "1",
+          "B",
+          "M",
+          "0無効/1有効"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 107
+      },
+      {
+        "tuple": [
+          "Expected version",
+          "14",
+          "9",
+          "N",
+          "M",
+          "画面表示version"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 108
+      },
+      {
+        "tuple": [
+          "Operation token",
+          "23",
+          "36",
+          "X",
+          "M",
+          "Web採番UUID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 109
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "59",
+          "2",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 110
+      }
+    ]
+  },
+  {
+    "layout": "USTRSP01",
+    "area": "DATA",
+    "expectedRows": 3,
+    "canonicalRows": 3,
+    "matches": true,
+    "sharedAliases": [
+      "USRMUT24"
+    ],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "User ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "成功時のTarget ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 18
+      },
+      {
+        "tuple": [
+          "更新後version",
+          "13",
+          "9",
+          "N",
+          "M",
+          "成功時のOptimistic lock version"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 19
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "22",
+          "3",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 20
+      }
+    ]
+  },
+  {
+    "layout": "URLREQ01",
+    "area": "DATA",
+    "expectedRows": 5,
+    "canonicalRows": 5,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "User ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "Target"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 118
+      },
+      {
+        "tuple": [
+          "New role",
+          "13",
+          "5",
+          "X",
+          "M",
+          "USER/ADMIN"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 119
+      },
+      {
+        "tuple": [
+          "Expected version",
+          "18",
+          "9",
+          "N",
+          "M",
+          "画面表示version"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 120
+      },
+      {
+        "tuple": [
+          "Operation token",
+          "27",
+          "36",
+          "X",
+          "M",
+          "Web採番UUID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 121
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "63",
+          "6",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 122
+      }
+    ]
+  },
+  {
+    "layout": "URLRSP01",
+    "area": "DATA",
+    "expectedRows": 3,
+    "canonicalRows": 3,
+    "matches": true,
+    "sharedAliases": [
+      "USRMUT24"
+    ],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "User ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "成功時のTarget ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 18
+      },
+      {
+        "tuple": [
+          "更新後version",
+          "13",
+          "9",
+          "N",
+          "M",
+          "成功時のOptimistic lock version"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 19
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "22",
+          "3",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 20
+      }
+    ]
+  },
+  {
+    "layout": "UPWREQ01",
+    "area": "DATA",
+    "expectedRows": 5,
+    "canonicalRows": 5,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "User ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "Target"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 130
+      },
+      {
+        "tuple": [
+          "New Password",
+          "13",
+          "256",
+          "X",
+          "M",
+          "User作成と同じpolicy"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 131
+      },
+      {
+        "tuple": [
+          "Expected version",
+          "269",
+          "9",
+          "N",
+          "M",
+          "画面表示version"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 132
+      },
+      {
+        "tuple": [
+          "Operation token",
+          "278",
+          "36",
+          "X",
+          "M",
+          "Web採番UUID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 133
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "314",
+          "11",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 134
+      }
+    ]
+  },
+  {
+    "layout": "UPWRSP01",
+    "area": "DATA",
+    "expectedRows": 3,
+    "canonicalRows": 3,
+    "matches": true,
+    "sharedAliases": [
+      "USRMUT24"
+    ],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "User ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "成功時のTarget ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 18
+      },
+      {
+        "tuple": [
+          "更新後version",
+          "13",
+          "9",
+          "N",
+          "M",
+          "成功時のOptimistic lock version"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 19
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "22",
+          "3",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 20
+      }
+    ]
+  },
+  {
+    "layout": "ULKREQ01",
+    "area": "DATA",
+    "expectedRows": 4,
+    "canonicalRows": 4,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "User ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "Target"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 142
+      },
+      {
+        "tuple": [
+          "Expected version",
+          "13",
+          "9",
+          "N",
+          "M",
+          "画面表示version"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 143
+      },
+      {
+        "tuple": [
+          "Operation token",
+          "22",
+          "36",
+          "X",
+          "M",
+          "Web採番UUID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 144
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "58",
+          "3",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 145
+      }
+    ]
+  },
+  {
+    "layout": "ULKRSP01",
+    "area": "DATA",
+    "expectedRows": 3,
+    "canonicalRows": 3,
+    "matches": true,
+    "sharedAliases": [
+      "USRMUT24"
+    ],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "User ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "成功時のTarget ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 18
+      },
+      {
+        "tuple": [
+          "更新後version",
+          "13",
+          "9",
+          "N",
+          "M",
+          "成功時のOptimistic lock version"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 19
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "22",
+          "3",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 20
+      }
+    ]
+  },
+  {
+    "layout": "QSBREQ01",
+    "area": "DATA",
+    "expectedRows": 3,
+    "canonicalRows": 3,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "質問本文",
+          "1",
+          "4096",
+          "X",
+          "M",
+          "NFC後1～4096 byte、CR/LF/TAB/NULと末尾ASCII spaceなし"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 162
+      },
+      {
+        "tuple": [
+          "Operation token",
+          "4097",
+          "36",
+          "X",
+          "M",
+          "Web採番UUID、利用者session内で一意"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 163
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "4133",
+          "12",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 164
+      }
+    ]
+  },
+  {
+    "layout": "QSBRSP01",
+    "area": "DATA",
+    "expectedRows": 4,
+    "canonicalRows": 4,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "受付ID",
+          "1",
+          "26",
+          "X",
+          "M",
+          "Random public ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 170
+      },
+      {
+        "tuple": [
+          "Question ID",
+          "27",
+          "12",
+          "N",
+          "M",
+          "内部ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 171
+      },
+      {
+        "tuple": [
+          "受付日時",
+          "39",
+          "17",
+          "N",
+          "M",
+          "JST"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 172
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "56",
+          "9",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 173
+      }
+    ]
+  },
+  {
+    "layout": "NTSREQ01",
+    "area": "DATA",
+    "expectedRows": 6,
+    "canonicalRows": 6,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "通知区分",
+          "1",
+          "12",
+          "X",
+          "O",
+          "ACCEPTED/COMPLETED/ERROR/space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 183
+      },
+      {
+        "tuple": [
+          "受付日時From",
+          "13",
+          "17",
+          "X",
+          "O",
+          "JST/space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 184
+      },
+      {
+        "tuple": [
+          "受付日時To",
+          "30",
+          "17",
+          "X",
+          "O",
+          "JST/space、最大366日"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 185
+      },
+      {
+        "tuple": [
+          "Page",
+          "47",
+          "6",
+          "N",
+          "M",
+          "1以上"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 186
+      },
+      {
+        "tuple": [
+          "Page size",
+          "53",
+          "3",
+          "N",
+          "M",
+          "固定50"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 187
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "56",
+          "9",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 188
+      }
+    ]
+  },
+  {
+    "layout": "NTSRSP01",
+    "area": "DATA",
+    "expectedRows": 7,
+    "canonicalRows": 7,
+    "matches": true,
+    "sharedAliases": [
+      "PAGED48"
+    ],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Effective page",
+          "1",
+          "6",
+          "N",
+          "M",
+          "1～999999"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 16
+      },
+      {
+        "tuple": [
+          "Page size",
+          "7",
+          "3",
+          "N",
+          "M",
+          "Interface固定値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 17
+      },
+      {
+        "tuple": [
+          "Total count",
+          "10",
+          "9",
+          "N",
+          "M",
+          "Page size 50は0～49,999,950、100は0～99,999,900"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 18
+      },
+      {
+        "tuple": [
+          "Total pages",
+          "19",
+          "6",
+          "N",
+          "M",
+          "0件でも1"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 19
+      },
+      {
+        "tuple": [
+          "First result",
+          "25",
+          "9",
+          "N",
+          "M",
+          "0件は0"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 20
+      },
+      {
+        "tuple": [
+          "Last result",
+          "34",
+          "9",
+          "N",
+          "M",
+          "0件は0"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 21
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "43",
+          "6",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 22
+      }
+    ]
+  },
+  {
+    "layout": "NTSRSP01",
+    "area": "RECORD",
+    "expectedRows": 9,
+    "canonicalRows": 9,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Notification ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "明細ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 198
+      },
+      {
+        "tuple": [
+          "受付ID",
+          "13",
+          "26",
+          "X",
+          "M",
+          "Public ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 199
+      },
+      {
+        "tuple": [
+          "通知区分",
+          "39",
+          "12",
+          "X",
+          "M",
+          "ACCEPTED/COMPLETED/ERROR"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 200
+      },
+      {
+        "tuple": [
+          "内部状態",
+          "51",
+          "12",
+          "X",
+          "M",
+          "RECEIVED/PROCESSING/COMPLETED/ERROR/CANCELLED"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 201
+      },
+      {
+        "tuple": [
+          "受付日時",
+          "63",
+          "17",
+          "N",
+          "M",
+          "JST"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 202
+      },
+      {
+        "tuple": [
+          "最終更新日時",
+          "80",
+          "17",
+          "N",
+          "M",
+          "JST"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 203
+      },
+      {
+        "tuple": [
+          "質問概要",
+          "97",
+          "512",
+          "X",
+          "M",
+          "先頭100文字相当または`削除済み`"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 204
+      },
+      {
+        "tuple": [
+          "質問削除済み",
+          "609",
+          "1",
+          "B",
+          "M",
+          "0/1"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 205
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "610",
+          "15",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 206
+      }
+    ]
+  },
+  {
+    "layout": "NTDREQ01",
+    "area": "DATA",
+    "expectedRows": 1,
+    "canonicalRows": 1,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Notification ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "Target"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 216
+      }
+    ]
+  },
+  {
+    "layout": "NTDRSP01",
+    "area": "DATA",
+    "expectedRows": 16,
+    "canonicalRows": 16,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Notification ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 222
+      },
+      {
+        "tuple": [
+          "受付ID",
+          "13",
+          "26",
+          "X",
+          "M",
+          "Public ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 223
+      },
+      {
+        "tuple": [
+          "通知区分",
+          "39",
+          "12",
+          "X",
+          "M",
+          "定義値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 224
+      },
+      {
+        "tuple": [
+          "内部状態",
+          "51",
+          "12",
+          "X",
+          "M",
+          "定義状態"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 225
+      },
+      {
+        "tuple": [
+          "受付日時",
+          "63",
+          "17",
+          "N",
+          "M",
+          "JST"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 226
+      },
+      {
+        "tuple": [
+          "処理開始日時",
+          "80",
+          "17",
+          "X",
+          "C",
+          "PROCESSING/COMPLETED/ERROR時JST、他はspace"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 227
+      },
+      {
+        "tuple": [
+          "処理完了日時",
+          "97",
+          "17",
+          "X",
+          "C",
+          "COMPLETED時JST、他はspace"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 228
+      },
+      {
+        "tuple": [
+          "Error日時",
+          "114",
+          "17",
+          "X",
+          "C",
+          "ERROR時JST、他はspace"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 229
+      },
+      {
+        "tuple": [
+          "取消日時",
+          "131",
+          "17",
+          "X",
+          "C",
+          "CANCELLED時JST、他はspace"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 230
+      },
+      {
+        "tuple": [
+          "質問削除済み",
+          "148",
+          "1",
+          "B",
+          "M",
+          "0/1"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 231
+      },
+      {
+        "tuple": [
+          "質問本文",
+          "149",
+          "4096",
+          "X",
+          "C",
+          "未削除時。削除済みはspace"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 232
+      },
+      {
+        "tuple": [
+          "回答本文",
+          "4245",
+          "4096",
+          "X",
+          "O",
+          "COMPLETED時。空回答は全spaceと区別するため状態で判定"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 233
+      },
+      {
+        "tuple": [
+          "Error code",
+          "8341",
+          "16",
+          "X",
+          "C",
+          "ERROR時必須、他はspace"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 234
+      },
+      {
+        "tuple": [
+          "利用者向けerror",
+          "8357",
+          "512",
+          "X",
+          "C",
+          "ERROR時必須、他はspace"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 235
+      },
+      {
+        "tuple": [
+          "Question ID",
+          "8869",
+          "12",
+          "X",
+          "C",
+          "未削除時ASCII数字、削除済みはspace"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 236
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "8881",
+          "16",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 237
+      }
+    ]
+  },
+  {
+    "layout": "NTCREQ01",
+    "area": "DATA",
+    "expectedRows": 2,
+    "canonicalRows": 2,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Notification ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "Target"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 247
+      },
+      {
+        "tuple": [
+          "Operation token",
+          "13",
+          "36",
+          "X",
+          "M",
+          "UUID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 248
+      }
+    ]
+  },
+  {
+    "layout": "NTCRSP01",
+    "area": "DATA",
+    "expectedRows": 3,
+    "canonicalRows": 3,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "更新後状態",
+          "1",
+          "12",
+          "X",
+          "C",
+          "`0000`/`0200`はCANCELLED、`0107`は競合時最新状態"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 254
+      },
+      {
+        "tuple": [
+          "取消日時",
+          "13",
+          "17",
+          "X",
+          "C",
+          "`0000`/`0200`時JST、`0107`時space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 255
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "30",
+          "3",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 256
+      }
+    ]
+  },
+  {
+    "layout": "QSSREQ01",
+    "area": "DATA",
+    "expectedRows": 8,
+    "canonicalRows": 8,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Keyword",
+          "1",
+          "256",
+          "X",
+          "O",
+          "質問/回答部分一致"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 266
+      },
+      {
+        "tuple": [
+          "Username",
+          "257",
+          "64",
+          "X",
+          "O",
+          "ADMINのみ完全一致。USERはspace必須"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 267
+      },
+      {
+        "tuple": [
+          "回答状態",
+          "321",
+          "12",
+          "X",
+          "O",
+          "ANSWERED/UNANSWERED/ERROR/space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 268
+      },
+      {
+        "tuple": [
+          "受付日時From",
+          "333",
+          "17",
+          "X",
+          "O",
+          "JST/space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 269
+      },
+      {
+        "tuple": [
+          "受付日時To",
+          "350",
+          "17",
+          "X",
+          "O",
+          "JST/space、最大366日"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 270
+      },
+      {
+        "tuple": [
+          "Page",
+          "367",
+          "6",
+          "N",
+          "M",
+          "1以上"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 271
+      },
+      {
+        "tuple": [
+          "Page size",
+          "373",
+          "3",
+          "N",
+          "M",
+          "固定50"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 272
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "376",
+          "9",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 273
+      }
+    ]
+  },
+  {
+    "layout": "QSSRSP01",
+    "area": "DATA",
+    "expectedRows": 7,
+    "canonicalRows": 7,
+    "matches": true,
+    "sharedAliases": [
+      "PAGED48"
+    ],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Effective page",
+          "1",
+          "6",
+          "N",
+          "M",
+          "1～999999"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 16
+      },
+      {
+        "tuple": [
+          "Page size",
+          "7",
+          "3",
+          "N",
+          "M",
+          "Interface固定値"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 17
+      },
+      {
+        "tuple": [
+          "Total count",
+          "10",
+          "9",
+          "N",
+          "M",
+          "Page size 50は0～49,999,950、100は0～99,999,900"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 18
+      },
+      {
+        "tuple": [
+          "Total pages",
+          "19",
+          "6",
+          "N",
+          "M",
+          "0件でも1"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 19
+      },
+      {
+        "tuple": [
+          "First result",
+          "25",
+          "9",
+          "N",
+          "M",
+          "0件は0"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 20
+      },
+      {
+        "tuple": [
+          "Last result",
+          "34",
+          "9",
+          "N",
+          "M",
+          "0件は0"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 21
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "43",
+          "6",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+        "line": 22
+      }
+    ]
+  },
+  {
+    "layout": "QSSRSP01",
+    "area": "RECORD",
+    "expectedRows": 8,
+    "canonicalRows": 8,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Question ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "明細ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 283
+      },
+      {
+        "tuple": [
+          "受付ID",
+          "13",
+          "26",
+          "X",
+          "M",
+          "Public ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 284
+      },
+      {
+        "tuple": [
+          "Username",
+          "39",
+          "64",
+          "X",
+          "M",
+          "ADMIN表示用。USER responseにも設定"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 285
+      },
+      {
+        "tuple": [
+          "質問概要",
+          "103",
+          "512",
+          "X",
+          "M",
+          "先頭100文字相当"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 286
+      },
+      {
+        "tuple": [
+          "回答状態",
+          "615",
+          "12",
+          "X",
+          "M",
+          "ANSWERED/UNANSWERED/ERROR"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 287
+      },
+      {
+        "tuple": [
+          "受付日時",
+          "627",
+          "17",
+          "N",
+          "M",
+          "JST"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 288
+      },
+      {
+        "tuple": [
+          "回答日時",
+          "644",
+          "17",
+          "X",
+          "C",
+          "ANSWERED時JST、他はspace"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 289
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "661",
+          "12",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 290
+      }
+    ]
+  },
+  {
+    "layout": "QSDREQ01",
+    "area": "DATA",
+    "expectedRows": 1,
+    "canonicalRows": 1,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Question ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "Target"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 300
+      }
+    ]
+  },
+  {
+    "layout": "QSDRSP01",
+    "area": "DATA",
+    "expectedRows": 9,
+    "canonicalRows": 9,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Question ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 306
+      },
+      {
+        "tuple": [
+          "受付ID",
+          "13",
+          "26",
+          "X",
+          "M",
+          "Public ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 307
+      },
+      {
+        "tuple": [
+          "Username",
+          "39",
+          "64",
+          "X",
+          "M",
+          "Owner"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 308
+      },
+      {
+        "tuple": [
+          "回答状態",
+          "103",
+          "12",
+          "X",
+          "M",
+          "ANSWERED/UNANSWERED/ERROR"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 309
+      },
+      {
+        "tuple": [
+          "質問本文",
+          "115",
+          "4096",
+          "X",
+          "M",
+          "本文"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 310
+      },
+      {
+        "tuple": [
+          "回答本文",
+          "4211",
+          "4096",
+          "X",
+          "O",
+          "空回答可"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 311
+      },
+      {
+        "tuple": [
+          "受付日時",
+          "8307",
+          "17",
+          "N",
+          "M",
+          "JST"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 312
+      },
+      {
+        "tuple": [
+          "回答日時",
+          "8324",
+          "17",
+          "X",
+          "C",
+          "ANSWERED時JST、他はspace"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 313
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "8341",
+          "12",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 314
+      }
+    ]
+  },
+  {
+    "layout": "QDLREQ01",
+    "area": "DATA",
+    "expectedRows": 2,
+    "canonicalRows": 2,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "Question ID",
+          "1",
+          "12",
+          "N",
+          "M",
+          "Target"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 324
+      },
+      {
+        "tuple": [
+          "Operation token",
+          "13",
+          "36",
+          "X",
+          "M",
+          "UUID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 325
+      }
+    ]
+  },
+  {
+    "layout": "QDLRSP01",
+    "area": "DATA",
+    "expectedRows": 2,
+    "canonicalRows": 2,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "削除日時",
+          "1",
+          "17",
+          "N",
+          "M",
+          "論理削除JST日時"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 331
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "18",
+          "7",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 332
+      }
+    ]
+  },
+  {
+    "layout": "QWKREQ01",
+    "area": "DATA",
+    "expectedRows": 4,
+    "canonicalRows": 4,
+    "matches": true,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "受付ID",
+          "1",
+          "26",
+          "X",
+          "M",
+          "Public ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 344
+      },
+      {
+        "tuple": [
+          "Question ID",
+          "27",
+          "12",
+          "N",
+          "M",
+          "DB ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 345
+      },
+      {
+        "tuple": [
+          "Async job ID",
+          "39",
+          "12",
+          "N",
+          "M",
+          "Job ID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 346
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "51",
+          "14",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+        "line": 347
+      }
+    ]
+  },
+  {
+    "layout": "WLGEVT01",
+    "area": "DATA",
+    "expectedRows": 15,
+    "canonicalRows": 15,
+    "matches": false,
+    "sharedAliases": [],
+    "canonicalFields": [
+      {
+        "tuple": [
+          "発生日時",
+          "1",
+          "17",
+          "N",
+          "M",
+          "HTTP response確定時のJST"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 256
+      },
+      {
+        "tuple": [
+          "Log type",
+          "18",
+          "16",
+          "X",
+          "M",
+          "`REQUEST`または限定`ACTION`。組合せは下記QA-054規則"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 257
+      },
+      {
+        "tuple": [
+          "Level",
+          "34",
+          "8",
+          "X",
+          "M",
+          "INFO/WARN/ERROR"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 258
+      },
+      {
+        "tuple": [
+          "Action",
+          "42",
+          "64",
+          "X",
+          "O",
+          "REQUESTは`HTTP_REQUEST_COMPLETED`（省略時API補完）、ACTIONは`MENU_VIEWED`必須"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 259
+      },
+      {
+        "tuple": [
+          "Message",
+          "106",
+          "512",
+          "X",
+          "M",
+          "本文・secretを含まない定型要約"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 260
+      },
+      {
+        "tuple": [
+          "HTTP request ID",
+          "618",
+          "36",
+          "X",
+          "M",
+          "UUID"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 261
+      },
+      {
+        "tuple": [
+          "HTTP method",
+          "654",
+          "8",
+          "X",
+          "M",
+          "GET/POST等"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 262
+      },
+      {
+        "tuple": [
+          "Path",
+          "662",
+          "256",
+          "X",
+          "M",
+          "Queryを除くURI path。制御文字なし"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 263
+      },
+      {
+        "tuple": [
+          "HTTP status",
+          "918",
+          "3",
+          "X",
+          "M",
+          "ASCII 3桁"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 264
+      },
+      {
+        "tuple": [
+          "Elapsed ms",
+          "921",
+          "9",
+          "X",
+          "M",
+          "ASCII数字、0～999999999"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 265
+      },
+      {
+        "tuple": [
+          "Remote address",
+          "930",
+          "45",
+          "X",
+          "M",
+          "検証済みIPv4/IPv6 text"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 266
+      },
+      {
+        "tuple": [
+          "Username",
+          "975",
+          "64",
+          "X",
+          "O",
+          "未認証はspace"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 267
+      },
+      {
+        "tuple": [
+          "Role",
+          "1039",
+          "5",
+          "X",
+          "O",
+          "USER/ADMIN/space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 268
+      },
+      {
+        "tuple": [
+          "Details",
+          "1044",
+          "1024",
+          "X",
+          "O",
+          "表示用bounded JSON。本文、query値、cookie、tokenなし"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 269
+      },
+      {
+        "tuple": [
+          "Reserved",
+          "2068",
+          "13",
+          "X",
+          "F",
+          "全space"
+        ],
+        "source": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+        "line": 270
+      }
+    ]
+  }
+]

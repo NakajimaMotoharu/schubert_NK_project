@@ -1,0 +1,80 @@
+"""Same-run owner/independent-oracle qualification; reads public metadata/source only, no JVM."""
+from pathlib import Path
+import collections,datetime,hashlib,json,re,subprocess,xml.etree.ElementTree as E
+R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';O=B/'evidence/PG26250-header-layout-field-current-criteria-v1';assert not O.exists()
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();load=lambda p:json.loads(p.read_bytes())
+full=R/'evidence/01_PT/002_NK-PRO-002/evidence/PG26242-protocol-named59-flag6-independent-v1/manifest.json';assert sha(full)=='62e8f43d53371f2170b713e2cfb1a377d3b1d4e2237bae13aac82d9d4b3d9488';m=load(full)
+assert m['actualExit']==0 and m['tests']==124 and m['measuredFour100'] and m['heldFourInitializations']==0 and not m['oldExecUnion'] and m['manualCoverageExclusions']==[]
+assert all(m[k]==0 for k in ['failures','errors','skipped','aborted']);assert m['source']=='2a5cdab45c6ef5e32994264cf1e93f5d70216040'
+for name in ['coverage.xml','testcases.safe.xml']:assert sha(full.parent/name)==m['files'][name]
+report={x.get('name'):x for x in E.parse(full.parent/'coverage.xml').findall('.//class')};cases=[x.attrib for x in E.parse(full.parent/'testcases.safe.xml').findall('testcase')];names={(x['classname'].rsplit('.',1)[-1],x['name'].removesuffix('()')) for x in cases}
+master=load(R/'documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json');tasks={x['id']:x for x in master['tasks']};inventory=load(B/'evidence/PG23972-current-main-method-delta42-v1/class-method-inventory.json')
+ownerIds=['WBS-P001-01','WBS-P001-02','WBS-P002-01'];owners=[];filters=[];sources=[]
+for owner in ownerIds:
+ task=tasks[owner];paths=set(task['ownedArtifacts']);rows=[x for x in inventory if x['sourcePath'] in paths and x['physicalKey'].startswith('protocol:')];assert len(paths)=={'WBS-P001-01':6,'WBS-P001-02':20,'WBS-P002-01':43}[owner];assert {x['sourcePath'] for x in rows}==paths
+ count=collections.defaultdict(lambda:dict(covered=0,missed=0));noCode=[];naturalB0=[];before=len(filters)
+ for x in rows:
+  path=R/x['sourcePath'];assert sha(path)==x['sourceSha256'] and x['structure'] is not None
+  content=path.read_text();assert '\r' not in content and b'\r' not in path.read_bytes();name=x['physicalKey'].split(':',1)[1].removesuffix('.class');node=report.get(name);measured={(v.get('name'),v.get('desc')) for v in node.findall('method')} if node is not None else set();leaf=name.rsplit('/',1)[-1].rsplit('$',1)[-1]
+  counters={v.get('type'):dict(covered=int(v.get('covered')),missed=int(v.get('missed'))) for v in node.findall('counter')} if node is not None else {}
+  if not any(v['hasCode'] for v in x['structure']['methods']):noCode.append(name)
+  if counters.get('CLASS',{}).get('covered',0)>0 and 'BRANCH' not in counters:naturalB0.append(name)
+  for k,v in counters.items():count[k]['covered']+=v['covered'];count[k]['missed']+=v['missed']
+  for method in x['structure']['methods']:
+   n=method['name'];d=method['descriptor']
+   if not method['hasCode'] or (n,d) in measured:continue
+   if name.endswith('$1') and n=='<clinit>' and d=='()V':reason='JAVAC_SYNTHETIC_SWITCHMAP_STANDARD_FILTER';basis='Compiler switch table only; handwritten switch branches remain measured.'
+   elif re.search(r'\brecord\s+'+re.escape(leaf)+r'\b',content) and ((n in ['equals','hashCode','toString']) or (d.startswith('()') and n not in ['<init>','<clinit>'])):reason='JAVAC_RECORD_STANDARD_FILTER';basis='Only generated component getter/equality/hash/string; explicit authored methods remain measured. Independent fixture/type/record assertions cover authored value contracts; this review is not an unfiltered runtime percentage.'
+   elif re.search(r'\benum\s+'+re.escape(leaf)+r'\b',content) and n in ['values','valueOf','$values','<init>']:reason='JAVAC_ENUM_STANDARD_FILTER';basis='Compiler enum support only; literal name/wire allowlist and invalid/null conversion assertions remain in normal run.'
+   elif n=='compareTo' and d=='(Ljava/lang/Object;)I' and ('compareTo','(Ldev/codex/schubert/nk/protocol/layout/LayoutId;)I') in measured:reason='JAVAC_COMPARABLE_BRIDGE_STANDARD_FILTER';basis='Compiler bridge to explicitly measured typed LayoutId.compareTo, not a handwritten branch.'
+   elif n=='<init>' and d=='()V' and re.search(r'private\s+'+re.escape(leaf)+r'\(\)\s*\{\s*\}',content):reason='PRIVATE_EMPTY_UTILITY_CTOR_STANDARD_FILTER';basis='Source-confirmed empty private constructor, no authored behavior; no private reflection or exclusion setting.'
+   else:raise AssertionError((owner,name,n,d))
+   filters.append(dict(owner=owner,physicalClass=name,source=x['sourcePath'],method=n,descriptor=d,reason=reason,basis=basis,measuredRuntimeCoverageClaimed=False))
+  sources.append(dict(owner=owner,path=x['sourcePath'],sourceSha256=x['sourceSha256'],physicalClass=name,physicalClassSha256=x['classSha256'],counters=counters,lfOnly=True))
+ assert all(count[k]['covered']>0 and count[k]['missed']==0 for k in ['LINE','METHOD','CLASS','BRANCH']);assert task['acceptance']['status']=='ACCEPTED' and task['acceptance']['source']=='7fffab57a567914956b66452e5e54388642efdec'
+ owners.append(dict(owner=owner,sourceArtifacts=len(paths),physicalClasses=len(rows),coverage=dict(count),measuredOwnerFour100=True,defaultFilteredMethods=len(filters)-before,noCodeClasses=noCode,naturalZeroBranchClasses=naturalB0,perSourceNonemptyBranch100Claimed=False,dependencies=task['dependencies'],sharedClassReferences=task['sharedClassReferences'],sharedImplementationFeeReadded=False))
+# Compare untouched independent UI233 rows directly against canonical approved numeric/direction cells.
+ui='documents/200_UI/230_インターフェース/233_固定長電文インターフェース一覧.md';canon=subprocess.check_output(['git','show','origin/main:'+ui],text=True);canonical=[]
+for line in canon.splitlines():
+ cells=[x.strip() for x in line.strip().strip('|').split('|')]
+ if len(cells)!=9:continue
+ match=re.fullmatch(r'([QSE]) `([A-Z0-9]{8})`',cells[1])
+ if match:canonical.append([match[2],match[1],cells[2]]+[v.replace(',','') for v in cells[3:7]])
+fixtures=R/'src/schubert-nk-protocol/src/test/resources/protocol';fixture=[l.split('\t') for l in (fixtures/'layouts-ui233.tsv').read_text().splitlines() if l and not l.startswith('#')];assert len(canonical)==64 and canonical==fixture
+prior=B/'evidence/PG26248-canonical-ui-field-comparison-v1';p=load(prior/'manifest.json');assert p['fixtureFieldRows']==389 and p['unconfirmedRows']==2;differences=load(prior/'unconfirmed-differences.json');assert [(v['layout'],v['area'],v['index']) for v in differences]==[('WLGEVT01','DATA',1),('WLGEVT01','DATA',3)]
+for s in load(prior/'scope-comparison.json'):
+ for i,row in enumerate(s['canonicalFields']):
+  actual=[l.split('\t')[2:] for l in (fixtures/'fields-ui234-236.tsv').read_text().splitlines() if l.startswith(s['layout']+'\t'+s['area']+'\t')][i]
+  assert row['tuple'][:6]==actual[:6]
+assert sum(len(s['canonicalFields']) for s in load(prior/'scope-comparison.json'))==389
+qa054=[x for x in cases if x['classname'].endswith('.WebLogActionContractTest')];assert len(qa054)==13
+for v in differences:v.update(classification='ABBREVIATED_METADATA_PROSE_PHYSICAL_CONTRACT_IDENTICAL_NOT_ORACLE_CHANGE',physicalFieldNameOffsetLengthWirePresenceIdentical=True,canonicalRuleAuthority='origin/main UI235 §12.2 QA054/SSC336',independentActualTestEvidence=[x['name'] for x in qa054],testExpectedComesFrom='Explicit REQUEST/HTTP_REQUEST_COMPLETED-or-omitted and ACTION/MENU_VIEWED closed pairs, reject crossed/unknown/LOG_SEARCHED; literal 2080 bytes and offsets18/42; fixture semantic text alone is not validation oracle.',productBugFound=False,fixtureOrProductionEdited=False)
+# Explicit assertions mapped to requirement owner portion; larger transport/runtime obligations stay separate.
+requirements=[
+ ('MQ-014','HeaderModelTest','headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow','256+data+record*count checked, 1,000,000 accepted/next byte rejected; wire encoder path in MessageCodecTest.'),
+ ('MQ-015','HeaderModelTest','headerValidateAgainstRejectsEachMetadataMismatch','Independent kind/interaction/layout/declared lengths reject each mismatch.'),
+ ('MQ-016','LayoutMetadataTest','registryMatchesIndependentUi233Catalog','Canonical64 rows and typed data/record independent SS323 table; service business behavior separate.'),
+ ('MQ-017','LayoutFieldCatalogTest','catalogMatchesIndependentUi234To236Fixture','Canonical389 physical field cells; immutable ordered metadata, no gap/overlap, independent byte and field expectations.'),
+ ('MQ-018','FieldCodecTest','textEncodeNormalizesUtf8AndPadsWithAsciiSpace','ASCII/Japanese3/emoji4/combining2 actual UTF8 length independent bytes.'),
+ ('MSG-001','FieldCodecTest','textDecodeIsStrictCanonicalAndOptionalAware','Strict UTF8 body field rejects malformed bytes; JMS BytesMessage metadata validator covered as pure value port; actual broker/adapter belongs P005/N and not accepted here.'),
+ ('MSG-002','FieldCodecNfcGoldenTest','nfcGolden001HangulJamoFitsComposedByteWidth','Literal Hangul UTF8/composed byte width/max vs below width.'),
+ ('MSG-003','FieldCodecTest','textEncodeNormalizesUtf8AndPadsWithAsciiSpace','Right ASCII0x20 padding, required/optional null and blank, trailing value-space reject.'),
+ ('MSG-004','FieldCodecTest','numericCodecChecksDigitsRangeAndOverflow','Literal zero/one/max zero-padded ASCII; semantic bounds, wire width and signedlong overflow failures.'),
+ ('MSG-005','ProtocolSemanticTypeTest','xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues','Typed X numeric wrappers, space optional and noncanonical rejects; actual payload X9 elapsed literal in QA054.'),
+ ('MSG-006','FieldCodecTest','booleanAndReservedFieldsRejectUnknownBytes','Literal0/1 and optionalspace; requiredspace/2/wronglength/null fail.'),
+ ('MSG-007','FieldCodecTest','numericSemanticCeilingIsIndependentOfWireAndLongCapacity','Max-1/max/+1 semantic boundaries independent literal19digits; overflow has no partial success/input mutation.'),
+ ('MSG-008','FieldCodecTest','textEncodeNormalizesUtf8AndPadsWithAsciiSpace','CR/LF/TAB/NUL encode reject and decode counterpart; malformed Unicode no silent truncation.'),
+ ('MSG-009','FieldCodecTest','textDecodeIsStrictCanonicalAndOptionalAware','Field LF rejection plus current owned69 production source LF-only. Whole docs/settings/generated-output LF under G/F remains separate and unaccepted here.'),
+ ('MSG-010','FieldCodecNfcGoldenTest','nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition','Independent UTF8 hex for NFD→NFC encode; noncanonical receive reject, input bytes unchanged.'),
+ ('MSG-011','SemanticFieldValueTest','semanticHelpersDecodeAndEncodeEverySupportedShape','Instant→JST literal17digits, invalid time/leap/zone cases in original Jst codec cases; runtimeclock not involved.')]
+req=[]
+for rid,cl,case,expected in requirements:
+ assert (cl,case) in names
+ req.append(dict(requirementId=rid,testId='PT-PRO-CURRENT-'+rid,case=cl+'#'+case,independentExpectedBasis=expected,actualBasis='Pinned normal124 case terminal success and unchanged frozen test assertions; no per-vector raw capture fabricated',status='VERIFIED_CURRENT_HOST_COMPONENT_PORTION',globalRequirementAccepted=False))
+criteria=[]
+for own in owners:
+ owner=own['owner'];criteria += [dict(id=owner+':contract',status='VERIFIED_CURRENT_HOST_COMPONENT_SCOPE',requirementMatrix='requirement-oracle-matrix.json',independentFixtures=['canonical64-layouts.json','canonical389-field-prose-dispositions.json'],allBusinessOrTransportRuntimeClaimed=False),dict(id=owner+':scope',status='VERIFIED_CURRENT_HOST_COMPONENT_SCOPE',sourceArtifacts=own['sourceArtifacts'],physicalClasses=own['physicalClasses'],dependencies=own['dependencies'],sharedReferences=own['sharedClassReferences'],sharedValidatorEvidenceSameRun=True),dict(id=owner+':quality',status='VERIFIED_CURRENT_HOST_COMPONENT_SCOPE_GLOBAL_GATES_SEPARATE',sameSource=m['source'],sameRun=m['singleSession'],coverage=own['coverage'],filterReview='default-filter-review.json',nullNegativeCoverage=True,replayConcurrencyResource='Immutable/pure memory values, no mutable owned external resource/retry process; original QA054 concurrent owner bounded shutdown is in actual same run. No service operations claimed.',whole451Accepted=False)]
+O.mkdir();outputs={'owner-scopes.json':owners,'source-physical-counters.json':sources,'default-filter-review.json':filters,'canonical64-layouts.json':canonical,'canonical389-field-prose-dispositions.json':differences,'requirement-oracle-matrix.json':req,'individual-criteria.json':criteria}
+for name,value in outputs.items():(O/name).write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n')
+v=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),source=m['source'],productionCoreMain=m['productionCoreMain'],run=m['singleSession'],outcome='THREE_OWNERS_NINE_CURRENT_HOST_CRITERIA_VERIFIED_NOT_FORMAL_OR_NEW_ORIGINAL_LEAF_ACCEPTANCE',ownerIds=ownerIds,criteriaVerified=9,criteriaTotal=9,canonicalLayoutRows=64,canonicalPhysicalFieldRows=389,abbreviatedRuleDescriptions=2,independentQa054Cases=13,ownerSummaries=owners,sameSourceRunManifest=dict(path=str(full.relative_to(R)),sha256=sha(full)),canonicalUi233=dict(path=ui,sha256=hashlib.sha256(canon.encode()).hexdigest()),canonicalFieldComparison=dict(path=str((prior/'manifest.json').relative_to(R)),sha256=sha(prior/'manifest.json')),productTestsReexecuted=0,oracleFixtureEdits=0,productBugsConfirmed=0,newOriginal190Acceptance=0,formalUpdated=False,whole451Accepted=False,backendNativeOrVmUsed=False,privateClassFilesRead=False,effortRate=None,files={n:sha(O/n) for n in outputs},toolSha256=sha(Path(__file__)))
+(O/'manifest.json').write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,criteria=9,owners=[{k:x[k] for k in ['owner','sourceArtifacts','physicalClasses','coverage','defaultFilteredMethods']} for x in owners],manifestSha256=sha(O/'manifest.json'))))

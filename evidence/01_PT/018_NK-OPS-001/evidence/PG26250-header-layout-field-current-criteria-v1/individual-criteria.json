@@ -1,0 +1,172 @@
+[
+  {
+    "id": "WBS-P001-01:contract",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_SCOPE",
+    "requirementMatrix": "requirement-oracle-matrix.json",
+    "independentFixtures": [
+      "canonical64-layouts.json",
+      "canonical389-field-prose-dispositions.json"
+    ],
+    "allBusinessOrTransportRuntimeClaimed": false
+  },
+  {
+    "id": "WBS-P001-01:scope",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_SCOPE",
+    "sourceArtifacts": 6,
+    "physicalClasses": 6,
+    "dependencies": [],
+    "sharedReferences": [],
+    "sharedValidatorEvidenceSameRun": true
+  },
+  {
+    "id": "WBS-P001-01:quality",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_SCOPE_GLOBAL_GATES_SEPARATE",
+    "sameSource": "2a5cdab45c6ef5e32994264cf1e93f5d70216040",
+    "sameRun": "PG26240-PROTOCOL-NAMED59-FLAG6",
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 687,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 88,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 137,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 76,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 30,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 5,
+        "missed": 0
+      }
+    },
+    "filterReview": "default-filter-review.json",
+    "nullNegativeCoverage": true,
+    "replayConcurrencyResource": "Immutable/pure memory values, no mutable owned external resource/retry process; original QA054 concurrent owner bounded shutdown is in actual same run. No service operations claimed.",
+    "whole451Accepted": false
+  },
+  {
+    "id": "WBS-P001-02:contract",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_SCOPE",
+    "requirementMatrix": "requirement-oracle-matrix.json",
+    "independentFixtures": [
+      "canonical64-layouts.json",
+      "canonical389-field-prose-dispositions.json"
+    ],
+    "allBusinessOrTransportRuntimeClaimed": false
+  },
+  {
+    "id": "WBS-P001-02:scope",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_SCOPE",
+    "sourceArtifacts": 20,
+    "physicalClasses": 29,
+    "dependencies": [],
+    "sharedReferences": [],
+    "sharedValidatorEvidenceSameRun": true
+  },
+  {
+    "id": "WBS-P001-02:quality",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_SCOPE_GLOBAL_GATES_SEPARATE",
+    "sameSource": "2a5cdab45c6ef5e32994264cf1e93f5d70216040",
+    "sameRun": "PG26240-PROTOCOL-NAMED59-FLAG6",
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 3034,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 564,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 175,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 84,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 22,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 170,
+        "missed": 0
+      }
+    },
+    "filterReview": "default-filter-review.json",
+    "nullNegativeCoverage": true,
+    "replayConcurrencyResource": "Immutable/pure memory values, no mutable owned external resource/retry process; original QA054 concurrent owner bounded shutdown is in actual same run. No service operations claimed.",
+    "whole451Accepted": false
+  },
+  {
+    "id": "WBS-P002-01:contract",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_SCOPE",
+    "requirementMatrix": "requirement-oracle-matrix.json",
+    "independentFixtures": [
+      "canonical64-layouts.json",
+      "canonical389-field-prose-dispositions.json"
+    ],
+    "allBusinessOrTransportRuntimeClaimed": false
+  },
+  {
+    "id": "WBS-P002-01:scope",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_SCOPE",
+    "sourceArtifacts": 43,
+    "physicalClasses": 43,
+    "dependencies": [
+      "WBS-P001-01",
+      "WBS-P001-02"
+    ],
+    "sharedReferences": [
+      "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator"
+    ],
+    "sharedValidatorEvidenceSameRun": true
+  },
+  {
+    "id": "WBS-P002-01:quality",
+    "status": "VERIFIED_CURRENT_HOST_COMPONENT_SCOPE_GLOBAL_GATES_SEPARATE",
+    "sameSource": "2a5cdab45c6ef5e32994264cf1e93f5d70216040",
+    "sameRun": "PG26240-PROTOCOL-NAMED59-FLAG6",
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 1948,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 188,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 457,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 216,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 121,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 39,
+        "missed": 0
+      }
+    },
+    "filterReview": "default-filter-review.json",
+    "nullNegativeCoverage": true,
+    "replayConcurrencyResource": "Immutable/pure memory values, no mutable owned external resource/retry process; original QA054 concurrent owner bounded shutdown is in actual same run. No service operations claimed.",
+    "whole451Accepted": false
+  }
+]

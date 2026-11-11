@@ -1,0 +1,86 @@
+[
+  {
+    "layout": "WLGEVT01",
+    "area": "DATA",
+    "index": 1,
+    "fixture": [
+      "Log type",
+      "18",
+      "16",
+      "X",
+      "M",
+      "REQUEST/ACTION。QA054限定組合せ"
+    ],
+    "canonical": [
+      "Log type",
+      "18",
+      "16",
+      "X",
+      "M",
+      "`REQUEST`または限定`ACTION`。組合せは下記QA-054規則"
+    ],
+    "classification": "ABBREVIATED_METADATA_PROSE_PHYSICAL_CONTRACT_IDENTICAL_NOT_ORACLE_CHANGE",
+    "physicalFieldNameOffsetLengthWirePresenceIdentical": true,
+    "canonicalRuleAuthority": "origin/main UI235 §12.2 QA054/SSC336",
+    "independentActualTestEvidence": [
+      "explicitRequestActionKeepsItsOwnClosedPair()",
+      "crossedAndUnknownActionsAreNeverNormalizedToSuccess()",
+      "omittedActionIsAllowedForRequestOnly()",
+      "menuActionMatchesIndependentOffsetsAndRoundTrips()",
+      "existingHttpMetadataAndReservedRulesRemainEnforced()",
+      "everyCanonicalConstructorReferenceRejectsNull()",
+      "independentConcurrentCallersDoNotMixCategories()",
+      "anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire()",
+      "everyOtherCategoryIsRejectedByNamedBoundary()",
+      "legacyRequestMatchesIndependentOriginalBytes()",
+      "missingBlankUnknownAndWrongCaseCategoryFail()",
+      "recordFieldsAreCompleteImmutableAndRedacted()",
+      "nfcAndExactUtf8ByteBoundaryHaveIndependentExpectedBytes()"
+    ],
+    "testExpectedComesFrom": "Explicit REQUEST/HTTP_REQUEST_COMPLETED-or-omitted and ACTION/MENU_VIEWED closed pairs, reject crossed/unknown/LOG_SEARCHED; literal 2080 bytes and offsets18/42; fixture semantic text alone is not validation oracle.",
+    "productBugFound": false,
+    "fixtureOrProductionEdited": false
+  },
+  {
+    "layout": "WLGEVT01",
+    "area": "DATA",
+    "index": 3,
+    "fixture": [
+      "Action",
+      "42",
+      "64",
+      "X",
+      "O",
+      "Bounded action code"
+    ],
+    "canonical": [
+      "Action",
+      "42",
+      "64",
+      "X",
+      "O",
+      "REQUESTは`HTTP_REQUEST_COMPLETED`（省略時API補完）、ACTIONは`MENU_VIEWED`必須"
+    ],
+    "classification": "ABBREVIATED_METADATA_PROSE_PHYSICAL_CONTRACT_IDENTICAL_NOT_ORACLE_CHANGE",
+    "physicalFieldNameOffsetLengthWirePresenceIdentical": true,
+    "canonicalRuleAuthority": "origin/main UI235 §12.2 QA054/SSC336",
+    "independentActualTestEvidence": [
+      "explicitRequestActionKeepsItsOwnClosedPair()",
+      "crossedAndUnknownActionsAreNeverNormalizedToSuccess()",
+      "omittedActionIsAllowedForRequestOnly()",
+      "menuActionMatchesIndependentOffsetsAndRoundTrips()",
+      "existingHttpMetadataAndReservedRulesRemainEnforced()",
+      "everyCanonicalConstructorReferenceRejectsNull()",
+      "independentConcurrentCallersDoNotMixCategories()",
+      "anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire()",
+      "everyOtherCategoryIsRejectedByNamedBoundary()",
+      "legacyRequestMatchesIndependentOriginalBytes()",
+      "missingBlankUnknownAndWrongCaseCategoryFail()",
+      "recordFieldsAreCompleteImmutableAndRedacted()",
+      "nfcAndExactUtf8ByteBoundaryHaveIndependentExpectedBytes()"
+    ],
+    "testExpectedComesFrom": "Explicit REQUEST/HTTP_REQUEST_COMPLETED-or-omitted and ACTION/MENU_VIEWED closed pairs, reject crossed/unknown/LOG_SEARCHED; literal 2080 bytes and offsets18/42; fixture semantic text alone is not validation oracle.",
+    "productBugFound": false,
+    "fixtureOrProductionEdited": false
+  }
+]
