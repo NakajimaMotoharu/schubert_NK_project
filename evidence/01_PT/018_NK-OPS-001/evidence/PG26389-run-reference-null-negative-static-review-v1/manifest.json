@@ -1,0 +1,14 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T06:44:11.602036+09:00",
+  "initialAdmissionExit": 1,
+  "reason": "Unclassified NullAssignment correctly blocked static admission; deliberate nullable JDBC result negative test is independently reviewed before contextual classification",
+  "rawRule": "NullAssignment",
+  "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+  "line": 142,
+  "sourceLine": "fixture.values[column] = null;",
+  "independentExpected": "Every one of four nonnull SQL Boolean columns when missing throws fixed BatchRepositoryException; no null-to-false default accepted",
+  "productionSourceChanged": false,
+  "suppressionsAdded": 0,
+  "productTestsExecuted": 0
+}

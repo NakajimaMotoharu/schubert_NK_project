@@ -1,0 +1,200 @@
+[
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 142,
+    "sourceLine": "      fixture.values[column] = null;",
+    "rule": "NullAssignment",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Explicit four nullable JDBC provider result negatives; each must throw fixed repository failure rather than default false. This assignment manufactures invalid input, no production null assignment or warning suppression.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 221,
+    "sourceLine": "    assertEquals(false, Thread.currentThread().isInterrupted());",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit pure borrowed-JDBC fixture, not J2EE; only self-owned worker and parent flag observation, finally shutdownNow/await5, bounded future5.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 225,
+    "sourceLine": "      var worker = Executors.newSingleThreadExecutor();",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Executor owning exit is explicit finally shutdownNow + asserted awaitTermination5, no TWR unlimited close. Unit outer process also has90s owner deadline; no pass until normal exit.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 225,
+    "sourceLine": "      var worker = Executors.newSingleThreadExecutor();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit pure borrowed-JDBC fixture, not J2EE; only self-owned worker and parent flag observation, finally shutdownNow/await5, bounded future5.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 228,
+    "sourceLine": "            worker.submit(",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit pure borrowed-JDBC fixture, not J2EE; only self-owned worker and parent flag observation, finally shutdownNow/await5, bounded future5.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 230,
+    "sourceLine": "                  if (phase.equals(ENTRY_POINT)) Thread.currentThread().interrupt();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit pure borrowed-JDBC fixture, not J2EE; only self-owned worker and parent flag observation, finally shutdownNow/await5, bounded future5.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 233,
+    "sourceLine": "                    return Thread.currentThread().isInterrupted();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit pure borrowed-JDBC fixture, not J2EE; only self-owned worker and parent flag observation, finally shutdownNow/await5, bounded future5.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 235,
+    "sourceLine": "                    Thread.interrupted();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit pure borrowed-JDBC fixture, not J2EE; only self-owned worker and parent flag observation, finally shutdownNow/await5, bounded future5.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 240,
+    "sourceLine": "        worker.shutdownNow();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit pure borrowed-JDBC fixture, not J2EE; only self-owned worker and parent flag observation, finally shutdownNow/await5, bounded future5.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 241,
+    "sourceLine": "        assertTrue(worker.awaitTermination(5, TimeUnit.SECONDS));",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit pure borrowed-JDBC fixture, not J2EE; only self-owned worker and parent flag observation, finally shutdownNow/await5, bounded future5.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 245,
+    "sourceLine": "    assertEquals(false, Thread.currentThread().isInterrupted());",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit pure borrowed-JDBC fixture, not J2EE; only self-owned worker and parent flag observation, finally shutdownNow/await5, bounded future5.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 254,
+    "sourceLine": "    var workers = Executors.newFixedThreadPool(2);",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Executor owning exit is explicit finally shutdownNow + asserted awaitTermination5, no TWR unlimited close. Unit outer process also has90s owner deadline; no pass until normal exit.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 254,
+    "sourceLine": "    var workers = Executors.newFixedThreadPool(2);",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit pure borrowed-JDBC fixture, not J2EE; only self-owned worker and parent flag observation, finally shutdownNow/await5, bounded future5.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 256,
+    "sourceLine": "      var first = workers.submit(() -> new RunReferenceRepository(one.connection()).read(RUN));",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit pure borrowed-JDBC fixture, not J2EE; only self-owned worker and parent flag observation, finally shutdownNow/await5, bounded future5.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 257,
+    "sourceLine": "      var second = workers.submit(() -> new RunReferenceRepository(two.connection()).read(other));",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit pure borrowed-JDBC fixture, not J2EE; only self-owned worker and parent flag observation, finally shutdownNow/await5, bounded future5.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 261,
+    "sourceLine": "      workers.shutdownNow();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit pure borrowed-JDBC fixture, not J2EE; only self-owned worker and parent flag observation, finally shutdownNow/await5, bounded future5.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 262,
+    "sourceLine": "      assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit pure borrowed-JDBC fixture, not J2EE; only self-owned worker and parent flag observation, finally shutdownNow/await5, bounded future5.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 333,
+    "sourceLine": "    final Map<Integer, Object> bindings = new HashMap<>();",
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Fresh Fixture-local fault/binding maps, one thread per Fixture, no publication/shared mutable state; ordinary JUnit nonparallel and worker exclusively owns its own Fixture.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 349,
+    "sourceLine": "      if (point.equals(interruptAt)) Thread.currentThread().interrupt();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit pure borrowed-JDBC fixture, not J2EE; only self-owned worker and parent flag observation, finally shutdownNow/await5, bounded future5.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 362,
+    "sourceLine": "              Connection.class.getClassLoader(),",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "JDK Proxy uses this standalone Fixture class loader deliberately; no application container or context-class-loader resource lookup.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 391,
+    "sourceLine": "              PreparedStatement.class.getClassLoader(),",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "JDK Proxy uses this standalone Fixture class loader deliberately; no application container or context-class-loader resource lookup.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+    "line": 423,
+    "sourceLine": "              ResultSet.class.getClassLoader(),",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "JDK Proxy uses this standalone Fixture class loader deliberately; no application container or context-class-loader resource lookup.",
+    "actualViolation": false
+  }
+]

@@ -1,0 +1,31 @@
+  // RUNPORT009-BEGIN: pure primitive projection, no database/FS fixture.
+  @Test
+  void literalProjectionOrAndRedactedDisplayAreIndependentOfDatabaseSetup() {
+    for (int bits = 0; bits < 16; bits++) {
+      boolean history = (bits & 1) != 0;
+      boolean inbox = (bits & 2) != 0;
+      boolean log = (bits & 4) != 0;
+      boolean consistent = (bits & 8) != 0;
+      if (bits == 0) {
+        assertThrows(IllegalArgumentException.class,
+            () -> new RunReferences(history, inbox, log, consistent));
+      } else {
+        var value = new RunReferences(history, inbox, log, consistent);
+        assertEquals(history, value.hasBatchHistory());
+        assertEquals(inbox, value.hasInboxProgress());
+        assertEquals(log, value.hasLogProgress());
+        assertEquals(consistent, value.identityConsistent());
+        assertEquals((bits & 7) != 0, value.anyReference());
+        assertEquals("RunReferences[observation=<redacted>]", value.toString());
+      }
+    }
+  }
+  // RUNPORT009-END
+
+  private static List<Throwable> providerFailures() {
+    var values = new ArrayList<>(failures());
+    values.add(new IllegalArgumentException("own provider argument"));
+    values.add(new NullPointerException("own provider null"));
+    return values;
+  }
+

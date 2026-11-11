@@ -1,0 +1,30 @@
+[
+  {
+    "old": "import java.time.ZoneOffset;",
+    "new": "import java.time.OffsetDateTime;"
+  },
+  {
+    "old": "Instant.parse(\"2026-11-05T00:00:00.123456Z\").atOffset(ZoneOffset.UTC)",
+    "new": "OffsetDateTime.parse(\"2026-11-05T00:00:00.123456Z\")"
+  },
+  {
+    "old": "      try (var worker = Executors.newSingleThreadExecutor()) {",
+    "new": "      var worker = Executors.newSingleThreadExecutor();\n      try {"
+  },
+  {
+    "old": "        assertEquals(true, task.get(5, TimeUnit.SECONDS));\n      }\n      fixture.assertClosed",
+    "new": "        assertEquals(true, task.get(5, TimeUnit.SECONDS));\n      } finally {\n        worker.shutdownNow();\n        assertTrue(worker.awaitTermination(5, TimeUnit.SECONDS));\n      }\n      fixture.assertClosed"
+  },
+  {
+    "old": "    try (var workers = Executors.newFixedThreadPool(2)) {",
+    "new": "    var workers = Executors.newFixedThreadPool(2);\n    try {"
+  },
+  {
+    "old": "      assertEquals(true, second.get(5, TimeUnit.SECONDS).hasBatchHistory());\n    }\n    assertEquals(new UUID(0, 1), one.bindings.get(1));",
+    "new": "      assertEquals(true, second.get(5, TimeUnit.SECONDS).hasBatchHistory());\n    } finally {\n      workers.shutdownNow();\n      assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));\n    }\n    assertEquals(new UUID(0, 1), one.bindings.get(1));"
+  },
+  {
+    "old": "for (Throwable original : failures())",
+    "new": "for (Throwable original : providerFailures())"
+  }
+]

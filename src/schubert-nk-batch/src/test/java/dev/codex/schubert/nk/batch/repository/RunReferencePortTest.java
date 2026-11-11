@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
-import java.time.ZoneOffset;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,11 +54,7 @@ final class RunReferencePortTest {
     assertEquals(SQL, fixture.sql);
     assertEquals(5, fixture.timeout);
     assertEquals(
-        Map.of(
-            1,
-            new UUID(0, 1),
-            2,
-            Instant.parse("2026-11-05T00:00:00.123456Z").atOffset(ZoneOffset.UTC)),
+        Map.of(1, new UUID(0, 1), 2, OffsetDateTime.parse("2026-11-05T00:00:00.123456Z")),
         fixture.bindings);
     assertEquals(
         List.of(
@@ -168,7 +164,7 @@ final class RunReferencePortTest {
                 STATEMENT_CLOSE));
     points.addAll(COLUMNS);
     for (String point : points) {
-      for (Throwable original : failures()) {
+      for (Throwable original : providerFailures()) {
         Fixture fixture = new Fixture();
         fixture.faults = Map.of(point, original);
         expected(original, () -> new RunReferenceRepository(fixture.connection()).read(RUN));
@@ -226,7 +222,8 @@ final class RunReferencePortTest {
     for (String phase : List.of(ENTRY_POINT, ROW_CLOSE, STATEMENT_CLOSE)) {
       Fixture fixture = new Fixture();
       if (!phase.equals(ENTRY_POINT)) fixture.interruptAt = phase;
-      try (var worker = Executors.newSingleThreadExecutor()) {
+      var worker = Executors.newSingleThreadExecutor();
+      try {
         var task =
             worker.submit(
                 () -> {
@@ -239,6 +236,9 @@ final class RunReferencePortTest {
                   }
                 });
         assertEquals(true, task.get(5, TimeUnit.SECONDS));
+      } finally {
+        worker.shutdownNow();
+        assertTrue(worker.awaitTermination(5, TimeUnit.SECONDS));
       }
       fixture.assertClosed(phase.equals(ENTRY_POINT) ? 0 : 1, phase.equals(ENTRY_POINT) ? 0 : 1);
     }
@@ -251,16 +251,53 @@ final class RunReferencePortTest {
     Fixture two = new Fixture();
     two.values[0] = true;
     BatchRun other = new BatchRun(new UUID(0, 2), RUN.cutoff());
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var first = workers.submit(() -> new RunReferenceRepository(one.connection()).read(RUN));
       var second = workers.submit(() -> new RunReferenceRepository(two.connection()).read(other));
       assertEquals(false, first.get(5, TimeUnit.SECONDS).hasBatchHistory());
       assertEquals(true, second.get(5, TimeUnit.SECONDS).hasBatchHistory());
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));
     }
     assertEquals(new UUID(0, 1), one.bindings.get(1));
     assertEquals(new UUID(0, 2), two.bindings.get(1));
     one.assertClosed(1, 1);
     two.assertClosed(1, 1);
+  }
+
+  // RUNPORT009-BEGIN: pure primitive projection, no database/FS fixture.
+  @Test
+  void literalProjectionOrAndRedactedDisplayAreIndependentOfDatabaseSetup() {
+    for (int bits = 0; bits < 16; bits++) {
+      boolean history = (bits & 1) != 0;
+      boolean inbox = (bits & 2) != 0;
+      boolean log = (bits & 4) != 0;
+      boolean consistent = (bits & 8) != 0;
+      if (bits == 0) {
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new RunReferences(history, inbox, log, consistent));
+      } else {
+        var value = new RunReferences(history, inbox, log, consistent);
+        assertEquals(history, value.hasBatchHistory());
+        assertEquals(inbox, value.hasInboxProgress());
+        assertEquals(log, value.hasLogProgress());
+        assertEquals(consistent, value.identityConsistent());
+        assertEquals((bits & 7) != 0, value.anyReference());
+        assertEquals("RunReferences[observation=<redacted>]", value.toString());
+      }
+    }
+  }
+
+  // RUNPORT009-END
+
+  private static List<Throwable> providerFailures() {
+    var values = new ArrayList<>(failures());
+    values.add(new IllegalArgumentException("own provider argument"));
+    values.add(new NullPointerException("own provider null"));
+    return values;
   }
 
   private static List<Throwable> failures() {
