@@ -1,0 +1,27 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T05:58:37.099192+09:00",
+  "status": "IMPLEMENTED_TEST_OWNER_FINITE_JOIN_GAP_SOURCE_CONFIRMED_NO_HANG_EXPERIMENT",
+  "source": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+    "sha256": "76b7c2644998b3d1cc617990ae777e36c0fc05a7fc08905c1f0dbd6360b82df5"
+  },
+  "expected": "Future get and owning executor exit both bounded, original8 expected/cases remain; wrong behavior never accepted because close waits indefinitely.",
+  "actual": "beforeAndAfterInterrupt uses Future.get5 seconds inside try-with ExecutorService; ExecutorService.close has no finite deadline. Current old8 normal run succeeded, no observed hang inferred.",
+  "historicalManifest": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG19148-inspection-summary-port-eight-v1/manifest.json",
+    "sha256": "c226658b3ead88981d31d56919d3948e28c28c6691119ad3487376b344ef2b78"
+  },
+  "oldTestAndTargetMainBytesStillMatch": true,
+  "additionalNegativeOracle": "Provider faults currently SQL/ISE/Error; add explicit IAE/NPE across16 already independent fault points, extra32 observations and no newJUnit definition. UTC bind expected becomes independently parsed fixed OffsetDateTime literal.",
+  "productTestsExecuted": 0,
+  "bug": "BUG-2653",
+  "ykt": "YKT-2333",
+  "relatedGlobalYkt": "YKT-2177",
+  "newNormalSubworkEstimatePp": {
+    "low": 0.2,
+    "base": 0.5,
+    "high": 1
+  },
+  "capPp": 2
+}

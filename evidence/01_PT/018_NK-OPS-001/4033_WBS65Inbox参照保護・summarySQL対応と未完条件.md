@@ -1,0 +1,7 @@
+# Inbox参照保護・summary SQLの要求対応
+
+source/Main8b2c6b8d4e、所有三sourceとSS332/DDL V012016019をPG26332 c00f8adaで対応。固定四列summary/UUIDUTCµs二bind/queryTimeout5/借用connection無変更、候補cursor/全snapshot参照検証/同xact+encryptedSHA条件付き削除/24又は168h保持/backupとadvisory/commit確定後非rollbackなどを個別期待へ分けた。SQL文字列一致はDB機能のPASSではない。
+
+元summary port全8 PG19148は現在のTest/Main source、Repository物理hashも不変で参照できる。成功確認のため再実行していない。旧DB whole TestのBeforeAll/TempDirとInboxCleanupのheld TemporaryInfrastructureException・暗号参照を本scopeで実行しない。F02/F03と実DB条件未解決のためP00402はNOT_ACCEPTED、/1準備のみ完了。
+
+BUG2653はINSPPORT008のfuture.get5後のTWR executor.closeが無期限であるsource不備を修正前起票。旧8成功/hang未観測を保全し、新正常footprintで有限finallyへ補修する。既48fault入力へIAE/NPE16×2を補強し、UTC expectedは固定OffsetDateTime literal、元valueTestがDB BeforeAll内なのでDTO null/getter/redaction一件を追加する。原群費は保持し追補.2/.5/1cap2を別凍結、Program全完了/coverage/新受入を未実行のまま加算しない。

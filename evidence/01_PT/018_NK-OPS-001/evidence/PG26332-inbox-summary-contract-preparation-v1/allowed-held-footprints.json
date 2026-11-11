@@ -1,0 +1,22 @@
+[
+  {
+    "owner": "InspectionSummaryPortTest",
+    "allowed": "PURE_JDBC_PROXY_ONLY_AFTER_NEW_FIXTURE_ESTIMATE",
+    "forbidden": [
+      "No real DB/TempDir/BatchDatabaseFixture",
+      "No driver manager or SQL execution",
+      "No auth/key/Root/VM/native",
+      "No actual held4 class IO"
+    ]
+  },
+  {
+    "owner": "InspectionSummaryRepositoryTest / AuthenticationInboxCleanupTest / InboxCleanupNonAuthenticationTest / QuestionQueryInboxCleanupTest",
+    "allowed": "PUBLIC_SOURCE_CONTRACT_AND_OLD_PUBLIC_METADATA_ONLY",
+    "forbidden": [
+      "DB BeforeAll/setup/reset not invoked",
+      "InboxCleanup imports/calls actual held TemporaryInfrastructureException; never compile/load/run under this footprint",
+      "No key/cipher/retained snapshot execution",
+      "No real cleanup/cursor/delete/commit/owned parent operation"
+    ]
+  }
+]

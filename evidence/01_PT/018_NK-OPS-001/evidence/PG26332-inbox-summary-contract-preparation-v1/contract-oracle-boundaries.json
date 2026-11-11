@@ -1,0 +1,31 @@
+[
+  {
+    "id": "P00402-summary",
+    "expectedSql": "select inspected_count,deleted_count,protected_count,complete from schubert.maintenance_read_inbox_summary(?,?)",
+    "conditions": [
+      "borrowed connection: autocommit=true / writable / READ_COMMITTED",
+      "queryTimeout5, UUID+explicit UTC OffsetDateTime two binds",
+      "zero or one row; absence differs from known0 and both complete bits retained",
+      "four required nonnull columns; inspected=deleted+protected, nonnegative bounded long without overflow",
+      "owned ResultSet then Statement each close once; no connection mutation/close/acquire/commit/rollback",
+      "provider unknown IAEx/NPE/Error identity preserved, SQL text/cause/suppressed stripped per SSC063",
+      "interrupt pre/post read failure, parent flag unchanged by worker test"
+    ],
+    "currentNormalEvidence": "Existing whole8 pinned same Test/Main bytes; not rerun here",
+    "newGap": "BUG2653 executor owning exit lacks deadline. Add bounded finally; explicit IAEx/NPE16x2 and separately literal UTC expected/DTO-null/getters will strengthen normal port within new predeclared work."
+  },
+  {
+    "id": "P00402-inbox",
+    "conditions": [
+      "locked candidate PK ascending after cursor LIMIT1 FOR_UPDATE, expired completed/error only; unsupported rows PROTECTED not deleted/end",
+      "frozen cutoff/run, explicit UTC JDBC4.2, backup/advisory preconditions and SQL argument typing",
+      "snapshot identity/layout/token/readable version/reference integrity before conditional delete",
+      "delete requires same transaction ID and exact SHA of encrypted response, completed state and required retention24/168h",
+      "same owned transaction for durable cursor/counts; rollback before confirmed commit, never claim rolledback after committed flag",
+      "parent guard checked before acquisition/mutation/commit/after commit, exact readback statement timeout when guard exists"
+    ],
+    "runtimeStatus": "HOLD_ACTUAL_TEMPORARY_EXCEPTION_AND_CRYPTO_DB_GRAPH",
+    "sourceReviewOnly": true,
+    "actualSqlOrSnapshotAuthenticationClaimed": false
+  }
+]

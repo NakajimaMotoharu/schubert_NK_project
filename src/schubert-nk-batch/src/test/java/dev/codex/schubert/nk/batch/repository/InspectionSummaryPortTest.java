@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
-import java.time.ZoneOffset;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,11 +52,7 @@ final class InspectionSummaryPortTest {
     assertEquals(SQL, fixture.sql);
     assertEquals(5, fixture.timeout);
     assertEquals(
-        Map.of(
-            1,
-            new UUID(0, 1),
-            2,
-            Instant.parse("2026-11-05T00:00:00.123456Z").atOffset(ZoneOffset.UTC)),
+        Map.of(1, new UUID(0, 1), 2, OffsetDateTime.parse("2026-11-05T00:00:00.123456Z")),
         fixture.bindings);
     assertEquals(
         List.of(
@@ -175,7 +171,7 @@ final class InspectionSummaryPortTest {
             "next2",
             TEXT_ROWCLOSE,
             TEXT_STATEMENTCLOSE))
-      for (int type = 0; type < 3; type++) {
+      for (int type = 0; type < 5; type++) {
         Fixture fixture = new Fixture();
         Throwable failure = failure(type);
         fixture.faults.put(point, failure);
@@ -218,7 +214,8 @@ final class InspectionSummaryPortTest {
   @Test
   void beforeAndAfterInterruptRejectOnAnOwnedWorkerAndNeverChangeTheParentFlag() throws Exception {
     boolean parentFlag = Thread.currentThread().isInterrupted();
-    try (var worker = Executors.newSingleThreadExecutor()) {
+    var worker = Executors.newSingleThreadExecutor();
+    try {
       for (boolean before : List.of(false, true)) {
         worker
             .submit(
@@ -239,9 +236,33 @@ final class InspectionSummaryPortTest {
                 })
             .get(5, TimeUnit.SECONDS);
       }
+    } finally {
+      worker.shutdownNow();
+      assertTrue(worker.awaitTermination(5, TimeUnit.SECONDS));
     }
     assertEquals(parentFlag, Thread.currentThread().isInterrupted());
   }
+
+  // INSPPORT009-BEGIN: source-independent DTO contract, no DB fixture lifecycle.
+  @Test
+  void summaryValueNullsAndLiteralGettersAreIndependentOfTheDatabaseFixture() {
+    assertThrows(
+        NullPointerException.class,
+        () -> new InspectionSummary(null, new CleanupCounts(0, 0, 0), false));
+    assertThrows(NullPointerException.class, () -> new InspectionSummary(RUN, null, false));
+    for (boolean complete : List.of(false, true)) {
+      var actual = new InspectionSummary(RUN, new CleanupCounts(3, 2, 1), complete);
+      assertEquals(new UUID(0, 1), actual.run().id());
+      assertEquals(Instant.parse("2026-11-05T00:00:00.123456Z"), actual.run().cutoff());
+      assertEquals(3, actual.counts().target());
+      assertEquals(2, actual.counts().deleted());
+      assertEquals(1, actual.counts().skipped());
+      assertEquals(complete, actual.complete());
+      assertEquals("InspectionSummary[observation=<redacted>]", actual.toString());
+    }
+  }
+
+  // INSPPORT009-END
 
   private static Map<String, Object> literal() {
     var row = new HashMap<String, Object>();
@@ -270,6 +291,8 @@ final class InspectionSummaryPortTest {
       case 0 -> new SQLException("private JDBC");
       case 1 -> new IllegalStateException("private provider");
       case 2 -> new AssertionError("private fatal");
+      case 3 -> new IllegalArgumentException("private provider argument");
+      case 4 -> new NullPointerException("private provider null");
       default -> throw new AssertionError("unknown fixture kind");
     };
   }
