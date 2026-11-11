@@ -1,0 +1,24 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T06:56:21.936044+09:00",
+  "BUG": "BUG-2656",
+  "YKT": "YKT-2336",
+  "testPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+  "testSha256": "60935ef809e3ff066008fd6d560d4cf2476e743e0ebaac39742bd64806b6afe4",
+  "finding": "Future.get5 and latch5 are finite, executor owning TWR close has no deadline; source-confirmed contract gap, no actual hang observed or inferred.",
+  "originalMethods": 5,
+  "productTestsExecuted": 0,
+  "MainChanged": false,
+  "newNormalBeforeEstimatePp": {
+    "low": 0.2,
+    "base": 0.5,
+    "high": 1
+  },
+  "capPp": 2,
+  "newDefinitionsPlanned": 2,
+  "additionalNormalCases": [
+    "All6 permutations of complete/expire/cancel at inclusive deadline, exactly one terminal capacity release and correct completion/cancellation/timeout state with literal bytes",
+    "Caller completion-view manipulation and fresh views do not alter registry-owned future; explicit constructor null contracts; fixed independent expected"
+  ],
+  "safety": "Pure current ReplyCorrelationRegistry/PendingReply JDK-only closure and ordinary JUnit; no WebStartupException/other held4 class bytes, API/auth/keys/files/JMS provider/native/Root/VM/broker actual access. No business input credentials/session/token. Preserve full old5 assertions and meaningful input before necessary changed-source7 run; not replay for confirmation."
+}

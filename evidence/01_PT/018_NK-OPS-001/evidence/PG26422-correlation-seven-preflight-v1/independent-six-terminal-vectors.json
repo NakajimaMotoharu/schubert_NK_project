@@ -1,0 +1,74 @@
+[
+  {
+    "order": "CEK",
+    "expectedWinner": "C",
+    "expectedTerminalResults": [
+      true,
+      false,
+      false
+    ],
+    "expectedRemainingPermits": 1,
+    "expectedLateCount": 0,
+    "expectedState": "literal bytes4,5,6"
+  },
+  {
+    "order": "CKE",
+    "expectedWinner": "C",
+    "expectedTerminalResults": [
+      true,
+      false,
+      false
+    ],
+    "expectedRemainingPermits": 1,
+    "expectedLateCount": 0,
+    "expectedState": "literal bytes4,5,6"
+  },
+  {
+    "order": "ECK",
+    "expectedWinner": "E",
+    "expectedTerminalResults": [
+      true,
+      false,
+      false
+    ],
+    "expectedRemainingPermits": 1,
+    "expectedLateCount": 1,
+    "expectedState": "TimeoutException"
+  },
+  {
+    "order": "EKC",
+    "expectedWinner": "E",
+    "expectedTerminalResults": [
+      true,
+      false,
+      false
+    ],
+    "expectedRemainingPermits": 1,
+    "expectedLateCount": 1,
+    "expectedState": "TimeoutException"
+  },
+  {
+    "order": "KCE",
+    "expectedWinner": "K",
+    "expectedTerminalResults": [
+      true,
+      false,
+      false
+    ],
+    "expectedRemainingPermits": 1,
+    "expectedLateCount": 1,
+    "expectedState": "CancellationException"
+  },
+  {
+    "order": "KEC",
+    "expectedWinner": "K",
+    "expectedTerminalResults": [
+      true,
+      false,
+      false
+    ],
+    "expectedRemainingPermits": 1,
+    "expectedLateCount": 1,
+    "expectedState": "CancellationException"
+  }
+]

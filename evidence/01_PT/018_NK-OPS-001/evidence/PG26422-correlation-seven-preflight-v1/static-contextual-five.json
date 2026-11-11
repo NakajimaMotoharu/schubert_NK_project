@@ -1,0 +1,42 @@
+[
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+    "line": 111,
+    "sourceLine": "    ExecutorService executor = Executors.newFixedThreadPool(16);",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Single owning ExecutorService has explicit finally finite5 shutdown/join; full test run must terminate normally under outer90s before PASS. TWR unlimited close removed, no blanket resource-warning suppression."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+    "line": 111,
+    "sourceLine": "    ExecutorService executor = Executors.newFixedThreadPool(16);",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit concurrency fixture owns16 workers; bounded latch5/future5 and explicit finally shutdownNow/assert await5. No application threads or container executor altered."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+    "line": 116,
+    "sourceLine": "            executor.submit(",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit concurrency fixture owns16 workers; bounded latch5/future5 and explicit finally shutdownNow/assert await5. No application threads or container executor altered."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+    "line": 130,
+    "sourceLine": "      executor.shutdownNow();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit concurrency fixture owns16 workers; bounded latch5/future5 and explicit finally shutdownNow/assert await5. No application threads or container executor altered."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+    "line": 131,
+    "sourceLine": "      assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit concurrency fixture owns16 workers; bounded latch5/future5 and explicit finally shutdownNow/assert await5. No application threads or container executor altered."
+  }
+]
