@@ -1,0 +1,120 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-11T23:50:13.424861+09:00",
+  "source": "103ae01acff5f25b4d25c48c932e520892856811",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "originalManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25454-api-outbox-jdbc-whole18-independent-v1/manifest.json",
+    "sha256": "66ac318ff158abf1b95330988401f42e8424f6a9ff590a62791fed978b6a5ee7"
+  },
+  "originalArtifactsUnmodified": true,
+  "legacyFieldName": "originalSixteenAssertionsUnchanged",
+  "legacyLabelDisposition": "DEPRECATED_TEMPLATE_LABEL_NOT_A_16_TEST_LIMIT",
+  "originalWholeAssertionsUnchanged": true,
+  "originalWholeAssertionCount": 18,
+  "fixtureCount": 2,
+  "expectedCaseCounts": {
+    "dev.codex.schubert.nk.api.monitoring.OutboxObservationRepositoryTest": 10,
+    "dev.codex.schubert.nk.api.monitoring.OutboxMetricCollectorTest": 8
+  },
+  "casePairs": [
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxMetricCollectorTest",
+      "name": "outboxConn001BothFamiliesPublishOnlyAfterAllSuccessfulClose()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxMetricCollectorTest",
+      "name": "outboxConn002FailureClearsBothFamiliesAndTrueEmptyQueryRecovers()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxMetricCollectorTest",
+      "name": "outboxConn003EveryObservationFailureIsUnknownAndPropagatesUnchangedOnce()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxMetricCollectorTest",
+      "name": "outboxConn004StandardDoesNotReadRegisterOrRetainButChecksBoundaryNull()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxMetricCollectorTest",
+      "name": "outboxConn005ConstructorAndBoundaryNullCannotErasePreviouslyAcceptedObservation()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxMetricCollectorTest",
+      "name": "outboxConn006OneOwnerSerializesReadCloseAndBothPublications()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxMetricCollectorTest",
+      "name": "outboxConn007ParallelCallersAndSeparateOwnersCannotCrossState()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxMetricCollectorTest",
+      "name": "outboxConn008PartialConstructionFailureRetainsCallerRegistryAndExactProblem()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxObservationRepositoryTest",
+      "name": "outboxDb001ShuffledRowsHaveLiteralCountsAndAgesAfterReverseClose()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxObservationRepositoryTest",
+      "name": "outboxDb002EmptyAndSparseGroupsAreZeroOnlyAfterQueryCompletes()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxObservationRepositoryTest",
+      "name": "outboxDb003NullAndWrongTransactionNeverPrepareOrMutateBorrowedConnection()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxObservationRepositoryTest",
+      "name": "outboxDb004NullUnknownAndDuplicateStatusCannotReturnPartialValues()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxObservationRepositoryTest",
+      "name": "outboxDb005NullNonpositiveCountAndNullOrFutureTimeAreNotKnownZero()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxObservationRepositoryTest",
+      "name": "outboxDb006TypedOffsetTimeHasExactUtcAndCalendarBoundaryOracles()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxObservationRepositoryTest",
+      "name": "outboxDb007NullResourcesAndAcquisitionFailuresNeverRetryOrCloseConnection()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxObservationRepositoryTest",
+      "name": "outboxDb008ReadAndCloseFailuresPreserveOriginalIdentityAndSuppressedOrder()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxObservationRepositoryTest",
+      "name": "outboxDb009ParallelBorrowedConnectionsHaveNoCrossOwnerState()"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.OutboxObservationRepositoryTest",
+      "name": "outboxDb010SnapshotInvariantsAndGeneratedContractsUseIndependentFixedValues()"
+    }
+  ],
+  "sameCurrentInputBytes": true,
+  "currentByteReuseNotNewRun": true,
+  "allSourceFour100ExistingOnly": true,
+  "requalifiedProductTestsByThisTool": 0,
+  "productTestsExecuted": 0,
+  "productTestsReexecuted": 0,
+  "oldSourceSuccessTransferred": false,
+  "originalFailures": 0,
+  "originalErrors": 0,
+  "originalSkipped": 0,
+  "bug": "BUG2625",
+  "ykt": "YKT2307",
+  "horizontalTargets": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/970_api_outbox_jdbc_whole18_independent.py",
+      "disposition": "EXPLICIT18_SUPPLEMENT"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/963_api_async_jdbc_whole16_independent.py",
+      "disposition": "CORRECT16_LABEL_NONAPPLICABLE"
+    }
+  ],
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "toolSha256": "4bb06ca79ad3f696719e201592e752b838c0e85a1a961f0dfab124556005adaa"
+}
