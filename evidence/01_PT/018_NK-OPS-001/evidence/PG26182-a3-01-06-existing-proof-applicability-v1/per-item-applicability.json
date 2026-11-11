@@ -1,0 +1,955 @@
+[
+  {
+    "id": "A3-01",
+    "target": "ArtemisAddressSettingsReadinessClient",
+    "planScopeReference": "WBS-P017-10",
+    "currentSourceOwner": "WBS-P017-10",
+    "planEstimate": {
+      "低位": 0.15,
+      "標準": 0.4,
+      "高位": 0.9
+    },
+    "manifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23238-address-settings-independent-v1/manifest.json",
+      "sha256": "70dcf4f4c6389ed6a828cb01c921de3a31a729173c10de727ece7de14e69f5e6",
+      "source": "01dbe0a53a245ed43e17c2b81acc12d11c450d29",
+      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "testsInOriginalManifest": 5
+    },
+    "inputChecks": [
+      {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AddressSettingsProjectionPortTest.java",
+        "expectedSha256": "f3c8e0c57f9bfa54fa4307bccd30017c74a9c712bbc0208daab32097f7866308",
+        "actualSha256": "f3c8e0c57f9bfa54fa4307bccd30017c74a9c712bbc0208daab32097f7866308",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+        "expectedSha256": "3d2eb71dd8ef910acb5e18650c15d68cd5c438a9f4917fa970f0f5c91bcf50e4",
+        "actualSha256": "3d2eb71dd8ef910acb5e18650c15d68cd5c438a9f4917fa970f0f5c91bcf50e4",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/372_address_settings_qualifier.py",
+        "expectedSha256": "ad72c100febe86ba9ce4b65ed9266bf2b4db8f5f25d6dbfa5861ebd21e408027",
+        "actualSha256": "ad72c100febe86ba9ce4b65ed9266bf2b4db8f5f25d6dbfa5861ebd21e408027",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/373_address_settings_scope.json",
+        "expectedSha256": "2d28acb133bb61eb866069c26098bf970bbb707ff7eb3d7e688585ba97e86082",
+        "actualSha256": "2d28acb133bb61eb866069c26098bf970bbb707ff7eb3d7e688585ba97e86082",
+        "qualification": "CURRENT_BYTES_MATCH"
+      }
+    ],
+    "physicalChecks": [
+      {
+        "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient",
+        "manifestSha256": "c71fa03c8abdd3db3ae9b52ed8961b55f0bdc3c372b18c4728f6948c32c4b5b3",
+        "currentPublicMetadataSha256": [
+          "c71fa03c8abdd3db3ae9b52ed8961b55f0bdc3c372b18c4728f6948c32c4b5b3"
+        ],
+        "qualification": "CURRENT_METADATA_MATCH"
+      },
+      {
+        "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Reader",
+        "manifestSha256": "88260528f64947ac26d8bd1c442ccfc822e18d3862e9363be23a54da79ca38f6",
+        "currentPublicMetadataSha256": [
+          "88260528f64947ac26d8bd1c442ccfc822e18d3862e9363be23a54da79ca38f6"
+        ],
+        "qualification": "CURRENT_METADATA_MATCH"
+      },
+      {
+        "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity",
+        "manifestSha256": "9a3f72c76cf5d7ac7bcfa7ddbe8cf0c95b1a2889df2d50d144c6b5e39d08f144",
+        "currentPublicMetadataSha256": [
+          "9a3f72c76cf5d7ac7bcfa7ddbe8cf0c95b1a2889df2d50d144c6b5e39d08f144"
+        ],
+        "qualification": "CURRENT_METADATA_MATCH"
+      }
+    ],
+    "originalCoverage": {
+      "INSTRUCTION": {
+        "covered": 404,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 10,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 68,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 14,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 9,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      }
+    },
+    "originalWholeTargetPredicates": {
+      "wholeTargetCodeCoverage100": true,
+      "newFixtureReplacesHeldBackendTest": false,
+      "whole451Accepted": false
+    },
+    "applicability": "APPLIES_ONLY_TO_ORIGINAL_LIMITED_SCOPE_UNCHANGED_CURRENT_BYTES",
+    "remaining": [
+      "Original proof is limited to declared in-memory port/independent fixture scope, not actual backend/native/VM/Root/session or whole owner acceptance.",
+      "Current-source/old-run references are not new execution, new coverage, new Test IDs or 451 completion.",
+      "Per-case method/oracle links and original owner ending dependencies still need separate individual acceptance."
+    ],
+    "productTestsExecuted": 0,
+    "newAcceptance": 0
+  },
+  {
+    "id": "A3-02",
+    "target": "ArtemisRoleReadinessClient",
+    "planScopeReference": "WBS-P017-10",
+    "currentSourceOwner": "WBS-P017-10",
+    "planEstimate": {
+      "低位": 0.15,
+      "標準": 0.4,
+      "高位": 0.9
+    },
+    "manifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23266-role-settings-independent-v1/manifest.json",
+      "sha256": "08b26b36120ca1debca0a1ff5c5ab9e8e2cae611516369ac7a5e6244c68ff2bc",
+      "source": "06d1efb5c7acd73557550dc94d2a84efba1ad996",
+      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "testsInOriginalManifest": 4
+    },
+    "inputChecks": [
+      {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/RoleSettingsProjectionPortTest.java",
+        "expectedSha256": "d51d6ccc84e05657d7f8678bf5733f945f51ebbe3aead20bf24fb8b4eea3582a",
+        "actualSha256": "d51d6ccc84e05657d7f8678bf5733f945f51ebbe3aead20bf24fb8b4eea3582a",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+        "expectedSha256": "0ffaf0718252a5853bde6b40fa7a604b42340898723eebb00ccf031e6b056647",
+        "actualSha256": "0ffaf0718252a5853bde6b40fa7a604b42340898723eebb00ccf031e6b056647",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/378_role_settings_qualifier.py",
+        "expectedSha256": "2e48c70731d0d7f97592c53359d8d867903238be11b7233fc6f14e3573c05014",
+        "actualSha256": "2e48c70731d0d7f97592c53359d8d867903238be11b7233fc6f14e3573c05014",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/379_role_settings_scope.json",
+        "expectedSha256": "9bd4cbb9bd86a1629efab394749980c7b411285464df30b312922c4b94d8acd7",
+        "actualSha256": "9bd4cbb9bd86a1629efab394749980c7b411285464df30b312922c4b94d8acd7",
+        "qualification": "CURRENT_BYTES_MATCH"
+      }
+    ],
+    "physicalChecks": [
+      {
+        "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient",
+        "manifestSha256": "e7b71dfa4517aae3ff6c140a7876aecabc3acd88315981455595f15f3e942389",
+        "currentPublicMetadataSha256": [
+          "e7b71dfa4517aae3ff6c140a7876aecabc3acd88315981455595f15f3e942389"
+        ],
+        "qualification": "CURRENT_METADATA_MATCH"
+      },
+      {
+        "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient$Reader",
+        "manifestSha256": "882d2ff6c57e36efb8faf7aefb16c8950aa68f3e1165c8ce6569b3b82140d3c4",
+        "currentPublicMetadataSha256": [
+          "882d2ff6c57e36efb8faf7aefb16c8950aa68f3e1165c8ce6569b3b82140d3c4"
+        ],
+        "qualification": "CURRENT_METADATA_MATCH"
+      }
+    ],
+    "originalCoverage": {
+      "INSTRUCTION": {
+        "covered": 423,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 28,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 86,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 22,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 8,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "originalWholeTargetPredicates": {
+      "wholeTargetCodeCoverage100": true,
+      "newFixtureReplacesHeldBackendTest": false,
+      "whole451Accepted": false
+    },
+    "applicability": "APPLIES_ONLY_TO_ORIGINAL_LIMITED_SCOPE_UNCHANGED_CURRENT_BYTES",
+    "remaining": [
+      "Original proof is limited to declared in-memory port/independent fixture scope, not actual backend/native/VM/Root/session or whole owner acceptance.",
+      "Current-source/old-run references are not new execution, new coverage, new Test IDs or 451 completion.",
+      "Per-case method/oracle links and original owner ending dependencies still need separate individual acceptance."
+    ],
+    "productTestsExecuted": 0,
+    "newAcceptance": 0
+  },
+  {
+    "id": "A3-03",
+    "target": "ApiJdbcPool",
+    "planScopeReference": "WBS-P004-05",
+    "currentSourceOwner": "WBS-P004-05",
+    "planEstimate": {
+      "低位": 0.15,
+      "標準": 0.4,
+      "高位": 0.9
+    },
+    "manifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23312-pool-ownership-independent-v1/manifest.json",
+      "sha256": "f013524b4a965847a4a6e7a8513fae2746f99829f567907d60755aeb20b50aae",
+      "source": "657a03f4317e51d899344122a5c2ebd8bdf9f736",
+      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "testsInOriginalManifest": 2
+    },
+    "inputChecks": [
+      {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiPoolSourceOwnershipPortTest.java",
+        "expectedSha256": "0d134cf2523403de25f77791bf0c1ffd72ce54e62792f53005cf4f990f9058e1",
+        "actualSha256": "0d134cf2523403de25f77791bf0c1ffd72ce54e62792f53005cf4f990f9058e1",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebPoolSourceOwnershipPortTest.java",
+        "expectedSha256": "4c0265e9372f3d7cbc1360c02e018472651456a893eb762818a3c6fb1dc614eb",
+        "actualSha256": "4c0265e9372f3d7cbc1360c02e018472651456a893eb762818a3c6fb1dc614eb",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool.java",
+        "expectedSha256": "81d1ef1dcdd511e2bb7eae1bfdee58e50432edd2bca81ce6085aa344e57ce312",
+        "actualSha256": "81d1ef1dcdd511e2bb7eae1bfdee58e50432edd2bca81ce6085aa344e57ce312",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebJdbcPool.java",
+        "expectedSha256": "a322547b005ea0a71e1beeaab971c2d4195e36657b440e0b449c6292bc316526",
+        "actualSha256": "a322547b005ea0a71e1beeaab971c2d4195e36657b440e0b449c6292bc316526",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/393_pool_ownership_qualifier.py",
+        "expectedSha256": "781ca42060a47b99e4c9487e60cc4e6c3d6a903a6fbbeb9100b753d40730f137",
+        "actualSha256": "781ca42060a47b99e4c9487e60cc4e6c3d6a903a6fbbeb9100b753d40730f137",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/394_pool_ownership_scope.json",
+        "expectedSha256": "5d5a2c82ce3f509c683f67e711702f2b5a0f6b6f7bf4da9390fd2ef79b742576",
+        "actualSha256": "5d5a2c82ce3f509c683f67e711702f2b5a0f6b6f7bf4da9390fd2ef79b742576",
+        "qualification": "CURRENT_BYTES_MATCH"
+      }
+    ],
+    "physicalChecks": [
+      {
+        "className": "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool",
+        "manifestSha256": "7a17f4f53c36252dd9a91905e71e1fa35300cceb2a0d8c2f0e46efa94d9bdc94",
+        "currentPublicMetadataSha256": [
+          "7a17f4f53c36252dd9a91905e71e1fa35300cceb2a0d8c2f0e46efa94d9bdc94"
+        ],
+        "qualification": "CURRENT_METADATA_MATCH"
+      },
+      {
+        "className": "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool",
+        "manifestSha256": "b2fd930a5feaf6398d7cf07575bb05e0c09fa0788f0fe72dd3e45c148b125c16",
+        "currentPublicMetadataSha256": [
+          "b2fd930a5feaf6398d7cf07575bb05e0c09fa0788f0fe72dd3e45c148b125c16"
+        ],
+        "qualification": "CURRENT_METADATA_MATCH"
+      }
+    ],
+    "originalCoverage": {
+      "INSTRUCTION": {
+        "covered": 92,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 28,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 4,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 4,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      }
+    },
+    "originalWholeTargetPredicates": {
+      "wholeTargetCodeCoverage100": true,
+      "branchStatus": "NATURAL_ZERO_BRANCH",
+      "branchCounterPresent": false,
+      "branchRatio": null,
+      "whole451Accepted": false
+    },
+    "applicability": "APPLIES_ONLY_TO_ORIGINAL_LIMITED_SCOPE_UNCHANGED_CURRENT_BYTES",
+    "remaining": [
+      "Original proof is limited to declared in-memory port/independent fixture scope, not actual backend/native/VM/Root/session or whole owner acceptance.",
+      "Current-source/old-run references are not new execution, new coverage, new Test IDs or 451 completion.",
+      "Per-case method/oracle links and original owner ending dependencies still need separate individual acceptance.",
+      "Natural zero BRANCH is N/A with ratio null; aggregate or other-class branch coverage does not convert this source to nonempty four-counter100."
+    ],
+    "productTestsExecuted": 0,
+    "newAcceptance": 0
+  },
+  {
+    "id": "A3-04",
+    "target": "WebJdbcPool",
+    "planScopeReference": "WBS-P018-06",
+    "currentSourceOwner": "WBS-P018-06",
+    "planEstimate": {
+      "低位": 0.15,
+      "標準": 0.4,
+      "高位": 0.9
+    },
+    "manifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23312-pool-ownership-independent-v1/manifest.json",
+      "sha256": "f013524b4a965847a4a6e7a8513fae2746f99829f567907d60755aeb20b50aae",
+      "source": "657a03f4317e51d899344122a5c2ebd8bdf9f736",
+      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "testsInOriginalManifest": 2
+    },
+    "inputChecks": [
+      {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiPoolSourceOwnershipPortTest.java",
+        "expectedSha256": "0d134cf2523403de25f77791bf0c1ffd72ce54e62792f53005cf4f990f9058e1",
+        "actualSha256": "0d134cf2523403de25f77791bf0c1ffd72ce54e62792f53005cf4f990f9058e1",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebPoolSourceOwnershipPortTest.java",
+        "expectedSha256": "4c0265e9372f3d7cbc1360c02e018472651456a893eb762818a3c6fb1dc614eb",
+        "actualSha256": "4c0265e9372f3d7cbc1360c02e018472651456a893eb762818a3c6fb1dc614eb",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool.java",
+        "expectedSha256": "81d1ef1dcdd511e2bb7eae1bfdee58e50432edd2bca81ce6085aa344e57ce312",
+        "actualSha256": "81d1ef1dcdd511e2bb7eae1bfdee58e50432edd2bca81ce6085aa344e57ce312",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebJdbcPool.java",
+        "expectedSha256": "a322547b005ea0a71e1beeaab971c2d4195e36657b440e0b449c6292bc316526",
+        "actualSha256": "a322547b005ea0a71e1beeaab971c2d4195e36657b440e0b449c6292bc316526",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/393_pool_ownership_qualifier.py",
+        "expectedSha256": "781ca42060a47b99e4c9487e60cc4e6c3d6a903a6fbbeb9100b753d40730f137",
+        "actualSha256": "781ca42060a47b99e4c9487e60cc4e6c3d6a903a6fbbeb9100b753d40730f137",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/394_pool_ownership_scope.json",
+        "expectedSha256": "5d5a2c82ce3f509c683f67e711702f2b5a0f6b6f7bf4da9390fd2ef79b742576",
+        "actualSha256": "5d5a2c82ce3f509c683f67e711702f2b5a0f6b6f7bf4da9390fd2ef79b742576",
+        "qualification": "CURRENT_BYTES_MATCH"
+      }
+    ],
+    "physicalChecks": [
+      {
+        "className": "dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool",
+        "manifestSha256": "7a17f4f53c36252dd9a91905e71e1fa35300cceb2a0d8c2f0e46efa94d9bdc94",
+        "currentPublicMetadataSha256": [
+          "7a17f4f53c36252dd9a91905e71e1fa35300cceb2a0d8c2f0e46efa94d9bdc94"
+        ],
+        "qualification": "CURRENT_METADATA_MATCH"
+      },
+      {
+        "className": "dev/codex/schubert/nk/web/bootstrap/WebJdbcPool",
+        "manifestSha256": "b2fd930a5feaf6398d7cf07575bb05e0c09fa0788f0fe72dd3e45c148b125c16",
+        "currentPublicMetadataSha256": [
+          "b2fd930a5feaf6398d7cf07575bb05e0c09fa0788f0fe72dd3e45c148b125c16"
+        ],
+        "qualification": "CURRENT_METADATA_MATCH"
+      }
+    ],
+    "originalCoverage": {
+      "INSTRUCTION": {
+        "covered": 92,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 28,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 4,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 4,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      }
+    },
+    "originalWholeTargetPredicates": {
+      "wholeTargetCodeCoverage100": true,
+      "branchStatus": "NATURAL_ZERO_BRANCH",
+      "branchCounterPresent": false,
+      "branchRatio": null,
+      "whole451Accepted": false
+    },
+    "applicability": "APPLIES_ONLY_TO_ORIGINAL_LIMITED_SCOPE_UNCHANGED_CURRENT_BYTES",
+    "remaining": [
+      "Original proof is limited to declared in-memory port/independent fixture scope, not actual backend/native/VM/Root/session or whole owner acceptance.",
+      "Current-source/old-run references are not new execution, new coverage, new Test IDs or 451 completion.",
+      "Per-case method/oracle links and original owner ending dependencies still need separate individual acceptance.",
+      "Natural zero BRANCH is N/A with ratio null; aggregate or other-class branch coverage does not convert this source to nonempty four-counter100."
+    ],
+    "productTestsExecuted": 0,
+    "newAcceptance": 0
+  },
+  {
+    "id": "A3-05",
+    "target": "WebServiceMetricBinding",
+    "planScopeReference": "WBS-P018-09",
+    "currentSourceOwner": "WBS-P018-09",
+    "planEstimate": {
+      "低位": 0.15,
+      "標準": 0.4,
+      "高位": 0.9
+    },
+    "manifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23396-web-service-metric21-independent-v1/manifest.json",
+      "sha256": "a70810235d17c3fd1c03690c1b40b4450cef4922bea86ecc1845b4a3ffb0a95c",
+      "source": "5eebf3a86fbba3e6b74edda93ba20612d3eda4f5",
+      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "testsInOriginalManifest": 21
+    },
+    "inputChecks": [
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBindingTest.java",
+        "expectedSha256": "9e9270a8d3c585ed255689878918db623848d6821b0a34dd5e2e602395963b8b",
+        "actualSha256": "9e9270a8d3c585ed255689878918db623848d6821b0a34dd5e2e602395963b8b",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservationTest.java",
+        "expectedSha256": "a23735273bf31a1c8b7c68737355364b19bc5d20e18ab3c422448de4016ed98b",
+        "actualSha256": "a23735273bf31a1c8b7c68737355364b19bc5d20e18ab3c422448de4016ed98b",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java",
+        "expectedSha256": "ee7591d71269a4238cdda10c5fbae3c7a61b37b8230f893776329e9d1df7ef64",
+        "actualSha256": "ee7591d71269a4238cdda10c5fbae3c7a61b37b8230f893776329e9d1df7ef64",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricContext.java",
+        "expectedSha256": "75eb5457ae1a264b1606ef910fed53b148075456992c534a58f28455b1952b4f",
+        "actualSha256": "75eb5457ae1a264b1606ef910fed53b148075456992c534a58f28455b1952b4f",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricBinding.java",
+        "expectedSha256": "2ea187f82ff17dea4e1597ac2802cc72bb83b6c9cec2bfb7cadfb079753b1946",
+        "actualSha256": "2ea187f82ff17dea4e1597ac2802cc72bb83b6c9cec2bfb7cadfb079753b1946",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservation.java",
+        "expectedSha256": "327d739bd9ca972fe535baf86dfbe3d1e01a32f921f98c1a1114ab3ad302f021",
+        "actualSha256": "327d739bd9ca972fe535baf86dfbe3d1e01a32f921f98c1a1114ab3ad302f021",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollector.java",
+        "expectedSha256": "dc1b278e0d111128b2679b7943ae1cabe56ea55eb7cbdc0104503e2b99a46210",
+        "actualSha256": "dc1b278e0d111128b2679b7943ae1cabe56ea55eb7cbdc0104503e2b99a46210",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java",
+        "expectedSha256": "059f2723ecf118084c7b192d28f5d86a9e6e91e4769195efaec7300b54891a24",
+        "actualSha256": "059f2723ecf118084c7b192d28f5d86a9e6e91e4769195efaec7300b54891a24",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricValve.java",
+        "expectedSha256": "f7dd88544d4d690d19a519488904e058a4ee8c2d8b7595c75b0494b872204a75",
+        "actualSha256": "f7dd88544d4d690d19a519488904e058a4ee8c2d8b7595c75b0494b872204a75",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorder.java",
+        "expectedSha256": "9ca3687779ab82d12966d3300d35d7acd8320e6020ad2d8acd0e829b55990483",
+        "actualSha256": "9ca3687779ab82d12966d3300d35d7acd8320e6020ad2d8acd0e829b55990483",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContract.java",
+        "expectedSha256": "019f126d38fdfbfd60baf8f38c254201db2427e7a0c2087e052712812a889c03",
+        "actualSha256": "019f126d38fdfbfd60baf8f38c254201db2427e7a0c2087e052712812a889c03",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry.java",
+        "expectedSha256": "29df7d74914a7a854c8d9ea345056ede3ca4d60cc0100f7c51b23efb2851a5a5",
+        "actualSha256": "29df7d74914a7a854c8d9ea345056ede3ca4d60cc0100f7c51b23efb2851a5a5",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource.java",
+        "expectedSha256": "79b6691a61e4fc6cb716d7fe84a6390b7272df3d0944e693003bcdb51798a12c",
+        "actualSha256": "79b6691a61e4fc6cb716d7fe84a6390b7272df3d0944e693003bcdb51798a12c",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetrics.java",
+        "expectedSha256": "18d8487e76e869b11147bab3786d7e765148d624b1a85c18dce33324e1eeca37",
+        "actualSha256": "18d8487e76e869b11147bab3786d7e765148d624b1a85c18dce33324e1eeca37",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebJvmMetrics.java",
+        "expectedSha256": "5123139871a0b35ec106d067c6c8eab4b2b8a2e449c2ead53f54e1e797799b71",
+        "actualSha256": "5123139871a0b35ec106d067c6c8eab4b2b8a2e449c2ead53f54e1e797799b71",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebSystemMetrics.java",
+        "expectedSha256": "3109070e589ccf2b8773a8aa49f74316f2db3c48a2d27747d733379d4f45d6b9",
+        "actualSha256": "3109070e589ccf2b8773a8aa49f74316f2db3c48a2d27747d733379d4f45d6b9",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistration.java",
+        "expectedSha256": "2f75b4bd051580a5a5420b481ffb8beb5f00ef5707bbfc9ec8102cfd78e76af8",
+        "actualSha256": "2f75b4bd051580a5a5420b481ffb8beb5f00ef5707bbfc9ec8102cfd78e76af8",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayload.java",
+        "expectedSha256": "bec3ebee4b555ed96ae14813c7c0e48744dd20c35b294c55ce791a14af527d44",
+        "actualSha256": "bec3ebee4b555ed96ae14813c7c0e48744dd20c35b294c55ce791a14af527d44",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+        "expectedSha256": "f6f2729a533843f568d254ebbae1a17cf575c4570b2ab307023ff54154b9475c",
+        "actualSha256": "f6f2729a533843f568d254ebbae1a17cf575c4570b2ab307023ff54154b9475c",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java",
+        "expectedSha256": "b14439675537e10360d052246415ed3addcb68a757a78452d3127af767f6c9eb",
+        "actualSha256": "b14439675537e10360d052246415ed3addcb68a757a78452d3127af767f6c9eb",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricScrape.java",
+        "expectedSha256": "8eede3e2f4e31276765a6b9eb13eac2da118102aad8fef73647d0c08e10031d0",
+        "actualSha256": "8eede3e2f4e31276765a6b9eb13eac2da118102aad8fef73647d0c08e10031d0",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporter.java",
+        "expectedSha256": "63804a5937d78024748f2013e9f74fc5293e4174137599d5dfee4790dab00022",
+        "actualSha256": "63804a5937d78024748f2013e9f74fc5293e4174137599d5dfee4790dab00022",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporter.java",
+        "expectedSha256": "a2524762cdc76d3f430cc76a6caf884cef86f39e61d341f399251006dee551d2",
+        "actualSha256": "a2524762cdc76d3f430cc76a6caf884cef86f39e61d341f399251006dee551d2",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporter.java",
+        "expectedSha256": "a57917dc639fc2b920a22e97abae60e48cb0ca590e917737acef1902dfa3f49c",
+        "actualSha256": "a57917dc639fc2b920a22e97abae60e48cb0ca590e917737acef1902dfa3f49c",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricText.java",
+        "expectedSha256": "082d4e882e21f430d8ccac9e01b7796ea722103fc144465f4ccc64aebf23d375",
+        "actualSha256": "082d4e882e21f430d8ccac9e01b7796ea722103fc144465f4ccc64aebf23d375",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalog.java",
+        "expectedSha256": "dc32190fea57bb5e2082bc9bd52f3db51873c149cb4d23a524b0ca21dba6e17b",
+        "actualSha256": "dc32190fea57bb5e2082bc9bd52f3db51873c149cb4d23a524b0ca21dba6e17b",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeDurationSupport.java",
+        "expectedSha256": "9e16eee7268e7d6f4d5821d1e61411eacf74568b8871424ba90f41edd2caaca2",
+        "actualSha256": "9e16eee7268e7d6f4d5821d1e61411eacf74568b8871424ba90f41edd2caaca2",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/418_web_service_metric21_qualifier.py",
+        "expectedSha256": "76598be7eb333eb732d9ffbd9f88644274ace360f80c82f68a0eadde1a6f04e8",
+        "actualSha256": "76598be7eb333eb732d9ffbd9f88644274ace360f80c82f68a0eadde1a6f04e8",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/419_web_service_metric_scope.json",
+        "expectedSha256": "cd33582200cc67fef3e79692107d7d74e89ad255d5b33c729aeb4afb4480114c",
+        "actualSha256": "cd33582200cc67fef3e79692107d7d74e89ad255d5b33c729aeb4afb4480114c",
+        "qualification": "CURRENT_BYTES_MATCH"
+      }
+    ],
+    "physicalChecks": [
+      {
+        "className": "dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding",
+        "manifestSha256": "632a4d99cbbc24242cf5f2ec31f187f37924b89cd1b5a222d617039e30b813e0",
+        "currentPublicMetadataSha256": [
+          "632a4d99cbbc24242cf5f2ec31f187f37924b89cd1b5a222d617039e30b813e0"
+        ],
+        "qualification": "CURRENT_METADATA_MATCH"
+      }
+    ],
+    "originalCoverage": {
+      "INSTRUCTION": {
+        "covered": 153,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 8,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 30,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 10,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 6,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "originalWholeTargetPredicates": {
+      "notRunDeclaredMethods": [
+        {
+          "name": "webservice009MissingTerminalMetadataSignalsOwnerWithoutSuccessSample",
+          "reason": "Calls HttpMetricValve.signalFailure -> WebStartupException.preserveFatal; explicit four-held initialization not permitted.",
+          "state": "NOT_EXECUTED_HOLD_NOT_PASS"
+        }
+      ],
+      "wholeOriginal22Accepted": false,
+      "wholeTargetCodeCoverage100": true,
+      "whole451Accepted": false
+    },
+    "applicability": "APPLIES_ONLY_TO_ORIGINAL_LIMITED_SCOPE_UNCHANGED_CURRENT_BYTES",
+    "remaining": [
+      "Original proof is limited to declared in-memory port/independent fixture scope, not actual backend/native/VM/Root/session or whole owner acceptance.",
+      "Current-source/old-run references are not new execution, new coverage, new Test IDs or 451 completion.",
+      "Per-case method/oracle links and original owner ending dependencies still need separate individual acceptance.",
+      "Original22 declarations include one excluded actual dependency;21 qualified cases do not make original22 accepted. Preserve notRunDeclaredMethods and wholeOriginal22Accepted=false."
+    ],
+    "productTestsExecuted": 0,
+    "newAcceptance": 0
+  },
+  {
+    "id": "A3-06",
+    "target": "QuestionWorkListener",
+    "planScopeReference": "WBS-P012-01",
+    "currentSourceOwner": "WBS-P012-01",
+    "planEstimate": {
+      "低位": 0.15,
+      "標準": 0.4,
+      "高位": 0.9
+    },
+    "manifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23438-event-listener-independent-v1/manifest.json",
+      "sha256": "d6e9cc5f7eebbc10c7db435e3b8a08f2eaec2159a56785b6a02e6cfba17d0f01",
+      "source": "57be3858e2dac6fce41bdb846d1d26a9a5671a80",
+      "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "testsInOriginalManifest": 6
+    },
+    "inputChecks": [
+      {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventListenerForwardingPortTest.java",
+        "expectedSha256": "aaa98911087ca34b32c3079c61807a04766caddfb9e95e06b0b2655f258692f7",
+        "actualSha256": "aaa98911087ca34b32c3079c61807a04766caddfb9e95e06b0b2655f258692f7",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener.java",
+        "expectedSha256": "a037c6586a68f6aa48424e2b9cc020aa37e2f357014299379b1ba01bdbed0cbc",
+        "actualSha256": "a037c6586a68f6aa48424e2b9cc020aa37e2f357014299379b1ba01bdbed0cbc",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogListener.java",
+        "expectedSha256": "7ed75f6a4a7a81a96ae5c95e9c6bba192d7f6fe2aa8437622cf5052ebea67df5",
+        "actualSha256": "7ed75f6a4a7a81a96ae5c95e9c6bba192d7f6fe2aa8437622cf5052ebea67df5",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener.java",
+        "expectedSha256": "0194df119dfda86475466c13a25cc2dc79af63d423b72e2a55101022d5b53177",
+        "actualSha256": "0194df119dfda86475466c13a25cc2dc79af63d423b72e2a55101022d5b53177",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor.java",
+        "expectedSha256": "b9d8a661e85cceaca6fddc73de6e12faae9f9337e563cd33fe3df77f601c42d1",
+        "actualSha256": "b9d8a661e85cceaca6fddc73de6e12faae9f9337e563cd33fe3df77f601c42d1",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata.java",
+        "expectedSha256": "6d87d23892dd6f43a52ce58149943070375a8b2288e5cd9569ec0991e557057f",
+        "actualSha256": "6d87d23892dd6f43a52ce58149943070375a8b2288e5cd9569ec0991e557057f",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+        "expectedSha256": "c2bfde63f582b8c8d9432c5dd15c4ce73ad49dec7304bdcccf290dfa63cc1248",
+        "actualSha256": "c2bfde63f582b8c8d9432c5dd15c4ce73ad49dec7304bdcccf290dfa63cc1248",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/DlqSender.java",
+        "expectedSha256": "43202ae1c72c9ce38bdfd48e33851ef74384eb67223e368db6ce6b40ccbe28e9",
+        "actualSha256": "43202ae1c72c9ce38bdfd48e33851ef74384eb67223e368db6ce6b40ccbe28e9",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata.java",
+        "expectedSha256": "ecb1f660cd83fbc28c7133e38f1ea1a67ef47f7bf46085e220b810047d963efc",
+        "actualSha256": "ecb1f660cd83fbc28c7133e38f1ea1a67ef47f7bf46085e220b810047d963efc",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard.java",
+        "expectedSha256": "68f3ac3e1ddba2e6e3afac97303a04b58b652c3cc357b4afed82d2bf85cd77ed",
+        "actualSha256": "68f3ac3e1ddba2e6e3afac97303a04b58b652c3cc357b4afed82d2bf85cd77ed",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage.java",
+        "expectedSha256": "6c8c70ef3872a2de673eb4a5af6a4eaefc52516403b5f08e9465a762b897cbad",
+        "actualSha256": "6c8c70ef3872a2de673eb4a5af6a4eaefc52516403b5f08e9465a762b897cbad",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder.java",
+        "expectedSha256": "dd3701dd1c9bad9d8e0116ffbec56287afefe3a618a25f954ebb6cc70f4ec9d5",
+        "actualSha256": "dd3701dd1c9bad9d8e0116ffbec56287afefe3a618a25f954ebb6cc70f4ec9d5",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+        "expectedSha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+        "actualSha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+        "expectedSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+        "actualSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ProtocolValidator.java",
+        "expectedSha256": "34b7707426eadec20b44d245c8a6dde5e2b7ad4cd3323625eb30a0a8822a5b70",
+        "actualSha256": "34b7707426eadec20b44d245c8a6dde5e2b7ad4cd3323625eb30a0a8822a5b70",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportMetadata.java",
+        "expectedSha256": "198dac5e9cad2046e8e78a4323bfe2e0e2a4a3842044015e8088c1149fcdf646",
+        "actualSha256": "198dac5e9cad2046e8e78a4323bfe2e0e2a4a3842044015e8088c1149fcdf646",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ExpectedRoute.java",
+        "expectedSha256": "e512bf8bb9a289e5ef3d12ecc4c11f4e01feec3a1e0b8716e2db64ffd416baf2",
+        "actualSha256": "e512bf8bb9a289e5ef3d12ecc4c11f4e01feec3a1e0b8716e2db64ffd416baf2",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java",
+        "expectedSha256": "6c8f5806097d9827a02058f8c1b53f108e2e40f28ef190ead2a7f9140be080f8",
+        "actualSha256": "6c8f5806097d9827a02058f8c1b53f108e2e40f28ef190ead2a7f9140be080f8",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java",
+        "expectedSha256": "d4ad2f50f40e9cb860786af43875583ac324fd2e6055f0bee1e6804101257d5d",
+        "actualSha256": "d4ad2f50f40e9cb860786af43875583ac324fd2e6055f0bee1e6804101257d5d",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java",
+        "expectedSha256": "7aee31bed1ddf707311f1aac8568c8de71907d9b19986261e80f92e5fe86f263",
+        "actualSha256": "7aee31bed1ddf707311f1aac8568c8de71907d9b19986261e80f92e5fe86f263",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValue.java",
+        "expectedSha256": "6f50d333720aaedf58b714be1f84c298297ae80398e8b8f7afb0ec7341d98041",
+        "actualSha256": "6f50d333720aaedf58b714be1f84c298297ae80398e8b8f7afb0ec7341d98041",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FixedPayload.java",
+        "expectedSha256": "e6323fb27286a91eb41481a7458fef14dd897c90a961c35f40d00b19eae59e0f",
+        "actualSha256": "e6323fb27286a91eb41481a7458fef14dd897c90a961c35f40d00b19eae59e0f",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/WireMessage.java",
+        "expectedSha256": "521ec97482cfe772177fd96abb829a441177371986c622584d820e7fb2e641a9",
+        "actualSha256": "521ec97482cfe772177fd96abb829a441177371986c622584d820e7fb2e641a9",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java",
+        "expectedSha256": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24",
+        "actualSha256": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/CommonHeader.java",
+        "expectedSha256": "13d093f420eeb2d41883e17e2a0cddb9defe04e8528a511f29bc6ef861518f8d",
+        "actualSha256": "13d093f420eeb2d41883e17e2a0cddb9defe04e8528a511f29bc6ef861518f8d",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java",
+        "expectedSha256": "3b003356680171b300d7c5d680b05cec255f4267190907c62cfaec3261a920a0",
+        "actualSha256": "3b003356680171b300d7c5d680b05cec255f4267190907c62cfaec3261a920a0",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java",
+        "expectedSha256": "5424c3f1ad90de3965e298380da683ec72644ecd8fae80117c01001d1d0aa620",
+        "actualSha256": "5424c3f1ad90de3965e298380da683ec72644ecd8fae80117c01001d1d0aa620",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java",
+        "expectedSha256": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4",
+        "actualSha256": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java",
+        "expectedSha256": "277dc29b07a2531b8c7d8307c0226762ff6b76fa2caef3849007bbcaf6aaffbc",
+        "actualSha256": "277dc29b07a2531b8c7d8307c0226762ff6b76fa2caef3849007bbcaf6aaffbc",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java",
+        "expectedSha256": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5",
+        "actualSha256": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/430_event_listener_qualifier.py",
+        "expectedSha256": "fd9272b486ed58365b811264d030f338b5b57a78397bb89686184289f61d622b",
+        "actualSha256": "fd9272b486ed58365b811264d030f338b5b57a78397bb89686184289f61d622b",
+        "qualification": "CURRENT_BYTES_MATCH"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/431_event_listener_scope.json",
+        "expectedSha256": "6964b75bbe6d21ac9c01da0a820340324be8a1b4c557adfe95696d21587f6b93",
+        "actualSha256": "6964b75bbe6d21ac9c01da0a820340324be8a1b4c557adfe95696d21587f6b93",
+        "qualification": "CURRENT_BYTES_MATCH"
+      }
+    ],
+    "physicalChecks": [
+      {
+        "className": "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener",
+        "manifestSha256": "4bb579daefa2921c7e0763b2333a5a61219f32406976ac154ce8a3734b5d0ad6",
+        "currentPublicMetadataSha256": [
+          "4bb579daefa2921c7e0763b2333a5a61219f32406976ac154ce8a3734b5d0ad6"
+        ],
+        "qualification": "CURRENT_METADATA_MATCH"
+      },
+      {
+        "className": "dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener",
+        "manifestSha256": "e2e93b6c6a2029b3921d3c07aa6b2aace98559f367e2fdb48ca480152dc1ce4d",
+        "currentPublicMetadataSha256": [
+          "e2e93b6c6a2029b3921d3c07aa6b2aace98559f367e2fdb48ca480152dc1ce4d"
+        ],
+        "qualification": "CURRENT_METADATA_MATCH"
+      }
+    ],
+    "originalCoverage": {
+      "INSTRUCTION": {
+        "covered": 52,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 14,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 6,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 6,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      }
+    },
+    "originalWholeTargetPredicates": {
+      "wholeTargetCodeCoverage100": true,
+      "branchStatus": "NATURAL_ZERO_NOT_APPLICABLE_RATIO_NULL",
+      "branchRatio": null,
+      "wholeDelegateQualified": false,
+      "whole451Accepted": false
+    },
+    "applicability": "APPLIES_ONLY_TO_ORIGINAL_LIMITED_SCOPE_UNCHANGED_CURRENT_BYTES",
+    "remaining": [
+      "Original proof is limited to declared in-memory port/independent fixture scope, not actual backend/native/VM/Root/session or whole owner acceptance.",
+      "Current-source/old-run references are not new execution, new coverage, new Test IDs or 451 completion.",
+      "Per-case method/oracle links and original owner ending dependencies still need separate individual acceptance.",
+      "Natural zero BRANCH is N/A with ratio null; aggregate or other-class branch coverage does not convert this source to nonempty four-counter100."
+    ],
+    "productTestsExecuted": 0,
+    "newAcceptance": 0
+  }
+]
