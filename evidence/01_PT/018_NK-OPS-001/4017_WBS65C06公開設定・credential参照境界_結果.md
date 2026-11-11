@@ -9,3 +9,5 @@
 実credential/source/runtimeの権限・inode/ACL/nlink/size・systemd配布/readiness、鍵長/current-previous版binding・保持session有効性・rotation/retire・redactionは未測定/HOLD。Sourceの固定文字列を実配布や実認証の成功へ換算しない。結論C06 NOT_ACCEPTED、製品PT/coverage新測定0、新元190受入0、正式1964/53と工数nullを維持。
 
 manifestに七resource/両Unit/設計origin-main hash・golden51値・公開10ID・四profile・既proofhashを保存。次C07はcurrent descriptorでownedの監視八resourceを正に読む。旧481のowned空は歴史projectionなので、current projectionのC07八を欠落させず、主担当費は一度だけ。Prometheus/Grafana/data retention/実scrape/停止は既HOLDを維持。
+
+資格追補（BUG2640/YKT2320）：26100の元14成功は保存するが、runtime CP旧Jar混入で同source資格はREOPENED。ここでの七template/公開IDの静的hash一致は不変であり、実配布/鍵/rotationを認定していない。是正後の当source再資格proofへ後続で結合する。

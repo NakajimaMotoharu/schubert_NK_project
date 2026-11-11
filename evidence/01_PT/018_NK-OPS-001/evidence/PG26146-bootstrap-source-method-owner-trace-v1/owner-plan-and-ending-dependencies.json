@@ -1,0 +1,241 @@
+[
+  {
+    "id": "WBS-P018-01",
+    "title": "設定・credential loader・redaction境界",
+    "rd": "SYS/ENV/PER/AVL/OPS/MON",
+    "ui": "211～212、231、243、251～253",
+    "ss": [
+      "352"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/018_NK-OPS-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CaddyPublicConfigurationTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootBatchCredentialReaderTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootServiceCredentialSourceTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolverTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/ServiceCredentialReaderTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/ServiceCredentialSetTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorAesCredentialTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccessTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredentialTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/AesCredentialFile.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialException.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialException.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialReader.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialSet.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorAesCredential.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccess.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredential.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P018-02",
+    "title": "署名BOM・全artifact・host immutable",
+    "rd": "SYS/ENV/PER/AVL/OPS/MON",
+    "ui": "211～212、231、243、251～253",
+    "ss": [
+      "343"
+    ],
+    "requirementIds": [
+      "SCM-001",
+      "SCM-002",
+      "SCM-003",
+      "SCM-004",
+      "SCM-005"
+    ],
+    "specDirectory": "evidence/01_PT/018_NK-OPS-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseApprovalTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseInventoryTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerificationTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifestTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseApproval.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseInventory.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P018-03",
+    "title": "canonical epoch/permit/owner/launch・保持FD",
+    "rd": "SYS/ENV/PER/AVL/OPS/MON",
+    "ui": "211～212、231、243、251～253",
+    "ss": [
+      "342"
+    ],
+    "requirementIds": [
+      "OPS-001",
+      "OPS-002",
+      "OPS-003",
+      "OPS-004",
+      "OPS-005",
+      "OPS-006",
+      "OPS-007",
+      "OPS-008"
+    ],
+    "specDirectory": "evidence/01_PT/018_NK-OPS-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningCurrentInvalidationTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningGateEvidenceTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootCurrentPermitPreflightTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootServiceAdmissionScopeTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootServiceExecutableAdmissionTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootServiceLauncherTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFileTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupLaunchFilesTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupLaunchRecordTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupPermitFilesTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupPermitRecordsTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootReleaseAdmissionTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootStartupContextTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ChildStartupContextTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrameTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ServiceStartupAdmissionTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/StartupProofFrameTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ChildStartupContext.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupProofFrame.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P018-04",
+    "title": "同PID権限移行/exec・socket/info同世代",
+    "rd": "SYS/ENV/PER/AVL/OPS/MON",
+    "ui": "211～212、231、243、251～253",
+    "ss": [
+      "342"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/018_NK-OPS-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGateTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshotTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClientTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicyTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitTerminationTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningStopPassTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningUnitTerminalsTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSourceTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/ServiceProcessResourcesTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedServiceExecArgumentsTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedServiceIdentityTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceProcessResources.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceExecArguments.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceIdentity.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P018-08",
+    "title": "native coverage正常/異常/停止checkpoint",
+    "rd": "SYS/ENV/PER/AVL/OPS/MON",
+    "ui": "211～212、231、243、251～253",
+    "ss": [
+      "354"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/018_NK-OPS-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpointTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfileTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHoldTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFileTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageTerminal.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  },
+  {
+    "id": "WBS-P019-01",
+    "title": "migration verify・DB/DDL version確認",
+    "rd": "MIG/MIG-DAT/FIL/SCM",
+    "ui": "243、254",
+    "ss": [
+      "343"
+    ],
+    "requirementIds": [],
+    "specDirectory": "evidence/01_PT/019_NK-MIG-001",
+    "candidateTestFiles": [
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourceTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/ServiceDatabaseAdmissionTest.java"
+    ],
+    "endingDependencies": [
+      "WBS-F02",
+      "WBS-P018-02"
+    ],
+    "originalAcceptanceStatus": "NOT_ACCEPTED",
+    "originalAcceptanceSource": null,
+    "sourcePaths": [
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java"
+    ],
+    "candidateTestFileNamesOnly": true,
+    "acceptedCurrent": false
+  }
+]

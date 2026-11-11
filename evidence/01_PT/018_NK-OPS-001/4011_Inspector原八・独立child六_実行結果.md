@@ -11,3 +11,7 @@ PG26102に初postのexact-body guard1を保全。BUG2635/YKT2315の原因は定�
 configured PMD13rawは自己Test IRQ12/独立receipt literal1で個別非該当、適用0/Checkstyle0。Mainと上位仕様不変更。coverageは新Main測定なし・合成なし・Test-only execをProduction四counterへ加算しない。parent held四init0、子のnative資格/coverageは未測定。実行環境/command/時刻/source/hashはPG26096元manifest/公開XML及びPG26100独立manifestに結合。秘密値使用なし、既外部job/VMはUNKNOWN/HOLDのまま。
 
 BUG2631/2632/2633/2634/2635の限定再試験を確認。C02全14設定のeffective merged Unit/NSS/権限/実所有/timeout/451/native依存は残るためNOT_ACCEPTED、新元190受入0・正式1964/53・工数null維持。新六の個別Test registry結合は後続通常手順で行い、旧技術catalogue520を無検証に526へ書き換えない。
+
+## 同source資格の再開（2026-11-12、BUG2640/YKT2320）
+
+PG26150のclasspath再点検で、generic external集合に旧14216 Main六Jarが混入していた。元14成功/50receipt/独立postの実記録は不変更で保全するが、現在source専有classpath資格の認定をREOPENEDへ戻す。旧Jarを除いた正規閉集合の同Test14と独立postが揃うまで当sourceの限定再試験認定へ使わない。正式認定や元190受入を増やしていないためそれらの差分は0。
