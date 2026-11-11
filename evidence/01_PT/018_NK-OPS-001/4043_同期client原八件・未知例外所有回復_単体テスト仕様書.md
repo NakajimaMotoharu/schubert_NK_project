@@ -19,4 +19,4 @@ PG26450はJava25.0.4の`-g -proc:none -implicit:none --release25 -Xlint:all -Wer
 
 再現: 1237 qualifier compile/static、1238preflight、source固定push後1237 run <source>、1239post <source>。一回用26450/52/54/56/58 namespaceを上書き・重複実行しない。Runtime header256/最大1m/全time入力は独立literalから期待を決める。SSのproducer call2秒・reply arrivaldeadlineと待機2秒を保持し、未実証のwhole-exchange/send時間解釈でMain/期待値を変更しない。
 
-元追補.25/.65/1.3pp cap2（26442製造前）、最大入力の詳細化は同群内・新定義増0。元P00502全19sourceの残14 method・C04・全体451/F02F03/global2177・正式1964/53/元190新受入・工数率は未更新。BUG2658/YKT2338の当二ownerを再試験し結果4044へ記録する。現在19件は未実行。
+元追補.25/.65/1.3pp cap2（26442製造前）、最大入力の詳細化は同群内・新定義増0。元P00502全19sourceの残14 method・C04・全体451/F02F03/global2177・正式1964/53/元190新受入・工数率は未更新。BUG2658/YKT2338の当二ownerを再試験し結果4044へ記録する。実行前保存時点では19件未実行。現在はPG26456終了0/26458独立0、結果4044へ対応。
