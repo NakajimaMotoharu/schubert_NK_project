@@ -11,3 +11,6 @@ BUG2642/YKT2322の元guard失敗PG26166を保持。最初の記録で「hash不�
 G13.04は準備のみ、個別oracleとending依存は未受入。見積り減額や製造完了を計上しない。正式1964PT/53scope・元190受入17/172/1・新受入0・工数率nullを維持する。秘密/認証/VM/DB/JMS/Root操作0。
 
 横展開の独立照合PG26168は全1845行のsource hashと観測1843行のclass hash一致、意図的null二行を確認。BUG2642/YKT2322は当metadata役割修正のみ閉鎖、製品/HOLDを解除しない。
+
+
+G13.07/1補正（2026-11-12、BUG2643/YKT2323）：PG26176 canonical-owner-correction-six.jsonを正とする。byte descriptorのrawOwnerではなく既存485 ownerKindOverridesを適用。原票のhash/method名/試験実行結果は不変、当六sourceの担当名だけ新表へ追記訂正。製品/新PT/旧受入差0。

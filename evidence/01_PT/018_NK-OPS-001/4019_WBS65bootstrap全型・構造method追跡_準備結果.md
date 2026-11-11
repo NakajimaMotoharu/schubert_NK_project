@@ -11,3 +11,6 @@ classファイルIO・四held初期化/compile・Root二Testの内容読取り0�
 manifest配下にsource-owner-testid-candidates、physical-method-oracle-open-matrix、owner-plan-and-ending-dependencies、canonical-requirement-rowsの四JSON/hash。次はG13.04 API→G13.05 Webを同じbounded readerで重複工具製造せず継続し、具体的な独立oracle/通常PTの不足へ進む。
 
 保存前の独立品質発見：BUG2640/YKT2320へInspector旧Jar混入を修正前起票。bootstrapのSource/構造metadata本索引は実行しておらず影響外。次の最優先を旧Jar排除後の同Test14再資格へ変更し、その後にG13.04/APIへ戻る。
+
+
+G13.07/1補正（2026-11-12、BUG2643/YKT2323）：PG26176 canonical-owner-correction-six.jsonを正とする。byte descriptorのrawOwnerではなく既存485 ownerKindOverridesを適用。原票のhash/method名/試験実行結果は不変、当六sourceの担当名だけ新表へ追記訂正。製品/新PT/旧受入差0。
