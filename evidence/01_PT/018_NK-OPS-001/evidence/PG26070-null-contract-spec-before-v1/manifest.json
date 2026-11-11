@@ -1,0 +1,57 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T00:51:33.284779+09:00",
+  "bug": "BUG2629",
+  "ykt": "YKT2310",
+  "sourcePins": {
+    "evidence/01_PT/001_NK-PRO-001/001_NK-PRO-001_単体テスト仕様書.md": "503c5f6be3caaa341dcec35cb1bd1b8a3892d270bf6a7fa91cdad580b43abdbe",
+    "evidence/01_PT/003_NK-PRO-003/001_NK-PRO-003_単体テスト仕様書.md": "efcf77158ce01cf3c2b05f173d1a9c0c7559433ed1ccd957f63b93f9df466463"
+  },
+  "primarySpecsSearched": 20,
+  "searchCondition": "Top-level 001_ specification wording only; no raw evidence or program execution.",
+  "hits": [
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/001_NK-PRO-001_単体テスト仕様書.md",
+      "line": 27,
+      "text": "| PT-PRO-001-H03 | protocol/version/layout/direction/interaction/UUID/context/result/長さの不正値を個別投入 | NPEではなく項目を示す契約例外 | 異常/null | JUnit XML |"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/001_NK-PRO-001_単体テスト仕様書.md",
+      "line": 41,
+      "text": "- Public constructor/factory/lookupへnull、blank、unknownを投入し、NPEを外部契約にしない。"
+    },
+    {
+      "path": "evidence/01_PT/003_NK-PRO-003/001_NK-PRO-003_単体テスト仕様書.md",
+      "line": 37,
+      "text": "| PT-PRO-003-T02 | null、16/18桁、non-digit、不存在日、うるう年境界をparse | strict reject、NPEではなく契約例外 | null/異常 | JUnit XML |"
+    },
+    {
+      "path": "evidence/01_PT/005_NK-MSG-001/001_NK-MSG-001_単体テスト仕様書.md",
+      "line": 162,
+      "text": "- Public constructor/factoryのnull、設定欠落、JMS property null、ReplyTo欠落を個別にdeny closedとし、NPEを正常系へ変換しない。"
+    },
+    {
+      "path": "evidence/01_PT/006_NK-MSG-002/001_NK-MSG-002_単体テスト仕様書.md",
+      "line": 159,
+      "text": "| PT-IDEM-012-W01-D | `closeIsIdempotentAndRejectsInvalidInputs` | null/worker/limit/周期/close期限/aggregate負値、close2回 | 起動前拒否、停止後周期0、二重close可、NPEを正常へ変換しない |"
+    },
+    {
+      "path": "evidence/01_PT/008_NK-SCN-001/001_NK-SCN-001_単体テスト仕様書.md",
+      "line": 54,
+      "text": "| PT-SCN-009-S04 | nullInvalidCaptureAndClosedKeysPreserveBoundaries | 全public NULL、非対応成功layout、不正typed/descriptor、誤file ID、保存禁止code、invalid sentAt、closed/unknown鍵を拒否。caller契約NPEを正常扱いせず、provider/cause/suppressed非保持、opaque snapshot固定redaction |"
+    },
+    {
+      "path": "evidence/01_PT/009_NK-MED-001/001_NK-MED-001_単体テスト仕様書.md",
+      "line": 74,
+      "text": "| PT-MED-022 | med022NullSizeAndSegmentContractsFailBeforeContentRead | constructor/root/identity/port/list/要素/callback NULL、empty/257segment、期待0/負、空/dot/dotdot/slash/NUL segment。NPEを正常扱いせず境界例外、callback/read未実施。最大256segmentは合成能力fixtureまたは実階層で到達確認 |"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/001_NK-CHR-001_単体テスト仕様書.md",
+      "line": 49,
+      "text": "- Public/package境界のpath/JSON/list/selectorにnull、blank、missing、unknownを入れ、NPEではなく契約failureとする。"
+    }
+  ],
+  "authority": "Existing 411 requireNonNull/invariant rule and Program001/104 explicit HDR3266 internal precondition; timestamps non-null Java conversion boundary. External wire errors remain typed validation failures.",
+  "upperSpecChangesNeeded": false,
+  "productionOrTestsChanged": false
+}

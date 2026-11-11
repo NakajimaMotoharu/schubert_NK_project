@@ -1,0 +1,60 @@
+# NK-PRO-003 単体テスト仕様書
+
+## 1. Program
+
+BUG-040/YKT-036追加、PT-PRO-003-M03: `MediaDescriptorValidatorTest#bug040StorageExtensionCannotBeHiddenByDisplayMetadata`。SS333 §8の7組を独立literalで固定し、storage拡張子の欠落/.bin/大文字/別許可形式/後置.binをすべて拒否。表示base名だけの変更は正常、cause/suppressedと例外へのpath非露出も確認。実file/manifest照合は後続NK-MED-001であり、本構造PTを代替証拠にしない。正式再試験完了までProgram判定保留。
+
+BUG-037/YKT-033追加（PT-SCN-20260908-18再試験完了、完了判定復帰）: SS322 §4.2/UI232の厳密17 ASCII数字をsenderでも保証する。DateTimeFormatterの拡張yearを切捨てず拒否する。元の17桁proleptic年/parseの扱いは変更しない。
+
+| Test ID | JstWireTimestampTest#method | 独立入力・期待 |
+|---|---|---|
+| PT-PRO-003-T03 | bug037ExpandedYearsAndUnrepresentableInstantsAreRejected | year+10000/-0001、Instant.MIN/MAX millisはcauseなしIllegalArgumentException。通常17桁の上下と既存parse非回帰、拡張/符号入力拒否 |
+| PT-PRO-003-T04 | bug037HeaderSenderRejectsBadTimeAndPreservesAdjacentContext | 同4値でHeader encodeは固定変換例外、出力bodyなし。最大正常日時のoffset96/17byteと次offset113/64byteがliteralに一致 |
+| PT-PRO-003-T05 | bug037RequiredAndOptionalDataSendersRejectBadTime | 必須N日時/任意X日時の同4値拒否、99991231235959999の独立numeric/text、Optional.emptyのUnset不変 |
+
+正式PT-SCN-20260908-18/9f9d324、全466件/Program16、全coverage100%、静的解析0。実行command/commit/環境/結果/hashは003 manifest/002結果へ記録。Header/Typed/semanticの既存全PTも非回帰確認。検索だけの横展開完了はしない。
+
+| 項目 | 内容 |
+|---|---|
+| Program ID | `NK-PRO-003` |
+| Class/method | `JstWireTimestamp`、`LargeResultDescriptor`、`LargeResultRecordCodec`、`MediaDescriptorValidator` |
+| 関連RD | MQ-035、MQ-039～041、FIL-001～009、MSG-F01～F09 |
+| 関連UI | 232、237 |
+| 関連SS | 322～323、333、354 |
+| 関連台帳 | SSC-004、BUG-034/YKT-030（constant-time hash再試験）、BUG-037/YKT-033（日時sender境界） |
+
+## 2. 事前条件・fixture
+
+- JST timestamp期待値は固定`Instant`と独立した17桁文字列を対にし、production formatterから生成しない。
+- Large-resultはtest側で4,800 byte recordを規則的な固定byteで生成し、件数・size・SHA-256を独立計算する。
+- File IDは固定UUID、relative pathは`yyyyMMdd/<UUID>.ready`だけをpositive fixtureとする。
+
+## 3. Test case
+
+| Test ID | 目的・入力/操作 | 独立期待値・根拠 | 観点 | Evidence |
+|---|---|---|---|---|
+| PT-PRO-003-T01 | InstantをJST17桁へformatしparseで戻す | UI 232 §3、Asia/Tokyo、millisecond精度で一致 | 正常/境界 | JUnit XML |
+| PT-PRO-003-T02 | null、16/18桁、non-digit、不存在日、うるう年境界をparse | strict reject、NPEではなく契約例外 | null/異常 | JUnit XML |
+| PT-PRO-003-D01 | File ID/path/size/hash/4800/1～10000件descriptorを生成 | UI 237 §5の全不変条件成立 | 正常/境界 | descriptor fixture |
+| PT-PRO-003-D02 | 絶対path、`..`、backslash、NUL、UUID不一致、suffix違い、size式不一致、uppercase hash | descriptor生成時に拒否 | Security/異常 | JUnit XML |
+| PT-PRO-003-L01 | 1/2/10000件の4,800 byte record streamをdecode | Header/BOM/newlineなし、件数・終端exact | 正常/最大 | hash/log |
+| PT-PRO-003-L02 | 0件、10001件、4,799/4,801 byte終端、descriptorより過不足、hash不一致 | 部分recordを返さず拒否 | 境界/異常 | JUnit XML |
+| PT-PRO-003-L03 | InputStreamが短いreadを返す、I/O error、null stream/descriptor | exact-read継続または型別例外 | I/O/null | JUnit XML |
+| PT-PRO-003-H01 | 独立JCA digestと全32 byte位置のbit改変を照合、compiled decodeをjavapで確認 | 正当recordのみ返す、32位置全拒否。比較は固定32byteのMessageDigest.isEqual、String.equalsなし。実時間のflaky assertionは使用しない | Security/方式/異常 | LargeResultRecordCodecTest・検証bytecode metadata |
+| PT-PRO-003-M01 | Media descriptorのroot非依存構造、size/hash/MIME/disposition/nameを検証 | UI 237 §8、SSC-004のAudio 1/Video 1/Music 5組だけ受理、pathを例外へ露出しない | Security/redaction | JUnit XML |
+| PT-PRO-003-M02 | 拡張子/MIME全7正規組合せとcross-product不一致、大文字拡張子、`application/octet-stream` descriptorを投入 | SSC-004の完全一致allowlist。不一致とHTTP専用MIMEをdescriptorで拒否 | 境界/異常 | JUnit XML |
+
+## 4. 並行・再送観点
+
+- Codecは入力stream以外の状態を持たず、別streamの並行decodeが干渉しない。
+- 再open後はdescriptor size/hashが同じ場合だけ同一結果とし、差替えは拒否する。Filesystem TOCTOUの実測は後続IT/STで行う。
+
+## 5. 実行command・合格条件
+
+Program 001と同じMaven `clean verify`を使用する。Line/method/class/branch各100%、1～10,000件と48,000,000 byte上限、short-read/I/O/null/invalid path/hash全分岐、failure/error/skipped/flaky/disabled/not-run 0を必須とする。
+
+## 6. 実行結果・障害
+
+2026-09-08: **BUG-034/YKT-030再試験完了・Program完了復帰**。PT-SCN-20260908-02、747d3a0、Program13/Protocol73/全363件成功、全coverage100%、静的解析0。固定32byteのMessageDigest.isEqualをcompiled bytecodeで確認し、PT-PRO-003-H01の全32位置改変拒否を確認した。以下は旧合格履歴。最新はmanifest/002結果を正とする。
+
+状態: **PG・PT完了**。Run `PT-PRO-20260902-01`、commit `3bcfa5a1632ef8500250a2252336e9d6bf4dfe16`で12件全PASS、failure/error/skipped/flaky/disabled/not-run 0。Module全33件PASS、coverage line/method/class/branch各100%、SpotBugs 0件。SSC-004を反映した7 MIME組合せと不一致全cross-product、1～10,000件・最大48,000,000 byteを含む。詳細は`002_NK-PRO-003_実行結果.md`と`evidence/manifest.json`を参照する。

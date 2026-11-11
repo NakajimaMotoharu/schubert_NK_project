@@ -1,0 +1,267 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T01:00:22.433918+09:00",
+  "source": "689e2af901c1c6cc970939f8110a6d2f178a966d",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "owners": [
+    {
+      "id": "WBS-P001-01",
+      "ownedSourcePins": {
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java": "aaa18a4c954a425c943e8c30ea1752b665b249e86d8f1767e9e37f4aa61a6b66",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/CommonHeader.java": "13d093f420eeb2d41883e17e2a0cddb9defe04e8528a511f29bc6ef861518f8d",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java": "5424c3f1ad90de3965e298380da683ec72644ecd8fae80117c01001d1d0aa620",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java": "3b003356680171b300d7c5d680b05cec255f4267190907c62cfaec3261a920a0",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/package-info.java": "f42304f14cb1bfeeb78be2d4589366593f6a9903eedb95514462a30f37ea47c3"
+      },
+      "requirementIds": [
+        "MQ-014",
+        "MQ-015",
+        "MQ-016",
+        "MQ-017",
+        "MQ-018"
+      ],
+      "relatedRD": "MQ-014～038、MSG-001～011、MSG-F02/F03、FIL-006",
+      "relatedUI": "232～237、243",
+      "designFiles": [
+        "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md"
+      ],
+      "originalAcceptanceSource": "7fffab57a567914956b66452e5e54388642efdec",
+      "dependencies": [],
+      "referenceCounters": {
+        "INSTRUCTION": {
+          "covered": 687,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 88,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 137,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 76,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 30,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 5,
+          "missed": 0
+        }
+      },
+      "newAcceptance": 0,
+      "currentAcceptance": false,
+      "missing": [
+        "All individual branch/exception/independent-oracle attribution and final owner/451 endings not established by aggregate measured counters."
+      ]
+    },
+    {
+      "id": "WBS-P001-02",
+      "ownedSourcePins": {
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldArea.java": "204ca119d0ad946294d03e3fb5d151f3c5ba541e97fe72dce960f024ae72cf50",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java": "7aee31bed1ddf707311f1aac8568c8de71907d9b19986261e80f92e5fe86f263",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValue.java": "6f50d333720aaedf58b714be1f84c298297ae80398e8b8f7afb0ec7341d98041",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValueSet.java": "2c292124a30ee4ed275ad2d43818b46c73c8f5648edd60914992da786e6f555b",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java": "d4ad2f50f40e9cb860786af43875583ac324fd2e6055f0bee1e6804101257d5d",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java": "3146b6c3d044f3191fcfa4e8687afbb0d57ee7645ff233ec4a0f02bdeb5421a2",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFields.java": "c62cfffa3b8616cc820480b8166919ce98c7f8c4f15fa4a2fc63e55659cc8e51",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutPayload.java": "37ca98b5f55870f438606e20006a2dd737a2690eb6c6f4276de87b90a87bec0c",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java": "6c8f5806097d9827a02058f8c1b53f108e2e40f28ef190ead2a7f9140be080f8",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java": "b99e562fe3afd1f1e11a7ff415f25999c14e46016d5a115022706d4f8674a9df",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/Padding.java": "e67fe4d4ac4c38b5056b45ba60f481c8d8e77dc354dfe1ea543d220da302d8bb",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java": "39c381766f47ebf2e71ccac4709ebb13272ee2c1dde8720ab888774456b62440",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/Presence.java": "222046f9576699922b9e7e0692ace81c43a345f3a7fc1b11c009143b7271b378",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException.java": "ed22caff978204b37fce0e3b9221758e7539596b64e3c19be77f76f7b7901dd2",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/WireMessage.java": "521ec97482cfe772177fd96abb829a441177371986c622584d820e7fb2e641a9",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/WireType.java": "22ac1353bdc960042885401477ad0685849d126d2ecd6786e4ba488a9cb76e6b",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/package-info.java": "2fbe92d4140d6941e535183ca3d276c9adbd10aae25286246a1ee3d38a1624c2",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/package-info.java": "10791580ee1eb4c0dbfbc16d04b979a3d6829eeaa330596e9faffc13fe77987b",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/package-info.java": "85e0d120423af8a1a8a3aa17a51f99e49a73a0a26f1486b30c880474d9f3c7b9"
+      },
+      "requirementIds": [],
+      "relatedRD": "MQ-014～038、MSG-001～011、MSG-F02/F03、FIL-006",
+      "relatedUI": "232～237、243",
+      "designFiles": [
+        "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md"
+      ],
+      "originalAcceptanceSource": "7fffab57a567914956b66452e5e54388642efdec",
+      "dependencies": [],
+      "referenceCounters": {
+        "INSTRUCTION": {
+          "covered": 3034,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 170,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 564,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 175,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 84,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 22,
+          "missed": 0
+        }
+      },
+      "newAcceptance": 0,
+      "currentAcceptance": false,
+      "missing": [
+        "All individual branch/exception/independent-oracle attribution and final owner/451 endings not established by aggregate measured counters."
+      ]
+    },
+    {
+      "id": "WBS-P002-03",
+      "ownedSourcePins": {
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ExpectedRoute.java": "e512bf8bb9a289e5ef3d12ecc4c11f4e01feec3a1e0b8716e2db64ffd416baf2",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/MessageEncodingException.java": "7728bc86a1258f37488c72d0c7eb392cbc9891da33906d6965962526e4f64ab3",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportBodyType.java": "e0fdf54397d7d935407d498fcb0679fd957b7af091727fd978c9d67df74f81b8",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportMetadata.java": "198dac5e9cad2046e8e78a4323bfe2e0e2a4a3842044015e8088c1149fcdf646"
+      },
+      "requirementIds": [],
+      "relatedRD": "MQ-014～045、MSG/MSG-F",
+      "relatedUI": "233～236",
+      "designFiles": [
+        "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md"
+      ],
+      "originalAcceptanceSource": "7fffab57a567914956b66452e5e54388642efdec",
+      "dependencies": [
+        "WBS-P001-01",
+        "WBS-P001-02"
+      ],
+      "referenceCounters": {
+        "INSTRUCTION": {
+          "covered": 644,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 113,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 32,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 14,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 5,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 36,
+          "missed": 0
+        }
+      },
+      "newAcceptance": 0,
+      "currentAcceptance": false,
+      "missing": [
+        "All individual branch/exception/independent-oracle attribution and final owner/451 endings not established by aggregate measured counters."
+      ]
+    }
+  ],
+  "sourceCount": 31,
+  "testAndIndependentFixturePins": {
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java": "2f20adba3d3b4dfa8eef16e36ad571f91c7ffffa9b080a15a04f1bfddabd631f",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalogTest.java": "ad2df79ad437b878561567c4364f458336669c1c0394c0c5e602b529bae483ef",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutMetadataTest.java": "e3ea04e5b8a49be88eb3e0adcd2f5b5bc5a20f6793ba9e3be632545fe282b436",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/time/JstWireTimestampTest.java": "588bc19f5035c5b1d9e80979fc5376274a7ebace6df91d8f68fa1eec1e6f8c61",
+    "src/schubert-nk-protocol/src/test/resources/protocol/fields-ui234-236.tsv": "a430ddf02fa6cc28b0f0075b96aa97eff829876b7f3bd9412bd0db7c3637bd4b",
+    "src/schubert-nk-protocol/src/test/resources/protocol/layouts-ui233.tsv": "c4f290595f5cabf19c11877e2dea95627b4d42490116431bac3bfde58950d711"
+  },
+  "existingNormalProof": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG24642-protocol-whole120-independent-v1/manifest.json",
+    "sha256": "8ebe6365bc701ba6432b1b55275004024dc71bc452d31b66d31c53894e3ae128"
+  },
+  "methodReferenceProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG24678-header-method30-trace-independent-v1/manifest.json",
+      "sha256": "ae51094f0453b0f361064b3d5186b4badafac04204b044f75ee01482cd6c89f4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG24732-typecatalog-method12-trace-independent-v1/manifest.json",
+      "sha256": "92e415a1fc5c04e21a5c97ba636c399ee39acff1a0fdbf037c4de2a007e82ec4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG24808-headercodec5-method14-trace-independent-v1/manifest.json",
+      "sha256": "dd40ac9440700fbb1753b0f15c8c6753372fae2488b54b6c939b863be1454e87"
+    }
+  ],
+  "nullSpecSynchronization": {
+    "bug": "BUG-2629",
+    "ykt": "YKT-2310",
+    "beforeManifestSha256": "bbaefba694fdd63eb667ce9e8c4ccd3545da15ea694631eab5fe8ac7dfd703ac",
+    "searchedPrimarySpecs": 20,
+    "matchingOriginalLines": 8,
+    "changedSpecs": [
+      {
+        "path": "evidence/01_PT/001_NK-PRO-001/001_NK-PRO-001_単体テスト仕様書.md",
+        "beforeSha256": "503c5f6be3caaa341dcec35cb1bd1b8a3892d270bf6a7fa91cdad580b43abdbe",
+        "afterSha256": "3af111dfc280786f52b86048206c42f5135dde63e7d465c2f6dcecf288fb31d2",
+        "changes": [
+          {
+            "line": 27,
+            "before": "| PT-PRO-001-H03 | protocol/version/layout/direction/interaction/UUID/context/result/長さの不正値を個別投入 | NPEではなく項目を示す契約例外 | 異常/null | JUnit XML |",
+            "after": "| PT-PRO-001-H03 | protocol/version/layout/direction/interaction/UUID/context/result/長さの不正値を個別投入 | 非null構造不正は項目を示すLayoutValidationException。Java内部の九参照nullは104/HDR3266-001の即時requireNonNull・field名契約で拒否し、外部wireの拒否型と区別 | 異常/null | JUnit XML |"
+          },
+          {
+            "line": 41,
+            "before": "- Public constructor/factory/lookupへnull、blank、unknownを投入し、NPEを外部契約にしない。",
+            "after": "- Javaのnon-null参照契約に反するnullはconstructor/factory/lookupの即時前提条件で拒否する（具体型・field名は各Test ID/104等を正とする）。非nullの不正構造・未知wire値は型付きvalidation例外を要求し、偶発NPEやNPEの正常業務結果へのcatch/変換を許さない。"
+          }
+        ]
+      },
+      {
+        "path": "evidence/01_PT/003_NK-PRO-003/001_NK-PRO-003_単体テスト仕様書.md",
+        "beforeSha256": "efcf77158ce01cf3c2b05f173d1a9c0c7559433ed1ccd957f63b93f9df466463",
+        "afterSha256": "d2a4e5b908458fa6dc8919d369fe4bd7dbcac6c8af4fc2b7831ce8ad07db661b",
+        "changes": [
+          {
+            "line": 37,
+            "before": "| PT-PRO-003-T02 | null、16/18桁、non-digit、不存在日、うるう年境界をparse | strict reject、NPEではなく契約例外 | null/異常 | JUnit XML |",
+            "after": "| PT-PRO-003-T02 | null、16/18桁、non-digit、不存在日、うるう年境界をparse | Java non-null引数違反は即時requireNonNull（parseはvalue、formatはinstant）、非null不正時刻は既型付き契約例外でstrict reject。外部wire失敗と区別しNPEを正常結果へ変換しない | null/異常 | JUnit XML |"
+          }
+        ]
+      }
+    ],
+    "otherPrimarySpecsUnchanged": 18,
+    "behaviorOrExpectedExceptionChanged": false,
+    "upperDesignChanged": false
+  },
+  "testIds": [
+    "PT-PRO-001-H01",
+    "PT-PRO-001-H02",
+    "PT-PRO-001-H03",
+    "HDR3266-001",
+    "PT-PRO-001-L01",
+    "PT-PRO-001-L02",
+    "PT-PRO-001-L03",
+    "PT-PRO-003-T02"
+  ],
+  "productTestsExecuted": 0,
+  "newCoverageMeasurements": 0,
+  "perCaseProbeAttribution": null,
+  "allBranchOraclesIndividuallyVerified": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "toolSha256": "f973c303645bce5c7f202991b5edf5b1627b71d851dfe47980dbd89ba08b9f9c"
+}
