@@ -1,0 +1,332 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T01:56:06.841053+09:00",
+  "source": "3ebc4db54f653a2713aa5b4589cef9b4c349198b",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "sourcePins": {
+    "src/deployment/caddy/Caddyfile.template": "2914bfd4134186911562071f92652ce750e513213a749672dd161615c3d8763c",
+    "src/deployment/postgresql/pg_hba.conf.template": "c73a1809eb70f3934fcb6621f3d60f782e6a5fef2946f178fad8294e1bcb8850",
+    "src/deployment/postgresql/postgresql.conf.template": "aa4474413deccf08e3f30b458355602145dd611ac0329e2a83a1f1007f9149eb",
+    "src/schubert-nk-api/src/main/resources/db/provisioning/001_roles.sql": "6021aa46d94cbf8edac059b6c14fc36381c0bad7ceca2930b5939ee9ba6b5522"
+  },
+  "canonicalDesignSha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82",
+  "caddyRequiredLiterals": [
+    "admin off",
+    "auto_https disable_redirects",
+    "skip_install_trust",
+    "https://<GLOBAL_IP>:55160",
+    "bind <GLOBAL_IP>",
+    "tls internal",
+    "max_size 2MB",
+    "Strict-Transport-Security \"max-age=31536000\"",
+    "X-Content-Type-Options \"nosniff\"",
+    "X-Frame-Options \"DENY\"",
+    "Referrer-Policy \"same-origin\"",
+    "-Server",
+    "reverse_proxy 127.0.0.1:8080",
+    "header_up X-Forwarded-For {remote_host}",
+    "header_up X-Forwarded-Proto {scheme}",
+    "header_up X-Forwarded-Host {host}",
+    "dial_timeout 2s",
+    "response_header_timeout 30s",
+    "read_timeout 60s",
+    "write_timeout 60s"
+  ],
+  "caddyExistingOriginalThreeReferences": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16160-caddy-config-three-pt-v1/manifest.json",
+      "sha256": "4fa248ef2e84f438988379450ec7ba5d4f8958588e834140667da6bd3a802a83"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16162-caddy-config-three-post-v1/manifest.json",
+      "sha256": "241833934d3a7e7779b84a9515f1390799e348eb0a47eb002668245dea2f1bed"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16165-caddy-config-three-independent-v2/manifest.json",
+      "sha256": "f797aaa8adcd6d8192a6d0a33b373b1387b6f5b3cc5ed4c709fb4c1e38612066"
+    }
+  ],
+  "caddyMainTestAndTemplateSameByte": true,
+  "caddySourceCoverageMeasured": true,
+  "caddyTargetUnitFour100": false,
+  "caddyTargetUnitFour100NotOverridden": true,
+  "postgresExpected32": {
+    "listen_addresses": "127.0.0.1,::1",
+    "port": "5432",
+    "max_connections": "40",
+    "shared_buffers": "2GB",
+    "effective_cache_size": "6GB",
+    "work_mem": "8MB",
+    "maintenance_work_mem": "512MB",
+    "max_worker_processes": "8",
+    "max_parallel_workers": "4",
+    "max_parallel_workers_per_gather": "2",
+    "temp_file_limit": "2GB",
+    "wal_compression": "on",
+    "min_wal_size": "1GB",
+    "max_wal_size": "4GB",
+    "checkpoint_timeout": "15min",
+    "checkpoint_completion_target": "0.9",
+    "deadlock_timeout": "500ms",
+    "password_encryption": "scram-sha-256",
+    "ssl": "off",
+    "log_statement": "none",
+    "log_parameter_max_length": "0",
+    "log_parameter_max_length_on_error": "0",
+    "log_connections": "on",
+    "log_disconnections": "on",
+    "log_checkpoints": "on",
+    "log_lock_waits": "on",
+    "log_autovacuum_min_duration": "0",
+    "log_min_duration_statement": "-1",
+    "log_min_duration_sample": "-1",
+    "log_transaction_sample_rate": "0",
+    "log_min_error_statement": "panic",
+    "log_error_verbosity": "terse"
+  },
+  "hbaOrdered16": [
+    [
+      "local",
+      "all",
+      "postgres",
+      "peer"
+    ],
+    [
+      "host",
+      "schubert_nk",
+      "schubert_app",
+      "127.0.0.1/32",
+      "scram-sha-256"
+    ],
+    [
+      "host",
+      "schubert_nk",
+      "schubert_app",
+      "::1/128",
+      "scram-sha-256"
+    ],
+    [
+      "host",
+      "schubert_nk",
+      "schubert_web_session",
+      "127.0.0.1/32",
+      "scram-sha-256"
+    ],
+    [
+      "host",
+      "schubert_nk",
+      "schubert_web_session",
+      "::1/128",
+      "scram-sha-256"
+    ],
+    [
+      "host",
+      "schubert_nk",
+      "schubert_batch",
+      "127.0.0.1/32",
+      "scram-sha-256"
+    ],
+    [
+      "host",
+      "schubert_nk",
+      "schubert_batch",
+      "::1/128",
+      "scram-sha-256"
+    ],
+    [
+      "host",
+      "schubert_nk",
+      "schubert_backup",
+      "127.0.0.1/32",
+      "scram-sha-256"
+    ],
+    [
+      "host",
+      "schubert_nk",
+      "schubert_backup",
+      "::1/128",
+      "scram-sha-256"
+    ],
+    [
+      "host",
+      "schubert_nk",
+      "schubert_ops_ro",
+      "127.0.0.1/32",
+      "scram-sha-256"
+    ],
+    [
+      "host",
+      "schubert_nk",
+      "schubert_ops_ro",
+      "::1/128",
+      "scram-sha-256"
+    ],
+    [
+      "host",
+      "schubert_nk",
+      "schubert_migration",
+      "127.0.0.1/32",
+      "scram-sha-256"
+    ],
+    [
+      "host",
+      "schubert_nk",
+      "schubert_migration",
+      "::1/128",
+      "scram-sha-256"
+    ],
+    [
+      "host",
+      "schubert_nk",
+      "schubert_inbox_inspector",
+      "127.0.0.1/32",
+      "scram-sha-256"
+    ],
+    [
+      "host",
+      "all",
+      "all",
+      "0.0.0.0/0",
+      "reject"
+    ],
+    [
+      "host",
+      "all",
+      "all",
+      "::/0",
+      "reject"
+    ]
+  ],
+  "roleTimeouts": [
+    {
+      "role": "schubert_app",
+      "setting": "statement_timeout",
+      "expected": "1500ms"
+    },
+    {
+      "role": "schubert_app",
+      "setting": "lock_timeout",
+      "expected": "500ms"
+    },
+    {
+      "role": "schubert_app",
+      "setting": "idle_in_transaction_session_timeout",
+      "expected": "15s"
+    },
+    {
+      "role": "schubert_web_session",
+      "setting": "statement_timeout",
+      "expected": "1500ms"
+    },
+    {
+      "role": "schubert_web_session",
+      "setting": "lock_timeout",
+      "expected": "500ms"
+    },
+    {
+      "role": "schubert_web_session",
+      "setting": "idle_in_transaction_session_timeout",
+      "expected": "15s"
+    },
+    {
+      "role": "schubert_batch",
+      "setting": "statement_timeout",
+      "expected": "30min"
+    },
+    {
+      "role": "schubert_batch",
+      "setting": "lock_timeout",
+      "expected": "5s"
+    },
+    {
+      "role": "schubert_batch",
+      "setting": "idle_in_transaction_session_timeout",
+      "expected": "60s"
+    },
+    {
+      "role": "schubert_backup",
+      "setting": "statement_timeout",
+      "expected": "30min"
+    },
+    {
+      "role": "schubert_backup",
+      "setting": "lock_timeout",
+      "expected": "5s"
+    },
+    {
+      "role": "schubert_backup",
+      "setting": "idle_in_transaction_session_timeout",
+      "expected": "60s"
+    },
+    {
+      "role": "schubert_migration",
+      "setting": "statement_timeout",
+      "expected": "30min"
+    },
+    {
+      "role": "schubert_migration",
+      "setting": "lock_timeout",
+      "expected": "5s"
+    },
+    {
+      "role": "schubert_migration",
+      "setting": "idle_in_transaction_session_timeout",
+      "expected": "60s"
+    },
+    {
+      "role": "schubert_ops_ro",
+      "setting": "statement_timeout",
+      "expected": "10s"
+    },
+    {
+      "role": "schubert_ops_ro",
+      "setting": "lock_timeout",
+      "expected": "1s"
+    },
+    {
+      "role": "schubert_ops_ro",
+      "setting": "idle_in_transaction_session_timeout",
+      "expected": "15s"
+    },
+    {
+      "role": "schubert_inbox_inspector",
+      "setting": "statement_timeout",
+      "expected": "30s"
+    },
+    {
+      "role": "schubert_inbox_inspector",
+      "setting": "lock_timeout",
+      "expected": "5s"
+    }
+  ],
+  "roleOwner": "WBS-P004-01_SHARED_REFERENCE_NO_SECOND_IMPLEMENTATION_COST",
+  "postgresHistoricalFormalResourcePins": {
+    "src/deployment/postgresql/postgresql.conf.template": "aa4474413deccf08e3f30b458355602145dd611ac0329e2a83a1f1007f9149eb",
+    "src/deployment/postgresql/pg_hba.conf.template": "c73a1809eb70f3934fcb6621f3d60f782e6a5fef2946f178fad8294e1bcb8850"
+  },
+  "postgresTestCurrentSha256": "d595c751a9090661c8f7da4301e5643215a8c38ba1e218fc27b67ee172feb4c5",
+  "postgresCurrentTestSameFormal": false,
+  "postgresBeforeAllStartsActualDb": true,
+  "postgresCurrentEightTestStatus": "NOT_RUN_HOLD_NOT_PASS",
+  "postgresPrimaryMessageRedactionCertified": false,
+  "criteria": [
+    {
+      "id": "WBS-C01",
+      "decision": "NOT_ACCEPTED",
+      "reason": "Current source/old original3 limited proof bound; full Caddy Source four100 false, authentic effective daemon/TLS/public ownership and451 endings unproven"
+    },
+    {
+      "id": "WBS-C03",
+      "decision": "NOT_ACCEPTED",
+      "reason": "32/16/20 source declarations correspond; actual PG18 parser/HBA/auth/role/effective GUC and primary-error redaction not current qualified under HOLD"
+    }
+  ],
+  "productTestsExecuted": 0,
+  "configurationParsersExecuted": 0,
+  "daemonOrDatabaseOrVmOperations": 0,
+  "newCoverageMeasurements": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "toolSha256": "7cda32962b7b3403eff49ec1c76f5c96f5b10a0309d83db83338abda4ca483e9"
+}
