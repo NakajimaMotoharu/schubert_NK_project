@@ -1,0 +1,106 @@
+{
+  "revision": "WBS65-EXEC-FORECAST-3",
+  "atJST": "2026-11-12T00:07:28.068730+09:00",
+  "originalRemainingPp": {
+    "low": 424.3,
+    "base": 904.85,
+    "high": 1778.4
+  },
+  "completedPlanWorkIds": [
+    "WBS-K03.01/01",
+    "WBS-K03.02/01",
+    "A4-01",
+    "A4-03",
+    "A4-02",
+    "WBS-F01"
+  ],
+  "completedPlanPriceSumPp": {
+    "low": 1.905,
+    "base": 5.25,
+    "high": 10.69
+  },
+  "remainingOriginalPlanPricePp": {
+    "low": 422.395,
+    "base": 899.6,
+    "high": 1767.71
+  },
+  "priceReductionIsNotEffortCompletionRate": true,
+  "actualAllocatedPp": null,
+  "EACIncludingActualDedicatedCostsPp": null,
+  "sharedFirstObservedUsedPercent": 0,
+  "sharedLastObservedUsedPercent": 1,
+  "sameWindowComparison": "Only exact reset identity; any differing marker remains null, no rounded reset inference",
+  "N": null,
+  "T": null,
+  "newOriginal190Acceptance": 0,
+  "effortCompletionRate": null,
+  "estimateCorrection": {
+    "target": "K03 group4578 frozen1/1/1 preserved",
+    "planRowAggregatePp": {
+      "low": 0.455,
+      "base": 1,
+      "high": 1.19
+    },
+    "reason": "Initial group froze standard budget identically in all three slots; actual plan low/high differ. Original event remains immutable; this is estimate-field correction, not output or savings."
+  },
+  "additionalDiscovery": [
+    "BUG2624 class role metadata repair within A401",
+    "BUG2625 legacy label within A403",
+    "BUG2626 F01 document label/owner correction within original group"
+  ],
+  "newBudgetAddedPp": 0,
+  "remainingFirst20DecisionTasks": [
+    "A4-02",
+    "F01",
+    "G13.01",
+    "F02",
+    "P02001.01",
+    "P00501 mapping",
+    "C04",
+    "P00101",
+    "P00102",
+    "P00203",
+    "C02"
+  ],
+  "normalStopThresholdRemainingPercent": 10,
+  "previousForecast": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/558_WBS65予実・第1窓版2.json",
+    "sha256": "bed46265e6a9b51c63ae73ff731931a871c1f7e03cdc8323ccc7b42db6f84a01"
+  },
+  "sourceRequalification": [
+    "F01 existing policy only"
+  ],
+  "ongoingOriginalConditions": [
+    "BUG2615/YKT2303 six dynamic caller checks remain HOLD under original B/N contracts"
+  ],
+  "plannedPriceMilestoneReached": 5.25,
+  "actualShared5PpMilestoneProven": false,
+  "partiallyCompletedPlanWorkIds": [
+    "WBS-G13.01"
+  ],
+  "scheduledPlanPriceThroughCurrentGroupBasePp": 7.75,
+  "revisedRemainingPp": {
+    "low": 421.645,
+    "base": 897.85,
+    "high": 1764.21
+  },
+  "estimateRevisions": [
+    {
+      "id": "WBS-G13.01",
+      "oldPp": {
+        "low": 1,
+        "base": 2.5,
+        "high": 5
+      },
+      "newRemainingPp": {
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.5
+      },
+      "baseDifferencePp": -1.75,
+      "reason": "Full current-source/layout/reference join complete; individual branch-oracle/owner dependencies not accepted. Remaining G13 reference recheck after existing B acceptance; B implementation/oracle costs retained separately.",
+      "classification": "PARTIAL_WORK_AND_PROVISIONAL_ESTIMATE_REVISION_NOT_ACCEPTANCE",
+      "uncalibrated": true
+    }
+  ]
+}
