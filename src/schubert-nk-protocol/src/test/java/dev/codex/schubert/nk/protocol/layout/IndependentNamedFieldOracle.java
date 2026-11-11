@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -34,6 +35,7 @@ import java.util.UUID;
  */
 final class IndependentNamedFieldOracle {
   private static final int JST_WIRE_DIGITS = 17;
+  private static final int ACCEPTED_NUMERIC_BOUNDARY_VECTORS = 2;
   private static final int UUID_TEXT_LENGTH = 36;
   private static final String SEMANTIC = "dev.codex.schubert.nk.protocol.layout.semantic.";
   private static final Instant TIME = Instant.parse("2026-09-02T03:34:56Z");
@@ -197,6 +199,41 @@ final class IndependentNamedFieldOracle {
         emptyArguments[n] = Optional.empty();
         assertWireMap(absent, fieldsOf(constructor.newInstance(emptyArguments)));
       }
+      // PT-PRO-001-NAMED-RANGE-001-BEGIN
+      // Independent UI/SS widths verify each constructor's field/width binding, not just helper
+      // code.
+      if (signature.get(n) == int.class || signature.get(n) == long.class) {
+        long maximum = BigInteger.TEN.pow(field.length()).subtract(BigInteger.ONE).longValueExact();
+        for (int boundary = 0; boundary < 4; boundary++) {
+          long value =
+              switch (boundary) {
+                case 0 -> 0;
+                case 1 -> maximum;
+                case 2 -> -1;
+                default -> maximum + 1;
+              };
+          Object numeric;
+          if (signature.get(n) == int.class) numeric = Math.toIntExact(value);
+          else numeric = value;
+          Object[] numericArguments = arguments.toArray();
+          numericArguments[n] = numeric;
+          if (boundary < ACCEPTED_NUMERIC_BOUNDARY_VECTORS) {
+            Object bounded = constructor.newInstance(numericArguments);
+            assertEquals(numeric, getters.get(n).invoke(bounded), field.name());
+          } else {
+            var failure =
+                assertThrows(
+                    InvocationTargetException.class,
+                    () -> constructor.newInstance(numericArguments));
+            var cause = assertInstanceOf(LayoutValidationException.class, failure.getCause());
+            assertEquals(
+                "typed numeric field is out of range: " + accessors.get(field.name()),
+                cause.getMessage(),
+                type.getSimpleName() + ":" + field.name());
+          }
+        }
+      }
+      // PT-PRO-001-NAMED-RANGE-001-END
     }
     var nullFailure =
         assertThrows(InvocationTargetException.class, () -> from.invoke(null, new Object[] {null}));
