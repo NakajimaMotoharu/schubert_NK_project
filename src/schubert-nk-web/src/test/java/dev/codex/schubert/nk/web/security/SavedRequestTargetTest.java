@@ -99,7 +99,8 @@ class SavedRequestTargetTest {
 
   @Test
   void web008ConcurrentTargetsRemainIndependent() throws Exception {
-    try (var pool = Executors.newFixedThreadPool(10)) {
+    var pool = Executors.newFixedThreadPool(10);
+    try {
       var futures = new ArrayList<Future<Void>>();
       for (int i = 0; i < 100; i++) {
         final int n = i;
@@ -115,6 +116,9 @@ class SavedRequestTargetTest {
                 }));
       }
       for (var future : futures) future.get(20, TimeUnit.SECONDS);
+    } finally {
+      pool.shutdownNow();
+      org.junit.jupiter.api.Assertions.assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
