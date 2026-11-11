@@ -15,3 +15,7 @@ BUG2631/2632/2633/2634/2635の限定再試験を確認。C02全14設定のeffect
 ## 同source資格の再開（2026-11-12、BUG2640/YKT2320）
 
 PG26150のclasspath再点検で、generic external集合に旧14216 Main六Jarが混入していた。元14成功/50receipt/独立postの実記録は不変更で保全するが、現在source専有classpath資格の認定をREOPENEDへ戻す。旧Jarを除いた正規閉集合の同Test14と独立postが揃うまで当sourceの限定再試験認定へ使わない。正式認定や元190受入を増やしていないためそれらの差分は0。
+
+## 現source専有runtime資格の更新（2026-11-12）
+
+BUG2640旧Jar排除後のPG26154全14成功/50receipt→PG26156独立a1b83f73で限定再試験資格を復帰。旧26096/26100は実成功の履歴で専有資格は撤回済みとして保持し、本current資格へ二重加算しない。追加Test定義0、Maincoverage/全C02/実認証等を認定しない。詳細4020。

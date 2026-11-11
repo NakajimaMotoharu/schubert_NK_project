@@ -11,3 +11,7 @@
 manifestに七resource/両Unit/設計origin-main hash・golden51値・公開10ID・四profile・既proofhashを保存。次C07はcurrent descriptorでownedの監視八resourceを正に読む。旧481のowned空は歴史projectionなので、current projectionのC07八を欠落させず、主担当費は一度だけ。Prometheus/Grafana/data retention/実scrape/停止は既HOLDを維持。
 
 資格追補（BUG2640/YKT2320）：26100の元14成功は保存するが、runtime CP旧Jar混入で同source資格はREOPENED。ここでの七template/公開IDの静的hash一致は不変であり、実配布/鍵/rotationを認定していない。是正後の当source再資格proofへ後続で結合する。
+
+## 現source専有runtime資格の更新（2026-11-12）
+
+BUG2640旧Jar排除後のPG26154全14成功/50receipt→PG26156独立a1b83f73で限定再試験資格を復帰。旧26096/26100は実成功の履歴で専有資格は撤回済みとして保持し、本current資格へ二重加算しない。追加Test定義0、Maincoverage/全C02/実認証等を認定しない。詳細4020。

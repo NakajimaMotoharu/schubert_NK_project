@@ -9,3 +9,7 @@ C08: 一owned wrapperの四exactreceipt（0/10/50/70とJVM成功dot）を独立A
 初guard1は作業copy SS353とorigin/mainの三空行差。PG26108元工具/hashを保全し、主本文はorigin/mainから読み、空行以外が同一であることを別確認。343はbyte一致、353はcanonical hash/local hashを区別して記録。上位資料は編集せず、以後正本origin/mainを使用する。guard検出を製品試験失敗に加算しない。
 
 evidence/PG26106-c05-c08-scope-decision-v1/manifest.json SHA256 0a626bbceef50ef0c9832ef184cd20f976ba4646b91a3478bb7b17678a1504c0。具体tuple/vector/source/Git blob/設計pin/既試験proofを含む。新Product実行/coverage/受入0、正式1964/53・工数null不変。次F03許可済み静的範囲・F04比較基盤を依存順に照合し、actual対象HOLDを解除しない。
+
+## 現source専有runtime資格の更新（2026-11-12）
+
+BUG2640旧Jar排除後のPG26154全14成功/50receipt→PG26156独立a1b83f73で限定再試験資格を復帰。旧26096/26100は実成功の履歴で専有資格は撤回済みとして保持し、本current資格へ二重加算しない。追加Test定義0、Maincoverage/全C02/実認証等を認定しない。詳細4020。
