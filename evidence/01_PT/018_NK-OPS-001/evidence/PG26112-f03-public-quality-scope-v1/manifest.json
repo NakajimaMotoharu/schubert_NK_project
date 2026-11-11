@@ -1,0 +1,200 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T01:33:23.705796+09:00",
+  "source": "ee59dfacf3c46af56b77231e03c0f11d6010f25c",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "publicProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/manifest.json",
+      "sha256": "2d200777b5983362f972cd00e83b64dbf265851bd9688eb6684a6442e4549298"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22126-current7aed-lineage-quality-independent-v1/manifest.json",
+      "sha256": "b8afadf6f5069ecdeaabd28cc7ea1cfa9a8ede51ebd904c7f013a70bc562062a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22106-api-stop-static-independent-input-v1/manifest.json",
+      "sha256": "8337343b6f8e98529d34e6c71e5372afb7f40ead39bbe59de6e218a64356828c"
+    }
+  ],
+  "sixModulePoms": {
+    "protocol": {
+      "path": "src/schubert-nk-protocol/pom.xml",
+      "sha256": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+      "inheritedDefaultCompileNullAway": true
+    },
+    "storage": {
+      "path": "src/schubert-nk-storage/pom.xml",
+      "sha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+      "inheritedDefaultCompileNullAway": true
+    },
+    "bootstrap": {
+      "path": "src/schubert-nk-bootstrap/pom.xml",
+      "sha256": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "inheritedDefaultCompileNullAway": true
+    },
+    "api": {
+      "path": "src/schubert-nk-api/pom.xml",
+      "sha256": "2c9786c2431606e25aef3e07117a43ee1abe4a4aa239900c4d7ae6d20469617f",
+      "inheritedDefaultCompileNullAway": true
+    },
+    "web": {
+      "path": "src/schubert-nk-web/pom.xml",
+      "sha256": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+      "inheritedDefaultCompileNullAway": true
+    },
+    "batch": {
+      "path": "src/schubert-nk-batch/pom.xml",
+      "sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+      "inheritedDefaultCompileNullAway": true
+    }
+  },
+  "inheritedCompilerArgs": [
+    "-Xlint:all",
+    "-Werror",
+    "-XDcompilePolicy=simple",
+    "--should-stop=ifError=FLOW",
+    "-Xplugin:ErrorProne -XepDisableAllChecks -Xep:NullAway:ERROR -XepOpt:NullAway:AnnotatedPackages=dev.codex.schubert.nk -XepOpt:NullAway:JSpecifyMode=true -XepOpt:NullAway:JSpecifyJDKModels=true",
+    "-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+    "-J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
+    "-J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
+    "-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+    "-J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+    "-J--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED",
+    "-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+    "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+    "-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+    "-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED"
+  ],
+  "rootPomSha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+  "versions": {
+    "maven.compiler.release": "25",
+    "project.build.sourceEncoding": "UTF-8",
+    "error-prone.version": "2.50.0",
+    "nullaway.version": "0.14.1",
+    "jspecify.version": "1.0.1"
+  },
+  "mainBuildTerminal": {
+    "actualExit": 0,
+    "timedOut": false,
+    "testsExecuted": false,
+    "testStatus": "NOT_RUN_COMPILE_ONLY_NOT_PASS",
+    "originalCommand": [
+      "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-o",
+      "--no-transfer-progress",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+      "-pl",
+      "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch",
+      "-am",
+      "-Dmaven.test.skip=true",
+      "package"
+    ]
+  },
+  "spotbugsClassStats": {
+    "protocol": {
+      "reportPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG22106-api-stop-static-independent-input-v1/spotbugs-protocol.xml",
+      "sha256": "798adc892f27681f86c7cdc068e01c771d025f749137d653e5affdacd0295bb8",
+      "classCount": 176,
+      "expectedPhysicalCount": 176,
+      "missing": [],
+      "extra": [],
+      "duplicates": 0,
+      "bugs": 0,
+      "missingDependencies": 0,
+      "analysisErrors": 0
+    },
+    "storage": {
+      "reportPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG22106-api-stop-static-independent-input-v1/spotbugs-storage.xml",
+      "sha256": "37d6104442391f2d90d4b88ba3a23b367058896510fccc639c6c426a306af99c",
+      "classCount": 80,
+      "expectedPhysicalCount": 80,
+      "missing": [],
+      "extra": [],
+      "duplicates": 0,
+      "bugs": 0,
+      "missingDependencies": 0,
+      "analysisErrors": 0
+    },
+    "bootstrap": {
+      "reportPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG22106-api-stop-static-independent-input-v1/spotbugs-bootstrap.xml",
+      "sha256": "8da77edb3bda51dca91591749b862045fd9755d4614ad6e632263e7bf8aa751d",
+      "classCount": 117,
+      "expectedPhysicalCount": 117,
+      "missing": [],
+      "extra": [],
+      "duplicates": 0,
+      "bugs": 0,
+      "missingDependencies": 0,
+      "analysisErrors": 0
+    },
+    "api": {
+      "reportPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG22106-api-stop-static-independent-input-v1/spotbugs-api.xml",
+      "sha256": "ccfb769a5b56820bc47011da00ae1234ac2cc93413c6d9d765876c386bea8cd7",
+      "classCount": 468,
+      "expectedPhysicalCount": 468,
+      "missing": [],
+      "extra": [],
+      "duplicates": 0,
+      "bugs": 0,
+      "missingDependencies": 0,
+      "analysisErrors": 0
+    },
+    "web": {
+      "reportPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG22106-api-stop-static-independent-input-v1/spotbugs-web.xml",
+      "sha256": "6123557e4ba39c1090d8de8ef6993f35bcf825dbf1329c34f11fa9829b3f186a",
+      "classCount": 359,
+      "expectedPhysicalCount": 359,
+      "missing": [],
+      "extra": [],
+      "duplicates": 0,
+      "bugs": 0,
+      "missingDependencies": 0,
+      "analysisErrors": 0
+    },
+    "batch": {
+      "reportPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG22106-api-stop-static-independent-input-v1/spotbugs-batch.xml",
+      "sha256": "9936c47f96f65c4b9e6f54bbc7c55dfac4ee7a2a1f042f3b1e8f0e6b84f9564e",
+      "classCount": 645,
+      "expectedPhysicalCount": 645,
+      "missing": [],
+      "extra": [],
+      "duplicates": 0,
+      "bugs": 0,
+      "missingDependencies": 0,
+      "analysisErrors": 0
+    }
+  },
+  "totalPhysicalClassStats": 1845,
+  "allPhysicalSetsMatch": true,
+  "heldFourClassFileReads": 0,
+  "heldFourRuntimeOrCompile": 0,
+  "rootTwoTestFileReads": 0,
+  "rawPmd1494Retained": true,
+  "applicablePmd": 0,
+  "unclassifiedPmd": 0,
+  "checkstyle": 0,
+  "currentArtifactHashesMatched": 1068,
+  "architectureRules": {
+    "CONTROLLER_BOUNDARY": 0,
+    "FRAMEWORK_FENCES": 0,
+    "INTERNAL_OWNER": 0,
+    "MODULE_EDGES": 0,
+    "REPOSITORY_DIRECTION": 0
+  },
+  "privateRawEvidenceReads": 0,
+  "productTestsExecuted": 0,
+  "analyzersExecuted": 0,
+  "newCoverageMeasurements": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "wholeF03Accepted": false,
+  "remainingConditions": [
+    "Test-side global format/Werror/static and denied Root Test2/Root11 scope remain HOLD; public Main report success is not whole F03.",
+    "Same final source/run 451, ordinary/VM/native/CHR and individual owner endings remain separate.",
+    "Current Test-only six owner cases qualify under own source46d7, not as Main coverage or global static certification."
+  ],
+  "classStatsNamesSha256": "9374dfc966af49d54dd0ae48663aa4e637c3f003c7386af9c5f0a747b919eb75",
+  "toolSha256": "fbebf41de2a6847159ceff32115f1dca5fd28c5460686f0d62d82bd1df77a8e4"
+}
