@@ -27,7 +27,7 @@ final class InspectorDeploymentTest {
   private static final String FIXTURE_BIN_SH_EA0135D2 = "/bin/sh";
   private static final Path REPO = Path.of(System.getProperty("nk.pt.repository"));
   private static final Path DEPLOYMENT = REPO.resolve("src/deployment");
-  private static final Path SHELLCHECK = shellCheck();
+  private static final Path SHELLCHECK_BINARY = shellCheck();
   private static final String UNIT = "schubert-nk-inbox-inspector.service";
   @TempDir Path root;
   private String method;
@@ -50,12 +50,16 @@ final class InspectorDeploymentTest {
   void renderedShellCheck() throws Exception {
     var wrapper = fake("NKINSPECTOR1 0\n", 0);
     assertEquals(0, execute(List.of(FIXTURE_BIN_SH_EA0135D2, "-n", wrapper.toString())).code());
-    var version = execute(List.of(SHELLCHECK.toString(), "--version"));
+    var version = execute(List.of(SHELLCHECK_BINARY.toString(), "--version"));
     assertEquals(0, version.code());
     assertTrue(version.out().contains("version: 0.11.0"));
     var result =
         execute(
-            List.of(SHELLCHECK.toString(), "--shell=sh", "--severity=style", wrapper.toString()));
+            List.of(
+                SHELLCHECK_BINARY.toString(),
+                "--shell=sh",
+                "--severity=style",
+                wrapper.toString()));
     assertEquals(new Result(0, "", ""), result);
   }
 
@@ -372,11 +376,30 @@ final class InspectorDeploymentTest {
           json.replace(root.toString(), "<PT_ROOT>")
               .replace(REPO.toString(), "<REPOSITORY>")
               .replace(System.getProperty("java.home"), "<JDK>");
+      sequence++;
       Files.writeString(
-          evidence.resolve(String.format(Locale.ROOT, "%03d.json", ++sequence)), json + "\n");
+          evidence.resolve(String.format(Locale.ROOT, "%03d.json", sequence)), json + "\n");
       return result;
+    } catch (InterruptedException interrupted) {
+      Thread.currentThread().interrupt();
+      throw interrupted;
     } finally {
-      if (process.isAlive()) process.destroy();
+      finishOwnedChild(process);
+    }
+  }
+
+  // BUG2632: TERM is a request; only a finite successful wait confirms this test's child ended.
+  static void finishOwnedChild(Process process) throws InterruptedException {
+    if (!process.isAlive()) return;
+    boolean interruptedOnEntry = Thread.interrupted();
+    try {
+      process.destroy();
+      assertTrue(process.waitFor(10, TimeUnit.SECONDS), "owned tool termination unconfirmed");
+    } catch (InterruptedException interrupted) {
+      Thread.currentThread().interrupt();
+      throw interrupted;
+    } finally {
+      if (interruptedOnEntry) Thread.currentThread().interrupt();
     }
   }
 
