@@ -1,0 +1,122 @@
+[
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 299,
+    "sourceLine": "      Thread.currentThread().interrupt();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit explicitly owns both pools; finite latches/Futures, finally shutdownNow/await5 asserted on both exits, interrupt flag deliberately set and cleared in finally for negative test. No application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 301,
+    "sourceLine": "      assertTrue(Thread.currentThread().isInterrupted());",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit explicitly owns both pools; finite latches/Futures, finally shutdownNow/await5 asserted on both exits, interrupt flag deliberately set and cleared in finally for negative test. No application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 304,
+    "sourceLine": "      Thread.interrupted();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit explicitly owns both pools; finite latches/Futures, finally shutdownNow/await5 asserted on both exits, interrupt flag deliberately set and cleared in finally for negative test. No application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 356,
+    "sourceLine": "    var workers = Executors.newVirtualThreadPerTaskExecutor();",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Both fixture pool owners close in explicit finally with shutdownNow and awaitTermination5 terminal assertion, avoiding unbounded ExecutorService.close. Actual job exit is also required."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 356,
+    "sourceLine": "    var workers = Executors.newVirtualThreadPerTaskExecutor();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit explicitly owns both pools; finite latches/Futures, finally shutdownNow/await5 asserted on both exits, interrupt flag deliberately set and cleared in finally for negative test. No application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 359,
+    "sourceLine": "          workers.submit(",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit explicitly owns both pools; finite latches/Futures, finally shutdownNow/await5 asserted on both exits, interrupt flag deliberately set and cleared in finally for negative test. No application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 368,
+    "sourceLine": "                              Thread.currentThread().interrupt();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit explicitly owns both pools; finite latches/Futures, finally shutdownNow/await5 asserted on both exits, interrupt flag deliberately set and cleared in finally for negative test. No application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 396,
+    "sourceLine": "      workers.shutdownNow();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit explicitly owns both pools; finite latches/Futures, finally shutdownNow/await5 asserted on both exits, interrupt flag deliberately set and cleared in finally for negative test. No application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 397,
+    "sourceLine": "      assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit explicitly owns both pools; finite latches/Futures, finally shutdownNow/await5 asserted on both exits, interrupt flag deliberately set and cleared in finally for negative test. No application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 421,
+    "sourceLine": "    var workers = Executors.newFixedThreadPool(8);",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Both fixture pool owners close in explicit finally with shutdownNow and awaitTermination5 terminal assertion, avoiding unbounded ExecutorService.close. Actual job exit is also required."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 421,
+    "sourceLine": "    var workers = Executors.newFixedThreadPool(8);",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit explicitly owns both pools; finite latches/Futures, finally shutdownNow/await5 asserted on both exits, interrupt flag deliberately set and cleared in finally for negative test. No application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 424,
+    "sourceLine": "      synchronized (service) {",
+    "rule": "AvoidSynchronizedStatement",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Original standalone 100-request fixture retains a single coordinator monitor; production service does not synchronize on it, no provider/external resources or application locking policy, original six assertions/oracle preserved."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 428,
+    "sourceLine": "              workers.submit(",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit explicitly owns both pools; finite latches/Futures, finally shutdownNow/await5 asserted on both exits, interrupt flag deliberately set and cleared in finally for negative test. No application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 444,
+    "sourceLine": "      workers.shutdownNow();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit explicitly owns both pools; finite latches/Futures, finally shutdownNow/await5 asserted on both exits, interrupt flag deliberately set and cleared in finally for negative test. No application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 445,
+    "sourceLine": "      assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit explicitly owns both pools; finite latches/Futures, finally shutdownNow/await5 asserted on both exits, interrupt flag deliberately set and cleared in finally for negative test. No application/container worker creation."
+  }
+]

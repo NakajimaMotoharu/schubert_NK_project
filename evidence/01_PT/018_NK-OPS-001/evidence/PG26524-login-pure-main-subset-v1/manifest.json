@@ -1,0 +1,796 @@
+{
+  "actualExit": 0,
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginClient.java": "9c654ea40f781e8600cfb6254cbb52f0ee0f2072261d145701fc721ca28a5a6c",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginExchangeException.java": "4f36806cd08ce5c3eb29d15694392b326da736f7e8f5e371552fe24988cd9684",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java": "cc0689a25334f9b2eb12983e5e952a0a19af703c28ff4898ff8b57f2a6aa7b39",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.java": "11ffd0f90e7064a7f42bef1029c65fc37e5cadbfe2b49a4b7bd3d775d9dd164b",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestSender.java": "055dfa7bb41118b3a1d412af02dec07c0c43f071783c6c6cb93d29ee1e1fd8f8",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java": "1a28f9d8ec9438f13621358c02181557fdc3a19f4afd55303ad727ce6fc9ed75",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/PendingReply.java": "346a3d7ddf65889875a3f1907eda05fd061a4788aabf5d7361b461790185c42b",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/package-info.java": "5b3d0f04dff20d2e3b538f4dfcd89c479ec2feea7cb1743e0a009cf2256e6ad1",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/package-info.java": "2b2c6b1d5f75a5744f5910035f91dcb04135507c6f3a1a06b6c3ad04bec12dda",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java": "5c1815ae4bc1770eaea141331ac0f93c11ccc5f6e69bf63e7792161d341ea90d",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java": "a44ab2c947a67c2659e44c7a9e83e9bbb983cca890fd621e34b5469be363019b",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java": "9926bf64d977a8b130b14c8d4e0e9308420fc1d4fa3b9ef86376c0cb0f2b9c5f",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "evidence/01_PT/018_NK-OPS-001/input/1256_login_normal_qualifier.py": "b78f2714dc020fb8945fb7c42a162ce527521cd80dd7f7481039d335e4f7bdb5",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/AuthenticationErrorProfileTest.java": "41ebd3cd62dc2c154a9a6aa89bb7152f5a6e52e6f62a2fcaf673a60be27bd93a",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java": "4c05d90d26badf81b4173a01fcb1484bb20c8f05c7133fd3408857825c8c50e4",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java": "01f12650ecff0e5dafa486d4eac507051b50789ea5cc914598e756e5bd0d6cf9",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java": "2df42867a30590944b8ec0b0158d318256812ba66593125f7b1d07719bf89689",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/ScenarioRecordEncodingTest.java": "53352d9758286a925435d60aba66ad2637610d1cd4cfd01d286d7a4bef764a15",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodecTest.java": "fd37c828db9db48c3bb81eb6b4c1382bf314143c967d8eea0afb6d2869ed92ef",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorUnicodeBoundaryTest.java": "ec4d02c910e8e109ab83f6ef441222256101c7db488466ade5f9ade80fe348de",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidatorTest.java": "97faf48280d3d1e6fdf24cae984fae531f718545274c4567f9ca4c26b163ab34",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java": "2f20adba3d3b4dfa8eef16e36ad571f91c7ffffa9b080a15a04f1bfddabd631f",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java": "c7249b4a26e6515043c686362ce8b7d67e256c35bcb4cc01f8205bcaf7e3e06f",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalogTest.java": "ad2df79ad437b878561567c4364f458336669c1c0394c0c5e602b529bae483ef",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutMetadataTest.java": "e3ea04e5b8a49be88eb3e0adcd2f5b5bc5a20f6793ba9e3be632545fe282b436",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadPaginationBoundaryTest.java": "6f8038c90b3854656b38c6b641a0c6ae4f5d0db66a12c562edf594e52c9c739d",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorTest.java": "fe63057e3a11162c11ef99ed376885da8c8b8202f41fbe0c4a10977f691d425c",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java": "39a6179bb4de73de4d3b4837023349607f6b08e0e8579c489279237292f099d4",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/SemanticDirectBoundaryTest.java": "1046e924ccb83eb256c0d87d77d5dcb7581544ada44eb42ed2942b539d2ff1ef",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/SemanticFieldValueTest.java": "b399e53307dabab625ac8cd2449b8edf87c8873e47265cdbea806d907c86354f",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/TypedUnsignedRangeBoundaryTest.java": "660978cfa05c15b98791ec78b08be544193de52144dbdf26a1bbbe756fae7d7a",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java": "ad7fc345ed8f7410258b3c20ec906eb6f4ebb391ad1fcee5f37ea8cbd1abc9d8",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/EnumWireCompatibilityTest.java": "e62586bd50012c93080f1772c5c2cb670837b8542d6fc6a6cf1c0e9527a58213",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathUnicodeBoundaryTest.java": "6f320895b8c8f765fccef35e2b387d13b143001cb9f92c2f2fea59be176216bb",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/ProtocolSemanticTypeTest.java": "dd40230045fec910c3ab2d1cada147a56859a8ff1d3081c70891551b061ba5aa",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/time/JstWireTimestampTest.java": "588bc19f5035c5b1d9e80979fc5376274a7ebace6df91d8f68fa1eec1e6f8c61",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/BrokerTopologyTest.java": "96e98d5d674681c90c863b7150c9fcfdb17c69e89d63f9462569daa004ab2630",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationExceptionTest.java": "4b38735c88ffee065f3499688a29df85d1d3e97a51401d9f9ce0805f75e41cca",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackExceptionTest.java": "189a8e5fc185e9cf70c22a72ff25be675ab284e5dc62bfd7920988456829bda9",
+    "src/schubert-nk-protocol/src/test/resources/protocol/fields-ui234-236.tsv": "a430ddf02fa6cc28b0f0075b96aa97eff829876b7f3bd9412bd0db7c3637bd4b",
+    "src/schubert-nk-protocol/src/test/resources/protocol/layouts-ui233.tsv": "c4f290595f5cabf19c11877e2dea95627b4d42490116431bac3bfde58950d711",
+    "src/schubert-nk-protocol/src/test/resources/protocol/named-accessors-independent.tsv": "27b9a458374f5b9edda50d78fae42ee76dabf15d8d1ecd9c94e56dbab63162d5",
+    "src/schubert-nk-protocol/src/test/resources/protocol/named-types-ss323.tsv": "9529fce86672b27a435665331648110521be6f59c5fe3fe5ca516df5234c7a76",
+    "src/schubert-nk-protocol/src/test/resources/protocol/payload-golden-ui234-236.tsv": "49bb76ec610216042f8e53ed548f4d5e52707a8bbf930a9fc6c93300dfa24839"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26278-protocol-unicode-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "6c33b2a1c55b3f0d116083e5e99ef8a3e5b3a15245b170dc4d0794f85d2964f9",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar": "6605e08075ab389c359451c7854808cf4b1575e1ea6317e534e9d4df088096df",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+  },
+  "stages": {
+    "nullaway-compile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-Dmaven.test.skip=true",
+        "compile"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26524-login-pure-main-subset-v1",
+      "endUTC": "2026-11-11T23:38:05.625406+00:00",
+      "startUTC": "2026-11-11T23:38:02.502663+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "df569188006ca0f16e749aaaeaac0716251ed8e1f5e800c30c7bb5080d6b9e85",
+      "timedOut": false
+    },
+    "test-compile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "-g",
+        "-proc:none",
+        "-implicit:none",
+        "--release",
+        "25",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26524-login-pure-main-subset-v1/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg26278-protocol-unicode-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26524-login-pure-main-subset-v1/test-classes",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-11T23:38:06.793514+00:00",
+      "startUTC": "2026-11-11T23:38:05.625914+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    }
+  },
+  "mainSources": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginClient.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginExchangeException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestSender.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/PendingReply.java"
+  ],
+  "packageSources": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/package-info.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/package-info.java"
+  ],
+  "mainClassHashes": {
+    "dev/codex/schubert/nk/web/security/MqLoginClient$Reply.class": "7f46ba6fba2955bb4cc3e6234816414ffabd04466a8bbc2f22e53c088b3d1e01",
+    "dev/codex/schubert/nk/web/security/package-info.class": "ae66eca5a2867bdfe083cfd31b1f4042e026446990b033aa451b20b202203016",
+    "dev/codex/schubert/nk/web/security/MqLoginExchangeException.class": "3d7c29bb75384a318d23fa25b753e409f3ff17740171c7aa01e81a64bbe92b2d",
+    "dev/codex/schubert/nk/web/security/MqLoginClient.class": "a0fefaa4c3fdf478512d8f3d4e36bf0b88ee6d41158d8788ee8baaaedd9f7c09",
+    "dev/codex/schubert/nk/web/security/MqLoginExchangeException$Reason.class": "f83d9b4a4ef2882ffa69db47fea52f67446677844f2dc4bac86c76d49c49048f",
+    "dev/codex/schubert/nk/web/messaging/PendingReply.class": "c19ff358f56c4496c14c37bc498789d44c9efacdbda8b79c6d38261908e51c2d",
+    "dev/codex/schubert/nk/web/messaging/package-info.class": "2c807cdc75f9e6e76cedc54352ef269711e6d11025186524a5ee4eceb9e22314",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason.class": "49de906b40d2e0da3c50dded1c72727a03d93faf97f087d381c7e0dc3688ac54",
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.class": "e0f96e0e6e9cf85633d8ca1c0c772421559ce169d3aad9bf050d56338d07c84d",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.class": "e6539f484082a7b470e8de3743c6393c0747a752ad7bf4bed17cb5c27b44c59d",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.class": "54a1aeff1136917d88193d462e572e6538fe372080ee3356d32145d66009d5e8",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestSender.class": "af7e1ad0ed83b40be3eb067da57c46b285a0b5b6567a33271fffb1ec17d78092"
+  },
+  "testClassHashes": {
+    "dev/codex/schubert/nk/web/security/MqLoginClientTest.class": "520f6998838ccd55677aa7a008e9cda307c460bc044bbaadd85ad0caae4bdfea",
+    "dev/codex/schubert/nk/web/security/MqLoginClientTest$FaultClock.class": "48547697527a8285ff410409420f65a689bc7ce535f7db03bd0780ddcda4b7b1",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest$MutableClock.class": "bbdfbf2230d3a0c7038ae76d8e2f7ac9fa2b6f57b7f9f31f5b5839d21f5b5b1d",
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.class": "5e068af45a73b5646160cc7ef15c0cd60452d207fbf05a5c40e1926805f43468",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.class": "79e62557931cff501c3fc1eac447b7e5efe47b0ea2f12250f6751dced9cb4c5d"
+  },
+  "subsetPomSha256": "b73af130f94550a16480a9d6c97aee33abeb68c2eb8d73339fbe0564f5517289",
+  "compilerConfiguration": "EXACT_ROOT_PLUGIN_RELEASE25_NULLAWAY_0141_ERRORPRONE2500",
+  "protoCompileManifestSha256": "9342d69793ec599c4bac012de15d7c574cab132517d6f6f48de68ac57b07d695",
+  "wholeProtocol130ClassesReused": true,
+  "expectedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.web.security.MqLoginClientTest",
+      "name": "web054RequestAndSuccessMatchIndependentWire()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.MqLoginClientTest",
+      "name": "web055ErrorProfilesRemainDistinct()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.MqLoginClientTest",
+      "name": "web056InputAndNullContractsNeverSendSecrets()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.MqLoginClientTest",
+      "name": "web057MalformedOrUncorrelatedRepliesNeverAuthenticate()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.MqLoginClientTest",
+      "name": "web058TransportFaultsDoNotBecomeBadCredentials()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.MqLoginClientTest",
+      "name": "web059ConcurrentLoginsKeepIdentityAndOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.MqLoginClientTest",
+      "name": "unknownProviderFailureErasesBothBuffersAndReleasesCapacity()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "exchangeRegistersBeforeOneSendAndReturnsDefensiveReply()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "sendFailureCancelsRegistrationAndPropagatesJmsException()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "elapsedWaitExpiresAndSubsequentReplyIsLate()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "replyAtDeadlineFailsTheWaitingFutureAsLate()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "interruptedWaitRemovesRegistrationAndRestoresInterruptFlag()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "approvedConfiguredWaitsAccept1To20AndRejectTheNextWithoutSending()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "constructorRegistryAndRequestBoundsDenyInvalidInputBeforeSend()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "exceptionReasonIsAClosedNonSecretClassification()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "uncheckedSenderTypesPreserveIdentityCopyAndReusableCapacity()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "duplicateAndClockOverflowDoNotSendOrCancelOtherOwnershipAndReleasePermit()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "registrationIsBoundedDuplicateSafeAndReleasesCapacityOnCancel()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "successfulCompletionIsAtomicAndDefensivelyCopiesBody()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "lateCompletionAndExplicitExpiryFailTheWaiterWithoutDelivery()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "nullDeadlineAndCapacityContractsFailBeforeMutation()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "oneOfOneHundredSimultaneousResponsesWins()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "allSixTerminalOrdersReturnOnePermitAndKeepTheFirstLiteralOutcome()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "callerCompletedOrCancelledViewsNeverChangeTheOwnedPromiseAndNullIsRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "name": "pageConstantsCountsAndArithmeticAreEnforced()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "name": "nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest",
+      "name": "enum002EverySemanticEnumRetainsItsFieldIndependentSerialDescriptor()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+      "name": "semanticEncodingHelpersRejectNullReferences()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "numericCodecChecksDigitsRangeAndOverflow()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "numericSemanticCeilingIsIndependentOfWireAndLongCapacity()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "explicitRequestActionKeepsItsOwnClosedPair()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "headerConstructorRejectsEveryStructuralViolation()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+      "name": "w03SingleRecordGoldenHasNoInventedDataAndRejectsNullUnknownAndNonRecordLayouts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest",
+      "name": "enum001SerializedAnswerStateMatchesIndependentProtocolVector()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "name": "descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "name": "allAllowlistedEnumsExposeExplicitWireValuesAndGenericConversion()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "name": "decodeRejectsTruncationExtraHashAndIoFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "name": "writesAndReadsHeaderlessExactRecordsWithIndependentHash()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "enumsMapOnlyApprovedWireValues()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+      "name": "bug037HeaderSenderRejectsBadTimeAndPreservesAdjacentContext()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "name": "layoutDefinitionChecksEveryLengthAndKindInvariant()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "name": "allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "crossedAndUnknownActionsAreNeverNormalizedToSuccess()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "name": "listRecordConditionsAndOrderingAreEnforced()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "authenticationContextValidatesAndRedacts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "allSixtyFourLayoutsRoundTripMinimumSuccessValues()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest",
+      "name": "relativePathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest",
+      "name": "page001SecondPageHasIndependentExpectedBounds()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "headerValidateAgainstRejectsEachMetadataMismatch()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "name": "deletedNotificationNeverContainsAnswer()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "valuesAreImmutableNullSafeAndRedacted()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest",
+      "name": "page002MaximumEffectivePageKeepsExactNineDigitArithmetic()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "omittedActionIsAllowedForRequestOnly()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "name": "dispositionMapsOnlyIAndA()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+      "name": "allOtherResponseErrorProfilesRetainTheirIndividualContracts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+      "name": "formatsAndParsesStrictJstMilliseconds()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "name": "acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest",
+      "name": "displayPathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "name": "contentMetadataRejectsInvalidValues()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "name": "rejectsEveryMimeCrossProductAndVideoAttachment()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "name": "optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+      "name": "loginLockAndFailurePreserveOnlyApprovedErrorFields()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "name": "catalogMatchesIndependentUi234To236Fixture()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+      "name": "nullNameIsRejectedBeforeWidthAndValueValidation()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+      "name": "malformedLoginErrorBoundariesAndTypesAreRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "fixedPayloadIsDefensiveAndWireMessageChecksLengths()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "name": "typedHelpersConvertIntAndIdentifiersWithoutLosingWireKinds()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+      "name": "rejectsMalformedDisplayFileNameWithoutReplacement()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "name": "everyRepeatingLayoutAcceptsItsMaximumRecordBoundary()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+      "name": "semanticHelpersDecodeAndEncodeEverySupportedShape()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+      "name": "unsupportedWidthsAreRejectedBeforeNumericRangeEvaluation()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest",
+      "name": "sem003QuestionAndWebLogTextContracts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "name": "nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "metadataAndExpectedRouteEstablishNullAndRangeContracts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "name": "iso011EqualsTrueDoesNotHideDistinctProtocolIdentity()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "transportAndRouteContractsRejectEveryMismatch()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "name": "xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+      "name": "bug037RequiredAndOptionalDataSendersRejectBadTime()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "menuActionMatchesIndependentOffsetsAndRoundTrips()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "name": "iso009PrimaryAndProtocolAreRequired()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "name": "layoutIdAndFieldDefinitionAreStrictAndOneBased()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "existingHttpMetadataAndReservedRulesRemainEnforced()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+      "name": "rejectsMalformedStoragePathWithoutReplacement()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "name": "iso012DisabledPrimarySuppressionCannotHideProtocol()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "name": "scenarioInlineAndLargeFileConditionsAreEnforced()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "name": "disabledPrimarySuppressionDoesNotHideRollbackFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "name": "primaryAndRollbackMustBothBePresent()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "name": "notificationCancellationAndQuestionStateConditionsAreEnforced()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "name": "receiptWebAndDefensiveContractsAreEnforced()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "numericErrorFillerDoesNotBecomeBusinessZero()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "encodeRejectsUnknownMissingWrongTypeAndRecordViolations()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "everyCanonicalConstructorReferenceRejectsNull()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "name": "loginUserPasswordDateAndSessionRulesAreEnforced()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "resultCodeProfilePreservesOnlyTheApprovedCancellationConflictState()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "validHeadersCoverRequestResponseErrorAndEventProfiles()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "name": "allNamedTypesHaveIndependentDirectionalFieldMeaning()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "everyResponseLayoutUsesExactErrorFillersAndNoRecords()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "name": "nfcGolden001HangulJamoFitsComposedByteWidth()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "name": "utf8MaximumFieldsAndN12UseIndependentCanonicalBoundaries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "independentConcurrentCallersDoNotMixCategories()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+      "name": "rd02RejectsNullUnknownNonRecordLengthAndMalformedFieldBytes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "name": "mediaAnimationAndMusicConditionsAreEnforced()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+      "name": "rd02SingleRecordDecodeUsesLiteralGoldenAndOwnsItsValues()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest",
+      "name": "sem002InclusiveDateLimitsAndOneSidedFilters()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+      "name": "negativeAndFirstOverflowAreRejectedAtEverySupportedWidth()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "name": "distinctEqualValuedNodesAreBothRetained()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "name": "allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest",
+      "name": "page003RejectsIndependentRangeAndOneFieldArithmeticChanges()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+      "name": "supplementaryPairsKeepIndependentExactUtf8ByteBoundaries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+      "name": "semanticValueObjectsNormalizeValidateCompareAndRedact()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "name": "sharedCodecProducesIdenticalBytesUnderConcurrentUse()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest",
+      "name": "sem001PasswordCharacterByteAndUsernameLimits()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "everyOtherCategoryIsRejectedByNamedBoundary()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "name": "bug040StorageExtensionCannotBeHiddenByDisplayMetadata()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "legacyRequestMatchesIndependentOriginalBytes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "name": "allN12IdentifierTypesEnforceTheSharedPositiveRange()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "name": "iso010SameNodeIsRetainedWithoutSelfSuppression()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+      "name": "nullUnknownAndNearMatchAddressesAreDenied()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "headerReferencesRejectNullAtTheNamedInvariantBoundary()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "fixedAndIndependentGoldenFieldsEncodeAtExactOffsets()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "responseAndEventHeadersRoundTripWithoutLeakingContext()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "name": "parserRejectsMalformedUnknownAndDuplicateRows()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "name": "constructorRejectsNullComponents()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "name": "acceptsExactlySevenSsc004ExtensionMimePairs()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "missingBlankUnknownAndWrongCaseCategoryFail()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+      "name": "zeroAndMaximumAreAcceptedAtEverySupportedWidth()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "name": "registryMatchesIndependentUi233Catalog()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "name": "sameNodeIsRetainedOnceWithoutSelfSuppression()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "numericDigitLimitIsCheckedWithoutOverflow()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "recordFieldsAreCompleteImmutableAndRedacted()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "name": "explicitCatalogMatchesIndependentSs323NamedTypeFixture()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+      "name": "rejectsMalformedLogicalIdentifierWithoutReplacement()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "booleanAndReservedFieldsRejectUnknownBytes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "name": "layoutFieldsRejectWrongAreaGapLengthAndNull()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "name": "rejectsNonCanonicalTextPathsNamesSizesAndHashes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+      "name": "semanticHelpersRejectInvalidWireValuesWithoutReturningPartialObjects()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "textDecodeIsStrictCanonicalAndOptionalAware()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "textEncodeNormalizesUtf8AndPadsWithAsciiSpace()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "headerDecoderRejectsEveryFixedFieldAndProfileCorruption()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "name": "writeRejectsNullCountLengthAndIoFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "name": "approvedEnumNamesWireValuesAndConversionMatchIndependentDesignTables()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "name": "catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+      "name": "sixDestinationsMatchTheIndependentPhysicalAndLimitOracle()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "headerEncodingMatchesIndependentUi232GoldenVector()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "nfcAndExactUtf8ByteBoundaryHaveIndependentExpectedBytes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "name": "typedModelsAndHelpersRejectNullMissingAndWrongKinds()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+      "name": "bug037ExpandedYearsAndUnrepresentableInstantsAreRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "name": "verificationRejectsAllThirtyTwoDigestBytePositions()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "name": "registryRejectsEmptyNullDuplicateAndKindMismatches()"
+    }
+  ],
+  "selectedClasses": [
+    "dev.codex.schubert.nk.web.security.MqLoginClientTest",
+    "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+    "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+    "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+    "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+    "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+    "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+    "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+    "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+    "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+    "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest",
+    "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+    "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+    "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest",
+    "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+    "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+    "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+    "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest",
+    "dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest",
+    "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+    "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+    "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+    "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+    "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest"
+  ],
+  "expectedTests": 154,
+  "productTestsExecuted": 0,
+  "heldActualClassFilesRead": false
+}

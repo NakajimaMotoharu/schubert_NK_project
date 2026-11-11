@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -352,7 +353,8 @@ final class MqLoginClientTest {
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 1);
     CountDownLatch sent = new CountDownLatch(1);
     CountDownLatch release = new CountDownLatch(1);
-    try (var workers = Executors.newVirtualThreadPerTaskExecutor()) {
+    var workers = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       Future<MqLoginClient.Reply> first =
           workers.submit(
               () ->
@@ -390,6 +392,9 @@ final class MqLoginClientTest {
       }
       assertEquals(ResultCode.SUCCESS, first.get(5, TimeUnit.SECONDS).code());
       assertEquals(0, bounded.pendingCount());
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));
     }
   }
 
@@ -413,7 +418,8 @@ final class MqLoginClientTest {
             CLOCK,
             () -> new UUID(0, ids.incrementAndGet()),
             WAIT);
-    try (var workers = Executors.newFixedThreadPool(8)) {
+    var workers = Executors.newFixedThreadPool(8);
+    try {
       List<Future<?>> results = new ArrayList<>();
       synchronized (service) {
         for (int index = 0; index < 100; index++) {
@@ -434,12 +440,78 @@ final class MqLoginClientTest {
         }
         for (Future<?> result : results) result.get(10, TimeUnit.SECONDS);
       }
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));
     }
     assertEquals(100, sends.get());
     assertEquals(100, ids.get());
     assertEquals(0, client.pendingCount());
     assertEquals(0, client.lateReplyCount());
     for (byte[] buffer : buffers) assertArrayEquals(new byte[640], buffer);
+  }
+
+  @Test
+  void unknownProviderFailureErasesBothBuffersAndReleasesCapacity() {
+    // BUG2664/YKT2344, PT-WEB-LOGIN-UNKNOWN-001; synthetic char/byte inputs only.
+    for (Throwable failure :
+        List.of(
+            new NullPointerException("synthetic-provider-fault"),
+            new AssertionError("synthetic-provider-fault"))) {
+      JmsRequestReplyClient client =
+          new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 1);
+      AtomicReference<byte[]> handed = new AtomicReference<>();
+      AtomicInteger sends = new AtomicInteger();
+      JmsRequestSender sender =
+          (id, wire) -> {
+            handed.set(wire);
+            sends.incrementAndGet();
+            if (failure instanceof RuntimeException runtime) throw runtime;
+            throw (Error) failure;
+          };
+      char[] password = {'p'};
+      Throwable actual =
+          assertThrows(
+              failure.getClass(),
+              () ->
+                  service(client, sender)
+                      .exchange(FIXTURE_ALICE_0A50500B, password, FIXTURE_1_FB15673E));
+      assertSame(failure, actual);
+      assertArrayEquals(new char[1], password);
+      assertArrayEquals(new byte[640], handed.get());
+      assertEquals(1, sends.get());
+      assertEquals(0, client.pendingCount());
+      // A fresh request succeeds through the same one-slot client after the failed owner exits.
+      UUID next = new UUID(0, 2);
+      char[] nextPassword = {'p'};
+      MqLoginClient.Reply reply =
+          new MqLoginClient(
+                  client,
+                  (id, wire) -> {
+                    sends.incrementAndGet();
+                    handed.set(wire);
+                    assertEquals(next, id);
+                    assertTrue(
+                        client.onReply(
+                            id,
+                            success(
+                                id,
+                                FIXTURE_ALICE_0A50500B,
+                                FIXTURE_USER_2DED8884,
+                                "e".repeat(64))));
+                  },
+                  CLOCK,
+                  () -> next,
+                  WAIT)
+              .exchange(FIXTURE_ALICE_0A50500B, nextPassword, FIXTURE_1_FB15673E);
+      assertEquals(ResultCode.SUCCESS, reply.code());
+      assertEquals(UserRole.USER, reply.data().role().orElseThrow());
+      assertEquals(FIXTURE_ALICE_0A50500B, reply.data().username().orElseThrow());
+      assertArrayEquals(new char[1], nextPassword);
+      assertArrayEquals(new byte[640], handed.get());
+      assertEquals(2, sends.get());
+      assertEquals(0, client.pendingCount());
+    }
   }
 
   private static void invalid(
