@@ -1,0 +1,157 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T02:02:54.926781+09:00",
+  "source": "a85f2aaa947b9bf5e32f3835d2fcf6b421a877a5",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "sourcePins": {
+    "src/deployment/config/api.env.template": "6ba707e0f670eaff9dc66ab4282c20e5632360e50306c8087853ba241dcc65af",
+    "src/deployment/config/api.yml.template": "206f4ed29da0fca31c1bab15015eb5b4db93255846c411f5d1815050d66bf267",
+    "src/deployment/config/batch.yml.template": "f8777bdd604dd1c0e1064d9c743fc15986baba737dcd852038e7bc5060efb8d9",
+    "src/deployment/config/common.yml.template": "d61acf911e08a15cfdb2700eb81db7bbbb920cb3ccd80f1665652af4b4b7880a",
+    "src/deployment/config/inbox-inspector.env.template": "2f8514321264c8fa67d73694ce7a441a7e3450ab520a60f0c052364304ab3f73",
+    "src/deployment/config/web.env.template": "6ba707e0f670eaff9dc66ab4282c20e5632360e50306c8087853ba241dcc65af",
+    "src/deployment/config/web.yml.template": "3e9a7ba4ada50e82e450cdd634439c2c122fed051de089010dee07dfd2d25cb7"
+  },
+  "approvedDesignPins": {
+    "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+    "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+  },
+  "goldenNonsecretSettings": {
+    "common.yml.template": {
+      "nk.protocol.version": "001",
+      "nk.time.display-zone": "Asia/Tokyo",
+      "nk.monitoring.mode": "STANDARD"
+    },
+    "api.yml.template": {
+      "nk.api.storage.asset-manifest-entries": 59627,
+      "nk.mq.url": "tcp://127.0.0.1:61616",
+      "nk.mq.sync-request": "nk.sync.request",
+      "nk.mq.sync-reply": "nk.sync.reply.web",
+      "nk.mq.async-work": "nk.async.work",
+      "nk.mq.web-log": "nk.web.log",
+      "nk.mq.dlq": "nk.dead.letter",
+      "nk.mq.expiry": "nk.expiry",
+      "nk.db.url": "jdbc:postgresql://127.0.0.1:5432/schubert_nk",
+      "nk.db.connect-timeout": "3s",
+      "nk.db.pool.api.max": "8",
+      "nk.db.pool.api.min": "2",
+      "nk.api.sync-consumers.initial": "4",
+      "nk.api.sync-consumers.max": "8",
+      "nk.api.async-consumers": "1",
+      "nk.api.storage.asset-root": "/srv/schubert-nk/data/assets",
+      "nk.api.storage.transfer-root": "/srv/schubert-nk/data/transfer",
+      "nk.inbox.reference-retention": "24h",
+      "nk.inbox.update-retention": "7d",
+      "nk.outbox.sent-retention": "7d"
+    },
+    "web.yml.template": {
+      "nk.db.url": "jdbc:postgresql://127.0.0.1:5432/schubert_nk",
+      "nk.mq.url": "tcp://127.0.0.1:61616",
+      "nk.db.pool.web.max": "2",
+      "nk.db.pool.web.min": "1",
+      "nk.db.connect-timeout": "3s",
+      "nk.web.http.address": "127.0.0.1",
+      "nk.web.http.port": "8080",
+      "nk.web.management.port": "8081",
+      "nk.web.mq.reply-timeout": "2s",
+      "nk.web.mq.wait.initial": "12",
+      "nk.web.mq.wait.max": "20",
+      "nk.web.session.idle-timeout": "8h",
+      "nk.web.session.max-per-user": "2",
+      "nk.web.storage.asset-root": "/srv/schubert-nk/data/assets",
+      "nk.web.storage.transfer-root": "/srv/schubert-nk/data/transfer",
+      "nk.web.media.max-streams": "20",
+      "nk.web.media.max-range-bytes": "1048576"
+    },
+    "batch.yml.template": {
+      "nk.batch.zone": "Asia/Tokyo",
+      "nk.batch.schedule": "05:00",
+      "nk.batch.backup-root": "/srv/schubert-nk/backup",
+      "nk.batch.backup-generations": "7",
+      "nk.batch.transfer-cleanup": "enabled",
+      "nk.batch.expiry-retention": "7d",
+      "nk.batch.log-retention": "90d",
+      "nk.batch.run-retention": "400d",
+      "nk.batch.chunk-size.notification": "1000",
+      "nk.batch.chunk-size.question": "1000",
+      "nk.batch.chunk-size.log": "10000"
+    }
+  },
+  "publicApiWebCredentialProfiles": {
+    "api": {
+      "path": "src/deployment/systemd/schubert-nk-api.service.template",
+      "sha256": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630",
+      "publicCredentialIds": [
+        "db-api",
+        "mq-api",
+        "api-context-aes-current",
+        "api-inbox-response-aes-current",
+        "operation-hmac-current"
+      ]
+    },
+    "web": {
+      "path": "src/deployment/systemd/schubert-nk-web.service.template",
+      "sha256": "eb3980ad64852645ffe2a07ac2ac4f453aeb8ce9cedd1d9147e1a1d3d863acbc",
+      "publicCredentialIds": [
+        "db-web",
+        "mq-web",
+        "web-session-aes-current",
+        "web-revoke-aes-current",
+        "web-log-aes-current"
+      ]
+    }
+  },
+  "publicInspectorProfiles": [
+    [
+      "db-inbox-inspector",
+      "maintenance-owner",
+      "api-context-aes-current",
+      "api-inbox-response-aes-current"
+    ],
+    [
+      "db-inbox-inspector",
+      "maintenance-owner",
+      "api-context-aes-current",
+      "api-inbox-response-aes-current",
+      "api-context-aes-previous"
+    ],
+    [
+      "db-inbox-inspector",
+      "maintenance-owner",
+      "api-context-aes-current",
+      "api-inbox-response-aes-current",
+      "api-inbox-response-aes-previous"
+    ],
+    [
+      "db-inbox-inspector",
+      "maintenance-owner",
+      "api-context-aes-current",
+      "api-inbox-response-aes-current",
+      "api-context-aes-previous",
+      "api-inbox-response-aes-previous"
+    ]
+  ],
+  "existingInspectorProfileProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26100-inspector-eight-six-independent-v1/manifest.json",
+    "sha256": "c567a0f673e45fbdc50baff9ecde2490cb8655fc9111674dcf54bfbd7824fbf1"
+  },
+  "templatesAreNotRenderedOrDistributed": true,
+  "credentialPathsActuallyOpened": 0,
+  "credentialValuesOrKeyMaterialRead": 0,
+  "cryptoOperations": 0,
+  "sessionOrTokenIssued": 0,
+  "actualJmsDbVmServiceOperations": 0,
+  "productTestsExecuted": 0,
+  "newCoverageMeasurements": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "decision": "NOT_ACCEPTED_PUBLIC_PROFILE_ONLY_ACTUAL_DISTRIBUTION_AND_ROTATION_UNPROVEN",
+  "remainingConditions": [
+    "Private source/file/UID/GID/mode/ACL/nlink/size/LoadCredential effective delivery and readiness remain unverified; public path string is not permission.",
+    "Actual key length/current/previous version binding, retained-session validity/expiry/rotation/retirement and redaction not inferred from names or prior unrelated tests.",
+    "Configured max2 sessions remains DIF016 requirement, not tested by this static template check.",
+    "Shared nonsecret source counts59627 and profile labels are approved config; no master/rawDB/Backup/credential/key was opened."
+  ],
+  "toolSha256": "d9bc95d3224eb5abb5fc1d35d6a0cfa8371bc4430c804f5340d3e53d0cd19fad"
+}
