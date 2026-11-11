@@ -1,0 +1,98 @@
+[
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+    "line": 250,
+    "sourceLine": "            BytesMessage.class.getClassLoader(),",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JVM dynamic Proxy must implement exact JMS interface identity; interface defining loader is intentional, no J2EE container/context-loader service or reflection access override."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+    "line": 278,
+    "sourceLine": "    Map<String, Object> values = new HashMap<>();",
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Test-owned mutable value maps are local to each synchronous fixture; no concurrent reader/writer or application map, null test values required; never shared across worker tests."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+    "line": 292,
+    "sourceLine": "    Map<String, Object> copy = new HashMap<>(source);",
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Test-owned mutable value maps are local to each synchronous fixture; no concurrent reader/writer or application map, null test values required; never shared across worker tests."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+    "line": 298,
+    "sourceLine": "    Map<String, Object> copy = new HashMap<>(source);",
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Test-owned mutable value maps are local to each synchronous fixture; no concurrent reader/writer or application map, null test values required; never shared across worker tests."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+    "line": 315,
+    "sourceLine": "            type.getClassLoader(),",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JVM dynamic Proxy must implement exact JMS interface identity; interface defining loader is intentional, no J2EE container/context-loader service or reflection access override."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+    "line": 360,
+    "sourceLine": "                return ignored == arguments[0];",
+    "rule": "CompareObjectsWithEquals",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Proxy equals handler must implement reference identity without recursively invoking Proxy.equals; intentional Object identity contract, not domain value comparison."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+    "line": 279,
+    "sourceLine": "            BytesMessage.class.getClassLoader(),",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JVM dynamic Proxy must implement exact JMS interface identity; interface defining loader is intentional, no J2EE container/context-loader service or reflection access override."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+    "line": 292,
+    "sourceLine": "    Map<String, Object> values = new HashMap<>();",
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Test-owned mutable value maps are local to each synchronous fixture; no concurrent reader/writer or application map, null test values required; never shared across worker tests."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+    "line": 309,
+    "sourceLine": "    Map<String, Object> copy = new HashMap<>(source);",
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Test-owned mutable value maps are local to each synchronous fixture; no concurrent reader/writer or application map, null test values required; never shared across worker tests."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+    "line": 315,
+    "sourceLine": "    Map<String, Object> copy = new HashMap<>(source);",
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Test-owned mutable value maps are local to each synchronous fixture; no concurrent reader/writer or application map, null test values required; never shared across worker tests."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+    "line": 332,
+    "sourceLine": "            type.getClassLoader(),",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JVM dynamic Proxy must implement exact JMS interface identity; interface defining loader is intentional, no J2EE container/context-loader service or reflection access override."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+    "line": 374,
+    "sourceLine": "                return ignored == arguments[0];",
+    "rule": "CompareObjectsWithEquals",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Proxy equals handler must implement reference identity without recursively invoking Proxy.equals; intentional Object identity contract, not domain value comparison."
+  }
+]

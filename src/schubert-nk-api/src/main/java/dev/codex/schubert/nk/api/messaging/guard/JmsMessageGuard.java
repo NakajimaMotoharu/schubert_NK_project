@@ -24,6 +24,7 @@ import org.jspecify.annotations.Nullable;
  */
 public final class JmsMessageGuard {
   private static final int MINIMUM_DELIVERY_COUNT = 1;
+  private static final String MALFORMED_IDENTITY = "transport identity property is malformed";
 
   private static final String PROPERTY_MESSAGE_ID = "NKMessageID";
   private static final String PROPERTY_LAYOUT_ID = "NKLayoutID";
@@ -58,23 +59,33 @@ public final class JmsMessageGuard {
       throw rejection("reply-to destination is absent, dynamic or outside the allowlist");
     }
 
+    // BUG2659/YKT2339: provider failures are not proof of malformed returned metadata.
+    // Keep acquisition/validation order; only pure value parsing belongs to conversion catches.
+    String transportId = requiredHeader(message.getJMSMessageID());
+    UUID correlationId = parseUuid(requiredHeader(message.getJMSCorrelationID()));
+    long expiration = message.getJMSExpiration();
+    int deliveryMode = message.getJMSDeliveryMode();
+    int deliveryCount = requiredDeliveryCount(message);
+    UUID messageId = parseUuid(requiredProperty(message, PROPERTY_MESSAGE_ID));
+    LayoutId layoutId = parseLayoutId(requiredProperty(message, PROPERTY_LAYOUT_ID));
+    String protocolVersion = requiredProperty(message, PROPERTY_PROTOCOL_VERSION);
     try {
       TransportMetadata metadata =
           new TransportMetadata(
               TransportBodyType.BYTES,
-              requiredHeader(message.getJMSMessageID()),
-              parseUuid(requiredHeader(message.getJMSCorrelationID())),
+              transportId,
+              correlationId,
               replyToAddress,
-              message.getJMSExpiration(),
-              message.getJMSDeliveryMode(),
-              requiredDeliveryCount(message),
-              parseUuid(requiredProperty(message, PROPERTY_MESSAGE_ID)),
-              new LayoutId(requiredProperty(message, PROPERTY_LAYOUT_ID)),
-              requiredProperty(message, PROPERTY_PROTOCOL_VERSION),
+              expiration,
+              deliveryMode,
+              deliveryCount,
+              messageId,
+              layoutId,
+              protocolVersion,
               destinationAddress);
       return new GuardedJmsMessage(body, metadata);
     } catch (IllegalArgumentException exception) {
-      throw rejection("transport identity property is malformed", exception);
+      throw rejection(MALFORMED_IDENTITY, exception);
     }
   }
 
@@ -124,7 +135,7 @@ public final class JmsMessageGuard {
     return requiredHeader(message.getStringProperty(property));
   }
 
-  private static String requiredHeader(String value) {
+  private static String requiredHeader(@Nullable String value) {
     if (value == null || value.isBlank()) {
       throw rejection("required transport header is missing");
     }
@@ -132,12 +143,24 @@ public final class JmsMessageGuard {
   }
 
   private static UUID parseUuid(String value) {
-    UUID parsed = UUID.fromString(value);
-    // BUG2263/YKT2008: UI232 §6 requires exact text, before UUID normalization loses it.
-    if (!parsed.toString().equals(value)) {
-      throw new IllegalArgumentException("transport UUID is not lowercase canonical form");
+    try {
+      UUID parsed = UUID.fromString(value);
+      // BUG2263/YKT2008: UI232 §6 requires exact text, before UUID normalization loses it.
+      if (!parsed.toString().equals(value)) {
+        throw new IllegalArgumentException("transport UUID is not lowercase canonical form");
+      }
+      return parsed;
+    } catch (IllegalArgumentException exception) {
+      throw rejection(MALFORMED_IDENTITY, exception);
     }
-    return parsed;
+  }
+
+  private static LayoutId parseLayoutId(String value) {
+    try {
+      return new LayoutId(value);
+    } catch (IllegalArgumentException exception) {
+      throw rejection(MALFORMED_IDENTITY, exception);
+    }
   }
 
   private static PermanentProtocolException rejection(String message) {

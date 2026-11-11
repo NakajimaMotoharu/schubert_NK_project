@@ -1,0 +1,53 @@
+
+Failures (2):
+  JUnit Jupiter:JmsReplyDecoderTest:providerFailuresRetainExactIdentityAndEarlierValidationStopsLaterReads()
+    MethodSource [className = 'dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest', methodName = 'providerFailuresRetainExactIdentityAndEarlierValidationStopsLaterReads', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.IllegalArgumentException> but was: <dev.codex.schubert.nk.protocol.codec.PermanentProtocolException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest.providerFailuresRetainExactIdentityAndEarlierValidationStopsLaterReads(JmsReplyDecoderTest.java:246)
+       [...]
+     Caused by: dev.codex.schubert.nk.protocol.codec.PermanentProtocolException: reply transport identity is malformed
+       dev.codex.schubert.nk.web.messaging.JmsReplyDecoder.rejection(JmsReplyDecoder.java:156)
+       dev.codex.schubert.nk.web.messaging.JmsReplyDecoder.decode(JmsReplyDecoder.java:92)
+       dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest.lambda$providerFailuresRetainExactIdentityAndEarlierValidationStopsLaterReads$0(JmsReplyDecoderTest.java:246)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+     Caused by: java.lang.IllegalArgumentException: synthetic provider failure
+       dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest.providerFailuresRetainExactIdentityAndEarlierValidationStopsLaterReads(JmsReplyDecoderTest.java:238)
+       [...]
+  JUnit Jupiter:JmsMessageGuardTest:providerFailuresRetainExactIdentityAndEarlierValidationStopsLaterReads()
+    MethodSource [className = 'dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest', methodName = 'providerFailuresRetainExactIdentityAndEarlierValidationStopsLaterReads', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.IllegalArgumentException> but was: <dev.codex.schubert.nk.protocol.codec.PermanentProtocolException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest.providerFailuresRetainExactIdentityAndEarlierValidationStopsLaterReads(JmsMessageGuardTest.java:215)
+       [...]
+     Caused by: dev.codex.schubert.nk.protocol.codec.PermanentProtocolException: transport identity property is malformed
+       dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuard.rejection(JmsMessageGuard.java:148)
+       dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuard.read(JmsMessageGuard.java:77)
+       dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest.lambda$providerFailuresRetainExactIdentityAndEarlierValidationStopsLaterReads$0(JmsMessageGuardTest.java:215)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+     Caused by: java.lang.IllegalArgumentException: synthetic provider failure
+       dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest.providerFailuresRetainExactIdentityAndEarlierValidationStopsLaterReads(JmsMessageGuardTest.java:206)
+       [...]
+
+Test run finished after 142 ms
+[         5 containers found      ]
+[         0 containers skipped    ]
+[         5 containers started    ]
+[         0 containers aborted    ]
+[         5 containers successful ]
+[         0 containers failed     ]
+[         2 tests found           ]
+[         0 tests skipped         ]
+[         2 tests started         ]
+[         0 tests aborted         ]
+[         0 tests successful      ]
+[         2 tests failed          ]
+

@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.web.messaging;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,6 +24,10 @@ import org.junit.jupiter.api.Test;
 
 /** PT-JMS-005/006 Web reply provider, metadata, route and wire negative matrix. */
 final class JmsReplyDecoderTest {
+  private static final String PROPERTY_EXISTS_METHOD = "propertyExists";
+  private static final String STRING_PROPERTY_METHOD = "getStringProperty";
+  private static final String PROVIDER_FAILURE = "synthetic provider failure";
+  private static final String DELIVERY_COUNT_PROPERTY = "JMSXDeliveryCount";
   private static final String BODY_FIELD = "body";
   private static final String BODY_LENGTH_FIELD = "bodyLength";
   private static final String LAYOUT_ID_PROPERTY = "NKLayoutID";
@@ -148,8 +153,8 @@ final class JmsReplyDecoderTest {
     assertRejected(bytesMessage(with(validReply(), TRANSPORT_ID_FIELD, " ")));
     assertRejected(bytesMessage(with(validReply(), CORRELATION_FIELD, null)));
     assertRejected(bytesMessage(with(validReply(), CORRELATION_FIELD, "not-a-uuid")));
-    assertRejected(bytesMessage(without(validReply(), "JMSXDeliveryCount")));
-    assertRejected(bytesMessage(with(validReply(), "JMSXDeliveryCount", 0)));
+    assertRejected(bytesMessage(without(validReply(), DELIVERY_COUNT_PROPERTY)));
+    assertRejected(bytesMessage(with(validReply(), DELIVERY_COUNT_PROPERTY, 0)));
     assertRejected(bytesMessage(without(validReply(), MESSAGE_ID_PROPERTY)));
     assertRejected(bytesMessage(with(validReply(), MESSAGE_ID_PROPERTY, " ")));
     assertRejected(bytesMessage(with(validReply(), MESSAGE_ID_PROPERTY, "not-a-uuid")));
@@ -211,6 +216,77 @@ final class JmsReplyDecoderTest {
     }
   }
 
+  @Test
+  void providerFailuresRetainExactIdentityAndEarlierValidationStopsLaterReads() {
+    // BUG2659/YKT2339; SS321 sections 7-8 / SSC332, PT-JMS-PROVIDER-WEB-001.
+    // Provider failure proves no malformed value: the oracle is original object identity.
+    String[][] sites = {
+      {"getBodyLength", ""},
+      {"getBody", ""},
+      {"getJMSDestination", ""},
+      {"getJMSReplyTo", ""},
+      {"getJMSMessageID", ""},
+      {"getJMSCorrelationID", ""},
+      {"getJMSExpiration", ""},
+      {"getJMSDeliveryMode", ""},
+      {PROPERTY_EXISTS_METHOD, DELIVERY_COUNT_PROPERTY},
+      {"getIntProperty", DELIVERY_COUNT_PROPERTY},
+      {PROPERTY_EXISTS_METHOD, "NKMessageID"},
+      {STRING_PROPERTY_METHOD, "NKMessageID"},
+      {PROPERTY_EXISTS_METHOD, LAYOUT_ID_PROPERTY},
+      {STRING_PROPERTY_METHOD, LAYOUT_ID_PROPERTY},
+      {PROPERTY_EXISTS_METHOD, VERSION_PROPERTY},
+      {STRING_PROPERTY_METHOD, VERSION_PROPERTY}
+    };
+    for (String[] site : sites) {
+      Throwable[] failures = {
+        new IllegalArgumentException(PROVIDER_FAILURE),
+        new NullPointerException(PROVIDER_FAILURE),
+        new AssertionError(PROVIDER_FAILURE),
+        new jakarta.jms.JMSException(PROVIDER_FAILURE)
+      };
+      for (Throwable failure : failures) {
+        BytesMessage message = faultingMessage(validReply(), site[0], site[1], failure);
+        Throwable actual = assertThrows(failure.getClass(), () -> DECODER.decode(message));
+        assertSame(failure, actual, site[0] + ":" + site[1]);
+      }
+    }
+    // Preserve left-to-right acquisition/validation: these later failures must not replace
+    // an earlier malformed UUID/layout. Values/diagnostics are literal independent oracles.
+    String[][] earlier = {
+      {CORRELATION_FIELD, "getJMSExpiration", ""},
+      {LAYOUT_ID_PROPERTY, STRING_PROPERTY_METHOD, VERSION_PROPERTY}
+    };
+    for (String[] entry : earlier) {
+      BytesMessage message =
+          faultingMessage(
+              with(validReply(), entry[0], "bad"),
+              entry[1],
+              entry[2],
+              new AssertionError("later getter must not run"));
+      PermanentProtocolException actual =
+          assertThrows(PermanentProtocolException.class, () -> DECODER.decode(message));
+      assertEquals("reply transport identity is malformed", actual.getMessage());
+      assertTrue(actual.getCause() instanceof IllegalArgumentException);
+    }
+  }
+
+  private static BytesMessage faultingMessage(
+      Map<String, Object> values, String getter, String property, Throwable failure) {
+    BytesMessage delegate = bytesMessage(values);
+    return (BytesMessage)
+        Proxy.newProxyInstance(
+            BytesMessage.class.getClassLoader(),
+            new Class<?>[] {BytesMessage.class},
+            (ignored, method, arguments) -> {
+              if (method.getName().equals(getter)
+                  && (property.isEmpty() || property.equals(arguments[0]))) {
+                throw failure;
+              }
+              return method.invoke(delegate, arguments);
+            });
+  }
+
   private static Map<String, Object> validReply() {
     byte[] body = responseWire();
     Map<String, Object> values = new HashMap<>();
@@ -222,7 +298,7 @@ final class JmsReplyDecoderTest {
     values.put(CORRELATION_FIELD, REQUEST_ID);
     values.put(EXPIRATION_FIELD, 1_000L);
     values.put("deliveryMode", DeliveryMode.PERSISTENT);
-    values.put("JMSXDeliveryCount", 1);
+    values.put(DELIVERY_COUNT_PROPERTY, 1);
     values.put(MESSAGE_ID_PROPERTY, RESPONSE_ID);
     values.put(LAYOUT_ID_PROPERTY, "LOGRSP01");
     values.put(VERSION_PROPERTY, "001");
@@ -282,10 +358,10 @@ final class JmsReplyDecoderTest {
               if (name.equals("getJMSDeliveryMode")) {
                 return values.get("deliveryMode");
               }
-              if (name.equals("propertyExists")) {
+              if (name.equals(PROPERTY_EXISTS_METHOD)) {
                 return values.containsKey((String) arguments[0]);
               }
-              if (name.equals("getIntProperty") || name.equals("getStringProperty")) {
+              if (name.equals("getIntProperty") || name.equals(STRING_PROPERTY_METHOD)) {
                 return values.get((String) arguments[0]);
               }
               if (name.equals("toString")) {

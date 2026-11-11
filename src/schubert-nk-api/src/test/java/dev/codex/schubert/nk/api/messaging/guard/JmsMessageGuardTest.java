@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.messaging.guard;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -25,6 +26,12 @@ import org.junit.jupiter.api.Test;
 
 /** PT-JMS-005/006 independent JMS boundary matrix without production codec or constants. */
 final class JmsMessageGuardTest {
+  private static final String PROPERTY_EXISTS_METHOD = "propertyExists";
+  private static final String STRING_PROPERTY_METHOD = "getStringProperty";
+  private static final String PROVIDER_FAILURE = "synthetic provider failure";
+  private static final String DELIVERY_COUNT_PROPERTY = "JMSXDeliveryCount";
+  private static final String LAYOUT_ID_PROPERTY = "NKLayoutID";
+  private static final String VERSION_PROPERTY = "NKProtocolVersion";
   private static final String BODY_FIELD = "body";
   private static final String BODY_LENGTH_FIELD = "bodyLength";
   private static final String DESTINATION_FIELD = "destination";
@@ -131,15 +138,15 @@ final class JmsMessageGuardTest {
     assertRejected(with(validRequest(), TRANSPORT_ID_FIELD, " "), REQUEST_ROUTE);
     assertRejected(with(validRequest(), CORRELATION_FIELD, null), REQUEST_ROUTE);
     assertRejected(with(validRequest(), CORRELATION_FIELD, "not-a-uuid"), REQUEST_ROUTE);
-    assertRejected(without(validRequest(), "JMSXDeliveryCount"), REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "JMSXDeliveryCount", 0), REQUEST_ROUTE);
+    assertRejected(without(validRequest(), DELIVERY_COUNT_PROPERTY), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), DELIVERY_COUNT_PROPERTY, 0), REQUEST_ROUTE);
     assertRejected(without(validRequest(), MESSAGE_ID_PROPERTY), REQUEST_ROUTE);
     assertRejected(with(validRequest(), MESSAGE_ID_PROPERTY, " "), REQUEST_ROUTE);
     assertRejected(with(validRequest(), MESSAGE_ID_PROPERTY, "not-a-uuid"), REQUEST_ROUTE);
-    assertRejected(without(validRequest(), "NKLayoutID"), REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "NKLayoutID", "short"), REQUEST_ROUTE);
-    assertRejected(without(validRequest(), "NKProtocolVersion"), REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "NKProtocolVersion", " "), REQUEST_ROUTE);
+    assertRejected(without(validRequest(), LAYOUT_ID_PROPERTY), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), LAYOUT_ID_PROPERTY, "short"), REQUEST_ROUTE);
+    assertRejected(without(validRequest(), VERSION_PROPERTY), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), VERSION_PROPERTY, " "), REQUEST_ROUTE);
     assertRejected(with(validRequest(), EXPIRATION_FIELD, -1L), REQUEST_ROUTE);
   }
 
@@ -179,6 +186,78 @@ final class JmsMessageGuardTest {
     }
   }
 
+  @Test
+  void providerFailuresRetainExactIdentityAndEarlierValidationStopsLaterReads() {
+    // BUG2659/YKT2339; SS321 sections 7-8 / SSC332, PT-JMS-PROVIDER-API-001.
+    // Provider failure proves no malformed value: the oracle is original object identity.
+    String[][] sites = {
+      {"getBodyLength", ""},
+      {"getBody", ""},
+      {"getJMSDestination", ""},
+      {"getJMSReplyTo", ""},
+      {"getJMSMessageID", ""},
+      {"getJMSCorrelationID", ""},
+      {"getJMSExpiration", ""},
+      {"getJMSDeliveryMode", ""},
+      {PROPERTY_EXISTS_METHOD, DELIVERY_COUNT_PROPERTY},
+      {"getIntProperty", DELIVERY_COUNT_PROPERTY},
+      {PROPERTY_EXISTS_METHOD, "NKMessageID"},
+      {STRING_PROPERTY_METHOD, "NKMessageID"},
+      {PROPERTY_EXISTS_METHOD, LAYOUT_ID_PROPERTY},
+      {STRING_PROPERTY_METHOD, LAYOUT_ID_PROPERTY},
+      {PROPERTY_EXISTS_METHOD, VERSION_PROPERTY},
+      {STRING_PROPERTY_METHOD, VERSION_PROPERTY}
+    };
+    for (String[] site : sites) {
+      Throwable[] failures = {
+        new IllegalArgumentException(PROVIDER_FAILURE),
+        new NullPointerException(PROVIDER_FAILURE),
+        new AssertionError(PROVIDER_FAILURE),
+        new jakarta.jms.JMSException(PROVIDER_FAILURE)
+      };
+      for (Throwable failure : failures) {
+        BytesMessage message = faultingMessage(validRequest(), site[0], site[1], failure);
+        Throwable actual =
+            assertThrows(failure.getClass(), () -> GUARD.read(message, REQUEST_ROUTE));
+        assertSame(failure, actual, site[0] + ":" + site[1]);
+      }
+    }
+    // Preserve left-to-right acquisition/validation: these later failures must not replace
+    // an earlier malformed UUID/layout. Values/diagnostics are literal independent oracles.
+    String[][] earlier = {
+      {CORRELATION_FIELD, "getJMSExpiration", ""},
+      {LAYOUT_ID_PROPERTY, STRING_PROPERTY_METHOD, VERSION_PROPERTY}
+    };
+    for (String[] entry : earlier) {
+      BytesMessage message =
+          faultingMessage(
+              with(validRequest(), entry[0], "bad"),
+              entry[1],
+              entry[2],
+              new AssertionError("later getter must not run"));
+      PermanentProtocolException actual =
+          assertThrows(PermanentProtocolException.class, () -> GUARD.read(message, REQUEST_ROUTE));
+      assertEquals("transport identity property is malformed", actual.getMessage());
+      assertTrue(actual.getCause() instanceof IllegalArgumentException);
+    }
+  }
+
+  private static BytesMessage faultingMessage(
+      Map<String, Object> values, String getter, String property, Throwable failure) {
+    BytesMessage delegate = bytesMessage(values);
+    return (BytesMessage)
+        Proxy.newProxyInstance(
+            BytesMessage.class.getClassLoader(),
+            new Class<?>[] {BytesMessage.class},
+            (ignored, method, arguments) -> {
+              if (method.getName().equals(getter)
+                  && (property.isEmpty() || property.equals(arguments[0]))) {
+                throw failure;
+              }
+              return method.invoke(delegate, arguments);
+            });
+  }
+
   private static Map<String, Object> validRequest() {
     Map<String, Object> values = baseValues();
     values.put(DESTINATION_FIELD, new ActiveMQQueue("nk.sync.request"));
@@ -202,10 +281,10 @@ final class JmsMessageGuardTest {
     values.put(TRANSPORT_ID_FIELD, "ID:provider-transport-id");
     values.put(CORRELATION_FIELD, CORRELATION_ID);
     values.put("deliveryMode", DeliveryMode.PERSISTENT);
-    values.put("JMSXDeliveryCount", 1);
+    values.put(DELIVERY_COUNT_PROPERTY, 1);
     values.put(MESSAGE_ID_PROPERTY, MESSAGE_ID);
-    values.put("NKLayoutID", "LOGREQ01");
-    values.put("NKProtocolVersion", "001");
+    values.put(LAYOUT_ID_PROPERTY, "LOGREQ01");
+    values.put(VERSION_PROPERTY, "001");
     return values;
   }
 
@@ -262,13 +341,13 @@ final class JmsMessageGuardTest {
               if (name.equals("getJMSDeliveryMode")) {
                 return values.get("deliveryMode");
               }
-              if (name.equals("propertyExists")) {
+              if (name.equals(PROPERTY_EXISTS_METHOD)) {
                 return values.containsKey((String) arguments[0]);
               }
               if (name.equals("getIntProperty")) {
                 return values.get((String) arguments[0]);
               }
-              if (name.equals("getStringProperty")) {
+              if (name.equals(STRING_PROPERTY_METHOD)) {
                 return values.get((String) arguments[0]);
               }
               if (name.equals("toString")) {
