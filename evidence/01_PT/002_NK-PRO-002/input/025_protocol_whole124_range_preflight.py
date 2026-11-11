@@ -1,0 +1,32 @@
+"""Full protocol changed-test preflight using pinned previous whole120 scope; no tests executed."""
+from pathlib import Path
+import datetime,hashlib,json,re,zipfile
+R=Path.cwd();B=R/'evidence/01_PT/002_NK-PRO-002';RUNS=R.parent/'pgpt-runs/PG379';load=lambda p:json.loads(p.read_bytes());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();cfg=load(B/'input/023_protocol_whole124_range_scope.json');cm=load(RUNS/cfg['compileSlot']/'manifest.json');sm=load(RUNS/cfg['staticSlot']/'manifest.json');O=R/cfg['preflightManifest'];assert not O.parent.exists();assert cm['actualExit']==0 and cm['inputHashes']==sm['inputHashes']
+for n,h in cm['inputHashes'].items():assert sha(R/n)==h
+old=R/cfg['unchangedOriginal120Manifest'];assert sha(old)=='8ebe6365bc701ba6432b1b55275004024dc71bc452d31b66d31c53894e3ae128';oldm=load(old);oldpf=load(old.parent/'preflight-manifest.json');assert sha(old.parent/'preflight-manifest.json')==oldm['files']['preflight-manifest.json'] and oldpf['actualExit']==0
+oldTests={n:h for n,h in oldpf['inputHashes'].items() if '/src/test/' in n};assert all(sha(R/n)==h for n,h in oldTests.items());discovered={str(p.relative_to(R)) for p in (R/'src/schubert-nk-protocol/src/test/java').rglob('*.java')};assert discovered==set(cfg['testSources']) and len(discovered)==26;assert discovered-{n for n in oldTests if n.endswith('.java')}=={cfg['additionalTestPath']}
+cases={};text={}
+for n in cfg['testSources']:
+ t=(R/n).read_text();text[Path(n).stem]=t;names=re.findall(cfg['declarationRegex'],t);assert len(names)==t.count('@Test')
+ if n in cfg['testClasses']:assert names;cases[cfg['testClasses'][n]]=names
+ else:assert Path(n).name=='IndependentNamedFieldOracle.java' and not names
+ for imp in re.findall(r'^import (?:static )?([^;]+);',t,re.M):assert imp.startswith(('dev.codex.schubert.nk.protocol.','java.','org.junit.'))
+ for term in ['@Disabled','@ParameterizedTest','ProcessBuilder','Runtime.getRuntime','java.sql','jakarta.jms','java.net','Files.','@TempDir','Thread.sleep']:assert term not in t
+oldcases={(c,n) for c,ns in oldpf['cases'].items() for n in ns};newcases={(c,n) for c,ns in cases.items() for n in ns};assert len(oldcases)==120 and len(newcases)==124 and oldcases<=newcases
+expectedNames={'zeroAndMaximumAreAcceptedAtEverySupportedWidth','negativeAndFirstOverflowAreRejectedAtEverySupportedWidth','unsupportedWidthsAreRejectedBeforeNumericRangeEvaluation','nullNameIsRejectedBeforeWidthAndValueValidation'};assert newcases-oldcases=={('dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest',n) for n in expectedNames}
+t=text['TypedUnsignedRangeBoundaryTest'];assert t.count('BigInteger.TEN.pow(width)')==2 and 'maximumForDigits' not in t and 'digits <= 18' in t and 'Long.MIN_VALUE, Long.MAX_VALUE' in t and 'Integer.MIN_VALUE, 0, 19, Integer.MAX_VALUE' in t and '"name", failure.getMessage()' in t
+assert set(cfg['resources'])=={str(p.relative_to(R)) for p in (R/'src/schubert-nk-protocol/src/test/resources/protocol').glob('*.tsv')} and len(cfg['resources'])==5
+for n in cfg['resources']:assert sha(R/n)==oldpf['resources'][n]==sha(RUNS/cfg['compileSlot']/'resources'/n.split('/src/test/resources/')[1])
+normal=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG22106-api-stop-static-independent-input-v1/normal.json';assert sha(normal)=='b2f07209804d71ee2ffbc4d9aca5311d4e6cf15721c74bcde411f86538cf4f27';nm=load(normal);assert nm['actualExit']==0 and nm['source']=='7aed8eace7c844c2f79f2e39db766faf914890d5';assert len(cfg['mainPaths'])==165 and all(sha(R/n)==nm['begin']['inputHashes'][n] for n in cfg['mainPaths']);assert set(cm['dependencies'])=={nm['jars']['protocol']['path'],str(R.parent/'toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar')}
+for n,h in cm['dependencies'].items():assert sha(Path(n))==h
+indexPath=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json';assert sha(indexPath)=='db6581ac589b42bdaa6e51ac101dac365d02a8fabab7d689eb5f12de29319723';ix=load(indexPath)
+with zipfile.ZipFile(nm['jars']['protocol']['path']) as z:
+ names=z.namelist();assert not any(h in n for n in names for h in ['TemporaryInfrastructureException','FingerprintKeyRing','ResponseSnapshotCodec','WebStartupException'])
+ physical={n[:-6] for n in names if n.endswith('.class')};assert physical==set(cfg['targetPhysical'])==set(cfg['currentMainPhysical']) and len(physical)==176
+ for n in physical:assert hashlib.sha256(z.read(n+'.class')).hexdigest()==ix[n]['sha256']==cfg['currentMainPhysical'][n]
+noCode=[n for n in physical if not ix[n]['hasCode']];assert len(noCode)==13
+items=sm['reports']['pmd']['items'];oldReview=oldpf['pmdApplicability'];assert sorted(json.dumps(x,sort_keys=True) for x in items)==sorted(json.dumps(x['finding'],sort_keys=True) for x in oldReview);assert len(items)==17 and not sm['reports']['pmd']['processingErrors'] and not sm['reports']['checkstyle']['items'];assert sm['stages']['pmd']['actualExit']==4 and sm['stages']['checkstyle']['actualExit']==0
+for row in oldReview:
+ x=row['finding'];line=text[x['class']].splitlines()[int(x['beginline'])-1];assert hashlib.sha256(line.encode()).hexdigest()==row['lineTextSha256'] and row['applicable'] is False
+O.parent.mkdir();value=dict(actualExit=0,atJST=datetime.datetime.now().astimezone().isoformat(),inputHashes=cm['inputHashes'],compileManifestSha256=sha(RUNS/cfg['compileSlot']/'manifest.json'),staticManifestSha256=sha(RUNS/cfg['staticSlot']/'manifest.json'),cases=cases,expectedTests=124,wholeFixtures=25,testSources=26,mainSources=165,physicalClasses=176,noCodeClasses=sorted(noCode),packageAnnotations=7,abstractInterfaces=6,resources={n:sha(R/n) for n in cfg['resources']},dependencies=cm['dependencies'],pmdRawFindings=17,pmdApplicability=oldReview,applicableStaticViolations=0,checkstyleFindings=0,processingErrors=0,original120MethodsPreserved=True,original25TestSourceBytesPreserved=True,newIndependentRangeMethods=4,additionalInputVectors=113,suppressionAdded=False,testFixtureExtraction=False,productTestsExecuted=0,heldFourPresentOnClasspath=False,backendOrRootVmNativeOperations=False,oldPreflight=dict(path=str((old.parent/'preflight-manifest.json').relative_to(R)),sha256=sha(old.parent/'preflight-manifest.json')),toolSha256=sha(Path(__file__)))
+O.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,tests=124,wholeFixtures=25,staticRaw=17,applicable=0,manifestSha256=sha(O))))

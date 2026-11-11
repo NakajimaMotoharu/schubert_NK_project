@@ -1,0 +1,24 @@
+[
+  {
+    "id": "PT-PRO-001-T01/T02/NAMED-FIELD",
+    "scope": "69 named types/296 canonical fields/79 optional/4 empty types",
+    "fixture": "named-types-ss323.tsv + fields-ui234-236.tsv + named-accessors-independent.tsv",
+    "expected": "Independent UI/SS field names/scalar wire literals/public constructor signatures; each getter and fields() equals independent input; null constructor reference names/optional empty/unknown empty-data rejected; redacted toString",
+    "case": "PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning",
+    "status": "EXISTING_NORMAL_PROOF_BOUND_NOT_NEW_EXECUTION"
+  },
+  {
+    "id": "PT-PRO-001-T02/T03/T04/BASE6",
+    "scope": "FixedPayload/PayloadValues/TypedPayloadValues/interfaces/TypedFieldValues,97 measured methods",
+    "expected": "clone input and returned arrays; immutable lists/non-null elements; literal numeric/UUID/time/path/enum mappings; wrong kind and semantic failures are typed exceptions; boundary null is immediate non-null contract rejection",
+    "caseRefs": "PG24774 base6 method97 relations + PG24642 original120",
+    "status": "EXISTING_METHOD_REFERENCE_AND_COUNTERS_ORACLE_REVIEW_PARTIAL"
+  },
+  {
+    "id": "PT-PRO-001-RANGE18-001..004",
+    "scope": "TypedFieldValues.requireUnsignedRange supported digits1..18 plus invalid/null",
+    "expected": "Independent BigInteger10^digits-1; zero/max accepted and -1/max+1 rejected at each width; widths outside1..18 rejected; null name first precondition",
+    "case": "NEW_NORMAL_PT_REQUIRED_NOT_IMPLEMENTED",
+    "status": "ADDITIONAL_PT_GAP_SAME_APPROVED_CONTRACT"
+  }
+]
