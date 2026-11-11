@@ -1,0 +1,229 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T00:01:29.208731+09:00",
+  "source": "cd9dafb651c5246a50543e3b100128df498bf11f",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "policyHashes": {
+    "documents/400_PGPT/410_工程標準/411_コーディング規約.md": "f04cdc3ab62be8b6a3b1c89d23975cdc255177557b52c114e47c04ed1ccf9cd0",
+    "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md": "d0e0b4834adaa57bf872b0fb7d1e43338d27b7a53bd43d27c3eeb94332412bd7",
+    "documents/400_PGPT/430_構成・追跡/431_Module・Program一覧.md": "75356945e6c50e54e28b5a9353fdb2d28285ebaa3b7cd69fb374ee511408d976"
+  },
+  "approvedDesigns": {
+    "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md": {
+      "approvedMain": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "0ea8db09a37dca68f906ab00b298bb0691a005df4e059b28f170432d4cccead6"
+    },
+    "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md": {
+      "approvedMain": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "edfd716ed55ff4b72739ed2e142c1dd7812a9682ba24895a765c1934b49bb0ae"
+    }
+  },
+  "previousAcceptedSource": "7fffab57a567914956b66452e5e54388642efdec",
+  "changesSincePriorAcceptance": {
+    "documents/400_PGPT/410_工程標準/411_コーディング規約.md": "60\t1\t\"documents/400_PGPT/410_\\345\\267\\245\\347\\250\\213\\346\\250\\231\\346\\272\\226/411_\\343\\202\\263\\343\\203\\274\\343\\203\\207\\343\\202\\243\\343\\203\\263\\343\\202\\260\\350\\246\\217\\347\\264\\204.md\"",
+    "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md": "2\t0\t\"documents/400_PGPT/450_\\345\\223\\201\\350\\263\\252/451_Build\\343\\203\\273\\351\\235\\231\\347\\232\\204\\350\\247\\243\\346\\236\\220\\343\\203\\273coverage\\346\\226\\271\\351\\207\\235.md\"",
+    "documents/400_PGPT/430_構成・追跡/431_Module・Program一覧.md": "326\t0\t\"documents/400_PGPT/430_\\346\\247\\213\\346\\210\\220\\343\\203\\273\\350\\277\\275\\350\\267\\241/431_Module\\343\\203\\273Program\\344\\270\\200\\350\\246\\247.md\""
+  },
+  "criteria": [
+    {
+      "id": "WBS-F01:contract",
+      "status": "SATISFIED_NONEXECUTABLE_POLICY_SCOPE",
+      "basis": "All fourteen policy sections reviewed against SS311/354/current six module responsibilities; code conformance remains F03.",
+      "testIds": [
+        "PT-QUALITY-FOUNDATION001"
+      ],
+      "evidence": [
+        {
+          "topic": "priority-source",
+          "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+          "line": 45,
+          "independentReviewBasis": [
+            "RD、UI、SS",
+            "`src`",
+            "`program/characterization`"
+          ]
+        },
+        {
+          "topic": "java-naming",
+          "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+          "line": 49,
+          "independentReviewBasis": [
+            "preview",
+            "UpperCamelCase",
+            "lowerCamelCase",
+            "UPPER_SNAKE_CASE"
+          ]
+        },
+        {
+          "topic": "module",
+          "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+          "line": 57,
+          "independentReviewBasis": [
+            "schubert-nk-protocol",
+            "schubert-nk-storage",
+            "schubert-nk-bootstrap",
+            "schubert-nk-api",
+            "schubert-nk-web",
+            "schubert-nk-batch",
+            "Web→業務API禁止"
+          ]
+        },
+        {
+          "topic": "null",
+          "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+          "line": 66,
+          "independentReviewBasis": [
+            "Nullability",
+            "Objects.requireNonNull",
+            "NullPointerException"
+          ]
+        },
+        {
+          "topic": "transaction-exceptions",
+          "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+          "line": 75,
+          "independentReviewBasis": [
+            "Outbox",
+            "Inbox",
+            "rollback",
+            "QA050"
+          ]
+        },
+        {
+          "topic": "redaction-security",
+          "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+          "line": 87,
+          "independentReviewBasis": [
+            "DIF-016",
+            "CSRF",
+            "deny-by-default",
+            "HMAC"
+          ]
+        },
+        {
+          "topic": "sql",
+          "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+          "line": 95,
+          "independentReviewBasis": [
+            "bind parameter",
+            "append-only",
+            "OffsetDateTime",
+            "0001～9999"
+          ]
+        },
+        {
+          "topic": "codec",
+          "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+          "line": 104,
+          "independentReviewBasis": [
+            "256-byte",
+            "64 layout",
+            "NFC",
+            "golden vector"
+          ]
+        },
+        {
+          "topic": "concurrency",
+          "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+          "line": 113,
+          "independentReviewBasis": [
+            "private final lock",
+            "Inbox/Outbox",
+            "atomic rename"
+          ]
+        },
+        {
+          "topic": "testability",
+          "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+          "line": 122,
+          "independentReviewBasis": [
+            "独立算出",
+            "not-run",
+            "100%",
+            "全資源後条件"
+          ]
+        },
+        {
+          "topic": "format-static",
+          "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+          "line": 143,
+          "independentReviewBasis": [
+            "Spotless",
+            "NullAway",
+            "SpotBugs",
+            "Checkstyle"
+          ]
+        },
+        {
+          "topic": "prohibited",
+          "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+          "line": 153,
+          "independentReviewBasis": [
+            "Force push",
+            "既存未commit変更",
+            "NPE正常扱い"
+          ]
+        },
+        {
+          "topic": "review-trace",
+          "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+          "line": 162,
+          "independentReviewBasis": [
+            "trace",
+            "canonicalOwner",
+            "canonicalCostOwner"
+          ]
+        },
+        {
+          "topic": "history",
+          "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+          "line": 178,
+          "independentReviewBasis": [
+            "2026-09-01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WBS-F01:scope",
+      "status": "SATISFIED_NONEXECUTABLE_POLICY_SCOPE",
+      "basis": "Owned Java/DDL/config artifacts, requirements and shared classes empty by current F01 definition. Policy only, no added code denominator or duplicate common cost."
+    },
+    {
+      "id": "WBS-F01:quality",
+      "status": "SATISFIED_POLICY_WITH_CODE_QUALITY_SEPARATE",
+      "basis": "UTF8/LF/final newline and committed bytes; quality gates retain strict static/null/FES/coverage requirements. Runtime/negative/rollback/concurrency tests are N-A for policy text, not exempt for code."
+    }
+  ],
+  "scope": "NONEXECUTABLE_F01_ONLY",
+  "decision": "POLICY_CRITERIA_REVIEW_COMPLETE_EXISTING_ACCEPTANCE_REQUALIFICATION_ONLY",
+  "existingAcceptanceStatusRetained": "ACCEPTED",
+  "globalWbsAcceptanceUpdated": false,
+  "F03Accepted": false,
+  "whole451Accepted": false,
+  "staticStructure": {
+    "status": "PASS_CURRENT_STATIC_SOURCE_STRUCTURE_ONLY",
+    "source": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+    "artifactCount": 1068,
+    "productionArtifacts": 1063,
+    "characterizationArtifacts": 5,
+    "addedComparedToLegacy": 9,
+    "retiredHistoricalPaths": 2,
+    "ownerKindOverrides": 131,
+    "identityRecomputed": false,
+    "descriptorBase": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/artifacts.json",
+      "sha256": "fb24a1a209849d42894925002baae668bc55a4bd858b1b7c1d38ab838319bb0b"
+    },
+    "runtimeQualified": false,
+    "wholeWbsAccepted": false,
+    "formalUpdated": false,
+    "newAcceptance": 0,
+    "effortRate": null
+  },
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "toolSha256": "d8fec813c1c0509515daecd0242a4da855b8d999716fae538232526175abacbf"
+}
