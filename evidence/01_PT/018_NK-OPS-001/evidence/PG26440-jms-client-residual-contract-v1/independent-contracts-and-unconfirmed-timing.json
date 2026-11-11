@@ -1,0 +1,24 @@
+[
+  {
+    "target": "JmsRequestReplyClient.exchange",
+    "inputs": "nonnull UUID/body/Duration/sender; body256..1000000, timeout1ns..2s; configured concurrency1..20, standard12",
+    "expected": "validate before send, tryAcquire once, source clock/deadline registration before exactly one cloned send; registry full/duplicate/unknown errors cannot leak local semaphore; sender success waits on defensive future, timeout/cancel/interrupt cleanup, interrupt flag restored; no automatic retry",
+    "unreviewedTiming": "SS321 separately says producer call timeout2s and arrival-deadline; SS312 exchange(timeout2s). Absolute whole-exchange send-time subtraction is not proven by this review; no Main timing bug or changed oracle claimed."
+  },
+  {
+    "target": "Failure/null/ownership boundary",
+    "inputs": "JMS/ISE original old tests; additional explicit provider IAE/NPE/Error and duplicate-existing/clock-overflow planned",
+    "expected": "unknown original Throwable identity preserved, own registration cancelled and permit released exactly once; failed duplicate must not cancel previously existing registration; no send before acquisition/clock failures; later valid exchange demonstrates permit reusable"
+  },
+  {
+    "target": "Test owning resources",
+    "inputs": "8 whole tests including1/12/20 concurrency and interrupt worker",
+    "expected": "executor finally shutdownNow+assert await5; Thread finally join2000 then assert !isAlive, original8 assertions retained",
+    "gap": "BUG2658/YKT2338 sourceconfirmed, no observed hang inferred; beforeprice.25/.65/1.3cap2"
+  },
+  {
+    "target": "Remaining14 owned method sources",
+    "expected": "Consumer/decoder/request adapter/protected-wire/BrokerContext/Login whole contracts and actual provider role/close remain required",
+    "status": "NOT_REVIEWED_NOT_ACCEPTED_ORIGINAL_PRICE_RETAINED"
+  }
+]

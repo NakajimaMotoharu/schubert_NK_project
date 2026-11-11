@@ -1,0 +1,29 @@
+[
+  {
+    "id": "JMSCLIENT009/IllegalArgumentException",
+    "input": "sender mutates its received clone then throws known same instance",
+    "expected": "same original Throwable; caller bytes unchanged, own pending0/one send, subsequent sameID positive reply verifies permit reuse"
+  },
+  {
+    "id": "JMSCLIENT009/NullPointerException",
+    "input": "sender mutates its received clone then throws known same instance",
+    "expected": "same original Throwable; caller bytes unchanged, own pending0/one send, subsequent sameID positive reply verifies permit reuse"
+  },
+  {
+    "id": "JMSCLIENT009/AssertionError",
+    "input": "sender mutates its received clone then throws known same instance",
+    "expected": "same original Throwable; caller bytes unchanged, own pending0/one send, subsequent sameID positive reply verifies permit reuse"
+  },
+  {
+    "id": "JMSCLIENT010/duplicate",
+    "expected": "no send; existing other owner pending unchanged, next distinctID success proves local permit recovery"
+  },
+  {
+    "id": "JMSCLIENT010/clock-max",
+    "expected": "DateTimeException before registration/send; pending0, later valid clock success proves local permit recovery"
+  },
+  {
+    "id": "JMSCLIENT010/maximum-body",
+    "expected": "literal1000000-byte caller buffer admitted; callback sees cloned body of exact bound, caller bytes0 remain, explicit reply8; existing1000001 rejection unchanged"
+  }
+]

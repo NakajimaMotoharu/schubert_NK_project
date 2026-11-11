@@ -1,0 +1,279 @@
+Compiled from "JmsRequestReplyClient.java"
+public final class dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient {
+  public static final int STANDARD_CONCURRENCY;
+
+  public static final java.time.Duration MAXIMUM_WAIT;
+
+  private final dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry registry;
+
+  private final java.time.Clock clock;
+
+  private final java.util.concurrent.Semaphore concurrentWaits;
+
+  public dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient();
+    Code:
+         0: aload_0
+         1: new           #1                  // class dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry
+         4: dup
+         5: invokespecial #3                  // Method dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry."<init>":()V
+         8: invokestatic  #7                  // Method java/time/Clock.systemUTC:()Ljava/time/Clock;
+        11: bipush        12
+        13: invokespecial #15                 // Method "<init>":(Ldev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry;Ljava/time/Clock;I)V
+        16: return
+
+  public dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient(dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry, java.time.Clock, int);
+    Code:
+         0: aload_0
+         1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: ldc           #21                 // String registry
+         8: invokestatic  #23                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        11: checkcast     #1                  // class dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry
+        14: putfield      #29                 // Field registry:Ldev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry;
+        17: aload_0
+        18: aload_2
+        19: ldc           #32                 // String clock
+        21: invokestatic  #23                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        24: checkcast     #8                  // class java/time/Clock
+        27: putfield      #34                 // Field clock:Ljava/time/Clock;
+        30: iload_3
+        31: iconst_1
+        32: if_icmplt     41
+        35: iload_3
+        36: bipush        20
+        38: if_icmple     51
+        41: new           #37                 // class java/lang/IllegalArgumentException
+        44: dup
+        45: ldc           #39                 // String maximum concurrent JMS waits must be between 1 and 20
+        47: invokespecial #41                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        50: athrow
+        51: aload_0
+        52: new           #44                 // class java/util/concurrent/Semaphore
+        55: dup
+        56: iload_3
+        57: invokespecial #46                 // Method java/util/concurrent/Semaphore."<init>":(I)V
+        60: putfield      #49                 // Field concurrentWaits:Ljava/util/concurrent/Semaphore;
+        63: return
+
+  public byte[] exchange(java.util.UUID, byte[], java.time.Duration, dev.codex.schubert.nk.web.messaging.JmsRequestSender) throws jakarta.jms.JMSException;
+    Code:
+         0: aload_1
+         1: ldc           #53                 // String correlationId
+         3: invokestatic  #23                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_2
+         8: ldc           #55                 // String encodedRequest
+        10: invokestatic  #23                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_3
+        15: ldc           #57                 // String timeout
+        17: invokestatic  #23                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: aload         4
+        23: ldc           #59                 // String sender
+        25: invokestatic  #23                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        28: pop
+        29: aload_2
+        30: aload_3
+        31: invokestatic  #61                 // Method validateRequest:([BLjava/time/Duration;)V
+        34: aload_0
+        35: getfield      #49                 // Field concurrentWaits:Ljava/util/concurrent/Semaphore;
+        38: invokevirtual #65                 // Method java/util/concurrent/Semaphore.tryAcquire:()Z
+        41: ifne          53
+        44: getstatic     #69                 // Field dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason.CAPACITY:Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;
+        47: ldc           #75                 // String synchronous JMS wait capacity is exhausted
+        49: invokestatic  #77                 // Method failure:(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;Ljava/lang/String;)Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException;
+        52: athrow
+        53: aload_0
+        54: getfield      #34                 // Field clock:Ljava/time/Clock;
+        57: invokevirtual #81                 // Method java/time/Clock.instant:()Ljava/time/Instant;
+        60: astore        5
+        62: aload         5
+        64: aload_3
+        65: invokevirtual #85                 // Method java/time/Instant.plus:(Ljava/time/temporal/TemporalAmount;)Ljava/time/Instant;
+        68: astore        6
+        70: aload_0
+        71: getfield      #29                 // Field registry:Ldev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry;
+        74: aload_1
+        75: aload         6
+        77: aload         5
+        79: invokevirtual #91                 // Method dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.register:(Ljava/util/UUID;Ljava/time/Instant;Ljava/time/Instant;)Ljava/util/Optional;
+        82: astore        7
+        84: aload         7
+        86: invokevirtual #95                 // Method java/util/Optional.isEmpty:()Z
+        89: ifeq          101
+        92: getstatic     #69                 // Field dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason.CAPACITY:Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;
+        95: ldc           #100                // String reply correlation registry is exhausted
+        97: invokestatic  #77                 // Method failure:(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;Ljava/lang/String;)Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException;
+       100: athrow
+       101: aload         7
+       103: invokevirtual #102                // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+       106: checkcast     #106                // class dev/codex/schubert/nk/web/messaging/PendingReply
+       109: astore        8
+       111: aload         4
+       113: aload_1
+       114: aload_2
+       115: invokevirtual #108                // Method "[B".clone:()Ljava/lang/Object;
+       118: checkcast     #109                // class "[B"
+       121: invokeinterface #113,  3          // InterfaceMethod dev/codex/schubert/nk/web/messaging/JmsRequestSender.send:(Ljava/util/UUID;[B)V
+       126: aload         8
+       128: invokevirtual #119                // Method dev/codex/schubert/nk/web/messaging/PendingReply.completion:()Ljava/util/concurrent/CompletionStage;
+       131: invokeinterface #123,  1          // InterfaceMethod java/util/concurrent/CompletionStage.toCompletableFuture:()Ljava/util/concurrent/CompletableFuture;
+       136: aload_3
+       137: invokevirtual #129                // Method java/time/Duration.toNanos:()J
+       140: getstatic     #135                // Field java/util/concurrent/TimeUnit.NANOSECONDS:Ljava/util/concurrent/TimeUnit;
+       143: invokevirtual #141                // Method java/util/concurrent/CompletableFuture.get:(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;
+       146: checkcast     #109                // class "[B"
+       149: astore        9
+       151: aload_0
+       152: getfield      #29                 // Field registry:Ldev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry;
+       155: aload_1
+       156: invokevirtual #147                // Method dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.cancel:(Ljava/util/UUID;)Z
+       159: pop
+       160: aload_0
+       161: getfield      #49                 // Field concurrentWaits:Ljava/util/concurrent/Semaphore;
+       164: invokevirtual #151                // Method java/util/concurrent/Semaphore.release:()V
+       167: aload         9
+       169: areturn
+       170: astore        9
+       172: aload_0
+       173: getfield      #29                 // Field registry:Ldev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry;
+       176: aload_1
+       177: aload         6
+       179: invokevirtual #156                // Method dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.expire:(Ljava/util/UUID;Ljava/time/Instant;)Z
+       182: pop
+       183: getstatic     #160                // Field dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason.TIMEOUT:Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;
+       186: ldc           #163                // String synchronous JMS reply timed out
+       188: aload         9
+       190: invokestatic  #165                // Method failure:(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;Ljava/lang/String;Ljava/lang/Throwable;)Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException;
+       193: athrow
+       194: astore        9
+       196: aload_0
+       197: getfield      #29                 // Field registry:Ldev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry;
+       200: aload_1
+       201: invokevirtual #147                // Method dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.cancel:(Ljava/util/UUID;)Z
+       204: pop
+       205: invokestatic  #170                // Method java/lang/Thread.currentThread:()Ljava/lang/Thread;
+       208: invokevirtual #176                // Method java/lang/Thread.interrupt:()V
+       211: getstatic     #179                // Field dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason.INTERRUPTED:Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;
+       214: ldc           #182                // String synchronous JMS reply wait was interrupted
+       216: aload         9
+       218: invokestatic  #165                // Method failure:(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;Ljava/lang/String;Ljava/lang/Throwable;)Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException;
+       221: athrow
+       222: astore        9
+       224: getstatic     #160                // Field dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason.TIMEOUT:Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;
+       227: ldc           #186                // String synchronous JMS reply arrived after its deadline
+       229: aload         9
+       231: invokevirtual #188                // Method java/util/concurrent/ExecutionException.getCause:()Ljava/lang/Throwable;
+       234: invokestatic  #165                // Method failure:(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;Ljava/lang/String;Ljava/lang/Throwable;)Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException;
+       237: athrow
+       238: astore        10
+       240: aload_0
+       241: getfield      #29                 // Field registry:Ldev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry;
+       244: aload_1
+       245: invokevirtual #147                // Method dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.cancel:(Ljava/util/UUID;)Z
+       248: pop
+       249: aload         10
+       251: athrow
+       252: astore        11
+       254: aload_0
+       255: getfield      #49                 // Field concurrentWaits:Ljava/util/concurrent/Semaphore;
+       258: invokevirtual #151                // Method java/util/concurrent/Semaphore.release:()V
+       261: aload         11
+       263: athrow
+      Exception table:
+         from    to  target type
+           111   151   170   Class java/util/concurrent/TimeoutException
+           111   151   194   Class java/lang/InterruptedException
+           111   151   222   Class java/util/concurrent/ExecutionException
+           111   151   238   any
+           170   240   238   any
+            53   160   252   any
+           170   254   252   any
+
+  public boolean onReply(java.util.UUID, byte[]);
+    Code:
+         0: aload_0
+         1: getfield      #29                 // Field registry:Ldev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry;
+         4: aload_1
+         5: aload_2
+         6: aload_0
+         7: getfield      #34                 // Field clock:Ljava/time/Clock;
+        10: invokevirtual #81                 // Method java/time/Clock.instant:()Ljava/time/Instant;
+        13: invokevirtual #192                // Method dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.complete:(Ljava/util/UUID;[BLjava/time/Instant;)Z
+        16: ireturn
+
+  public int pendingCount();
+    Code:
+         0: aload_0
+         1: getfield      #29                 // Field registry:Ldev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry;
+         4: invokevirtual #196                // Method dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.pendingCount:()I
+         7: ireturn
+
+  public long lateReplyCount();
+    Code:
+         0: aload_0
+         1: getfield      #29                 // Field registry:Ldev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry;
+         4: invokevirtual #200                // Method dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.lateResponseCount:()J
+         7: lreturn
+
+  private static void validateRequest(byte[], java.time.Duration);
+    Code:
+         0: aload_0
+         1: arraylength
+         2: sipush        256
+         5: if_icmplt     19
+         8: aload_0
+         9: arraylength
+        10: getstatic     #205                // Field dev/codex/schubert/nk/protocol/transport/BrokerTopology.SYNC_REQUEST:Ldev/codex/schubert/nk/protocol/transport/BrokerTopology;
+        13: invokevirtual #211                // Method dev/codex/schubert/nk/protocol/transport/BrokerTopology.maximumBodyLength:()I
+        16: if_icmple     29
+        19: new           #37                 // class java/lang/IllegalArgumentException
+        22: dup
+        23: ldc           #214                // String encoded JMS request body length is outside its range
+        25: invokespecial #41                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        28: athrow
+        29: aload_1
+        30: invokevirtual #216                // Method java/time/Duration.isZero:()Z
+        33: ifne          53
+        36: aload_1
+        37: invokevirtual #219                // Method java/time/Duration.isNegative:()Z
+        40: ifne          53
+        43: aload_1
+        44: getstatic     #222                // Field MAXIMUM_WAIT:Ljava/time/Duration;
+        47: invokevirtual #226                // Method java/time/Duration.compareTo:(Ljava/time/Duration;)I
+        50: ifle          63
+        53: new           #37                 // class java/lang/IllegalArgumentException
+        56: dup
+        57: ldc           #230                // String JMS request timeout must be between 1ns and 2s
+        59: invokespecial #41                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        62: athrow
+        63: return
+
+  private static dev.codex.schubert.nk.web.messaging.JmsRequestReplyException failure(dev.codex.schubert.nk.web.messaging.JmsRequestReplyException$Reason, java.lang.String);
+    Code:
+         0: new           #232                // class dev/codex/schubert/nk/web/messaging/JmsRequestReplyException
+         3: dup
+         4: aload_0
+         5: aload_1
+         6: invokespecial #234                // Method dev/codex/schubert/nk/web/messaging/JmsRequestReplyException."<init>":(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;Ljava/lang/String;)V
+         9: areturn
+
+  private static dev.codex.schubert.nk.web.messaging.JmsRequestReplyException failure(dev.codex.schubert.nk.web.messaging.JmsRequestReplyException$Reason, java.lang.String, java.lang.Throwable);
+    Code:
+         0: new           #232                // class dev/codex/schubert/nk/web/messaging/JmsRequestReplyException
+         3: dup
+         4: aload_0
+         5: aload_1
+         6: aload_2
+         7: invokespecial #237                // Method dev/codex/schubert/nk/web/messaging/JmsRequestReplyException."<init>":(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;Ljava/lang/String;Ljava/lang/Throwable;)V
+        10: areturn
+
+  static {};
+    Code:
+         0: ldc2_w        #240                // long 2l
+         3: invokestatic  #242                // Method java/time/Duration.ofSeconds:(J)Ljava/time/Duration;
+         6: putstatic     #222                // Field MAXIMUM_WAIT:Ljava/time/Duration;
+         9: return
+}

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -155,6 +156,7 @@ final class JmsRequestReplyClientTest {
     } finally {
       waiting.interrupt();
       waiting.join(2_000);
+      assertFalse(waiting.isAlive());
     }
   }
 
@@ -166,7 +168,8 @@ final class JmsRequestReplyClientTest {
       CountDownLatch release = new CountDownLatch(1);
       AtomicInteger sends = new AtomicInteger();
       List<Future<byte[]>> waits = new ArrayList<>();
-      try (ExecutorService executor = Executors.newFixedThreadPool(maximum)) {
+      ExecutorService executor = Executors.newFixedThreadPool(maximum);
+      try {
         try {
           for (int index = 1; index <= maximum; index++) {
             UUID id = new UUID(0, index);
@@ -202,6 +205,9 @@ final class JmsRequestReplyClientTest {
         } finally {
           release.countDown();
         }
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));
       }
       assertEquals(maximum, sends.get());
       assertEquals(0, client.pendingCount());
@@ -278,6 +284,119 @@ final class JmsRequestReplyClientTest {
         JmsRequestReplyException.Reason.CAPACITY,
         JmsRequestReplyException.Reason.valueOf("CAPACITY"));
   }
+
+  // JMSCLIENT009010-BEGIN: independent provider and local ownership negatives.
+  @Test
+  void uncheckedSenderTypesPreserveIdentityCopyAndReusableCapacity() throws Exception {
+    for (Throwable original :
+        List.of(
+            new IllegalArgumentException("synthetic sender argument"),
+            new NullPointerException("synthetic sender null"),
+            new AssertionError("synthetic sender error"))) {
+      JmsRequestReplyClient client = client(new MutableClock(NOW), 1);
+      AtomicInteger sends = new AtomicInteger();
+      byte[] encoded = request();
+      Throwable observed =
+          assertThrows(
+              original.getClass(),
+              () ->
+                  client.exchange(
+                      ID_1,
+                      encoded,
+                      Duration.ofSeconds(2),
+                      (id, body) -> {
+                        sends.incrementAndGet();
+                        body[0] = 9;
+                        if (original instanceof RuntimeException runtime) throw runtime;
+                        throw (Error) original;
+                      }));
+      assertSame(original, observed);
+      assertEquals(0, encoded[0]);
+      assertEquals(1, sends.get());
+      assertEquals(0, client.pendingCount());
+      assertArrayEquals(
+          new byte[] {4, 5, 6},
+          client.exchange(
+              ID_1,
+              request(),
+              Duration.ofSeconds(2),
+              (id, body) -> {
+                sends.incrementAndGet();
+                assertTrue(client.onReply(id, new byte[] {4, 5, 6}));
+              }));
+      assertEquals(2, sends.get());
+      assertEquals(0, client.pendingCount());
+    }
+  }
+
+  @Test
+  void duplicateAndClockOverflowDoNotSendOrCancelOtherOwnershipAndReleasePermit() throws Exception {
+    MutableClock clock = new MutableClock(NOW);
+    ReplyCorrelationRegistry registry = new ReplyCorrelationRegistry(2);
+    PendingReply existing = registry.register(ID_1, NOW.plusSeconds(2), NOW).orElseThrow();
+    JmsRequestReplyClient client = new JmsRequestReplyClient(registry, clock, 1);
+    AtomicInteger sends = new AtomicInteger();
+    assertThrows(
+        IllegalStateException.class,
+        () ->
+            client.exchange(
+                ID_1, request(), Duration.ofSeconds(2), (id, body) -> sends.incrementAndGet()));
+    assertEquals(0, sends.get());
+    assertEquals(1, registry.pendingCount());
+    assertFalse(existing.completion().toCompletableFuture().isDone());
+    assertArrayEquals(
+        new byte[] {7},
+        client.exchange(
+            new UUID(0, 2),
+            request(),
+            Duration.ofSeconds(2),
+            (id, body) -> {
+              sends.incrementAndGet();
+              assertTrue(client.onReply(id, new byte[] {7}));
+            }));
+    assertEquals(1, registry.pendingCount());
+    assertFalse(existing.completion().toCompletableFuture().isDone());
+    assertTrue(registry.cancel(ID_1));
+    clock.set(Instant.MAX);
+    assertThrows(
+        java.time.DateTimeException.class,
+        () ->
+            client.exchange(
+                ID_1, request(), Duration.ofSeconds(2), (id, body) -> sends.incrementAndGet()));
+    assertEquals(1, sends.get());
+    assertEquals(0, registry.pendingCount());
+    clock.set(NOW);
+    assertArrayEquals(
+        new byte[] {8},
+        client.exchange(
+            ID_1,
+            request(),
+            Duration.ofSeconds(2),
+            (id, body) -> {
+              sends.incrementAndGet();
+              assertTrue(client.onReply(id, new byte[] {8}));
+            }));
+    assertEquals(2, sends.get());
+    assertEquals(0, registry.pendingCount());
+    byte[] maximum = new byte[1_000_000];
+    assertArrayEquals(
+        new byte[] {8},
+        client.exchange(
+            ID_1,
+            maximum,
+            Duration.ofSeconds(2),
+            (id, body) -> {
+              sends.incrementAndGet();
+              assertEquals(1_000_000, body.length);
+              body[0] = 9;
+              assertTrue(client.onReply(id, new byte[] {8}));
+            }));
+    assertEquals(0, maximum[0]);
+    assertEquals(3, sends.get());
+    assertEquals(0, registry.pendingCount());
+  }
+
+  // JMSCLIENT009010-END
 
   private static JmsRequestReplyClient client(Clock clock, int maximumConcurrent) {
     return new JmsRequestReplyClient(new ReplyCorrelationRegistry(), clock, maximumConcurrent);

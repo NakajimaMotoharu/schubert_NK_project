@@ -1,0 +1,30 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T07:15:24.471177+09:00",
+  "BUG": "BUG-2658",
+  "YKT": "YKT-2338",
+  "testPath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+  "testSha256": "7bc124d5f9f86aada3770344acc8bf09e74df159ca0f4d262339db8f995a62b2",
+  "originalTestMethods": 8,
+  "findings": [
+    "Configured1/12/20 executor TWR close unbounded although per-Future/latch wait finite",
+    "Interruption Test owns a Thread: finally join2000 has no postjoin terminal assertion on exception cleanup paths"
+  ],
+  "noHangObservedOrInferred": true,
+  "MainChanged": false,
+  "productTestsExecuted": 0,
+  "additionalRequiredNormalEstimateBeforePp": {
+    "low": 0.25,
+    "base": 0.65,
+    "high": 1.3
+  },
+  "capPp": 2,
+  "newDefinitionsPlanned": 2,
+  "newNegativeCases": [
+    "sender IAEx/NPE/Error original identity, cloned request unchanged, registration removed and capacity reusable",
+    "duplicate registration preserves existing pending/no send/permit reusable; clockInstant MAX overflow before registration/no send/permit reusable"
+  ],
+  "connectedWholeRunPlanned": "original Client8 +new2 +unchanged Registry7 +necessary literalTopology2 =19 in one fixed source/session; no old exec union",
+  "permission": "Public JDK-only Client/registry/promise/exception/interface and known current Protocol catalogue physical class; compile/runtime no provider factory/Artemis/client auth/backend/credential/Root/held4/key/FS/VM/native",
+  "timingDisposition": "SS321 explicitly producer call timeout2s and reply deadline/late behavior, SS312 exchange timeout2s. Absolute end-to-end/send-time subtraction not proven here; do not invent Main timing defect or change admitted timeout oracle to fit code. Timing remains individual criteria review, no Main patch."
+}

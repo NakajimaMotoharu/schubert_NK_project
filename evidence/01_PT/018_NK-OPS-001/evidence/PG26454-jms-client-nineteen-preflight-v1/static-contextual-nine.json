@@ -1,0 +1,74 @@
+[
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 133,
+    "sourceLine": "    Thread waiting =",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit self-owned Thread and1/12/20 worker fixtures; finally interrupt/join2/assert noalive and pool shutdownNow/assert await5, finite latches/futures. Not application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 134,
+    "sourceLine": "        new Thread(",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit self-owned Thread and1/12/20 worker fixtures; finally interrupt/join2/assert noalive and pool shutdownNow/assert await5, finite latches/futures. Not application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 143,
+    "sourceLine": "                interrupted.set(Thread.currentThread().isInterrupted());",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit self-owned Thread and1/12/20 worker fixtures; finally interrupt/join2/assert noalive and pool shutdownNow/assert await5, finite latches/futures. Not application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 171,
+    "sourceLine": "      ExecutorService executor = Executors.newFixedThreadPool(maximum);",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Single fixture pool is owned by explicit finite finally5; all paths release latch then stop/join with terminal assert. Actual normal process exit under90s is additionally required before PASS."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 171,
+    "sourceLine": "      ExecutorService executor = Executors.newFixedThreadPool(maximum);",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit self-owned Thread and1/12/20 worker fixtures; finally interrupt/join2/assert noalive and pool shutdownNow/assert await5, finite latches/futures. Not application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 177,
+    "sourceLine": "                executor.submit(",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit self-owned Thread and1/12/20 worker fixtures; finally interrupt/join2/assert noalive and pool shutdownNow/assert await5, finite latches/futures. Not application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 209,
+    "sourceLine": "        executor.shutdownNow();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit self-owned Thread and1/12/20 worker fixtures; finally interrupt/join2/assert noalive and pool shutdownNow/assert await5, finite latches/futures. Not application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 210,
+    "sourceLine": "        assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit self-owned Thread and1/12/20 worker fixtures; finally interrupt/join2/assert noalive and pool shutdownNow/assert await5, finite latches/futures. Not application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 413,
+    "sourceLine": "      Thread.currentThread().interrupt();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit self-owned Thread and1/12/20 worker fixtures; finally interrupt/join2/assert noalive and pool shutdownNow/assert await5, finite latches/futures. Not application/container worker creation."
+  }
+]
