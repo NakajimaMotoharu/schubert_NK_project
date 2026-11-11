@@ -1,0 +1,107 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T00:29:10.518201+09:00",
+  "source": "1f3566c3e8bcff381cafc10d20de211260d4e448",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "mainCandidates": [
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/TargetAdapter.java",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java"
+  ],
+  "targetInputs": {
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/TargetAdapter.java": "c73d16ee3183dc7315fe8b03ea1af83a4972f1061616f218884308b4e8cc9003",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/TargetAdapterTest.java": "69bf147d90936517c1d71d1499a52a2c09a256e409fe0c304568fc9bb5df5fbf",
+    "program/characterization/tests/resources/cases/catalog.json": "df412392032ad324a5e5dd92b0703c03287a7744af47aa42cd34a0a617e46d38"
+  },
+  "gateProductPins": {
+    "program/characterization/tests/java/dev/codex/schubert/characterization/GateContractValidatorNegativeTest.java": "c963648021fa5a09d166c8bd714886127c7708cbc14bb374fdf403fcce4144de",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java": "385f42c97c30755435b7ad5c956a9183aadfb4a406456fcbe4f7f87185b836ce",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionNumericTest.java": "5131f714aa4ca4f877f17a17d18180ee0e3921fb56ce1cb9f981483ffd4e22e3",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/GateBaselineMetadataTest.java": "1c9144508676a7c31f0a52684f43986a761fc18adcfdbd1bb5d949bd45fec700",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/GateEvidenceDocumentsTest.java": "d8d49a86e4e20c9ee50df74f3bbe75524d474ed94eed9f52918d0d679ecb4f7c",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/GateMetricsCountTest.java": "383b88a7ba3a8ea06d08d8188e413d292adf43896ce37be33ebff3abdc6d6173",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/GateSyntheticRunPortTest.java": "32ece82be553a3ad0f65576909989f3e5188536570c6d00a869c707cc38351b3",
+    "program/characterization/tests/resources/cases/gate-contract.json": "bd5d0b960a8544f1ea7d7c5621ee261a254c3d868da05abf175beda71b1d8ca9",
+    "program/characterization/tests/resources/cases/catalog.json": "df412392032ad324a5e5dd92b0703c03287a7744af47aa42cd34a0a617e46d38",
+    "program/characterization/tests/resources/cases/schema.json": "8116075a4a7915addf446845fc4a87f54431af96c274bd48c6fee59e981e23f8",
+    "program/characterization/tests/resources/cases/dif-allowlist.json": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6",
+    "program/characterization/tests/resources/browser/manifest.json": "470febbeabe77bbd7b8835baf4cb283c472775c15fa88df89db40bc05c6dbec3",
+    "program/characterization/tests/resources/cases/case-requirements.json": "f31eaff19732157415dccc960d85bf6a68e0eb188bf98b79d54a7c0887dea569",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java": "2179121f50f31183b2b2d04e19ad489d9fc601dead1083291db882a7a050a6f9"
+  },
+  "specification": {
+    "path": "evidence/01_PT/020_NK-CHR-001/001_NK-CHR-001_単体テスト仕様書.md",
+    "sha256": "ee1d568f470712894c6f54201cf2b6e92ad32f6d431adb3ff0c855797d315e6b"
+  },
+  "matrix": [
+    {
+      "id": "PT-CHR-NK-001",
+      "main": "program/characterization/src/main/java/dev/codex/schubert/characterization/TargetAdapter.java",
+      "tests": "program/characterization/tests/java/dev/codex/schubert/characterization/TargetAdapterTest.java",
+      "independentExpected": "Exactly24 shared catalog IDs; CURRENT23 exceptNK-onlyN01, NK24; explicit normalized HTTPS URI/path/artifact and null/unknown/overwrite rejection.",
+      "existingEvidence": {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG18716-gate-definitions-thirtyfive-v1/manifest.json",
+        "sha256": "0550ffe9016104b0eca82e0a13f2ef7a3687e97cf20d0f709b4f0c134c7115b3"
+      },
+      "scope": "All original three TargetAdapter methods and wholeSource counters existing; exact current Main/Test/catalog bytes matched.",
+      "decision": "CURRENT_BYTE_REUSE_REFERENCE_NOT_NEW_PT"
+    },
+    {
+      "id": "PT-CHR-G04-001",
+      "main": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "tests": "program/characterization/tests/java/dev/codex/schubert/characterization/GateContractTest.java",
+      "independentExpected": "Pinned environment/counts/tree/source manifest and same two run schema.",
+      "existingEvidence": {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG21140-gate-synthetic-sixty-v1/manifest.json",
+        "sha256": "1d672d4a736b9b14b684a73822ef1602ee4065b18aa171c37001bfaef7f360cd"
+      },
+      "scope": "Current Product inputs of synthetic Gate60 matched; original GateContractTest seven-method whole suite is not represented by this selected method set.",
+      "decision": "SYNTHETIC_GATE_SUBSET_REFERENCE_ORIGINAL_WHOLE_GAP"
+    },
+    {
+      "id": "PT-CHR-G04-002",
+      "main": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "tests": "program/characterization/tests/java/dev/codex/schubert/characterization/GateContractValidatorNegativeTest.java",
+      "independentExpected": "Arbitrary legacy placeholder/tree/manifest/env modifications reject; trusted843 baseline tree identity required.",
+      "existingEvidence": {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG21146-gate-independent-post-v1/manifest.json",
+        "sha256": "9183fc62c812cf8e8050c1122e5b876177bc9e0da1d0ed86eb52d5af03409408"
+      },
+      "scope": "Existing synthetic gate methods include exact acceptsActualBaselineCommit/rejectsAlteredBaseline cases; no new actual baseline data access.",
+      "decision": "EXISTING_CURRENT_INPUT_SYNTHETIC_REF_NOT_NEW_RUN"
+    },
+    {
+      "id": "PT-CHR-CLI-002",
+      "main": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "tests": "program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "independentExpected": "Temporary output atomically written; existing baseline overwrite rejects; no part residue.",
+      "existingEvidence": null,
+      "scope": "Source witness baselinePromotionIsImmutableCommitBoundAndSymlinkSafe; no current complete GateCli wholeSource four-counter qualification established by referenced adapter/gate evidence.",
+      "decision": "SOURCE_REVIEW_ONLY_DYNAMIC_QUALITY_GAP"
+    }
+  ],
+  "baseline": {
+    "originalCommit": "843de94",
+    "gitTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+    "currentGitTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+    "workingDiff": "",
+    "actualBaselineFilesRead": false,
+    "written": false
+  },
+  "existingAdapterMethodsReferenced": 3,
+  "existingGateTestsReferenced": 60,
+  "sourceDeclarationsDifferFromProductionCoreAndNotCombined": true,
+  "gateCliCompleteSourceQualified": false,
+  "missing": [
+    "Complete original GateCli wholeSource quality/oracle/source evidence, without executing unknown or actual backend paths.",
+    "F02 external ending dependency NOT_ACCEPTED; child acceptance blocked but independent work continues."
+  ],
+  "decision": "NOT_ACCEPTED",
+  "externalDependency": "WBS-F02",
+  "productTestsExecuted": 0,
+  "newCoverageMeasurements": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "toolSha256": "28d7f3eb4b20aa36a70b1e52fa2b96428454a34be1ae94cc99314ded586f3db9"
+}
