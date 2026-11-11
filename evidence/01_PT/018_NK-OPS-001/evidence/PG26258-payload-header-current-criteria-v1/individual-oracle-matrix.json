@@ -1,0 +1,163 @@
+[
+  {
+    "testId": "PT-PRO-002-P07",
+    "case": "PayloadGoldenVectorTest#allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes",
+    "independentExpected": "64 canonical min/max data/record and31 generic error fixed hash oracles; these are low-level codec bounds, not semantically valid business messages.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-P08",
+    "case": "PayloadGoldenVectorTest#everyRepeatingLayoutAcceptsItsMaximumRecordBoundary",
+    "independentExpected": "14 layouts max records/total from independent UI233 limits, not SUT-derived expected.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-P09",
+    "case": "PayloadGoldenVectorTest#sharedCodecProducesIdenticalBytesUnderConcurrentUse",
+    "independentExpected": "Eight threads, literal384 bytes, latch/get/termination bounded10s and finally shutdown; no mutable singleton state.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-P03",
+    "case": "PayloadCodecTest#encodeRejectsUnknownMissingWrongTypeAndRecordViolations",
+    "independentExpected": "Fixed/unknown field, missing/wrongkind, record count/null rejects before wire result.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-M02",
+    "case": "PayloadCodecTest#decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers",
+    "independentExpected": "Exact declared lengths, null references/elements, fixed/reserved/error filler corruption reject typed errors.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-CODEC-AUTHERR-001",
+    "case": "AuthenticationErrorProfileTest#loginLockAndFailurePreserveOnlyApprovedErrorFields",
+    "independentExpected": "432 literalbytes; retry offsets167/6, locked0/1/900; usermessage176/256; success-only data spaces, count0.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-CODEC-AUTHERR-002",
+    "case": "AuthenticationErrorProfileTest#malformedLoginErrorBoundariesAndTypesAreRejected",
+    "independentExpected": "Retry901/negative/wrongkind/missing; message256/257bytes/control/null; forbidden fields and filler mismatch.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-CODEC-AUTHERR-003",
+    "case": "AuthenticationErrorProfileTest#allOtherResponseErrorProfilesRetainTheirIndividualContracts",
+    "independentExpected": "31 response layouts/error codes, Login onlytwofield/Cancel0107state only, other29 blank/zero records0.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-E02",
+    "case": "PayloadCodecTest#resultCodeProfilePreservesOnlyTheApprovedCancellationConflictState",
+    "independentExpected": "NTC0107 exactly PROCESSING/COMPLETED/ERROR and unset cancel time; rejected unknown/omitted/wrongtype.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-H01",
+    "case": "MessageCodecTest#headerEncodingMatchesIndependentUi232GoldenVector",
+    "independentExpected": "Literal256byte header positional expected, fixed magic/version/QS/JST/UUID/rootrelation/length/reserved.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-H01-RSP-EVT",
+    "case": "MessageCodecTest#responseAndEventHeadersRoundTripWithoutLeakingContext",
+    "independentExpected": "Independent literal256 response andevent expected, context64 vs spaces, IDs/result andtotal.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-H02",
+    "case": "MessageCodecTest#headerDecoderRejectsEveryFixedFieldAndProfileCorruption",
+    "independentExpected": "Single-field byte corruption, versions/reserved/result/context/IDs/declaredformula typedrejection.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-T01",
+    "case": "MessageCodecTest#transportAndRouteContractsRejectEveryMismatch",
+    "independentExpected": "Pure transport metadata Bytes/persistent2/protocol001/IDs/layout/correlation/dest/reply/expiry exact; null and onefault mismatch; no actual JMS object/provider.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-TNULL",
+    "case": "MessageCodecTest#metadataAndExpectedRouteEstablishNullAndRangeContracts",
+    "independentExpected": "Metadata/route null andrange contracts at immutable construction; no connected broker/client.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-M01",
+    "case": "MessageCodecTest#fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes",
+    "independentExpected": "Exact encodedbody bounds, overflow/short/oversize/length mismatch before any business dispatch.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-P06/pageConstantsCountsAndArithmeticAreEnforced",
+    "case": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#pageConstantsCountsAndArithmeticAreEnforced()",
+    "independentExpected": "Explicit valid literal field fixtures and one-condition invalid mutations of UI234236/SS322§9; original authored assertions retained, no database business-state claim.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-P06/listRecordConditionsAndOrderingAreEnforced",
+    "case": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#listRecordConditionsAndOrderingAreEnforced()",
+    "independentExpected": "Explicit valid literal field fixtures and one-condition invalid mutations of UI234236/SS322§9; original authored assertions retained, no database business-state claim.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-P06/deletedNotificationNeverContainsAnswer",
+    "case": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#deletedNotificationNeverContainsAnswer()",
+    "independentExpected": "Explicit valid literal field fixtures and one-condition invalid mutations of UI234236/SS322§9; original authored assertions retained, no database business-state claim.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-P06/scenarioInlineAndLargeFileConditionsAreEnforced",
+    "case": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#scenarioInlineAndLargeFileConditionsAreEnforced()",
+    "independentExpected": "Explicit valid literal field fixtures and one-condition invalid mutations of UI234236/SS322§9; original authored assertions retained, no database business-state claim.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-P06/notificationCancellationAndQuestionStateConditionsAreEnforced",
+    "case": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#notificationCancellationAndQuestionStateConditionsAreEnforced()",
+    "independentExpected": "Explicit valid literal field fixtures and one-condition invalid mutations of UI234236/SS322§9; original authored assertions retained, no database business-state claim.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-P06/receiptWebAndDefensiveContractsAreEnforced",
+    "case": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#receiptWebAndDefensiveContractsAreEnforced()",
+    "independentExpected": "Explicit valid literal field fixtures and one-condition invalid mutations of UI234236/SS322§9; original authored assertions retained, no database business-state claim.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-P06/loginUserPasswordDateAndSessionRulesAreEnforced",
+    "case": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#loginUserPasswordDateAndSessionRulesAreEnforced()",
+    "independentExpected": "Explicit valid literal field fixtures and one-condition invalid mutations of UI234236/SS322§9; original authored assertions retained, no database business-state claim.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  },
+  {
+    "testId": "PT-PRO-002-P06/mediaAnimationAndMusicConditionsAreEnforced",
+    "case": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest#mediaAnimationAndMusicConditionsAreEnforced()",
+    "independentExpected": "Explicit valid literal field fixtures and one-condition invalid mutations of UI234236/SS322§9; original authored assertions retained, no database business-state claim.",
+    "actual": "PASSED_IN_SAME_NORMAL124_PINNED_RUN",
+    "rawPerVectorCaptureClaimed": false
+  }
+]

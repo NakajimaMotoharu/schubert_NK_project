@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-12T05:24:07.122">
+<error filename="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathUnicodeBoundaryTest.java" msg="ContextedRuntimeException: java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 6
+Exception Context:
+	[1:Rule applied on node=!debug only! [StringLiteral:38:9]&quot;𐀀&quot;]
+---------------------------------">
+<![CDATA[org.apache.commons.lang3.exception.ContextedRuntimeException: java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 6
+Exception Context:
+	[1:Rule applied on node=!debug only! [StringLiteral:38:9]"𐀀"]
+---------------------------------
+	at net.sourceforge.pmd.util.AssertionUtil.contexted(AssertionUtil.java:265)
+	at net.sourceforge.pmd.lang.rule.internal.RuleApplicator.applyOnIndex(RuleApplicator.java:79)
+	at net.sourceforge.pmd.lang.rule.internal.RuleApplicator.apply(RuleApplicator.java:57)
+	at net.sourceforge.pmd.lang.rule.internal.RuleSets.apply(RuleSets.java:183)
+	at net.sourceforge.pmd.lang.impl.PmdRunnable.processSource(PmdRunnable.java:140)
+	at net.sourceforge.pmd.lang.impl.PmdRunnable.run(PmdRunnable.java:80)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 6
+	at net.sf.saxon.str.StringTool.fromCharSequence(StringTool.java:107)
+	at net.sf.saxon.value.StringValue.<init>(StringValue.java:106)
+	at net.sf.saxon.value.StringValue.<init>(StringValue.java:91)
+	at net.sourceforge.pmd.lang.rule.xpath.internal.DomainConversion.getAtomicRepresentation(DomainConversion.java:135)
+	at net.sourceforge.pmd.lang.rule.xpath.internal.DomainConversion.convert(DomainConversion.java:62)
+	at net.sourceforge.pmd.lang.rule.xpath.internal.AstAttributeNode.atomize(AstAttributeNode.java:73)
+	at net.sf.saxon.expr.Atomizer.getAtomizingIterator(Atomizer.java:600)
+	at net.sf.saxon.expr.Atomizer$AtomizerElaborator.lambda$elaborateForPull$0(Atomizer.java:679)
+	at net.sf.saxon.expr.AtomicSequenceConverter$AtomicSequenceConverterElaborator.lambda$elaborateForPull$0(AtomicSequenceConverter.java:536)
+	at net.sf.saxon.expr.CardinalityChecker$CardinalityCheckerElaborator.lambda$elaborateForPull$0(CardinalityChecker.java:506)
+	at net.sf.saxon.expr.elab.LazyPullEvaluator.evaluate(LazyPullEvaluator.java:39)
+	at net.sf.saxon.expr.SystemFunctionCall$SystemFunctionCallElaborator.lambda$elaborateForPull$2(SystemFunctionCall.java:618)
+	at net.sf.saxon.expr.FilterExpression$FilterExprElaborator$PositionalFilteredIterator.next(FilterExpression.java:1332)
+	at net.sourceforge.pmd.lang.rule.xpath.internal.SaxonXPathRuleQuery.evaluate(SaxonXPathRuleQuery.java:127)
+	at net.sourceforge.pmd.lang.rule.xpath.XPathRule.apply(XPathRule.java:101)
+	at net.sourceforge.pmd.lang.rule.RuleReference.apply(RuleReference.java:413)
+	at net.sourceforge.pmd.lang.rule.internal.RuleApplicator.applyOnIndex(RuleApplicator.java:77)
+	... 9 more
+]]>
+</error>
+</pmd>

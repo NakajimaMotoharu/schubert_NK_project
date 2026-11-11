@@ -1,0 +1,170 @@
+[
+  {
+    "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+    "line": 169,
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Fresh invocation-only local ordered/fixture map, not shared container state; immutable return or synchronous Test consumer. ConcurrentHashMap would discard intended insertion-order contract.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java",
+    "line": 22,
+    "rule": "CompareObjectsWithEquals",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Throwable identity guard deliberately avoids Java self-suppression; equality of distinct Throwable is not the ownership condition.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java",
+    "line": 18,
+    "rule": "CompareObjectsWithEquals",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Throwable identity guard deliberately avoids Java self-suppression; equality of distinct Throwable is not the ownership condition.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+    "line": 161,
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Owner closes fixed executor in finally with shutdownNow and asserted termination10; borrowed jobs finish bounded future/get; no unbounded worker.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+    "line": 161,
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "JUnit standalone memory-only concurrency oracle; no application-container managed thread policy. Both fixed executors finally shutdownNow and bounded awaitTermination10.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+    "line": 166,
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "JUnit standalone memory-only concurrency oracle; no application-container managed thread policy. Both fixed executors finally shutdownNow and bounded awaitTermination10.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+    "line": 181,
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "JUnit standalone memory-only concurrency oracle; no application-container managed thread policy. Both fixed executors finally shutdownNow and bounded awaitTermination10.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+    "line": 182,
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "JUnit standalone memory-only concurrency oracle; no application-container managed thread policy. Both fixed executors finally shutdownNow and bounded awaitTermination10.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+    "line": 88,
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Fresh invocation-only local ordered/fixture map, not shared container state; immutable return or synchronous Test consumer. ConcurrentHashMap would discard intended insertion-order contract.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+    "line": 93,
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Fresh invocation-only local ordered/fixture map, not shared container state; immutable return or synchronous Test consumer. ConcurrentHashMap would discard intended insertion-order contract.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+    "line": 101,
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Fresh invocation-only local ordered/fixture map, not shared container state; immutable return or synchronous Test consumer. ConcurrentHashMap would discard intended insertion-order contract.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+    "line": 187,
+    "rule": "NullAssignment",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Deliberate independent null-contract negative fixture, not production normal-state null assignment.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+    "line": 194,
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Fresh invocation-only local ordered/fixture map, not shared container state; immutable return or synchronous Test consumer. ConcurrentHashMap would discard intended insertion-order contract.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+    "line": 240,
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Fresh invocation-only local ordered/fixture map, not shared container state; immutable return or synchronous Test consumer. ConcurrentHashMap would discard intended insertion-order contract.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+    "line": 180,
+    "rule": "NullAssignment",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Deliberate independent null-contract negative fixture, not production normal-state null assignment.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+    "line": 209,
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Owner closes fixed executor in finally with shutdownNow and asserted termination10; borrowed jobs finish bounded future/get; no unbounded worker.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+    "line": 209,
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "JUnit standalone memory-only concurrency oracle; no application-container managed thread policy. Both fixed executors finally shutdownNow and bounded awaitTermination10.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+    "line": 211,
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "JUnit standalone memory-only concurrency oracle; no application-container managed thread policy. Both fixed executors finally shutdownNow and bounded awaitTermination10.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+    "line": 212,
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "JUnit standalone memory-only concurrency oracle; no application-container managed thread policy. Both fixed executors finally shutdownNow and bounded awaitTermination10.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+    "line": 219,
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "JUnit standalone memory-only concurrency oracle; no application-container managed thread policy. Both fixed executors finally shutdownNow and bounded awaitTermination10.",
+    "actualViolation": false
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+    "line": 220,
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "JUnit standalone memory-only concurrency oracle; no application-container managed thread policy. Both fixed executors finally shutdownNow and bounded awaitTermination10.",
+    "actualViolation": false
+  }
+]

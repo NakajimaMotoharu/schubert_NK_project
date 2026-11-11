@@ -21,6 +21,7 @@ public final class DisplayPath {
     Objects.requireNonNull(input, "input");
     String value = Normalizer.normalize(input, Normalizer.Form.NFC);
     if (value.isEmpty()
+        || !StandardCharsets.UTF_8.newEncoder().canEncode(value)
         || PathSyntax.isAbsoluteOrDriveQualified(value)
         || value.getBytes(StandardCharsets.UTF_8).length > MAXIMUM_WIRE_BYTES
         || PathSyntax.containsControl(value)

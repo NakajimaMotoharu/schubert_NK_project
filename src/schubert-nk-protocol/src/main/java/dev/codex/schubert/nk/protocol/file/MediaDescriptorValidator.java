@@ -102,6 +102,7 @@ public final class MediaDescriptorValidator {
   private static void validateCanonicalText(
       String fieldName, String value, int maximumBytes, boolean forbidAllControls) {
     if (value.isEmpty()
+        || !StandardCharsets.UTF_8.newEncoder().canEncode(value)
         || !Normalizer.isNormalized(value, Normalizer.Form.NFC)
         || value.getBytes(StandardCharsets.UTF_8).length > maximumBytes
         || value.endsWith(" ")) {

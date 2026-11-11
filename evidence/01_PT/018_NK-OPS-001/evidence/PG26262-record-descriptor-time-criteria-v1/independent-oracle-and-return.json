@@ -1,0 +1,62 @@
+[
+  {
+    "owner": "WBS-P002-04",
+    "expected": "Typed PermanentProtocolException message/cause without raw input; malformed UTF8 and arithmetic overflow actual causes preserved, semantic range cause absent. Same source exceptions triggered in FieldCodecTest and message/error profiles.",
+    "testIds": [
+      "PT-CODEC-EXC-001",
+      "PT-PRO-002-E01",
+      "PT-PRO-002-E02"
+    ],
+    "currentHostCriteriaVerified": [
+      "contract",
+      "scope",
+      "quality"
+    ],
+    "naturalBranchZeroIsNA": true
+  },
+  {
+    "owner": "WBS-P003-01",
+    "expected": "Headerless exact4800 records; independent9600bytes/digest, all32 digest-byte tamper, max10000/48000000 using generated memory-only stream, count/length/null/short/extra/IO/zero-read and SHA mismatch rejects.",
+    "testIds": [
+      "PT-PRO-003-H01",
+      "LargeResultRecordCodecTest#acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum"
+    ],
+    "currentHostCriteriaVerified": [
+      "contract",
+      "scope",
+      "quality"
+    ],
+    "externalFileOrRootIoUsed": false,
+    "streamOwnership": "Input/output supplied by caller and caller closes; stream codec never closes a borrowed stream; no opened filesystem resources."
+  },
+  {
+    "owner": "WBS-P003-02",
+    "expected": "Seven SSC004 MIME/extension pairs and64/512/256 UTF8/N12 bounds already pass, but invalid UTF16 surrogate rejection has a source gap and no independent normal case yet.",
+    "testIds": [
+      "PT-PRO-003-M03",
+      "PT-PRO-003-M04"
+    ],
+    "currentHostCriteriaVerified": [
+      "scope"
+    ],
+    "contractAndQualityReturned": true,
+    "bug": "BUG-2648",
+    "reproductionStatus": "NOT_RUN",
+    "actualPassClaimedForNewInput": false
+  },
+  {
+    "owner": "WBS-P003-03",
+    "expected": "JST strict17digits, fixed leap-date/literal UTC09h mapping and independent historical LMT literal; millisecond precision, year0000/9999 edges, expanded year/InstantMIN/MAX/null/invalid digits/calendar rejects. Caller header andtyped data prevent adjacent overwrites.",
+    "testIds": [
+      "PT-PRO-003-T03",
+      "PT-PRO-003-T04",
+      "PT-PRO-003-T05",
+      "JstWireTimestampTest#formatsAndParsesStrictJstMilliseconds"
+    ],
+    "currentHostCriteriaVerified": [
+      "contract",
+      "scope",
+      "quality"
+    ]
+  }
+]

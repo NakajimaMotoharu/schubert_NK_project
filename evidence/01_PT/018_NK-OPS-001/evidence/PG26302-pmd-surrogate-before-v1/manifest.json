@@ -1,0 +1,16 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T05:25:54.053148+09:00",
+  "status": "PMD5_PROCESSING_ERRORS_NOT_STATIC_PASS",
+  "sourceHashes": {
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorUnicodeBoundaryTest.java": "5ddded00ec518af10a1367dec373917d1cacfaaf16cccdd4a433ef05c39ddf96",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathUnicodeBoundaryTest.java": "366886333c78ada2eb0bc2612745b2b82cab8897027b05f82fdcaea194d40fa4"
+  },
+  "originalWholeStatic": "PG26282 pmd5 processingErrors2/raw22/CS0/SB0",
+  "changedPathStatic": "PG26292 pmd5 processingErrors1/CS0",
+  "sourceOfError": "PMD7.28 XPath Saxon StringTool receives malformed UTF16 decoded StringLiteral attribute; no product or permission failure",
+  "proposed": "Construct exact same eight malformed UTF16 strings from explicit char code units at runtime; retain independent expected rejection and full static rules, no suppression/exclusion. Fresh Test compilation needed, unchanged Main compile/static retained.",
+  "bug": "BUG-2651",
+  "ykt": "YKT-2331",
+  "productTestsExecuted": 0
+}

@@ -1,0 +1,21 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T05:09:38.601165+09:00",
+  "status": "SOURCE_GAP_REGISTERED_BEFORE_FIX_REPRO_PENDING_NOT_TEST_FAILURE",
+  "productionCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "source": {
+    "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+    "sha256": "270d7dff5951b47086836bb2f49ca526ebc4c03581a0cce8f9fcd3f8e950727d"
+  },
+  "originalTest": {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidatorTest.java",
+    "sha256": "97faf48280d3d1e6fdf24cae984fae531f718545274c4567f9ca4c26b163ab34"
+  },
+  "observation": "validateCanonicalText uses replacement-capable String.getBytes(UTF_8) for byte bounds, without UTF16 scalar validity check; malformed surrogate inputs absent from existing Media test. Other FieldCodec uses REPORT; actual normal reproduction pending.",
+  "expected": "Reject unpaired UTF16 in logical ID/storage relative path/display name without replacement; accept valid supplementary pairs and true byte bounds. UI232 UTF8 strict / UI235MEDIA1024 / SS3224.1 and333 display NFC UTF8 contract.",
+  "actualRuntime": null,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "bug": "BUG-2648",
+  "ykt": "YKT-2328"
+}

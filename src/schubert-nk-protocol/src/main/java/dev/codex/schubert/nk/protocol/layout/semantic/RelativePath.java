@@ -27,6 +27,7 @@ public final class RelativePath {
 
   private static void validate(String value) {
     if (value.isEmpty()
+        || !StandardCharsets.UTF_8.newEncoder().canEncode(value)
         || PathSyntax.isAbsoluteOrDriveQualified(value)
         || value.endsWith("/")
         || value.indexOf('\\') >= 0

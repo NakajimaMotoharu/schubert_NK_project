@@ -1,0 +1,42 @@
+package dev.codex.schubert.nk.protocol.layout.semantic;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+/** UI243/SS323333 canonical value invariants, BUG2648/YKT2328; no filesystem resolution. */
+class PathUnicodeBoundaryTest {
+  @Test // PT-PRO-PATH-U16-001
+  void relativePathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars() {
+    for (String invalid : malformedValues()) {
+      assertThrows(IllegalArgumentException.class, () -> RelativePath.of("directory/" + invalid));
+    }
+    for (String scalar : List.of("\ud800\udc00", "\ud83d\ude00", "\udbff\udfff")) {
+      assertEquals("directory/" + scalar, RelativePath.of("directory/" + scalar).wireValue());
+    }
+  }
+
+  @Test // PT-PRO-PATH-U16-002
+  void displayPathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars() {
+    for (String invalid : malformedValues()) {
+      assertThrows(IllegalArgumentException.class, () -> DisplayPath.of("directory/" + invalid));
+    }
+    for (String scalar : List.of("\ud800\udc00", "\ud83d\ude00", "\udbff\udfff")) {
+      assertEquals("directory/" + scalar, DisplayPath.of("directory/" + scalar).wireValue());
+    }
+  }
+
+  private static List<String> malformedValues() {
+    return List.of(
+        "\ud800",
+        "\udfff",
+        "\ud800x",
+        "x\udfff",
+        "\ud800\ud800",
+        "\udfff\udfff",
+        "\udfff\ud800",
+        "\ud83d\ude00\ud800");
+  }
+}
