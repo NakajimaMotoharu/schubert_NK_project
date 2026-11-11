@@ -506,6 +506,47 @@ class WebBusinessWireClientsTest {
     }
   }
 
+  @Test
+  void wire013ProviderNullFailuresEraseCloneAndReleaseEachFacadeCapacity() {
+    // PT-WEB-S3WIRE013: independent literal18 request vectors; no backend or grant.
+    for (String type : TYPES) {
+      var wire = new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 1);
+      var sent = new ArrayList<byte[]>();
+      var original = new NullPointerException("synthetic-provider-fault");
+      JmsRequestSender failing =
+          (id, body) -> {
+            assertArrayEquals(request(type, id, CONTEXT.wireValue()), body);
+            sent.add(body);
+            throw original;
+          };
+      var client = facade(group(type), wire, failing, CLOCK, () -> ID, WAIT);
+      assertSame(
+          original,
+          assertThrows(NullPointerException.class, () -> client.apply(input(type), CONTEXT)));
+      assertEquals(1, sent.size());
+      assertEquals(0, wire.pendingCount());
+      assertArrayEquals(new byte[sent.getFirst().length], sent.getFirst());
+      // Explicit fresh invocation verifies one-slot capacity recovery; not an automatic retry.
+      var next = new UUID(0, 2);
+      JmsRequestSender accepted =
+          (id, body) -> {
+            assertEquals(next, id);
+            assertArrayEquals(request(type, id, CONTEXT.wireValue()), body);
+            sent.add(body);
+            assertTrue(
+                wire.onReply(id, response(type, ERROR_RESULT_CODE, id, CONTEXT.wireValue())));
+          };
+      var fresh = facade(group(type), wire, accepted, CLOCK, () -> next, WAIT);
+      var reply = fresh.apply(input(type), CONTEXT);
+      assertEquals(ERROR_RESULT_CODE, reply.resultCode().wireValue());
+      assertTrue(reply.payload().isEmpty());
+      assertEquals(2, sent.size());
+      assertEquals(0, wire.pendingCount());
+      assertEquals(0, wire.lateReplyCount());
+      sent.forEach(body -> assertArrayEquals(new byte[body.length], body));
+    }
+  }
+
   // UI234 PAGED48 and UI236 section 11.3: independent absolute offsets, no Main encoder/catalog.
   private static byte[] questionPageVector(int count) {
     byte[] bytes =

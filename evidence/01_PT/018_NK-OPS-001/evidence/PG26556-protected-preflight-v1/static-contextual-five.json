@@ -1,0 +1,42 @@
+[
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest.java",
+    "line": 361,
+    "sourceLine": "    var pool = Executors.newFixedThreadPool(8);",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "The fixture pool owner close in explicit finally with shutdownNow and awaitTermination10 terminal assertion, avoiding unbounded ExecutorService.close. Actual job exit is also required."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest.java",
+    "line": 361,
+    "sourceLine": "    var pool = Executors.newFixedThreadPool(8);",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit explicitly owns the pool; finite latches/Futures, finally shutdownNow/await10 asserted on all exits, interrupt flag deliberately set and cleared in finally for negative test. No application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest.java",
+    "line": 367,
+    "sourceLine": "            pool.submit(",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit explicitly owns the pool; finite latches/Futures, finally shutdownNow/await10 asserted on all exits, interrupt flag deliberately set and cleared in finally for negative test. No application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest.java",
+    "line": 388,
+    "sourceLine": "      pool.shutdownNow();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit explicitly owns the pool; finite latches/Futures, finally shutdownNow/await10 asserted on all exits, interrupt flag deliberately set and cleared in finally for negative test. No application/container worker creation."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest.java",
+    "line": 389,
+    "sourceLine": "      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone normal JUnit explicitly owns the pool; finite latches/Futures, finally shutdownNow/await10 asserted on all exits, interrupt flag deliberately set and cleared in finally for negative test. No application/container worker creation."
+  }
+]

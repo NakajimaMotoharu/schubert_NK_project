@@ -1,0 +1,448 @@
+# NK-WEB-001 単体テスト仕様書
+
+2026-11-09品質是正：PT-WEB032..035原4のworker所有終了/集約待機を有限化、既Futureget20と全元期待を保持。018/3985-3986、BUG2612、Sourcee5a1c9d/Main7aed、25718真正4/0→25720独立9e74d913/1Source1Code四100・実CRC1/SDK0。固定vector/消去/redaction/全65長さ・195文字変異・128長さ差/自己生成100を検証、実session/実鍵/HTTP0、生成値非保存。旧正式Web05/660/全体1964-53を上書き・合算しない。
+
+
+2026-10-22 rollback分類追補：PT-WEB-SESSION-ATTACH329001～003/SessionRollbackAttachment329TestとEncryptedWebSessionRepository.transactionの仕様・独立oracle・前提・所有counterは[018/1453](../018_NK-OPS-001/1453_WebSession_rollback_secondary単体テスト仕様.md)。setAutoCommit失敗前提でsession/CSRF生成・DB実処理へ進まないproxy試験と、既自己所有DB domainを区別する。SS312/314/331/332/354/SSC329330/BUG1592、未実行/別source成功を旧正式認定へ合算しない。
+
+## BUG-247 / PT-WEB-296 Web session不正row＋ResultSet.close複合故障（2026-09-24）
+
+Program `NK-WEB-001`、`JdbcWebSessionStore.findLocked/read`、`EncryptedWebSessionRepository.find`、`JdbcWebSessionStoreTest#web296MalformedRowWithResultCloseFailureIsInfrastructureNotInvalidation`、`EncryptedWebSessionRepositoryTest#web297MalformedRowAndResultCloseFailureRollsBackWithoutDeletingSession`、`JdbcWebSessionStoreTest#web298MalformedRowWithFatalResultClosePropagatesFatalWithoutInvalidation`。RD AUT-001～004、UI226、SS314 §7.2.4/332、442、YKT-154/162。隔離PostgreSQL18へ正常row1をseedし、公開JDBC proxyで取得済み`id`をnullへ置換、`ResultSet.close`を別`SQLDataException`で失敗させる。R296の期待はexact `SessionStoreException`（`InvalidSessionRowException`でない）、固定message、cause/suppressed0、result/statement close各1、借用connection open、rollback後SQL row1。R297は外側のrollback1/追加commit0/削除0、故障解除後に同じsessionを再取得する。R298は同じ不正値投影とclose時の`Error`を複合し、fatal同一性、外部suppressed0、close各1/借用connection維持/row残置を確認する。保存値不正単独の行無効化契約と、資源close失敗なら不在・削除へ進めないSS314/442契約から独立に算出し、Production codeをexpected生成へ使わない。provider未知値、null/境界も既存PTで確認する。補正済み修正前R296選択runは1件failure/exit1（期待exact固定基盤障害、実Invalid下位型）。修正後R296/297/298選択成功。R298初回のsuppressed=1想定は内部markerを外部へ保持しない契約に合わず試験oracle誤りとして不認定、0へ補正した。正式実行command・環境・対象commit・coverage・結果・関連BUG/SSC・sanitized RED/hashは002と本Program `evidence/manifest.json`へ固定する。raw session/cookie/token、SQL parameter、credentialを保存しない。
+
+## PG262 / PT-SCR-135拡張：Login→Scenario一覧→Logの同一HTTP runtime（2026-09-24）
+
+正式`PT-WEB-20260924-60`/source`71c79c4b7`で限定認定。環境・coverage・証跡hashは002/manifest参照。下段の「正式全reactorは後続」は選択段階の履歴。
+
+Program `NK-WEB-001`、`ScenarioLogMvcConfiguration`、`WebLogApplicationRuntime.startWithScenario/startPath`、`WebLogApplicationRuntimeTest#scr135RealHttpAdminLogSearchUsesProductionApiBroker`。RD FUN-004/008/AUT-001/002/MQ-003～008、UI221～225/231/235、SS311/313/314/321/323/324/342/352。隔離PG18/Flyway、実Artemis、実HTTP Tomcat、合成ADMIN account/独立PBKDF2 hashをfixtureにする。GET `/login`はtitle「schubert NK - ログイン」とCSRF、POSTは302/rotated Secure・HttpOnly cookie、GET `/logs?action=PTSCR135`は200/指定1行、同cookieでGET `/scenarios`は200/`h1`「Scenario Games」。API側のProduction Scenario graphでGAMREQ01を処理し、request_inboxにCOMPLETED1行、Log照会もLGSREQ01 COMPLETED1行を独立SQL後条件として確認する。期待HTTP/DOM/DB値はUI/SSの固定値とFixture SQLから設定し、Production responseをexpected生成へ流用しない。正常・認証cookie・同runtime登録・DB/JMS縦結線を対象とし、null/異常/rollback/再送/closeは既存PT-SCR-127～135およびScenario PTへ追跡する。file publisher/inspectorはGAM非使用の試験境界であり、実file接続、OS root admission、process起動、実NK CHR-L01は本caseに算入しない。実行command・環境・対象commit・coverage・結果・関連BUG/SSC・証跡path/hashは002と本Program `evidence/manifest.json`を参照。選択試験およびWeb module `clean verify`は通過、正式全reactorは後続。
+
+## 2026-09-24 追加Resource反例（BUG-228/YKT-162）
+
+対象は`JdbcWebSessionStore.read/findLocked`、`EncryptedWebSessionRepository.load/find`。RD AUT-001～004、UI226、SS314 §7.2.4/332。実PGへ正常な暗号化session rowを1件保存し、公開JDBC proxyだけで`ResultSet.getObject`から固定markerの未知`IllegalArgumentException`を投げる。expectedはProduction methodから算出せず、SS314の「不正rowだけ削除、不明resource故障は固定Infrastructure/rollback」から設定する。raw session/cookie/tokenやprovider詳細は証跡へ保存しない。
+
+| Test ID | Class#method | 事前条件・入力/操作 | 独立期待 |
+|---|---|---|---|
+| PT-WEB-294 | JdbcWebSessionStoreTest#web294ProviderGetterFailureNeverBecomesInvalidRow | 正常row、borrowed TX。getter未知IAE単独とResultSet.close SQLを複合注入 | exact `SessionStoreException`（`InvalidSessionRowException`ではない）、固定message・cause/suppressed0、result/statement close各1、借用connectionは開いたまま、rollback後row1 |
+| PT-WEB-295 | EncryptedWebSessionRepositoryTest#web295ProviderGetterFailureRollsBackWithoutDeletingSession | 正常匿名session作成後のfindにgetter未知IAE。次に故障を解除して同IDを再find | 初回は固定`SessionStoreException`、rollback1、row削除0/commitなし、次回同sessionを正常取得。異常を「不在」へ変換しない |
+
+選択RED/修正後GREENを障害表BUG-228へ対応付ける。正式runの環境・command・commit、Java line/method/class/branch全100%、静的解析、結果/manifest/hashは本Programの`evidence/manifest.json`と実行結果002へ追記する。実Web/API起動・実NK CHRは別未完了条件。
+
+## 1. 対象・scope
+
+Program NK-WEB-001（関連NK-AUT-001）。FUN-001/AUT-001～004/MQ-021、UI221/226、SS311/313/314 §7～8/352 §3、PG-D-093。Productionはsrc/schubert-nk-web、Class `.web.session.WebSessionId` と `.web.security.SavedRequestTarget`。Spring Session repository/security/form/mapper/error/HTTP wiringは後続仕様化し、本8件だけでProgram完了としない。
+
+## 2. Session ID・SavedRequest境界（正式Web01で実施済み）
+
+PT-WEB-001～008は正式PT-WEB-20260908-01/source04aa4b8で全PASS。全633件/Web84・全coverage100%/静的解析0。新規BUGなし。boundary-exploration.md/002/manifestにcommand/環境/commit/日時/Test ID/期待・実際/path/hashを固定。本8件の合格は暗号/session repository/Spring/HTTPの完了を意味しない。
+
+合成32byte CSPRNG入力と固定base64url/SHA-256 vector、明示URL文字列を使用する。Production methodでexpectedを作らない。秘密値はJUnit本文/manifestに記録しない。
+
+| Test ID | Class#method | 目的・fixture/input/操作 | 独立期待 |
+|---|---|---|---|
+| PT-WEB-001 | WebSessionIdTest#web001CanonicalIdsAndIndependentHashes | 固定0/連番/FF 32byte、canonical43文字、parse/generate/hash/cookie明示access | 独立base64urlとSHA-256固定vector、toStringはredacted、raw/hash非表示 |
+| PT-WEB-002 | #web002NullLengthAlphabetAndUnusedBitsReject | API null、0/42/44文字、padding/+///space/control/不正末尾padbit | 固定秘密非保持のvalidation例外、canonicalでない同値表現を拒否 |
+| PT-WEB-003 | #web003GenerationOwnsAndErasesRandomBuffers | 注入SecureRandomの固定正常/途中provider失敗、caller契約・一時byte寿命 | CSPRNG出力32byte、成功/失敗とも一時buffer全zero、成功だけ有効ID |
+| PT-WEB-004 | #web004ConcurrentIdsAndHashesShareNoMutableDigest | 100並行・実CSPRNGと固定入力hash | 全ID unique/32byte/canonical、全hash独立一致、全thread完了 |
+| PT-WEB-005 | SavedRequestTargetTest#web005SafeGetTargetsPreservePathAndQuery | 承認route形/Unicode/正常percent/空query/encoded query値 | 原文字列を保持しGETだけ。後続route allowlist照合は別責務 |
+| PT-WEB-006 | #web006ExternalMalformedAndStateChangingTargetsReject | null、POST/HEAD、scheme/opaque/authority/fragment、syntax/control/backslash/dot・encoded path separator | 外部遷移/非GET保存なし、固定redacted例外、query内容非露出 |
+| PT-WEB-007 | #web007Utf8LimitAndUnicodeBoundariesAreExact | 2047/2048/2049 UTF-8 byte、multi-byte/surrogate、先頭/末尾space | 2048以内だけ許可、UTF-8不正/URI不正を拒否、暗黙truncate/trimなし |
+| PT-WEB-008 | #web008ConcurrentTargetsRemainIndependent | 100独立query/Unicode入力 | 元path/query同一、cross-request混入なし、toStringにqueryなし |
+
+## 3. Session属性schema（SSC-038/PG-D-094、正式Web02で実施済み）
+
+Class `.web.session.SessionPrincipal/SessionOperationToken/SessionAttributes/SessionAttributeCodec`。001～008と同じRD/UI/SSにSS314 §7.2を加える。合成principal/context/CSRF/token、固定時刻・明示JSON/UTF8 bytesを使用し、raw値はsanitized証跡へ出さない。
+
+| Test ID | Class#method | 入力・操作・独立期待 |
+|---|---|---|
+| PT-WEB-009 | SessionAttributeCodecTest#web009AnonymousAndAuthenticatedGoldenJson | 匿名/認証quartet、全optional組合せ、USER/ADMIN、token0/1/10、手書きcanonical JSON/UTF8 byte一致、decode各field明示比較 |
+| PT-WEB-010 | #web010PrincipalTokenAndCollectionInvariantsFailFast | 全public null/collection要素、usernameNFC/64byte/不正control、CSRF64/128、未知用途/token重複/11件、immutable copy、toString全redacted |
+| PT-WEB-011 | #web011UnknownDuplicateNullAndTypesNeverDeserialize | root/nested未知・重複、JSON null/number/boolean/array/object型誤り、認証quartet欠落、formatVersion未知/小数/文字列、必須token配列欠落、任意class名拒否 |
+| PT-WEB-012 | #web012MalformedUtf8AndBoundedDocumentsRejectSafely | null/空/不正UTF8/BOM/末尾別doc/comment/unterminated/deep未知構造、16KiB超過、秘密markerをerror/cause/suppressedへ保持しない |
+| PT-WEB-013 | #web013UnicodeSavedTargetsAndTokenPurposesPreserveMeaning | 最大username/CSRF/2048byte SavedRequest/10 token、Unicode・escape、8承認更新用途、同用途複数可/UUID重複不可、原値/順序保持 |
+| PT-WEB-014 | #web014IndependentDecodeAcceptsOrderButRejectsInvalidValues | 手書き逆順/whitespace JSON、canonical Instant/UUID、expiry/認可をこの部品で決めない、外部URL/不正token/time/role/context拒否 |
+| PT-WEB-015 | #web015ConcurrentAttributesHaveNoCrossSessionState | 100独立principal/query/token、手組JSON入力/明示field期待、encoder/decoder共有可、不変collection・秘密非露出 |
+
+新7件は正式PT-WEB-20260908-02/source7ca9ac1でPASS、全640件/Web91・全coverage100%/静的解析0。BUG-055/YKT-050は属性日時の固定例外へ修正・再試験完了。平文schemaのPTであり、暗号/DB/session fixation/CSRF/Spring/HTTP/実NK CHRは未実施。attributes-exploration.md/002/manifest/checksumsで一意追跡する。
+
+## 4. Session暗号（SSC-039/PG-D-095、正式Web03で実施済み）
+
+Class `.web.session.SessionPayloadIdentity/EncryptedSessionPayload/SessionPayloadException/SessionPayloadCodec`。FUN-001/AUT-001～004、UI226/242、SS314 §7.2.2/331 §9.1/352 §11.2。key/nonce/hash/UUID/timeは合成固定値。Expectedは手書きJSONと独立DataOutputStreamの7field LP/JCE AES-GCM、Production codec/identityをexpected生成に呼ばない。
+
+| Test ID | Class#method | 目的・fixture/入力・操作・独立期待 |
+|---|---|---|
+| PT-WEB-016 | SessionPayloadCodecTest#web016IndependentEnvelopeAndDefensiveOwnership | 匿名/認証JSON・固定nonce/key・全AAD、NKENC1 byte完全一致、独立暗号復号、caller key/array mutation非干渉・redacted・一時nonce消去 |
+| PT-WEB-017 | #web017CurrentPreviousAndUnknownKeyFailClosed | currentだけwrite、previous暗号read、unknown/DB内包key不一致・wrong key拒否、独立vector |
+| PT-WEB-018 | #web018EnvelopeAndEveryAadFieldMutationReject | 長さ/format/magic/key字種/nonce/tag/body改変、7AADfield各変異、PK/hash/作成時刻row移植で平文を返さない |
+| PT-WEB-019 | #web019AuthenticatedInvalidJsonAndSizeBoundariesReject | tag有効でも閉schema違反・不正UTF8/空/16385byte不可、正常最大16384byte、envelope29/37/16436/16437境界 |
+| PT-WEB-020 | #web020NullConfigurationIdentityAndClosedLifetime | 全public null、key31/32/33・ID0/1/16/17・previous組合せ/重複、hash/microsecond、close冪等/close後拒否、ciphertext防御copy |
+| PT-WEB-021 | #web021ConcurrentNonceAndCallerMonitorIsolation | 100並行の独立属性/nonce認証、全nonce12byte unique、caller this monitorでoperation/closeを妨害できない |
+| PT-WEB-022 | #web022ProviderAndRandomFailuresAreRedacted | 公開JCA provider欠落・SecureRandom途中故障、固定reason/causeなし/suppressed0、nonce一時buffer消去、provider必ず復旧 |
+| PT-WEB-023 | #web023RotationKeysAndCloseAreSerialized | latch制御randomと並行close、進行中暗号が完了後だけclose、全future完了、owned key消去によるclose後拒否、再起動相当new instanceが同vector読取 |
+
+正式PT-WEB-20260908-03/source3bb7319で新8件/全648件PASS、全coverage100%/静的解析0。SSC-039完了、新BUGなし。encryption-exploration.md/002/manifest/checksumsで追跡。暗号部品だけのPTで、DB行の削除/失効/自動current再保存・CSRF/HTTPは合格へ算入しない。
+
+## 5. Session technical store（SSC-040/PG-D-096、正式Web04で実施済み）
+
+Class `.web.session.WebSessionRow/SessionStoreException/JdbcWebSessionStore`。FUN-001/AUT-001～004、UI226/242、SS312/314 §7.2.3/331 §9.1/352。実PostgreSQL18の隔離合成DBとproduction Flyway/grantを使用。ExpectedはDDL/明示9列SQL後条件、ciphertextは合成opaque bytes（暗号認証はPT016～023で別実施）。Test classはtest fixture所在の`.web.logging.JdbcWebSessionStoreTest`。
+
+| Test ID | Class#method | fixture・入力・操作・独立期待 |
+|---|---|---|
+| PT-WEB-024 | JdbcWebSessionStoreTest#web024RoundTripCiphertextAndExplicitColumns | 新row/未存在hash、全9列・microsecond・ciphertext/keyのSQL独立照合、SELECT *禁止とbound値、caller Connection保持 |
+| PT-WEB-025 | #web025CompareAndSwapNoResurrection | version0→1、stale update/deleteはfalse、identity違い/+1不一致拒否、削除後updateがINSERTを起こさず0行 |
+| PT-WEB-026 | #web026CallerTransactionsRollbackFixation | insert/update/delete rollback、旧row削除＋新row同TX・失敗rollback、別connection非可視、commit後だけ新row |
+| PT-WEB-027 | #web027RoleIsolationAndConstraints | Webの業務schema拒否、PK/hash UK/NULL/時間/範囲constraint、SQL injection風hash拒否、ddl不変更 |
+| PT-WEB-028 | #web028NullRowAndConfigurationBoundaries | public null/collection非該当、time precision/order/TTL1..28800/version0..999999999、autoCommit/readOnly・redacted値 |
+| PT-WEB-029 | #web029EveryJdbcFailureIsRedactedAndResourcesClose | 公開JDBC proxyでgetAutoCommit/isReadOnly/prepare/bind/query/update/next/getter/close/null resource/異常更新数を注入、固定例外causeなし、caller rollback可 |
+| PT-WEB-030 | #web030InvalidDatabaseRowsFailClosed | 9列各SQL NULL、型/範囲/時間/重複rowを公開ResultSetで注入、invalid値を返さず接続寿命不変 |
+| PT-WEB-031 | #web031ConcurrentLocksAndVersionsStayConsistent | 実row lock＋100並行更新でversion/last access更新を取りこぼさない、競合CASは1勝者、削除済row再生なし |
+
+正式PT-WEB-20260908-04/sourcea3c12a6で新8件/全656件PASS、全coverage100%/静的解析0。SSC-040/BUG-056/YKT-051完了、store-exploration.md/002/manifest/checksumsで一意追跡。同時HTTPのdirty属性merge/8h idle/失効/CSRF/framework接続は後続、低位storeに未実装のcaseを本8件へ混在させない。
+
+## 6. CSRF value（PG-D-097、正式Web05で実施済み）
+
+Class `.web.security.WebCsrfToken`、FUN-001/AUT-004、UI226、SS314 §7.2.1/8.1/352 §3。合成32byte固定入力、独立hex文字列と明示一致/不一致を期待値にする。
+
+| Test ID | Class#method | fixture/input/操作・独立期待 |
+|---|---|---|
+| PT-WEB-032 | WebCsrfTokenTest#web032GenerationMatchesIndependentHexAndErasesBuffers | 固定0..31 byte→手書き64hex、provider成功/失敗双方の一時array zero、null random拒否、固定例外causeなし |
+| PT-WEB-033 | #web033EveryAllowedLengthMatchesOnlyIdenticalToken | 許可全長64..128、base64url全文字、同一だけtrue、先頭/中間/末尾1文字変更/異なる長さfalse |
+| PT-WEB-034 | #web034MissingMalformedAndNullBoundariesStayRedacted | null parse契約、nullable submitted欠落false、empty/63/129/Unicode/control/space/+//等parse拒否・matches false、form accessだけraw、toString redacted |
+| PT-WEB-035 | #web035ConcurrentGenerationAndMatchingStayIndependent | 100 CSPRNG token unique、共有immutable tokenへの100一致/不一致照合、cross-request混入なし |
+
+正式PT-WEB-20260908-05/sourcedc3c74eで新4件/全660件PASS、全coverage100%/静的解析0、新BUGなし。csrf-exploration.md/002/manifest/checksumsへ一意追跡。生成/照合valueだけであり、session保存/CSRF filter/HTTP403/parameter重複排除/全POST接続は未実施。
+
+## 7. 暗号session lifecycle（SSC-041/PG-D-098、正式Web06 PASS）
+
+Class `.web.session.EncryptedWebSessionRepository/WebSessionSnapshot/InvalidSessionRowException`とstore拡張。FUN-001/AUT-001～004、UI226 §6、SS312/314 §7.2.4/331/352。実隔離PostgreSQL、固定Clock/CSPRNG/UUID、合成属性・独立JSON/LP/JCEと明示SQL後条件を使用する。
+
+| Test ID | Class#method | fixture/input/操作・独立期待 |
+|---|---|---|
+| PT-WEB-036 | EncryptedWebSessionRepositoryTest#web036CreateReadRestartAndIdleAreEncrypted | 匿名即時作成・Cookie hashだけDB・CSRF32byte/8h、独立復号JSON、再起動/currentprevious、microsecond/Clock後退/idle延長 |
+| PT-WEB-037 | #web037ExpiryAndCorruptRowsCommitInvalidation | expiry前/一致/後、unknown key/tag/AAD/schema/SQL NULL・型不正row、削除commit後だけ不在、別row非影響 |
+| PT-WEB-038 | #web038MutationPreservesCurrentAttributesAndSecurityIdentity | 現在属性へSavedRequest/token追加削除、principal/CSRF置換/null/11件拒否、他属性維持、失効済再生成なし |
+| PT-WEB-039 | #web039LoginFixationIsAtomicAndPreservesAllowlist | 新Cookie/DB UUID/CSRF・新principal、SavedRequest/未完了token保持、旧row削除と新row作成atomic、ID/UUID/CSRF衝突rollback |
+| PT-WEB-040 | #web040VersionRolloverPreservesCookieAndRejectsOldPk | version上限→新DB UUID/0、Cookie/CSRF/created/属性保持、新AAD独立復号、旧PK stale CAS拒否、UUID衝突rollback |
+| PT-WEB-041 | #web041DatabaseCryptoAndCommitFailuresNeverGrantSession | open/null/setup/read/write/delete/commit/rollback/close、random/UUID/key/Clock故障、postcommit close時の保存実態と再読、全失敗は固定診断 |
+| PT-WEB-042 | #web042NullConfigurationAndIdentityInvariants | 全public/constructor/factory null、snapshot Cookie/hash整合・immutable/redacted、閉key後不可、非認証操作でprincipal付与なし |
+| PT-WEB-043 | #web043ConcurrentReadMutateInvalidateNeverResurrect | 100読取/短mutation・10token制約内の並行加算削除、read/delete/保存race、version継続、既存Cookieから削除済session再生成なし |
+
+API実認証/Logout revoke queue/監査metadata/HTTP/Cookie/filter/Spring adapterは別scopeであり、この8件に未実施の合格を混在させない。
+
+## 8. Spring Session接続（SSC-042/PG-D-099、正式Web07 PASS）
+
+Program NK-WEB-001、class SpringEncryptedSessionRepository/SpringWebSessionとEncryptedWebSessionRepository.rotate/touch。FUN-001/AUT-001～004、UI226、SS313/314 §7.2.5/331/352。実隔離PG/DDL/role、固定Clock/CSPRNG、Mock Servletと実Spring SessionRepositoryFilter。期待は独立固定属性/SQL/HTTP header、production methodでexpected生成しない。
+
+| Test ID | Class#method | 目的・fixture/操作/独立期待 |
+|---|---|---|
+| PT-WEB-044 | SpringWebSessionTest#web044LifecycleRotateAndTouchPreserveIdentity | 匿名/認証済rotate、ID/CSRF変更・属性保持/旧row失効、missing/expiry/衝突、touch µs/前後/Clock後退/NULL/faultを実DB確認 |
+| PT-WEB-045 | #web045ProjectionAndImmediatePersistenceAreClosed | 4属性names/type/欠落、unknown/null/type/immutable/read-only security、SavedRequest safe/empty/remove、principal setはfixation・旧Cookie無効、独立DB row/hash/再読 |
+| PT-WEB-046 | #web046TokenDeltasPreserveConcurrentChanges | 10 request snapshotから並行追加/削除、順序不問の固定UUID集合・最大10/11拒否、同UUID別用途/時刻拒否、他属性不変/削除済非復活 |
+| PT-WEB-047 | #web047RepositoryOwnershipExpiryAndFailuresReject | ctor/全public null、foreign session save、missing/invalid Cookie、set idle同値だけ、expiry±µs/close/DB障害、cause/suppressed/redaction/公開monitor独立 |
+| PT-WEB-048 | #web048ServletFilterCookiesRestartAndFixation | 実SessionRepositoryFilter＋Mock Servlet/実DB、匿名Cookie Secure/HttpOnly/Lax/Path=/、raw32byte IDのみ、再起動同Cookie、principal set/ID変更、新CSRF・SavedRequest/token移管 |
+| PT-WEB-049 | #web049ServletInvalidationAndStaleCommitNeverResurrect | Filter request跨ぎ失効/旧Cookie/expiry/不正Cookie、response commit前save、同時失効した古いrequestのcommit障害・DB非復活、Logout後Cookie除去 |
+
+WebSessionFilterFactory#createもPT048/049で追跡。探索/正式commandは421のtoolchain、root clean verifyで全既存再試験。正式Web07/sourced6d9ff6、新6件/全674件・全coverage100%/静的解析0。BUG-058/059・YKT-053/054はspring-session-exploration.md/002/manifest/checksumsへ追跡。Security chain/CSRF POST認可/実Login API/全画面を本6件の合格へ混在させない。
+
+## 9. CSRF POST接続（PG-D-100、正式Web08 PASS）
+
+NK-WEB-001/FUN-001/AUT-001～004、UI226、SS313/314 §8.1/351/352。EncryptedSessionCsrfTokenRepository/FormCsrfTokenRequestHandler/WebCsrfFilterFactory。実PG/閉SpringSession/実CsrfFilterをMock Servlet上で結合し、独立form値/HTTP403/後段call count/DB後条件を期待にする。実監査writer・Login API・最終Security chainは別残件。
+
+| Test ID | Class#method | 目的・事前条件/入力/操作・期待 |
+|---|---|---|
+| PT-WEB-050 | WebCsrfIntegrationTest#web050RepositoryPersistsGeneratesAndInvalidates | 匿名生成/load/save、既存rotate/CSRF新規・principal保持、同値saveだけ/不一致field拒否、null-save既存失効/不在冪等、null/属性型不正/DB・key故障 |
+| PT-WEB-051 | #web051OnlySingleBodyParameterResolves | deferred request attributes、_csrf一意1値、長さ64/128境界/欠落/空/null要素/複数/文字不正、header代替拒否、query keyのpercent/+ decode・不正escape拒否、query値は不変 |
+| PT-WEB-052 | #web052EveryPostRejectsBeforeBusinessWithoutCsrf | SS313のLogin/Logout/User4操作・作成/質問/取消/削除全POSTへ正常/欠落/誤値/重複/query/header matrix、正常だけ後段1回、不正403＋固定拒否handler1回・秘密非表示、GET/HEAD非更新の通常通過 |
+| PT-WEB-053 | #web053FixationExpiryFaultsAndConcurrentRequestsStayBound | Login fixation前token/別session token/expiryを拒否、現在tokenだけ成功。SQL/close故障は成功しない。並行requestの同じ有効tokenは独立通過し、CSRFがoperation tokenを代替しない |
+
+正式Web08/source22c40bd、新4件/全678件・全coverage100%/静的解析0、新BUGなし。実行/環境/coverage/証跡hashはcsrf-filter-exploration.md/002/manifest/checksumsへ追跡。期待値をProduction methodで生成しない。本番監査handler/最終Security chain/設定登録は別残件。
+
+## 10. Login JMS境界（PG-D-101、正式Web10 PASS）
+
+MqLoginClient/MqLoginExchangeException。NK-WEB-001、FUN-001/AUT-001～004/MQ-004、UI226/232/234、SS312/314/321～323/352。固定Clock/UUID・既存JMS clientに合成senderを接続し、期待電文はUI232共通headerとUI234 DATAのbyte offsetへ独立配置する。Production encode/decodeをexpected生成へ使わない。合成秘密値はsource内fixtureのみ、wire/password/contextのraw出力を証跡へ格納しない。
+
+| Test ID | MqLoginClientTest#method | 目的・入力/操作・独立期待 |
+|---|---|---|
+| PT-WEB-054 | web054RequestAndSuccessMatchIndependentWire | NFC/trim・password短値/UTF8・IPv4/6、640byte全一致、USER/ADMIN成功688byte・context/time/role、同一user case差許容、char/sender buffer zero |
+| PT-WEB-055 | web055ErrorProfilesRemainDistinct | 0101/0106/9000、message optional/256byte、retry/remaining範囲、失敗はprincipalなし・成功mapper不使用、result値を変更しない |
+| PT-WEB-056 | web056InputAndNullContractsNeverSendSecrets | 全ctor/method null・timeout範囲、username/password byte境界/NFC/空/control/未知IP、zero/no-send、固定例外cause/suppressedなし |
+| PT-WEB-057 | web057MalformedOrUncorrelatedRepliesNeverAuthenticate | 長短/header/reserved/layout/correlation/全未許可code、UTF8/role/context/time/成功error field/別username・失敗success field拒否、無再送 |
+| PT-WEB-058 | web058TransportFaultsDoNotBecomeBadCredentials | JMS checked/runtime/IllegalState、timeout/capacity/interruption、Clock/UUID故障とnull契約、登録解放/割込み維持・buffer zero・固定UNAVAILABLE |
+| PT-WEB-059 | web059ConcurrentLoginsKeepIdentityAndOwnership | 100独立Loginのcorrelation/要求username/返却role/context・秘密buffer分離、12件上限内、pending0・caller monitor独立 |
+
+BUG-060/YKT-055: PT055は検証済error fillerからの個別projectionを正とする。BUG-061/YKT-056: PT054へUI232/SS324 §6.1の成功replay0200と元field保持を追加し、PT057の0200一律拒否oracleを上位正本へ是正する。0200でも成功DATA欠落/別usernameは拒否する。これはProductionに合わせた期待値変更ではなく、先行障害登録02efd4d後の上位規則取りこぼし修正である。
+
+上流IP trust、Spring provider/成功失敗handler、session保存・画面・API実dispatcher・実NK CHRは未実施。特に0200の元snapshotだけで現在Web認証を付与せず、providerの現在context確認を残gateとする。探索/正式結果とcoverageは後続002/manifestへ記録する。
+
+## 11. Spring Login provider・再送context確認（SSC-043/PG-D-102、正式Web11 PASS）
+
+MqLoginContextProbe/MqAuthenticationProvider/LoginClientAddress/MqLoginLockedException。FUN-001/AUT-001～004/MQ-004、UI226/232/234、SS312/314/324 §6.1/352。実Spring認証型・既存JMS client、合成senderと固定Clock/UUID。GAMREQ256byte、GAMRSP265+272×0..10byteはUI offsetの手書きgolden、認証済/未認証とROLE値・password消去は独立期待。
+
+| Test ID | Class#method | 目的・入力/操作・期待 |
+|---|---|---|
+| PT-WEB-060 | MqLoginContextProbeTest#web060ProbeUsesFreshProtectedReadAndValidatesAllRecords | 0000/0200・0/1/10record・圧縮内容保持せずdiscard、context/correlation/独立全要求byte、0102はfalse |
+| PT-WEB-061 | #web061ProbeRejectsMalformedAndFailedReplies | layout/相関/context/総長/count/record field・順序/予約byte、未知code/9000/9001、不正はgrantなし・固定例外・無再送 |
+| PT-WEB-062 | #web062ProbeNullFaultsAndConcurrentCallsStayIsolated | ctor/API null、wait境界、JMS/Clock/UUID/timeout/割込み故障、100並行のidentity/no cache/buffer消去 |
+| PT-WEB-063 | MqAuthenticationProviderTest#web063DetailsAndLockDelayAreBoundedAndRedacted | numeric IPv4/6・scope/hostname/null拒否、元表記保持、Lock0/900/負/901、固定診断/追加causeなし |
+| PT-WEB-064 | #web064FreshAuthenticationConsumesCredentialsAndUsesApiRole | 0000 USER/ADMIN、正規化username/元issuedAt/context・ROLE対応、無password/無HTTP mutation、input char zero＋credentials null |
+| PT-WEB-065 | #web065ReplayRequiresCurrentContextBeforeGrant | 0200→新GAM probe成功だけgrant、元expiresより後も現在有効なら成功、0102/9000/不正probeは拒否、役割変更失効のAPI既存試験も回帰 |
+| PT-WEB-066 | #web066FailureAndNullTypesNeverBecomeAuthentication | 0101/0106/9000/入力不正/通信、認証済入力/非対象class/型不正/欠落/null、固定例外・lock秒・credential全終了消去 |
+| PT-WEB-067 | #web067ConcurrentProvidersNeverCrossCredentialsOrPrincipals | 100独立要求・username/role/contextの対照、input全消去、共有monitor独立、pending0 |
+
+最終Security chain/Caddy検証/fixation保存/成功失敗HTTP handler/実JMS-API全起動は未実施。本probeの合成応答をAPI実連携や実NK CHR成功と扱わない。
+
+## 12. 閉SecurityContext復元・fixation保存（SSC-044/PG-D-103、実装前仕様）
+
+EncryptedSessionSecurityContextRepository/EncryptedSessionAuthenticationStrategy/ClosedWebAuthentication。FUN-001/AUT-001～004、UI226、SS313/314 §7.2.6/331/352。SessionSecurityContextTestを実PG・実SessionRepositoryFilter/SecurityContextHolderFilter・Mock Servlet上で実施する。期待は明示ROLE/HTTP Cookie/独立JSONとSQL後条件、production保存値からexpectedを逆生成しない。
+
+| Test ID | SessionSecurityContextTest#method | 目的・fixture/入力/操作・独立期待 |
+|---|---|---|
+| PT-WEB-068 | web068ClosedProjectionRejectsForeignAuthentication | 正規USER/ADMIN、空/anonymous、未知型/不正principal/credential/detail/権限数・値・null authorityを拒否、未知保存属性もfail closed |
+| PT-WEB-069 | web069DeferredLoadAndCompatibilityRemainRequestScoped | lazy未参照時loadなし、一回get・isGenerated安定、別request独立、旧互換API/null holder/request、Cookieなし匿名・設定marker欠落/別instance拒否 |
+| PT-WEB-070 | web070SaveOnlyChecksPersistedIdentityWithoutMutation | 同値saveは追加writeなし、空→匿名/不在no-op、異principal/role/context/空→既認証拒否、未作成/失効後に任意INSERT/grantしない |
+| PT-WEB-071 | web071StrategyFixatesOncePreservingApprovedAttributes | 実PG/HTTPでprovider相当成功→1回fixation、新ID/UUID/CSRFと旧row失効、SavedRequest/未完了token保持、Cookie属性・独立JSON/DB後条件 |
+| PT-WEB-072 | web072NullConfigurationAndStorageFaultsFailClosed | 全public/ctor null・missing session/marker/type、get/set/SQL/commit/close/key故障、固定診断/成功Cookie・平文fallbackなし |
+| PT-WEB-073 | web073ConcurrentLoadAndStaleRequestsNeverResurrect | 100 deferred参照一回、複数session分離・公開monitor独立、失効前snapshotのsave/responseでrow非復活・authority置換拒否 |
+| PT-WEB-074 | web074RealHolderFilterRestoresAndClearsThreadContext | 実Holder filterでUSER/ADMIN/匿名復元、終了/例外でThreadLocal clear、再起動同Cookie、未知/期限/破損はgrantなし |
+| PT-WEB-075 | web075ProviderFixationAndRestoreStayBoundAcrossRequests | 独立Login/GAM合成wire→実provider→strategy→save、次HTTP requestの同一principal復元、0000/0200有効/失効probe・CSRF維持と保存失敗時非成功 |
+
+最終form filter/成功失敗HTTP handler/Logout API queue/Caddy trust/実API起動/実NK CHRは未実施であり、本8件の合格へ含めない。
+
+## 13. 安全な画面GET RequestCache（PG-D-104、実装前仕様）
+
+SavedScreenTarget/EncryptedSessionRequestCache。FUN-001/AUT-001～004、UI221/226、SS313 §4/9・314 §3/7.2/352。SessionSavedRequestTest、実PostgreSQL・実SessionRepositoryFilter、公開Mock Servletの故障注入。正常expectedはUI/SSのURL literal、Stringだけのsession属性、Cookie属性とDB後条件。Production matcher/encoderをexpectedの算出へ使わない。
+
+| Test ID | SessionSavedRequestTest#method | 目的・入力/操作・独立期待 |
+|---|---|---|
+| PT-WEB-076 | web076AllScreenRoutesAndUtf8BoundariesAreExplicit | 全23画面の保護GET family、path/query保持、日本語・2047/2048/2049byte、空query/nullable query、正規UI URLと独立allowlist |
+| PT-WEB-077 | web077UnsafeMethodsEndpointsAndSecretQueriesNeverSave | POST/HEAD/未知/外部/dot/encoded delimiter/Login/error/static/media/AJAX拒否、decoded case-insensitive秘密key・不正query拒否、正常検索key/値の意味保持 |
+| PT-WEB-078 | web078EncryptedCacheContainsOnlyClosedGetProjection | 実PG/filterのsave/get/remove、全SavedRequest getterはGET/相対URL以外空、cookie/header/locale/parameter/body/例外非保存、fixation後保持、DB1件 |
+| PT-WEB-079 | web079MatchingConsumesOnlyExactCurrentGetWithoutReplay | 同GET path/queryだけ消費して同requestを返す。異URL/POST/query相違は非消費、保存不在/二回目はnull。Header/body/Host偽装を復元しない |
+| PT-WEB-080 | web080NullInvalidSessionAndStorageFailuresAreRedacted | 全public/ctor/getter null、marker欠落/別instance、stored型/値異常、Servlet get/set/removeとDB/key故障、固定診断・native fallback/秘密漏れなし |
+| PT-WEB-081 | web081ConcurrentSessionsAndStaleResponsesStayIsolated | 100独立session URLの並行保存/読取・公開monitor独立、失効後responseで再作成なし、Login fixationとSavedRequest消費・CSRF/token保持 |
+
+保存は認可ではない。最終EntryPoint/Login handler/全chain/HTTP controller・実API/実NK CHRは別gate。
+
+## 14. Login form・Caddy client・認証filter（PG-D-105、実装前仕様）
+
+CaddyClientAddressResolver/CaddyRequestRejectedException/LoginFormAuthenticationConverter/LoginFormRejectedException/MqFormLoginFilterFactory。FUN-001/AUT-001～004、UI226/232/234、SS313/314/342/352。SessionFormLoginTest、実PG・Session/CSRF/Holder/AuthenticationProcessing filter、独立UI offset合成JMS応答。status/Location callbackは試験doubleであり最終HTML/監査は別gate。
+
+| Test ID | SessionFormLoginTest#method | 目的・入力/操作・独立期待 |
+|---|---|---|
+| PT-WEB-082 | web082OnlyDirectLoopbackCaddyHeadersSupplyClientAddress | numeric loopback peer・単一XFF/https、IPv4/IPv6文字列維持、hostname/scope/多段/Forwarded混在/非loopback/欠落/重複拒否 |
+| PT-WEB-083 | web083ProxyNullFaultsAndConcurrentRequestsAreIsolated | null request/header enumeration/element/peer・Servlet故障を固定診断、100異なるclient・公開monitor独立、session未作成 |
+| PT-WEB-084 | web084FormCreatesOnlyConsumableUntrustedCredentials | 正規UTF8 form/単一username/password→未認証token、detailsは検証済IPだけ、NFC/byte境界は実providerへ、全終了char[]zero・credentials erase |
+| PT-WEB-085 | web085MalformedAmbiguousFormsNeverReachAuthentication | null/欠落/空/重複field、query同名/encoded名、不正query、未知Content-Type/charset/encoding、GET/別path拒否、password/session非保存 |
+| PT-WEB-086 | web086ActualCsrfProviderFixationAndHolderChainSucceeds | 実CSRF→認証provider/strategy/save、0000/0200・USER/ADMIN、SavedRequest保持と1回ID/CSRF更新、次HTTP復元、ThreadLocal clear |
+| PT-WEB-087 | web087CsrfAndAuthenticationFailuresNeverGrantOrReplay | CSRF欠落/不一致/別sessionはMQ0、0101/0106/9000/replay失効、form/proxy失敗、lock0/900、API/DB故障は成功Cookie/grantなし。独立status callbackを区別 |
+| PT-WEB-088 | web088FactoryNullMatchingAndExceptionalLifecycleAreBounded | 全constructor/factory null、非Login/非POSTは1回chain委譲、controller/handler例外時Holder clear、保存/handler順・MFA/二度rotateなし |
+| PT-WEB-089 | web089ConcurrentLoginChainsKeepPrincipalsAndCookiesSeparate | 100異なるusername/password/contextの実session並行Login、各authority/CSRF/新Cookieと旧row失効、API request上限・pending0、秘密消去/ThreadLocal混入なし |
+
+### 14.1 Form allowlist回帰（BUG-067/YKT-059）
+
+| Test ID | SessionFormLoginTest#method | 目的・入力/操作・独立期待 |
+|---|---|---|
+| PT-WEB-090 | web090UnknownFormNamesAndEnumerationFaultsNeverAuthenticate | SS352 §8の固定allowlist username/password/_csrfから独立に、role/空/大文字/未知/bodyとquery由来追加名を拒否。null enumeration/element、hasMore/next故障も固定診断、MQ0/未認証・session未作成。正常3fieldは既存082～089を全回帰 |
+
+### 14.2 HTTP security header（PG-D-106）
+
+WebSecurityHeaderWriter/WebSecurityHeaderFilterFactory、WebSecurityHeaderTest。UI222/226、SS313/342/352 §7.2。独立fixtureは明示HttpServletRequest/ResponseとSS352の固定7header値。実server/Caddy実応答は後続で、Mock HTTPの合格と混同しない。
+
+| Test ID | WebSecurityHeaderTest#method | 目的・入力/操作・独立期待 |
+|---|---|---|
+| PT-WEB-091 | web091EveryResponseGetsExactNonConflictingSecurityPolicy | GET/HEAD/POST・匿名/認証相当URL/HTML/error/media/static、status200/206/302/400/401/403/404/405/409/416/429/503、既存競合/重複headerを独立7値で置換、本文/statusは維持 |
+| PT-WEB-092 | web092RealHeaderFilterWritesBeforeEveryCommitAndAfterReset | 実HeaderWriterFilterの通常終了/sendError/sendRedirect/flush/stream/writer close、下流reset、Servlet/IO例外時finally、headerはcommit時点で一致、非秘密Location/本文を維持 |
+| PT-WEB-093 | web093NullAndResponseFaultContractsDoNotHideFailures | request/response null fail-fast、各header setの公開Servlet故障をcallerへ伝播、例外を診断header/HTMLへ変換しない。request値を読まない |
+| PT-WEB-094 | web094ConcurrentResponsesHaveNoSharedMutableState | 単一writer/factory filterの100並行request、各body/status/独立7値、public monitor非依存 |
+
+### 14.3 Web SECURITY local audit（PG-D-107）
+
+WebSecurityAuditと閉event enum、WebSecurityAuditTest。AUT-001～004/MON-004、UI226/252、SS314/351/352。固定Clock、JDK公開System.Loggerの収集double、合成principal/client/request UUIDをfixtureとし、JSON期待はSS351の明示key/value（production encoderから生成しない）。API critical DB audit/本番logger設定・HTTP接続は別残件。
+
+| Test ID | WebSecurityAuditTest#method | 目的・入力/操作・独立期待 |
+|---|---|---|
+| PT-WEB-095 | web095AllSecurityEventsUseClosedIndependentJson | 全6eventのcatalog action/reason/outcome/level、UTC millis、service/version/category/request、actor有無、canonicalIP、lock0/900、JSON key完全一致、Throwableなし |
+| PT-WEB-096 | web096InvalidEventMetadataNeverReachesLogger | 成功actor/IP欠落、失敗/lockのactor混入、非lock retry非0、負/901、unknownIP/hostname/scope/空/過長、設定1/64/65byte/不正文字、null Optional/要素/API境界は非出力 |
+| PT-WEB-097 | web097UnicodeAndSecretCanariesRemainOutsideAudit | username NFC/64byte/line separator/JSON escape、context/loginAt/rawCookie/CSRF/password/body/causeの混入なし、user入力を失敗actorへ流さない |
+| PT-WEB-098 | web098ClockAndLoggerFaultsNeverBecomeSuccessfulAudit | Clock null/例外・logger公開故障伝播、出力/部分成功の誤表示なし、config/version非漏出診断 |
+| PT-WEB-099 | web099RepeatedEventsHaveNoMutableJsonOrPrincipalRetention | eventごとの新JSON、actor/IP省略時の前call値の混入なし、入出力は文字列/enum/UUID、loggerへprincipal/Throwableを渡さない |
+| PT-WEB-100 | web100ConcurrentAuditEventsStayIndependent | 単一auditの100並行、各request/actor/IP/lock/role・独立JSONとlevel、public monitor非依存、秘密canary0 |
+
+### 14.4 Caddy contextとCSRF拒否監査（PG-D-108）
+
+WebRequestContext/CaddyTransportContextFilter/WebCsrfDeniedHandler、WebRequestSecurityTest。FUN-001/AUT-001～004/MON-004、UI222/226/252、SS313/314/342/351/352。server固定UUID、numeric loopback/XFF/https、収集System.Logger、実Spring filterと独立HTTP/JSON値。private reflectionを使わない。HTTP全起動/認可/HTML/実Caddyとlogger設定は未実装で別gate。
+
+| Test ID | WebRequestSecurityTest#method | 目的・入力/操作・独立期待 |
+|---|---|---|
+| PT-WEB-101 | web101ServerIdentityAndTrustedAddressReachOnlyCurrentRequest | 偽X-Request-IDを無視、独立server UUIDと検証済IP、responseへの新X-Request-ID追加なし、session/body未参照、header/filter/context公開get契約 |
+| PT-WEB-102 | web102RedispatchReusesIdentityButRevalidatesTransport | 同一requestのERROR/ASYNC/forward再入でID1回発行、transport再検査、異なるclient/不正header拒否、別requestは別ID |
+| PT-WEB-103 | web103UntrustedProxyNeverTouchesSessionOrBusiness | 非loopback/欠落/重複/Forwarded等は403・下流0、SECURITY固定action/reason/route/requestID、非信頼IP/secretなし、header正常 |
+| PT-WEB-104 | web104NullConfigurationAttributeAndResponseFaultsFailClosed | null factory/引数/UUID、非HTTP request/response、attr欠落/型/Servlet故障、logger/response/chain故障は正常化しない |
+| PT-WEB-105 | web105CsrfDeniedHandlerIgnoresSecretExceptionsAndPreservesSession | 匿名/USER/ADMINで403、閉actor/IP/IDだけJSON、例外message/cause/parameter未参照、CSRF再生成/session破棄なし、MQ0 |
+| PT-WEB-106 | web106ActualCsrfFilterUsesProductionDeniedAudit | 実Header/Caddy/Holder/CSRF filterの不正POSTはactual handler監査403/下流0、正CSRFは下流1、POSTごとID、HTTP headerとHolder clear |
+| PT-WEB-107 | web107DeniedHandlerNullContextAndLoggerFaultsNeverGrant | null request/response/exception/constructor、context欠落/型、異常Authentication、logger故障/HTTP送信故障、status/下流/秘密非保持 |
+| PT-WEB-108 | web108ConcurrentSecurityRequestsDoNotShareContextOrAudit | 100独立request/client/UUID/response/監査、共有filter/handlerの公開monitor非依存、ERROR再入とThreadLocal混入なし |
+
+### 14.5 実Servlet container境界（PG-D-109）
+
+EmbeddedWebSecurityTest、Tomcat11.0.25/Java25のloopback実HTTP、既存production filterと隔離PG、合成Servlet/監査。実TLS/Caddy/全MVC/templateは対象外。期待は独立HTTP status/header/body定数、DB row/Cookie種別、固定監査key、context ID非混入とし、Production methodでexpectedを生成しない。
+
+| Test ID | EmbeddedWebSecurityTest#method | 目的・入力/操作・独立期待 |
+|---|---|---|
+| PT-WEB-109 | web109RealHttpSessionCsrfAndHeadersMatchContract | 実HTTPの匿名session/CSRF取得→POST正常/異常、独立status/header/Cookie flag、JSESSIONIDなし・native session0、暗号DB継続 |
+| PT-WEB-110 | web110RealErrorDispatchIsBoundedAndRedacted | proxy/CSRF拒否、error servletへのdispatch回数/同一request ID/監査件数/403、秘密例外やserver詳細なし、defaultエラーページ非公開 |
+| PT-WEB-111 | web111RealFormParameterMergingRejectsUnknownAndQueryCredentials | Servletがdecoded query/bodyをmergeする実挙動で未知名/重複/encoded credentialをproduction converterが拒否、provider委譲0/HTTP400相当、正常構造だけ通過 |
+| PT-WEB-112 | web112ConcurrentRealHttpRequestsKeepCookiesAndAuditSeparate | 100独立HTTP requestのsession/CSRF/UUID/監査と100response対応、接続・server/temporary resource終了、非flaky/失敗を合格算入しない |
+
+### 14.6 Login結果handler（PG-D-110、SSC-046）
+
+MqLoginSuccessHandler/MqLoginFailureHandler、SessionLoginHandlerTest。FUN-001/AUT-001～004/MON-004、UI226/232、SS313/314/351/352。固定HTTP/JSON値はCurrent handler/CHR-A02とSSの独立定数、DB後条件は行数・閉principal・古いhash不在を明示。例外には合成secret canaryを置き、message/causeを読んだ場合に失敗するfixtureを使う。対象source/coverage/環境/実行command/BUG/SSCは002/manifestへ正式run後記録。未実行を合格に算入しない。
+
+| Test ID | SessionLoginHandlerTest#method | 入力・操作・独立期待 |
+|---|---|---|
+| PT-WEB-113 | web113SuccessRedirectsOnlyToClosedSavedGet | USER/ADMIN、SavedRequest有無、302/Location固定値、閉actor/IP/IDの成功監査、target/Referer無視、保存済GETは次GETまで維持 |
+| PT-WEB-114 | web114SuccessRejectsUnpersistedOrInvalidIdentity | null/匿名/foreign/mismatched principal、configured marker不正、破損SavedRequestは成功応答/監査なし |
+| PT-WEB-115 | web115FailureAndLockPreserveCurrentRedirectContract | BadCredentials/lock0/1/900の302/errorまたはlocked、Retry-After、固定監査。password/例外/session保存なし |
+| PT-WEB-116 | web116InputServiceAndUnknownFailuresStayDistinct | Form400/proxy403/サービス・保存・未知503、失敗counter/LOGIN_FAILED誤加算なし、秘密例外未参照、session未生成 |
+| PT-WEB-117 | web117HandlerNullAndPublicFaultsNeverPretendSuccess | factory/引数null、context/DB/attribute/logger/response公開故障の伝播、成功UI偽装・秘密cause保存なし |
+| PT-WEB-118 | web118ActualLoginFilterUsesProductionHandlers | 実PG/Holder/CSRF/form provider/custom fixation＋本handler、独立wire正常/失敗/lock/9000、Cookie/DB/redirect/監査、次GET認証保持、再送/bodyなし |
+| PT-WEB-119 | web119ConcurrentHandlerCallsKeepOutcomesSeparate | 100独立request/actor/IP/ID/SavedRequest、success/lock/failureのheader/監査混入なし、公開monitor不要 |
+| PT-WEB-120 | web120SuccessResponseFailureDoesNotInventRollback | 固定化済sessionに対するredirect送信故障、同一request retryと次session読取で実確定状態を確認。新Cookie/CSRF再発行・API再Loginなし |
+
+### 14.7 URL認可policy（PG-D-111）
+
+WebAuthorizationFilterFactory / WebAuthorizationFilterTest。FUN-001～013/AUT-001～004、UI221/226、SS313/314/352。独立URL×anonymous/USER/ADMIN表をfixtureとして明示し、Spring StrictHttpFirewall＋AuthorizationFilterへ送る。Header/formの偽role、全method/dispatcher、encoded path、query、未知route、100並行を含む。HTTP redirect/error view/owner再検証/最終runtimeは別gate。実行情報とcoverage/BUGは002/manifestへ正式実行後記録する。
+
+| Test ID | WebAuthorizationFilterTest#method | 事前条件・操作・独立期待 |
+|---|---|---|
+| PT-WEB-121 | web121OnlyExplicitPublicResourcesAreAnonymous | 明示6public pathは認証supplier不要、未知CSS/JS/偽suffixは保護。偽header/form roleは認可値に使わない |
+| PT-WEB-122 | web122RoleMatrixProtectsAdminAndLogs | USER/ADMIN×管理root/下位URL/logs/全業務URL、USER管理拒否・ADMIN許可、anonymous保護拒否、URI queryで権限変更なし |
+| PT-WEB-123 | web123FirewallAndRedispatchCannotBypassRole | path parameter/dot/double slash/encoded slash等はfirewall拒否、encoded文字のadminはUSER拒否。REQUEST/ERROR/ASYNC/FORWARD/INCLUDEで同じrole規則 |
+| PT-WEB-124 | web124ConcurrentPoliciesHaveNoCrossRequestIdentity | factoryごと別filter、100並行でThreadLocal principalとURL結果が対応、公開monitor非依存・下流一回/拒否ゼロ、後続ThreadLocal clear |
+
+### 14.8 未認証・role拒否応答（PG-D-112）
+
+WebAccessFailureHandler/WebAccessExceptionFilterFactory、SessionAccessFailureTest。FUN-001～013/AUT-001～004/MON-004、UI221/226、SS313/314/351/352。固定HTTP/Location/JSON、実暗号PG session行数とsavedRequest、下流0/1回を独立期待にする。新認証要求eventは既存actionへの理由追加であり、PT095/096の既存6event期待を維持して新eventを追記する。
+
+| Test ID | SessionAccessFailureTest#method | 事前条件・入力・操作・期待 |
+|---|---|---|
+| PT-WEB-125 | web125AnonymousGetReturnsToLoginWithOnlySafeSavedRequest | 通常GET302/login、安全な画面だけ保存、未知/秘密query/外部targetは未保存、未認証監査actorなし |
+| PT-WEB-126 | web126PostAjaxAndMediaNeverRedirectOrReplay | POST/HEAD/他method、AJAX、media/downloadは403・Locationなし・session保存なし、偽query/endpoint類似名を区別 |
+| PT-WEB-127 | web127RoleDenialKeepsPrincipalAndRedactsException | USER/ADMINのhandler呼出は403、閉actor/ID/IP/ROLE/routeだけ監査、token/session保持、例外診断未参照 |
+| PT-WEB-128 | web128NullStorageLoggerAndResponseFaultsRemainFailures | null boundary/型/context/DB/属性/logger/response故障を伝播、成功/redirect偽装やsecret保持なし |
+| PT-WEB-129 | web129ActualExceptionTranslationUsesEncryptedCacheAndRoleGate | 実Session/Holder/CSRF/Login/ExceptionTranslation/Authorization接続、匿名GET保存→Login復帰、匿名POST403、USER管理403/ADMIN通過、body再送なし |
+| PT-WEB-130 | web130ConcurrentDenialsKeepRequestAndActorSeparate | 100並行anonymous/role応答、監査UUID/actor/Locationの混入なし、private状態共有なし/ThreadLocal clear |
+
+### 14.9 単一chain実HTTP接続（PG-D-113）
+
+WebSecurityFilterFactory、WebSecurityChainTest。FUN-001～013/AUT-001～004/MON-004、UI221/226、SS311/313/314/342/351/352。Tomcat11.0.25 loopback、実暗号PG、手書offset API reply、synthetic servlet。期待は固定HTTP/Location/header/DB後条件、Cookie切替/旧ID不在、監査schemaとrequest ID。実TLS/Caddy/全MVC/Logout/本番logger・起動は対象外。全coverage/環境/sourcecommit/実行command/BUG/SSC/証跡hashは正式run後002/manifestへ記録する。
+
+| Test ID | WebSecurityChainTest#method | 事前条件・入力・操作・独立期待 |
+|---|---|---|
+| PT-WEB-131 | web131FactoryNullAndClosedComposition | 必須依存null拒否、別factory productは独立、合成filterのinit/destroy、実Session/CSRF/Holder順序・下流回数 |
+| PT-WEB-132 | web132RealHttpLoginReturnsToSavedScreen | 保護GET302/Login→CSRF→USER/ADMIN Login→302元GET、新Cookie/旧row失効・新CSRF、次GET認証保持 |
+| PT-WEB-133 | web133RealHttpFailuresNeverGrantAuthentication | 0101/0106/9000/JMS/不正CSRF、redirect/Retry-After/503/403を区別、native session0、credential/body非反射 |
+| PT-WEB-134 | web134RealHttpRoleAndErrorDispatchRemainBound | USER管理/logs拒否・ADMIN通過、POST/AJAX/media未認証403、ERROR元UUID・監査重複0、公開method制限 |
+| PT-WEB-135 | web135FirewallRejectionRetainsSafeHeaders | 正規proxy＋不正pathは400/header/下流0、非正規proxy403、内部ERROR同一request ID・server詳細/secretなし |
+| PT-WEB-136 | web136ConcurrentHttpChainsKeepSessionsAndAuditIsolated | 並行Login/保護GET/拒否でCookie/CSRF/principal/監査混入なし、停止時のHTTP接続/resource終了、独立不変期待 |
+| PT-WEB-137 | web137ServletPrincipalAndProgrammaticAuthStayClosed | BUG073/YKT065。実HTTPでgetUserPrincipal/getRemoteUser/isUserInRoleが閉USER/ADMINと一致、SavedRequestは一致GETで消費。Servlet programmatic Login/Logoutが新認証やcoordination迂回を起こさずsession/CSRFを保持 |
+
+### 14.10 Servlet閉principal bridge（PG-D-114）
+
+ClosedServletSecurityFilter / ClosedServletSecurityFilterTest。FUN-001/AUT-001～004、UI226、SS313/314/352、BUG073/YKT065。Servlet nullable契約と非HTTP/nullの負例を明示し、独立principal/role文字列/FORM/固定例外を期待にする。native principalを悪意あるfixtureにして参照しないことを確認する。
+
+| Test ID | ClosedServletSecurityFilterTest#method | 入力・操作・期待 |
+|---|---|---|
+| PT-WEB-138 | web138ClosedPrincipalImplementsServletContract | 匿名/USER/ADMINのPrincipal/remoteUser/authType/role完全一致、未知/空/null role=false、native identity未参照、redacted toString |
+| PT-WEB-139 | web139ProgrammaticAuthenticationCannotBypassCoordination | authenticate/login/logoutは固定例外、null契約、secret入力非保持、principal/session/CSRF維持 |
+| PT-WEB-140 | web140NullForeignAndDownstreamFaultsStayClosed | null request/response/chain、非HTTP型、foreign Authentication、下流IOException/ServletExceptionは正確に伝播、snapshotのnull排除 |
+| PT-WEB-141 | web141ConcurrentAndCrossThreadSnapshotsKeepOriginalActor | 100並行・後からHolderを変更/clearした同一request参照でも元immutable principalを維持、他actor混入なし、公開monitor不要 |
+
+### 14.11 Menu・MVC/Thymeleaf接続（PG-D-115）
+
+MenuController、MenuViewModel/TopBarViewModel/MenuCard、WebMvcConfiguration、menu.html/fragments/layout.html/static/css/schubert.css。FUN-002/AUT-001～003/SYS-006/TST-001～005、UI221～223/226、SS311/313/314/352。Current menuの最初4card title/説明/URLとUI223 USER7/ADMIN9を独立配列に固定する。HTML DOMはJsoup test-onlyで解析し、production model/enumからexpectedを生成しない。実行環境/command/sourcecommit/coverage/BUG/SSC/hashは002/manifestへ正式gate後収集する。Login画面/Logout処理/本番起動/全画面CHRは対象外。
+
+| Test ID | MenuMvcTest#method | 事前条件・入力・操作・期待 |
+|---|---|---|
+| PT-WEB-142 | web142MenuModelsPreserveRoleOrderAndClosedFields | USER7/ADMIN9の完全な順序/title/説明/URL、brand/username/role、card不変性、redacted診断、秘密objectを保持しない |
+| PT-WEB-143 | web143MenuBoundaryNullForeignAndModelFaultsReject | null Principal/Model/model factory、foreign Principal拒否、Model故障伝播、任意request role/URLを採用しない |
+| PT-WEB-144 | web144MvcConfigurationIsExplicitUtf8AndClosed | Bean依存null、実context/DispatcherServlet初期化、HTML UTF8/classpath/cache設定、security CSRF processor、未知view/URLで秘密露出なし |
+| PT-WEB-145 | web145RealHttpMenuHasExactCardsAndLogoutCsrf | 実Tomcat＋暗号PG＋security＋DispatcherServlet＋Thymeleaf。USER/ADMIN Login後GET /、title/header/card順・件数/URL・POST/logout＋hidden _csrf 1件、native session0、security header。Logout自体は未実施 |
+| PT-WEB-146 | web146HtmlEscapesIdentityAndServesOnlySafeResources | HTML特殊文字usernameをtext escape、context/password/session/raw tokenの不要DOM/診断混入なし。CSS UTF8/900px responsive/可視focus、未知resource/inline script/style/event禁止 |
+| PT-WEB-147 | web147ConcurrentMenuRenderingKeepsActorsAndCsrfSeparate | 100並行requestのusername/role/card/CSRFをそれぞれ照合、他actor混入なし、全HTTP/context/resourceを終了 |
+
+### 14.12 共通error・依存障害（SSC-047/PG-D-116）
+
+ErrorViewModel/ProblemViewFactory/ErrorController、WebDisplayContext/Filter、WebErrorDispatchFilter、WebInfrastructureFailureFilter、WebSecurityFilterFactory、error/error.html。FUN-001/002/AUT-001～004/TST-001～005/MON-004、UI221/222/226、SS313/314/351/352。独立status/固定日本語message/UUID/明示DOM、故障JDBC/native getterと合成errorを使用する。期待をproduction factoryから生成しない。正式環境/command/branch/commit/coverage/result/BUG/SSC/evidence hashは002/manifestへ記録する。
+
+| Test ID | ErrorMvcTest#method | 事前条件・入力・操作・独立期待 |
+|---|---|---|
+| PT-WEB-148 | web148ErrorCatalogAndModelsAreClosed | 400/401/403/404/405/409/416/429/503、500/未知→503、欠落→404、固定message/UUID、表示modelの不変・null契約・redacted診断 |
+| PT-WEB-149 | web149DisplaySnapshotAndCsrfRemainRequestScoped | 匿名/USER/ADMIN閉snapshot、raw identity非保持、CSRF解決済投影、clear全属性、foreign/null/型異常、native getter/DB未参照のerror表示 |
+| PT-WEB-150 | web150InfrastructureFailuresDoNotLoopOrHideOtherFaults | SessionStoreException未commit→503、commit済/ERROR自身/別例外は伝播、null/非HTTP/response故障を成功扱いしない |
+| PT-WEB-151 | web151ErrorControllerIgnoresUnsafeDiagnostics | null依存、server context/属性/Model/response故障、ERROR_EXCEPTION/MESSAGE/REQUEST_URI/query/secret getterを読まない |
+| PT-WEB-152 | web152ErrorTemplatesRenderExactSafeDom | 実MVC/Thymeleafで全status、匿名/USER/ADMIN TopBar/Logout CSRF、固定日本語messageとUUIDだけ、HTML escape/内部値非露出 |
+| PT-WEB-153 | web153RealHttpErrorsKeepStatusHeadersAndIdentity | 実Tomcat/security/PG/MVCの400/403/404/409/416/429/500→503/503、元UUID・closed actor・header、POSTを再送しない |
+| PT-WEB-154 | web154DatabaseFailureRendersWithoutReadingSessionAgain | DB故障がsnapshot前/後の2経路、503が再帰せず表示、匿名または解決済actor/CSRF、API送信増加0、native session0 |
+| PT-WEB-155 | web155DeniedRequestsKeepOneAuditAndOriginalRequestId | USER管理拒否/CSRF拒否から実error template、監査重複0・元ID、未知例外のmessage/body/内部path非反射 |
+| PT-WEB-156 | web156ForgedErrorDispatchNeverBypassesBusinessSecurity | 外部REQUEST/error、偽query/header、ASYNC/FORWARD、ERROR別URLは従来認証/CSRF/role、非正規proxyは403空body |
+| PT-WEB-157 | web157ConcurrentErrorRenderingKeepsRequestActorsSeparate | 100並行errorのactor/role/status/CSRF/UUIDを独立照合、他要求混入0、全HTTP/context/resource終了 |
+
+### 14.13 API0102・失効後HTTP終端（SSC-048/PG-D-117）
+
+ApiSessionInvalidHandler、WebResultMapper、WebSecurityAudit、実Session/security/error MVC接続。FUN-001/AUT-001～004/MON-004/TST-001～005、UI221/222/226/232、SS313/314/351/352。検証済ResultCodeの独立HTTP表、固定Location/DOM/監査JSON、SQL DELETE後条件・Cookie失効をoracleとする。raw wire/HTTP秘密は保存せず、実行command/OS/JDK/version/branch/sourcecommit/日時/exit/coverage/関連BUG/SSC/hashは002/manifestへ記録する。未実装TDDの失敗は不合格のまま保持しBUGにはしない。
+
+| Test ID | ApiSessionInvalidTest#method | 事前条件・入力・操作・独立期待 |
+|---|---|---|
+| PT-WEB-158 | web158ResultCodesHaveIndependentHttpClassification | 承認済12resultから200/400/401/403/404/409/429/503の独立表、null拒否。mapper自体に失効/再送/DB副作用なし |
+| PT-WEB-159 | web159InvalidHandlerBoundariesNeverUseNativeSession | constructor/request/response null、欠落/foreign repository marker、foreign actor、context/属性/session getter/invalidate異常、診断getter未参照、Holder clear |
+| PT-WEB-160 | web160InvalidHandlerUsesClosedNavigationAndAudit | GETと全非GET、AJAX各大小文字、全media範囲。通常GET固定302 /login?session-expired、他401、旧actor表示/CSRF全除去、SESSION_EXPIRED INFO/固定reason/秘密なし、session不在のno-create |
+| PT-WEB-161 | web161InvalidationClearsEncryptedSessionAndDisplay | 実PG/Session filterの旧row削除、Cookie期限0、principal/SavedRequest/operation token/CSRF消去、新session/再送queue0、別session不変 |
+| PT-WEB-162 | web162RealHttpExpiredGetReturnsToLogin | 実Login後、検証済0102相当のfixture入口から実handler。302/固定Location、SQL row消失、失効Cookie、次回保護GETは未認証、native0/追加API Login0 |
+| PT-WEB-163 | web163RealHttpPostAjaxAndMediaNeverReplay | Login後POST/HEAD/AJAX/mediaの0102は401、安全errorの匿名DOM、旧TopBar/CSRFなし、元UUID、body再送0、秘密非表示 |
+| PT-WEB-164 | web164InvalidationFaultsNeverClaimSuccessfulLogout | DB delete前/commit故障、logger/response/commit済/clear失敗は伝播または503、削除未確定を成功扱いしない。API失効とLogout再試行を混同しない |
+| PT-WEB-165 | web165ConcurrentAndStaleInvalidationCannotDeleteNewLogin | 100並行の各actor/UUID/row/Cookieを照合し別要求混入0。古い要求とLogin fixationを順序制御し、旧hash削除で新rowは残る、全資源終了 |
+
+### 14.14 Scenario6電文のWeb交換（PG-D-118）
+
+ScenarioWireClient/ScenarioWireException/閉Result、既存JmsRequestReplyClient。NK-WEB-001/NK-SCN-001、FUN-003～005/MQ-003～010/AUT/TST、UI221/223/231/232/234/237、SS311/312/313/321/322/323/333/352。UI234の固定offset/lengthと独立literal byte列・意味値を期待としproduction encoderでexpectedを作らない。明示合成senderと実既存相関registryを使い、実Artemis/最終controller/実NK CHRとは区別する。結果・command/環境/sourcecommit/coverage/関連BUG/SSC・証跡hashは002/manifestへ記録する。
+
+| Test ID | ScenarioWireClientTest#method | 目的・fixture/入力/操作・独立期待 |
+|---|---|---|
+| PT-WEB-166 | web166SixRequestsMatchIndependentWire | GAM/SPK/SRC/RTE/SCF/SCN typed input、固定Clock/UUID/context、手組header/DATA全byte照合、send1、buffer消去 |
+| PT-WEB-167 | web167SixSuccessResponsesDecodeWithoutRetainingSecrets | 6layout正常/0200、0/1/最大record、SCN I/Fの独立vector→typed意味値/順、closed診断/不変collection |
+| PT-WEB-168 | web168ApprovedErrorsNeverExposeSuccessPayload | 全承認error codeと6layoutのblank/zero error profile、code保持/payload空、残留success field拒否 |
+| PT-WEB-169 | web169MalformedUncorrelatedAndForeignResponsesReject | 長さ/header/layout/kind/version/count/context/UUID/UTF8/NFC/padding/record意味値破損、別要求混同なし、全temporary消去 |
+| PT-WEB-170 | web170InputAndConfigurationFaultsNeverSend | null/欠落/非許可layout/型/records/field/timeout範囲/Clock/UUID、送信なし、固定例外に秘密/cause/suppressedなし |
+| PT-WEB-171 | web171TransportFailuresDoNotRetryOrLeakPending | JMS checked/runtime/timeout/capacity/interrupt/late response、再送0、pending0、割込維持、buffer全消去 |
+| PT-WEB-172 | web172ConcurrentQueriesKeepContextsAndRepliesSeparate | 100並行6layout、各UUID/context/input/output独立照合、同じclient上で誤配信/状態混入/公開monitor依存なし |
+| PT-WEB-173 | web173ResponseBoundsAndCallerOwnershipRemainExact | Layout上限byte/件数、短/過長、境界record/count整合、caller typed値不変、一時値非保持、response解放 |
+
+## 15. 実行とexit
+
+2026-10-03 PG-D348/BUG561/YKT405追記：PT-WEB-CSRF054（WebCsrfIntegrationTest.web054RotationResultMustMatchNewObservedSession）は既存sessionへのgenerateTokenで返却ID非null・再取得sessionと一致・旧IDから変更というSS314 fixation後条件を独立旧/新/別ID literalで確認する。no-op、返却null、session消失、不一致を固定SessionStoreExceptionで拒否し、tokenを返さず、unknown Errorは原identityで伝播する。PT-WEB-050～053は実暗号DB/filter/rotation/Cookie/並行の正常契約を再実行、Source/選択証跡は016060・PG437 manifestを参照。同Source全回帰とnativeは別、静的指摘抑制・coverage除外・raw ID保存なし。
+
+421のJava25/Maven toolchainで探索testとroot clean verifyを実行する。line/method/class/branch各100%、NullAway/negative/SpotBugs/format/Enforcer、failed/flaky/skipped/not-run0。public NPEは契約違反のfail-fastをassertし、Productionでcatchして正常扱いしない。全不正入力で秘密情報を例外cause/suppressedへ保持しない。
+
+実行command・日時・OS/JDK/tool・branch/sourcecommit・終了code・入力/期待/実際・coverage・BUG/SSC・sanitized evidence path/hashは002とevidence/manifest.jsonへ記録する。001～165は正式Web20260909-12実施済み、source970681df/全790件・全coverage100%/静的解析0。BUG-057/YKT-052はlifecycle-exploration.md、058/059と053/054はspring-session-exploration.md、CSRF接続はcsrf-filter-exploration.md、BUG060～062/YKT055/056はlogin-exploration.mdとprovider-exploration.md。閉context/fixationはsecurity-context-exploration.md。SavedRequest/BUG063～065・YKT057はrequest-cache-exploration.md。Login form/filter・BUG066/YKT058はform-filter-exploration.md。Form allowlist/HTTP header・BUG067/YKT059はheader-allowlist-exploration.md。SECURITY JSON/BUG068/YKT060はaudit-exploration.md。Caddy context/実CSRF拒否監査・BUG069/YKT061はrequest-context-exploration.md。本番logger/全画面等は未実施であり合格へ算入しない。 Tomcat実HTTP・BUG070/071・YKT062/063はcontainer-exploration.md。 Login結果handler/SSC046はlogin-handler-exploration.md。 URL認可/BUG072・YKT064はauthorization-exploration.md、未認証/role応答はaccess-response-exploration.md。 単一chain/閉Servlet principal・BUG073/YKT065はsecurity-chain-exploration.md。 Menu実MVC/DOMはmenu-mvc-exploration.md。 共通error・BUG074/YKT066/SSC047はerror-mvc-exploration.md。 API0102/SSC048はapi-session-invalid-exploration.md。
+## SSC182 Current CSP literal整合（2026-10-05）
+
+BUG688/YKT493、SS352355/SSC182。WEB091～094とEmbeddedWebSecurityTestの独立expectedをCurrent CHR-A01固定header literalに統一し、default-src selfのscript/connect継承・inline/eval/external不許可を維持する。Current baseline/比較oracle・DIF追加/値の正規化は不変更。018332333/PG461-caddy-policy-selected-v4に同変更群の9suite50PT・FES0/静的6zero/dirty source SHAを記録、fresh全回帰/実A01/正式は未受入。旧evidence/logs内の仕様書コピーは歴史証拠で書き換えない。
+
+## 2026-11-09 WebLogPayloadCodec原9・有限owner再資格
+
+018/3987-3988、PG25758原9→PG25760独立post参照。source6f0457/currentMain7aed、3Source四counter100・45CRC/SDK0。UI235 QA054に基づくshared golden一literal是正(BUG2615)を明示、後続六caller/YKT2303未再資格。正式/Program015全完了・生成record直接全契約には加算しない。
+
+## 2026-11-09 固定Header原4の有限owner再資格
+
+018/3989-3990、25818原4→SDK25832(metadataのみ42class)→25820独立参照。source2d1f/currentMain7aed、二Source line/method/class100・自然branch0はN-A/nullでstrict非空四gate未受入。既get10/全元4oracle保持。実HTTP/auth/session/全451へ加算0。
+
+## 2026-11-09 閉鎖identity/URL認可 原8の有限owner再資格
+
+018/3991-3992、25858原8→25862 SDK identity99→25860独立。source6c5a/Main7aed、target2Source3Code L47M14C3B12I242、ClosedServlet四100/Factory自然B0 N-Aで全Source非空四未受入。合成MockSession/内部Authだけ、実サービス認証への成功換算0。
+
+## 2026-11-09 RequestTrace原10・QA054内部直接三観点
+
+018/3993-3994、25918原10＋既method追加3観点→SDK25922 identity29→25920独立。sourcecbe/Main7aed、4Source5Code L130M36C5B42I668。Trace/Context/Interceptor四100、Config自然B0 N-Aで全Source非空四未受入。公開repo Sourcefixture読取だけ、実認証/原本VM等操作0。正式・Program015全完了への加算0。
+
+## 2026-11-09 Security監査原6の有限owner再資格
+
+018/3995-3996、初25958 strictcompile1/0Testを保全→Gson公開POM注釈依存補完→source9f/25982 compile警告0/原6成功→SDK25986 identity26→25984独立。一Source三Code L89M11C3B52I469四100/EnumclassB0二N-A、generated enum全直接契約・Program015全完了/全451へ転用0。実audit sink/認証/原本等操作0。
