@@ -234,6 +234,20 @@ final class IndependentNamedFieldOracle {
         }
       }
       // PT-PRO-001-NAMED-RANGE-001-END
+      // PT-PRO-001-NAMED-FLAG-001-BEGIN
+      if (signature.get(n) == boolean.class) {
+        for (boolean flag : new boolean[] {false, true}) {
+          Map<String, FieldValue> flagFields = new LinkedHashMap<>(input);
+          flagFields.put(field.name(), new FieldValue.Flag(flag));
+          Object flagged = from.invoke(null, new FieldValueSet(flagFields));
+          assertEquals(Boolean.valueOf(flag), getters.get(n).invoke(flagged), field.name());
+          assertWireMap(flagFields, fieldsOf(flagged));
+          Object[] flagArguments = arguments.toArray();
+          flagArguments[n] = flag;
+          assertWireMap(flagFields, fieldsOf(constructor.newInstance(flagArguments)));
+        }
+      }
+      // PT-PRO-001-NAMED-FLAG-001-END
     }
     var nullFailure =
         assertThrows(InvocationTargetException.class, () -> from.invoke(null, new Object[] {null}));
