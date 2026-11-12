@@ -7,7 +7,7 @@ NK-MSG-001。RD MQ003/006..010、UI231/232、SS312/321/322/323、411/451。Produ
 | PT-JMS-TXP001..009 原9 | EventTransactionPortTest全原method、literal QWK320byte／WLG2336byte | 原SS offset入力・process/commit/rollback/callback順・恒久隔離・UNKNOWNのassertを保持。旧結果を当sourceへ移さず同runで必要再資格 |
 | PT-JMS-TXP010 新1 | 2route×2entry×2getter×IAE/NPEの16入力。元getterが返さず投例外 | provider故障はwire不正ではない。元instance・body不変・DLQ mutation/send/commitなし、rollback一回。observedはattempted→rollback→confirmed、legacyはrollbackだけ |
 | PT-JMS-TXP011 新1 | default portへ(event=null/delivery=null/両null)、次に明示literal objectの正常入力 | null三入力はSAM未実行、正常は元event同一instanceをSAMへ一回。期待はcount/identityでproduction codecから生成しない |
-| PT-JMS-DLQ-WRITER-BOUND 新1 | Writer transport128（内側ASCII space/上限tilde）×code長1/32の4正常、0x1f/0x7fの近傍2異常 | 128文字transportとcodeをtrimせず保持、body[0,32,255] exact、境界外は送出propertyを作らずIAE。literal値が独立oracle |
+| PT-JMS-DLQ-WRITER-BOUND 新1 | FatalDlqMessageWriterTest.exactPrintable128AndErrorCode32BoundariesAreRetainedWithoutTrimming。Writer transport128（内側ASCII space/上限tilde）×code長1/32の4正常、0x1f/0x7fの近傍2異常 | 128文字transportとcodeをtrimせず保持、body[0,32,255] exact、境界外は送出propertyを作らずIAE。literal値が独立oracle |
 | PT-JMS-INPORT001..006／EVENT-DELIVERY原2／Writer原3／DLQ001..008／Guard全8 | 全classの借用JMS Proxy、null/欠落/empty/未知/境界/例外 | 既whole fixtureを再利用し同種guarded/untrusted試験を新規製造しない。元独立expectedを保持 |
 | Protocol130 | 当byteの共通codec全class | 閉包全counter検証の必要共有、原golden保持・旧exec合算なし |
 
@@ -18,3 +18,12 @@ NK-MSG-001。RD MQ003/006..010、UI231/232、SS312/321/322/323、411/451。Produ
 Preflight26582 SHA `902bc2c3c375bc75f707caa8596384ac361e0fc6a60e5ddfb2c1c663c6cb21f3`。予定commandは `PYTHONPATH=tools/quality python3 -B evidence/01_PT/018_NK-OPS-001/input/1272_event_normal_qualifier.py run <固定commit>`。PG26584／独立PG26586へ実日時・OS/JDK/tool・branch/source・command/exit・入力/期待/実際・全190physical/当CRC・line/method/class/branch・XMLhashを保存する。作成時green/coverageは未実行。
 
 全fixtureはJMS API ProxyとArtemis宛先の値だけで実serviceを起動せず、actual held四classを読み/compile/loadしない。unsafe embedded whole fixtureからmethodを選択しない。実DB/鍵/Root/VM/native/配備/intentへ進まない。C04/F02F03/四owner/全451・正式1964/53は未完、IT/ST完了は宣言しない。
+
+
+## 現行追補：同一exceptionの二境界、全170予定
+
+元169はPG26584で全成功だが依存InboundTransactionsにbranch二件の未実行があり、PG26586はactualExit1・閉包未受入として保存。成功169をcoverage PASSへ変更しない。26590で追加.05/.15/.3を事前凍結し、原群.35/.9/1.8を保持したまま改訂.4/1.05/2.1cap3。
+
+PT-JMS-INPORT007／InboundTransactionPortTest.identicalIsolationAndRollbackFailuresDoNotSelfSuppressOrFakeConfirmationを一件追加。①provider隔離例外とprotocolが同一instanceでも自己suppressionせず、同じcause・suppressed0・send→attempted→rollback→confirmed。②primaryとrollback例外が同一でも自己suppressionせず、同じcause・suppressed0・attempted→rollbackだけ、commit/send/confirmedなし。JDK自己suppression禁止とSS321/322のphase保持が独立oracle。本体codeを変えず、元全6を逆変換保持した。
+
+26592製造→26594変更Testだけcompile0（Main14成功を再演せず同byte保持）→26596変更Test raw4文脈非該当・他5fixture原26を同source照合→26598 preflight 1e5329b9cd9a68fbbaf7a683f1073bad3ad9c2cf0c1fb50f15fe4f343c6d936f。次は固定sourceのEvent11＋Inbound7＋Delivery2＋Writer4＋DLQ8＋Guard8＋Protocol130=170を同run PG26600へ、独立PG26602で全190physicalの四counterを確認。旧169 execとの合算は禁止。commandは1276_event_current_qualifier.py run <固定commit>。本追補作成時170未実行、global451/正式は未完。

@@ -221,6 +221,45 @@ final class InboundTransactionPortTest {
     assertEquals(0, observed.commits);
   }
 
+  @Test
+  void identicalIsolationAndRollbackFailuresDoNotSelfSuppressOrFakeConfirmation() {
+    // PT-JMS-INPORT007; JDK self-suppression must never replace the actual phase failure.
+    Fixture isolation = new Fixture();
+    var sameProtocol = protocol();
+    isolation.faults = Map.of(SEND, sameProtocol);
+    var failed =
+        assertThrows(
+            FailedJmsIsolationException.class,
+            () -> isolate(isolation, isolation.message(), sameProtocol));
+    assertSame(sameProtocol, failed.getCause());
+    assertEquals(0, failed.getSuppressed().length);
+    assertEquals(0, sameProtocol.getSuppressed().length);
+    assertEquals(List.of(SEND, ATTEMPTED, ROLLBACK, CONFIRMED), isolation.events);
+    assertEquals(1, isolation.sends);
+    assertEquals(1, isolation.rollbacks);
+    assertEquals(0, isolation.commits);
+
+    Fixture rollback = new Fixture();
+    var sameFailure = new IllegalStateException("synthetic identical rollback");
+    rollback.faults = Map.of(ROLLBACK, sameFailure);
+    var unconfirmed =
+        assertThrows(
+            UnconfirmedJmsRollbackException.class,
+            () ->
+                InboundTransactions.rollbackAfterFailure(
+                    rollback.context(),
+                    sameFailure,
+                    () -> rollback.events.add(ATTEMPTED),
+                    () -> rollback.events.add(CONFIRMED)));
+    assertSame(sameFailure, unconfirmed.getCause());
+    assertEquals(0, unconfirmed.getSuppressed().length);
+    assertEquals(0, sameFailure.getSuppressed().length);
+    assertEquals(List.of(ATTEMPTED, ROLLBACK), rollback.events);
+    assertEquals(1, rollback.rollbacks);
+    assertEquals(0, rollback.commits);
+    assertEquals(0, rollback.sends);
+  }
+
   private static PermanentProtocolException protocol() {
     return new PermanentProtocolException("own invalid wire fixture");
   }

@@ -1,0 +1,242 @@
+[
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+    "line": 250,
+    "sourceLine": "            BytesMessage.class.getClassLoader(),",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JVM Proxy implements exact JMS interface using its defining loader. No J2EE container/context loader or reflective-access override; preserving the interface identity is deliberate."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+    "line": 278,
+    "sourceLine": "    Map<String, Object> values = new HashMap<>();",
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Each map belongs exclusively to one synchronous fixture; no concurrent read/write, deliberate null/missing value cases. No production shared map."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+    "line": 292,
+    "sourceLine": "    Map<String, Object> copy = new HashMap<>(source);",
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Each map belongs exclusively to one synchronous fixture; no concurrent read/write, deliberate null/missing value cases. No production shared map."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+    "line": 298,
+    "sourceLine": "    Map<String, Object> copy = new HashMap<>(source);",
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Each map belongs exclusively to one synchronous fixture; no concurrent read/write, deliberate null/missing value cases. No production shared map."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+    "line": 315,
+    "sourceLine": "            type.getClassLoader(),",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JVM Proxy implements exact JMS interface using its defining loader. No J2EE container/context loader or reflective-access override; preserving the interface identity is deliberate."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+    "line": 360,
+    "sourceLine": "                return ignored == arguments[0];",
+    "rule": "CompareObjectsWithEquals",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Proxy equals handler implements reference identity without recursively calling Proxy.equals; this is intentional Object identity, not a domain value comparison."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java",
+    "line": 126,
+    "sourceLine": "      var context = s.context();",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "This is a borrowed interface-only JMSContext Proxy with no external resource. Listener/sender must not own close; fixture rejects unexpected operations. No factory/server/connection is created, fixture Java values are self-contained."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java",
+    "line": 156,
+    "sourceLine": "      var context = s.context();",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "This is a borrowed interface-only JMSContext Proxy with no external resource. Listener/sender must not own close; fixture rejects unexpected operations. No factory/server/connection is created, fixture Java values are self-contained."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java",
+    "line": 193,
+    "sourceLine": "      var context = s.context();",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "This is a borrowed interface-only JMSContext Proxy with no external resource. Listener/sender must not own close; fixture rejects unexpected operations. No factory/server/connection is created, fixture Java values are self-contained."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java",
+    "line": 227,
+    "sourceLine": "      var context = s.context();",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "This is a borrowed interface-only JMSContext Proxy with no external resource. Listener/sender must not own close; fixture rejects unexpected operations. No factory/server/connection is created, fixture Java values are self-contained."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java",
+    "line": 252,
+    "sourceLine": "    var context = s.context();",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "This is a borrowed interface-only JMSContext Proxy with no external resource. Listener/sender must not own close; fixture rejects unexpected operations. No factory/server/connection is created, fixture Java values are self-contained."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java",
+    "line": 276,
+    "sourceLine": "    var context = s.context();",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "This is a borrowed interface-only JMSContext Proxy with no external resource. Listener/sender must not own close; fixture rejects unexpected operations. No factory/server/connection is created, fixture Java values are self-contained."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java",
+    "line": 309,
+    "sourceLine": "      var context = s.context();",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "This is a borrowed interface-only JMSContext Proxy with no external resource. Listener/sender must not own close; fixture rejects unexpected operations. No factory/server/connection is created, fixture Java values are self-contained."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java",
+    "line": 358,
+    "sourceLine": "                        BytesMessage.class.getClassLoader(),",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JVM Proxy implements exact JMS interface using its defining loader. No J2EE container/context loader or reflective-access override; preserving the interface identity is deliberate."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java",
+    "line": 371,
+    "sourceLine": "            var context = s.context();",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "This is a borrowed interface-only JMSContext Proxy with no external resource. Listener/sender must not own close; fixture rejects unexpected operations. No factory/server/connection is created, fixture Java values are self-contained."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java",
+    "line": 538,
+    "sourceLine": "    private final Map<String, Object> properties = new LinkedHashMap<>();",
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Each map belongs exclusively to one synchronous fixture; no concurrent read/write, deliberate null/missing value cases. No production shared map."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java",
+    "line": 559,
+    "sourceLine": "              JMSContext.class.getClassLoader(),",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JVM Proxy implements exact JMS interface using its defining loader. No J2EE container/context loader or reflective-access override; preserving the interface identity is deliberate."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java",
+    "line": 585,
+    "sourceLine": "              JMSProducer.class.getClassLoader(),",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JVM Proxy implements exact JMS interface using its defining loader. No J2EE container/context loader or reflective-access override; preserving the interface identity is deliberate."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java",
+    "line": 612,
+    "sourceLine": "              BytesMessage.class.getClassLoader(),",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JVM Proxy implements exact JMS interface using its defining loader. No J2EE container/context loader or reflective-access override; preserving the interface identity is deliberate."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/DlqSenderContractTest.java",
+    "line": 450,
+    "sourceLine": "    private final Map<String, Object> properties = new LinkedHashMap<>();",
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Each map belongs exclusively to one synchronous fixture; no concurrent read/write, deliberate null/missing value cases. No production shared map."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/DlqSenderContractTest.java",
+    "line": 617,
+    "sourceLine": "    return type.cast(Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, handler));",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JVM Proxy implements exact JMS interface using its defining loader. No J2EE container/context loader or reflective-access override; preserving the interface identity is deliberate."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriterTest.java",
+    "line": 64,
+    "sourceLine": "    JMSContext context = context(new Capture());",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "This is a borrowed interface-only JMSContext Proxy with no external resource. Listener/sender must not own close; fixture rejects unexpected operations. No factory/server/connection is created, fixture Java values are self-contained."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriterTest.java",
+    "line": 205,
+    "sourceLine": "      case \"equals\" -> proxy == arguments[0];",
+    "rule": "CompareObjectsWithEquals",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Proxy equals handler implements reference identity without recursively calling Proxy.equals; this is intentional Object identity, not a domain value comparison."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriterTest.java",
+    "line": 211,
+    "sourceLine": "    return type.cast(Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, handler));",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JVM Proxy implements exact JMS interface using its defining loader. No J2EE container/context loader or reflective-access override; preserving the interface identity is deliberate."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriterTest.java",
+    "line": 215,
+    "sourceLine": "    private final Map<String, String> stringProperties = new HashMap<>();",
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Each map belongs exclusively to one synchronous fixture; no concurrent read/write, deliberate null/missing value cases. No production shared map."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriterTest.java",
+    "line": 216,
+    "sourceLine": "    private final Map<String, Integer> intProperties = new HashMap<>();",
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Each map belongs exclusively to one synchronous fixture; no concurrent read/write, deliberate null/missing value cases. No production shared map."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionPortTest.java",
+    "line": 282,
+    "sourceLine": "    final Map<String, Object> properties = new HashMap<>();",
+    "rule": "UseConcurrentHashMap",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Fixture-local synchronous maps only, deliberately null/missing provider data; no concurrent state."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionPortTest.java",
+    "line": 303,
+    "sourceLine": "              JMSContext.class.getClassLoader(),",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JMS interface Proxy uses defining loader for exact type identity; no J2EE server/context-loader service or access override."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionPortTest.java",
+    "line": 328,
+    "sourceLine": "              JMSProducer.class.getClassLoader(),",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JMS interface Proxy uses defining loader for exact type identity; no J2EE server/context-loader service or access override."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionPortTest.java",
+    "line": 355,
+    "sourceLine": "              Message.class.getClassLoader(),",
+    "rule": "UseProperClassLoader",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JMS interface Proxy uses defining loader for exact type identity; no J2EE server/context-loader service or access override."
+  }
+]
