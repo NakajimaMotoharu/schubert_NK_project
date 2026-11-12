@@ -97,3 +97,6 @@ WBS-P016-17公開source契約/独立期待値/TestIDは[4153_P01617User詳細更
 
 
 P01615/16/17原pureUser32は[仕様](4155_P016151617原User三二件通常単体仕様.md)/[結果](4156_P016151617原User三二件通常単体結果.md)、8source9Code同exec四100/全191partial、actual認証・更新DB/HTTP/token/CHR/451終了は未受入。
+
+
+P01615新User検索入力8は[仕様](4157_P01615User検索入力八単体仕様.md)/[結果](4158_P01615User検索入力八単体結果.md)、Form全source四100/全177partial、actualHTTP/認可/DB/CHR/451は別未受入。
