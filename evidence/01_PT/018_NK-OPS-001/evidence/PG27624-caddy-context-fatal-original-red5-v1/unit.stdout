@@ -1,0 +1,87 @@
+
+Failures (5):
+  JUnit Jupiter:CaddyContextFatalContractTest:fatal004IdentifyIdReadGraphAndStableServerIdentity()
+    MethodSource [className = 'dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest', methodName = 'fatal004IdentifyIdReadGraphAndStableServerIdentity', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <java.lang.IllegalStateException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest.fatal004IdentifyIdReadGraphAndStableServerIdentity(CaddyContextFatalContractTest.java:158)
+       [...]
+     Caused by: java.lang.IllegalStateException: web request context is unavailable
+       dev.codex.schubert.nk.web.security.WebRequestContext.identify(WebRequestContext.java:63)
+       dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest.lambda$fatal004IdentifyIdReadGraphAndStableServerIdentity$0(CaddyContextFatalContractTest.java:159)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:CaddyContextFatalContractTest:fatal001ResolverClosedForwardingVectorsAndProviderGraph()
+    MethodSource [className = 'dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest', methodName = 'fatal001ResolverClosedForwardingVectorsAndProviderGraph', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <dev.codex.schubert.nk.web.security.CaddyRequestRejectedException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest.fatal001ResolverClosedForwardingVectorsAndProviderGraph(CaddyContextFatalContractTest.java:52)
+       [...]
+     Caused by: dev.codex.schubert.nk.web.security.CaddyRequestRejectedException: request proxy is invalid
+       dev.codex.schubert.nk.web.security.CaddyClientAddressResolver.resolve(CaddyClientAddressResolver.java:29)
+       dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest.lambda$fatal001ResolverClosedForwardingVectorsAndProviderGraph$0(CaddyContextFatalContractTest.java:53)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:CaddyContextFatalContractTest:fatal002FilterContextSaveKeepsFatalAndNeverDispatches()
+    MethodSource [className = 'dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest', methodName = 'fatal002FilterContextSaveKeepsFatalAndNeverDispatches', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <java.lang.IllegalStateException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest.fatal002FilterContextSaveKeepsFatalAndNeverDispatches(CaddyContextFatalContractTest.java:105)
+       [...]
+     Caused by: java.lang.IllegalStateException: web request context is unavailable
+       dev.codex.schubert.nk.web.security.CaddyTransportContextFilter.doFilter(CaddyTransportContextFilter.java:67)
+       dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest.lambda$fatal002FilterContextSaveKeepsFatalAndNeverDispatches$0(CaddyContextFatalContractTest.java:108)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:CaddyContextFatalContractTest:fatal003ExistingContextReadGraphAndForeignMetadataNeverStringifies()
+    MethodSource [className = 'dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest', methodName = 'fatal003ExistingContextReadGraphAndForeignMetadataNeverStringifies', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <java.lang.IllegalStateException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest.fatal003ExistingContextReadGraphAndForeignMetadataNeverStringifies(CaddyContextFatalContractTest.java:131)
+       [...]
+     Caused by: java.lang.IllegalStateException: web request context is unavailable
+       dev.codex.schubert.nk.web.security.WebRequestContext.existing(WebRequestContext.java:50)
+       dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest.lambda$fatal003ExistingContextReadGraphAndForeignMetadataNeverStringifies$0(CaddyContextFatalContractTest.java:131)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:CaddyContextFatalContractTest:fatal005IdentifyIdWriteGraphAndNoFallbackAfterFailure()
+    MethodSource [className = 'dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest', methodName = 'fatal005IdentifyIdWriteGraphAndNoFallbackAfterFailure', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <java.lang.IllegalStateException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest.fatal005IdentifyIdWriteGraphAndNoFallbackAfterFailure(CaddyContextFatalContractTest.java:196)
+       [...]
+     Caused by: java.lang.IllegalStateException: web request context is unavailable
+       dev.codex.schubert.nk.web.security.WebRequestContext.identify(WebRequestContext.java:74)
+       dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest.lambda$fatal005IdentifyIdWriteGraphAndNoFallbackAfterFailure$0(CaddyContextFatalContractTest.java:197)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+
+Test run finished after 365 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         5 tests found           ]
+[         0 tests skipped         ]
+[         5 tests started         ]
+[         0 tests aborted         ]
+[         0 tests successful      ]
+[         5 tests failed          ]
+

@@ -41,3 +41,5 @@ WBS-P016-01公開source契約/独立期待値/TestIDは[4126_P01601Login画面�
 WBS-P016-02公開source契約/独立期待値/TestIDは[4127_P01602Menu画面原四artifact契約対応.md](4127_P01602Menu画面原四artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
 
 [4128 共有TraceMenu通常24](../006_NK-MSG-002/4128_P00603共有Trace原十五・新五全二四件単体仕様.md): PG27610-TRACE-MENU24固定全24成功、原赤3失敗別記/実target全四100・全scopepartial・原WBS未受入。
+
+[4129 CaddyContext通常24](../015_NK-WEB-001/4129_P01502CaddyContext原十五・新五全二四件単体仕様.md): PG27630-CADDY-CONTEXT24固定全24成功、原赤5失敗別記/実target全四100・全scopepartial・原WBS未受入。
