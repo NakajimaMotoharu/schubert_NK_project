@@ -1,0 +1,101 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T14:08:32.078161+09:00",
+  "source": "d4f695a314ace7457f315e69ca5d67bfb7b8770b",
+  "productionCoreMain": "a27bf16e22698294a5900b13f06a09d1d213d830",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java": "217b86beb833a3be43fefffa486ac124a5ba52a0dab205e000dfdb631598aa7a",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/MediaRepository.java": "229fa7d29d001b33323d2fdbf866264c161dba04f876fc29c4f6dce6af7525dc"
+  },
+  "wholeOwnSourceReviewed": true,
+  "designs": {
+    "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md": {
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md": {
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    }
+  },
+  "checks": [
+    {
+      "id": "P00901-PG01",
+      "methods": "MediaRequest.decode/header/responseLayoutId/descriptor/canonical/query",
+      "testIds": [
+        "PT-MED-033..036"
+      ],
+      "expected": "Eightallowlisted AUD/ANM/ANL/VID/MCT/MCS/MTR/MED request001, headerregistry andtypedsemantic/datawipe before dispatch, responsepairedID. DescriptoronlyAUD/VID/MED, exactlogicalID/requestdisposition andtype; VideoINLINE only. Canonical owner/layout001/REQUEST:layout fixedfieldorder, numericAudioID canonical Longdecimal/disposition, ANLcategory, VIDvideoId, MCS/MTRcategory/section, MEDtrackId/disposition, menu/categoriesempty; callerclosesbuffers. Decode/canonicalvalues grantnoauth/physicalfile. WholeRequest3 includes actualFingerprint even thoughfirstmethodpure, noextract."
+    },
+    {
+      "id": "P00901-PG02",
+      "methods": "MediaRepository.audioMetadata/musicMetadata/videoMetadata/animationMenu/animationList/musicCategories/musicSections/musicTracks/query/descriptor",
+      "testIds": [
+        "PT-MED-008..017",
+        "PT-MED-036"
+      ],
+      "expected": "Borrowed explicitreadonly nonautocommit connection/verifiedactor USERorADMIN allmedia, ownedstatement/resultclose only; parameterbindnotinterpolation, no directoryenumeration/titlepairinference. Audio id::text exact/OGG; MUSIC/VIDEO type-scopedlogicalID, requiredmetadata ID/size/SHA/MIME/name/path validated, videodisplay fields OPENING included. Menu counts storedMAIN+SUBTRACK/OVA/OPENING,maxoneopening/unknownreject/total999. AnimationMAINincludesSUBTRACK onlywithstoredMAINparent, display_order/logicalIdC, max50. Musiccategory曲/BGM/otherC max20; sectionゲーム/アニメ/キャラクターソング/otherC max100; tracksstored pairkey/M-I-N role/displayorder/logicalIdC max200. Eachquerymax+1 sentinel, requiredSQLNULL/unknownenum/overflow/wire9000, resourcecount9001 onlywithoutcompoundclosefault; preservefatalbeforecatalog. DescriptorOptionalemptyonlygenuinemissing, not unreadable/invalid. Relativepathinternalwire only, Webdisplayprojectionseparate."
+    },
+    {
+      "id": "P00901-PG03",
+      "methods": "MediaApplicationService.process/run/inspect/prepare/complete/identity/transaction",
+      "testIds": [
+        "PT-MED-055..061"
+      ],
+      "expected": "SameMessageguard; readonly freshactor/Inboxsource snapshot orquery, committed+closed before descriptorphysicalverify, includingREPLAY. finalwrite freshsameowner verifies/touchesactor andnormalInboxarbitration; onlyNEW capturesfrozenbytes; definitiveNOTFOUND/RESOURCE onlypersist, sessioninvalid/infrastructure notsaved. Actorchanged orfailedkey/unknownfiles no success. Exact24h refretention, savedcompletionconsistency, replaynotrequery/changeauthority, replyafterDBcommitclose withfreshstageclock/UUID. OwnedSQLRuntimeError -> rollbackonce thenclose, secondaryattached/fatalidentity preserved, commit+closefailure nottreatedrollbacksuccess. APIregistration/rootready remains separate."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaApplicationServiceTest.java",
+      "sha256": "2d32979e7169899663259b3e5f0e5b176baba2a77f6d5eb239532c887964385d",
+      "tests": 7,
+      "reasons": [
+        "ApiLogDatabaseFixture",
+        "TemporaryInfrastructureException"
+      ],
+      "status": "HOLD_WHOLE_DB_KEY_BROKER_DEPENDENCIES_NO_PARTIAL_SELECTION",
+      "wholeBodyReviewed": false,
+      "methodIndexReviewed": true
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaRequestTest.java",
+      "sha256": "c179ee62c17e81940fb29790a0601f5be6f9c0a493689d4dbb0f2f9b9cc6aa60",
+      "tests": 3,
+      "reasons": [
+        "FingerprintKeyRing"
+      ],
+      "status": "HOLD_WHOLE_DB_KEY_BROKER_DEPENDENCIES_NO_PARTIAL_SELECTION",
+      "wholeBodyReviewed": true,
+      "methodIndexReviewed": true
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/MediaRepositoryTest.java",
+      "sha256": "6f67bd741ba4946b4c29999857cf5b3368e45b4e6d944dc03395f378e6979cf6",
+      "tests": 11,
+      "reasons": [
+        "ApiLogDatabaseFixture"
+      ],
+      "status": "HOLD_WHOLE_DB_KEY_BROKER_DEPENDENCIES_NO_PARTIAL_SELECTION",
+      "wholeBodyReviewed": false,
+      "methodIndexReviewed": true
+    }
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P009-01/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_WHOLE_KEY_DB_BROKER_HELD_AND_EXIT",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1395_media_query_contract_audit.py",
+    "sha256": "e4c2446bf616ae3980afab46a6ece79da2c2ba400836180b494f971aaa98f074"
+  }
+}

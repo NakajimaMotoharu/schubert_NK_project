@@ -1,0 +1,41 @@
+{
+  "actualExit": 0,
+  "source": "a27bf16e22698294a5900b13f06a09d1d213d830",
+  "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaReplayService.java",
+  "sourceSha256": "6ab00046a2001d579cb9a32787d9f17c22ae8cc4b079f366232878bd0e6154e2",
+  "sites": [
+    {
+      "method": "captureSuccess",
+      "line": 101,
+      "types": "ResponseSnapshotException\n        | PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure",
+      "body": "catch (ResponseSnapshotException\n        | PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure) {\n      throw new TemporaryInfrastructureException();\n    }"
+    },
+    {
+      "method": "captureFailure",
+      "line": 124,
+      "types": "ResponseSnapshotException\n        | PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure",
+      "body": "catch (ResponseSnapshotException\n        | PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure) {\n      throw new TemporaryInfrastructureException();\n    }"
+    },
+    {
+      "method": "read",
+      "line": 179,
+      "types": "ResponseSnapshotException\n        | PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure",
+      "body": "catch (ResponseSnapshotException\n        | PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure) {\n      throw new TemporaryInfrastructureException();\n    }"
+    },
+    {
+      "method": "reply",
+      "line": 207,
+      "types": "PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure",
+      "body": "catch (PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure) {\n      throw new TemporaryInfrastructureException();\n    }"
+    },
+    {
+      "method": "failure",
+      "line": 226,
+      "types": "PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure",
+      "body": "catch (PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure) {\n      throw new TemporaryInfrastructureException();\n    }"
+    }
+  ],
+  "bug": "BUG-2682",
+  "horizontal": "YKT-2359",
+  "productTestsExecuted": 0
+}

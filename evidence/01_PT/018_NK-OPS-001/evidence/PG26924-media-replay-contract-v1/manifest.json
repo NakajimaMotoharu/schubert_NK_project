@@ -1,0 +1,77 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T14:10:50.877193+09:00",
+  "source": "d4f695a314ace7457f315e69ca5d67bfb7b8770b",
+  "productionCoreMain": "a27bf16e22698294a5900b13f06a09d1d213d830",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationAssembly.java": "57cdf6667121b9bba14714fea35c01591b409606292e8b036c11d0164f53ed0a",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaReplayService.java": "6ab00046a2001d579cb9a32787d9f17c22ae8cc4b079f366232878bd0e6154e2"
+  },
+  "wholeOwnSourceReviewed": true,
+  "designs": {
+    "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md": {
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    },
+    "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md": {
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    }
+  },
+  "checks": [
+    {
+      "id": "P00902-PG01",
+      "methods": "MediaApplicationAssembly.create",
+      "testIds": [
+        "PT-MED-ASSEMBLY001..003"
+      ],
+      "expected": "Allcaller supplied database/keyring/snapshotCodec/heldinspector/clock required. Construct ordinary Service/AuthVerifier/ContextHash/Repo/Inbox/Replay only, borrowed resources retained; doesnotopenDB/startconsumer/admitroot/ready/closekeys. CurrentactualKey/Codec byte/runtime/compile HOLD not inferredfromassemblysource."
+    },
+    {
+      "id": "P00902-PG02",
+      "methods": "MediaReplayService.captureSuccess/captureFailure/capture/read/identity/persistentError",
+      "testIds": [
+        "PT-MED-050..053"
+      ],
+      "expected": "All8 pairedresponse001 frozen originalheader/DATA/records encrypted underAAD requestMessage/layout/owner. COMPLETED0000 orERROR9001/listlimit; ERROR0104 onlydescriptor AUD/VID/MED notmenus; session0102/temp9000 nonpersisted. RefNONE always. Originalcompletedmicros matchesheader millis, fullbodylength/correlation/headerregistry/code/state/typedsemantic/descriptor IDdisposition validatebeforeexposed. No snapshotgrantsactor/fileauthority. Plainbody/DATA/records wiped. Fivefixedcatalog conversions must preserve reachablefatal before redaction underSS312; currentlymissing, BUG2682/YKT2359 beforefix."
+    },
+    {
+      "id": "P00902-PG03",
+      "methods": "MediaReplayService.reply/failure/wire/Snapshot",
+      "testIds": [
+        "PT-MED-050..054"
+      ],
+      "expected": "Callerfreshsameowner identity gate thenheader freshMessage/sentmillis/currentrequestcontext/correlation=requestMessage. Savedvalues preserved; onlysuccessreplay0200, failure original9001/descriptor0104, no manufactureddescriptor/fallback/query/physicalhash/DB/JMS/keysownership. Successfuldescriptor request rebind ID/type/disposition. SnapshottoString redacted. WholeReplay5 actualTemp/fixtureCodec and key graph staysHOLD, no splittingmed054apparentlypure."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaReplayServiceTest.java",
+      "sha256": "d9a9d34234e9a729bc9861b6b55dc3b6114c7748eed516c7f9c4cd8ef05cadeb",
+      "tests": 5,
+      "wholeBodyReviewed": false,
+      "methodIndexReviewed": true,
+      "status": "HOLD_WHOLE_ACTUAL_TEMP_CODEC_KEY_FIXTURE_NO_PARTIALMETHOD"
+    }
+  ],
+  "newFatalFinding": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26924-media-replay-contract-v1/fatal-before.json",
+    "sha256": "969353996456ee7e0142e33628b402d7ce42b515030ae52645da2a5d8302aa4c"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P009-02/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_BUG2682_ACTUAL4_CRYPTO_RUNTIME_AND_EXIT",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1399_media_replay_contract_audit.py",
+    "sha256": "64827d6beae010c85f6eebd69ad75c19bc2108a209cc0671e4ca6de44126e29c"
+  }
+}
