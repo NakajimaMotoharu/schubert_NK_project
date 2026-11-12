@@ -1,0 +1,28 @@
+{
+  "actualExit": 0,
+  "source": "43d4489fda4018505827c8f125f93ef501c92e14",
+  "targets": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ContentDetailController.java",
+      "sha256": "2105ba833b33c91ac13129f4bae373a390f2e691115c7b08dc4ac64a5a543fc3",
+      "bug": "BUG-2715",
+      "catchPatterns": [
+        "} catch (FileIntegrityException | IllegalArgumentException failure) {",
+        "} catch (MediaDeliveryException | IllegalArgumentException failure) {",
+        "} catch (ProtectedReadWireException | IllegalArgumentException failure) {"
+      ],
+      "callsNeeded": 3
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/storage/LargeResultReader.java",
+      "sha256": "c034edd141bcb5e529ee842dbe270635ecd299876bca9d2d9ae71aa10faccbc8",
+      "bug": "BUG-2716",
+      "catchPatterns": [
+        "} catch (StorageIoException | PermanentProtocolException | IllegalArgumentException failure) {"
+      ],
+      "callsNeeded": 1,
+      "owner": "WBS-P008-06"
+    }
+  ],
+  "runtimeExecuted": false
+}

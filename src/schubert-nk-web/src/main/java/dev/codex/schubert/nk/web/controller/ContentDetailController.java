@@ -125,6 +125,7 @@ public final class ContentDetailController {
       model.addAttribute("page", ScenarioDetailViewModel.from(actor, data, records));
       return "scenario";
     } catch (FileIntegrityException | IllegalArgumentException failure) {
+      SessionStoreException.preserveFatal(failure);
       response.sendError(503);
       return null;
     }
@@ -162,6 +163,7 @@ public final class ContentDetailController {
           failure.reason() == ProtectedReadWireException.Reason.INVALID_INPUT ? 400 : 503);
       return null;
     } catch (MediaDeliveryException | IllegalArgumentException failure) {
+      SessionStoreException.preserveFatal(failure);
       response.sendError(503);
       return null;
     }
@@ -212,6 +214,7 @@ public final class ContentDetailController {
               payload.records().stream().map(r -> (MusicTrackRecord) r).toList()));
       return "music-list";
     } catch (ProtectedReadWireException | IllegalArgumentException failure) {
+      SessionStoreException.preserveFatal(failure);
       response.sendError(503);
       return null;
     }

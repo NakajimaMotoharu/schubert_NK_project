@@ -7,6 +7,7 @@ import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.StorageAttributeGuard;
 import dev.codex.schubert.nk.storage.StorageIdentity;
 import dev.codex.schubert.nk.storage.StorageIoException;
+import dev.codex.schubert.nk.web.session.SessionStoreException;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
@@ -57,6 +58,7 @@ public final class LargeResultReader {
             });
       }
     } catch (StorageIoException | PermanentProtocolException | IllegalArgumentException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new FileIntegrityException();
     }
   }

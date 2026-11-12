@@ -55,3 +55,6 @@ WBS-P016-05公開source契約/独立期待値/TestIDは[4132_P01605SCR005Route�
 
 
 WBS-P016-06公開source契約/独立期待値/TestIDは[4133_P01606SCR006File一覧原二artifact契約対応.md](4133_P01606SCR006File一覧原二artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-P016-07公開source契約/独立期待値/TestIDは[4134_P01607SCR007本文通信組立原九artifact契約対応.md](4134_P01607SCR007本文通信組立原九artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
