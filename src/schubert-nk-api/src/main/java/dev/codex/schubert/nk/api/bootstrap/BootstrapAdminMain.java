@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.bootstrap;
 
 import dev.codex.schubert.nk.api.application.admin.BootstrapAdminService;
 import dev.codex.schubert.nk.api.application.admin.UserCommandMetadata;
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.file.InspectorCredentialException;
 import dev.codex.schubert.nk.api.file.InspectorCredentialLoader;
 import dev.codex.schubert.nk.api.file.ServiceCredentialException;
@@ -189,11 +190,21 @@ public final class BootstrapAdminMain {
     try {
       Objects.requireNonNull(connection, "connection");
       connection.setAutoCommit(false);
-      connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-      var metadata = new UserCommandMetadata(UUID.randomUUID(), UUID.randomUUID(), Instant.now());
-      var outcome = new BootstrapAdminService().create(connection, username, password, metadata);
-      connection.commit();
-      return outcome == BootstrapAdminService.Outcome.CREATED ? 0 : 20;
+      try {
+        connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+        var metadata = new UserCommandMetadata(UUID.randomUUID(), UUID.randomUUID(), Instant.now());
+        var outcome = new BootstrapAdminService().create(connection, username, password, metadata);
+        connection.commit();
+        return outcome == BootstrapAdminService.Outcome.CREATED ? 0 : 20;
+      } catch (SQLException | RuntimeException | Error failure) {
+        // BUG2697/YKT2371; SS343 SSC188/SS312: caller owns TX, outer TWR owns physical close.
+        try {
+          connection.rollback();
+        } catch (SQLException | RuntimeException | Error rollbackFailure) {
+          TemporaryInfrastructureException.attachSecondary(failure, rollbackFailure);
+        }
+        throw failure;
+      }
     } finally {
       Arrays.fill(password, '\0');
     }

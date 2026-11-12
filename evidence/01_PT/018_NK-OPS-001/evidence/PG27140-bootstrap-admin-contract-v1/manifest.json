@@ -1,0 +1,121 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T16:17:12.501897+09:00",
+  "source": "c29e14a4470daf88727e3c4ea1f9359f1e9d5308",
+  "productionCoreMain": "a695e0da99a5b7749cd1f70a200a767fd3906d3b",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java": "92a2e1e393d01678de79fa5d84518c4f9b5c99269e95ab195ff9c92967dbab43",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain.java": "d6d87b4250ff3cf604308c3373d052a46283130a556c37c25c4e858ef1991f61"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01005-PG01",
+      "methods": "BootstrapAdminService.create/require/Outcome",
+      "testIds": [
+        "PT-ADM-BOOT001..006"
+      ],
+      "expected": "BorrowedwriteTX autoCommitfalse/readOnlyfalse/READ_COMMITTED; sharedmaintenance71419602 try-only thenmembership71419601 thenSHARE_ROW_EXCLUSIVE tablelock thenexistsallusers. Everyrow/null/extra/lockfailure rejects. AnyexistingUser regardlessrole/status returnsALREADY_EXISTS onlyafterheldresult/statementclose, nohash/create/update/audit. EmptyDB onlycreatesoneADMIN ACTIVE/version0/createdBy-updatedBySQLNULL, UInewuserASCII/NFCtrim/ROOTkey andsamePasswordPolicy/PBKDF2. Password/normalizedbuffer wipeeverypath, CREATED provisionaluntilcallercommit+normalclose. Neverfakeauthenticatedactor/use ordinaryUserCREATE or grant startup authority."
+    },
+    {
+      "id": "P01005-PG02",
+      "methods": "BootstrapAdminService.audit; sharedUserCommandMetadata",
+      "testIds": [
+        "PT-ADM-BOOT001/005/006"
+      ],
+      "expected": "Sameoperation UTCtimestamp/traceIDs foruser+ACTION/SECURITY USER_CREATED twoauditrows, actorNULL, fixedsourceBOOTSTRAP/targetID only. Eachaffectedexact1; anyfailure entirecallerrollback, no password/hash/context/credential/providertext. IndependentSQL/PK/grant/count/postconditions andJCAhash oracle resideoriginalwholeDBfixturesHOLD, sourcepresence not actualDBPASS."
+    },
+    {
+      "id": "P01005-PG03",
+      "methods": "BootstrapAdminMain.run/requireActor/requireSame/main/launch",
+      "testIds": [
+        "PT-ADM-BOOT007/008",
+        "PT-ADM-BOOT707001",
+        "PT-ADM-BOOT669001..005"
+      ],
+      "expected": "DedicatedfixedUnit disabledbydefault/no ordinarypermit/JMS flow, APIUID/GID/fixedgroups/cap0/NNP/exactcgroup/currentgeneration beforeafter. Fixedcredentialdirectory only, threeheldcredentials boundedstrictUTF8/root-inode-policy, no argv/env/role overrides. Allsource/root/credential/DB closes andgenerationpost before0created/20existing. Explicitentry fixedThrowable→safe50 diagnostic/terminal+closing order isseparateapprovedlaunchcontract, not ordinaryservicefatalcatalog; noautomatic changefromcatchalone. Rejectargv/namespace70, unknownfailed/closefailed never0/20; actualnative/unit/credentials/DB/globalRootHOLD."
+    },
+    {
+      "id": "P01005-PG04",
+      "methods": "BootstrapAdminMain.createAndCommit",
+      "testIds": [
+        "PT-ADM-BOOT007",
+        "PT-ADM-BOOT007-COMMIT-UNKNOWN"
+      ],
+      "expected": "Password consumed everypath. ConfirmownedmanualTX thenconfigureREAD_COMMITTED/create/commit; returnprovisional0/20onlyoncommitnormal andouterconnection/sourceclose/generationnormal. SQL/Runtime/Error aftermanualTX starts requiresrollbackonce thenpreservefailure, rollbacksecondary retainedusingexistingsharedcontract; borrowedConnectionphysicalclose outercalleronly. Commitunknown remainsfailure evenifservercommitted; repeatexisting20/no duplicate. Currentmethod hasno explicitrollback, BUG2697 beforefix. No inference that driverclose provesrequiredrollback ornormalresourcecompletion."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceTest.java",
+      "sha256": "3814db950ec9a6e6eceee7c529efbbb39731a53acea84f1c4da803804cc5bdb8",
+      "tests": 10,
+      "wholeBodyReviewed": false,
+      "status": "HOLD_WHOLE_DB_BOOTSTRAP_MAIN_NATIVE_NO_EXTRACTION",
+      "dbFixture": true,
+      "externalProcess": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMainTest.java",
+      "sha256": "d3cc062c6481912b4f53da870d2444d9ae56a7a02cdb41343cdca040f0c7736e",
+      "tests": 5,
+      "wholeBodyReviewed": false,
+      "status": "HOLD_WHOLE_DB_BOOTSTRAP_MAIN_NATIVE_NO_EXTRACTION",
+      "dbFixture": true,
+      "externalProcess": true
+    }
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P010-05/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_ROLLBACK_SOURCE_PG_AND_WHOLE_DB_NATIVE_CREDENTIAL_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1486_bootstrap_admin_contract_audit.py",
+    "sha256": "8de7f9f3498c45bb3af30c0f795279885468b195535ed3fe5f7686d50559e8cf"
+  }
+}
