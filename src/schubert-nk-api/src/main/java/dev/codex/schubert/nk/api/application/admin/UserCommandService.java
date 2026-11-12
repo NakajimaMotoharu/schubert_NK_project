@@ -91,6 +91,7 @@ public final class UserCommandService {
                 return rejected(ResultCode.VALIDATION_ERROR, Optional.empty(), Optional.empty());
               normalized = policy.normalizeForCreation(password, name.value());
             } catch (IllegalArgumentException invalid) {
+              TemporaryInfrastructureException.preserveFatal(invalid);
               return rejected(ResultCode.VALIDATION_ERROR, Optional.empty(), Optional.empty());
             }
             String hash = encode(normalized);
@@ -257,6 +258,7 @@ public final class UserCommandService {
           try {
             next = values.make(before);
           } catch (IllegalArgumentException invalid) {
+            TemporaryInfrastructureException.preserveFatal(invalid);
             return rejected(ResultCode.VALIDATION_ERROR, Optional.of(id), stored);
           }
           if (before.role() == UserRole.ADMIN

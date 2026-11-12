@@ -1,0 +1,103 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T15:53:49.546104+09:00",
+  "source": "aa869405cde9eeda70058c951e1b675f5509f572",
+  "productionCoreMain": "eac757a58af15160001cd5909a5b6e5168f1848e",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserAuditWriter.java": "f0458e7874c4c5884e4f4dc79a0aedb803d730ab95469b43c610f3618d2eb474",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.java": "2f2eeb0e07a5682a657ea23ca912b036b14b08e3ad5cf30cd0d5582a526e14a0",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayService.java": "706b3a9d6ce6f70caebbd7f2883bba8eb76fe0cbcfba487e9873df56d56795b4",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter.java": "68568dfbd26fa58a01460ecee9911073b6e66cf2fdea88a69f6776c7892d65d1"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01003-PG01",
+      "methods": "UserMutationReplayService.capture/read/reply/failure/validateResult/persistentError/reference/identity/wire/Snapshot",
+      "testIds": [
+        "PT-ADM-028..032"
+      ],
+      "expected": "Frozen mutation result nevercurrentDB. CurrentADMIN/owner/request-scope required and outercurrentauth/HMAC. Bound sourceMessagePK controlsAAD andsavedcorrelation, retryrequest controlsfreshreplyheader correlation/context/time. Exactly280wire/DATA24/records0/layoutversion001/savedcompletedAtms, resultstateprofile. SuccessUSER numericref, errorNONE; create0000/version0, other0000targetsame/versionexpected+1, initial0200onlyunlock/sameversion; replaysuccess0200 but savederrorsretained. Allowedpersist0105/9001,0104noncreate,0100onlycreate/reset. 0102/0103/9000 nonpersistent. Ownedbody/datafinallywipe, request buffers separate caller ownership; no authgrant/privateSnapshot forging. Four catches dropwrappedfatal beforefixedcatalog, BUG2693 beforefix; actual4 fullruntimeHOLD."
+    },
+    {
+      "id": "P01003-PG02",
+      "methods": "UserAuditWriter.write/state/action/insert/safe; UserCommandMetadata",
+      "testIds": [
+        "PT-ADM-014..023",
+        "ADM-VALUE-003/004"
+      ],
+      "expected": "Criticalaudit samecallerTX, exact1row each, anyfailure callerrollback. Five closedactions USER_CREATED/STATUS_CHANGED/ROLE_CHANGED/PASSWORD_RESET/UNLOCKED. Success exceptreset/unlock writesACTION thenSECURITY; reset/unlock/denial SECURITYonly; INFOsuccess/WARNdenial. Detailoutcome/code/target/beforeafter role-status-version-failedCount-lockedboolean, boundUTF8<=1024 no password/hash/context/token/providerbody. Actor/targetusername NFC/controlredaction. Singleoperation metadataInstant flooredmicro forSQLUTC andsameaudit/revoke, message/correlation fixed/nonnull/redacted. ExistingwholepureValue4 includesmetadata boundary no newexec/fee yet."
+    },
+    {
+      "id": "P01003-PG03",
+      "methods": "UserRequestAuditWriter.write/Event",
+      "testIds": [
+        "PT-ADM-034..039"
+      ],
+      "expected": "Five currentadmission events SESSION_INVALID/ROLE_DENIED/TOKEN_MISMATCH/MESSAGE_MISMATCH/REPLAY. Security/MQ categorization INFO authinvalid/replay otherwiseWARN; actionsclosed authorizationdenied/businessmutation/protocolrejected/Inboxreplayed. Detailslayout/operation/targettype/id/role andexact result0102/0103/0105 orMESSAGE_IDENTITY orcount1. Missingactor SQLNULL ID/username, typedUTC/traceIDs, executeUpdateexact1; no requestPassword/rawtoken/context/keys. AllsameTX/noindependentcommit. Replaytestwhole5 directResponseSnapshotCodec andmutationrequestfixture dependenciesheld; cannot substitute source reviewforruntimePASS."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest.java",
+      "sha256": "f78cf30e14216f4a47d37e05bd101b33063273d306a55d73ae4611573cecdfad",
+      "tests": 5,
+      "wholeBodyReviewed": false,
+      "status": "HOLD_WHOLE_ACTUAL4_AND_DB_HELPERS_NO_METHOD_EXTRACTION",
+      "actualSnapshotCodec": true
+    }
+  ],
+  "metadataPureFixtureSharedWithP01002": true,
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27078-user-mutation-replay-contract-v1/before.json",
+    "sha256": "09a0cc8573ba4511fea8bb084a9491ad1da8b47fe7b844859429eb59aab68cb7"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P010-03/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_FATAL4_AND_WHOLE_ACTUAL4_DB_RUNTIME_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1462_user_mutation_replay_contract_audit.py",
+    "sha256": "cc3093356fc930c7b96c4a22bf502670b55dea3db134a20efbd8c654cd2d5f68"
+  }
+}

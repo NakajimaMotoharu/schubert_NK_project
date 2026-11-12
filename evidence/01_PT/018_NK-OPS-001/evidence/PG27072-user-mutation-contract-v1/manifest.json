@@ -1,0 +1,131 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T15:51:58.071725+09:00",
+  "source": "aa869405cde9eeda70058c951e1b675f5509f572",
+  "productionCoreMain": "eac757a58af15160001cd5909a5b6e5168f1848e",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandService.java": "ad3d822dc20690cfa5f4bd5a830d4a503a5f217dae7a77d309e4faa3fccb6e12",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.java": "ac2490b101fec96b81e0ff64ab09ab2f5b8858ebe545949bb7f3de43bf56a51b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequest.java": "52c686c9484de9f4ddfde527002eef98d135414f84083c41e9b7ee13ac57c036",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationResult.java": "fd070960f128b22813c6e01de6cdd6ddd3f4813291cf47abf435a08d8bd1d146"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01002-PG01",
+      "methods": "UserMutationRequest.decode/header/mutation/targetUserId/operationToken/canonical/apply/close",
+      "testIds": [
+        "PT-ADM-024..027"
+      ],
+      "expected": "Five strict layouts UCR/UST/URL/UPW/ULK/version001 Q/S/actualDATA/records/semantic. UCRtarget NEW_USER:key, others USER:id; owner currentverifiedID, typedX1 NFC originalvalue andN1 decimal andB1 single0/1. Fields exactSS3239.3 order; usernameKey NFCtrimROOTlowercase but originalusername case retained; no token/headerIDs/context/time/reserved in canonical. Exact decodedoperation into prelude+command, request isnot permission. Password ownedchar[] and consumedclones, independentcanonical buffers/callerclose, decodebytefinallywipe, idempotentterminalclose/allbusinessaccessreject, redactedtoString. Callerconfined/no close race contract, actualwholeTest4 dependsDB/KeyRing =>HOLD."
+    },
+    {
+      "id": "P01002-PG02",
+      "methods": "UserCommandService.create/changeStatus/changeRole/resetPassword/unlock/update/execute/read/encode",
+      "testIds": [
+        "PT-ADM-014..023"
+      ],
+      "expected": "CallerwriteTX/currentADMIN/prelude/InboxNEW required. CreateASCIIusername/passwordpolicy/currentPBKDF2 encodedformat, usernameUK conflict0105, DB2200H only cleanexceptiongraph->savepointrollback9001, newversion0. Update targetID/version0..999999999, absent0104/stale0105; selfdisable/demote0105; preserveactiveADMIN>=1 under71419601+sorted prelude locks; samevalue status/role stillversionincrement. Versionmax9001. Unlock noactive lock0200/no version/revoke, otherunlock clearscount/window/lock and increments. Otherupdates revokeallsessions with fixedreason andcriticalaudit sameTX. TypedUTCbind/allSQLliteralexternalbindonly/affectedexact1/metadata timestamp shared, hash neverlogged. Password inputs andnormalized buffers wipe every path. Two policyIArg catch paths return0100 before fatalclassification; BUG2692 source-onlyfix pending, runtimeHOLD."
+    },
+    {
+      "id": "P01002-PG03",
+      "methods": "UserMutationApplicationService.process/transaction/execute",
+      "testIds": [
+        "PT-ADM-033..039"
+      ],
+      "expected": "OnewriteTX prelude by decodedmutation/target, currentauth/ADMIN before InboxBound withowner/token/HMAC/7dayexpiry. NEW appliesonce, freezecompletion thencriticalaudit+commit; exactsavedreplay doesnotissuecommandagain, savedref/version validation. Tokenmismatch0105 audit/no newInbox; messageidentityaudit then permanentfailure aftercommit. Auth0102/role0103 reevaluated/no snapshot; reply freshheader onlyaftercommit+ownedclose. SQL/Runtime/Error rollbackonce+close, secondary fatal graph preserved, caller keys/HTTP/JMS ownership unchanged. WholeDB/actual4 Test7 held, normal send/ACK test isintegrationfixture notcurrentproof."
+    },
+    {
+      "id": "P01002-PG04",
+      "methods": "UserMutationResult.constructor/accepted/rejected/toString; sharedUserCommandMetadata",
+      "testIds": [
+        "ADM-VALUE-001..004",
+        "PT-ADM-019/021/023"
+      ],
+      "expected": "Only0000/0200 withdata, only0100/0104/0105/9001 withoutdata; everyothercode/payload/null rejects. accepted targetID andversion0..999999999; independentliteral code table/all12codes/N9 boundaries. Metadata UTCmicro floor includingpreepoch/Instantlimits andnonnull IDs, redacted. Response typedfields literalUserID/version key andwrongtypes/numerics. ExistingwholeValue4 pure/finite/fullyreviewed no command/DB/auth, old23332wholejarprofile cannot be exclusivecurrent proof; no rerun merelyconfirmation, scopedcurrentqualification if necessary beforepriced."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+      "sha256": "cdbe7ab2d7c9dd5db3d54f612d85d297f575f5e0881e00467fc997919fbdcf91",
+      "tests": 10,
+      "wholeBodyReviewed": false,
+      "status": "HOLD_WHOLE_DB_ACTUAL4_NO_EXTRACTION",
+      "dbFixture": true,
+      "actualKeyRing": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationServiceTest.java",
+      "sha256": "007af1cec58f35e10dee457912ffa04844bdae4cda3cc2ee3276ffd96a837139",
+      "tests": 7,
+      "wholeBodyReviewed": false,
+      "status": "HOLD_WHOLE_DB_ACTUAL4_NO_EXTRACTION",
+      "dbFixture": true,
+      "actualKeyRing": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest.java",
+      "sha256": "aa4db7e439cbb8fdf1adee7f8352dd60d65e21f2d6ce44c5d0fde0cfbf937f3f",
+      "tests": 4,
+      "wholeBodyReviewed": false,
+      "status": "HOLD_WHOLE_DB_ACTUAL4_NO_EXTRACTION",
+      "dbFixture": true,
+      "actualKeyRing": true
+    }
+  ],
+  "extraWholePureFixture": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationOutcomeValuePortTest.java",
+    "sha256": "73ac62592a3b5a812f6fdb419f3c412e89dce68735e0ff692af98c01ba84a30a",
+    "tests": 4,
+    "wholeBodyReviewed": true,
+    "status": "OLD_SCOPE_REUSE_OR_CURRENT_EXCLUSIVE_QUALIFICATION_PENDING"
+  },
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27072-user-mutation-contract-v1/before.json",
+    "sha256": "c5f8ef63b7ccc3a2aee04511da372b290affdfcc504a0ff5f450e1b2ae6d6bab"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P010-02/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_POLICY_FATAL2_AND_WHOLE_DB_ACTUAL4_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1458_user_mutation_contract_audit.py",
+    "sha256": "49d7cb58c13afc6d5782f07debcfa15b9ef652f7e8b026e4a0dd06290f0c88c5"
+  }
+}

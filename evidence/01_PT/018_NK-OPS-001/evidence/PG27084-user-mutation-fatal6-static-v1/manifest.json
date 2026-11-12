@@ -1,0 +1,81 @@
+{
+  "actualExit": 0,
+  "sourceBefore": "aa869405cde9eeda70058c951e1b675f5509f572",
+  "checks": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandService.java",
+      "sha256": "08b186e35de24da53bd7615f8b0ae8395048a35f1af9c16553955319118b2002",
+      "addedCalls": 2,
+      "originalRecoveredExactly": true,
+      "oldExceptionTypesCatalogAuthorizationSqlWireAndWipeUnchanged": true
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayService.java",
+      "sha256": "5d83db07d274d09dec72e1cb3524107da107ce8e1431e13f4eca59943b476720",
+      "addedCalls": 4,
+      "originalRecoveredExactly": true,
+      "oldExceptionTypesCatalogAuthorizationSqlWireAndWipeUnchanged": true
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandService.java": "08b186e35de24da53bd7615f8b0ae8395048a35f1af9c16553955319118b2002",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayService.java": "5d83db07d274d09dec72e1cb3524107da107ce8e1431e13f4eca59943b476720"
+  },
+  "stages": {
+    "format": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T06:55:15.333150+00:00",
+      "endUTC": "2026-11-12T06:55:15.899065+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandService.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayService.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T06:55:15.899462+00:00",
+      "endUTC": "2026-11-12T06:55:16.766756+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG27084-user-mutation-fatal6-static-v1/checkstyle.xml",
+        "@/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG27084-user-mutation-fatal6-static-v1/sources.txt"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "productTestsExecuted": 0,
+  "MainCompiled": false,
+  "actualHeldClassBinaryReadHashParseInit": false,
+  "coverage": null,
+  "nullAway": null,
+  "pmd": null,
+  "spotBugs": null,
+  "ptStatus": "NOT_RUN_HOLD_NOT_PASS",
+  "bugs": [
+    "BUG-2692",
+    "BUG-2693"
+  ],
+  "horizontal": "YKT-2359_ALL23_RUNTIME_PENDING_OPEN",
+  "formalUpdated": false,
+  "verifierSha256": "0d0f66e7f78678d6e6fe5381adbd2f3d39369341fb3372defa9c38af6e544199"
+}
