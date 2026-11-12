@@ -12,6 +12,8 @@ pf=B/'evidence/PG26598-event-current-preflight-v2/manifest.json';assert sha(pf)=
 physical={n.removesuffix('.class'):h for n,h in b['physicalClassHashes'].items()};assert len(physical)==190
 for n,h in physical.items():assert sha(U/'component'/(n+'.class'))==h
 proto=load(B/'evidence/PG26278-protocol-unicode-main-compile-v1/manifest.json');assert all(physical[n.removesuffix('.class')]==h for n,h in proto['physicalClassHashes'].items())
+for sourcePath,sourceHash in proto['inputHashes'].items():
+ assert sha(R/sourcePath)==sourceHash==hashlib.sha256(subprocess.check_output(['git','show',b['source']+':'+sourcePath])).hexdigest()
 ix=load(B/'evidence/PG23360-base59-named-proof-supplement-v1/current-normal-physical-index.json');protoNoCode={n for n in physical if '/protocol/' in n and not ix[n]['hasCode']};assert len(protoNoCode)==13
 annotations={n for n in physical if n.endswith('/package-info')};assert len(annotations)==10;noCode=protoNoCode|annotations;assert len(noCode)==16
 compilerFilters=load(R/'evidence/01_PT/002_NK-PRO-002/evidence/PG24594-protocol-whole-denominator-v1/manifest.json');standardSwitchmaps={x['name'] for x in compilerFilters['compilerRows']};assert len(standardSwitchmaps)==4
