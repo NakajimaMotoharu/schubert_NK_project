@@ -224,7 +224,8 @@ final class RevocationPayloadCodecTest {
   @Test
   void rerun003fHundredConcurrentFreshNoncesAndOwnedClose() throws Exception {
     var codec = new RevocationPayloadCodec("v2", KEY, null, null);
-    try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
+    var pool = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       var futures = new ArrayList<Future<EncryptedRevocationPayload>>();
       for (int i = 0; i < 100; i++) futures.add(pool.submit(() -> codec.encrypt(IDENTITY, AUTH)));
       var nonces = new HashSet<String>();
@@ -236,6 +237,10 @@ final class RevocationPayloadCodecTest {
       }
       assertEquals(100, nonces.size());
     } finally {
+      pool.shutdownNow();
+      if (!pool.awaitTermination(10, TimeUnit.SECONDS)) {
+        throw new AssertionError("PUBLIC crypto worker termination unconfirmed");
+      }
       codec.close();
       codec.close();
     }
@@ -267,7 +272,8 @@ final class RevocationPayloadCodecTest {
           }
         };
     var codec = new RevocationPayloadCodec("v2", KEY, "v1", OLD, random);
-    try (var pool = Executors.newFixedThreadPool(2)) {
+    var pool = Executors.newFixedThreadPool(2);
+    try {
       var encrypt = pool.submit(() -> codec.encrypt(IDENTITY, AUTH));
       assertTrue(entered.await(20, TimeUnit.SECONDS));
       var close =
@@ -293,6 +299,10 @@ final class RevocationPayloadCodecTest {
       }
     } finally {
       release.countDown();
+      pool.shutdownNow();
+      if (!pool.awaitTermination(10, TimeUnit.SECONDS)) {
+        throw new AssertionError("PUBLIC crypto worker termination unconfirmed");
+      }
       codec.close();
     }
   }

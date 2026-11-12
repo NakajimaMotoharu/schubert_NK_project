@@ -1,0 +1,28 @@
+{
+  "actualExit": 0,
+  "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadCodecTest.java",
+  "oldSha256": "6baaa1a06d02a069dd6117d8d6722e414ef738665742cb12a2f192bdd6212ba2",
+  "newSha256": "bd67ce95e3e25412545e4b6aff41588073851034173c3c326109a062228467e3",
+  "changes": [
+    {
+      "before": "    try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {",
+      "after": "    var pool = Executors.newVirtualThreadPerTaskExecutor();\n    try {"
+    },
+    {
+      "before": "    } finally {\n      codec.close();\n      codec.close();",
+      "after": "    } finally {\n      pool.shutdownNow();\n      if (!pool.awaitTermination(10, TimeUnit.SECONDS)) {\n        throw new AssertionError(\"PUBLIC crypto worker termination unconfirmed\");\n      }\n      codec.close();\n      codec.close();"
+    },
+    {
+      "before": "    try (var pool = Executors.newFixedThreadPool(2)) {",
+      "after": "    var pool = Executors.newFixedThreadPool(2);\n    try {"
+    },
+    {
+      "before": "    } finally {\n      release.countDown();\n      codec.close();",
+      "after": "    } finally {\n      release.countDown();\n      pool.shutdownNow();\n      if (!pool.awaitTermination(10, TimeUnit.SECONDS)) {\n        throw new AssertionError(\"PUBLIC crypto worker termination unconfirmed\");\n      }\n      codec.close();"
+    }
+  ],
+  "originalAllAssertionsInverseExact": true,
+  "ownedPools": 2,
+  "productTestsExecuted": 0,
+  "bug": "BUG-2712"
+}
