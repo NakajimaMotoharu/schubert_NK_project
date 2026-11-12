@@ -1,0 +1,122 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T17:00:01.286969+09:00",
+  "source": "db9b88773a05ba7beaa7798bb6c2a571c55c734d",
+  "productionCoreMain": "1cc6a646035dd5e8aa246ee41c87ab2a74a7c145",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java": "d303f5a79375d69bbc4f45c91d4ab74bd5744c40baafe45f6cbe8beb692ffaa2"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01102-PG01",
+      "methods": "process/processOwned/expired/transaction/execute/executeCanonical",
+      "testIds": [
+        "PT-QST-ASUB001..007",
+        "PT-QST-ASUB008/009/012/013"
+      ],
+      "expected": "StrictownedQSB input thenfixedreceiveUTCmicro/monotonicstart. Deadline earlier header.sentAt+2s/receive+2s andresidualbudget fixedatreceive; expiredrequest9000 beforeaccept, no budgetrestart. Currentauth0102 audits/noaccept. Currentowner/canonical/HMAC7day Inbox beforeNEW, bound sourceM0 andsavedidentity; samepayloadsameToken replay retainedreceipt/currentheader0200, tokenpayloadmismatch0105 audited/no newrow, messageidentity mismatch auditcommit thenpermanentfailure. OnecallerwriteTX inclauthidle/audit/Inbox, SQLRuntimeError rollbackonce+ownedclose/secondaryfatal beforecatalog; request/canonical copies close beforecommit andallreturn paths. OriginalDB/actual4 fixturesheld, codepresence notactualtransactionPASS."
+    },
+    {
+      "id": "P01102-PG02",
+      "methods": "create/insertQuestion/oneId/identity/workWire",
+      "testIds": [
+        "PT-QST-ASUB001/003/004/006",
+        "PT-QST-ASUB010/011"
+      ],
+      "expected": "OnlyInboxNEW checksretainedquestion owner/token guard. Existingbodydifferent0105/same9000 withoutnewQuestion/job/work orInboxalias/guessedtime. AtomicQuestion(receiptCSPRNG26/owner/body/token/UTCat), AsyncJobRECEIVED(M0/M0), NotificationACCEPTED/RECEIVED, onePENDING ASYNC_WORK W!=M0/QWKREQ01 version001/currentat andEventInternalheader/noauth, criticalQUESTION_SUBMITTED, QUESTION-bound encryptedNKREF1 snapshotQSBRSP01/0000 allsameTX. FixedSQLbind/affectedexact1/nullableResultreject/bufferswipe. Receiptcollision retrymax3 onlyPSQL23505nameduq_questions_receipt_id withsavepoint; otherconstraint/state/identity/FK neverretry. Suppressedclose/rollbackfailure isnotcleancollision andmustouterrollback/temporary, currentmissingguardBUG2699."
+    },
+    {
+      "id": "P01102-PG03",
+      "methods": "read/reply/failure/sent/proof/timeout",
+      "testIds": [
+        "PT-QST-ASUB002/005/007",
+        "PT-QST-ASUB008/009/010/012"
+      ],
+      "expected": "SavedM0/owner/token/resultrefAAD/layout001/COMPLETED0000/receiptQuestionID/completedAt binding, frozenpayloadandexpiry reused. FreshresponseUUID/currentrequestcorrelation/context/time; 0000/0200 onlyafterexactoneoriginalQWK rowSENT proven. Questionowner/token/receipt/jobowner/M0/correlation/workUUID/bodygolden/createdat/DLQnull/SENTtimestamp>=completed/leaseNULL allmatch, extra/missingrows failclosed. Commit+allownedclose beforedispatcherwake; neverJMSsendonrequestthread. Betweenobservations holdnoConnection/lock, <=10mspark/remaining2s, eachshortread-onlyTX statement_timeout ceilpositive1ms min/no0infinite. Commitafterdeadline still9000 while savedCOMPLETED retained. Interrupt/provider/IO/unknownclose notsuccess."
+    },
+    {
+      "id": "P01102-PG04",
+      "methods": "audit/auditRetained/rollback/RetainedRequest",
+      "testIds": [
+        "PT-QST-ASUB003/004/006/009/011/013"
+      ],
+      "expected": "Criticalaudit exact1/UTC/nonnullvalidatedclosedfields, actorNFC/controlredaction/noquestionbody/password/token/context/providertext. Newreceipt/job/question/state onlyvalidatednumeric/26alphabet, denial/replay/protocolfixedcodes. RetainedRequest catchesclassifyfatal andsuppressed before0105/9000; rollbackunknown/closeunknown neverdefinitebusinesssuccess. SeparateauditRetained transaction preservesfailure andno fakeaccept. User312/SS351 existingactions unchanged."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest.java",
+      "sha256": "8bb241a12904e90f4bd9a437b8c4fd1e1e67c834e23e2e3c7e5fb5405c762da2",
+      "tests": 7,
+      "wholeBodyReviewed": false,
+      "status": "HOLD_WHOLE_DB_ACTUAL4_NO_METHOD_EXTRACTION",
+      "reviewedScope": "method index/setup/admission and existing constraint/compound examples only"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest.java",
+      "sha256": "0537a392a55c58863d0b54ff406e2ad5ac4471134bea4c2a54c4db441d074bd5",
+      "tests": 6,
+      "wholeBodyReviewed": false,
+      "status": "HOLD_WHOLE_DB_ACTUAL4_NO_METHOD_EXTRACTION",
+      "reviewedScope": "method index/setup/admission and existing constraint/compound examples only"
+    }
+  ],
+  "receiptRecoveryAdditionalBefore": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27186-question-submission-contract-v1/recovery-comparison.json",
+    "sha256": "72243533b8176b2c996e595469fc5dac7446de9f0f93f906e584fc98e6e469d2"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P011-02/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_RECEIPT_CLOSE_GUARD_AND_WHOLE_DB_ACTUAL4_ATOMIC_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1507_question_submission_contract_audit.py",
+    "sha256": "189ef7de61ace511f7b301c1da89965337e1d6ae9c32f7dc6aacebca3f1545f3"
+  }
+}

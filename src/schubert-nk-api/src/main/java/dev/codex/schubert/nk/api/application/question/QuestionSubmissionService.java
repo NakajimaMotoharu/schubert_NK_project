@@ -414,6 +414,8 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
             receipt, new QuestionId(id), at.truncatedTo(ChronoUnit.MILLIS));
       } catch (SQLException failure) {
         TemporaryInfrastructureException.preserveFatal(failure);
+        // BUG2699/YKT2373: a failed close cannot be recovered as a clean receipt collision.
+        if (failure.getSuppressed().length != 0) throw failure;
         if (!(failure instanceof PSQLException postgres) || !"23505".equals(failure.getSQLState()))
           throw failure;
         var error = postgres.getServerErrorMessage();
