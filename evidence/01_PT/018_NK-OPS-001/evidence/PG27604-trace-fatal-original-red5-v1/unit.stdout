@@ -1,0 +1,60 @@
+
+Failures (3):
+  JUnit Jupiter:WebRequestTraceFatalContractTest:fatal005FailedReadCanRecoverWithoutAFalseMarkerOrLeakedScope()
+    MethodSource [className = 'dev.codex.schubert.nk.web.logging.WebRequestTraceFatalContractTest', methodName = 'fatal005FailedReadCanRecoverWithoutAFalseMarkerOrLeakedScope', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <java.lang.IllegalStateException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.logging.WebRequestTraceFatalContractTest.fatal005FailedReadCanRecoverWithoutAFalseMarkerOrLeakedScope(WebRequestTraceFatalContractTest.java:91)
+       [...]
+     Caused by: java.lang.IllegalStateException: request audit metadata is unavailable
+       dev.codex.schubert.nk.web.logging.WebRequestTrace.existing(WebRequestTrace.java:98)
+       dev.codex.schubert.nk.web.logging.WebRequestTrace.ensure(WebRequestTrace.java:76)
+       dev.codex.schubert.nk.web.logging.WebRequestTraceFatalContractTest.lambda$fatal005FailedReadCanRecoverWithoutAFalseMarkerOrLeakedScope$0(WebRequestTraceFatalContractTest.java:92)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:WebRequestTraceFatalContractTest:fatal001ReadCauseRetainsExactErrorIdentity()
+    MethodSource [className = 'dev.codex.schubert.nk.web.logging.WebRequestTraceFatalContractTest', methodName = 'fatal001ReadCauseRetainsExactErrorIdentity', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <java.lang.IllegalStateException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.logging.WebRequestTraceFatalContractTest.fatal001ReadCauseRetainsExactErrorIdentity(WebRequestTraceFatalContractTest.java:23)
+       [...]
+     Caused by: java.lang.IllegalStateException: request audit metadata is unavailable
+       dev.codex.schubert.nk.web.logging.WebRequestTrace.existing(WebRequestTrace.java:98)
+       dev.codex.schubert.nk.web.logging.WebRequestTraceFatalContractTest.lambda$fatal001ReadCauseRetainsExactErrorIdentity$0(WebRequestTraceFatalContractTest.java:23)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:WebRequestTraceFatalContractTest:fatal002WriteSuppressedSqlNextRetainsIdentityAndGraph()
+    MethodSource [className = 'dev.codex.schubert.nk.web.logging.WebRequestTraceFatalContractTest', methodName = 'fatal002WriteSuppressedSqlNextRetainsIdentityAndGraph', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <java.lang.IllegalStateException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.logging.WebRequestTraceFatalContractTest.fatal002WriteSuppressedSqlNextRetainsIdentityAndGraph(WebRequestTraceFatalContractTest.java:37)
+       [...]
+     Caused by: java.lang.IllegalStateException: request audit metadata is unavailable
+       dev.codex.schubert.nk.web.logging.WebRequestTrace.ensure(WebRequestTrace.java:87)
+       dev.codex.schubert.nk.web.logging.WebRequestTraceFatalContractTest.lambda$fatal002WriteSuppressedSqlNextRetainsIdentityAndGraph$0(WebRequestTraceFatalContractTest.java:38)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+
+Test run finished after 234 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         5 tests found           ]
+[         0 tests skipped         ]
+[         5 tests started         ]
+[         0 tests aborted         ]
+[         2 tests successful      ]
+[         3 tests failed          ]
+
