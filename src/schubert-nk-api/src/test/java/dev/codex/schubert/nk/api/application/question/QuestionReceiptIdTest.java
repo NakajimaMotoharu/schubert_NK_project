@@ -145,7 +145,8 @@ final class QuestionReceiptIdTest {
     Map<String, Integer> expected = new HashMap<>();
     for (String value : literalCycles) expected.put(value, 4);
     Map<String, Integer> actual = new HashMap<>();
-    try (var executor = Executors.newFixedThreadPool(8)) {
+    var executor = Executors.newFixedThreadPool(8);
+    try {
       List<Callable<QuestionReceiptId>> tasks = new ArrayList<>();
       for (int i = 0; i < 64; i++) tasks.add(generator::generate);
       // Holding the caller-visible monitor must not block the private generator lock.
@@ -154,6 +155,9 @@ final class QuestionReceiptIdTest {
         for (var result : results)
           actual.merge(result.get(5, TimeUnit.SECONDS).value(), 1, Integer::sum);
       }
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(expected, actual);
     assertEquals(1664, calls.get());
@@ -175,5 +179,38 @@ final class QuestionReceiptIdTest {
     Files.writeString(
         directory.resolve("PT-QST-RID008.txt"),
         "forward=0123456789ABCDEFGHJKMNPQRS\nreverse=ZYXWVTSRQPNMKJHGFEDCBA9876\nlength=26\nalphabetSize=32\nrandomDrawsPerId=26\nownerOrTimeInput=false\n");
+  }
+
+  @Test
+  @DisplayName("PT-QST-RID009 provider failure releases private state to another worker")
+  void providerFailureReleasesPrivateStateToAnotherWorker() throws Exception {
+    for (boolean fatal : List.of(false, true)) {
+      Throwable failure =
+          fatal
+              ? new AssertionError("public provider fixture")
+              : new IllegalStateException("public provider fixture");
+      var calls = new AtomicInteger();
+      var generator =
+          new QuestionReceiptIdGenerator(
+              bound -> {
+                assertEquals(32, bound);
+                if (calls.getAndIncrement() == 0) {
+                  if (failure instanceof Error error) throw error;
+                  throw (RuntimeException) failure;
+                }
+                return 0;
+              });
+      assertSame(failure, assertThrows(failure.getClass(), generator::generate));
+      var worker = Executors.newSingleThreadExecutor();
+      try {
+        assertEquals(
+            "00000000000000000000000000",
+            worker.submit(generator::generate).get(5, TimeUnit.SECONDS).value());
+        assertEquals(27, calls.get());
+      } finally {
+        worker.shutdownNow();
+        assertTrue(worker.awaitTermination(10, TimeUnit.SECONDS));
+      }
+    }
   }
 }

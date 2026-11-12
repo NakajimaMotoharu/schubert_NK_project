@@ -238,7 +238,8 @@ final class QuestionSubmitRequestPortTest {
   @Test
   void parallelCopiesAndControlledCloseKeepIndependentOwnership() throws Exception {
     var request = decoded(BODY);
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var pending = new ArrayList<Future<char[]>>();
       for (int i = 0; i < 8; i++) pending.add(workers.submit(request::copyQuestion));
       for (var task : pending) {
@@ -271,7 +272,12 @@ final class QuestionSubmitRequestPortTest {
       assertArrayEquals(BODY.toCharArray(), reader.get(10, TimeUnit.SECONDS));
       assertThrows(IllegalStateException.class, request::header);
     } finally {
-      request.close();
+      workers.shutdownNow();
+      try {
+        assertEquals(true, workers.awaitTermination(10, TimeUnit.SECONDS));
+      } finally {
+        request.close();
+      }
     }
   }
 }

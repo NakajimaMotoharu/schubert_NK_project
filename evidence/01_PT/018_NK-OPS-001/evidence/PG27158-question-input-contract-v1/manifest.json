@@ -1,0 +1,120 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T16:25:35.845560+09:00",
+  "source": "1cc6a646035dd5e8aa246ee41c87ab2a74a7c145",
+  "productionCoreMain": "1cc6a646035dd5e8aa246ee41c87ab2a74a7c145",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptId.java": "32e2d84c19a05c4655c6911e0b27374c13fb6b4d3ef09ead40e60877305d5d2f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdGenerator.java": "a4cb4c03f5dbdb225632d6abf4c2465fbb414ce09b0894f0b6649c83c7bc145d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequest.java": "d9ed41871ca79eddaf323630a938b1d468886a6e3e8b3c9f72203d905ae1ab5d"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01101-PG01",
+      "methods": "QuestionReceiptId.constructor/value/toString; QuestionReceiptIdGenerator.constructor/create/generate",
+      "testIds": [
+        "PT-QST-RID001..008"
+      ],
+      "expected": "26exactuppercaseCrockford characters 0123456789ABCDEFGHJKMNPQRSTVWXYZ, no ULIDleadingrestriction/time/owner input. Everyposition/ASCIIforbidden/nonASCII/surrogate/length25-26-27/null rejects. 26randomdraws bound32 =>130random bits, CSPRNGproductionfactory/no fallback, custompublic-test randominvalidindex/providerfailure stopsatfirst draw preservingidentity. PrivateLock serializeswhole26drawcandidate whilecallerpublicmonitor cannotblock it, independent16literalcycles×4 for64calls/1664draws. DB uniqueness/replayreuse caller responsibilities, generator candidate not acceptance/auth. Redactedvalue/toString; Testwritespublicgoldenfile target/question-receipt-traces only into unit-owned cwd, no master/credential/root."
+    },
+    {
+      "id": "P01101-PG02",
+      "methods": "QuestionSubmitRequest.decode/header/operationToken/copyQuestion/canonical/close/ensureOpen",
+      "testIds": [
+        "PT-QST-SUB001..008",
+        "PT-QST-PORT001..008"
+      ],
+      "expected": "QSBREQ01 Q/A/DATA4144/record0/header+UUIDreserved exact. Independentoffset body0..4095/token4096..4131/reserved4132..4143. BodyUTF8 1..4096bytes/NFC/semantic; ASCIItrailingpadding removed whileleadingvalidspace/nonASCIItrailing retained, malformedbytes/nonNFC/control/oversize/short/reservedtoken rejects. Header immutableborrowed trace, token separateInboxkey notcanonical. Owner currentactor decimal/layout001/QUESTION:NEW/onequestion-X1 originalNFCUTF8, no token/header/context/time into canonical, no authgrant."
+    },
+    {
+      "id": "P01101-PG03",
+      "methods": "QuestionSubmitRequest input/copy/canonical/close ownership and stateLock",
+      "testIds": [
+        "PT-QST-PORT004..008",
+        "PT-QST-SUB005/006/007"
+      ],
+      "expected": "Decodecopybytes wipedfinally, requestownedcharbody/copyclones/canonicalfields separateowners; mutationofcallerbyte/returnedchar/returnedfieldcopy cannot mutateothers. Canonical independentlycloseable; requestterminalidempotentclose wipesownbody andfuturebusinessaccess rejects, priorcanonical remainsownedusable. Private lock linearizescopy/canonical/close, controlledlatch worker10/future10 and terminalread onlycompleteorclosed, no fakepartialstate. ExistingwholePort8 no HMAC/DB/actual4 butpoolTWR unbounded; Receipt8 same. OriginalSubmitRequestTest8 actualFingerprintKeyRing wholeHOLD, ownpool alsounbounded/pending; no extraction or replacementHMACfixture."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "sha256": "95ecae1fb73ba439d3150b37083f087fde857f49dfa7a1c0e67f5bf4ac69e1c3",
+      "pool": "executor",
+      "workerCount": 8,
+      "implicitUnboundedClose": true,
+      "futuresAlreadyFinite": true,
+      "status": "PURE_WHOLE_PENDING_FINITE_FIX"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequestPortTest.java",
+      "sha256": "99b117de7d104daca7113ce323f20e1c406ddb698e2e0ff5dfafa58dd0ba2ccf",
+      "pool": "workers",
+      "workerCount": 2,
+      "implicitUnboundedClose": true,
+      "futuresAlreadyFinite": true,
+      "status": "PURE_WHOLE_PENDING_FINITE_FIX"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequestTest.java",
+      "sha256": "84da364beb7d9537bd5cb25a3907db733a810d9a34fd36279bfaad4f94329390",
+      "pool": "executor",
+      "workerCount": 8,
+      "implicitUnboundedClose": true,
+      "futuresAlreadyFinite": true,
+      "status": "HOLD_WHOLE_ACTUAL_KEY_RING"
+    }
+  ],
+  "additionalExistingPurePort": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequestPortTest.java",
+    "sha256": "99b117de7d104daca7113ce323f20e1c406ddb698e2e0ff5dfafa58dd0ba2ccf",
+    "wholeBodyReviewed": true,
+    "tests": 8
+  },
+  "receiptWholeBodyReviewed": true,
+  "oldKeyRingWholeBodyReviewed": false,
+  "unitOwnedPublicFileWrite": {
+    "path": "target/question-receipt-traces/PT-QST-RID008.txt",
+    "onlySyntheticPublicGoldenVectors": true,
+    "cwdMustBePrivateOwnedUnitDirectory": true
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P011-01/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_FINITE2_CURRENT_DEPENDENCIES_AND_WHOLE_KEYRING_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1493_question_input_contract_audit.py",
+    "sha256": "f73f0f6db10b659d2ddf30f4d1b3259bcb6ce5fdd3577376ff255f91dc2ee40e"
+  }
+}

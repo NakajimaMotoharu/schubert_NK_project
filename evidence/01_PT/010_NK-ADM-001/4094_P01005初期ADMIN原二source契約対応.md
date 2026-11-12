@@ -13,3 +13,5 @@ NK-ADM-001。対象source/hash、承認設計commit/hash、独立期待値/TestI
 P01005 publicown2全文/承認3438.2SSC188189/312/331332351352、保守shared71419602→membership71419601→tablelock→全User存在/初回ADMIN/version0/criticalaudit/credentialUnit世代/全資源正常後0or20とownedTXに独立期待値Boot001～008/707001/669001～005対応。wholeTest二はBeforeAll actualDBとMain/native/credential依存でHOLD、抽出/操作0。EntryThrowable固定50は既契約保持。BUG2697 createAndCommit rollback欠落を修正前27140起票、YKT2371 ownTXcallerとborrowedService/outercloseの境界記録。原/1準備だけ、原/2/451/実初期ADMINnative/終了依存未受入。
 
 実行: `python3 -B evidence/01_PT/018_NK-OPS-001/input/1486_bootstrap_admin_contract_audit.py` metadata終了0。新規製品PT/coverageなし。原/1の準備だけ、原/2・451・元190未受入。独立期待値は公開設計の固定境界・順序・後条件に基づき、production methodで生成しない。正式1964PT/53scope・工数null。
+
+PG追記: source 1cc6a646035dd5e8aa246ee41c87ab2a74a7c145、[27150](../018_NK-OPS-001/evidence/PG27150-bootstrap-rollback-source-join-v1/manifest.json)。27146元source逆変換/formatCS0、Maincompile/init/runtime/DB/native/coverage未実施、BUG2697/YKT2371OPEN。手動TX成立前の失敗を成立へ推測せず、既owned外closeと固定entry結果を維持。

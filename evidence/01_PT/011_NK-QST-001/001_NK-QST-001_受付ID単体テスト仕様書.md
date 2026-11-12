@@ -18,3 +18,6 @@ PG-D-188。RD QST002/ASY001、UI224§3/236、SS312§7/331§6.1。対象QuestionR
 | RID008 | equalityAndPublicEvidence | 同一/相異public値、失敗message、固定vector trace | 等値/hash契約・toString/診断はREDACTED・公開vectorのみ保存。表示用値はvalue accessorのみ |
 
 期待値はProductionのalphabet/helperで作らず独立literal/BigInteger等の別算定を使う。正常/境界/異常/null/並行/例外を網羅。DB再送/衝突は本部品非該当として別writer仕様へ残す。constructorでinvariantを確立、NPEをcatchして成功にしない。新Java全line/method/class/branch100%、既存全回帰/静的解析と新scope整合が正式認定条件。実行日時/tool/commit/command/結果/hashは002とmanifestへ後記、未実行を合格にしない。
+
+
+WBS-P011-01公開source契約/独立期待値/TestIDは[4095_P01101質問受付ID入力原三source契約対応.md](4095_P01101質問受付ID入力原三source契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
