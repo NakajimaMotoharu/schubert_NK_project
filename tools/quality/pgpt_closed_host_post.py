@@ -16,6 +16,17 @@ import xml.etree.ElementTree as ET
 import pgpt_closed_host_profile as policy
 
 
+def validate_switch_map_shape(text, item):
+    """Verify one javac enum switch map, not an arbitrary uncovered synthetic class."""
+    require = policy.require
+    require(re.search(r'interfaces:\s*0, fields:\s*1, methods:\s*1,', text), 'map has exactly one field and clinit')
+    require(re.search(r'flags:.*ACC_SUPER.*ACC_SYNTHETIC', text), 'javac synthetic map class flags')
+    field = '$SwitchMap$' + item['enumClass'].replace('.', '$')
+    require(text.count('static final int[] ' + field + ';') == 1, 'exact enum map field')
+    require(re.search(r'flags:.*ACC_STATIC.*ACC_FINAL.*ACC_SYNTHETIC', text), 'synthetic static final map field flags')
+    require(text.count('static {};') == 1 and 'SourceFile: "' + Path(item['sourcePath']).name + '"' in text, 'same source clinit map only')
+
+
 def verify(c, config, source):
     root = policy.R
     sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
@@ -79,20 +90,29 @@ def verify(c, config, source):
     no_code = {n for n, value in method_counts.items() if value == 0}
     info = {name: dict(crc=crc, instructions=int(inst)) for inst, branch, line, method, complexity, crc, name in re.findall(r'^\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+class 0x([0-9a-f]{16}) (\S+)$', (artifact / 'classinfo.stdout').read_text(), re.M)}
     analyzed = {n for n, x in info.items() if x['instructions'] > 0}
-    # Initial bounded profiles have no synthetic enum-switch-map classes. Do not silently filter
-    # an unexpected compiler artifact; a separately reviewed capability is required for that case.
-    require(analyzed == set(ids) - no_code, 'unexpected compiler artifact/analysis gap; no exclusion')
+    maps = {x['className']: x for x in c.get('standardCompilerSwitchMaps', [])}
+    map_evidence = {}
+    for name, item in maps.items():
+        require(name in info and method_counts[name] == 1 and info[name]['instructions'] == 0, 'standard analyzer map zero, physical clinit retained')
+        cmd = [str(policy.JAVA.with_name('javap')), '-p', '-v', str(work / 'component' / (name + '.class'))]
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30, check=False)
+        require(result.returncode == 0 and not result.stderr, 'owned compiler map disassembly terminal')
+        validate_switch_map_shape(result.stdout, item)
+        map_evidence[name] = dict(command=cmd, actualExit=result.returncode, disassembly=result.stdout, enumClass=item['enumClass'], physicalCrc=ids[name], codeMethods=1, analyzerInstructions=0, customFilter=False)
+    require(analyzed == set(ids) - no_code - set(maps), 'unexpected compiler artifact/analysis gap; no exclusion')
     missing = set(ids) - set(info)
     require(all(n.endswith('/package-info') and n in no_code for n in missing), 'unexpected omitted physical class')
     require(all(ids[n] == x['crc'] for n, x in info.items()), 'classinfo actual CRC')
+    require(set(info) - analyzed == (no_code - missing) | set(maps), 'only proven default-filtered maps or natural no-Code')
     ex = (artifact / 'execinfo.stdout').read_text()
     require(ex.count('Session "') == 1 and 'Session "' + c['id'] + '"' in ex, 'one exact exec session')
     probes = {n: (crc, int(hit), int(total)) for crc, hit, total, n in re.findall(r'^([0-9a-f]{16})\s+(\d+) of\s+(\d+)\s+(\S+)$', ex, re.M)}
     test_names = {n[:-6] for n in b['testClassHashes']}
     observed = {n for n in probes if n.startswith('dev/codex/schubert/nk/') and n not in test_names}
-    require(observed <= analyzed and all(probes[n][0] == ids[n] and probes[n][1] > 0 for n in observed), 'positive same-Main CRC only')
+    require(observed <= analyzed | set(maps) and all(probes[n][0] == ids[n] and probes[n][1] > 0 for n in observed), 'positive same-Main CRC only')
     init = {n for n in re.findall(r"Initializing '([^']+)'", (unit / 'class-init.log').read_text()) if n.startswith('dev/codex/schubert/nk/') and not any(n == t or n.startswith(t + '$') for t in test_names)}
     require(not any(n.rpartition('/')[2].split('$')[0] in policy.DENIED for n in init), 'held class initialized')
+    require(not set(c.get('forbiddenInitializedClasses', [])) & init, 'source-reviewed compile-only JDBC parent initialized')
     real = init & set(ids)
     require(real - observed <= no_code and observed <= real, 'class init and exec membership')
     bindings = {}
@@ -111,6 +131,11 @@ def verify(c, config, source):
     component = {key: dict(covered=sum(v.get(key, {}).get('covered', 0) for v in targets.values()), missed=sum(v.get(key, {}).get('missed', 0) for v in targets.values())) for key in set().union(*(set(v) for v in targets.values()))}
     component100 = all(component.get(k, {}).get('covered', 0) > 0 and component[k]['missed'] == 0 for k in ['LINE', 'METHOD', 'CLASS', 'BRANCH'])
     out = policy.environment(c, 'post'); files = {}
+    for i, (name, value) in enumerate(map_evidence.items()):
+        filename = f'standard-switch-map-{i:03d}.txt'
+        (out / filename).write_text(value.pop('disassembly'))
+        files[filename] = sha(out / filename)
+        value['disassemblyFile'] = filename
     for base, prefix in [(artifact, 'unit-'), (unit, 'original-')]:
         candidates = [x for x in base.iterdir() if x.is_file()] + list((base / 'xml').glob('TEST-*.xml'))
         for path in candidates:
@@ -119,6 +144,7 @@ def verify(c, config, source):
             require(name not in files, 'unique copied evidence name')
             shutil.copyfile(path, out / name); files[name] = sha(out / name)
     result = dict(actualExit=0, source=source, productionCoreMain=b['productionCoreMain'], config=policy.ref(config), run=c['id'], tests=len(actual), newTestDefinitions=c.get('newTestDefinitions', 0), physicalClasses=len(physical), positiveMainCrc=len(observed), coverage=coverage, targetCounters=targets, completeSourceComponentCounters=component, completeSourceComponentFour100=component100, wholeScopeFour100=not uncovered, uncoveredFullSourceClasses=uncovered, naturalNoCodeClasses=sorted(no_code), naturalNoBranchClasses=sorted(n for n, row in targets.items() if 'BRANCH' not in row), classIds=ids, actualJvmCodeMethodCounts=method_counts, hiddenJvmAdapters=bindings, manualCoverageExclusions=[], oldExecCombined=False, preflight=policy.ref(pf), inputHashes=b['inputHashes'], dependencies=b['dependencies'], environment=env, productTestsExecuted=len(actual), actualBackendNativeFsRootOrHeldClassActions=0, formalUpdated=False, whole451Accepted=False, newAcceptance=0, effortRate=None, files=files, verifier=policy.ref(Path(__file__).resolve()))
+    result.update(defaultStandardFilteredSwitchMaps=map_evidence, forbiddenInitializedClasses=c.get('forbiddenInitializedClasses', []), forbiddenInitializedClassesObserved=[], reviewedReflection=c.get('reviewedReflection', []))
     policy.write_json(out / 'manifest.json', result)
     return result
 

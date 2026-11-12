@@ -117,6 +117,7 @@ def validate_syntax(c):
         require(set(item) == {'path', 'sha256'} and re.fullmatch(r'[0-9a-f]{64}', item['sha256']), 'proof hash schema')
         path = relative_name(item['path'])
         require(path.startswith('evidence/') and Path(path).suffix in ['.md', '.json'] and '/private' not in path.lower(), 'public proof only')
+    validate_optional_capabilities(c)
     require(set(c.get('slots', {})) == {'prestyle', 'prepare', 'static', 'preflight', 'unit', 'post'}, 'six explicit immutable evidence slots')
     require(len(set(c['slots'].values())) == 6, 'distinct evidence slots')
     for p in c['slots'].values():
@@ -125,6 +126,38 @@ def validate_syntax(c):
     require(set(c.get('privateDirs', {})) == {'prepare', 'unit'}, 'explicit private owned dirs')
     require(len(set(c['privateDirs'].values())) == 2 and all(re.fullmatch(r'pg[0-9]+-[a-z0-9-]+', v) for v in c['privateDirs'].values()), 'fresh private run names')
     return c
+
+
+def validate_optional_capabilities(c):
+    """Explicit reviewed source capabilities; never infer permission from a matching name."""
+    reflection = c.get('reviewedReflection', [])
+    require(isinstance(reflection, list) and len(reflection) <= 1, 'one reviewed immutable History reflection only')
+    for item in reflection:
+        require(set(item) == {'testPath', 'targetClass', 'sourceAnchor', 'targetSource', 'closureProof'}, 'reflection schema')
+        require(item['testPath'] in [t['path'] for t in c['testSources']], 'reflection whole Test')
+        target = 'dev.codex.schubert.nk.batch.repository.BatchRunRepository$History'
+        require(item['targetClass'] == target, 'only source-reviewed immutable History, no Root/authority reflection')
+        require(item['sourceAnchor'] == 'var type = Class.forName("' + target + '");', 'one exact reflection anchor')
+        require(item['targetSource'] in c['mainSources'] and item['targetSource'].endswith('/BatchRunRepository.java'), 'whole reviewed parent source')
+        require(target.replace('.', '/') + '.class' in c['physicalClasses'], 'full History physical class')
+        require(item['closureProof'] in c['closureProofs'], 'explicit reflection closure proof')
+    forbidden = c.get('forbiddenInitializedClasses', [])
+    require(isinstance(forbidden, list) and len(forbidden) == len(set(forbidden)), 'unique forbidden initialization set')
+    for name in forbidden:
+        relative_name(name)
+        require(name + '.class' in c['physicalClasses'], 'forbidden initialization in full physical scope')
+    for item in reflection:
+        require(item['targetClass'].split('$')[0].replace('.', '/') in forbidden, 'JDBC parent must not initialize')
+    maps = c.get('standardCompilerSwitchMaps', [])
+    require(isinstance(maps, list) and len(maps) == len({x.get('className') for x in maps}), 'unique compiler maps')
+    for item in maps:
+        require(set(item) == {'className', 'enumClass', 'sourcePath'}, 'compiler map schema')
+        name = relative_name(item['className'])
+        require(name.endswith('$1') and name + '.class' in c['physicalClasses'], 'explicit physical compiler map')
+        require(name not in c['targetClasses'], 'compiler map is not a claimed executable target')
+        require(item['sourcePath'] in c['mainSources'] and name.split('$')[0].endswith('/' + Path(item['sourcePath']).stem), 'same-source compiler map owner')
+        enum = item['enumClass']
+        require(isinstance(enum, str) and re.fullmatch(r'dev\.codex\.schubert\.nk\.[A-Za-z0-9_.$]+', enum) and enum.replace('.', '/') + '.class' in c['physicalClasses'], 'explicit same-component enum')
 
 
 def input_paths(c):
@@ -153,8 +186,20 @@ def checked_inputs(c):
     require(hashes[QUALITY_INPUTS[0]] == hashlib.sha256(subprocess.check_output(['git', 'show', PMD_POLICY_SOURCE + ':' + QUALITY_INPUTS[0]], cwd=R)).hexdigest(), 'full approved Root PMD policy unchanged')
     for item in c['oracleSpecs'] + c['closureProofs']:
         require(digest(R / item['path']) == item['sha256'], 'independent proof changed')
+    for item in c.get('reviewedReflection', []):
+        proof = read_json(R / item['closureProof']['path'])
+        reviewed = proof.get('reflection', {})
+        require(proof.get('actualExit') == 0 and proof.get('privateRootOrHeldClassActions') == 0, 'reviewed immutable source closure')
+        require(all(reviewed.get(k) == item[k] for k in ['testPath', 'targetClass', 'sourceAnchor', 'targetSource']), 'exact original reflection proof')
+        require(proof.get('inputHashes', {}).get(item['targetSource']) == hashes[item['targetSource']], 'whole parent source unchanged since closure')
+        require(proof.get('forbiddenInitializedClasses') == c.get('forbiddenInitializedClasses'), 'all JDBC parents remain runtime-forbidden')
+        source = (R / item['testPath']).read_text()
+        require(source.count(item['sourceAnchor']) == source.count('Class.forName') == 1, 'no additional reflection call')
     for path in c['mainSources'] + [t['path'] for t in c['testSources']]:
         text = (R / path).read_text()
+        for item in c.get('reviewedReflection', []):
+            if path == item['testPath']:
+                text = text.replace(item['sourceAnchor'], '', 1)
         require(not any(x in text for x in [*DENIED, '@BeforeAll', '@TestFactory', '@ParameterizedTest', 'ProcessBuilder', 'DriverManager', 'DataSource', 'Class.forName', 'java.lang.foreign', 'java.net.Socket']), 'outside closed ordinary host scope')
     return hashes
 
