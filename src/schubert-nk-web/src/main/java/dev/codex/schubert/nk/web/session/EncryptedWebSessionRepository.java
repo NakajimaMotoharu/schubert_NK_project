@@ -290,6 +290,7 @@ public final class EncryptedWebSessionRepository {
     try {
       return id.lookupHash();
     } catch (GeneralSecurityException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new SessionStoreException();
     }
   }

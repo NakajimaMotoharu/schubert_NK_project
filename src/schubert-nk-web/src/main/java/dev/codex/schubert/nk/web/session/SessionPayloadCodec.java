@@ -95,6 +95,7 @@ public final class SessionPayloadCodec implements AutoCloseable {
                 .array();
         return new EncryptedSessionPayload(currentVersion, envelope);
       } catch (GeneralSecurityException | ProviderException failure) {
+        SessionStoreException.preserveFatal(failure);
         throw new SessionPayloadException(SessionPayloadException.Reason.CRYPTO_UNAVAILABLE);
       } finally {
         Arrays.fill(plaintext, (byte) 0);
@@ -142,6 +143,7 @@ public final class SessionPayloadCodec implements AutoCloseable {
         plaintext = cipher.doFinal(stored, cipherOffset, stored.length - cipherOffset);
         return json.decode(plaintext);
       } catch (GeneralSecurityException | ProviderException | SessionAttributeException failure) {
+        SessionStoreException.preserveFatal(failure);
         throw invalid();
       } finally {
         Arrays.fill(stored, (byte) 0);

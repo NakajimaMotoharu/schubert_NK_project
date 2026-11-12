@@ -150,6 +150,7 @@ public final class SessionAttributeCodec {
         | IllegalArgumentException
         | IllegalStateException
         | DateTimeException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new SessionAttributeException();
     } finally {
       Arrays.fill(candidate, (byte) 0);
