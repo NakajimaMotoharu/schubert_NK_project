@@ -1,0 +1,308 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T12:20:07.451220+09:00",
+  "source": "b53727861b367dba5a5f275342c286ec5f3de8e3",
+  "productionCoreMain": "62960fc3b5d4a67cf7bd9df887b668169d10f87f",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java": "8b91f57f37b99faccc394751ab7c9b5e15fdfa1b7a8a0e947832d7b672252ee7",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java": "6cbdc8b0bc006e036ac3e127685d06c19bbb3c1e05d854cb52c8620d6a6065d6",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCryptoException.java": "a54b29289de7d08e01d6cbc814e9a815ae2162de559e02eebdb6e677a850066f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextIdentity.java": "b9dbed4233756c481cdb747d96f6de8843e9d910a4c18f51c30454d16130d7dd",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java": "830a87635d2782354fe9c03e5d7612a2ab88364cdc31157b501fbf7baf361469",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextException.java": "5a0e03c3b5aa5c14f41b8273bca454409288b88b50190f23d1d59982be8552ce",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java": "e4dc9150a2cded204ba286f63c2c85b18411a8d39cee96083bfb61530ef2a1d1",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.java": "4b64f5d458370b67b3f5f156ffb879151eb69c30fbe9819660e70cc81e55a402",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthorizationException.java": "d380238db3295ef027da57f23eb88cc7ade4c319aefe5f73d7bd71392bce4ffa",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthorizationService.java": "8aa174fe39b5d71afe07443beb133063418edd1de095c16b3e288ac26d1faebb",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java": "9b0714ec9dc88f3f15e11341d71d873250fee8436ebad03b3fb1079060392581",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/EncryptedAuthContext.java": "d503847e6b1b1a3853033cbe82eb53678b529d616f36d1dfc0a354b3635954b7",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/IssuedContext.java": "e63b4f5bc96fef9df4b42ca1bff2de29098ab1139d96d49d4aedb1dbbc991ec1",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/RevokedContext.java": "103bff044f7e8e66b214fbb4d680fd9644afdf81ee88d4eef9411e6e4c65d8f0",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/package-info.java": "7219a69f7f8d33d3c9923fc9870f8703472a9a945a7ceb4580f08e529c4a6f95"
+  },
+  "design": {
+    "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+    "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+    "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+  },
+  "checks": [
+    {
+      "id": "P00703-PG01",
+      "sources": [
+        "AuthenticationContextVerifier",
+        "AuthenticatedActor",
+        "ContextHash",
+        "AuthenticationContextException",
+        "AuthenticationInfrastructureException"
+      ],
+      "expectation": "Caller explicit TX User→session lock; raw64lowerhex SHA256 ASCII lookup, revoked=false/expiry>now/ACTIVE, latest DB username/role/N12 actor, guardedtouch greatest(lastaccess,now) and greatest(expiry,now+8h) affected1. Readonlyinspect explicitreadonly/one nonlockingread/noidlechange not finalgrant. SQL NULL/unknownrole/fault fixed9000, semanticinvalid0102; fatal graph seen-identity cycle protection.",
+      "testIds": [
+        "PT-AUT-007-01..06",
+        "PT-AUT-007-R01..04",
+        "PG20840 pure original6"
+      ],
+      "limitation": "DB whole fixture10 not executed; old pure6 target2 unchanged only, wholecurrent dependencies and unknown same-type provider origin not qualified."
+    },
+    {
+      "id": "P00703-PG02",
+      "sources": [
+        "AdminCommandAuthenticator"
+      ],
+      "expectation": "CREATE targetabsent/otherspresent N12, candidate lookup not grant, decreasing membership advisory71419601 then all relevant Users ascending lock before lockedcontextowner equality/fresh verifier/latestADMIN. Identityalone cannotgrantADMIN. Caller owns TX/criticalaudit/Inbox.",
+      "testIds": [
+        "PT-ADM-008..013",
+        "PT-ADM-074",
+        "PG20874 pure original8"
+      ],
+      "limitation": "DB whole fixture7 held, old8 target2 unchanged only; no current actual locks/activeADMIN mutation accepted."
+    },
+    {
+      "id": "P00703-PG03",
+      "sources": [
+        "AuthorizationService",
+        "AuthorizationException",
+        "AuthenticatedActor"
+      ],
+      "expectation": "USER/ADMIN owner notification only; othernotification always0104, otherquestion ADMINallowed/USER0104, adminoperation USER0103. OwnerN12/nonnullactor/closed403404 exception. Fixed no identity/target detail in display.",
+      "testIds": [
+        "PT-AUT-008-01",
+        "PT-AUT-008-02"
+      ],
+      "limitation": "Current normal whole2+Protocol130 genuine132, no JDBC predicates/HTTP/application actual authorization claim. Actor username getBytes scalar/site8 remains globalYKT2328 pending, not closed by byte count test."
+    },
+    {
+      "id": "P00703-PG04",
+      "sources": [
+        "AuthContextCodec",
+        "AuthContextIdentity",
+        "AuthContextCryptoException",
+        "EncryptedAuthContext",
+        "IssuedContext",
+        "RevokedContext",
+        "package-info"
+      ],
+      "expectation": "API-exclusive currentwrite/currentpreviousread NKENC1 AES256GCM/nonce12/AAD six lengthprefix ASCII fields, strict version/key/envelope64context/unknownkeys typed; clonedownedbuffers private lock/wipe/close. Issued expires>issued, revokedsuccess0000/0200 only, no identity/context in display.",
+      "testIds": [
+        "PT-AUT-005-C01..04",
+        "PT-AUT-005-H01/H02",
+        "PT-AUT-005-I",
+        "PT-AUT-008-R01/R04"
+      ],
+      "limitation": "Publicsynthetic Test source oracles reviewed, codec7/hash3 not freshly run because unbounded future/executorclose ownership needs finite qualification before current normal run. Actualcredential/key/session/DB/held4 operations remain absent."
+    }
+  ],
+  "retainedOriginalProofs": [
+    {
+      "proof": {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20840-authentication-verifier-jdbc-six-v1/manifest.json",
+        "sha256": "9ed3f1b415ee21c3439a2be2aa554692ea51f5509c507ebbd3c1d5c51f5adc03"
+      },
+      "originalSource": "f16526371daf0352925fda5c9686425a64e4a40b",
+      "originalMain": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+      "originalTests": 6,
+      "inputHashes": {
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java": "e4dc9150a2cded204ba286f63c2c85b18411a8d39cee96083bfb61530ef2a1d1",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationVerifierJdbcPortTest.java": "9f8e0b379cbfcbfc8bee9e64eb2f119d719435b433befbb9c43225487afae089"
+      },
+      "physical": {
+        "dev/codex/schubert/nk/api/security/AuthenticationContextVerifier$VerifiedSession": "025230a8a7a50c4d9db5743dc3d1e845f1d8691d3493f2ebfcfb327debb95b08",
+        "dev/codex/schubert/nk/api/security/AuthenticationContextVerifier": "0c3d5fa186229eca1164ea69026fc4b8b6bc40753aef7b2654ddd3c5dc3c924d"
+      },
+      "counters": {
+        "dev/codex/schubert/nk/api/security/AuthenticationContextVerifier": {
+          "INSTRUCTION": {
+            "covered": 285,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 25,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 65,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 18,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 5,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        },
+        "dev/codex/schubert/nk/api/security/AuthenticationContextVerifier$VerifiedSession": {
+          "INSTRUCTION": {
+            "covered": 9,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 1,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 1,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        }
+      },
+      "status": "ORIGINAL_RUN_TARGET_SOURCE_TEST_AND_PHYSICAL_IDENTICAL_NOT_CURRENT_WHOLE_DEPENDENCY_QUALIFICATION",
+      "newExecutions": 0
+    },
+    {
+      "proof": {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20874-admin-prelude-jdbc-eight-v1/manifest.json",
+        "sha256": "ce7bf008353044a156a102689d02c164888de4825e629b4241039daab7ce1b6e"
+      },
+      "originalSource": "14cb941d08f6fde9f9cb5d6aac2d99aabb85db29",
+      "originalMain": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+      "originalTests": 8,
+      "inputHashes": {
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java": "8b91f57f37b99faccc394751ab7c9b5e15fdfa1b7a8a0e947832d7b672252ee7",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.java": "3e1ae38ba52644c2027a712bd22ea165c29e42f6d044712c6d61d70ce1d4516f"
+      },
+      "physical": {
+        "dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation": "323ef5ceb26ff0e0621dd023de1fe72f0534e222f29647815efda1686ee796e0",
+        "dev/codex/schubert/nk/api/security/AdminCommandAuthenticator": "b13296b253975dfe4ced9134198363905260172cb2250009c6fc5886936bdfc0"
+      },
+      "counters": {
+        "dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation": {
+          "INSTRUCTION": {
+            "covered": 55,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 4,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 9,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 4,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 2,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        },
+        "dev/codex/schubert/nk/api/security/AdminCommandAuthenticator": {
+          "INSTRUCTION": {
+            "covered": 306,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 44,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 66,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 29,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 7,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        }
+      },
+      "status": "ORIGINAL_RUN_TARGET_SOURCE_TEST_AND_PHYSICAL_IDENTICAL_NOT_CURRENT_WHOLE_DEPENDENCY_QUALIFICATION",
+      "newExecutions": 0
+    }
+  ],
+  "originalVerifierIndependentPost": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20850-authentication-jdbc-independent-post-v1/manifest.json",
+    "sha256": "5d353b3a5ea5a57be2702a9a4f62d282821d4d267bed94893271e442766b4970"
+  },
+  "currentAuthorizationWhole132": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26744-authorization-current-independent-v1/manifest.json",
+    "sha256": "ab79611dc49705be111785a4db4a9cb88b8464c16170e1bf92a9b75603c9ee8d"
+  },
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticatorTest.java",
+      "sha256": "4906dbaa81ca9d27f27eb11d327e240e5a28cb16d1f89f196824c235275c4a21",
+      "fullPublicSourceReviewed": false,
+      "publicMethodIndexReviewed": true,
+      "tests": 7,
+      "status": "HOLD_WHOLE_REAL_DATABASE_FIXTURE_NO_PARTIAL_SELECTION",
+      "independentExpectations": "Literal role-owner 403/404 matrix, source-independent JCA/DataOutputStream encryption/hash vectors; realDB lock/identity/SQL/TX expectations remain unexecuted."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "sha256": "10b4b75bc16afe0038e05e7c14abd516e1335f51929a25a674319d7afcdda26d",
+      "fullPublicSourceReviewed": true,
+      "publicMethodIndexReviewed": true,
+      "tests": 7,
+      "status": "NOT_RUN_FINITE_WORKER_CLOSE_AND_CRYPTO_RESTORE_QUALIFICATION_PENDING",
+      "independentExpectations": "Literal role-owner 403/404 matrix, source-independent JCA/DataOutputStream encryption/hash vectors; realDB lock/identity/SQL/TX expectations remain unexecuted."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifierTest.java",
+      "sha256": "990217488f3a10a40597eb5fc53da442b6f474df9f8d0d3dbe650fde604a7057",
+      "fullPublicSourceReviewed": false,
+      "publicMethodIndexReviewed": true,
+      "tests": 10,
+      "status": "HOLD_WHOLE_REAL_DATABASE_FIXTURE_NO_PARTIAL_SELECTION",
+      "independentExpectations": "Literal role-owner 403/404 matrix, source-independent JCA/DataOutputStream encryption/hash vectors; realDB lock/identity/SQL/TX expectations remain unexecuted."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthorizationServiceTest.java",
+      "sha256": "f290e044393ebbdd7778fdf474aaff8a211987c8f9c7686cba60591ef1aa465b",
+      "fullPublicSourceReviewed": true,
+      "publicMethodIndexReviewed": true,
+      "tests": 2,
+      "status": "CURRENT_WHOLE_AUTHORIZATION2_WITH_PROTOCOL130_QUALIFIED",
+      "independentExpectations": "Literal role-owner 403/404 matrix, source-independent JCA/DataOutputStream encryption/hash vectors; realDB lock/identity/SQL/TX expectations remain unexecuted."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/ContextHashTest.java",
+      "sha256": "eafd2eb1a16ac85b8d8eb40f1d75cdcf49c0c894c9d08c883d546b233e62b353",
+      "fullPublicSourceReviewed": true,
+      "publicMethodIndexReviewed": true,
+      "tests": 3,
+      "status": "NOT_RUN_FINITE_WORKER_CLOSE_AND_CRYPTO_RESTORE_QUALIFICATION_PENDING",
+      "independentExpectations": "Literal role-owner 403/404 matrix, source-independent JCA/DataOutputStream encryption/hash vectors; realDB lock/identity/SQL/TX expectations remain unexecuted."
+    }
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P007-03/1"
+  ],
+  "endingStatus": "WBS-P007-03/2_NOT_ACCEPTED_REAL_DB_CRYPTO_FINITE_LIFETIME_UNICODE_ACTOR_DEPENDENCIES_AND_WHOLE451",
+  "productTestsExecuted": 132,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1327_api_context_contract_audit.py",
+    "sha256": "90f92261595d28cb95f611e7bd82974a7f86f39ea81765482307762dac7da29f"
+  }
+}
