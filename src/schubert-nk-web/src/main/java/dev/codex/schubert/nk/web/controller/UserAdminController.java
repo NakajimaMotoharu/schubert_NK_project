@@ -18,6 +18,7 @@ import dev.codex.schubert.nk.web.form.UserRoleForm;
 import dev.codex.schubert.nk.web.form.UserSearchForm;
 import dev.codex.schubert.nk.web.form.UserStatusForm;
 import dev.codex.schubert.nk.web.form.UserUnlockForm;
+import dev.codex.schubert.nk.web.messaging.JmsRequestReplyException;
 import dev.codex.schubert.nk.web.messaging.ProtectedReadWireClient;
 import dev.codex.schubert.nk.web.messaging.ProtectedReadWireException;
 import dev.codex.schubert.nk.web.messaging.UserAdministrationWireClient;
@@ -112,9 +113,11 @@ public final class UserAdminController {
       model.addAttribute(LITERAL_PAGE, UserCreateViewModel.newForm(actor, token.token()));
       return "admin/user-new";
     } catch (OperationTokenConflictException conflict) {
+      JmsRequestReplyException.preserveFatal(conflict);
       response.sendError(409);
       return null;
     } catch (SessionStoreException failure) {
+      JmsRequestReplyException.preserveFatal(failure);
       response.sendError(503);
       return null;
     }
@@ -174,11 +177,14 @@ public final class UserAdminController {
         response.setStatus(302);
         return null;
       } catch (OperationTokenConflictException conflict) {
+        JmsRequestReplyException.preserveFatal(conflict);
         response.sendError(409);
         return null;
       } catch (SessionStoreException failure) {
+        JmsRequestReplyException.preserveFatal(failure);
         return showCreate(actor, form, token, model, response, 503, RETRY);
       } catch (IllegalArgumentException | ClassCastException | NoSuchElementException failure) {
+        JmsRequestReplyException.preserveFatal(failure);
         response.sendError(503);
         return null;
       }
@@ -283,11 +289,14 @@ public final class UserAdminController {
         response.setStatus(302);
         return null;
       } catch (OperationTokenConflictException conflict) {
+        JmsRequestReplyException.preserveFatal(conflict);
         response.sendError(409);
         return null;
       } catch (SessionStoreException failure) {
+        JmsRequestReplyException.preserveFatal(failure);
         return showChange(id, actor, operation, form, token, model, request, response, 503, RETRY);
       } catch (IllegalArgumentException | ClassCastException | NoSuchElementException failure) {
+        JmsRequestReplyException.preserveFatal(failure);
         response.sendError(503);
         return null;
       }
@@ -338,9 +347,11 @@ public final class UserAdminController {
         }
         model.addAttribute("forms", List.copyOf(forms));
       } catch (OperationTokenConflictException conflict) {
+        JmsRequestReplyException.preserveFatal(conflict);
         response.sendError(409);
         return null;
       } catch (SessionStoreException failure) {
+        JmsRequestReplyException.preserveFatal(failure);
         response.sendError(503);
         return null;
       }
@@ -377,6 +388,7 @@ public final class UserAdminController {
     try {
       return WebSessionId.parse(current.getId());
     } catch (IllegalArgumentException failure) {
+      JmsRequestReplyException.preserveFatal(failure);
       throw new OperationTokenConflictException();
     }
   }
@@ -402,9 +414,11 @@ public final class UserAdminController {
       tokens.orElseThrow().require(session(request), purpose, token);
       return token;
     } catch (OperationTokenConflictException conflict) {
+      JmsRequestReplyException.preserveFatal(conflict);
       response.sendError(409);
       return null;
     } catch (SessionStoreException failure) {
+      JmsRequestReplyException.preserveFatal(failure);
       response.sendError(503);
       return null;
     }

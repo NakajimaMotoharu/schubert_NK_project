@@ -1,0 +1,128 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T00:41:26.956282+09:00",
+  "source": "e95c1391428956ee2b568018df76ac253aa6051c",
+  "productionCoreMain": "0e64916211565c7b7a84785628e3fc5449c69b6b",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserCreateForm.java": "5b599ddb57dfd4ba0b8a89547567b1d48bedb5d6ac09439c5dc0abd6cda25b86",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserCreateViewModel.java": "a2500110cedb6b4b38221a483191d9164f757709e404dcb190eaf1a869a80e82",
+    "src/schubert-nk-web/src/main/resources/templates/admin/user-new.html": "97fd0f78dbfbe4538ca36e5ddda507ed55d762c040d12b09d544fc568b0dbedd"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 238,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/225_管理・ログ画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "5ab9d595a5b8c94278e0ea2c37677bfe1c0359063cab1623a4331d0044776770"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01616-PG01",
+      "methods": "UserCreateForm.bind/toRequest/close",
+      "testIds": [
+        "PT-USER-CREATE001..008"
+      ],
+      "expected": "Exactly six required single-value fields, optional _csrf single ignored/non-retained because securityfilter validates separately; unknown/missing/list0-multiple binding error, nullmap/key/list/element failfast. Username NFC+trim ASCII[A-Za-z0-9._-]1..64bytes, invalid redisplayempty. Role USERADMIN/flag literaltruefalse closed; UUIDcanonical lowercase36 syntax only, actualsame-session/purpose/ownership iscaller obligation. Password NFC withouttrim,12..128 Unicode codepoints and<=256UTF8bytes, no trailingASCIIspace/control/isolatedsurrogate/ignorecaseusername match; confirmation NFCequal notsenttwice. Constructor cloneschar, invalid andfinally tempchars/bytes wiped; closeidempotent rejects later toRequest. Display onlyusername-role-enabled no password/confirmation/token/CSRF/rawdiagnostic. Fixedwire372 offset username0/64,password64/256,role320/5,enabled325/1,operationUUID326/36,padding362/10 fromSS323, independentgolden."
+    },
+    {
+      "id": "P01616-PG02",
+      "methods": "UserCreateViewModel.newForm/redisplay",
+      "testIds": [
+        "REQUEST-DISPLAY001..010",
+        "PT-USER-BIZ001..012"
+      ],
+      "expected": "Immutable five-key values topBar/fields/issues/token/message; new defaultsusernameempty/USER/enabledtrue/emptymessage-issues, redisplay retains samecallerpublicUUID/closednonsecretfields, conflict adds fixedusername issue withoutmutating form. Caller performs ADMINauth/tokenissue-purpose-binding; thisfactory isdisplay-only notpermission proof. NoGET tokenrefresh/automatic businessreissue; nullactor/form/token/message rejected, no secretretention."
+    },
+    {
+      "id": "P01616-PG03",
+      "methods": "admin/user-new.html/operation-post-submit.js assembly",
+      "testIds": [
+        "PT-UCREATE-DOM001..008",
+        "PT-USER-BIZ001..012"
+      ],
+      "expected": "UI225 exact title/labels/fieldorder andPOSTfixed/admin/users/new, hiddenoperationUUID onlycallerprovided; fieldsescaped, passwordinputs have no value/redisplay and autocomplete=new-password. Closed role andenabled defaultselection; usernamefield error/summary/message escaped. CommonlogoutCSRF+normalPOST securityfilter/processor are assembly obligation, standalone template/resource renderer isnotCSRF bypass or auth acceptance. Existingexternaldefer operation-post-submit.js marker, JSactualexecution belongsP01625. Usernamecollision/0105/DB audit rollback/successdetailredirect/session lifecycle belongactualcontrollerAPI contract/P01617, unaccepted here."
+    },
+    {
+      "id": "P01616-PG04",
+      "methods": "Historical originalUserCreate8/requestdisplay10/DOM43",
+      "testIds": [
+        "PT-USER-CREATE001..008",
+        "REQUEST-DISPLAY001..010",
+        "PT-UCREATE-DOM001..008"
+      ],
+      "expected": "Allwhole originalsource bytes retained; oldforms56 and requestdisplay10 currentowned relevant byte match are originalscope only/no repeat. UserCreateFormTest whole8 independent372golden/null/boundaries/nonretention/100parallel finiteFuture10/finallyshutdownNow-await10 qualifies as currentnormalcandidate afterexactMainclosure, withMutation8 andUserDisplay8 pricedonce shared afterP01617. DOM resource proof and actualcontrollerDB fixture are distinct, no extraction/privateResult/grant seam."
+    }
+  ],
+  "immutablePriorProofMatches": [
+    {
+      "raw": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG18190-request-display-ten-pt-v1/manifest.json",
+        "sha256": "be260ea2a4ad517e319a1bbbb8c90055ec7483354176fa20269a057ad041aed5"
+      },
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "tests": 10,
+      "relevantOwnedInputHashes": {
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserCreateViewModel.java": "a2500110cedb6b4b38221a483191d9164f757709e404dcb190eaf1a869a80e82"
+      },
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    },
+    {
+      "formCompile": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24396-web-six-form-bounded-fiftysix-independent-v1/compile-manifest.json",
+        "sha256": "ae2a5be8cb5673ab0bf693a92e82522bdfc5406ae18dcdcde161245219ede75e"
+      },
+      "allInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "reexecuted": 0
+    }
+  ],
+  "wholeOriginalFormCandidate": {
+    "test": {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserCreateFormTest.java",
+      "sha256": "0eb7b3e9f537636c45b00f21bed44d8875489cd0cb7cdc885ca5516d0dbff323"
+    },
+    "tests": 8,
+    "wholeSourceReviewed": true,
+    "finiteWorkerAfterconditions": true,
+    "approval": "CONDITIONAL_EXACT_CLOSURE_AND_PRICE_BEFORE_EXECUTION"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-16/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_ACTUAL_CREATE_HTTP_AUTH_SESSION_TOKEN_DB_CHR_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendNativeOrHeldClassActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1846_user_create_contract.py",
+    "sha256": "270a12c686243ba4018bf95837c2015abb3a77ba6388a25345ad183c816ed4b1"
+  }
+}

@@ -85,3 +85,12 @@ WBS-P016-14公開source契約/独立期待値/TestIDは[4146_P01614Log原七arti
 
 
 P01614と共通Pageの原全40は[仕様](4147_P01614原Log四十単体仕様.md)/[結果](4148_P01614原Log四十単体結果.md)。target4 outer四100/全220partial、実業務/監査DB/CHR/原190終了は未受入。
+
+
+WBS-P016-15公開source契約/独立期待値/TestIDは[4151_P01615User一覧原三artifact契約対応.md](4151_P01615User一覧原三artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-P016-16公開source契約/独立期待値/TestIDは[4152_P01616User追加原三artifact契約対応.md](4152_P01616User追加原三artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-P016-17公開source契約/独立期待値/TestIDは[4153_P01617User詳細更新原十二artifact契約対応.md](4153_P01617User詳細更新原十二artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。

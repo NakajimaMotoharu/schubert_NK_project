@@ -1,0 +1,116 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T00:39:35.445086+09:00",
+  "source": "e95c1391428956ee2b568018df76ac253aa6051c",
+  "productionCoreMain": "0e64916211565c7b7a84785628e3fc5449c69b6b",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserSearchForm.java": "d00242a9223aa067fc609945fc6e5bf382429c121b3c49600a3c3a056778c906",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserListViewModel.java": "3ab853dea7f6e95aa94c6553180ad7d355c1af6761636dc9828a9ada969f5eb6",
+    "src/schubert-nk-web/src/main/resources/templates/admin/user-list.html": "75ff8f6521d9e48c852264d839e17f9d2224f17ad2d486b37750cdae612e7655"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 365,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/225_管理・ログ画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "5ab9d595a5b8c94278e0ea2c37677bfe1c0359063cab1623a4331d0044776770"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01615-PG01",
+      "methods": "UserSearchForm.bind/invalidCharacter/toRequest",
+      "testIds": [
+        "PT-USER-HTTP001..010",
+        "USER-DISPLAY001..005"
+      ],
+      "expected": "Four keys username/role/state/page only; unknown key/list0-or-multiple fixed binding error, map/list/element null rejected at constructor boundary. Controls and isolatedUTF16 reject before NFC+trim, username<=64UTF8bytes, closedoptional role USERADMIN/state ACTIVE DISABLED LOCKED. Empty/missingpage1; signedASCIIint<=0 floor1, positive<=999999, overflow/plus/decimal/unicode digits rejected. Immutable copies/redacted tostring. InvalidtoRequest fails; validwire pageSize50/optionalempty and no owner authority inferred. Pure string NumberFormatException boundary no provider callback."
+    },
+    {
+      "id": "P01615-PG02",
+      "methods": "UserListViewModel.success/invalid/link/Row",
+      "testIds": [
+        "USER-DISPLAY001..005",
+        "PT-USER-HTTP006..010"
+      ],
+      "expected": "Local ADMINdisplay guard; actualsecuritychain/API auth separate. Successrequiresvalidform, PageViewModel50 exactcount/effective=min(request,totalPages), exactrecordcount/uniqueID/usernameUTF8unsigned C-byte ascending thenIDstrictascending, no repair/resort. Emptyvalidpage/prevnext borders; copiedrows+stablefilterlinks all3conditions percent-encoded. Invalidform has no results/count/navigation. Rowusername/role/state/lock/lastlogin/createdupdated fixed+09millisecond display, optionalmissingempty, logical positiveID detailhref; no password/session/foreignobjects. Caller mutation cannot change immutable exposed list/beans."
+    },
+    {
+      "id": "P01615-PG03",
+      "methods": "admin/user-list.html",
+      "testIds": [
+        "PT-USER-HTTP007..010",
+        "PT-RESOURCE-USER-LIST"
+      ],
+      "expected": "Exact Users title/User追加/detail nav and field/columnorder fromUI225. GET searchfields retained/closedrole-state options, errorsescapedtext, no hidden session/token/password. Count/prevnext only whenPagepresent, empty message or escapedrow table, logicaldetailhref, sharedlogoutCSRF remains separate. No utext/inlineJS/rawDTO exposure; actualHTTP/auth/DB/page SQL/original190 ending not accepted by source/template checks."
+    },
+    {
+      "id": "P01615-PG04",
+      "methods": "Historical UserDisplayContractTest whole8 and later shared current qualification",
+      "testIds": [
+        "USER-DISPLAY001..008"
+      ],
+      "expected": "3472/3473 and PG18210/12/14/25 retain original eight/source/run. AlltwoVM/helper source hashes and wholeTest byte checked only against original begin metadata; no replay or transfer of oldsource8/coverage. CurrentProto176 dependency changed, therefore after P01616/17 wholefixture source/closure review price exactly one shared current8, not newTest definitions or P01615+17 double fee. Originalcontroller/Bean DB/actual4 fixtures remain HOLD/unextracted; no privateResult or substitute permission seam."
+    }
+  ],
+  "immutablePriorProofMatches": [
+    {
+      "raw": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG18210-user-display-eight-pt-v1/manifest.json",
+        "sha256": "7bc53799010fd5d23a4e35c665c604407f7144f9288f76c021f4fd14cbf9cabe"
+      },
+      "post": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG18214-user-display-eight-independent-v1/manifest.json",
+        "sha256": "f05e5f657ed1306e469629a130c3c74cf50c2301e5818a2938b6fd7af9feadb6"
+      },
+      "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "tests": 8,
+      "helperInputHashes": {
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserListViewModel.java": "3ab853dea7f6e95aa94c6553180ad7d355c1af6761636dc9828a9ada969f5eb6",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserDetailViewModel.java": "c4d5545b5424c3fabc6b5563bd77e29f507a3f97c69ac2ae89ba34c680e902e3",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/PageViewModel.java": "29de4e2f08b7d0ca5bcb61952e3e50b6d7a501846b61da67e02e3f7e882a6593",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserSearchForm.java": "d00242a9223aa067fc609945fc6e5bf382429c121b3c49600a3c3a056778c906",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232"
+      },
+      "test": {
+        "path": "tools/quality/architecture/UserDisplayContractTest.java",
+        "sha256": "74e37d277cb69b31bbae8b2da0caceb5abe7e7c9cde7714309a2a0b3ef52c970"
+      },
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    }
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-15/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_ACTUAL_HTTP_AUTH_USER_DB_CHR_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendNativeOrHeldClassActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1841_user_list_contract.py",
+    "sha256": "36780b29c8dc6488783e568e7b53d9c63dad071a97ea0aea46fb0bfd4035018d"
+  }
+}

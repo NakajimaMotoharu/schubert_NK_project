@@ -1,0 +1,163 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T00:46:03.277770+09:00",
+  "source": "e95c1391428956ee2b568018df76ac253aa6051c",
+  "productionCoreMain": "0e64916211565c7b7a84785628e3fc5449c69b6b",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/UserBusinessMvcConfiguration.java": "9a0131aad87ee4373e6cf7ffe19a171380d1d514f601e463e848f7a28b6702f6",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/UserMvcConfiguration.java": "b7f00a8a6a8ffa84b4d756e25d985e0b516571d11635fe22e96ff4872ba19d24",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java": "3cca5368ead598ac9ae648891702ff818aac1d77b464b3cb9a92299c24648cb3",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/PasswordResetForm.java": "5f3efc52bcae063faec1531fcd9d1949ad576f5355f327001bc5dd888092cd1d",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserChangeForm.java": "86c971c5eb84ba1fce0240b6a72238a05a0769f85af2a439a297d6ab3bd6550e",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserMutationInput.java": "a5532415afe5314c6578ff9cbe6362fd9cb39ab6eb13d043c5153adeb4703d7c",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserRoleForm.java": "5d915e86e749f1d932bf4f1c8b37b1b787162b70cc6207858b09f99365f607ec",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserStatusForm.java": "d92c506396ad2fc1084a2cf87c5b688d9e62be60875e076f52d72a3ded9e7081",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserUnlockForm.java": "721ff28339f4e5684a20781491dbe74802d5ef092ad32a44bd23f7841a38493c",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/UserAdministrationWireClient.java": "fefe8a3a47ac916e0b869b82753701f8204f0a175870c81bb3638d7871cec006",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserDetailViewModel.java": "c4d5545b5424c3fabc6b5563bd77e29f507a3f97c69ac2ae89ba34c680e902e3",
+    "src/schubert-nk-web/src/main/resources/templates/admin/user-detail.html": "c74fe2ced5c6492369f243bf9930e52e88fef40b18492195a1ac01a9b05f8fba"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 1171,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/225_管理・ログ画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "5ab9d595a5b8c94278e0ea2c37677bfe1c0359063cab1623a4331d0044776770"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01617-PG01",
+      "methods": "UserBusinessMvcConfiguration/UserMvcConfiguration/UserAdministrationWireClient",
+      "testIds": [
+        "PT-USER-BIZ001..012",
+        "PT-WEB-S3WIRE001..008"
+      ],
+      "expected": "Ordinaryfull composition imports WebMVC and oneController withsamecore token lifecycle; legacyread-only hasOptionaltokensabsent and cannotacceptordinaryReady/new/update. FixedUSR/UDT/UCR/UST/URL/UPW/ULK sevenlayout facade only, neverHTTPselectedcapability. Nineall directProtectedReadfacades source search: four alreadycurrent32, otherfive needwholeWebBusinessWireClients8 afterclosure; no former whole wire success transferred."
+    },
+    {
+      "id": "P01617-PG02",
+      "methods": "UserAdminController.administrator/newForm/create/detail/retained/session",
+      "testIds": [
+        "PT-USER-HTTP001..010",
+        "PT-USER-DETAIL001..008",
+        "PT-USER-BIZ001..012"
+      ],
+      "expected": "ADMIN403 beforebinding/lookup; exactsessionnoncreatingfalse/id andsamepurposecanonicalUUID retained, missingmalformed400/expired-mismatch409. GETcreate issuesCREATE once, GETdetail firstfreshUDT then atomic preciselyvisibleforms issueForForms; selfhidesSTATUSROLE, UNLOCKonlyLOCKED, PASSWORDshown. Capacitypending+consumed<=10 belongsQA049lifecycle, display completion isnotAPIproof. Allformstoken capacity failure doesnotpartiallypublish. POSTinvalid400/sameUUID andno send, wirefailure503/sameUUID/passwordnotredisplayed; verified0102 immediateinvalidhandler. Verified0000/0200create requiresversion0 then completeVerified andrelative302 detail. No extraGETrefresh/automaticmutation reissue."
+    },
+    {
+      "id": "P01617-PG03",
+      "methods": "UserAdminController.change/showChange/lookup",
+      "testIds": [
+        "PT-USER-BIZ001..012",
+        "QA048",
+        "QA049"
+      ],
+      "expected": "Closedfouroperation/purpose/path1..999999999999. PASSWORDfetchesfreshverifiedtargetusername beforepolicy binding. Formfinallyclose onallresultpaths; no rawpasswordretention/extraLogout. VerifiedtargetID/version mustequalrequest+1 exceptUNLOCK0200sameversion, then tokenfirstcompletion. SelfPASSWORDverifiedsuccess clearslocal session/display/security andreturnsLoginwithoutfabricated0102audit. Otheroperations relative302;400/409/503 redisplay latestfreshUDT andonlysameretainedpurpose token, notnewissue. PurelookupUserId/DTOprojection catches areclosed; externalModel/request/response failurescannotbe normalized asfatalcatalog. BUG2722 thirteen actualcallback catalog catches violate lastcondition, fix separatelybefore acceptance; source audit doesnotclaimpass."
+    },
+    {
+      "id": "P01617-PG04",
+      "methods": "UserMutationInput.bind/requireUsable/displayValues/close and four sealed form adapters",
+      "testIds": [
+        "PT-USER-CHANGE001..016"
+      ],
+      "expected": "Four sealed forms only; fixedcommon5 fields plusoperationextra, optional_csrfignorednonretained, unknown/missing/multiple invalid, nullfailfast. PathpositiveN12 andhiddenidASCII1..12 equalpath; versionASCII1..9digits including0/MAX999999999, confirmexacttrue, UUIDlowercanonical36. STATUStruefalse/ROLEUSERADMIN only, PASSWORDtrustedfreshusername nonblank andNFC12..128codepoints256byte/confirmation/normalization/sameaccount rejection/no trailingASCIIspace-controls-surrogates. Constructor cloneschar, invalid andfinallytempwipe, closeidempotent/closed request+displayreject. Exposeid/version andsafeoperationvaluesonly, passwordimmutableDTO cannotbe erasedbyformclose andis separatelyowned. Policy forms cannotgrantAPIrole/self-lastADMIN/session/version authority."
+    },
+    {
+      "id": "P01617-PG05",
+      "methods": "UserDetailViewModel.from/user-detail.html",
+      "testIds": [
+        "USER-DISPLAY006..008",
+        "PT-USER-DETAIL001..008",
+        "PT-UDETAIL-DOM001..008"
+      ],
+      "expected": "LocalADMIN/requestIDbinding/sessioncount0..2 andversion0 valid; immutableclosed15key metadata, noPassword/sessioncontext. Selfcaseinsensitive, LOCKEDfixedreasononly, optionaldatesempty/JST+09millisecond fields. ExacttemplateDL order/escapedactors/logicalID links, onlyControllerprovidedforms withspecificoperation/id/version/token andconfirmrequired; passwordno value/autocomplete-new-password, noauthorityfromhiddenfields. No unescapedHTML orDTO passthrough. Display8oldproof only/currentqualification afterwholeclosure; actualUserControllerDBfixture/ApiInvalid/Root/actual4HOLD unextracted."
+    },
+    {
+      "id": "P01617-PG06",
+      "methods": "Ordinary whole pure tests and shared fee correction before next group",
+      "testIds": [
+        "PT-USER-CREATE001..008",
+        "PT-USER-CHANGE001..016",
+        "USER-DISPLAY001..008"
+      ],
+      "expected": "Actualwhole count isCreate8+Mutation16+Display8=32, correcting prior prose24 beforeany newTestgroup starts. Oldstartestimates retained, proposedcurrentnormalprice .15/.45/.9 for24 plus .05/.15/.3 actualextra8 =.2/.6/1.2cap2 subjectfullclosure/static. No newTestdefinitions. Mutationwhole553lines usesinvokeAll30/Future30/finallyshutdownNow-await10 for100tasks; Create100 Future10/finallyawait10, Displaypure254linesnoexecutors. No source/fixture extraction orheldgrants. Format/static defects, ifobserved, mustbeticketedbeforecorrection andoldbytesretained."
+    }
+  ],
+  "defectNotAccepted": {
+    "bug": "BUG-2722",
+    "before": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27848-user-controller-catalog-before-v1/before.json",
+      "sha256": "898f8585c91d822f977d8d16c2dd8b4a3205114fefb8852150b5133203c7e74e"
+    },
+    "sites": 13,
+    "sourceNotYetFixed": true,
+    "runtime": "HOLD"
+  },
+  "wholeNormalCandidates": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserCreateFormTest.java": {
+      "sha256": "0eb7b3e9f537636c45b00f21bed44d8875489cd0cb7cdc885ca5516d0dbff323",
+      "wholeSourceReviewed": true,
+      "tests": 8,
+      "finiteOwnedPool": true
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java": {
+      "sha256": "a98aec86a57e21885a80cf8443faba5130fa9e16c481c45b916df987585af304",
+      "wholeSourceReviewed": true,
+      "tests": 16,
+      "finiteOwnedPool": true
+    },
+    "tools/quality/architecture/UserDisplayContractTest.java": {
+      "sha256": "74e37d277cb69b31bbae8b2da0caceb5abe7e7c9cde7714309a2a0b3ef52c970",
+      "wholeSourceReviewed": true,
+      "tests": 8,
+      "pureValuesOnly": true
+    }
+  },
+  "priorDisplayRaw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG18210-user-display-eight-pt-v1/manifest.json",
+    "sha256": "7bc53799010fd5d23a4e35c665c604407f7144f9288f76c021f4fd14cbf9cabe"
+  },
+  "priorSourceNotCurrentQualification": true,
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-17/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_BUG2722_ACTUAL_USER_HTTP_SESSION_DB_CHR_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendNativeOrHeldClassActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1851_user_detail_contract.py",
+    "sha256": "aa1127a0ef5a4384314336cd9941cea270e06d04875fd2f713fd85ceecaf418d"
+  }
+}
