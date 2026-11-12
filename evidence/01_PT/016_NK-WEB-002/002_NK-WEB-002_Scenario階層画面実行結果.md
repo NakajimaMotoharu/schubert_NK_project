@@ -28,3 +28,6 @@ raw log `/tmp/pgpt-pg194-green4.log` SHA256 `6ee7b639626e67c7ba9d5dd65f6008b5c98
 - BUG216/YKT172: 証跡scope41への増設に伴う固定count2箇所・failure loop1箇所を修正。019全59＋017全1canary成功。残る40 literalはGit SHA長でscope件数ではない。
 
 上記の選択結果に加え、冒頭の正式全reactor・同一commit証跡を確定した。実broker/bootstrap/全画面/Production request logging/実NK互換性gateは未完了。
+
+
+P01504再送記録の原16＋graph4＋新fatal5全25仕様は[4121](../015_NK-WEB-001/4121_P01504再送記録原十六・新五全二五件単体仕様.md)。元19328成功は原source維持、未実行をPASSへ加算しない、費用主担当P01504一度だけ。

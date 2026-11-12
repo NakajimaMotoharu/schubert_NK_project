@@ -1,0 +1,20 @@
+{
+  "actualExit": 0,
+  "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+  "sourceBefore": "922df4cdb2e9954627e879d6f864e13d67cadceb",
+  "oldSha256": "4b4d55796b4fbfe687936912ce556a9e919923cc5a949182af3f7f5f58352e77",
+  "newSha256": "03dac3a3b2c8a8007ad2b8e5e8b56b7a92cd135b7b25152e7c8aec0055594ff3",
+  "originalAllAssertionsInverseExact": true,
+  "changes": [
+    {
+      "before": "    try (var executor = Executors.newFixedThreadPool(2)) {",
+      "after": "    var executor = Executors.newFixedThreadPool(2);\n    try {"
+    },
+    {
+      "before": "      assertThrows(UnsupportedOperationException.class, () -> a.add(b.getFirst()));\n    }\n  }",
+      "after": "      assertThrows(UnsupportedOperationException.class, () -> a.add(b.getFirst()));\n    } finally {\n      executor.shutdownNow();\n      if (!executor.awaitTermination(10, TimeUnit.SECONDS)) {\n        throw new AssertionError(\"revocation repository workers did not terminate\");\n      }\n    }\n  }"
+    }
+  ],
+  "productTestsExecuted": 0,
+  "bug": "BUG-2710"
+}

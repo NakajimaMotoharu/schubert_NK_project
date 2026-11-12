@@ -492,7 +492,8 @@ final class PendingRevocationPortTest {
 
   @Test
   void oneRepositoryHasIndependentConcurrentBorrowedConnectionsAndImmutableRows() throws Exception {
-    try (var executor = Executors.newFixedThreadPool(2)) {
+    var executor = Executors.newFixedThreadPool(2);
+    try {
       var first =
           executor.submit(
               () -> {
@@ -521,6 +522,11 @@ final class PendingRevocationPortTest {
       assertEquals(OWNER, a.getFirst().leaseOwner());
       assertEquals(new UUID(0, 2), b.getFirst().leaseOwner());
       assertThrows(UnsupportedOperationException.class, () -> a.add(b.getFirst()));
+    } finally {
+      executor.shutdownNow();
+      if (!executor.awaitTermination(10, TimeUnit.SECONDS)) {
+        throw new AssertionError("revocation repository workers did not terminate");
+      }
     }
   }
 

@@ -16,3 +16,6 @@ NK-WEB-001。対象source/hash、承認設計commit/hash、独立期待値/TestI
 
 
 PG27486 Repo.read一fatal口source-only修正/元1e442e逆変換/CSformat0 c1339044、製品PT0。wholePendingRevocationPortTest685行・16Testとhelper全文を確認、JDK JDBCinterface proxyだけ/SQLliteral独立・DBkey実体なし。唯一workerTWR未有限をBUG2710修正前起票、次別価格groupで有限化と新fatal5/whole25へ進む。
+
+
+source固定commit 922df4cdb2e9954627e879d6f864e13d67cadceb、独立sourcejoin [manifest](../018_NK-OPS-001/evidence/PG27490-revocation-metadata-fatal-source-join-v1/manifest.json) SHAdea0be05adb8ab7ef80f1fb784dd46e2e28009d6c844e1725843de6728a54f1b。BUG2709 Repo.read一既SessionStorefatal口+importだけ、元1e442e逆変換/27486configuredGJF-CS0 c1339044。SQL/lease/Backoff/cipherbound/null/診断/borrowedTX不変、旧16成功を新sourceへ転用0。全54限定fatal site runtime/再発防止は未完OPEN。wholePortTest685行全16を確認、唯一workerTWR無期限をBUG2710修正前起票、次群finite修正/新fatal5/必要helper4/whole16同exec25を別開始価格で予定。 製品PT0、runtime/coverage未受入。

@@ -26,3 +26,6 @@ Program共通追補（2026-10-22、Scenario画面本体の仕様変更なし）�
 golden電文はUI232/234 byte offsetから独立構築し、expectedにProduction codecを使わない。HTTP/DOM期待はCurrent templateとUIのliteral。fixtureは公開合成値で、master実体/credential/session/cookie/tokenは証跡に保存しない。正常/boundary/null/exception/並行・0/最大、追加Retryなしを網羅。既存Menu/error/session/APIinvalid PTも回帰する。
 
 Java4coverage100%/NullAway/staticを要求。templateの各if/each分岐は空・単・最大・escape/role/CSRFで照合する。失敗/flaky/skipped/not-runを成功に含めない。実行command/環境/対象commit/終了/結果/coverage/BUG/SSC/hashは002とevidence/manifest.jsonへ成功後固定する。正式PT-WEB-20260920-12で16PTと全reactor成功、002/manifest参照。実Artemis/全layout登録/本番logger/実NK全CHR/IT/STの完成証跡ではない。
+
+
+P01504再送記録の原16＋graph4＋新fatal5全25仕様は[4121](../015_NK-WEB-001/4121_P01504再送記録原十六・新五全二五件単体仕様.md)。元19328成功は原source維持、未実行をPASSへ加算しない、費用主担当P01504一度だけ。

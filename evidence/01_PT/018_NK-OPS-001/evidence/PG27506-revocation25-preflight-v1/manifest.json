@@ -1,0 +1,163 @@
+{
+  "actualExit": 0,
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/PendingRevocationRepository.java": "c11388734f03a3263f0c53097d5ce3e1c79d5f17416bdbf569a4cbd4d9fe4f7b",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/ClaimedRevocation.java": "0d62d5d5c749ed7db388e0d96aacfda7bd8cc74edb07326abd945c61b33e2d4f",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/EncryptedRevocationPayload.java": "cef3f699c0f4b9eb8d562ed2c131c8c23e389808d0e8fd08bc33144b0aa55d94",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity.java": "ee2a5de2420d9fd0f73919a78de9a6b5cbfd8fa13836100f234bb33cc85b1252",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationFailureCode.java": "7619c5d7d7f1e7904d5379123512e6a829691ab1eb2a06dd1305d44bdc7d6fe7",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/package-info.java": "785d98841334b52c27cf6c3a1625a06bf0a8a7c61776214c0ad9375a09c18549",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java": "93717ee948f88bd799a14cdad397c0d92e584711c32f571df8592be379033ed1",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/InvalidSessionRowException.java": "e3c592ebb82effd50447c356629695def2af5f05e90137de57fe908d4310a853",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/package-info.java": "24641c16e2937e6fdb40acd9c3f86139fb9b54588aaf5931c240d74471d93277",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java": "03dac3a3b2c8a8007ad2b8e5e8b56b7a92cd135b7b25152e7c8aec0055594ff3",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionFailureGraphTest.java": "3ab62c90af53ffb1e6fd9f01e650324bb16e201fd4eeecc7a5ba21f2127d7a10",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionJdbcGraph328Test.java": "a946c07a2cd3b6c28d0ee244c42dd41de4706e03378418ec4462ae53c72551c0",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationFatalPortTest.java": "a0648d8a509249964f1a28b047c7196e6c79319df8269d3aa5edd454b3e673da",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27498-revocation25-normal-v1/manifest.json",
+    "sha256": "fb8973b8e9fe1613173d0e09a45d2589b79ff0d18646c80cd22899e93a9d265e"
+  },
+  "testAndChangedMainStatic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27500-revocation25-static-v1/manifest.json",
+    "sha256": "f6402276137fcfad653ec453fdd706f91aa9f4f1f3a4e3fb2cd400f1bc8b6ef5"
+  },
+  "unchangedMainStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/manifest.json",
+    "sha256": "2d200777b5983362f972cd00e83b64dbf265851bd9688eb6684a6442e4549298"
+  },
+  "finiteOriginalAssertions": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27494-revocation-port-finite-source-v1/manifest.json",
+    "sha256": "5b29e5b637acb8ba99c9e986b7947ba267be6986d1a160ef8d8c1fe83b101a13"
+  },
+  "classified": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationFatalPortTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "114",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "StandaloneJUnit explicitJDK JDBCinterface Proxy loader; noJ2EE/container/contextloader accessors."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationFatalPortTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "129",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "StandaloneJUnit explicitJDK JDBCinterface Proxy loader; noJ2EE/container/contextloader accessors."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationFatalPortTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "150",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "StandaloneJUnit explicitJDK JDBCinterface Proxy loader; noJ2EE/container/contextloader accessors."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "rule": "CloseResource",
+      "line": "495",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "OwnedJUnitexecutorfinallyshutdownNow/await10 bounded; TWRwouldrestoreunboundedclose."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "495",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "StandaloneJUnit own2workers/Future5/finallyawait10; no server/container/businessDB threads."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "498",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "StandaloneJUnit own2workers/Future5/finallyawait10; no server/container/businessDB threads."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "507",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "StandaloneJUnit own2workers/Future5/finallyawait10; no server/container/businessDB threads."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "525",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "Unconfirmedownedworker mustfailJUnit notcountasPASS/resourcesreleased."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "526",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "StandaloneJUnit own2workers/Future5/finallyawait10; no server/container/businessDB threads."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "527",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "StandaloneJUnit own2workers/Future5/finallyawait10; no server/container/businessDB threads."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "594",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "PrivateFixture maps confined tosingleworker; parallelbranches eachcreateownFixture, repository itselfstateless andJUnitparallel disabled."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "596",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "PrivateFixture maps confined tosingleworker; parallelbranches eachcreateownFixture, repository itselfstateless andJUnitparallel disabled."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "686",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "StandaloneJUnit explicitJDK JDBCinterface Proxy loader; noJ2EE/container/contextloader accessors."
+    }
+  ],
+  "expectedTests": 25,
+  "fullPhysicalClasses": 9,
+  "newDefinitions": 5,
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "pmdRawFindings": 13,
+  "manualSuppressionAdded": false,
+  "actualBackendOrHeldClassActions": 0,
+  "heldFixturesExtractedOrRewritten": false,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "fullReportExpectedPartial": true,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1664_revocation25_preflight.py",
+    "sha256": "423fd3e1c1e6f70ee9b764ef541dbf826cd77b6bd412b8d55edc31b73e14a7a3"
+  }
+}
