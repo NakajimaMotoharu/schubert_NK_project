@@ -26,3 +26,8 @@ WBS-P011-01公開source契約/独立期待値/TestIDは[4095_P01101質問受付I
 
 
 WBS-P011-02公開source契約/独立期待値/TestIDは[4097_P01102質問原子受付原source契約対応.md](4097_P01102質問原子受付原source契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+[4098 既存受付ID回復通常PT](4098_P01101既存受付ID回復四件と関連九件通常PT仕様.md): 27204/27208同source13成功、Main2四100、既存4を新定義に加算0、元KeyRing/DB終了依存HOLD。
+
+
+WBS-P011-03公開source契約/独立期待値/TestIDは[4099_P01103質問command時刻原source契約対応.md](4099_P01103質問command時刻原source契約対応.md)。metadataのみ、新PT/coverage/正式受入0。

@@ -1,0 +1,87 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T17:17:31.627836+09:00",
+  "source": "0ff6b3fc5afba0b9fbe06e0998c3d9442217631b",
+  "productionCoreMain": "13e6c050db76b202b03b1d7653cc368c178cae76",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.java": "c62cea835ecc09e2e811cdf704d2e8c562b207f802a50c8f1789868fff3cfc1c"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01103-PG01",
+      "methods": "constructor/messageId/correlationId/at",
+      "testIds": [
+        "PT-CMD-META001",
+        "PT-CMD-META002"
+      ],
+      "expected": "Trace UUID message/correlation independentlyrequirednonnull withliteralnames, preservedasprovided (neednotbedifferent). Instantnonnull; noowner/token/password/key authority orcanonicalization oftracevalues. Metadataisnotoperationtoken/HMACimplementation. SharedP00601/P00703 closure remainsrequired."
+    },
+    {
+      "id": "P01103-PG02",
+      "methods": "constructor/at",
+      "testIds": [
+        "PT-CMD-TIMEBOUND001..003"
+      ],
+      "expected": "UTCyear1to9999 inclusiveafterfloortruncatetomicros: loweraccepted,+999nsfloorloweraccepted,-1nsrejected; upperaccepted,+999nsfloorupperaccepted,+1000nsrejected. PreEpoch .999999999 floors .999999, epoch+1nsfloorszero. ExpectedfixedInstantliterals independentofproductiontruncation."
+    },
+    {
+      "id": "P01103-PG03",
+      "methods": "toString/accessors",
+      "testIds": [
+        "PT-CMD-META002"
+      ],
+      "expected": "ExactconstantQuestionCommandMetadata[REDACTED] fordistincttraces/time, noUUID/time/providertext. Allaccessorspreservegivenidentities/nanosfloor. Valueisimmutable/JDKonly/noresource/SQL/threads. ActualHMACcurrentowner/constanttime/samepayloadfrozenInbox7days notprovenbythisvalueclass; no oldproofsemantictransfer."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadataContractTest.java",
+      "sha256": "35defc94dd7470149d6e4c741ee00cc9196d5ad6731dd5290aecbcd61f9ce71c",
+      "tests": 2,
+      "wholeBodyReviewed": true,
+      "status": "ELIGIBLE_WHOLE_JDK_ONLY_NOT_EXECUTED_THIS_GROUP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCommandTimeBoundaryTest.java",
+      "sha256": "0d2b3fd7a094c51c4009b96c5dfa65081d0924810ce6aecd0dc2c6198c4e4ef0",
+      "tests": 3,
+      "wholeBodyReviewed": true,
+      "status": "ELIGIBLE_WHOLE_JDK_ONLY_NOT_EXECUTED_THIS_GROUP"
+    }
+  ],
+  "ownerTitleVsConcreteInventory": "Metadata trace/time only; HMAC/token shareddependencies mustnotbe silentlyclaimed",
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P011-03/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_CURRENT_METADATA_NORMAL5_AND_SHARED_HMAC_INBOX_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1522_question_metadata_contract_audit.py",
+    "sha256": "af2fb0f27c1e09362d16ae5107a5b21146645d9b5aaa2d37fc5a3c50f4f1b7e2"
+  }
+}
