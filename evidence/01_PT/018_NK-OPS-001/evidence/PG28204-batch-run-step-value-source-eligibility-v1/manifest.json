@@ -1,0 +1,87 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T05:46:48.458066+09:00",
+  "source": "9628dab0a838530c89ec38377e1c129bafd75107",
+  "productionCoreMain": "1ef5610854bf99cca938ae4b025b630e5e1a5d4b",
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java": "0467e9722cc3c46e238fcdb9e2d1deffde11b3a498e54e61c0f477d18440889e",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java": "f736e4cf0f251df6b0d0579996b0353e6a757b0def2777a4528ee976c8384285",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java": "a37a929c6f7f01ccdd2facf7b6f74a72eea2f8927739b38c0ff998f3ec1015fe",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepResult.java": "d4d8f244943923c428596dd5629c942fe207fb9d51a6a7872c3fa7190a71e319",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java": "9285d0ce208cf45f55f4d2c5a740e59573ef1b984d99c2ef6e41dd311462382a",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java": "4f6c9eca1af5970e44717d214fa1ef83459c853268548f33633cf65ba0d32a81"
+  },
+  "wholeReviewedMainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepResult.java"
+  ],
+  "wholeReviewedTestSources": [
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java"
+  ],
+  "safeClosureMainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java"
+  ],
+  "safeWholeExistingTests": 2,
+  "eligibleTest": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java",
+  "immutableValueNotRuntimeOwnershipCapability": true,
+  "remainingWhole8": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+  "remaining8Status": "INTERNAL_DEPENDENCY_REVIEW_PENDING_NOT_PLATFORM_REFUSAL_OR_AUTOMATIC_SAFETY_HOLD",
+  "remaining8Reasons": [
+    "ExistingClass.forName BatchRunRepository$History/privateconstructor requires wholeparent/transitive source and initialization proof; parentfirst105lines only currently reviewed",
+    "BatchStepResult.Reason exhaustiveenum switches imply compiler switchmap; initialcommonpost rejects unexpected synthetic artifacts ratherthanexclude",
+    "Virtual64worker Future5 butimplicitTWRclose unbounded; BUG2746 beforefix"
+  ],
+  "oldHelperProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28166-backup-manifest16-independent-v1/manifest.json",
+    "sha256": "5ec9531bce5b1ba5d8b5436621c44585d8aafdafa27785e836a59ef4c24ffd2a"
+  },
+  "oldHelperMisses": {
+    "dev/codex/schubert/nk/batch/repository/BatchRun": {
+      "INSTRUCTION": 7,
+      "BRANCH": 3,
+      "LINE": 2,
+      "COMPLEXITY": 4,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt": {
+      "INSTRUCTION": 15,
+      "BRANCH": 4,
+      "LINE": 3,
+      "COMPLEXITY": 6,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchStep": {
+      "INSTRUCTION": 3,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    }
+  },
+  "futureNormal2": {
+    "low": 0.2,
+    "base": 0.6,
+    "high": 1.2
+  },
+  "futureInternalDependencyReview": {
+    "low": 0.15,
+    "base": 0.45,
+    "high": 0.9
+  },
+  "originalWholeStepTestUnchanged": true,
+  "methodsOrFixturesExtracted": false,
+  "newFixtures": false,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2042_batch_values_eligibility_close.py",
+    "sha256": "327e13822788970fc302d8284f980802639bba54fc7d502a4c18dad066569c4d"
+  }
+}
