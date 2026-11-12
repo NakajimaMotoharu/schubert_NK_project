@@ -1,0 +1,147 @@
+{
+  "groupId": "PGPT-WBS65-LOG-ORIGINAL19-NEW2-WHOLE21-RETAINED-COMPILE-NORMAL-CLOSURE-20261113",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1293_WBS65Log現在二十一通常結果.json",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG28458-log-whole21-current-source-scope-join-v1/manifest.json",
+  "manifestSha256": "2293a965e262d87d464c73913dc03fd4eba6f510d74a7f9c289b2167c485e006",
+  "terminalAtUTC": "2026-11-13T08:51:31.010176+09:00",
+  "run": "PG28458",
+  "workIds": [
+    "WBS-F03-LOG_WHOLE21_REMAINING_NORMAL_CLOSURE"
+  ],
+  "outcome": "LOG_WHOLE21_SUCCESS_ONE_FULL_SOURCE_FOUR100_FULL23_PARTIAL_ANALYSIS_SYMBOLS_NOT_RUNTIME",
+  "technical": {
+    "kind": "LOG_CURRENT_ORIGINAL19_NEW2_WHOLE21_NORMAL",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28456-log-analysis-context-post-v1/manifest.json",
+      "sha256": "3c423d5172314d3a5962e8f13397f14c99a4ba7e7a8d41fe06cb211e0f524c31"
+    },
+    "tests": 21,
+    "newDefinitions": 2,
+    "newAcceptance": 0,
+    "physicalClasses": 23,
+    "positiveMainCrc": 18,
+    "completeTargetSources": 1,
+    "targetClasses": 5,
+    "targetCounters": {
+      "COMPLEXITY": {
+        "covered": 49,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 571,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 15,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 163,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 3,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 68,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": false,
+    "uncoveredFullSourceClasses": {
+      "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures": {
+        "INSTRUCTION": 25,
+        "BRANCH": 8,
+        "LINE": 6,
+        "COMPLEXITY": 5,
+        "METHOD": 1,
+        "CLASS": 1
+      },
+      "dev/codex/schubert/nk/batch/repository/CleanupChunk": {
+        "INSTRUCTION": 5,
+        "BRANCH": 1,
+        "LINE": 1,
+        "COMPLEXITY": 1
+      },
+      "dev/codex/schubert/nk/batch/repository/CleanupRepository": {
+        "INSTRUCTION": 146,
+        "BRANCH": 25,
+        "LINE": 38,
+        "COMPLEXITY": 21
+      },
+      "dev/codex/schubert/nk/batch/repository/CleanupKind": {
+        "INSTRUCTION": 18,
+        "BRANCH": 6,
+        "LINE": 8,
+        "COMPLEXITY": 7,
+        "METHOD": 2
+      },
+      "dev/codex/schubert/nk/batch/repository/BatchRun": {
+        "INSTRUCTION": 7,
+        "BRANCH": 3,
+        "LINE": 2,
+        "COMPLEXITY": 4,
+        "METHOD": 1
+      },
+      "dev/codex/schubert/nk/batch/repository/CleanupCounts": {
+        "BRANCH": 4,
+        "COMPLEXITY": 4
+      },
+      "dev/codex/schubert/nk/batch/repository/BatchStep": {
+        "INSTRUCTION": 84,
+        "LINE": 15,
+        "COMPLEXITY": 3,
+        "METHOD": 3,
+        "CLASS": 1
+      },
+      "dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard": {
+        "INSTRUCTION": 16,
+        "BRANCH": 4,
+        "LINE": 3,
+        "COMPLEXITY": 4
+      },
+      "dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary": {
+        "INSTRUCTION": 16,
+        "BRANCH": 5,
+        "LINE": 5,
+        "COMPLEXITY": 6,
+        "METHOD": 1
+      },
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason": {
+        "INSTRUCTION": 21,
+        "LINE": 4,
+        "COMPLEXITY": 1,
+        "METHOD": 1,
+        "CLASS": 1
+      },
+      "dev/codex/schubert/nk/storage/StorageIoException": {
+        "INSTRUCTION": 14,
+        "BRANCH": 1,
+        "LINE": 4,
+        "COMPLEXITY": 3,
+        "METHOD": 2
+      },
+      "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard": {
+        "INSTRUCTION": 4,
+        "BRANCH": 2,
+        "COMPLEXITY": 2
+      }
+    },
+    "MainChanged": false,
+    "TestChanged": false,
+    "roster": {
+      "runs": 77,
+      "actualExecutions": 3746,
+      "success": 3718,
+      "failed": 28,
+      "scope": "EXPLICIT_OBSERVED_ROSTER_NOT_GLOBAL_UNIQUE_OR_FORMAL"
+    }
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1292_WBS65予実・Log現在二十一通常後版280.json",
+    "sha256": "40c191f7458589dfb0598fce46d9fa3e429b9a59c1025c3b5a08796128f028f5"
+  },
+  "checkpointText": "Log既存whole19＋新2=21全成功/FESabort0、PG28456独立post0。現Main16のRootNullAway/Main-Test compile0・Guard実class一つを含む全23physical/positiveCRC18、Log全1source/nested5physical（実行可能3class）四100 L163/M15/C3/B68/I571。新fatal body・rollback cause/suppressed/nextの元Error identity、rollback→復元/commit0/lease固定secondary/borrowedclose0を独立literalで検証。元19全body/helper/225資源vectorと回復matrixを保持、fixedpool Future3-finallyshutdownNow-await10で20独立JDBC fixtureの有限終了。標準CleanupRepository$1は実SourceFile/synthetic/field1/clinit1/CRC e9bc05ef・JaCoCo標準0codefilterを保存、独自除外0。Guard実positiveCRC b5b153f7/currentbyteとfresh実行を照合し未網羅枝は残す。Outercompile symbol2と解析専用6型はruntime/reportへ混入せず、全禁止init観測0。原Root/Main-Test/PMD-CS-GJF成功をbyte/ASTで保持、必要SBcontextだけ再確認しbugs-missing-errors0、PMD生69を31message-sourceanchor群（workerfinallyはsourceLine362）へ全件照合/適用-未分類0/抑制0。新定義2だけ計上、他12helperの未網羅/旧exec/旧sourceを合算せず、実DB/Root親/所有/native/CHR/全451/190は未受入。 Testsource2aa39cc209889b985fcc75b6f584628879e365e6/Maine9d0c0128b8bc6b86cdca4eb710c366b5af63dcd。原190新0/正式1964-53/工数null、残{'low': 401.584, 'base': 847.32, 'high': 1661.925}未較正。",
+  "nextCommand": "AfterpublishclosedlimitedLog21 proof do notstop. Continue625canonicalP01708 dependency/ownedsource/independentoracles andnormaleligiblewholeTests, ornecessaryrelatedcurrentJDBCcallerimpact audit; no confirmationreplay ofnew8/new21 orwhole regression. GlobalBUG2751otherfourMain/BUG2752wholeSession/BUG2754nativeworker/YKT2359 stillOPEN, Root/native/actual4HOLD preserved. Markfiniteworker/toolbugs onlytheirboundedverifiedscope, notoriginal190acceptance. Freshquota/usage09:06:30/N-Tnull/diskgate."
+}
