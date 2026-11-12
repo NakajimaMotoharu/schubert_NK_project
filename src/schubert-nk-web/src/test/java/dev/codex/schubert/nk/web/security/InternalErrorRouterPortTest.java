@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import jakarta.servlet.DispatcherType;
 import jakarta.servlet.Filter;
@@ -361,7 +362,8 @@ final class InternalErrorRouterPortTest {
 
   @Test
   void eightOwnedTasksKeepRequestsCallbacksAndEmptyContextsIsolated() throws Exception {
-    try (var pool = Executors.newFixedThreadPool(2)) {
+    var pool = Executors.newFixedThreadPool(2);
+    try {
       var jobs = new ArrayList<Future<List<String>>>();
       for (int i = 0; i < 8; i++) {
         int index = i;
@@ -390,6 +392,9 @@ final class InternalErrorRouterPortTest {
       for (int i = 0; i < 8; i++)
         assertEquals(
             List.of(i % 2 == 0 ? CALL_E : CALL_B, CHAIN), jobs.get(i).get(10, TimeUnit.SECONDS));
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
     }
   }
 }
