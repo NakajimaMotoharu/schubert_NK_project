@@ -1,0 +1,73 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG28378-JDBC-KNOWNPAIR-NEW8",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": "WBS-P017-01",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": "WBS-P017-02",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "WBS-P003-04"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4208_JDBC純順位新八単体仕様.md",
+      "sha256": "711d5b0a04355ebc0c5eda6cacfcce18db27ea8d41d5cbe313c00ea78cb5e77a"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28368-jdbc-helper-new8-whole-source-oracle-closure-v1/manifest.json",
+      "sha256": "26a30656dbd50066f9047b4978eecae3c226eca41e2233ac0d41da4882f3d011"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "e9d0c0128b8bc6b86cdca4eb710c366b5af63dcd",
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailuresTest.java",
+      "tests": 8
+    }
+  ],
+  "expectedTests": 8,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-batch/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG28370-jdbc-knownpair8-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG28372-jdbc-knownpair8-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG28374-jdbc-knownpair8-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG28376-jdbc-knownpair8-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG28378-jdbc-knownpair8-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG28380-jdbc-knownpair8-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg28372-jdbc-knownpair8-prepare-v1",
+    "unit": "pg28378-jdbc-knownpair8-unit-v1"
+  },
+  "newTestDefinitions": 8
+}

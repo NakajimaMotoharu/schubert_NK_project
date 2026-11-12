@@ -3,3 +3,6 @@
 BUG2752/2757、YKT2359、SS312/332SSC063199310/333/341/352、UI251、CDB001..009/BAT087/121。Session executeのSQL/BatchRepoだけfatal分類、選択したErrorをactualprimaryへ記録してからfinally一回closeへ渡す。IOException自体の従来固定化/unknown型優先不変更。Session closeReplaceとJdbcResourceFailures knownSQLpairは元null/unknown選択後だけprimary→secondary graph分類。全元bodyは追加逆変換でbyte一致、SQL/借用owner/権限/credential消去不変更。
 
 PG28362はsourcePG/GJF-CSだけ、Session fullDBRoot TestはHOLD・部分抽出なし、Maincompile/fullstatic/PT/coverageは未受入。次の純JdbcResourceFailures新whole8はJDKThrowableだけで独立literal・identity/fresh固定secondary/cause-suppressed-next-cycleを直接検証する別scopeで、Session/全RepositoryのDB後条件や親ownerを認定しない。新定義数と実行件数を区別し元1964-53/190/工数nullを維持する。
+
+
+source固定commit e9d0c0128b8bc6b86cdca4eb710c366b5af63dcd、独立sourcejoin [manifest](../018_NK-OPS-001/evidence/PG28366-db-session-jdbc-source-join-v1/manifest.json) SHAc60980f2195b585cd0317dea4e18ebff833f2bed37e90949997160c5a8d8b318。BUG2752 Session SQL/BatchRepo graphから選択したfatalをactualprimaryへ記録しfinally元identityを保持、Session closeReplaceとBUG2757 JdbcResourceFailuresのknownSQLpairだけguard計五call。元unknown型優先/checkedIO/SQL/authority/credential消去/借用資源順序不変更、二Mainの全旧bodyはbyte逆変換一致/GJF-CS0。Maincompile/fullstatic/PTcoverage未実施、DBRoot SessionTestはwholeHOLD、純JDBC helper新whole8を別scopeで次必要資格とする。 製品PT0、runtime/coverage未受入。
