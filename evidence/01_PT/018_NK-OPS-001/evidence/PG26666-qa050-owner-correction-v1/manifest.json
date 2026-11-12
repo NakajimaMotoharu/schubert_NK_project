@@ -1,0 +1,52 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T10:29:58.176745+09:00",
+  "bug": "BUG-2671",
+  "ykt": "YKT-2351",
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26664-qa050-owner-before-v1/manifest.json",
+    "sha256": "25e3f642c333559de79f23cca5fa85c6a0cd66216e94a7e88f3d469106d518a1"
+  },
+  "designs": [
+    {
+      "path": "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "119f2f4aa75aecf4a3810a1e2dcb24c8d6c0507d5a8bdc143453e95c00c26e74"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    }
+  ],
+  "correctedScope": "QA050=session-revocation-unconfirmed-retry 5s/30s/5m then15m. SS3248.3API_outbox=1s/5s/30s/1m/5m; SS3249WebLog_outbox=sameAPI5m cap.",
+  "correctedFiles": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4058_Outbox十二source・SQL再送DLQ・独立期待値対応.md",
+      "sha256": "f3cef3e28420f29db0786550b9444250105ff27abbb3f589c552d2994fd44f5c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/1298_outbox_twelve_public_contract_audit.py",
+      "sha256": "768fcffbea77bdf722f627caa8d34150abb6ecce40ca64a5ec12f5484f16c476"
+    }
+  ],
+  "originalManifestAndEventRetainedUnmodified": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/1299_outbox_twelve_close.json",
+      "sha256": "e9f432f27c237bb484248326bbc659c2e0514eb5d266dd1fe9a7a3d634f10810"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26656-outbox-twelve-public-contract-v1/manifest.json",
+      "sha256": "566cac49a0aab4f3d18582966ebc9a198bb2ee7f3dbbcbf21c5e5cf41d35e51d"
+    }
+  ],
+  "originalPrepPriceAnd190StatusUnchanged": true,
+  "MainAndTestChanged": false,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1301_qa050_schedule_owner_correction.py",
+    "sha256": "639e89b4d6460e05ce3f10ea70035cecac18e51b70982b70cfb60bcb002dbbab"
+  }
+}
