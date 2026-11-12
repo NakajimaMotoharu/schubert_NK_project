@@ -14,3 +14,6 @@ fixtureは全一class4method、thread/Executor/DB/外部接続/鍵/実sessionな
 事前static: 初回26796compile0/26798raw16（適用literal重複1）は保全、BUG2677/YKT2357修正前PG26802起票後独立ROLE_USERラベル定数化。入力/期待値/元8断言不変更。fresh26808compile→26810raw15適用0/CS/format0→26812 preflight fb2cb3e8。Main197の再buildなし、原source/byte/静的証跡を厳密照合。抑制/品質緩和0。
 
 実行予定: source固定commitの後、`PYTHONPATH=tools/quality python3 -B evidence/01_PT/018_NK-OPS-001/input/1345_web_auth_helper_qualifier.py run <固定source>`、同runのみ1348独立postへ。環境Java25.0.4/JUnit1.13.4/JaCoCo0.8.15、各ツールhash/実command/branch/終了code/XML/CRC/coverageはmanifestへ保存。仕様書作成時点で166は未実行・未受入。旧162は成功だがhelper不足のまま保持し、合成しない。後続実HTTP/DB/CHR/451/元190は本純粋value試験だけでは閉じない。
+
+
+実行後追記: source840・PG26816全166真正0/PG26818独立0、全197physicalの四coverage100。詳細は[4072実行結果](4072_Web認証value四件・現全一六六_実行結果.md)。上の「作成時点未実行」は仕様確定時の履歴を保持。

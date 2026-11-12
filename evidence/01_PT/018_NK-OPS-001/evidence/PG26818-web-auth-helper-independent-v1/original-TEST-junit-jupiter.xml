@@ -1,0 +1,1056 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="166" skipped="0" failures="0" errors="0" time="1.235" hostname="npc1" timestamp="2026-11-12T12:58:18">
+<properties>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.class.path" value="/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar"/>
+<property name="java.class.version" value="69.0"/>
+<property name="java.home" value="/home/mini/codex/project1/work/toolchain/jdk-25.0.4"/>
+<property name="java.io.tmpdir" value="/home/mini/codex/project1/work/pgpt-runs/PG379/pg26816-web-auth-helper-current166-v1/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="25.0.4+7-1-26.04-Ubuntu"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="25"/>
+<property name="java.vendor" value="Ubuntu"/>
+<property name="java.vendor.url" value="https://ubuntu.com/"/>
+<property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-25"/>
+<property name="java.version" value="25.0.4"/>
+<property name="java.version.date" value="2026-07-21"/>
+<property name="java.vm.compressedOopsMode" value="Zero based"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="25"/>
+<property name="java.vm.vendor" value="Ubuntu"/>
+<property name="java.vm.version" value="25.0.4+7-1-26.04-Ubuntu"/>
+<property name="jdk.debug" value="release"/>
+<property name="junit.docs.version" value="1.13.4"/>
+<property name="junit.jupiter.execution.parallel.enabled" value="false"/>
+<property name="junit.jupiter.extensions.autodetection.enabled" value="false"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="7.0.0-43-generic"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdin.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/home/mini/codex/project1/work/toolchain/jdk-25.0.4/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar execute --disable-banner --class-path /home/mini/codex/project1/work/pgpt-runs/PG379/pg26808-web-auth-helper-profile-v1/main:/home/mini/codex/project1/work/pgpt-runs/PG379/pg26808-web-auth-helper-profile-v1/test-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg26524-login-pure-main-subset-v1/test-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg26304-protocol-unicode-full130-compile-v3/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg26280-protocol-unicode-full130-compile-v1/resources:/home/mini/codex/project1/work/pgpt-runs/PG379/pg26278-protocol-unicode-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar --select-class dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest --select-class dev.codex.schubert.nk.web.security.MqLoginContextProbeTest --select-class dev.codex.schubert.nk.web.security.ClosedAuthenticationValueTest --select-class dev.codex.schubert.nk.web.security.MqLoginClientTest --select-class dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest --select-class dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest --select-class dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest --select-class dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest --select-class dev.codex.schubert.nk.protocol.codec.FieldCodecTest --select-class dev.codex.schubert.nk.protocol.codec.MessageCodecTest --select-class dev.codex.schubert.nk.protocol.codec.PayloadCodecTest --select-class dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest --select-class dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest --select-class dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest --select-class dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest --select-class dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest --select-class dev.codex.schubert.nk.protocol.header.HeaderModelTest --select-class dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest --select-class dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest --select-class dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest --select-class dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest --select-class dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest --select-class dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest --select-class dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest --select-class dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest --select-class dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest --select-class dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest --select-class dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest --select-class dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest --select-class dev.codex.schubert.nk.protocol.time.JstWireTimestampTest --select-class dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest --select-class dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest --select-class dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest --reports-dir /home/mini/codex/project1/work/pgpt-runs/PG379/pg26816-web-auth-helper-current166-v1/xml --fail-if-no-tests --details summary"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="user.dir" value="/home/mini/codex/project1/work/pgpt-foundation"/>
+<property name="user.home" value="/home/mini"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="mini"/>
+<property name="user.timezone" value="Asia/Tokyo"/>
+</properties>
+<testcase name="pageConstantsCountsAndArithmeticAreEnforced()" classname="dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest]/[method:pageConstantsCountsAndArithmeticAreEnforced()]
+display-name: pageConstantsCountsAndArithmeticAreEnforced()
+]]></system-out>
+</testcase>
+<testcase name="nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition()" classname="dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest]/[method:nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition()]
+display-name: nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition()
+]]></system-out>
+</testcase>
+<testcase name="enum002EverySemanticEnumRetainsItsFieldIndependentSerialDescriptor()" classname="dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest]/[method:enum002EverySemanticEnumRetainsItsFieldIndependentSerialDescriptor()]
+display-name: enum002EverySemanticEnumRetainsItsFieldIndependentSerialDescriptor()
+]]></system-out>
+</testcase>
+<testcase name="semanticEncodingHelpersRejectNullReferences()" classname="dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest]/[method:semanticEncodingHelpersRejectNullReferences()]
+display-name: semanticEncodingHelpersRejectNullReferences()
+]]></system-out>
+</testcase>
+<testcase name="numericCodecChecksDigitsRangeAndOverflow()" classname="dev.codex.schubert.nk.protocol.codec.FieldCodecTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.FieldCodecTest]/[method:numericCodecChecksDigitsRangeAndOverflow()]
+display-name: numericCodecChecksDigitsRangeAndOverflow()
+]]></system-out>
+</testcase>
+<testcase name="numericSemanticCeilingIsIndependentOfWireAndLongCapacity()" classname="dev.codex.schubert.nk.protocol.codec.FieldCodecTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.FieldCodecTest]/[method:numericSemanticCeilingIsIndependentOfWireAndLongCapacity()]
+display-name: numericSemanticCeilingIsIndependentOfWireAndLongCapacity()
+]]></system-out>
+</testcase>
+<testcase name="explicitRequestActionKeepsItsOwnClosedPair()" classname="dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest]/[method:explicitRequestActionKeepsItsOwnClosedPair()]
+display-name: explicitRequestActionKeepsItsOwnClosedPair()
+]]></system-out>
+</testcase>
+<testcase name="headerConstructorRejectsEveryStructuralViolation()" classname="dev.codex.schubert.nk.protocol.header.HeaderModelTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.header.HeaderModelTest]/[method:headerConstructorRejectsEveryStructuralViolation()]
+display-name: headerConstructorRejectsEveryStructuralViolation()
+]]></system-out>
+</testcase>
+<testcase name="uncheckedSenderTypesPreserveIdentityCopyAndReusableCapacity()" classname="dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest]/[method:uncheckedSenderTypesPreserveIdentityCopyAndReusableCapacity()]
+display-name: uncheckedSenderTypesPreserveIdentityCopyAndReusableCapacity()
+]]></system-out>
+</testcase>
+<testcase name="w03SingleRecordGoldenHasNoInventedDataAndRejectsNullUnknownAndNonRecordLayouts()" classname="dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest]/[method:w03SingleRecordGoldenHasNoInventedDataAndRejectsNullUnknownAndNonRecordLayouts()]
+display-name: w03SingleRecordGoldenHasNoInventedDataAndRejectsNullUnknownAndNonRecordLayouts()
+]]></system-out>
+</testcase>
+<testcase name="enum001SerializedAnswerStateMatchesIndependentProtocolVector()" classname="dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest]/[method:enum001SerializedAnswerStateMatchesIndependentProtocolVector()]
+display-name: enum001SerializedAnswerStateMatchesIndependentProtocolVector()
+]]></system-out>
+</testcase>
+<testcase name="descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation()" classname="dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest]/[method:descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation()]
+display-name: descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation()
+]]></system-out>
+</testcase>
+<testcase name="closedProjectionRequiresExactTokenAndLiteralRoleAuthority()" classname="dev.codex.schubert.nk.web.security.ClosedAuthenticationValueTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.ClosedAuthenticationValueTest]/[method:closedProjectionRequiresExactTokenAndLiteralRoleAuthority()]
+display-name: closedProjectionRequiresExactTokenAndLiteralRoleAuthority()
+]]></system-out>
+</testcase>
+<testcase name="allAllowlistedEnumsExposeExplicitWireValuesAndGenericConversion()" classname="dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest]/[method:allAllowlistedEnumsExposeExplicitWireValuesAndGenericConversion()]
+display-name: allAllowlistedEnumsExposeExplicitWireValuesAndGenericConversion()
+]]></system-out>
+</testcase>
+<testcase name="decodeRejectsTruncationExtraHashAndIoFailure()" classname="dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest]/[method:decodeRejectsTruncationExtraHashAndIoFailure()]
+display-name: decodeRejectsTruncationExtraHashAndIoFailure()
+]]></system-out>
+</testcase>
+<testcase name="writesAndReadsHeaderlessExactRecordsWithIndependentHash()" classname="dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest]/[method:writesAndReadsHeaderlessExactRecordsWithIndependentHash()]
+display-name: writesAndReadsHeaderlessExactRecordsWithIndependentHash()
+]]></system-out>
+</testcase>
+<testcase name="constructorRegistryAndRequestBoundsDenyInvalidInputBeforeSend()" classname="dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest]/[method:constructorRegistryAndRequestBoundsDenyInvalidInputBeforeSend()]
+display-name: constructorRegistryAndRequestBoundsDenyInvalidInputBeforeSend()
+]]></system-out>
+</testcase>
+<testcase name="elapsedWaitExpiresAndSubsequentReplyIsLate()" classname="dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest]/[method:elapsedWaitExpiresAndSubsequentReplyIsLate()]
+display-name: elapsedWaitExpiresAndSubsequentReplyIsLate()
+]]></system-out>
+</testcase>
+<testcase name="enumsMapOnlyApprovedWireValues()" classname="dev.codex.schubert.nk.protocol.header.HeaderModelTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.header.HeaderModelTest]/[method:enumsMapOnlyApprovedWireValues()]
+display-name: enumsMapOnlyApprovedWireValues()
+]]></system-out>
+</testcase>
+<testcase name="bug037HeaderSenderRejectsBadTimeAndPreservesAdjacentContext()" classname="dev.codex.schubert.nk.protocol.time.JstWireTimestampTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.time.JstWireTimestampTest]/[method:bug037HeaderSenderRejectsBadTimeAndPreservesAdjacentContext()]
+display-name: bug037HeaderSenderRejectsBadTimeAndPreservesAdjacentContext()
+]]></system-out>
+</testcase>
+<testcase name="layoutDefinitionChecksEveryLengthAndKindInvariant()" classname="dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest]/[method:layoutDefinitionChecksEveryLengthAndKindInvariant()]
+display-name: layoutDefinitionChecksEveryLengthAndKindInvariant()
+]]></system-out>
+</testcase>
+<testcase name="allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()" classname="dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest]/[method:allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()]
+display-name: allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()
+]]></system-out>
+</testcase>
+<testcase name="crossedAndUnknownActionsAreNeverNormalizedToSuccess()" classname="dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest]/[method:crossedAndUnknownActionsAreNeverNormalizedToSuccess()]
+display-name: crossedAndUnknownActionsAreNeverNormalizedToSuccess()
+]]></system-out>
+</testcase>
+<testcase name="listRecordConditionsAndOrderingAreEnforced()" classname="dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest]/[method:listRecordConditionsAndOrderingAreEnforced()]
+display-name: listRecordConditionsAndOrderingAreEnforced()
+]]></system-out>
+</testcase>
+<testcase name="approvedConfiguredWaitsAccept1To20AndRejectTheNextWithoutSending()" classname="dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest]/[method:approvedConfiguredWaitsAccept1To20AndRejectTheNextWithoutSending()]
+display-name: approvedConfiguredWaitsAccept1To20AndRejectTheNextWithoutSending()
+]]></system-out>
+</testcase>
+<testcase name="sendFailureCancelsRegistrationAndPropagatesJmsException()" classname="dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest]/[method:sendFailureCancelsRegistrationAndPropagatesJmsException()]
+display-name: sendFailureCancelsRegistrationAndPropagatesJmsException()
+]]></system-out>
+</testcase>
+<testcase name="authenticationContextValidatesAndRedacts()" classname="dev.codex.schubert.nk.protocol.header.HeaderModelTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.header.HeaderModelTest]/[method:authenticationContextValidatesAndRedacts()]
+display-name: authenticationContextValidatesAndRedacts()
+]]></system-out>
+</testcase>
+<testcase name="allSixtyFourLayoutsRoundTripMinimumSuccessValues()" classname="dev.codex.schubert.nk.protocol.codec.PayloadCodecTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.PayloadCodecTest]/[method:allSixtyFourLayoutsRoundTripMinimumSuccessValues()]
+display-name: allSixtyFourLayoutsRoundTripMinimumSuccessValues()
+]]></system-out>
+</testcase>
+<testcase name="relativePathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars()" classname="dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest]/[method:relativePathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars()]
+display-name: relativePathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars()
+]]></system-out>
+</testcase>
+<testcase name="page001SecondPageHasIndependentExpectedBounds()" classname="dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest]/[method:page001SecondPageHasIndependentExpectedBounds()]
+display-name: page001SecondPageHasIndependentExpectedBounds()
+]]></system-out>
+</testcase>
+<testcase name="headerValidateAgainstRejectsEachMetadataMismatch()" classname="dev.codex.schubert.nk.protocol.header.HeaderModelTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.header.HeaderModelTest]/[method:headerValidateAgainstRejectsEachMetadataMismatch()]
+display-name: headerValidateAgainstRejectsEachMetadataMismatch()
+]]></system-out>
+</testcase>
+<testcase name="deletedNotificationNeverContainsAnswer()" classname="dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest]/[method:deletedNotificationNeverContainsAnswer()]
+display-name: deletedNotificationNeverContainsAnswer()
+]]></system-out>
+</testcase>
+<testcase name="web063DetailsAndLockDelayAreBoundedAndRedacted()" classname="dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest]/[method:web063DetailsAndLockDelayAreBoundedAndRedacted()]
+display-name: web063DetailsAndLockDelayAreBoundedAndRedacted()
+]]></system-out>
+</testcase>
+<testcase name="valuesAreImmutableNullSafeAndRedacted()" classname="dev.codex.schubert.nk.protocol.codec.PayloadCodecTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.PayloadCodecTest]/[method:valuesAreImmutableNullSafeAndRedacted()]
+display-name: valuesAreImmutableNullSafeAndRedacted()
+]]></system-out>
+</testcase>
+<testcase name="page002MaximumEffectivePageKeepsExactNineDigitArithmetic()" classname="dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest]/[method:page002MaximumEffectivePageKeepsExactNineDigitArithmetic()]
+display-name: page002MaximumEffectivePageKeepsExactNineDigitArithmetic()
+]]></system-out>
+</testcase>
+<testcase name="web056InputAndNullContractsNeverSendSecrets()" classname="dev.codex.schubert.nk.web.security.MqLoginClientTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.MqLoginClientTest]/[method:web056InputAndNullContractsNeverSendSecrets()]
+display-name: web056InputAndNullContractsNeverSendSecrets()
+]]></system-out>
+</testcase>
+<testcase name="omittedActionIsAllowedForRequestOnly()" classname="dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest]/[method:omittedActionIsAllowedForRequestOnly()]
+display-name: omittedActionIsAllowedForRequestOnly()
+]]></system-out>
+</testcase>
+<testcase name="web065ReplayRequiresCurrentContextBeforeGrant()" classname="dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest" time="0.019">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest]/[method:web065ReplayRequiresCurrentContextBeforeGrant()]
+display-name: web065ReplayRequiresCurrentContextBeforeGrant()
+]]></system-out>
+</testcase>
+<testcase name="dispositionMapsOnlyIAndA()" classname="dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest]/[method:dispositionMapsOnlyIAndA()]
+display-name: dispositionMapsOnlyIAndA()
+]]></system-out>
+</testcase>
+<testcase name="allOtherResponseErrorProfilesRetainTheirIndividualContracts()" classname="dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest" time="0.033">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest]/[method:allOtherResponseErrorProfilesRetainTheirIndividualContracts()]
+display-name: allOtherResponseErrorProfilesRetainTheirIndividualContracts()
+]]></system-out>
+</testcase>
+<testcase name="web061ProbeRejectsMalformedAndFailedReplies()" classname="dev.codex.schubert.nk.web.security.MqLoginContextProbeTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.MqLoginContextProbeTest]/[method:web061ProbeRejectsMalformedAndFailedReplies()]
+display-name: web061ProbeRejectsMalformedAndFailedReplies()
+]]></system-out>
+</testcase>
+<testcase name="formatsAndParsesStrictJstMilliseconds()" classname="dev.codex.schubert.nk.protocol.time.JstWireTimestampTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.time.JstWireTimestampTest]/[method:formatsAndParsesStrictJstMilliseconds()]
+display-name: formatsAndParsesStrictJstMilliseconds()
+]]></system-out>
+</testcase>
+<testcase name="oneOfOneHundredSimultaneousResponsesWins()" classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest]/[method:oneOfOneHundredSimultaneousResponsesWins()]
+display-name: oneOfOneHundredSimultaneousResponsesWins()
+]]></system-out>
+</testcase>
+<testcase name="acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum()" classname="dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest" time="0.13">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest]/[method:acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum()]
+display-name: acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum()
+]]></system-out>
+</testcase>
+<testcase name="exceptionReasonIsAClosedNonSecretClassification()" classname="dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest]/[method:exceptionReasonIsAClosedNonSecretClassification()]
+display-name: exceptionReasonIsAClosedNonSecretClassification()
+]]></system-out>
+</testcase>
+<testcase name="decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers()" classname="dev.codex.schubert.nk.protocol.codec.PayloadCodecTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.PayloadCodecTest]/[method:decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers()]
+display-name: decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers()
+]]></system-out>
+</testcase>
+<testcase name="displayPathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars()" classname="dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest]/[method:displayPathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars()]
+display-name: displayPathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars()
+]]></system-out>
+</testcase>
+<testcase name="contentMetadataRejectsInvalidValues()" classname="dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest]/[method:contentMetadataRejectsInvalidValues()]
+display-name: contentMetadataRejectsInvalidValues()
+]]></system-out>
+</testcase>
+<testcase name="rejectsEveryMimeCrossProductAndVideoAttachment()" classname="dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest]/[method:rejectsEveryMimeCrossProductAndVideoAttachment()]
+display-name: rejectsEveryMimeCrossProductAndVideoAttachment()
+]]></system-out>
+</testcase>
+<testcase name="web059ConcurrentLoginsKeepIdentityAndOwnership()" classname="dev.codex.schubert.nk.web.security.MqLoginClientTest" time="0.013">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.MqLoginClientTest]/[method:web059ConcurrentLoginsKeepIdentityAndOwnership()]
+display-name: web059ConcurrentLoginsKeepIdentityAndOwnership()
+]]></system-out>
+</testcase>
+<testcase name="optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames()" classname="dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest]/[method:optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames()]
+display-name: optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames()
+]]></system-out>
+</testcase>
+<testcase name="loginLockAndFailurePreserveOnlyApprovedErrorFields()" classname="dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest]/[method:loginLockAndFailurePreserveOnlyApprovedErrorFields()]
+display-name: loginLockAndFailurePreserveOnlyApprovedErrorFields()
+]]></system-out>
+</testcase>
+<testcase name="catalogMatchesIndependentUi234To236Fixture()" classname="dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest]/[method:catalogMatchesIndependentUi234To236Fixture()]
+display-name: catalogMatchesIndependentUi234To236Fixture()
+]]></system-out>
+</testcase>
+<testcase name="nullNameIsRejectedBeforeWidthAndValueValidation()" classname="dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest]/[method:nullNameIsRejectedBeforeWidthAndValueValidation()]
+display-name: nullNameIsRejectedBeforeWidthAndValueValidation()
+]]></system-out>
+</testcase>
+<testcase name="web064FreshAuthenticationConsumesCredentialsAndUsesApiRole()" classname="dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest" time="0.221">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest]/[method:web064FreshAuthenticationConsumesCredentialsAndUsesApiRole()]
+display-name: web064FreshAuthenticationConsumesCredentialsAndUsesApiRole()
+]]></system-out>
+</testcase>
+<testcase name="web062ProbeNullFaultsAndConcurrentCallsStayIsolated()" classname="dev.codex.schubert.nk.web.security.MqLoginContextProbeTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.MqLoginContextProbeTest]/[method:web062ProbeNullFaultsAndConcurrentCallsStayIsolated()]
+display-name: web062ProbeNullFaultsAndConcurrentCallsStayIsolated()
+]]></system-out>
+</testcase>
+<testcase name="malformedLoginErrorBoundariesAndTypesAreRejected()" classname="dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest]/[method:malformedLoginErrorBoundariesAndTypesAreRejected()]
+display-name: malformedLoginErrorBoundariesAndTypesAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="fixedPayloadIsDefensiveAndWireMessageChecksLengths()" classname="dev.codex.schubert.nk.protocol.codec.MessageCodecTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.MessageCodecTest]/[method:fixedPayloadIsDefensiveAndWireMessageChecksLengths()]
+display-name: fixedPayloadIsDefensiveAndWireMessageChecksLengths()
+]]></system-out>
+</testcase>
+<testcase name="typedHelpersConvertIntAndIdentifiersWithoutLosingWireKinds()" classname="dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest]/[method:typedHelpersConvertIntAndIdentifiersWithoutLosingWireKinds()]
+display-name: typedHelpersConvertIntAndIdentifiersWithoutLosingWireKinds()
+]]></system-out>
+</testcase>
+<testcase name="nullDeadlineAndCapacityContractsFailBeforeMutation()" classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest]/[method:nullDeadlineAndCapacityContractsFailBeforeMutation()]
+display-name: nullDeadlineAndCapacityContractsFailBeforeMutation()
+]]></system-out>
+</testcase>
+<testcase name="rejectsMalformedDisplayFileNameWithoutReplacement()" classname="dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest]/[method:rejectsMalformedDisplayFileNameWithoutReplacement()]
+display-name: rejectsMalformedDisplayFileNameWithoutReplacement()
+]]></system-out>
+</testcase>
+<testcase name="everyRepeatingLayoutAcceptsItsMaximumRecordBoundary()" classname="dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest" time="0.043">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest]/[method:everyRepeatingLayoutAcceptsItsMaximumRecordBoundary()]
+display-name: everyRepeatingLayoutAcceptsItsMaximumRecordBoundary()
+]]></system-out>
+</testcase>
+<testcase name="web058TransportFaultsDoNotBecomeBadCredentials()" classname="dev.codex.schubert.nk.web.security.MqLoginClientTest" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.MqLoginClientTest]/[method:web058TransportFaultsDoNotBecomeBadCredentials()]
+display-name: web058TransportFaultsDoNotBecomeBadCredentials()
+]]></system-out>
+</testcase>
+<testcase name="semanticHelpersDecodeAndEncodeEverySupportedShape()" classname="dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest]/[method:semanticHelpersDecodeAndEncodeEverySupportedShape()]
+display-name: semanticHelpersDecodeAndEncodeEverySupportedShape()
+]]></system-out>
+</testcase>
+<testcase name="unsupportedWidthsAreRejectedBeforeNumericRangeEvaluation()" classname="dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest]/[method:unsupportedWidthsAreRejectedBeforeNumericRangeEvaluation()]
+display-name: unsupportedWidthsAreRejectedBeforeNumericRangeEvaluation()
+]]></system-out>
+</testcase>
+<testcase name="sem003QuestionAndWebLogTextContracts()" classname="dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest]/[method:sem003QuestionAndWebLogTextContracts()]
+display-name: sem003QuestionAndWebLogTextContracts()
+]]></system-out>
+</testcase>
+<testcase name="nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck()" classname="dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest]/[method:nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck()]
+display-name: nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck()
+]]></system-out>
+</testcase>
+<testcase name="metadataAndExpectedRouteEstablishNullAndRangeContracts()" classname="dev.codex.schubert.nk.protocol.codec.MessageCodecTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.MessageCodecTest]/[method:metadataAndExpectedRouteEstablishNullAndRangeContracts()]
+display-name: metadataAndExpectedRouteEstablishNullAndRangeContracts()
+]]></system-out>
+</testcase>
+<testcase name="iso011EqualsTrueDoesNotHideDistinctProtocolIdentity()" classname="dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest]/[method:iso011EqualsTrueDoesNotHideDistinctProtocolIdentity()]
+display-name: iso011EqualsTrueDoesNotHideDistinctProtocolIdentity()
+]]></system-out>
+</testcase>
+<testcase name="transportAndRouteContractsRejectEveryMismatch()" classname="dev.codex.schubert.nk.protocol.codec.MessageCodecTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.MessageCodecTest]/[method:transportAndRouteContractsRejectEveryMismatch()]
+display-name: transportAndRouteContractsRejectEveryMismatch()
+]]></system-out>
+</testcase>
+<testcase name="xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues()" classname="dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest]/[method:xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues()]
+display-name: xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues()
+]]></system-out>
+</testcase>
+<testcase name="unknownProviderFailureErasesBothBuffersAndReleasesCapacity()" classname="dev.codex.schubert.nk.web.security.MqLoginClientTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.MqLoginClientTest]/[method:unknownProviderFailureErasesBothBuffersAndReleasesCapacity()]
+display-name: unknownProviderFailureErasesBothBuffersAndReleasesCapacity()
+]]></system-out>
+</testcase>
+<testcase name="interruptedWaitRemovesRegistrationAndRestoresInterruptFlag()" classname="dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest]/[method:interruptedWaitRemovesRegistrationAndRestoresInterruptFlag()]
+display-name: interruptedWaitRemovesRegistrationAndRestoresInterruptFlag()
+]]></system-out>
+</testcase>
+<testcase name="bug037RequiredAndOptionalDataSendersRejectBadTime()" classname="dev.codex.schubert.nk.protocol.time.JstWireTimestampTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.time.JstWireTimestampTest]/[method:bug037RequiredAndOptionalDataSendersRejectBadTime()]
+display-name: bug037RequiredAndOptionalDataSendersRejectBadTime()
+]]></system-out>
+</testcase>
+<testcase name="menuActionMatchesIndependentOffsetsAndRoundTrips()" classname="dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest]/[method:menuActionMatchesIndependentOffsetsAndRoundTrips()]
+display-name: menuActionMatchesIndependentOffsetsAndRoundTrips()
+]]></system-out>
+</testcase>
+<testcase name="iso009PrimaryAndProtocolAreRequired()" classname="dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest]/[method:iso009PrimaryAndProtocolAreRequired()]
+display-name: iso009PrimaryAndProtocolAreRequired()
+]]></system-out>
+</testcase>
+<testcase name="layoutIdAndFieldDefinitionAreStrictAndOneBased()" classname="dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest]/[method:layoutIdAndFieldDefinitionAreStrictAndOneBased()]
+display-name: layoutIdAndFieldDefinitionAreStrictAndOneBased()
+]]></system-out>
+</testcase>
+<testcase name="existingHttpMetadataAndReservedRulesRemainEnforced()" classname="dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest]/[method:existingHttpMetadataAndReservedRulesRemainEnforced()]
+display-name: existingHttpMetadataAndReservedRulesRemainEnforced()
+]]></system-out>
+</testcase>
+<testcase name="rejectsMalformedStoragePathWithoutReplacement()" classname="dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest]/[method:rejectsMalformedStoragePathWithoutReplacement()]
+display-name: rejectsMalformedStoragePathWithoutReplacement()
+]]></system-out>
+</testcase>
+<testcase name="headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow()" classname="dev.codex.schubert.nk.protocol.header.HeaderModelTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.header.HeaderModelTest]/[method:headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow()]
+display-name: headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow()
+]]></system-out>
+</testcase>
+<testcase name="web055ErrorProfilesRemainDistinct()" classname="dev.codex.schubert.nk.web.security.MqLoginClientTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.MqLoginClientTest]/[method:web055ErrorProfilesRemainDistinct()]
+display-name: web055ErrorProfilesRemainDistinct()
+]]></system-out>
+</testcase>
+<testcase name="iso012DisabledPrimarySuppressionCannotHideProtocol()" classname="dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest]/[method:iso012DisabledPrimarySuppressionCannotHideProtocol()]
+display-name: iso012DisabledPrimarySuppressionCannotHideProtocol()
+]]></system-out>
+</testcase>
+<testcase name="scenarioInlineAndLargeFileConditionsAreEnforced()" classname="dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest]/[method:scenarioInlineAndLargeFileConditionsAreEnforced()]
+display-name: scenarioInlineAndLargeFileConditionsAreEnforced()
+]]></system-out>
+</testcase>
+<testcase name="disabledPrimarySuppressionDoesNotHideRollbackFailure()" classname="dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest]/[method:disabledPrimarySuppressionDoesNotHideRollbackFailure()]
+display-name: disabledPrimarySuppressionDoesNotHideRollbackFailure()
+]]></system-out>
+</testcase>
+<testcase name="primaryAndRollbackMustBothBePresent()" classname="dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest]/[method:primaryAndRollbackMustBothBePresent()]
+display-name: primaryAndRollbackMustBothBePresent()
+]]></system-out>
+</testcase>
+<testcase name="fatalGraphOrderUsesIndependentIdentitiesAndCyclesTerminate()" classname="dev.codex.schubert.nk.web.security.ClosedAuthenticationValueTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.ClosedAuthenticationValueTest]/[method:fatalGraphOrderUsesIndependentIdentitiesAndCyclesTerminate()]
+display-name: fatalGraphOrderUsesIndependentIdentitiesAndCyclesTerminate()
+]]></system-out>
+</testcase>
+<testcase name="successfulCompletionIsAtomicAndDefensivelyCopiesBody()" classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest]/[method:successfulCompletionIsAtomicAndDefensivelyCopiesBody()]
+display-name: successfulCompletionIsAtomicAndDefensivelyCopiesBody()
+]]></system-out>
+</testcase>
+<testcase name="notificationCancellationAndQuestionStateConditionsAreEnforced()" classname="dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest]/[method:notificationCancellationAndQuestionStateConditionsAreEnforced()]
+display-name: notificationCancellationAndQuestionStateConditionsAreEnforced()
+]]></system-out>
+</testcase>
+<testcase name="fixedStoreFailureConstructorsHaveLiteralRedactedDiagnostics()" classname="dev.codex.schubert.nk.web.security.ClosedAuthenticationValueTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.ClosedAuthenticationValueTest]/[method:fixedStoreFailureConstructorsHaveLiteralRedactedDiagnostics()]
+display-name: fixedStoreFailureConstructorsHaveLiteralRedactedDiagnostics()
+]]></system-out>
+</testcase>
+<testcase name="receiptWebAndDefensiveContractsAreEnforced()" classname="dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest]/[method:receiptWebAndDefensiveContractsAreEnforced()]
+display-name: receiptWebAndDefensiveContractsAreEnforced()
+]]></system-out>
+</testcase>
+<testcase name="numericErrorFillerDoesNotBecomeBusinessZero()" classname="dev.codex.schubert.nk.protocol.codec.FieldCodecTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.FieldCodecTest]/[method:numericErrorFillerDoesNotBecomeBusinessZero()]
+display-name: numericErrorFillerDoesNotBecomeBusinessZero()
+]]></system-out>
+</testcase>
+<testcase name="encodeRejectsUnknownMissingWrongTypeAndRecordViolations()" classname="dev.codex.schubert.nk.protocol.codec.PayloadCodecTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.PayloadCodecTest]/[method:encodeRejectsUnknownMissingWrongTypeAndRecordViolations()]
+display-name: encodeRejectsUnknownMissingWrongTypeAndRecordViolations()
+]]></system-out>
+</testcase>
+<testcase name="everyCanonicalConstructorReferenceRejectsNull()" classname="dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest]/[method:everyCanonicalConstructorReferenceRejectsNull()]
+display-name: everyCanonicalConstructorReferenceRejectsNull()
+]]></system-out>
+</testcase>
+<testcase name="loginUserPasswordDateAndSessionRulesAreEnforced()" classname="dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest]/[method:loginUserPasswordDateAndSessionRulesAreEnforced()]
+display-name: loginUserPasswordDateAndSessionRulesAreEnforced()
+]]></system-out>
+</testcase>
+<testcase name="resultCodeProfilePreservesOnlyTheApprovedCancellationConflictState()" classname="dev.codex.schubert.nk.protocol.codec.PayloadCodecTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.PayloadCodecTest]/[method:resultCodeProfilePreservesOnlyTheApprovedCancellationConflictState()]
+display-name: resultCodeProfilePreservesOnlyTheApprovedCancellationConflictState()
+]]></system-out>
+</testcase>
+<testcase name="validHeadersCoverRequestResponseErrorAndEventProfiles()" classname="dev.codex.schubert.nk.protocol.header.HeaderModelTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.header.HeaderModelTest]/[method:validHeadersCoverRequestResponseErrorAndEventProfiles()]
+display-name: validHeadersCoverRequestResponseErrorAndEventProfiles()
+]]></system-out>
+</testcase>
+<testcase name="allNamedTypesHaveIndependentDirectionalFieldMeaning()" classname="dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest" time="0.135">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest]/[method:allNamedTypesHaveIndependentDirectionalFieldMeaning()]
+display-name: allNamedTypesHaveIndependentDirectionalFieldMeaning()
+]]></system-out>
+</testcase>
+<testcase name="everyResponseLayoutUsesExactErrorFillersAndNoRecords()" classname="dev.codex.schubert.nk.protocol.codec.PayloadCodecTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.PayloadCodecTest]/[method:everyResponseLayoutUsesExactErrorFillersAndNoRecords()]
+display-name: everyResponseLayoutUsesExactErrorFillersAndNoRecords()
+]]></system-out>
+</testcase>
+<testcase name="nfcGolden001HangulJamoFitsComposedByteWidth()" classname="dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest]/[method:nfcGolden001HangulJamoFitsComposedByteWidth()]
+display-name: nfcGolden001HangulJamoFitsComposedByteWidth()
+]]></system-out>
+</testcase>
+<testcase name="web067ConcurrentProvidersNeverCrossCredentialsOrPrincipals()" classname="dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest" time="0.059">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest]/[method:web067ConcurrentProvidersNeverCrossCredentialsOrPrincipals()]
+display-name: web067ConcurrentProvidersNeverCrossCredentialsOrPrincipals()
+]]></system-out>
+</testcase>
+<testcase name="utf8MaximumFieldsAndN12UseIndependentCanonicalBoundaries()" classname="dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest]/[method:utf8MaximumFieldsAndN12UseIndependentCanonicalBoundaries()]
+display-name: utf8MaximumFieldsAndN12UseIndependentCanonicalBoundaries()
+]]></system-out>
+</testcase>
+<testcase name="independentConcurrentCallersDoNotMixCategories()" classname="dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest]/[method:independentConcurrentCallersDoNotMixCategories()]
+display-name: independentConcurrentCallersDoNotMixCategories()
+]]></system-out>
+</testcase>
+<testcase name="rd02RejectsNullUnknownNonRecordLengthAndMalformedFieldBytes()" classname="dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest]/[method:rd02RejectsNullUnknownNonRecordLengthAndMalformedFieldBytes()]
+display-name: rd02RejectsNullUnknownNonRecordLengthAndMalformedFieldBytes()
+]]></system-out>
+</testcase>
+<testcase name="mediaAnimationAndMusicConditionsAreEnforced()" classname="dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest]/[method:mediaAnimationAndMusicConditionsAreEnforced()]
+display-name: mediaAnimationAndMusicConditionsAreEnforced()
+]]></system-out>
+</testcase>
+<testcase name="rd02SingleRecordDecodeUsesLiteralGoldenAndOwnsItsValues()" classname="dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest]/[method:rd02SingleRecordDecodeUsesLiteralGoldenAndOwnsItsValues()]
+display-name: rd02SingleRecordDecodeUsesLiteralGoldenAndOwnsItsValues()
+]]></system-out>
+</testcase>
+<testcase name="sem002InclusiveDateLimitsAndOneSidedFilters()" classname="dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest]/[method:sem002InclusiveDateLimitsAndOneSidedFilters()]
+display-name: sem002InclusiveDateLimitsAndOneSidedFilters()
+]]></system-out>
+</testcase>
+<testcase name="negativeAndFirstOverflowAreRejectedAtEverySupportedWidth()" classname="dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest]/[method:negativeAndFirstOverflowAreRejectedAtEverySupportedWidth()]
+display-name: negativeAndFirstOverflowAreRejectedAtEverySupportedWidth()
+]]></system-out>
+</testcase>
+<testcase name="replyAtDeadlineFailsTheWaitingFutureAsLate()" classname="dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest]/[method:replyAtDeadlineFailsTheWaitingFutureAsLate()]
+display-name: replyAtDeadlineFailsTheWaitingFutureAsLate()
+]]></system-out>
+</testcase>
+<testcase name="anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire()" classname="dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest]/[method:anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire()]
+display-name: anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire()
+]]></system-out>
+</testcase>
+<testcase name="registrationIsBoundedDuplicateSafeAndReleasesCapacityOnCancel()" classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest]/[method:registrationIsBoundedDuplicateSafeAndReleasesCapacityOnCancel()]
+display-name: registrationIsBoundedDuplicateSafeAndReleasesCapacityOnCancel()
+]]></system-out>
+</testcase>
+<testcase name="distinctEqualValuedNodesAreBothRetained()" classname="dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest]/[method:distinctEqualValuedNodesAreBothRetained()]
+display-name: distinctEqualValuedNodesAreBothRetained()
+]]></system-out>
+</testcase>
+<testcase name="fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes()" classname="dev.codex.schubert.nk.protocol.codec.MessageCodecTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.MessageCodecTest]/[method:fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes()]
+display-name: fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes()
+]]></system-out>
+</testcase>
+<testcase name="allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes()" classname="dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest" time="0.029">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest]/[method:allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes()]
+display-name: allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes()
+]]></system-out>
+</testcase>
+<testcase name="supplementaryPairsKeepIndependentExactUtf8ByteBoundaries()" classname="dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest]/[method:supplementaryPairsKeepIndependentExactUtf8ByteBoundaries()]
+display-name: supplementaryPairsKeepIndependentExactUtf8ByteBoundaries()
+]]></system-out>
+</testcase>
+<testcase name="page003RejectsIndependentRangeAndOneFieldArithmeticChanges()" classname="dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest]/[method:page003RejectsIndependentRangeAndOneFieldArithmeticChanges()]
+display-name: page003RejectsIndependentRangeAndOneFieldArithmeticChanges()
+]]></system-out>
+</testcase>
+<testcase name="allSixTerminalOrdersReturnOnePermitAndKeepTheFirstLiteralOutcome()" classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest]/[method:allSixTerminalOrdersReturnOnePermitAndKeepTheFirstLiteralOutcome()]
+display-name: allSixTerminalOrdersReturnOnePermitAndKeepTheFirstLiteralOutcome()
+]]></system-out>
+</testcase>
+<testcase name="semanticValueObjectsNormalizeValidateCompareAndRedact()" classname="dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest]/[method:semanticValueObjectsNormalizeValidateCompareAndRedact()]
+display-name: semanticValueObjectsNormalizeValidateCompareAndRedact()
+]]></system-out>
+</testcase>
+<testcase name="duplicateAndClockOverflowDoNotSendOrCancelOtherOwnershipAndReleasePermit()" classname="dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest]/[method:duplicateAndClockOverflowDoNotSendOrCancelOtherOwnershipAndReleasePermit()]
+display-name: duplicateAndClockOverflowDoNotSendOrCancelOtherOwnershipAndReleasePermit()
+]]></system-out>
+</testcase>
+<testcase name="sharedCodecProducesIdenticalBytesUnderConcurrentUse()" classname="dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest]/[method:sharedCodecProducesIdenticalBytesUnderConcurrentUse()]
+display-name: sharedCodecProducesIdenticalBytesUnderConcurrentUse()
+]]></system-out>
+</testcase>
+<testcase name="sem001PasswordCharacterByteAndUsernameLimits()" classname="dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest]/[method:sem001PasswordCharacterByteAndUsernameLimits()]
+display-name: sem001PasswordCharacterByteAndUsernameLimits()
+]]></system-out>
+</testcase>
+<testcase name="everyOtherCategoryIsRejectedByNamedBoundary()" classname="dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest]/[method:everyOtherCategoryIsRejectedByNamedBoundary()]
+display-name: everyOtherCategoryIsRejectedByNamedBoundary()
+]]></system-out>
+</testcase>
+<testcase name="web066FailureAndNullTypesNeverBecomeAuthentication()" classname="dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest]/[method:web066FailureAndNullTypesNeverBecomeAuthentication()]
+display-name: web066FailureAndNullTypesNeverBecomeAuthentication()
+]]></system-out>
+</testcase>
+<testcase name="bug040StorageExtensionCannotBeHiddenByDisplayMetadata()" classname="dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest]/[method:bug040StorageExtensionCannotBeHiddenByDisplayMetadata()]
+display-name: bug040StorageExtensionCannotBeHiddenByDisplayMetadata()
+]]></system-out>
+</testcase>
+<testcase name="legacyRequestMatchesIndependentOriginalBytes()" classname="dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest]/[method:legacyRequestMatchesIndependentOriginalBytes()]
+display-name: legacyRequestMatchesIndependentOriginalBytes()
+]]></system-out>
+</testcase>
+<testcase name="allN12IdentifierTypesEnforceTheSharedPositiveRange()" classname="dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest]/[method:allN12IdentifierTypesEnforceTheSharedPositiveRange()]
+display-name: allN12IdentifierTypesEnforceTheSharedPositiveRange()
+]]></system-out>
+</testcase>
+<testcase name="iso010SameNodeIsRetainedWithoutSelfSuppression()" classname="dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest]/[method:iso010SameNodeIsRetainedWithoutSelfSuppression()]
+display-name: iso010SameNodeIsRetainedWithoutSelfSuppression()
+]]></system-out>
+</testcase>
+<testcase name="web057MalformedOrUncorrelatedRepliesNeverAuthenticate()" classname="dev.codex.schubert.nk.web.security.MqLoginClientTest" time="0.024">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.MqLoginClientTest]/[method:web057MalformedOrUncorrelatedRepliesNeverAuthenticate()]
+display-name: web057MalformedOrUncorrelatedRepliesNeverAuthenticate()
+]]></system-out>
+</testcase>
+<testcase name="nullUnknownAndNearMatchAddressesAreDenied()" classname="dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest]/[method:nullUnknownAndNearMatchAddressesAreDenied()]
+display-name: nullUnknownAndNearMatchAddressesAreDenied()
+]]></system-out>
+</testcase>
+<testcase name="web054RequestAndSuccessMatchIndependentWire()" classname="dev.codex.schubert.nk.web.security.MqLoginClientTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.MqLoginClientTest]/[method:web054RequestAndSuccessMatchIndependentWire()]
+display-name: web054RequestAndSuccessMatchIndependentWire()
+]]></system-out>
+</testcase>
+<testcase name="headerReferencesRejectNullAtTheNamedInvariantBoundary()" classname="dev.codex.schubert.nk.protocol.header.HeaderModelTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.header.HeaderModelTest]/[method:headerReferencesRejectNullAtTheNamedInvariantBoundary()]
+display-name: headerReferencesRejectNullAtTheNamedInvariantBoundary()
+]]></system-out>
+</testcase>
+<testcase name="fixedAndIndependentGoldenFieldsEncodeAtExactOffsets()" classname="dev.codex.schubert.nk.protocol.codec.PayloadCodecTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.PayloadCodecTest]/[method:fixedAndIndependentGoldenFieldsEncodeAtExactOffsets()]
+display-name: fixedAndIndependentGoldenFieldsEncodeAtExactOffsets()
+]]></system-out>
+</testcase>
+<testcase name="responseAndEventHeadersRoundTripWithoutLeakingContext()" classname="dev.codex.schubert.nk.protocol.codec.MessageCodecTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.MessageCodecTest]/[method:responseAndEventHeadersRoundTripWithoutLeakingContext()]
+display-name: responseAndEventHeadersRoundTripWithoutLeakingContext()
+]]></system-out>
+</testcase>
+<testcase name="parserRejectsMalformedUnknownAndDuplicateRows()" classname="dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest]/[method:parserRejectsMalformedUnknownAndDuplicateRows()]
+display-name: parserRejectsMalformedUnknownAndDuplicateRows()
+]]></system-out>
+</testcase>
+<testcase name="constructorRejectsNullComponents()" classname="dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest]/[method:constructorRejectsNullComponents()]
+display-name: constructorRejectsNullComponents()
+]]></system-out>
+</testcase>
+<testcase name="exchangeRegistersBeforeOneSendAndReturnsDefensiveReply()" classname="dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest]/[method:exchangeRegistersBeforeOneSendAndReturnsDefensiveReply()]
+display-name: exchangeRegistersBeforeOneSendAndReturnsDefensiveReply()
+]]></system-out>
+</testcase>
+<testcase name="callerCompletedOrCancelledViewsNeverChangeTheOwnedPromiseAndNullIsRejected()" classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest]/[method:callerCompletedOrCancelledViewsNeverChangeTheOwnedPromiseAndNullIsRejected()]
+display-name: callerCompletedOrCancelledViewsNeverChangeTheOwnedPromiseAndNullIsRejected()
+]]></system-out>
+</testcase>
+<testcase name="acceptsExactlySevenSsc004ExtensionMimePairs()" classname="dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest]/[method:acceptsExactlySevenSsc004ExtensionMimePairs()]
+display-name: acceptsExactlySevenSsc004ExtensionMimePairs()
+]]></system-out>
+</testcase>
+<testcase name="zeroAndMaximumAreAcceptedAtEverySupportedWidth()" classname="dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest]/[method:zeroAndMaximumAreAcceptedAtEverySupportedWidth()]
+display-name: zeroAndMaximumAreAcceptedAtEverySupportedWidth()
+]]></system-out>
+</testcase>
+<testcase name="missingBlankUnknownAndWrongCaseCategoryFail()" classname="dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest]/[method:missingBlankUnknownAndWrongCaseCategoryFail()]
+display-name: missingBlankUnknownAndWrongCaseCategoryFail()
+]]></system-out>
+</testcase>
+<testcase name="registryMatchesIndependentUi233Catalog()" classname="dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest]/[method:registryMatchesIndependentUi233Catalog()]
+display-name: registryMatchesIndependentUi233Catalog()
+]]></system-out>
+</testcase>
+<testcase name="sameNodeIsRetainedOnceWithoutSelfSuppression()" classname="dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest]/[method:sameNodeIsRetainedOnceWithoutSelfSuppression()]
+display-name: sameNodeIsRetainedOnceWithoutSelfSuppression()
+]]></system-out>
+</testcase>
+<testcase name="numericDigitLimitIsCheckedWithoutOverflow()" classname="dev.codex.schubert.nk.protocol.codec.PayloadCodecTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.PayloadCodecTest]/[method:numericDigitLimitIsCheckedWithoutOverflow()]
+display-name: numericDigitLimitIsCheckedWithoutOverflow()
+]]></system-out>
+</testcase>
+<testcase name="recordFieldsAreCompleteImmutableAndRedacted()" classname="dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest]/[method:recordFieldsAreCompleteImmutableAndRedacted()]
+display-name: recordFieldsAreCompleteImmutableAndRedacted()
+]]></system-out>
+</testcase>
+<testcase name="web060ProbeUsesFreshProtectedReadAndValidatesAllRecords()" classname="dev.codex.schubert.nk.web.security.MqLoginContextProbeTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.MqLoginContextProbeTest]/[method:web060ProbeUsesFreshProtectedReadAndValidatesAllRecords()]
+display-name: web060ProbeUsesFreshProtectedReadAndValidatesAllRecords()
+]]></system-out>
+</testcase>
+<testcase name="rejectsMalformedLogicalIdentifierWithoutReplacement()" classname="dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest]/[method:rejectsMalformedLogicalIdentifierWithoutReplacement()]
+display-name: rejectsMalformedLogicalIdentifierWithoutReplacement()
+]]></system-out>
+</testcase>
+<testcase name="explicitCatalogMatchesIndependentSs323NamedTypeFixture()" classname="dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest]/[method:explicitCatalogMatchesIndependentSs323NamedTypeFixture()]
+display-name: explicitCatalogMatchesIndependentSs323NamedTypeFixture()
+]]></system-out>
+</testcase>
+<testcase name="booleanAndReservedFieldsRejectUnknownBytes()" classname="dev.codex.schubert.nk.protocol.codec.FieldCodecTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.FieldCodecTest]/[method:booleanAndReservedFieldsRejectUnknownBytes()]
+display-name: booleanAndReservedFieldsRejectUnknownBytes()
+]]></system-out>
+</testcase>
+<testcase name="layoutFieldsRejectWrongAreaGapLengthAndNull()" classname="dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest]/[method:layoutFieldsRejectWrongAreaGapLengthAndNull()]
+display-name: layoutFieldsRejectWrongAreaGapLengthAndNull()
+]]></system-out>
+</testcase>
+<testcase name="malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()" classname="dev.codex.schubert.nk.protocol.codec.FieldCodecTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.FieldCodecTest]/[method:malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()]
+display-name: malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()
+]]></system-out>
+</testcase>
+<testcase name="rejectsNonCanonicalTextPathsNamesSizesAndHashes()" classname="dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest]/[method:rejectsNonCanonicalTextPathsNamesSizesAndHashes()]
+display-name: rejectsNonCanonicalTextPathsNamesSizesAndHashes()
+]]></system-out>
+</testcase>
+<testcase name="semanticHelpersRejectInvalidWireValuesWithoutReturningPartialObjects()" classname="dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest]/[method:semanticHelpersRejectInvalidWireValuesWithoutReturningPartialObjects()]
+display-name: semanticHelpersRejectInvalidWireValuesWithoutReturningPartialObjects()
+]]></system-out>
+</testcase>
+<testcase name="textDecodeIsStrictCanonicalAndOptionalAware()" classname="dev.codex.schubert.nk.protocol.codec.FieldCodecTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.FieldCodecTest]/[method:textDecodeIsStrictCanonicalAndOptionalAware()]
+display-name: textDecodeIsStrictCanonicalAndOptionalAware()
+]]></system-out>
+</testcase>
+<testcase name="textEncodeNormalizesUtf8AndPadsWithAsciiSpace()" classname="dev.codex.schubert.nk.protocol.codec.FieldCodecTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.FieldCodecTest]/[method:textEncodeNormalizesUtf8AndPadsWithAsciiSpace()]
+display-name: textEncodeNormalizesUtf8AndPadsWithAsciiSpace()
+]]></system-out>
+</testcase>
+<testcase name="principalUsesLiteralNfcUnicodeAndClosedNullBoundaries()" classname="dev.codex.schubert.nk.web.security.ClosedAuthenticationValueTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.security.ClosedAuthenticationValueTest]/[method:principalUsesLiteralNfcUnicodeAndClosedNullBoundaries()]
+display-name: principalUsesLiteralNfcUnicodeAndClosedNullBoundaries()
+]]></system-out>
+</testcase>
+<testcase name="headerDecoderRejectsEveryFixedFieldAndProfileCorruption()" classname="dev.codex.schubert.nk.protocol.codec.MessageCodecTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.MessageCodecTest]/[method:headerDecoderRejectsEveryFixedFieldAndProfileCorruption()]
+display-name: headerDecoderRejectsEveryFixedFieldAndProfileCorruption()
+]]></system-out>
+</testcase>
+<testcase name="writeRejectsNullCountLengthAndIoFailure()" classname="dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest]/[method:writeRejectsNullCountLengthAndIoFailure()]
+display-name: writeRejectsNullCountLengthAndIoFailure()
+]]></system-out>
+</testcase>
+<testcase name="approvedEnumNamesWireValuesAndConversionMatchIndependentDesignTables()" classname="dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest]/[method:approvedEnumNamesWireValuesAndConversionMatchIndependentDesignTables()]
+display-name: approvedEnumNamesWireValuesAndConversionMatchIndependentDesignTables()
+]]></system-out>
+</testcase>
+<testcase name="catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes()" classname="dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest]/[method:catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes()]
+display-name: catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes()
+]]></system-out>
+</testcase>
+<testcase name="sixDestinationsMatchTheIndependentPhysicalAndLimitOracle()" classname="dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest]/[method:sixDestinationsMatchTheIndependentPhysicalAndLimitOracle()]
+display-name: sixDestinationsMatchTheIndependentPhysicalAndLimitOracle()
+]]></system-out>
+</testcase>
+<testcase name="headerEncodingMatchesIndependentUi232GoldenVector()" classname="dev.codex.schubert.nk.protocol.codec.MessageCodecTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.codec.MessageCodecTest]/[method:headerEncodingMatchesIndependentUi232GoldenVector()]
+display-name: headerEncodingMatchesIndependentUi232GoldenVector()
+]]></system-out>
+</testcase>
+<testcase name="nfcAndExactUtf8ByteBoundaryHaveIndependentExpectedBytes()" classname="dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest]/[method:nfcAndExactUtf8ByteBoundaryHaveIndependentExpectedBytes()]
+display-name: nfcAndExactUtf8ByteBoundaryHaveIndependentExpectedBytes()
+]]></system-out>
+</testcase>
+<testcase name="typedModelsAndHelpersRejectNullMissingAndWrongKinds()" classname="dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest]/[method:typedModelsAndHelpersRejectNullMissingAndWrongKinds()]
+display-name: typedModelsAndHelpersRejectNullMissingAndWrongKinds()
+]]></system-out>
+</testcase>
+<testcase name="bug037ExpandedYearsAndUnrepresentableInstantsAreRejected()" classname="dev.codex.schubert.nk.protocol.time.JstWireTimestampTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.time.JstWireTimestampTest]/[method:bug037ExpandedYearsAndUnrepresentableInstantsAreRejected()]
+display-name: bug037ExpandedYearsAndUnrepresentableInstantsAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="lateCompletionAndExplicitExpiryFailTheWaiterWithoutDelivery()" classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest]/[method:lateCompletionAndExplicitExpiryFailTheWaiterWithoutDelivery()]
+display-name: lateCompletionAndExplicitExpiryFailTheWaiterWithoutDelivery()
+]]></system-out>
+</testcase>
+<testcase name="verificationRejectsAllThirtyTwoDigestBytePositions()" classname="dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest]/[method:verificationRejectsAllThirtyTwoDigestBytePositions()]
+display-name: verificationRejectsAllThirtyTwoDigestBytePositions()
+]]></system-out>
+</testcase>
+<testcase name="registryRejectsEmptyNullDuplicateAndKindMismatches()" classname="dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest]/[method:registryRejectsEmptyNullDuplicateAndKindMismatches()]
+display-name: registryRejectsEmptyNullDuplicateAndKindMismatches()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>
