@@ -1,0 +1,27 @@
+"""Independent full-source Main1/Proto176 and Test-only quality correction preflight."""
+from pathlib import Path
+import hashlib,json,xml.etree.ElementTree as ET
+R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';W=R.parent/'pgpt-runs/PG379/pg27880-user-search8-normal-v1';O=B/'evidence/PG27884-user-search8-preflight-v1';ld=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(R)),sha256=sha(p));assert not O.exists();pp=B/'evidence/PG27881-user-search-test-static-fix-v2/manifest.json';m=ld(pp);original=R/m['initialPrepare']['path'];initial=ld(original);assert sha(original)==m['initialPrepare']['sha256'] and initial['actualExit']==m['actualExit']==0;assert m['expectedTests']==8 and len(m['selectedClasses'])==1 and m['MainSourceSubsetCount']==1
+for p,h in m['inputHashes'].items():assert sha(R/p)==h
+for p,h in m['dependencies'].items():assert sha(Path(p))==h
+for folder,key in [('component','physicalClassHashes'),('target/classes','mainClassHashes'),('test-classes-v2','testClassHashes')]:assert m[key]=={str(p.relative_to(W/folder)):sha(p) for p in (W/folder).rglob('*.class')}
+assert len(m['physicalClassHashes'])==177 and len(m['mainClassHashes'])==1 and initial['mainClassHashes']==m['mainClassHashes'];assert m['MainRecompiledForTestCorrection']==0
+assert all(initial['inputHashes'][p]==m['inputHashes'][p] for p in m['apiMainSources']);cor=m['testStaticCorrection'];assert cor['expandedOracleTokensIdentical'] and cor['wrongLiteralNegativeRejected'] and cor['helperRenamedOnly']
+ns='http://maven.apache.org/POM/4.0.0';ET.register_namespace('',ns);tag=lambda n:'{'+ns+'}'+n;compiler=next(p for p in ET.parse(R/'pom.xml').getroot().findall('.//'+tag('plugin')) if p.findtext(tag('artifactId'))=='maven-compiler-plugin');copied=ET.parse(W/'pom.xml').getroot().find('.//'+tag('plugin'));assert ET.tostring(compiler)==ET.tostring(copied) and sha(W/'pom.xml')==m['subsetPomSha256'];assert '-Xep:NullAway:ERROR' in ET.tostring(copied).decode() and '-Werror' in ET.tostring(copied).decode()
+sp=B/'evidence/PG27883-user-search8-static-v2/manifest.json';st=ld(sp);oldst=R/st['reusedMainStatic']['path'];prior=ld(oldst);assert sha(oldst)==st['reusedMainStatic']['sha256'] and all(prior['inputHashes'][p]==m['inputHashes'][p] for p in m['apiMainSources']);assert st['actualExit']==0 and st['inputHashes']==m['inputHashes'] and not st['processingErrors'] and st['checkstyleFindings']==0 and all(st['spotbugs'][k]==0 for k in ['bugs','missing','errors'])
+test=R/m['apiTestSources'][0];lines=test.read_text().splitlines();anchors={'pool':'var executor = Executors.newFixedThreadPool(4);','submit':'.submit(','stop':'executor.shutdownNow();','join':'assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));'};positions={}
+for key,text in anchors.items():
+ found=[i+1 for i,line in enumerate(lines) if text in line];assert len(found)==1;positions[key]=str(found[0])
+expected={('CloseResource',positions['pool']),*[('DoNotUseThreads',v) for v in positions.values()]}
+def accepted(rows):
+ return len(rows)==5 and {(x['rule'],x['line']) for x in rows}==expected and all(Path(x['path']).name=='UserSearchFormContractTest.java' for x in rows)
+assert accepted(st['rawFindings']);wrong=[dict(x) for x in st['rawFindings']];wrong[0]['line']='1';assert not accepted(wrong);foreign=[dict(x) for x in st['rawFindings']];foreign[0]['path']='foreign.java';assert not accepted(foreign);unknown=[dict(x) for x in st['rawFindings']];unknown[0]['rule']='UNKNOWN';assert not accepted(unknown);assert not accepted(st['rawFindings']+[st['rawFindings'][0]])
+classified=[dict(**x,disposition='NOT_APPLICABLE_OWNED_STANDALONE_JUNIT_NO_SUPPRESSION',reason='One owned fixed4worker pool/16tasks, every Future.get5 and finallyshutdownNow/assertawait10, no application threads or unbounded lifecycle') for x in st['rawFindings']]
+
+for manifest,stages in [(original,initial['stages']),(pp,m['stages']),(oldst,prior['stages']),(sp,st['stages'])]:
+ for label,v in stages.items():
+  assert v['actualExit']==(4 if label=='pmd' else 0) and not v['timedOut']
+  for stream in ['stdout','stderr']:assert sha(manifest.parent/(label+'.'+stream))==v[stream+'Sha256']
+assert set(m['mainClassHashes'])=={n.replace('.','/')+'.class' for n in st['spotbugs']['classStats']}
+assert not any(n.endswith('/'+h+'.class') for n in m['physicalClassHashes'] for h in ['TemporaryInfrastructureException','FingerprintKeyRing','ResponseSnapshotCodec','WebStartupException'])
+O.mkdir();v=dict(actualExit=0,inputHashes=m['inputHashes'],prepare=ref(pp),initialMainCompile=ref(original),static=ref(sp),initialStatic=ref(oldst),expectedTests=8,newDefinitions=8,fullPhysicalClasses=177,rootCompilerUnchanged=True,expandedOracleTokensUnchanged=True,MainRecompiledForTestCorrection=0,MainSpotBugsRepeatedForTestCorrection=0,staticApplicable=0,unclassified=0,processingErrors=0,checkstyle=0,spotbugs=0,pmdRawFindings=5,classified=classified,independentSourceAnchors=positions,metadataPositiveAndNegativeChecks=5,manualSuppressionAdded=False,oldStatic7Retained=True,actualBackendOrHeldClassActions=0,heldFixturesExtractedOrRewritten=False,productTestsExecuted=0,newAcceptance=0,formalUpdated=False,whole451Accepted=False,fullReportExpectedPartial=True,verifier=ref(Path(__file__).resolve()));(O/'manifest.json').write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,manifest=ref(O/'manifest.json'))))
