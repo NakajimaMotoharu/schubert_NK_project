@@ -1,0 +1,146 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T13:18:32.937026+09:00",
+  "source": "44dd6a0e540482fb2338e869e6cc874b747e4981",
+  "productionCoreMain": "62960fc3b5d4a67cf7bd9df887b668169d10f87f",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioQuerySnapshot.java": "11b7346adb9a501dea51e3b051de978998742d6a875dd2c7b4e8cbb837365443",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java": "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioQueryException.java": "46cad487144bfa56615badc60b78136b54512edec3f5473ea905d627f182e59b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioRepository.java": "f6d626e2de473b6313f544514e6793c255dfbf2d9dc15249e1134ddd90604265"
+  },
+  "design": {
+    "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+    "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+    "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+  },
+  "checks": [
+    {
+      "id": "P00801-PG01",
+      "sources": [
+        "ScenarioRepository.games/speakers/routes/files"
+      ],
+      "testIds": [
+        "PT-SCN-001..004"
+      ],
+      "expectation": "Games display_order,id max10, Speaker same-nameGROUP acrossoptionalgame/minid/countentries descending/nameascending max500, Routes fixedUI game/prefixmaps unknown未分類/twodigitnotfabricated max50, Files display_order,id and entrycountnotaudio max500. Masterread for both DB-authenticatedUSER/ADMIN, no artificial owner filtering."
+    },
+    {
+      "id": "P00801-PG02",
+      "sources": [
+        "ScenarioRepository.search/text/add/searchRecord"
+      ],
+      "testIds": [
+        "PT-SCN-005/006",
+        "ptScn005SixFiltersWildcardsAndRepresentativeVoiceAreIndependent",
+        "ptScn005ThreeTextInputsNormalizeBeforeByteChecks"
+      ],
+      "expectation": "NFC/trim body/speaker/chapter before typedwire upper256/128/256, body lowerROOT LIKE/speakernameexact/chapterILIKE/game/type/voiceEXISTS predicates allvaluebind. Scenario specifically RETAINS Current percent/underscore/backslash wildcard interpretation; generic nonScenario ESCAPE must not be applied. One materializedfilter/count/effectivepage/lateral statement snapshot; totalentrycount notvoiceexpanded; representative firstdisplayorder/audioid; orderentrydisplay,id/page100/clamp1..last/empty1/99999900cap9001."
+    },
+    {
+      "id": "P00801-PG03",
+      "sources": [
+        "ScenarioRepository.detail/title/rows/number/integer/game/entryType",
+        "ScenarioQueryException"
+      ],
+      "testIds": [
+        "PT-SCN-007",
+        "PT-SCN-008-D01..004",
+        "PT-SCN-PRE001..009"
+      ],
+      "expectation": "Explicit nonautoCommit readonlyborrowedTX, ownedstatement/resultclose, no commit/rollback/connectionclose/fileI/O. Detail globalprevnext game/filedisplay/id; entry_index/display/id→1sequence, allvoice display/audioid→1audioseq/noaudio0, expanded10000max with10001sentinel, missingOptionalempty not success. Displaytitle firstJavaisBlank-false chapter/section/file withouttrim; speakerFKname notlabel. RequiredSQLNULL/unknownenum/overflow/rowwire failure9000, capacity9001 onlywithoutclosefault, fatal preserved; no sensitiveSQL/cause/suppressed outward. Direct actualTemp fatal helper remains runtime/compile HOLD."
+    },
+    {
+      "id": "P00801-PG04",
+      "sources": [
+        "ScenarioRequest.decode/header/responseLayoutId/scriptFileId/canonical/query",
+        "ScenarioQuerySnapshot.Inline/Detail"
+      ],
+      "testIds": [
+        "PT-SCN-009-Q01..Q04"
+      ],
+      "expectation": "SixallowlistedGAM/SPK/RTE/SCF/SRC/SCN layouts001, strictheader/body/typedsemantic and datawipe, immutable header notauthgrant. HMAC owneractorid/requestlayout/001/REQUEST:layout/typedpresence/order, canonicalfields callercloses; nullboundaryerrors not queries, detailOptionalempty maps0104. No auth/touch/Inbox/file/JMS/TXownership sideeffects; Requestwhole3 referencesactualFingerprint, do not extract pure methods to bypass."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequestTest.java",
+      "sha256": "08f53e616aa58369d7b7b26d671c0a60139933a77a0c68ba52178087b3ef9a15",
+      "tests": 3,
+      "methods": [
+        "sixLayoutsHaveIndependentCanonicalVectors",
+        "optionalAndNumericBoundariesPreserveFieldPresenceAndRequestValues",
+        "malformedNullAndOutcomeBoundariesNeverBecomeQueries"
+      ],
+      "status": "HOLD_WHOLE_REAL_DB_OR_ACTUAL_HELD_CLASS_DEPENDENCY_NO_METHOD_EXTRACTION",
+      "reasons": [
+        "FingerprintKeyRing"
+      ],
+      "wholeBodyReviewed": true,
+      "methodIndexReviewed": true
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioRepositoryTest.java",
+      "sha256": "387f48739260b4593b0a54728ed4b04209e671813fb6de85b607b651c8153307",
+      "tests": 18,
+      "methods": [
+        "ptScn001GamesHaveIndependentBytesAndDoNotOwnTransaction",
+        "ptScn009AllRequestRoutesUseIndependentDatabaseOutcomes",
+        "ptScn002SpeakerAggregationIsByNameAndScopedBeforeCounting",
+        "ptScn003EveryRouteMapAndUnknownPrefixHaveIndependentBytes",
+        "ptScn004FilesUseDisplayOrderTitleAndEntryNotAudioCount",
+        "ptScn005SixFiltersWildcardsAndRepresentativeVoiceAreIndependent",
+        "ptScn006PagesAreClippedWithOneStatementAndEmptyIsOnePage",
+        "ptScn007NullReadonlyAndRequiredMetadataNeverBecomeSuccess",
+        "ptScn002004CapacityLimitsNeverReturnTruncatedSuccess",
+        "ptScn006007AggregateAndMetadataFaultsAreBounded",
+        "ptScn007CapacityAndCloseFailureNeverExposeSuppressedSql",
+        "ptScn007JdbcIntegerWideningKeepsSqlNullDistinct",
+        "ptScn005ThreeTextInputsNormalizeBeforeByteChecks",
+        "ptScn005ParallelReadsKeepOrderAndDoNotWriteMasterOrSessions",
+        "ptScn008D01NavigationAndBlankTitlesFollowCurrentDisplayContract",
+        "ptScn008D02AllVoiceRowsAndDataHaveIndependentByteOffsets",
+        "ptScn008D03CountsExpandedRecordsAndBoundsSnapshotBeforeFileIo",
+        "ptScn008D04NullMetadataSqlAndCompoundCloseFaultsStayBounded"
+      ],
+      "status": "HOLD_WHOLE_REAL_DB_OR_ACTUAL_HELD_CLASS_DEPENDENCY_NO_METHOD_EXTRACTION",
+      "reasons": [
+        "ApiLogDatabaseFixture"
+      ],
+      "wholeBodyReviewed": false,
+      "methodIndexReviewed": true
+    }
+  ],
+  "sourceRuntimeHold": {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioRepository.java",
+    "directStaticImport": "TemporaryInfrastructureException.preserveFatal",
+    "noActualClassBinaryReadHashParseCompileOrInitialization": true
+  },
+  "sharedSnapshot6": {
+    "proof": {
+      "path": "evidence/01_PT/008_NK-SCN-001/evidence/PG19818-scenario-snapshot-current-six-v1/manifest.json",
+      "sha256": "c827fe182d5b37c59d3568ef3050b3c31c9f1fd0ec76293b272f567110f2341e"
+    },
+    "originalSource": "65d00a74703d7948a397821511dce5e9c5d93fc0",
+    "targetMainTestSourceAndNormalPhysicalIdentical": true,
+    "wholeCurrentChangedProtocol3DependenciesNotQualified": true,
+    "scope": "ORIGINAL_OTHER_OWNER_TARGET_ONLY_NO_NEW_FEE_OR_CURRENT_PT",
+    "productReexecutions": 0
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P008-01/1"
+  ],
+  "endingStatus": "P00801/2_UNACCEPTED_ACTUAL_TEMP_CLASS_REAL_DB_CURRENT_WHOLE_DEPENDENCIES_P00703_EXIT",
+  "MainOrTestChanged": false,
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1352_scenario_query_contract_audit.py",
+    "sha256": "70b74fc0269c40025ddc3fc5cb774bdb3889a4da8ec8d165e3c9a8fc709bcccb"
+  }
+}

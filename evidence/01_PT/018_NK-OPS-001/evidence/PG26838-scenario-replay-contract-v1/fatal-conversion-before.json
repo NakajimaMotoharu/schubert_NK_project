@@ -1,0 +1,60 @@
+{
+  "actualExit": 0,
+  "source": "44dd6a0e540482fb2338e869e6cc874b747e4981",
+  "productionCoreMain": "62960fc3b5d4a67cf7bd9df887b668169d10f87f",
+  "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioReplayService.java",
+  "sourceSha256": "e27d75577f9a7e42c9525bda6a4cec10f64cd8fd745836102bf9e51f18c5ea15",
+  "sites": [
+    {
+      "line": 118,
+      "catchTypes": "ResponseSnapshotException\n        | PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure",
+      "body": "catch (ResponseSnapshotException\n        | PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure) {\n      throw new TemporaryInfrastructureException();\n    }",
+      "method": "captureSuccess"
+    },
+    {
+      "line": 148,
+      "catchTypes": "ResponseSnapshotException\n        | PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure",
+      "body": "catch (ResponseSnapshotException\n        | PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure) {\n      throw new TemporaryInfrastructureException();\n    }",
+      "method": "captureFailure"
+    },
+    {
+      "line": 208,
+      "catchTypes": "ResponseSnapshotException\n        | PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure",
+      "body": "catch (ResponseSnapshotException\n        | PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure) {\n      throw new TemporaryInfrastructureException();\n    }",
+      "method": "read"
+    },
+    {
+      "line": 251,
+      "catchTypes": "ResponseSnapshotException\n        | PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure",
+      "body": "catch (ResponseSnapshotException\n        | PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure) {\n      throw new TemporaryInfrastructureException();\n    }",
+      "method": "replaceFile"
+    },
+    {
+      "line": 277,
+      "catchTypes": "PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure",
+      "body": "catch (PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure) {\n      throw new TemporaryInfrastructureException();\n    }",
+      "method": "reply"
+    },
+    {
+      "line": 296,
+      "catchTypes": "PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure",
+      "body": "catch (PermanentProtocolException\n        | IllegalArgumentException\n        | IllegalStateException failure) {\n      throw new TemporaryInfrastructureException();\n    }",
+      "method": "failure"
+    }
+  ],
+  "designs": {
+    "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md": {
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md": {
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    }
+  },
+  "productTestsExecuted": 0,
+  "bug": "BUG-2679",
+  "horizontal": "YKT-2359",
+  "runtimeAdmission": "HOLD_ACTUAL_FOUR_AND_DB",
+  "sourceOnlyFinding": true
+}

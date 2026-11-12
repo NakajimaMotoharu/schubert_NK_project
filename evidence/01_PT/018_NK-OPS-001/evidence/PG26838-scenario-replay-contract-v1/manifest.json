@@ -1,0 +1,104 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T13:37:00.542715+09:00",
+  "source": "44dd6a0e540482fb2338e869e6cc874b747e4981",
+  "productionCoreMain": "62960fc3b5d4a67cf7bd9df887b668169d10f87f",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationAssembly.java": "35d0d5bffa170f92e56857bc581c8435d88225d0d764c23c6d88ad5ed88aa9b3",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java": "778ab847405c6fabba7d9bfdfc723b302ddb41aa539c77f431c401286cdfabaa",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioAuditWriter.java": "d01fdad23e83591779d549b39f9dd7fea697965d1e1cb11a8dc239c3c72fdaca",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioReplayService.java": "e27d75577f9a7e42c9525bda6a4cec10f64cd8fd745836102bf9e51f18c5ea15"
+  },
+  "designs": {
+    "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md": {
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md": {
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    }
+  },
+  "checks": [
+    {
+      "id": "P00802-PG01",
+      "methods": "Assembly.standard; Service.process/read/prepare/finish/transaction",
+      "testIds": [
+        "PT-SCN-010..014",
+        "PT-SCN-009-S01..S06"
+      ],
+      "expected": "Decode before stage; private sameMessage serializer spans readonly fresh-actor/Inbox snapshot, file preparation outside TX, then final writable fresh actor same owner and Inbox arbitration. Lock/root acceptance remains separate. Borrowed snapshots grant no authority; prepare failure/final session rejection never persistent success. NEW captures successful query and critical audit atomically; replay neither requery nor duplicate audit except missing-file regeneration with owner/content verification and descriptor CAS. Connection owned commit/rollback/close failures stay infrastructure; no file I/O inside DB TX."
+    },
+    {
+      "id": "P00802-PG02",
+      "methods": "Replay.captureSuccess/captureFailure/read/replaceFile/reply/failure",
+      "testIds": [
+        "PT-SCN-009-S01..S06"
+      ],
+      "expected": "Original fixed header+DATA+records AES snapshot bound to requestMessage/responseLayout001/owner; completed_at micros agrees captured header millis. Persist success0000 or definite9001/SCN0104 only; 0102/9000 never persisted. Decrypt validates whole header,length,semantic,layout/ref/state/code/time/owner/script identity. Successful replay0200 only; failure originalcode. Fresh message/sentAt/current context/requestMessage correlation. Replace only verified equal-content file descriptor, preserve original state/ref/header/time. Wipe decrypted body/DATA/records. SS312 fatal graph must be inspected BEFORE fixed exception conversion; six current catches violate this source contract."
+    },
+    {
+      "id": "P00802-PG03",
+      "methods": "AuditWriter.write/username",
+      "testIds": [
+        "PT-SCN-AUD469003..006"
+      ],
+      "expected": "SRCREQ01 -> SCENARIO_SEARCHED with explicit totalCount; SCNREQ01 -> SCENARIO_VIEWED with INLINE record count or FILE fileRecordCount. Other four list queries no statement. Borrowed TX only, owned statement exactly one close and insert exactly1; all SQL faults reach caller. API ACTION INFO; request message/correlation, actor id/NFC username with CR LF TAB U2028 U2029 replaced by spaces; JSON only layout/resultCount. No body/filter/path/context/key/credential; failure rolls back by Service, not audit writer."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationServiceTest.java",
+      "sha256": "1c11a57c16141e567dfb7cc4d9dea769e61ebebd15717c587d8b861bc93424ea",
+      "tests": 12,
+      "wholeBodyReviewed": false,
+      "status": "WHOLE_FIXTURE_HOLD_NO_METHOD_EXTRACTION",
+      "reasons": [
+        "ResponseSnapshotCodec",
+        "FingerprintKeyRing",
+        "ApiLogDatabaseFixture"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioAuditWriterTest.java",
+      "sha256": "a9d54940e22d9bb51f7e122346a2bb34e6e28b9c08ab880e3041ad8a8faacb45",
+      "tests": 5,
+      "wholeBodyReviewed": true,
+      "status": "WHOLE_FIXTURE_HOLD_NO_METHOD_EXTRACTION",
+      "reasons": [
+        "ScenarioRequest direct FingerprintKeyRing typed footprint; target TemporaryInfrastructureException transitive boundary not admitted"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioReplayServiceTest.java",
+      "sha256": "5d8ad29aaa7740c6b45f0a2d8cdd50604f5385334b0cb42fff55feaef57a374a",
+      "tests": 6,
+      "wholeBodyReviewed": false,
+      "status": "WHOLE_FIXTURE_HOLD_NO_METHOD_EXTRACTION",
+      "reasons": [
+        "ResponseSnapshotCodec"
+      ]
+    }
+  ],
+  "fatalConversionFinding": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26838-scenario-replay-contract-v1/fatal-conversion-before.json",
+    "sha256": "6da82e4f530c6362da7dd9528c5cf7be98e0b98b268404dafbcb4cf944288535"
+  },
+  "wholeOwnSourceReviewed": true,
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P008-02/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_BUG2679_RUNTIME_ACTUAL4_DB_AND_EXIT_DEPENDENCIES",
+  "MainOrTestChanged": false,
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1355_scenario_replay_contract_audit.py",
+    "sha256": "86f10bd5ee52e524acc54d2b9a44199fa9617adaf4db3570b9a9119e840505ce"
+  }
+}
