@@ -13,3 +13,5 @@ NK-ADM-001。対象source/hash、承認設計commit/hash、独立期待値/TestI
 P01004実在庫Log六source全文/承認312323324332351352、ADMIN/100件/31日optional/LogINFO-WARN-ERROR共通predicate/固定SQLbindと凍結24h再送/QA054初回成功LOG_SEARCHED一回を独立期待値ADM055～075/Plain8/Sql9/SearchPort8へ対応。LogRequestはP01809共有owner費用不重複。元三wholeDB/actual4HOLD、追加25whole全文確認。BUG2694Replay五分類欠落と2695二future/pool無期限を修正前27100登録、YKT2359全28runtime未完/YKT2369worker1再試験予定。原/1準備だけ、原/2/451/終了依存未受入。
 
 実行: `python3 -B evidence/01_PT/018_NK-OPS-001/input/1470_log_query_contract_audit.py` metadata終了0。新規製品PT/coverageなし。原/1の準備だけ、原/2・451・元190未受入。独立期待値は公開設計の固定境界・順序・後条件に基づき、production methodで生成しない。正式1964PT/53scope・工数null。
+
+PG追記: source a695e0da99a5b7749cd1f70a200a767fd3906d3b、[27110](../018_NK-OPS-001/evidence/PG27110-log-fatal-source-join-v1/manifest.json)。五portのみ/元source逆変換/formatCS0、runtime compile/PT/coverageは未実施、BUG2694/全28runtimeOPEN。

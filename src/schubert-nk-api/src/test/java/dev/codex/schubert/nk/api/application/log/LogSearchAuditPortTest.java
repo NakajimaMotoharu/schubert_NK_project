@@ -32,6 +32,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -271,11 +272,15 @@ final class LogSearchAuditPortTest {
 
   @Test
   void searchPort008IndependentOwnedWorkersDoNotShareBindings() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var first = workers.submit(() -> writeOne(Event.SEARCH_SUCCEEDED));
       var second = workers.submit(() -> writeOne(Event.REPLAY));
-      assertEquals(SUCCESS_ACTION, first.get().get(4));
-      assertEquals("INBOX_REPLAYED", second.get().get(4));
+      assertEquals(SUCCESS_ACTION, first.get(5, TimeUnit.SECONDS).get(4));
+      assertEquals("INBOX_REPLAYED", second.get(5, TimeUnit.SECONDS).get(4));
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
