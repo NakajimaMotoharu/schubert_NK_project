@@ -1,0 +1,78 @@
+{
+  "actualExit": 0,
+  "originalTestSha256": "74e37d277cb69b31bbae8b2da0caceb5abe7e7c9cde7714309a2a0b3ef52c970",
+  "currentTestSha256": "2fdf772e2b4479e471c82e2eb727c29bcbe3ad2417efa291ab6c91bebb41e0ca",
+  "originalSourceByteRetained": true,
+  "javaAllLiteralIdentifierOperatorTokensUnchanged": true,
+  "oracleMutationNegativeRejected": true,
+  "allThreeFormatAfterExit": 0,
+  "otherTwoSourceChange": false,
+  "stages": {
+    "before": {
+      "actualExit": 1,
+      "timedOut": false,
+      "startUTC": "2026-11-12T15:51:18.321279+00:00",
+      "endUTC": "2026-11-12T15:51:18.937300+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/UserDisplayContractTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "d5adf195e999a30918d9f39a1b912a0c114e8916ff001c53c73011201d1540ab",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "correct": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T15:51:18.990018+00:00",
+      "endUTC": "2026-11-12T15:51:19.506030+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--replace",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/UserDisplayContractTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "after": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T15:51:19.510253+00:00",
+      "endUTC": "2026-11-12T15:51:20.126169+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/UserDisplayContractTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserCreateFormTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "testInputHashes": {
+    "tools/quality/architecture/UserDisplayContractTest.java": "2fdf772e2b4479e471c82e2eb727c29bcbe3ad2417efa291ab6c91bebb41e0ca",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserCreateFormTest.java": "0eb7b3e9f537636c45b00f21bed44d8875489cd0cb7cdc885ca5516d0dbff323",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java": "a98aec86a57e21885a80cf8443faba5130fa9e16c481c45b916df987585af304"
+  },
+  "MainChanged": false,
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "bug": "BUG-2723",
+  "ykt": "YKT-2378",
+  "verifierSha256": "d8119bc45a39b6157b3b58777befd849ba10afc381bc9a2d5eb9818f5baec240"
+}
