@@ -1,0 +1,10 @@
+# BackupProfile非秘密claim原四単体仕様
+
+NK-BAT-001/BAK001/OPS009/UI251/SS343/SSC110/BPROFILE001..004/PT-BAT-PROFILE1405003。Main BackupProfile/BackupVersions、原whole BackupProfileTest4を実行する。Profileは公開比較claimでtool authorityではない。DB/dump/age/tool/native/Root/intent/worker/credential実体を使わず、JDK/JSpecify/JUnitだけ。
+
+- positiveDelByteIsRejectedAndOwnedInputIsWiped: 既存手書GOLDEN先頭を正値0x7fへ変え、IllegalArgumentExceptionと全配列0を独立期待とする。負UTF8だけで上限を網羅したとしない。
+- literalGoldenAndImmutableNonsecretClaims: NKBACKUPPROFILE1固定16field/順序/ASCII/LF・8固定version/7個の111...公開hash、手書GOLDENそのものとencode結果のbyte一致、consume後全0、immutable返却Map/呼出側mutableMapからdefensivecopy、固定redaction/4096上限。期待値をproduction methodで生成しない。
+- strictByteAndCanonicalNegativeMatrixWipesEveryInput: 空/unknown-version/schema000/emptyhost/unknownkey/whitespace/pathslash/Unicode escape/repeatedkey/upperhash/63hash/4097/NUL/日本/末尾LF無し・余分LF・CRLFを固定literalから変異、全不正と全ownedbyte0を確認。nullはinvariant拒否。
+- constructorRejectsMissingUnknownNullAndMalformedHashes: versions/map/nullvalue拒否、空/unknown/missing keys、空/g64/63長hash拒否、正常入力map不変。
+
+旧PG1405-1411は選択24/旧closing303の歴史証跡だけ。現Profileのexplicitimport source差でphysical一致不明のため今回必要current資格、Versions旧source一致は今回whole2byteやcoverageの代わりにしない。RootNullAway/PMD全規約/CS-SB-GJF・独立適用判定・source固定後whole4一回、全physical2/class-init/CRC/実XML終了codeとFESabort0を独立postで照合。targetはProfile全source、Versionshelperの未網羅は保持、旧exec合算/独自除外0。正式1964-53/全451/実Backup/190へ昇格しない。command/environment/hash/targetsourceは各stage manifest-chainと結果へ保存。
