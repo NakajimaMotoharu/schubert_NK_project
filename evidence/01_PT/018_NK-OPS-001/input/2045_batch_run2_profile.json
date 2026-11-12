@@ -1,0 +1,70 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG28220-BATCH-RUN-ACTIVATION2",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java": "WBS-P017-02"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4194_RunActivation公開値原二単体仕様.md",
+      "sha256": "c79477bf07dafb31ae1fdc973a704f589604b08f6c3605adf7d432fbf0855fd1"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28204-batch-run-step-value-source-eligibility-v1/manifest.json",
+      "sha256": "aebcbc478f12c12408346dc9308aa3519f39f5b00ec2e8639121d1e327a19fe9"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "1ef5610854bf99cca938ae4b025b630e5e1a5d4b",
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java",
+      "tests": 2
+    }
+  ],
+  "expectedTests": 2,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceActivation.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/repository/BatchRun",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceActivation"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-batch/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG28210-batch-run-activation2-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG28212-batch-run-activation2-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG28214-batch-run-activation2-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG28216-batch-run-activation2-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG28220-batch-run-activation2-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG28222-batch-run-activation2-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg28212-batch-run-activation2-prepare-v1",
+    "unit": "pg28220-batch-run-activation2-unit-v1"
+  },
+  "newTestDefinitions": 0
+}

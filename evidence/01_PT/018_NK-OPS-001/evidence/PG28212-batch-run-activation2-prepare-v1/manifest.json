@@ -1,0 +1,103 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2045_batch_run2_profile.json",
+    "sha256": "64bfb8c1fb8be4fe5c4d8bf2febec73477f368d7e735ea5a459ee4f54b5458c8"
+  },
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java": "0467e9722cc3c46e238fcdb9e2d1deffde11b3a498e54e61c0f477d18440889e",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java": "9285d0ce208cf45f55f4d2c5a740e59573ef1b984d99c2ef6e41dd311462382a",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "toolHashes": {
+    "tools/quality/pgpt_closed_host_profile.py": "e0687eb0ca221686587ec74f08a2121bd14f8b2dedd4fa41d191143b9d8f9f5a",
+    "tools/quality/pgpt_closed_host_stages.py": "40c84099dcfb858824acc351f5d42d2e6216ed30d2959cbd635dce4f20125e03",
+    "tools/quality/pgpt_closed_host_post.py": "5ce124b5882a4d027218a17d10ec9b357b1609fc8edde637debc13c6e5c57932"
+  },
+  "physicalClassHashes": {
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceActivation.class": "4a62469824f074982351f4f7016fff4e38fcb3825a5af54c77ae86babe9e05ae"
+  },
+  "testClassHashes": {
+    "dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.class": "dc48f2ecf29e570c24a9da4079fcc91f3dccfccc597cd80eb2b51a9c25aafa77"
+  },
+  "expectedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.BatchRunValueBoundaryTest",
+      "name": "cutoffBoundsNullsAndFixedRunDiagnostic()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.BatchRunValueBoundaryTest",
+      "name": "activationNullsValueAccessorsAndFixedDiagnostic()"
+    }
+  ],
+  "selectedClasses": [
+    "dev.codex.schubert.nk.batch.repository.BatchRunValueBoundaryTest"
+  ],
+  "stages": {
+    "nullaway-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T20:52:18.874681+00:00",
+      "endUTC": "2026-11-12T20:52:21.295305+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-Dmaven.test.skip=true",
+        "compile"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28212-batch-run-activation2-prepare-v1",
+      "stdoutSha256": "aa21bf82ce1021f9e29bd7f5ba75f981b4c3ba2283c730f982a33f3a783c8b80",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T20:52:21.295631+00:00",
+      "endUTC": "2026-11-12T20:52:21.862400+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-implicit:none",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28212-batch-run-activation2-prepare-v1/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28212-batch-run-activation2-prepare-v1/test-classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "preliminaryStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28210-batch-run-activation2-prestyle-v1/manifest.json",
+    "sha256": "4ff31c9a6f35e565c03dd6978b24736e090cbf4dd921aec2dee66636ed1c7803"
+  },
+  "rootCompilerSha256": "a062ec2cf62ddc0e140d41bed89be7814071f798feac2dd0bcdc297a2d2d00cb",
+  "subsetPomSha256": "77d8d4cef2db44f75a5c9539775c4da9ea4a414325725d898d27fd9a5d205cb4",
+  "productTestsExecuted": 0,
+  "MainCompiled": true,
+  "wholeProjectMainRebuilt": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_profile.py",
+    "sha256": "e0687eb0ca221686587ec74f08a2121bd14f8b2dedd4fa41d191143b9d8f9f5a"
+  }
+}
