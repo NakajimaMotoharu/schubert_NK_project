@@ -1,0 +1,102 @@
+{
+  "actualExit": 0,
+  "inputHashes": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": "64e8bb6e4ebe10b606244200eec59e677465215d210c686aefd9da22c9a7bf6e",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFailureGraphTest.java": "4d6ca5dbb53c826c612b4f8af61f8881153d4b890e7adda9a3071d51ce574680",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "mainSources": [
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java"
+  ],
+  "testSources": [
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFailureGraphTest.java"
+  ],
+  "physicalClassHashes": {
+    "dev/codex/schubert/nk/storage/package-info.class": "b9c4509338ea3545a2ee90fee9391cc4b356ef7f60309562a752596d05c81583",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "8508ca85bfbca22e66b27d20020a96078f9fbb4662c686a48300b4361dbb61f7",
+    "dev/codex/schubert/nk/storage/StorageIoException.class": "34893281af2c4468b155f83ca0e2df48248338ed776bbd6387e939306e111e49"
+  },
+  "testClassHashes": {
+    "dev/codex/schubert/nk/storage/StorageFailureGraphTest.class": "057bce9c978cf4b85ce48d6682c647cc709a95d7526c44fbee0d4501e4026dfd"
+  },
+  "selectedClasses": [
+    "dev.codex.schubert.nk.storage.StorageFailureGraphTest"
+  ],
+  "expectedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.storage.StorageFailureGraphTest",
+      "name": "fixedReasonsAndNullContract()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.storage.StorageFailureGraphTest",
+      "name": "directCauseAndSuppressedIdentityAndOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.storage.StorageFailureGraphTest",
+      "name": "sqlNextAndMixedEdgesRetainIdentity()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.storage.StorageFailureGraphTest",
+      "name": "nonFatalCyclesAndDuplicateEdgesFinishWithoutMutation()"
+    }
+  ],
+  "expectedTests": 4,
+  "stages": {
+    "nullaway-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T13:46:18.893031+00:00",
+      "endUTC": "2026-11-12T13:46:21.363883+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-Dmaven.test.skip=true",
+        "compile"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg27688-storage-public-graph-v1",
+      "stdoutSha256": "d614f36adc86bad3586a2e8385a96e43cbc6bf9f4e7915087da095cabb9279d7",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T13:46:21.364247+00:00",
+      "endUTC": "2026-11-12T13:46:21.980520+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-implicit:none",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg27688-storage-public-graph-v1/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg27688-storage-public-graph-v1/test-classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFailureGraphTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "rootCompilerSha256": "a062ec2cf62ddc0e140d41bed89be7814071f798feac2dd0bcdc297a2d2d00cb",
+  "rootCompilerUnchanged": true,
+  "MainSources": 2,
+  "productTestsExecuted": 0,
+  "actualBackendNativeOrHeldActions": 0,
+  "subsetPomSha256": "a8c76bb28244aa67355a9915f80b730cf605ddf3a49d3c813c5ff54cc4c194c6"
+}

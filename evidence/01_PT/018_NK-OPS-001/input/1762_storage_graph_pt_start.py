@@ -1,0 +1,12 @@
+"""Before-price four new pure storage exception tests, not directory/native qualification."""
+from pathlib import Path
+import datetime,hashlib,json
+R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';D=R/'documents/400_PGPT/470_PMO/600_通常PGPT_20261106'
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(R)),sha256=sha(p));wr=lambda p,x:p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
+p=D/'1038_WBS65予実・storage分類PG後版183.json';f=json.loads(p.read_text());price=dict(low=.075,base=.225,high=.45);f.update(previousForecast=ref(p),revision='WBS65-EXEC-FORECAST-184-STORAGE_GRAPH_PT_BEFORE',atJST=datetime.datetime.now().astimezone().isoformat())
+for k,v in price.items():
+ for field in ['additionalRequiredWorkGrossPp','additionalDiscoveredRemainingPp','revisedRemainingPp']:f[field][k]=round(f[field][k]+v,3)
+f['additionalDiscovery'].append('Public StorageIoException entire helper-only four new literal/identity/null/SQL graph tests .025/.075/.15 plus exactRoot NullAway safeMain2/freshstatic/currentrun/fullphysical independent CRC and measured four counters .05/.15/.3 =.075/.225/.45cap1. No original7Directory test or resource capability seam/extraction. Source PG previous price complete/no duplication; callerBUG2718runtime remains OPEN.')
+fp=D/'1040_WBS65予実・storage例外四PT前版184.json';assert not fp.exists();wr(fp,f)
+c=dict(groupId='PGPT-WBS65-STORAGE-PUBLIC-GRAPH-FOUR-NORMAL-20261112',recordPath=str((D/'1041_WBS65storage例外四通常PT開始.json').relative_to(R)),category='SELECTED_TEST',kind='SOURCE_REQUALIFICATION',scope='Full pure StorageIoException plus package-info; four new independent public memory Throwable/SQL graphs. Fresh exactRoot compiler NullAway, static, sameexecCRC/full helper coverage; no Directory/ResourceScope/native/FS/actual4/Root. .075/.225/.45cap1.',oracleRefs=[ref(R/'evidence/01_PT/003_NK-PRO-003/4135_P00304固定catalog有限graph単体仕様.md')],wbsLeafIds=['WBS-P003-04'],source='edaf641333266660ec79a6e070c98b7a79bbccac',run='PG27690',estimate=price,capPp=1,workIds=['P00304-STORAGE_PUBLIC_GRAPH_FOUR-NORMAL_PT'],forecastRef=ref(fp),nextCommand='Implement full four public graph tests and closedMain2 profile; RootNullAway/freshstatic0/preflight/sourcepin then normaloneexec/independentCRC-allphysical/fourcounters. Record no actual Directory runtime qualification; thenP01608. Usage next23:40:01/freshquota; initial20review when due.')
+wr(B/'input/1763_storage_graph_pt_start.json',c);print(json.dumps(dict(actualExit=0,estimate=price)))

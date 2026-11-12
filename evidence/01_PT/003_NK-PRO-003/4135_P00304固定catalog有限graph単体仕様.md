@@ -14,3 +14,6 @@ OwnedTransferDirectory.executeの三checked catchへ同helperを固定COLLISION/
 ResourceScopeのprimary/secondary優先順位はSS333の例外規則がある。原ResourceScopeTest knownBodyFailuresは既suppressed Errorも固定IO化する独立期待値を持つ。したがって当処理はgeneric fatal guard横展開の非該当、use/acquire/handoff一切変更しない。元受入17を一括再認証しない。
 
 事前source6f7、PG27678 before、source製造PG27680 exact inverse/configured GJF-CS0。現時点製品PT0・Maincompile0・coverage未測定。普通helper-only PTは次群でsource固定とRoot NullAway/静的解析・同run CRC/四counterを確認してから実施・記録する。実DB/VM/Root/実鍵/native/actual4/私有grant操作0、旧source成功の転用0、正式1964PT/53scope維持。
+
+
+source固定commit edaf641333266660ec79a6e070c98b7a79bbccac、独立sourcejoin [manifest](../018_NK-OPS-001/evidence/PG27684-storage-catalog-source-join-v1/manifest.json) SHA767f6b769022ae5484baf1a4ab2d49f963deb1471392230e6e4749f471631dc7。StorageIoExceptionへ既有限identity/cause-suppressed-SQLnext分類algorithmをmodule内実装、OwnedDirectory三catchへ既理由変換前call。元6f7へexactinverse/GJF-CS0。ResourceScopeはSS333明示複合優先規則により非該当、未変更。実Dir runtime/DB/native/Root/FS/actual4未実施・BUG2718OPEN、helperUnitは後続別価格。旧P00304/08受入は元source歴史で維持し新sourceへ合算0。 製品PT0、runtime/coverage未受入。
