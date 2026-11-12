@@ -1,0 +1,280 @@
+Compiled from "BatchStepResult.java"
+public final class dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason extends java.lang.Enum<dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason> {
+  public static final dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason NONE;
+
+  public static final dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason ALREADY_SUCCESSFUL;
+
+  public static final dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason BACKUP_UNAVAILABLE;
+
+  public static final dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason PROTECTED_RECORDS;
+
+  public static final dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason ABANDONED;
+
+  public static final dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason DATABASE_FAILURE;
+
+  public static final dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason COMMAND_FAILURE;
+
+  public static final dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason SAFETY_FAILURE;
+
+  public static final dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason IO_FAILURE;
+
+  public static final dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason TIMEOUT;
+
+  public static final dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason INTERRUPTED;
+
+  private static final dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason[] $VALUES;
+
+  public static dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason[] values();
+    Code:
+         0: getstatic     #37                 // Field $VALUES:[Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+         3: invokevirtual #41                 // Method "[Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;".clone:()Ljava/lang/Object;
+         6: checkcast     #42                 // class "[Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;"
+         9: areturn
+
+  public static dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason valueOf(java.lang.String);
+    Code:
+         0: ldc           #1                  // class dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason
+         2: aload_0
+         3: invokestatic  #46                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+         6: checkcast     #1                  // class dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason
+         9: areturn
+
+  private dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason();
+    Code:
+         0: aload_0
+         1: aload_1
+         2: iload_2
+         3: invokespecial #52                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+         6: return
+
+  public java.lang.String code();
+    Code:
+         0: aload_0
+         1: getstatic     #3                  // Field NONE:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+         4: if_acmpne     11
+         7: aconst_null
+         8: goto          15
+        11: aload_0
+        12: invokevirtual #56                 // Method name:()Ljava/lang/String;
+        15: areturn
+
+  public java.lang.String summary();
+    Code:
+         0: aload_0
+         1: invokevirtual #60                 // Method ordinal:()I
+         4: tableswitch   { // 0 to 10
+                       0: 74
+                       1: 78
+                       2: 83
+                       3: 88
+                       4: 93
+                       5: 98
+                       6: 103
+                       7: 108
+                       8: 113
+                       9: 118
+                      10: 123
+                 default: 64
+            }
+        64: new           #64                 // class java/lang/MatchException
+        67: dup
+        68: aconst_null
+        69: aconst_null
+        70: invokespecial #66                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+        73: athrow
+        74: aconst_null
+        75: goto          125
+        78: ldc           #69                 // String step already successful for business date
+        80: goto          125
+        83: ldc           #71                 // String verified backup unavailable
+        85: goto          125
+        88: ldc           #73                 // String protected records retained
+        90: goto          125
+        93: ldc           #75                 // String previous same-run attempt abandoned
+        95: goto          125
+        98: ldc           #77                 // String batch database operation failed
+       100: goto          125
+       103: ldc           #79                 // String batch command failed
+       105: goto          125
+       108: ldc           #81                 // String batch safety check failed
+       110: goto          125
+       113: ldc           #83                 // String batch file operation failed
+       115: goto          125
+       118: ldc           #85                 // String batch step deadline reached
+       120: goto          125
+       123: ldc           #87                 // String batch step interrupted
+       125: areturn
+
+  private boolean allows(dev.codex.schubert.nk.batch.repository.BatchStepResult$Status);
+    Code:
+         0: aload_0
+         1: invokevirtual #60                 // Method ordinal:()I
+         4: tableswitch   { // 0 to 4
+                       0: 40
+                       1: 55
+                       2: 55
+                       3: 70
+                       4: 85
+                 default: 100
+            }
+        40: aload_1
+        41: getstatic     #89                 // Field dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.SUCCESS:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Status;
+        44: if_acmpne     51
+        47: iconst_1
+        48: goto          119
+        51: iconst_0
+        52: goto          119
+        55: aload_1
+        56: getstatic     #95                 // Field dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.SKIPPED:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Status;
+        59: if_acmpne     66
+        62: iconst_1
+        63: goto          119
+        66: iconst_0
+        67: goto          119
+        70: aload_1
+        71: getstatic     #98                 // Field dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.WARNING:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Status;
+        74: if_acmpne     81
+        77: iconst_1
+        78: goto          119
+        81: iconst_0
+        82: goto          119
+        85: aload_1
+        86: getstatic     #101                // Field dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.FAILED:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Status;
+        89: if_acmpne     96
+        92: iconst_1
+        93: goto          119
+        96: iconst_0
+        97: goto          119
+       100: aload_1
+       101: getstatic     #98                 // Field dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.WARNING:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Status;
+       104: if_acmpeq     114
+       107: aload_1
+       108: getstatic     #101                // Field dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.FAILED:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Status;
+       111: if_acmpne     118
+       114: iconst_1
+       115: goto          119
+       118: iconst_0
+       119: ireturn
+
+  private static dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason[] $values();
+    Code:
+         0: bipush        11
+         2: anewarray     #1                  // class dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason
+         5: dup
+         6: iconst_0
+         7: getstatic     #3                  // Field NONE:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        10: aastore
+        11: dup
+        12: iconst_1
+        13: getstatic     #7                  // Field ALREADY_SUCCESSFUL:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        16: aastore
+        17: dup
+        18: iconst_2
+        19: getstatic     #10                 // Field BACKUP_UNAVAILABLE:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        22: aastore
+        23: dup
+        24: iconst_3
+        25: getstatic     #13                 // Field PROTECTED_RECORDS:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        28: aastore
+        29: dup
+        30: iconst_4
+        31: getstatic     #16                 // Field ABANDONED:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        34: aastore
+        35: dup
+        36: iconst_5
+        37: getstatic     #19                 // Field DATABASE_FAILURE:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        40: aastore
+        41: dup
+        42: bipush        6
+        44: getstatic     #22                 // Field COMMAND_FAILURE:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        47: aastore
+        48: dup
+        49: bipush        7
+        51: getstatic     #25                 // Field SAFETY_FAILURE:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        54: aastore
+        55: dup
+        56: bipush        8
+        58: getstatic     #28                 // Field IO_FAILURE:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        61: aastore
+        62: dup
+        63: bipush        9
+        65: getstatic     #31                 // Field TIMEOUT:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        68: aastore
+        69: dup
+        70: bipush        10
+        72: getstatic     #34                 // Field INTERRUPTED:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        75: aastore
+        76: areturn
+
+  static {};
+    Code:
+         0: new           #1                  // class dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason
+         3: dup
+         4: ldc           #104                // String NONE
+         6: iconst_0
+         7: invokespecial #105                // Method "<init>":(Ljava/lang/String;I)V
+        10: putstatic     #3                  // Field NONE:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        13: new           #1                  // class dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason
+        16: dup
+        17: ldc           #106                // String ALREADY_SUCCESSFUL
+        19: iconst_1
+        20: invokespecial #105                // Method "<init>":(Ljava/lang/String;I)V
+        23: putstatic     #7                  // Field ALREADY_SUCCESSFUL:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        26: new           #1                  // class dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason
+        29: dup
+        30: ldc           #107                // String BACKUP_UNAVAILABLE
+        32: iconst_2
+        33: invokespecial #105                // Method "<init>":(Ljava/lang/String;I)V
+        36: putstatic     #10                 // Field BACKUP_UNAVAILABLE:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        39: new           #1                  // class dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason
+        42: dup
+        43: ldc           #108                // String PROTECTED_RECORDS
+        45: iconst_3
+        46: invokespecial #105                // Method "<init>":(Ljava/lang/String;I)V
+        49: putstatic     #13                 // Field PROTECTED_RECORDS:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        52: new           #1                  // class dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason
+        55: dup
+        56: ldc           #109                // String ABANDONED
+        58: iconst_4
+        59: invokespecial #105                // Method "<init>":(Ljava/lang/String;I)V
+        62: putstatic     #16                 // Field ABANDONED:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        65: new           #1                  // class dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason
+        68: dup
+        69: ldc           #110                // String DATABASE_FAILURE
+        71: iconst_5
+        72: invokespecial #105                // Method "<init>":(Ljava/lang/String;I)V
+        75: putstatic     #19                 // Field DATABASE_FAILURE:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        78: new           #1                  // class dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason
+        81: dup
+        82: ldc           #111                // String COMMAND_FAILURE
+        84: bipush        6
+        86: invokespecial #105                // Method "<init>":(Ljava/lang/String;I)V
+        89: putstatic     #22                 // Field COMMAND_FAILURE:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+        92: new           #1                  // class dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason
+        95: dup
+        96: ldc           #112                // String SAFETY_FAILURE
+        98: bipush        7
+       100: invokespecial #105                // Method "<init>":(Ljava/lang/String;I)V
+       103: putstatic     #25                 // Field SAFETY_FAILURE:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+       106: new           #1                  // class dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason
+       109: dup
+       110: ldc           #113                // String IO_FAILURE
+       112: bipush        8
+       114: invokespecial #105                // Method "<init>":(Ljava/lang/String;I)V
+       117: putstatic     #28                 // Field IO_FAILURE:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+       120: new           #1                  // class dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason
+       123: dup
+       124: ldc           #114                // String TIMEOUT
+       126: bipush        9
+       128: invokespecial #105                // Method "<init>":(Ljava/lang/String;I)V
+       131: putstatic     #31                 // Field TIMEOUT:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+       134: new           #1                  // class dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason
+       137: dup
+       138: ldc           #115                // String INTERRUPTED
+       140: bipush        10
+       142: invokespecial #105                // Method "<init>":(Ljava/lang/String;I)V
+       145: putstatic     #34                 // Field INTERRUPTED:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+       148: invokestatic  #116                // Method $values:()[Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+       151: putstatic     #37                 // Field $VALUES:[Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+       154: return
+}

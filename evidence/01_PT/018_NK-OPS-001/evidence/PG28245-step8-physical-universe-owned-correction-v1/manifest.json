@@ -1,0 +1,101 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T06:03:31.193777+09:00",
+  "bug": "BUG2747",
+  "ykt": "YKT2393",
+  "originalFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28244-batch-step-values8-prepare-v1/manifest.json",
+    "sha256": "1e0f34df37852c650c5fdcdfb69434916bf076f807a1c298ebfe65f6b0799589"
+  },
+  "correctedConfiguration": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2055b_batch_step8_measured_profile.json",
+    "sha256": "36f60e67310e677684c961c07c523efbd4785be33bf257f28b38ae50555e2462"
+  },
+  "correctedPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28244-batch-step-values8-prepare-owned-continuation-v1/manifest.json",
+    "sha256": "d923734312c4e133b1608746165b9a6e5e733c8ac4b559c8f3feec39a7c35a8f"
+  },
+  "correctedPrestyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28242-batch-step-values8-prestyle-owned-continuation-v1/manifest.json",
+    "sha256": "1ba72ba1a8da4a7ce6076c07c8811550b3ca27ce683aa440ce26bd394b6f7a04"
+  },
+  "physicalClasses": 13,
+  "sourceInputHashesUnchanged": true,
+  "ordinaryMainTestCompileReexecuted": false,
+  "ordinaryPrestyleReexecuted": false,
+  "productTestsExecuted": 0,
+  "rawEvidencePreserved": true,
+  "actualJava25EnumEncoding": "DIRECT_ORDINAL_TABLESWITCH_NO_MAP_CLASS",
+  "disassembly": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+      "-p",
+      "-c",
+      "-classpath",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28244-batch-step-values8-prepare-v1/target/classes",
+      "dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason"
+    ],
+    "actualExit": 0,
+    "path": "reason-owned-disassembly.txt",
+    "sha256": "e0997e7c3fee38813cdc600e1d679bca73ee59106b1b9c281d86c490f4bdda32"
+  },
+  "allSixProfileAudit": [
+    {
+      "profile": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2036a_closed_host_example.json",
+        "sha256": "153e4f76b2bc328e6853c1e0f9470bcfd2781c430d31ab22ceaa5c5289bd3f85"
+      },
+      "maps": [],
+      "dollarOne": []
+    },
+    {
+      "profile": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2036b_closed_host_example.json",
+        "sha256": "9c076947abbe3c544d19c3e75ac971f9b3171180b143ec01c033f453aae92112"
+      },
+      "maps": [],
+      "dollarOne": []
+    },
+    {
+      "profile": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2036c_closed_host_example.json",
+        "sha256": "404bbe452fc28b5d3704bdba4e2bdc082bb1593519f8ea381eb4481506b8b21b"
+      },
+      "maps": [],
+      "dollarOne": []
+    },
+    {
+      "profile": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2036d_closed_host_example.json",
+        "sha256": "38417797dd417abcda47b105fc06be555ba9a1bea468712fc4276671c2410dcd"
+      },
+      "maps": [],
+      "dollarOne": []
+    },
+    {
+      "profile": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2045_batch_run2_profile.json",
+        "sha256": "64bfb8c1fb8be4fe5c4d8bf2febec73477f368d7e735ea5a459ee4f54b5458c8"
+      },
+      "maps": [],
+      "dollarOne": []
+    },
+    {
+      "profile": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2055_batch_step8_profile.json",
+        "sha256": "7aad04cd4f99cf580707eaa0583251271fd287389000b29d7221a12c547fb5a9"
+      },
+      "maps": [
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/BatchStepResult$1",
+          "enumClass": "dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason",
+          "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepResult.java"
+        }
+      ],
+      "dollarOne": [
+        "dev/codex/schubert/nk/batch/repository/BatchStepResult$1.class"
+      ]
+    }
+  ],
+  "newAcceptance": 0
+}

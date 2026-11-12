@@ -1,0 +1,603 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2055c_batch_step8_final_profile.json",
+    "sha256": "ccda4f69dabe3928c77238b30d261334e6a4946e06fd9ae99fb0b336c26484b4"
+  },
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java": "0467e9722cc3c46e238fcdb9e2d1deffde11b3a498e54e61c0f477d18440889e",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java": "f736e4cf0f251df6b0d0579996b0353e6a757b0def2777a4528ee976c8384285",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java": "a37a929c6f7f01ccdd2facf7b6f74a72eea2f8927739b38c0ff998f3ec1015fe",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepResult.java": "d4d8f244943923c428596dd5629c942fe207fb9d51a6a7872c3fa7190a71e319",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java": "dacc345b826e86682036df2e94f8e5300cb75435f4cdcd1de6ece4165eac5884",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": "f4cff9bb43cacfde5be699fd61d4e25526523d5ef5e478aa88dcbb8bdde6928a",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": "134bcdaecf9f02adc74d5cb728782c41f19497b0c0c37ee2cd4a70b0155179b6",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java": "be9f8bcd8d83ed16ac94b6846db33bfb190206abbf37f75587a2e4ebdcf70893",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28244-batch-step-values8-prepare-owned-continuation-qualification-refresh-v1/manifest.json",
+    "sha256": "d7dc8c6516f6f9b0dec2495c1915e9381479554ab771a3c49ad1fbca2d045685"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+    "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+    "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "line": "142",
+      "reason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "line": "238",
+      "reason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "line": "314",
+      "reason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "line": "354",
+      "reason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "line": "417",
+      "reason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "147",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "154",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "280",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "287",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "292",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "299",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "323",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "330",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "377",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "384",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "389",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "396",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "428",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "435",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "440",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "447",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "147",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "154",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "280",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "287",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "292",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "299",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "323",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "330",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "377",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "384",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "389",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "396",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "428",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "435",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "440",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "447",
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "150",
+      "reason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "283",
+      "reason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "295",
+      "reason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "326",
+      "reason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "380",
+      "reason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "392",
+      "reason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "431",
+      "reason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "443",
+      "reason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "line": "245",
+      "reason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ResultSet object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "line": "368",
+      "reason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ResultSet object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "line": "424",
+      "reason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ResultSet object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotUseThreads",
+      "line": "28",
+      "reason": "This batch repository only reads currentThread().isInterrupted() before and after borrowed-transaction work. It creates or starts no thread and is not a Jakarta EE web container. Both interruption checks are required cancellation guards and remain compile-only in Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotUseThreads",
+      "line": "80",
+      "reason": "This batch repository only reads currentThread().isInterrupted() before and after borrowed-transaction work. It creates or starts no thread and is not a Jakarta EE web container. Both interruption checks are required cancellation guards and remain compile-only in Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "CloseResource",
+      "line": "39",
+      "reason": "SS332 statement/resultset are borrowed-parent local resources and are closed in explicit nested finally blocks after present() aliases; each close retains the primary/secondary priority. Whole96-line source verifies all paths and this Step8 profile forbids repository initialization/execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "CloseResource",
+      "line": "46",
+      "reason": "SS332 statement/resultset are borrowed-parent local resources and are closed in explicit nested finally blocks after present() aliases; each close retains the primary/secondary priority. Whole96-line source verifies all paths and this Step8 profile forbids repository initialization/execution.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ResultSet object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "58",
+      "reason": "SS332 primary SQLException/RuntimeException/Error is retained by identity and immediately rethrown; secondary resource-close failures go through the exact JdbcResourceFailures priority. No generic catch normalizes business success; these parent methods remain compile-only in Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "69",
+      "reason": "SS332 primary SQLException/RuntimeException/Error is retained by identity and immediately rethrown; secondary resource-close failures go through the exact JdbcResourceFailures priority. No generic catch normalizes business success; these parent methods remain compile-only in Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "58",
+      "reason": "SS332 primary SQLException/RuntimeException/Error is retained by identity and immediately rethrown; secondary resource-close failures go through the exact JdbcResourceFailures priority. No generic catch normalizes business success; these parent methods remain compile-only in Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "69",
+      "reason": "SS332 primary SQLException/RuntimeException/Error is retained by identity and immediately rethrown; secondary resource-close failures go through the exact JdbcResourceFailures priority. No generic catch normalizes business success; these parent methods remain compile-only in Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "61",
+      "reason": "SS332 cleanup priority intentionally rethrows the selected close failure while preserving the agreed primary/secondary contract; all resources close directly in finally and no connection is owned/closed. Altering finally would change the contract, not improve it.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "72",
+      "reason": "SS332 cleanup priority intentionally rethrows the selected close failure while preserving the agreed primary/secondary contract; all resources close directly in finally and no connection is owned/closed. Altering finally would change the contract, not improve it.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "65",
+      "reason": "SS332 primary SQLException/RuntimeException/Error is retained by identity and immediately rethrown; secondary resource-close failures go through the exact JdbcResourceFailures priority. No generic catch normalizes business success; these parent methods remain compile-only in Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "76",
+      "reason": "SS332 primary SQLException/RuntimeException/Error is retained by identity and immediately rethrown; secondary resource-close failures go through the exact JdbcResourceFailures priority. No generic catch normalizes business success; these parent methods remain compile-only in Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "65",
+      "reason": "SS332 primary SQLException/RuntimeException/Error is retained by identity and immediately rethrown; secondary resource-close failures go through the exact JdbcResourceFailures priority. No generic catch normalizes business success; these parent methods remain compile-only in Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "76",
+      "reason": "SS332 primary SQLException/RuntimeException/Error is retained by identity and immediately rethrown; secondary resource-close failures go through the exact JdbcResourceFailures priority. No generic catch normalizes business success; these parent methods remain compile-only in Step8.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+      "rule": "AvoidAccessibilityAlteration",
+      "line": "237",
+      "reason": "The existing whole-test fixed diagnostic audit accesses exactly the source-reviewed private immutable History constructor with synthetic scalar/JDK data. The pinned closure proof and parent-init deny set exclude repository/Root/authority operations. It tests fixed redaction, grants no production visibility, and is not a general reflection allowance.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "You should not modify visibility of constructors, methods or fields using setAccessible()"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+      "rule": "CloseResource",
+      "line": "268",
+      "reason": "The only Test-owned virtual executor is stopped in finally with shutdownNow and awaitTermination(10 seconds), while all Future.get waits retain 5 seconds. This replaces unbounded implicit close per BUG2746 and preserves all original64 assertions; no shared/application executor is used.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "268",
+      "reason": "These sites create/submit/shutdown/await the sole Test-owned virtual executor to verify64 independent immutable values. Finally shutdownNow/await10 and Future5 bound cleanup and observation; no webapp unmanaged background work or external operation exists.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "274",
+      "reason": "These sites create/submit/shutdown/await the sole Test-owned virtual executor to verify64 independent immutable values. Finally shutdownNow/await10 and Future5 bound cleanup and observation; no webapp unmanaged background work or external operation exists.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "282",
+      "reason": "The owned Test-worker finally must fail the test if awaitTermination10 reports workers still alive. This is an asserted resource postcondition, never a normal-success catch or business exception conversion; Future5 and original assertions remain unchanged.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "283",
+      "reason": "These sites create/submit/shutdown/await the sole Test-owned virtual executor to verify64 independent immutable values. Finally shutdownNow/await10 and Future5 bound cleanup and observation; no webapp unmanaged background work or external operation exists.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "284",
+      "reason": "These sites create/submit/shutdown/await the sole Test-owned virtual executor to verify64 independent immutable values. Finally shutdownNow/await10 and Future5 bound cleanup and observation; no webapp unmanaged background work or external operation exists.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "e44efc1c2202729c0924b59ac6cb4972aa9407637829a8cf768a249f0e57142b"
+  }
+}

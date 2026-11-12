@@ -265,7 +265,8 @@ final class BatchStepValuesTest {
 
   @Test
   void independentConcurrentValues() throws Exception {
-    try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
+    var pool = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       List<Future<BatchStepAttempt>> futures = new ArrayList<>();
       for (int i = 1; i <= 64; i++) {
         int n = i;
@@ -278,6 +279,10 @@ final class BatchStepValuesTest {
         assertEquals(i, a.attempt());
         assertEquals(LocalDate.of(2026, 9, 13), a.businessDate());
       }
+    } finally {
+      pool.shutdownNow();
+      if (!pool.awaitTermination(10, TimeUnit.SECONDS))
+        throw new AssertionError("owned virtual value workers did not terminate");
     }
   }
 

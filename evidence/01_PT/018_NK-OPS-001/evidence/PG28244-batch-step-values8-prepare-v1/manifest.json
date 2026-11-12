@@ -1,0 +1,88 @@
+{
+  "actualExit": 1,
+  "atJST": "2026-11-13T06:02:19.442228+09:00",
+  "failedStage": "EXPECTED_FULL_PHYSICAL_UNIVERSE",
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2055_batch_step8_profile.json",
+    "sha256": "7aad04cd4f99cf580707eaa0583251271fd287389000b29d7221a12c547fb5a9"
+  },
+  "expectedPhysical": [
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceActivation.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStep.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRunRepository.class",
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class",
+    "dev/codex/schubert/nk/batch/repository/RunReferences.class",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRunRepository$History.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult$1.class"
+  ],
+  "actualPhysicalClassHashes": {
+    "dev/codex/schubert/nk/batch/repository/BatchRunRepository$History.class": "2172a69e3d1bdff745f95f92c9e90b899ac2d770c0718ed43d0cd77bbd95763b",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult.class": "d7911da0bd233582858d96e0488abdcdfd5744aa4adc0cc6dafa92601465c4c9",
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class": "60ef4c5e313ab26a46c7a3a46263c3ce292ef48b20c9184c80086ed9e570e146",
+    "dev/codex/schubert/nk/batch/repository/BatchRunRepository.class": "93d46f81c042d60b1ea4beabb1d47037fb01c073942c12a275018c4c35227e8f",
+    "dev/codex/schubert/nk/batch/repository/BatchStep.class": "06e90b35ca09ac687bfd480caac794fa7be6a47dff9db3d397e682f75f010b1c",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceActivation.class": "4a62469824f074982351f4f7016fff4e38fcb3825a5af54c77ae86babe9e05ae",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason.class": "c5a0fedb364b039fbe360883b875ce3e938c5006fc7263c413b56fad798214ed",
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class": "d61f86c115e29d12da29964711253fcd3e8fc64b8cb2d263efd87702295ae547",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.class": "08893a338b6e7ffab7272cd1789215001855261ec7ac0a4dafa92f41af5a3a27",
+    "dev/codex/schubert/nk/batch/repository/RunReferences.class": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class": "df847adb1bc28f74c6a60feba730a17ac7d5b7600b7488e0444cdcf0e247b6e4"
+  },
+  "stages": {
+    "nullaway-compile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-Dmaven.test.skip=true",
+        "compile"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28244-batch-step-values8-prepare-v1",
+      "endUTC": "2026-11-12T21:00:58.752444+00:00",
+      "startUTC": "2026-11-12T21:00:55.829909+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "d4000b178cabb430f109bedef7e1175db1011c356071bf90c445b29cc374333e",
+      "timedOut": false
+    },
+    "test-compile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-implicit:none",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28244-batch-step-values8-prepare-v1/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28244-batch-step-values8-prepare-v1/test-classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "endUTC": "2026-11-12T21:00:59.519288+00:00",
+      "startUTC": "2026-11-12T21:00:58.752930+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    }
+  },
+  "productTestsExecuted": 0,
+  "noUnitStarted": true,
+  "originalCompileSuccessfulNotProfileAccepted": true
+}

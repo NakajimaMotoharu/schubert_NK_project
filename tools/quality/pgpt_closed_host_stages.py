@@ -50,6 +50,29 @@ def static(c, config, extra):
     return m
 
 
+def classify_source_findings(paths, anchors, raw, source_text):
+    """One identity per actual message when a rule emits several findings at one site."""
+    message_mode = any('message' in a for a in anchors)
+    expected = set(); classified = []
+    fields = {'path', 'rule', 'sourceAnchor', 'occurrences', 'reason', 'disposition'} | ({'message'} if message_mode else set())
+    for a in anchors:
+        h.require(set(a) == fields and a['disposition'] == 'NOT_APPLICABLE' and isinstance(a['reason'], str) and len(a['reason']) >= 24, 'independent per-site applicability explanation')
+        h.require(a['path'] in paths, 'explicit static source scope')
+        if message_mode: h.require(isinstance(a['message'], str) and a['message'], 'explicit actual finding message')
+        rows = [str(i + 1) for i, line in enumerate(source_text(a['path']).splitlines()) if line.strip() == a['sourceAnchor']]
+        h.require(type(a['occurrences']) is int and a['occurrences'] >= 1 and len(rows) == a['occurrences'], 'independent exact source anchor')
+        for line in rows:
+            identity = (str(h.R / a['path']), a['rule'], line) + ((a['message'],) if message_mode else ())
+            h.require(identity not in expected, 'duplicate finding classification')
+            expected.add(identity)
+            row = dict(path=a['path'], rule=a['rule'], line=line, reason=a['reason'], disposition=a['disposition'])
+            if message_mode: row['message'] = a['message']
+            classified.append(row)
+    actual = [(x['path'], x['rule'], x['line']) + ((x['message'],) if message_mode else ()) for x in raw]
+    h.require(len(actual) == len(expected) and set(actual) == expected, 'unclassified/applicable static finding; no blanket Test exemption')
+    return classified
+
+
 def preflight(c, config, extra):
     h.require(len(extra) == 1, 'explicit independent static-admission JSON required')
     admission_path = Path(extra[0]).resolve()
@@ -64,22 +87,11 @@ def preflight(c, config, extra):
     h.require(not st['processingErrors'] and not st['checkstyleFindings'] and all(st['spotbugs'][k] == 0 for k in ['bugs', 'missing', 'errors']), 'static errors remain')
     compiler, tag = h.compiler_element()
     h.require(ET.tostring(compiler) == ET.tostring(ET.parse(work / 'pom.xml').getroot().find('.//' + tag('plugin'))) and h.digest(work / 'pom.xml') == m['subsetPomSha256'], 'exact Root compiler configuration')
-    expected = set(); classified = []
-    for a in admission['sourceAnchors']:
-        h.require(set(a) == {'path', 'rule', 'sourceAnchor', 'occurrences', 'reason', 'disposition'} and a['disposition'] == 'NOT_APPLICABLE' and isinstance(a['reason'], str) and len(a['reason']) >= 24, 'independent per-site applicability explanation')
-        h.require(a['path'] in c['mainSources'] + [x['path'] for x in c['testSources']], 'explicit static source scope')
-        rows = [str(i + 1) for i, line in enumerate((h.R / a['path']).read_text().splitlines()) if line.strip() == a['sourceAnchor']]
-        h.require(type(a['occurrences']) is int and a['occurrences'] >= 1 and len(rows) == a['occurrences'], 'independent exact source anchor')
-        for line in rows:
-            identity = (str(h.R / a['path']), a['rule'], line)
-            h.require(identity not in expected, 'duplicate finding classification')
-            expected.add(identity); classified.append(dict(path=a['path'], rule=a['rule'], line=line, reason=a['reason'], disposition=a['disposition']))
-    actual = {(x['path'], x['rule'], x['line']) for x in st['rawFindings']}
-    h.require(len(st['rawFindings']) == len(expected) and actual == expected, 'unclassified/applicable static finding; no blanket Test exemption')
+    classified = classify_source_findings(c['mainSources'] + [x['path'] for x in c['testSources']], admission['sourceAnchors'], st['rawFindings'], lambda p: (h.R / p).read_text())
     h.require({x.replace('.', '/') + '.class' for x in st['spotbugs']['classStats']} == set(m['physicalClassHashes']), 'SpotBugs full physical class universe')
     for p, stages in [(pp, m['stages']), (sp, st['stages'])]:
         for label, v in stages.items():
-            h.require(v['actualExit'] == (4 if label == 'pmd' and expected else 0) and not v['timedOut'], 'actual stage exit')
+            h.require(v['actualExit'] == (4 if label == 'pmd' and classified else 0) and not v['timedOut'], 'actual stage exit')
             for stream in ['stdout', 'stderr']:
                 h.require(h.digest(p.parent / (label + '.' + stream)) == v[stream + 'Sha256'], 'actual static/compile stream hash')
     out = h.environment(c, 'preflight')

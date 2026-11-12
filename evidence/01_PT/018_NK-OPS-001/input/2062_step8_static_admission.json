@@ -1,0 +1,194 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG28252-BATCH-STEP-VALUES8",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28244-batch-step-values8-prepare-owned-continuation-qualification-refresh-v1/manifest.json",
+    "sha256": "d7dc8c6516f6f9b0dec2495c1915e9381479554ab771a3c49ad1fbca2d045685"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+    "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var query = present(statement);",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "occurrences": 5,
+      "reason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "occurrences": 16,
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "message": "Avoid catching Error in try-catch block",
+      "occurrences": 16,
+      "reason": "SS332 exact resource-cleanup contract: these multi-catches store the identical primary and immediately rethrow it; cleanup failure invokes the existing type-precedence helper. There is no swallowing, stringification or fallback in these catch bodies; parent remains compile-only with no JDBC execution.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceAnchor": "} finally {",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "occurrences": 8,
+      "reason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var row = present(rows);",
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "occurrences": 3,
+      "reason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 2,
+      "reason": "This batch repository only reads currentThread().isInterrupted() before and after borrowed-transaction work. It creates or starts no thread and is not a Jakarta EE web container. Both interruption checks are required cancellation guards and remain compile-only in Step8.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var checked = present(statement);",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "occurrences": 1,
+      "reason": "SS332 statement/resultset are borrowed-parent local resources and are closed in explicit nested finally blocks after present() aliases; each close retains the primary/secondary priority. Whole96-line source verifies all paths and this Step8 profile forbids repository initialization/execution.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var values = present(row);",
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "occurrences": 1,
+      "reason": "SS332 statement/resultset are borrowed-parent local resources and are closed in explicit nested finally blocks after present() aliases; each close retains the primary/secondary priority. Whole96-line source verifies all paths and this Step8 profile forbids repository initialization/execution.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "occurrences": 2,
+      "reason": "SS332 primary SQLException/RuntimeException/Error is retained by identity and immediately rethrown; secondary resource-close failures go through the exact JdbcResourceFailures priority. No generic catch normalizes business success; these parent methods remain compile-only in Step8.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "message": "Avoid catching Error in try-catch block",
+      "occurrences": 2,
+      "reason": "SS332 primary SQLException/RuntimeException/Error is retained by identity and immediately rethrown; secondary resource-close failures go through the exact JdbcResourceFailures priority. No generic catch normalizes business success; these parent methods remain compile-only in Step8.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceAnchor": "} finally {",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "occurrences": 2,
+      "reason": "SS332 cleanup priority intentionally rethrows the selected close failure while preserving the agreed primary/secondary contract; all resources close directly in finally and no connection is owned/closed. Altering finally would change the contract, not improve it.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "occurrences": 2,
+      "reason": "SS332 primary SQLException/RuntimeException/Error is retained by identity and immediately rethrown; secondary resource-close failures go through the exact JdbcResourceFailures priority. No generic catch normalizes business success; these parent methods remain compile-only in Step8.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "message": "Avoid catching Error in try-catch block",
+      "occurrences": 2,
+      "reason": "SS332 primary SQLException/RuntimeException/Error is retained by identity and immediately rethrown; secondary resource-close failures go through the exact JdbcResourceFailures priority. No generic catch normalizes business success; these parent methods remain compile-only in Step8.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+      "rule": "AvoidAccessibilityAlteration",
+      "sourceAnchor": "ctor.setAccessible(true);",
+      "message": "You should not modify visibility of constructors, methods or fields using setAccessible()",
+      "occurrences": 1,
+      "reason": "The existing whole-test fixed diagnostic audit accesses exactly the source-reviewed private immutable History constructor with synthetic scalar/JDK data. The pinned closure proof and parent-init deny set exclude repository/Root/authority operations. It tests fixed redaction, grants no production visibility, and is not a general reflection allowance.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var pool = Executors.newVirtualThreadPerTaskExecutor();",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "occurrences": 1,
+      "reason": "The only Test-owned virtual executor is stopped in finally with shutdownNow and awaitTermination(10 seconds), while all Future.get waits retain 5 seconds. This replaces unbounded implicit close per BUG2746 and preserves all original64 assertions; no shared/application executor is used.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var pool = Executors.newVirtualThreadPerTaskExecutor();",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "reason": "These sites create/submit/shutdown/await the sole Test-owned virtual executor to verify64 independent immutable values. Finally shutdownNow/await10 and Future5 bound cleanup and observation; no webapp unmanaged background work or external operation exists.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "pool.submit(() -> new BatchStepAttempt(n, RUN, BatchStep.CLEAN_LOG, n, NOW, false)));",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "reason": "These sites create/submit/shutdown/await the sole Test-owned virtual executor to verify64 independent immutable values. Finally shutdownNow/await10 and Future5 bound cleanup and observation; no webapp unmanaged background work or external operation exists.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceAnchor": "} finally {",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "occurrences": 1,
+      "reason": "The owned Test-worker finally must fail the test if awaitTermination10 reports workers still alive. This is an asserted resource postcondition, never a normal-success catch or business exception conversion; Future5 and original assertions remain unchanged.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "pool.shutdownNow();",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "reason": "These sites create/submit/shutdown/await the sole Test-owned virtual executor to verify64 independent immutable values. Finally shutdownNow/await10 and Future5 bound cleanup and observation; no webapp unmanaged background work or external operation exists.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "if (!pool.awaitTermination(10, TimeUnit.SECONDS))",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "reason": "These sites create/submit/shutdown/await the sole Test-owned virtual executor to verify64 independent immutable values. Finally shutdownNow/await10 and Future5 bound cleanup and observation; no webapp unmanaged background work or external operation exists.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
