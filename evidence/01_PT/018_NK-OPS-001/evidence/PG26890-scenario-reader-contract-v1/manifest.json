@@ -1,0 +1,118 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T13:57:39.893442+09:00",
+  "source": "a27bf16e22698294a5900b13f06a09d1d213d830",
+  "productionCoreMain": "a27bf16e22698294a5900b13f06a09d1d213d830",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioDetailDelivery.java": "6400a4da0720ec7987f3aa4defe005014a232ed0475513fd90501b08366a2523",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStream.java": "c86d8e01903b09c050187c4da462e82279b86eb638d8a2e1f12ecbc09b80f2ae",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/storage/LargeResultReader.java": "c034edd141bcb5e529ee842dbe270635ecd299876bca9d2d9ae71aa10faccbc8",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/storage/ScenarioRecordReader.java": "39d4882340526f647f73b93669b45fc2e6570be220c23bd5aaf45a3012c1b359"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": {
+    "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+    "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+  },
+  "checks": [
+    {
+      "id": "P00806-PG01",
+      "methods": "ScenarioDetailDelivery.deliver/fileResponse",
+      "testIds": [
+        "PT-SCN-008-R01..R03"
+      ],
+      "expected": "Validatedimmutable snapshot<=200 inline/no publisher, 0/1/199/200/201/10000 boundaries; header256+DATA1728+200x4800=961984 under1M. >200 publisheronce borrowedoriginalimmutablelist/time, descriptorcount equals snapshotcount, project explicitDATA offset1328mode/1329UUID/1365path/1621size/1633SHA/1697recordlength/1703count, FILErecordsnone. Failed/null/mismatchedpublisher no fallback/retry/delete. Callback is public syntheticpublisher only, no realcontenthash/lifecycle proof."
+    },
+    {
+      "id": "P00806-PG02",
+      "methods": "ScenarioRecordStream.constructor/byteLength/write/encode/toString",
+      "testIds": [
+        "PT-SCN-008-W04/W05"
+      ],
+      "expected": "Immutable nonnull1..10000 rows, whole sequence plus every4800record validation beforeI/O includinglast4097/invalidcontrol; byteLength4800xcount withoutwhole48Mbuffer. Fresh callerownedchannel position0 size0, shortwrites loop/zero-negativefail, perrecordSHA, force(true) afterallrecordbytes, no implicitclose. Callerdata preserved, toString countonly. Independent peroffsetgoldens andseparateSHA. Synthetictempfiles only; parallelTestunbounded invokeAll/get andExecutorclose violates finitequality, BUG2681 beforefix; completeTest5 must befinitebeforeadmission."
+    },
+    {
+      "id": "P00806-PG03",
+      "methods": "LargeResultReader.readScenario/verifyDirectory; ScenarioRecordReader.read/scan",
+      "testIds": [
+        "PT-SCN-008-RD03/RD04/RD05"
+      ],
+      "expected": "Realretainedroot/readiness/accessexternalHOLD. WebLargeResultReader validates root/date ownergroupmode andheldready regular/nlink/size before+aftercallerownedchannel; no pathescapes/mutation. PureRecordReader borrowedfreshchannel pos0, first4800boundedscan exactEOF/hash BEFOREdecode, rewindonce andrescan+rehash bytesactuallydecoded, whole sequence thenimmutablelist. Neverreturnpartial; malformedreserved/required/UTF8/NFC/sequence withvalidhash rejected, badhash precedesdecode, null/nonfresh/closed/zeroIO/seekfail/mutatebetweenpasses fail andneverclosecallerchannel. FullRecordReader4 uses exclusively JUnittempSynthetic48Mfixtures andhandwrittenUI234bytes; effects disclosed, not nofileactions."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioDetailDeliveryTest.java",
+      "sha256": "59127e08ee2dc63a31dbd13070add804f721caf9bebf2d5b3934868448767fd5",
+      "tests": 3,
+      "wholeBodyReviewed": true,
+      "methodIndexReviewed": true,
+      "status": "ADMITTED_WHOLE_MEMORY_OR_SYNTHETIC_TEMP_HOST_FILES_ONLY_PENDING_QUALIFICATION",
+      "testOwnedTempFiles": false,
+      "finiteWorkerGap": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStreamTest.java",
+      "sha256": "dab5445d8223665deb56954dc6b27e75898b06d34cea9e63da478c2e7ee2cd7a",
+      "tests": 5,
+      "wholeBodyReviewed": true,
+      "methodIndexReviewed": true,
+      "status": "ADMITTED_WHOLE_MEMORY_OR_SYNTHETIC_TEMP_HOST_FILES_ONLY_PENDING_QUALIFICATION",
+      "testOwnedTempFiles": true,
+      "finiteWorkerGap": true
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/storage/LargeResultReaderTest.java",
+      "sha256": "efe3520393ad34c2469c805136754e8153ecfb9b4618fb5a09bde9d2186bbf25",
+      "tests": 5,
+      "wholeBodyReviewed": false,
+      "methodIndexReviewed": true,
+      "status": "HOLD_WHOLE_NATIVE_ROOT_FIXTURE_NO_EXTRACTION",
+      "testOwnedTempFiles": true,
+      "finiteWorkerGap": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/storage/ScenarioRecordReaderTest.java",
+      "sha256": "34211a24be4ae7bc625c3ee4270a0cc359daf2ae6aea0627deaf39c1d9fe0626",
+      "tests": 4,
+      "wholeBodyReviewed": true,
+      "methodIndexReviewed": true,
+      "status": "ADMITTED_WHOLE_MEMORY_OR_SYNTHETIC_TEMP_HOST_FILES_ONLY_PENDING_QUALIFICATION",
+      "testOwnedTempFiles": true,
+      "finiteWorkerGap": false
+    }
+  ],
+  "safeFixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/storage/ScenarioFileFixture.java",
+    "sha256": "bab03337af5d15eb5b1ec8855dac3816043a3b22788ed152a5a34fc85ea59b80",
+    "wholeBodyReviewed": true,
+    "independentManualOffsets": true,
+    "productionEncodeUsedForExpected": false,
+    "testOwnTemporary48MFilesWritesCleanupDisclosed": true,
+    "existingDisclosure": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15889-reader-temporary-fixture-disclosure-erratum-v1/manifest.json",
+      "sha256": "4f9439fb32a5f5876e07bbe731a4864e3c9b46da3e946b18428b46df2f54773f"
+    }
+  },
+  "newFiniteWorkerFinding": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26890-scenario-reader-contract-v1/stream-worker-before.json",
+    "sha256": "b4555a463e607412e550166013fe3b04b37664a4fedaed110157b436dc65e686"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P008-06/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_FINITE_WORKER_CURRENT_DEPENDENCIES_NATIVE_RETAINEDROOT_EXIT",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1384_scenario_reader_contract_audit.py",
+    "sha256": "9d3c4ee32d649b1d898ccb626df5337297e4e7d5ba047b2a386000854d6e1331"
+  }
+}

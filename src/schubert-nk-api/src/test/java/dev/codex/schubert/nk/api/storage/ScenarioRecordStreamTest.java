@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -60,7 +61,8 @@ class ScenarioRecordStreamTest {
   @Test
   void w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels() throws Exception {
     var prepared = new ScenarioRecordStream(records(3));
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var tasks = new ArrayList<java.util.concurrent.Callable<String>>();
       for (int i = 0; i < 16; i++) {
         Path path = root.resolve("parallel-" + i);
@@ -75,11 +77,14 @@ class ScenarioRecordStreamTest {
             });
       }
       String first = null;
-      for (var result : pool.invokeAll(tasks)) {
-        String actual = result.get();
+      for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS)) {
+        String actual = result.get(10, TimeUnit.SECONDS);
         if (first == null) first = actual;
         assertEquals(first, actual);
       }
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS), "record stream executor terminated");
     }
   }
 
