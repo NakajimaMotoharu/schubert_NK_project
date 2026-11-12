@@ -19,6 +19,8 @@ def prepared(c, config):
     h.require(m['physicalClassHashes'] == h.class_hashes(work / 'component') == h.class_hashes(work / 'target/classes'), 'whole Main physical bytes unchanged')
     h.require(m['testClassHashes'] == h.class_hashes(work / 'test-classes'), 'whole Test bytes unchanged')
     h.require(all(h.digest(Path(p)) == v for p, v in m['dependencies'].items()), 'prepared SDK bytes changed')
+    import pgpt_guard_signature
+    pgpt_guard_signature.validate_prepared(c, m, work)
     return p, m, work
 
 
@@ -38,7 +40,8 @@ def static(c, config, extra):
     listing.write_text(''.join(str(h.R / p) + '\n' for p in paths))
     sg = h.TC / 'static-gates-20261015'
     libs = [sg / 'record-fix-v1/pmd-record-1298.jar', *sorted((sg / 'pmd-bin-7.28.0/lib').glob('*.jar'))]
-    stages = {'pmd': h.steps.step('pmd', [str(h.JAVA), '-cp', ':'.join(map(str, libs)), 'net.sourceforge.pmd.cli.PmdCli', 'check', '--file-list', str(listing), '--rulesets', str(h.R / 'tools/quality/static/pmd.xml'), '--use-version', 'java-25', '--aux-classpath', str(h.TC / 'jdk-25.0.4/lib/jrt-fs.jar') + ':' + str(work / 'target/classes') + ':' + ':'.join(m['dependencies']), '--no-cache', '--format', 'xml', '--report-file', str(out / 'pmd.xml')], h.R)}
+    compile_only = [m['guardSignature']['compileCarrier']['path']] if m.get('guardSignature') is not None else []
+    stages = {'pmd': h.steps.step('pmd', [str(h.JAVA), '-cp', ':'.join(map(str, libs)), 'net.sourceforge.pmd.cli.PmdCli', 'check', '--file-list', str(listing), '--rulesets', str(h.R / 'tools/quality/static/pmd.xml'), '--use-version', 'java-25', '--aux-classpath', str(h.TC / 'jdk-25.0.4/lib/jrt-fs.jar') + ':' + str(work / 'target/classes') + ':' + ':'.join([*m['dependencies'], *compile_only]), '--no-cache', '--format', 'xml', '--report-file', str(out / 'pmd.xml')], h.R)}
     stages['checkstyle'] = h.steps.step('checkstyle', [str(h.JAVA), '-jar', str(sg / 'checkstyle-14.3.0-all.jar'), '-c', str(h.R / 'tools/quality/static/checkstyle.xml'), '-f', 'xml', '-o', str(out / 'checkstyle.xml'), '@' + str(listing)], h.R)
     stages['format'] = h.steps.step('format', [str(h.JAVA), '-jar', str(h.TC / 'google-java-format-1.36.1-all-deps.jar'), '--skip-reflowing-long-strings', '--dry-run', '--set-exit-if-changed', *[str(h.R / p) for p in paths]], h.R)
     stages['spotbugs'] = h.steps.step('spotbugs', [str(h.MAVEN), '-o', '--no-transfer-progress', '-Dmaven.repo.local=' + str(h.TC / 'm2/repository'), '-Dmaven.test.skip=true', 'com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check'], work)
@@ -125,6 +128,7 @@ def run(c, config, extra):
     runtime = ':'.join([str(work / 'target/classes'), str(work / 'test-classes'), *m['dependencies']])
     cmd = [str(h.JAVA), '-Djava.io.tmpdir=' + str(unit / 'tmp'), '-Dfile.encoding=UTF-8', '-Duser.timezone=Asia/Tokyo', '-Djunit.jupiter.execution.parallel.enabled=false', '-Djunit.jupiter.extensions.autodetection.enabled=false', *properties, '-javaagent:' + str(agent) + '=destfile=' + str(unit / 'jacoco.exec') + ',sessionid=' + c['id'] + ',append=false', '-Xlog:class+init=info:file=' + str(unit / 'class-init.log'), '-jar', str(h.CONSOLE), 'execute', '--disable-banner', '--class-path', runtime, *[arg for name in m['selectedClasses'] for arg in ['--select-class', name]], '--reports-dir', str(unit / 'xml'), '--fail-if-no-tests', '--details', 'summary']
     begin = dict(source=source, productionCoreMain=c['productionCoreMain'], config=h.ref(config), prepare=h.ref(pp), preflight=h.ref(pf), inputHashes=m['inputHashes'], metadataPins=pins, dependencies=m['dependencies'], physicalClassHashes=m['physicalClassHashes'], testClassHashes=m['testClassHashes'], expectedCases=m['expectedCases'], selectedClasses=m['selectedClasses'], session=c['id'], expectedTests=c['expectedTests'], oldExecUnion=False, coverageExclusions=[], backendOrHeldClassActions=0)
+    begin['guardSignature'] = m.get('guardSignature')
     h.write_json(out / 'begin.json', begin)
     stages = {'unit': h.steps.step('unit', cmd, unit)}
     for label, args in [('coverage', ['report', str(unit / 'jacoco.exec'), '--classfiles', str(work / 'component'), '--xml', str(unit / 'coverage.xml')]), ('classinfo', ['classinfo', str(work / 'component')]), ('execinfo', ['execinfo', str(unit / 'jacoco.exec')])]:

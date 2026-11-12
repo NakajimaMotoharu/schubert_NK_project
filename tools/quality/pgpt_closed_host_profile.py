@@ -118,6 +118,8 @@ def validate_syntax(c):
         path = relative_name(item['path'])
         require(path.startswith('evidence/') and Path(path).suffix in ['.md', '.json'] and '/private' not in path.lower(), 'public proof only')
     validate_optional_capabilities(c)
+    import pgpt_guard_signature
+    pgpt_guard_signature.syntax(c)
     require(set(c.get('slots', {})) == {'prestyle', 'prepare', 'static', 'preflight', 'unit', 'post'}, 'six explicit immutable evidence slots')
     require(len(set(c['slots'].values())) == 6, 'distinct evidence slots')
     for p in c['slots'].values():
@@ -145,7 +147,9 @@ def validate_optional_capabilities(c):
     require(isinstance(forbidden, list) and len(forbidden) == len(set(forbidden)), 'unique forbidden initialization set')
     for name in forbidden:
         relative_name(name)
-        require(name + '.class' in c['physicalClasses'], 'forbidden initialization in full physical scope')
+        import pgpt_guard_signature as guard
+        signature_fence = c.get('reviewedGuardSignature') is not None and name in guard.FORBIDDEN_INIT
+        require(name + '.class' in c['physicalClasses'] or signature_fence, 'forbidden initialization in full physical scope or exact signature fence')
     for item in reflection:
         require(item['targetClass'].split('$')[0].replace('.', '/') in forbidden, 'JDBC parent must not initialize')
     maps = c.get('standardCompilerSwitchMaps', [])
@@ -161,7 +165,8 @@ def validate_optional_capabilities(c):
 
 
 def input_paths(c):
-    return c['mainSources'] + [t['path'] for t in c['testSources']] + [r['path'] for r in c.get('resources', [])] + c['pomInputs'] + QUALITY_INPUTS
+    import pgpt_guard_signature as guard
+    return c['mainSources'] + [t['path'] for t in c['testSources']] + [r['path'] for r in c.get('resources', [])] + c['pomInputs'] + QUALITY_INPUTS + ([guard.SOURCE] if c.get('reviewedGuardSignature') is not None else [])
 
 
 def validate_owners(c, owners):
@@ -169,7 +174,7 @@ def validate_owners(c, owners):
 
 
 def tool_hashes():
-    paths = ['tools/quality/' + n + '.py' for n in ['pgpt_closed_host_profile', 'pgpt_closed_host_stages', 'pgpt_closed_host_post']]
+    paths = ['tools/quality/' + n + '.py' for n in ['pgpt_closed_host_profile', 'pgpt_closed_host_stages', 'pgpt_closed_host_post', 'pgpt_guard_signature']]
     return {p: digest(R / p) for p in paths}
 
 
@@ -201,6 +206,8 @@ def checked_inputs(c):
             if path == item['testPath']:
                 text = text.replace(item['sourceAnchor'], '', 1)
         require(not any(x in text for x in [*DENIED, '@BeforeAll', '@TestFactory', '@ParameterizedTest', 'ProcessBuilder', 'DriverManager', 'DataSource', 'Class.forName', 'java.lang.foreign', 'java.net.Socket']), 'outside closed ordinary host scope')
+    import pgpt_guard_signature
+    pgpt_guard_signature.checked(c)
     return hashes
 
 
@@ -276,6 +283,8 @@ def prepare(c, config):
     work = RUNS / c['privateDirs']['prepare']
     require(not work.exists(), 'fresh prepare only')
     out = environment(c, 'prepare'); work.mkdir(); (work / 'test-classes').mkdir()
+    import pgpt_guard_signature as guard
+    signature = guard.create_compile_carrier(c, work)
     for p in c['mainSources']:
         to = work / 'src/main/java' / p.split('/src/main/java/')[1]
         to.parent.mkdir(parents=True, exist_ok=True); to.write_bytes((R / p).read_bytes())
@@ -296,17 +305,23 @@ def prepare(c, config):
     for i, jar in enumerate(c.get('sdkJars', [])):
         d = add(ds, 'dependency')
         for n, v in [('groupId', 'dev.codex.schubert.quality'), ('artifactId', f'closed-sdk-{i}'), ('version', '1'), ('scope', 'system'), ('systemPath', str(TC / 'm2/repository' / jar))]: add(d, n, v)
+    if signature is not None:
+        d = add(ds, 'dependency')
+        for n, v in [('groupId', 'dev.codex.schubert.quality'), ('artifactId', 'real-guard-compile-symbols'), ('version', '1'), ('scope', 'system'), ('systemPath', signature['compileCarrier']['path'])]: add(d, n, v)
     add(add(root, 'build'), 'plugins').append(copy.deepcopy(compiler))
     ET.ElementTree(root).write(work / 'pom.xml', encoding='unicode', xml_declaration=True)
     stages = {'nullaway-compile': steps.step('nullaway-compile', [str(MAVEN), '-o', '--no-transfer-progress', '-Dmaven.repo.local=' + str(TC / 'm2/repository'), '-Dmaven.test.skip=true', 'compile'], work)}
     require(stages['nullaway-compile']['actualExit'] == 0 and not stages['nullaway-compile']['timedOut'], 'Main compile failed; no retry')
-    stages['test-compile'] = steps.step('test-compile', [str(JAVAC), '--release', '25', '-g', '-proc:none', '-implicit:none', '-encoding', 'UTF-8', '-Xlint:all', '-Werror', '-cp', str(work / 'target/classes') + ':' + ':'.join(deps), '-d', str(work / 'test-classes'), *[str(R / t['path']) for t in c['testSources']]], R)
+    guard.copy_runtime_interface(signature, work)
+    compile_only = [signature['compileCarrier']['path']] if signature is not None else []
+    stages['test-compile'] = steps.step('test-compile', [str(JAVAC), '--release', '25', '-g', '-proc:none', '-implicit:none', '-encoding', 'UTF-8', '-Xlint:all', '-Werror', '-cp', str(work / 'target/classes') + ':' + ':'.join([*deps, *compile_only]), '-d', str(work / 'test-classes'), *[str(R / t['path']) for t in c['testSources']]], R)
     require(stages['test-compile']['actualExit'] == 0 and not stages['test-compile']['timedOut'], 'whole Test compile failed; no retry')
     physical = class_hashes(work / 'target/classes')
     require(set(physical) == set(c['physicalClasses']), 'full physical class universe differs')
     import shutil
     shutil.copytree(work / 'target/classes', work / 'component')
     m = dict(actualExit=0, config=ref(config), inputHashes=hashes, dependencies=deps, toolHashes=tool_hashes(), physicalClassHashes=physical, testClassHashes=class_hashes(work / 'test-classes'), expectedCases=cases, selectedClasses=sorted({x['classname'] for x in cases}), stages=stages, preliminaryStyle=ref(pre), rootCompilerSha256=hashlib.sha256(ET.tostring(compiler)).hexdigest(), subsetPomSha256=digest(work / 'pom.xml'), productTestsExecuted=0, MainCompiled=True, wholeProjectMainRebuilt=False, verifier=ref(Path(__file__).resolve()))
+    m.update(guardSignature=signature, freshMainSourceCount=len(c['mainSources']), reusedRuntimeSignatureClassCount=1 if signature is not None else 0)
     write_json(out / 'manifest.json', m)
     return m
 

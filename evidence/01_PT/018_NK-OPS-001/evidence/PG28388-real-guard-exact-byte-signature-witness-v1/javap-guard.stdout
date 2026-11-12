@@ -1,0 +1,34 @@
+Compiled from "MaintenanceOwnerFrame.java"
+public interface dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame$Guard {
+  public abstract long remainingNanos() throws java.io.IOException;
+
+  public default void check() throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: invokeinterface #3,  1            // InterfaceMethod remainingNanos:()J
+         6: lconst_0
+         7: lcmp
+         8: ifgt          15
+        11: invokestatic  #9                  // Method dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.unavailable:()Ljava/io/IOException;
+        14: athrow
+        15: return
+
+  public default int queryTimeoutSeconds() throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: invokeinterface #3,  1            // InterfaceMethod remainingNanos:()J
+         6: lstore_1
+         7: lload_1
+         8: ldc2_w        #13                 // long 1000000000l
+        11: lcmp
+        12: ifge          19
+        15: invokestatic  #9                  // Method dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.unavailable:()Ljava/io/IOException;
+        18: athrow
+        19: ldc2_w        #15                 // long 5l
+        22: lload_1
+        23: ldc2_w        #13                 // long 1000000000l
+        26: ldiv
+        27: invokestatic  #17                 // Method java/lang/Math.min:(JJ)J
+        30: l2i
+        31: ireturn
+}

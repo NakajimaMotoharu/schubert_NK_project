@@ -87,6 +87,31 @@ def verify(c, config, source):
     exec(compile(ast.Module(body=nodes, type_ignores=[]), str(helper), 'exec'), namespace)
     ids = {n[:-6]: namespace['crc64']((work / 'component' / n).read_bytes()) for n in physical}
     method_counts = {n[:-6]: namespace['code_count']((work / 'component' / n).read_bytes()) for n in physical}
+    signature = b.get('guardSignature')
+    if c.get('reviewedGuardSignature') is not None:
+        # Independent byte/ZIP/command checks; do not call the producer's cache reader.
+        import zipfile
+        outer_name = 'dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame'
+        guard_name = outer_name + '$Guard'
+        expected_hashes = {
+            outer_name: 'cf12980ffcb4982da0b9cd5425730825a5cd8762bfdcdc581aa3cf6ab18b46ea',
+            guard_name: '53f2b39f586ec6ee172b0e3009d46638a60ca8f1ce8ad442f497affa6cbd869b',
+        }
+        require(signature == prep.get('guardSignature') and isinstance(signature, dict), 'same signature receipt')
+        carrier = work / 'guard-compile-signatures.jar'
+        require(signature['compileCarrier'] == dict(path=str(carrier), sha256=sha(carrier)), 'own exact compiler carrier')
+        with zipfile.ZipFile(carrier) as archive:
+            require(len(archive.namelist()) == 2 and set(archive.namelist()) == {n + '.class' for n in expected_hashes}, 'two compiler symbols only')
+            require(all(hashlib.sha256(archive.read(n + '.class')).hexdigest() == value for n, value in expected_hashes.items()), 'compiler symbol bytes')
+        require(physical[guard_name + '.class'] == expected_hashes[guard_name] and outer_name + '.class' not in physical, 'runtime/report interface only')
+        require(ids[guard_name] == 'b5b153f7fd9d91fa', 'real Guard positive witness CRC')
+        runtime_paths = cmd[cmd.index('--class-path') + 1].split(':')
+        require(runtime_paths == [str(work / 'target/classes'), str(work / 'test-classes'), *b['dependencies']] and
+                str(carrier) not in runtime_paths, 'exact runtime paths, compiler carrier absent')
+        required_forbidden = {outer_name, 'dev/codex/schubert/nk/bootstrap/ChildStartupContext', 'dev/codex/schubert/nk/storage/LinuxMonotonicClock'}
+        require(required_forbidden <= set(c.get('forbiddenInitializedClasses', [])), 'no outer/native initialization permission')
+    else:
+        require(signature is None, 'no implicit signature component')
     no_code = {n for n, value in method_counts.items() if value == 0}
     info = {name: dict(crc=crc, instructions=int(inst)) for inst, branch, line, method, complexity, crc, name in re.findall(r'^\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+class 0x([0-9a-f]{16}) (\S+)$', (artifact / 'classinfo.stdout').read_text(), re.M)}
     analyzed = {n for n, x in info.items() if x['instructions'] > 0}
@@ -109,6 +134,8 @@ def verify(c, config, source):
     probes = {n: (crc, int(hit), int(total)) for crc, hit, total, n in re.findall(r'^([0-9a-f]{16})\s+(\d+) of\s+(\d+)\s+(\S+)$', ex, re.M)}
     test_names = {n[:-6] for n in b['testClassHashes']}
     observed = {n for n in probes if n.startswith('dev/codex/schubert/nk/') and n not in test_names}
+    if signature is not None:
+        require(guard_name in observed, 'fresh real Guard execution required')
     require(observed <= analyzed | set(maps) and all(probes[n][0] == ids[n] and probes[n][1] > 0 for n in observed), 'positive same-Main CRC only')
     init = {n for n in re.findall(r"Initializing '([^']+)'", (unit / 'class-init.log').read_text()) if n.startswith('dev/codex/schubert/nk/') and not any(n == t or n.startswith(t + '$') for t in test_names)}
     require(not any(n.rpartition('/')[2].split('$')[0] in policy.DENIED for n in init), 'held class initialized')
@@ -145,6 +172,7 @@ def verify(c, config, source):
             shutil.copyfile(path, out / name); files[name] = sha(out / name)
     result = dict(actualExit=0, source=source, productionCoreMain=b['productionCoreMain'], config=policy.ref(config), run=c['id'], tests=len(actual), newTestDefinitions=c.get('newTestDefinitions', 0), physicalClasses=len(physical), positiveMainCrc=len(observed), coverage=coverage, targetCounters=targets, completeSourceComponentCounters=component, completeSourceComponentFour100=component100, wholeScopeFour100=not uncovered, uncoveredFullSourceClasses=uncovered, naturalNoCodeClasses=sorted(no_code), naturalNoBranchClasses=sorted(n for n, row in targets.items() if 'BRANCH' not in row), classIds=ids, actualJvmCodeMethodCounts=method_counts, hiddenJvmAdapters=bindings, manualCoverageExclusions=[], oldExecCombined=False, preflight=policy.ref(pf), inputHashes=b['inputHashes'], dependencies=b['dependencies'], environment=env, productTestsExecuted=len(actual), actualBackendNativeFsRootOrHeldClassActions=0, formalUpdated=False, whole451Accepted=False, newAcceptance=0, effortRate=None, files=files, verifier=policy.ref(Path(__file__).resolve()))
     result.update(defaultStandardFilteredSwitchMaps=map_evidence, forbiddenInitializedClasses=c.get('forbiddenInitializedClasses', []), forbiddenInitializedClassesObserved=[], reviewedReflection=c.get('reviewedReflection', []))
+    result['guardSignature'] = signature
     policy.write_json(out / 'manifest.json', result)
     return result
 
