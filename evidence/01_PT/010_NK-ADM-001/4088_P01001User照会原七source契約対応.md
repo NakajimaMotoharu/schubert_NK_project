@@ -13,3 +13,6 @@ NK-ADM-001。対象source/hash、承認設計commit/hash、独立期待値/TestI
 P01001 own7全文とSS312/323324332351のADMIN/同snapshot SQL/50件/前方literal検索/原値canonical/現在認証再検査/凍結再送/監査を独立期待値ADM001～007/040～054/CORE4/VAL4/SQL9へ対応。原DB/actual4 wholefixture四つHOLD、既存追加pure17は全文確認し現依存再資格待ち。BUG2689 UserQueryReplay五catch分類欠落を修正前27034起票、YKT2359全17対象へ追加。原/1準備のみ、原/2全品質/終了依存未受入。
 
 実行: `python3 -B evidence/01_PT/018_NK-OPS-001/input/1443_user_query_contract_audit.py` metadata終了0。新規製品PT/coverageなし。原/1の準備だけ、原/2・451・元190未受入。独立期待値は公開設計の固定境界・順序・後条件に基づき、production methodで生成しない。正式1964PT/53scope・工数null。
+
+
+source限定PG: eac757a58af15160001cd5909a5b6e5168f1848e、[27046](../018_NK-OPS-001/evidence/PG27046-user-query-fatal-source-join-v1/manifest.json)。既fatalport五行のみ/元source逆変換同一/27042 formatCS0、compile/runtime/PT/coverage未実施、BUG2689/YKT2359全17runtimeOPEN。
