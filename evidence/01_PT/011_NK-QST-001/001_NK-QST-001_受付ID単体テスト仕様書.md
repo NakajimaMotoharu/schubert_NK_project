@@ -21,3 +21,5 @@ PG-D-188。RD QST002/ASY001、UI224§3/236、SS312§7/331§6.1。対象QuestionR
 
 
 WBS-P011-01公開source契約/独立期待値/TestIDは[4095_P01101質問受付ID入力原三source契約対応.md](4095_P01101質問受付ID入力原三source契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+[4096通常PT](4096_P01101質問入力原十六件と独立RID009含む全一五九通常PT仕様.md): source1e433/Main1cc、27170/27174全159成功/全191scope四100、元16と新RID009一件・第三KeyRingHOLD/原/2/451/正式未受入。
