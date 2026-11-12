@@ -93,6 +93,7 @@ public final class LogReplayService {
         | PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -116,6 +117,7 @@ public final class LogReplayService {
         | PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -169,6 +171,7 @@ public final class LogReplayService {
         | PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -198,6 +201,7 @@ public final class LogReplayService {
     } catch (PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -217,6 +221,7 @@ public final class LogReplayService {
     } catch (PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
