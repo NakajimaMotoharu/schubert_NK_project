@@ -1,0 +1,197 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T21:02:37.298532+09:00",
+  "source": "3c9e4913e1312b1410135fbb10ba7a9f8bdc639b",
+  "productionCoreMain": "3c9e4913e1312b1410135fbb10ba7a9f8bdc639b",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/error/ProblemViewFactory.java": "d3ebd2358380c5a80078f0660bb9b178bb5e339ffdc4dfe52122ff8ba0336b4e",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/TargetOperationInput.java": "91e810d742b97b6607a1fa7939b485ea18eca6703e2039b961ced106f8c2af48",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/PageViewModel.java": "29de4e2f08b7d0ca5bcb61952e3e50b6d7a501846b61da67e02e3f7e882a6593",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09",
+    "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd",
+    "src/schubert-nk-web/src/main/resources/templates/fragments/log-pagination.html": "4b3908ed49684bf3acb35457656802e9e2e1a8dac5a84073b2f213413c543ee2",
+    "src/schubert-nk-web/src/main/resources/templates/fragments/pagination.html": "ddf3ccc9a1f88adf5bd61c8c9aa8928022f97c6e8f314c48941aad267bd5cb80"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/222_画面共通・レイアウト設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "8a52f0de895933c5696d7d5d385287729480a40384cd1855ea99d3d9a914763c"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/224_質問・通知画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f4e20115d1438064729150d6a717bdb71a477351efa718e4f6c22b52d36aa4c5"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "8f9abda07bc93262c264eae723c74245165bf0806b273b0d007e9fa46f37fa46"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01507-PG01",
+      "methods": "ProblemViewFactory.create",
+      "testIds": [
+        "PT-WEB-148..157",
+        "ErrorControllerPortTest8"
+      ],
+      "expected": "rawStatusnull404; exactInteger400/401/403/404/405/409/416/429/503 mapfixedenum, foreignobject andallotherints503. NevertoString/reflectforeignException/message/URI/query, serverUUID/topbardisplayonlypassedtoErrorVMconstructor. HTTPmethod/ERRORdispatch ownershipbelongscontroller, factoryalone cannotcertify403/404/503HTTP/DOM. Purestatus has noexternalcaughtcatalog so nofatalguard added."
+    },
+    {
+      "id": "P01507-PG02",
+      "methods": "TargetOperationInput.bind/requireValid withCancelForm/QuestionDeleteForm sharedwrappers",
+      "testIds": [
+        "PT-TARGET001..008"
+      ],
+      "expected": "OnlyCANCEL/DELETEinternal selector; fourrequiredfields exactlyonestring/non-null, unknownkeys/nullkey fixedformerror except_csrftransport. IDASCII1..12 digits/positive/pathidexact, confirmationexacttrue, UUIDlowercanonical8-4-4-4-12, no trimming/coercion. Missing/null/empty/multiple/nullelement invalidfixedJapaneseissues; no malformedtoRequest. Immutableissues/values snapshot, onlydisplayfields/tokenvalue(noauthproof) retained. Independent48byte wire expected literal000000000042+publicUUID forNTCREQ01/QDLREQ01; actualHMAC/consume/APIowner not testedby form."
+    },
+    {
+      "id": "P01507-PG03",
+      "methods": "PageViewModel.from/getters/previous/next",
+      "testIds": [
+        "PT-WEB-174..181"
+      ],
+      "expected": "Fixed50/100; literal0/1/full/firstmiddlelast/max999999page; page/count/pages/first/last consistencyreject/nocorrectivefallback; maxcount49999950/99999900. Emptyfirstlast0/pages1, prev/nextOptionalIntabsenceends. Non-nullclosedreadonly10JavaBeanproperties; REDACTEDtoString. Whole8sourcefullreviewed including100parallel/privatepool/Future10/finallyawait10 andsyntheticThymeleafDOM/noDB/native/actual4. ExistingPG24370actual64 preserved noreconfirmationrun."
+    },
+    {
+      "id": "P01507-PG04",
+      "methods": "TopBarViewModel/layout.html/pagination.html/log-pagination.html",
+      "testIds": [
+        "PT-WEB-142..147",
+        "PT-SCR-028",
+        "PT-SCR-086"
+      ],
+      "expected": "Closedprincipal→displayusername/role/brand schubertNK; retainnoauthobject, nullreject/REDACTED. th:text escapesbrand/user/role/title, fixedmenu/notifications links+POST/logout, generatedCSRFresolvedbyapprovedviewcontext. Pagination onlynonempty results, previous/next optionalhref(typedparentbuilt)/otherwisetext, before-next100label, exactrange/count, top-bottomlabel/classes. Neverth:utext/directstoragepath/session/context. Resourcecontractread alone notexecutedDOM/browser/HTTP/XSS proof; allendingdependencies open."
+    }
+  ],
+  "oldImmutableProofMatches": [
+    {
+      "kind": "PAGE",
+      "original": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24370-pure-view-seven-bounded-sixtyfour-independent-v1/manifest.json",
+        "sha256": "bb83280e8349a3049e2ce6956d01d6bbb2b59a3eae2945e73a8962a40b633ec5"
+      },
+      "originalSource": "ed2e968a8381c491ba8df6986e59d48afb0b9c0f",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "tests": 64,
+      "matchedExistingWholeTestHashes": {
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchResultsViewModelTest.java": "09a9aead7e61cd9112d24058fccf4840ce7944f3df96433786092a3d571362f3",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchViewModelTest.java": "d6fd5dd2128ff0990e687d6caec8eb10d5e08f50203334943fbfb0b162035d44",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyViewModelTest.java": "c213d7be28e0d5a1eb45f77481f7bc739e6baab5159fade863e3bb9adea84a10",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/PageViewModelTest.java": "425e4c1aceaf3b53e80df9550eba7b275ada1e42b89328eaec7035b6b7fdcea1",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailViewModelTest.java": "2f36c481df8f9461b53f77e344342450392f3de05df7359cfcf7923910cb6820",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioHierarchyViewModelTest.java": "90988ece7c893f667a33a1dba475bbf188b85a30ccbd5cf137c0f128ecc87293",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchResultsViewModelTest.java": "cbea43c163c40254cf55d8154f386da256fa4cd3093b47e1469fbee43f4ea9ee",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/GameListViewModel.java": "4a32df1a4113ad4db863f03c2a48cc97515ec565bfe42c6dd8b4368f97037de4",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/LogSearchResultsViewModel.java": "3785d2e215d44597db335dba052ef19a5f44e970c4c4d69eb8fbe2163363761f",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/LogSearchViewModel.java": "25ad7a58607a98cea252e8eea8e40eb5d15285d9487b0990b0933b1fca0516da",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MusicCategoryViewModel.java": "c7fd573ce7401edb3c5d9fdf4390199554166f342cb5e7ef7da85cf220fc2e31",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MusicSectionViewModel.java": "f6154b043fc6bf9d370ce1e6931d427ff0ff673f298e040f8e1f69077710c654",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/PageViewModel.java": "29de4e2f08b7d0ca5bcb61952e3e50b6d7a501846b61da67e02e3f7e882a6593",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/RouteListViewModel.java": "e2b1116b9e88e2496e7d5978d9e6963f6e40316347f1d19c8a44341b4a38daed",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ScenarioDetailViewModel.java": "1930fa8d05d6a5af4620bf044dd870185809a81e4c52f61534a3473e88ebc55e",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ScenarioFileListViewModel.java": "90cf19702c1ba8878ff6406d8dc32eeddff04f8bda1e8ffea226d21826dd6c9e",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ScenarioSearchResultsViewModel.java": "fcb24eb77942508626c84db02af9fd5e688edd67002af8c7e548d9e478997dd1",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09",
+        "evidence/01_PT/015_NK-WEB-001/input/063_pure_view_seven_qualifier.py": "d52a296b3ba91f449c30f6c7455858ea635226dc2bf6c21f01ae688c9c2fb033",
+        "evidence/01_PT/015_NK-WEB-001/input/062_pure_view_seven_scope.json": "3a14ebaf7028a1201d2b9e3051af2f250e512715c8520b08341fe9456d2cd23a"
+      },
+      "actualTestsRerun": 0,
+      "oldScopeOnly": true,
+      "strictNonemptyFour100GateExit": 1,
+      "noWholeWebJarReadOrHash": true,
+      "currentProtocolChangedSourceNotTransferred": true
+    },
+    {
+      "kind": "FORM",
+      "original": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24396-web-six-form-bounded-fiftysix-independent-v1/manifest.json",
+        "sha256": "ea97726181dbdf1c210d2316c70467ad0765b7b8ef011ee10d01c5758b013d96"
+      },
+      "originalSource": "2dd95b08fd3d03307a4a3d26ba7eeef824b640c3",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "tests": 56,
+      "matchedExistingWholeTestHashes": {
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java": "631f6ed36f7bd9445df72efdab0635fd8f67b851ed054213ae69cf434d6986be",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java": "3470a69bb98ee7825309ec48cb30185614c90acbb4e3af35765b079c2563fdff",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/ScenarioSearchFormTest.java": "3665616b51d865a781784277df0a842e0d34108f45244be6f4f5db5df34afa29",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/TargetOperationFormTest.java": "da3bfb044a78d2f40dfe262259acabe3619e99d02916adfb8a21c0822feaefd2",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserCreateFormTest.java": "0eb7b3e9f537636c45b00f21bed44d8875489cd0cb7cdc885ca5516d0dbff323",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java": "a98aec86a57e21885a80cf8443faba5130fa9e16c481c45b916df987585af304",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/ScenarioSearchForm.java": "ce70478c3c11c49ae841e849a6e9d81064cbda1f590c956d3cfe48f751c2ac78",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/LogSearchForm.java": "d3022a7ea6ac2e00f14d5719f9d9b00bce3b509f4dac7d66091444d818d8c642",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSubmitForm.java": "725f0fbe38aaec853e50da6eb5ea060eb0a8fe7e4a18faa5ddb9febce3f03b6f",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserCreateForm.java": "5b599ddb57dfd4ba0b8a89547567b1d48bedb5d6ac09439c5dc0abd6cda25b86",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/TargetOperationInput.java": "91e810d742b97b6607a1fa7939b485ea18eca6703e2039b961ced106f8c2af48",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/CancelForm.java": "c73d6d50c61b068b632c452f4af2ac570f1ba0bcbc0809d31f051efc05a51284",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionDeleteForm.java": "0655e04b7cd37e9d9e3570db7386b92547e4c38cafc3501615a680233faab7d0",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserMutationInput.java": "a5532415afe5314c6578ff9cbe6362fd9cb39ab6eb13d043c5153adeb4703d7c",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserStatusForm.java": "d92c506396ad2fc1084a2cf87c5b688d9e62be60875e076f52d72a3ded9e7081",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserRoleForm.java": "5d915e86e749f1d932bf4f1c8b37b1b787162b70cc6207858b09f99365f607ec",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/PasswordResetForm.java": "5f3efc52bcae063faec1531fcd9d1949ad576f5355f327001bc5dd888092cd1d",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserUnlockForm.java": "721ff28339f4e5684a20781491dbe74802d5ef092ad32a44bd23f7841a38493c",
+        "evidence/01_PT/015_NK-WEB-001/input/068_web_six_form_qualifier.py": "af8ce81b12e4f34a6003ccbc1697895c39485cd04f2b534cd04960a61bb1bc67",
+        "evidence/01_PT/015_NK-WEB-001/input/067_web_six_form_scope.json": "6673d6aab009494ddede76f685bbba9d4d2b74aed0454145eab86098c873c265"
+      },
+      "actualTestsRerun": 0,
+      "oldScopeOnly": true,
+      "strictNonemptyFour100GateExit": 1,
+      "noWholeWebJarReadOrHash": true,
+      "currentProtocolChangedSourceNotTransferred": true
+    },
+    {
+      "kind": "ERROR_FACTORY",
+      "original": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG19368-web-error-controller-eight-v1/manifest.json",
+        "sha256": "02d1c9ccf6351970fdb006cd7ba342225b94bc39fa32b1815ab0ac05bb794f75"
+      },
+      "originalSource": "01a067bcde4429a6a3c08096830403b3e78b66c0",
+      "originalMain": "7d2c2fb64711531db8898d49b4b377670b58ff87",
+      "tests": 8,
+      "inputMatch": {
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ErrorController.java": true,
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java": true
+      },
+      "oldScopeOnly": true,
+      "actualTestsRerun": 0
+    }
+  ],
+  "wholeSafeCandidateReview": [
+    "PageViewModelTest8",
+    "TargetOperationFormTest8"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P015-07/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_TEMPLATE_HTTP_AND_SAME_SOURCE_ENDING_REMAIN",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1696_common_layout_contract_audit.py",
+    "sha256": "fb5b5c2d8c7bf05c972894d59d458acff77afdaea6a8b105e35df1eb984f6c19"
+  }
+}
