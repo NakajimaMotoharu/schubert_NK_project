@@ -1,0 +1,59 @@
+
+Failures (3):
+  JUnit Jupiter:RevocationPayloadFatalContractTest:fatal005FatalOperationStillAllowsIdempotentClose()
+    MethodSource [className = 'dev.codex.schubert.nk.web.revocation.RevocationPayloadFatalContractTest', methodName = 'fatal005FatalOperationStillAllowsIdempotentClose', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <dev.codex.schubert.nk.web.revocation.RevocationPayloadException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.revocation.RevocationPayloadFatalContractTest.fatal005FatalOperationStillAllowsIdempotentClose(RevocationPayloadFatalContractTest.java:94)
+       [...]
+     Caused by: dev.codex.schubert.nk.web.revocation.RevocationPayloadException: revocation encrypted payload rejected: CRYPTO_UNAVAILABLE
+       dev.codex.schubert.nk.web.revocation.RevocationPayloadCodec.encrypt(RevocationPayloadCodec.java:96)
+       dev.codex.schubert.nk.web.revocation.RevocationPayloadFatalContractTest.lambda$fatal005FatalOperationStillAllowsIdempotentClose$0(RevocationPayloadFatalContractTest.java:94)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:RevocationPayloadFatalContractTest:fatal002SuppressedSqlNextReachesSameFatalWithoutChangingGraph()
+    MethodSource [className = 'dev.codex.schubert.nk.web.revocation.RevocationPayloadFatalContractTest', methodName = 'fatal002SuppressedSqlNextReachesSameFatalWithoutChangingGraph', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <dev.codex.schubert.nk.web.revocation.RevocationPayloadException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.revocation.RevocationPayloadFatalContractTest.fatal002SuppressedSqlNextReachesSameFatalWithoutChangingGraph(RevocationPayloadFatalContractTest.java:47)
+       [...]
+     Caused by: dev.codex.schubert.nk.web.revocation.RevocationPayloadException: revocation encrypted payload rejected: CRYPTO_UNAVAILABLE
+       dev.codex.schubert.nk.web.revocation.RevocationPayloadCodec.encrypt(RevocationPayloadCodec.java:96)
+       dev.codex.schubert.nk.web.revocation.RevocationPayloadFatalContractTest.lambda$fatal002SuppressedSqlNextReachesSameFatalWithoutChangingGraph$0(RevocationPayloadFatalContractTest.java:47)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:RevocationPayloadFatalContractTest:fatal001ProviderCauseKeepsExactFatalAndWipesNonce()
+    MethodSource [className = 'dev.codex.schubert.nk.web.revocation.RevocationPayloadFatalContractTest', methodName = 'fatal001ProviderCauseKeepsExactFatalAndWipesNonce', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <dev.codex.schubert.nk.web.revocation.RevocationPayloadException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.revocation.RevocationPayloadFatalContractTest.fatal001ProviderCauseKeepsExactFatalAndWipesNonce(RevocationPayloadFatalContractTest.java:32)
+       [...]
+     Caused by: dev.codex.schubert.nk.web.revocation.RevocationPayloadException: revocation encrypted payload rejected: CRYPTO_UNAVAILABLE
+       dev.codex.schubert.nk.web.revocation.RevocationPayloadCodec.encrypt(RevocationPayloadCodec.java:96)
+       dev.codex.schubert.nk.web.revocation.RevocationPayloadFatalContractTest.lambda$fatal001ProviderCauseKeepsExactFatalAndWipesNonce$0(RevocationPayloadFatalContractTest.java:32)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+
+Test run finished after 167 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         5 tests found           ]
+[         0 tests skipped         ]
+[         5 tests started         ]
+[         0 tests aborted         ]
+[         2 tests successful      ]
+[         3 tests failed          ]
+

@@ -1,0 +1,117 @@
+{
+  "actualExit": 0,
+  "source": "3d7eab02e0ceda2c0db6420fb8f10d2f2d8e5607",
+  "productionCoreMain": "334c66d8e1a5955392e7797ed90603dbc81de0b7",
+  "atJST": "2026-11-12T20:56:27.709728+09:00",
+  "post": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27550-revocation-crypto16-independent-v1/manifest.json",
+    "sha256": "1603311dba8d194efb32615de67c9dc37d5c98b215f4c3171e847a2b25d08b45"
+  },
+  "originalRed": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27542-revocation-codec-fatal-original-red5-v1/manifest.json",
+    "sha256": "2471e54de52b8b1515748cf67c74fc4d42f47b467ebe17caab91213af7fb777f"
+  },
+  "tests": 16,
+  "newDefinitions": 5,
+  "originalRedProductTests": 5,
+  "originalRedProductFailed": 3,
+  "MainSafeSourcesFreshCompiled": 8,
+  "physicalClasses": 185,
+  "positiveMainCrc": 7,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 821,
+      "missed": 17431
+    },
+    "BRANCH": {
+      "covered": 70,
+      "missed": 1016
+    },
+    "LINE": {
+      "covered": 176,
+      "missed": 3471
+    },
+    "COMPLEXITY": {
+      "covered": 61,
+      "missed": 1274
+    },
+    "METHOD": {
+      "covered": 27,
+      "missed": 738
+    },
+    "CLASS": {
+      "covered": 7,
+      "missed": 159
+    }
+  },
+  "targetCounters": {
+    "dev/codex/schubert/nk/web/session/SessionStoreException": {
+      "INSTRUCTION": {
+        "covered": 69,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 12,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 18,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 8,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/revocation/RevocationPayloadCodec": {
+      "INSTRUCTION": {
+        "covered": 452,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 40,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 101,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 30,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 10,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "targetFour100": {
+    "dev/codex/schubert/nk/web/session/SessionStoreException": true,
+    "dev/codex/schubert/nk/web/revocation/RevocationPayloadCodec": true
+  },
+  "wholeScopeFour100": false,
+  "scopeDescription": "BUG2711元922相当normal新5で3失敗再現2471e54d、固定全16/PG27550独立1603311dでcause/suppressed/SQLnext Error同一、非fatal循環有限/固定catalog/wipe/idempotentcloseを確認し限定閉鎖。原whole7の独立AAD/golden/鍵境界/不正/null/並行/closeも同exec成功、BUG2712二pool原assertion逆変換/finallyawait10/Future20保持で限定閉鎖。RootそのままNullAway新Main8/9physical、現Proto176を加え全185、SB0・PMDraw14個別JUnit文脈非該当/CSformat0/抑制0。codec/helper四100、全185未網羅保持、元190新0。初回新Test import誤記は実行前javac失敗/訂正後Testcompile、同Maincompileは再実行せず照合。独立postのstdout physical192は表示literalの誤記、assert/manifestは185で一貫、母数は185実数のみ使用。全56catalog他runtime/実DB再送/真正API/451はOPEN。",
+  "bugStatus": {
+    "BUG2711": "CLOSED_LIMITED_CRYPTO_FATAL_CATALOG",
+    "BUG2712": "CLOSED_LIMITED_TWO_CRYPTO_WORKERS",
+    "YKT2359": "ALL56_LIMITED_SITES_OTHER_RUNTIME_OPEN",
+    "YKT2374": "EIGHT_EXPLICIT_WORKER_OWNERS_CLOSED_NOT_GLOBAL"
+  },
+  "global451Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}
