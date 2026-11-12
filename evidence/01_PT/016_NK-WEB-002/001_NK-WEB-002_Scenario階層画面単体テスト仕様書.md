@@ -64,3 +64,6 @@ P01608/09の個別契約と/2不足は[4137_P0160809Animationメニュー一覧�
 
 
 WBS-P016-10公開source契約/独立期待値/TestIDは[4138_P01610Animation視聴原五artifact契約対応.md](4138_P01610Animation視聴原五artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+P01610公開表示モデルの新4通常Unitは[4139_P01610視聴public四単体テスト仕様・結果.md](4139_P01610視聴public四単体テスト仕様・結果.md)。Watch target100/全181partial、実ControllerのHOLD/原190未受入は維持。
