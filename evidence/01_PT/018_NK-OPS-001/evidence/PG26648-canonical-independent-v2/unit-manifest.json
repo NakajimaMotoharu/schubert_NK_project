@@ -1,0 +1,245 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "62960fc3b5d4a67cf7bd9df887b668169d10f87f",
+    "productionCoreMain": "62960fc3b5d4a67cf7bd9df887b668169d10f87f",
+    "inputHashes": {
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java": "db04a40f6d009f37c4e70696657003d9ef4ed759db69b83d91610d0992955b9e",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java": "5a56fe3ee6a2dd3fe62f97102d90c9d590eae3013b5db36d9ed3ff5905d31952",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprint.java": "25f0c77746cdb01ce938f83fe0b019929f0aeb2e073db4f043abb3a41ba0995b",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/package-info.java": "456d04bff4a8fcb406f84ae47df14e72be906d74888f5f074edbb64d7a57eb6c",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprintTest.java": "4aac4b51eb3da1fe27594800d967dc9b8a87d35e371f172c26fecedbe7936ccc",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/SecretBufferTest.java": "32743b02e36a6d15cc90d4510de108ccdc86f1ddb3e27920b2299b85566fbd32"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    "physicalClassHashes": {
+      "dev/codex/schubert/nk/api/idempotency/OperationFingerprint.class": "5c27a9e8350a7df2ce3b67d8ae33619468c0515e02aa87b7316313501d0fc5be",
+      "dev/codex/schubert/nk/api/idempotency/package-info.class": "403adc29e1ba04649770c841d9eb0fe31a0edb25e3f8453cca87709129877910",
+      "dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.class": "ab7056d38728cd00be7f4193adb008fb0a487f3fd4d49f0437af37a53a9cc98b",
+      "dev/codex/schubert/nk/api/idempotency/CanonicalRequest.class": "c24edb93de1625d2963dd276ac6e13ecebad22e0b0560070bd87f3823d040f1f",
+      "dev/codex/schubert/nk/api/idempotency/CanonicalField.class": "0174a2146399c94450bba8e5d98eb7059c26aca4b882a912e407cad8a6a9889c"
+    },
+    "expectedCases": [
+      {
+        "classname": "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+        "name": "goldenCanonicalAndHmacMatchIndependentOpenSslVector()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+        "name": "nfcNormalizationAndNullEmptyDistinctionAreStable()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+        "name": "canonicalModelsDefensivelyCopyAndRedact()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+        "name": "invalidModelsAndFingerprintArgumentsAreRejected()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+        "name": "unavailableHmacProviderProducesTypedStartupFailure()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+        "name": "scalar001MalformedTextNeverAliasesQuestionMarkInCanonicalInput()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+        "name": "scalar002SupplementaryNfcAndSignedNumberMatchIndependentVectors()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+        "name": "supersededAndCurrentStreamStorageAreWipedAtGrowthResetAndClose()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+        "name": "streamBoundsAndExceptionalExitWipeAllOwnedCapacity()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+        "name": "requestOwnerClosesEveryFieldWithoutModifyingCallerCopiesOrFingerprint()"
+      }
+    ],
+    "expectedTests": 10,
+    "session": "PG26646-CANONICAL-WHOLE10",
+    "selectedClasses": [
+      "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+      "dev.codex.schubert.nk.api.idempotency.SecretBufferTest"
+    ],
+    "preflightManifestSha256": "56b48311271dd1cc490af5b703fdff74e7cec8f6614f92036ebff46cb06dfefa",
+    "compileManifestSha256": "7addbd44296bd9055dbbcc9a1c82fd4e9f94949962cb2f7d4a7d1b130f0b1720",
+    "oldExecUnion": false,
+    "actualHeldOrExternalOperations": 0
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T01:15:49.360139+00:00",
+      "endUTC": "2026-11-12T01:15:50.677955+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg26646-canonical-whole10-v2/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg26646-canonical-whole10-v2/jacoco.exec,sessionid=PG26646-CANONICAL-WHOLE10,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg26646-canonical-whole10-v2/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26628-canonical-pure-main-v1/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg26628-canonical-pure-main-v1/test-classes-v2:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+        "--select-class",
+        "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26646-canonical-whole10-v2/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "7c9a4e7d33e577637dee66cb8be6f4f5da59b415f7ff157d3750b1a166469449",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T01:15:50.678230+00:00",
+      "endUTC": "2026-11-12T01:15:50.842991+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26646-canonical-whole10-v2/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26628-canonical-pure-main-v1/target/classes",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26646-canonical-whole10-v2/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "917ab467b6f004ecef5b358ad48b14b899c677ecaac286a7343a94d2a1669497",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T01:15:50.843338+00:00",
+      "endUTC": "2026-11-12T01:15:51.008268+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26628-canonical-pure-main-v1/target/classes"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "d387cad0c45df95e0ac903cc01ae2aaa78b514a3d106b57025c196b7e9864ea4",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T01:15:51.008513+00:00",
+      "endUTC": "2026-11-12T01:15:51.173288+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26646-canonical-whole10-v2/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "faca54aefb702552fb21a4661e56d8bbed718db6f6a23ae0b308d4bd4fc0739e",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+      "name": "scalar002SupplementaryNfcAndSignedNumberMatchIndependentVectors()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+      "name": "goldenCanonicalAndHmacMatchIndependentOpenSslVector()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+      "name": "invalidModelsAndFingerprintArgumentsAreRejected()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+      "name": "unavailableHmacProviderProducesTypedStartupFailure()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+      "name": "supersededAndCurrentStreamStorageAreWipedAtGrowthResetAndClose()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+      "name": "scalar001MalformedTextNeverAliasesQuestionMarkInCanonicalInput()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+      "name": "nfcNormalizationAndNullEmptyDistinctionAreStable()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+      "name": "requestOwnerClosesEveryFieldWithoutModifyingCallerCopiesOrFingerprint()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+      "name": "streamBoundsAndExceptionalExitWipeAllOwnedCapacity()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+      "name": "canonicalModelsDefensivelyCopyAndRedact()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false
+}
