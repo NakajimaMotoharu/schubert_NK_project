@@ -1,0 +1,41 @@
+{
+  "actualExit": 0,
+  "owner": "dev/codex/schubert/nk/web/media/MediaRangeService",
+  "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaRangeService.java",
+  "sourceSha256": "6add8f1a1e8470b3f8aedc86e273138c7446de07ab16a772587df00f2c59e69a",
+  "classSha256": "f26b78af15d7ab9dbe89b62c6dc0556cda398ca8f8268a94ab5fd77b1fa43bef",
+  "bootstrap": "java/lang/runtime/SwitchBootstraps.typeSwitch",
+  "labels": [
+    "Full",
+    "Partial",
+    "Unsatisfiable"
+  ],
+  "stages": {
+    "javap-retained-owner": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T06:16:39.732490+00:00",
+      "endUTC": "2026-11-12T06:16:40.048063+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-v",
+        "-p",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26990-media186-profile-v2/component/dev/codex/schubert/nk/web/media/MediaRangeService.class"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "f41cd37b5f30b4bf7ceae358b2e717c12ec4084d4d568f5eadfaabedb60ff674",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "positiveChecks": 1,
+  "negativeChecks": 4,
+  "ownerPattern": "EXACT_RETAINED_MEDIA_RANGE_SERVICE_ONLY",
+  "productTestsExecuted": 0,
+  "productOrActualHeldClassInitialized": false,
+  "bug": "BUG-2688",
+  "horizontal": "YKT-2366",
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1435_typeswitch_owner_witness.py",
+    "sha256": "a424b08479831a99e0feebc98ddac223614026c328c57f1b130b4da33967d102"
+  }
+}

@@ -1,0 +1,848 @@
+Classfile /home/mini/codex/project1/work/pgpt-runs/PG379/pg26990-media186-profile-v2/component/dev/codex/schubert/nk/web/media/MediaRangeService.class
+  Last modified Nov 12, 2026; size 9048 bytes
+  SHA-256 checksum f26b78af15d7ab9dbe89b62c6dc0556cda398ca8f8268a94ab5fd77b1fa43bef
+  Compiled from "MediaRangeService.java"
+public final class dev.codex.schubert.nk.web.media.MediaRangeService
+  minor version: 0
+  major version: 69
+  flags: (0x0031) ACC_PUBLIC, ACC_FINAL, ACC_SUPER
+  this_class: #2                          // dev/codex/schubert/nk/web/media/MediaRangeService
+  super_class: #8                         // java/lang/Object
+  interfaces: 0, fields: 2, methods: 5, attributes: 4
+Constant pool:
+    #1 = Methodref          #2.#3         // dev/codex/schubert/nk/web/media/MediaRangeService."<init>":(Ldev/codex/schubert/nk/web/media/MediaRangeService$FileSource;I)V
+    #2 = Class              #4            // dev/codex/schubert/nk/web/media/MediaRangeService
+    #3 = NameAndType        #5:#6         // "<init>":(Ldev/codex/schubert/nk/web/media/MediaRangeService$FileSource;I)V
+    #4 = Utf8               dev/codex/schubert/nk/web/media/MediaRangeService
+    #5 = Utf8               <init>
+    #6 = Utf8               (Ldev/codex/schubert/nk/web/media/MediaRangeService$FileSource;I)V
+    #7 = Methodref          #8.#9         // java/lang/Object."<init>":()V
+    #8 = Class              #10           // java/lang/Object
+    #9 = NameAndType        #5:#11        // "<init>":()V
+   #10 = Utf8               java/lang/Object
+   #11 = Utf8               ()V
+   #12 = String             #13           // source
+   #13 = Utf8               source
+   #14 = Methodref          #15.#16       // java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #15 = Class              #17           // java/util/Objects
+   #16 = NameAndType        #18:#19       // requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #17 = Utf8               java/util/Objects
+   #18 = Utf8               requireNonNull
+   #19 = Utf8               (Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #20 = Class              #21           // dev/codex/schubert/nk/web/media/MediaRangeService$FileSource
+   #21 = Utf8               dev/codex/schubert/nk/web/media/MediaRangeService$FileSource
+   #22 = Fieldref           #2.#23        // dev/codex/schubert/nk/web/media/MediaRangeService.source:Ldev/codex/schubert/nk/web/media/MediaRangeService$FileSource;
+   #23 = NameAndType        #13:#24       // source:Ldev/codex/schubert/nk/web/media/MediaRangeService$FileSource;
+   #24 = Utf8               Ldev/codex/schubert/nk/web/media/MediaRangeService$FileSource;
+   #25 = Class              #26           // java/lang/IllegalArgumentException
+   #26 = Utf8               java/lang/IllegalArgumentException
+   #27 = String             #28           // media stream count is outside 1..20
+   #28 = Utf8               media stream count is outside 1..20
+   #29 = Methodref          #25.#30       // java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+   #30 = NameAndType        #5:#31        // "<init>":(Ljava/lang/String;)V
+   #31 = Utf8               (Ljava/lang/String;)V
+   #32 = Class              #33           // java/util/concurrent/Semaphore
+   #33 = Utf8               java/util/concurrent/Semaphore
+   #34 = Methodref          #32.#35       // java/util/concurrent/Semaphore."<init>":(I)V
+   #35 = NameAndType        #5:#36        // "<init>":(I)V
+   #36 = Utf8               (I)V
+   #37 = Fieldref           #2.#38        // dev/codex/schubert/nk/web/media/MediaRangeService.permits:Ljava/util/concurrent/Semaphore;
+   #38 = NameAndType        #39:#40       // permits:Ljava/util/concurrent/Semaphore;
+   #39 = Utf8               permits
+   #40 = Utf8               Ljava/util/concurrent/Semaphore;
+   #41 = String             #42           // type
+   #42 = Utf8               type
+   #43 = String             #44           // logicalId
+   #44 = Utf8               logicalId
+   #45 = String             #46           // disposition
+   #46 = Utf8               disposition
+   #47 = String             #48           // range
+   #48 = Utf8               range
+   #49 = String             #50           // descriptor
+   #50 = Utf8               descriptor
+   #51 = String             #52           // response
+   #52 = Utf8               response
+   #53 = Methodref          #54.#55       // dev/codex/schubert/nk/protocol/file/MediaDescriptor.mediaType:()Ldev/codex/schubert/nk/protocol/file/MediaType;
+   #54 = Class              #56           // dev/codex/schubert/nk/protocol/file/MediaDescriptor
+   #55 = NameAndType        #57:#58       // mediaType:()Ldev/codex/schubert/nk/protocol/file/MediaType;
+   #56 = Utf8               dev/codex/schubert/nk/protocol/file/MediaDescriptor
+   #57 = Utf8               mediaType
+   #58 = Utf8               ()Ldev/codex/schubert/nk/protocol/file/MediaType;
+   #59 = Methodref          #54.#60       // dev/codex/schubert/nk/protocol/file/MediaDescriptor.logicalId:()Ljava/lang/String;
+   #60 = NameAndType        #44:#61       // logicalId:()Ljava/lang/String;
+   #61 = Utf8               ()Ljava/lang/String;
+   #62 = Methodref          #63.#64       // java/lang/String.equals:(Ljava/lang/Object;)Z
+   #63 = Class              #65           // java/lang/String
+   #64 = NameAndType        #66:#67       // equals:(Ljava/lang/Object;)Z
+   #65 = Utf8               java/lang/String
+   #66 = Utf8               equals
+   #67 = Utf8               (Ljava/lang/Object;)Z
+   #68 = Methodref          #54.#69       // dev/codex/schubert/nk/protocol/file/MediaDescriptor.disposition:()Ldev/codex/schubert/nk/protocol/file/ContentDisposition;
+   #69 = NameAndType        #46:#70       // disposition:()Ldev/codex/schubert/nk/protocol/file/ContentDisposition;
+   #70 = Utf8               ()Ldev/codex/schubert/nk/protocol/file/ContentDisposition;
+   #71 = Class              #72           // dev/codex/schubert/nk/web/media/MediaDeliveryException
+   #72 = Utf8               dev/codex/schubert/nk/web/media/MediaDeliveryException
+   #73 = Fieldref           #74.#75       // dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason.INVALID_DESCRIPTOR:Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;
+   #74 = Class              #76           // dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason
+   #75 = NameAndType        #77:#78       // INVALID_DESCRIPTOR:Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;
+   #76 = Utf8               dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason
+   #77 = Utf8               INVALID_DESCRIPTOR
+   #78 = Utf8               Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;
+   #79 = Methodref          #71.#80       // dev/codex/schubert/nk/web/media/MediaDeliveryException."<init>":(Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;)V
+   #80 = NameAndType        #5:#81        // "<init>":(Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;)V
+   #81 = Utf8               (Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;)V
+   #82 = Methodref          #32.#83       // java/util/concurrent/Semaphore.tryAcquire:()Z
+   #83 = NameAndType        #84:#85       // tryAcquire:()Z
+   #84 = Utf8               tryAcquire
+   #85 = Utf8               ()Z
+   #86 = Fieldref           #74.#87       // dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason.BUSY:Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;
+   #87 = NameAndType        #88:#78       // BUSY:Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;
+   #88 = Utf8               BUSY
+   #89 = InvokeDynamic      #0:#90        // #0:execute:(Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;)Ldev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation;
+   #90 = NameAndType        #91:#92       // execute:(Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;)Ldev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation;
+   #91 = Utf8               execute
+   #92 = Utf8               (Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;)Ldev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation;
+   #93 = InterfaceMethodref #20.#94       // dev/codex/schubert/nk/web/media/MediaRangeService$FileSource.read:(Ldev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation;)V
+   #94 = NameAndType        #95:#96       // read:(Ldev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation;)V
+   #95 = Utf8               read
+   #96 = Utf8               (Ldev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation;)V
+   #97 = Methodref          #32.#98       // java/util/concurrent/Semaphore.release:()V
+   #98 = NameAndType        #99:#11       // release:()V
+   #99 = Utf8               release
+  #100 = Class              #101          // java/io/IOException
+  #101 = Utf8               java/io/IOException
+  #102 = Fieldref           #74.#103      // dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason.UNAVAILABLE:Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;
+  #103 = NameAndType        #104:#78      // UNAVAILABLE:Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;
+  #104 = Utf8               UNAVAILABLE
+  #105 = Fieldref           #106.#107     // dev/codex/schubert/nk/protocol/file/ContentDisposition.ATTACHMENT:Ldev/codex/schubert/nk/protocol/file/ContentDisposition;
+  #106 = Class              #108          // dev/codex/schubert/nk/protocol/file/ContentDisposition
+  #107 = NameAndType        #109:#110     // ATTACHMENT:Ldev/codex/schubert/nk/protocol/file/ContentDisposition;
+  #108 = Utf8               dev/codex/schubert/nk/protocol/file/ContentDisposition
+  #109 = Utf8               ATTACHMENT
+  #110 = Utf8               Ldev/codex/schubert/nk/protocol/file/ContentDisposition;
+  #111 = Methodref          #112.#113     // java/util/Optional.empty:()Ljava/util/Optional;
+  #112 = Class              #114          // java/util/Optional
+  #113 = NameAndType        #115:#116     // empty:()Ljava/util/Optional;
+  #114 = Utf8               java/util/Optional
+  #115 = Utf8               empty
+  #116 = Utf8               ()Ljava/util/Optional;
+  #117 = Methodref          #54.#118      // dev/codex/schubert/nk/protocol/file/MediaDescriptor.byteLength:()J
+  #118 = NameAndType        #119:#120     // byteLength:()J
+  #119 = Utf8               byteLength
+  #120 = Utf8               ()J
+  #121 = Methodref          #122.#123     // dev/codex/schubert/nk/web/media/HttpByteRangeParser.parseFirst:(Ljava/util/Optional;J)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+  #122 = Class              #124          // dev/codex/schubert/nk/web/media/HttpByteRangeParser
+  #123 = NameAndType        #125:#126     // parseFirst:(Ljava/util/Optional;J)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+  #124 = Utf8               dev/codex/schubert/nk/web/media/HttpByteRangeParser
+  #125 = Utf8               parseFirst
+  #126 = Utf8               (Ljava/util/Optional;J)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+  #127 = Class              #128          // java/util/HashMap
+  #128 = Utf8               java/util/HashMap
+  #129 = Methodref          #127.#9       // java/util/HashMap."<init>":()V
+  #130 = String             #131          // Accept-Ranges
+  #131 = Utf8               Accept-Ranges
+  #132 = String             #133          // bytes
+  #133 = Utf8               bytes
+  #134 = InterfaceMethodref #135.#136     // java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #135 = Class              #137          // java/util/Map
+  #136 = NameAndType        #138:#139     // put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #137 = Utf8               java/util/Map
+  #138 = Utf8               put
+  #139 = Utf8               (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #140 = String             #141          // Content-Type
+  #141 = Utf8               Content-Type
+  #142 = String             #143          // application/octet-stream
+  #143 = Utf8               application/octet-stream
+  #144 = Methodref          #54.#145      // dev/codex/schubert/nk/protocol/file/MediaDescriptor.mimeType:()Ljava/lang/String;
+  #145 = NameAndType        #146:#61      // mimeType:()Ljava/lang/String;
+  #146 = Utf8               mimeType
+  #147 = String             #148          // Content-Disposition
+  #148 = Utf8               Content-Disposition
+  #149 = Methodref          #150.#151     // dev/codex/schubert/nk/web/media/ContentDispositionFactory.create:(Ldev/codex/schubert/nk/protocol/file/MediaDescriptor;)Ljava/lang/String;
+  #150 = Class              #152          // dev/codex/schubert/nk/web/media/ContentDispositionFactory
+  #151 = NameAndType        #153:#154     // create:(Ldev/codex/schubert/nk/protocol/file/MediaDescriptor;)Ljava/lang/String;
+  #152 = Utf8               dev/codex/schubert/nk/web/media/ContentDispositionFactory
+  #153 = Utf8               create
+  #154 = Utf8               (Ldev/codex/schubert/nk/protocol/file/MediaDescriptor;)Ljava/lang/String;
+  #155 = String             #156          // X-Content-Type-Options
+  #156 = Utf8               X-Content-Type-Options
+  #157 = String             #158          // nosniff
+  #158 = Utf8               nosniff
+  #159 = String             #160          // Cache-Control
+  #160 = Utf8               Cache-Control
+  #161 = String             #162          // private, no-store
+  #162 = Utf8               private, no-store
+  #163 = Methodref          #15.#164      // java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+  #164 = NameAndType        #18:#165      // requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+  #165 = Utf8               (Ljava/lang/Object;)Ljava/lang/Object;
+  #166 = InvokeDynamic      #1:#167       // #1:typeSwitch:(Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;I)I
+  #167 = NameAndType        #168:#169     // typeSwitch:(Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;I)I
+  #168 = Utf8               typeSwitch
+  #169 = Utf8               (Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;I)I
+  #170 = Class              #171          // java/lang/MatchException
+  #171 = Utf8               java/lang/MatchException
+  #172 = Methodref          #170.#173     // java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+  #173 = NameAndType        #5:#174       // "<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+  #174 = Utf8               (Ljava/lang/String;Ljava/lang/Throwable;)V
+  #175 = Class              #176          // dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full
+  #176 = Utf8               dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full
+  #177 = Methodref          #175.#178     // dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.length:()J
+  #178 = NameAndType        #179:#120     // length:()J
+  #179 = Utf8               length
+  #180 = Class              #181          // dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+  #181 = Utf8               dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+  #182 = Methodref          #180.#183     // dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.start:()J
+  #183 = NameAndType        #184:#120     // start:()J
+  #184 = Utf8               start
+  #185 = Methodref          #180.#178     // dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.length:()J
+  #186 = String             #187          // Content-Range
+  #187 = Utf8               Content-Range
+  #188 = Methodref          #180.#189     // dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.end:()J
+  #189 = NameAndType        #190:#120     // end:()J
+  #190 = Utf8               end
+  #191 = InvokeDynamic      #2:#192       // #2:makeConcatWithConstants:(JJJ)Ljava/lang/String;
+  #192 = NameAndType        #193:#194     // makeConcatWithConstants:(JJJ)Ljava/lang/String;
+  #193 = Utf8               makeConcatWithConstants
+  #194 = Utf8               (JJJ)Ljava/lang/String;
+  #195 = Class              #196          // dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable
+  #196 = Utf8               dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable
+  #197 = InvokeDynamic      #3:#198       // #3:makeConcatWithConstants:(J)Ljava/lang/String;
+  #198 = NameAndType        #193:#199     // makeConcatWithConstants:(J)Ljava/lang/String;
+  #199 = Utf8               (J)Ljava/lang/String;
+  #200 = String             #201          // Content-Length
+  #201 = Utf8               Content-Length
+  #202 = Methodref          #203.#204     // java/lang/Long.toString:(J)Ljava/lang/String;
+  #203 = Class              #205          // java/lang/Long
+  #204 = NameAndType        #206:#199     // toString:(J)Ljava/lang/String;
+  #205 = Utf8               java/lang/Long
+  #206 = Utf8               toString
+  #207 = InterfaceMethodref #135.#208     // java/util/Map.copyOf:(Ljava/util/Map;)Ljava/util/Map;
+  #208 = NameAndType        #209:#210     // copyOf:(Ljava/util/Map;)Ljava/util/Map;
+  #209 = Utf8               copyOf
+  #210 = Utf8               (Ljava/util/Map;)Ljava/util/Map;
+  #211 = InterfaceMethodref #212.#213     // dev/codex/schubert/nk/web/media/MediaRangeService$Response.begin:(ILjava/util/Map;)V
+  #212 = Class              #214          // dev/codex/schubert/nk/web/media/MediaRangeService$Response
+  #213 = NameAndType        #215:#216     // begin:(ILjava/util/Map;)V
+  #214 = Utf8               dev/codex/schubert/nk/web/media/MediaRangeService$Response
+  #215 = Utf8               begin
+  #216 = Utf8               (ILjava/util/Map;)V
+  #217 = InterfaceMethodref #212.#218     // dev/codex/schubert/nk/web/media/MediaRangeService$Response.body:()Ljava/io/OutputStream;
+  #218 = NameAndType        #219:#220     // body:()Ljava/io/OutputStream;
+  #219 = Utf8               body
+  #220 = Utf8               ()Ljava/io/OutputStream;
+  #221 = Methodref          #222.#223     // dev/codex/schubert/nk/web/media/MediaBodyStreamer.copy:(Ljava/nio/channels/SeekableByteChannel;Ljava/io/OutputStream;JJ)V
+  #222 = Class              #224          // dev/codex/schubert/nk/web/media/MediaBodyStreamer
+  #223 = NameAndType        #225:#226     // copy:(Ljava/nio/channels/SeekableByteChannel;Ljava/io/OutputStream;JJ)V
+  #224 = Utf8               dev/codex/schubert/nk/web/media/MediaBodyStreamer
+  #225 = Utf8               copy
+  #226 = Utf8               (Ljava/nio/channels/SeekableByteChannel;Ljava/io/OutputStream;JJ)V
+  #227 = Methodref          #2.#228       // dev/codex/schubert/nk/web/media/MediaRangeService.respond:(Ljava/nio/channels/SeekableByteChannel;Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;)V
+  #228 = NameAndType        #229:#230     // respond:(Ljava/nio/channels/SeekableByteChannel;Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;)V
+  #229 = Utf8               respond
+  #230 = Utf8               (Ljava/nio/channels/SeekableByteChannel;Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;)V
+  #231 = Utf8               (Ldev/codex/schubert/nk/web/media/MediaRangeService$FileSource;)V
+  #232 = Utf8               Code
+  #233 = Utf8               LineNumberTable
+  #234 = Utf8               LocalVariableTable
+  #235 = Utf8               this
+  #236 = Utf8               Ldev/codex/schubert/nk/web/media/MediaRangeService;
+  #237 = Utf8               maximumStreams
+  #238 = Utf8               I
+  #239 = Utf8               StackMapTable
+  #240 = Utf8               deliver
+  #241 = Utf8               (Ldev/codex/schubert/nk/protocol/file/MediaType;Ljava/lang/String;Ldev/codex/schubert/nk/protocol/file/ContentDisposition;Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;)V
+  #242 = Utf8               failure
+  #243 = Utf8               Ljava/io/IOException;
+  #244 = Utf8               Ldev/codex/schubert/nk/protocol/file/MediaType;
+  #245 = Utf8               Ljava/lang/String;
+  #246 = Utf8               Ljava/util/Optional;
+  #247 = Utf8               head
+  #248 = Utf8               Z
+  #249 = Utf8               Ldev/codex/schubert/nk/protocol/file/MediaDescriptor;
+  #250 = Utf8               Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;
+  #251 = Utf8               LocalVariableTypeTable
+  #252 = Utf8               Ljava/util/Optional<Ljava/lang/String;>;
+  #253 = Class              #254          // java/lang/Throwable
+  #254 = Utf8               java/lang/Throwable
+  #255 = Utf8               Exceptions
+  #256 = Utf8               Signature
+  #257 = Utf8               (Ldev/codex/schubert/nk/protocol/file/MediaType;Ljava/lang/String;Ldev/codex/schubert/nk/protocol/file/ContentDisposition;Ljava/util/Optional<Ljava/lang/String;>;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;)V
+  #258 = Utf8               status
+  #259 = Utf8               J
+  #260 = Utf8               full
+  #261 = Utf8               Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Full;
+  #262 = Utf8               partial
+  #263 = Utf8               Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial;
+  #264 = Utf8               ignored
+  #265 = Utf8               Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+  #266 = Utf8               channel
+  #267 = Utf8               Ljava/nio/channels/SeekableByteChannel;
+  #268 = Utf8               attachment
+  #269 = Utf8               selection
+  #270 = Utf8               Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+  #271 = Utf8               headers
+  #272 = Utf8               Ljava/util/Map;
+  #273 = Utf8               Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;
+  #274 = Class              #275          // java/nio/channels/SeekableByteChannel
+  #275 = Utf8               java/nio/channels/SeekableByteChannel
+  #276 = Class              #277          // dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection
+  #277 = Utf8               dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection
+  #278 = Utf8               (Ljava/nio/channels/SeekableByteChannel;Ljava/util/Optional<Ljava/lang/String;>;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;)V
+  #279 = Utf8               lambda$deliver$0
+  #280 = Utf8               (Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;Ljava/nio/channels/SeekableByteChannel;)V
+  #281 = Utf8               SourceFile
+  #282 = Utf8               MediaRangeService.java
+  #283 = Utf8               NestMembers
+  #284 = Class              #285          // dev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation
+  #285 = Utf8               dev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation
+  #286 = Utf8               BootstrapMethods
+  #287 = MethodType         #288          //  (Ljava/nio/channels/SeekableByteChannel;)V
+  #288 = Utf8               (Ljava/nio/channels/SeekableByteChannel;)V
+  #289 = MethodHandle       6:#290        // REF_invokeStatic dev/codex/schubert/nk/web/media/MediaRangeService.lambda$deliver$0:(Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;Ljava/nio/channels/SeekableByteChannel;)V
+  #290 = Methodref          #2.#291       // dev/codex/schubert/nk/web/media/MediaRangeService.lambda$deliver$0:(Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;Ljava/nio/channels/SeekableByteChannel;)V
+  #291 = NameAndType        #279:#280     // lambda$deliver$0:(Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;Ljava/nio/channels/SeekableByteChannel;)V
+  #292 = String             #293          // bytes \u0001-\u0001/\u0001
+  #293 = Utf8               bytes \u0001-\u0001/\u0001
+  #294 = String             #295          // bytes */\u0001
+  #295 = Utf8               bytes */\u0001
+  #296 = MethodHandle       6:#297        // REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #297 = Methodref          #298.#299     // java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #298 = Class              #300          // java/lang/invoke/LambdaMetafactory
+  #299 = NameAndType        #301:#302     // metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #300 = Utf8               java/lang/invoke/LambdaMetafactory
+  #301 = Utf8               metafactory
+  #302 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #303 = MethodHandle       6:#304        // REF_invokeStatic java/lang/runtime/SwitchBootstraps.typeSwitch:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #304 = Methodref          #305.#306     // java/lang/runtime/SwitchBootstraps.typeSwitch:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #305 = Class              #307          // java/lang/runtime/SwitchBootstraps
+  #306 = NameAndType        #168:#308     // typeSwitch:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #307 = Utf8               java/lang/runtime/SwitchBootstraps
+  #308 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #309 = MethodHandle       6:#310        // REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #310 = Methodref          #311.#312     // java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #311 = Class              #313          // java/lang/invoke/StringConcatFactory
+  #312 = NameAndType        #193:#314     // makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #313 = Utf8               java/lang/invoke/StringConcatFactory
+  #314 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #315 = Utf8               InnerClasses
+  #316 = Utf8               FileSource
+  #317 = Utf8               Reason
+  #318 = Utf8               Response
+  #319 = Utf8               ReadOperation
+  #320 = Utf8               Selection
+  #321 = Utf8               Full
+  #322 = Utf8               Partial
+  #323 = Utf8               Unsatisfiable
+  #324 = Class              #325          // java/lang/invoke/MethodHandles$Lookup
+  #325 = Utf8               java/lang/invoke/MethodHandles$Lookup
+  #326 = Class              #327          // java/lang/invoke/MethodHandles
+  #327 = Utf8               java/lang/invoke/MethodHandles
+  #328 = Utf8               Lookup
+{
+  private final dev.codex.schubert.nk.web.media.MediaRangeService$FileSource source;
+    descriptor: Ldev/codex/schubert/nk/web/media/MediaRangeService$FileSource;
+    flags: (0x0012) ACC_PRIVATE, ACC_FINAL
+
+  private final java.util.concurrent.Semaphore permits;
+    descriptor: Ljava/util/concurrent/Semaphore;
+    flags: (0x0012) ACC_PRIVATE, ACC_FINAL
+
+  public dev.codex.schubert.nk.web.media.MediaRangeService(dev.codex.schubert.nk.web.media.MediaRangeService$FileSource);
+    descriptor: (Ldev/codex/schubert/nk/web/media/MediaRangeService$FileSource;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: bipush        20
+         4: invokespecial #1                  // Method "<init>":(Ldev/codex/schubert/nk/web/media/MediaRangeService$FileSource;I)V
+         7: return
+      LineNumberTable:
+        line 43: 0
+        line 44: 7
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       8     0  this   Ldev/codex/schubert/nk/web/media/MediaRangeService;
+            0       8     1 source   Ldev/codex/schubert/nk/web/media/MediaRangeService$FileSource;
+
+  public dev.codex.schubert.nk.web.media.MediaRangeService(dev.codex.schubert.nk.web.media.MediaRangeService$FileSource, int);
+    descriptor: (Ldev/codex/schubert/nk/web/media/MediaRangeService$FileSource;I)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=4, locals=3, args_size=3
+         0: aload_0
+         1: invokespecial #7                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: ldc           #12                 // String source
+         8: invokestatic  #14                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        11: checkcast     #20                 // class dev/codex/schubert/nk/web/media/MediaRangeService$FileSource
+        14: putfield      #22                 // Field source:Ldev/codex/schubert/nk/web/media/MediaRangeService$FileSource;
+        17: iload_2
+        18: iconst_1
+        19: if_icmplt     28
+        22: iload_2
+        23: bipush        20
+        25: if_icmple     38
+        28: new           #25                 // class java/lang/IllegalArgumentException
+        31: dup
+        32: ldc           #27                 // String media stream count is outside 1..20
+        34: invokespecial #29                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        37: athrow
+        38: aload_0
+        39: new           #32                 // class java/util/concurrent/Semaphore
+        42: dup
+        43: iload_2
+        44: invokespecial #34                 // Method java/util/concurrent/Semaphore."<init>":(I)V
+        47: putfield      #37                 // Field permits:Ljava/util/concurrent/Semaphore;
+        50: return
+      LineNumberTable:
+        line 47: 0
+        line 48: 4
+        line 49: 17
+        line 50: 28
+        line 51: 38
+        line 52: 50
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      51     0  this   Ldev/codex/schubert/nk/web/media/MediaRangeService;
+            0      51     1 source   Ldev/codex/schubert/nk/web/media/MediaRangeService$FileSource;
+            0      51     2 maximumStreams   I
+      StackMapTable: number_of_entries = 2
+        frame_type = 255 /* full_frame */
+          offset_delta = 28
+          locals = [ class dev/codex/schubert/nk/web/media/MediaRangeService, class dev/codex/schubert/nk/web/media/MediaRangeService$FileSource, int ]
+          stack = []
+        frame_type = 9 /* same */
+
+  public void deliver(dev.codex.schubert.nk.protocol.file.MediaType, java.lang.String, dev.codex.schubert.nk.protocol.file.ContentDisposition, java.util.Optional<java.lang.String>, boolean, dev.codex.schubert.nk.protocol.file.MediaDescriptor, dev.codex.schubert.nk.web.media.MediaRangeService$Response) throws dev.codex.schubert.nk.web.media.MediaDeliveryException;
+    descriptor: (Ldev/codex/schubert/nk/protocol/file/MediaType;Ljava/lang/String;Ldev/codex/schubert/nk/protocol/file/ContentDisposition;Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=6, locals=10, args_size=8
+         0: aload_1
+         1: ldc           #41                 // String type
+         3: invokestatic  #14                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_2
+         8: ldc           #43                 // String logicalId
+        10: invokestatic  #14                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_3
+        15: ldc           #45                 // String disposition
+        17: invokestatic  #14                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: aload         4
+        23: ldc           #47                 // String range
+        25: invokestatic  #14                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        28: pop
+        29: aload         6
+        31: ldc           #49                 // String descriptor
+        33: invokestatic  #14                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        36: pop
+        37: aload         7
+        39: ldc           #51                 // String response
+        41: invokestatic  #14                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        44: pop
+        45: aload_1
+        46: aload         6
+        48: invokevirtual #53                 // Method dev/codex/schubert/nk/protocol/file/MediaDescriptor.mediaType:()Ldev/codex/schubert/nk/protocol/file/MediaType;
+        51: if_acmpne     75
+        54: aload_2
+        55: aload         6
+        57: invokevirtual #59                 // Method dev/codex/schubert/nk/protocol/file/MediaDescriptor.logicalId:()Ljava/lang/String;
+        60: invokevirtual #62                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        63: ifeq          75
+        66: aload_3
+        67: aload         6
+        69: invokevirtual #68                 // Method dev/codex/schubert/nk/protocol/file/MediaDescriptor.disposition:()Ldev/codex/schubert/nk/protocol/file/ContentDisposition;
+        72: if_acmpeq     86
+        75: new           #71                 // class dev/codex/schubert/nk/web/media/MediaDeliveryException
+        78: dup
+        79: getstatic     #73                 // Field dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason.INVALID_DESCRIPTOR:Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;
+        82: invokespecial #79                 // Method dev/codex/schubert/nk/web/media/MediaDeliveryException."<init>":(Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;)V
+        85: athrow
+        86: aload_0
+        87: getfield      #37                 // Field permits:Ljava/util/concurrent/Semaphore;
+        90: invokevirtual #82                 // Method java/util/concurrent/Semaphore.tryAcquire:()Z
+        93: ifne          107
+        96: new           #71                 // class dev/codex/schubert/nk/web/media/MediaDeliveryException
+        99: dup
+       100: getstatic     #86                 // Field dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason.BUSY:Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;
+       103: invokespecial #79                 // Method dev/codex/schubert/nk/web/media/MediaDeliveryException."<init>":(Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;)V
+       106: athrow
+       107: aload_0
+       108: getfield      #22                 // Field source:Ldev/codex/schubert/nk/web/media/MediaRangeService$FileSource;
+       111: aload         6
+       113: aload         4
+       115: iload         5
+       117: aload         6
+       119: aload         7
+       121: invokedynamic #89,  0             // InvokeDynamic #0:execute:(Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;)Ldev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation;
+       126: invokeinterface #93,  3           // InterfaceMethod dev/codex/schubert/nk/web/media/MediaRangeService$FileSource.read:(Ldev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation;)V
+       131: aload_0
+       132: getfield      #37                 // Field permits:Ljava/util/concurrent/Semaphore;
+       135: invokevirtual #97                 // Method java/util/concurrent/Semaphore.release:()V
+       138: goto          166
+       141: astore        8
+       143: new           #71                 // class dev/codex/schubert/nk/web/media/MediaDeliveryException
+       146: dup
+       147: getstatic     #102                // Field dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason.UNAVAILABLE:Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;
+       150: invokespecial #79                 // Method dev/codex/schubert/nk/web/media/MediaDeliveryException."<init>":(Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;)V
+       153: athrow
+       154: astore        9
+       156: aload_0
+       157: getfield      #37                 // Field permits:Ljava/util/concurrent/Semaphore;
+       160: invokevirtual #97                 // Method java/util/concurrent/Semaphore.release:()V
+       163: aload         9
+       165: athrow
+       166: return
+      Exception table:
+         from    to  target type
+           107   131   141   Class java/io/IOException
+           107   131   154   any
+           141   156   154   any
+      LineNumberTable:
+        line 64: 0
+        line 65: 7
+        line 66: 14
+        line 67: 21
+        line 68: 29
+        line 69: 37
+        line 70: 45
+        line 71: 57
+        line 72: 69
+        line 73: 75
+        line 75: 86
+        line 77: 107
+        line 81: 131
+        line 82: 138
+        line 78: 141
+        line 79: 143
+        line 81: 154
+        line 82: 163
+        line 83: 166
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+          143      11     8 failure   Ljava/io/IOException;
+            0     167     0  this   Ldev/codex/schubert/nk/web/media/MediaRangeService;
+            0     167     1  type   Ldev/codex/schubert/nk/protocol/file/MediaType;
+            0     167     2 logicalId   Ljava/lang/String;
+            0     167     3 disposition   Ldev/codex/schubert/nk/protocol/file/ContentDisposition;
+            0     167     4 range   Ljava/util/Optional;
+            0     167     5  head   Z
+            0     167     6 descriptor   Ldev/codex/schubert/nk/protocol/file/MediaDescriptor;
+            0     167     7 response   Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0     167     4 range   Ljava/util/Optional<Ljava/lang/String;>;
+      StackMapTable: number_of_entries = 6
+        frame_type = 251 /* same_frame_extended */
+          offset_delta = 75
+        frame_type = 10 /* same */
+        frame_type = 20 /* same */
+        frame_type = 97 /* same_locals_1_stack_item */
+          stack = [ class java/io/IOException ]
+        frame_type = 76 /* same_locals_1_stack_item */
+          stack = [ class java/lang/Throwable ]
+        frame_type = 11 /* same */
+    Exceptions:
+      throws dev.codex.schubert.nk.web.media.MediaDeliveryException
+    Signature: #257                         // (Ldev/codex/schubert/nk/protocol/file/MediaType;Ljava/lang/String;Ldev/codex/schubert/nk/protocol/file/ContentDisposition;Ljava/util/Optional<Ljava/lang/String;>;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;)V
+
+  private static void respond(java.nio.channels.SeekableByteChannel, java.util.Optional<java.lang.String>, boolean, dev.codex.schubert.nk.protocol.file.MediaDescriptor, dev.codex.schubert.nk.web.media.MediaRangeService$Response) throws java.io.IOException;
+    descriptor: (Ljava/nio/channels/SeekableByteChannel;Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;)V
+    flags: (0x000a) ACC_PRIVATE, ACC_STATIC
+    Code:
+      stack=8, locals=18, args_size=5
+         0: aload_3
+         1: invokevirtual #68                 // Method dev/codex/schubert/nk/protocol/file/MediaDescriptor.disposition:()Ldev/codex/schubert/nk/protocol/file/ContentDisposition;
+         4: getstatic     #105                // Field dev/codex/schubert/nk/protocol/file/ContentDisposition.ATTACHMENT:Ldev/codex/schubert/nk/protocol/file/ContentDisposition;
+         7: if_acmpne     14
+        10: iconst_1
+        11: goto          15
+        14: iconst_0
+        15: istore        5
+        17: iload         5
+        19: ifeq          28
+        22: invokestatic  #111                // Method java/util/Optional.empty:()Ljava/util/Optional;
+        25: goto          29
+        28: aload_1
+        29: aload_3
+        30: invokevirtual #117                // Method dev/codex/schubert/nk/protocol/file/MediaDescriptor.byteLength:()J
+        33: invokestatic  #121                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser.parseFirst:(Ljava/util/Optional;J)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+        36: astore        6
+        38: new           #127                // class java/util/HashMap
+        41: dup
+        42: invokespecial #129                // Method java/util/HashMap."<init>":()V
+        45: astore        7
+        47: aload         7
+        49: ldc           #130                // String Accept-Ranges
+        51: ldc           #132                // String bytes
+        53: invokeinterface #134,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        58: pop
+        59: aload         7
+        61: ldc           #140                // String Content-Type
+        63: iload         5
+        65: ifeq          73
+        68: ldc           #142                // String application/octet-stream
+        70: goto          77
+        73: aload_3
+        74: invokevirtual #144                // Method dev/codex/schubert/nk/protocol/file/MediaDescriptor.mimeType:()Ljava/lang/String;
+        77: invokeinterface #134,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        82: pop
+        83: aload         7
+        85: ldc           #147                // String Content-Disposition
+        87: aload_3
+        88: invokestatic  #149                // Method dev/codex/schubert/nk/web/media/ContentDispositionFactory.create:(Ldev/codex/schubert/nk/protocol/file/MediaDescriptor;)Ljava/lang/String;
+        91: invokeinterface #134,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        96: pop
+        97: aload         7
+        99: ldc           #155                // String X-Content-Type-Options
+       101: ldc           #157                // String nosniff
+       103: invokeinterface #134,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       108: pop
+       109: aload         7
+       111: ldc           #159                // String Cache-Control
+       113: ldc           #161                // String private, no-store
+       115: invokeinterface #134,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       120: pop
+       121: lconst_0
+       122: lstore        9
+       124: aload         6
+       126: dup
+       127: invokestatic  #163                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       130: pop
+       131: astore        13
+       133: iconst_0
+       134: istore        14
+       136: aload         13
+       138: iload         14
+       140: invokedynamic #166,  0            // InvokeDynamic #1:typeSwitch:(Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;I)I
+       145: tableswitch   { // 0 to 2
+                       0: 182
+                       1: 204
+                       2: 259
+                 default: 172
+            }
+       172: new           #170                // class java/lang/MatchException
+       175: dup
+       176: aconst_null
+       177: aconst_null
+       178: invokespecial #172                // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+       181: athrow
+       182: aload         13
+       184: checkcast     #175                // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full
+       187: astore        15
+       189: sipush        200
+       192: istore        8
+       194: aload         15
+       196: invokevirtual #177                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.length:()J
+       199: lstore        11
+       201: goto          293
+       204: aload         13
+       206: checkcast     #180                // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+       209: astore        16
+       211: sipush        206
+       214: istore        8
+       216: aload         16
+       218: invokevirtual #182                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.start:()J
+       221: lstore        9
+       223: aload         16
+       225: invokevirtual #185                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.length:()J
+       228: lstore        11
+       230: aload         7
+       232: ldc           #186                // String Content-Range
+       234: lload         9
+       236: aload         16
+       238: invokevirtual #188                // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.end:()J
+       241: aload_3
+       242: invokevirtual #117                // Method dev/codex/schubert/nk/protocol/file/MediaDescriptor.byteLength:()J
+       245: invokedynamic #191,  0            // InvokeDynamic #2:makeConcatWithConstants:(JJJ)Ljava/lang/String;
+       250: invokeinterface #134,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       255: pop
+       256: goto          293
+       259: aload         13
+       261: checkcast     #195                // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable
+       264: astore        17
+       266: sipush        416
+       269: istore        8
+       271: lconst_0
+       272: lstore        11
+       274: aload         7
+       276: ldc           #186                // String Content-Range
+       278: aload_3
+       279: invokevirtual #117                // Method dev/codex/schubert/nk/protocol/file/MediaDescriptor.byteLength:()J
+       282: invokedynamic #197,  0            // InvokeDynamic #3:makeConcatWithConstants:(J)Ljava/lang/String;
+       287: invokeinterface #134,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       292: pop
+       293: aload         7
+       295: ldc           #200                // String Content-Length
+       297: lload         11
+       299: invokestatic  #202                // Method java/lang/Long.toString:(J)Ljava/lang/String;
+       302: invokeinterface #134,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       307: pop
+       308: aload         4
+       310: iload         8
+       312: aload         7
+       314: invokestatic  #207                // InterfaceMethod java/util/Map.copyOf:(Ljava/util/Map;)Ljava/util/Map;
+       317: invokeinterface #211,  3          // InterfaceMethod dev/codex/schubert/nk/web/media/MediaRangeService$Response.begin:(ILjava/util/Map;)V
+       322: iload_2
+       323: ifne          348
+       326: lload         11
+       328: lconst_0
+       329: lcmp
+       330: ifle          348
+       333: aload_0
+       334: aload         4
+       336: invokeinterface #217,  1          // InterfaceMethod dev/codex/schubert/nk/web/media/MediaRangeService$Response.body:()Ljava/io/OutputStream;
+       341: lload         9
+       343: lload         11
+       345: invokestatic  #221                // Method dev/codex/schubert/nk/web/media/MediaBodyStreamer.copy:(Ljava/nio/channels/SeekableByteChannel;Ljava/io/OutputStream;JJ)V
+       348: return
+      LineNumberTable:
+        line 92: 0
+        line 95: 17
+        line 94: 33
+        line 96: 38
+        line 97: 47
+        line 98: 59
+        line 99: 83
+        line 100: 97
+        line 101: 109
+        line 103: 121
+        line 105: 124
+        line 106: 182
+        line 107: 189
+        line 108: 194
+        line 109: 201
+        line 110: 204
+        line 111: 211
+        line 112: 216
+        line 113: 223
+        line 114: 230
+        line 116: 238
+        line 114: 250
+        line 117: 256
+        line 118: 259
+        line 119: 266
+        line 120: 271
+        line 121: 274
+        line 124: 293
+        line 125: 308
+        line 126: 322
+        line 127: 348
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+          194      10     8 status   I
+          201       3    11 length   J
+          189      15    15  full   Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Full;
+          216      43     8 status   I
+          230      29    11 length   J
+          211      48    16 partial   Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial;
+          266      27    17 ignored   Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+            0     349     0 channel   Ljava/nio/channels/SeekableByteChannel;
+            0     349     1 range   Ljava/util/Optional;
+            0     349     2  head   Z
+            0     349     3 descriptor   Ldev/codex/schubert/nk/protocol/file/MediaDescriptor;
+            0     349     4 response   Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;
+           17     332     5 attachment   Z
+           38     311     6 selection   Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+           47     302     7 headers   Ljava/util/Map;
+          271      78     8 status   I
+          124     225     9 start   J
+          274      75    11 length   J
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0     349     1 range   Ljava/util/Optional<Ljava/lang/String;>;
+           47     302     7 headers   Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;
+      StackMapTable: number_of_entries = 13
+        frame_type = 14 /* same */
+        frame_type = 64 /* same_locals_1_stack_item */
+          stack = [ int ]
+        frame_type = 252 /* append */
+          offset_delta = 12
+          locals = [ int ]
+        frame_type = 64 /* same_locals_1_stack_item */
+          stack = [ class java/util/Optional ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 43
+          locals = [ class java/nio/channels/SeekableByteChannel, class java/util/Optional, int, class dev/codex/schubert/nk/protocol/file/MediaDescriptor, class dev/codex/schubert/nk/web/media/MediaRangeService$Response, int, class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection, class java/util/Map ]
+          stack = [ class java/util/Map, class java/lang/String ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 3
+          locals = [ class java/nio/channels/SeekableByteChannel, class java/util/Optional, int, class dev/codex/schubert/nk/protocol/file/MediaDescriptor, class dev/codex/schubert/nk/web/media/MediaRangeService$Response, int, class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection, class java/util/Map ]
+          stack = [ class java/util/Map, class java/lang/String, class java/lang/String ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 58
+          locals = [ class java/nio/channels/SeekableByteChannel, class java/util/Optional, int, class dev/codex/schubert/nk/protocol/file/MediaDescriptor, class dev/codex/schubert/nk/web/media/MediaRangeService$Response, int, class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection, class java/util/Map, top, long, top, top, class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection, int ]
+          stack = []
+        frame_type = 35 /* same */
+        frame_type = 9 /* same */
+        frame_type = 21 /* same */
+        frame_type = 54 /* same */
+        frame_type = 255 /* full_frame */
+          offset_delta = 33
+          locals = [ class java/nio/channels/SeekableByteChannel, class java/util/Optional, int, class dev/codex/schubert/nk/protocol/file/MediaDescriptor, class dev/codex/schubert/nk/web/media/MediaRangeService$Response, int, class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection, class java/util/Map, int, long, long ]
+          stack = []
+        frame_type = 54 /* same */
+    Exceptions:
+      throws java.io.IOException
+    Signature: #278                         // (Ljava/nio/channels/SeekableByteChannel;Ljava/util/Optional<Ljava/lang/String;>;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;)V
+
+  private static void lambda$deliver$0(java.util.Optional, boolean, dev.codex.schubert.nk.protocol.file.MediaDescriptor, dev.codex.schubert.nk.web.media.MediaRangeService$Response, java.nio.channels.SeekableByteChannel) throws java.io.IOException;
+    descriptor: (Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;Ljava/nio/channels/SeekableByteChannel;)V
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=5, locals=5, args_size=5
+         0: aload         4
+         2: aload_0
+         3: iload_1
+         4: aload_2
+         5: aload_3
+         6: invokestatic  #227                // Method respond:(Ljava/nio/channels/SeekableByteChannel;Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;)V
+         9: return
+      LineNumberTable:
+        line 77: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0 range   Ljava/util/Optional;
+            0      10     1  head   Z
+            0      10     2 descriptor   Ldev/codex/schubert/nk/protocol/file/MediaDescriptor;
+            0      10     3 response   Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;
+            0      10     4 channel   Ljava/nio/channels/SeekableByteChannel;
+    Exceptions:
+      throws java.io.IOException
+}
+SourceFile: "MediaRangeService.java"
+NestMembers:
+  dev/codex/schubert/nk/web/media/MediaRangeService$Response
+  dev/codex/schubert/nk/web/media/MediaRangeService$FileSource
+  dev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation
+BootstrapMethods:
+  0: #296 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #287 (Ljava/nio/channels/SeekableByteChannel;)V
+      #289 REF_invokeStatic dev/codex/schubert/nk/web/media/MediaRangeService.lambda$deliver$0:(Ljava/util/Optional;ZLdev/codex/schubert/nk/protocol/file/MediaDescriptor;Ldev/codex/schubert/nk/web/media/MediaRangeService$Response;Ljava/nio/channels/SeekableByteChannel;)V
+      #287 (Ljava/nio/channels/SeekableByteChannel;)V
+  1: #303 REF_invokeStatic java/lang/runtime/SwitchBootstraps.typeSwitch:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #175 dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full
+      #180 dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+      #195 dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable
+  2: #309 REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #292 bytes \u0001-\u0001/\u0001
+  3: #309 REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #294 bytes */\u0001
+InnerClasses:
+  public static #316= #20 of #2;          // FileSource=class dev/codex/schubert/nk/web/media/MediaRangeService$FileSource of class dev/codex/schubert/nk/web/media/MediaRangeService
+  public static final #317= #74 of #71;   // Reason=class dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason of class dev/codex/schubert/nk/web/media/MediaDeliveryException
+  public static #318= #212 of #2;         // Response=class dev/codex/schubert/nk/web/media/MediaRangeService$Response of class dev/codex/schubert/nk/web/media/MediaRangeService
+  public static #319= #284 of #2;         // ReadOperation=class dev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation of class dev/codex/schubert/nk/web/media/MediaRangeService
+  public static #320= #276 of #122;       // Selection=class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection of class dev/codex/schubert/nk/web/media/HttpByteRangeParser
+  public static final #321= #175 of #122; // Full=class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full of class dev/codex/schubert/nk/web/media/HttpByteRangeParser
+  public static final #322= #180 of #122; // Partial=class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial of class dev/codex/schubert/nk/web/media/HttpByteRangeParser
+  public static final #323= #195 of #122; // Unsatisfiable=class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable of class dev/codex/schubert/nk/web/media/HttpByteRangeParser
+  public static final #328= #324 of #326; // Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles
