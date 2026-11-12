@@ -1,0 +1,171 @@
+{
+  "groupId": "PGPT-WBS65-CANCEL-DELETE-TARGET-FORMS-ORIGINAL8-NORMAL-20261113",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1149_WBS65取消削除原八通常PT結果.json",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG27992-target-forms8-scope-join-v1/manifest.json",
+  "manifestSha256": "240ceb2710710da8cdecb7cfa559cc976187b0ad213780ec77d1b0dc9bef1a29",
+  "terminalAtUTC": "2026-11-13T02:40:51.660205+09:00",
+  "run": "PG27992",
+  "workIds": [
+    "P01621-P01623-SHARED_TARGET_FORMS_ORIGINAL8-NORMAL_PT"
+  ],
+  "outcome": "TARGET_ORIGINAL8_SUCCESS_THREE_SOURCE_COMPONENT_FOUR100_FULL179_PARTIAL",
+  "technical": {
+    "kind": "P01621_P01623_TARGET_FORMS_ORIGINAL8",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27990-target-forms8-independent-v1/manifest.json",
+      "sha256": "c42c5325f48b79ee085814a20a674d9a0b6008376a15116778d8f0262a561dce"
+    },
+    "tests": 8,
+    "newDefinitions": 0,
+    "newAcceptance": 0,
+    "physicalClasses": 179,
+    "positiveMainCrc": 33,
+    "completeSourceCounters": {
+      "dev/codex/schubert/nk/web/form/TargetOperationInput": {
+        "INSTRUCTION": {
+          "covered": 228,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 32,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 42,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 20,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 4,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "dev/codex/schubert/nk/web/form/QuestionDeleteForm": {
+        "INSTRUCTION": {
+          "covered": 45,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 10,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 7,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 7,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "dev/codex/schubert/nk/web/form/CancelForm": {
+        "INSTRUCTION": {
+          "covered": 45,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 10,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 7,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 7,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      }
+    },
+    "completeSourceComponentCounters": {
+      "METHOD": {
+        "covered": 18,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 3,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 62,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 32,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 318,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 34,
+        "missed": 0
+      }
+    },
+    "completeSourceComponentFour100": true,
+    "naturalNoBranchSources": [
+      "dev/codex/schubert/nk/web/form/CancelForm",
+      "dev/codex/schubert/nk/web/form/QuestionDeleteForm"
+    ],
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 2688,
+        "missed": 15105
+      },
+      "BRANCH": {
+        "covered": 165,
+        "missed": 887
+      },
+      "LINE": {
+        "covered": 496,
+        "missed": 3047
+      },
+      "COMPLEXITY": {
+        "covered": 154,
+        "missed": 1159
+      },
+      "METHOD": {
+        "covered": 103,
+        "missed": 657
+      },
+      "CLASS": {
+        "covered": 30,
+        "missed": 132
+      }
+    },
+    "wholeScopeFour100": false,
+    "MainSourcesRebuilt": 3,
+    "MainChanged": false,
+    "TestChanged": false,
+    "precompileFullCheckstyleAdded": true,
+    "roster": {
+      "runs": 65,
+      "actualExecutions": 3582,
+      "success": 3554,
+      "failed": 28,
+      "scope": "EXPLICIT_OBSERVED_ROSTER_NOT_GLOBAL_UNIQUE_OR_FORMAL"
+    }
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1148_WBS65予実・取消削除原八PT後版229.json",
+    "sha256": "a976212743189f63c9b5959023bcd1e7db37cf680fc88cd7a5b83b21a53a9e09"
+  },
+  "checkpointText": "取消削除原whole8全成功/FESabort0・新定義0、PG27990独立c42c5325。全179physical/33positiveCRC・RootNullAway Main3、TargetOperationInput/CancelForm/QuestionDeleteForm全三source component四100（後二wrapper自然branch0はN/A明示）、全179Proto未網羅保持。UI236手書48byte=N12＋固定UUID36、ID境界・path一致/operation混同/confirmtrue限定/canonical小文字UUID/閉field-CSRFtransport/欠落null空二値/immutable inputcopy/100並行8workerFuture5-finallyshutdownNow-await10を元全assertion不変更で検証。compile前fullCS-GJF-二style0、最終fullRoot PMD生5は全ownedJUnitpool行の明示非該当/抑制0、適用・未分類/CS-SB-format0、Main-Test変更0。BUG2733実Controller/YKT2359七caller・四NQviews/sessionDB/ownerAPI/実operation-token発行消費/HTTP/CHR/全451はHOLD未受入、原190新0/正式1964-53/工数null。 Testsource072618de3b2c162b07cdf9a5a9ba50dbc773e93e/Maine16500d7df27a55082f8c69a68c510414167dbb4。残{'low': 402.718, 'base': 850.1, 'high': 1667.49}未較正。",
+  "nextCommand": "ContinueP01622 fullQuestionSearchForm/QuestionListViewModel/listactualtemplate three sourcecontract UI224236SS313314323332 withcurrentSearch14 PG27958 evidence/no replay, fourNQviews dynamicHOLD. ThenP01623 DeleteForm/DetailVM/template/currentTarget8 evidence, P01624 ErrorController/filter/View/template andP01625 commonJS-VCSS normalunit safeclosure. No heldfixtures/native/DB/Root/VM; Usage next02:51:56/freshquota."
+}

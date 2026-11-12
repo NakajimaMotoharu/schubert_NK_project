@@ -118,3 +118,6 @@ P01620/22原検索入力26は[仕様](4167_P0162022通知質問検索原二十�
 
 
 WBS-P016-21公開source契約/独立期待値/TestIDは[4169_P01621通知明細原七artifact契約対応.md](4169_P01621通知明細原七artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+P01621/23原取消削除8は[仕様](4171_P0162123取消削除原八単体仕様.md)／[結果](4172_P0162123取消削除原八単体結果.md)、三完全source component四100/全179partial、実TokenDB/ownerAPI/HTTP/CHR/451別HOLD未受入。
