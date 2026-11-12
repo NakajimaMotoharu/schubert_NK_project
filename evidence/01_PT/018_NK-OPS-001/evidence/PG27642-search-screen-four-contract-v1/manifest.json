@@ -1,0 +1,162 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T21:46:13.254850+09:00",
+  "source": "0e6d8d7b05b4beb68b972331b4eb824a603f24b8",
+  "productionCoreMain": "43d4489fda4018505827c8f125f93ef501c92e14",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/ScenarioSearchForm.java": "ce70478c3c11c49ae841e849a6e9d81064cbda1f590c956d3cfe48f751c2ac78",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ScenarioSearchResultsViewModel.java": "fcb24eb77942508626c84db02af9fd5e688edd67002af8c7e548d9e478997dd1",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ScenarioSearchViewModel.java": "12bc2a9ea42f34c62daa34d1589327c93778f4b691221b484072837a1a47b821",
+    "src/schubert-nk-web/src/main/resources/templates/search.html": "e3db4ebdc9372eb396d2fe95cf56aced827d400503cca1317b3572e53a69c4a7"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/222_画面共通・レイアウト設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "8a52f0de895933c5696d7d5d385287729480a40384cd1855ea99d3d9a914763c"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/223_現行機能画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "db8c325e5d79f27a41ac5c92c815590d2434320ffcecd8dffd80953aa7c2aa1d"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "8f9abda07bc93262c264eae723c74245165bf0806b273b0d007e9fa46f37fa46"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01603-PG01",
+      "methods": "ScenarioSearchForm.bind/toRequest",
+      "testIds": [
+        "PT-WEB-214..221"
+      ],
+      "expected": "Closedq/game/speaker/chapter/entry_type/voice/page singlevalue map snapshot. Top-levelnull/mapnullkey/list/nullElement violatesnonnull APIcontract andfailsfast(asoriginalweb220), HTTP missingfield=>empty, empty/multiplevaluebindingissue/unknownfieldFORM. CheckCRLF/TAB/NUL/loneUTF16 beforeNFC thenASCIItrim; q/chapter256/speaker128 UTF8bytes, no truncation. Gameempty/N1/N2, typeempty/dialogue/narration, voiceempty/with/without only; pageabsentempty1, intASCII0/negative→1, >999999/nonint/overflowreject. InvalidtoRequestforbidden, validoptionalempty/typedclosedvalues/fixedpage100; sourceparseNumberFormatException originatesfinalString/JDK only, noexternalexceptioncatalog loss."
+    },
+    {
+      "id": "P01603-PG02",
+      "methods": "ScenarioSearchResultsViewModel.from/Row/Audio",
+      "testIds": [
+        "PT-WEB-206..213"
+      ],
+      "expected": "Non-nullclosedactor/PAGED100/immutable typedrecords; exactrowcount0orlast-first+1, preserveAPIrecordorder (SS234 display_order), line>=1 andaudioflag/id/pathallpaired. Displaygame/chapter/speaker/body/scriptpathonly; no physicalpath/context/authority; dialogueセリフ/narrationナレーション. Fixedscenario numericID#entry-ID anchor/AudioID endpoint+download, no decode/untrustedURL. NoquerysortorvoicepickinWeb: backendchoosesfirstAudioID+displaypathorder asUI234321. Displayviewdoesnotauthorize media."
+    },
+    {
+      "id": "P01603-PG03",
+      "methods": "ScenarioSearchViewModel.success/invalid/pageLink/FieldError",
+      "testIds": [
+        "PT-WEB-222..229"
+      ],
+      "expected": "Validformrequiredforsuccess, games<=10/speakers<=500 preserveAPIorder/immutablecopies, effectivepage=min(request,totalpages), inconsistentresponsereject. Invalidviewhasnoresults/noAPIpage, retainnonemptygame/speaker andnormalizedfilters. ErrororderFORM/Q/GAME/SPEAKER/CHAPTER/TYPE/VOICE/PAGE fixedenum; closedJapanese messages including bytebounds. Prev/nextonlywhenpresent, path/search andall6conditions percent-UTF8-encoded withactualeffectivepage; script/&/quotes remainencoded, noAPIresult/cache/authobject exposed."
+    },
+    {
+      "id": "P01603-PG04",
+      "methods": "search.html/sharedpagination/layout/JSreference",
+      "testIds": [
+        "PT-SCR-026..033",
+        "PT-SEARCH-DOM001..008",
+        "PT-SCR025-A..H"
+      ],
+      "expected": "ApprovedschubertNK検索 brand/header/fixedGET/search/nohiddenpagewhennewquery, allowlistedchoices/preserveinvalidtypedchoicesescaped, fieldsummaryhiddenonlyempty/rolealert; escapedrowtext/no thutext, page0message該当するデータはありません, optionalchapter/speaker/audioandfixedopen/DL/preloadnone. Top/bottomsame100pager/range/count, actualrowskeptAPIorder. Externaldefersearch-speaker-submit.js validatesrawchars/NFCtrimUTF8samebounds andgamechange requestSubmit; JSownedP01625 feeonce/notexecutedhere, Page/Topbar ownedP01507. ActualHTTP/Security/CHR/DB/JSV8 acceptance separate."
+    }
+  ],
+  "immutablePriorProofMatches": [
+    {
+      "original": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24396-web-six-form-bounded-fiftysix-independent-v1/manifest.json",
+        "sha256": "ea97726181dbdf1c210d2316c70467ad0765b7b8ef011ee10d01c5758b013d96"
+      },
+      "originalSource": "2dd95b08fd3d03307a4a3d26ba7eeef824b640c3",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "tests": 56,
+      "wholeInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    },
+    {
+      "original": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24370-pure-view-seven-bounded-sixtyfour-independent-v1/manifest.json",
+        "sha256": "bb83280e8349a3049e2ce6956d01d6bbb2b59a3eae2945e73a8962a40b633ec5"
+      },
+      "originalSource": "ed2e968a8381c491ba8df6986e59d48afb0b9c0f",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "tests": 64,
+      "wholeInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    },
+    {
+      "original": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24476-search-animation-view-bounded-sixteen-independent-v1/manifest.json",
+        "sha256": "f8b78eff11977bfb750a956092d49430da16731052b4ff85ba4395020cfc7c91"
+      },
+      "originalSource": "192a154e721f97f92d534c774349737ccbd44497",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "tests": 16,
+      "wholeInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    },
+    {
+      "original": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG24452-six-resource-dom-independent-v1/manifest.json",
+        "sha256": "8252688c6079afe59f95b623b884f9cd252747f2eafd958c56020d2df8075606"
+      },
+      "originalSource": "9a4a32f2a1ef0e64cbe3a41f8ec88a6235fde8bd",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "tests": 43,
+      "wholeInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false,
+      "javaCoverage": null,
+      "actualMvcBrowserAccepted": false
+    }
+  ],
+  "sharedScript": {
+    "path": "src/schubert-nk-web/src/main/resources/static/js/search-speaker-submit.js",
+    "sha256": "dcf25a57a0e304391a0d3c880c263db246e296d6a7af0322283ddb72fa3e48fa",
+    "owner": "WBS-P016-25",
+    "codeReviewed": true,
+    "nodeOrBrowserExecuted": false,
+    "noDuplicateSharedFee": true
+  },
+  "candidateReviewScope": "source contracts/priorindependentmanifests/fixtureimports-methodindex/null-owner-finite excerpts; no newwholefixture runtime admission claimed",
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-03/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_P01502_AUTH_ACTUAL_HTTP_API_AND_SAME_SOURCE_QUALITY_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1732_search_screen_contract_audit.py",
+    "sha256": "85f44bda6d6f24bc2b5a53862bf5cfceddff8006ae3f2d07432e6c4e527f6c07"
+  }
+}
