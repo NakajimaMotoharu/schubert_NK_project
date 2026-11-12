@@ -12,3 +12,6 @@ PG28180の変更はRuntime五conditional helper/SQL三helper call/Commit import�
 | PT-BACKUP-GRAPH2744-002..003 | 既知bodySQL＋既知cleanupSQLの両graphに固定Errorならprimary、primaryにErrorなしならcleanup。元top-level unknown130matrix優先・rollback/復元条件を不変更。有限非fatalcycleは固定catalog/原因や診断実体保持0。 | NOT_RUN・BeforeAll実DB wholeTestHOLD |
 
 当表は将来入力/独立expectedの準備であり、新しいJUnit method実装/実行件数ではない。元wholeTestから安全そうなmethodやfixtureを切出さず、別DataSource/Root/keyや代用fixtureを用意しない。各通常PT・coverage・NullAway/PMD/SpotBugsと必要同source全451は未実施を保持、BUG全体未完了。既old69 success/旧native/execを新sourceへ合算しない。補助検証command・終了code・input/原byte/差分/hashは018のPG28180 manifestに一意対応。Rootsource固定・独立sourcejoinは後続追記する。
+
+
+source固定commit 1ef5610854bf99cca938ae4b025b630e5e1a5d4b、独立sourcejoin [manifest](../018_NK-OPS-001/evidence/PG28184-backup-fatal-source-join-v1/manifest.json) SHA3b5a0cd4389fae0f06e07eb09c81d76c2e8b2ec880e34e8fd671fe1fb2b06270。BUG2743のArtifactVerifier三/Reader二はRuntime条件付き分類、checkedIOとSS333 ResourceScope/既primary-close優先は不変更。BUG2744 Commitは元全type優先選択後の既知SQL両失敗にprimary→cleanup、外catalog前に捕捉graphを分類。三Main七境界/八helper call/import一だけ元byte完全逆変換、GJF-CS0、batch→storage既依存を確認。Maincompile/NullAway-PMD-SB/実native-DB callerwholePT・coverageはHOLD未実施、sourcePGをPASSへ混ぜずBUG/YKT2359OPEN、既69PTと旧native成功転用0。 製品PT0、runtime/coverage未受入。
