@@ -1,0 +1,59 @@
+
+Failures (3):
+  JUnit Jupiter:WebCsrfFatalContractTest:fatal001ProviderCauseRetainsIdentityAndWipesThirtyTwoBytes()
+    MethodSource [className = 'dev.codex.schubert.nk.web.security.WebCsrfFatalContractTest', methodName = 'fatal001ProviderCauseRetainsIdentityAndWipesThirtyTwoBytes', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <java.lang.IllegalStateException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.security.WebCsrfFatalContractTest.fatal001ProviderCauseRetainsIdentityAndWipesThirtyTwoBytes(WebCsrfFatalContractTest.java:23)
+       [...]
+     Caused by: java.lang.IllegalStateException: CSRF generation is unavailable
+       dev.codex.schubert.nk.web.security.WebCsrfToken.generate(WebCsrfToken.java:41)
+       dev.codex.schubert.nk.web.security.WebCsrfFatalContractTest.lambda$fatal001ProviderCauseRetainsIdentityAndWipesThirtyTwoBytes$0(WebCsrfFatalContractTest.java:23)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:WebCsrfFatalContractTest:fatal005NextGenerationAfterFatalHasNoRetainedFailureOrBufferState()
+    MethodSource [className = 'dev.codex.schubert.nk.web.security.WebCsrfFatalContractTest', methodName = 'fatal005NextGenerationAfterFatalHasNoRetainedFailureOrBufferState', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <java.lang.IllegalStateException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.security.WebCsrfFatalContractTest.fatal005NextGenerationAfterFatalHasNoRetainedFailureOrBufferState(WebCsrfFatalContractTest.java:73)
+       [...]
+     Caused by: java.lang.IllegalStateException: CSRF generation is unavailable
+       dev.codex.schubert.nk.web.security.WebCsrfToken.generate(WebCsrfToken.java:41)
+       dev.codex.schubert.nk.web.security.WebCsrfFatalContractTest.lambda$fatal005NextGenerationAfterFatalHasNoRetainedFailureOrBufferState$0(WebCsrfFatalContractTest.java:73)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:WebCsrfFatalContractTest:fatal002SuppressedSqlNextRetainsIdentityAndOriginalGraph()
+    MethodSource [className = 'dev.codex.schubert.nk.web.security.WebCsrfFatalContractTest', methodName = 'fatal002SuppressedSqlNextRetainsIdentityAndOriginalGraph', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <java.lang.IllegalStateException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.security.WebCsrfFatalContractTest.fatal002SuppressedSqlNextRetainsIdentityAndOriginalGraph(WebCsrfFatalContractTest.java:36)
+       [...]
+     Caused by: java.lang.IllegalStateException: CSRF generation is unavailable
+       dev.codex.schubert.nk.web.security.WebCsrfToken.generate(WebCsrfToken.java:41)
+       dev.codex.schubert.nk.web.security.WebCsrfFatalContractTest.lambda$fatal002SuppressedSqlNextRetainsIdentityAndOriginalGraph$0(WebCsrfFatalContractTest.java:36)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+
+Test run finished after 147 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         5 tests found           ]
+[         0 tests skipped         ]
+[         5 tests started         ]
+[         0 tests aborted         ]
+[         2 tests successful      ]
+[         3 tests failed          ]
+

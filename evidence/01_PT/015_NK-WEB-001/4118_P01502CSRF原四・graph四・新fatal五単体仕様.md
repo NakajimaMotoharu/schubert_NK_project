@@ -17,3 +17,6 @@ PG27448はMainToken/SessionStore/InvalidRowとpackage-info二つの全5source/5p
 開始費.15/.45/.9pp cap2（新5/元source red対照.075/.225/.45＋safeMain compile/static/必要13資格.075/.225/.45）。Main固定1e442e0e、Test sourceは実行時記録。PG27452は新5のみを元fa9b相当のnormal実classへ実行し想定3失敗を製品FAILで保存する。PG27460は修正後全13を一度、PG27462で真正terminal/XML/allTest/CRC/単session/全5scope/init/四counterを独立照合。旧成功/別source/別execを合算せず、他Crypto29/Json12/Proto130の確認再演なし。
 
 実行 `PYTHONPATH=tools/quality python3 -B evidence/01_PT/018_NK-OPS-001/input/1643_csrf_fatal_original_red_control.py <固定Test source>`、次に`1641_csrf13_qualifier.py run <同source>`。全13未実行をPASSへ加算しない。BUG2707他projection六sourceと全53site runtime/実session認証/DB・chain・451/元190は未受入、正式1964/53/工数null、IT/ST宣言なし。
+
+
+実結果 Testd5c95d71/Main1e442e0e、27452元新5=3失敗2成功/OS1（独立判定0）、27460固定13全成功/FESabort0/OS0、27462独立SHA1db5217a62785a7b7b5a00fbd59beee21ce6562c27e116c53b66c81c1c518e07。Token L28/M8/C1/B8、helper L18/M2/C1/B12全100、全5physical/2positiveCRC、InvalidRow I3/L1/M1/C1不足/自然B0保持。新定義5・延べ18実行（赤3失敗含む）、元Test三source不変更。BUG2707他11site/六source・原WBS/実sessionDB/451は未受入。
