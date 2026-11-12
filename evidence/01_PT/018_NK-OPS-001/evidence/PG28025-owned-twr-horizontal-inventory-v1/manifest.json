@@ -1,0 +1,807 @@
+{
+  "actualExit": 0,
+  "source": "c90ad80639c4116766ba2d3b04597b98f712490a",
+  "productionCoreMain": "e16500d7df27a55082f8c69a68c510414167dbb4",
+  "command": [
+    "rg",
+    "--json",
+    "try \\(var (executor|pool) = Executors\\.newFixedThreadPool",
+    "src",
+    "tools/quality/architecture",
+    "--glob",
+    "*.java",
+    "--glob",
+    "!RootFailedStartRecoveryTest.java",
+    "--glob",
+    "!RootFailedStartPairRecoveryTest.java",
+    "--glob",
+    "!SnapshotKeyCloseWitness.java"
+  ],
+  "actualCommandExit": 0,
+  "matches": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "line": 224,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "line": 151,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseApprovalTest.java",
+      "line": 115,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifestTest.java",
+      "line": 593,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/StartupProofFrameTest.java",
+      "line": 244,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ChildStartupContextTest.java",
+      "line": 510,
+      "statement": "try (var pool = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpointTest.java",
+      "line": 469,
+      "statement": "try (var pool = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerificationTest.java",
+      "line": 850,
+      "statement": "try (var pool = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ServiceStartupAdmissionTest.java",
+      "line": 566,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseInventoryTest.java",
+      "line": 508,
+      "statement": "try (var pool = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepositoryTest.java",
+      "line": 176,
+      "statement": "try (var executor = Executors.newFixedThreadPool(10)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "line": 611,
+      "statement": "try (var pool = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginFailurePortTest.java",
+      "line": 284,
+      "statement": "try (var pool = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "line": 192,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoaderTest.java",
+      "line": 84,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredentialTest.java",
+      "line": 82,
+      "statement": "try (var pool = Executors.newFixedThreadPool(12)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorAesCredentialTest.java",
+      "line": 196,
+      "statement": "try (var pool = Executors.newFixedThreadPool(12)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccessTest.java",
+      "line": 137,
+      "statement": "try (var pool = Executors.newFixedThreadPool(12)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InternalErrorRouterPortTest.java",
+      "line": 364,
+      "statement": "try (var pool = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinatorTest.java",
+      "line": 1086,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinatorTest.java",
+      "line": 337,
+      "statement": "try (var pool = Executors.newFixedThreadPool(12)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/JdbcWebSessionStoreTest.java",
+      "line": 599,
+      "statement": "try (var pool = Executors.newFixedThreadPool(10)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiAdmittedConfigurationTest.java",
+      "line": 200,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinatorTest.java",
+      "line": 371,
+      "statement": "try (var pool = Executors.newFixedThreadPool(12)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/HeldMediaFileInspectorTest.java",
+      "line": 95,
+      "statement": "try (var pool = Executors.newFixedThreadPool(10)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricSourceTest.java",
+      "line": 340,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+      "line": 66,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+      "line": 257,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+      "line": 279,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepositoryTest.java",
+      "line": 469,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "line": 579,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "line": 372,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservationTest.java",
+      "line": 179,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxSealedProofTest.java",
+      "line": 300,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LogoutInboxServiceTest.java",
+      "line": 255,
+      "statement": "try (var pool = Executors.newFixedThreadPool(16)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycleTest.java",
+      "line": 232,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxProcessExecTest.java",
+      "line": 257,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifierTest.java",
+      "line": 165,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifierTest.java",
+      "line": 422,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java",
+      "line": 340,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginInboxServiceTest.java",
+      "line": 553,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxInodeSecurityTest.java",
+      "line": 267,
+      "statement": "try (var pool = Executors.newFixedThreadPool(12)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.java",
+      "line": 459,
+      "statement": "try (var pool = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "line": 67,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionFormLoginTest.java",
+      "line": 252,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogRequestTest.java",
+      "line": 262,
+      "statement": "try (var pool = Executors.newFixedThreadPool(10)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ContentDetailControllerTest.java",
+      "line": 488,
+      "statement": "try (var executor = Executors.newFixedThreadPool(12)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationServiceTest.java",
+      "line": 256,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/WebRequestSecurityTest.java",
+      "line": 487,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "line": 581,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceConfigFilesTest.java",
+      "line": 221,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/JdbcSessionStorePortTest.java",
+      "line": 437,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/UserBusinessControllerTest.java",
+      "line": 906,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxFileLockTest.java",
+      "line": 387,
+      "statement": "try (var executor = Executors.newFixedThreadPool(32)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxStartupAdmissionTest.java",
+      "line": 476,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationVerifierJdbcPortTest.java",
+      "line": 382,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+      "line": 768,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationResponseMapperTest.java",
+      "line": 84,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "line": 318,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "line": 569,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest.java",
+      "line": 427,
+      "statement": "try (var pool = Executors.newFixedThreadPool(10)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptRepositoryTest.java",
+      "line": 193,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxHostDirectoryCallsTest.java",
+      "line": 154,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryRequestTest.java",
+      "line": 297,
+      "statement": "try (var pool = Executors.newFixedThreadPool(10)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/TargetBusinessControllerTest.java",
+      "line": 352,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxStartupFileLockTest.java",
+      "line": 267,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthSessionServiceTest.java",
+      "line": 199,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxExecDescriptorsTest.java",
+      "line": 265,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationServiceTest.java",
+      "line": 536,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceTest.java",
+      "line": 209,
+      "statement": "try (var executor = Executors.newFixedThreadPool(12)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/WebLogIngestServiceTest.java",
+      "line": 126,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorLauncherTest.java",
+      "line": 218,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxDirectoryCallsTest.java",
+      "line": 67,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxDirectoryCallsTest.java",
+      "line": 237,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticatorTest.java",
+      "line": 460,
+      "statement": "try (var pool = Executors.newFixedThreadPool(10)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+      "line": 792,
+      "statement": "try (var pool = Executors.newFixedThreadPool(10)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+      "line": 823,
+      "statement": "try (var pool = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+      "line": 864,
+      "statement": "try (var pool = Executors.newFixedThreadPool(10)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/BackupRerunBoundaryTest.java",
+      "line": 261,
+      "statement": "try (var pool = Executors.newFixedThreadPool(16)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/LogCleanupProgressBoundaryTest.java",
+      "line": 223,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequestTest.java",
+      "line": 230,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "tools/quality/architecture/PublicCanonicalAadValueTest.java",
+      "line": 178,
+      "statement": "try (var pool = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupStepRepositoryTest.java",
+      "line": 459,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolverTest.java",
+      "line": 373,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadinessTest.java",
+      "line": 132,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "line": 258,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbeTest.java",
+      "line": 575,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGateTest.java",
+      "line": 212,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupCommitServiceTest.java",
+      "line": 415,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/UnitStateParserBytePortTest.java",
+      "line": 149,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequestTest.java",
+      "line": 170,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClientTest.java",
+      "line": 149,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicyTest.java",
+      "line": 219,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupUnitTerminationTest.java",
+      "line": 559,
+      "statement": "try (var pool = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "line": 119,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java",
+      "line": 147,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootReleaseAdmissionTest.java",
+      "line": 907,
+      "statement": "try (var pool = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshotTest.java",
+      "line": 466,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcessTest.java",
+      "line": 372,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRetirementRecordsTest.java",
+      "line": 255,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupDatabaseWorkerTest.java",
+      "line": 652,
+      "statement": "try (var pool = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestReaderTest.java",
+      "line": 309,
+      "statement": "try (var pool = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupWorkerRequestFilesTest.java",
+      "line": 371,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupAdmissionViewOwnerTest.java",
+      "line": 360,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "line": 256,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsTest.java",
+      "line": 282,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceFileLockTest.java",
+      "line": 80,
+      "statement": "try (var pool = Executors.newFixedThreadPool(32)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFileTest.java",
+      "line": 374,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupDatabaseCopyTest.java",
+      "line": 466,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFilesTest.java",
+      "line": 551,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootReleaseApprovalReaderTest.java",
+      "line": 393,
+      "statement": "try (var pool = Executors.newFixedThreadPool(4)) {",
+      "status": "UNASSESSED_SOURCE_ONLY_NOT_A_BUG_OR_SUCCESS_CLASSIFICATION"
+    }
+  ],
+  "matchedSites": 111,
+  "matchedFiles": 104,
+  "inputHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceTest.java": "3814db950ec9a6e6eceee7c529efbbb39731a53acea84f1c4da803804cc5bdb8",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java": "cdbe7ab2d7c9dd5db3d54f612d85d297f575f5e0881e00467fc997919fbdcf91",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest.java": "aa4db7e439cbb8fdf1adee7f8352dd60d65e21f2d6ce44c5d0fde0cfbf937f3f",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryRequestTest.java": "245b84e2fe0af87848385d8ed4de445c0dfd574b0dc02e6f226101521c3d9b4a",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogRequestTest.java": "283303adafd8fd708a2a82c1223ba6554aec62bb10b48af3d5efa7532e71c1fd",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequestTest.java": "84da364beb7d9537bd5cb25a3907db733a810d9a34fd36279bfaad4f94329390",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiAdmittedConfigurationTest.java": "63d82faa7692112a050e39ea6a15418f7de3edfb252f059f0220310dd66902cf",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java": "4cea79b53b8e5f33b4400818c3a20913863a0fa9f9ad3e33d93999bd999de42a",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/HeldMediaFileInspectorTest.java": "7ab38eaf180482226da157377790ab9c3001f164195b27b44a4b232320044c07",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinatorTest.java": "342820f02bd4e58561a4b732398ac5b676d434ba63a1f597096eef45a959e7eb",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/WebLogIngestServiceTest.java": "c184a06cf4e4811ed04db656d98744c6ec039bb34c2d2dd669eaec8f1d45ecf2",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/BackupRerunBoundaryTest.java": "8f2796e8d66e825055c64d2cd32c7c8c44a1fecfec8893976ec4fcd18742ed51",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorLauncherTest.java": "6389beb1e03ef0ada92f8350d5545832521828fdea2aba4bd8ffd7396e090312",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/LogCleanupProgressBoundaryTest.java": "7583cdbb9c8f5a265b053ec00c0eec369296fadb4c22fe5cd93a74af1dea3976",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java": "60029426a27efd8f06ec26ab2adf7409d026d8e39b303c59503336fcebd3913a",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java": "ac9ed3fad5582cd0afaa58d233add3ff127e11c701ee884a4e4e69ed001649fa",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java": "7897d964e49abf34487ec3fe589fce82dcd6d7a6fad555eb69237f7e1a701970",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java": "43a19e9249e6418d74e2be9e8a3918569a887a1c3ea037a86a38827c95f15d46",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticatorTest.java": "4906dbaa81ca9d27f27eb11d327e240e5a28cb16d1f89f196824c235275c4a21",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.java": "3e1ae38ba52644c2027a712bd22ea165c29e42f6d044712c6d61d70ce1d4516f",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationServiceTest.java": "fb08bb5f49818298542e7b6711f2106e34c55a342dd081dda92a668ed2bafbaf",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthSessionServiceTest.java": "d2452c513a9c9f92bdcf67de977fa547b5dbe2319299955610c5a93d0b579381",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifierTest.java": "990217488f3a10a40597eb5fc53da442b6f474df9f8d0d3dbe650fde604a7057",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationResponseMapperTest.java": "d42472923a2399840df438ba00f9cf6e46619bc4fff1f567a8a46e99c98116ec",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationServiceTest.java": "be9dd86bd0244c79a60b66354c901371f5acae529ce000b6096d89c98b9d1985",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationVerifierJdbcPortTest.java": "9f8e0b379cbfcbfc8bee9e64eb2f119d719435b433befbb9c43225487afae089",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptRepositoryTest.java": "81c90422652e9314a1aac1a04cd4a911e655c866aa24f761b2a4b057e07c565e",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginInboxServiceTest.java": "02e4ea99e5306a6977f0726574c60763e35254bd1a7a671599921adb2dcf2ce6",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LogoutInboxServiceTest.java": "e18f014a8e3ba8a5ef79acfbfbb8c94fe0735bde2daf1afa85497befc65e831a",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupCommitServiceTest.java": "6fbd619307e67f68bbbfbcdfa51fbe675288250f5adadc4a176b76105a040278",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java": "a312f0550a33d71bf8243cc12d11c839b47269b038be10e2c0397c549b42e767",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupDatabaseCopyTest.java": "3cf04995f2be10dfbab10dea3c517c32260b29736b2885d6db591dea116062ef",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupDatabaseWorkerTest.java": "731fce7128f6f3fd60e78b5df84a7b6e79905c441f0fc638bc0077f7034ef927",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java": "c474a1eea57ea0a3974fcb577c3d068154d634cd41580d27343954a1b18d3692",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestReaderTest.java": "0a197e216f1b4291e829956cb90b2b585ad982ad31df29b6057b1d3c6b45585e",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupWorkerRequestFilesTest.java": "1f0ac0a1a36e695bc810122c861c64342fa4a61b0eccf409246b4cbdfe941c34",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFilesTest.java": "b3dbaff27a988a095defa2bbda7e8775b6bc0a5bdd4f88403e62f7d53d88048a",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceFileLockTest.java": "f55f3b4cfa0dc0729b2a3fd7ec869286d610bf21fe71ca97716af196dd8d7310",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsTest.java": "6a771cff5dad26f8b9f469667169f113b3e91be172fe52f400e53d543615dc32",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRetirementRecordsTest.java": "f3aafc9ea0ef24317484f51e3d609045aa23178d52b77880df6a282df7bf6d7e",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootReleaseApprovalReaderTest.java": "f3c2b814955108002db16c81db4cb4f41fbebf942c256a0d44c0583ac1def2fc",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFileTest.java": "9b11e18091f918223d38a02d6ba3cc01c85c92424cac18cd30d8502081ef87ac",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupAdmissionViewOwnerTest.java": "719595a634dfe355e89e88e8cbadbeeb32cf417ed5e4c859b9f7bf940b46c3f2",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClientTest.java": "850ebead00f3b0cf415f4e2413308811bc012862bb5345deb2851419e165bbf3",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGateTest.java": "9d712f9471ee73fd7e32e8cf37ee08c0922c6080230dc3766846c7fe37dff6b1",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcessTest.java": "f29bf5e6447c81f9fd2d3829b2ec1a740eade66d2067b99441b88d4e3d3d4e3b",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupUnitTerminationTest.java": "077c29d1aad07c974ba31aa621278a0c8589359363b3f9ea526e0efc3b4702ea",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequestTest.java": "674c4ec473789c1db6026308e93b6922e4eae59c895b91c8e68c215c06fa39f1",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolverTest.java": "78c7f605d7f8215caf08b0391d7fc037fcef6b0ca0c504bf6f8f9edea6896aeb",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java": "c894e2f65a3acc24624b5044b8a4cb10d5c24aab04546e5418b3c1f1db54bf04",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java": "c5b577e45049173c254f6e79a24c8645275674e6d1f64489e6ae0ebc867bc855",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbeTest.java": "8a33cc914673443152ce6f0887c76295525d97d26e862dcdfb184163daf7300b",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshotTest.java": "edf0ce67d649d340e2e61907cc8228cd9c44fe08a21a9f011d81cdcbef4d1a63",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicyTest.java": "b9804b33eb028770bac620fabe176883ad8a627aa92fdc0f2282264ae43114f4",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadinessTest.java": "fe14df69a1b4e7deb21b0afe03825fbf1fb02b30055b42c73f8ab29f3ce7a359",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootReleaseAdmissionTest.java": "40d987d7f2c538c66b7530ba77b672768ef2be90bf6556e5021fab71de6f7445",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/UnitStateParserBytePortTest.java": "5502cdcc889900367fe8b4361c2ecd081e1eeda9213c4d7786e89f90a1946b3f",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupStepRepositoryTest.java": "3aaa32fb24d0f1858c2ccbdcf9995d91969642b5576a32ba76ff0779bcf7741d",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java": "c48aaae03b6901d3511ac2cda416c0f184044b6baefcf307d64c69997937a63c",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorAesCredentialTest.java": "3a9802a9167a4d82f7d0b77e10d4db8dda571f2ef2ebcdc9a615bd1c11fd8616",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccessTest.java": "122713d3313837eaa465b4c152f5f367ab7cd42d776a677eec8b30ba4ebdfe71",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredentialTest.java": "8fce092a7e882fdc66773a7592716b8d4a9b8afc7aa1c19b34c5d96ef302e989",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ChildStartupContextTest.java": "7fa014c542c0a25569f8a10e9f046660394122c4b8c7b0597d2316c5c2bf5d60",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpointTest.java": "40d28e8f5c637ed3bade554aa703d828bbd279cb22aa43c2a9edcc6228183264",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseApprovalTest.java": "1440d9326c5018f7d6a79ee50b1d9dd5bd61c0cf169d07a7ade1a1e82e5ef85b",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseInventoryTest.java": "5e31e9acb25f892a208e05b4f4e4b8e70969dd116c00643e32bee67a95a1ad4c",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerificationTest.java": "1b9d3abdf839e6e66c58e2c7e377b49901dff2361c575c06b6a5c4ffc5c2b338",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java": "2f02b94bd908ca395000a05b8bc9928e184539f8a512d39ec30290f7cc65dd06",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ServiceStartupAdmissionTest.java": "a4b7b28f002f43eecdbeb46ff8e9523e96eb3bc747803b2998246a1098719963",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/StartupProofFrameTest.java": "658c1736b4d4d0927d4db12eac869c5bf66dd8a29c862993d26780d52341fa59",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifestTest.java": "41ee3074a5da859ab33a6f0129f62ce7de9635152f35c2cf588d27015120a3a3",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java": "d56e00afaac0bfe0dd269d689b10df907a0f04a31e6021837a180ccea7f0b78b",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java": "76f862737d14f8de6676ff189f0842568e515149a3e7539ea6a960dec1d3fbd0",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxDirectoryCallsTest.java": "9fa23bf34577c56999113b938cf46d2eb564a31822cf70db3c8e8d8e0686109a",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxExecDescriptorsTest.java": "777582d7f7517180a54f142fc314a7161e921980da8b9dee170fff23768f9ea4",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxFileLockTest.java": "372b731a2f6e06d0d5be14d51ae624419197136c56d2ece55c37f026d6a13b85",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxHostDirectoryCallsTest.java": "9476a0154a70da98ad585e3e4948957dc7c0411502c049fc6366d4f78c2a3674",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxInodeSecurityTest.java": "d75ce7400426d874ab1405826b72d12cb227a15783354308048191fd96059107",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxProcessExecTest.java": "5cf629305535e82a9b54024d9012335a0bf37896a584e87e092758518ad412b9",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxSealedProofTest.java": "824ba98f1bd3d2e8a1fad780ee729982f5e4ac8818c0df8387fff8f2ffc1af02",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxStartupAdmissionTest.java": "145d310163244bf24c19d1b3b1666e3c2c45498e778555ed375eb4e4a0b151c2",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxStartupFileLockTest.java": "e8f675ab00ca1a1116bda3def1dee09474c3bed2fd9aafc11a276664c8fa7dbd",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceConfigFilesTest.java": "c4cc020dc204f413127cc745e5d7de703f0d28f9cf5f9fbbcc55a30144050bca",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java": "787dbdfb9e93ee7428b6d8c2522db3cddb1203a32fe5caa89bda12622d7a1575",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoaderTest.java": "43bc7332ebf8f05b53763635b914462473fa39f1c85b433887f3e1af5f22114a",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/JdbcWebSessionStoreTest.java": "a932b7b15262dec3d80bd8c6d93d560d7103e950036abae0f053675aaf4344b5",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java": "8168e79aabf6711644e77179ddc3741a7767a1c30080a5e2c6dedc6b5e2a987f",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java": "2a2d8e125bd39be3827b00201765b04830fed6851e8c934c157862754cf19bfd",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservationTest.java": "a23735273bf31a1c8b7c68737355364b19bc5d20e18ab3c422448de4016ed98b",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepositoryTest.java": "175d1c5385409c114cc2e8cf4d80f7028acf2c5bac6918e6293191a7d2f88078",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricSourceTest.java": "7a132db8f3a682afdbbc6cfeb63942dd9c062523e810e871a01d779cfd372ed8",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepositoryTest.java": "21807c9377145120abe4b11dfa89663083041ce15a7ce522e9972bedf7a0b6e0",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinatorTest.java": "372c6a650cbd734bfce4bbce0fe853db337612fd0c92acab3815ec1eb18145ad",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinatorTest.java": "0b5fa9f866fe30b9723adffb919fc0e359e342f2edc89da58a5b19aed8b877e7",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InternalErrorRouterPortTest.java": "48832e4824132c3518ceaed9d451065a94265a5ea90850e1f136701628fd982e",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginFailurePortTest.java": "3b70e5c73c52960db73ee96c7cf632c6399ec2a167de47846baae277bcee1815",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ContentDetailControllerTest.java": "3f0b6117c1a7656ef0a97f9890205e4de998f3393828c10549eac9738e08c2b9",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/JdbcSessionStorePortTest.java": "8ce537e9d32a9fa49ac17554b47eccd924f652fda07e6a0c26a9efb59a85ef38",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionFormLoginTest.java": "7c71a5dd6cc0366101768689d7078396ee25ab8ba0ac584b3ec98da3453bf6c0",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycleTest.java": "cfe40ad77f9b1d9cc24d33f85eef07d4df0fc02f1af0b77b73670586d05503f8",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/TargetBusinessControllerTest.java": "0c9d5b4d705d1c10a615113c04029f35bad956639090ebd205f71d78f0164b8e",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/UserBusinessControllerTest.java": "4ec7b267f4ca20905fa46c6e4a394b4b96d3e91c0fe73d0d5eea38c8b65d8368",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/WebRequestSecurityTest.java": "3839e452da52bde5e73a1eae0fde0f650a2916972a252d9b3bcfb75585b5de0c",
+    "tools/quality/architecture/PublicCanonicalAadValueTest.java": "9ba9b2009e7623821dc0a9d6bad223ed24b27d4005a761039dc2d551e03ec2d1"
+  },
+  "excludedBeforeRead": [
+    "RootFailedStartRecoveryTest.java",
+    "RootFailedStartPairRecoveryTest.java",
+    "SnapshotKeyCloseWitness.java"
+  ],
+  "protectedFilesNotRead": true,
+  "productTestsExecuted": 0,
+  "bug2734TwoSelectedPools": "QUALIFIED_NORMAL22_ONLY",
+  "ykt2387": "OPEN_REMAINING_SITES_REQUIRE_CRITERIA_REVIEW_NOT_AUTOMATIC_DEFECT",
+  "searchOnlyNotCompletion": true
+}
