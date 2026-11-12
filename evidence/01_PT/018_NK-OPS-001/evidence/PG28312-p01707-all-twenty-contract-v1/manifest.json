@@ -1,0 +1,266 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T06:52:18.390866+09:00",
+  "source": "ae3b4b274b7545ab0aff1d97612eeebd16b17d59",
+  "productionCoreMain": "934f144c1c2c2432cbd84835283b9323dd8ecf13",
+  "ownedSourceHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/CleanupStopReason.java": "948d471fb3d69fd417a3a52a17d46fc2e528814521158f336a0c055fa96b5590",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/CleanupStoppedException.java": "65b367602ff1357acd24ec4d7ba30483dd6346a44882105a2e804c168e5f3856",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java": "5a05867d4c6176fae934d2d4936e43b6a9ddabd1983cf072c78285fe3c8ffe4f",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary.java": "14c7ddab5f5156bb31f86da057d7460f98c8863ea680bcabdf47505568f3bab1",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupSummary.java": "fe92043709045bb68f2755934a48d70ae7c2c6e81ae87ca016ba2f743d018501",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.java": "c35f946f01b4f90b493e01065ecbfb285f6ef39e9ef6f55ca502463cda8ba283",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCleanupExecution.java": "36649443598a528b56a048aff50a26ebc74c04b936628fb40cffd49ef8e71a14",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/CleanupProfile.java": "9fbbeb80a1be4f6a2183376d4b1f979020e48e02baee163a11406656c9c5e2b9",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/CleanupWorkerRequest.java": "996bede981606bfde5c711d030a4cb9f32de06e05fcbad8c064990966060e24f",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupChunk.java": "89a3708504bedbc86eb7bdc7a99e84a61047ccb8fe2a9fad961c0944a687abe8",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java": "9a7504e2b266c3de22ce10dfc8b15dadb0ce04f3a5f05bdd86d151c32d341f19",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java": "a09d018ae56a45401c2fdaefdb1ac44da8390ebe2e1ff71a4edb8be6297ea6a7",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupKind.java": "e792d04a7b6409fbfb4696b7b295d242d5958740e084a42bb2f1b3d5592108ea",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupReason.java": "5a753a16012cee16134b37686d7ee7c26cde29e2a52449fe81bd2bd73a914597",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepChunk.java": "2da91936cd06c97fa1752906a1385065b6d53737bdc1247619ec1177f5b764c4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/LogCleanupProgress.java": "57cd675756ee9d372388f562ee2242f75df95ce95173f56fe9b861b4723a2833"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 3147,
+  "design": [
+    {
+      "path": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5"
+    },
+    {
+      "path": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "b152dcd886d1ca67293a3ea7207cd24f2d6904fccddcd15d614d278446987340"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+    },
+    {
+      "path": "documents/200_UI/250_運用・非機能/251_朝バッチ・バックアップ・起動停止設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "6dc961aebad948e77567b6c2d584d01c00eb62aee27826aefd47dd41e286f7dd"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01707-ORACLE01",
+      "methods": "CleanupStopReason.values/valueOf",
+      "testIds": [
+        "BAT021..029"
+      ],
+      "expected": "固定LOCK_BUSY/BACKUP_GATE/TIME_LIMIT/INTERRUPTED/DATABASE_FAILURE。停止理由を成功完了や別runへ補完しない。"
+    },
+    {
+      "id": "P01707-ORACLE02",
+      "methods": "CleanupStoppedException.constructor/reason",
+      "testIds": [
+        "BAT021..029"
+      ],
+      "expected": "非null固定reason/固定message・raw JDBC cause値を保持しない。未知NPEをcatch正常扱いしない。"
+    },
+    {
+      "id": "P01707-ORACLE03",
+      "methods": "LogCleanupService.constructors/withOwner/execute/check/transaction/owned/replace/known/SessionLease.acquire-close",
+      "testIds": [
+        "BAT018..029",
+        "LOGTX337001..019"
+      ],
+      "expected": "SS3417.2/SSC337: 借用親autoCommittrue/固定runと既owner、advisory71419602/0..10000chunk→永続progress ENDまでcommit・復元・leaseclose後だけsummary。chunk前後30分(負elapsed/1.8e12境界)/割込保持、同run継続は累積delta・commit済unknownをrollbackと偽らずdiscard。未知primary優先・knownprimary+unknowncleanup優先・selfsuppression禁止、rollback失敗復元0/connectionclose0。BUG2751既知五catalog未分類、元実DB wholeTestHOLD、旧純JDBCport19はfullclosure前で転用0。"
+    },
+    {
+      "id": "P01707-ORACLE04",
+      "methods": "LogCleanupSummary.constructor/attemptCounts/exitCode/toString",
+      "testIds": [
+        "CLEANVALUE003..006",
+        "BAT018..020"
+      ],
+      "expected": "同run/END必須/各累積非減少、試行はafter-before。独立固定before3/1/2→after10/5/5は7/4/3、同END再送delta0でも累積skipありexit10、保護0だけ0。MAX境界/全null不正・counts自体の不変条件により減算overflow無し。"
+    },
+    {
+      "id": "P01707-ORACLE05",
+      "methods": "StepCleanupService.constructors/withOwner/execute/transaction/check",
+      "testIds": [
+        "BAT170..177"
+      ],
+      "expected": "SS3313.14/332/341: mapping/parentRW-RC-autoCommittrue、元budget/owner前後・1000ずつ同DELETEと累積atomiccommit。chunk0と実候補0だけ完了、QUESTIONS FKdeferredは非完了warning、savedbefore一致/未知commitは未完了でdispose。mutation入口拒否はrollback0、rollback失敗復元0、unknown primary/cleanup型優先保持。BUG2751既知三catalog未分類、実DB wholeHOLD。"
+    },
+    {
+      "id": "P01707-ORACLE06",
+      "methods": "StepCleanupSummary.constructor/callCounts/complete/toString",
+      "testIds": [
+        "BAT154..161",
+        "BAT170..177"
+      ],
+      "expected": "mapping/LOGS除外、before/after skipped0、非減少target、deferredはQUESTIONSだけ。delta2=5-3、MAX-0/同MAX=0、deferred≠END。全null/不正値/固定redaction、purewholeStep8候補の独立literalを参照し実DB結果を捏造しない。"
+    },
+    {
+      "id": "P01707-ORACLE07",
+      "methods": "CleanupWorkerRequestFiles.allconstructors/forStartup-prepareStartup-readStartup/forFailure-prepareFailure-readFailure-retireFailure/forOwner-prepareOwner-readOwner-retireOwner/requireOwnerProfile/forExpiry/requireClear/requireOwnedCycle/requireExpiryOwnedCycle/requireOwnedNames/prepare-prepareExpiry-prepareBytes/read-readExpiry-readBytes/retire-retireExpiry-retireBytes/directory/file/guard/write/verify/read",
+      "testIds": [
+        "PT-OPS-CREQFILE001..008"
+      ],
+      "expected": "SS343固定root0700/root600/同dev-inode-全snapshot/ACL/NOFOLLOW/CREATE_NEW/force-close-readback/no-replace。closedprofile namesからのみ選択しowner2/startup3/expiry/failedを混同せず、不明name/part/Inspector残留は拒否。publish前後namespace/長さ進捗EOF/全ownedwipe、借用root非close、全Unit終端/同owner原本確認なしretire不可。DII二fixed変換BUG2754、actualRoot-native-request-intent全HOLD。"
+    },
+    {
+      "id": "P01707-ORACLE08",
+      "methods": "MorningCleanupExecution.Completion/execute/executeFailed/executeprivate/requireInspectorEnvironmentClear/digest",
+      "testIds": [
+        "CEXEC001..004",
+        "CFLOW001"
+      ],
+      "expected": "SS3417.3: 同parentbudget/M-A/INVALID/boot/run/activation/cutoffと原本、真正Backup結果に一致する固定dataだけ新規公開、親advisoryhandOff一回、実freshchild0/10又は正常拒否30全終端→reacquire→全7step現readback→原本request-owner最後intent退役。拒否30はBroker等0、不存在/RUNNINGをFAILEDで補完0。Root失敗cohortの実回収調査/操作でなく通常設計source対応のみ、native/Root/実owner能力発行HOLD。"
+    },
+    {
+      "id": "P01707-ORACLE09",
+      "methods": "CleanupProfile.consume/encode/run/activation/cutoff",
+      "testIds": [
+        "CFREQ001..006",
+        "CREQ001..007"
+      ],
+      "expected": "sealed二data型のみ/headerdispatch/1..1024/owned全終了wipe、権限ではない。unknownheader/長さ/nullを拒否し勝手な第三型/修復をしない。"
+    },
+    {
+      "id": "P01707-ORACLE10",
+      "methods": "CleanupWorkerRequest.constructor/encode/consume/toString/Expiry-PriorExpiry-constructors-handle-original-priorHandle-encode-consume-toString",
+      "testIds": [
+        "PT-OPS-CREQ001..007",
+        "EXREQ001..008"
+      ],
+      "expected": "NKCLEAN1固定5行+LF/256・nil/同runactivation拒否/µs/year1-9999/小文字hash64・再encode完全一致/全bytewipe。ExpiryはNKEXPIRY1又はNKEXPIRYSKIP2固定12/18行・1024、boot/epoch/broker32nonzero/fullstep id-attempt-start、skipとprior有無一致/別id小attempt/同JSTday/end<=newstart。claimだけでDB/native権限を作らない。"
+    },
+    {
+      "id": "P01707-ORACLE11",
+      "methods": "CleanupChunk.constructor/counts/reason",
+      "testIds": [
+        "BAT004/006/010",
+        "CLEANVALUE006"
+      ],
+      "expected": "non-null counts/reason、拒否reasonではtarget0→counts不変条件で全0、OKは任意整合counts。未commit観測をOS/backup証明へ使わない。"
+    },
+    {
+      "id": "P01707-ORACLE12",
+      "methods": "CleanupCounts.constructor/target/deleted/skipped",
+      "testIds": [
+        "CLEANVALUE001",
+        "BAT002/010/011"
+      ],
+      "expected": "全非負、deleted<=target、skipped==target-deleted。独立0/1/MAX/MIN/±1と三component不整合、差分は非負MAX以下でoverflow0。"
+    },
+    {
+      "id": "P01707-ORACLE13",
+      "methods": "CleanupDatabaseSession.allconstructors/rootGate-rootGateFor/forExpiry/cleanupSchema-CleanupSchema.verify/execute/check/queryTimeout/admit/scalar/query/present/require/closeReplace",
+      "testIds": [
+        "PT-OPS-CDB001..008"
+      ],
+      "expected": "固定loopbackport1..65535/schubert_nkと専用schubert_batch current/session role・非recovery/RW-RC、schema後だけ自己advisory/同namespace自己lock readback、callback同期一回・戻前自己lock保持。credential所有byteとproperties消去/borrowedconnection全close、query5又は元ownerdeadline秒floor、失敗は非成功/未知identity。BUG2752 SQLfatalとfinally実primary bookkeepingは別内部audit待ち、credential/DB/Root実操作HOLD。"
+    },
+    {
+      "id": "P01707-ORACLE14",
+      "methods": "CleanupKind.constructor/function/maximumRows/step",
+      "testIds": [
+        "CLEANVALUE002",
+        "BAT003/005/009/154"
+      ],
+      "expected": "固定9kindとDDL関数suffixを独立literal配列へ対応、LOGSだけ10000・他1000、固定Step mapping/技術4kind同CLEAN_BATCH_RUN。任意SQLidentifierを受け付けずこのmetadata照合ではSQLを実行しない。"
+    },
+    {
+      "id": "P01707-ORACLE15",
+      "methods": "CleanupReason.values/valueOf",
+      "testIds": [
+        "CLEANVALUE006",
+        "BAT004/008/010"
+      ],
+      "expected": "OK/LOCK_BUSY/BACKUP_GATE三固定、拒否を完了にしない。"
+    },
+    {
+      "id": "P01707-ORACLE16",
+      "methods": "CleanupRepository.constructor/execute/readLogProgress/prepare/requireTransaction/bind/counts/required",
+      "testIds": [
+        "BAT005..016",
+        "CQUERY001..008"
+      ],
+      "expected": "借用親transaction中だけfixed9SQL・run UUID/UTCcutoff+limitbind、1row全non-null型counts/limitとreason整合・余分row拒否、logprogress END累積の独立読み、全ownedRS/statementclose/connection非操作。DDL/SS332正: 完了-error state_changed<=cutoff-24h、cancelled<cutoff、QST論理削除+通知不存在/FK保護、hold/未完/lease保全。SQLknown二catalogBUG2751。"
+    },
+    {
+      "id": "P01707-ORACLE17",
+      "methods": "CleanupStepChunk.constructor/requireMapping/beforeCounts/toString/Reason",
+      "testIds": [
+        "BAT154..161"
+      ],
+      "expected": "mapping/LOGSとskipped除外、countskip0、known=OK/FKだけoptional総数あり、拒否count0/END iffOK+count0、FKQUESTIONSのみ、total>=delta。独立delta2/total5→before3・MAX境界・null/unknown/等価性。"
+    },
+    {
+      "id": "P01707-ORACLE18",
+      "methods": "CleanupStepRepository.constructor/execute/counts/present/require",
+      "testIds": [
+        "BAT162..169",
+        "CSTEP001..008"
+      ],
+      "expected": "V020 fixed7parameter/fullhandle+kind+limit1..1000、DBidentity前後、1row/non-null各count・optional累積二項同時存在/complete/reason/余分row0。DELETE+step累積はcaller同transactionでcommit、repositoryはcommit/rollback/borrowedclose0。SQLknown一catalogBUG2751、pure値parseIAEだけSQLDataException。"
+    },
+    {
+      "id": "P01707-ORACLE19",
+      "methods": "CleanupTerminalRepository.Entry/Snapshot/RejectedEntry/RejectedSnapshot/constructor/read/readBackupUnavailable/references/progressSeal/projection/entry/terminal/snapshot/readRejected/rejected/rejectedSnapshot/check/seconds/present/require",
+      "testIds": [
+        "CTERM006..009",
+        "CEXEC001",
+        "ISSSTEP003",
+        "REF200001"
+      ],
+      "expected": "SS331/341/343: 実receipt後再取得親RW-RC/owner/runidentity、最新7step全14列・順序一意id/run/day/µs時刻/終了reason-summary/count一致。backup失敗は6実SKIP BACKUP_UNAVAILABLEとTransfer独立、旧成功参照は別anchor/同JSTday/小attempt/fullSUCCESS・LogInboxprogress seal、現在SKIPを旧SUCCESSへ改変0。不在/部分/RUNNINGは7optional slotsのまま保持/実query外pureprojectionだけIAE分類。SQL三catalogBUG2751、checkedIOの型規則は別/不変更。全actualDB-Root-HOLD。"
+    },
+    {
+      "id": "P01707-ORACLE20",
+      "methods": "LogCleanupProgress.constructor/run/counts/complete",
+      "testIds": [
+        "CLEANVALUE005",
+        "BAT004/006/007/011"
+      ],
+      "expected": "非nullrun/countsの未commitprogress値、completefalseをENDに補完しない。同run再送累積固定と試行差分はserviceの責任。"
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-P004-01",
+    "WBS-P004-03"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P017-07.01/1",
+    "WBS-P017-07.02/1",
+    "WBS-P017-07.03/1"
+  ],
+  "endingStatus": "ORIGINAL_PREPARATION_ONLY_ALL_TWENTY_INPUT_ORACLE_MAP_RUNTIME_HOLD",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2080b_p01707_canonical_split_contract_config.json",
+    "sha256": "abfa6b2c37b2cd8f118c5a1e38959216ebefb0aff7d87620d48db3eb209d91b5"
+  }
+}

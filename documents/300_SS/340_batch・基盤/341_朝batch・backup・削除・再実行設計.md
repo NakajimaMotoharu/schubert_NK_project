@@ -330,7 +330,7 @@ SSC057/PG164: 非Log/非秘密Inboxの7kindは331 §3.14のStepCleanupService→
 
 | Step | 対象 | Chunk | 失敗時 |
 |---|---|---:|---|
-| `CLEAN_NOTIFICATION` | COMPLETED/ERROR 24h超、CANCELLEDの前日まで | 1,000 | Chunk rollback、FAILED、question削除へ進まない |
+| `CLEAN_NOTIFICATION` | COMPLETED/ERRORは状態遷移から24時間以上、CANCELLEDはstate_changed_atが固定run開始cutoff未満（SS332 §11.2） | 1,000 | Chunk rollback、FAILED、question削除へ進まない |
 | `CLEAN_QUESTION` | 論理削除済み＋notification不存在 | 1,000 | FK競合はskip/warning、他DB異常はFAILED |
 | `CLEAN_SESSION` | UI 251の失効/期限条件 | 1,000 | Failed tableを記録しtechnical後続は独立 |
 | `CLEAN_INBOX_OUTBOX` | expires/SENT+7日、PROCESSING/PENDING/ERROR除外 | 1,000 | 異常rowを削除せずalert |

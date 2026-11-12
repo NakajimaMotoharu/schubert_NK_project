@@ -1,0 +1,227 @@
+{
+  "taskId": "WBS-P017-07",
+  "expectedOwned": 20,
+  "groupId": "PGPT-WBS65-P01707-ALL-TWENTY-ORIGINAL-ORACLE-PREPARATION-20261113",
+  "startConfig": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/2080_p01707_original_start.json",
+  "startRecord": "1241_WBS65P01707全二十契約準備開始.json",
+  "scope": "OriginalP01707 all20publicMain3147lines withRD NTF006007011/QST009/UI251/SS332341 contract-oracle-TestID mapping only. Readonlysource no actualDB/delete/Root/native/intent/permit/counterfeitdata authority orfailedcohort probe. Canonical/1 onlyifallownedreviewed, /2 actualretention-FK-counter-quality and190 remainunaccepted. No heldTestextraction/newfixture. Canonicalcost isthreeactualsplit leaves .01SQL-FK/.02resources/.03trace; nonexistentparent /1 and/2 mustnotbecreated. Totalbothrows .9/2.25/4.5 retained, onlythree/1 .315/.786/1.575 eligiblepreparation afterfullmapping.",
+  "oraclePaths": [
+    "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG28304-backup-profile4-post-v1/manifest.json"
+  ],
+  "designPrefixes": [
+    [
+      "documents/100_RD",
+      "122"
+    ],
+    [
+      "documents/100_RD",
+      "123"
+    ],
+    [
+      "documents/300_SS",
+      "332"
+    ],
+    [
+      "documents/300_SS",
+      "341"
+    ],
+    [
+      "documents/300_SS",
+      "343"
+    ],
+    [
+      "documents/200_UI",
+      "251"
+    ]
+  ],
+  "run": "PG28310",
+  "manifestDirectory": "PG28312-p01707-all-twenty-contract-v1",
+  "checks": [
+    {
+      "id": "P01707-ORACLE01",
+      "methods": "CleanupStopReason.values/valueOf",
+      "testIds": [
+        "BAT021..029"
+      ],
+      "expected": "固定LOCK_BUSY/BACKUP_GATE/TIME_LIMIT/INTERRUPTED/DATABASE_FAILURE。停止理由を成功完了や別runへ補完しない。"
+    },
+    {
+      "id": "P01707-ORACLE02",
+      "methods": "CleanupStoppedException.constructor/reason",
+      "testIds": [
+        "BAT021..029"
+      ],
+      "expected": "非null固定reason/固定message・raw JDBC cause値を保持しない。未知NPEをcatch正常扱いしない。"
+    },
+    {
+      "id": "P01707-ORACLE03",
+      "methods": "LogCleanupService.constructors/withOwner/execute/check/transaction/owned/replace/known/SessionLease.acquire-close",
+      "testIds": [
+        "BAT018..029",
+        "LOGTX337001..019"
+      ],
+      "expected": "SS3417.2/SSC337: 借用親autoCommittrue/固定runと既owner、advisory71419602/0..10000chunk→永続progress ENDまでcommit・復元・leaseclose後だけsummary。chunk前後30分(負elapsed/1.8e12境界)/割込保持、同run継続は累積delta・commit済unknownをrollbackと偽らずdiscard。未知primary優先・knownprimary+unknowncleanup優先・selfsuppression禁止、rollback失敗復元0/connectionclose0。BUG2751既知五catalog未分類、元実DB wholeTestHOLD、旧純JDBCport19はfullclosure前で転用0。"
+    },
+    {
+      "id": "P01707-ORACLE04",
+      "methods": "LogCleanupSummary.constructor/attemptCounts/exitCode/toString",
+      "testIds": [
+        "CLEANVALUE003..006",
+        "BAT018..020"
+      ],
+      "expected": "同run/END必須/各累積非減少、試行はafter-before。独立固定before3/1/2→after10/5/5は7/4/3、同END再送delta0でも累積skipありexit10、保護0だけ0。MAX境界/全null不正・counts自体の不変条件により減算overflow無し。"
+    },
+    {
+      "id": "P01707-ORACLE05",
+      "methods": "StepCleanupService.constructors/withOwner/execute/transaction/check",
+      "testIds": [
+        "BAT170..177"
+      ],
+      "expected": "SS3313.14/332/341: mapping/parentRW-RC-autoCommittrue、元budget/owner前後・1000ずつ同DELETEと累積atomiccommit。chunk0と実候補0だけ完了、QUESTIONS FKdeferredは非完了warning、savedbefore一致/未知commitは未完了でdispose。mutation入口拒否はrollback0、rollback失敗復元0、unknown primary/cleanup型優先保持。BUG2751既知三catalog未分類、実DB wholeHOLD。"
+    },
+    {
+      "id": "P01707-ORACLE06",
+      "methods": "StepCleanupSummary.constructor/callCounts/complete/toString",
+      "testIds": [
+        "BAT154..161",
+        "BAT170..177"
+      ],
+      "expected": "mapping/LOGS除外、before/after skipped0、非減少target、deferredはQUESTIONSだけ。delta2=5-3、MAX-0/同MAX=0、deferred≠END。全null/不正値/固定redaction、purewholeStep8候補の独立literalを参照し実DB結果を捏造しない。"
+    },
+    {
+      "id": "P01707-ORACLE07",
+      "methods": "CleanupWorkerRequestFiles.allconstructors/forStartup-prepareStartup-readStartup/forFailure-prepareFailure-readFailure-retireFailure/forOwner-prepareOwner-readOwner-retireOwner/requireOwnerProfile/forExpiry/requireClear/requireOwnedCycle/requireExpiryOwnedCycle/requireOwnedNames/prepare-prepareExpiry-prepareBytes/read-readExpiry-readBytes/retire-retireExpiry-retireBytes/directory/file/guard/write/verify/read",
+      "testIds": [
+        "PT-OPS-CREQFILE001..008"
+      ],
+      "expected": "SS343固定root0700/root600/同dev-inode-全snapshot/ACL/NOFOLLOW/CREATE_NEW/force-close-readback/no-replace。closedprofile namesからのみ選択しowner2/startup3/expiry/failedを混同せず、不明name/part/Inspector残留は拒否。publish前後namespace/長さ進捗EOF/全ownedwipe、借用root非close、全Unit終端/同owner原本確認なしretire不可。DII二fixed変換BUG2754、actualRoot-native-request-intent全HOLD。"
+    },
+    {
+      "id": "P01707-ORACLE08",
+      "methods": "MorningCleanupExecution.Completion/execute/executeFailed/executeprivate/requireInspectorEnvironmentClear/digest",
+      "testIds": [
+        "CEXEC001..004",
+        "CFLOW001"
+      ],
+      "expected": "SS3417.3: 同parentbudget/M-A/INVALID/boot/run/activation/cutoffと原本、真正Backup結果に一致する固定dataだけ新規公開、親advisoryhandOff一回、実freshchild0/10又は正常拒否30全終端→reacquire→全7step現readback→原本request-owner最後intent退役。拒否30はBroker等0、不存在/RUNNINGをFAILEDで補完0。Root失敗cohortの実回収調査/操作でなく通常設計source対応のみ、native/Root/実owner能力発行HOLD。"
+    },
+    {
+      "id": "P01707-ORACLE09",
+      "methods": "CleanupProfile.consume/encode/run/activation/cutoff",
+      "testIds": [
+        "CFREQ001..006",
+        "CREQ001..007"
+      ],
+      "expected": "sealed二data型のみ/headerdispatch/1..1024/owned全終了wipe、権限ではない。unknownheader/長さ/nullを拒否し勝手な第三型/修復をしない。"
+    },
+    {
+      "id": "P01707-ORACLE10",
+      "methods": "CleanupWorkerRequest.constructor/encode/consume/toString/Expiry-PriorExpiry-constructors-handle-original-priorHandle-encode-consume-toString",
+      "testIds": [
+        "PT-OPS-CREQ001..007",
+        "EXREQ001..008"
+      ],
+      "expected": "NKCLEAN1固定5行+LF/256・nil/同runactivation拒否/µs/year1-9999/小文字hash64・再encode完全一致/全bytewipe。ExpiryはNKEXPIRY1又はNKEXPIRYSKIP2固定12/18行・1024、boot/epoch/broker32nonzero/fullstep id-attempt-start、skipとprior有無一致/別id小attempt/同JSTday/end<=newstart。claimだけでDB/native権限を作らない。"
+    },
+    {
+      "id": "P01707-ORACLE11",
+      "methods": "CleanupChunk.constructor/counts/reason",
+      "testIds": [
+        "BAT004/006/010",
+        "CLEANVALUE006"
+      ],
+      "expected": "non-null counts/reason、拒否reasonではtarget0→counts不変条件で全0、OKは任意整合counts。未commit観測をOS/backup証明へ使わない。"
+    },
+    {
+      "id": "P01707-ORACLE12",
+      "methods": "CleanupCounts.constructor/target/deleted/skipped",
+      "testIds": [
+        "CLEANVALUE001",
+        "BAT002/010/011"
+      ],
+      "expected": "全非負、deleted<=target、skipped==target-deleted。独立0/1/MAX/MIN/±1と三component不整合、差分は非負MAX以下でoverflow0。"
+    },
+    {
+      "id": "P01707-ORACLE13",
+      "methods": "CleanupDatabaseSession.allconstructors/rootGate-rootGateFor/forExpiry/cleanupSchema-CleanupSchema.verify/execute/check/queryTimeout/admit/scalar/query/present/require/closeReplace",
+      "testIds": [
+        "PT-OPS-CDB001..008"
+      ],
+      "expected": "固定loopbackport1..65535/schubert_nkと専用schubert_batch current/session role・非recovery/RW-RC、schema後だけ自己advisory/同namespace自己lock readback、callback同期一回・戻前自己lock保持。credential所有byteとproperties消去/borrowedconnection全close、query5又は元ownerdeadline秒floor、失敗は非成功/未知identity。BUG2752 SQLfatalとfinally実primary bookkeepingは別内部audit待ち、credential/DB/Root実操作HOLD。"
+    },
+    {
+      "id": "P01707-ORACLE14",
+      "methods": "CleanupKind.constructor/function/maximumRows/step",
+      "testIds": [
+        "CLEANVALUE002",
+        "BAT003/005/009/154"
+      ],
+      "expected": "固定9kindとDDL関数suffixを独立literal配列へ対応、LOGSだけ10000・他1000、固定Step mapping/技術4kind同CLEAN_BATCH_RUN。任意SQLidentifierを受け付けずこのmetadata照合ではSQLを実行しない。"
+    },
+    {
+      "id": "P01707-ORACLE15",
+      "methods": "CleanupReason.values/valueOf",
+      "testIds": [
+        "CLEANVALUE006",
+        "BAT004/008/010"
+      ],
+      "expected": "OK/LOCK_BUSY/BACKUP_GATE三固定、拒否を完了にしない。"
+    },
+    {
+      "id": "P01707-ORACLE16",
+      "methods": "CleanupRepository.constructor/execute/readLogProgress/prepare/requireTransaction/bind/counts/required",
+      "testIds": [
+        "BAT005..016",
+        "CQUERY001..008"
+      ],
+      "expected": "借用親transaction中だけfixed9SQL・run UUID/UTCcutoff+limitbind、1row全non-null型counts/limitとreason整合・余分row拒否、logprogress END累積の独立読み、全ownedRS/statementclose/connection非操作。DDL/SS332正: 完了-error state_changed<=cutoff-24h、cancelled<cutoff、QST論理削除+通知不存在/FK保護、hold/未完/lease保全。SQLknown二catalogBUG2751。"
+    },
+    {
+      "id": "P01707-ORACLE17",
+      "methods": "CleanupStepChunk.constructor/requireMapping/beforeCounts/toString/Reason",
+      "testIds": [
+        "BAT154..161"
+      ],
+      "expected": "mapping/LOGSとskipped除外、countskip0、known=OK/FKだけoptional総数あり、拒否count0/END iffOK+count0、FKQUESTIONSのみ、total>=delta。独立delta2/total5→before3・MAX境界・null/unknown/等価性。"
+    },
+    {
+      "id": "P01707-ORACLE18",
+      "methods": "CleanupStepRepository.constructor/execute/counts/present/require",
+      "testIds": [
+        "BAT162..169",
+        "CSTEP001..008"
+      ],
+      "expected": "V020 fixed7parameter/fullhandle+kind+limit1..1000、DBidentity前後、1row/non-null各count・optional累積二項同時存在/complete/reason/余分row0。DELETE+step累積はcaller同transactionでcommit、repositoryはcommit/rollback/borrowedclose0。SQLknown一catalogBUG2751、pure値parseIAEだけSQLDataException。"
+    },
+    {
+      "id": "P01707-ORACLE19",
+      "methods": "CleanupTerminalRepository.Entry/Snapshot/RejectedEntry/RejectedSnapshot/constructor/read/readBackupUnavailable/references/progressSeal/projection/entry/terminal/snapshot/readRejected/rejected/rejectedSnapshot/check/seconds/present/require",
+      "testIds": [
+        "CTERM006..009",
+        "CEXEC001",
+        "ISSSTEP003",
+        "REF200001"
+      ],
+      "expected": "SS331/341/343: 実receipt後再取得親RW-RC/owner/runidentity、最新7step全14列・順序一意id/run/day/µs時刻/終了reason-summary/count一致。backup失敗は6実SKIP BACKUP_UNAVAILABLEとTransfer独立、旧成功参照は別anchor/同JSTday/小attempt/fullSUCCESS・LogInboxprogress seal、現在SKIPを旧SUCCESSへ改変0。不在/部分/RUNNINGは7optional slotsのまま保持/実query外pureprojectionだけIAE分類。SQL三catalogBUG2751、checkedIOの型規則は別/不変更。全actualDB-Root-HOLD。"
+    },
+    {
+      "id": "P01707-ORACLE20",
+      "methods": "LogCleanupProgress.constructor/run/counts/complete",
+      "testIds": [
+        "CLEANVALUE005",
+        "BAT004/006/007/011"
+      ],
+      "expected": "非nullrun/countsの未commitprogress値、completefalseをENDに補完しない。同run再送累積固定と試行差分はserviceの責任。"
+    }
+  ],
+  "existingProofs": [],
+  "endingStatus": "ORIGINAL_PREPARATION_ONLY_ALL_TWENTY_INPUT_ORACLE_MAP_RUNTIME_HOLD",
+  "nextCommand": "Readwhole20publicMain3147lines/sourceonly plusorigin/main exactRD122NTF006007011/RD123QST009/SS332341. Recordindividualreturn/error/null/SQL-FK-retention/owner/resourcepost-oracles/TestID/485costOwner/hash andknownHOLD. Actualthreecanonicalleaf/1onlyafterallownedreviewed no/2acceptance/PTclaim; onlytheneligibleexistingwholevalues/Testsourceclosure andnecessaryfutureworkpriced. No Root2Testbody/actual4class oractualDB/native/intent/Root/deletion probe. Freshquota/hourlyusage06:59:22/disk6.5GiB.",
+  "capPp": 5,
+  "canonicalCostLeafIds": [
+    "WBS-P017-07.01",
+    "WBS-P017-07.02",
+    "WBS-P017-07.03"
+  ]
+}
