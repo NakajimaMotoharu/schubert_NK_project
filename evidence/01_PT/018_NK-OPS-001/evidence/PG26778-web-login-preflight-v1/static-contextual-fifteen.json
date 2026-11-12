@@ -1,0 +1,122 @@
+[
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqAuthenticationProviderTest.java",
+    "line": 251,
+    "sourceLine": "    var workers = Executors.newFixedThreadPool(8);",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit owns this pool, finally shutdownNow and asserted awaitTermination5s on every acquired path instead of unbounded ExecutorService.close; full normal terminal still required."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqAuthenticationProviderTest.java",
+    "line": 251,
+    "sourceLine": "    var workers = Executors.newFixedThreadPool(8);",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone independent in-memory concurrent fixture and explicit interrupt-flag restoration, no servlet container/server or managed production worker. Existing bounded future10s retained and two pool owners finite."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqAuthenticationProviderTest.java",
+    "line": 254,
+    "sourceLine": "      synchronized (fixture.provider) {",
+    "rule": "AvoidSynchronizedStatement",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Original fixture coordinator holds the public object monitor while workers call the production private-lock path; retaining this adversarial oracle verifies caller monitors cannot control service lifetime. Not a production container locking choice."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqAuthenticationProviderTest.java",
+    "line": 259,
+    "sourceLine": "              workers.submit(",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone independent in-memory concurrent fixture and explicit interrupt-flag restoration, no servlet container/server or managed production worker. Existing bounded future10s retained and two pool owners finite."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqAuthenticationProviderTest.java",
+    "line": 282,
+    "sourceLine": "      workers.shutdownNow();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone independent in-memory concurrent fixture and explicit interrupt-flag restoration, no servlet container/server or managed production worker. Existing bounded future10s retained and two pool owners finite."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqAuthenticationProviderTest.java",
+    "line": 283,
+    "sourceLine": "      assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone independent in-memory concurrent fixture and explicit interrupt-flag restoration, no servlet container/server or managed production worker. Existing bounded future10s retained and two pool owners finite."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginContextProbeTest.java",
+    "line": 203,
+    "sourceLine": "      Thread.currentThread().interrupt();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone independent in-memory concurrent fixture and explicit interrupt-flag restoration, no servlet container/server or managed production worker. Existing bounded future10s retained and two pool owners finite."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginContextProbeTest.java",
+    "line": 208,
+    "sourceLine": "      assertTrue(Thread.currentThread().isInterrupted());",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone independent in-memory concurrent fixture and explicit interrupt-flag restoration, no servlet container/server or managed production worker. Existing bounded future10s retained and two pool owners finite."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginContextProbeTest.java",
+    "line": 210,
+    "sourceLine": "      Thread.interrupted();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone independent in-memory concurrent fixture and explicit interrupt-flag restoration, no servlet container/server or managed production worker. Existing bounded future10s retained and two pool owners finite."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginContextProbeTest.java",
+    "line": 228,
+    "sourceLine": "    var workers = Executors.newFixedThreadPool(8);",
+    "rule": "CloseResource",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit owns this pool, finally shutdownNow and asserted awaitTermination5s on every acquired path instead of unbounded ExecutorService.close; full normal terminal still required."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginContextProbeTest.java",
+    "line": 228,
+    "sourceLine": "    var workers = Executors.newFixedThreadPool(8);",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone independent in-memory concurrent fixture and explicit interrupt-flag restoration, no servlet container/server or managed production worker. Existing bounded future10s retained and two pool owners finite."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginContextProbeTest.java",
+    "line": 231,
+    "sourceLine": "      synchronized (concurrent) {",
+    "rule": "AvoidSynchronizedStatement",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Original fixture coordinator holds the public object monitor while workers call the production private-lock path; retaining this adversarial oracle verifies caller monitors cannot control service lifetime. Not a production container locking choice."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginContextProbeTest.java",
+    "line": 235,
+    "sourceLine": "              workers.submit(",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone independent in-memory concurrent fixture and explicit interrupt-flag restoration, no servlet container/server or managed production worker. Existing bounded future10s retained and two pool owners finite."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginContextProbeTest.java",
+    "line": 241,
+    "sourceLine": "      workers.shutdownNow();",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone independent in-memory concurrent fixture and explicit interrupt-flag restoration, no servlet container/server or managed production worker. Existing bounded future10s retained and two pool owners finite."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginContextProbeTest.java",
+    "line": 242,
+    "sourceLine": "      assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));",
+    "rule": "DoNotUseThreads",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone independent in-memory concurrent fixture and explicit interrupt-flag restoration, no servlet container/server or managed production worker. Existing bounded future10s retained and two pool owners finite."
+  }
+]

@@ -225,7 +225,8 @@ final class MqLoginContextProbeTest {
             CLOCK,
             () -> new UUID(0, ids.incrementAndGet()),
             WAIT);
-    try (var workers = Executors.newFixedThreadPool(8)) {
+    var workers = Executors.newFixedThreadPool(8);
+    try {
       List<Future<?>> calls = new ArrayList<>();
       synchronized (concurrent) {
         for (int index = 0; index < 100; index++) {
@@ -236,6 +237,9 @@ final class MqLoginContextProbeTest {
         }
         for (Future<?> call : calls) call.get(10, TimeUnit.SECONDS);
       }
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));
     }
     assertEquals(100, ids.get());
     assertEquals(100, sends.get());

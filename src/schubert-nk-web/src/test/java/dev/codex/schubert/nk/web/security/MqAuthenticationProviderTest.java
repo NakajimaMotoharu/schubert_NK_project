@@ -248,7 +248,8 @@ final class MqAuthenticationProviderTest {
   void web067ConcurrentProvidersNeverCrossCredentialsOrPrincipals() throws Exception {
     var fixture =
         new Fixture(FIXTURE_0200_FC9DB3AC, FIXTURE_ADMIN_C4BB3010, FIXTURE_0000_876EEFE0, CLOCK);
-    try (var workers = Executors.newFixedThreadPool(8)) {
+    var workers = Executors.newFixedThreadPool(8);
+    try {
       List<Future<?>> results = new ArrayList<>();
       synchronized (fixture.provider) {
         for (int i = 0; i < 100; i++) {
@@ -277,6 +278,9 @@ final class MqAuthenticationProviderTest {
         }
         for (var result : results) result.get(10, TimeUnit.SECONDS);
       }
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));
     }
     assertEquals(100, fixture.logins.get());
     assertEquals(100, fixture.probes.get());

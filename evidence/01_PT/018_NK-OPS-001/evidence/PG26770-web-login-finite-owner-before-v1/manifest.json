@@ -1,0 +1,29 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T12:35:28.944665+09:00",
+  "finding": "Future10s already bounded, TWR ExecutorService.close has no deadline at2 owned pool sites. Runtime hang not claimed or deliberately induced.",
+  "sources": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqAuthenticationProviderTest.java": {
+      "sha256": "1102d1cdb41889da6e3476227970c3d01e2523be8603e6a9db83ad1cdc7adcad",
+      "tests": 5,
+      "finiteFuture10Preserved": true,
+      "unboundedOwnerSites": 1
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginContextProbeTest.java": {
+      "sha256": "94bd2c4d5bcc12870074f5907c03a7e21ef7b5a213cad94170a20e480d20434b",
+      "tests": 3,
+      "finiteFuture10Preserved": true,
+      "unboundedOwnerSites": 1
+    }
+  },
+  "productTestsExecuted": 0,
+  "MainChanged": false,
+  "bug": "BUG-2675",
+  "ykt": "YKT-2355",
+  "globalYkt2177Closed": false,
+  "additionalBeforePrice": {
+    "low": 0.05,
+    "base": 0.15,
+    "high": 0.3
+  }
+}
