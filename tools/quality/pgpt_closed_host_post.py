@@ -112,6 +112,27 @@ def verify(c, config, source):
         require(required_forbidden <= set(c.get('forbiddenInitializedClasses', [])), 'no outer/native initialization permission')
     else:
         require(signature is None, 'no implicit signature component')
+    analysis_context = prep.get('analysisOnlyContext')
+    if c.get('reviewedAnalysisOnlyContext') is not None:
+        import pgpt_analysis_symbols as analysis
+        witness_pin = c['reviewedAnalysisOnlyContext']['witness']
+        witness = load(root / witness_pin['path'])
+        require(sha(root / witness_pin['path']) == witness_pin['sha256'] and
+                isinstance(analysis_context, dict), 'fixed analysis witness/receipt')
+        carrier = work / 'analysis-only-six-symbols.jar'
+        require(analysis_context['carrier'] == dict(path=str(carrier), sha256=sha(carrier)), 'own analysis-only carrier')
+        with zipfile.ZipFile(carrier) as archive:
+            require(len(archive.namelist()) == 6 and set(archive.namelist()) == {n + '.class' for n in analysis.NAMES}, 'exact six auxiliary symbols')
+            for name in analysis.NAMES:
+                require(hashlib.sha256(archive.read(name + '.class')).hexdigest() == witness['classes'][name]['sha256'], 'aux symbol bytes')
+        require(not {n + '.class' for n in analysis.NAMES} & set(physical), 'no auxiliary runtime/report classes')
+        runtime_paths = cmd[cmd.index('--class-path') + 1].split(':')
+        require(str(carrier) not in runtime_paths and analysis.NAMES <= set(c.get('forbiddenInitializedClasses', [])), 'no auxiliary runtime or initialization permission')
+        for name in analysis.SOURCE_PATHS:
+            value = sha(root / name)
+            require(value == b['metadataPins'][name] == hashlib.sha256(subprocess.check_output(['git', 'show', source + ':' + name], cwd=root)).hexdigest(), 'same-source auxiliary source declarations')
+    else:
+        require(analysis_context is None, 'no implicit static context')
     no_code = {n for n, value in method_counts.items() if value == 0}
     info = {name: dict(crc=crc, instructions=int(inst)) for inst, branch, line, method, complexity, crc, name in re.findall(r'^\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+class 0x([0-9a-f]{16}) (\S+)$', (artifact / 'classinfo.stdout').read_text(), re.M)}
     analyzed = {n for n, x in info.items() if x['instructions'] > 0}
@@ -173,6 +194,7 @@ def verify(c, config, source):
     result = dict(actualExit=0, source=source, productionCoreMain=b['productionCoreMain'], config=policy.ref(config), run=c['id'], tests=len(actual), newTestDefinitions=c.get('newTestDefinitions', 0), physicalClasses=len(physical), positiveMainCrc=len(observed), coverage=coverage, targetCounters=targets, completeSourceComponentCounters=component, completeSourceComponentFour100=component100, wholeScopeFour100=not uncovered, uncoveredFullSourceClasses=uncovered, naturalNoCodeClasses=sorted(no_code), naturalNoBranchClasses=sorted(n for n, row in targets.items() if 'BRANCH' not in row), classIds=ids, actualJvmCodeMethodCounts=method_counts, hiddenJvmAdapters=bindings, manualCoverageExclusions=[], oldExecCombined=False, preflight=policy.ref(pf), inputHashes=b['inputHashes'], dependencies=b['dependencies'], environment=env, productTestsExecuted=len(actual), actualBackendNativeFsRootOrHeldClassActions=0, formalUpdated=False, whole451Accepted=False, newAcceptance=0, effortRate=None, files=files, verifier=policy.ref(Path(__file__).resolve()))
     result.update(defaultStandardFilteredSwitchMaps=map_evidence, forbiddenInitializedClasses=c.get('forbiddenInitializedClasses', []), forbiddenInitializedClassesObserved=[], reviewedReflection=c.get('reviewedReflection', []))
     result['guardSignature'] = signature
+    result['analysisOnlyContext'] = analysis_context
     policy.write_json(out / 'manifest.json', result)
     return result
 

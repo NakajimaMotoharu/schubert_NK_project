@@ -21,6 +21,8 @@ def prepared(c, config):
     h.require(all(h.digest(Path(p)) == v for p, v in m['dependencies'].items()), 'prepared SDK bytes changed')
     import pgpt_guard_signature
     pgpt_guard_signature.validate_prepared(c, m, work)
+    import pgpt_analysis_symbols
+    pgpt_analysis_symbols.validate_prepared(c, m, work)
     return p, m, work
 
 

@@ -1,0 +1,572 @@
+Classfile /home/mini/codex/project1/work/pgpt-runs/PG379/pg28428-six-analysis-symbols-exact-byte-witness-v1/classes/dev/codex/schubert/nk/storage/LinuxMonotonicClock.class
+  Last modified Nov 13, 2026; size 5223 bytes
+  SHA-256 checksum cd7d9013e0f7bd37ecd0fe19c261e738fbff01f363b50e7109fcc995205677e1
+  Compiled from "LinuxMonotonicClock.java"
+public final class dev.codex.schubert.nk.storage.LinuxMonotonicClock
+  minor version: 0
+  major version: 69
+  flags: (0x0031) ACC_PUBLIC, ACC_FINAL, ACC_SUPER
+  this_class: #30                         // dev/codex/schubert/nk/storage/LinuxMonotonicClock
+  super_class: #128                       // java/lang/Object
+  interfaces: 0, fields: 1, methods: 6, attributes: 5
+Constant pool:
+    #1 = String             #2            // os.name
+    #2 = Utf8               os.name
+    #3 = Methodref          #4.#5         // java/lang/System.getProperty:(Ljava/lang/String;)Ljava/lang/String;
+    #4 = Class              #6            // java/lang/System
+    #5 = NameAndType        #7:#8         // getProperty:(Ljava/lang/String;)Ljava/lang/String;
+    #6 = Utf8               java/lang/System
+    #7 = Utf8               getProperty
+    #8 = Utf8               (Ljava/lang/String;)Ljava/lang/String;
+    #9 = Methodref          #10.#11       // java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+   #10 = Class              #12           // java/util/Objects
+   #11 = NameAndType        #13:#14       // requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+   #12 = Utf8               java/util/Objects
+   #13 = Utf8               requireNonNull
+   #14 = Utf8               (Ljava/lang/Object;)Ljava/lang/Object;
+   #15 = Class              #16           // java/lang/String
+   #16 = Utf8               java/lang/String
+   #17 = String             #18           // os.arch
+   #18 = Utf8               os.arch
+   #19 = InterfaceMethodref #20.#21       // java/lang/foreign/Linker.nativeLinker:()Ljava/lang/foreign/Linker;
+   #20 = Class              #22           // java/lang/foreign/Linker
+   #21 = NameAndType        #23:#24       // nativeLinker:()Ljava/lang/foreign/Linker;
+   #22 = Utf8               java/lang/foreign/Linker
+   #23 = Utf8               nativeLinker
+   #24 = Utf8               ()Ljava/lang/foreign/Linker;
+   #25 = InterfaceMethodref #20.#26       // java/lang/foreign/Linker.defaultLookup:()Ljava/lang/foreign/SymbolLookup;
+   #26 = NameAndType        #27:#28       // defaultLookup:()Ljava/lang/foreign/SymbolLookup;
+   #27 = Utf8               defaultLookup
+   #28 = Utf8               ()Ljava/lang/foreign/SymbolLookup;
+   #29 = Methodref          #30.#31       // dev/codex/schubert/nk/storage/LinuxMonotonicClock.create:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxMonotonicClock;
+   #30 = Class              #32           // dev/codex/schubert/nk/storage/LinuxMonotonicClock
+   #31 = NameAndType        #33:#34       // create:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxMonotonicClock;
+   #32 = Utf8               dev/codex/schubert/nk/storage/LinuxMonotonicClock
+   #33 = Utf8               create
+   #34 = Utf8               (Ljava/lang/String;Ljava/lang/String;Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxMonotonicClock;
+   #35 = String             #36           // OS
+   #36 = Utf8               OS
+   #37 = Methodref          #10.#38       // java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #38 = NameAndType        #13:#39       // requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #39 = Utf8               (Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+   #40 = String             #41           // architecture
+   #41 = Utf8               architecture
+   #42 = String             #43           // native symbols
+   #43 = Utf8               native symbols
+   #44 = String             #45           // Linux
+   #45 = Utf8               Linux
+   #46 = Methodref          #15.#47       // java/lang/String.equals:(Ljava/lang/Object;)Z
+   #47 = NameAndType        #48:#49       // equals:(Ljava/lang/Object;)Z
+   #48 = Utf8               equals
+   #49 = Utf8               (Ljava/lang/Object;)Z
+   #50 = String             #51           // amd64
+   #51 = Utf8               amd64
+   #52 = String             #53           // x86_64
+   #53 = Utf8               x86_64
+   #54 = String             #55           // aarch64
+   #55 = Utf8               aarch64
+   #56 = InterfaceMethodref #57.#58       // java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+   #57 = Class              #59           // java/util/Set
+   #58 = NameAndType        #60:#61       // of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+   #59 = Utf8               java/util/Set
+   #60 = Utf8               of
+   #61 = Utf8               (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+   #62 = InterfaceMethodref #57.#63       // java/util/Set.contains:(Ljava/lang/Object;)Z
+   #63 = NameAndType        #64:#49       // contains:(Ljava/lang/Object;)Z
+   #64 = Utf8               contains
+   #65 = Class              #66           // java/lang/IllegalStateException
+   #66 = Utf8               java/lang/IllegalStateException
+   #67 = String             #68           // shared monotonic clock unavailable
+   #68 = Utf8               shared monotonic clock unavailable
+   #69 = Methodref          #65.#70       // java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+   #70 = NameAndType        #71:#72       // "<init>":(Ljava/lang/String;)V
+   #71 = Utf8               <init>
+   #72 = Utf8               (Ljava/lang/String;)V
+   #73 = String             #74           // clock_gettime
+   #74 = Utf8               clock_gettime
+   #75 = InterfaceMethodref #76.#77       // java/lang/foreign/SymbolLookup.find:(Ljava/lang/String;)Ljava/util/Optional;
+   #76 = Class              #78           // java/lang/foreign/SymbolLookup
+   #77 = NameAndType        #79:#80       // find:(Ljava/lang/String;)Ljava/util/Optional;
+   #78 = Utf8               java/lang/foreign/SymbolLookup
+   #79 = Utf8               find
+   #80 = Utf8               (Ljava/lang/String;)Ljava/util/Optional;
+   #81 = InvokeDynamic      #0:#82        // #0:get:()Ljava/util/function/Supplier;
+   #82 = NameAndType        #83:#84       // get:()Ljava/util/function/Supplier;
+   #83 = Utf8               get
+   #84 = Utf8               ()Ljava/util/function/Supplier;
+   #85 = Methodref          #86.#87       // java/util/Optional.orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+   #86 = Class              #88           // java/util/Optional
+   #87 = NameAndType        #89:#90       // orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+   #88 = Utf8               java/util/Optional
+   #89 = Utf8               orElseThrow
+   #90 = Utf8               (Ljava/util/function/Supplier;)Ljava/lang/Object;
+   #91 = Class              #92           // java/lang/foreign/MemorySegment
+   #92 = Utf8               java/lang/foreign/MemorySegment
+   #93 = Class              #94           // dev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall
+   #94 = Utf8               dev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall
+   #95 = Fieldref           #96.#97       // java/lang/foreign/ValueLayout.JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+   #96 = Class              #98           // java/lang/foreign/ValueLayout
+   #97 = NameAndType        #99:#100      // JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+   #98 = Utf8               java/lang/foreign/ValueLayout
+   #99 = Utf8               JAVA_INT
+  #100 = Utf8               Ljava/lang/foreign/ValueLayout$OfInt;
+  #101 = Class              #102          // java/lang/foreign/MemoryLayout
+  #102 = Utf8               java/lang/foreign/MemoryLayout
+  #103 = Fieldref           #96.#104      // java/lang/foreign/ValueLayout.ADDRESS:Ljava/lang/foreign/AddressLayout;
+  #104 = NameAndType        #105:#106     // ADDRESS:Ljava/lang/foreign/AddressLayout;
+  #105 = Utf8               ADDRESS
+  #106 = Utf8               Ljava/lang/foreign/AddressLayout;
+  #107 = InterfaceMethodref #108.#109     // java/lang/foreign/FunctionDescriptor.of:(Ljava/lang/foreign/MemoryLayout;[Ljava/lang/foreign/MemoryLayout;)Ljava/lang/foreign/FunctionDescriptor;
+  #108 = Class              #110          // java/lang/foreign/FunctionDescriptor
+  #109 = NameAndType        #60:#111      // of:(Ljava/lang/foreign/MemoryLayout;[Ljava/lang/foreign/MemoryLayout;)Ljava/lang/foreign/FunctionDescriptor;
+  #110 = Utf8               java/lang/foreign/FunctionDescriptor
+  #111 = Utf8               (Ljava/lang/foreign/MemoryLayout;[Ljava/lang/foreign/MemoryLayout;)Ljava/lang/foreign/FunctionDescriptor;
+  #112 = Class              #113          // java/lang/foreign/Linker$Option
+  #113 = Utf8               java/lang/foreign/Linker$Option
+  #114 = InterfaceMethodref #20.#115      // java/lang/foreign/Linker.downcallHandle:(Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/FunctionDescriptor;[Ljava/lang/foreign/Linker$Option;)Ljava/lang/invoke/MethodHandle;
+  #115 = NameAndType        #116:#117     // downcallHandle:(Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/FunctionDescriptor;[Ljava/lang/foreign/Linker$Option;)Ljava/lang/invoke/MethodHandle;
+  #116 = Utf8               downcallHandle
+  #117 = Utf8               (Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/FunctionDescriptor;[Ljava/lang/foreign/Linker$Option;)Ljava/lang/invoke/MethodHandle;
+  #118 = Methodref          #119.#120     // java/lang/invoke/MethodHandleProxies.asInterfaceInstance:(Ljava/lang/Class;Ljava/lang/invoke/MethodHandle;)Ljava/lang/Object;
+  #119 = Class              #121          // java/lang/invoke/MethodHandleProxies
+  #120 = NameAndType        #122:#123     // asInterfaceInstance:(Ljava/lang/Class;Ljava/lang/invoke/MethodHandle;)Ljava/lang/Object;
+  #121 = Utf8               java/lang/invoke/MethodHandleProxies
+  #122 = Utf8               asInterfaceInstance
+  #123 = Utf8               (Ljava/lang/Class;Ljava/lang/invoke/MethodHandle;)Ljava/lang/Object;
+  #124 = Methodref          #30.#125      // dev/codex/schubert/nk/storage/LinuxMonotonicClock."<init>":(Ldev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall;)V
+  #125 = NameAndType        #71:#126      // "<init>":(Ldev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall;)V
+  #126 = Utf8               (Ldev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall;)V
+  #127 = Methodref          #128.#129     // java/lang/Object."<init>":()V
+  #128 = Class              #130          // java/lang/Object
+  #129 = NameAndType        #71:#131      // "<init>":()V
+  #130 = Utf8               java/lang/Object
+  #131 = Utf8               ()V
+  #132 = String             #133          // monotonic read
+  #133 = Utf8               monotonic read
+  #134 = Fieldref           #30.#135      // dev/codex/schubert/nk/storage/LinuxMonotonicClock.read:Ldev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall;
+  #135 = NameAndType        #136:#137     // read:Ldev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall;
+  #136 = Utf8               read
+  #137 = Utf8               Ldev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall;
+  #138 = InterfaceMethodref #139.#140     // java/lang/foreign/Arena.ofConfined:()Ljava/lang/foreign/Arena;
+  #139 = Class              #141          // java/lang/foreign/Arena
+  #140 = NameAndType        #142:#143     // ofConfined:()Ljava/lang/foreign/Arena;
+  #141 = Utf8               java/lang/foreign/Arena
+  #142 = Utf8               ofConfined
+  #143 = Utf8               ()Ljava/lang/foreign/Arena;
+  #144 = Long               16l
+  #146 = Long               8l
+  #148 = InterfaceMethodref #139.#149     // java/lang/foreign/Arena.allocate:(JJ)Ljava/lang/foreign/MemorySegment;
+  #149 = NameAndType        #150:#151     // allocate:(JJ)Ljava/lang/foreign/MemorySegment;
+  #150 = Utf8               allocate
+  #151 = Utf8               (JJ)Ljava/lang/foreign/MemorySegment;
+  #152 = InterfaceMethodref #93.#153      // dev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall.call:(ILjava/lang/foreign/MemorySegment;)I
+  #153 = NameAndType        #154:#155     // call:(ILjava/lang/foreign/MemorySegment;)I
+  #154 = Utf8               call
+  #155 = Utf8               (ILjava/lang/foreign/MemorySegment;)I
+  #156 = Methodref          #30.#157      // dev/codex/schubert/nk/storage/LinuxMonotonicClock.unavailable:()Ljava/io/IOException;
+  #157 = NameAndType        #158:#159     // unavailable:()Ljava/io/IOException;
+  #158 = Utf8               unavailable
+  #159 = Utf8               ()Ljava/io/IOException;
+  #160 = Fieldref           #96.#161      // java/lang/foreign/ValueLayout.JAVA_LONG:Ljava/lang/foreign/ValueLayout$OfLong;
+  #161 = NameAndType        #162:#163     // JAVA_LONG:Ljava/lang/foreign/ValueLayout$OfLong;
+  #162 = Utf8               JAVA_LONG
+  #163 = Utf8               Ljava/lang/foreign/ValueLayout$OfLong;
+  #164 = InterfaceMethodref #91.#165      // java/lang/foreign/MemorySegment.get:(Ljava/lang/foreign/ValueLayout$OfLong;J)J
+  #165 = NameAndType        #83:#166      // get:(Ljava/lang/foreign/ValueLayout$OfLong;J)J
+  #166 = Utf8               (Ljava/lang/foreign/ValueLayout$OfLong;J)J
+  #167 = Long               1000000000l
+  #169 = Methodref          #170.#171     // java/lang/Math.multiplyExact:(JJ)J
+  #170 = Class              #172          // java/lang/Math
+  #171 = NameAndType        #173:#174     // multiplyExact:(JJ)J
+  #172 = Utf8               java/lang/Math
+  #173 = Utf8               multiplyExact
+  #174 = Utf8               (JJ)J
+  #175 = Methodref          #170.#176     // java/lang/Math.addExact:(JJ)J
+  #176 = NameAndType        #177:#174     // addExact:(JJ)J
+  #177 = Utf8               addExact
+  #178 = InterfaceMethodref #139.#179     // java/lang/foreign/Arena.close:()V
+  #179 = NameAndType        #180:#131     // close:()V
+  #180 = Utf8               close
+  #181 = Class              #182          // java/lang/ArithmeticException
+  #182 = Utf8               java/lang/ArithmeticException
+  #183 = Class              #184          // java/lang/Throwable
+  #184 = Utf8               java/lang/Throwable
+  #185 = Methodref          #183.#186     // java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+  #186 = NameAndType        #187:#188     // addSuppressed:(Ljava/lang/Throwable;)V
+  #187 = Utf8               addSuppressed
+  #188 = Utf8               (Ljava/lang/Throwable;)V
+  #189 = Class              #190          // java/io/IOException
+  #190 = Utf8               java/io/IOException
+  #191 = Methodref          #189.#70      // java/io/IOException."<init>":(Ljava/lang/String;)V
+  #192 = Utf8               ()Ldev/codex/schubert/nk/storage/LinuxMonotonicClock;
+  #193 = Utf8               Code
+  #194 = Utf8               LineNumberTable
+  #195 = Utf8               LocalVariableTable
+  #196 = Utf8               os
+  #197 = Utf8               Ljava/lang/String;
+  #198 = Utf8               symbols
+  #199 = Utf8               Ljava/lang/foreign/SymbolLookup;
+  #200 = Utf8               address
+  #201 = Utf8               Ljava/lang/foreign/MemorySegment;
+  #202 = Utf8               StackMapTable
+  #203 = Utf8               this
+  #204 = Utf8               Ldev/codex/schubert/nk/storage/LinuxMonotonicClock;
+  #205 = Utf8               nowNanos
+  #206 = Utf8               ()J
+  #207 = Utf8               overflow
+  #208 = Utf8               Ljava/lang/ArithmeticException;
+  #209 = Utf8               value
+  #210 = Utf8               seconds
+  #211 = Utf8               J
+  #212 = Utf8               nanos
+  #213 = Utf8               arena
+  #214 = Utf8               Ljava/lang/foreign/Arena;
+  #215 = Utf8               Exceptions
+  #216 = Utf8               lambda$create$0
+  #217 = Utf8               ()Ljava/lang/IllegalStateException;
+  #218 = Utf8               SourceFile
+  #219 = Utf8               LinuxMonotonicClock.java
+  #220 = Utf8               RuntimeVisibleAnnotations
+  #221 = Utf8               Lorg/jspecify/annotations/NullMarked;
+  #222 = Utf8               NestMembers
+  #223 = Utf8               BootstrapMethods
+  #224 = MethodType         #225          //  ()Ljava/lang/Object;
+  #225 = Utf8               ()Ljava/lang/Object;
+  #226 = MethodHandle       6:#227        // REF_invokeStatic dev/codex/schubert/nk/storage/LinuxMonotonicClock.lambda$create$0:()Ljava/lang/IllegalStateException;
+  #227 = Methodref          #30.#228      // dev/codex/schubert/nk/storage/LinuxMonotonicClock.lambda$create$0:()Ljava/lang/IllegalStateException;
+  #228 = NameAndType        #216:#217     // lambda$create$0:()Ljava/lang/IllegalStateException;
+  #229 = MethodType         #217          //  ()Ljava/lang/IllegalStateException;
+  #230 = MethodHandle       6:#231        // REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #231 = Methodref          #232.#233     // java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #232 = Class              #234          // java/lang/invoke/LambdaMetafactory
+  #233 = NameAndType        #235:#236     // metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #234 = Utf8               java/lang/invoke/LambdaMetafactory
+  #235 = Utf8               metafactory
+  #236 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #237 = Utf8               InnerClasses
+  #238 = Utf8               ReadCall
+  #239 = Class              #240          // java/lang/foreign/ValueLayout$OfInt
+  #240 = Utf8               java/lang/foreign/ValueLayout$OfInt
+  #241 = Utf8               OfInt
+  #242 = Utf8               Option
+  #243 = Class              #244          // java/lang/foreign/ValueLayout$OfLong
+  #244 = Utf8               java/lang/foreign/ValueLayout$OfLong
+  #245 = Utf8               OfLong
+  #246 = Class              #247          // java/lang/invoke/MethodHandles$Lookup
+  #247 = Utf8               java/lang/invoke/MethodHandles$Lookup
+  #248 = Class              #249          // java/lang/invoke/MethodHandles
+  #249 = Utf8               java/lang/invoke/MethodHandles
+  #250 = Utf8               Lookup
+{
+  private final dev.codex.schubert.nk.storage.LinuxMonotonicClock$ReadCall read;
+    descriptor: Ldev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall;
+    flags: (0x0012) ACC_PRIVATE, ACC_FINAL
+
+  public static dev.codex.schubert.nk.storage.LinuxMonotonicClock create();
+    descriptor: ()Ldev/codex/schubert/nk/storage/LinuxMonotonicClock;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=3, locals=0, args_size=0
+         0: ldc           #1                  // String os.name
+         2: invokestatic  #3                  // Method java/lang/System.getProperty:(Ljava/lang/String;)Ljava/lang/String;
+         5: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+         8: checkcast     #15                 // class java/lang/String
+        11: ldc           #17                 // String os.arch
+        13: invokestatic  #3                  // Method java/lang/System.getProperty:(Ljava/lang/String;)Ljava/lang/String;
+        16: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        19: checkcast     #15                 // class java/lang/String
+        22: invokestatic  #19                 // InterfaceMethod java/lang/foreign/Linker.nativeLinker:()Ljava/lang/foreign/Linker;
+        25: invokeinterface #25,  1           // InterfaceMethod java/lang/foreign/Linker.defaultLookup:()Ljava/lang/foreign/SymbolLookup;
+        30: invokestatic  #29                 // Method create:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxMonotonicClock;
+        33: areturn
+      LineNumberTable:
+        line 30: 0
+        line 31: 2
+        line 32: 13
+        line 33: 22
+        line 30: 30
+
+  static dev.codex.schubert.nk.storage.LinuxMonotonicClock create(java.lang.String, java.lang.String, java.lang.foreign.SymbolLookup);
+    descriptor: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxMonotonicClock;
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=8, locals=5, args_size=3
+         0: aload_0
+         1: ldc           #35                 // String OS
+         3: invokestatic  #37                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #40                 // String architecture
+        10: invokestatic  #37                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_2
+        15: ldc           #42                 // String native symbols
+        17: invokestatic  #37                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: aload_0
+        22: ldc           #44                 // String Linux
+        24: invokevirtual #46                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        27: ifeq          48
+        30: ldc           #50                 // String amd64
+        32: ldc           #52                 // String x86_64
+        34: ldc           #54                 // String aarch64
+        36: invokestatic  #56                 // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+        39: aload_1
+        40: invokeinterface #62,  2           // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+        45: ifne          58
+        48: new           #65                 // class java/lang/IllegalStateException
+        51: dup
+        52: ldc           #67                 // String shared monotonic clock unavailable
+        54: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        57: athrow
+        58: aload_2
+        59: ldc           #73                 // String clock_gettime
+        61: invokeinterface #75,  2           // InterfaceMethod java/lang/foreign/SymbolLookup.find:(Ljava/lang/String;)Ljava/util/Optional;
+        66: invokedynamic #81,  0             // InvokeDynamic #0:get:()Ljava/util/function/Supplier;
+        71: invokevirtual #85                 // Method java/util/Optional.orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+        74: checkcast     #91                 // class java/lang/foreign/MemorySegment
+        77: astore_3
+        78: ldc           #93                 // class dev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall
+        80: invokestatic  #19                 // InterfaceMethod java/lang/foreign/Linker.nativeLinker:()Ljava/lang/foreign/Linker;
+        83: aload_3
+        84: getstatic     #95                 // Field java/lang/foreign/ValueLayout.JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+        87: iconst_2
+        88: anewarray     #101                // class java/lang/foreign/MemoryLayout
+        91: dup
+        92: iconst_0
+        93: getstatic     #95                 // Field java/lang/foreign/ValueLayout.JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+        96: aastore
+        97: dup
+        98: iconst_1
+        99: getstatic     #103                // Field java/lang/foreign/ValueLayout.ADDRESS:Ljava/lang/foreign/AddressLayout;
+       102: aastore
+       103: invokestatic  #107                // InterfaceMethod java/lang/foreign/FunctionDescriptor.of:(Ljava/lang/foreign/MemoryLayout;[Ljava/lang/foreign/MemoryLayout;)Ljava/lang/foreign/FunctionDescriptor;
+       106: iconst_0
+       107: anewarray     #112                // class java/lang/foreign/Linker$Option
+       110: invokeinterface #114,  4          // InterfaceMethod java/lang/foreign/Linker.downcallHandle:(Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/FunctionDescriptor;[Ljava/lang/foreign/Linker$Option;)Ljava/lang/invoke/MethodHandle;
+       115: invokestatic  #118                // Method java/lang/invoke/MethodHandleProxies.asInterfaceInstance:(Ljava/lang/Class;Ljava/lang/invoke/MethodHandle;)Ljava/lang/Object;
+       118: checkcast     #93                 // class dev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall
+       121: astore        4
+       123: new           #30                 // class dev/codex/schubert/nk/storage/LinuxMonotonicClock
+       126: dup
+       127: aload         4
+       129: invokespecial #124                // Method "<init>":(Ldev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall;)V
+       132: areturn
+      LineNumberTable:
+        line 38: 0
+        line 39: 7
+        line 40: 14
+        line 41: 21
+        line 42: 48
+        line 43: 58
+        line 45: 61
+        line 46: 71
+        line 47: 78
+        line 50: 80
+        line 53: 103
+        line 51: 110
+        line 48: 115
+        line 55: 123
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0     133     0    os   Ljava/lang/String;
+            0     133     1 architecture   Ljava/lang/String;
+            0     133     2 symbols   Ljava/lang/foreign/SymbolLookup;
+           78      55     3 address   Ljava/lang/foreign/MemorySegment;
+          123      10     4  read   Ldev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall;
+      StackMapTable: number_of_entries = 2
+        frame_type = 48 /* same */
+        frame_type = 9 /* same */
+
+  dev.codex.schubert.nk.storage.LinuxMonotonicClock(dev.codex.schubert.nk.storage.LinuxMonotonicClock$ReadCall);
+    descriptor: (Ldev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall;)V
+    flags: (0x0000)
+    Code:
+      stack=3, locals=2, args_size=2
+         0: aload_0
+         1: invokespecial #127                // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: ldc           #132                // String monotonic read
+         8: invokestatic  #37                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        11: checkcast     #93                 // class dev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall
+        14: putfield      #134                // Field read:Ldev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall;
+        17: return
+      LineNumberTable:
+        line 58: 0
+        line 59: 4
+        line 60: 17
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      18     0  this   Ldev/codex/schubert/nk/storage/LinuxMonotonicClock;
+            0      18     1  read   Ldev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall;
+
+  public long nowNanos() throws java.io.IOException;
+    descriptor: ()J
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=5, locals=9, args_size=1
+         0: invokestatic  #138                // InterfaceMethod java/lang/foreign/Arena.ofConfined:()Ljava/lang/foreign/Arena;
+         3: astore_1
+         4: aload_1
+         5: ldc2_w        #144                // long 16l
+         8: ldc2_w        #146                // long 8l
+        11: invokeinterface #148,  5          // InterfaceMethod java/lang/foreign/Arena.allocate:(JJ)Ljava/lang/foreign/MemorySegment;
+        16: astore_2
+        17: aload_0
+        18: getfield      #134                // Field read:Ldev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall;
+        21: iconst_1
+        22: aload_2
+        23: invokeinterface #152,  3          // InterfaceMethod dev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall.call:(ILjava/lang/foreign/MemorySegment;)I
+        28: ifeq          35
+        31: invokestatic  #156                // Method unavailable:()Ljava/io/IOException;
+        34: athrow
+        35: aload_2
+        36: getstatic     #160                // Field java/lang/foreign/ValueLayout.JAVA_LONG:Ljava/lang/foreign/ValueLayout$OfLong;
+        39: lconst_0
+        40: invokeinterface #164,  4          // InterfaceMethod java/lang/foreign/MemorySegment.get:(Ljava/lang/foreign/ValueLayout$OfLong;J)J
+        45: lstore_3
+        46: aload_2
+        47: getstatic     #160                // Field java/lang/foreign/ValueLayout.JAVA_LONG:Ljava/lang/foreign/ValueLayout$OfLong;
+        50: ldc2_w        #146                // long 8l
+        53: invokeinterface #164,  4          // InterfaceMethod java/lang/foreign/MemorySegment.get:(Ljava/lang/foreign/ValueLayout$OfLong;J)J
+        58: lstore        5
+        60: lload_3
+        61: lconst_0
+        62: lcmp
+        63: iflt          82
+        66: lload         5
+        68: lconst_0
+        69: lcmp
+        70: iflt          82
+        73: lload         5
+        75: ldc2_w        #167                // long 1000000000l
+        78: lcmp
+        79: iflt          86
+        82: invokestatic  #156                // Method unavailable:()Ljava/io/IOException;
+        85: athrow
+        86: lload_3
+        87: ldc2_w        #167                // long 1000000000l
+        90: invokestatic  #169                // Method java/lang/Math.multiplyExact:(JJ)J
+        93: lload         5
+        95: invokestatic  #175                // Method java/lang/Math.addExact:(JJ)J
+        98: lstore        7
+       100: aload_1
+       101: ifnull        110
+       104: aload_1
+       105: invokeinterface #178,  1          // InterfaceMethod java/lang/foreign/Arena.close:()V
+       110: lload         7
+       112: lreturn
+       113: astore        7
+       115: invokestatic  #156                // Method unavailable:()Ljava/io/IOException;
+       118: athrow
+       119: astore_2
+       120: aload_1
+       121: ifnull        139
+       124: aload_1
+       125: invokeinterface #178,  1          // InterfaceMethod java/lang/foreign/Arena.close:()V
+       130: goto          139
+       133: astore_3
+       134: aload_2
+       135: aload_3
+       136: invokevirtual #185                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       139: aload_2
+       140: athrow
+      Exception table:
+         from    to  target type
+            86   100   113   Class java/lang/ArithmeticException
+             4   100   119   Class java/lang/Throwable
+           113   119   119   Class java/lang/Throwable
+           124   130   133   Class java/lang/Throwable
+      LineNumberTable:
+        line 64: 0
+        line 65: 4
+        line 66: 17
+        line 67: 35
+        line 68: 46
+        line 69: 60
+        line 71: 86
+        line 75: 100
+        line 71: 110
+        line 72: 113
+        line 73: 115
+        line 64: 119
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+          115       4     7 overflow   Ljava/lang/ArithmeticException;
+           17     102     2 value   Ljava/lang/foreign/MemorySegment;
+           46      73     3 seconds   J
+           60      59     5 nanos   J
+            4     137     1 arena   Ljava/lang/foreign/Arena;
+            0     141     0  this   Ldev/codex/schubert/nk/storage/LinuxMonotonicClock;
+      StackMapTable: number_of_entries = 8
+        frame_type = 253 /* append */
+          offset_delta = 35
+          locals = [ class java/lang/foreign/Arena, class java/lang/foreign/MemorySegment ]
+        frame_type = 253 /* append */
+          offset_delta = 46
+          locals = [ long, long ]
+        frame_type = 3 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 23
+          locals = [ long ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 2
+          locals = [ class dev/codex/schubert/nk/storage/LinuxMonotonicClock, class java/lang/foreign/Arena, class java/lang/foreign/MemorySegment, long, long ]
+          stack = [ class java/lang/ArithmeticException ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 5
+          locals = [ class dev/codex/schubert/nk/storage/LinuxMonotonicClock, class java/lang/foreign/Arena ]
+          stack = [ class java/lang/Throwable ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 13
+          locals = [ class dev/codex/schubert/nk/storage/LinuxMonotonicClock, class java/lang/foreign/Arena, class java/lang/Throwable ]
+          stack = [ class java/lang/Throwable ]
+        frame_type = 5 /* same */
+    Exceptions:
+      throws java.io.IOException
+
+  private static java.io.IOException unavailable();
+    descriptor: ()Ljava/io/IOException;
+    flags: (0x000a) ACC_PRIVATE, ACC_STATIC
+    Code:
+      stack=3, locals=0, args_size=0
+         0: new           #189                // class java/io/IOException
+         3: dup
+         4: ldc           #67                 // String shared monotonic clock unavailable
+         6: invokespecial #191                // Method java/io/IOException."<init>":(Ljava/lang/String;)V
+         9: areturn
+      LineNumberTable:
+        line 79: 0
+
+  private static java.lang.IllegalStateException lambda$create$0();
+    descriptor: ()Ljava/lang/IllegalStateException;
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=3, locals=0, args_size=0
+         0: new           #65                 // class java/lang/IllegalStateException
+         3: dup
+         4: ldc           #67                 // String shared monotonic clock unavailable
+         6: invokespecial #69                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+         9: areturn
+      LineNumberTable:
+        line 46: 0
+}
+SourceFile: "LinuxMonotonicClock.java"
+RuntimeVisibleAnnotations:
+  0: #221()
+    org.jspecify.annotations.NullMarked
+NestMembers:
+  dev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall
+BootstrapMethods:
+  0: #230 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #224 ()Ljava/lang/Object;
+      #226 REF_invokeStatic dev/codex/schubert/nk/storage/LinuxMonotonicClock.lambda$create$0:()Ljava/lang/IllegalStateException;
+      #229 ()Ljava/lang/IllegalStateException;
+InnerClasses:
+  public static #238= #93 of #30;         // ReadCall=class dev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall of class dev/codex/schubert/nk/storage/LinuxMonotonicClock
+  public static #241= #239 of #96;        // OfInt=class java/lang/foreign/ValueLayout$OfInt of class java/lang/foreign/ValueLayout
+  public static #242= #112 of #20;        // Option=class java/lang/foreign/Linker$Option of class java/lang/foreign/Linker
+  public static #245= #243 of #96;        // OfLong=class java/lang/foreign/ValueLayout$OfLong of class java/lang/foreign/ValueLayout
+  public static final #250= #246 of #248; // Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles

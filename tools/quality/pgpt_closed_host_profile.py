@@ -120,6 +120,8 @@ def validate_syntax(c):
     validate_optional_capabilities(c)
     import pgpt_guard_signature
     pgpt_guard_signature.syntax(c)
+    import pgpt_analysis_symbols
+    pgpt_analysis_symbols.syntax(c)
     require(set(c.get('slots', {})) == {'prestyle', 'prepare', 'static', 'preflight', 'unit', 'post'}, 'six explicit immutable evidence slots')
     require(len(set(c['slots'].values())) == 6, 'distinct evidence slots')
     for p in c['slots'].values():
@@ -149,7 +151,9 @@ def validate_optional_capabilities(c):
         relative_name(name)
         import pgpt_guard_signature as guard
         signature_fence = c.get('reviewedGuardSignature') is not None and name in guard.FORBIDDEN_INIT
-        require(name + '.class' in c['physicalClasses'] or signature_fence, 'forbidden initialization in full physical scope or exact signature fence')
+        import pgpt_analysis_symbols as analysis
+        analysis_fence = c.get('reviewedAnalysisOnlyContext') is not None and name in analysis.NAMES
+        require(name + '.class' in c['physicalClasses'] or signature_fence or analysis_fence, 'forbidden initialization in full physical scope or exact signature/analysis fence')
     for item in reflection:
         require(item['targetClass'].split('$')[0].replace('.', '/') in forbidden, 'JDBC parent must not initialize')
     maps = c.get('standardCompilerSwitchMaps', [])
@@ -166,7 +170,8 @@ def validate_optional_capabilities(c):
 
 def input_paths(c):
     import pgpt_guard_signature as guard
-    return c['mainSources'] + [t['path'] for t in c['testSources']] + [r['path'] for r in c.get('resources', [])] + c['pomInputs'] + QUALITY_INPUTS + ([guard.SOURCE] if c.get('reviewedGuardSignature') is not None else [])
+    import pgpt_analysis_symbols as analysis
+    return c['mainSources'] + [t['path'] for t in c['testSources']] + [r['path'] for r in c.get('resources', [])] + c['pomInputs'] + QUALITY_INPUTS + ([guard.SOURCE] if c.get('reviewedGuardSignature') is not None else []) + (analysis.SOURCE_PATHS if c.get('reviewedAnalysisOnlyContext') is not None else [])
 
 
 def validate_owners(c, owners):
@@ -174,7 +179,7 @@ def validate_owners(c, owners):
 
 
 def tool_hashes():
-    paths = ['tools/quality/' + n + '.py' for n in ['pgpt_closed_host_profile', 'pgpt_closed_host_stages', 'pgpt_closed_host_post', 'pgpt_guard_signature']]
+    paths = ['tools/quality/' + n + '.py' for n in ['pgpt_closed_host_profile', 'pgpt_closed_host_stages', 'pgpt_closed_host_post', 'pgpt_guard_signature', 'pgpt_analysis_symbols']]
     return {p: digest(R / p) for p in paths}
 
 
@@ -208,6 +213,8 @@ def checked_inputs(c):
         require(not any(x in text for x in [*DENIED, '@BeforeAll', '@TestFactory', '@ParameterizedTest', 'ProcessBuilder', 'DriverManager', 'DataSource', 'Class.forName', 'java.lang.foreign', 'java.net.Socket']), 'outside closed ordinary host scope')
     import pgpt_guard_signature
     pgpt_guard_signature.checked(c)
+    import pgpt_analysis_symbols
+    pgpt_analysis_symbols.checked(c)
     return hashes
 
 
