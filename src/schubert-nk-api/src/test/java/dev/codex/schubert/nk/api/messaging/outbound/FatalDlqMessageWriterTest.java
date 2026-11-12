@@ -121,6 +121,36 @@ final class FatalDlqMessageWriterTest {
     assertEquals(FatalDlqMetadata.DetectedBy.API_WORK, FatalDlqMetadata.DetectedBy.values()[1]);
   }
 
+  @Test
+  void exactPrintable128AndErrorCode32BoundariesAreRetainedWithoutTrimming() throws Exception {
+    // SS321 section11: independently authored exact maxima, including ASCII space and tilde.
+    for (String transport : new String[] {"!" + " ".repeat(126) + "~", "~".repeat(128)}) {
+      for (String code : new String[] {"A", "A" + "Z".repeat(31)}) {
+        Capture capture = new Capture();
+        byte[] body = {0, 32, (byte) 0xff};
+        FatalDlqMetadata metadata =
+            new FatalDlqMetadata(code, FatalDlqMetadata.DetectedBy.WEB_REPLY, DETECTED_AT);
+        FatalDlqMessageWriter.INSTANCE.create(
+            context(capture), rejected(body, transport), metadata);
+        assertArrayEquals(new byte[] {0, 32, (byte) 0xff}, capture.body);
+        assertEquals(128, transport.length());
+        assertEquals(transport, capture.stringProperties.get("NKOriginalTransportID"));
+        assertEquals(code, capture.stringProperties.get("NKErrorCode"));
+      }
+    }
+    FatalDlqMetadata metadata =
+        new FatalDlqMetadata("A", FatalDlqMetadata.DetectedBy.WEB_REPLY, DETECTED_AT);
+    for (String bad : new String[] {"X\u001f", "X\u007f"}) {
+      Capture capture = new Capture();
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              FatalDlqMessageWriter.INSTANCE.create(
+                  context(capture), rejected(new byte[0], bad), metadata));
+      assertEquals(0, capture.stringProperties.size());
+    }
+  }
+
   private static GuardedJmsMessage rejected(byte[] body, String transportId) {
     return new GuardedJmsMessage(
         body,

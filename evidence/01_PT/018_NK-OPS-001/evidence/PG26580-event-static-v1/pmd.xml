@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-12T09:26:21.005">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java">
+<violation beginline="250" endline="250" begincolumn="13" endcolumn="48" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.guard" class="JmsMessageGuardTest" method="faultingMessage" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="278" endline="278" begincolumn="25" endcolumn="49" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.guard" class="JmsMessageGuardTest" method="baseValues" variable="values" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="292" endline="292" begincolumn="25" endcolumn="53" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.guard" class="JmsMessageGuardTest" method="with" variable="copy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="298" endline="298" begincolumn="25" endcolumn="53" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.guard" class="JmsMessageGuardTest" method="without" variable="copy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="315" endline="315" begincolumn="13" endcolumn="34" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.guard" class="JmsMessageGuardTest" method="proxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="360" endline="360" begincolumn="24" endcolumn="47" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.guard" class="JmsMessageGuardTest" method="proxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/EventTransactionPortTest.java">
+<violation beginline="126" endline="126" begincolumn="11" endcolumn="18" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventTransactionPortTest" method="txp003NullAndNonTransactedInputsHaveNoBodyBusinessOrRollbackEffects" variable="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this JMSContext object are closed after use
+</violation>
+<violation beginline="156" endline="156" begincolumn="11" endcolumn="18" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventTransactionPortTest" method="txp004TransportFailureRollsBackOnceWithLegacyOrConfirmedCallbackPorts" variable="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this JMSContext object are closed after use
+</violation>
+<violation beginline="193" endline="193" begincolumn="11" endcolumn="18" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventTransactionPortTest" method="txp005ClockProcessorAndCommitFailuresPreserveIdentityAndRollbackPhase" variable="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this JMSContext object are closed after use
+</violation>
+<violation beginline="227" endline="227" begincolumn="11" endcolumn="18" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventTransactionPortTest" method="txp006PermanentProtocolFailureCommitsBodyPreservingIsolationAndSignalsTerminal" variable="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this JMSContext object are closed after use
+</violation>
+<violation beginline="252" endline="252" begincolumn="9" endcolumn="16" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventTransactionPortTest" method="txp007InvalidDeliveryMetadataIsIsolatedBeforeProcessorWithBoundedDiagnostic" variable="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this JMSContext object are closed after use
+</violation>
+<violation beginline="276" endline="276" begincolumn="9" endcolumn="16" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventTransactionPortTest" method="txp008FailedIsolationPreservesPrimaryAndConfirmedRollbackWithoutCommitSuccess" variable="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this JMSContext object are closed after use
+</violation>
+<violation beginline="309" endline="309" begincolumn="11" endcolumn="18" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventTransactionPortTest" method="txp009UnconfirmedRollbackRetainsUnknownPhaseAndNeverRetriesOrConfirms" variable="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this JMSContext object are closed after use
+</violation>
+<violation beginline="358" endline="358" begincolumn="25" endcolumn="60" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventTransactionPortTest" method="txp010ProviderArgumentAndNullFailuresRollbackRatherThanIsolateWire" variable="message" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="371" endline="371" begincolumn="17" endcolumn="24" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventTransactionPortTest" method="txp010ProviderArgumentAndNullFailuresRollbackRatherThanIsolateWire" variable="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this JMSContext object are closed after use
+</violation>
+<violation beginline="538" endline="538" begincolumn="39" endcolumn="73" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventTransactionPortTest.Scenario" variable="properties" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="559" endline="559" begincolumn="15" endcolumn="48" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventTransactionPortTest.Scenario" method="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="585" endline="585" begincolumn="15" endcolumn="49" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventTransactionPortTest.Scenario" method="producer" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="612" endline="612" begincolumn="15" endcolumn="50" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="EventTransactionPortTest.Scenario" method="message" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionPortTest.java">
+<violation beginline="243" endline="243" begincolumn="31" endcolumn="59" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.inbound" class="InboundTransactionPortTest.Fixture" variable="properties" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="264" endline="264" begincolumn="15" endcolumn="48" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="InboundTransactionPortTest.Fixture" method="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="289" endline="289" begincolumn="15" endcolumn="49" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="InboundTransactionPortTest.Fixture" method="producer" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="316" endline="316" begincolumn="15" endcolumn="45" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.inbound" class="InboundTransactionPortTest.Fixture" method="message" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/DlqSenderContractTest.java">
+<violation beginline="450" endline="450" begincolumn="39" endcolumn="73" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.outbound" class="DlqSenderContractTest.Capture" variable="properties" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="617" endline="617" begincolumn="45" endcolumn="66" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="DlqSenderContractTest" method="proxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriterTest.java">
+<violation beginline="64" endline="64" begincolumn="16" endcolumn="23" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="FatalDlqMessageWriterTest" method="metadataAndWriterContractsDenyNullAndUnboundedValues" variable="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this JMSContext object are closed after use
+</violation>
+<violation beginline="205" endline="205" begincolumn="24" endcolumn="45" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="FatalDlqMessageWriterTest" method="objectMethod" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+<violation beginline="211" endline="211" begincolumn="45" endcolumn="66" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="FatalDlqMessageWriterTest" method="proxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="215" endline="215" begincolumn="39" endcolumn="73" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.outbound" class="FatalDlqMessageWriterTest.Capture" variable="stringProperties" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="216" endline="216" begincolumn="40" endcolumn="71" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.outbound" class="FatalDlqMessageWriterTest.Capture" variable="intProperties" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+</file>
+</pmd>

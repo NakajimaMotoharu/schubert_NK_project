@@ -339,6 +339,103 @@ final class EventTransactionPortTest {
     }
   }
 
+  @Test
+  void txp010ProviderArgumentAndNullFailuresRollbackRatherThanIsolateWire() {
+    // BUG2659 integration; two formerly overcaught getters, both routes and entry points.
+    for (boolean question : List.of(true, false)) {
+      for (boolean legacy : List.of(true, false)) {
+        for (String getter : List.of("getJMSMessageID", "getJMSCorrelationID")) {
+          for (RuntimeException failure :
+              List.of(
+                  new IllegalArgumentException("synthetic provider fault"),
+                  new NullPointerException("synthetic provider fault"))) {
+            var s = new Scenario(question);
+            byte[] before = s.body.clone();
+            BytesMessage delegate = s.message();
+            BytesMessage message =
+                (BytesMessage)
+                    Proxy.newProxyInstance(
+                        BytesMessage.class.getClassLoader(),
+                        new Class<?>[] {BytesMessage.class},
+                        (ignored, method, arguments) -> {
+                          if (method.getName().equals(getter)) throw failure;
+                          return method.invoke(delegate, arguments);
+                        });
+            var listener =
+                listener(
+                    s,
+                    ignored -> {
+                      throw new AssertionError(UNEXPECTED_PROCESSOR);
+                    },
+                    CLOCK);
+            var context = s.context();
+            if (legacy) {
+              assertSame(
+                  failure,
+                  assertThrows(failure.getClass(), () -> listener.onMessage(context, message)));
+              assertEquals(List.of(MODE, ROLLBACK), s.order);
+            } else {
+              assertSame(
+                  failure,
+                  assertThrows(
+                      failure.getClass(),
+                      () ->
+                          listener.onMessage(
+                              context,
+                              message,
+                              () -> s.order.add(ATTEMPTED),
+                              () -> s.order.add(CONFIRMED))));
+              assertEquals(List.of(MODE, ATTEMPTED, ROLLBACK, CONFIRMED), s.order);
+            }
+            assertEquals(1, s.bodyReads);
+            assertEquals(0, s.clears);
+            assertSame(null, s.sent);
+            assertArrayEquals(before, s.body);
+            assertEquals(0, failure.getSuppressed().length);
+          }
+        }
+      }
+    }
+  }
+
+  @Test
+  void txp011DefaultProcessorNullContractsAndLegacyIdentityAreIndependentOfJms() {
+    // Explicit literal object input; expected is SAM count/argument identity, not a codec result.
+    var header =
+        new dev.codex.schubert.nk.protocol.header.CommonHeader(
+            "SCHBNK01",
+            1,
+            new dev.codex.schubert.nk.protocol.layout.LayoutId(WORK_LAYOUT),
+            1,
+            dev.codex.schubert.nk.protocol.header.MessageKind.EVENT,
+            dev.codex.schubert.nk.protocol.header.InteractionKind.INTERNAL,
+            java.util.UUID.fromString(EVENT_ID),
+            java.util.UUID.fromString(CORRELATION_ID),
+            NOW,
+            java.util.Optional.empty(),
+            256,
+            64,
+            0,
+            0,
+            320,
+            java.util.Optional.empty());
+    var event =
+        new dev.codex.schubert.nk.protocol.layout.WireMessage<>(
+            header,
+            new dev.codex.schubert.nk.protocol.layout.FixedPayload(
+                Arrays.copyOfRange(golden(true), 256, 320), 0, List.of()));
+    var delivery = new DeliveryMetadata(3, TRANSPORT_ID, NOW);
+    var seen = new ArrayList<Object>();
+    InternalEventProcessor processor = seen::add;
+    assertThrows(NullPointerException.class, () -> processor.process(null, delivery));
+    assertThrows(NullPointerException.class, () -> processor.process(event, null));
+    assertThrows(NullPointerException.class, () -> processor.process(null, null));
+    assertTrue(seen.isEmpty());
+    processor.process(event, delivery);
+    assertEquals(1, seen.size());
+    assertSame(event, seen.getFirst());
+  }
+
   private static TransactedEventListener listener(
       Scenario s, InternalEventProcessor processor, Clock clock) {
     return new TransactedEventListener(

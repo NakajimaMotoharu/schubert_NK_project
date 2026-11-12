@@ -1,0 +1,36 @@
+"""Independent whole event/DLQ source, ownership, oracle and fresh static admission; no PT here."""
+from pathlib import Path
+import hashlib,json,xml.etree.ElementTree as ET
+R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';U=R.parent/'pgpt-runs/PG379/pg26578-event-main-subset-v1';O=B/'evidence/PG26582-event-preflight-v1';assert not O.exists();sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();load=lambda p:json.loads(Path(p).read_bytes());write=lambda p,v:Path(p).write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
+pc=B/'evidence/PG26578-event-main-subset-v1/manifest.json';m=load(pc);ps=B/'evidence/PG26580-event-static-v1';s=load(ps/'manifest.json');assert m['actualExit']==0 and m['expectedTests']==169 and len(m['expectedCases'])==169;assert m['inputHashes']==s['inputHashes'] and m['dependencies']==s['dependencies'];assert all(sha(R/p)==h for p,h in m['inputHashes'].items())
+for label,t in m['stages'].items():
+ assert t['actualExit']==0 and not t['timedOut']
+ for stream in ['stdout','stderr']:assert sha(pc.parent/(label+'.'+stream))==t[stream+'Sha256']
+assert m['mainClassHashes']=={str(p.relative_to(U/'target/classes')):sha(p) for p in (U/'target/classes').rglob('*.class')} and len(m['mainClassHashes'])==14
+assert m['testClassHashes']=={str(p.relative_to(U/'test-classes')):sha(p) for p in (U/'test-classes').rglob('*.class')}
+normal=B/'evidence/PG22106-api-stop-static-independent-input-v1/normal.json';n=load(normal);guard='dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard.class';unchanged={p for p,h in m['mainClassHashes'].items() if h==n['normalPhysicalClassHashes']['api:'+p]};assert len(unchanged)==13 and set(m['mainClassHashes'])-unchanged=={guard}
+guardCompile=B/'evidence/PG26480-jms-provider-main-subset-v1/manifest.json';gm=load(guardCompile);assert m['mainClassHashes'][guard]==gm['mainClassHashes'][guard];guardSource='src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard.java';assert m['inputHashes'][guardSource]==gm['inputHashes'][guardSource]
+ns={'m':'http://maven.apache.org/POM/4.0.0'}
+def compiler(p):return next(x for x in ET.parse(p).findall('.//m:plugin',ns) if x.findtext('m:artifactId',namespaces=ns)=='maven-compiler-plugin')
+assert ET.tostring(compiler(R/'pom.xml'))==ET.tostring(compiler(U/'pom.xml'))
+style=B/'evidence/PG22122-current7aed-lineage-style-v1/manifest.json';st=load(style);assert st['actualExit']==st['applicableViolations']==st['unclassified']==st['checkstyle']==0;art=style.parent/'artifacts.json';assert sha(art)==st['files']['artifacts.json'];rows={x['path']:x for x in load(art)}
+for p in m['mainSources']+m['packageSources']:
+ if p!=guardSource:assert rows[p]['sha256']==sha(R/p)==n['begin']['inputHashes'][p]
+guardStatic=load(B/'evidence/PG26482-jms-provider-static-v1/manifest.json');assert guardStatic['inputHashes'][guardSource]==sha(R/guardSource)
+assert not any('/src/main/java/' in f.get('name','') for f in ET.parse(B/'evidence/PG26482-jms-provider-static-v1/pmd.xml').getroot() if f.tag.rpartition('}')[2]=='file')
+sb=ET.parse(ps/'spotbugs.xml').getroot();assert not any(sb.findall('.//'+x) for x in ['BugInstance','MissingClass','Error']);stats={x.get('class') for x in sb.findall('.//ClassStats')};assert stats=={x.removesuffix('.class').replace('/','.') for x in m['mainClassHashes']};assert s['stages']['spotbugs']['actualExit']==s['stages']['checkstyle']['actualExit']==0;assert not ET.parse(ps/'checkstyle.xml').findall('.//error')
+rt=ET.parse(ps/'pmd.xml').getroot();assert not any(x.tag.rpartition('}')[2] in ['error','configerror'] for x in rt.iter());occ=[];reasons={'CloseResource':'This is a borrowed interface-only JMSContext Proxy with no external resource. Listener/sender must not own close; fixture rejects unexpected operations. No factory/server/connection is created, fixture Java values are self-contained.', 'UseProperClassLoader':'Standalone JVM Proxy implements exact JMS interface using its defining loader. No J2EE container/context loader or reflective-access override; preserving the interface identity is deliberate.', 'UseConcurrentHashMap':'Each map belongs exclusively to one synchronous fixture; no concurrent read/write, deliberate null/missing value cases. No production shared map.', 'CompareObjectsWithEquals':'Proxy equals handler implements reference identity without recursively calling Proxy.equals; this is intentional Object identity, not a domain value comparison.'}
+for f in rt:
+ if f.tag.rpartition('}')[2]!='file':continue
+ path=Path(f.get('name'));assert str(path.relative_to(R)) in m['inputHashes'];lines=path.read_text().splitlines()
+ for x in f:
+  if x.tag.rpartition('}')[2]!='violation':continue
+  rule=x.get('rule');assert rule in reasons,(path,rule,x.attrib);at=int(x.get('beginline'));occ.append(dict(path=str(path.relative_to(R)),line=at,sourceLine=lines[at-1],rule=rule,classification='CONTEXTUAL_NONAPPLICABLE',reason=reasons[rule]))
+assert len(occ)==30
+mfg=B/'evidence/PG26577-event-writer-manufacture-v1/manifest.json';mf=load(mfg);assert mf['actualExit']==0 and mf['newDefinitions']==3 and not mf['MainChanged']
+for entry in mf['results']:assert entry['originalAllTokensInverseExact'] and sha(R/entry['path'])==entry['afterSha256']
+old=B/'evidence/PG23478-event-transaction-independent-v1/manifest.json';ep=load(old);assert sha(old)=='3d9b27a9d8bc04eea13b0cc81622df70070bb05089d0d712f0fd49f50041d455';target='src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener.java';assert ep['inputHashes'][target]==sha(R/target);targetClass='dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener';assert ep['physical'][targetClass]==m['mainClassHashes'][targetClass+'.class'];assert ep['inputHashes'][guardSource]!=sha(R/guardSource);assert not ep['wholeDependencyQualified']
+held=['TemporaryInfrastructureException','FingerprintKeyRing','ResponseSnapshotCodec','WebStartupException']
+assert not any(h in p for p in m['mainClassHashes'] for h in held)
+for p in m['mainSources']:assert not any(h in (R/p).read_text() for h in held)
+O.mkdir();write(O/'static-contextual-thirty.json',occ);v=dict(actualExit=0,inputHashes=m['inputHashes'],dependencies=m['dependencies'],compileManifestSha256=sha(pc),staticManifestSha256=sha(ps/'manifest.json'),expectedTests=169,newDefinitions=3,originalEvent9AndWriter3Preserved=True,wholeOriginalDlq8ReusedRatherThanDuplicated=True,providerIntegrationInputs=16,defaultNullInputs=3,defaultIdentityPositive=1,writerValidExactBoundaryInputs=4,writerInvalidNearBoundaryInputs=2,freshNullAway=True,freshSpotbugsExactPhysical14=True,spotbugsBugs=0,spotbugsMissing=0,spotbugsErrors=0,rawPmd=30,applicableStaticViolations=0,unclassified=0,checkstyleFindings=0,processingErrors=0,unchanged13PhysicalMatchNormal=True,changedGuardMatchesCurrentQualifiedPhysical=True,oldEventTargetPhysicalSameButGuardChanged=True,oldEvent9NotTransferredAsCurrentSuccess=True,heldActualClassRead=False,actualVmDbBrokerAuthKeyRootOperations=False,unsafeEmbeddedFixtureNotCompiled=True,newAcceptance=0,formalUpdated=False,whole451Accepted=False,productTestsExecuted=0,files={p.name:sha(p) for p in O.iterdir()});write(O/'manifest.json',v);print(json.dumps(dict(actualExit=0,expectedTests=169,staticApplicable=0,rawContextual=30,MainPhysical14=True,manifestSha256=sha(O/'manifest.json'))))
