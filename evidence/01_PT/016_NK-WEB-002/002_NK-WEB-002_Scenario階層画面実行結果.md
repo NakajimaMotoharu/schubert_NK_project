@@ -78,3 +78,6 @@ P01611/12の既全14通常PTは[仕様](4141_P0161112原Music十四単体テス�
 
 
 WBS-P016-13公開source契約/独立期待値/TestIDは[4143_P01613Music曲一覧原五artifact契約対応.md](4143_P01613Music曲一覧原五artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+P01613の公開モデル6新規Unitは[仕様](4144_P01613MusicTrack公開六単体仕様.md)/[結果](4145_P01613MusicTrack公開六単体結果.md)。target100/全180partial、原/2や実ControllerのHOLDは維持。
