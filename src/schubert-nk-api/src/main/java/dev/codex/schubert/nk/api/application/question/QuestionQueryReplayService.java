@@ -108,6 +108,7 @@ public final class QuestionQueryReplayService {
         | PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -130,6 +131,7 @@ public final class QuestionQueryReplayService {
         | PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -195,6 +197,7 @@ public final class QuestionQueryReplayService {
         | PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -223,6 +226,7 @@ public final class QuestionQueryReplayService {
     } catch (PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -244,6 +248,7 @@ public final class QuestionQueryReplayService {
     } catch (PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }

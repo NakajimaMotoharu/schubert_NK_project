@@ -1,0 +1,99 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T19:13:28.348883+09:00",
+  "source": "864b4dcb4282b8bb8bf03c3c21571093d0964bb5",
+  "productionCoreMain": "b23ddcfab9566b96f182562ae011f1b4ba401c72",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationAuditWriter.java": "9b36eb173f1c64adb26515f0f6b84f19d454e704f893a3bef2e6661188e57b0c",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryAuditWriter.java": "f07e45a7a349f594ec6bd0276e98604e2aab91476bc26299a6c50ccff7a48620",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryReplayService.java": "f8cc65b60561d378dfa1052a6551f2ed9ca32eb21ca99b23f81accbceab44587"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedSourceLines": 501,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01403-PG01",
+      "methods": "QueryReplay.captureSuccess/captureFailure/capture",
+      "testIds": [
+        "QRY013..017",
+        "NTF010"
+      ],
+      "expected": "Only valid typed response SUCCESS or persistent NOT_FOUND detail/RESOURCE_LIMIT list. Snapshot NONE ref, response001, completion microseconds; plaintext header correlation original M0/completed millis and current auth context, Q_SCOPE8 captures USER/ADMIN prefix only on question scope, notification no prefix. body/plaintext wiped finally; encryption port unchanged, no crypto/key substitution."
+    },
+    {
+      "id": "P01403-PG02",
+      "methods": "QueryReplay.read/Snapshot.scopeAllowed/reply/failure",
+      "testIds": [
+        "QRY013..017",
+        "NTF010"
+      ],
+      "expected": "Decrypt AAD originalM0/layout001/currentowner; exact layout/version/reference/header length/correlation/time/state-code/typed records, body/data/records/plaintext wiped. Snapshot sameRequest object and owner; captured USER can remain narrow, captured ADMIN needs currentADMIN; notification remains own-user. Fresh reply UUID/time/currentcontext and only SUCCESS replay0200; definite errors unchanged. Fixed failure allowlist, no saved current auth proof. Five fixedTemporary catch boundaries must propagate same reachableError via finite identity graph before ordinary catalog; five missing calls BUG2702."
+    },
+    {
+      "id": "P01403-PG03",
+      "methods": "QueryAudit.write/MutationAudit.write",
+      "testIds": [
+        "QRY018..024",
+        "QRY039..045",
+        "NTF011"
+      ],
+      "expected": "Borrowed caller TX only/no commit rollback close connection. Exact prepared INSERT11column/10bind UTC, statement close, affectedRows exactly1 else rawSQLException. Closed event tables: auth/owner/protocol/replay/capacity mapped to fixed actions/category/level; query step/outcome, mutation N9_VERSION/9001 capacity only. Header UUIDs, optional verified actor/nullSQL types, NFC control-sanitized username, no payload/search/context/token/key or target ID. Failures preserve original and TWR suppressed, cannot countaudit success; full proxy8 independently verifies table/binds/null/rowcount/fault/parallel no backend but workerclose lifetime gap needs separate ledger/PG before run."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryReplayServiceTest.java",
+      "sha256": "92c0c8af57cf50c6c0a1feb4c3fc75a2959ff0e71d6e463fe1acf8598892e97a",
+      "wholeBodyReviewed": false,
+      "reviewedScope": "imports/setup/first method only",
+      "status": "HOLD_WHOLE_ACTUAL4_NO_EXTRACTION"
+    }
+  ],
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27344-question-query-replay-audit-contract-v1/before.json",
+    "sha256": "a4576d392216ef9921085d9027cbd80db2a5fe73b1e2d4bcdad1fda9e9266bcb"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P014-03/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_FIVE_FATAL_CONVERSIONS_AND_ACTUAL4_CURRENT_SCOPE_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1590_question_query_replay_audit_contract.py",
+    "sha256": "acea98ff27a22884c8568a18ec3f9545d9f5a3e6d8e3ae6f50945891535695b7"
+  }
+}
