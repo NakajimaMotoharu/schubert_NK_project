@@ -1,0 +1,182 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T12:10:45.852809+09:00",
+  "source": "9d551aef47329783c0ea0ff06f4e34949c80f852",
+  "productionCoreMain": "62960fc3b5d4a67cf7bd9df887b668169d10f87f",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java": "1ec3c856c555f77de597745defbbd6ea6f60292013117a44daf81e78a5f5eda8",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionAuditWriter.java": "173393177007aeb17a945ae37894e4d4a4c8b9b7f386765628bdbede6d7ebb6d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionRevocationReason.java": "213a5fb2c04bf79b447f0a981f4f8b0eb3834b948476f8b2ddadb56b472cdd74"
+  },
+  "design": {
+    "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+    "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+    "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+  },
+  "checks": [
+    {
+      "id": "P00702-PG01",
+      "source": "AuthSessionService.issue",
+      "expectation": "Explicit caller transaction; app_users row lock first, missing/disabled denied before issuance; insert same user context then select nonrevoked expires_at>issuedAt rows ordered last_accessed_at,id FOR UPDATE. Replace exactly size-2 oldest entries, requiring affected1. No implicit issue-time ordering or absolute lifetime.",
+      "testIds": [
+        "PT-AUT-ISS002",
+        "PT-AUT-005-I/006"
+      ],
+      "limitation": "Memory JDBC checks exact SQL/order/binding, not live PostgreSQL lock serialization."
+    },
+    {
+      "id": "P00702-PG02",
+      "source": "AuthSessionService.issue",
+      "expectation": "32 random bytes lowercase64; SHA256 lookup, AES-GCM encrypted envelope and identity-bound AAD; microsecond UTC issuance/last-access, +8h expiry; raw temporary bytes and borrowed ciphertext wiped on every acquired path. No raw context/lookup hash/envelope/identifier logged.",
+      "testIds": [
+        "PT-AUT-ISS001",
+        "PT-AUT-ISS003",
+        "PT-AUT-ISS007"
+      ],
+      "limitation": "Original independent public deterministic vector only, never actual key/session issuance. Whole current crypto dependency closure not newly qualified."
+    },
+    {
+      "id": "P00702-PG03",
+      "source": "SessionAuditWriter.write/SessionRevocationReason",
+      "expectation": "Critical SESSION_REVOKED SECURITY INFO in caller business transaction after each replacement; reason REPLACED/result0000, current login verified IP, actor/target user and message/correlation IDs. Six closed reasons, optional IP uses SQL NULL, exact insert1. No borrowed commit/rollback/close.",
+      "testIds": [
+        "PT-AUT-ISS002",
+        "AUT-SESSION-AUDIT001..009"
+      ],
+      "limitation": "Original audit9 fixed bindings/SQL/failure resource graph; SDK initialization review null in historical proof retained as limitation, not silently promoted."
+    },
+    {
+      "id": "P00702-PG04",
+      "source": "AuthSessionService.issue/SessionAuditWriter.write",
+      "expectation": "SQL/required SQL NULL/affected-count/owned-close faults cannot return success; fixed infrastructure redaction; semantic missing/disabled context rejection and owned close failure distinguished; caller rollback required, Inbox replay caller must not reissue.",
+      "testIds": [
+        "PT-AUT-ISS004..008",
+        "AUT-SESSION-AUDIT001..009"
+      ],
+      "limitation": "Unknown runtime original test uses IllegalStateException. Provider-thrown AuthenticationContextException origin and fatal/aliased graphs are not claimed completely tested. New DB transaction, same-user concurrency, and ending dependency proof remain absent."
+    }
+  ],
+  "retainedOriginalProofs": [
+    {
+      "proof": {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20914-session-issue-jdbc-eight-v1/manifest.json",
+        "sha256": "b51345dd72a3a46cf9d8ead259b301c442c1de7dba965ec75cb3ad7d190554ed"
+      },
+      "originalSource": "5720b037554171d092eddabcf0a04bfe95897350",
+      "originalMain": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+      "originalTests": 8,
+      "inputHashes": {
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java": "1ec3c856c555f77de597745defbbd6ea6f60292013117a44daf81e78a5f5eda8",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionIssueJdbcPortTest.java": "367458b115a8e5f3705fb6cd5bbc4db1728d15ea6bae0b41c7e7832d06ea04d8"
+      },
+      "physical": {
+        "dev/codex/schubert/nk/api/security/AuthSessionService": "11fe88d62a4975091d1db74b99cd6fab02155dee6ba288213e81df36de673510"
+      },
+      "counters": {
+        "dev/codex/schubert/nk/api/security/AuthSessionService": {
+          "INSTRUCTION": {
+            "covered": 334,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 20,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 69,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 13,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 3,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        }
+      },
+      "status": "ORIGINAL_RUN_TARGET_SOURCE_TEST_AND_PHYSICAL_IDENTICAL_NOT_CURRENT_WHOLE_DEPENDENCY_QUALIFICATION",
+      "newExecutions": 0
+    },
+    {
+      "proof": {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG19788-session-audit-nine-v1/manifest.json",
+        "sha256": "b5f2b873ff71454b878c7ce480fb64fec86135c4a0514b31da2de85a5237e2de"
+      },
+      "originalSource": "112dd625284038570852e74ffa1b98f132beb4cd",
+      "originalMain": "28af318d0198fe7432ca6fcd234d3fabbfd10173",
+      "originalTests": 9,
+      "inputHashes": {
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionAuditWriter.java": "173393177007aeb17a945ae37894e4d4a4c8b9b7f386765628bdbede6d7ebb6d",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionAuditPortTest.java": "64179428f24f1c78e6e93e320de1a840dfa0beab09538396e1df02a98557c67e"
+      },
+      "physical": {
+        "dev/codex/schubert/nk/api/security/SessionAuditWriter": "1519962b12160eebaede73fb23ca31c8b867958280840680cf51e5b907880101"
+      },
+      "counters": {
+        "dev/codex/schubert/nk/api/security/SessionAuditWriter": {
+          "INSTRUCTION": {
+            "covered": 75,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 4,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 17,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 4,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 2,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        }
+      },
+      "status": "ORIGINAL_RUN_TARGET_SOURCE_TEST_AND_PHYSICAL_IDENTICAL_NOT_CURRENT_WHOLE_DEPENDENCY_QUALIFICATION",
+      "newExecutions": 0
+    }
+  ],
+  "originalIssueIndependentPost": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20920-session-issue-independent-post-v1/manifest.json",
+    "sha256": "b573d901bee705b5d2c1b8249702c9cdb2187e019e9e53644811288697340f61"
+  },
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthSessionServiceTest.java",
+      "sha256": "d2452c513a9c9f92bdcf67de977fa547b5dbe2319299955610c5a93d0b579381",
+      "fullPublicSourceReviewed": true,
+      "tests": 6,
+      "status": "HOLD_WHOLE_REAL_DATABASE_FIXTURE_NO_PARTIAL_SELECTION",
+      "independentExpectations": "literal SQL counts/last-access and PostgreSQL UUID order, independent JCA hash/AES-GCM AAD, caller rollback and critical audit atomicity; 100-issue real concurrency not executed"
+    }
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P007-02/1"
+  ],
+  "endingStatus": "WBS-P007-02/2_NOT_ACCEPTED_REAL_DB_CONCURRENCY_TRANSACTION_DEPENDENCIES_AND_WHOLE451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1319_two_sessions_contract_audit.py",
+    "sha256": "5b11d14315528801a34ec86db12ee202932006175e4565c7b2af3f0da483ec64"
+  }
+}
