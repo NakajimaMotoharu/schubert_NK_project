@@ -1,0 +1,159 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T18:17:00.963081+09:00",
+  "source": "b23ddcfab9566b96f182562ae011f1b4ba401c72",
+  "productionCoreMain": "b23ddcfab9566b96f182562ae011f1b4ba401c72",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java": "93029308e85bad6c693ffcf30ab435f42fef2b4a56de713f5ec1e7752f071275",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/QuestionQueryScopeFrame.java": "77b626a3d396b6e6e98b2199149e8892dfa2dd478a21759b0d20cbb072988b2e",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.java": "5eece6ce0bfd2e2e7db0f466f4f2806a28ce4182019117d897f5346468f54efd"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedSourceLines": 872,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01401-PG01",
+      "methods": "Application.process/inspect/complete/persist",
+      "testIds": [
+        "QRY018..024",
+        "NTF011",
+        "QRY-SCOPE002/004"
+      ],
+      "expected": "Read-onlycurrentauth first/originalownerCanonical/inspectMessageonly/noidlelocks. Existingfrozencompletion ornewqueryimmutablevalue separatedbeforeownedcommitclose; finalwritecurrentauth/idletouch rechecksownerIDandfreshrole. CapturedADMIN->currentUSER newQSS0103/QSD0104 nonstoredSECURITYaudit beforeInboxhandler; competinglockedcompletion alsoinspectactualSnapshot.scopeAllowed. CapturedUSER/currentADMIN preservesoldlimitedscope, notwidening/refetch. NTS/NTD alwaysownerbound. HMAC/24hInboxNOne/tokenless/sourceM0/savedcompletion equality/expiry frozen, mismatchcriticalauditcommitsbeforePermanent; canonicalcopiesclose."
+    },
+    {
+      "id": "P01401-PG02",
+      "methods": "Application.transaction/reject/messageMismatch/identity",
+      "testIds": [
+        "QRY018..024",
+        "NTF011"
+      ],
+      "expected": "OwnreadOnly/writeTX/commit+connectionclose beforefreshresponseUUID/currentrequestheader. operation/commitSQLRuntimeError rollbackonce/secondaryattach, finalclassificationbeforecatalog. CurrentauthcleanContextException isalreadyverifiedbyAuthenticationContextVerifier suppressedguard: unknownresourceclose becomesInfrastructure, notSESSIONINVALID. InboxMessageMismatch onlyreasoncorrect+suppressedempty, unknownclose neverclassifieddefinitebusinessmismatch. ClosedRejectionenum fixesaction/classification/audit, no rawexternalResultCode."
+    },
+    {
+      "id": "P01401-PG03",
+      "methods": "QuestionQueryScopeFrame.wrap/capturedScope/wireForInspection",
+      "testIds": [
+        "QRY-SCOPE001/003"
+      ],
+      "expected": "IndependentprefixUSER4e4b515259310055/ADMIN4e4b515259310041 followedbyexactcallerownedwire, minwire256/frame264. No liveauthgrant/currentrowguess. QSS/QSD prefixed001only; malformedmagic/unknownscope/truncated/version002/crossNTD/NTS/Userroute rejected. Legacyunprefixedraw isinspectioncloneonly, normalreplaycaptureScope rejectslegacy. Copiescallerowned/mutationnotshared; encryption/AAD ownedactualcodec andnotexercisedbyframe2."
+    },
+    {
+      "id": "P01401-PG04",
+      "methods": "Repository.questionSearch/questionDetail/notificationSearch/notificationDetail/paged/detail",
+      "testIds": [
+        "QRY001..005",
+        "NTF001..005",
+        "QRY-SQL001..010",
+        "QRY-PLAIN001..008"
+      ],
+      "expected": "Borrowedexplicitreadonly/manualTX; noConnectioncommit/rollback/close orJMS. USERquestionowner only/no suppliedusername, ADMINquestionallnondeleted; notificationADMINstillselfonly. FixedSQL/typedbinds escapedliteralQ keyword andinclusiveUTCdates, Question submittedAt/idDESC vsNotification stateChangedAt/idDESC. count+listcommonpredicate, page50/max49999950/pageclamporiginalcanonunchanged/emptyzero/1. Unicode100codepointsummary, fulltypedDetail/currentowner/missingOptional, deletednotificationbody/answer/idNULL+labeldeleted; validfiveerrorcodes typedindependentliteralmap. Invalidrows/count/SQL/providergraph classifiedfixedfailure/nonnulltypedColumns, normalSql10neverinjectsthoseheldexceptions."
+    },
+    {
+      "id": "P01401-PG05",
+      "methods": "scope endings/sharedP013code",
+      "testIds": [
+        "current DB/auth/role changes/replay ending"
+      ],
+      "expected": "AllordinarySQLinterface/PTmetadata notactualDB/SQLengine/currentauth/HMAC/frozencrypto/native. P013ownsRequest/Exception andexistingSQLtestfee, relatedP014sourceprojectionfee0dup. Originalsourceprice1/3/8 frozen. MainFramepure2/publicidentityJDKonly isadmissionnotnewPASShere. SharedQueryReplay/Audit ownedP01403, actual4wholeDBTests HOLD, original/2and451stillunaccepted."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationServiceTest.java",
+      "sha256": "07ae0aa17bcbd55e0dc7bd0b3634262655f97d211cca669a2b01eec9a1668076",
+      "tests": 9,
+      "wholeBodyReviewed": false,
+      "status": "HOLD_WHOLE_DB_ACTUAL4_HELPER_NO_EXTRACTION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRepositoryTest.java",
+      "sha256": "572c0e86ecb4d6e3d22a84c9bc67c4c098b6e83d7cf6bd37ea2f16a76a662fc5",
+      "tests": 9,
+      "wholeBodyReviewed": false,
+      "status": "HOLD_WHOLE_DB_ACTUAL4_HELPER_NO_EXTRACTION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/QuestionQueryScopeFrameTest.java",
+      "sha256": "9a0872ab0b442ec299625c6ec33a6e1ef201d7a4258ce30128f4f2f30c31d7ca",
+      "tests": 2,
+      "wholeBodyReviewed": true,
+      "status": "ELIGIBLE_WHOLE_PURE_FRAME2_NOT_RUN_OR_REQUALIFIED_THIS_GROUP"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSqlContractTest.java",
+      "sha256": "091d86412f47c06d63eb91df04eabd1e1bab46ec5721cb0ebd7fafd333e8f576",
+      "tests": 10,
+      "wholeBodyReviewed": true,
+      "status": "ELIGIBLE_WHOLE_JDBC_INTERFACES_VALID_ROWS_NO_GRAPH9_OR_BACKEND",
+      "primaryCostOwner": "WBS-P013-01",
+      "relatedP014ExtraFee": 0,
+      "oldOriginalSpec8PlusExistingSupplement2": true,
+      "newDefinitions": 0
+    }
+  ],
+  "existingSqlOriginalAndSupplementSpecs": [
+    {
+      "path": "evidence/01_PT/014_NK-QRY-001/003_NK-QRY-001_質問通知SQL界面契約単体テスト仕様書.md",
+      "sha256": "7816c92c531430b2ac5c82b828ddfd73b64419dbd3210cb8fe58a8e40f7fecf1"
+    },
+    {
+      "path": "evidence/01_PT/014_NK-QRY-001/005_NK-QRY-001_通知有効終端・満杯page契約仕様書.md",
+      "sha256": "c0e3701e7614740bfb6354bd4af2ce62a4fbcfc9c9cda4771998d2d4f4560eb9"
+    }
+  ],
+  "normalMainUniqueDelta": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/908_WBS65製造Main実差分十七source照合.json",
+    "sha256": "49c256cc10e18ec600245683dc52aa13baf6009550488a7cafe8b1a6f19dbcc9"
+  },
+  "normalSqlWholeCount": 10,
+  "oldPlannedEightCountSupersededBeforeRun": true,
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P014-01/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_CURRENT_AUTH_DB_SCOPEFRAME_AND_SAME_SOURCE_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1568_question_query_contract_audit.py",
+    "sha256": "e14b1ef6c8a4032251af52cae10b519c5a2ea8be96e98c91b6dab7eb32618e44"
+  }
+}
