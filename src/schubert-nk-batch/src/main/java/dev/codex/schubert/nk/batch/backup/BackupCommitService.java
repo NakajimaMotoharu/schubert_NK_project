@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.batch.backup;
 
 import dev.codex.schubert.nk.batch.repository.BackupStepRepository;
 import dev.codex.schubert.nk.batch.repository.BatchRepositoryException;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Instant;
@@ -45,6 +46,8 @@ public final class BackupCommitService {
           if (cleanupFailure instanceof Error fatal) throw fatal;
           if (cleanupFailure instanceof RuntimeException
               && !(cleanupFailure instanceof BatchRepositoryException)) throw cleanupFailure;
+          StorageIoException.preserveFatal(failure);
+          StorageIoException.preserveFatal(cleanupFailure);
           throw new BatchRepositoryException();
         }
         throw failure;
@@ -53,6 +56,7 @@ public final class BackupCommitService {
       interrupted();
       return stored;
     } catch (SQLException | BatchRepositoryException failure) {
+      StorageIoException.preserveFatal(failure);
       throw new BatchRepositoryException();
     }
   }

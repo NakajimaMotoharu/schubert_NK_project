@@ -242,6 +242,8 @@ public final class BackupArtifactVerifier {
         guard(started);
         return result;
       } catch (IOException | DirectoryIteratorException | UnsupportedOperationException failure) {
+        if (failure instanceof RuntimeException runtimeFailure)
+          StorageIoException.preserveFatal(runtimeFailure);
         throw unavailable();
       } finally {
         Arrays.fill(buffer, (byte) 0);
@@ -330,6 +332,8 @@ public final class BackupArtifactVerifier {
       guard(started);
       return same;
     } catch (IOException | DirectoryIteratorException | UnsupportedOperationException failure) {
+      if (failure instanceof RuntimeException runtimeFailure)
+        StorageIoException.preserveFatal(runtimeFailure);
       throw unavailable();
     } finally {
       Arrays.fill(canonical, (byte) 0);
@@ -563,6 +567,8 @@ public final class BackupArtifactVerifier {
         guard(started);
         return result;
       } catch (IOException | DirectoryIteratorException | UnsupportedOperationException failure) {
+        if (failure instanceof RuntimeException runtimeFailure)
+          StorageIoException.preserveFatal(runtimeFailure);
         if (force != null && failure instanceof StorageIoException storage)
           throw new StorageIoException(storage.reason());
         throw unavailable();

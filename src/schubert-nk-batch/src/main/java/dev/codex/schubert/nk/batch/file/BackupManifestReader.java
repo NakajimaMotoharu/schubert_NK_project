@@ -163,6 +163,8 @@ public final class BackupManifestReader {
           | DirectoryIteratorException
           | UnsupportedOperationException
           | NoSuchAlgorithmException failure) {
+        if (failure instanceof RuntimeException runtimeFailure)
+          StorageIoException.preserveFatal(runtimeFailure);
         throw unavailable();
       }
     } finally {
@@ -335,6 +337,8 @@ public final class BackupManifestReader {
         guard(started);
         return result;
       } catch (IOException | DirectoryIteratorException | UnsupportedOperationException failure) {
+        if (failure instanceof RuntimeException runtimeFailure)
+          StorageIoException.preserveFatal(runtimeFailure);
         throw unavailable();
       } finally {
         Arrays.fill(bytes, (byte) 0);
