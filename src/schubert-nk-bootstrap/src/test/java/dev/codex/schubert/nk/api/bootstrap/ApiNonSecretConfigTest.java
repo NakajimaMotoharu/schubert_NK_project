@@ -189,11 +189,16 @@ final class ApiNonSecretConfigTest {
     assertEquals(
         INVALID,
         assertThrows(IllegalArgumentException.class, () -> config.value("password")).getMessage());
-    try (var executor = Executors.newFixedThreadPool(8)) {
+    var executor = Executors.newFixedThreadPool(8);
+    try {
       var jobs = new java.util.ArrayList<java.util.concurrent.Future<String>>();
       for (int i = 0; i < 32; i++)
         jobs.add(executor.submit(() -> ApiNonSecretConfig.parse("", "").canonicalSha256()));
-      for (var job : jobs) assertEquals(config.canonicalSha256(), job.get());
+      for (var job : jobs)
+        assertEquals(config.canonicalSha256(), job.get(5, java.util.concurrent.TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
     }
     assertTrue(config.canonicalSha256().matches("[0-9a-f]{64}"));
   }
