@@ -1,0 +1,72 @@
+{
+  "actualExit": 0,
+  "sourceBefore": "820d932442801a8f398fb59ad32d6d737a23f725",
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioFileRegenerator.java": "57d677dfb979ca2ca5251c8ab222760ccab7be7924e56031df688d1cd6fed34c"
+  },
+  "toolHashes": {
+    "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2",
+    "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar": "25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4",
+    "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "stages": {
+    "format": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T04:51:26.765788+00:00",
+      "endUTC": "2026-11-12T04:51:27.181245+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioFileRegenerator.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T04:51:27.181593+00:00",
+      "endUTC": "2026-11-12T04:51:27.797673+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG26876-regenerator-fatal-source-static-v1/checkstyle.xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioFileRegenerator.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "checkstyleIssues": 0,
+  "sourceOnlyIndependentReview": {
+    "exactAddedCalls": 1,
+    "oldSourceRecoveredByRemovingOnlyOneCall": true,
+    "oldExceptionTypesAndRedactedCatalogAndBuffersUnchanged": true,
+    "sameMethodPreserved": true,
+    "sharedFatalGraphImplementationUnchanged": true
+  },
+  "productTestsExecuted": 0,
+  "MainCompiled": false,
+  "actualHeldClassBinaryReadHashParseInit": false,
+  "coverage": null,
+  "nullAway": null,
+  "spotBugs": null,
+  "pmd": null,
+  "ptStatus": "NOT_RUN_HOLD_NOT_PASS",
+  "bugState": "OPEN_PENDING_PERMITTED_INDEPENDENT_RUNTIME_QUALIFICATION",
+  "alternativeIsNotProductPT": true,
+  "formalUpdated": false,
+  "scriptSha256": "0e09b1ba3914dde07522142b30245db1d4723f8f64d363eba265d6a6743eaf80"
+}

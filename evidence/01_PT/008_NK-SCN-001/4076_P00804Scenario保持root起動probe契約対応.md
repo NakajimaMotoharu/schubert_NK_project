@@ -1,0 +1,13 @@
+# P00804 保持root・ready・起動probe 原3source契約
+
+NK-SCN-001。対象source/hash、承認設計commit/hash、独立期待値/TestIDは [PG26858](../018_NK-OPS-001/evidence/PG26858-scenario-ready-contract-v1/manifest.json)。
+
+- P00804-PG01 / TransferRootInspection.inspect/requireFileStore/requireSecureDirectoryStream / PT-SCN-008-A06,PT-SCN-008-A01..A05: Borrowed admitted retained root, exact owner/group/mode metadata and secure directory stream, ext4 only. Native statvfs on retained capability proves current RW bind view, not FileStore canonical mountflags; null/typeunknown/RO/nonext4/attribute/ownedstreamclose fails unavailable. No root creation/chmod, no global admission/singleinstance authority from this component. Current LinuxInodeSecurity dependency prohibits runtime/compile selection of apparentlypure helpermethods.
+
+- P00804-PG02 / ScenarioReadyFileInspector.inspect/inspectDate/inspectEntry / PT-SCN-009-V01..V03: Root inspection first, existing canonicaldate/ready only NOFOLLOW; exactowner/group/mode/nlink/size, bounded full4800stream exactEOF/hash and attributes afterread. MISSING only if dateopen failed MISSING before acquired date or readyopen MISSING before callback entered; missing after callback, dateclose/rootclose/changed attrs/hash/unknown failure is unavailable. Never write/delete/regenerate from inspector. Descriptor alone isnotauth/physicalacceptance; regeneration permitted by separate staged service only afterconfirmedabsence.
+
+- P00804-PG03 / TransferStartupProbe.verify/write/requireCollision/cleanup / PT-SCN-008-P01..P03: Caller exclusive startup/fullroot/singleinstance/producers-stopped gates remain external. ValidJSTdate1..9999/UUID, initialize onlynewdate. CREATE_NEW own A part4800, force/verify, no-replace publish Aready, create BpartsameUUID4800 with differentfixedSHA, secondpublish mustcollide preservingboth, independentlyverifyA/B. Cleanup onlypart/ready knowncreated/published; verify A attributes/hash before ready deletion, preserve changed/unconfirmedownedentry. Sync day, keep newemptydate; cleanup or close ambiguity means readinessfalse, no businessdescriptor. Source review grants no deletion/permission/native authority.
+
+P00804実主担当はstreamではなく保持root/probe/ready原3と着手前訂正。own3全文/SS3336.1・7.2・7.4へA06/V01～03/P01～03対応、PG26858 bc622ea4 metadata0。MISSINGは未取得/未進入の厳格境界、currentheldmountRW/ext4/securestream、probeA/Bと所有限定清掃/不確定保全の後条件。三wholefixture3/5/6はnative/ext4HOLD、nullmethod分割迂回0。実ready/操作権限へ読替え0。
+
+実行: `python3 -B evidence/01_PT/018_NK-OPS-001/input/1368_scenario_ready_contract_audit.py` metadata終了0。新規製品PT/coverageなし。原/1の準備だけ、原/2・451・元190未受入。独立期待値は公開設計の固定境界・順序・後条件に基づき、production methodで生成しない。正式1964PT/53scope・工数null。

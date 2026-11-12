@@ -7,3 +7,5 @@ PT-SCN010～014/009-S01～S06: readonly新鮮actor・Inbox参照→TX外file準�
 BUG2679/YKT2359: Replay六catchで元fatal graphを検査せず固定例外へ変換。SS312既契約内の不備、修正前原状は同directory fatal-conversion-before.json。source修正と静的reviewは別事前価格、runtime/PTはactual4 HOLD。DB全fixtureやAudit5の部分抽出で迂回しない。Audit5 sourceは全文、他whole2は依存/メソッド索引までで試験body全文監査とはしない。
 
 metadata command `python3 -B evidence/01_PT/018_NK-OPS-001/input/1355_scenario_replay_contract_audit.py` exit0、新規PT/coverage/元190受入0。原/1準備だけ完了、/2はBUG/actual4・DB・終了依存・451未受入。正式1964PT/53scope・工数null。
+
+PG追記: source 820d932442801a8f398fb59ad32d6d737a23f725でfatal共有port六接続、PG26846 format/Checkstyle0、[PG26850独立source照合](../018_NK-OPS-001/evidence/PG26850-scenario-fatal-source-independent-v1/manifest.json)。実PT/coverage/NullAway/SB/PMD未実施、BUG2679/YKT2359 OPENを維持。代替静的結果をPT PASSへ混ぜない。

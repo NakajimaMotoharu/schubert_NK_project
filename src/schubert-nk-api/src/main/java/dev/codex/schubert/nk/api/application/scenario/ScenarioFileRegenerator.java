@@ -78,6 +78,7 @@ final class ScenarioFileRegenerator {
         | ProviderException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }

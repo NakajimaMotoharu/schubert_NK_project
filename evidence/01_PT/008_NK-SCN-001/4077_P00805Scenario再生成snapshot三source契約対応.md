@@ -1,0 +1,13 @@
+# P00805 結果再生成・snapshot 原3source契約
+
+NK-SCN-001。対象source/hash、承認設計commit/hash、独立期待値/TestIDは [PG26862](../018_NK-OPS-001/evidence/PG26862-scenario-regenerator-contract-v1/manifest.json)。
+
+- P00805-PG01 / ScenarioFileRegenerator.regenerate/withoutFile/sameContent / PT-SCN-009-F01..F03: Only caller-proven MISSING, readonlyTX closed and fresh sameowner. Saved initialSUCCESS filedescriptor/detail required; currentmetadata equals original eight logical fields with descriptor omitted; exactcount and hash4800encoded recordstream equals original before anypublishercall. Onepublishercall only, regenerated count/hash agreesoriginal, ID/date maychange; no delete/update/retry here. Capacity/generation mismatch cannot overwrite original success into ERROR; header/state/ref/completedAt/24h unchanged. Digest temporaryrecord bytes wiped. Same wrappedfatal before fixedcatalog rule as BUG2679 missing in onecatch: BUG2680 registered before any correction.
+
+- P00805-PG02 / ScenarioFileInspector.inspect/Availability / PT-SCN-009-V01..V03: Read-only port PRESENT or independentlyconfirmedMISSING; invalid/unreadable/unknown failsIOException, neverMISSING. Regenerator no authority to invoke based on unverifieddescriptor/context or to repairpresentcorruptfile. Actualphysical check owned by P00804, do not duplicate shared fee or transfer source metadata to runtimeproof.
+
+- P00805-PG03 / ScenarioDetailSnapshot.constructor/metadata/records/toString / SNAPSHOTMAX001..003,PT-SCN-SHAPE001..003: Metadata requiredINLINE, copyoflist with nonnullrows, 0..10000records. Validate whole sequence gap at201/5000/9999 and everyrecord wire eventail4097byte; first/last explicit row1/10000 and immutabledefensivecopy. Callerdata unaffected by failures; FILE and10001rejectshape before exposedresult. Null contract no normalization; toStringonlyrecordcount, no title/body/path. No DB/file/JMS/keys/native/actual4 dependencies in whole two standalonefixtures. CurrentDisplayPath/RelativePath bytes differ from oldsix; retainoldtargetproof but preprice necessary currentProto130+six qualification, no execunion.
+
+P00805 own3全文/SS3336.1とF01～03/V01～03/SHAPE001～003/SNAPSHOTMAX001～003を対応。PG26862 f5b0356f metadata0。Regeneratorwhole3 actualTemp/CodecHOLD、新BUG2680修正前起票・YKT2359七番目対象追加。独立wholememory二fixture6は全文読取/許可閉包、旧targetMain/Test同一だがDisplayPath/RelativePath変更で当source再資格必要。BUG2674/2354同根句引用工具不備は26864元失敗保持→26866正1負2、Main不変。
+
+実行: `python3 -B evidence/01_PT/018_NK-OPS-001/input/1372_scenario_regen_contract_audit.py` metadata終了0。新規製品PT/coverageなし。原/1の準備だけ、原/2・451・元190未受入。独立期待値は公開設計の固定境界・順序・後条件に基づき、production methodで生成しない。正式1964PT/53scope・工数null。

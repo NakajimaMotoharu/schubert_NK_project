@@ -1,0 +1,111 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T13:48:51.640990+09:00",
+  "source": "820d932442801a8f398fb59ad32d6d737a23f725",
+  "productionCoreMain": "820d932442801a8f398fb59ad32d6d737a23f725",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioFileRegenerator.java": "65d4d208c30d9d5bfaeab7aea8647c98a4731fbf8347f550f97c2595c87a89e2",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/ScenarioFileInspector.java": "f6084db84908966c8ba9890fda62f481b028789153dd93d030623f27438ec5d5",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshot.java": "a9adb21b9bddf514ad3b44218465762c767d8f4f8ba34d38c4526df74eb0dcc6"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": {
+    "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+    "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+  },
+  "checks": [
+    {
+      "id": "P00805-PG01",
+      "methods": "ScenarioFileRegenerator.regenerate/withoutFile/sameContent",
+      "testIds": [
+        "PT-SCN-009-F01..F03"
+      ],
+      "expected": "Only caller-proven MISSING, readonlyTX closed and fresh sameowner. Saved initialSUCCESS filedescriptor/detail required; currentmetadata equals original eight logical fields with descriptor omitted; exactcount and hash4800encoded recordstream equals original before anypublishercall. Onepublishercall only, regenerated count/hash agreesoriginal, ID/date maychange; no delete/update/retry here. Capacity/generation mismatch cannot overwrite original success into ERROR; header/state/ref/completedAt/24h unchanged. Digest temporaryrecord bytes wiped. Same wrappedfatal before fixedcatalog rule as BUG2679 missing in onecatch: BUG2680 registered before any correction."
+    },
+    {
+      "id": "P00805-PG02",
+      "methods": "ScenarioFileInspector.inspect/Availability",
+      "testIds": [
+        "PT-SCN-009-V01..V03"
+      ],
+      "expected": "Read-only port PRESENT or independentlyconfirmedMISSING; invalid/unreadable/unknown failsIOException, neverMISSING. Regenerator no authority to invoke based on unverifieddescriptor/context or to repairpresentcorruptfile. Actualphysical check owned by P00804, do not duplicate shared fee or transfer source metadata to runtimeproof."
+    },
+    {
+      "id": "P00805-PG03",
+      "methods": "ScenarioDetailSnapshot.constructor/metadata/records/toString",
+      "testIds": [
+        "SNAPSHOTMAX001..003",
+        "PT-SCN-SHAPE001..003"
+      ],
+      "expected": "Metadata requiredINLINE, copyoflist with nonnullrows, 0..10000records. Validate whole sequence gap at201/5000/9999 and everyrecord wire eventail4097byte; first/last explicit row1/10000 and immutabledefensivecopy. Callerdata unaffected by failures; FILE and10001rejectshape before exposedresult. Null contract no normalization; toStringonlyrecordcount, no title/body/path. No DB/file/JMS/keys/native/actual4 dependencies in whole two standalonefixtures. CurrentDisplayPath/RelativePath bytes differ from oldsix; retainoldtargetproof but preprice necessary currentProto130+six qualification, no execunion."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioFileRegeneratorTest.java",
+      "sha256": "3abce7473b80d66957d78d29830ce8219bc0777362c7f915dccb124c3a1918ca",
+      "tests": 3,
+      "wholeBodyReviewed": false,
+      "methodIndexReviewed": true,
+      "status": "HOLD_WHOLE_ACTUAL_TEMP_SNAPSHOT_KEY_FIXTURE_NO_EXTRACTION"
+    }
+  ],
+  "safeWholeMemoryCandidates": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshotBoundaryTest.java",
+      "sha256": "4d235d14a7c7c31089525741ac93cb425520bae75e703d9b51b2e6d46c03ede2",
+      "tests": 3,
+      "wholeBodyReviewed": true,
+      "status": "ADMITTED_WHOLE_MEMORY_NOT_EXECUTED_PENDING_CURRENT_DEPENDENCY_QUALIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioSnapshotShapeTest.java",
+      "sha256": "c1f205a1e81e9edd886fc6230ae438851d0c4442901997ab57c31a0aecd7ed7b",
+      "tests": 3,
+      "wholeBodyReviewed": true,
+      "status": "ADMITTED_WHOLE_MEMORY_NOT_EXECUTED_PENDING_CURRENT_DEPENDENCY_QUALIFICATION"
+    }
+  ],
+  "oldSnapshotSix": {
+    "proof": {
+      "path": "evidence/01_PT/008_NK-SCN-001/evidence/PG19818-scenario-snapshot-current-six-v1/manifest.json",
+      "sha256": "c827fe182d5b37c59d3568ef3050b3c31c9f1fd0ec76293b272f567110f2341e"
+    },
+    "allTargetMainTestIdentical": true,
+    "currentDependencyDrift": [
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath.java",
+        "oldSourceSha256": "2718fe6494806fc87dc3d081f82ed220616a07d53bf6eb39a23de579b3c6e7e3",
+        "currentSourceSha256": "e26f1483749b0426f67df22df854e513f61ecb08569d5616ccd5569ded441d02"
+      },
+      {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/RelativePath.java",
+        "oldSourceSha256": "0700ba6f2ef1263a690a0acd3030ad97455951c8dd66ebf632debeca6ff80fa1",
+        "currentSourceSha256": "3a4c04729dd6c232f34157dc765180cf1643d7cb8011f51068907e5d5fd5ddf9"
+      }
+    ],
+    "currentWholeDependencyQualified": false,
+    "newExecutions": 0
+  },
+  "newSourceDefect": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26862-scenario-regenerator-contract-v1/fatal-before.json",
+    "sha256": "13c43bd90c96fffad0dd654253da7da4b801905d4a03e02ea1db7ef35a826fac"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P008-05/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_NEW_BUG2680_RUNTIME_SNAPSHOT_QUALIFICATION_AND_EXIT",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1372_scenario_regen_contract_audit.py",
+    "sha256": "e7692db49171ba2cdd924f4307076e9a8a0144fe7eb61ff260d85150db5cfb31"
+  }
+}

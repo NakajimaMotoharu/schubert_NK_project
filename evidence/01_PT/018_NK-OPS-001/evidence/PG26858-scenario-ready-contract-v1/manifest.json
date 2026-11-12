@@ -1,0 +1,124 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T13:45:13.686152+09:00",
+  "source": "820d932442801a8f398fb59ad32d6d737a23f725",
+  "productionCoreMain": "820d932442801a8f398fb59ad32d6d737a23f725",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioReadyFileInspector.java": "64c3367522dfb4e30af3abaa070e68341b1bb508e5adee0d9058b1a2ddfa0885",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferRootInspection.java": "cb81d5a93cff52f11020108bc89ed21fa99c444d59e40a693e9400d65b3e2a8d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferStartupProbe.java": "d4ca4a803d313c5f2269b5e245785e7f345bb1f076a3511ce4c895e5bdcab18e"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": {
+    "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+    "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+  },
+  "checks": [
+    {
+      "id": "P00804-PG01",
+      "methods": "TransferRootInspection.inspect/requireFileStore/requireSecureDirectoryStream",
+      "testIds": [
+        "PT-SCN-008-A06",
+        "PT-SCN-008-A01..A05"
+      ],
+      "expected": "Borrowed admitted retained root, exact owner/group/mode metadata and secure directory stream, ext4 only. Native statvfs on retained capability proves current RW bind view, not FileStore canonical mountflags; null/typeunknown/RO/nonext4/attribute/ownedstreamclose fails unavailable. No root creation/chmod, no global admission/singleinstance authority from this component. Current LinuxInodeSecurity dependency prohibits runtime/compile selection of apparentlypure helpermethods."
+    },
+    {
+      "id": "P00804-PG02",
+      "methods": "ScenarioReadyFileInspector.inspect/inspectDate/inspectEntry",
+      "testIds": [
+        "PT-SCN-009-V01..V03"
+      ],
+      "expected": "Root inspection first, existing canonicaldate/ready only NOFOLLOW; exactowner/group/mode/nlink/size, bounded full4800stream exactEOF/hash and attributes afterread. MISSING only if dateopen failed MISSING before acquired date or readyopen MISSING before callback entered; missing after callback, dateclose/rootclose/changed attrs/hash/unknown failure is unavailable. Never write/delete/regenerate from inspector. Descriptor alone isnotauth/physicalacceptance; regeneration permitted by separate staged service only afterconfirmedabsence."
+    },
+    {
+      "id": "P00804-PG03",
+      "methods": "TransferStartupProbe.verify/write/requireCollision/cleanup",
+      "testIds": [
+        "PT-SCN-008-P01..P03"
+      ],
+      "expected": "Caller exclusive startup/fullroot/singleinstance/producers-stopped gates remain external. ValidJSTdate1..9999/UUID, initialize onlynewdate. CREATE_NEW own A part4800, force/verify, no-replace publish Aready, create BpartsameUUID4800 with differentfixedSHA, secondpublish mustcollide preservingboth, independentlyverifyA/B. Cleanup onlypart/ready knowncreated/published; verify A attributes/hash before ready deletion, preserve changed/unconfirmedownedentry. Sync day, keep newemptydate; cleanup or close ambiguity means readinessfalse, no businessdescriptor. Source review grants no deletion/permission/native authority."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioReadyFileInspectorTest.java",
+      "sha256": "dd6a1fcce1a7d8f96c16c04876dfd04a92fbd7090652ec9cb073f02450bb0eef",
+      "tests": 3,
+      "wholeBodyReviewed": false,
+      "methodIndexReviewed": true,
+      "methods": [
+        "realReadyFilesMissingNamesAndConcurrentReadsStayReadOnly",
+        "presentButInvalidFilesAreNeverDeclaredMissing",
+        "nullNativeCallbackAndCloseFailuresNeverBecomeAbsence",
+        "initializeDirectory",
+        "verify",
+        "mode",
+        "reject"
+      ],
+      "status": "HOLD_WHOLE_NATIVE_EXT4_FIXTURE_NO_PARTIAL_NULL_METHOD_OR_ALTERNATE_PORT"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferRootInspectionTest.java",
+      "sha256": "765e3081ef6e1f25d8b78073c9e7a6382ae7a32d99f63d828faf6e495188da9d",
+      "tests": 5,
+      "wholeBodyReviewed": false,
+      "methodIndexReviewed": true,
+      "methods": [
+        "a06HeldRootRemainsOriginalWhenConfiguredPathIsReplacedBySymlink",
+        "a06NullClosedWrongOwnerGroupAndPermissionNeverModifyRoot",
+        "a06OnlyProvenWritableExt4AndSecureDirectoryProviderAreAccepted",
+        "close",
+        "a06Mount001CurrentHeldMountFlagsAreMandatoryAndReadOnlyIsRejected",
+        "a06Mount002UnknownMountAndNullNeverFallBackToWritablePath",
+        "reject"
+      ],
+      "status": "HOLD_WHOLE_NATIVE_EXT4_FIXTURE_NO_PARTIAL_NULL_METHOD_OR_ALTERNATE_PORT"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferStartupProbeTest.java",
+      "sha256": "396d07963566999e2fdf0a155a62927bde94fa8331e47aa1686ef8e74778333d",
+      "tests": 6,
+      "wholeBodyReviewed": false,
+      "methodIndexReviewed": true,
+      "methods": [
+        "p01ColdAndExistingDateUseActualPatternsGroupsNoReplaceAndLeaveOnlyEmptyDates",
+        "p02NullInvalidDateClosedAndWrongAttributesNeverRepairConfiguredRoots",
+        "p02ExistingPartReadyAndUnexpectedSecondPartAreNeverDeletedAsProbeOwnership",
+        "p03CreateWritePublishVerifyAndCloseFaultsFailEvenWhenOwnedFilesCanBeCleaned",
+        "p03UncertainPublicationChangedReadyAndCleanupFailuresPreserveOnlyRequiredEvidence",
+        "p03NewDateInitializationAndSyncFailureCannotBecomeSuccessfulReadiness",
+        "mode",
+        "group",
+        "reject",
+        "noArtifactHandles",
+        "initializeDirectory",
+        "write",
+        "verify",
+        "createDirectory",
+        "publish",
+        "unlink",
+        "sync",
+        "close"
+      ],
+      "status": "HOLD_WHOLE_NATIVE_EXT4_FIXTURE_NO_PARTIAL_NULL_METHOD_OR_ALTERNATE_PORT"
+    }
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P008-04/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_NATIVE_OWNERSHIP_FULLROOT_SINGLEINSTANCE_EXIT_DEPENDENCIES",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1368_scenario_ready_contract_audit.py",
+    "sha256": "05d9b24f9881ebcf504684679b2102c1885844b5199e3086f5af976f0aff137e"
+  }
+}

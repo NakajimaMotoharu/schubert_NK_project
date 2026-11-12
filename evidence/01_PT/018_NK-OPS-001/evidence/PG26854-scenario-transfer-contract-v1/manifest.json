@@ -1,0 +1,157 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T13:43:19.908061+09:00",
+  "source": "820d932442801a8f398fb59ad32d6d737a23f725",
+  "productionCoreMain": "820d932442801a8f398fb59ad32d6d737a23f725",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/CapacityExceededException.java": "97da7ca6adc387e39046443ca298a4dd39dbbf574fa2b9e16951c8b9d227793c",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/ScenarioFilePublisher.java": "b9c5e02f9009afe5699f74fd41f576af9c9ac317486e8c1ab0aaf4b8cdccbc15",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/HeldProbeFileIo.java": "85e2996a53395a7ee59f27e7b7bd0e6aab624d6ad245307660cc7fcf4c090ac6",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/HeldTransferFileIo.java": "3f9211ae022be34f6f0ac4b06e71bfddbadd099ea6ffdde048b2e9cd0d31d436",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ProbeFileIo.java": "cca802e5628af1e775e55094046ee3ed3cbe9a832b04c4db5cefb0388bc890c6",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioFileWriter.java": "00beb3cfaba4dcb08f2991e03f898556e2fc8e320679deb1d61e98b90b30522b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferCapacity.java": "93d56d7ef295998c5f637c90f0aafaa2f15fbdc4d366ab6e238c833c96788db7",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferContentVerifier.java": "472eff17a1faef0e9b66c980d57f3cab97895bdff73077373af3a1a44726f61d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferFileIo.java": "52cfe0bd96234de8312b52e4de98ab989a08190eb7d8ba8f0664f88bf045f16b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferStoragePreparation.java": "4e8e52ca67368c6d74f8ca73c99e03293590c9a0ae949f49101cc4d0e7f277d4",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferUsageScanner.java": "16caf2159bbe41ac5299a6b477292c73e16e9e668deacac4675fc9f7b833faf9"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": {
+    "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+    "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+  },
+  "checks": [
+    {
+      "id": "P00803-PG01",
+      "methods": "TransferCapacity.constructor/reserve/snapshot/Reservation.retain/close; CapacityExceededException",
+      "testIds": [
+        "PT-SCN-008-C01..C03"
+      ],
+      "expected": "Independent decimal bytes3.5G warning/4.5G critical/5G design; files5000/9000/10000. Invalid negative initial and reserve not1..48000000 before state change. Internal private lock, atomic first crossing only one among100, caller monitor cannot block, in-flight totals included. Retain ready/undeleted part exactlyonce, close only unused reservation, second close idempotent/retain-afterclose fails. Immutable snapshot. Literal catalog RESOURCE_LIMIT/no cause/suppressed. Old full Capacity5 assertion/source/ResultCode and five physical hashes identical, no new run or whole old9 current transfer."
+    },
+    {
+      "id": "P00803-PG02",
+      "methods": "ScenarioFilePublisher.publish; ScenarioFileWriter.publish/publishAttempt; TransferFileIo/HeldTransferFileIo",
+      "testIds": [
+        "PT-SCN-008-W07..W10"
+      ],
+      "expected": "Validate all1..10000records/4800each before I/O and reserve. JSTcanonicalyear1..9999 date, root ownership precheck, newinode-only0750directory/0640file group init, existing date validate-only. CREATE_NEW part/write force/verify attrs hash/renameat2 no-replace/directory fsync; verify ready before descriptor. At most4 attempts for initial+3collision, owned directory/reservation close before retry. Cleanup owned unpublished part only; unconfirmed cleanup/published states retain quota; never delete ready on response failure. Nativewhole fixtures held; Writer unbounded worker sites pending, not fresh PT."
+    },
+    {
+      "id": "P00803-PG03",
+      "methods": "TransferContentVerifier.verify; ProbeFileIo/HeldProbeFileIo; TransferStoragePreparation.prepare/Prepared",
+      "testIds": [
+        "PT-SCN-008-W06",
+        "PT-SCN-008-P01..P05"
+      ],
+      "expected": "Caller-owned readable channel never closed:4800bounded buffer/exact count/EOF/SHA256, zero progress/EOF short/extra/IO/hash differences fail fixed unavailable. Probe synthetic4800 A/B fixed SHA vectors, neverbusinessdescriptor; freshinode only/force/verify. Full root admission exclusive interval is external. Probe completes BEFORE full usage scan, only complete scan seeds shared capacity/publisher/inspector; null or incomplete scan cannot publish capability. No root chmod/create or ownership assumption from source review."
+    },
+    {
+      "id": "P00803-PG04",
+      "methods": "TransferUsageScanner.Usage/scan/scanDates/scanFiles",
+      "testIds": [
+        "PT-SCN-008-U01..U03"
+      ],
+      "expected": "Caller admitted heldroot and exact owner/group/mode; canonical real8digit date/UUID part|ready only; held NOFOLLOW regularinode attrs, count bothpart/ready sizes, zero part permitted by storageguard but ready recordsize strict. Maximum10000entries and48Mperfile, bound partialscan/overflow via invariants. Any unexpected entry/date/iterator/ownedclose fault returns no partial Usage; neverwrite/delete/repair files. Complete scan before producers, no concurrentwritersnapshot claim. Nativewhole held."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioFileWriterTest.java",
+      "sha256": "d579c42e36edacdeb7870a4a40658648a12c0f1a48d48ae714ec3c00660abbf5",
+      "tests": 7,
+      "wholeBodyReviewed": false,
+      "status": "HOLD_WHOLE_NATIVE_EXT4_OWNERSHIP_NO_METHOD_EXTRACTION",
+      "nativeFixture": true,
+      "originalWriterFiniteWorkerGap": true
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+      "sha256": "e5861accbddb01d45951bd4376390c3b97eb578d949051bc15bd736d85073910",
+      "tests": 5,
+      "wholeBodyReviewed": true,
+      "status": "SOURCE_CLOSED_MEMORY_OR_SYNTHETIC_HOST_FILE_ONLY_NOT_EXECUTED",
+      "nativeFixture": false,
+      "originalWriterFiniteWorkerGap": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferContentVerifierTest.java",
+      "sha256": "c3d0d849079e2a16a01a6d7518ba3c670b73c2102ddf2b18a69aa9f8b50ba431",
+      "tests": 3,
+      "wholeBodyReviewed": true,
+      "status": "SOURCE_CLOSED_MEMORY_OR_SYNTHETIC_HOST_FILE_ONLY_NOT_EXECUTED",
+      "nativeFixture": false,
+      "originalWriterFiniteWorkerGap": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferStoragePreparationTest.java",
+      "sha256": "837ffcade9a7596ce293a9daa1c57a18e5f972835152b88112e71055aae93b23",
+      "tests": 2,
+      "wholeBodyReviewed": true,
+      "status": "HOLD_WHOLE_NATIVE_EXT4_OWNERSHIP_NO_METHOD_EXTRACTION",
+      "nativeFixture": true,
+      "originalWriterFiniteWorkerGap": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferUsageScannerTest.java",
+      "sha256": "719b152de9fbe9402a58a8616122de0e9ea3fdb69858f619c09728e365959586",
+      "tests": 6,
+      "wholeBodyReviewed": false,
+      "status": "HOLD_WHOLE_NATIVE_EXT4_OWNERSHIP_NO_METHOD_EXTRACTION",
+      "nativeFixture": true,
+      "originalWriterFiniteWorkerGap": false
+    }
+  ],
+  "retainedCapacityFive": {
+    "independent": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG24922-checksum-capacity-whole9-independent-v1/manifest.json",
+      "sha256": "b03106a9de6e89d69554c95d17393972045d86a1c18a8df419f79422069a5f74"
+    },
+    "unit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG24920-checksum-capacity-original-whole9-v1/manifest.json",
+      "sha256": "0ba70e17628c6069afdbaedcb450f16cc22192f423dbc26c849933dff0298141"
+    },
+    "sourceClosureHashes": {
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferCapacity.java": "93d56d7ef295998c5f637c90f0aafaa2f15fbdc4d366ab6e238c833c96788db7",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/CapacityExceededException.java": "97da7ca6adc387e39046443ca298a4dd39dbbf574fa2b9e16951c8b9d227793c",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java": "e5861accbddb01d45951bd4376390c3b97eb578d949051bc15bd736d85073910",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4"
+    },
+    "normalPhysicalExact": [
+      "dev/codex/schubert/nk/api/error/CapacityExceededException.class",
+      "dev/codex/schubert/nk/api/storage/TransferCapacity$Level.class",
+      "dev/codex/schubert/nk/api/storage/TransferCapacity$Reservation.class",
+      "dev/codex/schubert/nk/api/storage/TransferCapacity$Snapshot.class",
+      "dev/codex/schubert/nk/api/storage/TransferCapacity.class"
+    ],
+    "oldSource": "dcae1bf40c97e7cc9003611bf22f9b2d30701054",
+    "oldAggregateFour100": true,
+    "oldAllSourceFour100": false,
+    "oldStrictGateExit": 1,
+    "naturalZeroBranchSources": 2,
+    "differentOtherFixtureProtocol2NotTransferred": [
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/RelativePath.java"
+    ],
+    "currentWholeNineQualified": false,
+    "newExecutions": 0
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P008-03/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_NATIVE_FS_OWNERSHIP_WRITER_WORKERS_FULL_DEPENDENCIES_AND_EXIT",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1363_scenario_transfer_contract_audit.py",
+    "sha256": "7f82bec7abd59700fbe82ea94523b5e2ffcbc074ad4cbc02dd693500a6f7a626"
+  }
+}
