@@ -1,0 +1,106 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T17:56:49.041333+09:00",
+  "source": "833e0c76c78890fd4c1f557a6b78c6adac35b645",
+  "productionCoreMain": "13e6c050db76b202b03b1d7653cc368c178cae76",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayService.java": "b5b58cd7e166a77fe3b8d546eb2885cb5b1a602e791d6b5ebd550aea2c533613",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationRequest.java": "efcd9884e66c0f5f12dfc3ae1161b1d9b8c7da4259f8f48dc558b5f9dcbcec6a"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01302-PG01",
+      "methods": "MutationRequest.decode/header/targetId/operationToken/cancellation/responseLayoutId/canonical",
+      "testIds": [
+        "QRY033/036",
+        "NTF016"
+      ],
+      "expected": "StrictNTCREQ01/QDLREQ01 version001/currentheadersemantic andtypedID/token/reserved. Decodecopyzero finally, malformedfixedPermanent. Canonicalowner/currentactorID/layout001/NOTIFICATION:target orQUESTION:target, singlenumericnotificationId/questionId; token/header/context/roleexcluded. Tokenimmutableonlyreuse/expectedpayloadbind throughInbox, Requestitselfnotauthgrant."
+    },
+    {
+      "id": "P01302-PG02",
+      "methods": "MutationRequest.Result/apply/validate",
+      "testIds": [
+        "QRY033/037/038",
+        "NTF016"
+      ],
+      "expected": "SuccessJOB ref forcancellation fromactualjob, QUESTIONnumericref equaldeletetarget; emptyrecords/typedcodeprofile. DefiniteerrorNONE only0104/9001 orNTC0107; 0107 statePROCESSING/COMPLETED/ERROR andspacecancelledAt. BorrowedwriteTX/currentactor/InboxNEW onlycommand.apply; cancelonlyRECEIVED/currentowner, updatefirstcommitwins, noapplyonreplay. App/CommandsharedDB/owner/concurrency endsnotprovedbythisvalueadapter."
+    },
+    {
+      "id": "P01302-PG03",
+      "methods": "MutationReplay.capture/read/validateTime/identity",
+      "testIds": [
+        "QRY033/036/039",
+        "NTF016"
+      ],
+      "expected": "SuccessNTC288/QDL280 NKREF1 successreference+token authenticatedinsideNKENC1, ERRORrawNONE profile. AAD sourceM0/responseLayout001/owner; EXECUTED source==requestM0, REPLAY originalM0 retained. Exactlayout/version/length/capturecorrelation/completedmillis/state-vs-code/codetargetprofile andresulttime<=completed. Frozenbody/expiry/versionnotupdated, bufferswire/datazero inallpaths; nonstored0102/0103/0105/9000 notsavedbusinessresult. No crypto/auth replacements orfakeSnapshot construction."
+    },
+    {
+      "id": "P01302-PG04",
+      "methods": "MutationReplay.reply/failure/wire/Snapshot",
+      "testIds": [
+        "QRY033/036/039",
+        "NTF016"
+      ],
+      "expected": "OpaqueprivateSnapshot boundtosameRequestobject andactorowner; callerrechecks currentauth/scope outsidecodec. FreshUUID/correlationcurrentrequest/context/sentmillis, successfulREPLAY0200 only, originaldefiniteerrorunchanged. FixedREDACTED/resultreference accessor, denialonly0102/0103/0104/0105/9000nonstored. AllfourfixedTemporary conversions mustclassifyfinitecause/suppressed/linked/SQLnext andpropagatereachableError sameobject beforecatalog; normalcatalogunchanged. CurrentfourmissingguardBUG2701, runtimeheld."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayServiceTest.java",
+      "sha256": "8b911b7acd2273f6b5e443dba2ada5c32125cd143d6407426b54566f41689880",
+      "tests": 4,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "imports/index andliteralcanonical examples only",
+      "status": "HOLD_WHOLE_ACTUAL4_AND_TRANSITIVE_KEYRING_NO_EXTRACTION"
+    }
+  ],
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27286-notification-mutation-contract-v1/before.json",
+    "sha256": "cecf61c44424f87b5d5c3c8fa9f7e3e76161f8968efaacab4048ddc86b629bdb"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P013-02/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_FOUR_FATAL_CONVERSIONS_AND_WHOLE_ACTUAL4_DB_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1560_notification_mutation_contract_audit.py",
+    "sha256": "c08ad26615bc82864dc506934d9b01d5248569bb24a38458cbec18987e8638b5"
+  }
+}

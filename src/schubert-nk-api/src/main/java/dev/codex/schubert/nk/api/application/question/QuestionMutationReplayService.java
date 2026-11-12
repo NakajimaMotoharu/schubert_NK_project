@@ -121,6 +121,7 @@ public final class QuestionMutationReplayService {
         | PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -179,6 +180,7 @@ public final class QuestionMutationReplayService {
         | PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -205,6 +207,7 @@ public final class QuestionMutationReplayService {
     } catch (PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -234,6 +237,7 @@ public final class QuestionMutationReplayService {
     } catch (PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
