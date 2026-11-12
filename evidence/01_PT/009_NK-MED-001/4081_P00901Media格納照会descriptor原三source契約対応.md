@@ -1,6 +1,6 @@
 # P00901 Media格納metadata・descriptor 原3source契約
 
-NK-SCN-001。対象source/hash、承認設計commit/hash、独立期待値/TestIDは [PG26920](../018_NK-OPS-001/evidence/PG26920-media-query-contract-v1/manifest.json)。
+NK-MED-001。対象source/hash、承認設計commit/hash、独立期待値/TestIDは [PG26920](../018_NK-OPS-001/evidence/PG26920-media-query-contract-v1/manifest.json)。
 
 - P00901-PG01 / MediaRequest.decode/header/responseLayoutId/descriptor/canonical/query / PT-MED-033..036: Eightallowlisted AUD/ANM/ANL/VID/MCT/MCS/MTR/MED request001, headerregistry andtypedsemantic/datawipe before dispatch, responsepairedID. DescriptoronlyAUD/VID/MED, exactlogicalID/requestdisposition andtype; VideoINLINE only. Canonical owner/layout001/REQUEST:layout fixedfieldorder, numericAudioID canonical Longdecimal/disposition, ANLcategory, VIDvideoId, MCS/MTRcategory/section, MEDtrackId/disposition, menu/categoriesempty; callerclosesbuffers. Decode/canonicalvalues grantnoauth/physicalfile. WholeRequest3 includes actualFingerprint even thoughfirstmethodpure, noextract.
 

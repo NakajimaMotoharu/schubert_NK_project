@@ -1,6 +1,6 @@
 # P00902 Media全8電文の保存・再構成 原2source契約
 
-NK-SCN-001。対象source/hash、承認設計commit/hash、独立期待値/TestIDは [PG26924](../018_NK-OPS-001/evidence/PG26924-media-replay-contract-v1/manifest.json)。
+NK-MED-001。対象source/hash、承認設計commit/hash、独立期待値/TestIDは [PG26924](../018_NK-OPS-001/evidence/PG26924-media-replay-contract-v1/manifest.json)。
 
 - P00902-PG01 / MediaApplicationAssembly.create / PT-MED-ASSEMBLY001..003: Allcaller supplied database/keyring/snapshotCodec/heldinspector/clock required. Construct ordinary Service/AuthVerifier/ContextHash/Repo/Inbox/Replay only, borrowed resources retained; doesnotopenDB/startconsumer/admitroot/ready/closekeys. CurrentactualKey/Codec byte/runtime/compile HOLD not inferredfromassemblysource.
 
@@ -14,3 +14,5 @@ P00902 own2全文/SS312324の8pairedlayout/保存CODE・RefNONE・AADowner/heade
 
 
 PG修正追記（固定前）: BUG2682先行26924原状保全、MediaReplay五catchへ既共有preserveFatalを各一行接続。26928format/Checkstyle0・その五行を除けば元Maina27 source完全一致。compile/NullAway/PMD/SpotBugs/暗号runtime/PT/coverageは未実行/HOLD。YKT2359全12対象の独立runtime未完でOPEN、元8電文結果や暗号形状の変更無し。source固定後の独立結合結果は後記。
+
+固定追記: source 8995f6cb6341c0298613cee3714c0d20f113c0f1、[26936 source限定PG結合](../018_NK-OPS-001/evidence/PG26936-media-fatal-source-scope-join-v1/manifest.json)。26928 c06dda9e formatCS0、PT/coverage/compile未実施。BUG2682/YKT2359 OPEN。BUG2683でProgram labelだけ正しいNK-MEDへ是正、入力/期待値/設計/コード契約を変更しない。

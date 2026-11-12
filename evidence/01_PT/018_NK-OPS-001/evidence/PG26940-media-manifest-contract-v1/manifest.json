@@ -1,0 +1,117 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T14:19:44.922442+09:00",
+  "source": "8995f6cb6341c0298613cee3714c0d20f113c0f1",
+  "productionCoreMain": "8995f6cb6341c0298613cee3714c0d20f113c0f1",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/AssetChecksumManifest.java": "503f89c284da8e356acc0ff45cf865b40cd094a783b04abce2389a89bb59a8b9",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/AssetManifestLoader.java": "d5316eedc4ea3a4c2be48752fdf22bd8c78cb66baa7d0ade617472c9fcb623d2",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/HeldMediaFileInspector.java": "e75126bee3b02cc48270d318690ff259ff3085811d26275f788fdff00105d1de",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/MediaFileInspector.java": "5adb888d851cfa1c7446a499cb389e94048d05366b181a0774f0892039824150",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/MediaIntegrityException.java": "c95df6a16e02c263a6409b04695df44ab06b4500f92c825bdbf31e94a89168ac",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/MediaQueryException.java": "77c96848ca417d87938143b140df4ea8d430d45b1708c6dbde2079d733817e0c"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": {
+    "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+    "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+  },
+  "checks": [
+    {
+      "id": "P00903-PG01",
+      "methods": "AssetChecksumManifest.read/requireExpectedCount/addLine/requireMatches/entryCount/toString",
+      "testIds": [
+        "PT-MED-041..044"
+      ],
+      "expected": "Callerownedmemorychannel, count1..59627 beforeI/O,65536boundedbuffer, eachline<=578bytes SHA64lowerhex+twoASCIIspaces+canonicalUTF8NFCrelativepath<=512bytes+LF. Exactcount/no duplicates/no BOM/CRLF/unterminatedline/invalidUTF8/path; decodedString>=67 before slicing notbytewidthonly. No partialcatalog. ImmutableMap, independent ABC SHA ba7816...0015ad and7allowlistedtype/MIME/extensions, constanttimeSHAcompare; missing/path/hash mismatch fixedintegrity error/no physicalsize orperGETassetread asserted. Buffers wiped/toStringcountonly. Existing4wholefinite pool invokeAll10 returns completed/cancelledFutures beforeget; finallyshutdownNow/await10. Onlysyntheticmemorybytes, no realmanifest/file/keys."
+    },
+    {
+      "id": "P00903-PG02",
+      "methods": "AssetManifestLoader.load/directory/size/sameSize/Io/NioIo",
+      "testIds": [
+        "PT-MED-045/046"
+      ],
+      "expected": "Calleradmittedretainedroot; manifests/master.sha256 opened fromexistingchild only, readonlyheldinode regularowner/group/mode/nlink before+after, size1..34524033 andchannel sizebefore/after, exactfullcount parser, ownchannel/childclose, no DB/rootcreate/repair. Pathreplacement not reopen/readnewname. IO/unsupported/attributes/null/size/close non-success fixedintegrity; empty/invalidnotmissing-success. Wholefixture usesactualLinux FD throughMediaAssetFixture despite no directnativeimport, HOLD; no extractednull/staticmethods."
+    },
+    {
+      "id": "P00903-PG03",
+      "methods": "HeldMediaFileInspector.verify; MediaFileInspector; MediaIntegrityException; MediaQueryException.resultCode",
+      "testIds": [
+        "PT-MED-047..049",
+        "PT-MED-012/013"
+      ],
+      "expected": "Manifest path/SHA check BEFORE physicalopens, existingMediaheldinode exactdescriptor size andpathsegments, borrowerroot retained/no descriptor-toauthority/cache. No perGETfullassetcontenthash/DB or explicitmutation, invalidunreadableuniformintegrity not404. MediaIntegrity fixedmessage/cause/suppressed redacted; Query capacity9001 vs ordinary9000 only, throwncallerSQLclassification preservesfatal elsewhere. Nativewholeinspector3HOLD; existingunboundedworker futuretarget unresolved undergeneral2177, noPT acceptance fromsourceindex."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/AssetChecksumManifestTest.java",
+      "sha256": "7d0913c5baa14c70adef02e24c20b29d4bd4c2844b7dc92cf31c92b2ddae6a4e",
+      "tests": 4,
+      "wholeBodyReviewed": true,
+      "status": "ADMITTED_WHOLE_MEMORY_CHANNEL_FINITE_EXECUTOR_CURRENT_PROTO_QUALIFICATION_PENDING",
+      "nativeHelperRef": null
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/AssetManifestLoaderTest.java",
+      "sha256": "6c66e65a4c792a9ff17d9ae580e0a914dc46252cdc8282e6281451e6a368f611",
+      "tests": 2,
+      "wholeBodyReviewed": true,
+      "status": "HOLD_WHOLE_MEDIA_ASSET_FIXTURE_LINUX_NATIVE_ROOT_NO_EXTRACTION",
+      "nativeHelperRef": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/MediaAssetFixture.java",
+        "sha256": "7d58d4fee12475cdb008f344dd47c00e257cd526268c0f79b93f62cc0b9de049"
+      }
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/HeldMediaFileInspectorTest.java",
+      "sha256": "7ab38eaf180482226da157377790ab9c3001f164195b27b44a4b232320044c07",
+      "tests": 3,
+      "wholeBodyReviewed": true,
+      "status": "HOLD_WHOLE_MEDIA_ASSET_FIXTURE_LINUX_NATIVE_ROOT_NO_EXTRACTION",
+      "nativeHelperRef": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/MediaAssetFixture.java",
+        "sha256": "7d58d4fee12475cdb008f344dd47c00e257cd526268c0f79b93f62cc0b9de049"
+      }
+    }
+  ],
+  "nativeHelperPartialSourceReviewed": "Imports/constructor/native delegate sufficienttoestablishHOLD; restnotclaimedwholeclosure",
+  "retainedOldManifestFour": {
+    "independent": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG24922-checksum-capacity-whole9-independent-v1/manifest.json",
+      "sha256": "b03106a9de6e89d69554c95d17393972045d86a1c18a8df419f79422069a5f74"
+    },
+    "unit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG24920-checksum-capacity-original-whole9-v1/manifest.json",
+      "sha256": "0ba70e17628c6069afdbaedcb450f16cc22192f423dbc26c849933dff0298141"
+    },
+    "source": "dcae1bf40c97e7cc9003611bf22f9b2d30701054",
+    "targetMainTestAndNormalPhysicalSame": true,
+    "currentDirectProtocolSourceDrift": [
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/RelativePath.java"
+    ],
+    "currentWholeQualified": false,
+    "oldAggregateFour100": true,
+    "oldAllSourceFour100": false,
+    "oldStrictSourceGateExit": 1,
+    "CapacityFiveOtherOwnerNotReexecutedOrRepriced": true
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P009-03/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_CURRENT_PROTO_MANIFEST4_REQUAL_NATIVE_ROOT_AND_EXIT",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1408_media_manifest_contract_audit.py",
+    "sha256": "3fd417ce8bc1b9804dcd90f1c3c178de901311a6584f66bda2c3846539f27be7"
+  }
+}
