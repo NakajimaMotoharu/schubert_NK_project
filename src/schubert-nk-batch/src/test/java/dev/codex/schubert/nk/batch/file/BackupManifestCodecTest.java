@@ -253,7 +253,8 @@ final class BackupManifestCodecTest {
   void concurrentCanonicalRoundTrips() throws Exception {
     byte[] expected = golden();
     var value = manifest();
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var tasks = new ArrayList<Future<byte[]>>();
       for (int i = 0; i < 64; i++)
         tasks.add(
@@ -264,11 +265,14 @@ final class BackupManifestCodecTest {
                 }));
       Set<byte[]> identities = Collections.newSetFromMap(new IdentityHashMap<>());
       for (var task : tasks) {
-        byte[] actual = task.get();
+        byte[] actual = task.get(5, java.util.concurrent.TimeUnit.SECONDS);
         assertArrayEquals(expected, actual);
         assertTrue(identities.add(actual));
       }
       assertEquals(64, identities.size());
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
     }
   }
 

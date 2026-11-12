@@ -1,0 +1,210 @@
+{
+  "actualExit": 0,
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupManifest.java": "4edbbd1ad918c5222a534cf6d9330aecd40f9e76118c555a529374cb04bfe6ac",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupVersions.java": "49fc0ea957098ae3f5d0dc40fbbbbf28abfed7353c4e46a0ccea7593951f9dc2",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupFileDigest.java": "5cc172c91118403e73b9b562d8c0286ba6716391b8dd156181ad5e3d0b1bfd65",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestCodec.java": "7e9fdc5ea08e7616d3a8b5e77c5d3d194fbe61872d738ff5281419bcb6eb1d12",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java": "f736e4cf0f251df6b0d0579996b0353e6a757b0def2777a4528ee976c8384285",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java": "a37a929c6f7f01ccdd2facf7b6f74a72eea2f8927739b38c0ff998f3ec1015fe",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java": "a0d65624548980afe6b1ee8db83d7ca7f0e67ac9d2aeab9721ab3dce04aa3c61",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java": "28cd4108dea7e349f51328bf35070c4388b5f23c9c9a1486c8c42a5c12ebc0fb",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestFixture.java": "dc52d8ad7f4cc73b2947257e458bb8e36f10221789218812c44010c72951e976",
+    "src/schubert-nk-batch/src/test/resources/backup/manifest-golden.json": "733939f4daa4dcb642e6b9a4433c92daf3d42e8ac73a15b0aee914b58571289e",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28156-backup-manifest16-normal-v1/manifest.json",
+    "sha256": "5d14cca45cced8393ace28bbc3c6d6f38e620cfd2fb1b4dc2421bdc99a226e86"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28158-backup-manifest16-static-v1/manifest.json",
+    "sha256": "089c16c2c38fad8153700196c9a9eef45ae80cc224c42a88be7c5c1a19c0cf13"
+  },
+  "preliminaryStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28154-backup-manifest16-pre-style-admitted-v1/manifest.json",
+    "sha256": "c3ccff5cc9b0b798f194ef26024de39b8e2453b06ae46aeb7fe401e2b07c0b32"
+  },
+  "expectedTests": 16,
+  "newDefinitions": 0,
+  "fullPhysicalClasses": 7,
+  "rootCompilerUnchanged": true,
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "pmdRawFindings": 11,
+  "classified": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "89",
+      "message": "Avoid using literals such as 2 in if statements",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_OR_INDEPENDENT_LITERAL_ORACLE_METADATA",
+      "reason": "Literal2 is the independent public eight-field fixture schema column ordinal [host,app,schema,os,jdk,postgresql,artemis,age], distinguishing the approved three-digit schema test vector from seven release token fields. It is Test oracle metadata rather than production policy or shared implementation constant."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "CloseResource",
+      "line": "258",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_OR_INDEPENDENT_LITERAL_ORACLE_METADATA",
+      "reason": "OwnedJUnit explicit finally shutdownNow and boundedawait10 avoids infinite implicitclose; inverseexact and format allJava tokens preserve every former independent assertion."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "258",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_OR_INDEPENDENT_LITERAL_ORACLE_METADATA",
+      "reason": "Existing standaloneJUnit own8workers64tasks Future5/finally shutdownNow-assertawait10; no product/container/DB/Backup worker."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "263",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_OR_INDEPENDENT_LITERAL_ORACLE_METADATA",
+      "reason": "Existing standaloneJUnit own8workers64tasks Future5/finally shutdownNow-assertawait10; no product/container/DB/Backup worker."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "275",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_OR_INDEPENDENT_LITERAL_ORACLE_METADATA",
+      "reason": "Existing standaloneJUnit own8workers64tasks Future5/finally shutdownNow-assertawait10; no product/container/DB/Backup worker."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "276",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_OR_INDEPENDENT_LITERAL_ORACLE_METADATA",
+      "reason": "Existing standaloneJUnit own8workers64tasks Future5/finally shutdownNow-assertawait10; no product/container/DB/Backup worker."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "rule": "CloseResource",
+      "line": "256",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_OR_INDEPENDENT_LITERAL_ORACLE_METADATA",
+      "reason": "OwnedJUnit explicit finally shutdownNow and boundedawait10 avoids infinite implicitclose; inverseexact and format allJava tokens preserve every former independent assertion."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "256",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_OR_INDEPENDENT_LITERAL_ORACLE_METADATA",
+      "reason": "Existing standaloneJUnit own8workers64tasks Future5/finally shutdownNow-assertawait10; no product/container/DB/Backup worker."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "261",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_OR_INDEPENDENT_LITERAL_ORACLE_METADATA",
+      "reason": "Existing standaloneJUnit own8workers64tasks Future5/finally shutdownNow-assertawait10; no product/container/DB/Backup worker."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "274",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_OR_INDEPENDENT_LITERAL_ORACLE_METADATA",
+      "reason": "Existing standaloneJUnit own8workers64tasks Future5/finally shutdownNow-assertawait10; no product/container/DB/Backup worker."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "275",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_OR_INDEPENDENT_LITERAL_ORACLE_METADATA",
+      "reason": "Existing standaloneJUnit own8workers64tasks Future5/finally shutdownNow-assertawait10; no product/container/DB/Backup worker."
+    }
+  ],
+  "independentSourceAnchors": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "line": "258"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "line": "258"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "pool.submit(",
+      "line": "263"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "pool.shutdownNow();",
+      "line": "275"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(pool.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));",
+      "line": "276"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "line": "256"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "line": "256"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "pool.submit(",
+      "line": "261"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "pool.shutdownNow();",
+      "line": "274"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(pool.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));",
+      "line": "275"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "sourceAnchor": "if (i == 2) {",
+      "line": "89"
+    }
+  ],
+  "manualSuppressionAdded": false,
+  "actualBackendOrHeldClassActions": 0,
+  "heldFixturesExtractedOrRewritten": false,
+  "onlyPublicTemplateCopies": true,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2024_backup_manifest16_preflight.py",
+    "sha256": "d12f5a8ac4c963aa98e23c35535fbe695383f3905f2b415c95c1aae3675bb7fc"
+  }
+}

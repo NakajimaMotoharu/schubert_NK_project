@@ -255,7 +255,8 @@ final class BackupManifestValuesTest {
   @Test
   void concurrentValueUse() throws Exception {
     var value = manifest();
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var work = new ArrayList<Future<String>>();
       for (int i = 0; i < 64; i++)
         work.add(
@@ -267,7 +268,12 @@ final class BackupManifestValuesTest {
                   return value.directoryName();
                 }));
       for (var f : work)
-        assertEquals("20260913-000002-12345678-9abc-def0-8123-456789abcdef", f.get());
+        assertEquals(
+            "20260913-000002-12345678-9abc-def0-8123-456789abcdef",
+            f.get(5, java.util.concurrent.TimeUnit.SECONDS));
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
     }
   }
 
