@@ -1,0 +1,129 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T18:43:02.971391+09:00",
+  "source": "83eedf6e1702c3a1493baf8827b760b02717da85",
+  "productionCoreMain": "b23ddcfab9566b96f182562ae011f1b4ba401c72",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandService.java": "9e188be488c14e55b22a0c6dc65eb90e9f5ba4167bd04620290ad665ae6ab306",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService.java": "fae41cea1f384210aac9d90898e65b2776676e7955fe48a3b3b59fb8a3b1f6c5"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedSourceLines": 635,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01402-PG01",
+      "methods": "Command.cancel/CancelResult",
+      "testIds": [
+        "NTF012..016",
+        "QRY028..032"
+      ],
+      "expected": "BorrowedmanualwriteTX/currentactor/InboxNEWonly. Alwaysnotificationowner evenADMIN; resolvejobwithoutlock thenlockjob beforematchingnotification. Missing0104, CANCELLED0200 keepsoriginaltime, PROCESSING/COMPLETED/ERROR0107 noCancellationTime, onlyRECEIVED/version<999999999 andmetadata>=changed CASexact1+notifCANCELLED+criticalaudit sameTX. Workerfirstcommitwins, noquestiondelete/answer/provider/JMS. PublicCancelResult requiresnon-nullcontainers/allowedcode/state/timeprofile andjobN12min1max999999999999, fixedredaction, notauthorizationproof."
+    },
+    {
+      "id": "P01402-PG02",
+      "methods": "Command.logicalDelete/DeleteResult/audit",
+      "testIds": [
+        "QRY028..032",
+        "NTF012"
+      ],
+      "expected": "SeparateUSERownerSQLvsADMINcurrentroleSQL/noOR; lockQuestionthenexistingAnswer, validateexistingdeletiontuple/state/version. Missing0104, alreadydeleted0200 preservesoldtime/actor, versionmax9001 nooverflow. NewQuestion/Answerlogicaldelete triples sameUTCmicro/actor/version+1/criticalaudit exact1, nojob/notificationupdate/physicaldelete; workerlatercopiescurrentdeletedtuple. Receipt26/publicIDs/role/state/result0000 JSONonly, NFCcontrolsanitizedusername, noquestion/answer/password/context/token. PublicDeleteResult only0000/0200 withpresenttime or0104/9001 empty, allnonnull/fixedredaction."
+    },
+    {
+      "id": "P01402-PG03",
+      "methods": "MutationApplication.process/transaction/execute",
+      "testIds": [
+        "QRY039..045",
+        "NTF016"
+      ],
+      "expected": "CurrentauthUser-sessionlocks thenowner/token canonical7dayInbox; NEWonlyapply/captureNKREF1. OPtokenreuse0105/messagemismatchPermanent onlycleanInboxexception afterfatal+suppressedguard. NEWmutation/audit/snapshot/authidletouch allsameownedTX. readonlyfalse/manual; handler/commitfailure rollbackonce/secondaryfatal+physicalclose beforeerror, commit-closeunknown notsuccess. CurrentauthContextcleanliness guardedinsideVerifier. Freshreplyonlyaftercommitclose; noJMS/HTTP/keys ownership orduplicatebusinessapplyonreplay."
+    },
+    {
+      "id": "P01402-PG04",
+      "methods": "MutationApplication.currentScope/integrity",
+      "testIds": [
+        "QRY039..045",
+        "QA046"
+      ],
+      "expected": "Frozen0104/0107 ownerbounddenial notliveproof. Cancellation9001 checkoriginalnotif/currentowner, successJOBref/currentowner keyshare; deletioncurrentUSERowner orADMINquestion keyshare, staleownership denied0104. SameTX inspectorchecksactualDB/reference/time/NKREF1 token/AAD originalM0/owner/layout/version; invalidproof temporary notinventsuccess. REPLAYaudit onlyreplay. savedpayload/completed/expiry neverrewritten, unrelatedactualRoot/VMcleanup permit notgranted."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCommandServiceTest.java",
+      "sha256": "eaf7e00f08682e389db603fecea74980a22463dd2d7548a8c7f6595f833f3966",
+      "tests": 9,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "imports/setup/index only",
+      "status": "HOLD_WHOLE_REAL_DB_ACTUAL4_AND_SHARED_CRYPTO_HELPERS_NO_EXTRACTION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationServiceTest.java",
+      "sha256": "8008628fbad391cb0f10516086d59a19cdc8953c9cb9dc84a659170abd82f078",
+      "tests": 9,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "imports/setup/index only",
+      "status": "HOLD_WHOLE_REAL_DB_ACTUAL4_AND_SHARED_CRYPTO_HELPERS_NO_EXTRACTION"
+    }
+  ],
+  "publicDtoEligibility": {
+    "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandService.java",
+    "sha256": "9e188be488c14e55b22a0c6dc65eb90e9f5ba4167bd04620290ad665ae6ab306",
+    "classes": [
+      "QuestionCommandService$CancelResult",
+      "QuestionCommandService$DeleteResult"
+    ],
+    "publicConstructors": true,
+    "privateSnapshotNotInstantiated": true,
+    "standaloneDedicatedFixtureFound": false,
+    "existingDbWholeFixtureNotExtracted": true,
+    "proposedNormalScope": "Five new independent pure JDK public DTO contract methods from approvedcode/state table andN12bounds only. NoSQL/crypto/auth/update/replayoperation, noHOLDreplacement orprivateResultforgery. Requiresbeforeprice/admission/static/pin/genuinePT, NOT_RUNnow."
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P014-02/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_REAL_DB_RACE_AUTH_INBOX_REF_AND_SAME_SOURCE_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1579_question_command_contract_audit.py",
+    "sha256": "70118495837f990629267442c5d134c8f369ddfeb8069188aabe7f6068d2580a"
+  }
+}
